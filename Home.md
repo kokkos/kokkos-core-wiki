@@ -9,7 +9,7 @@ OpenMP, Pthreads and CUDA as backend programming models.
 
 This Wiki provides a number of resources for both new and old Kokkos developers.
 
-## **[[The Programming Guide|ProgrammingGuide]]**
+## **[[The Programming Guide|The Kokkos Programming Guide]]**
 
 The Programming Guide contains in-depth descriptions of the capabilities provided
 by Kokkos. This includes explanation of design decisions as well as best practice
