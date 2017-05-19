@@ -1,6 +1,6 @@
 # **[[Home|Home]]:**
 ## **[[Programming Guide|ProgrammingGuide]]**
-### **[[Content: Core|ContentCore]]**
+### **[[Content: Core|Content: Core]]**
 1. **[[Introduction|Introduction]]**
 2. **[[Machine Model|MachineModel]]**
 3. **[[Programming Model|ProgrammingModel]]**
