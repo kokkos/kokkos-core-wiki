@@ -30,7 +30,7 @@
 6. **[[View|View]]**
 7. **[[Parallel Dispatch|ParallelDispatch]]**
 8. **[[Hierarchical Parallelism|HierarchicalParallelism]]**
-9. **[[Custom Reductions|Custom Reductions]]**
+9. **[[Custom Reductions|Programming Guide: Custom Reductions]]**
     1. Build-In Reducers with standard scalar types
     2. Build-In Reducers with custom scalar types
     3. Writing your own Reducer
