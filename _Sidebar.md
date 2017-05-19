@@ -9,7 +9,7 @@
 6. **[[View|View]]**
 7. **[[Parallel Dispatch|ParallelDispatch]]**
 8. **[[Hierarchical Parallelism|HierarchicalParallelism]]**
-9. **[[Custom Reductions|Custom Reductions]]**
+9. **[[Custom Reductions|Programming Guide: Custom Reductions]]**
 10. **[[Atomic Operations|Atomic Operations]]**
 11. **[[Subviews|Subviews]]**
 12. **[[Interoperability|Interoperability]]**
@@ -29,4 +29,3 @@
 4. **[[Execution Policies|ExecutionPolicies]]**
 5. **[[Memory Spaces|MemorySpaces]]**
 6. **[[Task Parallelism|TaskParallelism]]**
-
