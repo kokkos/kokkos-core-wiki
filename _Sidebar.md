@@ -1,5 +1,5 @@
 # **[[Home|Home]]:**
-## **[[Programming Guide|Programming Guide]]**
+## **[[Programming Guide|The Kokkos Programming Guide]]**
 ### **[[Content: Core|Programming Guide: Core]]**
 1. **[[Introduction|Introduction]]**
 2. **[[Machine Model|MachineModel]]**
