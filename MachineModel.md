@@ -76,7 +76,7 @@ _Kokkos threads are for computing in parallel_, not for overlapping I/O and comp
 
 **Reproducible reductions and scans** Kokkos promises _nothing_ about the order in which the iterations of a parallel loop occur. However, it _does_ promise that if you execute the same parallel reduction or scan, using the same hardware resources and run-time settings, then you will get the same results each time you run the operation. "Same results" even means "with respect to floating-point rounding error."
 
-**Asynchronous parallel dispatch** This concerns the second category of code that calls Kokkos operations. In Kokkos, parallel dispatch executes asynchronously. This means that it may return "early," before it has actually completed. Nevertheless, it executes _in sequence_ with respect to other Kokkos operations on the same execution or memory space. This matters for things like timing. For example, a parallel_for may return "right away," so if you want to measure how long it takes, you must first call fence() on that execution space. This forces all functors to complete before fence()
+**Asynchronous parallel dispatch** This concerns the second category of code that calls Kokkos operations. In Kokkos, parallel dispatch executes asynchronously. This means that it may return "early," before it has actually completed. Nevertheless, it executes _in sequence_ with respect to other Kokkos operations on the same execution or memory space. This matters for things like timing. For example, a `parallel_for` may return "right away," so if you want to measure how long it takes, you must first call `fence()` on that execution space. This forces all functors to complete before `fence()`
 returns.
 
 ### 2.3.1 Thread safety?
