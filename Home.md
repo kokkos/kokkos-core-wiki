@@ -13,7 +13,7 @@ This Wiki provides a number of resources for both new and old Kokkos developers.
 
 The Programming Guide contains in-depth descriptions of the capabilities provided
 by Kokkos. This includes explanation of design decisions as well as best practice
-hints. This is a good place to start of your Kokkos journey other than attending 
+hints. This is a good place to start off your Kokkos journey other than attending 
 one of our Tutorial days. 
 
 ## **[[The API Reference|APIReference]]**
@@ -36,7 +36,7 @@ There is also a tutorial available for learning the basics of profiling.
 
 ## [Kokkos-Tools](https://github.com/kokkos/kokkos-tools)
 
-Kokkos Tools provide profiling and debugging capabilities, which access build-in 
+Kokkos Tools provide profiling and debugging capabilities which access built-in 
 instrumentation of Kokkos. They make it significantly easier to understand what is 
 going on in a large Kokkos application and thus help you to find errors and performance
 issues. 
