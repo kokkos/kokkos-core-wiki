@@ -164,13 +164,42 @@ You may also refer to specific dimensions without a runtime parameter:
     const size_t n0 = a.dimension_0 ();
     const size_t n2 = a.dimension_2 ();
 
-Note the return type of `dimension_N()` is the `size_type` of the views memory space. This causes some issues if warning free compilation should be achieved since it will typically be necessary to cast the return value. In particular in cases where the `size_type` is more conservative than required it can be beneficial to cast the value to `int`, since signed 32 bit integers typically give the best performance when used as index types. In index heavy codes this performance difference can be significant compared to using `size_t` since the vector length on many architectures is twice as long for 32 bit values as for 64 bit values, and signed integers have less stringent overflow testing requirements than unsigned integers.
+Note the return type of `dimension_N()` is the `size_type` of the views memory space. This causes some issues if warning free compilation should be achieved since it will typically be necessary to cast the return value. In particular, in cases where the `size_type` is more conservative than required, it can be beneficial to cast the value to `int` since signed 32 bit integers typically give the best performance when used as index types. In index heavy codes, this performance difference can be significant compared to using `size_t` since the vector length on many architectures is twice as long for 32 bit values as for 64 bit values and signed integers have less stringent overflow testing requirements than unsigned integers.
 
-Users of the BLAS and LAPACK libraries may be familiar with the ideas
-of layout and stride.  These libraries only accept matrices in
-column-major format.  The stride between consecutive entries in the
-same column is 1, and the stride between consecutive entries in the
-same row is \lstinline!LDA! (``leading dimension of the matrix A'').  The
-number of rows may be less than \lstinline!LDA!, but may not be greater.
+Users of the BLAS and LAPACK libraries may be familiar with the ideas of layout and stride. These libraries only accept matrices in column-major format. The stride between consecutive entries in the same column is 1, and the stride between consecutive entries in the same row is `LDA` (``leading dimension of the matrix A''). The number of rows may be less than `LDA`, but may not be greater.
 
+### 6.3.2 Other layouts
+
+Other layouts are possible.  For example, Kokkos has a "tiled" layout, where a tile's entries are stored contiguously (in either row- or column-major order) and tiles have compile-time dimensions. One may also use Kokkos to implement Morton ordering or variants thereof. In order to write a custom layout one has to define a new layout class and specialise the `ViewMapping` class for that layout. The `ViewMapping` class implements the offset operator as well as stride calculation for regular layouts. A good way to start such a customization is by copying the implementation of `LayoutLeft` and its associated `ViewMapping` specialization, renaming the layout and then change the offset operator.
+
+### 6.3.3 Default layout depends on execution space
+
+Kokkos selects a View's default layout for optimal parallel access over the leftmost dimension based on its execution space. For example, `View<int**, Cuda>` has `LayoutLeft`, so that consecutive threads in the same warp access consecutive entries in memory. This _coalesced access_ gives the code better memory bandwidth.
+
+In contrast, `View<int**, OpenMP>` has `LayoutRight`, so that a single thread accesses contiguous entries of the array. This avoids wasting cache lines and helps prevent false sharing of a cache line between threads. In Section 6.4 more details will be discussed.
+
+### 6.3.4 Explicitly specifying layout
+
+We prefer that users let Kokkos determine a View's layout, based on its execution space. However, sometimes you really need to specify the layout. For example, the BLAS and LAPACK libraries only accept column-major arrays.  If you want to give a View to the BLAS or LAPACK library, that View must be `LayoutLeft`. You may specify the layout as a template parameter of View. For example:
+
+    const size_t N0 = ...;
+    const size_t N1 = ...;
+    View<double**, LayoutLeft> A ("A", N0, N1);
+    
+    // Get 'LDA' for BLAS / LAPACK
+    int strides[2]; // any integer type works in stride()
+    A.stride (strides);
+    const int LDA = strides[1];
+
+You may ask a View for its layout via its `array_layout` typedef. This can be helpful for C++ template metaprogramming. For example:
+
+    template<class ViewType>
+    void callBlas (const ViewType& A) {
+      typedef typename ViewType::array_layout array_layout;
+      if (std::is_same<array_layout, LayoutLeft>::value) {
+        callSomeBlasFunction (A.data(), ...);
+      } else {
+        throw std::invalid_argument ("A is not LayoutLeft");
+      }
+    }
 
