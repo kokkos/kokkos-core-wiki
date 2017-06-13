@@ -14,26 +14,10 @@ Kokkos is comprised of two orthogonal aspects. The first of these is an underlyi
 _abstract machine model_ which describes fundamental concepts required for the development of future portable and performant high performance computing applications; the second is a concrete instantiation of the programming model written in C++, which allows programmers to write to the concept machine model. It is important to treat these two aspects to Kokkos as distinct entities because the underlying model being used by Kokkos could, in the future, be instantiated in additional languages beyond C++ yet the algorithmic specification would remain valid.
 
 ### 2.1.1 Kokkos Abstract Machine Model
-Kokkos assumes an _abstract machine model_ for the design of future shared-memory
-computing architectures. The model (shown in Figure 2.1) assumes that there may be
-multiple execution units in a compute node. For a more general discussion of abstract
-machine models for Exascale computing the reader should consult reference [?]. In the
-figure shown here, we have elected to show two different types of compute units - one
-which represents multiple latency-optimized cores, similar to contemporary processor
-cores, and a second source of compute in the form of an off die accelerator. Of note
-is that the processor and accelerator each have distinct memories, each with unique
-performance properties, that may or may not be accessible across the node (i.e. the
-memory may be reachable or _shared_ by all execution units, but specific memory spaces
-may also be only accessible by specifc execution units). The specific layout shown in
-Figure 2.1 is an instantiation of the Kokkos abstract machine model used to describe the
-potential for multiple types of compute engines and memories within a single node. In
-future systems there may be a range of execution engines which are used in the node
-ranging from a single type of core as in many/multi-core processors found today through
-to a range of execution units where many-core processors may be joined to numerous
-types of accelerator cores. In order to ensure portability to the potential range of nodes
-an abstraction of the compute engines and available memories are required.
+Kokkos assumes an _abstract machine model_ for the design of future shared-memory computing architectures. The model (shown in Figure 2.1) assumes that there may be multiple execution units in a compute node. For a more general discussion of abstract machine models for Exascale computing the reader should consult reference [?]. In the figure shown here, we have elected to show two different types of compute units - one which represents multiple latency-optimized cores, similar to contemporary processor cores, and a second source of compute in the form of an off die accelerator. Of note is that the processor and accelerator each have distinct memories, each with unique performance properties, that may or may not be accessible across the node (i.e. the memory may be reachable or _shared_ by all execution units, but specific memory spaces
+may also be only accessible by specific execution units). The specific layout shown in Figure 2.1 is an instantiation of the Kokkos abstract machine model used to describe the potential for multiple types of compute engines and memories within a single node. In future systems there may be a range of execution engines which are used in the node ranging from a single type of core as in many/multi-core processors found today through to a range of execution units where many-core processors may be joined to numerous types of accelerator cores. In order to ensure portability to the potential range of nodes an abstraction of the compute engines and available memories are required.
   
-[[!https://github.com/kokkos/ProgrammingGuide/blob/master/figures/kokkos-node.pdf]]
+[!https://github.com/kokkos/ProgrammingGuide/blob/master/figures/kokkos-node.pdf]
 Figure 2.1 Conceptual Model of a Future High Performance Computing Node
 
 ## 2.2 Kokkos Execution Spaces
