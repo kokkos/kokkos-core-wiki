@@ -4,7 +4,7 @@
 
 In order to use Kokkos an initialization call is required. That call is responsible for acquiring hardware resources such as threads. Typically, this call should be placed right at the start of a program. If you use both MPI and Kokkos, your program should initialize Kokkos right after calling `MPI_Init`. That way, if MPI sets up process binding masks, Kokkos will get that information and use it for best performance. Your program must also _finalize_ Kokkos when done using it in order to free hardware resources.
 
-## Initialization by command-line arguments
+## 5.1 Initialization by command-line arguments
 
 The simplest way to initialize Kokkos is by calling the following function:
 
@@ -53,7 +53,7 @@ Argument | Description
 --kokkos-ndevices=INT[,INT] | used when running MPI jobs. Specify number of devices per node to be used. Process to device mapping happens by obtaining the local MPI rank and assigning devices round-robin. The optional second argument allows for an existing device to be ignored. This is most useful on workstations with multiple GPUs, of which one is used to drive screen output.
 
 
-## Initialization by struct
+## 5.2 Initialization by struct
 
 Instead of giving `Kokkos::initialize()` command-line arguments, one may directly pass in initialization parameters using the following struct:
 
@@ -83,7 +83,7 @@ Here is an example of how to use the struct.
     Kokkos::initialize(args);
 
 
-## Initializing non-default execution spaces
+## 5.3 Initializing non-default execution spaces
 
 Instead of calling the generic initialization, one can call initialization for each execution space on its own. 
 If the associated host execution space of an execution space is not identical to the latter, it has to be initialized first. For example, when compiling with support for pthreads and Cuda, `Kokkos::Threads` has to be initialized before `Kokkos::Cuda`. The initialization calls take different arguments for each of the execution spaces.
@@ -92,6 +92,6 @@ If you want to initialize an execution space other than those that Kokkos initia
 
 We do _not_ recommend initializing multiple host execution spaces, because the different spaces may fight over threads or other hardware resources. This may have a big effect on performance. The only exception is the `Serial` execution space; you may safely initialize `Serial` along with another host execution space.
 
-## Finalization
+## 5.4 Finalization
 
 At the end of each program Kokkos needs to be shut down in order to free resources. Do this by calling `Kokkos::finalize()`. You may wish to set this to be called automatically at program exit, either by setting an `atexit` hook or by attaching the function to `MPI_COMM_SELF` so that it is called automatically at `MPI_Finalize`.
