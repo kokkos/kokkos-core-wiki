@@ -88,3 +88,89 @@ A view can have const data semantics (i.e. its entries are read-only) by specify
 
 
 Const Views often enables the compiler to optimize more aggressively by allowing it to reason about possible write conflicts and data aliasing. For example, in a vector update `a(i+1)+=b(i)` with skewed indexing, it is safe to vectorize if `b` is a View of const data.
+
+### 6.2.4 Accessing entries (indexing)
+
+You may access an entry of a View using parentheses enclosing a comma-delimited list of integer indices. This looks just like a Fortran multidimensional array access. For example:
+
+    const size_t N = ...;
+    View<double*[3][4]> a ("some label", N);
+    // KOKKOS_LAMBDA macro includes capture-by-value specifier [=].
+    parallel_for (N, KOKKOS_LAMBDA (const ptrdiff_t i) {
+        const size_t j = ...;
+        const size_t k = ...;
+        const double a_ijk = a(i,j,k);
+        /* rest of the loop body */
+    });
+
+Note how in the above example, we only access the View's entries in a parallel loop body. In general, you may only access a View's entries in an execution space which is allowed to access that View's memory space. For example, if the default execution space is `Cuda`, a View for which no specific Memory Space was given may not be accessed in host code 
+\footnote{An exemption is if you specified for CUDA compilation that the default memory space is CudaUVMSpace, which can be accessed from the host.}.
+
+Furthermore, access costs (e.g., latency and bandwidth) may vary, depending on the View's "native" memory and execution spaces and the execution space from which you access it. CUDA UVM may work, but it may also be slow, depending on your access pattern and performance requirements. Thus, best practice is to access the View only in a Kokkos parallel for, reduce, or scan, using the same execution space as the View. This also ensures that access to the View's entries respect first-touch allocation. The first (leftmost) dimension of the View is the _parallel dimension_ over which it is most efficient to do parallel array access if the default memory layout is used (e.g. if no specific memory layout is
+specified).
+
+### 6.2.5 Reference counting
+
+Kokkos automatically manages deallocation of Views through a reference-counting mechanism.  Otherwise, Views behave like raw pointers. Copying or assigning a View does a shallow copy, and changes the reference count. (The View copied has its reference count incremented, and the assigned-to View has its reference count decremented.) A View's destructor (called when the View falls out of scope or during a stack unwind due to an exception) decrements the reference count. Once the reference count reaches zero, Kokkos may deallocate the View.
+
+For example, the following code allocates two Views, then assigns one to the other. That assignment may deallocate the first View, since it reduces its reference count to zero. It then increases the reference count of the second View, since now both Views point to it.
+
+    View<int*> a ("a", 10);
+    View<int*> b ("b", 10);
+    a = b; // assignment does shallow copy
+
+
+For efficiency, View allocation and reference counting turn off inside of Kokkos' parallel for, reduce, and scan operations. This affects what you can do with Views inside of Kokkos' parallel operations.
+
+### 6.2.6 Resizing
+
+Kokkos Views can be resized using the `resize` non-member function. It takes an existing view as its input by reference and the new dimension information corresponding to the constructor arguments. A new view with the new dimensions will be created and a kernel will be run in the views execution space to copy the data element by element from the old view to the new one. Note that the old allocation is only deleted if the view to be resized was the _only_ view referencing the underlying allocation.
+
+    // Allocate a view with 100x50x4 elements
+    View<int**[4]> a( "a", 100,50);
+    
+    // Resize a to 200x50x4 elements; the original allocation is freed
+    resize(a, 200,50);
+    
+    // Create a second view b viewing the same data as a
+    View<int**[4]> b = a;
+    // Resize a again to 300x60x4 elements; b is still 200x50x4
+    resize(a,300,60);
+
+
+## 6.3 Layout
+
+### 6.3.1 Strides and dimensions
+
+_Layout_ refers to the mapping from a logical multidimensional index _(i, j, k, . . .)_ to a physical memory offset. Different programming languages may have different layout conventions. For example, Fortran uses _column-major_ or "left" layout, where consecutive entries in the same column of a 2-D array are contiguous in memory. Kokkos calls this `LayoutLeft`. C, C++, and Java use _row-major_ or "right" layout, where consecutive entries in the same row of a 2-D array are contiguous in memory. Kokkos calls this `LayoutRight`.
+
+The generalization of both left and right layouts is "strided." For a strided layout, each dimension has a _stride_. The stride for that dimension determines how far apart in memory two array entries are, whose indices in that dimension differ only by one, and whose other indices are all the same. For example, with a 3-D strided view with strides _(s_1, s_2, s_3)_, entries _(i, j, k)_ and _(i, j+1, k)_ are _s_2_ entries (not bytes) apart in memory. Kokkos calls this `LayoutStride`.
+
+Strides may differ from dimensions. For example, Kokkos reserves the right to pad each dimension for cache or vector alignment. You may access the dimensions of a View using the `dimension` method, which takes the index of the dimension.
+
+Strides are accessed using the `stride` method. It takes a raw integer array, and only fills in as many entries as the rank of the View. For example:
+
+    const size_t N0 = ...;
+    const size_t N1 = ...;
+    const size_t N2 = ...;
+    View<int***> a ("a", N0, N1, N2);
+    
+    int dim1 = a.dimension (1); // returns dimension 1
+    size_t strides[3]
+    a.strides (dims); // fill 'strides' with strides
+
+You may also refer to specific dimensions without a runtime parameter:
+
+    const size_t n0 = a.dimension_0 ();
+    const size_t n2 = a.dimension_2 ();
+
+Note the return type of `dimension_N()` is the `size_type` of the views memory space. This causes some issues if warning free compilation should be achieved since it will typically be necessary to cast the return value. In particular in cases where the `size_type` is more conservative than required it can be beneficial to cast the value to `int`, since signed 32 bit integers typically give the best performance when used as index types. In index heavy codes this performance difference can be significant compared to using `size_t` since the vector length on many architectures is twice as long for 32 bit values as for 64 bit values, and signed integers have less stringent overflow testing requirements than unsigned integers.
+
+Users of the BLAS and LAPACK libraries may be familiar with the ideas
+of layout and stride.  These libraries only accept matrices in
+column-major format.  The stride between consecutive entries in the
+same column is 1, and the stride between consecutive entries in the
+same row is \lstinline!LDA! (``leading dimension of the matrix A'').  The
+number of rows may be less than \lstinline!LDA!, but may not be greater.
+
+
