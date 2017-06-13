@@ -343,4 +343,73 @@ While `RandomAccess` is valid for other execution spaces, currently no specific 
 
 ### 6.5.3 Standard idiom for specifying access traits
 
+The standard idiom for View is to pass it around using as few template parameters as possible. Then, assign to a View with the desired access traits only at the "last moment" when those access traits are needed just before entering a computational kernel. This lets you template C++ classes and functions on the View type without
+proliferating instantiations. Here is an example:
+
+    // Compute a sparse matrix-vector product, for a sparse
+    // matrix stored in compressed sparse row (CSR) format.
+    void
+    spmatvec (const View<double*>& y,
+      const View<const size_t*>& ptr,
+      const View<const int*>& ind,
+      const View<const double*>& val,
+      const View<const double*>& x)
+    {
+      // Access to x has less locality than access to y.
+      View<const double*, RandomAccess> x_ra = x;
+      typedef View<const size_t*>::size_type size_type;
+    
+      parallel_for (y.dimension_0 (), KOKKOS_LAMBDA (const size_type i) {
+          double y_i = y(i);
+          for (size_t k = ptr(i); k < ptr(i+1); ++k) {
+            y_i += val(k) * x_ra(ind(k));
+          }
+          y(i) = y_i;
+        });
+    }
+
+### 6.5.4 Unmanaged Views
+
+It's always better to let Kokkos control memory allocation but sometimes you don't have a choice. You might have to work with an application or an interface that returns a raw pointer, for example. Kokkos lets you wrap raw pointers in an _unmanaged View_. "Unmanaged" means that Kokkos does _not_ do reference counting or automatic deallocation for those Views. The following example shows how to create an unmanaged View of host memory. You may do this for CUDA device memory too, or indeed for memory allocated in any memory space, by specifying the View's execution or memory space accordingly.
+
+    // Sometimes other code gives you a raw pointer, ...
+    const size_t N0 = ...;
+    double* x_raw = malloc (N0 * sizeof (double));
+    {
+      // ... but you want to access it with Kokkos.
+      //
+      // malloc() returns host memory, so we use the host memory space HostSpace.  
+      // Unmanaged Views have no label, 
+      // because labels work with the reference counting system.
+      View<double*, HostSpace, MemoryTraits<Unmanaged> >
+        x_view (x_raw, N0);
+    
+      functionThatTakesKokkosView (x_view);
+    
+      // It's safest for unmanaged Views to fall out of
+      // scope, before freeing their memory.
+    }
+    free (x_raw);
+
+
+### 6.5.5 Conversion Rules and Function Specialization
+
+Not all view types can be assigned to each other. Requirements are: the data type and dimension have to match, the layout must be compatible and the memory space has to match. Examples illustrating the rules are:
+
+1.  Memory Spaces must match
+    *  `Kokkos::View<int*> -> Kokkos::View<int*,HostSpace> ` / ok if default memory space is HostSpace}
+2.  Data Type and Rank has to Match
+    *  `int*  -> int*          ` /ok}
+    *  `int*  -> const int*    ` /ok}
+    *  `const int*  -> int*    ` /not ok, const violation}
+    *  `int** -> int*          ` /not ok, rank mismatch}
+    *  `int*[3] -> int**       ` /ok}
+    *  `int** -> int*[3]       ` /ok if runtime dimension check matches}
+    *  `int*  -> long*         ` /not ok, type mismatch}
+3.  Layouts must be compatible
+    *  `LayoutRight -> LayoutRight ` /ok}
+    *  `LayoutLeft -> LayoutRight  ` /not ok}
+    *  `LayoutLeft -> LayoutSride  ` /ok}
+    *  `LayoutStride -> LayoutLeft ` /ok if runtime dimensions allow assignment}
+4.  Memory Traits
 
