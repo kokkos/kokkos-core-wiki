@@ -32,8 +32,9 @@ ranging from a single type of core as in many/multi-core processors found today 
 to a range of execution units where many-core processors may be joined to numerous
 types of accelerator cores. In order to ensure portability to the potential range of nodes
 an abstraction of the compute engines and available memories are required.
-
-![kokkos-node.pdf](file:\\cee(G:)\Kokkos\KDocs\ProgrammingGuide\figures\kokkos-node.pdf)]  Figure 2.1 Conceptual Model of a Future High Performance Computing Node
+  
+[[https://github.com/kokkos/ProgrammingGuide/blob/master/figures/kokkos-node.pdf]]
+Figure 2.1 Conceptual Model of a Future High Performance Computing Node
 
 ## 2.2 Kokkos Execution Spaces
 Kokkos uses the term _execution spaces_ to describe a logical grouping of computation units which share an identical set of performance properties. An execution space provides a set of parallel execution resources which can be utilized by the programmer using several types of fundamental parallel operation. For a list of the operations available see Chapter 7.
