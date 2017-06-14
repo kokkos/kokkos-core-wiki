@@ -52,36 +52,15 @@ If a functor has an `execution_space` public typedef, a parallel dispatch will o
 
 ## 7.2 Parallel for
 
-The most common parallel dispatch operation is a \lstinline|parallel_for| call.
-It corresponds to the OpenMP construct \lstinline!#pragma omp parallel for!.
-\lstinline!Parallel_for! splits the index range over the available hardware resources and executes the loop body in parallel.
-Each iteration is executed independently.
-Kokkos promises nothing about the loop order or the amount of work which actually runs concurrently.
-This means in particular that not all loop iterations are active at the same time.  Consequently, it is not legal to use wait constructs (e.g., wait for a prior iteration to finish). 
-Kokkos also doesn't guarantee that it will use all available parallelism.
-For example, it can decide to execute in serial if the loop count is very small, and it would typically be faster to run in serial instead of introducing parallelization overhead.
-The \lstinline|RangePolicy| allows you to specify minimal chunk sizes in order to control potential concurrency for low trip count loops.
+The most common parallel dispatch operation is a `parallel_for` call. It corresponds to the OpenMP construct `#pragma omp parallel for`. `Parallel_for` splits the index range over the available hardware resources and executes the loop body in parallel. Each iteration is executed independently. Kokkos promises nothing about the loop order or the amount of work which actually runs concurrently. This means in particular that not all loop iterations are active at the same time. Consequently, it is not legal to use wait constructs (e.g., wait for a prior iteration to finish). Kokkos also doesn't guarantee that it will use all available parallelism. For example, it can decide to execute in serial if the loop count is very small, and it would typically be faster to run in serial instead of introducing parallelization overhead. The `RangePolicy` allows you to specify minimal chunk sizes in order to control potential concurrency for low trip count loops.
 
-The lambda or the \lstinline!operator()! method of the functor takes one argument.  That argument is the parallel loop ``index.''
-The type of the index depends on the execution policy used for the \lstinline!parallel_for!.  It is an integer type for the implicit or explicit \lstinline|RangePolicy|.
-The former is used if the first argument to \lstinline|parallel_for| is an integer.
+The lambda or the `operator()` method of the functor takes one argument. That argument is the parallel loop "index." The type of the index depends on the execution policy used for the `parallel_for`. It is an integer type for the implicit or explicit `RangePolicy`. The former is used if the first argument to `parallel_for` is an integer.
 
 ## 7.3 Parallel reduce
 
-Kokkos' \lstinline!parallel_reduce! operation implements a reduction.
-It is like \lstinline!parallel_for!, except that each iteration
-produces a value, and the values are accumulated into a single value
-with a user-specified associative binary operation.  It corresponds to
-the OpenMP construct \lstinline!#pragma omp parallel reduction!, but
-with fewer restrictions on the reduction operation.
+Kokkos' `parallel_reduce` operation implements a reduction. It is like `parallel_for`, except that each iteration produces a value, and the values are accumulated into a single value with a user-specified associative binary operation. It corresponds to the OpenMP construct `#pragma omp parallel reduction`, but with fewer restrictions on the reduction operation.
 
-The lambda or the \lstinline!operator()! method of the functor takes two arguments.
-The first argument is the parallel loop ``index.''
-The type of the index depends on the execution policy used for the \lstinline!parallel_reduce!.
-If you give \lstinline!parallel_reduce! an integer range as its first argument,
-or use \lstinline!RangePolicy! explicitly,
-then the first argument of the lambda or \lstinline!operator()! method is an integer index.
-Its second argument is a nonconst reference to the type of the reduction result.
+The lambda or the `operator()` method of the functor takes two arguments. The first argument is the parallel loop "index." The type of the index depends on the execution policy used for the `parallel_reduce`. If you give `parallel_reduce` an integer range as its first argument, or use `RangePolicy` explicitly, then the first argument of the lambda or operator()` method is an integer index. Its second argument is a nonconst reference to the type of the reduction result.
 
 ### 7.3.1 Example using lambda
 
@@ -95,9 +74,7 @@ Here is an example reduction using a lambda, where the reduction result is a `do
     parallel_reduce (N, KOKKOS_LAMBDA (const int i, double& update) {
         update += x(i); }, sum);
 
-This version of `parallel_reduce` is easy to use, but it imposes some assumptions on the reduction. For example, it assumes that it is correct for threads to join their intermediate reduction results using binary `operator+`.
-If you want to change this, you must either implement your own reduction result type with a custom binary `operator+`,
-or define the reduction using a functor instead of a lambda.
+This version of `parallel_reduce` is easy to use, but it imposes some assumptions on the reduction. For example, it assumes that it is correct for threads to join their intermediate reduction results using binary `operator+`. If you want to change this, you must either implement your own reduction result type with a custom binary `operator+`, or define the reduction using a functor instead of a lambda.
 
 ### 7.3.2 Example using functor
 
@@ -110,7 +87,7 @@ The following example shows a reduction using the _max-plus semiring_, where `ma
       typedef double value_type;
     
       // Just like with parallel_for functors, you may specify
-      // an execution_space typedef.  If not provided, Kokkos
+      // an execution_space typedef. If not provided, Kokkos
       // will use the default execution space by default.
     
       // Since we're using a functor instead of a lambda,
@@ -132,7 +109,7 @@ The following example shows a reduction using the _max-plus semiring_, where `ma
     
       // "Join" intermediate results from different threads.
       // This should normally implement the same reduction
-      // operation as operator() above.  Note that both input
+      // operation as operator() above. Note that both input
       // arguments MUST be declared volatile.
       KOKKOS_INLINE_FUNCTION void
       join (volatile value_type& dst,
@@ -148,7 +125,7 @@ The following example shows a reduction using the _max-plus semiring_, where `ma
       init (value_type& dst) const
       { // The identity under max is -Inf.
         // Kokkos does not come with a portable way to access
-        // floating-point Inf and NaN.  Trilinos does, however;
+        // floating-point Inf and NaN. Trilinos does, however;
         // see Kokkos::ArithTraits in the Tpetra package.
     #ifdef __CUDA_ARCH__
         return -CUDART_INF;
@@ -175,22 +152,19 @@ This example shows how to use the above functor:
 
 ### 7.3.3 Example using functor with default join and init
 
-If your functor does not supply a \lstinline!join! method with the correct signature,
-Kokkos will supply a default \lstinline!join! that uses binary \lstinline!operator+!.
-Likewise, if your functor does not supply an \lstinline!init! method with the correct signature,
-Kokkos will supply a default \lstinline!init! that sets the reduction result to zero.
+If your functor does not supply a `join` method with the correct signature, Kokkos will supply a default `join` that uses binary `operator+`. Likewise, if your functor does not supply an `init` method with the correct signature, Kokkos will supply a default `init` that sets the reduction result to zero.
 
-Here is an example of a reduction functor that computes the sum of squares of the entries of a View. Since it does not implement the \lstinline!join! and \lstinline!init! methods, Kokkos will supply defaults.
+Here is an example of a reduction functor that computes the sum of squares of the entries of a View. Since it does not implement the `join` and `init` methods, Kokkos will supply defaults.
 
     struct SquareSum {
       // Specify the type of the reduction value with a "value_type"
-      // typedef.  In this case, the reduction value has type int.
+      // typedef. In this case, the reduction value has type int.
       typedef int value_type;
     
       // The reduction functor's operator() looks a little different than
-      // the parallel_for functor's operator().  For the reduction, we
+      // the parallel_for functor's operator(). For the reduction, we
       // pass in both the loop index i, and the intermediate reduction
-      // value lsum.  The latter MUST be passed in by nonconst reference.
+      // value lsum. The latter MUST be passed in by nonconst reference.
       // (If the reduction type is an array like int[], indicating an
       // array reduction result, then the second argument is just int[].)
       KOKKOS_INLINE_FUNCTION
@@ -217,10 +191,7 @@ This example has a short enough loop body that it would be better to use a lambd
 
 ### 7.3.4 Reductions with an array of results
 
-Kokkos lets you compute reductions with an array of reduction results,
-as long as that array has a (run-time) constant number of entries.
-This currently only works with functors.  Here is an example functor
-that computes column sums of a 2-D View.
+Kokkos lets you compute reductions with an array of reduction results, as long as that array has a (run-time) constant number of entries. This currently only works with functors. Here is an example functor that computes column sums of a 2-D View.
 
     struct ColumnSums {
       // In this case, the reduction result is an array of float.
@@ -236,7 +207,7 @@ that computes column sums of a 2-D View.
       View<float**> X_;
     
       // As with the above examples, you may supply an
-      // execution_space typedef.  If not supplied, Kokkos
+      // execution_space typedef. If not supplied, Kokkos
       // will use the default execution space for this functor.
     
       // Be sure to set value_count in the constructor.
@@ -249,10 +220,9 @@ that computes column sums of a 2-D View.
       // so we don't pass it in by reference here.
       KOKKOS_INLINE_FUNCTION void
       operator() (const size_type i, value_type sum) const {
-        // You may find it helpful to put pragmas above
-        // this loop to convince the compiler to vectorize it.
-        // This is probably only helpful if the View type
-        // has LayoutRight.
+        // You may find it helpful to put pragmas above this loop
+        // to convince the compiler to vectorize it. This is 
+        // probably only helpful if the View type has LayoutRight.
         for (size_type j = 0; j < value_count; ++j) {
           sum[j] += X_(i, j);
         }
@@ -289,30 +259,11 @@ We show how to use this functor here:
 
 ## 7.4 Parallel scan
 
-Kokkos' \lstinline!parallel_scan! operation implements a \emph{prefix scan}.
-A prefix scan is like a reduction over a 1-D array,
-but it also stores all intermediate results (``partial sums'').
-It can use any associative binary operator.
-The default is \lstinline!operator+!,
-and we call a scan with that operator a ``sum scan''
-if we need to distinguish it from scans with other operators.
-The scan operation comes in two variants.
-An \emph{exclusive scan} excludes (hence the name) the first entry of the array,
-and an \emph{inclusive scan} includes that entry.
-Given an example array $(1, 2, 3, 4, 5)$,
-an exclusive sum scan overwrites the array with $(0, 1, 3, 6, 10)$,
-and an inclusive sum scan overwrites the array with $(1, 3, 6, 10, 15)$.
+Kokkos' `parallel_scan` operation implements a _prefix scan_. A prefix scan is like a reduction over a 1-D array, but it also stores all intermediate results ("partial sums"). It can use any associative binary operator. The default is `operator+`, and we call a scan with that operator a "sum scan" if we need to distinguish it from scans with other operators. The scan operation comes in two variants. An _exclusive scan_ excludes (hence the name) the first entry of the array, and an _inclusive scan_ includes that entry. Given an example array $(1, 2, 3, 4, 5)$, an exclusive sum scan overwrites the array with $(0, 1, 3, 6, 10)$, and an inclusive sum scan overwrites the array with $(1, 3, 6, 10, 15)$.
 
-Many operations that ``look'' sequential can be parallelized with a
-scan.  To learn more, see e.g., ``Vector Models for Data-Parallel
-Computing,'' Guy Blelloch, 1990 (the book version of Prof.\ Blelloch's
-PhD dissertation).
+Many operations that "look" sequential can be parallelized with a scan.  To learn more, see e.g., "Vector Models for Data-Parallel Computing," Guy Blelloch, 1990 (the book version of Prof.\ Blelloch's PhD dissertation).
 
-Kokkos lets users specify a scan by either a functor or a lambda.
-Both look like their \lstinline!parallel_reduce! equivalents,
-except that the \lstinline!operator()! method or lambda takes three arguments:
-the loop index, the ``update'' value by nonconst reference, and a \lstinline!bool!.
-Here is a lambda example where the intermediate results have type \lstinline!float!.
+Kokkos lets users specify a scan by either a functor or a lambda. Both look like their `parallel_reduce` equivalents, except that the `operator()` method or lambda takes three arguments: the loop index, the "update" value by nonconst reference, and a `bool`. Here is a lambda example where the intermediate results have type `float`.
 
     View<float*> x = ...; // assume filled with input values
     const size_t N = x.dimension_0 ();
@@ -322,31 +273,18 @@ Here is a lambda example where the intermediate results have type \lstinline!flo
           x(i) = upd; // only update array on final pass
         }
         // For exclusive scan, change the update value after
-        // updating array, like we do here.  For inclusive scan,
+        // updating array, like we do here. For inclusive scan,
         // change the update value before updating array.
         upd += x(i);
       });
 
-Kokkos may use a multiple-pass algorithm to implement scan.
-This means that it may call your \lstinline!operator()! or lambda multiple times per loop index value.
-The \lstinline!final! Boolean argument tells you whether Kokkos is on the final pass.
-You must only update the array on the final pass.
+Kokkos may use a multiple-pass algorithm to implement scan. This means that it may call your `operator()` or lambda multiple times per loop index value. The `final` Boolean argument tells you whether Kokkos is on the final pass. You must only update the array on the final pass.
 
-For an exclusive scan, change the \lstinline!update! value after
-updating the array, as in the above example.  For an inclusive scan,
-change \lstinline!update! \emph{before} updating the array.  Just as
-with reductions, your functor may need to specify a nondefault
-\lstinline!join! or \lstinline!init! method if the defaults do not do
-what you want.
+For an exclusive scan, change the `update` value after updating the array, as in the above example. For an inclusive scan, change `update` _before_ updating the array. Just as with reductions, your functor may need to specify a nondefault `join` or `init` method if the defaults do not do what you want.
 
 ## 7.5 Function Name Tags
 
-When writing class based applications it often is useful to make the classes themselves functors.
-Using that approach allows the kernels to access all other class members, both data and functions.
-An issue coming up in that case is the necessity for multiple parallel kernels in the same class.
-Kokkos supports that through function name tags. An application can use optional (unused) first arguments
-to differentiate multiple operators in the same class. Execution policies can take the type of that argument as
-an optional template parameter. The same applies to init, join and final functions.
+When writing class-based applications it often is useful to make the classes themselves functors. Using that approach allows the kernels to access all other class members, both data and functions. An issue coming up in that case is the necessity for multiple parallel kernels in the same class. Kokkos supports that through function name tags. An application can use optional (unused) first arguments to differentiate multiple operators in the same class. Execution policies can take the type of that argument as an optional template parameter. The same applies to init, join and final functions.
 
     class Foo {
       struct BarTag {};
