@@ -1,119 +1,56 @@
-\chapter 7
-Parallel dispatch}\label{C:Dispatch}
+# Chapter 7
 
-You probably started reading this Guide because you wanted to learn
-how Kokkos can parallelize your code.  This chapter will teach you
-different kinds of parallel operations that Kokkos can execute.  We
-call these operations collectively \emph{parallel dispatch}, because
-Kokkos ``dispatches'' them for execution by a particular execution
-space.  Kokkos provides three different parallel operations:
-\begin{itemize}
-\item \lstinline!parallel_for! implements a ``for loop'' with
-  independent iterations.
-\item \lstinline!parallel_reduce! implements a reduction.
-\item \lstinline!parallel_scan! implements a prefix scan.
-\end{itemize}
-Kokkos gives users two options for defining the body of a parallel
-loop: functors and lambdas.  It also lets users control how the
-parallel operation executes, by specifying an \emph{execution policy}.
-Later chapters will cover more advanced execution policies that allow
-nested parallelism.
+# Parallel dispatch
+
+You probably started reading this Guide because you wanted to learn how Kokkos can parallelize your code. This chapter will teach you different kinds of parallel operations that Kokkos can execute. We call these operations collectively _parallel dispatch_, because Kokkos "dispatches" them for execution by a particular execution space. Kokkos provides three different parallel operations:
+
+* `parallel_for` implements a "for loop" with independent iterations.
+* `parallel_reduce` implements a reduction.
+* `parallel_scan` implements a prefix scan.
+
+Kokkos gives users two options for defining the body of a parallel loop: functors and lambdas. It also lets users control how the parallel operation executes, by specifying an _execution policy_. Later chapters will cover more advanced execution policies that allow nested parallelism.
 
 Important notes on syntax:
-\begin{itemize}
-\item Use the \lstinline!KOKKOS_INLINE_FUNCTION! macro to mark a
-  functor's methods that Kokkos will call in parallel
-\item Use the \lstinline!KOKKOS_LAMBDA! macro to replace a lambda's
-  capture clause when giving the lambda to Kokkos for parallel
+
+* Use the `KOKKOS_INLINE_FUNCTION` macro to mark a   functor's methods that Kokkos will call in parallel
+* Use the `KOKKOS_LAMBDA` macro to replace a lambda's capture clause when giving the lambda to Kokkos for parallel
   execution
-\end{itemize}
 
-\section{7.1 Specifying the parallel loop body}
+## 7.1 Specifying the parallel loop body
 
-\subsection{Functors}
+### 7.1.1 Functors
 
-A \emph{functor} is one way to define the body of a parallel loop.
-It is a class or struct\footnote{A ``struct'' in C++ is just a class, all of whose members are public by default.} with a public \lstinline!operator()! instance method.
-That method's arguments depend on both which parallel operation you want to execute (for, reduce, or scan), and on the loop's execution policy (e.g., range or team).
-For an example of a functor, see the section in this chapter for each type of parallel operation.
-In the most common case of a \lstinline!parallel_for!, it takes an integer argument which is the for loop's index.
-Other arguments are possible; see Chapter \ref{C:Hierarchical} on ``hierarchical parallelism.''
+A _functor_ is one way to define the body of a parallel loop. It is a class or struct\footnote{A "struct" in C++ is just a class, all of whose members are public by default.} with a public `operator()` instance method. That method's arguments depend on both which parallel operation you want to execute (for, reduce, or scan), and on the loop's execution policy (e.g., range or team). For an example of a functor see the section in this chapter for each type of parallel operation. In the most common case of a `parallel_for`, it takes an integer argument which is the for loop's index. Other arguments are possible; see Chapter 8 on "hierarchical parallelism."
 
-The \lstinline|operator()| method must be const, and must be marked with the \\ \lstinline!KOKKOS_INLINE_FUNCTION! macro.
-If building with CUDA, this macro will mark your method as suitable for running on the CUDA device (as well as on the host).
-If not building with CUDA, the macro is unnecessary but harmless.  Here is an example of the signature of such a method:
-\begin{lstlisting}
-KOKKOS_INLINE_FUNCTION void operator() (...) const;
-\end{lstlisting}
+The `operator()` method must be const, and must be marked with the `KOKKOS_INLINE_FUNCTION` macro. If building with CUDA, this macro will mark your method as suitable for running on the CUDA device (as well as on the host). If not building with CUDA, the macro is unnecessary but harmless. Here is an example of the signature of such a method:
 
-The entire parallel operation (for, reduce, or scan) shares the same instance of the functor.
-However, any variables declared inside the \lstinline!operator()! method are local to that iteration of the parallel loop.
-Kokkos may pass the functor instance by ``copy,'' not by pointer or reference, to the execution space that executes the code.
-In particular, the functor might need to be copied to a different execution space than the host.  For this reason, it is generally not valid to have any pointer or reference members in the functor.
-Pass in Kokkos Views by copy as well; this works by shallow copy.
-The functor is also passed as a const object, so it is not valid to change members of the functors.
-(However, it is valid for the functor to change the contents of, for example, a View or a raw array which is a member of the functor.)
+    KOKKOS_INLINE_FUNCTION void operator() (...) const;
 
-\subsection{Lambdas}
+The entire parallel operation (for, reduce, or scan) shares the same instance of the functor. However, any variables declared inside the `operator()` method are local to that iteration of the parallel loop. Kokkos may pass the functor instance by "copy," not by pointer or reference, to the execution space that executes the code. In particular, the functor might need to be copied to a different execution space than the host. For this reason, it is generally not valid to have any pointer or reference members in the functor. Pass in Kokkos Views by copy as well; this works by shallow copy. The functor is also passed as a const object, so it is not valid to change members of the functors. (However, it is valid for the functor to change the contents of, for example, a View or a raw array which is a member of the functor.)
 
-The 2011 version of the C++ standard (``C++11'') provides a new language construct, the \emph{lambda}, also called ``anonymous function'' or ``closure.''
-Kokkos lets users supply parallel loop bodies as either functors (see above) or lambdas.
-Lambdas work like automatically generated functors.
-Just like a class, a lambda may have state.  The only difference is that with a lambda, the state comes in from the environment.
-(The name ``closure'' means that the function ``closes over'' state from the environment.)
-Just like with functors, lambdas must bring in state by ``value'' (copy), not by reference or pointer.
+### 7.1.2 Lambdas
 
-By default, lambdas capture nothing (as the default capture specifier \lstinline![]! specifies).
-This is not likely to be useful, since \lstinline!parallel_for! generally works by its side effects.
-Thus, we recommend using the ``capture by value'' specifier \lstinline![=]! by default.
-You may also explicitly specify variables to capture, but they must be captured by value.
-We prefer that for the outermost level of parallelism (see Chapter \ref{C:Hierarchical}),
-you use the \lstinline!KOKKOS_LAMBDA! macro instead of the capture clause.
-If CUDA is disabled, this just turns into the usual capture-by-value clause \lstinline![=]!.
-That captures variables from the surrounding scope by value.
-Do NOT capture them by reference!
-If CUDA is enabled, this macro may have a special definition
-that makes the lambda work correctly with CUDA.
-Compare to the \lstinline!KOKKOS_INLINE_FUNCTION! macro,
-which has a special meaning if CUDA is enabled.
-If you do not plan to build with CUDA, you may use \lstinline![=]! explicitly,
-but we find using the macro easier than remembering the capture clause syntax.
+The 2011 version of the C++ standard ("C++11") provides a new language construct, the _lambda_, also called "anonymous function" or "closure." Kokkos lets users supply parallel loop bodies as either functors (see above) or lambdas. Lambdas work like automatically generated functors. Just like a class, a lambda may have state.  The only difference is that with a lambda, the state comes in from the environment. (The name "closure" means that the function "closes over" state from the environment.) Just like with functors, lambdas must bring in state by "value" (copy), not by reference or pointer.
 
-It is a violation of Kokkos semantics to capture by reference \lstinline|[&]| for two reasons.
-First Kokkos might give the lambda to an execution space which can not access the stack of
-the dispatching thread. Secondly, capturing by reference allows the programmer to violate the
-const semantics of the lambda. For correctness and portability reasons lambdas and functors are
-treated as const objects inside the parallel code section. Capturing by reference allows a circumvention
-of that const property, and enables many more possibilities of writing non-threads-safe code.
+By default, lambdas capture nothing (as the default capture specifier `[]` specifies). This is not likely to be useful, since `parallel_for` generally works by its side effects. Thus, we recommend using the ``capture by value'' specifier `[=]` by default. You may also explicitly specify variables to capture, but they must be captured by value. We prefer that for the outermost level of parallelism (see Chapter 8), you use the `KOKKOS_LAMBDA` macro instead of the capture clause.
+If CUDA is disabled, this just turns into the usual capture-by-value clause `[=]`. That captures variables from the surrounding scope by value. Do NOT capture them by reference! If CUDA is enabled, this macro may have a special definition
+that makes the lambda work correctly with CUDA. Compare to the `KOKKOS_INLINE_FUNCTION` macro, which has a special meaning if CUDA is enabled. If you do not plan to build with CUDA, you may use `[=]` explicitly, but we find using the macro easier than remembering the capture clause syntax.
 
-When using lambdas for nested parallelism (see Chapter \ref{C:Hierarchical} for details) using
-capture by reference can be useful for performance reasons, but the code is only valid Kokkos
-code if it also works with capturing by copy.
+It is a violation of Kokkos semantics to capture by reference `[&]` for two reasons. First Kokkos might give the lambda to an execution space which can not access the stack of the dispatching thread. Secondly, capturing by reference allows the programmer to violate the const semantics of the lambda. For correctness and portability reasons lambdas and functors are treated as const objects inside the parallel code section. Capturing by reference allows a circumvention of that const property, and enables many more possibilities of writing non-threads-safe code.
 
-\subsection{Should I use a functor or a lambda?}
+When using lambdas for nested parallelism (see Chapter 8 for details) using capture by reference can be useful for performance reasons, but the code is only valid Kokkos code if it also works with capturing by copy.
 
-Kokkos lets users choose whether to use a functor or a lambda.
-Lambdas are convenient for short loop bodies.
-For a much more complicated loop body,
-you might find it easier for testing to separate it out and name it as a functor.
-Lambdas by definition are ``anonymous functions,'' meaning that they have no name.
-This makes it harder to test them.
-Furthermore, if you would like to use lambdas with CUDA,
-you must have a sufficiently new version of CUDA.
-At the time of writing CUDA 7.5 supports lambdas using a special flag.
-To enable this support, use the \lstinline|KOKKOS_CUDA_OPTIONS=enable_lambda| option.
+### 7.1.3 Should I use a functor or a lambda?
 
-Finally, the ``execution tag'' feature, which lets you put together several different parallel loop bodies into a single functor,
-only works with functors.  (See Chapter \ref{C:Hierarchical} for details.)
+Kokkos lets users choose whether to use a functor or a lambda. Lambdas are convenient for short loop bodies. For a much more complicated loop body, you might find it easier for testing to separate it out and name it as a functor. Lambdas by definition are "anonymous functions," meaning that they have no name. This makes it harder to test them. Furthermore, if you would like to use lambdas with CUDA, you must have a sufficiently new version of CUDA. At the time of writing CUDA 7.5 supports lambdas using a special flag. To enable this support, use the `KOKKOS_CUDA_OPTIONS=enable_lambda` option.
 
-\subsection{Specifying the execution space}
+Finally, the ``execution tag'' feature, which lets you put together several different parallel loop bodies into a single functor, only works with functors.  (See Chapter 8 for details.)
 
-If a functor has an \lstinline|execution_space| public typedef, a parallel dispatch will only run the functor in that execution space.
-That's a good way to mark a functor as specific to an execution space.
-If the functor lacks this typedef, \lstinline|parallel_for| will run it in the default execution space, unless you tell it otherwise (that's an advanced topic; see ``execution policies'').
-Lambdas do not have typedefs, so they run on the default execution space, unless you tell Kokkos otherwise.
+### 7.1.4 Specifying the execution space
 
-\section{Parallel for}
+If a functor has an `execution_space` public typedef, a parallel dispatch will only run the functor in that execution space. That's a good way to mark a functor as specific to an execution space. If the functor lacks this typedef, `parallel_for` will run it in the default execution space, unless you tell it otherwise (that's an advanced topic; see "execution policies"). Lambdas do not have typedefs, so they run on the default execution space, unless you tell Kokkos otherwise.
+
+## 7.2 Parallel for
 
 The most common parallel dispatch operation is a \lstinline|parallel_for| call.
 It corresponds to the OpenMP construct \lstinline!#pragma omp parallel for!.
@@ -129,7 +66,7 @@ The lambda or the \lstinline!operator()! method of the functor takes one argumen
 The type of the index depends on the execution policy used for the \lstinline!parallel_for!.  It is an integer type for the implicit or explicit \lstinline|RangePolicy|.
 The former is used if the first argument to \lstinline|parallel_for| is an integer.
 
-\section{Parallel reduce}
+## 7.3 Parallel reduce
 
 Kokkos' \lstinline!parallel_reduce! operation implements a reduction.
 It is like \lstinline!parallel_for!, except that each iteration
@@ -146,218 +83,211 @@ or use \lstinline!RangePolicy! explicitly,
 then the first argument of the lambda or \lstinline!operator()! method is an integer index.
 Its second argument is a nonconst reference to the type of the reduction result.
 
-\subsection{Example using lambda}
+### 7.3.1 Example using lambda
 
-Here is an example reduction using a lambda,
-where the reduction result is a \lstinline!double!.
-\begin{lstlisting}
-const size_t N = ...;
-View<double*> x ("x", N);
-// ... fill x with some numbers ...
-double sum = 0.0;
-// KOKKOS_LAMBDA macro includes capture-by-value specifier [=].
-parallel_reduce (N, KOKKOS_LAMBDA (const int i, double& update) {
-    update += x(i); }, sum);
-\end{lstlisting}
-This version of \verb!parallel_reduce! is easy to use,
-but it imposes some assumptions on the reduction.
-For example, it assumes that it is correct for threads to join their intermediate reduction results using binary \lstinline!operator+!.
-If you want to change this, you must either implement your own reduction result type with a custom binary \lstinline!operator+!,
+Here is an example reduction using a lambda, where the reduction result is a `double`.
+
+    const size_t N = ...;
+    View<double*> x ("x", N);
+    // ... fill x with some numbers ...
+    double sum = 0.0;
+    // KOKKOS_LAMBDA macro includes capture-by-value specifier [=].
+    parallel_reduce (N, KOKKOS_LAMBDA (const int i, double& update) {
+        update += x(i); }, sum);
+
+This version of `parallel_reduce` is easy to use, but it imposes some assumptions on the reduction. For example, it assumes that it is correct for threads to join their intermediate reduction results using binary `operator+`.
+If you want to change this, you must either implement your own reduction result type with a custom binary `operator+`,
 or define the reduction using a functor instead of a lambda.
 
-\subsection{Example using functor}
+### 7.3.2 Example using functor
 
-The following example shows a reduction using the \emph{max-plus semiring},
-where \lstinline!max(a,b)! corresponds to addition and ordinary addition corresponds to multiplication:
-\begin{lstlisting}
-class MaxPlus {
-public:
-  // Kokkos reduction functors need the value_type typedef.
-  // This is the type of the result of the reduction.
-  typedef double value_type;
+The following example shows a reduction using the _max-plus semiring_, where `max(a,b)` corresponds to addition and ordinary addition corresponds to multiplication:
 
-  // Just like with parallel_for functors, you may specify
-  // an execution_space typedef.  If not provided, Kokkos
-  // will use the default execution space by default.
+    class MaxPlus {
+    public:
+      // Kokkos reduction functors need the value_type typedef.
+      // This is the type of the result of the reduction.
+      typedef double value_type;
+    
+      // Just like with parallel_for functors, you may specify
+      // an execution_space typedef.  If not provided, Kokkos
+      // will use the default execution space by default.
+    
+      // Since we're using a functor instead of a lambda,
+      // the functor's constructor must do the work of capturing
+      // the Views needed for the reduction.
+      MaxPlus (const View<double*>& x) : x_ (x) {}
+    
+      // This is helpful for determining the right index type,
+      // especially if you expect to need a 64-bit index.
+      typedef View<double*>::size_type size_type;
+    
+      KOKKOS_INLINE_FUNCTION void
+      operator() (const size_type i, value_type& update) const
+      { // max-plus semiring equivalent of "plus"
+        if (update < x_(i)) {
+          update = x_(i);
+        }
+      }
+    
+      // "Join" intermediate results from different threads.
+      // This should normally implement the same reduction
+      // operation as operator() above.  Note that both input
+      // arguments MUST be declared volatile.
+      KOKKOS_INLINE_FUNCTION void
+      join (volatile value_type& dst,
+            const volatile value_type& src) const
+      { // max-plus semiring equivalent of "plus"
+        if (dst < src) {
+          dst = src;
+      }
+      }
+    
+      // Tell each thread how to initialize its reduction result.
+      KOKKOS_INLINE_FUNCTION void
+      init (value_type& dst) const
+      { // The identity under max is -Inf.
+        // Kokkos does not come with a portable way to access
+        // floating-point Inf and NaN.  Trilinos does, however;
+        // see Kokkos::ArithTraits in the Tpetra package.
+    #ifdef __CUDA_ARCH__
+        return -CUDART_INF;
+    #else
+        return strtod ("-Inf", (char**) NULL);
+    #endif // __CUDA_ARCH__
+      }
+    
+    private:
+      View<double*> x_;
+    };
 
-  // Since we're using a functor instead of a lambda,
-  // the functor's constructor must do the work of capturing
-  // the Views needed for the reduction.
-  MaxPlus (const View<double*>& x) : x_ (x) {}
-
-  // This is helpful for determining the right index type,
-  // especially if you expect to need a 64-bit index.
-  typedef View<double*>::size_type size_type;
-
-  KOKKOS_INLINE_FUNCTION void
-  operator() (const size_type i, value_type& update) const
-  { // max-plus semiring equivalent of "plus"
-    if (update < x_(i)) {
-      update = x_(i);
-    }
-  }
-
-  // "Join" intermediate results from different threads.
-  // This should normally implement the same reduction
-  // operation as operator() above.  Note that both input
-  // arguments MUST be declared volatile.
-  KOKKOS_INLINE_FUNCTION void
-  join (volatile value_type& dst,
-        const volatile value_type& src) const
-  { // max-plus semiring equivalent of "plus"
-    if (dst < src) {
-      dst = src;
-    }
-  }
-
-  // Tell each thread how to initialize its reduction result.
-  KOKKOS_INLINE_FUNCTION void
-  init (value_type& dst) const
-  { // The identity under max is -Inf.
-    // Kokkos does not come with a portable way to access
-    // floating-point Inf and NaN.  Trilinos does, however;
-    // see Kokkos::ArithTraits in the Tpetra package.
-#ifdef __CUDA_ARCH__
-    return -CUDART_INF;
-#else
-    return strtod ("-Inf", (char**) NULL);
-#endif // __CUDA_ARCH__
-  }
-
-private:
-  View<double*> x_;
-};
-\end{lstlisting}
 
 This example shows how to use the above functor:
-\begin{lstlisting}
-const size_t N = ...;
-View<double*> x ("x", N);
-// ... fill x with some numbers ...
 
-//  Trivial reduction in max-plus semiring is -Inf.
-double result = strtod ("-Inf", (char**) NULL);
-parallel_reduce (N, MaxPlus (x), result);
-\end{lstlisting}
+    const size_t N = ...;
+    View<double*> x ("x", N);
+    // ... fill x with some numbers ...
+    
+    //  Trivial reduction in max-plus semiring is -Inf.
+    double result = strtod ("-Inf", (char**) NULL);
+    parallel_reduce (N, MaxPlus (x), result);
 
-\subsection{Example using functor with default join and init}
+
+### 7.3.3 Example using functor with default join and init
 
 If your functor does not supply a \lstinline!join! method with the correct signature,
 Kokkos will supply a default \lstinline!join! that uses binary \lstinline!operator+!.
 Likewise, if your functor does not supply an \lstinline!init! method with the correct signature,
 Kokkos will supply a default \lstinline!init! that sets the reduction result to zero.
 
-Here is an example of a reduction functor that computes the sum of squares
-of the entries of a View.
-Since it does not implement the \lstinline!join! and \lstinline!init! methods,
-Kokkos will supply defaults.
-\begin{lstlisting}
-struct SquareSum {
-  // Specify the type of the reduction value with a "value_type"
-  // typedef.  In this case, the reduction value has type int.
-  typedef int value_type;
+Here is an example of a reduction functor that computes the sum of squares of the entries of a View. Since it does not implement the \lstinline!join! and \lstinline!init! methods, Kokkos will supply defaults.
 
-  // The reduction functor's operator() looks a little different than
-  // the parallel_for functor's operator().  For the reduction, we
-  // pass in both the loop index i, and the intermediate reduction
-  // value lsum.  The latter MUST be passed in by nonconst reference.
-  // (If the reduction type is an array like int[], indicating an
-  // array reduction result, then the second argument is just int[].)
-  KOKKOS_INLINE_FUNCTION
-  void operator () (const int i, value_type& lsum) const {
-    lsum += i*i; // compute the sum of squares
-  }
-};
+    struct SquareSum {
+      // Specify the type of the reduction value with a "value_type"
+      // typedef.  In this case, the reduction value has type int.
+      typedef int value_type;
+    
+      // The reduction functor's operator() looks a little different than
+      // the parallel_for functor's operator().  For the reduction, we
+      // pass in both the loop index i, and the intermediate reduction
+      // value lsum.  The latter MUST be passed in by nonconst reference.
+      // (If the reduction type is an array like int[], indicating an
+      // array reduction result, then the second argument is just int[].)
+      KOKKOS_INLINE_FUNCTION
+      void operator () (const int i, value_type& lsum) const {
+        lsum += i*i; // compute the sum of squares
+      }
+    };
+    
+    // Use the above functor to compute the sum of squares from 0 to N-1.
+    const size_t N = ...;
+    sum = 0;
+    // parallel_reduce needs an instance of SquareSum,
+    // so we invoke its constructor with ().
+    parallel_reduce (N, SquareSum ());
 
-// Use the above functor to compute the sum of squares from 0 to N-1.
-const size_t N = ...;
-sum = 0;
-// parallel_reduce needs an instance of SquareSum,
-// so we invoke its constructor with ().
-parallel_reduce (N, SquareSum ());
-\end{lstlisting}
 This example has a short enough loop body that it would be better to use a lambda:
-\begin{lstlisting}
-// Compute the sum of squares from 0 to N-1.
-int sum = 0;
-parallel_reduce (N, KOKKOS_LAMBDA (const int i, int& lsum) {
-  lsum += i*i;
-});
-\end{lstlisting}
 
-\subsection{Reductions with an array of results}
+    // Compute the sum of squares from 0 to N-1.
+    int sum = 0;
+    parallel_reduce (N, KOKKOS_LAMBDA (const int i, int& lsum) {
+      lsum += i*i;
+    });
+
+
+### 7.3.4 Reductions with an array of results
 
 Kokkos lets you compute reductions with an array of reduction results,
 as long as that array has a (run-time) constant number of entries.
 This currently only works with functors.  Here is an example functor
 that computes column sums of a 2-D View.
-\begin{lstlisting}
-struct ColumnSums {
-  // In this case, the reduction result is an array of float.
-  // Note the C++ notation for an array typedef.
-  typedef float value_type[];
 
-  typedef View<float**>::size_type size_type;
+    struct ColumnSums {
+      // In this case, the reduction result is an array of float.
+      // Note the C++ notation for an array typedef.
+      typedef float value_type[];
+    
+     typedef View<float**>::size_type size_type;
+    
+      // Tell Kokkos the result array's number of entries.
+      // This must be a public value in the functor.
+      size_type value_count;
+    
+      View<float**> X_;
+    
+      // As with the above examples, you may supply an
+      // execution_space typedef.  If not supplied, Kokkos
+      // will use the default execution space for this functor.
+    
+      // Be sure to set value_count in the constructor.
+      ColumnSums (const View<float**>& X) :
+        value_count (X.dimension_1 ()), // # columns in X
+        X_ (X)
+      {}
+   
+      // value_type here is already a "reference" type,
+      // so we don't pass it in by reference here.
+      KOKKOS_INLINE_FUNCTION void
+      operator() (const size_type i, value_type sum) const {
+        // You may find it helpful to put pragmas above
+        // this loop to convince the compiler to vectorize it.
+        // This is probably only helpful if the View type
+        // has LayoutRight.
+        for (size_type j = 0; j < value_count; ++j) {
+          sum[j] += X_(i, j);
+        }
+      }
+    
+      // value_type here is already a "reference" type,
+      // so we don't pass it in by reference here.
+      KOKKOS_INLINE_FUNCTION void
+      join (volatile value_type dst,
+            const volatile value_type src) const {
+        for (size_type j = 0; j < value_count; ++j) {
+          dst[j] += src[j];
+        }
+      }
+    
+      KOKKOS_INLINE_FUNCTION void init () const {
+        for (size_type j = 0; j < value_count; ++j) {
+          sum[j] += 0.0;
+        }
+      }
+    };
 
-  // Tell Kokkos the result array's number of entries.
-  // This must be a public value in the functor.
-  size_type value_count;
-
-  View<float**> X_;
-
-  // As with the above examples, you may supply an
-  // execution_space typedef.  If not supplied, Kokkos
-  // will use the default execution space for this functor.
-
-  // Be sure to set value_count in the constructor.
-  ColumnSums (const View<float**>& X) :
-    value_count (X.dimension_1 ()), // # columns in X
-    X_ (X)
-  {}
-
-  // value_type here is already a "reference" type,
-  // so we don't pass it in by reference here.
-  KOKKOS_INLINE_FUNCTION void
-  operator() (const size_type i, value_type sum) const {
-    // You may find it helpful to put pragmas above
-    // this loop to convince the compiler to vectorize it.
-    // This is probably only helpful if the View type
-    // has LayoutRight.
-    for (size_type j = 0; j < value_count; ++j) {
-      sum[j] += X_(i, j);
-    }
-  }
-
-  // value_type here is already a "reference" type,
-  // so we don't pass it in by reference here.
-  KOKKOS_INLINE_FUNCTION void
-  join (volatile value_type dst,
-        const volatile value_type src) const {
-    for (size_type j = 0; j < value_count; ++j) {
-      dst[j] += src[j];
-    }
-  }
-
-  KOKKOS_INLINE_FUNCTION void init () const {
-    for (size_type j = 0; j < value_count; ++j) {
-      sum[j] += 0.0;
-    }
-  }
-};
-\end{lstlisting}
 We show how to use this functor here:
-\begin{lstlisting}
-  const size_t numRows = 10000;
-  const size_t numCols = 10;
 
-  View<float**> X ("X", numRows, numCols);
-  // ... fill X before the following ...
-  ColumnSums cs (X);
-  float sums[10];
-  parallel_reduce (X.dimension_0 (), cs, sums);
-\end{lstlisting}
+      const size_t numRows = 10000;
+      const size_t numCols = 10;
+    
+      View<float**> X ("X", numRows, numCols);
+      // ... fill X before the following ...
+      ColumnSums cs (X);
+      float sums[10];
+      parallel_reduce (X.dimension_0 (), cs, sums);
+    
 
-\section{Parallel scan}
+## 7.4 Parallel scan
 
 Kokkos' \lstinline!parallel_scan! operation implements a \emph{prefix scan}.
 A prefix scan is like a reduction over a 1-D array,
@@ -383,20 +313,20 @@ Both look like their \lstinline!parallel_reduce! equivalents,
 except that the \lstinline!operator()! method or lambda takes three arguments:
 the loop index, the ``update'' value by nonconst reference, and a \lstinline!bool!.
 Here is a lambda example where the intermediate results have type \lstinline!float!.
-\begin{lstlisting}
-View<float*> x = ...; // assume filled with input values
-const size_t N = x.dimension_0 ();
-parallel_scan (N, KOKKOS_LAMBDA (const int& i,
-          float& upd, const bool& final) {
-    if (final) {
-      x(i) = upd; // only update array on final pass
-    }
-    // For exclusive scan, change the update value after
-    // updating array, like we do here.  For inclusive scan,
-    // change the update value before updating array.
-    upd += x(i);
-  });
-\end{lstlisting}
+
+    View<float*> x = ...; // assume filled with input values
+    const size_t N = x.dimension_0 ();
+    parallel_scan (N, KOKKOS_LAMBDA (const int& i,
+              float& upd, const bool& final) {
+        if (final) {
+          x(i) = upd; // only update array on final pass
+        }
+        // For exclusive scan, change the update value after
+        // updating array, like we do here.  For inclusive scan,
+        // change the update value before updating array.
+        upd += x(i);
+      });
+
 Kokkos may use a multiple-pass algorithm to implement scan.
 This means that it may call your \lstinline!operator()! or lambda multiple times per loop index value.
 The \lstinline!final! Boolean argument tells you whether Kokkos is on the final pass.
@@ -409,7 +339,7 @@ with reductions, your functor may need to specify a nondefault
 \lstinline!join! or \lstinline!init! method if the defaults do not do
 what you want.
 
-\section{Function Name Tags}
+## 7.5 Function Name Tags
 
 When writing class based applications it often is useful to make the classes themselves functors.
 Using that approach allows the kernels to access all other class members, both data and functions.
@@ -418,34 +348,33 @@ Kokkos supports that through function name tags. An application can use optional
 to differentiate multiple operators in the same class. Execution policies can take the type of that argument as
 an optional template parameter. The same applies to init, join and final functions.
 
-\begin{lstlisting}
-class Foo {
-  struct BarTag {};
-  struct RabTag {};
+    class Foo {
+      struct BarTag {};
+      struct RabTag {};
+    
+      void compute() {
+         Kokkos::parallel_for(RangePolicy<BarTag>(0,100), *this);
+         Kokkos::parallel_for(RangePolicy<RabTag>(0,1000), *this);
+      }
+    
+     KOKKOS_INLINE_FUNCTION
+      void operator() (const BarTag&, const int& i) const {
+        ...
+        foobar();
+        ...
+      }
+    
+      KOKKOS_INLINE_FUNCTION
+      void operator() (const RabTag&, const int& i) const {
+        ...
+        foobar();
+        ...
+      }
+    
+      void foobar() {
+        ...
+      }
+    };
 
-  void compute() {
-     Kokkos::parallel_for(RangePolicy<BarTag>(0,100), *this);
-     Kokkos::parallel_for(RangePolicy<RabTag>(0,1000), *this);
-  }
-
-  KOKKOS_INLINE_FUNCTION
-  void operator() (const BarTag&, const int& i) const {
-    ...
-    foobar();
-    ...
-  }
-
-  KOKKOS_INLINE_FUNCTION
-  void operator() (const RabTag&, const int& i) const {
-    ...
-    foobar();
-    ...
-  }
-
-  void foobar() {
-    ...
-  }
-};
-\end{lstlisting}
 
 This approach can also be used to template the operators by templating the tag classes which is useful to enable compile time evaluation of appropriate conditionals.
