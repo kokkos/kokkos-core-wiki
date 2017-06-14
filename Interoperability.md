@@ -41,7 +41,7 @@ in the functor or lambda are automatically switched into unmanaged
 mode. This would not happen when simply entering an OpenMP
 parallel region.
 
-### 12.1.1 Cuda interoperabiltiy
+### 12.1.1 Cuda interoperability
 
 The most important thing to know for Cuda interoperability is that the provided macro
 \lstinline|KOKKOS_INLINE_FUNCTION| evaluates to
