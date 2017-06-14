@@ -1,6 +1,6 @@
-# Chapter
+# Chapter 6
 
-# 6 View: Multidimensional array
+# View: Multidimensional array
 
 After reading this chapter, you should understand the following:
 
