@@ -17,16 +17,13 @@ Kokkos consists mainly of header files. Only a few functions have to be compiled
 > Intel 14.x, 15.x, 16.x, 17.x;  
 > Clang 3.5.1, 3.6.x, 3.7.x, 3.8.x, 3.9.x;  
 > Cuda 7.0, 7.5, 8.0;  
-> XL 13.3; 
-
-
-**This table needs work - daldo**  
+> XL 13.3;  
 
 
 Table 4.1: Configuration Macros
   
  Macro | Effect | Comment
-  .--- | .--- | .---
+ :--- |:--- |:---
 `KOKKOS_HAVE_CUDA`| Enable the CUDA execution space. |Requires a compiler capable of understanding CUDA-C. See Section ??.
 `KOKKOS_HAVE_OPENMP`| Enable the OpenMP execution space. |Requires the compiler to support OpenMP (e.g., `-fopenmp`).
 `KOKKOS_HAVE_PTHREADS`| Enable the Threads execution space. | Requires linking with libpthread.
