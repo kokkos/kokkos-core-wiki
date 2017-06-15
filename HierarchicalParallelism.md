@@ -225,196 +225,164 @@ The third pattern is `parallel_scan` which can be used to perform prefix scans.
 
 ### 8.4.2 Vector loops
 
-At the innermost level of nesting parallel loops in a kernel is comprised of the \emph{vector}-loop.
-Vector level parallelism works identical to the team level loops using the execution policy \lstinline|ThreadVectorRange|.
-In contrast to the team-level, there is no legal way to exploit the vector level outside of a parallel pattern using the \lstinline|ThreadVectorRange|.
-However one can use such a parallel construct in- and outside- of a \lstinline|TeamThreadRange| parallel operation.
+At the innermost level of nesting parallel loops in a kernel is comprised of the _vector_-loop. Vector level parallelism works identical to the team level loops using the execution policy `ThreadVectorRange`. In contrast to the team-level, there is no legal way to exploit the vector level outside of a parallel pattern using the `ThreadVectorRange`. However one can use such a parallel construct in- and outside- of a `TeamThreadRange` parallel operation.
 
-\begin{lstlisting}
-using Kokkos::parallel_reduce;
-using Kokkos::TeamPolicy;
-using Kokkos::TeamThreadRange;
-using Kokkos::ThreadVectorRange;
-parallel_for (TeamPolicy<> (league_size, team_size),
-                 KOKKOS_LAMBDA (member_type team_member) {
-
-    int k = team_member.team_rank();
-    // The default reduction uses Scalar's += operator
-    // to combine thread contributions.
-    Scalar sum;
-    parallel_reduce (ThreadVectorRange (team_member, loop_count),
-      [=] (int& i, Scalar& lsum) {
-        // ...
-        lsum += ...;
-      }, sum);
-
-    parallel_for (TeamThreadRange (team_member, workset_size),
-      [&] (int& j) {
-      // You may provide a custom reduction as another
-      // lambda together with an initialization value.
-      Scalar product;
-      Scalar init_value = 1;
-      parallel_reduce (ThreadVectorRange (team_member, loop_count),
-        [=] (int& i, Scalar& lsum) {
-          // ...
-          lsum *= ...;
-        }, product, [=] (Scalar& lsum, Scalar& update) {
-          lsum *= update;
-        }, init_value);
+    using Kokkos::parallel_reduce;
+    using Kokkos::TeamPolicy;
+    using Kokkos::TeamThreadRange;
+    using Kokkos::ThreadVectorRange;
+    parallel_for (TeamPolicy<> (league_size, team_size),
+                     KOKKOS_LAMBDA (member_type team_member) {
+    
+        int k = team_member.team_rank();
+        // The default reduction uses Scalar's += operator
+        // to combine thread contributions.
+        Scalar sum;
+        parallel_reduce (ThreadVectorRange (team_member, loop_count),
+          [=] (int& i, Scalar& lsum) {
+            // ...
+            lsum += ...;
+          }, sum);
+    
+        parallel_for (TeamThreadRange (team_member, workset_size),
+          [&] (int& j) {
+          // You may provide a custom reduction as another
+          // lambda together with an initialization value.
+          Scalar product;
+          Scalar init_value = 1;
+         parallel_reduce (ThreadVectorRange (team_member, loop_count),
+            [=] (int& i, Scalar& lsum) {
+              // ...
+              lsum *= ...;
+            }, product, [=] (Scalar& lsum, Scalar& update) {
+              lsum *= update;
+            }, init_value);
+          });
       });
-  });
-\end{lstlisting}
 
-As the name indicates the vector-level must be vectorizable.
-The parallel patterns will exploit available mechanisms to encourage vectorization by the compiler.
-When using the Intel compiler for example, the vector level loop will be internally decorated with
-\lstinline|#pragma ivdep|, telling the compiler to ignore assumed vector dependencies.
+As the name indicates the vector-level must be vectorizable. The parallel patterns will exploit available mechanisms to encourage vectorization by the compiler. When using the Intel compiler for example, the vector level loop will be internally decorated with `#pragma ivdep`, telling the compiler to ignore assumed vector dependencies.
 
 ### 8.4.3 Restricting execution to a single executor
 
-As stated above, a kernel is a parallel region with respect to threads (and vector lanes) within a team.
-This means that global memory accesses outside of the respective nested levels potentially have to be protected against repetitive execution.
-A common example is the case where a team performs some calculation but only one result per team has to be written back to global memory.
+As stated above, a kernel is a parallel region with respect to threads (and vector lanes) within a team. This means that global memory accesses outside of the respective nested levels potentially have to be protected against repetitive execution. A common example is the case where a team performs some calculation but only one result per team has to be written back to global memory.
 
-Kokkos provides the \lstinline|Kokkkos::single(Policy,Lambda)| function for this case.
-It currently accepts two policies:
-\begin{itemize}
-\item \lstinline|Kokkos::PerTeam| restricts execution of the lambda's
-  body to once per team
-\item \lstinline|Kokkos::PerThread| restricts execution of the
-  lambda's body to once per thread (that is, to only one vector lane
+Kokkos provides the `Kokkkos::single(Policy,Lambda)` function for this case. It currently accepts two policies:
+
+`Kokkos::PerTeam` restricts execution of the lambda's   body to once per team
+`Kokkos::PerThread` restricts execution of the lambda's body to once per thread (that is, to only one vector lane
   in a thread)
-\end{itemize}
-The \lstinline|single| function takes a lambda as its second argument.
-That lambda takes zero arguments or one argument by reference.
-If it takes no argument, its body must perform side effects in order to have an effect.
-If it takes one argument, the final value of that argument is broadcast to every executor on the level:
-i.e. every vectorlane of the thread, or every thread (and vector lane) of the team.
-It must always be correct for the lambda to capture variables by value
-(\lstinline|[=]|, not \lstinline|[&]|).
-Thus, if the lambda captures by reference,
-it must \emph{not} modify variables that it has captured by reference.
 
-\begin{lstlisting}
-using Kokkos::parallel_for;
-using Kokkos::parallel_reduce;
-using Kokkos::TeamThreadRange;
-using Kokkos::ThreadVectorRange;
-using Kokkos::PerThread;
+The `single` function takes a lambda as its second argument. That lambda takes zero arguments or one argument by reference.
+If it takes no argument, its body must perform side effects in order to have an effect. If it takes one argument, the final value of that argument is broadcast to every executor on the level: i.e. every vectorlane of the thread, or every thread (and vector lane) of the team. It must always be correct for the lambda to capture variables by value
+(`[=]`, not `[&]`). Thus, if the lambda captures by reference, it must _not_ modify variables that it has captured by reference.
 
-TeamPolicy<...> policy (...);
-typedef TeamPolicy<...>::member_type team_member;
+    using Kokkos::parallel_for;
+    using Kokkos::parallel_reduce;
+    using Kokkos::TeamThreadRange;
+    using Kokkos::ThreadVectorRange;
+    using Kokkos::PerThread;
+    
+    TeamPolicy<...> policy (...);
+    typedef TeamPolicy<...>::member_type team_member;
+    
+    parallel_for (policy, KOKKOS_LAMBDA (const team_member& thread) {
+     // ...
+    
+      parallel_for (TeamThreadRange (thread, 100),
+        KOKKOS_LAMBDA (const int& i) {
+          double sum = 0;
+          // Perform a vector reduction with a thread
+          parallel_reduce (ThreadVectorRange (thread, 100),
+            [=] (int i, double& lsum) {
+              // ...
+              lsum += ...;
+          }, sum);
+          // Add the result value into a team shared array.
+          // Make sure it is only added once per thread.
+          Kokkos::single (PerThread (), [=] () {
+              shared_array(i) += sum;
+          });
+      });
 
-parallel_for (policy, KOKKOS_LAMBDA (const team_member& thread) {
-  // ...
-
-  parallel_for (TeamThreadRange (thread, 100),
-    KOKKOS_LAMBDA (const int& i) {
-      double sum = 0;
-      // Perform a vector reduction with a thread
-      parallel_reduce (ThreadVectorRange (thread, 100),
-        [=] (int i, double& lsum) {
-          // ...
-          lsum += ...;
+      double sum;
+      parallel_reduce (TeamThreadRange (thread, 99),
+        KOKKOS_LAMBDA (int i, double& lsum) {
+          // Add the result value into a team shared array.
+          // Make sure it is only added once per thread.
+          Kokkos::single (PerThread (thread), [=] () {
+              lsum += someFunction (shared_array(i),
+                                    shared_array(i+1));
+          });
       }, sum);
-      // Add the result value into a team shared array.
-      // Make sure it is only added once per thread.
-      Kokkos::single (PerThread (), [=] () {
-          shared_array(i) += sum;
+    
+      // Add the per team contribution to global memory.
+      Kokkos::single (PerTeam (thread), [=] () {
+        global_array(thread.league_rank()) = sum;
       });
-  });
+    });
 
-  double sum;
-  parallel_reduce (TeamThreadRange (thread, 99),
-    KOKKOS_LAMBDA (int i, double& lsum) {
-      // Add the result value into a team shared array.
-      // Make sure it is only added once per thread.
-      Kokkos::single (PerThread (thread), [=] () {
-          lsum += someFunction (shared_array(i),
-                                shared_array(i+1));
+
+Here is an example of using the broadcast capabilities to determine the start offset for a team in a buffer:
+
+    using Kokkos::parallel_for;
+    using Kokkos::parallel_reduce;
+    using Kokkos::TeamThreadRange;
+    using Kokkos::ThreadVectorRange;
+    using Kokkos::PerThread;
+    
+    TeamPolicy<...> policy (...);
+    typedef TeamPolicy<...>::member_type team_member;
+    
+    Kokkos::View<int> offset("Offset");
+    offset() = 0;
+    
+    parallel_for (policy, KOKKOS_LAMBDA (const team_member& thread) {
+      // ...
+    
+      parallel_reduce (TeamThreadRange (thread, 100),
+        KOKKOS_LAMBDA (const int& i, int& lsum) {
+          if(...) lsum++;
       });
-  }, sum);
-
-  // Add the per team contribution to global memory.
-  Kokkos::single (PerTeam (thread), [=] () {
-    global_array(thread.league_rank()) = sum;
-  });
-});
-\end{lstlisting}
-
-Here is an example of using the broadcast capabilities to determine the start offset for a team
-in a buffer:
-
-\begin{lstlisting}
-using Kokkos::parallel_for;
-using Kokkos::parallel_reduce;
-using Kokkos::TeamThreadRange;
-using Kokkos::ThreadVectorRange;
-using Kokkos::PerThread;
-
-TeamPolicy<...> policy (...);
-typedef TeamPolicy<...>::member_type team_member;
-
-Kokkos::View<int> offset("Offset");
-offset() = 0;
-
-parallel_for (policy, KOKKOS_LAMBDA (const team_member& thread) {
-  // ...
-
-  parallel_reduce (TeamThreadRange (thread, 100),
-    KOKKOS_LAMBDA (const int& i, int& lsum) {
-      if(...) lsum++;
-  });
-  Kokkos::single (PerTeam (thread), [=] (int& my_offset) {
-    my_offset = Kokkos::atomic_fetch_add(&offset(),lsum);
-  });
-  ...
-\end{lstlisting}
+      Kokkos::single (PerTeam (thread), [=] (int& my_offset) {
+       my_offset = Kokkos::atomic_fetch_add(&offset(),lsum);
+      });
+      ...
 
 To further illustrate the "parallel region" semantics of the team execution consider the following code:
 
-\begin{lstlisting}
-using Kokkos::parallel_reduce;
-using Kokkos::TeamThreadRange;
-using Kokkos::TeamPolicy;
+    using Kokkos::parallel_reduce;
+    using Kokkos::TeamThreadRange;
+    using Kokkos::TeamPolicy;
+    
+    parallel_reduce(TeamPolicy<>(N,team_size),
+      KOKKOS_LAMBDA (const member_type& teamMember, int& lsum) {
+        int s = 0;
+        for(int i = 0; i<10; i++) s++;
+        lsum += s;
+    },sum);
 
-parallel_reduce(TeamPolicy<>(N,team_size),
-  KOKKOS_LAMBDA (const member_type& teamMember, int& lsum) {
-    int s = 0;
-    for(int i = 0; i<10; i++) s++;
-    lsum += s;
-},sum);
-\end{lstlisting}
 
-In this example \lstinline{sum} will contain the value \lstinline{N * team_size * 10}.
-Every thread in each team will compute \lstinline{s=10} and then contribute it to the sum.
+In this example `sum` will contain the value `N * team_size * 10`. Every thread in each team will compute `s=10` and then contribute it to the sum.
 
-Lets go one step further and add a nested \lstinline{parallel_reduce}.
-By choosing the loopbound to be \lstinline{team_size} every thread still only runs
-once through the inner loop.
+Lets go one step further and add a nested `parallel_reduce`. By choosing the loopbound to be `team_size` every thread still only runs once through the inner loop.
 
-\begin{lstlisting}
-using Kokkos::parallel_reduce;
-using Kokkos::TeamThreadRange;
-using Kokkos::TeamPolicy;
+    using Kokkos::parallel_reduce;
+    using Kokkos::TeamThreadRange;
+    using Kokkos::TeamPolicy;
+    
+    parallel_reduce(TeamPolicy<>(N,team_size),
+      KOKKOS_LAMBDA (const member_type& teamMember, int& lsum) {
+    
+      int s = 0;
+      parallel_reduce(TeamThreadRange(teamMember, team_size),
+        [=] (const int k, int & inner_lsum) {
+        int inner_s = 0;
+        for(int i = 0; i<10; i++) inner_s++;
+        inner_lsum += inner_s;
+      },s);
+      lsum += s;
+    },sum);
 
-parallel_reduce(TeamPolicy<>(N,team_size),
-  KOKKOS_LAMBDA (const member_type& teamMember, int& lsum) {
-
-  int s = 0;
-  parallel_reduce(TeamThreadRange(teamMember, team_size),
-    [=] (const int k, int & inner_lsum) {
-    int inner_s = 0;
-    for(int i = 0; i<10; i++) inner_s++;
-    inner_lsum += inner_s;
-  },s);
-  lsum += s;
-},sum);
-\end{lstlisting}
-
-The answer in this case is neverless \lstinline{N * team_size * team_size * 10}.
-Each thread computes \lstinline{inner_s = 10}.
-But all threads in the team combine their results to compute a \lstinline{s} value of \lstinline{team_size * 10}.
-Since every thread in each team contributes that value to the global sum, we arrive at the final value of \lstinline{N * team_size * team_size * 10}.
-If the intended goal was for each team to only contribute \lstinline{s} once to the global sum,
-the contribution should have been protected with a \lstinline{single} clause.
+The answer in this case is neverless `N * team_size * team_size * 10`.
+Each thread computes `inner_s = 10`. But all threads in the team combine their results to compute a `s` value of `team_size * 10`. Since every thread in each team contributes that value to the global sum, we arrive at the final value of `N * team_size * team_size * 10`. If the intended goal was for each team to only contribute `s` once to the global sum,
+the contribution should have been protected with a `single` clause.
