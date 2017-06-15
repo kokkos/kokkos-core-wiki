@@ -10,7 +10,7 @@ The syntax differs only by the execution policy,
 which is the first argument to the \verb!parallel_*! operation.
 Kokkos also exposes a ``scratch pad'' memory which provides thread private and team private allocations..
 
-\section{Motivation}\label{S:Hierarchical:Motivation}
+## 8.1 Motivation
 
 Node architectures on modern high-performance computers are characterized by ever more \emph{hierarchical parallelism}.
 A level in the hierachy is determined by the hardware resources which are shared between compute units at that level.
@@ -49,7 +49,7 @@ You should use Hierarchical Parallelism in particular in a number of cases:
 On the other hand you should probably not use Hierarchical Parallelism if you have tightly nested loops.
 For that usecase a multi dimensional RangePolicy is the better fit.
 
-\section{Thread teams}\label{S:Hierarchical:Teams}
+## 8.2 Thread teams
 
 Kokkos' most basic hierarchical parallelism concept is a thread team.
 A \emph{thread team} is a collection of threads which can synchronize,
@@ -67,7 +67,7 @@ and they must run to completion before new ones are executed.
 Consequently it is not valid to use inter thread-team synchronization mechanisms
 such as waits for events initiated by other thread teams.
 
-\subsection{Creating a Policy instance}\label{SS:Hierarchical:Teams:Policy}
+### 8.2.1 Creating a Policy instance
 
 Kokkos exposes use of thread teams with the \lstinline!Kokkos::TeamPolicy! execution policy.
 To use thread teams you need to create a \lstinline|Kokkos::TeamPolicy| instance.
@@ -93,7 +93,7 @@ Kokkos::TeamPolicy<SomeTag, ExecutionSpace>
 \end{lstlisting}
 
 
-\subsection{Basic kernels}\label{SS:Hierarchical:Teams:Kernels}
+### 8.2.2 Basic kernels
 
 The team policy's \lstinline!member_type! provides the necessary functionality to use teams within a parallel kernel.
 It allows access to thread identifiers such as the league rank and size, and the team rank and size.
@@ -120,9 +120,7 @@ parallel_for (policy, KOKKOS_LAMBDA (member_type team_member) {
 The name ``\lstinline!TeamPolicy!'' makes it explicit that a kernel
 using it constitutes a parallel region with respect to the team.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Team scratch pad memory}\label{S:Hierarchical:Scratch}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+## 8.3 Team scratch pad memory
 
 Each Kokkos team has a ``scratch pad.''
 This is an instance of a memory space accessible only by threads in that team.
@@ -235,9 +233,7 @@ Kokkos::parallel_for(Kokkos::TeamPolicy<>(league_size,team_size),
 });
 \end{lstlisting}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Nested parallelism}\label{S:Hierarchical:Nested}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+## 8.4 Nested parallelism
 
 Instead of writing code which explicitly uses league and team rank indices, one can use nested parallelism to implement hierarchical algorithms.
 Kokkos lets the user have up to three nested layers of parallelism.
@@ -249,7 +245,7 @@ You may nest them and use them in conjunction with code that is aware of the lea
 The different layers are accessible via special execution policies:
 \lstinline|TeamThreadLoop| and \lstinline|ThreadVectorLoop|.
 
-\subsection{Team loops}\label{SS:Hierarchical:Nested:Loops:Team}
+### 8.4.1 Team loops
 
 The first nested level of parallel loops splits an index range over the threads of a team.
 This motivates the policy name \lstinline|TeamThreadRange|,
@@ -315,7 +311,7 @@ parallel_for (TeamPolicy<> (league_size, team_size),
 
 The third pattern is \lstinline|parallel_scan| which can be used to perform prefix scans.
 
-\subsection{Vector loops}\label{SS:Hierarchical:Nested:Loops:Vector}
+### 8.4.2 Vector loops
 
 At the innermost level of nesting parallel loops in a kernel is comprised of the \emph{vector}-loop.
 Vector level parallelism works identical to the team level loops using the execution policy \lstinline|ThreadVectorRange|.
@@ -362,7 +358,7 @@ The parallel patterns will exploit available mechanisms to encourage vectorizati
 When using the Intel compiler for example, the vector level loop will be internally decorated with
 \lstinline|#pragma ivdep|, telling the compiler to ignore assumed vector dependencies.
 
-\subsection{Restricting execution to a single executor}
+### 8.4.3 Restricting execution to a single executor
 
 As stated above, a kernel is a parallel region with respect to threads (and vector lanes) within a team.
 This means that global memory accesses outside of the respective nested levels potentially have to be protected against repetitive execution.
