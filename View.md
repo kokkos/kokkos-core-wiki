@@ -397,19 +397,19 @@ It's always better to let Kokkos control memory allocation but sometimes you don
 Not all view types can be assigned to each other. Requirements are: the data type and dimension have to match, the layout must be compatible and the memory space has to match. Examples illustrating the rules are:
 
 1.  Memory Spaces must match
-    *  `Kokkos::View<int*> -> Kokkos::View<int*,HostSpace> ` / ok if default memory space is HostSpace}
+    *  `Kokkos::View<int*> -> Kokkos::View<int*,HostSpace> ` /ok if default memory space is HostSpace
 2.  Data Type and Rank has to Match
-    *  `int*  -> int*          ` /ok}
-    *  `int*  -> const int*    ` /ok}
-    *  `const int*  -> int*    ` /not ok, const violation}
-    *  `int** -> int*          ` /not ok, rank mismatch}
-    *  `int*[3] -> int**       ` /ok}
-    *  `int** -> int*[3]       ` /ok if runtime dimension check matches}
-    *  `int*  -> long*         ` /not ok, type mismatch}
+    *  `int*  -> int*          ` /ok
+    *  `int*  -> const int*    ` /ok
+    *  `const int*  -> int*    ` /not ok, const violation
+    *  `int** -> int*          ` /not ok, rank mismatch
+    *  `int*[3] -> int**       ` /ok
+    *  `int** -> int*[3]       ` /ok if runtime dimension check matches
+    *  `int*  -> long*         ` /not ok, type mismatch
 3.  Layouts must be compatible
-    *  `LayoutRight -> LayoutRight ` /ok}
-    *  `LayoutLeft -> LayoutRight  ` /not ok}
-    *  `LayoutLeft -> LayoutSride  ` /ok}
-    *  `LayoutStride -> LayoutLeft ` /ok if runtime dimensions allow assignment}
+    *  `LayoutRight -> LayoutRight ` /ok
+    *  `LayoutLeft -> LayoutRight  ` /not ok
+    *  `LayoutLeft -> LayoutSride  ` /ok
+    *  `LayoutStride -> LayoutLeft ` /ok if runtime dimensions allow assignment
 4.  Memory Traits
 
