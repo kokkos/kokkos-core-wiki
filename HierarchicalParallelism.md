@@ -57,7 +57,7 @@ Kokkos exposes use of thread teams with the `Kokkos::TeamPolicy` execution polic
             policy( league_size, Kokkos::AUTO() );
     
     // Using a specific execution space and an execution tag
-   Kokkos::TeamPolicy<SomeTag, ExecutionSpace>
+    Kokkos::TeamPolicy<SomeTag, ExecutionSpace>
             policy( league_size, team_size );
 
 ### 8.2.2 Basic kernels
@@ -268,9 +268,8 @@ As stated above, a kernel is a parallel region with respect to threads (and vect
 
 Kokkos provides the `Kokkkos::single(Policy,Lambda)` function for this case. It currently accepts two policies:
 
-`Kokkos::PerTeam` restricts execution of the lambda's   body to once per team
-`Kokkos::PerThread` restricts execution of the lambda's body to once per thread (that is, to only one vector lane
-  in a thread)
+* `Kokkos::PerTeam` restricts execution of the lambda's   body to once per team
+* `Kokkos::PerThread` restricts execution of the lambda's body to once per thread (that is, to only one vector lane in a thread)
 
 The `single` function takes a lambda as its second argument. That lambda takes zero arguments or one argument by reference.
 If it takes no argument, its body must perform side effects in order to have an effect. If it takes one argument, the final value of that argument is broadcast to every executor on the level: i.e. every vectorlane of the thread, or every thread (and vector lane) of the team. It must always be correct for the lambda to capture variables by value
@@ -386,3 +385,11 @@ Lets go one step further and add a nested `parallel_reduce`. By choosing the loo
 The answer in this case is neverless `N * team_size * team_size * 10`.
 Each thread computes `inner_s = 10`. But all threads in the team combine their results to compute a `s` value of `team_size * 10`. Since every thread in each team contributes that value to the global sum, we arrive at the final value of `N * team_size * team_size * 10`. If the intended goal was for each team to only contribute `s` once to the global sum,
 the contribution should have been protected with a `single` clause.
+
+**** Following is test-text for footnote treatment **** remove after testing ***** dal*****
+*******************************************************************************************
+Instead of writing code which explicitly uses league and team rank indices, one can use nested parallelism to implement hierarchical algorithms. Kokkos lets the user have up to three nested layers of parallelism. The team and thread levels are the first two levels. The third level is _vector_ parallelism.
+
+You may use any of the three parallel patterns -- for, reduce, or scan -- at each level\footnote{The parallel scan operation is not implemented for all execution spaces on the thread level, and it doesn't support a TeamPolicy on the top level.}.
+You may nest them and use them in conjunction with code that is aware of the league and team rank. The different layers are accessible via special execution policies: `TeamThreadLoop` and `ThreadVectorLoop`.
+
