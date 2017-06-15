@@ -28,7 +28,7 @@ if applicable. These defaults depend on the Kokkos configuration. Kokkos chooses
 1. `Kokkos::Cuda`
 
 The highest execution space in the list which is actually enabled is Kokkos' default execution space, and the highest enabled host execution space is Kokkos' default host execution space. (Currently, the only non-host execution space is `Cuda`.) For example, if  `Kokkos::Cuda`, `Kokkos::OpenMP`, and `Kokkos::Serial` are enabled, then `Kokkos::Cuda` is the
-default execution space and `Kokkos::OpenMP` is the default host execution space.\footnote{This is the preferred set of defaults when CUDA and OpenMP are enabled. If you use a thread-parallel host execution space, we prefer Kokkos' OpenMP back-end, as this ensures compatibility of Kokkos' threads with the application's direct use of OpenMP threads. Kokkos cannot promise that its Threads back-end will not conflict with the application's direct use of operating system threads.}
+default execution space and `Kokkos::OpenMP` is the default host execution space.<sup>1</sup>
 
 Command-line arguments come in "prefixed" and "non-prefixed" versions. Prefixed versions start with the string \verb!--kokkos-!. `Kokkos::initialize` will remove prefixed options from the input list, but will preserve non-prefixed options. Argument options are given with an equals (\verb!=!) sign. If the same argument occurs more than once, the last one counts. Furthermore, prefixed versions of the command line arguments take precedence over the non-prefixed ones. For example, the arguments
 
@@ -51,6 +51,12 @@ Argument | Description
 --kokkos-numa=INT | specify number of NUMA regions used by process. 
 --kokkos-device=INT | specify device id to be used by Kokkos. 
 --kokkos-ndevices=INT[,INT] | used when running MPI jobs. Specify number of devices per node to be used. Process to device mapping happens by obtaining the local MPI rank and assigning devices round-robin. The optional second argument allows for an existing device to be ignored. This is most useful on workstations with multiple GPUs, of which one is used to drive screen output.
+
+
+***
+<sup>1</sup> This is the preferred set of defaults when CUDA and OpenMP are enabled. If you use a thread-parallel host execution space, we prefer Kokkos' OpenMP back-end, as this ensures compatibility of Kokkos' threads with the application's direct use of OpenMP threads. Kokkos cannot promise that its Threads back-end will not conflict with the application's direct use of operating system threads.
+
+***
 
 
 ## 5.2 Initialization by struct
