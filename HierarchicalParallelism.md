@@ -88,183 +88,140 @@ The name "`TeamPolicy`" makes it explicit that a kernel using it constitutes a p
 
 Each Kokkos team has a "scratch pad." This is an instance of a memory space accessible only by threads in that team. Scratch pads let an algorithm load a workset into a shared space and then collaboratively work on it with all members of a team. The lifetime of data in a scratch pad is the lifetime of the team. In particular, scratch pads are recycled by all logical teams running on the same physical set of cores. During the lifetime of the team all operations allowed on global memory are allowed on the scratch memory. This includes taking addresses and performing atomic operations on elements located in scratch space. Team-level scratch pads correspond to the per-block shared memory in Cuda, or to the "local store" memory on the Cell processor.
 
-Kokkos exposes scratch pads through a special memory space associated with the execution space:
-\lstinline|execution_space::scratch_memory_space|.
-You may allocate a chunk of scratch memory through the \lstinline|TeamPolicy| member type.
-You may request multiple allocations from scratch, up to a user-provided maximum aggregate size.
-The maximum is provided either through a \lstinline|team_shmem_size| function in the functor which returns a potentially team-size dependent value,
-or it can be specified through a setting of the TeamPolicy \lstinline|set_scratch_size|.
-It is not valid to provide both values at the same time.
-The argument to the TeamPolicy can be used to set the shared memory size when using functors.
-One restriction on shared memory allocations is that they can not be freed during the lifetime of the team.
-This avoids the complexity of a memory pool,
-and reduces the time it takes to obtain an allocation
-(which currently is a few tens of integer operations to calculate the offset).
+Kokkos exposes scratch pads through a special memory space associated with the execution space: `execution_space::scratch_memory_space`. You may allocate a chunk of scratch memory through the `TeamPolicy` member type. You may request multiple allocations from scratch, up to a user-provided maximum aggregate size. The maximum is provided either through a `team_shmem_size` function in the functor which returns a potentially team-size dependent value, or it can be specified through a setting of the TeamPolicy `set_scratch_size`. It is not valid to provide both values at the same time. The argument to the TeamPolicy can be used to set the shared memory size when using functors. One restriction on shared memory allocations is that they can not be freed during the lifetime of the team. This avoids the complexity of a memory pool, and reduces the time it takes to obtain an allocation (which currently is a few tens of integer operations to calculate the offset).
 
 The following is an example of using the functor interface:
-\begin{lstlisting}
-template<class ExecutionSpace>
-struct functor {
-  typedef ExecutionSpace execution_space;
-  typedef execution_space::member_type member_type;
 
-  KOKKOS_INLINE_FUNCTION
-  void operator() (member_type team_member) const {
-    size_t double_size = 5*team_member.team_size()*sizeof(double);
+    template<class ExecutionSpace>
+    struct functor {
+      typedef ExecutionSpace execution_space;
+      typedef execution_space::member_type member_type;
+    
+      KOKKOS_INLINE_FUNCTION
+      void operator() (member_type team_member) const {
+        size_t double_size = 5*team_member.team_size()*sizeof(double);
+    
+        // Get a shared team allocation on the scratch pad
+        double* team_shared_a = (double*)
+          team_member.team_shmem().get_shmem(double_size);
+    
+        // Get another allocation on the scratch pad
+        int* team_shared_b = (int*)
+          team_member.team_shmem().get_shmem(160*sizeof(int));
+    
+        // ... use the scratch allocations ...
+      }
+    
+      // Provide the shared memory capacity.
+      // This function takes the team_size as an argument,
+      // which allows team_size dependent allocations.
+      size_t team_shmem_size (int team_size) const {
+        return sizeof(double)*5*team_size +
+               sizeof(int)*160;
+      }
+    };
 
-    // Get a shared team allocation on the scratch pad
-    double* team_shared_a = (double*)
-      team_member.team_shmem().get_shmem(double_size);
 
-    // Get another allocation on the scratch pad
-    int* team_shared_b = (int*)
-      team_member.team_shmem().get_shmem(160*sizeof(int));
-
-    // ... use the scratch allocations ...
-  }
-
-  // Provide the shared memory capacity.
-  // This function takes the team_size as an argument,
-  // which allows team_size dependent allocations.
-  size_t team_shmem_size (int team_size) const {
-    return sizeof(double)*5*team_size +
-           sizeof(int)*160;
-  }
-};
-\end{lstlisting}
-
-The \lstinline|set_scratch_size| function of the \lstinline|TeamPolicy| takes two or three arguments.
-The first argument specifies the level in the scratch hierarchy for which a specific size is requested.
-Different levels have different restrictions.
-Generally the first level is restricted to a few tenths of kilobyte roughly corresponding to L1 cache size.
-The second level can be used to get an aggregate over all teams of a few gigabyte, corresponding to available
-space in high-bandwidth memory.
-The third level generally falls back to capacity memory in the node.
-The second and third argument are either per-thread or per-team sizes for scratch memory.
-Note like previously discussed, the setter function does not modify the instance it is called on, but returns
-a copy of the policy object with adjusted scratch size request.
+The `set_scratch_size` function of the `TeamPolicy` takes two or three arguments. The first argument specifies the level in the scratch hierarchy for which a specific size is requested. Different levels have different restrictions. Generally the first level is restricted to a few tenths of kilobyte roughly corresponding to L1 cache size. The second level can be used to get an aggregate over all teams of a few gigabyte, corresponding to available space in high-bandwidth memory. The third level generally falls back to capacity memory in the node. The second and third argument are either per-thread or per-team sizes for scratch memory. Note like previously discussed, the setter function does not modify the instance it is called on, but returns a copy of the policy object with adjusted scratch size request.
 
 Here are some examples:
-\begin{lstlisting}
-TeamPolicy<> policy_1 = TeamPolicy<>(league_size, team_size).
-                          set_scratch_size(1, PerTeam(1024), PerThread(32));
-TeamPolicy<> policy_2 = TeamPolicy<>(league_size, team_size).
-                          set_scratch_size(1, PerThread(32));
-TeamPolicy<> policy_3 = TeamPolicy<>(league_size, team_size).
-                          set_scratch_size(1, PerTeam(1024));
-\end{lstlisting}
 
-The total amount of scratch space available for each team will be the per-team value plus the per-thread value multiplied by the team-size.
-The interface allows users to specify those settings inline:
-\begin{lstlisting}
-parallel_for(TeamPolicy<>(league_size, team_size).set_scratch_size(1, PerTeam(1024)),
-  KOKKOS_LAMBDA (const TeamPolicy<>::member_type& team) {
-    ...
-});
-\end{lstlisting}
+    TeamPolicy<> policy_1 = TeamPolicy<>(league_size, team_size).
+                              set_scratch_size(1, PerTeam(1024), PerThread(32));
+    TeamPolicy<> policy_2 = TeamPolicy<>(league_size, team_size).
+                              set_scratch_size(1, PerThread(32));
+    TeamPolicy<> policy_3 = TeamPolicy<>(league_size, team_size).
+                              set_scratch_size(1, PerTeam(1024));
 
-Instead of simply getting raw allocations in memory, users can also allocate Views directly in scratch memory.
-This is achieved by providing the shared memory handle as the first argument of the View constructor.
-Views also have a static member function which return their shared memory size requirements.
-The function expects the run-time dimensions as arguments, corresponding to View's constructor.
-Note that the view must be unmanaged (i.e. it must have the \lstinline|Unmanaged| memory trait).
+The total amount of scratch space available for each team will be the per-team value plus the per-thread value multiplied by the team-size. The interface allows users to specify those settings inline:
 
-\begin{lstlisting}
-tyepdef Kokkos::DefaultExecutionSpace::scratch_memory_space
-  ScratchSpace;
-// Define a view type in ScratchSpace
-typedef Kokkos::View<int*[4],ScratchSpace,
-          Kokkos::MemoryTraits<Kokkos::Unmanaged>> shared_int_2d;
+    parallel_for(TeamPolicy<>(league_size, team_size).set_scratch_size(1, PerTeam(1024)),
+      KOKKOS_LAMBDA (const TeamPolicy<>::member_type& team) {
+        ...
+    });
 
-// Get the size of the shared memory allocation
-size_t shared_size = shared_int_2d::shmem_size(team_size);
-Kokkos::parallel_for(Kokkos::TeamPolicy<>(league_size,team_size),
-                     KOKKOS_LAMBDA ( member_type team_member) {
-  // Get a view allocated in team shared memory.
-  // The constructor takes the shared memory handle and the
-  // runtime dimensions
-  shared_int_2d A(team_member.team_shmem(), team_member.team_size());
-  ...
-});
-\end{lstlisting}
+Instead of simply getting raw allocations in memory, users can also allocate Views directly in scratch memory. This is achieved by providing the shared memory handle as the first argument of the View constructor. Views also have a static member function which return their shared memory size requirements. The function expects the run-time dimensions as arguments, corresponding to View's constructor. Note that the view must be unmanaged (i.e. it must have the `Unmanaged` memory trait).
+
+    typedef Kokkos::DefaultExecutionSpace::scratch_memory_space
+      ScratchSpace;
+    // Define a view type in ScratchSpace
+    typedef Kokkos::View<int*[4],ScratchSpace,
+              Kokkos::MemoryTraits<Kokkos::Unmanaged>> shared_int_2d;
+    
+    // Get the size of the shared memory allocation
+    size_t shared_size = shared_int_2d::shmem_size(team_size);
+    Kokkos::parallel_for(Kokkos::TeamPolicy<>(league_size,team_size),
+                         KOKKOS_LAMBDA ( member_type team_member) {
+      // Get a view allocated in team shared memory.
+      // The constructor takes the shared memory handle and the
+      // runtime dimensions
+      shared_int_2d A(team_member.team_shmem(), team_member.team_size());
+      ...
+    });
 
 ## 8.4 Nested parallelism
 
-Instead of writing code which explicitly uses league and team rank indices, one can use nested parallelism to implement hierarchical algorithms.
-Kokkos lets the user have up to three nested layers of parallelism.
-The team and thread levels are the first two levels.
-The third level is \emph{vector} parallelism.
+Instead of writing code which explicitly uses league and team rank indices, one can use nested parallelism to implement hierarchical algorithms. Kokkos lets the user have up to three nested layers of parallelism. The team and thread levels are the first two levels. The third level is _vector_ parallelism.
 
 You may use any of the three parallel patterns -- for, reduce, or scan -- at each level\footnote{The parallel scan operation is not implemented for all execution spaces on the thread level, and it doesn't support a TeamPolicy on the top level.}.
-You may nest them and use them in conjunction with code that is aware of the league and team rank.
-The different layers are accessible via special execution policies:
-\lstinline|TeamThreadLoop| and \lstinline|ThreadVectorLoop|.
+You may nest them and use them in conjunction with code that is aware of the league and team rank. The different layers are accessible via special execution policies: `TeamThreadLoop` and `ThreadVectorLoop`.
 
 ### 8.4.1 Team loops
 
-The first nested level of parallel loops splits an index range over the threads of a team.
-This motivates the policy name \lstinline|TeamThreadRange|,
-which indicates that the loop is executed once by the team with the index range split over threads.
-The loop count is not limited to the number of threads in a team, and how the index range is mapped to threads is architecture dependent.
-It is not legal to nest multiple parallel loops using the \lstinline!TeamThreadRange! policy.
-However, it is valid to have multiple parallel loops using the \lstinline!TeamThreadRange! policy follow each other in sequence, in the same kernel.
+The first nested level of parallel loops splits an index range over the threads of a team. This motivates the policy name `TeamThreadRange`, which indicates that the loop is executed once by the team with the index range split over threads.
+The loop count is not limited to the number of threads in a team, and how the index range is mapped to threads is architecture dependent. It is not legal to nest multiple parallel loops using the `TeamThreadRange` policy. However, it is valid to have multiple parallel loops using the `TeamThreadRange` policy follow each other in sequence, in the same kernel.
 Note that it is not legal to make a write access to POD data outside of the closure of a nested parallel layer. 
-This is a conscious choice to prevent difficult to debug issues related to thread private, team shared and globally shared variables.
-A simple way to enforce this is by using the ``capture by value'' clause with lambdas,
-but ``capture by reference'' is recommended for release builds since it typically results in better performance.
-With the lambda being considered as \lstinline|const| inside the \lstinline!TeamThreadRange! loop,
-the compiler will catch illegal accesses at compile time as a \lstinline|const| violation.
+This is a conscious choice to prevent difficult to debug issues related to thread private, team shared and globally shared variables. A simple way to enforce this is by using the "capture by value"' clause with lambdas,
+but "capture by reference" is recommended for release builds since it typically results in better performance.
+With the lambda being considered as `const` inside the `TeamThreadRange` loop, the compiler will catch illegal accesses at compile time as a `const` violation.
 
-The simplest use case is to have another \lstinline|parallel_for| nested inside a kernel.
-\begin{lstlisting}
-using Kokkos::parallel_for;
-using Kokkos::TeamPolicy;
-using Kokkos::TeamThreadRange;
+The simplest use case is to have another `parallel_for` nested inside a kernel.
 
-parallel_for (TeamPolicy<> (league_size, team_size),
-                    KOKKOS_LAMBDA (member_type team_member)
-{
-  Scalar tmp;
-  parallel_for (TeamThreadRange (team_member, loop_count),
-    [=] (int& i) {
-      // ...
-      // tmp += i; // This would be an illegal access
+    using Kokkos::parallel_for;
+    using Kokkos::TeamPolicy;
+    using Kokkos::TeamThreadRange;
+    
+    parallel_for (TeamPolicy<> (league_size, team_size),
+                        KOKKOS_LAMBDA (member_type team_member)
+    {
+      Scalar tmp;
+      parallel_for (TeamThreadRange (team_member, loop_count),
+        [=] (int& i) {
+          // ...
+          // tmp += i; // This would be an illegal access
+        });
     });
-});
-\end{lstlisting}
 
-The \lstinline|parallel_reduce| construct can be used to perform optimized team-level reductions:
+The `parallel_reduce` construct can be used to perform optimized team-level reductions:
 
-\begin{lstlisting}
-using Kokkos::parallel_reduce;
-using Kokkos::TeamPolicy;
-using Kokkos::TeamThreadRange;
-parallel_for (TeamPolicy<> (league_size, team_size),
-                 KOKKOS_LAMBDA (member_type team_member) {
-    // The default reduction uses Scalar's += operator
-    // to combine thread contributions.
-    Scalar sum;
-    parallel_reduce (TeamThreadRange (team_member, loop_count),
-      [=] (int& i, Scalar& lsum) {
-        // ...
-        lsum += ...;
-      }, sum);
+    using Kokkos::parallel_reduce;
+    using Kokkos::TeamPolicy;
+    using Kokkos::TeamThreadRange;
+    parallel_for (TeamPolicy<> (league_size, team_size),
+                     KOKKOS_LAMBDA (member_type team_member) {
+        // The default reduction uses Scalar's += operator
+        // to combine thread contributions.
+        Scalar sum;
+        parallel_reduce (TeamThreadRange (team_member, loop_count),
+          [=] (int& i, Scalar& lsum) {
+            // ...
+            lsum += ...;
+          }, sum);
+    
+        // You may provide a custom reduction as another
+        // lambda together with an initialization value.
+        Scalar product;
+        Scalar init_value = 1;
+        parallel_reduce (TeamThreadRange (team_member, loop_count),
+          [=] (int& i, Scalar& lsum) {
+            // ...
+            lsum *= ...;
+          }, product, [=] (Scalar& lsum, Scalar& update) {
+            lsum *= update;
+          }, init_value);
+      });
 
-    // You may provide a custom reduction as another
-    // lambda together with an initialization value.
-    Scalar product;
-    Scalar init_value = 1;
-    parallel_reduce (TeamThreadRange (team_member, loop_count),
-      [=] (int& i, Scalar& lsum) {
-        // ...
-        lsum *= ...;
-      }, product, [=] (Scalar& lsum, Scalar& update) {
-        lsum *= update;
-      }, init_value);
-  });
-\end{lstlisting}
-
-The third pattern is \lstinline|parallel_scan| which can be used to perform prefix scans.
+The third pattern is `parallel_scan` which can be used to perform prefix scans.
 
 ### 8.4.2 Vector loops
 
