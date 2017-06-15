@@ -2,136 +2,91 @@
 
 # Hierarchical Parallelism
 
-This chapter explains how to use Kokkos to exploit multiple levels of shared-memory parallelism.
-These levels include thread teams, threads within a team, and vector lanes.
-You may nest these levels of parallelism,
-and execute \lstinline!parallel_for!, \lstinline!parallel_reduce!, or \lstinline!parallel_scan! at each level.
-The syntax differs only by the execution policy,
-which is the first argument to the \verb!parallel_*! operation.
-Kokkos also exposes a ``scratch pad'' memory which provides thread private and team private allocations..
+This chapter explains how to use Kokkos to exploit multiple levels of shared-memory parallelism. These levels include thread teams, threads within a team, and vector lanes. You may nest these levels of parallelism, and execute `parallel_for`, `parallel_reduce`, or `parallel_scan` at each level. The syntax differs only by the execution policy,
+which is the first argument to the `parallel_*` operation. Kokkos also exposes a "scratch pad" memory which provides thread private and team private allocations..
 
 ## 8.1 Motivation
 
-Node architectures on modern high-performance computers are characterized by ever more \emph{hierarchical parallelism}.
-A level in the hierachy is determined by the hardware resources which are shared between compute units at that level.
+Node architectures on modern high-performance computers are characterized by ever more _hierarchical parallelism_.
+A level in the hierarchy is determined by the hardware resources which are shared between compute units at that level.
 Higher levels in the hierarchy also have access to all resources in its branch at lower levels of the hierarchy.
 This concept is orthogonal to the concept of heterogeneity.
 For example, a node in a typical CPU-based cluster consists of a number of multicore CPUs.  Each core supports one or more hyperthreads, and each hyperthread can execute vector instructions.
 This means there are 4 levels in the hierarchy of parallelism:
-\begin{enumerate}
-\item CPU sockets share access to the same memory and network resources,
-\item cores within a socket typically have a shared last level cache (LLC),
-\item hyperthreads on the same core have access to a shared L1 (and L2) cache and they submit instructions to the same execution units, and
-\item vector units execute a shared instruction on multiple data items.
-\end{enumerate}
+
+1. CPU sockets share access to the same memory and network resources,
+1. cores within a socket typically have a shared last level cache (LLC),
+1. hyperthreads on the same core have access to a shared L1 (and L2) cache and they submit instructions to the same execution units, and
+1. vector units execute a shared instruction on multiple data items.
+
 GPU-based systems also have a hierarchy of 4 levels:
-\begin{enumerate}
-\item Multiple GPUs in the same node share access to the same host memory and network resources,
-\item core clusters (e.g. the SMs on an NVIDIA GPU) have a shared cache and access to the same high bandwidth memory on a single GPU,
-\item threads running on the same core cluster have access to the same L1 cache and scratch memory and
-\item they are grouped in so called Warps or Wave Fronts within which threads are always synchronous and can collaborate more closely, for example via direct register swapping.
-\end{enumerate}
-Kokkos provides a number of abstract levels of parallelism,
-which it maps to the appropriate hardware features.
-This mapping is not necessarily static or predefined; it may differ for each kernel.
-Furthermore, some mapping decisions happen at run time.
-This enables adaptive kernels which map work to different hardware resources depending on the work set size.
-While Kokkos provides defaults and suggestions, the optimal mapping can be algorithm dependent.
-Hierarchical parallelism is accessible through execution policies.
+
+1. multiple GPUs in the same node share access to the same host memory and network resources,
+1. core clusters (e.g. the SMs on an NVIDIA GPU) have a shared cache and access to the same high bandwidth memory on a single GPU,
+1. threads running on the same core cluster have access to the same L1 cache and scratch memory and
+1. they are grouped in so called Warps or Wave Fronts within which threads are always synchronous and can collaborate more closely, for example via direct register swapping.
+
+Kokkos provides a number of abstract levels of parallelism, which it maps to the appropriate hardware features. This mapping is not necessarily static or predefined; it may differ for each kernel. Furthermore, some mapping decisions happen at run time. This enables adaptive kernels which map work to different hardware resources depending on the work set size. While Kokkos provides defaults and suggestions, the optimal mapping can be algorithm dependent. Hierarchical parallelism is accessible through execution policies.
 
 You should use Hierarchical Parallelism in particular in a number of cases:
-\begin{enumerate}
-\item Non-tightly nested loops: Hierarchical Parallelism allows you to expose more parallelism.
-\item Data gather + reuse: If you gather data for a particular iteration of an outer loop, and then repeatably use it in an inner loop, Hierarchical Parallelism with scratch memory may match the usecase well.
-\item Force Cache Blocking: Using Hierarchical Parallelism forces a developer into algorithmic choices which are good for cache blocking. This can sometimes lead to better performing algorithms than a simple flat parallelism.
-\end{enumerate}
 
-On the other hand you should probably not use Hierarchical Parallelism if you have tightly nested loops.
-For that usecase a multi dimensional RangePolicy is the better fit.
+1. Non-tightly nested loops: Hierarchical Parallelism allows you to expose more parallelism.
+1. Data gather + reuse: If you gather data for a particular iteration of an outer loop, and then repeatably use it in an inner loop, Hierarchical Parallelism with scratch memory may match the use case well.
+1. Force Cache Blocking: Using Hierarchical Parallelism forces a developer into algorithmic choices which are good for cache blocking. This can sometimes lead to better performing algorithms than a simple flat parallelism.
+
+On the other hand you should probably not use Hierarchical Parallelism if you have tightly nested loops. For that use case a multi-dimensional Range Policy is the better fit.
 
 ## 8.2 Thread teams
 
-Kokkos' most basic hierarchical parallelism concept is a thread team.
-A \emph{thread team} is a collection of threads which can synchronize,
-and which share a ``scratch pad'' memory
-(see Section\ref {S:Hierarchical:Scratch}).
+Kokkos' most basic hierarchical parallelism concept is a thread team. A _thread team_ is a collection of threads which can synchronize, and which share a "scratch pad" memory (see Section 8.3).
 
-Instead of mapping a 1-D range of indices to hardware resources,
-Kokkos' thread teams map a 2-D index range.
-The first index is the \emph{league rank}, the index of the team.
-The second index is the \emph{team rank}, the thread index within a team.
-In CUDA this is equivalent to launching a 1-D grid of 1-D blocks.
-The league size is arbitrary -- that is, it is only limited by the integer size type -- while the team size must fit in the hardware constraints.
-As in CUDA, only a limited number of teams are actually active at the same time,
-and they must run to completion before new ones are executed.
-Consequently it is not valid to use inter thread-team synchronization mechanisms
-such as waits for events initiated by other thread teams.
+Instead of mapping a 1-D range of indices to hardware resources, Kokkos' thread teams map a 2-D index range. The first index is the _league rank_, the index of the team. The second index is the _team rank_, the thread index within a team. In CUDA this is equivalent to launching a 1-D grid of 1-D blocks. The league size is arbitrary -- that is, it is only limited by the integer size type -- while the team size must fit in the hardware constraints. As in CUDA, only a limited number of teams are actually active at the same time, and they must run to completion before new ones are executed. Consequently it is not valid to use inter thread-team synchronization mechanisms such as waits for events initiated by other thread teams.
 
 ### 8.2.1 Creating a Policy instance
 
-Kokkos exposes use of thread teams with the \lstinline!Kokkos::TeamPolicy! execution policy.
-To use thread teams you need to create a \lstinline|Kokkos::TeamPolicy| instance.
-It can be created inline for the parallel dispatch call.
-The constructors require two arguments: a league size and a team size.
-In place of the team size a user can utilize \lstinline|Kokkos::AUTO| to let Kokkos guess a good team size for a given architecture.
-Doing that is the recommend way for most developers to utilize the \lstinline|TeamPolicy|.
-As with the  \lstinline|Kokkos::RangePolicy| a specific execution tag, a specific execution space, a \lstinline|Kokkos::IndexType|, and a \lstinline|Kokkos::Schedule| can be given as optional template arguments.
-\begin{lstlisting}
-// Using default execution space and launching
-// a league with league_size teams with team_size threads each
-Kokkos::TeamPolicy<>
-        policy( league_size, team_size );
+Kokkos exposes use of thread teams with the `Kokkos::TeamPolicy` execution policy. To use thread teams you need to create a `Kokkos::TeamPolicy` instance. It can be created inline for the parallel dispatch call. The constructors require two arguments: a league size and a team size. In place of the team size a user can utilize `Kokkos::AUTO` to let Kokkos guess a good team size for a given architecture. Doing that is the recommend way for most developers to utilize the `TeamPolicy`. As with the  `Kokkos::RangePolicy` a specific execution tag, a specific execution space, a `Kokkos::IndexType`, and a `Kokkos::Schedule` can be given as optional template arguments.
 
-// Using  a specific execution space to
-// run an n_workset parallelism with Kokkos choosing the team size
-Kokkos::TeamPolicy<ExecutionSpace>
-        policy( league_size, Kokkos::AUTO() );
-
-// Using a specific execution space and an execution tag
-Kokkos::TeamPolicy<SomeTag, ExecutionSpace>
-        policy( league_size, team_size );
-\end{lstlisting}
-
+    // Using default execution space and launching
+    // a league with league_size teams with team_size threads each
+    Kokkos::TeamPolicy<>
+            policy( league_size, team_size );
+    
+    // Using  a specific execution space to
+    // run an n_workset parallelism with Kokkos choosing the team size
+    Kokkos::TeamPolicy<ExecutionSpace>
+            policy( league_size, Kokkos::AUTO() );
+    
+    // Using a specific execution space and an execution tag
+   Kokkos::TeamPolicy<SomeTag, ExecutionSpace>
+            policy( league_size, team_size );
 
 ### 8.2.2 Basic kernels
 
-The team policy's \lstinline!member_type! provides the necessary functionality to use teams within a parallel kernel.
-It allows access to thread identifiers such as the league rank and size, and the team rank and size.
-It also provides team-synchronous actions such as team barriers, reductions and scans.
-\begin{lstlisting}
-using Kokkos::TeamPolicy;
-using Kokkos::parallel_for;
+The team policy's `member_type` provides the necessary functionality to use teams within a parallel kernel. It allows access to thread identifiers such as the league rank and size, and the team rank and size. It also provides team-synchronous actions such as team barriers, reductions and scans.
 
-typedef TeamPolicy<ExecutionSpace>::member_type member_type;
-// Create an instance of the policy
-TeamPolicy<ExecutionSpace> policy (league_size, Kokkos::AUTO() );
-// Launch a kernel
-parallel_for (policy, KOKKOS_LAMBDA (member_type team_member) {
-    // Calculate a global thread id
-    int k = team_member.league_rank () * team_member.team_size () +
-            team_member.team_rank ();
-    // Calculate the sum of the global thread ids of this team
-    int team_sum = team_member.reduce (k);
-    // Atomicly add the value to a global value
-    a() += team_sum;
-  });
-\end{lstlisting}
+    using Kokkos::TeamPolicy;
+    using Kokkos::parallel_for;
+    
+    typedef TeamPolicy<ExecutionSpace>::member_type member_type;
+    // Create an instance of the policy
+    TeamPolicy<ExecutionSpace> policy (league_size, Kokkos::AUTO() );
+    // Launch a kernel
+    parallel_for (policy, KOKKOS_LAMBDA (member_type team_member) {
+        // Calculate a global thread id
+         int k = team_member.league_rank () * team_member.team_size () +
+                team_member.team_rank ();
+        // Calculate the sum of the global thread ids of this team
+         int team_sum = team_member.reduce (k);
+         // Atomicly add the value to a global value
+         a() += team_sum;
+      });
 
-The name ``\lstinline!TeamPolicy!'' makes it explicit that a kernel
-using it constitutes a parallel region with respect to the team.
+
+The name "`TeamPolicy`" makes it explicit that a kernel using it constitutes a parallel region with respect to the team.
 
 ## 8.3 Team scratch pad memory
 
-Each Kokkos team has a ``scratch pad.''
-This is an instance of a memory space accessible only by threads in that team.
-Scratch pads let an algorithm load a workset into a shared space
-and then collaboratively work on it with all members of a team.
-The lifetime of data in a scratch pad is the lifetime of the team.
-In particular, scratch pads are recycled by all logical teams running on the same physical set of cores.
-During the lifetime of the team all operations allowed on global memory are allowed on the scratch memory.
-This includes taking addresses and performing atomic operations on elements located in scratch space.
-Team-level scratch pads correspond to the per-block shared memory in Cuda,
-or to the ``local store'' memory on the Cell processor.
+Each Kokkos team has a "scratch pad." This is an instance of a memory space accessible only by threads in that team. Scratch pads let an algorithm load a workset into a shared space and then collaboratively work on it with all members of a team. The lifetime of data in a scratch pad is the lifetime of the team. In particular, scratch pads are recycled by all logical teams running on the same physical set of cores. During the lifetime of the team all operations allowed on global memory are allowed on the scratch memory. This includes taking addresses and performing atomic operations on elements located in scratch space. Team-level scratch pads correspond to the per-block shared memory in Cuda, or to the "local store" memory on the Cell processor.
 
 Kokkos exposes scratch pads through a special memory space associated with the execution space:
 \lstinline|execution_space::scratch_memory_space|.
