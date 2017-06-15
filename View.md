@@ -103,11 +103,15 @@ You may access an entry of a View using parentheses enclosing a comma-delimited 
         /* rest of the loop body */
     });
 
-Note how in the above example, we only access the View's entries in a parallel loop body. In general, you may only access a View's entries in an execution space which is allowed to access that View's memory space. For example, if the default execution space is `Cuda`, a View for which no specific Memory Space was given may not be accessed in host code 
-\footnote{An exemption is if you specified for CUDA compilation that the default memory space is CudaUVMSpace, which can be accessed from the host.}.
+Note how in the above example, we only access the View's entries in a parallel loop body. In general, you may only access a View's entries in an execution space which is allowed to access that View's memory space. For example, if the default execution space is `Cuda`, a View for which no specific Memory Space was given may not be accessed in host code<sup>1</sup>.
 
 Furthermore, access costs (e.g., latency and bandwidth) may vary, depending on the View's "native" memory and execution spaces and the execution space from which you access it. CUDA UVM may work, but it may also be slow, depending on your access pattern and performance requirements. Thus, best practice is to access the View only in a Kokkos parallel for, reduce, or scan, using the same execution space as the View. This also ensures that access to the View's entries respect first-touch allocation. The first (leftmost) dimension of the View is the _parallel dimension_ over which it is most efficient to do parallel array access if the default memory layout is used (e.g. if no specific memory layout is
 specified).
+
+***
+<sup>1</sup>  An exemption is if you specified for CUDA compilation that the default memory space is CudaUVMSpace, which can be accessed from the host.
+
+***
 
 ### 6.2.5 Reference counting
 
