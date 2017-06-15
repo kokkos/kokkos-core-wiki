@@ -22,21 +22,15 @@ Kokkos consists mainly of header files. Only a few functions have to be compiled
 
 **This table needs work - daldo**  
 
+
 Table 4.1: Configuration Macros  
-
-| Macro | Effect | Comment  |  
- 
-|`KOKKOS_HAVE_CUDA`| Enable the CUDA execution space. |Requires a compiler capable of understanding CUDA-C. See Section ??. |
-|`KOKKOS_HAVE_OPENMP`| Enable the OpenMP execution space. |Requires the compiler to support OpenMP (e.g., `-fopenmp`). |  
-
-|`KOKKOS_HAVE_PTHREADS`| Enable the Threads execution space. | Requires linking with libpthread. |  
-
-|`KOKKOS_HAVE_Serial`| Enable the Serial execution space. |  |  
-
-|`KOKKOS_HAVE_CXX11`| Enable internal usage of C++11 features. | The code needs to be compiled with the C++11 standard. Most compilers accept the -std=c++11 flag for this. |  
-
-|`KOKKOS_HAVE_HWLOC`| Enable thread and memory pinning via hwloc. | Requires linking with libhwloc. |  
-
+ Macro | Effect | Comment
+`KOKKOS_HAVE_CUDA`| Enable the CUDA execution space. |Requires a compiler capable of understanding CUDA-C. See Section ??.
+`KOKKOS_HAVE_OPENMP`| Enable the OpenMP execution space. |Requires the compiler to support OpenMP (e.g., `-fopenmp`).
+`KOKKOS_HAVE_PTHREADS`| Enable the Threads execution space. | Requires linking with libpthread.
+`KOKKOS_HAVE_Serial`| Enable the Serial execution space. |
+`KOKKOS_HAVE_CXX11`| Enable internal usage of C++11 features. | The code needs to be compiled with the C++11 standard. Most compilers accept the -std=c++11 flag for this.
+`KOKKOS_HAVE_HWLOC`| Enable thread and memory pinning via hwloc. | Requires linking with libhwloc. 
 
 
 ## 4.2 Using Kokkos' Makefile system
