@@ -20,13 +20,17 @@ Important notes on syntax:
 
 ### 7.1.1 Functors
 
-A _functor_ is one way to define the body of a parallel loop. It is a class or struct\footnote{A "struct" in C++ is just a class, all of whose members are public by default.} with a public `operator()` instance method. That method's arguments depend on both which parallel operation you want to execute (for, reduce, or scan), and on the loop's execution policy (e.g., range or team). For an example of a functor see the section in this chapter for each type of parallel operation. In the most common case of a `parallel_for`, it takes an integer argument which is the for loop's index. Other arguments are possible; see Chapter 8 on "hierarchical parallelism."
+A _functor_ is one way to define the body of a parallel loop. It is a class or struct<sup>1</sup> with a public `operator()` instance method. That method's arguments depend on both which parallel operation you want to execute (for, reduce, or scan), and on the loop's execution policy (e.g., range or team). For an example of a functor see the section in this chapter for each type of parallel operation. In the most common case of a `parallel_for`, it takes an integer argument which is the for loop's index. Other arguments are possible; see Chapter 8 on "Hierarchical Parallelism."
 
 The `operator()` method must be const, and must be marked with the `KOKKOS_INLINE_FUNCTION` macro. If building with CUDA, this macro will mark your method as suitable for running on the CUDA device (as well as on the host). If not building with CUDA, the macro is unnecessary but harmless. Here is an example of the signature of such a method:
 
     KOKKOS_INLINE_FUNCTION void operator() (...) const;
 
 The entire parallel operation (for, reduce, or scan) shares the same instance of the functor. However, any variables declared inside the `operator()` method are local to that iteration of the parallel loop. Kokkos may pass the functor instance by "copy," not by pointer or reference, to the execution space that executes the code. In particular, the functor might need to be copied to a different execution space than the host. For this reason, it is generally not valid to have any pointer or reference members in the functor. Pass in Kokkos Views by copy as well; this works by shallow copy. The functor is also passed as a const object, so it is not valid to change members of the functors. (However, it is valid for the functor to change the contents of, for example, a View or a raw array which is a member of the functor.)
+
+***
+<sup>1</sup>  A "struct" in C++ is just a class, all of whose members are public by default.
+***
 
 ### 7.1.2 Lambdas
 
