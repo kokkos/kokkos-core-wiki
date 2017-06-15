@@ -160,9 +160,8 @@ Instead of simply getting raw allocations in memory, users can also allocate Vie
 
 Instead of writing code which explicitly uses league and team rank indices, one can use nested parallelism to implement hierarchical algorithms. Kokkos lets the user have up to three nested layers of parallelism. The team and thread levels are the first two levels. The third level is _vector_ parallelism.
 
-You may use any of the three parallel patterns -- for, reduce, or scan -- at each level<sup>1</sup>
+You may use any of the three parallel patterns -- for, reduce, or scan -- at each level<sup>1</sup>.
 You may nest them and use them in conjunction with code that is aware of the league and team rank. The different layers are accessible via special execution policies: `TeamThreadLoop` and `ThreadVectorLoop`.
-
 
 ***
 <sup>1</sup> The parallel scan operation is not implemented for all execution spaces on the thread level, and it  doesn't support a TeamPolicy on the top level.
