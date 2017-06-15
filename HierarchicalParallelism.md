@@ -10,9 +10,7 @@ which is the first argument to the `parallel_*` operation. Kokkos also exposes a
 Node architectures on modern high-performance computers are characterized by ever more _hierarchical parallelism_.
 A level in the hierarchy is determined by the hardware resources which are shared between compute units at that level.
 Higher levels in the hierarchy also have access to all resources in its branch at lower levels of the hierarchy.
-This concept is orthogonal to the concept of heterogeneity.
-For example, a node in a typical CPU-based cluster consists of a number of multicore CPUs.  Each core supports one or more hyperthreads, and each hyperthread can execute vector instructions.
-This means there are 4 levels in the hierarchy of parallelism:
+This concept is orthogonal to the concept of heterogeneity. For example, a node in a typical CPU-based cluster consists of a number of multicore CPUs.  Each core supports one or more hyperthreads, and each hyperthread can execute vector instructions. This means there are 4 levels in the hierarchy of parallelism:
 
 1. CPU sockets share access to the same memory and network resources,
 1. cores within a socket typically have a shared last level cache (LLC),
@@ -121,7 +119,6 @@ The following is an example of using the functor interface:
       }
     };
 
-
 The `set_scratch_size` function of the `TeamPolicy` takes two or three arguments. The first argument specifies the level in the scratch hierarchy for which a specific size is requested. Different levels have different restrictions. Generally the first level is restricted to a few tenths of kilobyte roughly corresponding to L1 cache size. The second level can be used to get an aggregate over all teams of a few gigabyte, corresponding to available space in high-bandwidth memory. The third level generally falls back to capacity memory in the node. The second and third argument are either per-thread or per-team sizes for scratch memory. Note like previously discussed, the setter function does not modify the instance it is called on, but returns a copy of the policy object with adjusted scratch size request.
 
 Here are some examples:
@@ -163,8 +160,13 @@ Instead of simply getting raw allocations in memory, users can also allocate Vie
 
 Instead of writing code which explicitly uses league and team rank indices, one can use nested parallelism to implement hierarchical algorithms. Kokkos lets the user have up to three nested layers of parallelism. The team and thread levels are the first two levels. The third level is _vector_ parallelism.
 
-You may use any of the three parallel patterns -- for, reduce, or scan -- at each level\footnote{The parallel scan operation is not implemented for all execution spaces on the thread level, and it doesn't support a TeamPolicy on the top level.}.
+You may use any of the three parallel patterns -- for, reduce, or scan -- at each level<sup>1</sup>
 You may nest them and use them in conjunction with code that is aware of the league and team rank. The different layers are accessible via special execution policies: `TeamThreadLoop` and `ThreadVectorLoop`.
+
+
+***
+<sup>1</sup> The parallel scan operation is not implemented for all execution spaces on the thread level, and it  doesn't support a TeamPolicy on the top level.
+***
 
 ### 8.4.1 Team loops
 
@@ -385,11 +387,3 @@ Lets go one step further and add a nested `parallel_reduce`. By choosing the loo
 The answer in this case is neverless `N * team_size * team_size * 10`.
 Each thread computes `inner_s = 10`. But all threads in the team combine their results to compute a `s` value of `team_size * 10`. Since every thread in each team contributes that value to the global sum, we arrive at the final value of `N * team_size * team_size * 10`. If the intended goal was for each team to only contribute `s` once to the global sum,
 the contribution should have been protected with a `single` clause.
-
-**** Following is test-text for footnote treatment **** remove after testing ***** dal*****
-*******************************************************************************************
-Instead of writing code which explicitly uses league and team rank indices, one can use nested parallelism to implement hierarchical algorithms. Kokkos lets the user have up to three nested layers of parallelism. The team and thread levels are the first two levels. The third level is _vector_ parallelism.
-
-You may use any of the three parallel patterns -- for, reduce, or scan -- at each level\footnote{The parallel scan operation is not implemented for all execution spaces on the thread level, and it doesn't support a TeamPolicy on the top level.}.
-You may nest them and use them in conjunction with code that is aware of the league and team rank. The different layers are accessible via special execution policies: `TeamThreadLoop` and `ThreadVectorLoop`.
-
