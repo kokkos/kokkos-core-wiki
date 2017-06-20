@@ -4,7 +4,7 @@
 
 This chapter explains how to compile Kokkos and how to link your application against Kokkos. Kokkos supports two build systems:
 
-*  Using the embedded Makele
+*  Using the embedded Makefile
 *  Trilinos' CMake build system
 
 Note that the two explicitly supported build methods should not be mixed. For example, do not include the embedded Makefile in your application build process, while explicitly linking against a pre-compiled Kokkos library in Trilinos. We also include specific advice for building for NVIDIA GPUs and for Intel Xeon Phi.
@@ -24,7 +24,7 @@ Table 4.1: Configuration Macros
   
  Macro | Effect | Comment
  :--- |:--- |:---
-`KOKKOS_HAVE_CUDA`| Enable the CUDA execution space. |Requires a compiler capable of understanding CUDA-C. See Section ??.
+`KOKKOS_HAVE_CUDA`| Enable the CUDA execution space. |Requires a compiler capable of understanding CUDA-C. See Section 4.4.
 `KOKKOS_HAVE_OPENMP`| Enable the OpenMP execution space. |Requires the compiler to support OpenMP (e.g., `-fopenmp`).
 `KOKKOS_HAVE_PTHREADS`| Enable the Threads execution space. | Requires linking with libpthread.
 `KOKKOS_HAVE_Serial`| Enable the Serial execution space. |
