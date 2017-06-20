@@ -11,13 +11,34 @@ Note that the two explicitly supported build methods should not be mixed. For ex
 
 ## 4.1 General Information
 
-Kokkos consists mainly of header files. Only a few functions have to be compiled into object files outside of the application's source code. Those functions are contained in `.cpp` files inside the `kokkos/core/src` directory and its subdirectories. The files are internally protected with macros to prevent compilation if the related execution space is not enabled. Thus, it is not necessary to create a list of included object files specific to your compilation target. One may simply compile all `.cpp` files. The enabled features are controlled via macros which have to be provided in the compilation line or in the `KokkosCore_config.h` include file. A list of macros can be found in Table 4.1. In order to compile Kokkos a C++11 compliant compiler is needed. For an up to date list of compilers which are tested on a nightly basis, please refer to the README on the github repository. At the time of writing supported compilers include (this must be updated-`dal-do`):
+Kokkos consists mainly of header files. Only a few functions have to be compiled into object files outside of the application's source code. Those functions are contained in `.cpp` files inside the `kokkos/core/src` directory and its subdirectories. The files are internally protected with macros to prevent compilation if the related execution space is not enabled. Thus, it is not necessary to create a list of included object files specific to your compilation target. One may simply compile all `.cpp` files. The enabled features are controlled via macros which have to be provided in the compilation line or in the `KokkosCore_config.h` include file. A list of macros can be found in Table 4.1. In order to compile Kokkos a C++11 compliant compiler is needed. For an up to date list of compilers which are tested on a nightly basis, please refer to the README on the github repository. At the time of writing supported compilers include:
 
-> GCC 4.7.2, 4.8.x, 4.9.x, 5.1.x, 5.3.x;  
-> Intel 14.x, 15.x, 16.x, 17.x;  
-> Clang 3.5.1, 3.6.x, 3.7.x, 3.8.x, 3.9.x;  
-> Cuda 7.0, 7.5, 8.0;  
-> XL 13.3;  
+    Primary tested compilers on X86
+        GCC 4.7.2, 4.8.4, 4.9.2, 5.1.0, 5.2.0;  
+        Intel 14.0.4, 15.0.2, 16.0.1, 17.0.098, 17.1.132;  
+        Clang 3.5.2, 3.6.1, 3.7.1, 3.8.1, 3.9.0;  
+        Cuda 7.0, 7.5, 8.0;
+        PGI 17.1  
+    Primary tested compilers on Power 8
+        XL 13.1.3 (OpenMP, Serial)
+        GCC 5.4.0 (OpenMP, Serial)
+    Primary tested compilers on Intel KNL
+        GCC 6.2.0
+        Intel 16.2.181, 17.0.098 (with gcc 4.7.2)
+        Intel 17.1.132, 17.2.132 (with gcc 4.9.3)
+        Intel 18.0.061 (beta) (with gcc 4.9.3)
+    
+    Secondary tested compilers
+        CUDA 7.0, 7.5 (with gcc 4.8.4)
+        CUDA 8.0 (with gcc 5.3.0 on X86)
+        CUDA 8.0 (with gcc 5.4.0 on Power8)
+        CUDA/Clang 8.0 using Clang/Trunk compiler
+    
+    Other working compilers
+        Cygwin 2.1.0 64bit (with gcc 4.9.3 on X86)
+
+    Known non-working combinations
+        Pthreads backend (on Power 8)
 
 
 Table 4.1: Configuration Macros
@@ -53,9 +74,9 @@ Table 4.2: Variables for the Embedded Makefile
 
 Variable  | Description
  :--- |:---
-`KOKKOS PATH (IN)` | Path to the Kokkos root or install directory. One can either build against an existing install of Kokkos or use its source directly for an embedded build. In the former case the "Input variables" are set inside the embedded Makefile.kokkos and it is not valid to set them differently in the including Makefile. 
-`CUDA PATH (IN)` | Path to the Cuda toolkit root directory. 
-`KOKKOS DEVICES (IN)` | Execution and Memory Spaces that should be enabled.
+`KOKKOS_PATH (IN)` | Path to the Kokkos root or install directory. One can either build against an existing install of Kokkos or use its source directly for an embedded build. In the former case the "Input variables" are set inside the embedded Makefile.kokkos and it is not valid to set them differently in the including Makefile. 
+`CUDA_PATH (IN)` | Path to the Cuda toolkit root directory. 
+`KOKKOS_DEVICES (IN)` | Execution and Memory Spaces that should be enabled.
 Options/Default |   OpenMP, Serial, Pthreads, Cuda / OpenMP
 `KOKKOS_ARCH (IN)` | The backend architecture to build for.
 Options/Default | KNL,KNC,SNB,HSW,BDW,Kepler,Kepler30,Kepler35,Kepler37,Maxwell,Maxwell50,Pascal60,Pascal61,ARMv8,ARMv81,ARMv8-ThunderX,BGQ,Power7,Power8 / (no particular architecture flags are set).
