@@ -74,15 +74,15 @@ Table 4.2: Variables for the Embedded Makefile
 
 Variable  | Description
  :--- |:---
-`KOKKOS_PATH (IN)` | Path to the Kokkos root or install directory. One can either build against an existing install of Kokkos or use its source directly for an embedded build. In the former case the "Input variables" are set inside the embedded Makefile.kokkos and it is not valid to set them differently in the including Makefile. 
+`KOKKOS_PATH (IN)` | Path to the Kokkos root or install directory. One can either build against an existing install of Kokkos <br> or use its source directly for an embedded build. In the former case the "Input variables" are set <br> inside the embedded Makefile.kokkos and it is not valid to set them differently in the including Makefile. 
 `CUDA_PATH (IN)` | Path to the Cuda toolkit root directory. 
 `KOKKOS_DEVICES (IN)` | Execution and Memory Spaces that should be enabled.
 Options/Default |   OpenMP, Serial, Pthreads, Cuda / OpenMP
 `KOKKOS_ARCH (IN)` | The backend architecture to build for.
-Options/Default | KNL,KNC,SNB,HSW,BDW,Kepler,Kepler30,Kepler35,Kepler37,Maxwell,Maxwell50,Pascal60,Pascal61,ARMv8,ARMv81,ARMv8-ThunderX,BGQ,Power7,Power8 / (no particular architecture flags are set).
+Options/Default | KNL,KNC,SNB,HSW,BDW,Kepler,Kepler30,Kepler35,Kepler37,Maxwell,Maxwell50,Pascal60,Pascal61,<br> ARMv8,ARMv81,ARMv8-ThunderX,BGQ,Power7,Power8 / (no particular architecture flags are set).
 `KOKKOS_USE_TPLS (IN)` | Enable optional third party libraries.
 Options/Default  | hwloc, librt, experimental_memkind / (none)
-`KOKKOS OPTIONS (IN)` | Enable optional settings
+`KOKKOS_OPTIONS (IN)` | Enable optional settings
 Options/Default | aggressive_vectorization / (none)
 `KOKKOS_CUDA_OPTIONS (IN)` | Enable optional settings specific to CUDA.
 Options/Default | force_uvm, use_ldg, rdc, enable_lambda / (none)
@@ -95,7 +95,7 @@ Options/Default  | C++11 / C++11
 `KOKKOS_CXXFLAGS (OUT)` | Compiler flags. Add this to the applications compiler flags.
 `KOKKOS_LDFLAGS (OUT)` | Linker flags. Add this to the applications linker flags.
 `KOKKOS LIBS (OUT)` | Libraries required by Kokkos. Add this to the link line after the linker flags.
-`KOKKOS_CPP_DEPENDS (OUT)` |  Dependencies for compilation units which include any Kokkos header files. Add this as a dependency to compilation targets including any Kokkos code.
+`KOKKOS_CPP_DEPENDS (OUT)` |  Dependencies for compilation units which include any Kokkos header files. <br> Add this as a dependency to compilation targets including any Kokkos code.
 `KOKKOS_LINK_DEPENDS (OUT)` | Dependencies of an application linking in the Kokkos library. Add this to the dependency list of link targets.
 `CXXFLAGS (IN)` | User provided compiler flags which will be used to compile the Kokkos library.
 `CXX (IN)` | The compiler used to compile the Kokkos library.
