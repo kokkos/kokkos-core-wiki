@@ -4,6 +4,8 @@
 
 The programming model Kokkos is characterized by 6 core abstractions: Execution Spaces, Execution Patterns, Execution Policies, Memory Spaces, Memory Layout and Memory Traits. These abstraction concepts allow the formulation of generic algorithms and data structures which can then be mapped to different types of architectures. Effectively, they allow for compile time transformation of algorithms to allow for adaptions of varying degrees of hardware parallelism as well as of the memory hierarchy.
 
+[Insert Figure 3.1 here; caption: Figure 3.1 The core abstractions of the Kokkos Programming Model ]
+
 ## 3.1 Execution Spaces
 
 An Execution Space is the place _Where_ code can actually be executed. For example, on current Hybrid GPU/CPU systems there are two types of execution spaces: the GPU cores and the CPU cores. In the future this could include Processing in Memory (PIM) modules or different core types on a heterogeneous CPU. In principle, this can also be used to introduce remote memory spaces, e.g., the capability of sending work to a different node. Execution Spaces thus give an application developer the means to target different parts of a heterogeneous hardware architecture. This corresponds directly to the previously described machine model.
@@ -45,7 +47,7 @@ Memory Spaces are the places _Where_ data resides. They specify physical locatio
 
 ## 3.5 Memory Layout
 
-Layouts express the _mapping_ from logical (or algorithmic) indices to address offset for a data allocation. By adopting appropriate layouts for memory structures an application can optimise data access patterns in a given algorithm. If an implementation provides polymorphic layouts (i.e. a data structure can be instantiated at compile or runtime with different layouts) an architecture dependent optimisation can be performed.
+Layouts express the _mapping_ from logical (or algorithmical) indices to address offset for a data allocation. By adopting appropriate layouts for memory structures an application can optimise data access patterns in a given algorithm. If an implementation provides polymorphic layouts (i.e. a data structure can be instantiated at compile or runtime with different layouts) an architecture dependent optimisation can be performed.
 
 ## 3.6 Memory Traits
 
