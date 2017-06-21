@@ -383,6 +383,6 @@ Lets go one step further and add a nested `parallel_reduce`. By choosing the loo
       lsum += s;
     },sum);
 
-The answer in this case is neverless `N * team_size * team_size * 10`.
+The answer in this case is nevertheless `N * team_size * team_size * 10`.
 Each thread computes `inner_s = 10`. But all threads in the team combine their results to compute a `s` value of `team_size * 10`. Since every thread in each team contributes that value to the global sum, we arrive at the final value of `N * team_size * team_size * 10`. If the intended goal was for each team to only contribute `s` once to the global sum,
 the contribution should have been protected with a `single` clause.
