@@ -55,9 +55,11 @@ Table 4.1: Configuration Macros
 
 ## 4.2 Using Kokkos' Makefile system
 
-The base of the build system is the `Makefile.kokkos`; it is designed to be included by application Makefiles. It contains logic to (re)generate the `KokkosCore_config.h` file if necessary, build the Kokkos library, and provide updated compiler and linker flags. settings and then parses the variables for Keywords. This allows for multiple options to be given for each variable. The separator doesn't matter as long as it doesn't interact with the Make system. A list of variables, their meaning and options is given in Table 4.2.
+The base of the build system is the `Makefile.kokkos`; it is designed to be included by application Makefiles. It contains logic to (re)generate the `KokkosCore_config.h` file if necessary, build the Kokkos library, and provide updated compiler and linker flags. 
 
-A word of caution on where to include the `Makefile.kokkos`: since the embedded Makefiles defines targets it is usually better to include it after the first application target has been defined. Since that target can't use the flags from the embedded Makefiles it should be a meta target:
+The system can digest a number of variables which are used to configure Kokkos settings and then parses the variables for Keywords. This allows for multiple options to be given for each variable. The separator doesn't matter as long as it doesn't interact with the Make system. A list of variables, their meaning and options are given in Table 4.2.
+
+A word of caution on where to include the `Makefile.kokkos`: since the embedded Makefiles define targets, it is usually better to include it after the first application target has been defined. Since that target can't use the flags from the embedded Makefiles, it should be a meta target:
 
     CXX=g++
     default: main
@@ -68,7 +70,7 @@ A word of caution on where to include the `Makefile.kokkos`: since the embedded 
 
 More example application Makefiles can be found in the tutorial examples under `kokkos/example/tutorial`.
 
-Kokkos provides a script `generate_makefile.bash` which can generate a Makefile for building and installing the library as well as building and running the tests. Please run `generate_makefile.bash --help` to see options. Note that paths given to the script must be absolute paths, and the script must be run with the `bash` shell (the script will do it if it is run directly i.e. as `./generate_makefile.bash`).
+Kokkos provides a script `generate_makefile.bash` which can generate a Makefile for building and installing the library as well as building and running the tests. Please run `generate_makefile.bash --help` to see options. Note that paths given to the script must be absolute paths, and the script must be run with the `bash` shell (the script will do this if it is run directly, i.e., as `./generate_makefile.bash`).
 
 Table 4.2: Variables for the Embedded Makefile
 
@@ -77,7 +79,7 @@ Variable  | Description
 `KOKKOS_PATH (IN)` | Path to the Kokkos root or install directory. One can either build against an existing install of Kokkos <br> or use its source directly for an embedded build. In the former case the "Input variables" are set <br> inside the embedded Makefile.kokkos and it is not valid to set them differently in the including Makefile. 
 `CUDA_PATH (IN)` | Path to the Cuda toolkit root directory. 
 `KOKKOS_DEVICES (IN)` | Execution and Memory Spaces that should be enabled.
-Options/Default |   OpenMP, Serial, Pthreads, Cuda / OpenMP
+ Options/Default |   OpenMP, Serial, Pthreads, Cuda / OpenMP
 `KOKKOS_ARCH (IN)` | The backend architecture to build for.
 Options/Default | KNL,KNC,SNB,HSW,BDW,Kepler,Kepler30,Kepler35,Kepler37,Maxwell,Maxwell50,Pascal60,Pascal61,<br> ARMv8,ARMv81,ARMv8-ThunderX,BGQ,Power7,Power8 / (no particular architecture flags are set).
 `KOKKOS_USE_TPLS (IN)` | Enable optional third party libraries.
@@ -112,7 +114,7 @@ We refer readers to Trilinos' documentation for details. Also, the `kokkos/confi
 
 ## 4.4 Building for CUDA
 
-Any Kokkos application compiled for CUDA embeds CUDA code via template metaprogramming. Thus, the whole application must be built with a CUDA-capable compiler. (At the moment, the only such compilers are NVIDIA's NVCC and Clang 4.0 [not released yet at time of writing].) More precisely, every compilation unit containing a Kokkos kernel or a function called from a Kokkos kernel has to be compiled with a CUDA-capable compiler. This includes files containing Kokkos::View allocations, which call an initialization kernel.
+Any Kokkos application compiled for CUDA embeds CUDA code via template metaprogramming. Thus, the whole application must be built with a CUDA-capable compiler. (At the moment, the only such compilers are NVIDIA's NVCC and Clang 4.0 [not released yet at time of writing].) More precisely, every compilation unit containing a Kokkos kernel or a function called from a Kokkos kernel has to be compiled with a CUDA-capable compiler. This includes files containing Kokkos::View allocations which call an initialization kernel.
 
 The current version of NVCC (give version number) has some shortcomings when used as the main compiler for a project, in particular when part of a complex build system. For example, it does not understand most GCC command-line options, which must be prepended by the `-Xcompiler` flag when calling NVCC. Kokkos comes with a shell script, called `nvcc_wrapper`, that wraps NVCC to address these issues. We intend this as a drop-in replacement for a normal GCC-compatible compiler (e.g., GCC or Intel) in your build system. It analyzes the provided command-line options and prepends them correctly. It also adds the correct flags for compiling generic C++ files containing CUDA code (e.g., `*.cpp, *.cxx,` or `*.CC`). By default `nvcc_wrapper` calls `g++` as the host compiler. You may override this by providing NVCC's `'-ccbin'` option as a compiler flag. The default can be set by editing the script itself or by setting the environment variable `NVCC_WRAPPER_DEFAULT_COMPILER`.
 
