@@ -27,10 +27,9 @@ if applicable. These defaults depend on the Kokkos configuration. Kokkos chooses
 1. `Kokkos::OpenMP`
 1. `Kokkos::Cuda`
 
-The highest execution space in the list which is actually enabled is Kokkos' default execution space, and the highest enabled host execution space is Kokkos' default host execution space. (Currently, the only non-host execution space is `Cuda`.) For example, if  `Kokkos::Cuda`, `Kokkos::OpenMP`, and `Kokkos::Serial` are enabled, then `Kokkos::Cuda` is the
-default execution space and `Kokkos::OpenMP` is the default host execution space.<sup>1</sup>
+The highest execution space in the list which is actually enabled is Kokkos' default execution space, and the highest enabled host execution space is Kokkos' default host execution space. (Currently, the only non-host execution space is `Cuda`.) For example, if  `Kokkos::Cuda`, `Kokkos::OpenMP`, and `Kokkos::Serial` are enabled, then `Kokkos::Cuda` is the default execution space and `Kokkos::OpenMP` is the default host execution space.<sup>1</sup>
 
-Command-line arguments come in "prefixed" and "non-prefixed" versions. Prefixed versions start with the string \verb!--kokkos-!. `Kokkos::initialize` will remove prefixed options from the input list, but will preserve non-prefixed options. Argument options are given with an equals (\verb!=!) sign. If the same argument occurs more than once, the last one counts. Furthermore, prefixed versions of the command line arguments take precedence over the non-prefixed ones. For example, the arguments
+Command-line arguments come in "prefixed" and "non-prefixed" versions. Prefixed versions start with the string `--kokkos-`. `Kokkos::initialize` will remove prefixed options from the input list, but will preserve non-prefixed options. Argument options are given with an equals (`=`) sign. If the same argument occurs more than once, the last one counts. Furthermore, prefixed versions of the command line arguments take precedence over the non-prefixed ones. For example, the arguments
 
     --kokkos-threads=4 --threads=2
 
@@ -47,10 +46,10 @@ Table 5.1: Command-line options for `Kokkos::initialize`
 Argument | Description
 :---      | :---
 --kokkos-help     | print this message
---kokkos-threads  | specify total number of threads or number of threads per NUMA region if used in conjunction with '--numa' option.
+--kokkos-threads  | specify total number of threads or number of threads per NUMA region if used in conjunction with `--numa` option.
 --kokkos-numa=INT | specify number of NUMA regions used by process. 
 --kokkos-device=INT | specify device id to be used by Kokkos. 
---kokkos-ndevices=INT[,INT] | used when running MPI jobs. Specify number of devices per node to be used. Process to device mapping happens by obtaining the local MPI rank and assigning devices round-robin. The optional second argument allows for an existing device to be ignored. This is most useful on workstations with multiple GPUs, of which one is used to drive screen output.
+--kokkos-ndevices=INT[,INT] | used when running MPI jobs. Specify number of devices per node to be used. Process to device mapping happens by obtaining the local MPI rank and assigning devices round-robin. The optional second argument allows for an existing device to be ignored. This is most useful on workstations with multiple GPUs, one of which is used to drive screen output.
 
 
 ***
@@ -70,10 +69,9 @@ Instead of giving `Kokkos::initialize()` command-line arguments, one may directl
        // ... the struct may have more members ...
     };
 
-The `num_threads` field corresponds to the \verb!--kokkos-threads! command-line argument, `num_numa` to \verb!--kokkos-numa!, and `device_id` to \verb!--kokkos-device!. (See Table 5.1 for details.) Not all parameters are observed by all execution spaces, and the struct might expand in the future if needed.
+The `num_threads` field corresponds to the `--kokkos-threads` command-line argument, `num_numa` to `--kokkos-numa`, and `device_id` to `--kokkos-device`. (See Table 5.1 for details.) Not all parameters are observed by all execution spaces, and the struct might expand in the future if needed.
 
-If you set `num_threads` or `num_numa` to zero or less, Kokkos will try to determine default values if possible or otherwise set them to 1. In particular Kokkos can use the hwloc library to determine default settings, using the assumption that the process binding mask is unique, i.e. that this process does not share any cores with another process.
-Note that the default value of each parameter is -1.
+If you set `num_threads` or `num_numa` to zero or less, Kokkos will try to determine default values if possible or otherwise set them to 1. In particular Kokkos can use the `hwloc` library to determine default settings, using the assumption that the process binding mask is unique, i.e. that this process does not share any cores with another process. Note that the default value of each parameter is -1.
 
 Here is an example of how to use the struct.
 
