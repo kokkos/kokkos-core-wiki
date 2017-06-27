@@ -41,7 +41,7 @@ Kokkos consists mainly of header files. Only a few functions have to be compiled
         Pthreads backend (on Power 8)
 
 
-Table 4.1: Configuration Macros
+<h4>Table 4.1: Configuration Macros</h4>
   
  Macro | Effect | Comment
  :--- |:--- |:---
@@ -72,27 +72,27 @@ More example application Makefiles can be found in the tutorial examples under `
 
 Kokkos provides a script `generate_makefile.bash` which can generate a Makefile for building and installing the library as well as building and running the tests. Please run `generate_makefile.bash --help` to see options. Note that paths given to the script must be absolute paths, and the script must be run with the `bash` shell (the script will do this if it is run directly, i.e., as `./generate_makefile.bash`).
 
-Table 4.2: Variables for the Embedded Makefile
+<h4>Table 4.2: Variables for the Embedded Makefile</h4>
 
 Variable  | Description
- :--- |:---
-`KOKKOS_PATH (IN)` | Path to the Kokkos root or install directory. One can either build against an existing install of Kokkos <br> or use its source directly for an embedded build. In the former case the "Input variables" are set <br> inside the embedded Makefile.kokkos and it is not valid to set them differently in the including Makefile. 
+ ---: |:---
+`KOKKOS_PATH (IN)` | Path to the Kokkos root or install directory. One can either build against an existing <br> install of Kokkos or use its source directly for an embedded build. In the former case the <br> "Input variables" are set inside the embedded Makefile.kokkos and it is not valid <br> to set them differently in the including Makefile. 
 `CUDA_PATH (IN)` | Path to the Cuda toolkit root directory. 
 `KOKKOS_DEVICES (IN)` | Execution and Memory Spaces that should be enabled.
- Options/Default |   OpenMP, Serial, Pthreads, Cuda / OpenMP
+`Options`<br>`    Default` | OpenMP, Serial, Pthreads, Cuda <br> OpenMP 
 `KOKKOS_ARCH (IN)` | The backend architecture to build for.
-Options/Default | KNL,KNC,SNB,HSW,BDW,Kepler,Kepler30,Kepler35,Kepler37,Maxwell,Maxwell50,Pascal60,Pascal61,<br> ARMv8,ARMv81,ARMv8-ThunderX,BGQ,Power7,Power8 / (no particular architecture flags are set).
+`Options` <br><br> `Default` | KNL, KNC, SNB, HSW, BDW, Kepler, Kepler30, Kepler35, Kepler37, Maxwell, Maxwell50, <br> Pascal60, Pascal61, ARMv8, ARMv81, ARMv8-ThunderX, BGQ, Power7, # Power8 <br> (no particular architecture flags are set).
 `KOKKOS_USE_TPLS (IN)` | Enable optional third party libraries.
-Options/Default  | hwloc, librt, experimental_memkind / (none)
+`Options` <br> `Default`  | hwloc, librt, experimental_memkind <br> (none)
 `KOKKOS_OPTIONS (IN)` | Enable optional settings
-Options/Default | aggressive_vectorization / (none)
+`Options` <br> `Default` | aggressive_vectorization <br> (none)
 `KOKKOS_CUDA_OPTIONS (IN)` | Enable optional settings specific to CUDA.
-Options/Default | force_uvm, use_ldg, rdc, enable_lambda / (none)
+`Options` <br> `Default` | force_uvm, use_ldg, rdc, enable_lambda <br> (none)
 `HWLOC_PATH (IN)` | Path to the hardware locality library if enabled.
 `KOKKOS_DEBUG (IN)` | Enable debugging.
-Options/Default | yes, no / no
+`Options` <br> `Default` | yes, no <br> no
 `KOKKOS_CXX_STANDARD (IN)` | Set the C++ standard to be used.
-Options/Default  | C++11 / C++11
+`Options` <br> `Default`  | C++11 <br> C++11
 `KOKKOS_CPPFLAGS (OUT)` | Preprocessor flags (include directories and defines). Add this to applications compiler and preprocessor flags.
 `KOKKOS_CXXFLAGS (OUT)` | Compiler flags. Add this to the applications compiler flags.
 `KOKKOS_LDFLAGS (OUT)` | Linker flags. Add this to the applications linker flags.
