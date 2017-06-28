@@ -9,6 +9,7 @@ The machine model has two important components:
 * _Execution spaces_, which execute parallel operations using data from one or more _memory spaces_.
 
 ![abstractions](https://github.com/kokkos/ProgrammingGuide/blob/figure-edits/figures/kokkos-abstractions-doc.png)
+
 Figure 2.1 The Core Abstractions of the Kokkos Programming Model
 
 ## 2.1 Motivations
