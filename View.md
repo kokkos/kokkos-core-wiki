@@ -264,7 +264,7 @@ allocation sizes and thus prevent a direct memcopy.
 
 The reasoning for allowing only direct bitwise copies is that a deep copy between different memory spaces would otherwise require a temporary copy of the data to which a bitwise copy is performed followed by a parallel kernel to transfer the data element by element.
 
-Kokkos provides the following way to work around those limitations. First views have a `HostMirror` typedef which is a view type with compatible layout inside the `HostSpace`. Additionally there is a `create_mirror` and `create_mirror_view` function which allocate views of the `HostMirror| type of a view. The difference between the two is that `create_mirror` will always allocate a new view, while `create_mirror_view` will only create a new view if the original one is not in `HostSpace`.
+Kokkos provides the following way to work around those limitations. First views have a `HostMirror` typedef which is a view type with compatible layout inside the `HostSpace`. Additionally there is a `create_mirror` and `create_mirror_view` function which allocate views of the `HostMirror` type of a view. The difference between the two is that `create_mirror` will always allocate a new view, while `create_mirror_view` will only create a new view if the original one is not in `HostSpace`.
 
     View<int*[3], MemorySpace> a ("a", 10);
     // Allocate a view in HostSpace with the layout and padding of a
