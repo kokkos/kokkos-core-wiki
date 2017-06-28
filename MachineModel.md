@@ -31,8 +31,8 @@ Kokkos uses the term _execution spaces_ to describe a logical grouping of comput
 An _instance_ of an execution space is a specific instantiation of an execution space to which a programmer can target parallel work. By means of example, an execution space might be used to describe a multi-core processor. In this example, the execution space contains several homogeneous cores which share some logical grouping. In a program written to the Kokkos model, an instance of this execution space would be made available on which parallel kernels could be executed. As a second example, if we were to add a GPU to the multi-core processor so a second execution space type is available in the system, the application programmer would then have two execution space instances available to select from. The important consideration here is that the method of compiling code for different execution spaces and the dispatch of kernels to instances is abstracted by the Kokkos model. This allows application programmers to be free from writing algorithms in hardware specific languages.
 
 ![execution-space](https://github.com/kokkos/ProgrammingGuide/blob/figure-edits/figures/kokkos-execution-space-doc.png)
-[!https://github.com/kokkos/ProgrammingGuide/figure-edits/figures/kokkos-execution-space-doc.png]
-Figure 2.3 Example Execution Spaces in a Future Computing Node ]
+
+Figure 2.3 Example Execution Spaces in a Future Computing Node
 
 ### 2.2.2 Kokkos Memory Spaces
 The multiple types of memory which will become available in future computing nodes are abstracted by Kokkos through _memory spaces_. Each memory space provides a finite storage capacity at which data structures can be allocated and accessed. Different memory space types have different characteristics with respect to accessibility from execution spaces as well as their performance characteristics.
