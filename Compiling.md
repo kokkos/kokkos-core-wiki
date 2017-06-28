@@ -76,12 +76,12 @@ Kokkos provides a script `generate_makefile.bash` which can generate a Makefile 
 
 Variable  | Description
  ---: |:---
-`KOKKOS_PATH (IN)` | Path to the Kokkos root or install directory. One can either build against an existing <br> install of Kokkos or use its source directly for an embedded build. In the former case the <br> "Input variables" are set inside the embedded Makefile.kokkos and it is not valid <br> to set them differently in the including Makefile. 
+`KOKKOS_PATH (IN)` | Path to the Kokkos root or install directory. One can either build against an existing install of Kokkos or use its source directly for an embedded build. In the former case the "Input variables" are set inside the embedded Makefile.kokkos and it is not valid to set them differently in the including Makefile. 
 `CUDA_PATH (IN)` | Path to the Cuda toolkit root directory. 
 `KOKKOS_DEVICES (IN)` | Execution and Memory Spaces that should be enabled.
 `Options`<br>`    Default` | OpenMP, Serial, Pthreads, Cuda <br> OpenMP 
 `KOKKOS_ARCH (IN)` | The backend architecture to build for.
-`Options` <br><br> `Default` | KNL, KNC, SNB, HSW, BDW, Kepler, Kepler30, Kepler35, Kepler37, Maxwell, Maxwell50, Pascal60, Pascal61, ARMv8, ARMv81, ARMv8-ThunderX, BGQ, Power7, # Power8 <br> (no particular architecture flags are set).
+`Options` <br><br><br> `Default` | KNL, KNC, SNB, HSW, BDW, Kepler, Kepler30, Kepler35, Kepler37, Maxwell, Maxwell50, Pascal60, Pascal61, ARMv8, ARMv81, ARMv8-ThunderX, BGQ, Power7, Power8 <br><br> (no particular architecture flags are set).
 `KOKKOS_USE_TPLS (IN)` | Enable optional third party libraries.
 `Options` <br> `Default`  | hwloc, librt, experimental_memkind <br> (none)
 `KOKKOS_OPTIONS (IN)` | Enable optional settings
