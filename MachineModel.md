@@ -10,7 +10,7 @@ The machine model has two important components:
 
 ![abstractions](https://github.com/kokkos/ProgrammingGuide/blob/figure-edits/figures/kokkos-abstractions-doc.png)
 
-Figure 2.1 The Core Abstractions of the Kokkos Programming Model
+<h4>Figure 2.1 The Core Abstractions of the Kokkos Programming Model</h4>
 
 ## 2.1 Motivations
 
@@ -22,7 +22,7 @@ Kokkos assumes an _abstract machine model_ for the design of future shared-memor
   
 ![node](https://github.com/kokkos/ProgrammingGuide/blob/figure-edits/figures/kokkos-node-doc.png)
 
-Figure 2.2 Conceptual Model of a Future High Performance Computing Node
+<h4>Figure 2.2 Conceptual Model of a Future High Performance Computing Node</h4>
 
 ## 2.2 Kokkos Execution Spaces
 Kokkos uses the term _execution spaces_ to describe a logical grouping of computation units which share an identical set of performance properties. An execution space provides a set of parallel execution resources which can be utilized by the programmer using several types of fundamental parallel operation. For a list of the operations available see Chapter 7.
@@ -32,7 +32,7 @@ An _instance_ of an execution space is a specific instantiation of an execution 
 
 ![execution-space](https://github.com/kokkos/ProgrammingGuide/blob/figure-edits/figures/kokkos-execution-space-doc.png)
 
-Figure 2.3 Example Execution Spaces in a Future Computing Node
+<h4>Figure 2.3 Example Execution Spaces in a Future Computing Node</h4>
 
 ### 2.2.2 Kokkos Memory Spaces
 The multiple types of memory which will become available in future computing nodes are abstracted by Kokkos through _memory spaces_. Each memory space provides a finite storage capacity at which data structures can be allocated and accessed. Different memory space types have different characteristics with respect to accessibility from execution spaces as well as their performance characteristics.
@@ -42,7 +42,7 @@ In much the same way execution spaces have specific instantiations through the a
 
 ![memory-space](https://github.com/kokkos/ProgrammingGuide/blob/figure-edits/figures/kokkos-memory-space-doc.png)
 
-Figure 2.4 Example Memory Spaces in a Future Computing Node
+<h4>Figure 2.4 Example Memory Spaces in a Future Computing Node</h4>
 
 **Atomic accesses to Memory in Kokkos** In cases where multiple executing threads attempt to read a memory address, complete a computation on the item, and write it back to same address in memory, an ordering collision may occur. These situations, known as _race conditions_ (because the data value stored in memory as the threads complete is dependent on which thread completes its memory operation last), are often the cause of non-determinism in parallel programs. A number of methods can be employed to ensure that race conditions do not occur in parallel programs including the use of locks (which allow only a single thread to gain access to data structure at a time), critical regions (which allow only one thread to execute a code sequence at any point in time) and _atomic_ operations. Memory operations which are atomic guarantee that a read, simple computation, and write to memory are completed as a single unit. This might allow application programmers to safely increment a memory value for instance, or more commonly, to safely accumulate values from multiple threads into a single memory location.
 
