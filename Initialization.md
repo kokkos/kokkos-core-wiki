@@ -41,7 +41,7 @@ set the number of threads to 3. Table 5.1 gives a full list of command-line opti
 
 
 
-Table 5.1: Command-line options for `Kokkos::initialize`
+<h4>Table 5.1: Command-line options for Kokkos::initialize <\h4>
 
 Argument | Description
 :---      | :---
