@@ -280,7 +280,7 @@ Kokkos provides the following way to work around those limitations. First views 
 
 ### 6.4.4 How do I get the raw pointer?
 
-We discourage access to a View's ``raw'' pointer. This circumvents reference counting. That is, the memory may be deallocated once the View's reference count goes to zero, so holding on to a raw pointer may result in invalid memory access. Furthermore, it may not even be possible to access the View's memory from a given execution space. For example, a View in the `Cuda` space points to CUDA device memory. Also using raw pointers would normally defeat the usability of polymorpic layouts and automatic padding. Nevertheless, sometimes you really need access to the pointer. For such cases, we provide the `data()` method. For example:
+We discourage access to a View's "raw" pointer. This circumvents reference counting. That is, the memory may be deallocated once the View's reference count goes to zero, so holding on to a raw pointer may result in invalid memory access. Furthermore, it may not even be possible to access the View's memory from a given execution space. For example, a View in the `Cuda` space points to CUDA device memory. Also using raw pointers would normally defeat the usability of polymorpic layouts and automatic padding. Nevertheless, sometimes you really need access to the pointer. For such cases, we provide the `data()` method. For example:
 
     // Legacy function that takes a raw pointer.
     extern void legacyFunction (double* x_raw, const size_t len);
