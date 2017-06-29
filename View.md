@@ -320,9 +320,9 @@ The `Atomic` access trait lets you create a View of data such that every read or
 1. not allowed to alias data for which atomic operations are performed, and 
 1. the results of non atomic accesses (including read) to data which is at the same time atomically accessed is not defined.
 
-Performance characteristics of atomic operation depend on the data type. Some types (in particular integer types) are natively supported and might even provide asynchronous atomic operations. Others (such as 32 bit and 64 bit atomics for non-integer types) are often implemented using CAS loops of integers. Everything else is implemented with a locking approach where an atomic operation acquires a lock based on a hash of the pointer value of the data element.
+Performance characteristics of atomic operations depend on the data type. Some types (in particular integer types) are natively supported and might even provide asynchronous atomic operations. Others (such as 32 bit and 64 bit atomics for non-integer types) are often implemented using CAS loops of integers. Everything else is implemented with a locking approach where an atomic operation acquires a lock based on a hash of the pointer value of the data element.
 
-Types for which atomic access are performed must support the necessary operators such as =,+=,-=,+,- etc. as well as have a number of `volatile` overloads of functions such as assign and copy constructors defined. 
+Types for which atomic access are performed must support the necessary operators such as =, +=, -=, +, - etc. as well as have a number of `volatile` overloads of functions such as assign and copy constructors defined. 
 
     View<int*> a("a" , 100);
     View<int*, MemoryTraits<Atomic> > a_atomic = a;
@@ -339,14 +339,13 @@ The `RandomAccess` trait declares the intent to access a View irregularly (in pa
     // Assign to const, RandomAccess View
     View<const int*, RandomAccess> a_ra = a_nonconst;
 
-If the default execution space is `Cuda`, access to a `RandomAccess` View may use CUDA texture fetches. Texture fetches are not cache coherent with respect to writes, which is why you must use read-only access. The texture cache is optimized for noncontiguous access, since it has a shorter cache line than the regular cache.
+If the default execution space is `Cuda`, access to a `RandomAccess` View may use CUDA texture fetches. Texture fetches are not cache coherent with respect to writes so you must use read-only access. The texture cache is optimized for noncontiguous access since it has a shorter cache line than the regular cache.
 
 While `RandomAccess` is valid for other execution spaces, currently no specific optimizations are performed. But in the future a view allocated with the `RandomAccess` attribute might for example, use a larger page size, and thus reduce page faults in the memory system.
 
 ### 6.5.3 Standard idiom for specifying access traits
 
-The standard idiom for View is to pass it around using as few template parameters as possible. Then, assign to a View with the desired access traits only at the "last moment" when those access traits are needed just before entering a computational kernel. This lets you template C++ classes and functions on the View type without
-proliferating instantiations. Here is an example:
+The standard idiom for View is to pass it around using as few template parameters as possible. Then, assign to a View with the desired access traits only at the "last moment" when those access traits are needed just before entering a computational kernel. This lets you template C++ classes and functions on the View type without proliferating instantiations. Here is an example:
 
     // Compute a sparse matrix-vector product, for a sparse
     // matrix stored in compressed sparse row (CSR) format.
@@ -381,37 +380,40 @@ It's always better to let Kokkos control memory allocation but sometimes you don
       // ... but you want to access it with Kokkos.
       //
       // malloc() returns host memory, so we use the host memory space HostSpace.  
-      // Unmanaged Views have no label, 
-      // because labels work with the reference counting system.
+      // Unmanaged Views have no label because labels work with the reference counting system.
       View<double*, HostSpace, MemoryTraits<Unmanaged> >
         x_view (x_raw, N0);
     
       functionThatTakesKokkosView (x_view);
     
-      // It's safest for unmanaged Views to fall out of
-      // scope, before freeing their memory.
+      // It's safest for unmanaged Views to fall out of scope before freeing their memory.
     }
     free (x_raw);
 
 
 ### 6.5.5 Conversion Rules and Function Specialization
 
-Not all view types can be assigned to each other. Requirements are: the data type and dimension have to match, the layout must be compatible and the memory space has to match. Examples illustrating the rules are:
+Not all view types can be assigned to each other. Requirements are: 
+* the data type and dimension have to match, 
+* the layout must be compatible and 
+* the memory space has to match.
 
-1.  Memory Spaces must match
-    *  `Kokkos::View<int*> -> Kokkos::View<int*,HostSpace> ` /ok if default memory space is HostSpace
-2.  Data Type and Rank has to Match
-    *  `int*  -> int*          ` /ok
-    *  `int*  -> const int*    ` /ok
-    *  `const int*  -> int*    ` /not ok, const violation
-    *  `int** -> int*          ` /not ok, rank mismatch
-    *  `int*[3] -> int**       ` /ok
-    *  `int** -> int*[3]       ` /ok if runtime dimension check matches
-    *  `int*  -> long*         ` /not ok, type mismatch
-3.  Layouts must be compatible
-    *  `LayoutRight -> LayoutRight ` /ok
-    *  `LayoutLeft -> LayoutRight  ` /not ok
-    *  `LayoutLeft -> LayoutSride  ` /ok
-    *  `LayoutStride -> LayoutLeft ` /ok if runtime dimensions allow assignment
+Examples illustrating the rules are:
+
+1.  Data Type and Rank has to Match
+    *  `int*  -> int*          `   / ok
+    *  `int*  -> const int*    `   / ok
+    *  `const int*  -> int*    `   / not ok, const violation
+    *  `int** -> int*          `   / not ok, rank mismatch
+    *  `int*[3] -> int**       `   / ok
+    *  `int** -> int*[3]       `   / ok if runtime dimension check matches
+    *  `int*  -> long*         `   / not ok, type mismatch
+2.  Layouts must be compatible
+    *  `LayoutRight -> LayoutRight `  / ok
+    *  `LayoutLeft -> LayoutRight  `  / not ok
+    *  `LayoutLeft -> LayoutSride  `  / ok
+    *  `LayoutStride -> LayoutLeft `  / ok if runtime dimensions allow assignment
+3.  Memory Spaces must match
+    *  `Kokkos::View<int*> -> Kokkos::View<int*,HostSpace>`  / ok if default memory space is HostSpace
 4.  Memory Traits
 
