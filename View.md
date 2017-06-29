@@ -316,7 +316,7 @@ Another way to get optimized data accesses is to specify a memory trait. These t
 
 ### 6.5.1 Atomic access
 
-The `Atomic` access trait lets you create a View of dat such that every read or write to any entry uses an atomic update. Kokkos supports atomics for all data types independent of size. Restrictions are that you are
+The `Atomic` access trait lets you create a View of data such that every read or write to any entry uses an atomic update. Kokkos supports atomics for all data types independent of size. Restrictions are that you are
 1. not allowed to alias data for which atomic operations are performed, and 
 1. the results of non atomic accesses (including read) to data which is at the same time atomically accessed is not defined.
 
