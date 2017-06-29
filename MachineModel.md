@@ -8,17 +8,13 @@ The machine model has two important components:
 * _Memory spaces_, in which data structures can be allocated
 * _Execution spaces_, which execute parallel operations using data from one or more _memory spaces_.
 
-![abstractions](https://github.com/kokkos/ProgrammingGuide/blob/figure-edits/figures/kokkos-abstractions-doc.png)
-
-<h4>Figure 2.1 The Core Abstractions of the Kokkos Programming Model</h4>
-
 ## 2.1 Motivations
 
 Kokkos is comprised of two orthogonal aspects. The first of these is an underlying
 _abstract machine model_ which describes fundamental concepts required for the development of future portable and performant high performance computing applications; the second is a _concrete instantiation of the programming model_ written in C++, which allows programmers to write to the concept machine model. It is important to treat these two aspects of Kokkos as distinct entities because the underlying model being used by Kokkos could, in the future, be instantiated in additional languages beyond C++ yet the algorithmic specification would remain valid.
 
 ### 2.1.1 Kokkos Abstract Machine Model
-Kokkos assumes an _abstract machine model_ for the design of future shared-memory computing architectures. The model (shown in Figure 2.2) assumes that there may be multiple execution units in a compute node. For a more general discussion of abstract machine models for Exascale computing the reader should consult reference Ang<sup>1</sup>. In the figure shown here, we have elected to show two different types of compute units - one which represents multiple latency-optimized cores, similar to contemporary processor cores, and a second source of compute in the form of an off die accelerator. Of note is that the processor and accelerator each have distinct memories, each with unique performance properties, that may or may not be accessible across the node (i.e. the memory may be reachable or _shared_ by all execution units, but specific memory spaces may also be only accessible by specific execution units). The specific layout shown in Figure 2.2 is an instantiation of the Kokkos abstract machine model used to describe the potential for multiple types of compute engines and memories within a single node. In future systems, there may be a range of execution engines which are used in the node ranging from a single type of core, as in many/multi-core processors found today, through to a range of execution units where many-core processors may be joined to numerous types of accelerator cores. In order to ensure portability to the potential range of nodes, an abstraction of the compute engines and available memories are required. 
+Kokkos assumes an _abstract machine model_ for the design of future shared-memory computing architectures. The model (shown in Figure 2.1) assumes that there may be multiple execution units in a compute node. For a more general discussion of abstract machine models for Exascale computing the reader should consult reference Ang<sup>1</sup>. In the figure shown here, we have elected to show two different types of compute units - one which represents multiple latency-optimized cores, similar to contemporary processor cores, and a second source of compute in the form of an off die accelerator. Of note is that the processor and accelerator each have distinct memories, each with unique performance properties, that may or may not be accessible across the node (i.e. the memory may be reachable or _shared_ by all execution units, but specific memory spaces may also be only accessible by specific execution units). The specific layout shown in Figure 2.1 is an instantiation of the Kokkos abstract machine model used to describe the potential for multiple types of compute engines and memories within a single node. In future systems, there may be a range of execution engines which are used in the node ranging from a single type of core, as in many/multi-core processors found today, through to a range of execution units where many-core processors may be joined to numerous types of accelerator cores. In order to ensure portability to the potential range of nodes, an abstraction of the compute engines and available memories are required. 
 ***
 <sup>1</sup> Ang, J.A., et. al., **Abstract Machine Models and Proxy Architectures for Exascale Computing**,
 2014, Sandia National Laboratories and Lawrence Berkeley National Laboratory, DOE Computer Architecture Laboratories Project
@@ -26,7 +22,7 @@ Kokkos assumes an _abstract machine model_ for the design of future shared-memor
 
 ![node](https://github.com/kokkos/ProgrammingGuide/blob/figure-edits/figures/kokkos-node-doc.png)
 
-<h4>Figure 2.2 Conceptual Model of a Future High Performance Computing Node</h4>
+<h4>Figure 2.1 Conceptual Model of a Future High Performance Computing Node</h4>
 
 ## 2.2 Kokkos Execution Spaces
 Kokkos uses the term _execution spaces_ to describe a logical grouping of computation units which share an identical set of performance properties. An execution space provides a set of parallel execution resources which can be utilized by the programmer using several types of fundamental parallel operation. For a list of the operations available see Chapter 7.
@@ -36,7 +32,7 @@ An _instance_ of an execution space is a specific instantiation of an execution 
 
 ![execution-space](https://github.com/kokkos/ProgrammingGuide/blob/figure-edits/figures/kokkos-execution-space-doc.png)
 
-<h4>Figure 2.3 Example Execution Spaces in a Future Computing Node</h4>
+<h4>Figure 2.2 Example Execution Spaces in a Future Computing Node</h4>
 
 ### 2.2.2 Kokkos Memory Spaces
 The multiple types of memory which will become available in future computing nodes are abstracted by Kokkos through _memory spaces_. Each memory space provides a finite storage capacity at which data structures can be allocated and accessed. Different memory space types have different characteristics with respect to accessibility from execution spaces as well as their performance characteristics.
@@ -46,7 +42,7 @@ In much the same way execution spaces have specific instantiations through the a
 
 ![memory-space](https://github.com/kokkos/ProgrammingGuide/blob/figure-edits/figures/kokkos-memory-space-doc.png)
 
-<h4>Figure 2.4 Example Memory Spaces in a Future Computing Node</h4>
+<h4>Figure 2.3 Example Memory Spaces in a Future Computing Node</h4>
 
 **Atomic accesses to Memory in Kokkos** In cases where multiple executing threads attempt to read a memory address, complete a computation on the item, and write it back to same address in memory, an ordering collision may occur. These situations, known as _race conditions_ (because the data value stored in memory as the threads complete is dependent on which thread completes its memory operation last), are often the cause of non-determinism in parallel programs. A number of methods can be employed to ensure that race conditions do not occur in parallel programs including the use of locks (which allow only a single thread to gain access to data structure at a time), critical regions (which allow only one thread to execute a code sequence at any point in time) and _atomic_ operations. Memory operations which are atomic guarantee that a read, simple computation, and write to memory are completed as a single unit. This might allow application programmers to safely increment a memory value for instance, or more commonly, to safely accumulate values from multiple threads into a single memory location.
 
@@ -70,8 +66,7 @@ _Kokkos threads are for computing in parallel_, not for overlapping I/O and comp
 
 **Reproducible reductions and scans** Kokkos promises _nothing_ about the order in which the iterations of a parallel loop occur. However, it _does_ promise that if you execute the same parallel reduction or scan, using the same hardware resources and run-time settings, then you will get the same results each time you run the operation. "Same results" even means "with respect to floating-point rounding error."
 
-**Asynchronous parallel dispatch** This concerns the second category of code that calls Kokkos operations. In Kokkos, parallel dispatch executes _asynchronously_. This means that it may return "early," before it has actually completed. Nevertheless, it executes _in sequence_ with respect to other Kokkos operations on the same execution or memory space. This matters for things like timing. For example, a `parallel_for` may return "right away," so if you want to measure how long it takes, you must first call `fence()` on that execution space. This forces all functors to complete before `fence()`
-returns.
+**Asynchronous parallel dispatch** This concerns the second category of code that calls Kokkos operations. In Kokkos, parallel dispatch executes _asynchronously_. This means that it may return "early," before it has actually completed. Nevertheless, it executes _in sequence_ with respect to other Kokkos operations on the same execution or memory space. This matters for things like timing. For example, a `parallel_for` may return "right away," so if you want to measure how long it takes, you must first call `fence()` on that execution space. This forces all functors to complete before `fence()` returns.
 
 ### 2.3.1 Thread safety?
 
