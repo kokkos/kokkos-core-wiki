@@ -4,7 +4,9 @@
 
 The programming model Kokkos is characterized by 6 core abstractions: Execution Spaces, Execution Patterns, Execution Policies, Memory Spaces, Memory Layout and Memory Traits. These abstraction concepts allow the formulation of generic algorithms and data structures which can then be mapped to different types of architectures. Effectively, they allow for compile time transformation of algorithms to allow for adaptions of varying degrees of hardware parallelism as well as of the memory hierarchy.
 
-[Insert Figure 3.1 here; caption: Figure 3.1 The core abstractions of the Kokkos Programming Model ]
+![abstractions](https://github.com/kokkos/ProgrammingGuide/blob/figure-edits/figures/kokkos-abstractions-doc.png)
+
+<h4>Figure 3.1 The Core Abstractions of the Kokkos Programming Model</h4>
 
 ## 3.1 Execution Spaces
 
