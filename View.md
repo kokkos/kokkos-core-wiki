@@ -167,9 +167,9 @@ You may also refer to specific dimensions without a runtime parameter:
     const size_t n0 = a.dimension_0 ();
     const size_t n2 = a.dimension_2 ();
 
-Note the return type of `dimension_N()` is the `size_type` of the views memory space. This causes some issues if warning free compilation should be achieved since it will typically be necessary to cast the return value. In particular, in cases where the `size_type` is more conservative than required, it can be beneficial to cast the value to `int` since signed 32 bit integers typically give the best performance when used as index types. In index heavy codes, this performance difference can be significant compared to using `size_t` since the vector length on many architectures is twice as long for 32 bit values as for 64 bit values and signed integers have less stringent overflow testing requirements than unsigned integers.
+Note the return type of `dimension_N()` is the `size_type` of the views memory space. This causes some issues if warning-free compilation should be achieved since it will typically be necessary to cast the return value. In particular, in cases where the `size_type` is more conservative than required, it can be beneficial to cast the value to `int` since signed 32 bit integers typically give the best performance when used as index types. In index heavy codes, this performance difference can be significant compared to using `size_t` since the vector length on many architectures is twice as long for 32 bit values as for 64 bit values and signed integers have less stringent overflow testing requirements than unsigned integers.
 
-Users of the BLAS and LAPACK libraries may be familiar with the ideas of layout and stride. These libraries only accept matrices in column-major format. The stride between consecutive entries in the same column is 1, and the stride between consecutive entries in the same row is `LDA` (``leading dimension of the matrix A''). The number of rows may be less than `LDA`, but may not be greater.
+Users of the BLAS and LAPACK libraries may be familiar with the ideas of layout and stride. These libraries only accept matrices in column-major format. The stride between consecutive entries in the same column is 1, and the stride between consecutive entries in the same row is `LDA` ("leading dimension of the matrix A"). The number of rows may be less than `LDA`, but may not be greater.
 
 ### 6.3.2 Other layouts
 
@@ -211,11 +211,11 @@ You may ask a View for its layout via its `array_layout` typedef. This can be he
 
 ### 6.4.1 Memory spaces
 
-Views are allocated by default, in the default execution space's default memory space. You may access the View's execution space via its `execution_space` typedef, and its memory space via its `memory_space` typedef. You may also specify the memory space explicitly as a template parameter. For example, the following allocates a View in CUDA device memory:
+Views are allocated by default in the default execution space's default memory space. You may access the View's execution space via its `execution_space` typedef, and its memory space via its `memory_space` typedef. You may also specify the memory space explicitly as a template parameter. For example, the following allocates a View in CUDA device memory:
 
     View<int*, CudaSpace> a ("a", 100000);
 
-and the following allocates a View in ``host'' memory, using the default host execution space for first-touch initialization:
+and the following allocates a View in "host" memory, using the default host execution space for first-touch initialization:
 
     View<int*, HostSpace> a ("a", 100000);
 
@@ -225,13 +225,13 @@ Since there is no bijective association between execution spaces and memory spac
     View<int*, Device<OpenMP,CudaUVMSpace> > b ("b", 100000);
 
 In this case `a` and `b` will live in the same memory space, but `a` will be initialized on the GPU while `b` will be
-initialized on the host. The `Device` type can be accessed as a views `device_type` typedef. A `Device` has only three typedef members `device_type`, `execution_space` and `memory_space`. The `execution_space` and `memory_space` typedefs are the same for a view and the `device_type` typedef.
+initialized on the host. The `Device` type can be accessed as a views `device_type` typedef. A `Device` has only three typedef members: `device_type`, `execution_space` and `memory_space`. The `execution_space` and `memory_space` typedefs are the same for a view and the `device_type` typedef.
 
-It is important to understand that accessibility of a View does not depend on its execution space directly. It is only determined by its memory space. Therefore both `a` and `b` have the same access properties. They differ only in how they are initialized, as well as in where parallel kernels associated with operations such as resizing or deep copies are run.
+It is important to understand that accessibility of a View does not depend on its execution space directly. It is only determined by its memory space. Therefore both `a` and `b` have the same access properties. They differ only in how they are initialized and in where parallel kernels associated with operations such as resizing or deep copies are run.
 
 ### 6.4.2 Initialization
 
-A View's entries are initialized to zero by default. Initialization happens in parallel, for first-touch allocation over the first (leftmost) dimension of the View using the execution space of the View.
+A View's entries are initialized to zero by default. Initialization happens in parallel for first-touch allocation over the first (leftmost) dimension of the View using the execution space of the View.
 
 You may allocate a View without initializing. For example:
 
@@ -258,8 +258,7 @@ Deep copies can only be performed between views with an identical memory layout 
     View<int*[3], LayoutLeft, HostSpace> d ("d", 10);
     deep_copy (c, d); // This might give a runtime error
 
-The first one will not work because the default layouts of `CudaSpace` and `HostSpace` are different. The compiler will catch that since no overload of the `deep_copy` function exists to copy view from one layout to another. The second case will fail at runtime if padding settings are different for the two memory spaces. This would result in different
-allocation sizes and thus prevent a direct memcopy.
+The first one will not work because the default layouts of `CudaSpace` and `HostSpace` are different. The compiler will catch that since no overload of the `deep_copy` function exists to copy view from one layout to another. The second case will fail at runtime if padding settings are different for the two memory spaces. This would result in different allocation sizes and thus prevent a direct memcopy.
 
 The reasoning for allowing only direct bitwise copies is that a deep copy between different memory spaces would otherwise require a temporary copy of the data to which a bitwise copy is performed followed by a parallel kernel to transfer the data element by element.
 
@@ -279,7 +278,7 @@ Kokkos provides the following way to work around those limitations. First views 
 
 ### 6.4.4 How do I get the raw pointer?
 
-We discourage access to a View's "raw" pointer. This circumvents reference counting. That is, the memory may be deallocated once the View's reference count goes to zero, so holding on to a raw pointer may result in invalid memory access. Furthermore, it may not even be possible to access the View's memory from a given execution space. For example, a View in the `Cuda` space points to CUDA device memory. Also using raw pointers would normally defeat the usability of polymorpic layouts and automatic padding. Nevertheless, sometimes you really need access to the pointer. For such cases, we provide the `data()` method. For example:
+We discourage access to a View's "raw" pointer. This circumvents reference counting, that is, the memory may be deallocated once the View's reference count goes to zero so holding on to a raw pointer may result in invalid memory access. Furthermore, it may not even be possible to access the View's memory from a given execution space. For example, a View in the `Cuda` space points to CUDA device memory. Also using raw pointers would normally defeat the usability of polymorpic layouts and automatic padding. Nevertheless, for instances you really need access to the pointer, we provide the `data()` method. For example:
 
     // Legacy function that takes a raw pointer.
     extern void legacyFunction (double* x_raw, const size_t len);
