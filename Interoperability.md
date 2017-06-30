@@ -45,12 +45,17 @@ The `RangePolicy` starts a 1D grid of 1D thread blocks so that the index `i` is 
 
 ### 12.1.2 OpenMP
 
-One restriction on OpenMP interoperability is that it is not valid to increase the number of threads via `omp_set_num_threads()` after initializing Kokkos. This restriction is for book keeping necessary when Kokkos does allocation for internal per thread data structures. It is however valid to ask for the thread ID inside a Kokkos parallel kernel compiled for the OpenMP execution space. It is also valid to use OpenMP constructs such as OpenMP atomics inside a parallel kernel or functions called by it. However, what happens when mixing OpenMP and Kokkos atomics is undefined since those will not necessarily map to the the same underlying mechanism.
+One restriction on OpenMP interoperability is that it is not valid to increase the number of threads via `omp_set_num_threads()` after initializing Kokkos. This restriction is for bookkeeping necessary when Kokkos does allocation for internal per thread data structures. It is however valid to ask for the thread ID inside a Kokkos parallel kernel compiled for the OpenMP execution space. It is also valid to use OpenMP constructs such as OpenMP atomics inside a parallel kernel or functions called by it. However, what happens when mixing OpenMP and Kokkos atomics is undefined since those will not necessarily map to the the same underlying mechanism.
 
 
 ## 12.2 Legacy data structures
 
-There are two principal mechanisms to facilitate interoperability with legacy data structures: (i) Kokkos allocates data and raw pointers that are extracted to create legacy data structures and (ii) unmanaged views can be used to view externally allocated data. In both cases, it is mandatory to fix the Layout of the Kokkos view to the actual layout used in the legacy data structure. Note that the user is responsible for insuring proper access capabilities. For example, a pointer obtained from a view in the `CudaSpace` may only be accessed from Cuda kernels, and a View constructed from memory acquired through a call to `new` will typically only be accessible from Execution spaces which can access the `HostSpace`.
+There are two principal mechanisms to facilitate interoperability with legacy data structures: 
+
+1. Kokkos allocates data and raw pointers that are extracted to create legacy data structures and 
+1. unmanaged views can be used to view externally allocated data. 
+
+In both cases, it is mandatory to fix the Layout of the Kokkos view to the actual layout used in the legacy data structure. Note that the user is responsible for insuring proper access capabilities. For example, a pointer obtained from a view in the `CudaSpace` may only be accessed from Cuda kernels, and a View constructed from memory acquired through a call to `new` will typically only be accessible from Execution spaces which can access the `HostSpace`.
 
 ## 12.3 Raw allocations through Kokkos
 
@@ -65,8 +70,7 @@ A simple way to add support for multiple memory spaces to a legacy app is to use
                              (150*sizeof(int*));
    
     // Fill the pointer array with pointers to data in the Cuda Space
-    // Since it is not the UVM space you can access 2d_array[i][j]
-    // only inside a Cuda Kernel
+    // Since it is not the UVM space you can access 2d_array[i][j] only inside a Cuda Kernel
     for(int i=0;i<150;i++)
       2d_array[i] = (int*) kokkos_malloc<CudaSpace>(200*sizeof(int));
 
@@ -126,8 +130,7 @@ Alternatively one can create a view which directly references the external alloc
       t_1d_view d_a(a,n);
     
       // Create a 3D view of the second external allocation
-      // This assumes that the data had a row major layout
-      // (i.e. the third index is stride 1)
+      // This assumes that the data had a row major layout (i.e. the third index is stride 1)
       t_3d_view d_b(b,n,m);
     }
 
@@ -176,7 +179,7 @@ Inside of parallel sections `Kokkos::vector` switches to view semantics. That me
 
 ## 12.4 Calling non-Kokkos libraries
 
-There are no restrictions on calling non-Kokkos libraries outside of parallel kernels. However, due to the polymorphic layouts of Kokkos views it is often required to test layouts for compatibility with third party libraries. The usual Blas interface for example, expects matrixes to be laid out in column major format (i.e. LayoutLeft in Kokkos). Furthermore it is necessary to test that the library can access the memory space of the view.
+There are no restrictions on calling non-Kokkos libraries outside of parallel kernels. However, due to the polymorphic layouts of Kokkos views it is often required to test layouts for compatibility with third party libraries. The usual BLAS interface for example, expects matrixes to be laid out in column major format (i.e. LayoutLeft in Kokkos). Furthermore it is necessary to test that the library can access the memory space of the view.
 
     template<class Scalar, class Device>
     Scalar dot(View<const Scalar* , Device> a,
