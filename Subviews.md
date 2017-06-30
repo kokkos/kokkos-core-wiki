@@ -56,7 +56,7 @@ Another way of getting a subview is through the appropriate `View` constructor.
     
     View<double**,LayoutStride> A_sub(A,make_pair(2,4),make_pair(3,7));
 
-For this usage you must know the layouttype of the subview. On the positive side, such a direct construction is generally a bit cheaper than through the `Kokkos::subview` function.
+For this usage you must know the layout type of the subview. On the positive side, such a direct construction is generally a bit cheaper than through the `Kokkos::subview` function.
 
 ### 11.2.1 C++11 type deduction
 
@@ -64,9 +64,9 @@ Note the use of the C++11 keyword `auto` in the above example. A subview may hav
 
 ### 11.2.2 Dimension of a subview
 
-Suppose that a View has `k` dimensions. Then, when calling `subview` on that View, you must pass in `k` arguments. Every argument that is a single index -- that is, not a pair or `ALL()` -- reduces the dimension of the resulting View by 1.
+Suppose that a View has `k` dimensions. Then when calling `subview` on that View, you must pass in `k` arguments. Every argument that is a single index -- that is, not a pair or `ALL()` -- reduces the dimension of the resulting View by 1.
 
 ### 11.2.3 Degenerate Views
 
-Given a View with `k` dimensions, we call that View _degenerate_ if any of its dimensions is zero. Degenerate Views are useful for keeping code simple, by avoiding special cases. For example, consider a MPI (Message-Passing Interface) distributed-memory parallel code that uses Kokkos to represent local (per-process) data structures. Suppose that the code distributes a dense matrix (2-D array) in block row fashion over the MPI processes in a communicator. It could be that some processes own zero rows of the matrix. This may not be efficient, since those processes do no work yet participate in collectives, but it might be possible. In this case, allowing Views with zero rows would reduce the number of special cases in the code.
+Given a View with `k` dimensions, we call that View _degenerate_ if any of its dimensions is zero. Degenerate Views are useful for keeping code simple by avoiding special cases. For example, consider a MPI (Message-Passing Interface) distributed-memory parallel code that uses Kokkos to represent local (per-process) data structures. Suppose that the code distributes a dense matrix (2-D array) in block row fashion over the MPI processes in a communicator. It could be that some processes own zero rows of the matrix. This may not be efficient, since those processes do no work yet participate in collectives, but it might be possible. In this case, allowing Views with zero rows would reduce the number of special cases in the code.
   
