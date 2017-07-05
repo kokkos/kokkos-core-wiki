@@ -48,7 +48,7 @@ When using lambdas for nested parallelism (see Chapter 8 for details) using capt
 
 Kokkos lets users choose whether to use a functor or a lambda. Lambdas are convenient for short loop bodies. For a much more complicated loop body, you might find it easier for testing to separate it out and name it as a functor. Lambdas by definition are "anonymous functions," meaning that they have no name. This makes it harder to test them. Furthermore, if you would like to use lambdas with CUDA, you must have a sufficiently new version of CUDA. At the time of writing, CUDA 7.5 and later versions support host-device lambda with the special flag. CUDA 8.0 has improved interoperability with the host compiler. To enable this support, use the `KOKKOS_CUDA_OPTIONS=enable_lambda` option.
 
-Finally, the ``execution tag'' feature, which lets you put together several different parallel loop bodies into a single functor, only works with functors.  (See Chapter 8 for details.)
+Finally, the "execution tag" feature, which lets you put together several different parallel loop bodies into a single functor, only works with functors.  (See Chapter 8 for details.)
 
 ### 7.1.4 Specifying the execution space
 
