@@ -265,7 +265,7 @@ We show how to use this functor here:
 
 Kokkos' `parallel_scan` operation implements a _prefix scan_. A prefix scan is like a reduction over a 1-D array, but it also stores all intermediate results ("partial sums"). It can use any associative binary operator. The default is `operator+` and we call a scan with that operator a "sum scan" if we need to distinguish it from scans with other operators. The scan operation comes in two variants. An _exclusive scan_ excludes (hence the name) the first entry of the array, and an _inclusive scan_ includes that entry. Given an example array `(1, 2, 3, 4, 5)`, an exclusive sum scan overwrites the array with `(0, 1, 3, 6, 10)`, and an inclusive sum scan overwrites the array with `(1, 3, 6, 10, 15)`.
 
-Many operations that "look" sequential can be parallelized with a scan.  To learn more see Blelloch's book<sup>1</sup> (version of his PhD dissertation).
+Many operations that "look" sequential can be parallelized with a scan.  To learn more see Blelloch's book<sup>2</sup> (version of his PhD dissertation).
 
 Kokkos lets users specify a scan by either a functor or a lambda. Both look like their `parallel_reduce` equivalents, except that the `operator()` method or lambda takes three arguments: the loop index, the "update" value by nonconst reference, and a `bool`. Here is a lambda example where the intermediate results have type `float`.
 
