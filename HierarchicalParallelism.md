@@ -32,17 +32,17 @@ You should use Hierarchical Parallelism in particular in a number of cases:
 1. Data gather + reuse: If you gather data for a particular iteration of an outer loop, and then repeatably use it in an inner loop, Hierarchical Parallelism with scratch memory may match the use case well.
 1. Force Cache Blocking: Using Hierarchical Parallelism forces a developer into algorithmic choices which are good for cache blocking. This can sometimes lead to better performing algorithms than a simple flat parallelism.
 
-On the other hand you should probably not use Hierarchical Parallelism if you have tightly nested loops. For that use case a multi-dimensional Range Policy is the better fit.
+On the other hand you should probably not use Hierarchical Parallelism if you have tightly nested loops. For that use case, a multi-dimensional Range Policy is the better fit.
 
 ## 8.2 Thread teams
 
-Kokkos' most basic hierarchical parallelism concept is a thread team. A _thread team_ is a collection of threads which can synchronize, and which share a "scratch pad" memory (see Section 8.3).
+Kokkos' most basic hierarchical parallelism concept is a thread team. A _thread team_ is a collection of threads which can synchronize and which share a "scratch pad" memory (see Section 8.3).
 
-Instead of mapping a 1-D range of indices to hardware resources, Kokkos' thread teams map a 2-D index range. The first index is the _league rank_, the index of the team. The second index is the _team rank_, the thread index within a team. In CUDA this is equivalent to launching a 1-D grid of 1-D blocks. The league size is arbitrary -- that is, it is only limited by the integer size type -- while the team size must fit in the hardware constraints. As in CUDA, only a limited number of teams are actually active at the same time, and they must run to completion before new ones are executed. Consequently it is not valid to use inter thread-team synchronization mechanisms such as waits for events initiated by other thread teams.
+Instead of mapping a 1-D range of indices to hardware resources, Kokkos' thread teams map a 2-D index range. The first index is the _league rank_, the index of the team. The second index is the _team rank_, the thread index within a team. In CUDA this is equivalent to launching a 1-D grid of 1-D blocks. The league size is arbitrary -- that is, it is only limited by the integer size type -- while the team size must fit in the hardware constraints. As in CUDA, only a limited number of teams are actually active at the same time, and they must run to completion before new ones are executed. Consequently, it is not valid to use inter thread-team synchronization mechanisms such as waits for events initiated by other thread teams.
 
 ### 8.2.1 Creating a Policy instance
 
-Kokkos exposes use of thread teams with the `Kokkos::TeamPolicy` execution policy. To use thread teams you need to create a `Kokkos::TeamPolicy` instance. It can be created inline for the parallel dispatch call. The constructors require two arguments: a league size and a team size. In place of the team size a user can utilize `Kokkos::AUTO` to let Kokkos guess a good team size for a given architecture. Doing that is the recommend way for most developers to utilize the `TeamPolicy`. As with the  `Kokkos::RangePolicy` a specific execution tag, a specific execution space, a `Kokkos::IndexType`, and a `Kokkos::Schedule` can be given as optional template arguments.
+Kokkos exposes use of thread teams with the `Kokkos::TeamPolicy` execution policy. To use thread teams you need to create a `Kokkos::TeamPolicy` instance. It can be created inline for the parallel dispatch call. The constructors require two arguments: a league size and a team size. In place of the team size, a user can utilize `Kokkos::AUTO` to let Kokkos guess a good team size for a given architecture. Doing that is the recommended way for most developers to utilize the `TeamPolicy`. As with the  `Kokkos::RangePolicy` a specific execution tag, a specific execution space, a `Kokkos::IndexType`, and a `Kokkos::Schedule` can be given as optional template arguments.
 
     // Using default execution space and launching
     // a league with league_size teams with team_size threads each
@@ -75,12 +75,12 @@ The team policy's `member_type` provides the necessary functionality to use team
                 team_member.team_rank ();
         // Calculate the sum of the global thread ids of this team
          int team_sum = team_member.reduce (k);
-         // Atomicly add the value to a global value
+         // Atomically add the value to a global value
          a() += team_sum;
       });
 
 
-The name "`TeamPolicy`" makes it explicit that a kernel using it constitutes a parallel region with respect to the team.
+The name `TeamPolicy` makes it explicit that a kernel using it constitutes a parallel region with respect to the team.
 
 ## 8.3 Team scratch pad memory
 
