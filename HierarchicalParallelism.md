@@ -169,10 +169,7 @@ You may nest them and use them in conjunction with code that is aware of the lea
 
 ### 8.4.1 Team loops
 
-The first nested level of parallel loops splits an index range over the threads of a team. This motivates the policy name `TeamThreadRange`, which indicates that the loop is executed once by the team with the index range split over threads.
-The loop count is not limited to the number of threads in a team, and how the index range is mapped to threads is architecture dependent. It is not legal to nest multiple parallel loops using the `TeamThreadRange` policy. However, it is valid to have multiple parallel loops using the `TeamThreadRange` policy follow each other in sequence, in the same kernel.
-Note that it is not legal to make a write access to POD data outside of the closure of a nested parallel layer. 
-This is a conscious choice to prevent difficult to debug issues related to thread private, team shared and globally shared variables. A simple way to enforce this is by using the "capture by value"' clause with lambdas,
+The first nested level of parallel loops splits an index range over the threads of a team. This motivates the policy name `TeamThreadRange`, which indicates that the loop is executed once by the team with the index range split over threads. The loop count is not limited to the number of threads in a team, and how the index range is mapped to threads is architecture dependent. It is not legal to nest multiple parallel loops using the `TeamThreadRange` policy. However, it is valid to have multiple parallel loops using the `TeamThreadRange` policy follow each other in sequence, in the same kernel. Note that it is not legal to make a write access to POD data outside of the closure of a nested parallel layer. This is a conscious choice to prevent difficult-to-debug issues related to thread private, team shared and globally shared variables. A simple way to enforce this is by using the "capture by value"' clause with lambdas,
 but "capture by reference" is recommended for release builds since it typically results in better performance.
 With the lambda being considered as `const` inside the `TeamThreadRange` loop, the compiler will catch illegal accesses at compile time as a `const` violation.
 
@@ -226,7 +223,7 @@ The third pattern is `parallel_scan` which can be used to perform prefix scans.
 
 ### 8.4.2 Vector loops
 
-At the innermost level of nesting parallel loops in a kernel is comprised of the _vector_-loop. Vector level parallelism works identical to the team level loops using the execution policy `ThreadVectorRange`. In contrast to the team-level, there is no legal way to exploit the vector level outside of a parallel pattern using the `ThreadVectorRange`. However one can use such a parallel construct in- and outside- of a `TeamThreadRange` parallel operation.
+The innermost level of nesting parallel loops in a kernel is comprised of the _vector_-loop. Vector level parallelism works identically to the team level loops using the execution policy `ThreadVectorRange`. In contrast to the team-level, there is no legal way to exploit the vector level outside of a parallel pattern using the `ThreadVectorRange`. However one can use such a parallel construct in- and outside- of a `TeamThreadRange` parallel operation.
 
     using Kokkos::parallel_reduce;
     using Kokkos::TeamPolicy;
@@ -269,12 +266,10 @@ As stated above, a kernel is a parallel region with respect to threads (and vect
 
 Kokkos provides the `Kokkkos::single(Policy,Lambda)` function for this case. It currently accepts two policies:
 
-* `Kokkos::PerTeam` restricts execution of the lambda's   body to once per team
+* `Kokkos::PerTeam` restricts execution of the lambda's body to once per team
 * `Kokkos::PerThread` restricts execution of the lambda's body to once per thread (that is, to only one vector lane in a thread)
 
-The `single` function takes a lambda as its second argument. That lambda takes zero arguments or one argument by reference.
-If it takes no argument, its body must perform side effects in order to have an effect. If it takes one argument, the final value of that argument is broadcast to every executor on the level: i.e. every vectorlane of the thread, or every thread (and vector lane) of the team. It must always be correct for the lambda to capture variables by value
-(`[=]`, not `[&]`). Thus, if the lambda captures by reference, it must _not_ modify variables that it has captured by reference.
+The `single` function takes a lambda as its second argument. That lambda takes zero arguments or one argument by reference. If it takes no argument, its body must perform side effects in order to have an effect. If it takes one argument, the final value of that argument is broadcast to every executor on the level: i.e. every vector lane of the thread, or every thread (and vector lane) of the team. It must always be correct for the lambda to capture variables by value (`[=]`, not `[&]`). Thus, if the lambda captures by reference, it must _not_ modify variables that it has captured by reference.
 
     using Kokkos::parallel_for;
     using Kokkos::parallel_reduce;
@@ -364,7 +359,7 @@ To further illustrate the "parallel region" semantics of the team execution cons
 
 In this example `sum` will contain the value `N * team_size * 10`. Every thread in each team will compute `s=10` and then contribute it to the sum.
 
-Lets go one step further and add a nested `parallel_reduce`. By choosing the loopbound to be `team_size` every thread still only runs once through the inner loop.
+Lets go one step further and add a nested `parallel_reduce`. By choosing the loop bound to be `team_size` every thread still only runs once through the inner loop.
 
     using Kokkos::parallel_reduce;
     using Kokkos::TeamThreadRange;
@@ -383,6 +378,4 @@ Lets go one step further and add a nested `parallel_reduce`. By choosing the loo
       lsum += s;
     },sum);
 
-The answer in this case is nevertheless `N * team_size * team_size * 10`.
-Each thread computes `inner_s = 10`. But all threads in the team combine their results to compute a `s` value of `team_size * 10`. Since every thread in each team contributes that value to the global sum, we arrive at the final value of `N * team_size * team_size * 10`. If the intended goal was for each team to only contribute `s` once to the global sum,
-the contribution should have been protected with a `single` clause.
+The answer in this case is nevertheless `N * team_size * team_size * 10`. Each thread computes `inner_s = 10`. But all threads in the team combine their results to compute a `s` value of `team_size * 10`. Since every thread in each team contributes that value to the global sum, we arrive at the final value of `N * team_size * team_size * 10`. If the intended goal was for each team to only contribute `s` once to the global sum, the contribution should have been protected with a `single` clause.
