@@ -287,7 +287,7 @@ Kokkos may use a multiple-pass algorithm to implement scan. This means that it m
 For an exclusive scan, change the `update` value after updating the array, as in the above example. For an inclusive scan, change `update` _before_ updating the array. Just as with reductions, your functor may need to specify a nondefault `join` or `init` method if the defaults do not do what you want.
 
 ***
-<sup>1</sup>  Blelloch, Guy, _Vector Models for Data-Parallel Computing_, The MIT Press, 1990.
+<sup>2</sup>  Blelloch, Guy, _Vector Models for Data-Parallel Computing_, The MIT Press, 1990.
 ***
 
 ## 7.5 Function Name Tags
