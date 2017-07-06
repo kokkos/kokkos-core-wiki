@@ -52,7 +52,7 @@ Finally, the "execution tag" feature, which lets you put together several differ
 
 ### 7.1.4 Specifying the execution space
 
-If a functor has an `execution_space` public typedef, a parallel dispatch will only run the functor in that execution space. That's a good way to mark a functor as specific to an execution space. If the functor lacks this typedef, `parallel_for` will run it in the default execution space, unless you tell it otherwise (that's an advanced topic; see "execution policies"). Lambdas do not have typedefs, so they run on the default execution space, unless you tell Kokkos otherwise.
+If a functor has an `execution_space` public typedef, a parallel dispatch will only run the functor in that execution space. That's a good way to mark a functor as specific to an execution space. If the functor lacks this typedef, `parallel_for` will run it in the default execution space unless you tell it otherwise (that's an advanced topic; see "execution policies"). Lambdas do not have typedefs, so they run on the default execution space unless you tell Kokkos otherwise.
 
 ## 7.2 Parallel for
 
@@ -62,9 +62,9 @@ The lambda or the `operator()` method of the functor takes one argument. That ar
 
 ## 7.3 Parallel reduce
 
-Kokkos' `parallel_reduce` operation implements a reduction. It is like `parallel_for`, except that each iteration produces a value, and the values are accumulated into a single value with a user-specified associative binary operation. It corresponds to the OpenMP construct `#pragma omp parallel reduction`, but with fewer restrictions on the reduction operation.
+Kokkos' `parallel_reduce` operation implements a reduction. It is like `parallel_for`, except that each iteration produces a value and these iteration values are accumulated into a single value with a user-specified associative binary operation. It corresponds to the OpenMP construct `#pragma omp parallel reduction` but with fewer restrictions on the reduction operation.
 
-The lambda or the `operator()` method of the functor takes two arguments. The first argument is the parallel loop "index." The type of the index depends on the execution policy used for the `parallel_reduce`. If you give `parallel_reduce` an integer range as its first argument, or use `RangePolicy` explicitly, then the first argument of the lambda or operator()` method is an integer index. Its second argument is a nonconst reference to the type of the reduction result.
+The lambda or the `operator()` method of the functor takes two arguments. The first argument is the parallel loop "index," the type of which depends on the execution policy used for the `parallel_reduce`. If you give `parallel_reduce` an integer range as its first argument, or use `RangePolicy` explicitly, then the first argument of the lambda or `operator()` method is an integer index. Its second argument is a nonconst reference to the type of the reduction result.
 
 ### 7.3.1 Example using lambda
 
@@ -78,7 +78,7 @@ Here is an example reduction using a lambda, where the reduction result is a `do
     parallel_reduce (N, KOKKOS_LAMBDA (const int i, double& update) {
         update += x(i); }, sum);
 
-This version of `parallel_reduce` is easy to use, but it imposes some assumptions on the reduction. For example, it assumes that it is correct for threads to join their intermediate reduction results using binary `operator+`. If you want to change this, you must either implement your own reduction result type with a custom binary `operator+`, or define the reduction using a functor instead of a lambda.
+This version of `parallel_reduce` is easy to use, but it imposes some assumptions on the reduction. For example, it assumes that it is correct for threads to join their intermediate reduction results using binary `operator+`. If you want to change this, you must either implement your own reduction result type with a custom binary `operator+` or define the reduction using a functor instead of a lambda.
 
 ### 7.3.2 Example using functor
 
@@ -263,9 +263,9 @@ We show how to use this functor here:
 
 ## 7.4 Parallel scan
 
-Kokkos' `parallel_scan` operation implements a _prefix scan_. A prefix scan is like a reduction over a 1-D array, but it also stores all intermediate results ("partial sums"). It can use any associative binary operator. The default is `operator+`, and we call a scan with that operator a "sum scan" if we need to distinguish it from scans with other operators. The scan operation comes in two variants. An _exclusive scan_ excludes (hence the name) the first entry of the array, and an _inclusive scan_ includes that entry. Given an example array `(1, 2, 3, 4, 5)`, an exclusive sum scan overwrites the array with `(0, 1, 3, 6, 10)`, and an inclusive sum scan overwrites the array with `(1, 3, 6, 10, 15)`.
+Kokkos' `parallel_scan` operation implements a _prefix scan_. A prefix scan is like a reduction over a 1-D array, but it also stores all intermediate results ("partial sums"). It can use any associative binary operator. The default is `operator+` and we call a scan with that operator a "sum scan" if we need to distinguish it from scans with other operators. The scan operation comes in two variants. An _exclusive scan_ excludes (hence the name) the first entry of the array, and an _inclusive scan_ includes that entry. Given an example array `(1, 2, 3, 4, 5)`, an exclusive sum scan overwrites the array with `(0, 1, 3, 6, 10)`, and an inclusive sum scan overwrites the array with `(1, 3, 6, 10, 15)`.
 
-Many operations that "look" sequential can be parallelized with a scan.  To learn more, see e.g., "Vector Models for Data-Parallel Computing," Guy Blelloch, 1990 (the book version of Prof. Blelloch's PhD dissertation).
+Many operations that "look" sequential can be parallelized with a scan.  To learn more see Blelloch's book<sup>1</sup> (version of his PhD dissertation).
 
 Kokkos lets users specify a scan by either a functor or a lambda. Both look like their `parallel_reduce` equivalents, except that the `operator()` method or lambda takes three arguments: the loop index, the "update" value by nonconst reference, and a `bool`. Here is a lambda example where the intermediate results have type `float`.
 
@@ -285,6 +285,10 @@ Kokkos lets users specify a scan by either a functor or a lambda. Both look like
 Kokkos may use a multiple-pass algorithm to implement scan. This means that it may call your `operator()` or lambda multiple times per loop index value. The `final` Boolean argument tells you whether Kokkos is on the final pass. You must only update the array on the final pass.
 
 For an exclusive scan, change the `update` value after updating the array, as in the above example. For an inclusive scan, change `update` _before_ updating the array. Just as with reductions, your functor may need to specify a nondefault `join` or `init` method if the defaults do not do what you want.
+
+***
+<sup>1</sup>  Blelloch, Guy, _Vector Models for Data-Parallel Computing_, The MIT Press, 1990.
+***
 
 ## 7.5 Function Name Tags
 
