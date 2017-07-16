@@ -32,7 +32,7 @@ Kokkos consists mainly of header files. Only a few functions have to be compiled
         CUDA 7.0, 7.5 (with gcc 4.8.4)
         CUDA 8.0 (with gcc 5.3.0 on X86)
         CUDA 8.0 (with gcc 5.4.0 on Power8)
-        CUDA/Clang 8.0 using Clang/Trunk compiler
+        Clang 4.0 (with CUDA 8.0, using Clang as the CUDA compiler)
     
     Other working compilers
         Cygwin 2.1.0 64bit (with gcc 4.9.3 on X86)
@@ -113,7 +113,7 @@ We refer readers to Trilinos' documentation for details. Also, the `kokkos/confi
 
 ## 4.4 Building for CUDA
 
-Any Kokkos application compiled for CUDA embeds CUDA code via template metaprogramming. Thus, the whole application must be built with a CUDA-capable compiler. (At the moment, the only such compilers are NVIDIA's NVCC and Clang 4.0 [not released yet at time of writing].) More precisely, every compilation unit containing a Kokkos kernel or a function called from a Kokkos kernel has to be compiled with a CUDA-capable compiler. This includes files containing `Kokkos::View` allocations which call an initialization kernel.
+Any Kokkos application compiled for CUDA embeds CUDA code via template metaprogramming. Thus, the whole application must be built with a CUDA-capable compiler. (At the moment, the only such compilers are NVIDIA's NVCC and Clang 4.0.) More precisely, every compilation unit containing a Kokkos kernel or a function called from a Kokkos kernel has to be compiled with a CUDA-capable compiler. This includes files containing `Kokkos::View` allocations which call an initialization kernel.
 
 All current versions of the NVCC compiler have shortcomings when used as the main compiler for a project, in particular when part of a complex build system. For example, it does not understand most GCC command-line options, which must be prepended by the `-Xcompiler` flag when calling NVCC. Kokkos comes with a shell script, called `nvcc_wrapper`, that wraps NVCC to address these issues. We intend this as a drop-in replacement for a normal GCC-compatible compiler (e.g., GCC or Intel) in your build system. It analyzes the provided command-line options and prepends them correctly. It also adds the correct flags for compiling generic C++ files containing CUDA code (e.g., `*.cpp, *.cxx,` or `*.CC`). By default `nvcc_wrapper` calls `g++` as the host compiler. You may override this by providing NVCC's `-ccbin` option as a compiler flag. The default can be set by editing the script itself or by setting the environment variable `NVCC_WRAPPER_DEFAULT_COMPILER`.
 
