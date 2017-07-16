@@ -32,7 +32,7 @@ Kokkos consists mainly of header files. Only a few functions have to be compiled
         CUDA 7.0, 7.5 (with gcc 4.8.4)
         CUDA 8.0 (with gcc 5.3.0 on X86)
         CUDA 8.0 (with gcc 5.4.0 on Power8)
-        Clang 4.0 (with CUDA 8.0, using Clang as the CUDA compiler)
+        Clang 4.0 (with CUDA 8.0, using Clang as the CUDA compiler, requires 384.x CUDA drivers)
     
     Other working compilers
         Cygwin 2.1.0 64bit (with gcc 4.9.3 on X86)
