@@ -44,6 +44,7 @@ Instead of mapping a 1-D range of indices to hardware resources, Kokkos' thread 
 
 Kokkos exposes use of thread teams with the `Kokkos::TeamPolicy` execution policy. To use thread teams you need to create a `Kokkos::TeamPolicy` instance. It can be created inline for the parallel dispatch call. The constructors require two arguments: a league size and a team size. In place of the team size, a user can utilize `Kokkos::AUTO` to let Kokkos guess a good team size for a given architecture. Doing that is the recommended way for most developers to utilize the `TeamPolicy`. As with the  `Kokkos::RangePolicy` a specific execution tag, a specific execution space, a `Kokkos::IndexType`, and a `Kokkos::Schedule` can be given as optional template arguments.
 
+```c++
     // Using default execution space and launching
     // a league with league_size teams with team_size threads each
     Kokkos::TeamPolicy<>
@@ -57,11 +58,13 @@ Kokkos exposes use of thread teams with the `Kokkos::TeamPolicy` execution polic
     // Using a specific execution space and an execution tag
     Kokkos::TeamPolicy<SomeTag, ExecutionSpace>
             policy( league_size, team_size );
+```
 
 ### 8.2.2 Basic kernels
 
 The team policy's `member_type` provides the necessary functionality to use teams within a parallel kernel. It allows access to thread identifiers such as the league rank and size, and the team rank and size. It also provides team-synchronous actions such as team barriers, reductions and scans.
 
+```c++
     using Kokkos::TeamPolicy;
     using Kokkos::parallel_for;
     
@@ -78,7 +81,7 @@ The team policy's `member_type` provides the necessary functionality to use team
          // Atomically add the value to a global value
          a() += team_sum;
       });
-
+```
 
 The name `TeamPolicy` makes it explicit that a kernel using it constitutes a parallel region with respect to the team.
 
@@ -90,6 +93,7 @@ Kokkos exposes scratch pads through a special memory space associated with the e
 
 The following is an example of using the functor interface:
 
+```c++
     template<class ExecutionSpace>
     struct functor {
       typedef ExecutionSpace execution_space;
@@ -118,27 +122,32 @@ The following is an example of using the functor interface:
                sizeof(int)*160;
       }
     };
-
+```
 The `set_scratch_size` function of the `TeamPolicy` takes two or three arguments. The first argument specifies the level in the scratch hierarchy for which a specific size is requested. Different levels have different restrictions. Generally, the first level is restricted to a few tens of kilobytes roughly corresponding to L1 cache size. The second level can be used to get an aggregate over all teams of a few gigabyte, corresponding to available space in high-bandwidth memory. The third level generally falls back to capacity memory in the node. The second and third argument are either per-thread or per-team sizes for scratch memory. Note like previously discussed, the setter function does not modify the instance it is called on, but returns a copy of the policy object with adjusted scratch size request.
 
 Here are some examples:
 
+```c++
     TeamPolicy<> policy_1 = TeamPolicy<>(league_size, team_size).
                               set_scratch_size(1, PerTeam(1024), PerThread(32));
     TeamPolicy<> policy_2 = TeamPolicy<>(league_size, team_size).
                               set_scratch_size(1, PerThread(32));
     TeamPolicy<> policy_3 = TeamPolicy<>(league_size, team_size).
-                              set_scratch_size(1, PerTeam(1024));
+                              set_scratch_size(0, PerTeam(1024));
+```
 
 The total amount of scratch space available for each team will be the per-team value plus the per-thread value multiplied by the team-size. The interface allows users to specify those settings inline:
 
+```c++
     parallel_for(TeamPolicy<>(league_size, team_size).set_scratch_size(1, PerTeam(1024)),
       KOKKOS_LAMBDA (const TeamPolicy<>::member_type& team) {
         ...
     });
+```
 
 Instead of simply getting raw allocations in memory, users can also allocate Views directly in scratch memory. This is achieved by providing the shared memory handle as the first argument of the View constructor. Views also have a static member function which return their shared memory size requirements. The function expects the run-time dimensions as arguments, corresponding to View's constructor. Note that the view must be unmanaged (i.e. it must have the `Unmanaged` memory trait).
 
+```c++
     typedef Kokkos::DefaultExecutionSpace::scratch_memory_space
       ScratchSpace;
     // Define a view type in ScratchSpace
@@ -147,14 +156,16 @@ Instead of simply getting raw allocations in memory, users can also allocate Vie
     
     // Get the size of the shared memory allocation
     size_t shared_size = shared_int_2d::shmem_size(team_size);
-    Kokkos::parallel_for(Kokkos::TeamPolicy<>(league_size,team_size),
+    Kokkos::parallel_for(Kokkos::TeamPolicy<>(league_size,team_size).
+                           set_scratch_size(0,Kokkos::PerTeam(shared_size),
                          KOKKOS_LAMBDA ( member_type team_member) {
       // Get a view allocated in team shared memory.
       // The constructor takes the shared memory handle and the
       // runtime dimensions
-      shared_int_2d A(team_member.team_shmem(), team_member.team_size());
+      shared_int_2d A(team_member.team_scratch(0), team_member.team_size());
       ...
     });
+```
 
 ## 8.4 Nested parallelism
 
@@ -175,6 +186,7 @@ With the lambda being considered as `const` inside the `TeamThreadRange` loop, t
 
 The simplest use case is to have another `parallel_for` nested inside a kernel.
 
+```c++
     using Kokkos::parallel_for;
     using Kokkos::TeamPolicy;
     using Kokkos::TeamThreadRange;
@@ -189,9 +201,11 @@ The simplest use case is to have another `parallel_for` nested inside a kernel.
           // tmp += i; // This would be an illegal access
         });
     });
+```
 
 The `parallel_reduce` construct can be used to perform optimized team-level reductions:
 
+```c++
     using Kokkos::parallel_reduce;
     using Kokkos::TeamPolicy;
     using Kokkos::TeamThreadRange;
@@ -218,6 +232,7 @@ The `parallel_reduce` construct can be used to perform optimized team-level redu
             lsum *= update;
           }, init_value);
       });
+```
 
 The third pattern is `parallel_scan` which can be used to perform prefix scans.
 
@@ -225,6 +240,7 @@ The third pattern is `parallel_scan` which can be used to perform prefix scans.
 
 The innermost level of nesting parallel loops in a kernel is comprised of the _vector_-loop. Vector level parallelism works identically to the team level loops using the execution policy `ThreadVectorRange`. In contrast to the team-level, there is no legal way to exploit the vector level outside of a parallel pattern using the `ThreadVectorRange`. However one can use such a parallel construct in- and outside- of a `TeamThreadRange` parallel operation.
 
+```c++
     using Kokkos::parallel_reduce;
     using Kokkos::TeamPolicy;
     using Kokkos::TeamThreadRange;
@@ -257,6 +273,7 @@ The innermost level of nesting parallel loops in a kernel is comprised of the _v
             }, init_value);
           });
       });
+```
 
 As the name indicates the vector-level must be vectorizable. The parallel patterns will exploit available mechanisms to encourage vectorization by the compiler. When using the Intel compiler for example, the vector level loop will be internally decorated with `#pragma ivdep`, telling the compiler to ignore assumed vector dependencies.
 
@@ -271,6 +288,7 @@ Kokkos provides the `Kokkkos::single(Policy,Lambda)` function for this case. It 
 
 The `single` function takes a lambda as its second argument. That lambda takes zero arguments or one argument by reference. If it takes no argument, its body must perform side effects in order to have an effect. If it takes one argument, the final value of that argument is broadcast to every executor on the level: i.e. every vector lane of the thread, or every thread (and vector lane) of the team. It must always be correct for the lambda to capture variables by value (`[=]`, not `[&]`). Thus, if the lambda captures by reference, it must _not_ modify variables that it has captured by reference.
 
+```c++
     using Kokkos::parallel_for;
     using Kokkos::parallel_reduce;
     using Kokkos::TeamThreadRange;
@@ -315,10 +333,11 @@ The `single` function takes a lambda as its second argument. That lambda takes z
         global_array(thread.league_rank()) = sum;
       });
     });
-
+```
 
 Here is an example of using the broadcast capabilities to determine the start offset for a team in a buffer:
 
+```c++
     using Kokkos::parallel_for;
     using Kokkos::parallel_reduce;
     using Kokkos::TeamThreadRange;
@@ -342,9 +361,12 @@ Here is an example of using the broadcast capabilities to determine the start of
        my_offset = Kokkos::atomic_fetch_add(&offset(),lsum);
       });
       ...
+   });
+```
 
 To further illustrate the "parallel region" semantics of the team execution consider the following code:
 
+```c++
     using Kokkos::parallel_reduce;
     using Kokkos::TeamThreadRange;
     using Kokkos::TeamPolicy;
@@ -355,12 +377,13 @@ To further illustrate the "parallel region" semantics of the team execution cons
         for(int i = 0; i<10; i++) s++;
         lsum += s;
     },sum);
-
+```
 
 In this example `sum` will contain the value `N * team_size * 10`. Every thread in each team will compute `s=10` and then contribute it to the sum.
 
 Lets go one step further and add a nested `parallel_reduce`. By choosing the loop bound to be `team_size` every thread still only runs once through the inner loop.
 
+```c++
     using Kokkos::parallel_reduce;
     using Kokkos::TeamThreadRange;
     using Kokkos::TeamPolicy;
@@ -377,5 +400,8 @@ Lets go one step further and add a nested `parallel_reduce`. By choosing the loo
       },s);
       lsum += s;
     },sum);
+```
 
 The answer in this case is nevertheless `N * team_size * team_size * 10`. Each thread computes `inner_s = 10`. But all threads in the team combine their results to compute a `s` value of `team_size * 10`. Since every thread in each team contributes that value to the global sum, we arrive at the final value of `N * team_size * team_size * 10`. If the intended goal was for each team to only contribute `s` once to the global sum, the contribution should have been protected with a `single` clause.
+
+**[[Chapter 9: Custom Reductions]]**
