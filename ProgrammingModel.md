@@ -55,4 +55,4 @@ Layouts express the _mapping_ from logical (or algorithmical) indices to address
 
 Memory Traits specify _how a data structure is accessed_ in an algorithm. Traits express usage scenarios such as atomic access, random access and streaming loads or stores. By putting such attributes on data structures, an implementation of the programming model can insert optimal load and store operations. If a compiler implements the programming model, it could reason about the access modes and use that to inform code transformations.
 
-NEXT: **[[Chapter 4: Compiling|Compiling]]**
+**[[Chapter 4: Compiling|Compiling]]**
