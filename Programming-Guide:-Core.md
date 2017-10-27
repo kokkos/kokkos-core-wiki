@@ -5,7 +5,7 @@
         1. Execution Spaces
         2. Memory Spaces
         3. Space Instances
-    3. **[[Program Execution|MachineModel#23-Program-Execution]]**
+    3. **[[Program Execution|MachineModel#23-program-execution]]**
 3. **[[Programming Model|ProgrammingModel]]**
     1. Execution Spaces
     2. Execution Patterns
