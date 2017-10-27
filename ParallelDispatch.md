@@ -24,7 +24,9 @@ A _functor_ is one way to define the body of a parallel loop. It is a class or s
 
 The `operator()` method must be const, and must be marked with the `KOKKOS_INLINE_FUNCTION` macro. If building with CUDA, this macro will mark your method as suitable for running on the CUDA device (as well as on the host). If not building with CUDA, the macro is unnecessary but harmless. Here is an example of the signature of such a method:
 
+```c++
     KOKKOS_INLINE_FUNCTION void operator() (...) const;
+```
 
 The entire parallel operation (for, reduce, or scan) shares the same instance of the functor. However, any variables declared inside the `operator()` method are local to that iteration of the parallel loop. Kokkos may pass the functor instance by "copy," not by pointer or reference, to the execution space that executes the code. In particular, the functor might need to be copied to a different execution space than the host. For this reason, it is generally not valid to have any pointer or reference members in the functor. Pass in Kokkos Views by copy as well; this works by shallow copy. The functor is also passed as a const object, so it is not valid to change members of the functors. (However, it is valid for the functor to change the contents of, for example, a View or a raw array which is a member of the functor.)
 
@@ -70,13 +72,16 @@ The lambda or the `operator()` method of the functor takes two arguments. The fi
 
 Here is an example reduction using a lambda, where the reduction result is a `double`.
 
+```c++
     const size_t N = ...;
     View<double*> x ("x", N);
     // ... fill x with some numbers ...
     double sum = 0.0;
     // KOKKOS_LAMBDA macro includes capture-by-value specifier [=].
     parallel_reduce (N, KOKKOS_LAMBDA (const int i, double& update) {
-        update += x(i); }, sum);
+      update += x(i); 
+    }, sum);
+```
 
 This version of `parallel_reduce` is easy to use, but it imposes some assumptions on the reduction. For example, it assumes that it is correct for threads to join their intermediate reduction results using binary `operator+`. If you want to change this, you must either implement your own reduction result type with a custom binary `operator+` or define the reduction using a functor instead of a lambda.
 
@@ -84,6 +89,7 @@ This version of `parallel_reduce` is easy to use, but it imposes some assumption
 
 The following example shows a reduction using the _max-plus semiring_, where `max(a,b)` corresponds to addition and ordinary addition corresponds to multiplication:
 
+```c++
     class MaxPlus {
     public:
       // Kokkos reduction functors need the value_type typedef.
@@ -128,31 +134,24 @@ The following example shows a reduction using the _max-plus semiring_, where `ma
       KOKKOS_INLINE_FUNCTION void
       init (value_type& dst) const
       { // The identity under max is -Inf.
-        // Kokkos does not come with a portable way to access
-        // floating-point Inf and NaN. Trilinos does, however;
-        // see Kokkos::ArithTraits in the Tpetra package.
-    #ifdef __CUDA_ARCH__
-        return -CUDART_INF;
-    #else
-        return strtod ("-Inf", (char**) NULL);
-    #endif // __CUDA_ARCH__
+         return reduction_identity<valute_type>::max();
       }
     
     private:
       View<double*> x_;
     };
-
+```
 
 This example shows how to use the above functor:
 
+```c++
     const size_t N = ...;
     View<double*> x ("x", N);
     // ... fill x with some numbers ...
     
-    //  Trivial reduction in max-plus semiring is -Inf.
-    double result = strtod ("-Inf", (char**) NULL);
+    double result;
     parallel_reduce (N, MaxPlus (x), result);
-
+```
 
 ### 7.3.3 Example using functor with default join and init
 
@@ -160,6 +159,7 @@ If your functor does not supply a `join` method with the correct signature, Kokk
 
 Here is an example of a reduction functor that computes the sum of squares of the entries of a View. Since it does not implement the `join` and `init` methods, Kokkos will supply defaults.
 
+```c++
     struct SquareSum {
       // Specify the type of the reduction value with a "value_type"
       // typedef. In this case, the reduction value has type int.
@@ -191,12 +191,13 @@ This example has a short enough loop body that it would be better to use a lambd
     parallel_reduce (N, KOKKOS_LAMBDA (const int i, int& lsum) {
       lsum += i*i;
     });
-
+```
 
 ### 7.3.4 Reductions with an array of results
 
 Kokkos lets you compute reductions with an array of reduction results, as long as that array has a (run-time) constant number of entries. This currently only works with functors. Here is an example functor that computes column sums of a 2-D View.
 
+```c++
     struct ColumnSums {
       // In this case, the reduction result is an array of float.
       // Note the C++ notation for an array typedef.
@@ -248,9 +249,11 @@ Kokkos lets you compute reductions with an array of reduction results, as long a
         }
       }
     };
+```
 
 We show how to use this functor here:
 
+```c++
       const size_t numRows = 10000;
       const size_t numCols = 10;
     
@@ -259,7 +262,7 @@ We show how to use this functor here:
       ColumnSums cs (X);
       float sums[10];
       parallel_reduce (X.dimension_0 (), cs, sums);
-    
+```   
 
 ## 7.4 Parallel scan
 
@@ -269,6 +272,7 @@ Many operations that "look" sequential can be parallelized with a scan.  To lear
 
 Kokkos lets users specify a scan by either a functor or a lambda. Both look like their `parallel_reduce` equivalents, except that the `operator()` method or lambda takes three arguments: the loop index, the "update" value by nonconst reference, and a `bool`. Here is a lambda example where the intermediate results have type `float`.
 
+```c++
     View<float*> x = ...; // assume filled with input values
     const size_t N = x.dimension_0 ();
     parallel_scan (N, KOKKOS_LAMBDA (const int& i,
@@ -281,6 +285,7 @@ Kokkos lets users specify a scan by either a functor or a lambda. Both look like
         // change the update value before updating array.
         upd += x(i);
       });
+```
 
 Kokkos may use a multiple-pass algorithm to implement scan. This means that it may call your `operator()` or lambda multiple times per loop index value. The `final` Boolean argument tells you whether Kokkos is on the final pass. You must only update the array on the final pass.
 
@@ -294,6 +299,7 @@ For an exclusive scan, change the `update` value after updating the array, as in
 
 When writing class-based applications it often is useful to make the classes themselves functors. Using that approach allows the kernels to access all other class members, both data and functions. An issue coming up in that case is the necessity for multiple parallel kernels in the same class. Kokkos supports that through function name tags. An application can use optional (unused) first arguments to differentiate multiple operators in the same class. Execution policies can take the type of that argument as an optional template parameter. The same applies to init, join and final functions.
 
+```c++
     class Foo {
       struct BarTag {};
       struct RabTag {};
@@ -321,6 +327,8 @@ When writing class-based applications it often is useful to make the classes the
         ...
       }
     };
-
+```
 
 This approach can also be used to template the operators by templating the tag classes which is useful to enable compile time evaluation of appropriate conditionals.
+
+**[[Chapter 8: Hierarchical Parallelism]]**
