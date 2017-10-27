@@ -23,6 +23,7 @@ It is important to recognize that this does not lift certain restrictions. For e
 
 The most important thing to know for Cuda interoperability is that the provided macro `KOKKOS_INLINE_FUNCTION` evaluates to `__host__ __device__ inline`. This means that calling a pure `__device__` function (for example Cuda intrinsics or device functions of libraries) must be protected with the `__CUDA_ARCH__` pragma.
 
+```c++
     __device__ SomeFunction(double* x) {
       ...
     }
@@ -40,6 +41,7 @@ The most important thing to know for Cuda interoperability is that the provided 
         #endif
       }
     }
+```
 
 The `RangePolicy` starts a 1D grid of 1D thread blocks so that the index `i` is calculated as `blockIdx.x * blockDim.x + threadIdx.x`. For the `TeamPolicy` the number of teams is the grid dimension, while the number of threads per team is mapped to the Y-dimension of the Cuda thread-block. The optional vector length is mapped to the X-dimension. For example, `TeamPolicy<Cuda>(100,12,16)` would start a 1D grid of size 100 with block-dimensions (16,12,1) while `TeamPolicy<Cuda>(100,96)` would result in a grid size of 100 with block-dimensions of (1,96,1). The restrictions on the vector length (power of two and smaller than 32 for the Cuda execution space) guarantee that vector loops are performed by threads which are part of a single warp.
 
@@ -61,6 +63,7 @@ In both cases, it is mandatory to fix the Layout of the Kokkos view to the actua
 
 A simple way to add support for multiple memory spaces to a legacy app is to use `kokkos_malloc`, `kokkos_free` and `kokkos_realloc`. The functions are templated on the memory space and thus allow targeted placement of data structures:
 
+```c++
     // Allocate an array of 100 doubles in the default memory space
     double* a = (double*) kokkos_malloc<>(100*sizeof(double));
     
@@ -73,6 +76,7 @@ A simple way to add support for multiple memory spaces to a legacy app is to use
     // Since it is not the UVM space you can access 2d_array[i][j] only inside a Cuda Kernel
     for(int i=0;i<150;i++)
       2d_array[i] = (int*) kokkos_malloc<CudaSpace>(200*sizeof(int));
+```
 
 A common usage scenario of this capability is to allocate all memory in the CudaUVMSpace when compiling for GPUs. This allows all allocations to be accessible from legacy code sections as well as from parallel kernels written with Kokkos.
 
@@ -80,6 +84,7 @@ A common usage scenario of this capability is to allocate all memory in the Cuda
 
 When memory is managed externally, for example because Kokkos is used in a library which is given pointers to data allocations as input, it can be necessary or convenient to wrap the data into Kokkos views. If the library anyway receives the data to create a copy, it is straight forward to allocate the internal data structure as a view and copy the data in a parallel kernel element by element. Note that you might need to first copy into a host view before copying to the actual destination memory space:
 
+```c++
     template<class ExecutionSpace>
     void MyKokkosFunction(double* a, const double** b, int n, int m) {
       // Define the host execution space and the view types
@@ -117,9 +122,11 @@ When memory is managed externally, for example because Kokkos is used in a libra
       // Copy the data from the host to the device
       deep_copy(d_b,h_b);
     }
+```
 
 Alternatively one can create a view which directly references the external allocation. If that data is a multi-dimensional view, it is important to specify the Layout explicitly. Furthermore, all data must be part of the same allocation.
 
+```c++
     void MyKokkosFunction(int* a, const double* b, int n, int m) {
       // Define the host execution space and the view types
       typedef View<int*, DefaultHostExecutionSpace, Unmanaged> t_1d_view;
@@ -133,12 +140,13 @@ Alternatively one can create a view which directly references the external alloc
       // This assumes that the data had a row major layout (i.e. the third index is stride 1)
       t_3d_view d_b(b,n,m);
     }
-
+```
 
 ### 12.3.2 Views as the fundamental data owning structure
 
 Another option is to let Kokkos handle the basic allocations using Views and then construct the legacy data structures around them. Again, it is important to fix the Layout of the Views to whatever the layout of the legacy data was.
 
+```c++
     // Allocate a 2D view with row major layout
     View<double**,LayoutRight,HostSpace> a("A",n,m);
     
@@ -148,6 +156,7 @@ Another option is to let Kokkos handle the basic allocations using Views and the
     // Fill the array with pointers to the rows of a
     for(int i=0; i<n; i++)
       a_old[i] = &a(i,0);
+```
 
 ### 12.3.3 std::vector
 
@@ -161,6 +170,7 @@ Kokkos provides a drop in replacement for `std::vector` with `Kokkos::vector`. O
 
 Inside of parallel sections `Kokkos::vector` switches to view semantics. That means in particular that assignments are shallow copies. Certain functions will also throw runtime errors when called inside a parallel kernel; this includes resize and push.
 
+```c++
     // Create a vector of 1000 double elements
     Kokkos::vector<double> v(1000);
     // Create another vector as a copy of v;
@@ -176,11 +186,13 @@ Inside of parallel sections `Kokkos::vector` switches to view semantics. That me
     
     // Now x contains the first 1000 uneven numbers
     // v contains the first 1000 even numbers
+```
 
 ## 12.4 Calling non-Kokkos libraries
 
 There are no restrictions on calling non-Kokkos libraries outside of parallel kernels. However, due to the polymorphic layouts of Kokkos views it is often required to test layouts for compatibility with third party libraries. The usual BLAS interface for example, expects matrixes to be laid out in column major format (i.e. LayoutLeft in Kokkos). Furthermore it is necessary to test that the library can access the memory space of the view.
 
+```c++
     template<class Scalar, class Device>
     Scalar dot(View<const Scalar* , Device> a,
                View<const Scalar*, Device> b) {
@@ -201,4 +213,4 @@ There are no restrictions on calling non-Kokkos libraries outside of parallel ke
                               a.dimension_0() );
       }
     }
-
+```
