@@ -331,4 +331,4 @@ When writing class-based applications it often is useful to make the classes the
 
 This approach can also be used to template the operators by templating the tag classes which is useful to enable compile time evaluation of appropriate conditionals.
 
-**[[Chapter 8: Hierarchical Parallelism]]**
+**[[Chapter 8: Hierarchical Parallelism|HierarchicalParallelism]]**
