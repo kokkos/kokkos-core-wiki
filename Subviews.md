@@ -35,11 +35,13 @@ These languages may have more elaborate notation for expressing sets of indices 
 
 To take a subview of a View, you can use the `Kokkos::subview` function. This function is overloaded for all different kinds of Views and index ranges. For example, the following code is equivalent to the above example `A(2:4, 3:7)`:
 
+```c++
     const size_t N0 = ...;
     const size_t N1 = ...;
     View<double**> A ("A", N0, N1);
     
     auto A_sub = subview (A, make_pair (2, 4), make_pair (3, 7));
+```
 
 In the above example and those that follow in this chapter, we assume that `Kokkos::View`, `Kokkos::subview`, `Kokkos::ALL`, `std::make_pair`, and `std::pair` have been imported into the working C++ namespace.
 
@@ -50,11 +52,13 @@ A subview has the same reference count as its parent `View`, so the parent `View
 
 Another way of getting a subview is through the appropriate `View` constructor.
 
+```c++
     const size_t N0 = ...;
     const size_t N1 = ...;
     View<double**> A ("A", N0, N1);
     
     View<double**,LayoutStride> A_sub(A,make_pair(2,4),make_pair(3,7));
+```
 
 For this usage you must know the layout type of the subview. On the positive side, such a direct construction is generally a bit cheaper than through the `Kokkos::subview` function.
 
@@ -70,3 +74,4 @@ Suppose that a View has `k` dimensions. Then when calling `subview` on that View
 
 Given a View with `k` dimensions, we call that View _degenerate_ if any of its dimensions is zero. Degenerate Views are useful for keeping code simple by avoiding special cases. For example, consider a MPI (Message-Passing Interface) distributed-memory parallel code that uses Kokkos to represent local (per-process) data structures. Suppose that the code distributes a dense matrix (2-D array) in block row fashion over the MPI processes in a communicator. It could be that some processes own zero rows of the matrix. This may not be efficient, since those processes do no work yet participate in collectives, but it might be possible. In this case, allowing Views with zero rows would reduce the number of special cases in the code.
   
+**[[Chapter 12: Interoperability|Interoperability]]**
