@@ -28,17 +28,18 @@ Kokkos aims to relieve some of this burden by optimizing array management and ac
 
 A View is an array of zero or more dimensions. Programmers set both the type of entries and the number of dimensions at compile time as part of the type of the View. For example, the following specifies and allocates a View with four dimensions for entries that have type `int`:
 
-    const size_t N0 = ...;
-    const size_t N1 = ...;
-    const size_t N2 = ...;
-    const size_t N3 = ...;
-    View<int****> a ("some label", N0, N1, N2, N3);
-
+```c++
+const size_t N0 = ...;
+const size_t N1 = ...;
+const size_t N2 = ...;
+const size_t N3 = ...;
+View<int****> a ("some label", N0, N1, N2, N3);
+```
 The string argument is a label which Kokkos uses for debugging. Different Views may have the same label. The ellipses indicate some integer dimensions specified at run time. Users may also set some dimensions at compile time. For example, the following View has two dimensions where the first (represented by the asterisk) is a run-time dimension and the second (represented by [3]) is a compile-time dimension. Thus, the View is an N by 3 array of type double, where N is specified at run time in the View's constructor.
-
-    const size_t N = ...;
-    View<double*[3]> b ("another label", N);
-
+```c++
+const size_t N = ...;
+View<double*[3]> b ("another label", N);
+```
 Views may have up to (at most) 8 dimensions and any number of these may be run-time or compile-time. The only limitation is that the run-time dimensions (if any) must appear first followed by all the compile-time dimensions (if any). For example, the following are valid three-dimensional View types:
 
 * `View<int***>`  (3 run-time dimensions)
@@ -59,10 +60,11 @@ Note that the above used constructor is not necessarily available for all view t
 
 Another important thing to keep in mind is that a `View` handle is a stateful object. It is not legal to create a `View` handle from raw memory by typecasting a pointer. To call any operator on a `View,` including the assignment operator, its constructor must have been called before. If it is necessary to initialize raw memory with a `View` handle, one can legally do so using a move constructor ("placement new"). The above has nothing to do with the data a `View` is referencing. It is completely legal to give a typecast pointer to the constructor of an unmanaged `View`.
 
-    View<int*> *a_ptr = (View<int*>*) malloc(10*sizeof(View<int*);
-    a_ptr[0] = View<int*>("A0",1000); // This is illegal
-    new(&a_ptr[1]) View<int*>("A1",10000); // This is legal 
-
+```c++
+View<int*> *a_ptr = (View<int*>*) malloc(10*sizeof(View<int*);
+a_ptr[0] = View<int*>("A0",1000); // This is illegal
+new(&a_ptr[1]) View<int*>("A1",10000); // This is legal 
+```
 
 ### 6.2.2 What types of data may a View contain?
 
@@ -76,15 +78,15 @@ While it is in principle6.2.2 possible to have Kokkos Views of arbitrary objects
 ### 6.2.3 Const Views
 
 A view can have const data semantics (i.e. its entries are read-only) by specifying a `const` data type.  It is a compile-time error to assign to an entry of a "const View". Assignment semantics are equivalent to a pointer to const data. A const View means the _entries_ are const; you may still assign to a const View. `View<const double*>` corresponds exactly to `const double*`, and `const View<double*>` to `double* const`. Therefore, it does not make sense to allocate a const View since you could not obtain a non-const view of the same data and you can not assign to it. You can however assign a non-const view to a const view. Here is an example:
+```c++
+const size_t N0 = ...;
+View<double*> a_nonconst ("a_nonconst", N0);
 
-    const size_t N0 = ...;
-    View<double*> a_nonconst ("a_nonconst", N0);
-
-    // Assign a nonconst View to a const View
-    View<const double*> a_const = a_nonconst;
-    // Pass the const View to some read-only function.
-    const double result = readOnlyFunction (a_const);
-
+// Assign a nonconst View to a const View
+View<const double*> a_const = a_nonconst;
+// Pass the const View to some read-only function.
+const double result = readOnlyFunction (a_const);
+```
 
 Const Views often enables the compiler to optimize more aggressively by allowing it to reason about possible write conflicts and data aliasing. For example, in a vector update `a(i+1)+=b(i)` with skewed indexing, it is safe to vectorize if `b` is a View of const data.
 
@@ -92,15 +94,17 @@ Const Views often enables the compiler to optimize more aggressively by allowing
 
 You may access an entry of a View using parentheses enclosing a comma-delimited list of integer indices. This looks just like a Fortran multidimensional array access. For example:
 
-    const size_t N = ...;
-    View<double*[3][4]> a ("some label", N);
-    // KOKKOS_LAMBDA macro includes capture-by-value specifier [=].
-    parallel_for (N, KOKKOS_LAMBDA (const ptrdiff_t i) {
-        const size_t j = ...;
-        const size_t k = ...;
-        const double a_ijk = a(i,j,k);
-        /* rest of the loop body */
-    });
+```c++
+const size_t N = ...;
+View<double*[3][4]> a ("some label", N);
+// KOKKOS_LAMBDA macro includes capture-by-value specifier [=].
+parallel_for (N, KOKKOS_LAMBDA (const ptrdiff_t i) {
+  const size_t j = ...;
+  const size_t k = ...;
+  const double a_ijk = a(i,j,k);
+  /* rest of the loop body */
+});
+```
 
 Note how in the above example, we only access the View's entries in a parallel loop body. In general, you may only access a View's entries in an execution space which is allowed to access that View's memory space. For example, if the default execution space is `Cuda`, a View for which no specific Memory Space was given may not be accessed in host code<sup>1</sup>.
 
@@ -118,10 +122,11 @@ Kokkos automatically manages deallocation of Views through a reference-counting 
 
 For example, the following code allocates two Views, then assigns one to the other. That assignment may deallocate the first View, since it reduces its reference count to zero. It then increases the reference count of the second View, since now both Views point to it.
 
-    View<int*> a ("a", 10);
-    View<int*> b ("b", 10);
-    a = b; // assignment does shallow copy
-
+```c++
+View<int*> a ("a", 10);
+View<int*> b ("b", 10);
+a = b; // assignment does shallow copy
+```
 
 For efficiency, View allocation and reference counting turn off inside of Kokkos' parallel for, reduce, and scan operations. This affects what you can do with Views inside of Kokkos' parallel operations.
 
@@ -129,17 +134,18 @@ For efficiency, View allocation and reference counting turn off inside of Kokkos
 
 Kokkos Views can be resized using the `resize` non-member function. It takes an existing view as its input by reference and the new dimension information corresponding to the constructor arguments. A new view with the new dimensions will be created and a kernel will be run in the views execution space to copy the data element by element from the old view to the new one. Note that the old allocation is only deleted if the view to be resized was the _only_ view referencing the underlying allocation.
 
-    // Allocate a view with 100x50x4 elements
-    View<int**[4]> a( "a", 100,50);
+```c++
+// Allocate a view with 100x50x4 elements
+View<int**[4]> a( "a", 100,50);
     
-    // Resize a to 200x50x4 elements; the original allocation is freed
-    resize(a, 200,50);
+// Resize a to 200x50x4 elements; the original allocation is freed
+resize(a, 200,50);
     
-    // Create a second view b viewing the same data as a
-    View<int**[4]> b = a;
-    // Resize a again to 300x60x4 elements; b is still 200x50x4
-    resize(a,300,60);
-
+// Create a second view b viewing the same data as a
+View<int**[4]> b = a;
+// Resize a again to 300x60x4 elements; b is still 200x50x4
+resize(a,300,60);
+```
 
 ## 6.3 Layout
 
@@ -153,19 +159,23 @@ Strides may differ from dimensions. For example, Kokkos reserves the right to pa
 
 Strides are accessed using the `stride` method. It takes a raw integer array, and only fills in as many entries as the rank of the View. For example:
 
-    const size_t N0 = ...;
-    const size_t N1 = ...;
-    const size_t N2 = ...;
-    View<int***> a ("a", N0, N1, N2);
+```c++
+const size_t N0 = ...;
+const size_t N1 = ...;
+const size_t N2 = ...;
+View<int***> a ("a", N0, N1, N2);
     
-    int dim1 = a.dimension (1); // returns dimension 1
-    size_t strides[3]
-    a.strides (dims); // fill 'strides' with strides
+int dim1 = a.dimension (1); // returns dimension 1
+size_t strides[3]
+a.strides (dims); // fill 'strides' with strides
+```
 
 You may also refer to specific dimensions without a runtime parameter:
 
-    const size_t n0 = a.dimension_0 ();
-    const size_t n2 = a.dimension_2 ();
+```c++
+const size_t n0 = a.dimension_0 ();
+const size_t n2 = a.dimension_2 ();
+```
 
 Note the return type of `dimension_N()` is the `size_type` of the views memory space. This causes some issues if warning-free compilation should be achieved since it will typically be necessary to cast the return value. In particular, in cases where the `size_type` is more conservative than required, it can be beneficial to cast the value to `int` since signed 32 bit integers typically give the best performance when used as index types. In index heavy codes, this performance difference can be significant compared to using `size_t` since the vector length on many architectures is twice as long for 32 bit values as for 64 bit values and signed integers have less stringent overflow testing requirements than unsigned integers.
 
@@ -185,27 +195,30 @@ In contrast, `View<int**, OpenMP>` has `LayoutRight`, so that a single thread ac
 
 We prefer that users let Kokkos determine a View's layout, based on its execution space. However, sometimes you really need to specify the layout. For example, the BLAS and LAPACK libraries only accept column-major arrays.  If you want to give a View to the BLAS or LAPACK library, that View must be `LayoutLeft`. You may specify the layout as a template parameter of View. For example:
 
-    const size_t N0 = ...;
-    const size_t N1 = ...;
-    View<double**, LayoutLeft> A ("A", N0, N1);
+```c++
+const size_t N0 = ...;
+const size_t N1 = ...;
+View<double**, LayoutLeft> A ("A", N0, N1);
     
-    // Get 'LDA' for BLAS / LAPACK
-    int strides[2]; // any integer type works in stride()
-    A.stride (strides);
-    const int LDA = strides[1];
+// Get 'LDA' for BLAS / LAPACK
+int strides[2]; // any integer type works in stride()
+A.stride (strides);
+const int LDA = strides[1];
+```
 
 You may ask a View for its layout via its `array_layout` typedef. This can be helpful for C++ template metaprogramming. For example:
 
-    template<class ViewType>
-    void callBlas (const ViewType& A) {
-      typedef typename ViewType::array_layout array_layout;
-      if (std::is_same<array_layout, LayoutLeft>::value) {
-        callSomeBlasFunction (A.data(), ...);
-      } else {
-        throw std::invalid_argument ("A is not LayoutLeft");
-      }
-    }
-
+```c++
+template<class ViewType>
+void callBlas (const ViewType& A) {
+  typedef typename ViewType::array_layout array_layout;
+  if (std::is_same<array_layout, LayoutLeft>::value) {
+    callSomeBlasFunction (A.data(), ...);
+  } else {
+    throw std::invalid_argument ("A is not LayoutLeft");
+  }
+}
+```
 
 ## 6.4 Managing Data Placement
 
@@ -213,16 +226,22 @@ You may ask a View for its layout via its `array_layout` typedef. This can be he
 
 Views are allocated by default in the default execution space's default memory space. You may access the View's execution space via its `execution_space` typedef, and its memory space via its `memory_space` typedef. You may also specify the memory space explicitly as a template parameter. For example, the following allocates a View in CUDA device memory:
 
-    View<int*, CudaSpace> a ("a", 100000);
+```c++
+View<int*, CudaSpace> a ("a", 100000);
+```
 
 and the following allocates a View in "host" memory, using the default host execution space for first-touch initialization:
 
-    View<int*, HostSpace> a ("a", 100000);
+```c++
+View<int*, HostSpace> a ("a", 100000);
+```
 
 Since there is no bijective association between execution spaces and memory spaces, Kokkos provides a way to explicitly provide both to a View as a `Device`.
 
-    View<int*, Device<Cuda,CudaUVMSpace> > a ("a", 100000);
-    View<int*, Device<OpenMP,CudaUVMSpace> > b ("b", 100000);
+```c++
+View<int*, Device<Cuda,CudaUVMSpace> > a ("a", 100000);
+View<int*, Device<OpenMP,CudaUVMSpace> > b ("b", 100000);
+```
 
 In this case `a` and `b` will live in the same memory space, but `a` will be initialized on the GPU while `b` will be
 initialized on the host. The `Device` type can be accessed as a views `device_type` typedef. A `Device` has only three typedef members: `device_type`, `execution_space` and `memory_space`. The `execution_space` and `memory_space` typedefs are the same for a view and the `device_type` typedef.
@@ -235,7 +254,9 @@ A View's entries are initialized to zero by default. Initialization happens in p
 
 You may allocate a View without initializing. For example:
 
-    View<int*> x (ViewAllocateWithoutInitializing (label), 100000);
+```c++
+View<int*> x (ViewAllocateWithoutInitializing (label), 100000);
+```
 
 This is useful in situations where your dominant use of the View exhibits a complicated access pattern. In this case it is best to run the most costly kernel directly after initialization to execute the first touch pattern and get optimal memory affinity.
 
@@ -244,19 +265,23 @@ This is useful in situations where your dominant use of the View exhibits a comp
 Copying data from one view to another, in particular between views in different memory spaces, is called deep copy.
 Kokkos never performs a hidden deep copy. To do so a user has to call the `deep_copy` function. For example:
 
-    View<int*> a ("a", 10);
-    View<int*> b ("b", 10);
-    deep_copy (a, b); // copy contents of b into a
+```c++
+View<int*> a ("a", 10);
+View<int*> b ("b", 10);
+deep_copy (a, b); // copy contents of b into a
+```
 
 Deep copies can only be performed between views with an identical memory layout and padding. For example the following two operations are not valid:
 
-    View<int*[3], CudaSpace> a ("a", 10);
-    View<int*[3], HostSpace> b ("b", 10);
-    deep_copy (a, b); // This will give a compiler error
+```c++
+View<int*[3], CudaSpace> a ("a", 10);
+View<int*[3], HostSpace> b ("b", 10);
+deep_copy (a, b); // This will give a compiler error
 
-    View<int*[3], LayoutLeft, CudaSpace> c ("c", 10);
-    View<int*[3], LayoutLeft, HostSpace> d ("d", 10);
-    deep_copy (c, d); // This might give a runtime error
+View<int*[3], LayoutLeft, CudaSpace> c ("c", 10);
+View<int*[3], LayoutLeft, HostSpace> d ("d", 10);
+deep_copy (c, d); // This might give a runtime error
+```
 
 The first one will not work because the default layouts of `CudaSpace` and `HostSpace` are different. The compiler will catch that since no overload of the `deep_copy` function exists to copy view from one layout to another. The second case will fail at runtime if padding settings are different for the two memory spaces. This would result in different allocation sizes and thus prevent a direct memcopy.
 
@@ -264,42 +289,48 @@ The reasoning for allowing only direct bitwise copies is that a deep copy betwee
 
 Kokkos provides the following way to work around those limitations. First views have a `HostMirror` typedef which is a view type with compatible layout inside the `HostSpace`. Additionally there is a `create_mirror` and `create_mirror_view` function which allocate views of the `HostMirror` type of a view. The difference between the two is that `create_mirror` will always allocate a new view, while `create_mirror_view` will only create a new view if the original one is not in `HostSpace`.
 
-    View<int*[3], MemorySpace> a ("a", 10);
-    // Allocate a view in HostSpace with the layout and padding of a
-    typename View<int*[3], MemorySpace>::HostMirror b =
-        create_mirror(a);
-    // This is always a memcopy
-    deep_copy (a, b);
+```c++
+View<int*[3], MemorySpace> a ("a", 10);
+// Allocate a view in HostSpace with the layout and padding of a
+typename View<int*[3], MemorySpace>::HostMirror b =
+    create_mirror(a);
+// This is always a memcopy
+deep_copy (a, b);
     
-    typename View<int*[3]>::HostMirror c =
-    create_mirror_view(a);
-    // This is a no-op if MemorySpace is HostSpace
-    deep_copy (a, c)
+typename View<int*[3]>::HostMirror c =
+create_mirror_view(a);
+// This is a no-op if MemorySpace is HostSpace
+deep_copy (a, c)
+```
 
 ### 6.4.4 How do I get the raw pointer?
 
 We discourage access to a View's "raw" pointer. This circumvents reference counting, that is, the memory may be deallocated once the View's reference count goes to zero so holding on to a raw pointer may result in invalid memory access. Furthermore, it may not even be possible to access the View's memory from a given execution space. For example, a View in the `Cuda` space points to CUDA device memory. Also using raw pointers would normally defeat the usability of polymorpic layouts and automatic padding. Nevertheless, for instances you really need access to the pointer, we provide the `data()` method. For example:
 
-    // Legacy function that takes a raw pointer.
-    extern void legacyFunction (double* x_raw, const size_t len);
-    
-    // Your function that takes a View.
-    void myFunction (const View<double*>& x) {
-      // DON'T DO THIS UNLESS YOU MUST
-      double* a_raw = a.data ();
-      const size_t N = x.dimension_0 ();
-      legacyFunction (a_raw, N);
-    }
+```c++
+// Legacy function that takes a raw pointer.
+extern void legacyFunction (double* x_raw, const size_t len);
+  
+// Your function that takes a View.
+void myFunction (const View<double*>& x) {
+  // DON'T DO THIS UNLESS YOU MUST
+  double* a_raw = a.data ();
+  const size_t N = x.dimension_0 ();
+  legacyFunction (a_raw, N);
+}
+```
 
 A user is in most cases also allowed to obtain a pointer to a specific element via the usual `&` operator. For example
 
-    // Legacy function that takes a raw pointer.
-    void someLibraryFunction (double* x_raw);
+```c++
+// Legacy function that takes a raw pointer.
+void someLibraryFunction (double* x_raw);
     
-    KOKKOS_INLINE_FUNCTION
-    void foo(const View<double*>& x) {
-      someLibraryFunction(&x[3]);
-    }
+KOKKOS_INLINE_FUNCTION
+void foo(const View<double*>& x) {
+  someLibraryFunction(&x(3));
+}
+```
 
 This is only valid if a Views reference type is an `lvalue`. That property can be queried statically at compile time from the view through its `reference_is_lvalue` member.
 
@@ -308,11 +339,13 @@ This is only valid if a Views reference type is an `lvalue`. That property can b
 
 Another way to get optimized data accesses is to specify a memory trait. These traits are used to declare intended use of the particular view of an allocation. For example, a particular kernel might use a view only for streaming writes. By declaring that intention, Kokkos can insert the appropriate store intrinsics on each architecture if available. Access traits are specified through an optional template parameter which comes last in the list of parameters. Multiple traits can be combined with binary "or" operators:
 
-    View<double*, MemoryTraits<SomeTrait> > a;
-    View<const double*, MemoryTraits<SomeTrait | SomeOtherTrait> > b;
-    View<int*, LayoutLeft, MemoryTraits<SomeTrait | SomeOtherTrait> > c;
-    View<int*, MemorySpace, MemoryTraits<SomeTrait | SomeOtherTrait> > d;
-    View<int*, LayoutLeft, MemorySpace, MemoryTraits<SomeTrait> > e;
+```c++
+View<double*, MemoryTraits<SomeTrait> > a;
+View<const double*, MemoryTraits<SomeTrait | SomeOtherTrait> > b;
+View<int*, LayoutLeft, MemoryTraits<SomeTrait | SomeOtherTrait> > c;
+View<int*, MemorySpace, MemoryTraits<SomeTrait | SomeOtherTrait> > d;
+View<int*, LayoutLeft, MemorySpace, MemoryTraits<SomeTrait> > e;
+```
 
 ### 6.5.1 Atomic access
 
@@ -324,20 +357,23 @@ Performance characteristics of atomic operations depend on the data type. Some t
 
 Types for which atomic access are performed must support the necessary operators such as =, +=, -=, +, - etc. as well as have a number of `volatile` overloads of functions such as assign and copy constructors defined. 
 
-    View<int*> a("a" , 100);
-    View<int*, MemoryTraits<Atomic> > a_atomic = a;
+```c++
+View<int*> a("a" , 100);
+View<int*, MemoryTraits<Atomic> > a_atomic = a;
     
-    a_atomic(1) += 1; // This access will do an atomic addition
-
+a_atomic(1) += 1; // This access will do an atomic addition
+```
 
 ### 6.5.2 Random Access
 
 The `RandomAccess` trait declares the intent to access a View irregularly (in particular non consecutively). If used for a const View in the `CudaSpace` or `CudaUVMSpace`, Kokkos will use texture fetches for accesses when executing in the `Cuda` execution space. For example:
 
-    const size_t N0 = ...;
-    View<int*> a_nonconst ("a", N0); // allocate nonconst View
-    // Assign to const, RandomAccess View
-    View<const int*, RandomAccess> a_ra = a_nonconst;
+```c++
+const size_t N0 = ...;
+View<int*> a_nonconst ("a", N0); // allocate nonconst View
+// Assign to const, RandomAccess View
+View<const int*, RandomAccess> a_ra = a_nonconst;
+```
 
 If the default execution space is `Cuda`, access to a `RandomAccess` View may use CUDA texture fetches. Texture fetches are not cache coherent with respect to writes so you must use read-only access. The texture cache is optimized for noncontiguous access since it has a shorter cache line than the regular cache.
 
@@ -347,49 +383,51 @@ While `RandomAccess` is valid for other execution spaces, currently no specific 
 
 The standard idiom for View is to pass it around using as few template parameters as possible. Then, assign to a View with the desired access traits only at the "last moment" when those access traits are needed just before entering a computational kernel. This lets you template C++ classes and functions on the View type without proliferating instantiations. Here is an example:
 
-    // Compute a sparse matrix-vector product, for a sparse
-    // matrix stored in compressed sparse row (CSR) format.
-    void
-    spmatvec (const View<double*>& y,
+```c++
+// Compute a sparse matrix-vector product, for a sparse
+// matrix stored in compressed sparse row (CSR) format.
+void spmatvec (const View<double*>& y,
       const View<const size_t*>& ptr,
       const View<const int*>& ind,
       const View<const double*>& val,
       const View<const double*>& x)
-    {
-      // Access to x has less locality than access to y.
-      View<const double*, RandomAccess> x_ra = x;
-      typedef View<const size_t*>::size_type size_type;
+{
+  // Access to x has less locality than access to y.
+  View<const double*, RandomAccess> x_ra = x;
+  typedef View<const size_t*>::size_type size_type;
     
-      parallel_for (y.dimension_0 (), KOKKOS_LAMBDA (const size_type i) {
-          double y_i = y(i);
-          for (size_t k = ptr(i); k < ptr(i+1); ++k) {
-            y_i += val(k) * x_ra(ind(k));
-          }
-          y(i) = y_i;
-        });
+  parallel_for (y.dimension_0 (), KOKKOS_LAMBDA (const size_type i) {
+    double y_i = y(i);
+    for (size_t k = ptr(i); k < ptr(i+1); ++k) {
+      y_i += val(k) * x_ra(ind(k));
     }
+    y(i) = y_i;
+  });
+}
+```
 
 ### 6.5.4 Unmanaged Views
 
 It's always better to let Kokkos control memory allocation but sometimes you don't have a choice. You might have to work with an application or an interface that returns a raw pointer, for example. Kokkos lets you wrap raw pointers in an _unmanaged View_. "Unmanaged" means that Kokkos does _not_ do reference counting or automatic deallocation for those Views. The following example shows how to create an unmanaged View of host memory. You may do this for CUDA device memory too, or indeed for memory allocated in any memory space, by specifying the View's execution or memory space accordingly.
 
-    // Sometimes other code gives you a raw pointer, ...
-    const size_t N0 = ...;
-    double* x_raw = malloc (N0 * sizeof (double));
-    {
-      // ... but you want to access it with Kokkos.
-      //
-      // malloc() returns host memory, so we use the host memory space HostSpace.  
-      // Unmanaged Views have no label because labels work with the reference counting system.
-      View<double*, HostSpace, MemoryTraits<Unmanaged> >
-        x_view (x_raw, N0);
-    
-      functionThatTakesKokkosView (x_view);
-    
-      // It's safest for unmanaged Views to fall out of scope before freeing their memory.
-    }
-    free (x_raw);
-
+```c++
+// Sometimes other code gives you a raw pointer, ...
+const size_t N0 = ...;
+double* x_raw = malloc (N0 * sizeof (double));
+{
+  // ... but you want to access it with Kokkos.
+  //
+  // malloc() returns host memory, so we use the host memory space HostSpace.  
+  // Unmanaged Views have no label because labels work with the reference counting system.
+  View<double*, HostSpace, MemoryTraits<Unmanaged> >
+    x_view (x_raw, N0);
+ 
+  functionThatTakesKokkosView (x_view);
+  
+  // It's safest for unmanaged Views to fall out of scope before freeing their memory.
+}
+free (x_raw);
+```
 
 ### 6.5.5 Conversion Rules and Function Specialization
 
@@ -410,10 +448,11 @@ Examples illustrating the rules are:
     *  `int*  -> long*         `   / not ok, type mismatch
 2.  Layouts must be compatible
     *  `LayoutRight -> LayoutRight `  / ok
-    *  `LayoutLeft -> LayoutRight  `  / not ok
+    *  `LayoutLeft -> LayoutRight  `  / not ok except for 1D Views
     *  `LayoutLeft -> LayoutSride  `  / ok
     *  `LayoutStride -> LayoutLeft `  / ok if runtime dimensions allow assignment
 3.  Memory Spaces must match
     *  `Kokkos::View<int*> -> Kokkos::View<int*,HostSpace>`  / ok if default memory space is HostSpace
 4.  Memory Traits
 
+**[[Chapter 7: Parallel Dispatch|ParallelDispatch]]**
