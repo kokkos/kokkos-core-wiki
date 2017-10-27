@@ -8,7 +8,9 @@ hierarchies and multiple types of execution resources. It currently can use
 OpenMP, Pthreads and CUDA as backend programming models.
 
 This Wiki provides a number of resources for both new and old Kokkos developers.
-
+```
+Note: The Wiki is a work in progress. Some of the content is not yet available (red links).
+```
 ## **[[The Programming Guide|The Kokkos Programming Guide]]**
 
 The Programming Guide contains in-depth descriptions of the capabilities provided
