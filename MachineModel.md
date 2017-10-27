@@ -76,3 +76,5 @@ _Kokkos threads are for computing in parallel_, not for overlapping I/O and comp
 ### 2.3.1 Thread safety?
 
 Users may wonder about "thread safety," that is, whether multiple operating system threads may safely call into Kokkos concurrently. Kokkos' thread safety depends on both its implementation and on the execution and memory spaces that the implementation uses. The C++ implementation has made great progress towards (non-Kokkos) thread safety of View memory management. For now, however, the most portable approach is for only one (non-Kokkos) thread of execution to control Kokkos. Also, be aware that operating system threads might interfere with Kokkos' performance depending on the execution space that you use.
+
+NEXT **[[Programming Model|ProgrammingModel]]**
