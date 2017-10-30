@@ -4,3 +4,4 @@ The Kokkos Programming Guide consists of three separate documents describing
 * [[The Containers Library|ContentContainers]]
 * [[The Algorithms Library|ContentAlgorihtms]]
 
+Sandia National Laboratories report **SAND2017-11710 W**
