@@ -119,4 +119,14 @@ All current versions of the NVCC compiler have shortcomings when used as the mai
 
 Many people use a system like Environment Modules (see `http://modules.sourceforge.net/`) to manage their shell environment. When using a module system, it can be useful to provide different versions for different back-end compiler types (e.g., `icpc, pgc++, g++,` and `clang`). To use the `nvcc_wrapper` in conjunction with MPI wrappers, simply overwrite which C++ compiler is called by the MPI wrapper. For example, you can reset OpenMPI's C++ compiler by setting the `OMPI_CXX` environment variable. Make sure that `nvcc_wrapper` calls the host compiler with which the MPI library was compiled.
 
+## 4.4 Execution Space Restrictions
+
+Currently, Kokkos organizes its execution spaces into three categories:
+
+ - Host Serial: A top-level `Serial` execution space with no parallelism or concurrency
+ - Host Parallel: Typically a threading model for CPUs, currently: `OpenMP`, `Threads`, and `QThreads`.
+ - Device Parallel: Typically an attached GPU, currently: `CUDA`, `OpenMPTarget`, and `ROCm`.
+
+The current Kokkos policy is to allow users, at compile time, to enable *at most one* execution space from each category. This prevents incompatibilities between different spaces in the same category from degrading the user's correctness and performance.
+
 **[[Chapter 5: Initialization|Initialization]]**
