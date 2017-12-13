@@ -88,7 +88,7 @@ args.device_id = 1;
 Kokkos::initialize(args);
 ```
 
-## 5.4 Finalization
+## 5.3 Finalization
 
 At the end of each program, Kokkos needs to be shut down in order to free resources; do this by calling `Kokkos::finalize()`. You may wish to set this to be called automatically at program exit, either by setting an `atexit` hook or by attaching the function to `MPI_COMM_SELF` so that it is called automatically at `MPI_Finalize`.
 
