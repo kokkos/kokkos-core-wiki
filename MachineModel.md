@@ -34,13 +34,6 @@ An _instance_ of an execution space is a specific instantiation of an execution 
 
 <h4>Figure 2.2 Example Execution Spaces in a Future Computing Node</h4>
 
-Currently, Kokkos organizes its execution spaces into three categories:
- - Host Serial: A top-level `Serial` execution space with no parallelism or concurrency
- - Host Parallel: Typically a threading model for CPUs, examples include `OpenMP` and `Threads`.
- - Device Parallel: Typically an attached GPU, examples include `CUDA` and `ROCm`.
-
-The current Kokkos policy is to disallow the use of more than one execution space in each category. This prevents incompatibilities between different spaces in the same category from degrading the user's correctness and performance.
-
 ### 2.2.2 Kokkos Memory Spaces
 The multiple types of memory which will become available in future computing nodes are abstracted by Kokkos through _memory spaces_. Each memory space provides a finite storage capacity at which data structures can be allocated and accessed. Different memory space types have different characteristics with respect to accessibility from execution spaces as well as their performance characteristics.
 
