@@ -14,19 +14,20 @@ Note that the two explicitly supported build methods should not be mixed. For ex
 Kokkos consists mainly of header files. Only a few functions have to be compiled into object files outside of the application's source code. Those functions are contained in `.cpp` files inside the `kokkos/core/src` directory and its subdirectories. The files are internally protected with macros to prevent compilation if the related execution space is not enabled. Thus, it is not necessary to create a list of included object files specific to your compilation target; one may simply compile all `.cpp` files. The enabled features are controlled via macros which have to be provided in the compilation line or in the `KokkosCore_config.h` include file; a list of macros can be found in Table 4.1. In order to compile Kokkos, a C++11 compliant compiler is needed. For an up to date list of compilers which are tested on a nightly basis, please refer to the README on the github repository. At the time of writing supported compilers include:
 
     Primary tested compilers on X86
-        GCC 4.7.2, 4.8.4, 4.9.2, 5.1.0, 5.2.0;  
-        Intel 14.0.4, 15.0.2, 16.0.1, 17.0.098, 17.1.132;  
-        Clang 3.5.2, 3.6.1, 3.7.1, 3.8.1, 3.9.0;  
+        GCC 4.8.4, 4.9.3, 5.1.0, 5.3.0, 6.1.0;
+        Intel 15.0.2, 16.0.1, 16.0.3, 17.0.098, 17.1.132;  
+        Clang 3.6.1, 3.7.1, 3.8.1, 3.9.0;  
         Cuda 7.0, 7.5, 8.0;
-        PGI 17.1  
+        PGI 17.10  
     Primary tested compilers on Power 8
         XL 13.1.3 (OpenMP, Serial)
         GCC 5.4.0 (OpenMP, Serial)
+        Cuda 8.0, 9.0 (with gcc 5.4.0);
     Primary tested compilers on Intel KNL
         GCC 6.2.0
-        Intel 16.2.181, 17.0.098 (with gcc 4.7.2)
-        Intel 17.1.132, 17.2.132 (with gcc 4.9.3)
-        Intel 18.0.061 (beta) (with gcc 4.9.3)
+        Intel 16.4.258 (with gcc 4.7.4)
+        Intel 17.2.174 (with gcc 4.9.3)
+        Intel 18.0.128 (with gcc 4.9.3)
     
     Secondary tested compilers
         CUDA 7.0, 7.5 (with gcc 4.8.4)
@@ -45,12 +46,12 @@ Kokkos consists mainly of header files. Only a few functions have to be compiled
   
  Macro | Effect | Comment
  :--- |:--- |:---
-`KOKKOS_HAVE_CUDA`| Enable the CUDA execution space. |Requires a compiler capable of understanding CUDA-C. See Section 4.4.
-`KOKKOS_HAVE_OPENMP`| Enable the OpenMP execution space. |Requires the compiler to support OpenMP (e.g., `-fopenmp`).
-`KOKKOS_HAVE_PTHREADS`| Enable the Threads execution space. | Requires linking with `libpthread`.
-`KOKKOS_HAVE_Serial`| Enable the Serial execution space. |
-`KOKKOS_HAVE_CXX11`| Enable internal usage of C++11 features. | The code needs to be compiled with the C++11 standard. Most compilers accept the -std=c++11 flag for this.
-`KOKKOS_HAVE_HWLOC`| Enable thread and memory pinning via hwloc. | Requires linking with `libhwloc`. 
+`KOKKOS_ENABLE_CUDA`| Enable the CUDA execution space. |Requires a compiler capable of understanding CUDA-C. See Section 4.4.
+`KOKKOS_ENABLE_OPENMP`| Enable the OpenMP execution space. |Requires the compiler to support OpenMP (e.g., `-fopenmp`).
+`KOKKOS_ENABLE_PTHREADS`| Enable the Threads execution space. | Requires linking with `libpthread`.
+`KOKKOS_ENABLE_Serial`| Enable the Serial execution space. |
+`KOKKOS_ENABLE_CXX11`| Enable internal usage of C++11 features. | The code needs to be compiled with the C++11 standard. Most compilers accept the -std=c++11 flag for this.
+`KOKKOS_ENABLE_HWLOC`| Enable thread and memory pinning via hwloc. | Requires linking with `libhwloc`. 
 
 
 ## 4.2 Using Kokkos' Makefile system
@@ -107,9 +108,43 @@ Variable  | Description
 
 The Trilinos project (see `trilinos.org`) is an effort to develop algorithms and enabling technologies within an object-oriented software framework for the solution of large-scale, complex multiphysics engineering and scientific problems. Trilinos is organized into packages. Even though Kokkos is a stand-alone software project, Trilinos uses Kokkos extensively. Thus, Trilinos' source code includes Kokkos' source code, and builds Kokkos as part of its build process.
 
-Trilinos' build system uses CMake. Thus, in order to build Kokkos as part of Trilinos, you must first install CMake (version `2.8.12` or newer; CMake `3.x` works). To enable Kokkos when building Trilinos, set the CMake option `Trilinos_ENABLE_Kokkos`. Trilinos' build system lets packages express dependencies on other packages or external libraries. If you enable any Trilinos package (e.g., Tpetra) that has a required dependency on Kokkos, Trilinos will enable Kokkos automatically. Configuration macros are automatically inferred from Trilinos settings. For example, if the CMake option `Trilinos_ENABLE_OpenMP` is `ON`, Trilinos will define the macro `KOKKOS_HAVE_OPENMP`. Trilinos' build system will autogenerate the previously mentioned `KokkosCore_config.h` file that contains those macros.
+Trilinos' build system uses CMake. Thus, in order to build Kokkos as part of Trilinos, you must first install CMake (version `2.8.12` or newer; CMake `3.x` works). To enable Kokkos when building Trilinos, set the CMake option `Trilinos_ENABLE_Kokkos`. Trilinos' build system lets packages express dependencies on other packages or external libraries. If you enable any Trilinos package (e.g., Tpetra) that has a required dependency on Kokkos, Trilinos will enable Kokkos automatically. Configuration macros are automatically inferred from Trilinos settings. For example, if the CMake option `Trilinos_ENABLE_OpenMP` is `ON`, Trilinos will define the macro `KOKKOS_ENABLE_OPENMP`. Trilinos' build system will autogenerate the previously mentioned `KokkosCore_config.h` file that contains those macros.
 
-We refer readers to Trilinos' documentation for details. Also, the `kokkos/config` directory includes examples of Trilinos configuration scripts.
+Trilinos' CMake build system utilizes Kokkos' build system to set compiler flags, compiler options, architectures, etc. CMake variables `CMAKE_CXX_COMPILER`, `CMAKE_C_COMPILER`, and `CMAKE_FORTRAN_COMPILER` are used to specify the compiler. To configure Trilinos for various archictures, with Kokkos enabled, the CMake variable `KOKKOS_ARCH` should be set to the appropriate architecture as specified in the Table 4.3.
+
+<h4>Table 4.3: Architecture Variables </h4>
+Variable | Description
+ ---: |:---
+`AMDAVX` | AMD CPU
+`ARMv80` | ARMv8.0 Compatible CPU
+`ARMv81` | ARMv8.1 Compatible CPU
+`ARMv8-ThunderX` | ARMv8 Cavium ThunderX CPU
+`BGQ` | IBM Blue Gene Q
+`Power7` | IBM POWER7 and POWER7+ CPUs
+`Power8` | IBM POWER8 CPUs
+`Power9` | IBM POWER9 CPUs
+`WSM` | Intel Westmere CPUs
+`SNB` | Intel Sandy/Ivy Bridge CPUs
+`HSW` | Intel Haswell CPUs
+`BDW` | Intel Broadwell Xeon E-class CPUs
+`SKX` | Intel Sky Lake Xeon E-class HPC CPUs (AVX512)
+`KNC` | Intel Knights Corner Xeon Phi
+`KNL` | Intel Knights Landing Xeon Phi
+`Kepler30` | NVIDIA Kepler generation CC 3.0
+`Kepler32` | NVIDIA Kepler generation CC 3.2
+`Kepler35` | NVIDIA Kepler generation CC 3.5
+`Kepler37` | NVIDIA Kepler generation CC 3.7
+`Maxwell50` | NVIDIA Maxwell generation CC 5.0
+`Maxwell52` | NVIDIA Maxwell generation CC 5.2
+`Maxwell53` | NVIDIA Maxwell generation CC 5.3
+`Pascal60` | NVIDIA Pascal generation CC 6.0
+`Pascal61` | NVIDIA Pascal generation CC 6.1
+
+Multiple architectures can be specified by separting the architecture variables with a semi-colon, for example `KOKKOS_ARCH:STRING="HSW;Kepler35` sets architecture variables for a machine with Intel Haswell CPUs and a NVIDIA Tesla K40 GPU. In addition, when setting the `KOKKOS_ARCH` variable it is not necessary to pass required architecture-specific flags to CMake, for example via the `CMAKE_CXX_FLAGS` variable.
+
+Several Trilinos packages with CUDA support currently require the use of UVM (note UVM is enabled by default when configuring Trilinos with CUDA enabled, unless the user explictly disables it). To ensure proper compilation and execution for such packages, the environment variables `export CUDA_LAUNCH_BLOCKING=1` and `export CUDA_MANAGED_FORCE_DEVICE_ALLOC=1` must be set.
+
+We refer readers to Trilinos' documentation for further details.
 
 ## 4.4 Building for CUDA
 
