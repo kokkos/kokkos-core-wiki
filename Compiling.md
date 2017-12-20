@@ -112,8 +112,9 @@ Trilinos' build system uses CMake. Thus, in order to build Kokkos as part of Tri
 
 Trilinos' CMake build system utilizes Kokkos' build system to set compiler flags, compiler options, architectures, etc. CMake variables `CMAKE_CXX_COMPILER`, `CMAKE_C_COMPILER`, and `CMAKE_FORTRAN_COMPILER` are used to specify the compiler. To configure Trilinos for various archictures, with Kokkos enabled, the CMake variable `KOKKOS_ARCH` should be set to the appropriate architecture as specified in the Table 4.3.
 
-<h4>Table 4.3: Architecture Variables </h4>
-Variable | Description
+<h4>Table 4.3: Architecture Variables</h4>
+
+Variable  | Description
  ---: |:---
 `AMDAVX` | AMD CPU
 `ARMv80` | ARMv8.0 Compatible CPU
@@ -139,6 +140,7 @@ Variable | Description
 `Maxwell53` | NVIDIA Maxwell generation CC 5.3
 `Pascal60` | NVIDIA Pascal generation CC 6.0
 `Pascal61` | NVIDIA Pascal generation CC 6.1
+
 
 Multiple architectures can be specified by separting the architecture variables with a semi-colon, for example `KOKKOS_ARCH:STRING="HSW;Kepler35` sets architecture variables for a machine with Intel Haswell CPUs and a NVIDIA Tesla K40 GPU. In addition, when setting the `KOKKOS_ARCH` variable it is not necessary to pass required architecture-specific flags to CMake, for example via the `CMAKE_CXX_FLAGS` variable.
 
