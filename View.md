@@ -73,9 +73,63 @@ C++ lets users construct data types that may "look like" numbers in terms of syn
 * built-in data types ("plain old data"), like `int` or `double`, or
 * structs of built-in data types.
 
-While it is in principle6.2.2 possible to have Kokkos Views of arbitrary objects, there are a number of restrictions. The `T` type must have a default constructor and destructor. For portability reasons, `T` is not allowed to have virtual functions and one is not allowed to call functions with dynamic memory allocations inside of kernel code. Furthermore, assignment operators as well as default constructors and destructors must be marked with `KOKKOS_[INLINE_]FUNCTION`. Keep in mind that the semantics of the resulting View are a combination of the Views 'view' semantics and the behaviour of the element type.
+While it is in principle possible to have Kokkos Views of arbitrary objects, Kokkos imposes restrictions on the set of types `T` for which one can construct a `View<T*>`.  For example:
 
-### 6.2.3 Const Views
+* `T` must have a default constructor and destructor. 
+* `T` must not have virtual methods.
+* `T`'s default constructor and destructor must not allocate data, and must be thread safe. 
+* `T`'s assignment operators as well as its default constructor and deconstructor must be marked with the `KOKKOS_INLINE_FUNCTION` or `KOKKOS_FUNCTION` macro.
+
+All restrictions but the first come from the requirement that `View<T*>` work with every execution and memory space,
+including those that use CUDA. The constructor of `View<T*>` does not just allocate memory; it also initializes the allocation by iterating over it using a `Kokkos::parallel_for`, and invoking `T`'s default constructor for each entry. If the View's execution space is `Cuda`, then that means `T`'s default constructor needs to be correct to call on device. Keep in mind that the semantics of the resulting `View` are a combination of the `Views 'view'` semantics and the behavior of the element type.
+
+Finally, note that virtual functions are technically allowed, but calling them is subject to further restrictions; developers should consult the discussions in Chapter 13, Kokkos and Virtual Functions (under development).
+
+### 6.2.3 Can I make a View of Views?
+
+A ``View of Views'' is a special case of View, where the type of each entry is itself a View. It is possible to make this, but before you try, please see below.
+
+#### 6.2.3.1 You probably don't want this
+
+If you really just want a multidimensional array, please don't do this.  Instead, see Section \ref{SS:View:CreateUse:Constructing} for the correct syntax.
+
+If you want to represent an array of arrays, and the inner arrays have fixed length or a fixed upper bound on length, consider instead using a ``compressed sparse row'' data structure. Kokkos' Containers subpackage as a `StaticCrsGraph` class that you may use for this purpose.
+
+If you want a hash table, Kokkos' Containers subpackage has an `UnorderedMap` class that you may use for this purpose.
+
+One reason you might \emph{actually} want a View of Views is because you need a representation of a ``ragged'' array of arrays -- where the inner arrays have widely varying length -- and you need to be able to reallocate the inner arrays dynamically.
+
+You might also want a View of some class that itself contains Views. If you want this, first think about how to reorganize your data structures for better efficiency.
+
+#### 6.2.3.2 I really want a View of Views; what do I do?
+
+Section \ref{SS:View:CreateUse:ValidValueType} above explains how the outer View's constructor works.  The outer View's constructor does not just allocate memory; it also initializes the allocation by iterating over it using a `Kokkos::parallel_for`, and invoking the entry type's default constructor for each entry.  If the View's execution space is `Cuda`, then that means the entry type's default constructor needs to be correct to call on device. That is a problem, because the entry type in this case is itself View. View's constructor wants to allocate memory, and thus does not work on device. Kokkos parallel regions generally forbid memory allocation.
+
+One work-around is to invoke all inner Views' constructors on host. For example, one might allocate a host mirror version of the outer View, do the inner View allocations on host, then deep copy the outer View to device.  Alternately, one might use `CudaUVMSpace` for the outer View, do the inner View allocations on host, then issue
+a `Kokkos::fence` before using the outer View on device. The fence ensures that no device kernel will attempt to use the outer View before the host initialization has finished.
+
+A different approach defers constructing the inner Views until a separate Kokkos parallel region.  One first constructs the outer View using the `WithoutInitializing` option, like this:
+\begin{lstlisting}
+using Kokkos::View;
+using Kokkos::view_alloc;
+using Kokkos::WithoutInitializing;
+
+// Need an std::string here, because the compiler gets confused
+// if you pass view_alloc a char* as its first argument.
+const std::string label ("v_outer");
+View<View<int*>> v_outer (view_alloc (label, WithoutInitializing));
+\end{lstlisting}
+This ensures that the inner Views' constructors don't get called on device. However, that also means that the inner Views are not correctly constructed; they are not yet safe to use! Thus, one must then use ``placement new'' in a Kokkos parallel region, in order to construct the inner Views. This approach works best when the inner Views share a common memory pool for all their allocations.
+
+Here is a summary of different ways to make a View of Views:
+
+* Allocate a host mirror version of the outer View, do the inner View allocations on host, then deep copy the outer View to device.
+* Use `CudaUVMSpace` for the outer View, do the inner View allocations on host, then fence before using the outer View on device.
+* Allocate the outer View using the `WithoutInitializing` option, then use ``placement new'' in a Kokkos parallel region to construct the inner Views.
+
+
+
+### 6.2.4 Const Views
 
 A view can have const data semantics (i.e. its entries are read-only) by specifying a `const` data type.  It is a compile-time error to assign to an entry of a "const View". Assignment semantics are equivalent to a pointer to const data. A const View means the _entries_ are const; you may still assign to a const View. `View<const double*>` corresponds exactly to `const double*`, and `const View<double*>` to `double* const`. Therefore, it does not make sense to allocate a const View since you could not obtain a non-const view of the same data and you can not assign to it. You can however assign a non-const view to a const view. Here is an example:
 ```c++
@@ -90,7 +144,7 @@ const double result = readOnlyFunction (a_const);
 
 Const Views often enables the compiler to optimize more aggressively by allowing it to reason about possible write conflicts and data aliasing. For example, in a vector update `a(i+1)+=b(i)` with skewed indexing, it is safe to vectorize if `b` is a View of const data.
 
-### 6.2.4 Accessing entries (indexing)
+### 6.2.5 Accessing entries (indexing)
 
 You may access an entry of a View using parentheses enclosing a comma-delimited list of integer indices. This looks just like a Fortran multidimensional array access. For example:
 
@@ -116,7 +170,7 @@ specified).
 
 ***
 
-### 6.2.5 Reference counting
+### 6.2.6 Reference counting
 
 Kokkos automatically manages deallocation of Views through a reference-counting mechanism.  Otherwise, Views behave like raw pointers. Copying or assigning a View does a shallow copy, and changes the reference count. (The View copied has its reference count incremented, and the assigned-to View has its reference count decremented.) A View's destructor (called when the View falls out of scope or during a stack unwind due to an exception) decrements the reference count. Once the reference count reaches zero, Kokkos may deallocate the View.
 
@@ -130,7 +184,7 @@ a = b; // assignment does shallow copy
 
 For efficiency, View allocation and reference counting turn off inside of Kokkos' parallel for, reduce, and scan operations. This affects what you can do with Views inside of Kokkos' parallel operations.
 
-### 6.2.6 Resizing
+### 6.2.7 Resizing
 
 Kokkos Views can be resized using the `resize` non-member function. It takes an existing view as its input by reference and the new dimension information corresponding to the constructor arguments. A new view with the new dimensions will be created and a kernel will be run in the views execution space to copy the data element by element from the old view to the new one. Note that the old allocation is only deleted if the view to be resized was the _only_ view referencing the underlying allocation.
 
