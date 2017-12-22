@@ -73,7 +73,17 @@ C++ lets users construct data types that may "look like" numbers in terms of syn
 * built-in data types ("plain old data"), like `int` or `double`, or
 * structs of built-in data types.
 
-While it is in principle6.2.2 possible to have Kokkos Views of arbitrary objects, there are a number of restrictions. The `T` type must have a default constructor and destructor. For portability reasons, `T` is not allowed to have virtual functions and one is not allowed to call functions with dynamic memory allocations inside of kernel code. Furthermore, assignment operators as well as default constructors and destructors must be marked with `KOKKOS_[INLINE_]FUNCTION`. Keep in mind that the semantics of the resulting View are a combination of the Views 'view' semantics and the behaviour of the element type.
+While it is in principle possible to have Kokkos Views of arbitrary objects, Kokkos imposes restrictions on the set of types `T` for which one can construct a `View<T*>`.  For example:
+
+* `T` must have a default constructor and destructor. 
+* `T` must not have virtual methods.
+* `T`'s default constructor and destructor must not allocate data, and must be thread safe. 
+* `T`'s assignment operators as well as its default constructor and deconstructor must be marked with the `KOKKOS_INLINE_FUNCTION` or `KOKKOS_FUNCTION` macro.
+
+All restrictions but the first come from the requirement that `View<T*>` work with every execution and memory space,
+including those that use CUDA. The constructor of `View<T*>` does not just allocate memory; it also initializes the allocation by iterating over it using a `Kokkos::parallel_for`, and invoking `T`'s default constructor for each entry. If the View's execution space is `Cuda`, then that means `T`'s default constructor needs to be correct to call on device. Keep in mind that the semantics of the resulting `View` are a combination of the `Views 'view'` semantics and the behavior of the element type.
+
+Finally, note that virtual functions are technically allowed, but calling them is subject to further restrictions; developers should consult the discussions in Chapter 13, Kokkos and Virtual Functions (under development).
 
 ### 6.2.3 Const Views
 
