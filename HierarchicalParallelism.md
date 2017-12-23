@@ -85,6 +85,30 @@ The team policy's `member_type` provides the necessary functionality to use team
 
 The name `TeamPolicy` makes it explicit that a kernel using it constitutes a parallel region with respect to the team.
 
+In order to allow for coordination of work between members of a team, i.e. some threads compute a value, store it in global memory and then everyone consumes it, teams provide barriers. These barriers are collectives for all team members in the same team, but have no relationship with other teams. Here is an example:
+
+```c++
+    using Kokkos::TeamPolicy;
+    using Kokkos::parallel_for;
+    
+    typedef TeamPolicy<ExecutionSpace>::member_type member_type;
+    // Create an instance of the policy
+    TeamPolicy<ExecutionSpace> policy (league_size, Kokkos::AUTO() );
+    // Launch a kernel
+    parallel_for (policy, KOKKOS_LAMBDA (member_type team_member) {
+        // Thread 0 in each team gathers some data via indirection.
+        if( team_member.team_rank() == 0 ) {
+          a(team_member.league_rank()) = b(indices(team_member.league_rank()));
+        }
+        // Now do a barrier for every team member to wait for a to be updated
+        team_member.team_barrier();
+
+        // Now a can be used by every team member
+        c(team_member.league_rank(),team_member.team_rank()) = a(team_member.league_rank();
+      });
+```
+
+
 ## 8.3 Team scratch pad memory
 
 Each Kokkos team has a "scratch pad." This is an instance of a memory space accessible only by threads in that team. Scratch pads let an algorithm load a workset into a shared space and then collaboratively work on it with all members of a team. The lifetime of data in a scratch pad is the lifetime of the team. In particular, scratch pads are recycled by all logical teams running on the same physical set of cores. During the lifetime of the team all operations allowed on global memory are allowed on the scratch memory. This includes taking addresses and performing atomic operations on elements located in scratch space. Team-level scratch pads correspond to the per-block shared memory in Cuda, or to the "local store" memory on the Cell processor.
