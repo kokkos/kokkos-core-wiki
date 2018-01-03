@@ -268,7 +268,12 @@ You may allocate a View without initializing. For example:
 View<int*> x (ViewAllocateWithoutInitializing (label), 100000);
 ```
 
-This is useful in situations where your dominant use of the View exhibits a complicated access pattern. In this case it is best to run the most costly kernel directly after initialization to execute the first touch pattern and get optimal memory affinity.
+This is mainly useful in cases when the initial values of the view are not important because
+they will be overwritten without ever being read.
+It is still important that the first write to each location be done within a parallel kernel
+in a way that reflects how first-touch affinity to threads is desired.
+Typically it is sufficient to use the parallel iteration index as the index of the location in the
+view to write to.
 
 ### 6.4.3 Deep copy and HostMirror
 
