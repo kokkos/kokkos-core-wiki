@@ -23,7 +23,7 @@
 1. **[[Sorting|Sorting]]**
 2. **[[Random Numbers|Random Numbers]]**
 
-## **[[API Reference|APIReference]]**
+## **[[API Reference|API-Reference]]**
 1. **[[Initialization|APIInitialization]]**
 2. **[[View|APIView]]**
 3. **[[Data Parallelism|APIDataParallelism]]**
