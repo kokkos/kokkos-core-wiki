@@ -4,7 +4,7 @@ Defined in header `<Kokkos_Core.hpp>`
 template <class ExecPolicy, class FunctorType>
 Kokkos::parallel_for(const ExecPolicy& policy, const FunctorType& functor, const std::string& str = "");
 ```
-1. Executes `functor` in parallel according to `policy` (See [Execution Policies](API-Core#execution-policies)). The `str` name is optional, and will be used to denote this parallel region in profiling reports.
+1. Executes `functor` in parallel according to `policy` (See [Execution Policies](Execution-Policy-API)). The `str` name is optional, and will be used to denote this parallel region in profiling reports.
 ```cpp
 template <class ExecPolicy, class FunctorType>
 Kokkos::parallel_for(const std::string& str, const ExecPolicy& policy, const FunctorType& functor);

@@ -26,10 +26,10 @@
 ## **[[API Reference|API-Reference]]**
 1. **[[Initialization|APIInitialization]]**
 2. **[[View|APIView]]**
-3. **[[Data Parallelism|APIDataParallelism]]**
-4. **[[Execution Policies|APIExecutionPolicies]]**
-5. **[[Memory Spaces|APIMemorySpaces]]**
-6. **[[Task Parallelism|APITaskParallelism]]**
+3. **[[Data Parallelism|Data-Parallelism-API]]**
+4. **[[Execution Policies|Execution-Policy-API]]**
+5. **[[Memory Spaces|Memory-Space-API]]**
+6. **[[Task Parallelism|Task-Parallelism-API]]**
 
 ## **[[Guide to Kokkos Testing Processes]]**
 1. **[[Overview|Overview]]**
