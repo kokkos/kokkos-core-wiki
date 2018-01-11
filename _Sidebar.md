@@ -24,12 +24,12 @@
 2. **[[Random Numbers|Random Numbers]]**
 
 ## **[[API Reference|APIReference]]**
-1. **[[Initialization|Initialization]]**
-2. **[[View|View]]**
-3. **[[Data Parallelism|DataParallelism]]**
-4. **[[Execution Policies|ExecutionPolicies]]**
-5. **[[Memory Spaces|MemorySpaces]]**
-6. **[[Task Parallelism|TaskParallelism]]**
+1. **[[Initialization|APIInitialization]]**
+2. **[[View|APIView]]**
+3. **[[Data Parallelism|APIDataParallelism]]**
+4. **[[Execution Policies|APIExecutionPolicies]]**
+5. **[[Memory Spaces|APIMemorySpaces]]**
+6. **[[Task Parallelism|APITaskParallelism]]**
 
 ## **[[Guide to Kokkos Testing Processes]]**
 1. **[[Overview|Overview]]**
