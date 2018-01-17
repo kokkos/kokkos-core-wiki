@@ -258,6 +258,18 @@ initialized on the host. The `Device` type can be accessed as a views `device_ty
 
 It is important to understand that accessibility of a View does not depend on its execution space directly. It is only determined by its memory space. Therefore both `a` and `b` have the same access properties. They differ only in how they are initialized and in where parallel kernels associated with operations such as resizing or deep copies are run.
 
+The following is the accessibility matrix for execution and memory spaces:
+
+| | Serial | OpenMP | Threads | Cuda | ROCm |
+|---|---|---|---|---|---|
+|HostSpace| x | x | x | - | - |
+|HBWSpace| x | x | x | - | - |
+|CudaSpace| - | - | - | x | - |
+|CudaUVMSpace| x | x | x | x | - |
+|CudaHostPinnedSpace| x | x | x | x | - |
+|ROCmSpace|  - | - | - | - | x |
+|ROCmHostPinnedSpace|  x | x | x | - | x |
+
 ### 6.4.2 Initialization
 
 A View's entries are initialized to zero by default. Initialization happens in parallel for first-touch allocation over the first (leftmost) dimension of the View using the execution space of the View.
