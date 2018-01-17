@@ -165,7 +165,7 @@ _Layout_ refers to the mapping from a logical multidimensional index _(i, j, k, 
 
 The generalization of both left and right layouts is "strided." For a strided layout, each dimension has a _stride_. The stride for that dimension determines how far apart in memory two array entries are, whose indices in that dimension differ only by one, and whose other indices are all the same. For example, with a 3-D strided view with strides _(s_1, s_2, s_3)_, entries _(i, j, k)_ and _(i, j+1, k)_ are _s_2_ entries (not bytes) apart in memory. Kokkos calls this `LayoutStride`.
 
-Strides may differ from dimensions. For example, Kokkos reserves the right to pad each dimension for cache or vector alignment. You may access the dimensions of a View using the `dimension` method, which takes the index of the dimension.
+Strides may differ from dimensions. For example, Kokkos reserves the right to pad each dimension for cache or vector alignment. You may access the dimensions of a View using the (ISO/C++ form) `extent` method, which takes the index of the dimension.
 
 Strides are accessed using the `stride` method. It takes a raw integer array, and only fills in as many entries as the rank of the View. For example:
 
@@ -175,7 +175,7 @@ const size_t N1 = ...;
 const size_t N2 = ...;
 View<int***> a ("a", N0, N1, N2);
     
-int dim1 = a.dimension (1); // returns dimension 1
+int dim1 = a.extent (1); // returns dimension 1
 size_t strides[3]
 a.strides (dims); // fill 'strides' with strides
 ```
@@ -183,11 +183,11 @@ a.strides (dims); // fill 'strides' with strides
 You may also refer to specific dimensions without a runtime parameter:
 
 ```c++
-const size_t n0 = a.dimension_0 ();
-const size_t n2 = a.dimension_2 ();
+const size_t n0 = a.extent_0 ();
+const size_t n2 = a.extent_2 ();
 ```
 
-Note the return type of `dimension_N()` is the `size_type` of the views memory space. This causes some issues if warning-free compilation should be achieved since it will typically be necessary to cast the return value. In particular, in cases where the `size_type` is more conservative than required, it can be beneficial to cast the value to `int` since signed 32 bit integers typically give the best performance when used as index types. In index heavy codes, this performance difference can be significant compared to using `size_t` since the vector length on many architectures is twice as long for 32 bit values as for 64 bit values and signed integers have less stringent overflow testing requirements than unsigned integers.
+Note the return type of `extent_N()` is the `size_type` of the views memory space. This causes some issues if warning-free compilation should be achieved since it will typically be necessary to cast the return value. In particular, in cases where the `size_type` is more conservative than required, it can be beneficial to cast the value to `int` since signed 32 bit integers typically give the best performance when used as index types. In index heavy codes, this performance difference can be significant compared to using `size_t` since the vector length on many architectures is twice as long for 32 bit values as for 64 bit values and signed integers have less stringent overflow testing requirements than unsigned integers.
 
 Users of the BLAS and LAPACK libraries may be familiar with the ideas of layout and stride. These libraries only accept matrices in column-major format. The stride between consecutive entries in the same column is 1, and the stride between consecutive entries in the same row is `LDA` ("leading dimension of the matrix A"). The number of rows may be less than `LDA`, but may not be greater.
 
@@ -342,7 +342,7 @@ extern void legacyFunction (double* x_raw, const size_t len);
 void myFunction (const View<double*>& x) {
   // DON'T DO THIS UNLESS YOU MUST
   double* a_raw = a.data ();
-  const size_t N = x.dimension_0 ();
+  const size_t N = x.extent_0 ();
   legacyFunction (a_raw, N);
 }
 ```
@@ -423,7 +423,7 @@ void spmatvec (const View<double*>& y,
   View<const double*, RandomAccess> x_ra = x;
   typedef View<const size_t*>::size_type size_type;
     
-  parallel_for (y.dimension_0 (), KOKKOS_LAMBDA (const size_type i) {
+  parallel_for (y.extent_0 (), KOKKOS_LAMBDA (const size_type i) {
     double y_i = y(i);
     for (size_t k = ptr(i); k < ptr(i+1); ++k) {
       y_i += val(k) * x_ra(ind(k));
