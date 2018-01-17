@@ -217,7 +217,7 @@ Kokkos lets you compute reductions with an array of reduction results, as long a
     
       // Be sure to set value_count in the constructor.
       ColumnSums (const View<float**>& X) :
-        value_count (X.dimension_1 ()), // # columns in X
+        value_count (X.extent_1 ()), // # columns in X
         X_ (X)
       {}
    
@@ -261,7 +261,7 @@ We show how to use this functor here:
       // ... fill X before the following ...
       ColumnSums cs (X);
       float sums[10];
-      parallel_reduce (X.dimension_0 (), cs, sums);
+      parallel_reduce (X.extent_0 (), cs, sums);
 ```   
 
 ## 7.4 Parallel scan
@@ -274,7 +274,7 @@ Kokkos lets users specify a scan by either a functor or a lambda. Both look like
 
 ```c++
     View<float*> x = ...; // assume filled with input values
-    const size_t N = x.dimension_0 ();
+    const size_t N = x.extent_0 ();
     parallel_scan (N, KOKKOS_LAMBDA (const int& i,
               float& upd, const bool& final) {
         if (final) {
