@@ -31,3 +31,22 @@ Examining the list of machines in Table 2.1, one can see that a wide range of ha
 ## Computer Accounts
 
 Sandia computing machines are connected to various networks and require access permissions be obtained through an account control system, normally WebCARS. Each of the machines listed above requires an account be obtained through WebCARS, except for Apollos and Kokkos-dev. Machines identified as Local are normally personal hardware of various kinds that are issued to (Kokkos team) staff members. Accounts on Kokkos-dev may be obtained through permission of Kokkos project leads and the assistance of CSRI CSU staff members. The Kokkos-dev and primary machines are required accounts for most testing, but most especially for promotion testing (described below). It is recommended that Kokkos team members obtain accounts on all the machines listed in Table 2.1.
+
+## Compilers
+ 
+Numerous compilers are available on the platforms identified in Table 2.1; this availability is provided by a range of modules. The modules that are utilized for the Kokkos testing described herein are identified in Section XX describing the test scripts. From among the wide range of available compilers, Kokkos supports a select set of these. The final discriminator of what constitutes support is determined by the set of compilers tested regularly through the nightly jobs submitted using the Jenkins servers on the OHPC. A version of this list is also provided through the README.md in the Kokkos Git repository ( https://github.com/kokkos/kokkos.git ). The current set of supported compilers is presented in Attachment C. Note, this set of compilers is not supported on any one platform but among the collection of platforms described in the Hardware section above. This list also appears in the test_all_sandia driver script in kokkos/config.
+
+## Backends
+
+A backend in the Kokkos context essentially identifies a mode in which executables are compiled and run in a Kokkos Execution Space. The supported options for devices in Kokkos-based simulations are:
+•	Serial
+•	OpenMP
+•	OpenACC
+•	PThread
+•	QThread 
+•	Cuda
+
+## Test Scripts
+
+kokkos/config:
+
