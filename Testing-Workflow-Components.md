@@ -9,9 +9,7 @@ To achieve the goal of enabling software applications to become performant on va
  Platform | Category | CPU Type | Num Nodes | Accelerator Type | Num GPUs | Network
  :--- |:--- |:--- |:--- |:--- |:--- |:---
 `Bowman`| P | Knights Landing |  32  |  None |  NA  | OHPC 
-`KOKKOS_ENABLE_PTHREADS`| Enable the Threads execution space. | Requires linking with `libpthread`.
-`KOKKOS_ENABLE_Serial`| Enable the Serial execution space. |
-`KOKKOS_ENABLE_CXX11`| Enable internal usage of C++11 features. | The code needs to be compiled with the C++11 standard. Most compilers accept the -std=c++11 flag for this.
+`Ellis`| P | Knights Landing |  32  |  None |  NA  | SRN
 `KOKKOS_ENABLE_HWLOC`| Enable thread and memory pinning via hwloc. | Requires linking with `libhwloc`. 
 
 
