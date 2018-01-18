@@ -11,7 +11,7 @@ To achieve the goal of enabling software applications to become performant on va
   
  Platform | Category | CPU Type | Nodes/Cores | Accelerator Type | Num GPUs | Network
  :--- |:--- |:--- |:--- |:--- |:--- |:---
-`Apollo`| P | ? |  32  |  None |  NA  | SRN
+`Apollo`| P | ? |  ?  |  None |  NA  | Local/OHPC?
 `Bowman`| P | Knights Landing |  32/-  |  None |  NA  | OHPC 
 `Ellis`| S | Knights Landing |  32/-  |  None |  NA  | SRN
 `Hansen`| S | Intel  Xeon Haswell E5-2698 |  3/16  |  None |  NA  | OHPC
@@ -22,3 +22,12 @@ To achieve the goal of enabling software applications to become performant on va
 `Local Macs`| S | ? | 4 or 8  |  None |  NA  | Local
 `White`| P | P8-Tuleta, P8-Firestone, P8-Garrison  |  9/10, 8/8, 8/8  |  NVIDIA Tesla |  7 K40, 7 K80, 8 P100  |  32  |  None |  NA | OHPC
 `Others from Jenkins List`| P | ? |  *  |  None |  NA  | OHPC
+
+
+## Batch Queues
+
+Examining the list of machines in Table 2.1, one can see that a wide range of hardware types constitute our collection of test beds. Some platforms have several different types of processors, including CPUs and GPUs. In order to access a homogeneous collection of nodes when runs are made on one these machines, several queues have been setup, one for each hardware/architecture type. It is necessary to load the proper environment for these nodes and use a batch submission script that selects the desired queue explicitly. More details are provided in the section that discusses the test scripts used for all Kokkos testing.
+
+## Computer Accounts
+
+Sandia computing machines are connected to various networks and require access permissions be obtained through an account control system, normally WebCARS. Each of the machines listed above requires an account be obtained through WebCARS, except for Apollos and Kokkos-dev. Machines identified as Local are normally personal hardware of various kinds that are issued to (Kokkos team) staff members. Accounts on Kokkos-dev may be obtained through permission of Kokkos project leads and the assistance of CSRI CSU staff members. The Kokkos-dev and primary machines are required accounts for most testing, but most especially for promotion testing (described below). It is recommended that Kokkos team members obtain accounts on all the machines listed in Table 2.1.
