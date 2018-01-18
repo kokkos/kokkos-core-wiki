@@ -1,3 +1,5 @@
 The software test program components identified in the __Introduction__ are described individually in this section.
 
-** Platforms
+** Platforms **
+
+To achieve the goal of enabling software applications to become performant on variety of systems, software testing must take place on a wide range of architectures. Integral to this effort at Sandia is the collection of machines referred to as the Heterogeneous Advanced Architecture Platforms ( HAAPs, https://snl-wiki.sandia.gov/display/HAAPs  ). A subset of these machines are identified in Table 1 as the primary test platforms; other machines with similar characteristics are identified as alternate test machines that are used in the event of maintenance or other outages of the primary. Note that the HAAPs link above (scroll to Platforms) is the official specifications for these machines. The Platforms table on the HAAPs link contains specifications for both the CPUs and the GPUs (accelerators) when present on a particular platform. The last column in Table 1 identifies the network on which a particular machine exists (OHPC – Open Network, SRN – Sandia Restricted Network). 
