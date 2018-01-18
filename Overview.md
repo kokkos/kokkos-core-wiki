@@ -1,4 +1,4 @@
-# Introduction
+# Kokkos Testing Processes
 
 Kokkos is a library of C++ templated macros that enable the construction of thread-scalable parallel patterns for data on many machine architectures.  Kokkos is designed for integration into the flow of computationally intensive host software that will be compiled for usage on modern computer architectures; the goal is improved performance of the computational kernels. Tuned implementation and some degree of code refactoring are generally needed to realize significant performance benefits. Supporting the development of the Kokkos macros and the expected performance benefits is an extensive software test program.
 
