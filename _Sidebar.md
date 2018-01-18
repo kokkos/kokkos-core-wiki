@@ -31,5 +31,5 @@
 5. **[[Memory Spaces|Memory-Space-API]]**
 6. **[[Task Parallelism|Task-Parallelism-API]]**
 
-## **[[Guide to Kokkos Testing Processes]]**
+## **[[A Guide to Kokkos Testing Processes]]**
 1. **[[Overview|Overview]]**
