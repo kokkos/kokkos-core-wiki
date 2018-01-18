@@ -341,9 +341,9 @@ extern void legacyFunction (double* x_raw, const size_t len);
 // Your function that takes a View.
 void myFunction (const Kokkos::View<double*>& x) {
   // DON'T DO THIS UNLESS YOU MUST
-  double* a_raw = a.data ();
-  const size_t N = x.extent_0 ();
-  legacyFunction (a_raw, N);
+  double* x_raw = x.data();
+  const size_t N = x.extent_0();
+  legacyFunction (x_raw, N);
 }
 ```
 
