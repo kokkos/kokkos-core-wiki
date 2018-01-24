@@ -22,6 +22,6 @@ See the [RangePolicy](Kokkos%3A%3ARangePolicy) documentation.
 
 4. With `MDRangePolicy`:
 ```cpp
-Kokkos::parallel_for(Kokkos::MDRangePolicy<Kokkos::Rank<2>, size_t>( {{0,0}}, {{work_count0, work_count1}}), functor, str);
+Kokkos::parallel_for(Kokkos::MDRangePolicy<Kokkos::Rank<2>, size_t>( {{begin0,begin1}}, {{end0, end1}}, {{tile_dim0, tile_dim1}}), functor, str);
 ```
 See the [MDRangePolicy](Kokkos%3A%3AMDRangePolicy) documentation.
