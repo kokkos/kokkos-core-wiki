@@ -19,9 +19,9 @@ To achieve the goal of enabling software applications to become performant on va
 `Ride`| S | P8-Tuleta, P8-Firestone, P8-Garrison  |  4/10, 11/10, 8/10  |  NVIDIA Tesla |  4 K40, 11 K80, 8 P100  | SRN
 `Shepard`| P | Intel Xeon Haswell E5-2698  |  36/16  |  None |  NA  | SRN
 `Sullivan`| S | Cavium ThunderX v1, v2 |  20, 2  |  None |  NA  | OHPC
-`Local Macs`| S | ? | 4 or 8  |  None |  NA  | Local
+`Multiple Macs`| S | ? | 4 or 8  |  None |  NA  | Local
 `White`| P | P8-Tuleta, P8-Firestone, P8-Garrison  |  9/10, 8/8, 8/8  |  NVIDIA Tesla |  7 K40, 7 K80, 8 P100  |  32  |  None |  NA | OHPC
-`Others from Jenkins List`| P | ? |  *  |  None |  NA  | OHPC
+`Others (Jenkins Targets)`| P | ? |  *  |  None |  NA  | OHPC
 
 
 ## Batch Queues
@@ -38,15 +38,37 @@ Numerous compilers are available on the platforms identified in Table 2.1; this 
 
 ## Backends
 
-A backend in the Kokkos context essentially identifies a mode in which executables are compiled and run in a Kokkos Execution Space. The supported options for devices in Kokkos-based simulations are:
-•	Serial
-•	OpenMP
-•	OpenACC
-•	PThread
-•	QThread 
-•	Cuda
+A backend in computing terminology refers to the system component that performs the majority of the work or computation.  For application to Kokkos, a backend essentially identifies a mode in which executables are compiled and defines the manner in which the hardware/processors are addressed to complete the assigned commands. The supported options for backends in Kokkos-based simulations are:
+
+* Serial
+* OpenMP
+* Threads (PThreads)
+* QThreads 
+* Cuda
+* ROCm
 
 ## Test Scripts
 
-kokkos/config:
+All Kokkos testing is performed using one or more shell-scripts that are contained in the Kokkos source code; these may be found in directories kokkos/config or kokkos/scripts. These were developed to setup and run the Kokkos tests (Section Test Descriptions) on several backends for several supported compilers on several platforms and then to analyze and report the results to the test performer. These shell scripts are listed below as well as the Kokkos directory in which it is located; see Repository Management which identifies the host Github site. These scripts are not discussed or reviewed here but will be identified in the Section on Testing and the circumstances in which each is used.
+* kokkos/config:
+* * test-all-sandia
+
+* kokkos/scripts
+* * snapshot.py
+
+* kokkos/scripts/testing_scripts
+* * jenkins_test_driver
+* * test_kokkos_master_develop_promotion.sh
+
+* kokkos/scripts/trilinos-integration
+* * checkin-test               
+* * prepare_trilinos_repos.sh
+* * shepard_jenkins_run_script_pthread_intel  
+* * shepard_jenkins_run_script_serial_intel  
+* * white_run_jenkins_script_cuda
+* * white_run_jenkins_script_omp
+
+## Repository Management
+
+The Kokkos repository is located on Github (https://github.com/github/kokkos/kokkos.git) ; scripts and tools that 
 
