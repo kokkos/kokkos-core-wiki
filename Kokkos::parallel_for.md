@@ -19,6 +19,7 @@ Kokkos::parallel_for(const size_t work_count, const FunctorType& functor, const 
 Kokkos::parallel_for(Kokkos::RangePolicy<size_t>(0, work_count), functor, str);
 ```
 See the [RangePolicy](Kokkos%3A%3ARangePolicy) documentation.
+
 4. With `MDRangePolicy`:
 ```cpp
 Kokkos::parallel_for(Kokkos::MDRangePolicy<Kokkos::Rank<2>, size_t>( {{0,0}}, {{work_count0, work_count1}}), functor, str);
