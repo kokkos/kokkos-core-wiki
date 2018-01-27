@@ -270,6 +270,21 @@ The following is the accessibility matrix for execution and memory spaces:
 |ROCmSpace|  - | - | - | - | x |
 |ROCmHostPinnedSpace|  x | x | x | - | x |
 
+This relationship can be queried via the `SpaceAccessibility` class:
+```c++
+template< typename AccessSpace , typename MemorySpace >
+struct SpaceAccessibility {
+  enum { accessible };  // AccessSpace can access MemorySpace
+  enum { assignable };  // Can assign View<...,AccessSpace,...> = View<...,MemorySpace,...>
+  enum { deep_copy };  // Can deep copy to AccessSpace::memory_space from MemorySpace
+};
+```
+A typical use case would be:
+```c++
+if(SpaceAccessibility<ExecSpace, ViewType::memory_space>::accessible) {
+   parallel_for(RangePolicy<ExecSpace>, functor);
+}
+```
 ### 6.4.2 Initialization
 
 A View's entries are initialized to zero by default. Initialization happens in parallel for first-touch allocation over the first (leftmost) dimension of the View using the execution space of the View.
