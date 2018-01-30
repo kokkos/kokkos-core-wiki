@@ -79,7 +79,7 @@ All Kokkos testing is performed using one or more shell-scripts that are contain
 
 ## Test Descriptions
 
-The Kokkos source directories contain the test problems that are exercised in nightly, release and promotion testing. The following kokkos source directories contain nearly a hundred tests. Please consult individual directories and test problems for necessary details. Results from these tests are presented as pass/fail.
+The Kokkos source directories contain the test problems that are exercised in nightly, release and promotion testing. The following kokkos source directories contain nearly a hundred tests. Please consult individual directories and test problems for necessary details.
 
 ```c++
 kokkos/algorithms/unit_tests   - 8
@@ -88,5 +88,5 @@ kokkos/containers/{performance_tests   -  8; unit_tests   -  14 }
 kokkos/core/{perf_test   -  ?; unit_test    -  ? } 
 example  -  22
 ```
-
+Having run these test problems, the results are presented as either pass or fail. Failing problems are identified for examination. As these problems are designed to pass, failure will enable developers to locate coding in need of repair
 
