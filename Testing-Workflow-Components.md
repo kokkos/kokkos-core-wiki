@@ -85,7 +85,7 @@ All Kokkos testing is performed using one or more shell-scripts that are contain
 The Kokkos source directories contain the test problems that are exercised in nightly, release and promotion testing. The following kokkos source directories contain nearly a hundred tests. Please consult individual directories and test problems for necessary details.
 
 ```c++
-kokkos/algorithms/unit_tests   - 8
+kokkos/algorithms/{unit_tests   - 8; performance_tests  - ? }
 kokkos/benchmarks    - 4
 kokkos/containers/{performance_tests   -  8; unit_tests   -  14 }
 kokkos/core/{perf_test   -  ?; unit_test    -  ? } 
