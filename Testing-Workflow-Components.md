@@ -58,6 +58,9 @@ A backend in computing terminology refers to the system component that performs 
 
 All Kokkos testing is performed using one or more shell-scripts that are contained in the Kokkos source code; these may be found in directories kokkos/config or kokkos/scripts. These were developed to setup and run the Kokkos tests (Section Test Descriptions) on several backends for several supported compilers on several platforms and then to analyze and report the results to the test performer. These shell scripts are listed below as well as the Kokkos directory in which it is located; see Repository Management which identifies the host Github site. These scripts are not discussed or reviewed here but will be identified in the Section on Testing and the circumstances in which each is used.
 ```c++
+* kokkos
+* * generate_makefile.bash
+
 * kokkos/config:
 * * test-all-sandia
 
