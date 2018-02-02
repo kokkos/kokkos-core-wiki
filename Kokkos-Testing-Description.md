@@ -31,8 +31,16 @@ shepard_jenkins_run_script_pthread_intel  &  shepard_jenkins_run_script_serial_i
 
 * **kokkos/scripts/trilinos-integration/white_run_jenkins_script_cuda & white_run_jenkins_script_omp**  as for the trilinos tests on Shepard, these are on platform White to test different compilers and architecture. Similar setup of flags, backends and libraries precede submission of batch jobs to run using the SEMS-developed scripts. test results are reported as for the tests on Shepard.
 
+## Kokkos Routine/Daily Testing
 
-## Kokkos Developmental Testing (Daily Tasks)
+Testing is a through-going aspect of software development, touching all phases of a software project. Bringing together the test scripts, the test problems and repository management methodology identified in the previous section, a team methodology has evolved that will evaluate the correctness and speed of the development product prior to commit. Each developer will use a combination of existing unit and performance tests or newly written tests in combination with existing or standalone test scripts to evaluate bugfixes, new features and evaluate one approach versus another for improving performance. Submission of a commit with a pull request will initiate a software review followed by suggestions for improvement or approval of the pull request.
+
+Another aspect of routine testing are the nightly tests on multiple platforms initiated using the _jenkins_test_driver script_. Most/All of the test platforms identified in Table 2-1 are sent multiple jobs for a range of compilers, Kokkos backends and combinations of test problems. These are run for the develop branch (and master branch) of Kokkos. Results from these tests become the standard for evaluating the state of the Kokkos branches. These tests are design to cover the full range of architectures and compilers that Kokkos supports.
+
+## Other Testing
+
+A set of tutorial problems have been developed for use in hands-on training exercises. These are not part of a scheduled test regimen; however, they are run and performance data updated periodically when Kokkos capabilities have changed significantly or new compilers and architectures are added to our repertoire.
+
 
 ## Kokkos Promotion Testing
 
