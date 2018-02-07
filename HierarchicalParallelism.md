@@ -220,17 +220,15 @@ The `parallel_reduce` construct can be used to perform optimized team-level redu
             lsum += ...;
           }, sum);
     
-        // You may provide a custom reduction as another
-        // lambda together with an initialization value.
+        // You may provide a custom reduction as a functor,
+        // including one of the Kokkos-provided ones, e.g. Prod<Scalar>.
         Scalar product;
         Scalar init_value = 1;
         parallel_reduce (TeamThreadRange (team_member, loop_count),
           [=] (int& i, Scalar& lsum) {
             // ...
             lsum *= ...;
-          }, product, [=] (Scalar& lsum, Scalar& update) {
-            lsum *= update;
-          }, init_value);
+          }, Kokkos::Experimental::Prod<Scalar>(product);
       });
 ```
 
@@ -260,17 +258,15 @@ The innermost level of nesting parallel loops in a kernel is comprised of the _v
     
         parallel_for (TeamThreadRange (team_member, workset_size),
           [&] (int& j) {
-          // You may provide a custom reduction as another
-          // lambda together with an initialization value.
+          // You may provide a custom reduction as a functor
+          // including one of the Kokkos-provided ones, e.g., Prod<Scalar>.
           Scalar product;
           Scalar init_value = 1;
          parallel_reduce (ThreadVectorRange (team_member, loop_count),
             [=] (int& i, Scalar& lsum) {
               // ...
               lsum *= ...;
-            }, product, [=] (Scalar& lsum, Scalar& update) {
-              lsum *= update;
-            }, init_value);
+            }, Kokkos::Experimental::Prod<Scalar>(product);
           });
       });
 ```
