@@ -231,6 +231,7 @@ The `parallel_reduce` construct can be used to perform optimized team-level redu
           }, Kokkos::Experimental::Prod<Scalar>(product);
       });
 ```
+Note that custom reductions must employ one of the functor join patterns recognized by Kokkos; these include `Sum, Prod, Min, Max, LAnd, LOr, BAnd, BOr, ValLocScalar, MinLoc, MaxLoc, MinMaxScalar, MinMax, MinMaxLocScalar` and `MinMaxLoc`.
 
 The third pattern is `parallel_scan` which can be used to perform prefix scans.
 
