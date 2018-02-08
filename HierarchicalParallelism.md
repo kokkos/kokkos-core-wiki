@@ -240,7 +240,7 @@ The third pattern is `parallel_scan` which can be used to perform prefix scans.
 
 #### 8.4.1.1 Team Barriers
 
-In instances where one loop operation might need to be sequenced with a different loop operation, such as filling of arrays as a preparation stage for following computations on that data, it is important to be able to control threads in time; this can be done through the use of barriers. In nested loops, the outside loop ( 'TeamPolicy<> ()' ) has a built-in (implicit) team barrier; inner loops ( 'TeamThreadRange ()' ) do not. This latter condition is often referred to as a 'non-blocking' condition. When necessary, an explicit barrier can be introduced to synchronize team threads; an example is shown in the previous example. 
+In instances where one loop operation might need to be sequenced with a different loop operation, such as filling of arrays as a preparation stage for following computations on that data, it is important to be able to control threads in time; this can be done through the use of barriers. In nested loops, the outside loop ( `TeamPolicy<> ()` ) has a built-in (implicit) team barrier; inner loops ( `TeamThreadRange ()` ) do not. This latter condition is often referred to as a 'non-blocking' condition. When necessary, an explicit barrier can be introduced to synchronize team threads; an example is shown in the previous example. 
 
 ### 8.4.2 Vector loops
 
