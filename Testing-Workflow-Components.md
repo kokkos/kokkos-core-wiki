@@ -56,14 +56,7 @@ A backend in computing terminology refers to the system component that performs 
 
 ## Test Scripts
 
-All Kokkos testing is performed using one or more shell-scripts that are contained in the Kokkos source code; these may be found in directories kokkos/config or kokkos/scripts. These were developed to setup and run the Kokkos tests (Section Test Descriptions) on several backends for several supported compilers on several platforms and then to analyze and report the results to the test performer. These shell scripts are listed below as well as the Kokkos directory in which it is located; see Repository Management which identifies the host Github site. These scripts are not discussed or reviewed here but will be identified in the Section on Testing and the circumstances in which each is used.
-```c++
-* kokkos/scripts/testing_scripts
-* * test_kokkos_master_develop_promotion.sh
-
-* kokkos/scripts/trilinos-integration
-* * checkin-test
-```
+All Kokkos testing is performed using one or more shell-scripts that are contained in the Kokkos source code; these may be found in directories kokkos/config or kokkos/scripts. These were developed to setup and run the Kokkos tests (Section Test Descriptions) on several backends for several supported compilers on several platforms and then to analyze and report the results to the test performer. These shell scripts are listed below as well as the Kokkos directory in which it is located; see Repository Management which identifies the host Github site. These scripts and their role in the testing workflow are briefly described in Table 2.2.
 
 <h4>Table 2.2: Kokkos Test Script Descriptions </h4>
   
@@ -78,10 +71,15 @@ All Kokkos testing is performed using one or more shell-scripts that are contain
 `shepard_jenkins_run_script_serial_intel` | kokkos/scripts/trilinos-integration | same as for script _shepard_jenkins_run_script_pthread_intel_ except it runs the _serial_ workspace in place of the _pthread_ workspace.
 `white_run_jenkins_script_cuda` | kokkos/scripts/trilinos-integration | as for the trilinos tests on Shepard, these are on platform White to test different compilers and architecture. Similar setup of flags, backends and libraries precede submission of batch jobs to run using the SEMS-developed scripts. test results are reported as for the tests on Shepard.
 `white_run_jenkins_script_omp` | kokkos/scripts/trilinos-integration | same as for script _white_run_jenkins_script_cuda_ except it runs the _cuda_ workspace in place of the _omp_ workspace.
+`test_kokkos_master_develop_promotion.sh` | kokkos/scripts/testing_scripts | [not used ??] For a specific set of parameters – backend, module, compiler, CxxFlags, architecture, kokkos options, cudea options, and HWLOC – a makefile is crated using generate_makefile.sh. [this makefile script is not the same as mentioned above with a .bash extension]
+`checkin-test` | kokkos/scripts/trilinos-integration | this script loads a set of SEMS modules for a trilinos checkinTest. This latter test (script) does not exist in the Kokkos repository at this time.
 
-## Test Descriptions
 
-The Kokkos source directories contain the test problems that are exercised in nightly, release and promotion testing. The following kokkos source directories contain nearly a hundred tests. Please consult individual directories and test problems for necessary details.
+## Kokkos Tests: Unit and Performance
+
+As described in the Introduction, Kokkos is a library of macros designed to enable applications of all flavors to experience the power and speed of evolving computer processors in the solution of their central equations. Kokkos’ role is as an enabler in these applications when it’s macros are properly integrated into the central algorithms (viz, kernels) of these applications. Testing of Kokkos’ macros is accomplished by replicating the mathematical implementations of typical kernels at a smaller scale and verifying the accuracy and performance characteristics of these replicas in a series of unit and performance tests.
+
+The Kokkos source directories identified below contain nearly a hundred tests problems that are exercised in nightly, release and promotion testing. Individual directories and test problems should be examined for necessary details of each test.
 
 ```c++
 kokkos/algorithms/{unit_tests   - 8; performance_tests  - ? }
@@ -90,5 +88,5 @@ kokkos/containers/{performance_tests   -  8; unit_tests   -  14 }
 kokkos/core/{perf_test   -  ?; unit_test    -  ? } 
 example  -  22
 ```
-Having run these test problems, the results are presented as either pass or fail. Failing problems are identified for examination. As these problems are designed to pass, failure will enable developers to locate coding in need of repair
+The results of running these tests are reported as either __pass__ or __fail__. Test problems that fail are identified for scrutiny so that software errors, inadequacies, and/or test problem deficiencies may be located and corrected.
 
