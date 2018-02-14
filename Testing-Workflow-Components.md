@@ -58,27 +58,26 @@ A backend in computing terminology refers to the system component that performs 
 
 All Kokkos testing is performed using one or more shell-scripts that are contained in the Kokkos source code; these may be found in directories kokkos/config or kokkos/scripts. These were developed to setup and run the Kokkos tests (Section Test Descriptions) on several backends for several supported compilers on several platforms and then to analyze and report the results to the test performer. These shell scripts are listed below as well as the Kokkos directory in which it is located; see Repository Management which identifies the host Github site. These scripts are not discussed or reviewed here but will be identified in the Section on Testing and the circumstances in which each is used.
 ```c++
-* kokkos
-* * generate_makefile.bash
-
-* kokkos/config:
-* * test-all-sandia
-
-* kokkos/scripts
-* * snapshot.py
-
 * kokkos/scripts/testing_scripts
-* * jenkins_test_driver
 * * test_kokkos_master_develop_promotion.sh
 
 * kokkos/scripts/trilinos-integration
-* * checkin-test               
-* * prepare_trilinos_repos.sh
-* * shepard_jenkins_run_script_pthread_intel  
-* * shepard_jenkins_run_script_serial_intel  
-* * white_run_jenkins_script_cuda
-* * white_run_jenkins_script_omp
+* * checkin-test
 ```
+
+<h4>Table 2.2: Kokkos Test Script Descriptions </h4>
+  
+ Script Name | Kokkos Source Directory | Script Description 
+ :----: |:----: |:--- 
+`generate_makefile.bash`| __kokkos__ | for selected options, this shell script generates a Makefile to run a set of tests. Options to be specified include the devices (i.e., the execution space), the architecture, the compiler and compiler flags for the Kokkos library, and a few other settings. A Makefile is created that builds and runs the tests identified in section __Test Descriptions__.
+`test-all-sandia`| __kokkos/config__ | a shell script that is run on a select machine for a select group of compilers and for the machine architecture.  The script accepts a set of options that define the specific results desired for a particular run.  For the machine this script is running on, the set of available compilers for the machines architecture will be run and the results processed. It can also run “spot checks” for a select subset of compilers on machines Apollos and Kokkos-dev.
+`jenkins_test_driver`| __kokkos/scripts/testing_scripts__ | This script accepts a build-type and host-compiler input to launch a build and run job on a target machine having created a makefile using _generate_makefile.bash_; it starts a job on the Jenkins continuous integration server; results are presented for configure, build and test steps; output for each of these steps can be examined through a dashboard.
+`snapshot.py`| __kokkos/scripts__ | In Git terminology, a snapshot is a copy of an entire software repository at a specific point in time (defined by its SHA-1). This python script takes a snapshot of one repository and performs the necessary repository actions to merge it into another repository at a specific point in history while generating a commit message for the git process to accomplish this joining operation.
+`prepare_trilinos_repos.sh` | kokkos/scripts/trilinos-integration | This script defines a set of environment variables for the two checkouts of trilinos necessary to perform the trilinos testing that precedes promotion of an updated Kokkos into the Trilinos repository. The environment variables are paths that point to the “pristine” trilinos branch and to the “updated” trilinos branch that contains a snapshot of the Kokkos develop branch into the Trilinos develop branch. This is the initial step preceding the trilinos integration tests that will take place on platforms Shepard and White.
+`shepard_jenkins_run_script_pthread_intel` | kokkos/scripts/trilinos-integration | loading a particular module for platform Shepard and the set of environment variables that point to the pristine and updated trilinos branches, this script sets up and runs a pthreads version of the trilinos checkin tests. Build flags for the appropriate Kokkos backends are set along with build flags and Kokkos cloned if necessary. Tests are run using scripts developed by the Sandia SEMS team; results are compared.
+`shepard_jenkins_run_script_serial_intel` | kokkos/scripts/trilinos-integration | same as for script _shepard_jenkins_run_script_pthread_intel_ except it runs the _serial_ workspace in place of the _pthread_ workspace.
+`white_run_jenkins_script_cuda` | kokkos/scripts/trilinos-integration | as for the trilinos tests on Shepard, these are on platform White to test different compilers and architecture. Similar setup of flags, backends and libraries precede submission of batch jobs to run using the SEMS-developed scripts. test results are reported as for the tests on Shepard.
+`white_run_jenkins_script_omp` | kokkos/scripts/trilinos-integration | same as for script _white_run_jenkins_script_cuda_ except it runs the _cuda_ workspace in place of the _omp_ workspace.
 
 ## Test Descriptions
 
