@@ -1,4 +1,5 @@
-The software test program components identified in the __Introduction__ are described individually in this section.
+The software test program components identified in the __Introduction__ are described individually in this section. 
+This chapter presents multiple aspects of the Kokkos test program and identifies the role of each component of the workflow. Establishing a “loaded vocabulary”, the actual testing activities are presented in the following chapter; the importance of these components to the overall testing activities is described in this chapter.
 
 ## Repository Management
 
@@ -30,20 +31,19 @@ To achieve the goal of enabling software applications to become performant on va
 
 ## Batch Queues
 
-Examining the list of machines in Table 2.1, one can see that a wide range of hardware types constitute our collection of test beds. Some platforms have several different types of processors, including CPUs and GPUs. In order to access a homogeneous collection of nodes when runs are made on one these machines, several queues have been setup, one for each hardware/architecture type. It is necessary to load the proper environment for these nodes and use a batch submission script that selects the desired queue explicitly. More details are provided in the section that discusses the test scripts used for all Kokkos testing.
+Examining the list of machines in Table 2.1, one can see that a wide range of hardware types constitute our collection of test beds. Some platforms have several different types of processors, including CPUs and GPUs. In order to access a homogeneous collection of nodes when test problems are exercised on one of these machines, several queues have been setup, one for each hardware/architecture type. It is necessary to load a specific environment for these nodes and use a batch submission script that targets the specific queue explicitly. More details are provided in the section that discusses the test scripts used in Kokkos testing.
 
 ## Computer Accounts
 
-Sandia computing machines are connected to various networks and require access permissions be obtained through an account control system, normally WebCARS. Each of the machines listed above requires an account be obtained through WebCARS, except for Apollos and Kokkos-dev. Machines identified as Local are normally personal hardware of various kinds that are issued to (Kokkos team) staff members. Accounts on _Kokkos-dev_ may be obtained through permission of Kokkos project leads and the assistance of CSRI CSU staff members. The _Kokkos-dev_ and primary machines are required accounts for most testing, but most especially for **promotion testing** (described below). It is recommended that Kokkos team members obtain accounts on all the machines listed in Table 2.1.
+Sandia computing machines are connected to multiple networks and require access permissions be obtained through an account control system; account control is normally through the WebCARS on-line utility. Each of the machines listed in Table 2.1 requires an account be obtained through WebCARS, except for _Apollos_ and _Kokkos-dev_. Machines identified as Local are normally personal hardware of various kinds that are issued to (Kokkos team) staff members. Accounts on _Kokkos-dev_ may be obtained through permission of Kokkos team leaders and the assistance of CSRI CSU staff members. The _Kokkos-dev_ and primary machines are required accounts for most testing, but most especially for __promotion testing__ (described below). It is recommended that Kokkos team members obtain accounts on all the machines identified in Table 2.1.
 
 ## Compilers
  
-Numerous compilers are available on the platforms identified in Table 2.1; this availability is provided by a range of modules. The modules that are utilized for the Kokkos testing described herein are identified in the Section on Test Scripts. From among the wide range of available compilers, Kokkos supports a select set of these. The final discriminator of what constitutes support is determined by the set of compilers tested regularly through the nightly jobs submitted using the Jenkins servers. A version of this list is also provided through the README.md in the Kokkos Git repository ( https://github.com/kokkos/kokkos.git  ), and, the current version is presented in Attachment C. Note, this set of compilers is not supported on any one platform but among the collection of platforms described in the Platform section above. This list also appears in the _test_all_sandia_ driver script in **kokkos/config**.
+Numerous compilers are installed on the platforms identified in Table 2.1; access to these compilers is administered using a module utility and the modules setup for the installed compilers. From among this set of installed compilers, Kokkos selects a subset that will constitute __Kokkos-supported__ compilers. Every supported compiler requires extensive testing to inherit the __supported__ label. In particular, compiler-platform pairs must be include the daily/nightly testing regimen that is established using the Jenkins continuous-integration software. All supported compilers are included in this extensive suite of testing evaluations. A list of these test jobs is only present as a view of the Jenkins dashboard. However, a version of this list can be seen as a snapshot (in-time) that exists as the _README.md_ in the Kokkos Git repository ( https://github.com/kokkos/kokkos.git  ). The current version of this list is presented in _Attachment C_. Important to remember is that this set of compilers is not supported on any one platform but as a collection of installed and tested compilers among the numerous platforms described in the __Platforms__ section above. This list is also built into the _test_all_sandia_ driver script (repository directory __kokkos/config__) that controls many of the individual developer-requested testings that happen in the Kokkos-team work flow.
 
 ## Backends
 
-A backend in computing terminology refers to the system component that performs the majority of the work or computation.  For application to Kokkos, a backend essentially identifies a mode in which executables are compiled and defines the manner in which the hardware/processors are addressed to complete the assigned commands. The supported options for backends in Kokkos-based simulations are:
-
+A backend in computing terminology refers to the system component that performs the majority of the work or computation.  For application to Kokkos, a backend essentially identifies a joint hardware-software configuration that enables the software application to address and utilize the computational power of specific processor types and their local memory spaces. Essential aspects of this Kokkos feature are the execution and memory spaces that define backends. The supported options for backends in Kokkos-based simulations are (correct?, please edit):
 
 ```c++
 * Serial
@@ -53,10 +53,11 @@ A backend in computing terminology refers to the system component that performs 
 * Cuda
 * ROCm
 ```
+Note that the ROCm backend is currently experimental (under development).
 
 ## Test Scripts
 
-All Kokkos testing is performed using one or more shell-scripts that are contained in the Kokkos source code; these may be found in directories kokkos/config or kokkos/scripts. These were developed to setup and run the Kokkos tests (Section Test Descriptions) on several backends for several supported compilers on several platforms and then to analyze and report the results to the test performer. These shell scripts are listed below as well as the Kokkos directory in which it is located; see Repository Management which identifies the host Github site. These scripts and their role in the testing workflow are briefly described in Table 2.2.
+All Kokkos testing is directed by shell-scripts that are a part of the Kokkos source code; these may be found in the top-level kokkos directory as well as kokkos/config and kokkos/scripts. They were developed to setup and run the Kokkos tests on several backends for several supported compilers on several platforms; the scripts then analyze and report the results to the test performer. These scripts and their role in the testing workflow are briefly described in Table 2.2 (Kokkos Test Script Descriptions).
 
 <h4>Table 2.2: Kokkos Test Script Descriptions </h4>
   
@@ -77,7 +78,7 @@ All Kokkos testing is performed using one or more shell-scripts that are contain
 
 ## Kokkos Tests: Unit and Performance
 
-As described in the Introduction, Kokkos is a library of macros designed to enable applications of all flavors to experience the power and speed of evolving computer processors in the solution of their central equations. Kokkos’ role is as an enabler in these applications when it’s macros are properly integrated into the central algorithms (viz, kernels) of these applications. Testing of Kokkos’ macros is accomplished by replicating the mathematical implementations of typical kernels at a smaller scale and verifying the accuracy and performance characteristics of these replicas in a series of unit and performance tests.
+As described in the __Introduction__, Kokkos is a library of macros designed to enable applications of all flavors to experience the power and speed of evolving computer processors in the solution of their central equations. Kokkos’ role is as an _enabler_ in these applications when it’s macros are properly integrated into the central algorithms (viz, kernels) of these applications. Testing of Kokkos’ macros is accomplished by replicating the mathematical implementations of typical kernels at a smaller scale and verifying the accuracy and performance characteristics of these replicas in a series of unit and performance tests.
 
 The Kokkos source directories identified below contain nearly a hundred tests problems that are exercised in nightly, release and promotion testing. Individual directories and test problems should be examined for necessary details of each test.
 
