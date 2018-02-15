@@ -4,55 +4,56 @@
 
 The following list is taken from file kokkos/README in the Kokkos Github repository. (15Feb18)
 
-`Primary tested compilers on X86 are:`
-  `GCC 4.8.4`
-  `GCC 4.9.3`
-  `GCC 5.1.0`
-  `GCC 5.3.0`
-  `GCC 6.1.0`
-  `Intel 15.0.2`
-  `Intel 16.0.1`
-  `Intel 17.1.043`
-  `Intel 17.4.196`
-  `Intel 18.0.128`
-  `Clang 3.5.2`
-  `Clang 3.6.1`
-  `Clang 3.7.1`
-  `Clang 3.8.1`
-  `Clang 3.9.0`
-  `Clang 4.0.0`
-  `Clang 4.0.0 for CUDA (CUDA Toolkit 8.0.44)`
-  `PGI 17.10`
-  `NVCC 7.0 for CUDA (with gcc 4.8.4)`
-  `NVCC 7.5 for CUDA (with gcc 4.8.4)`
-  `NVCC 8.0.44 for CUDA (with gcc 5.3.0)`
+* Primary tested compilers on X86 are:
+    * GCC 4.8.4
+    * GCC 4.9.3
+    * GCC 5.1.0
+    * GCC 5.3.0
+    * GCC 6.1.0
+    * Intel 15.0.2
+    * Intel 16.0.1
+    * Intel 17.1.043
+    * Intel 17.4.196
+    * Intel 18.0.128
+    * Clang 3.5.2
+    * Clang 3.6.1
+    * Clang 3.7.1
+    * Clang 3.8.1
+    * Clang 3.9.0
+    * Clang 4.0.0
+    * Clang 4.0.0 for CUDA (CUDA Toolkit 8.0.44)
+    * PGI 17.10
+    * NVCC 7.0 for CUDA (with gcc 4.8.4)
+    * NVCC 7.5 for CUDA (with gcc 4.8.4)
+    * NVCC 8.0.44 for CUDA (with gcc 5.3.0)
 
-`Primary tested compilers on Power 8 are:`
-  `GCC 5.4.0 (OpenMP,Serial)`
-  `IBM XL 13.1.5 (OpenMP, Serial) (There is a workaround in place to avoid a compiler bug)`
-  `NVCC 8.0.44 for CUDA (with gcc 5.4.0)`
-  `NVCC 9.0.103 for CUDA (with gcc 6.3.0)`
+* Primary tested compilers on Power 8 are:
+    * GCC 5.4.0 (OpenMP,Serial)
+    * IBM XL 13.1.5 (OpenMP, Serial) (There is a workaround in place to avoid a compiler bug)
+    * NVCC 8.0.44 for CUDA (with gcc 5.4.0)
+    * NVCC 9.0.103 for CUDA (with gcc 6.3.0)
 
-`Primary tested compilers on Intel KNL are:`
-  `GCC 6.2.0`
-  `Intel 16.4.258 (with gcc 4.7.2)`
-  `Intel 17.2.174 (with gcc 4.9.3)`
-  `Intel 18.0.128 (with gcc 4.9.3)`
+* Primary tested compilers on Intel KNL are:
+    * GCC 6.2.0
+    * Intel 16.4.258 (with gcc 4.7.2)
+    * Intel 17.2.174 (with gcc 4.9.3)
+    * Intel 18.0.128 (with gcc 4.9.3)
 
-`Other compilers working:`
-  `X86:`
-  `Cygwin 2.1.0 64bit with gcc 4.9.3`
+* Other compilers working:
+    * X86:
+    * Cygwin 2.1.0 64bit with gcc 4.9.3
 
-`Known non-working combinations:`
-  `Power8:`
-  `Pthreads backend`
+* Known non-working combinations:
+    *  Power8:
+    *  Pthreads backend
 
 
-Primary tested compiler are passing in release mode
-with warnings as errors. They also are tested with a comprehensive set of 
-backend combinations (i.e. OpenMP, Pthreads, Serial, OpenMP+Serial, ...).
+Primary tested compiler are passing in release mode with warnings as errors.
+They also are tested with a comprehensive set of backend combinations (i.e. OpenMP, Pthreads, Serial, OpenMP+Serial, ...).
 We are using the following set of flags:
 GCC:   -Wall -Wshadow -pedantic -Werror -Wsign-compare -Wtype-limits
+
+----
 
 ## B.  Listing of File kokkos/config/kokkos-promotion.txt
 
