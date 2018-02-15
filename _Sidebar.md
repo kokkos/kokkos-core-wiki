@@ -33,5 +33,5 @@
 
 ## **[[A Guide to Kokkos Testing Processes]]**
 1. **[[Kokkos Testing Processes|Testing Processes]]**
-2. **[[Components of Testing Workflow|Testing Workflow Components]]**
+2. **[[Testing Workflow Components|Testing Workflow Components]]**
 3. **[[Kokkos Testing|Kokkos Testing Description]]**
