@@ -32,6 +32,6 @@
 6. **[[Task Parallelism|Task-Parallelism-API]]**
 
 ## **[[A Guide to Kokkos Testing Processes]]**
-1. **[[Kokkos Testing Processes|Kokkos Testing Processes]]**
+1. **[[Testing Processes|Testing Processes]]**
 2. **[[Testing Workflow Components|Testing Workflow Components]]**
 3. **[[Kokkos Testing|Kokkos Testing Description]]**
