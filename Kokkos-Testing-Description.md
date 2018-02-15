@@ -8,30 +8,7 @@ This section of the Testing description develops the primary focus of the docume
 
 In Git, a branch is a divergence from the main (or master) line of a software repository; it is where most of the development takes place. The Kokkos team uses two main Git branches in its software development process: Kokkos *Master* and *develop*. Other branches will exist during a development cycle, e.g. *issue-865* or *array-bounds*, but the above are the branches of interest when merging changes into the master repository. The other development branches (e.g., *issue-865*) are committed to the develop branch with a pull request to become integrated into the *develop* branch set of working changes for the development cycle.
 
-## Description of the Kokkos Testing Scripts
-
-This section provides a functional description of the scripts identified in the **Test Scripts** section above. The role of each script in the Kokkos workflow is described.
-
-* **kokkos/scripts/testing_scripts/jenkins_test_driver** Jenkins is a continuous integration tool that can be triggered to perform software builds and/or tests or can be run in a cron-based mode. This script accepts a build-type and host-compiler input to launch a build and run job on a target machine having created a makefile using generate_makefile.bash.  Jenkins results for a configure, build and test step can be examined in the output and is available through a dashboard.
-
-* **kokkos/generate_makefile.bash**  Given a set of options, this shell script generates a Makefile to run a set of tests. The options to be specified include the devices (i.e., the execution space), the architecture, the compiler and compiler flags for the Kokkos library, and a few other settings. With the specified settings, a Makefile is created that will build and run the tests identified in Section Test Descriptions. 
-
-* **kokkos/config/test-all-sandia**   A shell script that is run on a select machine for a select group of compilers and for the machine architecture.  The script accepts a set of options that define the specific results desired for a particular run.  For the machine this script is running on, the set of available compilers for the machines architecture will be run and the results processed. It can also run “spot checks,” a select subset of compilers for machines Apollos and Kokkos-dev.
-
-* **kokkos/scripts/trilinos-integration/checkin-test**  this script loads a set of SEMS modules for a trilinos checkinTest. This latter test (script) does not exist in the Kokkos repository at this time.
-
-* **kokkos/scripts/testing_scripts/test_kokkos_master_develop_promotion.sh**  [not used ??] For a specific set of parameters – backend, module, compiler, CxxFlags, architecture, kokkos options, cudea options, and HWLOC – a makefile is crated using generate_makefile.sh. [this makefile script is not the same as mentioned above with a .bash extension]
-
-* **kokkos/scripts/trilinos-integration/prepare_trilinos_repos.sh**  This bash script defines a set of environment variables for the two checkouts of trilinos necessary to perform the trilinos testing that precedes promotion of an updated Kokkos into the Trilinos repository. The environment variables are paths that point to the “pristine” trilinos branch and to the “updated” trilinos branch that contains a snapshot of the Kokkos develop branch into the Trilinos develop branch. This is the initial step preceding the trilinos integration tests that will take place on platforms Shepard and White. (See next scripts.)
-
-* **kokkos/scripts/snapshot.py**  In Git terminology, a snapshot is a copy of an entire software repository at a specific point in time (defined by its SHA-1). This is a python script that takes a snapshot of one repository and performs the necessary repository actions to merge it into another repository at a specific point in history while generating a commit message for the git process to accomplish this joining operation.
-
-* **kokkos/scripts/trilinos-integration/ 
-shepard_jenkins_run_script_pthread_intel  &  shepard_jenkins_run_script_serial_intel**  loading a particular module for platform Shepard and the set of environment variables that point to the pristine and updated trilinos branches, these scripts set up and run a pthreads and serial version of the trilinos checkin tests. Build flags for the appropriate Kokkos backends are set along with build flags and Kokkos cloned if necessary. Tests are run using scripts developed by the Sandia SEMS team and results are compared. 
-
-* **kokkos/scripts/trilinos-integration/white_run_jenkins_script_cuda & white_run_jenkins_script_omp**  as for the trilinos tests on Shepard, these are on platform White to test different compilers and architecture. Similar setup of flags, backends and libraries precede submission of batch jobs to run using the SEMS-developed scripts. test results are reported as for the tests on Shepard.
-
-## Kokkos Routine/Daily Testing
+## Kokkos Routine/Daily/Nightly Testing
 
 Testing is a through-going aspect of software development, touching all phases of a software project. Bringing together the test scripts, the test problems and repository management methodology identified in the previous section, a team methodology has evolved that will evaluate the correctness and speed of the development product prior to commit. Each developer will use a combination of existing unit and performance tests or newly written tests in combination with existing or standalone test scripts to evaluate bugfixes, new features and evaluate one approach versus another for improving performance. Submission of a commit with a pull request will initiate a software review followed by suggestions for improvement or approval of the pull request.
 
@@ -42,7 +19,9 @@ Another aspect of routine testing are the nightly tests on multiple platforms in
 A set of tutorial problems have been developed for use in hands-on training exercises. These are not part of a scheduled test regimen; however, they are run and performance data updated periodically when Kokkos capabilities have changed significantly or new compilers and architectures are added to our repertoire.
 
 
-## Kokkos Promotion Testing
+## Kokkos Promotion Testing and Promotion Processes
+
+Special focus is given to the components of promotion testing, describing the stages of the test process by which the develop branch of Kokkos (containing the latest set of software improvements and bug fixes) are pushed into a tagged Kokkos Master and then into the Trilinos Master repository. Note, Kokkos is a Trilinos package. This process is woven into and dependent on our chosen repository management software Git [e.g., Pro Git, Chacon & Straub, 2014]. The description of the promotion workflow includes details of the many-step process, including the git commands that are integral to the promotion process.
 
 Promotion testing refers to the process established that leads to integration of the stand-alone version of the Kokkos software back into the parent Trilinos software as a package (the basic unit of identity in Trilinos). The promotion testing process was developed to satisfy the requirements for pushing Kokkos software updates into Trilinos with the confidence that these updates will not adversely affect the integrity of other packages that depend on Kokkos, nor will it adversely affect the Trilinos software repository itself.
 
