@@ -1,9 +1,11 @@
+# Kokkos Testing Workflow Components
+
 The software test program components identified in the __Introduction__ are described individually in this section. 
-This chapter presents multiple aspects of the Kokkos test program and identifies the role of each component of the workflow. Establishing a “loaded vocabulary”, the actual testing activities are presented in the following chapter; the importance of these components to the overall testing activities is described in this chapter.
+This chapter presents multiple aspects of the Kokkos test program and identifies the role of each component of the workflow. Establishing a “loaded vocabulary”, the importance of these components to the overall testing activities is described in this chapter. The actual testing activities are presented in the following chapter.
 
-## Repository Management
+## Software Management for the Kokkos Git Repository
 
-The Kokkos software is hosted in a repository on Github (https://github.com/github/kokkos/kokkos.git). A git clone command will by default place all software in directories with a top-level named kokkos.  Scripts, tests, description files, etc. are referenced in following texts relative to this top-level.
+Git is a distributed management system; a complete snapshot of the Kokkos software can be obtained from the Kokkos clone site ( https://github.com/github/kokkos/kokkos.git ). A clone from this Git remote site, called by default __origin__, obtains a branch called by default __master__. Each branch is an independent copy of a Git database (called the software repository here) and where development of a software project takes place. The Kokkos team has two branches of primary importance in its software development process: Kokkos __master__ and __develop__; the former is treated as the official version of Kokkos (forked from Trilinos) and the latter the official branch that collects changes from developers during a development cycle. Both branches limit write-privileges to the project owners. Developers create branches, e.g. issue-865 or array-bounds, for their work and submit pull requests (fetch and merge) to the owners to integrate the branch changes for the current development cycle. The pull request often contains suggestions for review and presentation of testing results. When a development cycle is complete, the process for integration of Kokkos changes into the Trilinos repository (the promotion process) is begun. At the conclusion of a successful promotion, the master branch of Kokkos receives a pull request from the develop branch; after approval, the cycle begins again.
 
 ## Platforms
 
@@ -31,11 +33,11 @@ To achieve the goal of enabling software applications to become performant on va
 
 ## Batch Queues
 
-Examining the list of machines in Table 2.1, one can see that a wide range of hardware types constitute our collection of test beds. Some platforms have several different types of processors, including CPUs and GPUs. In order to access a homogeneous collection of nodes when test problems are exercised on one of these machines, several queues have been setup, one for each hardware/architecture type. It is necessary to load a specific environment for these nodes and use a batch submission script that targets the specific queue explicitly. More details are provided in the section that discusses the test scripts used in Kokkos testing.
+Examining the list of machines in Table 2.1, one can see a wide range of hardware types constitute our collection of test beds. Some platforms have several different types of processors, including CPUs and GPUs. In order to access a homogeneous collection of nodes when test problems are exercised on one of these machines, several queues have been setup, one for each hardware/architecture type. It is necessary to load a specific environment for these nodes and use a batch submission script that targets the specific queue explicitly. More details are provided in the section that discusses the test scripts used in Kokkos testing.
 
 ## Computer Accounts
 
-Sandia computing machines are connected to multiple networks and require access permissions be obtained through an account control system; account control is normally through the WebCARS on-line utility. Each of the machines listed in Table 2.1 requires an account be obtained through WebCARS, except for _Apollos_ and _Kokkos-dev_. Machines identified as Local are normally personal hardware of various kinds that are issued to (Kokkos team) staff members. Accounts on _Kokkos-dev_ may be obtained through permission of Kokkos team leaders and the assistance of CSRI CSU staff members. The _Kokkos-dev_ and primary machines are required accounts for most testing, but most especially for __promotion testing__ (described below). It is recommended that Kokkos team members obtain accounts on all the machines identified in Table 2.1.
+Sandia computing machines are connected to multiple networks and require access permissions be obtained through an account control system; account control is normally through the WebCARS on-line utility. Each of the machines listed in Table 2.1 requires an account be obtained through WebCARS, except for _Apollos_ and _Kokkos-dev_. Machines identified as Local are normally personal hardware of various kinds that are issued to (Kokkos team) staff members. Accounts on _Kokkos-dev_ may be obtained through permission of Kokkos team leaders and the assistance of CSRI CSU staff members. The _Kokkos-dev_ and primary machines are required accounts for most testing, but most especially for __promotion testing__ (described in Section 3). It is recommended that Kokkos team members obtain accounts on all the machines identified in Table 2.1.
 
 ## Compilers
  
@@ -78,9 +80,9 @@ All Kokkos testing is directed by shell-scripts that are a part of the Kokkos so
 
 ## Kokkos Tests: Unit and Performance
 
-As described in the __Introduction__, Kokkos is a library of macros designed to enable applications of all flavors to experience the power and speed of evolving computer processors in the solution of their central equations. Kokkos’ role is as an _enabler_ in these applications when it’s macros are properly integrated into the central algorithms (viz, kernels) of these applications. Testing of Kokkos’ macros is accomplished by replicating the mathematical implementations of typical kernels at a smaller scale and verifying the accuracy and performance characteristics of these replicas in a series of unit and performance tests.
+As described in the __Introduction__, Kokkos is a library of macros designed to enable applications of all flavors to experience the power and speed of evolving computer processors in the solution of their central equations. Kokkos’ role is as an _enabler_ in these applications when it’s macros are properly integrated into the central algorithms (viz, kernels) of these applications. Testing of Kokkos’ macros is accomplished by replicating some of the mathematical implementations of typical kernels at a smaller scale and verifying the accuracy and performance characteristics of these replicas in a series of unit and performance tests.
 
-The Kokkos source directories identified below contain nearly a hundred tests problems that are exercised in nightly, release and promotion testing. Individual directories and test problems should be examined for necessary details of each test.
+The Kokkos source directories identified below contain nearly a hundred tests problems that are exercised in debugging, nightly, release and promotion testing. Individual directories and test problems should be examined for necessary details of each test.
 
 ```c++
 kokkos/algorithms/{unit_tests   - 8; performance_tests  - ? }
