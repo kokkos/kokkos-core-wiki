@@ -71,9 +71,7 @@ Summary:
 
 Steps 1, 2, and 4 include testing that may fail. These failures must be fixed either by pull requests to Kokkos develop, or by creating a new Trilinos branch for parts of Trilinos that must be updated. This is what usually takes the most time.
 
-
-// ----------------------------------------------------------------------- //
-
+// ----------------------------------------------------------------------------------------------------- //
 
 Step 1: The following should be repeated on enough machines to cover all
 supported compilers. Those machines are:
@@ -96,7 +94,7 @@ supported compilers. Those machines are:
          nohup ../config/test_all_sandia &
          tail -f nohup.out                   # to watch progress
 
-// ----------------------------------------------------------------------- //
+// ----------------------------------------------------------------------------------------------------- //
 
 Step 2:
   2.1. Build and test Trilinos with 4 different configurations; Run scripts for white and shepard that are provided in kokkos/config/trilinos-integration. These scripts load their own modules/environment, so don't require preparation. You can run all four at the same time, use separate directories for each.
@@ -108,7 +106,7 @@ Step 2:
 
   2.2. Compare the compile errors and test failures between updated and pristine versions. There may be compile failures that happen in both, tests that fail in both, and there may be tests that only fail sometimes (thus, rerun tests manually as needed).
 
-// ----------------------------------------------------------------------- //
+// ----------------------------------------------------------------------------------------------------- //
 
 Step 3: This step should be run on kokkos-dev
 
@@ -166,7 +164,8 @@ Step 3: This step should be run on kokkos-dev
          develop: sha1
 
   3.8. DO NOT PUSH YET !!!
-// ----------------------------------------------------------------------- //
+
+// ----------------------------------------------------------------------------------------------------- //
 
 Step 4: This step can be done on any SEMS machine (e.g. kokkos-dev). Actually, the checkin step requires lots of disk space and RAM. Use ceerws1113 if you have access to it.
 
@@ -189,7 +188,7 @@ Step 4: This step can be done on any SEMS machine (e.g. kokkos-dev). Actually, t
 
   4.4. If there are failures, fix and backtrack. Otherwise, go to next step
 
-// ----------------------------------------------------------------------- //
+// ----------------------------------------------------------------------------------------------------- //
 
 Step 5: Push Kokkos master to GitHub (requires Owner permission).
 
