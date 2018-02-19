@@ -58,7 +58,7 @@ We are using the following set of flags:
 
 ----
 
-## B.  Listing of File kokkos/config/kokkos-promotion.txt
+## B.  File:  kokkos-promotion.txt
 
 Summary:
 
@@ -100,11 +100,11 @@ supported compilers. Those machines are:
 // ----------------------------------------------------------------------------------------------------- //
 
 Step 2:
-  2.1. Build and test Trilinos with 4 different configurations; Run scripts for white and shepard that are provided in kokkos/config/trilinos-integration. These scripts load their own modules/environment, so don't require preparation. You can run all four at the same time, use separate directories for each.
+  2.1. Build and test Trilinos with 4 different configurations; Run scripts for white and shepard that are provided in kokkos/scripts/trilinos-integration. These scripts load their own modules/environment, so don't require preparation. You can run all four at the same time, use separate directories for each.
 
          mkdir serial
          cd serial
-         nohup KOKKOS_PATH/config/trilinos/integration/
+         nohup KOKKOS_PATH/scripts/trilinos-integration/
                           shepard_jenkins_run_script_serial_intel &
 
   2.2. Compare the compile errors and test failures between updated and pristine versions. There may be compile failures that happen in both, tests that fail in both, and there may be tests that only fail sometimes (thus, rerun tests manually as needed).
@@ -139,7 +139,7 @@ Step 3: This step should be run on kokkos-dev
        git checkout master
        git merge --no-ff origin/develop
 
-  3.6. Update the tag in kokkos/config/master_history.txt
+  3.6. Update the tag in kokkos/master_history.txt
 
        Tag description: MajorNumber.MinorNumber.WeeksSinceMinorNumberUpdate
        Tag field widths: #.#.##
@@ -149,7 +149,7 @@ Step 3: This step should be run on kokkos-dev
        develop description: SHA1 of merged develop branch
        SHA1 field width: ######## (8 chars)
 
-       # Append to config/master_history.txt:
+       # Append to master_history.txt:
 
        tag:  2.03.13    date: 07:27:2017    master: da314444    develop: 29ccb58a
 
@@ -180,7 +180,7 @@ Step 4: This step can be done on any SEMS machine (e.g. kokkos-dev). Actually, t
   4.2 Snapshot Kokkos into Trilinos - this requires python/2.7.9 and that both Trilinos and Kokkos be clean - no untracked or modified files. Run the following outside of the Kokkos and Trilinos source trees.
 
         module load sems-python/2.7.9
-        python KOKKOS_PATH/config/snapshot.py KOKKOS_PATH TRILINOS_PATH/packages
+        python KOKKOS_PATH/scripts/snapshot.py KOKKOS_PATH TRILINOS_PATH/packages
 
   4.3. Run checkin-test to push to trilinos using the CI build modules (gcc/4.9.3)
 
