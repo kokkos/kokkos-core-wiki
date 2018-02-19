@@ -47,11 +47,14 @@ The following list is taken from file kokkos/README in the Kokkos Github reposit
     *  Power8:
     *  Pthreads backend
 
-
 Primary tested compiler are passing in release mode with warnings as errors.
-They also are tested with a comprehensive set of backend combinations (i.e. OpenMP, Pthreads, Serial, OpenMP+Serial, ...).
+
+They also are tested with a comprehensive set of backend combinations:
+    ```OpenMP, Pthreads, Serial, OpenMP+Serial, ...```
+
 We are using the following set of flags:
-GCC:   -Wall -Wshadow -pedantic -Werror -Wsign-compare -Wtype-limits
+    ```GCC:   -Wall -Wshadow -pedantic -Werror -Wsign-compare -Wtype-limits```
+
 
 ----
 
