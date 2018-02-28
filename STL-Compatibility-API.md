@@ -1,6 +1,8 @@
 ## STL Compatibility Issues
 
-Kokkos developers strive to implement the Kokkos macros in a manner compatible with the latest versions of the C++ language and with the C++ Standard Library (STL). However deviations from this approach occur when necessary. This section documents several of those deviations and provides information for developers in the following specific areas. Selecting the link for the topic of interest will connect to the appropriate presentation and discussion.
+Kokkos developers strive to implement the Kokkos macros in a manner compatible with the latest versions of the C++ language and with the C++ Standard Library (STL). However deviations from this approach occur when necessary. This section documents several of those deviations and provides information for developers in the following specific areas; each can be accessed by selecting the appropriate link.
+
+----------
 
 |Type  |Description                  |
 |:-----|:----------------------------|
