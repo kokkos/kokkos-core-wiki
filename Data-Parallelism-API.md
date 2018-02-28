@@ -1,10 +1,3 @@
-## Data Types
-
-|Type  |Description                  |
-|:-----|:----------------------------|
-|[Kokkos::Complex](Kokkos%3A%3AComplex) | Definitions for Kokkos::Complex Data Type |
-
-
 ## Parallel patterns
 
 |Function  |Description                  |
