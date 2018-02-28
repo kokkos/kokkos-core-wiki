@@ -30,7 +30,7 @@
 4. **[[Execution Policies|Execution-Policy-API]]**
 5. **[[Memory Spaces|Memory-Space-API]]**
 6. **[[Task Parallelism|Task-Parallelism-API]]**
-7. **[[STD Compatibility |STL-Compatibility-API]]**
+7. **[[STL Compatibility |STL-Compatibility-API]]**
 
 ## **[[A Guide to Kokkos Testing Processes]]**
 1. **[[Testing Processes|Testing Processes]]**
