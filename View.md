@@ -140,7 +140,27 @@ a = b; // assignment does shallow copy
 
 For efficiency, View allocation and reference counting turn off inside of Kokkos' parallel for, reduce, and scan operations. This affects what you can do with Views inside of Kokkos' parallel operations.
 
-### 6.2.6 Resizing
+### 6.2.6 Lifetime
+
+The lifetime of an allocation begins when a View is constructed by an allocating constructor such as
+```cpp
+Kokkos::View<int*> b("b", 10);
+```
+The lifetime of an allocation ends when there are no more Views which reference that allocation (see reference counting above).
+
+Kokkos requires that the lifetime of all allocations ends before the call to `Kokkos::finalize`!
+
+For example, the following is incorrect usage of Kokkos:
+```cpp
+int main() {
+  Kokkos::initialize();
+  Kokkos::View<double*> ("view constructed rcp", N);
+  Kokkos::finalize();
+  // p is destroyed here, after Kokkos::finalize
+}
+```
+
+### 6.2.7 Resizing
 
 Kokkos Views can be resized using the `resize` non-member function. It takes an existing view as its input by reference and the new dimension information corresponding to the constructor arguments. A new view with the new dimensions will be created and a kernel will be run in the views execution space to copy the data element by element from the old view to the new one. Note that the old allocation is only deleted if the view to be resized was the _only_ view referencing the underlying allocation.
 
