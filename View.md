@@ -154,7 +154,7 @@ For example, the following is incorrect usage of Kokkos:
 ```cpp
 int main() {
   Kokkos::initialize();
-  Kokkos::View<double*> ("view constructed rcp", N);
+  Kokkos::View<double*> p("view constructed rcp", N);
   Kokkos::finalize();
   // p is destroyed here, after Kokkos::finalize
 }
