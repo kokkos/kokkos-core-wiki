@@ -140,6 +140,8 @@ Variable  | Description
 `Maxwell53` | NVIDIA Maxwell generation CC 5.3
 `Pascal60` | NVIDIA Pascal generation CC 6.0
 `Pascal61` | NVIDIA Pascal generation CC 6.1
+`Volta70` | NVIDIA Volta generation CC 7.0
+`Volta72` | NVIDIA Volta generation CC 7.2
 
 
 Multiple architectures can be specified by separting the architecture variables with a semi-colon, for example `KOKKOS_ARCH:STRING="HSW;Kepler35` sets architecture variables for a machine with Intel Haswell CPUs and a NVIDIA Tesla K40 GPU. In addition, when setting the `KOKKOS_ARCH` variable it is not necessary to pass required architecture-specific flags to CMake, for example via the `CMAKE_CXX_FLAGS` variable.
