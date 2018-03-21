@@ -4,7 +4,7 @@ _Kokkos::Complex_ math functions are defined for the same builtin data types spe
 
 Developers will have greater success in the long term by following the general strategy outlined below.
 
-```
+```c++
    using std::sqrt;
    Scalar x = ...
    Scalar y = sqrt(x);
