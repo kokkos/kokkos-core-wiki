@@ -29,6 +29,25 @@ template <class ExecPolicy, class FunctorType>
 Kokkos::parallel_reduce(const ExecPolicy& policy, const FunctorType& functor);
 ```
 
+```cpp
+template <class ExecPolicy, class FunctorType, class ReducerArgument>
+Kokkos::parallel_reduce(const std::string& name, const ExecPolicy& policy, const FunctorType& functor, const ReducerArgument& reducer);
+```
+
+```cpp
+template <class ExecPolicy, class FunctorType, class ReducerArgument>
+Kokkos::parallel_reduce(const ExecPolicy& policy, const FunctorType& functor, const ReducerArgument& reducer);
+```
+
+```cpp
+template <class ExecPolicy, class FunctorType, class ReducerArgumentNonConst>
+Kokkos::parallel_reduce(const std::string& name, const ExecPolicy& policy, const FunctorType& functor, ReducerArgumentNonConst& reducer);
+```
+
+```cpp
+template <class ExecPolicy, class FunctorType, class ReducerArgumentNonConst>
+Kokkos::parallel_reduce(const ExecPolicy& policy, const FunctorType& functor, ReducerArgumentNonConst& reducer);
+```
 ### Parameters:
 
   * `name`: A user provided string which is used in profiling and debugging tools via the Kokkos Profiling Hooks. 
@@ -40,7 +59,9 @@ Kokkos::parallel_reduce(const ExecPolicy& policy, const FunctorType& functor);
     * `TeamThreadRange`: defines a 1D iteration range to be executed by a thread-team. Only valid inside a parallel region executed through a `TeamPolicy` or a `TaskTeam`.
     * `ThreadVectorRange`: defines a 1D iteration range to be executed through vector parallelization. Only valid inside a parallel region executed through a `TeamPolicy` or a `TaskTeam`.
   * FunctorType: A valid functor with an `operator()` with a matching signature for the `ExecPolicy`
-  * ReducerArgument is either a class fullfilling the "Reducer" concept, an scalar argument taken by reference or a `Kokkos::View`
+  * ReducerArgument: Either a class fullfilling the "Reducer" concept, or a `Kokkos::View`
+  * ReducerArgumentNonConst: Either a class fullfilling the "Reducer" concept, a POD type with `operator +=` and `operator =`, or a `Kokkos::View`
+
 
 ### Requirements:
   
@@ -50,9 +71,9 @@ Kokkos::parallel_reduce(const ExecPolicy& policy, const FunctorType& functor);
   * If `ExecPolicy` is `MDRangePolicy` the `functor` has a member function of the form `operator() (const IntegerType& i0, ... , const IntegerType& iN, ReducerValueType& value) const` or `operator() (const WorkTag, const IntegerType& i0, ... , const IntegerType& iN, ReducerValueType& value) const` 
     * The `WorkTag` free form of the operator is used if `ExecPolicy::work_tag` is not `void`.
     * `N` must match `ExecPolicy::rank`
-  * The reduction argument type `ReducerValueType` of the `functor` operator must be compatible with the `ReducerArgument` and must match `init`, `join` and `final` argument types of the functor if those exist.
+  * The reduction argument type `ReducerValueType` of the `functor` operator must be compatible with the `ReducerArgument` (or `ReducerArgumentNonConst`) and must match `init`, `join` and `final` argument types of the functor if those exist. If `ReducerArgument`
     * is a scalar type: `ReducerValueType` must be of the same type.
-    * is a `Kokkos::View`: `ReducerArgument::rank` must be 1 and `ReducerArgument::non_const_value_type` must match `ReducerValueType`.
+    * is a `Kokkos::View`: `ReducerArgument::rank` must be 0 and `ReducerArgument::non_const_value_type` must match `ReducerValueType`.
     * satisfies the `Reducer` concept: `ReducerArgument::value_type` must match `ReducerValueType`  
   
 ## Semantics
