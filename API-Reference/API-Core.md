@@ -1,5 +1,5 @@
-## [Data Parallelism](Data-Parallelism-API)
+## [Data Parallelism](Data-Parallelism)
 
-## [Execution Policies](Execution-Policy-API)
+## [Execution Policies](Execution-Policies)
 
-## [Execution Spaces](Execution-Space-API)
+## [Execution Spaces](Execution-Space)
