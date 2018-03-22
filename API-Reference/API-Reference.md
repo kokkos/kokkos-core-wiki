@@ -1,3 +1,3 @@
-## [Core Library](API-Reference/API-Core)
+## [Core Library](API-Core)
 
 ## [Containers Library](API-Containers)
