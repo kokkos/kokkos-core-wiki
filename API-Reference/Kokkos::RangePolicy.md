@@ -1,11 +1,77 @@
-```cpp
-Kokkos::RangePolicy<ExecSpace, WorkTag, Index>
-```
-Template parameters: an [Execution Space](Execution-Space-API) `ExecSpace`, a work tag, and an integral `Index` type (e.g. `int`). Any subset of these may be omitted, but those provided must be in the same order shown above. `ExecSpace` defaults to `Kokkos::DefaultExecutionSpace`, `WorkTag` defaults to `void`, and `Index` defaults to `ExecSpace::index_type`.
+# `Kokkos::RangePolicy`
 
-If the `WorkTag` is not `void`, then the user functor must take as its first argument an object of type `WorkTag`.  Otherwise, no work tag argument should be accepted. The next argument after the work tag should be an integer of type `Index`. For example:
-```cpp
-Kokkos::parallel_for(Kokkos::RangePolicy<int>, KOKKOS_LAMBDA(const int& i) {
-  /* ... */
-});
-```
+Header File: `Kokkos_Core.hpp`
+
+Usage: 
+  ```c++
+  Kokkos::RangePolicy<>(begin, end)
+  Kokkos::RangePolicy<ARGS>(begin, end)
+  ```
+
+RangePolicy defines an execution policy for a 1D iteration space starting at begin and going to end with an open interval. 
+
+# Interface 
+  ```c++
+  template<class ... Args>
+  class Kokkos::RangePolicy;
+  ```
+
+## Parameters:
+
+### Common Arguments for all Execution Policies
+
+  * Execution Policies generally accept compile time arguments via template parameters and runtime parameters via constructor arguments or setter fucntions.
+  * Template arguments can be given in arbitrary order.
+
+| Argument | Options | Purpose |
+| --- | --- | --- |
+| ExecutionSpace | `Serial`, `OpenMP`, `Threads`, `Cuda`, `ROCm` | Specify the Execution Space to execute the kernel in |
+| Schedule | `Schedule<Dynamic>`, `Schedule<Static>` | Specifiy scheduling policy for work items. `Dynamic` scheduling is implemented through a work stealing queue |
+| IndexType | `IndexType<int>` | Specify integer type to be used for traversing the iteration space. |
+| WorkTag | `SomeClass` | Specify the work tag type used to call the functor operator. Any arbitrary type. |
+
+### Requriements:
+
+
+## Public Class Members
+
+### Constructors
+ 
+ * RangePolicy(): Default Constructor unitialized policy.
+ * ```c++
+   template<class ... InitArgs> 
+   RangePolicy(const int64_t& begin, const int64_t& end, const InitArgs ... init_args)
+   ```
+   Provide a start and end index as well as optional arguments to control certain behavior (see below).
+   
+ * ```c++
+   template<class ... InitArgs> 
+   RangePolicy(const ExecutionSpace& space, const int64_t& begin, const int64_t& end, const InitArgs ... init_args)
+   ```
+   Provide a start and end index and an `ExecutionSpace` instance to use as the execution resource, as well as optional arguments to control certain behavior (see below).
+
+#### Optional `InitArgs`:
+
+ * `ChunkSize` : Provide a hint for optimal chunk-size to be used during scheduling.
+
+
+## Examples
+
+  ```c++
+    RangePolicy<> policy_1(N);
+    RangePolicy<Cuda> policy_2(5,N-5);
+    RangePolicy<Schedule<Dynamic>, OpenMP> policy_3(n,m);
+    RangePolicy<IndexType<int>, Schedule<Dynamic>> policy_4(K);
+    RangePolicy<> policy_6(-3,N+3, ChunkSize(8));
+    RangePolicy<OpenMP> policy_7(OpenMP(), 0, N, ChunkSize(4));
+  ```
+
+  Note: providing a single integer as a policy to a parallel pattern, implies a defaulted `RangePolicy`
+
+  ```c++
+    // These two calls are identical
+    parallel_for("Loop", N, functor);
+    parallel_for("Loop", RangePolicy<>(N), functor);
+  ```
+
+
