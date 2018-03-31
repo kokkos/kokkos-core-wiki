@@ -25,7 +25,7 @@
 
 ## **[[API Reference|API-Reference]]**
 1. **[[Initialization|Initialization-API]]**
-2. **[[View|View-API]]**
+2. **[[View|Kokkos::View]]**
 3. **[[Data Parallelism|Data-Parallelism]]**
 4. **[[Execution Policies|Execution-Policies]]**
 5. **[[Memory Spaces|Memory-Space]]**
