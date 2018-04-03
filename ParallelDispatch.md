@@ -134,7 +134,7 @@ The following example shows a reduction using the _max-plus semiring_, where `ma
       KOKKOS_INLINE_FUNCTION void
       init (value_type& dst) const
       { // The identity under max is -Inf.
-         return reduction_identity<valute_type>::max();
+         dst = reduction_identity<valute_type>::max();
       }
     
     private:
