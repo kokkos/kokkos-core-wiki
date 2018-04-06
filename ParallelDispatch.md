@@ -277,13 +277,15 @@ Kokkos lets users specify a scan by either a functor or a lambda. Both look like
     const size_t N = x.extent_0 ();
     parallel_scan (N, KOKKOS_LAMBDA (const int& i,
               float& upd, const bool& final) {
+        // Load old value in case we update it before accumulating
+        const float val_i = x(i); 
         if (final) {
           x(i) = upd; // only update array on final pass
         }
         // For exclusive scan, change the update value after
         // updating array, like we do here. For inclusive scan,
         // change the update value before updating array.
-        upd += x(i);
+        upd += val_i;
       });
 ```
 
