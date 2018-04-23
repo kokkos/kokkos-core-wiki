@@ -90,10 +90,37 @@ Template parameters other than `DataType` are optional, but ordering is enforced
 ### Constructors
 
   * `View()`: Default Constructor. No allocations are made, no reference counting happens. All extents are zero and its data pointer is NULL.
-  * `View(const std::string& name, const IntType& n0, ... , const IntType& nR)`: Standard allocating constructor
+  * `View( const View<DT, Prop...>& rhs)`: Copy constructor with compatible view. Follows View assignment rules. 
+  * `View( View&& rhs)`: Move constructor
+  * `View( const std::string& name, const IntType& n0, ... , const IntType& nR)`: Standard allocating constructor.
     * `name`: a user provided label, which is used for profiling and debugging purposes. Names are not required to be unique,
     * `n0, ... , nR`: Runtime dimensions of the view.   
-
+  * `View( const std::string& name, const array_layout& layout): Standart allocating constructor.  
+    * `name`: a user provided label, which is used for profiling and debugging purposes. Names are not required to be unique,
+    * `layout`: an instance of a layout class.
+  * `View( const AllocProperties& prop, , const IntType& n0, ... , const IntType& nR)`: Allocating constructor with allocation properties.
+    * An allocation properties object is returned by the `view_alloc` function. 
+    * `n0, ... , nR`: Runtime dimensions of the view.
+    * Requires `array_layout::is_regular == true`.
+  * `View( const AllocProperties& prop, const array_layout& layout): Allocating constructor with allocation properties and a layout object. 
+    * An allocation properties object is returned by the `view_alloc` function. 
+    * `layout`: an instance of a layout class.
+  * `View( const pointer_type& ptr, const IntType& n0, ... , const IntType& nR)`: Unmanaged data wrapping constructor.
+    * `ptr`: pointer to a user provided memory allocation. Must provide storage of size `View::required_allocation_size(n0,...,nR)`
+    * `n0, ... , nR`: Runtime dimensions of the view.   
+    * Requires `array_layout::is_regular == true`.
+  * `View( const std::string& name, const array_layout& layout): Unmanaged data wrapper constructor.  
+    * `ptr`: pointer to a user provided memory allocation. Must provide storage of size `View::required_allocation_size(layout)` (*NEEDS TO BE IMPLEMENTED*)
+    * `layout`: an instance of a layout class.
+  * `View( const ScratchSpace& space, const IntType& n0, ... , const IntType& nR)`: Constructor which aquires memory from a Scratch Memory handle.
+    * `space`: scratch memory handle. Typically returned from `team_handles` in `TeamPolicy` kernels. 
+    * `n0, ... , nR`: Runtime dimensions of the view.   
+    * Requires `array_layout::is_regular == true`.
+  * `View( const ScratchSpace& space, const array_layout& layout): Constructor which aquires memory from a Scratch Memory handle.  
+    * `space`: scratch memory handle. Typically returned from `team_handles` in `TeamPolicy` kernels. 
+    * `layout`: an instance of a layout class.
+  * `View( const View<DT, Prop...>& rhs, Args ... args): Subview constructor. See `subview` function for arguments. 
+ 
 ### Data Access Functions
 
   * ```c++
@@ -175,7 +202,15 @@ Template parameters other than `DataType` are optional, but ordering is enforced
     bool span_is_contiguous() const
     ```
     Whether the span is contiguous (i.e. whether every memory location between in span belongs to the index space covered by the view).
-
+  * ```c++
+    static constexpr size_t required_allocation_size(size_t N0 = 0, ..., size_t N8 = 0);
+    ```
+    Returns the number of bytes necessary for an unmanaged view of the provided dimensions. This function is only valid if `array_layout::is_regular == true`.
+  * ```c++
+    static constexpr size_t required_allocation_size(const array_layout& layout);
+    ```
+    Returns the number of bytes necessary for an unmanaged view of the provided layout.
+  
 ### Other
   * ```c++
     int use_count() const
@@ -186,6 +221,52 @@ Template parameters other than `DataType` are optional, but ordering is enforced
     const char* label() const
     ```
     Returns the label of the View. 
+
+## Assignment Rules
+
+Assignment rules cover the assignment operator as well as copy constructors. We aim at making all logically legal assignments possible, 
+while intercepting illegal assignments if possible at compile time, otherwise at runtime.
+In the following we use `DstType` and `SrcType` as the type of the destination view and source view respectively. 
+`dst_view` and `src_view` refer to the runtime instances of the destionation and source views. I.e.:
+```c++
+ScrType src_view(...);
+DstType dst_view(src_view);
+dst_view = src_view;
+```
+
+The following conditions must be met at and are evaluated at compile time:
+ * `DstType::rank == SrcType::rank`
+ * `DstType::non_const_value_type` is the same as `SrcType::non_const_value_type`
+ * If `std::is_const<SrcType::value_type>::value == true` than `std::is_const<DstType::value_type>::value` must be `true` also.
+ * `MemorySpaceAccess<DstType::memory_space,SrcType::memory_space>::assignable == true` 
+ * If `DstType::dynamic_rank != DstType::rank` and `SrcType::dynamic_rank != SrcType::rank` than for each dimension `k` which is compile time for both it must be true that `dst_view.extent(k) == src_view.extent(k)`
+
+Additionally the following conditions must be met at runtime: 
+ * If `DstType::dynamic_rank != DstType::rank` than for each compile time dimension `k` it must be true that `dst_view.extent(k) == src_view.extent(k)`.
+ 
+Furthermore there are rules which must be met if `DstType::array_layout` is not the same as `SrcType::array_layout`.
+These rules only cover cases where both layouts are one of `LayoutLeft`, `LayoutRight` or `LayoutStride`
+ * If neither `DstType::array_layout` nor `SrcType::array_layout` is `LayoutStride`: 
+   * If `DstType::rank > 1` than `DstType::array_layout` must be the same as `SrcType::array_layout`.
+ * If either `DstType::array_layout` or `SrcType::array_layout` is `LayoutStride`
+   * For each dimension `k` it must hold that `dst_view.extent(k) == src_view.extent(k)`
+
+### Assignment Examples
+ ```c++
+  View<int*>       a1 = View<int*>("A1",N);     // OK
+  View<int**>      a2 = View<int*[10]>("A2",N); // OK
+  View<int*[10]>   a3 = View<int**>("A3",N,M);  // OK if M == 10 otherwise runtime failure
+  View<const int*> a4 = a1;                     // OK
+  View<int*>       a5 = a4;                     // Error: const to non-const assignment
+  View<int**>      a6 = a1;                     // Error: Ranks do not match
+  View<int*[8]>    a7 = a3;                     // Error: compile time dimensions do not match
+  View<int[4][10]> a8 = a3;                     // OK if N == 4 otherwise runtime failure
+  View<int*, LayoutLeft>    a9  = a1;           // OK since a1 is either LayoutLeft or LayoutRight
+  View<int**, LayoutStride> a10 = a8;           // OK
+  View<int**>               a11 = a10;          // OK
+  View<int*, HostSpace> a12 = View<int*, CudaSpace>("A12",N); // Error: non assignable memory spaces
+  View<int*, HostSpace> a13 = View<int*, CudaHostPinnedSpace>("A13",N); // OK
+ ```
 
 ## Examples
 
