@@ -99,8 +99,9 @@ supported compilers. Those machines are:
 
 // ----------------------------------------------------------------------------------------------------- //
 
-Step 2:
-  2.1. Build and test Trilinos with 4 different configurations; Run scripts for white and shepard that are provided in kokkos/scripts/trilinos-integration. These scripts load their own modules/environment, so don't require preparation. You can run all four at the same time, use separate directories for each.
+Step 2:Build and Test
+
+  2.1. Build and test Trilinos with 4 different configurations; run scripts for white and shepard that are provided in kokkos/scripts/trilinos-integration. These scripts load their own modules/environment, so don't require preparation. You can run all four at the same time, use separate directories for each.
 
          mkdir serial
          cd serial
