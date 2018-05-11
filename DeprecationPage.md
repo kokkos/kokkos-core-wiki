@@ -10,6 +10,7 @@
  | `View<>::operator()(Args...)` with # of Args != `View<>::rank` | `View<>::access(Args...)` |
  | `ExecSpace::is_initialized()` | `Kokkos::is_initialized()` |
  | `ExecSpace::initialize(...)` | `Kokkos::initialize(...)` *Note: certain overloads are gone* |
+ | `ExecSpace::print_configuration(...)` | `Kokkos::print_configuration(...)` |
  | `ExecSpace::max_hardware_thread_id()` | `ExecSpace::concurrency()` |
  | `ExecSpace::hardware_thread_id()` | Use `Kokkos::UniqueToken` |
  | `KOKKOS_HAVE_...` | `KOKKOS_ENABLE_...` |
