@@ -8,7 +8,7 @@
  | `View<>::dimension(X)` | `View<>::extent(X)` | Alignment with C++ standard |
  | `View<>::capacity()` | `View<>::span(X)` | Alignment with C++ standard |
  | `View<>::operator()(Args...)` with # of Args != `View<>::rank` | `View<>::access(Args...)` | Frequent source of hard to detect bugs in user code. |
- | `View<>::View(Arg,N0,...,N7)` with # of N Args != `View<>::rank_dynamic` | Either use the constructor which uses a Layout or fix number of arguments | Frequent source of hard to detect bugs in user code. |
+ | `View<>::View(Arg,N0,...,N7)` with # of N Args != `View<>::rank_dynamic` | Either fix number of arguments, or create a meta function to produce layout with correct number of arguments. Note you can also use the implementation detail macro KOKKOS_IMPL_CTOR_DEFAULT_ARG for arguments larger rank_dynamic. But there is no backwards compatibility guarantee on that. | Frequent source of hard to detect bugs in user code. |
  | `ExecSpace::is_initialized()` | `Kokkos::is_initialized()` | Too many possibilities of organizing Kokkos initialization: now streamlined interface. |
  | `ExecSpace::initialize(...)` | `Kokkos::initialize(...)` *Note: certain overloads are gone* |  Too many possibilities of organizing Kokkos initialization: now streamlined interface. |
  | `ExecSpace::print_configuration(...)` | `Kokkos::print_configuration(...)` | Too many possibilities of organizing Kokkos initialization: now streamlined interface. |
