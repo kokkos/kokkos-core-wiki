@@ -92,30 +92,35 @@ Template parameters other than `DataType` are optional, but ordering is enforced
   * `View()`: Default Constructor. No allocations are made, no reference counting happens. All extents are zero and its data pointer is NULL.
   * `View( const View<DT, Prop...>& rhs)`: Copy constructor with compatible view. Follows View assignment rules. 
   * `View( View&& rhs)`: Move constructor
-  * `View( const std::string& name, const IntType& n0, ... , const IntType& nR)`: Standard allocating constructor.
+  * `View( const std::string& name, const IntType& ... indicies)`: Standard allocating constructor.
     * `name`: a user provided label, which is used for profiling and debugging purposes. Names are not required to be unique,
-    * `n0, ... , nR`: Runtime dimensions of the view.   
+    * `indicies`: Runtime dimensions of the view.  
+    * Requires: `sizeof(IntType...)==rank_dynamic()` 
+    * Requires: `array_layout::is_regular == true`.
   * `View( const std::string& name, const array_layout& layout): Standart allocating constructor.  
     * `name`: a user provided label, which is used for profiling and debugging purposes. Names are not required to be unique,
     * `layout`: an instance of a layout class.
-  * `View( const AllocProperties& prop, , const IntType& n0, ... , const IntType& nR)`: Allocating constructor with allocation properties.
+  * `View( const AllocProperties& prop, , const IntType& ... indicies)`: Allocating constructor with allocation properties.
     * An allocation properties object is returned by the `view_alloc` function. 
-    * `n0, ... , nR`: Runtime dimensions of the view.
-    * Requires `array_layout::is_regular == true`.
+    * `indicies`: Runtime dimensions of the view.
+    * Requires: `sizeof(IntType...)==rank_dynamic()` 
+    * Requires: `array_layout::is_regular == true`.
   * `View( const AllocProperties& prop, const array_layout& layout): Allocating constructor with allocation properties and a layout object. 
     * An allocation properties object is returned by the `view_alloc` function. 
     * `layout`: an instance of a layout class.
-  * `View( const pointer_type& ptr, const IntType& n0, ... , const IntType& nR)`: Unmanaged data wrapping constructor.
+  * `View( const pointer_type& ptr, const IntType& ... indicies)`: Unmanaged data wrapping constructor.
     * `ptr`: pointer to a user provided memory allocation. Must provide storage of size `View::required_allocation_size(n0,...,nR)`
-    * `n0, ... , nR`: Runtime dimensions of the view.   
-    * Requires `array_layout::is_regular == true`.
+    * `indicies`: Runtime dimensions of the view.   
+    * Requires: `sizeof(IntType...)==rank_dynamic()` 
+    * Requires: `array_layout::is_regular == true`.
   * `View( const std::string& name, const array_layout& layout): Unmanaged data wrapper constructor.  
     * `ptr`: pointer to a user provided memory allocation. Must provide storage of size `View::required_allocation_size(layout)` (*NEEDS TO BE IMPLEMENTED*)
     * `layout`: an instance of a layout class.
-  * `View( const ScratchSpace& space, const IntType& n0, ... , const IntType& nR)`: Constructor which aquires memory from a Scratch Memory handle.
+  * `View( const ScratchSpace& space, const IntType& ... indicies)`: Constructor which aquires memory from a Scratch Memory handle.
     * `space`: scratch memory handle. Typically returned from `team_handles` in `TeamPolicy` kernels. 
-    * `n0, ... , nR`: Runtime dimensions of the view.   
-    * Requires `array_layout::is_regular == true`.
+    * `indicies`: Runtime dimensions of the view.   
+    * Requires: `sizeof(IntType...)==rank_dynamic()` 
+    * Requires: `array_layout::is_regular == true`.
   * `View( const ScratchSpace& space, const array_layout& layout): Constructor which aquires memory from a Scratch Memory handle.  
     * `space`: scratch memory handle. Typically returned from `team_handles` in `TeamPolicy` kernels. 
     * `layout`: an instance of a layout class.
@@ -124,13 +129,14 @@ Template parameters other than `DataType` are optional, but ordering is enforced
 ### Data Access Functions
 
   * ```c++
-    reference_type operator() (const IntType& i0, ..., const IntType& iR) const
+    reference_type operator() (const IntType& ... indicies) const
     ```
     Returns a value of `reference_type` which may or not be referencable itself. The number of index arguments must match the `rank` of the view.
     See notes on `reference_type` for properties of the return type. 
+    * Requires: `sizeof(IntType...)==rank_dynamic()` 
 
   * ```c++
-    reference_type access (const IntType& i0, ..., const IntType& i7) const
+    reference_type access (const IntType& i0=0, ... , const IntType& i7=0) const
     ```
     Returns a value of `reference_type` which may or not be referencable itself. The number of index arguments must be equal or larger than the `rank` of the view.
     Index arguments beyond `rank` must be `0`, which will be enforced if `KOKKOS_DEBUG` is defined. 
@@ -158,6 +164,7 @@ Template parameters other than `DataType` are optional, but ordering is enforced
     constexpr size_t stride(const iType& dim) const
     ```
     Return the stride of the specified dimension. `iType` must be an integral type, and `dim` must be smaller than `rank`.
+    Example: `a.stride(3) == (&a(i0,i1,i2,i3+1,i4)-&a(i0,i1,i2,i3,i4))`
   * ```c++
     constexpr size_t stride_0() const
     ```
@@ -237,7 +244,7 @@ dst_view = src_view;
 The following conditions must be met at and are evaluated at compile time:
  * `DstType::rank == SrcType::rank`
  * `DstType::non_const_value_type` is the same as `SrcType::non_const_value_type`
- * If `std::is_const<SrcType::value_type>::value == true` than `std::is_const<DstType::value_type>::value` must be `true` also.
+ * If `std::is_const<SrcType::value_type>::value == true` than `std::is_const<DstType::value_type>::value == true`.
  * `MemorySpaceAccess<DstType::memory_space,SrcType::memory_space>::assignable == true` 
  * If `DstType::dynamic_rank != DstType::rank` and `SrcType::dynamic_rank != SrcType::rank` than for each dimension `k` which is compile time for both it must be true that `dst_view.extent(k) == src_view.extent(k)`
 

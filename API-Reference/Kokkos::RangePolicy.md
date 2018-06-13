@@ -4,22 +4,60 @@ Header File: `Kokkos_Core.hpp`
 
 Usage: 
   ```c++
-  Kokkos::RangePolicy<>(begin, end)
-  Kokkos::RangePolicy<ARGS>(begin, end)
   Kokkos::RangePolicy<>(begin, end, args...)
   Kokkos::RangePolicy<ARGS>(begin, end, args...)
-  Kokkos::RangePolicy<>(Space(), begin, end)
-  Kokkos::RangePolicy<ARGS>(Space(), begin, end)
   Kokkos::RangePolicy<>(Space(), begin, end, args...)
   Kokkos::RangePolicy<ARGS>(Space(), begin, end, args...)
   ```
 
 RangePolicy defines an execution policy for a 1D iteration space starting at begin and going to end with an open interval. 
 
-# Interface 
+# Synopsis 
   ```c++
   template<class ... Args>
-  class Kokkos::RangePolicy;
+  class Kokkos::RangePolicy {
+    typedef RangePolicy execution_policy;
+    typedef typename traits::index_type member_type ;
+    typedef typename traits::index_type index_type;
+ 
+    //Inherited from PolicyTraits<Args...> 
+    using execution_space   = PolicyTraits<Args...>::execution_space;
+    using schedule_type     = PolicyTraits<Args...>::schedule_type;
+    using work_tag          = PolicyTraits<Args...>::work_tag;
+    using index_type        = PolicyTraits<Args...>::index_type;
+    using iteration_pattern = PolicyTraits<Args...>::iteration_pattern;
+    using launch_bounds     = PolicyTraits<Args...>::launch_bounds;
+
+    //Constructors
+    RangePolicy(const RangePolicy&) = default;
+    RangePolicy(RangePolicy&&) = default;
+
+    inline RangePolicy();
+
+    template<class ... Args>
+    inline RangePolicy( const execution_space & work_space
+             , const member_type work_begin
+             , const member_type work_end
+             , Args ... args);
+
+    template<class ... Args>
+    inline RangePolicy( const member_type work_begin
+             , const member_type work_end
+             , Args ... args);
+
+
+    // retrieve chunk_size
+    inline member_type chunk_size() const;
+    // set chunk_size to a discrete value
+    inline RangePolicy set_chunk_size(int chunk_size_);
+
+    // return ExecSpace instance provided to the constructor
+    KOKKOS_INLINE_FUNCTION const execution_space & space() const;
+    // return Range begin 
+    KOKKOS_INLINE_FUNCTION member_type begin() const;
+    // return Range end 
+    KOKKOS_INLINE_FUNCTION member_type end()   const;
+  };
   ```
 
 ## Parameters:
