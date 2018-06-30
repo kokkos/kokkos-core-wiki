@@ -5,7 +5,7 @@ The OffsetView is in the Experimental namespace.
 Sometimes, it is advantageous to have the indices of an array begin at something other than zero.  In this case, an OffsetView may be used.
 
 ----------
-# Construction
+## Construction
 
 An OffsetView must have a label, and at least one dimension.  Only runtime extents are supported, but otherwise the semantics of an OffsetView are similar to those of a View.  
 
@@ -35,7 +35,7 @@ A std::initializer_list may also be used instead of an Array.
 OffsetView<double**> ov(b, {-10, -20});
 
 ---------
-# Interface
+## Interface
 
 The beginning indices may be obtained as an array. The begin and end of iteration may be found for each rank.
 
