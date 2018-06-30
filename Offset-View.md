@@ -5,18 +5,18 @@ The OffsetView is in the Experimental namespace.
 Sometimes, it is advantageous to have the indices of an array begin at something other than zero.  In this case, an OffsetView may be used.
 
 ----------
-Construction
+# Construction
 
 An OffsetView must have a label, and at least one dimension.  Only runtime extents are supported, but otherwise the semantics of an OffsetView are similar to those of a View.  
 
-const size_t min0 = ...; 
-const size_t max0 = ...; 
-const size_t min1 = ...; 
-const size_t max1 = ...; 
-const size_t min2 = ...; 
-const size_t max2 = ...; 
+ const size_t min0 = ...; 
+ const size_t max0 = ...; 
+ const size_t min1 = ...; 
+ const size_t max1 = ...; 
+ const size_t min2 = ...; 
+ const size_t max2 = ...; 
 
-OffsetView<int***> a("someLabel", {min0, max0}, {min1, max1},{min2, max2});
+ OffsetView<int***> a("someLabel", {min0, max0}, {min1, max1},{min2, max2});
 
 Construction from a layout is also allowed.  
 
