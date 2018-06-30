@@ -1,4 +1,4 @@
-OffsetView
+# OffsetView
 
 The OffsetView is in the Experimental namespace.
 
@@ -35,7 +35,7 @@ A std::initializer_list may also be used instead of an Array.
 OffsetView<double**> ov(b, {-10, -20});
 
 ---------
-Interface
+# Interface
 
 The beginning indices may be obtained as an array. The begin and end of iteration may be found for each rank.
 
@@ -49,14 +49,14 @@ Note that OffsetView::end(const size_t i) returns a value that is not a legal in
 
 Subviews are supported, and the result of taking a subview of an OffsetView is another OffsetView.  If ALL() is passed to the subview  function, then the offsets for that rank are preserved, otherwise they are dropped.
 
-            OffsetView<Scalar***> sliceMe("offsetToSlice", {-10,20}, {-20,30}, {-30,40});
-            auto offsetSubview = subview(sliceMe,0, Kokkos::ALL(), std::make_pair(-30, -21));
-
-            ASSERT_EQ(offsetSubview.Rank, 2);
-            ASSERT_EQ(offsetSubview.begin(0) , -20);
-            ASSERT_EQ(offsetSubview.end(0) , 31);
-            ASSERT_EQ(offsetSubview.begin(1) , 0);
-            ASSERT_EQ(offsetSubview.end(1) , 9);
+OffsetView<Scalar***> sliceMe("offsetToSlice", {-10,20}, {-20,30}, {-30,40});
+auto offsetSubview = subview(sliceMe,0, Kokkos::ALL(), std::make_pair(-30, -21));
+ 
+ASSERT_EQ(offsetSubview.Rank, 2);
+ASSERT_EQ(offsetSubview.begin(0) , -20);
+ASSERT_EQ(offsetSubview.end(0) , 31);
+ASSERT_EQ(offsetSubview.begin(1) , 0);
+ASSERT_EQ(offsetSubview.end(1) , 9);
 
 The following deep copies are also supported: from a constant value to an OffsetView; from a compatible OffsetView to another OffsetView; from a compatible View to an OffsetView; from a compatible OffsetView to a View.
 
