@@ -30,7 +30,8 @@
 4. **[[Execution Policies|Execution-Policies]]**
 5. **[[Memory Spaces|Memory-Space]]**
 6. **[[Task Parallelism|Task-Parallelism]]**
-7. **[[STL Compatibility |STL-Compatibility]]**
+7. **[[Utilities|Utilities]]**
+8. **[[STL Compatibility |STL-Compatibility]]**
 
 ## **[[A Guide to Kokkos Testing Processes]]**
 1. **[[Testing Processes|Testing Processes]]**
