@@ -12,6 +12,8 @@ Usage:
 
 TeamPolicy defines an execution policy for a 1D iteration space starting at begin and going to end with an open interval. 
 
+See also: [TeamMember](Kokkos%3A%3ATeamHandleConcept)
+
 # Synopsis 
   ```c++
   template<class ... Args>
