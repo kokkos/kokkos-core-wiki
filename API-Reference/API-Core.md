@@ -8,5 +8,5 @@ Parallel Execution Dispatch.
 Execution policies.
 ### 5. **[[Memory Spaces|Memory-Space]]**
 ### 6. **[[Task Parallelism|Task-Parallelism]]**
-### 7. **[[Utilities|Utilities]]**
+### 7. **[[Utilities|API-Utilities]]**
 ### 8. **[[STL Compatibility |STL-Compatibility]]**
