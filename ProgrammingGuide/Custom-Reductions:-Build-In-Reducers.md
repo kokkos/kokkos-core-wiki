@@ -20,7 +20,7 @@ The following is an example for doing a simple min-reduction, finding the minima
 ```c++
 double min;
 
-Kokkos::parallel_for( “MinReduce”, N, KOKKOS_LAMBDA (const int& x, double& lmin) {
+Kokkos::parallel_reduce( “MinReduce”, N, KOKKOS_LAMBDA (const int& x, double& lmin) {
   double val = (1.0*x- 7.2) * (1.0*x- 7.2) + 3.5;
   if( val < lmin ) lmin = val; 
 }, Kokkos::Min<double>(min));

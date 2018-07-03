@@ -12,6 +12,9 @@ This Wiki provides a number of resources for both new and old Kokkos developers.
 Note: The Wiki is a work in progress. 
       Some of the content is not yet available (red links).
 ```
+## **[[Deprecated Functionality|DeprecationPage]]**
+List of deprecated features, their replacements and reason for deprecation.
+
 ## **[[Upcoming and Past Events|EventsPage]]**
 
 ## **[[The Programming Guide|The Kokkos Programming Guide]]**

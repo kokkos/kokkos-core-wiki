@@ -199,7 +199,7 @@ You may use any of the three parallel patterns -- for, reduce, or scan -- at eac
 You may nest them and use them in conjunction with code that is aware of the league and team rank. The different layers are accessible via special execution policies: `TeamThreadLoop` and `ThreadVectorLoop`.
 
 ***
-<sup>1</sup> The parallel scan operation is not implemented for all execution spaces on the thread level, and it  doesn't support a TeamPolicy on the top level.
+<sup>1</sup> The parallel scan operation is not implemented for all execution spaces on the thread level, and it doesn't support a TeamPolicy on the top level.
 ***
 
 ### 8.4.1 Team loops
@@ -243,22 +243,28 @@ The `parallel_reduce` construct can be used to perform optimized team-level redu
             // ...
             lsum += ...;
           }, sum);
+
+        // Introduce a team barrier here to synchronize threads
+        team_member.team_barrier();
     
-        // You may provide a custom reduction as another
-        // lambda together with an initialization value.
+        // You may provide a custom reduction as a functor,
+        // including one of the Kokkos-provided ones, e.g. Prod<Scalar>.
         Scalar product;
         Scalar init_value = 1;
         parallel_reduce (TeamThreadRange (team_member, loop_count),
           [=] (int& i, Scalar& lsum) {
             // ...
             lsum *= ...;
-          }, product, [=] (Scalar& lsum, Scalar& update) {
-            lsum *= update;
-          }, init_value);
+          }, Kokkos::Experimental::Prod<Scalar>(product);
       });
 ```
+Note that custom reductions must employ one of the functor join patterns recognized by Kokkos; these include `Sum, Prod, Min, Max, LAnd, LOr, BAnd, BOr, ValLocScalar, MinLoc, MaxLoc, MinMaxScalar, MinMax, MinMaxLocScalar` and `MinMaxLoc`.
 
 The third pattern is `parallel_scan` which can be used to perform prefix scans.
+
+#### 8.4.1.1 Team Barriers
+
+In instances where one loop operation might need to be sequenced with a different loop operation, such as filling of arrays as a preparation stage for following computations on that data, it is important to be able to control threads in time; this can be done through the use of barriers. In nested loops, the outside loop ( `TeamPolicy<> ()` ) has a built-in (implicit) team barrier; inner loops ( `TeamThreadRange ()` ) do not. This latter condition is often referred to as a 'non-blocking' condition. When necessary, an explicit barrier can be introduced to synchronize team threads; an example is shown in the previous example. 
 
 ### 8.4.2 Vector loops
 
@@ -284,17 +290,15 @@ The innermost level of nesting parallel loops in a kernel is comprised of the _v
     
         parallel_for (TeamThreadRange (team_member, workset_size),
           [&] (int& j) {
-          // You may provide a custom reduction as another
-          // lambda together with an initialization value.
+          // You may provide a custom reduction as a functor
+          // including one of the Kokkos-provided ones, e.g., Prod<Scalar>.
           Scalar product;
           Scalar init_value = 1;
          parallel_reduce (ThreadVectorRange (team_member, loop_count),
             [=] (int& i, Scalar& lsum) {
               // ...
               lsum *= ...;
-            }, product, [=] (Scalar& lsum, Scalar& update) {
-              lsum *= update;
-            }, init_value);
+            }, Kokkos::Experimental::Prod<Scalar>(product);
           });
       });
 ```

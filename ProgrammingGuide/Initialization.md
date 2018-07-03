@@ -20,12 +20,13 @@ and its default host execution space
 ```c++
 Kokkos::DefaultHostExecutionSpace;
 ```
-if applicable. These defaults depend on the Kokkos configuration. Kokkos chooses the two spaces using the following list, ordered from low to high:
+if applicable. It will also always initialize `Kokkos::Serial`. 
+These defaults depend on the Kokkos configuration. Kokkos chooses the two spaces using the following list, ordered from low to high:
 
-1. `Kokkos::Serial` 
 1. `Kokkos::Threads`
-1. `Kokkos::OpenMP`
-1. `Kokkos::Cuda`
+2. `Kokkos::OpenMP`
+3. `Kokkos::Cuda`
+4. `Kokkos::ROCm`
 
 The highest execution space in the list which is actually enabled is Kokkos' default execution space, and the highest enabled host execution space is Kokkos' default host execution space. For example, if  `Kokkos::Cuda`, `Kokkos::OpenMP`, and `Kokkos::Serial` are enabled, then `Kokkos::Cuda` is the default execution space and `Kokkos::OpenMP` is the default host execution space.<sup>1</sup>
 
