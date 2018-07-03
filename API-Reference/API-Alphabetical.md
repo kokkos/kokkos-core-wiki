@@ -1,3 +1,5 @@
+All functions and classes listed here are part of the `Kokkos::` namespace. 
+
 |Name |Library | Category | Description                  |
 |:---------|:--------|:-----------|:----------------------------|
 |[complex](Kokkos%3A%3AComplex) | [Core](API-Core) | [Utilities](API-Utilities) | Complex numbers which work on host and device |
