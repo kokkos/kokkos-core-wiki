@@ -24,6 +24,7 @@
 2. **[[Random Numbers|Random Numbers]]**
 
 ## **[[API Reference|API-Reference]]**
+### **[[Content: Alphabetical|API-Alphabetical]]**
 ### **[[Content: Core|API-Core]]**
 1. **[[Initialization|Initialization-API]]**
 2. **[[View|Kokkos::View]]**
