@@ -19,11 +19,11 @@ Reducer objects used in conjunction with [parallel_reduce](Kokkos%3A%3Aparallel_
 |[LAnd](Kokkos%3A%3ALAnd) | Logical 'And' reduction |
 |[LOr](Kokkos%3A%3ALOr) | Logical 'Or' reduction |
 |[Max](Kokkos%3A%3AMax) | Maximum reduction |
-|[Max](Kokkos%3A%3AMaxLoc) | Reduction providing maximum and an associated index |
+|[MaxLoc](Kokkos%3A%3AMaxLoc) | Reduction providing maximum and an associated index |
 |[Min](Kokkos%3A%3AMin) | Minimum reduction |
-|[Min](Kokkos%3A%3AMinLoc) | Reduction providing minimum and an associated index |
+|[MinLoc](Kokkos%3A%3AMinLoc) | Reduction providing minimum and an associated index |
 |[MinMax](Kokkos%3A%3AMinMax) | Reduction providing both minimum and maximum |
-|[MinMax](Kokkos%3A%3AMinMaxLoc) | Reduction providing both minimum and maximum and associated indicies |
+|[MinMaxLoc](Kokkos%3A%3AMinMaxLoc) | Reduction providing both minimum and maximum and associated indicies |
 |[Prod](Kokkos%3A%3AProd) | Multiplicative reduction |
 |[Sum](Kokkos%3A%3ASum) | Sum reduction |
 
