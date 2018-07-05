@@ -66,7 +66,8 @@ The lambda or the `operator()` method of the functor takes one argument. That ar
 
 Kokkos' `parallel_reduce` operation implements a reduction. It is like `parallel_for`, except that each iteration produces a value and these iteration values are accumulated into a single value with a user-specified associative binary operation. It corresponds to the OpenMP construct `#pragma omp parallel reduction` but with fewer restrictions on the reduction operation.
 
-The lambda or the `operator()` method of the functor takes two arguments. The first argument is the parallel loop "index," the type of which depends on the execution policy used for the `parallel_reduce`. If you give `parallel_reduce` an integer range as its first argument, or use `RangePolicy` explicitly, then the first argument of the lambda or `operator()` method is an integer index. Its second argument is a nonconst reference to the type of the reduction result.
+The lambda or the `operator()` method of the functor takes two arguments. The first argument is the parallel loop "index," the type of which depends on the execution policy used for the `parallel_reduce`. If you give `parallel_reduce` an integer range as its first argument, or use `RangePolicy` explicitly, then the first argument of the lambda or `operator()` method is an integer index. Its second argument is a non-const reference to the type of the reduction result or a `reducer` (see [[Custom Reductions|Programming-Guide%3A-Custom-Reductions]]. 
+When not providing a `reducer` the reduction is performed with a sum reduction using the + or += operator of the scalar type. Custom reduction can also be implemented by providing a functor with a `join` and an `init` function. 
 
 ### 7.3.1 Example using lambda
 
@@ -83,9 +84,7 @@ Here is an example reduction using a lambda, where the reduction result is a `do
     }, sum);
 ```
 
-This version of `parallel_reduce` is easy to use, but it imposes some assumptions on the reduction. For example, it assumes that it is correct for threads to join their intermediate reduction results using binary `operator+`. If you want to change this, you must either implement your own reduction result type with a custom binary `operator+` or define the reduction using a functor instead of a lambda.
-
-### 7.3.2 Example using functor
+### 7.3.2 Example using functor with `join` and `init`.
 
 The following example shows a reduction using the _max-plus semiring_, where `max(a,b)` corresponds to addition and ordinary addition corresponds to multiplication:
 
@@ -153,47 +152,7 @@ This example shows how to use the above functor:
     parallel_reduce (N, MaxPlus (x), result);
 ```
 
-### 7.3.3 Example using functor with default join and init
-
-If your functor does not supply a `join` method with the correct signature, Kokkos will supply a default `join` that uses binary `operator+`. Likewise, if your functor does not supply an `init` method with the correct signature, Kokkos will supply a default `init` that sets the reduction result to zero.
-
-Here is an example of a reduction functor that computes the sum of squares of the entries of a View. Since it does not implement the `join` and `init` methods, Kokkos will supply defaults.
-
-```c++
-    struct SquareSum {
-      // Specify the type of the reduction value with a "value_type"
-      // typedef. In this case, the reduction value has type int.
-      typedef int value_type;
-    
-      // The reduction functor's operator() looks a little different than
-      // the parallel_for functor's operator(). For the reduction, we
-      // pass in both the loop index i, and the intermediate reduction
-      // value lsum. The latter MUST be passed in by nonconst reference.
-      // (If the reduction type is an array like int[], indicating an
-      // array reduction result, then the second argument is just int[].)
-      KOKKOS_INLINE_FUNCTION
-      void operator () (const int i, value_type& lsum) const {
-        lsum += i*i; // compute the sum of squares
-      }
-    };
-    
-    // Use the above functor to compute the sum of squares from 0 to N-1.
-    const size_t N = ...;
-    sum = 0;
-    // parallel_reduce needs an instance of SquareSum,
-    // so we invoke its constructor with ().
-    parallel_reduce (N, SquareSum ());
-
-This example has a short enough loop body that it would be better to use a lambda:
-
-    // Compute the sum of squares from 0 to N-1.
-    int sum = 0;
-    parallel_reduce (N, KOKKOS_LAMBDA (const int i, int& lsum) {
-      lsum += i*i;
-    });
-```
-
-### 7.3.4 Reductions with an array of results
+### 7.3.3 Reductions with an array of results
 
 Kokkos lets you compute reductions with an array of reduction results, as long as that array has a (run-time) constant number of entries. This currently only works with functors. Here is an example functor that computes column sums of a 2-D View.
 
