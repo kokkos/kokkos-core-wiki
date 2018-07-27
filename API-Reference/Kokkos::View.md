@@ -100,7 +100,7 @@ Template parameters other than `DataType` are optional, but ordering is enforced
   * `View( const std::string& name, const array_layout& layout)`: Standard allocating constructor.  
     * `name`: a user provided label, which is used for profiling and debugging purposes. Names are not required to be unique,
     * `layout`: an instance of a layout class.
-  * `View( const AllocProperties& prop, , const IntType& ... indicies)`: Allocating constructor with allocation properties.
+  * `View( const AllocProperties& prop, , const IntType& ... indices)`: Allocating constructor with allocation properties.
     * An allocation properties object is returned by the `view_alloc` function. 
     * `indices`: Runtime dimensions of the view.
     * Requires: `sizeof(IntType...)==rank_dynamic()` 
@@ -108,7 +108,7 @@ Template parameters other than `DataType` are optional, but ordering is enforced
   * `View( const AllocProperties& prop, const array_layout& layout)`: Allocating constructor with allocation properties and a layout object. 
     * An allocation properties object is returned by the `view_alloc` function. 
     * `layout`: an instance of a layout class.
-  * `View( const pointer_type& ptr, const IntType& ... indicies)`: Unmanaged data wrapping constructor.
+  * `View( const pointer_type& ptr, const IntType& ... indices)`: Unmanaged data wrapping constructor.
     * `ptr`: pointer to a user provided memory allocation. Must provide storage of size `View::required_allocation_size(n0,...,nR)`
     * `indices`: Runtime dimensions of the view.   
     * Requires: `sizeof(IntType...)==rank_dynamic()` 
@@ -121,7 +121,7 @@ Template parameters other than `DataType` are optional, but ordering is enforced
     * `indices`: Runtime dimensions of the view.   
     * Requires: `sizeof(IntType...)==rank_dynamic()` 
     * Requires: `array_layout::is_regular == true`.
-  * `View( const ScratchSpace& space, const array_layout& layout): Constructor which acquires memory from a Scratch Memory handle.  
+  * `View( const ScratchSpace& space, const array_layout& layout)`: Constructor which acquires memory from a Scratch Memory handle.  
     * `space`: scratch memory handle. Typically returned from `team_handles` in `TeamPolicy` kernels. 
     * `layout`: an instance of a layout class.
   * `View( const View<DT, Prop...>& rhs, Args ... args)`: Subview constructor. See `subview` function for arguments. 
