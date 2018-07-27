@@ -16,24 +16,24 @@ class View;
 
 ### Parameters
 
-Template parameters other than `DataType` are optional, but ordering is enforced. That means for example that `LayoutType` can be ommitted but if both `MemorySpace` and `MemoryTraits` are specified, `MemorySpace` must come before `MemoryTraits`.
+Template parameters other than `DataType` are optional, but ordering is enforced. That means for example that `LayoutType` can be omitted but if both `MemorySpace` and `MemoryTraits` are specified, `MemorySpace` must come before `MemoryTraits`.
   
-  * `DataType`: Defines the fundamental scalar type of the `View` and its dimensionality. The basic structure is `ScalarType STARS BRACKETS` where the number of STARS denotes the number of runtime length dimensions and the number BRACKETS defines the compile time dimensions. Due to C++ type restrictions runtime dimensions must come first. Examples:
+  * `DataType`: Defines the fundamental scalar type of the `View` and its dimensionality. The basic structure is `ScalarType STARS BRACKETS` where the number of STARS denotes the number of runtime length dimensions and the number of BRACKETS defines the compile time dimensions. Due to C++ type restrictions runtime dimensions must come first. Examples:
     * `double**`: 2D View of `double` with 2 runtime dimensions
     * `const int***[5][3]`: 5D View of `int` with 3 runtime and 2 compile dimensions. The data is `const`.
     * `Foo[6][2]`: 2D View of a class `Foo` with 2 compile time dimensions.
-  * `LayoutType`: determines the mapping of indizies into the underlying 1D memory storage. Custom Layouts can be implemented, but Kokkos comes with some built-in ones: 
-    * `LayoutRight`: strides increase from the right most to the left most dimension. The last dimension has a stride of one. This corresponds to how C multi dimensional arrays (`[][][]`) are layed out in memory. 
+  * `LayoutType`: determines the mapping of indices into the underlying 1D memory storage. Custom Layouts can be implemented, but Kokkos comes with some built-in ones: 
+    * `LayoutRight`: strides increase from the right most to the left most dimension. The last dimension has a stride of one. This corresponds to how C multi dimensional arrays (`[][][]`) are laid out in memory. 
     * `LayoutLeft`: strides increase from the left most to the right most dimension. The first dimension has a stride of one. This is the layout Fortran uses for its arrays. 
     * `LayoutStride`: strides can be arbitrary for each dimension. 
-  * `MemorySpace`: Controls the storage location. If ommitted the default memory space of the default execution space is used (i.e. `Kokkos::DefaultExecutionSpace::memory_space`)
+  * `MemorySpace`: Controls the storage location. If omitted the default memory space of the default execution space is used (i.e. `Kokkos::DefaultExecutionSpace::memory_space`)
   * `MemoryTraits`: Sets access properties via enum parameters for the templated `Kokkos::MemoryTraits<>` class. Enums can be combined bit combined. Posible values:
     * `Unmanaged`: The View will not be reference counted. The allocation has to be provided to the constructor.
     * `Atomic`: All accesses to the view will use atomic operations. 
-    * `RandomAccess`: Hint that the view is used in a random access manner. If the view is also const this will trigger special load operations on GPUs (i.e. texture fetches).
+    * `RandomAccess`: Hint that the view is used in a random access manner. If the view is also `const` this will trigger special load operations on GPUs (i.e. texture fetches).
     * `Restrict`: There is no aliasing of the view by other data structures in the current scope. 
 
-### Requriements:
+### Requirements:
   
 
 ## Public Class Members
@@ -50,7 +50,7 @@ Template parameters other than `DataType` are optional, but ordering is enforced
 
  *  `data_type`: The `DataType` of the View, note `data_type` contains the array specifiers (e.g. `int**[3]`)
  *  `const_data_type`: Const version of `DataType`, same as `data_type` if that is already const.
- *  `non_const_data_type`: Non-Const version of `DataType`, same as `data_type` if that is already non-const.
+ *  `non_const_data_type`: Non-const version of `DataType`, same as `data_type` if that is already non-const.
 
  *  `scalar_array_type`: If `DataType` represents some properly specialised array data type such as Sacado FAD types, `scalar_array_type` is the underlying fundamental scalar type.
  *  `const_scalar_array_type`: Const version of `scalar_array_type`, same as `scalar_array_type` if that is already const
@@ -64,7 +64,7 @@ Template parameters other than `DataType` are optional, but ordering is enforced
 
 
 #### Spaces
- *  `execution_space`: Execution Space associated with the view. Will be used for performing view initialization, and certain deep_copy operations.
+ *  `execution_space`: Execution Space associated with the view, will be used for performing view initialization, and certain deep_copy operations.
  *  `memory_space`: Data storage location type. 
  *  `device_type`: the compound type defined by `Device<execution_space,memory_space>`
  *  `memory_traits`: The memory traits of the view. 
@@ -74,8 +74,8 @@ Template parameters other than `DataType` are optional, but ordering is enforced
 
 #### ViewTypes
  * `non_const_type`: this view type with all template parameters explicitly defined.
- * `const_type: this view type with all templerate parameters explicitly defined using a `const` data type.
- * `HostMirror`: compatible view type with the same `DataType` and `LayoutType` stored in host accesible memory space. 
+ * `const_type: this view type with all template parameters explicitly defined using a `const` data type.
+ * `HostMirror`: compatible view type with the same `DataType` and `LayoutType` stored in host accessible memory space. 
 
 #### Data Handles
  * `reference_type`: return type of the view access operators.
@@ -85,60 +85,60 @@ Template parameters other than `DataType` are optional, but ordering is enforced
  *  `array_layout`: The Layout of the View.
  *  `size_type`: index type associated with the memory space of this view. 
  *  `dimension`: An integer array like type, able to represent the extents of the view.
- *  `specialize`: A specizalisation tag used for partial specialisation of the mapping construct underlying a Kokkos View.
+ *  `specialize`: A specialization tag used for partial specialization of the mapping construct underlying a Kokkos View.
 
 ### Constructors
 
   * `View()`: Default Constructor. No allocations are made, no reference counting happens. All extents are zero and its data pointer is NULL.
   * `View( const View<DT, Prop...>& rhs)`: Copy constructor with compatible view. Follows View assignment rules. 
   * `View( View&& rhs)`: Move constructor
-  * `View( const std::string& name, const IntType& ... indicies)`: Standard allocating constructor.
+  * `View( const std::string& name, const IntType& ... indices)`: Standard allocating constructor.
     * `name`: a user provided label, which is used for profiling and debugging purposes. Names are not required to be unique,
-    * `indicies`: Runtime dimensions of the view.  
+    * `indices`: Runtime dimensions of the view.  
     * Requires: `sizeof(IntType...)==rank_dynamic()` 
     * Requires: `array_layout::is_regular == true`.
-  * `View( const std::string& name, const array_layout& layout): Standart allocating constructor.  
+  * `View( const std::string& name, const array_layout& layout)`: Standard allocating constructor.  
     * `name`: a user provided label, which is used for profiling and debugging purposes. Names are not required to be unique,
     * `layout`: an instance of a layout class.
   * `View( const AllocProperties& prop, , const IntType& ... indicies)`: Allocating constructor with allocation properties.
     * An allocation properties object is returned by the `view_alloc` function. 
-    * `indicies`: Runtime dimensions of the view.
+    * `indices`: Runtime dimensions of the view.
     * Requires: `sizeof(IntType...)==rank_dynamic()` 
     * Requires: `array_layout::is_regular == true`.
-  * `View( const AllocProperties& prop, const array_layout& layout): Allocating constructor with allocation properties and a layout object. 
+  * `View( const AllocProperties& prop, const array_layout& layout)`: Allocating constructor with allocation properties and a layout object. 
     * An allocation properties object is returned by the `view_alloc` function. 
     * `layout`: an instance of a layout class.
   * `View( const pointer_type& ptr, const IntType& ... indicies)`: Unmanaged data wrapping constructor.
     * `ptr`: pointer to a user provided memory allocation. Must provide storage of size `View::required_allocation_size(n0,...,nR)`
-    * `indicies`: Runtime dimensions of the view.   
+    * `indices`: Runtime dimensions of the view.   
     * Requires: `sizeof(IntType...)==rank_dynamic()` 
     * Requires: `array_layout::is_regular == true`.
-  * `View( const std::string& name, const array_layout& layout): Unmanaged data wrapper constructor.  
+  * `View( const std::string& name, const array_layout& layout)`: Unmanaged data wrapper constructor.  
     * `ptr`: pointer to a user provided memory allocation. Must provide storage of size `View::required_allocation_size(layout)` (*NEEDS TO BE IMPLEMENTED*)
     * `layout`: an instance of a layout class.
-  * `View( const ScratchSpace& space, const IntType& ... indicies)`: Constructor which aquires memory from a Scratch Memory handle.
+  * `View( const ScratchSpace& space, const IntType& ... indicies)`: Constructor which acquires memory from a Scratch Memory handle.
     * `space`: scratch memory handle. Typically returned from `team_handles` in `TeamPolicy` kernels. 
-    * `indicies`: Runtime dimensions of the view.   
+    * `indices`: Runtime dimensions of the view.   
     * Requires: `sizeof(IntType...)==rank_dynamic()` 
     * Requires: `array_layout::is_regular == true`.
-  * `View( const ScratchSpace& space, const array_layout& layout): Constructor which aquires memory from a Scratch Memory handle.  
+  * `View( const ScratchSpace& space, const array_layout& layout): Constructor which acquires memory from a Scratch Memory handle.  
     * `space`: scratch memory handle. Typically returned from `team_handles` in `TeamPolicy` kernels. 
     * `layout`: an instance of a layout class.
-  * `View( const View<DT, Prop...>& rhs, Args ... args): Subview constructor. See `subview` function for arguments. 
+  * `View( const View<DT, Prop...>& rhs, Args ... args)`: Subview constructor. See `subview` function for arguments. 
  
 ### Data Access Functions
 
   * ```c++
-    reference_type operator() (const IntType& ... indicies) const
+    reference_type operator() (const IntType& ... indices) const
     ```
-    Returns a value of `reference_type` which may or not be referencable itself. The number of index arguments must match the `rank` of the view.
+    Returns a value of `reference_type` which may or not be referenceable itself. The number of index arguments must match the `rank` of the view.
     See notes on `reference_type` for properties of the return type. 
     * Requires: `sizeof(IntType...)==rank_dynamic()` 
 
   * ```c++
     reference_type access (const IntType& i0=0, ... , const IntType& i7=0) const
     ```
-    Returns a value of `reference_type` which may or not be referencable itself. The number of index arguments must be equal or larger than the `rank` of the view.
+    Returns a value of `reference_type` which may or not be referenceable itself. The number of index arguments must be equal or larger than the `rank` of the view.
     Index arguments beyond `rank` must be `0`, which will be enforced if `KOKKOS_DEBUG` is defined. 
     See notes on `reference_type` for properties of the return type. 
 
@@ -234,7 +234,7 @@ Template parameters other than `DataType` are optional, but ordering is enforced
 Assignment rules cover the assignment operator as well as copy constructors. We aim at making all logically legal assignments possible, 
 while intercepting illegal assignments if possible at compile time, otherwise at runtime.
 In the following we use `DstType` and `SrcType` as the type of the destination view and source view respectively. 
-`dst_view` and `src_view` refer to the runtime instances of the destionation and source views. I.e.:
+`dst_view` and `src_view` refer to the runtime instances of the destination and source views, i.e.:
 ```c++
 ScrType src_view(...);
 DstType dst_view(src_view);
@@ -271,7 +271,7 @@ These rules only cover cases where both layouts are one of `LayoutLeft`, `Layout
   View<int*, LayoutLeft>    a9  = a1;           // OK since a1 is either LayoutLeft or LayoutRight
   View<int**, LayoutStride> a10 = a8;           // OK
   View<int**>               a11 = a10;          // OK
-  View<int*, HostSpace> a12 = View<int*, CudaSpace>("A12",N); // Error: non assignable memory spaces
+  View<int*, HostSpace> a12 = View<int*, CudaSpace>("A12",N); // Error: non-assignable memory spaces
   View<int*, HostSpace> a13 = View<int*, CudaHostPinnedSpace>("A13",N); // OK
  ```
 
