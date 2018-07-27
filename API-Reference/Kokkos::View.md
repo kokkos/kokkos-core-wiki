@@ -116,7 +116,7 @@ Template parameters other than `DataType` are optional, but ordering is enforced
   * `View( const std::string& name, const array_layout& layout)`: Unmanaged data wrapper constructor.  
     * `ptr`: pointer to a user provided memory allocation. Must provide storage of size `View::required_allocation_size(layout)` (*NEEDS TO BE IMPLEMENTED*)
     * `layout`: an instance of a layout class.
-  * `View( const ScratchSpace& space, const IntType& ... indicies)`: Constructor which acquires memory from a Scratch Memory handle.
+  * `View( const ScratchSpace& space, const IntType& ... indices)`: Constructor which acquires memory from a Scratch Memory handle.
     * `space`: scratch memory handle. Typically returned from `team_handles` in `TeamPolicy` kernels. 
     * `indices`: Runtime dimensions of the view.   
     * Requires: `sizeof(IntType...)==rank_dynamic()` 
