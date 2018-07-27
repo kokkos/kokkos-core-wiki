@@ -23,7 +23,7 @@ Reducer objects used in conjunction with [parallel_reduce](Kokkos%3A%3Aparallel_
 |[Min](Kokkos%3A%3AMin) | Minimum reduction |
 |[MinLoc](Kokkos%3A%3AMinLoc) | Reduction providing minimum and an associated index |
 |[MinMax](Kokkos%3A%3AMinMax) | Reduction providing both minimum and maximum |
-|[MinMaxLoc](Kokkos%3A%3AMinMaxLoc) | Reduction providing both minimum and maximum and associated indicies |
+|[MinMaxLoc](Kokkos%3A%3AMinMaxLoc) | Reduction providing both minimum and maximum and associated indices |
 |[Prod](Kokkos%3A%3AProd) | Multiplicative reduction |
 |[Sum](Kokkos%3A%3ASum) | Sum reduction |
 
