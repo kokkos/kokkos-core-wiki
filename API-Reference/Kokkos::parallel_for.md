@@ -35,7 +35,7 @@ Kokkos::parallel_for(const ExecPolicy& policy, const FunctorType& functor);
     * `ThreadVectorRange`: defines a 1D iteration range to be executed through vector parallelization. Only valid inside a parallel region executed through a `TeamPolicy` or a `TaskTeam`.
   * FunctorType: A valid functor with an `operator()` with a matching signature for the `ExecPolicy`
 
-### Requriements:
+### Requirements:
   
   * If `ExecPolicy` is an `IntegerType`, `functor` has a member function `operator() (const IntegerType& i) const`.  
   * If `ExecPolicy` is an `MDRangePolicy` and `ExecPolicy::work_tag` is `void`, `functor` has a member function `operator() (const IntegerType& i0, ... , const IntegerType& iN) const` where `N` is `ExecPolicy::rank-1`.
