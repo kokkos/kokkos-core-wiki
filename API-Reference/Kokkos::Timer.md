@@ -44,6 +44,6 @@ Timer is a simple construct to measure time.
     double time1 = timer.seconds();
     timer.reset();
     // ...
-    double time2 = timer.seonds();
+    double time2 = timer.seconds();
   ```
 
