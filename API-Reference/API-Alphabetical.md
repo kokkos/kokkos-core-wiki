@@ -27,4 +27,4 @@ All functions and classes listed here are part of the `Kokkos::` namespace.
 |[TeamThreadRange](Kokkos%3A%3ANestedPolicies) | [Core](API-Core) | [Execution Policies](Execution-Policies)| Policy to iterate over a 1D index range with the threads of a team. |
 |[ThreadVectorRange](Kokkos%3A%3ANestedPolicies) | [Core](API-Core) | [Execution Policies](Execution-Policies)| Policy to iterate over a 1D index range with the vector lanes of a thread. |
 |[Timer](Kokkos%3A%3ATimer) | [Core](API-Core) | [Utilities](API-Utilities)| A basic timer returning seconds |
-|[View](Kokkos%3A%3AView) | [Core](API-Core) | [View](Kokkos%3A%3AView)| A basic timer returning seconds |
+|[View](Kokkos%3A%3AView) | [Core](API-Core) | [View](Kokkos%3A%3AView)| A multi-dimensional array |
