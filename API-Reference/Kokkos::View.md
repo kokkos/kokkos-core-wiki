@@ -74,7 +74,7 @@ Template parameters other than `DataType` are optional, but ordering is enforced
 
 #### ViewTypes
  * `non_const_type`: this view type with all template parameters explicitly defined.
- * `const_type: this view type with all template parameters explicitly defined using a `const` data type.
+ * `const_type`: this view type with all template parameters explicitly defined using a `const` data type.
  * `HostMirror`: compatible view type with the same `DataType` and `LayoutType` stored in host accessible memory space. 
 
 #### Data Handles
