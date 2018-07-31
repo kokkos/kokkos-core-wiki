@@ -3,11 +3,11 @@
 Header File: `Kokkos_Core.hpp`
 
 TeamHandleConcept defines the concept for the `member_type` of `TeamPolicy` and `TeamTask`.
-The actual type is defined through the policies, but meets the following API requirements
+The actual type is defined through the policies, but meets the following API requirements.
 Note that the specific classes are only part of the public API as provided by `TeamPolicy` and 
 `TeamTask` and only their parts as defined by the `TeamHandleConcept`. 
-The actual name of the class as well as potential template parameters, existing
-constructors, member functions going beyond the concept etc. are NOT part of the public Kokkos API,
+The actual name of the class, as well as potential template parameters, existing
+constructors, member functions going beyond the concept, etc., are NOT part of the public Kokkos API
 and are thus subject to change. 
 
 # Synopsis 
@@ -21,7 +21,7 @@ and are thus subject to change.
     TeamHandleConcept & operator = ( TeamHandleConcept && ) = default ;
     TeamHandleConcept & operator = ( TeamHandleConcept const & ) = default ;
 
-    // Indicies
+    // Indices
     KOKKOS_INLINE_FUNCTION
     int team_rank() const noexcept;
     KOKKOS_INLINE_FUNCTION
@@ -123,7 +123,7 @@ and are thus subject to change.
 
 ### Team Collective Operations
   The following functions must be called collectively by all members of a team. These
-  calls must be lexically the same call. I.e. it is not legal to have some members of a team,
+  calls must be lexically the same call, i.e. it is not legal to have some members of a team
   call a collective in one branch and the others in another branch of the code (see example).
 
   * ```c++
