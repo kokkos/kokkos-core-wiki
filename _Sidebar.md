@@ -33,7 +33,7 @@
 5. **[[Memory Spaces|Memory-Space]]**
 6. **[[Task Parallelism|Task-Parallelism]]**
 7. **[[Utilities|API-Utilities]]**
-8. **[[STL Compatibility |STL-Compatibility]]**
+8. **[[STL Compatibility|STL-Compatibility]]**
 
 ## **[[A Guide to Kokkos Testing Processes]]**
 1. **[[Testing Processes|Testing Processes]]**
