@@ -84,7 +84,11 @@ See also: [TeamMember](Kokkos%3A%3ATeamHandleConcept)
 
 ### Constructors
  
- * TeamPolicy(): Default Constructor uninitialized policy.
+ * ```c++
+   TeamPolicy()
+   ```
+   Default Constructor uninitialized policy.
+ 
  * ```c++
    TeamPolicy(index_type league_size, index_type team_size [, index_type vector_length])
    ```
