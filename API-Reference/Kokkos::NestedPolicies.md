@@ -32,14 +32,14 @@ the execution space type via the team handle.
  * ```c++
    Impl::TeamThreadRangeBoundariesStruct TeamThreadRange(TeamMemberType team, IndexType count);
    ```
-   Splits the index range 0 to count-1 over the threads of the team. This call is potentially a
+   Splits the index range `0` to `count-1` over the threads of the team. This call is potentially a
    synchronization point for the team, and thus must meet the requirements of `team_barrier`.
    * `team`: object meeting the requirements of TeamHandle
    * `count`: index range length. 
  * ```c++
    Impl::TeamThreadRangeBoundariesStruct TeamThreadRange(TeamMemberType team, IndexType begin, IndexType end);
    ```
-   Splits the index range begin to end-1 over the threads of the team. This call is potentially a 
+   Splits the index range `begin` to `end-1` over the threads of the team. This call is potentially a 
    synchronization point for the team, and thus must meet the requirements of `team_barrier`.
    * `team`: object meeting the requirements of TeamHandle
    * `begin`: start index.
@@ -47,14 +47,14 @@ the execution space type via the team handle.
  * ```c++
    Impl::ThreadVectorRangeBoundariesStruct ThreadVectorRange(TeamMemberType team, IndexType count);
    ```
-   Splits the index range 0 to count-1 over the vector lanes of the calling thread. It is not legal to 
+   Splits the index range `0` to `count-1` over the vector lanes of the calling thread. It is not legal to 
    call this function inside of a vector level loop. 
    * `team`: object meeting the requirements of TeamHandle
    * `count`: index range length. 
  * ```c++
    Impl::ThreadVectorRangeBoundariesStruct ThreadVectorRange(TeamMemberType team, IndexType begin, IndexType end);
    ```
-   Splits the index range begin to end-1 over the vector lanes of the calling thread. It is not legal to 
+   Splits the index range `begin` to `end-1` over the vector lanes of the calling thread. It is not legal to 
    call this function inside of a vector level loop.
    * `team`: object meeting the requirements of TeamHandle
    * `begin`: start index.        
