@@ -18,7 +18,7 @@
 1. **[[Dual View|DualView]]**
 2. **[[Dynamic Rank View|DynamicRankView]]**
 3. **[[Dynamic Length View|DynamicLengthView]]**
-4. **[[Offset View/OffsetView]]**
+4. **[[Offset View|OffsetView]]**
 5. **[[Unordered Map|Unordered Map]]**
 ### **[[Content: Algorithms|ContentAlgorithms]]**
 1. **[[Sorting|Sorting]]**
