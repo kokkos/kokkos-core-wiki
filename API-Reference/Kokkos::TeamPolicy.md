@@ -67,24 +67,24 @@ See also: [TeamMember](Kokkos%3A%3ATeamHandleConcept)
 
 ### Common Arguments for all Execution Policies
 
-  * Execution Policies generally accept compile time arguments via template parameters and runtime parameters via constructor arguments or setter fucntions.
+  * Execution Policies generally accept compile time arguments via template parameters and runtime parameters via constructor arguments or setter functions.
   * Template arguments can be given in arbitrary order.
 
 | Argument | Options | Purpose |
 | --- | --- | --- |
 | ExecutionSpace | `Serial`, `OpenMP`, `Threads`, `Cuda`, `ROCm` | Specify the Execution Space to execute the kernel in. Defaults to `Kokkos::DefaultExecutionSpace`. |
-| Schedule | `Schedule<Dynamic>`, `Schedule<Static>` | Specifiy scheduling policy for work items. `Dynamic` scheduling is implemented through a work stealing queue. Default is machine and backend specific. |
+| Schedule | `Schedule<Dynamic>`, `Schedule<Static>` | Specify scheduling policy for work items. `Dynamic` scheduling is implemented through a work stealing queue. Default is machine and backend specific. |
 | IndexType | `IndexType<int>` | Specify integer type to be used for traversing the iteration space. Defaults to `int64_t`. |
 | WorkTag | `SomeClass` | Specify the work tag type used to call the functor operator. Any arbitrary type defaults to `void`. |
 
-### Requriements:
+### Requirements:
 
 
 ## Public Class Members
 
 ### Constructors
  
- * TeamPolicy(): Default Constructor unitialized policy.
+ * TeamPolicy(): Default Constructor uninitialized policy.
  * ```c++
    TeamPolicy(index_type league_size, index_type team_size [, index_type vector_length])
    ```
@@ -95,7 +95,7 @@ See also: [TeamMember](Kokkos%3A%3ATeamHandleConcept)
    TeamPolicy(index_type league_size, Impl::AUTO_t [, index_type vector_length])
    ```
    Request to launch `league_size` work items, each of which is assigned to a team of threads of a size determined by Kokkos, using a vector length of `vector_length`.
-   The team size may be determined lazely at launch time, taking into account properties of the functor.
+   The team size may be determined lazily at launch time, taking into account properties of the functor.
 
  * ```c++
    TeamPolicy(execution space, index_type league_size, index_type team_size [, index_type vector_length])
@@ -108,7 +108,7 @@ See also: [TeamMember](Kokkos%3A%3ATeamHandleConcept)
    TeamPolicy(execution_space space, index_type league_size, Impl::AUTO_t [, index_type vector_length])
    ```
    Request to launch `league_size` work items, each of which is assigned to a team of threads of a size determined by Kokkos, using a vector length of `vector_length`.
-   The team size may be determined lazely at launch time, taking into account properties of the functor.
+   The team size may be determined lazily at launch time, taking into account properties of the functor.
    Use the provided execution space instance during a kernel launch.  
 
 ### Runtime Settings
@@ -140,4 +140,3 @@ See also: [TeamMember](Kokkos%3A%3ATeamHandleConcept)
     TeamPolicy<IndexType<int>, Schedule<Dynamic>> policy_4(N,1,4);
     TeamPolicy<OpenMP> policy_5(OpenMP(), N, AUTO);
   ```
-
