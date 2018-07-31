@@ -22,13 +22,13 @@ Usage:
 
 ### Common Arguments for all Execution Policies
 
-  * Execution Policies generally accept compile time arguments via template parameters and runtime parameters via constructor arguments or setter fucntions.
+  * Execution Policies generally accept compile time arguments via template parameters and runtime parameters via constructor arguments or setter functions.
   * Template arguments can be given in arbitrary order.
 
 | Argument | Options | Purpose |
 | --- | --- | --- |
 | ExecutionSpace | `Serial`, `OpenMP`, `Threads`, `Cuda`, `ROCm` | Specify the Execution Space to execute the kernel in. Defaults to `Kokkos::DefaultExecutionSpace`. |
-| Schedule | `Schedule<Dynamic>`, `Schedule<Static>` | Specifiy scheduling policy for work items. `Dynamic` scheduling is implemented through a work stealing queue. Default is machine and backend specific. |
+| Schedule | `Schedule<Dynamic>`, `Schedule<Static>` | Specify scheduling policy for work items. `Dynamic` scheduling is implemented through a work stealing queue. Default is machine and backend specific. |
 | IndexType | `IndexType<int>` | Specify integer type to be used for traversing the iteration space. Defaults to `int64_t`. |
 | WorkTag | `SomeClass` | Specify the work tag type used to call the functor operator. Any arbitrary type defaults to `void`. |
 
@@ -41,7 +41,7 @@ Usage:
     Determines the rank of the index space as well as in which order to iterate over the tiles and how to iterate within the tiles. 
     `outer` and `inner` can be `Kokkos::Iterate::default`, `Kokkos::Iterate::left`, or `Kokkos::Iterate::right`. 
     
-### Requriements:
+### Requirements:
 
 
 ## Public Class Members
@@ -51,7 +51,7 @@ Usage:
 * ```c++
   MDRangePolicy()
   ```
-  Default Constructor unitialized policy.
+  Default Constructor uninitialized policy.
 * ```c++
    MDRangePolicy(const Kokkos::Array<int64_t,rank>& begin, const Kokkos::Array<int64_t,rank>& end)
    ```
@@ -81,4 +81,5 @@ Usage:
     MDRangePolicy<Rank<3>> policy_1({0,0,0},{N0,N1,N2});
     RangePolicy<Cuda,Rank<3,Iterate::Right,Iterate::Left>> policy_2({5,5,5},{N0-5,N1-5,N2-5},{T0,T1,T2});
   ```
+
 
