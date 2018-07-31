@@ -67,7 +67,7 @@ See also: [TeamMember](Kokkos%3A%3ATeamHandleConcept)
 
 ### Common Arguments for all Execution Policies
 
-  * Execution Policies generally accept compile time arguments via template parameters and runtime parameters via constructor arguments or setter fucntions.
+  * Execution Policies generally accept compile time arguments via template parameters and runtime parameters via constructor arguments or setter functions.
   * Template arguments can be given in arbitrary order.
 
 | Argument | Options | Purpose |
