@@ -22,7 +22,7 @@ Usage:
 
 ### Common Arguments for all Execution Policies
 
-  * Execution Policies generally accept compile time arguments via template parameters and runtime parameters via constructor arguments or setter fucntions.
+  * Execution Policies generally accept compile time arguments via template parameters and runtime parameters via constructor arguments or setter functions.
   * Template arguments can be given in arbitrary order.
 
 | Argument | Options | Purpose |
@@ -41,7 +41,7 @@ Usage:
     Determines the rank of the index space as well as in which order to iterate over the tiles and how to iterate within the tiles. 
     `outer` and `inner` can be `Kokkos::Iterate::default`, `Kokkos::Iterate::left`, or `Kokkos::Iterate::right`. 
     
-### Requriements:
+### Requirements:
 
 
 ## Public Class Members
@@ -51,7 +51,7 @@ Usage:
 * ```c++
   MDRangePolicy()
   ```
-  Default Constructor unitialized policy.
+  Default Constructor uninitialized policy.
 * ```c++
    MDRangePolicy(const Kokkos::Array<int64_t,rank>& begin, const Kokkos::Array<int64_t,rank>& end)
    ```
