@@ -70,18 +70,18 @@ RangePolicy defines an execution policy for a 1D iteration space starting at beg
 | Argument | Options | Purpose |
 | --- | --- | --- |
 | ExecutionSpace | `Serial`, `OpenMP`, `Threads`, `Cuda`, `ROCm` | Specify the Execution Space to execute the kernel in. Defaults to `Kokkos::DefaultExecutionSpace`. |
-| Schedule | `Schedule<Dynamic>`, `Schedule<Static>` | Specifiy scheduling policy for work items. `Dynamic` scheduling is implemented through a work stealing queue. Default is machine and backend specific. |
+| Schedule | `Schedule<Dynamic>`, `Schedule<Static>` | Specify scheduling policy for work items. `Dynamic` scheduling is implemented through a work stealing queue. Default is machine and backend specific. |
 | IndexType | `IndexType<int>` | Specify integer type to be used for traversing the iteration space. Defaults to `int64_t`. |
 | WorkTag | `SomeClass` | Specify the work tag type used to call the functor operator. Any arbitrary type defaults to `void`. |
 
-### Requriements:
+### Requirements:
 
 
 ## Public Class Members
 
 ### Constructors
  
- * RangePolicy(): Default Constructor unitialized policy.
+ * RangePolicy(): Default Constructor uninitialized policy.
  * ```c++
    template<class ... InitArgs> 
    RangePolicy(const int64_t& begin, const int64_t& end, const InitArgs ... init_args)
@@ -117,5 +117,3 @@ RangePolicy defines an execution policy for a 1D iteration space starting at beg
     parallel_for("Loop", N, functor);
     parallel_for("Loop", RangePolicy<>(N), functor);
   ```
-
-
