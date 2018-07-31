@@ -19,7 +19,7 @@
 2. **[[Dynamic Rank View|DynamicRankView]]**
 3. **[[Dynamic Length View|DynamicLengthView]]**
 4. **[[Offset View|Offset-View]]**
-5. **[[Unordered Map|Unordered Map]]**
+5. **[[Unordered Map|Unordered-Map]]**
 ### **[[Content: Algorithms|ContentAlgorithms]]**
 1. **[[Sorting|Sorting]]**
 2. **[[Random Numbers|Random Numbers]]**
