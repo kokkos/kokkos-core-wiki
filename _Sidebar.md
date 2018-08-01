@@ -22,7 +22,7 @@
 5. **[[Unordered Map|Unordered-Map]]**
 ### **[[Content: Algorithms|ContentAlgorithms]]**
 1. **[[Sorting|Sorting]]**
-2. **[[Random Numbers|Random Numbers]]**
+2. **[[Random Numbers|Random-Number-Generators]]**
 
 ## **[[API Reference|API-Reference]]**
 1. **[[Initialization|Initialization-API]]**
