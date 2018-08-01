@@ -16,4 +16,4 @@ Kokkos implements a 64-bit and 1024-bit (high-dimensional) version of the scramb
 
 ## Application of Random Number Generators
 
-The Process, the Steps
+The Process, the Steps, are next.
