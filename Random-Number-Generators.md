@@ -1,6 +1,6 @@
 # Random Number Generators
 
-This section documents the basis for the Kokkos Random Number Generators and outlines their usage.
+The basis for the Kokkos Random Number Generators and their usage is outlined here.
 
 ## Description of Generators
 
@@ -14,6 +14,6 @@ Kokkos implements a 64-bit and 1024-bit (high-dimensional) version of the scramb
 <sup>2</sup> Vigna, Sebastiano (2014). "_An experimental exploration of Marsaglia's xorshift generators, scrambled_“ ( http://arxiv.org/abs/1402.6246)
 ***
 
-## Application of Random Number Generators
+## Implementation of Random Number Generators for Applications
 
 The Process, the Steps, are next.
