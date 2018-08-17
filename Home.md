@@ -24,7 +24,7 @@ by Kokkos. This includes explanation of design decisions as well as best practic
 hints. This is a good place to start off your Kokkos journey other than attending 
 one of our Tutorial days. 
 
-## **[[The API Reference|APIReference]]**
+## **[[The API Reference|API-Reference]]**
 
 This is the place to go for a fast lookup of syntax. Developers who have previously 
 worked a lot with other shared memory models such as OpenMP, CUDA, or OpenCL may be

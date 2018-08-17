@@ -25,14 +25,16 @@
 2. **[[Random Numbers|Random-Number-Generators]]**
 
 ## **[[API Reference|API-Reference]]**
+### **[[Content: Alphabetical|API-Alphabetical]]**
+### **[[Content: Core|API-Core]]**
 1. **[[Initialization|Initialization-API]]**
 2. **[[View|Kokkos::View]]**
 3. **[[Data Parallelism|Data-Parallelism]]**
 4. **[[Execution Policies|Execution-Policies]]**
 5. **[[Memory Spaces|Memory-Space]]**
 6. **[[Task Parallelism|Task-Parallelism]]**
-7. **[[Utilities|Utilities]]**
-8. **[[STL Compatibility |STL-Compatibility]]**
+7. **[[Utilities|API-Utilities]]**
+8. **[[STL Compatibility|STL-Compatibility]]**
 
 ## **[[A Guide to Kokkos Testing Processes]]**
 1. **[[Testing Processes|Testing Processes]]**

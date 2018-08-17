@@ -1,5 +1,7 @@
 ## Parallel patterns
 
+Parallel execution patterns for composing algorithms.
+
 |Function  |Description                  |
 |:---------|:----------------------------|
 |[parallel_for](Kokkos%3A%3Aparallel_for) | Executes user code in parallel |
@@ -24,3 +26,4 @@ Reducer objects used in conjunction with [parallel_reduce](Kokkos%3A%3Aparallel_
 |[MinMaxLoc](Kokkos%3A%3AMinMaxLoc) | Reduction providing both minimum and maximum and associated indices |
 |[Prod](Kokkos%3A%3AProd) | Multiplicative reduction |
 |[Sum](Kokkos%3A%3ASum) | Sum reduction |
+
