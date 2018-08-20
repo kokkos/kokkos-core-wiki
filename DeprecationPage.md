@@ -4,6 +4,7 @@
 
  | Deprecated Feature | Replaced By | Reason for Removal |
  | --- | --- | --- | 
+ | `View<>::ptr_on_device()` | `View<>::data()` | Alignment with C++ standard |
  | `View<>::dimension_X()` | `View<>::extent(X)` | Alignment with C++ standard |
  | `View<>::dimension(X)` | `View<>::extent(X)` | Alignment with C++ standard |
  | `View<>::capacity()` | `View<>::span(X)` | Alignment with C++ standard |
