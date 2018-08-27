@@ -9,7 +9,7 @@ All functions and classes listed here are part of the `Kokkos::` namespace.
 |[LOr](Kokkos%3A%3ALOr) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism) | Reducer for Logical 'Or' reduction |
 |[Max](Kokkos%3A%3AMax) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism) | Reducer for Maximum reduction |
 |[MaxLoc](Kokkos%3A%3AMaxLoc) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism) | Reducer for Reduction providing maximum and an associated index |
-|[MDRangePolicy](Kokkos%3A%3ARangePolicy) | [Core](API-Core) | [Execution Policies](Execution-Policies)| Policy to iterate over a multidimensional index range. |
+|[MDRangePolicy](Kokkos%3A%3AMDRangePolicy) | [Core](API-Core) | [Execution Policies](Execution-Policies)| Policy to iterate over a multidimensional index range. |
 |[Min](Kokkos%3A%3AMin) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism) | Reducer for Minimum reduction |
 |[MinLoc](Kokkos%3A%3AMinLoc) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism) | Reducer for Reduction providing minimum and an associated index |
 |[MinMax](Kokkos%3A%3AMinMax) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism) | Reducer for Reduction providing both minimum and maximum |
