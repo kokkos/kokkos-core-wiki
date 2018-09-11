@@ -35,6 +35,8 @@
 6. **[[Task Parallelism|Task-Parallelism]]**
 7. **[[Utilities|API-Utilities]]**
 8. **[[STL Compatibility|STL-Compatibility]]**
+### **[[Content: Containers|API-Containers]]**
+### **[[Content: Algorithms|API-Algorithms]]**
 
 ## **[[A Guide to Kokkos Testing Processes]]**
 1. **[[Testing Processes|Testing Processes]]**
