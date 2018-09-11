@@ -37,6 +37,8 @@
 8. **[[STL Compatibility|STL-Compatibility]]**
 ### **[[Content: Containers|API-Containers]]**
 ### **[[Content: Algorithms|API-Algorithms]]**
+1. **[[Sort|Sort]]**
+2. **[[Random Number|Random Number]]**
 
 ## **[[A Guide to Kokkos Testing Processes]]**
 1. **[[Testing Processes|Testing Processes]]**
