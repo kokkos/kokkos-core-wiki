@@ -2,6 +2,10 @@ All functions and classes listed here are part of the `Kokkos::` namespace.
 
 |Name |Library | Category | Description                  |
 |:---------|:--------|:-----------|:----------------------------|
+| | [Algorithm](API-Container) | | Algorithm description |
+| | | | |
+| | [Container](API-Container) | | Container description |
+| | | | |
 |[BAnd](Kokkos%3A%3ABAnd) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism) | Reducer for Binary 'And' reduction |
 |[BOr](Kokkos%3A%3ABOr) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism) | Reducer for Binary 'Or' reduction |
 |[complex](Kokkos%3A%3AComplex) | [Core](API-Core) | [Utilities](API-Utilities) | Complex numbers which work on host and device |
