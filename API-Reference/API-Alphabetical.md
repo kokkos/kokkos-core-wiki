@@ -30,3 +30,5 @@ All functions and classes listed here are part of the `Kokkos::` namespace.
 |[View](Kokkos%3A%3AView) | [Core](API-Core) | [View](Kokkos%3A%3AView)| A multi-dimensional array |
 | | | | |
 | | [Container](API-Container) | | Container description |
+| | | | |
+| | [Algorithm](API-Container) | | Algorithm description |
