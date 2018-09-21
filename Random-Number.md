@@ -8,7 +8,7 @@
     static gen_func_type max(){return type_value}`
 
  * `KOKKOS_INLINE_FUNCTION
-    static gen_func_type draw(Generator& gen)  {return gen_data_type((gen.rand()&gen_return__value)}`
+    static gen_func_type draw(Generator& gen)  {return gen_data_type((gen.rand()&gen_return_value)}`
 
  * `KOKKOS_INLINE_FUNCTION
     static gen_func_type draw(Generator& gen, const gen_data_type& range)  {return gen_data_type((gen.rand(range));}`
@@ -19,4 +19,21 @@
 
 
 Function specializations for _gen_data_type_, _gen_func_type_ and _type_value_
-*gen_data_type:* Scalar, char, short, int, uint, long, ulong, long long, ulong long, float, double, complex<float>, complex<double>
+
+All functions and classes listed here are part of the `Kokkos::` namespace. 
+
+|gen_data_type |gen_func_type | type_value | gen_return_value ---        |
+|:-------------|:-------------|:-----------|:----------------------------|
+| char | short | 127 | (&0xff+256)%256 |
+| short | short | 32767 | (&0xffff+65536)%32768  |
+| int | int  | MAX_RAND |  ? |
+| uint | uint | MAX_URAND |  ? |
+| long | long | MAX_RAND or MAX_RAND64 |  ? |
+| ulong | ulong  | MAX_RAND or MAX_RAND64 |  ? |
+| long long | long long  | MAX_RAND64 |  ? |
+| ulong long | ulong long  | MAX_URAND64 |  ? |
+| float | float  | 1.0f |  ? |
+| double | double  | 1.0 |  ? |
+| complex<float> | complex<float>  | 1.0,1.0 |  ? |
+| complex<double> | complex<double>  | 1.0,1.0 |  ? |
+|  |  |  |  |
