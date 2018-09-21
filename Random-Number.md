@@ -37,3 +37,9 @@ All functions and classes listed here are part of the `Kokkos::` namespace.
 | complex<float> | complex<float>  | 1.0,1.0 |  ? |
 | complex<double> | complex<double>  | 1.0,1.0 |  ? |
 |  |  |  |  |
+
+where the maximum values of the XorShift function values are given by the following enums.
+*   enum {MAX_URAND = 0xffffffffU};
+*   enum {MAX_URAND64 = 0xffffffffffffffffULL-1};
+*   enum {MAX_RAND = static_cast<int>(0xffffffffU/2)};
+*   enum {MAX_RAND64 = static_cast<int64_t>(0xffffffffffffffffULL/2-1)};
