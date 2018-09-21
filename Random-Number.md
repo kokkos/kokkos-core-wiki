@@ -22,7 +22,7 @@ Function specializations for _gen_data_type_, _gen_func_type_ and _type_value_
 
 All functions and classes listed here are part of the `Kokkos::` namespace. 
 
-|gen_data_type |gen_func_type | type_value | gen_return_value ---        |
+|gen_data_type |gen_func_type | type_value | gen_return_value            |
 |:-------------|:-------------|:-----------|:----------------------------|
 | char | short | 127 | (&0xff+256)%256 |
 | short | short | 32767 | (&0xffff+65536)%32768  |
