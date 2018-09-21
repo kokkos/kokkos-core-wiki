@@ -3,7 +3,19 @@ All functions and classes listed here are part of the `Kokkos::` namespace.
 |Name |Library | Category | Description                  |
 |:---------|:--------|:-----------|:----------------------------|
 | | [Algorithm](API-Container) | | Algorithm description |
-| | | | |
+|Copy_Functor| Algorithm | Sort | View Copy |
+|Copy_Permute_Functor| Algorithm | Sort | View Copy |
+|Rand| Algorithm | Random Number | Generator Type (12), draw options (3) |
+|Rand| Algorithm | Random Number | Generator Type (12), draw options (3) |
+|Random_XorShift64_Pool| Algorithm | Random Number | Random Number Generator, pool for threads  |
+|Random_XorShift64| Algorithm | Random Number | Random Number Generator for 12 types, plus normal distribution|
+|init| Algorithm | Random Number | initialize state using seed for Random_XorShift64_Pool |
+|Random_XorShift1024_Pool| Algorithm | Random Number | Random Number Generator, 1024 bit, pool for threads  |
+|Random_XorShift64| Algorithm | Random Number | Random Number Generator for Cuda Device (12 types, normal distribution)|
+|Random_XorShift1024| Algorithm | Random Number | Random Number Generator for Cuda Device (12 types, normal distribution)|
+|Random_XorShift64| Algorithm | Random Number | Random Number Generator for ROCm Device (12 types, normal distribution)|
+|Random_XorShift1024| Algorithm | Random Number | Random Number Generator for ROCm Device (12 types, normal distribution)|| | | | |
+|fill_random| Algorithm | Random Number | create sample space to fit a (0 to) range or begin-end space |
 | | [Container](API-Container) | | Container description |
 | | | | |
 |[BAnd](Kokkos%3A%3ABAnd) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism) | Reducer for Binary 'And' reduction |
