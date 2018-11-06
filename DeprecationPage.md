@@ -1,4 +1,4 @@
-# Deprecated Functionality in Kokkos 2.7
+# Deprecated Functionality in Kokkos 2.7.24
 
 ## Compile Time Detectable
 
@@ -20,6 +20,8 @@
  | `KOKKOS_HAVE_...` | `KOKKOS_ENABLE_...` | Harmonization of Macro Names |
  | `KOKKOS_HAVE_PTHREAD` | `KOKKOS_ENABLE_THREADS` | Harmonization of Macro Names |
  | `KOKKOS_HAVE_CXX11` | *Not necessary anymore* |
+ | `DualView::modified_host` | The modify flags are now private members and not accessible. Use `DualView::clear_sync_state()` to reset the modification markers | This allowed us internal optimization such as having both views being merged into one and deciding where to store the data. |
+ | `DualView::modified_device` | The modify flags are now private members and not accessible. Use `DualView::clear_sync_state()` to reset the modification markers | This allowed us internal optimization such as having both views being merged into one and deciding where to store the data. |
  
 ## Deprecated RunTime Behaviour
 
@@ -27,3 +29,7 @@
   | --- | --- | --- |
   | `deep_copy(A,B)` with A and B having not-matching dimensions | `deep_copy(subview(A,...),subview(B,...))` | Frequent source of hard to detect bugs in user code. |
   | `TeamPolicy<>(N,team_size)` with team_size larger than supported | *previously this adjusted team_size to maximum possible value, now this errors out. Use `AUTO` if team_size shall be adjustable.* | Frequent source of hard to detect bugs in user code. |
+  | `DualView::sync<SPACE>` with `SPACE` not matching the actual underlying views Spaces | Call with the right `SPACE` type or explicitly call sync_host(), sync_device() if templating is not needed. | This had unexpected behaviour in particular when using DualViews on UVM memory. Furthermore every non-matching space would end up synching the host. |
+  | `DualView::need_sync<SPACE>` with `SPACE` not matching the actual underlying views Spaces | Call with the right `SPACE` type or explicitly call need_sync_host(), need_sync_device() if templating is not needed. | This had unexpected behaviour in particular when using DualViews on UVM memory. Furthermore every non-matching space would behave as if asked for state of the host view. |
+  | `DualView::modify<SPACE>` with `SPACE` not matching the actual underlying views Spaces | Call with the right `SPACE` type or explicitly call modify_host(), modify_device() if templating is not needed. | This had unexpected behaviour in particular when using DualViews on UVM memory. Furthermore every non-matching space would end up marking the host view as modified. |
+  | `DualView::view<SPACE>` with `SPACE` not matching the actual underlying views Spaces | Call with the right `SPACE` type or explicitly call view_host(), view_device() if templating is not needed. | This had unexpected behaviour in particular when using DualViews on UVM memory. Furthermore every non-matching space would end up giving back the host. |
