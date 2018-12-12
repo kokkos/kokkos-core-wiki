@@ -176,7 +176,7 @@ Kokkos lets you compute reductions with an array of reduction results, as long a
     
       // Be sure to set value_count in the constructor.
       ColumnSums (const View<float**>& X) :
-        value_count (X.extent_1 ()), // # columns in X
+        value_count (X.extent(1) ()), // # columns in X
         X_ (X)
       {}
    
@@ -202,9 +202,9 @@ Kokkos lets you compute reductions with an array of reduction results, as long a
         }
       }
     
-      KOKKOS_INLINE_FUNCTION void init () const {
+      KOKKOS_INLINE_FUNCTION void init (value_type sum) const {
         for (size_type j = 0; j < value_count; ++j) {
-          sum[j] += 0.0;
+          sum[j] = 0.0;
         }
       }
     };
@@ -220,7 +220,7 @@ We show how to use this functor here:
       // ... fill X before the following ...
       ColumnSums cs (X);
       float sums[10];
-      parallel_reduce (X.extent_0 (), cs, sums);
+      parallel_reduce (X.extent(0) (), cs, sums);
 ```   
 
 ## 7.4 Parallel scan
