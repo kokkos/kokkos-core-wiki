@@ -31,7 +31,7 @@ exceptions and multiple libraries trying to "own" Kokkos initialization.
 `Kokkos::is_initialized()` is false, and calls `Kokkos::finalize` in its
 destructor only if it called `Kokkos::initialize` in its constructor.
 
-Constructor:
+### Kokkos::ScopeGuard::ScopeGuard
 ```c++
   ScopeGuard();
   ScopeGuard(const InitArguments&);
@@ -41,7 +41,7 @@ Calls `Kokkos::initialize` only if
 `Kokkos::is_initialized()` is false.
 Arguments are passed directly to `Kokkos::initialize` if it is called.
 
-Destructor:
+### Kokkos::ScopeGuard::~ScopeGuard
 ```c++
   ~ScopeGuard();
 ```
