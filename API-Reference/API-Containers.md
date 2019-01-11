@@ -4,8 +4,8 @@ Bitset comment
 DualView comment
 ### 3. **[[DynamicView|dynamicView-path]]**
 DynamicView comment.
-### 4. **[[DynRankView|dynrankview-path]]**
-ErrorReporter comment.
+### 4. **[[DynRankView|Kokkos::DynRankView]]**
+Kokkos Runtime-determined-dimension DynRankView class. 
 ### 5. **[[Functional|functional-path]]**
 Functional comment.
 ### 6. **[[OffsetView|offsetview-path]]**
