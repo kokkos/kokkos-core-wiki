@@ -121,6 +121,8 @@ See also: [TeamMember](Kokkos%3A%3ATeamHandleConcept)
     inline TeamPolicy& set_chunk_size(int chunk);
     ```
     Set the chunk size. Each physical team of threads will get assigned `chunk` consecutive teams. Default is 1.
+    
+    Returns: reference to `*this`
 
   * ```c++
     inline TeamPolicy& set_scratch_size(const int& level, const Impl::PerTeamValue& per_team);
@@ -134,6 +136,8 @@ See also: [TeamMember](Kokkos%3A%3ATeamHandleConcept)
     * `per_thread`: wrapper for the per thread size of scratch in bytes. Returned by the function `PerThread(int)`.
     One can set the scratch size for level 0 and 1 independently by calling the function twice. 
     Subsequent calls with the same level overwrite the previous value. 
+    
+    Returns: reference to `*this`
 
 ## Examples
 
