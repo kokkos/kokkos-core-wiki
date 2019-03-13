@@ -111,7 +111,7 @@ One work-around is to invoke all inner Views' constructors on host. For example,
 a `Kokkos::fence` before using the outer View on device. The fence ensures that no device kernel will attempt to use the outer View before the host initialization has finished.
 
 A different approach defers constructing the inner Views until a separate Kokkos parallel region.  One first constructs the outer View using the `WithoutInitializing` option, like this:
-\begin{lstlisting}
+```cpp
 using Kokkos::View;
 using Kokkos::view_alloc;
 using Kokkos::WithoutInitializing;
@@ -120,7 +120,7 @@ using Kokkos::WithoutInitializing;
 // if you pass view_alloc a char* as its first argument.
 const std::string label ("v_outer");
 View<View<int*>> v_outer (view_alloc (label, WithoutInitializing));
-\end{lstlisting}
+```
 This ensures that the inner Views' constructors don't get called on device. However, that also means that the inner Views are not correctly constructed; they are not yet safe to use! Thus, one must then use ``placement new'' in a Kokkos parallel region, in order to construct the inner Views. This approach works best when the inner Views share a common memory pool for all their allocations.
 
 Here is a summary of different ways to make a View of Views:
