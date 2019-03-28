@@ -403,12 +403,12 @@ Kokkos::View<int*[3], MemorySpace> a ("a", 10);
 typename Kokkos::View<int*[3], MemorySpace>::HostMirror b =
     create_mirror(a);
 // This is always a memcopy
-Kokkos::deep_copy (a, b);
+Kokkos::deep_copy (b, a);
     
 typename Kokkos::View<int*[3]>::HostMirror c =
 Kokkos::create_mirror_view(a);
 // This is a no-op if MemorySpace is HostSpace
-Kokkos::deep_copy (a, c)
+Kokkos::deep_copy (c, a)
 ```
 
 ### 6.4.4 How do I get the raw pointer?
