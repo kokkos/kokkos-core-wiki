@@ -2,7 +2,7 @@
 ## **[[Programming Guide|The Kokkos Programming Guide]]**
 ### **[[Content: Core|Programming Guide: Core]]**
 1. **[[Introduction|Introduction]]**
-2. **[[Machine Model|MachineModel]]**
+2. **[[Machine Model|Machine-Model]]**
 3. **[[Programming Model|ProgrammingModel]]**
 4. **[[Compiling|Compiling]]**
 5. **[[Initialization|Initialization]]**
