@@ -18,7 +18,17 @@ All functions and classes listed here are part of the `Kokkos::` namespace.
 |fill_random| Algorithm | Random Number | create sample space to fit a (0 to) range or begin-end space |
 | | | | |
 | | [Container](API-Container) | | Container description |
-|[DualView] (Kokkos%3A%3ADualView) | [Containers](API-Containers) | View|  Host-Device Mirror of View with Host-Device Memory |
+|[Bitset](Kokkos%3A%3ABitset) | [Containers](API-Containers) | View | A concurrent Bitset class. |
+|[DualView](Kokkos%3A%3ADualView) | [Containers](API-Containers) | View | Host-Device Mirror of View with Host-Device Memory |
+|[DynRankView](Kokkos%3A%3ADynRankView) | [Containers](API-Containers) | View | A view which can determine its rank at runtime. |
+|[DynamicView](Kokkos%3A%3ADynamicView) | [Containers](API-Containers) | View | A view which can change its size dynamically. |
+|[ErrorReporter](Kokkos%3A%3AErrorReporter) | [Containers](API-Containers) | View | A class supporting error recording in parallel code. |
+|[OffsetView](Kokkos%3A%3AOffsetView) | [Containers](API-Containers) | View | View structure supporting non-zero start indicies. |
+|[ScatterView](Kokkos%3A%3AScatterView) | [Containers](API-Containers) | View | View structure to transpartently support atomic and data replication strategies for scatter-reduce algorithms. |
+|[StaticCrsGraph](Kokkos%3A%3AStaticCrsGraph) | [Containers](API-Containers) | View | A non-resizable CRS graph structure with view semantics. |
+|[UnorderedMap](Kokkos%3A%3AUnorderedMap) | [Containers](API-Containers) | View | A map data structure optimized for concurrent inserts. |
+|[vector](Kokkos%3A%3Avector) | [Containers](API-Containers) | View | A class providing similar interfaces to `std::vector`. |
+|[](Kokkos%3A%3A) | [Containers](API-Containers) | View | |
 | | | | |
 | | [Core](API-Core) | | Core description |
 |[BAnd](Kokkos%3A%3ABAnd) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism) | Reducer for Binary 'And' reduction |
@@ -43,6 +53,7 @@ All functions and classes listed here are part of the `Kokkos::` namespace.
 |[Prod](Kokkos%3A%3AProd) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism) | Reducer for Multiplicative reduction |
 |[RangePolicy](Kokkos%3A%3ARangePolicy) | [Core](API-Core) | [Execution Policies](Execution-Policies)| Policy to iterate over a 1D index range. |
 |[ReducerConcept](Kokkos%3A%3AReducerConcept) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism)| Provides the concept for Reducers. |
+|[subview](Kokkos:%3A%3Asubview) | [Core](API-Core) | View | Crating multi-dimensional array which is a slice of a view |
 |[Sum](Kokkos%3A%3ASum) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism) | Reducer for Sum reduction |
 |[TeamHandleConcept](Kokkos%3A%3ATeamHandleConcept) | [Core](API-Core) | [Execution Policies](Execution-Policies)| Provides the concept for the `member_type` of a [TeamPolicy](Kokkos%3A%3ATeamPolicy). |
 |[TeamPolicy](Kokkos%3A%3ATeamPolicy) | [Core](API-Core) | [Execution Policies](Execution-Policies)| Policy to iterate over a 1D index range, assigning to each iteration a team of threads. |
@@ -50,4 +61,3 @@ All functions and classes listed here are part of the `Kokkos::` namespace.
 |[ThreadVectorRange](Kokkos%3A%3ANestedPolicies) | [Core](API-Core) | [Execution Policies](Execution-Policies)| Policy to iterate over a 1D index range with the vector lanes of a thread. |
 |[Timer](Kokkos%3A%3ATimer) | [Core](API-Core) | [Utilities](API-Utilities)| A basic timer returning seconds |
 |[View](Kokkos%3A%3AView) | [Core](API-Core) | [View](Kokkos%3A%3AView)| A multi-dimensional array |
-|Subview | [Core](API-Core) | View| A multi-dimensional array which is a slice of a view |
