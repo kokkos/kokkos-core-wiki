@@ -16,12 +16,16 @@ All functions and classes listed here are part of the `Kokkos::` namespace.
 |Random_XorShift64| Algorithm | Random Number | Random Number Generator for ROCm Device (12 types, normal distribution)|
 |Random_XorShift1024| Algorithm | Random Number | Random Number Generator for ROCm Device (12 types, normal distribution)|| | | | |
 |fill_random| Algorithm | Random Number | create sample space to fit a (0 to) range or begin-end space |
-| | [Container](API-Container) | | Container description |
 | | | | |
+| | [Container](API-Container) | | Container description |
+|[DualView] (Kokkos%3A%3ADualView) | [Containers](API-Containers) | View|  Host-Device Mirror of View with Host-Device Memory |
+| | | | |
+| | [Core](API-Core) | | Core description |
 |[BAnd](Kokkos%3A%3ABAnd) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism) | Reducer for Binary 'And' reduction |
 |[BOr](Kokkos%3A%3ABOr) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism) | Reducer for Binary 'Or' reduction |
 |[complex](Kokkos%3A%3AComplex) | [Core](API-Core) | [Utilities](API-Utilities) | Complex numbers which work on host and device |
-|[CreateMirror]() | [Core](API-Core) | [View](Data-Parallelism) | Mirror Host data to Device data |
+|[create_mirror](Kokkos%3A%3Acreate_mirror) | [Core](API-Core) | [View](Data-Parallelism) | Mirror Host data to Device data |
+|[create_mirror_view](Kokkos%3A%3Acreate_mirror_view) | [Core](API-Core) | [View](Data-Parallelism) | Mirror Host data to Device data |
 |[LAnd](Kokkos%3A%3ALAnd) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism) | Reducer for Logical 'And' reduction |
 |[LOr](Kokkos%3A%3ALOr) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism) | Reducer for Logical 'Or' reduction |
 |[Max](Kokkos%3A%3AMax) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism) | Reducer for Maximum reduction |
@@ -46,5 +50,4 @@ All functions and classes listed here are part of the `Kokkos::` namespace.
 |[ThreadVectorRange](Kokkos%3A%3ANestedPolicies) | [Core](API-Core) | [Execution Policies](Execution-Policies)| Policy to iterate over a 1D index range with the vector lanes of a thread. |
 |[Timer](Kokkos%3A%3ATimer) | [Core](API-Core) | [Utilities](API-Utilities)| A basic timer returning seconds |
 |[View](Kokkos%3A%3AView) | [Core](API-Core) | [View](Kokkos%3A%3AView)| A multi-dimensional array |
-|[DualView] (Kokkos%3A%3ADualView) | [Containers](API-Containers) | View|  Host-Device Mirror of View with Host-Device Memory |
 |Subview | [Core](API-Core) | View| A multi-dimensional array which is a slice of a view |
