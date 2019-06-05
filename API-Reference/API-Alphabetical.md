@@ -67,7 +67,10 @@ All functions and classes listed here are part of the `Kokkos::` namespace.
 |[PerThread](Kokkos%3A%3ANestedPolicies) | [Core](API-Core) | [Execution Policies](Execution-Policies)| Policy used in single construct to indicate once per thread execution. |
 |[Prod](Kokkos%3A%3AReducerConcept) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism) | Reducer for Multiplicative reduction |
 |[RangePolicy](Kokkos%3A%3ARangePolicy) | [Core](API-Core) | [Execution Policies](Execution-Policies)| Policy to iterate over a 1D index range. |
+|[(X)realloc|(Kokkos%3A%3Arealloc) | [Core](API-Core) | View | Resize an existing view without maintaining the content |
 |[(U)ReducerConcept](Kokkos%3A%3AReducerConcept) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism)| Provides the concept for Reducers. |
+|[(X)resize|(Kokkos%3A%3Aresize) | [Core](API-Core) | View | Resize an existing view while maintaining the content |
+|[(X)SpaceAccessibility|(Kokkos%3A%3ASpaceAccessibility) | [Core](API-Core) | [Spaces](Spaces) | Facility to query accessibility rules between execution and memory spaces. |
 |[(X)subview](Kokkos%3A%3Asubview) | [Core](API-Core) | View | Crating multi-dimensional array which is a slice of a view |
 |[Sum](Kokkos%3A%3AReducerConcept) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism) | Reducer for Sum reduction |
 |[TeamHandleConcept](Kokkos%3A%3ATeamHandleConcept) | [Core](API-Core) | [Execution Policies](Execution-Policies)| Provides the concept for the `member_type` of a [TeamPolicy](Kokkos%3A%3ATeamPolicy). |
