@@ -1,8 +1,8 @@
 All functions and classes listed here are part of the `Kokkos::` namespace. 
 
+### Algorithms
 |Name |Library | Category | Description                  |
 |:---------|:--------|:-----------|:----------------------------|
-| | [Algorithm](API-Container) | | Algorithm description |
 |Copy_Functor| Algorithm | Sort | View Copy |
 |Copy_Permute_Functor| Algorithm | Sort | View Copy |
 |Rand| Algorithm | Random Number | Generator Type (12), draw options (3) |
@@ -11,13 +11,13 @@ All functions and classes listed here are part of the `Kokkos::` namespace.
 |Random_XorShift64| Algorithm | Random Number | Random Number Generator for 12 types, plus normal distribution|
 |init| Algorithm | Random Number | initialize state using seed for Random_XorShift64_Pool |
 |Random_XorShift1024_Pool| Algorithm | Random Number | Random Number Generator, 1024 bit, pool for threads  |
-|Random_XorShift64| Algorithm | Random Number | Random Number Generator for Cuda Device (12 types, normal distribution)|
-|Random_XorShift1024| Algorithm | Random Number | Random Number Generator for Cuda Device (12 types, normal distribution)|
-|Random_XorShift64| Algorithm | Random Number | Random Number Generator for ROCm Device (12 types, normal distribution)|
-|Random_XorShift1024| Algorithm | Random Number | Random Number Generator for ROCm Device (12 types, normal distribution)|| | | | |
+|Random_XorShift1024| Algorithm | Random Number | Random Number Generator for 12 types, plus normal distribution)|
 |fill_random| Algorithm | Random Number | create sample space to fit a (0 to) range or begin-end space |
-| | | | |
-| | [Container](API-Container) | | Container description |
+
+
+### Containers
+|Name |Library | Category | Description                  |
+|:---------|:--------|:-----------|:----------------------------|
 |[Bitset](Kokkos%3A%3ABitset) | [Containers](API-Containers) | View | A concurrent Bitset class. |
 |[DualView](Kokkos%3A%3ADualView) | [Containers](API-Containers) | View | Host-Device Mirror of View with Host-Device Memory |
 |[DynRankView](Kokkos%3A%3ADynRankView) | [Containers](API-Containers) | View | A view which can determine its rank at runtime. |
@@ -28,9 +28,12 @@ All functions and classes listed here are part of the `Kokkos::` namespace.
 |[StaticCrsGraph](Kokkos%3A%3AStaticCrsGraph) | [Containers](API-Containers) | View | A non-resizable CRS graph structure with view semantics. |
 |[UnorderedMap](Kokkos%3A%3AUnorderedMap) | [Containers](API-Containers) | View | A map data structure optimized for concurrent inserts. |
 |[vector](Kokkos%3A%3Avector) | [Containers](API-Containers) | View | A class providing similar interfaces to `std::vector`. |
-|[](Kokkos%3A%3A) | [Containers](API-Containers) | View | |
-| | | | |
-| | [Core](API-Core) | | Core description |
+
+
+### Core
+
+|Name |Library | Category | Description                  |
+|:---------|:--------|:-----------|:----------------------------|
 |[(X)atomic_exchange](Kokkos%3A%3Aatomic_exchange) | [Core](API-Core) | [Atomic-Operations](Atomic-Operations) | Atomic operation which exchanges a value and returns the old. | 
 |[(X)atomic_compare_exchange](Kokkos%3A%3Aatomic_compare_exchange) | [Core](API-Core) | [Atomic-Operations](Atomic-Operations) | Atomic operation which exchanges a value only if the old value matches a comparison value and returns the old value. | 
 |[(X)atomic_compare_exchange_strong](Kokkos%3A%3Aatomic_compare_exchange_strong) | [Core](API-Core) | [Atomic-Operations](Atomic-Operations) | Atomic operation which exchanges a value only if the old value matches a comparison value and returns true if the exchange is executed. | 
@@ -67,10 +70,10 @@ All functions and classes listed here are part of the `Kokkos::` namespace.
 |[PerThread](Kokkos%3A%3ANestedPolicies) | [Core](API-Core) | [Execution Policies](Execution-Policies)| Policy used in single construct to indicate once per thread execution. |
 |[Prod](Kokkos%3A%3AReducerConcept) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism) | Reducer for Multiplicative reduction |
 |[RangePolicy](Kokkos%3A%3ARangePolicy) | [Core](API-Core) | [Execution Policies](Execution-Policies)| Policy to iterate over a 1D index range. |
-|[(X)realloc|(Kokkos%3A%3Arealloc) | [Core](API-Core) | View | Resize an existing view without maintaining the content |
+|[(X)realloc](Kokkos%3A%3Arealloc) | [Core](API-Core) | View | Resize an existing view without maintaining the content |
 |[(U)ReducerConcept](Kokkos%3A%3AReducerConcept) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism)| Provides the concept for Reducers. |
-|[(X)resize|(Kokkos%3A%3Aresize) | [Core](API-Core) | View | Resize an existing view while maintaining the content |
-|[(X)SpaceAccessibility|(Kokkos%3A%3ASpaceAccessibility) | [Core](API-Core) | [Spaces](Spaces) | Facility to query accessibility rules between execution and memory spaces. |
+|[(X)resize](Kokkos%3A%3Aresize) | [Core](API-Core) | View | Resize an existing view while maintaining the content |
+|[(X)SpaceAccessibility](Kokkos%3A%3ASpaceAccessibility) | [Core](API-Core) | [Spaces](Spaces) | Facility to query accessibility rules between execution and memory spaces. |
 |[(X)subview](Kokkos%3A%3Asubview) | [Core](API-Core) | View | Crating multi-dimensional array which is a slice of a view |
 |[Sum](Kokkos%3A%3AReducerConcept) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism) | Reducer for Sum reduction |
 |[TeamHandleConcept](Kokkos%3A%3ATeamHandleConcept) | [Core](API-Core) | [Execution Policies](Execution-Policies)| Provides the concept for the `member_type` of a [TeamPolicy](Kokkos%3A%3ATeamPolicy). |
