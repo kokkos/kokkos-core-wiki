@@ -91,8 +91,8 @@ Usage:
    ```
    Returns a view of the result place. 
 
-### Build-In Reducers
-
+### Built-In Reducers
+Kokkos provides a number of built-in reducers that work with the intrinsic C++ types as well as Kokkos::complex.  below are descriptions of each reducer.
  * ```c++
    template<class Scalar, class Space>
    class Sum;
