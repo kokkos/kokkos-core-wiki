@@ -1,6 +1,6 @@
 # `Kokkos::Sum`
 
-Specific implementation of ReducerConcept performing an `add` operation
+Specific implementation of ReducerConcept(Kokkos%3A%3AReducerConcept) performing an `add` operation
 
 Header File: `Kokkos_Core.hpp`
 
