@@ -79,7 +79,7 @@ Usage:
  * ```c++
    void init( value_type& val)  const;
    ```
-   Initialize val with appropriate initial value. For example, 'Add' assigns val = 0, but Prod assigns val = 1   
+   Initialize `val` with appropriate initial value. For example, 'Add' assigns `val = 0;`, but Prod assigns `val = 1;`   
 
  * ```c++
    value_type& reference() const;
