@@ -95,4 +95,4 @@ Usage:
    * `Sum<T,S>::value_type` is non-const `T`
    * `Sum<T,S>::result_view_type` is `Kokkos::View<T,S,Kokkos::MemoryTraits<Kokkos::Unmanaged>>`
    * Requires: `Scalar` has `operator =` and `operator +=` defined. `Kokkos::reduction_identity<Scalar>::sum()` is a valid expression. 
-   * In order to use Sum with a custom type, a template specialization of Kokkos::reduction_identity<CustomType> must be defined.  See [Using Built-in Reducers with Custom Scalar Types](Custom-Reductions%3A-Build-In-Reducers-with-Custom-Scalar-Types) for details
+   * In order to use Sum with a custom type, a template specialization of Kokkos::reduction_identity<CustomType> must be defined.  See [Using Built-in Reducers with Custom Scalar Types](Custom-Reductions%3A-Built-In-Reducers-with-Custom-Scalar-Types) for details
