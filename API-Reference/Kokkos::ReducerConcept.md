@@ -17,7 +17,6 @@ Usage:
       //Required for Concept
       typedef Reducer reducer;
       typedef ... value_type;
-
       typedef Kokkos::View<value_type, ... > result_view_type;
       
       KOKKOS_INLINE_FUNCTION
