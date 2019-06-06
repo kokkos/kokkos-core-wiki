@@ -57,13 +57,13 @@ Usage:
  * ```c++
    Reducer(value_type& result)
    ```
-   Constructs a reducer which references a local variable as its result place.
+   Constructs a reducer which references a local variable as its result location.  
  
  * ```c++
    Reducer(const result_view_type result)`
    ```
-   Constructs a reducer which is given a specific view to put the result in.
- 
+   Constructs a reducer which references a specific view as its result location.
+
 ### Combiner Functions
 
  * ```c++
