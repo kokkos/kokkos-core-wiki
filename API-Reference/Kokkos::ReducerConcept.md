@@ -64,7 +64,7 @@ Usage:
    ```
    Constructs a reducer which references a specific view as its result location.
 
-### Combiner Functions
+### Functions
 
  * ```c++
    void join(value_type& dest, const value_type& src)  const;`
