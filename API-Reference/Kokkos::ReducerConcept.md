@@ -50,7 +50,7 @@ Usage:
    
  * `reducer`: The self type.
  * `value_type`: The reduction scalar type.
- * `result_view_type`: A `Kokkos::View` referencing the place where the reduction result should be placed. Can be an unmanaged view of a scalar. 
+ * `result_view_type`: A `Kokkos::View` referencing the place where the reduction result should be placed. Can be an unmanaged view of a scalar or complex datatype (class or struct).  Unmanaged views must specify the same memory space as the scalar or complex datatype.
 ### Constructors
  
  Constructors are not part of the concept. A custom reducer can have complex custom constructors. All Build-In reducers in Kokkos have the following two constructors:
