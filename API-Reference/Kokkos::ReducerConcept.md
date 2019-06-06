@@ -92,7 +92,7 @@ Usage:
    Returns a view of the result place. 
 
 ### Built-In Reducers
-Kokkos provides a number of built-in reducers that work with the intrinsic C++ types as well as Kokkos::complex.  below are descriptions of each reducer.
+Kokkos provides a number of built-in reducers that automatically work with the intrinsic C++ types as well as Kokkos::complex.  In order to use a Built-in reducer with a custom type, a template specialization of Kokkos::reduction_identity<CustomType> must be defined.  See below for an example.  
  * ```c++
    template<class Scalar, class Space>
    class Sum;
@@ -110,6 +110,60 @@ Kokkos provides a number of built-in reducers that work with the intrinsic C++ t
    * `Prod<T,S>::value_type` is `T`
    * `Prod<T,S>::result_view_type` is `Kokkos::View<T,S,Kokkos::MemoryTraits<Kokkos::Unmanaged>>`
    * Requires: `Scalar` has `operator =` and `operator *=` defined. `Kokkos::reduction_identity<Scalar>::prod()` is a valid expression. 
+
+ * ```c++
+   template<class Scalar, class Space>
+   class Min;
+   ```
+   Selects the minimum value from combined inputs.
+   * `Min<T,S>::value_type` is `T`
+   * `Min<T,S>::result_view_type` is `Kokkos::View<T,S,Kokkos::MemoryTraits<Kokkos::Unmanaged>>`
+   * Requires: `Scalar` has `operator =` and `operator <` defined. `Kokkos::reduction_identity<Scalar>::min()` is a valid expression. 
+
+ * ```c++
+   template<class Scalar, class Space>
+   class Max;
+   ```
+   Selects the minimum value from combined inputs.
+   * `Max<T,S>::value_type` is `T`
+   * `Max<T,S>::result_view_type` is `Kokkos::View<T,S,Kokkos::MemoryTraits<Kokkos::Unmanaged>>`
+   * Requires: `Scalar` has `operator =` and `operator >` defined. `Kokkos::reduction_identity<Scalar>::max()` is a valid expression. 
+
+ * ```c++
+   template<class Scalar, class Space>
+   class LAnd;
+   ```
+   Uses the logical 'and' operation to combine partial results.
+   * `Land<T,S>::value_type` is `T`
+   * `Land<T,S>::result_view_type` is `Kokkos::View<T,S,Kokkos::MemoryTraits<Kokkos::Unmanaged>>`
+   * Requires: `Scalar` has `operator =` and `operator &&` defined. `Kokkos::reduction_identity<Scalar>::land()` is a valid expression. 
+
+ * ```c++
+   template<class Scalar, class Space>
+   class LOr;
+   ```
+   Uses the logical 'or' operation to combine partial results.
+   * `LOr<T,S>::value_type` is `T`
+   * `LOr<T,S>::result_view_type` is `Kokkos::View<T,S,Kokkos::MemoryTraits<Kokkos::Unmanaged>>`
+   * Requires: `Scalar` has `operator =` and `operator ||` defined. `Kokkos::reduction_identity<Scalar>::lor()` is a valid expression. 
+
+ * ```c++
+   template<class Scalar, class Space>
+   class BAnd;
+   ```
+   Uses the bitwise 'and' operation to combine partial results.
+   * `BAnd<T,S>::value_type` is `T`
+   * `BAnd<T,S>::result_view_type` is `Kokkos::View<T,S,Kokkos::MemoryTraits<Kokkos::Unmanaged>>`
+   * Requires: `Scalar` has `operator =` and `operator &` defined. `Kokkos::reduction_identity<Scalar>::band()` is a valid expression. 
+
+ * ```c++
+   template<class Scalar, class Space>
+   class Bor;
+   ```
+   Uses the bitwise 'or' operation to combine partial results.
+   * `BOr<T,S>::value_type` is `T`
+   * `BOr<T,S>::result_view_type` is `Kokkos::View<T,S,Kokkos::MemoryTraits<Kokkos::Unmanaged>>`
+   * Requires: `Scalar` has `operator =` and `operator |` defined. `Kokkos::reduction_identity<Scalar>::bor()` is a valid expression. 
 
 ## Examples
 
