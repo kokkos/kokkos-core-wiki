@@ -92,15 +92,8 @@ Usage:
    Returns a view of the result place. 
 
 ### Built-In Reducers
-Kokkos provides a number of built-in reducers that automatically work with the intrinsic C++ types as well as Kokkos::complex.  In order to use a Built-in reducer with a custom type, a template specialization of Kokkos::reduction_identity<CustomType> must be defined.  See below for an example.  
- * ```c++
-   template<class Scalar, class Space>
-   class Sum;
-   ```
-   Uses the addition operation to combine partial results;
-   * `Sum<T,S>::value_type` is `T`
-   * `Sum<T,S>::result_view_type` is `Kokkos::View<T,S,Kokkos::MemoryTraits<Kokkos::Unmanaged>>`
-   * Requires: `Scalar` has `operator =` and `operator +=` defined. `Kokkos::reduction_identity<Scalar>::sum()` is a valid expression. 
+Kokkos provides a number of built-in reducers that automatically work with the intrinsic C++ types as well as Kokkos::complex.  In order to use a Built-in reducer with a custom type, a template specialization of Kokkos::reduction_identity<CustomType> must be defined.  See below for an example.
+ * [Kokkos::Sum](Kokkos%3A%3ASum)
 
  * ```c++
    template<class Scalar, class Space>
