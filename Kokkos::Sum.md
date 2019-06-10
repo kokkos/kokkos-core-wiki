@@ -79,12 +79,12 @@ Usage:
  * ```c++
    void init( value_type& val)  const;
    ```
-   Initialize `val` with `0` value.    
+   Initialize `val` using the Kokkos::reduction_identity<Scalar>::sum() method.  The default implementation sets `val=0`.
 
  * ```c++
    value_type& reference() const;
    ```
-   Returns a reference to the result place.
+   Returns a reference to the result provided in class constructor.
 
  * ```c++
    result_view_type view() const;
