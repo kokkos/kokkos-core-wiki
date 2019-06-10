@@ -69,12 +69,12 @@ Usage:
  * ```c++
    void join(value_type& dest, const value_type& src)  const;`
    ```
-   Add `src` into `dest`:  `dest*=src;`. 
+   Multiply `src` and `dest` and store in `dest`:  `dest*=src;`. 
 
  * ```c++
    void join(volatile value_type& dest, const volatile value_type& src) const;
    ```
-   Add `src` into `dest`: `dest*=src;`. 
+   Multiply `src` and `dest` and store in `dest`: `dest*=src;`. 
 
  * ```c++
    void init( value_type& val)  const;
