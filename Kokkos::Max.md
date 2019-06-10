@@ -79,7 +79,7 @@ Usage:
  * ```c++
    void init( value_type& val)  const;
    ```
-   Initialize `val` using the Kokkos::reduction_identity<Scalar>::max() method.  The default implementation sets `val=<TYPE>_MIN`.
+   Initialize `val` using the Kokkos::reduction_identity<Scalar>::max() method.  The default implementation sets `val=<TYPE>_MAX`.
 
  * ```c++
    value_type& reference() const;
