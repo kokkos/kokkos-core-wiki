@@ -50,7 +50,7 @@ Usage:
    
  * `reducer`: The self type.
  * `value_type`: The reduction scalar type.
- * `result_view_type`: A `Kokkos::View` referencing where the reduction result 
+ * `result_view_type`: A `Kokkos::View` referencing the reduction result 
 
 ### Constructors
  
