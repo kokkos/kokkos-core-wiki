@@ -1,7 +1,7 @@
 Kokkos provides Reducers for the most common reduction types:
 
-* Sum: For simple Summations
-* Prod: Computing the product of all input values
+* [Sum](Kokkos%3A%3ASum): For simple Summations
+* [Prod](Kokkos%3A%3AProd): Computing the product of all input values
 * Min: Finding the minimum value
 * Max: Finding the maximum value
 * MinMax: Finding the minimum and the maximum value
