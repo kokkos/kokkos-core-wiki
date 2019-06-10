@@ -69,12 +69,12 @@ Usage:
  * ```c++
    void join(value_type& dest, const value_type& src)  const;`
    ```
-   Store logical `and` of `src` and `dest` into `dest`:  `dest = src || dest;`. 
+   Store logical `and` of `src` and `dest` into `dest`:  `dest = src && dest;`. 
 
  * ```c++
    void join(volatile value_type& dest, const volatile value_type& src) const;
    ```
-   Store logical `and` of `src` and `dest` into `dest`:  `dest = src || dest;`. 
+   Store logical `and` of `src` and `dest` into `dest`:  `dest = src && dest;`. 
 
  * ```c++
    void init( value_type& val)  const;
