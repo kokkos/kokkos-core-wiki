@@ -101,23 +101,9 @@ Kokkos provides a number of built-in reducers that automatically work with the i
 
  * [Kokkos::Max](Kokkos%3A%3AMax)
 
- * ```c++
-   template<class Scalar, class Space>
-   class Min;
-   ```
-   Selects the minimum value from combined inputs.
-   * `Min<T,S>::value_type` is `T`
-   * `Min<T,S>::result_view_type` is `Kokkos::View<T,S,Kokkos::MemoryTraits<Kokkos::Unmanaged>>`
-   * Requires: `Scalar` has `operator =` and `operator <` defined. `Kokkos::reduction_identity<Scalar>::min()` is a valid expression. 
+ * [Kokkos::LAnd](Kokkos%3A%3ALAnd)
 
- * ```c++
-   template<class Scalar, class Space>
-   class Max;
-   ```
-   Selects the minimum value from combined inputs.
-   * `Max<T,S>::value_type` is `T`
-   * `Max<T,S>::result_view_type` is `Kokkos::View<T,S,Kokkos::MemoryTraits<Kokkos::Unmanaged>>`
-   * Requires: `Scalar` has `operator =` and `operator >` defined. `Kokkos::reduction_identity<Scalar>::max()` is a valid expression. 
+ * [Kokkos::LOr](Kokkos%3A%3ALOr)
 
  * ```c++
    template<class Scalar, class Space>
