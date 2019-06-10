@@ -97,14 +97,9 @@ Kokkos provides a number of built-in reducers that automatically work with the i
 
  * [Kokkos::Prod](Kokkos%3A%3AProd)
 
- * ```c++
-   template<class Scalar, class Space>
-   class Prod;
-   ```
-   Uses the multiply operation to combine partial results.
-   * `Prod<T,S>::value_type` is `T`
-   * `Prod<T,S>::result_view_type` is `Kokkos::View<T,S,Kokkos::MemoryTraits<Kokkos::Unmanaged>>`
-   * Requires: `Scalar` has `operator =` and `operator *=` defined. `Kokkos::reduction_identity<Scalar>::prod()` is a valid expression. 
+ * [Kokkos::Min](Kokkos%3A%3AMin)
+
+ * [Kokkos::Max](Kokkos%3A%3AMax)
 
  * ```c++
    template<class Scalar, class Space>
