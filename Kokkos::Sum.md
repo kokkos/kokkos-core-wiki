@@ -37,10 +37,10 @@ Usage:
       result_view_type view() const;
 
       KOKKOS_INLINE_FUNCTION
-      Reducer(value_type& value_);
+      Sum(value_type& value_);
 
       KOKKOS_INLINE_FUNCTION
-      Reducer(const result_view_type& value_);
+      Sum(const result_view_type& value_);
   };
   ```
 
@@ -55,12 +55,12 @@ Usage:
 ### Constructors
  
  * ```c++
-   Reducer(value_type& result)
+   Sum(value_type& result)
    ```
    Constructs a reducer which references a local variable as its result location.  
  
  * ```c++
-   Reducer(const result_view_type result)`
+   Sum(const result_view_type result)`
    ```
    Constructs a reducer which references a specific view as its result location.
 
