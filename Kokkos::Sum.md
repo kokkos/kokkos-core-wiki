@@ -89,7 +89,7 @@ Usage:
  * ```c++
    result_view_type view() const;
    ```
-   Returns a view of the result place. 
+   Returns a view of the result place provided in class constructor.
 
 ### Additional Information
    * `Sum<T,S>::value_type` is non-const `T`
