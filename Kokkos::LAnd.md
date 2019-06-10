@@ -94,5 +94,5 @@ Usage:
 ### Additional Information
    * `LAnd<T,S>::value_type` is non-const `T`
    * `LAnd<T,S>::result_view_type` is `Kokkos::View<T,S,Kokkos::MemoryTraits<Kokkos::Unmanaged>>`.  Note that the S (memory space) must be the same as the space where the result resides.
-   * Requires: `Scalar` has `operator =` and `operator >` defined. `Kokkos::reduction_identity<Scalar>::land()` is a valid expression. 
+   * Requires: `Scalar` has `operator =` and `operator &&` defined. `Kokkos::reduction_identity<Scalar>::land()` is a valid expression. 
    * In order to use LAnd with a custom type, a template specialization of Kokkos::reduction_identity<CustomType> must be defined.  See [Using Built-in Reducers with Custom Scalar Types](Custom-Reductions%3A-Built-In-Reducers-with-Custom-Scalar-Types) for details
