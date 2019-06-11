@@ -42,7 +42,7 @@ printf(“Min: %lf\n”, min);
 ```
 
 For the `MinLoc`, `MaxLoc` and `MinMaxLoc` reducers the reduction type is a complex scalar type which is accessible through a `value_type` typedef. 
-`MinLoc` and `MaxLoc` have value types which have a simple `val` and `loc` member to store the reduction value and the index respectively. Note that index can be a struct itself, for example to store a multi dimensional index result (see later). 
+`MinLoc` and `MaxLoc` have value types which contain a `val` and `loc` member to store the reduction value and the index respectively. Note that index (`loc`) can be a struct itself, for example to store a multi dimensional index result (see later). 
 
 ```c++
 typedef Kokkos::MinLoc<double,int>::value_type minloc_type;
