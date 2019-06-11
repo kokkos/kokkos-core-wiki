@@ -98,17 +98,17 @@ Kokkos::parallel_reduce( “MinLocReduce”, Kokkos::TeamPolicy<>(N,AUTO),
   // Note: for a min or max reduction it wouldn't hurt if 
   //       every team member did this
   Kokkos::single(Kokkos::PerTeam(team), [=] () {
-    if( row_minmaxloc.min_val < team_minmax.min_val ) {
-      team_minmax.min_val = row_minmax.min_val;
-      team_minmax.min_loc = row_minmax.min_loc;
+    if( row_minmaxloc.min_val < team_minmaxloc.min_val ) {
+      team_minmaxloc.min_val = row_minmaxloc.min_val;
+      team_minmaxloc.min_loc = row_minmaxloc.min_loc;
     }
-    if( row_minmaxloc.max_val < team_minmax.max_val ) {
-      team_minmax.max_val = row_minmax.max_val;
-      team_minmax.max_loc = row_minmax.max_loc;
+    if( row_minmaxloc.max_val > team_minmax.max_val ) {
+      team_minmaxloc.max_val = row_minmaxloc.max_val;
+      team_minmaxloc.max_loc = row_minmaxloc.max_loc;
     }
   }
 }, reducer_type(minmaxloc));
 
 printf(“Min %lf at (%i, %i)\n”,minmaxloc.min_val, minmaxloc.min_loc.first, minmaxloc.min_loc.second);
-printf(“Min %lf at (%i, %i)\n”,minmaxloc.max_val, minmaxloc.max_loc.first, minmaxloc.max_loc.second);
+printf(“Max %lf at (%i, %i)\n”,minmaxloc.max_val, minmaxloc.max_loc.first, minmaxloc.max_loc.second);
 ```
