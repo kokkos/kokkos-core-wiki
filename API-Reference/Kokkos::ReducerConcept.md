@@ -105,25 +105,11 @@ Kokkos provides a number of built-in reducers that automatically work with the i
 
  * [Kokkos::LOr](Kokkos%3A%3ALOr)
 
- * ```c++
-   template<class Scalar, class Space>
-   class LAnd;
-   ```
-   Uses the logical 'and' operation to combine partial results.
-   * `Land<T,S>::value_type` is `T`
-   * `Land<T,S>::result_view_type` is `Kokkos::View<T,S,Kokkos::MemoryTraits<Kokkos::Unmanaged>>`
-   * Requires: `Scalar` has `operator =` and `operator &&` defined. `Kokkos::reduction_identity<Scalar>::land()` is a valid expression. 
+ * [Kokkos::BAnd](Kokkos%3A%3ABAnd)
 
- * ```c++
-   template<class Scalar, class Space>
-   class LOr;
-   ```
-   Uses the logical 'or' operation to combine partial results.
-   * `LOr<T,S>::value_type` is `T`
-   * `LOr<T,S>::result_view_type` is `Kokkos::View<T,S,Kokkos::MemoryTraits<Kokkos::Unmanaged>>`
-   * Requires: `Scalar` has `operator =` and `operator ||` defined. `Kokkos::reduction_identity<Scalar>::lor()` is a valid expression. 
+ * [Kokkos::BOr](Kokkos%3A%3ABOr)
 
- * ```c++
+* ```c++
    template<class Scalar, class Space>
    class BAnd;
    ```
