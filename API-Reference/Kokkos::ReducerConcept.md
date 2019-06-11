@@ -109,24 +109,6 @@ Kokkos provides a number of built-in reducers that automatically work with the i
 
  * [Kokkos::BOr](Kokkos%3A%3ABOr)
 
-* ```c++
-   template<class Scalar, class Space>
-   class BAnd;
-   ```
-   Uses the bitwise 'and' operation to combine partial results.
-   * `BAnd<T,S>::value_type` is `T`
-   * `BAnd<T,S>::result_view_type` is `Kokkos::View<T,S,Kokkos::MemoryTraits<Kokkos::Unmanaged>>`
-   * Requires: `Scalar` has `operator =` and `operator &` defined. `Kokkos::reduction_identity<Scalar>::band()` is a valid expression. 
-
- * ```c++
-   template<class Scalar, class Space>
-   class Bor;
-   ```
-   Uses the bitwise 'or' operation to combine partial results.
-   * `BOr<T,S>::value_type` is `T`
-   * `BOr<T,S>::result_view_type` is `Kokkos::View<T,S,Kokkos::MemoryTraits<Kokkos::Unmanaged>>`
-   * Requires: `Scalar` has `operator =` and `operator |` defined. `Kokkos::reduction_identity<Scalar>::bor()` is a valid expression. 
-
 ## Examples
 
   ```c++
