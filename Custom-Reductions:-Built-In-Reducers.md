@@ -2,16 +2,16 @@ Kokkos provides Reducers for the most common reduction types:
 
 * [Sum](Kokkos%3A%3ASum): For simple Summations
 * [Prod](Kokkos%3A%3AProd): Computing the product of all input values
-* Min: Finding the minimum value
-* Max: Finding the maximum value
+* [Min](Kokkos%3A%3AMin): Finding the minimum value
+* [Max](Kokkos%3A%3AMax): Finding the maximum value
 * MinMax: Finding the minimum and the maximum value
 * MinLoc: Retrieve the minimum value as well as its associated index
 * MaxLoc: Retrieve the maximum value as well as its associated index
 * MinMaxLoc: Find both the maximum and minimum value as well as their associated indices
-* BAnd: Do a binary “and” reduction
-* BOr: Do a binary “or” reduction
-* LAnd: Do a logical “and” reduction
-* LOr: Do a logical “or” reduction
+* [BAnd](Kokkos%3A%3ABAnd): Do a binary “and” reduction
+* [BOr](Kokkos%3A%3ABOr): Do a binary “or” reduction
+* [LAnd](Kokkos%3A%3ALAnd): Do a logical “and” reduction
+* [LOr](Kokkos%3A%3ALOr): Do a logical “or” reduction
 
 These reducers work only for scalar data, i.e. you can’t have a runtime length array as the reduction type (for example finding the minimum values for each vector in a multi vector concurrently).
 Generally the Reducers are templated on the Scalar type for the reduction as well as an optional template parameter for the memory space of the result (more on that later). The `MinLoc`, `MaxLoc` and `MinMaxLoc` reducers are additionally templated on the index type. 
