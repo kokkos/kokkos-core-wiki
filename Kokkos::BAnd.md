@@ -79,7 +79,7 @@ Usage:
  * ```c++
    void init( value_type& val)  const;
    ```
-   Initialize `val` using the Kokkos::reduction_identity<Scalar>::land() method.  The default implementation sets `val=1`.
+   Initialize `val` using the Kokkos::reduction_identity<Scalar>::land() method.  The default implementation sets `val=~(0)`.
 
  * ```c++
    value_type& reference() const;
