@@ -126,14 +126,14 @@ The following example shows a reduction using the _max-plus semiring_, where `ma
       { // max-plus semiring equivalent of "plus"
         if (dst < src) {
           dst = src;
-      }
+        }
       }
     
       // Tell each thread how to initialize its reduction result.
       KOKKOS_INLINE_FUNCTION void
       init (value_type& dst) const
       { // The identity under max is -Inf.
-         dst = reduction_identity<valute_type>::max();
+         dst = reduction_identity<value_type>::max();
       }
     
     private:
