@@ -10,7 +10,7 @@ A Reducer is a class which provides the necessary information to join (reduce) t
 To perform a common operation, such as finding the minimum for an intrinsic C++ type, no custom code is required.  Kokkos::complex is also supported with Built-in reducers without any custom additions.  Click the heading for more detail.
 
 ## **[[Built-In Reducers with Custom Scalar Types|Custom-Reductions:-Built-In-Reducers-with-Custom-Scalar-Types]]**
-If your application requires a custom scalar types, the scalar type must provide the necessary operators (for example comparison operators for min-reductions). A specialization of the reduction_identity class is also required.  Click the heading for more detail. 
+If your application requires a custom scalar types, the scalar type must be copy constructible and provide the necessary operators for the reduction (for example comparison operators are required for minmax-reductions). A specialization of the reduction_identity class is also required.  Click the heading for more detail. 
 
 ## **[[Custom Reducers|Custom Reductions: Custom Reducers]]**
 For completely arbitrary reductions, you must provide an implementation of a Reducer class. 
