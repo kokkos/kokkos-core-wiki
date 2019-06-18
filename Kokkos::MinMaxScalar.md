@@ -1,4 +1,4 @@
-# `Kokkos::ValLocScalar`
+# `Kokkos::MinMaxScalar`
 
 Template class for storing the min and max values for min/max reducers.  Should be accessed via ::value_type defined for particular reducer.
 
@@ -33,8 +33,8 @@ Usage:
 
 ### Assignment operators
 
- * `void operator = (const ValLocScalar& rhs);` 
+ * `void operator = (const MinMaxScalar& rhs);` 
       assign `min_val` and `max_val` from `rhs`;
 
- * `void operator = (const volatile ValLocScalar& rhs);` 
+ * `void operator = (const volatile MinMaxScalar& rhs);` 
       assign `min_val` and `max_val` from `rhs`;
