@@ -1,6 +1,6 @@
 # `Kokkos::MinLoc`
 
-Specific implementation of [ReducerConcept](Kokkos%3A%3AReducerConcept) storing the minimum value
+Specific implementation of [ReducerConcept](Kokkos%3A%3AReducerConcept) storing the minimum value with an index
 
 Header File: `Kokkos_Core.hpp`
 
