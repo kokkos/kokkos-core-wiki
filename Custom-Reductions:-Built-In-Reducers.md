@@ -6,7 +6,7 @@ Kokkos provides Reducers for the most common reduction types:
 * [Max](Kokkos%3A%3AMax): Finding the maximum value
 * MinMax: Finding the minimum and the maximum value
 * MinLoc: Retrieve the minimum value as well as its associated index
-* MaxLoc: Retrieve the maximum value as well as its associated index
+* [MaxLoc](Kokkos%3A%3AMaxLoc): Retrieve the maximum value as well as its associated index
 * MinMaxLoc: Find both the maximum and minimum value as well as their associated indices
 * [BAnd](Kokkos%3A%3ABAnd): Do a binary “and” reduction
 * [BOr](Kokkos%3A%3ABOr): Do a binary “or” reduction
