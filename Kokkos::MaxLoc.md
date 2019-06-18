@@ -82,7 +82,7 @@ Usage:
    ```
    Initialize `val.val` using the Kokkos::reduction_identity<Scalar>::max() method.  The default implementation sets `val=<TYPE>_MIN`.
 
-Initialize `val.loc` using the Kokkos::reduction_identity<Index>::min() method.  The default implementation sets `val=<TYPE>_MAX`.
+   Initialize `val.loc` using the Kokkos::reduction_identity<Index>::min() method.  The default implementation sets `val=<TYPE>_MAX`.
 
  * ```c++
    value_type& reference() const;
