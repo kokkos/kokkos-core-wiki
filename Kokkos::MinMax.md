@@ -60,17 +60,17 @@ Usage:
    Constructs a reducer which references a local variable as its result location.  
  
  * ```c++
-   MinMax(const result_view_type result)`
+   MinMax(const result_view_type result)
    ```
    Constructs a reducer which references a specific view as its result location.
 
 ### Functions
 
  * ```c++
-   void join(value_type& dest, const value_type& src)  const;`
+   void join(value_type& dest, const value_type& src)  const;
    ```
-   ** Store minimum of `src` and `dest` into `dest`:  `dest.min_val = (src.min_val < dest.min_val) ? src.min_val : dest.min_val;`.
-   ** Store maximum of `src` and `dest` into `dest`:  `dest.max_val = (src.max_val < dest.max_val) ? src.max_val : dest.max_val;`.
+   - Store minimum of `src` and `dest` into `dest`:  `dest.min_val = (src.min_val < dest.min_val) ? src.min_val : dest.min_val;`.
+   - Store maximum of `src` and `dest` into `dest`:  `dest.max_val = (src.max_val < dest.max_val) ? src.max_val : dest.max_val;`.
  * ```c++
    void join(volatile value_type& dest, const volatile value_type& src) const;
    ```
