@@ -1,4 +1,4 @@
-# `Kokkos::MinLoc`
+# `Kokkos::MinMax`
 
 Specific implementation of [ReducerConcept](Kokkos%3A%3AReducerConcept) storing both the minimum and maximum values
 
