@@ -4,7 +4,7 @@ Kokkos provides Reducers for the most common reduction types:
 * [Prod](Kokkos%3A%3AProd): Computing the product of all input values
 * [Min](Kokkos%3A%3AMin): Finding the minimum value
 * [Max](Kokkos%3A%3AMax): Finding the maximum value
-* MinMax: Finding the minimum and the maximum value
+* [MinMax](Kokkos%3A%3AMinMax): Finding the minimum and the maximum value
 * [MinLoc](Kokkos%3A%3AMinLoc): Retrieve the minimum value as well as its associated index
 * [MaxLoc](Kokkos%3A%3AMaxLoc): Retrieve the maximum value as well as its associated index
 * MinMaxLoc: Find both the maximum and minimum value as well as their associated indices
