@@ -23,3 +23,18 @@ Usage:
       void operator = (const ValLocScalar& rhs);
       void operator = (const volatile ValLocScalar& rhs);
   };
+
+## Public Members
+
+### Variables
+   
+ * `val`: Scalar Value.
+ * `loc`: Scalar index.
+
+### Assignment operators
+
+ * `void operator = (const ValLocScalar& rhs);` 
+      assign `val` and `loc` from `rhs`;
+
+ * `void operator = (const volatile ValLocScalar& rhs);` 
+      assign `val` and `loc` from `rhs`;
