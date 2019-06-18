@@ -6,7 +6,7 @@ Header File: `Kokkos_Core.hpp`
 
 Usage: 
   ```c++
-  T result;
+  MinLoc<T,I,S>::value_type result;
   parallel_reduce(N,Functor,MinLoc<T,I,S>(result));
   ```
 
