@@ -74,8 +74,8 @@ Usage:
  * ```c++
    void join(volatile value_type& dest, const volatile value_type& src) const;
    ```
-    ** Store minimum of `src` and `dest` into `dest`:  `dest.min_val = (src.min_val < dest.min_val) ? src.min_val : dest.min_val;`.
-   ** Store maximum of `src` and `dest` into `dest`:  `dest.max_val = (src.max_val < dest.max_val) ? src.max_val : dest.max_val;`. 
+    - Store minimum of `src` and `dest` into `dest`:  `dest.min_val = (src.min_val < dest.min_val) ? src.min_val : dest.min_val;`.
+   - Store maximum of `src` and `dest` into `dest`:  `dest.max_val = (src.max_val < dest.max_val) ? src.max_val : dest.max_val;`. 
 
  * ```c++
    void init( value_type& val)  const;
