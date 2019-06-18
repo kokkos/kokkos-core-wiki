@@ -85,7 +85,7 @@ Usage:
 
    Initialize `val.max_val` using the Kokkos::reduction_identity<Index>::max() method.  The default implementation sets `val=<TYPE>_MIN`.
 
-  Initialize `val.min_loc` using the Kokkos::reduction_identity<Scalar>::min() method.  The default implementation sets `val=<TYPE>_MAX`.
+   Initialize `val.min_loc` using the Kokkos::reduction_identity<Scalar>::min() method.  The default implementation sets `val=<TYPE>_MAX`.
 
    Initialize `val.max_loc` using the Kokkos::reduction_identity<Index>::min() method.  The default implementation sets `val=<TYPE>_MAX`.
 
