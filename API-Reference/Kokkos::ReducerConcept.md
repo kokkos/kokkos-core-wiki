@@ -92,7 +92,7 @@ Usage:
    Returns a view of the result place. 
 
 ### Built-In Reducers
-Kokkos provides a number of built-in reducers that automatically work with the intrinsic C++ types as well as Kokkos::complex.  In order to use a Built-in reducer with a custom type, a template specialization of Kokkos::reduction_identity<CustomType> must be defined.  See below for an example.
+Kokkos provides a number of built-in reducers that automatically work with the intrinsic C++ types as well as Kokkos::complex.  In order to use a Built-in reducer with a custom type, a template specialization of Kokkos::reduction_identity<CustomType> must be defined.  A simple example is below and more information can be found under .
  * [Kokkos::Sum](Kokkos%3A%3ASum)
 
  * [Kokkos::Prod](Kokkos%3A%3AProd)
@@ -108,6 +108,14 @@ Kokkos provides a number of built-in reducers that automatically work with the i
  * [Kokkos::BAnd](Kokkos%3A%3ABAnd)
 
  * [Kokkos::BOr](Kokkos%3A%3ABOr)
+
+ * [Kokkos::MinMax](Kokkos%3A%3AMinMax)
+
+ * [Kokkos::MinLoc](Kokkos%3A%3AMinLoc)
+
+ * [Kokkos::MaxLoc](Kokkos%3A%3AMaxLoc)
+
+ * [Kokkos::MinMaxLoc](Kokkos%3A%3AMinMaxLoc)
 
 ## Examples
 
