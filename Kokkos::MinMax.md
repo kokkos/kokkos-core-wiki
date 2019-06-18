@@ -7,7 +7,7 @@ Header File: `Kokkos_Core.hpp`
 Usage: 
   ```c++
   MinMax<T,S>::value_type result;
-  parallel_reduce(N,Functor,MinLoc<T,S>(result));
+  parallel_reduce(N,Functor,MinMax<T,S>(result));
   ```
 
 . 
@@ -96,6 +96,6 @@ Usage:
 
 ### Additional Information
    * `MinMax<T,S>::value_type` is Specialization of MinMaxScalar on non-const `T`
-   * `MinLoc<T,S>::result_view_type` is `Kokkos::View<T,S,Kokkos::MemoryTraits<Kokkos::Unmanaged>>`.  Note that the S (memory space) must be the same as the space where the result resides.
+   * `MinMax<T,S>::result_view_type` is `Kokkos::View<T,S,Kokkos::MemoryTraits<Kokkos::Unmanaged>>`.  Note that the S (memory space) must be the same as the space where the result resides.
    * Requires: `Scalar` has `operator =`, `operator <` and `operator >` defined. `Kokkos::reduction_identity<Scalar>::min()` and `Kokkos::reduction_identity<Scalar>::max()` are a valid expressions. 
    * In order to use MinMax with a custom type of `Scalar`, a template specialization of Kokkos::reduction_identity<CustomType> must be defined.  See [Using Built-in Reducers with Custom Scalar Types](Custom-Reductions%3A-Built-In-Reducers-with-Custom-Scalar-Types) for details
