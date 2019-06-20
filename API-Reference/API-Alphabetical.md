@@ -40,8 +40,8 @@ All functions and classes listed here are part of the `Kokkos::` namespace.
 |[(X)atomic_\[op\]](Kokkos%3A%3Aatomic_op) | [Core](API-Core) | [Atomic-Operations](Atomic-Operations) | Atomic operation which don't return anything. | 
 |[(X)atomic_fetch_\[op\]](Kokkos%3A%3Aatomic_fetch_op) | [Core](API-Core) | [Atomic-Operations](Atomic-Operations) | Various atomic operations which return the old value. | 
 |[(X)atomic_\[op\]_fetch](Kokkos%3A%3Aatomic_op_fetch) | [Core](API-Core) | [Atomic-Operations](Atomic-Operations) | Various atomic operations which return the updated value. | 
-|[BAnd](Kokkos%3A%3AReducerConcept) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism) | Reducer for Binary 'And' reduction |
-|[BOr](Kokkos%3A%3AReducerConcept) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism) | Reducer for Binary 'Or' reduction |
+|[BAnd](Kokkos%3A%3ABAnd) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism) | Reducer for Binary 'And' reduction |
+|[BOr](Kokkos%3A%3ABOr) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism) | Reducer for Binary 'Or' reduction |
 |[(U)complex](Kokkos%3A%3AComplex) | [Core](API-Core) | [Utilities](API-Utilities) | Complex numbers which work on host and device |
 |[(X)create_mirror](Kokkos%3A%3Acreate_mirror) | [Core](API-Core) | [View](Data-Parallelism) | Mirror Host data to Device data |
 |[(X)create_mirror_view](Kokkos%3A%3Acreate_mirror_view) | [Core](API-Core) | [View](Data-Parallelism) | Mirror Host data to Device data |
