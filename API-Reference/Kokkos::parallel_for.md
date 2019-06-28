@@ -71,6 +71,8 @@ int main(int argc, char* argv[]) {
 }
 ```
 
+* `TeamPolicy` policy with C++ struct as  functor.  Note that the KOKKOS_INLINE_FUNCTION macro add all of the function specifiers necessary for the target execution space.  The TagA/B structs provide the ability to 'overload' the operators within the same functor.
+
 ```c++
 #include<Kokkos_Core.hpp>
 #include<cstdio> 
@@ -81,11 +83,13 @@ struct TagB {};
 struct Foo {
   KOKKOS_INLINE_FUNCTION
   void operator() (const TagA, const Kokkos::TeamPolicy<>::member_type& team) const {
-    printf("Greetings from thread %i of team %i with TagA\n",team.thread_rank(),team.league_rank());
+    printf("Greetings from thread %i of team %i with TagA\n",
+            team.thread_rank(),team.league_rank());
   });
   KOKKOS_INLINE_FUNCTION
   void operator() (const TagB, const Kokkos::TeamPolicy<>::member_type& team) const {
-    printf("Greetings from thread %i of team %i with TagB\n",team.thread_rank(),team.league_rank());
+    printf("Greetings from thread %i of team %i with TagB\n",
+            team.thread_rank(),team.league_rank());
   });
 });
 
