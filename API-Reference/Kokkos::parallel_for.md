@@ -36,7 +36,7 @@ Kokkos::parallel_for(const ExecPolicy& policy,
     * [TeamPolicy](Kokkos%3A%3ATeamPolicy): defines a 1D iteration range, each of which is assigned to a thread team.
     * [TeamThreadRange](Kokkos%3A%3ANestedPolicies): defines a 1D iteration range to be executed by a thread-team. Only valid inside a parallel region executed through a `TeamPolicy` or a `TaskTeam`.
     * [ThreadVectorRange](Kokkos%3A%3ANestedPolicies): defines a 1D iteration range to be executed through vector parallelization dividing the threads within a team.  Only valid inside a parallel region executed through a `TeamPolicy` or a `TaskTeam`.
-  * FunctorType: A valid functor with an `operator()` with a matching signature for the `ExecPolicy`.  The functor can be defined using a C++ class or lambda.  See Examples below for more detail.
+  * FunctorType: A valid functor having an `operator()` with a matching signature for the `ExecPolicy`.  The functor can be defined using a C++ class or lambda.  See Examples below for more detail.
 
 ### Requirements:
   
