@@ -15,12 +15,15 @@ used by profiling and debugging tools. This call may be asynchronous and return 
 
 ```cpp
 template <class ExecPolicy, class FunctorType>
-Kokkos::parallel_for(const std::string& name, const ExecPolicy& policy, const FunctorType& functor);
+Kokkos::parallel_for(const std::string& name, 
+                     const ExecPolicy& policy, 
+                     const FunctorType& functor);
 ```
 
 ```cpp
 template <class ExecPolicy, class FunctorType>
-Kokkos::parallel_for(const ExecPolicy& policy, const FunctorType& functor);
+Kokkos::parallel_for(const ExecPolicy& policy, 
+                     const FunctorType& functor);
 ```
 
 ### Parameters:
