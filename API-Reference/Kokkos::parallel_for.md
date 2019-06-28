@@ -28,11 +28,12 @@ Kokkos::parallel_for(const ExecPolicy& policy, const FunctorType& functor);
   * `name`: A user provided string which is used in profiling and debugging tools via the Kokkos Profiling Hooks. 
   * ExecPolicy: An *ExecutionPolicy* which defines iteration space and other execution properties. Valid policies are:
     * `IntegerType`: defines a 1D iteration range, starting from 0 and going to a count.
-    * `RangePolicy`: defines a 1D iteration range. 
-    * `MDRangePolicy`: defines a multi-dimensional iteration space.
-    * `TeamPolicy`: defines a 1D iteration range, each of which is assigned to a thread team.
-    * `TeamThreadRange`: defines a 1D iteration range to be executed by a thread-team. Only valid inside a parallel region executed through a `TeamPolicy` or a `TaskTeam`.
-    * `ThreadVectorRange`: defines a 1D iteration range to be executed through vector parallelization. Only valid inside a parallel region executed through a `TeamPolicy` or a `TaskTeam`.
+    * [RangePolicy](Kokkos%3A%3ARangePolicy): defines a 1D iteration range. 
+    * |[MDRangePolicy](Kokkos%3A%3AMDRangePolicy): defines a multi-dimensional iteration space.
+    * [TeamPolicy](Kokkos%3A%3ATeamPolicy): defines a 1D iteration range, each of which is assigned to a thread team.
+    * [TeamThreadRange](Kokkos%3A%3ANestedPolicies): defines a 1D iteration range to be executed by a thread-team. Only valid inside a parallel region executed through a `TeamPolicy` or a `TaskTeam`.
+    * [TeamVectorRange](Kokkos%3A%3ANestedPolicies): defines a 1D iteration range to be executed through vector parallelization. Only valid inside a parallel region executed through a `TeamPolicy` or a `TaskTeam`.
+    * [ThreadVectorRange](Kokkos%3A%3ANestedPolicies): defines a 1D iteration range with the vector lanes of a thread.  Only valid inside a parallel region executed through a `RangePolicy`. 
   * FunctorType: A valid functor with an `operator()` with a matching signature for the `ExecPolicy`
 
 ### Requirements:
