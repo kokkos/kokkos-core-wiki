@@ -41,7 +41,7 @@ namespace sample {  // namespace helps with name resolution in reduction identit
    };
    typedef array_type<int,4> ValueType;  // used to simplify code below
 }
-namespace Kokkos {
+namespace Kokkos { //reduction identity must be defined in Kokkos namespace
    template<>
    struct reduction_identity< sample::ValueType > {
       KOKKOS_FORCEINLINE_FUNCTION static sample::ValueType sum()  {return sample::ValueType();}
