@@ -52,7 +52,7 @@ Kokkos::parallel_for(const ExecPolicy& policy, const FunctorType& functor);
 
 More Detailed Examples are provided in the ExecutionPolicy documentation. 
 
-### IntergerType policy with lambda as the functor.  Note that KOKKOS_LAMBDA is the same as [=] KOKKOS_FUNCTION, which means that all of the variables used within the lambda are captured by value.  Also, the KOKKOS_LAMBDA and KOKKOS_FUNCTION macros add all of the function specifiers necessary for the target execution space.
+`IntergerType` policy with lambda as the functor.  Note that KOKKOS_LAMBDA is the same as [=] KOKKOS_FUNCTION, which means that all of the variables used within the lambda are captured by value.  Also, the KOKKOS_LAMBDA and KOKKOS_FUNCTION macros add all of the function specifiers necessary for the target execution space.
 
 ```c++
 #include<Kokkos_Core.hpp>
