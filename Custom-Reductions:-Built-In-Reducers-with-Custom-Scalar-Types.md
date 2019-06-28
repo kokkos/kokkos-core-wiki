@@ -44,7 +44,9 @@ namespace sample {  // namespace helps with name resolution in reduction identit
 namespace Kokkos { //reduction identity must be defined in Kokkos namespace
    template<>
    struct reduction_identity< sample::ValueType > {
-      KOKKOS_FORCEINLINE_FUNCTION static sample::ValueType sum()  {return sample::ValueType();}
+      KOKKOS_FORCEINLINE_FUNCTION static sample::ValueType sum() {
+         return sample::ValueType();
+      }
    };
 }
 int main( int argc, char* argv[] )
@@ -52,13 +54,15 @@ int main( int argc, char* argv[] )
   int E = 1024;
   Kokkos::initialize( argc, argv );
   {
-     sample::ValueType tr;
-     Kokkos::parallel_reduce( E, KOKKOS_LAMBDA (const int& i, sample::ValueType & upd) {
-        int ndx =i%4;
-        upd.the_array[ndx] += 1; // sum all of the i%4 entries (essentially divide total by 4)
+     sample::ValueType tr;         
+     Kokkos::parallel_reduce( E, KOKKOS_LAMBDA (const int& i, 
+                                                sample::ValueType & upd) {
+        int ndx =i%4;  // sum all of the i%4 entries (divide total by 4)
+        upd.the_array[ndx] += 1; 
      }, Kokkos::Sum<sample::ValueType>(tr) );
      printf( "  Computed result for %d is %d, %d, %d, %d \n", 
-             E, tr.the_array[0], tr.the_array[1], tr.the_array[2], tr.the_array[3] );
+             E, tr.the_array[0], tr.the_array[1], 
+                tr.the_array[2], tr.the_array[3] );
   }
   Kokkos::finalize();
 
