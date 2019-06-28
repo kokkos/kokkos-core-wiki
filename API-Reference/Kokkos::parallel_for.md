@@ -71,7 +71,7 @@ int main(int argc, char* argv[]) {
 }
 ```
 
-* `TeamPolicy` policy with C++ struct as  functor.  Note that the KOKKOS_INLINE_FUNCTION macro adds all of the function specifiers necessary for the target execution space.  The TagA/B structs also provide the ability to 'overload' the operators within the same functor.
+* `TeamPolicy` policy with C++ struct as  functor.  Note that the KOKKOS_INLINE_FUNCTION macro adds all of the function specifiers necessary for the target execution space.  The TagA/B structs also provide the ability to 'overload' the operators within the same functor.  Much like the lambda example, the functor and any member variables contained within are captured by value, which means they must have either implicit or explicit copy constructors.
 
 ```c++
 #include<Kokkos_Core.hpp>
