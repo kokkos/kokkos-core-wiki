@@ -20,32 +20,45 @@ provided by the work items. The optional label `name` is used by profiling and d
 
 ```cpp
 template <class ExecPolicy, class FunctorType>
-Kokkos::parallel_reduce(const std::string& name, const ExecPolicy& policy, const FunctorType& functor);
+Kokkos::parallel_reduce(const std::string& name, 
+                        const ExecPolicy& policy, 
+                        const FunctorType& functor);
 ```
 
 ```cpp
 template <class ExecPolicy, class FunctorType>
-Kokkos::parallel_reduce(const ExecPolicy& policy, const FunctorType& functor);
+Kokkos::parallel_reduce(const ExecPolicy& policy, 
+                        const FunctorType& functor);
 ```
 
 ```cpp
 template <class ExecPolicy, class FunctorType, class ReducerArgument>
-Kokkos::parallel_reduce(const std::string& name, const ExecPolicy& policy, const FunctorType& functor, const ReducerArgument& reducer);
+Kokkos::parallel_reduce(const std::string& name, 
+                        const ExecPolicy& policy, 
+                        const FunctorType& functor, 
+                        const ReducerArgument& reducer);
 ```
 
 ```cpp
 template <class ExecPolicy, class FunctorType, class ReducerArgument>
-Kokkos::parallel_reduce(const ExecPolicy& policy, const FunctorType& functor, const ReducerArgument& reducer);
+Kokkos::parallel_reduce(const ExecPolicy& policy, 
+                        const FunctorType& functor, 
+                        const ReducerArgument& reducer);
 ```
 
 ```cpp
 template <class ExecPolicy, class FunctorType, class ReducerArgumentNonConst>
-Kokkos::parallel_reduce(const std::string& name, const ExecPolicy& policy, const FunctorType& functor, ReducerArgumentNonConst& reducer);
+Kokkos::parallel_reduce(const std::string& name, 
+                        const ExecPolicy& policy, 
+                        const FunctorType& functor, 
+                        ReducerArgumentNonConst& reducer);
 ```
 
 ```cpp
 template <class ExecPolicy, class FunctorType, class ReducerArgumentNonConst>
-Kokkos::parallel_reduce(const ExecPolicy& policy, const FunctorType& functor, ReducerArgumentNonConst& reducer);
+Kokkos::parallel_reduce(const ExecPolicy& policy, 
+                        const FunctorType& functor, 
+                        ReducerArgumentNonConst& reducer);
 ```
 ### Parameters:
 
