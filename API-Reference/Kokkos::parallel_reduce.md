@@ -82,6 +82,9 @@ Kokkos::parallel_reduce(const ExecPolicy& policy,
   * If `ExecPolicy` is `MDRangePolicy` the `functor` has a member function of the form `operator() (const IntegerType& i0, ... , const IntegerType& iN, ReducerValueType& value) const` or `operator() (const WorkTag, const IntegerType& i0, ... , const IntegerType& iN, ReducerValueType& value) const` 
     * The `WorkTag` free form of the operator is used if `ExecPolicy::work_tag` is not `void`.
     * `N` must match `ExecPolicy::rank`
+  * If the `functor` is a lambda, `ReducerArgument` must satisfy the `Reducer` Concept or `ReducerArgumentNonConst` must be a POD type with `operator +=` and `operator =` or a `Kokkos::View`. 
+    * The `WorkTag` free form of the operator is used if `ExecPolicy::work_tag` is not `void`.
+    * `N` must match `ExecPolicy::rank`
   * The reduction argument type `ReducerValueType` of the `functor` operator must be compatible with the `ReducerArgument` (or `ReducerArgumentNonConst`) and must match the arguments of the `init`, `join` and `final` functions of the functor if those exist. 
   * If `ReducerArgument` (or `ReducerArgumentNonConst`)
     * is a scalar type: `ReducerValueType` must be of the same type.
