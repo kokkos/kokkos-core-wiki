@@ -97,7 +97,7 @@ Kokkos::parallel_reduce(const ExecPolicy& policy,
 
 ## Examples
 
-More Detailed Examples are provided in the ExecutionPolicy documentation. 
+More Detailed Examples are provided in the [Custom Reductions](Programming-Guide%3A-Custom-Reductions) and [ExecutionPolicy]() documentation. 
 
 ```c++
 #include<Kokkos_Core.hpp>
