@@ -13,8 +13,7 @@ Kokkos::parallel_reduce( policy, functor);
 ```
 
 Dispatches parallel work defined by `functor` according to the *ExecutionPolicy* `policy` and performance a reduction of the contributions
-provided by the work items. The optional label `name` is used by profiling and debugging tools. The reduction type is either a `sum`, 
-defined by `reducer` or deduced from an optional `join` operator on the functor. The reduction result is stored in `result`, or through the
+provided by the work items. The optional label `name` is used by profiling and debugging tools. The reduction type is either a `sum`, is defined by the `reducer` or is deduced from an optional `join` operator on the functor. The reduction result is stored in `result`, or through the
 `reducer` handle. It is also provided to the `functor.final()` function if such a function exists.  
 
 ## Interface
