@@ -83,11 +83,11 @@ Kokkos::parallel_reduce(const ExecPolicy& policy,
     * The `WorkTag` free form of the operator is used if `ExecPolicy::work_tag` is not `void`.
     * `N` must match `ExecPolicy::rank`
   * The reduction argument type `ReducerValueType` of the `functor` operator must be compatible with the `ReducerArgument` (or `ReducerArgumentNonConst`) and must match the arguments of the `init`, `join` and `final` functions of the functor if those exist. 
-  * If `ReducerArgument`
+  * If `ReducerArgument` (or `ReducerArgumentNonConst`)
     * is a scalar type: `ReducerValueType` must be of the same type.
     * is a `Kokkos::View`: `ReducerArgument::rank` must be 0 and `ReducerArgument::non_const_value_type` must match `ReducerValueType`.
     * satisfies the `Reducer` concept: `ReducerArgument::value_type` must match `ReducerValueType`
-    * is an array or a pointer, ReducerValueType must match the array or the pointer signature.  Likewise, the functor must define value_type the same as ReducerValueType and must implement the functions `void init( ReducerValueType dst [] ) const` and `void join( ReducerValueType dst[], ReducerValueType src[] ) const` or `void init( ReducerValueType * dst) const` and `void join( ReducerValueType * dst, ReducerValueType * src ) const` depending on whether ReducerArgumentNonConst is an array or pointer respectively. 
+    * is an array or a pointer, ReducerValueType must match the array or the pointer signature.  Likewise, the functor must define FunctorType::value_type the same as ReducerValueType and must implement the functions `void init( ReducerValueType dst [] ) const` and `void join( ReducerValueType dst[], ReducerValueType src[] ) const` or `void init( ReducerValueType * dst) const` and `void join( ReducerValueType * dst, ReducerValueType * src ) const` depending on whether ReducerArgumentNonConst is an array or pointer respectively.  If the functor implements the `final` function, the argument must also match those of init and join.
 ## Semantics
 
 * Neither concurrency nor order of execution are guaranteed. 
