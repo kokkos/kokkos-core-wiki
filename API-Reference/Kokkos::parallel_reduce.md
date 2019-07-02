@@ -57,10 +57,9 @@ Kokkos::parallel_reduce(const ExecPolicy& policy, const FunctorType& functor, Re
     * [TeamPolicy](Kokkos%3A%3ATeamPolicy): defines a 1D iteration range, each of which is assigned to a thread team.
     * [TeamThreadRange](Kokkos%3A%3ANestedPolicies): defines a 1D iteration range to be executed by a thread-team. Only valid inside a parallel region executed through a `TeamPolicy` or a `TaskTeam`.
     * [ThreadVectorRange](Kokkos%3A%3ANestedPolicies): defines a 1D iteration range to be executed through vector parallelization dividing the threads within a team.  Only valid inside a parallel region executed through a `TeamPolicy` or a `TaskTeam`.
-  * FunctorType: A valid functor with (at minimum) an `operator()` with a matching signature for the `ExecPolicy`
+  * FunctorType: A valid functor with (at minimum) an `operator()` with a matching signature for the `ExecPolicy` combined with the reduced type.
   * ReducerArgument: Either a class fullfilling the "Reducer" concept or a `Kokkos::View`
-  * ReducerArgumentNonConst: a class fullfilling the "Reducer" concept, a POD type with `operator +=` and `operator =`, or a `Kokkos::View`.  The ReducerArgumentNonConst can also be an array or a pointer, but the Functor must implement the init() and join functions described below.
-
+  * ReducerArgumentNonConst: a class fullfilling the "Reducer" concept, a POD type with `operator +=` and `operator =`, or a `Kokkos::View`.  The ReducerArgumentNonConst can also be an array or a pointer; see below for functor requirements.
 
 ### Requirements:
   
@@ -70,11 +69,12 @@ Kokkos::parallel_reduce(const ExecPolicy& policy, const FunctorType& functor, Re
   * If `ExecPolicy` is `MDRangePolicy` the `functor` has a member function of the form `operator() (const IntegerType& i0, ... , const IntegerType& iN, ReducerValueType& value) const` or `operator() (const WorkTag, const IntegerType& i0, ... , const IntegerType& iN, ReducerValueType& value) const` 
     * The `WorkTag` free form of the operator is used if `ExecPolicy::work_tag` is not `void`.
     * `N` must match `ExecPolicy::rank`
-  * The reduction argument type `ReducerValueType` of the `functor` operator must be compatible with the `ReducerArgument` (or `ReducerArgumentNonConst`) and must match `init`, `join` and `final` argument types of the functor if those exist. If `ReducerArgument`
+  * The reduction argument type `ReducerValueType` of the `functor` operator must be compatible with the `ReducerArgument` (or `ReducerArgumentNonConst`) and must match the arguments of the `init`, `join` and `final` functions of the functor if those exist. 
+  * If `ReducerArgument`
     * is a scalar type: `ReducerValueType` must be of the same type.
     * is a `Kokkos::View`: `ReducerArgument::rank` must be 0 and `ReducerArgument::non_const_value_type` must match `ReducerValueType`.
-    * satisfies the `Reducer` concept: `ReducerArgument::value_type` must match `ReducerValueType`  
-  
+    * satisfies the `Reducer` concept: `ReducerArgument::value_type` must match `ReducerValueType`
+    * is an array or a pointer, ReducerValueType must match the array or the pointer signature.  Likewise, the functor must define value_type the same as ReducerValueType and must implement the functions `void init( ReducerValueType dst [] ) const` and `void join( ReducerValueType dst[], ReducerValueType src[] ) const` or `void init( ReducerValueType * dst) const` and `void join( ReducerValueType * dst, ReducerValueType * src ) const` depending on whether ReducerArgumentNonConst is an array or pointer respectively. 
 ## Semantics
 
 * Neither concurrency nor order of execution are guaranteed. 
