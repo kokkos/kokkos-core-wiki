@@ -59,7 +59,7 @@ Kokkos::parallel_reduce(const ExecPolicy& policy, const FunctorType& functor, Re
     * [ThreadVectorRange](Kokkos%3A%3ANestedPolicies): defines a 1D iteration range to be executed through vector parallelization dividing the threads within a team.  Only valid inside a parallel region executed through a `TeamPolicy` or a `TaskTeam`.
   * FunctorType: A valid functor with (at minimum) an `operator()` with a matching signature for the `ExecPolicy`
   * ReducerArgument: Either a class fullfilling the "Reducer" concept or a `Kokkos::View`
-  * ReducerArgumentNonConst: a class fullfilling the "Reducer" concept, a POD type with `operator +=` and `operator =`, or a `Kokkos::View`
+  * ReducerArgumentNonConst: a class fullfilling the "Reducer" concept, a POD type with `operator +=` and `operator =`, or a `Kokkos::View`.  The ReducerArgumentNonConst can also be an array or a pointer, but the Functor must implement the init() and join functions described below.
 
 
 ### Requirements:
