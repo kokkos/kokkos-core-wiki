@@ -51,12 +51,6 @@ Kokkos::parallel_scan(const std::string& name,
                       ReturnType&        return_value);
 ```
 
-```cpp
-template <class ExecPolicy, class FunctorType, class ReducerArgumentNonConst>
-Kokkos::parallel_reduce(const ExecPolicy& policy, 
-                        const FunctorType& functor, 
-                        ReducerArgumentNonConst& reducer);
-```
 ### Parameters:
 
   * `name`: A user provided string which is used in profiling and debugging tools via the Kokkos Profiling Hooks. 
