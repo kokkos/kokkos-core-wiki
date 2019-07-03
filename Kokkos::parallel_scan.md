@@ -72,36 +72,22 @@ Kokkos::parallel_reduce(const ExecPolicy& policy,
 
 ### Requirements:
   
-  * If `ExecPolicy` is not `MDRangePolicy` the `functor` has a member function of the form `operator() (const HandleType& handle, ReducerValueType& value) const` or `operator() (const WorkTag, const HandleType& handle, ReducerValueType& value) const` 
+  * If `ExecPolicy` is not `MDRangePolicy` the `functor` has a member function of the form `operator() (const HandleType& handle, ReturnType& value, const bool final) const` or `operator() (const WorkTag, const HandleType& handle, ReturnType& value, const bool final) const` 
     * The `WorkTag` free form of the operator is used if `ExecPolicy` is an `IntegerType` or `ExecPolicy::work_tag` is `void`.
     * `HandleType` is an `IntegerType` if `ExecPolicy` is an `IntegerType` else it is `ExecPolicy::member_type`.
-  * If `ExecPolicy` is `MDRangePolicy` the `functor` has a member function of the form `operator() (const IntegerType& i0, ... , const IntegerType& iN, ReducerValueType& value) const` or `operator() (const WorkTag, const IntegerType& i0, ... , const IntegerType& iN, ReducerValueType& value) const` 
+  * If `ExecPolicy` is `MDRangePolicy` the `functor` has a member function of the form `operator() (const IntegerType& i0, ... , const IntegerType& iN, ReturnType& value, const bool final) const` or `operator() (const WorkTag, const IntegerType& i0, ... , const IntegerType& iN, ReturnType& value, const bool final) const` 
     * The `WorkTag` free form of the operator is used if `ExecPolicy::work_tag` is not `void`.
     * `N` must match `ExecPolicy::rank`
-  * If the `functor` is a lambda, `ReducerArgument` must satisfy the `Reducer` concept or `ReducerArgumentNonConst` must be a POD type with `operator +=` and `operator =` or a `Kokkos::View`.  In the latter case, the default `Sum` reduction is applied. 
-  * If `ExecPolicy` is `TeamThreadRange` a "reducing" `functor` is not allowed and the `ReducerArgument` must satisfy the `Reducer` concept or `ReducerArgumentNonConst` must be a POD type with `operator +=` and `operator =` or a `Kokkos::View`.  In the latter case, the default `Sum` reduction is applied.
-  * The reduction argument type `ReducerValueType` of the `functor` operator must be compatible with the `ReducerArgument` (or `ReducerArgumentNonConst`) and must match the arguments of the `init`, `join` and `final` functions of the functor if those exist. 
-  * If `ReducerArgument` (or `ReducerArgumentNonConst`)
-    * is a scalar type: `ReducerValueType` must be of the same type.
-    * is a `Kokkos::View`: `ReducerArgument::rank` must be 0 and `ReducerArgument::non_const_value_type` must match `ReducerValueType`.
-    * satisfies the `Reducer` concept: `ReducerArgument::value_type` must match `ReducerValueType`
-    * is an array or a pointer
-       * ReducerValueType must match the array or the pointer signature
-       * the functor must define FunctorType::value_type the same as ReducerValueType
-       * the functor must declare a public member variable `int value_count` which is the length of the array 
-       * the functor must implement the function `void init( ReducerValueType dst [] ) const`or `void init( ReducerValueType * dst) const` depending on whether ReducerArgumentNonConst is an array or pointer respectively.
-       * the functor must implement the function `void join( ReducerValueType dst[], ReducerValueType src[] ) const` or `void join( ReducerValueType * dst, ReducerValueType * src ) const` depending on whether ReducerArgumentNonConst is an array or pointer respectively.  
-       * If the functor implements the `final` function, the argument must also match those of init and join.
+  * The type `ReturnType` of the `functor` operator must be compatible with the `ReturnType` of the parallel_scan and must match the arguments of the `init` and `join` functions of the functor.  
+  * the functor must define FunctorType::value_type the same as ReturnType
+       
 ## Semantics
 
 * Neither concurrency nor order of execution are guaranteed. 
-* The call is potentially asynchronous if the `ReducerArgument` is not a scalar type. 
-* The `ReducerArgument` content will be overwritten, i.e. the value does not need to be initialized to the reduction-neutral element. 
-* The input value to the operator may contain a partial reduction result, Kokkos may only combine the thread local contributions in the end. The operator should modify the input reduction value according to the requested reduction type. 
+* The `ReturnType` content will be overwritten, i.e. the value does not need to be initialized to the reduction-neutral element. 
+* The input value to the operator may contain a partial result, Kokkos may only combine the thread local contributions in the end. The operator should modify the input value according to the desired scan operation. 
 
 ## Examples
-
-More Detailed Examples are provided in the [Custom Reductions](Programming-Guide%3A-Custom-Reductions) and [ExecutionPolicy](Execution-Policies) documentation. 
 
 ```c++
 #include<Kokkos_Core.hpp>
@@ -112,9 +98,8 @@ int main(int argc, char* argv[]) {
 
    int N = atoi(argv[1]);
    double result;
-   Kokkos::parallel_reduce("Loop1", N, KOKKOS_LAMBDA (const int& i, double& lsum ) {
-     lsum += 1.0*i;
-   },result);
+   ScanFunctor f;
+   Kokkos::parallel_scan("Loop1", N, f, result);
 
    printf("Result: %i %lf\n",N,result);
    Kokkos::finalize();
@@ -148,8 +133,8 @@ int main(int argc, char* argv[]) {
 
    Foo foo;
    double max,min;
-   Kokkos::parallel_reduce(Kokkos::TeamPolicy<TagMax>(N,Kokkos::AUTO), foo, Kokkos::Max<double>(max));
-   Kokkos::parallel_reduce("Loop2", Kokkos::TeamPolicy<TagMin>(N,Kokkos::AUTO), foo, Kokkos::Min<double>(min));
+   Kokkos::parallel_scan(Kokkos::TeamPolicy<TagMax>(N,Kokkos::AUTO), foo, max);
+   Kokkos::parallel_scan("Loop2", Kokkos::TeamPolicy<TagMin>(N,Kokkos::AUTO), foo, min);
    Kokkos::fence();
 
    printf("Result: %lf %lf\n",min,max);
