@@ -109,12 +109,14 @@ struct TagMin {};
 
 struct Foo {
   KOKKOS_INLINE_FUNCTION
-  void operator() (const TagMax, const Kokkos::TeamPolicy<>::member_type& team, double& lmax) const {
+  void operator() (const TagMax, const Kokkos::TeamPolicy<>::member_type& team, 
+                   double& lmax, const bool final ) const {
     if( team.league_rank % 17 + team.team_rank % 13 > lmax )
       lmax = team.league_rank % 17 + team.team_rank % 13;
   });
   KOKKOS_INLINE_FUNCTION
-  void operator() (const TagMin, const Kokkos::TeamPolicy<>::member_type& team, double& lmin ) const {
+  void operator() (const TagMin, const Kokkos::TeamPolicy<>::member_type& team, 
+                   double& lmin, const bool final ) const {
     if( team.league_rank % 17 + team.team_rank % 13 < lmin )
       lmin = team.league_rank % 17 + team.team_rank % 13;
   });
