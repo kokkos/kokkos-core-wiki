@@ -90,12 +90,12 @@ Kokkos::parallel_reduce(const ExecPolicy& policy,
     * is a `Kokkos::View`: `ReducerArgument::rank` must be 0 and `ReducerArgument::non_const_value_type` must match `ReducerValueType`.
     * satisfies the `Reducer` concept: `ReducerArgument::value_type` must match `ReducerValueType`
     * is an array or a pointer
-       ** ReducerValueType must match the array or the pointer signature
-       ** the functor must define FunctorType::value_type the same as ReducerValueType
-       ** the functor must declare a public member variable `int value_count` which is the length of the array 
-       ** the functor must implement the function `void init( ReducerValueType dst [] ) const`or `void init( ReducerValueType * dst) const` depending on whether ReducerArgumentNonConst is an array or pointer respectively.
-       ** the functor must implement the function `void join( ReducerValueType dst[], ReducerValueType src[] ) const` or `void join( ReducerValueType * dst, ReducerValueType * src ) const` depending on whether ReducerArgumentNonConst is an array or pointer respectively.  
-       ** If the functor implements the `final` function, the argument must also match those of init and join.
+       * ReducerValueType must match the array or the pointer signature
+       * the functor must define FunctorType::value_type the same as ReducerValueType
+       * the functor must declare a public member variable `int value_count` which is the length of the array 
+       * the functor must implement the function `void init( ReducerValueType dst [] ) const`or `void init( ReducerValueType * dst) const` depending on whether ReducerArgumentNonConst is an array or pointer respectively.
+       * the functor must implement the function `void join( ReducerValueType dst[], ReducerValueType src[] ) const` or `void join( ReducerValueType * dst, ReducerValueType * src ) const` depending on whether ReducerArgumentNonConst is an array or pointer respectively.  
+       * If the functor implements the `final` function, the argument must also match those of init and join.
 ## Semantics
 
 * Neither concurrency nor order of execution are guaranteed. 
