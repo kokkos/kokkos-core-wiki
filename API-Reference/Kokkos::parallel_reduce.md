@@ -83,6 +83,7 @@ Kokkos::parallel_reduce(const ExecPolicy& policy,
     * The `WorkTag` free form of the operator is used if `ExecPolicy::work_tag` is not `void`.
     * `N` must match `ExecPolicy::rank`
   * If the `functor` is a lambda, `ReducerArgument` must satisfy the `Reducer` concept or `ReducerArgumentNonConst` must be a POD type with `operator +=` and `operator =` or a `Kokkos::View`.  In the latter case, the default `Sum` reduction is applied. 
+  * If `ExecPolicy` is `TeamThreadRange` a "reducing" `functor` is not allowed and the `ReducerArgument` must satisfy the `Reducer` concept or `ReducerArgumentNonConst` must be a POD type with `operator +=` and `operator =` or a `Kokkos::View`.  In the latter case, the default `Sum` reduction is applied.
   * The reduction argument type `ReducerValueType` of the `functor` operator must be compatible with the `ReducerArgument` (or `ReducerArgumentNonConst`) and must match the arguments of the `init`, `join` and `final` functions of the functor if those exist. 
   * If `ReducerArgument` (or `ReducerArgumentNonConst`)
     * is a scalar type: `ReducerValueType` must be of the same type.
