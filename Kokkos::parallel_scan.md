@@ -10,7 +10,7 @@ Kokkos::parallel_scan( policy, functor, result);
 Kokkos::parallel_scan( policy, functor );
 ```
 
-Dispatches parallel work defined by `functor` according to the *ExecutionPolicy* `policy` and perform a pre or post scan of the contributions
+Dispatches parallel work defined by `functor` according to the *ExecutionPolicy* `policy` and perform a pre (inclusive) or post (exclusive) scan of the contributions
 provided by the work items. The optional label `name` is used by profiling and debugging tools.  If provided, the final result is placed in result. 
 
 ## Interface
