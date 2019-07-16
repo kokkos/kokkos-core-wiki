@@ -88,6 +88,8 @@ Finally, note that virtual functions are technically allowed, but calling them i
 
 ### 6.2.3 Can I make a View of Views?
 
+NOVICES: THE ANSWER FOR YOU IS "NO."  PLEASE SKIP THIS SECTION.  
+
 A "View of Views" is a special case of View, where the type of each entry is itself a View. It is possible to make this, but before you try, please see below.
 
 #### 6.2.3.1 You probably don't want this
