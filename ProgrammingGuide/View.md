@@ -21,7 +21,6 @@ For best performance, coders need to tie details of how they manage arrays to de
 
 Kokkos aims to relieve some of this burden by optimizing array management and access for the specific architecture. Tying arrays to shared-memory parallelism lets Kokkos optimize the former to the latter. For example, Kokkos can easily do first-touch allocation because it controls threads that it can use to initialize arrays. Kokkos' architecture-awareness lets it pick optimal layout and pad allocations for good alignment. Expert coders can also use Kokkos to access low-level or more architecture-specific optimizations in a more user-friendly way. For instance, Kokkos makes it easy to experiment with different array layouts.
 
-
 ## 6.2 Creating and using a View
 
 ### 6.2.1 Constructing a View
@@ -58,7 +57,7 @@ This limitation comes from the implementation of View using C++ templates. View'
 
 Note that the above used constructor is not necessarily available for all view types; specific Layouts or Memory Spaces may require more specialized allocators. This is discussed later.
 
-Another important thing to keep in mind is that a `View` handle is a stateful object. It is not legal to create a `View` handle from raw memory by typecasting a pointer. To call any operator on a `View,` including the assignment operator, its constructor must have been called before. If it is necessary to initialize raw memory with a `View` handle, one can legally do so using a move constructor ("placement new"). The above has nothing to do with the data a `View` is referencing. It is completely legal to give a typecast pointer to the constructor of an unmanaged `View`.
+Another important thing to keep in mind is that a `View` handle is a stateful object. It is not legal to create a `View` handle from raw memory by typecasting a pointer. To call any operator on a `View,` including the assignment operator, its constructor must have been called before. If it is necessary to initialize raw memory with a `View` handle, one can legally do so using placement new. The above has nothing to do with the data a `View` is referencing. It is completely legal to give a typecast pointer to the constructor of an unmanaged `View`.
 
 ```c++
 Kokkos::View<int*> *a_ptr = (Kokkos::View<int*>*) malloc(10*sizeof(View<int*);
@@ -89,13 +88,13 @@ Finally, note that virtual functions are technically allowed, but calling them i
 
 ### 6.2.3 Can I make a View of Views?
 
-A ``View of Views'' is a special case of View, where the type of each entry is itself a View. It is possible to make this, but before you try, please see below.
+A "View of Views" is a special case of View, where the type of each entry is itself a View. It is possible to make this, but before you try, please see below.
 
 #### 6.2.3.1 You probably don't want this
 
-If you really just want a multidimensional array, please don't do this.  Instead, see Section \ref{SS:View:CreateUse:Constructing} for the correct syntax.
+If you really just want a multidimensional array, please don't do this.  Instead, see Section 6.2.1 above for the correct syntax.
 
-If you want to represent an array of arrays, and the inner arrays have fixed length or a fixed upper bound on length, consider instead using a ``compressed sparse row'' data structure. Kokkos' Containers subpackage as a `StaticCrsGraph` class that you may use for this purpose.
+If you want to represent an array of arrays, and the inner arrays have fixed length or a fixed upper bound on length, consider instead using a ``compressed sparse row'' data structure. Kokkos' Containers subpackage has a `StaticCrsGraph` class that you may use for this purpose.
 
 If you want a hash table, Kokkos' Containers subpackage has an `UnorderedMap` class that you may use for this purpose.
 
@@ -105,7 +104,7 @@ You might also want a View of some class that itself contains Views. If you want
 
 #### 6.2.3.2 What's the problem with a View of Views?
 
-Section \ref{SS:View:CreateUse:ValidValueType} above explains how the outer View's constructor works.  The outer View's constructor does not just allocate memory; it also initializes the allocation by iterating over it using a `Kokkos::parallel_for`, and invoking the entry type's default constructor for each entry.  If the View's execution space is `Cuda`, then that means the entry type's default constructor needs to be correct to call on device. That is a problem, because the entry type in this case is itself View. View's constructor wants to allocate memory, and thus does not work on device. Kokkos parallel regions generally forbid memory allocation.
+A View of Views would have an "outer View," with zero or more "inner Views."  Section 6.2.2 above explains how the outer View's constructor would work.  The outer View's constructor does not just allocate memory; it also initializes the allocation by iterating over it using a `Kokkos::parallel_for`, and invoking the entry type's default constructor for each entry.  If the View's execution space is `Cuda`, then that means the entry type's default constructor needs to be correct to call on device. That is a problem, because the entry type in this case is itself View. View's constructor wants to allocate memory, and thus does not work on device. Kokkos parallel regions generally forbid memory allocation.
 
 You could create the outer View without initializing, like this:
 ```cpp
@@ -478,7 +477,7 @@ extern void legacyFunction (double* x_raw, const size_t len);
 void myFunction (const Kokkos::View<double*>& x) {
   // DON'T DO THIS UNLESS YOU MUST
   double* x_raw = x.data();
-  const size_t N = x.extent_0();
+  const size_t N = x.extent(0);
   legacyFunction (x_raw, N);
 }
 ```
