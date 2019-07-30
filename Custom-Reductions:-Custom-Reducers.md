@@ -1,5 +1,16 @@
 Custom arbitrary reductions are implemented using a reduction class and a "reduced" class.  The "reduced" class is much like the custom scalar type used with [BuiltIn Reducers](Custom-Reductions%3A-Built-In-Reducers-with-Custom-Scalar-Types) and the reduction class implements the [ReducerConcept](Kokkos%3A%3AReducerConcept)
 
+The following requirements must be fulfilled for the "reduced" class
+     
+   * Operators required for applied reduction class must be implemented.
+   * The class / struct must either use the default copy constructor or have a specific copy constructor 
+     implemented. 
+
+The following requirements must be fulfilled for the reduction class
+     
+   * Typedefs reducer, value_type and result_view_type must be defined.  see the Reducer Concept for details.
+   * The reducer concept methods must be implemented
+   * The exposed result_view_type must be defined in the memory space where the object is used 
 
 ## Example
 
