@@ -13,4 +13,4 @@ To perform a common operation, such as finding the minimum for an intrinsic C++ 
 If your application requires a custom scalar types, the scalar type must be copy constructible and provide the necessary operators for the reduction (for example comparison operators are required for minmax-reductions). A specialization of the reduction_identity class is also required.  Click the heading for more detail. 
 
 ## **[[Custom Reducers|Custom Reductions: Custom Reducers]]**
-For completely arbitrary reductions, you must provide an implementation of a Reducer class. 
+For completely arbitrary reductions, you must provide an implementation of a Reducer class.  Click the heading for more detail and an example.
