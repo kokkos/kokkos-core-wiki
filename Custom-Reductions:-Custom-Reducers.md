@@ -1,2 +1,2 @@
-Custom arbitrary reductions are implemented using a reduction class and a "reduced" class.  The "reduced" class is much like the custom scalar type used with BuiltIn reducers and the reduction class implements the [ReducerConcept](Kokkos%3A%3AReducerConcept)
+Custom arbitrary reductions are implemented using a reduction class and a "reduced" class.  The "reduced" class is much like the custom scalar type used with [BuiltIn Reducers](Custom-Reductions%3A-Built-In-Reducers-with-Custom-Scalar-Types) and the reduction class implements the [ReducerConcept](Kokkos%3A%3AReducerConcept)
  
