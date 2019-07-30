@@ -108,7 +108,7 @@ int main( int argc, char* argv[] ) {
 
      Kokkos::parallel_reduce (  E, [&] (const int j, ValueType &upd ) {
         int ndx =i%4;  // sum all of the i%4 entries (divide total by 4)
-        innerUpd.myArray[ndx] += 1;
+        upd.myArray[ndx] += 1;
      }, ArraySumResult(tr) );
 
      // Output result.
