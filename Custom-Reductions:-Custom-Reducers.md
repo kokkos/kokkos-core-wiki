@@ -3,7 +3,7 @@ Custom arbitrary reductions are implemented using a reduction class and a "reduc
 
 ## Example
 
-This example performs a custom reduction on an array using the built-in Sum reducer. 
+This example performs a custom reduction on an array using a custom class and reducer. 
 
 ```c++
 namespace sample {  // namespace helps with name resolution in reduction identity 
