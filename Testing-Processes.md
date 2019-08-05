@@ -1,5 +1,38 @@
-# Kokkos Testing Processes
+# Kokkos Testing Processes and Change Process
 
-Kokkos is a library of C++ templated macros that enable the construction of thread-scalable parallel patterns for data on many machine architectures.  Kokkos is designed for integration into the flow of computationally intensive host software that will be compiled for usage on modern computer architectures; the goal is improved performance of the computational kernels. Tuned implementation and some degree of code refactoring are generally needed to realize significant performance benefits. Supporting the development of the Kokkos macros and the expected performance benefits is an extensive software test program.
+Kokkos testing falls into three categories:
 
-This document outlines Kokkos testing activities in its variety and extent; some aspects will be described in greater detail than others, particularly promotion testing. The emphasis on promotion testing is based on its importance to the integrity of the Kokkos software library. The test activity summary first presents the software repository management system followed by descriptions of specific hardware platforms, required computer accounts, supported software compilers, Kokkos backends, test and test script description. The final section contains a description of the software testing regimen, particularly the testing workflow for Kokkos __software promotion__.
+ - Pull Request Testing
+ - Nightly Testing
+ - Integration Testing (Release Testing)
+ 
+## Pull Request Testing
+
+All changes to Kokkos are introduced via pull requests against the github.com develop branch of Kokkos. 
+In order to be merged two conditions must be met:
+
+1) Automatic testing of the pull request must pass.
+2) A Kokkos core developer must approve the pull request, after checking the changes for alignment with Kokkos developer standards. 
+
+The tested configurations in Pull Request testing cover the major deployment systems
+and are executed via jenkins and travis at various institutions. 
+Pull request testing also includes verification that the formatting meets 
+the clang-format style specified in the repository. 
+Test configurations are defined in the `kokkos/.jenkins` and `kokkos/.travis.yml` files.
+The clang-format style file is `kokkos/.clang-format`.
+
+## Nightly Testing
+
+Nightly testing covers a wider range of compilers and configuration of Kokkos 
+on an extensive list of platforms. 
+Test configurations are given in `kokkos/scripts/testings/test_all_sandia`. 
+Executing this script on the (in it) specified platforms will meet full testing requirements.
+Nightly tests are set up via Jenkins and execute this script in stages. 
+
+## Integration Testing (Release Testing)
+
+In order for a new Kokkos version to be released full integration testing is performed.
+A release is then formed by merging the Kokkos develop branch into its master branch, 
+and creating a git tag with the version number. 
+Details of the process are described in Testing Process Details. 
+
