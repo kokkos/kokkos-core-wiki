@@ -10,19 +10,17 @@ The following list is taken from file kokkos/README in the Kokkos Github reposit
     * GCC 5.1.0
     * GCC 5.3.0
     * GCC 6.1.0
+    * GCC 7.3.0
+    * GCC 8.1.0
     * Intel 15.0.2
     * Intel 16.0.1
     * Intel 17.1.043
     * Intel 17.4.196
     * Intel 18.0.128
-    * Clang 3.5.2
     * Clang 3.6.1
-    * Clang 3.7.1
-    * Clang 3.8.1
-    * Clang 3.9.0
     * Clang 4.0.0
     * Clang 4.0.0 for CUDA (CUDA Toolkit 8.0.44)
-    * PGI 17.10
+    * PGI 18.10
     * NVCC 7.0 for CUDA (with gcc 4.8.4)
     * NVCC 7.5 for CUDA (with gcc 4.8.4)
     * NVCC 8.0.44 for CUDA (with gcc 5.3.0)
@@ -64,13 +62,13 @@ Summary:
 
 - Step 1: Testing Kokkos itself using test_all_sandia
 
-- Step 2: Testing of Kokkos integrated into Trilinos (config/trilinos-integration/*.sh)
+- Step 2: Testing of Kokkos integrated into Trilinos via ATDM configurations as well as against LAMMPS and SPARC. 
 
 - Step 3: Locally update CHANGELOG, merge into master, edit config/master_history.txt
 
-- Step 4: Locally snapshot new master into corresponding Trilinos branch (develop or temporary), push with checking-test-sems.sh
+- Step 4: Locally snapshot new master into corresponding Trilinos kokkos-promotion branch and issue pull-request against Trilinos' develop branch.
 
-- Step 5: Push local Kokkos master to GitHub (need Owner approval)
+- Step 5: Push local Kokkos master to GitHub after Trilinos pull request was accepted.
 
 Steps 1, 2, and 4 include testing that may fail. These failures must be fixed either by pull requests to Kokkos develop, or by creating a new Trilinos branch for parts of Trilinos that must be updated. This is what usually takes the most time.
 
@@ -80,7 +78,7 @@ Step 1: The following should be repeated on enough machines to cover all
 supported compilers. Those machines are:
 
     kokkos-dev
-    ??? <- TODO: identify other machines
+    kokkos-dev-2
 
   1.1. Clone kokkos develop branch (or just switch to it)
 
@@ -178,17 +176,12 @@ Step 4: This step can be done on any SEMS machine (e.g. kokkos-dev). Actually, t
         git clone -b develop git@github.com:trilinos/Trilinos.git
         TRILINOS_PATH=$PWD/Trilinos
 
-  4.2 Snapshot Kokkos into Trilinos - this requires python/2.7.9 and that both Trilinos and Kokkos be clean - no untracked or modified files. Run the following outside of the Kokkos and Trilinos source trees.
+  4.2 Snapshot Kokkos into Trilinos kokkos-promotion branch - this requires python/2.7.9 and that both Trilinos and Kokkos be clean - no untracked or modified files. Run the following outside of the Kokkos and Trilinos source trees.
 
         module load sems-python/2.7.9
         python KOKKOS_PATH/scripts/snapshot.py KOKKOS_PATH TRILINOS_PATH/packages
 
-  4.3. Run checkin-test to push to trilinos using the CI build modules (gcc/4.9.3)
-
-       cd TRILINOS_PATH
-       mkdir CHECKIN
-       cd CHECKIN
-       nohup ../cmake/std/sems/checkin-test-sems.sh --do-all --push &
+  4.3. Issue pull request against Trilinos develop branch.
 
   4.4. If there are failures, fix and backtrack. Otherwise, go to next step
 
