@@ -2,5 +2,4 @@ The Guide to Kokkos Testing Processes is a description of the components of a te
 
 1. **[[Testing Processes|Testing Processes]]**
 2. **[[Testing Workflow Components|Testing Workflow Components]]**
-3. **[[Kokkos Testing|Kokkos Testing Description]]**
-4. **[[Testing Process Details|Testing Process Details]]**
+3. **[[Testing Process Details|Testing Process Details]]**
