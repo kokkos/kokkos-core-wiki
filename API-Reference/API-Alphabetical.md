@@ -49,7 +49,7 @@ All functions and classes listed here are part of the `Kokkos::` namespace.
 |[(X)CudaSpace](Kokkos%3A%3ACudaMemorySpaces) | [Core](API-Core) | [Spaces](Spaces) | The primary CUDA Memory Space. |
 |[(X)CudaUVMSpace](Kokkos%3A%3ACudaMemorySpaces) | [Core](API-Core) | [Spaces](Spaces) | The CUDA Memory Space providing access to unified memory page migratable allocations. |
 |[(X)CudaHostPinnedSpace](Kokkos%3A%3ACudaMemorySpaces) | [Core](API-Core) | [Spaces](Spaces) | The CUDA Memrory Space providing access to host pinned GPU-accessible host memory. |
-|[(X)ExecutionSpaceConcept](Kokkos%3A%3AExecutionSpaceConcept) | [Core](API-Core) | [Spaces](Spaces) | Concept for execution spaces. |
+|[ExecutionSpace Concept](ExecutionSpaceConcept) | [Core](API-Core) | [Spaces](Spaces) | Concept for execution spaces. |
 |[(X)HostSpace](Kokkos%3A%3AHostSpace) | [Core](API-Core) | [Spaces](Spaces) | The primary Host Memory Space. |
 |[LAnd](Kokkos%3A%3ALAnd) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism) | Reducer for Logical 'And' reduction |
 |[LOr](Kokkos%3A%3ALOr) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism) | Reducer for Logical 'Or' reduction |
