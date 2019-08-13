@@ -21,7 +21,6 @@ For best performance, coders need to tie details of how they manage arrays to de
 
 Kokkos aims to relieve some of this burden by optimizing array management and access for the specific architecture. Tying arrays to shared-memory parallelism lets Kokkos optimize the former to the latter. For example, Kokkos can easily do first-touch allocation because it controls threads that it can use to initialize arrays. Kokkos' architecture-awareness lets it pick optimal layout and pad allocations for good alignment. Expert coders can also use Kokkos to access low-level or more architecture-specific optimizations in a more user-friendly way. For instance, Kokkos makes it easy to experiment with different array layouts.
 
-
 ## 6.2 Creating and using a View
 
 ### 6.2.1 Constructing a View
@@ -58,7 +57,7 @@ This limitation comes from the implementation of View using C++ templates. View'
 
 Note that the above used constructor is not necessarily available for all view types; specific Layouts or Memory Spaces may require more specialized allocators. This is discussed later.
 
-Another important thing to keep in mind is that a `View` handle is a stateful object. It is not legal to create a `View` handle from raw memory by typecasting a pointer. To call any operator on a `View,` including the assignment operator, its constructor must have been called before. If it is necessary to initialize raw memory with a `View` handle, one can legally do so using a move constructor ("placement new"). The above has nothing to do with the data a `View` is referencing. It is completely legal to give a typecast pointer to the constructor of an unmanaged `View`.
+Another important thing to keep in mind is that a `View` handle is a stateful object. It is not legal to create a `View` handle from raw memory by typecasting a pointer. To call any operator on a `View,` including the assignment operator, its constructor must have been called before. If it is necessary to initialize raw memory with a `View` handle, one can legally do so using placement new. The above has nothing to do with the data a `View` is referencing. It is completely legal to give a typecast pointer to the constructor of an unmanaged `View`.
 
 ```c++
 Kokkos::View<int*> *a_ptr = (Kokkos::View<int*>*) malloc(10*sizeof(View<int*);
@@ -89,47 +88,104 @@ Finally, note that virtual functions are technically allowed, but calling them i
 
 ### 6.2.3 Can I make a View of Views?
 
-A ``View of Views'' is a special case of View, where the type of each entry is itself a View. It is possible to make this, but before you try, please see below.
+NOVICES: THE ANSWER FOR YOU IS "NO."  PLEASE SKIP THIS SECTION.  
+
+A "View of Views" is a special case of View, where the type of each entry is itself a View. It is possible to make this, but before you try, please see below.
 
 #### 6.2.3.1 You probably don't want this
 
-If you really just want a multidimensional array, please don't do this.  Instead, see Section \ref{SS:View:CreateUse:Constructing} for the correct syntax.
+If you really just want a multidimensional array, please don't do this.  Instead, see Section 6.2.1 above for the correct syntax.
 
-If you want to represent an array of arrays, and the inner arrays have fixed length or a fixed upper bound on length, consider instead using a ``compressed sparse row'' data structure. Kokkos' Containers subpackage as a `StaticCrsGraph` class that you may use for this purpose.
+If you want to represent an array of arrays, and the inner arrays have fixed length or a fixed upper bound on length, consider instead using a ``compressed sparse row'' data structure. Kokkos' Containers subpackage has a `StaticCrsGraph` class that you may use for this purpose.
 
 If you want a hash table, Kokkos' Containers subpackage has an `UnorderedMap` class that you may use for this purpose.
 
-One reason you might \emph{actually} want a View of Views is because you need a representation of a ``ragged'' array of arrays -- where the inner arrays have widely varying length -- and you need to be able to reallocate the inner arrays dynamically.
+One reason you might _actually_ want a View of Views is because you need a representation of a "ragged" array of arrays -- where the inner arrays have widely varying length -- and you need to be able to reallocate the inner arrays dynamically.
 
 You might also want a View of some class that itself contains Views. If you want this, first think about how to reorganize your data structures for better efficiency.
 
-#### 6.2.3.2 I really want a View of Views; what do I do?
+#### 6.2.3.2 What's the problem with a View of Views?
 
-Section \ref{SS:View:CreateUse:ValidValueType} above explains how the outer View's constructor works.  The outer View's constructor does not just allocate memory; it also initializes the allocation by iterating over it using a `Kokkos::parallel_for`, and invoking the entry type's default constructor for each entry.  If the View's execution space is `Cuda`, then that means the entry type's default constructor needs to be correct to call on device. That is a problem, because the entry type in this case is itself View. View's constructor wants to allocate memory, and thus does not work on device. Kokkos parallel regions generally forbid memory allocation.
+A View of Views would have an "outer View," with zero or more "inner Views."  Section 6.2.2 above explains how the outer View's constructor would work.  The outer View's constructor does not just allocate memory; it also initializes the allocation by iterating over it using a `Kokkos::parallel_for`, and invoking the entry type's default constructor for each entry.  If the View's execution space is `Cuda`, then that means the entry type's default constructor needs to be correct to call on device. That is a problem, because the entry type in this case is itself View. View's constructor wants to allocate memory, and thus does not work on device. Kokkos parallel regions generally forbid memory allocation.
 
-One work-around is to invoke all inner Views' constructors on host. For example, one might allocate a host mirror version of the outer View, do the inner View allocations on host, then deep copy the outer View to device.  Alternately, one might use `CudaUVMSpace` for the outer View, do the inner View allocations on host, then issue
-a `Kokkos::fence` before using the outer View on device. The fence ensures that no device kernel will attempt to use the outer View before the host initialization has finished.
-
-A different approach defers constructing the inner Views until a separate Kokkos parallel region.  One first constructs the outer View using the `WithoutInitializing` option, like this:
-\begin{lstlisting}
+You could create the outer View without initializing, like this:
+```cpp
 using Kokkos::View;
 using Kokkos::view_alloc;
 using Kokkos::WithoutInitializing;
 
-// Need an std::string here, because the compiler gets confused
+// Need an std::string here, because the compiler may get confused
 // if you pass view_alloc a char* as its first argument.
 const std::string label ("v_outer");
 View<View<int*>> v_outer (view_alloc (label, WithoutInitializing));
-\end{lstlisting}
-This ensures that the inner Views' constructors don't get called on device. However, that also means that the inner Views are not correctly constructed; they are not yet safe to use! Thus, one must then use ``placement new'' in a Kokkos parallel region, in order to construct the inner Views. This approach works best when the inner Views share a common memory pool for all their allocations.
+```
+However, that leaves the inner Views in an undefined state.  You can't legally assign to them or call their destructors.  (Remember that View assignment updates the assignee's reference count.)  You'll need to do more than just this in order to create valid inner Views and ensure their safe deallocation.
 
-Here is a summary of different ways to make a View of Views:
+You'll have worse problems if the outer View's memory space is `CudaSpace`.  Allocating View construction must run on host in order to allocate memory, but you won't be able to assign the resulting constructed View to any element of the outer View.
 
-* Allocate a host mirror version of the outer View, do the inner View allocations on host, then deep copy the outer View to device.
-* Use `CudaUVMSpace` for the outer View, do the inner View allocations on host, then fence before using the outer View on device.
-* Allocate the outer View using the `WithoutInitializing` option, then use ``placement new'' in a Kokkos parallel region to construct the inner Views.
+Another issue is that View construction in a Kokkos parallel region does not update the View's reference count.  Thus, the inner Views must be created in sequential host code, not inside of a `Kokkos::parallel_*`.
 
+#### 6.2.3.3 I really want a View of Views; what do I do?
 
+Here is how to create a View of Views, where each inner View has a separate owning allocation:
+
+  1. The outer View must have a memory space that is both host and device accessible, such as `CudaUVMSpace`.
+  2. Create the outer View without initializing it.
+  3. Create inner Views using placement new, in a sequential host loop.  (Prefer creating the inner Views uninitialized.  Creating the inner Views initialized launches one device kernel per inner View.  This is likely much slower than just initializing them all yourself from a single kernel over the outer View.)
+  4. At this point, you may access the outer and inner Views on device.
+  5. Before deallocating inner Views, fence to ensure all device kernels that access them have finished.
+  6. Destroy the inner Views explicitly.  (Otherwise, Step 7 will leak the inner Views' memory.)
+  7. Get rid of the outer View as you normally would.
+
+Here is an example:
+```cpp
+using Kokkos::Cuda;
+using Kokkos::CudaSpace;
+using Kokkos::CudaUVMSpace;
+using Kokkos::View;
+using Kokkos::view_alloc;
+using Kokkos::WithoutInitializing;
+
+using inner_view_type = View<double*, CudaSpace>;
+using outer_view_type = View<inner_view_type*, CudaUVMSpace>;
+
+const int numOuter = 5;
+const int numInner = 4;
+outer_view_type outer (view_alloc (std::string ("Outer"), WithoutInitializing), numOuter);
+
+// Create inner Views on host, outside of a parallel region, uninitialized
+for (int k = 0; k < numOuter; ++k) {
+  const std::string label = std::string ("Inner ") + std::to_string (k);
+  new (&outer[k]) inner_view_type (view_alloc (label, WithoutInitializing), numInner);
+}
+
+// Outer and inner views are now ready for use on device
+
+Kokkos::RangePolicy<Cuda, int> range (0, numOuter);
+Kokkos::parallel_for ("my kernel label", range, 
+    KOKKOS_LAMBDA (const int i) {  
+      for (int j = 0; j < numInner; ++j) {
+        device_outer[i][j] = 10.0 * double (i) + double (j);
+      }
+    }
+  });
+
+// Fence before deallocation on host, to make sure 
+// that the device kernel is done first.
+// Note the new fence syntax that requires an instance.
+// This will work with other CUDA streams, etc.
+Cuda ().fence ();
+
+// Destroy inner Views, again on host, outside of a parallel region.
+for (int k = 0; k < 5; ++k) {
+  outer[k].~inner_view_type ();
+}
+
+// You're better off disposing of outer immediately.
+outer = outer_view_type ();
+```
+
+Another approach is to create the inner Views as nonowning, from a single pool of memory.  This makes it unnecessary to invoke their destructors.
 
 ### 6.2.4 Const Views
 
@@ -403,12 +459,12 @@ Kokkos::View<int*[3], MemorySpace> a ("a", 10);
 typename Kokkos::View<int*[3], MemorySpace>::HostMirror b =
     create_mirror(a);
 // This is always a memcopy
-Kokkos::deep_copy (a, b);
+Kokkos::deep_copy (b, a);
     
 typename Kokkos::View<int*[3]>::HostMirror c =
 Kokkos::create_mirror_view(a);
 // This is a no-op if MemorySpace is HostSpace
-Kokkos::deep_copy (a, c)
+Kokkos::deep_copy (c, a)
 ```
 
 ### 6.4.4 How do I get the raw pointer?
@@ -423,7 +479,7 @@ extern void legacyFunction (double* x_raw, const size_t len);
 void myFunction (const Kokkos::View<double*>& x) {
   // DON'T DO THIS UNLESS YOU MUST
   double* x_raw = x.data();
-  const size_t N = x.extent_0();
+  const size_t N = x.extent(0);
   legacyFunction (x_raw, N);
 }
 ```

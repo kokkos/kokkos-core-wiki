@@ -1,4 +1,3 @@
-
 #### headers:  Kokkos_Core.hpp, Kokkos_Complex.hpp
 
 `template<class Generator>`
@@ -43,7 +42,7 @@ where the maximum values of the XorShift function values are given by the follow
 *   enum {MAX_URAND64 = 0xffffffffffffffffULL-1};
 *   enum {MAX_RAND = static_cast<int>(0xffffffffU/2)};
 *   enum {MAX_RAND64 = static_cast<int64_t>(0xffffffffffffffffULL/2-1)};
-=======
+
 # Kokkos::Generator
 
 

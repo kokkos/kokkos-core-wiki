@@ -1,4 +1,4 @@
-# Deprecated Functionality in Kokkos 2.7.24
+# Deprecated Functionality in Kokkos 2.8.00
 
 ## Compile Time Detectable
 
@@ -15,6 +15,8 @@
  | `ExecSpace::print_configuration(...)` | `Kokkos::print_configuration(...)` | Too many possibilities of organizing Kokkos initialization: now streamlined interface. |
  | `ExecSpace::max_hardware_thread_id()` | `ExecSpace::concurrency()` | Removal of execution space specific interfaces in favor of more general ones which work for all of them. | 
  | `ExecSpace::hardware_thread_id()` | Use `Kokkos::UniqueToken` | Removal of execution space specific interfaces in favor of more general ones which work for all of them. | 
+ | `ExecSpace::fence()` | Use `ExecSpace().fence()` | Support for instances, where you want to only fence that instance need this to be a non-static member function |
+ | `ExecSpace::is_initialized()` | Use `Kokkos::is_initialized()` | Simplify initialization makes this superfluous |
  | `TeamPolicy<>::team_size_max(Functor)` | `TeamPolicy<>::team_size_max(Functor, DispatchTag)` | This is now a member function of the team policy. The previous variant didn't take all necessary information into account and could result in invalid answers. |
  | `TeamPolicy<>::team_size_recommended(Functor)` | `TeamPolicy<>::team_size_recommended(Functor, DispatchTag)` | This is now a member function of the team policy. The previous variant didn't take all necessary information into account and could result in invalid answers. |
  | `KOKKOS_HAVE_...` | `KOKKOS_ENABLE_...` | Harmonization of Macro Names |
