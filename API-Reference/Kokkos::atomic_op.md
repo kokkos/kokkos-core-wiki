@@ -19,6 +19,9 @@ Atomicly updates the `value` at the address given by `ptr_to_value` with `update
   void atomic_and(T* const ptr_to_value, const T value);
 
   template<class T>
+  void atomic_assign(T* const ptr_to_value, const T value);
+
+  template<class T>
   void atomic_decrement(T* const ptr_to_value);
 
   template<class T>
@@ -50,6 +53,15 @@ Atomicly updates the `value` at the address given by `ptr_to_value` with `update
   Atomicly executes `*ptr_to_value &= value`. 
   * `ptr_to_value`: address of the to be updated value.
   * `value`: value with which to combine the original value. 
+
+* ```c++
+  template<class T>
+  void atomic_assign(T* const ptr_to_value, const T value);
+  ```
+
+  Atomicly executes `*ptr_to_value = value`. 
+  * `ptr_to_value`: address of the to be updated value.
+  * `value`: new value.
 
 * ```c++
   template<class T>
