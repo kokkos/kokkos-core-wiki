@@ -45,20 +45,20 @@ All functions and classes listed here are part of the `Kokkos::` namespace.
 |[(U)complex](Kokkos%3A%3AComplex) | [Core](API-Core) | [Utilities](API-Utilities) | Complex numbers which work on host and device |
 |[(X)create_mirror](Kokkos%3A%3Acreate_mirror) | [Core](API-Core) | [View](Data-Parallelism) | Mirror Host data to Device data |
 |[(X)create_mirror_view](Kokkos%3A%3Acreate_mirror_view) | [Core](API-Core) | [View](Data-Parallelism) | Mirror Host data to Device data |
-|[(X)Cuda](Kokkos%3A%3ACuda) | [Core](API-Core) | [Spaces](Spaces) | The CUDA Execution Space. |
-|[(X)CudaSpace](Kokkos%3A%3ACudaMemorySpaces) | [Core](API-Core) | [Spaces](Spaces) | The primary CUDA Memory Space. |
-|[(X)CudaUVMSpace](Kokkos%3A%3ACudaMemorySpaces) | [Core](API-Core) | [Spaces](Spaces) | The CUDA Memory Space providing access to unified memory page migratable allocations. |
-|[(X)CudaHostPinnedSpace](Kokkos%3A%3ACudaMemorySpaces) | [Core](API-Core) | [Spaces](Spaces) | The CUDA Memrory Space providing access to host pinned GPU-accessible host memory. |
+|[Cuda](Kokkos%3A%3ACuda) | [Core](API-Core) | [Spaces](Spaces) | The CUDA Execution Space. |
+|[CudaSpace](Kokkos%3A%3ACudaSpace) | [Core](API-Core) | [Spaces](Spaces) | The primary CUDA Memory Space. |
+|[CudaUVMSpace](Kokkos%3A%3ACudaUVMSpace) | [Core](API-Core) | [Spaces](Spaces) | The CUDA Memory Space providing access to unified memory page migratable allocations. |
+|[CudaHostPinnedSpace](Kokkos%3A%3ACudaHostPinnedSpace) | [Core](API-Core) | [Spaces](Spaces) | The CUDA Memrory Space providing access to host pinned GPU-accessible host memory. |
 |[ExecutionSpace Concept](ExecutionSpaceConcept) | [Core](API-Core) | [Spaces](Spaces) | Concept for execution spaces. |
-|[(X)HostSpace](Kokkos%3A%3AHostSpace) | [Core](API-Core) | [Spaces](Spaces) | The primary Host Memory Space. |
+|[HostSpace](Kokkos%3A%3AHostSpace) | [Core](API-Core) | [Spaces](Spaces) | The primary Host Memory Space. |
 |[LAnd](Kokkos%3A%3ALAnd) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism) | Reducer for Logical 'And' reduction |
 |[LOr](Kokkos%3A%3ALOr) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism) | Reducer for Logical 'Or' reduction |
 |[Max](Kokkos%3A%3AMax) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism) | Reducer for Maximum reduction |
 |[MaxLoc](Kokkos%3A%3AMaxLoc) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism) | Reducer for Reduction providing maximum and an associated index |
 |[(U)MDRangePolicy](Kokkos%3A%3AMDRangePolicy) | [Core](API-Core) | [Execution Policies](Execution-Policies)| Policy to iterate over a multidimensional index range. |
 |[MemorySpaceConcept](MemorySpaceConcept) | [Core](API-Core) | [Spaces](Spaces) | Concept for execution spaces. |
-|[(X)OpenMP](Kokkos%3A%3AOpenMP) | [Core](API-Core) | [Spaces](Spaces) | Execution space using non-target OpenMP parallel execution mechanisms. |
-|[(X)OpenMPTarget](Kokkos%3A%3AOpenMP) | [Core](API-Core) | [Spaces](Spaces) | Execution space using targetoffload OpenMP parallel execution mechanisms. |
+|[OpenMP](Kokkos%3A%3AOpenMP) | [Core](API-Core) | [Spaces](Spaces) | Execution space using non-target OpenMP parallel execution mechanisms. |
+|[OpenMPTarget](Kokkos%3A%3AOpenMPTarget) | [Core](API-Core) | [Spaces](Spaces) | Execution space using targetoffload OpenMP parallel execution mechanisms. |
 |[Min](Kokkos%3A%3AMin) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism) | Reducer for Minimum reduction |
 |[MinLoc](Kokkos%3A%3AMinLoc) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism) | Reducer for Reduction providing minimum and an associated index |
 |[MinMax](Kokkos%3A%3AMinMax) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism) | Reducer for Reduction providing both minimum and maximum |
