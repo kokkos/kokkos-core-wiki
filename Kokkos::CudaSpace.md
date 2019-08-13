@@ -1,1 +1,2 @@
-TODO
+
+`Kokkos::CudaSpace` is a [`MemorySpace` type](MemorySpaceConcept) representing device memory on a Cuda-capable GPU.  Except in rare instances, it should not be used directly, but instead should be used generically as an memory space.  For details, see [the documentation on the `MemorySpace` concept](MemorySpaceConcept).
