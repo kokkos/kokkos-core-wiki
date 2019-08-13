@@ -119,3 +119,7 @@ Additionally, the following type aliases (a.k.a. `typedef`s) will be defined by 
 * `Ex::array_layout`: the default [`ArrayLayout`](ArrayLayoutConcept) recommended for use with `View` types accessed from `Ex`.
 * `Ex::scratch_memory_space`: the [`ScratchMemorySpace`](ScratchMemorySpaceConcept) that parallel patterns will use for allocation of scratch memory (for instance, as requested by a [`Kokkos::TeamPolicy`](Kokkos%3A%3ATeamPolicy)).
 
+Default Constructibility, Copy Constructibility
+-----------------------------------------------
+
+In addition to the above functionality, all `ExecutionSpace` types in Kokkos are default constructible (you can construct them as `Ex ex()`) and copy constructible (you can construct them as `Ex ex2(ex1)`).  All default constructible instances of an `ExecutionSpace` type are guaranteed to have equivalent behavior, and all copy constructed instances are guaranteed to have equivalent behavior to the instance they were copied from.
