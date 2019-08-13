@@ -56,7 +56,7 @@ All functions and classes listed here are part of the `Kokkos::` namespace.
 |[Max](Kokkos%3A%3AMax) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism) | Reducer for Maximum reduction |
 |[MaxLoc](Kokkos%3A%3AMaxLoc) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism) | Reducer for Reduction providing maximum and an associated index |
 |[(U)MDRangePolicy](Kokkos%3A%3AMDRangePolicy) | [Core](API-Core) | [Execution Policies](Execution-Policies)| Policy to iterate over a multidimensional index range. |
-|[(X)MemorySpaceConcept](Kokkos%3A%3AMemorySpaceConcept) | [Core](API-Core) | [Spaces](Spaces) | Concept for execution spaces. |
+|[MemorySpaceConcept](MemorySpaceConcept) | [Core](API-Core) | [Spaces](Spaces) | Concept for execution spaces. |
 |[(X)OpenMP](Kokkos%3A%3AOpenMP) | [Core](API-Core) | [Spaces](Spaces) | Execution space using non-target OpenMP parallel execution mechanisms. |
 |[(X)OpenMPTarget](Kokkos%3A%3AOpenMP) | [Core](API-Core) | [Spaces](Spaces) | Execution space using targetoffload OpenMP parallel execution mechanisms. |
 |[Min](Kokkos%3A%3AMin) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism) | Reducer for Minimum reduction |
