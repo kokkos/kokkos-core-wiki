@@ -313,11 +313,11 @@ int main(int argc, char* argv[]) {
 }
 ```
 
-#### Mirrors
+## Mirrors
 
 A common desired use case is to have a memory allocation in GPU memory and an identical memory allocation in CPU memory, such that copying from one to another is straightforward. To satisfy this use case and others, Kokkos has facilities for dealing with "mirrors" of View. A "mirror" of a View type `A` is loosely defined a View type `B` such that Views of type `B` are accessible from the CPU and `deep_copy` between Views of type `A` and `B` are direct. The most common functions for dealing with mirrors are `create_mirror`, `create_mirror_view` and `create_mirror_view_and_copy`.
 
-##### Kokkos::create_mirror()
+### Kokkos::create_mirror()
 
 Usage:
 ```cpp
@@ -330,7 +330,7 @@ MirrorType create_mirror(Space const& space, ViewType const&);
 The first version of `create_mirror` returns a View to a new allocation in CPU ("host") memory which is otherwise compatible (same data type, layout, and extents) with the given argument View.
 The second version is like the first, except that the returned View uses the given `Space` as its `MemorySpace` and constructs it as a copy of `space`.
 
-##### Kokkos::create_mirror_view()
+### Kokkos::create_mirror_view()
 
 Usage:
 ```cpp
@@ -342,7 +342,7 @@ MirrorType create_mirror_view(Space const& space, ViewType const&);
 
 `create_mirror_view` works like `create_mirror`, except that if the argument View is accessible from the host, then a copy of the argument View will be returned and no new allocation will be created. This is a useful mechanism to prevent unnecessary copies in programs that can support GPU parallelism but were compiled without it.
 
-##### Kokkos::create_mirror_view_and_copy()
+### Kokkos::create_mirror_view_and_copy()
 
 Usage:
 ```cpp
