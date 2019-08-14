@@ -33,8 +33,8 @@ void resize(Kokkos::View<T, P...>& v,
 
 
 * ```c++
-template <class T, class... P>
-void resize(View<T, P...>& v,
+  template <class T, class... P>
+  void resize(View<T, P...>& v,
         const size_t n0 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
         const size_t n1 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
         const size_t n2 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
@@ -43,7 +43,7 @@ void resize(View<T, P...>& v,
         const size_t n5 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
         const size_t n6 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
         const size_t n7 = KOKKOS_IMPL_CTOR_DEFAULT_ARG);
-```
+  ```
   Resizes `v` to have the new dimensions while preserving the contents for the common subview of the old and new view.
   * `v`: existing view, can be a default constructed one. 
   * `n[X]`: new length for extent X.
@@ -52,10 +52,10 @@ void resize(View<T, P...>& v,
   * `View<T, P...>::array_layout` is either `LayoutLeft` or `LayoutRight`.
 
 * ```c++
-template <class T, class... P>
-void resize(Kokkos::View<T, P...>& v,
+  template <class T, class... P>
+  void resize(Kokkos::View<T, P...>& v,
              const typename Kokkos::View<T, P...>::array_layout& layout); 
-```
+  ```
   Resizes `v` to have the new dimensions while preserving the contents for the common subview of the old and new view.
   * `v`: existing view, can be a default constructed one. 
   * `layout`: a layout instance containing the new dimensions.
