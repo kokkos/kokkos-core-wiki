@@ -67,3 +67,8 @@ Default Constructibility, Copy Constructibility
 -----------------------------------------------
 
 Like `ExecutionSpace`, in addition to the above functionality, all `MemorySpace` types in Kokkos are default constructible (you can construct them as `MSp msp()`) and copy constructible (you can construct them as `MSp msp2(msp1)`).  All default constructible instances of a `MemorySpace` type are guaranteed to have equivalent behavior, and all copy constructed instances are guaranteed to have equivalent behavior to the instance they were copied from.
+
+Detection
+---------
+
+Kokkos provides the convenience type trait `Kokkos::is_memory_space<T>` which has a `value` compile-time accessible value (usable as `Kokkos::is_memory_space<T>::value`) that is `true` if and only if a type `T` meets the requirements of the `MemorySpace` concept.  Any `MemorySpace` type `T` will also have the expression `Kokkos::is_space<T>::value` evaluate to `true` as a compile-time constant.

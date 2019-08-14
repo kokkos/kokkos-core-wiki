@@ -123,3 +123,8 @@ Default Constructibility, Copy Constructibility
 -----------------------------------------------
 
 In addition to the above functionality, all `ExecutionSpace` types in Kokkos are default constructible (you can construct them as `Ex ex()`) and copy constructible (you can construct them as `Ex ex2(ex1)`).  All default constructible instances of an `ExecutionSpace` type are guaranteed to have equivalent behavior, and all copy constructed instances are guaranteed to have equivalent behavior to the instance they were copied from.
+
+Detection
+---------
+
+Kokkos provides the convenience type trait `Kokkos::is_execution_space<T>` which has a `value` compile-time accessible value (usable as `Kokkos::is_execution_space<T>::value`) that is `true` if and only if a type `T` meets the requirements of the `ExecutionSpace` concept.  Any `ExecutionSpace` type `T` will also have the expression `Kokkos::is_space<T>::value` evaluate to `true` as a compile-time constant.
