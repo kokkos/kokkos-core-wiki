@@ -1,4 +1,4 @@
-# `Kokkos::atomic_exchange`
+# `Kokkos::atomic_load`
 
 Header File: `Kokkos_Core.hpp`
 

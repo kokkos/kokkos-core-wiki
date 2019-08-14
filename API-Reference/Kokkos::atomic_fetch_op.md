@@ -1,10 +1,10 @@
-# `Kokkos::atomic_[op]`
+# `Kokkos::atomic_fetch_[op]`
 
 Header File: `Kokkos_Core.hpp`
 
 Usage:
   ```c++
-  old_value =  atomic_fetch_op(ptr_to_value,update_value);
+  old_value =  atomic_fetch_[op](ptr_to_value,update_value);
   ```
 
 Atomicly updates the variable at the address given by `ptr_to_value` with `update_value` according to the relevant operation, 

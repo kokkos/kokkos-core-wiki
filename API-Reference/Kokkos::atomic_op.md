@@ -4,7 +4,7 @@ Header File: `Kokkos_Core.hpp`
 
 Usage:
   ```c++
-  atomic_op(ptr_to_value,update_value);
+  atomic_[op](ptr_to_value,update_value);
   ```
 
 Atomicly updates the `value` at the address given by `ptr_to_value` with `update_value` according to the relevant operation.

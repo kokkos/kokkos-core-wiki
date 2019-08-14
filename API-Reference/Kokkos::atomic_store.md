@@ -1,10 +1,10 @@
-# `Kokkos::atomic_exchange`
+# `Kokkos::atomic_store`
 
 Header File: `Kokkos_Core.hpp`
 
 Usage:
   ```c++
-  atomic_exchange(ptr_to_value,new_value);
+  atomic_store(ptr_to_value,new_value);
   ```
 
 Atomicly sets the value at the address given by `ptr_to_value` to `new_value`.
@@ -13,14 +13,14 @@ Atomicly sets the value at the address given by `ptr_to_value` to `new_value`.
 
 ```c++
   template<class T>
-  void atomic_exchange(T* const ptr_to_value, const T new_value);
+  void atomic_store(T* const ptr_to_value, const T new_value);
 ```
 
 ## Description
 
 * ```c++
   template<class T>
-  void atomic_exchange(T* const ptr_to_value, const T new_value);
+  void atomic_store(T* const ptr_to_value, const T new_value);
   ```
 
   Atomicly executes `*ptr_to_value = new_value;`. 

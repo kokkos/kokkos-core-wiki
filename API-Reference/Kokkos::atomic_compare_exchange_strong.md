@@ -1,4 +1,4 @@
-# `Kokkos::atomic_exchange`
+# `Kokkos::atomic_compare_exchange_strong`
 
 Header File: `Kokkos_Core.hpp`
 
@@ -14,14 +14,14 @@ is equal to `comparison_value`, and returns true if the exchange has happened.
 
 ```c++
   template<class T>
-  bool atomic_compare_exchange(T* const ptr_to_value, const T comparison_value, const T new_value);
+  bool atomic_compare_exchange_strong(T* const ptr_to_value, const T comparison_value, const T new_value);
 ```
 
 ## Description
 
 * ```c++
   template<class T>
-  bool atomic_compare_exchange(T* const ptr_to_value, const T comparison_value, const T new_value);
+  bool atomic_compare_exchange_strong(T* const ptr_to_value, const T comparison_value, const T new_value);
   ```
 
   Atomicly executes `old_value = *ptr_to_value; if(old_value==comparison_value) *ptr_to_value = new_value; return old_value;`. 
