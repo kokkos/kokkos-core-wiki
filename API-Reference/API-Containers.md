@@ -8,7 +8,7 @@ DynamicView comment.
 Kokkos Runtime-determined-dimension DynRankView class. 
 ### 5. **[[Functional|functional-path]]**
 Functional comment.
-### 6. **[[OffsetView|Offset-View]]**
+### 6. **[[OffsetView|offsetview-path]]**
 OffsetView comment.
 ### 7. **[[ScatterView|scatterview-path]]**
 ScatterView comment.
