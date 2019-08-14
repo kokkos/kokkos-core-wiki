@@ -312,3 +312,42 @@ int main(int argc, char* argv[]) {
    Kokkos::finalize();
 }
 ```
+
+#### Mirrors
+
+A common desired use case is to have a memory allocation in GPU memory and an identical memory allocation in CPU memory, such that copying from one to another is straightforward. To satisfy this use case and others, Kokkos has facilities for dealing with "mirrors" of View. A "mirror" of a View type `A` is loosely defined a View type `B` such that Views of type `B` are accessible from the CPU and `deep_copy` between Views of type `A` and `B` are direct. The most common functions for dealing with mirrors are `create_mirror`, `create_mirror_view` and `create_mirror_view_and_copy`.
+
+##### Kokkos::create_mirror()
+
+Usage:
+```cpp
+template <class ViewType>
+typename ViewType::HostMirror create_mirror(ViewType const&);
+template <class Space, class ViewType>
+MirrorType create_mirror(Space const& space, ViewType const&);
+```
+
+The first version of `create_mirror` returns a View to a new allocation in CPU ("host") memory which is otherwise compatible (same data type, layout, and extents) with the given argument View.
+The second version is like the first, except that the returned View uses the given `Space` as its `MemorySpace` and constructs it as a copy of `space`.
+
+##### Kokkos::create_mirror_view()
+
+Usage:
+```cpp
+template <class ViewType>
+typename ViewType::HostMirror create_mirror_view(ViewType const&);
+template <class Space, class ViewType>
+MirrorType create_mirror_view(Space const& space, ViewType const&);
+```
+
+`create_mirror_view` works like `create_mirror`, except that if the argument View is accessible from the host, then a copy of the argument View will be returned and no new allocation will be created. This is a useful mechanism to prevent unnecessary copies in programs that can support GPU parallelism but were compiled without it.
+
+##### Kokkos::create_mirror_view_and_copy()
+
+Usage:
+```cpp
+template <class Space, class ViewType>
+MirrorType create_mirror_view(Space const& space, ViewType const&);
+```
+
+`create_mirror_view_and_copy` works like `create_mirror_view`, except that if the returned View is a new allocation different from the argument View, then `Kokkos::deep_copy(returned_view, argument_view)` will be executed before returning. This is a useful mechanism for avoiding unnecessary `deep_copy` calls in programs that can support GPU parallelism but were compiled without it.
