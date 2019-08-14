@@ -3,8 +3,6 @@ All functions and classes listed here are part of the `Kokkos::` namespace.
 ### Algorithms
 |Name |Library | Category | Description                  |
 |:---------|:--------|:-----------|:----------------------------|
-|Copy_Functor| Algorithm | Sort | View Copy |
-|Copy_Permute_Functor| Algorithm | Sort | View Copy |
 |Rand| Algorithm | Random Number | Generator Type (12), draw options (3) |
 |Rand| Algorithm | Random Number | Generator Type (12), draw options (3) |
 |Random_XorShift64_Pool| Algorithm | Random Number | Random Number Generator, pool for threads  |
