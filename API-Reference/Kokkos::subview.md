@@ -67,7 +67,7 @@ IMPL_DETAIL subview(const ViewType& v, Args ... args);
   for(int i0 = 0; i0 < s.extent(0); i0++) 
   for(int i1 = 0; i1 < s.extent(1); i1++) 
   for(int i2 = 0; i2 < s.extent(2); i2++) {
-    assert(s(i0,i1,i2) == a(i0+3,5,i1,i2);
+    assert(s(i0,i1,i2) == a(i0+3,5,i1,i2));
   }
 
   auto s3415 = Kokkos::subview(a,3,4,1,5);
