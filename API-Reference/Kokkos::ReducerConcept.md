@@ -1,6 +1,6 @@
 # `Kokkos::ReducerConcept`
 
-The concept of a Reducer is the abstraction that defines the "how" a "Reduction" is performed during the parallel reduce execution pattern.  The abstraction of "what" is given as a template parameter and corresponds to the "what" that is being reduced in the parallel_reduce operation.  This page describes the definitions and functions expected from a Reducer with a hypothetical 'Reducer' class definition.  A brief description of built-in reducers is also included. 
+The concept of a Reducer is the abstraction that defines the "how" a "Reduction" is performed during the parallel reduce execution pattern.  The abstraction of "what" is given as a template parameter and corresponds to the "what" that is being reduced in the [parallel_reduce](Kokkos%3A%3Aparallel_reduce) operation.  This page describes the definitions and functions expected from a Reducer with a hypothetical 'Reducer' class definition.  A brief description of built-in reducers is also included. 
 
 Header File: `Kokkos_Core.hpp`
 
