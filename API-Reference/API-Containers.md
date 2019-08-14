@@ -14,7 +14,7 @@ OffsetView comment.
 ScatterView comment.
 ### 8. **[[StaticCrsGraph|graph-path]]**
 StaticCrsGraph comment.
-### 9. **[[UnorderedMap|unordered-path]]**
+### 9. **[[UnorderedMap|Unordered-Map]]**
 UnorderedMap comment.
 ### 10. **[[Vector|vector-path]]**
 Vector comment.
