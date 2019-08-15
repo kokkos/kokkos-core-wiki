@@ -46,7 +46,49 @@ There are currently two task policies in Kokkos Tasking: `TaskSingle` and `TaskT
 Predecessors
 ------------
 
-Dependency relationships in Kokkos are represented by instances of the `Kokkos::Future` class template.  
+Dependency relationships in Kokkos are represented by instances of the `Kokkos::BasicFuture` class template.  Each task (created with the `task_spawn` or `host_spawn` patterns) can have zero or one predecessors.  Predecessors are given to a pattern as an argument to the policy:
+
+```c++
+using scheduler_type = /* ... discussed below ... */;
+auto scheduler = scheduler_type(/* ... discussed below ... */);
+// Launch with no predecessor:
+auto fut = Kokkos::host_spawn(
+  Kokkos::TaskSingle(scheduler),
+  MyTaskFunctor()
+);
+// Launch when `fut` is ready, at the earliest:
+auto fut2 = Kokkos::host_spawn(
+  Kokkos::TaskSingle(scheduler, fut),
+  MyOtherTaskFunctor()
+);
+/* ... */
+```
+
+Schedulers
+----------
+
+The Kokkos `TaskScheduler` concept is an abstraction that generalizes over the many possible strategies for scheduling tasks in a task-based system.  Like other concepts in Kokkos, users should not write code that depends directly on a specific `TaskScheduler`, but rather to the generic model that all `TaskScheduler` types guarantee.
+
+The `Kokkos::BasicFuture` class template, used for representing dependency relationships, is templated on the return type of the task it represents and on the type of the scheduler that was used to execute that task:
+
+```c++
+template <class Scheduler>
+void my_function(Scheduler sched) {
+  // use auto until you need to name the type for some reason
+  auto fut = Kokkos::host_spawn(
+    Kokkos::TaskSingle(sched),
+    MyTaskFunctor()
+  );
+  /* ... */
+  using my_result_type = MyTaskFunctor::value_type;
+  // convertibility is guaranteed:
+  Kokkos::BasicFuture<my_task_result, Scheduler> ff = fut;
+}
+```
+
+(Note: Kokkos does not guarantee the specific return type of task parallel patterns, only that they will be convertible to the appropriate `Kokkos::BasicFuture` type.  Use `auto` until you need to name the type for some reason—like storing it in a container, for instance.  Otherwise, Kokkos may be able to provide better performance if the future type is never required to be converted to a specific `Kokkos::BasicFuture` type.)
+
+Future types in Kokkos have shared reference semantics; a copy of a given future represents the same underlying dependency as the future it was copied from.
 
 
 Invariants in the Kokkos Tasking Programming Model
