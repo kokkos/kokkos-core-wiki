@@ -85,6 +85,8 @@ void my_function(Scheduler sched) {
 
 (Note: Kokkos does not guarantee the specific return type of task parallel patterns, only that they will be convertible to the appropriate `Kokkos::BasicFuture` type.  Use `auto` until you need to name the type for some reason—like storing it in a container, for instance.  Otherwise, Kokkos may be able to provide better performance if the future type is never required to be converted to a specific `Kokkos::BasicFuture` type.)
 
+`TaskScheduler` types in Kokkos have shared reference semantics; a copy of a given scheduler represents the same underlying entity and strategy as the scheduler it was copied from.
+
 When a future is ready, the result of the task that a future represents as a predecessor can be retrieved using the `get()` method.  However, this can **only** be called from a context where the future is guaranteed to be ready—that is, in a task that was spawned with the future as a predecessor, or a task that transitively depends on that future via another task, or after a `Kokkos::wait` on the scheduler that spawned the task associated with the future (see below).  **Calling the `get()` method of a future in any other context results in undefined behavior** (and the worst kind of bug, at that: it may not even result in a segfault or anything until hours of execution!).  Note that this is different from `std::future`, where the `get()` method blocks until it's ready.
 
 Future types in Kokkos have shared reference semantics; a copy of a given future represents the same underlying dependency as the future it was copied from.  A default-constructed `Kokkos::BasicFuture` represents an always-ready dependency with no value (that is, retrieving the value is undefined behavior—practically speaking, probably a segfault).  In addition to convertibility to a `Kokkos::BasicFuture` of the appropriate value type and scheduler type, all Kokkos futures are convertible to a `Kokkos::BasicFuture` of `void` and the appropriate scheduler type.
@@ -109,6 +111,15 @@ void my_function(Scheduler sched) {
 ```
 
 Users should think of `Kokkos::wait` as an *extremely* expensive operation (a "sledgehammer") and use it as sparingly as possible.
+
+### "Waiting" in a task functor
+
+TODO talk about `respawn`
+
+Aggregate Predecessors
+----------------------
+
+TODO talk about `when_all`
 
 Invariants in the Kokkos Tasking Programming Model
 ==================================================
