@@ -50,7 +50,7 @@ All functions and classes listed here are part of the `Kokkos::` namespace.
 |[CudaUVMSpace](Kokkos%3A%3ACudaUVMSpace) | [Core](API-Core) | [Spaces](Spaces) | The CUDA Memory Space providing access to unified memory page migratable allocations. |
 |[CudaHostPinnedSpace](Kokkos%3A%3ACudaHostPinnedSpace) | [Core](API-Core) | [Spaces](Spaces) | The CUDA Memrory Space providing access to host pinned GPU-accessible host memory. |
 |[ExecutionSpace concept](ExecutionSpaceConcept) | [Core](API-Core) | [Spaces](Spaces) | Concept for execution spaces. |
-|[ExecutionPolicy concept](ExecutionPolicyConcept) | [Core](API-Core) | [Execution Policies](Execution-Policies) | Concept for execution policies. |
+|[ExecutionPolicy Concept](Kokkos%3A%3AExecutionPolicyConcept) | [Core](API-Core) | [Execution Policies](Execution-Policies) | Concept for execution policies. |
 |[HostSpace](Kokkos%3A%3AHostSpace) | [Core](API-Core) | [Spaces](Spaces) | The primary Host Memory Space. |
 |[HPX](Kokkos%3A%3AHPX) | [Core](API-Core) | [Spaces](Spaces) | Execution space using the HPX runtime system execution mechanisms. |
 |[LAnd](Kokkos%3A%3ALAnd) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism) | Reducer for Logical 'And' reduction |
@@ -58,13 +58,13 @@ All functions and classes listed here are part of the `Kokkos::` namespace.
 |[Max](Kokkos%3A%3AMax) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism) | Reducer for Maximum reduction |
 |[MaxLoc](Kokkos%3A%3AMaxLoc) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism) | Reducer for Reduction providing maximum and an associated index |
 |[(U)MDRangePolicy](Kokkos%3A%3AMDRangePolicy) | [Core](API-Core) | [Execution Policies](Execution-Policies)| Policy to iterate over a multidimensional index range. |
-|[MemorySpace concept](MemorySpaceConcept) | [Core](API-Core) | [Spaces](Spaces) | Concept for execution spaces. |
-|[OpenMP](Kokkos%3A%3AOpenMP) | [Core](API-Core) | [Spaces](Spaces) | Execution space using non-target OpenMP parallel execution mechanisms. |
-|[OpenMPTarget](Kokkos%3A%3AOpenMPTarget) | [Core](API-Core) | [Spaces](Spaces) | Execution space using targetoffload OpenMP parallel execution mechanisms. |
+|[MemorySpace concept](Kokkos%3A%3AMemorySpaceConcept) | [Core](API-Core) | [Spaces](Spaces) | Concept for execution spaces. |
 |[Min](Kokkos%3A%3AMin) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism) | Reducer for Minimum reduction |
 |[MinLoc](Kokkos%3A%3AMinLoc) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism) | Reducer for Reduction providing minimum and an associated index |
 |[MinMax](Kokkos%3A%3AMinMax) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism) | Reducer for Reduction providing both minimum and maximum |
 |[MinMaxLoc](Kokkos%3A%3AMinMaxLoc) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism) | Reducer for Reduction providing both minimum and maximum and associated indicies |
+|[OpenMP](Kokkos%3A%3AOpenMP) | [Core](API-Core) | [Spaces](Spaces) | Execution space using non-target OpenMP parallel execution mechanisms. |
+|[OpenMPTarget](Kokkos%3A%3AOpenMPTarget) | [Core](API-Core) | [Spaces](Spaces) | Execution space using targetoffload OpenMP parallel execution mechanisms. |
 |[parallel_for](Kokkos%3A%3Aparallel_for) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism)| Bulk execute of independent work items. |
 |[parallel_reduce](Kokkos%3A%3Aparallel_reduce) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism)| Bulk execute of independent work items, which contribute to a reduction. |
 |[parallel_scan](Kokkos%3A%3Aparallel_scan) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism)| Bulk execute of work items, which a simple pre- or postfix scan dependency. |
