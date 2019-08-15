@@ -43,10 +43,10 @@ Task Policies
 
 There are currently two task policies in Kokkos Tasking: `TaskSingle` and `TaskTeam`.  The former tells Kokkos to launch the associated task functor with a single worker when its predecessors are done (more on this below), while the latter tells Kokkos to launch with a team of workers, similar to a single team from a `Kokkos::TeamPolicy` launch in data parallelism.
 
-Predecessors
-------------
+Predecessors and Schedulers
+---------------------------
 
-Dependency relationships in Kokkos are represented by instances of the `Kokkos::BasicFuture` class template.  Each task (created with the `task_spawn` or `host_spawn` patterns) can have zero or one predecessors.  Predecessors are given to a pattern as an argument to the policy:
+Dependency relationships in Kokkos are represented by instances of the `Kokkos::BasicFuture` class template.  Each task (created with the `task_spawn` or `host_spawn` patterns) can have zero or one predecessors (to create task graphs with more predecessors, use `Kokkos::when_all`, described below).  Predecessors are given to a pattern as an argument to the policy:
 
 ```c++
 using scheduler_type = /* ... discussed below ... */;
@@ -63,9 +63,6 @@ auto fut2 = Kokkos::host_spawn(
 );
 /* ... */
 ```
-
-Schedulers
-----------
 
 The Kokkos `TaskScheduler` concept is an abstraction that generalizes over the many possible strategies for scheduling tasks in a task-based system.  Like other concepts in Kokkos, users should not write code that depends directly on a specific `TaskScheduler`, but rather to the generic model that all `TaskScheduler` types guarantee.
 
@@ -88,8 +85,30 @@ void my_function(Scheduler sched) {
 
 (Note: Kokkos does not guarantee the specific return type of task parallel patterns, only that they will be convertible to the appropriate `Kokkos::BasicFuture` type.  Use `auto` until you need to name the type for some reason—like storing it in a container, for instance.  Otherwise, Kokkos may be able to provide better performance if the future type is never required to be converted to a specific `Kokkos::BasicFuture` type.)
 
-Future types in Kokkos have shared reference semantics; a copy of a given future represents the same underlying dependency as the future it was copied from.
+When a future is ready, the result of the task that a future represents as a predecessor can be retrieved using the `get()` method.  However, this can **only** be called from a context where the future is guaranteed to be ready—that is, in a task that was spawned with the future as a predecessor, or a task that transitively depends on that future via another task, or after a `Kokkos::wait` on the scheduler that spawned the task associated with the future (see below).  **Calling the `get()` method of a future in any other context results in undefined behavior** (and the worst kind of bug, at that: it may not even result in a segfault or anything until hours of execution!).  Note that this is different from `std::future`, where the `get()` method blocks until it's ready.
 
+Future types in Kokkos have shared reference semantics; a copy of a given future represents the same underlying dependency as the future it was copied from.  A default-constructed `Kokkos::BasicFuture` represents an always-ready dependency with no value (that is, retrieving the value is undefined behavior—practically speaking, probably a segfault).  In addition to convertibility to a `Kokkos::BasicFuture` of the appropriate value type and scheduler type, all Kokkos futures are convertible to a `Kokkos::BasicFuture` of `void` and the appropriate scheduler type.
+
+Waiting in Kokkos Tasking
+-------------------------
+
+Kokkos generally provides no way to block a thread of execution to wait on an individual future, and it provides no guarantee of correct execution if the user attempts to do so via external means (for instance, polling on the `is_ready()` method in a `while` loop is forbidden).  *Outside of* a Kokkos task functor (that is, anywhere that `host_spawn` would be allowed), Kokkos provides the ability to wait on *all* of the futures created on a given scheduler (including those created, transitively, by tasks spawned not yet completed, or potentially not even started).  This is done using the `Kokkos::wait` function on the scheduler:
+
+```c++
+template <class Scheduler>
+void my_function(Scheduler sched) {
+  // use auto until you need to name the type for some reason
+  auto fut = Kokkos::host_spawn(
+    Kokkos::TaskSingle(sched),
+    MyTaskFunctor()
+  );
+  Kokkos::wait(sched);
+  auto value = fut.get();
+  /* ... */
+}
+```
+
+Users should think of `Kokkos::wait` as an *extremely* expensive operation (a "sledgehammer") and use it as sparingly as possible.
 
 Invariants in the Kokkos Tasking Programming Model
 ==================================================
