@@ -42,7 +42,7 @@ All functions and classes listed here are part of the `Kokkos::` namespace.
 |[atomic_store](Kokkos%3A%3Aatomic_store) | [Core](API-Core) | [Atomic-Operations](Atomic-Operations) | Atomic operation which stores a value. | 
 |[BAnd](Kokkos%3A%3ABAnd) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism) | Reducer for Binary 'And' reduction |
 |[BOr](Kokkos%3A%3ABOr) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism) | Reducer for Binary 'Or' reduction |
-|[(U)complex](Kokkos%3A%3AComplex) | [Core](API-Core) | [Utilities](API-Utilities) | Complex numbers which work on host and device |
+|[complex](Kokkos%3A%3AComplex) | [Core](API-Core) | [Utilities](API-Utilities) | Complex numbers which work on host and device |
 |[(X)create_mirror](Kokkos%3A%3Acreate_mirror) | [Core](API-Core) | [View](Data-Parallelism) | Mirror Host data to Device data |
 |[(X)create_mirror_view](Kokkos%3A%3Acreate_mirror_view) | [Core](API-Core) | [View](Data-Parallelism) | Mirror Host data to Device data |
 |[Cuda](Kokkos%3A%3ACuda) | [Core](API-Core) | [Spaces](Spaces) | The CUDA Execution Space. |
@@ -67,21 +67,21 @@ All functions and classes listed here are part of the `Kokkos::` namespace.
 |[MinMaxLoc](Kokkos%3A%3AMinMaxLoc) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism) | Reducer for Reduction providing both minimum and maximum and associated indicies |
 |[parallel_for](Kokkos%3A%3Aparallel_for) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism)| Bulk execute of independent work items. |
 |[parallel_reduce](Kokkos%3A%3Aparallel_reduce) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism)| Bulk execute of independent work items, which contribute to a reduction. |
-|[(U)parallel_scan](Kokkos%3A%3Aparallel_scan) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism)| Bulk execute of work items, which a simple pre- or postfix scan dependency. |
+|[parallel_scan](Kokkos%3A%3Aparallel_scan) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism)| Bulk execute of work items, which a simple pre- or postfix scan dependency. |
 |[PerTeam](Kokkos%3A%3ANestedPolicies) | [Core](API-Core) | [Execution Policies](Execution-Policies)| Policy used in single construct to indicate once per team execution. |
 |[PerThread](Kokkos%3A%3ANestedPolicies) | [Core](API-Core) | [Execution Policies](Execution-Policies)| Policy used in single construct to indicate once per thread execution. |
 |[Prod](Kokkos%3A%3AProd) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism) | Reducer for Multiplicative reduction |
 |[RangePolicy](Kokkos%3A%3ARangePolicy) | [Core](API-Core) | [Execution Policies](Execution-Policies)| Policy to iterate over a 1D index range. |
-|[(X)realloc](Kokkos%3A%3Arealloc) | [Core](API-Core) | View | Resize an existing view without maintaining the content |
-|[(U)ReducerConcept](Kokkos%3A%3AReducerConcept) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism)| Provides the concept for Reducers. |
-|[(X)resize](Kokkos%3A%3Aresize) | [Core](API-Core) | View | Resize an existing view while maintaining the content |
+|[realloc](Kokkos%3A%3Arealloc) | [Core](API-Core) | View | Resize an existing view without maintaining the content |
+|[ReducerConcept](Kokkos%3A%3AReducerConcept) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism)| Provides the concept for Reducers. |
+|[resize](Kokkos%3A%3Aresize) | [Core](API-Core) | View | Resize an existing view while maintaining the content |
 |[SpaceAccessibility](Kokkos%3A%3ASpaceAccessibility) | [Core](API-Core) | [Spaces](Spaces) | Facility to query accessibility rules between execution and memory spaces. |
-|[(X)subview](Kokkos%3A%3Asubview) | [Core](API-Core) | View | Crating multi-dimensional array which is a slice of a view |
+|[subview](Kokkos%3A%3Asubview) | [Core](API-Core) | View | Crating multi-dimensional array which is a slice of a view |
 |[Sum](Kokkos%3A%3ASum) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism) | Reducer for Sum reduction |
 |[TeamHandle concept](TeamHandleConcept) | [Core](API-Core) | [Execution Policies](Execution-Policies)| Provides the concept for the `member_type` of a [TeamPolicy](Kokkos%3A%3ATeamPolicy). |
 |[(U)TeamPolicy](Kokkos%3A%3ATeamPolicy) | [Core](API-Core) | [Execution Policies](Execution-Policies)| Policy to iterate over a 1D index range, assigning to each iteration a team of threads. |
-|[(U)TeamThreadRange](Kokkos%3A%3ANestedPolicies) | [Core](API-Core) | [Execution Policies](Execution-Policies)| Policy to iterate over a 1D index range with the threads of a team. |
-|[(U)TeamVectorRange](Kokkos%3A%3ANestedPolicies) | [Core](API-Core) | [Execution Policies](Execution-Policies)| Policy to iterate over a 1D index range with the threads and vector lanes of a team. |
-|[(U)ThreadVectorRange](Kokkos%3A%3ANestedPolicies) | [Core](API-Core) | [Execution Policies](Execution-Policies)| Policy to iterate over a 1D index range with the vector lanes of a thread. |
+|[TeamThreadRange](Kokkos%3A%3ANestedPolicies) | [Core](API-Core) | [Execution Policies](Execution-Policies)| Policy to iterate over a 1D index range with the threads of a team. |
+|[TeamVectorRange](Kokkos%3A%3ANestedPolicies) | [Core](API-Core) | [Execution Policies](Execution-Policies)| Policy to iterate over a 1D index range with the threads and vector lanes of a team. |
+|[ThreadVectorRange](Kokkos%3A%3ANestedPolicies) | [Core](API-Core) | [Execution Policies](Execution-Policies)| Policy to iterate over a 1D index range with the vector lanes of a thread. |
 |[Timer](Kokkos%3A%3ATimer) | [Core](API-Core) | [Utilities](API-Utilities)| A basic timer returning seconds |
 |[View](Kokkos%3A%3AView) | [Core](API-Core) | [View](Kokkos%3A%3AView)| A multi-dimensional array |
