@@ -2,7 +2,6 @@ Kokkos contains two `Space` Concepts: [`MemorySpace`](Kokkos%3A%3AMemorySpaceCon
 Concrete instances of these two concepts are used to allocate data and dispatch work. Their relationship is described through 
 the [`Kokkos::SpaceAccessibility`](Kokkos%3A%3ASpaceAccessibility) trait.
 
-  * [``](Kokkos%3A%3A)
 ## Execution Spaces
 
   The Concept is documented in [`ExecutionSpace`](Kokkos%3A%3AExecutionSpaceConcept).
