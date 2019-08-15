@@ -142,6 +142,8 @@ struct MyTaskFunctor {
 
 A task functor can only be respawned up to once *per execution of* `operator()` (that is, once per time it is spawned or respawned).  Multiple calls to `respawn` in the same execution of `operator()` are redundant and lead to undefined behavior.  Calls to `respawn` are always lazy—the subsequent call to `operator()` by Kokkos will only happen after the currently executing one returns (and after the predecessors, if any, are ready) at the earliest.
 
+The first argument to `Kokkos::respawn` must always be a pointer to the currently executing task functor (or one of its base classes) from which `Kokkos::respawn` is called.  The second argument can be either a future of the same scheduler as the currently executing task functor or an instance of the scheduler itself.  The third (optional) argument is a task priority, discussed below.
+
 
 Aggregate Predecessors
 ----------------------
