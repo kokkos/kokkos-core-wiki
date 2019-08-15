@@ -41,7 +41,7 @@ The primary analogs of `Kokkos::parallel_for()` and friends for tasking are `Kok
 Task Policies
 -------------
 
-There are currently two task policies in Kokkos Tasking: `TaskSingle` and `TaskTeam`.  The former tells Kokkos to launch the associated task functor with a single worker when its predecessors are done (more on this below), while the latter tells Kokkos to launch with a team of workers, similar to a single team from a `Kokkos::TeamPolicy` launch in data parallelism.
+There are currently two task policies in Kokkos Tasking: `TaskSingle` and `TaskTeam`.  The former tells Kokkos to launch the associated task functor with a single worker when its predecessors are done (more on this below), while the latter tells Kokkos to launch with a team of workers, similar to a single team from a `Kokkos::TeamPolicy` launch in data parallelism.  In a task spawned with `TaskTeam`, users are only allowed to call `task_spawn` from a single worker; use `Kokkos::single` for this purpose.
 
 Predecessors and Schedulers
 ---------------------------
@@ -85,11 +85,11 @@ void my_function(Scheduler sched) {
 
 (Note: Kokkos does not guarantee the specific return type of task parallel patterns, only that they will be convertible to the appropriate `Kokkos::BasicFuture` type.  Use `auto` until you need to name the type for some reason—like storing it in a container, for instance.  Otherwise, Kokkos may be able to provide better performance if the future type is never required to be converted to a specific `Kokkos::BasicFuture` type.)
 
-`TaskScheduler` types in Kokkos have shared reference semantics; a copy of a given scheduler represents the same underlying entity and strategy as the scheduler it was copied from.
+`TaskScheduler` types in Kokkos have shared reference semantics; a copy of a given scheduler represents the same underlying entity and strategy as the scheduler it was copied from. Inside of a task functor, users should retrieve the scheduler instance from the team member handle passed in as the first argument rather than storing the scheduler themselves.  Use `auto` for this as well until you need to store it for some reason.
 
 When a future is ready, the result of the task that a future represents as a predecessor can be retrieved using the `get()` method.  However, this can **only** be called from a context where the future is guaranteed to be ready—that is, in a task that was spawned with the future as a predecessor, or a task that transitively depends on that future via another task, or after a `Kokkos::wait` on the scheduler that spawned the task associated with the future (see below).  **Calling the `get()` method of a future in any other context results in undefined behavior** (and the worst kind of bug, at that: it may not even result in a segfault or anything until hours of execution!).  Note that this is different from `std::future`, where the `get()` method blocks until it's ready.
 
-Future types in Kokkos have shared reference semantics; a copy of a given future represents the same underlying dependency as the future it was copied from.  A default-constructed `Kokkos::BasicFuture` represents an always-ready dependency with no value (that is, retrieving the value is undefined behavior—practically speaking, probably a segfault).  In addition to convertibility to a `Kokkos::BasicFuture` of the appropriate value type and scheduler type, all Kokkos futures are convertible to a `Kokkos::BasicFuture` of `void` and the appropriate scheduler type.
+Future types in Kokkos have shared reference semantics; a copy of a given future represents the same underlying dependency as the future it was copied from.  A default-constructed `Kokkos::BasicFuture` represents an always-ready dependency with no value (that is, retrieving the value is undefined behavior—practically speaking, probably a segfault).  A default-constructed future will return `true` for the `is_null()` method.  In addition to convertibility to a `Kokkos::BasicFuture` of the appropriate value type and scheduler type, all Kokkos futures are convertible to a `Kokkos::BasicFuture` of `void` and the appropriate scheduler type.
 
 Waiting in Kokkos Tasking
 -------------------------
@@ -114,7 +114,34 @@ Users should think of `Kokkos::wait` as an *extremely* expensive operation (a "s
 
 ### "Waiting" in a task functor
 
-TODO talk about `respawn`
+In Kokkos tasking, all task functors must be able to run to completion without blocking once they are started (the Kokkos scheduler *can* run other tasks at any point that the functor calls back into the Kokkos tasking system, such as any `task_spawn`, but it is allowed to assume user functors will run to completion if left alone).  This means that there is no way to block a task pending the result of another task.  Other tasking systems that make this sort of design decision require the user to spawn a new task for each new piece of predicated work, which is an option in Kokkos as well, but Kokkos also provides another option.  To help reduce the allocation cost associated with the traditional approach to never-blocking task systems, Kokkos allows users to "reuse" the current task as a successor to some future.  Kokkos provides the `Kokkos::respawn()` function.  For example:
+
+```c++
+template <class Scheduler>
+struct MyTaskFunctor {
+  using value_type = void;
+  using future_type = Kokkos::BasicFuture<double, Scheduler>;
+  future_type f;
+  template <class TeamMember>
+  KOKKOS_INLINE_FUNCTION
+  void operator()(TeamMember& member) {
+    if(f.is_null()) {
+      f = Kokkos::task_spawn(
+        Kokkos::TaskSingle(member.scheduler()),
+        MyOtherTaskFunctor()
+      );
+      Kokkos::respawn(this, f);
+    }
+    else {
+      // This is after the respawn so we're guaranteed that f is ready
+      printf("Got result %f\n", f.get());
+    }
+  }
+};
+```
+
+A task functor can only be respawned up to once *per execution of* `operator()` (that is, once per time it is spawned or respawned).  Multiple calls to `respawn` in the same execution of `operator()` are redundant and lead to undefined behavior.  Calls to `respawn` are always lazy—the subsequent call to `operator()` by Kokkos will only happen after the currently executing one returns (and after the predecessors, if any, are ready) at the earliest.
+
 
 Aggregate Predecessors
 ----------------------
