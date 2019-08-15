@@ -148,7 +148,7 @@ The first argument to `Kokkos::respawn` must always be a pointer to the currentl
 Aggregate Predecessors
 ----------------------
 
-TODO talk about `when_all`
+Kokkos tasking provides two forms of the `when_all()` method on every `TaskScheduler` type. Both serve to aggregate multiple predecessors into one, and both return a value convertible to a `Kokkos::BasicFuture` of `void` and that scheduler type.  The first takes an array of `Kokkos::BasicFuture` of the scheduler type and a count of entries in that array.  The second takes a `count` and a unary function or functor that should expect to be called with each integer in the range `[0, count)`.  In both cases, the return value is a future that will become ready when all of the input futures become ready.
 
 Task Priorities
 ---------------
