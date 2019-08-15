@@ -155,7 +155,9 @@ Task Priorities
 
 Kokkos allows users to provide a priority hint to task parallel execution policies as an optional third argument, or as an optional third argument to `Kokkos::respawn`.  This has no observable effect on the programming model—only on the performance.  A scheduler may ignore these priorities.  The allowed task priorities are `Kokkos::TaskPriority::High`, `Kokkos::TaskPriority::Regular`, and `Kokkos::TaskPriority::Low`, which the second being the default if the argument isn't given.
 
+<!--
 Invariants in the Kokkos Tasking Programming Model
 ==================================================
 
 TODO
+-->
