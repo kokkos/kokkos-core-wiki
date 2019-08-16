@@ -28,6 +28,12 @@ typename ViewType::HostMirror create_mirror_view(ViewType const&);
 
 template <class Space, class ViewType>
 ImplMirrorType create_mirror_view(Space const& space, ViewType const&);
+  
+template <class Space, class ViewType>
+ImplMirrorType create_mirror_view(Space const& space, ViewType const&, decltype(Kokkos::ViewAllocateWithoutInitializing());
+  
+template <class Space, class ViewType>
+ImplMirrorType create_mirror_view_and_copy(Space const& space, ViewType const&);
 ```
 
 
