@@ -16,5 +16,5 @@ ScatterView comment.
 StaticCrsGraph comment.
 ### 9. **[[UnorderedMap|Unordered-Map]]**
 UnorderedMap comment.
-### 10. **[Vector](Kokkos::vector)**
+### 10. **[Vector](Kokkos%3A%3Avector)**
 std::vector compatible implementation that works with non-host memory spaces.
