@@ -16,7 +16,8 @@ The four template arguments are the same as those of Kokkos::View.
 
 Usage:
 
-    `using view_type = Kokkos::DualView<Scalar**, 
+```c++
+    using view_type = Kokkos::DualView<Scalar**, 
                                        Kokkos::LayoutLeft, 
                                        Device>
     view_type a("A", n, m);
@@ -27,4 +28,5 @@ Usage:
 
     Kokkos::deep_copy(a.h_view, 2);
     a.template modify<typename ViewType::host_mirror_space>();
-    a.template sync<typename ViewType::execution_space>();`
+    a.template sync<typename ViewType::execution_space>();
+```
