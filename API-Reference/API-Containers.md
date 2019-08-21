@@ -1,6 +1,6 @@
 ### 1. **[[Bitset|bitset-path]]**
 Bitset comment
-### 2. **[[DualView](Kokkos%3A%3ADualView)]**
+### 2. **[DualView](Kokkos%3A%3ADualView)**
 Container to manage access to mirrored views in different memory spaces
 ### 3. **[[DynamicView|dynamicView-path]]**
 DynamicView comment.
