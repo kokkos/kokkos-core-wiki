@@ -13,3 +13,17 @@ The four template arguments are the same as those of Kokkos::View.
  - Device, The Kokkos Device type.  If its memory space is not the same as the host's memory space, then DualView will contain two separate Views: one in device memory, and one in host memory.  Otherwise, DualView will only store one View.
  
  - MemoryTraits (optional) The user's intended memory access behavior.  Please see the documentation of Kokkos::View for examples.  The default suffices for most users.
+
+Usage:
+
+`   using view_type = Kokkos::DualView<Scalar**, Kokkos::LayoutLeft, Device>
+    view_type a("A", n, m);
+
+    Kokkos::deep_copy(a.d_view, 1);
+    a.template modify<typename view_type::execution_space>();
+    a.template sync<typename view_type::host_mirror_space>();
+
+    Kokkos::deep_copy(a.h_view, 2);
+    a.template modify<typename ViewType::host_mirror_space>();
+    a.template sync<typename ViewType::execution_space>();
+`
