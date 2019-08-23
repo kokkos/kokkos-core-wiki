@@ -99,3 +99,41 @@ void find_indicies(View<int*> indicies, View<double*> values) {
 
 The full list of atomic operations can be found here:
 
+|Name |Library | Category | Description                  |
+|:---------|:--------|:-----------|:----------------------------|
+|[atomic_exchange](Kokkos%3A%3Aatomic_exchange) | [Core](API-Core) | [Atomic-Operations](Atomic-Operations) | Atomic operation which exchanges a value and returns the old. | 
+|[atomic_compare_exchange](Kokkos%3A%3Aatomic_compare_exchange) | [Core](API-Core) | [Atomic-Operations](Atomic-Operations) | Atomic operation which exchanges a value only if the old value matches a comparison value and returns the old value. | 
+|[atomic_compare_exchange_strong](Kokkos%3A%3Aatomic_compare_exchange_strong) | [Core](API-Core) | [Atomic-Operations](Atomic-Operations) | Atomic operation which exchanges a value only if the old value matches a comparison value and returns true if the exchange is executed. | 
+|[atomic_load](Kokkos%3A%3Aatomic_load) | [Core](API-Core) | [Atomic-Operations](Atomic-Operations) | Atomic operation which loads a value. | 
+|[atomic_\[op\]](Kokkos%3A%3Aatomic_op) | [Core](API-Core) | [Atomic-Operations](Atomic-Operations) | Atomic operation which don't return anything. | 
+|[atomic_fetch_\[op\]](Kokkos%3A%3Aatomic_fetch_op) | [Core](API-Core) | [Atomic-Operations](Atomic-Operations) | Various atomic operations which return the old value. | 
+|[atomic_\[op\]_fetch](Kokkos%3A%3Aatomic_op_fetch) | [Core](API-Core) | [Atomic-Operations](Atomic-Operations) | Various atomic operations which return the updated value. | 
+|[atomic_store](Kokkos%3A%3Aatomic_store) | [Core](API-Core) | [Atomic-Operations](Atomic-Operations) | Atomic operation which stores a value. |
+
+## 10.3 Atomic Memory Trait
+
+If all operations on a specific `View` during a Kernel are atomic one can also use the atomic memory trait.
+Generally one creates a *atomic* `View` from a *non-atomic* `View` just for the one kernel, and then uses normal 
+operations on it.
+
+```c++
+void create_histogram(View<int*> histogram, int min, int max, View<int*> values) {
+  deep_copy(histogram,0);
+  View<int*,MemoryTraits<Atomic> > histogram_atomic = histogram;
+  parallel_for("CreateHistogram", values.extent(0), KOKKOS_LAMBDA(const int i) {
+    int index = (1.0*(values(i)-min)/(max-min)) * histogram.extent(0);
+    histogram_atomic(index)++;
+  });
+}
+```
+
+## 10.4 ScatterView
+
+On CPUs one often uses low thread counts, in particular if Kokkos is used in conjunction with MPI. 
+In such situations data replication is often a more performance approach, than using atomic operations. 
+In order to still have portable code, one can use the `ScatterView`. It allows the transparent switch at
+compile time from using atomic operations to using data replication depending on the underlying hardware. 
+
+A full description can be found here: [ScatterView](Kokkos%3A%3AScatterView)
+
+
