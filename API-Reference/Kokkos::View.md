@@ -202,6 +202,10 @@ Template parameters other than `DataType` are optional, but ordering is enforced
     ```
     Returns the memory span in elements between the element with the lowest and the highest address. This can be larger than the product of extents due to padding, and or non-contiguous data layout as for example `LayoutStride` allows. 
   * ```c++
+    constexpr size_t size() const
+    ```
+    Returns the product of extents, i.e. the logical number of elements in the view. 
+  * ```c++
     constexpr pointer_type data() const
     ```
     Return the pointer to the underlying data allocation.
@@ -312,4 +316,3 @@ int main(int argc, char* argv[]) {
    Kokkos::finalize();
 }
 ```
-
