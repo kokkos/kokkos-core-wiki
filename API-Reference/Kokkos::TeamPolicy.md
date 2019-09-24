@@ -58,6 +58,27 @@ See also: [TeamMember](Kokkos%3A%3ATeamHandleConcept)
     inline TeamPolicy& set_scratch_size(const int& level, const Impl::PerTeamValue& per_team, const Impl::PerThreadValue& per_thread);
     inline TeamPolicy& set_scratch_size(const int& level, const Impl::PerThreadValue& per_thread, const Impl::PerTeamValue& per_team);
 
+    // querying configuration limits
+    template<class FunctorType>
+    int team_size_max(const FunctorType& f, const ParallelForTag&) const;
+    template<class FunctorType>
+    int team_size_max(const FunctorType& f, const ParallelReduceTag&) const;
+    template<class FunctorType>
+    int team_size_recommended(const FunctorType& f, const ParallelForTag&) const;
+    template<class FunctorType>
+    int team_size_recommended(const FunctorType& f, const ParallelReduceTag&) const;
+    static int vector_length_max(); 
+    static int scratch_size_max(int level); 
+
+    // querying configuration settings
+    int vector_length() const;
+    int team_size() const;
+    int league_size() const;
+    int scratch_size(int level, int team_size_ = -1) const;
+    int team_scratch_size(int level) const;
+    int thread_scratch_size(int level) const;
+    int chunk_size() const;
+
     // return ExecSpace instance provided to the constructor
     KOKKOS_INLINE_FUNCTION const typename traits::execution_space & space() const;
   };
@@ -139,6 +160,87 @@ See also: [TeamMember](Kokkos%3A%3ATeamHandleConcept)
     
     Returns: reference to `*this`
 
+### Query Limits of Runtime Settings
+
+  * ```c++
+    template<class FunctorType>
+    int team_size_max(const FunctorType& f, const ParallelForTag&) const;
+    template<class FunctorType>
+    int team_size_max(const FunctorType& f, const ParallelReduceTag&) const;
+    ```
+    Query the maximum team size possible given a specific functor. 
+    The tag denotes whether this is for a `parallel_for` or a `parallel_reduce`.
+    Note: this is not a static function! The function will take into account settings
+    for vector length and scratch size of `*this`. Using a value larger than the 
+    return value will result in dispatch failure. 
+
+    Returns: The maximum value for `team_size` allowed to be given to be used with an
+    otherwise identical `TeamPolicy` for dispatching the functor `f`.
+    
+  * ```c++
+    template<class FunctorType>
+    int team_size_recommended(const FunctorType& f, const ParallelForTag&) const;
+    template<class FunctorType>
+    int team_size_recommended(const FunctorType& f, const ParallelReduceTag&) const;
+    ```
+    Query the recommended team size for the specific functor `f`. 
+    The tag denotes whether this is for a `parallel_for` or a `parallel_reduce`.
+    Note: this is not a static function! The function will take into account settings
+    for vector length and scratch size of `*this`.
+
+    Returns: The recommended value for `team_size` to be given to be used with an
+    otherwise identical `TeamPolicy` for dispatching the functor `f`.
+
+  * ```c++
+    static int vector_length_max(); 
+    ```
+    Returns: the maximum valid value for vector length.
+
+  * ```c++
+    static int scratch_size_max(int level); 
+    ```
+    Returns: the maximum total scratch size in bytes, for the given level. 
+
+### Query Runtime Settings
+
+  * ```c++
+    int vector_length() const;
+    ```
+    Returns: the requested vector length.
+
+  * ```c++
+    int team_size() const;
+    ```
+    Returns: the requested team size.
+
+  * ```c++
+    int league_size() const;
+    ```
+    Returns: the requested league size.
+
+  * ```c++
+    int scratch_size(int level, int team_size_ = -1) const;
+    ```
+    This function returns the total scratch size requested. If `team_size` is not provided, the 
+    team size for the calculation is used from the internal setting (i.e. the result of calling
+    `this->team_size()`). Otherwise the provided team size is used. 
+ 
+    Returns: the value for the total scratch size size in bytes  in the specified scratch level.
+
+  * ```c++
+    int team_scratch_size(int level) const;
+    ```
+    Returns: the value for the per team scratch size in bytes  in the specified scratch level.
+
+  * ```c++
+    int thread_scratch_size(int level) const;
+    ```
+    Returns: the value for the per thread scratch size in bytes in the specified scratch level.
+
+  * ```c++
+    int chunk_size() const;
+    ```
+    Returns: the chunk size, set via `set_chunk_size()`.
 ## Examples
 
   ```c++
