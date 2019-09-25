@@ -62,7 +62,7 @@ This function will be structured by assuming that the number of elements adjacen
 node has been pre-computed.
 
 ```cpp
-Kokkos::View<double*> sum_to_nodes(Kokkos::View<int**> elements_to_nodes, int number_of_nodes,
+Kokkos::View<double*> average_to_nodes(Kokkos::View<int**> elements_to_nodes, int number_of_nodes,
     Kokkos::View<double*> element_values,
     Kokkos::View<int*> elements_per_node) {
   auto node_values = sum_to_nodes(elements_to_nodes, number_of_nodes, element_values);
