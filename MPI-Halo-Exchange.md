@@ -64,6 +64,8 @@ or redudantly copied, to the (possibly different) MPI rank which owns that eleme
 We can filter out the subset of these elements that are associated with a given owner using
 `Kokkos::parallel_scan` and subsequently pack messages using `Kokkos::parallel_for`.
 
+### Identifying subset indices
+
 For the filter-out step, we simply need to identify which ranks (keys) are the same as some
 known destination, and if they are then we number them consecutively in the order they appear
 (which is a scan operation).
@@ -112,5 +114,22 @@ Kokkos::View<int*> find_subset(Kokkos::View<int*> keys, int desired_key) {
   Kokkos::View<int*> subset_indices("subset indices", subset_size);
   Kokkos::parallel_scan(keys.size(), subset_scanner(keys, desired_key, subset_indices));
   return subset_indices;
+}
+```
+
+### Extracting subset message
+
+Once we are able to produce a list of subset indices (those indices of elements which will be transmitted in one message),
+we can use that list of indices to extract a subset of the simulation data to send.
+Here, let us assume that we have a `Kokkos::View` which stores one floating-point value per element, and we want
+to extract a message containing only the floating-point values for the relevant subset.
+
+```cpp
+Kokkos::View<double*> pack_message(Kokkos::View<double*> all_element_data, Kokkos::View<int*> subset_indices) {
+  Kokkos::View<double*> message("message", subset_indices.size());
+  Kokkos::parallel_for(subset_indices.size(), KOKKOS_LAMBDA(int i) {
+    message[i] = all_element_data[subset_indices[i]];
+  });
+  return message;
 }
 ```
