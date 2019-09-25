@@ -1,4 +1,4 @@
-# Overlapping Host and Device execution With Kokkos Use Case
+# Overlapping Host and Device work 
 
 When using architectures that allow host execution to concur with device execution Kokkos supports 
 overlapping host operations with device operations which can produce significant speedup depending 
