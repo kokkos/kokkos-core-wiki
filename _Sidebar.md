@@ -15,9 +15,9 @@
 12. **[[Interoperability|Interoperability]]**
 13. **[[Kokkos and Virtual Functions|Kokkos and Virtual Functions]]**
 ### **[[Content: Containers|ContentContainers]]**
-1. **[[Dual View|DualView]]**
-2. **[[Dynamic Rank View|DynamicRankView]]**
-3. **[[Dynamic Length View|DynamicLengthView]]**
+1. **[Dual View](Kokkos%3A%3ADualView)**
+2. **[Dynamic Rank View](Kokkos%3A%3ADynRankView)**
+3. **[Dynamic Length View](Kokkos%3A%3ADynamicView)**
 4. **[[Offset View|Offset-View]]**
 5. **[[Unordered Map|Unordered-Map]]**
 ### **[[Content: Algorithms|ContentAlgorithms]]**
@@ -40,11 +40,13 @@
 1. **[[Sort|Sort]]**
 2. **[[Random Number|Random Number]]**
 
-## **[[A Guide to Kokkos Testing Processes]]**
-1. **[[Testing Processes|Testing Processes]]**
-2. **[[Testing Workflow Components|Testing Workflow Components]]**
-3. **[[Kokkos Testing|Kokkos Testing Description]]**
-4. **[[Testing Process Details|Testing Process Details]]**
 
 ## **Use Cases**
 1. **[[MPI Halo Exchange|MPI Halo Exchange]]**
+
+## **[[A Guide to Kokkos Testing and Issue Tracking]]**
+1. **[[Requirement Tracking|Requirements-Issues-and-Feedback]]**
+2. **[[Testing Processes|Testing Processes]]**
+3. **[[Testing Workflow Components|Testing Workflow Components]]**
+4. **[[Kokkos Testing|Kokkos Testing Description]]**
+5. **[[Testing Process Details|Testing Process Details]]**
