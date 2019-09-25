@@ -44,6 +44,10 @@
 ## **Use Cases**
 1. **[[MPI Halo Exchange|MPI Halo Exchange]]**
 2. **[[ScatterView Average To Nodes|Average To Nodes]]**
+3. **[[Tightly nested loops|MDRangePolicy]]**
+4. **[[Using Virtual Functions|VirtualFunctions]]**
+5. **[[Classes and Functors|TaggedOperators]]**
+6. **
 
 ## **[[A Guide to Kokkos Testing and Issue Tracking]]**
 1. **[[Requirement Tracking|Requirements-Issues-and-Feedback]]**
