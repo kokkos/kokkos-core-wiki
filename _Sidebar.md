@@ -43,7 +43,7 @@
 
 ## **Use Cases**
 1. **[[MPI Halo Exchange|MPI Halo Exchange]]**
-2. **[[Average To Nodes|ScatterView Average To Nodes]]**
+2. **[[ScatterView Average To Nodes|Average To Nodes]]**
 
 ## **[[A Guide to Kokkos Testing and Issue Tracking]]**
 1. **[[Requirement Tracking|Requirements-Issues-and-Feedback]]**
