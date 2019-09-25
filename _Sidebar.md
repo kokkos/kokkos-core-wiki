@@ -45,3 +45,6 @@
 2. **[[Testing Workflow Components|Testing Workflow Components]]**
 3. **[[Kokkos Testing|Kokkos Testing Description]]**
 4. **[[Testing Process Details|Testing Process Details]]**
+
+## **Use Cases**
+1. **[[MPI Halo Exchange|MPI Halo Exchange]]**
