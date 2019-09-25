@@ -21,10 +21,10 @@ All functions and classes listed here are part of the `Kokkos::` namespace.
 |[DynRankView](Kokkos%3A%3ADynRankView) | [Containers](API-Containers) | View | A view which can determine its rank at runtime. |
 |[DynamicView](Kokkos%3A%3ADynamicView) | [Containers](API-Containers) | View | A view which can change its size dynamically. |
 |[ErrorReporter](Kokkos%3A%3AErrorReporter) | [Containers](API-Containers) | View | A class supporting error recording in parallel code. |
-|[OffsetView](Kokkos%3A%3AOffsetView) | [Containers](API-Containers) | View | View structure supporting non-zero start indicies. |
+|[OffsetView](Offset-View) | [Containers](API-Containers) | View | View structure supporting non-zero start indicies. |
 |[ScatterView](Kokkos%3A%3AScatterView) | [Containers](API-Containers) | View | View structure to transpartently support atomic and data replication strategies for scatter-reduce algorithms. |
 |[StaticCrsGraph](Kokkos%3A%3AStaticCrsGraph) | [Containers](API-Containers) | View | A non-resizable CRS graph structure with view semantics. |
-|[UnorderedMap](Kokkos%3A%3AUnorderedMap) | [Containers](API-Containers) | View | A map data structure optimized for concurrent inserts. |
+|[UnorderedMap](Unordered-Map) | [Containers](API-Containers) | View | A map data structure optimized for concurrent inserts. |
 |[vector](Kokkos%3A%3Avector) | [Containers](API-Containers) | View | A class providing similar interfaces to `std::vector`. |
 
 

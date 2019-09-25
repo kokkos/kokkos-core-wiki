@@ -100,13 +100,13 @@ Usage:
 ## Public Class Members
 
 ### Typedefs
-    * `original_view_type`: Type of View passed to ScatterView constructor.
-    * `original_value_type`: Value type of the original_view_type.
-    * `original_reference_type`: Reference type of the original_view_type.
-    // ScatterDuplicated only
-    * `data_type_info`: DuplicatedDataType, a newly created DataType that has a new runtime dimension which becomes the largest-stride dimension, from the given View DataType.
-    * `internal_data_type`: Value type of data_type_info.
-    * `internal_view_type`: A View type created from the internal_data_type.
+* `original_view_type`: Type of View passed to ScatterView constructor.
+* `original_value_type`: Value type of the original_view_type.
+* `original_reference_type`: Reference type of the original_view_type.
+// ScatterDuplicated only
+* `data_type_info`: DuplicatedDataType, a newly created DataType that has a new runtime dimension which becomes the largest-stride dimension, from the given View DataType.
+* `internal_data_type`: Value type of data_type_info.
+* `internal_view_type`: A View type created from the internal_data_type.
 
 ### Constructors
 
