@@ -1,4 +1,4 @@
-# MPI Halo Exchange
+## MPI Halo Exchange
 
 Kokkos and MPI are complementary programming models: Kokkos is designed to handle
 parallel programming within a shared-memory space, and MPI is designed to handle parallel programming
@@ -7,7 +7,7 @@ In order to create a fully scalable parallel program, it is often necessary to u
 Kokkos and MPI.
 This Use Case document walks through an example of how MPI and Kokkos can work together.
 
-## Sending a single message
+### Sending a single message
 
 MPI is based around message-passing semantics, and one of the simplest operations in MPI is sending
 a single message.
@@ -36,7 +36,7 @@ if (my_rank == source_rank) {
 }
 ```
 
-## CUDA-Aware MPI
+### CUDA-Aware MPI
 
 One common concern for programmers who are using CUDA GPU parallelism through Kokkos as well as MPI is
 how to use MPI to communicate between two ranks which are each using CUDA parallelism.
@@ -51,7 +51,7 @@ calling CUDA functions to copy the relevant memory from one place to another on 
 or from one GPU to another through PCIe or NVIDIA NVLINK if available.
 As such, the example above continues to work even if `Kokkos::DefaultExecutionSpace` is `Kokkos::Cuda`.
 
-## Separating out messages
+### Separating out messages
 
 There is often a need in unstructured MPI-based codes to determine what subsets of data need to be
 packed into which messages and sent to which other ranks, based on less structured information.
