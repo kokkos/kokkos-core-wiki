@@ -1,4 +1,4 @@
-# Structure of Arrays and Structure of Arrays with Cabana
+# Array of Structures and Structure of Arrays with Cabana
 
 [Cabana](https://github.com/ECP-copa/Cabana) is a MPI+Kokkos performance portable library for particle-based simulations.  It provides particle data structures, algorithms, and utilities to enable simulations on a variety of platforms including many-core architectures and GPUs.
 
