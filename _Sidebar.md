@@ -49,6 +49,7 @@
 5. **[[Classes and Functors|TaggedOperators]]**
 6. **[[Overlapping Host and Device work|OverlappingHostAndDeviceWork]]**
 7. **[[Tasking|Tasking]]**
+8. **[[Fortran Interop|Kokkos Fortran Interoperability]]**
 
 ## **[[A Guide to Kokkos Testing and Issue Tracking]]**
 1. **[[Requirement Tracking|Requirements-Issues-and-Feedback]]**
