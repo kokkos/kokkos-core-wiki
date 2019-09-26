@@ -58,6 +58,30 @@ interface to_nd_array
     module procedure to_nd_array_r64_3d
 ```
 
+To convert an ndarray to a Kokkos::View we us view_from_ndarray defined in [flcl-cxx.hpp](https://github.com/kokkos/kokkos-fortran-interop/blob/master/src/flcl-cxx.hpp)
+``` c++ 
+template <typename DataType>
+  Kokkos::View<DataType, Kokkos::LayoutStride, Kokkos::HostSpace, Kokkos::MemoryUnmanaged>
+  view_from_ndarray(flcl_ndarray_t const &ndarray) 
+```
+
+These are the main utilities that will be used in our DAXPY example. 
+
+We begin with a fortran program defined in [axpy-main.f90](https://github.com/kokkos/kokkos-fortran-interop/blob/master/examples/01-axpy/axpy-main.f90)
+
+We start by bringing in the flcl module: 
+``` fortran
+use :: flcl_mod
+```
+We then define our arrays including two 'Y' arrays one will be used for calculating the daxpy result with fortran, the other with kokkos. 
+``` fortran 
+  real(c_double), dimension(:), allocatable :: f_y
+  real(c_double), dimension(:), allocatable :: c_y
+  real(c_double), dimension(:), allocatable :: x
+  real(c_double) :: alpha
+``` 
+
+
 **Input**:
   `inputData(C,P,D,D)` - a rank 4 View
   `inputField(C,F,P,D)` - a rank 4 View
