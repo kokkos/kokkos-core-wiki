@@ -50,6 +50,7 @@
 6. **[[Overlapping Host and Device work|OverlappingHostAndDeviceWork]]**
 7. **[[Tasking|Tasking]]**
 8. **[[Fortran Interop|Kokkos Fortran Interoperability]]**
+9. **[[SoA and AoSoA with Cabana|SoA and AoSoA with Cabana]]**
 
 ## **[[A Guide to Kokkos Testing and Issue Tracking]]**
 1. **[[Requirement Tracking|Requirements-Issues-and-Feedback]]**
