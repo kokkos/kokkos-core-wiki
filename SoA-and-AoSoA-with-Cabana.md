@@ -35,3 +35,33 @@ MemberTypes<Types...>;
 #### Non-member functions
 `Cabana::get`
 : accesses the specified element of the SoA.
+
+## Array of Structures of Arrays (AoSoA)
+
+### Cabana::AoSoA
+Defined in header [`<Cabana_AoSoA.hpp>`](https://github.com/ECP-copa/Cabana/blob/master/core/src/Cabana_AoSoA.hpp)
+
+```C++
+template <class DataTypes, class DeviceType,
+          int VectorLength = Impl::PerformanceTraits<
+              typename DeviceType::execution_space>::vector_length,
+          class MemoryTraits = Kokkos::MemoryManaged>
+class AoSoA;
+```
+
+#### Template parameters
+`DataTypes`
+: The types of the elements stored in the underlying `Cabana::SoA`s.
+
+`DeviceType`
+: The Kokkos device type that carries the information about where to execute code and where to allocate storage.
+
+`VectorLength`
+: The vector length for the structure of arrays (optional).
+
+`MemoryTraits`
+: The Kokkos memory traits that tells who controls memory allocation and deallocation (optional).
+
+#### Non-member functions
+`slice`
+: accesses the particle data fields.
