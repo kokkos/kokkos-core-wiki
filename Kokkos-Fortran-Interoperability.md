@@ -2,7 +2,7 @@
 
 ## Operations on multi-dimensional fortran allocated arrays using Kokkos 
 
-This example demonstrates usage of the `Fortran Language Compatibility Layer (FLCL)` in the context of performing a simple DAXPY (double precision A * X + Y) using Kokkos from a simple fortran program. Such a use case occurs when using Kokkos for for performance portability within a Fortran application. 
+This example demonstrates usage of the `Fortran Language Compatibility Layer (FLCL)` in the context of performing a DAXPY (double precision A * X + Y) using Kokkos from a simple fortran program. Such a use case occurs when using Kokkos for performance portability within a Fortran application. 
 
 ## Program structure 
 This example uses the Kokkos fortran interop utilities in [FLCL](https://github.com/kokkos/kokkos-fortran-interop). 
