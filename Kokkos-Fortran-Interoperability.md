@@ -5,10 +5,11 @@
 This example demonstrates usage of the `teh Fortran Language Compatibility Layer (FLCL)` in the context of performing a simple DAXPY (double precision A * X + Y) using Kokkos from a simple fortran program. Such a use case occurs when using Kokkos for for performance portability within a Fortran application. 
 
 ## Program structure 
-This example uses the Kokkos fortran interop utilities https://github.com/kokkos/kokkos-fortran-interop. 
+This example uses the Kokkos fortran interop utilities in [FLCL](https://github.com/kokkos/kokkos-fortran-interop). 
 This includes a set of fortran routines for converting fortran allocated arrays into an ndarray and a set of C++ functions for converting an ndarray into a Kokkos unmanaged view. 
 
-The ndarray type (flcl_ndarray_t) is a simple struct that captures the rank, dimensions, strides (equivalent to a dope vector) along with the flattened data. 
+The ndarray type (flcl_ndarray_t) is a simple struct that captures the rank, dimensions, strides (equivalent to a dope vector) along with the flattened data. This is defined and implemented in [flcl-cxx.hpp](https://github.com/kokkos/kokkos-fortran-interop/blob/master/src/flcl-cxx.hpp)
+
 ```c++ 
 
 typedef struct _flcl_nd_array_t {
@@ -19,9 +20,43 @@ typedef struct _flcl_nd_array_t {
 } flcl_ndarray_t;
 
 ```
+This has a fortran equivalent type located in [flcl-f.f90](https://github.com/kokkos/kokkos-fortran-interop/blob/master/src/flcl-f.f90)
 
-The 
+``` fortran
+type, bind(C) :: nd_array_t
+    integer(c_size_t) :: rank
+    integer(c_size_t) :: dims(ND_ARRAY_MAX_RANK)
+    integer(c_size_t) :: strides(ND_ARRAY_MAX_RANK)
+    type(c_ptr) :: data
+  end type nd_array_t
+```
 
+To convert a fortran allocated array into an ndarray we use a set of procedures (behind an interface) defined in [flcl-f.f90](https://github.com/kokkos/kokkos-fortran-interop/blob/master/src/flcl-f.f90)
+
+```fortran
+
+interface to_nd_array
+    ! 1D specializations
+    module procedure to_nd_array_l_1d
+    module procedure to_nd_array_i32_1d
+    module procedure to_nd_array_i64_1d
+    module procedure to_nd_array_r32_1d
+    module procedure to_nd_array_r64_1d
+    
+    ! 2D specializations
+    module procedure to_nd_array_l_2d
+    module procedure to_nd_array_i32_2d
+    module procedure to_nd_array_i64_2d
+    module procedure to_nd_array_r32_2d
+    module procedure to_nd_array_r64_2d
+
+    ! 3D specializations
+    module procedure to_nd_array_l_3d
+    module procedure to_nd_array_i32_3d
+    module procedure to_nd_array_i64_3d
+    module procedure to_nd_array_r32_3d
+    module procedure to_nd_array_r64_3d
+```
 
 **Input**:
   `inputData(C,P,D,D)` - a rank 4 View
