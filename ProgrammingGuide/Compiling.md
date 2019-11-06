@@ -4,20 +4,21 @@
 
 This chapter explains how to compile Kokkos and how to link your application against Kokkos. Kokkos supports two build systems:
 
-*  Using the embedded Makefile
+*  General CMake build system
 *  Trilinos' CMake build system
+*  Embedded GNU Makefile
 
-Note that the two explicitly supported build methods should not be mixed. For example, do not include the embedded Makefile in your application build process, while explicitly linking against a pre-compiled Kokkos library in Trilinos. We also include specific advice for building for NVIDIA GPUs and for Intel Xeon Phi.
+Note that the build methods listed above should not be mixed. For example, do not include the GNU Makefile in your application build process, while explicitly linking against a pre-compiled Kokkos library in Trilinos. We also include specific advice for building for NVIDIA GPUs and for Intel Xeon Phi.
 
 ## 4.1 General Information
 
 Kokkos consists mainly of header files. Only a few functions have to be compiled into object files outside of the application's source code. Those functions are contained in `.cpp` files inside the `kokkos/core/src` directory and its subdirectories. The files are internally protected with macros to prevent compilation if the related execution space is not enabled. Thus, it is not necessary to create a list of included object files specific to your compilation target; one may simply compile all `.cpp` files. The enabled features are controlled via macros which have to be provided in the compilation line or in the `KokkosCore_config.h` include file; a list of macros can be found in Table 4.1. In order to compile Kokkos, a C++11 compliant compiler is needed. For an up to date list of compilers which are tested on a nightly basis, please refer to the README on the github repository. At the time of writing supported compilers include:
 
+***** Still need to update this list *****
     Primary tested compilers on X86
         GCC 4.8.4, 4.9.3, 5.1.0, 5.3.0, 6.1.0;
         Intel 15.0.2, 16.0.1, 16.0.3, 17.0.098, 17.1.132;  
-        Clang 3.6.1, 3.7.1, 3.8.1, 3.9.0;  
-        Cuda 7.0, 7.5, 8.0;
+        Clang 3.6.1, 3.7.1, 3.8.1, 3.9.0;
         PGI 17.10  
     Primary tested compilers on Power 8
         XL 13.1.3 (OpenMP, Serial)
@@ -54,7 +55,7 @@ Kokkos consists mainly of header files. Only a few functions have to be compiled
 `KOKKOS_ENABLE_HWLOC`| Enable thread and memory pinning via hwloc. | Requires linking with `libhwloc`. 
 
 
-## 4.2 Using Kokkos' Makefile system
+## 4.2 Using Kokkos' GNU Makefile system
 
 The base of the build system is the file `Makefile.kokkos`; it is designed to be included by application Makefiles. It contains logic to (re)generate the `KokkosCore_config.h` file if necessary, build the Kokkos library, and provide updated compiler and linker flags. 
 
@@ -73,7 +74,7 @@ More example application Makefiles can be found in the tutorial examples under `
 
 Kokkos provides a script `generate_makefile.bash` which can generate a Makefile for building and installing the library as well as building and running the tests. Please run `generate_makefile.bash --help` to see options. Note that paths given to the script must be absolute paths, and the script must be run with the `bash` shell (the script will do this if it is run directly, i.e., as `./generate_makefile.bash`).
 
-<h4>Table 4.2: Variables for the Embedded Makefile</h4>
+<h4>Table 4.2: Variables for the GNU Makefile</h4>
 
 Variable  | Description
  ---: |:---
