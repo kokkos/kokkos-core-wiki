@@ -4,7 +4,6 @@
 1. **[[Introduction|Introduction]]**
 2. **[[Machine Model|Machine-Model]]**
 3. **[[Programming Model|ProgrammingModel]]**
-4. **[[Build|BUILD]]**
 4. **[[Compiling|Compiling]]**
 5. **[[Initialization|Initialization]]**
 6. **[[View|View]]**
