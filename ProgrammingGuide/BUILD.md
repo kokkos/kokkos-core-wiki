@@ -28,7 +28,16 @@ If compiling with something other than g++, your application should use a compil
 ````
 
 ### Using Kokkos in-tree build
-If building in-tree, there is no `find_package` and you link with `target_link_libraries(kokkos)`.
+If building in-tree, the Kokkos source directory must be within a sub-directory of your application source tree (relative to the location of your application CMakeLists.txt)
+
+To include Kokkos in the application add the following to CMakeLists.txt:
+````
+add_subdirectory(<path to Kokkos dir relative to your CMakeList.txt>)
+include_directories(${Kokkos_INCLUDE_DIRS_RET})
+target_link_libraries(myTarget kokkos)
+```` 
+The include_directories command is necessary to update the application include paths, and the target link libraries command links your executable to the Kokkos library.  It does not require a package name.
+Using this method, the Kokkos options necessary to specify the devices, arch and options must be specified with your application CMake command.  See below for the list of available settings (keywords) 
 
 
 ## Configuring Kokkos with CMake
@@ -40,7 +49,6 @@ cd build
 cmake ${srcdir} \
  -DCMAKE_CXX_COMPILER=g++ \
  -DCMAKE_INSTALL_PREFIX=${my_install_folder} \
- ../
 ````
 which builds and installed a default Kokkos when you run `make install`.
 There are numerous device backends, options, and architecture-specific optimizations that can be configured, e.g.
@@ -50,7 +58,18 @@ cmake ${srcdir} \
  -DCMAKE_INSTALL_PREFIX=${my_install_folder} \
  -DKokkos_ENABLE_OPENMP=On
 ````
-which activates the OpenMP backend. All of the options controlling device backends, options, architectures, and third-party libraries (TPLs) are given below.
+which activates the OpenMP backend. All of the options controlling device backends, options, architectures, and third-party libraries (TPLs) are given below under the keywords listing.
+
+### Using cm_generate_makefile.bash
+An alternative to calling the cmake command directly, the cm_generate_makefile.bash command can be used to configure the cmake build environment.  The cm_generate_makefile.bash equivalent to the above OpenMP example is as follows:
+
+````
+${srcdir}/cm_generate_makefile.bash --compiler=g++ --with-openmp --prefix=${my_install_folder}
+````
+For a full list of cm_generate_makefile.bash options use the command 
+````
+${srcdir}/cm_generate_makefile.bash --help
+````
 
 ## Spack
 An alternative to manually building with the CMake is to use the Spack package manager.
