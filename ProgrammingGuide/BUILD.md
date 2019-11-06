@@ -22,7 +22,7 @@ The target_link_libraries command will find and include all of the necessary pre
 ````
 -DKokkos_ROOT=<Kokkos Install Directory>/lib64/cmake/Kokkos
 ````
-If compiling with something other that g++, your application should use a consistent compiler to that used to build the Kokkos package.  This is especially true with using nvcc_wrapper.
+If compiling with something other that g++, your application should use a compiler which is consistent to that used to build the Kokkos package.  This is especially true when using nvcc_wrapper.
 ````
 -DCMAKE_CXX_COMPILER=<Kokkos Install Directory>/bin/nvcc_wrapper
 ````
