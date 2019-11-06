@@ -2,7 +2,7 @@
 
 # Compiling
 
-This chapter explains how to compile Kokkos and how to link your application against Kokkos. Kokkos supports two build systems:
+This chapter explains how to compile Kokkos and how to link your application against Kokkos. Kokkos supports three methods to build:
 
 *  General CMake build system
 *  Trilinos' CMake build system
@@ -12,37 +12,32 @@ Note that the build methods listed above should not be mixed. For example, do no
 
 ## 4.1 General Information
 
-Kokkos consists mainly of header files. Only a few functions have to be compiled into object files outside of the application's source code. Those functions are contained in `.cpp` files inside the `kokkos/core/src` directory and its subdirectories. The files are internally protected with macros to prevent compilation if the related execution space is not enabled. Thus, it is not necessary to create a list of included object files specific to your compilation target; one may simply compile all `.cpp` files. The enabled features are controlled via macros which have to be provided in the compilation line or in the `KokkosCore_config.h` include file; a list of macros can be found in Table 4.1. In order to compile Kokkos, a C++11 compliant compiler is needed. For an up to date list of compilers which are tested on a nightly basis, please refer to the README on the github repository. At the time of writing supported compilers include:
+Kokkos consists mainly of header files. Only a few functions have to be compiled into object files outside of the application's source code. Those functions are contained in `.cpp` files inside the `kokkos/core/src` directory and its subdirectories. The files are internally protected with macros to prevent compilation if the related execution space is not enabled. Thus, it is not necessary to create a list of included object files specific to your compilation target; one may simply compile all `.cpp` files. The enabled features are controlled via macros which have to be provided in the compilation line or in the `KokkosCore_config.h` include file; a list of macros can be found in Table 4.1. 
 
-***** Still need to update this list *****
+In order to compile Kokkos, a C++11 compliant compiler is needed. For an up to date list of compilers which are tested on a nightly basis, please refer to the README on the github repository. At the time of writing supported compilers include:
+
+```
     Primary tested compilers on X86
-        GCC 4.8.4, 4.9.3, 5.1.0, 5.3.0, 6.1.0;
-        Intel 15.0.2, 16.0.1, 16.0.3, 17.0.098, 17.1.132;  
-        Clang 3.6.1, 3.7.1, 3.8.1, 3.9.0;
+        GCC 4.8.4, 4.9.3, 5.3.0, 6.1.0
+        Intel 15.0.2, 16.0.1, 16.0.3, 17.0.1, 17.1.132, 18.1.63
+        Clang 3.7.1, 3.8.1, 3.9.0, 6.0, 7.0
+        Cuda 9.0.69 (Clang 6.0)
+        Cuda 9.1 (gcc 5.3.0, Clang 7.0/gcc 6.1.0)
+        Cuda 9.2 (gcc 6.1.0)
+        Cuda 10.0 (gcc 5.3.0, Clang 8.0)
+        Cuda 10.1 (gcc 7.3.0)
         PGI 17.10  
     Primary tested compilers on Power 8
-        XL 13.1.3 (OpenMP, Serial)
-        GCC 5.4.0 (OpenMP, Serial)
-        Cuda 8.0, 9.0 (with gcc 5.4.0);
+        Intel 16.1.0 (OpenMP, Serial)
+        GCC 5.4.0, 6.4.0 (OpenMP, Serial)
+        Cuda 9.2 (with gcc 7.2.0)
+        Cuda 10.0 (with gcc 7.4.0)
     Primary tested compilers on Intel KNL
-        GCC 6.2.0
-        Intel 16.4.258 (with gcc 4.7.4)
+        GCC 6.2.0, 7.1.0
         Intel 17.2.174 (with gcc 4.9.3)
         Intel 18.0.128 (with gcc 4.9.3)
     
-    Secondary tested compilers
-        CUDA 7.0, 7.5 (with gcc 4.8.4)
-        CUDA 8.0 (with gcc 5.3.0 on X86)
-        CUDA 8.0 (with gcc 5.4.0 on Power8)
-        Clang 4.0 (with CUDA 8.0, using Clang as the CUDA compiler, requires 384.x CUDA drivers)
-    
-    Other working compilers
-        Cygwin 2.1.0 64bit (with gcc 4.9.3 on X86)
-
-    Known non-working combinations
-        Pthreads backend (on Power 8)
-
-
+```
 <h4>Table 4.1: Configuration Macros (KokkosCore_config.h)</h4>
   
  Macro | Effect | Comment
