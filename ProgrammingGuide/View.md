@@ -536,10 +536,10 @@ The `RandomAccess` trait declares the intent to access a View irregularly (in pa
 const size_t N0 = ...;
 Kokkos::View<int*> a_nonconst ("a", N0); // allocate nonconst View
 // Assign to const, RandomAccess View
-Kokkos::View<const int*, Kokkos::RandomAccess> a_ra = a_nonconst;
+Kokkos::View<const int*, Kokkos::MemoryTraits<Kokkos::RandomAccess>> a_ra = a_nonconst;
 ```
 
-If the default execution space is `Cuda`, access to a `RandomAccess` View may use CUDA texture fetches. Texture fetches are not cache coherent with respect to writes so you must use read-only access. The texture cache is optimized for noncontiguous access since it has a shorter cache line than the regular cache.
+If the default execution space is `Cuda`, access to a `RandomAccess` View may use CUDA texture fetches. Texture fetches are not cache-coherent with respect to writes so you must use read-only access. The texture cache is optimized for noncontiguous access since it has a shorter cache line than the regular cache.
 
 While `RandomAccess` is valid for other execution spaces, currently no specific optimizations are performed. But in the future a view allocated with the `RandomAccess` attribute might for example, use a larger page size, and thus reduce page faults in the memory system.
 
@@ -557,7 +557,7 @@ void spmatvec (const Kokkos::View<double*>& y,
       const Kokkos::View<const double*>& x)
 {
   // Access to x has less locality than access to y.
-  Kokkos::View<const double*, Kokkos::RandomAccess> x_ra = x;
+  Kokkos::View<const double*, Kokkos::MemoryTraits<Kokkos::RandomAccess>> x_ra = x;
   typedef Kokkos::View<const size_t*>::size_type size_type;
     
   Kokkos::parallel_for (y.extent_0 (), KOKKOS_LAMBDA (const size_type i) {
