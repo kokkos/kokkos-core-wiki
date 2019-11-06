@@ -111,10 +111,11 @@ cmake ${srcdir} \
 which activates the OpenMP backend. All of the options controlling device backends, options, architectures, and third-party libraries (TPLs) are given below under the keywords listing.
 
 ### Using cm_generate_makefile.bash
-An alternative to calling the cmake command directly, the cm_generate_makefile.bash command can be used to configure the cmake build environment.  The cm_generate_makefile.bash equivalent to the above OpenMP example is as follows:
+As an alternative to calling the cmake command directly, the cm_generate_makefile.bash command can be used to configure the CMake build environment.  The cm_generate_makefile.bash equivalent to the above OpenMP example is as follows:
 
 ````
-${srcdir}/cm_generate_makefile.bash --compiler=g++ --with-openmp --prefix=${my_install_folder}
+${srcdir}/cm_generate_makefile.bash --compiler=g++ \
+  --with-openmp --prefix=${my_install_folder}
 ````
 For a full list of cm_generate_makefile.bash options use the command 
 ````
