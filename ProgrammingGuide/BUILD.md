@@ -9,7 +9,7 @@ for C++.  Applications heavily leveraging Kokkos are strongly encouraged to use 
 
 You can either use Kokkos as an installed package (encouraged) or use Kokkos in-tree included in your project.
 
-**Using Kokkos installed Package**
+### Using Kokkos installed Package
 With the Kokkos package installed, you build and link with the Kokkos library using CMake by adding the following to you your `CMakeLists.txt`:
 ````
 find_package(Kokkos REQUIRED)
@@ -27,7 +27,7 @@ If compiling with something other than g++, your application should use a compil
 -DCMAKE_CXX_COMPILER=<Kokkos Install Directory>/bin/nvcc_wrapper
 ````
 
-**Using Kokkos in-tree build**
+###Using Kokkos in-tree build
 If building in-tree, there is no `find_package` and you link with `target_link_libraries(kokkos)`.
 
 
