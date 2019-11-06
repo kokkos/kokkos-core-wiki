@@ -181,9 +181,9 @@ if (Spack_WORKAROUND)
 endif()
 ````
 
-### Kokkos Keyword Listing
+### Kokkos CMake Keyword Listing
 Note that with version 3.0 all Kokkos CMake keywords are prexed with `Kokkos_` which is case sensitive.  
-### Device Backends
+#### Device Backends
 Device backends can be enabled by specifiying `-DKokkos_ENABLE_X`.
 
 * Kokkos_ENABLE_CUDA
@@ -202,7 +202,7 @@ Device backends can be enabled by specifiying `-DKokkos_ENABLE_X`.
     * Whether to build serial  backend
     * BOOL Default: ON
 
-### Enable Options
+#### Enable Options
 Options can be enabled by specifiying `-DKokkos_ENABLE_X`.
 
 * Kokkos_ENABLE_AGGRESSIVE_VECTORIZATION
@@ -257,12 +257,12 @@ Options can be enabled by specifiying `-DKokkos_ENABLE_X`.
     * Whether to build serial  backend
     * BOOL Default: OFF
 
-### Other Options
+#### Other Options
 * Kokkos_CXX_STANDARD
     * The C++ standard for Kokkos to use: c++11, c++14, c++17, or c++20. This should be given in CMake style as 11, 14, 17, or 20.
     * STRING Default: 11
 
-### Third-party Libraries (TPLs)
+#### Third-party Libraries (TPLs)
 The following options control enabling TPLs:
 * Kokkos_ENABLE_HPX
     * Whether to enable the HPX library
@@ -308,7 +308,7 @@ The following options control `find_package` paths for CMake-based TPLs:
     * Location of HPX prefix (ROOT) or CMake config file (DIR)
     * PATH Default:
 
-### Architecture Keywords
+#### Architecture Keywords
 Architecture-specific optimizations can be enabled by specifiying `-DKokkos_ARCH_X`.
 
 * Kokkos_ARCH_AMDAVX
