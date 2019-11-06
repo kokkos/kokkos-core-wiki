@@ -3,13 +3,14 @@
 # Installing and Using Kokkos
 
 ## Kokkos Philosophy
-Kokkos provides a modern CMake style build system.
+Kokkos provides a CMake style build system.
 As C++ continues to develop for C++20 and beyond, CMake is likely to provide the most robust support
 for C++.  Applications heavily leveraging Kokkos are strongly encouraged to use a CMake build system.
 
-You can either use Kokkos as an installed package (encouraged) or use Kokkos in-tree in your project.
-Modern CMake is exceedingly simple at a high-level (with the devil in the details).
-Once Kokkos is installed In your `CMakeLists.txt` simply use:
+You can either use Kokkos as an installed package (encouraged) or use Kokkos in-tree included in your project.
+
+**Using Kokkos installed Package**
+With the Kokkos package installed, you build and link with the Kokkos library using CMake by adding the following to you your `CMakeLists.txt`:
 ````
 find_package(Kokkos REQUIRED)
 ````
@@ -17,18 +18,29 @@ Then for every executable or library in your project:
 ````
 target_link_libraries(myTarget Kokkos::kokkos)
 ````
-That's it! There is no checking Kokkos preprocessor, compiler, or linker flags.
-Kokkos propagates all the necesssary flags to your project.
-This means not only is linking to Kokkos easy, but Kokkos itself can actually configure compiler and linker flags for *your*
-project. If building in-tree, there is no `find_package` and you link with `target_link_libraries(kokkos)`.
-
-
-## Configuring CMake
-A very basic installation is done with:
+The target_link_libraries command will find and include all of the necessary pre-processor, compiler, and linker flags that are required for an application using Kokkos.  When running CMake for your project you will need to specify the directory containing the Kokkos package:  
 ````
+-DKokkos_ROOT=<Kokkos Install Directory>/lib64/cmake/Kokkos
+````
+If compiling with something other that g++, your application should use a consistent compiler to that used to build the Kokkos package.  This is especially true with using nvcc_wrapper.
+````
+-DCMAKE_CXX_COMPILER=<Kokkos Install Directory>/bin/nvcc_wrapper
+````
+
+**Using Kokkos in-tree build**
+If building in-tree, there is no `find_package` and you link with `target_link_libraries(kokkos)`.
+
+
+## Configuring Kokkos with CMake
+A very basic installation is done with:
+
+````
+mkdir build
+cd build
 cmake ${srcdir} \
  -DCMAKE_CXX_COMPILER=g++ \
- -DCMAKE_INSTALL_PREFIX=${my_install_folder}
+ -DCMAKE_INSTALL_PREFIX=${my_install_folder} \
+ ../
 ````
 which builds and installed a default Kokkos when you run `make install`.
 There are numerous device backends, options, and architecture-specific optimizations that can be configured, e.g.
@@ -101,7 +113,7 @@ endif()
 ````
 
 # Kokkos Keyword Listing
-
+Note that with version 3.0 all Kokkos CMake keywords are prexed with `Kokkos_` which is case sensitive.  
 ## Device Backends
 Device backends can be enabled by specifiying `-DKokkos_ENABLE_X`.
 
