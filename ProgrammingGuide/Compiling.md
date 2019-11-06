@@ -55,7 +55,7 @@ In order to compile Kokkos, a C++11 compliant compiler is needed. For an up to d
 
 Kokkos provides a CMake style build system.
 As C++ continues to develop for C++20 and beyond, CMake is likely to provide the most robust support
-for C++.  Applications heavily leveraging Kokkos are strongly encouraged to use a CMake build system.
+for C++.  Applications heavily leveraging Kokkos are strongly encouraged to use a CMake build system.  Kokkos requires CMake version 3.10 and above.
 
 You can either use Kokkos as an installed package (encouraged) or use Kokkos in-tree included in your project.
 
@@ -407,7 +407,7 @@ Architecture-specific optimizations can be enabled by specifiying `-DKokkos_ARCH
 
 The Trilinos project (see `trilinos.org`) is an effort to develop algorithms and enabling technologies within an object-oriented software framework for the solution of large-scale, complex multiphysics engineering and scientific problems. Trilinos is organized into packages. Even though Kokkos is a stand-alone software project, Trilinos uses Kokkos extensively. Thus, Trilinos' source code includes Kokkos' source code, and builds Kokkos as part of its build process.
 
-Trilinos' build system uses CMake. Thus, in order to build Kokkos as part of Trilinos, you must first install CMake (version `2.8.12` or newer; CMake `3.x` works). To enable Kokkos when building Trilinos, set the CMake option `Trilinos_ENABLE_Kokkos`. Trilinos' build system lets packages express dependencies on other packages or external libraries. If you enable any Trilinos package (e.g., Tpetra) that has a required dependency on Kokkos, Trilinos will enable Kokkos automatically. Configuration macros are automatically inferred from Trilinos settings. For example, if the CMake option `Trilinos_ENABLE_OpenMP` is `ON`, Trilinos will define the macro `Kokkos_ENABLE_OPENMP`. Trilinos' build system will autogenerate the previously mentioned `KokkosCore_config.h` file that contains those macros.
+Trilinos' build system uses CMake. Thus, in order to build Kokkos as part of Trilinos, you must first install CMake (version `3.10` or newer). To enable Kokkos when building Trilinos, set the CMake option `Trilinos_ENABLE_Kokkos`. Trilinos' build system lets packages express dependencies on other packages or external libraries. If you enable any Trilinos package (e.g., Tpetra) that has a required dependency on Kokkos, Trilinos will enable Kokkos automatically. Configuration macros are automatically inferred from Trilinos settings. For example, if the CMake option `Trilinos_ENABLE_OpenMP` is `ON`, Trilinos will define the macro `Kokkos_ENABLE_OPENMP`. Trilinos' build system will autogenerate the previously mentioned `KokkosCore_config.h` file that contains those macros.
 
 Trilinos' CMake build system utilizes Kokkos' build system to set compiler flags, compiler options, architectures, etc. CMake variables `CMAKE_CXX_COMPILER`, `CMAKE_C_COMPILER`, and `CMAKE_FORTRAN_COMPILER` are used to specify the compiler. To configure Trilinos for various archictures, with Kokkos enabled, the CMake variable `Kokkos_ARCH` should be set to the appropriate architecture as specified in the Table 4.3.
 
