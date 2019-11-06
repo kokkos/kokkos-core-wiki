@@ -27,7 +27,7 @@ If compiling with something other than g++, your application should use a compil
 -DCMAKE_CXX_COMPILER=<Kokkos Install Directory>/bin/nvcc_wrapper
 ````
 
-###Using Kokkos in-tree build
+### Using Kokkos in-tree build
 If building in-tree, there is no `find_package` and you link with `target_link_libraries(kokkos)`.
 
 
