@@ -77,6 +77,14 @@ If compiling with something other than g++, your application should use a compil
 -DCMAKE_CXX_COMPILER=<Kokkos Install Directory>/bin/nvcc_wrapper
 ````
 
+**Important note** 
+With Kokkos release 3.0 the externally defined CMAKE_CXX_FLAGS are not propagated to projects that include the kokkos package.  This limitation is especially important when using Clang compilers with gcc and cuda.  The Clang options that are provided via the CMAKE_CXX_FLAGS with the Kokkos project are illustrated below.
+
+```
+--gcc-toolchain=<path to gcc source tree>
+--cuda-path=<path to cuda source>
+``` 
+
 ### Using Kokkos in-tree build
 If building in-tree, the Kokkos source directory must be within a sub-directory of your application source tree (relative to the location of your application CMakeLists.txt)
 
