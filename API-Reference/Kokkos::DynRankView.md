@@ -131,7 +131,7 @@ Template parameters other than `DataType` are optional, but ordering is enforced
     See notes on `reference_type` for properties of the return type. 
 
   * ```c++
-    reference_type access (const IntType& i0=0, ... , const IntType& i7=0) const
+    reference_type access (const IntType& i0=0, ... , const IntType& i6=0) const
     ```
     Returns a value of `reference_type` which may or not be referenceable itself. The number of index arguments must be equal or larger than the `rank` of the view.
     Index arguments beyond `rank` must be `0`, which will be enforced if `KOKKOS_DEBUG` is defined. 
