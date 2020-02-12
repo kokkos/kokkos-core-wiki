@@ -49,8 +49,8 @@ Argument | Description
 --kokkos-help     | print this message
 --kokkos-threads  | specify total number of threads or number of threads per NUMA region if used in conjunction with `--numa` option.
 --kokkos-numa=INT | specify number of NUMA regions used by process. 
---kokkos-device=INT | specify device id to be used by Kokkos. 
---kokkos-ndevices=INT[,INT] | used when running MPI jobs. Specify number of devices per node to be used. Process to device mapping happens by obtaining the local MPI rank and assigning devices round-robin. The optional second argument allows for an existing device to be ignored. This is most useful on workstations with multiple GPUs, one of which is used to drive screen output.
+--kokkos-device-id=INT | specify device id to be used by Kokkos. 
+--kokkos-num-devices=INT[,INT] | used when running MPI jobs. Specify number of devices per node to be used. Process to device mapping happens by obtaining the local MPI rank and assigning devices round-robin. The optional second argument allows for an existing device to be ignored. This is most useful on workstations with multiple GPUs, one of which is used to drive screen output.
 
 
 ***
