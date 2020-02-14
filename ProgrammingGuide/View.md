@@ -299,7 +299,7 @@ Kokkos::View<int***> a ("a", N0, N1, N2);
     
 int dim1 = a.extent (1); // returns dimension 1
 size_t strides[3]
-a.strides (dims); // fill 'strides' with strides
+a.strides (strides); // fill 'strides' with strides
 ```
 
 You may also refer to specific dimensions without a runtime parameter:
