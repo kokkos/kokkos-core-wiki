@@ -241,7 +241,7 @@ Template parameters other than `DataType` are optional, but ordering is enforced
   * ```c++
     void assign_data(pointer_type arg_data);
     ```
-    decrement reference count of previously assigned data and set the underlying pointer to arg_data.  Note that the effective result of this operation is that the view is now an unmanaged view; thus, the deallocation of arg_data is not linked in anyway to the deallocation of the target view. 
+    Decrement reference count of previously assigned data and set the underlying pointer to arg_data.  Note that the effective result of this operation is that the view is now an unmanaged view; thus, the deallocation of arg_data is not linked in anyway to the deallocation of the target view. 
 
 
 ## Assignment Rules
