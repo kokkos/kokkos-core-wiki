@@ -224,14 +224,25 @@ Template parameters other than `DataType` are optional, but ordering is enforced
   
 ### Other
   * ```c++
-    int use_count() const
+    int use_count() const;
     ```
     Returns the current reference count of the underlying allocation.
 
   * ```c++
-    const char* label() const
+    const char* label() const;
     ```
     Returns the label of the View. 
+
+  * ```c++
+    const bool is_assignable(const View<DT, Prop...>& rhs);
+    ```
+    Returns true if the View can be assigned to rhs.  See below for assignment rules. 
+
+  * ```c++
+    void assign_data(pointer_type arg_data);
+    ```
+    decrement reference count of previously assigned data and set the underlying pointer to arg_data.  Note that the effective result of this operation is that the view is now an unmanaged view; thus, the deallocation of arg_data is not linked in anyway to the deallocation of the target view. 
+
 
 ## Assignment Rules
 
