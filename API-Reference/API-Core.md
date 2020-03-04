@@ -1,7 +1,7 @@
 ### 1. **[[Initialization|Initialization-API]]**
 Initialization and finalization of Kokkos. 
 ### 2. **[[View|API-View]]**
-Kokkos MultiDimensional View class and related free fucntions. 
+Kokkos MultiDimensional View class and related free functions. 
 ### 3. **[[Data Parallelism|Data-Parallelism]]**
 Parallel Execution Dispatch.
 ### 4. **[[Execution Policies|Execution-Policies]]**
