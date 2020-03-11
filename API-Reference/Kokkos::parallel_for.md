@@ -49,7 +49,7 @@ Kokkos::parallel_for(const ExecPolicy& policy,
 ## Semantics
 
 * Neither concurrency nor order of execution of iterations are guaranteed.
-* The call is potentially asynchronous. To guarantee a kernel has finished, a developer should call fence on the execution space on which the kernel is run
+* The call is potentially asynchronous. To guarantee a kernel has finished, a developer should call fence on the execution space on which the kernel is run.
 
 ## Examples
 
