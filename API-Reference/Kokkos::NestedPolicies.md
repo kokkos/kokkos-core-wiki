@@ -1,5 +1,6 @@
 # `Kokkos::TeamThreadRange`
 # `Kokkos::ThreadVectorRange`
+# `Kokkos::TeamVectorRange`
 # `Kokkos::PerTeam`
 # `Kokkos::PerThread`
 
