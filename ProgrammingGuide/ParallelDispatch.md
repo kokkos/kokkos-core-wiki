@@ -271,14 +271,14 @@ When writing class-based applications it often is useful to make the classes the
       }
     
      KOKKOS_INLINE_FUNCTION
-      void operator() (const BarTag&, const int& i) const {
+      void operator() (const BarTag&, const int i) const {
         ...
         foobar();
         ...
       }
     
       KOKKOS_INLINE_FUNCTION
-      void operator() (const RabTag&, const int& i) const {
+      void operator() (const RabTag&, const int i) const {
         ...
         foobar();
         ...
