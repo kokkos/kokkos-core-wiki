@@ -58,9 +58,9 @@ All functions and classes listed here are part of the `Kokkos::` namespace.
 |[LayoutLeft](Kokkos%3A%3ALayoutLeft) | [Core](API-Core) | [Views](Views) | Memory Layout matching Fortran |
 |[LayoutRight](Kokkos%3A%3ALayoutRight) | [Core](API-Core) | [Views](Views) | Memory Layout matching C |
 |[LayoutStride](Kokkos%3A%3ALayoutStride) | [Core](API-Core) | [Views](Views) | Memory Layout for arbitrary strides |
-|[kokkos_free](Kokkos%3A%3Akokkos_free) | [Core](API-Core) | (TBD) | Dellocates previously allocated memory |
-|[kokkos_malloc](Kokkos%3A%3Akokkos_malloc) | [Core](API-Core) | (TBD) | Allocates memory |
-|[kokkos_realloc](Kokkos%3A%3Akokkos_realloc) | [Core](API-Core) | (TBD) | Expands previously allocated memory block |
+|[kokkos_free](Kokkos%3A%3Akokkos_free) | [Core](API-Core) | [Spaces](Spaces) | Dellocates previously allocated memory |
+|[kokkos_malloc](Kokkos%3A%3Akokkos_malloc) | [Core](API-Core) | [Spaces](Spaces) | Allocates memory |
+|[kokkos_realloc](Kokkos%3A%3Akokkos_realloc) | [Core](API-Core) | [Spaces](Spaces) | Expands previously allocated memory block |
 |[LAnd](Kokkos%3A%3ALAnd) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism) | Reducer for Logical 'And' reduction |
 |[LOr](Kokkos%3A%3ALOr) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism) | Reducer for Logical 'Or' reduction |
 |[Max](Kokkos%3A%3AMax) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism) | Reducer for Maximum reduction |
