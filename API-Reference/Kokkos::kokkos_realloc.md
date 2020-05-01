@@ -7,7 +7,7 @@ template <class MemorySpace = typename Kokkos::DefaultExecutionSpace::memory_spa
 void* kokkos_realloc(void* ptr, size_t new_size);
 ```
 
-Reallocates the given area of memory. It must be previously allocated by `Kokkos::kokkos_malloc()` or `Kokkos::realloc()` and not yet freed with `Kokkos::kokkos_free()`, otherwise, the results are undefined.
+Reallocates the given area of memory. It must be previously allocated by [`Kokkos::kokkos_malloc()`](Kokkos%3A%3Akokkos_malloc) or [`Kokkos::kokkos_realloc()`](Kokkos%3A%3Akokkos_realloc) and not yet freed with [`Kokkos::kokkos_free()`](Kokkos%3A%3Akokkos_free), otherwise, the results are undefined.
 
 ## Parameters
 

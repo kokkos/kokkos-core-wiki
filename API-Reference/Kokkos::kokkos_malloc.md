@@ -28,6 +28,6 @@ If allocation succeeds, returns a pointer to the lowest (first) byte in the allo
 ## Return value
 
 On success, returns the pointer to the beginning of newly allocated memory.
-To avoid a memory leak, the returned pointer must be deallocated with `Kokkos::kokkos_free()` or `Kokkos::realloc()`.
+To avoid a memory leak, the returned pointer must be deallocated with [`Kokkos::kokkos_free()`](Kokkos%3A%3Akokkos_free) or [`Kokkos::realloc()`](Kokkos%3A%3Akokkos_realloc).
 
 On failure, returns a null pointer.
