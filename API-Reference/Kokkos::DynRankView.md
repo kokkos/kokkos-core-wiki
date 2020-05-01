@@ -4,9 +4,9 @@ Header File: `Kokkos_DynRankView.hpp`
 
 Usage: 
 
-Kokkos DynRankView is a potentially reference counted multi dimensional array with compile time layouts and memory space.
+`DynRankView` is a potentially reference counted multi dimensional array with compile time layouts and memory space.
 Its semantics are similar to that of `std::shared_ptr`.
-The DynRankView differs from the View in that its rank is not provided with the DataType template parameter; it is determined dynamically based on the number of extent arguments passed to the constructor. The rank has an upper bound of 7 dimensions.
+The `DynRankView` differs from the [[View|Kokkos::View]] in that its rank is not provided with the `DataType` template parameter; it is determined dynamically based on the number of extent arguments passed to the constructor. The rank has an upper bound of 7 dimensions.
 
 ## Interface
 
@@ -20,16 +20,16 @@ class DynRankView;
 Template parameters other than `DataType` are optional, but ordering is enforced. That means for example that `LayoutType` can be omitted but if both `MemorySpace` and `MemoryTraits` are specified, `MemorySpace` must come before `MemoryTraits`.
   
   * `DataType`: Defines the fundamental scalar type of the `DynRankView`. The basic structure is `ScalarType`. Examples:
-    * `double`: A DynRankView of `double` - dimensions are passed as arguments to the constructor, the number of which determine the rank.
-  * `LayoutType`: determines the mapping of indices into the underlying 1D memory storage. Custom Layouts can be implemented, but Kokkos comes with some built-in ones: 
-    * `LayoutRight`: strides increase from the right most to the left most dimension. The last dimension has a stride of one. This corresponds to how C multi dimensional arrays (`[][][]`) are laid out in memory. 
-    * `LayoutLeft`: strides increase from the left most to the right most dimension. The first dimension has a stride of one. This is the layout Fortran uses for its arrays. 
-    * `LayoutStride`: strides can be arbitrary for each dimension. 
-  * `MemorySpace`: Controls the storage location. If omitted the default memory space of the default execution space is used (i.e. `Kokkos::DefaultExecutionSpace::memory_space`)
-  * `MemoryTraits`: Sets access properties via enum parameters for the templated `Kokkos::MemoryTraits<>` class. Enums can be combined bit combined. Posible values:
+    * `double`: a `DynRankView` of `double`, dimensions are passed as arguments to the constructor, the number of which determine the rank.
+  * `LayoutType`: Determines the mapping of indices into the underlying 1D memory storage. Custom Layouts can be implemented, but Kokkos comes with some built-in ones: 
+    * `LayoutRight`: Strides increase from the right most to the left most dimension. The last dimension has a stride of one. This corresponds to how C multi dimensional arrays (`[][][]`) are laid out in memory. 
+    * `LayoutLeft`: Strides increase from the left most to the right most dimension. The first dimension has a stride of one. This is the layout Fortran uses for its arrays. 
+    * `LayoutStride`: Strides can be arbitrary for each dimension. 
+  * `MemorySpace`: Controls the storage location. If omitted, the default memory space of the default execution space is used (i.e. `Kokkos::DefaultExecutionSpace::memory_space`)
+  * [[`MemoryTraits`|Kokkos::MemoryTraits]]: Sets access properties via enum parameters for the templated `Kokkos::MemoryTraits<>` class. Enums can be bit combined. Possible values:
     * `Unmanaged`: The DynRankView will not be reference counted. The allocation has to be provided to the constructor.
     * `Atomic`: All accesses to the view will use atomic operations. 
-    * `RandomAccess`: Hint that the view is used in a random access manner. If the view is also `const` this will trigger special load operations on GPUs (i.e. texture fetches).
+    * `RandomAccess`: Hint that the view is used in a random access manner. If the view is also `const`, this will trigger special load operations on GPUs (i.e. texture fetches).
     * `Restrict`: There is no aliasing of the view by other data structures in the current scope. 
 
 ### Requirements:
@@ -47,29 +47,25 @@ Template parameters other than `DataType` are optional, but ordering is enforced
 
 #### Data Types
 
- *  `data_type`: The `DataType` of the DynRankView.
- *  `const_data_type`: Const version of `DataType`, same as `data_type` if that is already const.
- *  `non_const_data_type`: Non-const version of `DataType`, same as `data_type` if that is already non-const.
+ *  `data_type`: the `DataType` of the DynRankView.
+ *  `const_data_type`: const version of `DataType`, same as `data_type` if that is already const.
+ *  `non_const_data_type`: non-const version of `DataType`, same as `data_type` if that is already non-const.
 
  *  `scalar_array_type`: If `DataType` represents some properly specialised array data type such as Sacado FAD types, `scalar_array_type` is the underlying fundamental scalar type.
- *  `const_scalar_array_type`: Const version of `scalar_array_type`, same as `scalar_array_type` if that is already const
- *  `non_const_scalar_array_type`: Non-Const version of `scalar_array_type`, same as `scalar_array_type` if that is already non-const.
+ *  `const_scalar_array_type`: const version of `scalar_array_type`, same as `scalar_array_type` if that is already const
+ *  `non_const_scalar_array_type`: non-Const version of `scalar_array_type`, same as `scalar_array_type` if that is already non-const.
 
 #### Scalar Types
- *  `value_type`: The `data_type` stripped of its array specifiers, i.e. the scalar type of the data the view is referencing (e.g. if `data_type` is `const int*******`, `value_type` is `const int`.
+ *  `value_type`: the `data_type` stripped of its array specifiers, i.e. the scalar type of the data the view is referencing (e.g. if `data_type` is `const int*******`, `value_type` is `const int`.
  *  `const_value_type`: const version of `value_type`.
  *  `non_const_value_type`: non-const version of `value_type`.
-  
-
 
 #### Spaces
- *  `execution_space`: Execution Space associated with the view, will be used for performing view initialization, and certain deep_copy operations.
- *  `memory_space`: Data storage location type. 
+ *  `execution_space`: execution space associated with the view, will be used for performing view initialization, and certain deep_copy operations.
+ *  `memory_space`: data storage location type. 
  *  `device_type`: the compound type defined by `Device<execution_space,memory_space>`
- *  `memory_traits`: The memory traits of the view. 
- *  `host_mirror_space`: Host accessible memory space used in `HostMirror`.
-
-
+ *  `memory_traits`: the memory traits of the view. 
+ *  `host_mirror_space`: host accessible memory space used in `HostMirror`.
 
 #### ViewTypes
  * `non_const_type`: this view type with all template parameters explicitly defined.
@@ -81,46 +77,46 @@ Template parameters other than `DataType` are optional, but ordering is enforced
  * `pointer_type`: pointer to scalar type. 
 
 #### Other
- *  `array_layout`: The Layout of the DynRankView.
+ *  `array_layout`: the layout of the DynRankView.
  *  `size_type`: index type associated with the memory space of this view. 
- *  `dimension`: An integer array like type, able to represent the extents of the view.
- *  `specialize`: A specialization tag used for partial specialization of the mapping construct underlying a Kokkos DynRankView.
+ *  `dimension`: an integer array like type, able to represent the extents of the view.
+ *  `specialize`: a specialization tag used for partial specialization of the mapping construct underlying a Kokkos DynRankView.
 
 ### Constructors
 
-  * `DynRankView()`: Default Constructor. No allocations are made, no reference counting happens. All extents are zero and its data pointer is NULL and its rank is set to 0.
+  * `DynRankView()`: default constructor. No allocations are made, no reference counting happens. All extents are zero and its data pointer is `nullptr` and its rank is set to 0.
   * `DynRankView( const DynRankView<DT, Prop...>& rhs)`: Copy constructor with compatible DynRankViews. Follows DynRankView assignment rules. 
-  * `DynRankView( DynRankView&& rhs)`: Move constructor
-  * `DynRankView( const View<RT,RP...> & rhs )`: Copy constructor taking View as imput.
-  * `DynRankView( const std::string& name, const IntType& ... indices)`: Standard allocating constructor.
+  * `DynRankView( DynRankView&& rhs)`: move constructor
+  * `DynRankView( const View<RT,RP...> & rhs )`: copy constructor taking View as imput.
+  * `DynRankView( const std::string& name, const IntType& ... indices)`: standard allocating constructor.
     * `name`: a user provided label, which is used for profiling and debugging purposes. Names are not required to be unique,
-    * `indices`: Runtime dimensions of the view.  
+    * `indices`: runtime dimensions of the view.  
     * Requires: `array_layout::is_regular == true`.
-  * `DynRankView( const std::string& name, const array_layout& layout)`: Standard allocating constructor.  
+  * `DynRankView( const std::string& name, const array_layout& layout)`: standard allocating constructor.  
     * `name`: a user provided label, which is used for profiling and debugging purposes. Names are not required to be unique,
     * `layout`: an instance of a layout class.
-  * `DynRankView( const AllocProperties& prop, , const IntType& ... indices)`: Allocating constructor with allocation properties.
+  * `DynRankView( const AllocProperties& prop, , const IntType& ... indices)`: allocating constructor with allocation properties.
     * An allocation properties object is returned by the `view_alloc` function. 
-    * `indices`: Runtime dimensions of the view.
+    * `indices`: runtime dimensions of the view.
     * Requires: `array_layout::is_regular == true`.
-  * `DynRankView( const AllocProperties& prop, const array_layout& layout)`: Allocating constructor with allocation properties and a layout object. 
+  * `DynRankView( const AllocProperties& prop, const array_layout& layout)`: allocating constructor with allocation properties and a layout object. 
     * `layout`: an instance of a layout class.
-  * `DynRankView( const pointer_type& ptr, const IntType& ... indices)`: Unmanaged data wrapping constructor.
+  * `DynRankView( const pointer_type& ptr, const IntType& ... indices)`: unmanaged data wrapping constructor.
     * `ptr`: pointer to a user provided memory allocation. Must provide storage of size `DynRankView::required_allocation_size(n0,...,nR)`
-    * `indices`: Runtime dimensions of the view.   
+    * `indices`: runtime dimensions of the view.   
     * Requires: `array_layout::is_regular == true`.
-  * `DynRankView( const std::string& name, const array_layout& layout)`: Unmanaged data wrapper constructor.  
+  * `DynRankView( const std::string& name, const array_layout& layout)`: unmanaged data wrapper constructor.  
     * `ptr`: pointer to a user provided memory allocation. Must provide storage of size `DynRankView::required_allocation_size(layout)` (*NEEDS TO BE IMPLEMENTED*)
     * `layout`: an instance of a layout class.
-  * `DynRankView( const ScratchSpace& space, const IntType& ... indices)`: Constructor which acquires memory from a Scratch Memory handle.
+  * `DynRankView( const ScratchSpace& space, const IntType& ... indices)`: constructor which acquires memory from a Scratch Memory handle.
     * `space`: scratch memory handle. Typically returned from `team_handles` in `TeamPolicy` kernels. 
-    * `indices`: Runtime dimensions of the view.   
+    * `indices`: runtime dimensions of the view.   
     * Requires: `sizeof(IntType...)==rank_dynamic()` 
     * Requires: `array_layout::is_regular == true`.
-  * `DynRankView( const ScratchSpace& space, const array_layout& layout)`: Constructor which acquires memory from a Scratch Memory handle.  
+  * `DynRankView( const ScratchSpace& space, const array_layout& layout)`: constructor which acquires memory from a Scratch Memory handle.  
     * `space`: scratch memory handle. Typically returned from `team_handles` in `TeamPolicy` kernels. 
     * `layout`: an instance of a layout class.
-  * `DynRankView( const DynRankView<DT, Prop...>& rhs, Args ... args)`: Subview constructor. See `subview` function for arguments. 
+  * `DynRankView( const DynRankView<DT, Prop...>& rhs, Args ... args)`: subview constructor. See `subview` function for arguments. 
  
 ### Data Access Functions
 
@@ -232,7 +228,7 @@ Template parameters other than `DataType` are optional, but ordering is enforced
 
 Assignment rules cover the assignment operator as well as copy constructors. We aim at making all logically legal assignments possible, 
 while intercepting illegal assignments if possible at compile time, otherwise at runtime.
-In the following we use `DstType` and `SrcType` as the type of the destination view and source view respectively. 
+In the following, we use `DstType` and `SrcType` as the type of the destination view and source view respectively. 
 `dst_view` and `src_view` refer to the runtime instances of the destination and source views, i.e.:
 ```c++
 ScrType src_view(...);
