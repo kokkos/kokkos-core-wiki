@@ -52,6 +52,7 @@ All functions and classes listed here are part of the `Kokkos::` namespace.
 |[deep_copy](Kokkos%3A%3Adeep_copy) | [Core](API-Core) | [View](API-View) | Copy Views |
 |[ExecutionPolicy Concept](ExecutionPolicyConcept) | [Core](API-Core) | [Execution Policies](Execution-Policies) | Concept for execution policies. |
 |[ExecutionSpace concept](Kokkos%3A%3AExecutionSpaceConcept) | [Core](API-Core) | [Spaces](Spaces) | Concept for execution spaces. |
+|[fence](Kokkos%3A%3Afence) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism) | Fences execution spaces. |
 |[HostSpace](Kokkos%3A%3AHostSpace) | [Core](API-Core) | [Spaces](Spaces) | The primary Host Memory Space. |
 |[HPX](Kokkos%3A%3AHPX) | [Core](API-Core) | [Spaces](Spaces) | Execution space using the HPX runtime system execution mechanisms. |
 |[LAnd](Kokkos%3A%3ALAnd) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism) | Reducer for Logical 'And' reduction |
