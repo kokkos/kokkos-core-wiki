@@ -104,8 +104,8 @@ All functions and classes listed here are part of the `Kokkos::` namespace.
 |[TeamHandle concept](TeamHandleConcept) | [Core](API-Core) | [Execution Policies](Execution-Policies)| Provides the concept for the `member_type` of a [TeamPolicy](Kokkos%3A%3ATeamPolicy). |
 |[(U)TeamPolicy](Kokkos%3A%3ATeamPolicy) | [Core](API-Core) | [Execution Policies](Execution-Policies)| Policy to iterate over a 1D index range, assigning to each iteration a team of threads. |
 |[TeamThreadRange](Kokkos%3A%3ATeamThreadRange) | [Core](API-Core) | [Execution Policies](Execution-Policies)| Policy to iterate over a 1D index range with the threads of a team. |
-|[TeamVectorRange](Kokkos%3A%3ANestedPolicies) | [Core](API-Core) | [Execution Policies](Execution-Policies)| Policy to iterate over a 1D index range with the threads and vector lanes of a team. |
-|[ThreadVectorRange](Kokkos%3A%3ANestedPolicies) | [Core](API-Core) | [Execution Policies](Execution-Policies)| Policy to iterate over a 1D index range with the vector lanes of a thread. |
+|[TeamVectorRange](Kokkos%3A%3ATeamVectorRange) | [Core](API-Core) | [Execution Policies](Execution-Policies)| Policy to iterate over a 1D index range with the threads and vector lanes of a team. |
+|[ThreadVectorRange](Kokkos%3A%3AThreadVectorRange) | [Core](API-Core) | [Execution Policies](Execution-Policies)| Policy to iterate over a 1D index range with the vector lanes of a thread. |
 |[Timer](Kokkos%3A%3ATimer) | [Core](API-Core) | [Utilities](API-Utilities)| A basic timer returning seconds |
 |[View](Kokkos%3A%3AView) | [Core](API-Core) | [View](API-View)| A multi-dimensional array |
 |[View-like Type Concept](ViewLike) | [Core](API-Core) | [View](API-View) | A set of class templates that act like a View |
