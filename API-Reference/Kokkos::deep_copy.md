@@ -68,60 +68,53 @@ void Kokkos::deep_copy(ViewSrc::value_type& dest,
 
 ## Semantics
 
-* If no [ExecutionSpace](API-Spaces) argument is provided, all outstanding operations (kernels, copy operation) will be finished before the copy is executed, and the copy operation is finished before the call returns.
-* If an [ExecutionSpace](API-Spaces) argument `exec_space` is provided the call is potentially asynchronous - i.e. the call returns before the copy operation is executed. In that case the copy operation will occur only after any already submitted work to `exec_space` is finished, and the copy operation will be finished before any work submitted to `exec_space` after the `deep_copy` call returns is executed. 
+* If no [ExecutionSpace](API-Spaces) argument is provided, all outstanding operations (kernels, copy operation) in any execution spaces will be finished before the copy is executed, and the copy operation is finished before the call returns.
+* If an [ExecutionSpace](API-Spaces) argument `exec_space` is provided the call is potentially asynchronous - i.e. the call returns before the copy operation is executed. In that case the copy operation will occur only after any already submitted work to `exec_space` is finished, and the copy operation will be finished before any work submitted to `exec_space` after the `deep_copy` call returns is executed. Note: the copy operation is only synchronous with respect to work in the specific execution space instance, but not necessarily with work in other instances of the same type. This behaves analogous to issuing a `cuda_memcpy_async` into a specific CUDA stream.
 
 ## Examples
 
 ```c++
-#include<Kokkos_Core.hpp>
-#include<cstdio> 
+#include <Kokkos_Core.hpp>
+#include <cstdio>
 
 int main(int argc, char* argv[]) {
-   Kokkos::initialize(argc,argv);
-   {
+  Kokkos::initialize(argc, argv);
+  {
+    int N = argc > 1 ? atoi(argv[1]) : 12;
+    if (N < 6) N = 12;
 
-   int N = argc>1?atoi(argv[1]):12;
-   if(N<6) N = 12;
+    // Contiguous Device View
+    Kokkos::View<int**, Kokkos::LayoutLeft> d_a("A", N, 10);
+    // Deep Copy Scalar into every element of a view
+    Kokkos::deep_copy(d_a, 3);
 
-   // Contiguous Device View
-   Kokkos::View<int**, Kokkos::LayoutLeft> d_a("A",N,10);
+    // Non Contiguous Device View
+    auto d_a_2 = Kokkos::subview(d_a, 2, Kokkos::ALL);
+    // Deep Copy Scalar into every element of a non-contiguous view
+    Kokkos::deep_copy(d_a_2, 5);
+    // Non Contiguous Device View
+    auto d_a_5 = Kokkos::subview(d_a, 5, Kokkos::ALL);
+    // Deep Copy between two non-contiguous views with a common execution space
+    Kokkos::deep_copy(d_a_2, d_a_5);
 
-   // Non Contiguous Device View
-   auto d_a_2 = Kokkos::subview(d_a,2,Kokkos::ALL);
-   auto d_a_5 = Kokkos::subview(d_a,5,Kokkos::ALL);
+    // Contiguous Host View
+    auto h_a = Kokkos::create_mirror_view(d_a);
+    // Deep Copy contiguous views
+    Kokkos::deep_copy(h_a, d_a);
 
-   // Contiguous Host View
-   auto h_a = Kokkos::create_mirror_view(d_a);
+    // Non Contiguous Host Views
+    auto h_a_2 = Kokkos::subview(h_a, 2, Kokkos::ALL);
+    // Deep Copy between two non-contiguous views with potentially no common
+    // execution space This fails for example if you compile the code with Cuda
+    // Kokkos::deep_copy(h_a_2, d_a_2);
 
-   // Non Contiguous Host Views
-   auto h_d_a_2 = Kokkos::subview(h_a,2,Kokkos::ALL);
-   auto h_a_5 = Kokkos::subview(h_a,5,Kokkos::ALL);
-   
-   // A Scalar View
-   auto d_a_2_5 = Kokkos::subview(d_a,2,5);
-
-   int scalar;
-   
-   // Deep Copy Scalar into every element of a view
-   Kokkos::deep_copy(d_a,3);
-   Kokkos::deep_copy(d_a_2,5);
-
-   // Deep Copy between two non-contiguous views with a common execution space
-   Kokkos::deep_copy(d_a_2,d_a5);
-
-   // Deep Copy between two non-contiguous views with potentially no common execution space
-   // This fails for example if you compile the code with Cuda
-   // Kokkos::deep_copy(h_a_2,d_a_2);
-   
-   // Deep Copy contiguous views
-   Kokkos::deep_copy(h_a,d_a);
-
-   // Deep Copy Scalar View into a scalar
-   Kokkos::deep_copy(scalar,d_a_2_5);
-
-   }
-   Kokkos::finalize();
+    // A Scalar View
+    auto d_a_2_5 = Kokkos::subview(d_a, 2, 5);
+    int scalar;
+    // Deep Copy Scalar View into a scalar
+    Kokkos::deep_copy(scalar, d_a_2_5);
+  }
+  Kokkos::finalize();
 }
 ```
 
