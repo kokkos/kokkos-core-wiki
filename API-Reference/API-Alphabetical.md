@@ -74,8 +74,11 @@ All functions and classes listed here are part of the `Kokkos::` namespace.
 |[OpenMP](Kokkos%3A%3AOpenMP) | [Core](API-Core) | [Spaces](Spaces) | Execution space using non-target OpenMP parallel execution mechanisms. |
 |[OpenMPTarget](Kokkos%3A%3AOpenMPTarget) | [Core](API-Core) | [Spaces](Spaces) | Execution space using targetoffload OpenMP parallel execution mechanisms. |
 |[parallel_for](Kokkos%3A%3Aparallel_for) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism)| Bulk execute of independent work items. |
+|[ParallelForTag](Kokkos%3A%3AParallelForTag) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism)| Tag passed to team\_size functions
 |[parallel_reduce](Kokkos%3A%3Aparallel_reduce) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism)| Bulk execute of independent work items, which contribute to a reduction. |
+|[ParallelReduceTag](Kokkos%3A%3AParallelReduceTag) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism)| Tag passed to team\_size functions
 |[parallel_scan](Kokkos%3A%3Aparallel_scan) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism)| Bulk execute of work items, which a simple pre- or postfix scan dependency. |
+|[ParallelScanTag](Kokkos%3A%3AParallelScanTag) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism)| Tag passed to team\_size functions
 |[PerTeam](Kokkos%3A%3ANestedPolicies) | [Core](API-Core) | [Execution Policies](Execution-Policies)| Policy used in single construct to indicate once per team execution. |
 |[PerThread](Kokkos%3A%3ANestedPolicies) | [Core](API-Core) | [Execution Policies](Execution-Policies)| Policy used in single construct to indicate once per thread execution. |
 |[Prod](Kokkos%3A%3AProd) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism) | Reducer for Multiplicative reduction |
