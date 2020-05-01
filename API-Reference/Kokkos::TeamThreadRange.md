@@ -17,16 +17,16 @@ the team handle.
 ## Synopsis 
   ```c++
    template<class TeamMemberType, class iType>
-    /* implementation defined */ T TeamThreadRange(const TeamMemberType& team, iType count);
+    /* implementation defined */ TeamThreadRange(TeamMemberType team, iType count);
    template<class TeamMemberType, class iType1, class iType2>
-    /* implementation defined */ T TeamThreadRange(const TeamMemberType& team, iType1 begin, iType2 end);
+    /* implementation defined */ TeamThreadRange(TeamMemberType team, iType1 begin, iType2 end);
   ```
 
 ## Description
 
  * ```c++
    template<class TeamMemberType, class iType>
-   /* Implementation defined */ T TeamThreadRange(const TeamMemberType& team, iType count);
+   /* Implementation defined */ TeamThreadRange(TeamMemberType team, iType count);
    ```
    Splits the index range `0` to `count-1` over the threads of the team. 
     *  **Arguments**
@@ -37,15 +37,15 @@ the team handle.
         * Implementation defined type.
 
     *  **Requirements**
-        * `TeamMemberType` meets the requirements of [TeamHandle](Kokkos%3A%3ATeamHandleConcept)
+        * `TeamMemberType` is a type that models [TeamHandle](Kokkos%3A%3ATeamHandleConcept)
         * `std::is_integral<iType>::value` is true.
-        * Every member thread of `team` must call the lexically same operation. I.e. it is not legal to have some 
+        * Every member thread of `team` must call the operation in the same branch, i.e. it is not legal to have some 
           threads call this function in one branch, and the other threads of `team` call it in another branch.
         * `count >= 0 ` is true;
  
  * ```c++
    template<class TeamMemberType, class iType1, class iType2>
-   /* Implementation defined */ T TeamThreadRange(const TeamMemberType& team, iType1 begin, iType2 end);
+   /* Implementation defined */ TeamThreadRange(TeamMemberType team, iType1 begin, iType2 end);
    ```
    Splits the index range `begin` to `end-1` over the threads of the team. 
     *  **Arguments**
@@ -58,11 +58,11 @@ the team handle.
 
     * **Requirements**
 
-        * `TeamMemberType` meets the requirements of [TeamHandle](Kokkos%3A%3ATeamHandleConcept)
+        * `TeamMemberType` is a type that models [TeamHandle](Kokkos%3A%3ATeamHandleConcept)
         * `std::is_integral<iType1>::value` is true.
         * `std::is_integral<iType2>::value` is true.
-        * Every member thread of `team` must call the lexically same operation. I.e. it is not legal to have some 
-          threads call this function in one branch, and the other threads of `team` call it in another branch.
+        * Every member thread of `team` must call the operation in the same branch, i.e. it is not legal to have some
+          threads call this function in one branch, and the other threads of `team` call it in another branch..
         * `end >= begin ` is true;
 
   
