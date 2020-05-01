@@ -45,34 +45,34 @@ All functions and classes listed here are part of the `Kokkos::` namespace.
 |[complex](Kokkos%3A%3AComplex) | [Core](API-Core) | [STL Compatibility](STL-Compatibility) | Complex numbers which work on host and device |
 |[(X)create_mirror](Kokkos%3A%3Acreate_mirror) | [Core](API-Core) | [View](API-View) | Mirror Host data to Device data |
 |[(X)create_mirror_view](Kokkos%3A%3Acreate_mirror_view) | [Core](API-Core) | [View](API-View) | Mirror Host data to Device data |
-|[Cuda](Kokkos%3A%3ACuda) | [Core](API-Core) | [Spaces](Spaces) | The CUDA Execution Space. |
-|[CudaSpace](Kokkos%3A%3ACudaSpace) | [Core](API-Core) | [Spaces](Spaces) | The primary CUDA Memory Space. |
-|[CudaUVMSpace](Kokkos%3A%3ACudaUVMSpace) | [Core](API-Core) | [Spaces](Spaces) | The CUDA Memory Space providing access to unified memory page migratable allocations. |
-|[CudaHostPinnedSpace](Kokkos%3A%3ACudaHostPinnedSpace) | [Core](API-Core) | [Spaces](Spaces) | The CUDA Memrory Space providing access to host pinned GPU-accessible host memory. |
+|[Cuda](Kokkos%3A%3ACuda) | [Core](API-Core) | [Spaces](API-Spaces) | The CUDA Execution Space. |
+|[CudaSpace](Kokkos%3A%3ACudaSpace) | [Core](API-Core) | [Spaces](API-Spaces) | The primary CUDA Memory Space. |
+|[CudaUVMSpace](Kokkos%3A%3ACudaUVMSpace) | [Core](API-Core) | [Spaces](API-Spaces) | The CUDA Memory Space providing access to unified memory page migratable allocations. |
+|[CudaHostPinnedSpace](Kokkos%3A%3ACudaHostPinnedSpace) | [Core](API-Core) | [Spaces](API-Spaces) | The CUDA Memrory Space providing access to host pinned GPU-accessible host memory. |
 |[deep_copy](Kokkos%3A%3Adeep_copy) | [Core](API-Core) | [View](API-View) | Copy Views |
 |[ExecutionPolicy Concept](ExecutionPolicyConcept) | [Core](API-Core) | [Execution Policies](Execution-Policies) | Concept for execution policies. |
-|[ExecutionSpace concept](Kokkos%3A%3AExecutionSpaceConcept) | [Core](API-Core) | [Spaces](Spaces) | Concept for execution spaces. |
+|[ExecutionSpace concept](Kokkos%3A%3AExecutionSpaceConcept) | [Core](API-Core) | [Spaces](API-Spaces) | Concept for execution spaces. |
 |[fence](Kokkos%3A%3Afence) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism) | Fences execution spaces. |
-|[HostSpace](Kokkos%3A%3AHostSpace) | [Core](API-Core) | [Spaces](Spaces) | The primary Host Memory Space. |
-|[HPX](Kokkos%3A%3AHPX) | [Core](API-Core) | [Spaces](Spaces) | Execution space using the HPX runtime system execution mechanisms. |
+|[HostSpace](Kokkos%3A%3AHostSpace) | [Core](API-Core) | [Spaces](API-Spaces) | The primary Host Memory Space. |
+|[HPX](Kokkos%3A%3AHPX) | [Core](API-Core) | [Spaces](API-Spaces) | Execution space using the HPX runtime system execution mechanisms. |
 |[LayoutLeft](Kokkos%3A%3ALayoutLeft) | [Core](API-Core) | [Views](Views) | Memory Layout matching Fortran |
 |[LayoutRight](Kokkos%3A%3ALayoutRight) | [Core](API-Core) | [Views](Views) | Memory Layout matching C |
 |[LayoutStride](Kokkos%3A%3ALayoutStride) | [Core](API-Core) | [Views](Views) | Memory Layout for arbitrary strides |
-|[kokkos_free](Kokkos%3A%3Akokkos_free) | [Core](API-Core) | [Spaces](Spaces) | Dellocates previously allocated memory |
-|[kokkos_malloc](Kokkos%3A%3Akokkos_malloc) | [Core](API-Core) | [Spaces](Spaces) | Allocates memory |
-|[kokkos_realloc](Kokkos%3A%3Akokkos_realloc) | [Core](API-Core) | [Spaces](Spaces) | Expands previously allocated memory block |
+|[kokkos_free](Kokkos%3A%3Akokkos_free) | [Core](API-Core) | [Spaces](API-Spaces) | Dellocates previously allocated memory |
+|[kokkos_malloc](Kokkos%3A%3Akokkos_malloc) | [Core](API-Core) | [Spaces](API-Spaces) | Allocates memory |
+|[kokkos_realloc](Kokkos%3A%3Akokkos_realloc) | [Core](API-Core) | [Spaces](API-Spaces) | Expands previously allocated memory block |
 |[LAnd](Kokkos%3A%3ALAnd) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism) | Reducer for Logical 'And' reduction |
 |[LOr](Kokkos%3A%3ALOr) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism) | Reducer for Logical 'Or' reduction |
 |[Max](Kokkos%3A%3AMax) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism) | Reducer for Maximum reduction |
 |[MaxLoc](Kokkos%3A%3AMaxLoc) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism) | Reducer for Reduction providing maximum and an associated index |
 |[(U)MDRangePolicy](Kokkos%3A%3AMDRangePolicy) | [Core](API-Core) | [Execution Policies](Execution-Policies)| Policy to iterate over a multidimensional index range. |
-|[MemorySpace concept](Kokkos%3A%3AMemorySpaceConcept) | [Core](API-Core) | [Spaces](Spaces) | Concept for execution spaces. |
+|[MemorySpace concept](Kokkos%3A%3AMemorySpaceConcept) | [Core](API-Core) | [Spaces](API-Spaces) | Concept for execution spaces. |
 |[Min](Kokkos%3A%3AMin) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism) | Reducer for Minimum reduction |
 |[MinLoc](Kokkos%3A%3AMinLoc) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism) | Reducer for Reduction providing minimum and an associated index |
 |[MinMax](Kokkos%3A%3AMinMax) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism) | Reducer for Reduction providing both minimum and maximum |
 |[MinMaxLoc](Kokkos%3A%3AMinMaxLoc) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism) | Reducer for Reduction providing both minimum and maximum and associated indicies |
-|[OpenMP](Kokkos%3A%3AOpenMP) | [Core](API-Core) | [Spaces](Spaces) | Execution space using non-target OpenMP parallel execution mechanisms. |
-|[OpenMPTarget](Kokkos%3A%3AOpenMPTarget) | [Core](API-Core) | [Spaces](Spaces) | Execution space using targetoffload OpenMP parallel execution mechanisms. |
+|[OpenMP](Kokkos%3A%3AOpenMP) | [Core](API-Core) | [Spaces](API-Spaces) | Execution space using non-target OpenMP parallel execution mechanisms. |
+|[OpenMPTarget](Kokkos%3A%3AOpenMPTarget) | [Core](API-Core) | [Spaces](API-Spaces) | Execution space using targetoffload OpenMP parallel execution mechanisms. |
 |[pair](Kokkos%3A%3Apair) | [Core](API-Core) | [STL Compatibility](STL-Compatibility)| Device compatible std::pair analogue
 |[parallel_for](Kokkos%3A%3Aparallel_for) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism)| Bulk execute of independent work items. |
 |[ParallelForTag](Kokkos%3A%3AParallelForTag) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism)| Tag passed to team\_size functions
@@ -87,7 +87,7 @@ All functions and classes listed here are part of the `Kokkos::` namespace.
 |[realloc](Kokkos%3A%3Arealloc) | [Core](API-Core) | [View](API-View) | Resize an existing view without maintaining the content |
 |[ReducerConcept](Kokkos%3A%3AReducerConcept) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism)| Provides the concept for Reducers. |
 |[resize](Kokkos%3A%3Aresize) | [Core](API-Core) | [View](API-View) | Resize an existing view while maintaining the content |
-|[SpaceAccessibility](Kokkos%3A%3ASpaceAccessibility) | [Core](API-Core) | [Spaces](Spaces) | Facility to query accessibility rules between execution and memory spaces. |
+|[SpaceAccessibility](Kokkos%3A%3ASpaceAccessibility) | [Core](API-Core) | [Spaces](API-Spaces) | Facility to query accessibility rules between execution and memory spaces. |
 |[subview](Kokkos%3A%3Asubview) | [Core](API-Core) | [View](API-View) | Crating multi-dimensional array which is a slice of a view |
 |[Sum](Kokkos%3A%3ASum) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism) | Reducer for Sum reduction |
 |[TeamHandle concept](TeamHandleConcept) | [Core](API-Core) | [Execution Policies](Execution-Policies)| Provides the concept for the `member_type` of a [TeamPolicy](Kokkos%3A%3ATeamPolicy). |
