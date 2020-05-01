@@ -13,7 +13,7 @@ If `ptr` is a null pointer, the function does nothing.
 
 ## Parameters
 
-* `ptr`: The pointer to the memory to deallocate on the specified memory space.
+`ptr`: The pointer to the memory to deallocate on the specified memory space.
 
 ## Template parameters
 

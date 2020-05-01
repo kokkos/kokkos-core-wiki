@@ -11,8 +11,8 @@ Reallocates the given area of memory. It must be previously allocated by [`Kokko
 
 ## Parameters
 
-* `ptr`: The pointer to the memory area to be reallocated.
-* `new_size`: The new size in bytes.
+`ptr`: The pointer to the memory area to be reallocated.  
+`new_size`: The new size in bytes.
 
 ## Template parameters
 

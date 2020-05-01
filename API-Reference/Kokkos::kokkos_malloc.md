@@ -18,8 +18,8 @@ If allocation succeeds, returns a pointer to the lowest (first) byte in the allo
 
 ## Parameters
 
-  * `label`: A user provided string which is used in profiling and debugging tools via the KokkosP Profiling Tools.
-  *  `size`: The number of bytes to allocate.
+`label`: A user provided string which is used in profiling and debugging tools via the KokkosP Profiling Tools.  
+`size`: The number of bytes to allocate.
 
 ## Template parameters
 
