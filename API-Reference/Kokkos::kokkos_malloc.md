@@ -4,12 +4,12 @@ Defined in header `<Kokkos_Core.hpp>`
 
 ```c++
 template <class MemorySpace = typename Kokkos::DefaultExecutionSpace::memory_space>
-void kokkos_malloc(const std:string& label, size_t size);
+void* kokkos_malloc(const std:string& label, size_t size);
 ```
 
 ```c++
 template <class MemorySpace = typename Kokkos::DefaultExecutionSpace::memory_space>
-void kokkos_malloc(size_t size);
+void* kokkos_malloc(size_t size);
 ```
 
 Allocate `size` bites of unitialized storage on the specified memory space.
