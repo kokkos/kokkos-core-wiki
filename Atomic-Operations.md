@@ -6,7 +6,7 @@ After reading this chapter, you should understand the following:
 
 * Atomic operations can be used to resolve write conflicts
 * How to use the free functions.
-* How to use the Atomic memory trait
+* How to use the [[Atomic memory trait|Kokkos::MemoryTraits]].
 * Using [[ScatterView|Kokkos::ScatterView]] for scatter add patterns
 
 ## 10.1 Write Conflicts and Their Resolution With Atomic Operations
@@ -101,13 +101,13 @@ The full list of atomic operations can be found here:
 
 |Name |Library | Category | Description                  |
 |:---------|:--------|:-----------|:----------------------------|
-|[atomic_exchange](Kokkos%3A%3Aatomic_exchange) | [Core](API-Core) | [Atomic-Operations](Atomic-Operations) | Atomic operation which exchanges a value and returns the old. | 
-|[atomic_compare_exchange](Kokkos%3A%3Aatomic_compare_exchange) | [Core](API-Core) | [Atomic-Operations](Atomic-Operations) | Atomic operation which exchanges a value only if the old value matches a comparison value and returns the old value. | 
-|[atomic_compare_exchange_strong](Kokkos%3A%3Aatomic_compare_exchange_strong) | [Core](API-Core) | [Atomic-Operations](Atomic-Operations) | Atomic operation which exchanges a value only if the old value matches a comparison value and returns true if the exchange is executed. | 
-|[atomic_load](Kokkos%3A%3Aatomic_load) | [Core](API-Core) | [Atomic-Operations](Atomic-Operations) | Atomic operation which loads a value. | 
-|[atomic_\[op\]](Kokkos%3A%3Aatomic_op) | [Core](API-Core) | [Atomic-Operations](Atomic-Operations) | Atomic operation which don't return anything. | 
-|[atomic_fetch_\[op\]](Kokkos%3A%3Aatomic_fetch_op) | [Core](API-Core) | [Atomic-Operations](Atomic-Operations) | Various atomic operations which return the old value. | 
-|[atomic_\[op\]_fetch](Kokkos%3A%3Aatomic_op_fetch) | [Core](API-Core) | [Atomic-Operations](Atomic-Operations) | Various atomic operations which return the updated value. | 
+|[atomic_exchange](Kokkos%3A%3Aatomic_exchange) | [Core](API-Core) | [Atomic-Operations](Atomic-Operations) | Atomic operation which exchanges a value and returns the old. |
+|[atomic_compare_exchange](Kokkos%3A%3Aatomic_compare_exchange) | [Core](API-Core) | [Atomic-Operations](Atomic-Operations) | Atomic operation which exchanges a value only if the old value matches a comparison value and returns the old value. |
+|[atomic_compare_exchange_strong](Kokkos%3A%3Aatomic_compare_exchange_strong) | [Core](API-Core) | [Atomic-Operations](Atomic-Operations) | Atomic operation which exchanges a value only if the old value matches a comparison value and returns true if the exchange is executed. |
+|[atomic_load](Kokkos%3A%3Aatomic_load) | [Core](API-Core) | [Atomic-Operations](Atomic-Operations) | Atomic operation which loads a value. |
+|[atomic_\[op\]](Kokkos%3A%3Aatomic_op) | [Core](API-Core) | [Atomic-Operations](Atomic-Operations) | Atomic operation which don't return anything. [op] might be `add`, `sub`, `or`, `and`, `max`, `min`, `increment` or `decrement` |
+|[atomic_fetch_\[op\]](Kokkos%3A%3Aatomic_fetch_op) | [Core](API-Core) | [Atomic-Operations](Atomic-Operations) | Various atomic operations which return the old value. [op] might be `add`, `sub`, `or`, `and`, `max`, `min`, `mul`, `div`, `mod`, `xor`, `lshift` or `rshift` |
+|[atomic_\[op\]_fetch](Kokkos%3A%3Aatomic_op_fetch) | [Core](API-Core) | [Atomic-Operations](Atomic-Operations) | Various atomic operations which return the updated value. [op] might be `add`, `sub`, `or`, `and`, `oper`, `max`, `min`, `mul`, `div`, `mod`, `xor`, `lshift` or `rshift`|
 |[atomic_store](Kokkos%3A%3Aatomic_store) | [Core](API-Core) | [Atomic-Operations](Atomic-Operations) | Atomic operation which stores a value. |
 
 ## 10.3 Atomic Memory Trait
