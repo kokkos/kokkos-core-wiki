@@ -7,7 +7,7 @@ Usage:
   value = atomic_load(ptr_to_value);
   ```
 
-Atomicly reads the value at the address given by `ptr_to_value`.
+Atomically reads the value at the address given by `ptr_to_value`.
 
 ## Synopsis
 
@@ -23,7 +23,7 @@ Atomicly reads the value at the address given by `ptr_to_value`.
   T atomic_load(T* const ptr_to_value);
   ```
 
-  Atomicly executes `value = *ptr_to_value; return value;`. 
+  Atomically executes `value = *ptr_to_value; return value;`. 
   * `ptr_to_value`: address of the to be updated value.
   * `value`: value at address `ptr_to_value`.
 
