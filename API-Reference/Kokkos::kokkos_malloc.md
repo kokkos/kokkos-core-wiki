@@ -19,13 +19,13 @@ If allocation succeeds, returns a pointer to the lowest (first) byte in the allo
 ## Parameters
 
   * `label`: A user provided string which is used in profiling and debugging tools via the KokkosP Profiling Tools.
-  *  `size: The number of bytes to allocate.
+  *  `size`: The number of bytes to allocate.
 
 ## Template parameters
 
-* `MemorySpace`:  Controls the storage location. If omitted the default memory space of the default execution space is used (i.e. Kokkos::DefaultExecutionSpace::memory_space`).
+* `MemorySpace`:  Controls the storage location. If omitted the default memory space of the default execution space is used (i.e. `Kokkos::DefaultExecutionSpace::memory_space`).
 
-## Return value`
+## Return value
 
 On success, returns the pointer to the beginning of newly allocated memory.
 To avoid a memory leak, the returned pointer must be deallocated with `Kokkos::kokkos_free()` or `Kokkos::realloc()`.
