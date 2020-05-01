@@ -22,3 +22,6 @@ If `ptr` is a null pointer, the function does nothing.
 ## Return value
 
 (none)
+## Exceptions
+
+Throws `std::runtime_error` on failure to deallocate.

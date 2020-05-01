@@ -16,6 +16,8 @@ Allocate `size` bites of unitialized storage on the specified memory space.
 
 If allocation succeeds, returns a pointer to the lowest (first) byte in the allocated memory block that is suitably aligned for any scalar type.
 
+If allocation fails, an excpetion of type `Kokkos::Experimental::RawMemoryAllocationFailure` is thrown.
+
 ## Parameters
 
 `label`: A user provided string which is used in profiling and debugging tools via the KokkosP Profiling Tools.  
@@ -30,4 +32,6 @@ If allocation succeeds, returns a pointer to the lowest (first) byte in the allo
 On success, returns the pointer to the beginning of newly allocated memory.
 To avoid a memory leak, the returned pointer must be deallocated with [`Kokkos::kokkos_free()`](Kokkos%3A%3Akokkos_free) or [`Kokkos::realloc()`](Kokkos%3A%3Akokkos_realloc).
 
-On failure, returns a null pointer.
+## Exceptions
+
+On failure, throws `Kokkos::Experimental::RawMemoryAllocationFailure`.
