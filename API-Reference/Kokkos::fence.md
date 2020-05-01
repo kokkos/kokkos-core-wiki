@@ -2,7 +2,7 @@
 
 Header File: `Kokkos_Core.hpp`
 
-In general, kernels in Kokkos are running asynchronously and launching them return immediately.
+In general, kernels in Kokkos are running asynchronously and launching them returns immediately.
 This implies that its effects might not be visible to the calling thread.
 Kokkos::fence() guarantees that all parallel patterns in all execution spaces are guaranteed to have completed upon return
 and that any side-effects are visible.
