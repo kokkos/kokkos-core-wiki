@@ -11,12 +11,12 @@ Reallocates the given area of memory. It must be previously allocated by [`Kokko
 
 ## Parameters
 
-* `ptr`: The pointer to the memory area to be reallocated.
-* `new_size`: The new size in bytes.
+`ptr`: The pointer to the memory area to be reallocated.  
+`new_size`: The new size in bytes.
 
 ## Template parameters
 
-* `MemorySpace`:  Controls the storage location. If omitted the default memory space of the default execution space is used (i.e. `Kokkos::DefaultExecutionSpace::memory_space`).
+* `MemorySpace`:  Controls the storage location. If omitted the memory space of the default execution space is used (i.e. `Kokkos::DefaultExecutionSpace::memory_space`).
 
 ## Return value
 

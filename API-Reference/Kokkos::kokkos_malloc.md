@@ -4,12 +4,12 @@ Defined in header `<Kokkos_Core.hpp>`
 
 ```c++
 template <class MemorySpace = typename Kokkos::DefaultExecutionSpace::memory_space>
-void kokkos_malloc(const std:string& label, size_t size);
+void* kokkos_malloc(const std:string& label, size_t size);
 ```
 
 ```c++
 template <class MemorySpace = typename Kokkos::DefaultExecutionSpace::memory_space>
-void kokkos_malloc(size_t size);
+void* kokkos_malloc(size_t size);
 ```
 
 Allocate `size` bites of unitialized storage on the specified memory space.
@@ -18,12 +18,12 @@ If allocation succeeds, returns a pointer to the lowest (first) byte in the allo
 
 ## Parameters
 
-  * `label`: A user provided string which is used in profiling and debugging tools via the KokkosP Profiling Tools.
-  *  `size`: The number of bytes to allocate.
+`label`: A user provided string which is used in profiling and debugging tools via the KokkosP Profiling Tools.  
+`size`: The number of bytes to allocate.
 
 ## Template parameters
 
-* `MemorySpace`:  Controls the storage location. If omitted the default memory space of the default execution space is used (i.e. `Kokkos::DefaultExecutionSpace::memory_space`).
+* `MemorySpace`:  Controls the storage location. If omitted the memory space of the default execution space is used (i.e. `Kokkos::DefaultExecutionSpace::memory_space`).
 
 ## Return value
 

@@ -13,11 +13,11 @@ If `ptr` is a null pointer, the function does nothing.
 
 ## Parameters
 
-* `ptr`: The pointer to the memory to deallocate on the specified memory space.
+`ptr`: The pointer to the memory to deallocate on the specified memory space.
 
 ## Template parameters
 
-* `MemorySpace`:  Controls the storage location. If omitted the default memory space of the default execution space is used (i.e. `Kokkos::DefaultExecutionSpace::memory_space`).
+* `MemorySpace`:  Controls the storage location. If omitted the memory space of the default execution space is used (i.e. `Kokkos::DefaultExecutionSpace::memory_space`).
 
 ## Return value
 
