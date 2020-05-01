@@ -2,6 +2,7 @@ Data management is a critical part of any program. The main facility in Kokkos i
 The following facilities are available:
 
   * [`View`](Kokkos%3A%3AView): The main Kokkos data structure, a multi dimensional memory space and layout aware array.
+  * [`deep_copy`](Kokkos%3A%3Adeep_copy): Copying data between views and scalars.
   * [`subview`](Kokkos%3A%3Asubview): Getting slices from a `Kokkos::View`.
   * [`realloc`](Kokkos%3A%3Arealloc): Reallocating a `Kokkos::View`.
   * [`resize`](Kokkos%3A%3Aresize): Resizinc a `Kokkos::View`.
