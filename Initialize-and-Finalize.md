@@ -18,7 +18,7 @@ See [Kokkos::finalize](Kokkos%3A%3Afinalize) for details.
 
 `Kokkos::ScopeGuard` is class a class which aggregates the resources managed by Kokkos.  ScopeGuard will call `Kokkos::initialize` when constructed and `Kokkos::finalize` when destructed, thus the Kokkos context can is automatically managed via the scope of the ScopeGuard object.   
 
-See [Kokkos::ScopeGuard](Kokkos%3A%3ScopeGuard) for details.
+See [Kokkos::ScopeGuard](Kokkos%3A%3AScopeGuard) for details.
 
 ScopeGuard aids in the following common mistake which is allowing Kokkos objects to live past `Kokkos::finalize`:
 ```c++
