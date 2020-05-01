@@ -12,11 +12,11 @@ template <class MemorySpace = typename Kokkos::DefaultExecutionSpace::memory_spa
 void* kokkos_malloc(size_t size);
 ```
 
-Allocate `size` bytes of unitialized storage on the specified memory space `MemorySpace`.
+Allocate `size` bytes of unitialized storage on the specified memory space `MemorySpace` plus some extra space for meta data such as the label.
 
 If allocation succeeds, returns a pointer to the lowest (first) byte in the allocated memory block that is suitably aligned for any scalar type.
 
-If allocation fails, an excpetion of type `Kokkos::Experimental::RawMemoryAllocationFailure` is thrown.
+If allocation fails, an exception of type `Kokkos::Experimental::RawMemoryAllocationFailure` is thrown.
 
 ## Parameters
 
