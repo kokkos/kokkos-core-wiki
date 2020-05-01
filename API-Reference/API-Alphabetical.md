@@ -53,7 +53,7 @@ All functions and classes listed here are part of the `Kokkos::` namespace.
 |[ExecutionPolicy Concept](ExecutionPolicyConcept) | [Core](API-Core) | [Execution Policies](Execution-Policies) | Concept for execution policies. |
 |[ExecutionSpace concept](Kokkos%3A%3AExecutionSpaceConcept) | [Core](API-Core) | [Spaces](API-Spaces) | Concept for execution spaces. |
 |[fence](Kokkos%3A%3Afence) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism) | Fences execution spaces. |
-|[finalize](Kokkos%3A%3Afinalize) | [Core](API-Core) | [Initialization and Finalization](initialize-and-finalize) | function to initialize Kokkos |
+|[finalize](Kokkos%3A%3Afinalize) | [Core](API-Core) | [Initialization and Finalization](initialize-and-finalize) | function to finalize Kokkos |
 |[HostSpace](Kokkos%3A%3AHostSpace) | [Core](API-Core) | [Spaces](API-Spaces) | The primary Host Memory Space. |
 |[HPX](Kokkos%3A%3AHPX) | [Core](API-Core) | [Spaces](API-Spaces) | Execution space using the HPX runtime system execution mechanisms. |
 |[initialize](Kokkos%3A%3Ainitialize) | [Core](API-Core) | [Initialization and Finalization](initialize-and-finalize) | function to initialize Kokkos |
