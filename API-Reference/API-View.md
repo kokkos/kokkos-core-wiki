@@ -7,4 +7,7 @@ The following facilities are available:
   * [`resize`](Kokkos%3A%3Aresize): Resizinc a `Kokkos::View`.
   * [`create_mirror`](Kokkos%3A%3Acreate_mirror): Creating a copy of a `Kokkos::View` in a different memory space.
   * [`create_mirror_view`](Kokkos%3A%3Acreate_mirror): Creating a copy of a `Kokkos::View` in a different memory space, if the original view is not accessible in that space.
+  * [`LayoutLeft`](Kokkos%3A%3ALayoutLeft): Memory Layout matching Fortran 
+  * [`LayoutRight`](Kokkos%3A%3ALayoutRight): Memory Layout matching C 
+  * [`LayoutStride`](Kokkos%3A%3ALayoutStride): Memory Layout for arbitrary strides 
 

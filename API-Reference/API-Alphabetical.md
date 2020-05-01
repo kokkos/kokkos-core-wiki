@@ -54,6 +54,9 @@ All functions and classes listed here are part of the `Kokkos::` namespace.
 |[fence](Kokkos%3A%3Afence) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism) | Fences execution spaces. |
 |[HostSpace](Kokkos%3A%3AHostSpace) | [Core](API-Core) | [Spaces](Spaces) | The primary Host Memory Space. |
 |[HPX](Kokkos%3A%3AHPX) | [Core](API-Core) | [Spaces](Spaces) | Execution space using the HPX runtime system execution mechanisms. |
+|[LayoutLeft](Kokkos%3A%3ALayoutLeft) | [Core](API-Core) | [Views](Views) | Memory Layout matching Fortran |
+|[LayoutRight](Kokkos%3A%3ALayoutRight) | [Core](API-Core) | [Views](Views) | Memory Layout matching C |
+|[LayoutStride](Kokkos%3A%3ALayoutStride) | [Core](API-Core) | [Views](Views) | Memory Layout for arbitrary strides |
 |[LAnd](Kokkos%3A%3ALAnd) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism) | Reducer for Logical 'And' reduction |
 |[LOr](Kokkos%3A%3ALOr) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism) | Reducer for Logical 'Or' reduction |
 |[Max](Kokkos%3A%3AMax) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism) | Reducer for Maximum reduction |
