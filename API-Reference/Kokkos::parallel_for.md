@@ -48,14 +48,14 @@ Kokkos::parallel_for(const ExecPolicy& policy,
 
 ## Semantics
 
-* Neither concurrency nor order of execution are guaranteed.
-* The call is potentially asynchronous.
+* Neither concurrency nor order of execution of iterations are guaranteed.
+* The call is potentially asynchronous. To guarantee a kernel has finished, a developer should call fence on the execution space on which the kernel is run.
 
 ## Examples
 
 More Detailed Examples are provided in the ExecutionPolicy documentation. 
 
-* `IntergerType` policy with lambda as the functor.  Note that KOKKOS_LAMBDA is the same as [=] KOKKOS_FUNCTION, which means that all of the variables used within the lambda are captured by value.  Also, the KOKKOS_LAMBDA and KOKKOS_FUNCTION macros add all of the function specifiers necessary for the target execution space.
+* `IntegerType` policy with lambda as the functor.  Note that KOKKOS_LAMBDA is the same as [=] KOKKOS_FUNCTION, which means that all of the variables used within the lambda are captured by value.  Also, the KOKKOS_LAMBDA and KOKKOS_FUNCTION macros add all of the function specifiers necessary for the target execution space.
 
 ```c++
 #include<Kokkos_Core.hpp>

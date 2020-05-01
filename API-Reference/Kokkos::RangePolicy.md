@@ -64,7 +64,7 @@ RangePolicy defines an execution policy for a 1D iteration space starting at beg
 
 ### Common Arguments for all Execution Policies
 
-  * Execution Policies generally accept compile time arguments via template parameters and runtime parameters via constructor arguments or setter fucntions.
+  * Execution Policies generally accept compile time arguments via template parameters and runtime parameters via constructor arguments or setter functions.
   * Template arguments can be given in arbitrary order.
 
 | Argument | Options | Purpose |

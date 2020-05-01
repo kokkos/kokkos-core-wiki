@@ -234,17 +234,17 @@ Kokkos lets users specify a scan by either a functor or a lambda. Both look like
 ```c++
     View<float*> x = ...; // assume filled with input values
     const size_t N = x.extent_0 ();
-    parallel_scan (N, KOKKOS_LAMBDA (const int& i,
-              float& upd, const bool& final) {
+    parallel_scan (N, KOKKOS_LAMBDA (const int i,
+              float& update, const bool final) {
         // Load old value in case we update it before accumulating
         const float val_i = x(i); 
         if (final) {
-          x(i) = upd; // only update array on final pass
+          x(i) = update; // only update array on final pass
         }
         // For exclusive scan, change the update value after
         // updating array, like we do here. For inclusive scan,
         // change the update value before updating array.
-        upd += val_i;
+        update += val_i;
       });
 ```
 
@@ -271,14 +271,14 @@ When writing class-based applications it often is useful to make the classes the
       }
     
      KOKKOS_INLINE_FUNCTION
-      void operator() (const BarTag&, const int& i) const {
+      void operator() (const BarTag&, const int i) const {
         ...
         foobar();
         ...
       }
     
       KOKKOS_INLINE_FUNCTION
-      void operator() (const RabTag&, const int& i) const {
+      void operator() (const RabTag&, const int i) const {
         ...
         foobar();
         ...

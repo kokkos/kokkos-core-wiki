@@ -409,8 +409,6 @@ Architecture-specific optimizations can be enabled by specifiying `-DKokkos_ARCH
     * BOOL Default: OFF
 
 
-
-
 ## 4.3 Using Trilinos' CMake build system
 
 The Trilinos project (see `trilinos.org`) is an effort to develop algorithms and enabling technologies within an object-oriented software framework for the solution of large-scale, complex multiphysics engineering and scientific problems. Trilinos is organized into packages. Even though Kokkos is a stand-alone software project, Trilinos uses Kokkos extensively. Thus, Trilinos' source code includes Kokkos' source code, and builds Kokkos as part of its build process.
@@ -523,5 +521,6 @@ Currently, Kokkos organizes its execution spaces into three categories:
  - Device Parallel: Typically an attached GPU, currently: `CUDA`, `OpenMPTarget`, and `ROCm`.
 
 The current Kokkos policy is to allow users, at compile time, to enable *at most one* execution space from each category. This prevents incompatibilities between different spaces in the same category from degrading the user's correctness and performance.
+
 
 **[[Chapter 5: Initialization|Initialization]]**

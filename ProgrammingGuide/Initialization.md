@@ -49,8 +49,8 @@ Argument | Description
 --kokkos-help     | print this message
 --kokkos-threads  | specify total number of threads or number of threads per NUMA region if used in conjunction with `--numa` option.
 --kokkos-numa=INT | specify number of NUMA regions used by process. 
---kokkos-device=INT | specify device id to be used by Kokkos. 
---kokkos-ndevices=INT[,INT] | used when running MPI jobs. Specify number of devices per node to be used. Process to device mapping happens by obtaining the local MPI rank and assigning devices round-robin. The optional second argument allows for an existing device to be ignored. This is most useful on workstations with multiple GPUs, one of which is used to drive screen output.
+--kokkos-device-id=INT | specify device id to be used by Kokkos. 
+--kokkos-num-devices=INT[,INT] | used when running MPI jobs. Specify number of devices per node to be used. Process to device mapping happens by obtaining the local MPI rank and assigning devices round-robin. The optional second argument allows for an existing device to be ignored. This is most useful on workstations with multiple GPUs, one of which is used to drive screen output.
 
 
 ***
@@ -89,7 +89,36 @@ args.device_id = 1;
 Kokkos::initialize(args);
 ```
 
-## 5.3 Finalization
+## 5.3 Initialization by environment variables
+
+It is also possible to set environment variables that control Kokkos options.  This can be helpful if you don't have the freedom to set command-line arguments.
+
+### Examples
+
+#### Use all the devices on a node
+
+Suppose that you want to run `my-executable` on one node with 4 Kokkos devices, and you want to run with 1 MPI process per device.
+```
+$ KOKKOS_NUM_DEVICES=4 mpiexec -np 4 my-executable
+```
+
+#### Example: Run on a specific device
+
+Suppose that you want to run `my-executable` on one node with 4 devices, but you only want to use the device with device ID 3.  (The device numbering scheme is vendor specific.  For example, for NVIDIA GPUs, see the output of the `nvidia-smi` command-line utility.)
+```
+$ KOKKOS_DEVICE_ID=3 my-executable
+```
+This environment variable overrides the `KOKKOS_NUM_DEVICES` environment variable.  If you set `KOKKOS_DEVICE_ID`, then all MPI processes on that node will use the same device.
+
+#### Example: Use specific devices (NVIDIA only)
+
+Suppose that you want to run `my-executable` on one node with 4 NVIDIA GPUs, but you only want to use GPUs 1 and 3 with two MPI processes.  (NVIDIA GPU numbering starts with 0.  See the output of the `nvidia-smi` command-line utility.)
+```
+$ CUDA_VISIBLE_DEVICES=1,3 KOKKOS_NUM_DEVICES=2 mpiexec -np 2 my-executable
+```
+This might be useful if you want to run multiple unit tests concurrently on the same node.
+
+## 5.4 Finalization
 
 At the end of each program, Kokkos needs to be shut down in order to free resources; do this by calling `Kokkos::finalize()`. You may wish to set this to be called automatically at program exit, either by setting an `atexit` hook or by attaching the function to `MPI_COMM_SELF` so that it is called automatically at `MPI_Finalize`.
 

@@ -101,7 +101,7 @@ Kokkos::parallel_reduce(const ExecPolicy& policy,
 * Neither concurrency nor order of execution are guaranteed. 
 * The call is potentially asynchronous if the `ReducerArgument` is not a scalar type. 
 * The `ReducerArgument` content will be overwritten, i.e. the value does not need to be initialized to the reduction-neutral element. 
-* The input value to the operator may contain a partial reduction result, Kokkos may only combine the thread local contributions in the end. The operator should modify the input reduction value according to the requested reduction type. 
+* The input value to the operator may contain a partial reduction result, Kokkos may only combine the thread local contributions in the end. The operator must modify the input reduction value according to the requested reduction type. 
 
 ## Examples
 

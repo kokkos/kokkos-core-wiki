@@ -613,7 +613,7 @@ Examples illustrating the rules are:
 2.  Layouts must be compatible
     *  `LayoutRight -> LayoutRight `  / ok
     *  `LayoutLeft -> LayoutRight  `  / not ok except for 1D Views
-    *  `LayoutLeft -> LayoutSride  `  / ok
+    *  `LayoutLeft -> LayoutStride `  / ok
     *  `LayoutStride -> LayoutLeft `  / ok if runtime dimensions allow assignment
 3.  Memory Spaces must match
     *  `Kokkos::View<int*> -> Kokkos::View<int*,HostSpace>`  / ok if default memory space is HostSpace
