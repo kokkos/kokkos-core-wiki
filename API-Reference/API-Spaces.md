@@ -27,3 +27,7 @@ the [`Kokkos::SpaceAccessibility`](Kokkos%3A%3ASpaceAccessibility) trait.
   * [`is_memory_space`](Kokkos%3A%3AMemorySpaceConcept)
   * [`SpaceAccessibility`](Kokkos%3A%3ASpaceAccessibility)
 
+## C-style memory management
+  * [`kokkos_malloc`](Kokkos%3A%3Akokkos_malloc)
+  * [`kokkos_realloc`](Kokkos%3A%3Akokkos_realloc)
+  * [`kokkos_free`](Kokkos%3A%3Akokkos_free)
