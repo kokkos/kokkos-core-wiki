@@ -23,7 +23,7 @@ If allocation succeeds, returns a pointer to the lowest (first) byte in the allo
 
 ## Template parameters
 
-* `MemorySpace`:  Controls the storage location. If omitted the default memory space of the default execution space is used (i.e. `Kokkos::DefaultExecutionSpace::memory_space`).
+* `MemorySpace`:  Controls the storage location. If omitted the memory space of the default execution space is used (i.e. `Kokkos::DefaultExecutionSpace::memory_space`).
 
 ## Return value
 
