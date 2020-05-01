@@ -54,12 +54,11 @@ void Kokkos::deep_copy(ViewSrc::value_type& dest,
 ### Parameters:
 
   * ExecSpace: An [ExecutionSpace](API-Spaces)
-  * ViewDest: A [Kokkos::View](Kokkos%3A%3AView) of non-const data i.e. 
-  * ViewSrc: A [Kokkos::View](Kokkos%3A%3AView).
+  * ViewDest:A [view-like type](ViewLike) (one of [Kokkos::View](Kokkos%3A%3AView), [Kokkos::DynRankView](Kokkos%3A%3ADynRankView), or [Kokkos::OffsetView](Kokkos%3A%3AOffsetView)) with a non-const `value_type` 
+  * ViewSrc: A [view-like type](ViewLike) (one of [Kokkos::View](Kokkos%3A%3AView), [Kokkos::DynRankView](Kokkos%3A%3ADynRankView), or [Kokkos::OffsetView](Kokkos%3A%3AOffsetView))
 
 ### Requirements:
-  
-  * `src` is a [view-like type](ViewLike) (one of [Kokkos::View](Kokkos%3A%3AView), [Kokkos::DynRankView](Kokkos%3A%3ADynRankView), or [Kokkos::OffsetView](Kokkos%3A%3AOffsetView))
+
   * If `src` and `dest` are [Kokkos::View](Kokkos%3A%3AView)s, then all the following are true:
      * `std::is_same<ViewDest::non_const_value_type, ViewSrc::non_const_value_type>::value == true`
      * `src.rank == dest.rank`
