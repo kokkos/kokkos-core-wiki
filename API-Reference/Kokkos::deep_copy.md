@@ -54,8 +54,8 @@ void Kokkos::deep_copy(ViewSrc::value_type& dest,
 ### Parameters:
 
   * ExecSpace: An [ExecutionSpace](API-Spaces)
-  * ViewDest:A [view-like type](ViewLike) (one of [Kokkos::View](Kokkos%3A%3AView), [Kokkos::DynRankView](Kokkos%3A%3ADynRankView), or [Kokkos::OffsetView](Kokkos%3A%3AOffsetView)) with a non-const `value_type` 
-  * ViewSrc: A [view-like type](ViewLike) (one of [Kokkos::View](Kokkos%3A%3AView), [Kokkos::DynRankView](Kokkos%3A%3ADynRankView), or [Kokkos::OffsetView](Kokkos%3A%3AOffsetView))
+  * ViewDest:A [view-like type](ViewLike) with a non-const `value_type` 
+  * ViewSrc: A [view-like type](ViewLike).
 
 ### Requirements:
 
