@@ -59,11 +59,12 @@ void Kokkos::deep_copy(ViewSrc::value_type& dest,
 
 ### Requirements:
   
+  * `src` is a [view-like type](ViewLike) (one of [Kokkos::View](Kokkos%3A%3AView), [Kokkos::DynRankView](Kokkos%3A%3ADynRankView), or [Kokkos::OffsetView](Kokkos%3A%3AOffsetView))
   * If `src` and `dest` are [Kokkos::View](Kokkos%3A%3AView)s, then all the following are true:
      * `std::is_same<ViewDest::non_const_value_type,ViewSrc::non_const_value_type>::value == true`
-     * `ViewDest::rank ==  ViewSrc::rank`
+     * `src.rank ==  dest.rank`
      * For all `k` in `[0, ViewDest::rank)` `dest.extent(k) == src.extent(k)`
-     * `src.span_is_contiguous() && dest.span_is_contiguous()` OR there exists an [ExecutionSpace](API-Spaces) `copy_space` such that both `SpaceAccessibility<copy_space,ViewDest::memory_space>::accessible == true` and `SpaceAccessibility<copy_space,ViewSrc::memory_space>::accessible == true`.
+     * `src.span_is_contiguous() && dest.span_is_contiguous()`, OR there exists an [ExecutionSpace](API-Spaces) `copy_space` such that both `SpaceAccessibility<copy_space, ViewDest::memory_space>::accessible == true` and `SpaceAccessibility<copy_space,ViewSrc::memory_space>::accessible == true`.
   * If `src` is a [Kokkos::View](Kokkos%3A%3AView) and `dest` is a scalar, then `src.rank == 0` is true.
 
 ## Semantics
