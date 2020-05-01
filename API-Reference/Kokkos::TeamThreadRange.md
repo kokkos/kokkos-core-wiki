@@ -9,10 +9,10 @@ Usage:
       [=] (int i, double& lsum) {...},sum);
   ```
 
-TeamThreadRange is an execution policy which can be used for nested parallel patterns. 
+TeamThreadRange is a [nested execution policy](https://github.com/kokkos/ProgrammingGuide/wiki/Execution-Policies#nested-execution-policies) used inside of hierarchical parallelism. 
 In contrast to global policies, the public interface for nested policies is implemented 
 as functions, in order to enable implicit templating on the execution space type via 
-the team handle. 
+the team handle.
 
 ## Synopsis 
   ```c++
