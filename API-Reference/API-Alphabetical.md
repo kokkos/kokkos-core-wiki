@@ -42,7 +42,7 @@ All functions and classes listed here are part of the `Kokkos::` namespace.
 |[atomic_store](Kokkos%3A%3Aatomic_store) | [Core](API-Core) | [Atomic-Operations](Atomic-Operations) | Atomic operation which stores a value. | 
 |[BAnd](Kokkos%3A%3ABAnd) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism) | Reducer for Binary 'And' reduction |
 |[BOr](Kokkos%3A%3ABOr) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism) | Reducer for Binary 'Or' reduction |
-|[complex](Kokkos%3A%3AComplex) | [Core](API-Core) | [Utilities](API-Utilities) | Complex numbers which work on host and device |
+|[complex](Kokkos%3A%3AComplex) | [Core](API-Core) | [STL Compatibility](STL-Compatibility) | Complex numbers which work on host and device |
 |[(X)create_mirror](Kokkos%3A%3Acreate_mirror) | [Core](API-Core) | [View](API-View) | Mirror Host data to Device data |
 |[(X)create_mirror_view](Kokkos%3A%3Acreate_mirror_view) | [Core](API-Core) | [View](API-View) | Mirror Host data to Device data |
 |[Cuda](Kokkos%3A%3ACuda) | [Core](API-Core) | [Spaces](Spaces) | The CUDA Execution Space. |
