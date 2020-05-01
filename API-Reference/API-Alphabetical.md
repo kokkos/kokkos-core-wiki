@@ -96,6 +96,7 @@ All functions and classes listed here are part of the `Kokkos::` namespace.
 |[realloc](Kokkos%3A%3Arealloc) | [Core](API-Core) | [View](API-View) | Resize an existing view without maintaining the content |
 |[ReducerConcept](Kokkos%3A%3AReducerConcept) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism)| Provides the concept for Reducers. |
 |[resize](Kokkos%3A%3Aresize) | [Core](API-Core) | [View](API-View) | Resize an existing view while maintaining the content |
+|[ScopeGuard](Kokkos%3A%3AScopeGuard) | [Core](API-Core) | [Initialization and Finalization](initialize-and-finalize) | class to aggregate initializing and finalizing Kokkos |
 |[SpaceAccessibility](Kokkos%3A%3ASpaceAccessibility) | [Core](API-Core) | [Spaces](API-Spaces) | Facility to query accessibility rules between execution and memory spaces. |
 |[subview](Kokkos%3A%3Asubview) | [Core](API-Core) | [View](API-View) | Crating multi-dimensional array which is a slice of a view |
 |[Sum](Kokkos%3A%3ASum) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism) | Reducer for Sum reduction |
