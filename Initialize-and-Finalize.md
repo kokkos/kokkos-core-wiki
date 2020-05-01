@@ -11,7 +11,7 @@ See [Kokkos::initialize](Kokkos%3A%3Ainitialize) for details.
 
 Shutdown Kokkos initialized execution spaces and release internally managed resources.
 
-See [Kokkos::finalize](Kokkos%3A%3finalize) for details.
+See [Kokkos::finalize](Kokkos%3A%3Afinalize) for details.
 
 
 ## Kokkos::ScopeGuard
