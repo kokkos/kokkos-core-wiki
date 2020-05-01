@@ -25,6 +25,12 @@ and returns the updated value found at that address..
   template<class T>
   T atomic_lshift_fetch(T* const ptr_to_value, const unsigned shift);
 
+  template <class T>
+  T atomic_max_fetch(T* const ptr_to_value, const T val);
+
+  template <class T>
+  T atomic_min_fetch(T* const ptr_to_value, const T val);
+
   template<class T>
   T atomic_mod_fetch(T* const ptr_to_value, const T value);
 
@@ -81,6 +87,24 @@ and returns the updated value found at that address..
   Atomically executes ` *ptr_to_value << shift; return *ptr_to_value;`. 
   * `ptr_to_value`: address of the to be updated value.
   * `shift`: value by which to shift the original variable.
+
+* ```c++
+  template<class T>
+  T atomic_max_fetch(T* const ptr_to_value, const T value);
+  ```
+
+  Atomically executes `*ptr_to_value = max(*ptr_to_value, value); return *ptr_to_value;`.
+  * `ptr_to_value`: address of the to be updated value.
+  * `value`: value which to take the maximum with.
+
+* ```c++
+  template<class T>
+  T atomic_min_fetch(T* const ptr_to_value, const T value);
+  ```
+
+  Atomically executes `*ptr_to_value = min(*ptr_to_value, value); return *ptr_to_value;`.
+  * `ptr_to_value`: address of the to be updated value.
+  * `value`: value which to take the minimum with.
 
 * ```c++
   template<class T>
