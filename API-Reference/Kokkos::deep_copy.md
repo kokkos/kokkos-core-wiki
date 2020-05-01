@@ -61,8 +61,8 @@ void Kokkos::deep_copy(ViewSrc::value_type& dest,
 
   * If `src` and `dest` are [Kokkos::View](Kokkos%3A%3AView)s, then all the following are true:
      * `std::is_same<ViewDest::non_const_value_type, ViewSrc::non_const_value_type>::value == true`
-     * `src.rank == dest.rank`
-     * For all `k` in `[0, dest.rank)` `dest.extent(k) == src.extent(k)`
+     * `src.rank == dest.rank` (or, for `Kokkos::DynRankView`, `src.rank() == dest.rank()`)
+     * For all `k` in `[0, dest.rank)` `dest.extent(k) == src.extent(k)` (or the same as `dest.rank()`
      * `src.span_is_contiguous() && dest.span_is_contiguous()`, *or* there exists an [ExecutionSpace](API-Spaces) `copy_space` (either given or defaulted) such that both `SpaceAccessibility<copy_space, ViewDest::memory_space>::accessible == true` and `SpaceAccessibility<copy_space,ViewSrc::memory_space>::accessible == true`.
   * If `src` is a [Kokkos::View](Kokkos%3A%3AView) and `dest` is a scalar, then `src.rank == 0` is true.
 
