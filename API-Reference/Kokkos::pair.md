@@ -1,4 +1,4 @@
-# `Kokkos::pair
+# `Kokkos::pair`
 
 Header File: `Kokkos_Pair.hpp`
 
@@ -47,7 +47,8 @@ Usage:
     std::pair<T1, T2> to_std_pair() const;
   };
   ```
-## Public Class Members
+
+### Public Class Members
 
 	* `first`: the first element in the pair
   * `second`: the second element in the pair
@@ -59,6 +60,7 @@ Usage:
   * `second_type`: the type of the second element in the pair
 
 ### Constructors
+
     * ```c++
         KOKKOS_DEFAULTED_FUNCTION constexpr pair() = default;
       ```
