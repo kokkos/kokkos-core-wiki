@@ -20,4 +20,6 @@ Reallocates the given area of memory. It must be previously allocated by [`Kokko
 
 ## Return value
 
-(none)
+On success, returns a pointer to the beginning of the newly allocated memory. To avoid a memory leak, the returned pointer must be deallocated with [`Kokkos::kokkos_free()`](Kokkos%3A%3Akokkos_free), the original pointer `ptr` is invalidated and any access to it is undefined behavior (even if reallocation was in-place).
+
+On failure, returns a null pointer. The original pointer ptr remains valid and may need to be deallocated with [`Kokkos::kokkos_free()`](Kokkos%3A%3Akokkos_free).
