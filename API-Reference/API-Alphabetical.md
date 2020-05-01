@@ -32,6 +32,7 @@ All functions and classes listed here are part of the `Kokkos::` namespace.
 
 |Name |Library | Category | Description                  |
 |:---------|:--------|:-----------|:----------------------------|
+|[abort](Kokkos%3A%3Aabort) | [Core](API-Core) | [Utilities](API-Utilities) | Causes abnormal program termination. | 
 |[atomic_exchange](Kokkos%3A%3Aatomic_exchange) | [Core](API-Core) | [Atomic-Operations](Atomic-Operations) | Atomic operation which exchanges a value and returns the old. | 
 |[atomic_compare_exchange](Kokkos%3A%3Aatomic_compare_exchange) | [Core](API-Core) | [Atomic-Operations](Atomic-Operations) | Atomic operation which exchanges a value only if the old value matches a comparison value and returns the old value. | 
 |[atomic_compare_exchange_strong](Kokkos%3A%3Aatomic_compare_exchange_strong) | [Core](API-Core) | [Atomic-Operations](Atomic-Operations) | Atomic operation which exchanges a value only if the old value matches a comparison value and returns true if the exchange is executed. | 
