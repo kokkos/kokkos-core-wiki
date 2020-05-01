@@ -55,6 +55,7 @@ All functions and classes listed here are part of the `Kokkos::` namespace.
 |[fence](Kokkos%3A%3Afence) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism) | Fences execution spaces. |
 |[HostSpace](Kokkos%3A%3AHostSpace) | [Core](API-Core) | [Spaces](API-Spaces) | The primary Host Memory Space. |
 |[HPX](Kokkos%3A%3AHPX) | [Core](API-Core) | [Spaces](API-Spaces) | Execution space using the HPX runtime system execution mechanisms. |
+|[Kokkos::initialize](Kokkos%3A%3Ainitialize) | [Initialization and Finalization](Initialize and Finalize) | function to initialize Kokkos |
 |[is_array_layout](Kokkos%3A%3Ais_array_layout) | [Core](API-Core) | | Trait to detect types that model the [Layout concept](Kokkos%3A%3ALayoutConcept) |
 |[is_execution_policy](Kokkos%3A%3Ais_execution_policy) | [Core](API-Core) | | Trait to detect types that model [ExecutionPolicy concept](Kokkos%3A%3AExecutionPolicyConcept) |
 |[is_execution_space](Kokkos%3A%3Ais_execution_space) | [Core](API-Core) | | Trait to detect types that model [ExecutionSpace concept](Kokkos%3A%3AExecutionSpaceConcept) |
