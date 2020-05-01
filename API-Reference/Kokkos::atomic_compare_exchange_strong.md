@@ -7,7 +7,7 @@ Usage:
   was_exchanged = atomic_compare_exchange_strong(ptr_to_value,comparison_value, new_value);
   ```
 
-Atomicly sets the value at the address given by `ptr_to_value` to `new_value` if the current value at `ptr_to_value`
+Atomically sets the value at the address given by `ptr_to_value` to `new_value` if the current value at `ptr_to_value`
 is equal to `comparison_value`, and returns true if the exchange has happened.
 
 ## Synopsis
@@ -24,7 +24,7 @@ is equal to `comparison_value`, and returns true if the exchange has happened.
   bool atomic_compare_exchange_strong(T* const ptr_to_value, const T comparison_value, const T new_value);
   ```
 
-  Atomicly executes `old_value = *ptr_to_value; if(old_value==comparison_value) *ptr_to_value = new_value; return old_value;`. 
+  Atomically executes `old_value = *ptr_to_value; if(old_value==comparison_value) *ptr_to_value = new_value; return old_value;`. 
   * `ptr_to_value`: address of the to be updated value.
   * `comparison_value`: value to be comapred to.
   * `new_value`: new value.

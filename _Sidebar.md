@@ -27,7 +27,7 @@
 ## **[[API Reference|API-Reference]]**
 ### **[[Content: Alphabetical|API-Alphabetical]]**
 ### **[[Content: Core|API-Core]]**
-1. **[[Initialization|Initialization-API]]**
+1. **[[Initialization and Finalization|Initialize and Finalize]]**
 2. **[[View|API-View]]**
 3. **[[Data Parallelism|Data-Parallelism]]**
 4. **[[Execution Policies|Execution-Policies]]**

@@ -54,8 +54,17 @@ All functions and classes listed here are part of the `Kokkos::` namespace.
 |[ExecutionPolicy Concept](ExecutionPolicyConcept) | [Core](API-Core) | [Execution Policies](Execution-Policies) | Concept for execution policies. |
 |[ExecutionSpace concept](Kokkos%3A%3AExecutionSpaceConcept) | [Core](API-Core) | [Spaces](API-Spaces) | Concept for execution spaces. |
 |[fence](Kokkos%3A%3Afence) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism) | Fences execution spaces. |
+|[finalize](Kokkos%3A%3Afinalize) | [Core](API-Core) | [Initialization and Finalization](initialize-and-finalize) | function to finalize Kokkos |
 |[HostSpace](Kokkos%3A%3AHostSpace) | [Core](API-Core) | [Spaces](API-Spaces) | The primary Host Memory Space. |
 |[HPX](Kokkos%3A%3AHPX) | [Core](API-Core) | [Spaces](API-Spaces) | Execution space using the HPX runtime system execution mechanisms. |
+|[initialize](Kokkos%3A%3Ainitialize) | [Core](API-Core) | [Initialization and Finalization](initialize-and-finalize) | function to initialize Kokkos |
+|[is_array_layout](Kokkos%3A%3Ais_array_layout) | [Core](API-Core) | | Trait to detect types that model the [Layout concept](Kokkos%3A%3ALayoutConcept) |
+|[is_execution_policy](Kokkos%3A%3Ais_execution_policy) | [Core](API-Core) | | Trait to detect types that model [ExecutionPolicy concept](Kokkos%3A%3AExecutionPolicyConcept) |
+|[is_execution_space](Kokkos%3A%3Ais_execution_space) | [Core](API-Core) | | Trait to detect types that model [ExecutionSpace concept](Kokkos%3A%3AExecutionSpaceConcept) |
+|[is_memory_space](Kokkos%3A%3Ais_memory_space) | [Core](API-Core) | | Trait to detect types that model [MemorySpace concept](Kokkos%3A%3AMemorySpaceConcept) |
+|[is_memory_traits](Kokkos%3A%3Ais_memory_traits) | [Core](API-Core) | | Trait to detect specializations of [Kokkos::MemoryTraits](Kokkos%3A%3AMemoryTraits) |
+|[is_reducer](Kokkos%3A%3Ais_reducer) | [Core](API-Core) | | Trait to detect types that model the [Reducer concept](Kokkos%3A%3AReducerConcept) |
+|[is_space](Kokkos%3A%3Ais_space) | [Core](API-Core) | | Trait to detect types that model the [Space concept](Kokkos%3A%3ASpaceConcept) |
 |[LayoutLeft](Kokkos%3A%3ALayoutLeft) | [Core](API-Core) | [Views](Views) | Memory Layout matching Fortran |
 |[LayoutRight](Kokkos%3A%3ALayoutRight) | [Core](API-Core) | [Views](Views) | Memory Layout matching C |
 |[LayoutStride](Kokkos%3A%3ALayoutStride) | [Core](API-Core) | [Views](Views) | Memory Layout for arbitrary strides |
@@ -88,6 +97,7 @@ All functions and classes listed here are part of the `Kokkos::` namespace.
 |[realloc](Kokkos%3A%3Arealloc) | [Core](API-Core) | [View](API-View) | Resize an existing view without maintaining the content |
 |[ReducerConcept](Kokkos%3A%3AReducerConcept) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism)| Provides the concept for Reducers. |
 |[resize](Kokkos%3A%3Aresize) | [Core](API-Core) | [View](API-View) | Resize an existing view while maintaining the content |
+|[ScopeGuard](Kokkos%3A%3AScopeGuard) | [Core](API-Core) | [Initialization and Finalization](initialize-and-finalize) | class to aggregate initializing and finalizing Kokkos |
 |[SpaceAccessibility](Kokkos%3A%3ASpaceAccessibility) | [Core](API-Core) | [Spaces](API-Spaces) | Facility to query accessibility rules between execution and memory spaces. |
 |[subview](Kokkos%3A%3Asubview) | [Core](API-Core) | [View](API-View) | Crating multi-dimensional array which is a slice of a view |
 |[Sum](Kokkos%3A%3ASum) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism) | Reducer for Sum reduction |
@@ -98,3 +108,4 @@ All functions and classes listed here are part of the `Kokkos::` namespace.
 |[ThreadVectorRange](Kokkos%3A%3ANestedPolicies) | [Core](API-Core) | [Execution Policies](Execution-Policies)| Policy to iterate over a 1D index range with the vector lanes of a thread. |
 |[Timer](Kokkos%3A%3ATimer) | [Core](API-Core) | [Utilities](API-Utilities)| A basic timer returning seconds |
 |[View](Kokkos%3A%3AView) | [Core](API-Core) | [View](API-View)| A multi-dimensional array |
+|[View-like Type Concept](ViewLike) | [Core](API-Core) | [View](API-View) | A set of class templates that act like a View |
