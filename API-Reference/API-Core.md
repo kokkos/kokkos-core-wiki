@@ -1,4 +1,4 @@
-### 1. **[[Initialization and Finalization|Initialization-API]]**
+### 1. **[[Initialization and Finalization|Initialize and Finalize]]**
 Initialization and finalization of Kokkos. 
 ### 2. **[[View|API-View]]**
 Kokkos MultiDimensional View class and related free functions. 
