@@ -1,4 +1,4 @@
-# `Kokkos::ParallelScanTag
+# Kokkos::ParallelScanTag
 
 Header File: `Kokkos_ExecPolicy.hpp`
 
@@ -11,8 +11,6 @@ Usage:
   int recommended_team_size = policy.team_size_recommended(
       Functor, Kokkos::ParallelScanTag());
   ```
-
-. 
 
 ## Synopsis 
   ```c++

@@ -28,3 +28,12 @@ Reducer objects used in conjunction with [parallel_reduce](Kokkos%3A%3Aparallel_
 |[Prod](Kokkos%3A%3AProd) | Multiplicative reduction |
 |[Sum](Kokkos%3A%3ASum) | Sum reduction |
 
+## Tags for Team Policy Calculations
+
+Tags passed to `team_size_max` or `team_size_recommended` to identify whether the pattern for which the team size for a functor is being requested
+
+|Tag|pattern
+|:--------------|:-----------------
+[ParallelForTag](ParallelForTag)|parallel\_for
+[ParallelReduceTag](ParallelReduceTag)|parallel\_reduce
+[ParallelScanTag](ParallelScanTag)|parallel\_scan

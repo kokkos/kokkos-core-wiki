@@ -1,4 +1,4 @@
-# `Kokkos::pair
+# `Kokkos::pair`
 
 Header File: `Kokkos_Pair.hpp`
 
@@ -11,8 +11,6 @@ Usage:
     Kokkos::pair<int, float> converted_std_pair(std_pair);
     std::pair<int,float> converted_kokkos_pair = kokkos_pair.to_std_pair();
   ```
-
-. 
 
 ## Synopsis 
   ```c++
@@ -47,9 +45,10 @@ Usage:
     std::pair<T1, T2> to_std_pair() const;
   };
   ```
-## Public Class Members
 
-	* `first`: the first element in the pair
+### Public Class Members
+
+  * `first`: the first element in the pair
   * `second`: the second element in the pair
 
 
@@ -59,53 +58,62 @@ Usage:
   * `second_type`: the type of the second element in the pair
 
 ### Constructors
-    * ```c++
-        KOKKOS_DEFAULTED_FUNCTION constexpr pair() = default;
-      ```
 
-      Default constructor. Initializes both data members with their defaults
+  * 
+  ```c++ 
+  KOKKOS_DEFAULTED_FUNCTION constexpr pair() = default;
+  ```
 
-    * ```c++
-      KOKKOS_FORCEINLINE_FUNCTION constexpr pair(first_type const& f,
-                                               second_type const& s);
-      ```
+  Default constructor. Initializes both data members with their defaults
 
-      Element-wise constructor. Assigns `first` the value of `f`, `second` the value of `s` 
+  * 
+  ```c++
+  KOKKOS_FORCEINLINE_FUNCTION constexpr pair(first_type const& f,
+                                  second_type const& s);
+  ```
 
-    * ```c++
-        template <class U, class V>
-        KOKKOS_FORCEINLINE_FUNCTION constexpr pair(const pair<U, V>& p);
-      ``` 
+  Element-wise constructor. Assigns `first` the value of `f`, `second` the value of `s` 
+
+  * 
+  ```c++
+  template <class U, class V>
+  KOKKOS_FORCEINLINE_FUNCTION constexpr pair(const pair<U, V>& p);
+  ``` 
       
-      Conversion from `std::pair`. Assigns each element of the pair to its corresponding element in the `p`
+  Conversion from `std::pair`. Assigns each element of the pair to its corresponding element in the `p`
 
-    * ```c++
-       template <class U, class V>
-       KOKKOS_FORCEINLINE_FUNCTION constexpr pair(const volatile pair<U, V>& p);
-     ```
+  * 
+  ```c++
+  template <class U, class V>
+  KOKKOS_FORCEINLINE_FUNCTION constexpr pair(const volatile pair<U, V>& p);
+  ```
      
-     Copy constructor from a volatile pair. Copies each element from `p` 
+  Copy constructor from a volatile pair. Copies each element from `p` 
 
 ### Assignment and conversion
 
-    * ```c++
-      template <class U, class V>
-      KOKKOS_FORCEINLINE_FUNCTION pair<T1, T2>& operator=(const pair<U, V>& p);
-      ```
+  * 
+  ```c++
+  template <class U, class V>
+  KOKKOS_FORCEINLINE_FUNCTION pair<T1, T2>& operator=(const pair<U, V>& p);
+  ```
 
-      Sets `first` to `p.first` and `second` to `p.second` 
+Sets `first` to `p.first` and `second` to `p.second` 
  
-  * ```c++ template <class U, class V>
-    KOKKOS_FORCEINLINE_FUNCTION void operator=(const volatile pair<U, V>& p) volatile;
-      ```
+  * 
+  ```c++ 
+  template <class U, class V>
+  KOKKOS_FORCEINLINE_FUNCTION void operator=(const volatile pair<U, V>& p) volatile;
+  ```
+  
+  Sets `first` to `p.first` and `second` to `p.second` 
 
-      Sets `first` to `p.first` and `second` to `p.second` 
 
+  ### Functions
 
-### Functions
+  * 
+  ```c++
+  std::pair<T1, T2> to_std_pair() const;
+  ```
 
-  * ```c++
-    std::pair<T1, T2> to_std_pair() const;
-    ```
-
-    Returns a `std::pair` whose contents match those of the `Kokkos::pair`. Useful for interacting with libraries that explicitly only accept `std::pair`
+  Returns a `std::pair` whose contents match those of the `Kokkos::pair`. Useful for interacting with libraries that explicitly only accept `std::pair`

@@ -54,23 +54,22 @@ void Kokkos::deep_copy(ViewSrc::value_type& dest,
 ### Parameters:
 
   * ExecSpace: An [ExecutionSpace](API-Spaces)
-  * ViewDest: A [Kokkos::View](Kokkos%3A%3AView) of non-const data i.e. 
-  * ViewSrc: A [Kokkos::View](Kokkos%3A%3AView).
+  * ViewDest:A [view-like type](ViewLike) (one of [Kokkos::View](Kokkos%3A%3AView), [Kokkos::DynRankView](Kokkos%3A%3ADynRankView), or [Kokkos::OffsetView](Kokkos%3A%3AOffsetView)) with a non-const `value_type` 
+  * ViewSrc: A [view-like type](ViewLike) (one of [Kokkos::View](Kokkos%3A%3AView), [Kokkos::DynRankView](Kokkos%3A%3ADynRankView), or [Kokkos::OffsetView](Kokkos%3A%3AOffsetView))
 
 ### Requirements:
-  
-  * `src` is a [view-like type](ViewLike) (one of [Kokkos::View](Kokkos%3A%3AView), [Kokkos::DynRankView](Kokkos%3A%3ADynRankView), or [Kokkos::OffsetView](Kokkos%3A%3AOffsetView))
+
   * If `src` and `dest` are [Kokkos::View](Kokkos%3A%3AView)s, then all the following are true:
-     * `std::is_same<ViewDest::non_const_value_type,ViewSrc::non_const_value_type>::value == true`
-     * `src.rank ==  dest.rank`
-     * For all `k` in `[0, ViewDest::rank)` `dest.extent(k) == src.extent(k)`
-     * `src.span_is_contiguous() && dest.span_is_contiguous()`, OR there exists an [ExecutionSpace](API-Spaces) `copy_space` such that both `SpaceAccessibility<copy_space, ViewDest::memory_space>::accessible == true` and `SpaceAccessibility<copy_space,ViewSrc::memory_space>::accessible == true`.
+     * `std::is_same<ViewDest::non_const_value_type, ViewSrc::non_const_value_type>::value == true`
+     * `src.rank == dest.rank` (or, for `Kokkos::DynRankView`, `src.rank() == dest.rank()`)
+     * For all `k` in `[0, dest.rank)` `dest.extent(k) == src.extent(k)` (or the same as `dest.rank()`
+     * `src.span_is_contiguous() && dest.span_is_contiguous()`, *or* there exists an [ExecutionSpace](API-Spaces) `copy_space` (either given or defaulted) such that both `SpaceAccessibility<copy_space, ViewDest::memory_space>::accessible == true` and `SpaceAccessibility<copy_space,ViewSrc::memory_space>::accessible == true`.
   * If `src` is a [Kokkos::View](Kokkos%3A%3AView) and `dest` is a scalar, then `src.rank == 0` is true.
 
 ## Semantics
 
 * If no [ExecutionSpace](API-Spaces) argument is provided, all outstanding operations (kernels, copy operation) in any execution spaces will be finished before the copy is executed, and the copy operation is finished before the call returns.
-* If an [ExecutionSpace](API-Spaces) argument `exec_space` is provided the call is potentially asynchronous - i.e. the call returns before the copy operation is executed. In that case the copy operation will occur only after any already submitted work to `exec_space` is finished, and the copy operation will be finished before any work submitted to `exec_space` after the `deep_copy` call returns is executed. Note: the copy operation is only synchronous with respect to work in the specific execution space instance, but not necessarily with work in other instances of the same type. This behaves analogous to issuing a `cuda_memcpy_async` into a specific CUDA stream.
+* If an [ExecutionSpace](API-Spaces) argument `exec_space` is provided the call is potentially asynchronous—i.e., the call returns before the copy operation is executed. In that case the copy operation will occur only after any already submitted work to `exec_space` is finished, and the copy operation will be finished before any work submitted to `exec_space` after the `deep_copy` call returns is executed. Note: the copy operation is only synchronous with respect to work in the specific execution space instance, but not necessarily with work in other instances of the same type. This behaves analogous to issuing a `cuda_memcpy_async` into a specific CUDA stream.
 
 ## Examples
 

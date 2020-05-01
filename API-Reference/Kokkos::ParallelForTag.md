@@ -1,4 +1,4 @@
-# `Kokkos::ParallelForTag
+# Kokkos::ParallelForTag
 
 Header File: `Kokkos_ExecPolicy.hpp`
 
@@ -11,8 +11,6 @@ Usage:
   int recommended_team_size = policy.team_size_recommended(
       Functor, Kokkos::ParallelForTag());
   ```
-
-. 
 
 ## Synopsis 
   ```c++
