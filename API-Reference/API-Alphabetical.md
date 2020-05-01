@@ -55,10 +55,12 @@ All functions and classes listed here are part of the `Kokkos::` namespace.
 |[fence](Kokkos%3A%3Afence) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism) | Fences execution spaces. |
 |[HostSpace](Kokkos%3A%3AHostSpace) | [Core](API-Core) | [Spaces](API-Spaces) | The primary Host Memory Space. |
 |[HPX](Kokkos%3A%3AHPX) | [Core](API-Core) | [Spaces](API-Spaces) | Execution space using the HPX runtime system execution mechanisms. |
+|[is_space](Kokkos%3A%3Ais_array_layout) | [Core](API-Core) | | Trait to detect types that model the [Layout concept](Kokkos%3A%3ALayoutConcept) |
 |[is_execution_policy](Kokkos%3A%3Ais_execution_policy) | [Core](API-Core) | | Trait to detect types that model [ExecutionPolicy concept](Kokkos%3A%3AExecutionPolicyConcept) |
 |[is_execution_space](Kokkos%3A%3Ais_execution_space) | [Core](API-Core) | | Trait to detect types that model [ExecutionSpace concept](Kokkos%3A%3AExecutionSpaceConcept) |
 |[is_memory_space](Kokkos%3A%3Ais_memory_space) | [Core](API-Core) | | Trait to detect types that model [MemorySpace concept](Kokkos%3A%3AMemorySpaceConcept) |
 |[is_memory_traits](Kokkos%3A%3Ais_memory_traits) | [Core](API-Core) | | Trait to detect specializations of [Kokkos::MemoryTraits](Kokkos%3A%3AMemoryTraits) |
+|[is_space](Kokkos%3A%3Ais_space) | [Core](API-Core) | | Trait to detect types that model the [Space concept](Kokkos%3A%3ASpaceConcept) |
 |[LayoutLeft](Kokkos%3A%3ALayoutLeft) | [Core](API-Core) | [Views](Views) | Memory Layout matching Fortran |
 |[LayoutRight](Kokkos%3A%3ALayoutRight) | [Core](API-Core) | [Views](Views) | Memory Layout matching C |
 |[LayoutStride](Kokkos%3A%3ALayoutStride) | [Core](API-Core) | [Views](Views) | Memory Layout for arbitrary strides |
