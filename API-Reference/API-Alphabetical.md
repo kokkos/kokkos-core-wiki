@@ -61,6 +61,7 @@ All functions and classes listed here are part of the `Kokkos::` namespace.
 |[is_execution_space](Kokkos%3A%3Ais_execution_space) | [Core](API-Core) | | Trait to detect types that model [ExecutionSpace concept](Kokkos%3A%3AExecutionSpaceConcept) |
 |[is_memory_space](Kokkos%3A%3Ais_memory_space) | [Core](API-Core) | | Trait to detect types that model [MemorySpace concept](Kokkos%3A%3AMemorySpaceConcept) |
 |[is_memory_traits](Kokkos%3A%3Ais_memory_traits) | [Core](API-Core) | | Trait to detect specializations of [Kokkos::MemoryTraits](Kokkos%3A%3AMemoryTraits) |
+|[is_reducer](Kokkos%3A%3Ais_reducer) | [Core](API-Core) | | Trait to detect types that model the [Reducer concept](Kokkos%3A%3AReducerConcept) |
 |[is_space](Kokkos%3A%3Ais_space) | [Core](API-Core) | | Trait to detect types that model the [Space concept](Kokkos%3A%3ASpaceConcept) |
 |[LayoutLeft](Kokkos%3A%3ALayoutLeft) | [Core](API-Core) | [Views](Views) | Memory Layout matching Fortran |
 |[LayoutRight](Kokkos%3A%3ALayoutRight) | [Core](API-Core) | [Views](Views) | Memory Layout matching C |
