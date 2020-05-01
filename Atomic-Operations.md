@@ -7,7 +7,7 @@ After reading this chapter, you should understand the following:
 * Atomic operations can be used to resolve write conflicts
 * How to use the free functions.
 * How to use the Atomic memory trait
-* Using ScatterView for scatter add patterns 
+* Using [[ScatterView|Kokkos::ScatterView]] for scatter add patterns
 
 ## 10.1 Write Conflicts and Their Resolution With Atomic Operations
 
