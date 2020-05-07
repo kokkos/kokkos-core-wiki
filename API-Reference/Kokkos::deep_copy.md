@@ -69,7 +69,7 @@ void Kokkos::deep_copy(ViewSrc::value_type& dest,
 ## Semantics
 
 * If no [ExecutionSpace](API-Spaces) argument is provided, all outstanding operations (kernels, copy operation) in any execution spaces will be finished before the copy is executed, and the copy operation is finished before the call returns.
-* If an [ExecutionSpace](API-Spaces) argument `exec_space` is provided the call is potentially asynchronous—i.e., the call returns before the copy operation is executed. In that case the copy operation will occur only after any already submitted work to `exec_space` is finished, and the copy operation will be finished before any work submitted to `exec_space` after the `deep_copy` call returns is executed. Note: the copy operation is only synchronous with respect to work in the specific execution space instance, but not necessarily with work in other instances of the same type. This behaves analogous to issuing a `cuda_memcpy_async` into a specific CUDA stream.
+* If an [ExecutionSpace](API-Spaces) argument `exec_space` is provided the call is potentially asynchronous—i.e., the call returns before the copy operation is executed. In that case the copy operation will occur only after any already submitted work to `exec_space` is finished, and the copy operation will be finished before any work submitted to `exec_space` after the `deep_copy` call returns is executed. Note: the copy operation is only synchronous with respect to work in the specific execution space instance, but not necessarily with work in other instances of the same type. This behaves analogous to issuing a `cudaMemcpyAsync` into a specific CUDA stream, without any additional synchronization.
 
 ## Examples
 
