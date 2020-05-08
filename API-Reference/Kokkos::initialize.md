@@ -56,8 +56,9 @@ struct InitArguments {
 ### Requirements
 
   * `Kokkos::finalize` must be called after `Kokkos::initialize`.
-  * `Kokkos::initialize` must be called after `MPI_Init` when Kokkos is initialized within an MPI context.
-  * User initiated Kokkos objects cannot be constructed until after `Kokkos::initialize` is called
+  * `Kokkos::initialize` generally should be called after `MPI_Init` when Kokkos is initialized within an MPI context.
+  * User initiated Kokkos objects cannot be constructed until after `Kokkos::initialize` is called.
+  * `Kokkos::initialize` may not be called after a call to `Kokkos::finalize`.
 
 ### Semantics
 
