@@ -142,17 +142,17 @@ int main(int argc, char* argv[]) {
     auto h_view_tmp = Kokkos::create_mirror_view(d_view);
 
     // This inherits the Layout from d_view
-    static_assert(std::is_same<decltype(h_view_tmp)::array_layout,Kokkos::LayoutLeft>::value);
+    static_assert(std::is_same<decltype(h_view_tmp)::array_layout,
+                               Kokkos::LayoutLeft>::value);
 
-    // This now works since h_view_tmp and h_view are both accessible from HostSpace::execution_space
+    // This now works since h_view_tmp and h_view are both accessible 
+    // from HostSpace::execution_space
     Kokkos::deep_copy(h_view_tmp,h_view);
 
     // Now we can copy from h_view_tmp to d_view since they are Layout compatible
     // If we just compiled for OpenMP this is a no-op since h_view_tmp and d_view
     // would reference the same data.
     Kokkos::deep_copy(d_view,h_view_tmp);
-
-
   }
   Kokkos::finalize();
 }
