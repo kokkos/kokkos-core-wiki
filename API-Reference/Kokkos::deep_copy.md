@@ -73,6 +73,7 @@ void Kokkos::deep_copy(ViewSrc::value_type& dest,
 
 ## Examples
 
+### Some Things you can and cannot do
 ```c++
 #include <Kokkos_Core.hpp>
 #include <cstdio>
@@ -118,3 +119,41 @@ int main(int argc, char* argv[]) {
 }
 ```
 
+### How to get layout incompatible views copied
+
+```c++
+#include<Kokkos_Core.hpp>
+
+int main(int argc, char* argv[]) {
+  Kokkos::initialize(argc,argv);
+  {
+    int N = argc>1?atoi(argv[1]):1000000;
+    int R = argc>2?atoi(argv[2]):10;
+
+
+    // Create two views with different Layouts
+    Kokkos::View<int**[5], Kokkos::LayoutLeft> d_view("DeviceView",N,R);
+    Kokkos::View<int**[5], Kokkos::LayoutRight, Kokkos::HostSpace> h_view("HostView",N,R);
+
+    // This would fail for example in a CUDA or HIP build:
+    // Kokkos::deep_copy(d_view,h_view);
+
+    // To copy two views with incompatible layouts between devices we need a temporary
+    auto h_view_tmp = Kokkos::create_mirror_view(d_view);
+
+    // This inherits the Layout from d_view
+    static_assert(std::is_same<decltype(h_view_tmp)::array_layout,Kokkos::LayoutLeft>::value);
+
+    // This now works since h_view_tmp and h_view are both accessible from HostSpace::execution_space
+    Kokkos::deep_copy(h_view_tmp,h_view);
+
+    // Now we can copy from h_view_tmp to d_view since they are Layout compatible
+    // If we just compiled for OpenMP this is a no-op since h_view_tmp and d_view
+    // would reference the same data.
+    Kokkos::deep_copy(d_view,h_view_tmp);
+
+
+  }
+  Kokkos::finalize();
+}
+```
