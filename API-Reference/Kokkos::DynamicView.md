@@ -282,3 +282,7 @@ Kokkos DyanmicView is a potentially reference counted rank 1 array, without layo
     ```
     Returns the label of the DynamicView. 
 
+  * ```c++
+    bool is_allocated() const;
+    ```
+    Returns true if the view points to a valid set of allocated memory chunks.  Note that this will return false until resize_serial is called with a size greater than 0.  
