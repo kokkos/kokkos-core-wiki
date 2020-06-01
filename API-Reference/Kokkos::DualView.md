@@ -238,7 +238,7 @@ class DualView : public ViewTraits<DataType, Arg1Type, Arg2Type, Arg3Type> {
   // Return allocation state of underlying views
   //
   // Returns true if both the host and device views points to a valid memory location.  
-  // This function works for both managed and unmanaged view. With the unmanaged view, 
+  // This function works for both managed and unmanaged views. With the unmanaged view, 
   // there is no guarantee that referenced address is valid, only that it is a non-null 
   // pointer. 
   constexpr bool is_allocated() const;
