@@ -63,6 +63,10 @@ public:
   
   // Device: return the current value at the index
   Value value_at(uint32_t index) const;
+
+  // Host/Device: return true if the internal views (keys, values, hashmap) are allocated
+  constexpr bool is_allocated() const;
+ 
 };
 
 
@@ -71,7 +75,7 @@ public:
   // Was the key/value pair successfully inserted into the map
   bool success() const;
   
-  // Is the key alreay present in the map
+  // Is the key already present in the map
   bool existing() const;
   
   // Did the insert fail?
