@@ -140,7 +140,8 @@ class vector : public DualView<Scalar*, LayoutLeft, Arg1Type> {
   // set the data buffer available at the end of the vector
   void set_overallocation(float extra);
   
-  // returns true if the internal views (host and device) are allocated (non-null pointers).
+  // returns true if the internal views (host and device) are allocated 
+  // (non-null pointers).
   constexpr bool is_allocated() const;
     
 };
