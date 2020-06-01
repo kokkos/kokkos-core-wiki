@@ -224,6 +224,12 @@ Template parameters other than `DataType` are optional, but ordering is enforced
     constexpr unsigned rank() const
     ```
     Returns the dynamic rank of the DynRankView
+
+  * ```c++
+    constexpr bool is_allocated() const;
+    ```
+    Returns true if the view points to a valid memory location.  This function works for both managed and unmanaged view. With the unmanaged view, there is no guarantee that referenced address is valid, only that it is a non-null pointer.
+
 ## Assignment Rules
 
 Assignment rules cover the assignment operator as well as copy constructors. We aim at making all logically legal assignments possible, 
