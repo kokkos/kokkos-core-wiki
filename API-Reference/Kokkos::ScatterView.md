@@ -126,6 +126,11 @@ Usage:
    Constructor from variadic pack of dimension arguments. Constructs `internal_view` member.
 
 ### Functions
+  * ```c++
+    constexpr bool is_allocated() const;
+    ```
+    Returns true if the `internal_view` points to a valid memory location.  This function works for both managed and unmanaged views. With the unmanaged view, there is no guarantee that referenced address is valid, only that it is a non-null pointer.
+
  * ```c++
     access() const;
    ```
