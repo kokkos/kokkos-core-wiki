@@ -243,6 +243,11 @@ Template parameters other than `DataType` are optional, but ordering is enforced
     ```
     Decrement reference count of previously assigned data and set the underlying pointer to arg_data.  Note that the effective result of this operation is that the view is now an unmanaged view; thus, the deallocation of memory associated with arg_data is not linked in anyway to the deallocation of the view. 
 
+  * ```c++
+    constexpr bool is_allocated() const;
+    ```
+    Returns true if the view points to a valid memory location.  This function works for both managed and unmanaged view. With the unmanaged view, there is no guarantee that referenced address is valid, only that it is a non-null pointer.
+
 
 ## Assignment Rules
 
