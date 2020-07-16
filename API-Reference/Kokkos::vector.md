@@ -91,6 +91,10 @@ class vector : public DualView<Scalar*, LayoutLeft, Arg1Type> {
   // returns true if vector is empty
   bool empty() const;
 
+  // returns pointer to the underlying array
+  // [Host only]
+  pointer data() const;
+
   // returns iterator starting at the beginning
   // [Host only]
   iterator begin() const;
