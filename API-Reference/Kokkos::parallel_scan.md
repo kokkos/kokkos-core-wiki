@@ -63,12 +63,9 @@ Kokkos::parallel_scan(const std::string& name,
 
 ### Requirements:
   
-  * If `ExecPolicy` is not `MDRangePolicy` the `functor` has a member function of the form `operator() (const HandleType& handle, ReturnType& value, const bool final) const` or `operator() (const WorkTag, const HandleType& handle, ReturnType& value, const bool final) const` 
+  * The `functor` has a member function of the form `operator() (const HandleType& handle, ReturnType& value, const bool final) const` or `operator() (const WorkTag, const HandleType& handle, ReturnType& value, const bool final) const` 
     * The `WorkTag` free form of the operator is used if `ExecPolicy` is an `IntegerType` or `ExecPolicy::work_tag` is `void`.
     * `HandleType` is an `IntegerType` if `ExecPolicy` is an `IntegerType` else it is `ExecPolicy::member_type`.
-  * If `ExecPolicy` is `MDRangePolicy` the `functor` has a member function of the form `operator() (const IntegerType& i0, ... , const IntegerType& iN, ReturnType& value, const bool final) const` or `operator() (const WorkTag, const IntegerType& i0, ... , const IntegerType& iN, ReturnType& value, const bool final) const` 
-    * The `WorkTag` free form of the operator is used if `ExecPolicy::work_tag` is not `void`.
-    * `N` must match `ExecPolicy::rank`
   * The type `ReturnType` of the `functor` operator must be compatible with the `ReturnType` of the parallel_scan and must match the arguments of the `init` and `join` functions of the functor.  
   * the functor must define FunctorType::value_type the same as ReturnType
        
