@@ -100,43 +100,4 @@ int main(int argc, char* argv[]) {
 }
 ```
 
-```c++
-#include<Kokkos_Core.hpp>
-#include<cstdio> 
-
-struct TagMax {};
-struct TagMin {};
-
-struct Foo {
-  KOKKOS_INLINE_FUNCTION
-  void operator() (const TagMax, const Kokkos::TeamPolicy<>::member_type& team, 
-                   double& lmax, const bool final ) const {
-    if( team.league_rank % 17 + team.team_rank % 13 > lmax )
-      lmax = team.league_rank % 17 + team.team_rank % 13;
-  });
-  KOKKOS_INLINE_FUNCTION
-  void operator() (const TagMin, const Kokkos::TeamPolicy<>::member_type& team, 
-                   double& lmin, const bool final ) const {
-    if( team.league_rank % 17 + team.team_rank % 13 < lmin )
-      lmin = team.league_rank % 17 + team.team_rank % 13;
-  });
-});
-
-int main(int argc, char* argv[]) {
-   Kokkos::initialize(argc,argv);
-
-   int N = atoi(argv[1]);
-
-   Foo foo;
-   double max,min;
-   Kokkos::parallel_scan(Kokkos::TeamPolicy<TagMax>(N,Kokkos::AUTO), foo, max);
-   Kokkos::parallel_scan("Loop2", Kokkos::TeamPolicy<TagMin>(N,Kokkos::AUTO), foo, min);
-   Kokkos::fence();
-
-   printf("Result: %lf %lf\n",min,max);
-
-   Kokkos::finalize();
-}
-```
-
 
