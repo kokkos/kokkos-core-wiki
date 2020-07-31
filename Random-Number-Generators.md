@@ -95,21 +95,21 @@ numbers, of the desired type, using the generator.
     KOKKOS_INLINE_FUNCTION
     Generator (STATE_ARGUMENTS, int state_idx = 0);
 
-    //Draw a equidistributed uint32_t in the range (0,MAX_URAND]
+    //Draw a equidistributed uint32_t in the range [0,MAX_URAND)
     KOKKOS_INLINE_FUNCTION
     uint32_t urand();
 
-    //Draw a equidistributed uint32_t in the range (0,range]
+    //Draw a equidistributed uint32_t in the range [0,range)
     KOKKOS_INLINE_FUNCTION
     uint32_t urand(const uint32_t& range);
 
-    //Draw a equidistributed uint32_t in the range (start,end]
+    //Draw a equidistributed uint32_t in the range [start,end)
     KOKKOS_INLINE_FUNCTION
     uint32_t urand(const uint32_t& start, const uint32_t& end );
     }
 ```
 
-For the selected 32-bit unsigned integer type, three range options are shown: [0,MAX_URAND], [0,range] and [range].
+For the selected 32-bit unsigned integer type, three range options are shown: [0,MAX_URAND), [0,range) and [start,end).
 The first, and default, option selects unsigned integers over max possible range for that data type. The defined value of MAX_URAND is shown above as an enum. (And also shown is maX_URAND for a 64-bit unsigned integer.) The latter two options cover a user-defined range of integers.
 
-More for other data types: Scalar, uint64_t, int, int32_t, int64_t, float, double; also normal distribution and a View-fill option for the [0, range] and [start, end] options.
+More for other data types: Scalar, uint64_t, int, int32_t, int64_t, float, double; also normal distribution and a View-fill option for the [0, range) and [start, end) options.
