@@ -82,7 +82,7 @@ Here is an example reduction using a lambda, where the reduction result is a `do
     // ... fill x with some numbers ...
     double sum = 0.0;
     // KOKKOS_LAMBDA macro includes capture-by-value specifier [=].
-    parallel_reduce (N, KOKKOS_LAMBDA (const int i, double& update) {
+    parallel_reduce ("Reduction", N, KOKKOS_LAMBDA (const int i, double& update) {
       update += x(i); 
     }, sum);
 ```
@@ -152,7 +152,7 @@ This example shows how to use the above functor:
     // ... fill x with some numbers ...
     
     double result;
-    parallel_reduce (N, MaxPlus (x), result);
+    parallel_reduce ("Reduction", N, MaxPlus (x), result);
 ```
 
 ### 7.3.3 Reductions with an array of results
