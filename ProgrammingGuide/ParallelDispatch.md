@@ -66,7 +66,10 @@ The lambda or the `operator()` method of the functor takes one argument. That ar
 
 Kokkos' `parallel_reduce` operation implements a reduction. It is like `parallel_for`, except that each iteration produces a value and these iteration values are accumulated into a single value with a user-specified associative binary operation. It corresponds to the OpenMP construct `#pragma omp parallel reduction` but with fewer restrictions on the reduction operation.
 
-The lambda or the `operator()` method of the functor takes two arguments. The first argument is the parallel loop "index," the type of which depends on the execution policy used for the `parallel_reduce`. If you give `parallel_reduce` an integer range as its first argument, or use `RangePolicy` explicitly, then the first argument of the lambda or `operator()` method is an integer index. Its second argument is a non-const reference to the type of the reduction result or a `reducer` (see **[[Custom Reductions|Programming Guide: Custom Reductions]]**). 
+In addition to the execution policy and the functor, `parallel_reduce` takes an additional argument which is either the place where the final reduction result is stored (a simple scalar, or a `Kokkos::View`) or a reducer argument which encapsulates both the place where to store the final result as well as the type of reduction operation desired (see **[[Custom Reductions|Programming Guide: Custom Reductions]]**). 
+
+The lambda or the `operator()` method of the functor takes two arguments. The first argument is the parallel loop "index," the type of which depends on the execution policy used for the `parallel_reduce`. For example: when calling `parallel_reduce` with a `RangePolicy`, the first argument to the operator is an integer type, but if you call it with a `TeamPolicy` the first argument is a *team handle*. The second argument is a non-const reference to a thread-local variable of the same type as the reduction result.
+
 When not providing a `reducer` the reduction is performed with a sum reduction using the + or += operator of the scalar type. Custom reduction can also be implemented by providing a functor with a `join` and an `init` function. 
 
 ### 7.3.1 Example using lambda
