@@ -35,7 +35,7 @@ IMPL_DETAIL subview(const ViewType& v, Args ... args);
     `pair<ptrdiff_t,ptrdiff_t>(0,v.extent(r))` as the `r`th argument.
   * If the `r`th argument `arg_r` is the `d`th range (`std::pair`, `Kokkos::pair` or 
     `Kokkos::ALL`) in the argument list than `s.extent(d) = arg_r.second-arg_r.first`,
-    and dimension `d` of `s` references the range `(arg_r.first,arg_r.second]` of 
+    and dimension `d` of `s` references the range `[arg_r.first,arg_r.second)` of 
     dimension `r` of `v`.
 
   Restrictions:
