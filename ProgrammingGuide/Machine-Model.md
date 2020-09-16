@@ -20,7 +20,7 @@ Kokkos assumes an _abstract machine model_ for the design of future shared-memor
 2014, Sandia National Laboratories and Lawrence Berkeley National Laboratory, DOE Computer Architecture Laboratories Project
 ***
 
-![node](https://github.com/kokkos/ProgrammingGuide/blob/figure-edits/figures/kokkos-node-doc.png)
+[[ProgrammingGuide/figures/kokkos-node-doc.png]]
 
 <h4>Figure 2.1 Conceptual Model of a Future High Performance Computing Node</h4>
 
@@ -30,7 +30,7 @@ Kokkos uses the term _execution spaces_ to describe a logical grouping of comput
 ### 2.2.1 Execution Space Instances
 An _instance_ of an execution space is a specific instantiation of an execution space to which a programmer can target parallel work. By means of example, an execution space might be used to describe a multi-core processor. In this example, the execution space contains several homogeneous cores which share some logical grouping. In a program written to the Kokkos model, an instance of this execution space would be made available on which parallel kernels could be executed. As a second example, if we were to add a GPU to the multi-core processor so a second execution space type is available in the system, the application programmer would then have two execution space instances available to select from. The important consideration here is that the method of compiling code for different execution spaces and the dispatch of kernels to instances is abstracted by the Kokkos model. This allows application programmers to be free from writing algorithms in hardware specific languages.
 
-![execution-space](https://github.com/kokkos/ProgrammingGuide/blob/figure-edits/figures/kokkos-execution-space-doc.png)
+[[ProgrammingGuide/figures/kokkos-execution-space-doc.png]]
 
 <h4>Figure 2.2 Example Execution Spaces in a Future Computing Node</h4>
 
@@ -40,7 +40,7 @@ The multiple types of memory which will become available in future computing nod
 ### 2.2.3 Instances of Kokkos Memory Spaces
 In much the same way execution spaces have specific instantiations through the availability of an _instance_ so do memory spaces. An instance of a memory space provides a concrete method for the application programmer to request data storage allocations. Returning to the examples provided for execution spaces, the multi-core processor may have multiple memory spaces available including on-package memory, slower DRAM and additional sets of non-volatile memories. The GPU may also provide an additional memory space through its local on-package memory. The programmer is free to decide where each data structure may be allocated by requesting these from the specific instance associated with that memory space. Kokkos provides the appropriate abstraction of the allocation routines and any associated data management operations including releasing the memory, returning it for future use, as well as for copy operations.
 
-![memory-space](https://github.com/kokkos/ProgrammingGuide/blob/figure-edits/figures/kokkos-memory-space-doc.png)
+[[ProgrammingGuide/figures/kokkos-memory-space-doc.png]]
 
 <h4>Figure 2.3 Example Memory Spaces in a Future Computing Node</h4>
 
