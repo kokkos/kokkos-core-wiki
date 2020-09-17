@@ -149,11 +149,11 @@ Called with a `shared_ptr<GraphNodeImpl<Ex, ...>>` (call it `node`) to indicate 
 
 Called with a `shared_ptr<GraphNodeImpl<Ex, ...>` (call it `node`) and a `GraphNodeRef<Ex, ...>` (call it `predecessor`) to indicate that the join of the kernel associated with `predecessor` must finish before the launch of the kernel associate with `node` when the graph is submitted. Both `node` and the `GraphNodeImpl<Ex, ...>` associated with `predecessor` must be objects that have already been registered with `add_node()` on the same graph.
 
-#### `GraphImpl<Ex>::create_root_node_ptr()
+#### `GraphImpl<Ex>::create_root_node_ptr()`
 
 Called once in the lifetime of the graph, at the beginning of the construction phase, to allow the backend to create a node that is a predecessor (at least transitively) to all nodes in the graph. For consistency, `add_node()` will also be called with the value returned by this customization point.
 
-#### `GraphImpl<Ex>::create_aggregate_ptr()
+#### `GraphImpl<Ex>::create_aggregate_ptr()`
 
 Called with a set of predecessors of types `GraphNodeRef<Ex, /* multiple types */>...` (call them `predecessors...`). The returned node should have a trivial kernel, but the implementation should still ensure that the join of the kernel in each of the `predecessors...` completes before any successors of the returned node. For consistency, `add_node` will be called with the returned node, and `add_predecessor` will be called with the returned node and each of the arguments to this customization point.
 
