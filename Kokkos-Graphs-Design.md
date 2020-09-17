@@ -93,9 +93,7 @@ runner.get_execution_space().fence();
 
 #### Type Erasure
 
-The goal of this structure is to enable compile-time kernel fusion when the structure of the application permits it while providing a straightforward interface for situations where 
-
-TODO
+The goal of this structure is to enable compile-time kernel fusion when the structure of the application permits it while providing a straightforward interface for situations where the type of the graph node needs to be named, like when used as data members of classes. More on this below.
 
 
 Backend Customization Point Design
@@ -206,8 +204,6 @@ concept _graph_node_backend_details_before_type_erasure = // exposition only
 ```
 
 
-
-
 Implementation Notes
 --------------------
 
@@ -215,13 +211,6 @@ Implementation Notes
 
 As previously alluded to, the structure of `GraphNodeImpl` is complicated a bit by the desire to minimize type erasure when the user can use return type deduction while maintaining a simple and intuitive interface for when the user needs to write the type explicitly.  The basic structure involves three layers with progressively increased type erasure along side the two previously mentioned backend customization points, `GraphNodeBackendSpecificDetails` and `GraphNodeDetailsBeforeTypeErasure`.  The most-derived version has the concrete type of the kernel _and_ the concrete type of the predecessor. The next layer up erases the predecessor, and the top layer (which the user gets a reference to when they write `GraphNodeRef<ExecSpace>`) erases both the kernel and the predecessor information. 
 
-TODO finish this
-
 ### `GraphNodeKernelImpl`
 
-### Host Backends
-
-
-### Cuda Backend
-
-
+In both of the current backend implementations, `GraphNodeKernelImpl` inherits from the `Impl::Parallel*` specialization of the corresponding pattern. In the host backend, the kernel merely calls the base class `execute()` when the graph implementation determines it's ready to run the kernel; the Cuda backend simply runs the `execute()` method as usual, but there's extra logic in `Kokkos_CudaKernelLaunch.hpp` to recognize graph execution policies and add the kernel to the graph rather than launching it eagerly.
