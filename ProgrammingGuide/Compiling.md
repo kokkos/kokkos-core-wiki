@@ -14,7 +14,7 @@ Note that the build methods listed above should not be mixed. For example, do no
 
 Kokkos consists mainly of header files. Only a few functions have to be compiled into object files outside of the application's source code. Those functions are contained in `.cpp` files inside the `kokkos/core/src` directory and its subdirectories. The files are internally protected with macros to prevent compilation if the related execution space is not enabled. Thus, it is not necessary to create a list of included object files specific to your compilation target; one may simply compile all `.cpp` files. The enabled features are controlled via macros which have to be provided in the compilation line or in the generated `KokkosCore_config.h` include file; a subset of the macros can be found in Table 4.1.  For the most part, all of these macros are enabled/disabled using the options and settings controlled through one of the build methods previously mentioned.
 
-In order to compile Kokkos, a C++11 compliant compiler is needed. For an up to date list of compilers which are tested on a nightly basis, please refer to the README on the github repository. At the time of writing supported compilers include:
+In order to compile Kokkos, a C++14 compliant compiler is needed. For an up to date list of compilers which are tested on a nightly basis, please refer to the README on the github repository. At the time of writing supported compilers include:
 
 ```
     Primary tested compilers on X86
@@ -61,11 +61,11 @@ You can either use Kokkos as an installed package (encouraged) or use Kokkos in-
 
 ### Using Kokkos installed Package
 With the Kokkos package installed, you build and link with the Kokkos library using CMake by adding the following to you your `CMakeLists.txt`:
-````
+````cmake
 find_package(Kokkos REQUIRED)
 ````
 Then for every executable or library in your project:
-````
+````cmake
 target_link_libraries(myTarget Kokkos::kokkos)
 ````
 The target_link_libraries command will find and include all of the necessary pre-processor, compiler, and linker flags that are required for an application using Kokkos.  When running CMake for your project you will need to specify the directory containing the Kokkos package:  
@@ -89,7 +89,7 @@ With Kokkos release 3.0 the externally defined CMAKE_CXX_FLAGS are not propagate
 If building in-tree, the Kokkos source directory must be within a sub-directory of your application source tree (relative to the location of your application CMakeLists.txt)
 
 To include Kokkos in the application add the following to CMakeLists.txt:
-````
+````cmake
 add_subdirectory(<path to Kokkos dir relative to your CMakeList.txt>)
 include_directories(${Kokkos_INCLUDE_DIRS_RET})
 target_link_libraries(myTarget kokkos)
@@ -101,17 +101,17 @@ Using this method, the Kokkos options necessary to specify the devices, arch and
 ## Configuring Kokkos with CMake
 A very basic installation is done with:
 
-````
-mkdir build
-cd build
-cmake ${srcdir} \
+````bash
+> mkdir build
+> cd build
+> cmake ${srcdir} \
  -DCMAKE_CXX_COMPILER=g++ \
  -DCMAKE_INSTALL_PREFIX=${my_install_folder} \
 ````
 which builds and installed a default Kokkos when you run `make install`.
 There are numerous device backends, options, and architecture-specific optimizations that can be configured, e.g.
-````
-cmake ${srcdir} \
+````bash
+> cmake ${srcdir} \
  -DCMAKE_CXX_COMPILER=g++ \
  -DCMAKE_INSTALL_PREFIX=${my_install_folder} \
  -DKokkos_ENABLE_OPENMP=On
@@ -121,28 +121,28 @@ which activates the OpenMP backend. All of the options controlling device backen
 ### Using cm_generate_makefile.bash
 As an alternative to calling the cmake command directly, the cm_generate_makefile.bash command can be used to configure the CMake build environment.  The cm_generate_makefile.bash equivalent to the above OpenMP example is as follows:
 
-````
-${srcdir}/cm_generate_makefile.bash --compiler=g++ \
+````bash
+> ${srcdir}/cm_generate_makefile.bash --compiler=g++ \
   --with-openmp --prefix=${my_install_folder}
 ````
 For a full list of cm_generate_makefile.bash options use the command 
-````
-${srcdir}/cm_generate_makefile.bash --help
+````bash
+> ${srcdir}/cm_generate_makefile.bash --help
 ````
 
 ### Spack
-An alternative to manually building with the CMake is to use the Spack package manager.
-To do so, download the `kokkos-spack` git repo and add to the package list:
-````
-spack repo add $path-to-kokkos-spack
+An alternative to manually building with CMake is to use the Spack package manager.
+To do so, download Spack and add it your path by sourcing the appropriate env file in the share folder, e.g.
+````bash
+> source spack/share/spack/setup-env.sh 
 ````
 A basic installation would be done as:
-````
-spack install kokkos
+````bash
+> spack install kokkos
 ````
 Spack allows options and and compilers to be tuned in the install command.
-````
-spack install kokkos@3.0 %gcc@7.3.0 +openmp
+````bash
+> spack install kokkos@3.0 %gcc@7.3.0 +openmp
 ````
 This example illustrates the three most common parameters to Spack:
 * Variants: specified with, e.g. `+openmp`, this activates (or deactivates with, e.g. `~openmp`) certain options.
@@ -150,37 +150,37 @@ This example illustrates the three most common parameters to Spack:
 * Compiler: a default compiler will be chosen if not specified, but an exact compiler version can be given with the `%`option.
 
 For a complete list of Kokkos options, run:
-````
-spack info kokkos
+````bash
+> spack info kokkos
 ````
 
 #### Spack Development
 Spack currently installs packages to a location determined by a unique hash. This hash name is not really "human readable".
 Generally, Spack usage should never really require you to reference the computer-generated unique install folder.
 If you must know, you can locate Spack Kokkos installations with:
-````
-spack find -p kokkos ...
+````bash
+> spack find -p kokkos ...
 ````
 where `...` is the unique spec identifying the particular Kokkos configuration and version.
 
 A better way to use Spack for doing Kokkos development is the DIY feature of Spack.
 If you wish to develop Kokkos itself, go to the Kokkos source folder:
-````
-spack diy -u cmake kokkos@diy ...
+````bash
+> spack diy -u cmake kokkos@diy ...
 ````
 where `...` is a Spack spec identifying the exact Kokkos configuration.
 This then creates a `spack-build` directory where you can run `make`.
 
 If doing development on a downstream project, you can do almost exactly the same thing.
-````
-spack diy -u cmake ${myproject}@${myversion} ... ^kokkos...
+````bash
+> spack diy -u cmake ${myproject}@${myversion} ... ^kokkos...
 ````
 where the `...` are the specs for your project and the desired Kokkos configuration.
 Again, a `spack-build` directory will be created where you can run `make`.
 
 Spack has a few idiosyncracies that make building outside of Spack annoying related to Spack forcing use of a compiler wrapper. This can be worked around by having a `-DSpack_WORKAROUND=On` given your CMake. Then add the block of code to your CMakeLists.txt:
 
-````
+````cmake
 if (Spack_WORKAROUND)
  set(SPACK_CXX $ENV{SPACK_CXX})
  if(SPACK_CXX)
