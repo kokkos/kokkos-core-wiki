@@ -132,7 +132,7 @@ For a full list of cm_generate_makefile.bash options use the command
 
 ### Spack
 An alternative to manually building with CMake is to use the Spack package manager.
-To do so, download Spack and add it your path by sourcing the appropriate env file in the share folder, e.g.
+To do so, download [Spack](https://github.com/spack/spack) and add it your path by sourcing the appropriate env file in the share folder, e.g.
 ````bash
 > source spack/share/spack/setup-env.sh 
 ````
