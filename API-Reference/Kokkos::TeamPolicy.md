@@ -71,7 +71,6 @@ See also: [TeamMember](Kokkos%3A%3ATeamHandleConcept)
     static int scratch_size_max(int level); 
 
     // querying configuration settings
-    int vector_length() const;
     int team_size() const;
     int league_size() const;
     int scratch_size(int level, int team_size_ = -1) const;
@@ -202,11 +201,6 @@ See also: [TeamMember](Kokkos%3A%3ATeamHandleConcept)
     Returns: the maximum total scratch size in bytes, for the given level. 
 
 ### Query Runtime Settings
-
-  * ```c++
-    int vector_length() const;
-    ```
-    Returns: the requested vector length.
 
   * ```c++
     int team_size() const;
