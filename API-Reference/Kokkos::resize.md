@@ -1,4 +1,4 @@
-# `Kokkos::atomic_resize`
+# `Kokkos::resize`
 
 Header File: `Kokkos_Core.hpp`
 
