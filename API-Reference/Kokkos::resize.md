@@ -8,7 +8,7 @@ Usage:
   resize(view,layout);
   ```
 
-Reallocates a view to have the new dimensions. Can grow or shrink, and will not preserve content.
+Reallocates a view to have the new dimensions. Can grow or shrink, and will preserve content of the common subextents. 
 
 ## Synopsis
 
