@@ -4,6 +4,12 @@
 
 In order to use Kokkos an initialization call is required. That call is responsible for initializing internal objects and acquiring hardware resources such as threads. Typically, this call should be placed right at the start of a program. If you use both MPI and Kokkos, your program should initialize Kokkos right after calling `MPI_Init`. That way, if MPI sets up process binding masks, Kokkos will get that information and use it for best performance. Your program must also _finalize_ Kokkos when done using it in order to free hardware resources.
 
+## 5.0 Include Headers
+
+All primary capabilities of Kokkos are provided by the `Kokkos_Core.hpp` header file. 
+Some capabilities - specifically data structures in the `containers` subpackage and algorithmic capabilities in the `algorithms` subpackage are included via separate header files.
+For specific capabilities check their API reference at **[[API-Reference|API-Reference]]**
+
 ## 5.1 Initialization by command-line arguments
 
 The simplest way to initialize Kokkos is by calling the following function:
@@ -97,5 +103,19 @@ Kokkos::initialize(args);
 ## 5.3 Finalization
 
 At the end of each program, Kokkos needs to be shut down in order to free resources; do this by calling `Kokkos::finalize()`. You may wish to set this to be called automatically at program exit, either by setting an `atexit` hook or by attaching the function to `MPI_COMM_SELF` so that it is called automatically at `MPI_Finalize`.
+
+## 5.4 Example Code
+
+A minimal Kokkos code thus would look like this:
+
+```c++
+#include<Kokkos_Core.hpp>
+
+int main(int argc, char* argv[]) {
+  Kokkos::initialize(argc,argv);
+
+  Kokkos::finalize();
+}
+```
 
 **[[Chapter 6: View|View]]**
