@@ -8,13 +8,13 @@ This chapter explains how to compile Kokkos and how to link your application aga
 *  Trilinos' CMake build system
 *  Embedded GNU Makefile
 
-Note that the build methods listed above should not be mixed. For example, do not include the GNU Makefile in your application build process, while explicitly linking against a pre-compiled Kokkos library in Trilinos. We also include specific advice for building for NVIDIA GPUs and for Intel Xeon Phi.
+Note that the build methods listed above should not be mixed. For example, do not include the GNU Makefile in your application build process, while explicitly linking against a pre-compiled Kokkos library in Trilinos. We also include specific advice for building for NVIDIA GPUs and Intel Xeon Phi.
 
 ## 4.1 General Information
 
-Kokkos consists mainly of header files. Only a few functions have to be compiled into object files outside of the application's source code. Those functions are contained in `.cpp` files inside the `kokkos/core/src` directory and its subdirectories. The files are internally protected with macros to prevent compilation if the related execution space is not enabled. Thus, it is not necessary to create a list of included object files specific to your compilation target; one may simply compile all `.cpp` files. The enabled features are controlled via macros which have to be provided in the compilation line or in the generated `KokkosCore_config.h` include file; a subset of the macros can be found in Table 4.1.  For the most part, all of these macros are enabled/disabled using the options and settings controlled through one of the build methods previously mentioned.
+Kokkos consists mainly of header files. Only a few functions have to be compiled into object files outside of the application's source code. Those functions are contained in `.cpp` files inside the `kokkos/core/src` directory and its subdirectories. The files are internally protected with macros to prevent compilation if the related execution space is not enabled. Thus, it is not necessary to create a list of included object files specific to your compilation target; one may simply compile all `.cpp` files. The enabled features are controlled via macros which have to be provided in the compilation line or the generated `KokkosCore_config.h` include file; a subset of the macros can be found in Table 4.1.  For the most part, all of these macros are enabled/disabled using the options and settings controlled through one of the build methods previously mentioned.
 
-In order to compile Kokkos, a C++14 compliant compiler is needed. For an up to date list of compilers which are tested on a nightly basis, please refer to the README on the github repository. At the time of writing supported compilers include:
+To compile Kokkos, a C++14 compliant compiler is needed. For an up to date list of compilers that are tested on a nightly basis, please refer to the README on the GitHub repository. At the time of writing supported compilers include:
 
 ```
     Primary tested compilers on X86
@@ -72,13 +72,13 @@ The target_link_libraries command will find and include all of the necessary pre
 ````
 -DKokkos_ROOT=<Kokkos Install Directory>/lib64/cmake/Kokkos
 ````
-If compiling with something other than g++, your application should use a compiler which is consistent to that used to build the Kokkos package.  This is especially true when using nvcc_wrapper.
+If compiling with something other than g++, your application should use a compiler that is consistent with that used to build the Kokkos package.  This is especially true when using nvcc_wrapper.
 ````
 -DCMAKE_CXX_COMPILER=<Kokkos Install Directory>/bin/nvcc_wrapper
 ````
 
 **Important note** 
-With Kokkos release 3.0 the externally defined CMAKE_CXX_FLAGS are not propagated to projects that include the kokkos package.  This limitation is especially important when using Clang compilers with gcc and cuda.  The Clang options that are provided via the CMAKE_CXX_FLAGS with the Kokkos project are illustrated below.
+With Kokkos release 3.0 the externally defined CMAKE_CXX_FLAGS are not propagated to projects that include the kokkos package.  This limitation is especially important when using Clang compilers with gcc and Cuda.  The Clang options that are provided via the CMAKE_CXX_FLAGS with the Kokkos project are illustrated below.
 
 ```
 --gcc-toolchain=<path to gcc source tree>
@@ -132,7 +132,7 @@ For a full list of cm_generate_makefile.bash options use the command
 
 ### Spack
 An alternative to manually building with CMake is to use the Spack package manager.
-To do so, download [Spack](https://github.com/spack/spack) and add it your path by sourcing the appropriate env file in the share folder, e.g.
+To do so, download [Spack](https://github.com/spack/spack) and add it to your path by sourcing the appropriate env file in the share folder, e.g.
 ````bash
 > source spack/share/spack/setup-env.sh 
 ````
@@ -140,7 +140,7 @@ A basic installation would be done as:
 ````bash
 > spack install kokkos
 ````
-Spack allows options and and compilers to be tuned in the install command.
+Spack allows options and compilers to be tuned in the install command.
 ````bash
 > spack install kokkos@3.0 %gcc@7.3.0 +openmp
 ````
@@ -171,14 +171,14 @@ If you wish to develop Kokkos itself, go to the Kokkos source folder:
 where `...` is a Spack spec identifying the exact Kokkos configuration.
 This then creates a `spack-build` directory where you can run `make`.
 
-If doing development on a downstream project, you can do almost exactly the same thing.
+If doing development on a downstream project, you can do almost the same thing.
 ````bash
 > spack diy -u cmake ${myproject}@${myversion} ... ^kokkos...
 ````
 where the `...` are the specs for your project and the desired Kokkos configuration.
 Again, a `spack-build` directory will be created where you can run `make`.
 
-Spack has a few idiosyncracies that make building outside of Spack annoying related to Spack forcing use of a compiler wrapper. This can be worked around by having a `-DSpack_WORKAROUND=On` given your CMake. Then add the block of code to your CMakeLists.txt:
+Spack has a few idiosyncrasies that make building outside of Spack annoying related to Spack forcing the use of a compiler wrapper. This can be worked around by having a `-DSpack_WORKAROUND=On` given your CMake. Then add the block of code to your CMakeLists.txt:
 
 ````cmake
 if (Spack_WORKAROUND)
@@ -191,9 +191,9 @@ endif()
 ````
 
 ### Kokkos CMake Keyword Listing
-Note that with version 3.0 all Kokkos CMake keywords are prexed with `Kokkos_` which is case sensitive.  
+Note that with version 3.0 all Kokkos CMake keywords are prefixed with `Kokkos_` which is case sensitive.  
 #### Device Backends
-Device backends can be enabled by specifiying `-DKokkos_ENABLE_X`.
+Device backends can be enabled by specifying `-DKokkos_ENABLE_X`.
 
 * Kokkos_ENABLE_CUDA
     * Whether to build CUDA backend
@@ -212,7 +212,7 @@ Device backends can be enabled by specifiying `-DKokkos_ENABLE_X`.
     * BOOL Default: ON
 
 #### Enable Options
-Options can be enabled by specifiying `-DKokkos_ENABLE_X`.
+Options can be enabled by specifying `-DKokkos_ENABLE_X`.
 
 * Kokkos_ENABLE_AGGRESSIVE_VECTORIZATION
     * Whether to aggressively vectorize loops
@@ -260,7 +260,7 @@ Options can be enabled by specifiying `-DKokkos_ENABLE_X`.
     * Whether to create bindings for profiling tools
     * BOOL Default: ON
 * Kokkos_ENABLE_PROFILING_LOAD_PRINT
-    * Whether to print information about which profiling tools gotloaded
+    * Whether to print information about which profiling tools got loaded
     * BOOL Default: OFF
 * Kokkos_ENABLE_TESTS
     * Whether to build serial  backend
@@ -318,10 +318,19 @@ The following options control `find_package` paths for CMake-based TPLs:
     * PATH Default:
 
 #### Architecture Keywords
-Architecture-specific optimizations can be enabled by specifiying `-DKokkos_ARCH_X`.
+Architecture-specific optimizations can be enabled by specifying `-DKokkos_ARCH_X`.
 
+* Kokkos_ARCH_A64FX
+    * Whether to optimize for ARMv8.2 with SVE Support
+    * BOOL Default: OFF
 * Kokkos_ARCH_AMDAVX
     * Whether to optimize for the AMDAVX architecture
+    * BOOL Default: OFF
+Kokkos_ARCH_AMPERE80
+    * Whether to optimize for the NVIDIA Ampere generation CC 8.0
+    * BOOL Default: OFF
+Kokkos_ARCH_AMPERE86
+    * Whether to optimize for the NVIDIA Ampere generation CC 8.6
     * BOOL Default: OFF
 * Kokkos_ARCH_ARMV80
     * Whether to optimize for the ARMV80 architecture
@@ -332,7 +341,7 @@ Architecture-specific optimizations can be enabled by specifiying `-DKokkos_ARCH
 * Kokkos_ARCH_ARMV8_THUNDERX
     * Whether to optimize for the ARMV8_THUNDERX architecture
     * BOOL Default: OFF
-* Kokkos_ARCH_ARMV8_TX2
+* Kokkos_ARCH_ARMV8_THUNDERX2
     * Whether to optimize for the ARMV8_TX2 architecture
     * BOOL Default: OFF
 * Kokkos_ARCH_BDW
@@ -341,11 +350,11 @@ Architecture-specific optimizations can be enabled by specifiying `-DKokkos_ARCH
 * Kokkos_ARCH_BGQ
     * Whether to optimize for the BGQ architecture
     * BOOL Default: OFF
-* Kokkos_ARCH_EPYC
-    * Whether to optimize for the EPYC architecture
-    * BOOL Default: OFF
 * Kokkos_ARCH_HSW
     * Whether to optimize for the HSW architecture
+    * BOOL Default: OFF
+* Kokkos_ARCH_INTEL_GEN
+    * Whether to optimize for Intel GPUs Gen9+
     * BOOL Default: OFF
 * Kokkos_ARCH_KEPLER30
     * Whether to optimize for the KEPLER30 architecture
@@ -407,15 +416,29 @@ Architecture-specific optimizations can be enabled by specifiying `-DKokkos_ARCH
 * Kokkos_ARCH_WSM
     * Whether to optimize for the WSM architecture
     * BOOL Default: OFF
-
+* Kokkos_ARCH_VEGA900
+    * Whether to optimize for AMD GPU MI25 GFX900
+    * BOOL Default: OFF
+* Kokkos_ARCH_VEGA906
+    * Whether to optimize for AMD GPU MI50/MI60 GFX906
+    * BOOL Default: OFF
+* Kokkos_ARCH_VEGA908
+    * Whether to optimize for AMD GPU MI100 GFX908
+    * BOOL Default: OFF
+* Kokkos_ARCH_ZEN
+    * Whether to optimize for AMD Zen architecture
+    * BOOL Default: OFF
+* Kokkos_ARCH_ZEN2
+    * Whether to optimize for AMD Zen2 architecture
+    * BOOL Default: OFF
 
 ## 4.3 Using Trilinos' CMake build system
 
 The Trilinos project (see `trilinos.org`) is an effort to develop algorithms and enabling technologies within an object-oriented software framework for the solution of large-scale, complex multiphysics engineering and scientific problems. Trilinos is organized into packages. Even though Kokkos is a stand-alone software project, Trilinos uses Kokkos extensively. Thus, Trilinos' source code includes Kokkos' source code, and builds Kokkos as part of its build process.
 
-Trilinos' build system uses CMake. Thus, in order to build Kokkos as part of Trilinos, you must first install CMake (version `3.10` or newer). To enable Kokkos when building Trilinos, set the CMake option `Trilinos_ENABLE_Kokkos`. Trilinos' build system lets packages express dependencies on other packages or external libraries. If you enable any Trilinos package (e.g., Tpetra) that has a required dependency on Kokkos, Trilinos will enable Kokkos automatically. Configuration macros are automatically inferred from Trilinos settings. For example, if the CMake option `Trilinos_ENABLE_OpenMP` is `ON`, Trilinos will define the macro `Kokkos_ENABLE_OPENMP`. Trilinos' build system will autogenerate the previously mentioned `KokkosCore_config.h` file that contains those macros.
+Trilinos' build system uses CMake. Thus, to build Kokkos as part of Trilinos, you must first install CMake (version `3.10` or newer). To enable Kokkos when building Trilinos, set the CMake option `Trilinos_ENABLE_Kokkos`. Trilinos' build system lets packages express dependencies on other packages or external libraries. If you enable any Trilinos package (e.g., Tpetra) that has a required dependency on Kokkos, Trilinos will enable Kokkos automatically. Configuration macros are automatically inferred from Trilinos settings. For example, if the CMake option `Trilinos_ENABLE_OpenMP` is `ON`, Trilinos will define the macro `Kokkos_ENABLE_OPENMP`. Trilinos' build system will autogenerate the previously mentioned `KokkosCore_config.h` file that contains those macros.
 
-Trilinos' CMake build system utilizes Kokkos' build system to set compiler flags, compiler options, architectures, etc. CMake variables `CMAKE_CXX_COMPILER`, `CMAKE_C_COMPILER`, and `CMAKE_FORTRAN_COMPILER` are used to specify the compiler. To configure Trilinos for various archictures, with Kokkos enabled, the CMake variable `Kokkos_ARCH` should be set to the appropriate architecture as specified in the Table 4.3.
+Trilinos' CMake build system utilizes Kokkos' build system to set compiler flags, compiler options, architectures, etc. CMake variables `CMAKE_CXX_COMPILER`, `CMAKE_C_COMPILER`, and `CMAKE_FORTRAN_COMPILER` are used to specify the compiler. To configure Trilinos for various architectures, with Kokkos enabled, the CMake variable `Kokkos_ARCH` should be set to the appropriate architecture as specified in Table 4.3.
 
 <h4>Table 4.3: Architecture Variables</h4>
 
@@ -449,9 +472,9 @@ Variable  | Description
 `Volta72` | NVIDIA Volta generation CC 7.2
 
 
-Multiple architectures can be specified by separting the architecture variables with a semi-colon, for example `Kokkos_ARCH:STRING="HSW;Kepler35` sets architecture variables for a machine with Intel Haswell CPUs and a NVIDIA Tesla K40 GPU. In addition, when setting the `Kokkos_ARCH` variable it is not necessary to pass required architecture-specific flags to CMake, for example via the `CMAKE_CXX_FLAGS` variable.
+Multiple architectures can be specified by separating the architecture variables with a semi-colon, for example, `Kokkos_ARCH:STRING="HSW;Kepler35` sets architecture variables for a machine with Intel Haswell CPUs and an NVIDIA Tesla K40 GPU. Also, when setting the `Kokkos_ARCH` variable it is not necessary to pass required architecture-specific flags to CMake, for example via the `CMAKE_CXX_FLAGS` variable.
 
-Several Trilinos packages with CUDA support currently require the use of UVM (note UVM is enabled by default when configuring Trilinos with CUDA enabled, unless the user explictly disables it). To ensure proper compilation and execution for such packages, the environment variables `export CUDA_LAUNCH_BLOCKING=1` and `export CUDA_MANAGED_FORCE_DEVICE_ALLOC=1` must be set.
+Several Trilinos packages with CUDA support currently require the use of UVM (note UVM is enabled by default when configuring Trilinos with CUDA enabled, unless the user explicitly disables it). To ensure proper compilation and execution for such packages, the environment variables `export CUDA_LAUNCH_BLOCKING=1` and `export CUDA_MANAGED_FORCE_DEVICE_ALLOC=1` must be set.
 
 We refer readers to Trilinos' documentation for further details.
 
@@ -459,7 +482,7 @@ We refer readers to Trilinos' documentation for further details.
 
 The base of the build system is the file `Makefile.kokkos`; it is designed to be included by application Makefiles. It contains logic to (re)generate the `KokkosCore_config.h` file if necessary, build the Kokkos library, and provide updated compiler and linker flags. 
 
-The system can digest a number of variables which are used to configure Kokkos settings and then parses the variables for Keywords. This allows for multiple options to be given for each variable. The separator doesn't matter as long as it doesn't interact with the Make system. A list of variables, their meaning and options are given in Table 4.4.
+The system can digest several variables that are used to configure Kokkos settings and then parses the variables for Keywords. This allows for multiple options to be given for each variable. The separator doesn't matter as long as it doesn't interact with the Make system. A list of variables, their meaning and options are given in Table 4.4.
 
 A word of caution on where to include the `Makefile.kokkos`: since the embedded Makefiles define targets, it is usually better to include it after the first application target has been defined. Since that target can't use the flags from the embedded Makefiles, it should be a meta target:
 
@@ -495,7 +518,7 @@ Variable  | Description
 `Options` <br> `Default` | yes, no <br> no
 `KOKKOS_CXX_STANDARD (IN)` | Set the C++ standard to be used.
 `Options` <br> `Default`  | C++11 <br> C++11
-`KOKKOS_CPPFLAGS (OUT)` | Preprocessor flags (include directories and defines). Add this to applications compiler and preprocessor flags.
+`KOKKOS_CPPFLAGS (OUT)` | Preprocessor flags (include directories and defines). Add this to the applications compiler and preprocessor flags.
 `KOKKOS_CXXFLAGS (OUT)` | Compiler flags. Add this to the applications compiler flags.
 `KOKKOS_LDFLAGS (OUT)` | Linker flags. Add this to the applications linker flags.
 `KOKKOS LIBS (OUT)` | Libraries required by Kokkos. Add this to the link line after the linker flags.
