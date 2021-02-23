@@ -79,7 +79,7 @@ Usage:
 
   ```c++
     MDRangePolicy<Rank<3>> policy_1({0,0,0},{N0,N1,N2});
-    RangePolicy<Cuda,Rank<3,Iterate::Right,Iterate::Left>> policy_2({5,5,5},{N0-5,N1-5,N2-5},{T0,T1,T2});
+    MDRangePolicy<Cuda,Rank<3,Iterate::Right,Iterate::Left>> policy_2({5,5,5},{N0-5,N1-5,N2-5},{T0,T1,T2});
   ```
 
 
