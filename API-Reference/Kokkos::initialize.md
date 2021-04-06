@@ -30,7 +30,7 @@ including Kokkos object constructors.  The function has two overloads.  One take
      * `--kokkos-help`,`--help`: print the valid arguments
      * `--kokkos-threads=INT`,`--threads=INT`: specify total number of threads or number of threads per NUMA region if used in conjunction with the `--numa` option.
      * `--kokkos-numa=INT`,`--numa=INT`: specify number of NUMA regions used by each process. 
-     * `--device`,`--device-id`: specify device id to be used by Kokkos (CUDA,HIP) 
+     * `--device`,`--device-id`: specify device id to be used by Kokkos (CUDA,HIP,SYCL) 
      * `--num-devices=INT[,INT]`: used when running MPI jobs. Specify number of devices per node to be used. see [Initialization](Initialization) for more detail.
 
   * args: structure of valid Kokkos arguments
