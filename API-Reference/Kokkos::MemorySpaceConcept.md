@@ -38,7 +38,7 @@ The concept of a `MemorySpace` is the fundamental abstraction to represent the "
 ### Typedefs
 
   * `memory_space`: The self type;
-  * `execution_space`: the default [`ExecutionSpace`](ExecutionSpaceConcept) to use when constructing objects in memory provided by an instance of `MSp`, 
+  * `execution_space`: the default [`ExecutionSpace`](ExecutionSpaceConcept) to use when constructing objects in memory provided by an instance of `MemorySpace`, 
                        or (potentially) when deep copying from or to such memory (see [`deep_copy` documentation](Kokkos%3A%3Adeep_copy) for details). 
                        Kokkos guarantees that `Kokkos::SpaceAccessibility<execution_space, memory_space>::accessible` will be `true` 
                        (see [`Kokkos::SpaceAccessibility`](Kokkos%3A%3ASpaceAccessibility)).
