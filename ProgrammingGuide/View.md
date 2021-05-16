@@ -523,7 +523,7 @@ Types for which atomic access are performed must support the necessary operators
 
 ```c++
 Kokkos::View<int*> a("a" , 100);
-Kokkos::View<int*, Kokkos::MemoryTraits<Atomic> > a_atomic = a;
+Kokkos::View<int*, Kokkos::MemoryTraits<Kokkos::Atomic> > a_atomic = a;
     
 a_atomic(1) += 1; // This access will do an atomic addition
 ```
