@@ -53,7 +53,7 @@ public:
   uint32_t find(Key key) const
   
   // Device: Does the key exist in the map 
-  bool exist(Key key) const
+  bool exists(Key key) const
 
   // Device: is the current index a valid key/value pair
   bool valid_at(uint32_t index) const;
