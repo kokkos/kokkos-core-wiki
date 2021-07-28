@@ -18,7 +18,7 @@ See also: [TeamMember](Kokkos%3A%3ATeamHandleConcept)
   ```c++
   template<class ... Args>
   class Kokkos::TeamPolicy {
-    typedef TeamPolicy execution_policy;
+    using execution_policy = TeamPolicy;
 
     //Inherited from PolicyTraits<Args...>  
     using execution_space   = PolicyTraits<Args...>::execution_space; 
@@ -28,35 +28,35 @@ See also: [TeamMember](Kokkos%3A%3ATeamHandleConcept)
     using iteration_pattern = PolicyTraits<Args...>::iteration_pattern; 
     using launch_bounds     = PolicyTraits<Args...>::launch_bounds;
 
-    typedef TeamMemberType<execution_space> member_type ;
+    using member_type = TeamMemberType<execution_space>;
 
     //Constructors
     TeamPolicy(const TeamPolicy&) = default;
     TeamPolicy(TeamPolicy&&) = default;
 
-    inline TeamPolicy();
+    TeamPolicy();
 
     template<class ... Args>
-    inline TeamPolicy( const typename traits::execution_space & work_space
-             , const index_type league_size
-             , const index_type team_size
-             , const index_type vector_length = 1);
+    TeamPolicy( const typename traits::execution_space & work_space
+              , const index_type league_size
+              , const index_type team_size
+              , const index_type vector_length = 1);
 
     template<class ... Args>
-    inline TeamPolicy( const index_type league_size
-             , const index_type team_size
-             , const index_type vector_length = 1);
+    TeamPolicy( const index_type league_size
+              , const index_type team_size
+              , const index_type vector_length = 1);
 
     TeamPolicy& operator = (const TeamPolicy&) = default;
 
     
     // set chunk_size to a discrete value
-    inline TeamPolicy& set_chunk_size(int chunk);
+    TeamPolicy& set_chunk_size(int chunk);
     // set scratch size for per-team and/or per-thread
-    inline TeamPolicy& set_scratch_size(const int& level, const Impl::PerTeamValue& per_team);
-    inline TeamPolicy& set_scratch_size(const int& level, const Impl::PerThreadValue& per_thread);
-    inline TeamPolicy& set_scratch_size(const int& level, const Impl::PerTeamValue& per_team, const Impl::PerThreadValue& per_thread);
-    inline TeamPolicy& set_scratch_size(const int& level, const Impl::PerThreadValue& per_thread, const Impl::PerTeamValue& per_team);
+    TeamPolicy& set_scratch_size(const int& level, const Impl::PerTeamValue& per_team);
+    TeamPolicy& set_scratch_size(const int& level, const Impl::PerThreadValue& per_thread);
+    TeamPolicy& set_scratch_size(const int& level, const Impl::PerTeamValue& per_team, const Impl::PerThreadValue& per_thread);
+    TeamPolicy& set_scratch_size(const int& level, const Impl::PerThreadValue& per_thread, const Impl::PerTeamValue& per_team);
 
     // querying configuration limits
     template<class FunctorType>
