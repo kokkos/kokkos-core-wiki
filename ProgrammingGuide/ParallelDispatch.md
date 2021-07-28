@@ -96,7 +96,7 @@ The following example shows a reduction using the _max-plus semiring_, where `ma
     public:
       // Kokkos reduction functors need the value_type typedef.
       // This is the type of the result of the reduction.
-      typedef double value_type;
+      using value_type = double;
     
       // Just like with parallel_for functors, you may specify
       // an execution_space typedef. If not provided, Kokkos
@@ -109,7 +109,7 @@ The following example shows a reduction using the _max-plus semiring_, where `ma
     
       // This is helpful for determining the right index type,
       // especially if you expect to need a 64-bit index.
-      typedef View<double*>::size_type size_type;
+      using size_type = View<double*>::size_type;
     
       KOKKOS_INLINE_FUNCTION void
       operator() (const size_type i, value_type& update) const
@@ -162,10 +162,9 @@ Kokkos lets you compute reductions with an array of reduction results, as long a
 ```c++
     struct ColumnSums {
       // In this case, the reduction result is an array of float.
-      // Note the C++ notation for an array typedef.
-      typedef float value_type[];
+      using value_type = float[];
     
-     typedef View<float**>::size_type size_type;
+      using size_type = View<float**>::size_type;
     
       // Tell Kokkos the result array's number of entries.
       // This must be a public value in the functor.
