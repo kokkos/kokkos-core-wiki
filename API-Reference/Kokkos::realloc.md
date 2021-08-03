@@ -1,4 +1,4 @@
-# `Kokkos::atomic_realloc`
+# `Kokkos::realloc`
 
 Header File: `Kokkos_Core.hpp`
 
