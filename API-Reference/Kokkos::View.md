@@ -248,6 +248,19 @@ Template parameters other than `DataType` are optional, but ordering is enforced
     ```
     Returns true if the view points to a valid memory location.  This function works for both managed and unmanaged views. With the unmanaged view, there is no guarantee that referenced address is valid, only that it is a non-null pointer.
 
+## NonMember Functions
+
+  * ```c++
+    template<class ViewDst, class ViewSrc>
+    bool operator==(ViewDst, ViewSrc);
+    ```
+    Returns true if `value_type`, `layout_type`, `memory_space`, `data()` and extents match. 
+
+  * ```c++
+    template<class ViewDst, class ViewSrc>
+    bool operator!=(ViewDst, ViewSrc);
+    ```
+    Returns true if any of `value_type`, `layout_type`, `memory_space`, `data()` and extents don't match. 
 
 ## Assignment Rules
 
