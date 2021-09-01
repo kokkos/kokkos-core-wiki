@@ -254,13 +254,13 @@ Template parameters other than `DataType` are optional, but ordering is enforced
     template<class ViewDst, class ViewSrc>
     bool operator==(ViewDst, ViewSrc);
     ```
-    Returns true if `value_type`, `layout_type`, `memory_space`, `data()` and extents match. 
+    Returns true if `value_type`, `array_layout`, `memory_space`, `rank`, `data()` and `extent(r)`, for `0<=r<rank`, match. 
 
   * ```c++
     template<class ViewDst, class ViewSrc>
     bool operator!=(ViewDst, ViewSrc);
     ```
-    Returns true if any of `value_type`, `layout_type`, `memory_space`, `data()` and extents don't match. 
+    Returns true if any of `value_type`, `array_layout`, `memory_space`, `rank`, `data()` and `extent(r)`, for `0<=r<rank` don't match. 
 
 ## Assignment Rules
 
