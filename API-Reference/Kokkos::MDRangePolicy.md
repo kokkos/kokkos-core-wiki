@@ -39,7 +39,7 @@ Usage:
     class Rank;
     ```
     Determines the rank of the index space as well as in which order to iterate over the tiles and how to iterate within the tiles. 
-    `outer` and `inner` can be `Kokkos::Iterate::default`, `Kokkos::Iterate::left`, or `Kokkos::Iterate::right`. 
+    `outer` and `inner` can be `Kokkos::Iterate::Default`, `Kokkos::Iterate::Left`, or `Kokkos::Iterate::Right`. 
     
 ### Requirements:
 
