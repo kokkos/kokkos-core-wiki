@@ -105,6 +105,7 @@ public:
     return true;
   }
 };
+}
 
 int main( int argc, char* argv[] ) {
 
@@ -112,12 +113,12 @@ int main( int argc, char* argv[] ) {
   {
      int E = 1024;
 
-     typedef array_type<int,4> ValueType;
-     typedef SumMyArray <int, Kokkos::HostSpace, 4> ArraySumResult;
+     typedef sample::array_type<int,4> ValueType;
+     typedef sample::SumMyArray <int, Kokkos::CudaSpace, 4> ArraySumResult;
 
      ValueType tr;
 
-     Kokkos::parallel_reduce (  E, [&] (const int j, ValueType &upd ) {
+     Kokkos::parallel_reduce (  E, KOKKOS_LAMBDA (const int i, ValueType &upd ) {
         int ndx =i%4;  // sum all of the i%4 entries (divide total by 4)
         upd.myArray[ndx] += 1;
      }, ArraySumResult(tr) );
@@ -127,8 +128,6 @@ int main( int argc, char* argv[] ) {
          tr.myArray[0], tr.myArray[1], tr.myArray[2], tr.myArray[3] );
   }
   Kokkos::finalize();
-}
-
 }
 
 ```
