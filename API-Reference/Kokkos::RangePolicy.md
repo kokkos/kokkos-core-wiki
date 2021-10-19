@@ -69,9 +69,10 @@ RangePolicy defines an execution policy for a 1D iteration space starting at beg
 
 | Argument | Options | Purpose |
 | --- | --- | --- |
-| ExecutionSpace | `Serial`, `OpenMP`, `Threads`, `Cuda`, `ROCm` | Specify the Execution Space to execute the kernel in. Defaults to `Kokkos::DefaultExecutionSpace`. |
+| ExecutionSpace | `Serial`, `OpenMP`, `Threads`, `Cuda`, `HIP`, `SYCL`, `HPX` | Specify the Execution Space to execute the kernel in. Defaults to `Kokkos::DefaultExecutionSpace`. |
 | Schedule | `Schedule<Dynamic>`, `Schedule<Static>` | Specify scheduling policy for work items. `Dynamic` scheduling is implemented through a work stealing queue. Default is machine and backend specific. |
-| IndexType | `IndexType<T>` | Specify type to be used for traversing the iteration space. Defaults to the default type of the execution space.|
+| IndexType | `IndexType<int>` | Specify integer type to be used for traversing the iteration space. Defaults to `int64_t`. |
+| LaunchBounds | `LaunchBounds<MaxThreads, MinBlocks>` | Specifies hints to to the compiler about CUDA/HIP launch bounds. |
 | WorkTag | `SomeClass` | Specify the work tag type used to call the functor operator. Any arbitrary type defaults to `void`. |
 
 ### Requirements:
