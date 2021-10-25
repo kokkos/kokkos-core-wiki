@@ -278,7 +278,7 @@ class DualView : public ViewTraits<DataType, Arg1Type, Arg2Type, Arg3Type> {
   // Return true if the span is contiguous
   KOKKOS_INLINE_FUNCTION bool span_is_contiguous();
 
-  // Get stride(s) for each dimension.
+  // Get stride(s) for each dimension. Sets stride_[rank] to span().
   template <typename iType>
   void stride(iType* stride_) const;
 
