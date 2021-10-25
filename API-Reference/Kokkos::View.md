@@ -198,6 +198,11 @@ Template parameters other than `DataType` are optional, but ordering is enforced
     ```
     Return the stride of dimension 7. 
   * ```c++
+    template<class iType>
+    void stride(iType* strides) const
+    ```
+    Sets `strides[r]` to `stride(r)` for all `r` with `0<=r<rank`. Sets `strides[rank]` to `span()`. `iType` must be an integral type, and `strides` must be an array of length `rank+1`.
+  * ```c++
     constexpr size_t span() const
     ```
     Returns the memory span in elements between the element with the lowest and the highest address. This can be larger than the product of extents due to padding, and or non-contiguous data layout as for example `LayoutStride` allows. 
