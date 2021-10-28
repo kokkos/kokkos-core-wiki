@@ -181,7 +181,7 @@ Instead of simply getting raw allocations in memory, users can also allocate Vie
     // Get the size of the shared memory allocation
     size_t shared_size = shared_int_2d::shmem_size(team_size);
     Kokkos::parallel_for(Kokkos::TeamPolicy<>(league_size,team_size).
-                           set_scratch_size(0,Kokkos::PerTeam(shared_size),
+                           set_scratch_size(0,Kokkos::PerTeam(shared_size)),
                          KOKKOS_LAMBDA ( member_type team_member) {
       // Get a view allocated in team shared memory.
       // The constructor takes the shared memory handle and the
