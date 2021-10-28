@@ -235,7 +235,7 @@ Kokkos lets users specify a scan by either a functor or a lambda. Both look like
 
 ```c++
     View<float*> x = ...; // assume filled with input values
-    const size_t N = x.extent_0 ();
+    const size_t N = x.extent(0);
     parallel_scan (N, KOKKOS_LAMBDA (const int i,
               float& update, const bool final) {
         // Load old value in case we update it before accumulating
