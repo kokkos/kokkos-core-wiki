@@ -469,12 +469,17 @@ In some cases users may desire to test building Trilinos with Kokkos' develop br
 
 To support this setup (without overwriting the Kokkos package in Trilinos), users may
 
-1. Add a symbolic link to the Trilinos source directory pointing to their local Kokkos' repository
+1. Add a symbolic link to the Trilinos source directory pointing to local Kokkos' repository
+    `ln -s <path-to-trilinos-src>/kokkos <path-to-local-kokkos>/kokkos` 
 2. Include the configure option `Kokkos_SOURCE_DIR_OVERRIDE:STRING=kokkos` in their CMake configuration
 
-The same process above can be applied for KokkosKernels as well, by adding a symbolic link to the local KokkosKernels repository and including the `KokkosKernels_SOURCE_DIR_OVERRIDE:STRING=kokkos-kernels` configuration option.
+The same process above can be applied for KokkosKernels as well, by adding a symbolic link to the local KokkosKernels repository and including the source override configuration option:
 
-For builds with CUDA enabled, the path to the `nvcc_wrapper` script should also be specified (as an environment variable for example, i.e. `export CXX=<path-to-kokkos>/bin/nvcc_wrapper` in a non-MPI build)
+1. Add a symbolic link to the Trilinos source directory pointing to local KokkosKernels' repository
+    `ln -s <path-to-trilinos-src>/kokkos-kernels <path-to-local-kokkos-kernels>/kokkos-kernels`
+2. Include the configure option `KokkosKernels_SOURCE_DIR_OVERRIDE:STRING=kokkos-kernels` 
+
+For builds with CUDA enabled, the path to the `nvcc_wrapper` script should also be specified (as an environment variable for example, i.e. `export CXX=<path-to-local-kokkos>/bin/nvcc_wrapper` in a non-MPI build, `export OMPI_CXX=<path-to-local-kokkos>/bin/nvcc_wrapper` for MPI build with OpenMPI, etc.)
 
 We refer readers to Trilinos' documentation for further details.
 
