@@ -299,7 +299,7 @@ Kokkos::View<int***> a ("a", N0, N1, N2);
     
 int dim1 = a.extent (1); // returns dimension 1
 size_t strides[3]
-a.strides (strides); // fill 'strides' with strides
+a.stride (strides); // fill 'strides' with strides
 ```
 
 You may also refer to specific dimensions without a runtime parameter:
@@ -376,7 +376,7 @@ Kokkos::View<int*, Kokkos::Device<Kokkos::OpenMP,Kokkos::CudaUVMSpace> > b ("b",
 ```
 
 In this case `a` and `b` will live in the same memory space, but `a` will be initialized on the GPU while `b` will be
-initialized on the host. The `Device` type can be accessed as a views `device_type` typedef. A `Device` has only three typedef members: `device_type`, `execution_space` and `memory_space`. The `execution_space` and `memory_space` typedefs are the same for a view and the `device_type` typedef.
+initialized on the host. The `Device` type can be accessed as a views `device_type` typedef. A `Device` has only three typedef members: `device_type`, `execution_space` and `memory_space`. The `execution_space` and `memory_space` typedefs are the same for a view as the `device_type` typedef.
 
 It is important to understand that accessibility of a View does not depend on its execution space directly. It is only determined by its memory space. Therefore both `a` and `b` have the same access properties. They differ only in how they are initialized and in where parallel kernels associated with operations such as resizing or deep copies are run.
 
@@ -523,7 +523,7 @@ Types for which atomic access are performed must support the necessary operators
 
 ```c++
 Kokkos::View<int*> a("a" , 100);
-Kokkos::View<int*, Kokkos::MemoryTraits<Atomic> > a_atomic = a;
+Kokkos::View<int*, Kokkos::MemoryTraits<Kokkos::Atomic> > a_atomic = a;
     
 a_atomic(1) += 1; // This access will do an atomic addition
 ```

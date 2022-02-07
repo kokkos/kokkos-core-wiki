@@ -88,13 +88,13 @@ struct Foo {
   void operator() (const TagA, const Kokkos::TeamPolicy<>::member_type& team) const {
     printf("Greetings from thread %i of team %i with TagA\n",
             team.thread_rank(),team.league_rank());
-  });
+  }
   KOKKOS_INLINE_FUNCTION
   void operator() (const TagB, const Kokkos::TeamPolicy<>::member_type& team) const {
     printf("Greetings from thread %i of team %i with TagB\n",
             team.thread_rank(),team.league_rank());
-  });
-});
+  }
+};
 
 int main(int argc, char* argv[]) {
    Kokkos::initialize(argc,argv);
@@ -103,8 +103,8 @@ int main(int argc, char* argv[]) {
 
    Foo foo;
 
-   Kokkos::parallel_for(Kokkos::TeamPolicy<Tag1>(N,Kokkos::AUTO), foo);
-   Kokkos::parallel_for("Loop2", Kokkos::TeamPolicy<Tag2>(N,Kokkos::AUTO), foo);
+   Kokkos::parallel_for(Kokkos::TeamPolicy<TagA>(N,Kokkos::AUTO), foo);
+   Kokkos::parallel_for("Loop2", Kokkos::TeamPolicy<TagB>(N,Kokkos::AUTO), foo);
    
    Kokkos::finalize();
 }

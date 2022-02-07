@@ -198,6 +198,11 @@ Template parameters other than `DataType` are optional, but ordering is enforced
     ```
     Return the stride of dimension 7. 
   * ```c++
+    template<class iType>
+    void stride(iType* strides) const
+    ```
+    Sets `strides[r]` to `stride(r)` for all `r` with `0<=r<rank`. Sets `strides[rank]` to `span()`. `iType` must be an integral type, and `strides` must be an array of length `rank+1`.
+  * ```c++
     constexpr size_t span() const
     ```
     Returns the memory span in elements between the element with the lowest and the highest address. This can be larger than the product of extents due to padding, and or non-contiguous data layout as for example `LayoutStride` allows. 
@@ -248,6 +253,19 @@ Template parameters other than `DataType` are optional, but ordering is enforced
     ```
     Returns true if the view points to a valid memory location.  This function works for both managed and unmanaged views. With the unmanaged view, there is no guarantee that referenced address is valid, only that it is a non-null pointer.
 
+## NonMember Functions
+
+  * ```c++
+    template<class ViewDst, class ViewSrc>
+    bool operator==(ViewDst, ViewSrc);
+    ```
+    Returns true if `value_type`, `array_layout`, `memory_space`, `rank`, `data()` and `extent(r)`, for `0<=r<rank`, match. 
+
+  * ```c++
+    template<class ViewDst, class ViewSrc>
+    bool operator!=(ViewDst, ViewSrc);
+    ```
+    Returns true if any of `value_type`, `array_layout`, `memory_space`, `rank`, `data()` and `extent(r)`, for `0<=r<rank` don't match. 
 
 ## Assignment Rules
 

@@ -27,9 +27,10 @@ Usage:
 
 | Argument | Options | Purpose |
 | --- | --- | --- |
-| ExecutionSpace | `Serial`, `OpenMP`, `Threads`, `Cuda`, `ROCm` | Specify the Execution Space to execute the kernel in. Defaults to `Kokkos::DefaultExecutionSpace`. |
+| ExecutionSpace | `Serial`, `OpenMP`, `Threads`, `Cuda`, `HIP`, `SYCL`, `HPX` | Specify the Execution Space to execute the kernel in. Defaults to `Kokkos::DefaultExecutionSpace`. |
 | Schedule | `Schedule<Dynamic>`, `Schedule<Static>` | Specify scheduling policy for work items. `Dynamic` scheduling is implemented through a work stealing queue. Default is machine and backend specific. |
 | IndexType | `IndexType<int>` | Specify integer type to be used for traversing the iteration space. Defaults to `int64_t`. |
+| LaunchBounds | `LaunchBounds<MaxThreads, MinBlocks>` | Specifies hints to to the compiler about CUDA/HIP launch bounds. |
 | WorkTag | `SomeClass` | Specify the work tag type used to call the functor operator. Any arbitrary type defaults to `void`. |
 
 ### Arguments Specific to MDRangePolicy
@@ -39,7 +40,7 @@ Usage:
     class Rank;
     ```
     Determines the rank of the index space as well as in which order to iterate over the tiles and how to iterate within the tiles. 
-    `outer` and `inner` can be `Kokkos::Iterate::default`, `Kokkos::Iterate::left`, or `Kokkos::Iterate::right`. 
+    `outer` and `inner` can be `Kokkos::Iterate::Default`, `Kokkos::Iterate::Left`, or `Kokkos::Iterate::Right`. 
     
 ### Requirements:
 
@@ -64,13 +65,13 @@ Usage:
  
 * ```c++
    template<class OT, class IT, class TT>
-   MDRangePolicy(const std::initializer_list<OT>& begin, const std::initializer_list<IT>&& end)
+   MDRangePolicy(const std::initializer_list<OT>& begin, const std::initializer_list<IT>& end)
    ```
    Provide a start and end index. The length of the lists must match the rank of the policy. 
 
 * ```c++
    template<class OT, class IT, class TT>
-   MDRangePolicy(const std::initializer_list<OT>& begin, const std::initializer_list<IT>&& end,  std::initializer_list<TT>& tiling)
+   MDRangePolicy(const std::initializer_list<OT>& begin, const std::initializer_list<IT>& end,  std::initializer_list<TT>& tiling)
    ```
    Provide a start and end index as well as the tiling dimensions. The length of the lists must match the rank of the policy.
 
@@ -79,7 +80,7 @@ Usage:
 
   ```c++
     MDRangePolicy<Rank<3>> policy_1({0,0,0},{N0,N1,N2});
-    RangePolicy<Cuda,Rank<3,Iterate::Right,Iterate::Left>> policy_2({5,5,5},{N0-5,N1-5,N2-5},{T0,T1,T2});
+    MDRangePolicy<Cuda,Rank<3,Iterate::Right,Iterate::Left>> policy_2({5,5,5},{N0-5,N1-5,N2-5},{T0,T1,T2});
   ```
 
 

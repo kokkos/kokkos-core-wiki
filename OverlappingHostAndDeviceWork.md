@@ -93,6 +93,7 @@ operation on iteration n
     // Application: y=Ax
     Kokkos::parallel_for( "yAx", device_range_policy( 0, N ), 
                                 KOKKOS_LAMBDA ( int j ) {
+      double temp2 = 0;
       for ( int i = 0; i < M; ++i ) {
         temp2 += A( j, i ) * x( i );
       }

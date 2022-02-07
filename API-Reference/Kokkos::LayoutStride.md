@@ -108,3 +108,40 @@ Usage:
     ``` 
     
     Calculates the strides given ordered dimensions
+
+## Example
+
+Creating a 3D unmanaged strided view around a ptr. (You can also just have a view allocate itself by providing a label)
+
+```c++
+#include<Kokkos_Core.hpp>
+int main(int argc, char* argv[]) {
+  Kokkos::initialize(argc,argv);
+  {
+     // Some storage
+     int* ptr = new int[80];
+     // Creating a layout object
+     Kokkos::LayoutStride layout(3,1,3,5,4,20);
+     // Create a unmanaged view from a pointer and a layout
+     Kokkos::View<int***, Kokkos::LayoutStride, Kokkos::HostSpace> a(ptr,layout);
+     
+     // Get strides
+     int strides[8];
+     a.stride(strides);
+     
+     // Print extents and strides
+     printf("Extents: %d %d %d\n",a.extent(0),a.extent(1),a.extent(2));
+     printf("Strides: %i %i %i\n",strides[0],strides[1],strides[2]);
+     
+     // delete storage
+     delete [] ptr;
+  }
+  Kokkos::finalize();
+}
+```
+
+Output:
+```
+Extents: 3 3 4
+Strides: 1 5 20
+```

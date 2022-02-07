@@ -137,13 +137,13 @@ struct Foo {
   void operator() (const TagMax, const Kokkos::TeamPolicy<>::member_type& team, double& lmax) const {
     if( team.league_rank % 17 + team.team_rank % 13 > lmax )
       lmax = team.league_rank % 17 + team.team_rank % 13;
-  });
+  }
   KOKKOS_INLINE_FUNCTION
   void operator() (const TagMin, const Kokkos::TeamPolicy<>::member_type& team, double& lmin ) const {
     if( team.league_rank % 17 + team.team_rank % 13 < lmin )
       lmin = team.league_rank % 17 + team.team_rank % 13;
-  });
-});
+  }
+};
 
 int main(int argc, char* argv[]) {
    Kokkos::initialize(argc,argv);

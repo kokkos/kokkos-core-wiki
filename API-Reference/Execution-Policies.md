@@ -14,5 +14,5 @@ task policy.
 |Policy  |Description                  |
 |:---------|:----------------------------|
 |[TeamThreadRange](Kokkos%3A%3ATeamThreadRange) | Used inside of a TeamPolicy kernel to perform nested parallel loops split over threads of a team. |
-|[TeamVectorRange](Kokkos%3A%3ATeamThreadRange) | Used inside of a TeamPolicy kernel to perform nested parallel loops split over threads of a team and their vector lanes. |
-|[ThreadVectorRange](Kokkos%3A%3ATeamThreadRange) | Used inside of a TeamPolicy kernel to perform nested parallel loops with vector lanes of a thread. |
+|[TeamVectorRange](Kokkos%3A%3ATeamVectorRange) | Used inside of a TeamPolicy kernel to perform nested parallel loops split over threads of a team and their vector lanes. |
+|[ThreadVectorRange](Kokkos%3A%3AThreadVectorRange) | Used inside of a TeamPolicy kernel to perform nested parallel loops with vector lanes of a thread. |

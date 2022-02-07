@@ -1,5 +1,7 @@
 # Deprecated Functionality in Kokkos 2.8.00
 
+This functionality was removed in Kokkos 3.0.
+
 ## Compile Time Detectable
 
  | Deprecated Feature | Replaced By | Reason for Removal |
