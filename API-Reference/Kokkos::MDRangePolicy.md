@@ -65,13 +65,13 @@ Usage:
  
 * ```c++
    template<class OT, class IT, class TT>
-   MDRangePolicy(const std::initializer_list<OT>& begin, const std::initializer_list<IT>&& end)
+   MDRangePolicy(const std::initializer_list<OT>& begin, const std::initializer_list<IT>& end)
    ```
    Provide a start and end index. The length of the lists must match the rank of the policy. 
 
 * ```c++
    template<class OT, class IT, class TT>
-   MDRangePolicy(const std::initializer_list<OT>& begin, const std::initializer_list<IT>&& end,  std::initializer_list<TT>& tiling)
+   MDRangePolicy(const std::initializer_list<OT>& begin, const std::initializer_list<IT>& end,  std::initializer_list<TT>& tiling)
    ```
    Provide a start and end index as well as the tiling dimensions. The length of the lists must match the rank of the policy.
 
