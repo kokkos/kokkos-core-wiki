@@ -35,6 +35,7 @@
 6. **[[Task Parallelism|Task-Parallelism]]**
 7. **[[Utilities|API-Utilities]]**
 8. **[[STL Compatibility|STL-Compatibility]]**
+9. **[[Numerics]]**
 ### **[[Content: Containers|API-Containers]]**
 ### **[[Content: Algorithms|API-Algorithms]]**
 1. **[[Sort|Sort]]**
