@@ -12,8 +12,8 @@ Create View allocation parameter bundle from argument list. Valid argument list 
  * label as a "string" or std::string
  * memory space instance of the View::memory_space type
  * execution space instance compatible with the View::memory_space
- * Kokkos::WithoutInitializing to bypass initialization
- * Kokkos::AllowPadding to allow allocation to pad dimensions for memory alignment
+ * `Kokkos::WithoutInitializing` to bypass initialization
+ * `Kokkos::AllowPadding` to allow allocation to pad dimensions for memory alignment
  * a pointer to create an unmanaged View wrapping that pointer
 
 ## Synopsis
