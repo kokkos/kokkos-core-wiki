@@ -105,3 +105,13 @@ void resize(const I& arg_prop, Kokkos::View<T, P...>& v,
   * `layout`: a layout instance containing the new dimensions.
   * `arg_prop`: View constructor property, e.g., `Kokkos::WithoutInitializing`.
 
+## Example:
+  * ```c++
+    Kokkos::resize(v, 2, 3);
+    ```
+    Resize a `Kokkos::View` with dynamic rank 2 to have dynamic extent 2 and 3 respectively preserving previous content.
+  * ```c++
+    Kokkos::resize(Kokkos::WithoutInitializing, v, 2, 3);
+    ```
+    Resize a `Kokkos::View` with dynamic rank 2 to have dynamic extent 2 and 3 respectively preserving previous content. After this call, the new content is uninitialized.
+
