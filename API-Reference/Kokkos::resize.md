@@ -34,7 +34,6 @@ void resize(const I& arg_prop, Kokkos::View<T, P...>& v,
        const size_t n5 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
        const size_t n6 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
        const size_t n7 = KOKKOS_IMPL_CTOR_DEFAULT_ARG);
-}
 
 template <class T, class... P>
 void resize(Kokkos::View<T, P...>& v,
