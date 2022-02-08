@@ -20,12 +20,12 @@ Create View allocation parameter bundle from argument list. Valid argument list 
 
 ```cpp
 template <class... Args>
-Impl::ViewCtorProp<typename Impl::ViewCtorProp<void, Args>::type...>
+**implementation-detail**
 view_alloc(Args const&... args);
 
 template <class... Args>
 KOKKOS_FUNCTION
-Impl::ViewCtorProp<typename Impl::ViewCtorProp<void, Args>::type...>
+**implementation-detail**
 view_wrap(Args const&... args);
 ```
 
@@ -33,7 +33,7 @@ view_wrap(Args const&... args);
 
 * ```cpp
   template <class... Args>
-  Impl::ViewCtorProp<typename Impl::ViewCtorProp<void, Args>::type...>
+  **implementation-detail**
   view_alloc(Args const&... args);
   ```
   Create View allocation parameter bundle from argument list.
@@ -43,10 +43,10 @@ view_wrap(Args const&... args);
 
 * ```cpp
   template <class... Args>
-  Impl::ViewCtorProp<typename Impl::ViewCtorProp<void, Args>::type...>
+  **implementation-detail**
   view_alloc(Args const&... args);
   ```
   Create View allocation parameter bundle from argument list.
 
   Restrictions:
-  * `args`: Cannot only be a pointer to memory.
+  * `args`: Can only be a pointer to memory.
