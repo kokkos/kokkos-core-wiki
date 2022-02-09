@@ -14,6 +14,7 @@
 11. **[[Subviews|Subviews]]**
 12. **[[Interoperability|Interoperability]]**
 13. **[[Kokkos and Virtual Functions|Kokkos and Virtual Functions]]**
+14. **[[Detection Idiom|Detection Idiom]]**
 ### **[[Content: Containers|ContentContainers]]**
 1. **[Dual View](Kokkos%3A%3ADualView)**
 2. **[Dynamic Rank View](Kokkos%3A%3ADynRankView)**
