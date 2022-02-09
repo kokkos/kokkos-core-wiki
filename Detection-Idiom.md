@@ -7,11 +7,10 @@ Header File: `Kokkos_DetectionIdiom.hpp`
 The Kokkos Detection Idiom is based upon the detection idiom from Version 2 of the C++ Extensions for
 Library Fundamentals, ISO/IEC TS 19568:2017, a draft of which can be found at
 <https://cplusplus.github.io/fundamentals-ts/v2.html#meta.detect>.
+
 The original C++ proposal can be found at <https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2015/n4436.pdf>.
-Those are excellent documents to learn more about the design details and how the mechanism works.
 
-The API:
-
+## API
 
 ```c++
 // VOID_T and DETECTOR are exposition-only and not intended to be used directly.
@@ -33,10 +32,12 @@ struct DETECTOR<Default, VOID_T<Op<Args...>>, Op, Args...> {
     using value_t = std::true_type;
     using type    = Op<Args...>;
 };
+```
 
+```c++
 namespace Kokkos {
 
-// Simplifiation of the type returned by detected_t for types not supporting the archtype provided
+// Simplification of the type returned by detected_t for types not supporting the archtype provided
 struct nonesuch {
     nonesuch(nonesuch&&) = delete;
     ~nonesuch() = delete;
@@ -89,9 +90,11 @@ inline constexpr bool is_detected_convertible_v =
 } // Kokkos namespace
 ```
 
-Usage examples:
+## Examples
 
-Suppose we needed to write a type trait to detect if a given type T
+### Detecting an expression
+
+Suppose we needed to write a type trait to detect if a given type `T`
 is copy assignable.  First we write an archtype helper alias:
 
 ```c++
@@ -107,12 +110,14 @@ using is_copy_assignable = Kokkos::is_detected<copy_assign_t, T>;
 ```
 
 If we also wanted to check that the return type of the copy assignment
-was T&, we would use:
+was `T&`, we would use:
 
 ```c++
 template<class T>
 using is_canonical_copy_assignable = Kokkos::is_detected_exact<T&, copy_assign_t, T>;
 ```
+
+### Detecting a nested typedef
 
 Suppose we want to use a nested `MyType::difference_type` if it
 exists, otherwise we want to use `std::ptrdiff_t`:
