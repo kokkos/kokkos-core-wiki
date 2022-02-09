@@ -110,7 +110,7 @@ using is_copy_assignable = Kokkos::is_detected<copy_assign_t, T>;
 ```
 
 If we also wanted to check that the return type of the copy assignment
-was `T&`, we would use:
+is `T&`, we would use:
 
 ```c++
 template<class T>
