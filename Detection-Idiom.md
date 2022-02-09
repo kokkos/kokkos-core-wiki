@@ -1,6 +1,6 @@
 # Detection Idiom
 
-The Kokkos Detection Idiom is used to recognize, in a SFINAE-friendly way, the validity of any C++ expression.
+The Detection Idiom is used to recognize, in a SFINAE-friendly way, the validity of any C++ expression.
 
 Header File: `Kokkos_DetectionIdiom.hpp`
 
