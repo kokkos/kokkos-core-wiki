@@ -13,7 +13,7 @@ Those are excellent documents to learn more about the design details and how the
 The API:
 
 
-```
+```c++
 // VOID_T and DETECTOR are exposition-only and not intended to be used directly.
 
 // Convienent metafunction to leverage SFINAE
@@ -94,14 +94,14 @@ Usage examples:
 Suppose we needed to write a type trait to detect if a given type T
 is copy assignable.  First we write an archtype helper alias:
 
-```
+```c++
 template<class T>
 using copy_assign_t = decltype(std::declval<T&>() = std::declval<T const&>());
 ```
 
 Then the trait can be easily expressed as:
 
-```
+```c++
 template<class T>
 using is_copy_assignable = Kokkos::is_detected<copy_assign_t, T>;
 ```
@@ -109,7 +109,7 @@ using is_copy_assignable = Kokkos::is_detected<copy_assign_t, T>;
 If we also wanted to check that the return type of the copy assignment
 was T&, we would use:
 
-```
+```c++
 template<class T>
 using is_canonical_copy_assignable = Kokkos::is_detected_exact<T&, copy_assign_t, T>;
 ```
@@ -119,14 +119,14 @@ exists, otherwise we want to use `std::ptrdiff_t`:
 
 First we write an archtype helper alias:
 
-```
+```c++
 template<class T>
 using diff_t = typename T::difference_type;
 ```
 
 Then we can declare our type:
 
-```
+```c++
 using our_difference_type = Kokkos::detected_or_t<std::ptrdiff_t, diff_t, MyType>;
 ```
 
