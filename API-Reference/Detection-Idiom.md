@@ -1,6 +1,6 @@
 # Detection Idiom
 
-The Detection Idiom is used to recognize, in a SFINAE-friendly way, the validity of any C++ expression.
+The Detection Idiom is used to recognize, in an SFINAE-friendly way, the validity of any C++ expression.
 
 Header File: `Kokkos_DetectionIdiom.hpp`
 
@@ -26,7 +26,7 @@ struct DETECTOR {
     using type    = Default;
 };
 
-// Specialization for types supporting the archtypal Op<Args...>
+// Specialization for types supporting the archetypal Op<Args...>
 template<class Default, template<class...> class Op, class... Args>
 struct DETECTOR<Default, VOID_T<Op<Args...>>, Op, Args...> {
     using value_t = std::true_type;
@@ -37,7 +37,7 @@ struct DETECTOR<Default, VOID_T<Op<Args...>>, Op, Args...> {
 ```c++
 namespace Kokkos {
 
-// Simplification of the type returned by detected_t for types not supporting the archtype provided
+// Simplification of the type returned by detected_t for types not supporting the archetype provided
 struct nonesuch {
     nonesuch(nonesuch&&) = delete;
     ~nonesuch() = delete;
@@ -95,7 +95,7 @@ inline constexpr bool is_detected_convertible_v =
 ### Detecting an expression
 
 Suppose we needed to write a type trait to detect if a given type `T`
-is copy assignable.  First we write an archtype helper alias:
+is copy assignable.  First we write an archetype helper alias:
 
 ```c++
 template<class T>
@@ -120,9 +120,9 @@ using is_canonical_copy_assignable = Kokkos::is_detected_exact<T&, copy_assign_t
 ### Detecting a nested typedef
 
 Suppose we want to use a nested `MyType::difference_type` if it
-exists, otherwise we want to use `std::ptrdiff_t`:
+exists, otherwise, we want to use `std::ptrdiff_t`:
 
-First we write an archtype helper alias:
+First we write an archetype helper alias:
 
 ```c++
 template<class T>
