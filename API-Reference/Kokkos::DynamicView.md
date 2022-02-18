@@ -3,7 +3,7 @@
 Header File: `Kokkos_DynamicView.hpp`
 
 Usage: 
-Kokkos DyanmicView is a potentially reference counted rank 1 array, without layout, that can be dynamically resized on the host.
+Kokkos DynamicView is a potentially reference-counted rank 1 array, without layout, that can be dynamically resized on the host.
 
   ```c++
   const int chunk_size = 16*1024;
@@ -16,7 +16,7 @@ Kokkos DyanmicView is a potentially reference counted rank 1 array, without layo
 
 ## Synopsis 
 
-  A rank 1 View-like class, instances can be dynamically resized on the host up to an upper-limit provided by users at construction.
+  A rank 1 View-like class, instances can be dynamically resized on the host up to an upper limit provided by users at construction.
 
   ```c++
   template< typename DataType , typename ... P >
@@ -155,13 +155,13 @@ Kokkos DyanmicView is a potentially reference counted rank 1 array, without layo
 ### Constructors
 
   * `DynamicView()`: Default Constructor. No allocations are made, no reference counting happens. All extents are zero and its data pointer is NULL.
-  * `DynamicView( const DynamicView<RT, RP...>& rhs)`: Copy constructor with compatible view. Follows View assignment rules. 
+  * `DynamicView( const DynamicView<RT, RP...>& rhs)`: Copy constructor from a compatible View. Follows View assignment rules. 
   * `DynamicView( DynamicView&& rhs)`: Move constructor
   * `DynamicView( const std::string & arg_label, const unsigned min_chunk_size, const unsigned max_extent )`: Standard allocating constructor.
-    * `arg_label`: a user provided label, which is used for profiling and debugging purposes. Names are not required to be unique,
-    * `min_chunk_size`: user provided minimum chunk size needed for memory allocation, will be raised to nearset power-of-two for more efficient memory access operations.
-    * `max_extent`: user provided maximum size, required in order to allocate a chunk-pointer array.
-    * The `resize_serial` method must be called after construction to reserve desired amount of memory, bound by `max_extent`.
+    * `arg_label`: a user-provided label, which is used for profiling and debugging purposes. Names are not required to be unique,
+    * `min_chunk_size`: user-provided minimum chunk size needed for memory allocation, will be raised to nearest power-of-two for more efficient memory access operations.
+    * `max_extent`: user-provided maximum size, required to allocate a chunk-pointer array.
+    * The `resize_serial` method must be called after construction to reserve the desired amount of memory, bound by `max_extent`.
   
 ### Data Access Functions
     
@@ -186,13 +186,13 @@ Kokkos DyanmicView is a potentially reference counted rank 1 array, without layo
     Resizes the DynamicView with sufficient chunks of memory of `chunk_size` to store the requested number of elements `n`.
     This method can only be called outside of parallel regions.
     `n` is restricted to be smaller than the `max_extent` value passed to the DynamicView constructor.
-    This method must be called after construction of the DynamicView as the constructor sets the requested sizes for `chunk_size` and `max_extent`, but does not take input for actual amount of memory to be used.
+    This method must be called after the construction of the DynamicView as the constructor sets the requested sizes for `chunk_size` and `max_extent`, but does not take input for the actual amount of memory to be used.
 
   * ```c++
     KOKKOS_INLINE_FUNCTION
     size_t allocation_extent() const noexcept
     ```
-    Returns the total size of the product of number of chunks multipled by the chunk size. This may be larger than `size` as this includes total size for total number of complete chunks of memory.
+    Returns the total size of the product of the number of chunks multiplied by the chunk size. This may be larger than `size` as this includes the total size for the total number of complete chunks of memory.
   
   * ```c++
     KOKKOS_INLINE_FUNCTION
@@ -217,7 +217,7 @@ Kokkos DyanmicView is a potentially reference counted rank 1 array, without layo
     constexpr int extent_int( const iType& dim) const
     ```
     Return the extent of the specified dimension as an `int`. `iType` must be an integral type, and `dim` must be smaller than `rank`.
-    Compared to `extent` this function can be useful on architectures where `int` operations are more efficient than `size_t`. It also may eliminate the need for type casts in applications which otherwise perform all index operations with `int`. 
+    Compared to `extent` this function can be useful on architectures where `int` operations are more efficient than `size_t`. It also may eliminate the need for type casts in applications that otherwise perform all index operations with `int`. 
     Returns 1 for rank > 1.
     
   * ```c++
@@ -285,4 +285,4 @@ Kokkos DyanmicView is a potentially reference counted rank 1 array, without layo
   * ```c++
     bool is_allocated() const;
     ```
-    Returns true if the view points to a valid set of allocated memory chunks.  Note that this will return false until resize_serial is called with a size greater than 0.  
+    Returns true if the View points to a valid set of allocated memory chunks.  Note that this will return false until resize_serial is called with a size greater than 0.  
