@@ -1,0 +1,18 @@
+name: Deploy Wiki
+on:
+  push:
+    branches: [ main ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+      with:
+        persist-credentials: false
+        fetch-depth: 0
+    - name: Deploy wiki please
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.dalg24_deploy_kokkos_wiki }}
+        repository: kokkos/kokkos.wiki
+        branch: master
