@@ -27,7 +27,7 @@ auto v1 =
 Functionality
 =============
 
-All `MemorySpace` types expose a common set of functionality.  In generic code that uses Kokkos (which is pretty much all user code), you should never use any part of an memory space type that isn't common to all memory space types (otherwise, you risk losing portability of your code).  There are a few expressions guaranteed to be valid for any `MemorySpace` type.  Given a type `MSp` that is a `MemorySpace` type, and an instance of that type `msp`, Kokkos guarantees the following expressions will provide the specified functionality:
+All `MemorySpace` types expose a common set of functionality.  In generic code that uses Kokkos (which is pretty much all user code), you should never use any part of a memory space type that isn't common to all memory space types (otherwise, you risk losing portability of your code).  There are a few expressions guaranteed to be valid for any `MemorySpace` type.  Given a type `MSp` that is a `MemorySpace` type, and an instance of that type `msp`, Kokkos guarantees the following expressions will provide the specified functionality:
 
 ---
 

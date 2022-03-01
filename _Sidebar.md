@@ -23,6 +23,11 @@
 ### **[[Content: Algorithms|ContentAlgorithms]]**
 1. **[[Sorting|Sorting]]**
 2. **[[Random Numbers|Random-Number-Generators]]**
+3. **[[Iterators|Iterators]]**
+4. **[[Std Algorithms|StdAlgorithms]]**
+   1. **[[NonModSequenceOps|StdNonModSeq]]**
+   2. **[[ModSeqOps|StdModSeq]]**
+   3. **[[PartioningOps|StdPartioningOps]]**
 
 ## **[[API Reference|API-Reference]]**
 ### **[[Content: Alphabetical|API-Alphabetical]]**
@@ -35,6 +40,8 @@
 6. **[[Task Parallelism|Task-Parallelism]]**
 7. **[[Utilities|API-Utilities]]**
 8. **[[STL Compatibility|STL-Compatibility]]**
+9. **[[Numerics]]**
+10. **[[Detection Idiom|Detection Idiom]]**
 ### **[[Content: Containers|API-Containers]]**
 ### **[[Content: Algorithms|API-Algorithms]]**
 1. **[[Sort|Sort]]**
