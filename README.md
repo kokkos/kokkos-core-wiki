@@ -88,7 +88,9 @@ cases.  Check with your team lead, if you are uncertain.
 				https://github.com/ajpowelsnl/kokkos/wiki
 
 	STEP 12) If your previewed changes are good, push your local topic branch to
-				your fork of the kokkos-core-wiki to create a pull request:
+				your fork of the kokkos-core-wiki to create a pull request.  Please
+				note that pushes to the main branch will be automatically, immediately
+				deployed to the Kokkos Wiki:
 
 				git push ajpowelsnl demo/setup 
 				Enumerating objects: 5, done.
