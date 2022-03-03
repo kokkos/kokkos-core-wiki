@@ -21,28 +21,28 @@ template <class ViewType>
 typename ViewType::HostMirror create_mirror(ViewType const&);
 
 template <class ViewType>
-typename ViewType::HostMirror create_mirror(decltype(Kokkos::ViewAllocateWithoutInitializing(), 
+typename ViewType::HostMirror create_mirror(decltype(Kokkos::ViewAllocateWithoutInitializing()),
                                             ViewType const&);
 
 template <class Space, class ViewType>
 ImplMirrorType create_mirror(Space const& space, ViewType const&);
 
 template <class Space, class ViewType>
-ImplMirrorType create_mirror(decltype(Kokkos::ViewAllocateWithoutInitializing(),
+ImplMirrorType create_mirror(decltype(Kokkos::ViewAllocateWithoutInitializing()),
                              Space const& space, ViewType const&);
 
 template <class ViewType>
 typename ViewType::HostMirror create_mirror_view(ViewType const&);
 
 template <class ViewType>
-typename ViewType::HostMirror create_mirror_view(decltype(Kokkos::ViewAllocateWithoutInitializing(),
+typename ViewType::HostMirror create_mirror_view(decltype(Kokkos::ViewAllocateWithoutInitializing()),
                                                  ViewType const&);
 
 template <class Space, class ViewType>
 ImplMirrorType create_mirror_view(Space const& space, ViewType const&);
 
 template <class Space, class ViewType>
-ImplMirrorType create_mirror_view(decltype(Kokkos::ViewAllocateWithoutInitializing(),
+ImplMirrorType create_mirror_view(decltype(Kokkos::ViewAllocateWithoutInitializing()),
                                   Space const& space, ViewType const&);
 
 template <class Space, class ViewType>
@@ -116,7 +116,7 @@ ImplMirrorType create_mirror_view_and_copy(Space const& space, ViewType const&);
 
 * ```cpp
   template <class Space, class ViewType>
-  ImplMirrorType create_mirror_view(decltype(Kokkos::ViewAllocateWithoutInitializing(), 
+  ImplMirrorType create_mirror_view(decltype(Kokkos::ViewAllocateWithoutInitializing()),
                                     Space const& space, ViewType const&);
   ```
   If `std::is_same<typename Space::memory_space, typename ViewType::memory_space>::value` is `false`,
