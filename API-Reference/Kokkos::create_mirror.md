@@ -21,28 +21,28 @@ template <class ViewType>
 typename ViewType::HostMirror create_mirror(ViewType const&);
 
 template <class ViewType>
-typename ViewType::HostMirror create_mirror(decltype(Kokkos::ViewAllocateWithoutInitializing(), 
+typename ViewType::HostMirror create_mirror(decltype(Kokkos::ViewAllocateWithoutInitializing()),
                                             ViewType const&);
 
 template <class Space, class ViewType>
 ImplMirrorType create_mirror(Space const& space, ViewType const&);
 
 template <class Space, class ViewType>
-ImplMirrorType create_mirror(decltype(Kokkos::ViewAllocateWithoutInitializing(),
+ImplMirrorType create_mirror(decltype(Kokkos::ViewAllocateWithoutInitializing()),
                              Space const& space, ViewType const&);
 
 template <class ViewType>
 typename ViewType::HostMirror create_mirror_view(ViewType const&);
 
 template <class ViewType>
-typename ViewType::HostMirror create_mirror_view(decltype(Kokkos::ViewAllocateWithoutInitializing(),
+typename ViewType::HostMirror create_mirror_view(decltype(Kokkos::ViewAllocateWithoutInitializing()),
                                                  ViewType const&);
 
 template <class Space, class ViewType>
 ImplMirrorType create_mirror_view(Space const& space, ViewType const&);
 
 template <class Space, class ViewType>
-ImplMirrorType create_mirror_view(decltype(Kokkos::ViewAllocateWithoutInitializing(),
+ImplMirrorType create_mirror_view(decltype(Kokkos::ViewAllocateWithoutInitializing()),
                                   Space const& space, ViewType const&);
 
 template <class Space, class ViewType>
@@ -64,7 +64,7 @@ ImplMirrorType create_mirror_view_and_copy(Space const& space, ViewType const&);
   typename ViewType::HostMirror create_mirror(decltype(Kokkos::ViewAllocateWithoutInitializing()),
                                               ViewType const& src);
   ```
-  Creates a new host accessible `View` with the same layout and padding as `src`. The new view will have unitialized data.
+  Creates a new host accessible `View` with the same layout and padding as `src`. The new view will have uninitialized data.
   * `src`: a `Kokkos::View`.
 
 * ```cpp
@@ -81,7 +81,7 @@ ImplMirrorType create_mirror_view_and_copy(Space const& space, ViewType const&);
   ImplMirrorType create_mirror(decltype(Kokkos::ViewAllocateWithoutInitializing()),
                                Space const& space, ViewType const&);
   ```
-  Creates a new `View` with the same layout and padding as `src` but with a device type of `Space::device_type`. The new view will have unitialized data.
+  Creates a new `View` with the same layout and padding as `src` but with a device type of `Space::device_type`. The new view will have uninitialized data.
   * `src`: a `Kokkos::View`.
   * `Space`: a class meeting the requirements of `ExecutionSpaceConcept` or `MemorySpaceConcept`
   * `ImplMirrorType`: an implementation defined specialization of `Kokkos::View`.
@@ -100,7 +100,7 @@ ImplMirrorType create_mirror_view_and_copy(Space const& space, ViewType const&);
                                                    ViewType const& src);
   ```
   If `src` is not host accessible (i.e. if `SpaceAccessibility<HostSpace,ViewType::memory_space>::accessible` is `false`)
-  it creates a new host accessible `View` with the same layout and padding as `src`. The new view will have unitialized data. Otherwise returns `src`.
+  it creates a new host accessible `View` with the same layout and padding as `src`. The new view will have uninitialized data. Otherwise returns `src`.
   * `src`: a `Kokkos::View`.
 
 * ```cpp
@@ -116,11 +116,11 @@ ImplMirrorType create_mirror_view_and_copy(Space const& space, ViewType const&);
 
 * ```cpp
   template <class Space, class ViewType>
-  ImplMirrorType create_mirror_view(decltype(Kokkos::ViewAllocateWithoutInitializing(), 
+  ImplMirrorType create_mirror_view(decltype(Kokkos::ViewAllocateWithoutInitializing()),
                                     Space const& space, ViewType const&);
   ```
   If `std::is_same<typename Space::memory_space, typename ViewType::memory_space>::value` is `false`,
-  creates a new `View` with the same layout and padding as `src` but with a device type of `Space::device_type`. The new view will have unitialized data.
+  creates a new `View` with the same layout and padding as `src` but with a device type of `Space::device_type`. The new view will have uninitialized data.
   Otherwise returns `src`.
   * `src`: a `Kokkos::View`.
   * `Space`: a class meeting the requirements of `ExecutionSpaceConcept` or `MemorySpaceConcept`
