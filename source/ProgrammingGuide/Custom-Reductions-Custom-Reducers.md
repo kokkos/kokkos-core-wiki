@@ -14,6 +14,8 @@ The following requirements must be fulfilled for the reduction class
    * The reducer concept methods must be implemented
    * The exposed result_view_type must be defined in the memory space where the object is used 
 
+Note: Even for tagged reductions, i.e., when specifying a tag in the policy, potential `init`/`join`/`final` member functions must not take a `WorkTag` argument.
+
 ## Example
 
 This example performs a custom reduction on an array using a custom class and reducer. 
