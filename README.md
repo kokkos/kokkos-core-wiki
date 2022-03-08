@@ -8,7 +8,6 @@ Sandia employees: Creation of wholly new pages will require Review and Approval 
 
 * **STEP 1) Create your own fork of the kokkos-core-wiki repo by navigating to `https://github.com/kokkos/kokkos-core-wiki`, and clicking "Fork" in the upper right of the github page**.<br/>
 
-<br/>
 * **STEP 2) Clone your forked repo, and add it as a remote:**<br/>
 
 ```
