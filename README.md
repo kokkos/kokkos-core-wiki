@@ -2,13 +2,13 @@
 
 Here, we summarize the steps for setting up the kokkos-core-wiki repo, and a
 branch-based workflow for updating documentation in the main Kokkos project.  The kokkos-core-wiki is the
-canonical source of Kokkos documentation "Truth".\
+canonical source of Kokkos documentation "Truth".<br/>
 
-Sandia employees: Creation of wholly new pages will require Review and Approval (R&A).  Check with your Sandia team lead, if you have questions about the R&A process.\
+Sandia employees: Creation of wholly new pages will require Review and Approval (R&A).  Check with your Sandia team lead, if you have questions about the R&A process.<br/>
 
-* **STEP 1) Create your own fork of the kokkos-core-wiki repo by navigating to `https://github.com/kokkos/kokkos-core-wiki`, and clicking "Fork" in the upper right of the github page**.\
+* **STEP 1) Create your own fork of the kokkos-core-wiki repo by navigating to `https://github.com/kokkos/kokkos-core-wiki`, and clicking "Fork" in the upper right of the github page**.<br/>
 
-* **STEP 2) Clone your forked repo, and add it as a remote:**\
+* **STEP 2) Clone your forked repo, and add it as a remote:**<br/>
 
 ```
 git clone git@github.com:ajpowelsnl/kokkos-core-wiki.git
