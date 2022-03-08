@@ -27,7 +27,6 @@ git@github.com:ajpowelsnl/kokkos-core-wiki.git
 					and the main project repo ("origin"):
 
 ```
-
 					[ajpowel@kokkos-dev-2 kokkos-core-wiki]$ git remote -v
 					ajpowelsnl	git@github.com:ajpowelsnl/kokkos-core-wiki.git (fetch)
 					ajpowelsnl	git@github.com:ajpowelsnl/kokkos-core-wiki.git (push)
