@@ -16,14 +16,12 @@ git remote add ajpowelsnl
 git@github.com:ajpowelsnl/kokkos-core-wiki.git
 ```
 
-<br/>
 * **STEP 3) Add the remote repo as "origin" or "upstream", according to your preference.  You will create pull requests against this repo:**<br/>
 
 ```
 git remote add origin git@github.com:kokkos/kokkos-core-wiki.git
 ```
 
-<br/>
 * **STEP 4) Check your remotes; you should see both your fork (`ajpowelsnl`) and the main project repo (`origin`):**<br/>
 
 ```
@@ -34,7 +32,6 @@ origin https://github.com/kokkos/kokkos-core-wiki.git (fetch)
 origin https://github.com/kokkos/kokkos-core-wiki.git (push)
 ```
 
-<br/>
 * **STEP 5) Create a topic branch in your local fork of the
   kokkos-core-wiki:**<br/>
 
@@ -42,14 +39,12 @@ origin https://github.com/kokkos/kokkos-core-wiki.git (push)
 git checkout -b demo/setup
 ```
 
-<br/>
 * **STEP 6) Add the Kokkos project Wiki repo from your fork as a remote (you will push changes to this repo to preview before creating a pull request on `origin git@github.com:kokkos/kokkos-core-wiki.git`):**<br/>
 
 ```
 git remote add my_wiki git@github.com:ajpowelsnl/kokkos.wiki.git
 ```
 
-<br/>
 * **STEP 7) Verify your remotes.  You should now have three different repos: your local, forked kokkos-core-wiki (`ajpowelsnl`), the remote kokkos-core-wiki (`origin`), and the Wiki associated with your forked Kokkos project (`my_wiki`):**<br/>
 
 ```
@@ -62,7 +57,6 @@ origin https://github.com/kokkos/kokkos-core-wiki.git (fetch)
 origin https://github.com/kokkos/kokkos-core-wiki.git (push)
 ```
 
-<br/>
 * **STEP 8) Set up your local topic branch track origin/main:**<br/>
 
 ```
@@ -80,7 +74,6 @@ Merge pull request #3 from dalg24/fixup_gh_actions
 Fixup path gh workflow
 ```
 
-<br/>
 * **STEP 9) Update your topic branch, rebasing on origin/main:**<br/>
 
 ```
@@ -88,21 +81,18 @@ git checkout demo/setup
 git rebase main
 ```
 
-<br/>
 * **STEP 10) Make the desired changes (on your local topic branch), and push to the main project Wiki (of your fork).  Nota bene: you will need to use the `-f` option to push; this option will overwrite existing files.**<br/>
 
 ```
 git push -f my_wiki demo/setup:master
 ```
 
-<br/>
 * **STEP 11) Preview your changes by navigating to the main project Wiki of your fork:**<br/>
 
 ```
 https://github.com/ajpowelsnl/kokkos/wiki
 ```
 
-<br/>
 * **STEP 12) If your previewed changes are good, push your local topic branch to your fork of the kokkos-core-wiki to create a pull request.  Please note that pushes to your branch will be automatically, immediately deployed to your *fork* of the Kokkos project Wiki.  You cannot push directly to the `main` branch of the remote repo:**<br/>
 
 ```
@@ -122,4 +112,3 @@ To github.com:ajpowelsnl/kokkos-core-wiki.git
 * [new branch]      demo/setup -> demo/setup
 ```
 
-<br/>
