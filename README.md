@@ -82,7 +82,7 @@ git@github.com:ajpowelsnl/kokkos-core-wiki.git
 
 	-	STEP 10) Make the desired changes (on your local topic branch), and push
 					to the main project Wiki (of your fork).  Nota bene: you
-					will need to use the `-f` option for the **FIRST** push; this option will overwrite existing files.  
+					will need to use the `-f` option to push; this option will overwrite existing files.  
 
 					`git push -f my_wiki demo/setup:master`
 
@@ -98,7 +98,7 @@ git@github.com:ajpowelsnl/kokkos-core-wiki.git
 					main projec Wiki.  You cannot push directly to the `main` branch of the remote repo:
 
 ```
-					git push ajpowelsnl demo/setup 
+					git push -f ajpowelsnl demo/setup 
 					Enumerating objects: 5, done.
 					Counting objects: 100% (5/5), done.
 					Delta compression using up to 40 threads
