@@ -58,7 +58,7 @@ git checkout demo/setup
 git rebase origin/main
 ```
 
-* **Step 8) Make the desired changes (on your local topic branch), and push to the main project Wiki (of your fork).  Nota bene: for your first commit, you will need to use the `-f` option to push; this option will overwrite existing files.**<br/>
+* **Step 8) Make the desired changes (on your local topic branch), and push to the main project Wiki (of your fork).  *Nota bene*: for your first commit, you will need to use the `-f` option to push; this option will overwrite existing files.**<br/>
 
 ```
 git push -f my_wiki demo/setup:master
