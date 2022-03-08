@@ -32,8 +32,7 @@ origin https://github.com/kokkos/kokkos-core-wiki.git (fetch)
 origin https://github.com/kokkos/kokkos-core-wiki.git (push)
 ```
 
-* **STEP 5) Create a topic branch in your local fork of the
-  kokkos-core-wiki:**<br/>
+* **STEP 5) Create a topic branch in your local fork of the kokkos-core-wiki:**<br/>
 
 ```
 git checkout -b demo/setup
@@ -57,7 +56,7 @@ origin https://github.com/kokkos/kokkos-core-wiki.git (fetch)
 origin https://github.com/kokkos/kokkos-core-wiki.git (push)
 ```
 
-* **STEP 8) Set up your local topic branch track origin/main:**<br/>
+* **STEP 8) Set up your local topic branch to track origin/main:**<br/>
 
 ```
 git checkout main
@@ -111,4 +110,3 @@ remote:
 To github.com:ajpowelsnl/kokkos-core-wiki.git
 * [new branch]      demo/setup -> demo/setup
 ```
-
