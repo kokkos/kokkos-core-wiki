@@ -33,7 +33,7 @@ able to simply look up how certain capabilities are used in Kokkos
 <!--- Kokkos Documentation "how to" guides will link to README.md files (via
 the kokkos, etc. user) from the main project repos, i.e., Kokkos, Kokkos Kernels, Kokkos Tools --->
 
-## [Kokkos Documentation "How To" Guide](https://github.com/kokkos/wiki/README)
+## [Kokkos Documentation "How To" Guide](https://github.com/ajpowelsnl/kokkos/wiki/README)
 
 # [The Kokkos Eco-System](https://github.com/kokkos)
 
