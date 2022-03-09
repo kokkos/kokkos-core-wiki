@@ -31,7 +31,7 @@ worked a lot with other shared memory models such as OpenMP, CUDA, or OpenCL may
 able to simply look up how certain capabilities are used in Kokkos
 
 ## **[[Kokkos Documentation|How To Guides]]**
-#### [Kokkos](https://github.com/ajpowelsnl/wiki/README)
+#### [Kokkos](https://github.com/kokkos/wiki/README)
 
 
 
