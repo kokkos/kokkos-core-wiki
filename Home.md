@@ -30,8 +30,8 @@ This is the place to go for a fast lookup of syntax. Developers who have previou
 worked a lot with other shared memory models such as OpenMP, CUDA, or OpenCL may be
 able to simply look up how certain capabilities are used in Kokkos
 
-<!--- Kokkos Documentation "how to" guides will link to README.md files from
-the main project repos, i.e., Kokkos, Kokkos Kernels, Kokkos Tools --->
+<!--- Kokkos Documentation "how to" guides will link to README.md files (via
+the kokkos, etc. user) from the main project repos, i.e., Kokkos, Kokkos Kernels, Kokkos Tools --->
 
 ## [Kokkos Documentation "How To" Guide](https://github.com/kokkos/wiki/README)
 
