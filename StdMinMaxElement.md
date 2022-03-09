@@ -60,11 +60,11 @@ auto min_element(const std::string& label,                              (8)
 
 ### Description
 
-- (1,2,5,6): Finds the smallest element in the range `[first, last)` or in `view`
-  using `operator<` to compare two elements
+- (1,2,5,6): Finds the smallest element in the range `[first, last)` (1,2)
+  or in `view` (5,6) using `operator<` to compare two elements
 
-- (3,4,7,8): Finds the smallest element in the range `[first, last)` or in `view`
-  using the binary functor `comp` to compare two elements
+- (3,4,7,8): Finds the smallest element in the range `[first, last)` (3,4)
+  or in `view` (7,8) using the binary functor `comp` to compare two elements
 
 ### Parameters and Requirements
 
@@ -105,14 +105,23 @@ auto min_element(const std::string& label,                              (8)
      }
   };
   ```
+  - the volatile overload is needed because the algorithm is
+  currently implemented as a reduction, where the `comp` functor is used
+  as the ``joiner'' to join two values. The current Kokkos implementation
+  of reductions requires any custom joiner to have
+  a volatile overload: see [this wiki page](https://github.com/kokkos/kokkos/wiki/Programming-Guide%3A-Custom-Reductions) for more info on reductions.
 
 
 ### Return
 
-Iterator to the smallest element. If several elements
-are equivalent to the smallest element, returns the iterator to the *first* such element.
-If the range `[first, last)` is empty it returns `last`.
-If `view` is empty, it returns `Kokkos::experimental::end(view)`.
+Iterator to the smallest element.
+The following special cases apply:
+
+- if several elements are equivalent to the smallest element, it returns the iterator to the *first* such element.
+
+- if the range `[first, last)` is empty it returns `last`.
+
+- if `view` is empty, it returns `Kokkos::Experimental::end(view)`.
 
 
 ### Example
@@ -132,7 +141,7 @@ auto res = KE::min_element(Kokkos::DefaultExecutionSpace(), a);
 template <class ValueType1, class ValueType2 = ValueType1>
 struct CustomLessThanComparator {
   KOKKOS_INLINE_FUNCTION
-  bool operator()(const ValueType1& a, 
+  bool operator()(const ValueType1& a,
                   const ValueType2& b) const {
     // here one can put any custom logic to return true if a is less than b
     return a < b;
@@ -219,10 +228,13 @@ auto max_element(const std::string& label,                              (8)
 
 ### Return
 
-Iterator to the largest element. If several elements
-are equivalent to the smallest element, returns the iterator to the *first* such element.
-If the range `[first, last)` is empty it returns `last`.
-If `view` is empty, it returns `Kokkos::experimental::end(view)`.
+Iterator to the largest element.
+The following special cases apply:
+- if several elements are equivalent to the smallest element, returns the iterator to the *first* such element.
+
+- if the range `[first, last)` is empty it returns `last`.
+
+- if `view` is empty, it returns `Kokkos::Experimental::end(view)`.
 
 
 ### Example
@@ -242,7 +254,7 @@ auto res = KE::max_element(Kokkos::DefaultExecutionSpace(), a);
 template <class ValueType1, class ValueType2 = ValueType1>
 struct CustomLessThanComparator {
   KOKKOS_INLINE_FUNCTION
-  bool operator()(const ValueType1& a, 
+  bool operator()(const ValueType1& a,
                   const ValueType2& b) const {
     // here one can put any custom logic to return true if a is less than b
     return a < b;
@@ -314,10 +326,10 @@ auto minmax_element(const std::string& label,                              (8)
 ### Description
 
 - (1,2,5,6): Finds the smallest and largest elements in the
-  range `[first, last)` or in `view` using `operator<` to compare two elements
+  range `[first, last)` (1,2) or in `view` (5,6) using `operator<` to compare two elements
 
 - (3,4,7,8): Finds the smallest and largest element in the
-  range `[first, last)` or in `view` using
+  range `[first, last)` (3,4) or in `view` (7,8) using
   the binary functor `comp` to compare two elements
 
 ### Parameters and Requirements
@@ -331,17 +343,17 @@ auto minmax_element(const std::string& label,                              (8)
 ### Return
 
 A Kokkos pair of iterators to the smallest element and largest elements in tha order.
-The following corner cases apply:
+The following special cases apply:
 
 - if the range `[first, last)` is empty it returns `Kokkos::pair(first, first)`.
 
-- if `view` is empty, it returns `Kokkos::pair(Kokkos::experimental::begin(view), Kokkos::experimental::begin(view))`.
+- if `view` is empty, it returns `Kokkos::pair(Kokkos::Experimental::begin(view), Kokkos::Experimental::begin(view))`.
 
 - if several elements are equivalent to the smallest element,
   the iterator to the *first* such element is returned.
 
 - if several elements are equivalent to the largest element,
-  the iterator to the `last` such element is returned.
+  the iterator to the *last* such element is returned.
 
 
 
@@ -361,7 +373,7 @@ auto itPair = KE::minmax_element(Kokkos::DefaultExecutionSpace(), a);
 template <class ValueType1, class ValueType2 = ValueType1>
 struct CustomLessThanComparator {
   KOKKOS_INLINE_FUNCTION
-  bool operator()(const ValueType1& a, 
+  bool operator()(const ValueType1& a,
                   const ValueType2& b) const {
     // here one can put any custom logic to return true if a is less than b
     return a < b;
@@ -381,6 +393,3 @@ struct CustomLessThanComparator {
 // passing the view directly
 auto res = KE::minmax_element(Kokkos::DefaultExecutionSpace(), a, CustomLessThanComparator<double>());
 ```
-
-
-
