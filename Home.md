@@ -31,7 +31,10 @@ worked a lot with other shared memory models such as OpenMP, CUDA, or OpenCL may
 able to simply look up how certain capabilities are used in Kokkos
 
 <!--- Kokkos Documentation "how to" guides will link to README.md files (via
-the kokkos, etc. user) from the main project repos, i.e., Kokkos, Kokkos Kernels, Kokkos Tools --->
+the kokkos, etc. user) from the main project repos, i.e., Kokkos, Kokkos
+Kernels, Kokkos Tools.  For development and testing purposes, use the
+ajpowelsnl user, but update the link after merging into `main`.
+ --->
 
 ## [Kokkos Documentation "How To" Guide](https://github.com/ajpowelsnl/kokkos/wiki/README)
 
