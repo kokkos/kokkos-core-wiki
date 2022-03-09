@@ -30,6 +30,11 @@ This is the place to go for a fast lookup of syntax. Developers who have previou
 worked a lot with other shared memory models such as OpenMP, CUDA, or OpenCL may be
 able to simply look up how certain capabilities are used in Kokkos
 
+## **[[Kokkos Documentation|How To Guides]]**
+#### [Kokkos](https://github.com/ajpowelsnl/wiki/README)
+
+
+
 # [The Kokkos Eco-System](https://github.com/kokkos)
 
 The Kokkos Programming Model is not the only resource available. There are a number 
