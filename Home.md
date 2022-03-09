@@ -30,15 +30,18 @@ This is the place to go for a fast lookup of syntax. Developers who have previou
 worked a lot with other shared memory models such as OpenMP, CUDA, or OpenCL may be
 able to simply look up how certain capabilities are used in Kokkos
 
-## **[[Kokkos Documentation|How To Guides]]**
-#### [Kokkos](https://github.com/kokkos/wiki/README)
+[]: # (Kokkos Documentation "how to" guides will link to README.md files from
+the main project repos, i.e., Kokkos, Kokkos Kernels, Kokkos Tools)
+
+
+## [Kokkos Documentation|How To Guide](https://github.com/ajpowelsnl/wiki/README)
 
 
 
 # [The Kokkos Eco-System](https://github.com/kokkos)
 
 The Kokkos Programming Model is not the only resource available. There are a number 
-of projects which can help HPC developers in their work. 
+of projects which can help HPC developers in their work.
 
 ## [Kokkos-Tutorials](https://github.com/kokkos/kokkos-tutorials)
 
