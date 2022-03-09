@@ -12,7 +12,7 @@ template <class MemorySpace = typename Kokkos::DefaultExecutionSpace::memory_spa
 void* kokkos_malloc(size_t size);
 ```
 
-Allocate `size` bytes of unitialized storage on the specified memory space `MemorySpace` plus some extra space for meta data such as the label.
+Allocate `size` bytes of uninitialized storage on the specified memory space `MemorySpace` plus some extra space for meta data such as the label.
 
 If allocation succeeds, returns a pointer to the lowest (first) byte in the allocated memory block that is suitably aligned for any scalar type.
 
