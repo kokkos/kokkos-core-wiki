@@ -23,6 +23,13 @@
 ### **[[Content: Algorithms|ContentAlgorithms]]**
 1. **[[Sorting|Sorting]]**
 2. **[[Random Numbers|Random-Number-Generators]]**
+3. **[[Iterators|Iterators]]**
+4. **[[Std Algorithms|StdAlgorithms]]**
+   1. **[[NonModSequenceOps|StdNonModSeq]]**
+   2. **[[ModSeqOps|StdModSeq]]**
+   3. **[[PartioningOps|StdPartioningOps]]**
+   4. **[[Numeric|StdNumeric]]**
+   5. **[[StdMinMaxElement|StdMinMaxElement]]**
 
 ## **[[API Reference|API-Reference]]**
 ### **[[Content: Alphabetical|API-Alphabetical]]**
