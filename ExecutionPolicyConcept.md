@@ -39,4 +39,4 @@ In this example, `Kokkos::RangePolicy<Kokkos::DefaultExecutionSpace>` is the `Ex
 Functionality
 -------------
 
-All `ExecutionPolicy` type provide a nested type named `index_type`.
+All `ExecutionPolicy` types provide a nested type named `index_type`.

@@ -92,20 +92,20 @@ Template parameters other than `DataType` are optional, but ordering is enforced
   * `View()`: Default Constructor. No allocations are made, no reference counting happens. All extents are zero and its data pointer is NULL.
   * `View( const View<DT, Prop...>& rhs)`: Copy constructor with compatible view. Follows View assignment rules. 
   * `View( View&& rhs)`: Move constructor
-  * `View( const std::string& name, const IntType& ... indices)`: Standard allocating constructor.
+  * `View( const std::string& name, const IntType& ... indices)`: Standard allocating constructor. The initialization is executed on the default instance of the execution space corresponding to `MemorySpace` and fences it.
     * `name`: a user provided label, which is used for profiling and debugging purposes. Names are not required to be unique,
     * `indices`: Runtime dimensions of the view.  
     * Requires: `sizeof(IntType...)==rank_dynamic()` 
     * Requires: `array_layout::is_regular == true`.
-  * `View( const std::string& name, const array_layout& layout)`: Standard allocating constructor.  
+  * `View( const std::string& name, const array_layout& layout)`: Standard allocating constructor. The initialization is executed on the default instance of the execution space corresponding to `MemorySpace` and fences it.
     * `name`: a user provided label, which is used for profiling and debugging purposes. Names are not required to be unique,
     * `layout`: an instance of a layout class.
-  * `View( const AllocProperties& prop, , const IntType& ... indices)`: Allocating constructor with allocation properties.
+  * `View( const AllocProperties& prop, , const IntType& ... indices)`: Allocating constructor with allocation properties. If an execution space is specified in `prop`, the initialization uses it and does not fence. Otherwise, the View is initialized using the default execution space instance corresponding to `MemorySpace` and fences it.
     * An allocation properties object is returned by the `view_alloc` function. 
     * `indices`: Runtime dimensions of the view.
     * Requires: `sizeof(IntType...)==rank_dynamic()` 
     * Requires: `array_layout::is_regular == true`.
-  * `View( const AllocProperties& prop, const array_layout& layout)`: Allocating constructor with allocation properties and a layout object. 
+  * `View( const AllocProperties& prop, const array_layout& layout)`: Allocating constructor with allocation properties and a layout object. If an execution space is specified in `prop`, the initialization uses it and does not fence. Otherwise, the View is initialized using the default execution space instance corresponding to `MemorySpace` and fences it.
     * An allocation properties object is returned by the `view_alloc` function. 
     * `layout`: an instance of a layout class.
   * `View( const pointer_type& ptr, const IntType& ... indices)`: Unmanaged data wrapping constructor.

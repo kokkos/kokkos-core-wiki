@@ -435,7 +435,7 @@ template <
 >
 OutputIteratorType replace_copy_if(const ExecutionSpace& exespace,              (1)
                                    InputIteratorType first_from,
-								   InputIteratorType last_from,
+                   InputIteratorType last_from,
                                    OutputIteratorType first_to,
                                    UnaryPredicateType pred, const T& new_value);
 
@@ -512,7 +512,7 @@ Iterator to the element *after* the last element copied.
 template <class ExecutionSpace, class InputIteratorType, class OutputIteratorType>
 OutputIteratorType copy(const ExecutionSpace& exespace,                      (1)
                         InputIteratorType first_from,
-						InputIteratorType last_from,
+            InputIteratorType last_from,
                         OutputIteratorType first_to);
 
 template <class ExecutionSpace, class InputIteratorType, class OutputIteratorType>
@@ -927,15 +927,15 @@ Otherwise, returns `first` (for 1,2) or `Kokkos::begin(view)` (for 3,4).
 ```cpp
 template <class ExecutionSpace, class InputIterator, class OutputIterator, class UnaryOperation>
 OutputIterator transform(const ExecutionSpace& exespace,                              (1)
-						 InputIterator first_from, InputIterator last_from,
+             InputIterator first_from, InputIterator last_from,
                          OutputIterator first_to,
-						 UnaryOperation unary_op);
+             UnaryOperation unary_op);
 
 template <class ExecutionSpace, class InputIterator, class OutputIterator, class UnaryOperation>
 OutputIterator transform(const std::string& label, const ExecutionSpace& exespace,    (2)
-						 InputIterator first_from, InputIterator last_from,
+             InputIterator first_from, InputIterator last_from,
                          OutputIterator d_first,
-						 UnaryOperation unary_op);
+             UnaryOperation unary_op);
 
 template <
   class ExecutionSpace,
@@ -966,8 +966,8 @@ template <
 >
 OutputIterator transform(const ExecutionSpace& exespace,                              (5)
                          InputIterator1 first_from1, InputIterator1 last_from1,
-					     InputIterator2 first_from2, OutputIterator first_to,
-			             BinaryOperation binary_op);
+               InputIterator2 first_from2, OutputIterator first_to,
+                   BinaryOperation binary_op);
 
 template <
   class ExecutionSpace,
@@ -976,8 +976,8 @@ template <
 >
 OutputIterator transform(const std::string& label, const ExecutionSpace& exespace,    (6)
                          InputIterator1 first_from1, InputIterator1 last_from1,
-					     InputIterator2 first_from2, OutputIterator first_to,
-			             BinaryOperation binary_op);
+               InputIterator2 first_from2, OutputIterator first_to,
+                   BinaryOperation binary_op);
 
 template <
   class ExecutionSpace,
@@ -1002,7 +1002,7 @@ template <
 auto transform(const std::string& label, const ExecutionSpace& exespace,              (8)
                const Kokkos::View<DataType1, Properties1...>& source1,
                const Kokkos::View<DataType2, Properties2...>& source2,
-		       Kokkos::View<DataType3, Properties3...>& dest,
+           Kokkos::View<DataType3, Properties3...>& dest,
                BinaryOperation binary_op);
 ```
 
@@ -1384,8 +1384,8 @@ IteratorType unique(const ExecutionSpace& exespace,                          (1)
 
 template <class ExecutionSpace, class IteratorType>
 IteratorType unique(const std::string& label,                                (2)
-				    const ExecutionSpace& exespace,
-					IteratorType first, IteratorType last);
+            const ExecutionSpace& exespace,
+          IteratorType first, IteratorType last);
 
 template <class ExecutionSpace, class DataType, class... Properties>
 auto unique(const ExecutionSpace& exespace,                                  (3)
@@ -1398,7 +1398,7 @@ auto unique(const std::string& label, const ExecutionSpace& exespace,        (4)
 template <class ExecutionSpace, class IteratorType, class BinaryPredicate>
 IteratorType unique(const ExecutionSpace& exespace,                          (5)
                     IteratorType first, IteratorType last,
-					BinaryPredicate pred);
+          BinaryPredicate pred);
 
 template <class ExecutionSpace, class IteratorType, class BinaryPredicate>
 IteratorType unique(const std::string& label,                                (6)
@@ -1466,13 +1466,13 @@ Iterator to the element *after* the new logical end of the range
 template <class ExecutionSpace, class InputIterator, class OutputIterator>
 OutputIterator unique_copy(const ExecutionSpace& exespace,                    (1)
                            InputIterator first_from, InputIterator last_from,
-						   OutputIterator first_to);
+               OutputIterator first_to);
 
 template <class ExecutionSpace, class InputIterator, class OutputIterator>
 OutputIterator unique_copy(const std::string& label,                          (2)
                            const ExecutionSpace& exespace,
                            InputIterator first_from, InputIterator last_from,
-						   OutputIterator first_to);
+               OutputIterator first_to);
 
 template <
   class ExecutionSpace,
@@ -1497,7 +1497,7 @@ template <
   class BinaryPredicate>
 OutputIterator unique_copy(const ExecutionSpace& exespace,                    (5)
                            InputIterator first_from, InputIterator last_from,
-						   OutputIterator first_to,
+               OutputIterator first_to,
                            BinaryPredicate pred);
 
 template <
@@ -1508,7 +1508,7 @@ OutputIterator unique_copy(const std::string& label,                          (6
                            const ExecutionSpace& exespace,
                            InputIterator first_from, InputIterator last_from,
                            OutputIterator first_to,
-						   BinaryPredicate pred);
+               BinaryPredicate pred);
 
 template <
   class ExecutionSpace,
@@ -1577,12 +1577,12 @@ template <class ExecutionSpace, class IteratorType>
 IteratorType rotate(const ExecutionSpace& exespace,                            (1)
                     IteratorType first,
                     IteratorType n_first,
-					IteratorType last);
+          IteratorType last);
 
 template <class ExecutionSpace, class IteratorType>
 IteratorType rotate(const std::string& label, const ExecutionSpace& exespace,  (2)
                     IteratorType first,
-					IteratorType n_first,
+          IteratorType n_first,
                     IteratorType last);
 
 template <class ExecutionSpace, class DataType, class... Properties>
@@ -1645,16 +1645,16 @@ template <class ExecutionSpace, class InputIterator, class OutputIterator>
 OutputIterator rotate_copy(const ExecutionSpace& exespace,                   (1)
                            InputIterator first_from,
                            InputIterator n_first,
-						   InputIterator last_from,
+               InputIterator last_from,
                            OutputIterator first_to);
 
 template <class ExecutionSpace, class InputIterator, class OutputIterator>
 OutputIterator rotate_copy(const std::string& label,                         (2)
                            const ExecutionSpace& exespace,
                            InputIterator first_from,
-						   InputIterator n_first,
+               InputIterator n_first,
                            InputIterator last_from,
-						   OutputIterator first_to);
+               OutputIterator first_to);
 
 template <
   class ExecutionSpace,
@@ -1732,7 +1732,7 @@ template <class ExecutionSpace, class Iterator, class ValueType>
 Iterator remove(const std::string& label,                                   (2)
                 const ExecutionSpace& exespace,
                 Iterator first, Iterator last,
-				const ValueType& value);
+        const ValueType& value);
 
 template <
   class ExecutionSpace,
@@ -1795,13 +1795,13 @@ Iterator to the element *after* the new logical end.
 template <class ExecutionSpace, class Iterator, class UnaryPredicateType>
 Iterator remove_if(const ExecutionSpace& exespace,                           (1)
                    Iterator first, Iterator last,
-				   UnaryPredicateType pred);
+           UnaryPredicateType pred);
 
 template <class ExecutionSpace, class Iterator, class UnaryPredicateType>
 Iterator remove_if(const std::string& label,                                 (2)
                    const ExecutionSpace& exespace,
                    Iterator first, Iterator last,
-				   UnaryPredicateType pred);
+           UnaryPredicateType pred);
 
 template <
   class ExecutionSpace,
@@ -1816,9 +1816,9 @@ template <
   class DataType, class... Properties,
   class UnaryPredicateType>
 auto remove_if(const std::string& label,                                     (4)
-			   const ExecutionSpace& exespace,
-			   const ::Kokkos::View<DataType, Properties...>& view,
-			   const UnaryPredicateType& pred);
+         const ExecutionSpace& exespace,
+         const ::Kokkos::View<DataType, Properties...>& view,
+         const UnaryPredicateType& pred);
 ```
 
 ### Description
@@ -1875,8 +1875,8 @@ template <
   class ValueType>
 OutputIterator remove_copy(const ExecutionSpace& exespace,                   (1)
                            InputIterator first_from,
-						   InputIterator last_from,
-						   OutputIterator first_to,
+               InputIterator last_from,
+               OutputIterator first_to,
                            const ValueType& value);
 
 template <
@@ -1886,9 +1886,9 @@ template <
 OutputIterator remove_copy(const std::string& label,                         (2)
                            const ExecutionSpace& exespace,
                            InputIterator first_from,
-						   InputIterator last_from,
+               InputIterator last_from,
                            OutputIterator first_to,
-						   const ValueType& value);
+               const ValueType& value);
 
 template <
   class ExecutionSpace,
