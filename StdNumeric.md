@@ -438,28 +438,28 @@ The reduction result.
 template <
   class ExecutionSpace, class InputIteratorType,
   class OutputIteratorType, class ValueType>
-OutputIteratorType exclusive_scan(const ExecutionSpace& ex,                      (1)
+OutputIteratorType exclusive_scan(const ExecutionSpace& exespace,                (1)
                                   InputIteratorType first,
-								  InputIteratorType last,
-								  OutputIteratorType first_dest,
-								  ValueType init_value);
+                                  InputIteratorType last,
+                                  OutputIteratorType first_dest,
+                                  ValueType init_value);
 
 template <
   class ExecutionSpace, class InputIteratorType,
   class OutputIteratorType, class ValueType>
 OutputIteratorType exclusive_scan(const std::string& label,                      (2)
-                                  const ExecutionSpace& ex,
-								  InputIteratorType first,
-								  InputIteratorType last,
-								  OutputIteratorType first_dest,
-								  ValueType init_value);
+                                  const ExecutionSpace& exespace,
+                                  InputIteratorType first,
+                                  InputIteratorType last,
+                                  OutputIteratorType first_dest,
+                                  ValueType init_value);
 
 template <
   class ExecutionSpace,
   class DataType1, class... Properties1,
   class DataType2, class... Properties2,
   class ValueType>
-auto exclusive_scan(const ExecutionSpace& ex,                                    (3)
+auto exclusive_scan(const ExecutionSpace& exespace,                              (3)
                     const ::Kokkos::View<DataType1, Properties1...>& view_from,
                     const ::Kokkos::View<DataType2, Properties2...>& view_dest,
                     ValueType init_value);
@@ -469,7 +469,7 @@ template <
   class DataType1, class... Properties1,
   class DataType2, class... Properties2,
   class ValueType>
-auto exclusive_scan(const std::string& label, const ExecutionSpace& ex,          (4)
+auto exclusive_scan(const std::string& label, const ExecutionSpace& exespace,    (4)
                     const ::Kokkos::View<DataType1, Properties1...>& view_from,
                     const ::Kokkos::View<DataType2, Properties2...>& view_dest,
                     ValueType init_value);
@@ -481,7 +481,7 @@ template <
  class ExecutionSpace, class InputIteratorType,
  class OutputIteratorType, class ValueType, class BinaryOpType
  >
-OutputIteratorType exclusive_scan(const ExecutionSpace& ex,                      (5)
+OutputIteratorType exclusive_scan(const ExecutionSpace& exespace,                (5)
                                   InputIteratorType first_from,
                                   InputIteratorType last_from,
                                   OutputIteratorType first_dest,
@@ -493,7 +493,7 @@ template <
   class OutputIteratorType, class ValueType, class BinaryOpType
   >
 OutputIteratorType exclusive_scan(const std::string& label,                      (6)
-                                  const ExecutionSpace& ex,
+                                  const ExecutionSpace& exespace,
                                   InputIteratorType first_from,
                                   InputIteratorType last_from,
                                   OutputIteratorType first_dest,
@@ -503,7 +503,7 @@ template <
   class ExecutionSpace, class DataType1, class... Properties1,
   class DataType2, class... Properties2, class ValueType,
   class BinaryOpType>
-auto exclusive_scan(const ExecutionSpace& ex,                                    (7)
+auto exclusive_scan(const ExecutionSpace& exespace,                              (7)
                     const ::Kokkos::View<DataType1, Properties1...>& view_from,
                     const ::Kokkos::View<DataType2, Properties2...>& view_dest,
                     ValueType init_value, BinaryOpType bin_op);
@@ -512,7 +512,7 @@ template <
   class ExecutionSpace, class DataType1, class... Properties1,
   class DataType2, class... Properties2, class ValueType,
   class BinaryOpType>
-auto exclusive_scan(const std::string& label, const ExecutionSpace& ex,          (8)
+auto exclusive_scan(const std::string& label, const ExecutionSpace& exespace,    (8)
                     const ::Kokkos::View<DataType1, Properties1...>& view_from,
                     const ::Kokkos::View<DataType2, Properties2...>& view_dest,
                     ValueType init_value, BinaryOpType bin_op);
@@ -594,20 +594,20 @@ template <
   class ExecutionSpace, class InputIteratorType,
   class OutputIteratorType, class ValueType,
   class BinaryOpType, class UnaryOpType>
-OutputIteratorType transform_exclusive_scan(const ExecutionSpace& ex,        (1)
+OutputIteratorType transform_exclusive_scan(const ExecutionSpace& exespace,     (1)
                                             InputIteratorType first_from,
-											InputIteratorType last_from,
-											OutputIteratorType first_dest,
-											ValueType init_value,
-											BinaryOpType binary_op,
-											UnaryOpType unary_op);
+                                            InputIteratorType last_from,
+                                            OutputIteratorType first_dest,
+                                            ValueType init_value,
+                                            BinaryOpType binary_op,
+                                            UnaryOpType unary_op);
 
 template <
   class ExecutionSpace, class InputIteratorType,
   class OutputIteratorType, class ValueType,
   class BinaryOpType, class UnaryOpType>
-OutputIteratorType transform_exclusive_scan(const std::string& label,        (2)
-                                            const ExecutionSpace& ex,
+OutputIteratorType transform_exclusive_scan(const std::string& label,           (2)
+                                            const ExecutionSpace& exespace,
                                             InputIteratorType first_from,
                                             InputIteratorType last_from,
                                             OutputIteratorType first_dest,
@@ -620,7 +620,7 @@ template <
   class DataType1, class... Properties1,
   class DataType2, class... Properties2,
   class ValueType, class BinaryOpType, class UnaryOpType>
-auto transform_exclusive_scan(const ExecutionSpace& ex,                       (3)
+auto transform_exclusive_scan(const ExecutionSpace& exespace,                   (3)
                               const ::Kokkos::View<DataType1, Properties1...>& view_from,
                               const ::Kokkos::View<DataType2, Properties2...>& view_dest,
                               ValueType init_value, BinaryOpType binary_op,
@@ -631,8 +631,8 @@ template <
   class DataType1, class... Properties1,
   class DataType2, class... Properties2,
   class ValueType, class BinaryOpType, class UnaryOpType>
-auto transform_exclusive_scan(const std::string& label,                       (4)
-                              const ExecutionSpace& ex,
+auto transform_exclusive_scan(const std::string& label,                         (4)
+                              const ExecutionSpace& exespace,
                               const ::Kokkos::View<DataType1, Properties1...>& view_from,
                               const ::Kokkos::View<DataType2, Properties2...>& view_dest,
                               ValueType init_value, BinaryOpType binary_op,
@@ -689,14 +689,14 @@ Iterator to the element *after* the last element written.
 // overload set A
 //
 template <class ExecutionSpace, class InputIteratorType, class OutputIteratorType>
-OutputIteratorType inclusive_scan(const ExecutionSpace& ex,                      (1)
+OutputIteratorType inclusive_scan(const ExecutionSpace& exespace,                 (1)
                                   InputIteratorType first_from,
                                   InputIteratorType last_from,
                                   OutputIteratorType first_dest);
 
 template <class ExecutionSpace, class InputIteratorType, class OutputIteratorType>
-OutputIteratorType inclusive_scan(const std::string& label,                      (2)
-                                  const ExecutionSpace& ex,
+OutputIteratorType inclusive_scan(const std::string& label,                       (2)
+                                  const ExecutionSpace& exespace,
                                   InputIteratorType first_from,
                                   InputIteratorType last_from,
                                   OutputIteratorType first_dest);
@@ -705,7 +705,7 @@ template <
   class ExecutionSpace,
   class DataType1, class... Properties1,
   class DataType2, class... Properties2>
-auto inclusive_scan(const ExecutionSpace& ex,                                    (3)
+auto inclusive_scan(const ExecutionSpace& exespace,                               (3)
                     const ::Kokkos::View<DataType1, Properties1...>& view_from,
                     const ::Kokkos::View<DataType2, Properties2...>& view_dest);
 
@@ -713,7 +713,7 @@ template <
   class ExecutionSpace,
   class DataType1, class... Properties1,
   class DataType2, class... Properties2>
-auto inclusive_scan(const std::string& label, const ExecutionSpace& ex,          (4)
+auto inclusive_scan(const std::string& label, const ExecutionSpace& exespace,     (4)
                     const ::Kokkos::View<DataType1, Properties1...>& view_from,
                     const ::Kokkos::View<DataType2, Properties2...>& view_dest);
 
@@ -724,7 +724,7 @@ template <
  class ExecutionSpace, class InputIteratorType,
  class OutputIteratorType, class BinaryOpType
  >
-OutputIteratorType inclusive_scan(const ExecutionSpace& ex,                      (5)
+OutputIteratorType inclusive_scan(const ExecutionSpace& exespace,                 (5)
                                   InputIteratorType first_from,
                                   InputIteratorType last_from,
                                   OutputIteratorType first_dest,
@@ -734,8 +734,8 @@ template <
   class ExecutionSpace, class InputIteratorType,
   class OutputIteratorType, class BinaryOpType
   >
-OutputIteratorType inclusive_scan(const std::string& label,                      (6)
-                                  const ExecutionSpace& ex,
+OutputIteratorType inclusive_scan(const std::string& label,                       (6)
+                                  const ExecutionSpace& exespace,
                                   InputIteratorType first_from,
                                   InputIteratorType last_from,
                                   OutputIteratorType first_dest,
@@ -746,7 +746,7 @@ template <
   class DataType1, class... Properties1,
   class DataType2, class... Properties2,
   class BinaryOpType>
-auto inclusive_scan(const ExecutionSpace& ex,                                    (7)
+auto inclusive_scan(const ExecutionSpace& exespace,                               (7)
                     const ::Kokkos::View<DataType1, Properties1...>& view_from,
                     const ::Kokkos::View<DataType2, Properties2...>& view_dest,
                     BinaryOpType bin_op);
@@ -755,7 +755,7 @@ template <
   class ExecutionSpace, class DataType1, class... Properties1,
   class DataType2, class... Properties2,
   class BinaryOpType>
-auto inclusive_scan(const std::string& label, const ExecutionSpace& ex,          (8)
+auto inclusive_scan(const std::string& label, const ExecutionSpace& exespace,     (8)
                     const ::Kokkos::View<DataType1, Properties1...>& view_from,
                     const ::Kokkos::View<DataType2, Properties2...>& view_dest,
                     BinaryOpType bin_op);
@@ -768,7 +768,7 @@ template <
  class InputIteratorType, class OutputIteratorType,
  class BinaryOpType, class ValueType
  >
-OutputIteratorType inclusive_scan(const ExecutionSpace& ex,                      (9)
+OutputIteratorType inclusive_scan(const ExecutionSpace& exespace,                 (9)
                                   InputIteratorType first_from,
                                   InputIteratorType last_from,
                                   OutputIteratorType first_dest,
@@ -779,8 +779,8 @@ template <
   class ExecutionSpace, class InputIteratorType,
   class OutputIteratorType, class BinaryOpType, class ValueType
   >
-OutputIteratorType inclusive_scan(const std::string& label,                      (10)
-                                  const ExecutionSpace& ex,
+OutputIteratorType inclusive_scan(const std::string& label,                       (10)
+                                  const ExecutionSpace& exespace,
                                   InputIteratorType first_from,
                                   InputIteratorType last_from,
                                   OutputIteratorType first_dest,
@@ -792,7 +792,7 @@ template <
   class DataType1, class... Properties1,
   class DataType2, class... Properties2,
   class BinaryOpType, class ValueType>
-auto inclusive_scan(const ExecutionSpace& ex,                                    (11)
+auto inclusive_scan(const ExecutionSpace& exespace,                               (11)
                     const ::Kokkos::View<DataType1, Properties1...>& view_from,
                     const ::Kokkos::View<DataType2, Properties2...>& view_dest,
                     BinaryOpType bin_op,
@@ -803,7 +803,7 @@ template <
   class DataType1, class... Properties1,
   class DataType2, class... Properties2,
   class BinaryOpType, class ValueType>
-auto inclusive_scan(const std::string& label, const ExecutionSpace& ex,          (12)
+auto inclusive_scan(const std::string& label, const ExecutionSpace& exespace,     (12)
                     const ::Kokkos::View<DataType1, Properties1...>& view_from,
                     const ::Kokkos::View<DataType2, Properties2...>& view_dest,
                     BinaryOpType bin_op,
@@ -852,7 +852,7 @@ Iterator to the element *after* the last element written.
 template <
   class ExecutionSpace, class InputIteratorType,
   class OutputIteratorType, class BinaryOpType, class UnaryOpType>
-OutputIteratorType transform_inclusive_scan(const ExecutionSpace& ex,        (1)
+OutputIteratorType transform_inclusive_scan(const ExecutionSpace& exespace,       (1)
                                             InputIteratorType first_from,
                                             InputIteratorType last_from,
                                             OutputIteratorType first_dest,
@@ -862,8 +862,8 @@ OutputIteratorType transform_inclusive_scan(const ExecutionSpace& ex,        (1)
 template <
   class ExecutionSpace, class InputIteratorType,
   class OutputIteratorType, class BinaryOpType, class UnaryOpType>
-OutputIteratorType transform_inclusive_scan(const std::string& label,        (2)
-                                            const ExecutionSpace& ex,
+OutputIteratorType transform_inclusive_scan(const std::string& label,             (2)
+                                            const ExecutionSpace& exespace,
                                             InputIteratorType first_from,
                                             InputIteratorType last_from,
                                             OutputIteratorType first_dest,
@@ -875,7 +875,7 @@ template <
   class DataType1, class... Properties1,
   class DataType2, class... Properties2,
   class BinaryOpType, class UnaryOpType>
-auto transform_inclusive_scan(const ExecutionSpace& ex,                       (3)
+auto transform_inclusive_scan(const ExecutionSpace& exespace,                     (3)
                               const ::Kokkos::View<DataType1, Properties1...>& view_from,
                               const ::Kokkos::View<DataType2, Properties2...>& view_dest,
                               BinaryOpType binary_op,
@@ -886,8 +886,8 @@ template <
   class DataType1, class... Properties1,
   class DataType2, class... Properties2,
   class BinaryOpType, class UnaryOpType>
-auto transform_inclusive_scan(const std::string& label,                       (4)
-                              const ExecutionSpace& ex,
+auto transform_inclusive_scan(const std::string& label,                           (4)
+                              const ExecutionSpace& exespace,
                               const ::Kokkos::View<DataType1, Properties1...>& view_from,
                               const ::Kokkos::View<DataType2, Properties2...>& view_dest,
                               BinaryOpType binary_op,
@@ -897,7 +897,7 @@ template <
   class ExecutionSpace, class InputIteratorType,
   class OutputIteratorType, class BinaryOpType, class UnaryOpType,
   class ValueType>
-OutputIteratorType transform_inclusive_scan(const ExecutionSpace& ex,         (5)
+OutputIteratorType transform_inclusive_scan(const ExecutionSpace& exespace,       (5)
                                             InputIteratorType first_from,
                                             InputIteratorType last_from,
                                             OutputIteratorType first_dest,
@@ -909,8 +909,8 @@ template <
   class ExecutionSpace, class InputIteratorType,
   class OutputIteratorType, class BinaryOpType, class UnaryOpType,
   class ValueType>
-OutputIteratorType transform_inclusive_scan(const std::string& label,         (6)
-                                            const ExecutionSpace& ex,
+OutputIteratorType transform_inclusive_scan(const std::string& label,             (6)
+                                            const ExecutionSpace& exespace,
                                             InputIteratorType first_from,
                                             InputIteratorType last_from,
                                             OutputIteratorType first_dest,
@@ -923,7 +923,7 @@ template <
   class DataType1, class... Properties1,
   class DataType2, class... Properties2,
   class BinaryOpType, class UnaryOpType, class ValueType>
-auto transform_inclusive_scan(const ExecutionSpace& ex,                       (7)
+auto transform_inclusive_scan(const ExecutionSpace& exespace,                     (7)
                               const ::Kokkos::View<DataType1, Properties1...>& view_from,
                               const ::Kokkos::View<DataType2, Properties2...>& view_dest,
                               BinaryOpType binary_op, UnaryOpType unary_op,
@@ -934,8 +934,8 @@ template <
   class DataType1, class... Properties1,
   class DataType2, class... Properties2,
   class BinaryOpType, class UnaryOpType, class ValueType>
-auto transform_inclusive_scan(const std::string& label,                       (8)
-                              const ExecutionSpace& ex,
+auto transform_inclusive_scan(const std::string& label,                           (8)
+                              const ExecutionSpace& exespace,
                               const ::Kokkos::View<DataType1, Properties1...>& view_from,
                               const ::Kokkos::View<DataType2, Properties2...>& view_dest,
                               BinaryOpType binary_op, UnaryOpType unary_op,
@@ -981,30 +981,30 @@ Iterator to the element *after* the last element written.
 template <class ExecutionSpace, class InputIteratorType, class OutputIteratorType>
 OutputIteratorType adjacent_difference(const ExecutionSpace& exespace,                    (1)
                                        InputIteratorType first_from,
-									   InputIteratorType last_from,
-									   OutputIteratorType first_dest);
+                                       InputIteratorType last_from,
+                                       OutputIteratorType first_dest);
 
 template <class ExecutionSpace, class InputIteratorType, class OutputIteratorType, class BinaryOp>
 OutputIteratorType adjacent_difference(const ExecutionSpace& exespace,                    (2)
                                        InputIteratorType first_from,
-									   InputIteratorType last_from,
-									   OutputIteratorType first_dest,
-									   BinaryOp bin_op);
+                                       InputIteratorType last_from,
+                                       OutputIteratorType first_dest,
+                                       BinaryOp bin_op);
 
 template <class ExecutionSpace, class InputIteratorType, class OutputIteratorType>
 OutputIteratorType adjacent_difference(const std::string& label,                          (3)
                                        const ExecutionSpace& exespace,
-									   InputIteratorType first_from,
-									   InputIteratorType last_from,
-									   OutputIteratorType first_dest);
+                                       InputIteratorType first_from,
+                                       InputIteratorType last_from,
+                                       OutputIteratorType first_dest);
 
 template <class ExecutionSpace, class InputIteratorType, class OutputIteratorType, class BinaryOp>
 OutputIteratorType adjacent_difference(const std::string& label,                          (4)
                                        const ExecutionSpace& exespace,
-									   InputIteratorType first_from,
-									   InputIteratorType last_from,
-									   OutputIteratorType first_dest,
-									   BinaryOp bin_op);
+                                       InputIteratorType first_from,
+                                       InputIteratorType last_from,
+                                       OutputIteratorType first_dest,
+                                       BinaryOp bin_op);
 
 template <
   class ExecutionSpace,
@@ -1012,7 +1012,7 @@ template <
   class DataType2, class... Properties2>
 auto adjacent_difference(const ExecutionSpace& exespace,                                  (5)
                          const ::Kokkos::View<DataType1, Properties1...>& view_from,
-					     const ::Kokkos::View<DataType2, Properties2...>& view_dest);
+                         const ::Kokkos::View<DataType2, Properties2...>& view_dest);
 
 template <
   class ExecutionSpace,
@@ -1021,8 +1021,8 @@ template <
   class BinaryOp>
 auto adjacent_difference(const ExecutionSpace& exespace,                                  (6)
                          const ::Kokkos::View<DataType1, Properties1...>& view_from,
-					     const ::Kokkos::View<DataType2, Properties2...>& view_dest,
-						 BinaryOp bin_op);
+                         const ::Kokkos::View<DataType2, Properties2...>& view_dest,
+                         BinaryOp bin_op);
 
 template <
   class ExecutionSpace,
@@ -1042,7 +1042,7 @@ auto adjacent_difference(const std::string& label,                              
                          const ExecutionSpace& exespace,
                          const ::Kokkos::View<DataType1, Properties1...>& view_from,
                          const ::Kokkos::View<DataType2, Properties2...>& view_dest,
-						 BinaryOp bin_op);
+                         BinaryOp bin_op);
 ```
 
 ### Description
