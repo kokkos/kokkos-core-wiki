@@ -16,4 +16,5 @@ Utility functionality part of Kokkos Core.
 Ports of standard C++ capabilities, which otherwise do not work on various hardware platforms.
 ### 9. **[[Numerics]]**
 Common mathematical functions, mathematical constants, numeric traits.
-
+### 10. **[[Macros]]**
+Global macros defined by Kokkos, used for architectures, general settings, etc.
