@@ -17,6 +17,9 @@ Currently supported (see below the full details):
 ## `Kokkos::Experimental::min_element`
 
 ```cpp
+//
+// overload set accepting iterators
+//
 template <class ExecutionSpace, class IteratorType>
 auto min_element(const ExecutionSpace& exespace,                        (1)
                  IteratorType first, IteratorType last);
@@ -29,14 +32,17 @@ auto min_element(const std::string& label,                              (2)
 template <class ExecutionSpace, class IteratorType, class ComparatorType>
 auto min_element(const ExecutionSpace& exespace,                        (3)
                  IteratorType first, IteratorType last,
-				 ComparatorType comp);
+                 ComparatorType comp);
 
 template <class ExecutionSpace, class IteratorType, class ComparatorType>
 auto min_element(const std::string& label,                              (4)
                  const ExecutionSpace& exespace,
                  IteratorType first, IteratorType last,
-				 ComparatorType comp);
+                 ComparatorType comp);
 
+//
+// overload set accepting views
+//
 template <class ExecutionSpace, class DataType, class... Properties>
 auto min_element(const ExecutionSpace& exespace,                        (5)
                  const ::Kokkos::View<DataType, Properties...>& view);
@@ -169,6 +175,9 @@ auto res = KE::min_element(Kokkos::DefaultExecutionSpace(), a, CustomLessThanCom
 ## `Kokkos::Experimental::max_element`
 
 ```cpp
+//
+// overload set accepting iterators
+//
 template <class ExecutionSpace, class IteratorType>
 auto max_element(const ExecutionSpace& exespace,                        (1)
                  IteratorType first, IteratorType last);
@@ -181,14 +190,17 @@ auto max_element(const std::string& label,                              (2)
 template <class ExecutionSpace, class IteratorType, class ComparatorType>
 auto max_element(const ExecutionSpace& exespace,                        (3)
                  IteratorType first, IteratorType last,
-				 ComparatorType comp);
+                 ComparatorType comp);
 
 template <class ExecutionSpace, class IteratorType, class ComparatorType>
 auto max_element(const std::string& label,                              (4)
                  const ExecutionSpace& exespace,
                  IteratorType first, IteratorType last,
-				 ComparatorType comp);
+                 ComparatorType comp);
 
+//
+// overload set accepting views
+//
 template <class ExecutionSpace, class DataType, class... Properties>
 auto max_element(const ExecutionSpace& exespace,                        (5)
                  const ::Kokkos::View<DataType, Properties...>& view);
@@ -220,7 +232,7 @@ auto max_element(const std::string& label,                              (8)
 
 ### Parameters and Requirements
 
-- `exespace`, `first`, `last`, `view`, `comp`: same as in [`min`](kokkosexperimentalmin_element)
+- `exespace`, `first`, `last`, `view`, `comp`: same as in [`min_element`](#kokkosexperimentalmin_element)
 - `label`:
   - used to name the implementation kernels for debugging purposes
   - for 1,3 the default string is: "Kokkos::max_element_iterator_api_default"
@@ -282,6 +294,9 @@ auto res = KE::max_element(Kokkos::DefaultExecutionSpace(), a, CustomLessThanCom
 ## `Kokkos::Experimental::minmax_element`
 
 ```cpp
+//
+// overload set accepting iterators
+//
 template <class ExecutionSpace, class IteratorType>
 auto minmax_element(const ExecutionSpace& exespace,                        (1)
                     IteratorType first, IteratorType last);
@@ -294,14 +309,17 @@ auto minmax_element(const std::string& label,                              (2)
 template <class ExecutionSpace, class IteratorType, class ComparatorType>
 auto minmax_element(const ExecutionSpace& exespace,                        (3)
                     IteratorType first, IteratorType last,
-				    ComparatorType comp);
+                    ComparatorType comp);
 
 template <class ExecutionSpace, class IteratorType, class ComparatorType>
 auto minmax_element(const std::string& label,                              (4)
                     const ExecutionSpace& exespace,
                     IteratorType first, IteratorType last,
-				    ComparatorType comp);
+                    ComparatorType comp);
 
+//
+// overload set accepting views
+//
 template <class ExecutionSpace, class DataType, class... Properties>
 auto minmax_element(const ExecutionSpace& exespace,                        (5)
                     const ::Kokkos::View<DataType, Properties...>& view);
@@ -334,7 +352,7 @@ auto minmax_element(const std::string& label,                              (8)
 
 ### Parameters and Requirements
 
-- `exespace`, `first`, `last`, `view`, `comp`: same as in [`min`](kokkosexperimentalmin_element)
+- `exespace`, `first`, `last`, `view`, `comp`: same as in [`min_element`](#kokkosexperimentalmin_element)
 - `label`:
   - used to name the implementation kernels for debugging purposes
   - for 1,3 the default string is: "Kokkos::minmax_element_iterator_api_default"
@@ -354,7 +372,6 @@ The following special cases apply:
 
 - if several elements are equivalent to the largest element,
   the iterator to the *last* such element is returned.
-
 
 
 ### Example
