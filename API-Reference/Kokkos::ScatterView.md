@@ -52,6 +52,9 @@ Usage:
   
     template <typename ... Dims>
     ScatterView(std::string const& name, Dims ... dims);
+
+    template <typename... P, typename... Dims>
+    ScatterView(::Kokkos::Impl::ViewCtorProp<P...> const& arg_prop, Dims... dims);
   
     template <int override_contrib = contribution>
     KOKKOS_FORCEINLINE_FUNCTION
@@ -124,6 +127,13 @@ Usage:
     ScatterView(std::string const& name, Dims ... dims);
    ```
    Constructor from variadic pack of dimension arguments. Constructs `internal_view` member.
+
+ * ```c++
+    ScatterView(::Kokkos::Impl::ViewCtorProp<P...> const& arg_prop, Dims... dims);
+   ```
+   Constructor from variadic pack of dimension arguments. Constructs `internal_view` member.
+   This constructor allows specifying an execution space instance to be used by passing, e.g., 
+   Kokkos::view_alloc(exec_space, "label") as first argument.
 
 ### Functions
   * ```c++
