@@ -16,6 +16,19 @@ is enabled. They can be tested for existence (e.g. `#ifdef KOKKOS_ENABLE_SERIAL`
 | `KOKKOS_ENABLE_MEMKIND`      | Defined if the experimental `HBWSpace` execution space is enabled.          |
 | `KOKKOS_ENABLE_SYCL`         | Defined if the experimental `SYCL` execution space is enabled.              |
 
+## C++ Standard Settings
+
+Kokkos supports the latest C++ language standards. Certain features may use different
+code paths or have different compiler support depending on the language standard that
+is enabled. The following macros are exposed to determine what language standard
+Kokkos was compiled with.
+
+| Macro               | Description                             |
+| ------------------- | --------------------------------------- |
+| KOKKOS_ENABLE_CXX14 | The C++14 language standard is enabled. |
+| KOKKOS_ENABLE_CXX17 | The C++17 language standard is enabled. |
+| KOKKOS_ENABLE_CXX20 | The C++20 language standard is enabled. |
+
 ## Architectures
 
 | Macro | Description |
@@ -30,7 +43,7 @@ is enabled. They can be tested for existence (e.g. `#ifdef KOKKOS_ENABLE_SERIAL`
 | `KOKKOS_ARCH_AVX2` | Optimize for AVX2 |
 | `KOKKOS_ARCH_AVX512XEON` | Optimize for Skylake(AVX512) |
 | `KOKKOS_ARCH_KNC` | Optimize for Intel Knights Corner Xeon Phi (HOST) |
-| `KOKKOS_ARCH_AVX512MIC` | Optmize for Many Integrated Core (MIC; AVX512) |
+| `KOKKOS_ARCH_AVX512MIC` | Optimize for Many Integrated Core (MIC; AVX512) |
 | `KOKKOS_ARCH_POWER7` | Optimize for IBM POWER7 CPUs (HOST) |
 | `KOKKOS_ARCH_POWER8` | Optimize for IBM POWER8 CPUs (HOST) |
 | `KOKKOS_ARCH_POWER9` | Optimize for IBM POWER9 CPUs (HOST)|
