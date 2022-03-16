@@ -124,3 +124,9 @@ with.
 | `KOKKOS_ENABLE_DUALVIEW_MODIFY_CHECK` | Defined if debug checks for Kokkos::DualView objects are enabled. |
 | `KOKKOS_ENABLE_DEPRECATED_CODE_3` | Defined if features deprecated in major release 3 are still available. |
 | `KOKKOS_ENABLE_DEPRECATION_WARNING` | Defined if deprecated features generate deprecation warnings |
+| `KOKKOS_ENABLE_COMPILER_WARNINGS` | A subset of compiler warnings are enabled for Kokkos. |
+| `KOKKOS_ENABLE_PROFILING_LOAD_PRINT` | Kokkos will output a message when the profiling library is loaded. |
+| `KOKKOS_ENABLE_TUNING` | Whether bindings for tunings are available (see [#2422](https://github.com/kokkos/kokkos/pull/2422)). |
+| `KOKKOS_ENABLE_LARGE_MEM_TESTS` | Whether large memory tests are enabled (only applies to some unit tests). |
+| `KOKKOS_ENABLE_COMPLEX_ALIGN` | Whether complex types are aligned. |
+| `KOKKOS_ENABLE_AGGRESSIVE_VECTORIZATION` | Whether certain dependency assumptions are ignored for aggressive vectorization of internal Kokkos loops. |
