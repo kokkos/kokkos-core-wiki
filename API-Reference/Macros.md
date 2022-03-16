@@ -1,4 +1,11 @@
 # Macros
+
+## Version Macros
+
+| Macro | Description |
+| ----- | ----------- |
+| KOKKOS_VERSION | The Kokkos version; `KOKKOS_VERSION % 100` is the patch level, `KOKKOS_VERSION / 100 % 100` is the minor version, and KOKKOS_VERSION / 10000 is the major version. |
+
 ## Execution Spaces
 
 The following macros can be used to test whether or not a specified execution space
