@@ -107,3 +107,8 @@ with.
 | `KOKKOS_ARCH_VEGA906` | Optimize for AMD GPU MI50/MI60 GFX906 (GPU) |
 | `KOKKOS_ARCH_VEGA908` | Optimize for AMD GPU MI100 GFX908 (GPU) |
 | `KOKKOS_ARCH_VEGA90A` | Optimize for AMD GPU MI200 GFX90A (GPU) |
+
+## General Settings
+
+| Macro | Description |
+| ------| ---------------|
