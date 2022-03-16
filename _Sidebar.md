@@ -15,11 +15,11 @@
 12. **[[Interoperability|Interoperability]]**
 13. **[[Kokkos and Virtual Functions|Kokkos and Virtual Functions]]**
 ### **[[Content: Containers|ContentContainers]]**
-1. **[Dual View](Kokkos%3A%3ADualView)**
-2. **[Dynamic Rank View](Kokkos%3A%3ADynRankView)**
-3. **[Dynamic Length View](Kokkos%3A%3ADynamicView)**
-4. **[[Offset View|Offset-View]]**
-5. **[[Unordered Map|Unordered-Map]]**
+1. **[DualView](Kokkos%3A%3ADualView)**
+2. **[DynRankView](Kokkos%3A%3ADynRankView)**
+3. **[DynamicView](Kokkos%3A%3ADynamicView)**
+4. **[[OffsetView|Offset-View]]**
+5. **[[UnorderedMap|Unordered-Map]]**
 ### **[[Content: Algorithms|ContentAlgorithms]]**
 1. **[[Sorting|Sorting]]**
 2. **[[Random Numbers|Random-Number-Generators]]**
