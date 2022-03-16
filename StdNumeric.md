@@ -12,7 +12,7 @@ Currently supported (see below the full details):
  - [`transform_exclusive_scan`](#kokkosexperimentaltransform_exclusive_scan)
  - [`inclusive_scan`](#kokkosexperimentalinclusive_scan)
  - [`transform_inclusive_scan`](#kokkosexperimentaltransform_inclusive_scan)
- - [`adjacent_difference`](#kokkosexperimentaladjance_difference)
+ - [`adjacent_difference`](#kokkosexperimentaladjant_difference)
 
 
 ------
