@@ -2,6 +2,9 @@
 
 
 ## Architectures
+
+| Macro | Description |
+| ------| ---------------|
 | KOKKOS_ARCH_SSE42 | Optimize for SSE 4.2 |
 | KOKKOS_ARCH_ARMV80 | Optimize for ARMv8.0 Compatible CPU (HOST) |
 | KOKKOS_ARCH_ARMV8_THUNDERX | Optimize for ARMv8 Cavium ThunderX CPU (HOST) |
