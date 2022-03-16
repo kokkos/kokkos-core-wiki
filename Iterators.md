@@ -1,5 +1,5 @@
 
-## Kokkos::Experimental::{begin, cbegin, end, cend}
+## `Kokkos::Experimental::{begin, cbegin, end, cend}`
 
 Header File: `Kokkos_Core.hpp`
 
@@ -55,12 +55,14 @@ auto itc = KE::cbegin(a);
 
 ```cpp
 template <class IteratorType>
-void distance(IteratorType first, IteratorType last);
+KOKKOS_INLINE_FUNCTION
+constexpr typename IteratorType::difference_type distance(IteratorType first,
+                                                          IteratorType last);
 ```
 
 ### Description
 
-Returns the number of steps from `first` to `last`.
+Returns the number of steps needed to go from `first` to `last`.
 
 
 ### Parameters and Requirements
@@ -69,7 +71,7 @@ Returns the number of steps from `first` to `last`.
 
 ### Return
 
-The number of steps needed to go from `first` to `last`. 
+The number of steps needed to go from `first` to `last`.
 The value may be negative if random-access iterators are used.
 
 ### Example
@@ -100,17 +102,17 @@ void iter_swap(IteratorType first, IteratorType last);
 
 ### Description
 
-Swaps the values of the elements the given iterators are pointing to. 
+Swaps the values of the elements the given iterators are pointing to.
 
 ### Parameters and Requirements
 
-- `first, last`: iterators to swap 
+- `first, last`: iterators to swap
 
 ### Notes
 
-For now, no execution space argument needs to be passed because 
-the operation is performed in the default execution space. 
-Also, nota that this operation fences the default execution space.
+Currently, the API does not have an execution space parameter because
+the operation is performed in the *default execution space*.
+The operation fences the default execution space.
 
 ### Return
 
