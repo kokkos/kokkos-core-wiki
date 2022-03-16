@@ -4,7 +4,7 @@
 
 | Macro | Description |
 | ----- | ----------- |
-| KOKKOS_VERSION | The Kokkos version; `KOKKOS_VERSION % 100` is the patch level, `KOKKOS_VERSION / 100 % 100` is the minor version, and KOKKOS_VERSION / 10000 is the major version. |
+| KOKKOS_VERSION | The Kokkos version; `KOKKOS_VERSION % 100` is the patch level, `KOKKOS_VERSION / 100 % 100` is the minor version, and `KOKKOS_VERSION / 10000` is the major version. |
 
 ## Execution Spaces
 
