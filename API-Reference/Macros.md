@@ -1,5 +1,20 @@
 # Macros
+## Execution Spaces
 
+The following macros can be used to test whether or not a specified execution space
+is enabled. They can be tested for existence (e.g. `#ifdef KOKKOS_ENABLE_SERIAL`).
+
+| Macro                        | Description                                                                 |
+| ---------------------------- | --------------------------------------------------------------------------- |
+| `KOKKOS_ENABLE_SERIAL`       | Defined if the [`Serial`](Kokkos%3A%3ASerial) execution space is enabled.   |
+| `KOKKOS_ENABLE_OPENMP`       | Defined if the [`OpenMP`](Kokkos%3A%3AOpenMP) execution space is enabled.   |
+| `KOKKOS_ENABLE_OPENMPTARGET` | Defined if the experimental `OpenMPTarget` execution space is enabled.      |
+| `KOKKOS_ENABLE_THREADS`      | Defined if the [`Threads`](Kokkos%3A%3AThreads) execution space is enabled. |
+| `KOKKOS_ENABLE_CUDA`         | Defined if the [`Cuda`](Kokkos%3A%3ACuda) execution space is enabled.       |
+| `KOKKOS_ENABLE_HIP`          | Defined if the experimental `HIP` execution space is enabled.               |
+| `KOKKOS_ENABLE_HPX`          | Defined if the [`HPX`](Kokkos%3A%3AHPX) execution space is enabled.         |
+| `KOKKOS_ENABLE_MEMKIND`      | Defined if the experimental `HBWSpace` execution space is enabled.          |
+| `KOKKOS_ENABLE_SYCL`         | Defined if the experimental `SYCL` execution space is enabled.              |
 
 ## Architectures
 
@@ -53,4 +68,3 @@
 | KOKKOS_ARCH_VEGA906 | Optimize for AMD GPU MI50/MI60 GFX906 (GPU) |
 | KOKKOS_ARCH_VEGA908 | Optimize for AMD GPU MI100 GFX908 (GPU) |
 | KOKKOS_ARCH_VEGA90A | Optimize for AMD GPU MI200 GFX90A (GPU) |
-
