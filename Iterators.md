@@ -56,8 +56,7 @@ auto itc = KE::cbegin(a);
 ```cpp
 template <class IteratorType>
 KOKKOS_INLINE_FUNCTION
-constexpr typename IteratorType::difference_type distance(IteratorType first,
-                                                          IteratorType last);
+constexpr typename IteratorType::difference_type distance(IteratorType first, IteratorType last);
 ```
 
 ### Description
