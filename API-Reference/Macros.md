@@ -42,6 +42,19 @@ Kokkos was compiled with.
 | KOKKOS_ENABLE_CXX17 | The C++17 language standard is enabled. |
 | KOKKOS_ENABLE_CXX20 | The C++20 language standard is enabled. |
 
+## Third-Party Library Settings
+
+These defines give information about what third-party libaries Kokkos was compiled
+with.
+
+| Macro                     | Description |
+| ------------------------- | ----------- |
+| KOKKOS_ENABLE_HWLOC       | Defined if [libhwloc](https://www.open-mpi.org/projects/hwloc/) is enabled for NUMA and architecture information.  |
+| KOKKOS_ENABLE_LIBRT       | Defined if Kokkos links to the POSIX librt for backwards compatibility.                                            |
+| KOKKOS_ENABLE_MEMKIND     | Defined if Kokkos enables the [Memkind](https://github.com/memkind/memkind) heap manager.                          |
+| KOKKOS_ENABLE_LIBDL       | Defined if Kokkos links to the dynamic linker (libdl).                                                             |
+| KOKKOS_ENABLE_LIBQUADMATH | Defined if Kokkos links to the [GCC Quad-Precision Math Library API](https://gcc.gnu.org/onlinedocs/libquadmath/). |
+
 ## Architectures
 
 | Macro | Description |
