@@ -149,14 +149,14 @@ struct CustomLessThanComparator {
   KOKKOS_INLINE_FUNCTION
   bool operator()(const ValueType1& a,
                   const ValueType2& b) const {
-    // here one can put any custom logic to return true if a is less than b
+   // here we use < but one can put any custom logic to return true if a is less than b
     return a < b;
   }
 
   KOKKOS_INLINE_FUNCTION
   bool operator()(const volatile ValueType1& a,
                   const volatile ValueType1& b) const {
-    // here one can put any custom logic to return true if a is less than b
+    // here we use < but one can put any custom logic to return true if a is less than b
     return a < b;
   }
 
@@ -268,14 +268,14 @@ struct CustomLessThanComparator {
   KOKKOS_INLINE_FUNCTION
   bool operator()(const ValueType1& a,
                   const ValueType2& b) const {
-    // here one can put any custom logic to return true if a is less than b
+    // here we use < but one can put any custom logic to return true if a is less than b
     return a < b;
   }
 
   KOKKOS_INLINE_FUNCTION
   bool operator()(const volatile ValueType1& a,
                   const volatile ValueType1& b) const {
-    // here one can put any custom logic to return true if a is less than b
+    // here we use < but one can put any custom logic to return true if a is less than b
     return a < b;
   }
 
@@ -392,14 +392,14 @@ struct CustomLessThanComparator {
   KOKKOS_INLINE_FUNCTION
   bool operator()(const ValueType1& a,
                   const ValueType2& b) const {
-    // here one can put any custom logic to return true if a is less than b
+    // here we use < but one can put any custom logic to return true if a is less than b
     return a < b;
   }
 
   KOKKOS_INLINE_FUNCTION
   bool operator()(const volatile ValueType1& a,
                   const volatile ValueType1& b) const {
-    // here one can put any custom logic to return true if a is less than b
+    // here we use < but one can put any custom logic to return true if a is less than b
     return a < b;
   }
 
