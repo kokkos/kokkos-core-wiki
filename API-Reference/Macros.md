@@ -119,3 +119,8 @@ with.
 
 | Macro | Description |
 | ------| ---------------|
+| `KOKKOS_ENABLE_DEBUG` | Defined if extra debug features are activated. |
+| `KOKKOS_ENABLE_DEBUG_BOUNDS_CHECK` | Defined if extra bounds checks are enabled/|
+| `KOKKOS_ENABLE_DEBUG_DUALVIEW_MODIFY_CHECK` | Defined if debug checks for Kokkos::DualView objects are enabled. |
+| `KOKKOS_ENABLE_DEPRECATED_CODE_3` | Defined if features deprecated in major release 3 are still available. |
+| `KOKKOS_ENABLE_DEPRECATION_WARNING` | Defined if deprecated features generate deprecation warnings |
