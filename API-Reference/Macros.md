@@ -16,6 +16,19 @@ is enabled. They can be tested for existence (e.g. `#ifdef KOKKOS_ENABLE_SERIAL`
 | `KOKKOS_ENABLE_MEMKIND`      | Defined if the experimental `HBWSpace` execution space is enabled.          |
 | `KOKKOS_ENABLE_SYCL`         | Defined if the experimental `SYCL` execution space is enabled.              |
 
+## Backend options
+
+| Macro                        | Description                                                                 |
+| ---------------------------- | --------------------------------------------------------------------------- |
+| `KOKKOS_ENABLE_CUDA_CONSTEXPR` | Defined if the CUDA backend supports constexpr functions. |
+| `KOKKOS_ENABLE_CUDA_LAMBDA`                  | Defined if the CUDA backend supports lambdas.
+| `KOKKOS_ENABLE_CUDA_LDG_INTRINSINCS`         | Defined if the CUDA backend supports LDG intrinsics.
+| `KOKKOS_ENABLE_CUDA_RELOCATABLE_DEVICE_CODE` | Defined if the CUDA backend supports relocatable device code. |
+| `KOKKOS_ENABLE_CUDA_UVM`                     | If defined, the default CUDA memory space is CudaUVMSpace, otherwise it is CudaSpace. |
+| `KOKKOS_ENABLE_HIP_MULTIPLE_KERNEL_INSTANTIATIONS` | If defined, multiple kernel versions are instantiated potentially improving run time. |
+| `KOKKOS_ENABLE_HIP_RELOCATABLE_DEVICE_CODE` | Defined if the HIP backend supports relocatable device code. |
+| `KOKKOS_ENABLE_HPX_ASYNC_DISPATCH` | Defined if the HPX backend supports asynchronous dispatch. |
+
 ## C++ Standard Settings
 
 Kokkos supports the latest C++ language standards. Certain features may use different
