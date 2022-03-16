@@ -5,14 +5,14 @@
 | KOKKOS_ARCH_SSE42 | Optimize for SSE 4.2 |
 | KOKKOS_ARCH_ARMV80 | Optimize for ARMv8.0 Compatible CPU (HOST) |
 | KOKKOS_ARCH_ARMV8_THUNDERX | Optimize for ARMv8 Cavium ThunderX CPU (HOST) |
-| KOKKOS_ARCH_ARMV81 |  |
+| KOKKOS_ARCH_ARMV81 | Optimize for ARMv8.1 Compatible CPU (HOST) |
 | KOKKOS_ARCH_ARMV8_THUNDERX2 | Optimize for ARMv8 Cavium ThunderX2 CPU (HOST) |
-| KOKKOS_ARCH_AMD_AVX2 
-| KOKKOS_ARCH_AVX
-| KOKKOS_ARCH_AVX2
-| KOKKOS_ARCH_AVX512XEON
+| KOKKOS_ARCH_AMD_AVX2 | Optimize for AVX2 (enabled for Zen) |
+| KOKKOS_ARCH_AVX | Optimize for AVX |
+| KOKKOS_ARCH_AVX2 | Optimize for AVX2 |
+| KOKKOS_ARCH_AVX512XEON | Optimize for Skylake(AVX512) |
 | KOKKOS_ARCH_KNC | Optimize for Intel Knights Corner Xeon Phi (HOST) |
-| KOKKOS_ARCH_AVX512MIC
+| KOKKOS_ARCH_AVX512MIC | Optmize for Many Integrated Core (MIC; AVX512) |
 | KOKKOS_ARCH_POWER7 | Optimize for IBM POWER7 CPUs (HOST) |
 | KOKKOS_ARCH_POWER8 | Optimize for IBM POWER8 CPUs (HOST) |
 | KOKKOS_ARCH_POWER9 | Optimize for IBM POWER9 CPUs (HOST)|
