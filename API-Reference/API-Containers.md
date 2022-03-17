@@ -1,4 +1,4 @@
-### 1. **[[Bitset|bitset-path]]**
+### 1. **[[Bitset|Bitset]]**
 Bitset comment
 ### 2. **[DualView](Kokkos%3A%3ADualView)**
 Container to manage access to mirrored views in different memory spaces
@@ -16,5 +16,5 @@ ScatterView comment.
 StaticCrsGraph comment.
 ### 9. **[[UnorderedMap|Unordered-Map]]**
 UnorderedMap comment.
-### 10. **[Vector](Kokkos%3A%3Avector)**
+### 10. **[vector](Kokkos%3A%3Avector)**
 std::vector compatible implementation that works with non-host memory spaces.
