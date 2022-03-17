@@ -156,7 +156,7 @@ Assumes the range (or the view) already to be partitioned.
 ### Return
 
 Iterator to the elment *after* the last element in the first partition,
-or last if all elements satisfy `pred`.
+or `last` if all elements satisfy `pred`.
 
 
 --------
@@ -187,7 +187,7 @@ template <
   class PredicateType>
 ::Kokkos::pair<OutputIteratorTrueType, OutputIteratorFalseType>
 partition_copy(const std::string& label,                                        (2)
-               const ExecutionSpace& exespace,             
+               const ExecutionSpace& exespace,
                InputIteratorType from_first,
                InputIteratorType from_last,
                OutputIteratorTrueType to_first_true,
@@ -285,4 +285,4 @@ auto partition_copy(const std::string& label,                                   
 
 ### Return
 
-A `Kokkos::pair` contained the iterators to the end of two destination ranges (or views)
+A `Kokkos::pair` containing the iterators to the end of two destination ranges (or views)

@@ -209,7 +209,7 @@ void replace(const std::string& label, const ExecutionSpace& exespace,       (4)
 ### Description
 
 Replaces with `new_value` all elements that are equal to `old_value` in the
-range `[first, last]` (overloads 1,2) or in `view` (overloads 3,4).
+range `[first, last)` (overloads 1,2) or in `view` (overloads 3,4).
 Equality is checked using `operator==`.
 
 ### Parameters and Requirements
@@ -283,7 +283,7 @@ void replace_if(const std::string& label, const ExecutionSpace& exespace,    (4)
 ### Description
 
 Replaces with `new_value` all the elements for which `pred` is `true` in
-the range `[first, last]` (overloads 1,2) or in `view` (overloads 3,4).
+the range `[first, last)` (overloads 1,2) or in `view` (overloads 3,4).
 
 ### Parameters and Requirements
 
@@ -357,7 +357,7 @@ OutputIteratorType replace_copy(const ExecutionSpace& exespace,               (1
 
 template <class ExecutionSpace, class InputIteratorType, class OutputIteratorType, class T>
 OutputIteratorType replace_copy(const std::string& label,                     (2)
-                                const ExecutionSpace& exespace,  
+                                const ExecutionSpace& exespace,
                                 OutputIteratorType first_to,
                                 const T& old_value, const T& new_value);
 
@@ -485,7 +485,7 @@ beginning at `first_to` (overloads 1,2) or from `view_from` to `view_to`
 ### Parameters and Requirements
 
 - `exespace`, `first_from`, `last_from`, `first_to`, `view_from`, `view_to`, `new_value`:
-  - same as in `replace_copy` (TODO: link)
+  - same as in [`replace_copy`](#kokkosexperimentalreplace_copy)
 - `label`:
   - for 1, the default string is: "Kokkos::replace_copy_if_iterator_api_default"
   - for 3, the default string is: "Kokkos::replace_copy_if_view_api_default"
@@ -1904,7 +1904,7 @@ template <
   class DataType2, class... Properties2,
   class ValueType>
 auto remove_copy(const std::string& label,                                   (4)
-                 const ExecutionSpace& exespace,          
+                 const ExecutionSpace& exespace,
                  const ::Kokkos::View<DataType1, Properties1...>& view_from,
                  const ::Kokkos::View<DataType2, Properties2...>& view_dest,
                  const ValueType& value);

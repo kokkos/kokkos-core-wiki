@@ -224,10 +224,10 @@ auto max_element(const std::string& label,                              (8)
 
 ### Description
 
-- (1,2,5,6): Finds the smallest element in the range `[first, last)` or in `view`
+- (1,2,5,6): Finds the largest element in the range `[first, last)` or in `view`
   using `operator<` to compare two elements
 
-- (3,4,7,8): Finds the smallest element in the range `[first, last)` or in `view`
+- (3,4,7,8): Finds the largest element in the range `[first, last)` or in `view`
   using the binary functor `comp` to compare two elements
 
 ### Parameters and Requirements
@@ -242,7 +242,7 @@ auto max_element(const std::string& label,                              (8)
 
 Iterator to the largest element.
 The following special cases apply:
-- if several elements are equivalent to the smallest element, returns the iterator to the *first* such element.
+- if several elements are equivalent to the largest element, returns the iterator to the *first* such element.
 
 - if the range `[first, last)` is empty it returns `last`.
 
@@ -360,7 +360,7 @@ auto minmax_element(const std::string& label,                              (8)
 
 ### Return
 
-A Kokkos pair of iterators to the smallest element and largest elements in tha order.
+A Kokkos pair of iterators to the smallest and largest elements in that order.
 The following special cases apply:
 
 - if the range `[first, last)` is empty it returns `Kokkos::pair(first, first)`.
