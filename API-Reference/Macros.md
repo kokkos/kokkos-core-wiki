@@ -11,10 +11,10 @@
 | Macro | Description |
 | ------| ---------------|
 | `KOKKOS_ENABLE_DEBUG` | Defined if extra debug features are activated. |
-| `KOKKOS_ENABLE_DEBUG_BOUNDS_CHECK` | Defined if extra bounds checks are enabled |
+| `KOKKOS_ENABLE_DEBUG_BOUNDS_CHECK` | Defined if extra bounds checks are enabled. |
 | `KOKKOS_ENABLE_DEBUG_DUALVIEW_MODIFY_CHECK` | Defined if debug checks for `Kokkos::DualView` objects are enabled. |
 | `KOKKOS_ENABLE_DEPRECATED_CODE_3` | Defined if features deprecated in major release 3 are still available. |
-| `KOKKOS_ENABLE_DEPRECATION_WARNING` | Defined if deprecated features generate deprecation warnings |
+| `KOKKOS_ENABLE_DEPRECATION_WARNING` | Defined if deprecated features generate deprecation warnings. |
 | `KOKKOS_ENABLE_PROFILING_LOAD_PRINT` | Kokkos will output a message when the profiling library is loaded. |
 | `KOKKOS_ENABLE_TUNING` | Whether bindings for tunings are available (see [#2422](https://github.com/kokkos/kokkos/pull/2422)). |
 | `KOKKOS_ENABLE_COMPLEX_ALIGN` | Whether complex types are aligned. |
@@ -42,8 +42,8 @@ is enabled. They can be tested for existence (e.g. `#ifdef KOKKOS_ENABLE_SERIAL`
 | Macro                        | Description                                                                 |
 | ---------------------------- | --------------------------------------------------------------------------- |
 | `KOKKOS_ENABLE_CUDA_CONSTEXPR` | Defined if the CUDA backend supports constexpr functions. |
-| `KOKKOS_ENABLE_CUDA_LAMBDA`                  | Defined if the CUDA backend supports lambdas.
-| `KOKKOS_ENABLE_CUDA_LDG_INTRINSINCS`         | Defined if the CUDA backend supports LDG intrinsics.
+| `KOKKOS_ENABLE_CUDA_LAMBDA`                  | Defined if the CUDA backend supports lambdas. |
+| `KOKKOS_ENABLE_CUDA_LDG_INTRINSINCS`         | Defined if the CUDA backend supports LDG intrinsic. |
 | `KOKKOS_ENABLE_CUDA_RELOCATABLE_DEVICE_CODE` | Defined if the CUDA backend supports relocatable device code. |
 | `KOKKOS_ENABLE_CUDA_UVM`                     | If defined, the default CUDA memory space is CudaUVMSpace, otherwise it is CudaSpace. |
 | `KOKKOS_ENABLE_HIP_MULTIPLE_KERNEL_INSTANTIATIONS` | If defined, multiple kernel versions are instantiated potentially improving run time. |
