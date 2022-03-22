@@ -15,6 +15,7 @@
 | `KOKKOS_ENABLE_DEBUG_DUALVIEW_MODIFY_CHECK` | Defined if debug checks for `Kokkos::DualView` objects are enabled. |
 | `KOKKOS_ENABLE_DEPRECATED_CODE_3` | Defined if features deprecated in major release 3 are still available. |
 | `KOKKOS_ENABLE_DEPRECATION_WARNING` | Defined if deprecated features generate deprecation warnings. |
+| `KOKKOS_ENABLE_HBWSPACE`    | Defined if the experimental `HBWSpace` memory space is enabled, enabled by KOKKOS_ENABLE_MEMKIND. |
 | `KOKKOS_ENABLE_PROFILING_LOAD_PRINT` | Kokkos will output a message when the profiling library is loaded. |
 | `KOKKOS_ENABLE_TUNING` | Whether bindings for tunings are available (see [#2422](https://github.com/kokkos/kokkos/pull/2422)). |
 | `KOKKOS_ENABLE_COMPLEX_ALIGN` | Whether complex types are aligned. |
@@ -34,7 +35,6 @@ is enabled. They can be tested for existence (e.g. `#ifdef KOKKOS_ENABLE_SERIAL`
 | `KOKKOS_ENABLE_CUDA`         | Defined if the [`Cuda`](Kokkos%3A%3ACuda) execution space is enabled.       |
 | `KOKKOS_ENABLE_HIP`          | Defined if the experimental `HIP` execution space is enabled.               |
 | `KOKKOS_ENABLE_HPX`          | Defined if the [`HPX`](Kokkos%3A%3AHPX) execution space is enabled.         |
-| `KOKKOS_ENABLE_MEMKIND`      | Defined if the experimental `HBWSpace` execution space is enabled.          |
 | `KOKKOS_ENABLE_SYCL`         | Defined if the experimental `SYCL` execution space is enabled.              |
 
 ## Backend options
@@ -72,7 +72,7 @@ with.
 | --------------------------- | ----------- |
 | `KOKKOS_ENABLE_HWLOC`       | Defined if [libhwloc](https://www.open-mpi.org/projects/hwloc/) is enabled for NUMA and architecture information.  |
 | `KOKKOS_ENABLE_LIBRT`       | Defined if Kokkos links to the POSIX librt for backwards compatibility.                                            |
-| `KOKKOS_ENABLE_MEMKIND`     | Defined if Kokkos enables the [Memkind](https://github.com/memkind/memkind) heap manager.                          |
+| `KOKKOS_ENABLE_MEMKIND`     | Defined if Kokkos enables the [Memkind](https://github.com/memkind/memkind) heap manager, enables HBWSpace.        |
 | `KOKKOS_ENABLE_LIBDL`       | Defined if Kokkos links to the dynamic linker (libdl).                                                             |
 | `KOKKOS_ENABLE_LIBQUADMATH` | Defined if Kokkos links to the [GCC Quad-Precision Math Library API](https://gcc.gnu.org/onlinedocs/libquadmath/). |
 
