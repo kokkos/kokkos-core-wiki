@@ -1,5 +1,5 @@
 ### 1. **[Bitset](Kokkos%3A%3ABitset)**
-Bitset comment
+A concurrent Bitset class.
 ### 2. **[DualView](Kokkos%3A%3ADualView)**
 Container to manage access to mirrored views in different memory spaces
 ### 3. **[[DynamicView|dynamicView-path]]**
