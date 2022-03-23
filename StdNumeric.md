@@ -365,7 +365,7 @@ ValueType transform_reduce(const std::string& label,                            
 - `init_reduction_value`:
   - initial reduction value to use
 - `joiner`:
-  - *binary* functor performing the desired operation to apply to join two elements.
+  - *binary* functor performing the desired operation to join two elements.
   Must be valid to be called from the execution space passed, and callable with
   two arguments `a,b` of type (possible const) `ValueType`, and must not modify `a,b`.
   - Must conform to:
