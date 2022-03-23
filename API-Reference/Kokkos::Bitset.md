@@ -19,7 +19,7 @@ class Bitset {
   Bitset(unsigned arg_size = 0u);
 
   // Host/Device: return the number of bits
-  unsigned size() const { return m_size; }
+  unsigned size() const;
 
   // Host: return the number of bits which are set to 1
   unsigned count() const;
@@ -87,7 +87,7 @@ template <typename Device>
 class ConstBitset {
  public:
   using execution_space = typename Device::execution_space;
-  using size_type       = unsigned int;
+  using size_type       = unsigned;
 
   // Host/Device: Construct a bitset with no bits
   ConstBitset();
