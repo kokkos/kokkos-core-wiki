@@ -28,6 +28,8 @@
    1. **[[NonModSequenceOps|StdNonModSeq]]**
    2. **[[ModSeqOps|StdModSeq]]**
    3. **[[PartioningOps|StdPartioningOps]]**
+   4. **[[Numeric|StdNumeric]]**
+   5. **[[StdMinMaxElement|StdMinMaxElement]]**
 
 ## **[[API Reference|API-Reference]]**
 ### **[[Content: Alphabetical|API-Alphabetical]]**

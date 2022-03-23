@@ -1,5 +1,5 @@
 
-## Kokkos::Experimental::{begin, cbegin, end, cend}
+## `Kokkos::Experimental::{begin, cbegin, end, cend}`
 
 Header File: `Kokkos_Core.hpp`
 
@@ -19,17 +19,17 @@ KOKKOS_INLINE_FUNCTION auto cend(const Kokkos::View<DataType, Properties...>& vi
 
 ### Description
 
-- (1,2) return a Kokkos iterator to the beginning of `view`
-- (3,4) return a Kokkos iterator to the element past the end of `view`
+- (1,2) return a Kokkos **random access** iterator to the beginning of `view`
+- (3,4) return a Kokkos **random access** iterator to the element past the end of `view`
 
 ### Notes
-- for performance reasons, these functions currently return a **random access** iterator
-
-- `cbegin, cend` ensure that the dereferenced iterator is const-qualified.
+- the returned iterator is a **random access** for performance reasons
 
 - `view` is taken as `const` because, within each function, we are not changing the view itself: the returned iterator operates on the view without changing its structure.
 
 - dereferencing an iterator must be done within an execution space where `view` is accessible
+
+- `cbegin, cend` ensure that the dereferenced iterator is const-qualified
 
 ### Parameters and Requirements
 
@@ -48,3 +48,82 @@ auto itc = KE::cbegin(a);
 // if dereferenced (within a proper execution space), can only read the content of `a`
 ```
 
+------------------
+
+
+## `Kokkos::Experimental::distance`
+
+```cpp
+template <class IteratorType>
+KOKKOS_INLINE_FUNCTION
+constexpr typename IteratorType::difference_type distance(IteratorType first, IteratorType last);
+```
+
+### Description
+
+Returns the number of steps needed to go from `first` to `last`.
+
+
+### Parameters and Requirements
+
+- `first, last`: range to calculate distance of
+
+### Return
+
+The number of steps needed to go from `first` to `last`.
+The value may be negative if random-access iterators are used.
+
+### Example
+
+```cpp
+namespace KE = Kokkos::Experimental;
+Kokkos::View<double*> a("a", 13);
+
+auto it1 = KE::begin(a);
+auto it2 = it1 + 4;
+const auto stepsA = KE::distance(it1, it2);
+// stepsA should be equal to 4
+
+const auto stepsB = KE::distance(it2, it1);
+// stepsB should be equal to -4
+```
+
+
+---------------
+
+
+## `Kokkos::Experimental::iter_swap`
+
+```cpp
+template <class IteratorType>
+void iter_swap(IteratorType first, IteratorType last);
+```
+
+### Description
+
+Swaps the values of the elements the given iterators are pointing to.
+
+### Parameters and Requirements
+
+- `first, last`: iterators to swap
+
+### Notes
+
+Currently, the API does not have an execution space parameter because
+the operation is performed in the *default execution space*.
+The operation fences the default execution space.
+
+### Return
+
+None
+
+### Example
+
+```cpp
+namespace KE = Kokkos::Experimental;
+Kokkos::View<double*> a("a", 13);
+
+auto it1 = KE::begin(a);
+auto it2 = it1 + 4;
+KE::swap(it1, it2);
+```
