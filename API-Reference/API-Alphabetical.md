@@ -16,7 +16,7 @@ All functions and classes listed here are part of the `Kokkos::` namespace.
 ### Containers
 |Name |Library | Category | Description                  |
 |:---------|:--------|:-----------|:----------------------------|
-|[Bitset](Bitset) | [Containers](API-Containers) | View | A concurrent Bitset class. |
+|[Bitset](Kokkos%3A%3ABitset) | [Containers](API-Containers) | View | A concurrent Bitset class. |
 |[DualView](Kokkos%3A%3ADualView) | [Containers](API-Containers) | View | Host-Device Mirror of View with Host-Device Memory |
 |[DynRankView](Kokkos%3A%3ADynRankView) | [Containers](API-Containers) | View | A view which can determine its rank at runtime. |
 |[DynamicView](Kokkos%3A%3ADynamicView) | [Containers](API-Containers) | View | A view which can change its size dynamically. |

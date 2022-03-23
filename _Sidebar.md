@@ -15,7 +15,7 @@
 12. **[[Interoperability|Interoperability]]**
 13. **[[Kokkos and Virtual Functions|Kokkos and Virtual Functions]]**
 ### **[[Content: Containers|ContentContainers]]**
-1. **[[Bitset|Bitset]]**
+1. **[Bitset](Kokkos%3A%3ABitset)**
 2. **[DualView](Kokkos%3A%3ADualView)**
 3. **[DynamicRankView](Kokkos%3A%3ADynRankView)**
 4. **[DynamicLengthView](Kokkos%3A%3ADynamicView)**

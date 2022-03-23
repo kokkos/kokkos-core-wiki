@@ -1,4 +1,4 @@
-### 1. **[[Bitset|Bitset]]**
+### 1. **[Bitset](Kokkos%3A%3ABitset)**
 Bitset comment
 ### 2. **[DualView](Kokkos%3A%3ADualView)**
 Container to manage access to mirrored views in different memory spaces
