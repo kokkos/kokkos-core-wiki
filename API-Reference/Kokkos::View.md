@@ -50,7 +50,7 @@ Template parameters other than `DataType` are optional, but ordering is enforced
 
  *  `data_type`: The `DataType` of the View, note `data_type` contains the array specifiers (e.g. `int**[3]`)
  *  `const_data_type`: Const version of `DataType`, same as `data_type` if that is already const.
-
+ *  `non_const_data_type`: Non-const version of `DataType`, same as `data_type` if that is already non-const.
 
  *  `scalar_array_type`: If `DataType` represents some properly specialised array data type such as Sacado FAD types, `scalar_array_type` is the underlying fundamental scalar type.
  *  `const_scalar_array_type`: Const version of `scalar_array_type`, same as `scalar_array_type` if that is already const
