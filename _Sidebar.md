@@ -14,12 +14,6 @@
 11. **[[Subviews|Subviews]]**
 12. **[[Interoperability|Interoperability]]**
 13. **[[Kokkos and Virtual Functions|Kokkos and Virtual Functions]]**
-### **[[Content: Containers|ContentContainers]]**
-1. **[DualView](Kokkos%3A%3ADualView)**
-2. **[DynRankView](Kokkos%3A%3ADynRankView)**
-3. **[DynamicView](Kokkos%3A%3ADynamicView)**
-4. **[[OffsetView|Offset-View]]**
-5. **[[UnorderedMap|Unordered-Map]]**
 ### **[[Content: Algorithms|ContentAlgorithms]]**
 1. **[[Sorting|Sorting]]**
 2. **[[Random Numbers|Random-Number-Generators]]**
@@ -45,6 +39,13 @@
 9. **[[Numerics]]**
 10. **[[Detection Idiom|Detection Idiom]]**
 ### **[[Content: Containers|API-Containers]]**
+1. **[Bitset](Kokkos%3A%3ABitset)**
+2. **[DualView](Kokkos%3A%3ADualView)**
+3. **[DynamicRankView](Kokkos%3A%3ADynRankView)**
+4. **[DynamicLengthView](Kokkos%3A%3ADynamicView)**
+5. **[[OffsetView|Offset-View]]**
+6. **[[UnorderedMap|Unordered-Map]]**
+7. **[vector](Kokkos%3A%3Avector)**
 ### **[[Content: Algorithms|API-Algorithms]]**
 1. **[[Sort|Sort]]**
 2. **[[Random Number|Random Number]]**
