@@ -79,18 +79,29 @@ Kokkos::parallel_scan(const std::string& name,
 
 ```c++
 #include<Kokkos_Core.hpp>
-#include<cstdio> 
+#include<cstdio>
 
 int main(int argc, char* argv[]) {
-   Kokkos::initialize(argc,argv);
+  Kokkos::initialize(argc,argv);
+  {
+    int N = argc>1?atoi(argv[1]):100;
+    int64_t result;
+    Kokkos::View<int64_t*>post("postfix_sum",N);
+    Kokkos::View<int64_t*>pre("prefix_sum",N);
 
-   int N = atoi(argv[1]);
-   double result;
-   ScanFunctor f;
-   Kokkos::parallel_scan("Loop1", N, f, result);
+    Kokkos::parallel_scan("Loop1", N,
+      KOKKOS_LAMBDA(int64_t i, int64_t& partial_sum, bool is_final) {
+      if(is_final) pre(i) = partial_sum;
+      partial_sum += i;
+      if(is_final) post(i) = partial_sum;
+    }, result);
 
-   printf("Result: %i %lf\n",N,result);
-   Kokkos::finalize();
+    // pre: 0,0,1,3,6,10,...
+    // post: 0,1,3,6,10,...
+    // result: N*(N-1)/2
+    printf("Result: %i %li\n",N,result);
+  }
+  Kokkos::finalize();
 }
 ```
 
