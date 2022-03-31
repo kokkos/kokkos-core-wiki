@@ -5,7 +5,8 @@ applications targeting all major HPC platforms. For that purpose it provides
 abstractions for both parallel execution of code and data management.
 Kokkos is designed to target complex node architectures with N-level memory
 hierarchies and multiple types of execution resources. It currently can use
-OpenMP, Pthreads and CUDA as backend programming models.
+CUDA, HIP, SYCL, HPX, OpenMP, and C++ threads as backend programming models,
+with several other backends in development.
 
 This Wiki provides a number of resources for both new and old Kokkos developers.
 ```
