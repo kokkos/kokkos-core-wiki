@@ -104,18 +104,10 @@ auto min_element(const std::string& label,                              (8)
      bool operator()(const value_type & a, const value_type & b) const {
 	   return /* true if a is less than b, based on your logic of "less than" */;
      }
-
-     KOKKOS_INLINE_FUNCTION
-     bool operator()(const volatile value_type a, const volatile value_type b) const {
-     return /* true if a is less than b, based on your logic of "less than" */;
-     }
   };
   ```
-  - the volatile overload is needed because the algorithm is
-  currently implemented as a reduction, where the `comp` functor is used
-  as the ``joiner'' to join two values. The current Kokkos implementation
-  of reductions requires any custom joiner to have
-  a volatile overload: see [this wiki page](https://github.com/kokkos/kokkos/wiki/Programming-Guide%3A-Custom-Reductions) for more info on reductions.
+  - the algorithm is currently implemented as a reduction, where the `comp` functor is used
+  as the ``joiner'' to join two values
 
 
 ### Return
@@ -150,13 +142,6 @@ struct CustomLessThanComparator {
   bool operator()(const ValueType1& a,
                   const ValueType2& b) const {
    // here we use < but one can put any custom logic to return true if a is less than b
-    return a < b;
-  }
-
-  KOKKOS_INLINE_FUNCTION
-  bool operator()(const volatile ValueType1& a,
-                  const volatile ValueType1& b) const {
-    // here we use < but one can put any custom logic to return true if a is less than b
     return a < b;
   }
 
@@ -268,13 +253,6 @@ struct CustomLessThanComparator {
   KOKKOS_INLINE_FUNCTION
   bool operator()(const ValueType1& a,
                   const ValueType2& b) const {
-    // here we use < but one can put any custom logic to return true if a is less than b
-    return a < b;
-  }
-
-  KOKKOS_INLINE_FUNCTION
-  bool operator()(const volatile ValueType1& a,
-                  const volatile ValueType1& b) const {
     // here we use < but one can put any custom logic to return true if a is less than b
     return a < b;
   }
@@ -392,13 +370,6 @@ struct CustomLessThanComparator {
   KOKKOS_INLINE_FUNCTION
   bool operator()(const ValueType1& a,
                   const ValueType2& b) const {
-    // here we use < but one can put any custom logic to return true if a is less than b
-    return a < b;
-  }
-
-  KOKKOS_INLINE_FUNCTION
-  bool operator()(const volatile ValueType1& a,
-                  const volatile ValueType1& b) const {
     // here we use < but one can put any custom logic to return true if a is less than b
     return a < b;
   }
