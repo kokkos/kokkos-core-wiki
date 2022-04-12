@@ -45,7 +45,7 @@ All functions and classes listed here are part of the `Kokkos::` namespace.
 |[BOr](Kokkos%3A%3ABOr) | [Core](API-Core) | [Data-Parallelism](Data-Parallelism) | Reducer for Binary 'Or' reduction |
 |[complex](Kokkos%3A%3AComplex) | [Core](API-Core) | [STL Compatibility](STL-Compatibility) | Complex numbers which work on host and device |
 |[(X)create_mirror](Kokkos%3A%3Acreate_mirror) | [Core](API-Core) | [View](API-View) | Mirror Host data to Device data |
-|[(X)create_mirror_view](Kokkos%3A%3Acreate_mirror_view) | [Core](API-Core) | [View](API-View) | Mirror Host data to Device data |
+|[(X)create_mirror_view](Kokkos%3A%3Acreate_mirror) | [Core](API-Core) | [View](API-View) | Mirror Host data to Device data |
 |[Cuda](Kokkos%3A%3ACuda) | [Core](API-Core) | [Spaces](API-Spaces) | The CUDA Execution Space. |
 |[CudaSpace](Kokkos%3A%3ACudaSpace) | [Core](API-Core) | [Spaces](API-Spaces) | The primary CUDA Memory Space. |
 |[CudaUVMSpace](Kokkos%3A%3ACudaUVMSpace) | [Core](API-Core) | [Spaces](API-Spaces) | The CUDA Memory Space providing access to unified memory page migratable allocations. |
