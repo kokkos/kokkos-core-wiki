@@ -11,7 +11,7 @@ Usage:
       [=] (int i, double& lsum, bool final) {...});
   ```
 
-ThreadVectorRange is a [nested execution policy](https://github.com/kokkos/ProgrammingGuide/wiki/Execution-Policies#nested-execution-policies) used inside of hierarchical parallelism. 
+ThreadVectorRange is a [nested execution policy](https://github.com/kokkos/kokkos/wiki/Execution-Policies#nested-execution-policies) used inside of hierarchical parallelism. 
 In contrast to global policies, the public interface for nested policies is implemented 
 as functions, in order to enable implicit templating on the execution space type via 
 the team handle.
