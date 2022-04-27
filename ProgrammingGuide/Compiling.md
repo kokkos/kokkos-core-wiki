@@ -345,10 +345,10 @@ Architecture-specific optimizations can be enabled by specifying `-DKokkos_ARCH_
 * Kokkos_ARCH_AMDAVX
     * Whether to optimize for the AMDAVX architecture
     * BOOL Default: OFF
-Kokkos_ARCH_AMPERE80
+* Kokkos_ARCH_AMPERE80
     * Whether to optimize for the NVIDIA Ampere generation CC 8.0
     * BOOL Default: OFF
-Kokkos_ARCH_AMPERE86
+* Kokkos_ARCH_AMPERE86
     * Whether to optimize for the NVIDIA Ampere generation CC 8.6
     * BOOL Default: OFF
 * Kokkos_ARCH_ARMV80
