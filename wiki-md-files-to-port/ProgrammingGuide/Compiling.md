@@ -337,6 +337,7 @@ The following options control `find_package` paths for CMake-based TPLs:
 
 #### Architecture Keywords
 Architecture-specific optimizations can be enabled by specifying `-DKokkos_ARCH_X`.
+See the [complete list of architecture keywords](../API-Reference/Macros.md#architectures).
 
 * Kokkos_ARCH_A64FX
     * Whether to optimize for ARMv8.2 with SVE Support
