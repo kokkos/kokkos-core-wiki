@@ -53,9 +53,9 @@ upstream https://github.com/kokkos/kokkos-core-wiki.git (push)
 * Step 7) Fetch new changes to the remote (`upstream`), and rebase on your topic branch (`demo/setup`) to update:<br/>
 
 ```
-git fetch origin main
+git fetch upstream main
 git checkout demo/setup
-git rebase origin/main
+git rebase upstream/main
 ```
 
 * Step 8) Make the desired changes (on your local topic branch), and push to the main project Wiki (of your fork).  *Nota bene*: for your first commit, you will need to use the `-f` option to push; this option will overwrite existing files.<br/>
