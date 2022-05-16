@@ -37,7 +37,7 @@ Kernels, Kokkos Tools.  For development and testing purposes, use the
 ajpowelsnl user, but update the link after merging into `main`.
  --->
 
-## [Kokkos Documentation "How To" Guide](https://github.com/ajpowelsnl/kokkos/wiki/README)
+## [Kokkos Documentation "How To" Guide](https://github.com/kokkos/kokkos/wiki/README)
 
 # [The Kokkos Eco-System](https://github.com/kokkos)
 
