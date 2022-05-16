@@ -94,7 +94,7 @@ with.
 | `KOKKOS_ARCH_POWER7` | Optimize for IBM POWER7 CPUs (HOST) |
 | `KOKKOS_ARCH_POWER8` | Optimize for IBM POWER8 CPUs (HOST) |
 | `KOKKOS_ARCH_POWER9` | Optimize for IBM POWER9 CPUs (HOST)|
-| `KOKKOS_ARCH_INTEL_GEN` | Optimize for Intel GPUs Gen9+ (GPU) |
+| `KOKKOS_ARCH_INTEL_GEN` | Optimize for SPIR64-based devices, e.g. Intel GPUs, using JIT |
 | `KOKKOS_ARCH_INTEL_DG1` | Optimize for Intel Iris XeMAX GPU (GPU) |
 | `KOKKOS_ARCH_INTEL_GEN9` | Optimize for Intel GPU Gen9 (GPU)|
 | `KOKKOS_ARCH_INTEL_GEN11` | Optimize for Intel GPU Gen11 (GPU) |
