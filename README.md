@@ -50,7 +50,7 @@ upstream https://github.com/kokkos/kokkos-core-wiki.git (fetch)
 upstream https://github.com/kokkos/kokkos-core-wiki.git (push)
 ```
 
-* Step 7) Fetch new changes to the remote (`origin`), and rebase on your topic branch (`demo/setup`) to update:<br/>
+* Step 7) Fetch new changes to the remote (`upstream`), and rebase on your topic branch (`demo/setup`) to update:<br/>
 
 ```
 git fetch origin main
