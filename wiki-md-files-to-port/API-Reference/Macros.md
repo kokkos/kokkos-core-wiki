@@ -80,17 +80,31 @@ with.
 
 | Macro | Description |
 | ------| ---------------|
+| `KOKKOS_ARCH_NATIVE` | Optimize for local machine |
 | `KOKKOS_ARCH_SSE42` | Optimize for SSE 4.2 |
 | `KOKKOS_ARCH_ARMV80` | Optimize for ARMv8.0 Compatible CPU (HOST) |
 | `KOKKOS_ARCH_ARMV8_THUNDERX` | Optimize for ARMv8 Cavium ThunderX CPU (HOST) |
 | `KOKKOS_ARCH_ARMV81` | Optimize for ARMv8.1 Compatible CPU (HOST) |
 | `KOKKOS_ARCH_ARMV8_THUNDERX2` | Optimize for ARMv8 Cavium ThunderX2 CPU (HOST) |
+| `KOKKOS_ARCH_A64FX` | Optimize for ARMv8.2 with SVE Support |
 | `KOKKOS_ARCH_AMD_AVX2` | Optimize for AVX2 (enabled for Zen) |
+| `KOKKOS_ARCH_AMDAVX` | Optimize for AMD chip |
 | `KOKKOS_ARCH_AVX` | Optimize for AVX |
 | `KOKKOS_ARCH_AVX2` | Optimize for AVX2 |
 | `KOKKOS_ARCH_AVX512XEON` | Optimize for Skylake(AVX512) |
+| `KOKKOS_ARCH_WSM` | Optimize for Intel Westmere CPU |
+| `KOKKOS_ARCH_SNB` | Optimize for Intel Sandy/Ivy Bridge CPUs |
+| `KOKKOS_ARCH_HSW` | Optimize for Intel Haswell CPUs |
+| `KOKKOS_ARCH_BDW` | Optimize for Intel Broadwell Xeon E-class CPUs |
+| `KOKKOS_ARCH_ICL` | Optimize for Intel Ice Lake Client CPUs (AVX512) |
+| `KOKKOS_ARCH_ICX` | Optimize for Intel Ice Lake Xeon Server CPUs (AVX512) |
+| `KOKKOS_ARCH_SKL` | Optimize for Intel Skylake Client CPUs |
+| `KOKKOS_ARCH_SKX` | Optimize for Intel Skylake Xeon Server CPUs (AVX512) |
 | `KOKKOS_ARCH_KNC` | Optimize for Intel Knights Corner Xeon Phi (HOST) |
+| `KOKKOS_ARCH_KNL` | Optimize for Intel Knights Landing Xeon Phi |
+| `KOKKOS_ARCH_SPR` | Optimize for Intel Sapphire Rapids Xeon Server CPUs (AVX512) |
 | `KOKKOS_ARCH_AVX512MIC` | Optimize for Many Integrated Core (MIC; AVX512) |
+| `KOKKOS_ARCH_BGQ` | Optimize for IBM Blue Gene Q |
 | `KOKKOS_ARCH_POWER7` | Optimize for IBM POWER7 CPUs (HOST) |
 | `KOKKOS_ARCH_POWER8` | Optimize for IBM POWER8 CPUs (HOST) |
 | `KOKKOS_ARCH_POWER9` | Optimize for IBM POWER9 CPUs (HOST)|
@@ -119,7 +133,7 @@ with.
 | `KOKKOS_ARCH_TURING75` | Optimize for NVIDIA Turing generation CC 7.5 (GPU) |
 | `KOKKOS_ARCH_AMPERE` | Set if any NVIDIA Ampere architecture has been enabled |
 | `KOKKOS_ARCH_AMPERE80` | Optimize for NVIDIA Ampere generation CC 8.0 (GPU) |
-| `KOKKOS_ARCH_AMPERE86 ` | Optimize for NVIDIA Ampere generation CC 8.6 (GPU) |
+| `KOKKOS_ARCH_AMPERE86` | Optimize for NVIDIA Ampere generation CC 8.6 (GPU) |
 | `KOKKOS_ARCH_AMD_ZEN` | Optimize for AMD Zen architecture (HOST) |
 | `KOKKOS_ARCH_AMD_ZEN2` | Optimize for AMD Zen2 architecture (HOST) |
 | `KOKKOS_ARCH_AMD_ZEN3` | Optimize for AMD Zen3 architecture (HOST) |
