@@ -32,7 +32,7 @@ upstream https://github.com/kokkos/kokkos-core-wiki.git (push)
 git checkout -b demo/setup
 ```
 
-* Step 5) Add your fork's  *Kokkos project Wiki* repo as a remote (you will push changes to this repo to preview before creating a pull request on `upstream git@github.com:kokkos/kokkos-core-wiki.git`).  If your *Kokkos project Wiki* is empty, then you will need to create a first page.  To create this first page, navigate to the Wiki in the banner (*e.g.*, `https://github.com/ajpowelsnl/kokkos1-kernels/wiki`), and click the green button that says, `Create the first page`.  Once you have created this first page, you should now be able to add the Wiki repo as a remote:<br/>
+* Step 5) Add your fork's  *Kokkos project Wiki* repo as a remote (you will push changes to this repo to preview before creating a pull request on `upstream git@github.com:kokkos/kokkos-core-wiki.git`).  If your *Kokkos project Wiki* is empty, then you will need to create a first page.  To create this first page, navigate to the Wiki in the banner (*e.g.*, `https://github.com/ajpowelsnl/kokkos/wiki`), and click the green button that says, `Create the first page`.  Once you have created this first page, you should now be able to add the Wiki repo as a remote:<br/>
 
 ```
 git remote add my_wiki git@github.com:ajpowelsnl/kokkos.wiki.git
