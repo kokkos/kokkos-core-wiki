@@ -73,7 +73,7 @@ https://github.com/ajpowelsnl/kokkos/wiki
 * Step 10) If your previewed changes are good, push your local topic branch to your fork of the kokkos-core-wiki repo to create a pull request.  You cannot push directly to the `main` branch of the remote repo:<br/>
 
 ```
-git push -f ajpowelsnl demo/setup 
+git push -f origin demo/setup 
 Enumerating objects: 5, done.
 Counting objects: 100% (5/5), done.
 Delta compression using up to 40 threads
