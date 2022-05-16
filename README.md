@@ -16,7 +16,7 @@ git clone git@github.com:ajpowelsnl/kokkos-core-wiki.git
 git remote add ajpowelsnl git@github.com:ajpowelsnl/kokkos-core-wiki.git
 ```
 
-* Step 3) Check your remotes; you should see both your fork (`ajpowelsnl`) and the main kokkos-core-wiki project repo (`origin`):<br/>
+* Step 3) Check your remotes; you should see both your fork (`origin`) and the main kokkos-core-wiki project repo (`upstream`):<br/>
 
 ```
 [ajpowel@kokkos-dev-2 kokkos-core-wiki]$ git remote -v
