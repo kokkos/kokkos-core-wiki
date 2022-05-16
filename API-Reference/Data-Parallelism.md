@@ -30,7 +30,10 @@ Reducer objects used in conjunction with [parallel_reduce](Kokkos%3A%3Aparallel_
 
 ## Tags for Team Policy Calculations
 
-Tags passed to `team_size_max` or `team_size_recommended` to identify whether the pattern for which the team size for a functor is being requested
+Tags passed to helper functions `team_size_max` or
+`team_size_recommended` to identify the team size for the parallel pattern.  
+
+
 
 |Tag|pattern
 |:--------------|:-----------------
