@@ -20,10 +20,10 @@ git remote add ajpowelsnl git@github.com:ajpowelsnl/kokkos-core-wiki.git
 
 ```
 [ajpowel@kokkos-dev-2 kokkos-core-wiki]$ git remote -v
-ajpowelsnl git@github.com:ajpowelsnl/kokkos-core-wiki.git (fetch)
-ajpowelsnl git@github.com:ajpowelsnl/kokkos-core-wiki.git (push)
-origin https://github.com/kokkos/kokkos-core-wiki.git (fetch)
-origin https://github.com/kokkos/kokkos-core-wiki.git (push)
+origin git@github.com:ajpowelsnl/kokkos-core-wiki.git (fetch)
+origin git@github.com:ajpowelsnl/kokkos-core-wiki.git (push)
+upstream https://github.com/kokkos/kokkos-core-wiki.git (fetch)
+upstream https://github.com/kokkos/kokkos-core-wiki.git (push)
 ```
 
 * Step 4) Create a topic branch in your local fork of the kokkos-core-wiki:<br/>
