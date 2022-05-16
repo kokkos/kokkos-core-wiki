@@ -12,7 +12,7 @@ Sandia employees: Creation of wholly new pages will require Review and Approval 
 * Step 2) Clone the remote kokkos-core-wiki repo, and add your fork as a remote:<br/>
 
 ```
-git clone git@github.com:kokkos/kokkos-core-wiki.git
+git clone git@github.com:ajpowelsnl/kokkos-core-wiki.git
 git remote add ajpowelsnl git@github.com:ajpowelsnl/kokkos-core-wiki.git
 ```
 
