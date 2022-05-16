@@ -41,8 +41,10 @@ Template parameters other than `DataType` are optional, but ordering is enforced
 ### Enums
 
  * `rank`: rank of the view (i.e. the dimensionality).
+ * `Rank`: rank of the view (i.e. the dimensionality) (use `rank` instead).
  * `rank_dynamic`: number of runtime determined dimensions.
  * `reference_type_is_lvalue_reference`: whether the reference type is a C++ lvalue reference. 
+ * `is_hostspace`: whether the view is accesible from the process thread.
 
 ### Typedefs
 
@@ -73,9 +75,21 @@ Template parameters other than `DataType` are optional, but ordering is enforced
 
 
 #### ViewTypes
- * `non_const_type`: this view type with all template parameters explicitly defined.
  * `const_type`: this view type with all template parameters explicitly defined using a `const` data type.
- * `HostMirror`: compatible view type with the same `DataType` and `LayoutType` stored in host accessible memory space. 
+ * `non_const_type`: this view type with all template parameters explicitly defined.
+ * `host_mirror_type`: compatible view type with the same `DataType` and `LayoutType` stored in host accessible memory space.
+ * `HostMirror`: compatible view type with the same `DataType` and `LayoutType` stored in host accessible memory space (use `host_mirror_type` instead).
+ * `uniform_type`: this view type with all template arguments explicitly defined, and brought into a canonical form.
+   * e.g. 0D and 1D `LayoutLeft` and `LayoutRight` are mapped to the same layout type, and always uses `device_type` as space argument.
+ * `uniform_const_type`: `uniform_type` with const data type
+ * `uniform_runtime_type`: as `uniform_type` but without compile time extents.
+ * `uniform_runtime_const_type`: `uniform_runtime_type` with const data type.
+ * `uniform_nomemspace_type`: uses unified layout and `AnonymousSpace`.
+ * `uniform_const_nomemspace_type`: `uniform_nomemspace_type` with const data type.
+ * `uniform_runtime_nomemspace_type`: uses unified layout, all runtime extents and `AnonymousSpace`.
+ * `uniform_runtime_const_nomemspace_type`: `uniform_runtime_nomemspace_type` with const data type.
+
+
 
 #### Data Handles
  * `reference_type`: return type of the view access operators.
@@ -129,11 +143,19 @@ Template parameters other than `DataType` are optional, but ordering is enforced
 ### Data Access Functions
 
   * ```c++
+    template<class IntType>
+    reference_type operator[] (const IntType& i) const
+    ```
+    Returns a value of `reference_type` which may or not be referenceable itself.
+    See notes on `reference_type` for properties of the return type.
+
+  * ```c++
+    template<class ... IntType>
     reference_type operator() (const IntType& ... indices) const
     ```
     Returns a value of `reference_type` which may or not be referenceable itself. The number of index arguments must match the `rank` of the view.
     See notes on `reference_type` for properties of the return type. 
-    * Requires: `sizeof(IntType...)==rank_dynamic()` 
+    * Requires: `sizeof(IntType...)==rank`
 
   * ```c++
     reference_type access (const IntType& i0=0, ... , const IntType& i7=0) const
