@@ -61,7 +61,8 @@ Returns an iterator to the *first* element in `[first, last)` that equals `value
 ### Example
 ```cpp
 namespace KE = Kokkos::Experimental;
-using view_type = Kokkos::View<int*>;
+auto exespace = Kokkos::DefaultExecutionSpace;
+using view_type = Kokkos::View<execspace, int*>;
 view_type a("a", 15);
 // fill "a" somehow
 
@@ -152,7 +153,7 @@ struct EqualsValue
 auto exespace = Kokkos::DefaultExecutionSpace;
 using view_type = Kokkos::View<execspace, int*>;
 view_type a("a", 15);
-// fill a somehow
+// fill "a" somehow
 
 // create predicate
 EqualsValue<int> p(5);
