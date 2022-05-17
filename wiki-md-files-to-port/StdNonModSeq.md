@@ -89,12 +89,12 @@ InputIterator find_if(const std::string& label, const ExecutionSpace& exespace, 
 
 template <class ExecutionSpace, class DataType, class... Properties, class PredicateType>
 auto find_if(const ExecutionSpace& exespace,
-             const Kokkos::View<DataType, Properties...>& view,                  (3)
+             const Kokkos::View<DataType, Properties...>& view,                    (3)
              PredicateType pred);
 
 template <class ExecutionSpace, class DataType, class... Properties, class PredicateType>
 auto find_if(const std::string& label, const ExecutionSpace& exespace,
-             const Kokkos::View<DataType, Properties...>& view,                  (4)
+             const Kokkos::View<DataType, Properties...>& view,                    (4)
              PredicateType pred);
 ```
 
@@ -107,7 +107,7 @@ Returns an iterator to the *first* element in `[first, last)` for which the pred
 
 ### Parameters and Requirements
 
-- `exespace`, `first, last`, `view`: same as in [Kokkos::Experimental::find](#Kokkos::Experimental::find)
+- `exespace`, `first, last`, `view`: same as in [`Kokkos::Experimental::find`](#Kokkos::Experimental::find)
 - `label`:
   - for 1, the default string is: "Kokkos::find_if_iterator_api_default"
   - for 3, the default string is: "Kokkos::find_if_view_api_default"
@@ -130,8 +130,8 @@ Returns an iterator to the *first* element in `[first, last)` for which the pred
 
 ### Return
 
-- (1,2): `InputIterator` instance pointing to the first element where the predicate is evaluated to true, or `last` if no element is found
-- (2,3): iterator to the first element that equals `value`, or `Kokkos::Experimental::end(view)` if none is found
+- (1,2): `InputIterator` instance pointing to the first element where the predicate is evaluated to true, or `last` if no such element is found
+- (3,4): iterator to the first element where the predicate is evaluated to `true`, or `Kokkos::Experimental::end(view)` if no such element is found
 
 ### Example
 ```cpp
