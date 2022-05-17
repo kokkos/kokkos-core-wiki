@@ -76,6 +76,48 @@ with.
 | `KOKKOS_ENABLE_LIBDL`       | Defined if Kokkos links to the dynamic linker (libdl).                                                             |
 | `KOKKOS_ENABLE_LIBQUADMATH` | Defined if Kokkos links to the [GCC Quad-Precision Math Library API](https://gcc.gnu.org/onlinedocs/libquadmath/). |
 
+## Compilers
+
+The following macros can be used to query the integral version values of used compilers.
+
+| Macro | Description |
+| ------| ---------------|
+| `KOKKOS_COMPILER_NVCC` | Defined if NVIDIA compiler is used. |
+| `KOKKOS_COMPILER_GNU`  | Defined if GCC compiler is used. |
+| `KOKKOS_COMPILER_INTEL` | Defined if Intel compiler or Intel LLVM compiler is used. |
+| `KOKKOS_COMPILER_IBM`   | Defined if IBM compiler or XLClang is used. |
+| `KOKKOS_COMPILER_CRAYC` | Defined if CRAY compiler is used for host code. |
+| `KOKKOS_COMPILER_APPLECC` | Defined if Apple cc compiler is used. |
+| `KOKKOS_COMPILER_CLANG` | Defined if Clang compiler is used. |
+| `KOKKOS_COMPILER_PGI` | Defined if PGI compiler is used. |
+| `KOKKOS_COMPILER_MSVC` | Defined if MSVC compiler is used. |
+
+## Compiler Extension for Atomics
+
+| Macro | Description |
+| ------| ---------------|
+| `KOKKOS_ENABLE_CUDA_ATOMICS` | Defined if CUDA atomics is enabled when compiling NVIDIA device code. |
+| `KOKKOS_ENABLE_GNU_ATOMICS` | Defined if GCC atomics is enabled when compiling host code. |
+| `KOKKOS_ENABLE_INTEL_ATOMICS` | Defined if Intel atomics is enabled. |
+| `KOKKOS_ENABLE_OPENMP_ATOMICS` | Defined if OpenMP atomics is enabled. |
+| `KOKKOS_ENABLE_WINDOWS_ATOMICS` | Defined if Win32 atomics is enabled. |
+
+## Compiler Options for Vectorization
+
+| Macro | Description |
+| ------| ---------------|
+| `KOKKOS_ENABLE_PRAGMA_IVDEP` | Defined if the compiler is enabled to ignore assumed vector dependencies. [#pragma ivdep](https://www.intel.com/content/www/us/en/develop/documentation/cpp-compiler-developer-guide-and-reference/top/compiler-reference/pragmas/intel-specific-pragma-reference/ivdep.html) |
+| `KOKKOS_ENABLE_PRAGMA_LOOPCOUNT` | Defined if the compiler is enabled to specify loop iterations for optimization. [#pragma loop count](https://www.intel.com/content/www/us/en/develop/documentation/cpp-compiler-developer-guide-and-reference/top/compiler-reference/pragmas/intel-specific-pragma-reference/loop-count.html) |
+| `KOKKOS_ENABLE_PRAGMA_SIMD` | Defined if the compiler's SIMD intrinsics are enabled. [#pragma simd](https://www.intel.com/content/www/us/en/develop/documentation/cpp-compiler-developer-guide-and-reference/top/compiler-reference/pragmas/intel-specific-pragma-reference/simd.html) |
+| `KOKKOS_ENABLE_PRAGMA_UNROLL` | Defined if the compiler is enabled to do the loop unrolling. [#pragma unroll](https://www.intel.com/content/www/us/en/develop/documentation/cpp-compiler-developer-guide-and-reference/top/compiler-reference/pragmas/intel-specific-pragma-reference/unroll-nounroll.html) |
+| `KOKKOS_ENABLE_PRAGMA_VECTOR` | Defined if the compiler is enabled to force vectorization. [#pragma vector](https://www.intel.com/content/www/us/en/develop/documentation/cpp-compiler-developer-guide-and-reference/top/compiler-reference/pragmas/intel-specific-pragma-reference/vector-1.html) |
+
+## Allocation Mechanism
+
+| Macro | Description |
+| ------| ---------------|
+| `KOKKOS_ENABLE_INTEL_MM_ALLOC` | Defined if set to use Intel [_mm_malloc](https://www.intel.com/content/www/us/en/develop/documentation/cpp-compiler-developer-guide-and-reference/top/compiler-reference/intrinsics/data-align-mem-alloc-intrins-and-inline-asmbly/allocating-and-freeing-aligned-memory-blocks.html) for the HostSpace memory allocation. |
+
 ## Architectures
 
 | Macro | Description |
