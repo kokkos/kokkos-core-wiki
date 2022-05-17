@@ -38,13 +38,13 @@ Kokkos::parallel_for(const ExecPolicy& policy,
     * [ThreadVectorRange](Kokkos%3A%3ANestedPolicies): defines a 1D iteration range to be executed through vector parallelization dividing the threads within a team.  Only valid inside a parallel region executed through a `TeamPolicy` or a `TaskTeam`.
   * FunctorType: A valid functor having an `operator()` with a matching signature for the `ExecPolicy`.  The functor can be defined using a C++ class/struct or lambda.  See Examples below for more detail.
 
-### Requirements
- 
-  * If `ExecPolicy` is an `IntegerType`, `functor` has a member function `operator() (const IntegerType& i) const`.
+### Requirements:
+  
+  * If `ExecPolicy` is an `IntegerType`, `functor` has a member function `operator() (const IntegerType& i) const`.  
   * If `ExecPolicy` is an `MDRangePolicy` and `ExecPolicy::work_tag` is `void`, `functor` has a member function `operator() (const IntegerType& i0, ... , const IntegerType& iN) const` where `N` is `ExecPolicy::rank-1`.
   * If `ExecPolicy` is an `MDRangePolicy` and `ExecPolicy::work_tag` is not `void`, `functor` has a member function `operator() (const ExecPolicy::work_tag, const IntegerType& i0, ... , const IntegerType& iN) const` where `N` is `ExecPolicy::rank-1`.
   * If `ExecPolicy::work_tag` is `void`, `functor` has a member function `operator() (const ExecPolicy::member_type& handle) const`.
-  * If `ExecPolicy::work_tag` is not `void`, `functor` has a member function `operator() (const ExecPolicy::work_tag, const ExecPolicy::member_type& handle) const`.
+  * If `ExecPolicy::work_tag` is not `void`, `functor` has a member function `operator() (const ExecPolicy::work_tag, const ExecPolicy::member_type& handle) const`. 
 
 ## Semantics
 
@@ -74,12 +74,7 @@ int main(int argc, char* argv[]) {
 }
 ```
 
-### Tag Dispatch
-
-  * The TagA/B structs also provide the ability to 'overload' the operators within the same functor.  Much like the lambda example, the functor and any member variables contained within are captured by value, which means they must have either implicit or explicit copy constructors.
-  * If `ExecPolicy::work_tag` is not `void`, `functor` has a member function `operator() (const ExecPolicy::work_tag, const IntegerType& i0, ... , const IntegerType& iN) const` where `N` is `ExecPolicy::rank-1`.
-  * If `ExecPolicy::work_tag` is not `void`, `functor` has a member function `operator() (const ExecPolicy::work_tag, const ExecPolicy::member_type& handle) const`.
-  * `TeamPolicy` policy with C++ struct as  functor.  Note that the KOKKOS_INLINE_FUNCTION macro adds all of the function specifiers necessary for the target execution space.
+* `TeamPolicy` policy with C++ struct as  functor.  Note that the KOKKOS_INLINE_FUNCTION macro adds all of the function specifiers necessary for the target execution space.  The TagA/B structs also provide the ability to 'overload' the operators within the same functor.  Much like the lambda example, the functor and any member variables contained within are captured by value, which means they must have either implicit or explicit copy constructors.
 
 ```c++
 #include<Kokkos_Core.hpp>
