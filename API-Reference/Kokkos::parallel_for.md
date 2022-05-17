@@ -41,6 +41,10 @@ Kokkos::parallel_for(const ExecPolicy& policy,
 ### Requirements
  
   * If `ExecPolicy` is an `IntegerType`, `functor` has a member function `operator() (const IntegerType& i) const`.
+  * If `ExecPolicy` is an `MDRangePolicy` and `ExecPolicy::work_tag` is `void`, `functor` has a member function `operator() (const IntegerType& i0, ... , const IntegerType& iN) const` where `N` is `ExecPolicy::rank-1`.
+  * If `ExecPolicy` is an `MDRangePolicy` and `ExecPolicy::work_tag` is not `void`, `functor` has a member function `operator() (const ExecPolicy::work_tag, const IntegerType& i0, ... , const IntegerType& iN) const` where `N` is `ExecPolicy::rank-1`.
+  * If `ExecPolicy::work_tag` is `void`, `functor` has a member function `operator() (const ExecPolicy::member_type& handle) const`.
+  * If `ExecPolicy::work_tag` is not `void`, `functor` has a member function `operator() (const ExecPolicy::work_tag, const ExecPolicy::member_type& handle) const`.
 
 ## Semantics
 
