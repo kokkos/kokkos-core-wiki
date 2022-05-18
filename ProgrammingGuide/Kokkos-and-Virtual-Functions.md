@@ -109,6 +109,7 @@ Instance* deviceInstance = Kokkos::kokkos_malloc<Kokkos::CudaUVMSpace>(sizeof(In
 Kokkos::parallel_for(... {
   new((Instance*)deviceInstance) Instance(); // initialize an instance, and place the result in the pointer deviceInstance
 });
+Kokkos::fence();
 deviceInstance->setAField(someHostValue); // set some field on the host
 ```
 
