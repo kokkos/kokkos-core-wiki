@@ -30,7 +30,7 @@ Reducer objects used in conjunction with [parallel_reduce](Kokkos%3A%3Aparallel_
 
 ## Tags for Team Policy Calculations
 
-Team size (`team_size_max`, `team_size_recommended`) is determined by the particular parallel patttern tag.
+The following parallel pattern tags are used to call the correct overload for team size calculations (`team_size_max`,`team_size_recommended`):
 
 |Tag|pattern
 |:--------------|:-----------------
