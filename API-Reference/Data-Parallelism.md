@@ -30,8 +30,7 @@ Reducer objects used in conjunction with [parallel_reduce](Kokkos%3A%3Aparallel_
 
 ## Tags for Team Policy Calculations
 
-Tags indicate which parallel patttern (`parallel_for`, `parallel_reduce`, `parallel_scan`) will be used in association with either max
-(`team_size_max`) or recommended (`team_size_recommended`) team size.
+Team size (`team_size_max`, `team_size_recommended`) is determined by the particular parallel patttern tag.
 
 |Tag|pattern
 |:--------------|:-----------------
