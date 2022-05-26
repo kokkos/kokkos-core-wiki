@@ -9,22 +9,22 @@ Header File: `Kokkos_Core.hpp`
 
 ```cpp
 template <class ExecutionSpace, class InputIterator, class T>
-InputIterator find(const ExecutionSpace& exespace,                              (1)
+InputIterator find(const ExecutionSpace& exespace,                                   (1)
                    InputIterator first, InputIterator last,
                    const T& value);
 
 template <class ExecutionSpace, class InputIterator, class T>
-InputIterator find(const std::string& label, const ExecutionSpace& exespace,    (2)
+InputIterator find(const std::string& label, const ExecutionSpace& exespace,         (2)
                    InputIterator first, InputIterator last,
                    const T& value);
 
 template <class ExecutionSpace, class DataType, class... Properties, class T>
-auto find(const ExecutionSpace& exespace,                                       (3)
+auto find(const ExecutionSpace& exespace,                                            (3)
           const ::Kokkos::View<DataType, Properties...>& view,
           const T& value);
 
 template <class ExecutionSpace, class DataType, class... Properties, class T>
-auto find(const std::string& label, const ExecutionSpace& exespace,             (4)
+auto find(const std::string& label, const ExecutionSpace& exespace,                  (4)
           const ::Kokkos::View<DataType, Properties...>& view,
           const T& value);
 ```
@@ -79,23 +79,23 @@ auto it2 = KE::find(Kokkos::OpenMP(), KE::begin(a), KE::end(a), 5);
 
 ```cpp
 template <class ExecutionSpace, class InputIterator, class PredicateType>
-InputIterator find_if(const ExecutionSpace& exespace,                              (1)
+InputIterator find_if(const ExecutionSpace& exespace,                                (1)
                       InputIterator first, InputIterator last,
                       PredicateType pred);
 
 template <class ExecutionSpace, class InputIterator, class PredicateType>
-InputIterator find_if(const std::string& label, const ExecutionSpace& exespace,    (2)
+InputIterator find_if(const std::string& label, const ExecutionSpace& exespace,      (2)
                       InputIterator first, InputIterator last,
                       PredicateType pred);
 
 template <class ExecutionSpace, class DataType, class... Properties, class PredicateType>
 auto find_if(const ExecutionSpace& exespace,
-             const Kokkos::View<DataType, Properties...>& view,                    (3)
+             const Kokkos::View<DataType, Properties...>& view,                      (3)
              PredicateType pred);
 
 template <class ExecutionSpace, class DataType, class... Properties, class PredicateType>
 auto find_if(const std::string& label, const ExecutionSpace& exespace,
-             const Kokkos::View<DataType, Properties...>& view,                    (4)
+             const Kokkos::View<DataType, Properties...>& view,                      (4)
              PredicateType pred);
 ```
 
@@ -169,12 +169,12 @@ auto it2 = KE::find_if(Kokkos::OpenMP(), KE::begin(a), KE::end(a), p);
 
 ```cpp
 template <class ExecutionSpace, class InputIterator, class PredicateType>
-InputIterator find_if_not(const ExecutionSpace& exespace,                              (1)
+InputIterator find_if_not(const ExecutionSpace& exespace,                            (1)
                       InputIterator first, InputIterator last,
                       PredicateType pred);
 
 template <class ExecutionSpace, class InputIterator, class PredicateType>
-InputIterator find_if_not(const std::string& label, const ExecutionSpace& exespace,    (2)
+InputIterator find_if_not(const std::string& label, const ExecutionSpace& exespace,  (2)
                       InputIterator first, InputIterator last,
                       PredicateType pred);
 
@@ -209,23 +209,23 @@ Returns an iterator to the *first* element in `[first, last)` for which the pred
 
 ```cpp
 template <class ExecutionSpace, class InputIterator, class UnaryFunctorType>
-UnaryFunctorType for_each(const ExecutionSpace& exespace,                              (1)
+UnaryFunctorType for_each(const ExecutionSpace& exespace,                            (1)
                       InputIterator first, InputIterator last,
                       UnaryFunctorType functor);
 
 template <class ExecutionSpace, class InputIterator, class UnaryFunctorType>
-UnaryFunctorType for_each(const std::string& label, const ExecutionSpace& exespace,    (2)
+UnaryFunctorType for_each(const std::string& label, const ExecutionSpace& exespace,  (2)
                       InputIterator first, InputIterator last,
                       UnaryFunctorType functor);
 
 template <class ExecutionSpace, class DataType, class... Properties, class UnaryFunctorType>
 UnaryFunctorType for_each(const ExecutionSpace& exespace,
-             const Kokkos::View<DataType, Properties...>& view,                     (3)
+             const Kokkos::View<DataType, Properties...>& view,                      (3)
              UnaryFunctorType functor);
 
 template <class ExecutionSpace, class DataType, class... Properties, class PredicateType>
 UnaryFunctorType for_each(const std::string& label, const ExecutionSpace& exespace,
-             const Kokkos::View<DataType, Properties...>& view,                     (4)
+             const Kokkos::View<DataType, Properties...>& view,                      (4)
              UnaryFunctorType func);
 ```
 
@@ -301,22 +301,22 @@ KE::for_each(Kokkos::OpenMP(), KE::begin(a), KE::end(a), p);
 template <class ExecutionSpace, class InputIterator, class SizeType, class UnaryFunctorType>
 UnaryFunctorType for_each_n(const ExecutionSpace& exespace,
                       InputIterator first, SizeType n,
-                      UnaryFunctorType functor);                                   (1)
+                      UnaryFunctorType functor);                                     (1)
 
 template <class ExecutionSpace, class InputIterator, class SizeType, class UnaryFunctorType>
 UnaryFunctorType for_each_n(const std::string& label, const ExecutionSpace& exespace,
                       InputIterator first, SizeType n
-                      UnaryFunctorType functor);                                   (2)
+                      UnaryFunctorType functor);                                     (2)
 
 template <class ExecutionSpace, class DataType, class... Properties, class SizeType, class UnaryFunctorType>
 UnaryFunctorType for_each_n(const ExecutionSpace& exespace,
              const Kokkos::View<DataType, Properties...>& view, SizeType n,
-             UnaryFunctorType functor);                                            (3)
+             UnaryFunctorType functor);                                              (3)
 
 template <class ExecutionSpace, class DataType, class... Properties, class SizeType, class UnaryFunctorType>
 UnaryFunctorType for_each_n(const std::string& label, const ExecutionSpace& exespace,
              const Kokkos::View<DataType, Properties...>& view, SizeType n,
-             UnaryFunctorType func);                                               (4)
+             UnaryFunctorType func);                                                 (4)
 ```
 
 ### Description
@@ -343,7 +343,7 @@ UnaryFunctorType
 template <class ExecutionSpace, class IteratorType1, class IteratorType2>
 Kokkos::pair<IteratorType1, IteratorType2> mismatch(const ExecutionSpace& ex,
                   IteratorType1 first1,
-                  IteratorType1 last1,                                             (1)
+                  IteratorType1 last1,                                               (1)
                   IteratorType2 first2,
                   IteratorType2 last2);
 
@@ -352,14 +352,14 @@ Kokkos::pair<IteratorType1, IteratorType2> mismatch(
                 const std::string& label,
                 const ExecutionSpace& ex,
                 IteratorType1 first1,
-                IteratorType1 last1,                                               (2)
+                IteratorType1 last1,                                                 (2)
                 IteratorType2 first2,
                 IteratorType2 last2)
 
 template <class ExecutionSpace, class IteratorType1, class IteratorType2, class BinaryPredicate>
 Kokkos::pair<IteratorType1, IteratorType2> mismatch(const ExecutionSpace& ex,
                   IteratorType1 first1,
-                  IteratorType1 last1,                                             (3)
+                  IteratorType1 last1,                                               (3)
                   IteratorType2 first2,
                   IteratorType2 last2, BinaryPredicate pred);
 
@@ -367,7 +367,7 @@ template <class ExecutionSpace, class IteratorType1, class IteratorType2, class 
 Kokkos::pair<IteratorType1, IteratorType2> mismatch(const std::string& label,
                   const ExecutionSpace& ex,
                   IteratorType1 first1,
-                  IteratorType1 last1,                                             (4)
+                  IteratorType1 last1,                                               (4)
                   IteratorType2 first2,
                   IteratorType2 last2, BinaryPredicate pred);
 
@@ -375,26 +375,26 @@ Kokkos::pair<IteratorType1, IteratorType2> mismatch(const std::string& label,
 template <class ExecutionSpace, class DataType1, class... Properties1,
           class DataType2, class... Properties2>
 auto mismatch(const ExecutionSpace& ex,
-              const Kokkos::View<DataType1, Properties1...>& view1,                (5)
+              const Kokkos::View<DataType1, Properties1...>& view1,                  (5)
               const Kokkos::View<DataType2, Properties2...>& view2);
 
 template <class ExecutionSpace, class DataType1, class... Properties1,
           class DataType2, class... Properties2>
 auto mismatch(const std::string& label, const ExecutionSpace& ex,
-              const Kokkos::View<DataType1, Properties1...>& view1,                (6)
+              const Kokkos::View<DataType1, Properties1...>& view1,                  (6)
               const Kokkos::View<DataType2, Properties2...>& view2);
 
 template <class ExecutionSpace, class DataType1, class... Properties1,
           class DataType2, class... Properties2, class BinaryPredicateType>
 auto mismatch(const ExecutionSpace& ex,
-              const Kokkos::View<DataType1, Properties1...>& view1,                (7)
+              const Kokkos::View<DataType1, Properties1...>& view1,                  (7)
               const Kokkos::View<DataType2, Properties2...>& view2,
               BinaryPredicateType&& predicate);
 
 template <class ExecutionSpace, class DataType1, class... Properties1,
           class DataType2, class... Properties2, class BinaryPredicateType>
 auto mismatch(const std::string& label, const ExecutionSpace& ex,
-              const Kokkos::View<DataType1, Properties1...>& view1,                (8)
+              const Kokkos::View<DataType1, Properties1...>& view1,                  (8)
               const Kokkos::View<DataType2, Properties2...>& view2,
               BinaryPredicateType&& predicate);
 
@@ -462,46 +462,46 @@ Kokkos::pair<int,int> mismatch_index = KE::mismatch(Kokkos::OpenMP(), KE::begin(
 ## Kokkos::Experimental::equal
 ```cpp
 template <class ExecutionSpace, class IteratorType1, class IteratorType2>
-bool equal(const ExecutionSpace& ex, IteratorType1 first1, IteratorType1 last1,                                             (1)
+bool equal(const ExecutionSpace& ex, IteratorType1 first1, IteratorType1 last1,      (1)
            IteratorType2 first2);
 
 template <class ExecutionSpace, class IteratorType1, class IteratorType2>
 bool equal(const std::string& label, const ExecutionSpace& ex,
-           IteratorType1 first1, IteratorType1 last1, IteratorType2 first2);                                                (2)
+           IteratorType1 first1, IteratorType1 last1, IteratorType2 first2);         (2)
 
 template <class ExecutionSpace, class IteratorType1, class IteratorType2,
           class BinaryPredicateType>
-bool equal(const ExecutionSpace& ex, IteratorType1 first1, IteratorType1 last1,                                             (3)
+bool equal(const ExecutionSpace& ex, IteratorType1 first1, IteratorType1 last1,      (3)
            IteratorType2 first2, BinaryPredicateType predicate);
 
 template <class ExecutionSpace, class IteratorType1, class IteratorType2,
           class BinaryPredicateType>
 bool equal(const std::string& label, const ExecutionSpace& ex,
-           IteratorType1 first1, IteratorType1 last1, IteratorType2 first2,                                                 (4)
+           IteratorType1 first1, IteratorType1 last1, IteratorType2 first2,          (4)
            BinaryPredicateType predicate);
 
 template <class ExecutionSpace, class DataType1, class... Properties1,
           class DataType2, class... Properties2>
 bool equal(const ExecutionSpace& ex,
-           const Kokkos::View<DataType1, Properties1...>& view1,                                                            (5)
+           const Kokkos::View<DataType1, Properties1...>& view1,                     (5)
            Kokkos::View<DataType2, Properties2...>& view2);
 
 template <class ExecutionSpace, class DataType1, class... Properties1,
           class DataType2, class... Properties2>
 bool equal(const std::string& label, const ExecutionSpace& ex,
-           const Kokkos::View<DataType1, Properties1...>& view1,                                                            (6)
+           const Kokkos::View<DataType1, Properties1...>& view1,                     (6)
            Kokkos::View<DataType2, Properties2...>& view2);
 
 template <class ExecutionSpace, class DataType1, class... Properties1,
           class DataType2, class... Properties2, class BinaryPredicate>
 bool equal(const ExecutionSpace& ex,
-           const Kokkos::View<DataType1, Properties1...>& view1,                                                            (7)
+           const Kokkos::View<DataType1, Properties1...>& view1,                     (7)
            Kokkos::View<DataType2, Properties2...>& view2, BinaryPredicate pred);
 
 template <class ExecutionSpace, class DataType1, class... Properties1,
           class DataType2, class... Properties2, class BinaryPredicate>
 bool equal(const std::string& label, const ExecutionSpace& ex,
-           const Kokkos::View<DataType1, Properties1...>& view1,                                                            (8)
+           const Kokkos::View<DataType1, Properties1...>& view1,                     (8)
            Kokkos::View<DataType2, Properties2...>& view2, BinaryPredicate pred);
 ```
 
@@ -566,28 +566,28 @@ bool isEqual = KE::equal(Kokkos::OpenMP(), KE::begin(a), KE::end(a), KE::begin(b
 ```cpp
 template <class ExecutionSpace, class IteratorType, class Predicate>
 typename IteratorType::difference_type count_if(const ExecutionSpace& ex,
-                                                IteratorType first,
-                                                IteratorType last,                                             (1)
+                                                IteratorType first,                  
+                                                IteratorType last,                   (1)
                                                 Predicate pred);
                                                 
 
 template <class ExecutionSpace, class IteratorType, class Predicate>
 typename IteratorType::difference_type count_if(const std::string& label,
                                                 const ExecutionSpace& ex,
-                                                IteratorType first,                                            (2)
+                                                IteratorType first,                  (2)
                                                 IteratorType last,
                                                 Predicate pred);
                                                 
 template <class ExecutionSpace, class DataType, class... Properties,
           class Predicate>
 auto count_if(const ExecutionSpace& ex,
-              const ::Kokkos::View<DataType, Properties...>& view,                                             (3)
+              const ::Kokkos::View<DataType, Properties...>& view,                   (3)
               Predicate pred);
                                                 
 template <class ExecutionSpace, class DataType, class... Properties,
           class Predicate>
 auto count_if(const std::string& label, const ExecutionSpace& ex,
-              const ::Kokkos::View<DataType, Properties...>& view,                                             (4)
+              const ::Kokkos::View<DataType, Properties...>& view,                   (4)
               Predicate pred);
 ```
 
@@ -609,22 +609,22 @@ For (3,4) returns the number of elements in view `v` for which the `pred` is tru
 template <class ExecutionSpace, class IteratorType, class T>
 typename IteratorType::difference_type count(const ExecutionSpace& ex,
                                              IteratorType first,
-                                             IteratorType last,                                                (1)
+                                             IteratorType last,                      (1)
                                              const T& value);
                                              
 template <class ExecutionSpace, class IteratorType, class T>
 typename IteratorType::difference_type count(const std::string& label,
                                              const ExecutionSpace& ex,
                                              IteratorType first,
-                                             IteratorType last,                                                (2)
+                                             IteratorType last,                      (2)
                                              const T& value);
                                              
 template <class ExecutionSpace, class DataType, class... Properties, class T>
-auto count(const ExecutionSpace& ex,                                                                            (3)
+auto count(const ExecutionSpace& ex,                                                 (3)
            const ::Kokkos::View<DataType, Properties...>& view, const T& value);
            
 template <class ExecutionSpace, class DataType, class... Properties, class T>
-auto count(const std::string& label, const ExecutionSpace& ex,                                                  (4)
+auto count(const std::string& label, const ExecutionSpace& ex,                       (4)
            const ::Kokkos::View<DataType, Properties...>& view, const T& value);
            
 ```
@@ -645,23 +645,23 @@ For (3,4) returns the number of elements in `v` that are equal to `value`.
 
 ```cpp
 template <class ExecutionSpace, class InputIterator, class Predicate>
-bool all_of(const ExecutionSpace& ex, InputIterator first, InputIterator last,                                       (1)
+bool all_of(const ExecutionSpace& ex, InputIterator first, InputIterator last,       (1)
             Predicate predicate);
             
 template <class ExecutionSpace, class InputIterator, class Predicate>
-bool all_of(const std::string& label, const ExecutionSpace& ex,                                                      (2)
+bool all_of(const std::string& label, const ExecutionSpace& ex,                      (2)
             InputIterator first, InputIterator last, Predicate predicate); 
             
 template <class ExecutionSpace, class DataType, class... Properties,
           class Predicate>
 bool all_of(const ExecutionSpace& ex,
-            const ::Kokkos::View<DataType, Properties...>& view,                                                     (3)
+            const ::Kokkos::View<DataType, Properties...>& view,                     (3)
             Predicate predicate); 
 
 template <class ExecutionSpace, class DataType, class... Properties,
           class Predicate>
 bool all_of(const std::string& label, const ExecutionSpace& ex,
-            const ::Kokkos::View<DataType, Properties...>& view,                                                     (4)
+            const ::Kokkos::View<DataType, Properties...>& view,                     (4)
             Predicate predicate);
 ```
 ### Description
@@ -679,22 +679,22 @@ Returns `true` if all the elements in `view` return `true` for unary predicate `
 
 ```cpp
 template <class ExecutionSpace, class InputIterator, class Predicate>
-bool any_of(const ExecutionSpace& ex, InputIterator first, InputIterator last,                                       (1)
+bool any_of(const ExecutionSpace& ex, InputIterator first, InputIterator last,       (1)
             Predicate predicate);
 
 template <class ExecutionSpace, class InputIterator, class Predicate>
 bool any_of(const std::string& label, const ExecutionSpace& ex,
-            InputIterator first, InputIterator last, Predicate predicate);                                           (2)
+            InputIterator first, InputIterator last, Predicate predicate);           (2)
 
 template <class ExecutionSpace, class DataType, class... Properties,
           class Predicate>
 bool any_of(const ExecutionSpace& ex,
-            const ::Kokkos::View<DataType, Properties...>& v,                                                        (3)
+            const ::Kokkos::View<DataType, Properties...>& v,                        (3)
             Predicate predicate);
 
 template <class ExecutionSpace, class DataType, class... Properties,
           class Predicate>
-bool any_of(const std::string& label, const ExecutionSpace& ex,                                                      (4)
+bool any_of(const std::string& label, const ExecutionSpace& ex,                      (4)
             const ::Kokkos::View<DataType, Properties...>& v,
             Predicate predicate);
 ```
@@ -714,22 +714,22 @@ Returns `true` if at least one element in `view` returns `true` for unary predic
 
 ```cpp
 template <class ExecutionSpace, class IteratorType, class Predicate>
-bool none_of(const ExecutionSpace& ex, IteratorType first, IteratorType last,                                        (1)
+bool none_of(const ExecutionSpace& ex, IteratorType first, IteratorType last,        (1)
              Predicate predicate);
 
 template <class ExecutionSpace, class IteratorType, class Predicate>
-bool none_of(const std::string& label, const ExecutionSpace& ex,                                                     (2)
+bool none_of(const std::string& label, const ExecutionSpace& ex,                     (2)
              IteratorType first, IteratorType last, Predicate predicate);
 
 template <class ExecutionSpace, class DataType, class... Properties,
           class Predicate>
 bool none_of(const ExecutionSpace& ex,
-             const ::Kokkos::View<DataType, Properties...>& v,                                                       (3)
+             const ::Kokkos::View<DataType, Properties...>& v,                       (3)
              Predicate predicate);
 
 template <class ExecutionSpace, class DataType, class... Properties,
           class Predicate>
-bool none_of(const std::string& label, const ExecutionSpace& ex,                                                     (4)
+bool none_of(const std::string& label, const ExecutionSpace& ex,                     (4)
              const ::Kokkos::View<DataType, Properties...>& v,
              Predicate predicate);
 ```
@@ -748,39 +748,39 @@ Returns `true` if no element in `view` returns `true` for unary predicate `pred`
 
 ```cpp
 template <class ExecutionSpace, class IteratorType>
-IteratorType adjacent_find(const ExecutionSpace& ex, IteratorType first,                                             (1)
+IteratorType adjacent_find(const ExecutionSpace& ex, IteratorType first,             (1)
                            IteratorType last);
 
 template <class ExecutionSpace, class IteratorType>
-IteratorType adjacent_find(const std::string& label, const ExecutionSpace& ex,                                       (2)
+IteratorType adjacent_find(const std::string& label, const ExecutionSpace& ex,       (2)
                            IteratorType first, IteratorType last);
 
 template <class ExecutionSpace, class DataType, class... Properties>
-auto adjacent_find(const ExecutionSpace& ex,                                                                         (3)
+auto adjacent_find(const ExecutionSpace& ex,                                         (3)
                    const ::Kokkos::View<DataType, Properties...>& view);
 
 template <class ExecutionSpace, class DataType, class... Properties>
-auto adjacent_find(const std::string& label, const ExecutionSpace& ex,                                               (4)
+auto adjacent_find(const std::string& label, const ExecutionSpace& ex,               (4)
                    const ::Kokkos::View<DataType, Properties...>& view);
 
 template <class ExecutionSpace, class IteratorType, class BinaryPredicateType>
-IteratorType adjacent_find(const ExecutionSpace& ex, IteratorType first,                                             (5)
+IteratorType adjacent_find(const ExecutionSpace& ex, IteratorType first,             (5)
                            IteratorType last, BinaryPredicateType pred);
 
 template <class ExecutionSpace, class IteratorType, class BinaryPredicateType>
-IteratorType adjacent_find(const std::string& label, const ExecutionSpace& ex,                                       (6)
+IteratorType adjacent_find(const std::string& label, const ExecutionSpace& ex,       (6)
                            IteratorType first, IteratorType last,
                            BinaryPredicateType pred);
 
 template <class ExecutionSpace, class DataType, class... Properties,
           class BinaryPredicateType>
 auto adjacent_find(const ExecutionSpace& ex,
-                   const ::Kokkos::View<DataType, Properties...>& view,                                              (7)
+                   const ::Kokkos::View<DataType, Properties...>& view,              (7)
                    BinaryPredicateType pred);
 
 template <class ExecutionSpace, class DataType, class... Properties,
           class BinaryPredicateType>
-auto adjacent_find(const std::string& label, const ExecutionSpace& ex,                                               (8)
+auto adjacent_find(const std::string& label, const ExecutionSpace& ex,               (8)
                    const ::Kokkos::View<DataType, Properties...>& view,
                    BinaryPredicateType pred);
 ```
@@ -805,38 +805,38 @@ Returns the first Kokkos view iterator `it` in (7,8), where `pred(view(it), view
 ```cpp
 template <class ExecutionSpace, class IteratorType1, class IteratorType2>
 bool lexicographical_compare(const ExecutionSpace& ex, IteratorType1 first1,
-                             IteratorType1 last1, IteratorType2 first2,                                               (1)
+                             IteratorType1 last1, IteratorType2 first2,              (1)
                              IteratorType2 last2);
 
 template <class ExecutionSpace, class IteratorType1, class IteratorType2>
 bool lexicographical_compare(const std::string& label, const ExecutionSpace& ex,
-                             IteratorType1 first1, IteratorType1 last1,                                               (2)
+                             IteratorType1 first1, IteratorType1 last1,              (2)
                              IteratorType2 first2, IteratorType2 last2);
 
 template <class ExecutionSpace, class DataType1, class... Properties1,
           class DataType2, class... Properties2>
 bool lexicographical_compare(
     const ExecutionSpace& ex,
-    const ::Kokkos::View<DataType1, Properties1...>& view1,                                                           (3)
+    const ::Kokkos::View<DataType1, Properties1...>& view1,                          (3)
     ::Kokkos::View<DataType2, Properties2...>& view2);
 
 template <class ExecutionSpace, class DataType1, class... Properties1,
           class DataType2, class... Properties2>
 bool lexicographical_compare(
     const std::string& label, const ExecutionSpace& ex,
-    const ::Kokkos::View<DataType1, Properties1...>& view1,                                                           (4)
+    const ::Kokkos::View<DataType1, Properties1...>& view1,                          (4)
     ::Kokkos::View<DataType2, Properties2...>& view2);
 
 template <class ExecutionSpace, class IteratorType1, class IteratorType2,
           class ComparatorType>
 bool lexicographical_compare(const ExecutionSpace& ex, IteratorType1 first1,
-                             IteratorType1 last1, IteratorType2 first2,                                               (5)
+                             IteratorType1 last1, IteratorType2 first2,              (5)
                              IteratorType2 last2, ComparatorType comp);
 
 template <class ExecutionSpace, class IteratorType1, class IteratorType2,
           class ComparatorType>
 bool lexicographical_compare(const std::string& label, const ExecutionSpace& ex,
-                             IteratorType1 first1, IteratorType1 last1,                                               (6)
+                             IteratorType1 first1, IteratorType1 last1,              (6)
                              IteratorType2 first2, IteratorType2 last2,
                              ComparatorType comp);
 
@@ -845,14 +845,14 @@ template <class ExecutionSpace, class DataType1, class... Properties1,
 bool lexicographical_compare(
     const ExecutionSpace& ex,
     const ::Kokkos::View<DataType1, Properties1...>& view1,
-    ::Kokkos::View<DataType2, Properties2...>& view2, ComparatorType comp);                                           (7)
+    ::Kokkos::View<DataType2, Properties2...>& view2, ComparatorType comp);          (7)
 
 
 template <class ExecutionSpace, class DataType1, class... Properties1,
           class DataType2, class... Properties2, class ComparatorType>
 bool lexicographical_compare(
     const std::string& label, const ExecutionSpace& ex,
-    const ::Kokkos::View<DataType1, Properties1...>& view1,                                                           (8)
+    const ::Kokkos::View<DataType1, Properties1...>& view1,                          (8)
     ::Kokkos::View<DataType2, Properties2...>& view2, ComparatorType comp);
 ```
 
@@ -875,51 +875,51 @@ Elements (5,6,7,8) are compared using `comp`.
 ```cpp
 template <class ExecutionSpace, class IteratorType1, class IteratorType2>
 IteratorType1 search(const ExecutionSpace& ex, IteratorType1 first,
-                     IteratorType1 last, IteratorType2 s_first,                                                       (1)
+                     IteratorType1 last, IteratorType2 s_first,                      (1)
                      IteratorType2 s_last);
 
 template <class ExecutionSpace, class IteratorType1, class IteratorType2>
 IteratorType1 search(const std::string& label, const ExecutionSpace& ex,
-                     IteratorType1 first, IteratorType1 last,                                                         (2)
+                     IteratorType1 first, IteratorType1 last,                        (2)
                      IteratorType2 s_first, IteratorType2 s_last);
 
 template <class ExecutionSpace, class DataType1, class... Properties1,
           class DataType2, class... Properties2>
 auto search(const ExecutionSpace& ex,
-            const ::Kokkos::View<DataType1, Properties1...>& view,                                                    (3)
+            const ::Kokkos::View<DataType1, Properties1...>& view,                   (3)
             const ::Kokkos::View<DataType2, Properties2...>& s_view);
 
 template <class ExecutionSpace, class DataType1, class... Properties1,
           class DataType2, class... Properties2>
 auto search(const std::string& label, const ExecutionSpace& ex,
-            const ::Kokkos::View<DataType1, Properties1...>& view,                                                    (4)
+            const ::Kokkos::View<DataType1, Properties1...>& view,                   (4)
             const ::Kokkos::View<DataType2, Properties2...>& s_view);
 
 // overload set 2: binary predicate passed
 template <class ExecutionSpace, class IteratorType1, class IteratorType2,
           class BinaryPredicateType>
-IteratorType1 search(const ExecutionSpace& ex, IteratorType1 first,                                                   (5)
+IteratorType1 search(const ExecutionSpace& ex, IteratorType1 first,                  (5)
                      IteratorType1 last, IteratorType2 s_first,
                      IteratorType2 s_last, const BinaryPredicateType& pred);
 
 template <class ExecutionSpace, class IteratorType1, class IteratorType2,
           class BinaryPredicateType>
 IteratorType1 search(const std::string& label, const ExecutionSpace& ex,
-                     IteratorType1 first, IteratorType1 last,                                                         (6)
+                     IteratorType1 first, IteratorType1 last,                        (6)
                      IteratorType2 s_first, IteratorType2 s_last,
                      const BinaryPredicateType& pred);
 
 template <class ExecutionSpace, class DataType1, class... Properties1,
           class DataType2, class... Properties2, class BinaryPredicateType>
 auto search(const ExecutionSpace& ex,
-            const ::Kokkos::View<DataType1, Properties1...>& view,                                                    (7)
+            const ::Kokkos::View<DataType1, Properties1...>& view,                   (7)
             const ::Kokkos::View<DataType2, Properties2...>& s_view,
             const BinaryPredicateType& pred);
 
 template <class ExecutionSpace, class DataType1, class... Properties1,
           class DataType2, class... Properties2, class BinaryPredicateType>
 auto search(const std::string& label, const ExecutionSpace& ex,
-            const ::Kokkos::View<DataType1, Properties1...>& view,                                                    (8)
+            const ::Kokkos::View<DataType1, Properties1...>& view,                   (8)
             const ::Kokkos::View<DataType2, Properties2...>& s_view,
             const BinaryPredicateType& pred)
 ```
@@ -942,51 +942,51 @@ Elements in (1,2,3,4) are compared using `==` and elements in (5,6,7,8) are comp
 template <class ExecutionSpace, class IteratorType, class SizeType,
           class ValueType>
 IteratorType search_n(const ExecutionSpace& ex, IteratorType first,
-                      IteratorType last, SizeType count,                                                              (1)
+                      IteratorType last, SizeType count,                             (1)
                       const ValueType& value);
 
 template <class ExecutionSpace, class IteratorType, class SizeType,
           class ValueType>
 IteratorType search_n(const std::string& label, const ExecutionSpace& ex,
-                      IteratorType first, IteratorType last, SizeType count,                                          (2)
+                      IteratorType first, IteratorType last, SizeType count,         (2)
                       const ValueType& value);
 
 template <class ExecutionSpace, class DataType, class... Properties,
           class SizeType, class ValueType>
 auto search_n(const ExecutionSpace& ex,
-              const ::Kokkos::View<DataType, Properties...>& view,                                                    (3)
+              const ::Kokkos::View<DataType, Properties...>& view,                   (3)
               SizeType count, const ValueType& value);
 
 template <class ExecutionSpace, class DataType, class... Properties,
           class SizeType, class ValueType>
 auto search_n(const std::string& label, const ExecutionSpace& ex,
-              const ::Kokkos::View<DataType, Properties...>& view,                                                    (4)
+              const ::Kokkos::View<DataType, Properties...>& view,                   (4)
               SizeType count, const ValueType& value);
 
 // overload set 2: binary predicate passed
 template <class ExecutionSpace, class IteratorType, class SizeType,
           class ValueType, class BinaryPredicateType>
 IteratorType search_n(const ExecutionSpace& ex, IteratorType first,
-                      IteratorType last, SizeType count, const ValueType& value,                                      (5)
+                      IteratorType last, SizeType count, const ValueType& value,     (5)
                       const BinaryPredicateType& pred);
 
 template <class ExecutionSpace, class IteratorType, class SizeType,
           class ValueType, class BinaryPredicateType>
 IteratorType search_n(const std::string& label, const ExecutionSpace& ex,
-                      IteratorType first, IteratorType last, SizeType count,                                          (6)
+                      IteratorType first, IteratorType last, SizeType count,         (6)
                       const ValueType& value, const BinaryPredicateType& pred);
 
 template <class ExecutionSpace, class DataType, class... Properties,
           class SizeType, class ValueType, class BinaryPredicateType>
 auto search_n(const ExecutionSpace& ex,
-              const ::Kokkos::View<DataType, Properties...>& view,                                                    (7)
+              const ::Kokkos::View<DataType, Properties...>& view,                   (7)
               SizeType count, const ValueType& value,
               const BinaryPredicateType& pred);
 
 template <class ExecutionSpace, class DataType, class... Properties,
           class SizeType, class ValueType, class BinaryPredicateType>
 auto search_n(const std::string& label, const ExecutionSpace& ex,
-              const ::Kokkos::View<DataType, Properties...>& view,                                                    (8)
+              const ::Kokkos::View<DataType, Properties...>& view,                   (8)
               SizeType count, const ValueType& value,
               const BinaryPredicateType& pred);
 ```
@@ -1009,52 +1009,52 @@ Searches the `view` for a range of `count` elements for which the `pred` returns
 ```cpp
 template <class ExecutionSpace, class IteratorType1, class IteratorType2>
 IteratorType1 find_first_of(const ExecutionSpace& ex, IteratorType1 first,
-                            IteratorType1 last, IteratorType2 s_first,                                                (1)
+                            IteratorType1 last, IteratorType2 s_first,               (1)
                             IteratorType2 s_last);
 
 template <class ExecutionSpace, class IteratorType1, class IteratorType2>
 IteratorType1 find_first_of(const std::string& label, const ExecutionSpace& ex,
-                            IteratorType1 first, IteratorType1 last,                                                  (2)
+                            IteratorType1 first, IteratorType1 last,                 (2)
                             IteratorType2 s_first, IteratorType2 s_last);
 
 template <class ExecutionSpace, class DataType1, class... Properties1,
           class DataType2, class... Properties2>
 auto find_first_of(const ExecutionSpace& ex,
-                   const ::Kokkos::View<DataType1, Properties1...>& view,                                             (3)
+                   const ::Kokkos::View<DataType1, Properties1...>& view,            (3)
                    const ::Kokkos::View<DataType2, Properties2...>& s_view);
 
 template <class ExecutionSpace, class DataType1, class... Properties1,
           class DataType2, class... Properties2>
 auto find_first_of(const std::string& label, const ExecutionSpace& ex,
-                   const ::Kokkos::View<DataType1, Properties1...>& view,                                             (4)
+                   const ::Kokkos::View<DataType1, Properties1...>& view,            (4)
                    const ::Kokkos::View<DataType2, Properties2...>& s_view);
 
 // overload set 2: binary predicate passed
 template <class ExecutionSpace, class IteratorType1, class IteratorType2,
           class BinaryPredicateType>
 IteratorType1 find_first_of(const ExecutionSpace& ex, IteratorType1 first,
-                            IteratorType1 last, IteratorType2 s_first,                                                (5)
+                            IteratorType1 last, IteratorType2 s_first,               (5)
                             IteratorType2 s_last,
                             const BinaryPredicateType& pred);
 
 template <class ExecutionSpace, class IteratorType1, class IteratorType2,
           class BinaryPredicateType>
 IteratorType1 find_first_of(const std::string& label, const ExecutionSpace& ex,
-                            IteratorType1 first, IteratorType1 last,                                                  (6)
+                            IteratorType1 first, IteratorType1 last,                 (6)
                             IteratorType2 s_first, IteratorType2 s_last,
                             const BinaryPredicateType& pred);
 
 template <class ExecutionSpace, class DataType1, class... Properties1,
           class DataType2, class... Properties2, class BinaryPredicateType>
 auto find_first_of(const ExecutionSpace& ex,
-                   const ::Kokkos::View<DataType1, Properties1...>& view,                                             (7)
+                   const ::Kokkos::View<DataType1, Properties1...>& view,            (7)
                    const ::Kokkos::View<DataType2, Properties2...>& s_view,
                    const BinaryPredicateType& pred);
 
 template <class ExecutionSpace, class DataType1, class... Properties1,
           class DataType2, class... Properties2, class BinaryPredicateType>
 auto find_first_of(const std::string& label, const ExecutionSpace& ex,
-                   const ::Kokkos::View<DataType1, Properties1...>& view,                                             (8)
+                   const ::Kokkos::View<DataType1, Properties1...>& view,            (8)
                    const ::Kokkos::View<DataType2, Properties2...>& s_view,
                    const BinaryPredicateType& pred);
 ```
@@ -1078,51 +1078,51 @@ Searches `view` for any of the elements in `s_view` in (7,8) for which `pred` ev
 ```cpp
 template <class ExecutionSpace, class IteratorType1, class IteratorType2>
 IteratorType1 find_end(const ExecutionSpace& ex, IteratorType1 first,
-                       IteratorType1 last, IteratorType2 s_first,                                                    (1)
+                       IteratorType1 last, IteratorType2 s_first,                    (1)
                        IteratorType2 s_last);
 
 template <class ExecutionSpace, class IteratorType1, class IteratorType2>
 IteratorType1 find_end(const std::string& label, const ExecutionSpace& ex,
-                       IteratorType1 first, IteratorType1 last,                                                       (2)
+                       IteratorType1 first, IteratorType1 last,                       (2)
                        IteratorType2 s_first, IteratorType2 s_last);
 
 template <class ExecutionSpace, class DataType1, class... Properties1,
           class DataType2, class... Properties2>
 auto find_end(const ExecutionSpace& ex,
-              const ::Kokkos::View<DataType1, Properties1...>& view,                                                  (3)
+              const ::Kokkos::View<DataType1, Properties1...>& view,                  (3)
               const ::Kokkos::View<DataType2, Properties2...>& s_view);
 
 template <class ExecutionSpace, class DataType1, class... Properties1,
           class DataType2, class... Properties2>
 auto find_end(const std::string& label, const ExecutionSpace& ex,
-              const ::Kokkos::View<DataType1, Properties1...>& view,                                                  (4)
+              const ::Kokkos::View<DataType1, Properties1...>& view,                  (4)
               const ::Kokkos::View<DataType2, Properties2...>& s_view);
 
 // overload set 2: binary predicate passed
 template <class ExecutionSpace, class IteratorType1, class IteratorType2,
           class BinaryPredicateType>
 IteratorType1 find_end(const ExecutionSpace& ex, IteratorType1 first,
-                       IteratorType1 last, IteratorType2 s_first,                                                     (5)
+                       IteratorType1 last, IteratorType2 s_first,                     (5)
                        IteratorType2 s_last, const BinaryPredicateType& pred);
 
 template <class ExecutionSpace, class IteratorType1, class IteratorType2,
           class BinaryPredicateType>
 IteratorType1 find_end(const std::string& label, const ExecutionSpace& ex,
-                       IteratorType1 first, IteratorType1 last,                                                       (6)
+                       IteratorType1 first, IteratorType1 last,                       (6)
                        IteratorType2 s_first, IteratorType2 s_last,
                        const BinaryPredicateType& pred);
 
 template <class ExecutionSpace, class DataType1, class... Properties1,
           class DataType2, class... Properties2, class BinaryPredicateType>
 auto find_end(const ExecutionSpace& ex,
-              const ::Kokkos::View<DataType1, Properties1...>& view,                                                  (7)
+              const ::Kokkos::View<DataType1, Properties1...>& view,                  (7)
               const ::Kokkos::View<DataType2, Properties2...>& s_view,
               const BinaryPredicateType& pred);
 
 template <class ExecutionSpace, class DataType1, class... Properties1,
           class DataType2, class... Properties2, class BinaryPredicateType>
 auto find_end(const std::string& label, const ExecutionSpace& ex,
-              const ::Kokkos::View<DataType1, Properties1...>& view,                                                  (8)
+              const ::Kokkos::View<DataType1, Properties1...>& view,                  (8)
               const ::Kokkos::View<DataType2, Properties2...>& s_view,
               const BinaryPredicateType& pred);
 ```
