@@ -54,7 +54,7 @@ Build system:
  :--- |:--- |:---
 `KOKKOS_ENABLE_CUDA`| Enable the CUDA execution space. |Requires a compiler capable of understanding CUDA-C. See Section 4.4.
 `KOKKOS_ENABLE_OPENMP`| Enable the OpenMP execution space. |Requires the compiler to support OpenMP (e.g., `-fopenmp`).
-`KOKKOS_ENABLE_PTHREADS`| Enable the Threads execution space. | Requires linking with `libpthread`.
+`KOKKOS_ENABLE_THREADS`| Enable the C++ Threads execution space.
 `KOKKOS_ENABLE_SERIAL`| Enable the Serial execution space. |
 `KOKKOS_ENABLE_HWLOC`| Enable thread and memory pinning via hwloc. | Requires linking with `libhwloc`. 
 
@@ -222,8 +222,8 @@ Device backends can be enabled by specifying `-DKokkos_ENABLE_X`.
 * Kokkos_ENABLE_OPENMP
     * Whether to build OpenMP backend
     * BOOL Default: OFF
-* Kokkos_ENABLE_PTHREAD
-    * Whether to build Pthread backend
+* Kokkos_ENABLE_THREADS
+    * Whether to build C++ Threads backend
     * BOOL Default: OFF
 * Kokkos_ENABLE_SERIAL
     * Whether to build serial  backend
@@ -508,7 +508,7 @@ Variable  | Description
 `KOKKOS_PATH (IN)` | Path to the Kokkos root or install directory. One can either build against an existing install of Kokkos or use its source directly for an embedded build. In the former case the "Input variables" are set inside the embedded Makefile.kokkos and it is not valid to set them differently in the including Makefile. 
 `CUDA_PATH (IN)` | Path to the Cuda toolkit root directory. 
 `KOKKOS_DEVICES (IN)` | Execution and Memory Spaces that should be enabled.
-`Options`<br>`    Default` | OpenMP, Serial, Pthreads, Cuda <br> OpenMP 
+`Options`<br>`    Default` | OpenMP, Serial, C++ Threads, Cuda <br> OpenMP 
 `KOKKOS_ARCH (IN)` | The backend architecture to build for.
 `Options` <br><br><br> `Default` | KNL, KNC, SNB, HSW, BDW, Kepler, Kepler30, Kepler35, Kepler37, Maxwell, Maxwell50, Pascal60, Pascal61, ARMv8, ARMv81, ARMv8-ThunderX, BGQ, Power7, Power8 <br><br> (no particular architecture flags are set).
 `KOKKOS_USE_TPLS (IN)` | Enable optional third party libraries.
@@ -544,7 +544,7 @@ Many people use a system like Environment Modules (see `http://modules.sourcefor
 Currently, Kokkos organizes its execution spaces into three categories:
 
  - Host Serial: A top-level `Serial` execution space with no parallelism or concurrency
- - Host Parallel: Typically a threading model for CPUs, currently: `OpenMP`, `Threads`, and `QThreads`.
+ - Host Parallel: Typically a threading model for CPUs, currently: `OpenMP` and `Threads`.
  - Device Parallel: Typically an attached GPU, currently: `CUDA`, `OpenMPTarget`, and `ROCm`.
 
 The current Kokkos policy is to allow users, at compile time, to enable *at most one* execution space from each category. This prevents incompatibilities between different spaces in the same category from degrading the user's correctness and performance.
