@@ -56,7 +56,6 @@ Build system:
 `KOKKOS_ENABLE_OPENMP`| Enable the OpenMP execution space. |Requires the compiler to support OpenMP (e.g., `-fopenmp`).
 `KOKKOS_ENABLE_PTHREADS`| Enable the Threads execution space. | Requires linking with `libpthread`.
 `KOKKOS_ENABLE_SERIAL`| Enable the Serial execution space. |
-`KOKKOS_ENABLE_CXX11`| Enable internal usage of C++11 features. | The code needs to be compiled with the C++11 standard. Most compilers accept the -std=c++11 flag for this.
 `KOKKOS_ENABLE_HWLOC`| Enable thread and memory pinning via hwloc. | Requires linking with `libhwloc`. 
 
 ## 4.2 Using General CMake build system
@@ -286,9 +285,9 @@ Options can be enabled by specifying `-DKokkos_ENABLE_X`.
     * BOOL Default: OFF
 
 #### Other Options
-* Kokkos_CXX_STANDARD
-    * The C++ standard for Kokkos to use: c++11, c++14, c++17, or c++20. This should be given in CMake style as 11, 14, 17, or 20.
-    * STRING Default: 11
+* CMAKE_CXX_STANDARD
+    * The C++ standard for Kokkos to use: c++14, c++17, or c++20. This should be given in CMake style as 14, 17, or 20.
+    * STRING Default: 14
 
 #### Third-party Libraries (TPLs)
 The following options control enabling TPLs:
@@ -522,7 +521,7 @@ Variable  | Description
 `KOKKOS_DEBUG (IN)` | Enable debugging.
 `Options` <br> `Default` | yes, no <br> no
 `KOKKOS_CXX_STANDARD (IN)` | Set the C++ standard to be used.
-`Options` <br> `Default`  | C++11 <br> C++11
+`Options` <br> `Default`  | C++14 <br> C++14
 `KOKKOS_CPPFLAGS (OUT)` | Preprocessor flags (include directories and defines). Add this to the applications compiler and preprocessor flags.
 `KOKKOS_CXXFLAGS (OUT)` | Compiler flags. Add this to the applications compiler flags.
 `KOKKOS_LDFLAGS (OUT)` | Linker flags. Add this to the applications linker flags.
