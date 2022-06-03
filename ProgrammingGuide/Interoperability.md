@@ -13,7 +13,7 @@ After reading this chapter, you should understand the following:
 
 In all code examples in this chapter, we assume that all classes in the `Kokkos` namespace have been imported into the working namespace.
 
-## 12.1 OpenMP, Pthreads and CUDA interoperability
+## 12.1 OpenMP, C++ Threads and CUDA interoperability
 
 Since the implementation of Kokkos is achieved with a C++ library it provides full interoperability with the underlying backend programming models. In particular, it allows for mixing of OpenMP, CUDA and Kokkos code in the same compilation unit. This is true for both the parallel execution layers of Kokkos as for the data layer.
 
