@@ -54,7 +54,7 @@ Build system:
  :--- |:--- |:---
 `KOKKOS_ENABLE_CUDA`| Enable the CUDA execution space. |Requires a compiler capable of understanding CUDA-C. See Section 4.4.
 `KOKKOS_ENABLE_OPENMP`| Enable the OpenMP execution space. |Requires the compiler to support OpenMP (e.g., `-fopenmp`).
-`KOKKOS_ENABLE_THREADS`| Enable the C++ Threads execution space. | Requires linking with `libpthread`.
+`KOKKOS_ENABLE_THREADS`| Enable the C++ Threads execution space.
 `KOKKOS_ENABLE_SERIAL`| Enable the Serial execution space. |
 `KOKKOS_ENABLE_CXX11`| Enable internal usage of C++11 features. | The code needs to be compiled with the C++11 standard. Most compilers accept the -std=c++11 flag for this.
 `KOKKOS_ENABLE_HWLOC`| Enable thread and memory pinning via hwloc. | Requires linking with `libhwloc`. 
