@@ -545,7 +545,7 @@ Many people use a system like Environment Modules (see `http://modules.sourcefor
 Currently, Kokkos organizes its execution spaces into three categories:
 
  - Host Serial: A top-level `Serial` execution space with no parallelism or concurrency
- - Host Parallel: Typically a threading model for CPUs, currently: `OpenMP`, `Threads`, and `QThreads`.
+ - Host Parallel: Typically a threading model for CPUs, currently: `OpenMP` and `Threads`.
  - Device Parallel: Typically an attached GPU, currently: `CUDA`, `OpenMPTarget`, and `ROCm`.
 
 The current Kokkos policy is to allow users, at compile time, to enable *at most one* execution space from each category. This prevents incompatibilities between different spaces in the same category from degrading the user's correctness and performance.
