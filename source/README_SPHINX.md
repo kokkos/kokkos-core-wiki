@@ -1,13 +1,10 @@
 # Kokkos Documentation Workflow <br/><br/>
 
-Here, we summarize the steps for setting up the kokkos-core-wiki repo, and a
-branch-based workflow for updating documentation in the main Kokkos project.  The kokkos-core-wiki is the
-canonical source of Kokkos documentation "Truth".  It is no longer possible to
-directly edit the main Kokkos project Wiki.<br/>
+The kokkos-core-wiki is the canonical source of Kokkos documentation "Truth".  Please do not directly edit the main Kokkos project Wiki.<br/>
 
-Sandia employees: Creation of wholly new pages will require Review and Approval (R&A).  Check with your Sandia team lead, if you have questions about the R&A process.<br/><br/>
+Sandia employees: Creation of wholly new pages will require Review and Approval (R&A).  Check with your Sandia team lead if you have questions about the R&A process.<br/><br/>
 
-* Step 1) Create your own fork of the kokkos-core-wiki repo by navigating to `https://github.com/kokkos/kokkos-core-wiki`, and clicking "Fork" in the upper right of the github page.<br/>
+* Step 1) Fork the kokkos-core-wiki repo (`https://github.com/kokkos/kokkos-core-wiki`).<br/>
 
 * Step 2) Clone your fork and add upstream `kokkos-core-wiki` repo as a remote:<br/>
 
@@ -29,48 +26,65 @@ upstream https://github.com/kokkos/kokkos-core-wiki.git (push)
 * Step 4) Create a topic branch in your local fork of the kokkos-core-wiki:<br/>
 
 ```
-git checkout -b demo/setup
+git checkout -b documentation/my_topic_branch
 ```
 
-* Step 5) Add your fork's  *Kokkos project Wiki* repo as a remote (you will push changes to this repo to preview before creating a pull request on `upstream git@github.com:kokkos/kokkos-core-wiki.git`).  If your *Kokkos project Wiki* is empty, then you will need to create a first page.  To create this first page, navigate to the Wiki in the banner (*e.g.*, `https://github.com/ajpowelsnl/kokkos/wiki`), and click the green button that says, `Create the first page`.  Once you have created this first page, you should now be able to add the Wiki repo as a remote:<br/>
+* Step 5) For the Sphinx-based workflow, please install the Python modules (using `pip` or `conda`) below on your local machine.  You will only need to install these modules once. <br/>
 
 ```
-git remote add my_wiki git@github.com:ajpowelsnl/kokkos.wiki.git
+Sphinx
+furo
+myst-parser
+sphinx-copybutton
+m2r2
 ```
 
-* Step 6) Verify your remotes.  You should now have three different repos: your local, forked kokkos-core-wiki (`ajpowelsnl`), the remote kokkos-core-wiki (`origin`), and the Wiki associated with your forked Kokkos project (`my_wiki`):<br/>
+* Step 6) Build the Sphinx documentation, and check the rendering of the local `html/index.html` file in a browser (suggested: Google Chrome, Firefox):<br/>
+
+```
+make html
+```
+
+* Step 7) Add your fork's  *Kokkos project Wiki* repo as a remote (you will push changes to this repo to preview before creating a pull request on `upstream git@github.com:kokkos/kokkos-core-wiki.git`).  If your *Kokkos project Wiki* is empty, then you will need to create a first page.  To create this first page, navigate to the Wiki in the banner (*e.g.*, `https://github.com/ajpowelsnl/kokkos/wiki`), and click the green button that says, `Create the first page`.  Once you have created this first page, you should now be able to add the Wiki repo as a remote:<br/>
+
+```
+git remote add my_wiki_preview git@github.com:ajpowelsnl/kokkos.wiki.git
+```
+
+* Step 8) Verify your remotes.  You should now have three different repos: your local, forked kokkos-core-wiki (`ajpowelsnl`), the remote kokkos-core-wiki (`origin`), and the Wiki associated with your forked Kokkos project (`my_wiki_preview`):<br/>
 
 ```
 [ajpowel@kokkos-dev-2 kokkos-core-wiki]$ git remote -v
 origin git@github.com:ajpowelsnl/kokkos-core-wiki.git (fetch)
 origin git@github.com:ajpowelsnl/kokkos-core-wiki.git (push)
-my_wiki git@github.com:ajpowelsnl/kokkos.wiki.git (fetch)
-my_wiki git@github.com:ajpowelsnl/kokkos.wiki.git (push)
+my_wiki_preview git@github.com:ajpowelsnl/kokkos.wiki.git (fetch)
+my_wiki_preview git@github.com:ajpowelsnl/kokkos.wiki.git (push)
 upstream https://github.com/kokkos/kokkos-core-wiki.git (fetch)
 upstream https://github.com/kokkos/kokkos-core-wiki.git (push)
 ```
 
-* Step 7) Fetch new changes to the remote (`upstream`), and rebase on your topic branch (`demo/setup`) to update:<br/>
+* Step 9) Fetch new changes from the remote kokkos-core-wiki (`upstream`), and rebase on your topic branch (`documentation/my_topic_branch`) to update:<br/>
 
 ```
+git checkout main
 git fetch upstream main
-git checkout demo/setup
+git checkout documentation/my_topic_branch
 git rebase upstream/main
 ```
 
-* Step 8) Make the desired changes (on your local topic branch), and push to the main project Wiki (of your fork).  *Nota bene*: for your first commit, you will need to use the `-f` option to push; this option will overwrite existing files.<br/>
+* Step 10) Make the desired changes (on your local topic branch), and push to the main project Wiki (of your fork). During the transition from the github Wiki to Sphnix-based documentation, you will modify files in the `source` directory.  *Nota bene*: for your first commit, you will need to use the `-f` option to push; this option will overwrite existing files.<br/>
 
 ```
-git push -f my_wiki demo/setup:master
+git push -f my_wiki_preview documentation/my_topic_branch:master
 ```
 
-* Step 9) Preview your changes by navigating to the main project Wiki of your fork:<br/>
+* Step 11) Preview your changes by navigating to the main project Wiki of your fork:<br/>
 
 ```
 https://github.com/ajpowelsnl/kokkos/wiki
 ```
 
-* Step 10) If your previewed changes are good, push your local topic branch to your fork of the kokkos-core-wiki repo to create a pull request.  You cannot push directly to the `main` branch of the remote repo:<br/>
+* Step 12) If your previewed changes are good, push your local topic branch to your fork of the kokkos-core-wiki repo to create a pull request.  You cannot push directly to the `main` branch of the remote repo:<br/>
 
 ```
 git push -f origin demo/setup 
