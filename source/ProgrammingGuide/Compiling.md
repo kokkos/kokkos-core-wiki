@@ -13,7 +13,7 @@ Note that the build methods listed above should not be mixed. For example, do no
 
 Kokkos consists mainly of header files. Only a few functions have to be compiled into object files outside of the application's source code. Those functions are contained in `.cpp` files inside the `kokkos/core/src` directory and its subdirectories. The files are internally protected with macros to prevent compilation if the related execution space is not enabled. Thus, it is not necessary to create a list of included object files specific to your compilation target; one may simply compile all `.cpp` files. The enabled features are controlled via macros which have to be provided in the compilation line or the generated `KokkosCore_config.h` include file; a subset of the macros can be found in Table 4.1.  For the most part, all of these macros are enabled/disabled using the options and settings controlled through one of the build methods previously mentioned.
 
-To compile Kokkos, a C++14 compliant compiler is needed. For an up to date list of compilers that are tested on a nightly basis, please refer to the README on the GitHub repository. At the time of writing supported compilers include:
+To compile Kokkos, a C++14 compliant compiler is needed. For an up-to-date list of compilers that are tested on a nightly basis, please refer to the README on the GitHub repository. At the time of writing supported compilers include:
 
 ```
 Minimum Compiler Versions
@@ -51,7 +51,7 @@ Build system:
   
  Macro | Effect | Comment
  :--- |:--- |:---
-`KOKKOS_ENABLE_CUDA`| Enable the CUDA execution space. |Requires a compiler capable of understanding CUDA-C. See Section 4.4.
+`KOKKOS_ENABLE_CUDA`| Enable the CUDA execution space. |Requires a compiler capable of understanding CUDA-C. See [Section 4.4](GNU_makefile_system).
 `KOKKOS_ENABLE_OPENMP`| Enable the OpenMP execution space. |Requires the compiler to support OpenMP (e.g., `-fopenmp`).
 `KOKKOS_ENABLE_THREADS`| Enable the C++ Threads execution space.
 `KOKKOS_ENABLE_SERIAL`| Enable the Serial execution space. |
@@ -63,30 +63,30 @@ Build system:
 
 Kokkos provides a CMake style build system.
 As C++ continues to develop for C++20 and beyond, CMake is likely to provide the most robust support
-for C++.  Applications heavily leveraging Kokkos are strongly encouraged to use a CMake build system.  Kokkos requires CMake version 3.10 and above.
+for C++.  Applications heavily leveraging Kokkos are strongly encouraged to use a CMake build system. Kokkos requires CMake version 3.10 and above.
 
 You can either use Kokkos as an installed package (encouraged) or use Kokkos in-tree included in your project.
 
 ### Using Kokkos installed Package
 With the Kokkos package installed, you build and link with the Kokkos library using CMake by adding the following to you your `CMakeLists.txt`:
-````cmake
+```cmake
 find_package(Kokkos REQUIRED)
-````
+```
 Then for every executable or library in your project:
-````cmake
+```cmake
 target_link_libraries(myTarget Kokkos::kokkos)
-````
-The target_link_libraries command will find and include all of the necessary pre-processor, compiler, and linker flags that are required for an application using Kokkos.  When running CMake for your project you will need to specify the directory containing the Kokkos package:  
-````
+```
+The target_link_libraries command will find and include all the necessary pre-processor, compiler, and linker flags that are required for an application using Kokkos.  When running CMake for your project you will need to specify the directory containing the Kokkos package:  
+```
 -DKokkos_ROOT=<Kokkos Install Directory>/lib64/cmake/Kokkos
-````
+```
 If compiling with something other than g++, your application should use a compiler that is consistent with that used to build the Kokkos package.  This is especially true when using nvcc_wrapper.
-````
+```
 -DCMAKE_CXX_COMPILER=<Kokkos Install Directory>/bin/nvcc_wrapper
-````
+```
 
 **Important note** 
-With Kokkos release 3.0 the externally defined CMAKE_CXX_FLAGS are not propagated to projects that include the kokkos package.  This limitation is especially important when using Clang compilers with gcc and Cuda.  The Clang options that are provided via the CMAKE_CXX_FLAGS with the Kokkos project are illustrated below.
+With Kokkos release 3.0 the externally defined CMAKE_CXX_FLAGS are not propagated to projects that include the kokkos package. This limitation is especially important when using Clang compilers with gcc and Cuda.  The Clang options that are provided via the CMAKE_CXX_FLAGS with the Kokkos project are illustrated below.
 
 ```
 --gcc-toolchain=<path to gcc source tree>
@@ -94,14 +94,14 @@ With Kokkos release 3.0 the externally defined CMAKE_CXX_FLAGS are not propagate
 ``` 
 
 ### Using Kokkos in-tree build
-If building in-tree, the Kokkos source directory must be within a sub-directory of your application source tree (relative to the location of your application CMakeLists.txt)
+If building in-tree, the Kokkos source directory must be within a subdirectory of your application source tree (relative to the location of your application CMakeLists.txt)
 
 To include Kokkos in the application add the following to CMakeLists.txt:
-````cmake
+```cmake
 add_subdirectory(<path to Kokkos dir relative to your CMakeList.txt>)
 include_directories(${Kokkos_INCLUDE_DIRS_RET})
 target_link_libraries(myTarget kokkos)
-```` 
+```
 The include_directories command is necessary to update the application include paths, and the target link libraries command links your executable to the Kokkos library.  It does not require a package name.
 Using this method, the Kokkos options necessary to specify the devices, arch and options must be specified with your application CMake command.  See below for the list of available settings (keywords) 
 
@@ -109,86 +109,86 @@ Using this method, the Kokkos options necessary to specify the devices, arch and
 ## Configuring Kokkos with CMake
 A very basic installation is done with:
 
-````bash
+```bash
 > mkdir build
 > cd build
 > cmake ${srcdir} \
  -DCMAKE_CXX_COMPILER=g++ \
- -DCMAKE_INSTALL_PREFIX=${my_install_folder} \
-````
+ -DCMAKE_INSTALL_PREFIX=${my_install_folder}
+```
 which builds and installed a default Kokkos when you run `make install`.
 There are numerous device backends, options, and architecture-specific optimizations that can be configured, e.g.
-````bash
+```bash
 > cmake ${srcdir} \
  -DCMAKE_CXX_COMPILER=g++ \
  -DCMAKE_INSTALL_PREFIX=${my_install_folder} \
  -DKokkos_ENABLE_OPENMP=On
-````
-which activates the OpenMP backend. All of the options controlling device backends, options, architectures, and third-party libraries (TPLs) are given below under the keywords listing.
+```
+which activates the OpenMP backend. All the options controlling device backends, options, architectures, and third-party libraries (TPLs) are given below under the keywords listing.
 
 ### Using generate_makefile.bash
 As an alternative to calling the cmake command directly, the generate_makefile.bash command can be used to configure the CMake build environment.  The generate_makefile.bash equivalent to the above OpenMP example is as follows:
 
-````bash
+```bash
 > ${srcdir}/generate_makefile.bash --compiler=g++ \
   --with-openmp --prefix=${my_install_folder}
-````
+```
 For a full list of generate_makefile.bash options use the command 
-````bash
+```bash
 > ${srcdir}/generate_makefile.bash --help
-````
+```
 
 ### Spack
 An alternative to manually building with CMake is to use the Spack package manager.
 To do so, download [Spack](https://github.com/spack/spack) and add it to your path by sourcing the appropriate env file in the share folder, e.g.
-````bash
+```bash
 > source spack/share/spack/setup-env.sh 
-````
+```
 A basic installation would be done as:
-````bash
+```bash
 > spack install kokkos
-````
+```
 Spack allows options and compilers to be tuned in the install command.
-````bash
+```bash
 > spack install kokkos@3.0 %gcc@7.3.0 +openmp
-````
+```
 This example illustrates the three most common parameters to Spack:
 * Variants: specified with, e.g. `+openmp`, this activates (or deactivates with, e.g. `~openmp`) certain options.
 * Version:  immediately following `kokkos` the `@version` can specify a particular Kokkos to build
 * Compiler: a default compiler will be chosen if not specified, but an exact compiler version can be given with the `%`option.
 
 For a complete list of Kokkos options, run:
-````bash
+```bash
 > spack info kokkos
-````
+```
 
 #### Spack Development
 Spack currently installs packages to a location determined by a unique hash. This hash name is not really "human readable".
 Generally, Spack usage should never really require you to reference the computer-generated unique install folder.
 If you must know, you can locate Spack Kokkos installations with:
-````bash
+```bash
 > spack find -p kokkos ...
-````
+```
 where `...` is the unique spec identifying the particular Kokkos configuration and version.
 
 A better way to use Spack for doing Kokkos development is the DIY feature of Spack.
 If you wish to develop Kokkos itself, go to the Kokkos source folder:
-````bash
+```bash
 > spack diy -u cmake kokkos@diy ...
-````
+```
 where `...` is a Spack spec identifying the exact Kokkos configuration.
 This then creates a `spack-build` directory where you can run `make`.
 
 If doing development on a downstream project, you can do almost the same thing.
-````bash
+```bash
 > spack diy -u cmake ${myproject}@${myversion} ... ^kokkos...
-````
+```
 where the `...` are the specs for your project and the desired Kokkos configuration.
 Again, a `spack-build` directory will be created where you can run `make`.
 
 Spack has a few idiosyncrasies that make building outside of Spack annoying related to Spack forcing the use of a compiler wrapper. This can be worked around by having a `-DSpack_WORKAROUND=On` given your CMake. Then add the block of code to your CMakeLists.txt:
 
-````cmake
+```cmake
 if (Spack_WORKAROUND)
  set(SPACK_CXX $ENV{SPACK_CXX})
  if(SPACK_CXX)
@@ -196,10 +196,10 @@ if (Spack_WORKAROUND)
    set(ENV{CXX} ${SPACK_CXX})
  endif()
 endif()
-````
+```
 
 ### Kokkos CMake Keyword Listing
-Note that with version 3.0 all Kokkos CMake keywords are prefixed with `Kokkos_` which is case sensitive.  
+Note that with version 3.0 all Kokkos CMake keywords are prefixed with `Kokkos_` which is case-sensitive.  
 #### Device Backends
 Device backends can be enabled by specifying `-DKokkos_ENABLE_X`.
 
@@ -451,11 +451,11 @@ Architecture-specific optimizations can be enabled by specifying `-DKokkos_ARCH_
 
 ## 4.3 Using Trilinos' CMake build system
 
-The Trilinos project (see `trilinos.org` and github for the [source code](https://github.com/trilinos/Trilinos) repository) is an effort to develop algorithms and enabling technologies within an object-oriented software framework for the solution of large-scale, complex multiphysics engineering and scientific problems. Trilinos is organized into packages. Even though Kokkos is a stand-alone software project, Trilinos uses Kokkos extensively. Thus, Trilinos' source code includes Kokkos' source code, and builds Kokkos as part of its build process.
+The Trilinos project (see [`trilinos.org`](https://trilinos.org) and github for the [source code](https://github.com/trilinos/Trilinos) repository) is an effort to develop algorithms and enabling technologies within an object-oriented software framework for the solution of large-scale, complex multiphysics engineering and scientific problems. Trilinos is organized into packages. Even though Kokkos is a stand-alone software project, Trilinos uses Kokkos extensively. Thus, Trilinos' source code includes Kokkos' source code, and builds Kokkos as part of its build process.
 
 Trilinos' build system uses CMake. Thus, to build Kokkos as part of Trilinos, you must first install CMake (version `3.17` or newer). To enable Kokkos when building Trilinos, set the CMake option `Trilinos_ENABLE_Kokkos`. Trilinos' build system lets packages express dependencies on other packages or external libraries. If you enable any Trilinos package (e.g., Tpetra) that has a required dependency on Kokkos, Trilinos will enable Kokkos automatically. Configuration macros are automatically inferred from Trilinos settings. For example, if the CMake option `Trilinos_ENABLE_OpenMP` is `ON`, Trilinos will define the macro `Kokkos_ENABLE_OPENMP`. Trilinos' build system will autogenerate the previously mentioned `KokkosCore_config.h` file that contains those macros.
 
-Trilinos' CMake build system utilizes Kokkos' build system to set compiler flags, compiler options, architectures, etc. CMake variables `CMAKE_CXX_COMPILER`, `CMAKE_C_COMPILER`, and `CMAKE_FORTRAN_COMPILER` are used to specify the compiler. To configure Trilinos for various architectures, with Kokkos enabled, the CMake variable `Kokkos_ARCH_<ArchCode>` should be set, matching ArchCode to the appropriate architecture as specified in [Architecture Keywords](https://github.com/kokkos/kokkos/wiki/Compiling#architecture-keywords).
+Trilinos' CMake build system utilizes Kokkos' build system to set compiler flags, compiler options, architectures, etc. CMake variables `CMAKE_CXX_COMPILER`, `CMAKE_C_COMPILER`, and `CMAKE_FORTRAN_COMPILER` are used to specify the compiler. To configure Trilinos for various architectures, with Kokkos enabled, the CMake variable `Kokkos_ARCH_<ArchCode>` should be set, matching ArchCode to the appropriate architecture as specified in [Architecture Keywords](#architecture-keywords).
 
 For example, `Kokkos_ARCH_HSW` sets the architecture variables for a machine with Intel Haswell CPUs. Also, when setting the `Kokkos_ARCH_<ArchCode>` variable it is not necessary to pass required architecture-specific flags to CMake, for example via the `CMAKE_CXX_FLAGS` variable.
 
@@ -481,6 +481,7 @@ For builds with CUDA enabled, the path to the `nvcc_wrapper` script should also 
 
 We refer readers to Trilinos' documentation for further details.
 
+(GNU_makefile_system)=
 ## 4.4 Using Kokkos' GNU Makefile system
 
 The base of the build system is the file `Makefile.kokkos`; it is designed to be included by application Makefiles. It contains logic to (re)generate the `KokkosCore_config.h` file if necessary, build the Kokkos library, and provide updated compiler and linker flags. 
@@ -532,11 +533,11 @@ Variable  | Description
 
 ## 4.5 Building for CUDA
 
-Any Kokkos application compiled for CUDA embeds CUDA code via template metaprogramming. Thus, the whole application must be built with a CUDA-capable compiler. (At the moment, the only such compilers are NVIDIA's NVCC and Clang 4.0+) More precisely, every compilation unit containing a Kokkos kernel or a function called from a Kokkos kernel has to be compiled with a CUDA-capable compiler. This includes files containing `Kokkos::View` allocations which call an initialization kernel.
+Any Kokkos application compiled for CUDA embeds CUDA code via template metaprogramming. Thus, the whole application must be built with a CUDA-capable compiler. (At the moment, the only such compilers are NVIDIA's NVCC and Clang 4.0+) More precisely, every compilation unit containing a Kokkos kernel or a function called from a Kokkos kernel has to be compiled with a CUDA-capable compiler. This includes files containing [`Kokkos::View`](../API/core/view/view) allocations which call an initialization kernel.
 
 All current versions of the NVCC compiler have shortcomings when used as the main compiler for a project, in particular when part of a complex build system. For example, it does not understand most GCC command-line options, which must be prepended by the `-Xcompiler` flag when calling NVCC. Kokkos comes with a shell script, called `nvcc_wrapper`, that wraps NVCC to address these issues. We intend this as a drop-in replacement for a normal GCC-compatible compiler (e.g., GCC or Intel) in your build system. It analyzes the provided command-line options and prepends them correctly. It also adds the correct flags for compiling generic C++ files containing CUDA code (e.g., `*.cpp, *.cxx,` or `*.CC`). By default `nvcc_wrapper` calls `g++` as the host compiler. You may override this by providing NVCC's `-ccbin` option as a compiler flag. The default can be set by editing the script itself or by setting the environment variable `NVCC_WRAPPER_DEFAULT_COMPILER`.
 
-Many people use a system like Environment Modules (see `http://modules.sourceforge.net/`) to manage their shell environment. When using a module system, it can be useful to provide different versions for different back-end compiler types (e.g., `icpc, pgc++, g++,` and `clang`). To use the `nvcc_wrapper` in conjunction with MPI wrappers, simply overwrite which C++ compiler is called by the MPI wrapper. For example, you can reset OpenMPI's C++ compiler by setting the `OMPI_CXX` environment variable. Make sure that `nvcc_wrapper` calls the host compiler with which the MPI library was compiled.
+Many people use a system like [Environment Modules](http://modules.sourceforge.net) to manage their shell environment. When using a module system, it can be useful to provide different versions for different back-end compiler types (e.g., `icpc, pgc++, g++,` and `clang`). To use the `nvcc_wrapper` in conjunction with MPI wrappers, simply overwrite which C++ compiler is called by the MPI wrapper. For example, you can reset OpenMPI's C++ compiler by setting the `OMPI_CXX` environment variable. Make sure that `nvcc_wrapper` calls the host compiler with which the MPI library was compiled.
 
 ## 4.6 Execution Space Restrictions
 
@@ -547,6 +548,3 @@ Currently, Kokkos organizes its execution spaces into three categories:
  - Device Parallel: Typically an attached GPU, currently: `CUDA`, `OpenMPTarget`, and `ROCm`.
 
 The current Kokkos policy is to allow users, at compile time, to enable *at most one* execution space from each category. This prevents incompatibilities between different spaces in the same category from degrading the user's correctness and performance.
-
-
-**[[Chapter 5: Initialization|Initialization]]**

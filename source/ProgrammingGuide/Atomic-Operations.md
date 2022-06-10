@@ -1,12 +1,11 @@
-
 # 10. Atomic Operations
 
 After reading this chapter, you should understand the following:
 
 * Atomic operations can be used to resolve write conflicts
 * How to use the free functions.
-* How to use the [[Atomic memory trait|Kokkos::MemoryTraits]].
-* Using [[ScatterView|Kokkos::ScatterView]] for scatter add patterns
+* How to use the Atomic memory trait.
+* Using [ScatterView](../API/containers/ScatterView) for scatter add patterns
 
 ## 10.1 Write Conflicts and Their Resolution With Atomic Operations
 
@@ -22,7 +21,7 @@ void create_histogram(View<int*> histogram, int min, int max, View<int*> values)
 }
 ```
 
-When parallelizing this loop with a simple `parallel_for` multiple threads may try to 
+When parallelizing this loop with a simple [`parallel_for()`](../API/core/parallel_for) multiple threads may try to 
 increment the same `index` at the same time. The increment on the other hand is actually
 three operations: 
   1. load `histogram(index)` into a register,
@@ -61,7 +60,7 @@ Atomic operations execute a whole logical operation uninterrupted. For example t
 
 ## 10.2 Atomic Free Functions
 
-Atomic free functions are functions which take a pointer to the to-be-updated value, plus the update. Every typical operation has its own atomic free function. The two example above would like like this:
+Atomic free functions are functions which take a pointer to the to-be-updated value, plus the update. Every typical operation has its own atomic free function. The two example above would be like this:
 
 ```c++
 void create_histogram(View<int*> histogram, int min, int max, View<int*> values) {
@@ -83,7 +82,7 @@ void compute_force(View<int**> neighbours, View<double*> values) {
 }
 ```
 
-There are also atomic operations which return the old or the new value. They follow the `atomic_fetch_[op]` and `atomic_[op]_fetch` naming scheme. For example if one would want to find all the indicies of negative values in an array and store them in a list this would be the algorithm:
+There are also atomic operations which return the old or the new value. They follow the [`atomic_fetch_[op]`](../API/core/atomics/atomic_fetch_op) and [`atomic_[op]_fetch`](../API/core/atomics/atomic_op_fetch.md) naming scheme. For example if one would want to find all the indices of negative values in an array and store them in a list this would be the algorithm:
 ```c++
 void find_indicies(View<int*> indicies, View<double*> values) {
   View<int> count("Count");
@@ -98,21 +97,21 @@ void find_indicies(View<int*> indicies, View<double*> values) {
 
 The full list of atomic operations can be found here:
 
-|Name |Library | Category | Description                  |
-|:---------|:--------|:-----------|:----------------------------|
-|[atomic_exchange](Kokkos%3A%3Aatomic_exchange) | [Core](API-Core) | [Atomic-Operations](Atomic-Operations) | Atomic operation which exchanges a value and returns the old. |
-|[atomic_compare_exchange](Kokkos%3A%3Aatomic_compare_exchange) | [Core](API-Core) | [Atomic-Operations](Atomic-Operations) | Atomic operation which exchanges a value only if the old value matches a comparison value and returns the old value. |
-|[atomic_compare_exchange_strong](Kokkos%3A%3Aatomic_compare_exchange_strong) | [Core](API-Core) | [Atomic-Operations](Atomic-Operations) | Atomic operation which exchanges a value only if the old value matches a comparison value and returns true if the exchange is executed. |
-|[atomic_load](Kokkos%3A%3Aatomic_load) | [Core](API-Core) | [Atomic-Operations](Atomic-Operations) | Atomic operation which loads a value. |
-|[atomic_\[op\]](Kokkos%3A%3Aatomic_op) | [Core](API-Core) | [Atomic-Operations](Atomic-Operations) | Atomic operation which don't return anything. [op] might be `and`, `add`, `assign`, `decrement`, `max`, `min`, `increment`, `or` or `sub` |
-|[atomic_fetch_\[op\]](Kokkos%3A%3Aatomic_fetch_op) | [Core](API-Core) | [Atomic-Operations](Atomic-Operations) | Various atomic operations which return the old value. [op] might be `add`, `and`, `div`, `lshift`, `max`, `min`, `mod`, `mul`, `or`, `rshift`, `sub` or `xor` |
-|[atomic_\[op\]_fetch](Kokkos%3A%3Aatomic_op_fetch) | [Core](API-Core) | [Atomic-Operations](Atomic-Operations) | Various atomic operations which return the updated value. [op] might be `add`, `and`, `div`, `lshift`, `max`, `min`, `mod`, `mul`, `or`, `rshift`, `sub` or `xor` |
-|[atomic_store](Kokkos%3A%3Aatomic_store) | [Core](API-Core) | [Atomic-Operations](Atomic-Operations) | Atomic operation which stores a value. |
+| Name                                                                                  | Library                   | Category | Description                  |
+|:--------------------------------------------------------------------------------------|:--------------------------|:-----------|:----------------------------|
+| [atomic_compare_exchange](../API/core/atomics/atomic_compare_exchange)                | [Core](../API/core-index) | [Atomic-Operations](Atomic-Operations) | Atomic operation which exchanges a value only if the old value matches a comparison value and returns the old value. |
+| [atomic_compare_exchange_strong](../API/core/atomics/atomic_compare_exchange_strong)  | [Core](../API/core-index) | [Atomic-Operations](Atomic-Operations) | Atomic operation which exchanges a value only if the old value matches a comparison value and returns true if the exchange is executed. |
+| [atomic_exchange](../API/core/atomics/atomic_exchange)                                | [Core](../API/core-index) | [Atomic-Operations](Atomic-Operations) | Atomic operation which exchanges a value and returns the old. |
+| [atomic_fetch_\[op\]](../API/core/atomics/atomic_fetch_op)                            | [Core](../API/core-index) | [Atomic-Operations](Atomic-Operations) | Various atomic operations which return the old value. [op] might be `add`, `and`, `div`, `lshift`, `max`, `min`, `mod`, `mul`, `or`, `rshift`, `sub` or `xor` |
+| [atomic_load](../API/core/atomics/atomic_load)                                        | [Core](../API/core-index) | [Atomic-Operations](Atomic-Operations) | Atomic operation which loads a value. |
+| [atomic_\[op\]](../API/core/atomics/atomic_op)                                        | [Core](../API/core-index) | [Atomic-Operations](Atomic-Operations) | Atomic operation which don't return anything. [op] might be `and`, `add`, `assign`, `decrement`, `max`, `min`, `increment`, `or` or `sub` |
+| [atomic_\[op\]_fetch](../API/core/atomics/atomic_op_fetch)                            | [Core](../API/core-index) | [Atomic-Operations](Atomic-Operations) | Various atomic operations which return the updated value. [op] might be `add`, `and`, `div`, `lshift`, `max`, `min`, `mod`, `mul`, `or`, `rshift`, `sub` or `xor` |
+| [atomic_store](../API/core/atomics/atomic_store)                                      | [Core](../API/core-index) | [Atomic-Operations](Atomic-Operations) | Atomic operation which stores a value. |
 
 ## 10.3 Atomic Memory Trait
 
 If all operations on a specific `View` during a Kernel are atomic one can also use the atomic memory trait.
-Generally one creates a *atomic* `View` from a *non-atomic* `View` just for the one kernel, and then uses normal 
+Generally one creates an *atomic* `View` from a *non-atomic* `View` just for the one kernel, and then uses normal 
 operations on it.
 
 ```c++
@@ -130,9 +129,7 @@ void create_histogram(View<int*> histogram, int min, int max, View<int*> values)
 
 On CPUs one often uses low thread counts, in particular if Kokkos is used in conjunction with MPI. 
 In such situations data replication is often a more performance approach, than using atomic operations. 
-In order to still have portable code, one can use the `ScatterView`. It allows the transparent switch at
+In order to still have portable code, one can use the [`ScatterView`](../API/containers/ScatterView). It allows the transparent switch at
 compile time from using atomic operations to using data replication depending on the underlying hardware. 
 
-A full description can be found here: [ScatterView](Kokkos%3A%3AScatterView)
-
-
+A full description can be found here: [ScatterView](../API/containers/ScatterView)

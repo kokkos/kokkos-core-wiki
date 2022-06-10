@@ -1,11 +1,10 @@
-
 # 1. Introduction
 
 The field of High Performance Computing (HPC) is on the verge of entering a new
 era. The need for a fundamental change comes from many angles including the growing
 acceptance that rates of pure computation (often called FLOP/s) are a poor single
 optimization goal for scientific workloads, as well as practical challenges in the form
-of producing energy efficient and cost efficient processors. Since the convergence on
+of producing energy efficient and cost-efficient processors. Since the convergence on
 the Message-Passing Interface (MPI) standard in the mid 1990s, application developers
 have enjoyed a seemingly static view of the underlying machine - that of a distributed
 collection of homogeneous nodes executing in collaboration. However, after almost two
@@ -18,9 +17,9 @@ performance and efficiency goals are to be realized.
 In reviewing potential options for the computing nodes of the future the reader
 might fall upon three broad categories of computing devices:
 
-* the multi-core processor with powerful serial performance, optimized to reduce operation latency, 
+* the multicore processor with powerful serial performance, optimized to reduce operation latency, 
 
-* many-core processors with low to medium powered compute cores that are designed to extend the multi-core concept toward throughput based computation,
+* many-core processors with low to medium powered compute cores that are designed to extend the multicore concept toward throughput based computation,
 
 * and finally, the general-purpose graphics processor unit (GP-GPU, or often, GPU) which is a much more numerous collection of low powered cores designed to tolerate long latencies but provide performance through a much higher degree of parallelism and computational throughput. 
 
@@ -48,5 +47,3 @@ to these questions.
 The Kokkos programming model described in this programming guide seeks to address these concerns by providing an abstraction of both computation and application data allocation and layout. These abstraction layers are designed specifically to isolate software developers from fluctuation and diversity in hardware details yet provide portability and high levels of performance across many architectures.
 
 This guide provides an introduction to the motivations of developing such an abstraction library, a coverage of the programming model and its implementation as an embedded C++ library requiring no additional modifications to the base C++ language. As such it should be seen as an introduction for new users and as a reference for application developers who are already employing Kokkos in their applications. Finally, supplementary tutorial examples are included as part of the Kokkos software release to help users experiment and explore the programming model through a gradual series of steps.
-
-**[[Chapter 2: Machine Model|Machine-Model]]**

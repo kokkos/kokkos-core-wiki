@@ -3,9 +3,9 @@
 Header File: `Kokkos_Core.hpp`
 
 Usage:
-  ```c++
-  was_exchanged = atomic_compare_exchange_strong(ptr_to_value,comparison_value, new_value);
-  ```
+```c++
+was_exchanged = atomic_compare_exchange_strong(ptr_to_value,comparison_value, new_value);
+```
 
 Atomically sets the value at the address given by `ptr_to_value` to `new_value` if the current value at `ptr_to_value`
 is equal to `comparison_value`, and returns true if the exchange has happened.
@@ -13,8 +13,8 @@ is equal to `comparison_value`, and returns true if the exchange has happened.
 ## Synopsis
 
 ```c++
-  template<class T>
-  bool atomic_compare_exchange_strong(T* const ptr_to_value, const T comparison_value, const T new_value);
+template<class T>
+bool atomic_compare_exchange_strong(T* const ptr_to_value, const T comparison_value, const T new_value);
 ```
 
 ## Description

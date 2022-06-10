@@ -1,6 +1,6 @@
 # Requirements, Issues and Feedback
 
-Kokkos manages its customer interactions primarily via [Kokkos Issues](https://github.com/kokkos/kokkos/issues) and the [KokkosTeam Slack](kokkosteam.slack.com) channel. The Slack channel is used for informal questions, requests and feedback. 
+Kokkos manages its customer interactions primarily via [Kokkos Issues](https://github.com/kokkos/kokkos/issues) and the [KokkosTeam Slack](https://kokkosteam.slack.com) channel. The Slack channel is used for informal questions, requests and feedback. 
 If the slack communication requires tracking, (especially if it requires code changes to Kokkos) 
 a github.com issue will be opened. 
 Issues must be opened for bug reports, enhancement requests and feature requests.

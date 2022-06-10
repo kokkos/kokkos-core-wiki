@@ -1,4 +1,4 @@
-# `Kokkos::fence`
+# `fence()`
 
 Header File: `Kokkos_Core.hpp`
 
@@ -9,8 +9,8 @@ Kokkos::fence();
 ```
 
 Blocks on completion of all outstanding asynchronous Kokkos operations.
-That includes parallel dispatch (e.g. [parallel_for](Kokkos%3A%3Aparallel_for), [parallel_reduce](Kokkos%3A%3Aparallel_reduce) 
-and [parallel_scan](Kokkos%3A%3Aparallel_scan)) as well as asynchronous data operations such as three-argument [deep_copy](Kokkos%3A%3Adeep_copy).
+That includes parallel dispatch (e.g. [parallel_for()](parallel_for), [parallel_reduce()](parallel_reduce) 
+and [parallel_scan()](parallel_scan)) as well as asynchronous data operations such as three-argument [deep_copy](Kokkos%3A%3Adeep_copy).
 
 Note: there is a execution space instance specific `fence` too: [ExecutionSpaceConcept](Kokkos%3A%3AExecutionSpaceConcept)
 

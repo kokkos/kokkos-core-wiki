@@ -1,48 +1,46 @@
 # `LAnd`
 
-Specific implementation of [ReducerConcept](Kokkos%3A%3AReducerConcept) performing logical `AND` operation
+Specific implementation of [ReducerConcept](ReducerConcept) performing logical `AND` operation
 
 Header File: `Kokkos_Core.hpp`
 
 Usage: 
-  ```c++
-  T result;
-  parallel_reduce(N,Functor,LAnd<T,S>(result));
-  ```
-
-. 
+```c++
+T result;
+parallel_reduce(N,Functor,LAnd<T,S>(result));
+```
 
 ## Synopsis 
-  ```c++
-  template<class Scalar, class Space>
-  class LAnd{
-    public:
-      typedef LAnd reducer;
-      typedef typename std::remove_cv<Scalar>::type value_type;
-      typedef Kokkos::View<value_type, Space> result_view_type;
-      
-      KOKKOS_INLINE_FUNCTION
-      void join(value_type& dest, const value_type& src)  const
+```c++
+template<class Scalar, class Space>
+class LAnd{
+ public:
+   typedef LAnd reducer;
+   typedef typename std::remove_cv<Scalar>::type value_type;
+   typedef Kokkos::View<value_type, Space> result_view_type;
+   
+   KOKKOS_INLINE_FUNCTION
+   void join(value_type& dest, const value_type& src)  const
 
-      KOKKOS_INLINE_FUNCTION
-      void join(volatile value_type& dest, const volatile value_type& src) const;
+   KOKKOS_INLINE_FUNCTION
+   void join(volatile value_type& dest, const volatile value_type& src) const;
 
-      KOKKOS_INLINE_FUNCTION
-      void init( value_type& val)  const;
+   KOKKOS_INLINE_FUNCTION
+   void init( value_type& val)  const;
 
-      KOKKOS_INLINE_FUNCTION
-      value_type& reference() const;
+   KOKKOS_INLINE_FUNCTION
+   value_type& reference() const;
 
-      KOKKOS_INLINE_FUNCTION
-      result_view_type view() const;
+   KOKKOS_INLINE_FUNCTION
+   result_view_type view() const;
 
-      KOKKOS_INLINE_FUNCTION
-      LAnd(value_type& value_);
+   KOKKOS_INLINE_FUNCTION
+   LAnd(value_type& value_);
 
-      KOKKOS_INLINE_FUNCTION
-      LAnd(const result_view_type& value_);
-  };
-  ```
+   KOKKOS_INLINE_FUNCTION
+   LAnd(const result_view_type& value_);
+};
+```
 
 ## Public Class Members
 
@@ -60,14 +58,14 @@ Usage:
    Constructs a reducer which references a local variable as its result location.  
  
  * ```c++
-   LAnd(const result_view_type result)`
+   LAnd(const result_view_type result)
    ```
    Constructs a reducer which references a specific view as its result location.
 
 ### Functions
 
  * ```c++
-   void join(value_type& dest, const value_type& src)  const;`
+   void join(value_type& dest, const value_type& src)  const;
    ```
    Store logical `and` of `src` and `dest` into `dest`:  `dest = src && dest;`. 
 
@@ -95,4 +93,4 @@ Usage:
    * `LAnd<T,S>::value_type` is non-const `T`
    * `LAnd<T,S>::result_view_type` is `Kokkos::View<T,S,Kokkos::MemoryTraits<Kokkos::Unmanaged>>`.  Note that the S (memory space) must be the same as the space where the result resides.
    * Requires: `Scalar` has `operator =` and `operator &&` defined. `Kokkos::reduction_identity<Scalar>::land()` is a valid expression. 
-   * In order to use LAnd with a custom type, a template specialization of Kokkos::reduction_identity<CustomType> must be defined.  See [Using Built-in Reducers with Custom Scalar Types](Custom-Reductions%3A-Built-In-Reducers-with-Custom-Scalar-Types) for details
+   * In order to use LAnd with a custom type, a template specialization of `Kokkos::reduction_identity<CustomType>` must be defined.  See [Built-In Reducers with Custom Scalar Types](../../../ProgrammingGuide/Custom-Reductions:-Built-In-Reducers-with-Custom-Scalar-Types) for details

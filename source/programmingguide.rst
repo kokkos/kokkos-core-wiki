@@ -1,12 +1,5 @@
-
 Programming Guide
 #################
-
-
-The Kokkos Programming Guide consists of three separate documents describing
-
-Core
-====
 
 .. toctree::
    :maxdepth: 1
@@ -24,16 +17,3 @@ Core
    ./ProgrammingGuide/Subviews
    ./ProgrammingGuide/Interoperability
    ./ProgrammingGuide/Kokkos-and-Virtual-Functions
-
-
-Containers
-==========
-
-bla  bla
-
-
-Algorithms
-==========
-
-bla bla
-
