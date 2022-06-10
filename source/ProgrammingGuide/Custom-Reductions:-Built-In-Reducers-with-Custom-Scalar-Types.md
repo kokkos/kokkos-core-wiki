@@ -1,4 +1,4 @@
-## 9.2 Built-In Reducers with Custom Scalar Types
+# 9.2 Built-In Reducers with Custom Scalar Types
 
 In order to use a Custom Scalar Type with Built-in reductions, the following requirements must be fulfilled.
 
@@ -7,7 +7,7 @@ In order to use a Custom Scalar Type with Built-in reductions, the following req
    * The class / struct must either use the default copy constructor or have a specific copy constructor 
      implemented. 
 
-### Example
+## Example
 
 This example performs a custom reduction on an array using the built-in [`Sum`](../API/core/builtinreducers/Sum) reducer. 
 

@@ -1,4 +1,4 @@
-## 9.3 Custom Reducers
+# 9.3 Custom Reducers
 
 Custom arbitrary reductions are implemented using a reduction class and a "reduced" class.  The "reduced" class is much like the custom scalar type used with [Built-In Reducers with Custom Scalar Types](Custom-Reductions:-Built-In-Reducers-with-Custom-Scalar-Types) and the reduction class implements the [ReducerConcept](../API/core/builtinreducers/ReducerConcept)
 
@@ -14,7 +14,7 @@ The following requirements must be fulfilled for the reduction class
    * The reducer concept methods must be implemented
    * The exposed result_view_type must be defined in the memory space where the object is used 
 
-### Example
+## Example
 
 This example performs a custom reduction on an array using a custom class and reducer. 
 
