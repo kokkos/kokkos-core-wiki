@@ -8,7 +8,7 @@ which is the first argument to the `parallel_*` operation. Kokkos also exposes a
 Node architectures on modern high-performance computers are characterized by ever more _hierarchical parallelism_.
 A level in the hierarchy is determined by the hardware resources which are shared between compute units at that level.
 Higher levels in the hierarchy also have access to all resources in its branch at lower levels of the hierarchy.
-This concept is orthogonal to the concept of heterogeneity. For example, a node in a typical CPU-based cluster consists of a number of multicore CPUs.  Each core supports one or more hyper-threads, and each hyper thread can execute vector instructions. This means there are 4 levels in the hierarchy of parallelism:
+This concept is orthogonal to the concept of heterogeneity. For example, a node in a typical CPU-based cluster consists of a number of multicore CPUs.  Each core supports one or more hyper-threads, and each hyper-thread can execute vector instructions. This means there are 4 levels in the hierarchy of parallelism:
 
 1. CPU sockets share access to the same memory and network resources,
 1. cores within a socket typically have a shared last level cache (LLC),

@@ -3,102 +3,102 @@
 Header File: `Kokkos_ScatterView.hpp`
 
 Usage: 
-  ```c++
-  KOKKOS_INLINE_FUNCTION int foo(int i) { return i; }
-  KOKKOS_INLINE_FUNCTION double bar(int i) { return i*i; }
-  
-  Kokkos::View<double*> results("results", 1);
-  Kokkos::Experimental::ScatterView<double*> scatter(results);
-  Kokkos::parallel_for(1, KOKKOS_LAMBDA(int input_i) {
-    auto access = scatter.access();
-    auto result_i = foo(input_i);
-    auto contribution = bar(input_i);
-    access(result_i) += contribution;
-  });
-  Kokkos::Experimental::contribute(results, scatter);
-  ```
+```c++
+KOKKOS_INLINE_FUNCTION int foo(int i) { return i; }
+KOKKOS_INLINE_FUNCTION double bar(int i) { return i*i; }
+
+Kokkos::View<double*> results("results", 1);
+Kokkos::Experimental::ScatterView<double*> scatter(results);
+Kokkos::parallel_for(1, KOKKOS_LAMBDA(int input_i) {
+ auto access = scatter.access();
+ auto result_i = foo(input_i);
+ auto contribution = bar(input_i);
+ access(result_i) += contribution;
+});
+Kokkos::Experimental::contribute(results, scatter);
+```
 
 
 ## Synopsis 
-  ```c++
+```c++
 
-  template <typename DataType
-           ,int Op
-           ,typename ExecSpace
-           ,typename Layout
-           ,int contribution
-           >
-  class ScatterView<DataType
-                     ,Layout
-                     ,ExecSpace
-                     ,Op
-                     ,{ScatterNonDuplicated,ScatterDuplicated}
-                     ,contribution>
-  {
-  public:
-    typedef Kokkos::View<DataType, Layout, ExecSpace> original_view_type;
-    typedef typename original_view_type::value_type original_value_type;
-    typedef typename original_view_type::reference_type original_reference_type;
-    friend class ScatterAccess<DataType, Op, ExecSpace, Layout, {ScatterNonDuplicated,ScatterDuplicated}, contribution, ScatterNonAtomic>;
-    friend class ScatterAccess<DataType, Op, ExecSpace, Layout, {ScatterNonDuplicated,ScatterDuplicated}, contribution, ScatterAtomic>;
-    typedef typename Kokkos::Impl::Experimental::DuplicatedDataType<DataType, {Kokkos::LayoutRight,Kokkos::LayoutLeft}> data_type_info; // ScatterDuplicated only
-    typedef typename data_type_info::value_type internal_data_type; // ScatterDuplicated only
-    typedef Kokkos::View<internal_data_type, {Kokkos::LayoutRight,Kokkos::LayoutLeft}, ExecSpace> internal_view_type; // ScatterDuplicated only
-    
-    ScatterView();
-  
-    template <typename RT, typename ... RP>
-    ScatterView(View<RT, RP...> const& );
-  
-    template <typename ... Dims>
-    ScatterView(std::string const& name, Dims ... dims);
+template <typename DataType
+        ,int Op
+        ,typename ExecSpace
+        ,typename Layout
+        ,int contribution
+        >
+class ScatterView<DataType
+                  ,Layout
+                  ,ExecSpace
+                  ,Op
+                  ,{ScatterNonDuplicated,ScatterDuplicated}
+                  ,contribution>
+{
+public:
+ typedef Kokkos::View<DataType, Layout, ExecSpace> original_view_type;
+ typedef typename original_view_type::value_type original_value_type;
+ typedef typename original_view_type::reference_type original_reference_type;
+ friend class ScatterAccess<DataType, Op, ExecSpace, Layout, {ScatterNonDuplicated,ScatterDuplicated}, contribution, ScatterNonAtomic>;
+ friend class ScatterAccess<DataType, Op, ExecSpace, Layout, {ScatterNonDuplicated,ScatterDuplicated}, contribution, ScatterAtomic>;
+ typedef typename Kokkos::Impl::Experimental::DuplicatedDataType<DataType, {Kokkos::LayoutRight,Kokkos::LayoutLeft}> data_type_info; // ScatterDuplicated only
+ typedef typename data_type_info::value_type internal_data_type; // ScatterDuplicated only
+ typedef Kokkos::View<internal_data_type, {Kokkos::LayoutRight,Kokkos::LayoutLeft}, ExecSpace> internal_view_type; // ScatterDuplicated only
+ 
+ ScatterView();
 
-    template <typename... P, typename... Dims>
-    ScatterView(::Kokkos::Impl::ViewCtorProp<P...> const& arg_prop, Dims... dims);
-  
-    template <int override_contrib = contribution>
-    KOKKOS_FORCEINLINE_FUNCTION
-    ScatterAccess<DataType, Op, ExecSpace, Layout, ScatterNonDuplicated, contribution, override_contrib>
-    access() const;
-  
-    original_view_type subview() const;
-  
-    template <typename DT, typename ... RP>
-    void contribute_into(View<DT, RP...> const& dest) const;
-  
-    void reset();
-    
-    template <typename DT, typename ... RP>
-    void reset_except(View<DT, RP...> const& view);
-  
-    void resize(const size_t n0 = 0,
-             const size_t n1 = 0,
-             const size_t n2 = 0,
-             const size_t n3 = 0,
-             const size_t n4 = 0,
-             const size_t n5 = 0,
-             const size_t n6 = 0,
-             const size_t n7 = 0);
-  
-    void realloc(const size_t n0 = 0,
-             const size_t n1 = 0,
-             const size_t n2 = 0,
-             const size_t n3 = 0,
-             const size_t n4 = 0,
-             const size_t n5 = 0,
-             const size_t n6 = 0,
-             const size_t n7 = 0);
-  
-  protected:
-    template <typename ... Args>
-    KOKKOS_FORCEINLINE_FUNCTION
-    original_reference_type at(Args ... args) const;
-    
-  private:
-    typedef original_view_type internal_view_type;
-    internal_view_type internal_view;
-  };
-  ```
+ template <typename RT, typename ... RP>
+ ScatterView(View<RT, RP...> const& );
+
+ template <typename ... Dims>
+ ScatterView(std::string const& name, Dims ... dims);
+
+ template <typename... P, typename... Dims>
+ ScatterView(::Kokkos::Impl::ViewCtorProp<P...> const& arg_prop, Dims... dims);
+
+ template <int override_contrib = contribution>
+ KOKKOS_FORCEINLINE_FUNCTION
+ ScatterAccess<DataType, Op, ExecSpace, Layout, ScatterNonDuplicated, contribution, override_contrib>
+ access() const;
+
+ original_view_type subview() const;
+
+ template <typename DT, typename ... RP>
+ void contribute_into(View<DT, RP...> const& dest) const;
+
+ void reset();
+ 
+ template <typename DT, typename ... RP>
+ void reset_except(View<DT, RP...> const& view);
+
+ void resize(const size_t n0 = 0,
+          const size_t n1 = 0,
+          const size_t n2 = 0,
+          const size_t n3 = 0,
+          const size_t n4 = 0,
+          const size_t n5 = 0,
+          const size_t n6 = 0,
+          const size_t n7 = 0);
+
+ void realloc(const size_t n0 = 0,
+          const size_t n1 = 0,
+          const size_t n2 = 0,
+          const size_t n3 = 0,
+          const size_t n4 = 0,
+          const size_t n5 = 0,
+          const size_t n6 = 0,
+          const size_t n7 = 0);
+
+protected:
+ template <typename ... Args>
+ KOKKOS_FORCEINLINE_FUNCTION
+ original_reference_type at(Args ... args) const;
+ 
+private:
+ typedef original_view_type internal_view_type;
+ internal_view_type internal_view;
+};
+```
 
 ## Public Class Members
 
