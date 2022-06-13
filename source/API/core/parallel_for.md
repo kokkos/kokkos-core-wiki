@@ -1,12 +1,11 @@
-
 # `parallel_for()`
 
 Header File: `Kokkos_Core.hpp`
 
 Usage: 
 ```c++
-  Kokkos::parallel_for(name, policy, functor);
-  Kokkos::parallel_for(policy, functor);
+Kokkos::parallel_for(name, policy, functor);
+Kokkos::parallel_for(policy, functor);
 ```
 
 Dispatches parallel work defined by `functor` according to the *ExecutionPolicy* `policy`. The optional label `name` is
