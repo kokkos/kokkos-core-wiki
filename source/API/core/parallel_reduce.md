@@ -1,4 +1,3 @@
-
 # `parallel_reduce()`
 
 Header File: `Kokkos_Core.hpp`
@@ -225,5 +224,3 @@ int main(int argc, char* argv[]) {
    Kokkos::finalize();
 }
 ```
-
-
