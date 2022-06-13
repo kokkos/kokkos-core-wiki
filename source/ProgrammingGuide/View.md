@@ -21,6 +21,7 @@ Kokkos aims to relieve some of this burden by optimizing array management and ac
 
 ## 6.2 Creating and using a View
 
+(Constructing_a_view)=
 ### 6.2.1 Constructing a View
 
 A View is an array of zero or more dimensions. Programmers set both the type of entries and the number of dimensions at compile time as part of the type of the View. For example, the following specifies and allocates a View with four dimensions for entries that have type `int`:
@@ -63,6 +64,7 @@ a_ptr[0] = Kokkos::View<int*>("A0",1000); // This is illegal
 new(&a_ptr[1]) Kokkos::View<int*>("A1",10000); // This is legal 
 ```
 
+(view_types_of_data)=
 ### 6.2.2 What types of data may a View contain?
 
 C++ lets users construct data types that may "look like" numbers in terms of syntax but do arbitrarily complicated things inside. Some of those things may not be thread safe, like unprotected updates to global state. Others may perform badly in parallel, like fine-grained dynamic memory allocation. Therefore, it is strongly advised to use only simple data types inside Kokkos Views. Users may always construct a View whose entries are
@@ -78,7 +80,7 @@ While it is in principle possible to have Kokkos Views of arbitrary objects, Kok
 * `T`'s assignment operators as well as its default constructor and deconstructor must be marked with the `KOKKOS_INLINE_FUNCTION` or `KOKKOS_FUNCTION` macro.
 
 All restrictions but the first come from the requirement that `View<T*>` work with every execution and memory space,
-including those that use CUDA. The constructor of `View<T*>` does not just allocate memory; it also initializes the allocation by iterating over it using a `Kokkos::parallel_for`, and invoking `T`'s default constructor for each entry. If the View's execution space is `Cuda`, then that means `T`'s default constructor needs to be correct to call on device. Keep in mind that the semantics of the resulting `View` are a combination of the `Views 'view'` semantics and the behavior of the element type.
+including those that use CUDA. The constructor of `View<T*>` does not just allocate memory; it also initializes the allocation by iterating over it using a [`Kokkos::parallel_for`](../API/core/parallel_for), and invoking `T`'s default constructor for each entry. If the View's execution space is `Cuda`, then that means `T`'s default constructor needs to be correct to call on device. Keep in mind that the semantics of the resulting `View` are a combination of the `Views 'view'` semantics and the behavior of the element type.
 
 The requirement that the destructor of `T` not deallocate memory technically disallows `T` being a managed View, or a structure which directly or indirectly contains a managed View. In extreme cases we do allow users to have managed Views in their type `T`, so long as a non-parallel loop is used to safely deallocate the Views contained in each `T` prior to the deallocation of the `View<T>` itself. This can be done by assigning to each contained View a default-constructed View of the same type. Having managed Views in `T` is not recommended.
 
@@ -92,7 +94,7 @@ A "View of Views" is a special case of View, where the type of each entry is its
 
 #### 6.2.3.1 You probably don't want this
 
-If you really just want a multidimensional array, please don't do this.  Instead, see Section 6.2.1 above for the correct syntax.
+If you really just want a multidimensional array, please don't do this.  Instead, see [Section 6.2.1](Constructing_a_view) above for the correct syntax.
 
 If you want to represent an array of arrays, and the inner arrays have fixed length or a fixed upper bound on length, consider instead using a ``compressed sparse row'' data structure. Kokkos' Containers subpackage has a `StaticCrsGraph` class that you may use for this purpose.
 
@@ -104,7 +106,7 @@ You might also want a View of some class that itself contains Views. If you want
 
 #### 6.2.3.2 What's the problem with a View of Views?
 
-A View of Views would have an "outer View," with zero or more "inner Views."  Section 6.2.2 above explains how the outer View's constructor would work.  The outer View's constructor does not just allocate memory; it also initializes the allocation by iterating over it using a `Kokkos::parallel_for`, and invoking the entry type's default constructor for each entry.  If the View's execution space is `Cuda`, then that means the entry type's default constructor needs to be correct to call on device. That is a problem, because the entry type in this case is itself View. View's constructor wants to allocate memory, and thus does not work on device. Kokkos parallel regions generally forbid memory allocation.
+A View of Views would have an "outer View," with zero or more "inner Views." [Section 6.2.2](view_types_of_data) above explains how the outer View's constructor would work.  The outer View's constructor does not just allocate memory; it also initializes the allocation by iterating over it using a [`Kokkos::parallel_for`](../API/core/parallel_for), and invoking the entry type's default constructor for each entry.  If the View's execution space is `Cuda`, then that means the entry type's default constructor needs to be correct to call on device. That is a problem, because the entry type in this case is itself View. View's constructor wants to allocate memory, and thus does not work on device. Kokkos parallel regions generally forbid memory allocation.
 
 You could create the outer View without initializing, like this:
 ```cpp
@@ -183,11 +185,12 @@ for (int k = 0; k < 5; ++k) {
 outer = outer_view_type ();
 ```
 
-Another approach is to create the inner Views as nonowning, from a single pool of memory.  This makes it unnecessary to invoke their destructors.
+Another approach is to create the inner Views as nonowning, from a single pool of memory. This makes it unnecessary to invoke their destructors.
 
 ### 6.2.4 Const Views
 
-A view can have const data semantics (i.e. its entries are read-only) by specifying a `const` data type.  It is a compile-time error to assign to an entry of a "const View". Assignment semantics are equivalent to a pointer to const data. A const View means the _entries_ are const; you may still assign to a const View. `View<const double*>` corresponds exactly to `const double*`, and `const View<double*>` to `double* const`. Therefore, it does not make sense to allocate a const View since you could not obtain a non-const view of the same data and you can not assign to it. You can however assign a non-const view to a const view. Here is an example:
+A view can have const data semantics (i.e. its entries are read-only) by specifying a `const` data type. It is a compile-time error to assign to an entry of a "const View". Assignment semantics are equivalent to a pointer to const data. A const View means the _entries_ are const; you may still assign to a const View. `View<const double*>` corresponds exactly to `const double*`, and `const View<double*>` to `double* const`. Therefore, it does not make sense to allocate a const View since you could not obtain a non-const view of the same data and you can not assign to it. You can however assign a non-const view to a const view. Here is an example:
+
 ```c++
 const size_t N0 = ...;
 Kokkos::View<double*> a_nonconst ("a_nonconst", N0);
@@ -248,7 +251,7 @@ Kokkos::View<int*> b("b", 10);
 ```
 The lifetime of an allocation ends when there are no more Views which reference that allocation (see reference counting above).
 
-Kokkos requires that the lifetime of all allocations ends before the call to `Kokkos::finalize`!
+Kokkos requires that the lifetime of all allocations ends before the call to [`Kokkos::finalize`](../API/core/initialize_finalize/finalize)!
 
 For example, the following is incorrect usage of Kokkos:
 ```cpp
@@ -307,7 +310,7 @@ const size_t n0 = a.extent_0 ();
 const size_t n2 = a.extent_2 ();
 ```
 
-Note the return type of `extent_N()` is the `size_type` of the views memory space. This causes some issues if warning-free compilation should be achieved since it will typically be necessary to cast the return value. In particular, in cases where the `size_type` is more conservative than required, it can be beneficial to cast the value to `int` since signed 32 bit integers typically give the best performance when used as index types. In index heavy codes, this performance difference can be significant compared to using `size_t` since the vector length on many architectures is twice as long for 32 bit values as for 64 bit values and signed integers have less stringent overflow testing requirements than unsigned integers.
+Note the return type of `extent_N()` is the `size_type` of the views memory space. This causes some issues if warning-free compilation should be achieved since it will typically be necessary to cast the return value. In particular, in cases where the `size_type` is more conservative than required, it can be beneficial to cast the value to `int` since signed 32-bit integers typically give the best performance when used as index types. In index heavy codes, this performance difference can be significant compared to using `size_t` since the vector length on many architectures is twice as long for 32 bit values as for 64 bit values and signed integers have less stringent overflow testing requirements than unsigned integers.
 
 Users of the BLAS and LAPACK libraries may be familiar with the ideas of layout and stride. These libraries only accept matrices in column-major format. The stride between consecutive entries in the same column is 1, and the stride between consecutive entries in the same row is `LDA` ("leading dimension of the matrix A"). The number of rows may be less than `LDA`, but may not be greater.
 
@@ -319,7 +322,7 @@ Other layouts are possible.  For example, Kokkos has a "tiled" layout, where a t
 
 Kokkos selects a View's default layout for optimal parallel access over the leftmost dimension based on its execution space. For example, `View<int**, Cuda>` has `LayoutLeft`, so that consecutive threads in the same warp access consecutive entries in memory. This _coalesced access_ gives the code better memory bandwidth.
 
-In contrast, `View<int**, OpenMP>` has `LayoutRight`, so that a single thread accesses contiguous entries of the array. This avoids wasting cache lines and helps prevent false sharing of a cache line between threads. In Section 6.4 more details will be discussed.
+In contrast, `View<int**, OpenMP>` has `LayoutRight`, so that a single thread accesses contiguous entries of the array. This avoids wasting cache lines and helps prevent false sharing of a cache line between threads. In [Section 6.4](Managing_Data_Placement) more details will be discussed.
 
 ### 6.3.4 Explicitly specifying layout
 
@@ -350,6 +353,7 @@ void callBlas (const ViewType& A) {
 }
 ```
 
+(Managing_Data_Placement)=
 ## 6.4 Managing Data Placement
 
 ### 6.4.1 Memory spaces
@@ -449,7 +453,7 @@ The first one will not work because the default layouts of `CudaSpace` and `Host
 
 The reasoning for allowing only direct bitwise copies is that a deep copy between different memory spaces would otherwise require a temporary copy of the data to which a bitwise copy is performed followed by a parallel kernel to transfer the data element by element.
 
-Kokkos provides the following way to work around those limitations. First views have a `HostMirror` typedef which is a view type with compatible layout inside the `HostSpace`. Additionally there is a `create_mirror` and `create_mirror_view` function which allocate views of the `HostMirror` type of a view. The difference between the two is that `create_mirror` will always allocate a new view, while `create_mirror_view` will only create a new view if the original one is not in `HostSpace`.
+Kokkos provides the following way to work around those limitations. First views have a `HostMirror` typedef which is a view type with compatible layout inside the `HostSpace`. Additionally, there is a `create_mirror` and `create_mirror_view` function which allocate views of the `HostMirror` type of view. The difference between the two is that `create_mirror` will always allocate a new view, while `create_mirror_view` will only create a new view if the original one is not in `HostSpace`.
 
 ```c++
 Kokkos::View<int*[3], MemorySpace> a ("a", 10);
@@ -513,7 +517,7 @@ Kokkos::View<int*, Kokkos::LayoutLeft, MemorySpace, Kokkos::MemoryTraits<SomeTra
 
 The `Atomic` access trait lets you create a View of data such that every read or write to any entry uses an atomic update. Kokkos supports atomics for all data types independent of size. Restrictions are that you are
 1. not allowed to alias data for which atomic operations are performed, and 
-1. the results of non atomic accesses (including read) to data which is at the same time atomically accessed is not defined.
+1. the results of non-atomic accesses (including read) to data which is at the same time atomically accessed is not defined.
 
 Performance characteristics of atomic operations depend on the data type. Some types (in particular integer types) are natively supported and might even provide asynchronous atomic operations. Others (such as 32 bit and 64 bit atomics for non-integer types) are often implemented using CAS loops of integers. Everything else is implemented with a locking approach where an atomic operation acquires a lock based on a hash of the pointer value of the data element.
 
@@ -537,7 +541,7 @@ Kokkos::View<int*> a_nonconst ("a", N0); // allocate nonconst View
 Kokkos::View<const int*, Kokkos::MemoryTraits<Kokkos::RandomAccess>> a_ra = a_nonconst;
 ```
 
-If the default execution space is `Cuda`, access to a `RandomAccess` View may use CUDA texture fetches. Texture fetches are not cache-coherent with respect to writes so you must use read-only access. The texture cache is optimized for noncontiguous access since it has a shorter cache line than the regular cache.
+If the default execution space is `Cuda`, access to a `RandomAccess` View may use CUDA texture fetches. Texture fetches are not cache-coherent with respect to writes, so you must use read-only access. The texture cache is optimized for noncontiguous access since it has a shorter cache line than the regular cache.
 
 While `RandomAccess` is valid for other execution spaces, currently no specific optimizations are performed. But in the future a view allocated with the `RandomAccess` attribute might for example, use a larger page size, and thus reduce page faults in the memory system.
 
@@ -570,7 +574,7 @@ void spmatvec (const Kokkos::View<double*>& y,
 
 ### 6.5.4 Unmanaged Views
 
-It's always better to let Kokkos control memory allocation but sometimes you don't have a choice. You might have to work with an application or an interface that returns a raw pointer, for example. Kokkos lets you wrap raw pointers in an _unmanaged View_. "Unmanaged" means that Kokkos does _not_ do reference counting or automatic deallocation for those Views. The following example shows how to create an unmanaged View of host memory. You may do this for CUDA device memory too, or indeed for memory allocated in any memory space, by specifying the View's execution or memory space accordingly.
+It's always better to let Kokkos control memory allocation, but sometimes you don't have a choice. You might have to work with an application or an interface that returns a raw pointer, for example. Kokkos lets you wrap raw pointers in an _unmanaged View_. "Unmanaged" means that Kokkos does _not_ do reference counting or automatic deallocation for those Views. The following example shows how to create an unmanaged View of host memory. You may do this for CUDA device memory too, or indeed for memory allocated in any memory space, by specifying the View's execution or memory space accordingly.
 
 ```c++
 // Sometimes other code gives you a raw pointer, ...
@@ -616,5 +620,3 @@ Examples illustrating the rules are:
 3.  Memory Spaces must match
     *  `Kokkos::View<int*> -> Kokkos::View<int*,HostSpace>`  / ok if default memory space is HostSpace
 4.  Memory Traits
-
-**[[Chapter 7: Parallel Dispatch|ParallelDispatch]]**
