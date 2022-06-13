@@ -3,41 +3,41 @@
 Header File: `Kokkos_Core.hpp`
 
 Usage:
-  ```c++
-  atomic_[op](ptr_to_value,update_value);
-  ```
+```c++
+atomic_[op](ptr_to_value,update_value);
+```
 
 Atomically updates the `value` at the address given by `ptr_to_value` with `update_value` according to the relevant operation.
 
 ## Synopsis
 
 ```c++
-  template<class T>
-  void atomic_add(T* const ptr_to_value, const T value);
+template<class T>
+void atomic_add(T* const ptr_to_value, const T value);
 
-  template<class T>
-  void atomic_and(T* const ptr_to_value, const T value);
+template<class T>
+void atomic_and(T* const ptr_to_value, const T value);
 
-  template<class T>
-  void atomic_assign(T* const ptr_to_value, const T value);
+template<class T>
+void atomic_assign(T* const ptr_to_value, const T value);
 
-  template<class T>
-  void atomic_decrement(T* const ptr_to_value);
+template<class T>
+void atomic_decrement(T* const ptr_to_value);
 
-  template<class T>
-  void atomic_incrememt(T* const ptr_to_value);
+template<class T>
+void atomic_incrememt(T* const ptr_to_value);
 
-  template <class T>
-  void atomic_max(T* const ptr_to_value, const T value);
+template <class T>
+void atomic_max(T* const ptr_to_value, const T value);
 
-  template <class T>
-  void atomic_min(T* const ptr_to_value, const T value);
+template <class T>
+void atomic_min(T* const ptr_to_value, const T value);
 
-  template<class T>
-  void atomic_or(T* const ptr_to_value, const T value);
+template<class T>
+void atomic_or(T* const ptr_to_value, const T value);
 
-  template<class T>
-  void atomic_sub(T* const ptr_to_value, const T value);
+template<class T>
+void atomic_sub(T* const ptr_to_value, const T value);
 ```
 
 ## Description
@@ -119,5 +119,4 @@ Atomically updates the `value` at the address given by `ptr_to_value` with `upda
 
   Atomically executes `*ptr_to_value -= value`. 
   * `ptr_to_value`: address of the to be updated value.
-  * `value`: value to be substracted.. 
-
+  * `value`: value to be subtracted.
