@@ -1,19 +1,20 @@
-
 Built-in Reducers
 #################
 
 .. toctree::
    :maxdepth: 1
 
+   ./builtinreducers/ReducerConcept
    ./builtinreducers/BAnd
-   ./builtinreducers/Sum
-   ./builtinreducers/Prod
-   ./builtinreducers/MinMaxLoc
-   ./builtinreducers/MinMax
-   ./builtinreducers/MinLoc
-   ./builtinreducers/Min
-   ./builtinreducers/MaxLoc
-   ./builtinreducers/Max
-   ./builtinreducers/LOr
-   ./builtinreducers/LAnd
    ./builtinreducers/BOr
+   ./builtinreducers/LAnd
+   ./builtinreducers/LOr
+   ./builtinreducers/Max
+   ./builtinreducers/MaxLoc
+   ./builtinreducers/Min
+   ./builtinreducers/MinLoc
+   ./builtinreducers/MinMax
+   ./builtinreducers/MinMaxLoc
+   ./builtinreducers/Prod
+   ./builtinreducers/Sum
+   ./builtinreducers/ReductionScalarTypes

@@ -1,49 +1,47 @@
 # `MinMaxLoc`
 
-Specific implementation of [ReducerConcept](Kokkos%3A%3AReducerConcept) storing both the minimum and maximum values with corresponding indicies
+Specific implementation of [ReducerConcept](ReducerConcept) storing both the minimum and maximum values with corresponding indicies
 
 Header File: `Kokkos_Core.hpp`
 
 Usage: 
-  ```c++
-  MinMaxLoc<T,I,S>::value_type result;
-  parallel_reduce(N,Functor,MinMaxLoc<T,I,S>(result));
-  ```
-
-. 
+```c++
+MinMaxLoc<T,I,S>::value_type result;
+parallel_reduce(N,Functor,MinMaxLoc<T,I,S>(result));
+```
 
 ## Synopsis 
-  ```c++
-  template<class Scalar, class Space>
-  class MinMaxLoc{
-    public:
-      typedef MinMaxLoc reducer;
-      typedef MinMaxLocScalar<typename std::remove_cv<Scalar>::type,
-                              typename std::remove_cv<Index>::type> value_type;
-      typedef Kokkos::View<value_type, Space> result_view_type;
-      
-      KOKKOS_INLINE_FUNCTION
-      void join(value_type& dest, const value_type& src)  const
+```c++
+template<class Scalar, class Space>
+class MinMaxLoc{
+ public:
+   typedef MinMaxLoc reducer;
+   typedef MinMaxLocScalar<typename std::remove_cv<Scalar>::type,
+                           typename std::remove_cv<Index>::type> value_type;
+   typedef Kokkos::View<value_type, Space> result_view_type;
+   
+   KOKKOS_INLINE_FUNCTION
+   void join(value_type& dest, const value_type& src)  const
 
-      KOKKOS_INLINE_FUNCTION
-      void join(volatile value_type& dest, const volatile value_type& src) const;
+   KOKKOS_INLINE_FUNCTION
+   void join(volatile value_type& dest, const volatile value_type& src) const;
 
-      KOKKOS_INLINE_FUNCTION
-      void init( value_type& val)  const;
+   KOKKOS_INLINE_FUNCTION
+   void init( value_type& val)  const;
 
-      KOKKOS_INLINE_FUNCTION
-      value_type& reference() const;
+   KOKKOS_INLINE_FUNCTION
+   value_type& reference() const;
 
-      KOKKOS_INLINE_FUNCTION
-      result_view_type view() const;
+   KOKKOS_INLINE_FUNCTION
+   result_view_type view() const;
 
-      KOKKOS_INLINE_FUNCTION
-      MinMaxLoc(value_type& value_);
+   KOKKOS_INLINE_FUNCTION
+   MinMaxLoc(value_type& value_);
 
-      KOKKOS_INLINE_FUNCTION
-      MinMaxLoc(const result_view_type& value_);
-  };
-  ```
+   KOKKOS_INLINE_FUNCTION
+   MinMaxLoc(const result_view_type& value_);
+};
+```
 
 ## Public Class Members
 
@@ -104,4 +102,4 @@ Usage:
    * `MinMaxLoc<T,I,S>::result_view_type` is `Kokkos::View<T,S,Kokkos::MemoryTraits<Kokkos::Unmanaged>>`.  Note that the S (memory space) must be the same as the space where the result resides.
    * Requires: `Scalar` has `operator =`, `operator <` and `operator >` defined. `Kokkos::reduction_identity<Scalar>::min()` and `Kokkos::reduction_identity<Scalar>::max()` are a valid expressions. 
    * Requires: `Index` has `operator =` defined. `Kokkos::reduction_identity<Scalar>::min()` is a valid expressions.
-  * In order to use MinMaxLoc with a custom type of either `Scalar` or `Index`, a template specialization of Kokkos::reduction_identity<CustomType> must be defined.  See [Using Built-in Reducers with Custom Scalar Types](Custom-Reductions%3A-Built-In-Reducers-with-Custom-Scalar-Types) for details
+   * In order to use MinMaxLoc with a custom type of either `Scalar` or `Index`, a template specialization of `Kokkos::reduction_identity<CustomType>` must be defined.  See [Built-In Reducers with Custom Scalar Types](../../../ProgrammingGuide/Custom-Reductions:-Built-In-Reducers-with-Custom-Scalar-Types) for details
