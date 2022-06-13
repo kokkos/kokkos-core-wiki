@@ -114,4 +114,4 @@ This is the solution that the code teams we have talked to have said is the most
 
 ### Questions/Follow-up
 
-This is intended to be an educational resource for our users. If something doesn't make sense or you have further questions, you'd be doing us a favor by letting us know on [Slack](kokkosteam.slack.com) or [GitHub](kokkosteam.slack.com)
+This is intended to be an educational resource for our users. If something doesn't make sense, or you have further questions, you'd be doing us a favor by letting us know on [Slack](https://kokkosteam.slack.com) or [GitHub](https://github.com/kokkos/kokkos.com)

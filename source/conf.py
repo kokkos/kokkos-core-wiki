@@ -21,8 +21,7 @@ sys.path.insert(0, os.path.abspath('.'))
 master_doc = "index"
 
 project = 'Kokkos'
-# copyright = f'{datetime.datetime.now().year}, 2021, National Technology & Engineering Solutions of Sandia, LLC (NTESS)'
-copyright = u"2014, National Technology & Engineering Solutions of Sandia, LLC (NTESS)"
+copyright = f'{datetime.datetime.now().year}, National Technology & Engineering Solutions of Sandia, LLC (NTESS)'
 author = 'lots of people'
 
 # The full version, including alpha/beta/rc tags
@@ -34,10 +33,10 @@ author = 'lots of people'
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = ["myst_parser", \
-              "sphinx.ext.autodoc", \
-              "sphinx.ext.viewcode", \
-              "sphinx.ext.intersphinx", \
+extensions = ["myst_parser",
+              "sphinx.ext.autodoc",
+              "sphinx.ext.viewcode",
+              "sphinx.ext.intersphinx",
               "sphinx_copybutton"]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -71,6 +70,7 @@ source_suffix = {
     '.md': 'markdown',
 }
 
+myst_heading_anchors = 4
 # need to figure out why this does not work
 # rst_prolog = """
 # .. include:: special.rst
