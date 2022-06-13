@@ -43,8 +43,8 @@ The `Kokkos EcoSystem <https://github.com/kokkos>`_ includes:
 Questions?
 ----------
 
-Find us on Slack: https://pressioteam.slack.com or
-open an issue on `github <https://kokkosteam.slack.com>`_.
+Find us on Slack: https://kokkosteam.slack.com or
+open an issue on `github <https://github.com/kokkos/kokkos/issues>`_.
 
 |
 |
