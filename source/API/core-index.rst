@@ -1,24 +1,22 @@
-
 API: Core
 #########
 
 .. toctree::
    :maxdepth: 1
 
-   ./core/Initialize-and-Finalize
-   ./core/View
+   ./core/fence
    ./core/parallel_for
    ./core/parallel_reduce
    ./core/parallel_scan
-   ./core/fence
-   ./core/Execution-Policies
+   ./core/atomics
    ./core/builtin_reducers
    ./core/CStyleMemManagement
-   ./core/Spaces
-   ./core/Task-Parallelism
-   ./core/atomics
-   ./core/Utilities
-   ./core/STL-Compatibility
-   ./core/Numerics
    ./core/Detection-Idiom
-
+   ./core/Execution-Policies
+   ./core/Initialize-and-Finalize
+   ./core/Numerics
+   ./core/Spaces
+   ./core/STL-Compatibility
+   ./core/Task-Parallelism
+   ./core/Utilities
+   ./core/View
