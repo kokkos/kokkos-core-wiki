@@ -1,4 +1,3 @@
-
 # 5. Initialization
 
 In order to use Kokkos an initialization call is required. That call is responsible for initializing internal objects and acquiring hardware resources such as threads. Typically, this call should be placed right at the start of a program. If you use both MPI and Kokkos, your program should initialize Kokkos right after calling `MPI_Init`. That way, if MPI sets up process binding masks, Kokkos will get that information and use it for best performance. Your program must also _finalize_ Kokkos when done using it in order to free hardware resources.
@@ -7,7 +6,12 @@ In order to use Kokkos an initialization call is required. That call is responsi
 
 All primary capabilities of Kokkos are provided by the `Kokkos_Core.hpp` header file. 
 Some capabilities - specifically data structures in the `containers` subpackage and algorithmic capabilities in the `algorithms` subpackage are included via separate header files.
-For specific capabilities check their API reference at **[[API-Reference|API-Reference]]**
+For specific capabilities check their API reference:
+- [API: Core](../API/core-index)
+- [API: Containers](../API/containers-index)
+- [API: Algorithms](../API/algorithms-index)
+- [API: Std Algorithms](../API/std-algorithms-index)
+- [API in Alphabetical Order](../API/alphabetical)
 
 ## 5.1 Initialization by command-line arguments
 
@@ -40,7 +44,7 @@ Kokkos chooses the two spaces using the following list:
 
 The highest execution space in the list which is enabled is Kokkos' default execution space, and the highest enabled host execution space is Kokkos' default host execution space. For example, if  `Kokkos::Cuda`, `Kokkos::OpenMP`, and `Kokkos::Serial` are enabled, then `Kokkos::Cuda` is the default execution space and `Kokkos::OpenMP` is the default host execution space.<sup>1</sup>  In cases where the highest enabled backend is a host parallel execution space the `DefaultExecutionSpace` and the `DefaultHostExecutionSpace` will be the same.
 
-Command-line arguments come in "prefixed" and "non-prefixed" versions. Prefixed versions start with the string `--kokkos-`. `Kokkos::initialize` will remove prefixed options from the input list, but will preserve non-prefixed options. Argument options are given with an equals (`=`) sign. If the same argument occurs more than once, the last one is used. Furthermore, prefixed versions of the command line arguments take precedence over the non-prefixed ones. For example, the arguments
+Command-line arguments come in "prefixed" and "non-prefixed" versions. Prefixed versions start with the string `--kokkos-`. [`Kokkos::initialize`](../API/core/initialize_finalize/initialize) will remove prefixed options from the input list, but will preserve non-prefixed options. Argument options are given with an equals (`=`) sign. If the same argument occurs more than once, the last one is used. Furthermore, prefixed versions of the command line arguments take precedence over the non-prefixed ones. For example, the arguments
 
     --kokkos-threads=4 --threads=2
 
@@ -50,9 +54,7 @@ set the number of threads to 4, while
 
 set the number of threads to 3. Table 5.1 gives a full list of command-line options.
 
-
-
-<h4>Table 5.1: Command-line options for Kokkos::initialize <\h4>
+<h4>Table 5.1: Command-line options for Kokkos::initialize</h4> 
 
 Argument | Description
 :---      | :---
@@ -62,15 +64,12 @@ Argument | Description
 --device-id=INT | specify device id to be used by Kokkos. 
 --num-devices=INT[,INT] | used when running MPI jobs. Specify the number of devices per node to be used. Process to device mapping happens by obtaining the local MPI rank and assigning devices round-robin. The optional second argument allows for an existing device to be ignored. This is most useful on workstations with multiple GPUs, one of which is used to drive screen output.
 
-
 ***
 <sup>1</sup> This is the preferred set of defaults when CUDA and OpenMP are enabled. If you use a thread-parallel host execution space, we prefer Kokkos' OpenMP back-end, as this ensures compatibility of Kokkos' threads with the application's direct use of OpenMP threads. Kokkos cannot promise that its Threads back-end will not conflict with the application's direct use of operating system threads.
 
-
-
 ## 5.2 Initialization by struct
 
-Instead of giving `Kokkos::initialize()` command-line arguments, one may directly pass in initialization parameters using the following struct:
+Instead of giving [`Kokkos::initialize()`](../API/core/initialize_finalize/initialize) command-line arguments, one may directly pass in initialization parameters using the following struct:
 
 ```c++
 struct Kokkos::InitArguments {
@@ -102,7 +101,7 @@ Kokkos::initialize(args);
 
 ## 5.3 Finalization
 
-At the end of each program, Kokkos needs to be shut down in order to free resources; do this by calling `Kokkos::finalize()`. You may wish to set this to be called automatically at program exit, either by setting an `atexit` hook or by attaching the function to `MPI_COMM_SELF` so that it is called automatically at `MPI_Finalize`.
+At the end of each program, Kokkos needs to be shut down in order to free resources; do this by calling [`Kokkos::finalize()`](../API/core/initialize_finalize/finalize). You may wish to set this to be called automatically at program exit, either by setting an `atexit` hook or by attaching the function to `MPI_COMM_SELF` so that it is called automatically at `MPI_Finalize`.
 
 ## 5.4 Example Code
 
@@ -117,5 +116,3 @@ int main(int argc, char* argv[]) {
   Kokkos::finalize();
 }
 ```
-
-**[[Chapter 6: View|View]]**
