@@ -55,3 +55,4 @@ In the above example, `my_view` will not go out of scope until the end of the ma
 
    ./initialize_finalize/initialize
    ./initialize_finalize/finalize
+   ./initialize_finalize/ScopeGuard

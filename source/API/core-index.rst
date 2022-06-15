@@ -14,9 +14,11 @@ API: Core
    ./core/Detection-Idiom
    ./core/Execution-Policies
    ./core/Initialize-and-Finalize
+   ./core/KokkosConcepts
    ./core/Numerics
    ./core/Spaces
    ./core/STL-Compatibility
    ./core/Task-Parallelism
+   ./core/Traits
    ./core/Utilities
    ./core/View

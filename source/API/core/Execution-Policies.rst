@@ -1,4 +1,3 @@
-
 Execution Policies
 ##################
 
@@ -22,8 +21,6 @@ Top Level Execution Policies
     * * `TeamPolicy <tbd>`__
       * Assigns to each iterate in a contiguous range a team of threads
 
-
-
 Nested Execution Policies
 ============================
 
@@ -46,7 +43,6 @@ Nested Execution Policies are used to dispatch parallel work inside of an alread
     * * `ThreadVectorRange <tbd>`__ 
       * Used inside of a TeamPolicy kernel to perform nested parallel loops with vector lanes of a thread.
 
-
 Common Arguments for all Execution Policies
 ===========================================
 
@@ -55,8 +51,6 @@ Execution Policies generally accept compile time arguments via template paramete
 .. tip::
 
 	Template arguments can be given in arbitrary order.
-
-
 
 .. list-table::
     :widths: 30 30 40

@@ -1,7 +1,6 @@
-
 # C-style memory management
 
-
+(kokkos_malloc)=
 ## `Kokkos::kokkos_malloc`
 
 Defined in header `<Kokkos_Core.hpp>`
@@ -40,10 +39,9 @@ To avoid a memory leak, the returned pointer must be deallocated with [`Kokkos::
 
 On failure, throws `Kokkos::Experimental::RawMemoryAllocationFailure`.
 
-
 <br/>
 
-
+(kokkos_realloc)=
 ## `Kokkos::kokkos_realloc`
 
 Defined in header `<Kokkos_Core.hpp>`
@@ -74,10 +72,9 @@ On failure, returns a null pointer. The original pointer ptr remains valid and m
 
 On failure, throws `Kokkos::Experimental::RawMemoryAllocationFailure`.
 
-
 <br/>
 
-
+(kokkos_free)=
 ## `Kokkos::kokkos_free`
 
 Defined in header `<Kokkos_Core.hpp>`
