@@ -8,6 +8,9 @@ API: Core
    ./core/parallel_for
    ./core/parallel_reduce
    ./core/parallel_scan
+   ./core/ParallelForTag
+   ./core/ParallelReduceTag
+   ./core/ParallelScanTag
    ./core/atomics
    ./core/builtin_reducers
    ./core/CStyleMemManagement

@@ -9,7 +9,7 @@ Its semantics are similar to that of `std::shared_ptr`.
 
 ## Interface
 
-```cpp
+```c++
 template <class DataType [, class LayoutType] [, class MemorySpace] [, class MemoryTraits]>
 class View;
 ```

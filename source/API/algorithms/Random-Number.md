@@ -1,4 +1,3 @@
-
 # Random-Number
 
 #### headers:  Kokkos_Core.hpp, Kokkos_Complex.hpp

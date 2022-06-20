@@ -14,3 +14,4 @@ View and related
    ./view/subview
    ./view/view
    ./view/view_alloc
+   ./view/view_like

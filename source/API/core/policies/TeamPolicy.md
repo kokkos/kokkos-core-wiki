@@ -3,21 +3,21 @@
 Header File: `Kokkos_Core.hpp`
 
 Usage: 
-  ```c++
-  Kokkos::TeamPolicy<>( league_size, team_size [, vector_length])
-  Kokkos::TeamPolicy<ARGS>(league_size, team_size [, vector_length])
-  Kokkos::TeamPolicy<>(Space, league_size, team_size [, vector_length])
-  Kokkos::TeamPolicy<ARGS>(Space, league_size, team_size [, vector_length])
-  ```
+```c++
+Kokkos::TeamPolicy<>( league_size, team_size [, vector_length])
+Kokkos::TeamPolicy<ARGS>(league_size, team_size [, vector_length])
+Kokkos::TeamPolicy<>(Space, league_size, team_size [, vector_length])
+Kokkos::TeamPolicy<ARGS>(Space, league_size, team_size [, vector_length])
+```
 
 TeamPolicy defines an execution policy for a 1D iteration space starting at begin and going to end with an open interval. 
 
-See also: [TeamMember](Kokkos%3A%3ATeamHandleConcept)
+See also: [TeamMember](TeamHandleConcept)
 
 ## Synopsis 
-  ```c++
-  template<class ... Args>
-  class Kokkos::TeamPolicy {
+```c++
+template<class ... Args>
+class Kokkos::TeamPolicy {
     using execution_policy = TeamPolicy;
 
     //Inherited from PolicyTraits<Args...>  
@@ -80,8 +80,8 @@ See also: [TeamMember](Kokkos%3A%3ATeamHandleConcept)
 
     // return ExecSpace instance provided to the constructor
     KOKKOS_INLINE_FUNCTION const typename traits::execution_space & space() const;
-  };
-  ```
+};
+```
 
 ## Parameters:
 
@@ -99,7 +99,6 @@ See also: [TeamMember](Kokkos%3A%3ATeamHandleConcept)
 | WorkTag | `SomeClass` | Specify the work tag type used to call the functor operator. Any arbitrary type defaults to `void`. |
 
 ### Requirements:
-
 
 ## Public Class Members
 
@@ -169,7 +168,7 @@ See also: [TeamMember](Kokkos%3A%3ATeamHandleConcept)
     int team_size_max(const FunctorType& f, const ParallelReduceTag&) const;
     ```
     Query the maximum team size possible given a specific functor. 
-    The tag denotes whether this is for a `parallel_for` or a `parallel_reduce`.
+    The tag denotes whether this is for a [`parallel_for`](../parallel_for) or a [`parallel_reduce`](../parallel_reduce).
     Note: this is not a static function! The function will take into account settings
     for vector length and scratch size of `*this`. Using a value larger than the 
     return value will result in dispatch failure. 
@@ -184,7 +183,7 @@ See also: [TeamMember](Kokkos%3A%3ATeamHandleConcept)
     int team_size_recommended(const FunctorType& f, const ParallelReduceTag&) const;
     ```
     Query the recommended team size for the specific functor `f`. 
-    The tag denotes whether this is for a `parallel_for` or a `parallel_reduce`.
+    The tag denotes whether this is for a [`parallel_for`](../parallel_for) or a [`parallel_reduce`](../parallel_reduce).
     Note: this is not a static function! The function will take into account settings
     for vector length and scratch size of `*this`.
 
@@ -218,9 +217,9 @@ See also: [TeamMember](Kokkos%3A%3ATeamHandleConcept)
     ```
     This function returns the total scratch size requested. If `team_size` is not provided, the 
     team size for the calculation is used from the internal setting (i.e. the result of calling
-    `this->team_size()`). Otherwise the provided team size is used. 
+    `this->team_size()`). Otherwise, the provided team size is used. 
  
-    Returns: the value for the total scratch size size in bytes  in the specified scratch level.
+    Returns: the value for the total scratch size in bytes  in the specified scratch level.
 
   * ```c++
     int team_scratch_size(int level) const;
@@ -238,10 +237,10 @@ See also: [TeamMember](Kokkos%3A%3ATeamHandleConcept)
     Returns: the chunk size, set via `set_chunk_size()`.
 ## Examples
 
-  ```c++
-    TeamPolicy<> policy_1(N,AUTO);
-    TeamPolicy<Cuda> policy_2(N,T);
-    TeamPolicy<Schedule<Dynamic>, OpenMP> policy_3(N,AUTO,8);
-    TeamPolicy<IndexType<int>, Schedule<Dynamic>> policy_4(N,1,4);
-    TeamPolicy<OpenMP> policy_5(OpenMP(), N, AUTO);
-  ```
+```c++
+TeamPolicy<> policy_1(N,AUTO);
+TeamPolicy<Cuda> policy_2(N,T);
+TeamPolicy<Schedule<Dynamic>, OpenMP> policy_3(N,AUTO,8);
+TeamPolicy<IndexType<int>, Schedule<Dynamic>> policy_4(N,1,4);
+TeamPolicy<OpenMP> policy_5(OpenMP(), N, AUTO);
+```

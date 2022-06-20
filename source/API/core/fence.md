@@ -10,9 +10,9 @@ Kokkos::fence();
 
 Blocks on completion of all outstanding asynchronous Kokkos operations.
 That includes parallel dispatch (e.g. [parallel_for()](parallel_for), [parallel_reduce()](parallel_reduce) 
-and [parallel_scan()](parallel_scan)) as well as asynchronous data operations such as three-argument [deep_copy](Kokkos%3A%3Adeep_copy).
+and [parallel_scan()](parallel_scan)) as well as asynchronous data operations such as three-argument [deep_copy](view/deep_copy).
 
-Note: there is a execution space instance specific `fence` too: [ExecutionSpaceConcept](Kokkos%3A%3AExecutionSpaceConcept)
+Note: there is a execution space instance specific `fence` too: [ExecutionSpaceConcept](ExecutionSpaceConcept)
 
 ## Interface
 
@@ -39,7 +39,7 @@ void Kokkos::fence(const std::string& label);
 ## Examples
 
 ### Timing kernels
-```cpp
+```c++
 Kokkos::Timer timer;
 // This operation is asynchronous, without a fence 
 // one would time only the launch overhead
@@ -50,7 +50,7 @@ double time = timer.seconds();
 
 ### Use with asynchronous deep copy
 
-```cpp
+```c++
 Kokkos::deep_copy(exec1, a,b);
 Kokkos::deep_copy(exec2, a,b);
 // do some stuff which doesn't touch a or b

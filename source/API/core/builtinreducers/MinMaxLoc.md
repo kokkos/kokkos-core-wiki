@@ -48,7 +48,7 @@ class MinMaxLoc{
 ### Typedefs
    
  * `reducer`: The self type.
- * `value_type`: The reduction scalar type (specialization of [MinMaxLocScalar](Kokkos%3A%3AMinMaxLocScalar))
+ * `value_type`: The reduction scalar type (specialization of [MinMaxLocScalar](MinMaxLocScalar))
  * `result_view_type`: A `Kokkos::View` referencing the reduction result 
 
 ### Constructors

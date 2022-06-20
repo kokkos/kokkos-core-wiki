@@ -17,15 +17,15 @@ destructor only if it called `Kokkos::initialize` in its constructor.
 
 ## Interface
 
-```cpp
+```c++
 Kokkos::ScopeGuard(int& narg, char* arg[]);
 ```
 
-```cpp
+```c++
 Kokkos::ScopeGuard(const InitArguments& args);
 ```
 
-```cpp
+```c++
 ~ScopeGuard();
 ```
 
@@ -35,7 +35,7 @@ Kokkos::ScopeGuard(const InitArguments& args);
   * arg: array of command line arguments, valid arguments are listed below.
   * args: structure of valid Kokkos arguments
 
-Note that all of the parameters above are passed to the `Kokkos::initialize` called internally.  See [Kokkos::initialize](Kokkos%3A%3Ainitialize) for more details.
+Note that all of the parameters above are passed to the `Kokkos::initialize` called internally.  See [Kokkos::initialize](initialize) for more details.
  
 ### Requirements
   * `Kokkos::ScopeGuard` object should be constructed before user initiated Kokkos objects 

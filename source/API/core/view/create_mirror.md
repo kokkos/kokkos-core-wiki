@@ -5,7 +5,7 @@ Header File: `Kokkos_Core.hpp`
 A common desired use case is to have a memory allocation in GPU memory and an identical memory allocation in CPU memory, such that copying from one to another is straightforward. To satisfy this use case and others, Kokkos has facilities for dealing with "mirrors" of View. A "mirror" of a View type `A` is loosely defined a View type `B` such that Views of type `B` are accessible from the CPU and `deep_copy` between Views of type `A` and `B` are direct. The most common functions for dealing with mirrors are `create_mirror`, `create_mirror_view` and `create_mirror_view_and_copy`.
 
 Usage:
-```cpp
+```c++
 auto host_mirror = create_mirror(a_view);
 auto host_mirror_view = create_mirror_view(a_view);
 
@@ -15,8 +15,7 @@ auto host_mirror_view_space = create_mirror_view(ExecSpace(),a_view);
 
 ## Synopsis
 
-```cpp
-
+```c++
 template <class ViewType>
 typename ViewType::HostMirror create_mirror(ViewType const&);
 
@@ -52,14 +51,14 @@ ImplMirrorType create_mirror_view_and_copy(Space const& space, ViewType const&);
 
 ## Description
 
-* ```cpp
+* ```c++
   template <class ViewType>
   typename ViewType::HostMirror create_mirror(ViewType const& src);
   ```
   Creates a new host accessible `View` with the same layout and padding as `src`.
   * `src`: a `Kokkos::View`.
 
-* ```cpp
+* ```c++
   template <class ViewType>
   typename ViewType::HostMirror create_mirror(decltype(Kokkos::ViewAllocateWithoutInitializing()),
                                               ViewType const& src);
@@ -67,7 +66,7 @@ ImplMirrorType create_mirror_view_and_copy(Space const& space, ViewType const&);
   Creates a new host accessible `View` with the same layout and padding as `src`. The new view will have uninitialized data.
   * `src`: a `Kokkos::View`.
 
-* ```cpp
+* ```c++
   template <class Space, class ViewType>
   ImplMirrorType create_mirror(Space const& space, ViewType const&);
   ```
@@ -76,7 +75,7 @@ ImplMirrorType create_mirror_view_and_copy(Space const& space, ViewType const&);
   * `Space`: a class meeting the requirements of `ExecutionSpaceConcept` or `MemorySpaceConcept`
   * `ImplMirrorType`: an implementation defined specialization of `Kokkos::View`.
 
-* ```cpp
+* ```c++
   template <class Space, class ViewType>
   ImplMirrorType create_mirror(decltype(Kokkos::ViewAllocateWithoutInitializing()),
                                Space const& space, ViewType const&);
@@ -86,7 +85,7 @@ ImplMirrorType create_mirror_view_and_copy(Space const& space, ViewType const&);
   * `Space`: a class meeting the requirements of `ExecutionSpaceConcept` or `MemorySpaceConcept`
   * `ImplMirrorType`: an implementation defined specialization of `Kokkos::View`.
 
-* ```cpp
+* ```c++
   template <class ViewType>
   typename ViewType::HostMirror create_mirror_view(ViewType const& src);
   ```
@@ -94,7 +93,7 @@ ImplMirrorType create_mirror_view_and_copy(Space const& space, ViewType const&);
   it creates a new host accessible `View` with the same layout and padding as `src`. Otherwise returns `src`.
   * `src`: a `Kokkos::View`.
 
-* ```cpp
+* ```c++
   template <class ViewType>
   typename ViewType::HostMirror create_mirror_view(decltype(Kokkos::ViewAllocateWithoutInitializing()),
                                                    ViewType const& src);
@@ -103,7 +102,7 @@ ImplMirrorType create_mirror_view_and_copy(Space const& space, ViewType const&);
   it creates a new host accessible `View` with the same layout and padding as `src`. The new view will have uninitialized data. Otherwise returns `src`.
   * `src`: a `Kokkos::View`.
 
-* ```cpp
+* ```c++
   template <class Space, class ViewType>
   ImplMirrorType create_mirror_view(Space const& space, ViewType const&);
   ```
@@ -114,7 +113,7 @@ ImplMirrorType create_mirror_view_and_copy(Space const& space, ViewType const&);
   * `Space`: a class meeting the requirements of `ExecutionSpaceConcept` or `MemorySpaceConcept`
   * `ImplMirrorType`: an implementation defined specialization of `Kokkos::View`.
 
-* ```cpp
+* ```c++
   template <class Space, class ViewType>
   ImplMirrorType create_mirror_view(decltype(Kokkos::ViewAllocateWithoutInitializing()),
                                     Space const& space, ViewType const&);
@@ -126,7 +125,7 @@ ImplMirrorType create_mirror_view_and_copy(Space const& space, ViewType const&);
   * `Space`: a class meeting the requirements of `ExecutionSpaceConcept` or `MemorySpaceConcept`
   * `ImplMirrorType`: an implementation defined specialization of `Kokkos::View`.
 
-* ```cpp
+* ```c++
   template <class Space, class ViewType>
   ImplMirrorType create_mirror_view_and_copy(Space const& space, ViewType const&);
   ```

@@ -6,12 +6,12 @@ Kokkos has support for lightweight task-based programming, which is currently pr
 Will Kokkos Tasking work for my problem?
 ----------------------------------------
 
-Not all task-based problems are a good fit for the current Kokkos approach to tasking.  Currently, the tasking interface in Kokkos is  targetted at problems with kernels far too small to overcome the inherent overhead of top-level Kokkos data parallel launches—that is, small but plentiful data parallel tasks with a non-trivial dependency structure.  For tasks that fit this general scale model but have (very) trivial dependency structures, it may be easier to use [hierarchical parallelism](HierarchicalParallelism), potentially with a `Kokkos::Schedule<Dynamic>` scheduling policy (see, for instance, [this page](Kokkos%3A%3ARangePolicy)) for load balancing if necessary. 
+Not all task-based problems are a good fit for the current Kokkos approach to tasking.  Currently, the tasking interface in Kokkos is  targetted at problems with kernels far too small to overcome the inherent overhead of top-level Kokkos data parallel launches—that is, small but plentiful data parallel tasks with a non-trivial dependency structure.  For tasks that fit this general scale model but have (very) trivial dependency structures, it may be easier to use [hierarchical parallelism](../../ProgrammingGuide/HierarchicalParallelism), potentially with a `Kokkos::Schedule<Dynamic>` scheduling policy (see, for instance, [this page](policies/RangePolicy)) for load balancing if necessary. 
 
 Basic Usage
 -----------
 
-Fundamentally, task parallelism is just another form of parallelism in Kokkos.  The same general idiom of pattern, policy, and functor applies as for ordinary [parallel dispatch](ParallelDispatch):
+Fundamentally, task parallelism is just another form of parallelism in Kokkos.  The same general idiom of pattern, policy, and functor applies as for ordinary [parallel dispatch](../../ProgrammingGuide/ParallelDispatch):
 
 ![parallel-dispatch](https://raw.githubusercontent.com/wiki/kokkos/kokkos/ProgrammingGuide/figures/parallel-dispatch.png)
 
@@ -34,7 +34,7 @@ struct MyTask {
 };
 ```
 
-Similar to [team parallelism](HierarchicalParallelism), the first parameter is the team handle, which has all of the same functionality as the one produced by a `Kokkos::TeamPolicy`, with a few extras.  Like with `Kokkos::parallel_reduce()`, the output is expressed through the second parameter.  Note that there is currently no lambda interface to Kokkos Tasking.
+Similar to [team parallelism](../../ProgrammingGuide/HierarchicalParallelism), the first parameter is the team handle, which has all of the same functionality as the one produced by a `Kokkos::TeamPolicy`, with a few extras.  Like with `Kokkos::parallel_reduce()`, the output is expressed through the second parameter.  Note that there is currently no lambda interface to Kokkos Tasking.
 
 Task Patterns
 -------------

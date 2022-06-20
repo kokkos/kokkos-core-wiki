@@ -3,11 +3,11 @@
 Header File: `Kokkos_Core.hpp`
 
 Usage: 
-  ```c++
-    parallel_for(TeamThreadRange(team,range), [=] (int i) {...});
-    parallel_reduce(TeamThreadRange(team,begin,end), 
-      [=] (int i, double& lsum) {...},sum);
-  ```
+```c++
+parallel_for(TeamThreadRange(team,range), [=] (int i) {...});
+parallel_reduce(TeamThreadRange(team,begin,end), 
+  [=] (int i, double& lsum) {...},sum);
+```
 
 TeamThreadRange is a [nested execution policy](https://github.com/kokkos/kokkos/wiki/Execution-Policies#nested-execution-policies) used inside of hierarchical parallelism. 
 In contrast to global policies, the public interface for nested policies is implemented 
@@ -15,12 +15,12 @@ as functions, in order to enable implicit templating on the execution space type
 the team handle.
 
 ## Synopsis 
-  ```c++
-   template<class TeamMemberType, class iType>
-    /* implementation defined */ TeamThreadRange(TeamMemberType team, iType count);
-   template<class TeamMemberType, class iType1, class iType2>
-    /* implementation defined */ TeamThreadRange(TeamMemberType team, iType1 begin, iType2 end);
-  ```
+```c++
+template<class TeamMemberType, class iType>
+/* implementation defined */ TeamThreadRange(TeamMemberType team, iType count);
+template<class TeamMemberType, class iType1, class iType2>
+/* implementation defined */ TeamThreadRange(TeamMemberType team, iType1 begin, iType2 end);
+```
 
 ## Description
 
@@ -37,7 +37,7 @@ the team handle.
         * Implementation defined type.
 
     *  **Requirements**
-        * `TeamMemberType` is a type that models [TeamHandle](Kokkos%3A%3ATeamHandleConcept)
+        * `TeamMemberType` is a type that models [TeamHandle](TeamHandleConcept)
         * `std::is_integral<iType>::value` is true.
         * Every member thread of `team` must call the operation in the same branch, i.e. it is not legal to have some 
           threads call this function in one branch, and the other threads of `team` call it in another branch.
@@ -58,7 +58,7 @@ the team handle.
 
     * **Requirements**
 
-        * `TeamMemberType` is a type that models [TeamHandle](Kokkos%3A%3ATeamHandleConcept)
+        * `TeamMemberType` is a type that models [TeamHandle](TeamHandleConcept)
         * `std::is_integral<iType1>::value` is true.
         * `std::is_integral<iType2>::value` is true.
         * Every member thread of `team` must call the operation in the same branch, i.e. it is not legal to have some
@@ -68,9 +68,9 @@ the team handle.
   
 ## Examples
 
-  ```c++
-   typedef TeamPolicy<>::member_type team_handle;
-   parallel_for(TeamPolicy<>(N,AUTO,4), KOKKOS_LAMBDA (const team_handle& team) {
+```c++
+typedef TeamPolicy<>::member_type team_handle;
+parallel_for(TeamPolicy<>(N,AUTO,4), KOKKOS_LAMBDA (const team_handle& team) {
      int n = team.league_rank();
      parallel_for(TeamThreadRange(team,M), [&] (const int& i) {
        A(n,i) = B(n) + i;
@@ -83,6 +83,6 @@ the team handle.
      single(PerTeam(team),[&] () {
        A_rowsum(n) += team_sum;
      });
-   });
-  ```
+});
+```
 

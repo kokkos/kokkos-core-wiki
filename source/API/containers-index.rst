@@ -10,5 +10,6 @@ API: Containers
    ./containers/DynRankView
    ./containers/Offset-View
    ./containers/ScatterView
+   ./containers/StaticCrsGraph
    ./containers/Unordered-Map
    ./containers/vector

@@ -7,7 +7,7 @@ Header File: `Kokkos_Core.hpp`
 
 ## Kokkos::Experimental::find
 
-```cpp
+```c++
 template <class ExecutionSpace, class InputIterator, class T>
 InputIterator find(const ExecutionSpace& exespace,                              (1)
                    InputIterator first, InputIterator last,
@@ -59,7 +59,7 @@ Returns an iterator to the *first* element in `[first, last)` that equals `value
 - (2,3): iterator to the first element that equals `value`, or `Kokkos::Experimental::end(view)` if none is found
 
 ### Example
-```cpp
+```c++
 namespace KE = Kokkos::Experimental;
 using view_type = Kokkos::View<int*>;
 view_type a("a", 15);
@@ -76,7 +76,7 @@ auto it2 = KE::find(Kokkos::OpenMP(), KE::begin(a), KE::end(a), 5);
 
 ## Kokkos::Experimental::find_if
 
-```cpp
+```c++
 template <class ExecutionSpace, class InputIterator, class PredicateType>
 InputIterator find_if(const ExecutionSpace& exespace,                              (1)
                       InputIterator first, InputIterator last,
@@ -115,7 +115,7 @@ Returns an iterator to the *first* element in `[first, last)` for which the pred
   - unary predicate which returns `true` for the required element; `pred(v)` must be valid to be called from the execution space passed, and convertible to bool for every
  argument `v` of type (possible const) `value_type`, where `value_type` is the value type of `InputIterator`, and must not modify `v`.
   - must conform to:
-  ```cpp
+  ```c++
   struct Predicate
   {
      KOKKOS_INLINE_FUNCTION
@@ -135,7 +135,7 @@ Returns an iterator to the *first* element in `[first, last)` for which the pred
 - (2,3): iterator to the first element that equals `value`, or `Kokkos::Experimental::end(view)` if none is found
 
 ### Example
-```cpp
+```c++
 namespace KE = Kokkos::Experimental;
 
 template<class ValueType>

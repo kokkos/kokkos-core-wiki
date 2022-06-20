@@ -1,4 +1,4 @@
-# NestedPolicies
+# `NestedPolicies`
 
 (PerTeam)=
 ## `Kokkos::PerTeam`
@@ -19,10 +19,10 @@ Header File: `Kokkos_Core.hpp`
 
 Usage: 
 ```c++
- parallel_for(TeamThreadRange(team,begin,end), [=] (int i) {});
- parallel_for(ThreadVectorRange(team,begin,end), [=] (int i) {});
- single(PerTeam(team), [=] () {});
- single(PerThread(team), [=] () {});
+parallel_for(TeamThreadRange(team,begin,end), [=] (int i) {});
+parallel_for(ThreadVectorRange(team,begin,end), [=] (int i) {});
+single(PerTeam(team), [=] () {});
+single(PerThread(team), [=] () {});
 ```
 
 Nested policies can be used for nested parallel patterns. In contrast to global policies, the public
@@ -31,12 +31,12 @@ the execution space type via the team handle.
 
 ### Synopsis 
 ```c++
- Impl::TeamThreadRangeBoundariesStruct TeamThreadRange(TeamMemberType team, IndexType count);
- Impl::TeamThreadRangeBoundariesStruct TeamThreadRange(TeamMemberType team, IndexType begin, IndexType end);
- Impl::ThreadVectorRangeBoundariesStruct ThreadVectorRange(TeamMemberType team, IndexType count);
- Impl::ThreadVectorRangeBoundariesStruct ThreadVectorRange(TeamMemberType team, IndexType begin, IndexType end);
- Impl::ThreadSingleStruct PerTeam(TeamMemberType team);
- Impl::VectorSingleStruct PerThread(TeamMemberType team);
+Impl::TeamThreadRangeBoundariesStruct TeamThreadRange(TeamMemberType team, IndexType count);
+Impl::TeamThreadRangeBoundariesStruct TeamThreadRange(TeamMemberType team, IndexType begin, IndexType end);
+Impl::ThreadVectorRangeBoundariesStruct ThreadVectorRange(TeamMemberType team, IndexType count);
+Impl::ThreadVectorRangeBoundariesStruct ThreadVectorRange(TeamMemberType team, IndexType begin, IndexType end);
+Impl::ThreadSingleStruct PerTeam(TeamMemberType team);
+Impl::VectorSingleStruct PerThread(TeamMemberType team);
 ```
 
 ### Description
@@ -88,26 +88,26 @@ the execution space type via the team handle.
   
 ### Examples
 
-  ```c++
-   typedef TeamPolicy<>::member_type team_handle;
-   parallel_for(TeamPolicy<>(N,AUTO,4), KOKKOS_LAMBDA (const team_handle& team) {
-     int n = team.league_rank();
-     parallel_for(TeamThreadRange(team,M), [&] (const int& i) {
-       int thread_sum;
-       parallel_reduce(ThreadVectorRange(team,K), [&] (const int& j, int& lsum) {
-         //...
-       },thread_sum);
-       single(PerThread(team), [&] () {
-         A(n,i) += thread_sum;
-       });
-     });
-     team.team_barrier();
-     int team_sum;
-     parallel_reduce(TeamThreadRange(team,M), [&] (const int& i, int& lsum) {
-       lsum += A(n,i);
-     },team_sum);
-     single(PerTeam(team),[&] () {
-       A_rowsum(n) += team_sum;
-     });
-   });
-  ```
+```c++
+typedef TeamPolicy<>::member_type team_handle;
+parallel_for(TeamPolicy<>(N,AUTO,4), KOKKOS_LAMBDA (const team_handle& team) {
+  int n = team.league_rank();
+  parallel_for(TeamThreadRange(team,M), [&] (const int& i) {
+    int thread_sum;
+    parallel_reduce(ThreadVectorRange(team,K), [&] (const int& j, int& lsum) {
+      //...
+    },thread_sum);
+    single(PerThread(team), [&] () {
+      A(n,i) += thread_sum;
+    });
+  });
+  team.team_barrier();
+  int team_sum;
+  parallel_reduce(TeamThreadRange(team,M), [&] (const int& i, int& lsum) {
+    lsum += A(n,i);
+  },team_sum);
+  single(PerTeam(team),[&] () {
+    A_rowsum(n) += team_sum;
+  });
+});
+```

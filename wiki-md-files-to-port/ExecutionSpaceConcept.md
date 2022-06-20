@@ -116,8 +116,8 @@ where `ostr` is a `std::ostream` (like `std::cout`, for instance) and `detail` i
 Additionally, the following type aliases (a.k.a. `typedef`s) will be defined by all execution space types:
 
 * `Ex::memory_space`: the default [`MemorySpace`](MemorySpaceConcept) to use when executing with `Ex`.  Kokkos guarantees that `Kokkos::SpaceAccessibility<Ex, Ex::memory_space>::accessible` will be `true` (see [`Kokkos::SpaceAccessibility`](Kokkos%3A%3ASpaceAccessibility))
-* `Ex::array_layout`: the default [`ArrayLayout`](ArrayLayoutConcept) recommended for use with `View` types accessed from `Ex`.
-* `Ex::scratch_memory_space`: the [`ScratchMemorySpace`](ScratchMemorySpaceConcept) that parallel patterns will use for allocation of scratch memory (for instance, as requested by a [`Kokkos::TeamPolicy`](Kokkos%3A%3ATeamPolicy)).
+* `Ex::array_layout`: the default `ArrayLayout` recommended for use with `View` types accessed from `Ex`.
+* `Ex::scratch_memory_space`: the `ScratchMemorySpace` that parallel patterns will use for allocation of scratch memory (for instance, as requested by a [`Kokkos::TeamPolicy`](Kokkos%3A%3ATeamPolicy)).
 
 Default Constructibility, Copy Constructibility
 -----------------------------------------------

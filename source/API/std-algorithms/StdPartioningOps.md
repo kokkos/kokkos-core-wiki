@@ -16,7 +16,7 @@ Currently supported (see below the full details):
 
 ## `Kokkos::Experimental::is_partitioned`
 
-```cpp
+```c++
 template <class ExecutionSpace, class InputIterator, class PredicateType>
 bool is_partitioned(const ExecutionSpace& exespace,                              (1)
                     InputIterator first, InputIterator last,
@@ -67,7 +67,7 @@ If `[first, last)` or `view` is empty, returns `true`.
   is the value type of `IteratorType` (for 1,2) or the value type of `view` (for 3,4),
   and must not modify `v`.
   - must conform to:
-  ```cpp
+  ```c++
   struct Predicate
   {
      KOKKOS_INLINE_FUNCTION
@@ -86,7 +86,7 @@ If `[first, last)` or `view` is empty, returns `true`.
 - `false`: otherwise
 
 ### Example
-```cpp
+```c++
 namespace KE = Kokkos::Experimental;
 
 template<class ValueType>
@@ -112,7 +112,7 @@ const auto res = KE::is_partitioned(exespace, KE::cbegin(a), KE::cend(a), IsNega
 
 ## `Kokkos::Experimental::partition_point`
 
-```cpp
+```c++
 template <class ExecutionSpace, class IteratorType, class PredicateType>
 IteratorType partition_point(const ExecutionSpace& exespace,                   (1)
                              IteratorType first, IteratorType last,
@@ -164,7 +164,7 @@ or `last` if all elements satisfy `pred`.
 
 ## `Kokkos::Experimental::partition_copy`
 
-```cpp
+```c++
 template <
   class ExecutionSpace,
   class InputIteratorType,
@@ -270,7 +270,7 @@ auto partition_copy(const std::string& label,                                   
   is the value type of `InputIteratorType` (for 1,2) or the value type of `view_from` (for 3,4),
   and must not modify `v`.
   - must conform to:
-  ```cpp
+  ```c++
   struct Predicate
   {
      KOKKOS_INLINE_FUNCTION

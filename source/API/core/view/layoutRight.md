@@ -6,32 +6,32 @@ This Kokkos Layout, when provided to a multidimensional View, lays out memory su
 
 Usage: 
 
-  ```c++
-  Kokkos::View<float*, Kokkos::LayoutRight> my_view;
-  ```
+```c++
+Kokkos::View<float*, Kokkos::LayoutRight> my_view;
+```
 
 ## Synopsis 
-  ```c++
-  struct LayoutRight {
+```c++
+struct LayoutRight {
 
-  typedef LayoutRight array_layout;
+typedef LayoutRight array_layout;
 
-  size_t dimension[ARRAY_LAYOUT_MAX_RANK];
+size_t dimension[ARRAY_LAYOUT_MAX_RANK];
 
-  enum { is_extent_constructible = true };
+enum { is_extent_constructible = true };
 
-  LayoutRight(LayoutRight const&) = default;
-  LayoutRight(LayoutRight&&)      = default;
-  LayoutRight& operator=(LayoutRight const&) = default;
-  LayoutRight& operator=(LayoutRight&&) = default;
+LayoutRight(LayoutRight const&) = default;
+LayoutRight(LayoutRight&&)      = default;
+LayoutRight& operator=(LayoutRight const&) = default;
+LayoutRight& operator=(LayoutRight&&) = default;
 
-  KOKKOS_INLINE_FUNCTION
-  explicit constexpr LayoutRight(size_t N0 = 0, size_t N1 = 0, size_t N2 = 0,
-                                size_t N3 = 0, size_t N4 = 0, size_t N5 = 0,
-                                size_t N6 = 0, size_t N7 = 0)
-      : dimension{N0, N1, N2, N3, N4, N5, N6, N7} {}
-	};
-  ```
+KOKKOS_INLINE_FUNCTION
+explicit constexpr LayoutRight(size_t N0 = 0, size_t N1 = 0, size_t N2 = 0,
+                            size_t N3 = 0, size_t N4 = 0, size_t N5 = 0,
+                            size_t N6 = 0, size_t N7 = 0)
+  : dimension{N0, N1, N2, N3, N4, N5, N6, N7} {}
+};
+```
 
 ## Public Class Members
 
@@ -53,23 +53,23 @@ Usage:
 
 ### Constructors
 
-  * LayoutRight(LayoutRight const&) = default;
+  * `LayoutRight(LayoutRight const&) = default;`
 
     Default copy constructor, element-wise copies the other Layout
 
-  * LayoutRight(LayoutRight&&)      = default;
+  * `LayoutRight(LayoutRight&&) = default;`
  
     Default move constructor, element-wise moves the other Layout
 
   * 
-  ```c++
-  KOKKOS_INLINE_FUNCTION
-  explicit constexpr LayoutRight(size_t N0 = 0, size_t N1 = 0, size_t N2 = 0,
-                                size_t N3 = 0, size_t N4 = 0, size_t N5 = 0,
-                                size_t N6 = 0, size_t N7 = 0);
-  ```
+```c++
+KOKKOS_INLINE_FUNCTION
+explicit constexpr LayoutRight(size_t N0 = 0, size_t N1 = 0, size_t N2 = 0,
+                            size_t N3 = 0, size_t N4 = 0, size_t N5 = 0,
+                            size_t N6 = 0, size_t N7 = 0);
+```
   
-  Constructor that takes in up to 8 sizes, to set the sizes of the corresponding dimenesions of the Layout
+  Constructor that takes in up to 8 sizes, to set the sizes of the corresponding dimensions of the Layout
 
 ### Assignment operators
 
