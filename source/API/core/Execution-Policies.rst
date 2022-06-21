@@ -50,7 +50,7 @@ Execution Policies generally accept compile time arguments via template paramete
 
 .. tip::
 
-	Template arguments can be given in arbitrary order.
+    Template arguments can be given in arbitrary order.
 
 .. list-table::
     :widths: 30 30 40
@@ -81,15 +81,15 @@ Execution Policies generally accept compile time arguments via template paramete
       * ``SomeClass`` 
       * Specify the work tag type used to call the functor operator. Any arbitrary type defaults to ``void``.
 
-.. toctree::
-   :maxdepth: 1
 
-  policies/ExecutionPolicyConcept
-  policies/MDRangePolicy
-  policies/NestedPolicies
-  policies/RangePolicy
-  policies/TeamHandleConcept
-  policies/TeamPolicy
-  policies/TeamThreadRange
-  policies/TeamVectorRange
-  policies/ThreadVectorRange
+.. toctree::
+
+  ./policies/ExecutionPolicyConcept
+  ./policies/MDRangePolicy
+  ./policies/NestedPolicies
+  ./policies/RangePolicy
+  ./policies/TeamHandleConcept
+  ./policies/TeamPolicy
+  ./policies/TeamThreadRange
+  ./policies/TeamVectorRange
+  ./policies/ThreadVectorRange
