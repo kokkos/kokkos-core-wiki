@@ -1,4 +1,3 @@
-
 # Sorting
 
 Header File: `Kokkos_Core.hpp`
@@ -9,12 +8,11 @@ Currently supported (see below the full details):
  - [`is_sorted`](#kokkosexperimentalis_sorted)
  - [`is_sorted_until`](#kokkosexperimentalis_sorted_until)
 
-
 ------
 
 ## `Kokkos::Experimental::is_sorted`
 
-```cpp
+```c++
 //
 // overload set accepting iterators
 //
@@ -95,7 +93,7 @@ bool is_sorted(const std::string& label, const ExecutionSpace& exespace,    (8)
   `value_type`, where `value_type` is the value type of `IteratorType` (for 1,2,3,4)
   or the value type of `view` (for 5,6,7,8) and must not modify `a,b`.
   - must conform to:
-  ```cpp
+  ```c++
   struct Comparator
   {
      KOKKOS_INLINE_FUNCTION
@@ -127,7 +125,7 @@ True if the elements are sorted in descending order.
 
 ## `Kokkos::Experimental::is_sorted_until`
 
-```cpp
+```c++
 //
 // overload set accepting iterators
 //

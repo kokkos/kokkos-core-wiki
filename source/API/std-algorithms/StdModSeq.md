@@ -1,4 +1,3 @@
-
 # Modifying Sequence
 
 Header File: `Kokkos_Core.hpp`
@@ -41,7 +40,7 @@ Currently supported (see below the full details):
 
 ## `Kokkos::Experimental::fill`
 
-```cpp
+```c++
 template <class ExecutionSpace, class IteratorType, class T>
 void fill(const ExecutionSpace& exespace,                                    (1)
           IteratorType first, IteratorType last,
@@ -95,7 +94,7 @@ None
 
 ### Example
 
-```cpp
+```c++
 namespace KE = Kokkos::Experimental;
 Kokkos::View<double*> a("a", 13);
 
@@ -115,7 +114,7 @@ KE::fill(Kokkos::OpenMP(), KE::begin(a), KE::end(a), 14.);
 
 ## `Kokkos::Experimental::fill_n`
 
-```cpp
+```c++
 template <class ExecutionSpace, class IteratorType, class SizeType, class T>
 IteratorType fill_n(const ExecutionSpace& exespace,                             (1)
                     IteratorType first,
@@ -162,7 +161,7 @@ Otherwise, it returns `first` (for 1,2) or `Kokkos::begin(view)` (for 3,4).
 
 ### Example
 
-```cpp
+```c++
 namespace KE = Kokkos::Experimental;
 Kokkos::View<double*> a("a", 13);
 // do something with a
@@ -184,7 +183,7 @@ KE::fill_n(Kokkos::OpenMP(), KE::begin(a), 10, newValue);
 
 ## `Kokkos::Experimental::replace`
 
-```cpp
+```c++
 template <class ExecutionSpace, class IteratorType, class T>
 void replace(const ExecutionSpace& exespace,                                 (1)
              IteratorType first, IteratorType last,
@@ -239,7 +238,7 @@ None
 
 ### Example
 
-```cpp
+```c++
 namespace KE = Kokkos::Experimental;
 Kokkos::View<double*> a("a", 13);
 // do something with a
@@ -258,7 +257,7 @@ KE::replace("mylabel", Kokkos::OpenMP(), a, oldValue, newValue);
 
 ## `Kokkos::Experimental::replace_if`
 
-```cpp
+```c++
 template <class ExecutionSpace, class IteratorType, class UnaryPredicateType, class T>
 void replace_if(const ExecutionSpace& exespace,                              (1)
                 IteratorType first, IteratorType last,
@@ -298,7 +297,7 @@ the range `[first, last)` (overloads 1,2) or in `view` (overloads 3,4).
   is the value type of `IteratorType` (for 1,2) or the value type of `view` (for 3,4),
   and must not modify `v`.
   - must conform to:
-  ```cpp
+  ```c++
   struct Predicate
   {
      KOKKOS_INLINE_FUNCTION
@@ -318,7 +317,7 @@ None
 
 ### Example
 
-```cpp
+```c++
 template <class ValueType>
 struct IsPositiveFunctor {
   KOKKOS_INLINE_FUNCTION
@@ -347,7 +346,7 @@ KE::replace_if("mylabel", Kokkos::OpenMP(), a,
 
 ## `Kokkos::Experimental::replace_copy`
 
-```cpp
+```c++
 template <class ExecutionSpace, class InputIteratorType, class OutputIteratorType, class T>
 OutputIteratorType replace_copy(const ExecutionSpace& exespace,               (1)
                                 InputIteratorType first_from,
@@ -427,7 +426,7 @@ Iterator to the element *after* the last element copied.
 
 ## `Kokkos::Experimental::replace_copy_if`
 
-```cpp
+```c++
 template <
   class ExecutionSpace,
   class InputIteratorType, class OutputIteratorType,
@@ -508,7 +507,7 @@ Iterator to the element *after* the last element copied.
 
 ## `Kokkos::Experimental::copy`
 
-```cpp
+```c++
 template <class ExecutionSpace, class InputIteratorType, class OutputIteratorType>
 OutputIteratorType copy(const ExecutionSpace& exespace,                      (1)
                         InputIteratorType first_from,
@@ -580,7 +579,7 @@ Iterator to the destination element *after* the last element copied.
 
 ## `Kokkos::Experimental::copy_n`
 
-```cpp
+```c++
 template <class ExecutionSpace, class InputIteratorType, class SizeType, class OutputIteratorType>
 OutputIteratorType copy_n(const ExecutionSpace& exespace,                    (1)
                           InputIteratorType first_from,
@@ -647,7 +646,7 @@ Otherwise, returns `first_to` (for 1,2) or `Kokkos::begin(view_to)` (for 3,4).
 
 ## `Kokkos::Experimental::copy_backward`
 
-```cpp
+```c++
 template <class ExecutionSpace, class InputIteratorType, class OutputIteratorType>
 OutputIteratorType copy_backward(const ExecutionSpace& exespace,                (1)
                                  InputIteratorType first_from,
@@ -720,7 +719,7 @@ Iterator to the last element copied.
 
 ## `Kokkos::Experimental::copy_if`
 
-```cpp
+```c++
 template <
   class ExecutionSpace, class InputIteratorType, class OutputIteratorType, class UnaryPredicateType
 >
@@ -796,7 +795,7 @@ Iterator to the destination element *after* the last element copied.
 
 ## `Kokkos::Experimental::generate`
 
-```cpp
+```c++
 template <class ExecutionSpace, class IteratorType, class GeneratorType>
 void generate(const ExecutionSpace& exespace,                                (1)
               IteratorType first, IteratorType last,
@@ -843,7 +842,7 @@ range `[first, last)` (overloads 1,2) or in the `view` (overloads 3,4).
   - must be accessible from `exespace`
 - `g`:
   - functor of the form:
-  ```cpp
+  ```c++
   struct Generate
   {
       KOKKOS_INLINE_FUNCTION
@@ -864,7 +863,7 @@ None
 
 ## `Kokkos::Experimental::generate_n`
 
-```cpp
+```c++
 template <class ExecutionSpace, class IteratorType, class SizeType, class GeneratorType>
 IteratorType generate_n(const ExecutionSpace& exespace,                      (1)
                         IteratorType first, SizeType n,
@@ -920,7 +919,7 @@ Otherwise, returns `first` (for 1,2) or `Kokkos::begin(view)` (for 3,4).
 
 ## `Kokkos::Experimental::transform`
 
-```cpp
+```c++
 template <class ExecutionSpace, class InputIterator, class OutputIterator, class UnaryOperation>
 OutputIterator transform(const ExecutionSpace& exespace,                        (1)
                          InputIterator first_from, InputIterator last_from,
@@ -1055,7 +1054,7 @@ Iterator to the element *after* the last element transformed.
 
 ## `Kokkos::Experimental::reverse`
 
-```cpp
+```c++
 template <class ExecutionSpace, class IteratorType, class T>
 void reverse(const ExecutionSpace& exespace,                                    (1)
              IteratorType first, IteratorType last);
@@ -1107,7 +1106,7 @@ None
 
 ## `Kokkos::Experimental::reverse_copy`
 
-```cpp
+```c++
 template <class ExecutionSpace, class InputIterator, class OutputIterator>
 OutputIterator reverse_copy(const ExecutionSpace& exespace,                  (1)
                             InputIterator first_from,
@@ -1179,7 +1178,7 @@ Iterator to the element *after* the last element copied.
 
 ## `Kokkos::Experimental::move`
 
-```cpp
+```c++
 template <class ExecutionSpace, class InputIterator, class OutputIterator>
 OutputIterator move(const ExecutionSpace& exespace,                          (1)
                     InputIterator first_from,
@@ -1250,7 +1249,7 @@ Iterator to the element *after* the last element moved.
 
 ## `Kokkos::Experimental::move_backward`
 
-```cpp
+```c++
 template <class ExecutionSpace, class InputIterator, class OutputIterator>
 OutputIterator move_backward(const ExecutionSpace& exespace,                 (1)
                              InputIterator first_from,
@@ -1309,7 +1308,7 @@ Iterator to the element *after* the last element moved.
 
 ## `Kokkos::Experimental::swap_ranges`
 
-```cpp
+```c++
 template <class ExecutionSpace, class Iterator1, class Iterator2>
 Iterator2 swap_ranges(const ExecutionSpace& exespace,                        (1)
                       Iterator1 first1, Iterator1 last1,
@@ -1375,7 +1374,7 @@ Iterator to the element *after* the last element swapped.
 
 ### `Kokkos::Experimental::unique`
 
-```cpp
+```c++
 template <class ExecutionSpace, class IteratorType>
 IteratorType unique(const ExecutionSpace& exespace,                          (1)
                     IteratorType first, IteratorType last);
@@ -1460,7 +1459,7 @@ Iterator to the element *after* the new logical end of the range
 
 ### `Kokkos::Experimental::unique_copy`
 
-```cpp
+```c++
 template <class ExecutionSpace, class InputIterator, class OutputIterator>
 OutputIterator unique_copy(const ExecutionSpace& exespace,                    (1)
                            InputIterator first_from, InputIterator last_from,
@@ -1570,7 +1569,7 @@ Iterator to the element *after* the last element copied in the destination range
 
 ## `Kokkos::Experimental::rotate`
 
-```cpp
+```c++
 template <class ExecutionSpace, class IteratorType>
 IteratorType rotate(const ExecutionSpace& exespace,                            (1)
                     IteratorType first,
@@ -1638,7 +1637,7 @@ new range and `n_first - 1` becomes the last element.
 
 ## `Kokkos::Experimental::rotate_copy`
 
-```cpp
+```c++
 template <class ExecutionSpace, class InputIterator, class OutputIterator>
 OutputIterator rotate_copy(const ExecutionSpace& exespace,                   (1)
                            InputIterator first_from,
@@ -1720,7 +1719,7 @@ Iterator to the element *after* the last element copied.
 
 ## `Kokkos::Experimental::remove`
 
-```cpp
+```c++
 template <class ExecutionSpace, class Iterator, class ValueType>
 Iterator remove(const ExecutionSpace& exespace,                             (1)
                 Iterator first, Iterator last,
@@ -1789,7 +1788,7 @@ Iterator to the element *after* the new logical end.
 
 ## `Kokkos::Experimental::remove_if`
 
-```cpp
+```c++
 template <class ExecutionSpace, class Iterator, class UnaryPredicateType>
 Iterator remove_if(const ExecutionSpace& exespace,                           (1)
                    Iterator first, Iterator last,
@@ -1843,7 +1842,7 @@ and the physical size of the container is unchanged.
   is the value type of `IteratorType` (for 1,2) or of `view` (for 3,4),
   and must not modify `v`.
   - must conform to:
-  ```cpp
+  ```c++
   struct Predicate
   {
      KOKKOS_INLINE_FUNCTION
@@ -1866,7 +1865,7 @@ Iterator to the element *after* the new logical end.
 
 ## `Kokkos::Experimental::remove_copy`
 
-```cpp
+```c++
 template <
   class ExecutionSpace,
   class InputIterator, class OutputIterator,
@@ -1951,7 +1950,7 @@ Iterator to the element after the last element copied.
 
 ## `Kokkos::Experimental::remove_copy_if`
 
-```cpp
+```c++
 template <
   class ExecutionSpace,
   class InputIterator, class OutputIterator,
@@ -2015,7 +2014,7 @@ those for which `pred` returns `true`.
   is the value type of `InputIteratorType` (for 1,2) or of `view_from` (for 3,4),
   and must not modify `v`.
   - must conform to:
-  ```cpp
+  ```c++
   struct Predicate
   {
      KOKKOS_INLINE_FUNCTION
@@ -2039,7 +2038,7 @@ Iterator to the element after the last element copied.
 
 ## `Kokkos::Experimental::shift_left`
 
-```cpp
+```c++
 template <class ExecutionSpace, class IteratorType>
 IteratorType shift_left(const ExecutionSpace& exespace,                 (1)
                         IteratorType first,
@@ -2102,7 +2101,7 @@ Otherwise, returns `first`.
 
 ## `Kokkos::Experimental::shift_right`
 
-```cpp
+```c++
 template <class ExecutionSpace, class IteratorType>
 IteratorType shift_right(const ExecutionSpace& exespace,                  (1)
                          IteratorType first,
