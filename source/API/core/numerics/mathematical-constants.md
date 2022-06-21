@@ -52,5 +52,5 @@ KOKKOS_FUNCTION void example() {
 
 ---
 **See also**  
-[Common mathematical functions](Mathematical-Functions)  
-[Numeric traits](Numeric-Traits)  
+[Common mathematical functions](mathematical-functions)  
+[Numeric traits](numeric-traits)  

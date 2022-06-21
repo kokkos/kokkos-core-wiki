@@ -1,4 +1,3 @@
-
 # Minimum/maximum
 
 Header File: `Kokkos_Core.hpp`
@@ -16,7 +15,7 @@ Currently supported (see below the full details):
 
 ## `Kokkos::Experimental::min_element`
 
-```cpp
+```c++
 //
 // overload set accepting iterators
 //
@@ -97,7 +96,7 @@ auto min_element(const std::string& label,                              (8)
   `value_type`, where `value_type` is the value type of `IteratorType` (for 1,2,3,4)
   or the value type of `view` (for 5,6,7,8) and must not modify `a,b`.
   - must conform to:
-  ```cpp
+  ```c++
   struct Comparator
   {
      KOKKOS_INLINE_FUNCTION
@@ -132,7 +131,7 @@ The following special cases apply:
 
 ### Example
 
-```cpp
+```c++
 namespace KE = Kokkos::Experimental;
 Kokkos::View<double*> a("a", 13);
 // fill a somehow
@@ -174,7 +173,7 @@ auto res = KE::min_element(Kokkos::DefaultExecutionSpace(), a, CustomLessThanCom
 
 ## `Kokkos::Experimental::max_element`
 
-```cpp
+```c++
 //
 // overload set accepting iterators
 //
@@ -251,7 +250,7 @@ The following special cases apply:
 
 ### Example
 
-```cpp
+```c++
 namespace KE = Kokkos::Experimental;
 Kokkos::View<double*> a("a", 13);
 // fill a somehow
@@ -293,7 +292,7 @@ auto res = KE::max_element(Kokkos::DefaultExecutionSpace(), a, CustomLessThanCom
 
 ## `Kokkos::Experimental::minmax_element`
 
-```cpp
+```c++
 //
 // overload set accepting iterators
 //
@@ -376,7 +375,7 @@ The following special cases apply:
 
 ### Example
 
-```cpp
+```c++
 namespace KE = Kokkos::Experimental;
 Kokkos::View<double*> a("a", 11);
 
