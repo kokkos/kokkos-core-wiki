@@ -48,7 +48,7 @@ class MinLoc{
 ### Typedefs
    
  * `reducer`: The self type.
- * `value_type`: The reduction scalar type (specialization of [ValLocScalar](Kokkos%3A%3AValLocScalar))
+ * `value_type`: The reduction scalar type (specialization of [ValLocScalar](ValLocScalar))
  * `result_view_type`: A `Kokkos::View` referencing the reduction result 
 
 ### Constructors
