@@ -1,4 +1,3 @@
-
 # `Bitset`
 
 Header file: `Kokkos_Bitset.hpp`
@@ -25,13 +24,13 @@ class Bitset;
 ### Static Constants
 
 ```c++
-  static constexpr unsigned BIT_SCAN_REVERSE   = 1u
-  static constexpr unsigned MOVE_HINT_BACKWARD = 2u
+static constexpr unsigned BIT_SCAN_REVERSE   = 1u
+static constexpr unsigned MOVE_HINT_BACKWARD = 2u
 
-  static constexpr unsigned BIT_SCAN_FORWARD_MOVE_HINT_FORWARD = 0u
-  static constexpr unsigned BIT_SCAN_REVERSE_MOVE_HINT_FORWARD = BIT_SCAN_REVERSE
-  static constexpr unsigned BIT_SCAN_FORWARD_MOVE_HINT_BACKWARD = MOVE_HINT_BACKWARD
-  static constexpr unsigned BIT_SCAN_REVERSE_MOVE_HINT_BACKWARD = BIT_SCAN_REVERSE | MOVE_HINT_BACKWARD
+static constexpr unsigned BIT_SCAN_FORWARD_MOVE_HINT_FORWARD = 0u
+static constexpr unsigned BIT_SCAN_REVERSE_MOVE_HINT_FORWARD = BIT_SCAN_REVERSE
+static constexpr unsigned BIT_SCAN_FORWARD_MOVE_HINT_BACKWARD = MOVE_HINT_BACKWARD
+static constexpr unsigned BIT_SCAN_REVERSE_MOVE_HINT_BACKWARD = BIT_SCAN_REVERSE | MOVE_HINT_BACKWARD
 ```
 
 * ```BIT_SCAN_REVERSE``` : Bit mask for scanning direction
@@ -57,59 +56,59 @@ class Bitset;
 ### Constructors
 
 ```c++
-    Bitset(unsigned arg_size = 0u)
+Bitset(unsigned arg_size = 0u)
 ```
 Host/Device: Construct a bitset with ```arg_size``` bits.
 
 ## Data Access Functions
 
 ```c++
-  unsigned size() const
+unsigned size() const
 ```
   Host/Device: return the number of bits.
 
 ```c++
-  unsigned count() const
+unsigned count() const
 ```
   Host: return the number of bits which are set to ```1```.
 
 ```c++
-  void set()
+void set()
 ```
   Host: set all the bits to ```1```.
 
 ```c++
-  void reset();
-  void clear();
+void reset();
+void clear();
 ```
   Host/Device: set all the bits to ```0```.
 
 ```c++
-  void set(unsigned i)
+void set(unsigned i)
 ```
   Device: set the ```i```'th bit to ```1```.
 
 ```c++
-  void reset(unsigned i)
+void reset(unsigned i)
 ```
   Device: set the ```i```'th bit to ```0```.
 
 ```c++
-  bool test(unsigned i) const
+bool test(unsigned i) const
 ```
   Device: return ```true``` if and only if the ```i```'th bit is set to ```1```.
 
 ```c++
-  unsigned max_hint() const
+unsigned max_hint() const
 ```
   Host/Device: used with ```find_any_set_near(...)``` & ```find_any_reset_near(...)``` functions.
   Returns the max number of times those functions should be call
   when searching for an available bit.
 
 ```c++
-  Kokkos::pair<bool, unsigned> find_any_set_near(
-      unsigned hint,
-      unsigned scan_direction = BIT_SCAN_FORWARD_MOVE_HINT_FORWARD) const
+Kokkos::pair<bool, unsigned> find_any_set_near(
+  unsigned hint,
+  unsigned scan_direction = BIT_SCAN_FORWARD_MOVE_HINT_FORWARD) const
 ```
   Host/Device: starting at the `hint` position,
                find the first bit set to ```1```.
@@ -122,9 +121,9 @@ Host/Device: Construct a bitset with ```arg_size``` bits.
   otherwise, it occurs at a larger index than ```hint```.
 
 ```c++
-  Kokkos::pair<bool, unsigned> find_any_unset_near(
-      unsigned hint,
-      unsigned scan_direction = BIT_SCAN_FORWARD_MOVE_HINT_FORWARD) const;
+Kokkos::pair<bool, unsigned> find_any_unset_near(
+  unsigned hint,
+  unsigned scan_direction = BIT_SCAN_FORWARD_MOVE_HINT_FORWARD) const;
 ```
   Host/Device: starting at the `hint` position,
                find the first bit set to ```0```.
@@ -137,12 +136,9 @@ Host/Device: Construct a bitset with ```arg_size``` bits.
   otherwise, it occurs at a larger index than ```hint```.
 
 ```c++
-  constexpr bool is_allocated() const
+constexpr bool is_allocated() const
 ```
   Host/Device: the bits are allocated on the device.
-
-<br/>
-
 
 # `ConstBitset`
 
@@ -160,19 +156,19 @@ class ConstBitset
 ### Constructors / assignment
 
 ```c++
-  ConstBitset()
+ConstBitset()
 ```
   Host/Device: Construct a bitset with no bits.
 
 ```c++
-  ConstBitset(ConstBitset const& rhs) = default
-  ConstBitset& operator=(ConstBitset const& rhs) = default
+ConstBitset(ConstBitset const& rhs) = default
+ConstBitset& operator=(ConstBitset const& rhs) = default
 ```
   Copy constructor/assignment operator.
 
 ```c++
-  ConstBitset(Bitset<Device> const& rhs)
-  ConstBitset& operator=(Bitset<Device> const& rhs)
+ConstBitset(Bitset<Device> const& rhs)
+ConstBitset& operator=(Bitset<Device> const& rhs)
 ```
   Host/Device: Copy/assign a ```Bitset``` to a ```ConstBitset```.
 
@@ -182,12 +178,12 @@ class ConstBitset
   Host/Device: return the number of bits.
 
 ```c++
-  unsigned count() const
+unsigned count() const
 ```
    Host/Device: return the number of bits which are set to ```1```.
 
 ```c++
-  bool test(unsigned i) const
+bool test(unsigned i) const
 ```
   Host/Device: Return ```true``` if and only if the ```i```'th bit set to ```1```.
 
@@ -211,4 +207,3 @@ template <typename DstDevice, typename SrcDevice>
 void deep_copy(ConstBitset<DstDevice>& dst, ConstBitset<SrcDevice> const& src)
 ```
 Copy a ```ConstBitset``` from ```src``` on ```SrcDevice``` to ```dst``` on ```DstDevice```.
-
