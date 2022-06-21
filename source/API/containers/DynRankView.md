@@ -1,17 +1,16 @@
-
 # `DynRankView`
 
 Header File: `Kokkos_DynRankView.hpp`
 
 Usage: 
 
-`DynRankView` is a potentially reference counted multi dimensional array with compile time layouts and memory space.
+`DynRankView` is a potential reference counted multidimensional array with compile time layouts and memory space.
 Its semantics are similar to that of `std::shared_ptr`.
 The `DynRankView` differs from the [[View|Kokkos::View]] in that its rank is not provided with the `DataType` template parameter; it is determined dynamically based on the number of extent arguments passed to the constructor. The rank has an upper bound of 7 dimensions.
 
 ## Interface
 
-```cpp
+```c++
 template <class DataType [, class LayoutType] [, class MemorySpace] [, class MemoryTraits]>
 class DynRankView;
 ```
@@ -34,7 +33,6 @@ Template parameters other than `DataType` are optional, but ordering is enforced
     * `Restrict`: There is no aliasing of the view by other data structures in the current scope. 
 
 ### Requirements:
-  
 
 ## Public Class Members
 
@@ -47,7 +45,6 @@ Template parameters other than `DataType` are optional, but ordering is enforced
 ### Typedefs
 
 #### Data Types
-
  *  `data_type`: the `DataType` of the DynRankView.
  *  `const_data_type`: const version of `DataType`, same as `data_type` if that is already const.
  *  `non_const_data_type`: non-const version of `DataType`, same as `data_type` if that is already non-const.
@@ -84,7 +81,6 @@ Template parameters other than `DataType` are optional, but ordering is enforced
  *  `specialize`: a specialization tag used for partial specialization of the mapping construct underlying a Kokkos DynRankView.
 
 ### Constructors
-
   * `DynRankView()`: default constructor. No allocations are made, no reference counting happens. All extents are zero and its data pointer is `nullptr` and its rank is set to 0.
   * `DynRankView( const DynRankView<DT, Prop...>& rhs)`: Copy constructor with compatible DynRankViews. Follows DynRankView assignment rules. 
   * `DynRankView( DynRankView&& rhs)`: move constructor
@@ -124,13 +120,13 @@ Template parameters other than `DataType` are optional, but ordering is enforced
   * ```c++
     reference_type operator() (const IntType& ... indices) const
     ```
-    Returns a value of `reference_type` which may or not be referenceable itself. The number of index arguments must match the `rank` of the view.
+    Returns a value of `reference_type` which may or not be reference itself. The number of index arguments must match the `rank` of the view.
     See notes on `reference_type` for properties of the return type. 
 
   * ```c++
     reference_type access (const IntType& i0=0, ... , const IntType& i6=0) const
     ```
-    Returns a value of `reference_type` which may or not be referenceable itself. The number of index arguments must be equal or larger than the `rank` of the view.
+    Returns a value of `reference_type` which may or not be reference itself. The number of index arguments must be equal or larger than the `rank` of the view.
     Index arguments beyond `rank` must be `0`, which will be enforced if `KOKKOS_DEBUG` is defined. 
     See notes on `reference_type` for properties of the return type. 
 
@@ -258,7 +254,6 @@ These rules only cover cases where both layouts are one of `LayoutLeft`, `Layout
 
 
 ## Examples
-
 
 ```c++
 #include<Kokkos_Core.hpp>
