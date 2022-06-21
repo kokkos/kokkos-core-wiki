@@ -1,11 +1,10 @@
-
 # `UnorderedMap`
 
-Kokkos's unordered map is designed to efficently handle tens of thousands of concurrent insertions.  Consequently, the API is signifcantly different from the standard unordered_map.  The two key differences are *fixed capacity* and *index based*.
+Kokkos's unordered map is designed to efficiently handle tens of thousands of concurrent insertions.  Consequently, the API is significantly different from the standard unordered_map.  The two key differences are *fixed capacity* and *index based*.
 
 *Fixed capacity*:  The capacity of the unordered_map is fix when inside a parallel algorithm.  This means that an insert can fail when the capacity of the map is exceeded.  The capacity of the map can be changed (rehash) from the host.
 
-*Index based*:  Instead of returning pointers or iterators (which would not work when moving between memory spaces) the map uses integer indexes.  This also allows the map to store data in cache friendly ways.  The availablity of indexes is managed by an internal atomic bitset based on `uint32_t`.
+*Index based*:  Instead of returning pointers or iterators (which would not work when moving between memory spaces) the map uses integer indexes.  This also allows the map to store data in cache friendly ways.  The availability of indexes is managed by an internal atomic bitset based on `uint32_t`.
 
 An `UnorderedMap` behaves like an unordered set if the template parameter `Value` is void.
 
@@ -93,7 +92,6 @@ public:
 
 There are 3 potential states for every insertion which are reported by the `UnorderedMapInsertResult`: success, existing, and failed.  `success` implies that the current thread has successfully inserted its key/value pair.  `existing` implies that the key is already in the map and its current value is unchanged.  `failed` means that either the capacity of the map was exhausted or that a free index was not found with a bounded search of the internal atomic bitset.  A `failed` insertion requires the user to increase the capacity (`rehash`) and restart the algoritm.
 
-
 ## Iteration
 
 Iterating over Kokkos' `UnorderedMap` is different from iterating over a standard container.  The pattern is to iterate over the capacity of the map and check if the current index is valid.
@@ -110,7 +108,3 @@ parallel_for(umap.capacity(), KOKKOS_LAMBDA (uint32_t i) {
   }
 });
 ```
-
-
-
-

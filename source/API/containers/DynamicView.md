@@ -1,4 +1,3 @@
-
 # `DynamicView`
 
 Header File: `Kokkos_DynamicView.hpp`
@@ -6,27 +5,26 @@ Header File: `Kokkos_DynamicView.hpp`
 Usage: 
 Kokkos DynamicView is a potentially reference-counted rank 1 array, without layout, that can be dynamically resized on the host.
 
-  ```c++
-  const int chunk_size = 16*1024;
-  Kokkos::Experimental::DynamicView<double*> view("v", chunk_size, 10*chunk_size);
-  view.resize_serial(3*chunk_size);
-  Kokkos::parallel_for("InitializeData", 3*chunk_size, KOKKOS_LAMBDA ( const int i) {
-      view(i) = i;
-    });
-  ```
+```c++
+const int chunk_size = 16*1024;
+Kokkos::Experimental::DynamicView<double*> view("v", chunk_size, 10*chunk_size);
+view.resize_serial(3*chunk_size);
+Kokkos::parallel_for("InitializeData", 3*chunk_size, KOKKOS_LAMBDA ( const int i) {
+  view(i) = i;
+});
+```
 
 ## Synopsis 
 
   A rank 1 View-like class, instances can be dynamically resized on the host up to an upper limit provided by users at construction.
 
-  ```c++
-  template< typename DataType , typename ... P >
-  class DynamicView : public Kokkos::ViewTraits< DataType , P ... >
-  {
-  public:
+```c++
+template< typename DataType , typename ... P >
+class DynamicView : public Kokkos::ViewTraits< DataType , P ... >
+{
+public:
     typedef Kokkos::ViewTraits< DataType , P ... >  traits ;
-  private:
-  
+private:
     template< class , class ... > friend class DynamicView ;
     typedef Kokkos::Impl::SharedAllocationTracker  track_type ;
     template< class Space , bool = Kokkos::Impl::MemorySpaceAccess< Space , typename traits::memory_space >::accessible > struct verify_space;
@@ -38,7 +36,7 @@ Kokkos DynamicView is a potentially reference-counted rank 1 array, without layo
     unsigned                       m_chunk_max ;   // number of entries in the chunk array - each pointing to a chunk of extent == m_chunk_size entries
     unsigned                       m_chunk_size ;  // 2 << (m_chunk_shift - 1)
   
-  public:
+public:
     typedef DynamicView< typename traits::data_type, typename traits::device_type > array_type ;
     typedef DynamicView< typename traits::const_data_type, typename traits::device_type > const_type ;
     typedef DynamicView< typename traits::non_const_data_type, typename traits::device_type > non_const_type ;
@@ -128,8 +126,8 @@ Kokkos DynamicView is a potentially reference-counted rank 1 array, without layo
   
     explicit inline
     DynamicView( const std::string & arg_label, const unsigned min_chunk_size, const unsigned max_extent );
-  };
-  ```
+};
+```
   
 ## Public Class Members
 
@@ -286,4 +284,4 @@ Kokkos DynamicView is a potentially reference-counted rank 1 array, without layo
   * ```c++
     bool is_allocated() const;
     ```
-    Returns true if the View points to a valid set of allocated memory chunks.  Note that this will return false until resize_serial is called with a size greater than 0.  
+    Returns true if the View points to a valid set of allocated memory chunks.  Note that this will return false until resize_serial is called with a size greater than 0.
