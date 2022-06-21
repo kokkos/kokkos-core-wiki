@@ -1,4 +1,4 @@
-# ParallelScanTag()
+# `ParallelScanTag()`
 
 Header File: `Kokkos_ExecPolicy.hpp`
 

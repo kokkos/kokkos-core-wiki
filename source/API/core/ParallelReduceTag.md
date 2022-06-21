@@ -1,4 +1,4 @@
-# ParallelReduceTag()
+# `ParallelReduceTag()`
 
 Header File: `Kokkos_ExecPolicy.hpp`
 

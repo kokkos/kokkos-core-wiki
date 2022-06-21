@@ -1,4 +1,4 @@
-# ParallelForTag()
+# `ParallelForTag()`
 
 Header File: `Kokkos_ExecPolicy.hpp`
 
