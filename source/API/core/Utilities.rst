@@ -1,10 +1,9 @@
-
 Utilities
 =========
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
-   ./utilities/timer
-   ./utilities/complex
    ./utilities/abort
+   ./utilities/complex
+   ./utilities/timer
