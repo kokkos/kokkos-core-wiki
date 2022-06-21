@@ -1,4 +1,3 @@
-
 # Minimum/maximum
 
 Header File: `Kokkos_Core.hpp`

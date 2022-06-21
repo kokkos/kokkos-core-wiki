@@ -1,4 +1,3 @@
-
 # Sorting
 
 Header File: `Kokkos_Core.hpp`

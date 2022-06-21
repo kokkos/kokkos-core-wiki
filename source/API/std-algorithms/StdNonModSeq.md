@@ -1,4 +1,3 @@
-
 # NonModifying Sequence
 
 Header File: `Kokkos_Core.hpp`

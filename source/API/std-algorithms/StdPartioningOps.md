@@ -1,4 +1,3 @@
-
 # Partitioning
 
 Header File: `Kokkos_Core.hpp`
