@@ -12,10 +12,10 @@ In addition to the experience we have garnered over the past several years of pa
 
 When it comes to cognitive load, perhaps even more important than limiting the total number of concepts is limiting the number of *subsumption hierarchies* of concepts.  Experience with C++ ranges has also shown that limiting the branching width of these hierarchies increases ease of learning.  Roughly speaking and from a high-level perspective, the major user-visible concept hierarchies that Kokkos currently uses are:
 
-* `ExecutionSpace`
-* `MemorySpace`
-* `ExecutionPolicy` (includes, for instance, `RangePolicy`)
-* `TeamMember`
+* [`ExecutionSpace`](execution_spaces)
+* [`MemorySpace`](memory_spaces)
+* [`ExecutionPolicy`](Execution-Policies) (includes, for instance, [`RangePolicy`](policies/RangePolicy))
+* [`TeamMember`](policies/TeamHandleConcept)
 * `Functor`
 
 Some minor hierarchies include:
@@ -33,11 +33,11 @@ Some things currently being treated as concepts (according to `Kokkos_Concepts.h
     * The `LaunchBounds<>` tag
     * `IterationPattern` (a.k.a. `Kokkos::Iterate`)
 
-There is also some question as to whether `Kokkos::View` (and friends) should be presented as a concept rather than just a class template, given the existence of act-alike class templates such as `DualView` and `OffsetView` external to Kokkos.   
+There is also some question as to whether [`Kokkos::View`](view/view) (and friends) should be presented as a concept rather than just a class template, given the existence of act-alike class templates such as `DualView` and `OffsetView` external to Kokkos.   
 
 ## The `ExecutionSpace` Concept
 
-Working off the functionality currently common to `Serial`, `Cuda`, `OpenMP`, `Threads`, `ROCm`, and `OpenMPTarget`, the current state of the Kokkos `ExeuctionSpace` concept looks something like:
+Working off the functionality currently common to `Serial`, `Cuda`, `OpenMP`, `Threads`, `ROCm`, and `OpenMPTarget`, the current state of the Kokkos [`ExeuctionSpace`](ExecutionSpaceConcept) concept looks something like:
 
 ```c++
 template <typename Ex>
@@ -73,7 +73,7 @@ Where we've extrapolated from the recent progress on execution space instances t
 
 ### Implementation Requirements
 
-Further requirements cannot be expressed without additional types constrained by additional concepts (this is a well-known limitation of the concepts mechanism in C++, and is necessary to preserve decidability of the type system).  Though some argue for using an archetype pattern to get around this (whereby an archetype with an implementation-private name designed to meet the requirements of the extra concept is used in the definition of constraints), the state of practice appears to be converging on a strategy that involves creating an additional named concept templated on all relevant types and constraining them together, which can then be used at relevant call site.  Most argue that this is a necessary artifact of the language feature, but that constraining concepts together in this way does not count as an "extra" concept for the purposes of cognitive load assessment.  Applying this approach and assuming the intention is for things like `Kokkos::parallel_for` to remain as algorithms rather than customization points, we get some further requirements from the `Kokkos::Impl` namespace:
+Further requirements cannot be expressed without additional types constrained by additional concepts (this is a well-known limitation of the concepts mechanism in C++, and is necessary to preserve decidability of the type system).  Though some argue for using an archetype pattern to get around this (whereby an archetype with an implementation-private name designed to meet the requirements of the extra concept is used in the definition of constraints), the state of practice appears to be converging on a strategy that involves creating an additional named concept templated on all relevant types and constraining them together, which can then be used at relevant call site.  Most argue that this is a necessary artifact of the language feature, but that constraining concepts together in this way does not count as an "extra" concept for the purposes of cognitive load assessment.  Applying this approach and assuming the intention is for things like [`Kokkos::parallel_for`](parallel_for) to remain as algorithms rather than customization points, we get some further requirements from the `Kokkos::Impl` namespace:
 
 ```c++
 template <typename Ex, typename ExPol, typename F, typename ResultType = int>
@@ -134,7 +134,7 @@ concept UniqueTokenExecutionSpace =
 
 ### An Additional Concept for `DeviceExecutionSpace`?
 
-All of the device execution spaces, in their current state, have two extra member functions, `sleep()` and `wake()`.  It's unclear whether this is intended to be general, but if it is, there is an additional concept in the hierarchy:
+All the device execution spaces, in their current state, have two extra member functions, `sleep()` and `wake()`.  It's unclear whether this is intended to be general, but if it is, there is an additional concept in the hierarchy:
 
 ```c++
 template <typename Ex>
