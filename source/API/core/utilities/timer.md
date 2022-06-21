@@ -3,17 +3,17 @@
 Header File: `Kokkos_Core.hpp`
 
 Usage: 
-  ```c++
-  Kokkos::Timer timer;
-  double time = timer.seconds();
-  timer.reset();
-  ```
+```c++
+Kokkos::Timer timer;
+double time = timer.seconds();
+timer.reset();
+```
 
 Timer is a simple construct to measure time. 
 
 ## Synopsis 
-  ```c++
-  class Timer {
+```c++
+class Timer {
     typedef Timer execution_policy;
 
     //Constructors
@@ -25,8 +25,8 @@ Timer is a simple construct to measure time.
     //Member functions
     double seconds(); 
     void reset();
-  };
-  ```
+};
+```
 
 ## Public Class Members
 
@@ -38,12 +38,11 @@ Timer is a simple construct to measure time.
   
 ## Examples
 
-  ```c++
-    Timer timer;
-    // ...
-    double time1 = timer.seconds();
-    timer.reset();
-    // ...
-    double time2 = timer.seconds();
-  ```
-
+```c++
+Timer timer;
+// ...
+double time1 = timer.seconds();
+timer.reset();
+// ...
+double time2 = timer.seconds();
+```

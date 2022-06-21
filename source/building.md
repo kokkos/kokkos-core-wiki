@@ -1,4 +1,3 @@
-
 # Installation and Usage
 
 ## Kokkos Philosophy
@@ -92,7 +91,7 @@ For a complete list of Kokkos options, run:
 ````
 More details can be found in the [Spack README](Spack.md)
 
-#### Spack Development
+### Spack Development
 Spack currently installs packages to a location determined by a unique hash. This hash name is not really "human readable".
 Generally, Spack usage should never really require you to reference the computer-generated unique install folder.
 If you must know, you can locate Spack Kokkos installations with:

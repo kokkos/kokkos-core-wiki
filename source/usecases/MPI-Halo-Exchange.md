@@ -20,7 +20,7 @@ The way to do this is to obtain what MPI needs: a pointer to the start of the me
 and the number of items in the message via `Kokkos::View::size()`.
 Here is an example that sends `double` values from one rank to another.
 
-```cpp
+```c++
 int source_rank = 1;
 int destination_rank = 1;
 int number_of_doubles = 12;
@@ -71,7 +71,7 @@ known destination, and if they are then we number them consecutively in the orde
 (which is a scan operation).
 Here is an example which filters out a subset of items:
 
-```cpp
+```c++
 // an exclusive scan functor, which during the final pass will
 // assign into the compressed subset indices
 class subset_scanner {
@@ -124,7 +124,7 @@ we can use that list of indices to extract a subset of the simulation data to se
 Here, let us assume that we have a `Kokkos::View` which stores one floating-point value per element, and we want
 to extract a message containing only the floating-point values for the relevant subset.
 
-```cpp
+```c++
 Kokkos::View<double*> pack_message(Kokkos::View<double*> all_element_data, Kokkos::View<int*> subset_indices) {
   Kokkos::View<double*> message("message", subset_indices.size());
   Kokkos::parallel_for(subset_indices.size(), KOKKOS_LAMBDA(int i) {

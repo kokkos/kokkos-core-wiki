@@ -16,7 +16,7 @@ Those entries are ultimately stored in a `Kokkos::View` with one entry per node,
 during the algorithm they will be accessed through a `Kokkos::ScatterView` in order to
 prevent data races.
 
-```cpp
+```c++
 Kokkos::View<int*> count_adjacent_elements(Kokkos::View<int**> elements_to_nodes, int number_of_nodes) {
   Kokkos::View<int*> elements_per_node("elements_per_node", number_of_nodes);
   auto scatter_elements_per_node = Kokkos::Experimental::create_scatter_view(elements_per_node);
@@ -37,7 +37,7 @@ Kokkos::View<int*> count_adjacent_elements(Kokkos::View<int**> elements_to_nodes
 Computing the sum of the element values adjacent to a node is almost identical to computing
 the number of elements around a node:
 
-```cpp
+```c++
 Kokkos::View<double*> sum_to_nodes(Kokkos::View<int**> elements_to_nodes, int number_of_nodes,
     Kokkos::View<double*> element_values) {
   Kokkos::View<double*> node_values("node_values", number_of_nodes);
@@ -61,7 +61,7 @@ to take the ratio of these two sums and define the average.
 This function will be structured by assuming that the number of elements adjacent to each
 node has been pre-computed.
 
-```cpp
+```c++
 Kokkos::View<double*> average_to_nodes(Kokkos::View<int**> elements_to_nodes, int number_of_nodes,
     Kokkos::View<double*> element_values,
     Kokkos::View<int*> elements_per_node) {

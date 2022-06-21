@@ -1,10 +1,8 @@
-
 API: Algorithms
 ###############
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
-   ./algorithms/Sort
    ./algorithms/Random-Number
-   
+   ./algorithms/Sort
