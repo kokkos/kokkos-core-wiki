@@ -6,19 +6,17 @@ Shut down all enabled Kokkos backends and free all associated resources.
 This function should be called after calling all other Kokkos API functions,
 *including Kokkos object destructors*.
 
-Programs are ill-formed if they do not call this function after calling `Kokkos::initialize`.
-
+Programs are ill-formed if they do not call this function after calling [`Kokkos::initialize`](initialize).
 
 Usage: 
 ```c++
-   Kokkos::finalize();
+Kokkos::finalize();
 ```
 
 ## Interface
 
-
-```cpp
-  Kokkos::finalize();
+```c++
+Kokkos::finalize();
 ```
 
 ### Parameters:

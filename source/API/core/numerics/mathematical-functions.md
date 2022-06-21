@@ -143,5 +143,5 @@ _`func`_\* denotes functions not available with the SYCL backend
 
 ---
 **See also**  
-[Mathematical constants](Mathematical-Constants)  
-[Numeric traits](Numeric-Traits)  
+[Mathematical constants](mathematical-constants)  
+[Numeric traits](numeric-traits)  
