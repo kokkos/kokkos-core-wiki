@@ -3,20 +3,20 @@
 Header File: `Kokkos_Core.hpp`
 
 Usage: 
-  ```c++
-  Kokkos::MDRangePolicy<>(begin, end)
-  Kokkos::MDRangePolicy<>(Space, begin, end)
-  Kokkos::MDRangePolicy<ARGS>(begin, end, tiling)
-  Kokkos::MDRangePolicy<ARGS>(Space, begin, end, tiling)
-  ```
+```c++
+Kokkos::MDRangePolicy<>(begin, end)
+Kokkos::MDRangePolicy<>(Space, begin, end)
+Kokkos::MDRangePolicy<ARGS>(begin, end, tiling)
+Kokkos::MDRangePolicy<ARGS>(Space, begin, end, tiling)
+```
 
-`MDRangePolicy` defines an execution policy for a multi dimensional iteration space starting at a `begin` tuple and going to `end` with an open interval. The iteration space will be tiled, and the user can optionally provide tiling sizes. 
+`MDRangePolicy` defines an execution policy for a multidimensional iteration space starting at a `begin` tuple and going to `end` with an open interval. The iteration space will be tiled, and the user can optionally provide tiling sizes. 
 
 ## Interface 
-  ```c++
-  template<class ... Args>
-  class Kokkos::MDRangePolicy;
-  ```
+```c++
+template<class ... Args>
+class Kokkos::MDRangePolicy;
+```
 
 ## Parameters:
 
@@ -78,9 +78,7 @@ Usage:
 
 ## Examples
 
-  ```c++
-    MDRangePolicy<Rank<3>> policy_1({0,0,0},{N0,N1,N2});
-    MDRangePolicy<Cuda,Rank<3,Iterate::Right,Iterate::Left>> policy_2({5,5,5},{N0-5,N1-5,N2-5},{T0,T1,T2});
-  ```
-
-
+```c++
+MDRangePolicy<Rank<3>> policy_1({0,0,0},{N0,N1,N2});
+MDRangePolicy<Cuda,Rank<3,Iterate::Right,Iterate::Left>> policy_2({5,5,5},{N0-5,N1-5,N2-5},{T0,T1,T2});
+```
