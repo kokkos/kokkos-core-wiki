@@ -3,10 +3,10 @@
 Header File: `Kokkos_Core.hpp`
 
 Usage:
-  ```c++
-  resize(view,n0,n1,n2,n3);
-  resize(view,layout);
-  ```
+```c++
+resize(view,n0,n1,n2,n3);
+resize(view,layout);
+```
 
 Reallocates a view to have the new dimensions. Can grow or shrink, and will preserve content of the common subextents.
 
@@ -45,7 +45,6 @@ void resize(const I& arg_prop, Kokkos::View<T, P...>& v,
 ```
 
 ## Description
-
 
 * ```c++
   template <class T, class... P>
@@ -114,4 +113,3 @@ void resize(const I& arg_prop, Kokkos::View<T, P...>& v,
     Kokkos::resize(Kokkos::WithoutInitializing, v, 2, 3);
     ```
     Resize a `Kokkos::View` with dynamic rank 2 to have dynamic extent 2 and 3 respectively preserving previous content. After this call, the new content is uninitialized.
-
