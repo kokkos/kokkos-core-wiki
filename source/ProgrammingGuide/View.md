@@ -109,7 +109,7 @@ You might also want a View of some class that itself contains Views. If you want
 A View of Views would have an "outer View," with zero or more "inner Views." [Section 6.2.2](view_types_of_data) above explains how the outer View's constructor would work.  The outer View's constructor does not just allocate memory; it also initializes the allocation by iterating over it using a [`Kokkos::parallel_for`](../API/core/parallel_for), and invoking the entry type's default constructor for each entry.  If the View's execution space is `Cuda`, then that means the entry type's default constructor needs to be correct to call on device. That is a problem, because the entry type in this case is itself View. View's constructor wants to allocate memory, and thus does not work on device. Kokkos parallel regions generally forbid memory allocation.
 
 You could create the outer View without initializing, like this:
-```cpp
+```c++
 using Kokkos::View;
 using Kokkos::view_alloc;
 using Kokkos::WithoutInitializing;
@@ -138,7 +138,7 @@ Here is how to create a View of Views, where each inner View has a separate owni
   7. Get rid of the outer View as you normally would.
 
 Here is an example:
-```cpp
+```c++
 using Kokkos::Cuda;
 using Kokkos::CudaSpace;
 using Kokkos::CudaUVMSpace;
@@ -246,7 +246,7 @@ For efficiency, View allocation and reference counting turn off inside of Kokkos
 ### 6.2.6 Lifetime
 
 The lifetime of an allocation begins when a View is constructed by an allocating constructor such as
-```cpp
+```c++
 Kokkos::View<int*> b("b", 10);
 ```
 The lifetime of an allocation ends when there are no more Views which reference that allocation (see reference counting above).
@@ -254,7 +254,7 @@ The lifetime of an allocation ends when there are no more Views which reference 
 Kokkos requires that the lifetime of all allocations ends before the call to [`Kokkos::finalize`](../API/core/initialize_finalize/finalize)!
 
 For example, the following is incorrect usage of Kokkos:
-```cpp
+```c++
 int main() {
   Kokkos::initialize();
   Kokkos::View<double*> p("constructed view", 100);

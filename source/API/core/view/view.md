@@ -9,7 +9,7 @@ Its semantics are similar to that of `std::shared_ptr`.
 
 ## Interface
 
-```cpp
+```c++
 template <class DataType [, class LayoutType] [, class MemorySpace] [, class MemoryTraits]>
 class View;
 ```
@@ -23,18 +23,17 @@ Template parameters other than `DataType` are optional, but ordering is enforced
     * `const int***[5][3]`: 5D View of `int` with 3 runtime and 2 compile dimensions. The data is `const`.
     * `Foo[6][2]`: 2D View of a class `Foo` with 2 compile time dimensions.
   * `LayoutType`: determines the mapping of indices into the underlying 1D memory storage. Custom Layouts can be implemented, but Kokkos comes with some built-in ones: 
-    * `LayoutRight`: strides increase from the right most to the left most dimension. The last dimension has a stride of one. This corresponds to how C multi dimensional arrays (`[][][]`) are laid out in memory. 
-    * `LayoutLeft`: strides increase from the left most to the right most dimension. The first dimension has a stride of one. This is the layout Fortran uses for its arrays. 
-    * `LayoutStride`: strides can be arbitrary for each dimension. 
+    * [`LayoutRight`](layoutRight): strides increase from the right most to the left most dimension. The last dimension has a stride of one. This corresponds to how C multi dimensional arrays (`[][][]`) are laid out in memory. 
+    * [`LayoutLeft`](layoutLeft): strides increase from the left most to the right most dimension. The first dimension has a stride of one. This is the layout Fortran uses for its arrays. 
+    * [`LayoutStride`](layoutStride): strides can be arbitrary for each dimension. 
   * `MemorySpace`: Controls the storage location. If omitted the default memory space of the default execution space is used (i.e. `Kokkos::DefaultExecutionSpace::memory_space`)
   * `MemoryTraits`: Sets access properties via enum parameters for the templated `Kokkos::MemoryTraits<>` class. Enums can be combined bit combined. Posible values:
     * `Unmanaged`: The View will not be reference counted. The allocation has to be provided to the constructor.
-    * `Atomic`: All accesses to the view will use atomic operations. 
+    * [`Atomic`](../atomics): All accesses to the view will use atomic operations. 
     * `RandomAccess`: Hint that the view is used in a random access manner. If the view is also `const` this will trigger special load operations on GPUs (i.e. texture fetches).
     * `Restrict`: There is no aliasing of the view by other data structures in the current scope. 
 
 ### Requirements:
-  
 
 ## Public Class Members
 

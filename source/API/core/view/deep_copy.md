@@ -4,48 +4,48 @@ Header File: `Kokkos_Core.hpp`
 
 Usage: 
 ```c++
-  Kokkos::deep_copy(exec_space, dest, src);
-  Kokkos::deep_copy(dest, src);
+Kokkos::deep_copy(exec_space, dest, src);
+Kokkos::deep_copy(dest, src);
 ```
 
-Copies data from `src` to `dest`, where `src` and `dest` can be [Kokkos::View](Kokkos%3A%3AView)s or scalars under certain circumstances.
+Copies data from `src` to `dest`, where `src` and `dest` can be [Kokkos::View](view)s or scalars under certain circumstances.
 
 ## Interface
 
-```cpp
+```c++
 template <class ExecSpace, class ViewDest, class ViewSrc>
 void Kokkos::deep_copy(const ExecSpace& exec_space, 
                        const ViewDest& dest,
                        const ViewSrc& src);
 ```
 
-```cpp
+```c++
 template <class ExecSpace, class ViewDest>
 void Kokkos::deep_copy(const ExecSpace& exec_space, 
                        const ViewDest& dest,
                        const typename ViewDest::value_type& src);
 ```
 
-```cpp
+```c++
 template <class ExecSpace, class ViewSrc>
 void Kokkos::deep_copy(const ExecSpace& exec_space, 
                        ViewSrc::value_type& dest,
                        const ViewSrc& src);
 ```
 
-```cpp
+```c++
 template <class ViewDest, class ViewSrc>
 void Kokkos::deep_copy(const ViewDest& dest,
                        const ViewSrc& src);
 ```
 
-```cpp
+```c++
 template <class ViewDest>
 void Kokkos::deep_copy(const ViewDest& dest,
                        const typename ViewDest::value_type& src);
 ```
 
-```cpp
+```c++
 template <class ViewSrc>
 void Kokkos::deep_copy(ViewSrc::value_type& dest,
                        const ViewSrc& src);
@@ -53,23 +53,23 @@ void Kokkos::deep_copy(ViewSrc::value_type& dest,
 
 ### Parameters:
 
-  * ExecSpace: An [ExecutionSpace](API-Spaces)
-  * ViewDest:A [view-like type](ViewLike) with a non-const `value_type` 
-  * ViewSrc: A [view-like type](ViewLike).
+  * ExecSpace: An [ExecutionSpace](../execution_spaces)
+  * ViewDest:A [view-like type](view_like) with a non-const `value_type` 
+  * ViewSrc: A [view-like type](view_like).
 
 ### Requirements:
 
-  * If `src` and `dest` are [Kokkos::View](Kokkos%3A%3AView)s, then all the following are true:
+  * If `src` and `dest` are [Kokkos::View](view)s, then all the following are true:
      * `std::is_same<ViewDest::non_const_value_type, ViewSrc::non_const_value_type>::value == true`
      * `src.rank == dest.rank` (or, for `Kokkos::DynRankView`, `src.rank() == dest.rank()`)
      * For all `k` in `[0, dest.rank)` `dest.extent(k) == src.extent(k)` (or the same as `dest.rank()`
-     * `src.span_is_contiguous() && dest.span_is_contiguous() && std::is_same<ViewDest::array_layout,ViewSrc::array_layout>::value`, *or* there exists an [ExecutionSpace](API-Spaces) `copy_space` (either given or defaulted) such that both `SpaceAccessibility<copy_space, ViewDest::memory_space>::accessible == true` and `SpaceAccessibility<copy_space,ViewSrc::memory_space>::accessible == true`.
-  * If `src` is a [Kokkos::View](Kokkos%3A%3AView) and `dest` is a scalar, then `src.rank == 0` is true.
+     * `src.span_is_contiguous() && dest.span_is_contiguous() && std::is_same<ViewDest::array_layout,ViewSrc::array_layout>::value`, *or* there exists an [ExecutionSpace](../execution_spaces) `copy_space` (either given or defaulted) such that both `SpaceAccessibility<copy_space, ViewDest::memory_space>::accessible == true` and `SpaceAccessibility<copy_space,ViewSrc::memory_space>::accessible == true`.
+  * If `src` is a [Kokkos::View](view) and `dest` is a scalar, then `src.rank == 0` is true.
 
 ## Semantics
 
-* If no [ExecutionSpace](API-Spaces) argument is provided, all outstanding operations (kernels, copy operation) in any execution spaces will be finished before the copy is executed, and the copy operation is finished before the call returns.
-* If an [ExecutionSpace](API-Spaces) argument `exec_space` is provided the call is potentially asynchronous—i.e., the call returns before the copy operation is executed. In that case the copy operation will occur only after any already submitted work to `exec_space` is finished, and the copy operation will be finished before any work submitted to `exec_space` after the `deep_copy` call returns is executed. Note: the copy operation is only synchronous with respect to work in the specific execution space instance, but not necessarily with work in other instances of the same type. This behaves analogous to issuing a `cudaMemcpyAsync` into a specific CUDA stream, without any additional synchronization.
+* If no [ExecutionSpace](../execution_spaces) argument is provided, all outstanding operations (kernels, copy operation) in any execution spaces will be finished before the copy is executed, and the copy operation is finished before the call returns.
+* If an [ExecutionSpace](../execution_spaces) argument `exec_space` is provided the call is potentially asynchronous—i.e., the call returns before the copy operation is executed. In that case the copy operation will occur only after any already submitted work to `exec_space` is finished, and the copy operation will be finished before any work submitted to `exec_space` after the `deep_copy` call returns is executed. Note: the copy operation is only synchronous with respect to work in the specific execution space instance, but not necessarily with work in other instances of the same type. This behaves analogous to issuing a `cudaMemcpyAsync` into a specific CUDA stream, without any additional synchronization.
 
 ## Examples
 

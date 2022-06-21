@@ -18,7 +18,7 @@ Create View allocation parameter bundle from argument list. Valid argument list 
 
 ## Synopsis
 
-```cpp
+```c++
 template <class... Args>
 **implementation-detail**
 view_alloc(Args const&... args);
@@ -31,7 +31,7 @@ view_wrap(Args const&... args);
 
 ## Description
 
-* ```cpp
+* ```c++
   template <class... Args>
   **implementation-detail**
   view_alloc(Args const&... args);
@@ -41,7 +41,7 @@ view_wrap(Args const&... args);
   Restrictions:
   * `args`: Cannot contain a pointer to memory.
 
-* ```cpp
+* ```c++
   template <class... Args>
   **implementation-detail**
   view_alloc(Args const&... args);

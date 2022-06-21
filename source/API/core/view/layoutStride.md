@@ -8,15 +8,15 @@ Most frequently encountered when taking a noncontiguous subview of some larger v
 
 Usage: 
 
-  ```c++
-  Kokkos::View<float***> full_mesh; // an entire mesh
-  Kokkos::View<float**, Kokkos::LayoutStride> mesh_subcomponent;
-  mesh_subcomponent = Kokkos::subview(full_mesh,Kokkos::ALL(), 0, Kokkos::ALL()); // take x and z components
-  ```
+```c++
+Kokkos::View<float***> full_mesh; // an entire mesh
+Kokkos::View<float**, Kokkos::LayoutStride> mesh_subcomponent;
+mesh_subcomponent = Kokkos::subview(full_mesh,Kokkos::ALL(), 0, Kokkos::ALL()); // take x and z components
+```
 
 ## Synopsis 
-  ```c++
-  struct LayoutStride {
+```c++
+struct LayoutStride {
     typedef LayoutStride array_layout;
   
     size_t dimension[ARRAY_LAYOUT_MAX_RANK];
@@ -41,8 +41,8 @@ Usage:
                                     size_t S4 = 0, size_t N5 = 0, size_t S5 = 0,
                                     size_t N6 = 0, size_t S6 = 0, size_t N7 = 0,
                                     size_t S7 = 0);
-  };
-  ```
+};
+```
 
 ## Public Class Members
 
@@ -68,26 +68,26 @@ Usage:
 
 ### Constructors
 
-  * LayoutStride(LayoutStride const&) = default;
+  * `LayoutStride(LayoutStride const&) = default;`
 
     Default copy constructor, element-wise copies the other Layout
 
-  * LayoutStride(LayoutStride&&)      = default;
+  * `LayoutStride(LayoutStride&&) = default;`
  
     Default move constructor, element-wise moves the other Layout
 
   * 
-  ```c++
-  KOKKOS_INLINE_FUNCTION
-  explicit constexpr LayoutStride(size_t N0 = 0, size_t S0 = 0, size_t N1 = 0,
-                                  size_t S1 = 0, size_t N2 = 0, size_t S2 = 0,
-                                  size_t N3 = 0, size_t S3 = 0, size_t N4 = 0,
-                                  size_t S4 = 0, size_t N5 = 0, size_t S5 = 0,
-                                  size_t N6 = 0, size_t S6 = 0, size_t N7 = 0,
-                                  size_t S7 = 0);
-  ```
+```c++
+KOKKOS_INLINE_FUNCTION
+explicit constexpr LayoutStride(size_t N0 = 0, size_t S0 = 0, size_t N1 = 0,
+                              size_t S1 = 0, size_t N2 = 0, size_t S2 = 0,
+                              size_t N3 = 0, size_t S3 = 0, size_t N4 = 0,
+                              size_t S4 = 0, size_t N5 = 0, size_t S5 = 0,
+                              size_t N6 = 0, size_t S6 = 0, size_t N7 = 0,
+                              size_t S7 = 0);
+```
   
-  Constructor that takes in up to 8 sizes, to set the sizes of the corresponding dimenesions of the Layout
+  Constructor that takes in up to 8 sizes, to set the sizes of the corresponding dimensions of the Layout
 
 ### Assignment operators
 
