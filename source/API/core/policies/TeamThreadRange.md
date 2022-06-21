@@ -9,7 +9,7 @@ parallel_reduce(TeamThreadRange(team,begin,end),
   [=] (int i, double& lsum) {...},sum);
 ```
 
-TeamThreadRange is a [nested execution policy](https://github.com/kokkos/kokkos/wiki/Execution-Policies#nested-execution-policies) used inside of hierarchical parallelism. 
+TeamThreadRange is a [nested execution policy](NestedPolicies) used inside hierarchical parallelism. 
 In contrast to global policies, the public interface for nested policies is implemented 
 as functions, in order to enable implicit templating on the execution space type via 
 the team handle.
