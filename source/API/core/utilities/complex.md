@@ -3,123 +3,121 @@
 Header File: `Kokkos_Core.hpp`
 
 Usage: 
-  ```c++
-  Kokkos::complex<double> a,b;
-  a.imag() = 5.0; a.real() = 1.0
-  b = a;
-  a += b;
-  ```
-
-. 
+```c++
+Kokkos::complex<double> a,b;
+a.imag() = 5.0; a.real() = 1.0
+b = a;
+a += b;
+```
 
 ## Synopsis 
-  ```c++
-  template<class Scalar>
-  class complex {
-      
-    public:
-      typedef Scalar value_type;
+```c++
+template<class Scalar>
+class complex {
+   
+ public:
+   typedef Scalar value_type;
 
-    private: 
-      value_type re,im;      
+ private: 
+   value_type re,im;      
 
-    public:
+ public:
 
-      KOKKOS_INLINE_FUNCTION complex();
-      KOKKOS_INLINE_FUNCTION complex(const complex& src);
-      KOKKOS_INLINE_FUNCTION complex(const volatile complex& src);
+   KOKKOS_INLINE_FUNCTION complex();
+   KOKKOS_INLINE_FUNCTION complex(const complex& src);
+   KOKKOS_INLINE_FUNCTION complex(const volatile complex& src);
 
-      template<class T>
-      KOKKOS_INLINE_FUNCTION complex(const T& re);
-      
-      template <class T1, class T2>
-      KOKKOS_INLINE_FUNCTION complex(const T1& re, const T2& im)
-      
-      template<class T>
-      complex(const std::complex<T>& src);
+   template<class T>
+   KOKKOS_INLINE_FUNCTION complex(const T& re);
+   
+   template <class T1, class T2>
+   KOKKOS_INLINE_FUNCTION complex(const T1& re, const T2& im)
+   
+   template<class T>
+   complex(const std::complex<T>& src);
 
-      template<class T>
-      KOKKOS_INLINE_FUNCTION complex<Scalar>& operator= (const complex<T>& src);
-      template<class T>
-      KOKKOS_INLINE_FUNCTION complex<Scalar>& operator= (const volatile complex<T>& src);
-      template<class T>
-      KOKKOS_INLINE_FUNCTION complex<Scalar>& operator= (const complex<T>& src) volatile;
-      template<class T>
-      KOKKOS_INLINE_FUNCTION complex<Scalar>& operator= (const volatile complex<T>& src) volatile;
+   template<class T>
+   KOKKOS_INLINE_FUNCTION complex<Scalar>& operator= (const complex<T>& src);
+   template<class T>
+   KOKKOS_INLINE_FUNCTION complex<Scalar>& operator= (const volatile complex<T>& src);
+   template<class T>
+   KOKKOS_INLINE_FUNCTION complex<Scalar>& operator= (const complex<T>& src) volatile;
+   template<class T>
+   KOKKOS_INLINE_FUNCTION complex<Scalar>& operator= (const volatile complex<T>& src) volatile;
 
-      template<class T>
-      KOKKOS_INLINE_FUNCTION complex<Scalar>& operator= (const T& re);
-      template<class T>
-      KOKKOS_INLINE_FUNCTION complex<Scalar>& operator= (const T& re) volatile;
+   template<class T>
+   KOKKOS_INLINE_FUNCTION complex<Scalar>& operator= (const T& re);
+   template<class T>
+   KOKKOS_INLINE_FUNCTION complex<Scalar>& operator= (const T& re) volatile;
 
-      template<class T>
-      KOKKOS_INLINE_FUNCTION complex<Scalar>& operator= (const std::complex<T>& src);
-      template<class T>
+   template<class T>
+   KOKKOS_INLINE_FUNCTION complex<Scalar>& operator= (const std::complex<T>& src);
+   template<class T>
 
-      operator std::complex<Scalar>() const;
+   operator std::complex<Scalar>() const;
 
-      KOKKOS_INLINE_FUNCTION RealType& imag();
-      KOKKOS_INLINE_FUNCTION RealType& real();
-      KOKKOS_INLINE_FUNCTION const RealType imag() const;
-      KOKKOS_INLINE_FUNCTION const RealType real() const;
-      KOKKOS_INLINE_FUNCTION volatile RealType& imag() volatile;
-      KOKKOS_INLINE_FUNCTION volatile RealType& real() volatile;
-      KOKKOS_INLINE_FUNCTION const RealType imag() const volatile;
-      KOKKOS_INLINE_FUNCTION const RealType real() const volatile;
-      KOKKOS_INLINE_FUNCTION void imag(RealType v);
-      KOKKOS_INLINE_FUNCTION void real(RealType v);
+   KOKKOS_INLINE_FUNCTION RealType& imag();
+   KOKKOS_INLINE_FUNCTION RealType& real();
+   KOKKOS_INLINE_FUNCTION const RealType imag() const;
+   KOKKOS_INLINE_FUNCTION const RealType real() const;
+   KOKKOS_INLINE_FUNCTION volatile RealType& imag() volatile;
+   KOKKOS_INLINE_FUNCTION volatile RealType& real() volatile;
+   KOKKOS_INLINE_FUNCTION const RealType imag() const volatile;
+   KOKKOS_INLINE_FUNCTION const RealType real() const volatile;
+   KOKKOS_INLINE_FUNCTION void imag(RealType v);
+   KOKKOS_INLINE_FUNCTION void real(RealType v);
 
-      template<class T>
-      KOKKOS_INLINE_FUNCTION complex& operator += (const complex<T>& src);
-      template<class T>
-      KOKKOS_INLINE_FUNCTION complex& operator += (const volatile complex<T>& src) volatile;
-      template<class T>
-      complex& operator += (const std::complex<T>& src);
-      template<class T>
-      KOKKOS_INLINE_FUNCTION complex& operator += (const T& real);
-      template<class T>
-      KOKKOS_INLINE_FUNCTION complex& operator += (const volatile T& real) real;
+   template<class T>
+   KOKKOS_INLINE_FUNCTION complex& operator += (const complex<T>& src);
+   template<class T>
+   KOKKOS_INLINE_FUNCTION complex& operator += (const volatile complex<T>& src) volatile;
+   template<class T>
+   complex& operator += (const std::complex<T>& src);
+   template<class T>
+   KOKKOS_INLINE_FUNCTION complex& operator += (const T& real);
+   template<class T>
+   KOKKOS_INLINE_FUNCTION complex& operator += (const volatile T& real) real;
 
-      template<class T>
-      KOKKOS_INLINE_FUNCTION complex& operator -= (const complex<T>& src);
-      template<class T>
-      complex& operator -= (const std::complex<T>& src);
-      template<class T>
-      KOKKOS_INLINE_FUNCTION complex& operator -= (const T& real);
+   template<class T>
+   KOKKOS_INLINE_FUNCTION complex& operator -= (const complex<T>& src);
+   template<class T>
+   complex& operator -= (const std::complex<T>& src);
+   template<class T>
+   KOKKOS_INLINE_FUNCTION complex& operator -= (const T& real);
 
-      template<class T>
-      KOKKOS_INLINE_FUNCTION complex& operator *= (const complex<T>& src);
-      template<class T>
-      KOKKOS_INLINE_FUNCTION complex& operator *= (const volatile complex<T>& src) volatile;
-      template<class T>
-      complex& operator *= (const std::complex<T>& src);
-      template<class T>
-      KOKKOS_INLINE_FUNCTION complex& operator *= (const T& real);
-      template<class T>
-      KOKKOS_INLINE_FUNCTION complex& operator *= (const volatile T& real) real;
+   template<class T>
+   KOKKOS_INLINE_FUNCTION complex& operator *= (const complex<T>& src);
+   template<class T>
+   KOKKOS_INLINE_FUNCTION complex& operator *= (const volatile complex<T>& src) volatile;
+   template<class T>
+   complex& operator *= (const std::complex<T>& src);
+   template<class T>
+   KOKKOS_INLINE_FUNCTION complex& operator *= (const T& real);
+   template<class T>
+   KOKKOS_INLINE_FUNCTION complex& operator *= (const volatile T& real) real;
 
-      template<class T>
-      KOKKOS_INLINE_FUNCTION complex& operator /= (const complex<T>& src);
-      template<class T>
-      complex& operator /= (const std::complex<T>& src);
-      template<class T>
-      KOKKOS_INLINE_FUNCTION complex& operator /= (const T& real);
+   template<class T>
+   KOKKOS_INLINE_FUNCTION complex& operator /= (const complex<T>& src);
+   template<class T>
+   complex& operator /= (const std::complex<T>& src);
+   template<class T>
+   KOKKOS_INLINE_FUNCTION complex& operator /= (const T& real);
 
-      template<class T>
-      KOKKOS_INLINE_FUNCTION complex& operator == (const complex<T>& src);
-      template<class T>
-      complex& operator == (const std::complex<T>& src);
-      template<class T>
-      KOKKOS_INLINE_FUNCTION complex& operator == (const T& real);
+   template<class T>
+   KOKKOS_INLINE_FUNCTION complex& operator == (const complex<T>& src);
+   template<class T>
+   complex& operator == (const std::complex<T>& src);
+   template<class T>
+   KOKKOS_INLINE_FUNCTION complex& operator == (const T& real);
 
-      template<class T>
-      KOKKOS_INLINE_FUNCTION complex& operator != (const complex<T>& src);
-      template<class T>
-      complex& operator != (const std::complex<T>& src);
-      template<class T>
-      KOKKOS_INLINE_FUNCTION complex& operator != (const T& real);
-  };
-  ```
+   template<class T>
+   KOKKOS_INLINE_FUNCTION complex& operator != (const complex<T>& src);
+   template<class T>
+   complex& operator != (const std::complex<T>& src);
+   template<class T>
+   KOKKOS_INLINE_FUNCTION complex& operator != (const T& real);
+};
+```
 
 ## Public Class Members
 
@@ -212,7 +210,6 @@ Usage:
 
 ### Functions
 
-
  * ```c++
       KOKKOS_INLINE_FUNCTION RealType& imag();
    ```
@@ -254,7 +251,6 @@ Usage:
       KOKKOS_INLINE_FUNCTION void real(RealType v);
    ```
    Sets `re = v`.
-
 
  * ```c++
       template<class T>
@@ -369,4 +365,3 @@ Usage:
       KOKKOS_INLINE_FUNCTION complex& operator != (const T& real);
    ```
    Returns `re != src.real() || im != value_type()`.
-

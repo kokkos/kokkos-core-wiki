@@ -5,17 +5,17 @@ Header File: `Kokkos_Pair.hpp`
 An implementation of `std::pair` that is intended to be fully compatible, with the exception that `Kokkos::pair` will work on the device. Also provides utility functions to convert from and to `std::pair`
 
 Usage: 
-  ```c++
-    std::pair<int, float> std_pair = std::make_pair(1,2.0f); 
-    Kokkos::pair<int_float> kokkos_pair = Kokkos::make_pair(1,2.0f);
-    Kokkos::pair<int, float> converted_std_pair(std_pair);
-    std::pair<int,float> converted_kokkos_pair = kokkos_pair.to_std_pair();
-  ```
+```c++
+std::pair<int, float> std_pair = std::make_pair(1,2.0f); 
+Kokkos::pair<int_float> kokkos_pair = Kokkos::make_pair(1,2.0f);
+Kokkos::pair<int, float> converted_std_pair(std_pair);
+std::pair<int,float> converted_kokkos_pair = kokkos_pair.to_std_pair();
+```
 
 ## Synopsis 
-  ```c++
-  template <class T1, class T2>
-  struct pair {
+```c++
+template <class T1, class T2>
+struct pair {
 
     typedef T1 first_type;
     typedef T2 second_type;
@@ -43,14 +43,13 @@ Usage:
     pair(const std::pair<U, V>& p);
   
     std::pair<T1, T2> to_std_pair() const;
-  };
-  ```
+};
+```
 
 ### Public Class Members
 
   * `first`: the first element in the pair
   * `second`: the second element in the pair
-
 
 ### Typedefs
    
@@ -107,7 +106,6 @@ Sets `first` to `p.first` and `second` to `p.second`
   ```
   
   Sets `first` to `p.first` and `second` to `p.second` 
-
 
   ### Functions
 
