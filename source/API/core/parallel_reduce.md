@@ -2,7 +2,7 @@
 
 Header File: `Kokkos_Core.hpp`
 
-### Usage 
+## Usage 
 ```c++
 Kokkos::parallel_reduce( name, policy, functor, reducer... );
 Kokkos::parallel_reduce( name, policy, functor, result...);
@@ -16,20 +16,20 @@ Dispatches parallel work defined by `functor` according to the *ExecutionPolicy*
 
 ## Interface
 
-```cpp
+```c++
 template <class ExecPolicy, class FunctorType>
 Kokkos::parallel_reduce(const std::string& name, 
                         const ExecPolicy& policy, 
                         const FunctorType& functor);
 ```
 
-```cpp
+```c++
 template <class ExecPolicy, class FunctorType>
 Kokkos::parallel_reduce(const ExecPolicy& policy, 
                         const FunctorType& functor);
 ```
 
-```cpp
+```c++
 template <class ExecPolicy, class FunctorType, class ReducerArgument>
 Kokkos::parallel_reduce(const std::string& name, 
                         const ExecPolicy& policy, 
@@ -37,14 +37,14 @@ Kokkos::parallel_reduce(const std::string& name,
                         const ReducerArgument& reducer...);
 ```
 
-```cpp
+```c++
 template <class ExecPolicy, class FunctorType, class ReducerArgument>
 Kokkos::parallel_reduce(const ExecPolicy& policy, 
                         const FunctorType& functor, 
                         const ReducerArgument& reducer...);
 ```
 
-```cpp
+```c++
 template <class ExecPolicy, class FunctorType, class ReducerArgumentNonConst>
 Kokkos::parallel_reduce(const std::string& name, 
                         const ExecPolicy& policy, 
@@ -52,14 +52,14 @@ Kokkos::parallel_reduce(const std::string& name,
                         ReducerArgumentNonConst& reducer...);
 ```
 
-```cpp
+```c++
 template <class ExecPolicy, class FunctorType, class ReducerArgumentNonConst>
 Kokkos::parallel_reduce(const ExecPolicy& policy, 
                         const FunctorType& functor, 
                         ReducerArgumentNonConst& reducer...);
 ```
 
-```cpp
+```c++
 template <class ExecPolicy, class FunctorType, class ReducerArgument1, class... ReducerArguments>
 Kokkos::parallel_reduce(const std::string& name, 
                         const ExecPolicy& policy, 
@@ -67,14 +67,14 @@ Kokkos::parallel_reduce(const std::string& name,
                         const ReducerArgument& reducer...);
 ```
 
-```cpp
+```c++
 template <class ExecPolicy, class FunctorType, class ReducerArgument1, class... ReducerArguments>
 Kokkos::parallel_reduce(const ExecPolicy& policy, 
                         const FunctorType& functor, 
                         const ReducerArgument& reducer...);
 ```
 
-```cpp
+```c++
 template <class ExecPolicy, class FunctorType, class ReducerArgumentNonConst1, class... ReducerArgumentNonConsts>
 Kokkos::parallel_reduce(const std::string& name, 
                         const ExecPolicy& policy, 
@@ -82,14 +82,14 @@ Kokkos::parallel_reduce(const std::string& name,
                         ReducerArgumentNonConst& reducer...);
 ```
 
-```cpp
+```c++
 template <class ExecPolicy, class FunctorType, class ReducerArgumentNonConst1, class ReducerArgumentNonConsts>
 Kokkos::parallel_reduce(const ExecPolicy& policy, 
                         const FunctorType& functor, 
                         ReducerArgumentNonConst& reducer...);
 ```
 
-```cpp
+```c++
 template <class ExecPolicy, class FunctorType>
 Kokkos::parallel_reduce(const std::string& name, 
                         const ExecPolicy& policy, 
@@ -97,7 +97,7 @@ Kokkos::parallel_reduce(const std::string& name,
                         const ResultType& result...);
 ```
 
-```cpp
+```c++
 template <class ExecPolicy, class FunctorType>
 Kokkos::parallel_reduce(const ExecPolicy& policy, 
                         const FunctorType& functor, 
@@ -109,11 +109,11 @@ Kokkos::parallel_reduce(const ExecPolicy& policy,
   * `name`: A user provided string which is used in profiling and debugging tools via the Kokkos Profiling Hooks. 
   * ExecPolicy: An *ExecutionPolicy* which defines iteration space and other execution properties. Valid policies are:
     * `IntegerType`: defines a 1D iteration range, starting from 0 and going to a count.
-    * [RangePolicy](Kokkos%3A%3ARangePolicy): defines a 1D iteration range. 
-    * [MDRangePolicy](Kokkos%3A%3AMDRangePolicy): defines a multi-dimensional iteration space.
-    * [TeamPolicy](Kokkos%3A%3ATeamPolicy): defines a 1D iteration range, each of which is assigned to a thread team.
-    * [TeamThreadRange](Kokkos%3A%3ANestedPolicies): defines a 1D iteration range to be executed by a thread-team. Only valid inside a parallel region executed through a `TeamPolicy` or a `TaskTeam`.
-    * [ThreadVectorRange](Kokkos%3A%3ANestedPolicies): defines a 1D iteration range to be executed through vector parallelization dividing the threads within a team.  Only valid inside a parallel region executed through a `TeamPolicy` or a `TaskTeam`.
+    * [RangePolicy](policies/RangePolicy): defines a 1D iteration range. 
+    * [MDRangePolicy](policies/MDRangePolicy): defines a multi-dimensional iteration space.
+    * [TeamPolicy](policies/TeamPolicy): defines a 1D iteration range, each of which is assigned to a thread team.
+    * [TeamThreadRange](policies/TeamThreadRange): defines a 1D iteration range to be executed by a thread-team. Only valid inside a parallel region executed through a `TeamPolicy` or a `TaskTeam`.
+    * [ThreadVectorRange](policies/ThreadVectorRange): defines a 1D iteration range to be executed through vector parallelization dividing the threads within a team.  Only valid inside a parallel region executed through a `TeamPolicy` or a `TaskTeam`.
   * FunctorType: A valid functor with (at minimum) an `operator()` with a matching signature for the `ExecPolicy` combined with the reduced type.
   * ReducerArgument: Either a class fullfilling the "Reducer" concept or a `Kokkos::View`
   * ReducerArgumentNonConst: a class fullfilling the "Reducer" concept, a POD type with `operator +=` and `operator =`, or a `Kokkos::View`.  The ReducerArgumentNonConst can also be an array or a pointer; see below for functor requirements.
@@ -149,7 +149,7 @@ Kokkos::parallel_reduce(const ExecPolicy& policy,
 
 ## Examples
 
-Further examples are provided in the [Custom Reductions](Programming-Guide%3A-Custom-Reductions) and [ExecutionPolicy](Execution-Policies) documentation. 
+Further examples are provided in the [Custom Reductions](../../ProgrammingGuide/Custom-Reductions) and [ExecutionPolicy](policies/ExecutionPolicyConcept) documentation. 
 
 ```c++
 #include<Kokkos_Core.hpp>
