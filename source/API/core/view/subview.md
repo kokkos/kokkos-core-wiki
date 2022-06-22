@@ -3,9 +3,9 @@
 Header File: `Kokkos_Core.hpp`
 
 Usage:
-  ```c++
-  auto s = subview(view,std::pair<int,int>(5,191),Kokkos::ALL,1);
-  ```
+```c++
+auto s = subview(view,std::pair<int,int>(5,191),Kokkos::ALL,1);
+```
 
 Creates a `Kokkos::View` viewing a subset of another `Kokkos::View`.
 
@@ -56,23 +56,19 @@ IMPL_DETAIL subview(const ViewType& v, Args ... args);
 ## Examples
 
 ```c++
+Kokkos::View<double***[5]> a("A",N0,N1,N2);
 
-  Kokkos::View<double***[5]> a("A",N0,N1,N2);
+auto s  = Kokkos::subview(a,
+              std::pair<int,int>(3,15),
+              5,
+              Kokkos::ALL,
+              Kokkos::ALL);
+for(int i0 = 0; i0 < s.extent(0); i0++) 
+for(int i1 = 0; i1 < s.extent(1); i1++) 
+for(int i2 = 0; i2 < s.extent(2); i2++) {
+  assert(s(i0,i1,i2) == a(i0+3,5,i1,i2));
+}
 
-  auto s  = Kokkos::subview(a,
-                std::pair<int,int>(3,15),
-                5,
-                Kokkos::ALL,
-                Kokkos::ALL);
-  for(int i0 = 0; i0 < s.extent(0); i0++) 
-  for(int i1 = 0; i1 < s.extent(1); i1++) 
-  for(int i2 = 0; i2 < s.extent(2); i2++) {
-    assert(s(i0,i1,i2) == a(i0+3,5,i1,i2));
-  }
-
-  auto s3415 = Kokkos::subview(a,3,4,1,5);
-  assert(s3415() == a(3,4,1,5));
+auto s3415 = Kokkos::subview(a,3,4,1,5);
+assert(s3415() == a(3,4,1,5));
 ```
-
-
-
