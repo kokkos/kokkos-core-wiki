@@ -33,6 +33,12 @@ The experimentally support interface for Kokkos is in
 
 This namespace houses experimental features that are not yet ready for prime time.  The feature may be incomplete, and the interface may change between releases.  The intent is to eventually move them into the top level namespace Kokkos (with a suitable deprecation period where they are both in `namespace Kokkos` and `namespace Kokkos::Experimental`).  If you need the functionality (e.g., a new backend), you may use it knowing that you may have to change your code for newer minor releases of Kokkos (and eventually will have to change your code when it moves to the top-level Kokkos namespace). 
 
+## User Defined Macros & Compatibility
+
+User defined macros can be particularly problematic, as they change what is lexically seen by the compiler and do not obey the language scoping rules.  They could interfere with variable names, functions, etc., including private ones used in Kokkos and other libraries.
+
+In order to minimize the risk of collisons, user defined macros should be prefaced with `MYPROJECT_` (or a similar way to disambiguate them) and be in all caps (this informs code readers that macros don't obey the usual syntactic and semantic rules of C++).
+
 ## C++ Compatibility
 
 It is the intent of the Kokkos team for minimal C++ support to be one revision behind the latest published C++ standard (they are published every three years starting with C++11).  These releases are generally considered major.  This drives increasing the minimal supported compiler versions, as well as allowing the Kokkos Team to take advantage of new library and language features, as well removing workarounds for older compiler bugs and limitations.  Kokkos may also optionally support later versions of the C++ standard, giving users features should they be compiling in those modes.
@@ -52,7 +58,9 @@ The following are public headers:
 
     Kokkos_Core.hpp
 
-If a header is not public, please do not directly `#include` it.  It is not guaranteed to work now or continue to work in the future.
+If a header is not public, please do not directly `#include` it.  It is not guaranteed to work now or continue to work in the future.  This includes any headers found in subdirectories.
+
+
 
 ### Other rights the Kokkos Team reserves
 
