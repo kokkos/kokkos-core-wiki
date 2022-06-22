@@ -1,4 +1,3 @@
-
 # Numeric
 
 Header File: `Kokkos_Core.hpp`
@@ -6,21 +5,20 @@ Header File: `Kokkos_Core.hpp`
 **All algorithms are currently in the `Kokkos::Experimental` namespace.**
 
 Currently supported (see below the full details):
- - [`reduce`](#kokkosexperimentalreduce)
- - [`transform_reduce`](#kokkosexperimentaltransform_reduce)
- - [`exclusive_scan`](#kokkosexperimentalexclusive_scan)
- - [`transform_exclusive_scan`](#kokkosexperimentaltransform_exclusive_scan)
- - [`inclusive_scan`](#kokkosexperimentalinclusive_scan)
- - [`transform_inclusive_scan`](#kokkosexperimentaltransform_inclusive_scan)
- - [`adjacent_difference`](#kokkosexperimentaladjant_difference)
-
+ - [`reduce`](kokkosexperimentalreduce)
+ - [`transform_reduce`](kokkosexperimentaltransform_reduce)
+ - [`exclusive_scan`](kokkosexperimentalexclusive_scan)
+ - [`transform_exclusive_scan`](kokkosexperimentaltransform_exclusive_scan)
+ - [`inclusive_scan`](kokkosexperimentalinclusive_scan)
+ - [`transform_inclusive_scan`](kokkosexperimentaltransform_inclusive_scan)
+ - [`adjacent_difference`](kokkosexperimentaladjant_difference)
 
 ------
 
-
+(kokkosexperimentalreduce)=
 ## `Kokkos::Experimental::reduce`
 
-```cpp
+```c++
 //
 // overload set A
 //
@@ -142,7 +140,7 @@ ValueType reduce(const std::string& label, const ExecutionSpace& exespace,      
   Must be valid to be called from the execution space passed, and callable with
   two arguments `a,b` of type (possible const) `ValueType`, and must not modify `a,b`.
   - Must conform to:
-  ```cpp
+  ```c++
   struct JoinFunctor {
 	KOKKOS_FUNCTION
 	constexpr ValueType operator()(const ValueType& a, const ValueType& b) const {
@@ -164,14 +162,12 @@ ValueType reduce(const std::string& label, const ExecutionSpace& exespace,      
 
 The reduction result.
 
-
-
 ------
 
-
+(kokkosexperimentaltransform_reduce)=
 ## `Kokkos::Experimental::transform_reduce`
 
-```cpp
+```c++
 //
 // overload set A
 //
@@ -369,7 +365,7 @@ ValueType transform_reduce(const std::string& label,                            
   Must be valid to be called from the execution space passed, and callable with
   two arguments `a,b` of type (possible const) `ValueType`, and must not modify `a,b`.
   - Must conform to:
-  ```cpp
+  ```c++
   struct JoinFunctor {
 	KOKKOS_FUNCTION
 	constexpr ValueType operator()(const ValueType& a,
@@ -394,7 +390,7 @@ ValueType transform_reduce(const std::string& label,                            
   where `value_type_{a,b}` are the value types of `first1` and `first2` (for 1,2,5,6)
   or the value types of `first_view` and `second_view` (for 3,4,7,8), and must not modify `a,b`.
   - Must conform to:
-  ```cpp
+  ```c++
   struct BinaryTransformer {
 	KOKKOS_FUNCTION
 	constexpr return_type operator()(const value_type_a & a, const value_type_b & b) const {
@@ -411,7 +407,7 @@ ValueType transform_reduce(const std::string& label,                            
   where `value_type` is the value type of `first1` (for 9,10)
   or the value type of `first_view` (for 11,12), and must not modify `v`.
   - Must conform to:
-  ```cpp
+  ```c++
   struct UnaryTransformer {
 	KOKKOS_FUNCTION
 	constexpr value_type operator()(const value_type & v) const {
@@ -424,14 +420,12 @@ ValueType transform_reduce(const std::string& label,                            
 
 The reduction result.
 
-
-
 ------
 
-
+(kokkosexperimentalexclusive_scan)=
 ## `Kokkos::Experimental::exclusive_scan`
 
-```cpp
+```c++
 //
 // overload set A
 //
@@ -531,7 +525,6 @@ the results to the range beginning at `first_dest` (5,6) or to `view_dest` (7,8)
 
 Exclusive means that the i-th input element is not included in the i-th sum.
 
-
 ### Parameters and Requirements
 
 - `exespace`:
@@ -556,7 +549,7 @@ Exclusive means that the i-th input element is not included in the i-th sum.
   is the value type of `InputIteratorType` (for 1,2,5,6) or the value type
   of `view_from` (for 3,4,7,8), and must not modify `a,b`.
   - must conform to:
-  ```cpp
+  ```c++
   struct BinaryOp
   {
      KOKKOS_INLINE_FUNCTION
@@ -583,13 +576,12 @@ Exclusive means that the i-th input element is not included in the i-th sum.
 
 Iterator to the element *after* the last element written.
 
-
 ------
 
-
+(kokkosexperimentaltransform_exclusive_scan)=
 ## `Kokkos::Experimental::transform_exclusive_scan`
 
-```cpp
+```c++
 template <
   class ExecutionSpace, class InputIteratorType,
   class OutputIteratorType, class ValueType,
@@ -665,7 +657,7 @@ and written to `view_dest`
   where `value_type` is the value type of `first_from` (for 1,2)
   or the value type of `view_from` (for 3,4), and must not modify `v`.
   - Must conform to:
-  ```cpp
+  ```c++
   struct UnaryOp {
 	KOKKOS_FUNCTION
 	constexpr value_type operator()(const value_type & v) const {
@@ -677,14 +669,12 @@ and written to `view_dest`
 
 Iterator to the element *after* the last element written.
 
-
-
 ------
 
-
+(kokkosexperimentalinclusive_scan)=
 ## `Kokkos::Experimental::inclusive_scan`
 
-```cpp
+```c++
 //
 // overload set A
 //
@@ -840,15 +830,12 @@ Inclusive means that the i-th input element is included in the i-th sum.
 
 Iterator to the element *after* the last element written.
 
-
-
-
 ------
 
-
+(kokkosexperimentaltransform_inclusive_scan)=
 ## `Kokkos::Experimental::transform_inclusive_scan`
 
-```cpp
+```c++
 template <
   class ExecutionSpace, class InputIteratorType,
   class OutputIteratorType, class BinaryOpType, class UnaryOpType>
@@ -970,14 +957,12 @@ Inclusive means that the i-th input element is included in the i-th sum.
 
 Iterator to the element *after* the last element written.
 
-
-
 ------
 
-
+(kokkosexperimentaladjant_difference)=
 ## `Kokkos::Experimental::adjacent_difference`
 
-```cpp
+```c++
 template <class ExecutionSpace, class InputIteratorType, class OutputIteratorType>
 OutputIteratorType adjacent_difference(const ExecutionSpace& exespace,                    (1)
                                        InputIteratorType first_from,
@@ -1086,7 +1071,7 @@ auto adjacent_difference(const std::string& label,                              
   is the value type of `InputIteratorType` (for 1,2,3,4) or the value type
   of `view_from` (for 5,6,7,8), and must not modify `a,b`.
   - must conform to:
-  ```cpp
+  ```c++
   struct BinaryOp
   {
      KOKKOS_INLINE_FUNCTION

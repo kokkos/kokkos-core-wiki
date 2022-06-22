@@ -94,5 +94,5 @@ legacy_std_numeric_limits_infinity() {
 
 ---
 **See also**  
-[Mathematical constants](Mathematical-Constants)  
-[Common mathematical functions](Mathematical-Functions)  
+[Mathematical constants](mathematical-constants)  
+[Common mathematical functions](mathematical-functions)  
