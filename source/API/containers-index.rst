@@ -1,4 +1,3 @@
-
 API: Containers
 ###############
 
@@ -10,5 +9,7 @@ API: Containers
    ./containers/DynamicView
    ./containers/DynRankView
    ./containers/Offset-View
+   ./containers/ScatterView
+   ./containers/StaticCrsGraph
    ./containers/Unordered-Map
-
+   ./containers/vector
