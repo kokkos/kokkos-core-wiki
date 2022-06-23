@@ -1,4 +1,4 @@
-## ScatterView averaging elements to nodes
+# ScatterView averaging elements to nodes
 
 In order to demonstrate a typical use case for `Kokkos::ScatterView`, we can think of
 a finite element program where the only information available is a mapping from elements
@@ -6,7 +6,7 @@ to nodes, and we would like to average some quantity from the elements to the no
 This average is the ratio of two sums, namely the sum of the adjacent element quantities
 divided by the sum of adjacent elements.
 
-### Computing the number of adjacent elements
+## Computing the number of adjacent elements
 
 Even just computing the number of elements adjacent to a node will already demonstrate most
 of the necessary workflow around `Kokkos::ScatterView`.
@@ -32,7 +32,7 @@ Kokkos::View<int*> count_adjacent_elements(Kokkos::View<int**> elements_to_nodes
 }
 ```
 
-### Computing the value sums at nodes
+## Computing the value sums at nodes
 
 Computing the sum of the element values adjacent to a node is almost identical to computing
 the number of elements around a node:
@@ -54,7 +54,7 @@ Kokkos::View<double*> sum_to_nodes(Kokkos::View<int**> elements_to_nodes, int nu
 }
 ```
 
-### Computing the full average
+## Computing the full average
 
 Now that we have two sums at each node, it is sufficient to use one final loop over nodes
 to take the ratio of these two sums and define the average.
