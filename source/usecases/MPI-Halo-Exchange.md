@@ -1,4 +1,4 @@
-## MPI Halo Exchange
+# MPI Halo Exchange
 
 Kokkos and MPI are complementary programming models: Kokkos is designed to handle
 parallel programming within a shared-memory space, and MPI is designed to handle parallel programming
@@ -7,7 +7,7 @@ In order to create a fully scalable parallel program, it is often necessary to u
 Kokkos and MPI.
 This Use Case document walks through an example of how MPI and Kokkos can work together.
 
-### Sending a single message
+## Sending a single message
 
 MPI is based around message-passing semantics, and one of the simplest operations in MPI is sending
 a single message.
@@ -36,7 +36,7 @@ if (my_rank == source_rank) {
 }
 ```
 
-### CUDA-Aware MPI
+## CUDA-Aware MPI
 
 One common concern for programmers who are using CUDA GPU parallelism through Kokkos as well as MPI is
 how to use MPI to communicate between two ranks which are each using CUDA parallelism.
@@ -51,7 +51,7 @@ calling CUDA functions to copy the relevant memory from one place to another on 
 or from one GPU to another through PCIe or NVIDIA NVLINK if available.
 As such, the example above continues to work even if `Kokkos::DefaultExecutionSpace` is `Kokkos::Cuda`.
 
-### Separating out messages
+## Separating out messages
 
 There is often a need in unstructured MPI-based codes to determine what subsets of data need to be
 packed into which messages and sent to which other ranks, based on less structured information.
@@ -64,7 +64,7 @@ or redudantly copied, to the (possibly different) MPI rank which owns that eleme
 We can filter out the subset of these elements that are associated with a given owner using
 `Kokkos::parallel_scan` and subsequently pack messages using `Kokkos::parallel_for`.
 
-### Identifying subset indices
+## Identifying subset indices
 
 For the filter-out step, we simply need to identify which ranks (keys) are the same as some
 known destination, and if they are then we number them consecutively in the order they appear
@@ -117,7 +117,7 @@ Kokkos::View<int*> find_subset(Kokkos::View<int*> keys, int desired_key) {
 }
 ```
 
-### Extracting subset message
+## Extracting subset message
 
 Once we are able to produce a list of subset indices (those indices of elements which will be transmitted in one message),
 we can use that list of indices to extract a subset of the simulation data to send.
