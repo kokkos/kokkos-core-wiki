@@ -1,6 +1,6 @@
 # Random-Number
 
-#### headers:  Kokkos_Core.hpp, Kokkos_Complex.hpp
+## headers:  Kokkos_Core.hpp, Kokkos_Complex.hpp
 
 `template<class Generator>`
 `struct rand<Generator, gen_data_type>`
@@ -21,7 +21,7 @@
 
 Function specializations for _gen_data_type_, _gen_func_type_ and _type_value_
 
-All functions and classes listed here are part of the `Kokkos::` namespace. 
+All functions and classes listed here are part of the `Kokkos::` namespace.
 
 |gen_data_type |gen_func_type | type_value | gen_return_value            |
 |:-------------|:-------------|:-----------|:----------------------------|
@@ -52,7 +52,7 @@ Header Files:  `Kokkos_core.hpp`
                `Kokkos_Complex.hpp`
 
 ## Synopsis
-Kokkos_Random provides the structure necessary for 
+Kokkos_Random provides the structure necessary for
 pseudorandom number generators. These generators are
 based on Vigna, Sebastiano (2014). ["_An_
 _experimental exploration of Marsaglia's xorshift generators,_
