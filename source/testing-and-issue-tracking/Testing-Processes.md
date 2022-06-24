@@ -35,4 +35,3 @@ In order for a new Kokkos version to be released full integration testing is per
 A release is then formed by merging the Kokkos develop branch into its master branch, 
 and creating a git tag with the version number. 
 Details of the process are described in Testing Process Details. 
-

@@ -39,8 +39,6 @@ To avoid a memory leak, the returned pointer must be deallocated with [`Kokkos::
 
 On failure, throws `Kokkos::Experimental::RawMemoryAllocationFailure`.
 
-<br/>
-
 (kokkos_realloc)=
 ## `Kokkos::kokkos_realloc`
 
@@ -71,8 +69,6 @@ On failure, returns a null pointer. The original pointer ptr remains valid and m
 ### Exceptions
 
 On failure, throws `Kokkos::Experimental::RawMemoryAllocationFailure`.
-
-<br/>
 
 (kokkos_free)=
 ## `Kokkos::kokkos_free`

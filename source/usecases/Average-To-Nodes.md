@@ -1,6 +1,6 @@
 # ScatterView averaging elements to nodes
 
-In order to demonstrate a typical use case for `Kokkos::ScatterView`, we can think of
+In order to demonstrate a typical use case for [`Kokkos::ScatterView`](../API/containers/ScatterView), we can think of
 a finite element program where the only information available is a mapping from elements
 to nodes, and we would like to average some quantity from the elements to the nodes.
 This average is the ratio of two sums, namely the sum of the adjacent element quantities
@@ -9,11 +9,11 @@ divided by the sum of adjacent elements.
 ## Computing the number of adjacent elements
 
 Even just computing the number of elements adjacent to a node will already demonstrate most
-of the necessary workflow around `Kokkos::ScatterView`.
+of the necessary workflow around [`Kokkos::ScatterView`](../API/containers/ScatterView).
 The algorithm is as follows: we will iterate over mesh elements, in parallel, and each mesh
 element will identify its nodes and add one to an array entry specific to that node.
-Those entries are ultimately stored in a `Kokkos::View` with one entry per node, but
-during the algorithm they will be accessed through a `Kokkos::ScatterView` in order to
+Those entries are ultimately stored in a [`Kokkos::View`](../API/core/view/view) with one entry per node, but
+during the algorithm they will be accessed through a [`Kokkos::ScatterView`](../API/containers/ScatterView) in order to
 prevent data races.
 
 ```c++

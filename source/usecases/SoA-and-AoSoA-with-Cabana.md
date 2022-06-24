@@ -19,7 +19,6 @@ Conceptually `Cabana::SoA<Cabana::MemberTypes<float[3], char>, 8>` is equivalent
 
 The data structure keeps a separate, homogeneous data array for each particle field, each having the same number of elements.  The motivation is easier vectorization for the compiler.
 
-
 #### Template parameters
 `DataTypes`
 : The types of the elements that the SoA stores as fixed size arrays.
