@@ -102,4 +102,4 @@ class MinMaxLoc{
    * `MinMaxLoc<T,I,S>::result_view_type` is `Kokkos::View<T,S,Kokkos::MemoryTraits<Kokkos::Unmanaged>>`.  Note that the S (memory space) must be the same as the space where the result resides.
    * Requires: `Scalar` has `operator =`, `operator <` and `operator >` defined. `Kokkos::reduction_identity<Scalar>::min()` and `Kokkos::reduction_identity<Scalar>::max()` are a valid expressions. 
    * Requires: `Index` has `operator =` defined. `Kokkos::reduction_identity<Scalar>::min()` is a valid expressions.
-   * In order to use MinMaxLoc with a custom type of either `Scalar` or `Index`, a template specialization of `Kokkos::reduction_identity<CustomType>` must be defined.  See [Built-In Reducers with Custom Scalar Types](../../../ProgrammingGuide/Custom-Reductions:-Built-In-Reducers-with-Custom-Scalar-Types) for details
+   * In order to use MinMaxLoc with a custom type of either `Scalar` or `Index`, a template specialization of `Kokkos::reduction_identity<CustomType>` must be defined.  See [Built-In Reducers with Custom Scalar Types](../../../ProgrammingGuide/Custom-Reductions-Built-In-Reducers-with-Custom-Scalar-Types) for details

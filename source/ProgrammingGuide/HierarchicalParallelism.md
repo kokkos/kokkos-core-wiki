@@ -1,6 +1,6 @@
 # 8. Hierarchical Parallelism
 
-This chapter explains how to use Kokkos to exploit multiple levels of shared-memory parallelism. These levels include thread teams, threads within a team, and vector lanes. You may nest these levels of parallelism, and execute [`parallel_for()`](../API/core/parallel_for), [`parallel_reduce()`](../API/core/parallel_reduce), or [`parallel_scan()`](../API/core/parallel_scan) at each level. The syntax differs only by the execution policy,
+This chapter explains how to use Kokkos to exploit multiple levels of shared-memory parallelism. These levels include thread teams, threads within a team, and vector lanes. You may nest these levels of parallelism, and execute [`parallel_for()`](../API/core/parallel-dispatch/parallel_for), [`parallel_reduce()`](../API/core/parallel-dispatch/parallel_reduce), or [`parallel_scan()`](../API/core/parallel-dispatch/parallel_scan) at each level. The syntax differs only by the execution policy,
 which is the first argument to the `parallel_*` operation. Kokkos also exposes a "scratch pad" memory which provides thread private and team private allocations.
 
 ## 8.1 Motivation
@@ -207,7 +207,7 @@ The first nested level of parallel loops splits an index range over the threads 
 but "capture by reference" is recommended for release builds since it typically results in better performance.
 With the lambda being considered as `const` inside the `TeamThreadRange` loop, the compiler will catch illegal accesses at compile time as a `const` violation.
 
-The simplest use case is to have another [`parallel_for()`](../API/core/parallel_for) nested inside a kernel.
+The simplest use case is to have another [`parallel_for()`](../API/core/parallel-dispatch/parallel_for) nested inside a kernel.
 
 ```c++
 using Kokkos::parallel_for;
@@ -226,7 +226,7 @@ parallel_for (TeamPolicy<> (league_size, team_size),
 });
 ```
 
-The [`parallel_reduce()`](../API/core/parallel_reduce)  construct can be used to perform optimized team-level reductions:
+The [`parallel_reduce()`](../API/core/parallel-dispatch/parallel_reduce)  construct can be used to perform optimized team-level reductions:
 
 ```c++
 using Kokkos::parallel_reduce;
@@ -259,7 +259,7 @@ parallel_for (TeamPolicy<> (league_size, team_size),
 ```
 Note that custom reductions must employ one of the functor join patterns recognized by Kokkos; these include `Sum, Prod, Min, Max, LAnd, LOr, BAnd, BOr, ValLocScalar, MinLoc, MaxLoc, MinMaxScalar, MinMax, MinMaxLocScalar` and `MinMaxLoc`.
 
-The third pattern is [`parallel_scan()`](../API/core/parallel_scan) which can be used to perform prefix scans.
+The third pattern is [`parallel_scan()`](../API/core/parallel-dispatch/parallel_scan) which can be used to perform prefix scans.
 
 #### 8.4.1.1 Team Barriers
 
@@ -408,7 +408,7 @@ parallel_reduce(TeamPolicy<>(N,team_size),
 
 In this example `sum` will contain the value `N * team_size * 10`. Every thread in each team will compute `s=10` and then contribute it to the sum.
 
-Let's go one step further and add a nested [`parallel_reduce()`](../API/core/parallel_reduce). By choosing the loop bound to be `team_size` every thread still only runs once through the inner loop.
+Let's go one step further and add a nested [`parallel_reduce()`](../API/core/parallel-dispatch/parallel_reduce). By choosing the loop bound to be `team_size` every thread still only runs once through the inner loop.
 
 ```c++
 using Kokkos::parallel_reduce;

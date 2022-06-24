@@ -10,7 +10,7 @@ Kokkos::fence();
 
 Blocks on completion of all outstanding asynchronous Kokkos operations.
 That includes parallel dispatch (e.g. [parallel_for()](parallel_for), [parallel_reduce()](parallel_reduce) 
-and [parallel_scan()](parallel_scan)) as well as asynchronous data operations such as three-argument [deep_copy](view/deep_copy).
+and [parallel_scan()](parallel_scan)) as well as asynchronous data operations such as three-argument [deep_copy](../view/deep_copy).
 
 Note: there is a execution space instance specific `fence` too: [ExecutionSpaceConcept](ExecutionSpaceConcept)
 

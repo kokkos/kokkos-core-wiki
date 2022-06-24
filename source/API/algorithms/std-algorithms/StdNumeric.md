@@ -1,6 +1,6 @@
 # Numeric
 
-Header File: `Kokkos_Core.hpp`
+Header File: `Kokkos_StdAlgorithms.hpp`
 
 **All algorithms are currently in the `Kokkos::Experimental` namespace.**
 

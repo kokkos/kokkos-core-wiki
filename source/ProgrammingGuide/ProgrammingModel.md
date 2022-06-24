@@ -14,10 +14,10 @@ An Execution Space is the place _Where_ code can actually be executed. For examp
 
 Execution Patterns are the _fundamental parallel algorithms_ in which an application has to be expressed. Examples are
 
-* [`parallel_for()`](../API/core/parallel_for): execute a function in undetermined order a specified amount of times, 
-* [`parallel_reduce()`](../API/core/parallel_reduce): which combines a [`parallel_for()`](../API/core/parallel_for) execution with a reduction operation, 
-* [`parallel_scan()`](../API/core/parallel_scan): which combines a [`parallel_for()`](../API/core/parallel_for) operation with a prefix or postfix scan on output values of each operation, and 
-* `task`: which executes a single function with dependencies on other functions. 
+* [`parallel_for()`](../API/core/parallel-dispatch/parallel_for): execute a function in undetermined order a specified amount of times,
+* [`parallel_reduce()`](../API/core/parallel-dispatch/parallel_reduce): which combines `parallel_for()` execution with a reduction operation,
+* [`parallel_scan()`](../API/core/parallel-dispatch/parallel_scan): which combines a `parallel_for()` operation with a prefix or postfix scan on output values of each operation, and
+* `task`: which executes a single function with dependencies on other functions.
 
 Expressing an application in these patterns allows the underlying implementation or the used compiler to reason about valid transformations. For example all `parallel_***` patterns allow unspecified execution order and only promise deterministic results of the reductions themselves. This enables different mapping patterns on different hardware such as assignment of iterations to threads or vector lanes.
 
@@ -37,7 +37,7 @@ Threads in a team can synchronize - they have a "barrier" primitive - and share 
 
 Scratch pad memory exists only during parallel operations; allocations in it do not persist across kernels. Teams themselves may run in any order, and may not necessarily run all in parallel. For example, if the user asks for _T_ teams, the hardware may choose to run them one after another in sequence, or in groups of up to _G_ teams at a time in parallel.
 
-Users may _nest_ parallel operations. Teams may perform one parallel operation (for, reduce, or scan), and threads within each team may perform another, possibly different parallel operation. Different teams may do entirely different things. For example, all the threads in one team may execute a [`parallel_for()`](../API/core/parallel_for) and all the threads in a different team may execute a [`parallel_scan()`](../API/core/parallel_scan). Different threads within a team may also do different things. However, performance may vary if threads in a team "diverge" in their behavior (e.g., take different sides of a branch). [Chapter 8 - Hierarchical Parallelism](HierarchicalParallelism) shows how the C++ implementation of Kokkos exposes thread teams.
+Users may _nest_ parallel operations. Teams may perform one parallel operation (for, reduce, or scan), and threads within each team may perform another, possibly different parallel operation. Different teams may do entirely different things. For example, all the threads in one team may execute a [`parallel_for()`](../API/core/parallel-dispatch/parallel_for) and all the threads in a different team may execute a [`parallel_scan()`](../API/core/parallel-dispatch/parallel_scan). Different threads within a team may also do different things. However, performance may vary if threads in a team "diverge" in their behavior (e.g., take different sides of a branch). [Chapter 8 - Hierarchical Parallelism](HierarchicalParallelism) shows how the C++ implementation of Kokkos exposes thread teams.
 
 NVIDIA's CUDA programming model inspired Kokkos' thread team model. The scratch pad memory corresponds with CUDA's per-team "shared memory." The "league/team" vocabulary comes from OpenMP 4.0 and has many aspects in common with our thread team model. We have found that programming to this model results in good performance, even on computer architectures that only implement parts of the full model. For example, most multicore processors in common use for high-performance computing lack "scratch pad" hardware. However, if users request a scratch pad size that fits comfortably in the largest cache shared by the threads in a team, programming as if a scratch pad exists forces users to address locality in their algorithms. This also reflects the common experience that rewriting a code for more restrictive hardware, then porting the code _back_ to conventional hardware, tends to improve performance relative to an unoptimized code.
 

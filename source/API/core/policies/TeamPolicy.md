@@ -168,7 +168,7 @@ class Kokkos::TeamPolicy {
     int team_size_max(const FunctorType& f, const ParallelReduceTag&) const;
     ```
     Query the maximum team size possible given a specific functor. 
-    The tag denotes whether this is for a [`parallel_for`](../parallel_for) or a [`parallel_reduce`](../parallel_reduce).
+    The tag denotes whether this is for a [`parallel_for`](../parallel-dispatch/parallel_for) or a [`parallel_reduce`](../parallel-dispatch/parallel_reduce).
     Note: this is not a static function! The function will take into account settings
     for vector length and scratch size of `*this`. Using a value larger than the 
     return value will result in dispatch failure. 
@@ -183,7 +183,7 @@ class Kokkos::TeamPolicy {
     int team_size_recommended(const FunctorType& f, const ParallelReduceTag&) const;
     ```
     Query the recommended team size for the specific functor `f`. 
-    The tag denotes whether this is for a [`parallel_for`](../parallel_for) or a [`parallel_reduce`](../parallel_reduce).
+    The tag denotes whether this is for a [`parallel_for`](../parallel-dispatch/parallel_for) or a [`parallel_reduce`](../parallel-dispatch/parallel_reduce).
     Note: this is not a static function! The function will take into account settings
     for vector length and scratch size of `*this`.
 
