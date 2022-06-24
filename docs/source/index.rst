@@ -91,6 +91,7 @@ Website Content
    ./API/containers-index
    ./API/algorithms-index
    ./API/alphabetical
+   Compability
    usecases
    testing-and-issue-tracking
    Tutorials <https://github.com/kokkos/kokkos-tutorials>
