@@ -109,11 +109,11 @@ Kokkos::parallel_reduce(const ExecPolicy& policy,
   * `name`: A user provided string which is used in profiling and debugging tools via the Kokkos Profiling Hooks. 
   * ExecPolicy: An *ExecutionPolicy* which defines iteration space and other execution properties. Valid policies are:
     * `IntegerType`: defines a 1D iteration range, starting from 0 and going to a count.
-    * [RangePolicy](policies/RangePolicy): defines a 1D iteration range. 
-    * [MDRangePolicy](policies/MDRangePolicy): defines a multi-dimensional iteration space.
-    * [TeamPolicy](policies/TeamPolicy): defines a 1D iteration range, each of which is assigned to a thread team.
-    * [TeamThreadRange](policies/TeamThreadRange): defines a 1D iteration range to be executed by a thread-team. Only valid inside a parallel region executed through a `TeamPolicy` or a `TaskTeam`.
-    * [ThreadVectorRange](policies/ThreadVectorRange): defines a 1D iteration range to be executed through vector parallelization dividing the threads within a team.  Only valid inside a parallel region executed through a `TeamPolicy` or a `TaskTeam`.
+    * [RangePolicy](../policies/RangePolicy): defines a 1D iteration range. 
+    * [MDRangePolicy](../policies/MDRangePolicy): defines a multi-dimensional iteration space.
+    * [TeamPolicy](../policies/TeamPolicy): defines a 1D iteration range, each of which is assigned to a thread team.
+    * [TeamThreadRange](../policies/TeamThreadRange): defines a 1D iteration range to be executed by a thread-team. Only valid inside a parallel region executed through a `TeamPolicy` or a `TaskTeam`.
+    * [ThreadVectorRange](../policies/ThreadVectorRange): defines a 1D iteration range to be executed through vector parallelization dividing the threads within a team.  Only valid inside a parallel region executed through a `TeamPolicy` or a `TaskTeam`.
   * FunctorType: A valid functor with (at minimum) an `operator()` with a matching signature for the `ExecPolicy` combined with the reduced type.
   * ReducerArgument: Either a class fullfilling the "Reducer" concept or a `Kokkos::View`
   * ReducerArgumentNonConst: a class fullfilling the "Reducer" concept, a POD type with `operator +=` and `operator =`, or a `Kokkos::View`.  The ReducerArgumentNonConst can also be an array or a pointer; see below for functor requirements.
@@ -149,7 +149,7 @@ Kokkos::parallel_reduce(const ExecPolicy& policy,
 
 ## Examples
 
-Further examples are provided in the [Custom Reductions](../../ProgrammingGuide/Custom-Reductions) and [ExecutionPolicy](policies/ExecutionPolicyConcept) documentation. 
+Further examples are provided in the [Custom Reductions](../../../ProgrammingGuide/Custom-Reductions) and [ExecutionPolicy](../policies/ExecutionPolicyConcept) documentation. 
 
 ```c++
 #include<Kokkos_Core.hpp>

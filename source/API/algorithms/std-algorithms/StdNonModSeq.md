@@ -1,8 +1,10 @@
 # NonModifying Sequence
 
-Header File: `Kokkos_Core.hpp`
+Header File: `Kokkos_StdAlgorithms.hpp`
 
 **All algorithms are currently in the `Kokkos::Experimental` namespace.**
+
+MISSING SOME HERE
 
 ## Kokkos::Experimental::find
 
@@ -162,4 +164,3 @@ auto it1 = KE::find_if(exespace, KE::begin(a), KE::end(a), p);
 // assuming OpenMP is enabled, then you can also explicitly call
 auto it2 = KE::find_if(Kokkos::OpenMP(), KE::begin(a), KE::end(a), p);
 ```
-

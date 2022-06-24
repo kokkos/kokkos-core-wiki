@@ -179,4 +179,4 @@ private:
  * ```c++
    contribute(View<DT1, VP...>& dest, Kokkos::Experimental::ScatterView<DT2, LY, ES, OP, CT, DP> const& src)
    ```
-   Convenience function to perform final reduction of ScatterView results into a resultant View; may be called following [`parallel_reduce()`](../core/parallel_reduce).
+   Convenience function to perform final reduction of ScatterView results into a resultant View; may be called following [`parallel_reduce()`](../core/parallel-dispatch/parallel_reduce).

@@ -1,4 +1,4 @@
-# Installation and Usage
+# Build, Install and Use
 
 ## Kokkos Philosophy
 Kokkos provides a modern CMake style build system.
@@ -33,6 +33,8 @@ If building in-tree, there is no `find_package`. You can use `add_subdirectory(k
 The examples in `examples/cmake_build_installed` and `examples/cmake_build_in_tree` can help get you started.
 
 
+<br/>
+
 ## Configuring CMake
 A very basic installation of Kokkos is done with:
 ````bash
@@ -50,6 +52,9 @@ There are numerous device backends, options, and architecture-specific optimizat
 ````
 which activates the OpenMP backend. All of the options controlling device backends, options, architectures, and third-party libraries (TPLs) are given below.
 
+
+<br/>
+
 ## Known Issues<a name="KnownIssues"></a>
 
 ### Cray
@@ -60,6 +65,48 @@ which activates the OpenMP backend. All of the options controlling device backen
 ### Fortran
 
 * In a mixed C++/Fortran code, CMake will use the C++ linker by default. If you override this behavior and use Fortran as the link language, the link may break because Kokkos adds linker flags expecting the linker to be C++. Prior to CMake 3.18, Kokkos has no way of detecting in downstream projects that the linker was changed to Fortran.  From CMake 3.18, Kokkos can use generator expressions to avoid adding flags when the linker is not C++. Note: Kokkos will not add any linker flags in this Fortran case. The user will be entirely on their own to add the appropriate linker flags.
+
+<br/>
+
+## Raw Makefile
+
+Raw Makefiles are only supported via inline builds. See below.
+
+## Inline Builds vs. Installed Package
+For individual projects, it may be preferable to build Kokkos inline rather than link to an installed package.
+The main reason is that you may otherwise need many different
+configurations of Kokkos installed depending on the required compile time
+features an application needs. For example there is only one default
+execution space, which means you need different installations to have OpenMP
+or C++ threads as the default space. Also for the CUDA backend there are certain
+choices, such as allowing relocatable device code, which must be made at
+installation time. Building Kokkos inline uses largely the same process
+as compiling an application against an installed Kokkos library.
+
+For CMake, this means copying over the Kokkos source code into your project and adding `add_subdirectory(kokkos)` to your CMakeLists.txt.
+
+For raw Makefiles, see the example benchmarks/bytes_and_flops/Makefile which can be used with an installed library and or an inline build.
+
+## Kokkos and CUDA UVM
+
+Kokkos does support UVM as a specific memory space called CudaUVMSpace.
+Allocations made with that space are accessible from host and device.
+You can tell Kokkos to use that as the default space for Cuda allocations.
+In either case UVM comes with a number of restrictions:
+* You can't access allocations on the host while a kernel is potentially
+running. This will lead to segfaults. To avoid that you either need to
+call Kokkos::Cuda::fence() (or just Kokkos::fence()), after kernels, or
+you can set the environment variable CUDA_LAUNCH_BLOCKING=1.
+* In multi socket multi GPU machines without NVLINK, UVM defaults
+to using zero copy allocations for technical reasons related to using multiple
+GPUs from the same process. If an executable doesn't do that (e.g. each
+MPI rank of an application uses a single GPU [can be the same GPU for
+multiple MPI ranks]) you can set CUDA_MANAGED_FORCE_DEVICE_ALLOC=1.
+This will enforce proper UVM allocations, but can lead to errors if
+more than a single GPU is used by a single process.
+
+
+<br/>
 
 ## Spack
 An alternative to manually building with the CMake is to use the Spack package manager.
@@ -89,7 +136,7 @@ For a complete list of Kokkos options, run:
 ````bash
 > spack info kokkos
 ````
-More details can be found in the [Spack README](Spack.md)
+<!-- More details can be found in the [Spack README](Spack.md) -->
 
 ### Spack Development
 Spack currently installs packages to a location determined by a unique hash. This hash name is not really "human readable".
@@ -101,4 +148,6 @@ If you must know, you can locate Spack Kokkos installations with:
 where `...` is the unique spec identifying the particular Kokkos configuration and version.
 
 A better way to use Spack for doing Kokkos development is the dev-build feature of Spack.
-For dev-build details, consult the kokkos-spack repository [README](https://github.com/kokkos/kokkos-spack/blob/master/README.md).
+For dev-build details, try using `spack test run`.
+
+<!-- consult the kokkos-spack repository [README](https://github.com/kokkos/kokkos-spack/blob/master/README.md). -->

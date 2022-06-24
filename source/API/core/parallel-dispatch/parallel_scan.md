@@ -56,8 +56,8 @@ Kokkos::parallel_scan(const std::string& name,
   * `name`: A user provided string which is used in profiling and debugging tools via the Kokkos Profiling Hooks. 
   * ExecPolicy: An *ExecutionPolicy* which defines iteration space and other execution properties. Valid policies are:
     * `IntegerType`: defines a 1D iteration range, starting from 0 and going to a count.
-    * [RangePolicy](policies/RangePolicy): defines a 1D iteration range. 
-    * [ThreadVectorRange](policies/ThreadVectorRange): defines a 1D iteration range to be executed through vector parallelization dividing the threads within a team.  Only valid inside a parallel region executed through a `TeamPolicy` or a `TaskTeam`.
+    * [RangePolicy](../policies/RangePolicy): defines a 1D iteration range. 
+    * [ThreadVectorRange](../policies/ThreadVectorRange): defines a 1D iteration range to be executed through vector parallelization dividing the threads within a team.  Only valid inside a parallel region executed through a `TeamPolicy` or a `TaskTeam`.
   * FunctorType: A valid functor with (at minimum) an `operator()` with a matching signature for the `ExecPolicy` combined with the reduced type.
   * ReturnType: a POD type with `operator +=` and `operator =`, or a `Kokkos::View`.  
 

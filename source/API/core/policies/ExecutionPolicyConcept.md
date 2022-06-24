@@ -6,7 +6,7 @@ The concept of an `ExecutionPolicy` is the fundamental abstraction to represent 
 
 ## What is an `ExecutionPolicy`?
 
-The dominant parallel dispatch mechanism in Kokkos, described [elsewhere in the programming guide](../../../ProgrammingGuide/ParallelDispatch), involves a `parallel_pattern` (e.g., something like [`Kokkos::parallel_for`](../parallel_for) or [`Kokkos::parallel_reduce`](../parallel_reduce)), an `ExecutionPolicy`, and a `Functor`.  In a hand-wavy sense:
+The dominant parallel dispatch mechanism in Kokkos, described [elsewhere in the programming guide](../../../ProgrammingGuide/ParallelDispatch), involves a `parallel_pattern` (e.g., something like [`Kokkos::parallel_for`](../parallel-dispatch/parallel_for) or [`Kokkos::parallel_reduce`](../parallel-dispatch/parallel_reduce)), an `ExecutionPolicy`, and a `Functor`.  In a hand-wavy sense:
 
 ```c++
 parallel_pattern(
