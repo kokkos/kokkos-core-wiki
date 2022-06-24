@@ -4,25 +4,24 @@ In order to use Kokkos an initialization call is required. That call is responsi
 
 ## 5.0 Include Headers
 
-All primary capabilities of Kokkos are provided by the `Kokkos_Core.hpp` header file. 
+All primary capabilities of Kokkos are provided by the `Kokkos_Core.hpp` header file.
 Some capabilities - specifically data structures in the `containers` subpackage and algorithmic capabilities in the `algorithms` subpackage are included via separate header files.
 For specific capabilities check their API reference:
 - [API: Core](../API/core-index)
 - [API: Containers](../API/containers-index)
 - [API: Algorithms](../API/algorithms-index)
-- [API: Std Algorithms](../API/std-algorithms-index)
 - [API in Alphabetical Order](../API/alphabetical)
 
 ## 5.1 Initialization by command-line arguments
 
 The simplest way to initialize Kokkos is by calling the following function:
 ```c++
-Kokkos::initialize(int& argc, char* argv[]); 
+Kokkos::initialize(int& argc, char* argv[]);
 ```
 Just like `MPI_Init`, this function interprets command-line arguments to determine the requested settings. Also like `MPI_Init`, it reserves the right to remove command-line arguments from the input list. This is why it takes `argc` by reference, rather than by value; it may change the value on output.
 
 During initialization one or more execution spaces will be initialized and assigned to one of the following aliases.
- 
+
 ```c++
 Kokkos::DefaultExecutionSpace;
 ```
@@ -30,7 +29,7 @@ Kokkos::DefaultExecutionSpace;
 Kokkos::DefaultHostExecutionSpace;
 ```
 
-`DefaultExecutionSpace` is the execution space used with policies and views where one is not explicitly specified.  Primarily, Kokkos will initialize one of the heterogeneous backends (CUDA, OpenMPTarget, HIP, SYCL) as the `DefaultExecutionSpace` if enabled in the build configuration.  In addition, Kokkos requires a `DefaultHostExecutionSpace`.  The `DefaultHostExecutionSpace` is default execution space used when host operations are required.  If one of the parallel host execution spaces are enabled in the build environment then `Kokkos::Serial` is only initialized if it is explicitly enabled in the build configuration.  If a parallel host execution space is not enabled in the build configuration, then `Kokkos::Serial` is initialized as the `DefaultHostExecutionSpace`. 
+`DefaultExecutionSpace` is the execution space used with policies and views where one is not explicitly specified.  Primarily, Kokkos will initialize one of the heterogeneous backends (CUDA, OpenMPTarget, HIP, SYCL) as the `DefaultExecutionSpace` if enabled in the build configuration.  In addition, Kokkos requires a `DefaultHostExecutionSpace`.  The `DefaultHostExecutionSpace` is default execution space used when host operations are required.  If one of the parallel host execution spaces are enabled in the build environment then `Kokkos::Serial` is only initialized if it is explicitly enabled in the build configuration.  If a parallel host execution space is not enabled in the build configuration, then `Kokkos::Serial` is initialized as the `DefaultHostExecutionSpace`.
 Kokkos chooses the two spaces using the following list:
 
 1. `Kokkos::Cuda`
@@ -54,14 +53,14 @@ set the number of threads to 4, while
 
 set the number of threads to 3. Table 5.1 gives a full list of command-line options.
 
-<h4>Table 5.1: Command-line options for Kokkos::initialize</h4> 
+<h4>Table 5.1: Command-line options for Kokkos::initialize</h4>
 
 Argument | Description
 :---      | :---
 --kokkos-help  <br/> --help   | print this message
 --kokkos-threads=INT <br/> --threads=INT  | specify total number of threads or number of threads per NUMA region if used in conjunction with `--numa` option.
---kokkos-numa=INT <br/> --numa=INT | specify number of NUMA regions used by process. 
---device-id=INT | specify device id to be used by Kokkos. 
+--kokkos-numa=INT <br/> --numa=INT | specify number of NUMA regions used by process.
+--device-id=INT | specify device id to be used by Kokkos.
 --num-devices=INT[,INT] | used when running MPI jobs. Specify the number of devices per node to be used. Process to device mapping happens by obtaining the local MPI rank and assigning devices round-robin. The optional second argument allows for an existing device to be ignored. This is most useful on workstations with multiple GPUs, one of which is used to drive screen output.
 
 ***
@@ -95,7 +94,7 @@ args.num_threads = 8;
 args.num_numa = 2;
 // If Kokkos was built with CUDA enabled, use the GPU with device ID 1.
 args.device_id = 1;
-    
+
 Kokkos::initialize(args);
 ```
 
