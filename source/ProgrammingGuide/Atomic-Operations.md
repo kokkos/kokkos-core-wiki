@@ -21,7 +21,7 @@ void create_histogram(View<int*> histogram, int min, int max, View<int*> values)
 }
 ```
 
-When parallelizing this loop with a simple [`parallel_for()`](../API/core/parallel_for) multiple threads may try to 
+When parallelizing this loop with a simple [`parallel_for()`](../API/core/parallel-dispatch/parallel_for) multiple threads may try to 
 increment the same `index` at the same time. The increment on the other hand is actually
 three operations: 
   1. load `histogram(index)` into a register,

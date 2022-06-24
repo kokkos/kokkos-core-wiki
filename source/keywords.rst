@@ -1,113 +1,131 @@
+.. include:: mydefs.rst
 
-Keywords and Macros
-###################
+CMake Keywords
+##############
+
+.. important::
+
+   With version 3.0 all Kokkos CMake keywords are prefixed with `Kokkos_` which is case-sensitive.
+
+   Recall that to set a keyword in CMake you used the syntax ``-Dkeyword_name``.
+
+
+This page is organized in four sections:
+
+- :ref:`keywords_backends`
+- :ref:`keywords_enable_options`
+- :ref:`keywords_enable_other_options`
+- :ref:`keywords_tpls`
+- :ref:`keywords_arch`
+
+
+.. _keywords_backends:
 
 Device Backends
 ===============
 
-.. important:: 
-
-    Device backends can be enabled by specifying ``-DKokkos_ENABLE_X``.
-
-
 .. list-table::
-    :widths: 25 60 15
+    :widths: 25 65 10
     :header-rows: 1
     :align: left
 
-    * - 
+    * -
       - Description/info
       - Default
 
     * - ``Kokkos_ENABLE_CUDA``
-      - Whether to build CUDA backend
-      - ``OFF``
-
-    * - ``Kokkos_ENABLE_HPX``
-      - (Experimental) Whether to build HPX backend 
+      - To build CUDA backend
       - ``OFF``
 
     * - ``Kokkos_ENABLE_OPENMP``
-      - Whether to build OpenMP backend
+      - To build OpenMP backend
       - ``OFF``
 
-    * - ``Kokkos_ENABLE_PTHREAD``
-      - Whether to build Pthread backend
+    * - ``Kokkos_ENABLE_THREADS``
+      - To build C++ Threads backend
       - ``OFF``
 
     * - ``Kokkos_ENABLE_SERIAL``
-      - Whether to build serial backend
+      - To build serial backend
       - ``ON``
 
     * - ``Kokkos_ENABLE_HIP``
-      - (Experimental) Whether to build HIP backend
+      - To build HIP backend
       - ``OFF``
 
-    * - ``Kokkos_ENABLE_OPENMPTARGET`` 
-      - (Experimental) Whether to build the OpenMP target backend
+    * - ``Kokkos_ENABLE_OPENMPTARGET``
+      - :red:`[Experimental]` To build the OpenMP target backend
+      - ``OFF``
+
+    * - ``Kokkos_ENABLE_SYCL``
+      - :red:`[Experimental]` To build SYCL backend
+      - ``OFF``
+
+    * - ``Kokkos_ENABLE_HPX``
+      - :red:`[Experimental]` To build HPX backend
       - ``OFF``
 
 
+.. _keywords_enable_options:
 
 Enable Options
 ===============
 
-.. important:: 
-
-    Options can be enabled by specifying ``-DKokkos_ENABLE_X``.
-
-
 .. list-table::
-    :widths: 25 60 15
+    :widths: 25 65 10
     :header-rows: 1
     :align: left
 
-    * - 
+    * -
       - Description/info
       - Default
 
     * * ``Kokkos_ENABLE_AGGRESSIVE_VECTORIZATION``
-      * Whether to aggressively vectorize loops
+      * Aggressively vectorize loops
       * ``OFF``
 
     * * ``Kokkos_ENABLE_COMPILER_WARNINGS``
-      * Whether to print all compiler warnings
+      * Print all compiler warnings
       * ``OFF``
 
     * * ``Kokkos_ENABLE_CUDA_CONSTEXPR``
-      * Whether to activate experimental relaxed constexpr functions
+      * Activate experimental relaxed constexpr functions
       * ``OFF``
 
     * * ``Kokkos_ENABLE_CUDA_LAMBDA``
-      * Whether to activate experimental lambda features
+      * Activate experimental lambda features
       * ``OFF``
 
     * * ``Kokkos_ENABLE_CUDA_LDG_INTRINSIC``
-      * Whether to use CUDA LDG intrinsics
+      * Use CUDA LDG intrinsics
       * ``OFF``
 
     * * ``Kokkos_ENABLE_CUDA_RELOCATABLE_DEVICE_CODE``
-      * Whether to enable relocatable device code (RDC) for CUDA
+      * Enable relocatable device code (RDC) for CUDA
       * ``OFF``
 
     * * ``Kokkos_ENABLE_CUDA_UVM``
-      * Whether to use unified memory (UM) by default for CUDA
+      * Use unified memory (UM) by default for CUDA
       * ``OFF``
 
     * * ``Kokkos_ENABLE_DEBUG``
-      * Whether to activate extra debug features - may increase compile times
+      * Activate extra debug features - may increase compile times
       * ``OFF``
 
     * * ``Kokkos_ENABLE_DEBUG_BOUNDS_CHECK``
-      * Whether to use bounds checking - will increase runtime
+      * Use bounds checking - will increase runtime
       * ``OFF``
 
     * * ``Kokkos_ENABLE_DEBUG_DUALVIEW_MODIFY_CHECK``
       * Debug check on dual views
       * ``OFF``
 
+    * * Kokkos_ENABLE_DEPRECATED_CODE
+      * Enable deprecated code
+      * ``OFF``
+
     * * ``Kokkos_ENABLE_EXAMPLES``
-      * Whether to enable building examples
+      * Enable building examples
       * ``OFF``
 
     * * ``Kokkos_ENABLE_HPX_ASYNC_DISPATCH``
@@ -115,28 +133,32 @@ Enable Options
       * ``OFF``
 
     * * ``Kokkos_ENABLE_LARGE_MEM_TESTS``
-      * Whether to perform extra large memory tests
+      * Perform extra large memory tests
       * ``OFF``
 
+    * * ``Kokkos_ENABLE_PROFILING``
+      * Create bindings for profiling tools
+      * ``ON``
+
     * * ``Kokkos_ENABLE_PROFILING_LOAD_PRINT``
-      * Whether to print information about which profiling tools gotloaded
+      * Print information about which profiling tools gotloaded
       * ``OFF``
 
     * * ``Kokkos_ENABLE_TESTS``
-      * Whether to build serial  backend
+      * Build tests
       * ``OFF``
 
-
+.. _keywords_enable_other_options:
 
 Other Options
 =============
 
 .. list-table::
-    :widths: 25 60 15
+    :widths: 25 50 25
     :header-rows: 1
     :align: left
 
-    * - 
+    * -
       - Description/info
       - Default
 
@@ -145,17 +167,19 @@ Other Options
       * STRING Default: 14
 
 
+.. _keywords_tpls:
+
 Third-party Libraries (TPLs)
 ============================
 
 The following options control enabling TPLs:
 
 .. list-table::
-    :widths: 25 60 15
+    :widths: 30 60 10
     :header-rows: 1
     :align: left
 
-    * - 
+    * -
       - Description/info
       - Default
 
@@ -178,16 +202,14 @@ The following options control enabling TPLs:
       * Whether to enable the LIBRT library
       * ``Off``
 
-
-
 The following options control finding and configuring non-CMake TPLs:
 
 .. list-table::
-    :widths: 25 60 15
+    :widths: 35 45 20
     :header-rows: 1
     :align: left
 
-    * - 
+    * -
       - Description/info
       - Default
 
@@ -219,11 +241,11 @@ The following options control finding and configuring non-CMake TPLs:
 The following options control ``find_package`` paths for CMake-based TPLs:
 
 .. list-table::
-    :widths: 25 60 15
+    :widths: 35 60 25
     :header-rows: 1
     :align: left
 
-    * - 
+    * -
       - Description/info
       - Default
 
@@ -231,23 +253,31 @@ The following options control ``find_package`` paths for CMake-based TPLs:
       * Location of HPX prefix (ROOT) or CMake config file (DIR)
       * PATH Default:
 
+.. _keywords_arch:
 
 Architecture Keywords
 =====================
 
-.. important:: 
-
-    Architecture-specific optimizations can be enabled by specifying ``-DKokkos_ARCH_X``.
-
-
 .. list-table::
-    :widths: 25 60 15
+    :widths: 25 65 10
     :header-rows: 1
     :align: left
 
-    * - 
+    * -
       - Description/info
       - Default
+
+    * * ``Kokkos_ARCH_A64FX``
+      * Optimize for ARMv8.2 with SVE Support
+      * ``OFF``
+
+    * * ``Kokkos_ARCH_AMPERE80``
+      * Optimize for the NVIDIA Ampere generation CC 8.0
+      * ``OFF``
+
+    * * ``Kokkos_ARCH_AMPERE86``
+      * Optimize for the NVIDIA Ampere generation CC 8.6
+      * ``OFF``
 
     * * ``Kokkos_ARCH_AMDAVX``
       * Optimize for AMDAVX architecture
@@ -265,6 +295,10 @@ Architecture Keywords
       * Optimize for ARMV8_THUNDERX architecture
       * ``OFF``
 
+    * * ``Kokkos_ARCH_ARMV8_THUNDERX2``
+      * Optimize for the ARMV8_TX2 architecture
+      * ``OFF``
+
     * * ``Kokkos_ARCH_ARMV8_TX2``
       * Optimize for ARMV8_TX2 architecture
       * ``OFF``
@@ -277,20 +311,12 @@ Architecture Keywords
       * Optimize for BGQ architecture
       * ``OFF``
 
-    * * ``Kokkos_ARCH_ZEN``
-      * Optimize for Zen architecture
-      * ``OFF``
-
-    * * ``Kokkos_ARCH_ZEN2``
-      * Optimize for Zen2 architecture
-      * ``OFF``
-
-    * * ``Kokkos_ARCH_ZEN3``
-      * Optimize for Zen3 architecture
-      * ``OFF``
-
     * * ``Kokkos_ARCH_HSW``
       * Optimize for HSW architecture
+      * ``OFF``
+
+    * * ``Kokkos_ARCH_INTEL_GEN``
+      * Optimize for Intel GPUs Gen9+
       * ``OFF``
 
     * * ``Kokkos_ARCH_KEPLER30``
@@ -361,6 +387,18 @@ Architecture Keywords
       * Optimize for TURING75 architecture
       * ``OFF``
 
+    * * ``Kokkos_ARCH_VEGA900``
+      * Optimize for AMD GPU MI25 GFX900
+      * ``OFF``
+
+    * * ``Kokkos_ARCH_VEGA906``
+      * Optimize for AMD GPU MI50/MI60 GFX906
+      * ``OFF``
+
+    * * ``Kokkos_ARCH_VEGA908``
+      * Optimize for AMD GPU MI100 GFX908
+      * ``OFF``
+
     * * ``Kokkos_ARCH_VOLTA70``
       * Optimize for VOLTA70 architecture
       * ``OFF``
@@ -371,4 +409,16 @@ Architecture Keywords
 
     * * ``Kokkos_ARCH_WSM``
       * Optimize for WSM architecture
+      * ``OFF``
+
+    * * ``Kokkos_ARCH_ZEN``
+      * Optimize for Zen architecture
+      * ``OFF``
+
+    * * ``Kokkos_ARCH_ZEN2``
+      * Optimize for Zen2 architecture
+      * ``OFF``
+
+    * * ``Kokkos_ARCH_ZEN3``
+      * Optimize for Zen3 architecture
       * ``OFF``

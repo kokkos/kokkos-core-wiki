@@ -10,4 +10,7 @@ Use Cases and Examples
    ./usecases/MDRangePolicy
    ./usecases/VirtualFunctions
    ./usecases/TaggedOperators
-
+   ./usecases/OverlappingHostAndDeviceWork
+   ./usecases/Tasking
+   ./usecases/Kokkos-Fortran-Interoperability
+   ./usecases/SoA-and-AoSoA-with-Cabana

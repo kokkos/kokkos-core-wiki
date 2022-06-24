@@ -6,3 +6,4 @@ API: Algorithms
 
    ./algorithms/Random-Number
    ./algorithms/Sort
+   ./algorithms/std-algorithms-index
