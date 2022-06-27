@@ -1,4 +1,3 @@
-
 Requirements
 ############
 
@@ -60,7 +59,7 @@ we are unaware of.
       * 20.1
 
 Build system:
-=========================
+=============
 
 * CMake >= 3.16: required
 * CMake >= 3.18: Fortran linkage. This does not affect most mixed Fortran/Kokkos builds. See [build issues](BUILD.md#KnownIssues).
@@ -80,8 +79,6 @@ We are using the following set of flags:
   -Wignored-qualifiers -Wempty-body
   -Wclobbered -Wuninitialized
 
-
-
 * Intel:
 
 .. code-block:: bash
@@ -90,7 +87,6 @@ We are using the following set of flags:
   -Werror -Wsign-compare -Wtype-limits
   -Wuninitialized
 
-
 * Clang:
 
 .. code-block:: bash
@@ -98,7 +94,6 @@ We are using the following set of flags:
   -Wall -Wunused-parameter -Wshadow -pedantic
   -Werror -Wsign-compare -Wtype-limits
   -Wuninitialized
-
 
 * NVCC:
 
