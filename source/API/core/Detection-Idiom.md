@@ -5,10 +5,9 @@ The Detection Idiom is used to recognize, in an SFINAE-friendly way, the validit
 Header File: `Kokkos_DetectionIdiom.hpp`
 
 The Kokkos Detection Idiom is based upon the detection idiom from Version 2 of the C++ Extensions for
-Library Fundamentals, ISO/IEC TS 19568:2017, a draft of which can be found at
-<https://cplusplus.github.io/fundamentals-ts/v2.html#meta.detect>.
+Library Fundamentals, ISO/IEC TS 19568:2017, a draft of which can be found [here](https://cplusplus.github.io/fundamentals-ts/v2.html#meta.detect).
 
-The original C++ proposal can be found at <https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2015/n4436.pdf>.
+The original C++ proposal can be found at [here](https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2015/n4436.pdf).
 
 ## API
 
@@ -134,4 +133,3 @@ Then we can declare our type:
 ```c++
 using our_difference_type = Kokkos::detected_or_t<std::ptrdiff_t, diff_t, MyType>;
 ```
-
