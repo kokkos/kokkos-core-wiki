@@ -2,13 +2,13 @@
 
 ## Dealing with pre-C++17
 
-Many applications and libraries in HPC are written using an Object Oriented design.
+Many applications and libraries in HPC are written using an Object-Oriented design.
 This has numerous advantages in terms of code organization and potentially reuse.
-Unfortunately it comes with a significant draw back as far as using Kokkos is concerned,
+Unfortunately it comes with a significant drawback as far as using Kokkos is concerned,
 if C++17 is not an option.
 
 Consider an application for simulating the time evolution of a particle system.
-In an Object Oriented design, it would likely contain something like a class `ParticleInteractions`,
+In an Object-Oriented design, it would likely contain something like a class `ParticleInteractions`,
 which holds references to data structures for particles and interaction potentials.
 It would also contain some member function `compute`, which would loop over the particles
 and calculate the interactions:
@@ -31,7 +31,7 @@ public:
 };
 ```
 
-A simple way of parallelising this is to add a `parallel_for` inside the member function `compute`.
+A simple way of parallelising this is to add a [`parallel_for`](../API/core/parallel-dispatch/parallel_for) inside the member function `compute`.
 
 ```c++
 class ParticleInteractions {
@@ -46,14 +46,14 @@ class ParticleInteractions {
 };
 ```
 
-And indeed on non-accelerator based systems this would work. But on systems where the `parallel_for`
+And indeed on non-accelerator based systems this would work. But on systems where the [`parallel_for`](../API/core/parallel-dispatch/parallel_for)
 dispatches work to an accelerator, this approach would likely fail with an access error.
 
-The reason for that is, that lambdas inside of a class member function do not capture other
+The reason for that is, that lambdas inside a class member function do not capture other
 class members individually, they capture the entire class as a whole.
 More precisely, in pre-C++17 they capture the `this` pointer at the scope of `compute`.
 
-In effect it is as if one would have written:
+In effect, it is as if one had written:
 ```c++
 class ParticleInteractions {
   ...
@@ -89,11 +89,11 @@ class ParticleInteractions {
 ```
 
 In fact this may even have clarity enhancing qualities, since it separates the work items of the parallel operation,
-from the dispatch itself and its associated pre and post launch work.
+from the dispatch itself and its associated pre- and post-launch work.
 
 But what if you have more than one parallel operation in a class?
 This is where Kokkos's tagged dispatch comes into play.
-In order for a class to have multiple operators, Kokkos allows these operators to have an unsued additional parameter
+In order for a class to have multiple operators, Kokkos allows these operators to have an unused additional parameter
 which is used in overload resolution.
 This parameter is given as an additional template parameter to the execution policy during dispatch.
 A good practice is to create `Tag-Classes` as nested definitions inside the original object:
