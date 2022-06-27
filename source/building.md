@@ -32,9 +32,6 @@ cmake_policy(SET CMP0074 NEW)
 If building in-tree, there is no `find_package`. You can use `add_subdirectory(kokkos)` with the Kokkos source and again just link with `target_link_libraries(Kokkos::kokkos)`.
 The examples in `examples/cmake_build_installed` and `examples/cmake_build_in_tree` can help get you started.
 
-
-<br/>
-
 ## Configuring CMake
 A very basic installation of Kokkos is done with:
 ````bash
@@ -50,10 +47,7 @@ There are numerous device backends, options, and architecture-specific optimizat
  -DCMAKE_INSTALL_PREFIX=${kokkos_install_folder} \
  -DKokkos_ENABLE_OPENMP=ON
 ````
-which activates the OpenMP backend. All of the options controlling device backends, options, architectures, and third-party libraries (TPLs) are given below.
-
-
-<br/>
+which activates the OpenMP backend. All the options controlling device backends, options, architectures, and third-party libraries (TPLs) are given below.
 
 ## Known Issues<a name="KnownIssues"></a>
 
@@ -65,8 +59,6 @@ which activates the OpenMP backend. All of the options controlling device backen
 ### Fortran
 
 * In a mixed C++/Fortran code, CMake will use the C++ linker by default. If you override this behavior and use Fortran as the link language, the link may break because Kokkos adds linker flags expecting the linker to be C++. Prior to CMake 3.18, Kokkos has no way of detecting in downstream projects that the linker was changed to Fortran.  From CMake 3.18, Kokkos can use generator expressions to avoid adding flags when the linker is not C++. Note: Kokkos will not add any linker flags in this Fortran case. The user will be entirely on their own to add the appropriate linker flags.
-
-<br/>
 
 ## Raw Makefile
 
@@ -104,9 +96,6 @@ MPI rank of an application uses a single GPU [can be the same GPU for
 multiple MPI ranks]) you can set CUDA_MANAGED_FORCE_DEVICE_ALLOC=1.
 This will enforce proper UVM allocations, but can lead to errors if
 more than a single GPU is used by a single process.
-
-
-<br/>
 
 ## Spack
 An alternative to manually building with the CMake is to use the Spack package manager.
