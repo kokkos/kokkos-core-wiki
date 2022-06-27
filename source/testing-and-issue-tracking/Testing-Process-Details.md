@@ -53,7 +53,6 @@ They also are tested with a comprehensive set of backend combinations:
 We are using the following set of flags:
     ```GCC:   -Wall -Wshadow -pedantic -Werror -Wsign-compare -Wtype-limits```
 
-
 ----
 
 ## B.  File:  kokkos-promotion.txt
@@ -82,18 +81,18 @@ supported compilers. Those machines are:
 
   1.1. Clone kokkos develop branch (or just switch to it)
 
-         git clone -b develop git@github.com:kokkos/kokkos.git
-         cd kokkos
+    git clone -b develop git@github.com:kokkos/kokkos.git
+    cd kokkos
 
   1.2. Create a testing directory
 
-         mkdir testing
-         cd testing
+    mkdir testing
+    cd testing
 
   1.3. Run the test_all_sandia script with no options to test all compilers
 
-         nohup ../config/test_all_sandia &
-         tail -f nohup.out                   # to watch progress
+    nohup ../config/test_all_sandia &
+    tail -f nohup.out                   # to watch progress
 
 // ----------------------------------------------------------------------------------------------------- //
 
@@ -101,12 +100,12 @@ Step 2: Build and Test
 
   2.1. Build and test Trilinos with 4 different configurations; run scripts for white and shepard that are provided in kokkos/scripts/trilinos-integration. These scripts load their own modules/environment, so don't require preparation. You can run all four at the same time, use separate directories for each.
 
-         mkdir serial
-         cd serial
-         nohup KOKKOS_PATH/scripts/trilinos-integration/
-                          shepard_jenkins_run_script_serial_intel &
+    mkdir serial
+    cd serial
+    nohup KOKKOS_PATH/scripts/trilinos-integration/
+                    shepard_jenkins_run_script_serial_intel &
 
-  2.2. Compare the compile errors and test failures between updated and pristine versions. There may be compile failures that happen in both, tests that fail in both, and there may be tests that only fail sometimes (thus, rerun tests manually as needed).
+  2.2. Compare the compile errors and test failures between updated and pristine versions. There may be compilation failures that happen in both, tests that fail in both, and there may be tests that only fail sometimes (thus, rerun tests manually as needed).
 
 // ----------------------------------------------------------------------------------------------------- //
 
@@ -114,18 +113,18 @@ Step 3: This step should be run on kokkos-dev
 
   3.1. If you don't have a GitHub token already, generate one for yourself (this will give you TOKEN):
 
-       https://github.com/settings/tokens
+    https://github.com/settings/tokens
 
   3.2. Get a clean copy of the Kokkos develop branch
 
-       git clone -b develop git@github.com:kokkos/kokkos.git
-       cd kokkos
+    git clone -b develop git@github.com:kokkos/kokkos.git
+    cd kokkos
 
   3.3. Generate the initial changelog. Use the most recent tag as OLDTAG (`git tag -l` can show you all tags). The NEWTAG is the new version number, e.g. "2.04.00". RUN THIS OUTSIDE THE KOKKOS SOURCE TREE!
 
-       module load ruby/2.3.1/gcc/5.3.0
-       gitthub_changelog_generator kokkos/kokkos --token TOKEN --no-pull-requests --include-labels 'InDevelop' --enhancement-labels 'enhancement,Feature Request' --future-release 'NEWTAG' --between-tags 'NEWTAG,OLDTAG'
-       cat CHANGELOG.md
+     module load ruby/2.3.1/gcc/5.3.0
+     gitthub_changelog_generator kokkos/kokkos --token TOKEN --no-pull-requests --include-labels 'InDevelop' --enhancement-labels 'enhancement,Feature Request' --future-release 'NEWTAG' --between-tags 'NEWTAG,OLDTAG'
+     cat CHANGELOG.md
 
   3.4. Manually cleanup and commit the change log. Pushing to develop requires Owner permission.
        (Copy the new section from the generated CHANGELOG.md to KOKKOS_PATH/CHANGELOG.md)
@@ -134,36 +133,36 @@ Step 3: This step should be run on kokkos-dev
 
   3.5. Merge develop into master. DO NOT FAST-FORWARD THE MERGE!!!!
 
-       (From kokkos directory):
-       git checkout master
-       git merge --no-ff origin/develop
+    (From kokkos directory):
+    git checkout master
+    git merge --no-ff origin/develop
 
   3.6. Update the tag in kokkos/master_history.txt
 
-       Tag description: MajorNumber.MinorNumber.WeeksSinceMinorNumberUpdate
-       Tag field widths: #.#.##
-       date description: month:day:year
-       date field widths: ##:##:####
-       master description: SHA1 of previous master commit (use `git log`?)
-       develop description: SHA1 of merged develop branch
-       SHA1 field width: ######## (8 chars)
-
-       # Append to master_history.txt:
-
-       tag:  2.03.13    date: 07:27:2017    master: da314444    develop: 29ccb58a
-
-       git commit --amend -a
+    Tag description: MajorNumber.MinorNumber.WeeksSinceMinorNumberUpdate
+    Tag field widths: #.#.##
+    date description: month:day:year
+    date field widths: ##:##:####
+    master description: SHA1 of previous master commit (use `git log`?)
+    develop description: SHA1 of merged develop branch
+    SHA1 field width: ######## (8 chars)
+    
+    # Append to master_history.txt:
+    
+    tag:  2.03.13    date: 07:27:2017    master: da314444    develop: 29ccb58a
+    
+    git commit --amend -a
 
 
   3.7. Create the new tag:
 
-       git tag -a #.#.##
-
-         (type the following into the tag message (same as for step 4.3))
-         tag: #.#.##
-         date: mm/dd/yyyy
-         master: sha1
-         develop: sha1
+    git tag -a #.#.##
+    
+      (type the following into the tag message (same as for step 4.3))
+      tag: #.#.##
+      date: mm/dd/yyyy
+      master: sha1
+      develop: sha1
 
   3.8. DO NOT PUSH YET !!!
 
@@ -173,13 +172,13 @@ Step 4: This step can be done on any SEMS machine (e.g. kokkos-dev). Actually, t
 
   4.1 Clone the Trilinos corresponding branch (or just switch to it)
 
-        git clone -b develop git@github.com:trilinos/Trilinos.git
-        TRILINOS_PATH=$PWD/Trilinos
+    git clone -b develop git@github.com:trilinos/Trilinos.git
+    TRILINOS_PATH=$PWD/Trilinos
 
-  4.2 Snapshot Kokkos into Trilinos kokkos-promotion branch - this requires python/2.7.9 and that both Trilinos and Kokkos be clean - no untracked or modified files. Run the following outside of the Kokkos and Trilinos source trees.
+  4.2 Snapshot Kokkos into Trilinos kokkos-promotion branch - this requires python/2.7.9 and that both Trilinos and Kokkos be clean - no untracked or modified files. Run the following outside the Kokkos and Trilinos source trees.
 
-        module load sems-python/2.7.9
-        python KOKKOS_PATH/scripts/snapshot.py KOKKOS_PATH TRILINOS_PATH/packages
+    module load sems-python/2.7.9
+    python KOKKOS_PATH/scripts/snapshot.py KOKKOS_PATH TRILINOS_PATH/packages
 
   4.3. Issue pull request against Trilinos develop branch.
 
@@ -189,6 +188,5 @@ Step 4: This step can be done on any SEMS machine (e.g. kokkos-dev). Actually, t
 
 Step 5: Push Kokkos master to GitHub (requires Owner permission).
 
-       cd KOKKOS_PATH
-       git push --follow-tags origin master
-
+    cd KOKKOS_PATH
+    git push --follow-tags origin master
