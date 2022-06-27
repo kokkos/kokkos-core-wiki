@@ -7,7 +7,6 @@ Due to oddities of GPU programming, the use of virtual functions in Kokkos paral
 In GPU programming, you might have run into the bug of calling a host function from the device. A similar thing can happen for subtle reasons in code using virtual functions. Consider the following code
 
 ```c++
-
 class ClassWithVirtualFunctions : public SomeBase {
   /** fields */
   public:
@@ -42,13 +41,13 @@ Remember that we have one VTable shared amongst all instances of a type. Each in
 
 Now that we know what the compiler is doing to implement virtual functions, we'll look at why it doesn't work with GPU's
 
-Credit: the content of this section is adapted from Pablo Arias here (https://pabloariasal.github.io/2017/06/10/understanding-virtual-tables/ )
+Credit: the content of this section is adapted from Pablo Arias [here](https://pabloariasal.github.io/2017/06/10/understanding-virtual-tables/ )
 
 ## Then why doesn't my code work?
 
 The reason the intro code might break is that when dealing with GPU-compatible classes with virtual functions, there isn't one VTable, but two. The first has the host versions of the virtual functions, while the second has the device functions. We're initializing the class on the host, so it points to the host VTable.
 
-Our cudaMemcpy faithfully copied all of the members of the class, including the VPointer merrily pointing at host functions, which we then call on the device.
+Our cudaMemcpy faithfully copied all the members of the class, including the VPointer merrily pointing at host functions, which we then call on the device.
 
 ## How to fix this
 
@@ -114,4 +113,4 @@ This is the solution that the code teams we have talked to have said is the most
 
 ## Questions/Follow-up
 
-This is intended to be an educational resource for our users. If something doesn't make sense, or you have further questions, you'd be doing us a favor by letting us know on [Slack](https://kokkosteam.slack.com) or [GitHub](https://github.com/kokkos/kokkos.com)
+This is intended to be an educational resource for our users. If something doesn't make sense, or you have further questions, you'd be doing us a favor by letting us know on [Slack](https://kokkosteam.slack.com) or [GitHub](https://github.com/kokkos/kokkos)
