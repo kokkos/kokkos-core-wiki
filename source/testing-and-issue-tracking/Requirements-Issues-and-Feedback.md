@@ -4,7 +4,7 @@ Kokkos manages its customer interactions primarily via [Kokkos Issues](https://g
 If the slack communication requires tracking, (especially if it requires code changes to Kokkos) 
 a github.com issue will be opened. 
 Issues must be opened for bug reports, enhancement requests and feature requests.
-Prioritization of issues is performed during the the weekly Kokkos developer meeting.
+Prioritization of issues is performed during the weekly Kokkos developer meeting.
 
 ## Requirements
 
