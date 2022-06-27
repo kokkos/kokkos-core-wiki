@@ -1,24 +1,22 @@
 # Fortran Interop Use Case
 
-## Operations on multi-dimensional fortran allocated arrays using Kokkos 
+## Operations on multidimensional fortran allocated arrays using Kokkos 
 
 This example demonstrates usage of the `Fortran Language Compatibility Layer (FLCL)` in the context of performing a DAXPY (double precision A * X + Y) using Kokkos from a simple fortran program. Such a use case occurs when using Kokkos for performance portability within a Fortran application. 
 
 ## Program structure 
 This example uses the Kokkos fortran interop utilities in [FLCL](https://github.com/kokkos/kokkos-fortran-interop). 
-This includes a set of fortran routines for converting fortran allocated arrays into an ndarray and a set of C++ functions for converting an ndarray into a Kokkos unmanaged view. 
+This includes a set of fortran routines for converting fortran allocated arrays into a ndarray and a set of C++ functions for converting a ndarray into a Kokkos unmanaged view. 
 
 The ndarray type (flcl_ndarray_t) is a simple struct that captures the rank, dimensions, strides (equivalent to a dope vector) along with the flattened data. This is defined and implemented in [flcl-cxx.hpp](https://github.com/kokkos/kokkos-fortran-interop/blob/master/src/flcl-cxx.hpp)
 
 ```c++ 
-
 typedef struct _flcl_nd_array_t {
     size_t rank;
     size_t dims[FLCL_NDARRAY_MAX_RANK];
     size_t strides[FLCL_NDARRAY_MAX_RANK];
     void *data;
 } flcl_ndarray_t;
-
 ```
 This has a fortran equivalent type located in [flcl-f.f90](https://github.com/kokkos/kokkos-fortran-interop/blob/master/src/flcl-f.f90)
 
@@ -31,10 +29,9 @@ type, bind(C) :: nd_array_t
   end type nd_array_t
 ```
 
-To convert a fortran allocated array into an ndarray we use a set of procedures (behind an interface) defined in [flcl-f.f90](https://github.com/kokkos/kokkos-fortran-interop/blob/master/src/flcl-f.f90)
+To convert a fortran allocated array into a ndarray we use a set of procedures (behind an interface) defined in [flcl-f.f90](https://github.com/kokkos/kokkos-fortran-interop/blob/master/src/flcl-f.f90)
 
 ```fortran
-
 interface to_nd_array
     ! 1D specializations
     module procedure to_nd_array_l_1d
@@ -58,7 +55,7 @@ interface to_nd_array
     module procedure to_nd_array_r64_3d
 ```
 
-To convert an ndarray to a Kokkos::View we use view_from_ndarray defined in [flcl-cxx.hpp](https://github.com/kokkos/kokkos-fortran-interop/blob/master/src/flcl-cxx.hpp)
+To convert a ndarray to a Kokkos::View we use view_from_ndarray defined in [flcl-cxx.hpp](https://github.com/kokkos/kokkos-fortran-interop/blob/master/src/flcl-cxx.hpp)
 ``` c++ 
 template <typename DataType>
   Kokkos::View<DataType, Kokkos::LayoutStride, Kokkos::HostSpace, Kokkos::MemoryUnmanaged>
@@ -82,7 +79,6 @@ We then define our arrays including two 'Y' arrays, one will be used for calcula
 ``` 
 Performing the DAXPY in fortran is simply: 
 ``` fortran 
-
 do ii = 1, mm
     f_y(ii) = f_y(ii) + alpha * x(ii)
   end do
@@ -138,9 +134,8 @@ void c_axpy( flcl_ndarray_t *nd_array_y, flcl_ndarray_t *nd_array_x, double *alp
   
     return;
   }
-
 ```
 
-In this function we first convert our two nd_array to Kokkos::View and then use Kokkos::parallel_for with a simply DAXPY lambda.  
+In this function we first convert our two nd_array to [`Kokkos::View`](../API/core/view/view) and then use [`Kokkos::parallel_for`](../API/core/parallel-dispatch/parallel_for) with a simply DAXPY lambda.  
 
-This use case illustrates the ability to use Kokkos in fortran applications with interoperability of fortran arrays and Kokkos::View via the ndarray type and conversion routines provided in FLCL. 
+This use case illustrates the ability to use Kokkos in fortran applications with interoperability of fortran arrays and [`Kokkos::View`](../API/core/view/view) via the ndarray type and conversion routines provided in FLCL. 

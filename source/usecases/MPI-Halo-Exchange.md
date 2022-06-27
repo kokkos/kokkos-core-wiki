@@ -62,7 +62,7 @@ to that element must be done by the MPI rank that owns it.
 Suppose further that on each MPI rank there exists an array that maps each element, whether owned
 or redudantly copied, to the (possibly different) MPI rank which owns that element.
 We can filter out the subset of these elements that are associated with a given owner using
-`Kokkos::parallel_scan` and subsequently pack messages using `Kokkos::parallel_for`.
+[`Kokkos::parallel_scan`](../API/core/parallel-dispatch/parallel_scan) and subsequently pack messages using [`Kokkos::parallel_for`](../API/core/parallel-dispatch/parallel_for).
 
 ## Identifying subset indices
 
@@ -121,7 +121,7 @@ Kokkos::View<int*> find_subset(Kokkos::View<int*> keys, int desired_key) {
 
 Once we are able to produce a list of subset indices (those indices of elements which will be transmitted in one message),
 we can use that list of indices to extract a subset of the simulation data to send.
-Here, let us assume that we have a `Kokkos::View` which stores one floating-point value per element, and we want
+Here, let us assume that we have a [`Kokkos::View`](../API/core/view/view) which stores one floating-point value per element, and we want
 to extract a message containing only the floating-point values for the relevant subset.
 
 ```c++
