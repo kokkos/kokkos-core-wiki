@@ -26,3 +26,5 @@ make clean
 cd docs/generated_docs
 python3 -m http.server
 ```
+
+Then, navigate to http://localhost:8000
