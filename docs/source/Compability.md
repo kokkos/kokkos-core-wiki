@@ -26,7 +26,7 @@ The public supported interface for Kokkos is:
 * The top-level `namespace Kokkos`
 * Macros starting with `KOKKOS_` (excluding those starting with `KOKKOS_IMPL_`)
 
-While the implementation details may change, the Kokkos Team puts its best effort into limiting changes to either having no functional behavioral differences (apart from bug fixes), or if they must, are changed with compile-time (preferred) or run-time warning and a suitable deprecation period (if possible).
+While the implementation details may change, the Kokkos Team puts its best effort into limiting changes to either having no functional behavioral differences (apart from bug fixes) or if they must, are changed with compile-time (preferred) or run-time warning and a suitable deprecation period (if possible).
 
 The experimentally support interface for Kokkos is in
 
