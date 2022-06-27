@@ -5,14 +5,13 @@ This chapter presents multiple aspects of the Kokkos test program and identifies
 
 ## Software Management for the Kokkos Git Repository
 
-Git is a distributed management system and is used for the Kokkos software repository; a complete snapshot of the Kokkos software can be obtained from the Kokkos clone site ( https://github.com/github/kokkos/kokkos.git ). A clone from this Git remote site, called by default __origin__, downloads a branch called by default __master__. Each _branch_ is an independent copy of a Git database (called the software repository here) and where development of a software project takes place. The Kokkos team has two branches of primary importance in its software development process: Kokkos __master__ and __develop__; the former is treated as the official version of Kokkos (forked from Trilinos) and the latter the official branch that collects changes from developers during a development cycle. Both branches restrict write-privileges to the project owners. Developers create branches, e.g. issue-865 or array-bounds, for their work and submit pull requests (fetch and merge) to the project owners to integrate the branch changes for the current development cycle. The pull request often contains suggestions for review and presentation of testing results. When a development cycle is complete, the process for integration of Kokkos changes into the Trilinos repository (the promotion process) is begun. At the conclusion of a successful promotion, the _master_ branch of Kokkos receives a pull request from the _develop_ branch; after approval, the cycle begins again.
+Git is a distributed management system and is used for the Kokkos software repository; a complete snapshot of the Kokkos software can be obtained from the Kokkos clone [site]( https://github.com/github/kokkos/kokkos.git). A clone from this Git remote site, called by default __origin__, downloads a branch called by default __master__. Each _branch_ is an independent copy of a Git database (called the software repository here) and where development of a software project takes place. The Kokkos team has two branches of primary importance in its software development process: Kokkos __master__ and __develop__; the former is treated as the official version of Kokkos (forked from Trilinos) and the latter the official branch that collects changes from developers during a development cycle. Both branches restrict write-privileges to the project owners. Developers create branches, e.g. issue-865 or array-bounds, for their work and submit pull requests (fetch and merge) to the project owners to integrate the branch changes for the current development cycle. The pull request often contains suggestions for review and presentation of testing results. When a development cycle is complete, the process for integration of Kokkos changes into the Trilinos repository (the promotion process) is begun. At the conclusion of a successful promotion, the _master_ branch of Kokkos receives a pull request from the _develop_ branch; after approval, the cycle begins again.
 
 ## Platforms
 
 To achieve the goal of enabling software applications to become performant on a variety of systems, software testing must take place on a wide range of architectures. Integral to this effort at Sandia is the collection of machines referred to as the Heterogeneous Advanced Architecture Platforms or HAAPs ( https://snl-wiki.sandia.gov/display/HAAPs ). A subset of these machines are identified in Table 2.1 as the primary (P) test platforms, while other machines with similar characteristics are identified as alternate (or secondary (S) ) test machines that can be used in the event of maintenance or other outages of the primary. The HAAPs link above (scroll to the Platforms section) is the official specifications for these machines. The Platforms table on the HAAPs link contains specifications for both the CPUs and the GPUs (accelerators) when present on a particular platform. Note, the information in Table 2.1 is a subset of that presented in the HAAPs table. The last column designates the network on which a particular machine exists (OHPC – Open Network, SRN – Sandia Restricted Network).
 
 [ decide if summary needed or not: A summary of these machines in Attachment M provides further details. ]
-
 
 <h4>Table 2.1: Kokkos Test Platforms and Characteristics</h4>
   
@@ -29,7 +28,6 @@ To achieve the goal of enabling software applications to become performant on a 
 `Multiple Macs`| S | ? | 4 or 8  |  None |  NA  | Local
 `White`| P | P8-Tuleta, P8-Firestone, P8-Garrison  |  9/10, 8/8, 8/8  |  NVIDIA Tesla |  7 K40, 7 K80, 8 P100  |  32  |  None |  NA | OHPC
 `Others (Jenkins Targets)`| P | ? |  *  |  None |  NA  | OHPC
-
 
 ## Batch Queues
 
@@ -77,7 +75,6 @@ All Kokkos testing is directed by shell-scripts that are a part of the Kokkos so
 `test_kokkos_master_develop_promotion.sh` | kokkos/scripts/testing_scripts | [not used ??] For a specific set of parameters – backend, module, compiler, CXXFlags, architecture, kokkos options, cuda options, and HWLOC – a makefile is crated using generate_makefile.sh. [this makefile script is not the same as mentioned above with a .bash extension]
 `checkin-test` | kokkos/scripts/trilinos-integration | this script loads a set of SEMS modules for a trilinos checkinTest. This latter test (script) does not exist in the Kokkos repository at this time.
 
-
 ## Kokkos Tests: Unit and Performance
 
 As described in the __Introduction__, Kokkos is a library of macros designed to enable applications of all flavors to experience the power and speed of Next Generation computer processors in the solution of their central equations. Kokkos’ role is as an _enabler_ in these applications when it’s macros are properly integrated into the central algorithms (viz, kernels) of these applications. Testing of Kokkos’ macros is accomplished by replicating some of the mathematical implementations of typical kernels at a smaller scale and verifying the accuracy and performance characteristics of these replicas in a series of unit and performance tests.
@@ -92,4 +89,3 @@ kokkos/core/{perf_test   -  ?; unit_test    -  ? }
 example  -  22
 ```
 The results of running these tests are reported as either __pass__ or __fail__. Test problems that fail are identified for scrutiny so that software errors, inadequacies, and/or test problem deficiencies may be located and corrected.
-
