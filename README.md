@@ -19,3 +19,10 @@ To clean:
 cd docs
 make clean
 ```
+
+## Displaying the site locally
+
+```bash
+cd docs/generated_docs
+python3 -m http.server
+```
