@@ -9,9 +9,7 @@ Currently supported (see below the full details):
  - [`max_element`](#kokkosexperimentalmax_element)
  - [`minmax_element`](#kokkosexperimentalminmax_element)
 
-
 ------
-
 
 ## `Kokkos::Experimental::min_element`
 
@@ -114,8 +112,7 @@ auto min_element(const std::string& label,                              (8)
   currently implemented as a reduction, where the `comp` functor is used
   as the ``joiner'' to join two values. The current Kokkos implementation
   of reductions requires any custom joiner to have
-  a volatile overload: see [this wiki page](https://github.com/kokkos/kokkos/wiki/Programming-Guide%3A-Custom-Reductions) for more info on reductions.
-
+  a volatile overload: see [Custom Reductions](../../../../ProgrammingGuide/Custom-Reductions) for more info on reductions.
 
 ### Return
 
@@ -127,7 +124,6 @@ The following special cases apply:
 - if the range `[first, last)` is empty it returns `last`.
 
 - if `view` is empty, it returns `Kokkos::Experimental::end(view)`.
-
 
 ### Example
 

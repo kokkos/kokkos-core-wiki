@@ -13,4 +13,4 @@ Which means contributing to Kokkos allows anyone else to use your contributions
 not just for public purposes but also for closed source commercial projects.
 For specifics see the `LICENSE <license.html>`__.
 
-Open an issue/feature req. <https://github.com/kokkos/kokkos/issues>
+Open an issue/feature req. `ISSUES <https://github.com/kokkos/kokkos/issues>`_
