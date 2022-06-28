@@ -1,0 +1,679 @@
+<!doctype html>
+<html class="no-js">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><link rel="next" title="Memory Spaces" href="memory_spaces.html" /><link rel="prev" title="Spaces" href="Spaces.html" />
+
+    <meta name="generator" content="sphinx-4.3.2, furo 2022.01.02"/>
+        <title>Execution Spaces - Kokkos documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?digest=df49af52631e7917044a9c21a57f7b83170a6dd0" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?digest=fade93df149f7c5fedb3ff897f799dc7d283b420" />
+    <link rel="stylesheet" type="text/css" href="../../_static/hacks.css" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #002b36;
+  --color-code-foreground: #839496;
+  
+  }
+  body[data-theme="dark"] {
+    --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+  }
+  @media (prefers-color-scheme: dark) {
+    body:not([data-theme="light"]) {
+      --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+    }
+  }
+</style></head>
+  <body>
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" />
+      <line x1="4" y1="6" x2="20" y2="6" />
+      <line x1="10" y1="12" x2="20" y2="12" />
+      <line x1="6" y1="18" x2="20" y2="18" />
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../index.html"><div class="brand">Kokkos  documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
+  
+  
+  <span class="sidebar-brand-text">Kokkos  documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
+  <input class="sidebar-search" placeholder=Search name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../programmingguide.html">Programming Guide</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../ProgrammingGuide/Introduction.html">1. Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ProgrammingGuide/Machine-Model.html">2. Machine Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ProgrammingGuide/ProgrammingModel.html">3: Programming Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ProgrammingGuide/Compiling.html">4. Compiling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ProgrammingGuide/Initialization.html">5. Initialization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ProgrammingGuide/View.html">6: View: Multidimensional array</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ProgrammingGuide/ParallelDispatch.html">7. Parallel dispatch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ProgrammingGuide/HierarchicalParallelism.html">8. Hierarchical Parallelism</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../ProgrammingGuide/Custom-Reductions.html">9. Custom Reductions</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../ProgrammingGuide/Custom-Reductions-Built-In-Reducers.html">9.1 Built-In-Reducers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ProgrammingGuide/Custom-Reductions-Built-In-Reducers-with-Custom-Scalar-Types.html">9.2 Built-In Reducers with Custom Scalar Types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ProgrammingGuide/Custom-Reductions-Custom-Reducers.html">9.3 Custom Reducers</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../ProgrammingGuide/Atomic-Operations.html">10. Atomic Operations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ProgrammingGuide/Subviews.html">11: Subviews</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ProgrammingGuide/Interoperability.html">12. Interoperability and Legacy Codes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ProgrammingGuide/Kokkos-and-Virtual-Functions.html">13. Kokkos and Virtual Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../building.html">Build, Install and Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../keywords.html">CMake Keywords</a></li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../core-index.html">API: Core</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2 has-children"><a class="reference internal" href="Initialize-and-Finalize.html">Initialize and Finalize</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="initialize_finalize/initialize.html">Kokkos::initialize</a></li>
+<li class="toctree-l3"><a class="reference internal" href="initialize_finalize/finalize.html">Kokkos::finalize</a></li>
+<li class="toctree-l3"><a class="reference internal" href="initialize_finalize/ScopeGuard.html">Kokkos::ScopeGuard</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="View.html">View and related</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="view/create_mirror.html"><code class="docutils literal notranslate"><span class="pre">create_mirror[_view]</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="view/deep_copy.html"><code class="docutils literal notranslate"><span class="pre">deep_copy()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="view/layoutLeft.html"><code class="docutils literal notranslate"><span class="pre">LayoutLeft</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="view/layoutRight.html"><code class="docutils literal notranslate"><span class="pre">LayoutRight</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="view/layoutStride.html"><code class="docutils literal notranslate"><span class="pre">LayoutStride</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="view/realloc.html"><code class="docutils literal notranslate"><span class="pre">realloc</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="view/resize.html"><code class="docutils literal notranslate"><span class="pre">resize</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="view/subview.html"><code class="docutils literal notranslate"><span class="pre">subview</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="view/view.html"><code class="docutils literal notranslate"><span class="pre">View</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="view/view_alloc.html"><code class="docutils literal notranslate"><span class="pre">view_alloc()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="view/view_like.html">View-like Types</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="ParallelDispatch.html">Parallel Execution/Dispatch</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="parallel-dispatch/parallel_for.html"><code class="docutils literal notranslate"><span class="pre">parallel_for()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="parallel-dispatch/parallel_reduce.html"><code class="docutils literal notranslate"><span class="pre">parallel_reduce()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="parallel-dispatch/parallel_scan.html"><code class="docutils literal notranslate"><span class="pre">parallel_scan()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="parallel-dispatch/fence.html"><code class="docutils literal notranslate"><span class="pre">fence()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="parallel-dispatch/ParallelForTag.html"><code class="docutils literal notranslate"><span class="pre">ParallelForTag()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="parallel-dispatch/ParallelReduceTag.html"><code class="docutils literal notranslate"><span class="pre">ParallelReduceTag()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="parallel-dispatch/ParallelScanTag.html"><code class="docutils literal notranslate"><span class="pre">ParallelScanTag()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="builtin_reducers.html">Built-in Reducers</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="builtinreducers/ReducerConcept.html"><code class="docutils literal notranslate"><span class="pre">ReducerConcept</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="builtinreducers/BAnd.html"><code class="docutils literal notranslate"><span class="pre">BAnd</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="builtinreducers/BOr.html"><code class="docutils literal notranslate"><span class="pre">BOr</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="builtinreducers/LAnd.html"><code class="docutils literal notranslate"><span class="pre">LAnd</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="builtinreducers/LOr.html"><code class="docutils literal notranslate"><span class="pre">LOr</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="builtinreducers/Max.html"><code class="docutils literal notranslate"><span class="pre">Max</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="builtinreducers/MaxLoc.html"><code class="docutils literal notranslate"><span class="pre">MaxLoc</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="builtinreducers/Min.html"><code class="docutils literal notranslate"><span class="pre">Min</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="builtinreducers/MinLoc.html"><code class="docutils literal notranslate"><span class="pre">MinLoc</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="builtinreducers/MinMax.html"><code class="docutils literal notranslate"><span class="pre">MinMax</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="builtinreducers/MinMaxLoc.html"><code class="docutils literal notranslate"><span class="pre">MinMaxLoc</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="builtinreducers/Prod.html"><code class="docutils literal notranslate"><span class="pre">Prod</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="builtinreducers/Sum.html"><code class="docutils literal notranslate"><span class="pre">Sum</span></code></a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="builtinreducers/ReductionScalarTypes.html">Reduction Scalar Types</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="builtinreducers/MinMaxLocScalar.html"><code class="docutils literal notranslate"><span class="pre">MinMaxLocScalar</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="builtinreducers/MinMaxScalar.html"><code class="docutils literal notranslate"><span class="pre">MinMaxScalar</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="builtinreducers/ValLocScalar.html"><code class="docutils literal notranslate"><span class="pre">ValLocScalar</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="Execution-Policies.html">Execution Policies</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="policies/ExecutionPolicyConcept.html"><code class="docutils literal notranslate"><span class="pre">ExecutionPolicy</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="policies/MDRangePolicy.html"><code class="docutils literal notranslate"><span class="pre">MDRangePolicy</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="policies/NestedPolicies.html"><code class="docutils literal notranslate"><span class="pre">NestedPolicies</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="policies/RangePolicy.html"><code class="docutils literal notranslate"><span class="pre">RangePolicy</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="policies/TeamHandleConcept.html"><code class="docutils literal notranslate"><span class="pre">TeamHandleConcept</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="policies/TeamPolicy.html"><code class="docutils literal notranslate"><span class="pre">TeamPolicy</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="policies/TeamThreadRange.html"><code class="docutils literal notranslate"><span class="pre">TeamThreadRange</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="policies/TeamVectorRange.html"><code class="docutils literal notranslate"><span class="pre">TeamVectorRange</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="policies/ThreadVectorRange.html"><code class="docutils literal notranslate"><span class="pre">ThreadVectorRange</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2 current has-children"><a class="reference internal" href="Spaces.html">Spaces</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l3 current current-page"><a class="current reference internal" href="#">Execution Spaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="memory_spaces.html">Memory Spaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SpaceAccessibility.html">Space Accessibility</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Task-Parallelism.html">Task-Parallelism</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="atomics.html">Atomics</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="atomics/atomic_compare_exchange.html"><code class="docutils literal notranslate"><span class="pre">atomic_compare_exchange</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="atomics/atomic_compare_exchange_strong.html"><code class="docutils literal notranslate"><span class="pre">atomic_compare_exchange_strong</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="atomics/atomic_exchange.html"><code class="docutils literal notranslate"><span class="pre">atomic_exchange</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="atomics/atomic_fetch_op.html"><code class="docutils literal notranslate"><span class="pre">atomic_fetch_[op]</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="atomics/atomic_load.html"><code class="docutils literal notranslate"><span class="pre">atomic_load</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="atomics/atomic_op.html"><code class="docutils literal notranslate"><span class="pre">atomic_[op]</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="atomics/atomic_op_fetch.html"><code class="docutils literal notranslate"><span class="pre">atomic_[op]_fetch</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="atomics/atomic_store.html"><code class="docutils literal notranslate"><span class="pre">atomic_store</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="Numerics.html">Numerics</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="numerics/mathematical-constants.html">Mathematical constants</a></li>
+<li class="toctree-l3"><a class="reference internal" href="numerics/mathematical-functions.html">Common math functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="numerics/numeric-traits.html">Numeric traits</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="CStyleMemManagement.html">C-style memory management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Traits.html">Traits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="KokkosConcepts.html">Kokkos Concepts</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="STL-Compatibility.html">STL Compatibility Issues</a><input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" role="switch" type="checkbox"/><label for="toctree-checkbox-13"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="stl-compat/pair.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::pair</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="Utilities.html">Utilities</a><input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" role="switch" type="checkbox"/><label for="toctree-checkbox-14"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="utilities/abort.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::abort</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilities/complex.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::complex</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilities/timer.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::Timer</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Detection-Idiom.html">Detection Idiom</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Macros.html">Macros</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../containers-index.html">API: Containers</a><input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" role="switch" type="checkbox"/><label for="toctree-checkbox-15"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../containers/Bitset.html"><code class="docutils literal notranslate"><span class="pre">Bitset</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../containers/Bitset.html#constbitset"><code class="docutils literal notranslate"><span class="pre">ConstBitset</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../containers/DualView.html"><code class="docutils literal notranslate"><span class="pre">DualView</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../containers/DynamicView.html"><code class="docutils literal notranslate"><span class="pre">DynamicView</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../containers/DynRankView.html"><code class="docutils literal notranslate"><span class="pre">DynRankView</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../containers/Offset-View.html"><code class="docutils literal notranslate"><span class="pre">OffsetView</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../containers/ScatterView.html"><code class="docutils literal notranslate"><span class="pre">ScatterView</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../containers/StaticCrsGraph.html"><code class="docutils literal notranslate"><span class="pre">StaticCrsGraph</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../containers/Unordered-Map.html"><code class="docutils literal notranslate"><span class="pre">UnorderedMap</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../containers/vector.html"><code class="docutils literal notranslate"><span class="pre">vector</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../algorithms-index.html">API: Algorithms</a><input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" role="switch" type="checkbox"/><label for="toctree-checkbox-16"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/Random-Number.html">Random-Number</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/Random-Number.html#generator">Generator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/Sort.html">Sort</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../algorithms/std-algorithms-index.html">Std Algorithms</a><input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" role="switch" type="checkbox"/><label for="toctree-checkbox-17"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../algorithms/std-algorithms/Iterators.html">Iterators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../algorithms/std-algorithms/StdMinMaxElement.html">Minimum/maximum</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../algorithms/std-algorithms/StdModSeq.html">Modifying Sequence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../algorithms/std-algorithms/StdNonModSeq.html">NonModifying Sequence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../algorithms/std-algorithms/StdNumeric.html">Numeric</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../algorithms/std-algorithms/StdPartioningOps.html">Partitioning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../algorithms/std-algorithms/StdSorting.html">Sorting</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../alphabetical.html">API in Alphabetical Order</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../usecases.html">Use Cases and Examples</a><input class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" role="switch" type="checkbox"/><label for="toctree-checkbox-18"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../usecases/MPI-Halo-Exchange.html">MPI Halo Exchange</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../usecases/Average-To-Nodes.html">ScatterView averaging elements to nodes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../usecases/MDRangePolicy.html">MDRangePolicy Use Case</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../usecases/VirtualFunctions.html">Virtual Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../usecases/TaggedOperators.html">Tagged Operators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../usecases/OverlappingHostAndDeviceWork.html">Overlapping Host and Device work</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../usecases/Tasking.html">Kokkos Tasking Use Case</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../usecases/Kokkos-Fortran-Interoperability.html">Fortran Interop Use Case</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../usecases/SoA-and-AoSoA-with-Cabana.html">Array of Structures and Structure of Arrays with Cabana</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../testing-and-issue-tracking.html">Testing and Issue Tracking</a><input class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" role="switch" type="checkbox"/><label for="toctree-checkbox-19"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../testing-and-issue-tracking/Requirements-Issues-and-Feedback.html">Requirements, Issues and Feedback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../testing-and-issue-tracking/Testing-Process-Details.html">Attachments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../testing-and-issue-tracking/Testing-Processes.html">Kokkos Testing Processes and Change Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../testing-and-issue-tracking/Testing-Workflow-Components.html">Kokkos Testing Workflow Components</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/kokkos/kokkos-tutorials">Tutorials</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../videolectures.html">Video lectures</a><input class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" role="switch" type="checkbox"/><label for="toctree-checkbox-20"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference external" href="https://www.youtube.com/watch?v=rUIcWtFU5qM">1. Intro, Build, Parallel dispatch</a></li>
+<li class="toctree-l2"><a class="reference external" href="https://www.youtube.com/watch?v=O-asHTtO7O4">2. Views and Spaces</a></li>
+<li class="toctree-l2"><a class="reference external" href="https://www.youtube.com/watch?v=nGyJS8u-6GY">3. Multidim loops and Data Structures</a></li>
+<li class="toctree-l2"><a class="reference external" href="https://www.youtube.com/watch?v=s9ecpeWRePs">4. Hierarchical Parallelism</a></li>
+<li class="toctree-l2"><a class="reference external" href="https://www.youtube.com/watch?v=xEAyOod57-c">5. SIMD, Streams, Tasking</a></li>
+<li class="toctree-l2"><a class="reference external" href="https://www.youtube.com/watch?v=1J3JQ3d3cRc&amp;t=1s">6. Fortran/Python interop, MPI, PGAS</a></li>
+<li class="toctree-l2"><a class="reference external" href="https://www.youtube.com/watch?v=MH6zFYGw0HU">7. Kokkos Tools</a></li>
+<li class="toctree-l2"><a class="reference external" href="https://www.youtube.com/watch?v=_qD4X66MQF8&amp;t=1s">8. Kokkos Kernels Math Library</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/kokkos/kokkos">GitHub Repo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../citation.html">Citing Kokkos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../license.html">License</a></li>
+</ul>
+
+</div>
+</div>
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <div class="content-icon-container">
+          <div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <div class="section" id="execution-spaces">
+<h1>Execution Spaces<a class="headerlink" href="#execution-spaces" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="kokkos-cuda">
+<span id="cuda"></span><h2><code class="docutils literal notranslate"><span class="pre">Kokkos::Cuda</span></code><a class="headerlink" href="#kokkos-cuda" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">Kokkos::Cuda</span></code> is an <a class="reference internal" href="#executionspaceconcept"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">ExecutionSpace</span></code> type</span></a> representing execution on a Cuda device.  Except in rare instances, it should not be used directly, but instead should be used generically as an execution space.  For details, see <a class="reference internal" href="#executionspaceconcept"><span class="std std-ref">the documentation on the <code class="docutils literal notranslate"><span class="pre">ExecutionSpace</span></code> concept</span></a>.</p>
+</div>
+<div class="section" id="kokkos-hpx">
+<span id="hpx"></span><h2><code class="docutils literal notranslate"><span class="pre">Kokkos::HPX</span></code><a class="headerlink" href="#kokkos-hpx" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">Kokkos::HPX</span></code> is an <a class="reference internal" href="#executionspaceconcept"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">ExecutionSpace</span></code> type</span></a> representing execution with the HPX runtime system.  Except in rare instances, it should not be used directly, but instead should be used generically as an execution space.  For details, see <a class="reference internal" href="#executionspaceconcept"><span class="std std-ref">the documentation on the <code class="docutils literal notranslate"><span class="pre">ExecutionSpace</span></code> concept</span></a>.</p>
+</div>
+<div class="section" id="kokkos-openmp">
+<span id="openmp"></span><h2><code class="docutils literal notranslate"><span class="pre">Kokkos::OpenMP</span></code><a class="headerlink" href="#kokkos-openmp" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">Kokkos::OpenMP</span></code> is an <a class="reference internal" href="#executionspaceconcept"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">ExecutionSpace</span></code> type</span></a> representing execution with the OpenMP runtime system.  Except in rare instances, it should not be used directly, but instead should be used generically as an execution space.  For details, see <a class="reference internal" href="#executionspaceconcept"><span class="std std-ref">the documentation on the <code class="docutils literal notranslate"><span class="pre">ExecutionSpace</span></code> concept</span></a>.</p>
+</div>
+<div class="section" id="kokkos-openmptarget">
+<span id="openmptarget"></span><h2><code class="docutils literal notranslate"><span class="pre">Kokkos::OpenMPTarget</span></code><a class="headerlink" href="#kokkos-openmptarget" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">Kokkos::OpenMPTarget</span></code> is an <a class="reference internal" href="#executionspaceconcept"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">ExecutionSpace</span></code> type</span></a> representing execution using the target offloading feature of the OpenMP runtime system.  Except in rare instances, it should not be used directly, but instead should be used generically as an execution space.  For details, see <a class="reference internal" href="#executionspaceconcept"><span class="std std-ref">the documentation on the <code class="docutils literal notranslate"><span class="pre">ExecutionSpace</span></code> concept</span></a></p>
+</div>
+<div class="section" id="kokkos-serial">
+<span id="serial"></span><h2><code class="docutils literal notranslate"><span class="pre">Kokkos::Serial</span></code><a class="headerlink" href="#kokkos-serial" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">Kokkos::Serial</span></code> is an <a class="reference internal" href="#executionspaceconcept"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">ExecutionSpace</span></code> type</span></a> representing serial execution the CPU.  Except in rare instances, it should not be used directly, but instead should be used generically as an execution space.  For details, see <a class="reference internal" href="#executionspaceconcept"><span class="std std-ref">the documentation on the <code class="docutils literal notranslate"><span class="pre">ExecutionSpace</span></code> concept</span></a>.</p>
+</div>
+<div class="section" id="kokkos-executionspaceconcept">
+<span id="executionspaceconcept"></span><h2><code class="docutils literal notranslate"><span class="pre">Kokkos::ExecutionSpaceConcept</span></code><a class="headerlink" href="#kokkos-executionspaceconcept" title="Permalink to this headline">¶</a></h2>
+<p>The concept of an <code class="docutils literal notranslate"><span class="pre">ExecutionSpace</span></code> is the fundamental abstraction to represent the “where” and the “how” that execution takes place in Kokkos.  Most code that uses Kokkos should be written to the <em>generic concept</em> of an <code class="docutils literal notranslate"><span class="pre">ExecutionSpace</span></code> rather than any specific instance.  This page talks practically about how to <em>use</em> the common features of execution spaces in Kokkos; for a more formal and theoretical treatment, see <a class="reference internal" href="KokkosConcepts.html"><span class="doc std std-doc">this document</span></a>.</p>
+<blockquote>
+<div><p><em>Disclaimer</em>: There is nothing new about the term “concept” in C++; anyone who has ever used templates in C++ has used concepts whether they knew it or not.  Please do not be confused by the word “concept” itself, which is now more often associated with a shiny new C++20 language feature.  Here, “concept” just means “what you’re allowed to do with a type that is a template parameter in certain places”.</p>
+</div></blockquote>
+<div class="section" id="very-simplest-use-not-at-all">
+<h3>Very Simplest Use: Not at all?<a class="headerlink" href="#very-simplest-use-not-at-all" title="Permalink to this headline">¶</a></h3>
+<p>When first starting to use Kokkos, the (surprising) answer to where you’ll see <a class="reference internal" href="#executionspaceconcept"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">ExecutionSpace</span></code>s</span></a> used explicitly is “nowhere”.  Many of the first things most users learn are “shortcuts” for “do this thing using the default execution space,” which is a type alias (a.k.a., <code class="docutils literal notranslate"><span class="pre">typedef</span></code>) named <code class="docutils literal notranslate"><span class="pre">Kokkos::DefaultExecutionSpace</span></code> defined based on build system flags. For instance,</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">Kokkos</span><span class="o">::</span><span class="n">parallel_for</span><span class="p">(</span>
+  <span class="mi">42</span><span class="p">,</span>
+  <span class="n">KOKKOS_LAMBDA</span> <span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">}</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>is a “shortcut” for</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">Kokkos</span><span class="o">::</span><span class="n">parallel_for</span><span class="p">(</span>
+  <span class="n">Kokkos</span><span class="o">::</span><span class="n">RangePolicy</span><span class="o">&lt;</span><span class="n">Kokkos</span><span class="o">::</span><span class="n">DefaultExecutionSpace</span><span class="o">&gt;</span><span class="p">(</span>
+    <span class="n">Kokkos</span><span class="o">::</span><span class="n">DefaultExecutionSpace</span><span class="p">(),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">42</span>
+  <span class="p">),</span>
+  <span class="n">KOKKOS_LAMBDA</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">}</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="being-more-generic">
+<h3>Being more generic<a class="headerlink" href="#being-more-generic" title="Permalink to this headline">¶</a></h3>
+<p>For more intermediate and advanced users, however, it is often good practice to write code that is explicitly generic over the execution space, so that calling code can pass in a non-default execution space if needed.  For instance, if the simple version of your function is</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">my_function</span><span class="p">(</span><span class="n">Kokkos</span><span class="o">::</span><span class="n">View</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">*&gt;</span> <span class="n">data</span><span class="p">,</span> <span class="kt">double</span> <span class="n">scale</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">Kokkos</span><span class="o">::</span><span class="n">parallel_for</span><span class="p">(</span>
+    <span class="n">data</span><span class="p">.</span><span class="n">extent</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span>
+    <span class="n">KOKKOS_LAMBDA</span> <span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">data</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">*=</span> <span class="n">scale</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>then a more advanced, more flexible version of your function might look like:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">ExecSpace</span><span class="p">,</span> <span class="k">class</span> <span class="nc">ViewType</span><span class="o">&gt;</span>
+<span class="kt">void</span> <span class="n">my_function</span><span class="p">(</span>
+  <span class="n">ExecSpace</span> <span class="n">ex</span><span class="p">,</span>
+  <span class="n">ViewType</span> <span class="n">data</span><span class="p">,</span>
+  <span class="kt">double</span> <span class="n">scale</span>
+<span class="p">)</span> <span class="p">{</span>
+  <span class="k">static_assert</span><span class="p">(</span>
+    <span class="n">Kokkos</span><span class="o">::</span><span class="n">SpaceAccessibility</span><span class="o">&lt;</span><span class="n">ExecSpace</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">ViewType</span><span class="o">::</span><span class="n">memory_space</span><span class="o">&gt;::</span><span class="n">assignable</span><span class="p">,</span>
+    <span class="s">"Incompatible ViewType and ExecutionSpace"</span>
+  <span class="p">);</span>
+  <span class="n">Kokkos</span><span class="o">::</span><span class="n">parallel_for</span><span class="p">(</span>
+    <span class="n">Kokkos</span><span class="o">::</span><span class="n">RangePolicy</span><span class="o">&lt;</span><span class="n">ExecSpace</span><span class="o">&gt;</span><span class="p">(</span><span class="n">ex</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">data</span><span class="p">.</span><span class="n">extent</span><span class="p">(</span><span class="mi">0</span><span class="p">)),</span>
+    <span class="n">KOKKOS_LAMBDA</span> <span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">data</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">*=</span> <span class="n">scale</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>More advanced users may also prefer the more explicit form simply to avoid the additional mental exercise of translating “shortcuts” when reading the code later.  Being explicit about <em>where</em> and <em>how</em> Kokkos parallel patterns are executing tends to reduce bugs, even if it is more verbose.</p>
+</div>
+<div class="section" id="functionality">
+<h3>Functionality<a class="headerlink" href="#functionality" title="Permalink to this headline">¶</a></h3>
+<p>All <code class="docutils literal notranslate"><span class="pre">ExecutionSpace</span></code> types expose a common set of functionality.  In generic code that uses Kokkos (which is pretty much all user code), you should never use any part of an execution space type that isn’t common to all execution space types (otherwise, you risk losing portability of your code).  There are a few expressions guaranteed to be valid for any <code class="docutils literal notranslate"><span class="pre">ExecutionSpace</span></code> type.  Given a type <code class="docutils literal notranslate"><span class="pre">Ex</span></code> that is an <code class="docutils literal notranslate"><span class="pre">ExecutionSpace</span></code> type, and an instance of that type <code class="docutils literal notranslate"><span class="pre">ex</span></code>, Kokkos guarantees the following expressions will provide the specified functionality:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">ex</span><span class="p">.</span><span class="n">name</span><span class="p">();</span>
+</pre></div>
+</div>
+<p><em>Returns:</em> a value convertible to <code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">char*</span></code> that is guaranteed to be unique to a given <code class="docutils literal notranslate"><span class="pre">ExecutionSpace</span></code> instance type.
+<em>Note:</em> the pointer returned by this function may not be accessible from the <code class="docutils literal notranslate"><span class="pre">ExecutionSpace</span></code> itself (for instance, on a device); use with caution.</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">ex</span><span class="p">.</span><span class="n">in_parallel</span><span class="p">();</span>
+</pre></div>
+</div>
+<p><em>Returns:</em> a value convertible to <code class="docutils literal notranslate"><span class="pre">bool</span></code> indicating whether or not the caller is executing as part of a Kokkos parallel pattern.
+<em>Note:</em> as currently implemented, there is no guarantee that <code class="docutils literal notranslate"><span class="pre">true</span></code> means the caller is necessarily executing as part of a pattern on the particular instance <code class="docutils literal notranslate"><span class="pre">ex</span></code>; just <em>some</em> instance of <code class="docutils literal notranslate"><span class="pre">Ex</span></code>.  This may be strengthened in the future.</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">ex</span><span class="p">.</span><span class="n">fence</span><span class="p">();</span>
+</pre></div>
+</div>
+<p><em>Effects:</em> Upon return, all parallel patterns executed on the instance <code class="docutils literal notranslate"><span class="pre">ex</span></code> are guaranteed to have completed, and their effects are guaranteed visible to the calling thread.
+<em>Returns:</em> Nothing.
+<em>Note:</em> This <em>cannot</em> be called from within a parallel pattern.  Doing so will lead to unspecified effects (i.e., it might work, but only for some execution spaces, so be extra careful not to do it).</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">ex</span><span class="p">.</span><span class="n">print_configuration</span><span class="p">(</span><span class="n">ostr</span><span class="p">);</span>
+<span class="n">ex</span><span class="p">.</span><span class="n">print_configuration</span><span class="p">(</span><span class="n">ostr</span><span class="p">,</span> <span class="n">detail</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>where <code class="docutils literal notranslate"><span class="pre">ostr</span></code> is a <code class="docutils literal notranslate"><span class="pre">std::ostream</span></code> (like <code class="docutils literal notranslate"><span class="pre">std::cout</span></code>, for instance) and <code class="docutils literal notranslate"><span class="pre">detail</span></code> is a boolean indicating whether a detailed description should be printed.</p>
+<p><em>Effects:</em> Outputs the configuration of <code class="docutils literal notranslate"><span class="pre">ex</span></code> to the given <code class="docutils literal notranslate"><span class="pre">std::ostream</span></code>.
+<em>Returns:</em> Nothing.
+<em>Note:</em> This <em>cannot</em> be called from within a parallel pattern.</p>
+<p>Additionally, the following type aliases (a.k.a. <code class="docutils literal notranslate"><span class="pre">typedef</span></code>s) will be defined by all execution space types:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Ex::memory_space</span></code>: the default <a class="reference internal" href="memory_spaces.html#memoryspaceconcept"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">MemorySpace</span></code></span></a> to use when executing with <code class="docutils literal notranslate"><span class="pre">Ex</span></code>.  Kokkos guarantees that <code class="docutils literal notranslate"><span class="pre">Kokkos::SpaceAccessibility&lt;Ex,</span> <span class="pre">Ex::memory_space&gt;::accessible</span></code> will be <code class="docutils literal notranslate"><span class="pre">true</span></code> (see <a class="reference internal" href="SpaceAccessibility.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">Kokkos::SpaceAccessibility</span></code></span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Ex::array_layout</span></code>: the default <code class="docutils literal notranslate"><span class="pre">ArrayLayout</span></code> recommended for use with <code class="docutils literal notranslate"><span class="pre">View</span></code> types accessed from <code class="docutils literal notranslate"><span class="pre">Ex</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Ex::scratch_memory_space</span></code>: the <code class="docutils literal notranslate"><span class="pre">ScratchMemorySpace</span></code> that parallel patterns will use for allocation of scratch memory (for instance, as requested by a <a class="reference internal" href="policies/TeamPolicy.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">Kokkos::TeamPolicy</span></code></span></a>).</p></li>
+</ul>
+<div class="section" id="default-constructibility-copy-constructibility">
+<h4>Default Constructibility, Copy Constructibility<a class="headerlink" href="#default-constructibility-copy-constructibility" title="Permalink to this headline">¶</a></h4>
+<p>In addition to the above functionality, all <code class="docutils literal notranslate"><span class="pre">ExecutionSpace</span></code> types in Kokkos are default constructible (you can construct them as <code class="docutils literal notranslate"><span class="pre">Ex</span> <span class="pre">ex()</span></code>) and copy constructible (you can construct them as <code class="docutils literal notranslate"><span class="pre">Ex</span> <span class="pre">ex2(ex1)</span></code>).  All default constructible instances of an <code class="docutils literal notranslate"><span class="pre">ExecutionSpace</span></code> type are guaranteed to have equivalent behavior, and all copy constructed instances are guaranteed to have equivalent behavior to the instance they were copied from.</p>
+</div>
+<div class="section" id="detection">
+<h4>Detection<a class="headerlink" href="#detection" title="Permalink to this headline">¶</a></h4>
+<p>Kokkos provides the convenience type trait <code class="docutils literal notranslate"><span class="pre">Kokkos::is_execution_space&lt;T&gt;</span></code> which has a <code class="docutils literal notranslate"><span class="pre">value</span></code> compile-time accessible value (usable as <code class="docutils literal notranslate"><span class="pre">Kokkos::is_execution_space&lt;T&gt;::value</span></code>) that is <code class="docutils literal notranslate"><span class="pre">true</span></code> if and only if a type <code class="docutils literal notranslate"><span class="pre">T</span></code> meets the requirements of the <code class="docutils literal notranslate"><span class="pre">ExecutionSpace</span></code> concept.  Any <code class="docutils literal notranslate"><span class="pre">ExecutionSpace</span></code> type <code class="docutils literal notranslate"><span class="pre">T</span></code> will also have the expression <code class="docutils literal notranslate"><span class="pre">Kokkos::is_space&lt;T&gt;::value</span></code> evaluate to <code class="docutils literal notranslate"><span class="pre">true</span></code> as a compile-time constant.</p>
+</div>
+</div>
+<div class="section" id="synopsis">
+<h3>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="c1">// This is not an actual class, it just describes the concept in shorthand</span>
+<span class="k">class</span> <span class="nc">ExecutionSpaceConcept</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span> 
+  <span class="k">typedef</span> <span class="n">ExecutionSpaceConcept</span> <span class="n">execution_space</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="p">...</span> <span class="n">memory_space</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">Device</span><span class="o">&lt;</span><span class="n">execution_space</span><span class="p">,</span> <span class="n">memory_space</span><span class="o">&gt;</span> <span class="n">device_type</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="p">...</span> <span class="n">scratch_memory_space</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="p">...</span> <span class="n">array_layout</span><span class="p">;</span>
+  
+
+  <span class="n">ExecutionSpaceConcept</span><span class="p">();</span>
+  <span class="n">ExecutionSpaceConcept</span><span class="p">(</span><span class="k">const</span> <span class="n">ExecutionSpaceConcept</span><span class="o">&amp;</span> <span class="n">src</span><span class="p">);</span>
+
+  <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">name</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+  <span class="kt">void</span> <span class="nf">print_configuration</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">ostream</span> <span class="n">ostr</span><span class="o">&amp;</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+  <span class="kt">void</span> <span class="nf">print_configuration</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">ostream</span> <span class="n">ostr</span><span class="o">&amp;</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">details</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+  
+  <span class="kt">bool</span> <span class="nf">in_parallel</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="nf">concurrency</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+
+  <span class="kt">void</span> <span class="nf">fence</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">template</span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">MS</span><span class="o">&gt;</span>
+<span class="k">struct</span> <span class="nc">is_execution_space</span> <span class="p">{</span>
+<span class="k">enum</span> <span class="p">{</span> <span class="n">value</span> <span class="o">=</span> <span class="nb">false</span> <span class="p">};</span>
+<span class="p">};</span>
+
+<span class="k">template</span><span class="o">&lt;&gt;</span>
+<span class="k">struct</span> <span class="nc">is_execution_space</span><span class="o">&lt;</span><span class="n">ExecutionSpaceConcept</span><span class="o">&gt;</span> <span class="p">{</span>
+<span class="k">enum</span> <span class="p">{</span> <span class="n">value</span> <span class="o">=</span> <span class="nb">true</span> <span class="p">};</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="typedefs">
+<h3>Typedefs<a class="headerlink" href="#typedefs" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">execution_space</span></code>: The self type;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">memory_space</span></code>: The default <a class="reference internal" href="memory_spaces.html#memoryspaceconcept"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">MemorySpace</span></code></span></a> to use when executing with <a class="reference internal" href="#executionspaceconcept"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">ExecutionSpaceConcept</span></code></span></a>.<br/>
+Kokkos guarantees that <code class="docutils literal notranslate"><span class="pre">Kokkos::SpaceAccessibility&lt;Ex,</span> <span class="pre">Ex::memory_space&gt;::accessible</span></code> will be <code class="docutils literal notranslate"><span class="pre">true</span></code>
+(see <a class="reference internal" href="SpaceAccessibility.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">Kokkos::SpaceAccessibility</span></code></span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">device_type</span></code>: <code class="docutils literal notranslate"><span class="pre">DeviceType&lt;execution_space,memory_space&gt;</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">array_layout</span></code>: The default <code class="docutils literal notranslate"><span class="pre">ArrayLayout</span></code> recommended for use with <code class="docutils literal notranslate"><span class="pre">View</span></code> types accessed from <a class="reference internal" href="#executionspaceconcept"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">ExecutionSpaceConcept</span></code></span></a>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">scratch_memory_space</span></code>: The <code class="docutils literal notranslate"><span class="pre">ScratchMemorySpace</span></code> that parallel patterns will use for allocation of scratch memory
+(for instance, as requested by a <a class="reference internal" href="policies/TeamPolicy.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">Kokkos::TeamPolicy</span></code></span></a>)</p></li>
+</ul>
+</div>
+<div class="section" id="constructors">
+<h3>Constructors<a class="headerlink" href="#constructors" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ExecutionSpaceConcept()</span></code>: Default constructor.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ExecutionSpaceConcept(const</span> <span class="pre">ExecutionSpaceConcept&amp;</span> <span class="pre">src)</span></code>: Copy constructor.</p></li>
+</ul>
+</div>
+<div class="section" id="functions">
+<h3>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">char*</span> <span class="pre">name()</span> <span class="pre">const;</span></code>: <em>Returns</em> the label of the execution space instance.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bool</span> <span class="pre">in_parallel()</span> <span class="pre">const;</span></code>: <em>Returns</em> a value convertible to <code class="docutils literal notranslate"><span class="pre">bool</span></code> indicating whether the caller is executing as part of a Kokkos parallel pattern.
+<em>Note:</em> as currently implemented, there is no guarantee that <code class="docutils literal notranslate"><span class="pre">true</span></code> means the caller is necessarily executing as
+part of a pattern on the particular instance <a class="reference internal" href="#executionspaceconcept"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">ExecutionSpaceConcept</span></code></span></a>; just <em>some</em> instance of <a class="reference internal" href="#executionspaceconcept"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">ExecutionSpaceConcept</span></code></span></a>.  This may be strengthened in the future.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">concurrency()</span> <span class="pre">const;</span></code> <em>Returns</em> the maximum amount of concurrently executing work items in a parallel setting, i.e. the maximum number of threads utilized by an execution space instance.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">fence()</span> <span class="pre">const;</span></code> <em>Effects:</em> Upon return, all parallel patterns executed on the instance <a class="reference internal" href="#executionspaceconcept"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">ExecutionSpaceConcept</span></code></span></a> are guaranteed to have completed,
+and their effects are guaranteed visible to the calling thread.
+<em>Note:</em> This <em>cannot</em> be called from within a parallel pattern.  Doing so will lead to unspecified effects
+(i.e., it might work, but only for some execution spaces, so be extra careful not to do it).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">print_configuration(std::ostream</span> <span class="pre">ostr)</span> <span class="pre">const;</span></code>: <em>Effects:</em> Outputs the configuration of <code class="docutils literal notranslate"><span class="pre">ex</span></code> to the given <code class="docutils literal notranslate"><span class="pre">std::ostream</span></code>.
+<em>Note:</em> This <em>cannot</em> be called from within a parallel pattern.</p></li>
+</ul>
+</div>
+<div class="section" id="non-member-facilities">
+<h3>Non Member Facilities<a class="headerlink" href="#non-member-facilities" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">template&lt;class</span> <span class="pre">MS&gt;</span> <span class="pre">struct</span> <span class="pre">is_execution_space;</span></code>: typetrait to check whether a class is a execution space.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">template&lt;class</span> <span class="pre">S1,</span> <span class="pre">class</span> <span class="pre">S2&gt;</span> <span class="pre">struct</span> <span class="pre">SpaceAccessibility;</span></code>: typetraits to check whether two spaces are compatible (assignable, deep_copy-able, accessable).
+(see <a class="reference internal" href="SpaceAccessibility.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">Kokkos::SpaceAccessibility</span></code></span></a>)</p></li>
+</ul>
+</div>
+</div>
+</div>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="memory_spaces.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Memory Spaces</div>
+              </div>
+              <svg><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="Spaces.html">
+              <svg><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Spaces</div>
+                
+              </div>
+            </a>
+        </div>
+
+        <div class="related-information">
+              Copyright &#169; 2014, National Technology &amp; Engineering Solutions of Sandia, LLC (NTESS) |
+          Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+          <a href="https://github.com/pradyunsg/furo">Furo theme</a>.
+            | <a class="muted-link" href="../../_sources/API/core/execution_spaces.md.txt"
+               rel="nofollow">
+              Show Source
+            </a>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            Contents
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Execution Spaces</a><ul>
+<li><a class="reference internal" href="#kokkos-cuda"><code class="docutils literal notranslate"><span class="pre">Kokkos::Cuda</span></code></a></li>
+<li><a class="reference internal" href="#kokkos-hpx"><code class="docutils literal notranslate"><span class="pre">Kokkos::HPX</span></code></a></li>
+<li><a class="reference internal" href="#kokkos-openmp"><code class="docutils literal notranslate"><span class="pre">Kokkos::OpenMP</span></code></a></li>
+<li><a class="reference internal" href="#kokkos-openmptarget"><code class="docutils literal notranslate"><span class="pre">Kokkos::OpenMPTarget</span></code></a></li>
+<li><a class="reference internal" href="#kokkos-serial"><code class="docutils literal notranslate"><span class="pre">Kokkos::Serial</span></code></a></li>
+<li><a class="reference internal" href="#kokkos-executionspaceconcept"><code class="docutils literal notranslate"><span class="pre">Kokkos::ExecutionSpaceConcept</span></code></a><ul>
+<li><a class="reference internal" href="#very-simplest-use-not-at-all">Very Simplest Use: Not at all?</a></li>
+<li><a class="reference internal" href="#being-more-generic">Being more generic</a></li>
+<li><a class="reference internal" href="#functionality">Functionality</a><ul>
+<li><a class="reference internal" href="#default-constructibility-copy-constructibility">Default Constructibility, Copy Constructibility</a></li>
+<li><a class="reference internal" href="#detection">Detection</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#synopsis">Synopsis</a></li>
+<li><a class="reference internal" href="#typedefs">Typedefs</a></li>
+<li><a class="reference internal" href="#constructors">Constructors</a></li>
+<li><a class="reference internal" href="#functions">Functions</a></li>
+<li><a class="reference internal" href="#non-member-facilities">Non Member Facilities</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/scripts/furo.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    </body>
+</html>
