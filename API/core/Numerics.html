@@ -136,7 +136,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -379,7 +379,7 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
@@ -390,10 +390,24 @@
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="numerics/mathematical-constants.html">Mathematical constants</a></li>
+</ul>
+</div>
+<p>The header <code class="docutils literal notranslate"><span class="pre">&lt;Kokkos_MathematicalConstants.hpp&gt;</span></code> is a backport of the C++20 standard library header <code class="docutils literal notranslate"><span class="pre">&lt;numbers&gt;</span></code> and
+provides several mathematical constants, such as <code class="docutils literal notranslate"><span class="pre">pi</span></code> or <code class="docutils literal notranslate"><span class="pre">sqrt2</span></code>.</p>
+<div class="toctree-wrapper compound">
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="numerics/mathematical-functions.html">Common math functions</a></li>
+</ul>
+</div>
+<p>The header <code class="docutils literal notranslate"><span class="pre">&lt;Kokkos_MathematicalFunctions.hpp&gt;</span></code> provides a consistent and portable overload set for standard C
+library mathematical functions, such as <code class="docutils literal notranslate"><span class="pre">fabs</span></code>, <code class="docutils literal notranslate"><span class="pre">sqrt</span></code>, and <code class="docutils literal notranslate"><span class="pre">sin</span></code>.</p>
+<div class="toctree-wrapper compound">
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="numerics/numeric-traits.html">Numeric traits</a></li>
 </ul>
 </div>
+<p>The header <code class="docutils literal notranslate"><span class="pre">&lt;Kokkos_NumericTraits.hpp&gt;</span></code> implements a new facility that is being added to the C++23 standard library and
+is intended as a replacement for <code class="docutils literal notranslate"><span class="pre">std::numeric_limits</span></code>.</p>
 </section>
 
         </article>
@@ -441,8 +455,26 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            Contents
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Numerics</a><ul>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>
