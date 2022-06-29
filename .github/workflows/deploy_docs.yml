@@ -25,9 +25,12 @@ jobs:
         working-directory: ${{ env.docs-directory }}
         run: |
           make html
+      # .nojekyll file is needed for GitHub Pages to know it's getting a ready webpage
+      # and there is no need to generate anything
       - name: Generate nojekyll file
         working-directory: ${{ env.docs-directory }}/generated_docs
         run: touch .nojekyll
+      # This action moves the content of `generated_docs` to the `deploy-doc-site` branch
       - name: Deploy docs
         uses: JamesIves/github-pages-deploy-action@v4
         with:
