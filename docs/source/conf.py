@@ -49,8 +49,8 @@ exclude_patterns = []
 
 # -- Options for HTML output -------------------------------------------------
 # The name of the Pygments (syntax highlighting) style to use.
-pygments_style = "solarized-dark"
-pygments_dark_style = "monokai" #solarized-dark"
+pygments_style = "default"
+pygments_dark_style = "monokai"
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
