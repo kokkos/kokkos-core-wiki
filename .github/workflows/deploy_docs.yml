@@ -13,9 +13,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - name: Print GitHub Actions Environment Variables
-        run: |
-          set | grep "^GITHUB_"
       - name: Set up Python ${{ env.python-version }}
         uses: actions/setup-python@v2
         with:
@@ -32,7 +29,7 @@ jobs:
         working-directory: ${{ env.docs-directory }}/generated_docs
         run: touch .nojekyll
       - name: Deploy docs
-        uses: JamesIves/github-pages-deploy-action@4.1.4
+        uses: JamesIves/github-pages-deploy-action@4.3.4
         with:
           branch: deploy-doc-site
           folder: ${{ env.docs-directory }}/generated_docs
