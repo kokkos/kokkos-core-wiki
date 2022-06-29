@@ -93,6 +93,7 @@ Website Content
    ./API/core-index
    ./API/containers-index
    ./API/algorithms-index
+   ./API/simd
    ./API/alphabetical
    usecases
    testing-and-issue-tracking
