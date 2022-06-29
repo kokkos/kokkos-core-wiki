@@ -6,3 +6,5 @@
 /html
 # Doc trees
 /doctrees
+# Generated docs
+/docs/generated_docs
