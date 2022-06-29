@@ -1,6 +1,5 @@
-
 html:
-	sphinx-build -b html ./source/ .
+	sphinx-build -b html ./source/ ./generated_docs/
 
 clean:
-	rm -rf *.html objects.inv searchindex.js _images _sources _static API ProgrammingGuide testing-and-issue-tracking usecases
+	rm -rf ./generated_docs/
