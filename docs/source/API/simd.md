@@ -75,3 +75,56 @@ template <class Integral> void gather_from(T const* mem, simd<Integral, typename
 ```
 
 Copies the selected elements as if `data[i] = mem[index[i]]` for all selected indices `i`.
+
+## Class template simd
+
+```c++
+template<class T, class Abi> class simd {
+ public:
+  using value_type = T;
+  using reference = /* see below */;
+  using mask_type = simd_mask<T, Abi>;
+  using abi_type = Abi;
+  static constexpr size_t size() noexcept;
+  simd() noexcept = default;
+
+  // simd constructors
+  template<class U> simd(U&& value);
+  template<class U> simd(const simd<U, simd_abi::fixed_size<size()>>&);
+  template<class G> explicit simd(G&& gen);
+  template<class U, class Flags> simd(const U* mem, Flags f);
+
+  // simd copy functions
+  template<class U, class Flags> copy_from(const U* mem, Flags f);
+  template<class U, class Flags> copy_to(U* mem, Flags f);
+  // simd subscript operators
+  reference operator[](size_t);
+  value_type operator[](size_t) const;
+
+  // simd unary operators
+  simd operator-() const;
+
+  // simd binary operators
+  friend simd operator+(const simd&, const simd&);
+  friend simd operator-(const simd&, const simd&);
+  friend simd operator*(const simd&, const simd&) noexcept;
+  friend simd operator/(const simd&, const simd&) noexcept;
+  friend simd operator<<(const simd&, const simd<int, Abi>&) noexcept;
+  friend simd operator>>(const simd&, const simd<int, Abi>&) noexcept;
+  friend simd operator<<(const simd&, int) noexcept;
+  friend simd operator>>(const simd&, int) noexcept;
+
+  // simd compound assignment
+  friend simd& operator+=(simd&, const simd&) noexcept;
+  friend simd& operator-=(simd&, const simd&) noexcept;
+  friend simd& operator*=(simd&, const simd&) noexcept;
+  friend simd& operator/=(simd&, const simd&) noexcept;
+  // simd compare operators
+  friend mask_type operator==(const simd&, const simd&) noexcept;
+  friend mask_type operator!=(const simd&, const simd&) noexcept;
+  friend mask_type operator>=(const simd&, const simd&) noexcept;
+  friend mask_type operator<=(const simd&, const simd&) noexcept;
+  friend mask_type operator>(const simd&, const simd&) noexcept;
+  friend mask_type operator<(const simd&, const simd&) noexcept;
+};
+```
