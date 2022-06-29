@@ -36,6 +36,7 @@ class where_expression : public const_where_expression<M, T> {
  public:
   template<class U> void operator=(U&& x);
   template<class U, class Flags> void copy_from(const U* mem, Flags);
+  template <class Integral> void gather_from(T const* mem, simd<Integral, typename T::abi_type> const& index);
 };
 ```
 
