@@ -1,0 +1,33 @@
+name: Deploy docs
+
+on:
+  push:
+    branches: [ 78-set-up-CI-and-autobuild-for-sphinx ]
+
+jobs:
+  build-and-deploy-docs:
+    runs-on: ubuntu-latest
+    env:
+      docs-directory: /home/runner/work/marcinwrobel1986/kokkos-core-wiki/docs
+      python-version: '3.10'
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python ${{ env.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ env.python-version }}
+          architecture: 'x64'
+      - name: Install Python dependencies
+        run: |
+          pip3 install -r build_requirements.txt
+      - name: Build documentation
+        working-directory: ${{ env.docs-directory }}
+        run: |
+          make html
+      - name: Deploy docs
+        uses: JamesIves/github-pages-deploy-action@4.1.4
+        with:
+          branch: deploy-doc-site
+          folder: ${{ env.docs-directory }}/generated_docs
+          clean: true
