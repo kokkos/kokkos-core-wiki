@@ -10,7 +10,6 @@ jobs:
     env:
       docs-directory: /home/runner/work/marcinwrobel1986/kokkos-core-wiki/docs
       python-version: '3.10'
-
     steps:
       - uses: actions/checkout@v2
       - name: Set up Python ${{ env.python-version }}
