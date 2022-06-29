@@ -120,12 +120,20 @@ Enable Options
       * Debug check on dual views
       * ``OFF``
 
-    * * Kokkos_ENABLE_DEPRECATED_CODE
+    * * ``Kokkos_ENABLE_DEPRECATED_CODE``
       * Enable deprecated code
       * ``OFF``
 
     * * ``Kokkos_ENABLE_EXAMPLES``
       * Enable building examples
+      * ``OFF``
+
+    * * ``Kokkos_ENABLE_MULTIPLE_KERNEL_INSTANTIATIONS``
+      * Instantiate multiple kernels at compile time - improve performance but increase compile time
+      * ``OFF``
+
+    * * ``Kokkos_ENABLE_HIP_RELOCATABLE_DEVICE_CODE``
+      * Enable relocatable device code (RDC) for HIP
       * ``OFF``
 
     * * ``Kokkos_ENABLE_HPX_ASYNC_DISPATCH``
@@ -141,7 +149,7 @@ Enable Options
       * ``ON``
 
     * * ``Kokkos_ENABLE_PROFILING_LOAD_PRINT``
-      * Print information about which profiling tools gotloaded
+      * Print information about which profiling tools got loaded
       * ``OFF``
 
     * * ``Kokkos_ENABLE_TESTS``
