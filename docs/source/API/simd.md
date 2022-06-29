@@ -28,6 +28,7 @@ class const_where_expression {
   T& data; // exposition only
  public:
   template<class U, class Flags> void copy_to(U* mem, Flags f) const;
+  template<class Integral> void scatter_to(T* mem, simd<Integral, typename T::abi_type> const& index) const;
 };
 
 template<class M, class T>
@@ -48,6 +49,12 @@ template<class U, class Flags> void copy_to(U* mem, Flags f) const;
 If `M` is `bool`, copies as if `*mem = static_cast<U>(data)` if `mask` is `true`.
 Otherwise, copies the selected elements as if `mem[i] = static_cast<U>(data[i])` for all selected indices `i`.
 
+```c++
+template<class Integral> void scatter_to(T* mem, simd<Integral, typename T::abi_type> const& index) const;
+```
+
+Copies the selected elements as if `mem[index[i]] = data[i]` for all selected indices `i`.
+
 ```
 template<class U> void operator=(U&& x);
 ```
@@ -61,3 +68,9 @@ template<class U, class Flags> void copy_from(const U* mem, Flags);
 
 If `M` is `bool`, copies as if `data = static_cast<T>(*mem)` if `mask` is `true`.
 Otherwise, copies the selected elements as if `data[i] = static_cast<T>(mem[i])` for all selected indices `i`.
+
+```c++
+template <class Integral> void gather_from(T const* mem, simd<Integral, typename T::abi_type> const& index);
+```
+
+Copies the selected elements as if `data[i] = mem[index[i]]` for all selected indices `i`.
