@@ -282,17 +282,17 @@ dst_view = src_view;
 The following conditions must be met at and are evaluated at compile time:
  * `DstType::rank == SrcType::rank`
  * `DstType::non_const_value_type` is the same as `SrcType::non_const_value_type`
- * If `std::is_const<SrcType::value_type>::value == true` than `std::is_const<DstType::value_type>::value == true`.
+ * If `std::is_const<SrcType::value_type>::value == true` then `std::is_const<DstType::value_type>::value == true`.
  * `MemorySpaceAccess<DstType::memory_space,SrcType::memory_space>::assignable == true` 
- * If `DstType::dynamic_rank != DstType::rank` and `SrcType::dynamic_rank != SrcType::rank` than for each dimension `k` which is compile time for both it must be true that `dst_view.extent(k) == src_view.extent(k)`
+ * If `DstType::dynamic_rank != DstType::rank` and `SrcType::dynamic_rank != SrcType::rank` then for each dimension `k` which is compile time for both it must be true that `dst_view.extent(k) == src_view.extent(k)`
 
 Additionally the following conditions must be met at runtime: 
- * If `DstType::dynamic_rank != DstType::rank` than for each compile time dimension `k` it must be true that `dst_view.extent(k) == src_view.extent(k)`.
+ * If `DstType::dynamic_rank != DstType::rank` then for each compile time dimension `k` it must be true that `dst_view.extent(k) == src_view.extent(k)`.
  
 Furthermore there are rules which must be met if `DstType::array_layout` is not the same as `SrcType::array_layout`.
 These rules only cover cases where both layouts are one of `LayoutLeft`, `LayoutRight` or `LayoutStride`
  * If neither `DstType::array_layout` nor `SrcType::array_layout` is `LayoutStride`: 
-   * If `DstType::rank > 1` than `DstType::array_layout` must be the same as `SrcType::array_layout`.
+   * If `DstType::rank > 1` then `DstType::array_layout` must be the same as `SrcType::array_layout`.
  * If either `DstType::array_layout` or `SrcType::array_layout` is `LayoutStride`
    * For each dimension `k` it must hold that `dst_view.extent(k) == src_view.extent(k)`
 
