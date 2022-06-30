@@ -51,9 +51,9 @@ A backend in computing terminology refers to the system component that performs 
 * Threads (PThreads)
 * QThreads 
 * Cuda
-* ROCm
+* HIP
 ```
-Note that the ROCm backend is currently experimental (under development).
+Note that the HIP backend is currently experimental (under development).
 
 ## Test Scripts
 
