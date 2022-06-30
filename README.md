@@ -1,4 +1,5 @@
 # kokkos-core-documentation-website
+Welcome to the Kokkos Documentation repository.  This is the source for https://kokkos.github.io/kokkos-core-wiki/.
 
 ## Requirements to build html page locally
 
