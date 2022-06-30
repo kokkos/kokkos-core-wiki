@@ -1,8 +1,8 @@
 Atomics
-=========
+=======
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
    ./atomics/atomic_compare_exchange
    ./atomics/atomic_compare_exchange_strong
