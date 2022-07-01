@@ -12,19 +12,19 @@ Top Level Execution Policies
     * - Policy
       - Description
 
-    * * `RangePolicy <tbd>`__
+    * * `RangePolicy <policies/RangePolicy.html>`__
       * Each iterate is an integer in a contiguous range
 
-    * * `MDRangePolicy <mdrangepolicy>`_
+    * * `MDRangePolicy <policies/MDRangePolicy.html>`_
       * Each iterate for each rank is an integer in a contiguous range
 
-    * * `TeamPolicy <tbd>`__
+    * * `TeamPolicy <policies/TeamPolicy.html>`__
       * Assigns to each iterate in a contiguous range a team of threads
 
 Nested Execution Policies
 ============================
 
-Nested Execution Policies are used to dispatch parallel work inside of an already executing parallel region either dispatched with a `TeamPolicy <tbd>`__ or a task policy.
+Nested Execution Policies are used to dispatch parallel work inside of an already executing parallel region either dispatched with a `TeamPolicy <policies/TeamPolicy.html>`__ or a task policy.
 
 .. list-table::
     :widths: 25 75
@@ -34,13 +34,13 @@ Nested Execution Policies are used to dispatch parallel work inside of an alread
     * - Policy
       - Description
 
-    * * `TeamThreadRange <tbd>`__
+    * * `TeamThreadRange <policies/TeamThreadRange.html>`__
       * Used inside of a TeamPolicy kernel to perform nested parallel loops split over threads of a team.
 
-    * * `TeamVectorRange <tbd>`__
+    * * `TeamVectorRange <policies/TeamVectorRange.html>`__
       * Used inside of a TeamPolicy kernel to perform nested parallel loops split over threads of a team and their vector lanes.
 
-    * * `ThreadVectorRange <tbd>`__
+    * * `ThreadVectorRange <policies/ThreadVectorRange.html>`__
       * Used inside of a TeamPolicy kernel to perform nested parallel loops with vector lanes of a thread.
 
 Common Arguments for all Execution Policies
