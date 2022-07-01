@@ -46,7 +46,7 @@ reader to cppreference.com for the synopsis of each individual function.
 
 ---
 
-~~_`func`_~~ denotes functions that are currently not provided by Kokkos
+<strike>_`func`_</strike> denotes functions that are currently not provided by Kokkos
 
 _`func`_\* denotes functions not available with the SYCL backend
 
@@ -55,8 +55,8 @@ _`func`_\* denotes functions not available with the SYCL backend
 [`fabs`](https://en.cppreference.com/w/cpp/numeric/math/fabs)
 [`fmod`](https://en.cppreference.com/w/cpp/numeric/math/fmod)
 [`remainder`](https://en.cppreference.com/w/cpp/numeric/math/remainder)
-[~~`remquo`~~](https://en.cppreference.com/w/cpp/numeric/math/remquo)
-[~~`fma`~~](https://en.cppreference.com/w/cpp/numeric/math/fma)
+[<strike>`remquo`</strike>](https://en.cppreference.com/w/cpp/numeric/math/remquo)
+[<strike>`fma`</strike>](https://en.cppreference.com/w/cpp/numeric/math/fma)
 [`fmax`](https://en.cppreference.com/w/cpp/numeric/math/fmax)
 [`fmin`](https://en.cppreference.com/w/cpp/numeric/math/fmin)
 [`fdim`](https://en.cppreference.com/w/cpp/numeric/math/fdim)
@@ -104,38 +104,38 @@ _`func`_\* denotes functions not available with the SYCL backend
 [`ceil`](https://en.cppreference.com/w/cpp/numeric/math/ceil)
 [`floor`](https://en.cppreference.com/w/cpp/numeric/math/floor)
 [`trunc`](https://en.cppreference.com/w/cpp/numeric/math/trunc)
-[~~`round`~~](https://en.cppreference.com/w/cpp/numeric/math/round)
-[~~`lround`~~](https://en.cppreference.com/w/cpp/numeric/math/round)
-[~~`llround`~~](https://en.cppreference.com/w/cpp/numeric/math/round)
+[<strike>`round`</strike>](https://en.cppreference.com/w/cpp/numeric/math/round)
+[<strike>`lround`</strike>](https://en.cppreference.com/w/cpp/numeric/math/round)
+[<strike>`llround`</strike>](https://en.cppreference.com/w/cpp/numeric/math/round)
 [`nearbyint`\*](https://en.cppreference.com/w/cpp/numeric/math/nearbyint)
-[~~`rint`~~](https://en.cppreference.com/w/cpp/numeric/math/rint)
-[~~`lrint`~~](https://en.cppreference.com/w/cpp/numeric/math/rint)
-[~~`llrint`~~](https://en.cppreference.com/w/cpp/numeric/math/rint)
+[<strike>`rint`</strike>](https://en.cppreference.com/w/cpp/numeric/math/rint)
+[<strike>`lrint`</strike>](https://en.cppreference.com/w/cpp/numeric/math/rint)
+[<strike>`llrint`</strike>](https://en.cppreference.com/w/cpp/numeric/math/rint)
 
 **Floating point manipulation functions**
-[~~`frexp`~~](https://en.cppreference.com/w/cpp/numeric/math/frexp)
-[~~`ldexp`~~](https://en.cppreference.com/w/cpp/numeric/math/ldexp)
-[~~`modf`~~](https://en.cppreference.com/w/cpp/numeric/math/modf)
-[~~`scalbn`~~](https://en.cppreference.com/w/cpp/numeric/math/scalbn)
-[~~`scalbln`~~](https://en.cppreference.com/w/cpp/numeric/math/scalbln)
-[~~`ilog`~~](https://en.cppreference.com/w/cpp/numeric/math/ilog)
-[~~`logb`~~](https://en.cppreference.com/w/cpp/numeric/math/logb)
-[~~`nextafter`~~](https://en.cppreference.com/w/cpp/numeric/math/nextafter)
-[~~`nexttoward`~~](https://en.cppreference.com/w/cpp/numeric/math/nexttoward)
-[~~`copysign`~~](https://en.cppreference.com/w/cpp/numeric/math/copysign)
+[<strike>`frexp`</strike>](https://en.cppreference.com/w/cpp/numeric/math/frexp)
+[<strike>`ldexp`</strike>](https://en.cppreference.com/w/cpp/numeric/math/ldexp)
+[<strike>`modf`</strike>](https://en.cppreference.com/w/cpp/numeric/math/modf)
+[<strike>`scalbn`</strike>](https://en.cppreference.com/w/cpp/numeric/math/scalbn)
+[<strike>`scalbln`</strike>](https://en.cppreference.com/w/cpp/numeric/math/scalbln)
+[<strike>`ilog`</strike>](https://en.cppreference.com/w/cpp/numeric/math/ilog)
+[<strike>`logb`</strike>](https://en.cppreference.com/w/cpp/numeric/math/logb)
+[<strike>`nextafter`</strike>](https://en.cppreference.com/w/cpp/numeric/math/nextafter)
+[<strike>`nexttoward`</strike>](https://en.cppreference.com/w/cpp/numeric/math/nexttoward)
+[<strike>`copysign`</strike>](https://en.cppreference.com/w/cpp/numeric/math/copysign)
 
 **Classification and comparison**
-[~~`fpclassify`~~](https://en.cppreference.com/w/cpp/numeric/math/fpclassify)
+[<strike>`fpclassify`</strike>](https://en.cppreference.com/w/cpp/numeric/math/fpclassify)
 [`isfinite`](https://en.cppreference.com/w/cpp/numeric/math/isfinite)
 [`isinf`](https://en.cppreference.com/w/cpp/numeric/math/isinf)
 [`isnan`](https://en.cppreference.com/w/cpp/numeric/math/isnan)
-[~~`isnormal`~~](https://en.cppreference.com/w/cpp/numeric/math/isnormal)
-[~~`isgreater`~~](https://en.cppreference.com/w/cpp/numeric/math/isgreater)
-[~~`isgreaterequal`~~](https://en.cppreference.com/w/cpp/numeric/math/isgreaterequal)
-[~~`isless`~~](https://en.cppreference.com/w/cpp/numeric/math/isless)
-[~~`islessequal`~~](https://en.cppreference.com/w/cpp/numeric/math/islessequal)
-[~~`islessgreater`~~](https://en.cppreference.com/w/cpp/numeric/math/islessgreater)
-[~~`isunordered`~~](https://en.cppreference.com/w/cpp/numeric/math/isunordered)
+[<strike>`isnormal`</strike>](https://en.cppreference.com/w/cpp/numeric/math/isnormal)
+[<strike>`isgreater`</strike>](https://en.cppreference.com/w/cpp/numeric/math/isgreater)
+[<strike>`isgreaterequal`</strike>](https://en.cppreference.com/w/cpp/numeric/math/isgreaterequal)
+[<strike>`isless`</strike>](https://en.cppreference.com/w/cpp/numeric/math/isless)
+[<strike>`islessequal`</strike>](https://en.cppreference.com/w/cpp/numeric/math/islessequal)
+[<strike>`islessgreater`</strike>](https://en.cppreference.com/w/cpp/numeric/math/islessgreater)
+[<strike>`isunordered`</strike>](https://en.cppreference.com/w/cpp/numeric/math/isunordered)
 
 ---
 
