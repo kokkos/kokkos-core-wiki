@@ -46,9 +46,9 @@ In the above example and those that follow in this chapter, we assume that [`Kok
 The Kokkos equivalent of a contiguous index range `3:7` is `pair<size_t, size_t>(3, 7)`. The Kokkos equivalent of
 `:` (a colon by itself; the whole index range for that dimension) is `ALL()` (an instance of the `ALL` class, which Kokkos uses only for this purpose). Kokkos does not currently have equivalents of the strided or arbitrary index sets.
 
-A subview has the same reference count as its parent `View`, so the parent `View` won't be deallocated before all subviews go away. Every subview is also a `View`. This means that you may take a subview of a subview.
+A subview has the same reference count as its parent [`View`](../API/core/view/view), so the parent [`View`](../API/core/view/view) won't be deallocated before all subviews go away. Every subview is also a [`View`](../API/core/view/view). This means that you may take a subview of a subview.
 
-Another way of getting a subview is through the appropriate `View` constructor.
+Another way of getting a subview is through the appropriate [`View`](../API/core/view/view) constructor.
 
 ```c++
 const size_t N0 = ...;
