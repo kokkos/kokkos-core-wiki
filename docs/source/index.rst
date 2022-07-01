@@ -23,27 +23,27 @@ The `Kokkos EcoSystem <https://github.com/kokkos>`_ includes:
      - Info
      -
 
-   * - :packnameindexpage:`kokkos`
+   * - ``kokkos``
      - (this library) Programming Model - Parallel Execution and Memory Abstraction
      - `Github link <https://github.com/kokkos/kokkos>`__
 
-   * - :packnameindexpage:`kokkos-kernels`
+   * - ``kokkos-kernels``
      - Sparse, dense, batched math kernels
      - `Github link <https://github.com/kokkos/kokkos-kernels>`__
 
-   * - :packnameindexpage:`kokkos-tools`
+   * - ``kokkos-tools``
      - Profiling and debugging tools
      - `Github link <https://github.com/kokkos/kokkos-tools>`__
 
-   * - :packnameindexpage:`pykokkos`
+   * - ``pykokkos``
      - Provides Python bindings to the Kokkos performance portable parallel programming.
      - `Github link <https://github.com/kokkos/pykokkos>`__
 
-   * - :packnameindexpage:`kokkos-remote-spaces`
+   * - ``kokkos-remote-spaces``
      - Shared memory semantics across multiple processes
      - `Github link <https://github.com/kokkos/kokkos-remote-spaces>`__
 
-   * - :packnameindexpage:`kokkos-resilience`
+   * - ``kokkos-resilience``
      - Resilience and Checkpointing Extensions for Kokkos
      - `Github link <https://github.com/kokkos/kokkos-resilience>`__
 
@@ -63,12 +63,12 @@ Relevant and related efforts include:
      - Proposal
      -
 
-   * - :packnameindexpage:`mdspan`
+   * - ``mdspan``
      - Reference implementation of mdspan targeting C++23
      - `P0009 <https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2022/p0009r16.html>`__
      - `Github link <https://github.com/kokkos/mdspan>`__
 
-   * - :packnameindexpage:`stdBLAS`
+   * - ``stdBLAS``
      - Reference Implementation for stdBLAS
      - `P1673 <https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2022/p1673r8.html>`__
      - `Github link <https://github.com/kokkos/stdBLAS>`__
