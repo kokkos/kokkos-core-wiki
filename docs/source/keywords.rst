@@ -5,9 +5,9 @@ CMake Keywords
 
 .. important::
 
-   With version 3.0 all Kokkos CMake keywords are prefixed with `Kokkos_` which is case-sensitive.
+   With version 3.0 all Kokkos CMake keywords are prefixed with ``Kokkos_`` which is case-sensitive.
 
-   Recall that to set a keyword in CMake you used the syntax ``-Dkeyword_name``.
+   Options can be enabled / disabled by specifying ``-DKokkos_ENABLE_X=ON`` / ``-DKokkos_ENABLE_X=OFF``.
 
 
 This page is organized in four sections:
