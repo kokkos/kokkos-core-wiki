@@ -401,13 +401,13 @@
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><a class="reference external" href="tbd">RangePolicy</a></p></td>
+<tr class="row-even"><td><p><a class="reference external" href="policies/RangePolicy.html">RangePolicy</a></p></td>
 <td><p>Each iterate is an integer in a contiguous range</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference external" href="mdrangepolicy">MDRangePolicy</a></p></td>
+<tr class="row-odd"><td><p><a class="reference external" href="policies/MDRangePolicy.html">MDRangePolicy</a></p></td>
 <td><p>Each iterate for each rank is an integer in a contiguous range</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference external" href="tbd">TeamPolicy</a></p></td>
+<tr class="row-even"><td><p><a class="reference external" href="policies/TeamPolicy.html">TeamPolicy</a></p></td>
 <td><p>Assigns to each iterate in a contiguous range a team of threads</p></td>
 </tr>
 </tbody>
@@ -416,7 +416,7 @@
 </section>
 <section id="nested-execution-policies">
 <h2>Nested Execution Policies<a class="headerlink" href="#nested-execution-policies" title="Permalink to this heading">#</a></h2>
-<p>Nested Execution Policies are used to dispatch parallel work inside of an already executing parallel region either dispatched with a <a class="reference external" href="tbd">TeamPolicy</a> or a task policy.</p>
+<p>Nested Execution Policies are used to dispatch parallel work inside of an already executing parallel region either dispatched with a <a class="reference external" href="policies/TeamPolicy.html">TeamPolicy</a> or a task policy.</p>
 <div class="table-wrapper colwidths-given docutils container">
 <table class="docutils align-left">
 <colgroup>
@@ -429,13 +429,13 @@
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><a class="reference external" href="tbd">TeamThreadRange</a></p></td>
+<tr class="row-even"><td><p><a class="reference external" href="policies/TeamThreadRange.html">TeamThreadRange</a></p></td>
 <td><p>Used inside of a TeamPolicy kernel to perform nested parallel loops split over threads of a team.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference external" href="tbd">TeamVectorRange</a></p></td>
+<tr class="row-odd"><td><p><a class="reference external" href="policies/TeamVectorRange.html">TeamVectorRange</a></p></td>
 <td><p>Used inside of a TeamPolicy kernel to perform nested parallel loops split over threads of a team and their vector lanes.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference external" href="tbd">ThreadVectorRange</a></p></td>
+<tr class="row-even"><td><p><a class="reference external" href="policies/ThreadVectorRange.html">ThreadVectorRange</a></p></td>
 <td><p>Used inside of a TeamPolicy kernel to perform nested parallel loops with vector lanes of a thread.</p></td>
 </tr>
 </tbody>
