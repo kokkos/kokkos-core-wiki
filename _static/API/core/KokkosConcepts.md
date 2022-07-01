@@ -37,7 +37,7 @@ There is also some question as to whether [`Kokkos::View`](view/view) (and frien
 
 ## The `ExecutionSpace` Concept
 
-Working off the functionality currently common to `Serial`, `Cuda`, `OpenMP`, `Threads`, `ROCm`, and `OpenMPTarget`, the current state of the Kokkos [`ExeuctionSpace`](ExecutionSpaceConcept) concept looks something like:
+Working off the functionality currently common to `Serial`, `Cuda`, `OpenMP`, `Threads`, `HIP`, and `OpenMPTarget`, the current state of the Kokkos [`ExeuctionSpace`](ExecutionSpaceConcept) concept looks something like:
 
 ```c++
 template <typename Ex>

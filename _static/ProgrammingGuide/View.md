@@ -384,15 +384,15 @@ It is important to understand that accessibility of a View does not depend on it
 
 The following is the accessibility matrix for execution and memory spaces:
 
-| | Serial | OpenMP | Threads | Cuda | ROCm |
+| | Serial | OpenMP | Threads | Cuda | HIP |
 |---|---|---|---|---|---|
 |HostSpace| x | x | x | - | - |
 |HBWSpace| x | x | x | - | - |
 |CudaSpace| - | - | - | x | - |
 |CudaUVMSpace| x | x | x | x | - |
 |CudaHostPinnedSpace| x | x | x | x | - |
-|ROCmSpace|  - | - | - | - | x |
-|ROCmHostPinnedSpace|  x | x | x | - | x |
+|HIPSpace|  - | - | - | - | x |
+|HIPHostPinnedSpace|  x | x | x | - | x |
 
 This relationship can be queried via the `SpaceAccessibility` class:
 ```c++

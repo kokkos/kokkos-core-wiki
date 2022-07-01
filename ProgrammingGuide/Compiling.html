@@ -747,7 +747,7 @@ main: $(KOKKOS_LINK_DEPENDS) $(KOKKOS_CPP_DEPENDS) main.cpp
 <ul class="simple">
 <li><p>Host Serial: A top-level <code class="docutils literal notranslate"><span class="pre">Serial</span></code> execution space with no parallelism or concurrency</p></li>
 <li><p>Host Parallel: Typically a threading model for CPUs, currently: <code class="docutils literal notranslate"><span class="pre">OpenMP</span></code> and <code class="docutils literal notranslate"><span class="pre">Threads</span></code>.</p></li>
-<li><p>Device Parallel: Typically an attached GPU, currently: <code class="docutils literal notranslate"><span class="pre">CUDA</span></code>, <code class="docutils literal notranslate"><span class="pre">OpenMPTarget</span></code>, and <code class="docutils literal notranslate"><span class="pre">ROCm</span></code>.</p></li>
+<li><p>Device Parallel: Typically an attached GPU, currently: <code class="docutils literal notranslate"><span class="pre">CUDA</span></code>, <code class="docutils literal notranslate"><span class="pre">OpenMPTarget</span></code>, and <code class="docutils literal notranslate"><span class="pre">HIP</span></code>.</p></li>
 </ul>
 <p>The current Kokkos policy is to allow users, at compile time, to enable <em>at most one</em> execution space from each category. This prevents incompatibilities between different spaces in the same category from degrading the user’s correctness and performance.</p>
 </section>
