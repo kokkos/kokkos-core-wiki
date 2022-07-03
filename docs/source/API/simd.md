@@ -96,7 +96,8 @@ template<class T, class Abi> class simd {
 
   // simd copy functions
   template<class U, class Flags> copy_from(const U* mem, Flags f);
-  template<class U, class Flags> copy_to(U* mem, Flags f);
+  template<class U, class Flags> copy_to(U* mem, Flags f) const;
+
   // simd subscript operators
   reference operator[](size_t);
   value_type operator[](size_t) const;
@@ -119,6 +120,7 @@ template<class T, class Abi> class simd {
   friend simd& operator-=(simd&, const simd&) noexcept;
   friend simd& operator*=(simd&, const simd&) noexcept;
   friend simd& operator/=(simd&, const simd&) noexcept;
+
   // simd compare operators
   friend mask_type operator==(const simd&, const simd&) noexcept;
   friend mask_type operator!=(const simd&, const simd&) noexcept;
@@ -128,3 +130,82 @@ template<class T, class Abi> class simd {
   friend mask_type operator<(const simd&, const simd&) noexcept;
 };
 ```
+
+```c++
+static constexpr size_t size() noexcept;
+```
+
+Returns the width of `simd<T, Abi>`.
+
+### Element references
+
+A reference is an object that refers to an element in a `simd` or `simd_mask` object.
+`reference::value_type` is the same type as `simd::value_type` or `simd_mask::value_type`, respectively.
+Class `reference` is for exposition only.
+An implementation is permitted to provide equivalent functionality without providing a class with this name,
+such as by defining `reference = value_type&`.
+
+```c++
+class reference // exposition only
+{
+ public:
+  operator value_type() const;
+  template<class U> reference operator=(U&& x);
+};
+```
+
+```c++
+operator value_type() const;
+```
+
+Returns the value of the element referred to by `*this`.
+
+```c++
+template<class U> reference operator=(U&& x);
+```
+Replaces the referred to element in `simd` or `simd_mask` with `static_cast<value_type>(std::forward<U>(x))`
+and returns a copy of `*this`.
+
+### simd constructors
+
+```c++
+template<class U> simd(U&& value);
+```
+
+Constructs an object with each element initialized to the value of the argument after conversion to `value_type`.
+
+```c++
+template<class U> simd(const simd<U, simd_abi::fixed_size<size()>>&);
+```
+
+Constructs an object where the `i`-th element equals `static_cast<T>(x[i])` for all `i` in the range `[0,size())`.
+
+```c++
+template<class G> explicit simd(G&& gen);
+```
+
+Constructs an object where the `i`-th element is initialized to `gen(std::integral_constant<std::size_t, i>())`.
+
+```c++
+template<class U, class Flags> simd(const U* mem, Flags f);
+```
+
+Constructs an object where the `i`-th element is initialized to `static_cast<T>(mem[i])` for all `i`
+in the range of `[0,size())`.
+If the template parameter `Flags` is `element_aligned_tag`, `mem` shall point to storage aligned by `alignof(U)`.
+
+### simd copy functions
+
+```c++
+template<class U, class Flags> copy_from(const U* mem, Flags f);
+```
+
+Replaces the elements of the `simd` object such that the `i`-th element is assigned
+with `static_cast<T>(mem[i])` for all `i` in the range `[0,size())`.
+If the template parameter `Flags` is `element_aligned_tag`, `mem` shall point to storage aligned by `alignof(U)`.
+
+```c++
+template<class U, class Flags> copy_to(U* mem, Flags f) const;
+```
+
+Copies all `simd`
