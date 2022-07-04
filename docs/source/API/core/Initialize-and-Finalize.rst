@@ -20,11 +20,11 @@ See `Kokkos::finalize <initialize_finalize/finalize.html>`_ for details.
 Kokkos::ScopeGuard
 ------------------
 
-`Kokkos::ScopeGuard` is a class which aggregates the resources managed by Kokkos. ScopeGuard will call `Kokkos::initialize` when constructed and `Kokkos::finalize` when destructed, thus the Kokkos context is automatically managed via the scope of the ScopeGuard object.
+``Kokkos::ScopeGuard`` is a class which aggregates the resources managed by Kokkos. ScopeGuard will call ``Kokkos::initialize`` when constructed and ``Kokkos::finalize`` when destructed, thus the Kokkos context is automatically managed via the scope of the ScopeGuard object.
 
 See `Kokkos::ScopeGuard <initialize_finalize/ScopeGuard.html>`_ for details.
 
-ScopeGuard aids in the following common mistake which is allowing Kokkos objects to live past `Kokkos::finalize`:
+ScopeGuard aids in the following common mistake which is allowing Kokkos objects to live past ``Kokkos::finalize``:
 
 .. code-block:: cpp
 
@@ -35,7 +35,7 @@ ScopeGuard aids in the following common mistake which is allowing Kokkos objects
     // my_view destructor called after Kokkos::finalize !
   }
 
-Switching to `Kokkos::ScopeGuard` fixes it:
+Switching to ``Kokkos::ScopeGuard`` fixes it:
 
 .. code-block:: cpp
 
@@ -46,11 +46,10 @@ Switching to `Kokkos::ScopeGuard` fixes it:
     // ScopeGuard destructor called, calls Kokkos::finalize
   }
 
-In the above example, `my_view` will not go out of scope until the end of the main() function.  Without `ScopeGuard`, `Kokkos::finalize` will be called before `my_view` is out of scope.  With `ScopeGuard`, `ScopeGuard` will be dereferenced (subsequently calling `Kokkos::finalize`) after `my_view` is dereferenced, which ensures the proper order during shutdown.
-
-|
+In the above example, ``my_view`` will not go out of scope until the end of the main() function.  Without ``ScopeGuard``, ``Kokkos::finalize`` will be called before ``my_view`` is out of scope.  With ``ScopeGuard``, ``ScopeGuard`` will be dereferenced (subsequently calling ``Kokkos::finalize``) after ``my_view`` is dereferenced, which ensures the proper order during shutdown.
 
 .. toctree::
+   :hidden:
    :maxdepth: 1
 
    ./initialize_finalize/initialize
