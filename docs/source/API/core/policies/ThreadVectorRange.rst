@@ -1,8 +1,7 @@
-
 ``ThreadVectorRange``
 =====================
 
-Header File: `Kokkos_Core.hpp`
+Header File: ``Kokkos_Core.hpp``
 
 Usage: 
 
@@ -39,7 +38,7 @@ Description
    /* Implementation defined */ ThreadVectorRange(TeamMemberType team, iType count);
    
 
-Splits the index range `0` to `count-1` over the vector lanes of the calling thread. 
+Splits the index range ``0`` to ``count-1`` over the vector lanes of the calling thread.
    
 *  **Arguments**:
 
