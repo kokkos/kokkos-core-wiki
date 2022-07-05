@@ -35,12 +35,31 @@ void resize(const I& arg_prop, Kokkos::View<T, P...>& v,
        const size_t n6 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
        const size_t n7 = KOKKOS_IMPL_CTOR_DEFAULT_ARG);
 
+template <class T, class... P, class... ViewCtorArgs>
+void resize(const Impl::ViewCtorProp<ViewCtorArgs...>& arg_prop,
+       Kokkos::View<T, P...>& v,
+       const size_t n0 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
+       const size_t n1 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
+       const size_t n2 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
+       const size_t n3 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
+       const size_t n4 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
+       const size_t n5 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
+       const size_t n6 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
+       const size_t n7 = KOKKOS_IMPL_CTOR_DEFAULT_ARG) {
+  impl_resize(arg_prop, v, n0, n1, n2, n3, n4, n5, n6, n7);
+}
+
 template <class T, class... P>
 void resize(Kokkos::View<T, P...>& v,
        const typename Kokkos::View<T, P...>::array_layout& layout);
 
 template <class I, class T, class... P>
 void resize(const I& arg_prop, Kokkos::View<T, P...>& v,
+       const typename Kokkos::View<T, P...>::array_layout& layout);
+
+template <class T, class... P, class... ViewCtorArgs>
+void resize(const Impl::ViewCtorProp<ViewCtorArgs...>& arg_prop,
+       Kokkos::View<T, P...>& v,
        const typename Kokkos::View<T, P...>::array_layout& layout);
 ```
 
@@ -86,6 +105,28 @@ void resize(const I& arg_prop, Kokkos::View<T, P...>& v,
   * `View<T, P...>::array_layout` is either `LayoutLeft` or `LayoutRight`.
 
 * ```c++
+  template <class T, class... P, class... ViewCtorArgs>
+  void resize(const Impl::ViewCtorProp<ViewCtorArgs...>& arg_prop,
+         Kokkos::View<T, P...>& v,
+         const size_t n0 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
+         const size_t n1 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
+         const size_t n2 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
+         const size_t n3 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
+         const size_t n4 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
+         const size_t n5 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
+         const size_t n6 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
+         const size_t n7 = KOKKOS_IMPL_CTOR_DEFAULT_ARG);
+  ```
+  Resizes `v` to have the new dimensions while preserving the contents for the common subview of the old and new view. The new `Kokkos::View` is constructed using the View constructor properties `arg_prop`, e.g., `Kokkos::view_alloc(Kokkos::WithoutInitializing)`.
+  * `v`: existing view, can be a default constructed one.
+  * `n[X]`: new length for extent X.
+  * `arg_prop`: View constructor properties, e.g., `Kokkos::view_alloc(Kokkos::WithoutInitializing)`.
+
+  Restrictions:
+  * `View<T, P...>::array_layout` is either `LayoutLeft` or `LayoutRight`.
+  * `arg_prop` must not include a pointer to memory, a label, or a memory space.
+
+* ```c++
   template <class T, class... P>
   void resize(Kokkos::View<T, P...>& v,
          const typename Kokkos::View<T, P...>::array_layout& layout);
@@ -103,6 +144,20 @@ void resize(const I& arg_prop, Kokkos::View<T, P...>& v,
   * `v`: existing view, can be a default constructed one.
   * `layout`: a layout instance containing the new dimensions.
   * `arg_prop`: View constructor property, e.g., `Kokkos::WithoutInitializing`.
+
+* ```c++
+  template <class T, class... P, class... ViewCtorArgs>
+  void resize(const Impl::ViewCtorProp<ViewCtorArgs...>& arg_prop,
+         Kokkos::View<T, P...>& v,
+         const typename Kokkos::View<T, P...>::array_layout& layout);
+  ```
+  Resizes `v` to have the new dimensions while preserving the contents for the common subview of the old and new view. The new `Kokkos::View` is constructed using the View constructor properties `arg_prop`, e.g., `Kokkos::view_alloc(Kokkos::WithoutInitializing)`.
+  * `v`: existing view, can be a default constructed one.
+  * `layout`: a layout instance containing the new dimensions.
+  * `arg_prop`: View constructor properties, e.g., `Kokkos::view_alloc(Kokkos::WithoutInitializing)`.
+
+  Restrictions:
+  * `arg_prop` must not include a pointer to memory, a label, or a memory space.
 
 ## Example:
   * ```c++
