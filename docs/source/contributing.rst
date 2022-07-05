@@ -1,7 +1,6 @@
 Contributing
 ============
 
-
 We are open and try to encourage contributions from external developers.
 To do so please first open an issue describing the contribution and then
 issue a pull request against the develop branch.
