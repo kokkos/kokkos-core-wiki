@@ -103,7 +103,6 @@ We are using the following set of flags:
   -Werror -Wsign-compare -Wtype-limits
   -Wuninitialized
 
-
 .. note:: 
 
   Other compilers are tested occasionally, in particular when pushing from develop to master branch. These are tested less rigorously without ``-Werror`` and only for a select set of backends.
