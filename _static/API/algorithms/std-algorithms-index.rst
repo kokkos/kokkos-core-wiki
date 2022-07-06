@@ -1,9 +1,8 @@
-
 Std Algorithms
 ##############
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
    ./std-algorithms/Iterators
    ./std-algorithms/StdMinMaxElement

@@ -4,6 +4,8 @@ Execution Policies
 Top Level Execution Policies
 ============================
 
+`ExecutionPolicyConcept <policies/ExecutionPolicyConcept.html>`__ is the fundamental abstraction to represent “how” the execution of a Kokkos parallel pattern takes place.
+
 .. list-table::
     :widths: 35 65
     :header-rows: 1
@@ -24,7 +26,7 @@ Top Level Execution Policies
 Nested Execution Policies
 ============================
 
-Nested Execution Policies are used to dispatch parallel work inside of an already executing parallel region either dispatched with a `TeamPolicy <policies/TeamPolicy.html>`__ or a task policy.
+Nested Execution Policies are used to dispatch parallel work inside of an already executing parallel region either dispatched with a `TeamPolicy <policies/TeamPolicy.html>`__ or a task policy. `NestedPolicies <policies/NestedPolicies.html>`__ summary.
 
 .. list-table::
     :widths: 25 75
@@ -83,13 +85,15 @@ Execution Policies generally accept compile time arguments via template paramete
 
 
 .. toctree::
+   :hidden:
+   :maxdepth: 1
 
-  ./policies/ExecutionPolicyConcept
-  ./policies/MDRangePolicy
-  ./policies/NestedPolicies
-  ./policies/RangePolicy
-  ./policies/TeamHandleConcept
-  ./policies/TeamPolicy
-  ./policies/TeamThreadRange
-  ./policies/TeamVectorRange
-  ./policies/ThreadVectorRange
+   ./policies/ExecutionPolicyConcept
+   ./policies/MDRangePolicy
+   ./policies/NestedPolicies
+   ./policies/RangePolicy
+   ./policies/TeamHandleConcept
+   ./policies/TeamPolicy
+   ./policies/TeamThreadRange
+   ./policies/TeamVectorRange
+   ./policies/ThreadVectorRange

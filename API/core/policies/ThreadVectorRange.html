@@ -387,7 +387,7 @@
         <article role="main">
           <section id="threadvectorrange">
 <h1><code class="docutils literal notranslate"><span class="pre">ThreadVectorRange</span></code><a class="headerlink" href="#threadvectorrange" title="Permalink to this heading">#</a></h1>
-<p>Header File: <cite>Kokkos_Core.hpp</cite></p>
+<p>Header File: <code class="docutils literal notranslate"><span class="pre">Kokkos_Core.hpp</span></code></p>
 <p>Usage:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">parallel_for</span><span class="p">(</span><span class="n">ThreadVectorRange</span><span class="p">(</span><span class="n">team</span><span class="p">,</span><span class="n">range</span><span class="p">),</span><span class="w"> </span><span class="p">[</span><span class="o">=</span><span class="p">]</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{...});</span><span class="w"></span>
 <span class="n">parallel_reduce</span><span class="p">(</span><span class="n">ThreadVectorRange</span><span class="p">(</span><span class="n">team</span><span class="p">,</span><span class="n">begin</span><span class="p">,</span><span class="n">end</span><span class="p">),</span><span class="w"></span>
@@ -415,7 +415,7 @@ the team handle.</p>
 <span class="cm">/* Implementation defined */</span><span class="w"> </span><span class="n">ThreadVectorRange</span><span class="p">(</span><span class="n">TeamMemberType</span><span class="w"> </span><span class="n">team</span><span class="p">,</span><span class="w"> </span><span class="n">iType</span><span class="w"> </span><span class="n">count</span><span class="p">);</span><span class="w"></span>
 </pre></div>
 </div>
-<p>Splits the index range <cite>0</cite> to <cite>count-1</cite> over the vector lanes of the calling thread.</p>
+<p>Splits the index range <code class="docutils literal notranslate"><span class="pre">0</span></code> to <code class="docutils literal notranslate"><span class="pre">count-1</span></code> over the vector lanes of the calling thread.</p>
 <ul class="simple">
 <li><p><strong>Arguments</strong>:</p>
 <ul>
