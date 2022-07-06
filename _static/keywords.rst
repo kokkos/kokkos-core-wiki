@@ -18,7 +18,6 @@ This page is organized in four sections:
 - :ref:`keywords_tpls`
 - :ref:`keywords_arch`
 
-
 .. _keywords_backends:
 
 Device Backends
@@ -174,7 +173,6 @@ Other Options
       * The C++ standard for Kokkos to use: c++14, c++17, or c++20. This should be given in CMake style as 14, 17, or 20.
       * STRING Default: 14
 
-
 .. _keywords_tpls:
 
 Third-party Libraries (TPLs)
@@ -244,7 +242,6 @@ The following options control finding and configuring non-CMake TPLs:
     * * ``Kokkos_LIBRT_DIR`` or ``LIBRT_ROOT``
       * Location of LIBRT install prefix
       * PATH Default:
-
 
 The following options control ``find_package`` paths for CMake-based TPLs:
 

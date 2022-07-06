@@ -1,11 +1,9 @@
-
 Video lectures
 ##############
 
 .. toctree::
    :maxdepth: 1
 
-   
    1. Intro, Build, Parallel dispatch <https://www.youtube.com/watch?v=rUIcWtFU5qM> 
    2. Views and Spaces <https://www.youtube.com/watch?v=O-asHTtO7O4>
    3. Multidim loops and Data Structures <https://www.youtube.com/watch?v=nGyJS8u-6GY>

@@ -11,7 +11,6 @@ Kokkos: The Programming Model
 
     :medium:`Kokkos Core implements a programming model in C++ for writing performance portable applications targeting all major HPC platforms. For that purpose it provides abstractions for both parallel execution of code and data management. Kokkos is designed to target complex node architectures with N-level memory hierarchies and multiple types of execution resources. It currently can use CUDA, HIP, SYCL, HPX, OpenMP and C++ threads as backend programming models with several other backends development.`
 
-
 The `Kokkos EcoSystem <https://github.com/kokkos>`_ includes:
 
 .. list-table::
@@ -47,7 +46,6 @@ The `Kokkos EcoSystem <https://github.com/kokkos>`_ includes:
      - Resilience and Checkpointing Extensions for Kokkos
      - `Github link <https://github.com/kokkos/kokkos-resilience>`__
 
-
 Related Work for the C++ standard library
 -----------------------------------------
 
@@ -72,7 +70,6 @@ Relevant and related efforts include:
      - Reference Implementation for stdBLAS
      - `P1673 <https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2022/p1673r8.html>`__
      - `Github link <https://github.com/kokkos/stdBLAS>`__
-
 
 Questions?
 ----------
