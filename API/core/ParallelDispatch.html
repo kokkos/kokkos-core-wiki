@@ -136,7 +136,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -379,7 +379,7 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
@@ -387,51 +387,67 @@
         <article role="main">
           <section id="parallel-execution-dispatch">
 <h1>Parallel Execution/Dispatch<a class="headerlink" href="#parallel-execution-dispatch" title="Permalink to this heading">#</a></h1>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="parallel-dispatch/parallel_for.html"><code class="docutils literal notranslate"><span class="pre">parallel_for()</span></code></a><ul>
-<li class="toctree-l2"><a class="reference internal" href="parallel-dispatch/parallel_for.html#interface">Interface</a></li>
-<li class="toctree-l2"><a class="reference internal" href="parallel-dispatch/parallel_for.html#semantics">Semantics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="parallel-dispatch/parallel_for.html#examples">Examples</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="parallel-dispatch/parallel_reduce.html"><code class="docutils literal notranslate"><span class="pre">parallel_reduce()</span></code></a><ul>
-<li class="toctree-l2"><a class="reference internal" href="parallel-dispatch/parallel_reduce.html#usage">Usage</a></li>
-<li class="toctree-l2"><a class="reference internal" href="parallel-dispatch/parallel_reduce.html#interface">Interface</a></li>
-<li class="toctree-l2"><a class="reference internal" href="parallel-dispatch/parallel_reduce.html#semantics">Semantics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="parallel-dispatch/parallel_reduce.html#examples">Examples</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="parallel-dispatch/parallel_scan.html"><code class="docutils literal notranslate"><span class="pre">parallel_scan()</span></code></a><ul>
-<li class="toctree-l2"><a class="reference internal" href="parallel-dispatch/parallel_scan.html#usage">Usage</a></li>
-<li class="toctree-l2"><a class="reference internal" href="parallel-dispatch/parallel_scan.html#interface">Interface</a></li>
-<li class="toctree-l2"><a class="reference internal" href="parallel-dispatch/parallel_scan.html#semantics">Semantics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="parallel-dispatch/parallel_scan.html#examples">Examples</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="parallel-dispatch/fence.html"><code class="docutils literal notranslate"><span class="pre">fence()</span></code></a><ul>
-<li class="toctree-l2"><a class="reference internal" href="parallel-dispatch/fence.html#interface">Interface</a></li>
-<li class="toctree-l2"><a class="reference internal" href="parallel-dispatch/fence.html#semantics">Semantics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="parallel-dispatch/fence.html#examples">Examples</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="parallel-dispatch/ParallelForTag.html"><code class="docutils literal notranslate"><span class="pre">ParallelForTag()</span></code></a><ul>
-<li class="toctree-l2"><a class="reference internal" href="parallel-dispatch/ParallelForTag.html#synopsis">Synopsis</a></li>
-<li class="toctree-l2"><a class="reference internal" href="parallel-dispatch/ParallelForTag.html#public-class-members">Public Class Members</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="parallel-dispatch/ParallelReduceTag.html"><code class="docutils literal notranslate"><span class="pre">ParallelReduceTag()</span></code></a><ul>
-<li class="toctree-l2"><a class="reference internal" href="parallel-dispatch/ParallelReduceTag.html#synopsis">Synopsis</a></li>
-<li class="toctree-l2"><a class="reference internal" href="parallel-dispatch/ParallelReduceTag.html#public-class-members">Public Class Members</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="parallel-dispatch/ParallelScanTag.html"><code class="docutils literal notranslate"><span class="pre">ParallelScanTag()</span></code></a><ul>
-<li class="toctree-l2"><a class="reference internal" href="parallel-dispatch/ParallelScanTag.html#synopsis">Synopsis</a></li>
-<li class="toctree-l2"><a class="reference internal" href="parallel-dispatch/ParallelScanTag.html#public-class-members">Public Class Members</a></li>
-</ul>
-</li>
-</ul>
+<section id="parallel-patterns">
+<h2>Parallel patterns<a class="headerlink" href="#parallel-patterns" title="Permalink to this heading">#</a></h2>
+<p>Parallel execution patterns for composing algorithms.</p>
+<div class="table-wrapper colwidths-given docutils container">
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 75%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Function</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference external" href="parallel-dispatch/parallel_for.html">parallel_for</a></p></td>
+<td><p>Executes user code in parallel</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="parallel-dispatch/parallel_reduce.html">parallel_reduce</a></p></td>
+<td><p>Executes user code to perform a reduction in parallel</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="parallel-dispatch/parallel_scan.html">parallel_scan</a></p></td>
+<td><p>Executes user code to generate a prefix sum in parallel</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="parallel-dispatch/fence.html">fence</a></p></td>
+<td><p>Fences execution spaces</p></td>
+</tr>
+</tbody>
+</table>
 </div>
+</section>
+<section id="tags-for-team-policy-calculations">
+<h2>Tags for Team Policy Calculations<a class="headerlink" href="#tags-for-team-policy-calculations" title="Permalink to this heading">#</a></h2>
+<p>The following parallel pattern tags are used to call the correct overload for team size calculations (team_size_max,team_size_recommended):</p>
+<div class="table-wrapper colwidths-given docutils container">
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 75%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Tag</p></th>
+<th class="head"><p>Pattern</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference external" href="parallel-dispatch/ParallelForTag.html">ParallelForTag</a></p></td>
+<td><p>parallel_for</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="parallel-dispatch/ParallelReduceTag.html">ParallelReduceTag</a></p></td>
+<td><p>parallel_reduce</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="parallel-dispatch/ParallelScanTag.html">ParallelScanTag</a></p></td>
+<td><p>parallel_scan</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="toctree-wrapper compound">
+</div>
+</section>
 </section>
 
         </article>
@@ -479,8 +495,28 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            Contents
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Parallel Execution/Dispatch</a><ul>
+<li><a class="reference internal" href="#parallel-patterns">Parallel patterns</a></li>
+<li><a class="reference internal" href="#tags-for-team-policy-calculations">Tags for Team Policy Calculations</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>
