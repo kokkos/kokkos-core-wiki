@@ -41,7 +41,7 @@ struct Functor {
 }
 ```
 
-The `RangePolicy` starts a 1D grid of 1D thread blocks so that the index `i` is calculated as `blockIdx.x * blockDim.x + threadIdx.x`. For the `TeamPolicy` the number of teams is the grid dimension, while the number of threads per team is mapped to the Y-dimension of the Cuda thread-block. The optional vector length is mapped to the X-dimension. For example, `TeamPolicy<Cuda>(100,12,16)` would start a 1D grid of size 100 with block-dimensions (16,12,1) while `TeamPolicy<Cuda>(100,96)` would result in a grid size of 100 with block-dimensions of (1,96,1). The restrictions on the vector length (power of two and smaller than 32 for the Cuda execution space) guarantee that vector loops are performed by threads which are part of a single warp.
+The [`RangePolicy`](../API/core/policies/RangePolicy) starts a 1D grid of 1D thread blocks so that the index `i` is calculated as `blockIdx.x * blockDim.x + threadIdx.x`. For the `TeamPolicy` the number of teams is the grid dimension, while the number of threads per team is mapped to the Y-dimension of the Cuda thread-block. The optional vector length is mapped to the X-dimension. For example, `TeamPolicy<Cuda>(100,12,16)` would start a 1D grid of size 100 with block-dimensions (16,12,1) while `TeamPolicy<Cuda>(100,96)` would result in a grid size of 100 with block-dimensions of (1,96,1). The restrictions on the vector length (power of two and smaller than 32 for the Cuda execution space) guarantee that vector loops are performed by threads which are part of a single warp.
 
 ### 12.1.2 OpenMP
 
@@ -59,7 +59,7 @@ In both cases, it is mandatory to fix the Layout of the Kokkos view to the actua
 
 ## 12.3 Raw allocations through Kokkos
 
-A simple way to add support for multiple memory spaces to a legacy app is to use `kokkos_malloc`, `kokkos_free` and `kokkos_realloc`. The functions are templated on the memory space and thus allow targeted placement of data structures:
+A simple way to add support for multiple memory spaces to a legacy app is to use [`kokkos_malloc`](kokkos_malloc), [`kokkos_free`](kokkos_free) and [`kokkos_realloc`](kokkos_realloc). The functions are templated on the memory space and thus allow targeted placement of data structures:
 
 ```c++
 // Allocate an array of 100 doubles in the default memory space

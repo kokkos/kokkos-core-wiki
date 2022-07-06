@@ -41,7 +41,7 @@ Instead of mapping a 1-D range of indices to hardware resources, Kokkos' thread 
 
 ### 8.2.1 Creating a Policy instance
 
-Kokkos exposes use of thread teams with the `Kokkos::TeamPolicy` execution policy. To use thread teams you need to create a `Kokkos::TeamPolicy` instance. It can be created inline for the parallel dispatch call. The constructors require two arguments: a league size and a team size. In place of the team size, a user can utilize `Kokkos::AUTO` to let Kokkos guess a good team size for a given architecture. Doing that is the recommended way for most developers to utilize the `TeamPolicy`. As with the  `Kokkos::RangePolicy` a specific execution tag, a specific execution space, a `Kokkos::IndexType`, and a `Kokkos::Schedule` can be given as optional template arguments.
+Kokkos exposes use of thread teams with the [`Kokkos::TeamPolicy`](../API/core/policies/TeamPolicy) execution policy. To use thread teams you need to create a [`Kokkos::TeamPolicy`](../API/core/policies/TeamPolicy) instance. It can be created inline for the parallel dispatch call. The constructors require two arguments: a league size and a team size. In place of the team size, a user can utilize `Kokkos::AUTO` to let Kokkos guess a good team size for a given architecture. Doing that is the recommended way for most developers to utilize the [`TeamPolicy`](../API/core/policies/TeamPolicy). As with the  [`Kokkos::RangePolicy`](../API/core/policies/RangePolicy) a specific execution tag, a specific execution space, a `Kokkos::IndexType`, and a `Kokkos::Schedule` can be given as optional template arguments.
 
 ```c++
 // Using default execution space and launching
@@ -82,7 +82,7 @@ parallel_for (policy, KOKKOS_LAMBDA (member_type team_member) {
   });
 ```
 
-The name `TeamPolicy` makes it explicit that a kernel using it constitutes a parallel region with respect to the team.
+The name [`TeamPolicy`](../API/core/policies/TeamPolicy) makes it explicit that a kernel using it constitutes a parallel region with respect to the team.
 
 In order to allow for coordination of work between members of a team, i.e. some threads compute a value, store it in global memory and then everyone consumes it, teams provide barriers. These barriers are collectives for all team members in the same team, but have no relationship with other teams. Here is an example:
 
@@ -112,7 +112,7 @@ parallel_for (policy, KOKKOS_LAMBDA (member_type team_member) {
 
 Each Kokkos team has a "scratch pad." This is an instance of a memory space accessible only by threads in that team. Scratch pads let an algorithm load a workset into a shared space and then collaboratively work on it with all members of a team. The lifetime of data in a scratch pad is the lifetime of the team. In particular, scratch pads are recycled by all logical teams running on the same physical set of cores. During the lifetime of the team all operations allowed on global memory are allowed on the scratch memory. This includes taking addresses and performing atomic operations on elements located in scratch space. Team-level scratch pads correspond to the per-block shared memory in Cuda, or to the "local store" memory on the Cell processor.
 
-Kokkos exposes scratch pads through a special memory space associated with the execution space: `execution_space::scratch_memory_space`. You may allocate a chunk of scratch memory through the `TeamPolicy` member type. You may request multiple allocations from scratch, up to a user-provided maximum aggregate size. The maximum is provided either through a `team_shmem_size` function in the functor which returns a potentially team-size dependent value, or it can be specified through a setting of the TeamPolicy `set_scratch_size`. It is not valid to provide both values at the same time. The argument to the TeamPolicy can be used to set the shared memory size when using functors. One restriction on shared memory allocations is that they can not be freed during the lifetime of the team. This avoids the complexity of a memory pool, and reduces the time it takes to obtain an allocation (which currently is a few tens of integer operations to calculate the offset).
+Kokkos exposes scratch pads through a special memory space associated with the execution space: `execution_space::scratch_memory_space`. You may allocate a chunk of scratch memory through the [`TeamPolicy`](../API/core/policies/TeamPolicy) member type. You may request multiple allocations from scratch, up to a user-provided maximum aggregate size. The maximum is provided either through a `team_shmem_size` function in the functor which returns a potentially team-size dependent value, or it can be specified through a setting of the TeamPolicy `set_scratch_size`. It is not valid to provide both values at the same time. The argument to the TeamPolicy can be used to set the shared memory size when using functors. One restriction on shared memory allocations is that they can not be freed during the lifetime of the team. This avoids the complexity of a memory pool, and reduces the time it takes to obtain an allocation (which currently is a few tens of integer operations to calculate the offset).
 
 The following is an example of using the functor interface:
 
@@ -146,7 +146,7 @@ struct functor {
   }
 };
 ```
-The `set_scratch_size` function of the `TeamPolicy` takes two or three arguments. The first argument specifies the level in the scratch hierarchy for which a specific size is requested. Different levels have different restrictions. Generally, the first level is restricted to a few tens of kilobytes roughly corresponding to L1 cache size. The second level can be used to get an aggregate over all teams of a few gigabyte, corresponding to available space in high-bandwidth memory. The third level mostly falls back to capacity memory in the node. The second and third argument are either per-thread or per-team sizes for scratch memory. Note like previously discussed, the setter function does not modify the instance it is called on, but returns a copy of the policy object with adjusted scratch size request.
+The `set_scratch_size` function of the [`TeamPolicy`](../API/core/policies/TeamPolicy) takes two or three arguments. The first argument specifies the level in the scratch hierarchy for which a specific size is requested. Different levels have different restrictions. Generally, the first level is restricted to a few tens of kilobytes roughly corresponding to L1 cache size. The second level can be used to get an aggregate over all teams of a few gigabyte, corresponding to available space in high-bandwidth memory. The third level mostly falls back to capacity memory in the node. The second and third argument are either per-thread or per-team sizes for scratch memory. Note like previously discussed, the setter function does not modify the instance it is called on, but returns a copy of the policy object with adjusted scratch size request.
 
 Here are some examples:
 
@@ -203,9 +203,9 @@ You may nest them and use them in conjunction with code that is aware of the lea
 
 ### 8.4.1 Team loops
 
-The first nested level of parallel loops splits an index range over the threads of a team. This motivates the policy name `TeamThreadRange`, which indicates that the loop is executed once by the team with the index range split over threads. The loop count is not limited to the number of threads in a team, and how the index range is mapped to threads is architecture dependent. It is not legal to nest multiple parallel loops using the `TeamThreadRange` policy. However, it is valid to have multiple parallel loops using the `TeamThreadRange` policy follow each other in sequence, in the same kernel. Note that it is not legal to make a write access to POD data outside of the closure of a nested parallel layer. This is a conscious choice to prevent difficult-to-debug issues related to thread private, team shared and globally shared variables. A simple way to enforce this is by using the "capture by value"' clause with lambdas,
+The first nested level of parallel loops splits an index range over the threads of a team. This motivates the policy name [`TeamThreadRange`](../API/core/policies/TeamThreadRange), which indicates that the loop is executed once by the team with the index range split over threads. The loop count is not limited to the number of threads in a team, and how the index range is mapped to threads is architecture dependent. It is not legal to nest multiple parallel loops using the [`TeamThreadRange`](../API/core/policies/TeamThreadRange) policy. However, it is valid to have multiple parallel loops using the [`TeamThreadRange`](../API/core/policies/TeamThreadRange) policy follow each other in sequence, in the same kernel. Note that it is not legal to make a write access to POD data outside the closure of a nested parallel layer. This is a conscious choice to prevent difficult-to-debug issues related to thread private, team shared and globally shared variables. A simple way to enforce this is by using the "capture by value"' clause with lambdas,
 but "capture by reference" is recommended for release builds since it typically results in better performance.
-With the lambda being considered as `const` inside the `TeamThreadRange` loop, the compiler will catch illegal accesses at compile time as a `const` violation.
+With the lambda being considered as `const` inside the [`TeamThreadRange`](../API/core/policies/TeamThreadRange) loop, the compiler will catch illegal accesses at compile time as a `const` violation.
 
 The simplest use case is to have another [`parallel_for()`](../API/core/parallel-dispatch/parallel_for) nested inside a kernel.
 
@@ -263,11 +263,11 @@ The third pattern is [`parallel_scan()`](../API/core/parallel-dispatch/parallel_
 
 #### 8.4.1.1 Team Barriers
 
-In instances where one loop operation might need to be sequenced with a different loop operation, such as filling of arrays as a preparation stage for following computations on that data, it is important to be able to control threads in time; this can be done through the use of barriers. In nested loops, the outside loop ( `TeamPolicy<> ()` ) has a built-in (implicit) team barrier; inner loops ( `TeamThreadRange ()` ) do not. This latter condition is often referred to as a 'non-blocking' condition. When necessary, an explicit barrier can be introduced to synchronize team threads; an example is shown in the previous example. 
+In instances where one loop operation might need to be sequenced with a different loop operation, such as filling of arrays as a preparation stage for following computations on that data, it is important to be able to control threads in time; this can be done through the use of barriers. In nested loops, the outside loop ( [`TeamPolicy<> ()`](../API/core/policies/TeamPolicy) ) has a built-in (implicit) team barrier; inner loops ( [`TeamThreadRange ()`](../API/core/policies/TeamThreadRange.md) ) do not. This latter condition is often referred to as a 'non-blocking' condition. When necessary, an explicit barrier can be introduced to synchronize team threads; an example is shown in the previous example. 
 
 ### 8.4.2 Vector loops
 
-The innermost level of nesting parallel loops in a kernel comprises the _vector_-loop. Vector level parallelism works identically to the team level loops using the execution policy `ThreadVectorRange`. In contrast to the team-level, there is no legal way to exploit the vector level outside of a parallel pattern using the `ThreadVectorRange`. However, one can use such a parallel construct in- and outside- of a `TeamThreadRange` parallel operation.
+The innermost level of nesting parallel loops in a kernel comprises the _vector_-loop. Vector level parallelism works identically to the team level loops using the execution policy [`ThreadVectorRange`](../API/core/policies/ThreadVectorRange). In contrast to the team-level, there is no legal way to exploit the vector level outside a parallel pattern using the [`ThreadVectorRange`](../API/core/policies/ThreadVectorRange). However, one can use such a parallel construct in- and outside- of a [`TeamThreadRange`](../API/core/policies/TeamThreadRange) parallel operation.
 
 ```c++
 using Kokkos::parallel_reduce;
