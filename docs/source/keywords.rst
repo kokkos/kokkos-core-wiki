@@ -33,35 +33,35 @@ Device Backends
       - Default
 
     * - ``Kokkos_ENABLE_CUDA``
-      - To build CUDA backend
+      - Enable CUDA backend
       - ``OFF``
 
     * - ``Kokkos_ENABLE_OPENMP``
-      - To build OpenMP backend
+      - Enable OpenMP backend
       - ``OFF``
 
     * - ``Kokkos_ENABLE_THREADS``
-      - To build C++ Threads backend
+      - Enable C++ Threads backend
       - ``OFF``
 
     * - ``Kokkos_ENABLE_SERIAL``
-      - To build serial backend
+      - Enable serial backend
       - ``ON``
 
     * - ``Kokkos_ENABLE_HIP``
-      - To build HIP backend
+      - Enable HIP backend
       - ``OFF``
 
     * - ``Kokkos_ENABLE_OPENMPTARGET``
-      - :red:`[Experimental]` To build the OpenMP target backend
+      - :red:`[Experimental]` Enable the OpenMP target backend
       - ``OFF``
 
     * - ``Kokkos_ENABLE_SYCL``
-      - :red:`[Experimental]` To build SYCL backend
+      - :red:`[Experimental]` Enable SYCL backend
       - ``OFF``
 
     * - ``Kokkos_ENABLE_HPX``
-      - :red:`[Experimental]` To build HPX backend
+      - :red:`[Experimental]` Enable HPX backend
       - ``OFF``
 
 
@@ -194,19 +194,19 @@ The following options control enabling TPLs:
       * ``OFF``
     * * ``Kokkos_ENABLE_HWLOC``
       * Whether to enable the HWLOC library
-      * ``Off``
+      * ``OFF``
     * * ``Kokkos_ENABLE_LIBNUMA``
       * Whether to enable the LIBNUMA library
-      * ``Off``
+      * ``OFF``
     * * ``Kokkos_ENABLE_MEMKIND``
       * Whether to enable the MEMKIND library
-      * ``Off``
+      * ``OFF``
     * * ``Kokkos_ENABLE_LIBDL``
       * Whether to enable the LIBDL library
-      * ``On``
+      * ``ON``
     * * ``Kokkos_ENABLE_LIBRT``
       * Whether to enable the LIBRT library
-      * ``Off``
+      * ``OFF``
 
 The following options control finding and configuring non-CMake TPLs:
 
