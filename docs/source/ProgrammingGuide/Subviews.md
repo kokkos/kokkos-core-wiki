@@ -36,7 +36,7 @@ To take a subview of a View, you can use the [`Kokkos::subview`](../API/core/vie
 ```c++
 const size_t N0 = ...;
 const size_t N1 = ...;
-View<double**> A ("A", N0, N1);
+Kokkos::View<double**> A ("A", N0, N1);
 
 auto A_sub = subview (A, make_pair (2, 4), make_pair (3, 7));
 ```
@@ -53,9 +53,9 @@ Another way of getting a subview is through the appropriate [`View`](../API/core
 ```c++
 const size_t N0 = ...;
 const size_t N1 = ...;
-View<double**> A ("A", N0, N1);
+Kokkos::View<double**> A ("A", N0, N1);
 
-View<double**,LayoutStride> A_sub(A,make_pair(2,4),make_pair(3,7));
+Kokkos::View<double**,LayoutStride> A_sub(A,make_pair(2,4),make_pair(3,7));
 ```
 
 For this usage you must know the layout type of the subview. On the positive side, such a direct construction is generally a bit cheaper than through the `Kokkos::subview` function.
@@ -77,7 +77,7 @@ Given a View with `k` dimensions, we call that View _degenerate_ if any of its d
 For some applications, it is useful to know the type of a subview, given the arguments. In these cases, using `auto` type deduction can be inconvenient. While it is possible to use `decltype()` and `std::declval` to obtain this from the `subview` function, Kokkos provides a convenient type alias:
 
 ```c++
-using my_view_type = View<double **>;
+using my_view_type = Kokkos::View<double **>;
 using my_subview_type = Kokkos::Subview<my_view_type,
                                         Kokkos::ALL,
                                         Kokkos::pair<unsigned, unsigned>>;
