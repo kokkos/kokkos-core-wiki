@@ -115,7 +115,7 @@ void resize(const Impl::ViewCtorProp<ViewCtorArgs...>& arg_prop,
          const size_t n6 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
          const size_t n7 = KOKKOS_IMPL_CTOR_DEFAULT_ARG);
   ```
-  Resizes `v` to have the new dimensions while preserving the contents for the common subview of the old and new view. The new `Kokkos::View` is constructed using the View constructor properties `arg_prop`, e.g., `Kokkos::view_alloc(Kokkos::WithoutInitializing)`.
+  Resizes `v` to have the new dimensions while preserving the contents for the common subview of the old and new view. The new `Kokkos::View` is constructed using the View constructor properties `arg_prop`, e.g., `Kokkos::view_alloc(Kokkos::WithoutInitializing)`.  If `arg_prop` includes an execution space, it is used for allocating memory and for copying elements without using a final fence.
   * `v`: existing view, can be a default constructed one.
   * `n[X]`: new length for extent X.
   * `arg_prop`: View constructor properties, e.g., `Kokkos::view_alloc(Kokkos::WithoutInitializing)`.
@@ -149,7 +149,7 @@ void resize(const Impl::ViewCtorProp<ViewCtorArgs...>& arg_prop,
          Kokkos::View<T, P...>& v,
          const typename Kokkos::View<T, P...>::array_layout& layout);
   ```
-  Resizes `v` to have the new dimensions while preserving the contents for the common subview of the old and new view. The new `Kokkos::View` is constructed using the View constructor properties `arg_prop`, e.g., `Kokkos::view_alloc(Kokkos::WithoutInitializing)`.
+  Resizes `v` to have the new dimensions while preserving the contents for the common subview of the old and new view. The new `Kokkos::View` is constructed using the View constructor properties `arg_prop`, e.g., `Kokkos::view_alloc(Kokkos::WithoutInitializing)`. If `arg_prop` includes an execution space, it is used for allocating memory and for copying elements without using a final fence.
   * `v`: existing view, can be a default constructed one.
   * `layout`: a layout instance containing the new dimensions.
   * `arg_prop`: View constructor properties, e.g., `Kokkos::view_alloc(Kokkos::WithoutInitializing)`.
