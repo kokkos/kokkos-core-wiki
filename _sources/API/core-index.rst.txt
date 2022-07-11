@@ -53,7 +53,7 @@ API: Core
    ./core/Task-Parallelism
    ./core/atomics
    ./core/Numerics
-   ./core/CStyleMemManagement
+   ./core/c_style_memory_management
    ./core/Traits
    ./core/KokkosConcepts
    ./core/STL-Compatibility

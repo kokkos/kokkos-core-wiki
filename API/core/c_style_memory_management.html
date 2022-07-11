@@ -3,7 +3,7 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><link rel="next" title="Traits" href="Traits.html" /><link rel="prev" title="Numeric traits" href="numerics/numeric-traits.html" />
+<link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><link rel="next" title="kokkos_malloc" href="c_style_memory_management/malloc.html" /><link rel="prev" title="Numeric traits" href="numerics/numeric-traits.html" />
 
     <meta name="generator" content="sphinx-5.0.1, furo 2022.06.04.1"/>
         <title>C-style memory management - Kokkos documentation</title>
@@ -270,14 +270,19 @@
 <li class="toctree-l3"><a class="reference internal" href="numerics/numeric-traits.html">Numeric traits</a></li>
 </ul>
 </li>
-<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">C-style memory management</a></li>
+<li class="toctree-l2 current has-children current-page"><a class="current reference internal" href="#">C-style memory management</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" role="switch" type="checkbox"/><label for="toctree-checkbox-13"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="c_style_memory_management/malloc.html"><code class="docutils literal notranslate"><span class="pre">kokkos_malloc</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="c_style_memory_management/realloc.html"><code class="docutils literal notranslate"><span class="pre">kokkos_realloc</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="c_style_memory_management/free.html"><code class="docutils literal notranslate"><span class="pre">kokkos_free</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="Traits.html">Traits</a></li>
 <li class="toctree-l2"><a class="reference internal" href="KokkosConcepts.html">Kokkos Concepts</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="STL-Compatibility.html">STL Compatibility Issues</a><input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" role="switch" type="checkbox"/><label for="toctree-checkbox-13"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="STL-Compatibility.html">STL Compatibility Issues</a><input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" role="switch" type="checkbox"/><label for="toctree-checkbox-14"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="stl-compat/pair.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::pair</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="Utilities.html">Utilities</a><input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" role="switch" type="checkbox"/><label for="toctree-checkbox-14"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="Utilities.html">Utilities</a><input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" role="switch" type="checkbox"/><label for="toctree-checkbox-15"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="utilities/abort.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::abort</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="utilities/complex.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::complex</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="utilities/timer.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::Timer</span></code></a></li>
@@ -287,7 +292,7 @@
 <li class="toctree-l2"><a class="reference internal" href="Macros.html">Macros</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../containers-index.html">API: Containers</a><input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" role="switch" type="checkbox"/><label for="toctree-checkbox-15"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../containers-index.html">API: Containers</a><input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" role="switch" type="checkbox"/><label for="toctree-checkbox-16"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../containers/Bitset.html"><code class="docutils literal notranslate"><span class="pre">Bitset</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../containers/Bitset.html#constbitset"><code class="docutils literal notranslate"><span class="pre">ConstBitset</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../containers/DualView.html"><code class="docutils literal notranslate"><span class="pre">DualView</span></code></a></li>
@@ -300,11 +305,11 @@
 <li class="toctree-l2"><a class="reference internal" href="../containers/vector.html"><code class="docutils literal notranslate"><span class="pre">vector</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../algorithms-index.html">API: Algorithms</a><input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" role="switch" type="checkbox"/><label for="toctree-checkbox-16"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../algorithms-index.html">API: Algorithms</a><input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" role="switch" type="checkbox"/><label for="toctree-checkbox-17"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../algorithms/Random-Number.html">Random-Number</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../algorithms/Random-Number.html#generator">Generator</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../algorithms/Sort.html">Sort</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../algorithms/std-algorithms-index.html">Std Algorithms</a><input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" role="switch" type="checkbox"/><label for="toctree-checkbox-17"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../algorithms/std-algorithms-index.html">Std Algorithms</a><input class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" role="switch" type="checkbox"/><label for="toctree-checkbox-18"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../algorithms/std-algorithms/Iterators.html">Iterators</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../algorithms/std-algorithms/StdMinMaxElement.html">Minimum/maximum</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../algorithms/std-algorithms/StdModSeq.html">Modifying Sequence</a></li>
@@ -317,7 +322,7 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../alphabetical.html">API in Alphabetical Order</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../usecases.html">Use Cases and Examples</a><input class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" role="switch" type="checkbox"/><label for="toctree-checkbox-18"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../usecases.html">Use Cases and Examples</a><input class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" role="switch" type="checkbox"/><label for="toctree-checkbox-19"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../usecases/MPI-Halo-Exchange.html">MPI Halo Exchange</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../usecases/Average-To-Nodes.html">ScatterView averaging elements to nodes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../usecases/MDRangePolicy.html">MDRangePolicy Use Case</a></li>
@@ -329,7 +334,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../usecases/SoA-and-AoSoA-with-Cabana.html">Array of Structures and Structure of Arrays with Cabana</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../testing-and-issue-tracking.html">Testing and Issue Tracking</a><input class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" role="switch" type="checkbox"/><label for="toctree-checkbox-19"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../testing-and-issue-tracking.html">Testing and Issue Tracking</a><input class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" role="switch" type="checkbox"/><label for="toctree-checkbox-20"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../testing-and-issue-tracking/Requirements-Issues-and-Feedback.html">Requirements, Issues and Feedback</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../testing-and-issue-tracking/Testing-Process-Details.html">Attachments</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../testing-and-issue-tracking/Testing-Processes.html">Kokkos Testing Processes and Change Process</a></li>
@@ -337,7 +342,7 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference external" href="https://github.com/kokkos/kokkos-tutorials">Tutorials</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../videolectures.html">Video lectures</a><input class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" role="switch" type="checkbox"/><label for="toctree-checkbox-20"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../videolectures.html">Video lectures</a><input class="toctree-checkbox" id="toctree-checkbox-21" name="toctree-checkbox-21" role="switch" type="checkbox"/><label for="toctree-checkbox-21"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference external" href="https://www.youtube.com/watch?v=rUIcWtFU5qM">1. Intro, Build, Parallel dispatch</a></li>
 <li class="toctree-l2"><a class="reference external" href="https://www.youtube.com/watch?v=O-asHTtO7O4">2. Views and Spaces</a></li>
 <li class="toctree-l2"><a class="reference external" href="https://www.youtube.com/watch?v=nGyJS8u-6GY">3. Multidim loops and Data Structures</a></li>
@@ -387,97 +392,27 @@
         <article role="main">
           <section id="c-style-memory-management">
 <h1>C-style memory management<a class="headerlink" href="#c-style-memory-management" title="Permalink to this heading">#</a></h1>
-<section id="kokkos-kokkos-malloc">
-<span id="kokkos-malloc"></span><h2><code class="docutils literal notranslate"><span class="pre">Kokkos::kokkos_malloc</span></code><a class="headerlink" href="#kokkos-kokkos-malloc" title="Permalink to this heading">#</a></h2>
-<p>Defined in header <code class="docutils literal notranslate"><span class="pre">&lt;Kokkos_Core.hpp&gt;</span></code></p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">MemorySpace</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="nc">Kokkos</span><span class="o">::</span><span class="n">DefaultExecutionSpace</span><span class="o">::</span><span class="n">memory_space</span><span class="o">&gt;</span><span class="w"></span>
-<span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">kokkos_malloc</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">:</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">label</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">size</span><span class="p">);</span><span class="w"></span>
-</pre></div>
-</div>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">MemorySpace</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="nc">Kokkos</span><span class="o">::</span><span class="n">DefaultExecutionSpace</span><span class="o">::</span><span class="n">memory_space</span><span class="o">&gt;</span><span class="w"></span>
-<span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">kokkos_malloc</span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">size</span><span class="p">);</span><span class="w"></span>
-</pre></div>
-</div>
-<p>Allocate <code class="docutils literal notranslate"><span class="pre">size</span></code> bytes of uninitialized storage on the specified memory space <a class="reference internal" href="memory_spaces.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">MemorySpace</span></code></span></a> plus some extra space for metadata such as the label.</p>
-<p>If allocation succeeds, returns a pointer to the lowest (first) byte in the allocated memory block that is suitably aligned for any scalar type.</p>
-<p>If allocation fails, an exception of type <code class="docutils literal notranslate"><span class="pre">Kokkos::Experimental::RawMemoryAllocationFailure</span></code> is thrown.</p>
-<section id="parameters">
-<h3>Parameters<a class="headerlink" href="#parameters" title="Permalink to this heading">#</a></h3>
-<p><code class="docutils literal notranslate"><span class="pre">label</span></code>: A user provided string which is used in profiling and debugging tools via the KokkosP Profiling Tools.<br />
-<code class="docutils literal notranslate"><span class="pre">size</span></code>: The number of bytes to allocate.</p>
-</section>
-<section id="template-parameters">
-<h3>Template parameters<a class="headerlink" href="#template-parameters" title="Permalink to this heading">#</a></h3>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">MemorySpace</span></code>:  Controls the storage location. If omitted the memory space of the default execution space is used (i.e. <code class="docutils literal notranslate"><span class="pre">Kokkos::DefaultExecutionSpace::memory_space</span></code>).</p></li>
+<section id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this heading">#</a></h2>
+<p>Defined in <code class="docutils literal notranslate"><span class="pre">&lt;Kokkos_Core.hpp&gt;</span></code></p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="c_style_memory_management/malloc.html"><code class="docutils literal notranslate"><span class="pre">kokkos_malloc</span></code></a></li>
 </ul>
-</section>
-<section id="return-value">
-<h3>Return value<a class="headerlink" href="#return-value" title="Permalink to this heading">#</a></h3>
-<p>On success, returns the pointer to the beginning of newly allocated memory.
-To avoid a memory leak, the returned pointer must be deallocated with <a class="reference internal" href="#kokkos-free"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">Kokkos::kokkos_free()</span></code></span></a> or <a class="reference internal" href="#kokkos-realloc"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">Kokkos::realloc()</span></code></span></a>.</p>
-</section>
-<section id="exceptions">
-<h3>Exceptions<a class="headerlink" href="#exceptions" title="Permalink to this heading">#</a></h3>
-<p>On failure, throws <code class="docutils literal notranslate"><span class="pre">Kokkos::Experimental::RawMemoryAllocationFailure</span></code>.</p>
-</section>
-</section>
-<section id="kokkos-kokkos-realloc">
-<span id="kokkos-realloc"></span><h2><code class="docutils literal notranslate"><span class="pre">Kokkos::kokkos_realloc</span></code><a class="headerlink" href="#kokkos-kokkos-realloc" title="Permalink to this heading">#</a></h2>
-<p>Defined in header <code class="docutils literal notranslate"><span class="pre">&lt;Kokkos_Core.hpp&gt;</span></code></p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">MemorySpace</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="nc">Kokkos</span><span class="o">::</span><span class="n">DefaultExecutionSpace</span><span class="o">::</span><span class="n">memory_space</span><span class="o">&gt;</span><span class="w"></span>
-<span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">kokkos_realloc</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">ptr</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">new_size</span><span class="p">);</span><span class="w"></span>
-</pre></div>
 </div>
-<p>Reallocates the given area of memory. It must be previously allocated by <a class="reference internal" href="#kokkos-malloc"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">Kokkos::kokkos_malloc()</span></code></span></a> or <a class="reference internal" href="#kokkos-realloc"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">Kokkos::kokkos_realloc()</span></code></span></a> on the same memory space <a class="reference internal" href="memory_spaces.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">MemorySpace</span></code></span></a> and not yet freed with <a class="reference internal" href="#kokkos-free"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">Kokkos::kokkos_free()</span></code></span></a>, otherwise, the results are undefined.</p>
-<section id="id1">
-<h3>Parameters<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
-<p><code class="docutils literal notranslate"><span class="pre">ptr</span></code>: The pointer to the memory area to be reallocated.<br />
-<code class="docutils literal notranslate"><span class="pre">new_size</span></code>: The new size in bytes.</p>
-</section>
-<section id="id2">
-<h3>Template parameters<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h3>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">MemorySpace</span></code>:  Controls the storage location. If omitted the memory space of the default execution space is used (i.e. <code class="docutils literal notranslate"><span class="pre">Kokkos::DefaultExecutionSpace::memory_space</span></code>).</p></li>
+<p>allocates memory</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="c_style_memory_management/realloc.html"><code class="docutils literal notranslate"><span class="pre">kokkos_realloc</span></code></a></li>
 </ul>
-</section>
-<section id="id3">
-<h3>Return value<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h3>
-<p>On success, returns a pointer to the beginning of the newly allocated memory. To avoid a memory leak, the returned pointer must be deallocated with <a class="reference internal" href="#kokkos-free"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">Kokkos::kokkos_free()</span></code></span></a>, the original pointer <code class="docutils literal notranslate"><span class="pre">ptr</span></code> is invalidated and any access to it is undefined behavior (even if reallocation was in-place).</p>
-<p>On failure, returns a null pointer. The original pointer ptr remains valid and may need to be deallocated with <a class="reference internal" href="#kokkos-free"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">Kokkos::kokkos_free()</span></code></span></a>.</p>
-</section>
-<section id="id4">
-<h3>Exceptions<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
-<p>On failure, throws <code class="docutils literal notranslate"><span class="pre">Kokkos::Experimental::RawMemoryAllocationFailure</span></code>.</p>
-</section>
-</section>
-<section id="kokkos-kokkos-free">
-<span id="kokkos-free"></span><h2><code class="docutils literal notranslate"><span class="pre">Kokkos::kokkos_free</span></code><a class="headerlink" href="#kokkos-kokkos-free" title="Permalink to this heading">#</a></h2>
-<p>Defined in header <code class="docutils literal notranslate"><span class="pre">&lt;Kokkos_Core.hpp&gt;</span></code></p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">MemorySpace</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="nc">Kokkos</span><span class="o">::</span><span class="n">DefaultExecutionSpace</span><span class="o">::</span><span class="n">memory_space</span><span class="o">&gt;</span><span class="w"></span>
-<span class="kt">void</span><span class="w"> </span><span class="n">kokkos_free</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">ptr</span><span class="p">);</span><span class="w"></span>
-</pre></div>
 </div>
-<p>Deallocates the space previously allocated by <a class="reference internal" href="#kokkos-malloc"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">Kokkos::kokkos_malloc()</span></code></span></a> or <a class="reference internal" href="#kokkos-realloc"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">Kokkos::kokkos_realloc()</span></code></span></a> on the specified memory space <code class="docutils literal notranslate"><span class="pre">MemorySpace</span></code>.</p>
-<p>If <code class="docutils literal notranslate"><span class="pre">ptr</span></code> is a null pointer, the function does nothing.</p>
-<section id="id5">
-<h3>Parameters<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h3>
-<p><code class="docutils literal notranslate"><span class="pre">ptr</span></code>: The pointer to the memory to deallocate on the specified memory space.</p>
-</section>
-<section id="id6">
-<h3>Template parameters<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h3>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">MemorySpace</span></code>:  Controls the storage location. If omitted the memory space of the default execution space is used (i.e. <code class="docutils literal notranslate"><span class="pre">Kokkos::DefaultExecutionSpace::memory_space</span></code>).</p></li>
+<p>expands or shrinks previously allocated memory block</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="c_style_memory_management/free.html"><code class="docutils literal notranslate"><span class="pre">kokkos_free</span></code></a></li>
 </ul>
-</section>
-<section id="id7">
-<h3>Return value<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h3>
-<p>(none)</p>
-</section>
-<section id="id8">
-<h3>Exceptions<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h3>
-<p>Throws <code class="docutils literal notranslate"><span class="pre">std::runtime_error</span></code> on failure to deallocate.</p>
-</section>
+</div>
+<p>deallocates previously allocated memory</p>
 </section>
 </section>
 
@@ -486,12 +421,12 @@ To avoid a memory leak, the returned pointer must be deallocated with <a class="
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="Traits.html">
+          <a class="next-page" href="c_style_memory_management/malloc.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Traits</div>
+                <div class="title"><code class="docutils literal notranslate"><span class="pre">kokkos_malloc</span></code></div>
               </div>
               <svg><use href="#svg-arrow-right"></use></svg>
             </a>
@@ -539,25 +474,7 @@ To avoid a memory leak, the returned pointer must be deallocated with <a class="
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">C-style memory management</a><ul>
-<li><a class="reference internal" href="#kokkos-kokkos-malloc"><code class="docutils literal notranslate"><span class="pre">Kokkos::kokkos_malloc</span></code></a><ul>
-<li><a class="reference internal" href="#parameters">Parameters</a></li>
-<li><a class="reference internal" href="#template-parameters">Template parameters</a></li>
-<li><a class="reference internal" href="#return-value">Return value</a></li>
-<li><a class="reference internal" href="#exceptions">Exceptions</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#kokkos-kokkos-realloc"><code class="docutils literal notranslate"><span class="pre">Kokkos::kokkos_realloc</span></code></a><ul>
-<li><a class="reference internal" href="#id1">Parameters</a></li>
-<li><a class="reference internal" href="#id2">Template parameters</a></li>
-<li><a class="reference internal" href="#id3">Return value</a></li>
-<li><a class="reference internal" href="#id4">Exceptions</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#kokkos-kokkos-free"><code class="docutils literal notranslate"><span class="pre">Kokkos::kokkos_free</span></code></a><ul>
-<li><a class="reference internal" href="#id5">Parameters</a></li>
-<li><a class="reference internal" href="#id6">Template parameters</a></li>
-<li><a class="reference internal" href="#id7">Return value</a></li>
-<li><a class="reference internal" href="#id8">Exceptions</a></li>
+<li><a class="reference internal" href="#functions">Functions</a><ul>
 </ul>
 </li>
 </ul>
