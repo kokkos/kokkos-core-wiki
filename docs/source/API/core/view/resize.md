@@ -45,9 +45,7 @@ void resize(const Impl::ViewCtorProp<ViewCtorArgs...>& arg_prop,
        const size_t n4 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
        const size_t n5 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
        const size_t n6 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
-       const size_t n7 = KOKKOS_IMPL_CTOR_DEFAULT_ARG) {
-  impl_resize(arg_prop, v, n0, n1, n2, n3, n4, n5, n6, n7);
-}
+       const size_t n7 = KOKKOS_IMPL_CTOR_DEFAULT_ARG);
 
 template <class T, class... P>
 void resize(Kokkos::View<T, P...>& v,
