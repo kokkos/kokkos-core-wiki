@@ -2,7 +2,7 @@ name: Deploy docs
 
 on:
   push:
-    branches: [ 33-add-edit-on-github-button ]
+    branches: [ main ]
 
 jobs:
   build-and-deploy-docs:
