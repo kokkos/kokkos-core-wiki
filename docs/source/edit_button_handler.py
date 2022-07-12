@@ -65,9 +65,11 @@ class HTMLButtonAdder:
 
     def __overwrite_html(self, file_names: tuple, wiki_prefix: str, btn_file_name: str) -> None:
         """Overwriting html file with button addition."""
+        # Setting relative path to the image
         generated_docs_dir = os.path.abspath(os.path.join(project_path, '../generated_docs'))
         up_dir = len(file_names[0].replace(generated_docs_dir, '').split(os.sep)) - 2
         up_dir_str = up_dir * '../'
+        # Reading file, replacing string and overwriting
         with open(file_names[0], 'rt') as html_file:
             html_file_str = html_file.read()
         replaced_str = file_names[1].replace(project_path, wiki_prefix)
