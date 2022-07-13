@@ -74,7 +74,7 @@ class HTMLButtonAdder:
             html_file_str = html_file.read()
         replaced_str = file_names[1].replace(project_path, wiki_prefix)
         str_to_put = f'<div>\n              <a href="{replaced_str}"><img src="{up_dir_str}_images/{btn_file_name}"' \
-                     f' width="161" height="30"></a>\n            </div>'
+                     f' width="150" height="30"></a>\n            </div>'
         html_str_replace = html_file_str.replace(self.string_to_replace, str_to_put)
         with open(file_names[0], 'wt') as new_html_file:
             new_html_file.write(html_str_replace)
@@ -103,10 +103,10 @@ if __name__ == "__main__":
     str_to_replace = '<div class="icons">\n              \n            </div>'
     print(f'=> Replacing string: {str_to_replace}')
     # Wiki prefix pointing directly to GitHub
-    wiki_prefix = 'https://github.com/kokkos/kokkos-core-wiki/edit/main/docs/source'
+    wiki_prefix = 'https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source'
     print(f'=> Using prefix for Kokkos Wiki: {wiki_prefix}')
     # Button file name in source dir
-    btn_file_name = 'edit_on_gh.png'
+    btn_file_name = 'edit_btn.png'
     print(f'=> Using: {btn_file_name} file for button')
     HTMLButtonAdder(document_files=document_files, html_files=html_files, excluded_files=excluded_files,
                     string_to_replace=str_to_replace).add_button(wiki_prefix=wiki_prefix, btn_file_name=btn_file_name)
