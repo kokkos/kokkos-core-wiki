@@ -256,7 +256,13 @@ The following options control ``find_package`` paths for CMake-based TPLs:
 
     * * ``HPX_DIR`` or ``HPX_ROOT``
       * Location of HPX prefix (ROOT) or CMake config file (DIR)
-      * PATH Default:
+      * PATH Default
+
+.. note::
+
+    When building tests, Kokkos will by default use ``find_package`` to search for an installed Google Test library. To force use of internal copy instead, use CMake's built-in `CMAKE_DISABLE_FIND_PACKAGE <https://cmake.org/cmake/help/latest/variable/CMAKE_DISABLE_FIND_PACKAGE_PackageName.html>`_::
+
+    -DCMAKE_DISABLE_FIND_PACKAGE_GTest=ON
 
 .. _keywords_arch:
 
