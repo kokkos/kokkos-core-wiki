@@ -25,10 +25,6 @@ jobs:
         working-directory: ${{ env.docs-directory }}
         run: |
           make html
-      - name: Add button for directly edit docs on GitHub
-        working-directory: ${{ env.docs-directory }}
-        run: |
-          make edit-button
       # .nojekyll file is needed for GitHub Pages to know it's getting a ready webpage
       # and there is no need to generate anything
       - name: Generate nojekyll file
