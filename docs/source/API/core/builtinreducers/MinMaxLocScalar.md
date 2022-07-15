@@ -18,7 +18,7 @@ I maxLoc = result.max_loc;
 ## Synopsis 
 
 ```c++
-template<class Scalar>
+template<class Scalar, class Index>
 struct MinMaxLocScalar{
   Scalar min_val;
   Scalar max_val;
