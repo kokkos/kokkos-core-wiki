@@ -2,7 +2,7 @@ name: Deploy docs
 
 on:
   push:
-    branches: [ main ]
+    branches: [ 33-add-edit-on-github-button ]
 
 jobs:
   build-and-deploy-docs:
@@ -28,7 +28,7 @@ jobs:
       - name: Add button for directly edit docs on GitHub
         working-directory: ${{ env.docs-directory }}
         run: |
-          python3 source/edit_button_handler.py
+          make edit-button
       # .nojekyll file is needed for GitHub Pages to know it's getting a ready webpage
       # and there is no need to generate anything
       - name: Generate nojekyll file
