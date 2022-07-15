@@ -1,13 +1,12 @@
 import os
-import shutil
 import sys
 
 try:
-    project_path = f"{os.sep}".join(os.path.abspath(__file__).split(os.sep)[:-1])
-    print(project_path)
+    project_path = f'{os.sep}'.join(os.path.abspath(__file__).split(os.sep)[:-1])
+    print(f'==> Starting in: {project_path}')
     sys.path.append(project_path)
 except Exception as e:
-    print(f"Can not add project path to system path! Exiting!\nERROR: {e}")
+    print(f'Can not add project path to system path! Exiting!\nERROR: {e}')
     raise SystemExit(1)
 
 
@@ -32,11 +31,11 @@ class FileFinder:
 
 class HTMLButtonAdder:
     """Adds button for direct edition docs pages on GitHub."""
-    def __init__(self, document_files: list, html_files: list, excluded_files: list, string_to_replace: str):
+    def __init__(self, document_files: list, html_files: list, excluded_files: list, html_tag: str):
         self.document_files = sorted(document_files)
         self.html_files = sorted(html_files)
         self.excluded_files = excluded_files
-        self.string_to_replace = string_to_replace
+        self.html_tag = html_tag
         self.__initial_checks()
 
     def __initial_checks(self):
@@ -49,21 +48,21 @@ class HTMLButtonAdder:
                                  f'Check excluded files.')
         print(f'=> Found {len(self.html_files)} files')
         # Making sure that string to replace could be found in each html_file
-        str_to_replace_list = []
+        html_tag_list = []
         missing_files = []
         for file in self.html_files:
             with open(file) as html_file:
                 html_str = html_file.read()
-                if html_str.find(str_to_replace) != -1:
-                    str_to_replace_list.append(file)
+                if html_str.find(self.html_tag) != -1:
+                    html_tag_list.append(file)
                 else:
                     missing_files.append(file)
-        if len(self.html_files) != len(str_to_replace_list):
+        if len(self.html_files) != len(html_tag_list):
             raise AssertionError(f'String to replace was not found in files: {missing_files}')
-        print(f'=> Found {len(str_to_replace_list)} files with matching string to replace')
+        print(f'=> Found {len(html_tag_list)} files with matching string to replace')
         print('--------------------------------------------------')
 
-    def __overwrite_html(self, file_names: tuple, wiki_prefix: str, btn_file_name: str) -> None:
+    def __overwrite_html(self, file_names: tuple, wiki_prefix: str) -> None:
         """Overwriting html file with button addition."""
         # Setting relative path to the image
         generated_docs_dir = os.path.abspath(os.path.join(project_path, '../generated_docs'))
@@ -72,19 +71,28 @@ class HTMLButtonAdder:
         # Reading file, replacing string and overwriting
         with open(file_names[0], 'rt') as html_file:
             html_file_str = html_file.read()
+        # Finding position to put edit icon
+        tag_pos = html_file_str.find(self.html_tag)
         replaced_str = file_names[1].replace(project_path, wiki_prefix)
-        str_to_put = f'<div>\n              <a href="{replaced_str}"><img src="{up_dir_str}_images/{btn_file_name}"' \
-                     f' width="150" height="30"></a>\n            </div>'
-        html_str_replace = html_file_str.replace(self.string_to_replace, str_to_put)
+        str_to_put = f'\n<div class="edit-this-page">\n  <a class="muted-link" href="{replaced_str}" title="Edit ' \
+                     f'this page">\n    <svg aria-hidden="true" viewBox="0 0 24 24" stroke-width="1.5" ' \
+                     f'stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">\n      ' \
+                     f'<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>\n      <path d="M4 20h4l10.5' \
+                     f' -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4"></path>\n      <line x1="13.5" y1="6.5" x2="17.5" ' \
+                     f'y2="10.5"></line>\n    </svg>\n    <span class="visually-hidden">Edit this page</span>\n  ' \
+                     f'</a>\n</div>\n'
+        html_str_beg = html_file_str[:tag_pos + len(html_tag)]
+        html_str_end = html_file_str[tag_pos + len(html_tag):]
+        html_str_replace = html_str_beg + str_to_put + html_str_end
         with open(file_names[0], 'wt') as new_html_file:
             new_html_file.write(html_str_replace)
         print(f'=> Processing: {file_names[0]} done')
 
-    def add_button(self, wiki_prefix: str, btn_file_name: str) -> None:
+    def add_button(self, wiki_prefix: str) -> None:
         """Loops over html files and overwrite them."""
         for num, file_names in enumerate(zip(self.html_files, self.document_files), 1):
             print(f'==> Processing pair {num}:\n=> {file_names[0]}\n=> {file_names[1]}')
-            self.__overwrite_html(file_names=file_names, wiki_prefix=wiki_prefix, btn_file_name=btn_file_name)
+            self.__overwrite_html(file_names=file_names, wiki_prefix=wiki_prefix)
 
 
 if __name__ == "__main__":
@@ -99,21 +107,12 @@ if __name__ == "__main__":
                       os.path.abspath(os.path.join(generated_docs_dir, 'search.html'))]
     # Final `html_files` list of files to add edit button to
     html_files = [html_file for html_file in html_files if html_file not in excluded_files]
-    # String to replace
-    str_to_replace = '<div class="icons">\n              \n            </div>'
-    print(f'=> Replacing string: {str_to_replace}')
+    # HTML tag after edit button is injected
+    html_tag = '<div class="content-icon-container">'
+    print(f'=> Adding button after: {html_tag}')
     # Wiki prefix pointing directly to GitHub
     wiki_prefix = 'https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source'
     print(f'=> Using prefix for Kokkos Wiki: {wiki_prefix}')
-    # Button file name in source dir
-    btn_file_name = 'edit_btn.png'
-    print(f'=> Using: {btn_file_name} file for button')
     HTMLButtonAdder(document_files=document_files, html_files=html_files, excluded_files=excluded_files,
-                    string_to_replace=str_to_replace).add_button(wiki_prefix=wiki_prefix, btn_file_name=btn_file_name)
-    print('--------------------------------------------------')
-    # Copying button file to `generated_docs`
-    shutil.copy(f'{os.path.join(project_path, btn_file_name)}',
-                os.path.abspath(os.path.join(project_path, f'../generated_docs/_images/{btn_file_name}')))
-    print(f"=> Copied: {btn_file_name} to "
-          f"{os.path.abspath(os.path.join(project_path, f'../generated_docs/_images/{btn_file_name}'))}")
+                    html_tag=html_tag).add_button(wiki_prefix=wiki_prefix)
     print('==================================================')
