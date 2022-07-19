@@ -5,8 +5,7 @@ Compiler Versions
 =================
 
 Generally Kokkos should work with all compiler versions newer than the minimum.
-However as in all sufficiently complex enough code, we have to work around compiler
-bugs with almost all compilers. So compiler versions we don't test may have issues
+However,in complex code, we have to work around compiler bugs. So compiler versions we don't test may have issues
 we are unaware of.
 
 .. list-table::
@@ -39,8 +38,8 @@ we are unaware of.
       * NA
     
     * * ROCM 
-      * 4.3
-      * 4.3.0
+      * 4.5
+      * 4.5.0
     
     * * MSVC 
       * 19.29
