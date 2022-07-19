@@ -417,11 +417,12 @@
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Minimum</span> <span class="n">Compiler</span> <span class="n">Versions</span>
 
     <span class="n">GCC</span><span class="p">:</span> <span class="mf">5.3.0</span>
-    <span class="n">Clang</span><span class="p">:</span> <span class="mf">4.0.0</span>
+    <span class="n">Clang</span><span class="p">:</span> <span class="mf">4.0.0</span>  <span class="p">(</span><span class="n">CPU</span><span class="p">)</span>
+    <span class="n">Clang</span><span class="p">:</span> <span class="mf">10.0.0</span> <span class="p">(</span><span class="k">as</span> <span class="n">CUDA</span> <span class="n">compiler</span><span class="p">)</span> 
     <span class="n">Intel</span><span class="p">:</span> <span class="mf">17.0.1</span>
     <span class="n">NVCC</span><span class="p">:</span> <span class="mf">9.2.88</span>
     <span class="n">NVC</span><span class="o">++</span><span class="p">:</span> <span class="mf">21.5</span>
-    <span class="n">ROCM</span><span class="p">:</span> <span class="mf">4.3</span>
+    <span class="n">ROCM</span><span class="p">:</span> <span class="mf">4.5</span>
     <span class="n">MSVC</span><span class="p">:</span> <span class="mf">19.29</span>
     <span class="n">IBM</span> <span class="n">XL</span><span class="p">:</span> <span class="mf">16.1.1</span>
     <span class="n">Fujitsu</span><span class="p">:</span> <span class="mf">4.5.0</span>
@@ -436,7 +437,7 @@
     <span class="n">MSVC</span><span class="p">:</span> <span class="mf">19.29</span>
     <span class="n">ARM</span><span class="o">/</span><span class="n">Clang</span><span class="p">:</span> <span class="mf">20.1</span>
     <span class="n">IBM</span> <span class="n">XL</span><span class="p">:</span> <span class="mf">16.1.1</span>
-    <span class="n">ROCM</span><span class="p">:</span> <span class="mf">4.3.0</span>
+    <span class="n">ROCM</span><span class="p">:</span> <span class="mf">4.5.0</span>
 
 <span class="n">Build</span> <span class="n">system</span><span class="p">:</span>
 
@@ -753,7 +754,7 @@ main: $(KOKKOS_LINK_DEPENDS) $(KOKKOS_CPP_DEPENDS) main.cpp
 </section>
 <section id="building-for-cuda">
 <h2>4.5 Building for CUDA<a class="headerlink" href="#building-for-cuda" title="Permalink to this heading">#</a></h2>
-<p>Any Kokkos application compiled for CUDA embeds CUDA code via template metaprogramming. Thus, the whole application must be built with a CUDA-capable compiler. (At the moment, the only such compilers are NVIDIA’s NVCC and Clang 4.0+) More precisely, every compilation unit containing a Kokkos kernel or a function called from a Kokkos kernel has to be compiled with a CUDA-capable compiler. This includes files containing <a class="reference internal" href="../API/core/view/view.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">Kokkos::View</span></code></span></a> allocations which call an initialization kernel.</p>
+<p>Any Kokkos application compiled for CUDA embeds CUDA code via template metaprogramming. Thus, the whole application must be built with a CUDA-capable compiler. (At the moment, the only such compilers are NVIDIA’s NVCC and Clang 10.0+) More precisely, every compilation unit containing a Kokkos kernel or a function called from a Kokkos kernel has to be compiled with a CUDA-capable compiler. This includes files containing <a class="reference internal" href="../API/core/view/view.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">Kokkos::View</span></code></span></a> allocations which call an initialization kernel.</p>
 <p>All current versions of the NVCC compiler have shortcomings when used as the main compiler for a project, in particular when part of a complex build system. For example, it does not understand most GCC command-line options, which must be prepended by the <code class="docutils literal notranslate"><span class="pre">-Xcompiler</span></code> flag when calling NVCC. Kokkos comes with a shell script, called <code class="docutils literal notranslate"><span class="pre">nvcc_wrapper</span></code>, that wraps NVCC to address these issues. We intend this as a drop-in replacement for a normal GCC-compatible compiler (e.g., GCC or Intel) in your build system. It analyzes the provided command-line options and prepends them correctly. It also adds the correct flags for compiling generic C++ files containing CUDA code (e.g., <code class="docutils literal notranslate"><span class="pre">*.cpp,</span> <span class="pre">*.cxx,</span></code> or <code class="docutils literal notranslate"><span class="pre">*.CC</span></code>). By default <code class="docutils literal notranslate"><span class="pre">nvcc_wrapper</span></code> calls <code class="docutils literal notranslate"><span class="pre">g++</span></code> as the host compiler. You may override this by providing NVCC’s <code class="docutils literal notranslate"><span class="pre">-ccbin</span></code> option as a compiler flag. The default can be set by editing the script itself or by setting the environment variable <code class="docutils literal notranslate"><span class="pre">NVCC_WRAPPER_DEFAULT_COMPILER</span></code>.</p>
 <p>Many people use a system like <a class="reference external" href="http://modules.sourceforge.net">Environment Modules</a> to manage their shell environment. When using a module system, it can be useful to provide different versions for different back-end compiler types (e.g., <code class="docutils literal notranslate"><span class="pre">icpc,</span> <span class="pre">pgc++,</span> <span class="pre">g++,</span></code> and <code class="docutils literal notranslate"><span class="pre">clang</span></code>). To use the <code class="docutils literal notranslate"><span class="pre">nvcc_wrapper</span></code> in conjunction with MPI wrappers, simply overwrite which C++ compiler is called by the MPI wrapper. For example, you can reset OpenMPI’s C++ compiler by setting the <code class="docutils literal notranslate"><span class="pre">OMPI_CXX</span></code> environment variable. Make sure that <code class="docutils literal notranslate"><span class="pre">nvcc_wrapper</span></code> calls the host compiler with which the MPI library was compiled.</p>
 </section>

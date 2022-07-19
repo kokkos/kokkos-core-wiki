@@ -12,14 +12,11 @@ The following list is taken from file kokkos/README in the Kokkos Github reposit
     * GCC 6.1.0
     * GCC 7.3.0
     * GCC 8.1.0
-    * Intel 15.0.2
-    * Intel 16.0.1
     * Intel 17.1.043
     * Intel 17.4.196
     * Intel 18.0.128
-    * Clang 3.6.1
-    * Clang 4.0.0
-    * Clang 4.0.0 for CUDA (CUDA Toolkit 8.0.44)
+    * Clang 4.0.0 for CPU
+    * Clang 10.0.0 for CUDA (CUDA Toolkit 11.0.1)
     * PGI 18.10
     * NVCC 7.0 for CUDA (with gcc 4.8.4)
     * NVCC 7.5 for CUDA (with gcc 4.8.4)
@@ -33,7 +30,6 @@ The following list is taken from file kokkos/README in the Kokkos Github reposit
 
 * Primary tested compilers on Intel KNL are:
     * GCC 6.2.0
-    * Intel 16.4.258 (with gcc 4.7.2)
     * Intel 17.2.174 (with gcc 4.9.3)
     * Intel 18.0.128 (with gcc 4.9.3)
 
