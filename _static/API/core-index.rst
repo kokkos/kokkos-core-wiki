@@ -25,7 +25,7 @@ API: Core
      - Atomics
    * - `Numerics <core/Numerics.html>`__
      - Common mathematical functions, mathematical constants, numeric traits.
-   * - `C-style memory management <core/CStyleMemManagement.html>`__
+   * - `C-style memory management <core/c_style_memory_management.html>`__
      - C-style memory management
    * - `Traits <core/Prod.html>`__
      - Traits
