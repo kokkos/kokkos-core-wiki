@@ -23,11 +23,11 @@ which is included from `<Kokkos_Core.hpp>`
 
 Provides most of the [standard C mathematical functions from `<cmath>`](https://en.cppreference.com/w/cpp/numeric/math), such as `fabs`, `sqrt`, and `sin`.
 
-Math functions are available in the `Kokkos::Experimental` namespace.
+Math functions are available in the `Kokkos::` namespace since version 3.7, in `Kokkos::Experimental` in previous versions.
 
 Below is the synopsis for `sqrt` as an example of unary math function.
 ```C++
-namespace Kokkos::Experimental {
+namespace Kokkos {  // (since 3.7)
 KOKKOS_FUNCTION float       sqrt ( float x );
 KOKKOS_FUNCTION float       sqrtf( float x );
 KOKKOS_FUNCTION double      sqrt ( double x );
@@ -46,10 +46,9 @@ reader to cppreference.com for the synopsis of each individual function.
 
 ---
 
-<strike>_`func`_</strike> denotes functions that are currently not provided by Kokkos
-
-_`func*`_\ denotes functions not available with the SYCL backend
-_`func**`_\ denotes functions available since 3.7
+<strike>_`func`_</strike> denotes functions that are currently not provided by Kokkos  
+_`func*`_ denotes functions not available with the SYCL backend  
+_`func**`_ denotes functions available since version 3.7
 
 **Basic operations**
 [`abs`](https://en.cppreference.com/w/cpp/numeric/math/fabs)
