@@ -64,15 +64,10 @@ class HTMLButtonAdder:
 
     def __overwrite_html(self, file_names: tuple, wiki_prefix: str) -> None:
         """Overwriting html file with button addition."""
-        # Setting relative path to the image
-        generated_docs_dir = os.path.abspath(os.path.join(project_path, '../generated_docs'))
-        up_dir = len(file_names[0].replace(generated_docs_dir, '').split(os.sep)) - 2
-        up_dir_str = up_dir * '../'
         # Reading file, replacing string and overwriting
         with open(file_names[0], 'rt') as html_file:
             html_file_str = html_file.read()
-        # Finding position to put edit icon
-        tag_pos = html_file_str.find(self.html_tag)
+        # Preparing icon string
         replaced_str = file_names[1].replace(project_path, wiki_prefix)
         str_to_put = f'\n<div class="edit-this-page">\n  <a class="muted-link" href="{replaced_str}" title="Edit ' \
                      f'this page">\n    <svg aria-hidden="true" viewBox="0 0 24 24" stroke-width="1.5" ' \
@@ -81,6 +76,11 @@ class HTMLButtonAdder:
                      f' -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4"></path>\n      <line x1="13.5" y1="6.5" x2="17.5" ' \
                      f'y2="10.5"></line>\n    </svg>\n    <span class="visually-hidden">Edit this page</span>\n  ' \
                      f'</a>\n</div>\n'
+        if html_file_str.find(str_to_put) != -1:
+            print(f'=> File: {file_names[0]} already has an edit button')
+            return
+        # Finding position to put edit icon
+        tag_pos = html_file_str.find(self.html_tag)
         html_str_beg = html_file_str[:tag_pos + len(html_tag)]
         html_str_end = html_file_str[tag_pos + len(html_tag):]
         html_str_replace = html_str_beg + str_to_put + html_str_end
