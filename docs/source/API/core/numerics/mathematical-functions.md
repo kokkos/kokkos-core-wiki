@@ -48,7 +48,7 @@ reader to cppreference.com for the synopsis of each individual function.
 
 <strike>_`func`_</strike> denotes functions that are currently not provided by Kokkos
 
-_`func`_\* denotes functions not available with the SYCL backend
+_`func*`_\ denotes functions not available with the SYCL backend
 
 **Basic operations**
 [`abs`](https://en.cppreference.com/w/cpp/numeric/math/fabs)
@@ -107,7 +107,7 @@ _`func`_\* denotes functions not available with the SYCL backend
 [<strike>`round`</strike>](https://en.cppreference.com/w/cpp/numeric/math/round)
 [<strike>`lround`</strike>](https://en.cppreference.com/w/cpp/numeric/math/round)
 [<strike>`llround`</strike>](https://en.cppreference.com/w/cpp/numeric/math/round)
-[`nearbyint`\*](https://en.cppreference.com/w/cpp/numeric/math/nearbyint)
+[`nearbyint*`](https://en.cppreference.com/w/cpp/numeric/math/nearbyint)
 [<strike>`rint`</strike>](https://en.cppreference.com/w/cpp/numeric/math/rint)
 [<strike>`lrint`</strike>](https://en.cppreference.com/w/cpp/numeric/math/rint)
 [<strike>`llrint`</strike>](https://en.cppreference.com/w/cpp/numeric/math/rint)
