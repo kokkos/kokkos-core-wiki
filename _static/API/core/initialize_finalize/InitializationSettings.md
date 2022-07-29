@@ -1,4 +1,4 @@
-# Kokkos::InitializationSettings
+# InitializationSettings
 
 Defined in header `<KokkosCore.cpp>`
 

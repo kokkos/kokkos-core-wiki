@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" /><link rel="next" title="Kokkos::finalize" href="finalize.html" /><link rel="prev" title="Initialize and Finalize" href="../Initialize-and-Finalize.html" />
+<link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" /><link rel="next" title="finalize" href="finalize.html" /><link rel="prev" title="Initialize and Finalize" href="../Initialize-and-Finalize.html" />
 
     <meta name="generator" content="sphinx-5.0.1, furo 2022.06.04.1"/>
-        <title>Kokkos::initialize - Kokkos documentation</title>
+        <title>initialize - Kokkos documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?digest=40978830699223671f4072448e654b5958f38b89" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
@@ -183,10 +183,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../keywords.html">CMake Keywords</a></li>
 <li class="toctree-l1 current has-children"><a class="reference internal" href="../../core-index.html">API: Core</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
 <li class="toctree-l2 current has-children"><a class="reference internal" href="../Initialize-and-Finalize.html">Initialize and Finalize</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
-<li class="toctree-l3 current current-page"><a class="current reference internal" href="#">Kokkos::initialize</a></li>
-<li class="toctree-l3"><a class="reference internal" href="finalize.html">Kokkos::finalize</a></li>
-<li class="toctree-l3"><a class="reference internal" href="ScopeGuard.html">Kokkos::ScopeGuard</a></li>
-<li class="toctree-l3"><a class="reference internal" href="InitializationSettings.html">Kokkos::InitializationSettings</a></li>
+<li class="toctree-l3 current current-page"><a class="current reference internal" href="#">initialize</a></li>
+<li class="toctree-l3"><a class="reference internal" href="finalize.html">finalize</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ScopeGuard.html">ScopeGuard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="InitializationSettings.html">InitializationSettings</a></li>
 </ul>
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../View.html">View and related</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -402,58 +402,52 @@
           </label>
         </div>
         <article role="main">
-          <section id="kokkos-initialize">
-<h1>Kokkos::initialize<a class="headerlink" href="#kokkos-initialize" title="Permalink to this heading">#</a></h1>
-<p>Header File: <code class="docutils literal notranslate"><span class="pre">Kokkos_Core.hpp</span></code></p>
+          <section id="initialize">
+<h1>initialize<a class="headerlink" href="#initialize" title="Permalink to this heading">#</a></h1>
+<p>Defined in header <code class="docutils literal notranslate"><span class="pre">&lt;Kokkos_Core.hpp&gt;</span></code></p>
 <p>Usage:</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="w">   </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">initialize</span><span class="p">(</span><span class="n">narg</span><span class="p">,</span><span class="w"> </span><span class="n">arg</span><span class="p">);</span><span class="w"></span>
-<span class="w">   </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">initialize</span><span class="p">(</span><span class="n">args</span><span class="p">);</span><span class="w"></span>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">Kokkos</span><span class="o">::</span><span class="n">initialize</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="n">argv</span><span class="p">);</span><span class="w"></span>
+<span class="n">Kokkos</span><span class="o">::</span><span class="n">initialize</span><span class="p">(</span><span class="n">Kokkos</span><span class="o">::</span><span class="n">InitializationSettings</span><span class="p">()</span><span class="w">  </span><span class="c1">// (since 3.7)</span>
+<span class="w">                       </span><span class="p">.</span><span class="n">set_disable_warnings</span><span class="p">(</span><span class="nb">true</span><span class="p">)</span><span class="w"></span>
+<span class="w">                       </span><span class="p">.</span><span class="n">set_num_threads</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span><span class="w"></span>
+<span class="w">                       </span><span class="p">.</span><span class="n">set_map_device_id_by</span><span class="p">(</span><span class="s">&quot;random&quot;</span><span class="p">));</span><span class="w"></span>
 </pre></div>
 </div>
-<p>Initialize Kokkos and all enabled Kokkos backends.
-This function should be called before calling any other Kokkos API functions,
-including Kokkos object constructors.  The function has two overloads.  One takes the same parameters as main() which correspond to the command line parameters for the executable.  The other overload takes a <code class="docutils literal notranslate"><span class="pre">Kokkos::InitArguments</span></code> structure which allows for programmatic control of arguments.</p>
+<p>Initializes the Kokkos execution environment.
+This function must be called before any other Kokkos API functions or constructors.
+There are a small number of exceptions, such as :func:<code class="docutils literal notranslate"><span class="pre">Kokkos::is_initialized</span></code> and
+:func:<code class="docutils literal notranslate"><span class="pre">Kokkos::is_finalized</span></code>.
+Kokkos can be initialized at most once; subsequent calls are erroneous.</p>
+<p>The function has two overloads.
+The first one takes the same two parameters as <code class="docutils literal notranslate"><span class="pre">main()</span></code> corresponding to
+the command line arguments passed to the program from the environment in which
+the program is run.  Kokkos parses the arguments for the flags that it
+recognizes.  Whenever a Kokkos flag is seen, it is removed from <code class="docutils literal notranslate"><span class="pre">argv</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">argc</span></code> is decremented.
+The second one takes a <a class="reference internal" href="InitializationSettings.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">Kokkos::InitializationSettings</span></code></span></a> class object
+which allows for programmatic control of arguments.
+<a class="reference internal" href="InitializationSettings.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">Kokkos::InitializationSettings</span></code></span></a> is implicitly constructible from the <code class="docutils literal notranslate"><span class="pre">Kokkos::InitArguments</span></code><sup>deprecated in version 3.7</sup>.</p>
 <section id="interface">
 <h2>Interface<a class="headerlink" href="#interface" title="Permalink to this heading">#</a></h2>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">initialize</span><span class="p">(</span><span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">narg</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">arg</span><span class="p">[]);</span><span class="w"></span>
-</pre></div>
-</div>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">initialize</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">InitArguments</span><span class="o">&amp;</span><span class="w"> </span><span class="n">args</span><span class="p">);</span><span class="w"></span>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">Kokkos</span><span class="o">::</span><span class="n">initialize</span><span class="p">(</span><span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">argv</span><span class="p">[]);</span><span class="w">                 </span><span class="c1">//             (1)</span>
+<span class="n">Kokkos</span><span class="o">::</span><span class="n">initialize</span><span class="p">(</span><span class="n">InitArguments</span><span class="w"> </span><span class="k">const</span><span class="o">&amp;</span><span class="w"> </span><span class="n">arguments</span><span class="p">);</span><span class="w">          </span><span class="c1">// (until 3.7) (2)</span>
+<span class="n">Kokkos</span><span class="o">::</span><span class="n">initialize</span><span class="p">(</span><span class="n">InitializationSettings</span><span class="w"> </span><span class="k">const</span><span class="o">&amp;</span><span class="w"> </span><span class="n">settings</span><span class="p">);</span><span class="w">  </span><span class="c1">// (since 3.7) (3)</span>
 </pre></div>
 </div>
 <section id="parameters">
-<h3>Parameters:<a class="headerlink" href="#parameters" title="Permalink to this heading">#</a></h3>
+<h3>Parameters<a class="headerlink" href="#parameters" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
-<li><p>narg:  number of command line arguments</p></li>
-<li><p>arg: array of command line arguments, valid arguments are listed below.</p>
-<ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">--kokkos-help</span></code>,<code class="docutils literal notranslate"><span class="pre">--help</span></code>: print the valid arguments</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--kokkos-threads=INT</span></code>,<code class="docutils literal notranslate"><span class="pre">--threads=INT</span></code>: specify total number of threads or number of threads per NUMA region if used in conjunction with the <code class="docutils literal notranslate"><span class="pre">--numa</span></code> option.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--kokkos-numa=INT</span></code>,<code class="docutils literal notranslate"><span class="pre">--numa=INT</span></code>: specify number of NUMA regions used by each process.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--device</span></code>,<code class="docutils literal notranslate"><span class="pre">--device-id</span></code>: specify device id to be used by Kokkos (CUDA,HIP,SYCL)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--num-devices=INT[,INT]</span></code>: used when running MPI jobs. Specify number of devices per node to be used. see <a class="reference internal" href="../../../ProgrammingGuide/Initialization.html"><span class="doc std std-doc">Initialization</span></a> for more detail.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">argc</span></code>: Non-negative value, representing the number of command line
+arguments passed to the program.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">argv</span></code>: Pointer to the first element of an array of <code class="docutils literal notranslate"><span class="pre">argc</span> <span class="pre">+</span> <span class="pre">1</span></code> pointers,
+of which the last one is null and the previous, if any, point to
+null-terminated multibyte strings that represent the arguments passed to the
+program.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">arguments</span></code>: (deprecated since version 3.7) C-style <code class="docutils literal notranslate"><span class="pre">struct</span></code> object is
+converted to <code class="docutils literal notranslate"><span class="pre">Kokkos::InitializationSettings</span></code> for backward compatibility.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">settings</span></code>: <code class="docutils literal notranslate"><span class="pre">class</span></code> object that contains settings to control the
+initialization of Kokkos.</p></li>
 </ul>
-</li>
-<li><p>args: structure of valid Kokkos arguments</p></li>
-</ul>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span><span class="w"> </span><span class="nc">InitArguments</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">num_threads</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">num_numa</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">device_id</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">ndevices</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">skip_device</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="n">disable_warnings</span><span class="p">;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
-</pre></div>
-</div>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>* num_threads: same as `--threads` above
-* num_numa: same as `--numa` above 
-* device_id: same as `--device-id` above
-* ndevices: first argument in `--num-devices` above
-* skip_device: second argument in `--num-devices` above
-* disable_warnings: turn off all Kokkos warnings 
-</pre></div>
-</div>
 </section>
 <section id="requirements">
 <h3>Requirements<a class="headerlink" href="#requirements" title="Permalink to this heading">#</a></h3>
@@ -472,20 +466,25 @@ including Kokkos object constructors.  The function has two overloads.  One take
 </section>
 <section id="example">
 <h3>Example<a class="headerlink" href="#example" title="Permalink to this heading">#</a></h3>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">**</span><span class="w"> </span><span class="n">argv</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">initialize</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="n">argv</span><span class="p">);</span><span class="w"></span>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Kokkos_Core.hpp&gt;</span><span class="cp"></span>
 
-<span class="w">  </span><span class="c1">// add scoping to ensure my_view destructor is called before Kokkos::finalize  </span>
-<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">argv</span><span class="p">[])</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">initialize</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="n">argv</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w">  </span><span class="c1">// scope to ensure that my_view destructor is called before Kokkos::finalize</span>
 <span class="w">     </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">View</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">*&gt;</span><span class="w"> </span><span class="n">my_view</span><span class="p">(</span><span class="s">&quot;my_view&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-<span class="w"> </span>
+<span class="w">  </span><span class="p">}</span><span class="w">  </span><span class="c1">// scope of my_view ends here</span>
 <span class="w">  </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">finalize</span><span class="p">();</span><span class="w"></span>
-<span class="w">  </span>
 <span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
 </section>
+</section>
+<section id="see-also">
+<h2>See also<a class="headerlink" href="#see-also" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="InitializationSettings.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">Kokkos::InitializationSettings</span></code></span></a></p></li>
+<li><p><a class="reference internal" href="ScopeGuard.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">Kokkos::ScopeGuard</span></code></span></a></p></li>
+</ul>
 </section>
 </section>
 
@@ -499,7 +498,7 @@ including Kokkos object constructors.  The function has two overloads.  One take
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Kokkos::finalize</div>
+                <div class="title">finalize</div>
               </div>
               <svg><use href="#svg-arrow-right"></use></svg>
             </a>
@@ -546,14 +545,15 @@ including Kokkos object constructors.  The function has two overloads.  One take
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">Kokkos::initialize</a><ul>
+<li><a class="reference internal" href="#">initialize</a><ul>
 <li><a class="reference internal" href="#interface">Interface</a><ul>
-<li><a class="reference internal" href="#parameters">Parameters:</a></li>
+<li><a class="reference internal" href="#parameters">Parameters</a></li>
 <li><a class="reference internal" href="#requirements">Requirements</a></li>
 <li><a class="reference internal" href="#semantics">Semantics</a></li>
 <li><a class="reference internal" href="#example">Example</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#see-also">See also</a></li>
 </ul>
 </li>
 </ul>
