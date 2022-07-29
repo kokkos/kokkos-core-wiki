@@ -423,9 +423,9 @@ and device and that follows practice from the C++ numerics library.</p>
 header <a class="reference external" href="https://github.com/kokkos/kokkos/blob/develop/core/src/Kokkos_MathematicalFunctions.hpp"><code class="docutils literal notranslate"><span class="pre">&lt;Kokkos_MathematicalFunctions.hpp&gt;</span></code></a>
 which is included from <code class="docutils literal notranslate"><span class="pre">&lt;Kokkos_Core.hpp&gt;</span></code></p>
 <p>Provides most of the <a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math">standard C mathematical functions from <code class="docutils literal notranslate"><span class="pre">&lt;cmath&gt;</span></code></a>, such as <code class="docutils literal notranslate"><span class="pre">fabs</span></code>, <code class="docutils literal notranslate"><span class="pre">sqrt</span></code>, and <code class="docutils literal notranslate"><span class="pre">sin</span></code>.</p>
-<p>Math functions are available in the <code class="docutils literal notranslate"><span class="pre">Kokkos::Experimental</span></code> namespace.</p>
+<p>Math functions are available in the <code class="docutils literal notranslate"><span class="pre">Kokkos::</span></code> namespace since version 3.7, in <code class="docutils literal notranslate"><span class="pre">Kokkos::Experimental</span></code> in previous versions.</p>
 <p>Below is the synopsis for <code class="docutils literal notranslate"><span class="pre">sqrt</span></code> as an example of unary math function.</p>
-<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="k">namespace</span><span class="w"> </span><span class="nn">Kokkos</span><span class="o">::</span><span class="nn">Experimental</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="k">namespace</span><span class="w"> </span><span class="nn">Kokkos</span><span class="w"> </span><span class="p">{</span><span class="w">  </span><span class="c1">// (since 3.7)</span>
 <span class="n">KOKKOS_FUNCTION</span><span class="w"> </span><span class="kt">float</span><span class="w">       </span><span class="n">sqrt</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
 <span class="n">KOKKOS_FUNCTION</span><span class="w"> </span><span class="kt">float</span><span class="w">       </span><span class="n">sqrtf</span><span class="p">(</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
 <span class="n">KOKKOS_FUNCTION</span><span class="w"> </span><span class="kt">double</span><span class="w">      </span><span class="n">sqrt</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
@@ -442,8 +442,9 @@ not available on the device.</p>
 <p>See below the list of common mathematical functions supported.  We refer the
 reader to cppreference.com for the synopsis of each individual function.</p>
 <hr class="docutils" />
-<p><strike><em><code class="docutils literal notranslate"><span class="pre">func</span></code></em></strike> denotes functions that are currently not provided by Kokkos</p>
-<p><em><code class="docutils literal notranslate"><span class="pre">func</span></code></em>* denotes functions not available with the SYCL backend</p>
+<p><strike><em><code class="docutils literal notranslate"><span class="pre">func</span></code></em></strike> denotes functions that are currently not provided by Kokkos<br />
+<em><code class="docutils literal notranslate"><span class="pre">func*</span></code></em> denotes functions not available with the SYCL backend<br />
+<em><code class="docutils literal notranslate"><span class="pre">func**</span></code></em> denotes functions available since version 3.7</p>
 <p><strong>Basic operations</strong>
 <a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/fabs"><code class="docutils literal notranslate"><span class="pre">abs</span></code></a>
 <a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/fabs"><code class="docutils literal notranslate"><span class="pre">fabs</span></code></a>
@@ -492,10 +493,10 @@ reader to cppreference.com for the synopsis of each individual function.</p>
 <a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/ceil"><code class="docutils literal notranslate"><span class="pre">ceil</span></code></a>
 <a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/floor"><code class="docutils literal notranslate"><span class="pre">floor</span></code></a>
 <a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/trunc"><code class="docutils literal notranslate"><span class="pre">trunc</span></code></a>
-<a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/round"><strike><code class="docutils literal notranslate"><span class="pre">round</span></code></strike></a>
+<a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/round"><code class="docutils literal notranslate"><span class="pre">round**</span></code></a>
 <a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/round"><strike><code class="docutils literal notranslate"><span class="pre">lround</span></code></strike></a>
 <a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/round"><strike><code class="docutils literal notranslate"><span class="pre">llround</span></code></strike></a>
-<a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/nearbyint"><code class="docutils literal notranslate"><span class="pre">nearbyint</span></code>*</a>
+<a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/nearbyint"><code class="docutils literal notranslate"><span class="pre">nearbyint*</span></code></a>
 <a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/rint"><strike><code class="docutils literal notranslate"><span class="pre">rint</span></code></strike></a>
 <a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/rint"><strike><code class="docutils literal notranslate"><span class="pre">lrint</span></code></strike></a>
 <a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/rint"><strike><code class="docutils literal notranslate"><span class="pre">llrint</span></code></strike></a></p>
@@ -506,16 +507,17 @@ reader to cppreference.com for the synopsis of each individual function.</p>
 <a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/scalbn"><strike><code class="docutils literal notranslate"><span class="pre">scalbn</span></code></strike></a>
 <a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/scalbln"><strike><code class="docutils literal notranslate"><span class="pre">scalbln</span></code></strike></a>
 <a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/ilog"><strike><code class="docutils literal notranslate"><span class="pre">ilog</span></code></strike></a>
-<a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/logb"><strike><code class="docutils literal notranslate"><span class="pre">logb</span></code></strike></a>
-<a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/nextafter"><strike><code class="docutils literal notranslate"><span class="pre">nextafter</span></code></strike></a>
+<a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/logb"><code class="docutils literal notranslate"><span class="pre">logb**</span></code></a>
+<a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/nextafter"><code class="docutils literal notranslate"><span class="pre">nextafter**</span></code></a>
 <a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/nexttoward"><strike><code class="docutils literal notranslate"><span class="pre">nexttoward</span></code></strike></a>
-<a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/copysign"><strike><code class="docutils literal notranslate"><span class="pre">copysign</span></code></strike></a></p>
+<a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/copysign"><code class="docutils literal notranslate"><span class="pre">copysign**</span></code></a></p>
 <p><strong>Classification and comparison</strong>
 <a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/fpclassify"><strike><code class="docutils literal notranslate"><span class="pre">fpclassify</span></code></strike></a>
 <a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/isfinite"><code class="docutils literal notranslate"><span class="pre">isfinite</span></code></a>
 <a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/isinf"><code class="docutils literal notranslate"><span class="pre">isinf</span></code></a>
 <a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/isnan"><code class="docutils literal notranslate"><span class="pre">isnan</span></code></a>
 <a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/isnormal"><strike><code class="docutils literal notranslate"><span class="pre">isnormal</span></code></strike></a>
+<a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/signbit"><code class="docutils literal notranslate"><span class="pre">signbit**</span></code></a>
 <a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/isgreater"><strike><code class="docutils literal notranslate"><span class="pre">isgreater</span></code></strike></a>
 <a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/isgreaterequal"><strike><code class="docutils literal notranslate"><span class="pre">isgreaterequal</span></code></strike></a>
 <a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/isless"><strike><code class="docutils literal notranslate"><span class="pre">isless</span></code></strike></a>
