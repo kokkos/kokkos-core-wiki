@@ -1,4 +1,4 @@
-# Kokkos::ScopeGuard
+# ScopeGuard
 
 Header File: `Kokkos_Core.hpp`
 

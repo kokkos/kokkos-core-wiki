@@ -1,4 +1,4 @@
-# Kokkos::initialize
+# initialize
 
 Defined in header `<Kokkos_Core.hpp>`
 
