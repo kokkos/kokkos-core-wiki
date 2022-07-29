@@ -15,6 +15,21 @@
 
 `Kokkos::CudaUVMSpace` is a [`MemorySpace` type](MemorySpaceConcept) representing unified virtual memory on a Cuda-capable GPU system.  Unified virtual memory is also accessible from most host execution spaces.  Except in rare instances, it should not be used directly, but instead should be used generically as an memory space.  For details, see [the documentation on the `MemorySpace` concept](MemorySpaceConcept).
 
+(HIPSpace)=
+## `Kokkos::HIPSpace`
+
+`Kokkos::HIPSpace` is a [`MemorySpace` type](MemorySpaceConcept) representing device memory on a GPU in the `HIP` GPU programming environment.  Except in rare instances, it should not be used directly, but instead should be used generically as an memory space.  For details, see [the documentation on the `MemorySpace` concept](MemorySpaceConcept).
+
+(HIPHostPinnedSpace)=
+## `Kokkos::HIPHostPinnedSpace`
+
+`Kokkos::HIPHostPinnedSpace` is a [`MemorySpace` type](MemorySpaceConcept) representing host-side pinned memory accessible from a GPU in the `HIP` GPU programming environment.  This memory is accessible by both host and device execution spaces.  Except in rare instances, it should not be used directly, but instead should be used generically as an memory space.  For details, see [the documentation on the `MemorySpace` concept](MemorySpaceConcept).
+
+(HIPManagedSpace)=
+## `Kokkos::HIPManagedSpace`
+
+`Kokkos::HIPManagedSpace` is a [`MemorySpace` type](MemorySpaceConcept) representing page-migratint memory on a GPU in the `HIP` GPU programming environment.  Page-migrating memory is accessible from most host execution spaces. Even though available with all combinations of operting system and `HIP`-supported hardware, it requires both operating system and hardware to support and enable the `xnack` feature. Except in rare instances, it should not be used directly, but instead should be used generically as an memory space.  For details, see [the documentation on the `MemorySpace` concept](MemorySpaceConcept).
+
 (HostSpace)=
 ## `Kokkos::HostSpace`
 
