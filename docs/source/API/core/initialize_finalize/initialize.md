@@ -1,57 +1,54 @@
 # Kokkos::initialize
 
-Header File: `Kokkos_Core.hpp`
+Defined in header `<Kokkos_Core.hpp>`
 
 Usage: 
-```c++
-   Kokkos::initialize(narg, arg);
-   Kokkos::initialize(args);
+
+```C++
+Kokkos::initialize(argc, argv);
+Kokkos::initialize(Kokkos::InitializationSettings()  // (since 3.7)
+                       .set_disable_warnings(true)
+                       .set_num_threads(8)
+                       .set_map_device_id_by("random"));
 ```
 
-Initialize Kokkos and all enabled Kokkos backends.
-This function should be called before calling any other Kokkos API functions,
-including Kokkos object constructors.  The function has two overloads.  One takes the same parameters as main() which correspond to the command line parameters for the executable.  The other overload takes a `Kokkos::InitArguments` structure which allows for programmatic control of arguments.
+Initializes the Kokkos execution environment.
+This function must be called before any other Kokkos API functions or constructors.
+There are a small number of exceptions, such as :func:`Kokkos::is_initialized` and
+:func:`Kokkos::is_finalized`.
+Kokkos can be initialized at most once; subsequent calls are erroneous.
+
+The function has two overloads.
+The first one takes the same two parameters as `main()` corresponding to
+the command line arguments passed to the program from the environment in which
+the program is run.  Kokkos parses the arguments for the flags that it
+recognizes.  Whenever a Kokkos flag is seen, it is removed from `argv`, and
+`argc` is decremented.
+The second one takes a [`Kokkos::InitializationSettings`](InitializationSettings) class object
+which allows for programmatic control of arguments.
+[`Kokkos::InitializationSettings`](InitializationSettings) is implicitly constructible from the `Kokkos::InitArguments`<sup>deprecated in version 3.7</sup>.
 
 ## Interface
 
-```c++
-  Kokkos::initialize(int& narg, char* arg[]);
+```C++
+Kokkos::initialize(int& argc, char* argv[]);                 //             (1)
+Kokkos::initialize(InitArguments const& arguments);          // (until 3.7) (2)
+Kokkos::initialize(InitializationSettings const& settings);  // (since 3.7) (3)
 ```
 
-```c++
-  Kokkos::initialize(const InitArguments& args);
-```
+### Parameters
 
-### Parameters:
+* `argc`: Non-negative value, representing the number of command line
+  arguments passed to the program.
+* `argv`: Pointer to the first element of an array of `argc + 1` pointers,
+  of which the last one is null and the previous, if any, point to
+  null-terminated multibyte strings that represent the arguments passed to the
+  program.
+* `arguments`: (deprecated since version 3.7) C-style `struct` object is
+  converted to `Kokkos::InitializationSettings` for backward compatibility.
+* `settings`: `class` object that contains settings to control the
+  initialization of Kokkos.
 
-  * narg:  number of command line arguments
-  * arg: array of command line arguments, valid arguments are listed below.
-
-     * `--kokkos-help`,`--help`: print the valid arguments
-     * `--kokkos-threads=INT`,`--threads=INT`: specify total number of threads or number of threads per NUMA region if used in conjunction with the `--numa` option.
-     * `--kokkos-numa=INT`,`--numa=INT`: specify number of NUMA regions used by each process. 
-     * `--device`,`--device-id`: specify device id to be used by Kokkos (CUDA,HIP,SYCL) 
-     * `--num-devices=INT[,INT]`: used when running MPI jobs. Specify number of devices per node to be used. see [Initialization](../../../ProgrammingGuide/Initialization) for more detail.
-
-  * args: structure of valid Kokkos arguments
-
-```c++
-struct InitArguments {
-  int num_threads;
-  int num_numa;
-  int device_id;
-  int ndevices;
-  int skip_device;
-  bool disable_warnings;
-}
-```
-
-    * num_threads: same as `--threads` above
-    * num_numa: same as `--numa` above 
-    * device_id: same as `--device-id` above
-    * ndevices: first argument in `--num-devices` above
-    * skip_device: second argument in `--num-devices` above
-    * disable_warnings: turn off all Kokkos warnings 
 
 ### Requirements
 
@@ -66,16 +63,18 @@ struct InitArguments {
 
 ### Example
 
-```c++
-int main(int argc, char** argv) {
-  Kokkos::initialize(argc, argv);
+```C++
+#include <Kokkos_Core.hpp>
 
-  // add scoping to ensure my_view destructor is called before Kokkos::finalize  
-  {
+int main(int argc, char* argv[]) {
+  Kokkos::initialize(argc, argv);
+  {  // scope to ensure that my_view destructor is called before Kokkos::finalize
      Kokkos::View<double*> my_view("my_view", 10);
-  }
- 
+  }  // scope of my_view ends here
   Kokkos::finalize();
-  
 }
 ```
+
+## See also
+* [`Kokkos::InitializationSettings`](InitializationSettings)
+* [`Kokkos::ScopeGuard`](ScopeGuard)
