@@ -8,7 +8,7 @@
 (HIP)=
 ## `Kokkos::HIP`
 
-`Kokkos::HIP` is an [`ExecutionSpace` type](ExecutionSpaceConcept) representing execution on a device supported by HIP.  Except in rare instances, it should not be used directly, but instead should be used generically as an execution space.  For details, see [the documentation on the `ExecutionSpace` concept](ExecutionSpaceConcept).
+`Kokkos::HIP` <sup>promoted from [Experimental](ExperimentalNamespace) since 4.0</sup> is an [`ExecutionSpace` type](ExecutionSpaceConcept) representing execution on a device supported by HIP.  Except in rare instances, it should not be used directly, but instead should be used generically as an execution space.  For details, see [the documentation on the `ExecutionSpace` concept](ExecutionSpaceConcept).
 
 (HPX)=
 ## `Kokkos::HPX`
