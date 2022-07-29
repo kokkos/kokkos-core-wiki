@@ -8,7 +8,7 @@
 (CudaHostPinnedSpace)=
 ## `Kokkos::CudaHostPinnedSpace`
 
-`Kokkos::CudaHostPinnedSpace` is a [`MemorySpace` type](MemorySpaceConcept) representing host-side pinned memory on a accessible from a Cuda-capable GPU.  This memory is typically accessible by both host and device execution spaces.  Except in rare instances, it should not be used directly, but instead should be used generically as an memory space.  For details, see [the documentation on the `MemorySpace` concept](MemorySpaceConcept).
+`Kokkos::CudaHostPinnedSpace` is a [`MemorySpace` type](MemorySpaceConcept) representing host-side pinned memory accessible from a Cuda-capable GPU.  This memory is typically accessible by both host and device execution spaces.  Except in rare instances, it should not be used directly, but instead should be used generically as an memory space.  For details, see [the documentation on the `MemorySpace` concept](MemorySpaceConcept).
 
 (CudaUVMSpace)=
 ## `Kokkos::CudaUVMSpace`
