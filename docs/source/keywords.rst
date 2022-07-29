@@ -272,6 +272,10 @@ Architecture Keywords
       - Description/info
       - Default
 
+    * * ``Kokkos_ARCH_NATIVE``
+      * Let compiler detect the architecture of the machine compiling on
+      * ``OFF``
+
     * * ``Kokkos_ARCH_A64FX``
       * Optimize for ARMv8.2 with SVE Support
       * ``OFF``
