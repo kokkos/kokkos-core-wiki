@@ -1,4 +1,4 @@
-# Kokkos::finalize
+# finalize
 
 Header File: `Kokkos_Core.hpp`
 
