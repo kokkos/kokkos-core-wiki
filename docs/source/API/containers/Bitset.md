@@ -201,9 +201,3 @@ template <typename DstDevice, typename SrcDevice>
 void deep_copy(Bitset<DstDevice>& dst, ConstBitset<SrcDevice> const& src)
 ```
 Copy a ```ConstBitset``` from ```src``` on ```SrcDevice``` to a ```Bitset``` ```dst``` on ```DstDevice```.
-
-```c++
-template <typename DstDevice, typename SrcDevice>
-void deep_copy(ConstBitset<DstDevice>& dst, ConstBitset<SrcDevice> const& src)
-```
-Copy a ```ConstBitset``` from ```src``` on ```SrcDevice``` to ```dst``` on ```DstDevice```.
