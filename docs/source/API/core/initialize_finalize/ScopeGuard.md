@@ -1,6 +1,6 @@
 # ScopeGuard
 
-Header File: `Kokkos_Core.hpp`
+Defined in header `<Kokkos_Core.hpp>`
 
 Usage: 
 ```c++
@@ -17,26 +17,7 @@ It calls [`Kokkos::intialize`](initialize) with the provided arguments in the
 constructor and [`Kokkos::finalize`](finalize) in the destructor.
 
 
-**WARNING: change of behavior in version 3.7**  
-Since Kokkos version 3.7, `ScopeGuard` unconditionally forwards the provided
-arguments to `Kokkos::initialize`, which means they have the same precondition.
-Until version 3.7, `ScopeGuard` was calling `Kokkos::initialize` in its
-constructor only if `Kokkos::is_initialized()` was `false`, and it was calling
-`Kokkos::finalize` in its destructor only if it called `Kokkos::initialize` in
-its constructor.
-
-We dropped support for the old behavior.  If you think you really need it, you
-may do:
-```C++
-auto guard = std::unique_ptr<Kokkos::ScopeGuard>(
-    Kokkos::is_initialized() ? new Kokkos::ScopeGuard() : nullptr);
-```
-or
-```C++
-auto guard = std::optional<Kokkos::ScopeGuard>(
-    Kokkos::is_initialized() ? Kokkos::ScopeGuard() : std::nullopt);
-```
-with C++17.  This will work regardless of the Kokkos version.
+**WARNING: change of behavior in version 3.7**  (see [note](#notes) below)
 
 ## Interface
 
@@ -63,7 +44,7 @@ public:
   }
 ```
 
-### Parameters:
+### Parameters
 
 * `argc`: number of command line arguments
 * `argv`: array of character pointers to null-terminated strings storing the command line arguments
@@ -71,6 +52,28 @@ public:
 * `args`: arguments to pass to [`Kokkos::initialize`](initialize)
 
 Note that all of the parameters above are passed to the `Kokkos::initialize` called internally.  See [Kokkos::initialize](initialize) for more details.
+
+
+### Notes
+Since Kokkos version 3.7, `ScopeGuard` unconditionally forwards the provided
+arguments to [`Kokkos::initialize`](initialize), which means they have the same
+preconditions.  Until version 3.7, `ScopeGuard` was calling
+`Kokkos::initialize` in its constructor only if `Kokkos::is_initialized()` was
+`false`, and it was calling `Kokkos::finalize` in its destructor only if it
+called `Kokkos::initialize` in its constructor.
+
+We dropped support for the old behavior.  If you think you really need it, you
+may do:
+```C++
+auto guard = std::unique_ptr<Kokkos::ScopeGuard>(
+    Kokkos::is_initialized() ? new Kokkos::ScopeGuard() : nullptr);
+```
+or
+```C++
+auto guard = Kokkos::is_initialized() ? std::make_optional<Kokkos::ScopeGuard>()
+                                      : std::nullopt;
+```
+with C++17.  This will work regardless of the Kokkos version.
 
 ### Example
 
