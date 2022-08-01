@@ -114,5 +114,5 @@ class Kokkos::RangePolicy {
 ```c++
  // These two calls are identical
  parallel_for("Loop", N, functor);
- parallel_for("Loop", RangePolicy<>(N), functor);
+ parallel_for("Loop", RangePolicy<>(0, N), functor);
 ```
