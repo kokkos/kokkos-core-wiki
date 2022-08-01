@@ -9,7 +9,7 @@ namespace Kokkos{
 }
 ```
 
-Type used as tag to specify the selection of all elements in a dimension.
+`Kokkos::ALL` is a constant of unspecified type that is used to select all elements in a dimension.
 
 
 ## Examples
