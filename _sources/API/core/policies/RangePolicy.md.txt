@@ -101,10 +101,10 @@ class Kokkos::RangePolicy {
 ## Examples
 
 ```c++
- RangePolicy<> policy_1(N);
+ RangePolicy<> policy_1(0, N);
  RangePolicy<Cuda> policy_2(5,N-5);
  RangePolicy<Schedule<Dynamic>, OpenMP> policy_3(n,m);
- RangePolicy<IndexType<int>, Schedule<Dynamic>> policy_4(K);
+ RangePolicy<IndexType<int>, Schedule<Dynamic>> policy_4(0, K);
  RangePolicy<> policy_6(-3,N+3, ChunkSize(8));
  RangePolicy<OpenMP> policy_7(OpenMP(), 0, N, ChunkSize(4));
 ```
@@ -114,5 +114,5 @@ class Kokkos::RangePolicy {
 ```c++
  // These two calls are identical
  parallel_for("Loop", N, functor);
- parallel_for("Loop", RangePolicy<>(N), functor);
+ parallel_for("Loop", RangePolicy<>(0, N), functor);
 ```
