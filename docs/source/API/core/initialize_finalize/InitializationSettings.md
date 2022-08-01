@@ -12,9 +12,9 @@ auto settings = Kokkos::InitializationSettings()
 
 `InitializationSettings` is a class that can be used to define the settings for
 initializating Kokkos programmatically without having to call the two parameter
-form (`argc` and `argv`) of [`Kokkos::initialize()`](./initialize).
+form (`argc` and `argv`) of [`Kokkos::initialize()`](initialize).
 It was introduced in version 3.7 as a replacement for the
-`Kokkos::InitArguments` structure.
+[`Kokkos::InitArguments`](InitArguments) structure.
 
 ## Interface
 
