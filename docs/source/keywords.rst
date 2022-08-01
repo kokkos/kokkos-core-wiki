@@ -273,7 +273,7 @@ Architecture Keywords
       - Default
 
     * * ``Kokkos_ARCH_NATIVE``
-      * Let compiler detect the architecture of the machine compiling on
+      * Optimize for the local CPU architecture
       * ``OFF``
 
     * * ``Kokkos_ARCH_A64FX``
