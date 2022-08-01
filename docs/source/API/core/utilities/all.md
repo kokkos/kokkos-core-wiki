@@ -15,10 +15,9 @@ namespace Kokkos{
 ## Examples
 
 ```c++
-Kokkos::View<double***[5]> a("A",N0,N1,N2);
+Kokkos::View<double**[5]> a("A",N0,N1);
 
 auto s  = Kokkos::subview(a,
-              std::pair<int,int>(3,15),
               5,
               Kokkos::ALL,
               Kokkos::ALL);
