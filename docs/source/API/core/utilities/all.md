@@ -5,7 +5,7 @@ Defined in header `<Kokkos_Core.hpp>`
 
 ```c++
 namespace Kokkos{
-  KokkosInternalType ALL = impl_detail;
+  constexpr UNSPECIFIED-TYPE ALL = IMPLEMENTATION-DETAIL;
 }
 ```
 
