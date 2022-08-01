@@ -287,6 +287,7 @@
 <li class="toctree-l3"><a class="reference internal" href="utilities/abort.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::abort</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="utilities/complex.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::complex</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="utilities/timer.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::Timer</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilities/experimental.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::Experimental</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="Detection-Idiom.html">Detection Idiom</a></li>
@@ -407,6 +408,10 @@
 <section id="kokkos-cuda">
 <span id="cuda"></span><h2><code class="docutils literal notranslate"><span class="pre">Kokkos::Cuda</span></code><a class="headerlink" href="#kokkos-cuda" title="Permalink to this heading">#</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">Kokkos::Cuda</span></code> is an <a class="reference internal" href="#executionspaceconcept"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">ExecutionSpace</span></code> type</span></a> representing execution on a Cuda device.  Except in rare instances, it should not be used directly, but instead should be used generically as an execution space.  For details, see <a class="reference internal" href="#executionspaceconcept"><span class="std std-ref">the documentation on the <code class="docutils literal notranslate"><span class="pre">ExecutionSpace</span></code> concept</span></a>.</p>
+</section>
+<section id="kokkos-hip">
+<span id="hip"></span><h2><code class="docutils literal notranslate"><span class="pre">Kokkos::HIP</span></code><a class="headerlink" href="#kokkos-hip" title="Permalink to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">Kokkos::HIP</span></code> <sup>promoted from <a class="reference internal" href="utilities/experimental.html#experimentalnamespace"><span class="std std-ref">Experimental</span></a> since 4.0</sup> is an <a class="reference internal" href="#executionspaceconcept"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">ExecutionSpace</span></code> type</span></a> representing execution on a device supported by HIP.  Except in rare instances, it should not be used directly, but instead should be used generically as an execution space.  For details, see <a class="reference internal" href="#executionspaceconcept"><span class="std std-ref">the documentation on the <code class="docutils literal notranslate"><span class="pre">ExecutionSpace</span></code> concept</span></a>.</p>
 </section>
 <section id="kokkos-hpx">
 <span id="hpx"></span><h2><code class="docutils literal notranslate"><span class="pre">Kokkos::HPX</span></code><a class="headerlink" href="#kokkos-hpx" title="Permalink to this heading">#</a></h2>
@@ -669,6 +674,7 @@ and their effects are guaranteed visible to the calling thread.
             <ul>
 <li><a class="reference internal" href="#">Execution Spaces</a><ul>
 <li><a class="reference internal" href="#kokkos-cuda"><code class="docutils literal notranslate"><span class="pre">Kokkos::Cuda</span></code></a></li>
+<li><a class="reference internal" href="#kokkos-hip"><code class="docutils literal notranslate"><span class="pre">Kokkos::HIP</span></code></a></li>
 <li><a class="reference internal" href="#kokkos-hpx"><code class="docutils literal notranslate"><span class="pre">Kokkos::HPX</span></code></a></li>
 <li><a class="reference internal" href="#kokkos-openmp"><code class="docutils literal notranslate"><span class="pre">Kokkos::OpenMP</span></code></a></li>
 <li><a class="reference internal" href="#kokkos-openmptarget"><code class="docutils literal notranslate"><span class="pre">Kokkos::OpenMPTarget</span></code></a></li>
