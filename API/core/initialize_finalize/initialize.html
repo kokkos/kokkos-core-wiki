@@ -187,6 +187,7 @@
 <li class="toctree-l3"><a class="reference internal" href="finalize.html">finalize</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ScopeGuard.html">ScopeGuard</a></li>
 <li class="toctree-l3"><a class="reference internal" href="InitializationSettings.html">InitializationSettings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="InitArguments.html">InitArguments</a></li>
 </ul>
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../View.html">View and related</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -415,9 +416,9 @@
 </pre></div>
 </div>
 <p>Initializes the Kokkos execution environment.
-This function must be called before any other Kokkos API functions or constructors.
-There are a small number of exceptions, such as :func:<code class="docutils literal notranslate"><span class="pre">Kokkos::is_initialized</span></code> and
-:func:<code class="docutils literal notranslate"><span class="pre">Kokkos::is_finalized</span></code>.
+This function must be called before any other Kokkos API functions or
+constructors.  There are a small number of exceptions, such as
+<code class="docutils literal notranslate"><span class="pre">Kokkos::is_initialized</span></code> and <code class="docutils literal notranslate"><span class="pre">Kokkos::is_finalized</span></code>.
 Kokkos can be initialized at most once; subsequent calls are erroneous.</p>
 <p>The function has two overloads.
 The first one takes the same two parameters as <code class="docutils literal notranslate"><span class="pre">main()</span></code> corresponding to

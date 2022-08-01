@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" /><link rel="next" title="Numeric traits" href="numeric-traits.html" /><link rel="prev" title="Mathematical constants" href="mathematical-constants.html" />
+<link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" /><link rel="next" title="View and related" href="../View.html" /><link rel="prev" title="InitializationSettings" href="InitializationSettings.html" />
 
     <meta name="generator" content="sphinx-5.0.1, furo 2022.06.04.1"/>
-        <title>Common math functions - Kokkos documentation</title>
+        <title>InitArguments - Kokkos documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?digest=40978830699223671f4072448e654b5958f38b89" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
@@ -136,7 +136,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -182,12 +182,12 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../building.html">Build, Install and Use</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../keywords.html">CMake Keywords</a></li>
 <li class="toctree-l1 current has-children"><a class="reference internal" href="../../core-index.html">API: Core</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
-<li class="toctree-l2 has-children"><a class="reference internal" href="../Initialize-and-Finalize.html">Initialize and Finalize</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../initialize_finalize/initialize.html">initialize</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../initialize_finalize/finalize.html">finalize</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../initialize_finalize/ScopeGuard.html">ScopeGuard</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../initialize_finalize/InitializationSettings.html">InitializationSettings</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../initialize_finalize/InitArguments.html">InitArguments</a></li>
+<li class="toctree-l2 current has-children"><a class="reference internal" href="../Initialize-and-Finalize.html">Initialize and Finalize</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="initialize.html">initialize</a></li>
+<li class="toctree-l3"><a class="reference internal" href="finalize.html">finalize</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ScopeGuard.html">ScopeGuard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="InitializationSettings.html">InitializationSettings</a></li>
+<li class="toctree-l3 current current-page"><a class="current reference internal" href="#">InitArguments</a></li>
 </ul>
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../View.html">View and related</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -266,10 +266,10 @@
 <li class="toctree-l3"><a class="reference internal" href="../atomics/atomic_store.html"><code class="docutils literal notranslate"><span class="pre">atomic_store</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l2 current has-children"><a class="reference internal" href="../Numerics.html">Numerics</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="mathematical-constants.html">Mathematical constants</a></li>
-<li class="toctree-l3 current current-page"><a class="current reference internal" href="#">Common math functions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="numeric-traits.html">Numeric traits</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../Numerics.html">Numerics</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../numerics/mathematical-constants.html">Mathematical constants</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../numerics/mathematical-functions.html">Common math functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../numerics/numeric-traits.html">Numeric traits</a></li>
 </ul>
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../c_style_memory_management.html">C-style memory management</a><input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" role="switch" type="checkbox"/><label for="toctree-checkbox-13"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -380,7 +380,7 @@
         </a>
         <div class="content-icon-container">
 <div class="edit-this-page">
-  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/API/core/numerics/mathematical-functions.md" title="Edit this page">
+  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/API/core/initialize_finalize/InitArguments.md" title="Edit this page">
     <svg aria-hidden="true" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
       <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4"></path>
@@ -398,140 +398,59 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main">
-          <section id="common-math-functions">
-<h1>Common math functions<a class="headerlink" href="#common-math-functions" title="Permalink to this heading">#</a></h1>
-<p>Motivating example (borrowed from https://llvm.org/docs/CompileCudaWithLLVM.html#standard-library-support)</p>
-<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="c1">// clang is OK with everything in this function.</span>
-<span class="n">__device__</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">test</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">sin</span><span class="p">(</span><span class="mf">0.</span><span class="p">);</span><span class="w"> </span><span class="c1">// nvcc - ok</span>
-<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">sin</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span><span class="w">  </span><span class="c1">// nvcc - error, because no std::sin(int) override is available.</span>
-<span class="w">  </span><span class="n">sin</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span><span class="w">       </span><span class="c1">// nvcc - same as above.</span>
+          <section id="initarguments">
+<h1>InitArguments<a class="headerlink" href="#initarguments" title="Permalink to this heading">#</a></h1>
+<p>Defined in <code class="docutils literal notranslate"><span class="pre">&lt;Kokkos_Core.hpp&gt;</span></code> header.</p>
+<section id="interface">
+<h2>Interface<a class="headerlink" href="#interface" title="Permalink to this heading">#</a></h2>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span><span class="w"> </span><span class="nc">InitArguments</span><span class="w"> </span><span class="p">{</span><span class="w">  </span><span class="c1">// (deprecated since 3.7)</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">num_threads</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">num_numa</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">device_id</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">ndevices</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">skip_device</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="n">disable_warnings</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">InitArguments</span><span class="p">();</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+</pre></div>
+</div>
+<p><strong>DEPRECATED: use <code class="docutils literal notranslate"><span class="pre">Kokkos::InitializationSettings</span></code> instead</strong><br />
+<code class="docutils literal notranslate"><span class="pre">InitArguments</span></code> is a struct that can be used to programmatically define the
+arguments passed to <a class="reference internal" href="initialize.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">Kokkos::initialize</span></code></span></a>.  It was deprecated in
+version 3.7 in favor of
+<a class="reference internal" href="InitializationSettings.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">Kokkos::InitializationSettings</span></code></span></a>.
+One of the main reasons for replacing it was that user-specified data members
+cannot be distinguished from defaulted ones.</p>
+<section id="example">
+<h3>Example<a class="headerlink" href="#example" title="Permalink to this heading">#</a></h3>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Kokkos_Core.hpp&gt;</span><span class="cp"></span>
 
-<span class="w">  </span><span class="n">sinf</span><span class="p">(</span><span class="mf">0.</span><span class="p">);</span><span class="w">       </span><span class="c1">// nvcc - ok</span>
-<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">sinf</span><span class="p">(</span><span class="mf">0.</span><span class="p">);</span><span class="w">  </span><span class="c1">// nvcc - no such function</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">InitArguments</span><span class="w"> </span><span class="n">arguments</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">arguments</span><span class="p">.</span><span class="n">num_threads</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">arguments</span><span class="p">.</span><span class="n">device_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">arguments</span><span class="p">.</span><span class="n">disable_warnings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">initialize</span><span class="p">(</span><span class="n">arguments</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="c1">// ...</span>
+<span class="w">  </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">finalize</span><span class="p">();</span><span class="w"></span>
 <span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
-<p>Kokkos’ goal is to provide a consistent overload set that is available on host
-and device and that follows practice from the C++ numerics library.</p>
-<hr class="docutils" />
-<p>Defined in
-header <a class="reference external" href="https://github.com/kokkos/kokkos/blob/develop/core/src/Kokkos_MathematicalFunctions.hpp"><code class="docutils literal notranslate"><span class="pre">&lt;Kokkos_MathematicalFunctions.hpp&gt;</span></code></a>
-which is included from <code class="docutils literal notranslate"><span class="pre">&lt;Kokkos_Core.hpp&gt;</span></code></p>
-<p>Provides most of the <a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math">standard C mathematical functions from <code class="docutils literal notranslate"><span class="pre">&lt;cmath&gt;</span></code></a>, such as <code class="docutils literal notranslate"><span class="pre">fabs</span></code>, <code class="docutils literal notranslate"><span class="pre">sqrt</span></code>, and <code class="docutils literal notranslate"><span class="pre">sin</span></code>.</p>
-<p>Math functions are available in the <code class="docutils literal notranslate"><span class="pre">Kokkos::</span></code> namespace since version 3.7, in <code class="docutils literal notranslate"><span class="pre">Kokkos::Experimental</span></code> in previous versions.</p>
-<p>Below is the synopsis for <code class="docutils literal notranslate"><span class="pre">sqrt</span></code> as an example of unary math function.</p>
-<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="k">namespace</span><span class="w"> </span><span class="nn">Kokkos</span><span class="w"> </span><span class="p">{</span><span class="w">  </span><span class="c1">// (since 3.7)</span>
-<span class="n">KOKKOS_FUNCTION</span><span class="w"> </span><span class="kt">float</span><span class="w">       </span><span class="n">sqrt</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
-<span class="n">KOKKOS_FUNCTION</span><span class="w"> </span><span class="kt">float</span><span class="w">       </span><span class="n">sqrtf</span><span class="p">(</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
-<span class="n">KOKKOS_FUNCTION</span><span class="w"> </span><span class="kt">double</span><span class="w">      </span><span class="n">sqrt</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
-<span class="w">                </span><span class="kt">long</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="nf">sqrt</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
-<span class="w">                </span><span class="kt">long</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="nf">sqrtl</span><span class="p">(</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
-<span class="n">KOKKOS_FUNCTION</span><span class="w"> </span><span class="kt">double</span><span class="w">      </span><span class="n">sqrt</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">IntegralType</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
-</pre></div>
-</div>
-<p>The function is overloaded for any argument of arithmetic type.  Additional
-functions with <code class="docutils literal notranslate"><span class="pre">f</span></code> and <code class="docutils literal notranslate"><span class="pre">l</span></code> suffixes that work on <code class="docutils literal notranslate"><span class="pre">float</span></code> and <code class="docutils literal notranslate"><span class="pre">long</span> <span class="pre">double</span></code>
-respectively are also available.  Please note, that <code class="docutils literal notranslate"><span class="pre">long</span> <span class="pre">double</span></code> overloads are
-not available on the device.</p>
-<p>See below the list of common mathematical functions supported.  We refer the
-reader to cppreference.com for the synopsis of each individual function.</p>
-<hr class="docutils" />
-<p><strike><em><code class="docutils literal notranslate"><span class="pre">func</span></code></em></strike> denotes functions that are currently not provided by Kokkos<br />
-<em><code class="docutils literal notranslate"><span class="pre">func*</span></code></em> denotes functions not available with the SYCL backend<br />
-<em><code class="docutils literal notranslate"><span class="pre">func**</span></code></em> denotes functions available since version 3.7</p>
-<p><strong>Basic operations</strong>
-<a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/fabs"><code class="docutils literal notranslate"><span class="pre">abs</span></code></a>
-<a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/fabs"><code class="docutils literal notranslate"><span class="pre">fabs</span></code></a>
-<a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/fmod"><code class="docutils literal notranslate"><span class="pre">fmod</span></code></a>
-<a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/remainder"><code class="docutils literal notranslate"><span class="pre">remainder</span></code></a>
-<a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/remquo"><strike><code class="docutils literal notranslate"><span class="pre">remquo</span></code></strike></a>
-<a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/fma"><strike><code class="docutils literal notranslate"><span class="pre">fma</span></code></strike></a>
-<a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/fmax"><code class="docutils literal notranslate"><span class="pre">fmax</span></code></a>
-<a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/fmin"><code class="docutils literal notranslate"><span class="pre">fmin</span></code></a>
-<a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/fdim"><code class="docutils literal notranslate"><span class="pre">fdim</span></code></a>
-<a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/nan"><code class="docutils literal notranslate"><span class="pre">nan</span></code></a></p>
-<p><strong>Exponential functions</strong>
-<a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/exp"><code class="docutils literal notranslate"><span class="pre">exp</span></code></a>
-<a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/exp2"><code class="docutils literal notranslate"><span class="pre">exp2</span></code></a>
-<a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/expm1"><code class="docutils literal notranslate"><span class="pre">expm1</span></code></a>
-<a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/log"><code class="docutils literal notranslate"><span class="pre">log</span></code></a>
-<a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/log10"><code class="docutils literal notranslate"><span class="pre">log10</span></code></a>
-<a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/log2"><code class="docutils literal notranslate"><span class="pre">log2</span></code></a>
-<a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/log1p"><code class="docutils literal notranslate"><span class="pre">log1p</span></code></a></p>
-<p><strong>Power functions</strong>
-<a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/pow"><code class="docutils literal notranslate"><span class="pre">pow</span></code></a>
-<a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/sqrt"><code class="docutils literal notranslate"><span class="pre">sqrt</span></code></a>
-<a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/cbrt"><code class="docutils literal notranslate"><span class="pre">cbrt</span></code></a>
-<a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/hypot"><code class="docutils literal notranslate"><span class="pre">hypot</span></code></a></p>
-<p><strong>Trigonometric functions</strong>
-<a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/sin"><code class="docutils literal notranslate"><span class="pre">sin</span></code></a>
-<a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/cos"><code class="docutils literal notranslate"><span class="pre">cos</span></code></a>
-<a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/tan"><code class="docutils literal notranslate"><span class="pre">tan</span></code></a>
-<a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/asin"><code class="docutils literal notranslate"><span class="pre">asin</span></code></a>
-<a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/acos"><code class="docutils literal notranslate"><span class="pre">acos</span></code></a>
-<a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/atan"><code class="docutils literal notranslate"><span class="pre">atan</span></code></a>
-<a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/atan2"><code class="docutils literal notranslate"><span class="pre">atan2</span></code></a></p>
-<p><strong>Hyperbolic functions</strong>
-<a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/sinh"><code class="docutils literal notranslate"><span class="pre">sinh</span></code></a>
-<a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/cosh"><code class="docutils literal notranslate"><span class="pre">cosh</span></code></a>
-<a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/tanh"><code class="docutils literal notranslate"><span class="pre">tanh</span></code></a>
-<a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/asinh"><code class="docutils literal notranslate"><span class="pre">asinh</span></code></a>
-<a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/acosh"><code class="docutils literal notranslate"><span class="pre">acosh</span></code></a>
-<a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/atanh"><code class="docutils literal notranslate"><span class="pre">atanh</span></code></a></p>
-<p><strong>Error and gamma functions</strong>
-<a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/erf"><code class="docutils literal notranslate"><span class="pre">erf</span></code></a>
-<a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/erfc"><code class="docutils literal notranslate"><span class="pre">erfc</span></code></a>
-<a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/tgamma"><code class="docutils literal notranslate"><span class="pre">tgamma</span></code></a>
-<a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/lgamma"><code class="docutils literal notranslate"><span class="pre">lgamma</span></code></a></p>
-<p><strong>Nearest integer floating point operations</strong>
-<a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/ceil"><code class="docutils literal notranslate"><span class="pre">ceil</span></code></a>
-<a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/floor"><code class="docutils literal notranslate"><span class="pre">floor</span></code></a>
-<a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/trunc"><code class="docutils literal notranslate"><span class="pre">trunc</span></code></a>
-<a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/round"><code class="docutils literal notranslate"><span class="pre">round**</span></code></a>
-<a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/round"><strike><code class="docutils literal notranslate"><span class="pre">lround</span></code></strike></a>
-<a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/round"><strike><code class="docutils literal notranslate"><span class="pre">llround</span></code></strike></a>
-<a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/nearbyint"><code class="docutils literal notranslate"><span class="pre">nearbyint*</span></code></a>
-<a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/rint"><strike><code class="docutils literal notranslate"><span class="pre">rint</span></code></strike></a>
-<a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/rint"><strike><code class="docutils literal notranslate"><span class="pre">lrint</span></code></strike></a>
-<a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/rint"><strike><code class="docutils literal notranslate"><span class="pre">llrint</span></code></strike></a></p>
-<p><strong>Floating point manipulation functions</strong>
-<a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/frexp"><strike><code class="docutils literal notranslate"><span class="pre">frexp</span></code></strike></a>
-<a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/ldexp"><strike><code class="docutils literal notranslate"><span class="pre">ldexp</span></code></strike></a>
-<a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/modf"><strike><code class="docutils literal notranslate"><span class="pre">modf</span></code></strike></a>
-<a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/scalbn"><strike><code class="docutils literal notranslate"><span class="pre">scalbn</span></code></strike></a>
-<a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/scalbln"><strike><code class="docutils literal notranslate"><span class="pre">scalbln</span></code></strike></a>
-<a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/ilog"><strike><code class="docutils literal notranslate"><span class="pre">ilog</span></code></strike></a>
-<a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/logb"><code class="docutils literal notranslate"><span class="pre">logb**</span></code></a>
-<a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/nextafter"><code class="docutils literal notranslate"><span class="pre">nextafter**</span></code></a>
-<a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/nexttoward"><strike><code class="docutils literal notranslate"><span class="pre">nexttoward</span></code></strike></a>
-<a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/copysign"><code class="docutils literal notranslate"><span class="pre">copysign**</span></code></a></p>
-<p><strong>Classification and comparison</strong>
-<a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/fpclassify"><strike><code class="docutils literal notranslate"><span class="pre">fpclassify</span></code></strike></a>
-<a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/isfinite"><code class="docutils literal notranslate"><span class="pre">isfinite</span></code></a>
-<a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/isinf"><code class="docutils literal notranslate"><span class="pre">isinf</span></code></a>
-<a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/isnan"><code class="docutils literal notranslate"><span class="pre">isnan</span></code></a>
-<a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/isnormal"><strike><code class="docutils literal notranslate"><span class="pre">isnormal</span></code></strike></a>
-<a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/signbit"><code class="docutils literal notranslate"><span class="pre">signbit**</span></code></a>
-<a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/isgreater"><strike><code class="docutils literal notranslate"><span class="pre">isgreater</span></code></strike></a>
-<a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/isgreaterequal"><strike><code class="docutils literal notranslate"><span class="pre">isgreaterequal</span></code></strike></a>
-<a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/isless"><strike><code class="docutils literal notranslate"><span class="pre">isless</span></code></strike></a>
-<a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/islessequal"><strike><code class="docutils literal notranslate"><span class="pre">islessequal</span></code></strike></a>
-<a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/islessgreater"><strike><code class="docutils literal notranslate"><span class="pre">islessgreater</span></code></strike></a>
-<a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/math/isunordered"><strike><code class="docutils literal notranslate"><span class="pre">isunordered</span></code></strike></a></p>
-<hr class="docutils" />
-<p><strong>NOTE</strong> Feel free to <a class="reference external" href="https://github.com/kokkos/kokkos/issues/new">open an issue</a> if you need one of the functions that is currently not implemented.  <a class="reference external" href="https://github.com/kokkos/kokkos/issues/4767">Issue #4767</a> is keeping track of these and has notes about implementability.</p>
-<hr class="docutils" />
-<p><strong>See also</strong><br />
-<a class="reference internal" href="mathematical-constants.html"><span class="doc std std-doc">Mathematical constants</span></a><br />
-<a class="reference internal" href="numeric-traits.html"><span class="doc std std-doc">Numeric traits</span></a></p>
+</section>
+<section id="see-also">
+<h3>See also<a class="headerlink" href="#see-also" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p><a class="reference internal" href="InitializationSettings.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">Kokkos::InitializationSettings</span></code></span></a></p></li>
+<li><p><a class="reference internal" href="initialize.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">Kokkos::initialize</span></code></span></a></p></li>
+</ul>
+</section>
+</section>
 </section>
 
         </article>
@@ -539,23 +458,23 @@ reader to cppreference.com for the synopsis of each individual function.</p>
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="numeric-traits.html">
+          <a class="next-page" href="../View.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Numeric traits</div>
+                <div class="title">View and related</div>
               </div>
               <svg><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="mathematical-constants.html">
+          <a class="prev-page" href="InitializationSettings.html">
               <svg><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Mathematical constants</div>
+                <div class="title">InitializationSettings</div>
                 
               </div>
             </a>
@@ -579,8 +498,31 @@ reader to cppreference.com for the synopsis of each individual function.</p>
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            Contents
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">InitArguments</a><ul>
+<li><a class="reference internal" href="#interface">Interface</a><ul>
+<li><a class="reference internal" href="#example">Example</a></li>
+<li><a class="reference internal" href="#see-also">See also</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>

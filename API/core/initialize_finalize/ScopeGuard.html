@@ -187,6 +187,7 @@
 <li class="toctree-l3"><a class="reference internal" href="finalize.html">finalize</a></li>
 <li class="toctree-l3 current current-page"><a class="current reference internal" href="#">ScopeGuard</a></li>
 <li class="toctree-l3"><a class="reference internal" href="InitializationSettings.html">InitializationSettings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="InitArguments.html">InitArguments</a></li>
 </ul>
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../View.html">View and related</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -405,7 +406,7 @@
         <article role="main">
           <section id="scopeguard">
 <h1>ScopeGuard<a class="headerlink" href="#scopeguard" title="Permalink to this heading">#</a></h1>
-<p>Header File: <code class="docutils literal notranslate"><span class="pre">Kokkos_Core.hpp</span></code></p>
+<p>Defined in header <code class="docutils literal notranslate"><span class="pre">&lt;Kokkos_Core.hpp&gt;</span></code></p>
 <p>Usage:</p>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">Kokkos</span><span class="o">::</span><span class="n">ScopeGuard</span><span class="w"> </span><span class="nf">guard</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="n">argv</span><span class="p">);</span><span class="w"></span>
 <span class="n">Kokkos</span><span class="o">::</span><span class="n">ScopeGuard</span><span class="w"> </span><span class="nf">guard</span><span class="p">(</span><span class="n">Kokkos</span><span class="o">::</span><span class="n">InitializationSettings</span><span class="p">()</span><span class="w">  </span><span class="c1">// (since 3.7)</span>
@@ -418,25 +419,7 @@
 exceptions.
 It calls <a class="reference internal" href="initialize.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">Kokkos::intialize</span></code></span></a> with the provided arguments in the
 constructor and <a class="reference internal" href="finalize.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">Kokkos::finalize</span></code></span></a> in the destructor.</p>
-<p><strong>WARNING: change of behavior in version 3.7</strong><br />
-Since Kokkos version 3.7, <code class="docutils literal notranslate"><span class="pre">ScopeGuard</span></code> unconditionally forwards the provided
-arguments to <code class="docutils literal notranslate"><span class="pre">Kokkos::initialize</span></code>, which means they have the same precondition.
-Until version 3.7, <code class="docutils literal notranslate"><span class="pre">ScopeGuard</span></code> was calling <code class="docutils literal notranslate"><span class="pre">Kokkos::initialize</span></code> in its
-constructor only if <code class="docutils literal notranslate"><span class="pre">Kokkos::is_initialized()</span></code> was <code class="docutils literal notranslate"><span class="pre">false</span></code>, and it was calling
-<code class="docutils literal notranslate"><span class="pre">Kokkos::finalize</span></code> in its destructor only if it called <code class="docutils literal notranslate"><span class="pre">Kokkos::initialize</span></code> in
-its constructor.</p>
-<p>We dropped support for the old behavior.  If you think you really need it, you
-may do:</p>
-<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">guard</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">Kokkos</span><span class="o">::</span><span class="n">ScopeGuard</span><span class="o">&gt;</span><span class="p">(</span><span class="w"></span>
-<span class="w">    </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">is_initialized</span><span class="p">()</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">ScopeGuard</span><span class="p">()</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">nullptr</span><span class="p">);</span><span class="w"></span>
-</pre></div>
-</div>
-<p>or</p>
-<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">guard</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">optional</span><span class="o">&lt;</span><span class="n">Kokkos</span><span class="o">::</span><span class="n">ScopeGuard</span><span class="o">&gt;</span><span class="p">(</span><span class="w"></span>
-<span class="w">    </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">is_initialized</span><span class="p">()</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">ScopeGuard</span><span class="p">()</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">nullopt</span><span class="p">);</span><span class="w"></span>
-</pre></div>
-</div>
-<p>with C++17.  This will work regardless of the Kokkos version.</p>
+<p><strong>WARNING: change of behavior in version 3.7</strong>  (see <a class="reference internal" href="#notes"><span class="std std-doc">note</span></a> below)</p>
 <section id="interface">
 <h2>Interface<a class="headerlink" href="#interface" title="Permalink to this heading">#</a></h2>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">ScopeGuard</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
@@ -462,7 +445,7 @@ may do:</p>
 </pre></div>
 </div>
 <section id="parameters">
-<h3>Parameters:<a class="headerlink" href="#parameters" title="Permalink to this heading">#</a></h3>
+<h3>Parameters<a class="headerlink" href="#parameters" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">argc</span></code>: number of command line arguments</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">argv</span></code>: array of character pointers to null-terminated strings storing the command line arguments</p></li>
@@ -470,6 +453,27 @@ may do:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">args</span></code>: arguments to pass to <a class="reference internal" href="initialize.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">Kokkos::initialize</span></code></span></a></p></li>
 </ul>
 <p>Note that all of the parameters above are passed to the <code class="docutils literal notranslate"><span class="pre">Kokkos::initialize</span></code> called internally.  See <a class="reference internal" href="initialize.html"><span class="doc std std-doc">Kokkos::initialize</span></a> for more details.</p>
+</section>
+<section id="notes">
+<h3>Notes<a class="headerlink" href="#notes" title="Permalink to this heading">#</a></h3>
+<p>Since Kokkos version 3.7, <code class="docutils literal notranslate"><span class="pre">ScopeGuard</span></code> unconditionally forwards the provided
+arguments to <a class="reference internal" href="initialize.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">Kokkos::initialize</span></code></span></a>, which means they have the same
+preconditions.  Until version 3.7, <code class="docutils literal notranslate"><span class="pre">ScopeGuard</span></code> was calling
+<code class="docutils literal notranslate"><span class="pre">Kokkos::initialize</span></code> in its constructor only if <code class="docutils literal notranslate"><span class="pre">Kokkos::is_initialized()</span></code> was
+<code class="docutils literal notranslate"><span class="pre">false</span></code>, and it was calling <code class="docutils literal notranslate"><span class="pre">Kokkos::finalize</span></code> in its destructor only if it
+called <code class="docutils literal notranslate"><span class="pre">Kokkos::initialize</span></code> in its constructor.</p>
+<p>We dropped support for the old behavior.  If you think you really need it, you
+may do:</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">guard</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">Kokkos</span><span class="o">::</span><span class="n">ScopeGuard</span><span class="o">&gt;</span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">is_initialized</span><span class="p">()</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">ScopeGuard</span><span class="p">()</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">nullptr</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">guard</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">is_initialized</span><span class="p">()</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_optional</span><span class="o">&lt;</span><span class="n">Kokkos</span><span class="o">::</span><span class="n">ScopeGuard</span><span class="o">&gt;</span><span class="p">()</span><span class="w"></span>
+<span class="w">                                      </span><span class="o">:</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">nullopt</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>with C++17.  This will work regardless of the Kokkos version.</p>
 </section>
 <section id="example">
 <h3>Example<a class="headerlink" href="#example" title="Permalink to this heading">#</a></h3>
@@ -551,7 +555,8 @@ may do:</p>
             <ul>
 <li><a class="reference internal" href="#">ScopeGuard</a><ul>
 <li><a class="reference internal" href="#interface">Interface</a><ul>
-<li><a class="reference internal" href="#parameters">Parameters:</a></li>
+<li><a class="reference internal" href="#parameters">Parameters</a></li>
+<li><a class="reference internal" href="#notes">Notes</a></li>
 <li><a class="reference internal" href="#example">Example</a></li>
 <li><a class="reference internal" href="#see-also">See also</a></li>
 </ul>

@@ -56,3 +56,4 @@ In the above example, ``my_view`` will not go out of scope until the end of the 
    ./initialize_finalize/finalize
    ./initialize_finalize/ScopeGuard
    ./initialize_finalize/InitializationSettings
+   ./initialize_finalize/InitArguments

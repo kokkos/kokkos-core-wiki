@@ -187,6 +187,7 @@
 <li class="toctree-l3 current current-page"><a class="current reference internal" href="#">finalize</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ScopeGuard.html">ScopeGuard</a></li>
 <li class="toctree-l3"><a class="reference internal" href="InitializationSettings.html">InitializationSettings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="InitArguments.html">InitArguments</a></li>
 </ul>
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../View.html">View and related</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -405,26 +406,25 @@
         <article role="main">
           <section id="finalize">
 <h1>finalize<a class="headerlink" href="#finalize" title="Permalink to this heading">#</a></h1>
-<p>Header File: <code class="docutils literal notranslate"><span class="pre">Kokkos_Core.hpp</span></code></p>
-<p>Shut down all enabled Kokkos backends and free all associated resources.
-This function should be called after calling all other Kokkos API functions,
-<em>including Kokkos object destructors</em>.</p>
-<p>Programs are ill-formed if they do not call this function after calling <a class="reference internal" href="initialize.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">Kokkos::initialize</span></code></span></a>.</p>
+<p>Defined in header <code class="docutils literal notranslate"><span class="pre">&lt;Kokkos_Core.hpp&gt;</span></code></p>
 <p>Usage:</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">Kokkos</span><span class="o">::</span><span class="n">finalize</span><span class="p">();</span><span class="w"></span>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">Kokkos</span><span class="o">::</span><span class="n">finalize</span><span class="p">();</span><span class="w"></span>
 </pre></div>
 </div>
+<p>Terminates the Kokkos execution environment.
+This functions cleans up all Kokkos states and released the associated
+resources.
+Once this function is called, no Kokkos API functions (not even
+<a class="reference internal" href="initialize.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">Kokkos::initialize</span></code></span></a>) may be called, except for
+<code class="docutils literal notranslate"><span class="pre">Kokkos::is_initialized</span></code> or <code class="docutils literal notranslate"><span class="pre">Kokkos::is_finalized</span></code>.
+The user must ensure that all Kokkos objects (e.g. <code class="docutils literal notranslate"><span class="pre">Kokkos::View</span></code>) are detroyed
+before <code class="docutils literal notranslate"><span class="pre">Kokkos::finalize</span></code> before <code class="docutils literal notranslate"><span class="pre">Kokkos::finalize</span></code> gets called.</p>
+<p>Programs are ill-formed if they do not call this function after calling <a class="reference internal" href="initialize.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">Kokkos::initialize</span></code></span></a>.</p>
 <section id="interface">
 <h2>Interface<a class="headerlink" href="#interface" title="Permalink to this heading">#</a></h2>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">Kokkos</span><span class="o">::</span><span class="n">finalize</span><span class="p">();</span><span class="w"></span>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">Kokkos</span><span class="o">::</span><span class="n">finalize</span><span class="p">();</span><span class="w"></span>
 </pre></div>
 </div>
-<section id="parameters">
-<h3>Parameters:<a class="headerlink" href="#parameters" title="Permalink to this heading">#</a></h3>
-<ul class="simple">
-<li><p>None</p></li>
-</ul>
-</section>
 <section id="requirements">
 <h3>Requirements<a class="headerlink" href="#requirements" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
@@ -440,16 +440,14 @@ This function should be called after calling all other Kokkos API functions,
 </section>
 <section id="example">
 <h3>Example<a class="headerlink" href="#example" title="Permalink to this heading">#</a></h3>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">**</span><span class="w"> </span><span class="n">argv</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">initialize</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="n">argv</span><span class="p">);</span><span class="w"></span>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Kokkos_Core.hpp&gt;</span><span class="cp"></span>
 
-<span class="w">  </span><span class="c1">// add scoping to ensure my_view destructor is called before Kokkos::finalize  </span>
-<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">argv</span><span class="p">[])</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">initialize</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="n">argv</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w">  </span><span class="c1">// scope to ensure that my_view destructor is called before Kokkos::finalize</span>
 <span class="w">     </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">View</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">*&gt;</span><span class="w"> </span><span class="n">my_view</span><span class="p">(</span><span class="s">&quot;my_view&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-<span class="w"> </span>
+<span class="w">  </span><span class="p">}</span><span class="w">  </span><span class="c1">// scope of my_view ends here</span>
 <span class="w">  </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">finalize</span><span class="p">();</span><span class="w"></span>
-<span class="w">  </span>
 <span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
@@ -516,7 +514,6 @@ This function should be called after calling all other Kokkos API functions,
             <ul>
 <li><a class="reference internal" href="#">finalize</a><ul>
 <li><a class="reference internal" href="#interface">Interface</a><ul>
-<li><a class="reference internal" href="#parameters">Parameters:</a></li>
 <li><a class="reference internal" href="#requirements">Requirements</a></li>
 <li><a class="reference internal" href="#semantics">Semantics</a></li>
 <li><a class="reference internal" href="#example">Example</a></li>

@@ -13,9 +13,9 @@ Kokkos::initialize(Kokkos::InitializationSettings()  // (since 3.7)
 ```
 
 Initializes the Kokkos execution environment.
-This function must be called before any other Kokkos API functions or constructors.
-There are a small number of exceptions, such as :func:`Kokkos::is_initialized` and
-:func:`Kokkos::is_finalized`.
+This function must be called before any other Kokkos API functions or
+constructors.  There are a small number of exceptions, such as
+`Kokkos::is_initialized` and `Kokkos::is_finalized`.
 Kokkos can be initialized at most once; subsequent calls are erroneous.
 
 The function has two overloads.
