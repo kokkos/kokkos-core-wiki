@@ -20,28 +20,28 @@ template <class ViewType>
 typename ViewType::HostMirror create_mirror(ViewType const&);
 
 template <class ViewType>
-typename ViewType::HostMirror create_mirror(decltype(Kokkos::ViewAllocateWithoutInitializing()),
+typename ViewType::HostMirror create_mirror(decltype(Kokkos::WithoutInitializing),
                                             ViewType const&);
 
 template <class Space, class ViewType>
 ImplMirrorType create_mirror(Space const& space, ViewType const&);
 
 template <class Space, class ViewType>
-ImplMirrorType create_mirror(decltype(Kokkos::ViewAllocateWithoutInitializing()),
+ImplMirrorType create_mirror(decltype(Kokkos::WithoutInitializing),
                              Space const& space, ViewType const&);
 
 template <class ViewType>
 typename ViewType::HostMirror create_mirror_view(ViewType const&);
 
 template <class ViewType>
-typename ViewType::HostMirror create_mirror_view(decltype(Kokkos::ViewAllocateWithoutInitializing()),
+typename ViewType::HostMirror create_mirror_view(decltype(Kokkos::WithoutInitializing),
                                                  ViewType const&);
 
 template <class Space, class ViewType>
 ImplMirrorType create_mirror_view(Space const& space, ViewType const&);
 
 template <class Space, class ViewType>
-ImplMirrorType create_mirror_view(decltype(Kokkos::ViewAllocateWithoutInitializing()),
+ImplMirrorType create_mirror_view(decltype(Kokkos::WithoutInitializing),
                                   Space const& space, ViewType const&);
 
 template <class Space, class ViewType>
@@ -60,7 +60,7 @@ ImplMirrorType create_mirror_view_and_copy(Space const& space, ViewType const&);
 
 * ```c++
   template <class ViewType>
-  typename ViewType::HostMirror create_mirror(decltype(Kokkos::ViewAllocateWithoutInitializing()),
+  typename ViewType::HostMirror create_mirror(decltype(Kokkos::WithoutInitializing),
                                               ViewType const& src);
   ```
   Creates a new host accessible [`View`](view) with the same layout and padding as `src`. The new view will have uninitialized data.
@@ -77,7 +77,7 @@ ImplMirrorType create_mirror_view_and_copy(Space const& space, ViewType const&);
 
 * ```c++
   template <class Space, class ViewType>
-  ImplMirrorType create_mirror(decltype(Kokkos::ViewAllocateWithoutInitializing()),
+  ImplMirrorType create_mirror(decltype(Kokkos::WithoutInitializing),
                                Space const& space, ViewType const&);
   ```
   Creates a new [`View`](view) with the same layout and padding as `src` but with a device type of `Space::device_type`. The new view will have uninitialized data.
@@ -95,7 +95,7 @@ ImplMirrorType create_mirror_view_and_copy(Space const& space, ViewType const&);
 
 * ```c++
   template <class ViewType>
-  typename ViewType::HostMirror create_mirror_view(decltype(Kokkos::ViewAllocateWithoutInitializing()),
+  typename ViewType::HostMirror create_mirror_view(decltype(Kokkos::WithoutInitializing),
                                                    ViewType const& src);
   ```
   If `src` is not host accessible (i.e. if `SpaceAccessibility<HostSpace,ViewType::memory_space>::accessible` is `false`)
@@ -115,7 +115,7 @@ ImplMirrorType create_mirror_view_and_copy(Space const& space, ViewType const&);
 
 * ```c++
   template <class Space, class ViewType>
-  ImplMirrorType create_mirror_view(decltype(Kokkos::ViewAllocateWithoutInitializing()),
+  ImplMirrorType create_mirror_view(decltype(Kokkos::WithoutInitializing),
                                     Space const& space, ViewType const&);
   ```
   If `std::is_same<typename Space::memory_space, typename ViewType::memory_space>::value` is `false`,
