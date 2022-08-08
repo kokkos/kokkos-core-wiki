@@ -37,6 +37,18 @@ The concept of an `ExecutionSpace` is the fundamental abstraction to represent t
 
 > *Disclaimer*: There is nothing new about the term "concept" in C++; anyone who has ever used templates in C++ has used concepts whether they knew it or not.  Please do not be confused by the word "concept" itself, which is now more often associated with a shiny new C++20 language feature.  Here, "concept" just means "what you're allowed to do with a type that is a template parameter in certain places".
 
+### Aliases based on configuration
+
+(DefaultExecutionSpace)=
+## `Kokkos::DefaultExecutionSpace`
+
+`Kokkos::DefaultExecutionSpace` is an alias of [`ExecutionSpace` type](ExecutionSpaceConcept) pointing to an `ExecutionSpace` based on the current configuration of Kokkos. It is set to the highest available in the hirachy `device,host-parallel,host-serial`. It also serves as default for optionally specified template prameters of [`ExecutionSpace` type](ExecutionSpaceConcept).
+
+(DefaultHostExecutionSpace)=
+## `Kokkos::DefaultHostExecutionSpace`
+
+`Kokkos::DefaultHostExecutionSpace` is an alias of [`ExecutionSpace` type](ExecutionSpaceConcept) pointing to an `ExecutionSpace` based on the current configuration of Kokkos. It is set to the highest available in the hirachy `host-parallel,host-serial`.
+
 ### Very Simplest Use: Not at all?
 
 When first starting to use Kokkos, the (surprising) answer to where you'll see [`ExecutionSpace`s](ExecutionSpaceConcept) used explicitly is "nowhere".  Many of the first things most users learn are "shortcuts" for "do this thing using the default execution space," which is a type alias (a.k.a., `typedef`) named `Kokkos::DefaultExecutionSpace` defined based on build system flags. For instance,

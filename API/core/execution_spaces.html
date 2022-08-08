@@ -436,6 +436,17 @@
 <blockquote>
 <div><p><em>Disclaimer</em>: There is nothing new about the term “concept” in C++; anyone who has ever used templates in C++ has used concepts whether they knew it or not.  Please do not be confused by the word “concept” itself, which is now more often associated with a shiny new C++20 language feature.  Here, “concept” just means “what you’re allowed to do with a type that is a template parameter in certain places”.</p>
 </div></blockquote>
+<section id="aliases-based-on-configuration">
+<h3>Aliases based on configuration<a class="headerlink" href="#aliases-based-on-configuration" title="Permalink to this heading">#</a></h3>
+</section>
+</section>
+<section id="kokkos-defaultexecutionspace">
+<span id="defaultexecutionspace"></span><h2><code class="docutils literal notranslate"><span class="pre">Kokkos::DefaultExecutionSpace</span></code><a class="headerlink" href="#kokkos-defaultexecutionspace" title="Permalink to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">Kokkos::DefaultExecutionSpace</span></code> is an alias of <a class="reference internal" href="#executionspaceconcept"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">ExecutionSpace</span></code> type</span></a> pointing to an <code class="docutils literal notranslate"><span class="pre">ExecutionSpace</span></code> based on the current configuration of Kokkos. It is set to the highest available in the hirachy <code class="docutils literal notranslate"><span class="pre">device,host-parallel,host-serial</span></code>. It also serves as default for optionally specified template prameters of <a class="reference internal" href="#executionspaceconcept"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">ExecutionSpace</span></code> type</span></a>.</p>
+</section>
+<section id="kokkos-defaulthostexecutionspace">
+<span id="defaulthostexecutionspace"></span><h2><code class="docutils literal notranslate"><span class="pre">Kokkos::DefaultHostExecutionSpace</span></code><a class="headerlink" href="#kokkos-defaulthostexecutionspace" title="Permalink to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">Kokkos::DefaultHostExecutionSpace</span></code> is an alias of <a class="reference internal" href="#executionspaceconcept"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">ExecutionSpace</span></code> type</span></a> pointing to an <code class="docutils literal notranslate"><span class="pre">ExecutionSpace</span></code> based on the current configuration of Kokkos. It is set to the highest available in the hirachy <code class="docutils literal notranslate"><span class="pre">host-parallel,host-serial</span></code>.</p>
 <section id="very-simplest-use-not-at-all">
 <h3>Very Simplest Use: Not at all?<a class="headerlink" href="#very-simplest-use-not-at-all" title="Permalink to this heading">#</a></h3>
 <p>When first starting to use Kokkos, the (surprising) answer to where you’ll see <a class="reference internal" href="#executionspaceconcept"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">ExecutionSpace</span></code>s</span></a> used explicitly is “nowhere”.  Many of the first things most users learn are “shortcuts” for “do this thing using the default execution space,” which is a type alias (a.k.a., <code class="docutils literal notranslate"><span class="pre">typedef</span></code>) named <code class="docutils literal notranslate"><span class="pre">Kokkos::DefaultExecutionSpace</span></code> defined based on build system flags. For instance,</p>
@@ -681,6 +692,11 @@ and their effects are guaranteed visible to the calling thread.
 <li><a class="reference internal" href="#kokkos-openmptarget"><code class="docutils literal notranslate"><span class="pre">Kokkos::OpenMPTarget</span></code></a></li>
 <li><a class="reference internal" href="#kokkos-serial"><code class="docutils literal notranslate"><span class="pre">Kokkos::Serial</span></code></a></li>
 <li><a class="reference internal" href="#kokkos-executionspaceconcept"><code class="docutils literal notranslate"><span class="pre">Kokkos::ExecutionSpaceConcept</span></code></a><ul>
+<li><a class="reference internal" href="#aliases-based-on-configuration">Aliases based on configuration</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#kokkos-defaultexecutionspace"><code class="docutils literal notranslate"><span class="pre">Kokkos::DefaultExecutionSpace</span></code></a></li>
+<li><a class="reference internal" href="#kokkos-defaulthostexecutionspace"><code class="docutils literal notranslate"><span class="pre">Kokkos::DefaultHostExecutionSpace</span></code></a><ul>
 <li><a class="reference internal" href="#very-simplest-use-not-at-all">Very Simplest Use: Not at all?</a></li>
 <li><a class="reference internal" href="#being-more-generic">Being more generic</a></li>
 <li><a class="reference internal" href="#functionality">Functionality</a><ul>
