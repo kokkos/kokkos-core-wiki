@@ -1,4 +1,4 @@
-# 13. Kokkos and Virtual Functions
+# 14. Kokkos and Virtual Functions
 
 Due to oddities of GPU programming, the use of virtual functions in Kokkos parallel regions can be complicated. This document describes the problems you're likely to face, where they come from, and how to work around them.
 

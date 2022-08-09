@@ -1,4 +1,4 @@
-# 12. Interoperability and Legacy Codes
+# 13. Interoperability and Legacy Codes
 
 One goal of Kokkos is to support incremental adoption in legacy applications. This facilitates a step by step conversion allowing for continuous testing of functionality (and in certain bounds) of performance. One feature of this is full interoperability with the underlying backend programming models. This also allows for target specific optimizations written directly in the backend model in order to achieve maximal performance.
 

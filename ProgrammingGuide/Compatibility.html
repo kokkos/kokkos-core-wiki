@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Kokkos Tasking Use Case" href="Tasking.html" /><link rel="prev" title="Tagged Operators" href="TaggedOperators.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="13. Interoperability and Legacy Codes" href="Interoperability.html" /><link rel="prev" title="11: Subviews" href="Subviews.html" />
 
     <meta name="generator" content="sphinx-5.0.1, furo 2022.06.04.1"/>
-        <title>Overlapping Host and Device work - Kokkos documentation</title>
+        <title>12 Backwards &amp; Future Compatibility - Kokkos documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=40978830699223671f4072448e654b5958f38b89" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
@@ -157,26 +157,26 @@
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <ul class="current">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../programmingguide.html">Programming Guide</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../ProgrammingGuide/Introduction.html">1. Introduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ProgrammingGuide/Machine-Model.html">2. Machine Model</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ProgrammingGuide/ProgrammingModel.html">3: Programming Model</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ProgrammingGuide/Compiling.html">4. Compiling</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ProgrammingGuide/Initialization.html">5. Initialization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ProgrammingGuide/View.html">6: View: Multidimensional array</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ProgrammingGuide/ParallelDispatch.html">7. Parallel dispatch</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ProgrammingGuide/HierarchicalParallelism.html">8. Hierarchical Parallelism</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../ProgrammingGuide/Custom-Reductions.html">9. Custom Reductions</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../ProgrammingGuide/Custom-Reductions-Built-In-Reducers.html">9.1 Built-In-Reducers</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../ProgrammingGuide/Custom-Reductions-Built-In-Reducers-with-Custom-Scalar-Types.html">9.2 Built-In Reducers with Custom Scalar Types</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../ProgrammingGuide/Custom-Reductions-Custom-Reducers.html">9.3 Custom Reducers</a></li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../programmingguide.html">Programming Guide</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Introduction.html">1. Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Machine-Model.html">2. Machine Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ProgrammingModel.html">3: Programming Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Compiling.html">4. Compiling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Initialization.html">5. Initialization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="View.html">6: View: Multidimensional array</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ParallelDispatch.html">7. Parallel dispatch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="HierarchicalParallelism.html">8. Hierarchical Parallelism</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="Custom-Reductions.html">9. Custom Reductions</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="Custom-Reductions-Built-In-Reducers.html">9.1 Built-In-Reducers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Custom-Reductions-Built-In-Reducers-with-Custom-Scalar-Types.html">9.2 Built-In Reducers with Custom Scalar Types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Custom-Reductions-Custom-Reducers.html">9.3 Custom Reducers</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../ProgrammingGuide/Atomic-Operations.html">10. Atomic Operations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ProgrammingGuide/Subviews.html">11: Subviews</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ProgrammingGuide/Compatibility.html">12 Backwards &amp; Future Compatibility</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ProgrammingGuide/Interoperability.html">13. Interoperability and Legacy Codes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ProgrammingGuide/Kokkos-and-Virtual-Functions.html">14. Kokkos and Virtual Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Atomic-Operations.html">10. Atomic Operations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Subviews.html">11: Subviews</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">12 Backwards &amp; Future Compatibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Interoperability.html">13. Interoperability and Legacy Codes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Kokkos-and-Virtual-Functions.html">14. Kokkos and Virtual Functions</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../requirements.html">Requirements</a></li>
@@ -326,16 +326,16 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../API/alphabetical.html">API in Alphabetical Order</a></li>
-<li class="toctree-l1 current has-children"><a class="reference internal" href="../usecases.html">Use Cases and Examples</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" role="switch" type="checkbox"/><label for="toctree-checkbox-19"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="MPI-Halo-Exchange.html">MPI Halo Exchange</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Average-To-Nodes.html">ScatterView averaging elements to nodes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="MDRangePolicy.html">MDRangePolicy Use Case</a></li>
-<li class="toctree-l2"><a class="reference internal" href="VirtualFunctions.html">Virtual Functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="TaggedOperators.html">Tagged Operators</a></li>
-<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Overlapping Host and Device work</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Tasking.html">Kokkos Tasking Use Case</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Kokkos-Fortran-Interoperability.html">Fortran Interop Use Case</a></li>
-<li class="toctree-l2"><a class="reference internal" href="SoA-and-AoSoA-with-Cabana.html">Array of Structures and Structure of Arrays with Cabana</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../usecases.html">Use Cases and Examples</a><input class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" role="switch" type="checkbox"/><label for="toctree-checkbox-19"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../usecases/MPI-Halo-Exchange.html">MPI Halo Exchange</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../usecases/Average-To-Nodes.html">ScatterView averaging elements to nodes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../usecases/MDRangePolicy.html">MDRangePolicy Use Case</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../usecases/VirtualFunctions.html">Virtual Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../usecases/TaggedOperators.html">Tagged Operators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../usecases/OverlappingHostAndDeviceWork.html">Overlapping Host and Device work</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../usecases/Tasking.html">Kokkos Tasking Use Case</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../usecases/Kokkos-Fortran-Interoperability.html">Fortran Interop Use Case</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../usecases/SoA-and-AoSoA-with-Cabana.html">Array of Structures and Structure of Arrays with Cabana</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../testing-and-issue-tracking.html">Testing and Issue Tracking</a><input class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" role="switch" type="checkbox"/><label for="toctree-checkbox-20"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -381,7 +381,7 @@
         </a>
         <div class="content-icon-container">
 <div class="edit-this-page">
-  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/usecases/OverlappingHostAndDeviceWork.md" title="Edit this page">
+  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/ProgrammingGuide/Compatibility.md" title="Edit this page">
     <svg aria-hidden="true" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
       <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4"></path>
@@ -405,184 +405,87 @@
           </label>
         </div>
         <article role="main">
-          <section id="overlapping-host-and-device-work">
-<h1>Overlapping Host and Device work<a class="headerlink" href="#overlapping-host-and-device-work" title="Permalink to this heading">#</a></h1>
-<p>When using architectures that allow host execution to concur with device execution Kokkos supports
-overlapping host operations with device operations which can produce significant speedup depending
-on the algorithm.  This use case describes the conditions and the design of algorithms that take advantage of
-overlapping device execution with host execution.</p>
-<section id="actors">
-<h2>Actors<a class="headerlink" href="#actors" title="Permalink to this heading">#</a></h2>
+          <section id="backwards-future-compatibility">
+<h1>12 Backwards &amp; Future Compatibility<a class="headerlink" href="#backwards-future-compatibility" title="Permalink to this heading">#</a></h1>
+<p>For a sufficiently clever user, effectively any change we make to Kokkos will be a breaking change. The intent of this document is to make it clear about what does and does not constitute supported use of Kokkos, as well as how Kokkos moves forward.</p>
+<p>There is a tension between the freedom to make improvements and backwards compatability.  We are presenting a set of rules that both allows the Kokkos Team to make improvements going forward while maintaining a high level of backwards compatibility (which avoids frustration and pain on the part of users).  While we do not deliberately set out to break users, we’d like to minimize accidental breakage while still allowing the Kokkos Team a good path forward.</p>
+<p>Unless we document otherwise, please:</p>
 <ul class="simple">
-<li><p>Algorithm with different set of kernels where some are best executed on the host and some
-are better executed on an accelerator device</p></li>
-<li><p>Algorithm where communication or serialization operations can be staggered with computational kernels</p></li>
-<li><p>Algorithm where work can be divided between host and device without contention to resources</p></li>
+<li><p>Avoid adding into <code class="docutils literal notranslate"><span class="pre">namespace</span> <span class="pre">Kokkos</span></code></p></li>
+<li><p>Avoid adding/removing/modifying macros starting with <code class="docutils literal notranslate"><span class="pre">KOKKOS_</span></code></p></li>
 </ul>
-</section>
-<section id="subjects">
-<h2>Subjects<a class="headerlink" href="#subjects" title="Permalink to this heading">#</a></h2>
+<p>This minimizes the chances that either Kokkos or user code is inadvertently broken by future changes.</p>
+<p>We reserve for the private use of the Kokkos Team:</p>
 <ul class="simple">
-<li><p>Kokkos Execution Spaces</p></li>
-<li><p>Kokkos Execution Policies</p></li>
-<li><p>Kokkos Memory Spaces</p></li>
+<li><p>Any nested <code class="docutils literal notranslate"><span class="pre">namespace</span> <span class="pre">Impl</span></code> inside <code class="docutils literal notranslate"><span class="pre">namespace</span> <span class="pre">Kokkos</span></code> (<code class="docutils literal notranslate"><span class="pre">Kokkos::Impl</span></code>, <code class="docutils literal notranslate"><span class="pre">Kokkos::Experimental::Impl</span></code>)</p></li>
+<li><p>Any macro starting with <code class="docutils literal notranslate"><span class="pre">KOKKOS_IMPL_</span></code></p></li>
 </ul>
-</section>
-<section id="assumptions">
-<h2>Assumptions<a class="headerlink" href="#assumptions" title="Permalink to this heading">#</a></h2>
+<p>These things contain the implementation details of Kokkos.  They are subject to change without notice, either in name or in behavior, even in minor point releases.  They should never be referred to directly in user code.</p>
+<section id="api-compatibility">
+<h2>API Compatibility<a class="headerlink" href="#api-compatibility" title="Permalink to this heading">#</a></h2>
+<p>The public supported interface for Kokkos is:</p>
 <ul class="simple">
-<li><p>There is little or no contention with host accessible memory while a device kernel is executing</p></li>
+<li><p>The top-level <code class="docutils literal notranslate"><span class="pre">namespace</span> <span class="pre">Kokkos</span></code></p></li>
+<li><p>Macros starting with <code class="docutils literal notranslate"><span class="pre">KOKKOS_</span></code> (excluding those starting with <code class="docutils literal notranslate"><span class="pre">KOKKOS_IMPL_</span></code>)</p></li>
 </ul>
-</section>
-<section id="constraints">
-<h2>Constraints<a class="headerlink" href="#constraints" title="Permalink to this heading">#</a></h2>
+<p>While the implementation details may change, the Kokkos Team puts its best effort into limiting changes to either having no functional behavioral differences (apart from bug fixes) or if they must, are changed with compile-time (preferred) or run-time warning and a suitable deprecation period (if possible).</p>
+<p>The experimentally support interface for Kokkos is in</p>
 <ul class="simple">
-<li><p>Kernels are non-blocking</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">namespace</span> <span class="pre">Kokkos::Experimental</span></code></p></li>
 </ul>
+<p>This namespace houses experimental features that are not yet ready for prime time.  The feature may be incomplete, and the interface may change between releases.  The intent is to eventually move them into the top level namespace Kokkos (with a suitable deprecation period where they are both in <code class="docutils literal notranslate"><span class="pre">namespace</span> <span class="pre">Kokkos</span></code> and <code class="docutils literal notranslate"><span class="pre">namespace</span> <span class="pre">Kokkos::Experimental</span></code>).  If you need the functionality (e.g., a new backend), you may use it knowing that you may have to change your code for newer minor releases of Kokkos (and eventually will have to change your code when it moves to the top-level Kokkos namespace).</p>
 </section>
-<section id="preconditions">
-<h2>Preconditions<a class="headerlink" href="#preconditions" title="Permalink to this heading">#</a></h2>
-<ul class="simple">
-<li><p>Execution “kernel” implemented in the form of C++ functor</p></li>
-</ul>
+<section id="user-defined-macros-compatibility">
+<h2>User Defined Macros &amp; Compatibility<a class="headerlink" href="#user-defined-macros-compatibility" title="Permalink to this heading">#</a></h2>
+<p>User defined macros can be particularly problematic, as they change what is lexically seen by the compiler and do not obey the language scoping rules.  They could interfere with variable names, functions, etc., including private ones used in Kokkos and other libraries.</p>
+<p>In order to minimize the risk of collisons, user defined macros should be prefaced with <code class="docutils literal notranslate"><span class="pre">MYPROJECT_</span></code> (or a similar way to disambiguate them) and be in all caps (this informs code readers that macros don’t obey the usual syntactic and semantic rules of C++).</p>
 </section>
-<section id="usage-pattern-1-overlapping-computational-kernels">
-<h2>Usage Pattern 1 - overlapping computational kernels<a class="headerlink" href="#usage-pattern-1-overlapping-computational-kernels" title="Permalink to this heading">#</a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">|---</span> <span class="n">Allocate</span> <span class="n">Device</span> <span class="ow">and</span> <span class="n">Host</span> <span class="n">Memory</span>
-<span class="o">|---</span> <span class="n">Initialize</span> <span class="n">Host</span> <span class="ow">and</span> <span class="n">Device</span> <span class="n">Memory</span>
-<span class="o">|------------------------------------------------</span>
-<span class="o">|-</span> <span class="n">Perform</span> <span class="n">host</span> <span class="n">operation</span> <span class="mi">0</span>
-<span class="o">|---</span> <span class="n">iteration</span> <span class="n">loop</span> <span class="o">-----------------------------</span>
-    <span class="o">|-&gt;-----------</span> <span class="k">global</span> <span class="n">barrier</span> <span class="o">-----------------</span>
-    <span class="o">|</span>  <span class="o">|-</span> <span class="n">Synchronize</span> <span class="n">host</span> <span class="ow">and</span> <span class="n">device</span> <span class="n">data</span>
-    <span class="o">|</span>  <span class="o">|-</span> <span class="n">Perform</span> <span class="n">device</span> <span class="n">operation</span> <span class="n">N</span> \
-    <span class="o">|</span>  <span class="o">|-</span> <span class="n">Perform</span> <span class="n">host</span> <span class="n">operation</span> <span class="n">N</span><span class="o">+</span><span class="mi">1</span> <span class="o">/</span> <span class="n">asynchronous</span>
-    <span class="o">|-&lt;--------------------------------------------</span>
+<section id="c-compatibility">
+<h2>C++ Compatibility<a class="headerlink" href="#c-compatibility" title="Permalink to this heading">#</a></h2>
+<p>It is the intent of the Kokkos team for minimal C++ support to be one revision behind the latest published C++ standard (they are published every three years starting with C++11).  These releases are generally considered major.  This drives increasing the minimal supported compiler versions, as well as allowing the Kokkos Team to take advantage of new library and language features, as well removing workarounds for older compiler bugs and limitations.  Kokkos may also optionally support later versions of the C++ standard, giving users features should they be compiling in those modes.</p>
+</section>
+<section id="abi-compatibility">
+<h2>ABI Compatibility<a class="headerlink" href="#abi-compatibility" title="Permalink to this heading">#</a></h2>
+<p>It is expected that Kokkos users recompile their code against new releases or builds of Kokkos.  There are no ABI (Application Binary Interface) guarantees at this level.</p>
+<p>An exception to this are Kokkos Tools, where much care is taken to ensure that already compiled older versions of tools work with newer versions of Kokkos.</p>
+</section>
+<section id="deprecation">
+<h2>Deprecation<a class="headerlink" href="#deprecation" title="Permalink to this heading">#</a></h2>
+<p>Occasionally the Kokkos Team needs to remove things for overall improvements to the Kokkos code base.  When doing so, the Kokkos Team puts in a best effort with deprecation warnings as well as a migratory, evolutionary path (ideally both the deprecated version and the new version co-exist for a suitable period of time) for moving to the improved interface and functionality.</p>
+</section>
+<section id="headers">
+<h2>Headers<a class="headerlink" href="#headers" title="Permalink to this heading">#</a></h2>
+<p>The following are public headers:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Kokkos_Core.hpp
 </pre></div>
 </div>
+<p>If a header is not public, please do not directly <code class="docutils literal notranslate"><span class="pre">#include</span></code> it.  It is not guaranteed to work now or continue to work in the future.  This includes any headers found in subdirectories.</p>
+<section id="other-rights-the-kokkos-team-reserves">
+<h3>Other rights the Kokkos Team reserves<a class="headerlink" href="#other-rights-the-kokkos-team-reserves" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Add new names and entities to <code class="docutils literal notranslate"><span class="pre">namespace</span> <span class="pre">Kokkos</span></code>, including but not limited to:</p>
+<ul>
+<li><p>Functions (this includes new member functions and overloads to existing functions)</p></li>
+<li><p>Enumerations</p></li>
+<li><p>Namespaces</p></li>
+<li><p>Aliases (<code class="docutils literal notranslate"><span class="pre">using</span></code>, <code class="docutils literal notranslate"><span class="pre">typedef</span></code>, etc.)</p></li>
+<li><p>Classes (<code class="docutils literal notranslate"><span class="pre">struct</span></code>/<code class="docutils literal notranslate"><span class="pre">class</span></code>/<code class="docutils literal notranslate"><span class="pre">union</span></code>)</p></li>
+<li><p>Concepts</p></li>
+<li><p>Variables</p></li>
+</ul>
+</li>
+<li><p>Add new default arguments to functions and templates</p></li>
+<li><p>Change return-types of functions in compatible ways (void to anything, etc).</p></li>
+<li><p>Make changes to existing interfaces in a fashion that will be backward compatible, if those interfaces are solely used to instantiate types and invoke functions. Implementation details (the primary name of a type, the implementation details for a function callable) may not be depended upon.</p></li>
+</ul>
 </section>
-<section id="example-code">
-<h2>Example Code<a class="headerlink" href="#example-code" title="Permalink to this heading">#</a></h2>
-<p>Perform setup of host data needed for iteration n+1 while device is performing
-operation on iteration n</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">value_type</span><span class="p">;</span><span class="w"></span>
-<span class="k">typedef</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">OpenMP</span><span class="w">   </span><span class="n">HostExecSpace</span><span class="p">;</span><span class="w"></span>
-<span class="k">typedef</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">Cuda</span><span class="w">     </span><span class="n">DeviceExecSpace</span><span class="p">;</span><span class="w"></span>
-<span class="k">typedef</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">RangePolicy</span><span class="o">&lt;</span><span class="n">DeviceExecSpace</span><span class="o">&gt;</span><span class="w">  </span><span class="n">device_range_policy</span><span class="p">;</span><span class="w"></span>
-<span class="k">typedef</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">RangePolicy</span><span class="o">&lt;</span><span class="n">HostExecSpace</span><span class="o">&gt;</span><span class="w">    </span><span class="n">host_range_policy</span><span class="p">;</span><span class="w"></span>
-<span class="k">typedef</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">View</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">CudaSpace</span><span class="o">&gt;</span><span class="w">   </span><span class="n">ViewVectorType</span><span class="p">;</span><span class="w"></span>
-<span class="k">typedef</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">View</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">**</span><span class="p">,</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">CudaSpace</span><span class="o">&gt;</span><span class="w">  </span><span class="n">ViewMatrixType</span><span class="p">;</span><span class="w"></span>
-
-<span class="c1">// Setup data on host  </span>
-<span class="c1">// use parameter xVal to demonstrate variability between iterations</span>
-<span class="kt">void</span><span class="w"> </span><span class="nf">init_src_views</span><span class="p">(</span><span class="n">ViewVectorType</span><span class="o">::</span><span class="n">HostMirror</span><span class="w"> </span><span class="n">p_x</span><span class="p">,</span><span class="w"></span>
-<span class="w">                  </span><span class="n">ViewMatrixType</span><span class="o">::</span><span class="n">HostMirror</span><span class="w"> </span><span class="n">p_A</span><span class="p">,</span><span class="w"></span>
-<span class="w">                  </span><span class="k">const</span><span class="w"> </span><span class="n">value_type</span><span class="w"> </span><span class="n">xVal</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span>
-<span class="w">  </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">parallel_for</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;init_A&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">host_range_policy</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">N</span><span class="p">),</span><span class="w"> </span><span class="p">[</span><span class="o">=</span><span class="p">]</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">M</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">j</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="n">h_A</span><span class="p">(</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="w">  </span><span class="p">});</span><span class="w"></span>
-
-<span class="w">  </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">parallel_for</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;init_x&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">host_range_policy</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">M</span><span class="p">),</span><span class="w"> </span><span class="p">[</span><span class="o">=</span><span class="p">]</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">h_x</span><span class="p">(</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">xVal</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="p">});</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
-<span class="w">  </span>
-<span class="n">ViewVectorType</span><span class="w"> </span><span class="nf">y</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;y&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
-<span class="n">ViewVectorType</span><span class="w"> </span><span class="nf">x</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;x&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">M</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
-<span class="n">ViewMatrixType</span><span class="w"> </span><span class="nf">A</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;A&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">M</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
-
-<span class="n">ViewVectorType</span><span class="o">::</span><span class="n">HostMirror</span><span class="w"> </span><span class="n">h_y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">create_mirror_view</span><span class="p">(</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
-<span class="n">ViewVectorType</span><span class="o">::</span><span class="n">HostMirror</span><span class="w"> </span><span class="n">h_x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">create_mirror_view</span><span class="p">(</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
-<span class="n">ViewMatrixType</span><span class="o">::</span><span class="n">HostMirror</span><span class="w"> </span><span class="n">h_A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">create_mirror_view</span><span class="p">(</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span>
-<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">repeat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">repeat</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">nrepeat</span><span class="p">;</span><span class="w"> </span><span class="n">repeat</span><span class="o">++</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="n">init_src_views</span><span class="p">(</span><span class="w"> </span><span class="n">h_x</span><span class="p">,</span><span class="w"> </span><span class="n">h_A</span><span class="p">,</span><span class="w"> </span><span class="n">repeat</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span><span class="w">  </span><span class="c1">// setup data for next device launch</span>
-<span class="w">  </span>
-<span class="w">  </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">fence</span><span class="p">();</span><span class="w"> </span><span class="c1">// barrier used to synch between device and host before copying data</span>
-<span class="w">    </span>
-<span class="w">  </span><span class="c1">// Deep copy host data needed for this iteration to device.</span>
-<span class="w">  </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">deep_copy</span><span class="p">(</span><span class="w"> </span><span class="n">h_y</span><span class="p">,</span><span class="w"> </span><span class="n">h</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">deep_copy</span><span class="p">(</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">h_x</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">deep_copy</span><span class="p">(</span><span class="w"> </span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">h_A</span><span class="w"> </span><span class="p">);</span><span class="w">  </span><span class="c1">// implicit barrier</span>
-
-<span class="w">  </span><span class="c1">// Application: y=Ax</span>
-<span class="w">  </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">parallel_for</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;yAx&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">device_range_policy</span><span class="p">(</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="p">),</span><span class="w"> </span>
-<span class="w">                              </span><span class="n">KOKKOS_LAMBDA</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">temp2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">M</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="n">temp2</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">A</span><span class="p">(</span><span class="w"> </span><span class="n">j</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">x</span><span class="p">(</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="n">y</span><span class="p">(</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">temp2</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span>
-<span class="w">  </span><span class="c1">// note that there is no barrier here, so the host thread will loop</span>
-<span class="w">  </span><span class="c1">// back around and call ini_src_views while the kernel is still running</span>
-<span class="p">}</span><span class="w"></span>
-</pre></div>
-</div>
-<p><strong>Important note</strong>:  In theory, the order in which the host kernel and the device kernel are
-launched is not important, but in practice the device kernel must be launched first.  Most
-host backends do not leave a “main” thread free while the kernel is running. Once the
-host parallel kernel is launched, the main thread is occupied until that thread’s
-contribution to the kernel is complete.  Because the device execution is in a different context,
-the host thread is free immediately after the kernel is launched.  Attention must
-also be paid to the contract associated with the parallel execution pattern.  If the pattern
-requires a synchronization prior to completion (such as a reduction), then there is no opportunity to
-overlap host and device operations.  Thus, taking advantage of a host/device
-overlapping pattern may require modifications to the overall algorithm.</p>
+<section id="miscellaneous-future-proofing">
+<h3>Miscellaneous future proofing<a class="headerlink" href="#miscellaneous-future-proofing" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Avoid taking the address of a function or variable in <code class="docutils literal notranslate"><span class="pre">namespace</span> <span class="pre">Kokkos</span></code></p></li>
+<li><p>Avoid <code class="docutils literal notranslate"><span class="pre">using</span> <span class="pre">namespace</span></code> declarations (<code class="docutils literal notranslate"><span class="pre">using</span> <span class="pre">namespace</span> <span class="pre">Kokkos;</span></code>, <code class="docutils literal notranslate"><span class="pre">using</span> <span class="pre">namespace</span> <span class="pre">Kokkos::Experimental;</span></code>)</p></li>
+</ul>
 </section>
-<section id="usage-pattern-2-perform-serialized-operation-on-host-while-device-is-executing-kernel">
-<h2>Usage pattern 2 - perform serialized operation on host while device is executing kernel<a class="headerlink" href="#usage-pattern-2-perform-serialized-operation-on-host-while-device-is-executing-kernel" title="Permalink to this heading">#</a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">|---</span> <span class="n">Allocate</span> <span class="n">Device</span> <span class="ow">and</span> <span class="n">Host</span> <span class="n">Memory</span>
-<span class="o">|---</span> <span class="n">Initialize</span> <span class="n">Host</span> <span class="ow">and</span> <span class="n">Device</span> <span class="n">Memory</span>
-<span class="o">|----------</span> <span class="k">global</span> <span class="n">barrier</span> <span class="o">------------------------------</span>
-<span class="o">|-</span> <span class="n">Synchronize</span> <span class="n">host</span> <span class="ow">and</span> <span class="n">device</span> <span class="n">data</span>
-<span class="o">|--------------------------------------------------------</span>
-    <span class="o">|-&gt;|-</span> <span class="n">Perform</span> <span class="n">device</span> <span class="n">operation</span> <span class="n">N</span>         \ <span class="n">asynchronous</span>
-    <span class="o">|</span>  <span class="o">|-</span> <span class="n">Serialize</span> <span class="n">host</span> <span class="n">data</span> <span class="kn">from</span> <span class="nn">N</span> <span class="n">to</span> <span class="n">disk</span> <span class="o">/</span>
-    <span class="o">|</span>  <span class="o">|------------</span> <span class="k">global</span> <span class="n">barrier</span> <span class="o">-----------------------</span>
-    <span class="o">|</span>  <span class="o">|-</span> <span class="n">Synchronize</span> <span class="n">host</span> <span class="ow">and</span> <span class="n">device</span> <span class="n">data</span> <span class="k">for</span> <span class="n">start</span> <span class="n">of</span> <span class="n">N</span><span class="o">+</span><span class="mi">1</span>
-    <span class="o">|-&lt;----------------------------------------------------</span>
-</pre></div>
-</div>
-<p>Data serialized to disk is behind by 1 iteration, but it can be performed
-asynchronously with the device operation.  Device data for N+1 is copied after
-iteration N which is why the barrier is need before the synchronization</p>
-</section>
-<section id="id1">
-<h2>example code<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">RangePolicy</span><span class="o">&lt;&gt;</span><span class="w">    </span><span class="n">range_policy</span><span class="p">;</span><span class="w"></span>
-<span class="k">typedef</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">View</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">*&gt;</span><span class="w">    </span><span class="n">ViewVectorType</span><span class="p">;</span><span class="w"></span>
-
-<span class="n">ViewVectorType</span><span class="w"> </span><span class="n">V_r</span><span class="p">;</span><span class="w"></span>
-<span class="n">ViewVectorType</span><span class="w"> </span><span class="n">V_r1</span><span class="p">;</span><span class="w"></span>
-<span class="n">ViewVectorType</span><span class="o">::</span><span class="n">HostMirror</span><span class="w"> </span><span class="n">h_V</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">create_mirror_view</span><span class="p">(</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
-
-<span class="n">get_initial_state</span><span class="p">(</span><span class="n">h_V</span><span class="p">);</span><span class="w"> </span><span class="c1">// function to initialize V on host</span>
-
-<span class="n">Kokkos</span><span class="o">::</span><span class="n">deep_copy</span><span class="p">(</span><span class="n">V_r</span><span class="p">,</span><span class="w"> </span><span class="n">h_V</span><span class="p">);</span><span class="w"></span>
-<span class="n">Kokkos</span><span class="o">::</span><span class="n">deep_copy</span><span class="p">(</span><span class="n">V_r1</span><span class="p">,</span><span class="w"> </span><span class="n">h_V</span><span class="p">)</span><span class="w"></span>
-
-<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">R</span><span class="p">;</span><span class="w"> </span><span class="n">r</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">  </span>
-<span class="w">  </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">parallel_for</span><span class="p">(</span><span class="n">range_policy</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">N</span><span class="p">),</span><span class="w"> </span><span class="n">KOKKOS_LAMBDA</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">     </span><span class="n">V_r1</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get_RHS_func</span><span class="p">(</span><span class="n">V_r</span><span class="p">);</span><span class="w">  </span><span class="c1">//return V_r1(i) for RHS from V_r</span>
-<span class="w">  </span><span class="p">});</span><span class="w"></span>
-
-<span class="w">  </span><span class="n">serialize_state</span><span class="p">(</span><span class="n">h_V</span><span class="p">);</span><span class="w"> </span><span class="c1">// serialize data still in host view_r</span>
-<span class="w"> </span>
-<span class="w">  </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">fence</span><span class="p">();</span><span class="w">  </span><span class="c1">// synchronize between host and device</span>
-<span class="w"> </span>
-<span class="w">  </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">deep_copy</span><span class="p">(</span><span class="n">h_V</span><span class="p">,</span><span class="w"> </span><span class="n">V_r1</span><span class="p">);</span><span class="w">  </span><span class="c1">// update for next iteration</span>
-<span class="w">  </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">deep_copy</span><span class="p">(</span><span class="n">V_r</span><span class="p">,</span><span class="w"> </span><span class="n">h_V</span><span class="p">);</span><span class="w"></span>
-<span class="w">     </span>
-<span class="p">}</span><span class="w"></span>
-</pre></div>
-</div>
 </section>
 </section>
 
@@ -591,23 +494,23 @@ iteration N which is why the barrier is need before the synchronization</p>
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="Tasking.html">
+          <a class="next-page" href="Interoperability.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Kokkos Tasking Use Case</div>
+                <div class="title">13. Interoperability and Legacy Codes</div>
               </div>
               <svg><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="TaggedOperators.html">
+          <a class="prev-page" href="Subviews.html">
               <svg><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Tagged Operators</div>
+                <div class="title">11: Subviews</div>
                 
               </div>
             </a>
@@ -643,16 +546,17 @@ iteration N which is why the barrier is need before the synchronization</p>
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">Overlapping Host and Device work</a><ul>
-<li><a class="reference internal" href="#actors">Actors</a></li>
-<li><a class="reference internal" href="#subjects">Subjects</a></li>
-<li><a class="reference internal" href="#assumptions">Assumptions</a></li>
-<li><a class="reference internal" href="#constraints">Constraints</a></li>
-<li><a class="reference internal" href="#preconditions">Preconditions</a></li>
-<li><a class="reference internal" href="#usage-pattern-1-overlapping-computational-kernels">Usage Pattern 1 - overlapping computational kernels</a></li>
-<li><a class="reference internal" href="#example-code">Example Code</a></li>
-<li><a class="reference internal" href="#usage-pattern-2-perform-serialized-operation-on-host-while-device-is-executing-kernel">Usage pattern 2 - perform serialized operation on host while device is executing kernel</a></li>
-<li><a class="reference internal" href="#id1">example code</a></li>
+<li><a class="reference internal" href="#">12 Backwards &amp; Future Compatibility</a><ul>
+<li><a class="reference internal" href="#api-compatibility">API Compatibility</a></li>
+<li><a class="reference internal" href="#user-defined-macros-compatibility">User Defined Macros &amp; Compatibility</a></li>
+<li><a class="reference internal" href="#c-compatibility">C++ Compatibility</a></li>
+<li><a class="reference internal" href="#abi-compatibility">ABI Compatibility</a></li>
+<li><a class="reference internal" href="#deprecation">Deprecation</a></li>
+<li><a class="reference internal" href="#headers">Headers</a><ul>
+<li><a class="reference internal" href="#other-rights-the-kokkos-team-reserves">Other rights the Kokkos Team reserves</a></li>
+<li><a class="reference internal" href="#miscellaneous-future-proofing">Miscellaneous future proofing</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
