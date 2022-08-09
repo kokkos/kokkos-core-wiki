@@ -287,6 +287,7 @@
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="core/Utilities.html">Utilities</a><input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" role="switch" type="checkbox"/><label for="toctree-checkbox-15"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="core/utilities/abort.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::abort</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="core/utilities/all.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::ALL</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="core/utilities/complex.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::complex</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="core/utilities/timer.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::Timer</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="core/utilities/experimental.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::Experimental</span></code></a></li>
@@ -547,397 +548,402 @@
 <td class="text-left"><p><a class="reference internal" href="core/Utilities.html"><span class="doc std std-doc">Utilities</span></a></p></td>
 <td class="text-left"><p>Causes abnormal program termination.</p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/atomics/atomic_exchange.html"><span class="doc std std-doc">atomic_exchange</span></a></p></td>
+<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/utilities/all.html"><span class="doc std std-doc">ALL</span></a></p></td>
+<td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
+<td class="text-left"><p><a class="reference internal" href="core/Utilities.html"><span class="doc std std-doc">Utilities</span></a></p></td>
+<td class="text-left"><p>Selects all elements in a dimension.</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/atomics/atomic_exchange.html"><span class="doc std std-doc">atomic_exchange</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/atomics.html"><span class="doc std std-doc">Atomic-Operations</span></a></p></td>
 <td class="text-left"><p>Atomic operation which exchanges a value and returns the old.</p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/atomics/atomic_compare_exchange.html"><span class="doc std std-doc">atomic_compare_exchange</span></a></p></td>
+<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/atomics/atomic_compare_exchange.html"><span class="doc std std-doc">atomic_compare_exchange</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/atomics.html"><span class="doc std std-doc">Atomic-Operations</span></a></p></td>
 <td class="text-left"><p>Atomic operation which exchanges a value only if the old value matches a comparison value and returns the old value.</p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/atomics/atomic_compare_exchange_strong.html"><span class="doc std std-doc">atomic_compare_exchange_strong</span></a></p></td>
+<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/atomics/atomic_compare_exchange_strong.html"><span class="doc std std-doc">atomic_compare_exchange_strong</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/atomics.html"><span class="doc std std-doc">Atomic-Operations</span></a></p></td>
 <td class="text-left"><p>Atomic operation which exchanges a value only if the old value matches a comparison value and returns true if the exchange is executed.</p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/atomics/atomic_load.html"><span class="doc std std-doc">atomic_load</span></a></p></td>
+<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/atomics/atomic_load.html"><span class="doc std std-doc">atomic_load</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/atomics.html"><span class="doc std std-doc">Atomic-Operations</span></a></p></td>
 <td class="text-left"><p>Atomic operation which loads a value.</p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/atomics/atomic_op.html"><span class="doc std std-doc">atomic_[op]</span></a></p></td>
+<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/atomics/atomic_op.html"><span class="doc std std-doc">atomic_[op]</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/atomics.html"><span class="doc std std-doc">Atomic-Operations</span></a></p></td>
 <td class="text-left"><p>Atomic operation which don’t return anything.</p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/atomics/atomic_fetch_op.html"><span class="doc std std-doc">atomic_fetch_[op]</span></a></p></td>
+<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/atomics/atomic_fetch_op.html"><span class="doc std std-doc">atomic_fetch_[op]</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/atomics.html"><span class="doc std std-doc">Atomic-Operations</span></a></p></td>
 <td class="text-left"><p>Various atomic operations which return the old value.</p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/atomics/atomic_op_fetch.html"><span class="doc std std-doc">atomic_[op]_fetch</span></a></p></td>
+<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/atomics/atomic_op_fetch.html"><span class="doc std std-doc">atomic_[op]_fetch</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/atomics.html"><span class="doc std std-doc">Atomic-Operations</span></a></p></td>
 <td class="text-left"><p>Various atomic operations which return the updated value.</p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/atomics/atomic_store.html"><span class="doc std std-doc">atomic_store</span></a></p></td>
+<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/atomics/atomic_store.html"><span class="doc std std-doc">atomic_store</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/atomics.html"><span class="doc std std-doc">Atomic-Operations</span></a></p></td>
 <td class="text-left"><p>Atomic operation which stores a value.</p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/builtinreducers/BAnd.html"><span class="doc std std-doc">BAnd</span></a></p></td>
+<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/builtinreducers/BAnd.html"><span class="doc std std-doc">BAnd</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/atomics.html"><span class="doc std std-doc">Atomic-Operations</span></a></p></td>
 <td class="text-left"><p>Reducer for Binary ‘And’ reduction</p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/builtinreducers/BOr.html"><span class="doc std std-doc">BOr</span></a></p></td>
+<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/builtinreducers/BOr.html"><span class="doc std std-doc">BOr</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/atomics.html"><span class="doc std std-doc">Atomic-Operations</span></a></p></td>
 <td class="text-left"><p>Reducer for Binary ‘Or’ reduction</p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/utilities/complex.html"><span class="doc std std-doc">complex</span></a></p></td>
+<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/utilities/complex.html"><span class="doc std std-doc">complex</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/STL-Compatibility.html"><span class="doc std std-doc">STL Compatibility</span></a></p></td>
 <td class="text-left"><p>Complex numbers which work on host and device</p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/view/create_mirror.html"><span class="doc std std-doc">(X)create_mirror</span></a></p></td>
+<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/view/create_mirror.html"><span class="doc std std-doc">(X)create_mirror</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/View.html"><span class="doc std std-doc">View</span></a></p></td>
 <td class="text-left"><p>Mirror Host data to Device data</p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/view/create_mirror.html"><span class="doc std std-doc">(X)create_mirror_view</span></a></p></td>
+<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/view/create_mirror.html"><span class="doc std std-doc">(X)create_mirror_view</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/View.html"><span class="doc std std-doc">View</span></a></p></td>
 <td class="text-left"><p>Mirror Host data to Device data</p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/execution_spaces.html#cuda"><span class="std std-ref">Cuda</span></a></p></td>
+<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/execution_spaces.html#cuda"><span class="std std-ref">Cuda</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/Spaces.html"><span class="doc std std-doc">Spaces</span></a></p></td>
 <td class="text-left"><p>The CUDA Execution Space.</p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/memory_spaces.html#cudaspace"><span class="std std-ref">CudaSpace</span></a></p></td>
+<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/memory_spaces.html#cudaspace"><span class="std std-ref">CudaSpace</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/Spaces.html"><span class="doc std std-doc">Spaces</span></a></p></td>
 <td class="text-left"><p>The primary CUDA Memory Space.</p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/memory_spaces.html#cudauvmspace"><span class="std std-ref">CudaUVMSpace</span></a></p></td>
+<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/memory_spaces.html#cudauvmspace"><span class="std std-ref">CudaUVMSpace</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/Spaces.html"><span class="doc std std-doc">Spaces</span></a></p></td>
 <td class="text-left"><p>The CUDA Memory Space providing access to unified memory page migratable allocations.</p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/memory_spaces.html#cudahostpinnedspace"><span class="std std-ref">CudaHostPinnedSpace</span></a></p></td>
+<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/memory_spaces.html#cudahostpinnedspace"><span class="std std-ref">CudaHostPinnedSpace</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/Spaces.html"><span class="doc std std-doc">Spaces</span></a></p></td>
 <td class="text-left"><p>The CUDA Memrory Space providing access to host pinned GPU-accessible host memory.</p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/view/deep_copy.html"><span class="doc std std-doc">deep_copy</span></a></p></td>
+<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/view/deep_copy.html"><span class="doc std std-doc">deep_copy</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/View.html"><span class="doc std std-doc">View</span></a></p></td>
 <td class="text-left"><p>Copy Views</p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/policies/ExecutionPolicyConcept.html"><span class="doc std std-doc">ExecutionPolicy Concept</span></a></p></td>
+<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/policies/ExecutionPolicyConcept.html"><span class="doc std std-doc">ExecutionPolicy Concept</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/Execution-Policies.html"><span class="doc std std-doc">Execution Policies</span></a></p></td>
 <td class="text-left"><p>Concept for execution policies.</p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/execution_spaces.html#executionspaceconcept"><span class="std std-ref">ExecutionSpace concept</span></a></p></td>
+<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/execution_spaces.html#executionspaceconcept"><span class="std std-ref">ExecutionSpace concept</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/Spaces.html"><span class="doc std std-doc">Spaces</span></a></p></td>
 <td class="text-left"><p>Concept for execution spaces.</p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/parallel-dispatch/fence.html"><span class="doc std std-doc">fence</span></a></p></td>
+<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/parallel-dispatch/fence.html"><span class="doc std std-doc">fence</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p></p></td>
 <td class="text-left"><p>Fences execution spaces.</p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/initialize_finalize/finalize.html"><span class="doc std std-doc">finalize</span></a></p></td>
+<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/initialize_finalize/finalize.html"><span class="doc std std-doc">finalize</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/Initialize-and-Finalize.html"><span class="doc std std-doc">Initialization and Finalization</span></a></p></td>
 <td class="text-left"><p>function to finalize Kokkos</p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/memory_spaces.html#hostspace"><span class="std std-ref">HostSpace</span></a></p></td>
+<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/memory_spaces.html#hostspace"><span class="std std-ref">HostSpace</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/Spaces.html"><span class="doc std std-doc">Spaces</span></a></p></td>
 <td class="text-left"><p>The primary Host Memory Space.</p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/execution_spaces.html#hpx"><span class="std std-ref">HPX</span></a></p></td>
+<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/execution_spaces.html#hpx"><span class="std std-ref">HPX</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/Spaces.html"><span class="doc std std-doc">Spaces</span></a></p></td>
 <td class="text-left"><p>Execution space using the HPX runtime system execution mechanisms.</p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/initialize_finalize/InitArguments.html"><span class="doc std std-doc">InitArguments</span></a></p></td>
+<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/initialize_finalize/InitArguments.html"><span class="doc std std-doc">InitArguments</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/Initialize-and-Finalize.html"><span class="doc std std-doc">Initialization and Finalization</span></a></p></td>
 <td class="text-left"><p>struct to programmatically define how to initialize Kokkos (deprecated in version 3.7)</p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/initialize_finalize/InitializationSettings.html"><span class="doc std std-doc">InitializationSettings</span></a></p></td>
+<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/initialize_finalize/InitializationSettings.html"><span class="doc std std-doc">InitializationSettings</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/Initialize-and-Finalize.html"><span class="doc std std-doc">Initialization and Finalization</span></a></p></td>
 <td class="text-left"><p>class to programmatically define how to initialize Kokkos</p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/initialize_finalize/initialize.html"><span class="doc std std-doc">initialize</span></a></p></td>
+<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/initialize_finalize/initialize.html"><span class="doc std std-doc">initialize</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/Initialize-and-Finalize.html"><span class="doc std std-doc">Initialization and Finalization</span></a></p></td>
 <td class="text-left"><p>function to initialize Kokkos</p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/Traits.html#is-array-layout"><span class="std std-ref">is_array_layout</span></a></p></td>
+<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/Traits.html#is-array-layout"><span class="std std-ref">is_array_layout</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/Traits.html"><span class="doc std std-doc">Traits</span></a></p></td>
 <td class="text-left"><p>Trait to detect types that model the Layout concept</p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/Traits.html#is-execution-policy"><span class="std std-ref">is_execution_policy</span></a></p></td>
+<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/Traits.html#is-execution-policy"><span class="std std-ref">is_execution_policy</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/Traits.html"><span class="doc std std-doc">Traits</span></a></p></td>
 <td class="text-left"><p>Trait to detect types that model ExecutionPolicy concept</p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p>is_execution_space</p></td>
+<tr class="row-odd"><td class="text-left"><p>is_execution_space</p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/Traits.html"><span class="doc std std-doc">Traits</span></a></p></td>
 <td class="text-left"><p>Trait to detect types that model <a class="reference internal" href="core/execution_spaces.html#executionspaceconcept"><span class="std std-ref">ExecutionSpace concept</span></a></p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/Traits.html#is-memory-space"><span class="std std-ref">is_memory_space</span></a></p></td>
+<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/Traits.html#is-memory-space"><span class="std std-ref">is_memory_space</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/Traits.html"><span class="doc std std-doc">Traits</span></a></p></td>
 <td class="text-left"><p>Trait to detect types that model <a class="reference internal" href="core/memory_spaces.html#memoryspaceconcept"><span class="std std-ref">MemorySpace concept</span></a></p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/Traits.html#is-memory-traits"><span class="std std-ref">is_memory_traits</span></a></p></td>
+<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/Traits.html#is-memory-traits"><span class="std std-ref">is_memory_traits</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/Traits.html"><span class="doc std std-doc">Traits</span></a></p></td>
 <td class="text-left"><p>Trait to detect specializations of <code class="docutils literal notranslate"><span class="pre">Kokkos::MemoryTraits</span></code></p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/Traits.html#is-reducer"><span class="std std-ref">is_reducer</span></a></p></td>
+<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/Traits.html#is-reducer"><span class="std std-ref">is_reducer</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/Traits.html"><span class="doc std std-doc">Traits</span></a></p></td>
 <td class="text-left"><p>Trait to detect types that model the <a class="reference internal" href="core/builtinreducers/ReducerConcept.html"><span class="doc std std-doc">Reducer concept</span></a></p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/Traits.html#is-space"><span class="std std-ref">is_space</span></a></p></td>
+<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/Traits.html#is-space"><span class="std std-ref">is_space</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/Traits.html"><span class="doc std std-doc">Traits</span></a></p></td>
 <td class="text-left"><p>Trait to detect types that model the Space concept</p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/view/layoutLeft.html"><span class="doc std std-doc">LayoutLeft</span></a></p></td>
+<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/view/layoutLeft.html"><span class="doc std std-doc">LayoutLeft</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/View.html"><span class="doc std std-doc">Views</span></a></p></td>
 <td class="text-left"><p>Memory Layout matching Fortran</p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/view/layoutRight.html"><span class="doc std std-doc">LayoutRight</span></a></p></td>
+<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/view/layoutRight.html"><span class="doc std std-doc">LayoutRight</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/View.html"><span class="doc std std-doc">Views</span></a></p></td>
 <td class="text-left"><p>Memory Layout matching C</p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/view/layoutStride.html"><span class="doc std std-doc">LayoutStride</span></a></p></td>
+<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/view/layoutStride.html"><span class="doc std std-doc">LayoutStride</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/View.html"><span class="doc std std-doc">Views</span></a></p></td>
 <td class="text-left"><p>Memory Layout for arbitrary strides</p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/c_style_memory_management/free.html"><span class="doc std std-doc">kokkos_free</span></a></p></td>
+<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/c_style_memory_management/free.html"><span class="doc std std-doc">kokkos_free</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/c_style_memory_management.html"><span class="doc std std-doc">Memory Management</span></a></p></td>
 <td class="text-left"><p>Dellocates previously allocated memory</p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/c_style_memory_management/malloc.html"><span class="doc std std-doc">kokkos_malloc</span></a></p></td>
+<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/c_style_memory_management/malloc.html"><span class="doc std std-doc">kokkos_malloc</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/c_style_memory_management.html"><span class="doc std std-doc">Memory Management</span></a></p></td>
 <td class="text-left"><p>Allocates memory</p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/c_style_memory_management/realloc.html"><span class="doc std std-doc">kokkos_realloc</span></a></p></td>
+<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/c_style_memory_management/realloc.html"><span class="doc std std-doc">kokkos_realloc</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/c_style_memory_management.html"><span class="doc std std-doc">Memory Management</span></a></p></td>
 <td class="text-left"><p>Expands previously allocated memory block</p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/builtinreducers/LAnd.html"><span class="doc std std-doc">LAnd</span></a></p></td>
+<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/builtinreducers/LAnd.html"><span class="doc std std-doc">LAnd</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/builtin_reducers.html"><span class="doc std std-doc">Built-in Reducers</span></a></p></td>
 <td class="text-left"><p>Reducer for Logical ‘And’ reduction</p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/builtinreducers/LOr.html"><span class="doc std std-doc">LOr</span></a></p></td>
+<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/builtinreducers/LOr.html"><span class="doc std std-doc">LOr</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/builtin_reducers.html"><span class="doc std std-doc">Built-in Reducers</span></a></p></td>
 <td class="text-left"><p>Reducer for Logical ‘Or’ reduction</p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/builtinreducers/Max.html"><span class="doc std std-doc">Max</span></a></p></td>
+<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/builtinreducers/Max.html"><span class="doc std std-doc">Max</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/builtin_reducers.html"><span class="doc std std-doc">Built-in Reducers</span></a></p></td>
 <td class="text-left"><p>Reducer for Maximum reduction</p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/builtinreducers/MaxLoc.html"><span class="doc std std-doc">MaxLoc</span></a></p></td>
+<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/builtinreducers/MaxLoc.html"><span class="doc std std-doc">MaxLoc</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/builtin_reducers.html"><span class="doc std std-doc">Built-in Reducers</span></a></p></td>
 <td class="text-left"><p>Reducer for Reduction providing maximum and an associated index</p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/policies/MDRangePolicy.html"><span class="doc std std-doc">(U)MDRangePolicy</span></a></p></td>
+<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/policies/MDRangePolicy.html"><span class="doc std std-doc">(U)MDRangePolicy</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/Execution-Policies.html"><span class="doc std std-doc">Execution Policies</span></a></p></td>
 <td class="text-left"><p>Policy to iterate over a multidimensional index range.</p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/memory_spaces.html#memoryspaceconcept"><span class="std std-ref">MemorySpace concept</span></a></p></td>
+<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/memory_spaces.html#memoryspaceconcept"><span class="std std-ref">MemorySpace concept</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/Spaces.html"><span class="doc std std-doc">Spaces</span></a></p></td>
 <td class="text-left"><p>Concept for execution spaces.</p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/builtinreducers/Min.html"><span class="doc std std-doc">Min</span></a></p></td>
+<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/builtinreducers/Min.html"><span class="doc std std-doc">Min</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/builtin_reducers.html"><span class="doc std std-doc">Built-in Reducers</span></a></p></td>
 <td class="text-left"><p>Reducer for Minimum reduction</p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/builtinreducers/MinLoc.html"><span class="doc std std-doc">MinLoc</span></a></p></td>
+<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/builtinreducers/MinLoc.html"><span class="doc std std-doc">MinLoc</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/builtin_reducers.html"><span class="doc std std-doc">Built-in Reducers</span></a></p></td>
 <td class="text-left"><p>Reducer for Reduction providing minimum and an associated index</p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/builtinreducers/MinMax.html"><span class="doc std std-doc">MinMax</span></a></p></td>
+<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/builtinreducers/MinMax.html"><span class="doc std std-doc">MinMax</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/builtin_reducers.html"><span class="doc std std-doc">Built-in Reducers</span></a></p></td>
 <td class="text-left"><p>Reducer for Reduction providing both minimum and maximum</p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/builtinreducers/MinMaxLoc.html"><span class="doc std std-doc">MinMaxLoc</span></a></p></td>
+<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/builtinreducers/MinMaxLoc.html"><span class="doc std std-doc">MinMaxLoc</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/builtin_reducers.html"><span class="doc std std-doc">Built-in Reducers</span></a></p></td>
 <td class="text-left"><p>Reducer for Reduction providing both minimum and maximum and associated indicies</p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/execution_spaces.html#openmp"><span class="std std-ref">OpenMP</span></a></p></td>
+<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/execution_spaces.html#openmp"><span class="std std-ref">OpenMP</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/Spaces.html"><span class="doc std std-doc">Spaces</span></a></p></td>
 <td class="text-left"><p>Execution space using non-target OpenMP parallel execution mechanisms.</p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/execution_spaces.html#openmptarget"><span class="std std-ref">OpenMPTarget</span></a></p></td>
+<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/execution_spaces.html#openmptarget"><span class="std std-ref">OpenMPTarget</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/Spaces.html"><span class="doc std std-doc">Spaces</span></a></p></td>
 <td class="text-left"><p>Execution space using targetoffload OpenMP parallel execution mechanisms.</p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/stl-compat/pair.html"><span class="doc std std-doc">pair</span></a></p></td>
+<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/stl-compat/pair.html"><span class="doc std std-doc">pair</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/STL-Compatibility.html"><span class="doc std std-doc">STL Compatibility</span></a></p></td>
 <td class="text-left"><p>Device compatible std::pair analogue</p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/parallel-dispatch/parallel_for.html"><span class="doc std std-doc">parallel_for</span></a></p></td>
+<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/parallel-dispatch/parallel_for.html"><span class="doc std std-doc">parallel_for</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p></p></td>
 <td class="text-left"><p>Bulk execute of independent work items.</p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/parallel-dispatch/ParallelForTag.html"><span class="doc std std-doc">ParallelForTag</span></a></p></td>
+<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/parallel-dispatch/ParallelForTag.html"><span class="doc std std-doc">ParallelForTag</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p></p></td>
 <td class="text-left"><p>Tag passed to team_size functions</p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/parallel-dispatch/parallel_reduce.html"><span class="doc std std-doc">parallel_reduce</span></a></p></td>
+<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/parallel-dispatch/parallel_reduce.html"><span class="doc std std-doc">parallel_reduce</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p></p></td>
 <td class="text-left"><p>Bulk execute of independent work items, which contribute to a reduction.</p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/parallel-dispatch/ParallelReduceTag.html"><span class="doc std std-doc">ParallelReduceTag</span></a></p></td>
+<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/parallel-dispatch/ParallelReduceTag.html"><span class="doc std std-doc">ParallelReduceTag</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p></p></td>
 <td class="text-left"><p>Tag passed to team_size functions</p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/parallel-dispatch/parallel_scan.html"><span class="doc std std-doc">parallel_scan</span></a></p></td>
+<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/parallel-dispatch/parallel_scan.html"><span class="doc std std-doc">parallel_scan</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p></p></td>
 <td class="text-left"><p>Bulk execute of work items, which a simple pre- or postfix scan dependency.</p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/parallel-dispatch/ParallelScanTag.html"><span class="doc std std-doc">ParallelScanTag</span></a></p></td>
+<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/parallel-dispatch/ParallelScanTag.html"><span class="doc std std-doc">ParallelScanTag</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p></p></td>
 <td class="text-left"><p>Tag passed to team_size functions</p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/policies/NestedPolicies.html#perteam"><span class="std std-ref">PerTeam</span></a></p></td>
+<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/policies/NestedPolicies.html#perteam"><span class="std std-ref">PerTeam</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/Execution-Policies.html"><span class="doc std std-doc">Execution Policies</span></a></p></td>
 <td class="text-left"><p>Policy used in single construct to indicate once per team execution.</p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/policies/NestedPolicies.html#perthread"><span class="std std-ref">PerThread</span></a></p></td>
+<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/policies/NestedPolicies.html#perthread"><span class="std std-ref">PerThread</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/Execution-Policies.html"><span class="doc std std-doc">Execution Policies</span></a></p></td>
 <td class="text-left"><p>Policy used in single construct to indicate once per thread execution.</p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/builtinreducers/Prod.html"><span class="doc std std-doc">Prod</span></a></p></td>
+<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/builtinreducers/Prod.html"><span class="doc std std-doc">Prod</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/builtin_reducers.html"><span class="doc std std-doc">Built-in Reducers</span></a></p></td>
 <td class="text-left"><p>Reducer for Multiplicative reduction</p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/policies/RangePolicy.html"><span class="doc std std-doc">RangePolicy</span></a></p></td>
+<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/policies/RangePolicy.html"><span class="doc std std-doc">RangePolicy</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/Execution-Policies.html"><span class="doc std std-doc">Execution Policies</span></a></p></td>
 <td class="text-left"><p>Policy to iterate over a 1D index range.</p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/view/realloc.html"><span class="doc std std-doc">realloc</span></a></p></td>
+<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/view/realloc.html"><span class="doc std std-doc">realloc</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/View.html"><span class="doc std std-doc">View</span></a></p></td>
 <td class="text-left"><p>Resize an existing view without maintaining the content</p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/builtinreducers/ReducerConcept.html"><span class="doc std std-doc">ReducerConcept</span></a></p></td>
+<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/builtinreducers/ReducerConcept.html"><span class="doc std std-doc">ReducerConcept</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/builtin_reducers.html"><span class="doc std std-doc">Built-in Reducers</span></a></p></td>
 <td class="text-left"><p>Provides the concept for Reducers.</p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/view/resize.html"><span class="doc std std-doc">resize</span></a></p></td>
+<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/view/resize.html"><span class="doc std std-doc">resize</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/View.html"><span class="doc std std-doc">View</span></a></p></td>
 <td class="text-left"><p>Resize an existing view while maintaining the content</p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/execution_spaces.html#serial"><span class="std std-ref">Serial</span></a></p></td>
+<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/execution_spaces.html#serial"><span class="std std-ref">Serial</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/Spaces.html"><span class="doc std std-doc">Spaces</span></a></p></td>
 <td class="text-left"><p>Execution space using serial execution the CPU.</p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/initialize_finalize/ScopeGuard.html"><span class="doc std std-doc">ScopeGuard</span></a></p></td>
+<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/initialize_finalize/ScopeGuard.html"><span class="doc std std-doc">ScopeGuard</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/Initialize-and-Finalize.html"><span class="doc std std-doc">Initialization and Finalization</span></a></p></td>
 <td class="text-left"><p>class to aggregate initializing and finalizing Kokkos</p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/SpaceAccessibility.html"><span class="doc std std-doc">SpaceAccessibility</span></a></p></td>
+<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/SpaceAccessibility.html"><span class="doc std std-doc">SpaceAccessibility</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/Spaces.html"><span class="doc std std-doc">Spaces</span></a></p></td>
 <td class="text-left"><p>Facility to query accessibility rules between execution and memory spaces.</p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/view/subview.html"><span class="doc std std-doc">subview</span></a></p></td>
+<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/view/subview.html"><span class="doc std std-doc">subview</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/View.html"><span class="doc std std-doc">View</span></a></p></td>
 <td class="text-left"><p>Crating multi-dimensional array which is a slice of a view</p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/builtinreducers/Sum.html"><span class="doc std std-doc">Sum</span></a></p></td>
+<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/builtinreducers/Sum.html"><span class="doc std std-doc">Sum</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/builtin_reducers.html"><span class="doc std std-doc">Built-in Reducers</span></a></p></td>
 <td class="text-left"><p>Reducer for Sum reduction</p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/policies/TeamHandleConcept.html"><span class="doc std std-doc">TeamHandle concept</span></a></p></td>
+<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/policies/TeamHandleConcept.html"><span class="doc std std-doc">TeamHandle concept</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/Execution-Policies.html"><span class="doc std std-doc">Execution Policies</span></a></p></td>
 <td class="text-left"><p>Provides the concept for the <code class="docutils literal notranslate"><span class="pre">member_type</span></code> of a <a class="reference internal" href="core/policies/TeamPolicy.html"><span class="doc std std-doc">TeamPolicy</span></a>.</p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/policies/TeamPolicy.html"><span class="doc std std-doc">(U)TeamPolicy</span></a></p></td>
+<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/policies/TeamPolicy.html"><span class="doc std std-doc">(U)TeamPolicy</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/Execution-Policies.html"><span class="doc std std-doc">Execution Policies</span></a></p></td>
 <td class="text-left"><p>Policy to iterate over a 1D index range, assigning to each iteration a team of threads.</p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/policies/TeamThreadRange.html"><span class="doc std std-doc">TeamThreadRange</span></a></p></td>
+<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/policies/TeamThreadRange.html"><span class="doc std std-doc">TeamThreadRange</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/Execution-Policies.html"><span class="doc std std-doc">Execution Policies</span></a></p></td>
 <td class="text-left"><p>Policy to iterate over a 1D index range with the threads of a team.</p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/policies/TeamVectorRange.html"><span class="doc std std-doc">TeamVectorRange</span></a></p></td>
+<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/policies/TeamVectorRange.html"><span class="doc std std-doc">TeamVectorRange</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/Execution-Policies.html"><span class="doc std std-doc">Execution Policies</span></a></p></td>
 <td class="text-left"><p>Policy to iterate over a 1D index range with the threads and vector lanes of a team.</p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/policies/ThreadVectorRange.html"><span class="doc std std-doc">ThreadVectorRange</span></a></p></td>
+<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/policies/ThreadVectorRange.html"><span class="doc std std-doc">ThreadVectorRange</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/Execution-Policies.html"><span class="doc std std-doc">Execution Policies</span></a></p></td>
 <td class="text-left"><p>Policy to iterate over a 1D index range with the vector lanes of a thread.</p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/utilities/timer.html"><span class="doc std std-doc">Timer</span></a></p></td>
+<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/utilities/timer.html"><span class="doc std std-doc">Timer</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/Utilities.html"><span class="doc std std-doc">Utilities</span></a></p></td>
 <td class="text-left"><p>A basic timer returning seconds</p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/view/view.html"><span class="doc std std-doc">View</span></a></p></td>
+<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/view/view.html"><span class="doc std std-doc">View</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/View.html"><span class="doc std std-doc">View</span></a></p></td>
 <td class="text-left"><p>A multi-dimensional array</p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/view/view_like.html"><span class="doc std std-doc">View-like Type Concept</span></a></p></td>
+<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/view/view_like.html"><span class="doc std std-doc">View-like Type Concept</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/View.html"><span class="doc std std-doc">View</span></a></p></td>
 <td class="text-left"><p>A set of class templates that act like a View</p></td>
