@@ -45,6 +45,15 @@ Nested Execution Policies are used to dispatch parallel work inside of an alread
     * * `ThreadVectorRange <policies/ThreadVectorRange.html>`__
       * Used inside of a TeamPolicy kernel to perform nested parallel loops with vector lanes of a thread.
 
+    * * `MDTeamThreadRange <policies/MDTeamThreadRange.html>`__
+      * Used inside of a TeamPolicy kernel to perform nested parallel loops over a multidimensional range split over threads of a team.
+
+    * * `MDTeamVectorRange <policies/MDTeamVectorRange.html>`__
+      * Used inside of a TeamPolicy kernel to perform nested parallel loops over a multidimensional range split over threads of a team and their vector lanes.
+
+    * * `MDThreadVectorRange <policies/MDThreadVectorRange.html>`__
+      * Used inside of a TeamPolicy kernel to perform nested parallel loops over a multidimensional range with vector lanes of a thread.
+
 Common Arguments for all Execution Policies
 ===========================================
 
