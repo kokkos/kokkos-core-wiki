@@ -15,5 +15,6 @@ Programming Guide
    ./ProgrammingGuide/Custom-Reductions
    ./ProgrammingGuide/Atomic-Operations
    ./ProgrammingGuide/Subviews
+   ./ProgrammingGuide/Compatibility
    ./ProgrammingGuide/Interoperability
    ./ProgrammingGuide/Kokkos-and-Virtual-Functions
