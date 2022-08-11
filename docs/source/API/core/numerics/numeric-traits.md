@@ -17,7 +17,8 @@ See below the list of available traits.
 
 ---
 
-_`trait`_\* denotes traits that were added in Kokkos 3.6
+_`trait*`_ denotes traits that were added in Kokkos 3.6  
+<strike>_`trait*`_</strike> denotes traits that were removed in Kokkos 4.0
 
 **Numeric distinguished value traits**
 `infinity`
@@ -26,10 +27,10 @@ _`trait`_\* denotes traits that were added in Kokkos 3.6
 `epsilon`
 `round_error`
 `norm_min`
-`denorm_min`*
-`reciprocal_overflow_threshold`*
-`quiet_NaN`*
-`signaling_NaN`*
+`denorm_min*`
+<strike>`reciprocal_overflow_threshold*`</strike>
+`quiet_NaN*`
+`signaling_NaN*`
 
 **Numeric characteristics traits**
 `digits`
