@@ -488,7 +488,7 @@
 <span class="w">  </span><span class="k">typedef</span><span class="w"> </span><span class="n">View</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">**</span><span class="p">,</span><span class="n">ExecutionSpace</span><span class="o">&gt;</span><span class="w"> </span><span class="n">t_2d_device_view</span><span class="p">;</span><span class="w"></span>
 
 <span class="w">  </span><span class="c1">// Allocate the view in the memory space of ExecutionSpace</span>
-<span class="w">  </span><span class="n">t_1d_device_view</span><span class="w"> </span><span class="nf">d_a</span><span class="p">(</span><span class="s">&quot;a&quot;</span><span class="p">,</span><span class="n">n</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">t_1d_device_view</span><span class="w"> </span><span class="n">d_a</span><span class="p">(</span><span class="s">&quot;a&quot;</span><span class="p">,</span><span class="n">n</span><span class="p">);</span><span class="w"></span>
 <span class="w">  </span><span class="c1">// Create a host copy of that view</span>
 <span class="w">  </span><span class="k">typename</span><span class="w"> </span><span class="nc">t_1d_device_view</span><span class="o">::</span><span class="n">HostMirror</span><span class="w"> </span><span class="n">h_a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">create_mirror_view</span><span class="p">(</span><span class="n">a</span><span class="p">);</span><span class="w"></span>
 <span class="w">  </span><span class="c1">// Copy the data from the external allocation into the host view</span>
@@ -500,7 +500,7 @@
 <span class="w">  </span><span class="n">deep_copy</span><span class="p">(</span><span class="n">d_a</span><span class="p">,</span><span class="n">h_a</span><span class="p">);</span><span class="w"></span>
 
 <span class="w">  </span><span class="c1">// Allocate a 2D view in the memory space of ExecutionSpace</span>
-<span class="w">  </span><span class="n">t_2d_device_view</span><span class="w"> </span><span class="nf">d_b</span><span class="p">(</span><span class="s">&quot;b&quot;</span><span class="p">,</span><span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">t_2d_device_view</span><span class="w"> </span><span class="n">d_b</span><span class="p">(</span><span class="s">&quot;b&quot;</span><span class="p">,</span><span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">);</span><span class="w"></span>
 <span class="w">  </span><span class="c1">// Create a host copy of that view</span>
 <span class="w">  </span><span class="k">typename</span><span class="w"> </span><span class="nc">t_2d_device_view</span><span class="o">::</span><span class="n">HostMirror</span><span class="w"> </span><span class="n">h_b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">create_mirror_view</span><span class="p">(</span><span class="n">b</span><span class="p">);</span><span class="w"></span>
 

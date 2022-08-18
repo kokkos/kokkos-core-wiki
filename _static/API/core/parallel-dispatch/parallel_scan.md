@@ -43,14 +43,6 @@ Kokkos::parallel_scan(const ExecPolicy&  policy,
                       ReturnType&        return_value);
 ```
 
-```c++
-template <class ExecPolicy, class FunctorType, class ReturnType>
-Kokkos::parallel_scan(const std::string& name, 
-                      const ExecPolicy&  policy, 
-                      const FunctorType& functor, 
-                      ReturnType&        return_value);
-```
-
 ### Parameters:
 
   * `name`: A user provided string which is used in profiling and debugging tools via the Kokkos Profiling Hooks. 
