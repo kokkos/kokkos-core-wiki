@@ -1,5 +1,5 @@
-Video lectures
-##############
+Video lectures and slides
+#########################
 
 .. list-table::
    :widths: 5 80 15
