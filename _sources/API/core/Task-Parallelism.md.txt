@@ -13,11 +13,11 @@ Basic Usage
 
 Fundamentally, task parallelism is just another form of parallelism in Kokkos.  The same general idiom of pattern, policy, and functor applies as for ordinary [parallel dispatch](../../ProgrammingGuide/ParallelDispatch):
 
-![parallel-dispatch](https://raw.githubusercontent.com/wiki/kokkos/kokkos/ProgrammingGuide/figures/parallel-dispatch.png)
+![parallel-dispatch](../../ProgrammingGuide/figures/parallel-dispatch.png)
 
 Similarly, for tasking, we have:
 
-![task-dispatch](https://raw.githubusercontent.com/wiki/kokkos/kokkos/ProgrammingGuide/figures/task-dispatch.png)
+![task-dispatch](../../ProgrammingGuide/figures/task-dispatch.png)
 
 
 Task Functor
