@@ -14,60 +14,49 @@ Usage:
 
 Creates a ``Kokkos::View`` viewing a subset of another ``Kokkos::View``.
 
-Synopsis
---------
-
-.. code-block:: cpp
-
-   template <class ViewType, class... Args>
-   IMPL_DETAIL subview(const ViewType& v, Args ... args);
-
 Description
 -----------
 
-* 
-  .. code-block:: cpp
+.. cpp:function:: template<class ViewType, class ... Args> \
+                  IMPL_DETAIL subview(const ViewType& v, Args ... args)
 
-     template <class ViewType, class... Args>
-     IMPL_DETAIL subview(const ViewType& v, Args ... args);
+Returns a new ``Kokkos::View`` ``s`` viewing a subset of ``v`` specified by ``args...``.
+The return type of subview is an implementation detail and is determined by
+the types in ``Args...``.
 
-  Returns a new ``Kokkos::View`` ``s`` viewing a subset of ``v`` specified by ``args...``.
-  The return type of subview is an implementation detail and is determined by 
-  the types in ``Args...``.
+.. rubric:: Subset selection:
 
-  .. rubric:: Subset selection:
+* For every integer argument in ``args...`` the rank of the returned view is
+  one smaller than the rank of ``v`` and the values referenced by ``s`` correspond to
+  the values associated with using the integer argument in the corresponding
+  position during indexing into ``v``.
+* Passing  `Kokkos::ALL <../utilities/all.html#kokkosall>`_ as the ``r``\ th argument is equivalent to passing
+  ``pair<ptrdiff_t,ptrdiff_t>(0,v.extent(r))`` as the ``r``\ th argument.
+* If the ``r``\ th argument ``arg_r`` is the ``d``\ th range (\ ``std::pair``\ , ``Kokkos::pair`` or
+  `Kokkos::ALL <../utilities/all.html#kokkosall>`_ ) in the argument list than ``s.extent(d) = arg_r.second-arg_r.first``\ ,
+  and dimension ``d`` of ``s`` references the range ``[arg_r.first,arg_r.second)`` of
+  dimension ``r`` of ``v``.
 
-  * For every integer argument in ``args...`` the rank of the returned view is 
-    one smaller than the rank of ``v`` and the values referenced by ``s`` correspond to 
-    the values associated with using the integer argument in the corresponding
-    position during indexing into ``v``.
-  * Passing  `Kokkos::ALL <../utilities/all.html#kokkosall>`_ as the ``r``\ th argument is equivalent to passing
-    ``pair<ptrdiff_t,ptrdiff_t>(0,v.extent(r))`` as the ``r``\ th argument.
-  * If the ``r``\ th argument ``arg_r`` is the ``d``\ th range (\ ``std::pair``\ , ``Kokkos::pair`` or 
-    `Kokkos::ALL <../utilities/all.html#kokkosall>`_ ) in the argument list than ``s.extent(d) = arg_r.second-arg_r.first``\ ,
-    and dimension ``d`` of ``s`` references the range ``[arg_r.first,arg_r.second)`` of 
-    dimension ``r`` of ``v``.
+.. rubric:: Restrictions:
 
-  .. rubric:: Restrictions:
+* ``sizeof...(args)`` is equal to ``ViewType::rank``.
+* Valid arguments are of type:
 
-  * ``sizeof...(args)`` is equal to ``ViewType::rank``.
-  * Valid arguments are of type:
+  * ``std::pair<iType,iType>`` with ``std::is_integral<iType>::value`` being true.
+  * ``Kokkos::pair<iType,iType>`` with ``std::is_integral<iType>::value`` being true.
+  * ``iType`` with ``std::is_integral<iType>::value`` being true.
+  * ``decltype(``\ `Kokkos::ALL <../utilities/all.html#kokkosall>`_ ``)``
 
-    * ``std::pair<iType,iType>`` with ``std::is_integral<iType>::value`` being true.
-    * ``Kokkos::pair<iType,iType>`` with ``std::is_integral<iType>::value`` being true.
-    * ``iType`` with ``std::is_integral<iType>::value`` being true.
-    * ``decltype(``\ `Kokkos::ALL <../utilities/all.html#kokkosall>`_ ``)``
+* If the ``r``\ th argument ``arg_r`` is of type ``std::pair<iType,iType>`` or ``Kokkos::pair<iType,iType>`` it must meet:
 
-  * If the ``r``\ th argument ``arg_r`` is of type ``std::pair<iType,iType>`` or ``Kokkos::pair<iType,iType>`` it must meet:
+  * ``arg_r.first >= 0``
+  * ``arg_r.second <= v.extent(r)``
+  * ``arg_r.first <= arg_r.second``
 
-    * ``arg_r.first >= 0``
-    * ``arg_r.second <= v.extent(r)``
-    * ``arg_r.first <= arg_r.second``
+* If the ``r``\ th argument ``arg_r`` is an integral it must meet:
 
-  * If the ``r``\ th argument ``arg_r`` is an integral it must meet:
-
-    * ``arg_r >= 0``
-    * ``arg_r < v.extent(r)``
+  * ``arg_r >= 0``
+  * ``arg_r < v.extent(r)``
 
 Examples
 --------
