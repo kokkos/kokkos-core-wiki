@@ -154,8 +154,8 @@ auto create_mirror_view_and_copy(Impl::ViewCtorProp<ViewCtorArgs...> const& arg_
   auto create_mirror_view(Impl::ViewCtorProp<ViewCtorArgs...> const& arg_prop,
                           ViewType const& src);
   ```
-  If the [`View`](view) constructor arguments `arg_prop` include a memory space and the memory space doesn't match the memory space of `src`, creates a new [`View`](view) in the specified memory_space.
-  If the `arg_prop` don't include a memory space and the memory space of `src` is not host-accessible, creates a new host-accessible [`View`](view).
+  If the [`View`](view) constructor arguments `arg_prop` include a memory space and the memory space doesn't match the memory space of `src`, a new [`View`](view) in the specified memory_space is created.
+  If the `arg_prop` don't include a memory space and the memory space of `src` is not host-accessible, a new host-accessible [`View`](view) is created.
   Otherwise, `src` is returned.
   If a new [`View`](view) is created, the implicitly called constructor respects `arg_prop` and uses the same layout and padding as `src`.
   * `src`: a `Kokkos::View`.
@@ -180,7 +180,7 @@ auto create_mirror_view_and_copy(Impl::ViewCtorProp<ViewCtorArgs...> const& arg_
   ImplMirrorType create_mirror_view_and_copy(Impl::ViewCtorProp<ViewCtorArgs...> const& arg_prop,
                                              ViewType const& src);
   ```
-  If the  memory space included in the [`View`](view) constructor arguments `arg_prop` matches the memory space of `src`, creates a new [`View`](view) in the specified memory space using `arg_prop` and the same layout andf padding as `src`. Additionally, a `deep_copy` from `src` to the new view is executed (using the execution space contained in `arg_prop` if provided).
+  If the  memory space included in the [`View`](view) constructor arguments `arg_prop` matches the memory space of `src`, a new [`View`](view) in the specified memory space is created using `arg_prop` and the same layout andf padding as `src`. Additionally, a `deep_copy` from `src` to the new view is executed (using the execution space contained in `arg_prop` if provided).
 Otherwise returns `src`.
   * `src`: a `Kokkos::View`.
   * `arg_prop`: [`View`](view) constructor properties, e.g., `Kokkos::view_alloc(Kokkos::HostSpace{}, Kokkos::WithoutInitializing)`.
