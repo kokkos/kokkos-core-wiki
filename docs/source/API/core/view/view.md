@@ -212,7 +212,7 @@ Template parameters other than `DataType` are optional, but ordering is enforced
   * ```c++
     constexpr pointer_type data() const
     ```
-    Return the pointer to the underlying data allocation. WARNING: calling any function that manipulates the behavior of the memory (e.g. `memAdvise`) on memory managed by `Kokkos` results in undefined behavior. You are on your own with this.
+    Return the pointer to the underlying data allocation. WARNING: calling any function that manipulates the behavior of the memory (e.g. `memAdvise`) on memory managed by `Kokkos` results in undefined behavior.
   * ```c++
     bool span_is_contiguous() const
     ```

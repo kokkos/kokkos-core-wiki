@@ -9,7 +9,7 @@ void* kokkos_realloc(void* ptr, size_t new_size);
 
 Reallocates the given area of memory. It must be previously allocated by [`Kokkos::kokkos_malloc()`](malloc) or [`Kokkos::kokkos_realloc()`](realloc) on the same memory space [`MemorySpace`](../memory_spaces) and not yet freed with [`Kokkos::kokkos_free()`](free), otherwise, the results are undefined.
 
-WARNING: calling any function that manipulates the behavior of the memory (e.g. `memAdvise`) on memory managed by `Kokkos` results in undefined behavior. You are on your own with this.
+WARNING: calling any function that manipulates the behavior of the memory (e.g. `memAdvise`) on memory managed by `Kokkos` results in undefined behavior.
 
 ## Parameters
 
