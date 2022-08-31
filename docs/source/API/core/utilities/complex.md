@@ -25,7 +25,6 @@ class complex {
 
    KOKKOS_INLINE_FUNCTION complex();
    KOKKOS_INLINE_FUNCTION complex(const complex& src);
-   KOKKOS_INLINE_FUNCTION complex(const volatile complex& src);
 
    template<class T>
    KOKKOS_INLINE_FUNCTION complex(const T& re);
@@ -38,17 +37,9 @@ class complex {
 
    template<class T>
    KOKKOS_INLINE_FUNCTION complex<Scalar>& operator= (const complex<T>& src);
-   template<class T>
-   KOKKOS_INLINE_FUNCTION complex<Scalar>& operator= (const volatile complex<T>& src);
-   template<class T>
-   KOKKOS_INLINE_FUNCTION complex<Scalar>& operator= (const complex<T>& src) volatile;
-   template<class T>
-   KOKKOS_INLINE_FUNCTION complex<Scalar>& operator= (const volatile complex<T>& src) volatile;
 
    template<class T>
    KOKKOS_INLINE_FUNCTION complex<Scalar>& operator= (const T& re);
-   template<class T>
-   KOKKOS_INLINE_FUNCTION complex<Scalar>& operator= (const T& re) volatile;
 
    template<class T>
    KOKKOS_INLINE_FUNCTION complex<Scalar>& operator= (const std::complex<T>& src);
@@ -60,23 +51,15 @@ class complex {
    KOKKOS_INLINE_FUNCTION RealType& real();
    KOKKOS_INLINE_FUNCTION const RealType imag() const;
    KOKKOS_INLINE_FUNCTION const RealType real() const;
-   KOKKOS_INLINE_FUNCTION volatile RealType& imag() volatile;
-   KOKKOS_INLINE_FUNCTION volatile RealType& real() volatile;
-   KOKKOS_INLINE_FUNCTION const RealType imag() const volatile;
-   KOKKOS_INLINE_FUNCTION const RealType real() const volatile;
    KOKKOS_INLINE_FUNCTION void imag(RealType v);
    KOKKOS_INLINE_FUNCTION void real(RealType v);
 
    template<class T>
    KOKKOS_INLINE_FUNCTION complex& operator += (const complex<T>& src);
    template<class T>
-   KOKKOS_INLINE_FUNCTION complex& operator += (const volatile complex<T>& src) volatile;
-   template<class T>
    complex& operator += (const std::complex<T>& src);
    template<class T>
    KOKKOS_INLINE_FUNCTION complex& operator += (const T& real);
-   template<class T>
-   KOKKOS_INLINE_FUNCTION complex& operator += (const volatile T& real) real;
 
    template<class T>
    KOKKOS_INLINE_FUNCTION complex& operator -= (const complex<T>& src);
@@ -88,13 +71,9 @@ class complex {
    template<class T>
    KOKKOS_INLINE_FUNCTION complex& operator *= (const complex<T>& src);
    template<class T>
-   KOKKOS_INLINE_FUNCTION complex& operator *= (const volatile complex<T>& src) volatile;
-   template<class T>
    complex& operator *= (const std::complex<T>& src);
    template<class T>
    KOKKOS_INLINE_FUNCTION complex& operator *= (const T& real);
-   template<class T>
-   KOKKOS_INLINE_FUNCTION complex& operator *= (const volatile T& real) real;
 
    template<class T>
    KOKKOS_INLINE_FUNCTION complex& operator /= (const complex<T>& src);
@@ -139,11 +118,6 @@ class complex {
    
 
  * ```c++
-      KOKKOS_INLINE_FUNCTION complex(const volatile complex& src);
-   ```
-   Copy constructor. Sets `re = src.real()` and `im = src.imag()`.
-
- * ```c++
       template<class T>
       KOKKOS_INLINE_FUNCTION complex(const T& real);
    ```
@@ -171,29 +145,7 @@ class complex {
 
  * ```c++
       template<class T>
-      KOKKOS_INLINE_FUNCTION complex<Scalar>& operator= (const volatile complex<T>& src);
-   ```
-   Sets `re = src.real()` and `im = src.imag()`.
- * ```c++
-      template<class T>
-      KOKKOS_INLINE_FUNCTION complex<Scalar>& operator= (const complex<T>& src) volatile;
-   ```
-   Sets `re = src.real()` and `im = src.imag()`.
- * ```c++
-      template<class T>
-      KOKKOS_INLINE_FUNCTION complex<Scalar>& operator= (const volatile complex<T>& src) volatile;
-   ```
-   Sets `re = src.real()` and `im = src.imag()`.
-
- * ```c++
-      template<class T>
       KOKKOS_INLINE_FUNCTION complex<Scalar>& operator= (const T& re);
-   ```
-   Sets `re = src.real()` and `im = value_type()`.
-
- * ```c++
-      template<class T>
-      KOKKOS_INLINE_FUNCTION complex<Scalar>& operator= (const T& re) volatile;
    ```
    Sets `re = src.real()` and `im = value_type()`.
 
@@ -228,22 +180,6 @@ class complex {
    ```
    Return `re`.
  * ```c++
-      KOKKOS_INLINE_FUNCTION volatile RealType& imag() volatile;
-   ```
-   Return `im`.
- * ```c++
-      KOKKOS_INLINE_FUNCTION volatile RealType& real() volatile;
-   ```
-   Return `re`.
- * ```c++
-      KOKKOS_INLINE_FUNCTION const RealType imag() const volatile;
-   ```
-   Return `im`.
- * ```c++
-      KOKKOS_INLINE_FUNCTION const RealType real() const volatile;
-   ```
-   Return `re`.
- * ```c++
       KOKKOS_INLINE_FUNCTION void imag(RealType v);
    ```
    Sets `im = v`.
@@ -260,22 +196,12 @@ class complex {
 
  * ```c++
       template<class T>
-      KOKKOS_INLINE_FUNCTION complex& operator += (const volatile complex<T>& src) volatile;
-   ```
-   Executes `re += src.real(); im += src.imag(); return *this;`
- * ```c++
-      template<class T>
       complex& operator += (const std::complex<T>& src);
    ```
    Executes `re += src.real(); im += src.imag(); return *this;`
  * ```c++
       template<class T>
       KOKKOS_INLINE_FUNCTION complex& operator += (const T& real);
-   ```
-   Executes `re += real; return *this;`
- * ```c++
-      template<class T>
-      KOKKOS_INLINE_FUNCTION complex& operator += (const volatile T& real) real;
    ```
    Executes `re += real; return *this;`
  
@@ -302,22 +228,12 @@ class complex {
    Multiplies the current complex number with the complex number src.
  * ```c++
       template<class T>
-      KOKKOS_INLINE_FUNCTION complex& operator *= (const volatile complex<T>& src) volatile;
-   ```
-   Multiplies the current complex number with the complex number `src`.
- * ```c++
-      template<class T>
       complex& operator *= (const std::complex<T>& src);
    ```
    Multiplies the current complex number with the complex number `src`.
  * ```c++
       template<class T>
       KOKKOS_INLINE_FUNCTION complex& operator *= (const T& real);
-   ```
-   Executes `re *= real; im *= real; return *this;`
- * ```c++
-      template<class T>
-      KOKKOS_INLINE_FUNCTION complex& operator *= (const volatile T& real) real;
    ```
    Executes `re *= real; im *= real; return *this;`
  * ```c++

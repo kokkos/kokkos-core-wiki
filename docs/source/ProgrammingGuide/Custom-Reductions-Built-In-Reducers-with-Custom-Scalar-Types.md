@@ -33,12 +33,6 @@ namespace sample {  // namespace helps with name resolution in reduction identit
           the_array[i]+=src.the_array[i];
        }
        return *this;
-     } 
-     KOKKOS_INLINE_FUNCTION   // volatile add operator 
-     void operator += (const volatile array_type& src) volatile {
-       for ( int i = 0; i < N; i++ ) {
-         the_array[i]+=src.the_array[i];
-       }
      }
    };
    typedef array_type<int,4> ValueType;  // used to simplify code below
