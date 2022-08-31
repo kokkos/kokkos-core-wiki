@@ -29,15 +29,9 @@ struct pair {
   
     template <class U, class V>
     KOKKOS_FORCEINLINE_FUNCTION constexpr pair(const pair<U, V>& p);
-  
-    template <class U, class V>
-    KOKKOS_FORCEINLINE_FUNCTION constexpr pair(const volatile pair<U, V>& p);
-  
+
     template <class U, class V>
     KOKKOS_FORCEINLINE_FUNCTION pair<T1, T2>& operator=(const pair<U, V>& p);
-  
-    template <class U, class V>
-    KOKKOS_FORCEINLINE_FUNCTION void operator=(const volatile pair<U, V>& p) volatile;
   
     template <class U, class V>
     pair(const std::pair<U, V>& p);
@@ -81,14 +75,6 @@ struct pair {
       
   Conversion from `std::pair`. Assigns each element of the pair to its corresponding element in the `p`
 
-  * 
-  ```c++
-  template <class U, class V>
-  KOKKOS_FORCEINLINE_FUNCTION constexpr pair(const volatile pair<U, V>& p);
-  ```
-     
-  Copy constructor from a volatile pair. Copies each element from `p` 
-
 ### Assignment and conversion
 
   * 
@@ -97,16 +83,8 @@ struct pair {
   KOKKOS_FORCEINLINE_FUNCTION pair<T1, T2>& operator=(const pair<U, V>& p);
   ```
 
-Sets `first` to `p.first` and `second` to `p.second` 
- 
-  * 
-  ```c++ 
-  template <class U, class V>
-  KOKKOS_FORCEINLINE_FUNCTION void operator=(const volatile pair<U, V>& p) volatile;
-  ```
-  
   Sets `first` to `p.first` and `second` to `p.second` 
-
+ 
   ### Functions
 
   * 

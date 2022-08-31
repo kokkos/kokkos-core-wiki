@@ -21,7 +21,6 @@ struct MinMaxScalar{
   Scalar max_val;
 
   void operator = (const MinMaxScalar& rhs);
-  void operator = (const volatile MinMaxScalar& rhs);
 };
 ```
 
@@ -35,7 +34,4 @@ struct MinMaxScalar{
 ### Assignment operators
 
  * `void operator = (const MinMaxScalar& rhs);` 
-      assign `min_val` and `max_val` from `rhs`;
-
- * `void operator = (const volatile MinMaxScalar& rhs);` 
       assign `min_val` and `max_val` from `rhs`;
