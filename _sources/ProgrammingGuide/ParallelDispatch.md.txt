@@ -119,11 +119,10 @@ public:
 
   // "Join" intermediate results from different threads.
   // This should normally implement the same reduction
-  // operation as operator() above. Note that both input
-  // arguments MUST be declared volatile.
+  // operation as operator() above.
   KOKKOS_INLINE_FUNCTION void
-  join (volatile value_type& dst,
-        const volatile value_type& src) const
+  join (value_type& dst,
+        const value_type& src) const
   { // max-plus semiring equivalent of "plus"
     if (dst < src) {
       dst = src;
@@ -195,8 +194,8 @@ struct ColumnSums {
   // value_type here is already a "reference" type,
   // so we don't pass it in by reference here.
   KOKKOS_INLINE_FUNCTION void
-  join (volatile value_type dst,
-        const volatile value_type src) const {
+  join (value_type dst,
+        const value_type src) const {
     for (size_type j = 0; j < value_count; ++j) {
       dst[j] += src[j];
     }

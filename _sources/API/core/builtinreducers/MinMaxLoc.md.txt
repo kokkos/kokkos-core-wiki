@@ -24,9 +24,6 @@ class MinMaxLoc{
    void join(value_type& dest, const value_type& src)  const
 
    KOKKOS_INLINE_FUNCTION
-   void join(volatile value_type& dest, const volatile value_type& src) const;
-
-   KOKKOS_INLINE_FUNCTION
    void init( value_type& val)  const;
 
    KOKKOS_INLINE_FUNCTION
@@ -70,11 +67,6 @@ class MinMaxLoc{
    ```
    - Store minimum with location of `src` and `dest` into `dest`.
    - Store maximum with location of `src` and `dest` into `dest`.
- * ```c++
-   void join(volatile value_type& dest, const volatile value_type& src) const;
-   ```
-    - Store minimum with location of `src` and `dest` into `dest`.
-   - Store maximum with location of `src` and `dest` into `dest`. 
 
  * ```c++
    void init( value_type& val)  const;

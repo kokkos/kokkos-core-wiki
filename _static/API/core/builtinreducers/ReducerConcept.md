@@ -23,9 +23,6 @@ class Reducer {
    void join(value_type& dest, const value_type& src)  const
 
    KOKKOS_INLINE_FUNCTION
-   void join(volatile value_type& dest, const volatile value_type& src) const;
-
-   KOKKOS_INLINE_FUNCTION
    void init( value_type& val)  const;
 
    KOKKOS_INLINE_FUNCTION
@@ -68,11 +65,6 @@ class Reducer {
 
  * ```c++
    void join(value_type& dest, const value_type& src)  const;
-   ```
-   Combine `src` into `dest`. For example, `Add` performs `dest+=src;`. 
-
- * ```c++
-   void join(volatile value_type& dest, const volatile value_type& src) const;
    ```
    Combine `src` into `dest`. For example, `Add` performs `dest+=src;`. 
 

@@ -146,12 +146,6 @@ ValueType reduce(const std::string& label, const ExecutionSpace& exespace,      
 	constexpr ValueType operator()(const ValueType& a, const ValueType& b) const {
 	  return /* ... */
 	}
-
-	KOKKOS_FUNCTION
-	constexpr ValueType operator()(const volatile ValueType& a,
-								   const volatile ValueType& b) const {
-	  return /* ... */
-	}
   };
   ```
   - The behavior is non-deterministic if the `joiner` operation
@@ -372,12 +366,6 @@ ValueType transform_reduce(const std::string& label,                            
                                  const ValueType& b) const {
 	  return /* ... */
 	}
-
-	KOKKOS_FUNCTION
-	constexpr ValueType operator()(const volatile ValueType& a,
-								   const volatile ValueType& b) const {
-	  return /* ... */
-	}
   };
   ```
   - The behavior is non-deterministic if the `joiner` operation
@@ -557,20 +545,11 @@ Exclusive means that the i-th input element is not included in the i-th sum.
 	                        const value_type & b) const {
        return /* ... */;
      }
-
-     return_type operator()(const volatile value_type & a,
-	                  	    const volatile value_type & b) const {
-       return /* ... */;
-     }
   };
   ```
   The return type `return_type` must be such that an object of type `OutputIteratorType`
   for (1,2,5,6) or an object of type `value_type` where `value_type` is the
   value type of `view_dest` for (3,4,7,8) can be dereferenced and assigned a value of type `return_type`.
-
-  - the volatile overload is needed for correctness by the current Kokkos
-  implementation of prefix scan operations
-
 
 ### Return
 
