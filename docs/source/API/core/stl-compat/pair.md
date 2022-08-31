@@ -84,7 +84,6 @@ struct pair {
   ```
 
   Sets `first` to `p.first` and `second` to `p.second` 
- 
   ### Functions
 
   * 
