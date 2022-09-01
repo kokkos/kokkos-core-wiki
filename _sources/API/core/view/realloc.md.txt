@@ -35,6 +35,18 @@ void realloc(const I& arg_prop, Kokkos::View<T, P...>& v,
        const size_t n6 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
        const size_t n7 = KOKKOS_IMPL_CTOR_DEFAULT_ARG);
 
+template <class... ViewCtorArgs, class T, class... P>
+void realloc(const Impl::ViewCtorProp<ViewCtorArgs...>& arg_prop,
+       Kokkos::View<T, P...>& v,
+       const size_t n0 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
+       const size_t n1 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
+       const size_t n2 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
+       const size_t n3 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
+       const size_t n4 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
+       const size_t n5 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
+       const size_t n6 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
+       const size_t n7 = KOKKOS_IMPL_CTOR_DEFAULT_ARG);
+
 template <class T, class... P>
 void realloc(Kokkos::View<T, P...>& v,
        const typename Kokkos::View<T, P...>::array_layout& layout);
@@ -42,6 +54,11 @@ void realloc(Kokkos::View<T, P...>& v,
 template <class I, class T, class... P>
 void realloc(const I& arg_prop, Kokkos::View<T, P...>& v,
        const typename Kokkos::View<T, P...>::array_layout& layout);
+
+template <class... ViewCtorArgs, class T, class... P>
+void realloc(const Impl::ViewCtorProp<ViewCtorArgs...>& arg_prop,
+             Kokkos::View<T, P...>& v,
+             const typename Kokkos::View<T, P...>::array_layout& layout);
 ```
 
 ## Description
@@ -87,6 +104,28 @@ void realloc(const I& arg_prop, Kokkos::View<T, P...>& v,
   * `View<T, P...>::array_layout` is either `LayoutLeft` or `LayoutRight`.
 
 * ```c++
+  template <class... ViewCtorArgs, class T, class... P>
+  void realloc(const I& arg_prop, Kokkos::View<T, P...>& v,
+         Kokkos::View<T, P...>& v,
+         const size_t n0 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
+         const size_t n1 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
+         const size_t n2 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
+         const size_t n3 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
+         const size_t n4 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
+         const size_t n5 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
+         const size_t n6 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
+         const size_t n7 = KOKKOS_IMPL_CTOR_DEFAULT_ARG);
+  ```
+  Resizes `v` to have the new dimensions without preserving its contents. The new `Kokkos::View` is constructed using the View constructor properties `arg_prop`, e.g., `Kokkos::view_alloc(Kokkos::WithoutInitializing)`.
+  * `v`: existing view, can be a default constructed one.
+  * `n[X]`: new length for extent X.
+  * `arg_prop`: View constructor properties, e.g., `Kokkos::view_alloc(Kokkos::WithoutInitializing)`.
+
+  Restrictions:
+  * `View<T, P...>::array_layout` is either `LayoutLeft` or `LayoutRight`.
+  * `arg_prop` must not include a pointer to memory, a label, or a memory space.
+
+* ```c++
   template <class T, class... P>
   void realloc(Kokkos::View<T, P...>& v,
          const typename Kokkos::View<T, P...>::array_layout& layout);
@@ -104,6 +143,20 @@ void realloc(const I& arg_prop, Kokkos::View<T, P...>& v,
   * `v`: existing view, can be a default constructed one.
   * `layout`: a layout instance containing the new dimensions.
   * `arg_prop`: View constructor property, e.g., `Kokkos::WithoutInitializing`.
+
+* ```c++
+  template <class... ViewCtorArgs, class T, class... P>
+  void realloc(const I& arg_prop, Kokkos::View<T, P...>& v,
+         Kokkos::View<T, P...>& v,
+         const typename Kokkos::View<T, P...>::array_layout& layout);
+  ```
+  Resizes `v` to have the new dimensions without preserving its contents. The new `Kokkos::View` is constructed using the View constructor properties `arg_prop`, e.g., `Kokkos::view_alloc(Kokkos::WithoutInitializing)`.
+  * `v`: existing view, can be a default constructed one.
+  * `layout`: a layout instance containing the new dimensions.
+  * `arg_prop`: View constructor properties, e.g., `Kokkos::view_alloc(Kokkos::WithoutInitializing)`.
+
+  Restrictions:
+  * `arg_prop` must not include a pointer to memory, a label, or a memory space.
 
 ## Example:
   * ```c++
