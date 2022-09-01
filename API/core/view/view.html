@@ -690,7 +690,7 @@ Example: <code class="docutils literal notranslate"><span class="pre">a.stride(3
 <li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">constexpr</span><span class="w"> </span><span class="n">pointer_type</span><span class="w"> </span><span class="n">data</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
 </pre></div>
 </div>
-<p>Return the pointer to the underlying data allocation.</p>
+<p>Return the pointer to the underlying data allocation. WARNING: calling any function that manipulates the behavior of the memory (e.g. <code class="docutils literal notranslate"><span class="pre">memAdvise</span></code>) on memory managed by <code class="docutils literal notranslate"><span class="pre">Kokkos</span></code> results in undefined behavior.</p>
 </li>
 <li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="n">span_is_contiguous</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
 </pre></div>

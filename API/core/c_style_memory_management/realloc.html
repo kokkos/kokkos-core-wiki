@@ -414,6 +414,7 @@
 </pre></div>
 </div>
 <p>Reallocates the given area of memory. It must be previously allocated by <a class="reference internal" href="malloc.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">Kokkos::kokkos_malloc()</span></code></span></a> or <a class="reference internal" href="#"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">Kokkos::kokkos_realloc()</span></code></span></a> on the same memory space <a class="reference internal" href="../memory_spaces.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">MemorySpace</span></code></span></a> and not yet freed with <a class="reference internal" href="free.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">Kokkos::kokkos_free()</span></code></span></a>, otherwise, the results are undefined.</p>
+<p>WARNING: calling any function that manipulates the behavior of the memory (e.g. <code class="docutils literal notranslate"><span class="pre">memAdvise</span></code>) on memory managed by <code class="docutils literal notranslate"><span class="pre">Kokkos</span></code> results in undefined behavior.</p>
 <section id="parameters">
 <h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this heading">#</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">ptr</span></code>: The pointer to the memory area to be reallocated.<br />

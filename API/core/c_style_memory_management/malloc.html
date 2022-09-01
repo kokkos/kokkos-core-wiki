@@ -420,6 +420,7 @@
 <p>Allocate <code class="docutils literal notranslate"><span class="pre">size</span></code> bytes of uninitialized storage on the specified memory space <a class="reference internal" href="../memory_spaces.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">MemorySpace</span></code></span></a> plus some extra space for metadata such as the label.</p>
 <p>If allocation succeeds, returns a pointer to the lowest (first) byte in the allocated memory block that is suitably aligned for any scalar type.</p>
 <p>If allocation fails, an exception of type <code class="docutils literal notranslate"><span class="pre">Kokkos::Experimental::RawMemoryAllocationFailure</span></code> is thrown.</p>
+<p>WARNING: calling any function that manipulates the behavior of the memory (e.g. <code class="docutils literal notranslate"><span class="pre">memAdvise</span></code>) on memory managed by <code class="docutils literal notranslate"><span class="pre">Kokkos</span></code> results in undefined behavior.</p>
 <section id="parameters">
 <h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this heading">#</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">label</span></code>: A user provided string which is used in profiling and debugging tools via the KokkosP Profiling Tools.<br />
