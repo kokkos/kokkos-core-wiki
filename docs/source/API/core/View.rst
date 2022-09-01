@@ -45,6 +45,7 @@ The following facilities are available:
    ./view/realloc
    ./view/resize
    ./view/subview
+   ./view/Subview
    ./view/view
    ./view/view_alloc
    ./view/view_like
