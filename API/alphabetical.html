@@ -251,6 +251,7 @@
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="core/Spaces.html">Spaces</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="core/execution_spaces.html">Execution Spaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="core/spaces/partition_space.html">Kokkos::partition_space()</a></li>
 <li class="toctree-l3"><a class="reference internal" href="core/memory_spaces.html">Memory Spaces</a></li>
 <li class="toctree-l3"><a class="reference internal" href="core/SpaceAccessibility.html">Space Accessibility</a></li>
 </ul>
@@ -848,102 +849,107 @@
 <td class="text-left"><p></p></td>
 <td class="text-left"><p>Tag passed to team_size functions</p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/policies/NestedPolicies.html#perteam"><span class="std std-ref">PerTeam</span></a></p></td>
+<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/spaces/partition_space.html"><span class="doc std std-doc">partition_space</span></a></p></td>
+<td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
+<td class="text-left"><p><a class="reference internal" href="core/Spaces.html"><span class="doc std std-doc">Spaces</span></a></p></td>
+<td class="text-left"><p>Split an existing execution space instance into multiple</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/policies/NestedPolicies.html#perteam"><span class="std std-ref">PerTeam</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/Execution-Policies.html"><span class="doc std std-doc">Execution Policies</span></a></p></td>
 <td class="text-left"><p>Policy used in single construct to indicate once per team execution.</p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/policies/NestedPolicies.html#perthread"><span class="std std-ref">PerThread</span></a></p></td>
+<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/policies/NestedPolicies.html#perthread"><span class="std std-ref">PerThread</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/Execution-Policies.html"><span class="doc std std-doc">Execution Policies</span></a></p></td>
 <td class="text-left"><p>Policy used in single construct to indicate once per thread execution.</p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/builtinreducers/Prod.html"><span class="doc std std-doc">Prod</span></a></p></td>
+<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/builtinreducers/Prod.html"><span class="doc std std-doc">Prod</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/builtin_reducers.html"><span class="doc std std-doc">Built-in Reducers</span></a></p></td>
 <td class="text-left"><p>Reducer for Multiplicative reduction</p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/policies/RangePolicy.html"><span class="doc std std-doc">RangePolicy</span></a></p></td>
+<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/policies/RangePolicy.html"><span class="doc std std-doc">RangePolicy</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/Execution-Policies.html"><span class="doc std std-doc">Execution Policies</span></a></p></td>
 <td class="text-left"><p>Policy to iterate over a 1D index range.</p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/view/realloc.html"><span class="doc std std-doc">realloc</span></a></p></td>
+<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/view/realloc.html"><span class="doc std std-doc">realloc</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/View.html"><span class="doc std std-doc">View</span></a></p></td>
 <td class="text-left"><p>Resize an existing view without maintaining the content</p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/builtinreducers/ReducerConcept.html"><span class="doc std std-doc">ReducerConcept</span></a></p></td>
+<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/builtinreducers/ReducerConcept.html"><span class="doc std std-doc">ReducerConcept</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/builtin_reducers.html"><span class="doc std std-doc">Built-in Reducers</span></a></p></td>
 <td class="text-left"><p>Provides the concept for Reducers.</p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/view/resize.html"><span class="doc std std-doc">resize</span></a></p></td>
+<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/view/resize.html"><span class="doc std std-doc">resize</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/View.html"><span class="doc std std-doc">View</span></a></p></td>
 <td class="text-left"><p>Resize an existing view while maintaining the content</p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/execution_spaces.html#serial"><span class="std std-ref">Serial</span></a></p></td>
+<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/execution_spaces.html#serial"><span class="std std-ref">Serial</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/Spaces.html"><span class="doc std std-doc">Spaces</span></a></p></td>
 <td class="text-left"><p>Execution space using serial execution the CPU.</p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/initialize_finalize/ScopeGuard.html"><span class="doc std std-doc">ScopeGuard</span></a></p></td>
+<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/initialize_finalize/ScopeGuard.html"><span class="doc std std-doc">ScopeGuard</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/Initialize-and-Finalize.html"><span class="doc std std-doc">Initialization and Finalization</span></a></p></td>
 <td class="text-left"><p>class to aggregate initializing and finalizing Kokkos</p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/SpaceAccessibility.html"><span class="doc std std-doc">SpaceAccessibility</span></a></p></td>
+<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/SpaceAccessibility.html"><span class="doc std std-doc">SpaceAccessibility</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/Spaces.html"><span class="doc std std-doc">Spaces</span></a></p></td>
 <td class="text-left"><p>Facility to query accessibility rules between execution and memory spaces.</p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/view/subview.html"><span class="doc std std-doc">subview</span></a></p></td>
+<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/view/subview.html"><span class="doc std std-doc">subview</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/View.html"><span class="doc std std-doc">View</span></a></p></td>
 <td class="text-left"><p>Crating multi-dimensional array which is a slice of a view</p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/builtinreducers/Sum.html"><span class="doc std std-doc">Sum</span></a></p></td>
+<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/builtinreducers/Sum.html"><span class="doc std std-doc">Sum</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/builtin_reducers.html"><span class="doc std std-doc">Built-in Reducers</span></a></p></td>
 <td class="text-left"><p>Reducer for Sum reduction</p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/policies/TeamHandleConcept.html"><span class="doc std std-doc">TeamHandle concept</span></a></p></td>
+<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/policies/TeamHandleConcept.html"><span class="doc std std-doc">TeamHandle concept</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/Execution-Policies.html"><span class="doc std std-doc">Execution Policies</span></a></p></td>
 <td class="text-left"><p>Provides the concept for the <code class="docutils literal notranslate"><span class="pre">member_type</span></code> of a <a class="reference internal" href="core/policies/TeamPolicy.html"><span class="doc std std-doc">TeamPolicy</span></a>.</p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/policies/TeamPolicy.html"><span class="doc std std-doc">(U)TeamPolicy</span></a></p></td>
+<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/policies/TeamPolicy.html"><span class="doc std std-doc">(U)TeamPolicy</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/Execution-Policies.html"><span class="doc std std-doc">Execution Policies</span></a></p></td>
 <td class="text-left"><p>Policy to iterate over a 1D index range, assigning to each iteration a team of threads.</p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/policies/TeamThreadRange.html"><span class="doc std std-doc">TeamThreadRange</span></a></p></td>
+<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/policies/TeamThreadRange.html"><span class="doc std std-doc">TeamThreadRange</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/Execution-Policies.html"><span class="doc std std-doc">Execution Policies</span></a></p></td>
 <td class="text-left"><p>Policy to iterate over a 1D index range with the threads of a team.</p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/policies/TeamVectorRange.html"><span class="doc std std-doc">TeamVectorRange</span></a></p></td>
+<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/policies/TeamVectorRange.html"><span class="doc std std-doc">TeamVectorRange</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/Execution-Policies.html"><span class="doc std std-doc">Execution Policies</span></a></p></td>
 <td class="text-left"><p>Policy to iterate over a 1D index range with the threads and vector lanes of a team.</p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/policies/ThreadVectorRange.html"><span class="doc std std-doc">ThreadVectorRange</span></a></p></td>
+<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/policies/ThreadVectorRange.html"><span class="doc std std-doc">ThreadVectorRange</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/Execution-Policies.html"><span class="doc std std-doc">Execution Policies</span></a></p></td>
 <td class="text-left"><p>Policy to iterate over a 1D index range with the vector lanes of a thread.</p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/utilities/timer.html"><span class="doc std std-doc">Timer</span></a></p></td>
+<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/utilities/timer.html"><span class="doc std std-doc">Timer</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/Utilities.html"><span class="doc std std-doc">Utilities</span></a></p></td>
 <td class="text-left"><p>A basic timer returning seconds</p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/view/view.html"><span class="doc std std-doc">View</span></a></p></td>
+<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/view/view.html"><span class="doc std std-doc">View</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/View.html"><span class="doc std std-doc">View</span></a></p></td>
 <td class="text-left"><p>A multi-dimensional array</p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/view/view_like.html"><span class="doc std std-doc">View-like Type Concept</span></a></p></td>
+<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/view/view_like.html"><span class="doc std std-doc">View-like Type Concept</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
 <td class="text-left"><p><a class="reference internal" href="core/View.html"><span class="doc std std-doc">View</span></a></p></td>
 <td class="text-left"><p>A set of class templates that act like a View</p></td>
