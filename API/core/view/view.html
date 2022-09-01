@@ -527,57 +527,57 @@ Its semantics are similar to that of <code class="docutils literal notranslate">
 <li><p><code class="docutils literal notranslate"><span class="pre">View(</span> <span class="pre">const</span> <span class="pre">std::string&amp;</span> <span class="pre">name,</span> <span class="pre">const</span> <span class="pre">IntType&amp;</span> <span class="pre">...</span> <span class="pre">indices)</span></code>: Standard allocating constructor. The initialization is executed on the default instance of the execution space corresponding to <code class="docutils literal notranslate"><span class="pre">MemorySpace</span></code> and fences it.</p>
 <ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">name</span></code>: a user provided label, which is used for profiling and debugging purposes. Names are not required to be unique,</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">indices</span></code>: Runtime dimensions of the view.</p></li>
-<li><p>Requires: <code class="docutils literal notranslate"><span class="pre">sizeof(IntType...)==rank_dynamic()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">indices</span></code>: Extents of the View.</p></li>
+<li><p>Requires: <code class="docutils literal notranslate"><span class="pre">sizeof(IntType...)==rank_dynamic()</span></code> or <code class="docutils literal notranslate"><span class="pre">sizeof(IntType...)==rank()</span></code>. In the latter case, the extents corresponding to compile-time dimensions must match the View type’s compile-time extents.</p></li>
 <li><p>Requires: <code class="docutils literal notranslate"><span class="pre">array_layout::is_regular</span> <span class="pre">==</span> <span class="pre">true</span></code>.</p></li>
 </ul>
 </li>
 <li><p><code class="docutils literal notranslate"><span class="pre">View(</span> <span class="pre">const</span> <span class="pre">std::string&amp;</span> <span class="pre">name,</span> <span class="pre">const</span> <span class="pre">array_layout&amp;</span> <span class="pre">layout)</span></code>: Standard allocating constructor. The initialization is executed on the default instance of the execution space corresponding to <code class="docutils literal notranslate"><span class="pre">MemorySpace</span></code> and fences it.</p>
 <ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">name</span></code>: a user provided label, which is used for profiling and debugging purposes. Names are not required to be unique,</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">layout</span></code>: an instance of a layout class.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">layout</span></code>: an instance of a layout class. The number of valid extents must either match the dynamic rank or the total rank. In the latter case, the extents corresponding to compile-time dimensions must match the View type’s compile-time extents.</p></li>
 </ul>
 </li>
 <li><p><code class="docutils literal notranslate"><span class="pre">View(</span> <span class="pre">const</span> <span class="pre">AllocProperties&amp;</span> <span class="pre">prop,</span> <span class="pre">,</span> <span class="pre">const</span> <span class="pre">IntType&amp;</span> <span class="pre">...</span> <span class="pre">indices)</span></code>: Allocating constructor with allocation properties. If an execution space is specified in <code class="docutils literal notranslate"><span class="pre">prop</span></code>, the initialization uses it and does not fence. Otherwise, the View is initialized using the default execution space instance corresponding to <code class="docutils literal notranslate"><span class="pre">MemorySpace</span></code> and fences it.</p>
 <ul>
 <li><p>An allocation properties object is returned by the <code class="docutils literal notranslate"><span class="pre">view_alloc</span></code> function.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">indices</span></code>: Runtime dimensions of the view.</p></li>
-<li><p>Requires: <code class="docutils literal notranslate"><span class="pre">sizeof(IntType...)==rank_dynamic()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">indices</span></code>: Extents of the View.</p></li>
+<li><p>Requires: <code class="docutils literal notranslate"><span class="pre">sizeof(IntType...)==rank_dynamic()</span></code> or <code class="docutils literal notranslate"><span class="pre">sizeof(IntType...)==rank()</span></code>. In the latter case, the extents corresponding to compile-time dimensions must match the View type’s compile-time extents.</p></li>
 <li><p>Requires: <code class="docutils literal notranslate"><span class="pre">array_layout::is_regular</span> <span class="pre">==</span> <span class="pre">true</span></code>.</p></li>
 </ul>
 </li>
 <li><p><code class="docutils literal notranslate"><span class="pre">View(</span> <span class="pre">const</span> <span class="pre">AllocProperties&amp;</span> <span class="pre">prop,</span> <span class="pre">const</span> <span class="pre">array_layout&amp;</span> <span class="pre">layout)</span></code>: Allocating constructor with allocation properties and a layout object. If an execution space is specified in <code class="docutils literal notranslate"><span class="pre">prop</span></code>, the initialization uses it and does not fence. Otherwise, the View is initialized using the default execution space instance corresponding to <code class="docutils literal notranslate"><span class="pre">MemorySpace</span></code> and fences it.</p>
 <ul>
 <li><p>An allocation properties object is returned by the <code class="docutils literal notranslate"><span class="pre">view_alloc</span></code> function.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">layout</span></code>: an instance of a layout class.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">layout</span></code>: an instance of a layout class. The number of valid extents must either match the dynamic rank or the total rank. In the latter case, the extents corresponding to compile-time dimensions must match the View type’s compile-time extents.</p></li>
 </ul>
 </li>
 <li><p><code class="docutils literal notranslate"><span class="pre">View(</span> <span class="pre">const</span> <span class="pre">pointer_type&amp;</span> <span class="pre">ptr,</span> <span class="pre">const</span> <span class="pre">IntType&amp;</span> <span class="pre">...</span> <span class="pre">indices)</span></code>: Unmanaged data wrapping constructor.</p>
 <ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">ptr</span></code>: pointer to a user provided memory allocation. Must provide storage of size <code class="docutils literal notranslate"><span class="pre">View::required_allocation_size(n0,...,nR)</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">indices</span></code>: Runtime dimensions of the view.</p></li>
-<li><p>Requires: <code class="docutils literal notranslate"><span class="pre">sizeof(IntType...)==rank_dynamic()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">indices</span></code>: Extents of the View.</p></li>
+<li><p>Requires: <code class="docutils literal notranslate"><span class="pre">sizeof(IntType...)==rank_dynamic()</span></code> or <code class="docutils literal notranslate"><span class="pre">sizeof(IntType...)==rank()</span></code>. In the latter case, the extents corresponding to compile-time dimensions must match the View type’s compile-time extents.</p></li>
 <li><p>Requires: <code class="docutils literal notranslate"><span class="pre">array_layout::is_regular</span> <span class="pre">==</span> <span class="pre">true</span></code>.</p></li>
 </ul>
 </li>
 <li><p><code class="docutils literal notranslate"><span class="pre">View(</span> <span class="pre">const</span> <span class="pre">std::string&amp;</span> <span class="pre">name,</span> <span class="pre">const</span> <span class="pre">array_layout&amp;</span> <span class="pre">layout)</span></code>: Unmanaged data wrapper constructor.</p>
 <ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">ptr</span></code>: pointer to a user provided memory allocation. Must provide storage of size <code class="docutils literal notranslate"><span class="pre">View::required_allocation_size(layout)</span></code> (<em>NEEDS TO BE IMPLEMENTED</em>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">layout</span></code>: an instance of a layout class.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">layout</span></code>: an instance of a layout class. The number of valid extents must either match the dynamic rank or the total rank. In the latter case, the extents corresponding to compile-time dimensions must match the View type’s compile-time extents.</p></li>
 </ul>
 </li>
 <li><p><code class="docutils literal notranslate"><span class="pre">View(</span> <span class="pre">const</span> <span class="pre">ScratchSpace&amp;</span> <span class="pre">space,</span> <span class="pre">const</span> <span class="pre">IntType&amp;</span> <span class="pre">...</span> <span class="pre">indices)</span></code>: Constructor which acquires memory from a Scratch Memory handle.</p>
 <ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">space</span></code>: scratch memory handle. Typically returned from <code class="docutils literal notranslate"><span class="pre">team_handles</span></code> in <code class="docutils literal notranslate"><span class="pre">TeamPolicy</span></code> kernels.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">indices</span></code>: Runtime dimensions of the view.</p></li>
-<li><p>Requires: <code class="docutils literal notranslate"><span class="pre">sizeof(IntType...)==rank_dynamic()</span></code></p></li>
+<li><p>Requires: <code class="docutils literal notranslate"><span class="pre">sizeof(IntType...)==rank_dynamic()</span></code> or <code class="docutils literal notranslate"><span class="pre">sizeof(IntType...)==rank()</span></code>. In the latter case, the extents corresponding to compile-time dimensions must match the View type’s compile-time extents.</p></li>
 <li><p>Requires: <code class="docutils literal notranslate"><span class="pre">array_layout::is_regular</span> <span class="pre">==</span> <span class="pre">true</span></code>.</p></li>
 </ul>
 </li>
 <li><p><code class="docutils literal notranslate"><span class="pre">View(</span> <span class="pre">const</span> <span class="pre">ScratchSpace&amp;</span> <span class="pre">space,</span> <span class="pre">const</span> <span class="pre">array_layout&amp;</span> <span class="pre">layout)</span></code>: Constructor which acquires memory from a Scratch Memory handle.</p>
 <ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">space</span></code>: scratch memory handle. Typically returned from <code class="docutils literal notranslate"><span class="pre">team_handles</span></code> in <code class="docutils literal notranslate"><span class="pre">TeamPolicy</span></code> kernels.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">layout</span></code>: an instance of a layout class.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">layout</span></code>: an instance of a layout class. The number of valid extents must either match the dynamic rank or the total rank. In the latter case, the extents corresponding to compile-time dimensions must match the View type’s compile-time extents.</p></li>
 </ul>
 </li>
 <li><p><code class="docutils literal notranslate"><span class="pre">View(</span> <span class="pre">const</span> <span class="pre">View&lt;DT,</span> <span class="pre">Prop...&gt;&amp;</span> <span class="pre">rhs,</span> <span class="pre">Args</span> <span class="pre">...</span> <span class="pre">args)</span></code>: Subview constructor. See <code class="docutils literal notranslate"><span class="pre">subview</span></code> function for arguments.</p></li>
