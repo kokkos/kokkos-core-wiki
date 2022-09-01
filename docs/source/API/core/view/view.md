@@ -42,6 +42,7 @@ Template parameters other than `DataType` are optional, but ordering is enforced
  * `rank`: rank of the view (i.e. the dimensionality).
  * `rank_dynamic`: number of runtime determined dimensions.
  * `reference_type_is_lvalue_reference`: whether the reference type is a C++ lvalue reference. 
+ * `is_hostspace`: whether the view is accessible from the process thread.
 
 ### Typedefs
 
@@ -67,22 +68,32 @@ Template parameters other than `DataType` are optional, but ordering is enforced
  *  `memory_space`: Data storage location type. 
  *  `device_type`: the compound type defined by `Device<execution_space,memory_space>`
  *  `memory_traits`: The memory traits of the view. 
- *  `host_mirror_space`: Host accessible memory space used in `HostMirror`.
+ *  `host_mirror_space`: compatible view type with the same `DataType` and `LayoutType` stored in host accessible memory space.
+ * `uniform_type`: this view type with all template arguments explicitly defined, and brought into a canonical form.
+   * e.g. 0D and 1D `LayoutLeft` and `LayoutRight` are mapped to the same layout type, and always uses `device_type` as space argument.
+ * `uniform_const_type`: `uniform_type` with const data type
+ * `uniform_runtime_type`: as `uniform_type` but without compile time extents.
+ * `uniform_runtime_const_type`: `uniform_runtime_type` with const data type.
+ * `uniform_nomemspace_type`: uses unified layout and `AnonymousSpace`.
+ * `uniform_const_nomemspace_type`: `uniform_nomemspace_type` with const data type.
+ * `uniform_runtime_nomemspace_type`: uses unified layout, all runtime extents and `AnonymousSpace`.
+ * `uniform_runtime_const_nomemspace_type`: `uniform_runtime_nomemspace_type` with const data type.
 
 
 
 #### ViewTypes
- * `non_const_type`: this view type with all template parameters explicitly defined.
  * `const_type`: this view type with all template parameters explicitly defined using a `const` data type.
- * `HostMirror`: compatible view type with the same `DataType` and `LayoutType` stored in host accessible memory space. 
+ * `non_const_type`: this view type with all template parameters explicitly defined.
+ * `host_mirror_type`: compatible view type with the same `DataType` and `LayoutType` stored in host accessible memory space.
+ * `HostMirror`: compatible view type with the same `DataType` and `LayoutType` stored in host accessible memory space.
 
 #### Data Handles
  * `reference_type`: return type of the view access operators.
- * `pointer_type`: pointer to scalar type. 
+ * `pointer_type`: pointer to scalar type.
 
 #### Other
  *  `array_layout`: The Layout of the View.
- *  `size_type`: index type associated with the memory space of this view. 
+ *  `size_type`: index type associated with the memory space of this view.
  *  `dimension`: An integer array like type, able to represent the extents of the view.
  *  `specialize`: A specialization tag used for partial specialization of the mapping construct underlying a Kokkos View.
 
@@ -128,11 +139,18 @@ Template parameters other than `DataType` are optional, but ordering is enforced
 ### Data Access Functions
 
   * ```c++
-    reference_type operator() (const IntType& ... indices) const
+    reference_type operator[] (const IntType& i) const
+    ```
+    Returns a value of `reference_type` which may or not be referenceable itself. Only valid valid for rank-1 views.
+    See notes on `reference_type` for properties of the return type.
+
+  * ```c++
+    template<class ... IntTypes>
+    reference_type operator() (const IntTypes& ... indices) const
     ```
     Returns a value of `reference_type` which may or not be referenceable itself. The number of index arguments must match the `rank` of the view.
     See notes on `reference_type` for properties of the return type. 
-    * Requires: `sizeof(IntType...)==rank_dynamic()` 
+    * Requires: `sizeof(IntTypes...)==rank`
 
   * ```c++
     reference_type access (const IntType& i0=0, ... , const IntType& i7=0) const
