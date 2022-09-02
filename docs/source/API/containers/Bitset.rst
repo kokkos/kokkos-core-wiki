@@ -13,8 +13,6 @@ Class Interface
 
   :cpp:`Kokkos::Bitset` represents a thread safe view to a fixed-size (at run-time) sequence of N bits.
 
-  :cpp:`Kokkos::ConstBitset` represents a thread safe view to a read-only fixed-size (at run-time) sequence of N bits.
-
   :tparam Device: Device that physically contains the bits.
 
   .. rubric:: Static Constants
