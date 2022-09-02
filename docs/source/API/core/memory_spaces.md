@@ -38,7 +38,7 @@
 (SharedSpace)=
 ## `Kokkos::SharedSpace`
 
-'Kokkos::SharedSpace' <sup>since 4.0</sup> is a [`MemorySpace` type](MemorySpaceConcept) alias representing memory that can be accessed by both CPU and GPU. To achieve this, the memory can be moved automatically from CPU to GPU by the os and driver. If not currently located in the local memory of the accessing processing unit, the memory is moved in chunks (size is backend dependent). These chunks can be moved independently (e.g. only the part that is accessed on the GPU is moved to the GPU).  For details, see [the documentation on the `MemorySpace` concept](MemorySpaceConcept).
+`Kokkos::SharedSpace` <sup>since 4.0</sup> is a [`MemorySpace` type](MemorySpaceConcept) alias representing memory that can be accessed by both CPU and GPU. To achieve this, the memory can be moved automatically from CPU to GPU by the os and driver. If not currently located in the local memory of the accessing processing unit, the memory is moved in chunks (size is backend dependent). These chunks can be moved independently (e.g. only the part that is accessed on the GPU is moved to the GPU).  For details, see [the documentation on the `MemorySpace` concept](MemorySpaceConcept).
 For the following backends `Kokkos::SharedSpace` is pointing to the correspoinding [`MemorySpace` type](MemorySpaceConcept):
 
 - Cuda -> CudaUVMSpace
