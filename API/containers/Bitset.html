@@ -384,7 +384,7 @@
         </a>
         <div class="content-icon-container">
 <div class="edit-this-page">
-  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/API/containers/Bitset.md" title="Edit this page">
+  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/API/containers/Bitset.rst" title="Edit this page">
     <svg aria-hidden="true" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
       <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4"></path>
@@ -411,191 +411,228 @@
           <section id="bitset">
 <h1><code class="docutils literal notranslate"><span class="pre">Bitset</span></code><a class="headerlink" href="#bitset" title="Permalink to this heading">#</a></h1>
 <p>Header file: <code class="docutils literal notranslate"><span class="pre">Kokkos_Bitset.hpp</span></code></p>
-<p>Usage:</p>
-<p><code class="docutils literal notranslate"><span class="pre">Kokkos::Bitset</span></code> represents a thread safe view to a fixed-size (at run-time) sequence of N bits.</p>
-<p><code class="docutils literal notranslate"><span class="pre">Kokkos::ConstBitset</span></code> represents a thread safe view to a read-only fixed-size (at run-time) sequence of N bits.</p>
-<section id="interface">
-<h2>Interface<a class="headerlink" href="#interface" title="Permalink to this heading">#</a></h2>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">Device</span><span class="o">&gt;</span><span class="w"></span>
-<span class="k">class</span><span class="w"> </span><span class="nc">Bitset</span><span class="p">;</span><span class="w"></span>
-</pre></div>
-</div>
-<section id="parameters">
-<h3>Parameters<a class="headerlink" href="#parameters" title="Permalink to this heading">#</a></h3>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">Device</span></code> : Device that physically contains the bits.</p></li>
-</ul>
-</section>
-</section>
-<section id="public-class-members">
-<h2>Public Class Members<a class="headerlink" href="#public-class-members" title="Permalink to this heading">#</a></h2>
-<section id="static-constants">
-<h3>Static Constants<a class="headerlink" href="#static-constants" title="Permalink to this heading">#</a></h3>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="n">BIT_SCAN_REVERSE</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="mi">1u</span><span class="w"></span>
-<span class="k">static</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="n">MOVE_HINT_BACKWARD</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2u</span><span class="w"></span>
+<section id="class-interface">
+<h2>Class Interface<a class="headerlink" href="#class-interface" title="Permalink to this heading">#</a></h2>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4I0E6Bitset">
+<span id="_CPPv3I0E6Bitset"></span><span id="_CPPv2I0E6Bitset"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Device</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Bitset</span></span></span><a class="headerlink" href="#_CPPv4I0E6Bitset" title="Permalink to this definition">#</a><br /></dt>
+<dd><p><code class="code highlight cpp docutils literal highlight-cpp"><span class="n">Kokkos</span><span class="o">::</span><span class="n">Bitset</span><span class="w"></span></code> represents a thread safe view to a fixed-size (at run-time) sequence of N bits.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Template Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>Device</strong> – Device that physically contains the bits.</p>
+</dd>
+</dl>
+<p class="rubric">Static Constants</p>
+<dl class="cpp member">
+<dt class="sig sig-object cpp" id="_CPPv4N6Bitset16BIT_SCAN_REVERSEE">
+<span id="_CPPv3N6Bitset16BIT_SCAN_REVERSEE"></span><span id="_CPPv2N6Bitset16BIT_SCAN_REVERSEE"></span><span id="Bitset::BIT_SCAN_REVERSE__unsigned"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BIT_SCAN_REVERSE</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">1u</span></span><a class="headerlink" href="#_CPPv4N6Bitset16BIT_SCAN_REVERSEE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p><code class="code highlight cpp docutils literal highlight-cpp"><span class="n">BIT_SCAN_REVERSE</span><span class="w"></span></code> : Bit mask for scanning direction</p>
+</dd></dl>
 
-<span class="k">static</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="n">BIT_SCAN_FORWARD_MOVE_HINT_FORWARD</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0u</span><span class="w"></span>
-<span class="k">static</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="n">BIT_SCAN_REVERSE_MOVE_HINT_FORWARD</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BIT_SCAN_REVERSE</span><span class="w"></span>
-<span class="k">static</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="n">BIT_SCAN_FORWARD_MOVE_HINT_BACKWARD</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MOVE_HINT_BACKWARD</span><span class="w"></span>
-<span class="k">static</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="n">BIT_SCAN_REVERSE_MOVE_HINT_BACKWARD</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BIT_SCAN_REVERSE</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">MOVE_HINT_BACKWARD</span><span class="w"></span>
-</pre></div>
-</div>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">BIT_SCAN_REVERSE</span></code> : Bit mask for scanning direction</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">MOVE_HINT_BACKWARD</span></code> : Bit mask for hint direction</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">BIT_SCAN_FORWARD_MOVE_HINT_FORWARD</span></code> : When passed as <code class="docutils literal notranslate"><span class="pre">scan_direction</span></code> to
-<code class="docutils literal notranslate"><span class="pre">find_any_set_near(...)</span></code> or <code class="docutils literal notranslate"><span class="pre">find_any_reset_near(...)</span></code>,
-scans for the bit in the forward (increasing index) direction.
-If the bit was not found, selects a new hint past the current hint.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">BIT_SCAN_REVERSE_MOVE_HINT_FORWARD</span></code> : When passed as <code class="docutils literal notranslate"><span class="pre">scan_direction</span></code> to
-<code class="docutils literal notranslate"><span class="pre">find_any_set_near(...)</span></code> or <code class="docutils literal notranslate"><span class="pre">find_any_reset_near(...)</span></code>,
-scans for the bit in the reverse (decreasing index) direction.
-If the bit was not found, selects a new hint past the current hint.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">BIT_SCAN_FORWARD_MOVE_HINT_BACKWARD</span></code> : When passed as <code class="docutils literal notranslate"><span class="pre">scan_direction</span></code> to
-<code class="docutils literal notranslate"><span class="pre">find_any_set_near(...)</span></code> or <code class="docutils literal notranslate"><span class="pre">find_any_reset_near(...)</span></code>,
-scans for the bit in the forward (increasing index) direction.
-If the bit was not found, selects a new hint before the current hint.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">BIT_SCAN_REVERSE_MOVE_HINT_BACKWARD</span></code> : When passed as <code class="docutils literal notranslate"><span class="pre">scan_direction</span></code> to
-<code class="docutils literal notranslate"><span class="pre">find_any_set_near(...)</span></code> or <code class="docutils literal notranslate"><span class="pre">find_any_reset_near(...)</span></code>,
-scans for the bit in the reverse (decreasing index) direction.
-If the bit was not found, selects a new hint before the current hint.</p></li>
-</ul>
-</section>
-<section id="constructors">
-<h3>Constructors<a class="headerlink" href="#constructors" title="Permalink to this heading">#</a></h3>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">Bitset</span><span class="p">(</span><span class="kt">unsigned</span><span class="w"> </span><span class="n">arg_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0u</span><span class="p">)</span><span class="w"></span>
-</pre></div>
-</div>
-<p>Host/Device: Construct a bitset with <code class="docutils literal notranslate"><span class="pre">arg_size</span></code> bits.</p>
-</section>
-</section>
-<section id="data-access-functions">
-<h2>Data Access Functions<a class="headerlink" href="#data-access-functions" title="Permalink to this heading">#</a></h2>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">unsigned</span><span class="w"> </span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
-</pre></div>
-</div>
-<p>Host/Device: return the number of bits.</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">unsigned</span><span class="w"> </span><span class="n">count</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
-</pre></div>
-</div>
-<p>Host: return the number of bits which are set to <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">set</span><span class="p">()</span><span class="w"></span>
-</pre></div>
-</div>
-<p>Host: set all the bits to <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">reset</span><span class="p">();</span><span class="w"></span>
-<span class="kt">void</span><span class="w"> </span><span class="nf">clear</span><span class="p">();</span><span class="w"></span>
-</pre></div>
-</div>
-<p>Host/Device: set all the bits to <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">set</span><span class="p">(</span><span class="kt">unsigned</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"></span>
-</pre></div>
-</div>
-<p>Device: set the <code class="docutils literal notranslate"><span class="pre">i</span></code>’th bit to <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">reset</span><span class="p">(</span><span class="kt">unsigned</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"></span>
-</pre></div>
-</div>
-<p>Device: set the <code class="docutils literal notranslate"><span class="pre">i</span></code>’th bit to <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="n">test</span><span class="p">(</span><span class="kt">unsigned</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
-</pre></div>
-</div>
-<p>Device: return <code class="docutils literal notranslate"><span class="pre">true</span></code> if and only if the <code class="docutils literal notranslate"><span class="pre">i</span></code>’th bit is set to <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">unsigned</span><span class="w"> </span><span class="n">max_hint</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
-</pre></div>
-</div>
-<p>Host/Device: used with <code class="docutils literal notranslate"><span class="pre">find_any_set_near(...)</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">find_any_reset_near(...)</span></code> functions.
-Returns the max number of times those functions should be call
-when searching for an available bit.</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">Kokkos</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">bool</span><span class="p">,</span><span class="w"> </span><span class="kt">unsigned</span><span class="o">&gt;</span><span class="w"> </span><span class="n">find_any_set_near</span><span class="p">(</span><span class="w"></span>
-<span class="w">  </span><span class="kt">unsigned</span><span class="w"> </span><span class="n">hint</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="kt">unsigned</span><span class="w"> </span><span class="n">scan_direction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BIT_SCAN_FORWARD_MOVE_HINT_FORWARD</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
-</pre></div>
-</div>
-<p>Host/Device: starting at the <code class="docutils literal notranslate"><span class="pre">hint</span></code> position,
-find the first bit set to <code class="docutils literal notranslate"><span class="pre">1</span></code>.
-Returns a <code class="docutils literal notranslate"><span class="pre">pair&lt;bool,</span> <span class="pre">unsigned&gt;</span></code>.  When <code class="docutils literal notranslate"><span class="pre">result.first</span></code> is <code class="docutils literal notranslate"><span class="pre">true</span></code> then
-<code class="docutils literal notranslate"><span class="pre">result.second</span></code> is the bit position found.  When <code class="docutils literal notranslate"><span class="pre">result.first</span></code> is <code class="docutils literal notranslate"><span class="pre">false</span></code> then
-<code class="docutils literal notranslate"><span class="pre">result.second</span></code> is a new hint position.
-If <code class="docutils literal notranslate"><span class="pre">scan_direction</span> <span class="pre">&amp;</span> <span class="pre">BIT_SCAN_REVERSE</span></code>, then the scanning for the bit happens in decreasing index order;
-otherwise, it happens in increasing index order.
-If <code class="docutils literal notranslate"><span class="pre">scan_direction</span> <span class="pre">&amp;</span> <span class="pre">MOVE_HINT_BACKWARDS</span></code>, then the new hint position occurs at a smaller index than <code class="docutils literal notranslate"><span class="pre">hint</span></code>;
-otherwise, it occurs at a larger index than <code class="docutils literal notranslate"><span class="pre">hint</span></code>.</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">Kokkos</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">bool</span><span class="p">,</span><span class="w"> </span><span class="kt">unsigned</span><span class="o">&gt;</span><span class="w"> </span><span class="n">find_any_unset_near</span><span class="p">(</span><span class="w"></span>
-<span class="w">  </span><span class="kt">unsigned</span><span class="w"> </span><span class="n">hint</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="kt">unsigned</span><span class="w"> </span><span class="n">scan_direction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BIT_SCAN_FORWARD_MOVE_HINT_FORWARD</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
-</pre></div>
-</div>
-<p>Host/Device: starting at the <code class="docutils literal notranslate"><span class="pre">hint</span></code> position,
-find the first bit set to <code class="docutils literal notranslate"><span class="pre">0</span></code>.
-Returns a <code class="docutils literal notranslate"><span class="pre">pair&lt;bool,</span> <span class="pre">unsigned&gt;</span></code>.   When <code class="docutils literal notranslate"><span class="pre">result.first</span></code> is <code class="docutils literal notranslate"><span class="pre">true</span></code> then
-<code class="docutils literal notranslate"><span class="pre">result.second</span></code> is the bit position found. When <code class="docutils literal notranslate"><span class="pre">result.first</span></code> is <code class="docutils literal notranslate"><span class="pre">false</span></code> then
-<code class="docutils literal notranslate"><span class="pre">result.second</span></code> is a new hint position.
-If <code class="docutils literal notranslate"><span class="pre">scan_direction</span> <span class="pre">&amp;</span> <span class="pre">BIT_SCAN_REVERSE</span></code>, then the scanning for the bit happens in decreasing index order;
-otherwise, it happens in increasing index order.
-If <code class="docutils literal notranslate"><span class="pre">scan_direction</span> <span class="pre">&amp;</span> <span class="pre">MOVE_HINT_BACKWARDS</span></code>, then the new hint position occurs at a smaller index than <code class="docutils literal notranslate"><span class="pre">hint</span></code>;
-otherwise, it occurs at a larger index than <code class="docutils literal notranslate"><span class="pre">hint</span></code>.</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">constexpr</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">is_allocated</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
-</pre></div>
-</div>
-<p>Host/Device: the bits are allocated on the device.</p>
+<dl class="cpp member">
+<dt class="sig sig-object cpp" id="_CPPv4N6Bitset18MOVE_HINT_BACKWARDE">
+<span id="_CPPv3N6Bitset18MOVE_HINT_BACKWARDE"></span><span id="_CPPv2N6Bitset18MOVE_HINT_BACKWARDE"></span><span id="Bitset::MOVE_HINT_BACKWARD__unsigned"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">MOVE_HINT_BACKWARD</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">2u</span></span><a class="headerlink" href="#_CPPv4N6Bitset18MOVE_HINT_BACKWARDE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p><code class="code highlight cpp docutils literal highlight-cpp"><span class="n">MOVE_HINT_BACKWARD</span><span class="w"></span></code> : Bit mask for hint direction</p>
+</dd></dl>
+
+<dl class="cpp member">
+<dt class="sig sig-object cpp" id="_CPPv4N6Bitset34BIT_SCAN_FORWARD_MOVE_HINT_FORWARDE">
+<span id="_CPPv3N6Bitset34BIT_SCAN_FORWARD_MOVE_HINT_FORWARDE"></span><span id="_CPPv2N6Bitset34BIT_SCAN_FORWARD_MOVE_HINT_FORWARDE"></span><span id="Bitset::BIT_SCAN_FORWARD_MOVE_HINT_FORWARD__unsigned"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BIT_SCAN_FORWARD_MOVE_HINT_FORWARD</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0u</span></span><a class="headerlink" href="#_CPPv4N6Bitset34BIT_SCAN_FORWARD_MOVE_HINT_FORWARDE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p><code class="code highlight cpp docutils literal highlight-cpp"><span class="n">BIT_SCAN_FORWARD_MOVE_HINT_FORWARD</span><span class="w"></span></code> : When passed as <code class="code highlight cpp docutils literal highlight-cpp"><span class="n">scan_direction</span><span class="w"></span></code> to <code class="code highlight cpp docutils literal highlight-cpp"><span class="n">find_any_set_near</span><span class="p">(...)</span><span class="w"></span></code> or <code class="code highlight cpp docutils literal highlight-cpp"><span class="n">find_any_reset_near</span><span class="p">(...)</span><span class="w"></span></code>, scans for the bit in the forward (increasing index) direction. If the bit was not found, selects a new hint past the current hint.</p>
+</dd></dl>
+
+<dl class="cpp member">
+<dt class="sig sig-object cpp" id="_CPPv4N6Bitset34BIT_SCAN_REVERSE_MOVE_HINT_FORWARDE">
+<span id="_CPPv3N6Bitset34BIT_SCAN_REVERSE_MOVE_HINT_FORWARDE"></span><span id="_CPPv2N6Bitset34BIT_SCAN_REVERSE_MOVE_HINT_FORWARDE"></span><span id="Bitset::BIT_SCAN_REVERSE_MOVE_HINT_FORWARD__unsigned"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BIT_SCAN_REVERSE_MOVE_HINT_FORWARD</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N6Bitset16BIT_SCAN_REVERSEE" title="Bitset::BIT_SCAN_REVERSE"><span class="n"><span class="pre">BIT_SCAN_REVERSE</span></span></a><a class="headerlink" href="#_CPPv4N6Bitset34BIT_SCAN_REVERSE_MOVE_HINT_FORWARDE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p><code class="code highlight cpp docutils literal highlight-cpp"><span class="n">BIT_SCAN_REVERSE_MOVE_HINT_FORWARD</span><span class="w"></span></code>: When passed as <code class="code highlight cpp docutils literal highlight-cpp"><span class="n">scan_direction</span><span class="w"></span></code> to <code class="code highlight cpp docutils literal highlight-cpp"><span class="n">find_any_set_near</span><span class="p">(...)</span><span class="w"></span></code> or <code class="code highlight cpp docutils literal highlight-cpp"><span class="n">find_any_reset_near</span><span class="p">(...)</span><span class="w"></span></code>, scans for the bit in the reverse (decreasing index) direction. If the bit was not found, selects a new hint past the current hint.</p>
+</dd></dl>
+
+<dl class="cpp member">
+<dt class="sig sig-object cpp" id="_CPPv4N6Bitset35BIT_SCAN_FORWARD_MOVE_HINT_BACKWARDE">
+<span id="_CPPv3N6Bitset35BIT_SCAN_FORWARD_MOVE_HINT_BACKWARDE"></span><span id="_CPPv2N6Bitset35BIT_SCAN_FORWARD_MOVE_HINT_BACKWARDE"></span><span id="Bitset::BIT_SCAN_FORWARD_MOVE_HINT_BACKWARD__unsigned"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BIT_SCAN_FORWARD_MOVE_HINT_BACKWARD</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N6Bitset18MOVE_HINT_BACKWARDE" title="Bitset::MOVE_HINT_BACKWARD"><span class="n"><span class="pre">MOVE_HINT_BACKWARD</span></span></a><a class="headerlink" href="#_CPPv4N6Bitset35BIT_SCAN_FORWARD_MOVE_HINT_BACKWARDE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p><code class="code highlight cpp docutils literal highlight-cpp"><span class="n">BIT_SCAN_FORWARD_MOVE_HINT_BACKWARD</span><span class="w"></span></code>: When passed as <code class="code highlight cpp docutils literal highlight-cpp"><span class="n">scan_direction</span><span class="w"></span></code> to <code class="code highlight cpp docutils literal highlight-cpp"><span class="n">find_any_set_near</span><span class="p">(...)</span><span class="w"></span></code> or <code class="code highlight cpp docutils literal highlight-cpp"><span class="n">find_any_reset_near</span><span class="p">(...)</span><span class="w"></span></code>, scans for the bit in the forward (increasing index) direction. If the bit was not found, selects a new hint before the current hint.</p>
+</dd></dl>
+
+<dl class="cpp member">
+<dt class="sig sig-object cpp" id="_CPPv4N6Bitset35BIT_SCAN_REVERSE_MOVE_HINT_BACKWARDE">
+<span id="_CPPv3N6Bitset35BIT_SCAN_REVERSE_MOVE_HINT_BACKWARDE"></span><span id="_CPPv2N6Bitset35BIT_SCAN_REVERSE_MOVE_HINT_BACKWARDE"></span><span id="Bitset::BIT_SCAN_REVERSE_MOVE_HINT_BACKWARD__unsigned"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BIT_SCAN_REVERSE_MOVE_HINT_BACKWARD</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N6Bitset16BIT_SCAN_REVERSEE" title="Bitset::BIT_SCAN_REVERSE"><span class="n"><span class="pre">BIT_SCAN_REVERSE</span></span></a><span class="w"> </span><span class="o"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N6Bitset18MOVE_HINT_BACKWARDE" title="Bitset::MOVE_HINT_BACKWARD"><span class="n"><span class="pre">MOVE_HINT_BACKWARD</span></span></a><a class="headerlink" href="#_CPPv4N6Bitset35BIT_SCAN_REVERSE_MOVE_HINT_BACKWARDE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p><code class="code highlight cpp docutils literal highlight-cpp"><span class="n">BIT_SCAN_REVERSE_MOVE_HINT_BACKWARD</span><span class="w"></span></code>: When passed as <code class="code highlight cpp docutils literal highlight-cpp"><span class="n">scan_direction</span><span class="w"></span></code> to <code class="code highlight cpp docutils literal highlight-cpp"><span class="n">find_any_set_near</span><span class="p">(...)</span><span class="w"></span></code> or <code class="code highlight cpp docutils literal highlight-cpp"><span class="n">find_any_reset_near</span><span class="p">(...)</span><span class="w"></span></code>, scans for the bit in the reverse (decreasing index) direction. If the bit was not found, selects a new hint before the current hint.</p>
+</dd></dl>
+
+<p class="rubric">Constructors</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6Bitset6BitsetEj">
+<span id="_CPPv3N6Bitset6BitsetEj"></span><span id="_CPPv2N6Bitset6BitsetEj"></span><span id="Bitset::Bitset__unsigned"></span><span class="sig-name descname"><span class="n"><span class="pre">Bitset</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">arg_size</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0u</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6Bitset6BitsetEj" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Host/Device: Construct a bitset with <code class="code highlight cpp docutils literal highlight-cpp"><span class="n">arg_size</span><span class="w"></span></code> bits.</p>
+</dd></dl>
+
+<p class="rubric">Data Access Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK6Bitset4sizeEv">
+<span id="_CPPv3NK6Bitset4sizeEv"></span><span id="_CPPv2NK6Bitset4sizeEv"></span><span id="Bitset::sizeC"></span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">size</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6Bitset4sizeEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Host/Device: return the number of bits.</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK6Bitset5countEv">
+<span id="_CPPv3NK6Bitset5countEv"></span><span id="_CPPv2NK6Bitset5countEv"></span><span id="Bitset::countC"></span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">count</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6Bitset5countEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Host: return the number of bits which are set to <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6Bitset3setEv">
+<span id="_CPPv3N6Bitset3setEv"></span><span id="_CPPv2N6Bitset3setEv"></span><span id="Bitset::set"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6Bitset3setEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Host: set all the bits to <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6Bitset5resetEv">
+<span id="_CPPv3N6Bitset5resetEv"></span><span id="_CPPv2N6Bitset5resetEv"></span><span id="Bitset::reset"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">reset</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4N6Bitset5resetEv" title="Permalink to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6Bitset5clearEv">
+<span id="_CPPv3N6Bitset5clearEv"></span><span id="_CPPv2N6Bitset5clearEv"></span><span id="Bitset::clear"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">clear</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4N6Bitset5clearEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Host/Device: set all the bits to <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6Bitset3setEj">
+<span id="_CPPv3N6Bitset3setEj"></span><span id="_CPPv2N6Bitset3setEj"></span><span id="Bitset::set__unsigned"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">i</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6Bitset3setEj" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Device: set the <code class="docutils literal notranslate"><span class="pre">i</span></code>‘th bit to <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6Bitset5resetEj">
+<span id="_CPPv3N6Bitset5resetEj"></span><span id="_CPPv2N6Bitset5resetEj"></span><span id="Bitset::reset__unsigned"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">reset</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">i</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6Bitset5resetEj" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Device: set the <code class="docutils literal notranslate"><span class="pre">i</span></code>‘th bit to <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK6Bitset4testEj">
+<span id="_CPPv3NK6Bitset4testEj"></span><span id="_CPPv2NK6Bitset4testEj"></span><span id="Bitset::test__unsignedC"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">test</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">i</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6Bitset4testEj" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Device: return <code class="code highlight cpp docutils literal highlight-cpp"><span class="nb">true</span><span class="w"></span></code> if and only if the <code class="docutils literal notranslate"><span class="pre">i</span></code>‘th bit is set to <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK6Bitset8max_hintEv">
+<span id="_CPPv3NK6Bitset8max_hintEv"></span><span id="_CPPv2NK6Bitset8max_hintEv"></span><span id="Bitset::max_hintC"></span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">max_hint</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6Bitset8max_hintEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Host/Device: used with <code class="code highlight cpp docutils literal highlight-cpp"><span class="n">find_any_set_near</span><span class="p">(...)</span><span class="w"></span></code> &amp; <code class="code highlight cpp docutils literal highlight-cpp"><span class="n">find_any_reset_near</span><span class="p">(...)</span><span class="w"></span></code> functions.</p>
+<p>Returns the max number of times those functions should be call when searching for an available bit.</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK6Bitset17find_any_set_nearEjj">
+<span id="_CPPv3NK6Bitset17find_any_set_nearEjj"></span><span id="_CPPv2NK6Bitset17find_any_set_nearEjj"></span><span id="Bitset::find_any_set_near__unsigned.unsignedC"></span><span class="n"><span class="pre">Kokkos</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">pair</span></span><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">bool</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">unsigned</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">find_any_set_near</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">hint</span></span>, <span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">scan_direction</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N6Bitset34BIT_SCAN_FORWARD_MOVE_HINT_FORWARDE" title="Bitset::BIT_SCAN_FORWARD_MOVE_HINT_FORWARD"><span class="n"><span class="pre">BIT_SCAN_FORWARD_MOVE_HINT_FORWARD</span></span></a><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6Bitset17find_any_set_nearEjj" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Host/Device: starting at the <code class="code highlight cpp docutils literal highlight-cpp"><span class="n">hint</span><span class="w"></span></code> position, find the first bit set to <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p>
+<p>Returns a <code class="code highlight cpp docutils literal highlight-cpp"><span class="n">pair</span><span class="o">&lt;</span><span class="kt">bool</span><span class="p">,</span><span class="w"> </span><span class="kt">unsigned</span><span class="o">&gt;</span><span class="w"></span></code>.</p>
+<p>When <code class="code highlight cpp docutils literal highlight-cpp"><span class="n">result</span><span class="p">.</span><span class="n">first</span><span class="w"></span></code> is <code class="code highlight cpp docutils literal highlight-cpp"><span class="nb">true</span><span class="w"></span></code> then <code class="code highlight cpp docutils literal highlight-cpp"><span class="n">result</span><span class="p">.</span><span class="n">second</span><span class="w"></span></code> is the bit position found.</p>
+<p>When <code class="code highlight cpp docutils literal highlight-cpp"><span class="n">result</span><span class="p">.</span><span class="n">first</span><span class="w"></span></code> is <code class="code highlight cpp docutils literal highlight-cpp"><span class="nb">false</span><span class="w"></span></code> then <code class="code highlight cpp docutils literal highlight-cpp"><span class="n">result</span><span class="p">.</span><span class="n">second</span><span class="w"></span></code> is a new hint position.</p>
+<p>If <code class="code highlight cpp docutils literal highlight-cpp"><span class="n">scan_direction</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">BIT_SCAN_REVERSE</span><span class="w"></span></code>, then the scanning for the bit happens in decreasing index order;
+otherwise, it happens in increasing index order.</p>
+<p>If <code class="code highlight cpp docutils literal highlight-cpp"><span class="n">scan_direction</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">MOVE_HINT_BACKWARDS</span><span class="w"></span></code>, then the new hint position occurs at a smaller index than <code class="code highlight cpp docutils literal highlight-cpp"><span class="n">hint</span><span class="w"></span></code>;
+otherwise, it occurs at a larger index than <code class="code highlight cpp docutils literal highlight-cpp"><span class="n">hint</span><span class="w"></span></code>.</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK6Bitset19find_any_unset_nearEjj">
+<span id="_CPPv3NK6Bitset19find_any_unset_nearEjj"></span><span id="_CPPv2NK6Bitset19find_any_unset_nearEjj"></span><span id="Bitset::find_any_unset_near__unsigned.unsignedC"></span><span class="n"><span class="pre">Kokkos</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">pair</span></span><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">bool</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">unsigned</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">find_any_unset_near</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">hint</span></span>, <span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">scan_direction</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N6Bitset34BIT_SCAN_FORWARD_MOVE_HINT_FORWARDE" title="Bitset::BIT_SCAN_FORWARD_MOVE_HINT_FORWARD"><span class="n"><span class="pre">BIT_SCAN_FORWARD_MOVE_HINT_FORWARD</span></span></a><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4NK6Bitset19find_any_unset_nearEjj" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Host/Device: starting at the <code class="code highlight cpp docutils literal highlight-cpp"><span class="n">hint</span><span class="w"></span></code> position, find the first bit set to <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
+<p>Returns a <code class="code highlight cpp docutils literal highlight-cpp"><span class="n">pair</span><span class="o">&lt;</span><span class="kt">bool</span><span class="p">,</span><span class="w"> </span><span class="kt">unsigned</span><span class="o">&gt;</span><span class="w"></span></code>.</p>
+<p>When <code class="code highlight cpp docutils literal highlight-cpp"><span class="n">result</span><span class="p">.</span><span class="n">first</span><span class="w"></span></code> is <code class="code highlight cpp docutils literal highlight-cpp"><span class="nb">true</span><span class="w"></span></code> then <code class="code highlight cpp docutils literal highlight-cpp"><span class="n">result</span><span class="p">.</span><span class="n">second</span><span class="w"></span></code> is the bit position found.</p>
+<p>When <code class="code highlight cpp docutils literal highlight-cpp"><span class="n">result</span><span class="p">.</span><span class="n">first</span><span class="w"></span></code> is <code class="code highlight cpp docutils literal highlight-cpp"><span class="nb">false</span><span class="w"></span></code> then <code class="code highlight cpp docutils literal highlight-cpp"><span class="n">result</span><span class="p">.</span><span class="n">second</span><span class="w"></span></code> is a new hint position.</p>
+<p>If <code class="code highlight cpp docutils literal highlight-cpp"><span class="n">scan_direction</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">BIT_SCAN_REVERSE</span><span class="w"></span></code>, then the scanning for the bit happens in decreasing index order; otherwise, it happens in increasing index order.</p>
+<p>If <code class="code highlight cpp docutils literal highlight-cpp"><span class="n">scan_direction</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">MOVE_HINT_BACKWARDS</span><span class="w"></span></code>, then the new hint position occurs at a smaller index than <code class="code highlight cpp docutils literal highlight-cpp"><span class="n">hint</span><span class="w"></span></code>; otherwise, it occurs at a larger index than <code class="code highlight cpp docutils literal highlight-cpp"><span class="n">hint</span><span class="w"></span></code>.</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK6Bitset12is_allocatedEv">
+<span id="_CPPv3NK6Bitset12is_allocatedEv"></span><span id="_CPPv2NK6Bitset12is_allocatedEv"></span><span id="Bitset::is_allocatedCCE"></span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_allocated</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6Bitset12is_allocatedEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Host/Device: the bits are allocated on the device.</p>
+</dd></dl>
+
+</dd></dl>
+
 </section>
 </section>
 <section id="constbitset">
 <h1><code class="docutils literal notranslate"><span class="pre">ConstBitset</span></code><a class="headerlink" href="#constbitset" title="Permalink to this heading">#</a></h1>
 <section id="id1">
-<h2>Interface<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">Device</span><span class="o">&gt;</span><span class="w"></span>
-<span class="k">class</span><span class="w"> </span><span class="nc">ConstBitset</span><span class="w"></span>
-</pre></div>
-</div>
-<section id="id2">
-<h3>Parameters<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h3>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">Device</span></code> : Device that physically contains the bits.</p></li>
-</ul>
+<h2>Class Interface<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4I0E11ConstBitset">
+<span id="_CPPv3I0E11ConstBitset"></span><span id="_CPPv2I0E11ConstBitset"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Device</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ConstBitset</span></span></span><a class="headerlink" href="#_CPPv4I0E11ConstBitset" title="Permalink to this definition">#</a><br /></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Template Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>Device</strong> – Device that physically contains the bits.</p>
+</dd>
+</dl>
+<p class="rubric">Constructors / assignment</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N11ConstBitset11ConstBitsetEv">
+<span id="_CPPv3N11ConstBitset11ConstBitsetEv"></span><span id="_CPPv2N11ConstBitset11ConstBitsetEv"></span><span id="ConstBitset::ConstBitset"></span><span class="sig-name descname"><span class="n"><span class="pre">ConstBitset</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11ConstBitset11ConstBitsetEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Host/Device: Construct a bitset with no bits.</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N11ConstBitset11ConstBitsetERK11ConstBitset">
+<span id="_CPPv3N11ConstBitset11ConstBitsetERK11ConstBitset"></span><span id="_CPPv2N11ConstBitset11ConstBitsetERK11ConstBitset"></span><span id="ConstBitset::ConstBitset__ConstBitsetCR"></span><span class="sig-name descname"><span class="n"><span class="pre">ConstBitset</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N11ConstBitset11ConstBitsetERK11ConstBitset" title="ConstBitset::ConstBitset"><span class="n"><span class="pre">ConstBitset</span></span></a><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">rhs</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N11ConstBitset11ConstBitsetERK11ConstBitset" title="Permalink to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N11ConstBitsetaSERK11ConstBitset">
+<span id="_CPPv3N11ConstBitsetaSERK11ConstBitset"></span><span id="_CPPv2N11ConstBitsetaSERK11ConstBitset"></span><span id="ConstBitset::assign-operator__ConstBitsetCR"></span><a class="reference internal" href="#_CPPv4I0E11ConstBitset" title="ConstBitset"><span class="n"><span class="pre">ConstBitset</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">=</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0E11ConstBitset" title="ConstBitset"><span class="n"><span class="pre">ConstBitset</span></span></a><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">rhs</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N11ConstBitsetaSERK11ConstBitset" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Copy constructor/assignment operator.</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N11ConstBitset11ConstBitsetERK6BitsetI6DeviceE">
+<span id="_CPPv3N11ConstBitset11ConstBitsetERK6BitsetI6DeviceE"></span><span id="_CPPv2N11ConstBitset11ConstBitsetERK6BitsetI6DeviceE"></span><span id="ConstBitset::ConstBitset__Bitset:Device:CR"></span><span class="sig-name descname"><span class="n"><span class="pre">ConstBitset</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0E6Bitset" title="Bitset"><span class="n"><span class="pre">Bitset</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0E11ConstBitset" title="ConstBitset::Device"><span class="n"><span class="pre">Device</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">rhs</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11ConstBitset11ConstBitsetERK6BitsetI6DeviceE" title="Permalink to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N11ConstBitsetaSERK6BitsetI6DeviceE">
+<span id="_CPPv3N11ConstBitsetaSERK6BitsetI6DeviceE"></span><span id="_CPPv2N11ConstBitsetaSERK6BitsetI6DeviceE"></span><span id="ConstBitset::assign-operator__Bitset:Device:CR"></span><a class="reference internal" href="#_CPPv4I0E11ConstBitset" title="ConstBitset"><span class="n"><span class="pre">ConstBitset</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">=</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0E6Bitset" title="Bitset"><span class="n"><span class="pre">Bitset</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0E11ConstBitset" title="ConstBitset::Device"><span class="n"><span class="pre">Device</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">rhs</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11ConstBitsetaSERK6BitsetI6DeviceE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Host/Device: Copy/assign a <code class="code highlight cpp docutils literal highlight-cpp"><span class="n">Bitset</span><span class="w"></span></code> to a <code class="code highlight cpp docutils literal highlight-cpp"><span class="n">ConstBitset</span><span class="w"></span></code>.</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11ConstBitset4sizeEv">
+<span id="_CPPv3NK11ConstBitset4sizeEv"></span><span id="_CPPv2NK11ConstBitset4sizeEv"></span><span id="ConstBitset::sizeC"></span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">size</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK11ConstBitset4sizeEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Host/Device: return the number of bits.</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11ConstBitset5countEv">
+<span id="_CPPv3NK11ConstBitset5countEv"></span><span id="_CPPv2NK11ConstBitset5countEv"></span><span id="ConstBitset::countC"></span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">count</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK11ConstBitset5countEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Host/Device: return the number of bits which are set to <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11ConstBitset4testEj">
+<span id="_CPPv3NK11ConstBitset4testEj"></span><span id="_CPPv2NK11ConstBitset4testEj"></span><span id="ConstBitset::test__unsignedC"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">test</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">i</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK11ConstBitset4testEj" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Host/Device: Return <code class="docutils literal notranslate"><span class="pre">true</span></code> if and only if the <code class="docutils literal notranslate"><span class="pre">i</span></code>‘th bit set to <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p>
+</dd></dl>
+
+</dd></dl>
+
 </section>
-<section id="constructors-assignment">
-<h3>Constructors / assignment<a class="headerlink" href="#constructors-assignment" title="Permalink to this heading">#</a></h3>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">ConstBitset</span><span class="p">()</span><span class="w"></span>
-</pre></div>
-</div>
-<p>Host/Device: Construct a bitset with no bits.</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">ConstBitset</span><span class="p">(</span><span class="n">ConstBitset</span><span class="w"> </span><span class="k">const</span><span class="o">&amp;</span><span class="w"> </span><span class="n">rhs</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="w"></span>
-<span class="n">ConstBitset</span><span class="o">&amp;</span><span class="w"> </span><span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="n">ConstBitset</span><span class="w"> </span><span class="k">const</span><span class="o">&amp;</span><span class="w"> </span><span class="n">rhs</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="w"></span>
-</pre></div>
-</div>
-<p>Copy constructor/assignment operator.</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">ConstBitset</span><span class="p">(</span><span class="n">Bitset</span><span class="o">&lt;</span><span class="n">Device</span><span class="o">&gt;</span><span class="w"> </span><span class="k">const</span><span class="o">&amp;</span><span class="w"> </span><span class="n">rhs</span><span class="p">)</span><span class="w"></span>
-<span class="n">ConstBitset</span><span class="o">&amp;</span><span class="w"> </span><span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="n">Bitset</span><span class="o">&lt;</span><span class="n">Device</span><span class="o">&gt;</span><span class="w"> </span><span class="k">const</span><span class="o">&amp;</span><span class="w"> </span><span class="n">rhs</span><span class="p">)</span><span class="w"></span>
-</pre></div>
-</div>
-<p>Host/Device: Copy/assign a <code class="docutils literal notranslate"><span class="pre">Bitset</span></code> to a <code class="docutils literal notranslate"><span class="pre">ConstBitset</span></code>.</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="kt">unsigned</span><span class="w"> </span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
-</pre></div>
-</div>
-<p>Host/Device: return the number of bits.</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">unsigned</span><span class="w"> </span><span class="n">count</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
-</pre></div>
-</div>
-<p>Host/Device: return the number of bits which are set to <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="n">test</span><span class="p">(</span><span class="kt">unsigned</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
-</pre></div>
-</div>
-<p>Host/Device: Return <code class="docutils literal notranslate"><span class="pre">true</span></code> if and only if the <code class="docutils literal notranslate"><span class="pre">i</span></code>’th bit set to <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p>
-</section>
-</section>
-<section id="nonmember-functions">
-<h2>NonMember Functions<a class="headerlink" href="#nonmember-functions" title="Permalink to this heading">#</a></h2>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">DstDevice</span><span class="p">,</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="nc">SrcDevice</span><span class="o">&gt;</span><span class="w"></span>
-<span class="kt">void</span><span class="w"> </span><span class="n">deep_copy</span><span class="p">(</span><span class="n">Bitset</span><span class="o">&lt;</span><span class="n">DstDevice</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">dst</span><span class="p">,</span><span class="w"> </span><span class="n">Bitset</span><span class="o">&lt;</span><span class="n">SrcDevice</span><span class="o">&gt;</span><span class="w"> </span><span class="k">const</span><span class="o">&amp;</span><span class="w"> </span><span class="n">src</span><span class="p">)</span><span class="w"></span>
-</pre></div>
-</div>
-<p>Copy a <code class="docutils literal notranslate"><span class="pre">Bitset</span></code> from <code class="docutils literal notranslate"><span class="pre">src</span></code> on <code class="docutils literal notranslate"><span class="pre">SrcDevice</span></code> to <code class="docutils literal notranslate"><span class="pre">dst</span></code> on <code class="docutils literal notranslate"><span class="pre">DstDevice</span></code>.</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">DstDevice</span><span class="p">,</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="nc">SrcDevice</span><span class="o">&gt;</span><span class="w"></span>
-<span class="kt">void</span><span class="w"> </span><span class="n">deep_copy</span><span class="p">(</span><span class="n">Bitset</span><span class="o">&lt;</span><span class="n">DstDevice</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">dst</span><span class="p">,</span><span class="w"> </span><span class="n">ConstBitset</span><span class="o">&lt;</span><span class="n">SrcDevice</span><span class="o">&gt;</span><span class="w"> </span><span class="k">const</span><span class="o">&amp;</span><span class="w"> </span><span class="n">src</span><span class="p">)</span><span class="w"></span>
-</pre></div>
-</div>
-<p>Copy a <code class="docutils literal notranslate"><span class="pre">ConstBitset</span></code> from <code class="docutils literal notranslate"><span class="pre">src</span></code> on <code class="docutils literal notranslate"><span class="pre">SrcDevice</span></code> to a <code class="docutils literal notranslate"><span class="pre">Bitset</span></code> <code class="docutils literal notranslate"><span class="pre">dst</span></code> on <code class="docutils literal notranslate"><span class="pre">DstDevice</span></code>.</p>
+<section id="non-member-functions">
+<h2>Non-Member Functions<a class="headerlink" href="#non-member-functions" title="Permalink to this heading">#</a></h2>
+<blockquote>
+<div><dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I00E9deep_copyvR6BitsetI9DstDeviceERK6BitsetI9SrcDeviceE">
+<span id="_CPPv3I00E9deep_copyR6BitsetI9DstDeviceERK6BitsetI9SrcDeviceE"></span><span id="_CPPv2I00E9deep_copyR6BitsetI9DstDeviceERK6BitsetI9SrcDeviceE"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">DstDevice</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SrcDevice</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">deep_copy</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0E6Bitset" title="Bitset"><span class="n"><span class="pre">Bitset</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I00E9deep_copyvR6BitsetI9DstDeviceERK6BitsetI9SrcDeviceE" title="deep_copy::DstDevice"><span class="n"><span class="pre">DstDevice</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">dst</span></span>, <a class="reference internal" href="#_CPPv4I0E6Bitset" title="Bitset"><span class="n"><span class="pre">Bitset</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I00E9deep_copyvR6BitsetI9DstDeviceERK6BitsetI9SrcDeviceE" title="deep_copy::SrcDevice"><span class="n"><span class="pre">SrcDevice</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">src</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I00E9deep_copyvR6BitsetI9DstDeviceERK6BitsetI9SrcDeviceE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Copy a <code class="docutils literal notranslate"><span class="pre">Bitset</span></code> from <code class="docutils literal notranslate"><span class="pre">src</span></code> on <code class="docutils literal notranslate"><span class="pre">SrcDevice</span></code> to <code class="docutils literal notranslate"><span class="pre">dst</span></code> on <code class="docutils literal notranslate"><span class="pre">DstDevice</span></code>.</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I00E9deep_copyvR6BitsetI9DstDeviceERK11ConstBitsetI9SrcDeviceE">
+<span id="_CPPv3I00E9deep_copyR6BitsetI9DstDeviceERK11ConstBitsetI9SrcDeviceE"></span><span id="_CPPv2I00E9deep_copyR6BitsetI9DstDeviceERK11ConstBitsetI9SrcDeviceE"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">DstDevice</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SrcDevice</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">deep_copy</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0E6Bitset" title="Bitset"><span class="n"><span class="pre">Bitset</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I00E9deep_copyvR6BitsetI9DstDeviceERK11ConstBitsetI9SrcDeviceE" title="deep_copy::DstDevice"><span class="n"><span class="pre">DstDevice</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">dst</span></span>, <a class="reference internal" href="#_CPPv4I0E11ConstBitset" title="ConstBitset"><span class="n"><span class="pre">ConstBitset</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I00E9deep_copyvR6BitsetI9DstDeviceERK11ConstBitsetI9SrcDeviceE" title="deep_copy::SrcDevice"><span class="n"><span class="pre">SrcDevice</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">src</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I00E9deep_copyvR6BitsetI9DstDeviceERK11ConstBitsetI9SrcDeviceE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Copy a <code class="docutils literal notranslate"><span class="pre">ConstBitset</span></code> from <code class="docutils literal notranslate"><span class="pre">src</span></code> on <code class="docutils literal notranslate"><span class="pre">SrcDevice</span></code> to a <code class="docutils literal notranslate"><span class="pre">Bitset</span></code> <code class="docutils literal notranslate"><span class="pre">dst</span></code> on <code class="docutils literal notranslate"><span class="pre">DstDevice</span></code>.</p>
+</dd></dl>
+
+</div></blockquote>
 </section>
 </section>
 
@@ -657,25 +694,12 @@ otherwise, it occurs at a larger index than <code class="docutils literal notran
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">Bitset</span></code></a><ul>
-<li><a class="reference internal" href="#interface">Interface</a><ul>
-<li><a class="reference internal" href="#parameters">Parameters</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#public-class-members">Public Class Members</a><ul>
-<li><a class="reference internal" href="#static-constants">Static Constants</a></li>
-<li><a class="reference internal" href="#constructors">Constructors</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#data-access-functions">Data Access Functions</a></li>
+<li><a class="reference internal" href="#class-interface">Class Interface</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#constbitset"><code class="docutils literal notranslate"><span class="pre">ConstBitset</span></code></a><ul>
-<li><a class="reference internal" href="#id1">Interface</a><ul>
-<li><a class="reference internal" href="#id2">Parameters</a></li>
-<li><a class="reference internal" href="#constructors-assignment">Constructors / assignment</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#nonmember-functions">NonMember Functions</a></li>
+<li><a class="reference internal" href="#id1">Class Interface</a></li>
+<li><a class="reference internal" href="#non-member-functions">Non-Member Functions</a></li>
 </ul>
 </li>
 </ul>
