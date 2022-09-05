@@ -56,7 +56,7 @@ struct array_type {
   }
 
   KOKKOS_INLINE_FUNCTION
-  void operator+=(const volatile array_type& src) volatile {
+  void operator+=(const array_type& src) {
     for (int i = 0; i < N; i++) {
       myArray[i] += src.myArray[i];
     }
@@ -84,7 +84,7 @@ struct SumMyArray {
   void join(value_type& dest, const value_type& src) const { dest += src; }
 
   KOKKOS_INLINE_FUNCTION
-  void join(volatile value_type& dest, const volatile value_type& src) const {
+  void join(value_type& dest, const value_type& src) const {
     dest += src;
   }
 

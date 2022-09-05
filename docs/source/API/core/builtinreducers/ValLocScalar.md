@@ -21,7 +21,6 @@ struct ValLocScalar{
   Index loc;
 
   void operator = (const ValLocScalar& rhs);
-  void operator = (const volatile ValLocScalar& rhs);
 };
 ```
 
@@ -35,7 +34,4 @@ struct ValLocScalar{
 ### Assignment operators
 
  * `void operator = (const ValLocScalar& rhs);` 
-      assign `val` and `loc` from `rhs`;
-
- * `void operator = (const volatile ValLocScalar& rhs);` 
       assign `val` and `loc` from `rhs`;

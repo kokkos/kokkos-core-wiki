@@ -26,6 +26,6 @@ template<class KeyViewType>  struct BinOp1D  { }
 template<class KeyViewType>  struct BinOp3D  { }
 
 
-template<class ViewType>  void sort( ViewType const & view , bool const always_use_kokkos_sort = false)  { }
+template<class ViewType>  void sort( ViewType const & view )  { }
 
 template<class ViewType>  void sort( ViewType view, size_t const begin, size_t const end )  {  }
