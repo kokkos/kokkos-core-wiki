@@ -50,6 +50,10 @@ Class Interface
 
     whether the reference type is a C++ lvalue reference.
 
+  .. cpp:member:: static constexpr bool is_hostspace
+
+    whether the view is accessible from the process thread.
+
   .. rubric:: Data Types
 
   .. cpp:type:: data_type
@@ -110,17 +114,55 @@ Class Interface
 
   .. cpp:type:: host_mirror_space
 
-    The host accessible memory space used in `HostMirror`.
+    A compatible view type with the same ``DataType`` and ``LayoutType`` stored in host accessible memory space.
+
+  .. cpp:type:: uniform_type
+
+    A view type with all template arguments explicitly defined, and brought into a canonical form.
+
+    :example: 0D and 1D `LayoutLeft <layoutLeft.html>`__ and `LayoutRight <layoutRight.html>`__ are mapped to the same layout type, and always uses :cpp:`device_type` as space argument.
+
+  .. cpp:type:: uniform_const_type
+
+    :cpp:`uniform_type` with const data type
+
+  .. cpp:type:: uniform_runtime_type
+
+    :cpp:`uniform_type` but without compile time extents
+
+  .. cpp:type:: uniform_runtime_const_type
+
+    :cpp:`uniform_runtime_type` with const data type
+
+  .. cpp:type:: uniform_nomemspace_type
+
+    uses unified layout and :cpp:`AnonymousSpace`
+
+  .. cpp:type:: uniform_const_nomemspace_type
+
+    :cpp:`uniform_nomemspace_type` with const data type.
+
+  .. cpp:type:: uniform_runtime_nomemspace_type
+
+    uses unified layout, all runtime extents and :cpp:`AnonymousSpace`
+
+  .. cpp:type:: uniform_runtime_const_nomemspace_type
+
+    :cpp:`uniform_runtime_nomemspace_type` with const data type
 
   .. rubric:: View Types
+
+  .. cpp:type:: const_type
+
+    The view type with all template parameters explicitly defined using a :cpp:`const` data type.
 
   .. cpp:type:: non_const_type
 
     The view type with all template parameters explicitly defined.
 
-  .. cpp:type:: const_type
+  .. cpp:type:: host_mirror_type
 
-    The view type with all template parameters explicitly defined using a :cpp:`const` data type.
+    A compatible view type with the same ``DataType`` and ``LayoutType`` stored in host accessible memory space.
 
   .. cpp:type:: HostMirror
 
@@ -244,9 +286,13 @@ Class Interface
 
   .. rubric:: Data Access Functions
 
+  .. cpp:function:: reference_type operator[] (const IntType& i) const
+
+    :return: a value of `reference_type` which may or not be referenceable itself. Only valid valid for rank-1 views.
+
   .. cpp:function:: reference_type operator() (const IntType& ... indices) const
 
-    *Requires:* :cpp:`sizeof(IntType...)==rank_dynamic()`.
+    *Requires:* :cpp:`sizeof(IntTypes...)==rank`.
 
     :param indices: The index to access the view at. The number of index arguments must match the :any:`rank` of the view.
     :return: a value of :any:`reference_type` which may or not be referenceable itself.
