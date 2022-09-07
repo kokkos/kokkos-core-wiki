@@ -1,11 +1,11 @@
 # Mathematical constants
 
 Defined in header [`<Kokkos_MathematicalConstants.hpp>`](https://github.com/kokkos/kokkos/blob/develop/core/src/Kokkos_MathematicalConstants.hpp)
-which is included from `<Kokkos_Core.hpp>` (since Kokkos 3.6)
+which is included from `<Kokkos_Core.hpp>`
 
 Provides all mathematical constants from [`<numbers>`](https://en.cppreference.com/w/cpp/numeric/constants) (since C++20).
 
-All constants are defined in the `Kokkos::Experimental` namespace.
+All constants are defined in the `Kokkos::numbers::` namespace since version 4.0, in `Kokkos::Experimental` in previous versions.
 
 **Mathematical constants**
 `e`
@@ -22,35 +22,25 @@ All constants are defined in the `Kokkos::Experimental` namespace.
 `egamma`
 `phi`
 
+---
 
-| Standard library                                      | Kokkos with C++20                            |
-|-------------------------------------------------------|----------------------------------------------|
-| `std::numbers::e`                                     | `Kokkos::Experimental::e`                    |
-| `std::numbers::log2e`                                 | `Kokkos::Experimental::log2e`                |
-| `std::numbers::log10e`                                | `Kokkos::Experimental::log10e`               |
-| `std::numbers::pi`                                    | `Kokkos::Experimental::pi`                   |
-| `std::numbers::inv_pi`                                | `Kokkos::Experimental::inv_pi`               |
-| `std::numbers::inv_sqrtpi`                            | `Kokkos::Experimental::lnv_sqrtpi`           |
-| `std::numbers::ln2`                                   | `Kokkos::Experimental::ln2`                  |
-| `std::numbers::ln10`                                  | `Kokkos::Experimental::ln10`                 |
-| `std::numbers::sqrt2`                                 | `Kokkos::Experimental::sqrt2`                |
-| `std::numbers::sqrt3`                                 | `Kokkos::Experiemtnal::sqrt3`                |
-| `std::numbers::inv_sqrt3`                             | `Kokkos::Experimental::inv_sqrt3`            |
-| `std::numbers::egamma`                                | `Kokkos::Experimental::egamma`               |
-| `std::numbers::phi`                                   | `Kokkos::Experimental::phi`                  |
-
-Values of constants rely on `<numbers>`. Refer to (https://eel.is/c++draft/numbers#math.constants) for details.
+## Notes
+* The mathematical constants are available in `Kokkos::Experimental::` since Kokkos 3.6
+* They were "promoted" to the `Kokkos::numbers` namespace in 4.0
 
 ---
 
+## Example
+
 ```C++
 KOKKOS_FUNCTION void example() {
-  constexpr auto pi = Kokkos::Experimental::pi_v<float>;
-  auto const x = Kokkos::Experimental::sin(pi/6);
+  constexpr auto pi = Kokkos::numbers::pi_v<float>;
+  auto const x = Kokkos::sin(pi/6);
 }
 ```
 
 ---
-**See also**  
+
+## See also
 [Common mathematical functions](mathematical-functions)  
 [Numeric traits](numeric-traits)  
