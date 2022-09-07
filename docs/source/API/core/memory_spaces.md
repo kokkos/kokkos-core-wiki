@@ -38,13 +38,14 @@
 (SharedSpace)=
 ## `Kokkos::SharedSpace`
 
-`Kokkos::SharedSpace` <sup>since 4.0</sup> is a [`MemorySpace` type](MemorySpaceConcept) alias representing memory that can be accessed by both CPU and GPU. To achieve this, the memory can be moved automatically from CPU to GPU by the os and driver. If not currently located in the local memory of the accessing processing unit, the memory is moved in chunks (size is backend dependent). These chunks can be moved independently (e.g. only the part that is accessed on the GPU is moved to the GPU).  For details, see [the documentation on the `MemorySpace` concept](MemorySpaceConcept).
-Availability can be checked with the preprocessor define `KOKKOS_HAS_SHARED_SPACE`.
+`Kokkos::SharedSpace` <sup>since 4.0</sup> is a [`MemorySpace` type](MemorySpaceConcept) alias representing memory that can be accessed by any enabled [`ExecutionSpace` type](ExecutionSpaceConcept). To achieve this, the memory can be moved to and from the local memory of the processing units represented by the `ExecutionSpaces`. The movement is done automatically by the os and driver at the moment of access. If not currently located in the local memory of the accessing processing unit, the memory is moved in chunks (size is backend dependent). These chunks can be moved independently (e.g. only the part that is accessed on the GPU is moved to the GPU) and are treated like local memory while residing on the processing unit. For details, see [the documentation on the `MemorySpace` concept](MemorySpaceConcept).
+Availability can be checked with the preprocessor define `KOKKOS_HAS_SHARED_SPACE` or the `constexpr` `has_SharedSpace()`.
 For the following backends `Kokkos::SharedSpace` is pointing to the correspoinding [`MemorySpace` type](MemorySpaceConcept):
 
-- Cuda -> CudaUVMSpace
-- HIP -> HIPManagedSpace
-- SYCL -> SYCLSharedUSMSpace
+- Cuda -> `CudaUVMSpace`
+- HIP -> `HIPManagedSpace`
+- SYCL -> `SYCLSharedUSMSpace`
+- OpenMP/Threads/HPX/Serial -> `HostSpace`
 
 (MemorySpaceConcept)=
 ## `Kokkos::MemorySpaceConcept`
