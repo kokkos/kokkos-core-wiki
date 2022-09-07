@@ -55,7 +55,7 @@ _`func*`_ see notes below
 [`fmod`](https://en.cppreference.com/w/cpp/numeric/math/fmod)
 [`remainder`](https://en.cppreference.com/w/cpp/numeric/math/remainder)
 [<strike>`remquo`</strike>](https://en.cppreference.com/w/cpp/numeric/math/remquo)
-[<strike>`fma`</strike>](https://en.cppreference.com/w/cpp/numeric/math/fma)
+[`fma*`](https://en.cppreference.com/w/cpp/numeric/math/fma)
 [`fmax`](https://en.cppreference.com/w/cpp/numeric/math/fmax)
 [`fmin`](https://en.cppreference.com/w/cpp/numeric/math/fmin)
 [`fdim`](https://en.cppreference.com/w/cpp/numeric/math/fdim)
@@ -144,6 +144,7 @@ _`func*`_ see notes below
 * `nearbyint` is not available with the SYCL backend
 * `round`, `logb`, `nextafter`, `copysign`, and `signbit` are available since version 3.7
 * three-argument version of `hypot` is available since 4.0
+* `fma` is available since 4.0
 
 ---
 
