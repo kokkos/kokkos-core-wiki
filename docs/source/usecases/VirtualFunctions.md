@@ -113,7 +113,9 @@ This is the solution that the code teams we have talked to have said is the most
 
 ## But what if I do not really need the V-Tables on the device side?
 
-There are cases where a lot of the logic of a code is implemented using virtual functions. Nevertheless, the performance critical part of the code might not use pointers to base class and dynamic polymorphism to compute a result from data. In these cases, the device might not need to have a working virtual function table. Consider the following example:
+The performance critical part of a code might not use pointers to base class and dynamic polymorphism to compute a result from data.
+Thus, the device might not need to have a working virtual function table.
+Consider the following example:
 ```c++
 struct Interface
 {
@@ -145,14 +147,20 @@ int main ()
 ```
 ### What is the problem?
 
-Inside the `parallel_for` the `operator()` is called which is marked `override`. On ROCm 5.2 this results in a memory access violation. When executing the `this->operator()(i,v)` call, the runtime looks into the V-Table and dereferences a host pointer on the device.
+Inside the `parallel_for` the `operator()` is called which is marked `override`.
+On ROCm 5.2 this results in a memory access violation.
+When executing the `this->operator()(i,v)` call, the runtime looks into the V-Table and dereferences a host pointer on the device.
 
 ### But if that is the case, why does it work with NVCC?
 
-Notice, that the `parallel_for` is called from a pointer of type `Implementation` and not a pointer of type `Interface` pointing to an `Implementation` object. Thus, no V-Table lookup for the `operator()` would be necessary as it can be deduced from the context of the call that it will be the `operator()` in the class `Interface`. But here it comes down to how the compiler handles the lookup. NVCC understands that the call is coming from an `Implementation` object and thinks: "Oh, I see, that you are calling from an `Implementation` object, I know it will be the `operator()` in this class scope, I will do this for you". ROCm, on the other hand, sees your call and thinks “Oh, this is a call to a virtual method, I will look that up for you” - failing to read from the virtual function table, as it is containing host addresses.
+Notice, that the `parallel_for` is called from a pointer of type `Implementation` and not a pointer of type `Interface` pointing to an `Implementation` object.
+Thus, no V-Table lookup for the `operator()` would be necessary as it can be deduced from the context of the call that it will be the `operator()` in the class `Interface`.
+But here it comes down to how the compiler handles the lookup. NVCC understands that the call is coming from an `Implementation` object and thinks: "Oh, I see, that you are calling from an `Implementation` object, I know it will be the `operator()` in this class scope, I will do this for you".
+ROCm, on the other hand, sees your call and thinks “Oh, this is a call to a virtual method, I will look that up for you” - failing to read from the virtual function table, as it is containing host addresses.
 
 ### How to solve this?
-Strictly speaking, the observed behavior on NVCC is an optimization that uses the context information to avoid the V-Table lookup. If the compiler does not apply this optimization, you can help in different ways by providing additional information. 
+Strictly speaking, the observed behavior on NVCC is an optimization that uses the context information to avoid the V-Table lookup.
+If the compiler does not apply this optimization, you can help in different ways by providing additional information. 
 
 - Changing the `override` to `final` on the `operator()` in the `Implementation` class. This tells the compiler the `operator()` is not changing in derived objects and thus it knows which one to call without the V-Table. Nevertheless, this also prevents any overloads of `operator()` in classes derived from `Implementation`.
 - Similarly, the entire derived class `Implementation` can be marked `final`. It has the same effect just for the entire class scope.
