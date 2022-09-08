@@ -111,6 +111,60 @@ deviceInstance->setAField(someHostValue); // set some field on the host
 
 This is the solution that the code teams we have talked to have said is the most productive way to solve the problem.
 
+## But what if I do not really need the V-Tables on the device side?
+
+There are cases where a lot of the logic of a code is implemented using virtual functions. Nevertheless, the performance critical part of the code might not use parent pointers and dynamic polymorphism to compute a result from data. In these cases, the device might not need to have a working virtual function table. Consider the following example:
+```c++
+struct Interface
+{
+    KOKKOS_DEFAULTED_FUNCTION
+    virtual ~Interface() = default;
+
+    KOKKOS_FUNCTION
+    virtual void operator()( const size_t, const Kokkos::View<int*> &) const = 0;
+};
+
+struct Implementation : public Interface
+{
+    KOKKOS_FUNCTION
+    void operator()(const size_t i, const Kokkos::View<int*> &v) const override
+    {
+        ++v(i);
+    }
+
+    void apply(const Kokkos::View<int*> v)
+    {
+        Kokkos::parallel_for(
+            Kokkos::RangePolicy<execution_space>(0, v.extent(0)),
+            KOKKOS_CLASS_LAMBDA (const size_t i) { this->operator()(i, v); }
+        );
+        execution_space().fence();
+    }
+};
+
+int main ()
+{
+    ... 
+    Kokkos::View<int *> v("my view");
+    auto implementationPtr_h = std::make_shared<Implementation>();
+    implementationPtr_h->apply(v);
+}
+```
+### What is the problem?
+
+Inside the `parallel_for` the `operator()` is called which is maked `override`. On Rocm 5.2 this results in a memory access violation. When executing the `this->operator()(i,v)` call the runtime looks into the V-Table and dereferences a host pointer on the device.
+
+### But if that is the case, why does it work with NVCC?
+
+Notice, that the `parallel_for` is called from a pointer of type `Implementation` and not a pointer of type `Interface` pointing to an `Implementation` object. Thus, no V-Table lookup for the `operator()` would be necessary as it can be deduced from the context of the call that it will be the `operator()` in the class `Interface`. But here it comes down to how the compiler handles the lookup. NVCC uses that it sees the call coming from an `Implementation` object and thinks: "Oh, I see, that you are calling from a `Implementation` object, I know it will be the `operator()` in this class scope, I will do this for you". Rocm on the other hand sees your call and thinks “Oh, this is a call to a virtual method, I will look that up for you” - failing to read from the virtual function table, as it is containing host addresses.
+
+### How to solve this?
+Stictly speaking the observed behavior on NVCC is an optimization that uses the context information to avoid the V-Table lookup. If the compiler does not apply this optimization you can help in different ways by providing additional information. 
+
+- Changing the `override` to `final` on the `operator()` in the `Implementation` class. This tells the compiler the `operator()` is not changing in derived objects and thus it knows which one to call without the V-Table. Nevertheless, this also prevents any overloads of `operator()` in classes derived from `Implementation`.
+- Similarly the entire derived class `Implementation` can be marked `final`. It has the same effect just for the entire class scope.
+- Tell the compiler to not look up any function name when calling `operator()` by using [qualified name lookup](https://en.cppreference.com/w/cpp/language/qualified_lookup). For this you tell the compiler which function you want by spelling out the class namespace e.g. `this->Implementation::operator() (i,v);`.
+
 ## Questions/Follow-up
 
 This is intended to be an educational resource for our users. If something doesn't make sense, or you have further questions, you'd be doing us a favor by letting us know on [Slack](https://kokkosteam.slack.com) or [GitHub](https://github.com/kokkos/kokkos)
