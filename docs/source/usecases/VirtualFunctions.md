@@ -147,7 +147,7 @@ int main ()
 ```
 ### What is the problem?
 
-Inside the `parallel_for` the `operator()` is called which is marked `override`.
+Inside the `parallel_for` the `operator()` is called. As `Implementation` derives from the pure virtual class `Interface`, the 'operator()' is marked `override`.
 On ROCm 5.2 this results in a memory access violation.
 When executing the `this->operator()(i,v)` call, the runtime looks into the V-Table and dereferences a host pointer on the device.
 
