@@ -113,7 +113,7 @@ This is the solution that the code teams we have talked to have said is the most
 
 ## But what if I do not really need the V-Tables on the device side?
 
-There are cases where a lot of the logic of a code is implemented using virtual functions. Nevertheless, the performance critical part of the code might not use parent pointers and dynamic polymorphism to compute a result from data. In these cases, the device might not need to have a working virtual function table. Consider the following example:
+There are cases where a lot of the logic of a code is implemented using virtual functions. Nevertheless, the performance critical part of the code might not use pointers to base class and dynamic polymorphism to compute a result from data. In these cases, the device might not need to have a working virtual function table. Consider the following example:
 ```c++
 struct Interface
 {
