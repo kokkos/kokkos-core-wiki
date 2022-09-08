@@ -121,33 +121,26 @@ struct Interface
     virtual ~Interface() = default;
 
     KOKKOS_FUNCTION
-    virtual void operator()( const size_t, const Kokkos::View<int*> &) const = 0;
+    virtual void operator()( const size_t) const = 0;
 };
 
 struct Implementation : public Interface
 {
     KOKKOS_FUNCTION
-    void operator()(const size_t i, const Kokkos::View<int*> &v) const override
-    {
-        ++v(i);
-    }
+    void operator()(const size_t i) const override
+    { ... }
 
-    void apply(const Kokkos::View<int*> v)
-    {
-        Kokkos::parallel_for(
-            Kokkos::RangePolicy<execution_space>(0, v.extent(0)),
-            KOKKOS_CLASS_LAMBDA (const size_t i) { this->operator()(i, v); }
-        );
-        execution_space().fence();
-    }
+    void apply(){
+        Kokkos::parallel_for("myLoop",10,
+            KOKKOS_CLASS_LAMBDA (const size_t i) { this->operator()(i); }
+        );}
 };
 
 int main ()
 {
     ... 
-    Kokkos::View<int *> v("my view");
     auto implementationPtr_h = std::make_shared<Implementation>();
-    implementationPtr_h->apply(v);
+    implementationPtr_h->apply();
 }
 ```
 ### What is the problem?
