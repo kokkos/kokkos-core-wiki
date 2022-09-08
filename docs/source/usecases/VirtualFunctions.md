@@ -162,7 +162,7 @@ Notice, that the `parallel_for` is called from a pointer of type `Implementation
 Strictly speaking, the observed behavior on NVCC is an optimization that uses the context information to avoid the V-Table lookup. If the compiler does not apply this optimization, you can help in different ways by providing additional information. 
 
 - Changing the `override` to `final` on the `operator()` in the `Implementation` class. This tells the compiler the `operator()` is not changing in derived objects and thus it knows which one to call without the V-Table. Nevertheless, this also prevents any overloads of `operator()` in classes derived from `Implementation`.
-- Similarly the entire derived class `Implementation` can be marked `final`. It has the same effect just for the entire class scope.
+- Similarly, the entire derived class `Implementation` can be marked `final`. It has the same effect just for the entire class scope.
 - Tell the compiler to not look up any function name when calling `operator()` by using [qualified name lookup](https://en.cppreference.com/w/cpp/language/qualified_lookup). For this you tell the compiler which function you want by spelling out the class namespace e.g. `this->Implementation::operator() (i,v);`.
 
 ## Questions/Follow-up
