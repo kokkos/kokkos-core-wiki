@@ -156,7 +156,7 @@ When executing the `this->operator()(i)` call, the runtime looks into the V-Tabl
 Notice, that the `parallel_for` is called from a pointer of type `Implementation` and not a pointer of type `Interface` pointing to an `Implementation` object.
 Thus, no V-Table lookup for the `operator()` would be necessary as it can be deduced from the context of the call that it will be `Implementation::operator()`.
 But here it comes down to how the compiler handles the lookup. NVCC understands that the call is coming from an `Implementation` object and thinks: "Oh, I see, that you are calling from an `Implementation` object, I know it will be the `operator()` in this class scope, I will do this for you".
-ROCm, on the other hand, sees your call and thinks “Oh, this is a call to a virtual method, I will look that up for you” - failing to read from the virtual function table, as it is containing host addresses.
+ROCm, on the other hand, sees your call and thinks “Oh, this is a call to a virtual method, I will look that up for you” - failing to read from the virtual function table, as it resides in host space.
 
 ### How to solve this?
 Strictly speaking, the observed behavior on NVCC is an optimization that uses the context information to avoid the V-Table lookup.
