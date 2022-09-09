@@ -149,7 +149,7 @@ int main ()
 
 Inside the `parallel_for` the `operator()` is called. As `Implementation` derives from the pure virtual class `Interface`, the 'operator()' is marked `override`.
 On ROCm 5.2 this results in a memory access violation.
-When executing the `this->operator()(i,v)` call, the runtime looks into the V-Table and dereferences a host pointer on the device.
+When executing the `this->operator()(i)` call, the runtime looks into the V-Table and dereferences a host pointer on the device.
 
 ### But if that is the case, why does it work with NVCC?
 
