@@ -163,7 +163,7 @@ Strictly speaking, the observed behavior on NVCC is an optimization that uses th
 If the compiler does not apply this optimization, you can help in different ways by providing additional information. 
 
 - Tell the compiler not to look up any function name in the V-Table when calling `operator()` by using [qualified name lookup](https://en.cppreference.com/w/cpp/language/qualified_lookup). For this, you tell the compiler which function you want by spelling out the class scope in which the function should be found e.g. `this->Implementation::operator() (i,v);`. This behavior is specified in the C++ Standard.
-- Changing the `override` to `final` on the `operator()` in the `Implementation` class. This tells the compiler the `operator()` is not changing in derived objects. Many compilers do use this in optimization and deduce which function to call without the V-Table. Nevertheless, this might only work with certain compilers, as this effect of adding `final` is not specified in the C++-Standard. 
+- Changing the `override` to `final` on the `operator()` in the `Implementation` class. This tells the compiler the `operator()` is not changing in derived objects. Many compilers do use this in optimization and deduce which function to call without the V-Table. Nevertheless, this might only work with certain compilers, as this effect of adding `final` is not specified in the C++ Standard. 
 - Similarly, the entire derived class `Implementation` can be marked `final`. This is compiler dependent, too for the same reasons.
 
 ## Questions/Follow-up
