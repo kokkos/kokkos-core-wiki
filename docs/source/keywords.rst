@@ -127,7 +127,7 @@ Enable Options
       * Enable building examples
       * ``OFF``
 
-    * * ``Kokkos_ENABLE_MULTIPLE_KERNEL_INSTANTIATIONS``
+    * * ``Kokkos_ENABLE_HIP_MULTIPLE_KERNEL_INSTANTIATIONS``
       * Instantiate multiple kernels at compile time - improve performance but increase compile time
       * ``OFF``
 
