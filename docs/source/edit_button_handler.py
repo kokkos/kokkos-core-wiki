@@ -84,6 +84,10 @@ class HTMLButtonAdder:
         html_str_beg = html_file_str[:tag_pos + len(html_tag)]
         html_str_end = html_file_str[tag_pos + len(html_tag):]
         html_str_replace = html_str_beg + str_to_put + html_str_end
+        # Overwriting the deprecated style
+        str_to_replace = '<span class="pre">[DEPRECATED]</span>'
+        replaced_with = '<span class="pre" style="color:#A020F0;font-weight:bold;">[DEPRECATED]</span>'
+        html_str_replace = html_str_replace.replace(str_to_replace, replaced_with)
         with open(file_names[0], 'wt') as new_html_file:
             new_html_file.write(html_str_replace)
         print(f'=> Processing: {file_names[0]} done')
