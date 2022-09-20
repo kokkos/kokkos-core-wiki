@@ -135,7 +135,8 @@ struct Implementation : public Interface
     void apply(){
         Kokkos::parallel_for("myLoop",10,
             KOKKOS_CLASS_LAMBDA (const size_t i) { this->operator()(i); }
-        );}
+        );
+    }
 };
 
 int main ()
