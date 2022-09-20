@@ -113,7 +113,7 @@ This is the solution that the code teams we have talked to have said is the most
 
 ## But what if I do not really need the V-Tables on the device side?
 Consider the following example which calls the `virtual operator()` on the device from a pointer of derived class type.
-One might think this should work because V-Table lookup on the device is neccessary.
+One might think this should work because no V-Table lookup on the device is neccessary.
 ```c++
 struct Interface
 {
