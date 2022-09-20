@@ -112,10 +112,8 @@ deviceInstance->setAField(someHostValue); // set some field on the host
 This is the solution that the code teams we have talked to have said is the most productive way to solve the problem.
 
 ## But what if I do not really need the V-Tables on the device side?
-
-The performance critical part of a code might not use pointers to base class and dynamic polymorphism to compute a result from data.
-Thus, the device might not need to have a working virtual function table.
-Consider the following example:
+Consider the following example which calls the `virtual operator()` on the device from a pointer of derived class type.
+One might think this should work because V-Table lookup on the device is neccessary.
 ```c++
 struct Interface
 {
@@ -146,7 +144,7 @@ int main ()
     implementationPtr->apply();
 }
 ```
-### What is the problem?
+### Why is this not portable?
 
 Inside the `parallel_for` the `operator()` is called. As `Implementation` derives from the pure virtual class `Interface`, the 'operator()' is marked `override`.
 On ROCm 5.2 this results in a memory access violation.
