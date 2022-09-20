@@ -142,8 +142,8 @@ struct Implementation : public Interface
 int main ()
 {
     ... 
-    auto implementationPtr_h = std::make_shared<Implementation>();
-    implementationPtr_h->apply();
+    auto implementationPtr = std::make_shared<Implementation>();
+    implementationPtr->apply();
 }
 ```
 ### What is the problem?
