@@ -30,7 +30,7 @@ Class Interface
 
   .. cppkokkos:deprecated-type:: some_deprecated_data_type
 
-    The const version of 1 some_deprecated_data_type.
+    The const version of some_deprecated_data_type.
 
   .. cppkokkos:function:: View( const ScratchSpace& space, const IntType& ... indices)
 

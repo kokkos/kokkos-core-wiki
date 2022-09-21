@@ -8,6 +8,7 @@ from docutils import nodes
 from docutils.nodes import Element, Node, TextElement, system_message
 from docutils.parsers.rst import directives
 
+from pygments.lexers import CppLexer
 from sphinx import addnodes
 from sphinx.addnodes import desc_signature, pending_xref
 from sphinx.application import Sphinx
@@ -2901,6 +2902,8 @@ class ASTType(ASTBase):
             return 'typedef'
         elif self.declSpecs.outer == 'deprecated-type':
             return '[DEPRECATED]'
+        elif self.declSpecs.outer == 'type':
+            return ''
         else:
             return 'type'
 
@@ -7824,6 +7827,7 @@ class CPPKokkosDomain(Domain):
 
 def setup(app: Sphinx) -> Dict[str, Any]:
     app.add_domain(CPPKokkosDomain)
+    app.add_lexer("cppkokkos", CppLexer)
     app.add_config_value("cppkokkos_index_common_prefix", [], 'env')
     app.add_config_value("cppkokkos_id_attributes", [], 'env')
     app.add_config_value("cppkokkos_paren_attributes", [], 'env')
