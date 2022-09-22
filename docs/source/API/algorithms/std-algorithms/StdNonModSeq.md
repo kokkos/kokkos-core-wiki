@@ -634,11 +634,11 @@ Returns the number of elements in the range [first,last) that are equal to `valu
 For (3,4) returns the number of elements in `v` that are equal to `value`.
 
 ### Parameters and Requirements
-- `execspace`, `first`, `last` and `view` similar to [#Kokkos::Expeimental::count_if](#kokkosexperimentalcount_if).
+- `execspace`, `first`, `last` and `view` similar to [#Kokkos::Experimental::count_if](#kokkosexperimentalcount_if).
 - `label`:
     - 1: The default string is "Kokkos::count_iterator_api_default".
     - 3: The default string is "Kokkos::count_view_api_default".
-- `pred` - similar to [#Kokkos::Expeimental::count_if](#kokkosexperimentalcount_if)
+- `pred` - similar to [#Kokkos::Experimental::count_if](#kokkosexperimentalcount_if)
 
 
 ## Kokkos::Experimental::all_off
@@ -669,7 +669,7 @@ Returns `true` if all the elements in the range [first,last) return `true` for u
 Returns `true` if all the elements in `view` return `true` for unary predicate `pred` in (3,4).
 
 ### Parameters and Requirements
-- `execspace`, `first`, `last` and `view` similar to [#Kokkos::Expeimental::count](#kokkosexperimentalcount).
+- `execspace`, `first`, `last` and `view` similar to [#Kokkos::Experimental::count](#kokkosexperimentalcount).
 - `label`:
     - 1: The default string is "Kokkos::all_of_iterator_api_default".
     - 3: The default string is "Kokkos::all_of_view_api_default".
@@ -704,7 +704,7 @@ Returns `true` if at least one element in the range [first,last) returns `true` 
 Returns `true` if at least one element in `view` returns `true` for unary predicate `pred` in (3,4).
 
 ### Parameters and Requirements
-- `execspace`, `first`, `last` and `view` similar to [#Kokkos::Expeimental::all_of](#kokkosexperimentalall_of).
+- `execspace`, `first`, `last` and `view` similar to [#Kokkos::Experimental::all_of](#kokkosexperimentalall_of).
 - `label`:
     - 1: The default string is "Kokkos::any_of_iterator_api_default".
     - 3: The default string is "Kokkos::any_of_view_api_default".
@@ -738,7 +738,7 @@ Returns `true` if no element in the range [first,last) returns `true` for unary 
 Returns `true` if no element in `view` returns `true` for unary predicate `pred` in (3,4).
 
 ### Parameters and Requirements
-- `execspace`, `first`, `last` and `view` similar to [#Kokkos::Expeimental::all_of](#kokkosexperimentalall_of).
+- `execspace`, `first`, `last` and `view` similar to [#Kokkos::Experimental::all_of](#kokkosexperimentalall_of).
 - `label`:
     - 1: The default string is "Kokkos::none_of_iterator_api_default".
     - 3: The default string is "Kokkos::none_of_view_api_default".
@@ -794,7 +794,7 @@ Returns the first Kokkos view iterator `it` in (3,4), where `view(it) == view(it
 Returns the first Kokkos view iterator `it` in (7,8), where `pred(view(it), view(it+1))` returns true. 
 
 ### Parameters and Requirements
-- `execspace`, `first`, `last` and `view` similar to [#Kokkos::Expeimental::all_of](#kokkosexperimentalall_of).
+- `execspace`, `first`, `last` and `view` similar to [#Kokkos::Experimental::all_of](#kokkosexperimentalall_of).
 - `label`:
     - 1,5: The default string is "Kokkos::adjacent_find_iterator_api_default".
     - 3,7: The default string is "Kokkos::adjacent_find_view_api_default".
@@ -863,7 +863,7 @@ Elements (1,2,3,4) are compared using the `<` operator.
 Elements (5,6,7,8) are compared using `comp`.
 
 ### Parameters and Requirements
-- `execspace`, `first1`, `last1`, `first2`, `last2`, `view1` and `view2` similar to [#Kokkos::Expeimental::mismatch](#kokkosexperimentalmismatch).
+- `execspace`, `first1`, `last1`, `first2`, `last2`, `view1` and `view2` similar to [#Kokkos::Experimental::mismatch](#kokkosexperimentalmismatch).
 - `label`:
     - 1,5: The default string is "Kokkos::lexicographical_compare_iterator_api_defaul".
     - 3,7: The default string is "Kokkos::lexicographical_compare_view_api_default".
@@ -930,7 +930,7 @@ Searches for the first occurrence of the sequence of elements `s_view` in `view`
 Elements in (1,2,3,4) are compared using `==` and elements in (5,6,7,8) are compared using `pred`.
 
 ### Parameters and Requirements
-- `execspace`, `s_first`, `s_last`, `first`, `last`, `s_view` and `view` similar to [#Kokkos::Expeimental::mismatch](#kokkosexperimentalmismatch).
+- `execspace`, `s_first`, `s_last`, `first`, `last`, `s_view` and `view` similar to [#Kokkos::Experimental::mismatch](#kokkosexperimentalmismatch).
 - `label`:
     - 1,5: The default string is "Kokkos::search_iterator_api_default".
     - 3,7: The default string is "Kokkos::search_view_api_default".
@@ -998,7 +998,7 @@ Searches the range [first, last) for a range of `count` elements for which the `
 Searches the `view` for a range of `count` elements for which the `pred` returns true for `value` in (7,8).
 
 ### Parameters and Requirements
-- `execspace`, `first`, `last`, `view` and `count` similar to [#Kokkos::Expeimental::for_each_n](#kokkosexperimentalfor_each_n).
+- `execspace`, `first`, `last`, `view` and `count` similar to [#Kokkos::Experimental::for_each_n](#kokkosexperimentalfor_each_n).
 - `label`:
     - 1,5: The default string is "Kokkos::search_n_iterator_api_default".
     - 3,7: The default string is "Kokkos::search_n_view_api_default".
@@ -1066,11 +1066,11 @@ Searches the range [first, last) for any of the elements in the range [s_first, 
 Searches `view` for any of the elements in `s_view` in (7,8) for which `pred` evaluates to `true`.
 
 ### Parameters and Requirements
-- `execspace`, `first`, `last`, `view` and `count` similar to [#Kokkos::Expeimental::for_each_n](#kokkosexperimentalfor_each_n).
+- `execspace`, `first`, `last`, `view` and `count` similar to [#Kokkos::Experimental::for_each_n](#kokkosexperimentalfor_each_n).
 - `label`:
     - 1,5: The default string is "Kokkos::find_first_of_iterator_api_default".
     - 3,7: The default string is ""Kokkos::find_first_of_view_api_default".
-- `pred` - similar to [Kokkos::Experimental::equal](#kokkosexpeimentalequal)
+- `pred` - similar to [Kokkos::Experimental::equal](#kokkosexperimentalequal)
 
 
 ## Kokkos::Experimental::find_end
@@ -1134,14 +1134,14 @@ Searches for the last occurrence of the sequence [s_first, s_last) in the range 
 Searches for the last occurrence of the `s_view` in `view`  in (7,8) for which `pred` evaluates to true.
 
 ### Parameters and Requirements
-- `execspace`, `first`, `last`, `view` and `count` similar to [#Kokkos::Expeimental::for_each_n](#kokkosexpeimentalfor_each_n).
+- `execspace`, `first`, `last`, `view` and `count` similar to [#Kokkos::Experimental::for_each_n](#kokkosexperimentalfor_each_n).
 - `label`:
     - 1,5: The default string is "Kokkos::search_n_iterator_api_default".
     - 3,7: The default string is "Kokkos::search_n_view_api_default".
-- `pred` - similar to [Kokkos::Experimental::equal](#kokkosexpeimentalequal)
+- `pred` - similar to [Kokkos::Experimental::equal](#kokkosexperimentalequal)
 
 ### Parameters and Requirements
-- `execspace`, `s_first`, `s_last`, `first`, `last`, `s_view` and `view` similar to [#Kokkos::Expeimental::search](#kokkosexpeimentalsearch).
+- `execspace`, `s_first`, `s_last`, `first`, `last`, `s_view` and `view` similar to [#Kokkos::Experimental::search](#kokkosexperimentalsearch).
 - `label`:
     - 1,5: The default string is "Kokkos::find_end_iterator_api_default".
     - 3,7: The default string is "Kokkos::find_end_view_api_default".
