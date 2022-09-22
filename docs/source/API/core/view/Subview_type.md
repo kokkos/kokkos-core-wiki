@@ -30,7 +30,8 @@ struct subViewHolder {
 Kokkos::Subview<view_type,
                 std::pair<int,int>,
                 int,
-                Kokkos::ALL,int> s;
+                decltype(Kokkos::ALL),
+                int> s;
 } subViewHolder;
 
 subViewHolder.s  = Kokkos::subview(a,
