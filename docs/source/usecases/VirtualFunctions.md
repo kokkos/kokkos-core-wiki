@@ -148,14 +148,14 @@ int main ()
 
 Inside the `parallel_for` the `operator()` is called. As `Implementation` derives from the pure virtual class `Interface`, the 'operator()' is marked `override`.
 On ROCm 5.2 this results in a memory access violation.
-When executing the `this->operator()(i)` call, the runtime looks into the V-Table and dereferences a host pointer on the device.
+When executing the `this->operator()(i)` call, the runtime looks into the V-Table and dereferences a host function pointer on the device.
 
 ### But if that is the case, why does it work with NVCC?
 
 Notice, that the `parallel_for` is called from a pointer of type `Implementation` and not a pointer of type `Interface` pointing to an `Implementation` object.
 Thus, no V-Table lookup for the `operator()` would be necessary as it can be deduced from the context of the call that it will be `Implementation::operator()`.
 But here it comes down to how the compiler handles the lookup. NVCC understands that the call is coming from an `Implementation` object and thinks: "Oh, I see, that you are calling from an `Implementation` object, I know it will be the `operator()` in this class scope, I will do this for you".
-ROCm, on the other hand, sees your call and thinks “Oh, this is a call to a virtual method, I will look that up for you” - failing to read from the virtual function table, as it resides in host space.
+ROCm, on the other hand, sees your call and thinks “Oh, this is a call to a virtual method, I will look that up for you” - failing to dereference the host function pointer in the host virtual function table.
 
 ### How to solve this?
 Strictly speaking, the observed behavior on NVCC is an optimization that uses the context information to avoid the V-Table lookup.
