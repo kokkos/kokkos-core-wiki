@@ -2802,11 +2802,12 @@ class ASTInitializer(ASTBase):
 
 
 class ASTType(ASTBase):
-    def __init__(self, declSpecs: ASTDeclSpecs, decl: ASTDeclarator) -> None:
+    def __init__(self, declSpecs: ASTDeclSpecs, decl: ASTDeclarator, deprecated_version: str = None) -> None:
         assert declSpecs
         assert decl
         self.declSpecs = declSpecs
         self.decl = decl
+        self.deprecated_version = deprecated_version
 
     @property
     def name(self) -> ASTNestedName:
@@ -2901,7 +2902,9 @@ class ASTType(ASTBase):
         if self.declSpecs.trailingTypeSpec:
             return 'typedef'
         elif self.declSpecs.outer == 'deprecated-type':
-            return '[DEPRECATED]'
+            if self.deprecated_version is None:
+                return '[DEPRECATED]'
+            return f'[DEPRECATED since {self.deprecated_version}]'
         elif self.declSpecs.outer == 'type':
             return ''
         else:
@@ -6330,6 +6333,8 @@ class DefinitionParser(BaseParser):
                 named = 'single'
             declSpecs = self._parse_decl_specs(outer=outer)
             decl = self._parse_declarator(named=named, paramMode=paramMode)
+        if self.__dict__.get('deprecated_version'):
+            return ASTType(declSpecs, decl, deprecated_version=self.deprecated_version)
         return ASTType(declSpecs, decl)
 
     def _parse_type_with_init(
@@ -7029,8 +7034,21 @@ class CPPKokkosObject(ObjectDescription[ASTDeclaration]):
 
     def handle_signature(self, sig: str, signode: desc_signature) -> ASTDeclaration:
         parentSymbol: Symbol = self.env.temp_data['cppkokkos:parent_symbol']
-
+        if self.object_type == 'deprecated-type':
+            deprecated_version = ''
+            try:
+                deprecated_version = sig.split(' ')[0]
+                if re.match('^[0-9]+.[0-9]+.*[0-9]*$', deprecated_version) is not None:
+                    temp_sig = sig.split(' ')[1:]
+                    sig = ' '.join(temp_sig)
+                    self.deprecated_version = deprecated_version
+                else:
+                    deprecated_version = ''
+            except ValueError as e:
+                sig = sig
         parser = DefinitionParser(sig, location=signode, config=self.env.config)
+        if self.object_type == 'deprecated-type' and deprecated_version:
+            parser.deprecated_version = self.deprecated_version
         try:
             ast = self.parse_definition(parser)
             parser.assert_end()

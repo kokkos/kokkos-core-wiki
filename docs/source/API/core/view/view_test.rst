@@ -28,9 +28,17 @@ Class Interface
 
     :cppkokkos:`uniform_type` but without compile time extents
 
-  .. cppkokkos:deprecated-type:: some_deprecated_data_type
+  .. cppkokkos:deprecated-type:: 3.6.01 some_deprecated_data_type
 
     The const version of some_deprecated_data_type.
+
+  .. cppkokkos:deprecated-type:: other_deprecated_data_type
+
+    The const version of other_deprecated_data_type.
+
+  .. cppkokkos:deprecated-type:: 3.7.0 some_deprecated_data_type_1
+
+    The const version of some_deprecated_data_type_1.
 
   .. cppkokkos:function:: View( const ScratchSpace& space, const IntType& ... indices)
 
