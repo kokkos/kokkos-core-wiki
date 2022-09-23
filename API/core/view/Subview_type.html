@@ -488,7 +488,8 @@ For restrictions on Args see <span class="xref myst"><code class="docutils liter
 <span class="n">Kokkos</span><span class="o">::</span><span class="n">Subview</span><span class="o">&lt;</span><span class="n">view_type</span><span class="p">,</span><span class="w"></span>
 <span class="w">                </span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">,</span><span class="w"></span>
 <span class="w">                </span><span class="kt">int</span><span class="p">,</span><span class="w"></span>
-<span class="w">                </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">ALL</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">s</span><span class="p">;</span><span class="w"></span>
+<span class="w">                </span><span class="k">decltype</span><span class="p">(</span><span class="n">Kokkos</span><span class="o">::</span><span class="n">ALL</span><span class="p">),</span><span class="w"></span>
+<span class="w">                </span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">s</span><span class="p">;</span><span class="w"></span>
 <span class="p">}</span><span class="w"> </span><span class="n">subViewHolder</span><span class="p">;</span><span class="w"></span>
 
 <span class="n">subViewHolder</span><span class="p">.</span><span class="n">s</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">subview</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"></span>
