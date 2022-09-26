@@ -115,6 +115,9 @@ This is the solution that the code teams we have talked to have said is the most
 Consider the following example which calls the `virtual operator()` on the device from a pointer of derived class type.
 One might think this should work because no V-Table lookup on the device is neccessary.
 ```c++
+#include <Kokkos_Core.hpp>
+#include <cstdio>
+
 struct Interface
 {
     KOKKOS_DEFAULTED_FUNCTION
@@ -128,7 +131,7 @@ struct Implementation : public Interface
 {
     KOKKOS_FUNCTION
     void operator()(const size_t i) const override
-    { ... }
+    { printf("%i from Implementation", i); }
 
     void apply(){
         Kokkos::parallel_for("myLoop",10,
@@ -137,11 +140,15 @@ struct Implementation : public Interface
     }
 };
 
-int main ()
+int main (int argc, char *argv[])
 {
-    ... 
-    auto implementationPtr = std::make_shared<Implementation>();
-    implementationPtr->apply();
+    Kokkos::initialize(argc,argv);
+    {
+      auto implementationPtr = std::make_shared<Implementation>();
+      implementationPtr->apply();
+      Kokkos::fence();
+    }
+    Kokkos::finalize();
 }
 ```
 ### Why is this not portable?
