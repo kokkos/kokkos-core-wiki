@@ -131,7 +131,7 @@ struct Implementation : public Interface
 {
     KOKKOS_FUNCTION
     void operator()(const size_t i) const override
-    { printf("%i from Implementation", i); }
+    { printf("%zu from Implementation\n", i); }
 
     void apply(){
         Kokkos::parallel_for("myLoop",10,
