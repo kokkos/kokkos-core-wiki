@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="MPI Halo Exchange" href="usecases/MPI-Halo-Exchange.html" /><link rel="prev" title="&lt;no title&gt;" href="known-issues.html" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Use Cases and Examples" href="usecases.html" /><link rel="prev" title="API in Alphabetical Order" href="API/alphabetical.html" />
 
     <meta name="generator" content="sphinx-5.0.1, furo 2022.06.04.1"/>
-        <title>Use Cases and Examples - Kokkos documentation</title>
+        <title>&lt;no title&gt; - Kokkos documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=40978830699223671f4072448e654b5958f38b89" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
@@ -156,7 +156,7 @@
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
-  <ul class="current">
+  <ul>
 <li class="toctree-l1 has-children"><a class="reference internal" href="programmingguide.html">Programming Guide</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="ProgrammingGuide/Introduction.html">1. Introduction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ProgrammingGuide/Machine-Model.html">2. Machine Model</a></li>
@@ -382,7 +382,7 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="API/alphabetical.html">API in Alphabetical Order</a></li>
-<li class="toctree-l1 current has-children current-page"><a class="current reference internal" href="#">Use Cases and Examples</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-24" name="toctree-checkbox-24" role="switch" type="checkbox"/><label for="toctree-checkbox-24"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="usecases.html">Use Cases and Examples</a><input class="toctree-checkbox" id="toctree-checkbox-24" name="toctree-checkbox-24" role="switch" type="checkbox"/><label for="toctree-checkbox-24"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="usecases/MPI-Halo-Exchange.html">MPI Halo Exchange</a></li>
 <li class="toctree-l2"><a class="reference internal" href="usecases/Average-To-Nodes.html">ScatterView averaging elements to nodes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="usecases/MDRangePolicy.html">MDRangePolicy Use Case</a></li>
@@ -437,7 +437,7 @@
         </a>
         <div class="content-icon-container">
 <div class="edit-this-page">
-  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/usecases.rst" title="Edit this page">
+  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/known-issues.rst" title="Edit this page">
     <svg aria-hidden="true" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
       <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4"></path>
@@ -461,45 +461,36 @@
           </label>
         </div>
         <article role="main">
-          <section id="use-cases-and-examples">
-<h1>Use Cases and Examples<a class="headerlink" href="#use-cases-and-examples" title="Permalink to this heading">#</a></h1>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="usecases/MPI-Halo-Exchange.html">MPI Halo Exchange</a></li>
-<li class="toctree-l1"><a class="reference internal" href="usecases/Average-To-Nodes.html">ScatterView averaging elements to nodes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="usecases/MDRangePolicy.html">MDRangePolicy Use Case</a></li>
-<li class="toctree-l1"><a class="reference internal" href="usecases/VirtualFunctions.html">Virtual Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="usecases/TaggedOperators.html">Tagged Operators</a></li>
-<li class="toctree-l1"><a class="reference internal" href="usecases/OverlappingHostAndDeviceWork.html">Overlapping Host and Device work</a></li>
-<li class="toctree-l1"><a class="reference internal" href="usecases/Tasking.html">Kokkos Tasking Use Case</a></li>
-<li class="toctree-l1"><a class="reference internal" href="usecases/Kokkos-Fortran-Interoperability.html">Fortran Interop Use Case</a></li>
-<li class="toctree-l1"><a class="reference internal" href="usecases/SoA-and-AoSoA-with-Cabana.html">Array of Structures and Structure of Arrays with Cabana</a></li>
-</ul>
-</div>
-</section>
+          <p># Known issues</p>
+<p>## HIP
+- Compatibility issue between HIP and gcc 8. You may encounter the following error:
+<code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">error:</span> <span class="pre">reference</span> <span class="pre">to</span> <span class="pre">__host__</span> <span class="pre">function</span> <span class="pre">'operator</span> <span class="pre">new'</span> <span class="pre">in</span> <span class="pre">__host__</span> <span class="pre">__device__</span> <span class="pre">function</span>
+<span class="pre">`</span></code>
+gcc 7, 9, and later do not have this issue.</p>
 
         </article>
       </div>
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="usecases/MPI-Halo-Exchange.html">
+          <a class="next-page" href="usecases.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">MPI Halo Exchange</div>
+                <div class="title">Use Cases and Examples</div>
               </div>
               <svg><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="known-issues.html">
+          <a class="prev-page" href="API/alphabetical.html">
               <svg><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">&lt;no title&gt;</div>
+                <div class="title">API in Alphabetical Order</div>
                 
               </div>
             </a>
