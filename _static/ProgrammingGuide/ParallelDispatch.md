@@ -265,24 +265,25 @@ class Foo {
   struct RabTag {};
 
   void compute() {
-     Kokkos::parallel_for(RangePolicy<BarTag>(0,100), *this);
-     Kokkos::parallel_for(RangePolicy<RabTag>(0,1000), *this);
+     Kokkos::parallel_for(RangePolicy<BarTag>(0, 100), *this);
+     Kokkos::parallel_for(RangePolicy<RabTag>(0, 1000), *this);
   }
 
- KOKKOS_INLINE_FUNCTION
-  void operator() (const BarTag&, const int i) const {
+ KOKKOS_FUNCTION
+  void operator() (BarTag, const int i) const {
     ...
     foobar();
     ...
   }
 
-  KOKKOS_INLINE_FUNCTION
-  void operator() (const RabTag&, const int i) const {
+  KOKKOS_FUNCTION
+  void operator() (RabTag, const int i) const {
     ...
     foobar();
     ...
   }
 
+  KOKKOS_FUNCTION
   void foobar() {
     ...
   }
