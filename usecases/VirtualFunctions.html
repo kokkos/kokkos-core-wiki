@@ -553,6 +553,71 @@
 </div>
 <p>This is the solution that the code teams we have talked to have said is the most productive way to solve the problem.</p>
 </section>
+<section id="but-what-if-i-do-not-really-need-the-v-tables-on-the-device-side">
+<h2>But what if I do not really need the V-Tables on the device side?<a class="headerlink" href="#but-what-if-i-do-not-really-need-the-v-tables-on-the-device-side" title="Permalink to this heading">#</a></h2>
+<p>Consider the following example which calls the <code class="docutils literal notranslate"><span class="pre">virtual</span> <span class="pre">operator()</span></code> on the device from a pointer of derived class type.
+One might think this should work because no V-Table lookup on the device is neccessary.</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Kokkos_Core.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
+
+<span class="k">struct</span><span class="w"> </span><span class="nc">Interface</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">KOKKOS_DEFAULTED_FUNCTION</span><span class="w"></span>
+<span class="w">    </span><span class="k">virtual</span><span class="w"> </span><span class="o">~</span><span class="n">Interface</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">KOKKOS_FUNCTION</span><span class="w"></span>
+<span class="w">    </span><span class="k">virtual</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="k">operator</span><span class="p">()(</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+
+<span class="k">struct</span><span class="w"> </span><span class="nc">Implementation</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">Interface</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">KOKKOS_FUNCTION</span><span class="w"></span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="k">operator</span><span class="p">()(</span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">override</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%zu from Implementation</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">);</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">apply</span><span class="p">(){</span><span class="w"></span>
+<span class="w">        </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">parallel_for</span><span class="p">(</span><span class="s">&quot;myLoop&quot;</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="n">KOKKOS_CLASS_LAMBDA</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">this</span><span class="o">-&gt;</span><span class="k">operator</span><span class="p">()(</span><span class="n">i</span><span class="p">);</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">argv</span><span class="p">[])</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">initialize</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span><span class="n">argv</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="k">auto</span><span class="w"> </span><span class="n">implementationPtr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">Implementation</span><span class="o">&gt;</span><span class="p">();</span><span class="w"></span>
+<span class="w">      </span><span class="n">implementationPtr</span><span class="o">-&gt;</span><span class="n">apply</span><span class="p">();</span><span class="w"></span>
+<span class="w">      </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">fence</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">finalize</span><span class="p">();</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<section id="why-is-this-not-portable">
+<h3>Why is this not portable?<a class="headerlink" href="#why-is-this-not-portable" title="Permalink to this heading">#</a></h3>
+<p>Inside the <code class="docutils literal notranslate"><span class="pre">parallel_for</span></code> the <code class="docutils literal notranslate"><span class="pre">operator()</span></code> is called. As <code class="docutils literal notranslate"><span class="pre">Implementation</span></code> derives from the pure virtual class <code class="docutils literal notranslate"><span class="pre">Interface</span></code>, the ‘operator()’ is marked <code class="docutils literal notranslate"><span class="pre">override</span></code>.
+On ROCm 5.2 this results in a memory access violation.
+When executing the <code class="docutils literal notranslate"><span class="pre">this-&gt;operator()(i)</span></code> call, the runtime looks into the V-Table and dereferences a host function pointer on the device.</p>
+</section>
+<section id="but-if-that-is-the-case-why-does-it-work-with-nvcc">
+<h3>But if that is the case, why does it work with NVCC?<a class="headerlink" href="#but-if-that-is-the-case-why-does-it-work-with-nvcc" title="Permalink to this heading">#</a></h3>
+<p>Notice, that the <code class="docutils literal notranslate"><span class="pre">parallel_for</span></code> is called from a pointer of type <code class="docutils literal notranslate"><span class="pre">Implementation</span></code> and not a pointer of type <code class="docutils literal notranslate"><span class="pre">Interface</span></code> pointing to an <code class="docutils literal notranslate"><span class="pre">Implementation</span></code> object.
+Thus, no V-Table lookup for the <code class="docutils literal notranslate"><span class="pre">operator()</span></code> would be necessary as it can be deduced from the context of the call that it will be <code class="docutils literal notranslate"><span class="pre">Implementation::operator()</span></code>.
+But here it comes down to how the compiler handles the lookup. NVCC understands that the call is coming from an <code class="docutils literal notranslate"><span class="pre">Implementation</span></code> object and thinks: “Oh, I see, that you are calling from an <code class="docutils literal notranslate"><span class="pre">Implementation</span></code> object, I know it will be the <code class="docutils literal notranslate"><span class="pre">operator()</span></code> in this class scope, I will do this for you”.
+ROCm, on the other hand, sees your call and thinks “Oh, this is a call to a virtual method, I will look that up for you” - failing to dereference the host function pointer in the host virtual function table.</p>
+</section>
+<section id="how-to-solve-this">
+<h3>How to solve this?<a class="headerlink" href="#how-to-solve-this" title="Permalink to this heading">#</a></h3>
+<p>Strictly speaking, the observed behavior on NVCC is an optimization that uses the context information to avoid the V-Table lookup.
+If the compiler does not apply this optimization, you can help in different ways by providing additional information. Unfortunately, none of these strategies is fully portable to all backends.</p>
+<ul class="simple">
+<li><p>Tell the compiler not to look up any function name in the V-Table when calling <code class="docutils literal notranslate"><span class="pre">operator()</span></code> by using <a class="reference external" href="https://en.cppreference.com/w/cpp/language/qualified_lookup">qualified name lookup</a>. For this, you tell the compiler which function you want by spelling out the class scope in which the function should be found e.g. <code class="docutils literal notranslate"><span class="pre">this-&gt;Implementation::operator()</span> <span class="pre">(i);</span></code>. This behavior is specified in the C++ Standard. Nevertheless, some backends are not fully compliant to the Standard.</p></li>
+<li><p>Changing the <code class="docutils literal notranslate"><span class="pre">override</span></code> to <code class="docutils literal notranslate"><span class="pre">final</span></code> on the <code class="docutils literal notranslate"><span class="pre">operator()</span></code> in the <code class="docutils literal notranslate"><span class="pre">Implementation</span></code> class. This tells the compiler the <code class="docutils literal notranslate"><span class="pre">operator()</span></code> is not changing in derived objects. Many compilers do use this in optimization and deduce which function to call without the V-Table. Nevertheless, this might only work with certain compilers, as this effect of adding <code class="docutils literal notranslate"><span class="pre">final</span></code> is not specified in the C++ Standard.</p></li>
+<li><p>Similarly, the entire derived class <code class="docutils literal notranslate"><span class="pre">Implementation</span></code> can be marked <code class="docutils literal notranslate"><span class="pre">final</span></code>. This is compiler dependent too, for the same reasons.</p></li>
+</ul>
+</section>
+</section>
 <section id="questions-follow-up">
 <h2>Questions/Follow-up<a class="headerlink" href="#questions-follow-up" title="Permalink to this heading">#</a></h2>
 <p>This is intended to be an educational resource for our users. If something doesn’t make sense, or you have further questions, you’d be doing us a favor by letting us know on <a class="reference external" href="https://kokkosteam.slack.com">Slack</a> or <a class="reference external" href="https://github.com/kokkos/kokkos">GitHub</a></p>
@@ -622,6 +687,12 @@
 <li><a class="reference internal" href="#then-why-doesn-t-my-code-work">Then why doesn’t my code work?</a></li>
 <li><a class="reference internal" href="#how-to-fix-this">How to fix this</a></li>
 <li><a class="reference internal" href="#complications-and-fixes">Complications and Fixes</a></li>
+<li><a class="reference internal" href="#but-what-if-i-do-not-really-need-the-v-tables-on-the-device-side">But what if I do not really need the V-Tables on the device side?</a><ul>
+<li><a class="reference internal" href="#why-is-this-not-portable">Why is this not portable?</a></li>
+<li><a class="reference internal" href="#but-if-that-is-the-case-why-does-it-work-with-nvcc">But if that is the case, why does it work with NVCC?</a></li>
+<li><a class="reference internal" href="#how-to-solve-this">How to solve this?</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#questions-follow-up">Questions/Follow-up</a></li>
 </ul>
 </li>
