@@ -111,6 +111,67 @@ deviceInstance->setAField(someHostValue); // set some field on the host
 
 This is the solution that the code teams we have talked to have said is the most productive way to solve the problem.
 
+## But what if I do not really need the V-Tables on the device side?
+Consider the following example which calls the `virtual operator()` on the device from a pointer of derived class type.
+One might think this should work because no V-Table lookup on the device is neccessary.
+```c++
+#include <Kokkos_Core.hpp>
+#include <cstdio>
+
+struct Interface
+{
+    KOKKOS_DEFAULTED_FUNCTION
+    virtual ~Interface() = default;
+
+    KOKKOS_FUNCTION
+    virtual void operator()( const size_t) const = 0;
+};
+
+struct Implementation : public Interface
+{
+    KOKKOS_FUNCTION
+    void operator()(const size_t i) const override
+    { printf("%zu from Implementation\n", i); }
+
+    void apply(){
+        Kokkos::parallel_for("myLoop",10,
+            KOKKOS_CLASS_LAMBDA (const size_t i) { this->operator()(i); }
+        );
+    }
+};
+
+int main (int argc, char *argv[])
+{
+    Kokkos::initialize(argc,argv);
+    {
+      auto implementationPtr = std::make_shared<Implementation>();
+      implementationPtr->apply();
+      Kokkos::fence();
+    }
+    Kokkos::finalize();
+}
+```
+### Why is this not portable?
+
+Inside the `parallel_for` the `operator()` is called. As `Implementation` derives from the pure virtual class `Interface`, the 'operator()' is marked `override`.
+On ROCm 5.2 this results in a memory access violation.
+When executing the `this->operator()(i)` call, the runtime looks into the V-Table and dereferences a host function pointer on the device.
+
+### But if that is the case, why does it work with NVCC?
+
+Notice, that the `parallel_for` is called from a pointer of type `Implementation` and not a pointer of type `Interface` pointing to an `Implementation` object.
+Thus, no V-Table lookup for the `operator()` would be necessary as it can be deduced from the context of the call that it will be `Implementation::operator()`.
+But here it comes down to how the compiler handles the lookup. NVCC understands that the call is coming from an `Implementation` object and thinks: "Oh, I see, that you are calling from an `Implementation` object, I know it will be the `operator()` in this class scope, I will do this for you".
+ROCm, on the other hand, sees your call and thinks “Oh, this is a call to a virtual method, I will look that up for you” - failing to dereference the host function pointer in the host virtual function table.
+
+### How to solve this?
+Strictly speaking, the observed behavior on NVCC is an optimization that uses the context information to avoid the V-Table lookup.
+If the compiler does not apply this optimization, you can help in different ways by providing additional information. Unfortunately, none of these strategies is fully portable to all backends.
+
+- Tell the compiler not to look up any function name in the V-Table when calling `operator()` by using [qualified name lookup](https://en.cppreference.com/w/cpp/language/qualified_lookup). For this, you tell the compiler which function you want by spelling out the class scope in which the function should be found e.g. `this->Implementation::operator() (i);`. This behavior is specified in the C++ Standard. Nevertheless, some backends are not fully compliant to the Standard.
+- Changing the `override` to `final` on the `operator()` in the `Implementation` class. This tells the compiler the `operator()` is not changing in derived objects. Many compilers do use this in optimization and deduce which function to call without the V-Table. Nevertheless, this might only work with certain compilers, as this effect of adding `final` is not specified in the C++ Standard. 
+- Similarly, the entire derived class `Implementation` can be marked `final`. This is compiler dependent too, for the same reasons.
+
 ## Questions/Follow-up
 
 This is intended to be an educational resource for our users. If something doesn't make sense, or you have further questions, you'd be doing us a favor by letting us know on [Slack](https://kokkosteam.slack.com) or [GitHub](https://github.com/kokkos/kokkos)
