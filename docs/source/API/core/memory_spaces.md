@@ -45,7 +45,7 @@ For the following backends `Kokkos::SharedSpace` is pointing to the correspoindi
 - Cuda -> `CudaUVMSpace`
 - HIP -> `HIPManagedSpace`
 - SYCL -> `SYCLSharedUSMSpace`
-- OpenMP/Threads/HPX/Serial -> `HostSpace`
+- Only backends running on host -> `HostSpace`
 
 (MemorySpaceConcept)=
 ## `Kokkos::MemorySpaceConcept`
