@@ -14,7 +14,7 @@ Once this function is called, no Kokkos API functions (not even
 [`Kokkos::initialize`](initialize)) may be called, except for
 `Kokkos::is_initialized` or `Kokkos::is_finalized`.
 The user must ensure that all Kokkos objects (e.g. `Kokkos::View`) are detroyed
-before `Kokkos::finalize` before `Kokkos::finalize` gets called.
+before `Kokkos::finalize` gets called.
 
 Programs are ill-formed if they do not call this function after calling [`Kokkos::initialize`](initialize).
 

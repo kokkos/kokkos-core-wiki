@@ -475,7 +475,7 @@ Once this function is called, no Kokkos API functions (not even
 <a class="reference internal" href="initialize.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">Kokkos::initialize</span></code></span></a>) may be called, except for
 <code class="docutils literal notranslate"><span class="pre">Kokkos::is_initialized</span></code> or <code class="docutils literal notranslate"><span class="pre">Kokkos::is_finalized</span></code>.
 The user must ensure that all Kokkos objects (e.g. <code class="docutils literal notranslate"><span class="pre">Kokkos::View</span></code>) are detroyed
-before <code class="docutils literal notranslate"><span class="pre">Kokkos::finalize</span></code> before <code class="docutils literal notranslate"><span class="pre">Kokkos::finalize</span></code> gets called.</p>
+before <code class="docutils literal notranslate"><span class="pre">Kokkos::finalize</span></code> gets called.</p>
 <p>Programs are ill-formed if they do not call this function after calling <a class="reference internal" href="initialize.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">Kokkos::initialize</span></code></span></a>.</p>
 <section id="interface">
 <h2>Interface<a class="headerlink" href="#interface" title="Permalink to this heading">#</a></h2>
