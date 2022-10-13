@@ -408,6 +408,10 @@ Architecture Keywords
       * Optimize for AMD GPU MI100 GFX908
       * ``OFF``
 
+    * * ``Kokkos_ARCH_VEGA90A``
+      * Optimize for AMD GPU MI200 series GFX90A
+      * ``OFF``
+
     * * ``Kokkos_ARCH_VOLTA70``
       * Optimize for VOLTA70 architecture
       * ``OFF``
