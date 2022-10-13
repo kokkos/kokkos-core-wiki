@@ -119,7 +119,9 @@ with.
 | `KOKKOS_ARCH_TURING75` | Optimize for NVIDIA Turing generation CC 7.5 (GPU) |
 | `KOKKOS_ARCH_AMPERE` | Set if any NVIDIA Ampere architecture has been enabled |
 | `KOKKOS_ARCH_AMPERE80` | Optimize for NVIDIA Ampere generation CC 8.0 (GPU) |
-| `KOKKOS_ARCH_AMPERE86 ` | Optimize for NVIDIA Ampere generation CC 8.6 (GPU) |
+| `KOKKOS_ARCH_AMPERE86` | Optimize for NVIDIA Ampere generation CC 8.6 (GPU) |
+| `KOKKOS_ARCH_HOPPER` | Set if any NVIDIA Hopper architecture has been enabled <sup>since Kokkos 4.0</sup> |
+| `KOKKOS_ARCH_HOPPER90` | Optimize for NVIDIA Hopper generation CC 9.0 (GPU) <sup>since Kokkos 4.0</sup> |
 | `KOKKOS_ARCH_AMD_ZEN` | Optimize for AMD Zen architecture (HOST) |
 | `KOKKOS_ARCH_AMD_ZEN2` | Optimize for AMD Zen2 architecture (HOST) |
 | `KOKKOS_ARCH_AMD_ZEN3` | Optimize for AMD Zen3 architecture (HOST) |
