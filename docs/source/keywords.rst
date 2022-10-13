@@ -320,6 +320,10 @@ Architecture Keywords
       * Optimize for BGQ architecture
       * ``OFF``
 
+    * * ``Kokkos_ARCH_HOPPER90``
+      * Optimize for the NVIDIA Hopper generation CC 9.0 <sup>since Kokkos 4.0</sup>
+      * ``OFF``
+
     * * ``Kokkos_ARCH_HSW``
       * Optimize for HSW architecture
       * ``OFF``
