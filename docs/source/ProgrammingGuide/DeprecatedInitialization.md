@@ -1,10 +1,8 @@
-# 5. Initialization
+# 15. Deprecated Initialization: THIS PAGE IS VALID FOR KOKKOS 3.6 AND OLDER
 
 In order to use Kokkos an initialization call is required. That call is responsible for initializing internal objects and acquiring hardware resources such as threads. Typically, this call should be placed right at the start of a program. If you use both MPI and Kokkos, your program should initialize Kokkos right after calling `MPI_Init`. That way, if MPI sets up process binding masks, Kokkos will get that information and use it for best performance. Your program must also _finalize_ Kokkos when done using it in order to free hardware resources.
 
-This documentation is valid for Kokkos 3.7 and newer. For older versions of Kokkos, use [Deprecated Initialization](DeprecatedInitialization).
-
-## 5.0 Include Headers
+## 15.0 Include Headers
 
 All primary capabilities of Kokkos are provided by the `Kokkos_Core.hpp` header file.
 Some capabilities - specifically data structures in the `containers` subpackage and algorithmic capabilities in the `algorithms` subpackage are included via separate header files.
@@ -14,7 +12,7 @@ For specific capabilities check their API reference:
 - [API: Algorithms](../API/algorithms-index)
 - [API in Alphabetical Order](../API/alphabetical)
 
-## 5.1 Initialization by command-line arguments
+## 15.1 Initialization by command-line arguments
 
 The simplest way to initialize Kokkos is by calling the following function:
 ```c++
@@ -45,66 +43,66 @@ Kokkos chooses the two spaces using the following list:
 
 The highest execution space in the list which is enabled is Kokkos' default execution space, and the highest enabled host execution space is Kokkos' default host execution space. For example, if  `Kokkos::Cuda`, `Kokkos::OpenMP`, and `Kokkos::Serial` are enabled, then `Kokkos::Cuda` is the default execution space and `Kokkos::OpenMP` is the default host execution space.<sup>1</sup>  In cases where the highest enabled backend is a host parallel execution space the `DefaultExecutionSpace` and the `DefaultHostExecutionSpace` will be the same.
 
-Command-line arguments are prefixed the string `--kokkos-`. [`Kokkos::initialize`](../API/core/initialize_finalize/initialize) will remove prefixed options from the input list, but will preserve non-prefixed options. Argument options are given with an equals (`=`) sign. If the same argument occurs more than once, the last one is used. For example, the arguments
+Command-line arguments come in "prefixed" and "non-prefixed" versions. Prefixed versions start with the string `--kokkos-`. [`Kokkos::initialize`](../API/core/initialize_finalize/initialize) will remove prefixed options from the input list, but will preserve non-prefixed options. Argument options are given with an equals (`=`) sign. If the same argument occurs more than once, the last one is used. Furthermore, prefixed versions of the command line arguments take precedence over the non-prefixed ones. For example, the arguments
 
-    --kokkos-threads=4 --kokkos-threads=3
+    --kokkos-threads=4 --threads=2
+
+set the number of threads to 4, while
+
+    --kokkos-threads=4 --threads=2 --kokkos-threads=3
 
 set the number of threads to 3. Table 5.1 gives a full list of command-line options.
 
-<h4>Table 5.1: Command-line options for Kokkos::initialize</h4>
+<h4>Table 15.1: Command-line options for Kokkos::initialize</h4>
 
 Argument | Description
 :---      | :---
---kokkos-help <br/> --help   | print this message
---kokkos-disable-warnings    | disable kokkos warning messages
---kokkos-print-configuration | print configuration
---kokkos-tune-internals      | allow Kokkos to autotune policies and declare tuning features through the tuning system. If left off, Kokkos uses heuristics.
---kokkos-num-threads=INT     | specify total number of threads to use for parallel regions on the host
---kokkos-map-device-id-by=(random\|mpi_rank) | strategy to select device-id automatically from available devices: random or mpi_rank<sup>2</sup>
---kokkos-tools-libs=STR      | specify which of the tools to use. Must either be full path to library or name of library if the path is present in the runtime library search path (e.g. LD_LIBRARY_PATH)
---kokkos-tools-help          | query the (loaded) kokkos-tool for its command-line option support (which should then be passed via --kokkos-tools-args="...")
---kokkos-tools-args=STR      | a single (quoted) string of options which will be whitespace delimited and passed to the loaded kokkos-tool as command-line arguments. E.g. `<EXE> --kokkos-tools-args="-c input.txt"` will pass `<EXE> -c input.txt` as argc/argv to tool
-
-When passing a boolean as a string, the acceptable values are:
- - true, yes, 1
- - false, no, 0
-
+--kokkos-help  <br/> --help   | print this message
+--kokkos-threads=INT <br/> --threads=INT  | specify total number of threads or number of threads per NUMA region if used in conjunction with `--numa` option.
+--kokkos-numa=INT <br/> --numa=INT | specify number of NUMA regions used by process.
+--device-id=INT | specify device id to be used by Kokkos.
+--num-devices=INT[,INT] | used when running MPI jobs. Specify the number of devices per node to be used. Process to device mapping happens by obtaining the local MPI rank and assigning devices round-robin. The optional second argument allows for an existing device to be ignored. This is most useful on workstations with multiple GPUs, one of which is used to drive screen output.
 
 ***
 <sup>1</sup> This is the preferred set of defaults when CUDA and OpenMP are enabled. If you use a thread-parallel host execution space, we prefer Kokkos' OpenMP back-end, as this ensures compatibility of Kokkos' threads with the application's direct use of OpenMP threads. Kokkos cannot promise that its Threads back-end will not conflict with the application's direct use of operating system threads.
-<sup>2</sup> The two device-id mapping strategies are:
-- random: choose a random device from available.
-- mpi_rank: choose device-id based on a round robin assignment of local MPI ranks. Works with OpenMPI, MVAPICH, SLURM, and derived implementations. Support for MPICH was added in Kokkos 4.0
 
-## 5.2 Initialization by environment variable
+## 15.2 Initialization by struct
 
-Instead of using command-line arguments, one may use environment variables. The environment variables are identical to the arguments in Table 5.1 but they are upper case and the dash is replaced by an underscore. For example, if we want to set the number of threads to 3, we have
-  KOKKOS_NUM_THREADS=3
+Instead of giving [`Kokkos::initialize()`](../API/core/initialize_finalize/initialize) command-line arguments, one may directly pass in initialization parameters using the following struct:
 
-## 5.3 Initialization by struct
+```c++
+struct Kokkos::InitArguments {
+  int num_threads;
+  int num_numa;
+  int device_id;
+  int ndevices;
+  int skip_device;
+  bool disable_warnings;
+};
+```
+The `num_threads` field corresponds to the `--kokkos-threads` command-line argument, `num_numa` to `--kokkos-numa`, `device_id` to `--device-id`, `ndevices` to the first value in `--num-devices` and `skip_devices` to the second value in `--num-devices`. (See Table 5.1 for details.) Not all parameters are observed by all execution spaces, and the struct might expand in the future if needed.
 
-Instead of giving [`Kokkos::initialize()`](../API/core/initialize_finalize/initialize) command-line arguments, one may directly pass in initialization parameters using the `Kokkos::Initialization` struct.  If one wants to set a options using the struct, one can use the set functions `set_xxx` where `xxx` is the identical to the arguments in Table 5.1 where the dash has been replaced by an unsderscore. To check if a variable has been set, one can use the `has_xxx` functions. Finally, to get the value that was set, one can use the `get_xxx` functions.
-
-
-If you do not set `num_threads`, Kokkos will try to determine a default value if possible or otherwise set it to 1. In particular, Kokkos can use the `hwloc` library to determine default settings using the assumption that the process binding mask is unique, i.e., that this process does not share any cores with another process. Note that the default value of each parameter is -1.
+If you set `num_threads` or `num_numa` to zero or less, Kokkos will try to determine default values if possible or otherwise set them to 1. In particular, Kokkos can use the `hwloc` library to determine default settings using the assumption that the process binding mask is unique, i.e., that this process does not share any cores with another process. Note that the default value of each parameter is -1.
 
 Here is an example of how to use the struct.
 
 ```c++
-Kokkos::InitializationSettings settings;
-// 8 (CPU) threads
-settinge.set_num_threads(8);
+Kokkos::InitArguments args;
+// 8 (CPU) threads per NUMA region
+args.num_threads = 8;
+// 2 (CPU) NUMA regions per process
+args.num_numa = 2;
 // If Kokkos was built with CUDA enabled, use the GPU with device ID 1.
-settings.set_device_id(1);
+args.device_id = 1;
 
-Kokkos::initialize(settings);
+Kokkos::initialize(args);
 ```
 
-## 5.4 Finalization
+## 15.3 Finalization
 
 At the end of each program, Kokkos needs to be shut down in order to free resources; do this by calling [`Kokkos::finalize()`](../API/core/initialize_finalize/finalize). You may wish to set this to be called automatically at program exit, either by setting an `atexit` hook or by attaching the function to `MPI_COMM_SELF` so that it is called automatically at `MPI_Finalize`.
 
-## 5.5 Example Code
+## 15.4 Example Code
 
 A minimal Kokkos code thus would look like this:
 
