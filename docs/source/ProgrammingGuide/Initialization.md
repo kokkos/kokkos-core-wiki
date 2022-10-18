@@ -45,7 +45,7 @@ Kokkos chooses the two spaces using the following list:
 
 The highest execution space in the list which is enabled is Kokkos' default execution space, and the highest enabled host execution space is Kokkos' default host execution space. For example, if  `Kokkos::Cuda`, `Kokkos::OpenMP`, and `Kokkos::Serial` are enabled, then `Kokkos::Cuda` is the default execution space and `Kokkos::OpenMP` is the default host execution space.<sup>1</sup>  In cases where the highest enabled backend is a host parallel execution space the `DefaultExecutionSpace` and the `DefaultHostExecutionSpace` will be the same.
 
-Command-line arguments are prefixed the string `--kokkos-`. [`Kokkos::initialize`](../API/core/initialize_finalize/initialize) will remove prefixed options from the input list, but will preserve non-prefixed options. Argument options are given with an equals (`=`) sign. If the same argument occurs more than once, the last one is used. For example, the arguments
+[`Kokkos::initialize`](../API/core/initialize_finalize/initialize) parses the command line for flags prefixed with `--kokkos-`, and removes all recognized flags.. Argument options are given with an equals (`=`) sign. If the same argument occurs more than once, the last one is used. For example, the arguments
 
     --kokkos-threads=4 --kokkos-threads=3
 
@@ -68,22 +68,24 @@ Argument | Description
 When passing a boolean as a string, the acceptable values are:
  - true, yes, 1
  - false, no, 0
+The values are case-insensitives.
 
 
 ***
 <sup>1</sup> This is the preferred set of defaults when CUDA and OpenMP are enabled. If you use a thread-parallel host execution space, we prefer Kokkos' OpenMP back-end, as this ensures compatibility of Kokkos' threads with the application's direct use of OpenMP threads. Kokkos cannot promise that its Threads back-end will not conflict with the application's direct use of operating system threads.
 <sup>2</sup> The two device-id mapping strategies are:
-- random: choose a random device from available.
-- mpi_rank: choose device-id based on a round robin assignment of local MPI ranks. Works with OpenMPI, MVAPICH, SLURM, and derived implementations. Support for MPICH was added in Kokkos 4.0
+- random: select a random device from available.
+- mpi_rank: select device based on a round robin assignment of local MPI ranks. Works with OpenMPI, MVAPICH, SLURM, and derived implementations. Support for MPICH was added in Kokkos 4.0
 
 ## 5.2 Initialization by environment variable
 
 Instead of using command-line arguments, one may use environment variables. The environment variables are identical to the arguments in Table 5.1 but they are upper case and the dash is replaced by an underscore. For example, if we want to set the number of threads to 3, we have
+
   KOKKOS_NUM_THREADS=3
 
 ## 5.3 Initialization by struct
 
-Instead of giving [`Kokkos::initialize()`](../API/core/initialize_finalize/initialize) command-line arguments, one may directly pass in initialization parameters using the `Kokkos::Initialization` struct.  If one wants to set a options using the struct, one can use the set functions `set_xxx` where `xxx` is the identical to the arguments in Table 5.1 where the dash has been replaced by an unsderscore. To check if a variable has been set, one can use the `has_xxx` functions. Finally, to get the value that was set, one can use the `get_xxx` functions.
+Instead of giving [`Kokkos::initialize()`](../API/core/initialize_finalize/initialize) command-line arguments, one may directly pass in initialization parameters using the `Kokkos::InitializationSettings` struct.  If one wants to set a options using the struct, one can use the set functions `set_xxx` where `xxx` is the identical to the arguments in Table 5.1 where the dash has been replaced by an unsderscore. To check if a variable has been set, one can use the `has_xxx` functions. Finally, to get the value that was set, one can use the `get_xxx` functions.
 
 
 If you do not set `num_threads`, Kokkos will try to determine a default value if possible or otherwise set it to 1. In particular, Kokkos can use the `hwloc` library to determine default settings using the assumption that the process binding mask is unique, i.e., that this process does not share any cores with another process. Note that the default value of each parameter is -1.
