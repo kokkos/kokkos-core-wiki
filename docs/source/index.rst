@@ -85,6 +85,7 @@ Website Content
 
    programmingguide
    requirements
+   deprecation
    building
    keywords
    ./API/core-index
