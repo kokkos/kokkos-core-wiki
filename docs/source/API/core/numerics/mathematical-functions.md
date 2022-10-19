@@ -47,8 +47,7 @@ reader to cppreference.com for the synopsis of each individual function.
 ---
 
 <strike>_`func`_</strike> denotes functions that are currently not provided by Kokkos  
-_`func*`_ denotes functions not available with the SYCL backend  
-_`func**`_ denotes functions available since version 3.7
+_`func*`_ see notes below
 
 **Basic operations**
 [`abs`](https://en.cppreference.com/w/cpp/numeric/math/fabs)
@@ -56,7 +55,7 @@ _`func**`_ denotes functions available since version 3.7
 [`fmod`](https://en.cppreference.com/w/cpp/numeric/math/fmod)
 [`remainder`](https://en.cppreference.com/w/cpp/numeric/math/remainder)
 [<strike>`remquo`</strike>](https://en.cppreference.com/w/cpp/numeric/math/remquo)
-[<strike>`fma`</strike>](https://en.cppreference.com/w/cpp/numeric/math/fma)
+[`fma*`](https://en.cppreference.com/w/cpp/numeric/math/fma)
 [`fmax`](https://en.cppreference.com/w/cpp/numeric/math/fmax)
 [`fmin`](https://en.cppreference.com/w/cpp/numeric/math/fmin)
 [`fdim`](https://en.cppreference.com/w/cpp/numeric/math/fdim)
@@ -75,7 +74,7 @@ _`func**`_ denotes functions available since version 3.7
 [`pow`](https://en.cppreference.com/w/cpp/numeric/math/pow)
 [`sqrt`](https://en.cppreference.com/w/cpp/numeric/math/sqrt)
 [`cbrt`](https://en.cppreference.com/w/cpp/numeric/math/cbrt)
-[`hypot`](https://en.cppreference.com/w/cpp/numeric/math/hypot)
+[`hypot*`](https://en.cppreference.com/w/cpp/numeric/math/hypot)
 
 **Trigonometric functions**
 [`sin`](https://en.cppreference.com/w/cpp/numeric/math/sin)
@@ -104,7 +103,7 @@ _`func**`_ denotes functions available since version 3.7
 [`ceil`](https://en.cppreference.com/w/cpp/numeric/math/ceil)
 [`floor`](https://en.cppreference.com/w/cpp/numeric/math/floor)
 [`trunc`](https://en.cppreference.com/w/cpp/numeric/math/trunc)
-[`round**`](https://en.cppreference.com/w/cpp/numeric/math/round)
+[`round*`](https://en.cppreference.com/w/cpp/numeric/math/round)
 [<strike>`lround`</strike>](https://en.cppreference.com/w/cpp/numeric/math/round)
 [<strike>`llround`</strike>](https://en.cppreference.com/w/cpp/numeric/math/round)
 [`nearbyint*`](https://en.cppreference.com/w/cpp/numeric/math/nearbyint)
@@ -119,10 +118,10 @@ _`func**`_ denotes functions available since version 3.7
 [<strike>`scalbn`</strike>](https://en.cppreference.com/w/cpp/numeric/math/scalbn)
 [<strike>`scalbln`</strike>](https://en.cppreference.com/w/cpp/numeric/math/scalbln)
 [<strike>`ilog`</strike>](https://en.cppreference.com/w/cpp/numeric/math/ilog)
-[`logb**`](https://en.cppreference.com/w/cpp/numeric/math/logb)
-[`nextafter**`](https://en.cppreference.com/w/cpp/numeric/math/nextafter)
+[`logb*`](https://en.cppreference.com/w/cpp/numeric/math/logb)
+[`nextafter*`](https://en.cppreference.com/w/cpp/numeric/math/nextafter)
 [<strike>`nexttoward`</strike>](https://en.cppreference.com/w/cpp/numeric/math/nexttoward)
-[`copysign**`](https://en.cppreference.com/w/cpp/numeric/math/copysign)
+[`copysign*`](https://en.cppreference.com/w/cpp/numeric/math/copysign)
 
 **Classification and comparison**
 [<strike>`fpclassify`</strike>](https://en.cppreference.com/w/cpp/numeric/math/fpclassify)
@@ -130,7 +129,7 @@ _`func**`_ denotes functions available since version 3.7
 [`isinf`](https://en.cppreference.com/w/cpp/numeric/math/isinf)
 [`isnan`](https://en.cppreference.com/w/cpp/numeric/math/isnan)
 [<strike>`isnormal`</strike>](https://en.cppreference.com/w/cpp/numeric/math/isnormal)
-[`signbit**`](https://en.cppreference.com/w/cpp/numeric/math/signbit)
+[`signbit*`](https://en.cppreference.com/w/cpp/numeric/math/signbit)
 [<strike>`isgreater`</strike>](https://en.cppreference.com/w/cpp/numeric/math/isgreater)
 [<strike>`isgreaterequal`</strike>](https://en.cppreference.com/w/cpp/numeric/math/isgreaterequal)
 [<strike>`isless`</strike>](https://en.cppreference.com/w/cpp/numeric/math/isless)
@@ -140,9 +139,15 @@ _`func**`_ denotes functions available since version 3.7
 
 ---
 
-**NOTE** Feel free to [open an issue](https://github.com/kokkos/kokkos/issues/new) if you need one of the functions that is currently not implemented.  [Issue #4767](https://github.com/kokkos/kokkos/issues/4767) is keeping track of these and has notes about implementability.
+## Notes
+* **Feel free to [open an issue](https://github.com/kokkos/kokkos/issues/new) if you need one of the functions that is currently not implemented.  [Issue #4767](https://github.com/kokkos/kokkos/issues/4767) is keeping track of these and has notes about implementability.**
+* `nearbyint` is not available with the SYCL backend
+* `round`, `logb`, `nextafter`, `copysign`, and `signbit` are available since version 3.7
+* three-argument version of `hypot` is available since 4.0
+* `fma` is available since 4.0
 
 ---
-**See also**  
+
+## See also
 [Mathematical constants](mathematical-constants)  
 [Numeric traits](numeric-traits)  

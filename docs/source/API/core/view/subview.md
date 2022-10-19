@@ -31,10 +31,10 @@ IMPL_DETAIL subview(const ViewType& v, Args ... args);
     one smaller than the rank of `v` and the values referenced by `s` correspond to 
     the values associated with using the integer argument in the corresponding
     position during indexing into `v`.
-  * Passing `Kokkos::ALL` as the `r`th argument is equivalent to passing 
+  * Passing [`Kokkos::ALL`](KokkosALL) as the `r`th argument is equivalent to passing 
     `pair<ptrdiff_t,ptrdiff_t>(0,v.extent(r))` as the `r`th argument.
   * If the `r`th argument `arg_r` is the `d`th range (`std::pair`, `Kokkos::pair` or 
-    `Kokkos::ALL`) in the argument list than `s.extent(d) = arg_r.second-arg_r.first`,
+    [`Kokkos::ALL`](KokkosALL)) in the argument list than `s.extent(d) = arg_r.second-arg_r.first`,
     and dimension `d` of `s` references the range `[arg_r.first,arg_r.second)` of 
     dimension `r` of `v`.
 
@@ -44,7 +44,7 @@ IMPL_DETAIL subview(const ViewType& v, Args ... args);
     * `std::pair<iType,iType>` with `std::is_integral<iType>::value` being true.
     * `Kokkos::pair<iType,iType>` with `std::is_integral<iType>::value` being true.
     * `iType` with `std::is_integral<iType>::value` being true.
-    * `decltype(Kokkos::ALL)`
+    * `decltype(`[`Kokkos::ALL`](KokkosALL)`)`
   * If the `r`th argument `arg_r` is of type `std::pair<iType,iType>` or `Kokkos::pair<iType,iType>` it must meet:
     * `arg_r.first >= 0`
     * `arg_r.second <= v.extent(r)`

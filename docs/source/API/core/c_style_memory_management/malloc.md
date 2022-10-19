@@ -18,6 +18,8 @@ If allocation succeeds, returns a pointer to the lowest (first) byte in the allo
 
 If allocation fails, an exception of type `Kokkos::Experimental::RawMemoryAllocationFailure` is thrown.
 
+WARNING: calling any function that manipulates the behavior of the memory (e.g. `memAdvise`) on memory managed by `Kokkos` results in undefined behavior.
+
 ## Parameters
 
 `label`: A user provided string which is used in profiling and debugging tools via the KokkosP Profiling Tools.  

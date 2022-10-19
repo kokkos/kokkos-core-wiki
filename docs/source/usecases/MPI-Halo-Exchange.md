@@ -97,7 +97,7 @@ public:
   KOKKOS_INLINE_FUNCTION void init(int& update) const {
     update = 0;
   }
-  KOKKOS_INLINE_FUNCTION void join(volatile int& update, volatile const int& input) const {
+  KOKKOS_INLINE_FUNCTION void join(int& update, const int& input) const {
     update += input;
   }
 private:

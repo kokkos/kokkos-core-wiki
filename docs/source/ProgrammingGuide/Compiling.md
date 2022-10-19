@@ -52,11 +52,13 @@ Build system:
 
  Macro | Effect | Comment
  :--- |:--- |:---
-`KOKKOS_ENABLE_CUDA`| Enable the CUDA execution space. |Requires a compiler capable of understanding CUDA-C. See [Section 4.4](GNU_makefile_system).
+`KOKKOS_ENABLE_CUDA`| Enable the CUDA execution space. |Requires a compiler capable of understanding CUDA-C. See [Section 4.5](Building for CUDA).
 `KOKKOS_ENABLE_OPENMP`| Enable the OpenMP execution space. |Requires the compiler to support OpenMP (e.g., `-fopenmp`).
 `KOKKOS_ENABLE_THREADS`| Enable the C++ Threads execution space.
 `KOKKOS_ENABLE_SERIAL`| Enable the Serial execution space. |
 `KOKKOS_ENABLE_HWLOC`| Enable thread and memory pinning via hwloc. | Requires linking with `libhwloc`.
+`KOKKOS_ENABLE_HIP`| Enable the HIP execution space. | Requires a compiler capable of understanding HIP.
+`KOKKOS_ENABLE_SYCL`| Enable the SYCL execution space. | Requires a compiler capable of understanding SYCL.
 
 ## 4.2 Using General CMake build system
 

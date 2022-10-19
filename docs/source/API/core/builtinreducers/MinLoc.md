@@ -24,9 +24,6 @@ class MinLoc{
    void join(value_type& dest, const value_type& src)  const
 
    KOKKOS_INLINE_FUNCTION
-   void join(volatile value_type& dest, const volatile value_type& src) const;
-
-   KOKKOS_INLINE_FUNCTION
    void init( value_type& val)  const;
 
    KOKKOS_INLINE_FUNCTION
@@ -67,11 +64,6 @@ class MinLoc{
 
  * ```c++
    void join(value_type& dest, const value_type& src)  const;
-   ```
-   Store minimum with index of `src` and `dest` into `dest`:  `dest = (src.val < dest.val) ? src : dest;`. 
-
- * ```c++
-   void join(volatile value_type& dest, const volatile value_type& src) const;
    ```
    Store minimum with index of `src` and `dest` into `dest`:  `dest = (src.val < dest.val) ? src : dest;`. 
 

@@ -6,7 +6,7 @@ which is included from `<Kokkos_Core.hpp>`
 
 Provides a replacement for [`numeric_limits` from the standard library header
 `<limits>`](https://en.cppreference.com/w/cpp/types/numeric_limits).
-Implements a new facility that is being to the C++23 standard library and that
+Implements a new facility that is being added to the C++23 standard library and that
 breaks the monolithic `numeric_limits` class template apart into individual
 trait templates.  For details, please refer to
 [P1841](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2022/p1841r2.pdf).
@@ -17,7 +17,8 @@ See below the list of available traits.
 
 ---
 
-_`trait`_\* denotes traits that were added in Kokkos 3.6
+_`trait*`_ denotes traits that were added in Kokkos 3.6  
+<strike>_`trait*`_</strike> denotes traits that were removed in Kokkos 4.0
 
 **Numeric distinguished value traits**
 `infinity`
@@ -26,10 +27,10 @@ _`trait`_\* denotes traits that were added in Kokkos 3.6
 `epsilon`
 `round_error`
 `norm_min`
-`denorm_min`*
-`reciprocal_overflow_threshold`*
-`quiet_NaN`*
-`signaling_NaN`*
+`denorm_min*`
+<strike>`reciprocal_overflow_threshold*`</strike>
+`quiet_NaN*`
+`signaling_NaN*`
 
 **Numeric characteristics traits**
 `digits`

@@ -23,9 +23,6 @@ class MinMax{
    void join(value_type& dest, const value_type& src)  const
 
    KOKKOS_INLINE_FUNCTION
-   void join(volatile value_type& dest, const volatile value_type& src) const;
-
-   KOKKOS_INLINE_FUNCTION
    void init( value_type& val)  const;
 
    KOKKOS_INLINE_FUNCTION
@@ -69,12 +66,6 @@ class MinMax{
    ```
    - Store minimum of `src` and `dest` into `dest`:  `dest.min_val = (src.min_val < dest.min_val) ? src.min_val : dest.min_val;`.
    - Store maximum of `src` and `dest` into `dest`:  `dest.max_val = (src.max_val < dest.max_val) ? src.max_val : dest.max_val;`.
- * ```c++
-   void join(volatile value_type& dest, const volatile value_type& src) const;
-   ```
-    - Store minimum of `src` and `dest` into `dest`:  `dest.min_val = (src.min_val < dest.min_val) ? src.min_val : dest.min_val;`.
-   - Store maximum of `src` and `dest` into `dest`:  `dest.max_val = (src.max_val < dest.max_val) ? src.max_val : dest.max_val;`. 
-
  * ```c++
    void init( value_type& val)  const;
    ```
