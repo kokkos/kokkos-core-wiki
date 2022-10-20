@@ -1,3 +1,4 @@
+import re
 import os
 import sys
 
@@ -84,9 +85,33 @@ class HTMLButtonAdder:
         html_str_beg = html_file_str[:tag_pos + len(html_tag)]
         html_str_end = html_file_str[tag_pos + len(html_tag):]
         html_str_replace = html_str_beg + str_to_put + html_str_end
+        html_str_replace = self._overwrite_deprecated_style(html_string=html_str_replace)
         with open(file_names[0], 'wt') as new_html_file:
             new_html_file.write(html_str_replace)
         print(f'=> Processing: {file_names[0]} done')
+
+    @staticmethod
+    def _overwrite_deprecated_style(html_string: str) -> str:
+        """Overwrites deprecated style."""
+        # Overwriting the deprecated style without version
+        str_to_replace = '<span class="pre">[DEPRECATED]</span>'
+        replaced_with = '<span class="pre" style="color:#A020F0;font-weight:bold;">[DEPRECATED]</span>'
+        html_string = html_string.replace(str_to_replace, replaced_with)
+        # Overwriting the deprecated style with version
+        not_finished = True
+        deprecated_regex = '<span class="pre">\[DEPRECATED<\/span> <span class="pre">since<\/span> ' \
+                           '<span class="pre">([0-9]+.[0-9]+.*[0-9]*){1}]<\/span>'
+        while not_finished:
+            match = re.search(deprecated_regex, html_string, re.MULTILINE)
+            if match is None:
+                return html_string
+            else:
+                html_str_beg = html_string[:match.regs[0][0]]
+                html_str_end = html_string[match.regs[0][1]:]
+                html_tag = html_string[match.regs[0][0]:match.regs[0][1]]
+                html_tag = html_tag.replace('"pre"', '"pre" style="color:#A020F0;font-weight:bold;"')
+                html_string = html_str_beg + html_tag + html_str_end
+
 
     def add_button(self, wiki_prefix: str) -> None:
         """Loops over html files and overwrite them."""
