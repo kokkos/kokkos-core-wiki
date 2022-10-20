@@ -2912,6 +2912,8 @@ class ASTType(ASTBase):
             if self.deprecated_version is None:
                 return '[DEPRECATED]'
             return f'[DEPRECATED since {self.deprecated_version}]'
+        elif self.declSpecs.outer == 'type':
+            return ''
         else:
             return 'type'
 
