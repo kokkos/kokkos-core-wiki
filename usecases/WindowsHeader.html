@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Kokkos and Windows.h" href="WindowsHeader.html" /><link rel="prev" title="Fortran Interop Use Case" href="Kokkos-Fortran-Interoperability.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Testing and Issue Tracking" href="../testing-and-issue-tracking.html" /><link rel="prev" title="Array of Structures and Structure of Arrays with Cabana" href="SoA-and-AoSoA-with-Cabana.html" />
 
     <meta name="generator" content="sphinx-5.0.1, furo 2022.06.04.1"/>
-        <title>Array of Structures and Structure of Arrays with Cabana - Kokkos documentation</title>
+        <title>Kokkos and Windows.h - Kokkos documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=40978830699223671f4072448e654b5958f38b89" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
@@ -136,7 +136,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -391,8 +391,8 @@
 <li class="toctree-l2"><a class="reference internal" href="OverlappingHostAndDeviceWork.html">Overlapping Host and Device work</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Tasking.html">Kokkos Tasking Use Case</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Kokkos-Fortran-Interoperability.html">Fortran Interop Use Case</a></li>
-<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Array of Structures and Structure of Arrays with Cabana</a></li>
-<li class="toctree-l2"><a class="reference internal" href="WindowsHeader.html">Kokkos and <code class="docutils literal notranslate"><span class="pre">Windows.h</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="SoA-and-AoSoA-with-Cabana.html">Array of Structures and Structure of Arrays with Cabana</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Kokkos and <code class="docutils literal notranslate"><span class="pre">Windows.h</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../testing-and-issue-tracking.html">Testing and Issue Tracking</a><input class="toctree-checkbox" id="toctree-checkbox-25" name="toctree-checkbox-25" role="switch" type="checkbox"/><label for="toctree-checkbox-25"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -438,7 +438,7 @@
         </a>
         <div class="content-icon-container">
 <div class="edit-this-page">
-  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/usecases/SoA-and-AoSoA-with-Cabana.md" title="Edit this page">
+  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/usecases/WindowsHeader.md" title="Edit this page">
     <svg aria-hidden="true" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
       <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4"></path>
@@ -456,77 +456,19 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main">
-          <section id="array-of-structures-and-structure-of-arrays-with-cabana">
-<h1>Array of Structures and Structure of Arrays with Cabana<a class="headerlink" href="#array-of-structures-and-structure-of-arrays-with-cabana" title="Permalink to this heading">#</a></h1>
-<p><a class="reference external" href="https://github.com/ECP-copa/Cabana">Cabana</a> is a MPI+Kokkos performance portable library for particle-based simulations.  It provides particle data structures, algorithms, and utilities to enable simulations on a variety of platforms including many-core architectures and GPUs.</p>
-<p>This use case describes the SoA and AoSoA classes provided by Cabana.  Their goal is to provide a vectorization-friendly collections of contiguous elements that exhibit good alignment.</p>
-<section id="structure-of-arrays-soa">
-<h2>Structure of Arrays (SoA)<a class="headerlink" href="#structure-of-arrays-soa" title="Permalink to this heading">#</a></h2>
-<section id="cabana-soa">
-<h3><code class="docutils literal notranslate"><span class="pre">Cabana::SoA</span></code><a class="headerlink" href="#cabana-soa" title="Permalink to this heading">#</a></h3>
-<p>Defined in header <a class="reference external" href="https://github.com/ECP-copa/Cabana/blob/master/core/src/Cabana_SoA.hpp"><code class="docutils literal notranslate"><span class="pre">&lt;Cabana_SoA.hpp&gt;</span></code></a></p>
-<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">DataTypes</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">VectorLength</span><span class="o">&gt;</span><span class="w"></span>
-<span class="k">struct</span><span class="w"> </span><span class="nc">SoA</span><span class="p">;</span><span class="w"></span>
-</pre></div>
-</div>
-<p><code class="docutils literal notranslate"><span class="pre">Cabana::SoA</span></code> is a struct template that provides a way to store a fixed-size collection of heterogeneous arrays whose size is the specified vector length.</p>
-<p>Conceptually <code class="docutils literal notranslate"><span class="pre">Cabana::SoA&lt;Cabana::MemberTypes&lt;float[3],</span> <span class="pre">char&gt;,</span> <span class="pre">8&gt;</span></code> is equivalent to <code class="docutils literal notranslate"><span class="pre">std::tuple&lt;float[3][8],</span> <span class="pre">char[8]&gt;</span></code>.</p>
-<p>The data structure keeps a separate, homogeneous data array for each particle field, each having the same number of elements.  The motivation is easier vectorization for the compiler.</p>
-<section id="template-parameters">
-<h4>Template parameters<a class="headerlink" href="#template-parameters" title="Permalink to this heading">#</a></h4>
-<p><code class="docutils literal notranslate"><span class="pre">DataTypes</span></code>
-: The types of the elements that the SoA stores as fixed size arrays.
-It is required to be a specialization of <code class="docutils literal notranslate"><span class="pre">Cabana::MemberTypes</span></code> which is defined as</p>
-<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span><span class="p">...</span><span class="w"> </span><span class="n">Types</span><span class="o">&gt;</span><span class="w"></span>
-<span class="n">MemberTypes</span><span class="o">&lt;</span><span class="n">Types</span><span class="p">...</span><span class="o">&gt;</span><span class="p">;</span><span class="w"></span>
-</pre></div>
-</div>
-<p><code class="docutils literal notranslate"><span class="pre">VectorLength</span></code>
-: The number of elements stored in contiguous memory locations for each data type.</p>
-</section>
-<section id="non-member-functions">
-<h4>Non-member functions<a class="headerlink" href="#non-member-functions" title="Permalink to this heading">#</a></h4>
-<p><code class="docutils literal notranslate"><span class="pre">Cabana::get</span></code>
-: accesses the specified element of the SoA.</p>
-</section>
-</section>
-</section>
-<section id="array-of-structures-of-arrays-aosoa">
-<h2>Array of Structures of Arrays (AoSoA)<a class="headerlink" href="#array-of-structures-of-arrays-aosoa" title="Permalink to this heading">#</a></h2>
-<section id="cabana-aosoa">
-<h3>Cabana::AoSoA<a class="headerlink" href="#cabana-aosoa" title="Permalink to this heading">#</a></h3>
-<p>Defined in header <a class="reference external" href="https://github.com/ECP-copa/Cabana/blob/master/core/src/Cabana_AoSoA.hpp"><code class="docutils literal notranslate"><span class="pre">&lt;Cabana_AoSoA.hpp&gt;</span></code></a></p>
-<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">DataTypes</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">DeviceType</span><span class="p">,</span><span class="w"></span>
-<span class="w">          </span><span class="kt">int</span><span class="w"> </span><span class="n">VectorLength</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Impl</span><span class="o">::</span><span class="n">PerformanceTraits</span><span class="o">&lt;</span><span class="w"></span>
-<span class="w">              </span><span class="k">typename</span><span class="w"> </span><span class="nc">DeviceType</span><span class="o">::</span><span class="n">execution_space</span><span class="o">&gt;::</span><span class="n">vector_length</span><span class="p">,</span><span class="w"></span>
-<span class="w">          </span><span class="k">class</span><span class="w"> </span><span class="nc">MemoryTraits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">MemoryManaged</span><span class="o">&gt;</span><span class="w"></span>
-<span class="k">class</span><span class="w"> </span><span class="nc">AoSoA</span><span class="p">;</span><span class="w"></span>
-</pre></div>
-</div>
-<section id="id1">
-<h4>Template parameters<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h4>
-<p><code class="docutils literal notranslate"><span class="pre">DataTypes</span></code>
-: The types of the elements stored in the underlying <code class="docutils literal notranslate"><span class="pre">Cabana::SoA</span></code>s.</p>
-<p><code class="docutils literal notranslate"><span class="pre">DeviceType</span></code>
-: The Kokkos device type that carries the information about where to execute code and where to allocate storage.</p>
-<p><code class="docutils literal notranslate"><span class="pre">VectorLength</span></code>
-: The vector length for the structure of arrays (optional).</p>
-<p><code class="docutils literal notranslate"><span class="pre">MemoryTraits</span></code>
-: The Kokkos memory traits that tells who controls memory allocation and deallocation (optional).</p>
-</section>
-<section id="id2">
-<h4>Non-member functions<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h4>
-<p><code class="docutils literal notranslate"><span class="pre">slice</span></code>
-: accesses the particle data fields.</p>
-</section>
-</section>
-</section>
+          <section id="kokkos-and-windows-h">
+<h1>Kokkos and <code class="docutils literal notranslate"><span class="pre">Windows.h</span></code><a class="headerlink" href="#kokkos-and-windows-h" title="Permalink to this heading">#</a></h1>
+<p>When using Kokkos on Windows a program or library might include <code class="docutils literal notranslate"><span class="pre">windows.h</span></code>. This is problematic as this header defines two macros with the names <code class="docutils literal notranslate"><span class="pre">min</span></code> and <code class="docutils literal notranslate"><span class="pre">max</span></code> unless <code class="docutils literal notranslate"><span class="pre">NOMINMAX</span></code> is defined previously.
+The preprocessor replaces strings in the source code with the macros yielding an uninterpretable result and thus compilation fails.
+Therefore, the header <code class="docutils literal notranslate"><span class="pre">Kokkos_Core.hpp</span></code> is protected against these macros, meaning they are undefined at the beginning and redefined at the end of the header file.
+Even though definitions inside <code class="docutils literal notranslate"><span class="pre">Kokkos_Core.hpp</span></code> are protected against the macros, code outside is not.
+Thus, it is on the user to deal with the macros being defined, either by defining <code class="docutils literal notranslate"><span class="pre">-DNOMINMAX</span></code> or <code class="docutils literal notranslate"><span class="pre">/DNOMINMAX</span></code> in the compile line (preferred) or by putting <code class="docutils literal notranslate"><span class="pre">()</span></code> around names that contain <code class="docutils literal notranslate"><span class="pre">min</span></code> or <code class="docutils literal notranslate"><span class="pre">max</span></code>.</p>
 </section>
 
         </article>
@@ -534,23 +476,23 @@ It is required to be a specialization of <code class="docutils literal notransla
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="WindowsHeader.html">
+          <a class="next-page" href="../testing-and-issue-tracking.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Kokkos and <code class="docutils literal notranslate"><span class="pre">Windows.h</span></code></div>
+                <div class="title">Testing and Issue Tracking</div>
               </div>
               <svg><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="Kokkos-Fortran-Interoperability.html">
+          <a class="prev-page" href="SoA-and-AoSoA-with-Cabana.html">
               <svg><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Fortran Interop Use Case</div>
+                <div class="title">Array of Structures and Structure of Arrays with Cabana</div>
                 
               </div>
             </a>
@@ -574,42 +516,8 @@ It is required to be a specialization of <code class="docutils literal notransla
         
       </footer>
     </div>
-    <aside class="toc-drawer">
+    <aside class="toc-drawer no-toc">
       
-      
-      <div class="toc-sticky toc-scroll">
-        <div class="toc-title-container">
-          <span class="toc-title">
-            Contents
-          </span>
-        </div>
-        <div class="toc-tree-container">
-          <div class="toc-tree">
-            <ul>
-<li><a class="reference internal" href="#">Array of Structures and Structure of Arrays with Cabana</a><ul>
-<li><a class="reference internal" href="#structure-of-arrays-soa">Structure of Arrays (SoA)</a><ul>
-<li><a class="reference internal" href="#cabana-soa"><code class="docutils literal notranslate"><span class="pre">Cabana::SoA</span></code></a><ul>
-<li><a class="reference internal" href="#template-parameters">Template parameters</a></li>
-<li><a class="reference internal" href="#non-member-functions">Non-member functions</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="reference internal" href="#array-of-structures-of-arrays-aosoa">Array of Structures of Arrays (AoSoA)</a><ul>
-<li><a class="reference internal" href="#cabana-aosoa">Cabana::AoSoA</a><ul>
-<li><a class="reference internal" href="#id1">Template parameters</a></li>
-<li><a class="reference internal" href="#id2">Non-member functions</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
-          </div>
-        </div>
-      </div>
       
       
     </aside>
