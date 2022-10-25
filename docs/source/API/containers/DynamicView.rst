@@ -6,8 +6,185 @@
 
 Header File: ``Kokkos_DynamicView.hpp``
 
-Usage: 
-Kokkos DynamicView is a potentially reference-counted rank 1 array, without layout, that can be dynamically resized on the host.
+Class Interface
+---------------
+
+.. cpp:class:: template<typename DataType , typename ... P> DynamicView
+
+  A potentially reference-counted rank 1 array, without layout, that can be dynamically resized on the host.
+
+  .. rubric:: Public Member Variables
+
+  .. cpp:member:: static constexpr bool reference_type_is_lvalue_reference
+
+    whether the reference type is a C++ lvalue reference.
+
+  .. rubric:: Data Types
+
+  .. cpp:type:: traits
+
+    :cpp:`Kokkos::ViewTraits` parent class type.
+
+  .. rubric:: View Types
+
+  .. cpp:type:: array_type
+
+    :cpp:`DynamicView` type templated on :cpp:`traits::data_type` and :cpp:`traits::device_type`.
+
+  .. cpp:type:: const_type
+
+    :cpp:`DynamicView` type templated on :cpp:`traits::const_data_type` and :cpp:`traits::device_type`.
+
+  .. cpp:type:: non_const_type
+
+    :cpp:`DynamicView` type templated on :cpp:`traits::non_const_data_type` and :cpp:`traits::device_type`.
+
+  .. cpp:type:: HostMirror
+
+    The compatible view type with the same :cpp:`DataType` and :cpp:`LayoutType` stored in host accessible memory space.
+
+  .. rubric:: Data Handle Types
+
+  .. cpp:type:: reference_type
+
+    The return type of the view access operators.
+
+  .. cpp:type:: pointer_type
+
+    The pointer to scalar type.
+
+  .. rubric:: Constructors
+
+  .. cpp:function:: DynamicView()
+
+    The default Constructor. No allocations are made, no reference counting happens. All extents are zero and its data pointer is NULL.
+
+  .. cpp:function:: DynamicView(const DynamicView<RT, RP...>& rhs)
+
+    The copy constructor from a compatible View. Follows View assignment rules.
+
+  .. cpp:function:: DynamicView(DynamicView&& rhs)
+
+    The move constructor
+
+  .. cpp:function:: DynamicView(const std::string & arg_label, const unsigned min_chunk_size, const unsigned max_extent)
+
+    The standard allocating constructor.
+
+    :param arg_label: a user-provided label, which is used for profiling and debugging purposes. Names are not required to be unique
+    :param min_chunk_size: a user-provided minimum chunk size needed for memory allocation, will be raised to nearest power-of-two for more efficient memory access operations
+    :param max_extent: a user-provided maximum size, required to allocate a chunk-pointer array
+
+    The :any:`resize_serial` method must be called after construction to reserve the desired amount of memory, bound by :any:`max_extent`.
+
+  .. rubric:: Data Access Functions
+
+  .. cpp:function:: reference_type operator() (const I0 & i0 , const Args & ... args) const
+
+    :return: a value of :any:`reference_type` which may or not be referenceable itself. The number of index arguments must be 1 (for non-deprecated code).
+
+  .. rubric:: Data Resizing, Dimensions, Strides
+
+  .. code-block:: cpp
+
+     template< typename IntType >
+     inline
+     typename std::enable_if
+       < std::is_integral<IntType>::value &&
+         Kokkos::Impl::MemorySpaceAccess< Kokkos::HostSpace
+                                        , typename Impl::ChunkArraySpace< typename traits::memory_space >::memory_space
+                                        >::accessible
+       >::type
+     resize_serial(IntType const & n)
+
+  Resizes the DynamicView with sufficient chunks of memory of :any:`chunk_size` to store the requested number of elements :cpp:`n`.
+  This method can only be called outside of parallel regions.
+  :cpp:`n` is restricted to be smaller than the :any:`max_extent` value passed to the DynamicView constructor.
+  This method must be called after the construction of the DynamicView as the constructor sets the requested sizes for :any:`chunk_size` and :any:`max_extent` , but does not take input for the actual amount of memory to be used.
+
+  .. cpp:function:: size_t allocation_extent() const noexcept
+
+    :return: the total size of the product of the number of chunks multiplied by the chunk size. This may be larger than :any:`size` as this includes the total size for the total number of complete chunks of memory.
+
+  .. cpp:function:: size_t chunk_size() const noexcept
+
+    :return: the number of entries a chunk of memory may store, always a power of two.
+
+  .. cpp:function:: size_t size() const noexcept
+
+    :return: the number of entries available in the allocation based on the number passed to :any:`resize_serial`. This number is bound by :any:`allocation_extent`.
+
+  .. cpp:function:: constexpr size_t extent( const iType& dim) const
+
+    :return: the extent of the specified dimension. :any:`iType` must be an integral type, and :any:`dim` must be smaller than :any:`rank`. Returns 1 for rank > 1.
+
+  .. cpp:function:: constexpr int extent_int( const iType& dim) const
+
+    :return: the extent of the specified dimension as an :any:`int`. :any:`iType` must be an integral type, and :any:`dim` must be smaller than :any:`rank`. Compared to :any:`extent` this function can be useful on architectures where :any:`int` operations are more efficient than :any:`size_t`. It also may eliminate the need for type casts in applications that otherwise perform all index operations with :any:`int`. Returns 1 for rank > 1.
+
+  .. cpp:function:: constexpr size_t stride(const iType& dim) const
+
+    :return: the stride of the specified dimension, always returns 0 for :cpp:`DynamicView`.
+
+  .. cpp:function:: constexpr size_t stride_0() const
+
+    :return: the stride of dimension 0, always returns 0 for :cpp:`DynamicView` s.
+
+  .. cpp:function:: constexpr size_t stride_1() const
+
+    :return: the stride of dimension 1, always returns 0 for :cpp:`DynamicView` s.
+
+  .. cpp:function:: constexpr size_t stride_2() const
+
+    :return: the stride of dimension 2, always returns 0 for :cpp:`DynamicView` s.
+
+  .. cpp:function:: constexpr size_t stride_3() const
+
+    :return: the stride of dimension 3, always returns 0 for :cpp:`DynamicView` s.
+
+  .. cpp:function:: constexpr size_t stride_4() const
+
+    :return: the stride of dimension 4, always returns 0 for :cpp:`DynamicView` s.
+
+  .. cpp:function:: constexpr size_t stride_5() const
+
+    :return: the stride of dimension 5, always returns 0 for :cpp:`DynamicView` s.
+
+  .. cpp:function:: constexpr size_t stride_6() const
+
+    :return: the stride of dimension 6, always returns 0 for :cpp:`DynamicView` s.
+
+  .. cpp:function:: constexpr size_t stride_7() const
+
+    :return: the stride of dimension 7, always returns 0 for :cpp:`DynamicView` s.
+
+  .. cpp:function:: constexpr size_t span() const
+
+    :return: always returns 0 for :cpp:`DynamicView` s.
+
+  .. cpp:function:: constexpr pointer_type data() const
+
+    :return: the pointer to the underlying data allocation.
+
+  .. cpp:function:: bool span_is_contiguous() const
+
+    :return: the span is contiguous, always false for :cpp:`DynamicView` s.
+
+  .. rubric:: Other
+
+  .. cpp:function:: int use_count() const
+
+    :return: the current reference count of the underlying allocation.
+
+  .. cpp:function:: const char* label() const
+
+    :return: the label of the :cpp:`DynamicView`.
+
+  .. cpp:function:: bool is_allocated() const
+
+    :return: true if the View points to a valid set of allocated memory chunks.  Note that this will return false until resize_serial is called with a size greater than 0.
+
+
 
 .. code-block:: cpp
 
@@ -18,10 +195,11 @@ Kokkos DynamicView is a potentially reference-counted rank 1 array, without layo
      view(i) = i;
    });
 
+
 Synopsis
 --------
 
-  A rank 1 View-like class, instances can be dynamically resized on the host up to an upper limit provided by users at construction.
+A rank 1 View-like class, instances can be dynamically resized on the host up to an upper limit provided by users at construction.
 
 .. code-block:: cpp
 
@@ -134,211 +312,3 @@ Synopsis
        DynamicView( const std::string & arg_label, const unsigned min_chunk_size, const unsigned max_extent );
    };
 
-Public Class Members
---------------------
-
-Enums
-^^^^^
-
-
-* ``reference_type_is_lvalue_reference``\ : whether the reference type is a C++ lvalue reference. 
-
-Typedefs
-^^^^^^^^
-
-
-* `traits`: `Kokkos::ViewTraits` parent class type.
-
-ViewTypes
-~~~~~~~~~
-
-
-* `array_type`: `DynamicView` type templated on `traits::data_type\ ``and``\ traits::device_type`. 
-* `const_type`: `DynamicView` type templated on `traits::const_data_type\ ``and``\ traits::device_type`. 
-* `non_const_type`: `DynamicView` type templated on `traits::non_const_data_type\ ``and``\ traits::device_type`. 
-* ``HostMirror``\ : compatible view type with the same ``DataType`` and ``LayoutType`` stored in host accessible memory space. 
-
-Data Handles
-~~~~~~~~~~~~
-
-
-* ``reference_type``\ : return type of the view access operators.
-* ``pointer_type``\ : pointer to scalar type. 
-
-Constructors
-^^^^^^^^^^^^
-
-
-* ``DynamicView()``\ : Default Constructor. No allocations are made, no reference counting happens. All extents are zero and its data pointer is NULL.
-* ``DynamicView( const DynamicView<RT, RP...>& rhs)``\ : Copy constructor from a compatible View. Follows View assignment rules. 
-* ``DynamicView( DynamicView&& rhs)``\ : Move constructor
-* ``DynamicView( const std::string & arg_label, const unsigned min_chunk_size, const unsigned max_extent )``\ : Standard allocating constructor.
-
-  * ``arg_label``\ : a user-provided label, which is used for profiling and debugging purposes. Names are not required to be unique,
-  * ``min_chunk_size``\ : user-provided minimum chunk size needed for memory allocation, will be raised to nearest power-of-two for more efficient memory access operations.
-  * ``max_extent``\ : user-provided maximum size, required to allocate a chunk-pointer array.
-  * The ``resize_serial`` method must be called after construction to reserve the desired amount of memory, bound by ``max_extent``.
-
-Data Access Functions
-^^^^^^^^^^^^^^^^^^^^^
-
-
-* 
-  .. code-block:: cpp
-
-     reference_type operator()( const I0 & i0 , const Args & ... args ) const;
-  Returns a value of ``reference_type`` which may or not be referenceable itself. The number of index arguments must be 1 (for non-deprecated code).
-
-Data Resizing, Dimensions, Strides
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-
-* 
-  .. code-block:: cpp
-
-     template< typename IntType >
-     inline
-     typename std::enable_if
-       < std::is_integral<IntType>::value &&
-         Kokkos::Impl::MemorySpaceAccess< Kokkos::HostSpace
-                                        , typename Impl::ChunkArraySpace< typename traits::memory_space >::memory_space 
-                                        >::accessible
-       >::type
-     resize_serial(IntType const & n)
-
-  Resizes the DynamicView with sufficient chunks of memory of ``chunk_size`` to store the requested number of elements ``n``.
-  This method can only be called outside of parallel regions.
-  ``n`` is restricted to be smaller than the ``max_extent`` value passed to the DynamicView constructor.
-  This method must be called after the construction of the DynamicView as the constructor sets the requested sizes for ``chunk_size`` and ``max_extent``\ , but does not take input for the actual amount of memory to be used.
-
-* 
-  .. code-block:: cpp
-
-     KOKKOS_INLINE_FUNCTION
-     size_t allocation_extent() const noexcept
-
-  Returns the total size of the product of the number of chunks multiplied by the chunk size. This may be larger than ``size`` as this includes the total size for the total number of complete chunks of memory.
-
-* 
-  .. code-block:: cpp
-
-     KOKKOS_INLINE_FUNCTION
-     size_t chunk_size() const noexcept
-
-  Returns the number of entries a chunk of memory may store, always a power of two.
-
-* 
-  .. code-block:: cpp
-
-     KOKKOS_INLINE_FUNCTION
-     size_t size() const noexcept
-
-  Returns the number of entries available in the allocation based on the number passed to ``resize_serial``. This number is bound by ``allocation_extent``.
-
-* 
-  .. code-block:: cpp
-
-     template<class iType>
-     constexpr size_t extent( const iType& dim) const
-
-  Return the extent of the specified dimension. ``iType`` must be an integral type, and ``dim`` must be smaller than ``rank``.
-  Returns 1 for rank > 1.
-
-* 
-  .. code-block:: cpp
-
-     template<class iType>
-     constexpr int extent_int( const iType& dim) const
-
-  Return the extent of the specified dimension as an ``int``. ``iType`` must be an integral type, and ``dim`` must be smaller than ``rank``.
-  Compared to ``extent`` this function can be useful on architectures where ``int`` operations are more efficient than ``size_t``. It also may eliminate the need for type casts in applications that otherwise perform all index operations with ``int``. 
-  Returns 1 for rank > 1.
-
-* 
-  .. code-block:: cpp
-
-     template<class iType>
-     constexpr size_t stride(const iType& dim) const
-
-  Return the stride of the specified dimension, always returns 0 for ``DynamicView``.
-
-* 
-  .. code-block:: cpp
-
-     constexpr size_t stride_0() const
-  Return the stride of dimension 0, always returns 0 for ``DynamicView``\ s.
-* 
-  .. code-block:: cpp
-
-     constexpr size_t stride_1() const
-  Return the stride of dimension 1, always returns 0 for ``DynamicView``\ s.
-* 
-  .. code-block:: cpp
-
-     constexpr size_t stride_2() const
-  Return the stride of dimension 2, always returns 0 for ``DynamicView``\ s.
-* 
-  .. code-block:: cpp
-
-     constexpr size_t stride_3() const
-  Return the stride of dimension 3, always returns 0 for ``DynamicView``\ s.
-* 
-  .. code-block:: cpp
-
-     constexpr size_t stride_4() const
-  Return the stride of dimension 4, always returns 0 for ``DynamicView``\ s.
-* 
-  .. code-block:: cpp
-
-     constexpr size_t stride_5() const
-  Return the stride of dimension 5, always returns 0 for ``DynamicView``\ s.
-* 
-  .. code-block:: cpp
-
-     constexpr size_t stride_6() const
-  Return the stride of dimension 6, always returns 0 for ``DynamicView``\ s.
-* 
-  .. code-block:: cpp
-
-     constexpr size_t stride_7() const
-  Return the stride of dimension 7, always returns 0 for ``DynamicView``\ s.
-* 
-  .. code-block:: cpp
-
-     constexpr size_t span() const
-  Always returns 0 for ``DynamicView``\ s.
-* 
-  .. code-block:: cpp
-
-     constexpr pointer_type data() const
-  Return the pointer to the underlying data allocation.
-* 
-  .. code-block:: cpp
-
-     bool span_is_contiguous() const
-  Whether the span is contiguous, always false for ``DynamicView``\ s.
-
-Other
-^^^^^
-
-
-* 
-  .. code-block:: cpp
-
-     int use_count() const
-
-  Returns the current reference count of the underlying allocation.
-
-* 
-  .. code-block:: cpp
-
-     const char* label() const
-
-  Returns the label of the DynamicView. 
-
-* 
-  .. code-block:: cpp
-
-     bool is_allocated() const;
-
-  Returns true if the View points to a valid set of allocated memory chunks.  Note that this will return false until resize_serial is called with a size greater than 0.
