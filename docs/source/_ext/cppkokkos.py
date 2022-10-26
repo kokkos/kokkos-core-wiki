@@ -7,8 +7,9 @@ from typing import (Any, Callable, Dict, Generator, Iterator, List, Optional, Tu
 from docutils import nodes
 from docutils.nodes import Element, Node, TextElement, system_message
 from docutils.parsers.rst import directives
-
+# @@@@@_
 from pygments.lexers import CppLexer
+# @@@@@!
 from sphinx import addnodes
 from sphinx.addnodes import desc_signature, pending_xref
 from sphinx.application import Sphinx
@@ -383,11 +384,13 @@ class ASTIdentifier(ASTBase):
             node = addnodes.desc_sig_name(self.identifier, self.identifier)
         if mode == 'markType':
             targetText = prefix + self.identifier + templateArgs
+            # @@@@@_
             pnode = addnodes.pending_xref('', refdomain='cppkokkos',
                                           reftype='identifier',
                                           reftarget=targetText, modname=None,
                                           classname=None)
             pnode['cppkokkos:parent_key'] = symbol.get_lookup_key()
+            # @@@@@!
             pnode += node
             signode += pnode
         elif mode == 'lastIsName':
@@ -405,11 +408,13 @@ class ASTIdentifier(ASTBase):
             assert len(templateArgs) == 0
             assert not self.is_anon()
             targetText = 'operator""' + self.identifier
+            # @@@@@_
             pnode = addnodes.pending_xref('', refdomain='cppkokkos',
                                           reftype='identifier',
                                           reftarget=targetText, modname=None,
                                           classname=None)
             pnode['cppkokkos:parent_key'] = symbol.get_lookup_key()
+            # @@@@@!
             pnode += node
             signode += pnode
         else:
@@ -1446,11 +1451,13 @@ class ASTOperator(ASTBase):
             signode += mainName
         elif mode == 'markType':
             targetText = prefix + str(self) + templateArgs
+            # @@@@@_
             pnode = addnodes.pending_xref('', refdomain='cppkokkos',
                                           reftype='identifier',
                                           reftarget=targetText, modname=None,
                                           classname=None)
             pnode['cppkokkos:parent_key'] = symbol.get_lookup_key()
+            # @@@@@!
             # Render the identifier part, but collapse it into a string
             # and make that the a link to this operator.
             # E.g., if it is 'operator SomeType', then 'SomeType' becomes
@@ -3197,7 +3204,9 @@ class ASTEnum(ASTBase):
     def describe_signature(self, signode: TextElement, mode: str,
                            env: "BuildEnvironment", symbol: "Symbol") -> None:
         verify_description_mode(mode)
+        # @@@@@_
         # self.scoped has been done by the CPPKokkosEnumObject
+        # @@@@@!
         self.attrs.describe_signature(signode)
         if len(self.attrs) != 0:
             signode += addnodes.desc_sig_space()
@@ -3666,7 +3675,9 @@ class ASTDeclaration(ASTBase):
         self.semicolon = semicolon
 
         self.symbol: Symbol = None
+        # @@@@@_
         # set by CPPKokkosObject._add_enumerator_to_parent
+        # @@@@@!
         self.enumeratorScopedSymbol: Symbol = None
 
     def clone(self) -> "ASTDeclaration":
@@ -4549,8 +4560,10 @@ class Symbol:
                                          otherChild.docname, otherChild.line)
                 elif ourChild.docname != otherChild.docname:
                     name = str(ourChild.declaration)
+                    # @@@@@_
                     msg = __("Duplicate C++ declaration, also defined at %s:%s.\n"
                              "Declaration is '.. cppkokkos:%s:: %s'.")
+                    # @@@@@!
                     msg = msg % (ourChild.docname, ourChild.line,
                                  ourChild.declaration.directiveType, name)
                     logger.warning(msg, location=(otherChild.docname, otherChild.line))
@@ -4844,11 +4857,15 @@ class DefinitionParser(BaseParser):
 
     @property
     def id_attributes(self):
+        # @@@@@_
         return self.config.cppkokkos_id_attributes
+        # @@@@@!
 
     @property
     def paren_attributes(self):
+        # @@@@@_
         return self.config.cppkokkos_paren_attributes
+        # @@@@@!
 
     def _parse_string(self) -> str:
         if self.current_char != '"':
@@ -6408,7 +6425,9 @@ class DefinitionParser(BaseParser):
         return ASTUnion(name, attrs)
 
     def _parse_enum(self) -> ASTEnum:
+        # @@@@@_
         scoped = None  # is set by CPPKokkosEnumObject
+        # @@@@@!
         attrs = self._parse_attribute_list()
         name = self._parse_nested_name()
         self.skip_ws()
@@ -6436,7 +6455,7 @@ class DefinitionParser(BaseParser):
     def _parse_template_parameter(self) -> ASTTemplateParam:
         self.skip_ws()
         if self.skip_word('template'):
-            # declare a tenplate template parameter
+            # declare a template template parameter
             nestedParams = self._parse_template_parameter_list()
         else:
             nestedParams = None
@@ -6823,7 +6842,9 @@ def _make_phony_error_name() -> ASTNestedName:
     return ASTNestedName([nne], [False], rooted=False)
 
 
+# @@@@@_
 class CPPKokkosObject(ObjectDescription[ASTDeclaration]):
+    # @@@@@!
     """Description of a C++ language object."""
 
     doc_field_types: List[Field] = [
@@ -6912,7 +6933,9 @@ class CPPKokkosObject(ObjectDescription[ASTDeclaration]):
                 break
         if not isInConcept and 'noindexentry' not in self.options:
             strippedName = name
+            # @@@@@_
             for prefix in self.env.config.cppkokkos_index_common_prefix:
+                # @@@@@!
                 if name.startswith(prefix):
                     strippedName = strippedName[len(prefix):]
                     break
@@ -6921,7 +6944,9 @@ class CPPKokkosObject(ObjectDescription[ASTDeclaration]):
 
         if newestId not in self.state.document.ids:
             # if the name is not unique, the first one will win
+            # @@@@@_
             names = self.env.domaindata['cppkokkos']['names']
+            # @@@@@!
             if name not in names:
                 names[name] = ast.symbol.docname
             # always add the newest id
@@ -6955,23 +6980,29 @@ class CPPKokkosObject(ObjectDescription[ASTDeclaration]):
 
     def run(self) -> List[Node]:
         env = self.state.document.settings.env  # from ObjectDescription.run
+        # @@@@@_
         if 'cppkokkos:parent_symbol' not in env.temp_data:
             root = env.domaindata['cppkokkos']['root_symbol']
             env.temp_data['cppkokkos:parent_symbol'] = root
             env.ref_context['cppkokkos:parent_key'] = root.get_lookup_key()
+            # @@@@@!
 
         # The lookup keys assume that no nested scopes exists inside overloaded functions.
         # (see also #5191)
         # Example:
+        # @@@@@_
         # .. cppkokkos:function:: void f(int)
         # .. cppkokkos:function:: void f(double)
         #
         #    .. cppkokkos:function:: void g()
         #
         #       :cppkokkos:any:`boom`
+        # @@@@@!
         #
         # So we disallow any signatures inside functions.
+        # @@@@@_
         parentSymbol = env.temp_data['cppkokkos:parent_symbol']
+        # @@@@@!
         parentDecl = parentSymbol.declaration
         if parentDecl is not None and parentDecl.objectType == 'function':
             msg = "C++ declarations inside functions are not supported." \
@@ -6982,16 +7013,22 @@ class CPPKokkosObject(ObjectDescription[ASTDeclaration]):
             ), location=self.get_location())
             name = _make_phony_error_name()
             symbol = parentSymbol.add_name(name)
+            # @@@@@_
             env.temp_data['cppkokkos:last_symbol'] = symbol
+            # @@@@@!
             return []
         # When multiple declarations are made in the same directive
         # they need to know about each other to provide symbol lookup for function parameters.
         # We use last_symbol to store the latest added declaration in a directive.
+        # @@@@@_
         env.temp_data['cppkokkos:last_symbol'] = None
+        # @@@@@!
         return super().run()
 
     def handle_signature(self, sig: str, signode: desc_signature) -> ASTDeclaration:
+        # @@@@@_
         parentSymbol: Symbol = self.env.temp_data['cppkokkos:parent_symbol']
+        # @@@@@!
 
         parser = DefinitionParser(sig, location=signode, config=self.env.config)
         try:
@@ -7003,7 +7040,9 @@ class CPPKokkosObject(ObjectDescription[ASTDeclaration]):
             # the possibly inner declarations.
             name = _make_phony_error_name()
             symbol = parentSymbol.add_name(name)
+            # @@@@@_
             self.env.temp_data['cppkokkos:last_symbol'] = symbol
+            # @@@@@!
             raise ValueError from e
 
         try:
@@ -7012,17 +7051,23 @@ class CPPKokkosObject(ObjectDescription[ASTDeclaration]):
             # append the new declaration to the sibling list
             assert symbol.siblingAbove is None
             assert symbol.siblingBelow is None
+            # @@@@@_
             symbol.siblingAbove = self.env.temp_data['cppkokkos:last_symbol']
+            # @@@@@!
             if symbol.siblingAbove is not None:
                 assert symbol.siblingAbove.siblingBelow is None
                 symbol.siblingAbove.siblingBelow = symbol
+            # @@@@@_
             self.env.temp_data['cppkokkos:last_symbol'] = symbol
+            # @@@@@!
         except _DuplicateSymbolError as e:
             # Assume we are actually in the old symbol,
             # instead of the newly created duplicate.
+            # @@@@@_
             self.env.temp_data['cppkokkos:last_symbol'] = e.symbol
             msg = __("Duplicate C++ declaration, also defined at %s:%s.\n"
                      "Declaration is '.. cppkokkos:%s:: %s'.")
+            # @@@@@!
             msg = msg % (e.symbol.docname, e.symbol.line,
                          self.display_object_type, sig)
             logger.warning(msg, location=signode)
@@ -7038,33 +7083,47 @@ class CPPKokkosObject(ObjectDescription[ASTDeclaration]):
         return ast
 
     def before_content(self) -> None:
+        # @@@@@_
         lastSymbol: Symbol = self.env.temp_data['cppkokkos:last_symbol']
+        # @@@@@!
         assert lastSymbol
+        # @@@@@_
         self.oldParentSymbol = self.env.temp_data['cppkokkos:parent_symbol']
         self.oldParentKey: LookupKey = self.env.ref_context['cppkokkos:parent_key']
         self.env.temp_data['cppkokkos:parent_symbol'] = lastSymbol
         self.env.ref_context['cppkokkos:parent_key'] = lastSymbol.get_lookup_key()
+        # @@@@@!
 
     def after_content(self) -> None:
+        # @@@@@_
         self.env.temp_data['cppkokkos:parent_symbol'] = self.oldParentSymbol
         self.env.ref_context['cppkokkos:parent_key'] = self.oldParentKey
+        # @@@@@!
 
 
+# @@@@@_
 class CPPKokkosTypeObject(CPPKokkosObject):
+    # @@@@@!
     object_type = 'type'
 
 
+# @@@@@_
 class CPPKokkosConceptObject(CPPKokkosObject):
+    # @@@@@!
     object_type = 'concept'
 
 
+# @@@@@_
 class CPPKokkosMemberObject(CPPKokkosObject):
+    # @@@@@!
     object_type = 'member'
 
 
+# @@@@@_
 class CPPKokkosFunctionObject(CPPKokkosObject):
+    # @@@@@!
     object_type = 'function'
-
+    # @@@@@_
     doc_field_types = CPPKokkosObject.doc_field_types + [
         GroupedField('parameter', label=_('Parameters'),
                      names=('param', 'parameter', 'arg', 'argument'),
@@ -7078,9 +7137,12 @@ class CPPKokkosFunctionObject(CPPKokkosObject):
         Field('returnvalue', label=_('Returns'), has_arg=False,
               names=('returns', 'return')),
     ]
+    # @@@@@!
 
 
+# @@@@@_
 class CPPKokkosClassObject(CPPKokkosObject):
+    # @@@@@!
     object_type = 'class'
 
     @property
@@ -7090,19 +7152,27 @@ class CPPKokkosClassObject(CPPKokkosObject):
         return self.objtype
 
 
+# @@@@@_
 class CPPKokkosUnionObject(CPPKokkosObject):
+    # @@@@@!
     object_type = 'union'
 
 
+# @@@@@_
 class CPPKokkosEnumObject(CPPKokkosObject):
+    # @@@@@!
     object_type = 'enum'
 
 
+# @@@@@_
 class CPPKokkosEnumeratorObject(CPPKokkosObject):
+    # @@@@@!
     object_type = 'enumerator'
 
 
+# @@@@@_
 class CPPKokkosNamespaceObject(SphinxDirective):
+    # @@@@@!
     """
     This directive is just to tell Sphinx that we're documenting stuff in
     namespace foo.
@@ -7115,7 +7185,9 @@ class CPPKokkosNamespaceObject(SphinxDirective):
     option_spec: OptionSpec = {}
 
     def run(self) -> List[Node]:
+        # @@@@@_
         rootSymbol = self.env.domaindata['cppkokkos']['root_symbol']
+        # @@@@@!
         if self.arguments[0].strip() in ('NULL', '0', 'nullptr'):
             symbol = rootSymbol
             stack: List[Symbol] = []
@@ -7132,13 +7204,17 @@ class CPPKokkosNamespaceObject(SphinxDirective):
                 ast = ASTNamespace(name, None)
             symbol = rootSymbol.add_name(ast.nestedName, ast.templatePrefix)
             stack = [symbol]
+        # @@@@@_
         self.env.temp_data['cppkokkos:parent_symbol'] = symbol
         self.env.temp_data['cppkokkos:namespace_stack'] = stack
         self.env.ref_context['cppkokkos:parent_key'] = symbol.get_lookup_key()
+        # @@@@@!
         return []
 
 
+# @@@@@_
 class CPPKokkosNamespacePushObject(SphinxDirective):
+    # @@@@@!
     has_content = False
     required_arguments = 1
     optional_arguments = 0
@@ -7158,19 +7234,29 @@ class CPPKokkosNamespacePushObject(SphinxDirective):
             logger.warning(e, location=self.get_location())
             name = _make_phony_error_name()
             ast = ASTNamespace(name, None)
+        # @@@@@_
         oldParent = self.env.temp_data.get('cppkokkos:parent_symbol', None)
+        # @@@@@!
         if not oldParent:
+            # @@@@@_
             oldParent = self.env.domaindata['cppkokkos']['root_symbol']
+            # @@@@@!
         symbol = oldParent.add_name(ast.nestedName, ast.templatePrefix)
+        # @@@@@_
         stack = self.env.temp_data.get('cppkokkos:namespace_stack', [])
+        # @@@@@!
         stack.append(symbol)
+        # @@@@@_
         self.env.temp_data['cppkokkos:parent_symbol'] = symbol
         self.env.temp_data['cppkokkos:namespace_stack'] = stack
         self.env.ref_context['cppkokkos:parent_key'] = symbol.get_lookup_key()
+        # @@@@@!
         return []
 
 
+# @@@@@_
 class CPPKokkosNamespacePopObject(SphinxDirective):
+    # @@@@@!
     has_content = False
     required_arguments = 0
     optional_arguments = 0
@@ -7178,7 +7264,9 @@ class CPPKokkosNamespacePopObject(SphinxDirective):
     option_spec: OptionSpec = {}
 
     def run(self) -> List[Node]:
+        # @@@@@_
         stack = self.env.temp_data.get('cppkokkos:namespace_stack', None)
+        # @@@@@!
         if not stack or len(stack) == 0:
             logger.warning("C++ namespace pop on empty stack. Defaulting to global scope.",
                            location=self.get_location())
@@ -7188,10 +7276,12 @@ class CPPKokkosNamespacePopObject(SphinxDirective):
         if len(stack) > 0:
             symbol = stack[-1]
         else:
+            # @@@@@_
             symbol = self.env.domaindata['cppkokkos']['root_symbol']
         self.env.temp_data['cppkokkos:parent_symbol'] = symbol
         self.env.temp_data['cppkokkos:namespace_stack'] = stack
         self.env.ref_context['cppkokkos:parent_key'] = symbol.get_lookup_key()
+        # @@@@@!
         return []
 
 
@@ -7203,11 +7293,13 @@ class AliasNode(nodes.Element):
         self.sig = sig
         self.aliasOptions = aliasOptions
         if env is not None:
+            # @@@@@_
             if 'cppkokkos:parent_symbol' not in env.temp_data:
                 root = env.domaindata['cppkokkos']['root_symbol']
                 env.temp_data['cppkokkos:parent_symbol'] = root
                 env.ref_context['cppkokkos:parent_key'] = root.get_lookup_key()
             self.parentKey = env.ref_context['cppkokkos:parent_key']
+            # @@@@@!
         else:
             assert parentKey is not None
             self.parentKey = parentKey
@@ -7245,7 +7337,9 @@ class AliasTransform(SphinxTransform):
                 desc = addnodes.desc()
                 content.append(desc)
                 desc.document = document
+                # @@@@@_
                 desc['domain'] = 'cppkokkos'
+                # @@@@@!
                 # 'desctype' is a backwards compatible attribute
                 desc['objtype'] = desc['desctype'] = 'alias'
                 desc['noindex'] = True
@@ -7288,7 +7382,9 @@ class AliasTransform(SphinxTransform):
                 node.replace_self(signode)
                 continue
 
+            # @@@@@_
             rootSymbol: Symbol = self.env.domains['cppkokkos'].data['root_symbol']
+            # @@@@@!
             parentSymbol: Symbol = rootSymbol.direct_lookup(parentKey)
             if not parentSymbol:
                 print("Target: ", sig)
@@ -7352,7 +7448,9 @@ class AliasTransform(SphinxTransform):
                 node.replace_self(nodes)
 
 
+# @@@@@_
 class CPPKokkosAliasObject(ObjectDescription):
+    # @@@@@!
     option_spec: OptionSpec = {
         'maxdepth': directives.nonnegative_int,
         'noroot': directives.flag,
@@ -7399,7 +7497,9 @@ class CPPKokkosAliasObject(ObjectDescription):
         return [node]
 
 
+# @@@@@_
 class CPPKokkosXRefRole(XRefRole):
+    # @@@@@!
     def process_link(self, env: BuildEnvironment, refnode: Element, has_explicit_title: bool,
                      title: str, target: str) -> Tuple[str, str]:
         refnode.attributes.update(env.ref_context)
@@ -7429,15 +7529,21 @@ class CPPKokkosXRefRole(XRefRole):
         return title, target
 
 
+# @@@@@_
 class CPPKokkosExprRole(SphinxRole):
+    # @@@@@!
     def __init__(self, asCode: bool) -> None:
         super().__init__()
         if asCode:
             # render the expression as inline code
+            # @@@@@_
             self.class_type = 'cppkokkos-expr'
+            # @@@@@!
         else:
             # render the expression as inline text
+            # @@@@@_
             self.class_type = 'cppkokkos-texpr'
+            # @@@@@!
 
     def run(self) -> Tuple[List[Node], List[system_message]]:
         text = self.text.replace('\n', ' ')
@@ -7451,18 +7557,25 @@ class CPPKokkosExprRole(SphinxRole):
             logger.warning('Unparseable C++ expression: %r\n%s', text, ex,
                            location=self.get_location())
             # see below
+            # @@@@@_
             return [addnodes.desc_inline('cppkokkos', text, text, classes=[self.class_type])], []
         parentSymbol = self.env.temp_data.get('cppkokkos:parent_symbol', None)
+        # @@@@@!
         if parentSymbol is None:
+            # @@@@@_
             parentSymbol = self.env.domaindata['cppkokkos']['root_symbol']
+            # @@@@@!
         # ...most if not all of these classes should really apply to the individual references,
         # not the container node
+        # @@@@@_
         signode = addnodes.desc_inline('cppkokkos', classes=[self.class_type])
+        # @@@@@!
         ast.describe_signature(signode, 'markType', self.env, parentSymbol)
         return [signode], []
 
-
+# @@@@@_
 class CPPKokkosDomain(Domain):
+    # @@@@@!
     """C++ language domain.
 
     There are two 'object type' attributes being used::
@@ -7474,7 +7587,9 @@ class CPPKokkosDomain(Domain):
       object_types dict below. They are the core different types of declarations in C++ that
       one can document.
     """
+    # @@@@@_
     name = 'cppkokkos'
+    # @@@@@!
     label = 'C++'
     object_types = {
         'class':      ObjType(_('class'),      'class', 'struct',   'identifier', 'type'),
@@ -7493,6 +7608,7 @@ class CPPKokkosDomain(Domain):
 
     directives = {
         # declarations
+        # @@@@@_
         'class': CPPKokkosClassObject,
         'struct': CPPKokkosClassObject,
         'union': CPPKokkosUnionObject,
@@ -7505,14 +7621,20 @@ class CPPKokkosDomain(Domain):
         'enum-struct': CPPKokkosEnumObject,
         'enum-class': CPPKokkosEnumObject,
         'enumerator': CPPKokkosEnumeratorObject,
+        # @@@@@!
         # scope control
+        # @@@@@_
         'namespace': CPPKokkosNamespaceObject,
         'namespace-push': CPPKokkosNamespacePushObject,
         'namespace-pop': CPPKokkosNamespacePopObject,
+        # @@@@@!
         # other
+        # @@@@@_
         'alias': CPPKokkosAliasObject
+        # @@@@@!
     }
     roles = {
+        # @@@@@_
         'any': CPPKokkosXRefRole(),
         'class': CPPKokkosXRefRole(),
         'struct': CPPKokkosXRefRole(),
@@ -7526,6 +7648,7 @@ class CPPKokkosDomain(Domain):
         'enumerator': CPPKokkosXRefRole(),
         'expr': CPPKokkosExprRole(asCode=True),
         'texpr': CPPKokkosExprRole(asCode=False)
+        # @@@@@!
     }
     initial_data = {
         'root_symbol': Symbol(None, None, None, None, None, None, None),
@@ -7613,7 +7736,9 @@ class CPPKokkosDomain(Domain):
             logger.warning('Unparseable C++ cross-reference: %r\n%s', t, ex,
                            location=node)
             return None, None
+        # @@@@@_
         parentKey: LookupKey = node.get("cppkokkos:parent_key", None)
+        # @@@@@!
         rootSymbol = self.data['root_symbol']
         if parentKey:
             parentSymbol: Symbol = rootSymbol.direct_lookup(parentKey)
@@ -7662,8 +7787,9 @@ class CPPKokkosDomain(Domain):
             if txtName.startswith('std::') or txtName == 'std':
                 raise NoUri(txtName, typ)
             return None, None
-
+        # @@@@@_
         if typ.startswith('cppkokkos:'):
+            # @@@@@!
             typ = typ[4:]
         declTyp = s.declaration.objectType
 
@@ -7676,10 +7802,12 @@ class CPPKokkosDomain(Domain):
             print("Type is %s, declaration type is %s" % (typ, declTyp))
             assert False
         if not checkType():
+            # @@@@@_
             logger.warning("cppkokkos:%s targets a %s (%s).",
                            typ, s.declaration.objectType,
                            s.get_full_nested_name(),
                            location=node)
+            # @@@@@!
 
         declaration = s.declaration
         if isShorthand:
@@ -7748,9 +7876,13 @@ class CPPKokkosDomain(Domain):
                                                         'any', target, node, contnode)
         if retnode:
             if objtype == 'templateParam':
+                # @@@@@_
                 return [('cppkokkos:templateParam', retnode)]
+                # @@@@@!
             else:
+                # @@@@@_
                 return [('cppkokkos:' + self.role_for_objtype(objtype), retnode)]
+                # @@@@@!
         return []
 
     def get_objects(self) -> Iterator[Tuple[str, str, str, str, str, int]]:
@@ -7771,7 +7903,9 @@ class CPPKokkosDomain(Domain):
         target = node.get('reftarget', None)
         if target is None:
             return None
+        # @@@@@_
         parentKey: LookupKey = node.get("cppkokkos:parent_key", None)
+        # @@@@@!
         if parentKey is None or len(parentKey.data) <= 0:
             return None
 
@@ -7782,25 +7916,33 @@ class CPPKokkosDomain(Domain):
 
 
 def setup(app: Sphinx) -> Dict[str, Any]:
+    # @@@@@_
     app.add_domain(CPPKokkosDomain)
     app.add_lexer("cppkokkos", CppLexer)
     app.add_config_value("cppkokkos_index_common_prefix", [], 'env')
     app.add_config_value("cppkokkos_id_attributes", [], 'env')
     app.add_config_value("cppkokkos_paren_attributes", [], 'env')
+    # @@@@@!
     app.add_post_transform(AliasTransform)
 
     # debug stuff
+    # @@@@@_
     app.add_config_value("cppkokkos_debug_lookup", False, '')
     app.add_config_value("cppkokkos_debug_show_tree", False, '')
+    # @@@@@!
 
     def initStuff(app):
+        # @@@@@_
         Symbol.debug_lookup = app.config.cppkokkos_debug_lookup
         Symbol.debug_show_tree = app.config.cppkokkos_debug_show_tree
         app.config.cppkokkos_index_common_prefix.sort(reverse=True)
+        # @@@@@!
     app.connect("builder-inited", initStuff)
 
     return {
+        # @@@@@_
         'version': '0.1',
+        # @@@@@!
         'env_version': 6,
         'parallel_read_safe': True,
         'parallel_write_safe': True,
