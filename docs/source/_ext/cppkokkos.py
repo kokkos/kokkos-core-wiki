@@ -8,6 +8,7 @@ from docutils import nodes
 from docutils.nodes import Element, Node, TextElement, system_message
 from docutils.parsers.rst import directives
 
+from pygments.lexers import CppLexer
 from sphinx import addnodes
 from sphinx.addnodes import desc_signature, pending_xref
 from sphinx.application import Sphinx
@@ -35,258 +36,6 @@ from sphinx.util.typing import OptionSpec
 
 logger = logging.getLogger(__name__)
 T = TypeVar('T')
-
-"""
-    Important note on ids
-    ----------------------------------------------------------------------------
-
-    Multiple id generation schemes are used due to backwards compatibility.
-    - v1: 1.2.3 <= version < 1.3
-          The style used before the rewrite.
-          It is not the actual old code, but a replication of the behaviour.
-    - v2: 1.3 <= version < now
-          Standardised mangling scheme from
-          https://itanium-cxx-abi.github.io/cxx-abi/abi.html#mangling
-          though not completely implemented.
-    All versions are generated and attached to elements. The newest is used for
-    the index. All of the versions should work as permalinks.
-
-
-    Signature Nodes and Tagnames
-    ----------------------------------------------------------------------------
-
-    Each signature is in a desc_signature node, where all children are
-    desc_signature_line nodes. Each of these lines will have the attribute
-    'sphinx_line_type' set to one of the following (prioritized):
-    - 'declarator', if the line contains the name of the declared object.
-    - 'templateParams', if the line starts a template parameter list,
-    - 'templateParams', if the line has template parameters
-      Note: such lines might get a new tag in the future.
-    - 'templateIntroduction, if the line is on the form 'conceptName{...}'
-    No other desc_signature nodes should exist (so far).
-
-
-    Grammar
-    ----------------------------------------------------------------------------
-
-    See https://www.nongnu.org/hcb/ for the grammar,
-    and https://github.com/cplusplus/draft/blob/master/source/grammar.tex,
-    and https://github.com/cplusplus/concepts-ts
-    for the newest grammar.
-
-    common grammar things:
-        template-declaration ->
-            "template" "<" template-parameter-list ">" declaration
-        template-parameter-list ->
-              template-parameter
-            | template-parameter-list "," template-parameter
-        template-parameter ->
-              type-parameter
-            | parameter-declaration # i.e., same as a function argument
-
-        type-parameter ->
-              "class"    "..."[opt] identifier[opt]
-            | "class"               identifier[opt] "=" type-id
-            | "typename" "..."[opt] identifier[opt]
-            | "typename"            identifier[opt] "=" type-id
-            | "template" "<" template-parameter-list ">"
-                "class"  "..."[opt] identifier[opt]
-            | "template" "<" template-parameter-list ">"
-                "class"             identifier[opt] "=" id-expression
-            # also, from C++17 we can have "typename" in template templates
-        templateDeclPrefix ->
-            "template" "<" template-parameter-list ">"
-
-        simple-declaration ->
-            attribute-specifier-seq[opt] decl-specifier-seq[opt]
-                init-declarator-list[opt] ;
-        # Make the semicolon optional.
-        # For now: drop the attributes (TODO).
-        # Use at most 1 init-declarator.
-        -> decl-specifier-seq init-declarator
-        -> decl-specifier-seq declarator initializer
-
-        decl-specifier ->
-              storage-class-specifier ->
-                 (  "static" (only for member_object and function_object)
-                  | "extern" (only for member_object and function_object)
-                  | "register"
-                 )
-                 thread_local[opt] (only for member_object)
-                                   (it can also appear before the others)
-
-            | type-specifier -> trailing-type-specifier
-            | function-specifier -> "inline" | "virtual" | "explicit" (only
-              for function_object)
-            | "friend" (only for function_object)
-            | "constexpr" (only for member_object and function_object)
-        trailing-type-specifier ->
-              simple-type-specifier
-            | elaborated-type-specifier
-            | typename-specifier
-            | cv-qualifier -> "const" | "volatile"
-        stricter grammar for decl-specifier-seq (with everything, each object
-        uses a subset):
-            visibility storage-class-specifier function-specifier "friend"
-            "constexpr" "volatile" "const" trailing-type-specifier
-            # where trailing-type-specifier can no be cv-qualifier
-        # Inside e.g., template parameters a strict subset is used
-        # (see type-specifier-seq)
-        trailing-type-specifier ->
-              simple-type-specifier ->
-                ::[opt] nested-name-specifier[opt] type-name
-              | ::[opt] nested-name-specifier "template" simple-template-id
-              | "char" | "bool" | etc.
-              | decltype-specifier
-            | elaborated-type-specifier ->
-                class-key attribute-specifier-seq[opt] ::[opt]
-                nested-name-specifier[opt] identifier
-              | class-key ::[opt] nested-name-specifier[opt] template[opt]
-                simple-template-id
-              | "enum" ::[opt] nested-name-specifier[opt] identifier
-            | typename-specifier ->
-                "typename" ::[opt] nested-name-specifier identifier
-              | "typename" ::[opt] nested-name-specifier template[opt]
-                simple-template-id
-        class-key -> "class" | "struct" | "union"
-        type-name ->* identifier | simple-template-id
-        # ignoring attributes and decltype, and then some left-factoring
-        trailing-type-specifier ->
-            rest-of-trailing
-            ("class" | "struct" | "union" | "typename") rest-of-trailing
-            built-in -> "char" | "bool" | etc.
-            decltype-specifier
-        rest-of-trailing -> (with some simplification)
-            "::"[opt] list-of-elements-separated-by-::
-        element ->
-            "template"[opt] identifier ("<" template-argument-list ">")[opt]
-        template-argument-list ->
-              template-argument "..."[opt]
-            | template-argument-list "," template-argument "..."[opt]
-        template-argument ->
-              constant-expression
-            | type-specifier-seq abstract-declarator
-            | id-expression
-
-
-        declarator ->
-              ptr-declarator
-            | noptr-declarator parameters-and-qualifiers trailing-return-type
-        ptr-declarator ->
-              noptr-declarator
-            | ptr-operator ptr-declarator
-        noptr-declarator ->
-              declarator-id attribute-specifier-seq[opt] ->
-                    "..."[opt] id-expression
-                  | rest-of-trailing
-            | noptr-declarator parameters-and-qualifiers
-            | noptr-declarator "[" constant-expression[opt] "]"
-              attribute-specifier-seq[opt]
-            | "(" ptr-declarator ")"
-        ptr-operator ->
-              "*"  attribute-specifier-seq[opt] cv-qualifier-seq[opt]
-            | "&   attribute-specifier-seq[opt]
-            | "&&" attribute-specifier-seq[opt]
-            | "::"[opt] nested-name-specifier "*" attribute-specifier-seq[opt]
-                cv-qualifier-seq[opt]
-        # function_object must use a parameters-and-qualifiers, the others may
-        # use it (e.g., function pointers)
-        parameters-and-qualifiers ->
-            "(" parameter-clause ")" attribute-specifier-seq[opt]
-            cv-qualifier-seq[opt] ref-qualifier[opt]
-            exception-specification[opt]
-        ref-qualifier -> "&" | "&&"
-        exception-specification ->
-            "noexcept" ("(" constant-expression ")")[opt]
-            "throw" ("(" type-id-list ")")[opt]
-        # TODO: we don't implement attributes
-        # member functions can have initializers, but we fold them into here
-        memberFunctionInit -> "=" "0"
-        # (note: only "0" is allowed as the value, according to the standard,
-        # right?)
-
-        enum-head ->
-            enum-key attribute-specifier-seq[opt] nested-name-specifier[opt]
-                identifier enum-base[opt]
-        enum-key -> "enum" | "enum struct" | "enum class"
-        enum-base ->
-            ":" type
-        enumerator-definition ->
-              identifier
-            | identifier "=" constant-expression
-
-    We additionally add the possibility for specifying the visibility as the
-    first thing.
-
-    concept_object:
-        goal:
-            just a declaration of the name (for now)
-
-        grammar: only a single template parameter list, and the nested name
-            may not have any template argument lists
-
-            "template" "<" template-parameter-list ">"
-            nested-name-specifier
-
-    type_object:
-        goal:
-            either a single type (e.g., "MyClass:Something_T" or a typedef-like
-            thing (e.g. "Something Something_T" or "int I_arr[]"
-        grammar, single type: based on a type in a function parameter, but
-        without a name:
-               parameter-declaration
-            -> attribute-specifier-seq[opt] decl-specifier-seq
-               abstract-declarator[opt]
-            # Drop the attributes
-            -> decl-specifier-seq abstract-declarator[opt]
-        grammar, typedef-like: no initilizer
-            decl-specifier-seq declarator
-        Can start with a templateDeclPrefix.
-
-    member_object:
-        goal: as a type_object which must have a declarator, and optionally
-        with a initializer
-        grammar:
-            decl-specifier-seq declarator initializer
-        Can start with a templateDeclPrefix.
-
-    function_object:
-        goal: a function declaration, TODO: what about templates? for now: skip
-        grammar: no initializer
-           decl-specifier-seq declarator
-        Can start with a templateDeclPrefix.
-
-    class_object:
-        goal: a class declaration, but with specification of a base class
-        grammar:
-              attribute-specifier-seq[opt]
-                  nested-name "final"[opt] (":" base-specifier-list)[opt]
-            base-specifier-list ->
-              base-specifier "..."[opt]
-            | base-specifier-list, base-specifier "..."[opt]
-            base-specifier ->
-              base-type-specifier
-            | "virtual" access-spe"cifier[opt]    base-type-specifier
-            | access-specifier[opt] "virtual"[opt] base-type-specifier
-        Can start with a templateDeclPrefix.
-
-    enum_object:
-        goal: an unscoped enum or a scoped enum, optionally with the underlying
-              type specified
-        grammar:
-            ("class" | "struct")[opt] visibility[opt]
-                attribute-specifier-seq[opt] nested-name (":" type)[opt]
-    enumerator_object:
-        goal: an element in a scoped or unscoped enum. The name should be
-              injected according to the scopedness.
-        grammar:
-            nested-name ("=" constant-expression)
-
-    namespace_object:
-        goal: a directive to put all following declarations in a specific scope
-        grammar:
-            nested-name
-"""
 
 udl_identifier_re = re.compile(r'''(?x)
     [a-zA-Z_][a-zA-Z0-9_]*\b   # note, no word boundary in the beginning
@@ -546,7 +295,7 @@ _id_char_from_prefix: Dict[Optional[str], str] = {
     None: 'c', 'u8': 'c',
     'u': 'Ds', 'U': 'Di', 'L': 'w'
 }
-# these are ordered by preceedence
+# these are ordered by precedence
 _expression_bin_ops = [
     ['||', 'or'],
     ['&&', 'and'],
@@ -634,11 +383,11 @@ class ASTIdentifier(ASTBase):
             node = addnodes.desc_sig_name(self.identifier, self.identifier)
         if mode == 'markType':
             targetText = prefix + self.identifier + templateArgs
-            pnode = addnodes.pending_xref('', refdomain='cpp',
+            pnode = addnodes.pending_xref('', refdomain='cppkokkos',
                                           reftype='identifier',
                                           reftarget=targetText, modname=None,
                                           classname=None)
-            pnode['cpp:parent_key'] = symbol.get_lookup_key()
+            pnode['cppkokkos:parent_key'] = symbol.get_lookup_key()
             pnode += node
             signode += pnode
         elif mode == 'lastIsName':
@@ -656,11 +405,11 @@ class ASTIdentifier(ASTBase):
             assert len(templateArgs) == 0
             assert not self.is_anon()
             targetText = 'operator""' + self.identifier
-            pnode = addnodes.pending_xref('', refdomain='cpp',
+            pnode = addnodes.pending_xref('', refdomain='cppkokkos',
                                           reftype='identifier',
                                           reftarget=targetText, modname=None,
                                           classname=None)
-            pnode['cpp:parent_key'] = symbol.get_lookup_key()
+            pnode['cppkokkos:parent_key'] = symbol.get_lookup_key()
             pnode += node
             signode += pnode
         else:
@@ -1697,11 +1446,11 @@ class ASTOperator(ASTBase):
             signode += mainName
         elif mode == 'markType':
             targetText = prefix + str(self) + templateArgs
-            pnode = addnodes.pending_xref('', refdomain='cpp',
+            pnode = addnodes.pending_xref('', refdomain='cppkokkos',
                                           reftype='identifier',
                                           reftarget=targetText, modname=None,
                                           classname=None)
-            pnode['cpp:parent_key'] = symbol.get_lookup_key()
+            pnode['cppkokkos:parent_key'] = symbol.get_lookup_key()
             # Render the identifier part, but collapse it into a string
             # and make that the a link to this operator.
             # E.g., if it is 'operator SomeType', then 'SomeType' becomes
@@ -3448,7 +3197,7 @@ class ASTEnum(ASTBase):
     def describe_signature(self, signode: TextElement, mode: str,
                            env: "BuildEnvironment", symbol: "Symbol") -> None:
         verify_description_mode(mode)
-        # self.scoped has been done by the CPPEnumObject
+        # self.scoped has been done by the CPPKokkosEnumObject
         self.attrs.describe_signature(signode)
         if len(self.attrs) != 0:
             signode += addnodes.desc_sig_space()
@@ -3917,7 +3666,7 @@ class ASTDeclaration(ASTBase):
         self.semicolon = semicolon
 
         self.symbol: Symbol = None
-        # set by CPPObject._add_enumerator_to_parent
+        # set by CPPKokkosObject._add_enumerator_to_parent
         self.enumeratorScopedSymbol: Symbol = None
 
     def clone(self) -> "ASTDeclaration":
@@ -4801,7 +4550,7 @@ class Symbol:
                 elif ourChild.docname != otherChild.docname:
                     name = str(ourChild.declaration)
                     msg = __("Duplicate C++ declaration, also defined at %s:%s.\n"
-                             "Declaration is '.. cpp:%s:: %s'.")
+                             "Declaration is '.. cppkokkos:%s:: %s'.")
                     msg = msg % (ourChild.docname, ourChild.line,
                                  ourChild.declaration.directiveType, name)
                     logger.warning(msg, location=(otherChild.docname, otherChild.line))
@@ -5095,11 +4844,11 @@ class DefinitionParser(BaseParser):
 
     @property
     def id_attributes(self):
-        return self.config.cpp_id_attributes
+        return self.config.cppkokkos_id_attributes
 
     @property
     def paren_attributes(self):
-        return self.config.cpp_paren_attributes
+        return self.config.cppkokkos_paren_attributes
 
     def _parse_string(self) -> str:
         if self.current_char != '"':
@@ -6659,7 +6408,7 @@ class DefinitionParser(BaseParser):
         return ASTUnion(name, attrs)
 
     def _parse_enum(self) -> ASTEnum:
-        scoped = None  # is set by CPPEnumObject
+        scoped = None  # is set by CPPKokkosEnumObject
         attrs = self._parse_attribute_list()
         name = self._parse_nested_name()
         self.skip_ws()
@@ -7074,7 +6823,7 @@ def _make_phony_error_name() -> ASTNestedName:
     return ASTNestedName([nne], [False], rooted=False)
 
 
-class CPPObject(ObjectDescription[ASTDeclaration]):
+class CPPKokkosObject(ObjectDescription[ASTDeclaration]):
     """Description of a C++ language object."""
 
     doc_field_types: List[Field] = [
@@ -7163,7 +6912,7 @@ class CPPObject(ObjectDescription[ASTDeclaration]):
                 break
         if not isInConcept and 'noindexentry' not in self.options:
             strippedName = name
-            for prefix in self.env.config.cpp_index_common_prefix:
+            for prefix in self.env.config.cppkokkos_index_common_prefix:
                 if name.startswith(prefix):
                     strippedName = strippedName[len(prefix):]
                     break
@@ -7172,7 +6921,7 @@ class CPPObject(ObjectDescription[ASTDeclaration]):
 
         if newestId not in self.state.document.ids:
             # if the name is not unique, the first one will win
-            names = self.env.domaindata['cpp']['names']
+            names = self.env.domaindata['cppkokkos']['names']
             if name not in names:
                 names[name] = ast.symbol.docname
             # always add the newest id
@@ -7206,23 +6955,23 @@ class CPPObject(ObjectDescription[ASTDeclaration]):
 
     def run(self) -> List[Node]:
         env = self.state.document.settings.env  # from ObjectDescription.run
-        if 'cpp:parent_symbol' not in env.temp_data:
-            root = env.domaindata['cpp']['root_symbol']
-            env.temp_data['cpp:parent_symbol'] = root
-            env.ref_context['cpp:parent_key'] = root.get_lookup_key()
+        if 'cppkokkos:parent_symbol' not in env.temp_data:
+            root = env.domaindata['cppkokkos']['root_symbol']
+            env.temp_data['cppkokkos:parent_symbol'] = root
+            env.ref_context['cppkokkos:parent_key'] = root.get_lookup_key()
 
         # The lookup keys assume that no nested scopes exists inside overloaded functions.
         # (see also #5191)
         # Example:
-        # .. cpp:function:: void f(int)
-        # .. cpp:function:: void f(double)
+        # .. cppkokkos:function:: void f(int)
+        # .. cppkokkos:function:: void f(double)
         #
-        #    .. cpp:function:: void g()
+        #    .. cppkokkos:function:: void g()
         #
-        #       :cpp:any:`boom`
+        #       :cppkokkos:any:`boom`
         #
         # So we disallow any signatures inside functions.
-        parentSymbol = env.temp_data['cpp:parent_symbol']
+        parentSymbol = env.temp_data['cppkokkos:parent_symbol']
         parentDecl = parentSymbol.declaration
         if parentDecl is not None and parentDecl.objectType == 'function':
             msg = "C++ declarations inside functions are not supported." \
@@ -7233,16 +6982,16 @@ class CPPObject(ObjectDescription[ASTDeclaration]):
             ), location=self.get_location())
             name = _make_phony_error_name()
             symbol = parentSymbol.add_name(name)
-            env.temp_data['cpp:last_symbol'] = symbol
+            env.temp_data['cppkokkos:last_symbol'] = symbol
             return []
         # When multiple declarations are made in the same directive
         # they need to know about each other to provide symbol lookup for function parameters.
         # We use last_symbol to store the latest added declaration in a directive.
-        env.temp_data['cpp:last_symbol'] = None
+        env.temp_data['cppkokkos:last_symbol'] = None
         return super().run()
 
     def handle_signature(self, sig: str, signode: desc_signature) -> ASTDeclaration:
-        parentSymbol: Symbol = self.env.temp_data['cpp:parent_symbol']
+        parentSymbol: Symbol = self.env.temp_data['cppkokkos:parent_symbol']
 
         parser = DefinitionParser(sig, location=signode, config=self.env.config)
         try:
@@ -7254,7 +7003,7 @@ class CPPObject(ObjectDescription[ASTDeclaration]):
             # the possibly inner declarations.
             name = _make_phony_error_name()
             symbol = parentSymbol.add_name(name)
-            self.env.temp_data['cpp:last_symbol'] = symbol
+            self.env.temp_data['cppkokkos:last_symbol'] = symbol
             raise ValueError from e
 
         try:
@@ -7263,17 +7012,17 @@ class CPPObject(ObjectDescription[ASTDeclaration]):
             # append the new declaration to the sibling list
             assert symbol.siblingAbove is None
             assert symbol.siblingBelow is None
-            symbol.siblingAbove = self.env.temp_data['cpp:last_symbol']
+            symbol.siblingAbove = self.env.temp_data['cppkokkos:last_symbol']
             if symbol.siblingAbove is not None:
                 assert symbol.siblingAbove.siblingBelow is None
                 symbol.siblingAbove.siblingBelow = symbol
-            self.env.temp_data['cpp:last_symbol'] = symbol
+            self.env.temp_data['cppkokkos:last_symbol'] = symbol
         except _DuplicateSymbolError as e:
             # Assume we are actually in the old symbol,
             # instead of the newly created duplicate.
-            self.env.temp_data['cpp:last_symbol'] = e.symbol
+            self.env.temp_data['cppkokkos:last_symbol'] = e.symbol
             msg = __("Duplicate C++ declaration, also defined at %s:%s.\n"
-                     "Declaration is '.. cpp:%s:: %s'.")
+                     "Declaration is '.. cppkokkos:%s:: %s'.")
             msg = msg % (e.symbol.docname, e.symbol.line,
                          self.display_object_type, sig)
             logger.warning(msg, location=signode)
@@ -7289,34 +7038,34 @@ class CPPObject(ObjectDescription[ASTDeclaration]):
         return ast
 
     def before_content(self) -> None:
-        lastSymbol: Symbol = self.env.temp_data['cpp:last_symbol']
+        lastSymbol: Symbol = self.env.temp_data['cppkokkos:last_symbol']
         assert lastSymbol
-        self.oldParentSymbol = self.env.temp_data['cpp:parent_symbol']
-        self.oldParentKey: LookupKey = self.env.ref_context['cpp:parent_key']
-        self.env.temp_data['cpp:parent_symbol'] = lastSymbol
-        self.env.ref_context['cpp:parent_key'] = lastSymbol.get_lookup_key()
+        self.oldParentSymbol = self.env.temp_data['cppkokkos:parent_symbol']
+        self.oldParentKey: LookupKey = self.env.ref_context['cppkokkos:parent_key']
+        self.env.temp_data['cppkokkos:parent_symbol'] = lastSymbol
+        self.env.ref_context['cppkokkos:parent_key'] = lastSymbol.get_lookup_key()
 
     def after_content(self) -> None:
-        self.env.temp_data['cpp:parent_symbol'] = self.oldParentSymbol
-        self.env.ref_context['cpp:parent_key'] = self.oldParentKey
+        self.env.temp_data['cppkokkos:parent_symbol'] = self.oldParentSymbol
+        self.env.ref_context['cppkokkos:parent_key'] = self.oldParentKey
 
 
-class CPPTypeObject(CPPObject):
+class CPPKokkosTypeObject(CPPKokkosObject):
     object_type = 'type'
 
 
-class CPPConceptObject(CPPObject):
+class CPPKokkosConceptObject(CPPKokkosObject):
     object_type = 'concept'
 
 
-class CPPMemberObject(CPPObject):
+class CPPKokkosMemberObject(CPPKokkosObject):
     object_type = 'member'
 
 
-class CPPFunctionObject(CPPObject):
+class CPPKokkosFunctionObject(CPPKokkosObject):
     object_type = 'function'
 
-    doc_field_types = CPPObject.doc_field_types + [
+    doc_field_types = CPPKokkosObject.doc_field_types + [
         GroupedField('parameter', label=_('Parameters'),
                      names=('param', 'parameter', 'arg', 'argument'),
                      can_collapse=True),
@@ -7331,7 +7080,7 @@ class CPPFunctionObject(CPPObject):
     ]
 
 
-class CPPClassObject(CPPObject):
+class CPPKokkosClassObject(CPPKokkosObject):
     object_type = 'class'
 
     @property
@@ -7341,19 +7090,19 @@ class CPPClassObject(CPPObject):
         return self.objtype
 
 
-class CPPUnionObject(CPPObject):
+class CPPKokkosUnionObject(CPPKokkosObject):
     object_type = 'union'
 
 
-class CPPEnumObject(CPPObject):
+class CPPKokkosEnumObject(CPPKokkosObject):
     object_type = 'enum'
 
 
-class CPPEnumeratorObject(CPPObject):
+class CPPKokkosEnumeratorObject(CPPKokkosObject):
     object_type = 'enumerator'
 
 
-class CPPNamespaceObject(SphinxDirective):
+class CPPKokkosNamespaceObject(SphinxDirective):
     """
     This directive is just to tell Sphinx that we're documenting stuff in
     namespace foo.
@@ -7366,7 +7115,7 @@ class CPPNamespaceObject(SphinxDirective):
     option_spec: OptionSpec = {}
 
     def run(self) -> List[Node]:
-        rootSymbol = self.env.domaindata['cpp']['root_symbol']
+        rootSymbol = self.env.domaindata['cppkokkos']['root_symbol']
         if self.arguments[0].strip() in ('NULL', '0', 'nullptr'):
             symbol = rootSymbol
             stack: List[Symbol] = []
@@ -7383,13 +7132,13 @@ class CPPNamespaceObject(SphinxDirective):
                 ast = ASTNamespace(name, None)
             symbol = rootSymbol.add_name(ast.nestedName, ast.templatePrefix)
             stack = [symbol]
-        self.env.temp_data['cpp:parent_symbol'] = symbol
-        self.env.temp_data['cpp:namespace_stack'] = stack
-        self.env.ref_context['cpp:parent_key'] = symbol.get_lookup_key()
+        self.env.temp_data['cppkokkos:parent_symbol'] = symbol
+        self.env.temp_data['cppkokkos:namespace_stack'] = stack
+        self.env.ref_context['cppkokkos:parent_key'] = symbol.get_lookup_key()
         return []
 
 
-class CPPNamespacePushObject(SphinxDirective):
+class CPPKokkosNamespacePushObject(SphinxDirective):
     has_content = False
     required_arguments = 1
     optional_arguments = 0
@@ -7409,19 +7158,19 @@ class CPPNamespacePushObject(SphinxDirective):
             logger.warning(e, location=self.get_location())
             name = _make_phony_error_name()
             ast = ASTNamespace(name, None)
-        oldParent = self.env.temp_data.get('cpp:parent_symbol', None)
+        oldParent = self.env.temp_data.get('cppkokkos:parent_symbol', None)
         if not oldParent:
-            oldParent = self.env.domaindata['cpp']['root_symbol']
+            oldParent = self.env.domaindata['cppkokkos']['root_symbol']
         symbol = oldParent.add_name(ast.nestedName, ast.templatePrefix)
-        stack = self.env.temp_data.get('cpp:namespace_stack', [])
+        stack = self.env.temp_data.get('cppkokkos:namespace_stack', [])
         stack.append(symbol)
-        self.env.temp_data['cpp:parent_symbol'] = symbol
-        self.env.temp_data['cpp:namespace_stack'] = stack
-        self.env.ref_context['cpp:parent_key'] = symbol.get_lookup_key()
+        self.env.temp_data['cppkokkos:parent_symbol'] = symbol
+        self.env.temp_data['cppkokkos:namespace_stack'] = stack
+        self.env.ref_context['cppkokkos:parent_key'] = symbol.get_lookup_key()
         return []
 
 
-class CPPNamespacePopObject(SphinxDirective):
+class CPPKokkosNamespacePopObject(SphinxDirective):
     has_content = False
     required_arguments = 0
     optional_arguments = 0
@@ -7429,7 +7178,7 @@ class CPPNamespacePopObject(SphinxDirective):
     option_spec: OptionSpec = {}
 
     def run(self) -> List[Node]:
-        stack = self.env.temp_data.get('cpp:namespace_stack', None)
+        stack = self.env.temp_data.get('cppkokkos:namespace_stack', None)
         if not stack or len(stack) == 0:
             logger.warning("C++ namespace pop on empty stack. Defaulting to global scope.",
                            location=self.get_location())
@@ -7439,10 +7188,10 @@ class CPPNamespacePopObject(SphinxDirective):
         if len(stack) > 0:
             symbol = stack[-1]
         else:
-            symbol = self.env.domaindata['cpp']['root_symbol']
-        self.env.temp_data['cpp:parent_symbol'] = symbol
-        self.env.temp_data['cpp:namespace_stack'] = stack
-        self.env.ref_context['cpp:parent_key'] = symbol.get_lookup_key()
+            symbol = self.env.domaindata['cppkokkos']['root_symbol']
+        self.env.temp_data['cppkokkos:parent_symbol'] = symbol
+        self.env.temp_data['cppkokkos:namespace_stack'] = stack
+        self.env.ref_context['cppkokkos:parent_key'] = symbol.get_lookup_key()
         return []
 
 
@@ -7454,11 +7203,11 @@ class AliasNode(nodes.Element):
         self.sig = sig
         self.aliasOptions = aliasOptions
         if env is not None:
-            if 'cpp:parent_symbol' not in env.temp_data:
-                root = env.domaindata['cpp']['root_symbol']
-                env.temp_data['cpp:parent_symbol'] = root
-                env.ref_context['cpp:parent_key'] = root.get_lookup_key()
-            self.parentKey = env.ref_context['cpp:parent_key']
+            if 'cppkokkos:parent_symbol' not in env.temp_data:
+                root = env.domaindata['cppkokkos']['root_symbol']
+                env.temp_data['cppkokkos:parent_symbol'] = root
+                env.ref_context['cppkokkos:parent_key'] = root.get_lookup_key()
+            self.parentKey = env.ref_context['cppkokkos:parent_key']
         else:
             assert parentKey is not None
             self.parentKey = parentKey
@@ -7496,7 +7245,7 @@ class AliasTransform(SphinxTransform):
                 desc = addnodes.desc()
                 content.append(desc)
                 desc.document = document
-                desc['domain'] = 'cpp'
+                desc['domain'] = 'cppkokkos'
                 # 'desctype' is a backwards compatible attribute
                 desc['objtype'] = desc['desctype'] = 'alias'
                 desc['noindex'] = True
@@ -7539,7 +7288,7 @@ class AliasTransform(SphinxTransform):
                 node.replace_self(signode)
                 continue
 
-            rootSymbol: Symbol = self.env.domains['cpp'].data['root_symbol']
+            rootSymbol: Symbol = self.env.domains['cppkokkos'].data['root_symbol']
             parentSymbol: Symbol = rootSymbol.direct_lookup(parentKey)
             if not parentSymbol:
                 print("Target: ", sig)
@@ -7603,7 +7352,7 @@ class AliasTransform(SphinxTransform):
                 node.replace_self(nodes)
 
 
-class CPPAliasObject(ObjectDescription):
+class CPPKokkosAliasObject(ObjectDescription):
     option_spec: OptionSpec = {
         'maxdepth': directives.nonnegative_int,
         'noroot': directives.flag,
@@ -7650,7 +7399,7 @@ class CPPAliasObject(ObjectDescription):
         return [node]
 
 
-class CPPXRefRole(XRefRole):
+class CPPKokkosXRefRole(XRefRole):
     def process_link(self, env: BuildEnvironment, refnode: Element, has_explicit_title: bool,
                      title: str, target: str) -> Tuple[str, str]:
         refnode.attributes.update(env.ref_context)
@@ -7680,15 +7429,15 @@ class CPPXRefRole(XRefRole):
         return title, target
 
 
-class CPPExprRole(SphinxRole):
+class CPPKokkosExprRole(SphinxRole):
     def __init__(self, asCode: bool) -> None:
         super().__init__()
         if asCode:
             # render the expression as inline code
-            self.class_type = 'cpp-expr'
+            self.class_type = 'cppkokkos-expr'
         else:
             # render the expression as inline text
-            self.class_type = 'cpp-texpr'
+            self.class_type = 'cppkokkos-texpr'
 
     def run(self) -> Tuple[List[Node], List[system_message]]:
         text = self.text.replace('\n', ' ')
@@ -7702,18 +7451,18 @@ class CPPExprRole(SphinxRole):
             logger.warning('Unparseable C++ expression: %r\n%s', text, ex,
                            location=self.get_location())
             # see below
-            return [addnodes.desc_inline('cpp', text, text, classes=[self.class_type])], []
-        parentSymbol = self.env.temp_data.get('cpp:parent_symbol', None)
+            return [addnodes.desc_inline('cppkokkos', text, text, classes=[self.class_type])], []
+        parentSymbol = self.env.temp_data.get('cppkokkos:parent_symbol', None)
         if parentSymbol is None:
-            parentSymbol = self.env.domaindata['cpp']['root_symbol']
+            parentSymbol = self.env.domaindata['cppkokkos']['root_symbol']
         # ...most if not all of these classes should really apply to the individual references,
         # not the container node
-        signode = addnodes.desc_inline('cpp', classes=[self.class_type])
+        signode = addnodes.desc_inline('cppkokkos', classes=[self.class_type])
         ast.describe_signature(signode, 'markType', self.env, parentSymbol)
         return [signode], []
 
 
-class CPPDomain(Domain):
+class CPPKokkosDomain(Domain):
     """C++ language domain.
 
     There are two 'object type' attributes being used::
@@ -7725,7 +7474,7 @@ class CPPDomain(Domain):
       object_types dict below. They are the core different types of declarations in C++ that
       one can document.
     """
-    name = 'cpp'
+    name = 'cppkokkos'
     label = 'C++'
     object_types = {
         'class':      ObjType(_('class'),      'class', 'struct',   'identifier', 'type'),
@@ -7744,39 +7493,39 @@ class CPPDomain(Domain):
 
     directives = {
         # declarations
-        'class': CPPClassObject,
-        'struct': CPPClassObject,
-        'union': CPPUnionObject,
-        'function': CPPFunctionObject,
-        'member': CPPMemberObject,
-        'var': CPPMemberObject,
-        'type': CPPTypeObject,
-        'concept': CPPConceptObject,
-        'enum': CPPEnumObject,
-        'enum-struct': CPPEnumObject,
-        'enum-class': CPPEnumObject,
-        'enumerator': CPPEnumeratorObject,
+        'class': CPPKokkosClassObject,
+        'struct': CPPKokkosClassObject,
+        'union': CPPKokkosUnionObject,
+        'function': CPPKokkosFunctionObject,
+        'member': CPPKokkosMemberObject,
+        'var': CPPKokkosMemberObject,
+        'type': CPPKokkosTypeObject,
+        'concept': CPPKokkosConceptObject,
+        'enum': CPPKokkosEnumObject,
+        'enum-struct': CPPKokkosEnumObject,
+        'enum-class': CPPKokkosEnumObject,
+        'enumerator': CPPKokkosEnumeratorObject,
         # scope control
-        'namespace': CPPNamespaceObject,
-        'namespace-push': CPPNamespacePushObject,
-        'namespace-pop': CPPNamespacePopObject,
+        'namespace': CPPKokkosNamespaceObject,
+        'namespace-push': CPPKokkosNamespacePushObject,
+        'namespace-pop': CPPKokkosNamespacePopObject,
         # other
-        'alias': CPPAliasObject
+        'alias': CPPKokkosAliasObject
     }
     roles = {
-        'any': CPPXRefRole(),
-        'class': CPPXRefRole(),
-        'struct': CPPXRefRole(),
-        'union': CPPXRefRole(),
-        'func': CPPXRefRole(fix_parens=True),
-        'member': CPPXRefRole(),
-        'var': CPPXRefRole(),
-        'type': CPPXRefRole(),
-        'concept': CPPXRefRole(),
-        'enum': CPPXRefRole(),
-        'enumerator': CPPXRefRole(),
-        'expr': CPPExprRole(asCode=True),
-        'texpr': CPPExprRole(asCode=False)
+        'any': CPPKokkosXRefRole(),
+        'class': CPPKokkosXRefRole(),
+        'struct': CPPKokkosXRefRole(),
+        'union': CPPKokkosXRefRole(),
+        'func': CPPKokkosXRefRole(fix_parens=True),
+        'member': CPPKokkosXRefRole(),
+        'var': CPPKokkosXRefRole(),
+        'type': CPPKokkosXRefRole(),
+        'concept': CPPKokkosXRefRole(),
+        'enum': CPPKokkosXRefRole(),
+        'enumerator': CPPKokkosXRefRole(),
+        'expr': CPPKokkosExprRole(asCode=True),
+        'texpr': CPPKokkosExprRole(asCode=False)
     }
     initial_data = {
         'root_symbol': Symbol(None, None, None, None, None, None, None),
@@ -7864,7 +7613,7 @@ class CPPDomain(Domain):
             logger.warning('Unparseable C++ cross-reference: %r\n%s', t, ex,
                            location=node)
             return None, None
-        parentKey: LookupKey = node.get("cpp:parent_key", None)
+        parentKey: LookupKey = node.get("cppkokkos:parent_key", None)
         rootSymbol = self.data['root_symbol']
         if parentKey:
             parentSymbol: Symbol = rootSymbol.direct_lookup(parentKey)
@@ -7914,7 +7663,7 @@ class CPPDomain(Domain):
                 raise NoUri(txtName, typ)
             return None, None
 
-        if typ.startswith('cpp:'):
+        if typ.startswith('cppkokkos:'):
             typ = typ[4:]
         declTyp = s.declaration.objectType
 
@@ -7927,7 +7676,7 @@ class CPPDomain(Domain):
             print("Type is %s, declaration type is %s" % (typ, declTyp))
             assert False
         if not checkType():
-            logger.warning("cpp:%s targets a %s (%s).",
+            logger.warning("cppkokkos:%s targets a %s (%s).",
                            typ, s.declaration.objectType,
                            s.get_full_nested_name(),
                            location=node)
@@ -7999,9 +7748,9 @@ class CPPDomain(Domain):
                                                         'any', target, node, contnode)
         if retnode:
             if objtype == 'templateParam':
-                return [('cpp:templateParam', retnode)]
+                return [('cppkokkos:templateParam', retnode)]
             else:
-                return [('cpp:' + self.role_for_objtype(objtype), retnode)]
+                return [('cppkokkos:' + self.role_for_objtype(objtype), retnode)]
         return []
 
     def get_objects(self) -> Iterator[Tuple[str, str, str, str, str, int]]:
@@ -8022,7 +7771,7 @@ class CPPDomain(Domain):
         target = node.get('reftarget', None)
         if target is None:
             return None
-        parentKey: LookupKey = node.get("cpp:parent_key", None)
+        parentKey: LookupKey = node.get("cppkokkos:parent_key", None)
         if parentKey is None or len(parentKey.data) <= 0:
             return None
 
@@ -8033,24 +7782,25 @@ class CPPDomain(Domain):
 
 
 def setup(app: Sphinx) -> Dict[str, Any]:
-    app.add_domain(CPPDomain)
-    app.add_config_value("cpp_index_common_prefix", [], 'env')
-    app.add_config_value("cpp_id_attributes", [], 'env')
-    app.add_config_value("cpp_paren_attributes", [], 'env')
+    app.add_domain(CPPKokkosDomain)
+    app.add_lexer("cppkokkos", CppLexer)
+    app.add_config_value("cppkokkos_index_common_prefix", [], 'env')
+    app.add_config_value("cppkokkos_id_attributes", [], 'env')
+    app.add_config_value("cppkokkos_paren_attributes", [], 'env')
     app.add_post_transform(AliasTransform)
 
     # debug stuff
-    app.add_config_value("cpp_debug_lookup", False, '')
-    app.add_config_value("cpp_debug_show_tree", False, '')
+    app.add_config_value("cppkokkos_debug_lookup", False, '')
+    app.add_config_value("cppkokkos_debug_show_tree", False, '')
 
     def initStuff(app):
-        Symbol.debug_lookup = app.config.cpp_debug_lookup
-        Symbol.debug_show_tree = app.config.cpp_debug_show_tree
-        app.config.cpp_index_common_prefix.sort(reverse=True)
+        Symbol.debug_lookup = app.config.cppkokkos_debug_lookup
+        Symbol.debug_show_tree = app.config.cppkokkos_debug_show_tree
+        app.config.cppkokkos_index_common_prefix.sort(reverse=True)
     app.connect("builder-inited", initStuff)
 
     return {
-        'version': 'builtin',
+        'version': '0.1',
         'env_version': 6,
         'parallel_read_safe': True,
         'parallel_write_safe': True,
