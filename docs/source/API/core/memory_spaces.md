@@ -47,6 +47,18 @@ For the following backends `Kokkos::SharedSpace` is pointing to the correspoindi
 - SYCL -> `SYCLSharedUSMSpace`
 - Only backends running on host -> `HostSpace`
 
+(SharedHostPinnedSpace)=
+## `Kokkos::SharedHostPinnedSpace`
+
+`Kokkos::SharedHostPinnedSpace` <sup>since 4.0</sup> is a [`MemorySpace` type](MemorySpaceConcept) alias which is accessible by all enabled [`ExecutionSpace` types](ExecutionSpaceConcept). The memory stays pinned on the host and is availabe on the device via zero copy access in small chunks (cache lines, memory pages, etc. depending on the backend). Writes to the memory in one `ExecutionSpace` become visible in other `ExecutionSpaces` at synchronization events. Which events trigger a synchronization depend on the backend specifics. Nevertheless, fences are synchronization events on all backends.
+Availability can be checked with the preprocessor define `KOKKOS_HAS_SHARED_HOST_PINNED_SPACE` or the `constexpr bool Kokkos::has_shared_host_pinned_space`.
+For the following backends `Kokkos::SharedHostPinnedSpace` is pointing to the correspoinding [`MemorySpace` type](MemorySpaceConcept):
+
+- Cuda -> `CudaHostPinnedSpace`
+- HIP -> `HipHostPinnedSpace`
+- SYCL -> `SYCLHostUSMSpace`
+- Only backends running on host -> `HostSpace`
+
 (MemorySpaceConcept)=
 ## `Kokkos::MemorySpaceConcept`
 
