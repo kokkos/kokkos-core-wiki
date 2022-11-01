@@ -103,7 +103,7 @@ Enable Options
       * Enable relocatable device code (RDC) for CUDA
       * ``OFF``
 
-    * * ``Kokkos_ENABLE_CUDA_UVM``
+    * * ``Kokkos_ENABLE_CUDA_UVM`` :red:`Deprecated since 4.0` use `SharedSpace <API/core/memory_spaces.html>`_ instead
       * Use unified memory (UM) by default for CUDA
       * ``OFF``
 
