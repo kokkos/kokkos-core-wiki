@@ -181,7 +181,7 @@ int main(int argc, char* argv[]) {
    Kokkos::parallel_reduce("Loop1", N, KOKKOS_LAMBDA (const int& i, double& lsum, double& lmin ) {
      lsum += 1.0*i;
      lmin = lmin < 1.0*i ? lmin : 1.0*i;
-   },sum,min);
+   },sum,Min<double>(min));
 
    printf("Result: %i %lf %lf\n",N,sum,min);
    Kokkos::finalize();
