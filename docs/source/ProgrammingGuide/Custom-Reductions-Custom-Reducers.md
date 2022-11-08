@@ -81,9 +81,6 @@ struct SumMyArray {
 
   // Required
   KOKKOS_INLINE_FUNCTION
-  void join(value_type& dest, const value_type& src) const { dest += src; }
-
-  KOKKOS_INLINE_FUNCTION
   void join(value_type& dest, const value_type& src) const {
     dest += src;
   }
