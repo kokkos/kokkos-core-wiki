@@ -15,7 +15,7 @@ Usage:
 
 Create View allocation parameter bundle from argument list. Valid argument list members are:
 
-* label as :cpp:`C`\ -string or :cpp:`std::string`
+* label as :cpp:`C`-string or :cpp:`std::string`
 * memory space instance of the :cpp:`View::memory_space` type
 * execution space instance able to access :cpp:`View::memory_space`
 * :cpp:`Kokkos::WithoutInitializing` to bypass initialization
@@ -26,33 +26,28 @@ Synopsis
 --------
 
 .. cpp:function:: template <class... Args> \
-                  **implementation-detail** \
-                  view_alloc(Args const&... args);
+                  view_alloc(Args const&... args)
 
 .. cpp:function:: template <class... Args> \
-                  KOKKOS_FUNCTION \
-                  **implementation-detail** \
-                  view_wrap(Args const&... args);
+                  view_wrap(Args const&... args)
 
 Description
 -----------
 
 .. cpp:function:: template <class... Args> \
-                  **implementation-detail** \
-                  view_alloc(Args const&... args);
+                  view_alloc(Args const&... args)
 
   Create View allocation parameter bundle from argument list.
 
   Restrictions:
 
-  * ``args``\ : Cannot contain a pointer to memory.
+  * ``args`` : Cannot contain a pointer to memory.
 
 .. cpp:function:: template <class... Args> \
-                  **implementation-detail** \
-                  view_alloc(Args const&... args);
+                  view_alloc(Args const&... args)
 
   Create View allocation parameter bundle from argument list.
 
   Restrictions:
 
-  * ``args``\ : Can only be a pointer to memory.
+  * ``args`` : Can only be a pointer to memory.
