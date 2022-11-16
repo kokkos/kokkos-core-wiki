@@ -1,7 +1,7 @@
 # Deprecation
 
 
-## Kokkos-4.0 and Kokkos-3.7.0
+## Kokkos-3.7.01 - 4.0*
 
 
   | Deprecated Feature  | Replacement          | Reason for Deprecating   |
@@ -19,3 +19,7 @@
   | `--[kokkos-]numa` command-line argument and `KOKKOS_NUMA` environment variable | `--kokkos-num-threads`| Harmonize option nomenclature with that of C++ `std::thread` library
   | `--[kokkos-]threads` command-line argument | `--kokkos-num-threads` | Improve API
   | Warn about `parallel_reduce` cases that call `join()` with arguments qualified by `volatile` keyword | Remove `volatile` overloads | Streamline API
+
+
+
+* Kokkos-4.0 will require C++17  
