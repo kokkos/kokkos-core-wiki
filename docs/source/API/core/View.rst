@@ -49,3 +49,4 @@ The following facilities are available:
    ./view/view
    ./view/view_alloc
    ./view/view_like
+   ./view/view_test
