@@ -9,11 +9,20 @@
 (TeamThreadRange)=
 ## `Kokkos::TeamThreadRange`
 
+(TeamThreadMDRange)=
+## `Kokkos::TeamThreadMDRange`
+
 (TeamVectorRange)=
 ## `Kokkos::TeamVectorRange`
 
+(TeamVectorMDRange)=
+## `Kokkos::TeamVectorMDRange`
+
 (ThreadVectorRange)=
 ## `Kokkos::ThreadVectorRange`
+
+(ThreadVectorMDRange)=
+## `Kokkos::ThreadVectorMDRange`
 
 Header File: `Kokkos_Core.hpp`
 

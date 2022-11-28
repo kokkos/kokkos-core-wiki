@@ -245,8 +245,11 @@
 <li class="toctree-l3"><a class="reference internal" href="policies/RangePolicy.html"><code class="docutils literal notranslate"><span class="pre">RangePolicy</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="policies/TeamHandleConcept.html"><code class="docutils literal notranslate"><span class="pre">TeamHandleConcept</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="policies/TeamPolicy.html"><code class="docutils literal notranslate"><span class="pre">TeamPolicy</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="policies/TeamThreadMDRange.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::TeamThreadMDRange</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="policies/TeamThreadRange.html"><code class="docutils literal notranslate"><span class="pre">TeamThreadRange</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="policies/TeamVectorMDRange.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::TeamVectorMDRange</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="policies/TeamVectorRange.html"><code class="docutils literal notranslate"><span class="pre">TeamVectorRange</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="policies/ThreadVectorMDRange.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::ThreadVectorMDRange</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="policies/ThreadVectorRange.html"><code class="docutils literal notranslate"><span class="pre">ThreadVectorRange</span></code></a></li>
 </ul>
 </li>
@@ -528,13 +531,22 @@
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><a class="reference external" href="policies/TeamThreadRange.html">TeamThreadRange</a></p></td>
+<tr class="row-even"><td><p><a class="reference external" href="policies/TeamThreadMDRange.html">TeamThreadMDRange</a></p></td>
+<td><p>Used inside of a TeamPolicy kernel to perform nested parallel loops over a multidimensional range split over threads of a team.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="policies/TeamThreadRange.html">TeamThreadRange</a></p></td>
 <td><p>Used inside of a TeamPolicy kernel to perform nested parallel loops split over threads of a team.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="policies/TeamVectorMDRange.html">TeamVectorMDRange</a></p></td>
+<td><p>Used inside of a TeamPolicy kernel to perform nested parallel loops over a multidimensional range split over threads of a team and their vector lanes.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference external" href="policies/TeamVectorRange.html">TeamVectorRange</a></p></td>
 <td><p>Used inside of a TeamPolicy kernel to perform nested parallel loops split over threads of a team and their vector lanes.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference external" href="policies/ThreadVectorRange.html">ThreadVectorRange</a></p></td>
+<tr class="row-even"><td><p><a class="reference external" href="policies/ThreadVectorMDRange.html">ThreadVectorMDRange</a></p></td>
+<td><p>Used inside of a TeamPolicy kernel to perform nested parallel loops over a multidimensional range with vector lanes of a thread.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="policies/ThreadVectorRange.html">ThreadVectorRange</a></p></td>
 <td><p>Used inside of a TeamPolicy kernel to perform nested parallel loops with vector lanes of a thread.</p></td>
 </tr>
 </tbody>
