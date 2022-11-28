@@ -19,3 +19,16 @@ To clean:
 cd docs
 make clean
 ```
+
+## Displaying the site locally
+
+`docs/generated_docs/index.html` can be opened in a web browser, or alternatively you can use python's built-in http server:
+
+```bash
+cd docs/generated_docs
+python3 -m http.server
+```
+
+Then, navigate to http://localhost:8000
+
+Alternatively, if you would like to auto refresh every time you run make, the documentation works with [httpwatcher](https://pypi.org/project/httpwatcher/).
