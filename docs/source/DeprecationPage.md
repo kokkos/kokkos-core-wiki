@@ -4,7 +4,7 @@
 ## Kokkos-3.7.01 - 4.0*
 
 
-  | Deprecated Feature  | Replacement          | Reason for Deprecating   |
+  | *Deprecated Feature*  | *Replacement*          | *Reason for Deprecating*   |
   | --------------------| -------------------- | ------------------------ |
   | `Kokkos::is_reducer_type` | `Kokkos::is_reducer` | Improve API
   | `OffsetView` constructors taking `index_list_type` | `Kokkos::pair` (CPU and GPU) | Streamline arguments to `::pair` function
