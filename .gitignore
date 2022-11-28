@@ -8,3 +8,5 @@
 /doctrees
 # Generated docs
 /docs/generated_docs
+
+__pycache__/
