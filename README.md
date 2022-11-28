@@ -22,6 +22,8 @@ make clean
 
 ## Displaying the site locally
 
+`docs/generated_docs/index.html` can be opened in a web browser, or alternatively you can use python's built-in http server:
+
 ```bash
 cd docs/generated_docs
 python3 -m http.server
