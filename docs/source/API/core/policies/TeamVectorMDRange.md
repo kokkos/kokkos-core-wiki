@@ -1,4 +1,4 @@
-# `Kokkos::TeamVectorMDRange`
+# `TeamVectorMDRange`
 
 Header File: `Kokkos_Core.hpp`
 
@@ -47,22 +47,6 @@ used inside of hierarchical parallelism.
 ## Examples
 
   ```c++
-   typedef TeamPolicy<>::member_type team_handle;
-   parallel_for(TeamPolicy<>(N,AUTO,4), KOKKOS_LAMBDA (const team_handle& team) {
-     int n = team.league_rank();
-     parallel_for(TeamVectorRange(team,M), [&] (const int& i) {
-       A(n,i) = B(n) + i;
-     });
-     team.team_barrier();
-     int team_sum;
-     parallel_reduce(TeamVectorRange(team,M), [&] (const int& i, int& lsum) {
-       lsum += A(n,i);
-     },team_sum);
-     single(PerTeam(team),[&] () {
-       A_rowsum(n) += team_sum;
-     });
-   });
-
    using TeamHandle = TeamPolicy<>::member_type;
 
    parallel_for(TeamPolicy<>(N,AUTO),
@@ -74,9 +58,9 @@ used inside of hierarchical parallelism.
            TeamVectorMDRange<Rank<4>, TeamType>(
                team, n0, n1, n2, n3);
 
-       parallel_for(teamVectorMDRange
+       parallel_for(teamVectorMDRange,
          [=](int i0, int i1, int i2, int i3) {
-           A(leagueRank,i0) = B(leagueRank, i1) + C(i1, i2, i3);
+           A(leagueRank, i0, i1, i2, i3) = B(leagueRank, i1) + C(i1, i2, i3);
        });
 
        team.team_barrier();
@@ -93,7 +77,6 @@ used inside of hierarchical parallelism.
 
        A_rowSum[leagueRank] = leagueSum;
      });
-
  
   ```
 
