@@ -46,7 +46,6 @@ public:
  typedef typename original_view_type::reference_type original_reference_type;
  friend class ScatterAccess<DataType, Operation, ExecSpace, Layout, {ScatterNonDuplicated,ScatterDuplicated}, contribution, ScatterNonAtomic>;
  friend class ScatterAccess<DataType, Operation, ExecSpace, Layout, {ScatterNonDuplicated,ScatterDuplicated}, contribution, ScatterAtomic>;
- []:# (TODO: Deprecate types requiring `Kokkos::Impl..` )
  typedef typename Kokkos::Impl::Experimental::DuplicatedDataType<DataType, {Kokkos::LayoutRight,Kokkos::LayoutLeft}> data_type_info; // ScatterDuplicated only
  typedef typename data_type_info::value_type internal_data_type; // ScatterDuplicated only
  typedef Kokkos::View<internal_data_type, {Kokkos::LayoutRight,Kokkos::LayoutLeft}, ExecSpace> internal_view_type; // ScatterDuplicated only
@@ -59,7 +58,6 @@ public:
  template <typename ... Dimensions>
  ScatterView(std::string const& name, Dimensions ... dims);
 
- []: # (TODO: Deprecate types requiring `Kokkos::Impl..` )
  template <typename... Properties, typename... Dimensions>
  ScatterView(::Kokkos::Impl::ViewCtorProp<Properties...> const& arg_prop, Dimensions... dims);
 
