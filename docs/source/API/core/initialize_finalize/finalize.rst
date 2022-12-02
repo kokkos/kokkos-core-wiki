@@ -1,5 +1,5 @@
 ``finalize``
-""""""""""""
+============
 
 .. role::cpp(code)
     :language: cpp
@@ -24,24 +24,24 @@ before ``Kokkos::finalize`` gets called.
 Programs are ill-formed if they do not call this function after calling `Kokkos::initialize <initialize.html#kokkosinitialize>`_.
 
 Interface
-============
+---------
 
 .. code-block:: cpp
 
     Kokkos::finalize();
 
 Requirements
-------------
+~~~~~~~~~~~~
 * ``Kokkos::finalize`` must be called before ``MPI_Finalize`` if Kokkos is used in an MPI context.
 * ``Kokkos::finalize`` must be called after user initialized Kokkos objects are out of scope.
 
 Semantics
----------
+~~~~~~~~~
 
 * ``Kokkos::is_initialized()`` should return false after calling ``Kokkos::finalize``
 
 Example
--------
+~~~~~~~
 
 .. code-block:: cpp
 
