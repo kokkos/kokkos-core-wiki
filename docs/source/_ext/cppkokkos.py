@@ -7164,10 +7164,6 @@ class CPPKokkosTypeObject(CPPKokkosObject):
 class CPPKokkosDeprecatedTypeObject(CPPKokkosObject):
     object_type = 'deprecated-type'
 
-class CPPKokkosDeprecatedTypeObject(CPPKokkosObject):
-    object_type = 'deprecated-type'
-
-
 class CPPKokkosConceptObject(CPPKokkosObject):
     object_type = 'concept'
 
