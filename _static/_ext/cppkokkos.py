@@ -2809,11 +2809,12 @@ class ASTInitializer(ASTBase):
 
 
 class ASTType(ASTBase):
-    def __init__(self, declSpecs: ASTDeclSpecs, decl: ASTDeclarator) -> None:
+    def __init__(self, declSpecs: ASTDeclSpecs, decl: ASTDeclarator, deprecated_version: str = None) -> None:
         assert declSpecs
         assert decl
         self.declSpecs = declSpecs
         self.decl = decl
+        self.deprecated_version = deprecated_version
 
     @property
     def name(self) -> ASTNestedName:
@@ -2850,6 +2851,8 @@ class ASTType(ASTBase):
                         res.append('CE')
                 elif objectType == 'type':  # just the name
                     res.append(symbol.get_full_nested_name().get_id(version))
+                elif objectType == 'deprecated-type':  # just the name
+                    res.append(symbol.get_full_nested_name().get_id(version))
                 else:
                     print(objectType)
                     assert False
@@ -2880,6 +2883,8 @@ class ASTType(ASTBase):
                 res.append(self.decl.get_param_id(version))
             elif objectType == 'type':  # just the name
                 res.append(symbol.get_full_nested_name().get_id(version))
+            elif objectType == 'deprecated-type':  # just the name
+                res.append(symbol.get_full_nested_name().get_id(version))
             else:
                 print(objectType)
                 assert False
@@ -2903,6 +2908,10 @@ class ASTType(ASTBase):
     def get_type_declaration_prefix(self) -> str:
         if self.declSpecs.trailingTypeSpec:
             return 'typedef'
+        elif self.declSpecs.outer == 'deprecated-type':
+            if self.deprecated_version is None:
+                return '[DEPRECATED]'
+            return f'[DEPRECATED since {self.deprecated_version}]'
         else:
             return 'type'
 
@@ -3777,6 +3786,10 @@ class ASTDeclaration(ASTBase):
             mainDeclNode += addnodes.desc_sig_keyword(self.visibility, self.visibility)
             mainDeclNode += addnodes.desc_sig_space()
         if self.objectType == 'type':
+            prefix = self.declaration.get_type_declaration_prefix()
+            mainDeclNode += addnodes.desc_sig_keyword(prefix, prefix)
+            mainDeclNode += addnodes.desc_sig_space()
+        elif self.objectType == 'deprecated-type':
             prefix = self.declaration.get_type_declaration_prefix()
             mainDeclNode += addnodes.desc_sig_keyword(prefix, prefix)
             mainDeclNode += addnodes.desc_sig_space()
@@ -6004,7 +6017,7 @@ class DefinitionParser(BaseParser):
 
     def _parse_decl_specs(self, outer: str, typed: bool = True) -> ASTDeclSpecs:
         if outer:
-            if outer not in ('type', 'member', 'function', 'templateParam'):
+            if outer not in ('type', 'member', 'function', 'templateParam', 'deprecated-type'):
                 raise Exception('Internal error, unknown outer "%s".' % outer)
         """
         storage-class-specifier function-specifier "constexpr"
@@ -6088,7 +6101,7 @@ class DefinitionParser(BaseParser):
                           typed: bool = True
                           ) -> ASTDeclarator:
         # 'typed' here means 'parse return type stuff'
-        if paramMode not in ('type', 'function', 'operatorCast', 'new'):
+        if paramMode not in ('type', 'function', 'operatorCast', 'new', 'deprecated-type'):
             raise Exception(
                 "Internal error, unknown paramMode '%s'." % paramMode)
         prevErrors = []
@@ -6256,12 +6269,11 @@ class DefinitionParser(BaseParser):
         outer == operatorCast: annoying case, we should not take the params
         """
         if outer:  # always named
-            if outer not in ('type', 'member', 'function',
-                             'operatorCast', 'templateParam'):
+            if outer not in ('type', 'member', 'function', 'operatorCast', 'templateParam', 'deprecated-type'):
                 raise Exception('Internal error, unknown outer "%s".' % outer)
             if outer != 'operatorCast':
                 assert named
-        if outer in ('type', 'function'):
+        if outer in ('type', 'function', 'deprecated-type'):
             # We allow type objects to just be a name.
             # Some functions don't have normal return types: constructors,
             # destructors, cast operators
@@ -6270,11 +6282,12 @@ class DefinitionParser(BaseParser):
             # first try without the type
             try:
                 declSpecs = self._parse_decl_specs(outer=outer, typed=False)
-                decl = self._parse_declarator(named=True, paramMode=outer,
-                                              typed=False)
+                decl = self._parse_declarator(named=True, paramMode=outer, typed=False)
                 self.assert_end(allowSemicolon=True)
             except DefinitionError as exUntyped:
                 if outer == 'type':
+                    desc = "If just a name"
+                elif outer == 'deprecated-type':
                     desc = "If just a name"
                 elif outer == 'function':
                     desc = "If the function has no return type"
@@ -6289,6 +6302,8 @@ class DefinitionParser(BaseParser):
                     self.pos = startPos
                     if outer == 'type':
                         desc = "If typedef-like declaration"
+                    elif outer == 'deprecated-type':
+                        desc = "If typedef-like declaration"
                     elif outer == 'function':
                         desc = "If the function has a return type"
                     else:
@@ -6300,6 +6315,9 @@ class DefinitionParser(BaseParser):
                     if True:
                         if outer == 'type':
                             header = "Type must be either just a name or a "
+                            header += "typedef-like declaration."
+                        elif outer == 'deprecated-type':
+                            header = "Deprecated-type must be either just a name or a "
                             header += "typedef-like declaration."
                         elif outer == 'function':
                             header = "Error when parsing function declaration."
@@ -6320,6 +6338,9 @@ class DefinitionParser(BaseParser):
             paramMode = 'type'
             if outer == 'member':
                 named = True
+            elif outer == 'deprecated-type':
+                paramMode = 'deprecated-type'
+                outer = None
             elif outer == 'operatorCast':
                 paramMode = 'operatorCast'
                 outer = None
@@ -6327,13 +6348,15 @@ class DefinitionParser(BaseParser):
                 named = 'single'
             declSpecs = self._parse_decl_specs(outer=outer)
             decl = self._parse_declarator(named=named, paramMode=paramMode)
+        if self.__dict__.get('deprecated_version'):
+            return ASTType(declSpecs, decl, deprecated_version=self.deprecated_version)
         return ASTType(declSpecs, decl)
 
     def _parse_type_with_init(
             self, named: Union[bool, str],
             outer: str) -> Union[ASTTypeWithInit, ASTTemplateParamConstrainedTypeWithInit]:
         if outer:
-            assert outer in ('type', 'member', 'function', 'templateParam')
+            assert outer in ('type', 'member', 'function', 'templateParam', 'deprecated-type')
         type = self._parse_type(outer=outer, named=named)
         if outer != 'templateParam':
             init = self._parse_initializer(outer=outer)
@@ -6709,11 +6732,10 @@ class DefinitionParser(BaseParser):
 
     def parse_declaration(self, objectType: str, directiveType: str) -> ASTDeclaration:
         if objectType not in ('class', 'union', 'function', 'member', 'type',
-                              'concept', 'enum', 'enumerator'):
+                              'concept', 'enum', 'enumerator', 'deprecated-type'):
             raise Exception('Internal error, unknown objectType "%s".' % objectType)
-        if directiveType not in ('class', 'struct', 'union', 'function', 'member', 'var',
-                                 'type', 'concept',
-                                 'enum', 'enum-struct', 'enum-class', 'enumerator'):
+        if directiveType not in ('class', 'struct', 'union', 'function', 'member', 'var', 'type', 'concept', 'enum',
+                                 'enum-struct', 'enum-class', 'enumerator', 'deprecated-type'):
             raise Exception('Internal error, unknown directiveType "%s".' % directiveType)
         visibility = None
         templatePrefix = None
@@ -6725,7 +6747,7 @@ class DefinitionParser(BaseParser):
         if self.match(_visibility_re):
             visibility = self.matched_text
 
-        if objectType in ('type', 'concept', 'member', 'function', 'class'):
+        if objectType in ('type', 'concept', 'member', 'function', 'class', 'deprecated-type'):
             templatePrefix = self._parse_template_declaration_prefix(objectType)
             if objectType == 'function' and templatePrefix is not None:
                 requiresClause = self._parse_requires_clause()
@@ -6736,6 +6758,24 @@ class DefinitionParser(BaseParser):
             try:
                 if not templatePrefix:
                     declaration = self._parse_type(named=True, outer='type')
+            except DefinitionError as e:
+                prevErrors.append((e, "If typedef-like declaration"))
+                self.pos = pos
+            pos = self.pos
+            try:
+                if not declaration:
+                    declaration = self._parse_type_using()
+            except DefinitionError as e:
+                self.pos = pos
+                prevErrors.append((e, "If type alias or template alias"))
+                header = "Error in type declaration."
+                raise self._make_multi_error(prevErrors, header) from e
+        elif objectType == 'deprecated-type':
+            prevErrors = []
+            pos = self.pos
+            try:
+                if not templatePrefix:
+                    declaration = self._parse_type(named=True, outer='deprecated-type')
             except DefinitionError as e:
                 prevErrors.append((e, "If typedef-like declaration"))
                 self.pos = pos
@@ -7028,9 +7068,24 @@ class CPPKokkosObject(ObjectDescription[ASTDeclaration]):
     def handle_signature(self, sig: str, signode: desc_signature) -> ASTDeclaration:
         # @@@@@_
         parentSymbol: Symbol = self.env.temp_data['cppkokkos:parent_symbol']
+        if self.object_type == 'deprecated-type':
+            deprecated_version = ''
+            try:
+                deprecated_version = sig.split(' ')[0]
+                if re.match('^[0-9]+.[0-9]+.*[0-9]*$', deprecated_version) is not None:
+                    temp_sig = sig.split(' ')[1:]
+                    sig = ' '.join(temp_sig)
+                    self.deprecated_version = deprecated_version
+                else:
+                    deprecated_version = ''
+            except ValueError as e:
+                sig = sig
+
         # @@@@@!
 
         parser = DefinitionParser(sig, location=signode, config=self.env.config)
+        if self.object_type == 'deprecated-type' and deprecated_version:
+            parser.deprecated_version = self.deprecated_version
         try:
             ast = self.parse_definition(parser)
             parser.assert_end()
@@ -7103,20 +7158,17 @@ class CPPKokkosObject(ObjectDescription[ASTDeclaration]):
 
 # @@@@@_
 class CPPKokkosTypeObject(CPPKokkosObject):
-    # @@@@@!
     object_type = 'type'
 
+class CPPKokkosDeprecatedTypeObject(CPPKokkosObject):
+    object_type = 'deprecated-type'
 
-# @@@@@_
 class CPPKokkosConceptObject(CPPKokkosObject):
-    # @@@@@!
     object_type = 'concept'
 
-
-# @@@@@_
 class CPPKokkosMemberObject(CPPKokkosObject):
-    # @@@@@!
     object_type = 'member'
+# @@@@@!
 
 
 # @@@@@_
@@ -7597,6 +7649,7 @@ class CPPKokkosDomain(Domain):
         'function':   ObjType(_('function'),   'func',              'identifier', 'type'),
         'member':     ObjType(_('member'),     'member', 'var',     'identifier'),
         'type':       ObjType(_('type'),                            'identifier', 'type'),
+        'deprecated-type':       ObjType(_('deprecated-type'),      'identifier', 'type'),
         'concept':    ObjType(_('concept'),    'concept',           'identifier'),
         'enum':       ObjType(_('enum'),       'enum',              'identifier', 'type'),
         'enumerator': ObjType(_('enumerator'), 'enumerator',        'identifier'),
@@ -7616,6 +7669,7 @@ class CPPKokkosDomain(Domain):
         'member': CPPKokkosMemberObject,
         'var': CPPKokkosMemberObject,
         'type': CPPKokkosTypeObject,
+        'deprecated-type': CPPKokkosDeprecatedTypeObject,
         'concept': CPPKokkosConceptObject,
         'enum': CPPKokkosEnumObject,
         'enum-struct': CPPKokkosEnumObject,
@@ -7643,6 +7697,7 @@ class CPPKokkosDomain(Domain):
         'member': CPPKokkosXRefRole(),
         'var': CPPKokkosXRefRole(),
         'type': CPPKokkosXRefRole(),
+        'deprecated-type': CPPKokkosXRefRole(),
         'concept': CPPKokkosXRefRole(),
         'enum': CPPKokkosXRefRole(),
         'enumerator': CPPKokkosXRefRole(),
