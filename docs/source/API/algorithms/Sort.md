@@ -74,7 +74,7 @@ KOKKOS_INLINE_FUNCTION void sort_by_key_thread(
 
 ``sort_team`` and ``sort_by_key_team`` internally use the entire team, so they may be called inside the top level of ``TeamPolicy`` lambdas and functors. ``sort_thread`` and ``sort_by_key_thread`` use the vector lanes of a thread, so they may be called either within ``TeamPolicy`` or ``TeamThreadRange`` loops.
 
-The ``sort_by_key`` functions sort ``keyView``, while simultaneously applying the same permutation to the elements of ``valueView``. It is equivalent to sorting ``(key[i], value[i])`` tuples according by key. An example of where this is commonly used is to sort the entries and values within each row of a CRS (compressed row sparse) matrix.
+The ``sort_by_key`` functions sort ``keyView``, while simultaneously applying the same permutation to the elements of ``valueView``. It is equivalent to sorting ``(key[i], value[i])`` tuples according by key. An example of where this is commonly used is to sort the entries and values within each row of a CRS (compressed row sparse) matrix. These functions require that ``keyView.extent(0) == valueView.extent(0)``.
 
 Versions taking a ``Comparator`` object will use it to order the keys. ``Comparator::operator()`` should be a const member function that accept two keys ``a`` and ``b``, and returns a bool that is true if and only if ``a`` goes before ``b`` in the sorted list. For versions not taking a ``Comparator`` object, keys are sorted into ascending order (according to ``operator<``). For example, this comparator will sort a list of ``int`` in ascending order:
 ```
