@@ -87,7 +87,7 @@ struct IntComparator {
 
 ## Additional Information
 
-- All functions include a final barrier at their level of parallelism, so all elements of ``view``/``keyView``/valueView`` may be accessed immediately after they return.
+- All functions include a final barrier at their level of parallelism, so all elements of ``view``/``keyView``/``valueView`` may be accessed immediately after they return.
 
 - These functions can operate on views in both global and scratch memory spaces.
 
