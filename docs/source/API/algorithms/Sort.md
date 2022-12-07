@@ -80,7 +80,7 @@ Versions taking a ``Comparator`` object will use it to order the keys. ``Compara
 ```
 struct IntComparator {
   KOKKOS_FUNCTION constexpr bool operator()(const int& a, const int& b) const {
-    return a > b;
+    return a > b; //a precedes b if a is larger
   }
 };
 ```
