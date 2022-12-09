@@ -72,9 +72,9 @@ KOKKOS_INLINE_FUNCTION void sort_by_key_thread(
   const TeamMember& t, const KeyViewType& keyView, const ValueViewType& valueView, const Comparator& comp);
 ```
 
-``sort_team`` and ``sort_by_key_team`` internally use the entire team, so they may be called inside the top level of ``TeamPolicy`` lambdas and functors. ``sort_thread`` and ``sort_by_key_thread`` use the vector lanes of a thread, so they may be called either within ``TeamPolicy`` or ``TeamThreadRange`` loops.
+``sort_team`` and ``sort_by_key_team`` internally use the entire team, so they may be called inside the top level of ``TeamPolicy`` lambdas and functors. ``sort_thread`` and ``sort_by_key_thread`` use the vector lanes of a thread, so they may be called within either ``TeamPolicy`` or ``TeamThreadRange`` loops.
 
-The ``sort_by_key`` functions sort ``keyView``, while simultaneously applying the same permutation to the elements of ``valueView``. It is equivalent to sorting ``(key[i], value[i])`` tuples according by key. An example of where this is commonly used is to sort the entries and values within each row of a CRS (compressed row sparse) matrix. These functions require that ``keyView.extent(0) == valueView.extent(0)``.
+The ``sort_by_key`` functions sort ``keyView``, while simultaneously applying the same permutation to the elements of ``valueView``. It is equivalent to sorting ``(key[i], value[i])`` tuples according to key. An example of where this is commonly used is to sort the entries and values in each row of a CRS (compressed row sparse) matrix. These functions require that ``keyView.extent(0) == valueView.extent(0)``.
 
 Versions taking a ``Comparator`` object will use it to order the keys. ``Comparator::operator()`` should be a const member function that accepts two keys ``a`` and ``b``, and returns a bool that is true if and only if ``a`` goes before ``b`` in the sorted list. For versions not taking a ``Comparator`` object, keys are sorted into ascending order (according to ``operator<``). For example, this comparator will sort a view of ``int`` in _descending_ order:
 ```
@@ -119,7 +119,7 @@ int main(int argc, char* argv[]) {
           Kokkos::Experimental::sort_team(t, A_row_i);
         });
     auto Ahost = Kokkos::create_mirror_view_and_copy(Kokkos::HostSpace(), A);
-    std::cout << "A, sorted by row:\n";
+    std::cout << "A, with each row sorted:\n";
     for(int i = 0; i < n; i++) {
       for(int j = 0; j < n; j++) {
         std::cout << Ahost(i, j) << ' ';
@@ -140,7 +140,7 @@ int main(int argc, char* argv[]) {
             });
         });
     Kokkos::deep_copy(Ahost, A);
-    std::cout << "\nA, now sorted by col:\n";
+    std::cout << "\nA, now with each column sorted:\n";
     for(int i = 0; i < n; i++) {
       for(int j = 0; j < n; j++) {
         std::cout << Ahost(i, j) << ' ';
@@ -154,7 +154,7 @@ int main(int argc, char* argv[]) {
 ```
 ### Sample output
 ```
-A, sorted by row:
+A, with each row sorted:
 0 9 38 68 74 76 83 89 91 95 
 19 41 41 55 65 68 78 92 99 99 
 2 13 16 17 19 40 44 54 96 99 
@@ -166,7 +166,7 @@ A, sorted by row:
 4 19 20 29 42 56 60 63 68 90 
 1 16 16 17 33 39 60 64 78 94 
 
-A, now sorted by col:
+A, now with each column sorted:
 0 5 9 13 19 25 33 39 42 81 
 0 6 14 16 20 32 37 40 58 86 
 1 8 15 17 25 38 40 51 60 90 
