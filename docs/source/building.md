@@ -105,9 +105,11 @@ The easiest way to configure the Spack environment is:
 > source spack/share/spack/setup-env.sh
 ````
 with other scripts available for other shells.
+
 You can display information about how to install packages with:
 ````bash
 > spack info kokkos
+````
 A basic installation would be done as:
 ````bash
 > spack install kokkos
