@@ -487,7 +487,7 @@
           </label>
         </div>
         <article role="main">
-          <section id="kokkos-and-windows-h">
+          <section class="tex2jax_ignore mathjax_ignore" id="kokkos-and-windows-h">
 <h1>Kokkos and <code class="docutils literal notranslate"><span class="pre">Windows.h</span></code><a class="headerlink" href="#kokkos-and-windows-h" title="Permalink to this heading">#</a></h1>
 <p>When using Kokkos on Windows a program or library might include <code class="docutils literal notranslate"><span class="pre">windows.h</span></code>. This is problematic as this header defines two macros with the names <code class="docutils literal notranslate"><span class="pre">min</span></code> and <code class="docutils literal notranslate"><span class="pre">max</span></code> unless <code class="docutils literal notranslate"><span class="pre">NOMINMAX</span></code> is defined previously.
 The preprocessor replaces strings in the source code with the macros yielding an uninterpretable result and thus compilation fails.

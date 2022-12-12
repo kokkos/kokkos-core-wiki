@@ -72,6 +72,11 @@ source_suffix = {
 }
 
 myst_heading_anchors = 4
+
+myst_enable_extensions = [
+    "dollarmath",
+    "amsmath"
+    ]
 # need to figure out why this does not work
 # rst_prolog = """
 # .. include:: special.rst

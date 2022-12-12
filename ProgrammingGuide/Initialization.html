@@ -487,7 +487,7 @@
           </label>
         </div>
         <article role="main">
-          <section id="initialization">
+          <section class="tex2jax_ignore mathjax_ignore" id="initialization">
 <h1>5. Initialization<a class="headerlink" href="#initialization" title="Permalink to this heading">#</a></h1>
 <p>In order to use Kokkos an initialization call is required. That call is responsible for initializing internal objects and acquiring hardware resources such as threads. Typically, this call should be placed right at the start of a program. If you use both MPI and Kokkos, your program should initialize Kokkos right after calling <code class="docutils literal notranslate"><span class="pre">MPI_Init</span></code>. That way, if MPI sets up process binding masks, Kokkos will get that information and use it for best performance. Your program must also <em>finalize</em> Kokkos when done using it in order to free hardware resources.</p>
 <section id="include-headers">

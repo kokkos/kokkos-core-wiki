@@ -487,7 +487,7 @@
           </label>
         </div>
         <article role="main">
-          <section id="hierarchical-parallelism">
+          <section class="tex2jax_ignore mathjax_ignore" id="hierarchical-parallelism">
 <h1>8. Hierarchical Parallelism<a class="headerlink" href="#hierarchical-parallelism" title="Permalink to this heading">#</a></h1>
 <p>This chapter explains how to use Kokkos to exploit multiple levels of shared-memory parallelism. These levels include thread teams, threads within a team, and vector lanes. You may nest these levels of parallelism, and execute <a class="reference internal" href="../API/core/parallel-dispatch/parallel_for.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">parallel_for()</span></code></span></a>, <a class="reference internal" href="../API/core/parallel-dispatch/parallel_reduce.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">parallel_reduce()</span></code></span></a>, or <a class="reference internal" href="../API/core/parallel-dispatch/parallel_scan.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">parallel_scan()</span></code></span></a> at each level. The syntax differs only by the execution policy,
 which is the first argument to the <code class="docutils literal notranslate"><span class="pre">parallel_*</span></code> operation. Kokkos also exposes a “scratch pad” memory which provides thread private and team private allocations.</p>
