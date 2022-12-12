@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Moving code from requiring Kokkos_ENABLE_CUDA_UVM to using SharedSpace" href="Moving_from_EnableUVM_to_SharedSpace.html" /><link rel="prev" title="Array of Structures and Structure of Arrays with Cabana" href="SoA-and-AoSoA-with-Cabana.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Testing and Issue Tracking" href="../testing-and-issue-tracking.html" /><link rel="prev" title="Kokkos and Windows.h" href="WindowsHeader.html" />
 
     <meta name="generator" content="sphinx-5.0.1, furo 2022.06.04.1"/>
-        <title>Kokkos and Windows.h - Kokkos documentation</title>
+        <title>Moving code from requiring Kokkos_ENABLE_CUDA_UVM to using SharedSpace - Kokkos documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=40978830699223671f4072448e654b5958f38b89" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
@@ -136,7 +136,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -418,8 +418,8 @@
 <li class="toctree-l2"><a class="reference internal" href="Tasking.html">Kokkos Tasking Use Case</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Kokkos-Fortran-Interoperability.html">Fortran Interop Use Case</a></li>
 <li class="toctree-l2"><a class="reference internal" href="SoA-and-AoSoA-with-Cabana.html">Array of Structures and Structure of Arrays with Cabana</a></li>
-<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Kokkos and <code class="docutils literal notranslate"><span class="pre">Windows.h</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="Moving_from_EnableUVM_to_SharedSpace.html">Moving code from requiring <code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_CUDA_UVM</span></code> to using <code class="docutils literal notranslate"><span class="pre">SharedSpace</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="WindowsHeader.html">Kokkos and <code class="docutils literal notranslate"><span class="pre">Windows.h</span></code></a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Moving code from requiring <code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_CUDA_UVM</span></code> to using <code class="docutils literal notranslate"><span class="pre">SharedSpace</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../testing-and-issue-tracking.html">Testing and Issue Tracking</a><input class="toctree-checkbox" id="toctree-checkbox-26" name="toctree-checkbox-26" role="switch" type="checkbox"/><label for="toctree-checkbox-26"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -465,7 +465,7 @@
         </a>
         <div class="content-icon-container">
 <div class="edit-this-page">
-  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/usecases/WindowsHeader.md" title="Edit this page">
+  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/usecases/Moving_from_EnableUVM_to_SharedSpace.md" title="Edit this page">
     <svg aria-hidden="true" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
       <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4"></path>
@@ -483,19 +483,71 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="kokkos-and-windows-h">
-<h1>Kokkos and <code class="docutils literal notranslate"><span class="pre">Windows.h</span></code><a class="headerlink" href="#kokkos-and-windows-h" title="Permalink to this heading">#</a></h1>
-<p>When using Kokkos on Windows a program or library might include <code class="docutils literal notranslate"><span class="pre">windows.h</span></code>. This is problematic as this header defines two macros with the names <code class="docutils literal notranslate"><span class="pre">min</span></code> and <code class="docutils literal notranslate"><span class="pre">max</span></code> unless <code class="docutils literal notranslate"><span class="pre">NOMINMAX</span></code> is defined previously.
-The preprocessor replaces strings in the source code with the macros yielding an uninterpretable result and thus compilation fails.
-Therefore, the header <code class="docutils literal notranslate"><span class="pre">Kokkos_Core.hpp</span></code> is protected against these macros, meaning they are undefined at the beginning and redefined at the end of the header file.
-Even though definitions inside <code class="docutils literal notranslate"><span class="pre">Kokkos_Core.hpp</span></code> are protected against the macros, code outside is not.
-Thus, it is on the user to deal with the macros being defined, either by defining <code class="docutils literal notranslate"><span class="pre">-DNOMINMAX</span></code> or <code class="docutils literal notranslate"><span class="pre">/DNOMINMAX</span></code> in the compile line (preferred) or by putting <code class="docutils literal notranslate"><span class="pre">()</span></code> around names that contain <code class="docutils literal notranslate"><span class="pre">min</span></code> or <code class="docutils literal notranslate"><span class="pre">max</span></code>.</p>
+          <section class="tex2jax_ignore mathjax_ignore" id="moving-code-from-requiring-kokkos-enable-cuda-uvm-to-using-sharedspace">
+<h1>Moving code from requiring <code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_CUDA_UVM</span></code> to using <code class="docutils literal notranslate"><span class="pre">SharedSpace</span></code><a class="headerlink" href="#moving-code-from-requiring-kokkos-enable-cuda-uvm-to-using-sharedspace" title="Permalink to this heading">#</a></h1>
+<p>With Kokkos 4.0 <code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_CUDA_UVM</span></code> is deprecated and can only be used with <code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_DEPRECATED_CODE_4</span></code>. The main reason for the deprecation was, that using the option changed the <code class="docutils literal notranslate"><span class="pre">memory_space</span></code> of the <code class="docutils literal notranslate"><span class="pre">Cuda</span></code> <code class="docutils literal notranslate"><span class="pre">ExecutionSpace</span></code>. This lead to several problems. For example: The driver is allowed to move chunks of this memory to the device or host depending on the access at any time without notice.
+The accesses in <code class="docutils literal notranslate"><span class="pre">parallel_for</span></code>, <code class="docutils literal notranslate"><span class="pre">parallel_reduce</span></code>, or <code class="docutils literal notranslate"><span class="pre">parallel_scan</span></code> do not occur in any guaranteed order and furthermore depend on other kernels running on the same GPU. This makes debugging tedious. Especially, if the memory an allocation resides in is not apparent but dependent on the options when running <code class="docutils literal notranslate"><span class="pre">cmake</span></code>.</p>
+<section id="the-alternative">
+<h2>The alternative<a class="headerlink" href="#the-alternative" title="Permalink to this heading">#</a></h2>
+<p>We introduced a new alias named <a class="reference internal" href="../API/core/memory_spaces.html#sharedspace"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">SharedSpace</span></code></span></a> in Kokkos 4.0. This always points to memory that is accessible by every <a class="reference internal" href="../API/core/execution_spaces.html#executionspaceconcept"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">ExecutionSpace</span></code></span></a> and is migrated without user interaction to the acessing <code class="docutils literal notranslate"><span class="pre">ExecutioSpace</span></code> on demand. After migration the memory is accessed locally.
+Using the alias e.g. in <code class="docutils literal notranslate"><span class="pre">Views</span></code> is expressive and thus easier to read. Furthermore, it is portable to every backend that can automatically migrate memory between <code class="docutils literal notranslate"><span class="pre">ExecutionSpaces</span></code>.
+Furthermore, we introduced the alias <a class="reference internal" href="../API/core/memory_spaces.html#sharedhostpinnedspace"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">SharedHostPinnedSpace</span></code></span></a> which points to memory that is accessible by all enabled <code class="docutils literal notranslate"><span class="pre">ExecutionSpaces</span></code> but always resides in the memory of the host.</p>
+</section>
+<section id="the-transition">
+<h2>The transition<a class="headerlink" href="#the-transition" title="Permalink to this heading">#</a></h2>
+<p>Basically it comes down to spelling <a class="reference internal" href="../API/core/memory_spaces.html#sharedspace"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">Kokkos::SharedSpace</span></code></span></a> as a template argument in all allocations.
+Below is an example of a transition:</p>
+<ul class="simple">
+<li><p>Code requiring <code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_CUDA_UVM</span></code> at configure time (until 4.0)</p></li>
+</ul>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Kokkos_Core.hpp&gt;</span><span class="cp"></span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="w"> </span><span class="p">(){</span><span class="w"></span>
+<span class="w">  </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">initialize</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">View</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">*&gt;</span><span class="w"> </span><span class="n">myView</span><span class="p">(</span><span class="s">&quot;myView&quot;</span><span class="p">,</span><span class="n">N</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">c_style_memory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">kokkos_malloc</span><span class="p">(</span><span class="s">&quot;c_style_alloc&quot;</span><span class="p">,</span><span class="n">N</span><span class="o">*</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">double</span><span class="p">));</span><span class="w"></span>
+
+<span class="w">    </span><span class="p">...</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">kokkos_free</span><span class="p">(</span><span class="n">c_style_memory</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span>
+<span class="w">  </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">finalize</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Code using <code class="docutils literal notranslate"><span class="pre">SharedSpace</span></code> (since 4.0)</p></li>
+</ul>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Kokkos_Core.hpp&gt;</span><span class="cp"></span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="w"> </span><span class="p">(){</span><span class="w"></span>
+<span class="w">  </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">initialize</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">static_assert</span><span class="p">(</span><span class="n">Kokkos</span><span class="o">::</span><span class="n">has_shared_space</span><span class="p">(),</span><span class="s">&quot;code only works on backends with SharedSpace&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span>
+<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">View</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">*</span><span class="p">,</span><span class="n">Kokkos</span><span class="o">::</span><span class="n">SharedSpace</span><span class="o">&gt;</span><span class="w"> </span><span class="n">myView</span><span class="p">(</span><span class="s">&quot;myView&quot;</span><span class="p">,</span><span class="n">N</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">c_style_memory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">kokkos_malloc</span><span class="o">&lt;</span><span class="n">Kokkos</span><span class="o">::</span><span class="n">SharedSpace</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;c_style_alloc&quot;</span><span class="p">,</span><span class="n">N</span><span class="o">*</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">double</span><span class="p">));</span><span class="w"></span>
+
+<span class="w">    </span><span class="p">...</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">kokkos_free</span><span class="o">&lt;</span><span class="n">Kokkos</span><span class="o">::</span><span class="n">SharedSpace</span><span class="o">&gt;</span><span class="p">(</span><span class="n">c_style_memory</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span>
+<span class="w">  </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">finalize</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
 </section>
 
         </article>
@@ -503,23 +555,23 @@ Thus, it is on the user to deal with the macros being defined, either by definin
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="Moving_from_EnableUVM_to_SharedSpace.html">
+          <a class="next-page" href="../testing-and-issue-tracking.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Moving code from requiring <code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_CUDA_UVM</span></code> to using <code class="docutils literal notranslate"><span class="pre">SharedSpace</span></code></div>
+                <div class="title">Testing and Issue Tracking</div>
               </div>
               <svg><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="SoA-and-AoSoA-with-Cabana.html">
+          <a class="prev-page" href="WindowsHeader.html">
               <svg><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Array of Structures and Structure of Arrays with Cabana</div>
+                <div class="title">Kokkos and <code class="docutils literal notranslate"><span class="pre">Windows.h</span></code></div>
                 
               </div>
             </a>
@@ -543,8 +595,28 @@ Thus, it is on the user to deal with the macros being defined, either by definin
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            Contents
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Moving code from requiring <code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_CUDA_UVM</span></code> to using <code class="docutils literal notranslate"><span class="pre">SharedSpace</span></code></a><ul>
+<li><a class="reference internal" href="#the-alternative">The alternative</a></li>
+<li><a class="reference internal" href="#the-transition">The transition</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>
