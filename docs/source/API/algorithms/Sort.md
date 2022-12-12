@@ -140,7 +140,7 @@ int main(int argc, char* argv[]) {
             });
         });
     Kokkos::deep_copy(Ahost, A);
-    std::cout << "\nA, now with each column sorted:\n";
+    std::cout << "\nA, with each column sorted:\n";
     for(int i = 0; i < n; i++) {
       for(int j = 0; j < n; j++) {
         std::cout << Ahost(i, j) << ' ';
@@ -166,7 +166,7 @@ A, with each row sorted:
 4 19 20 29 42 56 60 63 68 90 
 1 16 16 17 33 39 60 64 78 94 
 
-A, now with each column sorted:
+A, with each column sorted:
 0 5 9 13 19 25 33 39 42 81 
 0 6 14 16 20 32 37 40 58 86 
 1 8 15 17 25 38 40 51 60 90 
