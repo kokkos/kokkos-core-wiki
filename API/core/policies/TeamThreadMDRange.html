@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" /><link rel="next" title="TeamThreadRange" href="TeamThreadRange.html" /><link rel="prev" title="TeamPolicy" href="TeamPolicy.html" />
 
     <meta name="generator" content="sphinx-5.0.1, furo 2022.06.04.1"/>
-        <title>Kokkos::TeamThreadMDRange - Kokkos documentation</title>
+        <title>TeamThreadMDRange - Kokkos documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?digest=40978830699223671f4072448e654b5958f38b89" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
@@ -245,11 +245,11 @@
 <li class="toctree-l3"><a class="reference internal" href="RangePolicy.html"><code class="docutils literal notranslate"><span class="pre">RangePolicy</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="TeamHandleConcept.html"><code class="docutils literal notranslate"><span class="pre">TeamHandleConcept</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="TeamPolicy.html"><code class="docutils literal notranslate"><span class="pre">TeamPolicy</span></code></a></li>
-<li class="toctree-l3 current current-page"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">Kokkos::TeamThreadMDRange</span></code></a></li>
+<li class="toctree-l3 current current-page"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">TeamThreadMDRange</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="TeamThreadRange.html"><code class="docutils literal notranslate"><span class="pre">TeamThreadRange</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="TeamVectorMDRange.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::TeamVectorMDRange</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="TeamVectorMDRange.html"><code class="docutils literal notranslate"><span class="pre">TeamVectorMDRange</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="TeamVectorRange.html"><code class="docutils literal notranslate"><span class="pre">TeamVectorRange</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="ThreadVectorMDRange.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::ThreadVectorMDRange</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ThreadVectorMDRange.html"><code class="docutils literal notranslate"><span class="pre">ThreadVectorMDRange</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="ThreadVectorRange.html"><code class="docutils literal notranslate"><span class="pre">ThreadVectorRange</span></code></a></li>
 </ul>
 </li>
@@ -488,8 +488,8 @@
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="kokkos-teamthreadmdrange">
-<h1><code class="docutils literal notranslate"><span class="pre">Kokkos::TeamThreadMDRange</span></code><a class="headerlink" href="#kokkos-teamthreadmdrange" title="Permalink to this heading">#</a></h1>
+          <section class="tex2jax_ignore mathjax_ignore" id="teamthreadmdrange">
+<h1><code class="docutils literal notranslate"><span class="pre">TeamThreadMDRange</span></code><a class="headerlink" href="#teamthreadmdrange" title="Permalink to this heading">#</a></h1>
 <p>Header File: <code class="docutils literal notranslate"><span class="pre">Kokkos_Core.hpp</span></code></p>
 <p>Usage:</p>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="n">parallel_for</span><span class="p">(</span><span class="n">TeamThreadMDRange</span><span class="o">&lt;</span><span class="n">Kokkos</span><span class="o">::</span><span class="n">Rank</span><span class="o">&lt;</span><span class="p">...</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="n">TeamHandle</span><span class="o">&gt;</span><span class="p">(</span><span class="n">team</span><span class="p">,</span><span class="w"> </span><span class="n">extent1</span><span class="p">,</span><span class="w"> </span><span class="n">extent2</span><span class="p">,</span><span class="w"> </span><span class="p">...),</span><span class="w"></span>
@@ -554,7 +554,7 @@ threads call this function in one branch, and the other threads of <code class="
 <span class="w">             </span><span class="n">team</span><span class="p">,</span><span class="w"> </span><span class="n">n0</span><span class="p">,</span><span class="w"> </span><span class="n">n1</span><span class="p">,</span><span class="w"> </span><span class="n">n2</span><span class="p">,</span><span class="w"> </span><span class="n">n3</span><span class="p">);</span><span class="w"></span>
 
 <span class="w">     </span><span class="n">parallel_for</span><span class="p">(</span><span class="n">teamThreadMDRange</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="o">=</span><span class="p">](</span><span class="kt">int</span><span class="w"> </span><span class="n">i0</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">i1</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">i2</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">i3</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">       </span><span class="n">A</span><span class="p">(</span><span class="n">leagueRank</span><span class="p">,</span><span class="n">i0</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">B</span><span class="p">(</span><span class="n">leagueRank</span><span class="p">,</span><span class="w"> </span><span class="n">i1</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">C</span><span class="p">(</span><span class="n">i1</span><span class="p">,</span><span class="w"> </span><span class="n">i2</span><span class="p">,</span><span class="w"> </span><span class="n">i3</span><span class="p">);</span><span class="w"></span>
+<span class="w">       </span><span class="n">A</span><span class="p">(</span><span class="n">leagueRank</span><span class="p">,</span><span class="w"> </span><span class="n">i0</span><span class="p">,</span><span class="w"> </span><span class="n">i1</span><span class="p">,</span><span class="w"> </span><span class="n">i2</span><span class="p">,</span><span class="w"> </span><span class="n">i3</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">B</span><span class="p">(</span><span class="n">leagueRank</span><span class="p">,</span><span class="w"> </span><span class="n">i1</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">C</span><span class="p">(</span><span class="n">i1</span><span class="p">,</span><span class="w"> </span><span class="n">i2</span><span class="p">,</span><span class="w"> </span><span class="n">i3</span><span class="p">);</span><span class="w"></span>
 <span class="w">     </span><span class="p">});</span><span class="w"></span>
 
 <span class="w">     </span><span class="n">team</span><span class="p">.</span><span class="n">team_barrier</span><span class="p">();</span><span class="w"></span>
@@ -633,7 +633,7 @@ threads call this function in one branch, and the other threads of <code class="
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">Kokkos::TeamThreadMDRange</span></code></a><ul>
+<li><a class="reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">TeamThreadMDRange</span></code></a><ul>
 <li><a class="reference internal" href="#interface">Interface</a></li>
 <li><a class="reference internal" href="#description">Description</a></li>
 <li><a class="reference internal" href="#examples">Examples</a></li>

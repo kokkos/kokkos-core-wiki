@@ -1,4 +1,4 @@
-# `Kokkos::TeamThreadMDRange`
+# `TeamThreadMDRange`
 
 Header File: `Kokkos_Core.hpp`
 
@@ -59,7 +59,7 @@ used inside of hierarchical parallelism.
                team, n0, n1, n2, n3);
 
        parallel_for(teamThreadMDRange, [=](int i0, int i1, int i2, int i3) {
-         A(leagueRank,i0) = B(leagueRank, i1) + C(i1, i2, i3);
+         A(leagueRank, i0, i1, i2, i3) = B(leagueRank, i1) + C(i1, i2, i3);
        });
 
        team.team_barrier();
