@@ -72,14 +72,15 @@ Example
 ~~~~~~~
 
 .. code-block:: cpp
+
     #include <Kokkos_Core.hpp>
 
     int main(int argc, char* argv[]) {
-    Kokkos::initialize(argc, argv);
-    {  // scope to ensure that my_view destructor is called before Kokkos::finalize
-        Kokkos::View<double*> my_view("my_view", 10);
-    }  // scope of my_view ends here
-    Kokkos::finalize();
+        Kokkos::initialize(argc, argv);
+        {  // scope to ensure that my_view destructor is called before Kokkos::finalize
+            Kokkos::View<double*> my_view("my_view", 10);
+        }  // scope of my_view ends here
+        Kokkos::finalize();
     }    
 
 See also
