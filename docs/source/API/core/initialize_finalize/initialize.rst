@@ -30,7 +30,8 @@ recognizes.  Whenever a Kokkos flag is seen, it is removed from ``argv``, and
 ``argc`` is decremented.
 The second one takes a `Kokkos::InitializationSettings <InitializationSettings.html#kokkosInitializationSettings>`_ class object
 which allows for programmatic control of arguments.
-`Kokkos::InitializationSettings <InitializationSettings.html#kokkosInitializationSettings>`_ is implicitly constructible from the ``Kokkos::InitArguments``<sup>deprecated in version 3.7</sup>.
+`Kokkos::InitializationSettings <InitializationSettings.html#kokkosInitializationSettings>`_ is implicitly
+constructible from the ``Kokkos::InitArguments`` :sup:`deprecated in version 3.7`.
 
 Interface
 ---------
@@ -58,15 +59,15 @@ Parameters
 Requirements
 ~~~~~~~~~~~~
 
-  * ``Kokkos::finalize`` must be called after ``Kokkos::initialize``.
-  * ``Kokkos::initialize`` generally should be called after ``MPI_Init`` when Kokkos is initialized within an MPI context.
-  * User initiated Kokkos objects cannot be constructed until after ``Kokkos::initialize`` is called.
-  * ``Kokkos::initialize`` may not be called after a call to ``Kokkos::finalize``.
+* ``Kokkos::finalize`` must be called after ``Kokkos::initialize``.
+* ``Kokkos::initialize`` generally should be called after ``MPI_Init`` when Kokkos is initialized within an MPI context.
+* User initiated Kokkos objects cannot be constructed until after ``Kokkos::initialize`` is called.
+* ``Kokkos::initialize`` may not be called after a call to ``Kokkos::finalize``.
 
 Semantics
 ~~~~~~~~~
 
-  * After calling ``Kokkos::initialize``, ``Kokkos::is_initialized()`` should return true.
+* After calling ``Kokkos::initialize``, ``Kokkos::is_initialized()`` should return true.
 
 Example
 ~~~~~~~
