@@ -5,28 +5,28 @@
 ## Kokkos-3.x
 
 
-  |  **Deprecated Feature**                     |  **Replacement**                                                   | **Reason**              
-  | ------------------------                    | --------------------------------------------------------------     | ------------------------
-  |                                             |                                                                    | 
-  |  `Kokkos::is_reducer_type`                  |  `Kokkos::is_reducer`                                              |  Improve API
-  |  Array reductions with raw pointer          |  Use `Kokkos::View` as return argument                             |  Improve API
-  |  `OffsetView` constructors taking `index_list_type`     |  `Kokkos::pair` (CPU and GPU)                          |  Streamline arguments to `::pair` function
+  |  **Deprecated Feature**    |  **Replacement**          | **Reason**              
+  | -------------------------  | ------------------------  | ------------------------- 
+  |                                             |                                      | 
+  |  `Kokkos::is_reducer_type`                  |  `Kokkos::is_reducer`  |  Improve API
+  |  Array reductions with raw pointer          |  Use `Kokkos::View` as return argument  |  Improve API
+  |  `OffsetView` constructors taking `index_list_type`     |  `Kokkos::pair` (CPU and GPU)  |  Streamline arguments to `::pair` function
   |  Overloads of `Kokkos::sort` taking a parameter `bool always_use_kokkos_sort`  |  Use `Kokkos::BinSort` if required, or call `Kokkos::sort` without bool parameter  |  Updating overloads
-  |                                             |                                                                    |
-  |  **PUBLIC HEADERS UPDATES**                 |                                                                    |
-  |  Guard against non-public header inclusion  |  **Core PUBLIC HEADERS**:  `Kokkos_Core.hpp`,                      |  Improve API
-  |                                             |                            `Kokkos_Macros.hpp`,                    |
-  |                                             |                            `Kokkos_Atomic.hpp`,                    |
-  |                                             |                            `Kokkos_DetectionIdiom.hpp`,            |
-  |                                             |                            `Kokkos_MathematicalConstants.hpp`,     |
-  |                                             |                            `Kokkos_MathematicalFunctions.hpp`,     |
-  |                                             |                            `Kokkos_NumericTraits.hpp`,             |
-  |                                             |                            `Kokkos_Array.hpp`,                     |
-  |                                             |                            `Kokkos_Complex.hpp`,                   |
-  |                                             |                            `Kokkos_Pair.hpp`,                      |
-  |                                             |                            `Kokkos_Half.hpp`,                      |
-  |                                             |                            `Kokkos_Timer.hpp`                      |
-  |                                             |                                                                    |
+  |                                             |                                                                  |
+  |  **PUBLIC HEADERS UPDATES**                 |                                                                  |
+  |  Guard against non-public header inclusion  |  **Core PUBLIC HEADERS**:  `Kokkos_Core.hpp`,                    |  Improve API
+  |                                             |                            `Kokkos_Macros.hpp`,                  |
+  |                                             |                            `Kokkos_Atomic.hpp`,                  |
+  |                                             |                            `Kokkos_DetectionIdiom.hpp`,          |
+  |                                             |                            `Kokkos_MathematicalConstants.hpp`,   |
+  |                                             |                            `Kokkos_MathematicalFunctions.hpp`,   |
+  |                                             |                            `Kokkos_NumericTraits.hpp`,           |
+  |                                             |                            `Kokkos_Array.hpp`,                   |
+  |                                             |                            `Kokkos_Complex.hpp`,                 |
+  |                                             |                            `Kokkos_Pair.hpp`,                    |
+  |                                             |                            `Kokkos_Half.hpp`,                    |
+  |                                             |                            `Kokkos_Timer.hpp`                    |
+  |                                             |                                                                  |
   |  Guard against non-public header inclusion  |  **Algorithms PUBLIC HEADERS**:  `Kokkos_StdAlgorithms.hpp`,       |  Improve API
   |                                             |                                  `Kokkos_Random.hpp`,              |
   |                                             |                                  `Kokkos_Sort.hpp`                 |
