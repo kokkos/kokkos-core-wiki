@@ -12,9 +12,9 @@ Usage:
 
     Kokkos::initialize(argc, argv);
     Kokkos::initialize(Kokkos::InitializationSettings()  // (since 3.7)
-                       .set_disable_warnings(true)
-                       .set_num_threads(8)
-                       .set_map_device_id_by("random"));
+                           .set_disable_warnings(true)
+                           .set_num_threads(8)
+                           .set_map_device_id_by("random"));
 
 Initializes the Kokkos execution environment.
 This function must be called before any other Kokkos API functions or
