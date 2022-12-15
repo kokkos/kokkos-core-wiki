@@ -13,7 +13,7 @@ Usage:
     Kokkos::parallel_for(name, policy, functor);
     Kokkos::parallel_for(policy, functor);
 
-Dispatches parallel work defined by ``functor`` according to the `*ExecutionPolicy* <../policies/ExecutionPolicyConcept.html>`_ ``policy``. The optional label ``name`` is
+Dispatches parallel work defined by ``functor`` according to the `ExecutionPolicy <../policies/ExecutionPolicyConcept.html>`_ ``policy``. The optional label ``name`` is
 used by profiling and debugging tools. This call may be asynchronous and return to the callee immediately. 
 
 Interface
@@ -37,12 +37,14 @@ Parameters:
 
 * ``name``: A user provided string which is used in profiling and debugging tools via the Kokkos Profiling Hooks. 
 * ExecPolicy: An *ExecutionPolicy* which defines iteration space and other execution properties. Valid policies are:
+
   - ``IntegerType``: defines a 1D iteration range, starting from 0 and going to a count.
   - `RangePolicy <../policies/RangePolicy.html>`_: defines a 1D iteration range.
   - `MDRangePolicy <../policies/MDRangePolicy.html>`_: defines a multi-dimensional iteration space.
   - `TeamPolicy <../policies/TeamPolicy.html>`_: defines a 1D iteration range, each of which is assigned to a thread team.
   - `TeamThreadRange <../policies/TeamVectorRange.html>`_: defines a 1D iteration range to be executed by a thread-team. Only valid inside a parallel region executed through a ``TeamPolicy`` or a ``TaskTeam``.
   - `ThreadVectorRange <../policies/ThreadVectorRange.html>`_: defines a 1D iteration range to be executed through vector parallelization dividing the threads within a team.  Only valid inside a parallel region executed through a ``TeamPolicy`` or a ``TaskTeam``.
+
 * FunctorType: A valid functor having an ``operator()`` with a matching signature for the ``ExecPolicy``.  The functor can be defined using a C++ class/struct or lambda.  See Examples below for more detail.
 
 Requirements:
