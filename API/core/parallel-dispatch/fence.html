@@ -465,7 +465,7 @@
         </a>
         <div class="content-icon-container">
 <div class="edit-this-page">
-  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/API/core/parallel-dispatch/fence.md" title="Edit this page">
+  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/API/core/parallel-dispatch/fence.rst" title="Edit this page">
     <svg aria-hidden="true" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
       <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4"></path>
@@ -489,23 +489,23 @@
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="fence">
+          <section id="fence">
 <h1><code class="docutils literal notranslate"><span class="pre">fence()</span></code><a class="headerlink" href="#fence" title="Permalink to this heading">#</a></h1>
-<p>Header File: <code class="docutils literal notranslate"><span class="pre">Kokkos_Core.hpp</span></code></p>
+<p>Header File: <code class="docutils literal notranslate"><span class="pre">&lt;Kokkos_Core.hpp&gt;</span></code></p>
 <p>Usage:</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">Kokkos</span><span class="o">::</span><span class="n">fence</span><span class="p">();</span><span class="w"></span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Kokkos</span><span class="o">::</span><span class="n">fence</span><span class="p">();</span><span class="w"></span>
 </pre></div>
 </div>
 <p>Blocks on completion of all outstanding asynchronous Kokkos operations.
-That includes parallel dispatch (e.g. <a class="reference internal" href="parallel_for.html"><span class="doc std std-doc">parallel_for()</span></a>, <a class="reference internal" href="parallel_reduce.html"><span class="doc std std-doc">parallel_reduce()</span></a>
-and <a class="reference internal" href="parallel_scan.html"><span class="doc std std-doc">parallel_scan()</span></a>) as well as asynchronous data operations such as three-argument <a class="reference internal" href="../view/deep_copy.html"><span class="doc std std-doc">deep_copy</span></a>.</p>
-<p>Note: there is a execution space instance specific <code class="docutils literal notranslate"><span class="pre">fence</span></code> too: <a class="reference internal" href="../execution_spaces.html#executionspaceconcept"><span class="std std-ref">ExecutionSpaceConcept</span></a></p>
+That includes parallel dispatch (e.g. <a class="reference external" href="parallel_for.html#kokkosparallel_for">parallel_for()</a>, <a class="reference external" href="parallel_reduce.html#kokkosparallel_reduce">parallel_reduce()</a>
+and <a class="reference external" href="parallel_scan.html#kokkosparallel_scan">parallel_scan()</a>) as well as asynchronous data operations such as three-argument <a class="reference external" href="../view/deep_copy.html">deep_copy</a>.</p>
+<p>Note: there is a execution space instance specific <code class="docutils literal notranslate"><span class="pre">fence</span></code> too: <a class="reference external" href="../execution_spaces.html#executionspaceconcept">ExecutionSpaceConcept</a></p>
 <section id="interface">
 <h2>Interface<a class="headerlink" href="#interface" title="Permalink to this heading">#</a></h2>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">Kokkos::fence</span><span class="p">();</span><span class="w"></span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">Kokkos::fence</span><span class="p">();</span><span class="w"></span>
 </pre></div>
 </div>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">Kokkos::fence</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">label</span><span class="p">);</span><span class="w"></span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">Kokkos::fence</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">label</span><span class="p">);</span><span class="w"></span>
 </pre></div>
 </div>
 <section id="parameters">
@@ -531,8 +531,8 @@ and <a class="reference internal" href="parallel_scan.html"><span class="doc std
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading">#</a></h2>
 <section id="timing-kernels">
 <h3>Timing kernels<a class="headerlink" href="#timing-kernels" title="Permalink to this heading">#</a></h3>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">Kokkos</span><span class="o">::</span><span class="n">Timer</span><span class="w"> </span><span class="n">timer</span><span class="p">;</span><span class="w"></span>
-<span class="c1">// This operation is asynchronous, without a fence </span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Kokkos</span><span class="o">::</span><span class="n">Timer</span><span class="w"> </span><span class="n">timer</span><span class="p">;</span><span class="w"></span>
+<span class="c1">// This operation is asynchronous, without a fence</span>
 <span class="c1">// one would time only the launch overhead</span>
 <span class="n">Kokkos</span><span class="o">::</span><span class="n">parallel_for</span><span class="p">(</span><span class="s">&quot;Test&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">functor</span><span class="p">);</span><span class="w"></span>
 <span class="n">Kokkos</span><span class="o">::</span><span class="n">fence</span><span class="p">();</span><span class="w"></span>
@@ -542,7 +542,7 @@ and <a class="reference internal" href="parallel_scan.html"><span class="doc std
 </section>
 <section id="use-with-asynchronous-deep-copy">
 <h3>Use with asynchronous deep copy<a class="headerlink" href="#use-with-asynchronous-deep-copy" title="Permalink to this heading">#</a></h3>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">Kokkos</span><span class="o">::</span><span class="n">deep_copy</span><span class="p">(</span><span class="n">exec1</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">);</span><span class="w"></span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Kokkos</span><span class="o">::</span><span class="n">deep_copy</span><span class="p">(</span><span class="n">exec1</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">);</span><span class="w"></span>
 <span class="n">Kokkos</span><span class="o">::</span><span class="n">deep_copy</span><span class="p">(</span><span class="n">exec2</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">);</span><span class="w"></span>
 <span class="c1">// do some stuff which doesn&#39;t touch a or b</span>
 <span class="n">Kokkos</span><span class="o">::</span><span class="n">parallel_for</span><span class="p">(</span><span class="s">&quot;Test&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">functor</span><span class="p">);</span><span class="w"></span>
