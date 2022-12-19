@@ -57,8 +57,8 @@ Parameters:
 * ExecPolicy: An *ExecutionPolicy* which defines iteration space and other execution properties. Valid policies are:
 
   - ``IntegerType``: defines a 1D iteration range, starting from 0 and going to a count.
-  - `RangePolicy <../policies/RangePolicy>`_: defines a 1D iteration range. 
-  - `ThreadVectorRange <../policies/ThreadVectorRange>`_: defines a 1D iteration range to be executed through vector parallelization dividing the threads within a team.  Only valid inside a parallel region executed through a ``TeamPolicy`` or a ``TaskTeam``.
+  - `RangePolicy <../policies/RangePolicy.html>`_: defines a 1D iteration range. 
+  - `ThreadVectorRange <../policies/ThreadVectorRange.html>`_: defines a 1D iteration range to be executed through vector parallelization dividing the threads within a team.  Only valid inside a parallel region executed through a ``TeamPolicy`` or a ``TaskTeam``.
 * FunctorType: A valid functor with (at minimum) an ``operator()`` with a matching signature for the ``ExecPolicy`` combined with the reduced type.
 * ReturnType: a POD type with ``operator +=`` and ``operator =``, or a ``Kokkos::View``.  
 
