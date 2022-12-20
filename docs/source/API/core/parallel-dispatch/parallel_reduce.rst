@@ -117,12 +117,12 @@ Parameters:
 * ``name``: A user provided string which is used in profiling and debugging tools via the Kokkos Profiling Hooks. 
 * ExecPolicy: An *ExecutionPolicy* which defines iteration space and other execution properties. Valid policies are:
 
-    - ``IntegerType``: defines a 1D iteration range, starting from 0 and going to a count.
-    - `RangePolicy <../policies/RangePolicy.html>`_: defines a 1D iteration range. 
-    - `MDRangePolicy <../policies/MDRangePolicy.html>`_: defines a multi-dimensional iteration space.
-    - `TeamPolicy <../policies/TeamPolicy.html>`_: defines a 1D iteration range, each of which is assigned to a thread team.
-    - `TeamThreadRange <../policies/TeamThreadRange.html>`_: defines a 1D iteration range to be executed by a thread-team. Only valid inside a parallel region executed through a ``TeamPolicy`` or a ``TaskTeam``.
-    - `ThreadVectorRange <../policies/ThreadVectorRange.html>`_: defines a 1D iteration range to be executed through vector parallelization dividing the threads within a team.  Only valid inside a parallel region executed through a ``TeamPolicy`` or a ``TaskTeam``.
+  - ``IntegerType``: defines a 1D iteration range, starting from 0 and going to a count.
+  - `RangePolicy <../policies/RangePolicy.html>`_: defines a 1D iteration range. 
+  - `MDRangePolicy <../policies/MDRangePolicy.html>`_: defines a multi-dimensional iteration space.
+  - `TeamPolicy <../policies/TeamPolicy.html>`_: defines a 1D iteration range, each of which is assigned to a thread team.
+  - `TeamThreadRange <../policies/TeamThreadRange.html>`_: defines a 1D iteration range to be executed by a thread-team. Only valid inside a parallel region executed through a ``TeamPolicy`` or a ``TaskTeam``.
+  - `ThreadVectorRange <../policies/ThreadVectorRange.html>`_: defines a 1D iteration range to be executed through vector parallelization dividing the threads within a team.  Only valid inside a parallel region executed through a ``TeamPolicy`` or a ``TaskTeam``.
 * FunctorType: A valid functor with (at minimum) an ``operator()`` with a matching signature for the ``ExecPolicy`` combined with the reduced type.
 * ReducerArgument: Either a class fullfilling the "Reducer" concept or a ``Kokkos::View``
 * ReducerArgumentNonConst: a class fullfilling the "Reducer" concept, a POD type with ``operator +=`` and ``operator =``, or a ``Kokkos::View``.  The ReducerArgumentNonConst can also be an array or a pointer; see below for functor requirements.
@@ -132,28 +132,28 @@ Requirements:
   
 * If ``ExecPolicy`` is not ``MDRangePolicy``, the ``functor`` has a member function of the form ``operator() (const HandleType& handle, ReducerValueType& value) const`` or ``operator() (const WorkTag, const HandleType& handle, ReducerValueType& value) const``.
 
-    - The ``WorkTag`` free form of the operator is used if ``ExecPolicy`` is an ``IntegerType`` or if ``ExecPolicy::work_tag`` is ``void``.
-    - ``HandleType`` is an ``IntegerType`` if ``ExecPolicy`` is an ``IntegerType`` else it is ``ExecPolicy::member_type``.
+  - The ``WorkTag`` free form of the operator is used if ``ExecPolicy`` is an ``IntegerType`` or if ``ExecPolicy::work_tag`` is ``void``.
+  - ``HandleType`` is an ``IntegerType`` if ``ExecPolicy`` is an ``IntegerType`` else it is ``ExecPolicy::member_type``.
 * If ``ExecPolicy`` is ``MDRangePolicy`` the ``functor`` has a member function of the form ``operator() (const IntegerType& i0, ... , const IntegerType& iN, ReducerValueType& value) const`` or ``operator() (const WorkTag, const IntegerType& i0, ... , const IntegerType& iN, ReducerValueType& value) const``.
 
-    - The ``WorkTag`` free form of the operator is used if ``ExecPolicy::work_tag`` is not ``void``.
-    - ``N`` must match ``ExecPolicy::rank``.
+  - The ``WorkTag`` free form of the operator is used if ``ExecPolicy::work_tag`` is not ``void``.
+  - ``N`` must match ``ExecPolicy::rank``.
 * If the ``functor`` is a lambda, ``ReducerArgument`` must satisfy the ``Reducer`` concept or ``ReducerArgumentNonConst`` must be a POD type with ``operator +=`` and ``operator =`` or a ``Kokkos::View``.  In the latter case, the default ``Sum`` reduction is applied. If provided, the ``init``/ ``join``/ ``final`` member functions must not take a ``WorkTag`` argument even for tagged reductions.
 * If ``ExecPolicy`` is ``TeamThreadRange`` a "reducing" ``functor`` is not allowed and the ``ReducerArgument`` must satisfy the ``Reducer`` concept or ``ReducerArgumentNonConst`` must be a POD type with ``operator +=`` and ``operator =`` or a ``Kokkos::View``.  In the latter case, the default ``Sum`` reduction is applied.
 * The reduction argument type ``ReducerValueType`` of the ``functor`` operator must be compatible with the ``ReducerArgument`` (or ``ReducerArgumentNonConst``) and must match the arguments of the ``init``, ``join`` and ``final`` functions of the functor if those exist and no reducer is specified (``ReducerArgument`` doesn't satisfy the ``Reducer`` concept but is a scalar, pointer, or ``Kokkos::View``). In case of tagged reductions, i.e., when specifying a tag in the policy, the functor's potential ``init``/ ``join``/ ``final`` member functions must also be tagged.
 * If ``ReducerArgument`` (or ``ReducerArgumentNonConst``)
 
-    - is a scalar type then ``ReducerValueType`` must be of the same type.
-    - is a ``Kokkos::View`` then ``ReducerArgument::rank`` must be 0 and ``ReducerArgument::non_const_value_type`` must match ``ReducerValueType``.
-    - satisfies the ``Reducer`` concept then ``ReducerArgument::value_type`` must match ``ReducerValueType``.
-    - is an array or a pointer
+  - is a scalar type then ``ReducerValueType`` must be of the same type.
+  - is a ``Kokkos::View`` then ``ReducerArgument::rank`` must be 0 and ``ReducerArgument::non_const_value_type`` must match ``ReducerValueType``.
+  - satisfies the ``Reducer`` concept then ``ReducerArgument::value_type`` must match ``ReducerValueType``.
+  - is an array or a pointer
 
-        + ReducerValueType must match the array or the pointer signature.
-        + the functor must define FunctorType::value_type the same as ReducerValueType.
-        + the functor must declare a public member variable ``int value_count`` which is the length of the array.
-        + the functor must implement the function ``void init( ReducerValueType dst [] ) const`` or ``void init( ReducerValueType * dst) const`` depending on whether ReducerArgumentNonConst is an array or pointer respectively.
-        + the functor must implement the function ``void join( ReducerValueType dst[], ReducerValueType src[] ) const`` or ``void join( ReducerValueType * dst, ReducerValueType * src ) const`` depending on whether.ReducerArgumentNonConst is an array or pointer respectively.  
-        + If the functor implements the ``final`` function, the argument must also match those of init and join.
+    + ReducerValueType must match the array or the pointer signature.
+    + the functor must define FunctorType::value_type the same as ReducerValueType.
+    + the functor must declare a public member variable ``int value_count`` which is the length of the array.
+    + the functor must implement the function ``void init( ReducerValueType dst [] ) const`` or ``void init( ReducerValueType * dst) const`` depending on whether ReducerArgumentNonConst is an array or pointer respectively.
+    + the functor must implement the function ``void join( ReducerValueType dst[], ReducerValueType src[] ) const`` or ``void join( ReducerValueType * dst, ReducerValueType * src ) const`` depending on whether.ReducerArgumentNonConst is an array or pointer respectively.  
+    + If the functor implements the ``final`` function, the argument must also match those of init and join.
 
 Semantics
 ---------
