@@ -139,13 +139,15 @@ More for other data types: Scalar, uint64_t, int, int32_t, int64_t, float, doubl
 #include <Kokkos_Core.hpp>
 #include <Kokkos_Random.hpp>
 
-int main() {
+int main(int argc, char *argv[]) {
+  Kokkos::ScopeGuarg guard(argc, argv);
+
   Kokkos::Random_XorShift64_Pool<> random_pool(/*seed=*/12345);
 
   int total = 1000000;
   int count;
   Kokkos::parallel_reduce(
-      "approximate_pi" total,
+      "approximate_pi", total,
       KOKKOS_LAMBDA(int, int& local_count) {
         // acquire the state of the random number generator engine
         auto generator = random_pool.get_state();
