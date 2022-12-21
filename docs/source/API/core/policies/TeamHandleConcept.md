@@ -14,6 +14,10 @@ and are thus subject to change.
 ```c++
 class TeamHandleConcept {
     public:
+    // Nested aliases
+    using execution_space      = /*see details in the description below*/;
+    using scratch_memory_space = /*see details in the description below*/;
+
     // Constructor, Destructor, Assignment
     TeamHandleConcept( TeamHandleConcept && ) = default ;
     TeamHandleConcept( TeamHandleConcept const & ) = default ;
@@ -58,6 +62,12 @@ class TeamHandleConcept {
 ```
 
 ## Public Class Members
+
+### Nested aliases
+
+  * `execution_space`: specifies the [execution space](https://kokkos.github.io/kokkos-core-wiki/API/core/execution_spaces.html) associated to the team
+
+  * `scratch_memory_space`: the scratch memory space associated to this team's execution space
 
 ### Constructors
  
