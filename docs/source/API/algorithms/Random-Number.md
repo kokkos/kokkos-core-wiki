@@ -131,3 +131,37 @@ For the selected 32-bit unsigned integer type, three range options are shown: [0
 The first, and default, option selects unsigned integers over max possible range for that data type. The defined value of MAX_URAND is shown above as an enum. (And also shown is maX_URAND for a 64-bit unsigned integer.) The latter two options cover a user-defined range of integers.
 
 More for other data types: Scalar, uint64_t, int, int32_t, int64_t, float, double; also normal distribution and a View-fill option for the [0, range) and [start, end) options.
+
+
+## Example
+
+```c++
+#include <Kokkos_Core.hpp>
+#include <Kokkos_Random.hpp>
+
+int main() {
+  Kokkos::Random_XorShift64_Pool<> random_pool(/*seed=*/12345);
+
+  int total = 1000000;
+  int count;
+  Kokkos::parallel_reduce(
+      "approximate_pi" total,
+      KOKKOS_LAMBDA(int, int& local_count) {
+        // acquire the state of the random number generator engine
+        auto generator = random_pool.get_state();
+
+        double x = generator.drand(0., 1.);
+        double y = generator.drand(0., 1.);
+
+        // do not forget to release the state of the engine
+        random_pool.free_state(generator);
+
+        if (x * x + y * y <= 1.) {
+          ++local_count;
+        }
+      },
+      count);
+
+  printf("pi = %f\n", 4. * count / total);
+}
+```
