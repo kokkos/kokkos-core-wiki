@@ -1,8 +1,8 @@
 ``LayoutLeft``
 ==============
 
-.. role:: cpp(code)
-   :language: cpp
+.. role:: cppkokkos(code)
+   :language: cppkokkos
 
 Header File: ``Kokkos_Layout.hpp``
 
@@ -41,33 +41,33 @@ Synopsis
 Class Interface
 ---------------
 
-.. cpp:class:: LayoutLeft
+.. cppkokkos:class:: LayoutLeft
 
   This Kokkos Layout, when provided to a multidimensional View, lays out memory such that the first index is the contiguous one. This matches the Fortran conventions for allocations.
 
   .. rubric:: Public Member Variables
 
-  .. cpp:member:: static constexpr bool is_extent_constructible
+  .. cppkokkos:member:: static constexpr bool is_extent_constructible
 
     A boolean enum to allow detection that this class is extent constructible
 
-  .. cpp:member:: static constexpr unsigned dimension
+  .. cppkokkos:member:: static constexpr unsigned dimension
 
     An array containing the size of each dimension of the Layout
 
   .. rubric:: Other Types
 
-  .. cpp:type:: array_layout
+  .. cppkokkos:type:: array_layout
 
     A tag signifying that this models the Layout concept
 
   .. rubric:: Constructors
 
-  .. cpp:function:: LayoutLeft(LayoutLeft const&)
+  .. cppkokkos:function:: LayoutLeft(LayoutLeft const&)
 
     Default copy constructor, element-wise copies the other Layout
 
-  .. cpp:function:: LayoutLeft(LayoutLeft&&)
+  .. cppkokkos:function:: LayoutLeft(LayoutLeft&&)
 
     Default move constructor, element-wise moves the other Layout
 
@@ -82,11 +82,11 @@ Class Interface
 
   .. rubric:: Assignment operators
 
-  .. cpp:function:: LayoutLeft& operator=(LayoutLeft const&) = default
+  .. cppkokkos:function:: LayoutLeft& operator=(LayoutLeft const&) = default
 
     Default copy assignment, element-wise copies the other Layout
 
-  .. cpp:function:: LayoutLeft& operator=(LayoutLeft&&) = default
+  .. cppkokkos:function:: LayoutLeft& operator=(LayoutLeft&&) = default
 
     Default move assignment, element-wise moves the other Layout
 
