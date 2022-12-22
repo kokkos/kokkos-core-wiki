@@ -23,18 +23,9 @@ used by profiling and debugging tools. This call may be asynchronous and return 
 Interface
 ---------
 
-.. code-block:: cpp
+.. cpp:function:: template <class ExecPolicy, class FunctorType> Kokkos::parallel_for(const std::string& name, const ExecPolicy& policy, const FunctorType& functor);
 
-    template <class ExecPolicy, class FunctorType>
-    Kokkos::parallel_for(const std::string& name, 
-                         const ExecPolicy& policy, 
-                         const FunctorType& functor);
-
-.. code-block:: cpp
-
-    template <class ExecPolicy, class FunctorType>
-    Kokkos::parallel_for(const ExecPolicy& policy, 
-                         const FunctorType& functor);
+.. cpp:function:: template <class ExecPolicy, class FunctorType> Kokkos::parallel_for(const ExecPolicy& policy, const FunctorType& functor);
 
 Parameters:
 ~~~~~~~~~~~
@@ -51,8 +42,8 @@ Parameters:
 
 * FunctorType: A valid functor having an ``operator()`` with a matching signature for the ``ExecPolicy``.  The functor can be defined using a C++ class/struct or lambda.  See Examples below for more detail.
 
-Requirements:
-~~~~~~~~~~~~~
+Requirements
+~~~~~~~~~~~~
 
 * If ``ExecPolicy`` is an ``IntegerType``, ``functor`` has a member function ``operator() (const IntegerType& i) const``.  
 * If ``ExecPolicy`` is an ``MDRangePolicy`` and ``ExecPolicy::work_tag`` is ``void``, ``functor`` has a member function ``operator() (const IntegerType& i0, ... , const IntegerType& iN) const`` where ``N`` is ``ExecPolicy::rank-1``.
