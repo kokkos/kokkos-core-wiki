@@ -719,7 +719,10 @@ otherwise identical <code class="docutils literal notranslate"><span class="pre"
 <li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">scratch_size_max</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">level</span><span class="p">);</span><span class="w"> </span>
 </pre></div>
 </div>
-<p>Returns: the maximum total scratch size in bytes, for the given level.</p>
+<p>Returns: the maximum total scratch size in bytes, for the given level. Note: If a kernel performs
+team-level reductions or scan operations, not all of this memory will be available for dynamic
+user requests. Some of that maximal scratch size is being used for internal operations. The
+actual size of these internal allocations depends on the value type used in the reduction or scan.</p>
 </li>
 </ul>
 </section>
