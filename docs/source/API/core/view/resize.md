@@ -9,6 +9,7 @@ resize(view,layout);
 ```
 
 Reallocates a view to have the new dimensions. Can grow or shrink, and will preserve content of the common subextents.
+May not modify the view, if sizes already match.
 
 ## Synopsis
 
@@ -76,6 +77,7 @@ void resize(const Impl::ViewCtorProp<ViewCtorArgs...>& arg_prop,
         const size_t n7 = KOKKOS_IMPL_CTOR_DEFAULT_ARG);
   ```
   Resizes `v` to have the new dimensions while preserving the contents for the common subview of the old and new view.
+  May not modify the view, if sizes already match.
   * `v`: existing view, can be a default constructed one.
   * `n[X]`: new length for extent X.
 
@@ -95,6 +97,7 @@ void resize(const Impl::ViewCtorProp<ViewCtorArgs...>& arg_prop,
          const size_t n7 = KOKKOS_IMPL_CTOR_DEFAULT_ARG);
   ```
   Resizes `v` to have the new dimensions while preserving the contents for the common subview of the old and new view. The new `Kokkos::View` is constructed using the View constructor property `arg_prop`, e.g., Kokkos::WithoutInitializing.
+  May not modify the view, if sizes already match.
   * `v`: existing view, can be a default constructed one.
   * `n[X]`: new length for extent X.
   * `arg_prop`: View constructor property, e.g., `Kokkos::WithoutInitializing`.
@@ -116,6 +119,7 @@ void resize(const Impl::ViewCtorProp<ViewCtorArgs...>& arg_prop,
          const size_t n7 = KOKKOS_IMPL_CTOR_DEFAULT_ARG);
   ```
   Resizes `v` to have the new dimensions while preserving the contents for the common subview of the old and new view. The new `Kokkos::View` is constructed using the View constructor properties `arg_prop`, e.g., `Kokkos::view_alloc(Kokkos::WithoutInitializing)`.  If `arg_prop` includes an execution space, it is used for allocating memory and for copying elements without using a final fence.
+  May not modify the view, if sizes already match.
   * `v`: existing view, can be a default constructed one.
   * `n[X]`: new length for extent X.
   * `arg_prop`: View constructor properties, e.g., `Kokkos::view_alloc(Kokkos::WithoutInitializing)`.
@@ -130,6 +134,7 @@ void resize(const Impl::ViewCtorProp<ViewCtorArgs...>& arg_prop,
          const typename Kokkos::View<T, P...>::array_layout& layout);
   ```
   Resizes `v` to have the new dimensions while preserving the contents for the common subview of the old and new view.
+  May not modify the view, if sizes already match.
   * `v`: existing view, can be a default constructed one.
   * `layout`: a layout instance containing the new dimensions.
 
@@ -139,6 +144,7 @@ void resize(const Impl::ViewCtorProp<ViewCtorArgs...>& arg_prop,
          const typename Kokkos::View<T, P...>::array_layout& layout);
   ```
   Resizes `v` to have the new dimensions while preserving the contents for the common subview of the old and new view. The new `Kokkos::View` is constructed using the View constructor property `arg_prop`, e.g., Kokkos::WithoutInitializing.
+  May not modify the view, if sizes already match.
   * `v`: existing view, can be a default constructed one.
   * `layout`: a layout instance containing the new dimensions.
   * `arg_prop`: View constructor property, e.g., `Kokkos::WithoutInitializing`.
@@ -150,12 +156,22 @@ void resize(const Impl::ViewCtorProp<ViewCtorArgs...>& arg_prop,
          const typename Kokkos::View<T, P...>::array_layout& layout);
   ```
   Resizes `v` to have the new dimensions while preserving the contents for the common subview of the old and new view. The new `Kokkos::View` is constructed using the View constructor properties `arg_prop`, e.g., `Kokkos::view_alloc(Kokkos::WithoutInitializing)`. If `arg_prop` includes an execution space, it is used for allocating memory and for copying elements without using a final fence.
+  May not modify the view, if sizes already match.
   * `v`: existing view, can be a default constructed one.
   * `layout`: a layout instance containing the new dimensions.
   * `arg_prop`: View constructor properties, e.g., `Kokkos::view_alloc(Kokkos::WithoutInitializing)`.
 
   Restrictions:
   * `arg_prop` must not include a pointer to memory, a label, or a memory space.
+
+## Possibly Unexpected Behavior Warning
+
+`resize` will only modify the specific `View` instance passed to it.
+Any other `View` which aliases the same allocation will be unmodified.
+Consequently, if the `use_count()` of the `View` is larger than 1, the
+old allocation will not be deleted.
+Note that if the size arguments already match the extents of the `View`
+argument, that `resize` may not create a new `View`.
 
 ## Example:
   * ```c++
