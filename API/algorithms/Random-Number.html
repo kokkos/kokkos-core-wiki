@@ -670,6 +670,41 @@ numbers, of the desired type, using the generator.</p>
 The first, and default, option selects unsigned integers over max possible range for that data type. The defined value of MAX_URAND is shown above as an enum. (And also shown is maX_URAND for a 64-bit unsigned integer.) The latter two options cover a user-defined range of integers.</p>
 <p>More for other data types: Scalar, uint64_t, int, int32_t, int64_t, float, double; also normal distribution and a View-fill option for the [0, range) and [start, end) options.</p>
 </section>
+<section id="example">
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this heading">#</a></h2>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Kokkos_Core.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Kokkos_Random.hpp&gt;</span><span class="cp"></span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">argv</span><span class="p">[])</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">ScopeGuarg</span><span class="w"> </span><span class="n">guard</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="n">argv</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">  </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">Random_XorShift64_Pool</span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="n">random_pool</span><span class="p">(</span><span class="cm">/*seed=*/</span><span class="mi">12345</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">total</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1000000</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">count</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">parallel_reduce</span><span class="p">(</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;approximate_pi&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">total</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="n">KOKKOS_LAMBDA</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">local_count</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// acquire the state of the random number generator engine</span>
+<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">generator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">random_pool</span><span class="p">.</span><span class="n">get_state</span><span class="p">();</span><span class="w"></span>
+
+<span class="w">        </span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">generator</span><span class="p">.</span><span class="n">drand</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span><span class="w"> </span><span class="mf">1.</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="kt">double</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">generator</span><span class="p">.</span><span class="n">drand</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span><span class="w"> </span><span class="mf">1.</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">        </span><span class="c1">// do not forget to release the state of the engine</span>
+<span class="w">        </span><span class="n">random_pool</span><span class="p">.</span><span class="n">free_state</span><span class="p">(</span><span class="n">generator</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mf">1.</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="o">++</span><span class="n">local_count</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="p">},</span><span class="w"></span>
+<span class="w">      </span><span class="n">count</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;pi = %f</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">4.</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">count</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">total</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
 </section>
 
         </article>
@@ -735,6 +770,7 @@ The first, and default, option selects unsigned integers over max possible range
 </li>
 <li><a class="reference internal" href="#generator">Generator</a><ul>
 <li><a class="reference internal" href="#synopsis">Synopsis</a></li>
+<li><a class="reference internal" href="#example">Example</a></li>
 </ul>
 </li>
 </ul>
