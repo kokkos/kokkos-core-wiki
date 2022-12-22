@@ -28,22 +28,32 @@ It was introduced in version 3.7 as a replacement for the
 Interface
 ---------
 
-.. .. cppkokkos:class::
-.. code-block:: cpp
+.. cpp:class:: InitializationSettings
 
-    class InitializationSettings {
-    public:
-    InitializationSettings();
-    InitializationSettings(InitArguments const& arguments);  // deprecated
-    InitializationSettings& set_PARAMETER-NAME(PARAMETER-TYPE value);  // see below
-    bool has_PARAMETER-NAME() const;  // see below
-    PARAMETER-TYPE get_PARAMETER-NAME() const;  // see below
-    };
+    .. cpp:function:: InitializationSettings();
+
+        Constructs a new object that does not contain any value for any of the settings.
+    
+    .. cpp:function:: InitializationSettings(InitArguments const& arguments);
+
+        **DEPRECATED** Converts the deprecated structure to a new object. Data members from the structure that compare equal to their default value are assumed to be unset. Let ``PARAMETER-NAME`` be a valid setting of type ``PARAMETER-TYPE`` as defined in the table below.
+
+    .. cpp:function:: InitializationSettings& set_PARAMETER_NAME(PARAMETER_TYPE value);  
+
+        Replaces the content of the ``PARAMETER_NAME`` setting with ``value`` and return a reference to the object. ``value`` must be a valid value for ``PARAMETER_NAME``.
+
+    .. cpp:function:: bool has_PARAMETER_NAME() const;  
+
+        Checks whether the object contains a value for the ``PARAMETER_NAME`` setting. Returns ``true`` if it contains a value, ``false`` otherwise.
+
+    .. cpp:function:: PARAMETER_TYPE get_PARAMETER_NAME() const;  
+
+        Accesses the contained value for the ``PARAMETER_NAME`` setting. The behavior is undefined if the object does not contain a value for setting ``PARAMETER_NAME``.
 
 The table below summarizes what settings are available.
 
 =======================        ==================    ===========
-**PARAMETER-NAME**             **PARAMETER-TYPE**    Description
+**PARAMETER_NAME**             **PARAMETER_TYPE**    Description
 =======================        ==================    ===========
 ``num_threads``                ``int``               Number of threads to use with the host parallel backend.  Must be greater than zero.
 ``device_id``                  ``int``               Device to use with the device parallel backend.  Valid IDs are zero to number of GPU(s) available for execution minus one.
@@ -56,45 +66,6 @@ The table below summarizes what settings are available.
 ``tools_args``                 ``std::string``       Options to pass to the loaded tool as command-line arguments.
 =======================        ==================    ===========
 
-.. code-block:: cpp
-
-    InitializationSettings();
-
-Constructs a new object that does not contain any value for any of the settings.
-
-.. code-block:: cpp
-    
-    InitializationSettings(InitArgument const& arguments);  // deprecated
-
-Converts the deprecated structure to a new object.
-Data members from the structure that compare equal to their default value are
-assumed to be unset.
-
-Let ``PARAMETER-NAME`` be a valid setting of type ``PARAMETER-TYPE`` as defined in the table above.
-
-.. code-block:: cpp
-
-    InitializationSettings& set_PARAMETER-NAME(PARAMETER-NAME value);
-
-Replaces the content of the ``PARAMETER-NAME`` setting with ``value`` and return a
-reference to the object.
-``value`` must be a valid value for ``PARAMETER-NAME``.
-
-.. code-block:: cpp
-
-    bool has_PARAMETER-NAME() const;
-
-Checks whether the object contains a value for the ``PARAMETER-NAME`` setting.
-Returns ``true`` if it contains a value, ``false`` otherwise.
-
-.. code-block:: cpp
-
-    PARAMETER-TYPE get_PARAMETER-NAME() const;
-
-Accesses the contained value for the ``PARAMETER-NAME`` setting.
-The behavior is undefined if the object does not contain a value for setting
-``PARAMETER-NAME``.
-
 Example
 ~~~~~~~
 
@@ -103,12 +74,12 @@ Example
     #include <Kokkos_Core.hpp>
 
     int main() {
-    Kokkos::initialize(Kokkos::InitializationSettings()
-                            .set_print_configuration(true)
-                            .set_map_device_id_by("random")
-                            .set_num_threads(1));
-    // ...
-    Kokkos::finalize();
+        Kokkos::initialize(Kokkos::InitializationSettings()
+                                .set_print_configuration(true)
+                                .set_map_device_id_by("random")
+                                .set_num_threads(1));
+        // ...
+        Kokkos::finalize();
     }
 
 See also
