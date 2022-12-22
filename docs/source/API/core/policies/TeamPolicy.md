@@ -198,7 +198,10 @@ class Kokkos::TeamPolicy {
   * ```c++
     static int scratch_size_max(int level); 
     ```
-    Returns: the maximum total scratch size in bytes, for the given level. 
+    Returns: the maximum total scratch size in bytes, for the given level. Note: If a kernel performs
+    team-level reductions or scan operations, not all of this memory will be available for dynamic
+    user requests. Some of that maximal scratch size is being used for internal operations. The
+    actual size of these internal allocations depends on the value type used in the reduction or scan.
 
 ### Query Runtime Settings
 
