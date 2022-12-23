@@ -23,93 +23,29 @@ Dispatches parallel work defined by ``functor`` according to the *ExecutionPolic
 Interface
 ---------
 
-.. code-block:: cpp
+.. cpp:function:: template <class ExecPolicy, class FunctorType> Kokkos::parallel_reduce(const std::string& name, const ExecPolicy& policy, const FunctorType& functor);
 
-    template <class ExecPolicy, class FunctorType>
-    Kokkos::parallel_reduce(const std::string& name, 
-                            const ExecPolicy& policy, 
-                            const FunctorType& functor);
+.. cpp:function:: template <class ExecPolicy, class FunctorType> Kokkos::parallel_reduce(const ExecPolicy& policy, const FunctorType& functor);
 
-.. code-block:: cpp
+.. cpp:function:: template <class ExecPolicy, class FunctorType, class ReducerArgument> Kokkos::parallel_reduce(const std::string& name, const ExecPolicy& policy, const FunctorType& functor, const ReducerArgument& reducer...);
 
-    template <class ExecPolicy, class FunctorType>
-    Kokkos::parallel_reduce(const ExecPolicy& policy, 
-                            const FunctorType& functor);
+.. cpp:function:: template <class ExecPolicy, class FunctorType, class ReducerArgument> Kokkos::parallel_reduce(const ExecPolicy& policy, const FunctorType& functor, const ReducerArgument& reducer...);
 
-.. code-block:: cpp
+.. cpp:function:: template <class ExecPolicy, class FunctorType, class ReducerArgumentNonConst> Kokkos::parallel_reduce(const std::string& name, const ExecPolicy& policy, const FunctorType& functor, ReducerArgumentNonConst& reducer...);
 
-    template <class ExecPolicy, class FunctorType, class ReducerArgument>
-    Kokkos::parallel_reduce(const std::string& name, 
-                            const ExecPolicy& policy, 
-                            const FunctorType& functor, 
-                            const ReducerArgument& reducer...);
-
-.. code-block:: cpp
-
-    template <class ExecPolicy, class FunctorType, class ReducerArgument>
-    Kokkos::parallel_reduce(const ExecPolicy& policy, 
-                            const FunctorType& functor, 
-                            const ReducerArgument& reducer...);
-
-.. code-block:: cpp
-
-    template <class ExecPolicy, class FunctorType, class ReducerArgumentNonConst>
-    Kokkos::parallel_reduce(const std::string& name, 
-                            const ExecPolicy& policy, 
-                            const FunctorType& functor, 
-                            ReducerArgumentNonConst& reducer...);
-
-.. code-block:: cpp
-
-    template <class ExecPolicy, class FunctorType, class ReducerArgumentNonConst>
-    Kokkos::parallel_reduce(const ExecPolicy& policy, 
-                            const FunctorType& functor, 
-                            ReducerArgumentNonConst& reducer...);
+.. cpp:function:: template <class ExecPolicy, class FunctorType, class ReducerArgumentNonConst> Kokkos::parallel_reduce(const ExecPolicy& policy, const FunctorType& functor, ReducerArgumentNonConst& reducer...);
     
-.. code-block:: cpp
+.. cpp:function:: template <class ExecPolicy, class FunctorType, class ReducerArgument1, class... ReducerArguments> Kokkos::parallel_reduce(const std::string& name, const ExecPolicy& policy, const FunctorType& functor, const ReducerArgument& reducer...);
 
-    template <class ExecPolicy, class FunctorType, class ReducerArgument1, class... ReducerArguments>
-    Kokkos::parallel_reduce(const std::string& name, 
-                            const ExecPolicy& policy, 
-                            const FunctorType& functor, 
-                            const ReducerArgument& reducer...);
+.. cpp:function:: template <class ExecPolicy, class FunctorType, class ReducerArgument1, class... ReducerArguments> Kokkos::parallel_reduce(const ExecPolicy& policy, const FunctorType& functor, const ReducerArgument& reducer...);
 
-.. code-block:: cpp
+.. cpp:function:: template <class ExecPolicy, class FunctorType, class ReducerArgumentNonConst1, class... ReducerArgumentNonConsts> Kokkos::parallel_reduce(const std::string& name, const ExecPolicy& policy, const FunctorType& functor, ReducerArgumentNonConst& reducer...);
 
-    template <class ExecPolicy, class FunctorType, class ReducerArgument1, class... ReducerArguments>
-    Kokkos::parallel_reduce(const ExecPolicy& policy, 
-                            const FunctorType& functor, 
-                            const ReducerArgument& reducer...);
+.. cpp:function:: template <class ExecPolicy, class FunctorType, class ReducerArgumentNonConst1, class ReducerArgumentNonConsts> Kokkos::parallel_reduce(const ExecPolicy& policy, const FunctorType& functor, ReducerArgumentNonConst& reducer...);
 
-.. code-block:: cpp
+.. cpp:function:: template <class ExecPolicy, class FunctorType> Kokkos::parallel_reduce(const std::string& name, const ExecPolicy& policy, const FunctorType& functor, const ResultType& result...);
 
-    template <class ExecPolicy, class FunctorType, class ReducerArgumentNonConst1, class... ReducerArgumentNonConsts>
-    Kokkos::parallel_reduce(const std::string& name, 
-                            const ExecPolicy& policy, 
-                            const FunctorType& functor, 
-                            ReducerArgumentNonConst& reducer...);
-
-.. code-block:: cpp
-
-    template <class ExecPolicy, class FunctorType, class ReducerArgumentNonConst1, class ReducerArgumentNonConsts>
-    Kokkos::parallel_reduce(const ExecPolicy& policy, 
-                            const FunctorType& functor, 
-                            ReducerArgumentNonConst& reducer...);
-
-.. code-block:: cpp
-
-    template <class ExecPolicy, class FunctorType>
-    Kokkos::parallel_reduce(const std::string& name, 
-                            const ExecPolicy& policy, 
-                            const FunctorType& functor, 
-                            const ResultType& result...);
-
-.. code-block:: cpp
-
-    template <class ExecPolicy, class FunctorType>
-    Kokkos::parallel_reduce(const ExecPolicy& policy, 
-                            const FunctorType& functor, 
-                            const ResultType& result...);
+.. cpp:function:: template <class ExecPolicy, class FunctorType> Kokkos::parallel_reduce(const ExecPolicy& policy, const FunctorType& functor, const ResultType& result...);
 
 Parameters:
 ~~~~~~~~~~~
