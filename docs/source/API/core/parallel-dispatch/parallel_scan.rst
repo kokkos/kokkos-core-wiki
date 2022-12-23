@@ -22,33 +22,13 @@ provided by the work items. The optional label ``name`` is used by profiling and
 Interface
 ---------
 
-.. code-block:: cpp
+.. cpp:function:: template <class ExecPolicy, class FunctorType> Kokkos::parallel_scan(const std::string& name, const ExecPolicy& policy, const FunctorType& functor);
 
-    template <class ExecPolicy, class FunctorType>
-    Kokkos::parallel_scan(const std::string& name, 
-                          const ExecPolicy& policy, 
-                          const FunctorType& functor);
+.. cpp:function:: template <class ExecPolicy, class FunctorType> Kokkos::parallel_scan(const ExecPolicy&  policy, const FunctorType& functor);
 
-.. code-block:: cpp
+.. cpp:function:: template <class ExecPolicy, class FunctorType, class ReturnType> Kokkos::parallel_scan(const std::string& name, const ExecPolicy&  policy, const FunctorType& functor, ReturnType&        return_value);
 
-    template <class ExecPolicy, class FunctorType>
-    Kokkos::parallel_scan(const ExecPolicy&  policy, 
-                          const FunctorType& functor);
-
-.. code-block:: cpp
-
-    template <class ExecPolicy, class FunctorType, class ReturnType>
-    Kokkos::parallel_scan(const std::string& name, 
-                          const ExecPolicy&  policy, 
-                          const FunctorType& functor, 
-                          ReturnType&        return_value);
-
-.. code-block:: cpp
-
-    template <class ExecPolicy, class FunctorType, class ReturnType>
-    Kokkos::parallel_scan(const ExecPolicy&  policy, 
-                          const FunctorType& functor, 
-                          ReturnType&        return_value);
+.. cpp:function:: template <class ExecPolicy, class FunctorType, class ReturnType> Kokkos::parallel_scan(const ExecPolicy&  policy, const FunctorType& functor, ReturnType&        return_value);
 
 Parameters:
 ~~~~~~~~~~~
