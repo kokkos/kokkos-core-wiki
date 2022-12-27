@@ -21,7 +21,10 @@ Usage
 Interface 
 ---------
 
-.. cpp:function:: template<class ... Args> class Kokkos::MDRangePolicy;
+.. code-block:: cpp
+    
+    template<class ... Args>
+    class Kokkos::MDRangePolicy;
 
 Parameters
 ----------
@@ -32,20 +35,27 @@ Common Arguments for all Execution Policies
 * Execution Policies generally accept compile time arguments via template parameters and runtime parameters via constructor arguments or setter functions.
 * Template arguments can be given in arbitrary order.
 
-========        ======= =======
-Argument        Options Purpose
-========        ======= =======
-ExecutionSpace  ``Serial``, ``OpenMP``, ``Threads``, ``Cuda``, ``HIP``, ``SYCL``, ``HPX``   Specify the Execution Space to execute the kernel in. Defaults to ``Kokkos::DefaultExecutionSpace``.
-Schedule        ``Schedule<Dynamic>``, ``Schedule<Static>`` Specify scheduling policy for work items. ``Dynamic`` scheduling is implemented through a work stealing queue. Default is machine and backend specific.
-IndexType       ``IndexType<int>``  Specify integer type to be used for traversing the iteration space. Defaults to ``int64_t``.
-LaunchBounds    ``LaunchBounds<MaxThreads, MinBlocks>`` Specifies hints to to the compiler about CUDA/HIP launch bounds.
-WorkTag         ``SomeClass``   Specify the work tag type used to call the functor operator. Any arbitrary type defaults to ``void``.
-========        ======= =======
++----------------+----------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Argument       | Options                                                                    | Purpose                                                                                                                                                 |
++================+============================================================================+=========================================================================================================================================================+
+| ExecutionSpace |  ``Serial``, ``OpenMP``, ``Threads``, ``Cuda``, ``HIP``, ``SYCL``, ``HPX`` | Specify the Execution Space to execute the kernel in. Defaults to ``Kokkos::DefaultExecutionSpace``.                                                    |
++----------------+----------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Schedule       | ``Schedule<Dynamic>``, ``Schedule<Static>``                                | Specify scheduling policy for work items. ``Dynamic`` scheduling is implemented through a work stealing queue. Default is machine and backend specific. |
++----------------+----------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
+| IndexType      | ``IndexType<int>``                                                         | Specify integer type to be used for traversing the iteration space. Defaults to ``int64_t``.                                                            |
++----------------+----------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
+| LaunchBounds   | ``LaunchBounds<MaxThreads, MinBlocks>``                                    | Specifies hints to to the compiler about CUDA/HIP launch bounds.                                                                                        |
++----------------+----------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
+| WorkTag        | ``SomeClass``                                                              | Specify the work tag type used to call the functor operator. Any arbitrary type defaults to ``void``.                                                   |
++----------------+----------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 Arguments Specific to MDRangePolicy
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. cpp:function:: template<int N, Iterate outer, Iterate inner> class Rank;
+.. code-block:: cpp
+    
+    template<int N, Iterate outer, Iterate inner>
+    class Rank;
   
 * Determines the rank of the index space as well as in which order to iterate over the tiles and how to iterate within the tiles. ``outer`` and ``inner`` can be ``Kokkos::Iterate::Default``, ``Kokkos::Iterate::Left``, or ``Kokkos::Iterate::Right``. 
     
