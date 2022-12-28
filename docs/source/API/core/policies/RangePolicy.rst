@@ -77,19 +77,19 @@ Common Arguments for all Execution Policies
 
 * Template arguments can be given in arbitrary order.
 
-+-------------------+---------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Argument          | Options                                                       | Purpose                                                                                                                                               |
-+===================+===============================================================+=======================================================================================================================================================+
-| ExecutionSpace    | `Serial`, `OpenMP`, `Threads`, `Cuda`, `HIP`, `SYCL`, `HPX`   | Specify the Execution Space to execute the kernel in. Defaults to `Kokkos::DefaultExecutionSpace`.                                                    |
-+-------------------+---------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Schedule          | `Schedule<Dynamic>`, `Schedule<Static>`                       | Specify scheduling policy for work items. `Dynamic` scheduling is implemented through a work stealing queue. Default is machine and backend specific. |
-+-------------------+---------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
-| IndexType         | `IndexType<int>`                                              | Specify integer type to be used for traversing the iteration space. Defaults to `int64_t`.                                                            |
-+-------------------+---------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
-| LaunchBounds      | `LaunchBounds<MaxThreads, MinBlocks>`                         | Specifies hints to to the compiler about CUDA/HIP launch bounds.                                                                                      |
-+-------------------+---------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
-| WorkTag           | `SomeClass`                                                   | Specify the work tag type used to call the functor operator. Any arbitrary type defaults to `void`.                                                   |
-+-------------------+---------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
++-------------------+---------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Argument          | Options                                                                   | Purpose                                                                                                                                                 |
++===================+===========================================================================+=========================================================================================================================================================+
+| ExecutionSpace    | ``Serial``, ``OpenMP``, ``Threads``, ``Cuda``, ``HIP``, ``SYCL``, ``HPX`` | Specify the Execution Space to execute the kernel in. Defaults to ``Kokkos::DefaultExecutionSpace``.                                                    |
++-------------------+---------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Schedule          | ``Schedule<Dynamic>``, ``Schedule<Static>``                               | Specify scheduling policy for work items. ``Dynamic`` scheduling is implemented through a work stealing queue. Default is machine and backend specific. |
++-------------------+---------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
+| IndexType         | ``IndexType<int>``                                                        | Specify integer type to be used for traversing the iteration space. Defaults to ``int64_t``.                                                            |
++-------------------+---------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
+| LaunchBounds      | ``LaunchBounds<MaxThreads, MinBlocks>``                                   | Specifies hints to to the compiler about CUDA/HIP launch bounds.                                                                                        |
++-------------------+---------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
+| WorkTag           | ``SomeClass``                                                             | Specify the work tag type used to call the functor operator. Any arbitrary type defaults to ``void``.                                                   |
++-------------------+---------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 Requirements
 ~~~~~~~~~~~~
@@ -100,7 +100,9 @@ Public Class Members
 Constructors
 ~~~~~~~~~~~~
  
-* RangePolicy(): Default Constructor uninitialized policy.
+.. cpp:function:: RangePolicy()
+    
+* Default Constructor uninitialized policy.
 
 .. code-block:: cpp
 
@@ -123,18 +125,15 @@ Optional ``InitArgs``:
 
 Examples
 --------
-
-.. cpp:function:: RangePolicy<> policy_1(0, N);
-
-.. cpp:function:: RangePolicy<Cuda> policy_2(5,N-5);
-
-.. cpp:function:: RangePolicy<Schedule<Dynamic>, OpenMP> policy_3(n,m);
-
-.. cpp:function:: RangePolicy<IndexType<int>, Schedule<Dynamic>> policy_4(0, K);
-
-.. cpp:function:: RangePolicy<> policy_6(-3,N+3, ChunkSize(8));
-
-.. cpp:function:: RangePolicy<OpenMP> policy_7(OpenMP(), 0, N, ChunkSize(4));
+   
+.. code-block:: cpp
+    
+    RangePolicy<> policy_1(0, N);
+    RangePolicy<Cuda> policy_2(5,N-5);
+    RangePolicy<Schedule<Dynamic>, OpenMP> policy_3(n,m);
+    RangePolicy<IndexType<int>, Schedule<Dynamic>> policy_4(0, K);
+    RangePolicy<> policy_6(-3,N+3, ChunkSize(8));
+    RangePolicy<OpenMP> policy_7(OpenMP(), 0, N, ChunkSize(4));
 
 Note: providing a single integer as a policy to a parallel pattern, implies a defaulted ``RangePolicy``
 
