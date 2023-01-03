@@ -102,21 +102,23 @@ Constructors
  
 .. cpp:function:: RangePolicy()
     
-* Default Constructor uninitialized policy.
+    Default Constructor uninitialized policy.
 
 .. code-block:: cpp
 
-   template<class ... InitArgs> 
-   RangePolicy(const int64_t& begin, const int64_t& end, const InitArgs ... init_args)
+    template<class ... InitArgs> 
+    RangePolicy(const int64_t& begin, const int64_t& end, const InitArgs ... init_args)
 
-* Provide a start and end index as well as optional arguments to control certain behavior (see below).
+\
+    Provide a start and end index as well as optional arguments to control certain behavior (see below).
    
 .. code-block:: cpp
 
-   template<class ... InitArgs> 
-   RangePolicy(const ExecutionSpace& space, const int64_t& begin, const int64_t& end, const InitArgs ... init_args)
-   
-* Provide a start and end index and an ``ExecutionSpace`` instance to use as the execution resource, as well as optional arguments to control certain behavior (see below).
+    template<class ... InitArgs> 
+    RangePolicy(const ExecutionSpace& space, const int64_t& begin, const int64_t& end, const InitArgs ... init_args)
+
+\
+    Provide a start and end index and an ``ExecutionSpace`` instance to use as the execution resource, as well as optional arguments to control certain behavior (see below).
 
 Optional ``InitArgs``:
 ^^^^^^^^^^^^^^^^^^^^^^
