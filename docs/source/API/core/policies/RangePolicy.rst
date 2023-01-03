@@ -100,8 +100,11 @@ Public Class Members
 Constructors
 ~~~~~~~~~~~~
  
-.. cpp:function:: RangePolicy()
+.. code-block:: cpp
     
+    RangePolicy()
+    
+\
     Default Constructor uninitialized policy.
 
 .. code-block:: cpp
