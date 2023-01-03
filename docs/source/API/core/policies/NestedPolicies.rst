@@ -59,39 +59,39 @@ Description
 
 .. cpp:function:: Impl::TeamThreadRangeBoundariesStruct TeamThreadRange(TeamMemberType team, IndexType count);
 
-* Splits the index range ``0`` to ``count-1`` over the threads of the team. This call is potentially a synchronization point for the team, and thus must meet the requirements of ``team_barrier``.
-    - ``team``: object meeting the requirements of TeamHandle
-    - ``count``: index range length. 
+    Splits the index range ``0`` to ``count-1`` over the threads of the team. This call is potentially a synchronization point for the team, and thus must meet the requirements of ``team_barrier``.
+        - ``team``: object meeting the requirements of TeamHandle
+        - ``count``: index range length. 
 
 .. cpp:function:: Impl::TeamThreadRangeBoundariesStruct TeamThreadRange(TeamMemberType team, IndexType begin, IndexType end);
 
-* Splits the index range ``begin`` to ``end-1`` over the threads of the team. This call is potentially a synchronization point for the team, and thus must meet the requirements of ``team_barrier``.
-   - ``team``: object meeting the requirements of TeamHandle
-   - ``begin``: start index.
-   - ``end``: end index.
+    Splits the index range ``begin`` to ``end-1`` over the threads of the team. This call is potentially a synchronization point for the team, and thus must meet the requirements of ``team_barrier``.
+        - ``team``: object meeting the requirements of TeamHandle
+        - ``begin``: start index.
+        - ``end``: end index.
 
 .. cpp:function:: Impl::ThreadVectorRangeBoundariesStruct ThreadVectorRange(TeamMemberType team, IndexType count);
 
-* Splits the index range ``0`` to ``count-1`` over the vector lanes of the calling thread. It is not legal to call this function inside of a vector level loop.
-   - ``team``: object meeting the requirements of TeamHandle
-   - ``count``: index range length. 
+    Splits the index range ``0`` to ``count-1`` over the vector lanes of the calling thread. It is not legal to call this function inside of a vector level loop.
+        - ``team``: object meeting the requirements of TeamHandle
+        - ``count``: index range length. 
 
 .. cpp:function:: Impl::ThreadVectorRangeBoundariesStruct ThreadVectorRange(TeamMemberType team, IndexType begin, IndexType end);
 
-* Splits the index range ``begin`` to ``end-1`` over the vector lanes of the calling thread. It is not legal to call this function inside of a vector level loop.
-   - ``team``: object meeting the requirements of TeamHandle
-   - ``begin``: start index.        
-   - ``end``: end index. 
+    Splits the index range ``begin`` to ``end-1`` over the vector lanes of the calling thread. It is not legal to call this function inside of a vector level loop.
+        - ``team``: object meeting the requirements of TeamHandle
+        - ``begin``: start index.        
+        - ``end``: end index. 
 
 .. cpp:function:: Impl::ThreadSingleStruct PerTeam(TeamMemberType team);
 
-* When used in conjunction with the ``single`` pattern restricts execution to a single vector lane in the calling team. While not a synchronization event, this call must be encountered by the entire team, and thus meet the calling requirements of ``team_barrier``. 
-    - ``team``: object meeting the requirements of TeamHandle
+    When used in conjunction with the ``single`` pattern restricts execution to a single vector lane in the calling team. While not a synchronization event, this call must be encountered by the entire team, and thus meet the calling requirements of ``team_barrier``. 
+        - ``team``: object meeting the requirements of TeamHandle
 
 .. cpp:function:: Impl::VectorSingleStruct PerThread(TeamMemberType team);
 
-* When used in conjunction with the ``single`` pattern restricts execution to a single vector lane in the calling thread. It is not legal to call this function inside of a vector level loop.
-   - ``team``: object meeting the requirements of TeamHandle
+    When used in conjunction with the ``single`` pattern restricts execution to a single vector lane in the calling thread. It is not legal to call this function inside of a vector level loop.
+        - ``team``: object meeting the requirements of TeamHandle
 
 Examples
 ~~~~~~~~
