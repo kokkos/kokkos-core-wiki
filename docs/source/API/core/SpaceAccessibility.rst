@@ -62,7 +62,9 @@ Equivalent to ``Kokkos::SpaceAccessibility<Ex::memory_space, MSp1>::assignable``
 
 A compile-time value convertible to ``bool`` guaranteed to be ``true`` if and only if it is valid within the Kokkos programming model to |KokkosDeepCopy|_ from any (otherwise valid) instance of |KokkosView|_ type ``V2`` (with ``std::is_same<V2::memory_space, MSp2>::value`` equal to ``true``) to any (otherwise valid and otherwise compatible) instance of a ``View`` type ``V1`` (with ``std::is_same<V1::memory_space, MSp1>::value`` equal to ``true``).  In other words, if ``v2`` is a valid instance of ``V2`` and ``v1`` is a valid instance of ``V1`` (with shape and other attributes otherwise compatible with ``v2``), the following expression will be well-defined and valid in the Kokkos programming model:
 
-.. cpp:function:: Kokkos::deep_copy(v1, v2);
+.. code-block:: cpp
+    
+    Kokkos::deep_copy(v1, v2);
 
 ------------
 
