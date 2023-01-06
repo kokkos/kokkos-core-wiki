@@ -31,10 +31,12 @@ Synopsis
 Description
 -----------
 
-.. cpp:function:: template<class TeamMemberType, class iType> TeamThreadRange(TeamMemberType team, iType count);
+.. code-block:: cpp
 
-    .. /* Implementation defined */
+    template<class TeamMemberType, class iType>
+    /* Implementation defined */ TeamThreadRange(TeamMemberType team, iType count);
 
+\
     Splits the index range ``0`` to ``count-1`` over the threads of the team. 
 
     * **Arguments**  
@@ -50,10 +52,12 @@ Description
         - Every member thread of ``team`` must call the operation in the same branch, i.e. it is not legal to have some threads call this function in one branch, and the other threads of ``team`` call it in another branch.
         - ``count >= 0`` is true;
  
-.. cpp:function:: template<class TeamMemberType, class iType1, class iType2> TeamThreadRange(TeamMemberType team, iType1 begin, iType2 end);
-
-    .. /* Implementation defined */
-
+.. code-block:: cpp
+    
+    template<class TeamMemberType, class iType1, class iType2>
+    /* Implementation defined */ TeamThreadRange(TeamMemberType team, iType1 begin, iType2 end);
+   
+\
     Splits the index range ``begin`` to ``end-1`` over the threads of the team. 
 
     * **Arguments**   
