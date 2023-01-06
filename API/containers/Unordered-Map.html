@@ -497,81 +497,81 @@
 <p>An <code class="docutils literal notranslate"><span class="pre">UnorderedMap</span></code> behaves like an unordered set if the template parameter <code class="docutils literal notranslate"><span class="pre">Value</span></code> is void.</p>
 <section id="kokkos-unorderedmap-api">
 <h2>Kokkos::UnorderedMap API<a class="headerlink" href="#kokkos-unorderedmap-api" title="Permalink to this heading">#</a></h2>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">UnorderedMapInsertResult</span><span class="p">;</span><span class="w"></span>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">UnorderedMapInsertResult</span><span class="p">;</span>
 
 <span class="k">template</span><span class="o">&lt;</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="nc">Key</span><span class="w">    </span><span class="c1">// Must be a POD</span>
 <span class="w">        </span><span class="p">,</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="nc">Value</span><span class="w">  </span><span class="c1">// void indicates an unordered set, otherwise </span>
 <span class="w">                          </span><span class="c1">// must be trivially copyable</span>
-<span class="w">        </span><span class="p">,</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="nc">Device</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">DefaultExecutionSpace</span><span class="w"></span>
+<span class="w">        </span><span class="p">,</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="nc">Device</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">DefaultExecutionSpace</span>
 <span class="w">                          </span><span class="c1">// Device is any class or struct with the </span>
 <span class="w">                          </span><span class="c1">// following typedefs or type aliases</span>
 <span class="w">                          </span><span class="c1">// execution_space, memory_space, and device_type</span>
-<span class="w">        </span><span class="o">&gt;</span><span class="w"></span>
-<span class="k">class</span><span class="w"> </span><span class="nc">UnorderedMap</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="k">public</span><span class="o">:</span><span class="w"></span>
+<span class="w">        </span><span class="o">&gt;</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">UnorderedMap</span><span class="w"> </span><span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
 <span class="w">  </span><span class="c1">// Host: create map with enough space for at least</span>
 <span class="w">  </span><span class="c1">// capacity_hint number of objects</span>
-<span class="w">  </span><span class="n">UnorderedMap</span><span class="p">(</span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">capacity_hint</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">UnorderedMap</span><span class="p">(</span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">capacity_hint</span><span class="p">);</span>
 <span class="w">  </span>
 <span class="w">  </span><span class="c1">// Host: clear the map</span>
-<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">clear</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">clear</span><span class="p">();</span>
 <span class="w">  </span>
 <span class="w">  </span><span class="c1">// Host: rehash map to given capacity,</span>
 <span class="w">  </span><span class="c1">// the current size is used as a lower bound</span>
 <span class="w">  </span><span class="c1">// O(capacity)</span>
-<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="nf">rehash</span><span class="p">(</span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">requested_capacity</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="nf">rehash</span><span class="p">(</span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">requested_capacity</span><span class="p">);</span>
 <span class="w">  </span>
 <span class="w">  </span><span class="c1">// Host: current size of the map, O(capacity)</span>
-<span class="w">  </span><span class="kt">uint32_t</span><span class="w"> </span><span class="nf">size</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kt">uint32_t</span><span class="w"> </span><span class="nf">size</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
 <span class="w">  </span>
 <span class="w">  </span><span class="c1">// Host/Device: capacity of the map, O(1)</span>
-<span class="w">  </span><span class="kt">uint32_t</span><span class="w"> </span><span class="nf">capacity</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kt">uint32_t</span><span class="w"> </span><span class="nf">capacity</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
 <span class="w">  </span>
 <span class="w">  </span><span class="c1">// Device: insert the given key into the map with a </span>
 <span class="w">  </span><span class="c1">// default constructed value</span>
-<span class="w">  </span><span class="n">UnorderedMapInsertResult</span><span class="w"> </span><span class="nf">insert</span><span class="p">(</span><span class="n">key</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">UnorderedMapInsertResult</span><span class="w"> </span><span class="nf">insert</span><span class="p">(</span><span class="n">key</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
 <span class="w">  </span>
 <span class="w">  </span><span class="c1">// Device: insert the given key/value pair into the map</span>
-<span class="w">  </span><span class="n">UnorderedMapInsertResult</span><span class="w"> </span><span class="nf">insert</span><span class="p">(</span><span class="n">Key</span><span class="w"> </span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="n">Value</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">UnorderedMapInsertResult</span><span class="w"> </span><span class="nf">insert</span><span class="p">(</span><span class="n">Key</span><span class="w"> </span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="n">Value</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
 <span class="w">  </span>
 <span class="w">  </span><span class="c1">// Device: return the index of the key if it exist, otherwise </span>
 <span class="w">  </span><span class="c1">// return invalid_index</span>
-<span class="w">  </span><span class="kt">uint32_t</span><span class="w"> </span><span class="nf">find</span><span class="p">(</span><span class="n">Key</span><span class="w"> </span><span class="n">key</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+<span class="w">  </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">find</span><span class="p">(</span><span class="n">Key</span><span class="w"> </span><span class="n">key</span><span class="p">)</span><span class="w"> </span><span class="k">const</span>
 <span class="w">  </span>
 <span class="w">  </span><span class="c1">// Device: Does the key exist in the map </span>
-<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="n">exists</span><span class="p">(</span><span class="n">Key</span><span class="w"> </span><span class="n">key</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="n">exists</span><span class="p">(</span><span class="n">Key</span><span class="w"> </span><span class="n">key</span><span class="p">)</span><span class="w"> </span><span class="k">const</span>
 
 <span class="w">  </span><span class="c1">// Device: is the current index a valid key/value pair</span>
-<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="n">valid_at</span><span class="p">(</span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">index</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="n">valid_at</span><span class="p">(</span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">index</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
 <span class="w">  </span>
 <span class="w">  </span><span class="c1">// Device: return the current key at the index</span>
-<span class="w">  </span><span class="n">Key</span><span class="w"> </span><span class="nf">key_at</span><span class="p">(</span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">index</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">Key</span><span class="w"> </span><span class="nf">key_at</span><span class="p">(</span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">index</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
 <span class="w">  </span>
 <span class="w">  </span><span class="c1">// Device: return the current value at the index</span>
-<span class="w">  </span><span class="n">Value</span><span class="w"> </span><span class="nf">value_at</span><span class="p">(</span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">index</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">Value</span><span class="w"> </span><span class="nf">value_at</span><span class="p">(</span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">index</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
 
 <span class="w">  </span><span class="c1">// Host/Device: return true if the internal views (keys, values, </span>
 <span class="w">  </span><span class="c1">// hashmap) are allocated</span>
-<span class="w">  </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="nf">is_allocated</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="nf">is_allocated</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
 <span class="w"> </span>
-<span class="p">};</span><span class="w"></span>
+<span class="p">};</span>
 
 
-<span class="k">class</span><span class="w"> </span><span class="nc">UnorderedMapInsertResult</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="k">public</span><span class="o">:</span><span class="w"></span>
+<span class="k">class</span><span class="w"> </span><span class="nc">UnorderedMapInsertResult</span><span class="w"> </span><span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
 <span class="w">  </span><span class="c1">// Was the key/value pair successfully inserted into the map</span>
-<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="n">success</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="n">success</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
 <span class="w">  </span>
 <span class="w">  </span><span class="c1">// Is the key already present in the map</span>
-<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="nf">existing</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="nf">existing</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
 <span class="w">  </span>
 <span class="w">  </span><span class="c1">// Did the insert fail?</span>
-<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="nf">failed</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="nf">failed</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
 <span class="w">  </span>
 <span class="w">  </span><span class="c1">// Index where the key exists in the map</span>
 <span class="w">  </span><span class="c1">// as long as failed() == false</span>
-<span class="w">  </span><span class="kt">uint32_t</span><span class="w"> </span><span class="nf">index</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
-<span class="p">};</span><span class="w"></span>
+<span class="w">  </span><span class="kt">uint32_t</span><span class="w"> </span><span class="nf">index</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
+<span class="p">};</span>
 </pre></div>
 </div>
 </section>
@@ -584,13 +584,13 @@
 <p>Iterating over Kokkos’ <code class="docutils literal notranslate"><span class="pre">UnorderedMap</span></code> is different from iterating over a standard container.  The pattern is to iterate over the capacity of the map and check if the current index is valid.</p>
 <p>Example:</p>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="c1">// assume umap is an existing Kokkos::UnorderedMap</span>
-<span class="n">parallel_for</span><span class="p">(</span><span class="n">umap</span><span class="p">.</span><span class="n">capacity</span><span class="p">(),</span><span class="w"> </span><span class="n">KOKKOS_LAMBDA</span><span class="w"> </span><span class="p">(</span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">umap</span><span class="p">.</span><span class="n">valid_at</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">key</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="n">umap</span><span class="p">.</span><span class="n">key_at</span><span class="p">(</span><span class="n">i</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">umap</span><span class="p">.</span><span class="n">value_at</span><span class="p">(</span><span class="n">i</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="p">...</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-<span class="p">});</span><span class="w"></span>
+<span class="n">parallel_for</span><span class="p">(</span><span class="n">umap</span><span class="p">.</span><span class="n">capacity</span><span class="p">(),</span><span class="w"> </span><span class="n">KOKKOS_LAMBDA</span><span class="w"> </span><span class="p">(</span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">umap</span><span class="p">.</span><span class="n">valid_at</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">key</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="n">umap</span><span class="p">.</span><span class="n">key_at</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">umap</span><span class="p">.</span><span class="n">value_at</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+<span class="w">    </span><span class="p">...</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">});</span>
 </pre></div>
 </div>
 </section>

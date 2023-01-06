@@ -507,15 +507,15 @@ For specific capabilities check their API reference:</p>
 <section id="initialization-by-command-line-arguments">
 <h2>5.1 Initialization by command-line arguments<a class="headerlink" href="#initialization-by-command-line-arguments" title="Permalink to this heading">#</a></h2>
 <p>The simplest way to initialize Kokkos is by calling the following function:</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">Kokkos</span><span class="o">::</span><span class="n">initialize</span><span class="p">(</span><span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">argv</span><span class="p">[]);</span><span class="w"></span>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">Kokkos</span><span class="o">::</span><span class="n">initialize</span><span class="p">(</span><span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">argv</span><span class="p">[]);</span>
 </pre></div>
 </div>
 <p>Just like <code class="docutils literal notranslate"><span class="pre">MPI_Init</span></code>, this function interprets command-line arguments to determine the requested settings. Also like <code class="docutils literal notranslate"><span class="pre">MPI_Init</span></code>, it reserves the right to remove command-line arguments from the input list. This is why it takes <code class="docutils literal notranslate"><span class="pre">argc</span></code> by reference, rather than by value; it may change the value on output.</p>
 <p>During initialization one or more execution spaces will be initialized and assigned to one of the following aliases.</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">Kokkos</span><span class="o">::</span><span class="n">DefaultExecutionSpace</span><span class="p">;</span><span class="w"></span>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">Kokkos</span><span class="o">::</span><span class="n">DefaultExecutionSpace</span><span class="p">;</span>
 </pre></div>
 </div>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">Kokkos</span><span class="o">::</span><span class="n">DefaultHostExecutionSpace</span><span class="p">;</span><span class="w"></span>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">Kokkos</span><span class="o">::</span><span class="n">DefaultHostExecutionSpace</span><span class="p">;</span>
 </pre></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">DefaultExecutionSpace</span></code> is the execution space used with policies and views where one is not explicitly specified.  Primarily, Kokkos will initialize one of the heterogeneous backends (CUDA, OpenMPTarget, HIP, SYCL) as the <code class="docutils literal notranslate"><span class="pre">DefaultExecutionSpace</span></code> if enabled in the build configuration.  In addition, Kokkos requires a <code class="docutils literal notranslate"><span class="pre">DefaultHostExecutionSpace</span></code>.  The <code class="docutils literal notranslate"><span class="pre">DefaultHostExecutionSpace</span></code> is default execution space used when host operations are required.  If one of the parallel host execution spaces are enabled in the build environment then <code class="docutils literal notranslate"><span class="pre">Kokkos::Serial</span></code> is only initialized if it is explicitly enabled in the build configuration.  If a parallel host execution space is not enabled in the build configuration, then <code class="docutils literal notranslate"><span class="pre">Kokkos::Serial</span></code> is initialized as the <code class="docutils literal notranslate"><span class="pre">DefaultHostExecutionSpace</span></code>.
@@ -573,28 +573,28 @@ Kokkos chooses the two spaces using the following list:</p>
 <section id="initialization-by-struct">
 <h2>5.2 Initialization by struct<a class="headerlink" href="#initialization-by-struct" title="Permalink to this heading">#</a></h2>
 <p>Instead of giving <a class="reference internal" href="../API/core/initialize_finalize/initialize.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">Kokkos::initialize()</span></code></span></a> command-line arguments, one may directly pass in initialization parameters using the following struct:</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span><span class="w"> </span><span class="nc">Kokkos</span><span class="o">::</span><span class="n">InitArguments</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">num_threads</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">num_numa</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">device_id</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">ndevices</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">skip_device</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="n">disable_warnings</span><span class="p">;</span><span class="w"></span>
-<span class="p">};</span><span class="w"></span>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span><span class="w"> </span><span class="nc">Kokkos</span><span class="o">::</span><span class="n">InitArguments</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">num_threads</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">num_numa</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">device_id</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">ndevices</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">skip_device</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="n">disable_warnings</span><span class="p">;</span>
+<span class="p">};</span>
 </pre></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">num_threads</span></code> field corresponds to the <code class="docutils literal notranslate"><span class="pre">--kokkos-threads</span></code> command-line argument, <code class="docutils literal notranslate"><span class="pre">num_numa</span></code> to <code class="docutils literal notranslate"><span class="pre">--kokkos-numa</span></code>, <code class="docutils literal notranslate"><span class="pre">device_id</span></code> to <code class="docutils literal notranslate"><span class="pre">--device-id</span></code>, <code class="docutils literal notranslate"><span class="pre">ndevices</span></code> to the first value in <code class="docutils literal notranslate"><span class="pre">--num-devices</span></code> and <code class="docutils literal notranslate"><span class="pre">skip_devices</span></code> to the second value in <code class="docutils literal notranslate"><span class="pre">--num-devices</span></code>. (See Table 5.1 for details.) Not all parameters are observed by all execution spaces, and the struct might expand in the future if needed.</p>
 <p>If you set <code class="docutils literal notranslate"><span class="pre">num_threads</span></code> or <code class="docutils literal notranslate"><span class="pre">num_numa</span></code> to zero or less, Kokkos will try to determine default values if possible or otherwise set them to 1. In particular, Kokkos can use the <code class="docutils literal notranslate"><span class="pre">hwloc</span></code> library to determine default settings using the assumption that the process binding mask is unique, i.e., that this process does not share any cores with another process. Note that the default value of each parameter is -1.</p>
 <p>Here is an example of how to use the struct.</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">Kokkos</span><span class="o">::</span><span class="n">InitArguments</span><span class="w"> </span><span class="n">args</span><span class="p">;</span><span class="w"></span>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">Kokkos</span><span class="o">::</span><span class="n">InitArguments</span><span class="w"> </span><span class="n">args</span><span class="p">;</span>
 <span class="c1">// 8 (CPU) threads per NUMA region</span>
-<span class="n">args</span><span class="p">.</span><span class="n">num_threads</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">8</span><span class="p">;</span><span class="w"></span>
+<span class="n">args</span><span class="p">.</span><span class="n">num_threads</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">8</span><span class="p">;</span>
 <span class="c1">// 2 (CPU) NUMA regions per process</span>
-<span class="n">args</span><span class="p">.</span><span class="n">num_numa</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w"></span>
+<span class="n">args</span><span class="p">.</span><span class="n">num_numa</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
 <span class="c1">// If Kokkos was built with CUDA enabled, use the GPU with device ID 1.</span>
-<span class="n">args</span><span class="p">.</span><span class="n">device_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+<span class="n">args</span><span class="p">.</span><span class="n">device_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
 
-<span class="n">Kokkos</span><span class="o">::</span><span class="n">initialize</span><span class="p">(</span><span class="n">args</span><span class="p">);</span><span class="w"></span>
+<span class="n">Kokkos</span><span class="o">::</span><span class="n">initialize</span><span class="p">(</span><span class="n">args</span><span class="p">);</span>
 </pre></div>
 </div>
 </section>
@@ -605,13 +605,13 @@ Kokkos chooses the two spaces using the following list:</p>
 <section id="example-code">
 <h2>5.4 Example Code<a class="headerlink" href="#example-code" title="Permalink to this heading">#</a></h2>
 <p>A minimal Kokkos code thus would look like this:</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="cpf">&lt;Kokkos_Core.hpp&gt;</span><span class="cp"></span>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="cpf">&lt;Kokkos_Core.hpp&gt;</span>
 
-<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">argv</span><span class="p">[])</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">initialize</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span><span class="n">argv</span><span class="p">);</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">argv</span><span class="p">[])</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">initialize</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span><span class="n">argv</span><span class="p">);</span>
 
-<span class="w">  </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">finalize</span><span class="p">();</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">finalize</span><span class="p">();</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 </section>

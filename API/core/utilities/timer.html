@@ -493,27 +493,27 @@
 <h1><code class="docutils literal notranslate"><span class="pre">Kokkos::Timer</span></code><a class="headerlink" href="#kokkos-timer" title="Permalink to this heading">#</a></h1>
 <p>Header File: <code class="docutils literal notranslate"><span class="pre">Kokkos_Core.hpp</span></code></p>
 <p>Usage:</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">Kokkos</span><span class="o">::</span><span class="n">Timer</span><span class="w"> </span><span class="n">timer</span><span class="p">;</span><span class="w"></span>
-<span class="kt">double</span><span class="w"> </span><span class="n">time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">timer</span><span class="p">.</span><span class="n">seconds</span><span class="p">();</span><span class="w"></span>
-<span class="n">timer</span><span class="p">.</span><span class="n">reset</span><span class="p">();</span><span class="w"></span>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">Kokkos</span><span class="o">::</span><span class="n">Timer</span><span class="w"> </span><span class="n">timer</span><span class="p">;</span>
+<span class="kt">double</span><span class="w"> </span><span class="n">time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">timer</span><span class="p">.</span><span class="n">seconds</span><span class="p">();</span>
+<span class="n">timer</span><span class="p">.</span><span class="n">reset</span><span class="p">();</span>
 </pre></div>
 </div>
 <p>Timer is a simple construct to measure time.</p>
 <section id="synopsis">
 <h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this heading">#</a></h2>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Timer</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">typedef</span><span class="w"> </span><span class="n">Timer</span><span class="w"> </span><span class="n">execution_policy</span><span class="p">;</span><span class="w"></span>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Timer</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">typedef</span><span class="w"> </span><span class="n">Timer</span><span class="w"> </span><span class="n">execution_policy</span><span class="p">;</span>
 
 <span class="w">    </span><span class="c1">//Constructors</span>
-<span class="w">    </span><span class="n">Timer</span><span class="p">();</span><span class="w"></span>
-<span class="w">    </span><span class="n">Timer</span><span class="p">(</span><span class="n">Timer</span><span class="o">&amp;&amp;</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="n">Timer</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Timer</span><span class="o">&amp;</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="o">~</span><span class="n">Timer</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">Timer</span><span class="p">();</span>
+<span class="w">    </span><span class="n">Timer</span><span class="p">(</span><span class="n">Timer</span><span class="o">&amp;&amp;</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="p">;</span>
+<span class="w">    </span><span class="n">Timer</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Timer</span><span class="o">&amp;</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="p">;</span>
+<span class="w">    </span><span class="o">~</span><span class="n">Timer</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="p">;</span>
 
 <span class="w">    </span><span class="c1">//Member functions</span>
 <span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="nf">seconds</span><span class="p">();</span><span class="w"> </span>
-<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">reset</span><span class="p">();</span><span class="w"></span>
-<span class="p">};</span><span class="w"></span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">reset</span><span class="p">();</span>
+<span class="p">};</span>
 </pre></div>
 </div>
 </section>
@@ -530,12 +530,12 @@
 </section>
 <section id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading">#</a></h2>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">Timer</span><span class="w"> </span><span class="n">timer</span><span class="p">;</span><span class="w"></span>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">Timer</span><span class="w"> </span><span class="n">timer</span><span class="p">;</span>
 <span class="c1">// ...</span>
-<span class="kt">double</span><span class="w"> </span><span class="n">time1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">timer</span><span class="p">.</span><span class="n">seconds</span><span class="p">();</span><span class="w"></span>
-<span class="n">timer</span><span class="p">.</span><span class="n">reset</span><span class="p">();</span><span class="w"></span>
+<span class="kt">double</span><span class="w"> </span><span class="n">time1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">timer</span><span class="p">.</span><span class="n">seconds</span><span class="p">();</span>
+<span class="n">timer</span><span class="p">.</span><span class="n">reset</span><span class="p">();</span>
 <span class="c1">// ...</span>
-<span class="kt">double</span><span class="w"> </span><span class="n">time2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">timer</span><span class="p">.</span><span class="n">seconds</span><span class="p">();</span><span class="w"></span>
+<span class="kt">double</span><span class="w"> </span><span class="n">time2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">timer</span><span class="p">.</span><span class="n">seconds</span><span class="p">();</span>
 </pre></div>
 </div>
 </section>

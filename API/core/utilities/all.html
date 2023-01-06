@@ -492,20 +492,20 @@
           <section class="tex2jax_ignore mathjax_ignore" id="kokkos-all">
 <span id="kokkosall"></span><h1><code class="docutils literal notranslate"><span class="pre">Kokkos::ALL</span></code><a class="headerlink" href="#kokkos-all" title="Permalink to this heading">#</a></h1>
 <p>Defined in header <code class="docutils literal notranslate"><span class="pre">&lt;Kokkos_Core.hpp&gt;</span></code></p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">namespace</span><span class="w"> </span><span class="nn">Kokkos</span><span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="k">constexpr</span><span class="w"> </span><span class="n">UNSPECIFIED</span><span class="o">-</span><span class="n">TYPE</span><span class="w"> </span><span class="n">ALL</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">IMPLEMENTATION</span><span class="o">-</span><span class="n">DETAIL</span><span class="p">;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">namespace</span><span class="w"> </span><span class="nn">Kokkos</span><span class="p">{</span>
+<span class="w">  </span><span class="k">constexpr</span><span class="w"> </span><span class="n">UNSPECIFIED</span><span class="o">-</span><span class="n">TYPE</span><span class="w"> </span><span class="n">ALL</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">IMPLEMENTATION</span><span class="o">-</span><span class="n">DETAIL</span><span class="p">;</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">Kokkos::ALL</span></code> is a constant of unspecified type that is used to select all elements in a dimension.</p>
 <section id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading">#</a></h2>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">Kokkos</span><span class="o">::</span><span class="n">View</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">**</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="o">&gt;</span><span class="w"> </span><span class="n">a</span><span class="p">(</span><span class="s">&quot;A&quot;</span><span class="p">,</span><span class="n">N0</span><span class="p">,</span><span class="n">N1</span><span class="p">);</span><span class="w"></span>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">Kokkos</span><span class="o">::</span><span class="n">View</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">**</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="o">&gt;</span><span class="w"> </span><span class="n">a</span><span class="p">(</span><span class="s">&quot;A&quot;</span><span class="p">,</span><span class="n">N0</span><span class="p">,</span><span class="n">N1</span><span class="p">);</span>
 
-<span class="k">auto</span><span class="w"> </span><span class="n">s</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">subview</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"></span>
-<span class="w">              </span><span class="mi">5</span><span class="p">,</span><span class="w"></span>
-<span class="w">              </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">ALL</span><span class="p">,</span><span class="w"></span>
-<span class="w">              </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">ALL</span><span class="p">);</span><span class="w"></span>
+<span class="k">auto</span><span class="w"> </span><span class="n">s</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">subview</span><span class="p">(</span><span class="n">a</span><span class="p">,</span>
+<span class="w">              </span><span class="mi">5</span><span class="p">,</span>
+<span class="w">              </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">ALL</span><span class="p">,</span>
+<span class="w">              </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">ALL</span><span class="p">);</span>
 </pre></div>
 </div>
 </section>

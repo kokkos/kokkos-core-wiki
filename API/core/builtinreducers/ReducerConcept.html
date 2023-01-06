@@ -494,39 +494,39 @@
 <p>The concept of a Reducer is the abstraction that defines the “how” a “Reduction” is performed during the parallel reduce execution pattern.  The abstraction of “what” is given as a template parameter and corresponds to the “what” that is being reduced in the <a class="reference internal" href="../parallel-dispatch/parallel_reduce.html"><span class="doc std std-doc">parallel_reduce</span></a> operation.  This page describes the definitions and functions expected from a Reducer with a hypothetical ‘Reducer’ class definition.  A brief description of built-in reducers is also included.</p>
 <p>Header File: <code class="docutils literal notranslate"><span class="pre">Kokkos_Core.hpp</span></code></p>
 <p>Usage:</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">T</span><span class="w"> </span><span class="n">result</span><span class="p">;</span><span class="w"></span>
-<span class="n">parallel_reduce</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">Functor</span><span class="p">,</span><span class="n">ReducerConcept</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">result</span><span class="p">));</span><span class="w"></span>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">T</span><span class="w"> </span><span class="n">result</span><span class="p">;</span>
+<span class="n">parallel_reduce</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">Functor</span><span class="p">,</span><span class="n">ReducerConcept</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">result</span><span class="p">));</span>
 </pre></div>
 </div>
 <section id="synopsis">
 <h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this heading">#</a></h2>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Reducer</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w"> </span><span class="k">public</span><span class="o">:</span><span class="w"></span>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Reducer</span><span class="w"> </span><span class="p">{</span>
+<span class="w"> </span><span class="k">public</span><span class="o">:</span>
 <span class="w">   </span><span class="c1">//Required for Concept</span>
-<span class="w">   </span><span class="k">typedef</span><span class="w"> </span><span class="n">Reducer</span><span class="w"> </span><span class="n">reducer</span><span class="p">;</span><span class="w"></span>
-<span class="w">   </span><span class="k">typedef</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="n">value_type</span><span class="p">;</span><span class="w"></span>
-<span class="w">   </span><span class="k">typedef</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">View</span><span class="o">&lt;</span><span class="n">value_type</span><span class="p">,</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">result_view_type</span><span class="p">;</span><span class="w"></span>
+<span class="w">   </span><span class="k">typedef</span><span class="w"> </span><span class="n">Reducer</span><span class="w"> </span><span class="n">reducer</span><span class="p">;</span>
+<span class="w">   </span><span class="k">typedef</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="n">value_type</span><span class="p">;</span>
+<span class="w">   </span><span class="k">typedef</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">View</span><span class="o">&lt;</span><span class="n">value_type</span><span class="p">,</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">result_view_type</span><span class="p">;</span>
 <span class="w">   </span>
-<span class="w">   </span><span class="n">KOKKOS_INLINE_FUNCTION</span><span class="w"></span>
-<span class="w">   </span><span class="kt">void</span><span class="w"> </span><span class="n">join</span><span class="p">(</span><span class="n">value_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">dest</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">value_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">src</span><span class="p">)</span><span class="w">  </span><span class="k">const</span><span class="w"></span>
+<span class="w">   </span><span class="n">KOKKOS_INLINE_FUNCTION</span>
+<span class="w">   </span><span class="kt">void</span><span class="w"> </span><span class="n">join</span><span class="p">(</span><span class="n">value_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">dest</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">value_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">src</span><span class="p">)</span><span class="w">  </span><span class="k">const</span>
 
-<span class="w">   </span><span class="n">KOKKOS_INLINE_FUNCTION</span><span class="w"></span>
-<span class="w">   </span><span class="kt">void</span><span class="w"> </span><span class="n">init</span><span class="p">(</span><span class="w"> </span><span class="n">value_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">val</span><span class="p">)</span><span class="w">  </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
+<span class="w">   </span><span class="n">KOKKOS_INLINE_FUNCTION</span>
+<span class="w">   </span><span class="kt">void</span><span class="w"> </span><span class="n">init</span><span class="p">(</span><span class="w"> </span><span class="n">value_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">val</span><span class="p">)</span><span class="w">  </span><span class="k">const</span><span class="p">;</span>
 
-<span class="w">   </span><span class="n">KOKKOS_INLINE_FUNCTION</span><span class="w"></span>
-<span class="w">   </span><span class="n">value_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">reference</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
+<span class="w">   </span><span class="n">KOKKOS_INLINE_FUNCTION</span>
+<span class="w">   </span><span class="n">value_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">reference</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
 
-<span class="w">   </span><span class="n">KOKKOS_INLINE_FUNCTION</span><span class="w"></span>
-<span class="w">   </span><span class="n">result_view_type</span><span class="w"> </span><span class="n">view</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
+<span class="w">   </span><span class="n">KOKKOS_INLINE_FUNCTION</span>
+<span class="w">   </span><span class="n">result_view_type</span><span class="w"> </span><span class="n">view</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
 
 <span class="w">   </span>
 <span class="w">   </span><span class="c1">//Part of Build-In reducers for Kokkos</span>
-<span class="w">   </span><span class="n">KOKKOS_INLINE_FUNCTION</span><span class="w"></span>
-<span class="w">   </span><span class="nf">Reducer</span><span class="p">(</span><span class="n">value_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">value_</span><span class="p">);</span><span class="w"></span>
+<span class="w">   </span><span class="n">KOKKOS_INLINE_FUNCTION</span>
+<span class="w">   </span><span class="nf">Reducer</span><span class="p">(</span><span class="n">value_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">value_</span><span class="p">);</span>
 
-<span class="w">   </span><span class="n">KOKKOS_INLINE_FUNCTION</span><span class="w"></span>
-<span class="w">   </span><span class="nf">Reducer</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">result_view_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">value_</span><span class="p">);</span><span class="w"></span>
-<span class="p">};</span><span class="w"></span>
+<span class="w">   </span><span class="n">KOKKOS_INLINE_FUNCTION</span>
+<span class="w">   </span><span class="nf">Reducer</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">result_view_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">value_</span><span class="p">);</span>
+<span class="p">};</span>
 </pre></div>
 </div>
 </section>
@@ -544,12 +544,12 @@
 <h3>Constructors<a class="headerlink" href="#constructors" title="Permalink to this heading">#</a></h3>
 <p>Constructors are not part of the concept. A custom reducer can have complex custom constructors. All Build-In reducers in Kokkos have the following two constructors:</p>
 <ul>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">Reducer</span><span class="p">(</span><span class="n">value_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">result</span><span class="p">)</span><span class="w"></span>
+<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">Reducer</span><span class="p">(</span><span class="n">value_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">result</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Constructs a reducer which references a local variable as its result location.</p>
 </li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">Reducer</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">result_view_type</span><span class="w"> </span><span class="n">result</span><span class="p">)</span><span class="w"></span>
+<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">Reducer</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">result_view_type</span><span class="w"> </span><span class="n">result</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Constructs a reducer which references a specific view as its result location.</p>
@@ -559,22 +559,22 @@
 <section id="functions">
 <h3>Functions<a class="headerlink" href="#functions" title="Permalink to this heading">#</a></h3>
 <ul>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">join</span><span class="p">(</span><span class="n">value_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">dest</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">value_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">src</span><span class="p">)</span><span class="w">  </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
+<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">join</span><span class="p">(</span><span class="n">value_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">dest</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">value_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">src</span><span class="p">)</span><span class="w">  </span><span class="k">const</span><span class="p">;</span>
 </pre></div>
 </div>
 <p>Combine <code class="docutils literal notranslate"><span class="pre">src</span></code> into <code class="docutils literal notranslate"><span class="pre">dest</span></code>. For example, <code class="docutils literal notranslate"><span class="pre">Add</span></code> performs <code class="docutils literal notranslate"><span class="pre">dest+=src;</span></code>.</p>
 </li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">init</span><span class="p">(</span><span class="w"> </span><span class="n">value_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">val</span><span class="p">)</span><span class="w">  </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
+<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">init</span><span class="p">(</span><span class="w"> </span><span class="n">value_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">val</span><span class="p">)</span><span class="w">  </span><span class="k">const</span><span class="p">;</span>
 </pre></div>
 </div>
 <p>Initialize <code class="docutils literal notranslate"><span class="pre">val</span></code> with appropriate initial value. For example, ‘Add’ assigns <code class="docutils literal notranslate"><span class="pre">val</span> <span class="pre">=</span> <span class="pre">0;</span></code>, but Prod assigns <code class="docutils literal notranslate"><span class="pre">val</span> <span class="pre">=</span> <span class="pre">1;</span></code></p>
 </li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">value_type</span><span class="o">&amp;</span><span class="w"> </span><span class="nf">reference</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
+<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">value_type</span><span class="o">&amp;</span><span class="w"> </span><span class="nf">reference</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
 </pre></div>
 </div>
 <p>Returns a reference to the result place.</p>
 </li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">result_view_type</span><span class="w"> </span><span class="nf">view</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
+<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">result_view_type</span><span class="w"> </span><span class="nf">view</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
 </pre></div>
 </div>
 <p>Returns a view of the result place.</p>
@@ -602,18 +602,18 @@
 </section>
 <section id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading">#</a></h2>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="w"> </span><span class="cp">#include</span><span class="cpf">&lt;Kokkos_Core.hpp&gt;</span><span class="cp"></span>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="w"> </span><span class="cp">#include</span><span class="cpf">&lt;Kokkos_Core.hpp&gt;</span>
 <span class="w"> </span>
-<span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">argv</span><span class="p">[])</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">argv</span><span class="p">[])</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">   </span><span class="kt">long</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">argc</span><span class="o">&gt;</span><span class="mi">1</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">:</span><span class="mi">100</span><span class="p">;</span><span class="w"> </span>
-<span class="w">   </span><span class="kt">long</span><span class="w"> </span><span class="n">result</span><span class="p">;</span><span class="w"></span>
-<span class="w">   </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">parallel_reduce</span><span class="p">(</span><span class="s">&quot;ReduceSum: &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">KOKKOS_LAMBDA</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="kt">long</span><span class="o">&amp;</span><span class="w"> </span><span class="n">lval</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">     </span><span class="n">lval</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">i</span><span class="p">;</span><span class="w"></span>
-<span class="w">   </span><span class="p">},</span><span class="n">Sum</span><span class="o">&lt;</span><span class="kt">long</span><span class="o">&gt;</span><span class="p">(</span><span class="n">result</span><span class="p">));</span><span class="w"></span>
+<span class="w">   </span><span class="kt">long</span><span class="w"> </span><span class="n">result</span><span class="p">;</span>
+<span class="w">   </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">parallel_reduce</span><span class="p">(</span><span class="s">&quot;ReduceSum: &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">KOKKOS_LAMBDA</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="kt">long</span><span class="o">&amp;</span><span class="w"> </span><span class="n">lval</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">     </span><span class="n">lval</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+<span class="w">   </span><span class="p">},</span><span class="n">Sum</span><span class="o">&lt;</span><span class="kt">long</span><span class="o">&gt;</span><span class="p">(</span><span class="n">result</span><span class="p">));</span>
 
-<span class="w">   </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Result: %l Expected: %l</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="n">result</span><span class="p">,</span><span class="n">N</span><span class="o">*</span><span class="p">(</span><span class="n">N</span><span class="mi">-1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">);</span><span class="w"></span>
-<span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="w">   </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Result: %l Expected: %l</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="n">result</span><span class="p">,</span><span class="n">N</span><span class="o">*</span><span class="p">(</span><span class="n">N</span><span class="mi">-1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">);</span>
+<span class="w"> </span><span class="p">}</span>
 </pre></div>
 </div>
 </section>

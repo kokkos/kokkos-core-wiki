@@ -8,6 +8,7 @@ Unless we document otherwise, please:
 
 * Avoid adding into `namespace Kokkos`
 * Avoid adding/removing/modifying macros starting with `KOKKOS_`
+* Avoid creating/removing/modifying files whose names start with `Kokkos_`
 
 This minimizes the chances that either Kokkos or user code is inadvertently broken by future changes.  
 
@@ -53,6 +54,8 @@ An exception to this are Kokkos Tools, where much care is taken to ensure that a
 Occasionally the Kokkos Team needs to remove things for overall improvements to the Kokkos code base.  When doing so, the Kokkos Team puts in a best effort with deprecation warnings as well as a migratory, evolutionary path (ideally both the deprecated version and the new version co-exist for a suitable period of time) for moving to the improved interface and functionality.
 
 ## Headers
+
+Avoid creating/removing/modifying header files whose names start with `Kokkos_`, even under other parts of your project.  Depending on how your build system is set up, this can, for instance, cause the wrong file to be included and lead to many hours of wasted debugging time.
 
 The following are public headers:
 

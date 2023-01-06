@@ -494,12 +494,12 @@
 <p>Header File: <code class="docutils literal notranslate"><span class="pre">Kokkos_Core.hpp</span></code></p>
 <p>Alias template to deduce the type that is returned by a call to the subview function with given arguments.</p>
 <p>Usage:</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">Kokkos</span><span class="o">::</span><span class="n">Subview</span><span class="o">&lt;</span><span class="n">ViewType</span><span class="p">,</span><span class="n">Args</span><span class="o">&gt;</span><span class="w"> </span><span class="n">subView</span><span class="p">;</span><span class="w"></span>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">Kokkos</span><span class="o">::</span><span class="n">Subview</span><span class="o">&lt;</span><span class="n">ViewType</span><span class="p">,</span><span class="n">Args</span><span class="o">&gt;</span><span class="w"> </span><span class="n">subView</span><span class="p">;</span>
 </pre></div>
 </div>
 <section id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this heading">#</a></h2>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">ViewType</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="p">...</span><span class="w"> </span><span class="n">Args</span><span class="o">&gt;</span><span class="w"></span>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">ViewType</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="p">...</span><span class="w"> </span><span class="n">Args</span><span class="o">&gt;</span>
 <span class="k">using</span><span class="w"> </span><span class="n">Subview</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">IMPL_DETAIL</span><span class="p">;</span><span class="w"> </span><span class="c1">// deduce subview type from source view traits</span>
 </pre></div>
 </div>
@@ -509,22 +509,22 @@ For restrictions on Args see <span class="xref myst"><code class="docutils liter
 </section>
 <section id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading">#</a></h2>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">view_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">View</span><span class="o">&lt;</span><span class="kt">double</span><span class="w"> </span><span class="o">***</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="o">&gt;</span><span class="p">;</span><span class="w"></span>
-<span class="n">view_type</span><span class="w"> </span><span class="n">a</span><span class="p">(</span><span class="s">&quot;A&quot;</span><span class="p">,</span><span class="n">N0</span><span class="p">,</span><span class="n">N1</span><span class="p">,</span><span class="n">N2</span><span class="p">);</span><span class="w"></span>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">view_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">View</span><span class="o">&lt;</span><span class="kt">double</span><span class="w"> </span><span class="o">***</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="n">view_type</span><span class="w"> </span><span class="n">a</span><span class="p">(</span><span class="s">&quot;A&quot;</span><span class="p">,</span><span class="n">N0</span><span class="p">,</span><span class="n">N1</span><span class="p">,</span><span class="n">N2</span><span class="p">);</span>
 
-<span class="k">struct</span><span class="w"> </span><span class="nc">subViewHolder</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="n">Kokkos</span><span class="o">::</span><span class="n">Subview</span><span class="o">&lt;</span><span class="n">view_type</span><span class="p">,</span><span class="w"></span>
-<span class="w">                </span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                </span><span class="kt">int</span><span class="p">,</span><span class="w"></span>
-<span class="w">                </span><span class="k">decltype</span><span class="p">(</span><span class="n">Kokkos</span><span class="o">::</span><span class="n">ALL</span><span class="p">),</span><span class="w"></span>
-<span class="w">                </span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">s</span><span class="p">;</span><span class="w"></span>
-<span class="p">}</span><span class="w"> </span><span class="n">subViewHolder</span><span class="p">;</span><span class="w"></span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">subViewHolder</span><span class="w"> </span><span class="p">{</span>
+<span class="n">Kokkos</span><span class="o">::</span><span class="n">Subview</span><span class="o">&lt;</span><span class="n">view_type</span><span class="p">,</span>
+<span class="w">                </span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">,</span>
+<span class="w">                </span><span class="kt">int</span><span class="p">,</span>
+<span class="w">                </span><span class="k">decltype</span><span class="p">(</span><span class="n">Kokkos</span><span class="o">::</span><span class="n">ALL</span><span class="p">),</span>
+<span class="w">                </span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">s</span><span class="p">;</span>
+<span class="p">}</span><span class="w"> </span><span class="n">subViewHolder</span><span class="p">;</span>
 
-<span class="n">subViewHolder</span><span class="p">.</span><span class="n">s</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">subview</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"></span>
-<span class="w">                                   </span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">15</span><span class="p">),</span><span class="w"></span>
-<span class="w">                                   </span><span class="mi">5</span><span class="p">,</span><span class="w"></span>
-<span class="w">                                   </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">ALL</span><span class="p">,</span><span class="w"></span>
-<span class="w">                                   </span><span class="mi">3</span><span class="p">);</span><span class="w"></span>
+<span class="n">subViewHolder</span><span class="p">.</span><span class="n">s</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">subview</span><span class="p">(</span><span class="n">a</span><span class="p">,</span>
+<span class="w">                                   </span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">15</span><span class="p">),</span>
+<span class="w">                                   </span><span class="mi">5</span><span class="p">,</span>
+<span class="w">                                   </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">ALL</span><span class="p">,</span>
+<span class="w">                                   </span><span class="mi">3</span><span class="p">);</span>
 </pre></div>
 </div>
 </section>

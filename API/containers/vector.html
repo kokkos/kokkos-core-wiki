@@ -493,148 +493,148 @@
 <h1><code class="docutils literal notranslate"><span class="pre">vector</span></code><a class="headerlink" href="#vector" title="Permalink to this heading">#</a></h1>
 <p>The Kokkos Vector is semantically similar to the std::vector, but it is designed to overcome issues with memory allocations and copies when working with devices that have different memory spaces.  The Kokkos::Vector is a Rank-1 DualView that implements the same interface as the std::vector.  This allows programs that rely heavily on std::vector to grant access to program data from within a non-host execution space.  Note that many of the std::vector compatible functions are host only, so access may be limited based on kernel complexity.  Below is a synopsis of the class and the description for each method specifies whether it is supported on the host, device or both.</p>
 <p>Usage:</p>
-<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">Kokkos</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Scalar</span><span class="p">,</span><span class="w"> </span><span class="n">Device</span><span class="o">&gt;</span><span class="w"> </span><span class="n">v</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span><span class="w"></span>
-<span class="n">v</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span><span class="w"></span>
-<span class="n">v</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">3</span><span class="p">);</span><span class="w"></span>
-<span class="n">v</span><span class="p">.[</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span><span class="w"></span>
-<span class="n">v</span><span class="p">.[</span><span class="n">n</span><span class="o">+</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span><span class="w"></span>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">Kokkos</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Scalar</span><span class="p">,</span><span class="w"> </span><span class="n">Device</span><span class="o">&gt;</span><span class="w"> </span><span class="n">v</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">v</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+<span class="n">v</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">3</span><span class="p">);</span>
+<span class="n">v</span><span class="p">.[</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="n">v</span><span class="p">.[</span><span class="n">n</span><span class="o">+</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span>
 </pre></div>
 </div>
 <section id="synopsis">
 <h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this heading">#</a></h2>
-<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">Scalar</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Arg1Type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">void</span><span class="o">&gt;</span><span class="w"></span>
-<span class="k">class</span><span class="w"> </span><span class="nc">vector</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">DualView</span><span class="o">&lt;</span><span class="n">Scalar</span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="n">LayoutLeft</span><span class="p">,</span><span class="w"> </span><span class="n">Arg1Type</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">Scalar</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Arg1Type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">void</span><span class="o">&gt;</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">vector</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">DualView</span><span class="o">&lt;</span><span class="n">Scalar</span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="n">LayoutLeft</span><span class="p">,</span><span class="w"> </span><span class="n">Arg1Type</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
 
 <span class="c1">// Typedefs </span>
 
 <span class="w">  </span><span class="c1">// Scalar value type</span>
-<span class="w">  </span><span class="k">typedef</span><span class="w"> </span><span class="n">Scalar</span><span class="w"> </span><span class="n">value_type</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="k">typedef</span><span class="w"> </span><span class="n">Scalar</span><span class="w"> </span><span class="n">value_type</span><span class="p">;</span>
 
 <span class="w">  </span><span class="c1">// Scalar pointer type</span>
-<span class="w">  </span><span class="k">typedef</span><span class="w"> </span><span class="n">Scalar</span><span class="o">*</span><span class="w"> </span><span class="n">pointer</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="k">typedef</span><span class="w"> </span><span class="n">Scalar</span><span class="o">*</span><span class="w"> </span><span class="n">pointer</span><span class="p">;</span>
 
 <span class="w">  </span><span class="c1">// Const Scalar pointer type</span>
-<span class="w">  </span><span class="k">typedef</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Scalar</span><span class="o">*</span><span class="w"> </span><span class="n">const_pointer</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="k">typedef</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Scalar</span><span class="o">*</span><span class="w"> </span><span class="n">const_pointer</span><span class="p">;</span>
 
 <span class="w">  </span><span class="c1">// Scalar reference type</span>
-<span class="w">  </span><span class="k">typedef</span><span class="w"> </span><span class="n">Scalar</span><span class="o">&amp;</span><span class="w"> </span><span class="n">reference</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="k">typedef</span><span class="w"> </span><span class="n">Scalar</span><span class="o">&amp;</span><span class="w"> </span><span class="n">reference</span><span class="p">;</span>
 
 <span class="w">  </span><span class="c1">// Const Scalar reference type</span>
-<span class="w">  </span><span class="k">typedef</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Scalar</span><span class="o">&amp;</span><span class="w"> </span><span class="n">const_reference</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="k">typedef</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Scalar</span><span class="o">&amp;</span><span class="w"> </span><span class="n">const_reference</span><span class="p">;</span>
 <span class="w">  </span>
 <span class="w">  </span><span class="c1">// Iterator type</span>
-<span class="w">  </span><span class="k">typedef</span><span class="w"> </span><span class="n">Scalar</span><span class="o">*</span><span class="w"> </span><span class="n">iterator</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="k">typedef</span><span class="w"> </span><span class="n">Scalar</span><span class="o">*</span><span class="w"> </span><span class="n">iterator</span><span class="p">;</span>
 
 <span class="w">  </span><span class="c1">// Const iterator type</span>
-<span class="w">  </span><span class="k">typedef</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Scalar</span><span class="o">*</span><span class="w"> </span><span class="n">const_iterator</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="k">typedef</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Scalar</span><span class="o">*</span><span class="w"> </span><span class="n">const_iterator</span><span class="p">;</span>
 
 <span class="w">  </span><span class="c1">// Accessor [Host only]</span>
-<span class="w">  </span><span class="n">KOKKOS_INLINE_FUNCTION</span><span class="w"> </span><span class="n">reference</span><span class="w"> </span><span class="k">operator</span><span class="p">()(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">KOKKOS_INLINE_FUNCTION</span><span class="w"> </span><span class="n">reference</span><span class="w"> </span><span class="k">operator</span><span class="p">()(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
 
 <span class="w">  </span><span class="c1">// Accessor [Host only]</span>
-<span class="w">  </span><span class="n">KOKKOS_INLINE_FUNCTION</span><span class="w"> </span><span class="n">reference</span><span class="w"> </span><span class="k">operator</span><span class="p">[](</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">KOKKOS_INLINE_FUNCTION</span><span class="w"> </span><span class="n">reference</span><span class="w"> </span><span class="k">operator</span><span class="p">[](</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
 
 <span class="c1">// Constructors</span>
 
 <span class="w">  </span><span class="c1">// Construct empty vector</span>
-<span class="w">  </span><span class="n">vector</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="n">vector</span><span class="p">();</span>
 
 <span class="w">  </span><span class="c1">// Construct vector of size n + 10% and initialize values to `val` </span>
-<span class="w">  </span><span class="n">vector</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">Scalar</span><span class="w"> </span><span class="n">val</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Scalar</span><span class="p">());</span><span class="w"></span>
+<span class="w">  </span><span class="n">vector</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">Scalar</span><span class="w"> </span><span class="n">val</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Scalar</span><span class="p">());</span>
 
 <span class="w">  </span><span class="c1">// Resize vector to size n + 10%</span>
-<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">resize</span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">n</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">resize</span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">n</span><span class="p">);</span>
 
 <span class="w">  </span><span class="c1">// Resize vector to size n + 10% and set values to `val`</span>
-<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">resize</span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Scalar</span><span class="o">&amp;</span><span class="w"> </span><span class="n">val</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">resize</span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Scalar</span><span class="o">&amp;</span><span class="w"> </span><span class="n">val</span><span class="p">);</span>
 
 <span class="w">  </span><span class="c1">// Set n values to `val`</span>
 <span class="w">  </span><span class="c1">// will auto synchronize between host and device</span>
 <span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">assign</span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Scalar</span><span class="o">&amp;</span><span class="w"> </span><span class="n">val</span><span class="p">);</span><span class="w"> </span>
 
 <span class="w">  </span><span class="c1">// same as resize (for compatibility)</span>
-<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">reserve</span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">n</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">reserve</span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">n</span><span class="p">);</span>
 
 <span class="w">  </span><span class="c1">// resize vector to size() + 1 and set last value to val</span>
 <span class="w">  </span><span class="c1">// [Host only, auto synchronize device]</span>
-<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">push_back</span><span class="p">(</span><span class="n">Scalar</span><span class="w"> </span><span class="n">val</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">push_back</span><span class="p">(</span><span class="n">Scalar</span><span class="w"> </span><span class="n">val</span><span class="p">);</span>
 
 <span class="w">  </span><span class="c1">// reduce size() by 1  </span>
-<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">pop_back</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">pop_back</span><span class="p">();</span>
 
 <span class="w">  </span><span class="c1">// set size() to 0</span>
-<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">clear</span><span class="p">()</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">clear</span><span class="p">()</span><span class="w"> </span><span class="p">;</span>
 
 <span class="w">  </span><span class="c1">// return number of elements in vector</span>
-<span class="w">  </span><span class="n">size_type</span><span class="w"> </span><span class="nf">size</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">size_type</span><span class="w"> </span><span class="nf">size</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
 
 <span class="w">  </span><span class="c1">// return maximum possible number of elements</span>
-<span class="w">  </span><span class="n">size_type</span><span class="w"> </span><span class="nf">max_size</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">size_type</span><span class="w"> </span><span class="nf">max_size</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
 
 <span class="w">  </span><span class="c1">// return memory used by vector </span>
-<span class="w">  </span><span class="n">size_type</span><span class="w"> </span><span class="nf">span</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">size_type</span><span class="w"> </span><span class="nf">span</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
 
 <span class="w">  </span><span class="c1">// returns true if vector is empty</span>
-<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="nf">empty</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="nf">empty</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
 
 <span class="w">  </span><span class="c1">// returns pointer to the underlying array</span>
 <span class="w">  </span><span class="c1">// [Host only]</span>
-<span class="w">  </span><span class="n">pointer</span><span class="w"> </span><span class="nf">data</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">pointer</span><span class="w"> </span><span class="nf">data</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
 
 <span class="w">  </span><span class="c1">// returns iterator starting at the beginning</span>
 <span class="w">  </span><span class="c1">// [Host only]</span>
-<span class="w">  </span><span class="n">iterator</span><span class="w"> </span><span class="nf">begin</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">iterator</span><span class="w"> </span><span class="nf">begin</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
 
 <span class="w">  </span><span class="c1">// returns iterator past the last element</span>
 <span class="w">  </span><span class="c1">// [Host only]</span>
-<span class="w">  </span><span class="n">iterator</span><span class="w"> </span><span class="nf">end</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">iterator</span><span class="w"> </span><span class="nf">end</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
 
 <span class="w">  </span><span class="c1">// returns reference to the front of the list</span>
 <span class="w">  </span><span class="c1">// [Host only]</span>
-<span class="w">  </span><span class="n">reference</span><span class="w"> </span><span class="nf">front</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="n">reference</span><span class="w"> </span><span class="nf">front</span><span class="p">();</span>
 
 <span class="w">  </span><span class="c1">// returns reference to the last element in the list</span>
 <span class="w">  </span><span class="c1">// [Host only]</span>
-<span class="w">  </span><span class="n">reference</span><span class="w"> </span><span class="nf">back</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="n">reference</span><span class="w"> </span><span class="nf">back</span><span class="p">();</span>
 
 <span class="w">  </span><span class="c1">// returns const reference to the front of the list</span>
 <span class="w">  </span><span class="c1">// [Host only]</span>
-<span class="w">  </span><span class="n">const_reference</span><span class="w"> </span><span class="nf">front</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">const_reference</span><span class="w"> </span><span class="nf">front</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
 
 <span class="w">  </span><span class="c1">// returns const reference to the last element in the list</span>
 <span class="w">  </span><span class="c1">// [Host only]</span>
-<span class="w">  </span><span class="n">const_reference</span><span class="w"> </span><span class="nf">back</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">const_reference</span><span class="w"> </span><span class="nf">back</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
 
 <span class="w">  </span><span class="c1">// Return the index of largest value satisfying val &lt; comp_val within the</span>
 <span class="w">  </span><span class="c1">// range start-theEnd, [Host only]</span>
-<span class="w">  </span><span class="kt">size_t</span><span class="w"> </span><span class="nf">lower_bound</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="o">&amp;</span><span class="w"> </span><span class="n">start</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="o">&amp;</span><span class="w"> </span><span class="n">theEnd</span><span class="p">,</span><span class="w"></span>
-<span class="w">                     </span><span class="k">const</span><span class="w"> </span><span class="n">Scalar</span><span class="o">&amp;</span><span class="w"> </span><span class="n">comp_val</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kt">size_t</span><span class="w"> </span><span class="nf">lower_bound</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="o">&amp;</span><span class="w"> </span><span class="n">start</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="o">&amp;</span><span class="w"> </span><span class="n">theEnd</span><span class="p">,</span>
+<span class="w">                     </span><span class="k">const</span><span class="w"> </span><span class="n">Scalar</span><span class="o">&amp;</span><span class="w"> </span><span class="n">comp_val</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
 <span class="w">  </span><span class="c1">// Return true if the list is sorted</span>
-<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="nf">is_sorted</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="nf">is_sorted</span><span class="p">();</span>
 
 <span class="w">  </span><span class="c1">// return iterator pointing to element matching `val` </span>
-<span class="w">  </span><span class="n">iterator</span><span class="w"> </span><span class="nf">find</span><span class="p">(</span><span class="n">Scalar</span><span class="w"> </span><span class="n">val</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">iterator</span><span class="w"> </span><span class="nf">find</span><span class="p">(</span><span class="n">Scalar</span><span class="w"> </span><span class="n">val</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
 <span class="w">  </span>
 <span class="w">  </span><span class="c1">// copy data from device to host</span>
-<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">device_to_host</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">device_to_host</span><span class="p">();</span>
 
 <span class="w">  </span><span class="c1">// copy data from host to device</span>
-<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">host_to_device</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">host_to_device</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
 
 <span class="w">  </span><span class="c1">// update/synchronize data in dual view from host perspective</span>
-<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">on_host</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">on_host</span><span class="p">();</span>
 
 <span class="w">  </span><span class="c1">// update/synchronize data in dual view from the device perspective </span>
 <span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">on_device</span><span class="p">();</span><span class="w"> </span>
 
 <span class="w">  </span><span class="c1">// set the data buffer available at the end of the vector</span>
-<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">set_overallocation</span><span class="p">(</span><span class="kt">float</span><span class="w"> </span><span class="n">extra</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">set_overallocation</span><span class="p">(</span><span class="kt">float</span><span class="w"> </span><span class="n">extra</span><span class="p">);</span>
 <span class="w">  </span>
 <span class="w">  </span><span class="c1">// returns true if the internal views (host and device) are allocated </span>
 <span class="w">  </span><span class="c1">// (non-null pointers).</span>
-<span class="w">  </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="nf">is_allocated</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="nf">is_allocated</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
 <span class="w">    </span>
-<span class="p">};</span><span class="w"></span>
+<span class="p">};</span>
 </pre></div>
 </div>
 </section>

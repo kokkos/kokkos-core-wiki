@@ -506,12 +506,12 @@
 <section id="task-functor">
 <h2>Task Functor<a class="headerlink" href="#task-functor" title="Permalink to this heading">#</a></h2>
 <p>In most ways, the functor portion of the task parallelism idiom in Kokkos is similar to that for data parallelism.  Task functors haeve the additional requirement that the task output type needs to be provided by the user by giving a nested type (a.k.a. “typedef”) named <code class="docutils literal notranslate"><span class="pre">value_type</span></code>:</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span><span class="w"> </span><span class="nc">MyTask</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="k">using</span><span class="w"> </span><span class="n">value_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">double</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">TeamMember</span><span class="o">&gt;</span><span class="w"></span>
-<span class="w">  </span><span class="n">KOKKOS_INLINE_FUNCTION</span><span class="w"></span>
-<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="k">operator</span><span class="p">()(</span><span class="n">TeamMember</span><span class="o">&amp;</span><span class="w"> </span><span class="n">member</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="o">&amp;</span><span class="w"> </span><span class="n">result</span><span class="p">);</span><span class="w"></span>
-<span class="p">};</span><span class="w"></span>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span><span class="w"> </span><span class="nc">MyTask</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">using</span><span class="w"> </span><span class="n">value_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">double</span><span class="p">;</span>
+<span class="w">  </span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">TeamMember</span><span class="o">&gt;</span>
+<span class="w">  </span><span class="n">KOKKOS_INLINE_FUNCTION</span>
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="k">operator</span><span class="p">()(</span><span class="n">TeamMember</span><span class="o">&amp;</span><span class="w"> </span><span class="n">member</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="o">&amp;</span><span class="w"> </span><span class="n">result</span><span class="p">);</span>
+<span class="p">};</span>
 </pre></div>
 </div>
 <p>Similar to <a class="reference internal" href="../../ProgrammingGuide/HierarchicalParallelism.html"><span class="doc std std-doc">team parallelism</span></a>, the first parameter is the team handle, which has all of the same functionality as the one produced by a <code class="docutils literal notranslate"><span class="pre">Kokkos::TeamPolicy</span></code>, with a few extras.  Like with <code class="docutils literal notranslate"><span class="pre">Kokkos::parallel_reduce()</span></code>, the output is expressed through the second parameter.  Note that there is currently no lambda interface to Kokkos Tasking.</p>
@@ -527,35 +527,35 @@
 <section id="predecessors-and-schedulers">
 <h2>Predecessors and Schedulers<a class="headerlink" href="#predecessors-and-schedulers" title="Permalink to this heading">#</a></h2>
 <p>Dependency relationships in Kokkos are represented by instances of the <code class="docutils literal notranslate"><span class="pre">Kokkos::BasicFuture</span></code> class template.  Each task (created with the <code class="docutils literal notranslate"><span class="pre">task_spawn</span></code> or <code class="docutils literal notranslate"><span class="pre">host_spawn</span></code> patterns) can have zero or one predecessors (to create task graphs with more predecessors, use <code class="docutils literal notranslate"><span class="pre">Kokkos::when_all</span></code>, described below).  Predecessors are given to a pattern as an argument to the policy:</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">scheduler_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="cm">/* ... discussed below ... */</span><span class="p">;</span><span class="w"></span>
-<span class="k">auto</span><span class="w"> </span><span class="n">scheduler</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">scheduler_type</span><span class="p">(</span><span class="cm">/* ... discussed below ... */</span><span class="p">);</span><span class="w"></span>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">scheduler_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="cm">/* ... discussed below ... */</span><span class="p">;</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">scheduler</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">scheduler_type</span><span class="p">(</span><span class="cm">/* ... discussed below ... */</span><span class="p">);</span>
 <span class="c1">// Launch with no predecessor:</span>
-<span class="k">auto</span><span class="w"> </span><span class="n">fut</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">host_spawn</span><span class="p">(</span><span class="w"></span>
-<span class="w">  </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">TaskSingle</span><span class="p">(</span><span class="n">scheduler</span><span class="p">),</span><span class="w"></span>
-<span class="w">  </span><span class="n">MyTaskFunctor</span><span class="p">()</span><span class="w"></span>
-<span class="p">);</span><span class="w"></span>
+<span class="k">auto</span><span class="w"> </span><span class="n">fut</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">host_spawn</span><span class="p">(</span>
+<span class="w">  </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">TaskSingle</span><span class="p">(</span><span class="n">scheduler</span><span class="p">),</span>
+<span class="w">  </span><span class="n">MyTaskFunctor</span><span class="p">()</span>
+<span class="p">);</span>
 <span class="c1">// Launch when `fut` is ready, at the earliest:</span>
-<span class="k">auto</span><span class="w"> </span><span class="n">fut2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">host_spawn</span><span class="p">(</span><span class="w"></span>
-<span class="w">  </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">TaskSingle</span><span class="p">(</span><span class="n">scheduler</span><span class="p">,</span><span class="w"> </span><span class="n">fut</span><span class="p">),</span><span class="w"></span>
-<span class="w">  </span><span class="n">MyOtherTaskFunctor</span><span class="p">()</span><span class="w"></span>
-<span class="p">);</span><span class="w"></span>
-<span class="cm">/* ... */</span><span class="w"></span>
+<span class="k">auto</span><span class="w"> </span><span class="n">fut2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">host_spawn</span><span class="p">(</span>
+<span class="w">  </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">TaskSingle</span><span class="p">(</span><span class="n">scheduler</span><span class="p">,</span><span class="w"> </span><span class="n">fut</span><span class="p">),</span>
+<span class="w">  </span><span class="n">MyOtherTaskFunctor</span><span class="p">()</span>
+<span class="p">);</span>
+<span class="cm">/* ... */</span>
 </pre></div>
 </div>
 <p>The Kokkos <code class="docutils literal notranslate"><span class="pre">TaskScheduler</span></code> concept is an abstraction that generalizes over the many possible strategies for scheduling tasks in a task-based system.  Like other concepts in Kokkos, users should not write code that depends directly on a specific <code class="docutils literal notranslate"><span class="pre">TaskScheduler</span></code>, but rather to the generic model that all <code class="docutils literal notranslate"><span class="pre">TaskScheduler</span></code> types guarantee.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">Kokkos::BasicFuture</span></code> class template, used for representing dependency relationships, is templated on the return type of the task it represents and on the type of the scheduler that was used to execute that task:</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">Scheduler</span><span class="o">&gt;</span><span class="w"></span>
-<span class="kt">void</span><span class="w"> </span><span class="n">my_function</span><span class="p">(</span><span class="n">Scheduler</span><span class="w"> </span><span class="n">sched</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">Scheduler</span><span class="o">&gt;</span>
+<span class="kt">void</span><span class="w"> </span><span class="n">my_function</span><span class="p">(</span><span class="n">Scheduler</span><span class="w"> </span><span class="n">sched</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="c1">// use auto until you need to name the type for some reason</span>
-<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">fut</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">host_spawn</span><span class="p">(</span><span class="w"></span>
-<span class="w">    </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">TaskSingle</span><span class="p">(</span><span class="n">sched</span><span class="p">),</span><span class="w"></span>
-<span class="w">    </span><span class="n">MyTaskFunctor</span><span class="p">()</span><span class="w"></span>
-<span class="w">  </span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="cm">/* ... */</span><span class="w"></span>
-<span class="w">  </span><span class="k">using</span><span class="w"> </span><span class="n">my_result_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MyTaskFunctor</span><span class="o">::</span><span class="n">value_type</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">fut</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">host_spawn</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">TaskSingle</span><span class="p">(</span><span class="n">sched</span><span class="p">),</span>
+<span class="w">    </span><span class="n">MyTaskFunctor</span><span class="p">()</span>
+<span class="w">  </span><span class="p">);</span>
+<span class="w">  </span><span class="cm">/* ... */</span>
+<span class="w">  </span><span class="k">using</span><span class="w"> </span><span class="n">my_result_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MyTaskFunctor</span><span class="o">::</span><span class="n">value_type</span><span class="p">;</span>
 <span class="w">  </span><span class="c1">// convertibility is guaranteed:</span>
-<span class="w">  </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">BasicFuture</span><span class="o">&lt;</span><span class="n">my_task_result</span><span class="p">,</span><span class="w"> </span><span class="n">Scheduler</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ff</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fut</span><span class="p">;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">BasicFuture</span><span class="o">&lt;</span><span class="n">my_task_result</span><span class="p">,</span><span class="w"> </span><span class="n">Scheduler</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ff</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fut</span><span class="p">;</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 <p>(Note: Kokkos does not guarantee the specific return type of task parallel patterns, only that they will be convertible to the appropriate <code class="docutils literal notranslate"><span class="pre">Kokkos::BasicFuture</span></code> type.  Use <code class="docutils literal notranslate"><span class="pre">auto</span></code> until you need to name the type for some reason—like storing it in a container, for instance.  Otherwise, Kokkos may be able to provide better performance if the future type is never required to be converted to a specific <code class="docutils literal notranslate"><span class="pre">Kokkos::BasicFuture</span></code> type.)</p>
@@ -566,44 +566,44 @@
 <section id="waiting-in-kokkos-tasking">
 <h2>Waiting in Kokkos Tasking<a class="headerlink" href="#waiting-in-kokkos-tasking" title="Permalink to this heading">#</a></h2>
 <p>Kokkos generally provides no way to block a thread of execution to wait on an individual future, and it provides no guarantee of correct execution if the user attempts to do so via external means (for instance, polling on the <code class="docutils literal notranslate"><span class="pre">is_ready()</span></code> method in a <code class="docutils literal notranslate"><span class="pre">while</span></code> loop is forbidden).  <em>Outside of</em> a Kokkos task functor (that is, anywhere that <code class="docutils literal notranslate"><span class="pre">host_spawn</span></code> would be allowed), Kokkos provides the ability to wait on <em>all</em> of the futures created on a given scheduler (including those created, transitively, by tasks spawned not yet completed, or potentially not even started).  This is done using the <code class="docutils literal notranslate"><span class="pre">Kokkos::wait</span></code> function on the scheduler:</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">Scheduler</span><span class="o">&gt;</span><span class="w"></span>
-<span class="kt">void</span><span class="w"> </span><span class="n">my_function</span><span class="p">(</span><span class="n">Scheduler</span><span class="w"> </span><span class="n">sched</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">Scheduler</span><span class="o">&gt;</span>
+<span class="kt">void</span><span class="w"> </span><span class="n">my_function</span><span class="p">(</span><span class="n">Scheduler</span><span class="w"> </span><span class="n">sched</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="c1">// use auto until you need to name the type for some reason</span>
-<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">fut</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">host_spawn</span><span class="p">(</span><span class="w"></span>
-<span class="w">    </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">TaskSingle</span><span class="p">(</span><span class="n">sched</span><span class="p">),</span><span class="w"></span>
-<span class="w">    </span><span class="n">MyTaskFunctor</span><span class="p">()</span><span class="w"></span>
-<span class="w">  </span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">wait</span><span class="p">(</span><span class="n">sched</span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fut</span><span class="p">.</span><span class="n">get</span><span class="p">();</span><span class="w"></span>
-<span class="w">  </span><span class="cm">/* ... */</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">fut</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">host_spawn</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">TaskSingle</span><span class="p">(</span><span class="n">sched</span><span class="p">),</span>
+<span class="w">    </span><span class="n">MyTaskFunctor</span><span class="p">()</span>
+<span class="w">  </span><span class="p">);</span>
+<span class="w">  </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">wait</span><span class="p">(</span><span class="n">sched</span><span class="p">);</span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fut</span><span class="p">.</span><span class="n">get</span><span class="p">();</span>
+<span class="w">  </span><span class="cm">/* ... */</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 <p>Users should think of <code class="docutils literal notranslate"><span class="pre">Kokkos::wait</span></code> as an <em>extremely</em> expensive operation (a “sledgehammer”) and use it as sparingly as possible.</p>
 <section id="waiting-in-a-task-functor">
 <h3>“Waiting” in a task functor<a class="headerlink" href="#waiting-in-a-task-functor" title="Permalink to this heading">#</a></h3>
 <p>In Kokkos tasking, all task functors must be able to run to completion without blocking once they are started (the Kokkos scheduler <em>can</em> run other tasks at any point that the functor calls back into the Kokkos tasking system, such as any <code class="docutils literal notranslate"><span class="pre">task_spawn</span></code>, but it is allowed to assume user functors will run to completion if left alone).  This means that there is no way to block a task pending the result of another task.  Other tasking systems that make this kind of design decision require the user to spawn a new task for each new piece of predicated work, which is an option in Kokkos as well, but Kokkos also provides another option.  To help reduce the allocation cost associated with the traditional approach to never-blocking task systems, Kokkos allows users to “reuse” the current task as a successor to some future.  Kokkos provides the <code class="docutils literal notranslate"><span class="pre">Kokkos::respawn()</span></code> function.  For example:</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">Scheduler</span><span class="o">&gt;</span><span class="w"></span>
-<span class="k">struct</span><span class="w"> </span><span class="nc">MyTaskFunctor</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="k">using</span><span class="w"> </span><span class="n">value_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">void</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="k">using</span><span class="w"> </span><span class="n">future_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">BasicFuture</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span><span class="w"> </span><span class="n">Scheduler</span><span class="o">&gt;</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="n">future_type</span><span class="w"> </span><span class="n">f</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">TeamMember</span><span class="o">&gt;</span><span class="w"></span>
-<span class="w">  </span><span class="n">KOKKOS_INLINE_FUNCTION</span><span class="w"></span>
-<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="k">operator</span><span class="p">()(</span><span class="n">TeamMember</span><span class="o">&amp;</span><span class="w"> </span><span class="n">member</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">f</span><span class="p">.</span><span class="n">is_null</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="n">f</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">task_spawn</span><span class="p">(</span><span class="w"></span>
-<span class="w">        </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">TaskSingle</span><span class="p">(</span><span class="n">member</span><span class="p">.</span><span class="n">scheduler</span><span class="p">()),</span><span class="w"></span>
-<span class="w">        </span><span class="n">MyOtherTaskFunctor</span><span class="p">()</span><span class="w"></span>
-<span class="w">      </span><span class="p">);</span><span class="w"></span>
-<span class="w">      </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">respawn</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="n">f</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">Scheduler</span><span class="o">&gt;</span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">MyTaskFunctor</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">using</span><span class="w"> </span><span class="n">value_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">void</span><span class="p">;</span>
+<span class="w">  </span><span class="k">using</span><span class="w"> </span><span class="n">future_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">BasicFuture</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span><span class="w"> </span><span class="n">Scheduler</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">  </span><span class="n">future_type</span><span class="w"> </span><span class="n">f</span><span class="p">;</span>
+<span class="w">  </span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">TeamMember</span><span class="o">&gt;</span>
+<span class="w">  </span><span class="n">KOKKOS_INLINE_FUNCTION</span>
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="k">operator</span><span class="p">()(</span><span class="n">TeamMember</span><span class="o">&amp;</span><span class="w"> </span><span class="n">member</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">f</span><span class="p">.</span><span class="n">is_null</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">f</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">task_spawn</span><span class="p">(</span>
+<span class="w">        </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">TaskSingle</span><span class="p">(</span><span class="n">member</span><span class="p">.</span><span class="n">scheduler</span><span class="p">()),</span>
+<span class="w">        </span><span class="n">MyOtherTaskFunctor</span><span class="p">()</span>
+<span class="w">      </span><span class="p">);</span>
+<span class="w">      </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">respawn</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="n">f</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
 <span class="w">      </span><span class="c1">// This is after the respawn so we&#39;re guaranteed that f is ready</span>
-<span class="w">      </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Got result %f</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">f</span><span class="p">.</span><span class="n">get</span><span class="p">());</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-<span class="p">};</span><span class="w"></span>
+<span class="w">      </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Got result %f</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">f</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">};</span>
 </pre></div>
 </div>
 <p>A task functor can only be respawned up to once <em>per execution of</em> <code class="docutils literal notranslate"><span class="pre">operator()</span></code> (that is, once per time it is spawned or respawned).  Multiple calls to <code class="docutils literal notranslate"><span class="pre">respawn</span></code> in the same execution of <code class="docutils literal notranslate"><span class="pre">operator()</span></code> are redundant and lead to undefined behavior.  Calls to <code class="docutils literal notranslate"><span class="pre">respawn</span></code> are always lazy—the subsequent call to <code class="docutils literal notranslate"><span class="pre">operator()</span></code> by Kokkos will only happen after the currently executing one returns (and after the predecessors, if any, are ready) at the earliest.</p>

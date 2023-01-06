@@ -495,14 +495,14 @@
 <p>A tag used in team size calculation functions to indicate that the functor for which a team size is being requested is being used in a <a class="reference internal" href="parallel_reduce.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">parallel_reduce</span></code></span></a></p>
 <p>Usage:</p>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">PolicyType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">TeamPolicy</span><span class="o">&lt;&gt;</span><span class="p">;</span><span class="w"> </span>
-<span class="n">PolicyType</span><span class="w"> </span><span class="n">policy</span><span class="p">;</span><span class="w"></span>
-<span class="kt">int</span><span class="w"> </span><span class="n">recommended_team_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">policy</span><span class="p">.</span><span class="n">team_size_recommended</span><span class="p">(</span><span class="w"></span>
-<span class="w">  </span><span class="n">Functor</span><span class="p">,</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">ParallelReduceTag</span><span class="p">());</span><span class="w"></span>
+<span class="n">PolicyType</span><span class="w"> </span><span class="n">policy</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">recommended_team_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">policy</span><span class="p">.</span><span class="n">team_size_recommended</span><span class="p">(</span>
+<span class="w">  </span><span class="n">Functor</span><span class="p">,</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">ParallelReduceTag</span><span class="p">());</span>
 </pre></div>
 </div>
 <section id="synopsis">
 <h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this heading">#</a></h2>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span><span class="w"> </span><span class="nc">ParallelReduceTag</span><span class="p">{};</span><span class="w"></span>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span><span class="w"> </span><span class="nc">ParallelReduceTag</span><span class="p">{};</span>
 </pre></div>
 </div>
 </section>

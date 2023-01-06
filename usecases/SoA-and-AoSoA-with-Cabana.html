@@ -498,8 +498,8 @@
 <section id="cabana-soa">
 <h3><code class="docutils literal notranslate"><span class="pre">Cabana::SoA</span></code><a class="headerlink" href="#cabana-soa" title="Permalink to this heading">#</a></h3>
 <p>Defined in header <a class="reference external" href="https://github.com/ECP-copa/Cabana/blob/master/core/src/Cabana_SoA.hpp"><code class="docutils literal notranslate"><span class="pre">&lt;Cabana_SoA.hpp&gt;</span></code></a></p>
-<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">DataTypes</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">VectorLength</span><span class="o">&gt;</span><span class="w"></span>
-<span class="k">struct</span><span class="w"> </span><span class="nc">SoA</span><span class="p">;</span><span class="w"></span>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">DataTypes</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">VectorLength</span><span class="o">&gt;</span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">SoA</span><span class="p">;</span>
 </pre></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">Cabana::SoA</span></code> is a struct template that provides a way to store a fixed-size collection of heterogeneous arrays whose size is the specified vector length.</p>
@@ -510,8 +510,8 @@
 <p><code class="docutils literal notranslate"><span class="pre">DataTypes</span></code>
 : The types of the elements that the SoA stores as fixed size arrays.
 It is required to be a specialization of <code class="docutils literal notranslate"><span class="pre">Cabana::MemberTypes</span></code> which is defined as</p>
-<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span><span class="p">...</span><span class="w"> </span><span class="n">Types</span><span class="o">&gt;</span><span class="w"></span>
-<span class="n">MemberTypes</span><span class="o">&lt;</span><span class="n">Types</span><span class="p">...</span><span class="o">&gt;</span><span class="p">;</span><span class="w"></span>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span><span class="p">...</span><span class="w"> </span><span class="n">Types</span><span class="o">&gt;</span>
+<span class="n">MemberTypes</span><span class="o">&lt;</span><span class="n">Types</span><span class="p">...</span><span class="o">&gt;</span><span class="p">;</span>
 </pre></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">VectorLength</span></code>
@@ -529,11 +529,11 @@ It is required to be a specialization of <code class="docutils literal notransla
 <section id="cabana-aosoa">
 <h3>Cabana::AoSoA<a class="headerlink" href="#cabana-aosoa" title="Permalink to this heading">#</a></h3>
 <p>Defined in header <a class="reference external" href="https://github.com/ECP-copa/Cabana/blob/master/core/src/Cabana_AoSoA.hpp"><code class="docutils literal notranslate"><span class="pre">&lt;Cabana_AoSoA.hpp&gt;</span></code></a></p>
-<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">DataTypes</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">DeviceType</span><span class="p">,</span><span class="w"></span>
-<span class="w">          </span><span class="kt">int</span><span class="w"> </span><span class="n">VectorLength</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Impl</span><span class="o">::</span><span class="n">PerformanceTraits</span><span class="o">&lt;</span><span class="w"></span>
-<span class="w">              </span><span class="k">typename</span><span class="w"> </span><span class="nc">DeviceType</span><span class="o">::</span><span class="n">execution_space</span><span class="o">&gt;::</span><span class="n">vector_length</span><span class="p">,</span><span class="w"></span>
-<span class="w">          </span><span class="k">class</span><span class="w"> </span><span class="nc">MemoryTraits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">MemoryManaged</span><span class="o">&gt;</span><span class="w"></span>
-<span class="k">class</span><span class="w"> </span><span class="nc">AoSoA</span><span class="p">;</span><span class="w"></span>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">DataTypes</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">DeviceType</span><span class="p">,</span>
+<span class="w">          </span><span class="kt">int</span><span class="w"> </span><span class="n">VectorLength</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Impl</span><span class="o">::</span><span class="n">PerformanceTraits</span><span class="o">&lt;</span>
+<span class="w">              </span><span class="k">typename</span><span class="w"> </span><span class="nc">DeviceType</span><span class="o">::</span><span class="n">execution_space</span><span class="o">&gt;::</span><span class="n">vector_length</span><span class="p">,</span>
+<span class="w">          </span><span class="k">class</span><span class="w"> </span><span class="nc">MemoryTraits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">MemoryManaged</span><span class="o">&gt;</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">AoSoA</span><span class="p">;</span>
 </pre></div>
 </div>
 <section id="id1">

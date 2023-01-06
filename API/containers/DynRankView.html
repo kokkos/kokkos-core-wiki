@@ -498,8 +498,8 @@ Its semantics are similar to that of <code class="docutils literal notranslate">
 The <code class="docutils literal notranslate"><span class="pre">DynRankView</span></code> differs from the [[View|Kokkos::View]] in that its rank is not provided with the <code class="docutils literal notranslate"><span class="pre">DataType</span></code> template parameter; it is determined dynamically based on the number of extent arguments passed to the constructor. The rank has an upper bound of 7 dimensions.</p>
 <section id="interface">
 <h2>Interface<a class="headerlink" href="#interface" title="Permalink to this heading">#</a></h2>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">DataType</span><span class="w"> </span><span class="p">[,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">LayoutType</span><span class="p">]</span><span class="w"> </span><span class="p">[,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">MemorySpace</span><span class="p">]</span><span class="w"> </span><span class="p">[,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">MemoryTraits</span><span class="p">]</span><span class="o">&gt;</span><span class="w"></span>
-<span class="k">class</span><span class="w"> </span><span class="nc">DynRankView</span><span class="p">;</span><span class="w"></span>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">DataType</span><span class="w"> </span><span class="p">[,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">LayoutType</span><span class="p">]</span><span class="w"> </span><span class="p">[,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">MemorySpace</span><span class="p">]</span><span class="w"> </span><span class="p">[,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">MemoryTraits</span><span class="p">]</span><span class="o">&gt;</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">DynRankView</span><span class="p">;</span>
 </pre></div>
 </div>
 <section id="parameters">
@@ -664,13 +664,13 @@ The <code class="docutils literal notranslate"><span class="pre">DynRankView</sp
 <section id="data-access-functions">
 <h3>Data Access Functions<a class="headerlink" href="#data-access-functions" title="Permalink to this heading">#</a></h3>
 <ul>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">reference_type</span><span class="w"> </span><span class="k">operator</span><span class="p">()</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">IntType</span><span class="o">&amp;</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="n">indices</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">reference_type</span><span class="w"> </span><span class="k">operator</span><span class="p">()</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">IntType</span><span class="o">&amp;</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="n">indices</span><span class="p">)</span><span class="w"> </span><span class="k">const</span>
 </pre></div>
 </div>
 <p>Returns a value of <code class="docutils literal notranslate"><span class="pre">reference_type</span></code> which may or not be reference itself. The number of index arguments must match the <code class="docutils literal notranslate"><span class="pre">rank</span></code> of the view.
 See notes on <code class="docutils literal notranslate"><span class="pre">reference_type</span></code> for properties of the return type.</p>
 </li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">reference_type</span><span class="w"> </span><span class="n">access</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">IntType</span><span class="o">&amp;</span><span class="w"> </span><span class="n">i0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">IntType</span><span class="o">&amp;</span><span class="w"> </span><span class="n">i6</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">reference_type</span><span class="w"> </span><span class="n">access</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">IntType</span><span class="o">&amp;</span><span class="w"> </span><span class="n">i0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">IntType</span><span class="o">&amp;</span><span class="w"> </span><span class="n">i6</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">const</span>
 </pre></div>
 </div>
 <p>Returns a value of <code class="docutils literal notranslate"><span class="pre">reference_type</span></code> which may or not be reference itself. The number of index arguments must be equal or larger than the <code class="docutils literal notranslate"><span class="pre">rank</span></code> of the view.
@@ -682,92 +682,92 @@ See notes on <code class="docutils literal notranslate"><span class="pre">refere
 <section id="data-layout-dimensions-strides">
 <h3>Data Layout, Dimensions, Strides<a class="headerlink" href="#data-layout-dimensions-strides" title="Permalink to this heading">#</a></h3>
 <ul>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">constexpr</span><span class="w"> </span><span class="n">array_layout</span><span class="w"> </span><span class="n">layout</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">constexpr</span><span class="w"> </span><span class="n">array_layout</span><span class="w"> </span><span class="n">layout</span><span class="p">()</span><span class="w"> </span><span class="k">const</span>
 </pre></div>
 </div>
 <p>Returns the layout object. Can be used to to construct other views with the same dimensions.</p>
 </li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">iType</span><span class="o">&gt;</span><span class="w"></span>
-<span class="k">constexpr</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">extent</span><span class="p">(</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">iType</span><span class="o">&amp;</span><span class="w"> </span><span class="n">dim</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">iType</span><span class="o">&gt;</span>
+<span class="k">constexpr</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">extent</span><span class="p">(</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">iType</span><span class="o">&amp;</span><span class="w"> </span><span class="n">dim</span><span class="p">)</span><span class="w"> </span><span class="k">const</span>
 </pre></div>
 </div>
 <p>Return the extent of the specified dimension. <code class="docutils literal notranslate"><span class="pre">iType</span></code> must be an integral type, and <code class="docutils literal notranslate"><span class="pre">dim</span></code> must be smaller than <code class="docutils literal notranslate"><span class="pre">rank</span></code>.</p>
 </li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">iType</span><span class="o">&gt;</span><span class="w"></span>
-<span class="k">constexpr</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">extent_int</span><span class="p">(</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">iType</span><span class="o">&amp;</span><span class="w"> </span><span class="n">dim</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">iType</span><span class="o">&gt;</span>
+<span class="k">constexpr</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">extent_int</span><span class="p">(</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">iType</span><span class="o">&amp;</span><span class="w"> </span><span class="n">dim</span><span class="p">)</span><span class="w"> </span><span class="k">const</span>
 </pre></div>
 </div>
 <p>Return the extent of the specified dimension as an <code class="docutils literal notranslate"><span class="pre">int</span></code>. <code class="docutils literal notranslate"><span class="pre">iType</span></code> must be an integral type, and <code class="docutils literal notranslate"><span class="pre">dim</span></code> must be smaller than <code class="docutils literal notranslate"><span class="pre">rank</span></code>.
 Compared to <code class="docutils literal notranslate"><span class="pre">extent</span></code> this function can be useful on architectures where <code class="docutils literal notranslate"><span class="pre">int</span></code> operations are more efficient than <code class="docutils literal notranslate"><span class="pre">size_t</span></code>. It also may eliminate the need for type casts in applications which otherwise perform all index operations with <code class="docutils literal notranslate"><span class="pre">int</span></code>.</p>
 </li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">iType</span><span class="o">&gt;</span><span class="w"></span>
-<span class="k">constexpr</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">stride</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">iType</span><span class="o">&amp;</span><span class="w"> </span><span class="n">dim</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">iType</span><span class="o">&gt;</span>
+<span class="k">constexpr</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">stride</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">iType</span><span class="o">&amp;</span><span class="w"> </span><span class="n">dim</span><span class="p">)</span><span class="w"> </span><span class="k">const</span>
 </pre></div>
 </div>
 <p>Return the stride of the specified dimension. <code class="docutils literal notranslate"><span class="pre">iType</span></code> must be an integral type, and <code class="docutils literal notranslate"><span class="pre">dim</span></code> must be smaller than <code class="docutils literal notranslate"><span class="pre">rank</span></code>.
 Example: <code class="docutils literal notranslate"><span class="pre">a.stride(3)</span> <span class="pre">==</span> <span class="pre">(&amp;a(i0,i1,i2,i3+1,i4)-&amp;a(i0,i1,i2,i3,i4))</span></code></p>
 </li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">constexpr</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">stride_0</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">constexpr</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">stride_0</span><span class="p">()</span><span class="w"> </span><span class="k">const</span>
 </pre></div>
 </div>
 <p>Return the stride of dimension 0.</p>
 </li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">constexpr</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">stride_1</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">constexpr</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">stride_1</span><span class="p">()</span><span class="w"> </span><span class="k">const</span>
 </pre></div>
 </div>
 <p>Return the stride of dimension 1.</p>
 </li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">constexpr</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">stride_2</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">constexpr</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">stride_2</span><span class="p">()</span><span class="w"> </span><span class="k">const</span>
 </pre></div>
 </div>
 <p>Return the stride of dimension 2.</p>
 </li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">constexpr</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">stride_3</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">constexpr</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">stride_3</span><span class="p">()</span><span class="w"> </span><span class="k">const</span>
 </pre></div>
 </div>
 <p>Return the stride of dimension 3.</p>
 </li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">constexpr</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">stride_4</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">constexpr</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">stride_4</span><span class="p">()</span><span class="w"> </span><span class="k">const</span>
 </pre></div>
 </div>
 <p>Return the stride of dimension 4.</p>
 </li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">constexpr</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">stride_5</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">constexpr</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">stride_5</span><span class="p">()</span><span class="w"> </span><span class="k">const</span>
 </pre></div>
 </div>
 <p>Return the stride of dimension 5.</p>
 </li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">constexpr</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">stride_6</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">constexpr</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">stride_6</span><span class="p">()</span><span class="w"> </span><span class="k">const</span>
 </pre></div>
 </div>
 <p>Return the stride of dimension 6.</p>
 </li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">constexpr</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">stride_7</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">constexpr</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">stride_7</span><span class="p">()</span><span class="w"> </span><span class="k">const</span>
 </pre></div>
 </div>
 <p>Return the stride of dimension 7.</p>
 </li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">constexpr</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">span</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">constexpr</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">span</span><span class="p">()</span><span class="w"> </span><span class="k">const</span>
 </pre></div>
 </div>
 <p>Returns the memory span in elements between the element with the lowest and the highest address. This can be larger than the product of extents due to padding, and or non-contiguous data layout as for example <code class="docutils literal notranslate"><span class="pre">LayoutStride</span></code> allows.</p>
 </li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">constexpr</span><span class="w"> </span><span class="n">pointer_type</span><span class="w"> </span><span class="n">data</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">constexpr</span><span class="w"> </span><span class="n">pointer_type</span><span class="w"> </span><span class="n">data</span><span class="p">()</span><span class="w"> </span><span class="k">const</span>
 </pre></div>
 </div>
 <p>Return the pointer to the underlying data allocation.</p>
 </li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="n">span_is_contiguous</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="n">span_is_contiguous</span><span class="p">()</span><span class="w"> </span><span class="k">const</span>
 </pre></div>
 </div>
 <p>Whether the span is contiguous (i.e. whether every memory location between in span belongs to the index space covered by the view).</p>
 </li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="nf">required_allocation_size</span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">N0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="p">...,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">N8</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span><span class="w"></span>
+<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="nf">required_allocation_size</span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">N0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="p">...,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">N8</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>Returns the number of bytes necessary for an unmanaged view of the provided dimensions. This function is only valid if <code class="docutils literal notranslate"><span class="pre">array_layout::is_regular</span> <span class="pre">==</span> <span class="pre">true</span></code>.</p>
 </li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="nf">required_allocation_size</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">array_layout</span><span class="o">&amp;</span><span class="w"> </span><span class="n">layout</span><span class="p">);</span><span class="w"></span>
+<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="nf">required_allocation_size</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">array_layout</span><span class="o">&amp;</span><span class="w"> </span><span class="n">layout</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>Returns the number of bytes necessary for an unmanaged view of the provided layout.</p>
@@ -777,22 +777,22 @@ Example: <code class="docutils literal notranslate"><span class="pre">a.stride(3
 <section id="id1">
 <h3>Other<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
 <ul>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">use_count</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">use_count</span><span class="p">()</span><span class="w"> </span><span class="k">const</span>
 </pre></div>
 </div>
 <p>Returns the current reference count of the underlying allocation.</p>
 </li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">label</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">label</span><span class="p">()</span><span class="w"> </span><span class="k">const</span>
 </pre></div>
 </div>
 <p>Returns the label of the DynRankView.</p>
 </li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">constexpr</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="n">rank</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">constexpr</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="n">rank</span><span class="p">()</span><span class="w"> </span><span class="k">const</span>
 </pre></div>
 </div>
 <p>Returns the dynamic rank of the DynRankView</p>
 </li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">constexpr</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="nf">is_allocated</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
+<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">constexpr</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="nf">is_allocated</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
 </pre></div>
 </div>
 <p>Returns true if the view points to a valid memory location.  This function works for both managed and unmanaged views. With the unmanaged view, there is no guarantee that referenced address is valid, only that it is a non-null pointer.</p>
@@ -806,9 +806,9 @@ Example: <code class="docutils literal notranslate"><span class="pre">a.stride(3
 while intercepting illegal assignments if possible at compile time, otherwise at runtime.
 In the following, we use <code class="docutils literal notranslate"><span class="pre">DstType</span></code> and <code class="docutils literal notranslate"><span class="pre">SrcType</span></code> as the type of the destination view and source view respectively.
 <code class="docutils literal notranslate"><span class="pre">dst_view</span></code> and <code class="docutils literal notranslate"><span class="pre">src_view</span></code> refer to the runtime instances of the destination and source views, i.e.:</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">ScrType</span><span class="w"> </span><span class="nf">src_view</span><span class="p">(...);</span><span class="w"></span>
-<span class="n">DstType</span><span class="w"> </span><span class="nf">dst_view</span><span class="p">(</span><span class="n">src_view</span><span class="p">);</span><span class="w"></span>
-<span class="n">dst_view</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">src_view</span><span class="p">;</span><span class="w"></span>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">ScrType</span><span class="w"> </span><span class="nf">src_view</span><span class="p">(...);</span>
+<span class="n">DstType</span><span class="w"> </span><span class="nf">dst_view</span><span class="p">(</span><span class="n">src_view</span><span class="p">);</span>
+<span class="n">dst_view</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">src_view</span><span class="p">;</span>
 </pre></div>
 </div>
 <p>The following conditions must be met at and are evaluated at compile time:</p>
@@ -835,38 +835,38 @@ These rules only cover cases where both layouts are one of <code class="docutils
 </section>
 <section id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading">#</a></h2>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="cpf">&lt;Kokkos_Core.hpp&gt;</span><span class="cp"></span>
-<span class="cp">#include</span><span class="cpf">&lt;cstdio&gt;</span><span class="c1"> </span><span class="cp"></span>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="cpf">&lt;Kokkos_Core.hpp&gt;</span>
+<span class="cp">#include</span><span class="cpf">&lt;cstdio&gt;</span><span class="c1"> </span>
 
-<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">argv</span><span class="p">[])</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">   </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">initialize</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span><span class="n">argv</span><span class="p">);</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">argv</span><span class="p">[])</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">initialize</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span><span class="n">argv</span><span class="p">);</span>
 
-<span class="w">   </span><span class="kt">int</span><span class="w"> </span><span class="n">N0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span><span class="w"></span>
-<span class="w">   </span><span class="kt">int</span><span class="w"> </span><span class="n">N1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span><span class="w"></span>
+<span class="w">   </span><span class="kt">int</span><span class="w"> </span><span class="n">N0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+<span class="w">   </span><span class="kt">int</span><span class="w"> </span><span class="n">N1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
 
-<span class="w">   </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">DynRankView</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">a</span><span class="p">(</span><span class="s">&quot;A&quot;</span><span class="p">,</span><span class="n">N0</span><span class="p">);</span><span class="w"></span>
-<span class="w">   </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">DynRankView</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">b</span><span class="p">(</span><span class="s">&quot;B&quot;</span><span class="p">,</span><span class="n">N1</span><span class="p">);</span><span class="w"></span>
+<span class="w">   </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">DynRankView</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">a</span><span class="p">(</span><span class="s">&quot;A&quot;</span><span class="p">,</span><span class="n">N0</span><span class="p">);</span>
+<span class="w">   </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">DynRankView</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">b</span><span class="p">(</span><span class="s">&quot;B&quot;</span><span class="p">,</span><span class="n">N1</span><span class="p">);</span>
 
-<span class="w">   </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">parallel_for</span><span class="p">(</span><span class="s">&quot;InitA&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">N0</span><span class="p">,</span><span class="w"> </span><span class="n">KOKKOS_LAMBDA</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">     </span><span class="n">a</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="p">;</span><span class="w"></span>
-<span class="w">   </span><span class="p">});</span><span class="w"></span>
+<span class="w">   </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">parallel_for</span><span class="p">(</span><span class="s">&quot;InitA&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">N0</span><span class="p">,</span><span class="w"> </span><span class="n">KOKKOS_LAMBDA</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">     </span><span class="n">a</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+<span class="w">   </span><span class="p">});</span>
 
-<span class="w">   </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">parallel_for</span><span class="p">(</span><span class="s">&quot;InitB&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">N1</span><span class="p">,</span><span class="w"> </span><span class="n">KOKKOS_LAMBDA</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">     </span><span class="n">b</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="p">;</span><span class="w"></span>
-<span class="w">   </span><span class="p">});</span><span class="w"></span>
+<span class="w">   </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">parallel_for</span><span class="p">(</span><span class="s">&quot;InitB&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">N1</span><span class="p">,</span><span class="w"> </span><span class="n">KOKKOS_LAMBDA</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">     </span><span class="n">b</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+<span class="w">   </span><span class="p">});</span>
 
-<span class="w">   </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">DynRankView</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span><span class="n">Kokkos</span><span class="o">::</span><span class="n">LayoutLeft</span><span class="o">&gt;</span><span class="w"> </span><span class="n">c</span><span class="p">(</span><span class="s">&quot;C&quot;</span><span class="p">,</span><span class="n">N0</span><span class="p">,</span><span class="n">N1</span><span class="p">);</span><span class="w"></span>
-<span class="w">   </span><span class="p">{</span><span class="w"></span>
-<span class="w">     </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">DynRankView</span><span class="o">&lt;</span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">const_a</span><span class="p">(</span><span class="n">a</span><span class="p">);</span><span class="w"></span>
-<span class="w">     </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">DynRankView</span><span class="o">&lt;</span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">const_b</span><span class="p">(</span><span class="n">b</span><span class="p">);</span><span class="w"></span>
-<span class="w">     </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">parallel_for</span><span class="p">(</span><span class="s">&quot;SetC&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">MDRangePolicy</span><span class="o">&lt;</span><span class="n">Kokkos</span><span class="o">::</span><span class="n">Rank</span><span class="o">&lt;</span><span class="mi">2</span><span class="p">,</span><span class="n">Kokkos</span><span class="o">::</span><span class="n">Iterate</span><span class="o">::</span><span class="n">Left</span><span class="o">&gt;&gt;</span><span class="p">({</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">},{</span><span class="n">N0</span><span class="p">,</span><span class="n">N1</span><span class="p">}),</span><span class="w"></span>
-<span class="w">       </span><span class="n">KOKKOS_LAMBDA</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">i0</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">i1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">       </span><span class="n">c</span><span class="p">(</span><span class="n">i0</span><span class="p">,</span><span class="n">i1</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">(</span><span class="n">i0</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">b</span><span class="p">(</span><span class="n">i1</span><span class="p">);</span><span class="w"></span>
-<span class="w">     </span><span class="p">});</span><span class="w"></span>
-<span class="w">   </span><span class="p">}</span><span class="w"></span>
+<span class="w">   </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">DynRankView</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span><span class="n">Kokkos</span><span class="o">::</span><span class="n">LayoutLeft</span><span class="o">&gt;</span><span class="w"> </span><span class="n">c</span><span class="p">(</span><span class="s">&quot;C&quot;</span><span class="p">,</span><span class="n">N0</span><span class="p">,</span><span class="n">N1</span><span class="p">);</span>
+<span class="w">   </span><span class="p">{</span>
+<span class="w">     </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">DynRankView</span><span class="o">&lt;</span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">const_a</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
+<span class="w">     </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">DynRankView</span><span class="o">&lt;</span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">const_b</span><span class="p">(</span><span class="n">b</span><span class="p">);</span>
+<span class="w">     </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">parallel_for</span><span class="p">(</span><span class="s">&quot;SetC&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">MDRangePolicy</span><span class="o">&lt;</span><span class="n">Kokkos</span><span class="o">::</span><span class="n">Rank</span><span class="o">&lt;</span><span class="mi">2</span><span class="p">,</span><span class="n">Kokkos</span><span class="o">::</span><span class="n">Iterate</span><span class="o">::</span><span class="n">Left</span><span class="o">&gt;&gt;</span><span class="p">({</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">},{</span><span class="n">N0</span><span class="p">,</span><span class="n">N1</span><span class="p">}),</span>
+<span class="w">       </span><span class="n">KOKKOS_LAMBDA</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">i0</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">i1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">       </span><span class="n">c</span><span class="p">(</span><span class="n">i0</span><span class="p">,</span><span class="n">i1</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">(</span><span class="n">i0</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">b</span><span class="p">(</span><span class="n">i1</span><span class="p">);</span>
+<span class="w">     </span><span class="p">});</span>
+<span class="w">   </span><span class="p">}</span>
 
-<span class="w">   </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">finalize</span><span class="p">();</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="w">   </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">finalize</span><span class="p">();</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 </section>

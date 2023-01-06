@@ -494,25 +494,25 @@
 <p>Template class for storing the min and max values with indices for min/max location reducers. Should be accessed via <code class="docutils literal notranslate"><span class="pre">::value_type</span></code> defined for particular reducer.</p>
 <p>Header File: <code class="docutils literal notranslate"><span class="pre">Kokkos_Core.hpp</span></code></p>
 <p>Usage:</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">MinMaxLoc</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span><span class="n">I</span><span class="p">,</span><span class="n">S</span><span class="o">&gt;::</span><span class="n">value_type</span><span class="w"> </span><span class="n">result</span><span class="p">;</span><span class="w"></span>
-<span class="n">parallel_reduce</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">Functor</span><span class="p">,</span><span class="n">MinMaxLoc</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span><span class="n">I</span><span class="p">,</span><span class="n">S</span><span class="o">&gt;</span><span class="p">(</span><span class="n">result</span><span class="p">));</span><span class="w"></span>
-<span class="n">T</span><span class="w"> </span><span class="n">minValue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">result</span><span class="p">.</span><span class="n">min_val</span><span class="p">;</span><span class="w"></span>
-<span class="n">T</span><span class="w"> </span><span class="n">maxValue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">result</span><span class="p">.</span><span class="n">max_val</span><span class="p">;</span><span class="w"></span>
-<span class="n">I</span><span class="w"> </span><span class="n">minLoc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">result</span><span class="p">.</span><span class="n">min_loc</span><span class="p">;</span><span class="w"></span>
-<span class="n">I</span><span class="w"> </span><span class="n">maxLoc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">result</span><span class="p">.</span><span class="n">max_loc</span><span class="p">;</span><span class="w"></span>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">MinMaxLoc</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span><span class="n">I</span><span class="p">,</span><span class="n">S</span><span class="o">&gt;::</span><span class="n">value_type</span><span class="w"> </span><span class="n">result</span><span class="p">;</span>
+<span class="n">parallel_reduce</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">Functor</span><span class="p">,</span><span class="n">MinMaxLoc</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span><span class="n">I</span><span class="p">,</span><span class="n">S</span><span class="o">&gt;</span><span class="p">(</span><span class="n">result</span><span class="p">));</span>
+<span class="n">T</span><span class="w"> </span><span class="n">minValue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">result</span><span class="p">.</span><span class="n">min_val</span><span class="p">;</span>
+<span class="n">T</span><span class="w"> </span><span class="n">maxValue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">result</span><span class="p">.</span><span class="n">max_val</span><span class="p">;</span>
+<span class="n">I</span><span class="w"> </span><span class="n">minLoc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">result</span><span class="p">.</span><span class="n">min_loc</span><span class="p">;</span>
+<span class="n">I</span><span class="w"> </span><span class="n">maxLoc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">result</span><span class="p">.</span><span class="n">max_loc</span><span class="p">;</span>
 </pre></div>
 </div>
 <section id="synopsis">
 <h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this heading">#</a></h2>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">Scalar</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Index</span><span class="o">&gt;</span><span class="w"></span>
-<span class="k">struct</span><span class="w"> </span><span class="nc">MinMaxLocScalar</span><span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="n">Scalar</span><span class="w"> </span><span class="n">min_val</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="n">Scalar</span><span class="w"> </span><span class="n">max_val</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="n">Index</span><span class="w"> </span><span class="n">min_loc</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="n">Index</span><span class="w"> </span><span class="n">max_loc</span><span class="p">;</span><span class="w"></span>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">Scalar</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Index</span><span class="o">&gt;</span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">MinMaxLocScalar</span><span class="p">{</span>
+<span class="w">  </span><span class="n">Scalar</span><span class="w"> </span><span class="n">min_val</span><span class="p">;</span>
+<span class="w">  </span><span class="n">Scalar</span><span class="w"> </span><span class="n">max_val</span><span class="p">;</span>
+<span class="w">  </span><span class="n">Index</span><span class="w"> </span><span class="n">min_loc</span><span class="p">;</span>
+<span class="w">  </span><span class="n">Index</span><span class="w"> </span><span class="n">max_loc</span><span class="p">;</span>
 
-<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="k">operator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">MinMaxLocScalar</span><span class="o">&amp;</span><span class="w"> </span><span class="n">rhs</span><span class="p">);</span><span class="w"></span>
-<span class="p">};</span><span class="w"></span>
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="k">operator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">MinMaxLocScalar</span><span class="o">&amp;</span><span class="w"> </span><span class="n">rhs</span><span class="p">);</span>
+<span class="p">};</span>
 </pre></div>
 </div>
 </section>

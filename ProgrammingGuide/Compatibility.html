@@ -497,6 +497,7 @@
 <ul class="simple">
 <li><p>Avoid adding into <code class="docutils literal notranslate"><span class="pre">namespace</span> <span class="pre">Kokkos</span></code></p></li>
 <li><p>Avoid adding/removing/modifying macros starting with <code class="docutils literal notranslate"><span class="pre">KOKKOS_</span></code></p></li>
+<li><p>Avoid creating/removing/modifying files whose names start with <code class="docutils literal notranslate"><span class="pre">Kokkos_</span></code></p></li>
 </ul>
 <p>This minimizes the chances that either Kokkos or user code is inadvertently broken by future changes.</p>
 <p>We reserve for the private use of the Kokkos Team:</p>
@@ -539,6 +540,7 @@
 </section>
 <section id="headers">
 <h2>Headers<a class="headerlink" href="#headers" title="Permalink to this heading">#</a></h2>
+<p>Avoid creating/removing/modifying header files whose names start with <code class="docutils literal notranslate"><span class="pre">Kokkos_</span></code>, even under other parts of your project.  Depending on how your build system is set up, this can, for instance, cause the wrong file to be included and lead to many hours of wasted debugging time.</p>
 <p>The following are public headers:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Kokkos_Core.hpp
 </pre></div>

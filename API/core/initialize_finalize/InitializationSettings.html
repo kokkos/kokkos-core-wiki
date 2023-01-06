@@ -493,10 +493,10 @@
 <h1>InitializationSettings<a class="headerlink" href="#initializationsettings" title="Permalink to this heading">#</a></h1>
 <p>Defined in header <code class="docutils literal notranslate"><span class="pre">&lt;KokkosCore.cpp&gt;</span></code></p>
 <p>Usage:</p>
-<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">settings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">InitializationSettings</span><span class="p">()</span><span class="w"></span>
-<span class="w">                    </span><span class="p">.</span><span class="n">set_num_threads</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span><span class="w"></span>
-<span class="w">                    </span><span class="p">.</span><span class="n">set_device_id</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="w"></span>
-<span class="w">                    </span><span class="p">.</span><span class="n">set_disable_warnings</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span><span class="w"></span>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">settings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">InitializationSettings</span><span class="p">()</span>
+<span class="w">                    </span><span class="p">.</span><span class="n">set_num_threads</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+<span class="w">                    </span><span class="p">.</span><span class="n">set_device_id</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="w">                    </span><span class="p">.</span><span class="n">set_disable_warnings</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
 </pre></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">InitializationSettings</span></code> is a class that can be used to define the settings for
@@ -506,14 +506,14 @@ It was introduced in version 3.7 as a replacement for the
 <a class="reference internal" href="InitArguments.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">Kokkos::InitArguments</span></code></span></a> structure.</p>
 <section id="interface">
 <h2>Interface<a class="headerlink" href="#interface" title="Permalink to this heading">#</a></h2>
-<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">InitializationSettings</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="k">public</span><span class="o">:</span><span class="w"></span>
-<span class="w">  </span><span class="n">InitializationSettings</span><span class="p">();</span><span class="w"></span>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">InitializationSettings</span><span class="w"> </span><span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w">  </span><span class="n">InitializationSettings</span><span class="p">();</span>
 <span class="w">  </span><span class="n">InitializationSettings</span><span class="p">(</span><span class="n">InitArguments</span><span class="w"> </span><span class="k">const</span><span class="o">&amp;</span><span class="w"> </span><span class="n">arguments</span><span class="p">);</span><span class="w">  </span><span class="c1">// deprecated</span>
 <span class="w">  </span><span class="n">InitializationSettings</span><span class="o">&amp;</span><span class="w"> </span><span class="n">set_PARAMETER</span><span class="o">-</span><span class="n">NAME</span><span class="p">(</span><span class="n">PARAMETER</span><span class="o">-</span><span class="n">TYPE</span><span class="w"> </span><span class="n">value</span><span class="p">);</span><span class="w">  </span><span class="c1">// see below</span>
 <span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="n">has_PARAMETER</span><span class="o">-</span><span class="n">NAME</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w">  </span><span class="c1">// see below</span>
 <span class="w">  </span><span class="n">PARAMETER</span><span class="o">-</span><span class="n">TYPE</span><span class="w"> </span><span class="n">get_PARAMETER</span><span class="o">-</span><span class="n">NAME</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w">  </span><span class="c1">// see below</span>
-<span class="p">};</span><span class="w"></span>
+<span class="p">};</span>
 </pre></div>
 </div>
 <p>The table below summarizes what settings are available.</p>
@@ -565,7 +565,7 @@ It was introduced in version 3.7 as a replacement for the
 </tbody>
 </table>
 </div>
-<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">InitializationSettings</span><span class="p">();</span><span class="w"></span>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">InitializationSettings</span><span class="p">();</span>
 </pre></div>
 </div>
 <p>Constructs a new object that does not contain any value for any of the settings.</p>
@@ -576,18 +576,18 @@ It was introduced in version 3.7 as a replacement for the
 Data members from the structure that compare equal to their default value are
 assumed to be unset.</p>
 <p>Let <code class="docutils literal notranslate"><span class="pre">PARAMETER-NAME</span></code> be a valid setting of type <code class="docutils literal notranslate"><span class="pre">PARAMETER-TYPE</span></code> as defined in the table above.</p>
-<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">InitializationSettings</span><span class="o">&amp;</span><span class="w"> </span><span class="n">set_PARAMETER</span><span class="o">-</span><span class="n">NAME</span><span class="p">(</span><span class="n">PARAMETER</span><span class="o">-</span><span class="n">NAME</span><span class="w"> </span><span class="n">value</span><span class="p">);</span><span class="w"></span>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">InitializationSettings</span><span class="o">&amp;</span><span class="w"> </span><span class="n">set_PARAMETER</span><span class="o">-</span><span class="n">NAME</span><span class="p">(</span><span class="n">PARAMETER</span><span class="o">-</span><span class="n">NAME</span><span class="w"> </span><span class="n">value</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>Replaces the content of the <code class="docutils literal notranslate"><span class="pre">PARAMETER-NAME</span></code> setting with <code class="docutils literal notranslate"><span class="pre">value</span></code> and return a
 reference to the object.
 <code class="docutils literal notranslate"><span class="pre">value</span></code> must be a valid value for <code class="docutils literal notranslate"><span class="pre">PARAMETER-NAME</span></code>.</p>
-<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="n">has_PARAMETER</span><span class="o">-</span><span class="n">NAME</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="n">has_PARAMETER</span><span class="o">-</span><span class="n">NAME</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
 </pre></div>
 </div>
 <p>Checks whether the object contains a value for the <code class="docutils literal notranslate"><span class="pre">PARAMETER-NAME</span></code> setting.
 Returns <code class="docutils literal notranslate"><span class="pre">true</span></code> if it contains a value, <code class="docutils literal notranslate"><span class="pre">false</span></code> otherwise.</p>
-<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">PARAMETER</span><span class="o">-</span><span class="n">TYPE</span><span class="w"> </span><span class="n">get_PARAMETER</span><span class="o">-</span><span class="n">NAME</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">PARAMETER</span><span class="o">-</span><span class="n">TYPE</span><span class="w"> </span><span class="n">get_PARAMETER</span><span class="o">-</span><span class="n">NAME</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
 </pre></div>
 </div>
 <p>Accesses the contained value for the <code class="docutils literal notranslate"><span class="pre">PARAMETER-NAME</span></code> setting.
@@ -595,16 +595,16 @@ The behavior is undefined if the object does not contain a value for setting
 <code class="docutils literal notranslate"><span class="pre">PARAMETER-NAME</span></code>.</p>
 <section id="example">
 <h3>Example<a class="headerlink" href="#example" title="Permalink to this heading">#</a></h3>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Kokkos_Core.hpp&gt;</span><span class="cp"></span>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Kokkos_Core.hpp&gt;</span>
 
-<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">initialize</span><span class="p">(</span><span class="n">Kokkos</span><span class="o">::</span><span class="n">InitializationSettings</span><span class="p">()</span><span class="w"></span>
-<span class="w">                         </span><span class="p">.</span><span class="n">set_print_configuration</span><span class="p">(</span><span class="nb">true</span><span class="p">)</span><span class="w"></span>
-<span class="w">                         </span><span class="p">.</span><span class="n">set_map_device_id_by</span><span class="p">(</span><span class="s">&quot;random&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">                         </span><span class="p">.</span><span class="n">set_num_threads</span><span class="p">(</span><span class="mi">1</span><span class="p">));</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">initialize</span><span class="p">(</span><span class="n">Kokkos</span><span class="o">::</span><span class="n">InitializationSettings</span><span class="p">()</span>
+<span class="w">                         </span><span class="p">.</span><span class="n">set_print_configuration</span><span class="p">(</span><span class="nb">true</span><span class="p">)</span>
+<span class="w">                         </span><span class="p">.</span><span class="n">set_map_device_id_by</span><span class="p">(</span><span class="s">&quot;random&quot;</span><span class="p">)</span>
+<span class="w">                         </span><span class="p">.</span><span class="n">set_num_threads</span><span class="p">(</span><span class="mi">1</span><span class="p">));</span>
 <span class="w">  </span><span class="c1">// ...</span>
-<span class="w">  </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">finalize</span><span class="p">();</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">finalize</span><span class="p">();</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 </section>

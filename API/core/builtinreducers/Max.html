@@ -494,37 +494,37 @@
 <p>Specific implementation of <a class="reference internal" href="ReducerConcept.html"><span class="doc std std-doc">ReducerConcept</span></a> storing the maximum value</p>
 <p>Header File: <code class="docutils literal notranslate"><span class="pre">Kokkos_Core.hpp</span></code></p>
 <p>Usage:</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">T</span><span class="w"> </span><span class="n">result</span><span class="p">;</span><span class="w"></span>
-<span class="n">parallel_reduce</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">Functor</span><span class="p">,</span><span class="n">Max</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span><span class="n">S</span><span class="o">&gt;</span><span class="p">(</span><span class="n">result</span><span class="p">));</span><span class="w"></span>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">T</span><span class="w"> </span><span class="n">result</span><span class="p">;</span>
+<span class="n">parallel_reduce</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">Functor</span><span class="p">,</span><span class="n">Max</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span><span class="n">S</span><span class="o">&gt;</span><span class="p">(</span><span class="n">result</span><span class="p">));</span>
 </pre></div>
 </div>
 <section id="synopsis">
 <h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this heading">#</a></h2>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">Scalar</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Space</span><span class="o">&gt;</span><span class="w"></span>
-<span class="k">class</span><span class="w"> </span><span class="nc">Max</span><span class="p">{</span><span class="w"></span>
-<span class="w"> </span><span class="k">public</span><span class="o">:</span><span class="w"></span>
-<span class="w">   </span><span class="k">typedef</span><span class="w"> </span><span class="n">Max</span><span class="w"> </span><span class="n">reducer</span><span class="p">;</span><span class="w"></span>
-<span class="w">   </span><span class="k">typedef</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="nc">std</span><span class="o">::</span><span class="n">remove_cv</span><span class="o">&lt;</span><span class="n">Scalar</span><span class="o">&gt;::</span><span class="n">type</span><span class="w"> </span><span class="n">value_type</span><span class="p">;</span><span class="w"></span>
-<span class="w">   </span><span class="k">typedef</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">View</span><span class="o">&lt;</span><span class="n">value_type</span><span class="p">,</span><span class="w"> </span><span class="n">Space</span><span class="o">&gt;</span><span class="w"> </span><span class="n">result_view_type</span><span class="p">;</span><span class="w"></span>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">Scalar</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Space</span><span class="o">&gt;</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Max</span><span class="p">{</span>
+<span class="w"> </span><span class="k">public</span><span class="o">:</span>
+<span class="w">   </span><span class="k">typedef</span><span class="w"> </span><span class="n">Max</span><span class="w"> </span><span class="n">reducer</span><span class="p">;</span>
+<span class="w">   </span><span class="k">typedef</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="nc">std</span><span class="o">::</span><span class="n">remove_cv</span><span class="o">&lt;</span><span class="n">Scalar</span><span class="o">&gt;::</span><span class="n">type</span><span class="w"> </span><span class="n">value_type</span><span class="p">;</span>
+<span class="w">   </span><span class="k">typedef</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">View</span><span class="o">&lt;</span><span class="n">value_type</span><span class="p">,</span><span class="w"> </span><span class="n">Space</span><span class="o">&gt;</span><span class="w"> </span><span class="n">result_view_type</span><span class="p">;</span>
 <span class="w">   </span>
-<span class="w">   </span><span class="n">KOKKOS_INLINE_FUNCTION</span><span class="w"></span>
-<span class="w">   </span><span class="kt">void</span><span class="w"> </span><span class="n">join</span><span class="p">(</span><span class="n">value_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">dest</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">value_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">src</span><span class="p">)</span><span class="w">  </span><span class="k">const</span><span class="w"></span>
+<span class="w">   </span><span class="n">KOKKOS_INLINE_FUNCTION</span>
+<span class="w">   </span><span class="kt">void</span><span class="w"> </span><span class="n">join</span><span class="p">(</span><span class="n">value_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">dest</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">value_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">src</span><span class="p">)</span><span class="w">  </span><span class="k">const</span>
 
-<span class="w">   </span><span class="n">KOKKOS_INLINE_FUNCTION</span><span class="w"></span>
-<span class="w">   </span><span class="kt">void</span><span class="w"> </span><span class="n">init</span><span class="p">(</span><span class="w"> </span><span class="n">value_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">val</span><span class="p">)</span><span class="w">  </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
+<span class="w">   </span><span class="n">KOKKOS_INLINE_FUNCTION</span>
+<span class="w">   </span><span class="kt">void</span><span class="w"> </span><span class="n">init</span><span class="p">(</span><span class="w"> </span><span class="n">value_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">val</span><span class="p">)</span><span class="w">  </span><span class="k">const</span><span class="p">;</span>
 
-<span class="w">   </span><span class="n">KOKKOS_INLINE_FUNCTION</span><span class="w"></span>
-<span class="w">   </span><span class="n">value_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">reference</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
+<span class="w">   </span><span class="n">KOKKOS_INLINE_FUNCTION</span>
+<span class="w">   </span><span class="n">value_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">reference</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
 
-<span class="w">   </span><span class="n">KOKKOS_INLINE_FUNCTION</span><span class="w"></span>
-<span class="w">   </span><span class="n">result_view_type</span><span class="w"> </span><span class="n">view</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
+<span class="w">   </span><span class="n">KOKKOS_INLINE_FUNCTION</span>
+<span class="w">   </span><span class="n">result_view_type</span><span class="w"> </span><span class="n">view</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
 
-<span class="w">   </span><span class="n">KOKKOS_INLINE_FUNCTION</span><span class="w"></span>
-<span class="w">   </span><span class="nf">Max</span><span class="p">(</span><span class="n">value_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">value_</span><span class="p">);</span><span class="w"></span>
+<span class="w">   </span><span class="n">KOKKOS_INLINE_FUNCTION</span>
+<span class="w">   </span><span class="nf">Max</span><span class="p">(</span><span class="n">value_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">value_</span><span class="p">);</span>
 
-<span class="w">   </span><span class="n">KOKKOS_INLINE_FUNCTION</span><span class="w"></span>
-<span class="w">   </span><span class="nf">Max</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">result_view_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">value_</span><span class="p">);</span><span class="w"></span>
-<span class="p">};</span><span class="w"></span>
+<span class="w">   </span><span class="n">KOKKOS_INLINE_FUNCTION</span>
+<span class="w">   </span><span class="nf">Max</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">result_view_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">value_</span><span class="p">);</span>
+<span class="p">};</span>
 </pre></div>
 </div>
 </section>
@@ -541,12 +541,12 @@
 <section id="constructors">
 <h3>Constructors<a class="headerlink" href="#constructors" title="Permalink to this heading">#</a></h3>
 <ul>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">Max</span><span class="p">(</span><span class="n">value_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">result</span><span class="p">)</span><span class="w"></span>
+<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">Max</span><span class="p">(</span><span class="n">value_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">result</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Constructs a reducer which references a local variable as its result location.</p>
 </li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">Max</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">result_view_type</span><span class="w"> </span><span class="n">result</span><span class="p">)</span><span class="w"></span>
+<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">Max</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">result_view_type</span><span class="w"> </span><span class="n">result</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Constructs a reducer which references a specific view as its result location.</p>
@@ -556,22 +556,22 @@
 <section id="functions">
 <h3>Functions<a class="headerlink" href="#functions" title="Permalink to this heading">#</a></h3>
 <ul>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">join</span><span class="p">(</span><span class="n">value_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">dest</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">value_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">src</span><span class="p">)</span><span class="w">  </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
+<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">join</span><span class="p">(</span><span class="n">value_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">dest</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">value_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">src</span><span class="p">)</span><span class="w">  </span><span class="k">const</span><span class="p">;</span>
 </pre></div>
 </div>
 <p>Store maximum of <code class="docutils literal notranslate"><span class="pre">src</span></code> and <code class="docutils literal notranslate"><span class="pre">dest</span></code> into <code class="docutils literal notranslate"><span class="pre">dest</span></code>:  <code class="docutils literal notranslate"><span class="pre">dest</span> <span class="pre">=</span> <span class="pre">(src</span> <span class="pre">&gt;</span> <span class="pre">dest)</span> <span class="pre">?</span> <span class="pre">src</span> <span class="pre">:</span> <span class="pre">dest;</span></code>.</p>
 </li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">init</span><span class="p">(</span><span class="w"> </span><span class="n">value_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">val</span><span class="p">)</span><span class="w">  </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
+<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">init</span><span class="p">(</span><span class="w"> </span><span class="n">value_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">val</span><span class="p">)</span><span class="w">  </span><span class="k">const</span><span class="p">;</span>
 </pre></div>
 </div>
 <p>Initialize <code class="docutils literal notranslate"><span class="pre">val</span></code> using the Kokkos::reduction_identity<Scalar>::max() method.  The default implementation sets <code class="docutils literal notranslate"><span class="pre">val=&lt;TYPE&gt;_MIN</span></code>.</p>
 </li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">value_type</span><span class="o">&amp;</span><span class="w"> </span><span class="nf">reference</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
+<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">value_type</span><span class="o">&amp;</span><span class="w"> </span><span class="nf">reference</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
 </pre></div>
 </div>
 <p>Returns a reference to the result provided in class constructor.</p>
 </li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">result_view_type</span><span class="w"> </span><span class="nf">view</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
+<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">result_view_type</span><span class="w"> </span><span class="nf">view</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
 </pre></div>
 </div>
 <p>Returns a view of the result place provided in class constructor.</p>

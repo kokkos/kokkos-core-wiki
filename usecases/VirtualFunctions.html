@@ -495,22 +495,22 @@
 <section id="the-problem">
 <h2>The Problem<a class="headerlink" href="#the-problem" title="Permalink to this heading">#</a></h2>
 <p>In GPU programming, you might have run into the bug of calling a host function from the device. A similar thing can happen for subtle reasons in code using virtual functions. Consider the following code</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">ClassWithVirtualFunctions</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">SomeBase</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="cm">/** fields */</span><span class="w"></span>
-<span class="w">  </span><span class="k">public</span><span class="o">:</span><span class="w"></span>
-<span class="w">  </span><span class="n">KOKKOS_FUNCTION</span><span class="w"> </span><span class="k">virtual</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">virtualFunction</span><span class="p">(){</span><span class="w"></span>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">ClassWithVirtualFunctions</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">SomeBase</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="cm">/** fields */</span>
+<span class="w">  </span><span class="k">public</span><span class="o">:</span>
+<span class="w">  </span><span class="n">KOKKOS_FUNCTION</span><span class="w"> </span><span class="k">virtual</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">virtualFunction</span><span class="p">(){</span>
 <span class="w">    </span><span class="c1">// TODO: implement all of physics</span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-<span class="p">};</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">};</span>
 
-<span class="n">ClassWithVirtualFunctions</span><span class="o">*</span><span class="w"> </span><span class="n">hostClassInstance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">hostClassInstance</span><span class="p">();</span><span class="w"></span>
-<span class="n">ClassWithVirtualFunction</span><span class="o">*</span><span class="w">  </span><span class="n">deviceClassInstance</span><span class="p">;</span><span class="w"></span>
-<span class="n">cudaMalloc</span><span class="p">((</span><span class="kt">void</span><span class="o">**</span><span class="p">)</span><span class="o">&amp;</span><span class="n">deviceClassInstance</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">ClassWithVirtualFunction</span><span class="p">));</span><span class="w"></span>
-<span class="n">cudaMemcpy</span><span class="p">(</span><span class="n">deviceClassInstance</span><span class="p">,</span><span class="w"> </span><span class="n">hostClassInstance</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">ClassWithVirtualFunction</span><span class="p">),</span><span class="w"> </span><span class="n">cudaMemcpyHostToDevice</span><span class="p">);</span><span class="w"></span>
+<span class="n">ClassWithVirtualFunctions</span><span class="o">*</span><span class="w"> </span><span class="n">hostClassInstance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">hostClassInstance</span><span class="p">();</span>
+<span class="n">ClassWithVirtualFunction</span><span class="o">*</span><span class="w">  </span><span class="n">deviceClassInstance</span><span class="p">;</span>
+<span class="n">cudaMalloc</span><span class="p">((</span><span class="kt">void</span><span class="o">**</span><span class="p">)</span><span class="o">&amp;</span><span class="n">deviceClassInstance</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">ClassWithVirtualFunction</span><span class="p">));</span>
+<span class="n">cudaMemcpy</span><span class="p">(</span><span class="n">deviceClassInstance</span><span class="p">,</span><span class="w"> </span><span class="n">hostClassInstance</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">ClassWithVirtualFunction</span><span class="p">),</span><span class="w"> </span><span class="n">cudaMemcpyHostToDevice</span><span class="p">);</span>
 
-<span class="n">Kokkos</span><span class="o">::</span><span class="n">parallel_for</span><span class="p">(</span><span class="s">&quot;DeviceKernel&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">SomeCudaPolicy</span><span class="p">,</span><span class="w"> </span><span class="n">KOKKOS_LAMBDA</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="n">deviceClassInstance</span><span class="o">-&gt;</span><span class="n">virtualFunction</span><span class="p">();</span><span class="w"></span>
-<span class="p">});</span><span class="w"></span>
+<span class="n">Kokkos</span><span class="o">::</span><span class="n">parallel_for</span><span class="p">(</span><span class="s">&quot;DeviceKernel&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">SomeCudaPolicy</span><span class="p">,</span><span class="w"> </span><span class="n">KOKKOS_LAMBDA</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">deviceClassInstance</span><span class="o">-&gt;</span><span class="n">virtualFunction</span><span class="p">();</span>
+<span class="p">});</span>
 </pre></div>
 </div>
 <p>At a glance this should be fine, we’ve made a device instance of a class, copied the contents of a host instance into it, and then used it. This code will typically crash, however, because <code class="docutils literal notranslate"><span class="pre">virtualFunction</span></code> will call a host version of the function. To understand why, you’ll need to understand a bit about how virtual functions are implemented.</p>
@@ -536,16 +536,16 @@
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">Instance</span><span class="o">*</span><span class="w"> </span><span class="n">hostInstance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Instance</span><span class="p">();</span><span class="w"> </span><span class="c1">// allocate and initialize host</span>
 <span class="n">Instance</span><span class="o">*</span><span class="w"> </span><span class="n">deviceInstance</span><span class="p">;</span><span class="w"> </span><span class="c1">// cudaMalloc&#39;d to allocate</span>
 <span class="n">cudaMemcpy</span><span class="p">(</span><span class="n">deviceInstance</span><span class="p">,</span><span class="w"> </span><span class="n">hostInstance</span><span class="p">);</span><span class="w"> </span><span class="c1">// to initialize the deivce</span>
-<span class="n">Kokkos</span><span class="o">::</span><span class="n">parallel_for</span><span class="p">(...</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="n">Kokkos</span><span class="o">::</span><span class="n">parallel_for</span><span class="p">(...</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="c1">// use deviceInstance</span>
-<span class="p">});</span><span class="w"></span>
+<span class="p">});</span>
 </pre></div>
 </div>
 <p>To one where we initialize on the device using a technique called <code class="docutils literal notranslate"><span class="pre">placement</span> <span class="pre">new</span></code></p>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">Instance</span><span class="o">*</span><span class="w"> </span><span class="n">deviceInstance</span><span class="p">;</span><span class="w"> </span><span class="c1">// cudaMalloc&#39;d to allocate it</span>
-<span class="n">Kokkos</span><span class="o">::</span><span class="n">parallel_for</span><span class="p">(...</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="n">Kokkos</span><span class="o">::</span><span class="n">parallel_for</span><span class="p">(...</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="k">new</span><span class="p">((</span><span class="n">Instance</span><span class="o">*</span><span class="p">)</span><span class="n">deviceInstance</span><span class="p">)</span><span class="w"> </span><span class="n">Instance</span><span class="p">();</span><span class="w"> </span><span class="c1">// initialize an instance, and place the result in the pointer deviceInstance</span>
-<span class="p">});</span><span class="w"></span>
+<span class="p">});</span>
 </pre></div>
 </div>
 <p>This code is extremely ugly, but leads to a properly initialized instance of the class. Note that like with other uses of <code class="docutils literal notranslate"><span class="pre">new</span></code>, you need to later <code class="docutils literal notranslate"><span class="pre">free</span></code> the memory</p>
@@ -555,27 +555,27 @@
 <h2>Complications and Fixes<a class="headerlink" href="#complications-and-fixes" title="Permalink to this heading">#</a></h2>
 <p>The first problem people run into with this is that they want to initialize some fields or nested classes based on host data before moving data down to the device</p>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">Instance</span><span class="o">*</span><span class="w"> </span><span class="n">hostInstance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Instance</span><span class="p">();</span><span class="w"> </span><span class="c1">// allocate and initialize host</span>
-<span class="n">hostInstance</span><span class="o">-&gt;</span><span class="n">setAField</span><span class="p">(</span><span class="n">someHostValue</span><span class="p">);</span><span class="w"></span>
+<span class="n">hostInstance</span><span class="o">-&gt;</span><span class="n">setAField</span><span class="p">(</span><span class="n">someHostValue</span><span class="p">);</span>
 <span class="n">Instance</span><span class="o">*</span><span class="w"> </span><span class="n">deviceInstance</span><span class="p">;</span><span class="w"> </span><span class="c1">// cudaMalloc&#39;d to allocate</span>
 <span class="n">cudaMemcpy</span><span class="p">(</span><span class="n">deviceInstance</span><span class="p">,</span><span class="w"> </span><span class="n">hostInstance</span><span class="p">);</span><span class="w"> </span><span class="c1">// to initialize the deivce</span>
-<span class="n">Kokkos</span><span class="o">::</span><span class="n">parallel_for</span><span class="p">(...</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="n">Kokkos</span><span class="o">::</span><span class="n">parallel_for</span><span class="p">(...</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="c1">// use deviceInstance</span>
-<span class="p">});</span><span class="w"></span>
+<span class="p">});</span>
 </pre></div>
 </div>
 <p>We can’t translate this easily, the naive translation would be</p>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">Instance</span><span class="o">*</span><span class="w"> </span><span class="n">deviceInstance</span><span class="p">;</span><span class="w"> </span><span class="c1">// cudaMalloc&#39;d to allocate it</span>
-<span class="n">Kokkos</span><span class="o">::</span><span class="n">parallel_for</span><span class="p">(...</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="n">Kokkos</span><span class="o">::</span><span class="n">parallel_for</span><span class="p">(...</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="k">new</span><span class="p">((</span><span class="n">Instance</span><span class="o">*</span><span class="p">)</span><span class="n">deviceInstance</span><span class="p">)</span><span class="w"> </span><span class="n">Instance</span><span class="p">();</span><span class="w"> </span><span class="c1">// initialize an instance, and place the result in the pointer deviceInstance</span>
-<span class="w">  </span><span class="n">deviceInstance</span><span class="o">-&gt;</span><span class="n">setAField</span><span class="p">(</span><span class="n">someHostValue</span><span class="p">);</span><span class="w"></span>
-<span class="p">});</span><span class="w"></span>
+<span class="w">  </span><span class="n">deviceInstance</span><span class="o">-&gt;</span><span class="n">setAField</span><span class="p">(</span><span class="n">someHostValue</span><span class="p">);</span>
+<span class="p">});</span>
 </pre></div>
 </div>
 <p>Which would crash for accessing the host value <code class="docutils literal notranslate"><span class="pre">someHostValue</span></code> on the device. The most productive solution we’ve found in these cases is to allocate the class in UVM, initialize it on the device, and then fill in fields on the host. To wit:</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">Instance</span><span class="o">*</span><span class="w"> </span><span class="n">deviceInstance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">kokkos_malloc</span><span class="o">&lt;</span><span class="n">Kokkos</span><span class="o">::</span><span class="n">CudaUVMSpace</span><span class="o">&gt;</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">Instance</span><span class="p">));</span><span class="w"></span>
-<span class="n">Kokkos</span><span class="o">::</span><span class="n">parallel_for</span><span class="p">(...</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">Instance</span><span class="o">*</span><span class="w"> </span><span class="n">deviceInstance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">kokkos_malloc</span><span class="o">&lt;</span><span class="n">Kokkos</span><span class="o">::</span><span class="n">CudaUVMSpace</span><span class="o">&gt;</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">Instance</span><span class="p">));</span>
+<span class="n">Kokkos</span><span class="o">::</span><span class="n">parallel_for</span><span class="p">(...</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="k">new</span><span class="p">((</span><span class="n">Instance</span><span class="o">*</span><span class="p">)</span><span class="n">deviceInstance</span><span class="p">)</span><span class="w"> </span><span class="n">Instance</span><span class="p">();</span><span class="w"> </span><span class="c1">// initialize an instance, and place the result in the pointer deviceInstance</span>
-<span class="p">});</span><span class="w"></span>
+<span class="p">});</span>
 <span class="n">deviceInstance</span><span class="o">-&gt;</span><span class="n">setAField</span><span class="p">(</span><span class="n">someHostValue</span><span class="p">);</span><span class="w"> </span><span class="c1">// set some field on the host</span>
 </pre></div>
 </div>
@@ -585,41 +585,41 @@
 <h2>But what if I do not really need the V-Tables on the device side?<a class="headerlink" href="#but-what-if-i-do-not-really-need-the-v-tables-on-the-device-side" title="Permalink to this heading">#</a></h2>
 <p>Consider the following example which calls the <code class="docutils literal notranslate"><span class="pre">virtual</span> <span class="pre">operator()</span></code> on the device from a pointer of derived class type.
 One might think this should work because no V-Table lookup on the device is neccessary.</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Kokkos_Core.hpp&gt;</span><span class="cp"></span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Kokkos_Core.hpp&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstdio&gt;</span>
 
-<span class="k">struct</span><span class="w"> </span><span class="nc">Interface</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">KOKKOS_DEFAULTED_FUNCTION</span><span class="w"></span>
-<span class="w">    </span><span class="k">virtual</span><span class="w"> </span><span class="o">~</span><span class="n">Interface</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="p">;</span><span class="w"></span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">Interface</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">KOKKOS_DEFAULTED_FUNCTION</span>
+<span class="w">    </span><span class="k">virtual</span><span class="w"> </span><span class="o">~</span><span class="n">Interface</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">KOKKOS_FUNCTION</span><span class="w"></span>
-<span class="w">    </span><span class="k">virtual</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="k">operator</span><span class="p">()(</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
-<span class="p">};</span><span class="w"></span>
+<span class="w">    </span><span class="n">KOKKOS_FUNCTION</span>
+<span class="w">    </span><span class="k">virtual</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="k">operator</span><span class="p">()(</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">};</span>
 
-<span class="k">struct</span><span class="w"> </span><span class="nc">Implementation</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">Interface</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">KOKKOS_FUNCTION</span><span class="w"></span>
-<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="k">operator</span><span class="p">()(</span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">override</span><span class="w"></span>
-<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%zu from Implementation</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">);</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">Implementation</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">Interface</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">KOKKOS_FUNCTION</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="k">operator</span><span class="p">()(</span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">override</span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%zu from Implementation</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
 
-<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">apply</span><span class="p">(){</span><span class="w"></span>
-<span class="w">        </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">parallel_for</span><span class="p">(</span><span class="s">&quot;myLoop&quot;</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="n">KOKKOS_CLASS_LAMBDA</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">this</span><span class="o">-&gt;</span><span class="k">operator</span><span class="p">()(</span><span class="n">i</span><span class="p">);</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
-<span class="w">        </span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="p">};</span><span class="w"></span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">apply</span><span class="p">(){</span>
+<span class="w">        </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">parallel_for</span><span class="p">(</span><span class="s">&quot;myLoop&quot;</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span>
+<span class="w">            </span><span class="n">KOKKOS_CLASS_LAMBDA</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">this</span><span class="o">-&gt;</span><span class="k">operator</span><span class="p">()(</span><span class="n">i</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+<span class="w">        </span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">};</span>
 
-<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">argv</span><span class="p">[])</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">initialize</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span><span class="n">argv</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="k">auto</span><span class="w"> </span><span class="n">implementationPtr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">Implementation</span><span class="o">&gt;</span><span class="p">();</span><span class="w"></span>
-<span class="w">      </span><span class="n">implementationPtr</span><span class="o">-&gt;</span><span class="n">apply</span><span class="p">();</span><span class="w"></span>
-<span class="w">      </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">fence</span><span class="p">();</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">finalize</span><span class="p">();</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">initialize</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span><span class="n">argv</span><span class="p">);</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="k">auto</span><span class="w"> </span><span class="n">implementationPtr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">Implementation</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="w">      </span><span class="n">implementationPtr</span><span class="o">-&gt;</span><span class="n">apply</span><span class="p">();</span>
+<span class="w">      </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">fence</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">finalize</span><span class="p">();</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 <section id="why-is-this-not-portable">

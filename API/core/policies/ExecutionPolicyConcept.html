@@ -498,26 +498,26 @@
 <section id="what-is-an-executionpolicy">
 <h2>What is an <code class="docutils literal notranslate"><span class="pre">ExecutionPolicy</span></code>?<a class="headerlink" href="#what-is-an-executionpolicy" title="Permalink to this heading">#</a></h2>
 <p>The dominant parallel dispatch mechanism in Kokkos, described <a class="reference internal" href="../../../ProgrammingGuide/ParallelDispatch.html"><span class="doc std std-doc">elsewhere in the programming guide</span></a>, involves a <code class="docutils literal notranslate"><span class="pre">parallel_pattern</span></code> (e.g., something like <a class="reference internal" href="../parallel-dispatch/parallel_for.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">Kokkos::parallel_for</span></code></span></a> or <a class="reference internal" href="../parallel-dispatch/parallel_reduce.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">Kokkos::parallel_reduce</span></code></span></a>), an <code class="docutils literal notranslate"><span class="pre">ExecutionPolicy</span></code>, and a <code class="docutils literal notranslate"><span class="pre">Functor</span></code>.  In a hand-wavy sense:</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">parallel_pattern</span><span class="p">(</span><span class="w"></span>
-<span class="w">  </span><span class="n">ExecutionPolicy</span><span class="p">(),</span><span class="w"></span>
-<span class="w">  </span><span class="n">Functor</span><span class="p">()</span><span class="w"></span>
-<span class="p">);</span><span class="w"></span>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">parallel_pattern</span><span class="p">(</span>
+<span class="w">  </span><span class="n">ExecutionPolicy</span><span class="p">(),</span>
+<span class="w">  </span><span class="n">Functor</span><span class="p">()</span>
+<span class="p">);</span>
 </pre></div>
 </div>
 <p>The most basic (“beginner”) case is actually a shortcut:</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">Kokkos</span><span class="o">::</span><span class="n">parallel_for</span><span class="p">(</span><span class="w"></span>
-<span class="w">  </span><span class="mi">42</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="n">KOKKOS_LAMBDA</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* ... */</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
-<span class="p">);</span><span class="w"></span>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">Kokkos</span><span class="o">::</span><span class="n">parallel_for</span><span class="p">(</span>
+<span class="w">  </span><span class="mi">42</span><span class="p">,</span>
+<span class="w">  </span><span class="n">KOKKOS_LAMBDA</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* ... */</span><span class="w"> </span><span class="p">}</span>
+<span class="p">);</span>
 </pre></div>
 </div>
 <p>is a “shortcut” for</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">Kokkos</span><span class="o">::</span><span class="n">parallel_for</span><span class="p">(</span><span class="w"></span>
-<span class="w">  </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">RangePolicy</span><span class="o">&lt;</span><span class="n">Kokkos</span><span class="o">::</span><span class="n">DefaultExecutionSpace</span><span class="o">&gt;</span><span class="p">(</span><span class="w"></span>
-<span class="w">    </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">DefaultExecutionSpace</span><span class="p">(),</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">42</span><span class="w"></span>
-<span class="w">  </span><span class="p">),</span><span class="w"></span>
-<span class="w">  </span><span class="n">KOKKOS_LAMBDA</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* ... */</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
-<span class="p">);</span><span class="w"></span>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">Kokkos</span><span class="o">::</span><span class="n">parallel_for</span><span class="p">(</span>
+<span class="w">  </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">RangePolicy</span><span class="o">&lt;</span><span class="n">Kokkos</span><span class="o">::</span><span class="n">DefaultExecutionSpace</span><span class="o">&gt;</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">DefaultExecutionSpace</span><span class="p">(),</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">42</span>
+<span class="w">  </span><span class="p">),</span>
+<span class="w">  </span><span class="n">KOKKOS_LAMBDA</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* ... */</span><span class="w"> </span><span class="p">}</span>
+<span class="p">);</span>
 </pre></div>
 </div>
 <p>In this example, <code class="docutils literal notranslate"><span class="pre">Kokkos::RangePolicy&lt;Kokkos::DefaultExecutionSpace&gt;</span></code> is the <code class="docutils literal notranslate"><span class="pre">ExecutionPolicy</span></code> type.</p>
