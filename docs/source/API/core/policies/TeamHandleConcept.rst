@@ -66,6 +66,10 @@ Synopsis
 
     .. cppkokkos:inlinefunction:: int team_size() const noexcept;
 
+    .. cppkokkos:deprecated-type:: 3.6.01 some_deprecated_data_type
+
+    .. cppkokkos:deprecated-type:: other_deprecated_data_type
+
     * Returns: the number of threads associated with the team.
 
     .. code-block:: cpp
