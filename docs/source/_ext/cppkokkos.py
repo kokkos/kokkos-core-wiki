@@ -6811,23 +6811,7 @@ class DefinitionParser(BaseParser):
                 header = "Error in type declaration."
                 raise self._make_multi_error(prevErrors, header) from e
         elif objectType == 'inlinefunction':
-            prevErrors = []
-            pos = self.pos
-            try:
-                if not templatePrefix:
-                    declaration = self._parse_type(named=True, outer='inlinefunction')
-            except DefinitionError as e:
-                prevErrors.append((e, "If typedef-like declaration"))
-                self.pos = pos
-            pos = self.pos
-            try:
-                if not declaration:
-                    declaration = self._parse_type_using()
-            except DefinitionError as e:
-                self.pos = pos
-                prevErrors.append((e, "If type alias or template alias"))
-                header = "Error in type declaration."
-                raise self._make_multi_error(prevErrors, header) from e
+            declaration = self._parse_type(named=True, outer='inlinefunction')
         elif objectType == 'concept':
             declaration = self._parse_concept()
         elif objectType == 'member':
