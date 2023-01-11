@@ -5,3 +5,4 @@ API: SIMD
    :maxdepth: 1
 
    ./simd/simd
+   ./simd/simd_mask
