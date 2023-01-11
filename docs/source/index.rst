@@ -90,6 +90,7 @@ Website Content
    ./API/core-index
    ./API/containers-index
    ./API/algorithms-index
+   ./API/simd-index
    ./API/alphabetical
    deprecation_page
    known-issues
