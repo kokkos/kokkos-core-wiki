@@ -6,3 +6,4 @@ API: SIMD
 
    ./simd/simd
    ./simd/simd_mask
+   ./simd/where_expression
