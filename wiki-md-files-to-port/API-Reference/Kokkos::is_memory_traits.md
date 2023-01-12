@@ -1,1 +1,0 @@
-Boolean type trait to detect specializations of [Kokkos::MemoryTraits](Kokkos%3A%3AMemoryTraits).
