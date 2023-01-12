@@ -1,35 +1,50 @@
 ``ParallelForTag()``
 ====================
 
+.. role::cpp(code)
+    :language: cpp
+
 Header File: ``<Kokkos_ExecPolicy.hpp>``
 
-A tag used in team size calculation functions to indicate that the functor for which a team size is being requested is being used in a [`parallel_for`](../parallel-dispatch/parallel_for)
+.. _text: ../parallel-dispatch/parallel_for.html
 
-Usage: 
-```c++
-using PolicyType = Kokkos::TeamPolicy<>; 
-PolicyType policy;
-int recommended_team_size = policy.team_size_recommended(
-  Functor, Kokkos::ParallelForTag());
-```
+.. |text| replace:: ``parallel_for``
 
-## Synopsis 
-```c++
-struct ParallelForTag{};
-```
+A tag used in team size calculation functions to indicate that the functor for which a team size is being requested is being used in a |text|_
 
-## Public Class Members
+Usage
+-----
 
-  None
+.. code-block:: cpp
 
-### Typedefs
+    using PolicyType = Kokkos::TeamPolicy<>; 
+    PolicyType policy;
+    int recommended_team_size = policy.team_size_recommended(
+        Functor, Kokkos::ParallelForTag());
+
+Synopsis 
+--------
+
+.. code-block:: cpp
+
+    struct ParallelForTag{};
+
+Public Class Members
+--------------------
+
+None
+
+Typedefs
+~~~~~~~~
    
- None
+None
 
-### Constructors
+Constructors
+~~~~~~~~~~~~
  
- Default
+Default
 
-### Functions
+Functions
+~~~~~~~~~
 
- None
+None
