@@ -136,7 +136,7 @@ Requirements:
   - ``HandleType`` is an ``IntegerType`` if ``ExecPolicy`` is an ``IntegerType`` else it is ``ExecPolicy::member_type``.
 * If ``ExecPolicy`` is ``MDRangePolicy`` the ``functor`` has a member function of the form ``operator() (const IntegerType& i0, ... , const IntegerType& iN, ReducerValueType& value) const`` or ``operator() (const WorkTag, const IntegerType& i0, ... , const IntegerType& iN, ReducerValueType& value) const``.
 
-  - The ``WorkTag`` free form of the operator is used if ``ExecPolicy::work_tag`` is not ``void``.
+  - The ``WorkTag`` free form of the operator is used if ``ExecPolicy::work_tag`` is ``void``.
   - ``N`` must match ``ExecPolicy::rank``.
 * If the ``functor`` is a lambda, ``ReducerArgument`` must satisfy the ``Reducer`` concept or ``ReducerArgumentNonConst`` must be a POD type with ``operator +=`` and ``operator =`` or a ``Kokkos::View``.  In the latter case, the default ``Sum`` reduction is applied. If provided, the ``init``/ ``join``/ ``final`` member functions must not take a ``WorkTag`` argument even for tagged reductions.
 * If ``ExecPolicy`` is ``TeamThreadRange`` a "reducing" ``functor`` is not allowed and the ``ReducerArgument`` must satisfy the ``Reducer`` concept or ``ReducerArgumentNonConst`` must be a POD type with ``operator +=`` and ``operator =`` or a ``Kokkos::View``.  In the latter case, the default ``Sum`` reduction is applied.
