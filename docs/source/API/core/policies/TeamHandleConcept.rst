@@ -64,7 +64,7 @@ Synopsis
 
     * Returns: the index ``i`` of the calling thread within the team with ``0 <= i < team_size()``
 
-    .. cppkokkos:inlinefunction:: int team_size() const noexcept;
+    .. cppkokkos:kokkosfunction:: int team_size() const noexcept;
 
     .. cppkokkos:deprecated-type:: 3.6.01 some_deprecated_data_type
 
