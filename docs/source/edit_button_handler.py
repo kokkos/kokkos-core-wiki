@@ -112,6 +112,7 @@ class HTMLButtonAdder:
                 html_tag = html_tag.replace('"pre"', '"pre" style="color:#A020F0;font-weight:bold;"')
                 html_string = html_str_beg + html_tag + html_str_end
 
+
     def add_button(self, wiki_prefix: str) -> None:
         """Loops over html files and overwrite them."""
         for num, file_names in enumerate(zip(self.html_files, self.document_files), 1):
