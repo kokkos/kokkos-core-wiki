@@ -2866,28 +2866,28 @@ class ASTType(ASTBase):
         # other versions
         res = []
         if objectType:  # needs the name
-             if objectType == 'function' or objectType == 'kokkosinlinefunction':  # also modifiers
-                  modifiers = self.decl.get_modifiers_id(version)
-                  res.append(symbol.get_full_nested_name().get_id(version, modifiers))
-                  if version >= 4:
-                      # with templates we need to mangle the return type in as well
-                      templ = symbol.declaration.templatePrefix
-                      if templ is not None:
-                          typeId = self.decl.get_ptr_suffix_id(version)
-                          if self.trailingReturn:
-                              returnTypeId = self.trailingReturn.get_id(version)
-                          else:
-                              returnTypeId = self.declSpecs.get_id(version)
-                          res.append(typeId)
-                          res.append(returnTypeId)
-                  res.append(self.decl.get_param_id(version))
-             elif objectType == 'type':  # just the name
-                 res.append(symbol.get_full_nested_name().get_id(version))
-             elif objectType == 'deprecated-type':  # just the name
-                 res.append(symbol.get_full_nested_name().get_id(version))
-             else:
-                 print(objectType)
-                 assert False
+            if objectType == 'function' or objectType == 'kokkosinlinefunction':  # also modifiers
+                modifiers = self.decl.get_modifiers_id(version)
+                res.append(symbol.get_full_nested_name().get_id(version, modifiers))
+                if version >= 4:
+                    # with templates we need to mangle the return type in as well
+                    templ = symbol.declaration.templatePrefix
+                    if templ is not None:
+                        typeId = self.decl.get_ptr_suffix_id(version)
+                        if self.trailingReturn:
+                            returnTypeId = self.trailingReturn.get_id(version)
+                        else:
+                            returnTypeId = self.declSpecs.get_id(version)
+                        res.append(typeId)
+                        res.append(returnTypeId)
+                res.append(self.decl.get_param_id(version))
+            elif objectType == 'type':  # just the name
+                res.append(symbol.get_full_nested_name().get_id(version))
+            elif objectType == 'deprecated-type':  # just the name
+                res.append(symbol.get_full_nested_name().get_id(version))
+            else:
+                print(objectType)
+                assert False
         else:  # only type encoding
             # the 'returnType' of a non-function type is simply just the last
             # type, i.e., for 'int*' it is 'int'
