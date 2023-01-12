@@ -86,7 +86,6 @@ class HTMLButtonAdder:
         html_str_end = html_file_str[tag_pos + len(html_tag):]
         html_str_replace = html_str_beg + str_to_put + html_str_end
         html_str_replace = self._overwrite_deprecated_style(html_string=html_str_replace)
-        html_str_replace = self._overwrite_inlinefunction_style(html_string=html_str_replace)
         with open(file_names[0], 'wt') as new_html_file:
             new_html_file.write(html_str_replace)
         print(f'=> Processing: {file_names[0]} done')
@@ -112,16 +111,6 @@ class HTMLButtonAdder:
                 html_tag = html_string[match.regs[0][0]:match.regs[0][1]]
                 html_tag = html_tag.replace('"pre"', '"pre" style="color:#A020F0;font-weight:bold;"')
                 html_string = html_str_beg + html_tag + html_str_end
-
-    @staticmethod
-    def _overwrite_inlinefunction_style(html_string: str) -> str:
-        """Overwrites inlinefunction style."""
-        # Overwriting the inlinefunction style without version
-        str_to_replace = '<span class="pre">KOKKOS_INLINE_FUNCTION</span>'
-        replaced_with = '<span class="pre" style="color:#12E049;font-weight:bold;">KOKKOS_INLINE_FUNCTION</span>'
-        html_string = html_string.replace(str_to_replace, replaced_with)
-        return html_string
-
 
     def add_button(self, wiki_prefix: str) -> None:
         """Loops over html files and overwrite them."""
