@@ -63,8 +63,6 @@ See below the list of common mathematical functions supported. We refer the read
 
 ``func*`` see notes below
 
-**Basic operations**
-
 .. _abs: https://en.cppreference.com/w/cpp/numeric/math/fabs
 
 .. |abs| replace:: ``abs``
@@ -105,7 +103,7 @@ See below the list of common mathematical functions supported. We refer the read
 
 .. |nan| replace:: ``nan``
 
-|abs|_ |fabs|_ |fmod|_ |remainder|_ |remquo|_ |fma*|_ |fmax|_ |fmin|_ |fdim|_ |nan|_
+**Basic operations** |abs|_ |fabs|_ |fmod|_ |remainder|_ |remquo|_ |fma*|_ |fmax|_ |fmin|_ |fdim|_ |nan|_
 
 **Exponential functions**
 
@@ -196,12 +194,12 @@ Notes
 -----
 
 .. _openIssue: https://github.com/kokkos/kokkos/issues/new
-.. |openIssue| replace:: open an issue
+.. |openIssue| replace:: **open an issue**
 
 .. _issue4767: https://github.com/kokkos/kokkos/issues/4767
-.. |issue4767| replace:: Issue #4767
+.. |issue4767| replace:: **Issue #4767**
 
-* **Feel free to |openIssue|_ if you need one of the functions that is currently not implemented. |issue4767|_ is keeping track of these and has notes about implementability.**
+* **Feel free to** |openIssue|_ **if you need one of the functions that is currently not implemented.** |issue4767|_ **is keeping track of these and has notes about implementability.**
 * ``nearbyint`` is not available with the SYCL backend
 * ``round``, ``logb``, ``nextafter``, ``copysign``, and ``signbit`` are available since version 3.7
 * three-argument version of ``hypot`` is available since 4.0
