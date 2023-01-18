@@ -171,3 +171,90 @@ When instantiated with `T=double`, this function behaves in the classic, familia
 If we simply instantiate it with `T=Kokkos::Experimental::native_simd<double>`, it still compiles just the same but now every mathematical operation is guaranteed to emit a vector instruction and the function can compute 4 quadratic formulas at a time on a 256-bit vector CPU.
 
 Note that Kokkos takes special care to ensure everything that can be done with `double` can also be done with SIMD types, including the multiplication by integer literals `4` and `2` in this example code.
+
+## Conditionals
+
+### Conditional assignment
+
+One of the more difficult things to do with SIMD types is conditional logic. Consider the following code which is responsible for ensuring that the value `x` is not negative (we will ignore the existence of `max` functions for this discussion because it makes for a nice simple example):
+
+```c++
+double x;
+if (x < 0) x = 0;
+```
+
+We cannot naively use SIMD types in this scenario, because `x < 0` is not a boolean value, instead it is a `simnd_mask<double, Abi>` object which represents possibly multiple booleans.
+
+```c++
+Kokkos::Experimental::native_simd<double> x;
+if (x < 0 /* <- this is not a boolean */) x = 0;
+```
+
+The ISO C++ consistent solution is to use `where` expressions as follows:
+
+```c++
+Kokkos::Experimental::native_simd<double> x;
+where(x < 0, x) = 0;
+```
+
+### Ternary operator
+
+At the time of this writing, there is also a common practice of using a function that mimics the behavior of the ternary conditional operator `a ? b : c` in a SIMD sense. This means the following are functionally equivalent:
+
+```c++
+bool a;
+double b;
+double c;
+auto d = a ? b : c;
+```
+
+```c++
+Kokkos::Experimental::native_simd_mask<double> a;
+Kokkos::Experimental::native_simd<double> b;
+Kokkos::Experimental::native_simd<double> c;
+auto d = Kokkos::Experimental::condition(a, b, c);
+```
+
+```c++
+Kokkos::Experimental::native_simd_mask<double> a;
+Kokkos::Experimental::native_simd<double> b;
+Kokkos::Experimental::native_simd<double> c;
+auto d = c;
+where(a, d) = b;
+```
+
+The roadmap regarding the ternary operator is as follows: ISO C++ will likely add the ability to overload this operator in later versions of the language, and the standard library's SIMD types will overload it.
+
+It is recommended that programmers use `where` expressions as much as possible for conditional logic when using Kokkos SIMD types, because this is consistent with the library solution currently proposed to ISO C++ without relying on non-standard functions or language features not yet available.
+
+### Reductions for performance
+
+One frustrating aspect of the solutions for conditional logic above is that computations are not skipped, they are simply masked out. Consider the following serial logic:
+
+```c++
+bool a;
+double b = 1.0;
+if (a) b = very_expensive_function(c, d, e);
+```
+
+When using `if` statements, `very_expensive_function` is not executed at all unless `a` is `true`. However, in SIMD mode:
+
+```c++
+Kokkos::Experimental::native_simd_mask<double> a;
+Kokkos::Experimental::native_simd<double> b = 1.0;
+where(a, b) = very_expensive_function(c, d, e);
+```
+
+Now `very_expensive_function` is always being executed. What if the probability of `a` being `true` is very low? We would want to skip the computation of `very_expensive_function` if at all possible.
+
+For this, we have boolean reductions across masks called `all_of`, `none_of`, and `any_of`:
+
+```c++
+Kokkos::Experimental::native_simd_mask<double> a;
+Kokkos::Experimental::native_simd<double> b = 1.0;
+if (Kokkos::Experimental::any_of(a)) {
+  where(a, b) = very_expensive_function(c, d, e);
+}
+```
+
+Now `very_expensive_function` will only be executed if any of the boolean values in the mask `a` are `true`. If it is common that all of the boolean values in `a` are `false`, then we will spend a lot less time in `very_expensive_function`.
