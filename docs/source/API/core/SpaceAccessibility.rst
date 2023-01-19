@@ -1,5 +1,3 @@
-``FIXME: CONTENT POLISHING``
-
 Space Accessibility
 ===================
 
