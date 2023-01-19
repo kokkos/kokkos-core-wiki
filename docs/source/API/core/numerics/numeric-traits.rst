@@ -4,6 +4,9 @@ Numeric traits
 .. role::cpp(code)
     :language: cpp
 
+.. role:: strike
+    :class: strike
+
 .. _KokkosNumericTraits: https://github.com/kokkos/kokkos/blob/3.5.00/core/src/Kokkos_NumericTraits.hpp
 
 .. |KokkosNumericTraits| replace:: ``<Kokkos_NumericTraits.hpp>``
@@ -91,7 +94,7 @@ See below the list of available traits.
 +---------------------------------------------------------+------------------------------------------------+
 | ``std::numeric_limits<FloatingPoint>::min_exponent10``  | ``min_exponent10_v<FloatingPoint>``            |
 +---------------------------------------------------------+------------------------------------------------+
-| ``std::numeric_limits<FloatingPoint>::max_exponent` `   | ``max_exponent_v<FloatingPoint>``              |
+| ``std::numeric_limits<FloatingPoint>::max_exponent``    | ``max_exponent_v<FloatingPoint>``              |
 +---------------------------------------------------------+------------------------------------------------+
 | ``std::numeric_limits<FloatingPoint>::max_exponent10``  | ``max_exponent10_v<FloatingPoint>``            |
 +---------------------------------------------------------+------------------------------------------------+
