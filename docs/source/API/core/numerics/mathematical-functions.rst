@@ -105,88 +105,261 @@ See below the list of common mathematical functions supported. We refer the read
 
 **Basic operations** |abs|_ |fabs|_ |fmod|_ |remainder|_ |remquo|_ |fma*|_ |fmax|_ |fmin|_ |fdim|_ |nan|_
 
-**Exponential functions**
+.. _exp: https://en.cppreference.com/w/cpp/numeric/math/exp
 
-.. compo:
+.. |exp| replace:: ``exp``
 
-    .. _:
-    .. || replace::
-    ||_
+.. _exp2: https://en.cppreference.com/w/cpp/numeric/math/exp2
 
-    [`exp`](https://en.cppreference.com/w/cpp/numeric/math/exp)
-    [`exp2`](https://en.cppreference.com/w/cpp/numeric/math/exp2)
-    [`expm1`](https://en.cppreference.com/w/cpp/numeric/math/expm1)
-    [`log`](https://en.cppreference.com/w/cpp/numeric/math/log)
-    [`log10`](https://en.cppreference.com/w/cpp/numeric/math/log10)
-    [`log2`](https://en.cppreference.com/w/cpp/numeric/math/log2)
-    [`log1p`](https://en.cppreference.com/w/cpp/numeric/math/log1p)
+.. |exp2| replace:: ``exp2``
 
-    **Power functions**
-    [`pow`](https://en.cppreference.com/w/cpp/numeric/math/pow)
-    [`sqrt`](https://en.cppreference.com/w/cpp/numeric/math/sqrt)
-    [`cbrt`](https://en.cppreference.com/w/cpp/numeric/math/cbrt)
-    [`hypot*`](https://en.cppreference.com/w/cpp/numeric/math/hypot)
+.. _expm1: https://en.cppreference.com/w/cpp/numeric/math/expm1
 
-    **Trigonometric functions**
-    [`sin`](https://en.cppreference.com/w/cpp/numeric/math/sin)
-    [`cos`](https://en.cppreference.com/w/cpp/numeric/math/cos)
-    [`tan`](https://en.cppreference.com/w/cpp/numeric/math/tan)
-    [`asin`](https://en.cppreference.com/w/cpp/numeric/math/asin)
-    [`acos`](https://en.cppreference.com/w/cpp/numeric/math/acos)
-    [`atan`](https://en.cppreference.com/w/cpp/numeric/math/atan)
-    [`atan2`](https://en.cppreference.com/w/cpp/numeric/math/atan2)
+.. |expm1| replace:: ``expm1``
 
-    **Hyperbolic functions**
-    [`sinh`](https://en.cppreference.com/w/cpp/numeric/math/sinh)
-    [`cosh`](https://en.cppreference.com/w/cpp/numeric/math/cosh)
-    [`tanh`](https://en.cppreference.com/w/cpp/numeric/math/tanh)
-    [`asinh`](https://en.cppreference.com/w/cpp/numeric/math/asinh)
-    [`acosh`](https://en.cppreference.com/w/cpp/numeric/math/acosh)
-    [`atanh`](https://en.cppreference.com/w/cpp/numeric/math/atanh)
+.. _log: https://en.cppreference.com/w/cpp/numeric/math/log
 
-    **Error and gamma functions**
-    [`erf`](https://en.cppreference.com/w/cpp/numeric/math/erf)
-    [`erfc`](https://en.cppreference.com/w/cpp/numeric/math/erfc)
-    [`tgamma`](https://en.cppreference.com/w/cpp/numeric/math/tgamma)
-    [`lgamma`](https://en.cppreference.com/w/cpp/numeric/math/lgamma)
+.. |log| replace:: ``log``
 
-    **Nearest integer floating point operations**
-    [`ceil`](https://en.cppreference.com/w/cpp/numeric/math/ceil)
-    [`floor`](https://en.cppreference.com/w/cpp/numeric/math/floor)
-    [`trunc`](https://en.cppreference.com/w/cpp/numeric/math/trunc)
-    [`round*`](https://en.cppreference.com/w/cpp/numeric/math/round)
-    [<strike>`lround`</strike>](https://en.cppreference.com/w/cpp/numeric/math/round)
-    [<strike>`llround`</strike>](https://en.cppreference.com/w/cpp/numeric/math/round)
-    [`nearbyint*`](https://en.cppreference.com/w/cpp/numeric/math/nearbyint)
-    [<strike>`rint`</strike>](https://en.cppreference.com/w/cpp/numeric/math/rint)
-    [<strike>`lrint`</strike>](https://en.cppreference.com/w/cpp/numeric/math/rint)
-    [<strike>`llrint`</strike>](https://en.cppreference.com/w/cpp/numeric/math/rint)
+.. _log10: https://en.cppreference.com/w/cpp/numeric/math/log10
 
-    **Floating point manipulation functions**
-    [<strike>`frexp`</strike>](https://en.cppreference.com/w/cpp/numeric/math/frexp)
-    [<strike>`ldexp`</strike>](https://en.cppreference.com/w/cpp/numeric/math/ldexp)
-    [<strike>`modf`</strike>](https://en.cppreference.com/w/cpp/numeric/math/modf)
-    [<strike>`scalbn`</strike>](https://en.cppreference.com/w/cpp/numeric/math/scalbn)
-    [<strike>`scalbln`</strike>](https://en.cppreference.com/w/cpp/numeric/math/scalbln)
-    [<strike>`ilog`</strike>](https://en.cppreference.com/w/cpp/numeric/math/ilog)
-    [`logb*`](https://en.cppreference.com/w/cpp/numeric/math/logb)
-    [`nextafter*`](https://en.cppreference.com/w/cpp/numeric/math/nextafter)
-    [<strike>`nexttoward`</strike>](https://en.cppreference.com/w/cpp/numeric/math/nexttoward)
-    [`copysign*`](https://en.cppreference.com/w/cpp/numeric/math/copysign)
+.. |log10| replace:: ``log10``
 
-    **Classification and comparison**
-    [<strike>`fpclassify`</strike>](https://en.cppreference.com/w/cpp/numeric/math/fpclassify)
-    [`isfinite`](https://en.cppreference.com/w/cpp/numeric/math/isfinite)
-    [`isinf`](https://en.cppreference.com/w/cpp/numeric/math/isinf)
-    [`isnan`](https://en.cppreference.com/w/cpp/numeric/math/isnan)
-    [<strike>`isnormal`</strike>](https://en.cppreference.com/w/cpp/numeric/math/isnormal)
-    [`signbit*`](https://en.cppreference.com/w/cpp/numeric/math/signbit)
-    [<strike>`isgreater`</strike>](https://en.cppreference.com/w/cpp/numeric/math/isgreater)
-    [<strike>`isgreaterequal`</strike>](https://en.cppreference.com/w/cpp/numeric/math/isgreaterequal)
-    [<strike>`isless`</strike>](https://en.cppreference.com/w/cpp/numeric/math/isless)
-    [<strike>`islessequal`</strike>](https://en.cppreference.com/w/cpp/numeric/math/islessequal)
-    [<strike>`islessgreater`</strike>](https://en.cppreference.com/w/cpp/numeric/math/islessgreater)
-    [<strike>`isunordered`</strike>](https://en.cppreference.com/w/cpp/numeric/math/isunordered)
+.. _log2: https://en.cppreference.com/w/cpp/numeric/math/log2
+
+.. |log2| replace:: ``log2``
+
+.. _log1p: https://en.cppreference.com/w/cpp/numeric/math/log1p
+
+.. |log1p| replace:: ``log1p``
+
+**Exponential functions** |exp|_ |exp2|_ |expm1|_ |log|_ |log10|_ |log2|_ |log1p|_
+
+.. _pow: https://en.cppreference.com/w/cpp/numeric/math/pow
+
+.. |pow| replace:: ``pow``
+
+.. _sqrt: https://en.cppreference.com/w/cpp/numeric/math/sqrt
+
+.. |sqrt| replace:: ``sqrt``
+
+.. _cbrt: https://en.cppreference.com/w/cpp/numeric/math/cbrt
+
+.. |cbrt| replace:: ``cbrt``
+
+.. _hypot*: https://en.cppreference.com/w/cpp/numeric/math/hypot
+
+.. |hypot*| replace:: ``hypot*``
+
+**Power functions** |pow|_ |sqrt|_ |cbrt|_ |hypot*|_
+
+.. _sin: https://en.cppreference.com/w/cpp/numeric/math/sin
+
+.. |sin| replace:: ``sin``
+
+.. _cos: https://en.cppreference.com/w/cpp/numeric/math/cos
+
+.. |cos| replace:: ``cos``
+
+.. _tan: https://en.cppreference.com/w/cpp/numeric/math/tan
+
+.. |tan| replace:: ``tan``
+
+.. _asin: https://en.cppreference.com/w/cpp/numeric/math/asin
+
+.. |asin| replace:: ``asin``
+
+.. _acos: https://en.cppreference.com/w/cpp/numeric/math/acos
+
+.. |acos| replace:: ``acos``
+
+.. _atan: https://en.cppreference.com/w/cpp/numeric/math/atan
+
+.. |atan| replace:: ``atan``
+
+.. _atan2: https://en.cppreference.com/w/cpp/numeric/math/atan2
+
+.. |atan2| replace:: ``atan2``
+
+**Trigonometric functions** |sin|_ |cos|_ |tan|_ |asin|_ |acos|_ |atan|_ |atan2|_
+
+.. _sinh: https://en.cppreference.com/w/cpp/numeric/math/sinh
+
+.. |sinh| replace:: ``sinh``
+
+.. _cosh: https://en.cppreference.com/w/cpp/numeric/math/cosh
+
+.. |cosh| replace:: ``cosh``
+
+.. _tanh: https://en.cppreference.com/w/cpp/numeric/math/tanh
+
+.. |tanh| replace:: ``tanh``
+
+.. _asinh: https://en.cppreference.com/w/cpp/numeric/math/asinh
+
+.. |asinh| replace:: ``asinh``
+
+.. _acosh: https://en.cppreference.com/w/cpp/numeric/math/acosh
+
+.. |acosh| replace:: ``acosh``
+
+.. _atanh: https://en.cppreference.com/w/cpp/numeric/math/atanh
+
+.. |atanh| replace:: ``atanh``
+
+**Hyperbolic functions** |sinh|_ |cosh|_ |tanh|_ |asinh|_ |acosh|_ |atanh|_
+
+.. _erf: https://en.cppreference.com/w/cpp/numeric/math/erf
+
+.. |erf| replace:: ``erf``
+
+.. _erfc: https://en.cppreference.com/w/cpp/numeric/math/erfc
+
+.. |erfc| replace:: ``erfc``
+
+.. _tgamma: https://en.cppreference.com/w/cpp/numeric/math/tgamma
+
+.. |tgamma| replace:: ``tgamma``
+
+.. _lgamma: https://en.cppreference.com/w/cpp/numeric/math/lgamma
+
+.. |lgamma| replace:: ``lgamma``
+
+**Error and gamma functions** |erf|_ |erfc|_ |tgamma|_ |lgamma|_
+
+.. _ceil: https://en.cppreference.com/w/cpp/numeric/math/ceil
+
+.. |ceil| replace:: ``ceil``
+
+.. _floor: https://en.cppreference.com/w/cpp/numeric/math/floor
+
+.. |floor| replace:: ``floor``
+
+.. _trunc: https://en.cppreference.com/w/cpp/numeric/math/trunc
+
+.. |trunc| replace:: ``trunc``
+
+.. _round*: https://en.cppreference.com/w/cpp/numeric/math/round
+
+.. |round*| replace:: ``round*``
+
+.. _lround: https://en.cppreference.com/w/cpp/numeric/math/round
+
+.. |lround| replace:: <strike> ``lround`` </strike>
+
+.. _llround: https://en.cppreference.com/w/cpp/numeric/math/round
+
+.. |llround| replace:: <strike> ``llround`` </strike>
+
+.. _nearbyint*: https://en.cppreference.com/w/cpp/numeric/math/nearbyint
+
+.. |nearbyint*| replace:: ``nearbyint*``
+
+.. _rint: https://en.cppreference.com/w/cpp/numeric/math/rint
+
+.. |rint| replace:: <strike> ``rint`` </strike>
+
+.. _lrint: https://en.cppreference.com/w/cpp/numeric/math/rint
+
+.. |lrint| replace:: <strike> ``lrint`` </strike>
+
+.. _llrint: https://en.cppreference.com/w/cpp/numeric/math/rint
+
+.. |llrint| replace:: <strike> ``llrint`` </strike>
+
+**Nearest integer floating point operations** |ceil|_ |floor|_ |trunc|_ |round*|_ |lround|_ |llround|_ |nearbyint*|_ |rint|_ |lrint|_ |llrint|_
+
+.. _frexp: https://en.cppreference.com/w/cpp/numeric/math/frexp
+
+.. |frexp| replace:: <strike> ``frexp`` </strike>
+
+.. _ldexp: https://en.cppreference.com/w/cpp/numeric/math/ldexp
+
+.. |ldexp| replace:: <strike> ``ldexp`` </strike>
+
+.. _modf: https://en.cppreference.com/w/cpp/numeric/math/modf
+
+.. |modf| replace:: <strike> ``modf`` </strike>
+
+.. _scalbn: https://en.cppreference.com/w/cpp/numeric/math/scalbn
+
+.. |scalbn| replace:: <strike> ``scalbn`` </strike>
+
+.. _scalbln: https://en.cppreference.com/w/cpp/numeric/math/scalbln
+
+.. |scalbln| replace:: <strike> ``scalbln`` </strike>
+
+.. _ilog: https://en.cppreference.com/w/cpp/numeric/math/ilog
+
+.. |ilog| replace:: <strike> ``ilog`` </strike>
+
+.. _logb*: https://en.cppreference.com/w/cpp/numeric/math/logb
+
+.. |logb*| replace:: ``logb*``
+
+.. _nextafter*: https://en.cppreference.com/w/cpp/numeric/math/nextafter 
+
+.. |nextafter*| replace:: ``nextafter*``
+
+.. _nexttoward: https://en.cppreference.com/w/cpp/numeric/math/nexttoward
+
+.. |nexttoward| replace:: <strike> ``nexttoward`` </strike>
+
+.. _copysign*: https://en.cppreference.com/w/cpp/numeric/math/copysign
+
+.. |copysign*| replace:: ``copysign*``
+
+**Floating point manipulation functions** |frexp|_ |ldexp|_ |modf|_ |scalbn|_ |scalbln|_ |ilog|_ |logb*|_ |nextafter*|_ |nexttoward|_ |copysign*|_
+
+.. _fpclassify: https://en.cppreference.com/w/cpp/numeric/math/fpclassify
+
+.. |fpclassify| replace:: <strike> ``fpclassify`` </strike>
+
+.. _isfinite: https://en.cppreference.com/w/cpp/numeric/math/isfinite
+
+.. |isfinite| replace:: ``isfinite``
+
+.. _isinf: https://en.cppreference.com/w/cpp/numeric/math/isinf
+
+.. |isinf| replace:: ``isinf``
+
+.. _isnan: https://en.cppreference.com/w/cpp/numeric/math/isnan
+
+.. |isnan| replace:: ``isnan``
+
+.. _isnormal: https://en.cppreference.com/w/cpp/numeric/math/isnormal
+
+.. |isnormal| replace:: <strike> ``isnormal`` </strike>
+
+.. _signbit*: https://en.cppreference.com/w/cpp/numeric/math/signbit
+
+.. |signbit*| replace:: ``signbit*``
+
+.. _isgreater: https://en.cppreference.com/w/cpp/numeric/math/isgreater
+
+.. |isgreater| replace:: <strike> ``isgreater`` </strike>
+
+.. _isgreaterequal: https://en.cppreference.com/w/cpp/numeric/math/isgreaterequal
+
+.. |isgreaterequal| replace:: <strike> ``isgreaterequal`` </strike>
+
+.. _isless: https://en.cppreference.com/w/cpp/numeric/math/isless
+
+.. |isless| replace:: <strike> ``isless`` </strike>
+
+.. _islessequal: https://en.cppreference.com/w/cpp/numeric/math/islessequal
+
+.. |islessequal| replace:: <strike> ``islessequal`` </strike>
+
+.. _islessgreater: https://en.cppreference.com/w/cpp/numeric/math/islessgreater
+
+.. |islessgreater| replace:: <strike> ``islessgreater`` </strike>
+
+.. _isunordered: https://en.cppreference.com/w/cpp/numeric/math/isunordered
+
+.. |isunordered| replace:: <strike> ``isunordered`` </strike>
+
+**Classification and comparison** |fpclassify|_ |isfinite|_ |isinf|_ |isnan|_ |isnormal|_ |signbit*|_ |isgreater|_ |isgreaterequal|_ |isless|_ |islessequal|_ |islessgreater|_ |isunordered|_
 
 ------------
 
@@ -194,9 +367,11 @@ Notes
 -----
 
 .. _openIssue: https://github.com/kokkos/kokkos/issues/new
+
 .. |openIssue| replace:: **open an issue**
 
 .. _issue4767: https://github.com/kokkos/kokkos/issues/4767
+
 .. |issue4767| replace:: **Issue #4767**
 
 * **Feel free to** |openIssue|_ **if you need one of the functions that is currently not implemented.** |issue4767|_ **is keeping track of these and has notes about implementability.**
