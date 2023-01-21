@@ -59,8 +59,6 @@ See below the list of common mathematical functions supported. We refer the read
 
 ------------
 
-:strike:`func` denotes functions that are currently not provided by Kokkos
-
 ``func*`` see notes below
 
 .. _abs: https://en.cppreference.com/w/cpp/numeric/math/fabs
@@ -81,7 +79,7 @@ See below the list of common mathematical functions supported. We refer the read
 
 .. _remquo: https://en.cppreference.com/w/cpp/numeric/math/remquo
 
-.. |remquo| replace:: <strike> ``remquo`` </strike>
+.. |remquo| replace:: ``remquo``
 
 .. _fma*: https://en.cppreference.com/w/cpp/numeric/math/fma
 
@@ -103,7 +101,7 @@ See below the list of common mathematical functions supported. We refer the read
 
 .. |nan| replace:: ``nan``
 
-**Basic operations** |abs|_ |fabs|_ |fmod|_ |remainder|_ |remquo|_ |fma*|_ |fmax|_ |fmin|_ |fdim|_ |nan|_
+**Basic operations** |abs|_ |fabs|_ |fmod|_ |remainder|_ |fma*|_ |fmax|_ |fmin|_ |fdim|_ |nan|_ (currently not provided by Kokkos: |remquo|_)
 
 .. _exp: https://en.cppreference.com/w/cpp/numeric/math/exp
 
@@ -245,11 +243,11 @@ See below the list of common mathematical functions supported. We refer the read
 
 .. _lround: https://en.cppreference.com/w/cpp/numeric/math/round
 
-.. |lround| replace:: <strike> ``lround`` </strike>
+.. |lround| replace:: ``lround``
 
 .. _llround: https://en.cppreference.com/w/cpp/numeric/math/round
 
-.. |llround| replace:: <strike> ``llround`` </strike>
+.. |llround| replace:: ``llround``
 
 .. _nearbyint*: https://en.cppreference.com/w/cpp/numeric/math/nearbyint
 
@@ -257,41 +255,41 @@ See below the list of common mathematical functions supported. We refer the read
 
 .. _rint: https://en.cppreference.com/w/cpp/numeric/math/rint
 
-.. |rint| replace:: <strike> ``rint`` </strike>
+.. |rint| replace:: ``rint``
 
 .. _lrint: https://en.cppreference.com/w/cpp/numeric/math/rint
 
-.. |lrint| replace:: <strike> ``lrint`` </strike>
+.. |lrint| replace:: ``lrint``
 
 .. _llrint: https://en.cppreference.com/w/cpp/numeric/math/rint
 
-.. |llrint| replace:: <strike> ``llrint`` </strike>
+.. |llrint| replace:: ``llrint``
 
-**Nearest integer floating point operations** |ceil|_ |floor|_ |trunc|_ |round*|_ |lround|_ |llround|_ |nearbyint*|_ |rint|_ |lrint|_ |llrint|_
+**Nearest integer floating point operations** |ceil|_ |floor|_ |trunc|_ |round*|_ |nearbyint*|_ (currently not provided by Kokkos: |lround|_ |llround|_ |rint|_ |lrint|_ |llrint|_)
 
 .. _frexp: https://en.cppreference.com/w/cpp/numeric/math/frexp
 
-.. |frexp| replace:: <strike> ``frexp`` </strike>
+.. |frexp| replace:: ``frexp``
 
 .. _ldexp: https://en.cppreference.com/w/cpp/numeric/math/ldexp
 
-.. |ldexp| replace:: <strike> ``ldexp`` </strike>
+.. |ldexp| replace:: ``ldexp``
 
 .. _modf: https://en.cppreference.com/w/cpp/numeric/math/modf
 
-.. |modf| replace:: <strike> ``modf`` </strike>
+.. |modf| replace:: ``modf``
 
 .. _scalbn: https://en.cppreference.com/w/cpp/numeric/math/scalbn
 
-.. |scalbn| replace:: <strike> ``scalbn`` </strike>
+.. |scalbn| replace:: ``scalbn``
 
 .. _scalbln: https://en.cppreference.com/w/cpp/numeric/math/scalbln
 
-.. |scalbln| replace:: <strike> ``scalbln`` </strike>
+.. |scalbln| replace:: ``scalbln``
 
 .. _ilog: https://en.cppreference.com/w/cpp/numeric/math/ilog
 
-.. |ilog| replace:: <strike> ``ilog`` </strike>
+.. |ilog| replace:: ``ilog``
 
 .. _logb*: https://en.cppreference.com/w/cpp/numeric/math/logb
 
@@ -303,17 +301,17 @@ See below the list of common mathematical functions supported. We refer the read
 
 .. _nexttoward: https://en.cppreference.com/w/cpp/numeric/math/nexttoward
 
-.. |nexttoward| replace:: <strike> ``nexttoward`` </strike>
+.. |nexttoward| replace:: ``nexttoward``
 
 .. _copysign*: https://en.cppreference.com/w/cpp/numeric/math/copysign
 
 .. |copysign*| replace:: ``copysign*``
 
-**Floating point manipulation functions** |frexp|_ |ldexp|_ |modf|_ |scalbn|_ |scalbln|_ |ilog|_ |logb*|_ |nextafter*|_ |nexttoward|_ |copysign*|_
+**Floating point manipulation functions** |logb*|_ |nextafter*|_ |copysign*|_ (currently not provided by Kokkos: |frexp|_ |ldexp|_ |modf|_ |scalbn|_ |scalbln|_ |ilog|_ |nexttoward|_)
 
 .. _fpclassify: https://en.cppreference.com/w/cpp/numeric/math/fpclassify
 
-.. |fpclassify| replace:: <strike> ``fpclassify`` </strike>
+.. |fpclassify| replace:: ``fpclassify``
 
 .. _isfinite: https://en.cppreference.com/w/cpp/numeric/math/isfinite
 
@@ -329,7 +327,7 @@ See below the list of common mathematical functions supported. We refer the read
 
 .. _isnormal: https://en.cppreference.com/w/cpp/numeric/math/isnormal
 
-.. |isnormal| replace:: <strike> ``isnormal`` </strike>
+.. |isnormal| replace:: ``isnormal``
 
 .. _signbit*: https://en.cppreference.com/w/cpp/numeric/math/signbit
 
@@ -337,29 +335,29 @@ See below the list of common mathematical functions supported. We refer the read
 
 .. _isgreater: https://en.cppreference.com/w/cpp/numeric/math/isgreater
 
-.. |isgreater| replace:: <strike> ``isgreater`` </strike>
+.. |isgreater| replace:: ``isgreater``
 
 .. _isgreaterequal: https://en.cppreference.com/w/cpp/numeric/math/isgreaterequal
 
-.. |isgreaterequal| replace:: <strike> ``isgreaterequal`` </strike>
+.. |isgreaterequal| replace:: ``isgreaterequal``
 
 .. _isless: https://en.cppreference.com/w/cpp/numeric/math/isless
 
-.. |isless| replace:: <strike> ``isless`` </strike>
+.. |isless| replace:: ``isless``
 
 .. _islessequal: https://en.cppreference.com/w/cpp/numeric/math/islessequal
 
-.. |islessequal| replace:: <strike> ``islessequal`` </strike>
+.. |islessequal| replace:: ``islessequal``
 
 .. _islessgreater: https://en.cppreference.com/w/cpp/numeric/math/islessgreater
 
-.. |islessgreater| replace:: <strike> ``islessgreater`` </strike>
+.. |islessgreater| replace:: ``islessgreater``
 
 .. _isunordered: https://en.cppreference.com/w/cpp/numeric/math/isunordered
 
-.. |isunordered| replace:: <strike> ``isunordered`` </strike>
+.. |isunordered| replace:: ``isunordered``
 
-**Classification and comparison** |fpclassify|_ |isfinite|_ |isinf|_ |isnan|_ |isnormal|_ |signbit*|_ |isgreater|_ |isgreaterequal|_ |isless|_ |islessequal|_ |islessgreater|_ |isunordered|_
+**Classification and comparison** |isfinite|_ |isinf|_ |isnan|_ |signbit*|_ (currently not provided by Kokkos: |fpclassify|_ |isnormal|_ |isgreater|_ |isgreaterequal|_ |isless|_ |islessequal|_ |islessgreater|_ |isunordered|_)
 
 ------------
 
