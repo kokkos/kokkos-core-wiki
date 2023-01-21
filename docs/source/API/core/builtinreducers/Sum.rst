@@ -88,7 +88,7 @@ Functions
 
 .. cppkokkos:kokkosinlinefunction:: result_view_type view() const;
 
-* Returns a view of the result place provided in class constructor.
+* Returns a view of the result referenced in class constructor.
 
 Additional Information
 ~~~~~~~~~~~~~~~~~~~~~~
