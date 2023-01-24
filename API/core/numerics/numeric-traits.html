@@ -465,7 +465,7 @@
         </a>
         <div class="content-icon-container">
 <div class="edit-this-page">
-  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/API/core/numerics/numeric-traits.md" title="Edit this page">
+  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/API/core/numerics/numeric-traits.rst" title="Edit this page">
     <svg aria-hidden="true" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
       <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4"></path>
@@ -489,22 +489,17 @@
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="numeric-traits">
+          <section id="numeric-traits">
 <h1>Numeric traits<a class="headerlink" href="#numeric-traits" title="Permalink to this heading">#</a></h1>
-<p>Defined in
-header <a class="reference external" href="https://github.com/kokkos/kokkos/blob/3.5.00/core/src/Kokkos_NumericTraits.hpp"><code class="docutils literal notranslate"><span class="pre">&lt;Kokkos_NumericTraits.hpp&gt;</span></code></a>
-which is included from <code class="docutils literal notranslate"><span class="pre">&lt;Kokkos_Core.hpp&gt;</span></code></p>
-<p>Provides a replacement for <a class="reference external" href="https://en.cppreference.com/w/cpp/types/numeric_limits"><code class="docutils literal notranslate"><span class="pre">numeric_limits</span></code> from the standard library header
-<code class="docutils literal notranslate"><span class="pre">&lt;limits&gt;</span></code></a>.
-Implements a new facility that is being added to the C++23 standard library and that
+<p>Defined in header <a class="reference external" href="https://github.com/kokkos/kokkos/blob/3.5.00/core/src/Kokkos_NumericTraits.hpp"><code class="docutils literal notranslate"><span class="pre">&lt;Kokkos_NumericTraits.hpp&gt;</span></code></a> which is included from <code class="docutils literal notranslate"><span class="pre">&lt;Kokkos_Core.hpp&gt;</span></code></p>
+<p>Provides a replacement for <a class="reference external" href="https://en.cppreference.com/w/cpp/types/numeric_limits"><code class="docutils literal notranslate"><span class="pre">numeric_limits</span></code> from the standard library header <code class="docutils literal notranslate"><span class="pre">&lt;limits&gt;</span></code></a>. Implements a new facility that is being added to the C++23 standard library and that
 breaks the monolithic <code class="docutils literal notranslate"><span class="pre">numeric_limits</span></code> class template apart into individual
-trait templates.  For details, please refer to
-<a class="reference external" href="http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2022/p1841r2.pdf">P1841</a>.</p>
+trait templates. For details, please refer to <a class="reference external" href="http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2022/p1841r2.pdf">P1841</a>.</p>
 <p>Numeric traits are defined in the <code class="docutils literal notranslate"><span class="pre">Kokkos::Experimental</span></code> namespace since Kokkos 3.5</p>
 <p>See below the list of available traits.</p>
 <hr class="docutils" />
-<p><em><code class="docutils literal notranslate"><span class="pre">trait*</span></code></em> denotes traits that were added in Kokkos 3.6<br />
-<strike><em><code class="docutils literal notranslate"><span class="pre">trait*</span></code></em></strike> denotes traits that were removed in Kokkos 4.0</p>
+<p><code class="docutils literal notranslate"><span class="pre">trait*</span></code> denotes traits that were added in Kokkos 3.6</p>
+<p><span class="strike">trait*</span> denotes traits that were removed in Kokkos 4.0</p>
 <p><strong>Numeric distinguished value traits</strong>
 <code class="docutils literal notranslate"><span class="pre">infinity</span></code>
 <code class="docutils literal notranslate"><span class="pre">finite_min</span></code>
@@ -513,7 +508,7 @@ trait templates.  For details, please refer to
 <code class="docutils literal notranslate"><span class="pre">round_error</span></code>
 <code class="docutils literal notranslate"><span class="pre">norm_min</span></code>
 <code class="docutils literal notranslate"><span class="pre">denorm_min*</span></code>
-<strike><code class="docutils literal notranslate"><span class="pre">reciprocal_overflow_threshold*</span></code></strike>
+<span class="strike">reciprocal_overflow_threshold*</span>
 <code class="docutils literal notranslate"><span class="pre">quiet_NaN*</span></code>
 <code class="docutils literal notranslate"><span class="pre">signaling_NaN*</span></code></p>
 <p><strong>Numeric characteristics traits</strong>
@@ -526,7 +521,7 @@ trait templates.  For details, please refer to
 <code class="docutils literal notranslate"><span class="pre">max_exponent</span></code>
 <code class="docutils literal notranslate"><span class="pre">max_exponent10</span></code></p>
 <hr class="docutils" />
-<div class="table-wrapper colwidths-auto docutils container">
+<div class="table-wrapper docutils container">
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Standard library</p></th>
@@ -594,10 +589,10 @@ trait templates.  For details, please refer to
 <p>Individual traits have <code class="docutils literal notranslate"><span class="pre">value</span></code> member constant that can be used with C++14 (e.g. <code class="docutils literal notranslate"><span class="pre">epsilon&lt;float&gt;::value</span></code>).</p>
 <hr class="docutils" />
 <p>Individual traits are SFINAE-friendly, you can detect value presence/absence.</p>
-<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span>
 <span class="k">constexpr</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">has_infinity</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
-<span class="w">    </span><span class="o">-&gt;</span><span class="w"> </span><span class="k">decltype</span><span class="p">(</span><span class="n">Kokkos</span><span class="o">::</span><span class="n">Experimental</span><span class="o">::</span><span class="n">infinity</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;::</span><span class="n">value</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">true_type</span><span class="p">{})</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">{};</span>
+<span class="w">        </span><span class="o">-&gt;</span><span class="w"> </span><span class="k">decltype</span><span class="p">(</span><span class="n">Kokkos</span><span class="o">::</span><span class="n">Experimental</span><span class="o">::</span><span class="n">infinity</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;::</span><span class="n">value</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">true_type</span><span class="p">{})</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">{};</span>
 <span class="p">}</span>
 
 <span class="k">constexpr</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">false_type</span><span class="w"> </span><span class="n">has_infinity</span><span class="p">(...)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="p">{};</span><span class="w"> </span><span class="p">}</span>
@@ -605,20 +600,20 @@ trait templates.  For details, please refer to
 <span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span>
 <span class="n">KOKKOS_FUNCTION</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">enable_if_t</span><span class="o">&lt;</span><span class="n">has_infinity</span><span class="p">(</span><span class="n">T</span><span class="p">{}),</span><span class="w"> </span><span class="n">T</span><span class="o">&gt;</span>
 <span class="n">legacy_std_numeric_limits_infinity</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">Experimental</span><span class="o">::</span><span class="n">infinity</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;::</span><span class="n">value</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">Experimental</span><span class="o">::</span><span class="n">infinity</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;::</span><span class="n">value</span><span class="p">;</span>
 <span class="p">}</span>
 
 <span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span>
 <span class="n">KOKKOS_FUNCTION</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">enable_if_t</span><span class="o">&lt;!</span><span class="n">has_infinity</span><span class="p">(</span><span class="n">T</span><span class="p">{}),</span><span class="w"> </span><span class="n">T</span><span class="o">&gt;</span>
 <span class="n">legacy_std_numeric_limits_infinity</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">T</span><span class="p">();</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">T</span><span class="p">();</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 <hr class="docutils" />
-<p><strong>See also</strong><br />
-<a class="reference internal" href="mathematical-constants.html"><span class="doc std std-doc">Mathematical constants</span></a><br />
-<a class="reference internal" href="mathematical-functions.html"><span class="doc std std-doc">Common mathematical functions</span></a></p>
+<p><strong>See also</strong></p>
+<p><a class="reference external" href="mathematical-constants.html">Mathematical constants</a></p>
+<p><a class="reference external" href="mathematical-functions.html">Common mathematical functions</a></p>
 </section>
 
         </article>
