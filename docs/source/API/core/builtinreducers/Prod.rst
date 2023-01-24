@@ -80,7 +80,7 @@ Functions
 
 .. cppkokkos:kokkosinlinefunction:: void init(value_type& val) const;
 
-    * Initialize ``val`` using the Kokkos::reduction_identity<Scalar>::prod() method. The default implementation sets ``val=1``.
+    * Initialize ``val`` using the ``Kokkos::reduction_identity<Scalar>::prod()`` method. The default implementation sets ``val=1``.
 
 .. cppkokkos:kokkosinlinefunction:: value_type& reference() const;
 
