@@ -465,7 +465,7 @@
         </a>
         <div class="content-icon-container">
 <div class="edit-this-page">
-  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/API/core/builtinreducers/ValLocScalar.md" title="Edit this page">
+  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/API/core/builtinreducers/ValLocScalar.rst" title="Edit this page">
     <svg aria-hidden="true" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
       <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4"></path>
@@ -489,25 +489,27 @@
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="vallocscalar">
+          <section id="vallocscalar">
 <h1><code class="docutils literal notranslate"><span class="pre">ValLocScalar</span></code><a class="headerlink" href="#vallocscalar" title="Permalink to this heading">#</a></h1>
 <p>Template class for storing a value plus index for min/max location reducers. Should be accessed via <code class="docutils literal notranslate"><span class="pre">::value_type</span></code> defined for particular reducer.</p>
-<p>Header File: <code class="docutils literal notranslate"><span class="pre">Kokkos_Core.hpp</span></code></p>
-<p>Usage:</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">MaxLoc</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span><span class="n">I</span><span class="p">,</span><span class="n">S</span><span class="o">&gt;::</span><span class="n">value_type</span><span class="w"> </span><span class="n">result</span><span class="p">;</span>
+<p>Header File: <code class="docutils literal notranslate"><span class="pre">&lt;Kokkos_Core.hpp&gt;</span></code></p>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this heading">#</a></h2>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">MaxLoc</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span><span class="n">I</span><span class="p">,</span><span class="n">S</span><span class="o">&gt;::</span><span class="n">value_type</span><span class="w"> </span><span class="n">result</span><span class="p">;</span>
 <span class="n">parallel_reduce</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">Functor</span><span class="p">,</span><span class="n">MaxLoc</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span><span class="n">I</span><span class="p">,</span><span class="n">S</span><span class="o">&gt;</span><span class="p">(</span><span class="n">result</span><span class="p">));</span>
 <span class="n">T</span><span class="w"> </span><span class="n">resultValue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">result</span><span class="p">.</span><span class="n">val</span><span class="p">;</span>
 <span class="n">I</span><span class="w"> </span><span class="n">resultIndex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">result</span><span class="p">.</span><span class="n">loc</span><span class="p">;</span>
 </pre></div>
 </div>
+</section>
 <section id="synopsis">
 <h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this heading">#</a></h2>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">Scalar</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Index</span><span class="o">&gt;</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">Scalar</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Index</span><span class="o">&gt;</span>
 <span class="k">struct</span><span class="w"> </span><span class="nc">ValLocScalar</span><span class="p">{</span>
-<span class="w">  </span><span class="n">Scalar</span><span class="w"> </span><span class="n">val</span><span class="p">;</span>
-<span class="w">  </span><span class="n">Index</span><span class="w"> </span><span class="n">loc</span><span class="p">;</span>
+<span class="w">    </span><span class="n">Scalar</span><span class="w"> </span><span class="n">val</span><span class="p">;</span>
+<span class="w">    </span><span class="n">Index</span><span class="w"> </span><span class="n">loc</span><span class="p">;</span>
 
-<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="k">operator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">ValLocScalar</span><span class="o">&amp;</span><span class="w"> </span><span class="n">rhs</span><span class="p">);</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="k">operator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">ValLocScalar</span><span class="o">&amp;</span><span class="w"> </span><span class="n">rhs</span><span class="p">);</span>
 <span class="p">};</span>
 </pre></div>
 </div>
@@ -524,8 +526,7 @@
 <section id="assignment-operators">
 <h3>Assignment operators<a class="headerlink" href="#assignment-operators" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">operator</span> <span class="pre">=</span> <span class="pre">(const</span> <span class="pre">ValLocScalar&amp;</span> <span class="pre">rhs);</span></code>
-assign <code class="docutils literal notranslate"><span class="pre">val</span></code> and <code class="docutils literal notranslate"><span class="pre">loc</span></code> from <code class="docutils literal notranslate"><span class="pre">rhs</span></code>;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">operator</span> <span class="pre">=</span> <span class="pre">(const</span> <span class="pre">ValLocScalar&amp;</span> <span class="pre">rhs);</span></code> assign <code class="docutils literal notranslate"><span class="pre">val</span></code> and <code class="docutils literal notranslate"><span class="pre">loc</span></code> from <code class="docutils literal notranslate"><span class="pre">rhs</span></code>;</p></li>
 </ul>
 </section>
 </section>
@@ -589,6 +590,7 @@ assign <code class="docutils literal notranslate"><span class="pre">val</span></
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">ValLocScalar</span></code></a><ul>
+<li><a class="reference internal" href="#usage">Usage</a></li>
 <li><a class="reference internal" href="#synopsis">Synopsis</a></li>
 <li><a class="reference internal" href="#public-members">Public Members</a><ul>
 <li><a class="reference internal" href="#variables">Variables</a></li>
