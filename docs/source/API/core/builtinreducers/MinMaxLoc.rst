@@ -82,13 +82,13 @@ Functions
 
 .. cppkokkos:kokkosinlinefunction:: void init( value_type& val) const;
 
-    Initialize ``val.min_val`` using the Kokkos::reduction_identity<Scalar>::min() method. The default implementation sets ``val=<TYPE>_MAX``.
+    Initialize ``val.min_val`` using the ``Kokkos::reduction_identity<Scalar>::min()`` method. The default implementation sets ``val=<TYPE>_MAX``.
 
-    Initialize ``val.max_val`` using the Kokkos::reduction_identity<Index>::max() method. The default implementation sets ``val=<TYPE>_MIN``.
+    Initialize ``val.max_val`` using the ``Kokkos::reduction_identity<Index>::max()`` method. The default implementation sets ``val=<TYPE>_MIN``.
 
-    Initialize ``val.min_loc`` using the Kokkos::reduction_identity<Scalar>::min() method. The default implementation sets ``val=<TYPE>_MAX``.
+    Initialize ``val.min_loc`` using the ``Kokkos::reduction_identity<Scalar>::min()`` method. The default implementation sets ``val=<TYPE>_MAX``.
 
-    Initialize ``val.max_loc`` using the Kokkos::reduction_identity<Index>::min() method. The default implementation sets ``val=<TYPE>_MAX``.
+    Initialize ``val.max_loc`` using the ``Kokkos::reduction_identity<Index>::max()`` method. The default implementation sets ``val=<TYPE>_MAX``.
 
 .. cppkokkos:kokkosinlinefunction:: value_type& reference() const;
 
