@@ -6,11 +6,11 @@
 
 Header File: ``<Kokkos_ExecPolicy.hpp>``
 
-.. _text: ../parallel-dispatch/parallel_for.html
+.. _parallelFor: ../parallel-dispatch/parallel_for.html
 
-.. |text| replace:: ``parallel_for``
+.. |parallelFor| replace:: :cpp:func:`parallel_for`
 
-A tag used in team size calculation functions to indicate that the functor for which a team size is being requested is being used in a |text|_
+A tag used in team size calculation functions to indicate that the functor for which a team size is being requested is being used in a |parallelFor|_
 
 Usage
 -----
