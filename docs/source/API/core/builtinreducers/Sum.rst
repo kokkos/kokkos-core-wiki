@@ -65,30 +65,30 @@ Constructors
 
 .. cppkokkos:kokkosinlinefunction:: Sum(value_type& value_);
 
-* Constructs a reducer which references a local variable as its result location.  
+    * Constructs a reducer which references a local variable as its result location.  
 
 .. cppkokkos:kokkosinlinefunction:: Sum(const result_view_type& value_);
 
-* Constructs a reducer which references a specific view as its result location.
+    * Constructs a reducer which references a specific view as its result location.
 
 Functions
 ~~~~~~~~~
 
 .. cppkokkos:kokkosinlinefunction:: void join(value_type& dest, const value_type& src) const;
 
-* Add ``src`` into ``dest``:  ``dest+=src;``. 
+    * Add ``src`` into ``dest``:  ``dest+=src;``. 
 
 .. cppkokkos:kokkosinlinefunction:: void init(value_type& val) const;
 
-* Initialize ``val`` using the Kokkos::reduction_identity<Scalar>::sum() method.  The default implementation sets ``val=0``.
+    * Initialize ``val`` using the Kokkos::reduction_identity<Scalar>::sum() method.  The default implementation sets ``val=0``.
 
 .. cppkokkos:kokkosinlinefunction:: value_type& reference() const;
 
-* Returns a reference to the result provided in class constructor.
+    * Returns a reference to the result provided in class constructor.
 
 .. cppkokkos:kokkosinlinefunction:: result_view_type view() const;
 
-* Returns a view of the result referenced in class constructor.
+    * Returns a view of the result referenced in class constructor.
 
 Additional Information
 ~~~~~~~~~~~~~~~~~~~~~~
