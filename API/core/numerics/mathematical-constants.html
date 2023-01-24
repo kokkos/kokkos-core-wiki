@@ -465,7 +465,7 @@
         </a>
         <div class="content-icon-container">
 <div class="edit-this-page">
-  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/API/core/numerics/mathematical-constants.md" title="Edit this page">
+  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/API/core/numerics/mathematical-constants.rst" title="Edit this page">
     <svg aria-hidden="true" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
       <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4"></path>
@@ -489,14 +489,14 @@
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="mathematical-constants">
+          <section id="mathematical-constants">
 <h1>Mathematical constants<a class="headerlink" href="#mathematical-constants" title="Permalink to this heading">#</a></h1>
 <p>Defined in header <a class="reference external" href="https://github.com/kokkos/kokkos/blob/develop/core/src/Kokkos_MathematicalConstants.hpp"><code class="docutils literal notranslate"><span class="pre">&lt;Kokkos_MathematicalConstants.hpp&gt;</span></code></a>
 which is included from <code class="docutils literal notranslate"><span class="pre">&lt;Kokkos_Core.hpp&gt;</span></code></p>
 <p>Provides all mathematical constants from <a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/constants"><code class="docutils literal notranslate"><span class="pre">&lt;numbers&gt;</span></code></a> (since C++20).</p>
 <p>All constants are defined in the <code class="docutils literal notranslate"><span class="pre">Kokkos::numbers::</span></code> namespace since version 4.0, in <code class="docutils literal notranslate"><span class="pre">Kokkos::Experimental</span></code> in previous versions.</p>
-<p><strong>Mathematical constants</strong>
-<code class="docutils literal notranslate"><span class="pre">e</span></code>
+<p><strong>Mathematical constants</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">e</span></code>
 <code class="docutils literal notranslate"><span class="pre">log2e</span></code>
 <code class="docutils literal notranslate"><span class="pre">log10e</span></code>
 <code class="docutils literal notranslate"><span class="pre">pi</span></code>
@@ -520,9 +520,9 @@ which is included from <code class="docutils literal notranslate"><span class="p
 <hr class="docutils" />
 <section id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this heading">#</a></h2>
-<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">KOKKOS_FUNCTION</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">example</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="k">constexpr</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">pi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">numbers</span><span class="o">::</span><span class="n">pi_v</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">;</span>
-<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">sin</span><span class="p">(</span><span class="n">pi</span><span class="o">/</span><span class="mi">6</span><span class="p">);</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">KOKKOS_FUNCTION</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">example</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">constexpr</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">pi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">numbers</span><span class="o">::</span><span class="n">pi_v</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">sin</span><span class="p">(</span><span class="n">pi</span><span class="o">/</span><span class="mi">6</span><span class="p">);</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -530,8 +530,8 @@ which is included from <code class="docutils literal notranslate"><span class="p
 <hr class="docutils" />
 <section id="see-also">
 <h2>See also<a class="headerlink" href="#see-also" title="Permalink to this heading">#</a></h2>
-<p><a class="reference internal" href="mathematical-functions.html"><span class="doc std std-doc">Common mathematical functions</span></a><br />
-<a class="reference internal" href="numeric-traits.html"><span class="doc std std-doc">Numeric traits</span></a></p>
+<p><a class="reference external" href="mathematical-functions.html">Common mathematical functions</a></p>
+<p><a class="reference external" href="numeric-traits.html">Numeric traits</a></p>
 </section>
 </section>
 
