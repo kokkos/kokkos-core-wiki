@@ -66,37 +66,37 @@ Constructors
 
 .. cppkokkos:kokkosinlinefunction:: MinMaxLoc(value_type& value_);
 
-* Constructs a reducer which references a local variable as its result location.  
+    * Constructs a reducer which references a local variable as its result location.  
 
 .. cppkokkos:kokkosinlinefunction:: MinMaxLoc(const result_view_type& value_);
 
-* Constructs a reducer which references a specific view as its result location.
+    * Constructs a reducer which references a specific view as its result location.
 
 Functions
 ~~~~~~~~~
 
 .. cppkokkos:kokkosinlinefunction:: void join(value_type& dest, const value_type& src) const;
    
-* Store minimum with location of ``src`` and ``dest`` into ``dest``.
-* Store maximum with location of ``src`` and ``dest`` into ``dest``.
+    * Store minimum with location of ``src`` and ``dest`` into ``dest``.
+    * Store maximum with location of ``src`` and ``dest`` into ``dest``.
 
 .. cppkokkos:kokkosinlinefunction:: void init( value_type& val) const;
 
-Initialize ``val.min_val`` using the Kokkos::reduction_identity<Scalar>::min() method. The default implementation sets ``val=<TYPE>_MAX``.
+    Initialize ``val.min_val`` using the Kokkos::reduction_identity<Scalar>::min() method. The default implementation sets ``val=<TYPE>_MAX``.
 
-Initialize ``val.max_val`` using the Kokkos::reduction_identity<Index>::max() method. The default implementation sets ``val=<TYPE>_MIN``.
+    Initialize ``val.max_val`` using the Kokkos::reduction_identity<Index>::max() method. The default implementation sets ``val=<TYPE>_MIN``.
 
-Initialize ``val.min_loc`` using the Kokkos::reduction_identity<Scalar>::min() method. The default implementation sets ``val=<TYPE>_MAX``.
+    Initialize ``val.min_loc`` using the Kokkos::reduction_identity<Scalar>::min() method. The default implementation sets ``val=<TYPE>_MAX``.
 
-Initialize ``val.max_loc`` using the Kokkos::reduction_identity<Index>::min() method. The default implementation sets ``val=<TYPE>_MAX``.
+    Initialize ``val.max_loc`` using the Kokkos::reduction_identity<Index>::min() method. The default implementation sets ``val=<TYPE>_MAX``.
 
 .. cppkokkos:kokkosinlinefunction:: value_type& reference() const;
 
-* Returns a reference to the result provided in class constructor.
+    * Returns a reference to the result provided in class constructor.
 
 .. cppkokkos:kokkosinlinefunction:: result_view_type view() const;
 
-* Returns a view of the result place provided in class constructor.
+    * Returns a view of the result place provided in class constructor.
 
 Additional Information
 ~~~~~~~~~~~~~~~~~~~~~~
