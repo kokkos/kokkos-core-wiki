@@ -465,7 +465,7 @@
         </a>
         <div class="content-icon-container">
 <div class="edit-this-page">
-  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/API/core/parallel-dispatch/ParallelReduceTag.md" title="Edit this page">
+  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/API/core/parallel-dispatch/ParallelReduceTag.rst" title="Edit this page">
     <svg aria-hidden="true" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
       <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4"></path>
@@ -489,20 +489,22 @@
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="parallelreducetag">
+          <section id="parallelreducetag">
 <h1><code class="docutils literal notranslate"><span class="pre">ParallelReduceTag()</span></code><a class="headerlink" href="#parallelreducetag" title="Permalink to this heading">#</a></h1>
-<p>Header File: <code class="docutils literal notranslate"><span class="pre">Kokkos_ExecPolicy.hpp</span></code></p>
-<p>A tag used in team size calculation functions to indicate that the functor for which a team size is being requested is being used in a <a class="reference internal" href="parallel_reduce.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">parallel_reduce</span></code></span></a></p>
-<p>Usage:</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">PolicyType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">TeamPolicy</span><span class="o">&lt;&gt;</span><span class="p">;</span><span class="w"> </span>
+<p>Header File: <code class="docutils literal notranslate"><span class="pre">&lt;Kokkos_ExecPolicy.hpp&gt;</span></code></p>
+<p>A tag used in team size calculation functions to indicate that the functor for which a team size is being requested is being used in a <a class="reference external" href="../parallel-dispatch/parallel_reduce.html"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">parallel_reduce()</span></code></a></p>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this heading">#</a></h2>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">PolicyType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">TeamPolicy</span><span class="o">&lt;&gt;</span><span class="p">;</span>
 <span class="n">PolicyType</span><span class="w"> </span><span class="n">policy</span><span class="p">;</span>
 <span class="kt">int</span><span class="w"> </span><span class="n">recommended_team_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">policy</span><span class="p">.</span><span class="n">team_size_recommended</span><span class="p">(</span>
-<span class="w">  </span><span class="n">Functor</span><span class="p">,</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">ParallelReduceTag</span><span class="p">());</span>
+<span class="w">    </span><span class="n">Functor</span><span class="p">,</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">ParallelReduceTag</span><span class="p">());</span>
 </pre></div>
 </div>
+</section>
 <section id="synopsis">
 <h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this heading">#</a></h2>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span><span class="w"> </span><span class="nc">ParallelReduceTag</span><span class="p">{};</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span><span class="w"> </span><span class="nc">ParallelReduceTag</span><span class="p">{};</span>
 </pre></div>
 </div>
 </section>
@@ -582,6 +584,7 @@
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">ParallelReduceTag()</span></code></a><ul>
+<li><a class="reference internal" href="#usage">Usage</a></li>
 <li><a class="reference internal" href="#synopsis">Synopsis</a></li>
 <li><a class="reference internal" href="#public-class-members">Public Class Members</a><ul>
 <li><a class="reference internal" href="#typedefs">Typedefs</a></li>
