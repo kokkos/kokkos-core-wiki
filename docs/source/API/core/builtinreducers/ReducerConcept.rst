@@ -98,7 +98,7 @@ Functions
 Built-In Reducers
 ~~~~~~~~~~~~~~~~~
 
-Kokkos provides a number of built-in reducers that automatically work with the intrinsic C++ types as well as Kokkos::complex. In order to use a Built-in reducer with a custom type, a template specialization of Kokkos::reduction_identity<CustomType> must be defined. A simple example is shown below and more information can be found under `Custom Reductions <../../../ProgrammingGuide/Custom-Reductions.html>`_.
+Kokkos provides a number of built-in reducers that automatically work with the intrinsic C++ types as well as ``Kokkos::complex``. In order to use a Built-in reducer with a custom type, a template specialization of ``Kokkos::reduction_identity<CustomType>`` must be defined. A simple example is shown below and more information can be found under `Custom Reductions <../../../ProgrammingGuide/Custom-Reductions.html>`_.
 
 * `Kokkos::BAnd <BAnd.html>`_
 * `Kokkos::BOr <BOr.html>`_
