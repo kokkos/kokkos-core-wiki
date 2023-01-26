@@ -106,49 +106,49 @@ Assignment
 
 .. cpp:function:: TeamHandleConcept & operator = ( TeamHandleConcept && )
 
-* Move assignment.
+    * Move assignment.
 
 .. cpp:function:: TeamHandleConcept & operator = ( TeamHandleConcept const & )
 
-* Assignment operators. Returns: ``*this``.
+    * Assignment operators. Returns: ``*this``.
 
 Index Queries
 ~~~~~~~~~~~~~
 
 .. cppkokkos:kokkosinlinefunction:: int team_rank() const noexcept ;
 
-* Returns: the index ``i`` of the calling thread within the team with ``0 <= i < team_size()``
+    * Returns: the index ``i`` of the calling thread within the team with ``0 <= i < team_size()``
 
 .. cppkokkos:kokkosinlinefunction:: int team_size() const noexcept ;
 
-* Returns: the number of threads associated with the team.
+    * Returns: the number of threads associated with the team.
 
 .. cppkokkos:kokkosinlinefunction:: int league_rank() const noexcept ;
 
-* Returns: the index ``i`` of the calling team within the league with ``0 <= i < league_size()``
+    * Returns: the index ``i`` of the calling team within the league with ``0 <= i < league_size()``
 
 .. cppkokkos:kokkosinlinefunction:: int league_size() const noexcept ;
 
-* Returns: the number of teams/workitems launched in the kernel. 
+    * Returns: the number of teams/workitems launched in the kernel. 
 
 Scratch Space Control
 ~~~~~~~~~~~~~~~~~~~~~
 
 .. cppkokkos:kokkosinlinefunction:: const scratch_memory_space & team_shmem() const ;
 
-* Equivalent to calling ``team_scratch(0)``.
+    * Equivalent to calling ``team_scratch(0)``.
 
 .. cppkokkos:kokkosinlinefunction:: const scratch_memory_space & team_scratch(int level) const ;
 
-* This function returns a scratch memory handle shared by all threads in a team, which allows access to scratch memory. This handle can be given as the first argument to a ``Kokkos::View`` to make it use scratch memory.
-    - ``level``: The level of requested scratch memory is either ``0`` or ``1``.
-    - Returns: a scratch memory handle to the team shared scratch memory specified by level. 
+    * This function returns a scratch memory handle shared by all threads in a team, which allows access to scratch memory. This handle can be given as the first argument to a ``Kokkos::View`` to make it use scratch memory.
+        - ``level``: The level of requested scratch memory is either ``0`` or ``1``.
+        - Returns: a scratch memory handle to the team shared scratch memory specified by level. 
 
 .. cppkokkos:kokkosinlinefunction:: const scratch_memory_space & thread_scratch(int level) const ;
 
-* This function returns a scratch memory handle specific to the calling thread, which allows access to its private scratch memory. This handle can be given as the first argument to a ``Kokkos::View`` to make it use scratch memory.
-    - ``level``: The level of requested scratch memory is either ``0`` or ``1``. 
-    - Returns: a scratch memory handle to the thread scratch memory specified by level. 
+    * This function returns a scratch memory handle specific to the calling thread, which allows access to its private scratch memory. This handle can be given as the first argument to a ``Kokkos::View`` to make it use scratch memory.
+        - ``level``: The level of requested scratch memory is either ``0`` or ``1``. 
+        - Returns: a scratch memory handle to the thread scratch memory specified by level. 
 
 Team Collective Operations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -157,7 +157,7 @@ The following functions must be called collectively by all members of a team. Th
 
 .. cppkokkos:kokkosinlinefunction:: void team_barrier() const noexcept ;
 
-* All members of the team wait at the barrier, until the whole team arrived. This also issues a memory fence. 
+    * All members of the team wait at the barrier, until the whole team arrived. This also issues a memory fence. 
 
 .. code-block:: cpp
 
@@ -165,9 +165,10 @@ The following functions must be called collectively by all members of a team. Th
     KOKKOS_INLINE_FUNCTION
     void team_broadcast( T & value , const int source_team_rank ) const noexcept;
 
-* After this call ``var`` contains for every member of the team the value of ``var`` from the thread for which ``team_rank() == source_team_rank``.
-    - ``var``: a variable of type ``T`` which gets overwritten by the value of ``var`` from the source rank. 
-    - ``source_team_rank``: identifies the broadcasting member of the team. 
+\
+    * After this call ``var`` contains for every member of the team the value of ``var`` from the thread for which ``team_rank() == source_team_rank``.
+        - ``var``: a variable of type ``T`` which gets overwritten by the value of ``var`` from the source rank. 
+        - ``source_team_rank``: identifies the broadcasting member of the team. 
 
 .. code-block:: cpp
 
@@ -175,10 +176,11 @@ The following functions must be called collectively by all members of a team. Th
     KOKKOS_INLINE_FUNCTION
     void team_broadcast( Closure const & f , T & value , const int source_team_rank) const noexcept;
 
-* After this call ``var`` contains for every member of the team the value of ``var`` from the thread for which ``team_rank() == source_team_rank`` after applying ``f``.
-    - ``f``: a function object with an ``void operator() ( T & )`` which is applied to ``var`` before broadcasting it.
-    - ``var``: a variable of type ``T`` which gets overwritten by the value of ``f(var)`` from the source rank. 
-    - ``source_team_rank``: identifies the broadcasting member of the team. 
+\
+    * After this call ``var`` contains for every member of the team the value of ``var`` from the thread for which ``team_rank() == source_team_rank`` after applying ``f``.
+        - ``f``: a function object with an ``void operator() ( T & )`` which is applied to ``var`` before broadcasting it.
+        - ``var``: a variable of type ``T`` which gets overwritten by the value of ``f(var)`` from the source rank. 
+        - ``source_team_rank``: identifies the broadcasting member of the team. 
 
 .. code-block:: cpp
 
@@ -186,7 +188,8 @@ The following functions must be called collectively by all members of a team. Th
     KOKKOS_INLINE_FUNCTION
     void team_reduce( ReducerType const & reducer ) const noexcept;
 
-* Performs a reduction accross all members of the team as specified by ``reducer``. ``ReducerType`` must meet the concept of ``Kokkos::Reducer``. 
+\
+    * Performs a reduction accross all members of the team as specified by ``reducer``. ``ReducerType`` must meet the concept of ``Kokkos::Reducer``. 
 
 .. code-block:: cpp
 
@@ -194,9 +197,10 @@ The following functions must be called collectively by all members of a team. Th
     KOKKOS_INLINE_FUNCTION
     T team_scan( T const & value , T * const global = 0 ) const noexcept;
 
-* Performs an exclusive scan over the ``var`` provided by the team members. Let ``t = team_rank()`` and ``VALUES[t]`` the value of ``var`` from thread ``t``.
-    - Returns: ``VALUES[0] + VALUES[1] + ``...``+ VALUES[t-1]`` or zero for ``t==0``.
-    - ``global`` if provided will be set to ``VALUES[0] + VALUES[1] + ``...``+ VALUES[team_size()-1]``, must be the same pointer for every team member. 
+\
+    * Performs an exclusive scan over the ``var`` provided by the team members. Let ``t = team_rank()`` and ``VALUES[t]`` the value of ``var`` from thread ``t``.
+        - Returns: ``VALUES[0] + VALUES[1] + ``...``+ VALUES[t-1]`` or zero for ``t==0``.
+        - ``global`` if provided will be set to ``VALUES[0] + VALUES[1] + ``...``+ VALUES[team_size()-1]``, must be the same pointer for every team member. 
 
 Examples
 --------
