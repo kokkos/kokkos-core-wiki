@@ -77,7 +77,7 @@ Functions
 
 .. cppkokkos:kokkosinlinefunction:: void join(value_type& dest, const value_type& src) const;
 
-    * Store minimum with index of ``src`` and ``dest`` into ``dest``:  ``dest = (src.val < dest.val) ? src :\ dest;``. 
+    * Store minimum with index of ``src`` and ``dest`` into ``dest``:  ``dest = (src.val < dest.val) ? src :dest;``. 
 
 .. cppkokkos:kokkosinlinefunction:: void init(value_type& val) const;
 
