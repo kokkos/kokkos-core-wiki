@@ -16,13 +16,13 @@ Usage
     Kokkos::MDRangePolicy<ARGS>(begin, end, tiling)
     Kokkos::MDRangePolicy<ARGS>(Space, begin, end, tiling)
 
-``MDRangePolicy`` defines an execution policy for a multidimensional iteration space starting at a ``begin`` tuple and going to ``end`` with an open interval. The iteration space will be tiled, and the user can optionally provide tiling sizes. 
+``MDRangePolicy`` defines an execution policy for a multidimensional iteration space starting at a ``begin`` tuple and going to ``end`` with an open interval. The iteration space will be tiled, and the user can optionally provide tiling sizes.
 
-Interface 
+Interface
 ---------
 
 .. code-block:: cpp
-    
+
     template<class ... Args>
     class Kokkos::MDRangePolicy;
 
@@ -53,14 +53,12 @@ Arguments Specific to MDRangePolicy
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: cpp
-    
+
     template<int N, Iterate outer, Iterate inner>
     class Rank;
-  
-* Determines the rank of the index space as well as in which order to iterate over the tiles and how to iterate within the tiles. ``outer`` and ``inner`` can be ``Kokkos::Iterate::Default``, ``Kokkos::Iterate::Left``, or ``Kokkos::Iterate::Right``. 
-    
-Requirements:
-~~~~~~~~~~~~~
+
+* Determines the rank of the index space as well as in which order to iterate over the tiles and how to iterate within the tiles. ``outer`` and ``inner`` can be ``Kokkos::Iterate::Default``, ``Kokkos::Iterate::Left``, or ``Kokkos::Iterate::Right``.
+
 
 Public Class Members
 --------------------
@@ -69,20 +67,20 @@ Constructors
 ~~~~~~~~~~~~
 
 .. cpp:function:: MDRangePolicy()
-    
+
     Default Constructor uninitialized policy.
 
 .. cpp:function:: MDRangePolicy(const Kokkos::Array<int64_t,rank>& begin, const Kokkos::Array<int64_t,rank>& end)
 
     Provide a start and end index.
-   
+
 .. cpp:function:: MDRangePolicy(const Kokkos::Array<int64_t,rank>& begin, const Kokkos::Array<int64_t,rank>& end,  const Kokkos::Array<int64_t,rank>& tiling)
 
     Provide a start and end index as well as the tiling dimensions.
- 
+
 .. cpp:function:: template<class OT, class IT, class TT> MDRangePolicy(const std::initializer_list<OT>& begin, const std::initializer_list<IT>& end)
 
-    Provide a start and end index. The length of the lists must match the rank of the policy. 
+    Provide a start and end index. The length of the lists must match the rank of the policy.
 
 .. cpp:function:: template<class OT, class IT, class TT> MDRangePolicy(const std::initializer_list<OT>& begin, const std::initializer_list<IT>& end,  std::initializer_list<TT>& tiling)
 
