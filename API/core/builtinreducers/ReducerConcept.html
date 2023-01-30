@@ -465,7 +465,7 @@
         </a>
         <div class="content-icon-container">
 <div class="edit-this-page">
-  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/API/core/builtinreducers/ReducerConcept.md" title="Edit this page">
+  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/API/core/builtinreducers/ReducerConcept.rst" title="Edit this page">
     <svg aria-hidden="true" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
       <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4"></path>
@@ -489,43 +489,45 @@
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="reducerconcept">
+          <section id="reducerconcept">
 <h1><code class="docutils literal notranslate"><span class="pre">ReducerConcept</span></code><a class="headerlink" href="#reducerconcept" title="Permalink to this heading">#</a></h1>
-<p>The concept of a Reducer is the abstraction that defines the “how” a “Reduction” is performed during the parallel reduce execution pattern.  The abstraction of “what” is given as a template parameter and corresponds to the “what” that is being reduced in the <a class="reference internal" href="../parallel-dispatch/parallel_reduce.html"><span class="doc std std-doc">parallel_reduce</span></a> operation.  This page describes the definitions and functions expected from a Reducer with a hypothetical ‘Reducer’ class definition.  A brief description of built-in reducers is also included.</p>
-<p>Header File: <code class="docutils literal notranslate"><span class="pre">Kokkos_Core.hpp</span></code></p>
-<p>Usage:</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">T</span><span class="w"> </span><span class="n">result</span><span class="p">;</span>
+<p>The concept of a Reducer is the abstraction that defines the “how” a “Reduction” is performed during the parallel reduce execution pattern. The abstraction of “what” is given as a template parameter and corresponds to the “what” that is being reduced in the <a class="reference external" href="../parallel-dispatch/parallel_reduce.html">parallel_reduce</a> operation. This page describes the definitions and functions expected from a Reducer with a hypothetical ‘Reducer’ class definition. A brief description of built-in reducers is also included.</p>
+<p>Header File: <code class="docutils literal notranslate"><span class="pre">&lt;Kokkos_Core.hpp&gt;</span></code></p>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this heading">#</a></h2>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">T</span><span class="w"> </span><span class="n">result</span><span class="p">;</span>
 <span class="n">parallel_reduce</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">Functor</span><span class="p">,</span><span class="n">ReducerConcept</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">result</span><span class="p">));</span>
 </pre></div>
 </div>
+</section>
 <section id="synopsis">
 <h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this heading">#</a></h2>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Reducer</span><span class="w"> </span><span class="p">{</span>
-<span class="w"> </span><span class="k">public</span><span class="o">:</span>
-<span class="w">   </span><span class="c1">//Required for Concept</span>
-<span class="w">   </span><span class="k">typedef</span><span class="w"> </span><span class="n">Reducer</span><span class="w"> </span><span class="n">reducer</span><span class="p">;</span>
-<span class="w">   </span><span class="k">typedef</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="n">value_type</span><span class="p">;</span>
-<span class="w">   </span><span class="k">typedef</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">View</span><span class="o">&lt;</span><span class="n">value_type</span><span class="p">,</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">result_view_type</span><span class="p">;</span>
-<span class="w">   </span>
-<span class="w">   </span><span class="n">KOKKOS_INLINE_FUNCTION</span>
-<span class="w">   </span><span class="kt">void</span><span class="w"> </span><span class="n">join</span><span class="p">(</span><span class="n">value_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">dest</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">value_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">src</span><span class="p">)</span><span class="w">  </span><span class="k">const</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Reducer</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="o">:</span>
+<span class="w">        </span><span class="c1">//Required for Concept</span>
+<span class="w">        </span><span class="k">typedef</span><span class="w"> </span><span class="n">Reducer</span><span class="w"> </span><span class="n">reducer</span><span class="p">;</span>
+<span class="w">        </span><span class="k">typedef</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="n">value_type</span><span class="p">;</span>
+<span class="w">        </span><span class="k">typedef</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">View</span><span class="o">&lt;</span><span class="n">value_type</span><span class="p">,</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">result_view_type</span><span class="p">;</span>
 
-<span class="w">   </span><span class="n">KOKKOS_INLINE_FUNCTION</span>
-<span class="w">   </span><span class="kt">void</span><span class="w"> </span><span class="n">init</span><span class="p">(</span><span class="w"> </span><span class="n">value_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">val</span><span class="p">)</span><span class="w">  </span><span class="k">const</span><span class="p">;</span>
+<span class="w">        </span><span class="n">KOKKOS_INLINE_FUNCTION</span>
+<span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="n">join</span><span class="p">(</span><span class="n">value_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">dest</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">value_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">src</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
 
-<span class="w">   </span><span class="n">KOKKOS_INLINE_FUNCTION</span>
-<span class="w">   </span><span class="n">value_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">reference</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
+<span class="w">        </span><span class="n">KOKKOS_INLINE_FUNCTION</span>
+<span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="n">init</span><span class="p">(</span><span class="n">value_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">val</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
 
-<span class="w">   </span><span class="n">KOKKOS_INLINE_FUNCTION</span>
-<span class="w">   </span><span class="n">result_view_type</span><span class="w"> </span><span class="n">view</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
+<span class="w">        </span><span class="n">KOKKOS_INLINE_FUNCTION</span>
+<span class="w">        </span><span class="n">value_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">reference</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
 
-<span class="w">   </span>
-<span class="w">   </span><span class="c1">//Part of Build-In reducers for Kokkos</span>
-<span class="w">   </span><span class="n">KOKKOS_INLINE_FUNCTION</span>
-<span class="w">   </span><span class="nf">Reducer</span><span class="p">(</span><span class="n">value_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">value_</span><span class="p">);</span>
+<span class="w">        </span><span class="n">KOKKOS_INLINE_FUNCTION</span>
+<span class="w">        </span><span class="n">result_view_type</span><span class="w"> </span><span class="n">view</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
 
-<span class="w">   </span><span class="n">KOKKOS_INLINE_FUNCTION</span>
-<span class="w">   </span><span class="nf">Reducer</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">result_view_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">value_</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">//Part of Build-In reducers for Kokkos</span>
+<span class="w">        </span><span class="n">KOKKOS_INLINE_FUNCTION</span>
+<span class="w">        </span><span class="nf">Reducer</span><span class="p">(</span><span class="n">value_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">value_</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">KOKKOS_INLINE_FUNCTION</span>
+<span class="w">        </span><span class="nf">Reducer</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">result_view_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">value_</span><span class="p">);</span>
 <span class="p">};</span>
 </pre></div>
 </div>
@@ -537,83 +539,97 @@
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">reducer</span></code>: The self type.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">value_type</span></code>: The reduction scalar type.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">result_view_type</span></code>: A <code class="docutils literal notranslate"><span class="pre">Kokkos::View</span></code> referencing where the reduction result should be placed. Can be an unmanaged view of a scalar or complex datatype (class or struct).  Unmanaged views must specify the same memory space where the referenced scalar (or complex datatype) resides.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">result_view_type</span></code>: A <code class="docutils literal notranslate"><span class="pre">Kokkos::View</span></code> referencing where the reduction result should be placed. Can be an unmanaged view of a scalar or complex datatype (class or struct). Unmanaged views must specify the same memory space where the referenced scalar (or complex datatype) resides.</p></li>
 </ul>
 </section>
 <section id="constructors">
 <h3>Constructors<a class="headerlink" href="#constructors" title="Permalink to this heading">#</a></h3>
 <p>Constructors are not part of the concept. A custom reducer can have complex custom constructors. All Build-In reducers in Kokkos have the following two constructors:</p>
-<ul>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">Reducer</span><span class="p">(</span><span class="n">value_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">result</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Constructs a reducer which references a local variable as its result location.</p>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">Reducer</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">result_view_type</span><span class="w"> </span><span class="n">result</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Constructs a reducer which references a specific view as its result location.</p>
-</li>
+<dl class="cppkokkos kokkosinlinefunction">
+<dt class="sig sig-object cppkokkos" id="_CPPv47ReducerR10value_type">
+<span id="_CPPv37ReducerR10value_type"></span><span id="_CPPv27ReducerR10value_type"></span><span id="Reducer__value_typeR"></span><span class="k"><span class="pre">KOKKOS_INLINE_FUNCTION</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Reducer</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">value_type</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">value_</span></span><span class="sig-paren">)</span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv47ReducerR10value_type" title="Permalink to this definition">#</a><br /></dt>
+<dd><ul class="simple">
+<li><p>Constructs a reducer which references a local variable as its result location.</p></li>
 </ul>
+</dd></dl>
+
+<dl class="cppkokkos kokkosinlinefunction">
+<dt class="sig sig-object cppkokkos" id="_CPPv47ReducerRK16result_view_type">
+<span id="_CPPv37ReducerRK16result_view_type"></span><span id="_CPPv27ReducerRK16result_view_type"></span><span id="Reducer__result_view_typeCR"></span><span class="k"><span class="pre">KOKKOS_INLINE_FUNCTION</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Reducer</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">result_view_type</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">value_</span></span><span class="sig-paren">)</span><span class="p"><span class="pre">;</span></span><br /></dt>
+<dd><ul class="simple">
+<li><p>Constructs a reducer which references a specific view as its result location.</p></li>
+</ul>
+</dd></dl>
+
 </section>
 <section id="functions">
 <h3>Functions<a class="headerlink" href="#functions" title="Permalink to this heading">#</a></h3>
-<ul>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">join</span><span class="p">(</span><span class="n">value_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">dest</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">value_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">src</span><span class="p">)</span><span class="w">  </span><span class="k">const</span><span class="p">;</span>
-</pre></div>
-</div>
-<p>Combine <code class="docutils literal notranslate"><span class="pre">src</span></code> into <code class="docutils literal notranslate"><span class="pre">dest</span></code>. For example, <code class="docutils literal notranslate"><span class="pre">Add</span></code> performs <code class="docutils literal notranslate"><span class="pre">dest+=src;</span></code>.</p>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">init</span><span class="p">(</span><span class="w"> </span><span class="n">value_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">val</span><span class="p">)</span><span class="w">  </span><span class="k">const</span><span class="p">;</span>
-</pre></div>
-</div>
-<p>Initialize <code class="docutils literal notranslate"><span class="pre">val</span></code> with appropriate initial value. For example, ‘Add’ assigns <code class="docutils literal notranslate"><span class="pre">val</span> <span class="pre">=</span> <span class="pre">0;</span></code>, but Prod assigns <code class="docutils literal notranslate"><span class="pre">val</span> <span class="pre">=</span> <span class="pre">1;</span></code></p>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">value_type</span><span class="o">&amp;</span><span class="w"> </span><span class="nf">reference</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
-</pre></div>
-</div>
-<p>Returns a reference to the result place.</p>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">result_view_type</span><span class="w"> </span><span class="nf">view</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
-</pre></div>
-</div>
-<p>Returns a view of the result place.</p>
-</li>
+<dl class="cppkokkos kokkosinlinefunction">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK4joinER10value_typeRK10value_type">
+<span id="_CPPv3NK4joinER10value_typeRK10value_type"></span><span id="_CPPv2NK4joinER10value_typeRK10value_type"></span><span id="join__value_typeR.value_typeCRC"></span><span class="k"><span class="pre">KOKKOS_INLINE_FUNCTION</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">join</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">value_type</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">dest</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">value_type</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">src</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="p"><span class="pre">;</span></span><br /></dt>
+<dd><ul class="simple">
+<li><p>Combine <code class="docutils literal notranslate"><span class="pre">src</span></code> into <code class="docutils literal notranslate"><span class="pre">dest</span></code>. For example, <code class="docutils literal notranslate"><span class="pre">Add</span></code> performs <code class="docutils literal notranslate"><span class="pre">dest+=src;</span></code>.</p></li>
 </ul>
+</dd></dl>
+
+<dl class="cppkokkos kokkosinlinefunction">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK4initER10value_type">
+<span id="_CPPv3NK4initER10value_type"></span><span id="_CPPv2NK4initER10value_type"></span><span id="init__value_typeRC"></span><span class="k"><span class="pre">KOKKOS_INLINE_FUNCTION</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">init</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">value_type</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">val</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="p"><span class="pre">;</span></span><br /></dt>
+<dd><ul class="simple">
+<li><p>Initialize <code class="docutils literal notranslate"><span class="pre">val</span></code> with appropriate initial value. For example, ‘Add’ assigns <code class="docutils literal notranslate"><span class="pre">val</span> <span class="pre">=</span> <span class="pre">0;</span></code>, but Prod assigns <code class="docutils literal notranslate"><span class="pre">val</span> <span class="pre">=</span> <span class="pre">1;</span></code></p></li>
+</ul>
+</dd></dl>
+
+<dl class="cppkokkos kokkosinlinefunction">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK9referenceEv">
+<span id="_CPPv3NK9referenceEv"></span><span id="_CPPv2NK9referenceEv"></span><span id="referenceC"></span><span class="k"><span class="pre">KOKKOS_INLINE_FUNCTION</span></span><span class="w"> </span><span class="n"><span class="pre">value_type</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">reference</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="p"><span class="pre">;</span></span><br /></dt>
+<dd><ul class="simple">
+<li><p>Returns a reference to the result place.</p></li>
+</ul>
+</dd></dl>
+
+<dl class="cppkokkos kokkosinlinefunction">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK4viewEv">
+<span id="_CPPv3NK4viewEv"></span><span id="_CPPv2NK4viewEv"></span><span id="viewC"></span><span class="k"><span class="pre">KOKKOS_INLINE_FUNCTION</span></span><span class="w"> </span><span class="n"><span class="pre">result_view_type</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">view</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="p"><span class="pre">;</span></span><br /></dt>
+<dd><ul class="simple">
+<li><p>Returns a view of the result place.</p></li>
+</ul>
+</dd></dl>
+
 </section>
 <section id="built-in-reducers">
 <h3>Built-In Reducers<a class="headerlink" href="#built-in-reducers" title="Permalink to this heading">#</a></h3>
-<p>Kokkos provides a number of built-in reducers that automatically work with the intrinsic C++ types as well as Kokkos::complex.  In order to use a Built-in reducer with a custom type, a template specialization of Kokkos::reduction_identity<CustomType> must be defined.  A simple example is shown below and more information can be found under <a class="reference internal" href="../../../ProgrammingGuide/Custom-Reductions.html"><span class="doc std std-doc">Custom Reductions</span></a>.</p>
+<p>Kokkos provides a number of built-in reducers that automatically work with the intrinsic C++ types as well as <code class="docutils literal notranslate"><span class="pre">Kokkos::complex</span></code>. In order to use a Built-in reducer with a custom type, a template specialization of <code class="docutils literal notranslate"><span class="pre">Kokkos::reduction_identity&lt;CustomType&gt;</span></code> must be defined. A simple example is shown below and more information can be found under <a class="reference external" href="../../../ProgrammingGuide/Custom-Reductions.html">Custom Reductions</a>.</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="BAnd.html"><span class="doc std std-doc">Kokkos::BAnd</span></a></p></li>
-<li><p><a class="reference internal" href="BOr.html"><span class="doc std std-doc">Kokkos::BOr</span></a></p></li>
-<li><p><a class="reference internal" href="LAnd.html"><span class="doc std std-doc">Kokkos::LAnd</span></a></p></li>
-<li><p><a class="reference internal" href="LOr.html"><span class="doc std std-doc">Kokkos::LOr</span></a></p></li>
-<li><p><a class="reference internal" href="Max.html"><span class="doc std std-doc">Kokkos::Max</span></a></p></li>
-<li><p><a class="reference internal" href="MaxLoc.html"><span class="doc std std-doc">Kokkos::MaxLoc</span></a></p></li>
-<li><p><a class="reference internal" href="Min.html"><span class="doc std std-doc">Kokkos::Min</span></a></p></li>
-<li><p><a class="reference internal" href="MinLoc.html"><span class="doc std std-doc">Kokkos::MinLoc</span></a></p></li>
-<li><p><a class="reference internal" href="MinMax.html"><span class="doc std std-doc">Kokkos::MinMax</span></a></p></li>
-<li><p><a class="reference internal" href="MinMaxLoc.html"><span class="doc std std-doc">Kokkos::MinMaxLoc</span></a></p></li>
-<li><p><a class="reference internal" href="Prod.html"><span class="doc std std-doc">Kokkos::Prod</span></a></p></li>
-<li><p><a class="reference internal" href="Sum.html"><span class="doc std std-doc">Kokkos::Sum</span></a></p></li>
+<li><p><a class="reference external" href="BAnd.html">Kokkos::BAnd</a></p></li>
+<li><p><a class="reference external" href="BOr.html">Kokkos::BOr</a></p></li>
+<li><p><a class="reference external" href="LAnd.html">Kokkos::LAnd</a></p></li>
+<li><p><a class="reference external" href="LOr.html">Kokkos::LOr</a></p></li>
+<li><p><a class="reference external" href="Max.html">Kokkos::Max</a></p></li>
+<li><p><a class="reference external" href="MaxLoc.html">Kokkos::MaxLoc</a></p></li>
+<li><p><a class="reference external" href="Min.html">Kokkos::Min</a></p></li>
+<li><p><a class="reference external" href="MinLoc.html">Kokkos::MinLoc</a></p></li>
+<li><p><a class="reference external" href="MinMax.html">Kokkos::MinMax</a></p></li>
+<li><p><a class="reference external" href="MinMaxLoc.html">Kokkos::MinMaxLoc</a></p></li>
+<li><p><a class="reference external" href="Prod.html">Kokkos::Prod</a></p></li>
+<li><p><a class="reference external" href="Sum.html">Kokkos::Sum</a></p></li>
 </ul>
 </section>
 </section>
 <section id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading">#</a></h2>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="w"> </span><span class="cp">#include</span><span class="cpf">&lt;Kokkos_Core.hpp&gt;</span>
-<span class="w"> </span>
-<span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">argv</span><span class="p">[])</span><span class="w"> </span><span class="p">{</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="cpf">&lt;Kokkos_Core.hpp&gt;</span>
 
-<span class="w">   </span><span class="kt">long</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">argc</span><span class="o">&gt;</span><span class="mi">1</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">:</span><span class="mi">100</span><span class="p">;</span><span class="w"> </span>
-<span class="w">   </span><span class="kt">long</span><span class="w"> </span><span class="n">result</span><span class="p">;</span>
-<span class="w">   </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">parallel_reduce</span><span class="p">(</span><span class="s">&quot;ReduceSum: &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">KOKKOS_LAMBDA</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="kt">long</span><span class="o">&amp;</span><span class="w"> </span><span class="n">lval</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">     </span><span class="n">lval</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
-<span class="w">   </span><span class="p">},</span><span class="n">Sum</span><span class="o">&lt;</span><span class="kt">long</span><span class="o">&gt;</span><span class="p">(</span><span class="n">result</span><span class="p">));</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">argv</span><span class="p">[])</span><span class="w"> </span><span class="p">{</span>
 
-<span class="w">   </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Result: %l Expected: %l</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="n">result</span><span class="p">,</span><span class="n">N</span><span class="o">*</span><span class="p">(</span><span class="n">N</span><span class="mi">-1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">);</span>
-<span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="kt">long</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">argc</span><span class="o">&gt;</span><span class="mi">1</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">:</span><span class="mi">100</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">long</span><span class="w"> </span><span class="n">result</span><span class="p">;</span>
+<span class="w">    </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">parallel_reduce</span><span class="p">(</span><span class="s">&quot;ReduceSum: &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">KOKKOS_LAMBDA</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="kt">long</span><span class="o">&amp;</span><span class="w"> </span><span class="n">lval</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">lval</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+<span class="w">    </span><span class="p">},</span><span class="w"> </span><span class="n">Sum</span><span class="o">&lt;</span><span class="kt">long</span><span class="o">&gt;</span><span class="p">(</span><span class="n">result</span><span class="p">));</span>
+
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Result: %l Expected: %l</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="n">result</span><span class="p">,</span><span class="n">N</span><span class="o">*</span><span class="p">(</span><span class="n">N</span><span class="mi">-1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">);</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 </section>
@@ -677,6 +693,7 @@
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">ReducerConcept</span></code></a><ul>
+<li><a class="reference internal" href="#usage">Usage</a></li>
 <li><a class="reference internal" href="#synopsis">Synopsis</a></li>
 <li><a class="reference internal" href="#public-class-members">Public Class Members</a><ul>
 <li><a class="reference internal" href="#typedefs">Typedefs</a></li>
