@@ -1,8 +1,8 @@
 ``MDRangePolicy``
 =================
 
-.. role::cpp(code)
-    :language: cpp
+.. role:: cppkokkos(code)
+    :language: cppkokkos
 
 Header File: ``<Kokkos_Core.hpp>``
 
