@@ -1,15 +1,15 @@
 ``RangePolicy``
 ===============
 
-.. role::cpp(code)
-    :language: cpp
+.. role::cppkokkos(code)
+    :language: cppkokkos
 
 Header File: ``<Kokkos_Core.hpp>``
 
 Usage
 -----
 
-.. code-block:: cpp
+.. code-block:: cppkokkos
 
     Kokkos::RangePolicy<>(begin, end, args...)
     Kokkos::RangePolicy<ARGS>(begin, end, args...)
@@ -21,7 +21,7 @@ RangePolicy defines an execution policy for a 1D iteration space starting at beg
 Synopsis 
 --------
 
-.. code-block:: cpp
+.. code-block:: cppkokkos
         
     template<class ... Args>
     class Kokkos::RangePolicy {
@@ -100,11 +100,14 @@ Public Class Members
 Constructors
 ~~~~~~~~~~~~
  
-.. cpp:function:: RangePolicy()
+.. code-block:: cppkokkos
     
+    RangePolicy()
+
+\
     Default Constructor uninitialized policy.
 
-.. code-block:: cpp
+.. code-block:: cppkokkos
 
     template<class ... InitArgs> 
     RangePolicy(const int64_t& begin, const int64_t& end, const InitArgs ... init_args)
@@ -112,7 +115,7 @@ Constructors
 \
     Provide a start and end index as well as optional arguments to control certain behavior (see below).
    
-.. code-block:: cpp
+.. code-block:: cppkokkos
 
     template<class ... InitArgs> 
     RangePolicy(const ExecutionSpace& space, const int64_t& begin, const int64_t& end, const InitArgs ... init_args)
@@ -128,7 +131,7 @@ Optional ``InitArgs``:
 Examples
 --------
    
-.. code-block:: cpp
+.. code-block:: cppkokkos
     
     RangePolicy<> policy_1(0, N);
     RangePolicy<Cuda> policy_2(5,N-5);
@@ -139,7 +142,7 @@ Examples
 
 Note: providing a single integer as a policy to a parallel pattern, implies a defaulted ``RangePolicy``
 
-.. code-block:: cpp
+.. code-block:: cppkokkos
 
     // These two calls are identical
     parallel_for("Loop", N, functor);
