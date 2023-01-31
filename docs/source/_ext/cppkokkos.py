@@ -2841,7 +2841,7 @@ class ASTType(ASTBase):
         if version == 1:
             res = []
             if objectType:  # needs the name
-                if objectType == 'function':  # also modifiers
+                if objectType == 'function' or objectType == 'kokkosinlinefunction':  # also modifiers
                     res.append(symbol.get_full_nested_name().get_id(version))
                     res.append(self.decl.get_param_id(version))
                     res.append(self.decl.get_modifiers_id(version))
@@ -2866,7 +2866,7 @@ class ASTType(ASTBase):
         # other versions
         res = []
         if objectType:  # needs the name
-            if objectType == 'function':  # also modifiers
+            if objectType == 'function' or objectType == 'kokkosinlinefunction':  # also modifiers
                 modifiers = self.decl.get_modifiers_id(version)
                 res.append(symbol.get_full_nested_name().get_id(version, modifiers))
                 if version >= 4:
@@ -3802,6 +3802,9 @@ class ASTDeclaration(ASTBase):
             pass
         elif self.objectType == 'function':
             pass
+        elif self.objectType == 'kokkosinlinefunction':
+            mainDeclNode += addnodes.desc_sig_keyword('KOKKOS_INLINE_FUNCTION', 'KOKKOS_INLINE_FUNCTION')
+            mainDeclNode += addnodes.desc_sig_space()
         elif self.objectType == 'class':
             assert self.directiveType in ('class', 'struct')
             mainDeclNode += addnodes.desc_sig_keyword(self.directiveType, self.directiveType)
@@ -6019,7 +6022,7 @@ class DefinitionParser(BaseParser):
 
     def _parse_decl_specs(self, outer: str, typed: bool = True) -> ASTDeclSpecs:
         if outer:
-            if outer not in ('type', 'member', 'function', 'templateParam', 'deprecated-type'):
+            if outer not in ('type', 'member', 'function', 'templateParam', 'deprecated-type', 'kokkosinlinefunction'):
                 raise Exception('Internal error, unknown outer "%s".' % outer)
         """
         storage-class-specifier function-specifier "constexpr"
@@ -6103,7 +6106,7 @@ class DefinitionParser(BaseParser):
                           typed: bool = True
                           ) -> ASTDeclarator:
         # 'typed' here means 'parse return type stuff'
-        if paramMode not in ('type', 'function', 'operatorCast', 'new', 'deprecated-type'):
+        if paramMode not in ('type', 'function', 'operatorCast', 'new', 'deprecated-type', 'kokkosinlinefunction'):
             raise Exception(
                 "Internal error, unknown paramMode '%s'." % paramMode)
         prevErrors = []
@@ -6271,11 +6274,11 @@ class DefinitionParser(BaseParser):
         outer == operatorCast: annoying case, we should not take the params
         """
         if outer:  # always named
-            if outer not in ('type', 'member', 'function', 'operatorCast', 'templateParam', 'deprecated-type'):
+            if outer not in ('type', 'member', 'function', 'operatorCast', 'templateParam', 'deprecated-type', 'kokkosinlinefunction'):
                 raise Exception('Internal error, unknown outer "%s".' % outer)
             if outer != 'operatorCast':
                 assert named
-        if outer in ('type', 'function', 'deprecated-type'):
+        if outer in ('type', 'function', 'deprecated-type', 'kokkosinlinefunction'):
             # We allow type objects to just be a name.
             # Some functions don't have normal return types: constructors,
             # destructors, cast operators
@@ -6293,6 +6296,8 @@ class DefinitionParser(BaseParser):
                     desc = "If just a name"
                 elif outer == 'function':
                     desc = "If the function has no return type"
+                elif outer == 'kokkosinlinefunction':
+                    desc = "If the function has no return type"
                 else:
                     assert False
                 prevErrors.append((exUntyped, desc))
@@ -6307,6 +6312,8 @@ class DefinitionParser(BaseParser):
                     elif outer == 'deprecated-type':
                         desc = "If typedef-like declaration"
                     elif outer == 'function':
+                        desc = "If the function has a return type"
+                    elif outer == 'kokkosinlinefunction':
                         desc = "If the function has a return type"
                     else:
                         assert False
@@ -6323,6 +6330,8 @@ class DefinitionParser(BaseParser):
                             header += "typedef-like declaration."
                         elif outer == 'function':
                             header = "Error when parsing function declaration."
+                        elif outer == 'kokkosinlinefunction':
+                            header = "Error when parsing kokkosinlinefunction declaration."
                         else:
                             assert False
                         raise self._make_multi_error(prevErrors, header) from exTyped
@@ -6358,7 +6367,7 @@ class DefinitionParser(BaseParser):
             self, named: Union[bool, str],
             outer: str) -> Union[ASTTypeWithInit, ASTTemplateParamConstrainedTypeWithInit]:
         if outer:
-            assert outer in ('type', 'member', 'function', 'templateParam', 'deprecated-type')
+            assert outer in ('type', 'member', 'function', 'templateParam', 'deprecated-type', 'kokkosinlinefunction')
         type = self._parse_type(outer=outer, named=named)
         if outer != 'templateParam':
             init = self._parse_initializer(outer=outer)
@@ -6734,10 +6743,10 @@ class DefinitionParser(BaseParser):
 
     def parse_declaration(self, objectType: str, directiveType: str) -> ASTDeclaration:
         if objectType not in ('class', 'union', 'function', 'member', 'type',
-                              'concept', 'enum', 'enumerator', 'deprecated-type'):
+                              'concept', 'enum', 'enumerator', 'deprecated-type', 'kokkosinlinefunction'):
             raise Exception('Internal error, unknown objectType "%s".' % objectType)
         if directiveType not in ('class', 'struct', 'union', 'function', 'member', 'var', 'type', 'concept', 'enum',
-                                 'enum-struct', 'enum-class', 'enumerator', 'deprecated-type'):
+                                 'enum-struct', 'enum-class', 'enumerator', 'deprecated-type', 'kokkosinlinefunction'):
             raise Exception('Internal error, unknown directiveType "%s".' % directiveType)
         visibility = None
         templatePrefix = None
@@ -6749,7 +6758,7 @@ class DefinitionParser(BaseParser):
         if self.match(_visibility_re):
             visibility = self.matched_text
 
-        if objectType in ('type', 'concept', 'member', 'function', 'class', 'deprecated-type'):
+        if objectType in ('type', 'concept', 'member', 'function', 'class', 'deprecated-type', 'kokkosinlinefunction'):
             templatePrefix = self._parse_template_declaration_prefix(objectType)
             if objectType == 'function' and templatePrefix is not None:
                 requiresClause = self._parse_requires_clause()
@@ -6790,12 +6799,17 @@ class DefinitionParser(BaseParser):
                 prevErrors.append((e, "If type alias or template alias"))
                 header = "Error in type declaration."
                 raise self._make_multi_error(prevErrors, header) from e
+
         elif objectType == 'concept':
             declaration = self._parse_concept()
         elif objectType == 'member':
             declaration = self._parse_type_with_init(named=True, outer='member')
         elif objectType == 'function':
             declaration = self._parse_type(named=True, outer='function')
+            if templatePrefix is not None:
+                trailingRequiresClause = self._parse_requires_clause()
+        elif objectType == 'kokkosinlinefunction':
+            declaration = self._parse_type(named=True, outer='kokkosinlinefunction')
             if templatePrefix is not None:
                 trailingRequiresClause = self._parse_requires_clause()
         elif objectType == 'class':
@@ -7160,6 +7174,9 @@ class CPPKokkosObject(ObjectDescription[ASTDeclaration]):
 # @@@@@_
 class CPPKokkosTypeObject(CPPKokkosObject):
     object_type = 'type'
+
+class CPPKokkosInlinefunctionObject(CPPKokkosObject):
+    object_type = 'kokkosinlinefunction'
 
 class CPPKokkosDeprecatedTypeObject(CPPKokkosObject):
     object_type = 'deprecated-type'
@@ -7645,6 +7662,7 @@ class CPPKokkosDomain(Domain):
     # @@@@@!
     label = 'C++'
     object_types = {
+        'kokkosinlinefunction':  ObjType(_('kokkosinlinefunction'),             'identifier', 'type'),
         'class':      ObjType(_('class'),      'class', 'struct',   'identifier', 'type'),
         'union':      ObjType(_('union'),      'union',             'identifier', 'type'),
         'function':   ObjType(_('function'),   'func',              'identifier', 'type'),
@@ -7667,6 +7685,7 @@ class CPPKokkosDomain(Domain):
         'struct': CPPKokkosClassObject,
         'union': CPPKokkosUnionObject,
         'function': CPPKokkosFunctionObject,
+        'kokkosinlinefunction': CPPKokkosInlinefunctionObject,
         'member': CPPKokkosMemberObject,
         'var': CPPKokkosMemberObject,
         'type': CPPKokkosTypeObject,
@@ -7695,6 +7714,7 @@ class CPPKokkosDomain(Domain):
         'struct': CPPKokkosXRefRole(),
         'union': CPPKokkosXRefRole(),
         'func': CPPKokkosXRefRole(fix_parens=True),
+        'kokkosinlinefunction': CPPKokkosXRefRole(fix_parens=True),
         'member': CPPKokkosXRefRole(),
         'var': CPPKokkosXRefRole(),
         'type': CPPKokkosXRefRole(),
