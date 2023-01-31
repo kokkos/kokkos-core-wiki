@@ -79,10 +79,10 @@ For some applications, it is useful to know the type of a subview, given the arg
 ```c++
 using my_view_type = Kokkos::View<double **>;
 using my_subview_type = Kokkos::Subview<my_view_type,
-                                        decltype(Kokkos::ALL),
+                                        std::remove_const_t<decltype(Kokkos::ALL)>,
                                         Kokkos::pair<unsigned, unsigned>>;
 
-using my_subview_type_deduced = decltype(subview(std::declval<my_view_type>(), Kokkos::ALL, std::make_pair(1u, 1u));
+using my_subview_type_deduced = decltype(subview(std::declval<my_view_type>(), Kokkos::ALL, std::make_pair(1u, 1u)));
 
 static_assert(std::is_same<my_subview_type, my_subview_type_deduced>::value);
 ```
