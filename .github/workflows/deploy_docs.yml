@@ -1,8 +1,9 @@
-name: Deploy docs
+name: Build and deploy docs
 
 on:
   push:
     branches: [ main ]
+  pull_request:
 
 jobs:
   build-and-deploy-docs:
@@ -32,6 +33,7 @@ jobs:
         run: touch .nojekyll
       # This action moves the content of `generated_docs` to the `deploy-doc-site` branch
       - name: Deploy docs
+        if: ${{ github.ref == 'refs/heads/main' }}
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: deploy-doc-site

@@ -1,1 +1,0 @@
-Boolean type trait to detect types that model [MemorySpace concept](Kokkos%3A%3AMemorySpaceConcept).
