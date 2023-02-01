@@ -44,7 +44,7 @@ IMPL_DETAIL subview(const ViewType& v, Args ... args);
     * `std::pair<iType,iType>` with `std::is_integral<iType>::value` being true.
     * `Kokkos::pair<iType,iType>` with `std::is_integral<iType>::value` being true.
     * `iType` with `std::is_integral<iType>::value` being true.
-    * `decltype(`[`Kokkos::ALL`](KokkosALL)`)`
+    * `std::remove_const_t<decltype(`[`Kokkos::ALL`](KokkosALL)`)>`
   * If the `r`th argument `arg_r` is of type `std::pair<iType,iType>` or `Kokkos::pair<iType,iType>` it must meet:
     * `arg_r.first >= 0`
     * `arg_r.second <= v.extent(r)`
