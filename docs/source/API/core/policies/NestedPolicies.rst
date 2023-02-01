@@ -4,48 +4,53 @@
 .. role:: cppkokkos(code)
     :language: cppkokkos
 
+Header File: ``<Kokkos_Core.hpp>``
+
+List
+----
+
 ``Kokkos::PerTeam``
--------------------
+~~~~~~~~~~~~~~~~~~~
 
 ``Kokkos::PerThread``
----------------------
+~~~~~~~~~~~~~~~~~~~~~
 
 ``Kokkos::TeamThreadRange``
----------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ``Kokkos::TeamThreadMDRange``
------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ``Kokkos::TeamVectorRange``
----------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ``Kokkos::TeamVectorMDRange``
------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ``Kokkos::ThreadVectorRange``
------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ``Kokkos::ThreadVectorMDRange``
--------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Header File: ``<Kokkos_Core.hpp>``
+|
 
 Usage
 ~~~~~
 
-.. code-block:: cppkokkos
+.. code-block:: cpp
 
     parallel_for(TeamThreadRange(team,begin,end), [=] (int i) {});
     parallel_for(ThreadVectorRange(team,begin,end), [=] (int i) {});
     single(PerTeam(team), [=] () {});
     single(PerThread(team), [=] () {});
 
-Nested policies can be used for nested parallel patterns. In contrast to global policies, the public interface for nested policies is implemented as functions, in order to enable implicit templating on the execution space type via the team handle. 
+Nested policies can be used for nested parallel patterns. In contrast to global policies, the public interface for nested policies is implemented as functions, in order to enable implicit templating on the execution space type via the team handle.
 
 Synopsis
 ~~~~~~~~
 
-.. code-block:: cppkokkos
+.. code-block:: cpp
 
     Impl::TeamThreadRangeBoundariesStruct TeamThreadRange(TeamMemberType team, IndexType count);
     Impl::TeamThreadRangeBoundariesStruct TeamThreadRange(TeamMemberType team, IndexType begin, IndexType end);
@@ -61,7 +66,7 @@ Description
 
     Splits the index range ``0`` to ``count-1`` over the threads of the team. This call is potentially a synchronization point for the team, and thus must meet the requirements of ``team_barrier``.
         - ``team``: object meeting the requirements of TeamHandle
-        - ``count``: index range length. 
+        - ``count``: index range length.
 
 .. cppkokkos:function:: Impl::TeamThreadRangeBoundariesStruct TeamThreadRange(TeamMemberType team, IndexType begin, IndexType end);
 
@@ -74,18 +79,18 @@ Description
 
     Splits the index range ``0`` to ``count-1`` over the vector lanes of the calling thread. It is not legal to call this function inside of a vector level loop.
         - ``team``: object meeting the requirements of TeamHandle
-        - ``count``: index range length. 
+        - ``count``: index range length.
 
 .. cppkokkos:function:: Impl::ThreadVectorRangeBoundariesStruct ThreadVectorRange(TeamMemberType team, IndexType begin, IndexType end);
 
     Splits the index range ``begin`` to ``end-1`` over the vector lanes of the calling thread. It is not legal to call this function inside of a vector level loop.
         - ``team``: object meeting the requirements of TeamHandle
-        - ``begin``: start index.        
-        - ``end``: end index. 
+        - ``begin``: start index.
+        - ``end``: end index.
 
 .. cppkokkos:function:: Impl::ThreadSingleStruct PerTeam(TeamMemberType team);
 
-    When used in conjunction with the ``single`` pattern restricts execution to a single vector lane in the calling team. While not a synchronization event, this call must be encountered by the entire team, and thus meet the calling requirements of ``team_barrier``. 
+    When used in conjunction with the ``single`` pattern restricts execution to a single vector lane in the calling team. While not a synchronization event, this call must be encountered by the entire team, and thus meet the calling requirements of ``team_barrier``.
         - ``team``: object meeting the requirements of TeamHandle
 
 .. cppkokkos:function:: Impl::VectorSingleStruct PerThread(TeamMemberType team);
