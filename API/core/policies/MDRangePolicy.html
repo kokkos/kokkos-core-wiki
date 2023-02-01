@@ -465,7 +465,7 @@
         </a>
         <div class="content-icon-container">
 <div class="edit-this-page">
-  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/API/core/policies/MDRangePolicy.md" title="Edit this page">
+  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/API/core/policies/MDRangePolicy.rst" title="Edit this page">
     <svg aria-hidden="true" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
       <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4"></path>
@@ -489,33 +489,35 @@
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="mdrangepolicy">
+          <section id="mdrangepolicy">
 <h1><code class="docutils literal notranslate"><span class="pre">MDRangePolicy</span></code><a class="headerlink" href="#mdrangepolicy" title="Permalink to this heading">#</a></h1>
-<p>Header File: <code class="docutils literal notranslate"><span class="pre">Kokkos_Core.hpp</span></code></p>
-<p>Usage:</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">Kokkos</span><span class="o">::</span><span class="n">MDRangePolicy</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">begin</span><span class="p">,</span><span class="w"> </span><span class="n">end</span><span class="p">)</span>
+<p>Header File: <code class="docutils literal notranslate"><span class="pre">&lt;Kokkos_Core.hpp&gt;</span></code></p>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this heading">#</a></h2>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Kokkos</span><span class="o">::</span><span class="n">MDRangePolicy</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">begin</span><span class="p">,</span><span class="w"> </span><span class="n">end</span><span class="p">)</span>
 <span class="n">Kokkos</span><span class="o">::</span><span class="n">MDRangePolicy</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">Space</span><span class="p">,</span><span class="w"> </span><span class="n">begin</span><span class="p">,</span><span class="w"> </span><span class="n">end</span><span class="p">)</span>
 <span class="n">Kokkos</span><span class="o">::</span><span class="n">MDRangePolicy</span><span class="o">&lt;</span><span class="n">ARGS</span><span class="o">&gt;</span><span class="p">(</span><span class="n">begin</span><span class="p">,</span><span class="w"> </span><span class="n">end</span><span class="p">,</span><span class="w"> </span><span class="n">tiling</span><span class="p">)</span>
 <span class="n">Kokkos</span><span class="o">::</span><span class="n">MDRangePolicy</span><span class="o">&lt;</span><span class="n">ARGS</span><span class="o">&gt;</span><span class="p">(</span><span class="n">Space</span><span class="p">,</span><span class="w"> </span><span class="n">begin</span><span class="p">,</span><span class="w"> </span><span class="n">end</span><span class="p">,</span><span class="w"> </span><span class="n">tiling</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">MDRangePolicy</span></code> defines an execution policy for a multidimensional iteration space starting at a <code class="docutils literal notranslate"><span class="pre">begin</span></code> tuple and going to <code class="docutils literal notranslate"><span class="pre">end</span></code> with an open interval. The iteration space will be tiled, and the user can optionally provide tiling sizes.</p>
+</section>
 <section id="interface">
 <h2>Interface<a class="headerlink" href="#interface" title="Permalink to this heading">#</a></h2>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="n">Args</span><span class="o">&gt;</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="n">Args</span><span class="o">&gt;</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">Kokkos</span><span class="o">::</span><span class="n">MDRangePolicy</span><span class="p">;</span>
 </pre></div>
 </div>
 </section>
 <section id="parameters">
-<h2>Parameters:<a class="headerlink" href="#parameters" title="Permalink to this heading">#</a></h2>
+<h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this heading">#</a></h2>
 <section id="common-arguments-for-all-execution-policies">
 <h3>Common Arguments for all Execution Policies<a class="headerlink" href="#common-arguments-for-all-execution-policies" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Execution Policies generally accept compile time arguments via template parameters and runtime parameters via constructor arguments or setter functions.</p></li>
 <li><p>Template arguments can be given in arbitrary order.</p></li>
 </ul>
-<div class="table-wrapper colwidths-auto docutils container">
+<div class="table-wrapper docutils container">
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Argument</p></th>
@@ -550,58 +552,64 @@
 </section>
 <section id="arguments-specific-to-mdrangepolicy">
 <h3>Arguments Specific to MDRangePolicy<a class="headerlink" href="#arguments-specific-to-mdrangepolicy" title="Permalink to this heading">#</a></h3>
-<ul>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="o">&lt;</span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">Iterate</span><span class="w"> </span><span class="n">outer</span><span class="p">,</span><span class="w"> </span><span class="n">Iterate</span><span class="w"> </span><span class="n">inner</span><span class="o">&gt;</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="o">&lt;</span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">Iterate</span><span class="w"> </span><span class="n">outer</span><span class="p">,</span><span class="w"> </span><span class="n">Iterate</span><span class="w"> </span><span class="n">inner</span><span class="o">&gt;</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">Rank</span><span class="p">;</span>
 </pre></div>
 </div>
-<p>Determines the rank of the index space as well as in which order to iterate over the tiles and how to iterate within the tiles.
-<code class="docutils literal notranslate"><span class="pre">outer</span></code> and <code class="docutils literal notranslate"><span class="pre">inner</span></code> can be <code class="docutils literal notranslate"><span class="pre">Kokkos::Iterate::Default</span></code>, <code class="docutils literal notranslate"><span class="pre">Kokkos::Iterate::Left</span></code>, or <code class="docutils literal notranslate"><span class="pre">Kokkos::Iterate::Right</span></code>.</p>
-</li>
+<ul class="simple">
+<li><p>Determines the rank of the index space as well as in which order to iterate over the tiles and how to iterate within the tiles. <code class="docutils literal notranslate"><span class="pre">outer</span></code> and <code class="docutils literal notranslate"><span class="pre">inner</span></code> can be <code class="docutils literal notranslate"><span class="pre">Kokkos::Iterate::Default</span></code>, <code class="docutils literal notranslate"><span class="pre">Kokkos::Iterate::Left</span></code>, or <code class="docutils literal notranslate"><span class="pre">Kokkos::Iterate::Right</span></code>.</p></li>
 </ul>
-</section>
-<section id="requirements">
-<h3>Requirements:<a class="headerlink" href="#requirements" title="Permalink to this heading">#</a></h3>
 </section>
 </section>
 <section id="public-class-members">
 <h2>Public Class Members<a class="headerlink" href="#public-class-members" title="Permalink to this heading">#</a></h2>
 <section id="constructors">
 <h3>Constructors<a class="headerlink" href="#constructors" title="Permalink to this heading">#</a></h3>
-<ul>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">MDRangePolicy</span><span class="p">()</span>
-</pre></div>
-</div>
-<p>Default Constructor uninitialized policy.</p>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="w"> </span><span class="n">MDRangePolicy</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">Array</span><span class="o">&lt;</span><span class="kt">int64_t</span><span class="p">,</span><span class="n">rank</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">begin</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">Array</span><span class="o">&lt;</span><span class="kt">int64_t</span><span class="p">,</span><span class="n">rank</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">end</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Provide a start and end index.</p>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="w"> </span><span class="n">MDRangePolicy</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">Array</span><span class="o">&lt;</span><span class="kt">int64_t</span><span class="p">,</span><span class="n">rank</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">begin</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">Array</span><span class="o">&lt;</span><span class="kt">int64_t</span><span class="p">,</span><span class="n">rank</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">end</span><span class="p">,</span><span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">Array</span><span class="o">&lt;</span><span class="kt">int64_t</span><span class="p">,</span><span class="n">rank</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">tiling</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Provide a start and end index as well as the tiling dimensions.</p>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="w"> </span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">OT</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">IT</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">TT</span><span class="o">&gt;</span>
-<span class="w"> </span><span class="n">MDRangePolicy</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">initializer_list</span><span class="o">&lt;</span><span class="n">OT</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">begin</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">initializer_list</span><span class="o">&lt;</span><span class="n">IT</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">end</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Provide a start and end index. The length of the lists must match the rank of the policy.</p>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="w"> </span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">OT</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">IT</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">TT</span><span class="o">&gt;</span>
-<span class="w"> </span><span class="n">MDRangePolicy</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">initializer_list</span><span class="o">&lt;</span><span class="n">OT</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">begin</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">initializer_list</span><span class="o">&lt;</span><span class="n">IT</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">end</span><span class="p">,</span><span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">initializer_list</span><span class="o">&lt;</span><span class="n">TT</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">tiling</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Provide a start and end index as well as the tiling dimensions. The length of the lists must match the rank of the policy.</p>
-</li>
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv413MDRangePolicyv">
+<span id="_CPPv313MDRangePolicyv"></span><span id="_CPPv213MDRangePolicyv"></span><span id="MDRangePolicy"></span><span class="sig-name descname"><span class="n"><span class="pre">MDRangePolicy</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv413MDRangePolicyv" title="Permalink to this definition">#</a><br /></dt>
+<dd><ul class="simple">
+<li><p>Default Constructor uninitialized policy.</p></li>
 </ul>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv413MDRangePolicyRKN6Kokkos5ArrayI7int64_t4rankEERKN6Kokkos5ArrayI7int64_t4rankEE">
+<span id="_CPPv313MDRangePolicyRKN6Kokkos5ArrayI7int64_t4rankEERKN6Kokkos5ArrayI7int64_t4rankEE"></span><span id="_CPPv213MDRangePolicyRKN6Kokkos5ArrayI7int64_t4rankEERKN6Kokkos5ArrayI7int64_t4rankEE"></span><span id="MDRangePolicy__Kokkos::Array:int64_t.rank:CR.Kokkos::Array:int64_t.rank:CR"></span><span class="sig-name descname"><span class="n"><span class="pre">MDRangePolicy</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">Kokkos</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Array</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">int64_t</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">rank</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">begin</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">Kokkos</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Array</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">int64_t</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">rank</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">end</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv413MDRangePolicyRKN6Kokkos5ArrayI7int64_t4rankEERKN6Kokkos5ArrayI7int64_t4rankEE" title="Permalink to this definition">#</a><br /></dt>
+<dd><ul class="simple">
+<li><p>Provide a start and end index.</p></li>
+</ul>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv413MDRangePolicyRKN6Kokkos5ArrayI7int64_t4rankEERKN6Kokkos5ArrayI7int64_t4rankEERKN6Kokkos5ArrayI7int64_t4rankEE">
+<span id="_CPPv313MDRangePolicyRKN6Kokkos5ArrayI7int64_t4rankEERKN6Kokkos5ArrayI7int64_t4rankEERKN6Kokkos5ArrayI7int64_t4rankEE"></span><span id="_CPPv213MDRangePolicyRKN6Kokkos5ArrayI7int64_t4rankEERKN6Kokkos5ArrayI7int64_t4rankEERKN6Kokkos5ArrayI7int64_t4rankEE"></span><span id="MDRangePolicy__Kokkos::Array:int64_t.rank:CR.Kokkos::Array:int64_t.rank:CR.Kokkos::Array:int64_t.rank:CR"></span><span class="sig-name descname"><span class="n"><span class="pre">MDRangePolicy</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">Kokkos</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Array</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">int64_t</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">rank</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">begin</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">Kokkos</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Array</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">int64_t</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">rank</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">end</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">Kokkos</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Array</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">int64_t</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">rank</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">tiling</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv413MDRangePolicyRKN6Kokkos5ArrayI7int64_t4rankEERKN6Kokkos5ArrayI7int64_t4rankEERKN6Kokkos5ArrayI7int64_t4rankEE" title="Permalink to this definition">#</a><br /></dt>
+<dd><ul class="simple">
+<li><p>Provide a start and end index as well as the tiling dimensions.</p></li>
+</ul>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4I000E13MDRangePolicyRKNSt16initializer_listI2OTEERKNSt16initializer_listI2ITEE">
+<span id="_CPPv3I000E13MDRangePolicyRKNSt16initializer_listI2OTEERKNSt16initializer_listI2ITEE"></span><span id="_CPPv2I000E13MDRangePolicyRKNSt16initializer_listI2OTEERKNSt16initializer_listI2ITEE"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">OT</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">IT</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TT</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="sig-name descname"><span class="n"><span class="pre">MDRangePolicy</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">initializer_list</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I000E13MDRangePolicyRKNSt16initializer_listI2OTEERKNSt16initializer_listI2ITEE" title="MDRangePolicy::OT"><span class="n"><span class="pre">OT</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">begin</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">initializer_list</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I000E13MDRangePolicyRKNSt16initializer_listI2OTEERKNSt16initializer_listI2ITEE" title="MDRangePolicy::IT"><span class="n"><span class="pre">IT</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">end</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I000E13MDRangePolicyRKNSt16initializer_listI2OTEERKNSt16initializer_listI2ITEE" title="Permalink to this definition">#</a><br /></dt>
+<dd><ul class="simple">
+<li><p>Provide a start and end index. The length of the lists must match the rank of the policy.</p></li>
+</ul>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4I000E13MDRangePolicyRKNSt16initializer_listI2OTEERKNSt16initializer_listI2ITEERNSt16initializer_listI2TTEE">
+<span id="_CPPv3I000E13MDRangePolicyRKNSt16initializer_listI2OTEERKNSt16initializer_listI2ITEERNSt16initializer_listI2TTEE"></span><span id="_CPPv2I000E13MDRangePolicyRKNSt16initializer_listI2OTEERKNSt16initializer_listI2ITEERNSt16initializer_listI2TTEE"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">OT</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">IT</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TT</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="sig-name descname"><span class="n"><span class="pre">MDRangePolicy</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">initializer_list</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I000E13MDRangePolicyRKNSt16initializer_listI2OTEERKNSt16initializer_listI2ITEERNSt16initializer_listI2TTEE" title="MDRangePolicy::OT"><span class="n"><span class="pre">OT</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">begin</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">initializer_list</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I000E13MDRangePolicyRKNSt16initializer_listI2OTEERKNSt16initializer_listI2ITEERNSt16initializer_listI2TTEE" title="MDRangePolicy::IT"><span class="n"><span class="pre">IT</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">end</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">initializer_list</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I000E13MDRangePolicyRKNSt16initializer_listI2OTEERKNSt16initializer_listI2ITEERNSt16initializer_listI2TTEE" title="MDRangePolicy::TT"><span class="n"><span class="pre">TT</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">tiling</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I000E13MDRangePolicyRKNSt16initializer_listI2OTEERKNSt16initializer_listI2ITEERNSt16initializer_listI2TTEE" title="Permalink to this definition">#</a><br /></dt>
+<dd><ul class="simple">
+<li><p>Provide a start and end index as well as the tiling dimensions. The length of the lists must match the rank of the policy.</p></li>
+</ul>
+</dd></dl>
+
 </section>
 </section>
 <section id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading">#</a></h2>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">MDRangePolicy</span><span class="o">&lt;</span><span class="n">Rank</span><span class="o">&lt;</span><span class="mi">3</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">policy_1</span><span class="p">({</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">},{</span><span class="n">N0</span><span class="p">,</span><span class="n">N1</span><span class="p">,</span><span class="n">N2</span><span class="p">});</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">MDRangePolicy</span><span class="o">&lt;</span><span class="n">Rank</span><span class="o">&lt;</span><span class="mi">3</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">policy_1</span><span class="p">({</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">},{</span><span class="n">N0</span><span class="p">,</span><span class="n">N1</span><span class="p">,</span><span class="n">N2</span><span class="p">});</span>
 <span class="n">MDRangePolicy</span><span class="o">&lt;</span><span class="n">Cuda</span><span class="p">,</span><span class="n">Rank</span><span class="o">&lt;</span><span class="mi">3</span><span class="p">,</span><span class="n">Iterate</span><span class="o">::</span><span class="n">Right</span><span class="p">,</span><span class="n">Iterate</span><span class="o">::</span><span class="n">Left</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">policy_2</span><span class="p">({</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">},{</span><span class="n">N0</span><span class="mi">-5</span><span class="p">,</span><span class="n">N1</span><span class="mi">-5</span><span class="p">,</span><span class="n">N2</span><span class="mi">-5</span><span class="p">},{</span><span class="n">T0</span><span class="p">,</span><span class="n">T1</span><span class="p">,</span><span class="n">T2</span><span class="p">});</span>
 </pre></div>
 </div>
@@ -666,11 +674,11 @@
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">MDRangePolicy</span></code></a><ul>
+<li><a class="reference internal" href="#usage">Usage</a></li>
 <li><a class="reference internal" href="#interface">Interface</a></li>
-<li><a class="reference internal" href="#parameters">Parameters:</a><ul>
+<li><a class="reference internal" href="#parameters">Parameters</a><ul>
 <li><a class="reference internal" href="#common-arguments-for-all-execution-policies">Common Arguments for all Execution Policies</a></li>
 <li><a class="reference internal" href="#arguments-specific-to-mdrangepolicy">Arguments Specific to MDRangePolicy</a></li>
-<li><a class="reference internal" href="#requirements">Requirements:</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#public-class-members">Public Class Members</a><ul>
