@@ -33,75 +33,140 @@ Usage
     a.template modify<typename ViewType::host_mirror_space>();
     a.template sync<typename ViewType::execution_space>();
 
+Public Class Members
+--------------------
+
+.. cppkokkos:class:: DualView
+
+    All elements are ``public:``
+
+Typedefs
+~~~~~~~~
+
+* ``traits``: Typedefs for device types and various ``Kokkos::View`` specializations.
+* ``host_mirror_space``: The Kokkos Host Device type;
+* ``t_dev``: The type of a ``Kokkos::View`` on the device.
+* ``t_host``: The type of a ``Kokkos::View`` host mirror of ``t_dev``.
+* ``t_dev_const``: The type of a const View on the device.
+* ``t_host_const``: The type of a const View host mirror of ``t_dev_const``.
+* ``t_dev_const_randomread``: The type of a const, random-access View on the device.
+* ``t_host_const_randomread``: The type of a const, random-access View host mirror of ``t_dev_const_randomread``.
+* ``t_dev_um``: The type of an unmanaged View on the device.
+* ``t_host_um``: The type of an unmanaged View host mirror of \\c t_dev_um.
+* ``t_dev_const_um``: The type of a const unmanaged View on the device.
+* ``t_host_const_um``: The type of a const unmanaged View host mirror of \\c t_dev_const_um.
+* ``t_dev_const_randomread_um``: The type of a const, random-access View on the device.
+* ``t_host_const_randomread_um``: The type of a const, random-access View host mirror of ``t_dev_const_randomread``.
+
+Constructors
+~~~~~~~~~~~~
+
+.. cppkokkos:function:: DualView();
+
+    * Empty constructor.
+    * Both device and host View objects are constructed using their default constructors. The "modified" flags are both initialized to "unmodified."
+
+.. cppkokkos:function:: DualView(const std::string& label, const size_t n0 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n1 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n2 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n3 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n4 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n5 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n6 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n7 = KOKKOS_IMPL_CTOR_DEFAULT_ARG);
+
+    * Constructor that allocates View objects on both host and device.
+    * This constructor works like the analogous constructor of View. The first argument is a string label, which is entirely for your benefit. (Different DualView objects may have the same label if you like.) The arguments that follow are the dimensions of the View objects. For example, if the View has three dimensions, the first three integer arguments will be nonzero, and you may omit the integer arguments that follow.
+
+.. cppkokkos:function:: DualView(const Impl::ViewCtorProp<P...>& arg_prop, typename std::enable_if<!Impl::ViewCtorProp<P...>::has_pointer, size_t>::type const n0 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n1 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n2 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n3 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n4 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n5 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n6 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n7 = KOKKOS_IMPL_CTOR_DEFAULT_ARG);
+
+    * Constructor that allocates View objects on both host and device.                                                                                                                                                                
+    * This constructor works like the analogous constructor of View. The first arguments are wrapped up in a ViewCtor class, this allows for a label, without initializing, and all of the other things that can be wrapped up in a Ctor class. The arguments that follow are the dimensions of the View objects. For example, if the View has three dimensions, the first three integer arguments will be nonzero, and you may omit the integer arguments that follow.                                                                                                                                                                                                
+
+.. cppkokkos:function:: DualView(const DualView<SS, LS, DS, MS>& src);
+
+    * Copy constructor (shallow copy)
+
+.. cppkokkos:function:: DualView(const DualView<SD, S1, S2, S3>& src, const Arg0& arg0, Args... args);
+
+    * Subview constructor
+
+[W.I.P.]
+
+Functions
+~~~~~~~~~
+
+[W.I.P.]
+
+Additional Information
+~~~~~~~~~~~~~~~~~~~~~~
+
+[W.I.P.]
+
+==========================================================
+
 Synopsis
 --------
 
 .. code-block:: cpp
 
-    template <class DataType, class Arg1Type = void, class Arg2Type = void,
-              class Arg3Type = void>
-    class DualView : public ViewTraits<DataType, Arg1Type, Arg2Type, Arg3Type> {
+    [X]template <class DataType, class Arg1Type = void, class Arg2Type = void,
+              [X]class Arg3Type = void>
+    [X]class DualView : public ViewTraits<DataType, Arg1Type, Arg2Type, Arg3Type> {
 
-        public:
-            // Typedefs for device types and various Kokkos::View specializations.
-            typedef ViewTraits<DataType, Arg1Type, Arg2Type, Arg3Type> traits;
+        [X]public:
+            [X]// Typedefs for device types and various Kokkos::View specializations.
+            [X]typedef ViewTraits<DataType, Arg1Type, Arg2Type, Arg3Type> traits;
 
-            // The Kokkos Host Device type;
-            typedef typename traits::host_mirror_space host_mirror_space;
+            [X]// The Kokkos Host Device type;
+            [X]typedef typename traits::host_mirror_space host_mirror_space;
 
-            // The type of a Kokkos::View on the device.
-            typedef View<typename traits::data_type, Arg1Type, Arg2Type, Arg3Type> t_dev;
+            [X]// The type of a Kokkos::View on the device.
+            [X]typedef View<typename traits::data_type, Arg1Type, Arg2Type, Arg3Type> t_dev;
 
-            // The type of a Kokkos::View host mirror of `t_dev`.
-            typedef typename t_dev::HostMirror t_host;
+            [X]// The type of a Kokkos::View host mirror of `t_dev`.
+            [X]typedef typename t_dev::HostMirror t_host;
 
-            // The type of a const View on the device.
-            typedef View<typename traits::const_data_type, Arg1Type, Arg2Type, Arg3Type>
-                t_dev_const;
+            [X]// The type of a const View on the device.
+            [X]typedef View<typename traits::const_data_type, Arg1Type, Arg2Type, Arg3Type>
+                [X]t_dev_const;
 
-            // The type of a const View host mirror of `t_dev_const`.
-            typedef typename t_dev_const::HostMirror t_host_const;
+            [X]// The type of a const View host mirror of `t_dev_const`.
+            [X]typedef typename t_dev_const::HostMirror t_host_const;
 
-            // The type of a const, random-access View on the device.
-            typedef View<typename traits::const_data_type, typename traits::array_layout,
-                         typename traits::device_type,
-                         Kokkos::MemoryTraits<Kokkos::RandomAccess> >
-                t_dev_const_randomread;
+            [X]// The type of a const, random-access View on the device.
+            [X]typedef View<typename traits::const_data_type, typename traits::array_layout,
+                         [X]typename traits::device_type,
+                         [X]Kokkos::MemoryTraits<Kokkos::RandomAccess> >
+                [X]t_dev_const_randomread;
 
-            //The type of a const, random-access View host mirror of
-            //`t_dev_const_randomread`.
-            typedef typename t_dev_const_randomread::HostMirror t_host_const_randomread;
+            [X]//The type of a const, random-access View host mirror of
+            [X]//`t_dev_const_randomread`.
+            [X]typedef typename t_dev_const_randomread::HostMirror t_host_const_randomread;
 
-            // The type of an unmanaged View on the device.
-            typedef View<typename traits::data_type, typename traits::array_layout,
-                         typename traits::device_type, MemoryUnmanaged>
-                t_dev_um;
+            [X]// The type of an unmanaged View on the device.
+            [X]typedef View<typename traits::data_type, typename traits::array_layout,
+                         [X]typename traits::device_type, MemoryUnmanaged>
+                [X]t_dev_um;
 
-            // The type of an unmanaged View host mirror of \c t_dev_um.
-            typedef View<typename t_host::data_type, typename t_host::array_layout,
-                         typename t_host::device_type, MemoryUnmanaged>
-                t_host_um;
+            [X]// The type of an unmanaged View host mirror of \c t_dev_um.
+            [X]typedef View<typename t_host::data_type, typename t_host::array_layout,
+                         [X]typename t_host::device_type, MemoryUnmanaged>
+                [X]t_host_um;
 
-            // The type of a const unmanaged View on the device.
-            typedef View<typename traits::const_data_type, typename traits::array_layout,
-                         typename traits::device_type, MemoryUnmanaged>
-                t_dev_const_um;
+            [X]// The type of a const unmanaged View on the device.
+            [X]typedef View<typename traits::const_data_type, typename traits::array_layout,
+                         [X]typename traits::device_type, MemoryUnmanaged>
+                [X]t_dev_const_um;
 
-            // The type of a const unmanaged View host mirror of \c t_dev_const_um.
-            typedef View<typename t_host::const_data_type, typename t_host::array_layout,
-                         typename t_host::device_type, MemoryUnmanaged>
-                t_host_const_um;
+            [X]// The type of a const unmanaged View host mirror of \c t_dev_const_um.
+            [X]typedef View<typename t_host::const_data_type, typename t_host::array_layout,
+                         [X]typename t_host::device_type, MemoryUnmanaged>
+                [X]t_host_const_um;
 
-            // The type of a const, random-access View on the device.
-            typedef View<typename t_host::const_data_type, typename t_host::array_layout,
-                         typename t_host::device_type,
-                         Kokkos::MemoryTraits<Kokkos::Unmanaged | Kokkos::RandomAccess> >
-                t_dev_const_randomread_um;
+            [X]// The type of a const, random-access View on the device.
+            [X]typedef View<typename t_host::const_data_type, typename t_host::array_layout,
+                         [X]typename t_host::device_type,
+                         [X]Kokkos::MemoryTraits<Kokkos::Unmanaged | Kokkos::RandomAccess> >
+                [X]t_dev_const_randomread_um;
 
-            //The type of a const, random-access View host mirror of
-            //`t_dev_const_randomread`.
-            typedef
-                typename t_dev_const_randomread::HostMirror t_host_const_randomread_um;
+            [X]//The type of a const, random-access View host mirror of
+            [X]//`t_dev_const_randomread`.
+            [X]typedef
+                [X]typename t_dev_const_randomread::HostMirror t_host_const_randomread_um;
 
             // The two View instances.
             t_dev d_view;
@@ -116,65 +181,65 @@ Synopsis
             t_modified_flags modified_flags;
             t_modified_flag modified_host, modified_device;
 
-            // Constructors
+            [X]// Constructors
 
-            // Empty constructor.
-            //
-            // Both device and host View objects are constructed using their
-            // default constructors.  The "modified" flags are both initialized
-            // to "unmodified."
-            DualView();
+            [X]// Empty constructor.
+            [X]//
+            [X]// Both device and host View objects are constructed using their
+            [X]// default constructors.  The "modified" flags are both initialized
+            [X]// to "unmodified."
+            [X]DualView();
 
-            // Constructor that allocates View objects on both host and device.
-            //
-            // This constructor works like the analogous constructor of View.
-            // The first argument is a string label, which is entirely for your
-            // benefit.  (Different DualView objects may have the same label if
-            // you like.)  The arguments that follow are the dimensions of the
-            // View objects.  For example, if the View has three dimensions,
-            // the first three integer arguments will be nonzero, and you may
-            // omit the integer arguments that follow.
-            DualView(const std::string& label,
-                     const size_t n0 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
-                     const size_t n1 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
-                     const size_t n2 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
-                     const size_t n3 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
-                     const size_t n4 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
-                     const size_t n5 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
-                     const size_t n6 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
-                     const size_t n7 = KOKKOS_IMPL_CTOR_DEFAULT_ARG);
+            [X]// Constructor that allocates View objects on both host and device.
+            [X]//
+            [X]// This constructor works like the analogous constructor of View.
+            [X]// The first argument is a string label, which is entirely for your
+            [X]// benefit. (Different DualView objects may have the same label if
+            [X]// you like.) The arguments that follow are the dimensions of the
+            [X]// View objects. For example, if the View has three dimensions,
+            [X]// the first three integer arguments will be nonzero, and you may
+            [X]// omit the integer arguments that follow.
+            [X]DualView(const std::string& label,
+                     [X]const size_t n0 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
+                     [X]const size_t n1 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
+                     [X]const size_t n2 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
+                     [X]const size_t n3 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
+                     [X]const size_t n4 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
+                     [X]const size_t n5 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
+                     [X]const size_t n6 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
+                     [X]const size_t n7 = KOKKOS_IMPL_CTOR_DEFAULT_ARG);
 
                                                                                                                                                                                                                                                         
-            /// Constructor that allocates View objects on both host and device.                                                                                                                                                                
-            ///                                                                                                                                                                                                                                        
-            /// This constructor works like the analogous constructor of View.                                                                                                                                                                         
-            /// The first arguments are wrapped up in a ViewCtor class, this allows                                                                                                                                                                    
-            /// for a label, without initializing, and all of the other things that can                                                                                                                                                                
-            /// be wrapped up in a Ctor class.                                                                                                                                                                                                         
-            /// The arguments that follow are the dimensions of the                                                                                                                                                                                    
-            /// View objects.  For example, if the View has three dimensions,                                                                                                                                                                          
-            /// the first three integer arguments will be nonzero, and you may                                                                                                                                                                         
-            /// omit the integer arguments that follow.                                                                                                                                                                                                
-            template <class... P>                                                                                                                                                                                                                      
-            DualView(const Impl::ViewCtorProp<P...>& arg_prop,                                                                                                                                                                                         
-                     typename std::enable_if<!Impl::ViewCtorProp<P...>::has_pointer,                                                                                                                                                                   
-                                             size_t>::type const n0 =                                                                                                                                                                                  
-                         KOKKOS_IMPL_CTOR_DEFAULT_ARG,                                                                                                                                                                                                 
-                     const size_t n1 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,                                                                                                                                                                                   
-                     const size_t n2 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,                                                                                                                                                                                   
-                     const size_t n3 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,                                                                                                                                                                                   
-                     const size_t n4 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,                                                                                                                                                                                   
-                     const size_t n5 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,                                                                                                                                                                                   
-                     const size_t n6 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,                                                                                                                                                                                   
-                     const size_t n7 = KOKKOS_IMPL_CTOR_DEFAULT_ARG);
+            [X]/// Constructor that allocates View objects on both host and device.                                                                                                                                                                
+            [X]///                                                                                                                                                                                                                                        
+            [X]/// This constructor works like the analogous constructor of View.                                                                                                                                                                         
+            [X]/// The first arguments are wrapped up in a ViewCtor class, this allows                                                                                                                                                                    
+            [X]/// for a label, without initializing, and all of the other things that can                                                                                                                                                                
+            [X]/// be wrapped up in a Ctor class.                                                                                                                                                                                                         
+            [X]/// The arguments that follow are the dimensions of the                                                                                                                                                                                    
+            [X]/// View objects.  For example, if the View has three dimensions,                                                                                                                                                                          
+            [X]/// the first three integer arguments will be nonzero, and you may                                                                                                                                                                         
+            [X]/// omit the integer arguments that follow.                                                                                                                                                                                                
+            [X]template <class... P>                                                                                                                                                                                                                      
+            [X]DualView(const Impl::ViewCtorProp<P...>& arg_prop,                                                                                                                                                                                         
+                     [X]typename std::enable_if<!Impl::ViewCtorProp<P...>::has_pointer,                                                                                                                                                                   
+                                             [X]size_t>::type const n0 =                                                                                                                                                                                  
+                         [X]KOKKOS_IMPL_CTOR_DEFAULT_ARG,                                                                                                                                                                                                 
+                     [X]const size_t n1 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,                                                                                                                                                                                   
+                     [X]const size_t n2 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,                                                                                                                                                                                   
+                     [X]const size_t n3 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,                                                                                                                                                                                   
+                     [X]const size_t n4 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,                                                                                                                                                                                   
+                     [X]const size_t n5 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,                                                                                                                                                                                   
+                     [X]const size_t n6 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,                                                                                                                                                                                   
+                     [X]const size_t n7 = KOKKOS_IMPL_CTOR_DEFAULT_ARG);
 
-            // Copy constructor (shallow copy)
-            template <class SS, class LS, class DS, class MS>
-            DualView(const DualView<SS, LS, DS, MS>& src);
+            [X]// Copy constructor (shallow copy)
+            [X]template <class SS, class LS, class DS, class MS>
+            [X]DualView(const DualView<SS, LS, DS, MS>& src);
 
-            // Subview constructor
-            template <class SD, class S1, class S2, class S3, class Arg0, class... Args>
-            DualView(const DualView<SD, S1, S2, S3>& src, const Arg0& arg0, Args... args);
+            [X]// Subview constructor
+            [X]template <class SD, class S1, class S2, class S3, class Arg0, class... Args>
+            [X]DualView(const DualView<SD, S1, S2, S3>& src, const Arg0& arg0, Args... args);
 
 
             // Create DualView from existing device and host View objects.
