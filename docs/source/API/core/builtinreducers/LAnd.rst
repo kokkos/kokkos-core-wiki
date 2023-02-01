@@ -1,9 +1,6 @@
 ``LAnd``
 ========
 
-.. role::cpp(code)
-    :language: cpp
-
 .. role:: cppkokkos(code)
     :language: cppkokkos
 
