@@ -465,7 +465,7 @@
         </a>
         <div class="content-icon-container">
 <div class="edit-this-page">
-  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/API/core/policies/NestedPolicies.md" title="Edit this page">
+  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/API/core/policies/NestedPolicies.rst" title="Edit this page">
     <svg aria-hidden="true" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
       <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4"></path>
@@ -489,45 +489,51 @@
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="nestedpolicies">
+          <section id="nestedpolicies">
 <h1><code class="docutils literal notranslate"><span class="pre">NestedPolicies</span></code><a class="headerlink" href="#nestedpolicies" title="Permalink to this heading">#</a></h1>
+<p>Header File: <code class="docutils literal notranslate"><span class="pre">&lt;Kokkos_Core.hpp&gt;</span></code></p>
+<section id="list">
+<h2>List<a class="headerlink" href="#list" title="Permalink to this heading">#</a></h2>
 <section id="kokkos-perteam">
-<span id="perteam"></span><h2><code class="docutils literal notranslate"><span class="pre">Kokkos::PerTeam</span></code><a class="headerlink" href="#kokkos-perteam" title="Permalink to this heading">#</a></h2>
+<h3><code class="docutils literal notranslate"><span class="pre">Kokkos::PerTeam</span></code><a class="headerlink" href="#kokkos-perteam" title="Permalink to this heading">#</a></h3>
 </section>
 <section id="kokkos-perthread">
-<span id="perthread"></span><h2><code class="docutils literal notranslate"><span class="pre">Kokkos::PerThread</span></code><a class="headerlink" href="#kokkos-perthread" title="Permalink to this heading">#</a></h2>
+<h3><code class="docutils literal notranslate"><span class="pre">Kokkos::PerThread</span></code><a class="headerlink" href="#kokkos-perthread" title="Permalink to this heading">#</a></h3>
 </section>
 <section id="kokkos-teamthreadrange">
-<span id="teamthreadrange"></span><h2><code class="docutils literal notranslate"><span class="pre">Kokkos::TeamThreadRange</span></code><a class="headerlink" href="#kokkos-teamthreadrange" title="Permalink to this heading">#</a></h2>
+<h3><code class="docutils literal notranslate"><span class="pre">Kokkos::TeamThreadRange</span></code><a class="headerlink" href="#kokkos-teamthreadrange" title="Permalink to this heading">#</a></h3>
 </section>
 <section id="kokkos-teamthreadmdrange">
-<span id="teamthreadmdrange"></span><h2><code class="docutils literal notranslate"><span class="pre">Kokkos::TeamThreadMDRange</span></code><a class="headerlink" href="#kokkos-teamthreadmdrange" title="Permalink to this heading">#</a></h2>
+<h3><code class="docutils literal notranslate"><span class="pre">Kokkos::TeamThreadMDRange</span></code><a class="headerlink" href="#kokkos-teamthreadmdrange" title="Permalink to this heading">#</a></h3>
 </section>
 <section id="kokkos-teamvectorrange">
-<span id="teamvectorrange"></span><h2><code class="docutils literal notranslate"><span class="pre">Kokkos::TeamVectorRange</span></code><a class="headerlink" href="#kokkos-teamvectorrange" title="Permalink to this heading">#</a></h2>
+<h3><code class="docutils literal notranslate"><span class="pre">Kokkos::TeamVectorRange</span></code><a class="headerlink" href="#kokkos-teamvectorrange" title="Permalink to this heading">#</a></h3>
 </section>
 <section id="kokkos-teamvectormdrange">
-<span id="teamvectormdrange"></span><h2><code class="docutils literal notranslate"><span class="pre">Kokkos::TeamVectorMDRange</span></code><a class="headerlink" href="#kokkos-teamvectormdrange" title="Permalink to this heading">#</a></h2>
+<h3><code class="docutils literal notranslate"><span class="pre">Kokkos::TeamVectorMDRange</span></code><a class="headerlink" href="#kokkos-teamvectormdrange" title="Permalink to this heading">#</a></h3>
 </section>
 <section id="kokkos-threadvectorrange">
-<span id="threadvectorrange"></span><h2><code class="docutils literal notranslate"><span class="pre">Kokkos::ThreadVectorRange</span></code><a class="headerlink" href="#kokkos-threadvectorrange" title="Permalink to this heading">#</a></h2>
+<h3><code class="docutils literal notranslate"><span class="pre">Kokkos::ThreadVectorRange</span></code><a class="headerlink" href="#kokkos-threadvectorrange" title="Permalink to this heading">#</a></h3>
 </section>
 <section id="kokkos-threadvectormdrange">
-<span id="threadvectormdrange"></span><h2><code class="docutils literal notranslate"><span class="pre">Kokkos::ThreadVectorMDRange</span></code><a class="headerlink" href="#kokkos-threadvectormdrange" title="Permalink to this heading">#</a></h2>
-<p>Header File: <code class="docutils literal notranslate"><span class="pre">Kokkos_Core.hpp</span></code></p>
-<p>Usage:</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">parallel_for</span><span class="p">(</span><span class="n">TeamThreadRange</span><span class="p">(</span><span class="n">team</span><span class="p">,</span><span class="n">begin</span><span class="p">,</span><span class="n">end</span><span class="p">),</span><span class="w"> </span><span class="p">[</span><span class="o">=</span><span class="p">]</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{});</span>
+<h3><code class="docutils literal notranslate"><span class="pre">Kokkos::ThreadVectorMDRange</span></code><a class="headerlink" href="#kokkos-threadvectormdrange" title="Permalink to this heading">#</a></h3>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+<section id="usage">
+<h3>Usage<a class="headerlink" href="#usage" title="Permalink to this heading">#</a></h3>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">parallel_for</span><span class="p">(</span><span class="n">TeamThreadRange</span><span class="p">(</span><span class="n">team</span><span class="p">,</span><span class="n">begin</span><span class="p">,</span><span class="n">end</span><span class="p">),</span><span class="w"> </span><span class="p">[</span><span class="o">=</span><span class="p">]</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{});</span>
 <span class="n">parallel_for</span><span class="p">(</span><span class="n">ThreadVectorRange</span><span class="p">(</span><span class="n">team</span><span class="p">,</span><span class="n">begin</span><span class="p">,</span><span class="n">end</span><span class="p">),</span><span class="w"> </span><span class="p">[</span><span class="o">=</span><span class="p">]</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{});</span>
 <span class="n">single</span><span class="p">(</span><span class="n">PerTeam</span><span class="p">(</span><span class="n">team</span><span class="p">),</span><span class="w"> </span><span class="p">[</span><span class="o">=</span><span class="p">]</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{});</span>
 <span class="n">single</span><span class="p">(</span><span class="n">PerThread</span><span class="p">(</span><span class="n">team</span><span class="p">),</span><span class="w"> </span><span class="p">[</span><span class="o">=</span><span class="p">]</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{});</span>
 </pre></div>
 </div>
-<p>Nested policies can be used for nested parallel patterns. In contrast to global policies, the public
-interface for nested policies is implemented as functions, in order to enable implicit templating on
-the execution space type via the team handle.</p>
+<p>Nested policies can be used for nested parallel patterns. In contrast to global policies, the public interface for nested policies is implemented as functions, in order to enable implicit templating on the execution space type via the team handle.</p>
+</section>
 <section id="synopsis">
 <h3>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this heading">#</a></h3>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">Impl</span><span class="o">::</span><span class="n">TeamThreadRangeBoundariesStruct</span><span class="w"> </span><span class="nf">TeamThreadRange</span><span class="p">(</span><span class="n">TeamMemberType</span><span class="w"> </span><span class="n">team</span><span class="p">,</span><span class="w"> </span><span class="n">IndexType</span><span class="w"> </span><span class="n">count</span><span class="p">);</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Impl</span><span class="o">::</span><span class="n">TeamThreadRangeBoundariesStruct</span><span class="w"> </span><span class="nf">TeamThreadRange</span><span class="p">(</span><span class="n">TeamMemberType</span><span class="w"> </span><span class="n">team</span><span class="p">,</span><span class="w"> </span><span class="n">IndexType</span><span class="w"> </span><span class="n">count</span><span class="p">);</span>
 <span class="n">Impl</span><span class="o">::</span><span class="n">TeamThreadRangeBoundariesStruct</span><span class="w"> </span><span class="nf">TeamThreadRange</span><span class="p">(</span><span class="n">TeamMemberType</span><span class="w"> </span><span class="n">team</span><span class="p">,</span><span class="w"> </span><span class="n">IndexType</span><span class="w"> </span><span class="n">begin</span><span class="p">,</span><span class="w"> </span><span class="n">IndexType</span><span class="w"> </span><span class="n">end</span><span class="p">);</span>
 <span class="n">Impl</span><span class="o">::</span><span class="n">ThreadVectorRangeBoundariesStruct</span><span class="w"> </span><span class="nf">ThreadVectorRange</span><span class="p">(</span><span class="n">TeamMemberType</span><span class="w"> </span><span class="n">team</span><span class="p">,</span><span class="w"> </span><span class="n">IndexType</span><span class="w"> </span><span class="n">count</span><span class="p">);</span>
 <span class="n">Impl</span><span class="o">::</span><span class="n">ThreadVectorRangeBoundariesStruct</span><span class="w"> </span><span class="nf">ThreadVectorRange</span><span class="p">(</span><span class="n">TeamMemberType</span><span class="w"> </span><span class="n">team</span><span class="p">,</span><span class="w"> </span><span class="n">IndexType</span><span class="w"> </span><span class="n">begin</span><span class="p">,</span><span class="w"> </span><span class="n">IndexType</span><span class="w"> </span><span class="n">end</span><span class="p">);</span>
@@ -538,92 +544,101 @@ the execution space type via the team handle.</p>
 </section>
 <section id="description">
 <h3>Description<a class="headerlink" href="#description" title="Permalink to this heading">#</a></h3>
-<ul>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">Impl</span><span class="o">::</span><span class="n">TeamThreadRangeBoundariesStruct</span><span class="w"> </span><span class="nf">TeamThreadRange</span><span class="p">(</span><span class="n">TeamMemberType</span><span class="w"> </span><span class="n">team</span><span class="p">,</span><span class="w"> </span><span class="n">IndexType</span><span class="w"> </span><span class="n">count</span><span class="p">);</span>
-</pre></div>
-</div>
-<p>Splits the index range <code class="docutils literal notranslate"><span class="pre">0</span></code> to <code class="docutils literal notranslate"><span class="pre">count-1</span></code> over the threads of the team. This call is potentially a
-synchronization point for the team, and thus must meet the requirements of <code class="docutils literal notranslate"><span class="pre">team_barrier</span></code>.</p>
-<ul class="simple">
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv415TeamThreadRange14TeamMemberType9IndexType">
+<span id="_CPPv315TeamThreadRange14TeamMemberType9IndexType"></span><span id="_CPPv215TeamThreadRange14TeamMemberType9IndexType"></span><span id="TeamThreadRange__TeamMemberType.IndexType"></span><span class="n"><span class="pre">Impl</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">TeamThreadRangeBoundariesStruct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TeamThreadRange</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">TeamMemberType</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">team</span></span>, <span class="n"><span class="pre">IndexType</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">count</span></span><span class="sig-paren">)</span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv415TeamThreadRange14TeamMemberType9IndexType" title="Permalink to this definition">#</a><br /></dt>
+<dd><dl class="simple">
+<dt>Splits the index range <code class="docutils literal notranslate"><span class="pre">0</span></code> to <code class="docutils literal notranslate"><span class="pre">count-1</span></code> over the threads of the team. This call is potentially a synchronization point for the team, and thus must meet the requirements of <code class="docutils literal notranslate"><span class="pre">team_barrier</span></code>.</dt><dd><ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">team</span></code>: object meeting the requirements of TeamHandle</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">count</span></code>: index range length.</p></li>
 </ul>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">Impl</span><span class="o">::</span><span class="n">TeamThreadRangeBoundariesStruct</span><span class="w"> </span><span class="nf">TeamThreadRange</span><span class="p">(</span><span class="n">TeamMemberType</span><span class="w"> </span><span class="n">team</span><span class="p">,</span><span class="w"> </span><span class="n">IndexType</span><span class="w"> </span><span class="n">begin</span><span class="p">,</span><span class="w"> </span><span class="n">IndexType</span><span class="w"> </span><span class="n">end</span><span class="p">);</span>
-</pre></div>
-</div>
-<p>Splits the index range <code class="docutils literal notranslate"><span class="pre">begin</span></code> to <code class="docutils literal notranslate"><span class="pre">end-1</span></code> over the threads of the team. This call is potentially a
-synchronization point for the team, and thus must meet the requirements of <code class="docutils literal notranslate"><span class="pre">team_barrier</span></code>.</p>
-<ul class="simple">
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv415TeamThreadRange14TeamMemberType9IndexType9IndexType">
+<span id="_CPPv315TeamThreadRange14TeamMemberType9IndexType9IndexType"></span><span id="_CPPv215TeamThreadRange14TeamMemberType9IndexType9IndexType"></span><span id="TeamThreadRange__TeamMemberType.IndexType.IndexType"></span><span class="n"><span class="pre">Impl</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">TeamThreadRangeBoundariesStruct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TeamThreadRange</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">TeamMemberType</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">team</span></span>, <span class="n"><span class="pre">IndexType</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">begin</span></span>, <span class="n"><span class="pre">IndexType</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">end</span></span><span class="sig-paren">)</span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv415TeamThreadRange14TeamMemberType9IndexType9IndexType" title="Permalink to this definition">#</a><br /></dt>
+<dd><dl class="simple">
+<dt>Splits the index range <code class="docutils literal notranslate"><span class="pre">begin</span></code> to <code class="docutils literal notranslate"><span class="pre">end-1</span></code> over the threads of the team. This call is potentially a synchronization point for the team, and thus must meet the requirements of <code class="docutils literal notranslate"><span class="pre">team_barrier</span></code>.</dt><dd><ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">team</span></code>: object meeting the requirements of TeamHandle</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">begin</span></code>: start index.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">end</span></code>: end index.</p></li>
 </ul>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">Impl</span><span class="o">::</span><span class="n">ThreadVectorRangeBoundariesStruct</span><span class="w"> </span><span class="nf">ThreadVectorRange</span><span class="p">(</span><span class="n">TeamMemberType</span><span class="w"> </span><span class="n">team</span><span class="p">,</span><span class="w"> </span><span class="n">IndexType</span><span class="w"> </span><span class="n">count</span><span class="p">);</span>
-</pre></div>
-</div>
-<p>Splits the index range <code class="docutils literal notranslate"><span class="pre">0</span></code> to <code class="docutils literal notranslate"><span class="pre">count-1</span></code> over the vector lanes of the calling thread. It is not legal to
-call this function inside of a vector level loop.</p>
-<ul class="simple">
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv417ThreadVectorRange14TeamMemberType9IndexType">
+<span id="_CPPv317ThreadVectorRange14TeamMemberType9IndexType"></span><span id="_CPPv217ThreadVectorRange14TeamMemberType9IndexType"></span><span id="ThreadVectorRange__TeamMemberType.IndexType"></span><span class="n"><span class="pre">Impl</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">ThreadVectorRangeBoundariesStruct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ThreadVectorRange</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">TeamMemberType</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">team</span></span>, <span class="n"><span class="pre">IndexType</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">count</span></span><span class="sig-paren">)</span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv417ThreadVectorRange14TeamMemberType9IndexType" title="Permalink to this definition">#</a><br /></dt>
+<dd><dl class="simple">
+<dt>Splits the index range <code class="docutils literal notranslate"><span class="pre">0</span></code> to <code class="docutils literal notranslate"><span class="pre">count-1</span></code> over the vector lanes of the calling thread. It is not legal to call this function inside of a vector level loop.</dt><dd><ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">team</span></code>: object meeting the requirements of TeamHandle</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">count</span></code>: index range length.</p></li>
 </ul>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">Impl</span><span class="o">::</span><span class="n">ThreadVectorRangeBoundariesStruct</span><span class="w"> </span><span class="nf">ThreadVectorRange</span><span class="p">(</span><span class="n">TeamMemberType</span><span class="w"> </span><span class="n">team</span><span class="p">,</span><span class="w"> </span><span class="n">IndexType</span><span class="w"> </span><span class="n">begin</span><span class="p">,</span><span class="w"> </span><span class="n">IndexType</span><span class="w"> </span><span class="n">end</span><span class="p">);</span>
-</pre></div>
-</div>
-<p>Splits the index range <code class="docutils literal notranslate"><span class="pre">begin</span></code> to <code class="docutils literal notranslate"><span class="pre">end-1</span></code> over the vector lanes of the calling thread. It is not legal to
-call this function inside of a vector level loop.</p>
-<ul class="simple">
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv417ThreadVectorRange14TeamMemberType9IndexType9IndexType">
+<span id="_CPPv317ThreadVectorRange14TeamMemberType9IndexType9IndexType"></span><span id="_CPPv217ThreadVectorRange14TeamMemberType9IndexType9IndexType"></span><span id="ThreadVectorRange__TeamMemberType.IndexType.IndexType"></span><span class="n"><span class="pre">Impl</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">ThreadVectorRangeBoundariesStruct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ThreadVectorRange</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">TeamMemberType</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">team</span></span>, <span class="n"><span class="pre">IndexType</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">begin</span></span>, <span class="n"><span class="pre">IndexType</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">end</span></span><span class="sig-paren">)</span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv417ThreadVectorRange14TeamMemberType9IndexType9IndexType" title="Permalink to this definition">#</a><br /></dt>
+<dd><dl class="simple">
+<dt>Splits the index range <code class="docutils literal notranslate"><span class="pre">begin</span></code> to <code class="docutils literal notranslate"><span class="pre">end-1</span></code> over the vector lanes of the calling thread. It is not legal to call this function inside of a vector level loop.</dt><dd><ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">team</span></code>: object meeting the requirements of TeamHandle</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">begin</span></code>: start index.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">end</span></code>: end index.</p></li>
 </ul>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">Impl</span><span class="o">::</span><span class="n">ThreadSingleStruct</span><span class="w"> </span><span class="nf">PerTeam</span><span class="p">(</span><span class="n">TeamMemberType</span><span class="w"> </span><span class="n">team</span><span class="p">);</span>
-</pre></div>
-</div>
-<p>When used in conjunction with the <code class="docutils literal notranslate"><span class="pre">single</span></code> pattern restricts execution to a single vector lane in the calling team.
-While not a synchronization event, this call must be encountered by the entire team, and thus meet the calling
-requirements of <code class="docutils literal notranslate"><span class="pre">team_barrier</span></code>.</p>
-<ul class="simple">
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv47PerTeam14TeamMemberType">
+<span id="_CPPv37PerTeam14TeamMemberType"></span><span id="_CPPv27PerTeam14TeamMemberType"></span><span id="PerTeam__TeamMemberType"></span><span class="n"><span class="pre">Impl</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">ThreadSingleStruct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PerTeam</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">TeamMemberType</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">team</span></span><span class="sig-paren">)</span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv47PerTeam14TeamMemberType" title="Permalink to this definition">#</a><br /></dt>
+<dd><dl class="simple">
+<dt>When used in conjunction with the <code class="docutils literal notranslate"><span class="pre">single</span></code> pattern restricts execution to a single vector lane in the calling team. While not a synchronization event, this call must be encountered by the entire team, and thus meet the calling requirements of <code class="docutils literal notranslate"><span class="pre">team_barrier</span></code>.</dt><dd><ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">team</span></code>: object meeting the requirements of TeamHandle</p></li>
 </ul>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">Impl</span><span class="o">::</span><span class="n">VectorSingleStruct</span><span class="w"> </span><span class="nf">PerThread</span><span class="p">(</span><span class="n">TeamMemberType</span><span class="w"> </span><span class="n">team</span><span class="p">);</span>
-</pre></div>
-</div>
-<p>When used in conjunction with the <code class="docutils literal notranslate"><span class="pre">single</span></code> pattern restricts execution to a single vector lane in the calling thread.
-It is not legal to call this function inside of a vector level loop.</p>
-<ul class="simple">
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv49PerThread14TeamMemberType">
+<span id="_CPPv39PerThread14TeamMemberType"></span><span id="_CPPv29PerThread14TeamMemberType"></span><span id="PerThread__TeamMemberType"></span><span class="n"><span class="pre">Impl</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">VectorSingleStruct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PerThread</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">TeamMemberType</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">team</span></span><span class="sig-paren">)</span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv49PerThread14TeamMemberType" title="Permalink to this definition">#</a><br /></dt>
+<dd><dl class="simple">
+<dt>When used in conjunction with the <code class="docutils literal notranslate"><span class="pre">single</span></code> pattern restricts execution to a single vector lane in the calling thread. It is not legal to call this function inside of a vector level loop.</dt><dd><ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">team</span></code>: object meeting the requirements of TeamHandle</p></li>
 </ul>
-</li>
-</ul>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
 <section id="examples">
 <h3>Examples<a class="headerlink" href="#examples" title="Permalink to this heading">#</a></h3>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="n">TeamPolicy</span><span class="o">&lt;&gt;::</span><span class="n">member_type</span><span class="w"> </span><span class="n">team_handle</span><span class="p">;</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="n">TeamPolicy</span><span class="o">&lt;&gt;::</span><span class="n">member_type</span><span class="w"> </span><span class="n">team_handle</span><span class="p">;</span>
 <span class="n">parallel_for</span><span class="p">(</span><span class="n">TeamPolicy</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">AUTO</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span><span class="w"> </span><span class="n">KOKKOS_LAMBDA</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">team_handle</span><span class="o">&amp;</span><span class="w"> </span><span class="n">team</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">team</span><span class="p">.</span><span class="n">league_rank</span><span class="p">();</span>
-<span class="w">  </span><span class="n">parallel_for</span><span class="p">(</span><span class="n">TeamThreadRange</span><span class="p">(</span><span class="n">team</span><span class="p">,</span><span class="n">M</span><span class="p">),</span><span class="w"> </span><span class="p">[</span><span class="o">&amp;</span><span class="p">]</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">thread_sum</span><span class="p">;</span>
-<span class="w">    </span><span class="n">parallel_reduce</span><span class="p">(</span><span class="n">ThreadVectorRange</span><span class="p">(</span><span class="n">team</span><span class="p">,</span><span class="n">K</span><span class="p">),</span><span class="w"> </span><span class="p">[</span><span class="o">&amp;</span><span class="p">]</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">j</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">lsum</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="c1">//...</span>
-<span class="w">    </span><span class="p">},</span><span class="n">thread_sum</span><span class="p">);</span>
-<span class="w">    </span><span class="n">single</span><span class="p">(</span><span class="n">PerThread</span><span class="p">(</span><span class="n">team</span><span class="p">),</span><span class="w"> </span><span class="p">[</span><span class="o">&amp;</span><span class="p">]</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="n">A</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">thread_sum</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">team</span><span class="p">.</span><span class="n">league_rank</span><span class="p">();</span>
+<span class="w">    </span><span class="n">parallel_for</span><span class="p">(</span><span class="n">TeamThreadRange</span><span class="p">(</span><span class="n">team</span><span class="p">,</span><span class="n">M</span><span class="p">),</span><span class="w"> </span><span class="p">[</span><span class="o">&amp;</span><span class="p">]</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">thread_sum</span><span class="p">;</span>
+<span class="w">        </span><span class="n">parallel_reduce</span><span class="p">(</span><span class="n">ThreadVectorRange</span><span class="p">(</span><span class="n">team</span><span class="p">,</span><span class="n">K</span><span class="p">),</span><span class="w"> </span><span class="p">[</span><span class="o">&amp;</span><span class="p">]</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">j</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">lsum</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">//...</span>
+<span class="w">        </span><span class="p">},</span><span class="n">thread_sum</span><span class="p">);</span>
+<span class="w">        </span><span class="n">single</span><span class="p">(</span><span class="n">PerThread</span><span class="p">(</span><span class="n">team</span><span class="p">),</span><span class="w"> </span><span class="p">[</span><span class="o">&amp;</span><span class="p">]</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">A</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">thread_sum</span><span class="p">;</span>
+<span class="w">        </span><span class="p">});</span>
 <span class="w">    </span><span class="p">});</span>
-<span class="w">  </span><span class="p">});</span>
-<span class="w">  </span><span class="n">team</span><span class="p">.</span><span class="n">team_barrier</span><span class="p">();</span>
-<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">team_sum</span><span class="p">;</span>
-<span class="w">  </span><span class="n">parallel_reduce</span><span class="p">(</span><span class="n">TeamThreadRange</span><span class="p">(</span><span class="n">team</span><span class="p">,</span><span class="n">M</span><span class="p">),</span><span class="w"> </span><span class="p">[</span><span class="o">&amp;</span><span class="p">]</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">lsum</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">lsum</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">A</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">i</span><span class="p">);</span>
-<span class="w">  </span><span class="p">},</span><span class="n">team_sum</span><span class="p">);</span>
-<span class="w">  </span><span class="n">single</span><span class="p">(</span><span class="n">PerTeam</span><span class="p">(</span><span class="n">team</span><span class="p">),[</span><span class="o">&amp;</span><span class="p">]</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">A_rowsum</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">team_sum</span><span class="p">;</span>
-<span class="w">  </span><span class="p">});</span>
+<span class="w">    </span><span class="n">team</span><span class="p">.</span><span class="n">team_barrier</span><span class="p">();</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">team_sum</span><span class="p">;</span>
+<span class="w">    </span><span class="n">parallel_reduce</span><span class="p">(</span><span class="n">TeamThreadRange</span><span class="p">(</span><span class="n">team</span><span class="p">,</span><span class="n">M</span><span class="p">),</span><span class="w"> </span><span class="p">[</span><span class="o">&amp;</span><span class="p">]</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">lsum</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">lsum</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">A</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">i</span><span class="p">);</span>
+<span class="w">    </span><span class="p">},</span><span class="n">team_sum</span><span class="p">);</span>
+<span class="w">    </span><span class="n">single</span><span class="p">(</span><span class="n">PerTeam</span><span class="p">(</span><span class="n">team</span><span class="p">),[</span><span class="o">&amp;</span><span class="p">]</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">A_rowsum</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">team_sum</span><span class="p">;</span>
+<span class="w">    </span><span class="p">});</span>
 <span class="p">});</span>
 </pre></div>
 </div>
@@ -689,6 +704,7 @@ It is not legal to call this function inside of a vector level loop.</p>
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">NestedPolicies</span></code></a><ul>
+<li><a class="reference internal" href="#list">List</a><ul>
 <li><a class="reference internal" href="#kokkos-perteam"><code class="docutils literal notranslate"><span class="pre">Kokkos::PerTeam</span></code></a></li>
 <li><a class="reference internal" href="#kokkos-perthread"><code class="docutils literal notranslate"><span class="pre">Kokkos::PerThread</span></code></a></li>
 <li><a class="reference internal" href="#kokkos-teamthreadrange"><code class="docutils literal notranslate"><span class="pre">Kokkos::TeamThreadRange</span></code></a></li>
@@ -696,7 +712,8 @@ It is not legal to call this function inside of a vector level loop.</p>
 <li><a class="reference internal" href="#kokkos-teamvectorrange"><code class="docutils literal notranslate"><span class="pre">Kokkos::TeamVectorRange</span></code></a></li>
 <li><a class="reference internal" href="#kokkos-teamvectormdrange"><code class="docutils literal notranslate"><span class="pre">Kokkos::TeamVectorMDRange</span></code></a></li>
 <li><a class="reference internal" href="#kokkos-threadvectorrange"><code class="docutils literal notranslate"><span class="pre">Kokkos::ThreadVectorRange</span></code></a></li>
-<li><a class="reference internal" href="#kokkos-threadvectormdrange"><code class="docutils literal notranslate"><span class="pre">Kokkos::ThreadVectorMDRange</span></code></a><ul>
+<li><a class="reference internal" href="#kokkos-threadvectormdrange"><code class="docutils literal notranslate"><span class="pre">Kokkos::ThreadVectorMDRange</span></code></a></li>
+<li><a class="reference internal" href="#usage">Usage</a></li>
 <li><a class="reference internal" href="#synopsis">Synopsis</a></li>
 <li><a class="reference internal" href="#description">Description</a></li>
 <li><a class="reference internal" href="#examples">Examples</a></li>
