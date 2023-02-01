@@ -16,20 +16,20 @@ Usage
     Kokkos::RangePolicy<>(Space(), begin, end, args...)
     Kokkos::RangePolicy<ARGS>(Space(), begin, end, args...)
 
-RangePolicy defines an execution policy for a 1D iteration space starting at begin and going to end with an open interval. 
+RangePolicy defines an execution policy for a 1D iteration space starting at begin and going to end with an open interval.
 
-Synopsis 
+Synopsis
 --------
 
-.. code-block:: cppkokkos
-        
+.. code-block:: cpp
+
     template<class ... Args>
     class Kokkos::RangePolicy {
         typedef RangePolicy execution_policy;
         typedef typename traits::index_type member_type ;
         typedef typename traits::index_type index_type;
 
-        //Inherited from PolicyTraits<Args...> 
+        //Inherited from PolicyTraits<Args...>
         using execution_space   = PolicyTraits<Args...>::execution_space;
         using schedule_type     = PolicyTraits<Args...>::schedule_type;
         using work_tag          = PolicyTraits<Args...>::work_tag;
@@ -61,9 +61,9 @@ Synopsis
 
         // return ExecSpace instance provided to the constructor
         KOKKOS_INLINE_FUNCTION const execution_space & space() const;
-        // return Range begin 
+        // return Range begin
         KOKKOS_INLINE_FUNCTION member_type begin() const;
-        // return Range end 
+        // return Range end
         KOKKOS_INLINE_FUNCTION member_type end()   const;
     };
 
@@ -91,48 +91,34 @@ Common Arguments for all Execution Policies
 | WorkTag           | ``SomeClass``                                                             | Specify the work tag type used to call the functor operator. Any arbitrary type defaults to ``void``.                                                   |
 +-------------------+---------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-Requirements
-~~~~~~~~~~~~
-
 Public Class Members
 --------------------
 
 Constructors
 ~~~~~~~~~~~~
- 
-.. code-block:: cppkokkos
-    
-    RangePolicy()
 
-\
-    Default Constructor uninitialized policy.
+.. cppkokkos:function:: RangePolicy()
 
-.. code-block:: cppkokkos
+   Default Constructor uninitialized policy.
 
-    template<class ... InitArgs> 
-    RangePolicy(const int64_t& begin, const int64_t& end, const InitArgs ... init_args)
+.. cppkokkos:function:: template<class ... InitArgs> RangePolicy(const int64_t& begin, const int64_t& end, const InitArgs ... init_args)
 
-\
-    Provide a start and end index as well as optional arguments to control certain behavior (see below).
-   
-.. code-block:: cppkokkos
+   Provide a start and end index as well as optional arguments to control certain behavior (see below).
 
-    template<class ... InitArgs> 
-    RangePolicy(const ExecutionSpace& space, const int64_t& begin, const int64_t& end, const InitArgs ... init_args)
+.. cppkokkos:function:: template<class ... InitArgs> RangePolicy(const ExecutionSpace& space, const int64_t& begin, const int64_t& end, const InitArgs ... init_args)
 
-\
-    Provide a start and end index and an ``ExecutionSpace`` instance to use as the execution resource, as well as optional arguments to control certain behavior (see below).
+   Provide a start and end index and an ``ExecutionSpace`` instance to use as the execution resource, as well as optional arguments to control certain behavior (see below).
 
 Optional ``InitArgs``:
 ^^^^^^^^^^^^^^^^^^^^^^
 
-* ``ChunkSize`` : Provide a hint for optimal chunk-size to be used during scheduling. For the SYCL backend, the workgroup size used in a ``parallel_for`` kernel can be set via this variable. 
+* ``ChunkSize`` : Provide a hint for optimal chunk-size to be used during scheduling. For the SYCL backend, the workgroup size used in a ``parallel_for`` kernel can be set via this variable.
 
 Examples
 --------
-   
+
 .. code-block:: cppkokkos
-    
+
     RangePolicy<> policy_1(0, N);
     RangePolicy<Cuda> policy_2(5,N-5);
     RangePolicy<Schedule<Dynamic>, OpenMP> policy_3(n,m);
