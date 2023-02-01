@@ -66,23 +66,23 @@ Public Class Members
 Constructors
 ~~~~~~~~~~~~
 
-.. cpp:function:: MDRangePolicy()
-    
+.. cppkokkos:function:: MDRangePolicy()
+
     * Default Constructor uninitialized policy.
 
-.. cpp:function:: MDRangePolicy(const Kokkos::Array<int64_t,rank>& begin, const Kokkos::Array<int64_t,rank>& end)
+.. cppkokkos:function:: MDRangePolicy(const Kokkos::Array<int64_t,rank>& begin, const Kokkos::Array<int64_t,rank>& end)
 
     * Provide a start and end index.
-   
-.. cpp:function:: MDRangePolicy(const Kokkos::Array<int64_t,rank>& begin, const Kokkos::Array<int64_t,rank>& end,  const Kokkos::Array<int64_t,rank>& tiling)
+
+.. cppkokkos:function:: MDRangePolicy(const Kokkos::Array<int64_t,rank>& begin, const Kokkos::Array<int64_t,rank>& end,  const Kokkos::Array<int64_t,rank>& tiling)
 
     * Provide a start and end index as well as the tiling dimensions.
- 
-.. cpp:function:: template<class OT, class IT, class TT> MDRangePolicy(const std::initializer_list<OT>& begin, const std::initializer_list<IT>& end)
 
-    * Provide a start and end index. The length of the lists must match the rank of the policy. 
+.. cppkokkos:function:: template<class OT, class IT, class TT> MDRangePolicy(const std::initializer_list<OT>& begin, const std::initializer_list<IT>& end)
 
-.. cpp:function:: template<class OT, class IT, class TT> MDRangePolicy(const std::initializer_list<OT>& begin, const std::initializer_list<IT>& end,  std::initializer_list<TT>& tiling)
+    * Provide a start and end index. The length of the lists must match the rank of the policy.
+
+.. cppkokkos:function:: template<class OT, class IT, class TT> MDRangePolicy(const std::initializer_list<OT>& begin, const std::initializer_list<IT>& end,  std::initializer_list<TT>& tiling)
 
     * Provide a start and end index as well as the tiling dimensions. The length of the lists must match the rank of the policy.
 
