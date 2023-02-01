@@ -101,7 +101,7 @@ Description
 Examples
 ~~~~~~~~
 
-.. code-block:: cppkokkos
+.. code-block:: cpp
 
     typedef TeamPolicy<>::member_type team_handle;
     parallel_for(TeamPolicy<>(N,AUTO,4), KOKKOS_LAMBDA (const team_handle& team) {
