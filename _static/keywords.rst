@@ -143,10 +143,6 @@ Enable Options
       * Perform extra large memory tests
       * ``OFF``
 
-    * * ``Kokkos_ENABLE_PROFILING``
-      * Create bindings for profiling tools
-      * ``ON``
-
     * * ``Kokkos_ENABLE_PROFILING_LOAD_PRINT``
       * Print information about which profiling tools got loaded
       * ``OFF``
