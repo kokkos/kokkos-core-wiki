@@ -1,8 +1,8 @@
 ``DualView``
 ============
 
-.. role:: cpp(code)
-   :language: cpp
+.. role:: cppkokkos(code)
+    :language: cppkokkos
 
 Container to manage mirroring a ``Kokkos::View`` that references device memory with a ``Kokkos::View`` that references host memory. The class provides capabilities to manage data which exists in two different memory spaces at the same time. It supports views with the same layout on two memory spaces as well as modified flags for both allocations. Users are responsible for updating the modified flags manually if they change the data in either memory space, by calling the ``sync()`` method, which is templated on the device with the modified data. Users may also synchronize data by calling the ``modify()`` function, which is templated on the device that requires synchronization (i.e., the target of the one-way copy operation).
  
