@@ -1,9 +1,6 @@
 ``TeamHandleConcept``
 =====================
 
-.. role::cpp(code)
-    :language: cpp
-
 .. role:: cppkokkos(code)
     :language: cppkokkos
 
@@ -85,30 +82,30 @@ Constructors
 
 Default, move and copy constructors as well as destructor.
 
-.. cpp:function:: TeamHandleConcept()
+.. cppkokkos:function:: TeamHandleConcept()
 
     * Default constructor.
 
-.. cpp:function:: TeamHandleConcept( TeamHandleConcept && )
+.. cppkokkos:function:: TeamHandleConcept( TeamHandleConcept && )
 
     * Move constructor.
 
-.. cpp:function:: TeamHandleConcept( TeamHandleConcept const & )
+.. cppkokkos:function:: TeamHandleConcept( TeamHandleConcept const & )
 
     * Copy constructor.
 
-.. cpp:function:: ~TeamHandleConcept()
+.. cppkokkos:function:: ~TeamHandleConcept()
 
     * Destructor.
 
 Assignment
 ~~~~~~~~~~
 
-.. cpp:function:: TeamHandleConcept & operator = ( TeamHandleConcept && )
+.. cppkokkos:function:: TeamHandleConcept & operator = ( TeamHandleConcept && )
 
     * Move assignment.
 
-.. cpp:function:: TeamHandleConcept & operator = ( TeamHandleConcept const & )
+.. cppkokkos:function:: TeamHandleConcept & operator = ( TeamHandleConcept const & )
 
     * Assignment operators. Returns: ``*this``.
 
