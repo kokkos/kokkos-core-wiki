@@ -1,1 +1,0 @@
-`Kokkos::HostSpace` is a [`MemorySpace` type](MemorySpaceConcept) representing traditional random access memory accessible from the CPU.  Except in rare instances, it should not be used directly, but instead should be used generically as an memory space.  For details, see [the documentation on the `MemorySpace` concept](MemorySpaceConcept).
