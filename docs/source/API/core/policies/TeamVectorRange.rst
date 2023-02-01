@@ -33,7 +33,10 @@ Synopsis
 Description
 -----------
 
-.. cppkokkos:function:: template<class TeamMemberType, class iType> /* implementation defined */ TeamVectorRange(TeamMemberType team, iType count);
+.. code-block:: cpp
+    
+    template<class TeamMemberType, class iType>
+    /* implementation defined */ TeamVectorRange(TeamMemberType team, iType count);
 
 Splits the index range ``0`` to ``count-1`` over the threads of the team and their vector lanes. 
 
@@ -51,7 +54,10 @@ Splits the index range ``0`` to ``count-1`` over the threads of the team and the
         threads call this function in one branch, and the other threads of ``team`` call it in another branch.
     - ``count >= 0`` is true;
  
-.. cppkokkos:function:: template<class TeamMemberType, class iType1, class iType2> /* implementation defined */ TeamVectorRange(TeamMemberType team, iType1 begin, iType2 end);
+.. code-block:: cpp
+    
+    template<class TeamMemberType, class iType1, class iType2>
+    /* implementation defined */ TeamVectorRange(TeamMemberType team, iType1 begin, iType2 end);
 
 Splits the index range ``begin`` to ``end-1`` over the threads of the team and their vector lanes. 
 
