@@ -124,20 +124,32 @@ Constructors
    
     * Default Constructor uninitialized policy.
 
-.. cppkokkos:function:: TeamPolicy(index_type league_size, index_type team_size [, index_type vector_length])
+.. code-block:: cpp
+    
+    TeamPolicy(index_type league_size, index_type team_size [, index_type vector_length])
 
+\
     * Request to launch ``league_size`` work items, each of which is assigned to a team of threads with ``team_size`` threads, using a vector length of ``vector_length``. If the team size is not possible when calling a parallel policy, that kernel launch may throw. 
 
-.. cppkokkos:function:: TeamPolicy(index_type league_size, Impl::AUTO_t [, index_type vector_length])
+.. code-block:: cpp
+    
+    TeamPolicy(index_type league_size, Impl::AUTO_t [, index_type vector_length])
 
+\
     * Request to launch ``league_size`` work items, each of which is assigned to a team of threads of a size determined by Kokkos, using a vector length of ``vector_length``. The team size may be determined lazily at launch time, taking into account properties of the functor.
 
-.. cppkokkos:function:: TeamPolicy(execution space, index_type league_size, index_type team_size [, index_type vector_length])
+.. code-block:: cpp
+    
+    TeamPolicy(execution space, index_type league_size, index_type team_size [, index_type vector_length])
 
+\
     * Request to launch ``league_size`` work items, each of which is assigned to a team of threads with ``team_size`` threads, using a vector length of ``vector_length``. If the team size is not possible when calling a parallel policy, that kernel launch may throw. Use the provided execution space instance during a kernel launch.
 
-.. cppkokkos:function:: TeamPolicy(execution_space space, index_type league_size, Impl::AUTO_t [, index_type vector_length])
+.. code-block:: cpp
 
+    TeamPolicy(execution_space space, index_type league_size, Impl::AUTO_t [, index_type vector_length])
+
+\
     * Request to launch ``league_size`` work items, each of which is assigned to a team of threads of a size determined by Kokkos, using a vector length of ``vector_length``. The team size may be determined lazily at launch time, taking into account properties of the functor. Use the provided execution space instance during a kernel launch.
 
 Runtime Settings
@@ -166,6 +178,14 @@ Runtime Settings
 Query Limits of Runtime Settings
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+.. _parallelFor: ../parallel-dispatch/parallel_for.html
+
+.. |parallelFor| replace:: :cppkokkos:func:`parallel_for`
+
+.. _parallelReduce: ../parallel-dispatch/parallel_reduce.html
+
+.. |parallelReduce| replace:: :cppkokkos:func:`parallel_reduce`
+
 .. code-block:: cpp
 
     template<class FunctorType>
@@ -174,15 +194,6 @@ Query Limits of Runtime Settings
     int team_size_max(const FunctorType& f, const ParallelReduceTag&) const;
 
 \
-
-.. _parallelFor: ../parallel-dispatch/parallel_for.html
-
-.. |parallelFor| replace:: :cpp:func:`parallel_for`
-
-.. _parallelReduce: ../parallel-dispatch/parallel_reduce.html
-
-.. |parallelReduce| replace:: :cpp:func: `parallel_reduce`
-
     * Query the maximum team size possible given a specific functor. The tag denotes whether this is for a |parallelFor|_ or a |parallelReduce|_.
     * Note: this is not a static function! The function will take into account settings for vector length and scratch size of ``*this``. Using a value larger than the return value will result in dispatch failure. 
     * Returns: The maximum value for ``team_size`` allowed to be given to be used with an otherwise identical ``TeamPolicy`` for dispatching the functor ``f``.
@@ -194,7 +205,7 @@ Query Limits of Runtime Settings
     template<class FunctorType>
     int team_size_recommended(const FunctorType& f, const ParallelReduceTag&) const;
 
-/
+\
     * Query the recommended team size for the specific functor ``f``. The tag denotes whether this is for a |parallelFor|_ or a |parallelReduce|_.
     * Note: this is not a static function! The function will take into account settings for vector length and scratch size of ``*this``.
     * Returns: The recommended value for ``team_size`` to be given to be used with an otherwise identical ``TeamPolicy`` for dispatching the functor ``f``.
@@ -211,28 +222,28 @@ Query Limits of Runtime Settings
 Query Runtime Settings
 ~~~~~~~~~~~~~~~~~~~~~~
 
-.. cppkokkos:function::int team_size() const;
+.. cppkokkos:function:: int team_size() const;
 
     * Returns: the requested team size.
 
-.. cppkokkos:function::int league_size() const;
+.. cppkokkos:function:: int league_size() const;
 
     * Returns: the requested league size.
 
-.. cppkokkos:function::int scratch_size(int level, int team_size_ = -1) const;
+.. cppkokkos:function:: int scratch_size(int level, int team_size_ = -1) const;
 
     * This function returns the total scratch size requested. If ``team_size`` is not provided, the team size for the calculation is used from the internal setting (i.e. the result of calling ``this->team_size()``). Otherwise, the provided team size is used.
     * Returns: the value for the total scratch size in bytes in the specified scratch level.
 
-.. cppkokkos:function::int team_scratch_size(int level) const;
+.. cppkokkos:function:: int team_scratch_size(int level) const;
 
     * Returns: the value for the per team scratch size in bytes in the specified scratch level.
 
-.. cppkokkos:function::int thread_scratch_size(int level) const;
+.. cppkokkos:function:: int thread_scratch_size(int level) const;
 
     * Returns: the value for the per thread scratch size in bytes in the specified scratch level.
 
-.. cppkokkos:function::int chunk_size() const;
+.. cppkokkos:function:: int chunk_size() const;
 
     * Returns: the chunk size, set via ``set_chunk_size()``.
 
