@@ -58,6 +58,24 @@ Typedefs
 * ``t_dev_const_randomread_um``: The type of a const, random-access View on the device.
 * ``t_host_const_randomread_um``: The type of a const, random-access View host mirror of ``t_dev_const_randomread``.
 
+.. code-block:: cpp
+        
+    t_dev d_view;
+    t_host h_view;
+
+* The two View instances.
+
+.. code-block:: cpp         
+
+    typedef View<unsigned int[2], LayoutLeft, typename t_host::execution_space>
+        t_modified_flags;
+    typedef View<unsigned int, LayoutLeft, typename t_host::execution_space>
+        t_modified_flag;
+    t_modified_flags modified_flags;
+    t_modified_flag modified_host, modified_device;
+
+* Counters to keep track of changes ("modified" flags)
+
 Constructors
 ~~~~~~~~~~~~
 
@@ -84,10 +102,38 @@ Constructors
 
     * Subview constructor
 
-[W.I.P.]
+.. cppkokkos:function:: DualView(const t_dev& d_view_, const t_host& h_view_);
+
+    * Create DualView from existing device and host View objects.
+    * This constructor assumes that the device and host View objects are synchronized. You, the caller, are responsible for making sure this is the case before calling this constructor. After this constructor returns, you may use DualView's ``sync()`` and ``modify()`` methods to ensure synchronization of the View objects.
+    * .  ``d_view_`` Device View
+    * .  ``h_view_`` Host View (must have type ``t_host = t_dev::HostMirror``)
 
 Functions
 ~~~~~~~~~
+
+.. code-block:: cpp
+
+    template <class Device>
+    KOKKOS_INLINE_FUNCTION const typename Impl::if_c<
+        std::is_same<typename t_dev::memory_space,
+                        typename Device::memory_space>::value,
+        t_dev, t_host>::type&
+    view();
+
+    template <class Device>
+    static int get_device_side();
+
+\
+    * Methods for synchronizing, marking as modified, and getting Views.
+    * Return a View on a specific device ``Device``.
+    * Please don't be afraid of the if_c expression in the return value's type. That just tells the method what the return type should be: ``t_dev`` if the \\c Device template parameter matches this DualView's device type, else ``t_host``.
+    * For example, suppose you create a DualView on Cuda, like this: 
+        - ``typedef Kokkos::DualView<float, Kokkos::LayoutRight, Kokkos::Cuda> dual_view_type; dual_view_type DV ("my dual view", 100);``
+        - If you want to get the CUDA device View, do this:
+        - ``typename dual_view_type::t_dev cudaView = DV.view<Kokkos::Cuda> ();``
+        - and if you want to get the host mirror of that View, do this:
+        - ``typedef typename Kokkos::HostSpace::execution_space host_device_type; typename dual_view_type::t_host hostView = DV.view<host_device_type> ();``
 
 [W.I.P.]
 
@@ -168,18 +214,18 @@ Synopsis
             [X]typedef
                 [X]typename t_dev_const_randomread::HostMirror t_host_const_randomread_um;
 
-            // The two View instances.
-            t_dev d_view;
-            t_host h_view;
+            [X]// The two View instances.
+            [X]t_dev d_view;
+            [X]t_host h_view;
 
-            // Counters to keep track of changes ("modified" flags)
+            [X]// Counters to keep track of changes ["modified" flags]
 
-            typedef View<unsigned int[2], LayoutLeft, typename t_host::execution_space>
-                t_modified_flags;
-            typedef View<unsigned int, LayoutLeft, typename t_host::execution_space>
-                t_modified_flag;
-            t_modified_flags modified_flags;
-            t_modified_flag modified_host, modified_device;
+            [X]typedef View<unsigned int[2], LayoutLeft, typename t_host::execution_space>
+                [X]t_modified_flags;
+            [X]typedef View<unsigned int, LayoutLeft, typename t_host::execution_space>
+                [X]t_modified_flag;
+            [X]t_modified_flags modified_flags;
+            [X]t_modified_flag modified_host, modified_device;
 
             [X]// Constructors
 
@@ -242,45 +288,45 @@ Synopsis
             [X]DualView(const DualView<SD, S1, S2, S3>& src, const Arg0& arg0, Args... args);
 
 
-            // Create DualView from existing device and host View objects.
-            //
-            // This constructor assumes that the device and host View objects
-            // are synchronized.  You, the caller, are responsible for making
-            // sure this is the case before calling this constructor.  After
-            // this constructor returns, you may use DualView's sync() and
-            // modify() methods to ensure synchronization of the View objects.
-            //
-            // .  d_view_ Device View
-            // .  h_view_ Host View (must have type t_host = t_dev::HostMirror)
-            DualView(const t_dev& d_view_, const t_host& h_view_);
+            [X]// Create DualView from existing device and host View objects.
+            [X]//
+            [X]// This constructor assumes that the device and host View objects
+            [X]// are synchronized.  You, the caller, are responsible for making
+            [X]// sure this is the case before calling this constructor.  After
+            [X]// this constructor returns, you may use DualView's sync() and
+            [X]// modify() methods to ensure synchronization of the View objects.
+            [X]//
+            [X]// .  d_view_ Device View
+            [X]// .  h_view_ Host View (must have type t_host = t_dev::HostMirror)
+            [X]DualView(const t_dev& d_view_, const t_host& h_view_);
 
-            // Methods for synchronizing, marking as modified, and getting Views.
+            [X]// Methods for synchronizing, marking as modified, and getting Views.
 
-            // Return a View on a specific device `Device`.
-            //
-            // Please don't be afraid of the if_c expression in the return
-            // value's type.  That just tells the method what the return type
-            // should be: t_dev if the \c Device template parameter matches
-            // this DualView's device type, else t_host.
-            //
-            // For example, suppose you create a DualView on Cuda, like this:
-            // 
-            //  typedef Kokkos::DualView<float, Kokkos::LayoutRight, Kokkos::Cuda>
-            //  dual_view_type; dual_view_type DV ("my dual view", 100); \endcode If you
-            //  want to get the CUDA device View, do this: \code typename
-            //  dual_view_type::t_dev cudaView = DV.view<Kokkos::Cuda> (); \endcode and if
-            //  you want to get the host mirror of that View, do this: \code typedef
-            //  typename Kokkos::HostSpace::execution_space host_device_type; typename
-            //  dual_view_type::t_host hostView = DV.view<host_device_type> (); \endcode
-            template <class Device>
-            KOKKOS_INLINE_FUNCTION const typename Impl::if_c<
-                std::is_same<typename t_dev::memory_space,
-                             typename Device::memory_space>::value,
-                t_dev, t_host>::type&
-            view();
+            [X]// Return a View on a specific device `Device`.
+            [X]//
+            [X]// Please don't be afraid of the if_c expression in the return
+            [X]// value's type.  That just tells the method what the return type
+            [X]// should be: t_dev if the \c Device template parameter matches
+            [X]// this DualView's device type, else t_host.
+            [X]//
+            [X]// For example, suppose you create a DualView on Cuda, like this:
+            [X]// 
+            [X]//  typedef Kokkos::DualView<float, Kokkos::LayoutRight, Kokkos::Cuda>
+            [X]//  dual_view_type; dual_view_type DV ("my dual view", 100); \endcode If you
+            [X]//  want to get the CUDA device View, do this: \code typename
+            [X]//  dual_view_type::t_dev cudaView = DV.view<Kokkos::Cuda> (); \endcode and if
+            [X]//  you want to get the host mirror of that View, do this: \code typedef
+            [X]//  typename Kokkos::HostSpace::execution_space host_device_type; typename
+            [X]//  dual_view_type::t_host hostView = DV.view<host_device_type> (); \endcode
+            [X]template <class Device>
+            [X]KOKKOS_INLINE_FUNCTION const typename Impl::if_c<
+                [X]std::is_same<typename t_dev::memory_space,
+                             [X]typename Device::memory_space>::value,
+                [X]t_dev, t_host>::type&
+            [X]view();
 
-            template <class Device>
-            static int get_device_side();
+            [X]template <class Device>
+            [X]static int get_device_side();
 
             //  Update data on device or host only if data in the other
             //  space has been marked as modified.
