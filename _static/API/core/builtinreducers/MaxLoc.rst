@@ -1,5 +1,5 @@
 ``MaxLoc``
-=========
+==========
 
 .. role:: cppkokkos(code)
     :language: cppkokkos
