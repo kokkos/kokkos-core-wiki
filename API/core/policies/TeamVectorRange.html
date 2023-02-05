@@ -465,7 +465,7 @@
         </a>
         <div class="content-icon-container">
 <div class="edit-this-page">
-  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/API/core/policies/TeamVectorRange.md" title="Edit this page">
+  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/API/core/policies/TeamVectorRange.rst" title="Edit this page">
     <svg aria-hidden="true" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
       <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4"></path>
@@ -489,22 +489,24 @@
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="teamvectorrange">
+          <section id="teamvectorrange">
 <h1><code class="docutils literal notranslate"><span class="pre">TeamVectorRange</span></code><a class="headerlink" href="#teamvectorrange" title="Permalink to this heading">#</a></h1>
-<p>Header File: <code class="docutils literal notranslate"><span class="pre">Kokkos_Core.hpp</span></code></p>
-<p>Usage:</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">parallel_for</span><span class="p">(</span><span class="n">TeamVectorRange</span><span class="p">(</span><span class="n">team</span><span class="p">,</span><span class="n">range</span><span class="p">),</span><span class="w"> </span><span class="p">[</span><span class="o">=</span><span class="p">]</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{...});</span>
-<span class="n">parallel_reduce</span><span class="p">(</span><span class="n">TeamVectorRange</span><span class="p">(</span><span class="n">team</span><span class="p">,</span><span class="n">begin</span><span class="p">,</span><span class="n">end</span><span class="p">),</span><span class="w"> </span>
-<span class="w">  </span><span class="p">[</span><span class="o">=</span><span class="p">]</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="o">&amp;</span><span class="w"> </span><span class="n">lsum</span><span class="p">)</span><span class="w"> </span><span class="p">{...},</span><span class="n">sum</span><span class="p">);</span>
+<p>Header File: <code class="docutils literal notranslate"><span class="pre">&lt;Kokkos_Core.hpp&gt;</span></code></p>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this heading">#</a></h2>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">parallel_for</span><span class="p">(</span><span class="n">TeamVectorRange</span><span class="p">(</span><span class="n">team</span><span class="p">,</span><span class="n">range</span><span class="p">),</span><span class="w"> </span><span class="p">[</span><span class="o">=</span><span class="p">]</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{...});</span>
+<span class="n">parallel_reduce</span><span class="p">(</span><span class="n">TeamVectorRange</span><span class="p">(</span><span class="n">team</span><span class="p">,</span><span class="n">begin</span><span class="p">,</span><span class="n">end</span><span class="p">),</span>
+<span class="w">    </span><span class="p">[</span><span class="o">=</span><span class="p">]</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="o">&amp;</span><span class="w"> </span><span class="n">lsum</span><span class="p">)</span><span class="w"> </span><span class="p">{...},</span><span class="n">sum</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>TeamVectorRange is a <a class="reference internal" href="NestedPolicies.html"><span class="doc std std-doc">nested execution policy</span></a> used inside hierarchical parallelism.
+<p>TeamVectorRange is a <a class="reference external" href="NestedPolicies.html">nested execution policy</a> used inside hierarchical parallelism.
 In contrast to global policies, the public interface for nested policies is implemented
 as functions, in order to enable implicit templating on the execution space type via
 the team handle.</p>
+</section>
 <section id="synopsis">
 <h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this heading">#</a></h2>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">TeamMemberType</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">iType</span><span class="o">&gt;</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">TeamMemberType</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">iType</span><span class="o">&gt;</span>
 <span class="cm">/* implementation defined */</span><span class="w"> </span><span class="n">TeamVectorRange</span><span class="p">(</span><span class="n">TeamMemberType</span><span class="w"> </span><span class="n">team</span><span class="p">,</span><span class="w"> </span><span class="n">iType</span><span class="w"> </span><span class="n">count</span><span class="p">);</span>
 <span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">TeamMemberType</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">iType1</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">iType2</span><span class="o">&gt;</span>
 <span class="cm">/* implementation defined */</span><span class="w"> </span><span class="n">TeamVectorRange</span><span class="p">(</span><span class="n">TeamMemberType</span><span class="w"> </span><span class="n">team</span><span class="p">,</span><span class="w"> </span><span class="n">iType1</span><span class="w"> </span><span class="n">begin</span><span class="p">,</span><span class="w"> </span><span class="n">iType2</span><span class="w"> </span><span class="n">end</span><span class="p">);</span>
@@ -513,83 +515,93 @@ the team handle.</p>
 </section>
 <section id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this heading">#</a></h2>
-<ul>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">TeamMemberType</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">iType</span><span class="o">&gt;</span>
-<span class="cm">/* Implementation defined */</span><span class="w"> </span><span class="n">TeamVectorRange</span><span class="p">(</span><span class="n">TeamMemberType</span><span class="w"> </span><span class="n">team</span><span class="p">,</span><span class="w"> </span><span class="n">iType</span><span class="w"> </span><span class="n">count</span><span class="p">);</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">TeamMemberType</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">iType</span><span class="o">&gt;</span>
+<span class="cm">/* implementation defined */</span><span class="w"> </span><span class="n">TeamVectorRange</span><span class="p">(</span><span class="n">TeamMemberType</span><span class="w"> </span><span class="n">team</span><span class="p">,</span><span class="w"> </span><span class="n">iType</span><span class="w"> </span><span class="n">count</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>Splits the index range <code class="docutils literal notranslate"><span class="pre">0</span></code> to <code class="docutils literal notranslate"><span class="pre">count-1</span></code> over the threads of the team and their vector lanes.</p>
 <ul class="simple">
-<li><p><strong>Arguments</strong></p>
-<ul>
+<li><dl class="simple">
+<dt><strong>Arguments</strong></dt><dd><ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">team</span></code>: a handle to the calling team execution context.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">count</span></code>: index range length.</p></li>
 </ul>
+</dd>
+</dl>
 </li>
-<li><p><strong>Returns</strong></p>
-<ul>
+<li><dl class="simple">
+<dt><strong>Returns</strong></dt><dd><ul>
 <li><p>Implementation defined type.</p></li>
 </ul>
+</dd>
+</dl>
 </li>
-<li><p><strong>Requirements</strong></p>
-<ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">TeamMemberType</span></code> is a type that models <a class="reference internal" href="TeamHandleConcept.html"><span class="doc std std-doc">TeamHandle</span></a></p></li>
+<li><dl class="simple">
+<dt><strong>Requirements</strong></dt><dd><ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">TeamMemberType</span></code> is a type that models <a class="reference external" href="TeamHandleConcept.html">TeamHandle</a></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">std::is_integral&lt;iType&gt;::value</span></code> is true.</p></li>
-<li><p>Every member thread of <code class="docutils literal notranslate"><span class="pre">team</span></code> must call the operation in the same branch, i.e. it is not legal to have some
-threads call this function in one branch, and the other threads of <code class="docutils literal notranslate"><span class="pre">team</span></code> call it in another branch.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">count</span> <span class="pre">&gt;=</span> <span class="pre">0</span> </code> is true;</p></li>
+<li><dl class="simple">
+<dt>Every member thread of <code class="docutils literal notranslate"><span class="pre">team</span></code> must call the operation in the same branch, i.e. it is not legal to have some</dt><dd><p>threads call this function in one branch, and the other threads of <code class="docutils literal notranslate"><span class="pre">team</span></code> call it in another branch.</p>
+</dd>
+</dl>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">count</span> <span class="pre">&gt;=</span> <span class="pre">0</span></code> is true;</p></li>
 </ul>
+</dd>
+</dl>
 </li>
 </ul>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">TeamMemberType</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">iType1</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">iType2</span><span class="o">&gt;</span>
-<span class="cm">/* Implementation defined */</span><span class="w"> </span><span class="n">TeamVectorRange</span><span class="p">(</span><span class="n">TeamMemberType</span><span class="w"> </span><span class="n">team</span><span class="p">,</span><span class="w"> </span><span class="n">iType1</span><span class="w"> </span><span class="n">begin</span><span class="p">,</span><span class="w"> </span><span class="n">iType2</span><span class="w"> </span><span class="n">end</span><span class="p">);</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">TeamMemberType</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">iType1</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">iType2</span><span class="o">&gt;</span>
+<span class="cm">/* implementation defined */</span><span class="w"> </span><span class="n">TeamVectorRange</span><span class="p">(</span><span class="n">TeamMemberType</span><span class="w"> </span><span class="n">team</span><span class="p">,</span><span class="w"> </span><span class="n">iType1</span><span class="w"> </span><span class="n">begin</span><span class="p">,</span><span class="w"> </span><span class="n">iType2</span><span class="w"> </span><span class="n">end</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>Splits the index range <code class="docutils literal notranslate"><span class="pre">begin</span></code> to <code class="docutils literal notranslate"><span class="pre">end-1</span></code> over the threads of the team and their vector lanes.</p>
 <ul class="simple">
-<li><p><strong>Arguments</strong></p>
-<ul>
+<li><dl class="simple">
+<dt><strong>Arguments</strong></dt><dd><ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">team</span></code>: a handle to the calling team execution context.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">begin</span></code>: index range begin.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">end</span></code>: index range end.</p></li>
 </ul>
+</dd>
+</dl>
 </li>
-<li><p><strong>Returns</strong></p>
-<ul>
+<li><dl class="simple">
+<dt><strong>Returns</strong></dt><dd><ul>
 <li><p>Implementation defined type.</p></li>
 </ul>
+</dd>
+</dl>
 </li>
-<li><p><strong>Requirements</strong></p>
-<ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">TeamMemberType</span></code> is a type that models <a class="reference internal" href="TeamHandleConcept.html"><span class="doc std std-doc">TeamHandle</span></a></p></li>
+<li><dl class="simple">
+<dt><strong>Requirements</strong></dt><dd><ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">TeamMemberType</span></code> is a type that models <a class="reference external" href="TeamHandleConcept.html">TeamHandle</a></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">std::is_integral&lt;iType1&gt;::value</span></code> is true.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">std::is_integral&lt;iType2&gt;::value</span></code> is true.</p></li>
-<li><p>Every member thread of <code class="docutils literal notranslate"><span class="pre">team</span></code> must call the operation in the same branch, i.e. it is not legal to have some
-threads call this function in one branch, and the other threads of <code class="docutils literal notranslate"><span class="pre">team</span></code> call it in another branch..</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">end</span> <span class="pre">&gt;=</span> <span class="pre">begin</span> </code> is true;</p></li>
+<li><p>Every member thread of <code class="docutils literal notranslate"><span class="pre">team</span></code> must call the operation in the same branch, i.e. it is not legal to have some threads call this function in one branch, and the other threads of <code class="docutils literal notranslate"><span class="pre">team</span></code> call it in another branch..</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">end</span> <span class="pre">&gt;=</span> <span class="pre">begin</span></code> is true;</p></li>
 </ul>
-</li>
-</ul>
+</dd>
+</dl>
 </li>
 </ul>
 </section>
 <section id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading">#</a></h2>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="n">TeamPolicy</span><span class="o">&lt;&gt;::</span><span class="n">member_type</span><span class="w"> </span><span class="n">team_handle</span><span class="p">;</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="n">TeamPolicy</span><span class="o">&lt;&gt;::</span><span class="n">member_type</span><span class="w"> </span><span class="n">team_handle</span><span class="p">;</span>
 <span class="n">parallel_for</span><span class="p">(</span><span class="n">TeamPolicy</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">AUTO</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span><span class="w"> </span><span class="n">KOKKOS_LAMBDA</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">team_handle</span><span class="o">&amp;</span><span class="w"> </span><span class="n">team</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">     </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">team</span><span class="p">.</span><span class="n">league_rank</span><span class="p">();</span>
-<span class="w">     </span><span class="n">parallel_for</span><span class="p">(</span><span class="n">TeamVectorRange</span><span class="p">(</span><span class="n">team</span><span class="p">,</span><span class="n">M</span><span class="p">),</span><span class="w"> </span><span class="p">[</span><span class="o">&amp;</span><span class="p">]</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">       </span><span class="n">A</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">B</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
-<span class="w">     </span><span class="p">});</span>
-<span class="w">     </span><span class="n">team</span><span class="p">.</span><span class="n">team_barrier</span><span class="p">();</span>
-<span class="w">     </span><span class="kt">int</span><span class="w"> </span><span class="n">team_sum</span><span class="p">;</span>
-<span class="w">     </span><span class="n">parallel_reduce</span><span class="p">(</span><span class="n">TeamVectorRange</span><span class="p">(</span><span class="n">team</span><span class="p">,</span><span class="n">M</span><span class="p">),</span><span class="w"> </span><span class="p">[</span><span class="o">&amp;</span><span class="p">]</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">lsum</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">       </span><span class="n">lsum</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">A</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">i</span><span class="p">);</span>
-<span class="w">     </span><span class="p">},</span><span class="n">team_sum</span><span class="p">);</span>
-<span class="w">     </span><span class="n">single</span><span class="p">(</span><span class="n">PerTeam</span><span class="p">(</span><span class="n">team</span><span class="p">),[</span><span class="o">&amp;</span><span class="p">]</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">       </span><span class="n">A_rowsum</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">team_sum</span><span class="p">;</span>
-<span class="w">     </span><span class="p">});</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">team</span><span class="p">.</span><span class="n">league_rank</span><span class="p">();</span>
+<span class="w">    </span><span class="n">parallel_for</span><span class="p">(</span><span class="n">TeamVectorRange</span><span class="p">(</span><span class="n">team</span><span class="p">,</span><span class="n">M</span><span class="p">),</span><span class="w"> </span><span class="p">[</span><span class="o">&amp;</span><span class="p">]</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">A</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">B</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+<span class="w">    </span><span class="p">});</span>
+<span class="w">    </span><span class="n">team</span><span class="p">.</span><span class="n">team_barrier</span><span class="p">();</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">team_sum</span><span class="p">;</span>
+<span class="w">    </span><span class="n">parallel_reduce</span><span class="p">(</span><span class="n">TeamVectorRange</span><span class="p">(</span><span class="n">team</span><span class="p">,</span><span class="n">M</span><span class="p">),</span><span class="w"> </span><span class="p">[</span><span class="o">&amp;</span><span class="p">]</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">lsum</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">lsum</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">A</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">i</span><span class="p">);</span>
+<span class="w">    </span><span class="p">},</span><span class="n">team_sum</span><span class="p">);</span>
+<span class="w">    </span><span class="n">single</span><span class="p">(</span><span class="n">PerTeam</span><span class="p">(</span><span class="n">team</span><span class="p">),[</span><span class="o">&amp;</span><span class="p">]</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">A_rowsum</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">team_sum</span><span class="p">;</span>
+<span class="w">    </span><span class="p">});</span>
 <span class="p">});</span>
 </pre></div>
 </div>
@@ -654,6 +666,7 @@ threads call this function in one branch, and the other threads of <code class="
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">TeamVectorRange</span></code></a><ul>
+<li><a class="reference internal" href="#usage">Usage</a></li>
 <li><a class="reference internal" href="#synopsis">Synopsis</a></li>
 <li><a class="reference internal" href="#description">Description</a></li>
 <li><a class="reference internal" href="#examples">Examples</a></li>
