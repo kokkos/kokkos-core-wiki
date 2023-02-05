@@ -1,14 +1,10 @@
 ``InitializationSettings``
 ==========================
 
-.. role::cpp(code)
-    :language: cpp
-
 .. role:: cppkokkos(code)
    :language: cppkokkos
 
 Defined in header ``<KokkosCore.cpp>``
-
 
 Usage:
 
@@ -19,36 +15,36 @@ Usage:
                     .set_device_id(0)
                     .set_disable_warnings(false);
 
-``InitializationSettings`` is a class that can be used to define the settings for
-initializating Kokkos programmatically without having to call the two parameter
-form (``argc`` and ``argv``) of `Kokkos::initialize() <initialize.html#kokkosinitialize>`_.
-It was introduced in version 3.7 as a replacement for the
-`Kokkos::InitArguments <InitArguments.html#kokkosInitArguments>`_ structure.
+.. versionadded:: 3.7
+   ``InitializationSettings`` is a class that can be used to define the settings for
+   initializating Kokkos programmatically without having to call the two parameter
+   form (``argc`` and ``argv``) of `Kokkos::initialize() <initialize.html#kokkosinitialize>`_.
+   It was introduced as a replacement for the `Kokkos::InitArguments <InitArguments.html#kokkosInitArguments>`_ structure.
 
 Interface
 ---------
 
-.. cpp:class:: InitializationSettings
+.. cppkokkos:class:: InitializationSettings
 
-    .. cpp:function:: InitializationSettings();
+   .. cppkokkos:function:: InitializationSettings();
 
-        Constructs a new object that does not contain any value for any of the settings.
-    
-    .. cpp:function:: InitializationSettings(InitArguments const& arguments);
+      Constructs a new object that does not contain any value for any of the settings.
 
-        **DEPRECATED** Converts the deprecated structure to a new object. Data members from the structure that compare equal to their default value are assumed to be unset. Let ``PARAMETER-NAME`` be a valid setting of type ``PARAMETER-TYPE`` as defined in the table below.
+   .. cppkokkos:function:: InitializationSettings(InitArguments const& arguments);
 
-    .. cpp:function:: InitializationSettings& set_PARAMETER_NAME(PARAMETER_TYPE value);  
+      **DEPRECATED** Converts the deprecated structure to a new object. Data members from the structure that compare equal to their default value are assumed to be unset. Let ``PARAMETER-NAME`` be a valid setting of type ``PARAMETER-TYPE`` as defined in the table below.
 
-        Replaces the content of the ``PARAMETER_NAME`` setting with ``value`` and return a reference to the object. ``value`` must be a valid value for ``PARAMETER_NAME``.
+   .. cppkokkos:function:: InitializationSettings& set_PARAMETER_NAME(PARAMETER_TYPE value);
 
-    .. cpp:function:: bool has_PARAMETER_NAME() const;  
+      Replaces the content of the ``PARAMETER_NAME`` setting with ``value`` and return a reference to the object. ``value`` must be a valid value for ``PARAMETER_NAME``.
 
-        Checks whether the object contains a value for the ``PARAMETER_NAME`` setting. Returns ``true`` if it contains a value, ``false`` otherwise.
+   .. cppkokkos:function:: bool has_PARAMETER_NAME() const;
 
-    .. cpp:function:: PARAMETER_TYPE get_PARAMETER_NAME() const;  
+      Checks whether the object contains a value for the ``PARAMETER_NAME`` setting. Returns ``true`` if it contains a value, ``false`` otherwise.
 
-        Accesses the contained value for the ``PARAMETER_NAME`` setting. The behavior is undefined if the object does not contain a value for setting ``PARAMETER_NAME``.
+   .. cppkokkos:function:: PARAMETER_TYPE get_PARAMETER_NAME() const;
+
+      Accesses the contained value for the ``PARAMETER_NAME`` setting. The behavior is undefined if the object does not contain a value for setting ``PARAMETER_NAME``.
 
 The table below summarizes what settings are available.
 
@@ -84,4 +80,5 @@ Example
 
 See also
 ~~~~~~~~
+
 * `Kokkos::initialize <initialize.html#kokkosinitialize>`_: initializes the Kokkos execution environment
