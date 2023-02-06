@@ -187,7 +187,7 @@
 <li class="toctree-l3"><a class="reference internal" href="initialize.html"><code class="docutils literal notranslate"><span class="pre">initialize</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="finalize.html"><code class="docutils literal notranslate"><span class="pre">finalize</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="ScopeGuard.html">ScopeGuard</a></li>
-<li class="toctree-l3 current current-page"><a class="current reference internal" href="#">InitializationSettings</a></li>
+<li class="toctree-l3 current current-page"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">InitializationSettings</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="InitArguments.html">InitArguments</a></li>
 </ul>
 </li>
@@ -465,7 +465,7 @@
         </a>
         <div class="content-icon-container">
 <div class="edit-this-page">
-  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/API/core/initialize_finalize/InitializationSettings.md" title="Edit this page">
+  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/API/core/initialize_finalize/InitializationSettings.rst" title="Edit this page">
     <svg aria-hidden="true" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
       <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4"></path>
@@ -489,39 +489,65 @@
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="initializationsettings">
-<h1>InitializationSettings<a class="headerlink" href="#initializationsettings" title="Permalink to this heading">#</a></h1>
+          <section id="initializationsettings">
+<h1><code class="docutils literal notranslate"><span class="pre">InitializationSettings</span></code><a class="headerlink" href="#initializationsettings" title="Permalink to this heading">#</a></h1>
 <p>Defined in header <code class="docutils literal notranslate"><span class="pre">&lt;KokkosCore.cpp&gt;</span></code></p>
 <p>Usage:</p>
-<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">settings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">InitializationSettings</span><span class="p">()</span>
-<span class="w">                    </span><span class="p">.</span><span class="n">set_num_threads</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
-<span class="w">                    </span><span class="p">.</span><span class="n">set_device_id</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="w">                    </span><span class="p">.</span><span class="n">set_disable_warnings</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">settings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">InitializationSettings</span><span class="p">()</span>
+<span class="w">                </span><span class="p">.</span><span class="n">set_num_threads</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+<span class="w">                </span><span class="p">.</span><span class="n">set_device_id</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="w">                </span><span class="p">.</span><span class="n">set_disable_warnings</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
 </pre></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">InitializationSettings</span></code> is a class that can be used to define the settings for
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 3.7: </span><code class="docutils literal notranslate"><span class="pre">InitializationSettings</span></code> is a class that can be used to define the settings for
 initializating Kokkos programmatically without having to call the two parameter
-form (<code class="docutils literal notranslate"><span class="pre">argc</span></code> and <code class="docutils literal notranslate"><span class="pre">argv</span></code>) of <a class="reference internal" href="initialize.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">Kokkos::initialize()</span></code></span></a>.
-It was introduced in version 3.7 as a replacement for the
-<a class="reference internal" href="InitArguments.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">Kokkos::InitArguments</span></code></span></a> structure.</p>
+form (<code class="docutils literal notranslate"><span class="pre">argc</span></code> and <code class="docutils literal notranslate"><span class="pre">argv</span></code>) of <a class="reference external" href="initialize.html#kokkosinitialize">Kokkos::initialize()</a>.
+It was introduced as a replacement for the <a class="reference external" href="InitArguments.html#kokkosInitArguments">Kokkos::InitArguments</a> structure.</p>
+</div>
 <section id="interface">
 <h2>Interface<a class="headerlink" href="#interface" title="Permalink to this heading">#</a></h2>
-<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">InitializationSettings</span><span class="w"> </span><span class="p">{</span>
-<span class="k">public</span><span class="o">:</span>
-<span class="w">  </span><span class="n">InitializationSettings</span><span class="p">();</span>
-<span class="w">  </span><span class="n">InitializationSettings</span><span class="p">(</span><span class="n">InitArguments</span><span class="w"> </span><span class="k">const</span><span class="o">&amp;</span><span class="w"> </span><span class="n">arguments</span><span class="p">);</span><span class="w">  </span><span class="c1">// deprecated</span>
-<span class="w">  </span><span class="n">InitializationSettings</span><span class="o">&amp;</span><span class="w"> </span><span class="n">set_PARAMETER</span><span class="o">-</span><span class="n">NAME</span><span class="p">(</span><span class="n">PARAMETER</span><span class="o">-</span><span class="n">TYPE</span><span class="w"> </span><span class="n">value</span><span class="p">);</span><span class="w">  </span><span class="c1">// see below</span>
-<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="n">has_PARAMETER</span><span class="o">-</span><span class="n">NAME</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w">  </span><span class="c1">// see below</span>
-<span class="w">  </span><span class="n">PARAMETER</span><span class="o">-</span><span class="n">TYPE</span><span class="w"> </span><span class="n">get_PARAMETER</span><span class="o">-</span><span class="n">NAME</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w">  </span><span class="c1">// see below</span>
-<span class="p">};</span>
-</pre></div>
-</div>
+<dl class="cppkokkos class">
+<dt class="sig sig-object cppkokkos" id="_CPPv422InitializationSettings">
+<span id="_CPPv322InitializationSettings"></span><span id="_CPPv222InitializationSettings"></span><span id="InitializationSettings"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">InitializationSettings</span></span></span><a class="headerlink" href="#_CPPv422InitializationSettings" title="Permalink to this definition">#</a><br /></dt>
+<dd><dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N22InitializationSettings22InitializationSettingsEv">
+<span id="_CPPv3N22InitializationSettings22InitializationSettingsEv"></span><span id="_CPPv2N22InitializationSettings22InitializationSettingsEv"></span><span id="InitializationSettings::InitializationSettings"></span><span class="sig-name descname"><span class="n"><span class="pre">InitializationSettings</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4N22InitializationSettings22InitializationSettingsEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Constructs a new object that does not contain any value for any of the settings.</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N22InitializationSettings22InitializationSettingsERK13InitArguments">
+<span id="_CPPv3N22InitializationSettings22InitializationSettingsERK13InitArguments"></span><span id="_CPPv2N22InitializationSettings22InitializationSettingsERK13InitArguments"></span><span id="InitializationSettings::InitializationSettings__InitArgumentsCR"></span><span class="sig-name descname"><span class="n"><span class="pre">InitializationSettings</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">InitArguments</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">arguments</span></span><span class="sig-paren">)</span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4N22InitializationSettings22InitializationSettingsERK13InitArguments" title="Permalink to this definition">#</a><br /></dt>
+<dd><p><strong>DEPRECATED</strong> Converts the deprecated structure to a new object. Data members from the structure that compare equal to their default value are assumed to be unset. Let <code class="docutils literal notranslate"><span class="pre">PARAMETER-NAME</span></code> be a valid setting of type <code class="docutils literal notranslate"><span class="pre">PARAMETER-TYPE</span></code> as defined in the table below.</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N22InitializationSettings18set_PARAMETER_NAMEE14PARAMETER_TYPE">
+<span id="_CPPv3N22InitializationSettings18set_PARAMETER_NAMEE14PARAMETER_TYPE"></span><span id="_CPPv2N22InitializationSettings18set_PARAMETER_NAMEE14PARAMETER_TYPE"></span><span id="InitializationSettings::set_PARAMETER_NAME__PARAMETER_TYPE"></span><a class="reference internal" href="#_CPPv422InitializationSettings" title="InitializationSettings"><span class="n"><span class="pre">InitializationSettings</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">set_PARAMETER_NAME</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">PARAMETER_TYPE</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">value</span></span><span class="sig-paren">)</span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4N22InitializationSettings18set_PARAMETER_NAMEE14PARAMETER_TYPE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Replaces the content of the <code class="docutils literal notranslate"><span class="pre">PARAMETER_NAME</span></code> setting with <code class="docutils literal notranslate"><span class="pre">value</span></code> and return a reference to the object. <code class="docutils literal notranslate"><span class="pre">value</span></code> must be a valid value for <code class="docutils literal notranslate"><span class="pre">PARAMETER_NAME</span></code>.</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK22InitializationSettings18has_PARAMETER_NAMEEv">
+<span id="_CPPv3NK22InitializationSettings18has_PARAMETER_NAMEEv"></span><span id="_CPPv2NK22InitializationSettings18has_PARAMETER_NAMEEv"></span><span id="InitializationSettings::has_PARAMETER_NAMEC"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">has_PARAMETER_NAME</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4NK22InitializationSettings18has_PARAMETER_NAMEEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Checks whether the object contains a value for the <code class="docutils literal notranslate"><span class="pre">PARAMETER_NAME</span></code> setting. Returns <code class="docutils literal notranslate"><span class="pre">true</span></code> if it contains a value, <code class="docutils literal notranslate"><span class="pre">false</span></code> otherwise.</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK22InitializationSettings18get_PARAMETER_NAMEEv">
+<span id="_CPPv3NK22InitializationSettings18get_PARAMETER_NAMEEv"></span><span id="_CPPv2NK22InitializationSettings18get_PARAMETER_NAMEEv"></span><span id="InitializationSettings::get_PARAMETER_NAMEC"></span><span class="n"><span class="pre">PARAMETER_TYPE</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_PARAMETER_NAME</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4NK22InitializationSettings18get_PARAMETER_NAMEEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Accesses the contained value for the <code class="docutils literal notranslate"><span class="pre">PARAMETER_NAME</span></code> setting. The behavior is undefined if the object does not contain a value for setting <code class="docutils literal notranslate"><span class="pre">PARAMETER_NAME</span></code>.</p>
+</dd></dl>
+
+</dd></dl>
+
 <p>The table below summarizes what settings are available.</p>
-<div class="table-wrapper colwidths-auto docutils container">
+<div class="table-wrapper docutils container">
 <table class="docutils align-default">
 <thead>
-<tr class="row-odd"><th class="head"><p><em>PARAMETER-NAME</em></p></th>
-<th class="head"><p><em>PARAMETER-TYPE</em></p></th>
+<tr class="row-odd"><th class="head"><p><strong>PARAMETER_NAME</strong></p></th>
+<th class="head"><p><strong>PARAMETER_TYPE</strong></p></th>
 <th class="head"><p>Description</p></th>
 </tr>
 </thead>
@@ -565,45 +591,17 @@ It was introduced in version 3.7 as a replacement for the
 </tbody>
 </table>
 </div>
-<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">InitializationSettings</span><span class="p">();</span>
-</pre></div>
-</div>
-<p>Constructs a new object that does not contain any value for any of the settings.</p>
-<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">InitializationSettings</span><span class="p">(</span><span class="n">InitArgument</span><span class="w"> </span><span class="k">const</span><span class="o">&amp;</span><span class="w"> </span><span class="n">arguments</span><span class="p">);</span><span class="w">  </span><span class="c1">// deprecated</span>
-</pre></div>
-</div>
-<p>Converts the deprecated structure to a new object.
-Data members from the structure that compare equal to their default value are
-assumed to be unset.</p>
-<p>Let <code class="docutils literal notranslate"><span class="pre">PARAMETER-NAME</span></code> be a valid setting of type <code class="docutils literal notranslate"><span class="pre">PARAMETER-TYPE</span></code> as defined in the table above.</p>
-<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">InitializationSettings</span><span class="o">&amp;</span><span class="w"> </span><span class="n">set_PARAMETER</span><span class="o">-</span><span class="n">NAME</span><span class="p">(</span><span class="n">PARAMETER</span><span class="o">-</span><span class="n">NAME</span><span class="w"> </span><span class="n">value</span><span class="p">);</span>
-</pre></div>
-</div>
-<p>Replaces the content of the <code class="docutils literal notranslate"><span class="pre">PARAMETER-NAME</span></code> setting with <code class="docutils literal notranslate"><span class="pre">value</span></code> and return a
-reference to the object.
-<code class="docutils literal notranslate"><span class="pre">value</span></code> must be a valid value for <code class="docutils literal notranslate"><span class="pre">PARAMETER-NAME</span></code>.</p>
-<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="n">has_PARAMETER</span><span class="o">-</span><span class="n">NAME</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
-</pre></div>
-</div>
-<p>Checks whether the object contains a value for the <code class="docutils literal notranslate"><span class="pre">PARAMETER-NAME</span></code> setting.
-Returns <code class="docutils literal notranslate"><span class="pre">true</span></code> if it contains a value, <code class="docutils literal notranslate"><span class="pre">false</span></code> otherwise.</p>
-<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">PARAMETER</span><span class="o">-</span><span class="n">TYPE</span><span class="w"> </span><span class="n">get_PARAMETER</span><span class="o">-</span><span class="n">NAME</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
-</pre></div>
-</div>
-<p>Accesses the contained value for the <code class="docutils literal notranslate"><span class="pre">PARAMETER-NAME</span></code> setting.
-The behavior is undefined if the object does not contain a value for setting
-<code class="docutils literal notranslate"><span class="pre">PARAMETER-NAME</span></code>.</p>
 <section id="example">
 <h3>Example<a class="headerlink" href="#example" title="Permalink to this heading">#</a></h3>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Kokkos_Core.hpp&gt;</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Kokkos_Core.hpp&gt;</span>
 
 <span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">initialize</span><span class="p">(</span><span class="n">Kokkos</span><span class="o">::</span><span class="n">InitializationSettings</span><span class="p">()</span>
-<span class="w">                         </span><span class="p">.</span><span class="n">set_print_configuration</span><span class="p">(</span><span class="nb">true</span><span class="p">)</span>
-<span class="w">                         </span><span class="p">.</span><span class="n">set_map_device_id_by</span><span class="p">(</span><span class="s">&quot;random&quot;</span><span class="p">)</span>
-<span class="w">                         </span><span class="p">.</span><span class="n">set_num_threads</span><span class="p">(</span><span class="mi">1</span><span class="p">));</span>
-<span class="w">  </span><span class="c1">// ...</span>
-<span class="w">  </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">finalize</span><span class="p">();</span>
+<span class="w">    </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">initialize</span><span class="p">(</span><span class="n">Kokkos</span><span class="o">::</span><span class="n">InitializationSettings</span><span class="p">()</span>
+<span class="w">                            </span><span class="p">.</span><span class="n">set_print_configuration</span><span class="p">(</span><span class="nb">true</span><span class="p">)</span>
+<span class="w">                            </span><span class="p">.</span><span class="n">set_map_device_id_by</span><span class="p">(</span><span class="s">&quot;random&quot;</span><span class="p">)</span>
+<span class="w">                            </span><span class="p">.</span><span class="n">set_num_threads</span><span class="p">(</span><span class="mi">1</span><span class="p">));</span>
+<span class="w">    </span><span class="c1">// ...</span>
+<span class="w">    </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">finalize</span><span class="p">();</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -611,7 +609,7 @@ The behavior is undefined if the object does not contain a value for setting
 <section id="see-also">
 <h3>See also<a class="headerlink" href="#see-also" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
-<li><p><a class="reference internal" href="initialize.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">Kokkos::initialize</span></code></span></a>: initializes the Kokkos execution environment</p></li>
+<li><p><a class="reference external" href="initialize.html#kokkosinitialize">Kokkos::initialize</a>: initializes the Kokkos execution environment</p></li>
 </ul>
 </section>
 </section>
@@ -674,7 +672,7 @@ The behavior is undefined if the object does not contain a value for setting
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">InitializationSettings</a><ul>
+<li><a class="reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">InitializationSettings</span></code></a><ul>
 <li><a class="reference internal" href="#interface">Interface</a><ul>
 <li><a class="reference internal" href="#example">Example</a></li>
 <li><a class="reference internal" href="#see-also">See also</a></li>
