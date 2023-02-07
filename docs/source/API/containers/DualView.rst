@@ -58,25 +58,12 @@ Typedefs
 * ``t_dev_const_randomread_um``: The type of a const, random-access View on the device.
 * ``t_host_const_randomread_um``: The type of a const, random-access View host mirror of ``t_dev_const_randomread``.
 
-.. code-block:: cpp
-        
-    t_dev d_view;
-    t_host h_view;
+    ``t_dev d_view;`` and ``t_host h_view;``: The two View instances.
 
-\
-    * The two View instances.
+.. cppkokkos:type:: View<unsigned int[2], LayoutLeft, typename t_host::execution_space> t_modified_flags;
+.. cppkokkos:type:: View<unsigned int, LayoutLeft, typename t_host::execution_space> t_modified_flag;
 
-.. code-block:: cpp         
-
-    typedef View<unsigned int[2], LayoutLeft, typename t_host::execution_space>
-        t_modified_flags;
-    typedef View<unsigned int, LayoutLeft, typename t_host::execution_space>
-        t_modified_flag;
-    t_modified_flags modified_flags;
-    t_modified_flag modified_host, modified_device;
-
-\
-    * Counters to keep track of changes ("modified" flags)
+    * ``t_modified_flags modified_flags;`` and ``t_modified_flag modified_host, modified_device;``: Counters to keep track of changes ("modified" flags)
 
 Constructors
 ~~~~~~~~~~~~
@@ -114,19 +101,10 @@ Constructors
 Functions
 ~~~~~~~~~
 
-.. code-block:: cpp
+.. cppkokkos:kokkosinlinefunction:: template <class Device> const typename Impl::if_c<std::is_same<typename t_dev::memory_space, typename Device::memory_space>::value, t_dev, t_host>::type& view();
 
-    template <class Device>
-    KOKKOS_INLINE_FUNCTION const typename Impl::if_c<
-        std::is_same<typename t_dev::memory_space,
-                        typename Device::memory_space>::value,
-        t_dev, t_host>::type&
-    view();
+.. cppkokkos:function:: template <class Device> static int get_device_side();
 
-    template <class Device>
-    static int get_device_side();
-
-\
     * Methods for synchronizing, marking as modified, and getting Views.
     * Return a View on a specific device ``Device``.
     * Please don't be afraid of the if_c expression in the return value's type. That just tells the method what the return type should be: ``t_dev`` if the \\c Device template parameter matches this DualView's device type, else ``t_host``.
@@ -137,39 +115,21 @@ Functions
         - and if you want to get the host mirror of that View, do this:
         - ``typedef typename Kokkos::HostSpace::execution_space host_device_type; typename dual_view_type::t_host hostView = DV.view<host_device_type> ();``
 
-.. code-block:: cpp
+.. cppkokkos:function:: template <class Device> void sync(const typename Impl::enable_if<(std::is_same<typename traits::data_type, typename traits::non_const_data_type>::value) || (std::is_same<Device, int>::value), int>::type& = 0);
 
-    template <class Device>
-    void sync(const typename Impl::enable_if<
-                    (std::is_same<typename traits::data_type,
-                                  typename traits::non_const_data_type>::value) ||
-                        (std::is_same<Device, int>::value),
-                    int>::type& = 0) 
+.. cppkokkos:function:: template <class Device> void sync(const typename Impl::enable_if<(!std::is_same<typename traits::data_type, typename traits::non_const_data_type>::value) || (std::is_same<Device, int>::value), int>::type& = 0); 
 
-    template <class Device>
-    void sync(const typename Impl::enable_if<
-                    (!std::is_same<typename traits::data_type,
-                                   typename traits::non_const_data_type>::value) ||
-                        (std::is_same<Device, int>::value),
-                    int>::type& = 0); 
+.. cppkokkos:function:: template <class Device> bool need_sync() const;
 
-    template <class Device>
-    bool need_sync() const;
-
-\
     * Update data on device or host only if data in the other space has been marked as modified.
     * If ``Device`` is the same as this DualView's device type, then copy data from host to device. Otherwise, copy data from device to host. In either case, only copy if the source of the copy has been modified.
     * This is a one-way synchronization only. If the target of the copy has been modified, this operation will discard those modifications. It will also reset both device and host modified flags.
     * This method doesn't know on its own whether you modified the data in either View. You must manually mark modified data as modified, by calling the ``modify()`` method with the appropriate template parameter.
 
-.. code-block:: cpp
+.. cppkokkos:function:: template <class Device> void modify();
 
-    template <class Device>
-    void modify()
+.. cppkokkos:function:: inline void clear_sync_state();
 
-    inline void clear_sync_state();
-
-\
     * Mark data as modified on the given device \\c Device.
     * If ``Device`` is the same as this DualView's device type, then mark the device's data as modified. Otherwise, mark the host's data as modified.
 
@@ -203,22 +163,10 @@ Functions
 
     * Get stride(s) for each dimension. Sets ``stride_`` [rank] to span().
 
-.. code-block:: cpp
+.. cppkokkos:kokkosinlinefunction:: template <typename iType> typename std::enable_if<std::is_integral<iType>::value, size_t>::type extent(const iType& r) const;
 
-    template <typename iType>
-    KOKKOS_INLINE_FUNCTION constexpr
-        typename std::enable_if<std::is_integral<iType>::value, size_t>::type
-        extent(const iType& r) const;
-
-\
     * Return the extent for the requested rank
 
-.. code-block:: cpp
+.. cppkokkos:kokkosinlinefunction:: template <typename iType> typename std::enable_if<std::is_integral<iType>::value, int>::type extent_int(const iType& r) const;
 
-    template <typename iType>
-    KOKKOS_INLINE_FUNCTION constexpr
-        typename std::enable_if<std::is_integral<iType>::value, int>::type
-        extent_int(const iType& r) const;
-
-\
     * Return integral extent for the requested rank
