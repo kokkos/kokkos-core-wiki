@@ -73,9 +73,13 @@ Public Class Members
 Nested aliases
 ~~~~~~~~~~~~~~
 
-* ``execution_space``: specifies the `execution space <https://kokkos.github.io/kokkos-core-wiki/API/core/execution_spaces.html>`_ associated to the team
+.. cpp:type:: execution_space
 
-* ``scratch_memory_space``: the scratch memory space associated to this team's execution space
+    * Specifies the `execution space <https://kokkos.github.io/kokkos-core-wiki/API/core/execution_spaces.html>`_ associated to the team
+
+.. cpp:type:: scratch_memory_space
+
+    * The scratch memory space associated to this team's execution space
 
 Constructors
 ~~~~~~~~~~~~
@@ -156,45 +160,25 @@ The following functions must be called collectively by all members of a team. Th
 
     * All members of the team wait at the barrier, until the whole team arrived. This also issues a memory fence. 
 
-.. code-block:: cpp
+.. cppkokkos:kokkosinlinefunction:: template<typename T> void team_broadcast( T & value , const int source_team_rank ) const noexcept;
 
-    template<typename T>
-    KOKKOS_INLINE_FUNCTION
-    void team_broadcast( T & value , const int source_team_rank ) const noexcept;
-
-\
     * After this call ``var`` contains for every member of the team the value of ``var`` from the thread for which ``team_rank() == source_team_rank``.
         - ``var``: a variable of type ``T`` which gets overwritten by the value of ``var`` from the source rank. 
         - ``source_team_rank``: identifies the broadcasting member of the team. 
 
-.. code-block:: cpp
+.. cppkokkos:kokkosinlinefunction:: template<class Closure, typename T> void team_broadcast( Closure const & f , T & value , const int source_team_rank) const noexcept;
 
-    template<class Closure, typename T>
-    KOKKOS_INLINE_FUNCTION
-    void team_broadcast( Closure const & f , T & value , const int source_team_rank) const noexcept;
-
-\
     * After this call ``var`` contains for every member of the team the value of ``var`` from the thread for which ``team_rank() == source_team_rank`` after applying ``f``.
         - ``f``: a function object with an ``void operator() ( T & )`` which is applied to ``var`` before broadcasting it.
         - ``var``: a variable of type ``T`` which gets overwritten by the value of ``f(var)`` from the source rank. 
         - ``source_team_rank``: identifies the broadcasting member of the team. 
 
-.. code-block:: cpp
+.. cppkokkos:kokkosinlinefunction:: template< typename ReducerType> void team_reduce( ReducerType const & reducer ) const noexcept;
 
-    template< typename ReducerType >
-    KOKKOS_INLINE_FUNCTION
-    void team_reduce( ReducerType const & reducer ) const noexcept;
-
-\
     * Performs a reduction accross all members of the team as specified by ``reducer``. ``ReducerType`` must meet the concept of ``Kokkos::Reducer``. 
 
-.. code-block:: cpp
+.. cppkokkos:kokkosinlinefunction:: template< typename T > T team_scan( T const & value , T * const global = 0 ) const noexcept;
 
-    template< typename T >
-    KOKKOS_INLINE_FUNCTION
-    T team_scan( T const & value , T * const global = 0 ) const noexcept;
-
-\
     * Performs an exclusive scan over the ``var`` provided by the team members. Let ``t = team_rank()`` and ``VALUES[t]`` the value of ``var`` from thread ``t``.
         - Returns: ``VALUES[0] + VALUES[1] + ``...``+ VALUES[t-1]`` or zero for ``t==0``.
         - ``global`` if provided will be set to ``VALUES[0] + VALUES[1] + ``...``+ VALUES[team_size()-1]``, must be the same pointer for every team member. 
