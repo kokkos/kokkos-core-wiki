@@ -24,7 +24,7 @@ Execution Spaces
 ``Kokkos::HIP``
 ---------------
 
-``Kokkos::HIP`` <sup>promoted from |Experimental|_ since 4.0</sup> is an |ExecutionSpaceConceptType|_ representing execution on a device supported by HIP. Except in rare instances, it should not be used directly, but instead should be used generically as an execution space. For details, see |DocExecutionSpaceConcept|_.
+``Kokkos::HIP`` :sup:`promoted from` |Experimental|_ :sup:`since 4.0` is an |ExecutionSpaceConceptType|_ representing execution on a device supported by HIP. Except in rare instances, it should not be used directly, but instead should be used generically as an execution space. For details, see |DocExecutionSpaceConcept|_.
 
 ``Kokkos::HPX``
 ---------------
@@ -63,12 +63,12 @@ Aliases based on configuration
 ``Kokkos::DefaultExecutionSpace``
 ---------------------------------
 
-``Kokkos::DefaultExecutionSpace`` is an alias of |ExecutionSpaceConceptType|_ pointing to an ``ExecutionSpace`` based on the current configuration of Kokkos. It is set to the highest available in the hirachy ``device,host-parallel,host-serial``. It also serves as default for optionally specified template prameters of |ExecutionSpaceConceptType|_.
+``Kokkos::DefaultExecutionSpace`` is an alias of |ExecutionSpaceConceptType|_ pointing to an ``ExecutionSpace`` based on the current configuration of Kokkos. It is set to the highest available in the hierarchy ``device,host-parallel,host-serial``. It also serves as default for optionally specified template prameters of |ExecutionSpaceConceptType|_.
 
 ``Kokkos::DefaultHostExecutionSpace``
 -------------------------------------
 
-``Kokkos::DefaultHostExecutionSpace`` is an alias of |ExecutionSpaceConceptType|_ pointing to an ``ExecutionSpace`` based on the current configuration of Kokkos. It is set to the highest available in the hirachy ``host-parallel,host-serial``.
+``Kokkos::DefaultHostExecutionSpace`` is an alias of |ExecutionSpaceConceptType|_ pointing to an ``ExecutionSpace`` based on the current configuration of Kokkos. It is set to the highest available in the hierarchy ``host-parallel,host-serial``.
 
 Very Simplest Use: Not at all?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
