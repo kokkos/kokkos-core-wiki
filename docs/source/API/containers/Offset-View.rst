@@ -1,17 +1,17 @@
 ``OffsetView``
 ==============
 
-.. role:: cpp(code)
-   :language: cpp
+.. role:: cppkokkos(code)
+	:language: cppkokkos
 
 The OffsetView is in the Experimental namespace.
 
-Sometimes, it is advantageous to have the indices of an array begin at something other than zero.  In this case, an OffsetView may be used.
+Sometimes, it is advantageous to have the indices of an array begin at something other than zero. In this case, an OffsetView may be used.
 
 Construction
 ------------
 
-An OffsetView must have a label, and at least one dimension.  Only runtime extents are supported, but otherwise the semantics of an OffsetView are similar to those of a View.  
+An OffsetView must have a label, and at least one dimension. Only runtime extents are supported, but otherwise the semantics of an OffsetView are similar to those of a View.  
 
 .. code-block:: cpp
 
@@ -27,10 +27,10 @@ An OffsetView must have a label, and at least one dimension.  Only runtime exten
 Construction from a layout is also allowed.  
 
 .. code-block:: cpp
+    
+    OffsetView<int***> a("someLabel", LayoutLeft, {min0, min1, min2});
 
-   OffsetView<int***> a("someLabel", LayoutLeft, {min0, min1, min2});
-
-An OffsetView may also be created from a View that has the same underlying type.  Since the View already has extents, the beginning indices must be passed to the constructor.  
+An OffsetView may also be created from a View that has the same underlying type. Since the View already has extents, the beginning indices must be passed to the constructor.  
 
 .. code-block:: cpp
 
@@ -43,8 +43,8 @@ The OffsetView ov has the same extents as b and must be indexed from [-10,-1] an
 A std::initializer_list may also be used instead of an Array.
 
 .. code-block:: cpp
-
-   OffsetView<double**> ov(b, {-10, -20});
+    
+    OffsetView<double**> ov(b, {-10, -20});
 
 Interface
 ---------
@@ -61,13 +61,11 @@ The beginning indices may be obtained as an array. The begin and end of iteratio
 
 Note that 
 
-.. code-block:: cpp
-
-   OffsetView::end(const size_t i)
+.. cppkokkos:function:: OffsetView::end(const size_t i)
 
 returns a value that is not a legal index:  It is exactly one more than the maximum allowable index for the given dimenion i.
 
-Subviews are supported, and the result of taking a subview of an OffsetView is another OffsetView.  If ALL() is passed to the subview  function, then the offsets for that rank are preserved, otherwise they are dropped.
+Subviews are supported, and the result of taking a subview of an OffsetView is another OffsetView. If ALL() is passed to the subview function, then the offsets for that rank are preserved, otherwise they are dropped.
 
 .. code-block:: cpp
 
@@ -91,6 +89,6 @@ A compatible View with the same label is obtained from the view() method.
 
 A copy constructor and an assignment operator from a View to an OffsetView are also provided.
 
-Equivalence operators "==" and "!=" are defined.  Given an OffsetView and a View, they are equivalent in the same sense that two Views are equivalent.  Similarly, two OffsetViews are equivalent in the same sense if their begins also match.
+Equivalence operators "==" and "!=" are defined. Given an OffsetView and a View, they are equivalent in the same sense that two Views are equivalent. Similarly, two OffsetViews are equivalent in the same sense if their begins also match.
 
 Mirrors are also supported.
