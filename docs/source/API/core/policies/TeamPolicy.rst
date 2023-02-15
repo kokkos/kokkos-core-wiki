@@ -27,68 +27,73 @@ Synopsis
 
     template<class ... Args>
     class Kokkos::TeamPolicy {
-        using execution_policy = TeamPolicy;
+        public:
+            using execution_policy = TeamPolicy;
 
-        //Inherited from PolicyTraits<Args...>  
-        using execution_space   = PolicyTraits<Args...>::execution_space; 
-        using schedule_type     = PolicyTraits<Args...>::schedule_type; 
-        using work_tag          = PolicyTraits<Args...>::work_tag; 
-        using index_type        = PolicyTraits<Args...>::index_type; 
-        using iteration_pattern = PolicyTraits<Args...>::iteration_pattern; 
-        using launch_bounds     = PolicyTraits<Args...>::launch_bounds;
+            //Inherited from PolicyTraits<Args...>  
+            using execution_space   = PolicyTraits<Args...>::execution_space; 
+            using schedule_type     = PolicyTraits<Args...>::schedule_type; 
+            using work_tag          = PolicyTraits<Args...>::work_tag; 
+            using index_type        = PolicyTraits<Args...>::index_type; 
+            using iteration_pattern = PolicyTraits<Args...>::iteration_pattern; 
+            using launch_bounds     = PolicyTraits<Args...>::launch_bounds;
 
         using member_type = TeamMemberType<execution_space>;
 
-        //Constructors
-        TeamPolicy(const TeamPolicy&) = default;
-        TeamPolicy(TeamPolicy&&) = default;
+        public:
+            //Constructors
+            TeamPolicy(const TeamPolicy&) = default;
+            TeamPolicy(TeamPolicy&&) = default;
 
-        TeamPolicy();
+            TeamPolicy();
+            
+            template<class ... Args>
+            TeamPolicy( const typename traits::execution_space & work_space
+                      , const index_type league_size
+                      , const index_type team_size
+                      , const index_type vector_length = 1);
 
-        template<class ... Args>
-        TeamPolicy( const typename traits::execution_space & work_space
-                  , const index_type league_size
-                  , const index_type team_size
-                  , const index_type vector_length = 1);
-
-        template<class ... Args>
-        TeamPolicy( const index_type league_size
-                  , const index_type team_size
-                  , const index_type vector_length = 1);
+            template<class ... Args>
+            TeamPolicy( const index_type league_size
+                      , const index_type team_size
+                      , const index_type vector_length = 1);
 
         TeamPolicy& operator = (const TeamPolicy&) = default;
 
-        
-        // set chunk_size to a discrete value
-        TeamPolicy& set_chunk_size(int chunk);
-        // set scratch size for per-team and/or per-thread
-        TeamPolicy& set_scratch_size(const int& level, const Impl::PerTeamValue& per_team);
-        TeamPolicy& set_scratch_size(const int& level, const Impl::PerThreadValue& per_thread);
-        TeamPolicy& set_scratch_size(const int& level, const Impl::PerTeamValue& per_team, const Impl::PerThreadValue& per_thread);
-        TeamPolicy& set_scratch_size(const int& level, const Impl::PerThreadValue& per_thread, const Impl::PerTeamValue& per_team);
+        public:
+            // set chunk_size to a discrete value
+            TeamPolicy& set_chunk_size(int chunk);
+            // set scratch size for per-team and/or per-thread
+            TeamPolicy& set_scratch_size(const int& level, const Impl::PerTeamValue& per_team);
+            TeamPolicy& set_scratch_size(const int& level, const Impl::PerThreadValue& per_thread);
+            TeamPolicy& set_scratch_size(const int& level, const Impl::PerTeamValue& per_team, const Impl::PerThreadValue& per_thread);
+            TeamPolicy& set_scratch_size(const int& level, const Impl::PerThreadValue& per_thread, const Impl::PerTeamValue& per_team);
 
-        // querying configuration limits
-        template<class FunctorType>
-        int team_size_max(const FunctorType& f, const ParallelForTag&) const;
-        template<class FunctorType>
-        int team_size_max(const FunctorType& f, const ParallelReduceTag&) const;
-        template<class FunctorType>
-        int team_size_recommended(const FunctorType& f, const ParallelForTag&) const;
-        template<class FunctorType>
-        int team_size_recommended(const FunctorType& f, const ParallelReduceTag&) const;
-        static int vector_length_max(); 
+            // querying configuration limits
+            template<class FunctorType>
+            int team_size_max(const FunctorType& f, const ParallelForTag&) const;
+            template<class FunctorType>
+            int team_size_max(const FunctorType& f, const ParallelReduceTag&) const;
+            template<class FunctorType>
+            int team_size_recommended(const FunctorType& f, const ParallelForTag&) const;
+            template<class FunctorType>
+            int team_size_recommended(const FunctorType& f, const ParallelReduceTag&) const;
+            static int vector_length_max(); 
         static int scratch_size_max(int level); 
 
-        // querying configuration settings
-        int team_size() const;
-        int league_size() const;
+        public:
+            // querying configuration settings
+            int team_size() const;
+            int league_size() const;
         int scratch_size(int level, int team_size_ = -1) const;
-        int team_scratch_size(int level) const;
+        public:
+            int team_scratch_size(int level) const;
         int thread_scratch_size(int level) const;
-        int chunk_size() const;
+        public:
+            int chunk_size() const;
 
-        // return ExecSpace instance provided to the constructor
-        KOKKOS_INLINE_FUNCTION const typename traits::execution_space & space() const;
+            // return ExecSpace instance provided to the constructor
+            KOKKOS_INLINE_FUNCTION const typename traits::execution_space & space() const;
     };
 
 Parameters
