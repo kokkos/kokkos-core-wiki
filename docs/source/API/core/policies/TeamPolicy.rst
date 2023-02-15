@@ -129,6 +129,14 @@ Constructors
    
     * Default Constructor uninitialized policy.
 
+.. cppkokkos:function:: TeamPolicy(const TeamPolicy&) = default;
+
+    * Copy constructor
+
+.. cppkokkos:function:: TeamPolicy(TeamPolicy&&) = default;
+
+    * Move constructor
+
 .. cppkokkos:function:: TeamPolicy(index_type league_size, index_type team_size, index_type vector_length=1)
 
     * Request to launch ``league_size`` work items, each of which is assigned to a team of threads with ``team_size`` threads, using a vector length of ``vector_length``. If the team size is not possible when calling a parallel policy, that kernel launch may throw. 
