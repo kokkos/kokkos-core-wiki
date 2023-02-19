@@ -46,6 +46,7 @@ and ``MemoryTraits`` are specified, ``MemorySpace`` must come before ``MemoryTra
   the number of runtime length dimensions and the number of BRACKETS defines the compile time dimensions.
   Due to C++ type restrictions runtime dimensions must come first.
   Examples:
+
   - ``double**``: 2D View of ``double`` with 2 runtime dimensions
 
   - ``const int***[5][3]``: 5D View of ``int`` with 3 runtime and 2 compile dimensions. The data is ``const``.
@@ -56,9 +57,9 @@ and ``MemoryTraits`` are specified, ``MemorySpace`` must come before ``MemoryTra
 
   Determines the mapping of indices into the underlying 1D memory storage.
   Custom Layouts can be implemented, but Kokkos comes with some built-in ones:
-  - |LayoutRight|_: strides increase from the right most to the left most dimension.
-    The last dimension has a stride of one. This corresponds to how C multi
-    dimensional arrays (``[][][]``) are laid out in memory.
+
+  - |LayoutRight|_: strides increase from the right most to the left most dimension. The last dimension has
+    a stride of one. This corresponds to how C multi dimensional arrays (``[][][]``) are laid out in memory.
 
   - |LayoutLeft|_: strides increase from the left most to the right most dimension.
     The first dimension has a stride of one. This is the layout Fortran uses for its arrays.
@@ -74,8 +75,12 @@ and ``MemoryTraits`` are specified, ``MemorySpace`` must come before ``MemoryTra
 
 .. |Atomic| replace:: :cppkokkos:func:`Atomic`
 
-* ``MemoryTraits``: Sets access properties via enum parameters for the templated ``Kokkos::MemoryTraits<>`` class.
+
+* ``MemoryTraits``:
+
+  Sets access properties via enum parameters for the templated ``Kokkos::MemoryTraits<>`` class.
   Enums can be combined bit combined. Posible values:
+
   - ``Unmanaged``: The View will not be reference counted. The allocation has to be provided to the constructor.
 
   - |Atomic|_: All accesses to the view will use atomic operations.
