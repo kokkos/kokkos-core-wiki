@@ -58,10 +58,10 @@ Examples
     Kokkos::View<double***[5]> a("A",N0,N1,N2);
 
     auto s  = Kokkos::subview(a,
-                 std::pair<int,int>(3,15),
-                 5,
-                 Kokkos::ALL,
-                 Kokkos::ALL);
+                              std::pair<int,int>(3,15),
+			      5,
+			      Kokkos::ALL,
+			      Kokkos::ALL);
     for(int i0 = 0; i0 < s.extent(0); i0++)
     for(int i1 = 0; i1 < s.extent(1); i1++)
     for(int i2 = 0; i2 < s.extent(2); i2++) {
