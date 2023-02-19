@@ -39,7 +39,7 @@ Returns a new ``Kokkos::View`` ``s`` viewing a subset of ``v`` specified by ``ar
     - ``std::pair<iType,iType>`` with ``std::is_integral<iType>::value`` being true.
     - ``Kokkos::pair<iType,iType>`` with ``std::is_integral<iType>::value`` being true.
     - ``iType`` with ``std::is_integral<iType>::value`` being true.
-    - ``decltype(``\ |KokkosAll|_ ``)>``
+    - ``std::remove_const_t< decltype(``\ |KokkosAll|_ ``)>``
 
 * If the ``r``\ th argument ``arg_r`` is of type ``std::pair<iType,iType>`` or ``Kokkos::pair<iType,iType>`` it must meet:
     - ``arg_r.first >= 0``
@@ -62,8 +62,8 @@ Examples
                  5,
                  Kokkos::ALL,
                  Kokkos::ALL);
-    for(int i0 = 0; i0 < s.extent(0); i0++) 
-    for(int i1 = 0; i1 < s.extent(1); i1++) 
+    for(int i0 = 0; i0 < s.extent(0); i0++)
+    for(int i1 = 0; i1 < s.extent(1); i1++)
     for(int i2 = 0; i2 < s.extent(2); i2++) {
         assert(s(i0,i1,i2) == a(i0+3,5,i1,i2));
     }
