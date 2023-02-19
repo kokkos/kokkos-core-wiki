@@ -23,37 +23,32 @@ Create View allocation parameter bundle from argument list. Valid argument list 
 * ``Kokkos::AllowPadding`` to allow allocation to pad dimensions for memory alignment
 * a pointer to create an unmanaged View wrapping that pointer
 
-Synopsis
---------
+..
+   Synopsis
+   --------
 
-.. code-block:: cpp
+   .. code-block:: cpp
 
-    template <class... Args>
-    /*implementation-detail*/
-    view_alloc(Args const&... args);
+       template <class... Args>
+       /*implementation-detail*/
+       view_alloc(Args const&... args);
 
-    template <class... Args>
-    KOKKOS_FUNCTION
-    /*implementation-detail*/
-    view_wrap(Args const&... args);
+       template <class... Args>
+       KOKKOS_FUNCTION
+       /*implementation-detail*/
+       view_wrap(Args const&... args);
 
 Description
 -----------
 
-.. cppkokkos:function:: template <class... Args> view_alloc(Args const&... args)
+.. cppkokkos:function:: template <class... Args> impl_defined view_alloc(Args const&... args)
 
-Create View allocation parameter bundle from argument list.
+   Create View allocation parameter bundle from argument list.
 
-Restrictions
-~~~~~~~~~~~~
+   ``args`` : Cannot contain a pointer to memory.
 
-* ``args`` : Cannot contain a pointer to memory.
+.. cppkokkos:function:: template <class... Args> impl_defined view_wrap(Args const&... args)
 
-.. cppkokkos:function:: template <class... Args> view_wrap(Args const&... args)
+   Create View allocation parameter bundle from argument list.
 
-Create View allocation parameter bundle from argument list.
-
-Restrictions
-~~~~~~~~~~~~
-
-* ``args`` : Can only be a pointer to memory.
+   ``args`` : Can only be a pointer to memory.
