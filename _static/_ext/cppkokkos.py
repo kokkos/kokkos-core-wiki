@@ -3707,7 +3707,7 @@ class ASTDeclaration(ASTBase):
 
     @property
     def function_params(self) -> List[ASTFunctionParameter]:
-        if self.objectType != 'function':
+        if self.objectType not in ['function', 'kokkosinlinefunction']:
             return None
         return self.declaration.function_params
 
@@ -5837,7 +5837,7 @@ class DefinitionParser(BaseParser):
             return None
         self.skip_ws()
         if not self.skip_string('('):
-            if paramMode == 'function':
+            if paramMode in ['function', 'kokkosinlinefunction']:
                 self.fail('Expecting "(" in parameters-and-qualifiers.')
             else:
                 return None
@@ -5952,7 +5952,7 @@ class DefinitionParser(BaseParser):
                 if volatile:
                     continue
             if not storage:
-                if outer in ('member', 'function'):
+                if outer in ('member', 'function', 'kokkosinlinefunction'):
                     if self.skip_word('static'):
                         storage = 'static'
                         continue
@@ -5966,11 +5966,11 @@ class DefinitionParser(BaseParser):
                 if self.skip_word('register'):
                     storage = 'register'
                     continue
-            if not inline and outer in ('function', 'member'):
+            if not inline and outer in ('function', 'member', 'kokkosinlinefunction'):
                 inline = self.skip_word('inline')
                 if inline:
                     continue
-            if not constexpr and outer in ('member', 'function'):
+            if not constexpr and outer in ('member', 'function', 'kokkosinlinefunction'):
                 constexpr = self.skip_word("constexpr")
                 if constexpr:
                     continue
@@ -5984,7 +5984,7 @@ class DefinitionParser(BaseParser):
                     threadLocal = self.skip_word('thread_local')
                     if threadLocal:
                         continue
-            if outer == 'function':
+            if outer == 'function' or outer == 'kokkosinlinefunction':
                 if not consteval:
                     consteval = self.skip_word('consteval')
                     if consteval:
@@ -7662,7 +7662,7 @@ class CPPKokkosDomain(Domain):
     # @@@@@!
     label = 'C++'
     object_types = {
-        'kokkosinlinefunction':  ObjType(_('kokkosinlinefunction'),             'identifier', 'type'),
+        'kokkosinlinefunction':  ObjType(_('kokkosinlinefunction'), 'identifier', 'type'),
         'class':      ObjType(_('class'),      'class', 'struct',   'identifier', 'type'),
         'union':      ObjType(_('union'),      'union',             'identifier', 'type'),
         'function':   ObjType(_('function'),   'func',              'identifier', 'type'),
