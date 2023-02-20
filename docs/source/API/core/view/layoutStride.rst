@@ -47,7 +47,7 @@ Description
    .. rubric:: Constructors
 
 
-   .. cppkokkos:function:: KOKKOS_INLINE_FUNCTION explicit constexpr LayoutStride(size_t N0 = 0, size_t S0 = 0, \
+   .. cppkokkos:kokkosinlinefunction:: explicit constexpr LayoutStride(size_t N0 = 0, size_t S0 = 0, \
 			   size_t N1 = 0, \
                            size_t S1 = 0, size_t N2 = 0, size_t S2 = 0, \
                            size_t N3 = 0, size_t S3 = 0, size_t N4 = 0, \
