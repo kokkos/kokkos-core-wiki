@@ -79,6 +79,16 @@ Description
 
    .. rubric:: Constructors
 
+
+   .. cppkokkos:function:: KOKKOS_INLINE_FUNCTION explicit constexpr LayoutStride(size_t N0 = 0, size_t S0 = 0, \
+			   size_t N1 = 0, \
+                           size_t S1 = 0, size_t N2 = 0, size_t S2 = 0, \
+                           size_t N3 = 0, size_t S3 = 0, size_t N4 = 0, \
+                           size_t S4 = 0, size_t N5 = 0, size_t S5 = 0, \
+                           size_t N6 = 0, size_t S6 = 0, size_t N7 = 0, size_t S7 = 0);
+
+      Constructor that takes in up to 8 sizes, to set the sizes of the corresponding dimensions of the Layout
+
    .. cppkokkos:function:: LayoutStride(LayoutStride const&) = default;
 
       Default copy constructor, element-wise copies the other Layout
@@ -86,15 +96,6 @@ Description
    .. cppkokkos:function:: LayoutStride(LayoutStride&&) = default;
 
       Default move constructor, element-wise moves the other Layout
-
-
-   .. cppkokkos:function:: KOKKOS_INLINE_FUNCTION explicit constexpr LayoutStride(size_t N0 = 0, size_t S0 = 0, size_t N1 = 0, \
-                                       size_t S1 = 0, size_t N2 = 0, size_t S2 = 0, \
-                                       size_t N3 = 0, size_t S3 = 0, size_t N4 = 0, \
-                                       size_t S4 = 0, size_t N5 = 0, size_t S5 = 0, \
-                                       size_t N6 = 0, size_t S6 = 0, size_t N7 = 0, size_t S7 = 0);
-
-      Constructor that takes in up to 8 sizes, to set the sizes of the corresponding dimensions of the Layout
 
    .. rubric:: Assignment operators
 
@@ -108,12 +109,10 @@ Description
 
    .. rubric:: Functions
 
-   .. code-block:: cpp
-
-      KOKKOS_INLINE_FUNCTION static LayoutStride order_dimensions(int const rank,
+   .. cppkokkos:kokkosinlinefunction:: static LayoutStride order_dimensions(int const rank, \
 		   iTypeOrder const* const order, iTypeDimen const* const dimen);
 
-   Calculates the strides given ordered dimensions
+      Calculates the strides given ordered dimensions
 
 Example
 -------
