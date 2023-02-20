@@ -1,36 +1,39 @@
 ``OffsetView``
 ==============
 
+An ``OffsetView`` can be used when the indices of an array begin at something other than zero.
+
 .. role:: cppkokkos(code)
-	:language: cppkokkos
+	  :language: cppkokkos
 
-The OffsetView is in the Experimental namespace.
+.. warning::
 
-Sometimes, it is advantageous to have the indices of an array begin at something other than zero. In this case, an OffsetView may be used.
+   The OffsetView is in the Experimental namespace.
+
 
 Construction
 ------------
 
-An OffsetView must have a label, and at least one dimension. Only runtime extents are supported, but otherwise the semantics of an OffsetView are similar to those of a View.  
+An OffsetView must have a label, and at least one dimension. Only runtime extents are supported, but otherwise the semantics of an OffsetView are similar to those of a View.
 
 .. code-block:: cpp
 
-   const size_t min0 = ...; 
-   const size_t max0 = ...; 
-   const size_t min1 = ...; 
-   const size_t max1 = ...; 
-   const size_t min2 = ...; 
-   const size_t max2 = ...; 
+   const size_t min0 = ...;
+   const size_t max0 = ...;
+   const size_t min1 = ...;
+   const size_t max1 = ...;
+   const size_t min2 = ...;
+   const size_t max2 = ...;
 
    OffsetView<int***> a("someLabel", {min0, max0}, {min1, max1},{min2, max2});
 
-Construction from a layout is also allowed.  
+Construction from a layout is also allowed.
 
 .. code-block:: cpp
-    
+
     OffsetView<int***> a("someLabel", LayoutLeft, {min0, min1, min2});
 
-An OffsetView may also be created from a View that has the same underlying type. Since the View already has extents, the beginning indices must be passed to the constructor.  
+An OffsetView may also be created from a View that has the same underlying type. Since the View already has extents, the beginning indices must be passed to the constructor.
 
 .. code-block:: cpp
 
@@ -38,12 +41,12 @@ An OffsetView may also be created from a View that has the same underlying type.
    Array<int64_t, 2> begins = {-10, -20};
    OffsetView<double**> ov(b, begins);
 
-The OffsetView ov has the same extents as b and must be indexed from [-10,-1] and [-20,-11].  
+The OffsetView ov has the same extents as b and must be indexed from [-10,-1] and [-20,-11].
 
 A std::initializer_list may also be used instead of an Array.
 
 .. code-block:: cpp
-    
+
     OffsetView<double**> ov(b, {-10, -20});
 
 Interface
@@ -59,9 +62,11 @@ The beginning indices may be obtained as an array. The begin and end of iteratio
    const int64_t begin0 = ov.begin(0);
    const int64_t end0= ov.end(0);
 
-Note that 
+Note that
 
-.. cppkokkos:function:: OffsetView::end(const size_t i)
+.. code-block:: cpp
+
+   OffsetView::end(const size_t i)
 
 returns a value that is not a legal index:  It is exactly one more than the maximum allowable index for the given dimenion i.
 
