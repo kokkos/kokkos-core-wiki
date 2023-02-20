@@ -17,39 +17,6 @@ Usage
     Kokkos::View<float**, Kokkos::LayoutStride> mesh_subcomponent;
     mesh_subcomponent = Kokkos::subview(full_mesh,Kokkos::ALL(), 0, Kokkos::ALL()); // take x and z components
 
-..
-   Synopsis
-   --------
-
-   .. code-block:: cpp
-
-       struct LayoutStride {
-	   typedef LayoutStride array_layout;
-
-	   size_t dimension[ARRAY_LAYOUT_MAX_RANK];
-	   size_t stride[ARRAY_LAYOUT_MAX_RANK];
-
-	   enum { is_extent_constructible = false };
-
-	   LayoutStride(LayoutStride const&) = default;
-	   LayoutStride(LayoutStride&&)      = default;
-	   LayoutStride& operator=(LayoutStride const&) = default;
-	   LayoutStride& operator=(LayoutStride&&) = default;
-
-	   template <typename iTypeOrder, typename iTypeDimen>
-	   KOKKOS_INLINE_FUNCTION static LayoutStride order_dimensions(
-	       int const rank, iTypeOrder const* const order,
-	       iTypeDimen const* const dimen);
-
-	   KOKKOS_INLINE_FUNCTION
-	   explicit constexpr LayoutStride(size_t N0 = 0, size_t S0 = 0, size_t N1 = 0,
-					   size_t S1 = 0, size_t N2 = 0, size_t S2 = 0,
-					   size_t N3 = 0, size_t S3 = 0, size_t N4 = 0,
-					   size_t S4 = 0, size_t N5 = 0, size_t S5 = 0,
-					   size_t N6 = 0, size_t S6 = 0, size_t N7 = 0,
-					   size_t S7 = 0);
-       };
-
 Description
 -----------
 
