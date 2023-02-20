@@ -1,5 +1,5 @@
-``deep_copy()``
-===============
+``deep_copy``
+=============
 
 .. role:: cppkokkos(code)
     :language: cppkokkos
@@ -14,7 +14,8 @@ Usage
    Kokkos::deep_copy(exec_space, dest, src);
    Kokkos::deep_copy(dest, src);
 
-Copies data from ``src`` to ``dest``, where ``src`` and ``dest`` can be `Kokkos::View <view.html>`_ s or scalars under certain circumstances.
+Copies data from ``src`` to ``dest``, where ``src`` and ``dest``
+can be `Kokkos::Views <view.html>`_ or scalars under certain circumstances.
 
 Interface
 ---------
@@ -42,10 +43,14 @@ Requirements
 ~~~~~~~~~~~~
 
 * If ``src`` and ``dest`` are `Kokkos::View <view.html>`_ s, then all the following are true:
-    - ``std::is_same<ViewDest::non_const_value_type, ViewSrc::non_const_value_type>::value == true``
-    - ``src.rank == dest.rank`` (or, for ``Kokkos::DynRankView`` , ``src.rank() == dest.rank()`` )
-    - For all ``k`` in ``[0, dest.rank)`` ``dest.extent(k) == src.extent(k)`` (or the same as ``dest.rank()``)
-    - ``src.span_is_contiguous() && dest.span_is_contiguous() && std::is_same<ViewDest::array_layout,ViewSrc::array_layout>::value``, *or* there exists an `ExecutionSpace <../execution_spaces.html>`_ ``copy_space`` (either given or defaulted) such that both ``SpaceAccessibility<copy_space, ViewDest::memory_space>::accessible == true`` and ``SpaceAccessibility<copy_space,ViewSrc::memory_space>::accessible == true``.
+
+  - ``std::is_same<ViewDest::non_const_value_type, ViewSrc::non_const_value_type>::value == true``
+
+  - ``src.rank == dest.rank`` (or, for ``Kokkos::DynRankView`` , ``src.rank() == dest.rank()`` )
+
+  - For all ``k`` in ``[0, dest.rank)`` ``dest.extent(k) == src.extent(k)`` (or the same as ``dest.rank()``)
+
+  - ``src.span_is_contiguous() && dest.span_is_contiguous() && std::is_same<ViewDest::array_layout,ViewSrc::array_layout>::value``, *or* there exists an `ExecutionSpace <../execution_spaces.html>`_ ``copy_space`` (either given or defaulted) such that both ``SpaceAccessibility<copy_space, ViewDest::memory_space>::accessible == true`` and ``SpaceAccessibility<copy_space,ViewSrc::memory_space>::accessible == true``.
 
 * If ``src`` is a `Kokkos::View <view.html>`_ and ``dest`` is a scalar, then ``src.rank == 0`` is true.
 
@@ -53,6 +58,7 @@ Semantics
 ---------
 
 * If no `ExecutionSpace <../execution_spaces.html>`_ argument is provided, all outstanding operations (kernels, copy operation) in any execution spaces will be finished before the copy is executed, and the copy operation is finished before the call returns.
+
 * If an `ExecutionSpace <../execution_spaces.html>`_ argument ``exec_space`` is provided the call is potentially asynchronous—i.e., the call returns before the copy operation is executed. In that case the copy operation will occur only after any already submitted work to ``exec_space`` is finished, and the copy operation will be finished before any work submitted to ``exec_space`` after the ``deep_copy`` call returns is executed. Note: the copy operation is only synchronous with respect to work in the specific execution space instance, but not necessarily with work in other instances of the same type. This behaves analogous to issuing a ``cudaMemcpyAsync`` into a specific CUDA stream, without any additional synchronization.
 
 Examples
@@ -133,7 +139,7 @@ How to get layout incompatible views copied
             static_assert(std::is_same<decltype(h_view_tmp)::array_layout,
                                        Kokkos::LayoutLeft>::value);
 
-            // This now works since h_view_tmp and h_view are both accessible 
+            // This now works since h_view_tmp and h_view are both accessible
             // from HostSpace::execution_space
             Kokkos::deep_copy(h_view_tmp,h_view);
 
