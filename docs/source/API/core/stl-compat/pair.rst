@@ -72,14 +72,18 @@ Constructors
     * Element-wise constructor. Assigns ``first`` the value of ``f``, ``second`` the value of ``s`` 
 
 .. cppkokkos:function:: template <class U, class V> KOKKOS_FORCEINLINE_FUNCTION constexpr pair(const pair<U, V>& p);
-      
+
     * Conversion from ``std::pair``. Assigns each element of the pair to its corresponding element in the ``p``
 
 Assignment and conversion
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. cppkokkos:function:: template <class U, class V> KOKKOS_FORCEINLINE_FUNCTION pair<T1, T2>& operator=(const pair<U, V>& p);
+.. code-block:: cpp
 
+    template <class U, class V>
+    KOKKOS_FORCEINLINE_FUNCTION pair<T1, T2>& operator=(const pair<U, V>& p);
+
+\
     * Sets ``first`` to ``p.first`` and ``second`` to ``p.second`` 
 
 Functions
