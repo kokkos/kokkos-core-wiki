@@ -39,9 +39,13 @@ Template parameters other than `DataType` are optional, but ordering is enforced
 
 ### Enums
 
- * `rank`: rank of the view (i.e. the dimensionality).
- * `rank_dynamic`: number of runtime determined dimensions.
+ * `rank`: rank of the view (i.e. the dimensionality). **(until Kokkos 4.1)**
+ * `rank_dynamic`: number of runtime determined dimensions. **(until Kokkos 4.1)**
  * `reference_type_is_lvalue_reference`: whether the reference type is a C++ lvalue reference. 
+
+**(since Kokkos 4.1)** `rank` and `rank_dynamic` are static member constants that are convertible to `size_t`.
+Their underlying types are unspecified, but equivalent to `std::integral_constant` with a nullary member function callable from host and device side.
+Users are encouraged to use `rank()` and `rank_dynamic()` (akin to a static member function call) instead of relying on implicit conversion to an integral type.
 
 ### Typedefs
 
@@ -142,6 +146,20 @@ Template parameters other than `DataType` are optional, but ordering is enforced
     See notes on `reference_type` for properties of the return type. 
 
 ### Data Layout, Dimensions, Strides
+
+  * ```c++
+    static constexpr size_t rank()  // (since Kokkos 4.1)
+    ```
+    Returns the rank of the view.
+
+  * ```c++
+    static constexpr size_t rank_dynamic()  // (since Kokkos 4.1)
+    ```
+    Returns the number of runtime determined dimensions.
+
+**Note:** in practice, `rank()` and `rank_dynamic()` are not actually
+implemented as static member functions but `rank` and `rank_dynamic` underlying
+types have a nullary member function (i.e. callable with no argument).
 
   * ```c++
     constexpr array_layout layout() const
