@@ -465,7 +465,7 @@
         </a>
         <div class="content-icon-container">
 <div class="edit-this-page">
-  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/API/core/view/view.md" title="Edit this page">
+  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/API/core/view/view.rst" title="Edit this page">
     <svg aria-hidden="true" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
       <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4"></path>
@@ -489,49 +489,67 @@
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="view">
+          <section id="view">
 <h1><code class="docutils literal notranslate"><span class="pre">View</span></code><a class="headerlink" href="#view" title="Permalink to this heading">#</a></h1>
-<p>Header File: <code class="docutils literal notranslate"><span class="pre">Kokkos_Core.hpp</span></code></p>
-<p>Usage:</p>
+<p>Header File: <code class="docutils literal notranslate"><span class="pre">&lt;Kokkos_Core.hpp&gt;</span></code></p>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this heading">#</a></h2>
 <p>Kokkos View is a potentially reference counted multi dimensional array with compile time layouts and memory space.
 Its semantics are similar to that of <code class="docutils literal notranslate"><span class="pre">std::shared_ptr</span></code>.</p>
+</section>
 <section id="interface">
 <h2>Interface<a class="headerlink" href="#interface" title="Permalink to this heading">#</a></h2>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">DataType</span><span class="w"> </span><span class="p">[,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">LayoutType</span><span class="p">]</span><span class="w"> </span><span class="p">[,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">MemorySpace</span><span class="p">]</span><span class="w"> </span><span class="p">[,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">MemoryTraits</span><span class="p">]</span><span class="o">&gt;</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">DataType</span><span class="w"> </span><span class="p">[,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">LayoutType</span><span class="p">]</span><span class="w"> </span><span class="p">[,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">MemorySpace</span><span class="p">]</span><span class="w"> </span><span class="p">[,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">MemoryTraits</span><span class="p">]</span><span class="o">&gt;</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">View</span><span class="p">;</span>
 </pre></div>
 </div>
 <section id="parameters">
 <h3>Parameters<a class="headerlink" href="#parameters" title="Permalink to this heading">#</a></h3>
-<p>Template parameters other than <code class="docutils literal notranslate"><span class="pre">DataType</span></code> are optional, but ordering is enforced. That means for example that <code class="docutils literal notranslate"><span class="pre">LayoutType</span></code> can be omitted but if both <code class="docutils literal notranslate"><span class="pre">MemorySpace</span></code> and <code class="docutils literal notranslate"><span class="pre">MemoryTraits</span></code> are specified, <code class="docutils literal notranslate"><span class="pre">MemorySpace</span></code> must come before <code class="docutils literal notranslate"><span class="pre">MemoryTraits</span></code>.</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">DataType</span></code>: Defines the fundamental scalar type of the <code class="docutils literal notranslate"><span class="pre">View</span></code> and its dimensionality. The basic structure is <code class="docutils literal notranslate"><span class="pre">ScalarType</span> <span class="pre">STARS</span> <span class="pre">BRACKETS</span></code> where the number of STARS denotes the number of runtime length dimensions and the number of BRACKETS defines the compile time dimensions. Due to C++ type restrictions runtime dimensions must come first. Examples:</p>
+<p>Template parameters other than <code class="docutils literal notranslate"><span class="pre">DataType</span></code> are optional, but ordering is enforced.
+That means for example that <code class="docutils literal notranslate"><span class="pre">LayoutType</span></code> can be omitted but if both <code class="docutils literal notranslate"><span class="pre">MemorySpace</span></code>
+and <code class="docutils literal notranslate"><span class="pre">MemoryTraits</span></code> are specified, <code class="docutils literal notranslate"><span class="pre">MemorySpace</span></code> must come before <code class="docutils literal notranslate"><span class="pre">MemoryTraits</span></code>.</p>
 <ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">DataType</span></code>:</p>
+<p>Defines the fundamental scalar type of the <code class="docutils literal notranslate"><span class="pre">View</span></code> and its dimensionality.
+The basic structure is <code class="docutils literal notranslate"><span class="pre">ScalarType</span> <span class="pre">STARS</span> <span class="pre">BRACKETS</span></code> where the number of STARS denotes
+the number of runtime length dimensions and the number of BRACKETS defines the compile time dimensions.
+Due to C++ type restrictions runtime dimensions must come first.
+Examples:</p>
+<ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">double**</span></code>: 2D View of <code class="docutils literal notranslate"><span class="pre">double</span></code> with 2 runtime dimensions</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">int***[5][3]</span></code>: 5D View of <code class="docutils literal notranslate"><span class="pre">int</span></code> with 3 runtime and 2 compile dimensions. The data is <code class="docutils literal notranslate"><span class="pre">const</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Foo[6][2]</span></code>: 2D View of a class <code class="docutils literal notranslate"><span class="pre">Foo</span></code> with 2 compile time dimensions.</p></li>
 </ul>
 </li>
-<li><p><code class="docutils literal notranslate"><span class="pre">LayoutType</span></code>: determines the mapping of indices into the underlying 1D memory storage. Custom Layouts can be implemented, but Kokkos comes with some built-in ones:</p>
-<ul>
-<li><p><a class="reference internal" href="layoutRight.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">LayoutRight</span></code></span></a>: strides increase from the right most to the left most dimension. The last dimension has a stride of one. This corresponds to how C multi dimensional arrays (<code class="docutils literal notranslate"><span class="pre">[][][]</span></code>) are laid out in memory.</p></li>
-<li><p><a class="reference internal" href="layoutLeft.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">LayoutLeft</span></code></span></a>: strides increase from the left most to the right most dimension. The first dimension has a stride of one. This is the layout Fortran uses for its arrays.</p></li>
-<li><p><a class="reference internal" href="layoutStride.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">LayoutStride</span></code></span></a>: strides can be arbitrary for each dimension.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LayoutType</span></code>:</p>
+<p>Determines the mapping of indices into the underlying 1D memory storage.
+Custom Layouts can be implemented, but Kokkos comes with some built-in ones:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="layoutRight.html"><code class="xref cppkokkos cppkokkos-func docutils literal notranslate"><span class="pre">LayoutRight()</span></code></a>: strides increase from the right most to the left most dimension. The last dimension has
+a stride of one. This corresponds to how C multi dimensional arrays (<code class="docutils literal notranslate"><span class="pre">[][][]</span></code>) are laid out in memory.</p></li>
+<li><p><a class="reference external" href="layoutLeft.html"><code class="xref cppkokkos cppkokkos-func docutils literal notranslate"><span class="pre">LayoutLeft()</span></code></a>: strides increase from the left most to the right most dimension.
+The first dimension has a stride of one. This is the layout Fortran uses for its arrays.</p></li>
+<li><p><a class="reference external" href="layoutStride.html"><code class="xref cppkokkos cppkokkos-func docutils literal notranslate"><span class="pre">LayoutStride()</span></code></a>: strides can be arbitrary for each dimension.</p></li>
 </ul>
 </li>
-<li><p><code class="docutils literal notranslate"><span class="pre">MemorySpace</span></code>: Controls the storage location. If omitted the default memory space of the default execution space is used (i.e. <code class="docutils literal notranslate"><span class="pre">Kokkos::DefaultExecutionSpace::memory_space</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">MemoryTraits</span></code>: Sets access properties via enum parameters for the templated <code class="docutils literal notranslate"><span class="pre">Kokkos::MemoryTraits&lt;&gt;</span></code> class. Enums can be combined bit combined. Posible values:</p>
+<li><p><code class="docutils literal notranslate"><span class="pre">MemorySpace</span></code>:</p>
+<p>Controls the storage location.
+If omitted the default memory space of the default execution space is used (i.e. <code class="docutils literal notranslate"><span class="pre">Kokkos::DefaultExecutionSpace::memory_space</span></code>)</p>
+</li>
+</ul>
 <ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">MemoryTraits</span></code>:</p>
+<p>Sets access properties via enum parameters for the templated <code class="docutils literal notranslate"><span class="pre">Kokkos::MemoryTraits&lt;&gt;</span></code> class.
+Possible template parameters are bit-combinations of the following flags:</p>
+<ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">Unmanaged</span></code>: The View will not be reference counted. The allocation has to be provided to the constructor.</p></li>
-<li><p><a class="reference internal" href="../atomics.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">Atomic</span></code></span></a>: All accesses to the view will use atomic operations.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">RandomAccess</span></code>: Hint that the view is used in a random access manner. If the view is also <code class="docutils literal notranslate"><span class="pre">const</span></code> this will trigger special load operations on GPUs (i.e. texture fetches).</p></li>
+<li><p><a class="reference external" href="../atomics.html"><code class="xref cppkokkos cppkokkos-func docutils literal notranslate"><span class="pre">Atomic()</span></code></a>: All accesses to the view will use atomic operations.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">RandomAccess</span></code>: Hint that the view is used in a random access manner.
+If the view is also <code class="docutils literal notranslate"><span class="pre">const</span></code> this will trigger special load operations on GPUs (i.e. texture fetches).</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Restrict</span></code>: There is no aliasing of the view by other data structures in the current scope.</p></li>
 </ul>
 </li>
 </ul>
-</section>
-<section id="requirements">
-<h3>Requirements:<a class="headerlink" href="#requirements" title="Permalink to this heading">#</a></h3>
 </section>
 </section>
 <section id="public-class-members">
@@ -546,299 +564,492 @@ Its semantics are similar to that of <code class="docutils literal notranslate">
 </section>
 <section id="typedefs">
 <h3>Typedefs<a class="headerlink" href="#typedefs" title="Permalink to this heading">#</a></h3>
-<section id="data-types">
-<h4>Data Types<a class="headerlink" href="#data-types" title="Permalink to this heading">#</a></h4>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">data_type</span></code>: The <code class="docutils literal notranslate"><span class="pre">DataType</span></code> of the View, note <code class="docutils literal notranslate"><span class="pre">data_type</span></code> contains the array specifiers (e.g. <code class="docutils literal notranslate"><span class="pre">int**[3]</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">const_data_type</span></code>: Const version of <code class="docutils literal notranslate"><span class="pre">DataType</span></code>, same as <code class="docutils literal notranslate"><span class="pre">data_type</span></code> if that is already const.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">non_const_data_type</span></code>: Non-const version of <code class="docutils literal notranslate"><span class="pre">DataType</span></code>, same as <code class="docutils literal notranslate"><span class="pre">data_type</span></code> if that is already non-const.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">scalar_array_type</span></code>: If <code class="docutils literal notranslate"><span class="pre">DataType</span></code> represents some properly specialised array data type such as Sacado FAD types, <code class="docutils literal notranslate"><span class="pre">scalar_array_type</span></code> is the underlying fundamental scalar type.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">const_scalar_array_type</span></code>: Const version of <code class="docutils literal notranslate"><span class="pre">scalar_array_type</span></code>, same as <code class="docutils literal notranslate"><span class="pre">scalar_array_type</span></code> if that is already const</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">non_const_scalar_array_type</span></code>: Non-Const version of <code class="docutils literal notranslate"><span class="pre">scalar_array_type</span></code>, same as <code class="docutils literal notranslate"><span class="pre">scalar_array_type</span></code> if that is already non-const.</p></li>
-</ul>
-</section>
-<section id="scalar-types">
-<h4>Scalar Types<a class="headerlink" href="#scalar-types" title="Permalink to this heading">#</a></h4>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">value_type</span></code>: The <code class="docutils literal notranslate"><span class="pre">data_type</span></code> stripped of its array specifiers, i.e. the scalar type of the data the view is referencing (e.g. if <code class="docutils literal notranslate"><span class="pre">data_type</span></code> is <code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">int**[3]</span></code>, <code class="docutils literal notranslate"><span class="pre">value_type</span></code> is <code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">int</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">const_value_type</span></code>: const version of <code class="docutils literal notranslate"><span class="pre">value_type</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">non_const_value_type</span></code>: non-const version of <code class="docutils literal notranslate"><span class="pre">value_type</span></code>.</p></li>
-</ul>
-</section>
-<section id="spaces">
-<h4>Spaces<a class="headerlink" href="#spaces" title="Permalink to this heading">#</a></h4>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">execution_space</span></code>: Execution Space associated with the view, will be used for performing view initialization, and certain deep_copy operations.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">memory_space</span></code>: Data storage location type.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">device_type</span></code>: the compound type defined by <code class="docutils literal notranslate"><span class="pre">Device&lt;execution_space,memory_space&gt;</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">memory_traits</span></code>: The memory traits of the view.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">host_mirror_space</span></code>: Host accessible memory space used in <code class="docutils literal notranslate"><span class="pre">HostMirror</span></code>.</p></li>
-</ul>
-</section>
-<section id="viewtypes">
-<h4>ViewTypes<a class="headerlink" href="#viewtypes" title="Permalink to this heading">#</a></h4>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">non_const_type</span></code>: this view type with all template parameters explicitly defined.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">const_type</span></code>: this view type with all template parameters explicitly defined using a <code class="docutils literal notranslate"><span class="pre">const</span></code> data type.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">HostMirror</span></code>: compatible view type with the same <code class="docutils literal notranslate"><span class="pre">DataType</span></code> and <code class="docutils literal notranslate"><span class="pre">LayoutType</span></code> stored in host accessible memory space.</p></li>
-</ul>
-</section>
-<section id="data-handles">
-<h4>Data Handles<a class="headerlink" href="#data-handles" title="Permalink to this heading">#</a></h4>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">reference_type</span></code>: return type of the view access operators.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">pointer_type</span></code>: pointer to scalar type.</p></li>
-</ul>
-</section>
-<section id="other">
-<h4>Other<a class="headerlink" href="#other" title="Permalink to this heading">#</a></h4>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">array_layout</span></code>: The Layout of the View.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">size_type</span></code>: index type associated with the memory space of this view.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">dimension</span></code>: An integer array like type, able to represent the extents of the view.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">specialize</span></code>: A specialization tag used for partial specialization of the mapping construct underlying a Kokkos View.</p></li>
-</ul>
-</section>
+<p class="rubric">Data Types</p>
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv49data_type">
+<span id="_CPPv39data_type"></span><span id="_CPPv29data_type"></span><span id="data_type"></span><span class="k"><span class="pre">type</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">data_type</span></span></span><a class="headerlink" href="#_CPPv49data_type" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>The <code class="docutils literal notranslate"><span class="pre">DataType</span></code> of the View, note <code class="docutils literal notranslate"><span class="pre">data_type</span></code> contains the array specifiers (e.g. <code class="docutils literal notranslate"><span class="pre">int**[3]</span></code>)</p>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv415const_data_type">
+<span id="_CPPv315const_data_type"></span><span id="_CPPv215const_data_type"></span><span id="const_data_type"></span><span class="k"><span class="pre">type</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">const_data_type</span></span></span><a class="headerlink" href="#_CPPv415const_data_type" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Const version of <code class="docutils literal notranslate"><span class="pre">DataType</span></code>, same as <code class="docutils literal notranslate"><span class="pre">data_type</span></code> if that is already const.</p>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv419non_const_data_type">
+<span id="_CPPv319non_const_data_type"></span><span id="_CPPv219non_const_data_type"></span><span id="non_const_data_type"></span><span class="k"><span class="pre">type</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">non_const_data_type</span></span></span><a class="headerlink" href="#_CPPv419non_const_data_type" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Non-const version of <code class="docutils literal notranslate"><span class="pre">DataType</span></code>, same as <code class="docutils literal notranslate"><span class="pre">data_type</span></code> if that is already non-const.</p>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv417scalar_array_type">
+<span id="_CPPv317scalar_array_type"></span><span id="_CPPv217scalar_array_type"></span><span id="scalar_array_type"></span><span class="k"><span class="pre">type</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">scalar_array_type</span></span></span><a class="headerlink" href="#_CPPv417scalar_array_type" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>If <code class="docutils literal notranslate"><span class="pre">DataType</span></code> represents some properly specialised array data type such as Sacado FAD types, <code class="docutils literal notranslate"><span class="pre">scalar_array_type</span></code> is the underlying fundamental scalar type.</p>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv423const_scalar_array_type">
+<span id="_CPPv323const_scalar_array_type"></span><span id="_CPPv223const_scalar_array_type"></span><span id="const_scalar_array_type"></span><span class="k"><span class="pre">type</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">const_scalar_array_type</span></span></span><a class="headerlink" href="#_CPPv423const_scalar_array_type" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Const version of <code class="docutils literal notranslate"><span class="pre">scalar_array_type</span></code>, same as <code class="docutils literal notranslate"><span class="pre">scalar_array_type</span></code> if that is already const</p>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv427non_const_scalar_array_type">
+<span id="_CPPv327non_const_scalar_array_type"></span><span id="_CPPv227non_const_scalar_array_type"></span><span id="non_const_scalar_array_type"></span><span class="k"><span class="pre">type</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">non_const_scalar_array_type</span></span></span><a class="headerlink" href="#_CPPv427non_const_scalar_array_type" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Non-Const version of <code class="docutils literal notranslate"><span class="pre">scalar_array_type</span></code>, same as <code class="docutils literal notranslate"><span class="pre">scalar_array_type</span></code> if that is already non-const.</p>
+</dd></dl>
+
+<p class="rubric">Scalar Types</p>
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv410value_type">
+<span id="_CPPv310value_type"></span><span id="_CPPv210value_type"></span><span id="value_type"></span><span class="k"><span class="pre">type</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">value_type</span></span></span><a class="headerlink" href="#_CPPv410value_type" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>The <code class="docutils literal notranslate"><span class="pre">data_type</span></code> stripped of its array specifiers, i.e. the scalar type
+of the data the view is referencing
+(e.g. if <code class="docutils literal notranslate"><span class="pre">data_type</span></code> is <code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">int**[3]</span></code>, <code class="docutils literal notranslate"><span class="pre">value_type</span></code> is <code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">int</span></code>).</p>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv416const_value_type">
+<span id="_CPPv316const_value_type"></span><span id="_CPPv216const_value_type"></span><span id="const_value_type"></span><span class="k"><span class="pre">type</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">const_value_type</span></span></span><a class="headerlink" href="#_CPPv416const_value_type" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>const version of <code class="docutils literal notranslate"><span class="pre">value_type</span></code>.</p>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv420non_const_value_type">
+<span id="_CPPv320non_const_value_type"></span><span id="_CPPv220non_const_value_type"></span><span id="non_const_value_type"></span><span class="k"><span class="pre">type</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">non_const_value_type</span></span></span><a class="headerlink" href="#_CPPv420non_const_value_type" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>non-const version of <code class="docutils literal notranslate"><span class="pre">value_type</span></code>.</p>
+</dd></dl>
+
+<p class="rubric">Spaces</p>
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv415execution_space">
+<span id="_CPPv315execution_space"></span><span id="_CPPv215execution_space"></span><span id="execution_space"></span><span class="k"><span class="pre">type</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">execution_space</span></span></span><a class="headerlink" href="#_CPPv415execution_space" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Execution Space associated with the view, will be used for
+performing view initialization, and certain deep_copy operations.</p>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv412memory_space">
+<span id="_CPPv312memory_space"></span><span id="_CPPv212memory_space"></span><span id="memory_space"></span><span class="k"><span class="pre">type</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">memory_space</span></span></span><a class="headerlink" href="#_CPPv412memory_space" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Data storage location type.</p>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv411device_type">
+<span id="_CPPv311device_type"></span><span id="_CPPv211device_type"></span><span id="device_type"></span><span class="k"><span class="pre">type</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">device_type</span></span></span><a class="headerlink" href="#_CPPv411device_type" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>the compound type defined by <code class="docutils literal notranslate"><span class="pre">Device&lt;execution_space,memory_space&gt;</span></code></p>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv413memory_traits">
+<span id="_CPPv313memory_traits"></span><span id="_CPPv213memory_traits"></span><span id="memory_traits"></span><span class="k"><span class="pre">type</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">memory_traits</span></span></span><a class="headerlink" href="#_CPPv413memory_traits" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>The memory traits of the view.</p>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv417host_mirror_space">
+<span id="_CPPv317host_mirror_space"></span><span id="_CPPv217host_mirror_space"></span><span id="host_mirror_space"></span><span class="k"><span class="pre">type</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">host_mirror_space</span></span></span><a class="headerlink" href="#_CPPv417host_mirror_space" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Host accessible memory space used in <code class="docutils literal notranslate"><span class="pre">HostMirror</span></code>.</p>
+</dd></dl>
+
+<p class="rubric">ViewTypes</p>
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv414non_const_type">
+<span id="_CPPv314non_const_type"></span><span id="_CPPv214non_const_type"></span><span id="non_const_type"></span><span class="k"><span class="pre">type</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">non_const_type</span></span></span><a class="headerlink" href="#_CPPv414non_const_type" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>this view type with all template parameters explicitly defined.</p>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv410const_type">
+<span id="_CPPv310const_type"></span><span id="_CPPv210const_type"></span><span id="const_type"></span><span class="k"><span class="pre">type</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">const_type</span></span></span><a class="headerlink" href="#_CPPv410const_type" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>this view type with all template parameters explicitly defined using a <code class="docutils literal notranslate"><span class="pre">const</span></code> data type.</p>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv410HostMirror">
+<span id="_CPPv310HostMirror"></span><span id="_CPPv210HostMirror"></span><span id="HostMirror"></span><span class="k"><span class="pre">type</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">HostMirror</span></span></span><a class="headerlink" href="#_CPPv410HostMirror" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>compatible view type with the same <code class="docutils literal notranslate"><span class="pre">DataType</span></code> and <code class="docutils literal notranslate"><span class="pre">LayoutType</span></code> stored in host accessible memory space.</p>
+</dd></dl>
+
+<p class="rubric">Data Handles</p>
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv414reference_type">
+<span id="_CPPv314reference_type"></span><span id="_CPPv214reference_type"></span><span id="reference_type"></span><span class="k"><span class="pre">type</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">reference_type</span></span></span><a class="headerlink" href="#_CPPv414reference_type" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>return type of the view access operators.</p>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv412pointer_type">
+<span id="_CPPv312pointer_type"></span><span id="_CPPv212pointer_type"></span><span id="pointer_type"></span><span class="k"><span class="pre">type</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pointer_type</span></span></span><a class="headerlink" href="#_CPPv412pointer_type" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>pointer to scalar type.</p>
+</dd></dl>
+
+<p class="rubric">Other</p>
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv412array_layout">
+<span id="_CPPv312array_layout"></span><span id="_CPPv212array_layout"></span><span id="array_layout"></span><span class="k"><span class="pre">type</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">array_layout</span></span></span><a class="headerlink" href="#_CPPv412array_layout" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>The Layout of the View.</p>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv49size_type">
+<span id="_CPPv39size_type"></span><span id="_CPPv29size_type"></span><span id="size_type"></span><span class="k"><span class="pre">type</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">size_type</span></span></span><a class="headerlink" href="#_CPPv49size_type" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>index type associated with the memory space of this view.</p>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv49dimension">
+<span id="_CPPv39dimension"></span><span id="_CPPv29dimension"></span><span id="dimension"></span><span class="k"><span class="pre">type</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">dimension</span></span></span><a class="headerlink" href="#_CPPv49dimension" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>An integer array like type, able to represent the extents of the view.</p>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv410specialize">
+<span id="_CPPv310specialize"></span><span id="_CPPv210specialize"></span><span id="specialize"></span><span class="k"><span class="pre">type</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">specialize</span></span></span><a class="headerlink" href="#_CPPv410specialize" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>A specialization tag used for partial specialization of the mapping construct underlying a Kokkos View.</p>
+</dd></dl>
+
 </section>
 <section id="constructors">
 <h3>Constructors<a class="headerlink" href="#constructors" title="Permalink to this heading">#</a></h3>
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv44Viewv">
+<span id="_CPPv34Viewv"></span><span id="_CPPv24Viewv"></span><span id="View"></span><span class="sig-name descname"><span class="n"><span class="pre">View</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv44Viewv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Default Constructor. No allocations are made, no reference counting happens. All extents are zero and its data pointer is NULL.</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv44ViewRK4ViewI2DTDp4PropE">
+<span id="_CPPv34ViewRK4ViewI2DTDp4PropE"></span><span id="_CPPv24ViewRK4ViewI2DTDp4PropE"></span><span id="View__View:DT.PropDp:CR"></span><span class="sig-name descname"><span class="n"><span class="pre">View</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv44ViewRK4ViewI2DTDp4PropE" title="View"><span class="n"><span class="pre">View</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">DT</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">Prop</span></span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">rhs</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv44ViewRK4ViewI2DTDp4PropE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Copy constructor with compatible view. Follows View assignment rules.</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv44ViewRR4View">
+<span id="_CPPv34ViewRR4View"></span><span id="_CPPv24ViewRR4View"></span><span id="View__ViewRR"></span><span class="sig-name descname"><span class="n"><span class="pre">View</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv44ViewRR4View" title="View"><span class="n"><span class="pre">View</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">rhs</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv44ViewRR4View" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Move constructor</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv44ViewRKNSt6stringEDpRK7IntType">
+<span id="_CPPv34ViewRKNSt6stringEDpRK7IntType"></span><span id="_CPPv24ViewRKNSt6stringEDpRK7IntType"></span><span id="View__ssCR.IntTypeCRDp"></span><span class="sig-name descname"><span class="n"><span class="pre">View</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">name</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">IntType</span></span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">...</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">indices</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv44ViewRKNSt6stringEDpRK7IntType" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Standard allocating constructor. The initialization is executed on the default
+instance of the execution space corresponding to <code class="docutils literal notranslate"><span class="pre">MemorySpace</span></code> and fences it.</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">View()</span></code>: Default Constructor. No allocations are made, no reference counting happens. All extents are zero and its data pointer is NULL.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">View(</span> <span class="pre">const</span> <span class="pre">View&lt;DT,</span> <span class="pre">Prop...&gt;&amp;</span> <span class="pre">rhs)</span></code>: Copy constructor with compatible view. Follows View assignment rules.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">View(</span> <span class="pre">View&amp;&amp;</span> <span class="pre">rhs)</span></code>: Move constructor</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">View(</span> <span class="pre">const</span> <span class="pre">std::string&amp;</span> <span class="pre">name,</span> <span class="pre">const</span> <span class="pre">IntType&amp;</span> <span class="pre">...</span> <span class="pre">indices)</span></code>: Standard allocating constructor. The initialization is executed on the default instance of the execution space corresponding to <code class="docutils literal notranslate"><span class="pre">MemorySpace</span></code> and fences it.</p>
-<ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">name</span></code>: a user provided label, which is used for profiling and debugging purposes. Names are not required to be unique,</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">indices</span></code>: Extents of the View.</p></li>
-<li><p>Requires: <code class="docutils literal notranslate"><span class="pre">sizeof(IntType...)==rank_dynamic()</span></code> or <code class="docutils literal notranslate"><span class="pre">sizeof(IntType...)==rank()</span></code>. In the latter case, the extents corresponding to compile-time dimensions must match the View type’s compile-time extents.</p></li>
+<li><p>Requires: <code class="docutils literal notranslate"><span class="pre">sizeof(IntType...)==rank_dynamic()</span></code> or <code class="docutils literal notranslate"><span class="pre">sizeof(IntType...)==rank()</span></code>.
+In the latter case, the extents corresponding to compile-time dimensions must match the View type’s compile-time extents.</p></li>
 <li><p>Requires: <code class="docutils literal notranslate"><span class="pre">array_layout::is_regular</span> <span class="pre">==</span> <span class="pre">true</span></code>.</p></li>
 </ul>
-</li>
-<li><p><code class="docutils literal notranslate"><span class="pre">View(</span> <span class="pre">const</span> <span class="pre">std::string&amp;</span> <span class="pre">name,</span> <span class="pre">const</span> <span class="pre">array_layout&amp;</span> <span class="pre">layout)</span></code>: Standard allocating constructor. The initialization is executed on the default instance of the execution space corresponding to <code class="docutils literal notranslate"><span class="pre">MemorySpace</span></code> and fences it.</p>
-<ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">name</span></code>: a user provided label, which is used for profiling and debugging purposes. Names are not required to be unique,</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">layout</span></code>: an instance of a layout class. The number of valid extents must either match the dynamic rank or the total rank. In the latter case, the extents corresponding to compile-time dimensions must match the View type’s compile-time extents.</p></li>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv44ViewRKNSt6stringERK12array_layout">
+<span id="_CPPv34ViewRKNSt6stringERK12array_layout"></span><span id="_CPPv24ViewRKNSt6stringERK12array_layout"></span><span id="View__ssCR.array_layoutCR"></span><span class="sig-name descname"><span class="n"><span class="pre">View</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">name</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">array_layout</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">layout</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv44ViewRKNSt6stringERK12array_layout" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Standard allocating constructor. The initialization is executed on the default
+instance of the execution space corresponding to <code class="docutils literal notranslate"><span class="pre">MemorySpace</span></code> and fences it.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">name</span></code>: a user provided label, which is used for profiling and debugging purposes.
+Names are not required to be unique,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">layout</span></code>: an instance of a layout class. The number of valid extents must
+either match the dynamic rank or the total rank. In the latter case, the extents
+corresponding to compile-time dimensions must match the View type’s compile-time extents.</p></li>
 </ul>
-</li>
-<li><p><code class="docutils literal notranslate"><span class="pre">View(</span> <span class="pre">const</span> <span class="pre">AllocProperties&amp;</span> <span class="pre">prop,</span> <span class="pre">,</span> <span class="pre">const</span> <span class="pre">IntType&amp;</span> <span class="pre">...</span> <span class="pre">indices)</span></code>: Allocating constructor with allocation properties. If an execution space is specified in <code class="docutils literal notranslate"><span class="pre">prop</span></code>, the initialization uses it and does not fence. Otherwise, the View is initialized using the default execution space instance corresponding to <code class="docutils literal notranslate"><span class="pre">MemorySpace</span></code> and fences it.</p>
-<ul>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv44ViewRK15AllocPropertiesDpRK7IntType">
+<span id="_CPPv34ViewRK15AllocPropertiesDpRK7IntType"></span><span id="_CPPv24ViewRK15AllocPropertiesDpRK7IntType"></span><span id="View__AllocPropertiesCR.IntTypeCRDp"></span><span class="sig-name descname"><span class="n"><span class="pre">View</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">AllocProperties</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">prop</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">IntType</span></span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">...</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">indices</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv44ViewRK15AllocPropertiesDpRK7IntType" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Allocating constructor with allocation properties. If an execution space is
+specified in <code class="docutils literal notranslate"><span class="pre">prop</span></code>, the initialization uses it and does not fence.
+Otherwise, the View is initialized using the default execution space instance corresponding to <code class="docutils literal notranslate"><span class="pre">MemorySpace</span></code> and fences it.</p>
+<ul class="simple">
 <li><p>An allocation properties object is returned by the <code class="docutils literal notranslate"><span class="pre">view_alloc</span></code> function.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">indices</span></code>: Extents of the View.</p></li>
-<li><p>Requires: <code class="docutils literal notranslate"><span class="pre">sizeof(IntType...)==rank_dynamic()</span></code> or <code class="docutils literal notranslate"><span class="pre">sizeof(IntType...)==rank()</span></code>. In the latter case, the extents corresponding to compile-time dimensions must match the View type’s compile-time extents.</p></li>
+<li><p>Requires: <code class="docutils literal notranslate"><span class="pre">sizeof(IntType...)==rank_dynamic()</span></code> or <code class="docutils literal notranslate"><span class="pre">sizeof(IntType...)==rank()</span></code>.
+In the latter case, the extents corresponding to compile-time dimensions must match the View type’s compile-time extents.</p></li>
 <li><p>Requires: <code class="docutils literal notranslate"><span class="pre">array_layout::is_regular</span> <span class="pre">==</span> <span class="pre">true</span></code>.</p></li>
 </ul>
-</li>
-<li><p><code class="docutils literal notranslate"><span class="pre">View(</span> <span class="pre">const</span> <span class="pre">AllocProperties&amp;</span> <span class="pre">prop,</span> <span class="pre">const</span> <span class="pre">array_layout&amp;</span> <span class="pre">layout)</span></code>: Allocating constructor with allocation properties and a layout object. If an execution space is specified in <code class="docutils literal notranslate"><span class="pre">prop</span></code>, the initialization uses it and does not fence. Otherwise, the View is initialized using the default execution space instance corresponding to <code class="docutils literal notranslate"><span class="pre">MemorySpace</span></code> and fences it.</p>
-<ul>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv44ViewRK15AllocPropertiesRK12array_layout">
+<span id="_CPPv34ViewRK15AllocPropertiesRK12array_layout"></span><span id="_CPPv24ViewRK15AllocPropertiesRK12array_layout"></span><span id="View__AllocPropertiesCR.array_layoutCR"></span><span class="sig-name descname"><span class="n"><span class="pre">View</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">AllocProperties</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">prop</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">array_layout</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">layout</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv44ViewRK15AllocPropertiesRK12array_layout" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Allocating constructor with allocation properties and a layout object. If an execution space is
+specified in <code class="docutils literal notranslate"><span class="pre">prop</span></code>, the initialization uses it and does not fence. Otherwise, the View is
+initialized using the default execution space instance corresponding to <code class="docutils literal notranslate"><span class="pre">MemorySpace</span></code> and fences it.</p>
+<ul class="simple">
 <li><p>An allocation properties object is returned by the <code class="docutils literal notranslate"><span class="pre">view_alloc</span></code> function.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">layout</span></code>: an instance of a layout class. The number of valid extents must either match the dynamic rank or the total rank. In the latter case, the extents corresponding to compile-time dimensions must match the View type’s compile-time extents.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">layout</span></code>: an instance of a layout class. The number of valid extents must either
+match the dynamic rank or the total rank. In the latter case, the extents corresponding
+to compile-time dimensions must match the View type’s compile-time extents.</p></li>
 </ul>
-</li>
-<li><p><code class="docutils literal notranslate"><span class="pre">View(</span> <span class="pre">const</span> <span class="pre">pointer_type&amp;</span> <span class="pre">ptr,</span> <span class="pre">const</span> <span class="pre">IntType&amp;</span> <span class="pre">...</span> <span class="pre">indices)</span></code>: Unmanaged data wrapping constructor.</p>
-<ul>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv44ViewRK12pointer_typeDpRK7IntType">
+<span id="_CPPv34ViewRK12pointer_typeDpRK7IntType"></span><span id="_CPPv24ViewRK12pointer_typeDpRK7IntType"></span><span id="View__pointer_typeCR.IntTypeCRDp"></span><span class="sig-name descname"><span class="n"><span class="pre">View</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">pointer_type</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">ptr</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">IntType</span></span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">...</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">indices</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv44ViewRK12pointer_typeDpRK7IntType" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Unmanaged data wrapping constructor.</p>
+<ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">ptr</span></code>: pointer to a user provided memory allocation. Must provide storage of size <code class="docutils literal notranslate"><span class="pre">View::required_allocation_size(n0,...,nR)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">indices</span></code>: Extents of the View.</p></li>
-<li><p>Requires: <code class="docutils literal notranslate"><span class="pre">sizeof(IntType...)==rank_dynamic()</span></code> or <code class="docutils literal notranslate"><span class="pre">sizeof(IntType...)==rank()</span></code>. In the latter case, the extents corresponding to compile-time dimensions must match the View type’s compile-time extents.</p></li>
+<li><p>Requires: <code class="docutils literal notranslate"><span class="pre">sizeof(IntType...)==rank_dynamic()</span></code> or <code class="docutils literal notranslate"><span class="pre">sizeof(IntType...)==rank()</span></code>. In the latter case,
+the extents corresponding to compile-time dimensions must match the View type’s compile-time extents.</p></li>
 <li><p>Requires: <code class="docutils literal notranslate"><span class="pre">array_layout::is_regular</span> <span class="pre">==</span> <span class="pre">true</span></code>.</p></li>
 </ul>
-</li>
-<li><p><code class="docutils literal notranslate"><span class="pre">View(</span> <span class="pre">const</span> <span class="pre">std::string&amp;</span> <span class="pre">name,</span> <span class="pre">const</span> <span class="pre">array_layout&amp;</span> <span class="pre">layout)</span></code>: Unmanaged data wrapper constructor.</p>
-<ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">ptr</span></code>: pointer to a user provided memory allocation. Must provide storage of size <code class="docutils literal notranslate"><span class="pre">View::required_allocation_size(layout)</span></code> (<em>NEEDS TO BE IMPLEMENTED</em>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">layout</span></code>: an instance of a layout class. The number of valid extents must either match the dynamic rank or the total rank. In the latter case, the extents corresponding to compile-time dimensions must match the View type’s compile-time extents.</p></li>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos">
+<span class="sig-name descname"><span class="n"><span class="pre">View</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">name</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">array_layout</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">layout</span></span><span class="sig-paren">)</span><br /></dt>
+<dd><p>Unmanaged data wrapper constructor.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ptr</span></code>: pointer to a user provided memory allocation. Must provide storage
+of size <code class="docutils literal notranslate"><span class="pre">View::required_allocation_size(layout)</span></code> (<em>NEEDS TO BE IMPLEMENTED</em>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">layout</span></code>: an instance of a layout class. The number of valid extents must
+either match the dynamic rank or the total rank. In the latter case, the extents
+corresponding to compile-time dimensions must match the View type’s compile-time extents.</p></li>
 </ul>
-</li>
-<li><p><code class="docutils literal notranslate"><span class="pre">View(</span> <span class="pre">const</span> <span class="pre">ScratchSpace&amp;</span> <span class="pre">space,</span> <span class="pre">const</span> <span class="pre">IntType&amp;</span> <span class="pre">...</span> <span class="pre">indices)</span></code>: Constructor which acquires memory from a Scratch Memory handle.</p>
-<ul>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv44ViewRK12ScratchSpaceDpRK7IntType">
+<span id="_CPPv34ViewRK12ScratchSpaceDpRK7IntType"></span><span id="_CPPv24ViewRK12ScratchSpaceDpRK7IntType"></span><span id="View__ScratchSpaceCR.IntTypeCRDp"></span><span class="sig-name descname"><span class="n"><span class="pre">View</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">ScratchSpace</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">space</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">IntType</span></span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">...</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">indices</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv44ViewRK12ScratchSpaceDpRK7IntType" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Constructor which acquires memory from a Scratch Memory handle.</p>
+<ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">space</span></code>: scratch memory handle. Typically returned from <code class="docutils literal notranslate"><span class="pre">team_handles</span></code> in <code class="docutils literal notranslate"><span class="pre">TeamPolicy</span></code> kernels.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">indices</span></code>: Runtime dimensions of the view.</p></li>
-<li><p>Requires: <code class="docutils literal notranslate"><span class="pre">sizeof(IntType...)==rank_dynamic()</span></code> or <code class="docutils literal notranslate"><span class="pre">sizeof(IntType...)==rank()</span></code>. In the latter case, the extents corresponding to compile-time dimensions must match the View type’s compile-time extents.</p></li>
+<li><p>Requires: <code class="docutils literal notranslate"><span class="pre">sizeof(IntType...)==rank_dynamic()</span></code> or <code class="docutils literal notranslate"><span class="pre">sizeof(IntType...)==rank()</span></code>.
+In the latter case, the extents corresponding to compile-time dimensions must match the View type’s compile-time extents.</p></li>
 <li><p>Requires: <code class="docutils literal notranslate"><span class="pre">array_layout::is_regular</span> <span class="pre">==</span> <span class="pre">true</span></code>.</p></li>
 </ul>
-</li>
-<li><p><code class="docutils literal notranslate"><span class="pre">View(</span> <span class="pre">const</span> <span class="pre">ScratchSpace&amp;</span> <span class="pre">space,</span> <span class="pre">const</span> <span class="pre">array_layout&amp;</span> <span class="pre">layout)</span></code>: Constructor which acquires memory from a Scratch Memory handle.</p>
-<ul>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv44ViewRK12ScratchSpaceRK12array_layout">
+<span id="_CPPv34ViewRK12ScratchSpaceRK12array_layout"></span><span id="_CPPv24ViewRK12ScratchSpaceRK12array_layout"></span><span id="View__ScratchSpaceCR.array_layoutCR"></span><span class="sig-name descname"><span class="n"><span class="pre">View</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">ScratchSpace</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">space</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">array_layout</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">layout</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv44ViewRK12ScratchSpaceRK12array_layout" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Constructor which acquires memory from a Scratch Memory handle.</p>
+<ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">space</span></code>: scratch memory handle. Typically returned from <code class="docutils literal notranslate"><span class="pre">team_handles</span></code> in <code class="docutils literal notranslate"><span class="pre">TeamPolicy</span></code> kernels.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">layout</span></code>: an instance of a layout class. The number of valid extents must either match the dynamic rank or the total rank. In the latter case, the extents corresponding to compile-time dimensions must match the View type’s compile-time extents.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">layout</span></code>: an instance of a layout class. The number of valid extents must
+either match the dynamic rank or the total rank. In the latter case, the extents
+corresponding to compile-time dimensions must match the View type’s compile-time extents.</p></li>
 </ul>
-</li>
-<li><p><code class="docutils literal notranslate"><span class="pre">View(</span> <span class="pre">const</span> <span class="pre">View&lt;DT,</span> <span class="pre">Prop...&gt;&amp;</span> <span class="pre">rhs,</span> <span class="pre">Args</span> <span class="pre">...</span> <span class="pre">args)</span></code>: Subview constructor. See <code class="docutils literal notranslate"><span class="pre">subview</span></code> function for arguments.</p></li>
-</ul>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv44ViewRK4ViewI2DTDp4PropEDp4Args">
+<span id="_CPPv34ViewRK4ViewI2DTDp4PropEDp4Args"></span><span id="_CPPv24ViewRK4ViewI2DTDp4PropEDp4Args"></span><span id="View__View:DT.PropDp:CR.ArgsDp"></span><span class="sig-name descname"><span class="n"><span class="pre">View</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv44ViewRK4ViewI2DTDp4PropEDp4Args" title="View"><span class="n"><span class="pre">View</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">DT</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">Prop</span></span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">rhs</span></span>, <span class="n"><span class="pre">Args</span></span><span class="p"><span class="pre">...</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">args</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv44ViewRK4ViewI2DTDp4PropEDp4Args" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Subview constructor. See <code class="docutils literal notranslate"><span class="pre">subview</span></code> function for arguments.</p>
+</dd></dl>
+
 </section>
 <section id="data-access-functions">
 <h3>Data Access Functions<a class="headerlink" href="#data-access-functions" title="Permalink to this heading">#</a></h3>
-<ul>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">reference_type</span><span class="w"> </span><span class="k">operator</span><span class="p">()</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">IntType</span><span class="o">&amp;</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="n">indices</span><span class="p">)</span><span class="w"> </span><span class="k">const</span>
-</pre></div>
-</div>
-<p>Returns a value of <code class="docutils literal notranslate"><span class="pre">reference_type</span></code> which may or not be referenceable itself. The number of index arguments must match the <code class="docutils literal notranslate"><span class="pre">rank</span></code> of the view.
-See notes on <code class="docutils literal notranslate"><span class="pre">reference_type</span></code> for properties of the return type.</p>
-<ul class="simple">
-<li><p>Requires: <code class="docutils literal notranslate"><span class="pre">sizeof(IntType...)==rank_dynamic()</span></code></p></li>
-</ul>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">reference_type</span><span class="w"> </span><span class="n">access</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">IntType</span><span class="o">&amp;</span><span class="w"> </span><span class="n">i0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">IntType</span><span class="o">&amp;</span><span class="w"> </span><span class="n">i7</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">const</span>
-</pre></div>
-</div>
-<p>Returns a value of <code class="docutils literal notranslate"><span class="pre">reference_type</span></code> which may or not be referenceable itself. The number of index arguments must be equal or larger than the <code class="docutils literal notranslate"><span class="pre">rank</span></code> of the view.
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NKclEDpRK7IntType">
+<span id="_CPPv3NKclEDpRK7IntType"></span><span id="_CPPv2NKclEDpRK7IntType"></span><span id="call-operator__IntTypeCRDpC"></span><span class="n"><span class="pre">reference_type</span></span><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">()</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">IntType</span></span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">...</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">indices</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NKclEDpRK7IntType" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Returns a value of <code class="docutils literal notranslate"><span class="pre">reference_type</span></code> which may or not be referenceable itself.
+The number of index arguments must match the <code class="docutils literal notranslate"><span class="pre">rank</span></code> of the view.
+See notes on <code class="docutils literal notranslate"><span class="pre">reference_type</span></code> for properties of the return type.
+Requires: <code class="docutils literal notranslate"><span class="pre">sizeof(IntType...)==rank_dynamic()</span></code></p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK6accessERK7IntTypeRK7IntTypeRK7IntTypeRK7IntTypeRK7IntTypeRK7IntTypeRK7IntTypeRK7IntType">
+<span id="_CPPv3NK6accessERK7IntTypeRK7IntTypeRK7IntTypeRK7IntTypeRK7IntTypeRK7IntTypeRK7IntTypeRK7IntType"></span><span id="_CPPv2NK6accessERK7IntTypeRK7IntTypeRK7IntTypeRK7IntTypeRK7IntTypeRK7IntTypeRK7IntTypeRK7IntType"></span><span id="access__IntTypeCR.IntTypeCR.IntTypeCR.IntTypeCR.IntTypeCR.IntTypeCR.IntTypeCR.IntTypeCRC"></span><span class="n"><span class="pre">reference_type</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">access</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">IntType</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">i0</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">IntType</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">i1</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">IntType</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">i2</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">IntType</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">i3</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">IntType</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">i4</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">IntType</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">i5</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">IntType</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">i6</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">IntType</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">i7</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6accessERK7IntTypeRK7IntTypeRK7IntTypeRK7IntTypeRK7IntTypeRK7IntTypeRK7IntTypeRK7IntType" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Returns a value of <code class="docutils literal notranslate"><span class="pre">reference_type</span></code> which may or not be referenceable itself.
+The number of index arguments must be equal or larger than the <code class="docutils literal notranslate"><span class="pre">rank</span></code> of the view.
 Index arguments beyond <code class="docutils literal notranslate"><span class="pre">rank</span></code> must be <code class="docutils literal notranslate"><span class="pre">0</span></code>, which will be enforced if <code class="docutils literal notranslate"><span class="pre">KOKKOS_DEBUG</span></code> is defined.
 See notes on <code class="docutils literal notranslate"><span class="pre">reference_type</span></code> for properties of the return type.</p>
-</li>
-</ul>
+</dd></dl>
+
 </section>
 <section id="data-layout-dimensions-strides">
 <h3>Data Layout, Dimensions, Strides<a class="headerlink" href="#data-layout-dimensions-strides" title="Permalink to this heading">#</a></h3>
-<ul>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">constexpr</span><span class="w"> </span><span class="n">array_layout</span><span class="w"> </span><span class="n">layout</span><span class="p">()</span><span class="w"> </span><span class="k">const</span>
-</pre></div>
-</div>
-<p>Returns the layout object. Can be used to to construct other views with the same dimensions.</p>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">iType</span><span class="o">&gt;</span>
-<span class="k">constexpr</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">extent</span><span class="p">(</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">iType</span><span class="o">&amp;</span><span class="w"> </span><span class="n">dim</span><span class="p">)</span><span class="w"> </span><span class="k">const</span>
-</pre></div>
-</div>
-<p>Return the extent of the specified dimension. <code class="docutils literal notranslate"><span class="pre">iType</span></code> must be an integral type, and <code class="docutils literal notranslate"><span class="pre">dim</span></code> must be smaller than <code class="docutils literal notranslate"><span class="pre">rank</span></code>.</p>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">iType</span><span class="o">&gt;</span>
-<span class="k">constexpr</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">extent_int</span><span class="p">(</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">iType</span><span class="o">&amp;</span><span class="w"> </span><span class="n">dim</span><span class="p">)</span><span class="w"> </span><span class="k">const</span>
-</pre></div>
-</div>
-<p>Return the extent of the specified dimension as an <code class="docutils literal notranslate"><span class="pre">int</span></code>. <code class="docutils literal notranslate"><span class="pre">iType</span></code> must be an integral type, and <code class="docutils literal notranslate"><span class="pre">dim</span></code> must be smaller than <code class="docutils literal notranslate"><span class="pre">rank</span></code>.
-Compared to <code class="docutils literal notranslate"><span class="pre">extent</span></code> this function can be useful on architectures where <code class="docutils literal notranslate"><span class="pre">int</span></code> operations are more efficient than <code class="docutils literal notranslate"><span class="pre">size_t</span></code>. It also may eliminate the need for type casts in applications which otherwise perform all index operations with <code class="docutils literal notranslate"><span class="pre">int</span></code>.</p>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">iType</span><span class="o">&gt;</span>
-<span class="k">constexpr</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">stride</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">iType</span><span class="o">&amp;</span><span class="w"> </span><span class="n">dim</span><span class="p">)</span><span class="w"> </span><span class="k">const</span>
-</pre></div>
-</div>
-<p>Return the stride of the specified dimension. <code class="docutils literal notranslate"><span class="pre">iType</span></code> must be an integral type, and <code class="docutils literal notranslate"><span class="pre">dim</span></code> must be smaller than <code class="docutils literal notranslate"><span class="pre">rank</span></code>.
-Example: <code class="docutils literal notranslate"><span class="pre">a.stride(3)</span> <span class="pre">==</span> <span class="pre">(&amp;a(i0,i1,i2,i3+1,i4)-&amp;a(i0,i1,i2,i3,i4))</span></code></p>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">constexpr</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">stride_0</span><span class="p">()</span><span class="w"> </span><span class="k">const</span>
-</pre></div>
-</div>
-<p>Return the stride of dimension 0.</p>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">constexpr</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">stride_1</span><span class="p">()</span><span class="w"> </span><span class="k">const</span>
-</pre></div>
-</div>
-<p>Return the stride of dimension 1.</p>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">constexpr</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">stride_2</span><span class="p">()</span><span class="w"> </span><span class="k">const</span>
-</pre></div>
-</div>
-<p>Return the stride of dimension 2.</p>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">constexpr</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">stride_3</span><span class="p">()</span><span class="w"> </span><span class="k">const</span>
-</pre></div>
-</div>
-<p>Return the stride of dimension 3.</p>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">constexpr</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">stride_4</span><span class="p">()</span><span class="w"> </span><span class="k">const</span>
-</pre></div>
-</div>
-<p>Return the stride of dimension 4.</p>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">constexpr</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">stride_5</span><span class="p">()</span><span class="w"> </span><span class="k">const</span>
-</pre></div>
-</div>
-<p>Return the stride of dimension 5.</p>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">constexpr</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">stride_6</span><span class="p">()</span><span class="w"> </span><span class="k">const</span>
-</pre></div>
-</div>
-<p>Return the stride of dimension 6.</p>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">constexpr</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">stride_7</span><span class="p">()</span><span class="w"> </span><span class="k">const</span>
-</pre></div>
-</div>
-<p>Return the stride of dimension 7.</p>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">iType</span><span class="o">&gt;</span>
-<span class="kt">void</span><span class="w"> </span><span class="n">stride</span><span class="p">(</span><span class="n">iType</span><span class="o">*</span><span class="w"> </span><span class="n">strides</span><span class="p">)</span><span class="w"> </span><span class="k">const</span>
-</pre></div>
-</div>
-<p>Sets <code class="docutils literal notranslate"><span class="pre">strides[r]</span></code> to <code class="docutils literal notranslate"><span class="pre">stride(r)</span></code> for all <code class="docutils literal notranslate"><span class="pre">r</span></code> with <code class="docutils literal notranslate"><span class="pre">0&lt;=r&lt;rank</span></code>. Sets <code class="docutils literal notranslate"><span class="pre">strides[rank]</span></code> to <code class="docutils literal notranslate"><span class="pre">span()</span></code>. <code class="docutils literal notranslate"><span class="pre">iType</span></code> must be an integral type, and <code class="docutils literal notranslate"><span class="pre">strides</span></code> must be an array of length <code class="docutils literal notranslate"><span class="pre">rank+1</span></code>.</p>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">constexpr</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">span</span><span class="p">()</span><span class="w"> </span><span class="k">const</span>
-</pre></div>
-</div>
-<p>Returns the memory span in elements between the element with the lowest and the highest address. This can be larger than the product of extents due to padding, and or non-contiguous data layout as for example <code class="docutils literal notranslate"><span class="pre">LayoutStride</span></code> allows.</p>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">constexpr</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="k">const</span>
-</pre></div>
-</div>
-<p>Returns the product of extents, i.e. the logical number of elements in the view.</p>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">constexpr</span><span class="w"> </span><span class="n">pointer_type</span><span class="w"> </span><span class="n">data</span><span class="p">()</span><span class="w"> </span><span class="k">const</span>
-</pre></div>
-</div>
-<p>Return the pointer to the underlying data allocation. WARNING: calling any function that manipulates the behavior of the memory (e.g. <code class="docutils literal notranslate"><span class="pre">memAdvise</span></code>) on memory managed by <code class="docutils literal notranslate"><span class="pre">Kokkos</span></code> results in undefined behavior.</p>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="n">span_is_contiguous</span><span class="p">()</span><span class="w"> </span><span class="k">const</span>
-</pre></div>
-</div>
-<p>Whether the span is contiguous (i.e. whether every memory location between in span belongs to the index space covered by the view).</p>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="nf">required_allocation_size</span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">N0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="p">...,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">N8</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
-</pre></div>
-</div>
-<p>Returns the number of bytes necessary for an unmanaged view of the provided dimensions. This function is only valid if <code class="docutils literal notranslate"><span class="pre">array_layout::is_regular</span> <span class="pre">==</span> <span class="pre">true</span></code>.</p>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="nf">required_allocation_size</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">array_layout</span><span class="o">&amp;</span><span class="w"> </span><span class="n">layout</span><span class="p">);</span>
-</pre></div>
-</div>
-<p>Returns the number of bytes necessary for an unmanaged view of the provided layout.</p>
-</li>
-</ul>
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK6layoutEv">
+<span id="_CPPv3NK6layoutEv"></span><span id="_CPPv2NK6layoutEv"></span><span id="layoutCCE"></span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="n"><span class="pre">array_layout</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">layout</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6layoutEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Returns the layout object. Can be used to to construct other views with the same dimensions.</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4I0ENK6extentE6size_tRK5iType">
+<span id="_CPPv3I0ENK6extentERK5iType"></span><span id="_CPPv2I0ENK6extentERK5iType"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">iType</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">extent</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0ENK6extentE6size_tRK5iType" title="extent::iType"><span class="n"><span class="pre">iType</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">dim</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4I0ENK6extentE6size_tRK5iType" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Return the extent of the specified dimension. <code class="docutils literal notranslate"><span class="pre">iType</span></code> must be an integral type, and <code class="docutils literal notranslate"><span class="pre">dim</span></code> must be smaller than <code class="docutils literal notranslate"><span class="pre">rank</span></code>.</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4I0ENK10extent_intEiRK5iType">
+<span id="_CPPv3I0ENK10extent_intERK5iType"></span><span id="_CPPv2I0ENK10extent_intERK5iType"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">iType</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">extent_int</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0ENK10extent_intEiRK5iType" title="extent_int::iType"><span class="n"><span class="pre">iType</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">dim</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4I0ENK10extent_intEiRK5iType" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Return the extent of the specified dimension as an <code class="docutils literal notranslate"><span class="pre">int</span></code>. <code class="docutils literal notranslate"><span class="pre">iType</span></code> must be an integral type,
+and <code class="docutils literal notranslate"><span class="pre">dim</span></code> must be smaller than <code class="docutils literal notranslate"><span class="pre">rank</span></code>. Compared to <code class="docutils literal notranslate"><span class="pre">extent</span></code> this function can be
+useful on architectures where <code class="docutils literal notranslate"><span class="pre">int</span></code> operations are more efficient than <code class="docutils literal notranslate"><span class="pre">size_t</span></code>.
+It also may eliminate the need for type casts in applications which
+otherwise perform all index operations with <code class="docutils literal notranslate"><span class="pre">int</span></code>.</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4I0ENK6strideE6size_tRK5iType">
+<span id="_CPPv3I0ENK6strideERK5iType"></span><span id="_CPPv2I0ENK6strideERK5iType"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">iType</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">stride</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0ENK6strideE6size_tRK5iType" title="stride::iType"><span class="n"><span class="pre">iType</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">dim</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4I0ENK6strideE6size_tRK5iType" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Return the stride of the specified dimension. <code class="docutils literal notranslate"><span class="pre">iType</span></code> must be an integral type,
+and <code class="docutils literal notranslate"><span class="pre">dim</span></code> must be smaller than <code class="docutils literal notranslate"><span class="pre">rank</span></code>. Example: <code class="docutils literal notranslate"><span class="pre">a.stride(3)</span> <span class="pre">==</span> <span class="pre">(&amp;a(i0,i1,i2,i3+1,i4)-&amp;a(i0,i1,i2,i3,i4))</span></code></p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK8stride_0Ev">
+<span id="_CPPv3NK8stride_0Ev"></span><span id="_CPPv2NK8stride_0Ev"></span><span id="stride_0CCE"></span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">stride_0</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK8stride_0Ev" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Return the stride of dimension 0.</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK8stride_1Ev">
+<span id="_CPPv3NK8stride_1Ev"></span><span id="_CPPv2NK8stride_1Ev"></span><span id="stride_1CCE"></span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">stride_1</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK8stride_1Ev" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Return the stride of dimension 1.</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK8stride_2Ev">
+<span id="_CPPv3NK8stride_2Ev"></span><span id="_CPPv2NK8stride_2Ev"></span><span id="stride_2CCE"></span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">stride_2</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK8stride_2Ev" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Return the stride of dimension 2.</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK8stride_3Ev">
+<span id="_CPPv3NK8stride_3Ev"></span><span id="_CPPv2NK8stride_3Ev"></span><span id="stride_3CCE"></span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">stride_3</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK8stride_3Ev" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Return the stride of dimension 3.</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK8stride_4Ev">
+<span id="_CPPv3NK8stride_4Ev"></span><span id="_CPPv2NK8stride_4Ev"></span><span id="stride_4CCE"></span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">stride_4</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK8stride_4Ev" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Return the stride of dimension 4.</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK8stride_5Ev">
+<span id="_CPPv3NK8stride_5Ev"></span><span id="_CPPv2NK8stride_5Ev"></span><span id="stride_5CCE"></span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">stride_5</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK8stride_5Ev" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Return the stride of dimension 5.</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK8stride_6Ev">
+<span id="_CPPv3NK8stride_6Ev"></span><span id="_CPPv2NK8stride_6Ev"></span><span id="stride_6CCE"></span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">stride_6</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK8stride_6Ev" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Return the stride of dimension 6.</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK8stride_7Ev">
+<span id="_CPPv3NK8stride_7Ev"></span><span id="_CPPv2NK8stride_7Ev"></span><span id="stride_7CCE"></span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">stride_7</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK8stride_7Ev" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Return the stride of dimension 7.</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4I0ENK6strideEvP5iType">
+<span id="_CPPv3I0ENK6strideEP5iType"></span><span id="_CPPv2I0ENK6strideEP5iType"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">iType</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">stride</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0ENK6strideEvP5iType" title="stride::iType"><span class="n"><span class="pre">iType</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">strides</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4I0ENK6strideEvP5iType" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Sets <code class="docutils literal notranslate"><span class="pre">strides[r]</span></code> to <code class="docutils literal notranslate"><span class="pre">stride(r)</span></code> for all <code class="docutils literal notranslate"><span class="pre">r</span></code> with <code class="docutils literal notranslate"><span class="pre">0&lt;=r&lt;rank</span></code>.
+Sets <code class="docutils literal notranslate"><span class="pre">strides[rank]</span></code> to <code class="docutils literal notranslate"><span class="pre">span()</span></code>. <code class="docutils literal notranslate"><span class="pre">iType</span></code> must be an integral type, and <code class="docutils literal notranslate"><span class="pre">strides</span></code> must be an array of length <code class="docutils literal notranslate"><span class="pre">rank+1</span></code>.</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK4spanEv">
+<span id="_CPPv3NK4spanEv"></span><span id="_CPPv2NK4spanEv"></span><span id="spanCCE"></span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">span</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK4spanEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Returns the memory span in elements between the element with the
+lowest and the highest address. This can be larger than the product
+of extents due to padding, and or non-contiguous data layout as for example <code class="docutils literal notranslate"><span class="pre">LayoutStride</span></code> allows.</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK4sizeEv">
+<span id="_CPPv3NK4sizeEv"></span><span id="_CPPv2NK4sizeEv"></span><span id="sizeCCE"></span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">size</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK4sizeEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Returns the product of extents, i.e. the logical number of elements in the view.</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK4dataEv">
+<span id="_CPPv3NK4dataEv"></span><span id="_CPPv2NK4dataEv"></span><span id="dataCCE"></span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="n"><span class="pre">pointer_type</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">data</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK4dataEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Return the pointer to the underlying data allocation.
+WARNING: calling any function that manipulates the behavior
+of the memory (e.g. <code class="docutils literal notranslate"><span class="pre">memAdvise</span></code>) on memory managed by <code class="docutils literal notranslate"><span class="pre">Kokkos</span></code> results in undefined behavior.</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK18span_is_contiguousEv">
+<span id="_CPPv3NK18span_is_contiguousEv"></span><span id="_CPPv2NK18span_is_contiguousEv"></span><span id="span_is_contiguousC"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">span_is_contiguous</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK18span_is_contiguousEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Whether the span is contiguous (i.e. whether every memory location between
+in span belongs to the index space covered by the view).</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv424required_allocation_size6size_t6size_t6size_t6size_t6size_t6size_t6size_t6size_t6size_t">
+<span id="_CPPv324required_allocation_size6size_t6size_t6size_t6size_t6size_t6size_t6size_t6size_t6size_t"></span><span id="_CPPv224required_allocation_size6size_t6size_t6size_t6size_t6size_t6size_t6size_t6size_t6size_t"></span><span id="required_allocation_size__s.s.s.s.s.s.s.s.sCE"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">required_allocation_size</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">N0</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">N1</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">N2</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">N3</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">N4</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">N5</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">N6</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">N7</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">N8</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><span class="sig-paren">)</span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv424required_allocation_size6size_t6size_t6size_t6size_t6size_t6size_t6size_t6size_t6size_t" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Returns the number of bytes necessary for an unmanaged view of the provided dimensions. This function is only valid if <code class="docutils literal notranslate"><span class="pre">array_layout::is_regular</span> <span class="pre">==</span> <span class="pre">true</span></code>.</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv424required_allocation_sizeRK12array_layout">
+<span id="_CPPv324required_allocation_sizeRK12array_layout"></span><span id="_CPPv224required_allocation_sizeRK12array_layout"></span><span id="required_allocation_size__array_layoutCRCE"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">required_allocation_size</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">array_layout</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">layout</span></span><span class="sig-paren">)</span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv424required_allocation_sizeRK12array_layout" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Returns the number of bytes necessary for an unmanaged view of the provided layout.</p>
+</dd></dl>
+
 </section>
-<section id="id1">
-<h3>Other<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
-<ul>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">use_count</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
-</pre></div>
-</div>
-<p>Returns the current reference count of the underlying allocation.</p>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="nf">label</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
-</pre></div>
-</div>
-<p>Returns the label of the View.</p>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">const</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="nf">is_assignable</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">View</span><span class="o">&lt;</span><span class="n">DT</span><span class="p">,</span><span class="w"> </span><span class="n">Prop</span><span class="p">...</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">rhs</span><span class="p">);</span>
-</pre></div>
-</div>
-<p>Returns true if the View can be assigned to rhs.  See below for assignment rules.</p>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">assign_data</span><span class="p">(</span><span class="n">pointer_type</span><span class="w"> </span><span class="n">arg_data</span><span class="p">);</span>
-</pre></div>
-</div>
-<p>Decrement reference count of previously assigned data and set the underlying pointer to arg_data.  Note that the effective result of this operation is that the view is now an unmanaged view; thus, the deallocation of memory associated with arg_data is not linked in anyway to the deallocation of the view.</p>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">constexpr</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="nf">is_allocated</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
-</pre></div>
-</div>
-<p>Returns true if the view points to a valid memory location.  This function works for both managed and unmanaged views. With the unmanaged view, there is no guarantee that referenced address is valid, only that it is a non-null pointer.</p>
-</li>
-</ul>
+<section id="other">
+<h3>Other<a class="headerlink" href="#other" title="Permalink to this heading">#</a></h3>
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK9use_countEv">
+<span id="_CPPv3NK9use_countEv"></span><span id="_CPPv2NK9use_countEv"></span><span id="use_countC"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">use_count</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4NK9use_countEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Returns the current reference count of the underlying allocation.</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK5labelEv">
+<span id="_CPPv3NK5labelEv"></span><span id="_CPPv2NK5labelEv"></span><span id="labelC"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">label</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4NK5labelEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Returns the label of the View.</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv413is_assignableRK4ViewI2DTDp4PropE">
+<span id="_CPPv313is_assignableRK4ViewI2DTDp4PropE"></span><span id="_CPPv213is_assignableRK4ViewI2DTDp4PropE"></span><span id="is_assignable__View:DT.PropDp:CR"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_assignable</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv44Viewv" title="View"><span class="n"><span class="pre">View</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">DT</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">Prop</span></span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">rhs</span></span><span class="sig-paren">)</span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv413is_assignableRK4ViewI2DTDp4PropE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Returns true if the View can be assigned to rhs.  See below for assignment rules.</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv411assign_data12pointer_type">
+<span id="_CPPv311assign_data12pointer_type"></span><span id="_CPPv211assign_data12pointer_type"></span><span id="assign_data__pointer_type"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">assign_data</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">pointer_type</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">arg_data</span></span><span class="sig-paren">)</span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv411assign_data12pointer_type" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Decrement reference count of previously assigned data and set the underlying pointer to arg_data.
+Note that the effective result of this operation is that the view
+is now an unmanaged view; thus, the deallocation of memory associated with
+arg_data is not linked in anyway to the deallocation of the view.</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK12is_allocatedEv">
+<span id="_CPPv3NK12is_allocatedEv"></span><span id="_CPPv2NK12is_allocatedEv"></span><span id="is_allocatedCCE"></span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_allocated</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4NK12is_allocatedEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Returns true if the view points to a valid memory location.
+This function works for both managed and unmanaged views.
+With the unmanaged view, there is no guarantee that referenced
+address is valid, only that it is a non-null pointer.</p>
+</dd></dl>
+
 </section>
 </section>
 <section id="nonmember-functions">
 <h2>NonMember Functions<a class="headerlink" href="#nonmember-functions" title="Permalink to this heading">#</a></h2>
-<ul>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">ViewDst</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">ViewSrc</span><span class="o">&gt;</span>
-<span class="kt">bool</span><span class="w"> </span><span class="k">operator</span><span class="o">==</span><span class="p">(</span><span class="n">ViewDst</span><span class="p">,</span><span class="w"> </span><span class="n">ViewSrc</span><span class="p">);</span>
-</pre></div>
-</div>
-<p>Returns true if <code class="docutils literal notranslate"><span class="pre">value_type</span></code>, <code class="docutils literal notranslate"><span class="pre">array_layout</span></code>, <code class="docutils literal notranslate"><span class="pre">memory_space</span></code>, <code class="docutils literal notranslate"><span class="pre">rank</span></code>, <code class="docutils literal notranslate"><span class="pre">data()</span></code> and <code class="docutils literal notranslate"><span class="pre">extent(r)</span></code>, for <code class="docutils literal notranslate"><span class="pre">0&lt;=r&lt;rank</span></code>, match.</p>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">ViewDst</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">ViewSrc</span><span class="o">&gt;</span>
-<span class="kt">bool</span><span class="w"> </span><span class="k">operator</span><span class="o">!=</span><span class="p">(</span><span class="n">ViewDst</span><span class="p">,</span><span class="w"> </span><span class="n">ViewSrc</span><span class="p">);</span>
-</pre></div>
-</div>
-<p>Returns true if any of <code class="docutils literal notranslate"><span class="pre">value_type</span></code>, <code class="docutils literal notranslate"><span class="pre">array_layout</span></code>, <code class="docutils literal notranslate"><span class="pre">memory_space</span></code>, <code class="docutils literal notranslate"><span class="pre">rank</span></code>, <code class="docutils literal notranslate"><span class="pre">data()</span></code> and <code class="docutils literal notranslate"><span class="pre">extent(r)</span></code>, for <code class="docutils literal notranslate"><span class="pre">0&lt;=r&lt;rank</span></code> don’t match.</p>
-</li>
-</ul>
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4I00Eeqb7ViewDst7ViewSrc">
+<span id="_CPPv3I00Eeq7ViewDst7ViewSrc"></span><span id="_CPPv2I00Eeq7ViewDst7ViewSrc"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ViewDst</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ViewSrc</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">==</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I00Eeqb7ViewDst7ViewSrc" title="operator==::ViewDst"><span class="n"><span class="pre">ViewDst</span></span></a>, <a class="reference internal" href="#_CPPv4I00Eeqb7ViewDst7ViewSrc" title="operator==::ViewSrc"><span class="n"><span class="pre">ViewSrc</span></span></a><span class="sig-paren">)</span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4I00Eeqb7ViewDst7ViewSrc" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Returns true if <code class="docutils literal notranslate"><span class="pre">value_type</span></code>, <code class="docutils literal notranslate"><span class="pre">array_layout</span></code>, <code class="docutils literal notranslate"><span class="pre">memory_space</span></code>, <code class="docutils literal notranslate"><span class="pre">rank</span></code>, <code class="docutils literal notranslate"><span class="pre">data()</span></code> and <code class="docutils literal notranslate"><span class="pre">extent(r)</span></code>, for <code class="docutils literal notranslate"><span class="pre">0&lt;=r&lt;rank</span></code>, match.</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4I00Eneb7ViewDst7ViewSrc">
+<span id="_CPPv3I00Ene7ViewDst7ViewSrc"></span><span id="_CPPv2I00Ene7ViewDst7ViewSrc"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ViewDst</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ViewSrc</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">!=</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I00Eneb7ViewDst7ViewSrc" title="operator!=::ViewDst"><span class="n"><span class="pre">ViewDst</span></span></a>, <a class="reference internal" href="#_CPPv4I00Eneb7ViewDst7ViewSrc" title="operator!=::ViewSrc"><span class="n"><span class="pre">ViewSrc</span></span></a><span class="sig-paren">)</span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4I00Eneb7ViewDst7ViewSrc" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Returns true if any of <code class="docutils literal notranslate"><span class="pre">value_type</span></code>, <code class="docutils literal notranslate"><span class="pre">array_layout</span></code>, <code class="docutils literal notranslate"><span class="pre">memory_space</span></code>, <code class="docutils literal notranslate"><span class="pre">rank</span></code>, <code class="docutils literal notranslate"><span class="pre">data()</span></code> and <code class="docutils literal notranslate"><span class="pre">extent(r)</span></code>, for <code class="docutils literal notranslate"><span class="pre">0&lt;=r&lt;rank</span></code> don’t match.</p>
+</dd></dl>
+
 </section>
 <section id="assignment-rules">
 <h2>Assignment Rules<a class="headerlink" href="#assignment-rules" title="Permalink to this heading">#</a></h2>
@@ -846,7 +1057,7 @@ Example: <code class="docutils literal notranslate"><span class="pre">a.stride(3
 while intercepting illegal assignments if possible at compile time, otherwise at runtime.
 In the following we use <code class="docutils literal notranslate"><span class="pre">DstType</span></code> and <code class="docutils literal notranslate"><span class="pre">SrcType</span></code> as the type of the destination view and source view respectively.
 <code class="docutils literal notranslate"><span class="pre">dst_view</span></code> and <code class="docutils literal notranslate"><span class="pre">src_view</span></code> refer to the runtime instances of the destination and source views, i.e.:</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">ScrType</span><span class="w"> </span><span class="nf">src_view</span><span class="p">(...);</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">ScrType</span><span class="w"> </span><span class="nf">src_view</span><span class="p">(...);</span>
 <span class="n">DstType</span><span class="w"> </span><span class="nf">dst_view</span><span class="p">(</span><span class="n">src_view</span><span class="p">);</span>
 <span class="n">dst_view</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">src_view</span><span class="p">;</span>
 </pre></div>
@@ -857,18 +1068,18 @@ In the following we use <code class="docutils literal notranslate"><span class="
 <li><p><code class="docutils literal notranslate"><span class="pre">DstType::non_const_value_type</span></code> is the same as <code class="docutils literal notranslate"><span class="pre">SrcType::non_const_value_type</span></code></p></li>
 <li><p>If <code class="docutils literal notranslate"><span class="pre">std::is_const&lt;SrcType::value_type&gt;::value</span> <span class="pre">==</span> <span class="pre">true</span></code> than <code class="docutils literal notranslate"><span class="pre">std::is_const&lt;DstType::value_type&gt;::value</span> <span class="pre">==</span> <span class="pre">true</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">MemorySpaceAccess&lt;DstType::memory_space,SrcType::memory_space&gt;::assignable</span> <span class="pre">==</span> <span class="pre">true</span></code></p></li>
-<li><p>If <code class="docutils literal notranslate"><span class="pre">DstType::dynamic_rank</span> <span class="pre">!=</span> <span class="pre">DstType::rank</span></code> and <code class="docutils literal notranslate"><span class="pre">SrcType::dynamic_rank</span> <span class="pre">!=</span> <span class="pre">SrcType::rank</span></code> than for each dimension <code class="docutils literal notranslate"><span class="pre">k</span></code> which is compile time for both it must be true that <code class="docutils literal notranslate"><span class="pre">dst_view.extent(k)</span> <span class="pre">==</span> <span class="pre">src_view.extent(k)</span></code></p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">DstType::dynamic_rank</span> <span class="pre">!=</span> <span class="pre">DstType::rank</span></code> and <code class="docutils literal notranslate"><span class="pre">SrcType::dynamic_rank</span> <span class="pre">!=</span> <span class="pre">SrcType::rank</span></code> then for each dimension <code class="docutils literal notranslate"><span class="pre">k</span></code> which is compile time for both it must be true that <code class="docutils literal notranslate"><span class="pre">dst_view.extent(k)</span> <span class="pre">==</span> <span class="pre">src_view.extent(k)</span></code></p></li>
 </ul>
 <p>Additionally the following conditions must be met at runtime:</p>
 <ul class="simple">
-<li><p>If <code class="docutils literal notranslate"><span class="pre">DstType::dynamic_rank</span> <span class="pre">!=</span> <span class="pre">DstType::rank</span></code> than for each compile time dimension <code class="docutils literal notranslate"><span class="pre">k</span></code> it must be true that <code class="docutils literal notranslate"><span class="pre">dst_view.extent(k)</span> <span class="pre">==</span> <span class="pre">src_view.extent(k)</span></code>.</p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">DstType::dynamic_rank</span> <span class="pre">!=</span> <span class="pre">DstType::rank</span></code> then for each compile time dimension <code class="docutils literal notranslate"><span class="pre">k</span></code> it must be true that <code class="docutils literal notranslate"><span class="pre">dst_view.extent(k)</span> <span class="pre">==</span> <span class="pre">src_view.extent(k)</span></code>.</p></li>
 </ul>
 <p>Furthermore there are rules which must be met if <code class="docutils literal notranslate"><span class="pre">DstType::array_layout</span></code> is not the same as <code class="docutils literal notranslate"><span class="pre">SrcType::array_layout</span></code>.
 These rules only cover cases where both layouts are one of <code class="docutils literal notranslate"><span class="pre">LayoutLeft</span></code>, <code class="docutils literal notranslate"><span class="pre">LayoutRight</span></code> or <code class="docutils literal notranslate"><span class="pre">LayoutStride</span></code></p>
 <ul class="simple">
 <li><p>If neither <code class="docutils literal notranslate"><span class="pre">DstType::array_layout</span></code> nor <code class="docutils literal notranslate"><span class="pre">SrcType::array_layout</span></code> is <code class="docutils literal notranslate"><span class="pre">LayoutStride</span></code>:</p>
 <ul>
-<li><p>If <code class="docutils literal notranslate"><span class="pre">DstType::rank</span> <span class="pre">&gt;</span> <span class="pre">1</span></code> than <code class="docutils literal notranslate"><span class="pre">DstType::array_layout</span></code> must be the same as <code class="docutils literal notranslate"><span class="pre">SrcType::array_layout</span></code>.</p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">DstType::rank</span> <span class="pre">&gt;</span> <span class="pre">1</span></code> then <code class="docutils literal notranslate"><span class="pre">DstType::array_layout</span></code> must be the same as <code class="docutils literal notranslate"><span class="pre">SrcType::array_layout</span></code>.</p></li>
 </ul>
 </li>
 <li><p>If either <code class="docutils literal notranslate"><span class="pre">DstType::array_layout</span></code> or <code class="docutils literal notranslate"><span class="pre">SrcType::array_layout</span></code> is <code class="docutils literal notranslate"><span class="pre">LayoutStride</span></code></p>
@@ -879,56 +1090,56 @@ These rules only cover cases where both layouts are one of <code class="docutils
 </ul>
 <section id="assignment-examples">
 <h3>Assignment Examples<a class="headerlink" href="#assignment-examples" title="Permalink to this heading">#</a></h3>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="w"> </span><span class="n">View</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">*&gt;</span><span class="w">       </span><span class="n">a1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">View</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">*&gt;</span><span class="p">(</span><span class="s">&quot;A1&quot;</span><span class="p">,</span><span class="n">N</span><span class="p">);</span><span class="w">     </span><span class="c1">// OK</span>
-<span class="w"> </span><span class="n">View</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">**&gt;</span><span class="w">      </span><span class="n">a2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">View</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">*</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;A2&quot;</span><span class="p">,</span><span class="n">N</span><span class="p">);</span><span class="w"> </span><span class="c1">// OK</span>
-<span class="w"> </span><span class="n">View</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">*</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span><span class="o">&gt;</span><span class="w">   </span><span class="n">a3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">View</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">**&gt;</span><span class="p">(</span><span class="s">&quot;A3&quot;</span><span class="p">,</span><span class="n">N</span><span class="p">,</span><span class="n">M</span><span class="p">);</span><span class="w">  </span><span class="c1">// OK if M == 10 otherwise runtime failure</span>
-<span class="w"> </span><span class="n">View</span><span class="o">&lt;</span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="o">*&gt;</span><span class="w"> </span><span class="n">a4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a1</span><span class="p">;</span><span class="w">                     </span><span class="c1">// OK</span>
-<span class="w"> </span><span class="n">View</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">*&gt;</span><span class="w">       </span><span class="n">a5</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a4</span><span class="p">;</span><span class="w">                     </span><span class="c1">// Error: const to non-const assignment</span>
-<span class="w"> </span><span class="n">View</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">**&gt;</span><span class="w">      </span><span class="n">a6</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a1</span><span class="p">;</span><span class="w">                     </span><span class="c1">// Error: Ranks do not match</span>
-<span class="w"> </span><span class="n">View</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">*</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span><span class="o">&gt;</span><span class="w">    </span><span class="n">a7</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a3</span><span class="p">;</span><span class="w">                     </span><span class="c1">// Error: compile time dimensions do not match</span>
-<span class="w"> </span><span class="n">View</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">[</span><span class="mi">4</span><span class="p">][</span><span class="mi">10</span><span class="p">]</span><span class="o">&gt;</span><span class="w"> </span><span class="n">a8</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a3</span><span class="p">;</span><span class="w">                     </span><span class="c1">// OK if N == 4 otherwise runtime failure</span>
-<span class="w"> </span><span class="n">View</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="n">LayoutLeft</span><span class="o">&gt;</span><span class="w">    </span><span class="n">a9</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">a1</span><span class="p">;</span><span class="w">           </span><span class="c1">// OK since a1 is either LayoutLeft or LayoutRight</span>
-<span class="w"> </span><span class="n">View</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">**</span><span class="p">,</span><span class="w"> </span><span class="n">LayoutStride</span><span class="o">&gt;</span><span class="w"> </span><span class="n">a10</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a8</span><span class="p">;</span><span class="w">           </span><span class="c1">// OK</span>
-<span class="w"> </span><span class="n">View</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">**&gt;</span><span class="w">               </span><span class="n">a11</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a10</span><span class="p">;</span><span class="w">          </span><span class="c1">// OK</span>
-<span class="w"> </span><span class="n">View</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="n">HostSpace</span><span class="o">&gt;</span><span class="w"> </span><span class="n">a12</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">View</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="n">CudaSpace</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;A12&quot;</span><span class="p">,</span><span class="n">N</span><span class="p">);</span><span class="w"> </span><span class="c1">// Error: non-assignable memory spaces</span>
-<span class="w"> </span><span class="n">View</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="n">HostSpace</span><span class="o">&gt;</span><span class="w"> </span><span class="n">a13</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">View</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="n">CudaHostPinnedSpace</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;A13&quot;</span><span class="p">,</span><span class="n">N</span><span class="p">);</span><span class="w"> </span><span class="c1">// OK</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">View</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">*&gt;</span><span class="w">       </span><span class="n">a1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">View</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">*&gt;</span><span class="p">(</span><span class="s">&quot;A1&quot;</span><span class="p">,</span><span class="n">N</span><span class="p">);</span><span class="w">     </span><span class="c1">// OK</span>
+<span class="n">View</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">**&gt;</span><span class="w">      </span><span class="n">a2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">View</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">*</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;A2&quot;</span><span class="p">,</span><span class="n">N</span><span class="p">);</span><span class="w"> </span><span class="c1">// OK</span>
+<span class="n">View</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">*</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span><span class="o">&gt;</span><span class="w">   </span><span class="n">a3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">View</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">**&gt;</span><span class="p">(</span><span class="s">&quot;A3&quot;</span><span class="p">,</span><span class="n">N</span><span class="p">,</span><span class="n">M</span><span class="p">);</span><span class="w">  </span><span class="c1">// OK if M == 10 otherwise runtime failure</span>
+<span class="n">View</span><span class="o">&lt;</span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="o">*&gt;</span><span class="w"> </span><span class="n">a4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a1</span><span class="p">;</span><span class="w">                     </span><span class="c1">// OK</span>
+<span class="n">View</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">*&gt;</span><span class="w">       </span><span class="n">a5</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a4</span><span class="p">;</span><span class="w">                     </span><span class="c1">// Error: const to non-const assignment</span>
+<span class="n">View</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">**&gt;</span><span class="w">      </span><span class="n">a6</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a1</span><span class="p">;</span><span class="w">                     </span><span class="c1">// Error: Ranks do not match</span>
+<span class="n">View</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">*</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span><span class="o">&gt;</span><span class="w">    </span><span class="n">a7</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a3</span><span class="p">;</span><span class="w">                     </span><span class="c1">// Error: compile time dimensions do not match</span>
+<span class="n">View</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">[</span><span class="mi">4</span><span class="p">][</span><span class="mi">10</span><span class="p">]</span><span class="o">&gt;</span><span class="w"> </span><span class="n">a8</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a3</span><span class="p">;</span><span class="w">                     </span><span class="c1">// OK if N == 4 otherwise runtime failure</span>
+<span class="n">View</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="n">LayoutLeft</span><span class="o">&gt;</span><span class="w">    </span><span class="n">a9</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">a1</span><span class="p">;</span><span class="w">           </span><span class="c1">// OK since a1 is either LayoutLeft or LayoutRight</span>
+<span class="n">View</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">**</span><span class="p">,</span><span class="w"> </span><span class="n">LayoutStride</span><span class="o">&gt;</span><span class="w"> </span><span class="n">a10</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a8</span><span class="p">;</span><span class="w">           </span><span class="c1">// OK</span>
+<span class="n">View</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">**&gt;</span><span class="w">               </span><span class="n">a11</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a10</span><span class="p">;</span><span class="w">          </span><span class="c1">// OK</span>
+<span class="n">View</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="n">HostSpace</span><span class="o">&gt;</span><span class="w"> </span><span class="n">a12</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">View</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="n">CudaSpace</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;A12&quot;</span><span class="p">,</span><span class="n">N</span><span class="p">);</span><span class="w"> </span><span class="c1">// Error: non-assignable memory spaces</span>
+<span class="n">View</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="n">HostSpace</span><span class="o">&gt;</span><span class="w"> </span><span class="n">a13</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">View</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="n">CudaHostPinnedSpace</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;A13&quot;</span><span class="p">,</span><span class="n">N</span><span class="p">);</span><span class="w"> </span><span class="c1">// OK</span>
 </pre></div>
 </div>
 </section>
 </section>
 <section id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading">#</a></h2>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="cpf">&lt;Kokkos_Core.hpp&gt;</span>
-<span class="cp">#include</span><span class="cpf">&lt;cstdio&gt;</span><span class="c1"> </span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="cpf">&lt;Kokkos_Core.hpp&gt;</span>
+<span class="cp">#include</span><span class="cpf">&lt;cstdio&gt;</span>
 
 <span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">argv</span><span class="p">[])</span><span class="w"> </span><span class="p">{</span>
-<span class="w">   </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">initialize</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span><span class="n">argv</span><span class="p">);</span>
+<span class="w">    </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">initialize</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span><span class="n">argv</span><span class="p">);</span>
 
-<span class="w">   </span><span class="kt">int</span><span class="w"> </span><span class="n">N0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
-<span class="w">   </span><span class="kt">int</span><span class="w"> </span><span class="n">N1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">N0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">N1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
 
-<span class="w">   </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">View</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">*&gt;</span><span class="w"> </span><span class="n">a</span><span class="p">(</span><span class="s">&quot;A&quot;</span><span class="p">,</span><span class="n">N0</span><span class="p">);</span>
-<span class="w">   </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">View</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">*&gt;</span><span class="w"> </span><span class="n">b</span><span class="p">(</span><span class="s">&quot;B&quot;</span><span class="p">,</span><span class="n">N1</span><span class="p">);</span>
+<span class="w">    </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">View</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">*&gt;</span><span class="w"> </span><span class="n">a</span><span class="p">(</span><span class="s">&quot;A&quot;</span><span class="p">,</span><span class="n">N0</span><span class="p">);</span>
+<span class="w">    </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">View</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">*&gt;</span><span class="w"> </span><span class="n">b</span><span class="p">(</span><span class="s">&quot;B&quot;</span><span class="p">,</span><span class="n">N1</span><span class="p">);</span>
 
-<span class="w">   </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">parallel_for</span><span class="p">(</span><span class="s">&quot;InitA&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">N0</span><span class="p">,</span><span class="w"> </span><span class="n">KOKKOS_LAMBDA</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">     </span><span class="n">a</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
-<span class="w">   </span><span class="p">});</span>
+<span class="w">    </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">parallel_for</span><span class="p">(</span><span class="s">&quot;InitA&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">N0</span><span class="p">,</span><span class="w"> </span><span class="n">KOKKOS_LAMBDA</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">a</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+<span class="w">    </span><span class="p">});</span>
 
-<span class="w">   </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">parallel_for</span><span class="p">(</span><span class="s">&quot;InitB&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">N1</span><span class="p">,</span><span class="w"> </span><span class="n">KOKKOS_LAMBDA</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">     </span><span class="n">b</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
-<span class="w">   </span><span class="p">});</span>
+<span class="w">    </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">parallel_for</span><span class="p">(</span><span class="s">&quot;InitB&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">N1</span><span class="p">,</span><span class="w"> </span><span class="n">KOKKOS_LAMBDA</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">b</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+<span class="w">    </span><span class="p">});</span>
 
-<span class="w">   </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">View</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">**</span><span class="p">,</span><span class="n">Kokkos</span><span class="o">::</span><span class="n">LayoutLeft</span><span class="o">&gt;</span><span class="w"> </span><span class="n">c</span><span class="p">(</span><span class="s">&quot;C&quot;</span><span class="p">,</span><span class="n">N0</span><span class="p">,</span><span class="n">N1</span><span class="p">);</span>
-<span class="w">   </span><span class="p">{</span>
-<span class="w">     </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">View</span><span class="o">&lt;</span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="o">*&gt;</span><span class="w"> </span><span class="n">const_a</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
-<span class="w">     </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">View</span><span class="o">&lt;</span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="o">*&gt;</span><span class="w"> </span><span class="n">const_b</span><span class="p">(</span><span class="n">b</span><span class="p">);</span>
-<span class="w">     </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">parallel_for</span><span class="p">(</span><span class="s">&quot;SetC&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">MDRangePolicy</span><span class="o">&lt;</span><span class="n">Kokkos</span><span class="o">::</span><span class="n">Rank</span><span class="o">&lt;</span><span class="mi">2</span><span class="p">,</span><span class="n">Kokkos</span><span class="o">::</span><span class="n">Iterate</span><span class="o">::</span><span class="n">Left</span><span class="o">&gt;&gt;</span><span class="p">({</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">},{</span><span class="n">N0</span><span class="p">,</span><span class="n">N1</span><span class="p">}),</span>
-<span class="w">       </span><span class="n">KOKKOS_LAMBDA</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">i0</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">i1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">       </span><span class="n">c</span><span class="p">(</span><span class="n">i0</span><span class="p">,</span><span class="n">i1</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">(</span><span class="n">i0</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">b</span><span class="p">(</span><span class="n">i1</span><span class="p">);</span>
-<span class="w">     </span><span class="p">});</span>
-<span class="w">   </span><span class="p">}</span>
+<span class="w">    </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">View</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">**</span><span class="p">,</span><span class="n">Kokkos</span><span class="o">::</span><span class="n">LayoutLeft</span><span class="o">&gt;</span><span class="w"> </span><span class="n">c</span><span class="p">(</span><span class="s">&quot;C&quot;</span><span class="p">,</span><span class="n">N0</span><span class="p">,</span><span class="n">N1</span><span class="p">);</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">View</span><span class="o">&lt;</span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="o">*&gt;</span><span class="w"> </span><span class="n">const_a</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
+<span class="w">        </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">View</span><span class="o">&lt;</span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="o">*&gt;</span><span class="w"> </span><span class="n">const_b</span><span class="p">(</span><span class="n">b</span><span class="p">);</span>
+<span class="w">        </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">parallel_for</span><span class="p">(</span><span class="s">&quot;SetC&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">MDRangePolicy</span><span class="o">&lt;</span><span class="n">Kokkos</span><span class="o">::</span><span class="n">Rank</span><span class="o">&lt;</span><span class="mi">2</span><span class="p">,</span><span class="n">Kokkos</span><span class="o">::</span><span class="n">Iterate</span><span class="o">::</span><span class="n">Left</span><span class="o">&gt;&gt;</span><span class="p">({</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">},{</span><span class="n">N0</span><span class="p">,</span><span class="n">N1</span><span class="p">}),</span>
+<span class="w">            </span><span class="n">KOKKOS_LAMBDA</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">i0</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">i1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">c</span><span class="p">(</span><span class="n">i0</span><span class="p">,</span><span class="n">i1</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">(</span><span class="n">i0</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">b</span><span class="p">(</span><span class="n">i1</span><span class="p">);</span>
+<span class="w">        </span><span class="p">});</span>
+<span class="w">    </span><span class="p">}</span>
 
-<span class="w">   </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">finalize</span><span class="p">();</span>
+<span class="w">    </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">finalize</span><span class="p">();</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -993,26 +1204,18 @@ These rules only cover cases where both layouts are one of <code class="docutils
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">View</span></code></a><ul>
+<li><a class="reference internal" href="#usage">Usage</a></li>
 <li><a class="reference internal" href="#interface">Interface</a><ul>
 <li><a class="reference internal" href="#parameters">Parameters</a></li>
-<li><a class="reference internal" href="#requirements">Requirements:</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#public-class-members">Public Class Members</a><ul>
 <li><a class="reference internal" href="#enums">Enums</a></li>
-<li><a class="reference internal" href="#typedefs">Typedefs</a><ul>
-<li><a class="reference internal" href="#data-types">Data Types</a></li>
-<li><a class="reference internal" href="#scalar-types">Scalar Types</a></li>
-<li><a class="reference internal" href="#spaces">Spaces</a></li>
-<li><a class="reference internal" href="#viewtypes">ViewTypes</a></li>
-<li><a class="reference internal" href="#data-handles">Data Handles</a></li>
-<li><a class="reference internal" href="#other">Other</a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#typedefs">Typedefs</a></li>
 <li><a class="reference internal" href="#constructors">Constructors</a></li>
 <li><a class="reference internal" href="#data-access-functions">Data Access Functions</a></li>
 <li><a class="reference internal" href="#data-layout-dimensions-strides">Data Layout, Dimensions, Strides</a></li>
-<li><a class="reference internal" href="#id1">Other</a></li>
+<li><a class="reference internal" href="#other">Other</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#nonmember-functions">NonMember Functions</a></li>
