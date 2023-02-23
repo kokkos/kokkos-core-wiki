@@ -26,7 +26,7 @@ might fall upon three broad categories of computing devices:
 Any combination of these options might also be combined in the future.
 
 The diversity of the options available for processor selection raises an interesting question as to how these should be programmed. In part due to their heritage, but also
-due to their optimized designs, each of these hardware types others a different programming solution and a different set of guidelines by which to write applications for highest
+due to their optimized designs, each of these hardware types offers a different programming solution and a different set of guidelines by which to write applications for highest
 performance. Options available today include a number of shared memory approaches
 such as OpenMP, Cilk+, Thread Building Blocks (TBB) as well as Linux p-threads. To
 target both contemporary multi/many-core processors and GPUs technologies options
