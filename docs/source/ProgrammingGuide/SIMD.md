@@ -183,7 +183,7 @@ double x;
 if (x < 0) x = 0;
 ```
 
-We cannot naively use SIMD types in this scenario, because `x < 0` is not a boolean value, instead it is a `simnd_mask<double, Abi>` object which represents possibly multiple booleans.
+We cannot naively use SIMD types in this scenario, because `x < 0` is not a boolean value, instead it is a `simd_mask<double, Abi>` object which represents possibly multiple booleans.
 
 ```c++
 Kokkos::Experimental::native_simd<double> x;
