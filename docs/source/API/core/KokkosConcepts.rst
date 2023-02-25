@@ -1,14 +1,22 @@
-# Kokkos Concepts
+Kokkos Concepts
+===============
 
-## Introduction
+Introduction
+------------
 
-Kokkos has been using concept-driven design essentially since its inception.  Until recently, there has been no readily-available mechanism for expressing these concepts in code.  (In fact, there hasn't really even been a generally agreed-upon approach to *documenting* concepts.)  With the merging of C++ Concepts as a language feature into the working draft, their implementation in multiple compilers, and the acceptance of the first concept-driven library feature, ranges, into the standard, it is time to consider formally specifying and documenting the concepts Kokkos uses in generic code.  Beyond this, the recent rapid expansion in (and corresponding demand for) new Kokkos backends makes the lack of a hardened, formal specification for basic Kokkos concepts more acute than ever.  With several new backend projects on the near horizon—SYCL, resilience, and HPX, just to name a few—now is the best time to formalize the core concepts in Kokkos so that we can begin to iteratively harden the concept set that Kokkos uses in generic code.  Additionally, since the promotion to Kokkos 3.0 includes a plan to deprecate many non-general features of certain execution spaces, now is a good time to take a more holistic approach to the execution space concept and the concepts it interacts with.
+Kokkos has been using concept-driven design essentially since its inception. Until recently, there has been no readily-available mechanism for expressing these concepts in code. (In fact, there hasn't really even been a generally agreed-upon approach to *documenting* concepts.) With the merging of C++ Concepts as a language feature into the working draft, their implementation in multiple compilers, and the acceptance of the first concept-driven library feature, ranges, into the standard, it is time to consider formally specifying and documenting the concepts Kokkos uses in generic code. Beyond this, the recent rapid expansion in (and corresponding demand for) new Kokkos backends makes the lack of a hardened, formal specification for basic Kokkos concepts more acute than ever. With several new backend projects on the near horizon—SYCL, resilience, and HPX, just to name a few—now is the best time to formalize the core concepts in Kokkos so that we can begin to iteratively harden the concept set that Kokkos uses in generic code.  Additionally, since the promotion to Kokkos 3.0 includes a plan to deprecate many non-general features of certain execution spaces, now is a good time to take a more holistic approach to the execution space concept and the concepts it interacts with.
 
-## Approach
+Approach
+--------
 
-In addition to the experience we have garnered over the past several years of participation in the ISO-C++ executor specification effort, we should use the approach in "Design of Concept Libraries for C++" (2011) by Sutton and Stroustrup as a guide.  In particular, we should design based on the *concepts = constraints + axioms* philosophy, which focuses on balancing flexibility of use with ease of learning.  This is not far from the design philosophy we already take—for instance, we don't really have separate "concepts" for the range policies given to `parallel_for` and `parallel_reduce`, even though a pure constraints-based approach may not see a need to make these two the same (the algorithms do very slightly different things with them, after all).  By combining constraints sets that are "similar enough" (as we always have done in the past), we can maintain the flexibility we need while minimizing cognitive load on users.
+In addition to the experience we have garnered over the past several years of participation in the ISO-C++ executor specification effort, we should use the approach in "Design of Concept Libraries for C++" (2011) by Sutton and Stroustrup as a guide.  In particular, we should design based on the *concepts = constraints + axioms* philosophy, which focuses on balancing flexibility of use with ease of learning.  This is not far from the design philosophy we already take—for instance, we don't really have separate "concepts" for the range policies given to ``parallel_for`` and ``parallel_reduce``, even though a pure constraints-based approach may not see a need to make these two the same (the algorithms do very slightly different things with them, after all).  By combining constraints sets that are "similar enough" (as we always have done in the past), we can maintain the flexibility we need while minimizing cognitive load on users.
 
-## Overview
+Overview
+--------
+
+.. _ExecutionSpace::
+
+.. |ExecutionSpace
 
 When it comes to cognitive load, perhaps even more important than limiting the total number of concepts is limiting the number of *subsumption hierarchies* of concepts.  Experience with C++ ranges has also shown that limiting the branching width of these hierarchies increases ease of learning.  Roughly speaking and from a high-level perspective, the major user-visible concept hierarchies that Kokkos currently uses are:
 
@@ -277,7 +285,6 @@ It would be nice if there were some way to reduce the conceptual surface area by
 Finally, it's not entirely clear to me why we need separate concepts for `TeamThreadRange` and `ThreadVectorRange`.  In my mind, multiple levels of nested parallelism is just another axis along which to extend the execution policy concept, and it's not clear to me why we need to use up extra conceptual overhead to describe specific points in that hierarchy.  (Again, I don't have any objections to the names specifically, just the extra cognitive load.)
 
 It's entirely possible that there isn't significant simplification to be made here.  Maybe the current separation of concerns is the simplest possible.  But as long as we're looking at hardening Kokkos concepts, we should at least explore this space.
-
 
 ## The `TeamMember` Concept
 
