@@ -14,7 +14,7 @@ Boolean type trait to detect types that model `ExecutionPolicy concept <policies
 is_memory_space
 ---------------
 
-Boolean type trait to detect types that model `MemorySpace concept <MemorySpaceConcept.html>`_.
+Boolean type trait to detect types that model `MemorySpace concept <memory_spaces.html#memoryspaceconcept>`_.
 
 is_memory_traits
 ----------------
