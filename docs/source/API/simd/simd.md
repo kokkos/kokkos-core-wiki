@@ -32,7 +32,7 @@ The second template parameter `Abi` is one of the pre-defined ABI types in the n
 ### Typedefs
 
  *  `value_type`: Equal to `T`
- *  `reference`: This type should be convertible to `value_type` and `value_type` should be assignable to `reference`. It may be a plain reference or it may be a special class that calls vector intrinsics to extract or fill in one vector lane.
+ *  `reference`: This type should be convertible to `value_type` and `value_type` should be assignable to `reference`. It may be a plain reference or it may be an implementation-defined type that calls vector intrinsics to extract or fill in one vector lane.
  *  `mask_type`: Equal to `simd_mask<T, Abi>`
  *  `abi_type`: Equal to `Abi`
 
@@ -56,7 +56,7 @@ The second template parameter `Abi` is one of the pre-defined ABI types in the n
   * `reference operator[](std::size_t)`: returns a reference to vector value `i` that can be modified.
   * `value_type operator[](std::size_t) const`: returns the vector value `i`.
 
-### Math Operators
+### Arithmetic Operators
   * `simd simd::operator-() const`
   * `simd operator+(const simd& lhs, const simd& rhs)`
   * `simd operator-(const simd& lhs, const simd& rhs)`
@@ -125,12 +125,14 @@ These functions are only defined for `value_type=double`.
 
 int main(int argc, char* argv[]) {
   Kokkos::initialize(argc,argv);
+  {
   using simd_type = Kokkos::Experimental::native_simd<double>;
   simd_type a([] (std::size_t i) { return 0.1 * i; });
   simd_type b(2.0);
   simd_type c = Kokkos::sqrt(a * a + b * b);
   for (std::size_t i = 0; i < simd_type::size(); ++i) {
     printf("[%zu] = %g\n", i, c[i]);
+  }
   }
   Kokkos::finalize();
 }
