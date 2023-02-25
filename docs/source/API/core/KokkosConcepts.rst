@@ -67,13 +67,13 @@ Some things currently being treated as concepts (according to ``Kokkos_Concepts.
 There is also some question as to whether |Kokkos_View|_ (and friends) should be presented as a concept rather than just a class template, given the existence of act-alike class templates such as ``DualView`` and ``OffsetView`` external to Kokkos.   
 
 The ``ExecutionSpace`` Concept
-----------------------------
+------------------------------
 
-.. _ExecutionSpace: ExecutionSpaceConcept.html
+.. _ExecutionSpace2: ExecutionSpaceConcept.html
 
-.. |ExecutionSpace| replace:: ``ExecutionSpace``
+.. |ExecutionSpace2| replace:: ``ExecutionSpace``
 
-Working off the functionality currently common to ``Serial``, ``Cuda``, ``OpenMP``, ``Threads``, ``HIP``, and ``OpenMPTarget``, the current state of the Kokkos |ExecutionSpace|_ concept looks something like:
+Working off the functionality currently common to ``Serial``, ``Cuda``, ``OpenMP``, ``Threads``, ``HIP``, and ``OpenMPTarget``, the current state of the Kokkos |ExecutionSpace2|_ concept looks something like:
 
 .. code-block:: cpp
         
@@ -330,7 +330,7 @@ The ``TeamMember`` Concept
 TODO
 
 The ``Functor`` Concept
----------------------
+-----------------------
 
 TODO
 
