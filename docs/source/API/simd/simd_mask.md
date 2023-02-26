@@ -75,12 +75,14 @@ The second template parameter `Abi` is one of the pre-defined ABI types in the n
 
 int main(int argc, char* argv[]) {
   Kokkos::initialize(argc,argv);
+  {
   using mask_type = Kokkos::Experimental::native_simd_mask<double>;
   mask_type a([] (std::size_t i) { return i == 0 });
   mask_type b([] (std::size_t i) { return i == 1 });
   mask_type c([] (std::size_t i) { return i == 0 || i == 1 });
   if (all_of(c == (a || b))) {
     printf("Kokkos simd_mask works as expected!");
+  }
   }
   Kokkos::finalize();
 }
