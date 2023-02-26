@@ -69,11 +69,11 @@ There is also some question as to whether |Kokkos_View|_ (and friends) should be
 The ``ExecutionSpace`` Concept
 ------------------------------
 
-.. _ExecutionSpace2: ExecutionSpaceConcept.html
+.. _ExecutionSpaceTwo: execution_spaces.html#executionspaceconcept
 
-.. |ExecutionSpace2| replace:: ``ExecutionSpace``
+.. |ExecutionSpaceTwo| replace:: ``ExecutionSpace``
 
-Working off the functionality currently common to ``Serial``, ``Cuda``, ``OpenMP``, ``Threads``, ``HIP``, and ``OpenMPTarget``, the current state of the Kokkos |ExecutionSpace2|_ concept looks something like:
+Working off the functionality currently common to ``Serial``, ``Cuda``, ``OpenMP``, ``Threads``, ``HIP``, and ``OpenMPTarget``, the current state of the Kokkos |ExecutionSpaceTwo|_ concept looks something like:
 
 .. code-block:: cpp
         
