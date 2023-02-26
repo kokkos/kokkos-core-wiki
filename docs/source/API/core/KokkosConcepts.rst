@@ -172,7 +172,6 @@ Support for ``UniqueToken`` adds the following requirements:
         && DefaultConstructible<Experimental::UniqueToken<Ex, Experimental::UniqueTokenScope::Instance>>
         && CopyConstructible<Experimental::UniqueToken<Ex, Experimental::UniqueTokenScope::Global>>
         && DefaultConstructible<Experimental::UniqueToken<Ex, Experimental::UniqueTokenScope::Global>>;
-        ```
 
 An Additional Concept for ``DeviceExecutionSpace``?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
