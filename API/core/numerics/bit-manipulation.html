@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" /><link rel="next" title="TeamHandleConcept" href="TeamHandleConcept.html" /><link rel="prev" title="NestedPolicies" href="NestedPolicies.html" />
+<link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" /><link rel="next" title="C-style memory management" href="../c_style_memory_management.html" /><link rel="prev" title="Numeric traits" href="numeric-traits.html" />
 
     <meta name="generator" content="sphinx-5.0.1, furo 2022.06.04.1"/>
-        <title>RangePolicy - Kokkos documentation</title>
+        <title>Bit manipulation - Kokkos documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?digest=40978830699223671f4072448e654b5958f38b89" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
@@ -238,19 +238,19 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l2 current has-children"><a class="reference internal" href="../Execution-Policies.html">Execution Policies</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="ExecutionPolicyConcept.html"><code class="docutils literal notranslate"><span class="pre">ExecutionPolicy</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="MDRangePolicy.html"><code class="docutils literal notranslate"><span class="pre">MDRangePolicy</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="NestedPolicies.html"><code class="docutils literal notranslate"><span class="pre">NestedPolicies</span></code></a></li>
-<li class="toctree-l3 current current-page"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">RangePolicy</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="TeamHandleConcept.html"><code class="docutils literal notranslate"><span class="pre">TeamHandleConcept</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="TeamPolicy.html"><code class="docutils literal notranslate"><span class="pre">TeamPolicy</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="TeamThreadMDRange.html"><code class="docutils literal notranslate"><span class="pre">TeamThreadMDRange</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="TeamThreadRange.html"><code class="docutils literal notranslate"><span class="pre">TeamThreadRange</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="TeamVectorMDRange.html"><code class="docutils literal notranslate"><span class="pre">TeamVectorMDRange</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="TeamVectorRange.html"><code class="docutils literal notranslate"><span class="pre">TeamVectorRange</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="ThreadVectorMDRange.html"><code class="docutils literal notranslate"><span class="pre">ThreadVectorMDRange</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="ThreadVectorRange.html"><code class="docutils literal notranslate"><span class="pre">ThreadVectorRange</span></code></a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../Execution-Policies.html">Execution Policies</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../policies/ExecutionPolicyConcept.html"><code class="docutils literal notranslate"><span class="pre">ExecutionPolicy</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../policies/MDRangePolicy.html"><code class="docutils literal notranslate"><span class="pre">MDRangePolicy</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../policies/NestedPolicies.html"><code class="docutils literal notranslate"><span class="pre">NestedPolicies</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../policies/RangePolicy.html"><code class="docutils literal notranslate"><span class="pre">RangePolicy</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../policies/TeamHandleConcept.html"><code class="docutils literal notranslate"><span class="pre">TeamHandleConcept</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../policies/TeamPolicy.html"><code class="docutils literal notranslate"><span class="pre">TeamPolicy</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../policies/TeamThreadMDRange.html"><code class="docutils literal notranslate"><span class="pre">TeamThreadMDRange</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../policies/TeamThreadRange.html"><code class="docutils literal notranslate"><span class="pre">TeamThreadRange</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../policies/TeamVectorMDRange.html"><code class="docutils literal notranslate"><span class="pre">TeamVectorMDRange</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../policies/TeamVectorRange.html"><code class="docutils literal notranslate"><span class="pre">TeamVectorRange</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../policies/ThreadVectorMDRange.html"><code class="docutils literal notranslate"><span class="pre">ThreadVectorMDRange</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../policies/ThreadVectorRange.html"><code class="docutils literal notranslate"><span class="pre">ThreadVectorRange</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../Spaces.html">Spaces</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -272,11 +272,11 @@
 <li class="toctree-l3"><a class="reference internal" href="../atomics/atomic_store.html"><code class="docutils literal notranslate"><span class="pre">atomic_store</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../Numerics.html">Numerics</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../numerics/mathematical-constants.html">Mathematical constants</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../numerics/mathematical-functions.html">Common math functions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../numerics/numeric-traits.html">Numeric traits</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../numerics/bit-manipulation.html">Bit manipulation</a></li>
+<li class="toctree-l2 current has-children"><a class="reference internal" href="../Numerics.html">Numerics</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="mathematical-constants.html">Mathematical constants</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mathematical-functions.html">Common math functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="numeric-traits.html">Numeric traits</a></li>
+<li class="toctree-l3 current current-page"><a class="current reference internal" href="#">Bit manipulation</a></li>
 </ul>
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../c_style_memory_management.html">C-style memory management</a><input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" role="switch" type="checkbox"/><label for="toctree-checkbox-13"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -466,7 +466,7 @@
         </a>
         <div class="content-icon-container">
 <div class="edit-this-page">
-  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/API/core/policies/RangePolicy.rst" title="Edit this page">
+  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/API/core/numerics/bit-manipulation.rst" title="Edit this page">
     <svg aria-hidden="true" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
       <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4"></path>
@@ -490,155 +490,66 @@
           </label>
         </div>
         <article role="main">
-          <section id="rangepolicy">
-<h1><code class="docutils literal notranslate"><span class="pre">RangePolicy</span></code><a class="headerlink" href="#rangepolicy" title="Permalink to this heading">#</a></h1>
-<p>Header File: <code class="docutils literal notranslate"><span class="pre">&lt;Kokkos_Core.hpp&gt;</span></code></p>
-<section id="usage">
-<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this heading">#</a></h2>
-<div class="highlight-cppkokkos notranslate"><div class="highlight"><pre><span></span><span class="n">Kokkos</span><span class="o">::</span><span class="n">RangePolicy</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">begin</span><span class="p">,</span><span class="w"> </span><span class="n">end</span><span class="p">,</span><span class="w"> </span><span class="n">args</span><span class="p">...)</span>
-<span class="n">Kokkos</span><span class="o">::</span><span class="n">RangePolicy</span><span class="o">&lt;</span><span class="n">ARGS</span><span class="o">&gt;</span><span class="p">(</span><span class="n">begin</span><span class="p">,</span><span class="w"> </span><span class="n">end</span><span class="p">,</span><span class="w"> </span><span class="n">args</span><span class="p">...)</span>
-<span class="n">Kokkos</span><span class="o">::</span><span class="n">RangePolicy</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">Space</span><span class="p">(),</span><span class="w"> </span><span class="n">begin</span><span class="p">,</span><span class="w"> </span><span class="n">end</span><span class="p">,</span><span class="w"> </span><span class="n">args</span><span class="p">...)</span>
-<span class="n">Kokkos</span><span class="o">::</span><span class="n">RangePolicy</span><span class="o">&lt;</span><span class="n">ARGS</span><span class="o">&gt;</span><span class="p">(</span><span class="n">Space</span><span class="p">(),</span><span class="w"> </span><span class="n">begin</span><span class="p">,</span><span class="w"> </span><span class="n">end</span><span class="p">,</span><span class="w"> </span><span class="n">args</span><span class="p">...)</span>
-</pre></div>
-</div>
-<p>RangePolicy defines an execution policy for a 1D iteration space starting at begin and going to end with an open interval.</p>
-</section>
-<section id="synopsis">
-<h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this heading">#</a></h2>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="n">Args</span><span class="o">&gt;</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">Kokkos</span><span class="o">::</span><span class="n">RangePolicy</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">typedef</span><span class="w"> </span><span class="n">RangePolicy</span><span class="w"> </span><span class="n">execution_policy</span><span class="p">;</span>
-<span class="w">    </span><span class="k">typedef</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="nc">traits</span><span class="o">::</span><span class="n">index_type</span><span class="w"> </span><span class="n">member_type</span><span class="w"> </span><span class="p">;</span>
-<span class="w">    </span><span class="k">typedef</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="nc">traits</span><span class="o">::</span><span class="n">index_type</span><span class="w"> </span><span class="n">index_type</span><span class="p">;</span>
-
-<span class="w">    </span><span class="c1">//Inherited from PolicyTraits&lt;Args...&gt;</span>
-<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="n">execution_space</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="n">PolicyTraits</span><span class="o">&lt;</span><span class="n">Args</span><span class="p">...</span><span class="o">&gt;::</span><span class="n">execution_space</span><span class="p">;</span>
-<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="n">schedule_type</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="n">PolicyTraits</span><span class="o">&lt;</span><span class="n">Args</span><span class="p">...</span><span class="o">&gt;::</span><span class="n">schedule_type</span><span class="p">;</span>
-<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="n">work_tag</span><span class="w">          </span><span class="o">=</span><span class="w"> </span><span class="n">PolicyTraits</span><span class="o">&lt;</span><span class="n">Args</span><span class="p">...</span><span class="o">&gt;::</span><span class="n">work_tag</span><span class="p">;</span>
-<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="n">index_type</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="n">PolicyTraits</span><span class="o">&lt;</span><span class="n">Args</span><span class="p">...</span><span class="o">&gt;::</span><span class="n">index_type</span><span class="p">;</span>
-<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="n">iteration_pattern</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PolicyTraits</span><span class="o">&lt;</span><span class="n">Args</span><span class="p">...</span><span class="o">&gt;::</span><span class="n">iteration_pattern</span><span class="p">;</span>
-<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="n">launch_bounds</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="n">PolicyTraits</span><span class="o">&lt;</span><span class="n">Args</span><span class="p">...</span><span class="o">&gt;::</span><span class="n">launch_bounds</span><span class="p">;</span>
-
-<span class="w">    </span><span class="c1">//Constructors</span>
-<span class="w">    </span><span class="n">RangePolicy</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">RangePolicy</span><span class="o">&amp;</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="p">;</span>
-<span class="w">    </span><span class="n">RangePolicy</span><span class="p">(</span><span class="n">RangePolicy</span><span class="o">&amp;&amp;</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="p">;</span>
-
-<span class="w">    </span><span class="kr">inline</span><span class="w"> </span><span class="n">RangePolicy</span><span class="p">();</span>
-
-<span class="w">    </span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="n">Args</span><span class="o">&gt;</span>
-<span class="w">    </span><span class="kr">inline</span><span class="w"> </span><span class="n">RangePolicy</span><span class="p">(</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">execution_space</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">work_space</span>
-<span class="w">                      </span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">member_type</span><span class="w"> </span><span class="n">work_begin</span>
-<span class="w">                      </span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">member_type</span><span class="w"> </span><span class="n">work_end</span>
-<span class="w">                      </span><span class="p">,</span><span class="w"> </span><span class="n">Args</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="n">args</span><span class="p">);</span>
-
-<span class="w">    </span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="n">Args</span><span class="o">&gt;</span>
-<span class="w">    </span><span class="kr">inline</span><span class="w"> </span><span class="n">RangePolicy</span><span class="p">(</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">member_type</span><span class="w"> </span><span class="n">work_begin</span>
-<span class="w">                      </span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">member_type</span><span class="w"> </span><span class="n">work_end</span>
-<span class="w">                      </span><span class="p">,</span><span class="w"> </span><span class="n">Args</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="n">args</span><span class="p">);</span>
-
-<span class="w">    </span><span class="c1">// retrieve chunk_size</span>
-<span class="w">    </span><span class="kr">inline</span><span class="w"> </span><span class="n">member_type</span><span class="w"> </span><span class="nf">chunk_size</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
-<span class="w">    </span><span class="c1">// set chunk_size to a discrete value</span>
-<span class="w">    </span><span class="kr">inline</span><span class="w"> </span><span class="n">RangePolicy</span><span class="w"> </span><span class="nf">set_chunk_size</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">chunk_size_</span><span class="p">);</span>
-
-<span class="w">    </span><span class="c1">// return ExecSpace instance provided to the constructor</span>
-<span class="w">    </span><span class="n">KOKKOS_INLINE_FUNCTION</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">execution_space</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">space</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
-<span class="w">    </span><span class="c1">// return Range begin</span>
-<span class="w">    </span><span class="n">KOKKOS_INLINE_FUNCTION</span><span class="w"> </span><span class="n">member_type</span><span class="w"> </span><span class="n">begin</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
-<span class="w">    </span><span class="c1">// return Range end</span>
-<span class="w">    </span><span class="n">KOKKOS_INLINE_FUNCTION</span><span class="w"> </span><span class="n">member_type</span><span class="w"> </span><span class="n">end</span><span class="p">()</span><span class="w">   </span><span class="k">const</span><span class="p">;</span>
-<span class="p">};</span>
-</pre></div>
-</div>
-</section>
-<section id="parameters">
-<h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this heading">#</a></h2>
-<section id="common-arguments-for-all-execution-policies">
-<h3>Common Arguments for all Execution Policies<a class="headerlink" href="#common-arguments-for-all-execution-policies" title="Permalink to this heading">#</a></h3>
-<ul class="simple">
-<li><p>Execution Policies generally accept compile time arguments via template parameters and runtime parameters via constructor arguments or setter functions.</p></li>
-<li><p>Template arguments can be given in arbitrary order.</p></li>
-</ul>
+          <section id="bit-manipulation">
+<h1>Bit manipulation<a class="headerlink" href="#bit-manipulation" title="Permalink to this heading">#</a></h1>
+<p>Defined in header <a class="reference external" href="https://github.com/kokkos/kokkos/blob/4.1.00/core/src/Kokkos_BitManipulation.hpp"><code class="docutils literal notranslate"><span class="pre">&lt;Kokkos_BitManipulation.hpp&gt;</span></code></a> which is included from <code class="docutils literal notranslate"><span class="pre">&lt;Kokkos_Core.hpp&gt;</span></code></p>
+<p>Provides function templates from the standard library header <a class="reference external" href="https://en.cppreference.com/w/cpp/header/bit"><code class="docutils literal notranslate"><span class="pre">&lt;bit&gt;</span></code></a> (since C++20).</p>
+<p>Bit manipulation function templates are defined in the <code class="docutils literal notranslate"><span class="pre">Kokkos::</span></code> namespace since Kokkos 4.1</p>
+<p><span class="strike">func</span> denotes function templates that have not been implemented.</p>
 <div class="table-wrapper docutils container">
 <table class="docutils align-default">
-<thead>
-<tr class="row-odd"><th class="head"><p>Argument</p></th>
-<th class="head"><p>Options</p></th>
-<th class="head"><p>Purpose</p></th>
-</tr>
-</thead>
 <tbody>
-<tr class="row-even"><td><p>ExecutionSpace</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">Serial</span></code>, <code class="docutils literal notranslate"><span class="pre">OpenMP</span></code>, <code class="docutils literal notranslate"><span class="pre">Threads</span></code>, <code class="docutils literal notranslate"><span class="pre">Cuda</span></code>, <code class="docutils literal notranslate"><span class="pre">HIP</span></code>, <code class="docutils literal notranslate"><span class="pre">SYCL</span></code>, <code class="docutils literal notranslate"><span class="pre">HPX</span></code></p></td>
-<td><p>Specify the Execution Space to execute the kernel in. Defaults to <code class="docutils literal notranslate"><span class="pre">Kokkos::DefaultExecutionSpace</span></code>.</p></td>
+<tr class="row-odd"><td><p><span class="strike">bit_cast</span></p></td>
+<td><p>reinterpret the object representation of one type as that of another</p></td>
 </tr>
-<tr class="row-odd"><td><p>Schedule</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">Schedule&lt;Dynamic&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">Schedule&lt;Static&gt;</span></code></p></td>
-<td><p>Specify scheduling policy for work items. <code class="docutils literal notranslate"><span class="pre">Dynamic</span></code> scheduling is implemented through a work stealing queue. Default is machine and backend specific.</p></td>
+<tr class="row-even"><td><p><span class="strike">byteswap</span></p></td>
+<td><p>reverses the bytes in the given integer value</p></td>
 </tr>
-<tr class="row-even"><td><p>IndexType</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">IndexType&lt;int&gt;</span></code></p></td>
-<td><p>Specify integer type to be used for traversing the iteration space. Defaults to <code class="docutils literal notranslate"><span class="pre">int64_t</span></code>.</p></td>
+<tr class="row-odd"><td><p><a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/has_single_bit"><code class="docutils literal notranslate"><span class="pre">has_single_bit</span></code></a></p></td>
+<td><p>checks if a number is an integral power of two</p></td>
 </tr>
-<tr class="row-odd"><td><p>LaunchBounds</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">LaunchBounds&lt;MaxThreads,</span> <span class="pre">MinBlocks&gt;</span></code></p></td>
-<td><p>Specifies hints to to the compiler about CUDA/HIP launch bounds.</p></td>
+<tr class="row-even"><td><p><a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/bit_ceil"><code class="docutils literal notranslate"><span class="pre">bit_ceil</span></code></a></p></td>
+<td><p>finds the smallest integral power of two not less than the given value</p></td>
 </tr>
-<tr class="row-even"><td><p>WorkTag</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">SomeClass</span></code></p></td>
-<td><p>Specify the work tag type used to call the functor operator. Any arbitrary type defaults to <code class="docutils literal notranslate"><span class="pre">void</span></code>.</p></td>
+<tr class="row-odd"><td><p><a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/bit_floor"><code class="docutils literal notranslate"><span class="pre">bit_floor</span></code></a></p></td>
+<td><p>finds the largest integral power of two not greater than the given value</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/bit_width"><code class="docutils literal notranslate"><span class="pre">bit_width</span></code></a></p></td>
+<td><p>finds the smallest number of bits needed to represent the given value</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="strike">rotl</span></p></td>
+<td><p>computes the result of bitwise left-rotation</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="strike">rotr</span></p></td>
+<td><p>computes the result of bitwise right-rotation</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/countl_zero"><code class="docutils literal notranslate"><span class="pre">countl_zero</span></code></a></p></td>
+<td><p>counts the number of consecutive 0 bits, starting from the most significant bit</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/countl_one"><code class="docutils literal notranslate"><span class="pre">countl_one</span></code></a></p></td>
+<td><p>counts the number of consecutive 1 bits, starting from the most significant bit</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/countr_zero"><code class="docutils literal notranslate"><span class="pre">countr_zero</span></code></a></p></td>
+<td><p>counts the number of consecutive 0 bits, starting from the least significant bit</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/countr_one"><code class="docutils literal notranslate"><span class="pre">countr_one</span></code></a></p></td>
+<td><p>counts the number of consecutive 1 bits, starting from the least significant bit</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/popcount"><code class="docutils literal notranslate"><span class="pre">popcount</span></code></a></p></td>
+<td><p>counts the number of 1 bits in an unsigned integer</p></td>
 </tr>
 </tbody>
 </table>
 </div>
-</section>
-</section>
-<section id="public-class-members">
-<h2>Public Class Members<a class="headerlink" href="#public-class-members" title="Permalink to this heading">#</a></h2>
-<section id="constructors">
-<h3>Constructors<a class="headerlink" href="#constructors" title="Permalink to this heading">#</a></h3>
-<dl class="cppkokkos function">
-<dt class="sig sig-object cppkokkos" id="_CPPv411RangePolicyv">
-<span id="_CPPv311RangePolicyv"></span><span id="_CPPv211RangePolicyv"></span><span id="RangePolicy"></span><span class="sig-name descname"><span class="n"><span class="pre">RangePolicy</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv411RangePolicyv" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>Default Constructor uninitialized policy.</p>
-</dd></dl>
-
-<dl class="cppkokkos function">
-<dt class="sig sig-object cppkokkos" id="_CPPv4IDpE11RangePolicyRK7int64_tRK7int64_tDpK8InitArgs">
-<span id="_CPPv3IDpE11RangePolicyRK7int64_tRK7int64_tDpK8InitArgs"></span><span id="_CPPv2IDpE11RangePolicyRK7int64_tRK7int64_tDpK8InitArgs"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="sig-name descname"><span class="n"><span class="pre">InitArgs</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="sig-name descname"><span class="n"><span class="pre">RangePolicy</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">int64_t</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">begin</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">int64_t</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">end</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4IDpE11RangePolicyRK7int64_tRK7int64_tDpK8InitArgs" title="RangePolicy::InitArgs"><span class="n"><span class="pre">InitArgs</span></span></a><span class="p"><span class="pre">...</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">init_args</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4IDpE11RangePolicyRK7int64_tRK7int64_tDpK8InitArgs" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>Provide a start and end index as well as optional arguments to control certain behavior (see below).</p>
-</dd></dl>
-
-<dl class="cppkokkos function">
-<dt class="sig sig-object cppkokkos" id="_CPPv4IDpE11RangePolicyRK14ExecutionSpaceRK7int64_tRK7int64_tDpK8InitArgs">
-<span id="_CPPv3IDpE11RangePolicyRK14ExecutionSpaceRK7int64_tRK7int64_tDpK8InitArgs"></span><span id="_CPPv2IDpE11RangePolicyRK14ExecutionSpaceRK7int64_tRK7int64_tDpK8InitArgs"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="sig-name descname"><span class="n"><span class="pre">InitArgs</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="sig-name descname"><span class="n"><span class="pre">RangePolicy</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">ExecutionSpace</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">space</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">int64_t</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">begin</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">int64_t</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">end</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4IDpE11RangePolicyRK14ExecutionSpaceRK7int64_tRK7int64_tDpK8InitArgs" title="RangePolicy::InitArgs"><span class="n"><span class="pre">InitArgs</span></span></a><span class="p"><span class="pre">...</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">init_args</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4IDpE11RangePolicyRK14ExecutionSpaceRK7int64_tRK7int64_tDpK8InitArgs" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>Provide a start and end index and an <code class="docutils literal notranslate"><span class="pre">ExecutionSpace</span></code> instance to use as the execution resource, as well as optional arguments to control certain behavior (see below).</p>
-</dd></dl>
-
-<section id="optional-initargs">
-<h4>Optional <code class="docutils literal notranslate"><span class="pre">InitArgs</span></code>:<a class="headerlink" href="#optional-initargs" title="Permalink to this heading">#</a></h4>
+<hr class="docutils" />
+<section id="notes">
+<h2>Notes<a class="headerlink" href="#notes" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">ChunkSize</span></code> : Provide a hint for optimal chunk-size to be used during scheduling. For the SYCL backend, the workgroup size used in a <code class="docutils literal notranslate"><span class="pre">parallel_for</span></code> kernel can be set via this variable.</p></li>
+<li><p>For all the above template functions, a non-<code class="docutils literal notranslate"><span class="pre">constexpr</span></code> counterpart ending
+with the <code class="docutils literal notranslate"><span class="pre">*_builtin</span></code> suffix is provided in the <code class="docutils literal notranslate"><span class="pre">Kokkos::Experimental::</span></code>
+namespace to make up for some compiler intrinsics that cannot appear in
+constant expressions.</p></li>
 </ul>
-</section>
-</section>
-</section>
-<section id="examples">
-<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading">#</a></h2>
-<div class="highlight-cppkokkos notranslate"><div class="highlight"><pre><span></span><span class="n">RangePolicy</span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="n">policy_1</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="p">);</span>
-<span class="n">RangePolicy</span><span class="o">&lt;</span><span class="n">Cuda</span><span class="o">&gt;</span><span class="w"> </span><span class="n">policy_2</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="n">N</span><span class="mi">-5</span><span class="p">);</span>
-<span class="n">RangePolicy</span><span class="o">&lt;</span><span class="n">Schedule</span><span class="o">&lt;</span><span class="n">Dynamic</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="n">OpenMP</span><span class="o">&gt;</span><span class="w"> </span><span class="n">policy_3</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">);</span>
-<span class="n">RangePolicy</span><span class="o">&lt;</span><span class="n">IndexType</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="n">Schedule</span><span class="o">&lt;</span><span class="n">Dynamic</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">policy_4</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">K</span><span class="p">);</span>
-<span class="n">RangePolicy</span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="n">policy_6</span><span class="p">(</span><span class="mi">-3</span><span class="p">,</span><span class="n">N</span><span class="o">+</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="n">ChunkSize</span><span class="p">(</span><span class="mi">8</span><span class="p">));</span>
-<span class="n">RangePolicy</span><span class="o">&lt;</span><span class="n">OpenMP</span><span class="o">&gt;</span><span class="w"> </span><span class="n">policy_7</span><span class="p">(</span><span class="n">OpenMP</span><span class="p">(),</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">ChunkSize</span><span class="p">(</span><span class="mi">4</span><span class="p">));</span>
-</pre></div>
-</div>
-<p>Note: providing a single integer as a policy to a parallel pattern, implies a defaulted <code class="docutils literal notranslate"><span class="pre">RangePolicy</span></code></p>
-<div class="highlight-cppkokkos notranslate"><div class="highlight"><pre><span></span><span class="c1">// These two calls are identical</span>
-<span class="n">parallel_for</span><span class="p">(</span><span class="s">&quot;Loop&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">functor</span><span class="p">);</span>
-<span class="n">parallel_for</span><span class="p">(</span><span class="s">&quot;Loop&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">RangePolicy</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="p">),</span><span class="w"> </span><span class="n">functor</span><span class="p">);</span>
-</pre></div>
-</div>
 </section>
 </section>
 
@@ -647,23 +558,23 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="TeamHandleConcept.html">
+          <a class="next-page" href="../c_style_memory_management.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title"><code class="docutils literal notranslate"><span class="pre">TeamHandleConcept</span></code></div>
+                <div class="title">C-style memory management</div>
               </div>
               <svg><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="NestedPolicies.html">
+          <a class="prev-page" href="numeric-traits.html">
               <svg><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title"><code class="docutils literal notranslate"><span class="pre">NestedPolicies</span></code></div>
+                <div class="title">Numeric traits</div>
                 
               </div>
             </a>
@@ -699,21 +610,8 @@
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">RangePolicy</span></code></a><ul>
-<li><a class="reference internal" href="#usage">Usage</a></li>
-<li><a class="reference internal" href="#synopsis">Synopsis</a></li>
-<li><a class="reference internal" href="#parameters">Parameters</a><ul>
-<li><a class="reference internal" href="#common-arguments-for-all-execution-policies">Common Arguments for all Execution Policies</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#public-class-members">Public Class Members</a><ul>
-<li><a class="reference internal" href="#constructors">Constructors</a><ul>
-<li><a class="reference internal" href="#optional-initargs">Optional <code class="docutils literal notranslate"><span class="pre">InitArgs</span></code>:</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="reference internal" href="#examples">Examples</a></li>
+<li><a class="reference internal" href="#">Bit manipulation</a><ul>
+<li><a class="reference internal" href="#notes">Notes</a></li>
 </ul>
 </li>
 </ul>
