@@ -82,8 +82,8 @@ Bit manipulation function templates are defined in the ``Kokkos::`` namespace si
 |bit_ceil|_        finds the smallest integral power of two not less than the given value
 |bit_floor|_       finds the largest integral power of two not greater than the given value
 |bit_width|_       finds the smallest number of bits needed to represent the given value
-:strike:`rotl`     computes the result of bitwise left-rotation
-:strike:`rotr`     computes the result of bitwise right-rotation
+|rotl|_            computes the result of bitwise left-rotation
+|rotr|_            computes the result of bitwise right-rotation
 |countl_zero|_     counts the number of consecutive 0 bits, starting from the most significant bit
 |countl_one|_      counts the number of consecutive 1 bits, starting from the most significant bit
 |countr_zero|_     counts the number of consecutive 0 bits, starting from the least significant bit
