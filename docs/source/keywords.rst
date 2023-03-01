@@ -151,24 +151,6 @@ Enable Options
       * Build tests
       * ``OFF``
 
-.. _keywords_enable_other_options:
-
-Other Options
-=============
-
-.. list-table::
-    :widths: 25 50 25
-    :header-rows: 1
-    :align: left
-
-    * -
-      - Description/info
-      - Default
-
-    * * ``Kokkos_CXX_STANDARD``
-      * **[DEPRECATED use CMAKE_CXX_STANDARD instead]** The C++ standard for Kokkos to use: c++14, c++17, or c++20. This should be given in CMake style as 14, 17, or 20.
-      * STRING Default: 14
-
 .. _keywords_tpls:
 
 Third-party Libraries (TPLs)
