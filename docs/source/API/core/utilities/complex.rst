@@ -16,242 +16,154 @@ Usage
     b = a;
     a += b;
 
-Synopsis
---------
-
-.. code-block:: cpp
-        
-    template<class Scalar>
-    class complex {
-    
-        public:
-            typedef Scalar value_type;
-
-        private: 
-            value_type re,im;      
-
-        public:
-
-            KOKKOS_INLINE_FUNCTION complex();
-            KOKKOS_INLINE_FUNCTION complex(const complex& src);
-
-            template<class T>
-            KOKKOS_INLINE_FUNCTION complex(const T& re);
-            
-            template <class T1, class T2>
-            KOKKOS_INLINE_FUNCTION complex(const T1& re, const T2& im)
-            
-            template<class T>
-            complex(const std::complex<T>& src);
-
-            template<class T>
-            KOKKOS_INLINE_FUNCTION complex<Scalar>& operator= (const complex<T>& src);
 
-            template<class T>
-            KOKKOS_INLINE_FUNCTION complex<Scalar>& operator= (const T& re);
+Description
+-----------
 
-            template<class T>
-            KOKKOS_INLINE_FUNCTION complex<Scalar>& operator= (const std::complex<T>& src);
-            template<class T>
+.. cppkokkos:class:: template<class Scalar> complex
 
-            operator std::complex<Scalar>() const;
+   |
 
-            KOKKOS_INLINE_FUNCTION RealType& imag();
-            KOKKOS_INLINE_FUNCTION RealType& real();
-            KOKKOS_INLINE_FUNCTION const RealType imag() const;
-            KOKKOS_INLINE_FUNCTION const RealType real() const;
-            KOKKOS_INLINE_FUNCTION void imag(RealType v);
-            KOKKOS_INLINE_FUNCTION void real(RealType v);
+   .. rubric:: Public Typedefs
 
-            template<class T>
-            KOKKOS_INLINE_FUNCTION complex& operator += (const complex<T>& src);
-            template<class T>
-            complex& operator += (const std::complex<T>& src);
-            template<class T>
-            KOKKOS_INLINE_FUNCTION complex& operator += (const T& real);
+   .. cppkokkos:type:: value_type
 
-            template<class T>
-            KOKKOS_INLINE_FUNCTION complex& operator -= (const complex<T>& src);
-            template<class T>
-            complex& operator -= (const std::complex<T>& src);
-            template<class T>
-            KOKKOS_INLINE_FUNCTION complex& operator -= (const T& real);
+      The scalar type of the real and the imaginary component.
 
-            template<class T>
-            KOKKOS_INLINE_FUNCTION complex& operator *= (const complex<T>& src);
-            template<class T>
-            complex& operator *= (const std::complex<T>& src);
-            template<class T>
-            KOKKOS_INLINE_FUNCTION complex& operator *= (const T& real);
+   .. rubric:: Constructors
 
-            template<class T>
-            KOKKOS_INLINE_FUNCTION complex& operator /= (const complex<T>& src);
-            template<class T>
-            complex& operator /= (const std::complex<T>& src);
-            template<class T>
-            KOKKOS_INLINE_FUNCTION complex& operator /= (const T& real);
+   .. cppkokkos:kokkosinlinefunction:: complex();
 
-            template<class T>
-            KOKKOS_INLINE_FUNCTION complex& operator == (const complex<T>& src);
-            template<class T>
-            complex& operator == (const std::complex<T>& src);
-            template<class T>
-            KOKKOS_INLINE_FUNCTION complex& operator == (const T& real);
+      Default constructor. Initializes the ``re`` and ``im`` with ``value_type()``.
 
-            template<class T>
-            KOKKOS_INLINE_FUNCTION complex& operator != (const complex<T>& src);
-            template<class T>
-            complex& operator != (const std::complex<T>& src);
-            template<class T>
-            KOKKOS_INLINE_FUNCTION complex& operator != (const T& real);
-    };
+   .. cppkokkos:kokkosinlinefunction:: complex(const complex& src);
 
-Public Class Members
---------------------
+      Copy constructor. Sets ``re = src.real()`` and ``im = src.imag()``.
 
-Typedefs
-~~~~~~~~
-   
-* ``value_type``: The scalar type of the real and the imaginary component.
+   .. cppkokkos:kokkosinlinefunction:: template<class T> complex(const T& real);
 
-Constructors
-~~~~~~~~~~~~
- 
-.. cppkokkos:kokkosinlinefunction:: complex();
+      Constructor from a real number. Sets ``re = real`` and ``im = value_type()``.
 
-    * Default constructor. Initializes the ``re`` and ``im`` with ``value_type()``.
+   .. cppkokkos:kokkosinlinefunction:: template <class T1, class T2> complex(const T1& real, const T2& imag)
 
-.. cppkokkos:kokkosinlinefunction:: complex(const complex& src);
+      Constructor from real numbers. Sets ``re = real`` and ``im = imag``.
 
-    * Copy constructor. Sets ``re = src.real()`` and ``im = src.imag()``.
+   .. cppkokkos:function:: template<class T> complex(const std::complex<T>& src);
 
-.. cppkokkos:kokkosinlinefunction:: template<class T> complex(const T& real);
+      Copy constructor. Sets ``re = src.real()`` and ``im = src.imag()``.
 
-    * Constructor from a real number. Sets ``re = real`` and ``im = value_type()``.
+   .. rubric:: Assignment and conversion
 
-.. cppkokkos:kokkosinlinefunction:: template <class T1, class T2> complex(const T1& real, const T2& imag)
+   .. cppkokkos:kokkosinlinefunction:: template<class T> complex<Scalar>& operator= (const complex<T>& src);
 
-    * Constructor from real numbers. Sets ``re = real`` and ``im = imag``.
+      Sets ``re = src.real()`` and ``im = src.imag()``.
 
-.. cppkokkos:function:: template<class T> complex(const std::complex<T>& src);
+   .. cppkokkos:kokkosinlinefunction:: template<class T> complex<Scalar>& operator= (const T& re);
 
-    * Copy constructor. Sets ``re = src.real()`` and ``im = src.imag()``.
+      Sets ``re = src.real()`` and ``im = value_type()``.
 
-Assignment and conversion
-~~~~~~~~~~~~~~~~~~~~~~~~~
+   .. cppkokkos:kokkosinlinefunction:: template<class T> complex<Scalar>& operator= (const std::complex<T>& src);
 
-.. cppkokkos:kokkosinlinefunction:: template<class T> complex<Scalar>& operator= (const complex<T>& src);
+      Sets ``re = src.real()`` and ``im = src.imag()``.
 
-    * Sets ``re = src.real()`` and ``im = src.imag()``.
+   .. cppkokkos:function:: operator std::complex<value_type>() const;
 
+      Returns ``std::complex<value_type>(re,im)``.
 
-.. cppkokkos:kokkosinlinefunction:: template<class T> complex<Scalar>& operator= (const T& re);
+   .. rubric:: Functions
 
-    * Sets ``re = src.real()`` and ``im = value_type()``.
+   .. cppkokkos:kokkosinlinefunction:: RealType& imag();
 
-.. cppkokkos:kokkosinlinefunction:: template<class T> complex<Scalar>& operator= (const std::complex<T>& src);
+      Return ``im``.
 
-    * Sets ``re = src.real()`` and ``im = src.imag()``.
+   .. cppkokkos:kokkosinlinefunction:: RealType& real();
 
-.. cppkokkos:function:: operator std::complex<value_type>() const;
+      Return ``re``.
 
-    * Returns ``std::complex<value_type>(re,im)``.
+   .. cppkokkos:kokkosinlinefunction:: const RealType imag() const;
 
-Functions
-~~~~~~~~~
+      Return ``im``.
 
-.. cppkokkos:kokkosinlinefunction:: RealType& imag();
+   .. cppkokkos:kokkosinlinefunction:: const RealType real() const;
 
-    * Return ``im``.
+      Return ``re``.
 
-.. cppkokkos:kokkosinlinefunction:: RealType& real();
+   .. cppkokkos:kokkosinlinefunction:: void imag(RealType v);
 
-    * Return ``re``.
+      Sets ``im = v``.
 
-.. cppkokkos:kokkosinlinefunction:: const RealType imag() const;
+   .. cppkokkos:kokkosinlinefunction:: void real(RealType v);
 
-    * Return ``im``.
+      Sets ``re = v``.
 
-.. cppkokkos:kokkosinlinefunction:: const RealType real() const;
+   .. cppkokkos:kokkosinlinefunction:: template<class T> complex& operator += (const complex<T>& src);
 
-    * Return ``re``.
+      Executes ``re += src.real(); im += src.imag(); return *this;``
 
-.. cppkokkos:kokkosinlinefunction:: void imag(RealType v);
+   .. cppkokkos:function:: template<class T> complex& operator += (const std::complex<T>& src);
 
-    * Sets ``im = v``.
+      Executes ``re += src.real(); im += src.imag(); return *this;``
 
-.. cppkokkos:kokkosinlinefunction:: void real(RealType v);
+   .. cppkokkos:kokkosinlinefunction:: template<class T> complex& operator += (const T& real);
 
-    * Sets ``re = v``.
+      Executes ``re += real; return *this;``
 
-.. cppkokkos:kokkosinlinefunction:: template<class T> complex& operator += (const complex<T>& src);
+   .. cppkokkos:kokkosinlinefunction:: template<class T> complex& operator -= (const complex<T>& src);
 
-    * Executes ``re += src.real(); im += src.imag(); return *this;``
+      Executes ``re -= src.real(); im -= src.imag(); return *this;``
 
-.. cppkokkos:function:: template<class T> complex& operator += (const std::complex<T>& src);
+   .. cppkokkos:function:: template<class T> complex& operator -= (const std::complex<T>& src);
 
-    * Executes ``re += src.real(); im += src.imag(); return *this;``
+      Executes ``re -= src.real(); im -= src.imag(); return *this;``
 
-.. cppkokkos:kokkosinlinefunction:: template<class T> complex& operator += (const T& real);
+   .. cppkokkos:kokkosinlinefunction:: template<class T> complex& operator -= (const T& real);
 
-    * Executes ``re += real; return *this;``
+      Executes ``re -= real; return *this;``
 
-.. cppkokkos:kokkosinlinefunction:: template<class T> complex& operator -= (const complex<T>& src);
+   .. cppkokkos:kokkosinlinefunction:: template<class T> complex& operator *= (const complex<T>& src);
 
-    * Executes ``re -= src.real(); im -= src.imag(); return *this;``
+      Multiplies the current complex number with the complex number ``src``.
 
-.. cppkokkos:function:: template<class T> complex& operator -= (const std::complex<T>& src);
+   .. cppkokkos:function:: template<class T> complex& operator *= (const std::complex<T>& src);
 
-    * Executes ``re -= src.real(); im -= src.imag(); return *this;``
+      Multiplies the current complex number with the complex number ``src``.
 
-.. cppkokkos:kokkosinlinefunction:: template<class T> complex& operator -= (const T& real);
+   .. cppkokkos:kokkosinlinefunction:: template<class T> complex& operator *= (const T& real);
 
-    * Executes ``re -= real; return *this;``
+      Executes ``re *= real; im *= real; return *this;``
 
-.. cppkokkos:kokkosinlinefunction:: template<class T> complex& operator *= (const complex<T>& src);
+   .. cppkokkos:kokkosinlinefunction:: template<class T> complex& operator /= (const complex<T>& src);
 
-    * Multiplies the current complex number with the complex number ``src``.
+      Divides the current complex number with the complex number ``src``.
 
-.. cppkokkos:function:: template<class T> complex& operator *= (const std::complex<T>& src);
+   .. cppkokkos:function:: template<class T> complex& operator /= (const std::complex<T>& src);
 
-    * Multiplies the current complex number with the complex number ``src``.
+      Divides the current complex number with the complex number ``src``.
 
-.. cppkokkos:kokkosinlinefunction:: template<class T> complex& operator *= (const T& real);
+   .. cppkokkos:kokkosinlinefunction:: template<class T> complex& operator /= (const T& real);
 
-    * Executes ``re *= real; im *= real; return *this;``
+      Executes ``re /= real; im /= real; return *this;``
 
-.. cppkokkos:kokkosinlinefunction:: template<class T> complex& operator /= (const complex<T>& src);
+   .. cppkokkos:kokkosinlinefunction:: template<class T> complex& operator == (const complex<T>& src);
 
-    * Divides the current complex number with the complex number ``src``.
+      Returns ``re == src.real() && im == src.imag()``.
 
-.. cppkokkos:function:: template<class T> complex& operator /= (const std::complex<T>& src);
+   .. cppkokkos:function:: template<class T> complex& operator == (const std::complex<T>& src);
 
-    * Divides the current complex number with the complex number ``src``.
+      Returns ``re == src.real() && im == src.imag()``.
 
-.. cppkokkos:kokkosinlinefunction:: template<class T> complex& operator /= (const T& real);
+   .. cppkokkos:kokkosinlinefunction:: template<class T> complex& operator == (const T& real);
 
-    * Executes ``re /= real; im /= real; return *this;``
+      Returns ``re == src.real() && im == value_type()``.
 
-.. cppkokkos:kokkosinlinefunction:: template<class T> complex& operator == (const complex<T>& src);
+   .. cppkokkos:kokkosinlinefunction:: template<class T> complex& operator != (const complex<T>& src);
 
-    * Returns ``re == src.real() && im == src.imag()``.
+      Returns ``re != src.real() || im != src.imag()``.
 
-.. cppkokkos:function:: template<class T> complex& operator == (const std::complex<T>& src);
+   .. cppkokkos:function:: template<class T> complex& operator != (const std::complex<T>& src);
 
-    * Returns ``re == src.real() && im == src.imag()``.
+      Returns ``re != src.real() || im != src.imag()``.
 
-.. cppkokkos:kokkosinlinefunction:: template<class T> complex& operator == (const T& real);
+   .. cppkokkos:kokkosinlinefunction:: template<class T> complex& operator != (const T& real);
 
-    * Returns ``re == src.real() && im == value_type()``.
-
-.. cppkokkos:kokkosinlinefunction:: template<class T> complex& operator != (const complex<T>& src);
-
-    * Returns ``re != src.real() || im != src.imag()``.
-
-.. cppkokkos:function:: template<class T> complex& operator != (const std::complex<T>& src);
-
-    * Returns ``re != src.real() || im != src.imag()``.
-
-.. cppkokkos:kokkosinlinefunction:: template<class T> complex& operator != (const T& real);
-
-    * Returns ``re != src.real() || im != value_type()``.
+      Returns ``re != src.real() || im != value_type()``.
