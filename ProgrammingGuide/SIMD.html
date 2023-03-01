@@ -1,0 +1,822 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Requirements" href="../requirements.html" /><link rel="prev" title="14. Kokkos and Virtual Functions" href="Kokkos-and-Virtual-Functions.html" />
+
+    <meta name="generator" content="sphinx-5.0.1, furo 2022.06.04.1"/>
+        <title>15. SIMD Types - Kokkos documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=40978830699223671f4072448e654b5958f38b89" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
+    <link rel="stylesheet" type="text/css" href="../_static/hacks.css" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">Kokkos  documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  
+  <span class="sidebar-brand-text">Kokkos  documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder=Search name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../programmingguide.html">Programming Guide</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Introduction.html">1. Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Machine-Model.html">2. Machine Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ProgrammingModel.html">3: Programming Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Compiling.html">4. Compiling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Initialization.html">5. Initialization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="View.html">6: View: Multidimensional array</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ParallelDispatch.html">7. Parallel dispatch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="HierarchicalParallelism.html">8. Hierarchical Parallelism</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="Custom-Reductions.html">9. Custom Reductions</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="Custom-Reductions-Built-In-Reducers.html">9.1 Built-In-Reducers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Custom-Reductions-Built-In-Reducers-with-Custom-Scalar-Types.html">9.2 Built-In Reducers with Custom Scalar Types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Custom-Reductions-Custom-Reducers.html">9.3 Custom Reducers</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Atomic-Operations.html">10. Atomic Operations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Subviews.html">11: Subviews</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Compatibility.html">12 Backwards &amp; Future Compatibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Interoperability.html">13. Interoperability and Legacy Codes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Kokkos-and-Virtual-Functions.html">14. Kokkos and Virtual Functions</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">15. SIMD Types</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../building.html">Build, Install and Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../keywords.html">CMake Keywords</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../API/core-index.html">API: Core</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../API/core/Initialize-and-Finalize.html">Initialize and Finalize</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../API/core/initialize_finalize/initialize.html"><code class="docutils literal notranslate"><span class="pre">initialize</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../API/core/initialize_finalize/finalize.html"><code class="docutils literal notranslate"><span class="pre">finalize</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../API/core/initialize_finalize/ScopeGuard.html">ScopeGuard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../API/core/initialize_finalize/InitializationSettings.html"><code class="docutils literal notranslate"><span class="pre">InitializationSettings</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../API/core/initialize_finalize/InitArguments.html">InitArguments</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../API/core/View.html">View and related</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../API/core/view/create_mirror.html"><code class="docutils literal notranslate"><span class="pre">create_mirror[_view]</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../API/core/view/deep_copy.html"><code class="docutils literal notranslate"><span class="pre">deep_copy()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../API/core/view/layoutLeft.html"><code class="docutils literal notranslate"><span class="pre">LayoutLeft</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../API/core/view/layoutRight.html"><code class="docutils literal notranslate"><span class="pre">LayoutRight</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../API/core/view/layoutStride.html"><code class="docutils literal notranslate"><span class="pre">LayoutStride</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../API/core/view/realloc.html"><code class="docutils literal notranslate"><span class="pre">realloc</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../API/core/view/resize.html"><code class="docutils literal notranslate"><span class="pre">resize</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../API/core/view/subview.html"><code class="docutils literal notranslate"><span class="pre">subview</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../API/core/view/Subview_type.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::Subview</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../API/core/view/view.html"><code class="docutils literal notranslate"><span class="pre">View</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../API/core/view/view_alloc.html"><code class="docutils literal notranslate"><span class="pre">view_alloc()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../API/core/view/view_like.html">View-like Types</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../API/core/ParallelDispatch.html">Parallel Execution/Dispatch</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../API/core/parallel-dispatch/parallel_for.html"><code class="docutils literal notranslate"><span class="pre">parallel_for()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../API/core/parallel-dispatch/parallel_reduce.html"><code class="docutils literal notranslate"><span class="pre">parallel_reduce()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../API/core/parallel-dispatch/parallel_scan.html"><code class="docutils literal notranslate"><span class="pre">parallel_scan()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../API/core/parallel-dispatch/fence.html"><code class="docutils literal notranslate"><span class="pre">fence()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../API/core/parallel-dispatch/ParallelForTag.html"><code class="docutils literal notranslate"><span class="pre">ParallelForTag()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../API/core/parallel-dispatch/ParallelReduceTag.html"><code class="docutils literal notranslate"><span class="pre">ParallelReduceTag()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../API/core/parallel-dispatch/ParallelScanTag.html"><code class="docutils literal notranslate"><span class="pre">ParallelScanTag()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../API/core/builtin_reducers.html">Built-in Reducers</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../API/core/builtinreducers/ReducerConcept.html"><code class="docutils literal notranslate"><span class="pre">ReducerConcept</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../API/core/builtinreducers/BAnd.html"><code class="docutils literal notranslate"><span class="pre">BAnd</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../API/core/builtinreducers/BOr.html"><code class="docutils literal notranslate"><span class="pre">BOr</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../API/core/builtinreducers/LAnd.html"><code class="docutils literal notranslate"><span class="pre">LAnd</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../API/core/builtinreducers/LOr.html"><code class="docutils literal notranslate"><span class="pre">LOr</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../API/core/builtinreducers/Max.html"><code class="docutils literal notranslate"><span class="pre">Max</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../API/core/builtinreducers/MaxLoc.html"><code class="docutils literal notranslate"><span class="pre">MaxLoc</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../API/core/builtinreducers/Min.html"><code class="docutils literal notranslate"><span class="pre">Min</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../API/core/builtinreducers/MinLoc.html"><code class="docutils literal notranslate"><span class="pre">MinLoc</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../API/core/builtinreducers/MinMax.html"><code class="docutils literal notranslate"><span class="pre">MinMax</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../API/core/builtinreducers/MinMaxLoc.html"><code class="docutils literal notranslate"><span class="pre">MinMaxLoc</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../API/core/builtinreducers/Prod.html"><code class="docutils literal notranslate"><span class="pre">Prod</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../API/core/builtinreducers/Sum.html"><code class="docutils literal notranslate"><span class="pre">Sum</span></code></a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../API/core/builtinreducers/ReductionScalarTypes.html">Reduction Scalar Types</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../API/core/builtinreducers/MinMaxLocScalar.html"><code class="docutils literal notranslate"><span class="pre">MinMaxLocScalar</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../API/core/builtinreducers/MinMaxScalar.html"><code class="docutils literal notranslate"><span class="pre">MinMaxScalar</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../API/core/builtinreducers/ValLocScalar.html"><code class="docutils literal notranslate"><span class="pre">ValLocScalar</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../API/core/Execution-Policies.html">Execution Policies</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../API/core/policies/ExecutionPolicyConcept.html"><code class="docutils literal notranslate"><span class="pre">ExecutionPolicy</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../API/core/policies/MDRangePolicy.html"><code class="docutils literal notranslate"><span class="pre">MDRangePolicy</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../API/core/policies/NestedPolicies.html"><code class="docutils literal notranslate"><span class="pre">NestedPolicies</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../API/core/policies/RangePolicy.html"><code class="docutils literal notranslate"><span class="pre">RangePolicy</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../API/core/policies/TeamHandleConcept.html"><code class="docutils literal notranslate"><span class="pre">TeamHandleConcept</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../API/core/policies/TeamPolicy.html"><code class="docutils literal notranslate"><span class="pre">TeamPolicy</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../API/core/policies/TeamThreadMDRange.html"><code class="docutils literal notranslate"><span class="pre">TeamThreadMDRange</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../API/core/policies/TeamThreadRange.html"><code class="docutils literal notranslate"><span class="pre">TeamThreadRange</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../API/core/policies/TeamVectorMDRange.html"><code class="docutils literal notranslate"><span class="pre">TeamVectorMDRange</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../API/core/policies/TeamVectorRange.html"><code class="docutils literal notranslate"><span class="pre">TeamVectorRange</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../API/core/policies/ThreadVectorMDRange.html"><code class="docutils literal notranslate"><span class="pre">ThreadVectorMDRange</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../API/core/policies/ThreadVectorRange.html"><code class="docutils literal notranslate"><span class="pre">ThreadVectorRange</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../API/core/Spaces.html">Spaces</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../API/core/execution_spaces.html">Execution Spaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../API/core/spaces/partition_space.html">Kokkos::partition_space()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../API/core/memory_spaces.html">Memory Spaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../API/core/SpaceAccessibility.html">Space Accessibility</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../API/core/Task-Parallelism.html">Task-Parallelism</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../API/core/atomics.html">Atomics</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../API/core/atomics/atomic_compare_exchange.html"><code class="docutils literal notranslate"><span class="pre">atomic_compare_exchange</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../API/core/atomics/atomic_compare_exchange_strong.html"><code class="docutils literal notranslate"><span class="pre">atomic_compare_exchange_strong</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../API/core/atomics/atomic_exchange.html"><code class="docutils literal notranslate"><span class="pre">atomic_exchange</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../API/core/atomics/atomic_fetch_op.html"><code class="docutils literal notranslate"><span class="pre">atomic_fetch_[op]</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../API/core/atomics/atomic_load.html"><code class="docutils literal notranslate"><span class="pre">atomic_load</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../API/core/atomics/atomic_op.html"><code class="docutils literal notranslate"><span class="pre">atomic_[op]</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../API/core/atomics/atomic_op_fetch.html"><code class="docutils literal notranslate"><span class="pre">atomic_[op]_fetch</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../API/core/atomics/atomic_store.html"><code class="docutils literal notranslate"><span class="pre">atomic_store</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../API/core/Numerics.html">Numerics</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../API/core/numerics/mathematical-constants.html">Mathematical constants</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../API/core/numerics/mathematical-functions.html">Common math functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../API/core/numerics/numeric-traits.html">Numeric traits</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../API/core/numerics/bit-manipulation.html">Bit manipulation</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../API/core/c_style_memory_management.html">C-style memory management</a><input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" role="switch" type="checkbox"/><label for="toctree-checkbox-13"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../API/core/c_style_memory_management/malloc.html"><code class="docutils literal notranslate"><span class="pre">kokkos_malloc</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../API/core/c_style_memory_management/realloc.html"><code class="docutils literal notranslate"><span class="pre">kokkos_realloc</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../API/core/c_style_memory_management/free.html"><code class="docutils literal notranslate"><span class="pre">kokkos_free</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../API/core/Traits.html">Traits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../API/core/KokkosConcepts.html">Kokkos Concepts</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../API/core/STL-Compatibility.html">STL Compatibility Issues</a><input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" role="switch" type="checkbox"/><label for="toctree-checkbox-14"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../API/core/stl-compat/pair.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::pair</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../API/core/Utilities.html">Utilities</a><input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" role="switch" type="checkbox"/><label for="toctree-checkbox-15"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../API/core/utilities/abort.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::abort</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../API/core/utilities/all.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::ALL</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../API/core/utilities/complex.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::complex</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../API/core/utilities/timer.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::Timer</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../API/core/utilities/experimental.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::Experimental</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../API/core/Detection-Idiom.html">Detection Idiom</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../API/core/Macros.html">Macros</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../API/containers-index.html">API: Containers</a><input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" role="switch" type="checkbox"/><label for="toctree-checkbox-16"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../API/containers/Bitset.html"><code class="docutils literal notranslate"><span class="pre">Bitset</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../API/containers/Bitset.html#constbitset"><code class="docutils literal notranslate"><span class="pre">ConstBitset</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../API/containers/DualView.html"><code class="docutils literal notranslate"><span class="pre">DualView</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../API/containers/DynamicView.html"><code class="docutils literal notranslate"><span class="pre">DynamicView</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../API/containers/DynRankView.html"><code class="docutils literal notranslate"><span class="pre">DynRankView</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../API/containers/Offset-View.html"><code class="docutils literal notranslate"><span class="pre">OffsetView</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../API/containers/ScatterView.html"><code class="docutils literal notranslate"><span class="pre">ScatterView</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../API/containers/StaticCrsGraph.html"><code class="docutils literal notranslate"><span class="pre">StaticCrsGraph</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../API/containers/Unordered-Map.html"><code class="docutils literal notranslate"><span class="pre">UnorderedMap</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../API/containers/vector.html"><code class="docutils literal notranslate"><span class="pre">vector</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../API/algorithms-index.html">API: Algorithms</a><input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" role="switch" type="checkbox"/><label for="toctree-checkbox-17"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../API/algorithms/Random-Number.html">Random-Number</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../API/algorithms/Random-Number.html#generator">Generator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../API/algorithms/Sort.html">Sort</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../API/algorithms/Sort.html#sorting-with-nested-policies-team-and-thread-level">Sorting with nested policies (team- and thread-level)</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../API/algorithms/std-algorithms-index.html">Std Algorithms</a><input class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" role="switch" type="checkbox"/><label for="toctree-checkbox-18"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../API/algorithms/std-algorithms/Iterators.html">Iterators</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../API/algorithms/std-algorithms/StdMinMaxElement.html">Minimum/maximum</a><input class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" role="switch" type="checkbox"/><label for="toctree-checkbox-19"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../API/algorithms/std-algorithms/all/StdMinElement.html"><code class="docutils literal notranslate"><span class="pre">min_element</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../API/algorithms/std-algorithms/all/StdMaxElement.html"><code class="docutils literal notranslate"><span class="pre">max_element</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../API/algorithms/std-algorithms/all/StdMinMaxElement.html"><code class="docutils literal notranslate"><span class="pre">minmax_element</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../API/algorithms/std-algorithms/StdModSeq.html">Modifying Sequence</a><input class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" role="switch" type="checkbox"/><label for="toctree-checkbox-20"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../API/algorithms/std-algorithms/all/StdCopy.html"><code class="docutils literal notranslate"><span class="pre">copy</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../API/algorithms/std-algorithms/all/StdCopyIf.html"><code class="docutils literal notranslate"><span class="pre">copy_if</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../API/algorithms/std-algorithms/all/StdCopy_n.html"><code class="docutils literal notranslate"><span class="pre">copy_n</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../API/algorithms/std-algorithms/all/StdCopyBackward.html"><code class="docutils literal notranslate"><span class="pre">copy_backward</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../API/algorithms/std-algorithms/all/StdMove.html"><code class="docutils literal notranslate"><span class="pre">move</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../API/algorithms/std-algorithms/all/StdMoveBackward.html"><code class="docutils literal notranslate"><span class="pre">move_backward</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../API/algorithms/std-algorithms/all/StdFill.html"><code class="docutils literal notranslate"><span class="pre">fill</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../API/algorithms/std-algorithms/all/StdFill_n.html"><code class="docutils literal notranslate"><span class="pre">fill_n</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../API/algorithms/std-algorithms/all/StdTransform.html"><code class="docutils literal notranslate"><span class="pre">transform</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../API/algorithms/std-algorithms/all/StdGenerate.html"><code class="docutils literal notranslate"><span class="pre">generate</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../API/algorithms/std-algorithms/all/StdGenerate_n.html"><code class="docutils literal notranslate"><span class="pre">generate_n</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../API/algorithms/std-algorithms/all/StdRemove.html"><code class="docutils literal notranslate"><span class="pre">remove</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../API/algorithms/std-algorithms/all/StdRemoveIf.html"><code class="docutils literal notranslate"><span class="pre">remove_if</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../API/algorithms/std-algorithms/all/StdRemoveCopy.html"><code class="docutils literal notranslate"><span class="pre">remove_copy</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../API/algorithms/std-algorithms/all/StdRemoveCopyIf.html"><code class="docutils literal notranslate"><span class="pre">remove_copy_if</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../API/algorithms/std-algorithms/all/StdReplace.html"><code class="docutils literal notranslate"><span class="pre">replace</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../API/algorithms/std-algorithms/all/StdReplaceIf.html"><code class="docutils literal notranslate"><span class="pre">replace_if</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../API/algorithms/std-algorithms/all/StdReplaceCopy.html"><code class="docutils literal notranslate"><span class="pre">replace_copy</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../API/algorithms/std-algorithms/all/StdReplaceCopyIf.html"><code class="docutils literal notranslate"><span class="pre">replace_copy_if</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../API/algorithms/std-algorithms/all/StdSwapRanges.html"><code class="docutils literal notranslate"><span class="pre">swap_ranges</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../API/algorithms/std-algorithms/all/StdReverse.html"><code class="docutils literal notranslate"><span class="pre">reverse</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../API/algorithms/std-algorithms/all/StdReverseCopy.html"><code class="docutils literal notranslate"><span class="pre">reverse_copy</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../API/algorithms/std-algorithms/all/StdRotate.html"><code class="docutils literal notranslate"><span class="pre">rotate</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../API/algorithms/std-algorithms/all/StdRotateCopy.html"><code class="docutils literal notranslate"><span class="pre">rotate_copy</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../API/algorithms/std-algorithms/all/StdShiftLeft.html"><code class="docutils literal notranslate"><span class="pre">shift_left</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../API/algorithms/std-algorithms/all/StdShiftRight.html"><code class="docutils literal notranslate"><span class="pre">shift_right</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../API/algorithms/std-algorithms/all/StdUnique.html"><code class="docutils literal notranslate"><span class="pre">unique</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../API/algorithms/std-algorithms/all/StdUniqueCopy.html"><code class="docutils literal notranslate"><span class="pre">unique_copy</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../API/algorithms/std-algorithms/StdNonModSeq.html">Non-modifying Sequence</a><input class="toctree-checkbox" id="toctree-checkbox-21" name="toctree-checkbox-21" role="switch" type="checkbox"/><label for="toctree-checkbox-21"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../API/algorithms/std-algorithms/all/StdAdjacentFind.html"><code class="docutils literal notranslate"><span class="pre">adjacent_find</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../API/algorithms/std-algorithms/all/StdCount.html"><code class="docutils literal notranslate"><span class="pre">count</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../API/algorithms/std-algorithms/all/StdCountIf.html"><code class="docutils literal notranslate"><span class="pre">count_if</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../API/algorithms/std-algorithms/all/StdEqual.html"><code class="docutils literal notranslate"><span class="pre">equal</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../API/algorithms/std-algorithms/all/StdAllOf.html"><code class="docutils literal notranslate"><span class="pre">all_of</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../API/algorithms/std-algorithms/all/StdAnyOf.html"><code class="docutils literal notranslate"><span class="pre">any_of</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../API/algorithms/std-algorithms/all/StdNoneOf.html"><code class="docutils literal notranslate"><span class="pre">none_of</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../API/algorithms/std-algorithms/all/StdFind.html"><code class="docutils literal notranslate"><span class="pre">find</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../API/algorithms/std-algorithms/all/StdFindIf.html"><code class="docutils literal notranslate"><span class="pre">find_if</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../API/algorithms/std-algorithms/all/StdFindIfNot.html"><code class="docutils literal notranslate"><span class="pre">find_if_not</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../API/algorithms/std-algorithms/all/StdFindEnd.html"><code class="docutils literal notranslate"><span class="pre">find_end</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../API/algorithms/std-algorithms/all/StdFindFirstOf.html"><code class="docutils literal notranslate"><span class="pre">find_first_of</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../API/algorithms/std-algorithms/all/StdForEach.html"><code class="docutils literal notranslate"><span class="pre">for_each</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../API/algorithms/std-algorithms/all/StdForEachN.html"><code class="docutils literal notranslate"><span class="pre">for_each_n</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../API/algorithms/std-algorithms/all/StdLexicographicalCompare.html"><code class="docutils literal notranslate"><span class="pre">lexicographical_compare</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../API/algorithms/std-algorithms/all/StdMismatch.html"><code class="docutils literal notranslate"><span class="pre">mismatch</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../API/algorithms/std-algorithms/all/StdSearch.html"><code class="docutils literal notranslate"><span class="pre">search</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../API/algorithms/std-algorithms/all/StdSearchN.html"><code class="docutils literal notranslate"><span class="pre">search_n</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../API/algorithms/std-algorithms/StdNumeric.html">Numeric</a><input class="toctree-checkbox" id="toctree-checkbox-22" name="toctree-checkbox-22" role="switch" type="checkbox"/><label for="toctree-checkbox-22"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../API/algorithms/std-algorithms/all/StdAdjacentDifference.html"><code class="docutils literal notranslate"><span class="pre">adjacent_difference</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../API/algorithms/std-algorithms/all/StdReduce.html"><code class="docutils literal notranslate"><span class="pre">reduce</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../API/algorithms/std-algorithms/all/StdExclusiveScan.html"><code class="docutils literal notranslate"><span class="pre">exclusive_scan</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../API/algorithms/std-algorithms/all/StdInclusiveScan.html"><code class="docutils literal notranslate"><span class="pre">inclusive_scan</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../API/algorithms/std-algorithms/all/StdTransformReduce.html"><code class="docutils literal notranslate"><span class="pre">transform_reduce</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../API/algorithms/std-algorithms/all/StdTransformExclusiveScan.html"><code class="docutils literal notranslate"><span class="pre">transform_exclusive_scan</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../API/algorithms/std-algorithms/all/StdTransformInclusiveScan.html"><code class="docutils literal notranslate"><span class="pre">transform_inclusive_scan</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../API/algorithms/std-algorithms/StdPartioningOps.html">Partitioning</a><input class="toctree-checkbox" id="toctree-checkbox-23" name="toctree-checkbox-23" role="switch" type="checkbox"/><label for="toctree-checkbox-23"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../API/algorithms/std-algorithms/all/StdIsPartitioned.html"><code class="docutils literal notranslate"><span class="pre">is_partitioned</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../API/algorithms/std-algorithms/all/StdPartitionPoint.html"><code class="docutils literal notranslate"><span class="pre">partition_point</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../API/algorithms/std-algorithms/all/StdPartitionCopy.html"><code class="docutils literal notranslate"><span class="pre">partition_copy</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../API/algorithms/std-algorithms/StdSorting.html">Sorting</a><input class="toctree-checkbox" id="toctree-checkbox-24" name="toctree-checkbox-24" role="switch" type="checkbox"/><label for="toctree-checkbox-24"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../API/algorithms/std-algorithms/all/StdIsSorted.html"><code class="docutils literal notranslate"><span class="pre">is_sorted</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../API/algorithms/std-algorithms/all/StdIsSortedUntil.html"><code class="docutils literal notranslate"><span class="pre">is_sorted_until</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../API/simd-index.html">API: SIMD</a><input class="toctree-checkbox" id="toctree-checkbox-25" name="toctree-checkbox-25" role="switch" type="checkbox"/><label for="toctree-checkbox-25"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../API/simd/simd.html"><code class="docutils literal notranslate"><span class="pre">Experimental::simd</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../API/simd/simd_mask.html"><code class="docutils literal notranslate"><span class="pre">Experimental::simd_mask</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../API/simd/where_expression.html">Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../API/simd/where_expression.html#example">Example</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../API/alphabetical.html">API in Alphabetical Order</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DeprecationPage.html">Deprecation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../known-issues.html">Known issues</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../usecases.html">Use Cases and Examples</a><input class="toctree-checkbox" id="toctree-checkbox-26" name="toctree-checkbox-26" role="switch" type="checkbox"/><label for="toctree-checkbox-26"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../usecases/MPI-Halo-Exchange.html">MPI Halo Exchange</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../usecases/Average-To-Nodes.html">ScatterView averaging elements to nodes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../usecases/MDRangePolicy.html">MDRangePolicy Use Case</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../usecases/VirtualFunctions.html">Virtual Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../usecases/TaggedOperators.html">Tagged Operators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../usecases/OverlappingHostAndDeviceWork.html">Overlapping Host and Device work</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../usecases/Tasking.html">Kokkos Tasking Use Case</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../usecases/Kokkos-Fortran-Interoperability.html">Fortran Interop Use Case</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../usecases/SoA-and-AoSoA-with-Cabana.html">Array of Structures and Structure of Arrays with Cabana</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../usecases/WindowsHeader.html">Kokkos and <code class="docutils literal notranslate"><span class="pre">Windows.h</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../usecases/Moving_from_EnableUVM_to_SharedSpace.html">Moving code from requiring <code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_CUDA_UVM</span></code> to using <code class="docutils literal notranslate"><span class="pre">SharedSpace</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../testing-and-issue-tracking.html">Testing and Issue Tracking</a><input class="toctree-checkbox" id="toctree-checkbox-27" name="toctree-checkbox-27" role="switch" type="checkbox"/><label for="toctree-checkbox-27"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../testing-and-issue-tracking/Requirements-Issues-and-Feedback.html">Requirements, Issues and Feedback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../testing-and-issue-tracking/Testing-Process-Details.html">Attachments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../testing-and-issue-tracking/Testing-Processes.html">Kokkos Testing Processes and Change Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../testing-and-issue-tracking/Testing-Workflow-Components.html">Kokkos Testing Workflow Components</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/kokkos/kokkos-tutorials">Tutorials</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../videolectures.html">Video lectures and slides</a><input class="toctree-checkbox" id="toctree-checkbox-28" name="toctree-checkbox-28" role="switch" type="checkbox"/><label for="toctree-checkbox-28"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference external" href="https://www.youtube.com/watch?v=rUIcWtFU5qM">1. Intro, Build, Parallel dispatch</a></li>
+<li class="toctree-l2"><a class="reference external" href="https://www.youtube.com/watch?v=O-asHTtO7O4">2. Views and Spaces</a></li>
+<li class="toctree-l2"><a class="reference external" href="https://www.youtube.com/watch?v=nGyJS8u-6GY">3. Multidim loops and Data Structures</a></li>
+<li class="toctree-l2"><a class="reference external" href="https://www.youtube.com/watch?v=s9ecpeWRePs">4. Hierarchical Parallelism</a></li>
+<li class="toctree-l2"><a class="reference external" href="https://www.youtube.com/watch?v=xEAyOod57-c">5. SIMD, Streams, Tasking</a></li>
+<li class="toctree-l2"><a class="reference external" href="https://www.youtube.com/watch?v=1J3JQ3d3cRc&amp;t=1s">6. Fortran/Python interop, MPI, PGAS</a></li>
+<li class="toctree-l2"><a class="reference external" href="https://www.youtube.com/watch?v=MH6zFYGw0HU">7. Kokkos Tools</a></li>
+<li class="toctree-l2"><a class="reference external" href="https://www.youtube.com/watch?v=_qD4X66MQF8&amp;t=1s">8. Kokkos Kernels Math Library</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/kokkos/kokkos">GitHub Repo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../citation.html">Citing Kokkos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+<div class="edit-this-page">
+  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/ProgrammingGuide/SIMD.md" title="Edit this page">
+    <svg aria-hidden="true" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4"></path>
+      <line x1="13.5" y1="6.5" x2="17.5" y2="10.5"></line>
+    </svg>
+    <span class="visually-hidden">Edit this page</span>
+  </a>
+</div>
+
+          <div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section class="tex2jax_ignore mathjax_ignore" id="simd-types">
+<h1>15. SIMD Types<a class="headerlink" href="#simd-types" title="Permalink to this heading">#</a></h1>
+<section id="background">
+<h2>Background<a class="headerlink" href="#background" title="Permalink to this heading">#</a></h2>
+<p>Through the history of high-performance computing using CPUs, there has been a struggle to get software to effectively make use of CPU vector registers and instructions through compiler auto-vectorization.
+An interesting look into this struggle can be found in <a class="reference external" href="https://pharr.org/matt/blog/2018/04/18/ispc-origins">this blog</a>, which gives some insight into how Intel compiler auto-vectorization has drawbacks compared to programming models such a CUDA for NVIDIA GPUs.
+A key quote, attributed to Stanford’s Tim Foley, states that “auto-vectorization is not a programming model”.
+This is essentially the heart of the issue: auto-vectorization is not a two-way conversation between programmer and machine. It is more like a black box that almost always fails to work.
+The <a class="reference external" href="https://www.researchgate.net/profile/Matthias_Kretz2/publication/295253746_Extending_C_for_Explicit_Data-Parallel_Programming_via_SIMD_Vector_Types/links/56c8c99208ae5488f0d6ffa0.pdf">dissertation</a> of Matthias Kretz, one of the key driving forces behind SIMD types being proposed to the ISO standard of the C++ language, describes similar motivations.
+Since Kokkos is a programming model that strives to deliver high performance on vector-capable CPUs, it makes sense for it to provide these SIMD types due to the limitations of alternative approaches.</p>
+</section>
+<section id="the-basic-idea">
+<h2>The Basic Idea<a class="headerlink" href="#the-basic-idea" title="Permalink to this heading">#</a></h2>
+<p>The idea behind SIMD types is to step just one layer of abstraction above hand-coding Intel intrinsic calls.
+The design of SIMD types recognizes that the vector intrinsics provided by many CPU vendors are fairly similar and that users would not like to hand-code for one specific vendor at a time.
+As such, the SIMD types are a C++ representation of vector registers and their methods explicitly call vendor-specific vector intrinsic instructions.
+The vendor-specific portions are abstracted away from user code through template parameters.</p>
+<p>The reason that SIMD types are so effective at producing high-performance code is that users are directly expressing what the vector parallelism is that they would like, and doing so in a way that is guaranteed to generate the vector instructions they expect.
+When using SIMD types, the compiler cannot fail to auto-vectorize, because auto-vectorization is not part of the picture.
+Users are more clearly able to reason about the available parallelism in their code in ways that an auto-vectorizer is almost never able to do.
+By allowing users to have direct control of how vectorization is done while protecting them from both vendor lock-in and the odd quirks of different vendor instruction sets, SIMD types allow users to write performance portable code accross CPUs and also GPUs.</p>
+</section>
+<section id="an-example">
+<h2>An Example<a class="headerlink" href="#an-example" title="Permalink to this heading">#</a></h2>
+<p>Suppose that we have the following loop that we would like to take advantage of CPU vectorization:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">double</span><span class="o">*</span><span class="w"> </span><span class="n">x</span><span class="p">;</span>
+<span class="kt">double</span><span class="o">*</span><span class="w"> </span><span class="n">y</span><span class="p">;</span>
+<span class="kt">double</span><span class="o">*</span><span class="w"> </span><span class="n">z</span><span class="p">;</span>
+<span class="kt">double</span><span class="o">*</span><span class="w"> </span><span class="n">r</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">;</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">r</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">z</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">z</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Here is one way to convert such a loop to use Kokkos SIMD types:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Kokkos_SIMD.hpp&gt;</span>
+
+<span class="k">using</span><span class="w"> </span><span class="n">simd_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">Experimental</span><span class="o">::</span><span class="n">native_simd</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="k">using</span><span class="w"> </span><span class="n">tag_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">Experimental</span><span class="o">::</span><span class="n">element_aligned_tag</span><span class="p">;</span>
+<span class="k">constexpr</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">int</span><span class="p">(</span><span class="n">simd_type</span><span class="o">::</span><span class="n">size</span><span class="p">());</span>
+<span class="n">assert</span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">width</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">width</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">simd_type</span><span class="w"> </span><span class="nf">sx</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">tag_type</span><span class="p">());</span>
+<span class="w">  </span><span class="n">simd_type</span><span class="w"> </span><span class="nf">sy</span><span class="p">(</span><span class="n">y</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">tag_type</span><span class="p">());</span>
+<span class="w">  </span><span class="n">simd_type</span><span class="w"> </span><span class="nf">sz</span><span class="p">(</span><span class="n">z</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">tag_type</span><span class="p">());</span>
+<span class="w">  </span><span class="n">simd_type</span><span class="w"> </span><span class="n">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">sqrt</span><span class="p">(</span><span class="n">sx</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">sx</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sy</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">sy</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sz</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">sz</span><span class="p">);</span>
+<span class="w">  </span><span class="n">sr</span><span class="p">.</span><span class="n">copy_to</span><span class="p">(</span><span class="n">r</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">tag_type</span><span class="p">());</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Kokkos::Experimental::native_simd&lt;double&gt;</span></code> is the basic SIMD type for a vector register
+containing values of 64-bit floating-point type.
+Constructing one given a pointer (and alignment tag) will execute a vectorized load instruction,
+and <code class="docutils literal notranslate"><span class="pre">copy_to</span></code> will generate a vectorized store instruction.
+Often these instructions are the only way to get the full memory bandwidth from your CPU.
+The SIMD type provides the basic math operators, so the three multiplications
+and two additions are guaranteed to turn into vector instructions for multiplication and addition.
+The <code class="docutils literal notranslate"><span class="pre">Kokkos::sqrt</span></code> overload will call a vector instruction for computing the square roots
+of values if the CPU supports it.</p>
+<p>In other words, we now have a C++ code which has no vendor-specific stuff in it but is guaranteed
+to emit exactly the right vendor vector instructions depending on which CPU type Kokkos
+is compiled for (<code class="docutils literal notranslate"><span class="pre">KOKKOS_ARCH</span></code> configurations).
+It is also still fairly readable, especially the portion that deals with the mathematical operations.</p>
+<p>If a CPU supports 256-bit vector registers, then this code will process 4 <code class="docutils literal notranslate"><span class="pre">double</span></code>s at a time (width = 4), and get close to 4X speedup depending on the situation.</p>
+</section>
+<section id="dealing-with-the-remainder">
+<h2>Dealing with the Remainder<a class="headerlink" href="#dealing-with-the-remainder" title="Permalink to this heading">#</a></h2>
+<p>In the above example, we skipped over a troublesome pitfall by asserting that the size of the data <code class="docutils literal notranslate"><span class="pre">n</span></code> that we are operating on is evenly divisible by the vector width.
+There are at least three major approaches to dealing with this issue in general:</p>
+<ol class="arabic">
+<li><p>Enforce that the data size is always a multiple of the vector width.
+One way to do this is by padding, which means allocate more than you need until it is a multiple and ignore the extra values.
+Another way to do this is by storing types which are also the same size, which you can do by using the same SIMD types:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Kokkos_SIMD.hpp&gt;</span>
+
+<span class="k">using</span><span class="w"> </span><span class="n">simd_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">Experimental</span><span class="o">::</span><span class="n">native_simd</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="n">simd_type</span><span class="o">*</span><span class="w"> </span><span class="n">x</span><span class="p">;</span>
+<span class="n">simd_type</span><span class="o">*</span><span class="w"> </span><span class="n">y</span><span class="p">;</span>
+<span class="n">simd_type</span><span class="o">*</span><span class="w"> </span><span class="n">z</span><span class="p">;</span>
+<span class="n">simd_type</span><span class="o">*</span><span class="w"> </span><span class="n">r</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">;</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">r</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">z</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">z</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Kokkos is working on adding special storage types to further support this use case and allow interoperability with <code class="docutils literal notranslate"><span class="pre">Kokkos::View</span></code>.</p>
+<p>Note that this approach looks cleaner in the example but can have wide-reaching consequences because the data type of the original data has changed, and may need to change in other places throughout a large code base.</p>
+</li>
+<li><p>Handle the remainder differently. For example, use a loop of non-vectorized code to compute the remainder values:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Kokkos_SIMD.hpp&gt;</span>
+
+<span class="k">using</span><span class="w"> </span><span class="n">simd_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">Experimental</span><span class="o">::</span><span class="n">native_simd</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="k">using</span><span class="w"> </span><span class="n">tag_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">Experimental</span><span class="o">::</span><span class="n">element_aligned_tag</span><span class="p">;</span>
+<span class="k">constexpr</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">int</span><span class="p">(</span><span class="n">simd_type</span><span class="o">::</span><span class="n">size</span><span class="p">());</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">width</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">width</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">simd_type</span><span class="w"> </span><span class="nf">sx</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">tag_type</span><span class="p">());</span>
+<span class="w">  </span><span class="n">simd_type</span><span class="w"> </span><span class="nf">sy</span><span class="p">(</span><span class="n">y</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">tag_type</span><span class="p">());</span>
+<span class="w">  </span><span class="n">simd_type</span><span class="w"> </span><span class="nf">sz</span><span class="p">(</span><span class="n">z</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">tag_type</span><span class="p">());</span>
+<span class="w">  </span><span class="n">simd_type</span><span class="w"> </span><span class="n">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">sqrt</span><span class="p">(</span><span class="n">sx</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">sx</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sy</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">sy</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sz</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">sz</span><span class="p">);</span>
+<span class="w">  </span><span class="n">sr</span><span class="p">.</span><span class="n">copy_to</span><span class="p">(</span><span class="n">r</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">tag_type</span><span class="p">());</span>
+<span class="p">}</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">r</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">z</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">z</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The main drawback of this approach is the code duplication / repetition.</p>
+</li>
+<li><p>Use masks in each iteration:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Kokkos_SIMD.hpp&gt;</span>
+
+<span class="k">using</span><span class="w"> </span><span class="n">simd_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">Experimental</span><span class="o">::</span><span class="n">native_simd</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="k">using</span><span class="w"> </span><span class="n">mask_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">Experimental</span><span class="o">::</span><span class="n">native_simd_mask</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="k">using</span><span class="w"> </span><span class="n">tag_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">Experimental</span><span class="o">::</span><span class="n">element_aligned_tag</span><span class="p">;</span>
+<span class="k">constexpr</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">int</span><span class="p">(</span><span class="n">simd_type</span><span class="o">::</span><span class="n">size</span><span class="p">());</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">width</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">mask_type</span><span class="w"> </span><span class="nf">mask</span><span class="p">([]</span><span class="w"> </span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="kt">size_t</span><span class="w"> </span><span class="n">lane</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="kt">int</span><span class="p">(</span><span class="n">lane</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="p">});</span>
+<span class="w">  </span><span class="n">simd_type</span><span class="w"> </span><span class="n">sx</span><span class="p">;</span>
+<span class="w">  </span><span class="n">simd_type</span><span class="w"> </span><span class="n">sy</span><span class="p">;</span>
+<span class="w">  </span><span class="n">simd_type</span><span class="w"> </span><span class="n">sz</span><span class="p">;</span>
+<span class="w">  </span><span class="n">where</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span><span class="w"> </span><span class="n">sx</span><span class="p">).</span><span class="n">copy_from</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">tag_type</span><span class="p">());</span>
+<span class="w">  </span><span class="n">where</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span><span class="w"> </span><span class="n">sy</span><span class="p">).</span><span class="n">copy_from</span><span class="p">(</span><span class="n">y</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">tag_type</span><span class="p">());</span>
+<span class="w">  </span><span class="n">where</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span><span class="w"> </span><span class="n">sz</span><span class="p">).</span><span class="n">copy_from</span><span class="p">(</span><span class="n">z</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">tag_type</span><span class="p">());</span>
+<span class="w">  </span><span class="n">simd_type</span><span class="w"> </span><span class="n">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">sqrt</span><span class="p">(</span><span class="n">sx</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">sx</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sy</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">sy</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sz</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">sz</span><span class="p">);</span>
+<span class="w">  </span><span class="n">where</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span><span class="w"> </span><span class="n">sr</span><span class="p">).</span><span class="n">copy_to</span><span class="p">(</span><span class="n">r</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">tag_type</span><span class="p">());</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The main drawback of this approach is the slight overhead of using masked loads and stores,
+but it nicely handles data from sources that have neither padded nor changed their data type
+without any code repetition.</p>
+</li>
+</ol>
+</section>
+<section id="vectorization-of-library-code">
+<h2>Vectorization of Library Code<a class="headerlink" href="#vectorization-of-library-code" title="Permalink to this heading">#</a></h2>
+<p>By using templating, complex mathematical library code can automatically take full advantage of vectorization without changing:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span>
+<span class="n">KOKKOS_FUNCTION</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">quadratic_formula</span><span class="p">(</span>
+<span class="w">    </span><span class="n">T</span><span class="w"> </span><span class="k">const</span><span class="o">&amp;</span><span class="w"> </span><span class="n">a</span><span class="p">,</span>
+<span class="w">    </span><span class="n">T</span><span class="w"> </span><span class="k">const</span><span class="o">&amp;</span><span class="w"> </span><span class="n">b</span><span class="p">,</span>
+<span class="w">    </span><span class="n">T</span><span class="w"> </span><span class="k">const</span><span class="o">&amp;</span><span class="w"> </span><span class="n">c</span><span class="p">,</span>
+<span class="w">    </span><span class="n">T</span><span class="o">&amp;</span><span class="w"> </span><span class="n">x1</span><span class="p">,</span>
+<span class="w">    </span><span class="n">T</span><span class="o">&amp;</span><span class="w"> </span><span class="n">x2</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="n">T</span><span class="w"> </span><span class="n">discriminant</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">c</span><span class="p">;</span>
+<span class="w">  </span><span class="n">T</span><span class="w"> </span><span class="n">sqrt_discriminant</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">sqrt</span><span class="p">(</span><span class="n">discriminant</span><span class="p">);</span>
+<span class="w">  </span><span class="n">x1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="o">-</span><span class="n">b</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sqrt_discriminant</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">a</span><span class="p">);</span>
+<span class="w">  </span><span class="n">x2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="o">-</span><span class="n">b</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">sqrt_discriminant</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">a</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>When instantiated with <code class="docutils literal notranslate"><span class="pre">T=double</span></code>, this function behaves in the classic, familiar, serial sense.
+If we simply instantiate it with <code class="docutils literal notranslate"><span class="pre">T=Kokkos::Experimental::native_simd&lt;double&gt;</span></code>, it still compiles just the same but now every mathematical operation is guaranteed to emit a vector instruction and the function can compute 4 quadratic formulas at a time on a 256-bit vector CPU.</p>
+<p>Note that Kokkos takes special care to ensure everything that can be done with <code class="docutils literal notranslate"><span class="pre">double</span></code> can also be done with SIMD types, including the multiplication by integer literals <code class="docutils literal notranslate"><span class="pre">4</span></code> and <code class="docutils literal notranslate"><span class="pre">2</span></code> in this example code.</p>
+</section>
+<section id="conditionals">
+<h2>Conditionals<a class="headerlink" href="#conditionals" title="Permalink to this heading">#</a></h2>
+<section id="conditional-assignment">
+<h3>Conditional assignment<a class="headerlink" href="#conditional-assignment" title="Permalink to this heading">#</a></h3>
+<p>One of the more difficult things to do with SIMD types is conditional logic. Consider the following code which is responsible for ensuring that the value <code class="docutils literal notranslate"><span class="pre">x</span></code> is not negative (we will ignore the existence of <code class="docutils literal notranslate"><span class="pre">max</span></code> functions for this discussion because it makes for a nice simple example):</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="p">;</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>We cannot naively use SIMD types in this scenario, because <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">&lt;</span> <span class="pre">0</span></code> is not a boolean value, instead it is a <code class="docutils literal notranslate"><span class="pre">simd_mask&lt;double,</span> <span class="pre">Abi&gt;</span></code> object which represents possibly multiple booleans.</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">Kokkos</span><span class="o">::</span><span class="n">Experimental</span><span class="o">::</span><span class="n">native_simd</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">x</span><span class="p">;</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="cm">/* &lt;- this is not a boolean */</span><span class="p">)</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>The ISO C++ consistent solution is to use <code class="docutils literal notranslate"><span class="pre">where</span></code> expressions as follows:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">Kokkos</span><span class="o">::</span><span class="n">Experimental</span><span class="o">::</span><span class="n">native_simd</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">x</span><span class="p">;</span>
+<span class="n">where</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="ternary-operator">
+<h3>Ternary operator<a class="headerlink" href="#ternary-operator" title="Permalink to this heading">#</a></h3>
+<p>At the time of this writing, there is also a common practice of using a function that mimics the behavior of the ternary conditional operator <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">?</span> <span class="pre">b</span> <span class="pre">:</span> <span class="pre">c</span></code> in a SIMD sense. This means the following are functionally equivalent:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="n">a</span><span class="p">;</span>
+<span class="kt">double</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+<span class="kt">double</span><span class="w"> </span><span class="n">c</span><span class="p">;</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">c</span><span class="p">;</span>
+</pre></div>
+</div>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">Kokkos</span><span class="o">::</span><span class="n">Experimental</span><span class="o">::</span><span class="n">native_simd_mask</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">a</span><span class="p">;</span>
+<span class="n">Kokkos</span><span class="o">::</span><span class="n">Experimental</span><span class="o">::</span><span class="n">native_simd</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+<span class="n">Kokkos</span><span class="o">::</span><span class="n">Experimental</span><span class="o">::</span><span class="n">native_simd</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">c</span><span class="p">;</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">Experimental</span><span class="o">::</span><span class="n">condition</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">Kokkos</span><span class="o">::</span><span class="n">Experimental</span><span class="o">::</span><span class="n">native_simd_mask</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">a</span><span class="p">;</span>
+<span class="n">Kokkos</span><span class="o">::</span><span class="n">Experimental</span><span class="o">::</span><span class="n">native_simd</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+<span class="n">Kokkos</span><span class="o">::</span><span class="n">Experimental</span><span class="o">::</span><span class="n">native_simd</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">c</span><span class="p">;</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">c</span><span class="p">;</span>
+<span class="n">where</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">d</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>The roadmap regarding the ternary operator is as follows: ISO C++ will likely add the ability to overload this operator in later versions of the language, and the standard library’s SIMD types will overload it.</p>
+<p>It is recommended that programmers use <code class="docutils literal notranslate"><span class="pre">where</span></code> expressions as much as possible for conditional logic when using Kokkos SIMD types, because this is consistent with the library solution currently proposed to ISO C++ without relying on non-standard functions or language features not yet available.</p>
+</section>
+<section id="reductions-for-performance">
+<h3>Reductions for performance<a class="headerlink" href="#reductions-for-performance" title="Permalink to this heading">#</a></h3>
+<p>One frustrating aspect of the solutions for conditional logic above is that computations are not skipped, they are simply masked out. Consider the following serial logic:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="n">a</span><span class="p">;</span>
+<span class="kt">double</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0</span><span class="p">;</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">very_expensive_function</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="w"> </span><span class="n">d</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>When using <code class="docutils literal notranslate"><span class="pre">if</span></code> statements, <code class="docutils literal notranslate"><span class="pre">very_expensive_function</span></code> is not executed at all unless <code class="docutils literal notranslate"><span class="pre">a</span></code> is <code class="docutils literal notranslate"><span class="pre">true</span></code>. However, in SIMD mode:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">Kokkos</span><span class="o">::</span><span class="n">Experimental</span><span class="o">::</span><span class="n">native_simd_mask</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">a</span><span class="p">;</span>
+<span class="n">Kokkos</span><span class="o">::</span><span class="n">Experimental</span><span class="o">::</span><span class="n">native_simd</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0</span><span class="p">;</span>
+<span class="n">where</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">very_expensive_function</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="w"> </span><span class="n">d</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Now <code class="docutils literal notranslate"><span class="pre">very_expensive_function</span></code> is always being executed. What if the probability of <code class="docutils literal notranslate"><span class="pre">a</span></code> being <code class="docutils literal notranslate"><span class="pre">true</span></code> is very low? We would want to skip the computation of <code class="docutils literal notranslate"><span class="pre">very_expensive_function</span></code> if at all possible.</p>
+<p>For this, we have boolean reductions across masks called <code class="docutils literal notranslate"><span class="pre">all_of</span></code>, <code class="docutils literal notranslate"><span class="pre">none_of</span></code>, and <code class="docutils literal notranslate"><span class="pre">any_of</span></code>:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">Kokkos</span><span class="o">::</span><span class="n">Experimental</span><span class="o">::</span><span class="n">native_simd_mask</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">a</span><span class="p">;</span>
+<span class="n">Kokkos</span><span class="o">::</span><span class="n">Experimental</span><span class="o">::</span><span class="n">native_simd</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0</span><span class="p">;</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Kokkos</span><span class="o">::</span><span class="n">Experimental</span><span class="o">::</span><span class="n">any_of</span><span class="p">(</span><span class="n">a</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">where</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">very_expensive_function</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="w"> </span><span class="n">d</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Now <code class="docutils literal notranslate"><span class="pre">very_expensive_function</span></code> will only be executed if any of the boolean values in the mask <code class="docutils literal notranslate"><span class="pre">a</span></code> are <code class="docutils literal notranslate"><span class="pre">true</span></code>. If it is common that all of the boolean values in <code class="docutils literal notranslate"><span class="pre">a</span></code> are <code class="docutils literal notranslate"><span class="pre">false</span></code>, then we will spend a lot less time in <code class="docutils literal notranslate"><span class="pre">very_expensive_function</span></code>.</p>
+</section>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="../requirements.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Requirements</div>
+              </div>
+              <svg><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="Kokkos-and-Virtual-Functions.html">
+              <svg><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">14. Kokkos and Virtual Functions</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2014, National Technology &amp; Engineering Solutions of Sandia, LLC (NTESS)
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            <div class="icons">
+              
+            </div>
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            Contents
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">15. SIMD Types</a><ul>
+<li><a class="reference internal" href="#background">Background</a></li>
+<li><a class="reference internal" href="#the-basic-idea">The Basic Idea</a></li>
+<li><a class="reference internal" href="#an-example">An Example</a></li>
+<li><a class="reference internal" href="#dealing-with-the-remainder">Dealing with the Remainder</a></li>
+<li><a class="reference internal" href="#vectorization-of-library-code">Vectorization of Library Code</a></li>
+<li><a class="reference internal" href="#conditionals">Conditionals</a><ul>
+<li><a class="reference internal" href="#conditional-assignment">Conditional assignment</a></li>
+<li><a class="reference internal" href="#ternary-operator">Ternary operator</a></li>
+<li><a class="reference internal" href="#reductions-for-performance">Reductions for performance</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/scripts/furo.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    </body>
+</html>
