@@ -375,9 +375,9 @@ Data Layout, Dimensions, Strides
 
    **since Kokkos 4.1**: Returns the number of runtime determined dimensions.
 
-   Note: in practice, ``rank()`` and ``rank_dynamic()`` are not actually
-   implemented as static member functions but ``rank`` and ``rank_dynamic`` underlying
-   types have a nullary member function (i.e. callable with no argument).
+Note: in practice, ``rank()`` and ``rank_dynamic()`` are not actually
+implemented as static member functions but ``rank`` and ``rank_dynamic`` underlying
+types have a nullary member function (i.e. callable with no argument).
 
 .. cppkokkos:function:: constexpr array_layout layout() const
 
