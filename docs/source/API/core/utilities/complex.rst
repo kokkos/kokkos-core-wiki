@@ -30,6 +30,12 @@ Description
 
       The scalar type of the real and the imaginary component.
 
+   .. rubric:: Private Members
+
+   .. cppkokkos:member:: value_type im, re
+
+      Private data members representing the real and the imaginary parts.
+
    .. rubric:: Constructors
 
    .. cppkokkos:kokkosinlinefunction:: complex();
