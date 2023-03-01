@@ -75,26 +75,66 @@ with.
 | `KOKKOS_ENABLE_MEMKIND`     | Defined if Kokkos enables the [Memkind](https://github.com/memkind/memkind) heap manager, enables HBWSpace.        |
 | `KOKKOS_ENABLE_LIBDL`       | Defined if Kokkos links to the dynamic linker (libdl).                                                             |
 | `KOKKOS_ENABLE_LIBQUADMATH` | Defined if Kokkos links to the [GCC Quad-Precision Math Library API](https://gcc.gnu.org/onlinedocs/libquadmath/). |
+## Compilers
+
+The following macros can be used to query the integral version values of used compilers.
+
+| Macro | Description |
+| ------| ---------------|
+| `KOKKOS_COMPILER_NVCC` | Defined if NVIDIA compiler is used. |
+| `KOKKOS_COMPILER_GNU`  | Defined if GCC compiler is used. |
+| `KOKKOS_COMPILER_INTEL` | Defined if Intel Compiler Classic or Intel oneAPI DPC++/C++ Compiler is used. |
+| `KOKKOS_COMPILER_IBM`   | Defined if IBM compiler or XLClang is used. |
+| `KOKKOS_COMPILER_CRAYC` | Defined if CRAY compiler is used for host code. |
+| `KOKKOS_COMPILER_APPLECC` | Defined if Apple cc compiler is used. |
+| `KOKKOS_COMPILER_CLANG` | Defined if Clang compiler is used. |
+| `KOKKOS_COMPILER_PGI` | Defined if PGI compiler is used. |
+| `KOKKOS_COMPILER_NVHPC` | Defined if NVHPC compiler is used. |
+| `KOKKOS_COMPILER_MSVC` | Defined if MSVC compiler is used. |
+
+## Compiler Options for Vectorization
+
+| Macro | Description |
+| ------| ---------------|
+| `KOKKOS_ENABLE_PRAGMA_IVDEP` | Defined if the compiler is enabled to ignore assumed vector dependencies. [#pragma ivdep](https://www.intel.com/content/www/us/en/develop/documentation/cpp-compiler-developer-guide-and-reference/top/compiler-reference/pragmas/intel-specific-pragma-reference/ivdep.html) |
+| `KOKKOS_ENABLE_PRAGMA_LOOPCOUNT` | Defined if the compiler is enabled to specify loop iterations for optimization. [#pragma loop count](https://www.intel.com/content/www/us/en/develop/documentation/cpp-compiler-developer-guide-and-reference/top/compiler-reference/pragmas/intel-specific-pragma-reference/loop-count.html) |
+| `KOKKOS_ENABLE_PRAGMA_SIMD` | Defined if the compiler has SIMD intrinsics enabled. [#pragma simd](https://www.intel.com/content/www/us/en/develop/documentation/cpp-compiler-developer-guide-and-reference/top/compiler-reference/pragmas/intel-specific-pragma-reference/simd.html) |
+| `KOKKOS_ENABLE_PRAGMA_UNROLL` | Defined if the compiler is enabled to do the loop unrolling. [#pragma unroll](https://www.intel.com/content/www/us/en/develop/documentation/cpp-compiler-developer-guide-and-reference/top/compiler-reference/pragmas/intel-specific-pragma-reference/unroll-nounroll.html) |
+| `KOKKOS_ENABLE_PRAGMA_VECTOR` | Defined if the compiler is enabled to force vectorization. [#pragma vector](https://www.intel.com/content/www/us/en/develop/documentation/cpp-compiler-developer-guide-and-reference/top/compiler-reference/pragmas/intel-specific-pragma-reference/vector-1.html) |
 
 ## Architectures
 
 | Macro | Description |
 | ------| ---------------|
+| `KOKKOS_ARCH_NATIVE` | Optimize for local machine |
 | `KOKKOS_ARCH_SSE42` | Optimize for SSE 4.2 |
 | `KOKKOS_ARCH_ARMV80` | Optimize for ARMv8.0 Compatible CPU (HOST) |
 | `KOKKOS_ARCH_ARMV8_THUNDERX` | Optimize for ARMv8 Cavium ThunderX CPU (HOST) |
 | `KOKKOS_ARCH_ARMV81` | Optimize for ARMv8.1 Compatible CPU (HOST) |
 | `KOKKOS_ARCH_ARMV8_THUNDERX2` | Optimize for ARMv8 Cavium ThunderX2 CPU (HOST) |
+| `KOKKOS_ARCH_A64FX` | Optimize for ARMv8.2 with SVE Support |
 | `KOKKOS_ARCH_AMD_AVX2` | Optimize for AVX2 (enabled for Zen) |
+| `KOKKOS_ARCH_AMDAVX` | Optimize for AMD chip |
 | `KOKKOS_ARCH_AVX` | Optimize for AVX |
 | `KOKKOS_ARCH_AVX2` | Optimize for AVX2 |
 | `KOKKOS_ARCH_AVX512XEON` | Optimize for Skylake(AVX512) |
+| `KOKKOS_ARCH_WSM` | Optimize for Intel Westmere CPU |
+| `KOKKOS_ARCH_SNB` | Optimize for Intel Sandy/Ivy Bridge CPUs |
+| `KOKKOS_ARCH_HSW` | Optimize for Intel Haswell CPUs |
+| `KOKKOS_ARCH_BDW` | Optimize for Intel Broadwell Xeon E-class CPUs |
+| `KOKKOS_ARCH_ICL` | Optimize for Intel Ice Lake Client CPUs (AVX512) |
+| `KOKKOS_ARCH_ICX` | Optimize for Intel Ice Lake Xeon Server CPUs (AVX512) |
+| `KOKKOS_ARCH_SKL` | Optimize for Intel Skylake Client CPUs |
+| `KOKKOS_ARCH_SKX` | Optimize for Intel Skylake Xeon Server CPUs (AVX512) |
 | `KOKKOS_ARCH_KNC` | Optimize for Intel Knights Corner Xeon Phi (HOST) |
+| `KOKKOS_ARCH_KNL` | Optimize for Intel Knights Landing Xeon Phi |
+| `KOKKOS_ARCH_SPR` | Optimize for Intel Sapphire Rapids Xeon Server CPUs (AVX512) |
 | `KOKKOS_ARCH_AVX512MIC` | Optimize for Many Integrated Core (MIC; AVX512) |
+| `KOKKOS_ARCH_BGQ` | Optimize for IBM Blue Gene Q |
 | `KOKKOS_ARCH_POWER7` | Optimize for IBM POWER7 CPUs (HOST) |
 | `KOKKOS_ARCH_POWER8` | Optimize for IBM POWER8 CPUs (HOST) |
 | `KOKKOS_ARCH_POWER9` | Optimize for IBM POWER9 CPUs (HOST)|
-| `KOKKOS_ARCH_INTEL_GEN` | Optimize for Intel GPUs Gen9+ (GPU) |
+| `KOKKOS_ARCH_INTEL_GEN` | Optimize for SPIR64-based devices, e.g. Intel GPUs, using JIT |
 | `KOKKOS_ARCH_INTEL_DG1` | Optimize for Intel Iris XeMAX GPU (GPU) |
 | `KOKKOS_ARCH_INTEL_GEN9` | Optimize for Intel GPU Gen9 (GPU)|
 | `KOKKOS_ARCH_INTEL_GEN11` | Optimize for Intel GPU Gen11 (GPU) |
