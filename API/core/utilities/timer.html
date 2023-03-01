@@ -466,7 +466,7 @@
         </a>
         <div class="content-icon-container">
 <div class="edit-this-page">
-  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/API/core/utilities/timer.md" title="Edit this page">
+  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/API/core/utilities/timer.rst" title="Edit this page">
     <svg aria-hidden="true" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
       <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4"></path>
@@ -490,19 +490,21 @@
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="kokkos-timer">
+          <section id="kokkos-timer">
 <h1><code class="docutils literal notranslate"><span class="pre">Kokkos::Timer</span></code><a class="headerlink" href="#kokkos-timer" title="Permalink to this heading">#</a></h1>
-<p>Header File: <code class="docutils literal notranslate"><span class="pre">Kokkos_Core.hpp</span></code></p>
-<p>Usage:</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">Kokkos</span><span class="o">::</span><span class="n">Timer</span><span class="w"> </span><span class="n">timer</span><span class="p">;</span>
+<p>Header File: <code class="docutils literal notranslate"><span class="pre">&lt;Kokkos_Core.hpp&gt;</span></code></p>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this heading">#</a></h2>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Kokkos</span><span class="o">::</span><span class="n">Timer</span><span class="w"> </span><span class="n">timer</span><span class="p">;</span>
 <span class="kt">double</span><span class="w"> </span><span class="n">time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">timer</span><span class="p">.</span><span class="n">seconds</span><span class="p">();</span>
 <span class="n">timer</span><span class="p">.</span><span class="n">reset</span><span class="p">();</span>
 </pre></div>
 </div>
 <p>Timer is a simple construct to measure time.</p>
+</section>
 <section id="synopsis">
 <h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this heading">#</a></h2>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Timer</span><span class="w"> </span><span class="p">{</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Timer</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">typedef</span><span class="w"> </span><span class="n">Timer</span><span class="w"> </span><span class="n">execution_policy</span><span class="p">;</span>
 
 <span class="w">    </span><span class="c1">//Constructors</span>
@@ -512,7 +514,7 @@
 <span class="w">    </span><span class="o">~</span><span class="n">Timer</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="p">;</span>
 
 <span class="w">    </span><span class="c1">//Member functions</span>
-<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="nf">seconds</span><span class="p">();</span><span class="w"> </span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="nf">seconds</span><span class="p">();</span>
 <span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">reset</span><span class="p">();</span>
 <span class="p">};</span>
 </pre></div>
@@ -531,7 +533,7 @@
 </section>
 <section id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading">#</a></h2>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">Timer</span><span class="w"> </span><span class="n">timer</span><span class="p">;</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Timer</span><span class="w"> </span><span class="n">timer</span><span class="p">;</span>
 <span class="c1">// ...</span>
 <span class="kt">double</span><span class="w"> </span><span class="n">time1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">timer</span><span class="p">.</span><span class="n">seconds</span><span class="p">();</span>
 <span class="n">timer</span><span class="p">.</span><span class="n">reset</span><span class="p">();</span>
@@ -600,6 +602,7 @@
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">Kokkos::Timer</span></code></a><ul>
+<li><a class="reference internal" href="#usage">Usage</a></li>
 <li><a class="reference internal" href="#synopsis">Synopsis</a></li>
 <li><a class="reference internal" href="#public-class-members">Public Class Members</a><ul>
 <li><a class="reference internal" href="#constructors">Constructors</a></li>
