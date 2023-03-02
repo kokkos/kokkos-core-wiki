@@ -18,36 +18,6 @@ Usage
     Kokkos::pair<int, float> converted_std_pair(std_pair);
     std::pair<int,float> converted_kokkos_pair = kokkos_pair.to_std_pair();
 
-Synopsis
---------
-
-.. code-block:: cpp
-
-    template <class T1, class T2>
-    struct pair {
-
-        typedef T1 first_type;
-        typedef T2 second_type;
-
-        first_type first;
-        second_type second;
-    
-        KOKKOS_DEFAULTED_FUNCTION constexpr pair() = default;
-        KOKKOS_FORCEINLINE_FUNCTION constexpr pair(first_type const& f,
-                                                   second_type const& s);
-    
-        template <class U, class V>
-        KOKKOS_FORCEINLINE_FUNCTION constexpr pair(const pair<U, V>& p);
-
-        template <class U, class V>
-        KOKKOS_FORCEINLINE_FUNCTION pair<T1, T2>& operator=(const pair<U, V>& p);
-    
-        template <class U, class V>
-        pair(const std::pair<U, V>& p);
-    
-        std::pair<T1, T2> to_std_pair() const;
-    };
-
 Public Class Members
 ~~~~~~~~~~~~~~~~~~~~
 
