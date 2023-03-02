@@ -6,11 +6,6 @@
 
 Defined in header ``<Kokkos_Core.hpp>``
 
-.. code-block:: cpp
-
-    template <class MemorySpace = Kokkos::DefaultExecutionSpace::memory_space>
-    void* kokkos_realloc(void* ptr, size_t new_size);
-
 .. _Kokkos_kokkos_malloc: malloc.html
 
 .. |Kokkos_kokkos_malloc| replace:: ``Kokkos::kokkos_malloc()``
@@ -27,30 +22,25 @@ Defined in header ``<Kokkos_Core.hpp>``
 
 .. |Kokkos_kokkos_free| replace:: ``Kokkos::kokkos_free()``
 
-Reallocates the given area of memory. It must be previously allocated by |Kokkos_kokkos_malloc|_ or |Kokkos_kokkos_realloc|_ on the same memory space |MemorySpace|_ and not yet freed with |Kokkos_kokkos_free|_, otherwise, the results are undefined.
+Reallocates the given area of memory. It must be previously allocated by |Kokkos_kokkos_malloc|_ or |Kokkos_kokkos_realloc|_
+on the same memory space |MemorySpace|_ and not yet freed with |Kokkos_kokkos_free|_, otherwise, the results are undefined.
 
-WARNING: calling any function that manipulates the behavior of the memory (e.g. ``memAdvise``) on memory managed by ``Kokkos`` results in undefined behavior.
+.. warning::
 
-Parameters
-----------
+   Calling any function that manipulates the behavior of the memory (e.g. ``memAdvise``)
+   on memory managed by ``Kokkos`` results in undefined behavior.
 
-``ptr``: The pointer to the memory area to be reallocated.
+Description
+-----------
 
-``new_size``: The new size in bytes.
+.. cppkokkos:function:: template <class MemorySpace = Kokkos::DefaultExecutionSpace::memory_space> void* kokkos_realloc(void* ptr, size_t new_size);
 
-Template parameters
--------------------
+  :tparam MemorySpace: Controls the storage location. If omitted the memory space of the default execution space is used (i.e. ``Kokkos::DefaultExecutionSpace::memory_space``).
 
-* ``MemorySpace``: Controls the storage location. If omitted the memory space of the default execution space is used (i.e. ``Kokkos::DefaultExecutionSpace::memory_space``).
+  :param ptr: The pointer to the memory area to be reallocated.
 
-Return value
-------------
+  :param new_size: The new size in bytes.
 
-On success, returns a pointer to the beginning of the newly allocated memory. To avoid a memory leak, the returned pointer must be deallocated with |Kokkos_kokkos_free|_, the original pointer ``ptr`` is invalidated and any access to it is undefined behavior (even if reallocation was in-place).
+  :returns: On success, returns a pointer to the beginning of the newly allocated memory. To avoid a memory leak, the returned pointer must be deallocated with |Kokkos_kokkos_free|_, the original pointer ``ptr`` is invalidated and any access to it is undefined behavior (even if reallocation was in-place). On failure, returns a null pointer. The original pointer ptr remains valid and may need to be deallocated with |Kokkos_kokkos_free|_.
 
-On failure, returns a null pointer. The original pointer ptr remains valid and may need to be deallocated with |Kokkos_kokkos_free|_.
-
-Exceptions
-----------
-
-On failure, throws ``Kokkos::Experimental::RawMemoryAllocationFailure``.
+  :throws: On failure, throws ``Kokkos::Experimental::RawMemoryAllocationFailure``.
