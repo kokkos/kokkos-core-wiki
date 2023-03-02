@@ -299,7 +299,7 @@ Architecture Keywords
       * ``OFF``
 
     * * ``Kokkos_ARCH_HOPPER90``
-      * Optimize for the NVIDIA Hopper generation CC 9.0 <sup>since Kokkos 4.0</sup>
+      * Optimize for the NVIDIA Hopper generation CC 9.0 :sup:`since Kokkos 4.0`
       * ``OFF``
 
     * * ``Kokkos_ARCH_HSW``
