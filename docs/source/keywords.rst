@@ -346,6 +346,10 @@ Architecture Keywords
       * Optimize for MAXWELL53 architecture
       * ``OFF``
 
+    * * ``Kokkos_ARCH_NAVI1030`` :red:`[Since 4.0]`
+      * Optimize for AMD GPU V620/W6800 GFX1030
+      * ``OFF``
+
     * * ``Kokkos_ARCH_PASCAL60``
       * Optimize for PASCAL60 architecture
       * ``OFF``
@@ -378,7 +382,7 @@ Architecture Keywords
       * Optimize for TURING75 architecture
       * ``OFF``
 
-    * * ``Kokkos_ARCH_VEGA900``
+    * * ``Kokkos_ARCH_VEGA900`` :red:`[Removed in 4.0]`
       * Optimize for AMD GPU MI25 GFX900
       * ``OFF``
 
