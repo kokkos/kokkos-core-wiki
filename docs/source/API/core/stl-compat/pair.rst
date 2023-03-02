@@ -18,47 +18,53 @@ Usage
     Kokkos::pair<int, float> converted_std_pair(std_pair);
     std::pair<int,float> converted_kokkos_pair = kokkos_pair.to_std_pair();
 
-Public Class Members
-~~~~~~~~~~~~~~~~~~~~
+Description
+-----------
 
-* ``first``: the first element in the pair
-* ``second``: the second element in the pair
+.. cppkokkos:struct:: template <class T1, class T2> pair
 
-Typedefs
-~~~~~~~~
-   
-* ``first_type``: the type of the first element in the pair
-* ``second_type``: the type of the second element in the pair
+    |
 
-Constructors
-~~~~~~~~~~~~
+    .. rubric:: Public Typedefs
 
-.. cppkokkos:function:: KOKKOS_DEFAULTED_FUNCTION constexpr pair() = default;
+    .. cppkokkos:type:: T1 first_type;
 
-    * Default constructor. Initializes both data members with their defaults
+        The type of the first element in the pair.
 
-.. cppkokkos:function:: KOKKOS_FORCEINLINE_FUNCTION constexpr pair(first_type const& f, second_type const& s);
+    .. cppkokkos:type:: T2 second_type;
 
-    * Element-wise constructor. Assigns ``first`` the value of ``f``, ``second`` the value of ``s`` 
+        The type of the second element in the pair.
+    
+    .. cppkokkos:var:: first_type first;
 
-.. cppkokkos:function:: template <class U, class V> KOKKOS_FORCEINLINE_FUNCTION constexpr pair(const pair<U, V>& p);
+        The first element in the pair.
 
-    * Conversion from ``std::pair``. Assigns each element of the pair to its corresponding element in the ``p``
+    .. cppkokkos:var:: second_type second;
 
-Assignment and conversion
-~~~~~~~~~~~~~~~~~~~~~~~~~
+        The second element in the pair.
 
-.. code-block:: cpp
+    .. rubric:: Constructors
 
-    template <class U, class V>
-    KOKKOS_FORCEINLINE_FUNCTION pair<T1, T2>& operator=(const pair<U, V>& p);
+    .. cppkokkos:function:: KOKKOS_DEFAULTED_FUNCTION constexpr pair() = default;
 
-\
-    * Sets ``first`` to ``p.first`` and ``second`` to ``p.second`` 
+        Default constructor. Initializes both data members with their defaults.
 
-Functions
-~~~~~~~~~
+    .. cppkokkos:function:: KOKKOS_FORCEINLINE_FUNCTION constexpr pair(first_type const& f, second_type const& s);
 
-.. cppkokkos:function:: std::pair<T1, T2> to_std_pair() const;
+        Element-wise constructor. Assigns ``first`` the value of ``f``, ``second`` the value of ``s``.
 
-    * Returns a ``std::pair`` whose contents match those of the ``Kokkos::pair``. Useful for interacting with libraries that explicitly only accept ``std::pair``
+    .. cppkokkos:function:: template <class U, class V> KOKKOS_FORCEINLINE_FUNCTION constexpr pair(const pair<U, V>& p);
+
+        Conversion from ``std::pair``. Assigns each element of the pair to its corresponding element in the ``p``.
+
+    .. rubric:: Assignment and conversion
+
+    .. cppkokkos:function:: template <class U, class V> KOKKOS_FORCEINLINE_FUNCTION pair<T1, T2>& operator=(const pair<U, V>& p);
+
+        Sets ``first`` to ``p.first`` and ``second`` to ``p.second``.
+
+    .. rubric:: Functions
+
+    .. cppkokkos:function:: std::pair<T1, T2> to_std_pair() const;
+
+        Returns a ``std::pair`` whose contents match those of the ``Kokkos::pair``. Useful for interacting with libraries that explicitly only accept ``std::pair``.
