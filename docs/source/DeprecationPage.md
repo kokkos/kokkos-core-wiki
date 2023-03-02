@@ -1,6 +1,5 @@
 ## Deprecation
 <!--- VERSION 3 DEPRECATION --->
-
 ## Kokkos-3.x
   |  **Deprecated**  |  **Replacement**  |  **Reason**
   |  ------------  | ------------  |  ------------
