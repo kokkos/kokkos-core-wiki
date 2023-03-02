@@ -229,6 +229,8 @@ Architectures
 +-----------------------------------+-----------------------------------------------------------------------------------+
 | ``KOKKOS_ARCH_AMPERE86``          | Optimize for NVIDIA Ampere generation CC 8.6 (GPU)                                |
 +-----------------------------------+-----------------------------------------------------------------------------------+
+| ``KOKKOS_ARCH_ADA89``             | Optimize for NVIDIA Ada generation CC 8.9 (GPU) :sup:`since Kokkos 4.1`           |
++-----------------------------------+-----------------------------------------------------------------------------------+
 | ``KOKKOS_ARCH_HOPPER``            | Set if any NVIDIA Hopper architecture has been enabled :sup:`since Kokkos 4.0`    |
 +-----------------------------------+-----------------------------------------------------------------------------------+
 | ``KOKKOS_ARCH_HOPPER90``          | Optimize for NVIDIA Hopper generation CC 9.0 (GPU) :sup:`since Kokkos 4.0`        |
