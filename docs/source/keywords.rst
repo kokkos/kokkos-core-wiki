@@ -135,10 +135,6 @@ Enable Options
       * Enable relocatable device code (RDC) for HIP
       * ``OFF``
 
-    * * ``Kokkos_ENABLE_HPX_ASYNC_DISPATCH``
-      * Whether HPX supports asynchronous dispatch
-      * ``OFF``
-
     * * ``Kokkos_ENABLE_LARGE_MEM_TESTS``
       * Perform extra large memory tests
       * ``OFF``
