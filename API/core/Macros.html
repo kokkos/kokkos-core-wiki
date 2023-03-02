@@ -474,7 +474,7 @@
         </a>
         <div class="content-icon-container">
 <div class="edit-this-page">
-  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/API/core/Macros.md" title="Edit this page">
+  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/API/core/Macros.rst" title="Edit this page">
     <svg aria-hidden="true" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
       <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4"></path>
@@ -498,11 +498,11 @@
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="macros">
+          <section id="macros">
 <h1>Macros<a class="headerlink" href="#macros" title="Permalink to this heading">#</a></h1>
 <section id="version-macros">
 <h2>Version Macros<a class="headerlink" href="#version-macros" title="Permalink to this heading">#</a></h2>
-<div class="table-wrapper colwidths-auto docutils container">
+<div class="table-wrapper docutils container">
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Macro</p></th>
@@ -519,7 +519,7 @@
 </section>
 <section id="general-settings">
 <h2>General Settings<a class="headerlink" href="#general-settings" title="Permalink to this heading">#</a></h2>
-<div class="table-wrapper colwidths-auto docutils container">
+<div class="table-wrapper docutils container">
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Macro</p></th>
@@ -565,7 +565,7 @@
 <h2>Execution Spaces<a class="headerlink" href="#execution-spaces" title="Permalink to this heading">#</a></h2>
 <p>The following macros can be used to test whether or not a specified execution space
 is enabled. They can be tested for existence (e.g. <code class="docutils literal notranslate"><span class="pre">#ifdef</span> <span class="pre">KOKKOS_ENABLE_SERIAL</span></code>).</p>
-<div class="table-wrapper colwidths-auto docutils container">
+<div class="table-wrapper docutils container">
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Macro</p></th>
@@ -574,25 +574,25 @@ is enabled. They can be tested for existence (e.g. <code class="docutils literal
 </thead>
 <tbody>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">KOKKOS_ENABLE_SERIAL</span></code></p></td>
-<td><p>Defined if the <a class="reference internal" href="execution_spaces.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">Serial</span></code></span></a> execution space is enabled.</p></td>
+<td><p>Defined if the <a class="reference external" href="execution_spaces.html"><code class="xref cppkokkos cppkokkos-func docutils literal notranslate"><span class="pre">Serial()</span></code></a> execution space is enabled.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">KOKKOS_ENABLE_OPENMP</span></code></p></td>
-<td><p>Defined if the <a class="reference internal" href="execution_spaces.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">OpenMP</span></code></span></a> execution space is enabled.</p></td>
+<td><p>Defined if the <a class="reference external" href="execution_spaces.html"><code class="xref cppkokkos cppkokkos-func docutils literal notranslate"><span class="pre">OpenMP()</span></code></a> execution space is enabled.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">KOKKOS_ENABLE_OPENMPTARGET</span></code></p></td>
 <td><p>Defined if the experimental <code class="docutils literal notranslate"><span class="pre">OpenMPTarget</span></code> execution space is enabled.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">KOKKOS_ENABLE_THREADS</span></code></p></td>
-<td><p>Defined if the <a class="reference internal" href="execution_spaces.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">Threads</span></code></span></a> execution space is enabled.</p></td>
+<td><p>Defined if the <a class="reference external" href="execution_spaces.html"><code class="xref cppkokkos cppkokkos-func docutils literal notranslate"><span class="pre">Threads()</span></code></a> execution space is enabled.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">KOKKOS_ENABLE_CUDA</span></code></p></td>
-<td><p>Defined if the <a class="reference internal" href="execution_spaces.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">Cuda</span></code></span></a> execution space is enabled.</p></td>
+<td><p>Defined if the <a class="reference external" href="execution_spaces.html"><code class="xref cppkokkos cppkokkos-func docutils literal notranslate"><span class="pre">Cuda()</span></code></a> execution space is enabled.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">KOKKOS_ENABLE_HIP</span></code></p></td>
 <td><p>Defined if the experimental <code class="docutils literal notranslate"><span class="pre">HIP</span></code> execution space is enabled.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">KOKKOS_ENABLE_HPX</span></code></p></td>
-<td><p>Defined if the <a class="reference internal" href="execution_spaces.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">HPX</span></code></span></a> execution space is enabled.</p></td>
+<td><p>Defined if the <a class="reference external" href="execution_spaces.html"><code class="xref cppkokkos cppkokkos-func docutils literal notranslate"><span class="pre">HPX()</span></code></a> execution space is enabled.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">KOKKOS_ENABLE_SYCL</span></code></p></td>
 <td><p>Defined if the experimental <code class="docutils literal notranslate"><span class="pre">SYCL</span></code> execution space is enabled.</p></td>
@@ -603,7 +603,7 @@ is enabled. They can be tested for existence (e.g. <code class="docutils literal
 </section>
 <section id="backend-options">
 <h2>Backend options<a class="headerlink" href="#backend-options" title="Permalink to this heading">#</a></h2>
-<div class="table-wrapper colwidths-auto docutils container">
+<div class="table-wrapper docutils container">
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Macro</p></th>
@@ -645,7 +645,7 @@ is enabled. They can be tested for existence (e.g. <code class="docutils literal
 code paths or have different compiler support depending on the language standard that
 is enabled. The following macros are exposed to determine what language standard
 Kokkos was compiled with.</p>
-<div class="table-wrapper colwidths-auto docutils container">
+<div class="table-wrapper docutils container">
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Macro</p></th>
@@ -668,9 +668,8 @@ Kokkos was compiled with.</p>
 </section>
 <section id="third-party-library-settings">
 <h2>Third-Party Library Settings<a class="headerlink" href="#third-party-library-settings" title="Permalink to this heading">#</a></h2>
-<p>These defines give information about what third-party libaries Kokkos was compiled
-with.</p>
-<div class="table-wrapper colwidths-auto docutils container">
+<p>These defines give information about what third-party libaries Kokkos was compiled with.</p>
+<div class="table-wrapper docutils container">
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Macro</p></th>
@@ -699,7 +698,7 @@ with.</p>
 </section>
 <section id="architectures">
 <h2>Architectures<a class="headerlink" href="#architectures" title="Permalink to this heading">#</a></h2>
-<div class="table-wrapper colwidths-auto docutils container">
+<div class="table-wrapper docutils container">
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Macro</p></th>
