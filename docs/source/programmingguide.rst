@@ -18,3 +18,4 @@ Programming Guide
    ./ProgrammingGuide/Compatibility
    ./ProgrammingGuide/Interoperability
    ./ProgrammingGuide/Kokkos-and-Virtual-Functions
+   ./ProgrammingGuide/SIMD
