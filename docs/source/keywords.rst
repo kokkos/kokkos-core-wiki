@@ -254,6 +254,10 @@ Architecture Keywords
       * Optimize for ARMv8.2 with SVE Support
       * ``OFF``
 
+    * * ``Kokkos_ARCH_ADA89``
+      * Optimize for the NVIDIA Ada generation CC 8.9 :sup:`since Kokkos 4.1`
+      * ``OFF``
+
     * * ``Kokkos_ARCH_AMPERE80``
       * Optimize for the NVIDIA Ampere generation CC 8.0
       * ``OFF``
