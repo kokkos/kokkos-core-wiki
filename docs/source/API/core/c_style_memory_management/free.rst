@@ -6,10 +6,7 @@
 
 Defined in header ``<Kokkos_Core.hpp>``
 
-.. code-block:: cpp
-
-    template <class MemorySpace = Kokkos::DefaultExecutionSpace::memory_space>
-    void kokkos_free(void* ptr);
+.. cppkokkos:function:: template <class MemorySpace = Kokkos::DefaultExecutionSpace::memory_space> void kokkos_free(void* ptr);
 
 .. _Kokkos_kokkos_malloc: ./malloc.html
 
@@ -26,7 +23,9 @@ If ``ptr`` is a null pointer, the function does nothing.
 Parameters
 ----------
 
-``ptr``: The pointer to the memory to deallocate on the specified memory space.
+.. cppkokkos:var:: void* ptr
+
+* The pointer to the memory to deallocate on the specified memory space.
 
 Template parameters
 -------------------
