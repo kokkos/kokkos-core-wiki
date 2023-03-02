@@ -33,6 +33,10 @@ Description
 
 .. cppkokkos:function:: template <class MemorySpace = Kokkos::DefaultExecutionSpace::memory_space> void* kokkos_malloc(const string& label, size_t size);
 
+or
+
+.. cppkokkos:function:: template <class MemorySpace = Kokkos::DefaultExecutionSpace::memory_space> void* kokkos_malloc(size_t size);
+
     :tparam MemorySpace: Controls the storage location. If omitted the memory space of the default execution space is used (i.e. ``Kokkos::DefaultExecutionSpace::memory_space``).
 
     :param label: A user provided string which is used in profiling and debugging tools via the KokkosP Profiling Tools.
