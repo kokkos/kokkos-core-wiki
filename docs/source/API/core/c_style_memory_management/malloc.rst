@@ -31,9 +31,13 @@ WARNING: calling any function that manipulates the behavior of the memory (e.g. 
 Parameters
 ----------
 
-``label``: A user provided string which is used in profiling and debugging tools via the KokkosP Profiling Tools.
-  
-``size``: The number of bytes to allocate.
+.. cppkokkos:member:: const string& label
+
+* A user provided string which is used in profiling and debugging tools via the KokkosP Profiling Tools.
+
+.. cppkokkos:member:: size_t size
+
+* The number of bytes to allocate.
 
 Template parameters
 -------------------
