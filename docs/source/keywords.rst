@@ -307,7 +307,7 @@ Architecture Keywords
       * ``OFF``
 
     * * ``KOKKOS_ARCH_INTEL_GEN``
-      * Optimize for Intel GPUs, JIT
+      * Optimize for Intel GPUs, Just-In-Time compilation
       * ``OFF``
 
     * * ``KOKKOS_ARCH_INTEL_DG1``
