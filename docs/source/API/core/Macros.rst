@@ -177,7 +177,7 @@ Architectures
 +-----------------------------------+-----------------------------------------------------------------------------------+
 | ``KOKKOS_ARCH_POWER9``            | Optimize for IBM POWER9 CPUs (HOST)                                               |
 +-----------------------------------+-----------------------------------------------------------------------------------+
-| ``KOKKOS_ARCH_INTEL_GEN``         | Optimize for Intel GPUs, Just-In-Time compilation (GPU)                           |
+| ``KOKKOS_ARCH_INTEL_GEN``         | Optimize for Intel GPUs, Just-In-Time compilation* (GPU)                          |
 +-----------------------------------+-----------------------------------------------------------------------------------+
 | ``KOKKOS_ARCH_INTEL_DG1``         | Optimize for Intel Iris XeMAX GPU (GPU)                                           |
 +-----------------------------------+-----------------------------------------------------------------------------------+
@@ -256,3 +256,8 @@ Architectures
 | ``KOKKOS_ARCH_VEGA90A``           | Optimize for AMD GPU MI200 series GFX90A (GPU)                                    |
 +-----------------------------------+-----------------------------------------------------------------------------------+
 
+*) ``KOKKOS_ARCH_INTEL_GEN`` enables Just-In-Time compilation for Intel GPUs whereas all the other flags for Intel compilers
+request Ahead-Of-Time compilation. Just-In-Time compilation means that the compiler is invoked again when the binaries created
+are actually executed and only at that point the architecture to compile for is determined. On the other hand, Ahead-Of-Time
+compilation describes the standard model where the compiler is only invoked once to create the binary and the architecture to
+compile for is determined before the program is run.
