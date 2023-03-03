@@ -474,7 +474,7 @@
         </a>
         <div class="content-icon-container">
 <div class="edit-this-page">
-  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/API/core/c_style_memory_management/realloc.md" title="Edit this page">
+  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/API/core/c_style_memory_management/realloc.rst" title="Edit this page">
     <svg aria-hidden="true" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
       <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4"></path>
@@ -498,34 +498,40 @@
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="kokkos-realloc">
+          <section id="kokkos-realloc">
 <h1><code class="docutils literal notranslate"><span class="pre">kokkos_realloc</span></code><a class="headerlink" href="#kokkos-realloc" title="Permalink to this heading">#</a></h1>
 <p>Defined in header <code class="docutils literal notranslate"><span class="pre">&lt;Kokkos_Core.hpp&gt;</span></code></p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">MemorySpace</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">DefaultExecutionSpace</span><span class="o">::</span><span class="n">memory_space</span><span class="o">&gt;</span>
-<span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">kokkos_realloc</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">ptr</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">new_size</span><span class="p">);</span>
-</pre></div>
+<p>Reallocates the given area of memory. It must be previously allocated by <a class="reference external" href="malloc.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::kokkos_malloc()</span></code></a> or <a class="reference external" href="realloc.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::kokkos_realloc()</span></code></a>
+on the same memory space <a class="reference external" href="../memory_spaces.html"><code class="docutils literal notranslate"><span class="pre">MemorySpace</span></code></a> and not yet freed with <a class="reference external" href="free.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::kokkos_free()</span></code></a>, otherwise, the results are undefined.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Calling any function that manipulates the behavior of the memory (e.g. <code class="docutils literal notranslate"><span class="pre">memAdvise</span></code>)
+on memory managed by <code class="docutils literal notranslate"><span class="pre">Kokkos</span></code> results in undefined behavior.</p>
 </div>
-<p>Reallocates the given area of memory. It must be previously allocated by <a class="reference internal" href="malloc.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">Kokkos::kokkos_malloc()</span></code></span></a> or <a class="reference internal" href="#"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">Kokkos::kokkos_realloc()</span></code></span></a> on the same memory space <a class="reference internal" href="../memory_spaces.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">MemorySpace</span></code></span></a> and not yet freed with <a class="reference internal" href="free.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">Kokkos::kokkos_free()</span></code></span></a>, otherwise, the results are undefined.</p>
-<p>WARNING: calling any function that manipulates the behavior of the memory (e.g. <code class="docutils literal notranslate"><span class="pre">memAdvise</span></code>) on memory managed by <code class="docutils literal notranslate"><span class="pre">Kokkos</span></code> results in undefined behavior.</p>
-<section id="parameters">
-<h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this heading">#</a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">ptr</span></code>: The pointer to the memory area to be reallocated.<br />
-<code class="docutils literal notranslate"><span class="pre">new_size</span></code>: The new size in bytes.</p>
-</section>
-<section id="template-parameters">
-<h2>Template parameters<a class="headerlink" href="#template-parameters" title="Permalink to this heading">#</a></h2>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">MemorySpace</span></code>:  Controls the storage location. If omitted the memory space of the default execution space is used (i.e. <code class="docutils literal notranslate"><span class="pre">Kokkos::DefaultExecutionSpace::memory_space</span></code>).</p></li>
+<section id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this heading">#</a></h2>
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4I0E14kokkos_reallocPvPv6size_t">
+<span id="_CPPv3I0E14kokkos_reallocPv6size_t"></span><span id="_CPPv2I0E14kokkos_reallocPv6size_t"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">MemorySpace</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">Kokkos</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">DefaultExecutionSpace</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">memory_space</span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">kokkos_realloc</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">ptr</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">new_size</span></span><span class="sig-paren">)</span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4I0E14kokkos_reallocPvPv6size_t" title="Permalink to this definition">#</a><br /></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Template Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>MemorySpace</strong> – Controls the storage location. If omitted the memory space of the default execution space is used (i.e. <code class="docutils literal notranslate"><span class="pre">Kokkos::DefaultExecutionSpace::memory_space</span></code>).</p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>ptr</strong> – The pointer to the memory area to be reallocated.</p></li>
+<li><p><strong>new_size</strong> – The new size in bytes.</p></li>
 </ul>
-</section>
-<section id="return-value">
-<h2>Return value<a class="headerlink" href="#return-value" title="Permalink to this heading">#</a></h2>
-<p>On success, returns a pointer to the beginning of the newly allocated memory. To avoid a memory leak, the returned pointer must be deallocated with <a class="reference internal" href="free.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">Kokkos::kokkos_free()</span></code></span></a>, the original pointer <code class="docutils literal notranslate"><span class="pre">ptr</span></code> is invalidated and any access to it is undefined behavior (even if reallocation was in-place).</p>
-<p>On failure, returns a null pointer. The original pointer ptr remains valid and may need to be deallocated with <a class="reference internal" href="free.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">Kokkos::kokkos_free()</span></code></span></a>.</p>
-</section>
-<section id="exceptions">
-<h2>Exceptions<a class="headerlink" href="#exceptions" title="Permalink to this heading">#</a></h2>
-<p>On failure, throws <code class="docutils literal notranslate"><span class="pre">Kokkos::Experimental::RawMemoryAllocationFailure</span></code>.</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>On success, returns a pointer to the beginning of the newly allocated memory. To avoid a memory leak, the returned pointer must be deallocated with <a class="reference external" href="free.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::kokkos_free()</span></code></a>, the original pointer <code class="docutils literal notranslate"><span class="pre">ptr</span></code> is invalidated and any access to it is undefined behavior (even if reallocation was in-place). On failure, returns a null pointer. The original pointer ptr remains valid and may need to be deallocated with <a class="reference external" href="free.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::kokkos_free()</span></code></a>.</p>
+</dd>
+<dt class="field-even">Throws<span class="colon">:</span></dt>
+<dd class="field-even"><p>On failure, throws <code class="docutils literal notranslate"><span class="pre">Kokkos::Experimental::RawMemoryAllocationFailure</span></code>.</p>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
 </section>
 
@@ -587,10 +593,7 @@
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">kokkos_realloc</span></code></a><ul>
-<li><a class="reference internal" href="#parameters">Parameters</a></li>
-<li><a class="reference internal" href="#template-parameters">Template parameters</a></li>
-<li><a class="reference internal" href="#return-value">Return value</a></li>
-<li><a class="reference internal" href="#exceptions">Exceptions</a></li>
+<li><a class="reference internal" href="#description">Description</a></li>
 </ul>
 </li>
 </ul>
