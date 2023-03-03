@@ -25,15 +25,13 @@ If allocation succeeds, returns a pointer to the lowest (first) byte in the allo
 If allocation fails, an exception of type ``Kokkos::Experimental::RawMemoryAllocationFailure`` is thrown.
 
 .. warning::
-    
+
     Calling any function that manipulates the behavior of the memory (e.g. ``memAdvise``) on memory managed by ``Kokkos`` results in undefined behavior.
 
 Description
 -----------
 
 .. cppkokkos:function:: template <class MemorySpace = Kokkos::DefaultExecutionSpace::memory_space> void* kokkos_malloc(const string& label, size_t size);
-
-or
 
 .. cppkokkos:function:: template <class MemorySpace = Kokkos::DefaultExecutionSpace::memory_space> void* kokkos_malloc(size_t size);
 
