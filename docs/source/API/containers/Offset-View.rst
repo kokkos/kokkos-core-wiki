@@ -68,7 +68,7 @@ Note that
 
    OffsetView::end(const size_t i)
 
-returns a value that is not a legal index:  It is exactly one more than the maximum allowable index for the given dimenion i.
+returns a value that is not a legal index:  It is exactly one more than the maximum allowable index for the given dimension i.
 
 Subviews are supported, and the result of taking a subview of an OffsetView is another OffsetView. If ALL() is passed to the subview function, then the offsets for that rank are preserved, otherwise they are dropped.
 
