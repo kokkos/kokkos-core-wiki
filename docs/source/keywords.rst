@@ -306,8 +306,32 @@ Architecture Keywords
       * Optimize for HSW architecture
       * ``OFF``
 
-    * * ``Kokkos_ARCH_INTEL_GEN``
-      * Optimize for Intel GPUs Gen9+
+    * * ``KOKKOS_ARCH_INTEL_GEN``
+      * Optimize for Intel GPUs, JIT
+      * ``OFF``
+
+    * * ``KOKKOS_ARCH_INTEL_DG1``
+      * Optimize for Intel Iris XeMAX GPU
+      * ``OFF``
+
+    * * ``KOKKOS_ARCH_INTEL_GEN9``
+      * Optimize for Intel GPU Gen9
+      * ``OFF``
+
+    * * ``KOKKOS_ARCH_INTEL_GEN11``
+      * Optimize for Intel GPU Gen11
+      * ``OFF``
+
+    * * ``KOKKOS_ARCH_INTEL_GEN12LP``
+      * Optimize for Intel GPU Gen12LP
+      * ``OFF``
+
+    * * ``KOKKOS_ARCH_INTEL_XEHP``
+      * Optimize for Intel GPU Xe-HP
+      * ``OFF``
+
+    * * ``KOKKOS_ARCH_INTEL_PVC``
+      * Optimize for Intel GPU Ponte Vecchio/GPU Max
       * ``OFF``
 
     * * ``Kokkos_ARCH_KEPLER30``
@@ -376,6 +400,10 @@ Architecture Keywords
 
     * * ``Kokkos_ARCH_SNB``
       * Optimize for SNB architecture
+      * ``OFF``
+
+    * * ``Kokkos_ARCH_SPR``
+      * Optimize for Sapphire Rapids architecture
       * ``OFF``
 
     * * ``Kokkos_ARCH_TURING75``
