@@ -17,26 +17,17 @@ Usage
 Create View allocation parameter bundle from argument list. Valid argument list members are:
 
 * label as ``C``-string or ``std::string``
+
 * memory space instance of the ``View::memory_space`` type
+
 * execution space instance able to access ``View::memory_space``
+
 * ``Kokkos::WithoutInitializing`` to bypass initialization
+
 * ``Kokkos::AllowPadding`` to allow allocation to pad dimensions for memory alignment
+
 * a pointer to create an unmanaged View wrapping that pointer
 
-..
-   Synopsis
-   --------
-
-   .. code-block:: cpp
-
-       template <class... Args>
-       /*implementation-detail*/
-       view_alloc(Args const&... args);
-
-       template <class... Args>
-       KOKKOS_FUNCTION
-       /*implementation-detail*/
-       view_wrap(Args const&... args);
 
 Description
 -----------
