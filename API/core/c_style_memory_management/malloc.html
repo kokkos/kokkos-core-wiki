@@ -474,7 +474,7 @@
         </a>
         <div class="content-icon-container">
 <div class="edit-this-page">
-  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/API/core/c_style_memory_management/malloc.md" title="Edit this page">
+  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/API/core/c_style_memory_management/malloc.rst" title="Edit this page">
     <svg aria-hidden="true" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
       <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4"></path>
@@ -498,40 +498,45 @@
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="kokkos-malloc">
+          <section id="kokkos-malloc">
 <h1><code class="docutils literal notranslate"><span class="pre">kokkos_malloc</span></code><a class="headerlink" href="#kokkos-malloc" title="Permalink to this heading">#</a></h1>
 <p>Defined in header <code class="docutils literal notranslate"><span class="pre">&lt;Kokkos_Core.hpp&gt;</span></code></p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">MemorySpace</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">DefaultExecutionSpace</span><span class="o">::</span><span class="n">memory_space</span><span class="o">&gt;</span>
-<span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">kokkos_malloc</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">:</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">label</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">size</span><span class="p">);</span>
-</pre></div>
-</div>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">MemorySpace</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">DefaultExecutionSpace</span><span class="o">::</span><span class="n">memory_space</span><span class="o">&gt;</span>
-<span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">kokkos_malloc</span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">size</span><span class="p">);</span>
-</pre></div>
-</div>
-<p>Allocate <code class="docutils literal notranslate"><span class="pre">size</span></code> bytes of uninitialized storage on the specified memory space <a class="reference internal" href="../memory_spaces.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">MemorySpace</span></code></span></a> plus some extra space for metadata such as the label.</p>
+<p>Allocate <code class="docutils literal notranslate"><span class="pre">size</span></code> bytes of uninitialized storage on the specified memory space <a class="reference external" href="../memory_spaces.html"><code class="docutils literal notranslate"><span class="pre">MemorySpace</span></code></a> plus some extra space for metadata such as the label.</p>
 <p>If allocation succeeds, returns a pointer to the lowest (first) byte in the allocated memory block that is suitably aligned for any scalar type.</p>
 <p>If allocation fails, an exception of type <code class="docutils literal notranslate"><span class="pre">Kokkos::Experimental::RawMemoryAllocationFailure</span></code> is thrown.</p>
-<p>WARNING: calling any function that manipulates the behavior of the memory (e.g. <code class="docutils literal notranslate"><span class="pre">memAdvise</span></code>) on memory managed by <code class="docutils literal notranslate"><span class="pre">Kokkos</span></code> results in undefined behavior.</p>
-<section id="parameters">
-<h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this heading">#</a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">label</span></code>: A user provided string which is used in profiling and debugging tools via the KokkosP Profiling Tools.<br />
-<code class="docutils literal notranslate"><span class="pre">size</span></code>: The number of bytes to allocate.</p>
-</section>
-<section id="template-parameters">
-<h2>Template parameters<a class="headerlink" href="#template-parameters" title="Permalink to this heading">#</a></h2>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">MemorySpace</span></code>:  Controls the storage location. If omitted the memory space of the default execution space is used (i.e. <code class="docutils literal notranslate"><span class="pre">Kokkos::DefaultExecutionSpace::memory_space</span></code>).</p></li>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Calling any function that manipulates the behavior of the memory (e.g. <code class="docutils literal notranslate"><span class="pre">memAdvise</span></code>) on memory managed by <code class="docutils literal notranslate"><span class="pre">Kokkos</span></code> results in undefined behavior.</p>
+</div>
+<section id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this heading">#</a></h2>
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4I0E13kokkos_mallocPvRK6string6size_t">
+<span id="_CPPv3I0E13kokkos_mallocRK6string6size_t"></span><span id="_CPPv2I0E13kokkos_mallocRK6string6size_t"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">MemorySpace</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">Kokkos</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">DefaultExecutionSpace</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">memory_space</span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">kokkos_malloc</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">label</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">size</span></span><span class="sig-paren">)</span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4I0E13kokkos_mallocPvRK6string6size_t" title="Permalink to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4I0E13kokkos_mallocPv6size_t">
+<span id="_CPPv3I0E13kokkos_malloc6size_t"></span><span id="_CPPv2I0E13kokkos_malloc6size_t"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">MemorySpace</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">Kokkos</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">DefaultExecutionSpace</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">memory_space</span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">kokkos_malloc</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">size</span></span><span class="sig-paren">)</span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4I0E13kokkos_mallocPv6size_t" title="Permalink to this definition">#</a><br /></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Template Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>MemorySpace</strong> – Controls the storage location. If omitted the memory space of the default execution space is used (i.e. <code class="docutils literal notranslate"><span class="pre">Kokkos::DefaultExecutionSpace::memory_space</span></code>).</p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>label</strong> – A user provided string which is used in profiling and debugging tools via the KokkosP Profiling Tools.</p></li>
+<li><p><strong>size</strong> – The number of bytes to allocate.</p></li>
 </ul>
-</section>
-<section id="return-value">
-<h2>Return value<a class="headerlink" href="#return-value" title="Permalink to this heading">#</a></h2>
-<p>On success, returns the pointer to the beginning of newly allocated memory.
-To avoid a memory leak, the returned pointer must be deallocated with <a class="reference internal" href="free.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">Kokkos::kokkos_free()</span></code></span></a> or <a class="reference internal" href="realloc.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">Kokkos::realloc()</span></code></span></a>.</p>
-</section>
-<section id="exceptions">
-<h2>Exceptions<a class="headerlink" href="#exceptions" title="Permalink to this heading">#</a></h2>
-<p>On failure, throws <code class="docutils literal notranslate"><span class="pre">Kokkos::Experimental::RawMemoryAllocationFailure</span></code>.</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>On success, returns the pointer to the beginning of newly allocated memory. To avoid a memory leak, the returned pointer must be deallocated with <a class="reference external" href="free.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::kokkos_free()</span></code></a> or <a class="reference external" href="realloc.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::realloc()</span></code></a>.</p>
+</dd>
+<dt class="field-even">Throws<span class="colon">:</span></dt>
+<dd class="field-even"><p>On failure, throws <code class="docutils literal notranslate"><span class="pre">Kokkos::Experimental::RawMemoryAllocationFailure</span></code>.</p>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
 </section>
 
@@ -593,10 +598,7 @@ To avoid a memory leak, the returned pointer must be deallocated with <a class="
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">kokkos_malloc</span></code></a><ul>
-<li><a class="reference internal" href="#parameters">Parameters</a></li>
-<li><a class="reference internal" href="#template-parameters">Template parameters</a></li>
-<li><a class="reference internal" href="#return-value">Return value</a></li>
-<li><a class="reference internal" href="#exceptions">Exceptions</a></li>
+<li><a class="reference internal" href="#description">Description</a></li>
 </ul>
 </li>
 </ul>
