@@ -4,9 +4,10 @@
 .. role:: cppkokkos(code)
    :language: cppkokkos
 
-Header File: ``Kokkos_Layout.hpp``
+Header File: ``<Kokkos_Layout.hpp>``
 
-Usage:
+Usage
+-----
 
 .. code-block:: cpp
 
@@ -17,25 +18,25 @@ Synopsis
 
 .. code-block:: cpp
 
-   struct LayoutLeft {
+    struct LayoutLeft {
 
-   typedef LayoutLeft array_layout;
+    typedef LayoutLeft array_layout;
 
-   size_t dimension[ARRAY_LAYOUT_MAX_RANK];
+    size_t dimension[ARRAY_LAYOUT_MAX_RANK];
 
-   enum { is_extent_constructible = true };
+    enum { is_extent_constructible = true };
 
-   LayoutLeft(LayoutLeft const&) = default;
-   LayoutLeft(LayoutLeft&&)      = default;
-   LayoutLeft& operator=(LayoutLeft const&) = default;
-   LayoutLeft& operator=(LayoutLeft&&) = default;
+    LayoutLeft(LayoutLeft const&) = default;
+    LayoutLeft(LayoutLeft&&)      = default;
+    LayoutLeft& operator=(LayoutLeft const&) = default;
+    LayoutLeft& operator=(LayoutLeft&&) = default;
 
-   KOKKOS_INLINE_FUNCTION
-   explicit constexpr LayoutLeft(size_t N0 = 0, size_t N1 = 0, size_t N2 = 0,
-                               size_t N3 = 0, size_t N4 = 0, size_t N5 = 0,
-                               size_t N6 = 0, size_t N7 = 0)
-     : dimension{N0, N1, N2, N3, N4, N5, N6, N7} {}
-   };
+    KOKKOS_INLINE_FUNCTION
+    explicit constexpr LayoutLeft(size_t N0 = 0, size_t N1 = 0, size_t N2 = 0,
+                                  size_t N3 = 0, size_t N4 = 0, size_t N5 = 0,
+                                  size_t N6 = 0, size_t N7 = 0)
+        : dimension{N0, N1, N2, N3, N4, N5, N6, N7} {}
+    };
 
 
 Class Interface
@@ -43,45 +44,50 @@ Class Interface
 
 .. cppkokkos:class:: LayoutLeft
 
-  This Kokkos Layout, when provided to a multidimensional View, lays out memory such that the first index is the contiguous one. This matches the Fortran conventions for allocations.
+    This Kokkos Layout, when provided to a multidimensional View, lays out memory such that the first index is the contiguous one. This matches the Fortran conventions for allocations.
 
-  .. rubric:: Public Member Variables
+    .. rubric:: Public Member Variables
 
-  .. cppkokkos:member:: static constexpr bool is_extent_constructible
+    .. cppkokkos:member:: static constexpr bool is_extent_constructible;
 
-    A boolean enum to allow detection that this class is extent constructible
+        A boolean enum to allow detection that this class is extent constructible.
 
-  .. cppkokkos:member:: static constexpr unsigned dimension
+    .. cppkokkos:member:: static constexpr unsigned dimension;
 
-    An array containing the size of each dimension of the Layout
+        An array containing the size of each dimension of the Layout.
 
-  .. rubric:: Other Types
+    .. rubric:: Other Types
 
-  .. cppkokkos:type:: array_layout
+    .. cppkokkos:type:: array_layout
 
-    A tag signifying that this models the Layout concept
+        A tag signifying that this models the Layout concept.
 
-  .. rubric:: Constructors
+    .. rubric:: Constructors
 
-  .. cppkokkos:function:: LayoutLeft(LayoutLeft const&)
+    .. cppkokkos:function:: LayoutLeft(LayoutLeft const&)
 
-    Default copy constructor, element-wise copies the other Layout
+        Default copy constructor, element-wise copies the other Layout.
 
-  .. cppkokkos:function:: LayoutLeft(LayoutLeft&&)
+    .. cppkokkos:function:: LayoutLeft(LayoutLeft&&)
 
-    Default move constructor, element-wise moves the other Layout
+        Default move constructor, element-wise moves the other Layout.
 
-  .. cppkokkos:kokkosinlinefunction:: explicit constexpr LayoutLeft(size_t N0 = 0, size_t N1 = 0, size_t N2 = 0, size_t N3 = 0, size_t N4 = 0, size_t N5 = 0, size_t N6 = 0, size_t N7 = 0);
+    .. code-block:: cpp
 
-  Constructor that takes in up to 8 sizes, to set the sizes of the corresponding dimensions of the Layout
+        KOKKOS_INLINE_FUNCTION
+        explicit constexpr LayoutLeft(size_t N0 = 0, size_t N1 = 0, size_t N2 = 0,
+                                      size_t N3 = 0, size_t N4 = 0, size_t N5 = 0,
+                                      size_t N6 = 0, size_t N7 = 0);
 
-  .. rubric:: Assignment operators
+    \
+        Constructor that takes in up to 8 sizes, to set the sizes of the corresponding dimensions of the Layout.
 
-  .. cppkokkos:function:: LayoutLeft& operator=(LayoutLeft const&) = default
+    .. rubric:: Assignment operators
 
-    Default copy assignment, element-wise copies the other Layout
+    .. cppkokkos:function:: LayoutLeft& operator=(LayoutLeft const&) = default;
 
-  .. cppkokkos:function:: LayoutLeft& operator=(LayoutLeft&&) = default
+        Default copy assignment, element-wise copies the other Layout.
 
-    Default move assignment, element-wise moves the other Layout
+    .. cppkokkos:function:: LayoutLeft& operator=(LayoutLeft&&) = default;
 
+        Default move assignment, element-wise moves the other Layout.
