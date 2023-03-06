@@ -474,7 +474,7 @@
         </a>
         <div class="content-icon-container">
 <div class="edit-this-page">
-  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/API/algorithms/std-algorithms/Iterators.md" title="Edit this page">
+  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/API/algorithms/std-algorithms/Iterators.rst" title="Edit this page">
     <svg aria-hidden="true" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
       <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4"></path>
@@ -498,38 +498,41 @@
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="iterators">
+          <section id="iterators">
 <h1>Iterators<a class="headerlink" href="#iterators" title="Permalink to this heading">#</a></h1>
 <section id="kokkos-experimental-begin-cbegin-end-cend">
 <h2><code class="docutils literal notranslate"><span class="pre">Kokkos::Experimental::{begin,</span> <span class="pre">cbegin,</span> <span class="pre">end,</span> <span class="pre">cend}</span></code><a class="headerlink" href="#kokkos-experimental-begin-cbegin-end-cend" title="Permalink to this heading">#</a></h2>
-<p>Header File: <code class="docutils literal notranslate"><span class="pre">Kokkos_StdAlgorithms.hpp</span></code></p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">DataType</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="p">...</span><span class="w"> </span><span class="n">Properties</span><span class="o">&gt;</span>
-<span class="n">KOKKOS_INLINE_FUNCTION</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">begin</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">View</span><span class="o">&lt;</span><span class="n">DataType</span><span class="p">,</span><span class="w"> </span><span class="n">Properties</span><span class="p">...</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">view</span><span class="p">);</span><span class="w">  </span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<p>Header File: <code class="docutils literal notranslate"><span class="pre">&lt;Kokkos_StdAlgorithms.hpp&gt;</span></code></p>
+<dl class="cppkokkos kokkosinlinefunction">
+<dt class="sig sig-object cppkokkos" id="_CPPv4I0DpE5beginDaRKN6Kokkos4ViewI8DataTypeDp10PropertiesEE">
+<span id="_CPPv3I0DpE5beginRKN6Kokkos4ViewI8DataTypeDp10PropertiesEE"></span><span id="_CPPv2I0DpE5beginRKN6Kokkos4ViewI8DataTypeDp10PropertiesEE"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">DataType</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="sig-name descname"><span class="n"><span class="pre">Properties</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="k"><span class="pre">KOKKOS_INLINE_FUNCTION</span></span><span class="w"> </span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">begin</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">Kokkos</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">View</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0DpE5beginDaRKN6Kokkos4ViewI8DataTypeDp10PropertiesEE" title="begin::DataType"><span class="n"><span class="pre">DataType</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0DpE5beginDaRKN6Kokkos4ViewI8DataTypeDp10PropertiesEE" title="begin::Properties"><span class="n"><span class="pre">Properties</span></span></a><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">view</span></span><span class="sig-paren">)</span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4I0DpE5beginDaRKN6Kokkos4ViewI8DataTypeDp10PropertiesEE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Returns a Kokkos <strong>random access</strong> iterator to the beginning of <code class="docutils literal notranslate"><span class="pre">view</span></code></p>
+</dd></dl>
 
-<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">DataType</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="p">...</span><span class="w"> </span><span class="n">Properties</span><span class="o">&gt;</span>
-<span class="n">KOKKOS_INLINE_FUNCTION</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">cbegin</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">View</span><span class="o">&lt;</span><span class="n">DataType</span><span class="p">,</span><span class="w"> </span><span class="n">Properties</span><span class="p">...</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">view</span><span class="p">);</span><span class="w"> </span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<dl class="cppkokkos kokkosinlinefunction">
+<dt class="sig sig-object cppkokkos" id="_CPPv4I0DpE6cbeginDaRKN6Kokkos4ViewI8DataTypeDp10PropertiesEE">
+<span id="_CPPv3I0DpE6cbeginRKN6Kokkos4ViewI8DataTypeDp10PropertiesEE"></span><span id="_CPPv2I0DpE6cbeginRKN6Kokkos4ViewI8DataTypeDp10PropertiesEE"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">DataType</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="sig-name descname"><span class="n"><span class="pre">Properties</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="k"><span class="pre">KOKKOS_INLINE_FUNCTION</span></span><span class="w"> </span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cbegin</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">Kokkos</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">View</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0DpE6cbeginDaRKN6Kokkos4ViewI8DataTypeDp10PropertiesEE" title="cbegin::DataType"><span class="n"><span class="pre">DataType</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0DpE6cbeginDaRKN6Kokkos4ViewI8DataTypeDp10PropertiesEE" title="cbegin::Properties"><span class="n"><span class="pre">Properties</span></span></a><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">view</span></span><span class="sig-paren">)</span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4I0DpE6cbeginDaRKN6Kokkos4ViewI8DataTypeDp10PropertiesEE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Returns a Kokkos const-qualified <strong>random access</strong> iterator to the beginning of <code class="docutils literal notranslate"><span class="pre">view</span></code></p>
+</dd></dl>
 
-<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">DataType</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="p">...</span><span class="w"> </span><span class="n">Properties</span><span class="o">&gt;</span>
-<span class="n">KOKKOS_INLINE_FUNCTION</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">end</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">View</span><span class="o">&lt;</span><span class="n">DataType</span><span class="p">,</span><span class="w"> </span><span class="n">Properties</span><span class="p">...</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">view</span><span class="p">);</span><span class="w">    </span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<dl class="cppkokkos kokkosinlinefunction">
+<dt class="sig sig-object cppkokkos" id="_CPPv4I0DpE3endDaRKN6Kokkos4ViewI8DataTypeDp10PropertiesEE">
+<span id="_CPPv3I0DpE3endRKN6Kokkos4ViewI8DataTypeDp10PropertiesEE"></span><span id="_CPPv2I0DpE3endRKN6Kokkos4ViewI8DataTypeDp10PropertiesEE"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">DataType</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="sig-name descname"><span class="n"><span class="pre">Properties</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="k"><span class="pre">KOKKOS_INLINE_FUNCTION</span></span><span class="w"> </span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">end</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">Kokkos</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">View</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0DpE3endDaRKN6Kokkos4ViewI8DataTypeDp10PropertiesEE" title="end::DataType"><span class="n"><span class="pre">DataType</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0DpE3endDaRKN6Kokkos4ViewI8DataTypeDp10PropertiesEE" title="end::Properties"><span class="n"><span class="pre">Properties</span></span></a><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">view</span></span><span class="sig-paren">)</span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4I0DpE3endDaRKN6Kokkos4ViewI8DataTypeDp10PropertiesEE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Returns a Kokkos <strong>random access</strong> iterator to the element past the end of <code class="docutils literal notranslate"><span class="pre">view</span></code></p>
+</dd></dl>
 
-<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">DataType</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="p">...</span><span class="w"> </span><span class="n">Properties</span><span class="o">&gt;</span>
-<span class="n">KOKKOS_INLINE_FUNCTION</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">cend</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">View</span><span class="o">&lt;</span><span class="n">DataType</span><span class="p">,</span><span class="w"> </span><span class="n">Properties</span><span class="p">...</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">view</span><span class="p">);</span><span class="w">   </span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
-</pre></div>
-</div>
-<section id="description">
-<h3>Description<a class="headerlink" href="#description" title="Permalink to this heading">#</a></h3>
-<ul class="simple">
-<li><p>(1,2) return a Kokkos <strong>random access</strong> iterator to the beginning of <code class="docutils literal notranslate"><span class="pre">view</span></code></p></li>
-<li><p>(3,4) return a Kokkos <strong>random access</strong> iterator to the element past the end of <code class="docutils literal notranslate"><span class="pre">view</span></code></p></li>
-</ul>
-</section>
+<dl class="cppkokkos kokkosinlinefunction">
+<dt class="sig sig-object cppkokkos" id="_CPPv4I0DpE4cendDaRKN6Kokkos4ViewI8DataTypeDp10PropertiesEE">
+<span id="_CPPv3I0DpE4cendRKN6Kokkos4ViewI8DataTypeDp10PropertiesEE"></span><span id="_CPPv2I0DpE4cendRKN6Kokkos4ViewI8DataTypeDp10PropertiesEE"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">DataType</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="sig-name descname"><span class="n"><span class="pre">Properties</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="k"><span class="pre">KOKKOS_INLINE_FUNCTION</span></span><span class="w"> </span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cend</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">Kokkos</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">View</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0DpE4cendDaRKN6Kokkos4ViewI8DataTypeDp10PropertiesEE" title="cend::DataType"><span class="n"><span class="pre">DataType</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0DpE4cendDaRKN6Kokkos4ViewI8DataTypeDp10PropertiesEE" title="cend::Properties"><span class="n"><span class="pre">Properties</span></span></a><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">view</span></span><span class="sig-paren">)</span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4I0DpE4cendDaRKN6Kokkos4ViewI8DataTypeDp10PropertiesEE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Returns a const-qualified Kokkos <strong>random access</strong> iterator to the element past the end of <code class="docutils literal notranslate"><span class="pre">view</span></code></p>
+</dd></dl>
+
 <section id="notes">
 <h3>Notes<a class="headerlink" href="#notes" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>the returned iterator is a <strong>random access</strong> for performance reasons</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">view</span></code> is taken as <code class="docutils literal notranslate"><span class="pre">const</span></code> because, within each function, we are not changing the view itself: the returned iterator operates on the view without changing its structure.</p></li>
 <li><p>dereferencing an iterator must be done within an execution space where <code class="docutils literal notranslate"><span class="pre">view</span></code> is accessible</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">cbegin,</span> <span class="pre">cend</span></code> ensure that the dereferenced iterator is const-qualified</p></li>
 </ul>
 </section>
 <section id="parameters-and-requirements">
@@ -556,19 +559,16 @@
 <hr class="docutils" />
 <section id="kokkos-experimental-distance">
 <h2><code class="docutils literal notranslate"><span class="pre">Kokkos::Experimental::distance</span></code><a class="headerlink" href="#kokkos-experimental-distance" title="Permalink to this heading">#</a></h2>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">IteratorType</span><span class="o">&gt;</span>
-<span class="n">KOKKOS_INLINE_FUNCTION</span>
-<span class="k">constexpr</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="nc">IteratorType</span><span class="o">::</span><span class="n">difference_type</span><span class="w"> </span><span class="n">distance</span><span class="p">(</span><span class="n">IteratorType</span><span class="w"> </span><span class="n">first</span><span class="p">,</span><span class="w"> </span><span class="n">IteratorType</span><span class="w"> </span><span class="n">last</span><span class="p">);</span>
-</pre></div>
-</div>
+<dl class="cppkokkos kokkosinlinefunction">
+<dt class="sig sig-object cppkokkos" id="_CPPv4I0E8distanceN12IteratorType15difference_typeE12IteratorType12IteratorType">
+<span id="_CPPv3I0E8distance12IteratorType12IteratorType"></span><span id="_CPPv2I0E8distance12IteratorType12IteratorType"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">IteratorType</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="k"><span class="pre">KOKKOS_INLINE_FUNCTION</span></span><span class="w"> </span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E8distanceN12IteratorType15difference_typeE12IteratorType12IteratorType" title="distance::IteratorType"><span class="n"><span class="pre">IteratorType</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">difference_type</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">distance</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0E8distanceN12IteratorType15difference_typeE12IteratorType12IteratorType" title="distance::IteratorType"><span class="n"><span class="pre">IteratorType</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">first</span></span>, <a class="reference internal" href="#_CPPv4I0E8distanceN12IteratorType15difference_typeE12IteratorType12IteratorType" title="distance::IteratorType"><span class="n"><span class="pre">IteratorType</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">last</span></span><span class="sig-paren">)</span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4I0E8distanceN12IteratorType15difference_typeE12IteratorType12IteratorType" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Returns the number of steps needed to go from <code class="docutils literal notranslate"><span class="pre">first</span></code> to <code class="docutils literal notranslate"><span class="pre">last</span></code>.</p>
+</dd></dl>
+
 <section id="id1">
-<h3>Description<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
-<p>Returns the number of steps needed to go from <code class="docutils literal notranslate"><span class="pre">first</span></code> to <code class="docutils literal notranslate"><span class="pre">last</span></code>.</p>
-</section>
-<section id="id2">
-<h3>Parameters and Requirements<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h3>
+<h3>Parameters and Requirements<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">first,</span> <span class="pre">last</span></code>: range to calculate distance of</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">first,</span> <span class="pre">last</span></code>: range to calculate the distance of</p></li>
 </ul>
 </section>
 <section id="return">
@@ -576,8 +576,8 @@
 <p>The number of steps needed to go from <code class="docutils literal notranslate"><span class="pre">first</span></code> to <code class="docutils literal notranslate"><span class="pre">last</span></code>.
 The value may be negative if random-access iterators are used.</p>
 </section>
-<section id="id3">
-<h3>Example<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h3>
+<section id="id2">
+<h3>Example<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h3>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">namespace</span><span class="w"> </span><span class="nn">KE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nn">Kokkos</span><span class="o">::</span><span class="nn">Experimental</span><span class="p">;</span>
 <span class="n">Kokkos</span><span class="o">::</span><span class="n">View</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">*&gt;</span><span class="w"> </span><span class="n">a</span><span class="p">(</span><span class="s">&quot;a&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">13</span><span class="p">);</span>
 
@@ -595,32 +595,28 @@ The value may be negative if random-access iterators are used.</p>
 <hr class="docutils" />
 <section id="kokkos-experimental-iter-swap">
 <h2><code class="docutils literal notranslate"><span class="pre">Kokkos::Experimental::iter_swap</span></code><a class="headerlink" href="#kokkos-experimental-iter-swap" title="Permalink to this heading">#</a></h2>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">IteratorType</span><span class="o">&gt;</span>
-<span class="kt">void</span><span class="w"> </span><span class="n">iter_swap</span><span class="p">(</span><span class="n">IteratorType</span><span class="w"> </span><span class="n">first</span><span class="p">,</span><span class="w"> </span><span class="n">IteratorType</span><span class="w"> </span><span class="n">last</span><span class="p">);</span>
-</pre></div>
-</div>
-<section id="id4">
-<h3>Description<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
-<p>Swaps the values of the elements the given iterators are pointing to.</p>
-</section>
-<section id="id5">
-<h3>Parameters and Requirements<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h3>
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4I0E9iter_swapv12IteratorType12IteratorType">
+<span id="_CPPv3I0E9iter_swap12IteratorType12IteratorType"></span><span id="_CPPv2I0E9iter_swap12IteratorType12IteratorType"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">IteratorType</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">iter_swap</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0E9iter_swapv12IteratorType12IteratorType" title="iter_swap::IteratorType"><span class="n"><span class="pre">IteratorType</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">first</span></span>, <a class="reference internal" href="#_CPPv4I0E9iter_swapv12IteratorType12IteratorType" title="iter_swap::IteratorType"><span class="n"><span class="pre">IteratorType</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">last</span></span><span class="sig-paren">)</span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4I0E9iter_swapv12IteratorType12IteratorType" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Swaps the values of the elements the given iterators are pointing to.</p>
+</dd></dl>
+
+<section id="id3">
+<h3>Parameters and Requirements<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">first,</span> <span class="pre">last</span></code>: iterators to swap</p></li>
 </ul>
 </section>
-<section id="id6">
-<h3>Notes<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h3>
-<p>Currently, the API does not have an execution space parameter because
-the operation is performed in the <em>default execution space</em>.
-The operation fences the default execution space.</p>
+<section id="id4">
+<h3>Notes<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
+<p>Currently, the API does not have an execution space parameter because the operation is performed in the <em>default execution space</em>. The operation fences the default execution space.</p>
 </section>
-<section id="id7">
-<h3>Return<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h3>
+<section id="id5">
+<h3>Return<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h3>
 <p>None</p>
 </section>
-<section id="id8">
-<h3>Example<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h3>
+<section id="id6">
+<h3>Example<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h3>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">namespace</span><span class="w"> </span><span class="nn">KE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nn">Kokkos</span><span class="o">::</span><span class="nn">Experimental</span><span class="p">;</span>
 <span class="n">Kokkos</span><span class="o">::</span><span class="n">View</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">*&gt;</span><span class="w"> </span><span class="n">a</span><span class="p">(</span><span class="s">&quot;a&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">13</span><span class="p">);</span>
 
@@ -692,25 +688,22 @@ The operation fences the default execution space.</p>
             <ul>
 <li><a class="reference internal" href="#">Iterators</a><ul>
 <li><a class="reference internal" href="#kokkos-experimental-begin-cbegin-end-cend"><code class="docutils literal notranslate"><span class="pre">Kokkos::Experimental::{begin,</span> <span class="pre">cbegin,</span> <span class="pre">end,</span> <span class="pre">cend}</span></code></a><ul>
-<li><a class="reference internal" href="#description">Description</a></li>
 <li><a class="reference internal" href="#notes">Notes</a></li>
 <li><a class="reference internal" href="#parameters-and-requirements">Parameters and Requirements</a></li>
 <li><a class="reference internal" href="#example">Example</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#kokkos-experimental-distance"><code class="docutils literal notranslate"><span class="pre">Kokkos::Experimental::distance</span></code></a><ul>
-<li><a class="reference internal" href="#id1">Description</a></li>
-<li><a class="reference internal" href="#id2">Parameters and Requirements</a></li>
+<li><a class="reference internal" href="#id1">Parameters and Requirements</a></li>
 <li><a class="reference internal" href="#return">Return</a></li>
-<li><a class="reference internal" href="#id3">Example</a></li>
+<li><a class="reference internal" href="#id2">Example</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#kokkos-experimental-iter-swap"><code class="docutils literal notranslate"><span class="pre">Kokkos::Experimental::iter_swap</span></code></a><ul>
-<li><a class="reference internal" href="#id4">Description</a></li>
-<li><a class="reference internal" href="#id5">Parameters and Requirements</a></li>
-<li><a class="reference internal" href="#id6">Notes</a></li>
-<li><a class="reference internal" href="#id7">Return</a></li>
-<li><a class="reference internal" href="#id8">Example</a></li>
+<li><a class="reference internal" href="#id3">Parameters and Requirements</a></li>
+<li><a class="reference internal" href="#id4">Notes</a></li>
+<li><a class="reference internal" href="#id5">Return</a></li>
+<li><a class="reference internal" href="#id6">Example</a></li>
 </ul>
 </li>
 </ul>
