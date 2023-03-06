@@ -1,16 +1,13 @@
 Iterators
 =========
 
-.. role:: cppkokkos(code)
-    :language: cppkokkos
-
 ``Kokkos::Experimental::{begin, cbegin, end, cend}``
 ----------------------------------------------------
 
 Header File: ``<Kokkos_StdAlgorithms.hpp>``
 
 .. code-block:: cpp
-        
+
     template <class DataType, class... Properties>
     KOKKOS_INLINE_FUNCTION auto begin(const Kokkos::View<DataType, Properties...>& view);  (1)
 
@@ -50,7 +47,7 @@ Example
 ~~~~~~~
 
 .. code-block:: cpp
-        
+
     namespace KE = Kokkos::Experimental;
     using view_type = Kokkos::View<int*>;
     view_type a("a", 15);
@@ -66,7 +63,11 @@ Example
 ``Kokkos::Experimental::distance``
 ----------------------------------
 
-.. cppkokkos:kokkosinlinefunction:: template <class IteratorType> constexpr typename IteratorType::difference_type distance(IteratorType first, IteratorType last);
+.. code-block:: cpp
+
+   template <class IteratorType>
+   KOKKOS_INLINE_FUNCTION
+   constexpr typename IteratorType::difference_type distance(IteratorType first, IteratorType last);
 
 Description
 ~~~~~~~~~~~
@@ -84,11 +85,12 @@ Return
 The number of steps needed to go from ``first`` to ``last``.
 The value may be negative if random-access iterators are used.
 
+
 Example
 ~~~~~~~
 
 .. code-block:: cpp
-        
+
     namespace KE = Kokkos::Experimental;
     Kokkos::View<double*> a("a", 13);
 
@@ -105,7 +107,11 @@ Example
 ``Kokkos::Experimental::iter_swap``
 -----------------------------------
 
-.. cppkokkos:function:: template <class IteratorType> void iter_swap(IteratorType first, IteratorType last);
+.. code-block:: cpp
+
+   template <class IteratorType>
+   KOKKOS_INLINE_FUNCTION
+   void iter_swap(IteratorType first, IteratorType last);
 
 Description
 ~~~~~~~~~~~
@@ -131,7 +137,7 @@ Example
 ~~~~~~~
 
 .. code-block:: cpp
-        
+
     namespace KE = Kokkos::Experimental;
     Kokkos::View<double*> a("a", 13);
 
