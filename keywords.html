@@ -839,7 +839,31 @@
 <td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_INTEL_GEN</span></code></p></td>
-<td><p>Optimize for Intel GPUs Gen9+</p></td>
+<td><p>Optimize for Intel GPUs, Just-In-Time compilation*</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_INTEL_DG1</span></code></p></td>
+<td><p>Optimize for Intel Iris XeMAX GPU</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_INTEL_GEN9</span></code></p></td>
+<td><p>Optimize for Intel GPU Gen9</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_INTEL_GEN11</span></code></p></td>
+<td><p>Optimize for Intel GPU Gen11</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_INTEL_GEN12LP</span></code></p></td>
+<td><p>Optimize for Intel GPU Gen12LP</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_INTEL_XEHP</span></code></p></td>
+<td><p>Optimize for Intel GPU Xe-HP</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_INTEL_PVC</span></code></p></td>
+<td><p>Optimize for Intel GPU Ponte Vecchio/GPU Max</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_KEPLER30</span></code></p></td>
@@ -910,53 +934,62 @@
 <td><p>Optimize for SNB architecture</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_TURING75</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_SPR</span></code></p></td>
+<td><p>Optimize for Sapphire Rapids architecture</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_TURING75</span></code></p></td>
 <td><p>Optimize for TURING75 architecture</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_VEGA900</span></code> <span class="red">[Removed in 4.0]</span></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_VEGA900</span></code> <span class="red">[Removed in 4.0]</span></p></td>
 <td><p>Optimize for AMD GPU MI25 GFX900</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_VEGA906</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_VEGA906</span></code></p></td>
 <td><p>Optimize for AMD GPU MI50/MI60 GFX906</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_VEGA908</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_VEGA908</span></code></p></td>
 <td><p>Optimize for AMD GPU MI100 GFX908</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_VEGA90A</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_VEGA90A</span></code></p></td>
 <td><p>Optimize for AMD GPU MI200 series GFX90A</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_VOLTA70</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_VOLTA70</span></code></p></td>
 <td><p>Optimize for VOLTA70 architecture</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_VOLTA72</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_VOLTA72</span></code></p></td>
 <td><p>Optimize for VOLTA72 architecture</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_WSM</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_WSM</span></code></p></td>
 <td><p>Optimize for WSM architecture</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_ZEN</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_ZEN</span></code></p></td>
 <td><p>Optimize for Zen architecture</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_ZEN2</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_ZEN2</span></code></p></td>
 <td><p>Optimize for Zen2 architecture</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_ZEN3</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_ZEN3</span></code></p></td>
 <td><p>Optimize for Zen3 architecture</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
 </tr>
 </tbody>
 </table>
 </div>
+<p><a href="#id1"><span class="problematic" id="id2">*</span></a>) <code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_INTEL_GEN</span></code> enables Just-In-Time compilation for Intel GPUs whereas all the other flags for Intel compilers
+request Ahead-Of-Time compilation. Just-In-Time compilation means that the compiler is invoked again when the binaries created
+are actually executed and only at that point the architecture to compile for is determined. On the other hand, Ahead-Of-Time
+compilation describes the standard model where the compiler is only invoked once to create the binary and the architecture to
+compile for is determined before the program is run.</p>
 </section>
 </section>
 
