@@ -4,35 +4,40 @@ Random-Number
 .. role:: cppkokkos(code)
     :language: cppkokkos
 
-Headers: Kokkos_Core.hpp, Kokkos_Complex.hpp
---------------------------------------------
+Rand
+----
 
-``template<class Generator>``
-``struct rand<Generator, gen_data_type>``
-
-.. code-block:: cpp
-
-    KOKKOS_INLINE_FUNCTION
-    static gen_func_type max() {return type_value}
+Header Files: ``<Kokkos_core.hpp>``, ``<Kokkos_Complex.hpp>``
 
 .. code-block:: cpp
 
-    KOKKOS_INLINE_FUNCTION
-    static gen_func_type draw(Generator& gen) {return gen_data_type((gen.rand()&gen_return_value)}
+   template<class Generator>
+   struct rand<Generator, gen_data_type>
+   {
+     KOKKOS_INLINE_FUNCTION
+     static gen_func_type max(){
+       return type_value;
+     }
 
-.. code-block:: cpp
+     KOKKOS_INLINE_FUNCTION
+     static gen_func_type draw(Generator& gen){
+       return gen_data_type((gen.rand()&gen_return_value)
+     }
 
-    KOKKOS_INLINE_FUNCTION
-    static gen_func_type draw(Generator& gen, const gen_data_type& range) {return gen_data_type((gen.rand(range));}
+     KOKKOS_INLINE_FUNCTION
+     static gen_func_type draw(Generator& gen,
+                               const gen_data_type& range){
+       return gen_data_type((gen.rand(range));
+     }
 
-.. code-block:: cpp
+     KOKKOS_INLINE_FUNCTION
+     static gen_func_type draw(Generator& gen,
+                               const gen_data_type& start,
+			       const gen_data_type& end){
+       return gen_data_type(gen.rand(start,end));
+     }
 
-    KOKKOS_INLINE_FUNCTION
-    static gen_func_type draw(Generator& gen, const gen_data_type& start, const gen_data_type& end)
-        {return gen_data_type(gen.rand(start,end));}
-
-Function specializations for _gen_data_type_, _gen_func_type_ and _type_value_
-
+Function specializations for ``gen_data_type``, ``gen_func_type`` and ``type_value``.
 All functions and classes listed here are part of the ``Kokkos::`` namespace.
 
 +-------------------+-------------------+---------------------------+-----------------------+
@@ -89,19 +94,20 @@ to **CuRAND**, none of the functions of the pool (or the generator)
 are collectives, i.e. all functions can be called inside conditionals.
 
 .. code-block:: cpp
- 
+
     template<class Device>
     class Pool {
-        public:
-        typedef Device Device_Type;
-        typedef Generator<Device> Generator_Type;
+      public:
 
-        Pool();
-        Pool(RanNum_type seed);
+      typedef Device Device_Type;
+      typedef Generator<Device> Generator_Type;
 
-        void init(RanNum_type seed, int num_states);
-        Generator_Type get_state();
-        void free_state(Generator_Type Gen);
+      Pool();
+      Pool(RanNum_type seed);
+
+      void init(RanNum_type seed, int num_states);
+      Generator_Type get_state();
+      void free_state(Generator_Type Gen);
     }
 
 A Pool of Generators are intialized using a starting seed and establishing
@@ -122,32 +128,32 @@ numbers, of the desired type, using the generator.
 
     template<class Device>
     class Generator {
-        public:
+      public:
 
-    typedef DeviceType device_type;
+      typedef DeviceType device_type;
 
-    //Max return values of respective [X]rand[S]() functions (XorShift).
-    enum {MAX_URAND = 0xffffffffU};
-    enum {MAX_URAND64 = 0xffffffffffffffffULL-1};
-    enum {MAX_RAND = static_cast<int>(0xffffffffU/2)};
-    enum {MAX_RAND64 = static_cast<int64_t>(0xffffffffffffffffULL/2-1)};
+      //Max return values of respective [X]rand[S]() functions (XorShift).
+      enum {MAX_URAND = 0xffffffffU};
+      enum {MAX_URAND64 = 0xffffffffffffffffULL-1};
+      enum {MAX_RAND = static_cast<int>(0xffffffffU/2)};
+      enum {MAX_RAND64 = static_cast<int64_t>(0xffffffffffffffffULL/2-1)};
 
-    //Init with a state and the idx with respect to pool. Note: in serial the
-    //Generator can be used by just giving it the necessary state arguments
-    KOKKOS_INLINE_FUNCTION
-    Generator (STATE_ARGUMENTS, int state_idx = 0);
+      //Init with a state and the idx with respect to pool. Note: in serial the
+      //Generator can be used by just giving it the necessary state arguments
+      KOKKOS_INLINE_FUNCTION
+      Generator (STATE_ARGUMENTS, int state_idx = 0);
 
-    //Draw a equidistributed uint32_t in the range [0,MAX_URAND)
-    KOKKOS_INLINE_FUNCTION
-    uint32_t urand();
+      //Draw a equidistributed uint32_t in the range [0,MAX_URAND)
+      KOKKOS_INLINE_FUNCTION
+      uint32_t urand();
 
-    //Draw a equidistributed uint32_t in the range [0,range)
-    KOKKOS_INLINE_FUNCTION
-    uint32_t urand(const uint32_t& range);
+      //Draw a equidistributed uint32_t in the range [0,range)
+      KOKKOS_INLINE_FUNCTION
+      uint32_t urand(const uint32_t& range);
 
-    //Draw a equidistributed uint32_t in the range [start,end)
-    KOKKOS_INLINE_FUNCTION
-    uint32_t urand(const uint32_t& start, const uint32_t& end );
+      //Draw a equidistributed uint32_t in the range [start,end)
+      KOKKOS_INLINE_FUNCTION
+      uint32_t urand(const uint32_t& start, const uint32_t& end );
     }
 
 For the selected 32-bit unsigned integer type, three range options are shown: [0,MAX_URAND), [0,range) and [start,end).
@@ -159,7 +165,7 @@ Example
 -------
 
 .. code-block:: cpp
-        
+
     #include <Kokkos_Core.hpp>
     #include <Kokkos_Random.hpp>
 
