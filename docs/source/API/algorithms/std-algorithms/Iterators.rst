@@ -1,31 +1,30 @@
 Iterators
 =========
 
+.. role:: cppkokkos(code)
+    :language: cppkokkos
+
 ``Kokkos::Experimental::{begin, cbegin, end, cend}``
 ----------------------------------------------------
 
 Header File: ``<Kokkos_StdAlgorithms.hpp>``
 
-.. code-block:: cpp
 
-    template <class DataType, class... Properties>
-    KOKKOS_INLINE_FUNCTION auto begin(const Kokkos::View<DataType, Properties...>& view);  (1)
+.. cppkokkos:kokkosinlinefunction:: template <class DataType, class... Properties> auto begin(const Kokkos::View<DataType, Properties...>& view);
 
-    template <class DataType, class... Properties>
-    KOKKOS_INLINE_FUNCTION auto cbegin(const Kokkos::View<DataType, Properties...>& view); (2)
+   Returns a Kokkos **random access** iterator to the beginning of ``view``
 
-    template <class DataType, class... Properties>
-    KOKKOS_INLINE_FUNCTION auto end(const Kokkos::View<DataType, Properties...>& view);    (3)
+.. cppkokkos:kokkosinlinefunction:: template <class DataType, class... Properties> auto cbegin(const Kokkos::View<DataType, Properties...>& view);
 
-    template <class DataType, class... Properties>
-    KOKKOS_INLINE_FUNCTION auto cend(const Kokkos::View<DataType, Properties...>& view);   (4)
+   Returns a Kokkos const-qualified **random access** iterator to the beginning of ``view``
 
-Description
-~~~~~~~~~~~
+.. cppkokkos:kokkosinlinefunction:: template <class DataType, class... Properties> auto end(const Kokkos::View<DataType, Properties...>& view);
 
-* (1,2) return a Kokkos **random access** iterator to the beginning of ``view``
+   Returns a Kokkos **random access** iterator to the element past the end of ``view``
 
-* (3,4) return a Kokkos **random access** iterator to the element past the end of ``view``
+.. cppkokkos:kokkosinlinefunction:: template <class DataType, class... Properties> auto cend(const Kokkos::View<DataType, Properties...>& view);
+
+   Returns a const-qualified Kokkos **random access** iterator to the element past the end of ``view``
 
 Notes
 ~~~~~
@@ -35,8 +34,6 @@ Notes
 * ``view`` is taken as ``const`` because, within each function, we are not changing the view itself: the returned iterator operates on the view without changing its structure.
 
 * dereferencing an iterator must be done within an execution space where ``view`` is accessible
-
-* ``cbegin, cend`` ensure that the dereferenced iterator is const-qualified
 
 Parameters and Requirements
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -63,21 +60,14 @@ Example
 ``Kokkos::Experimental::distance``
 ----------------------------------
 
-.. code-block:: cpp
+.. cppkokkos:kokkosinlinefunction:: template <class IteratorType> constexpr typename IteratorType::difference_type distance(IteratorType first, IteratorType last);
 
-   template <class IteratorType>
-   KOKKOS_INLINE_FUNCTION
-   constexpr typename IteratorType::difference_type distance(IteratorType first, IteratorType last);
-
-Description
-~~~~~~~~~~~
-
-Returns the number of steps needed to go from ``first`` to ``last``.
+   Returns the number of steps needed to go from ``first`` to ``last``.
 
 Parameters and Requirements
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-* ``first, last``: range to calculate distance of
+* ``first, last``: range to calculate the distance of
 
 Return
 ~~~~~~
@@ -107,16 +97,9 @@ Example
 ``Kokkos::Experimental::iter_swap``
 -----------------------------------
 
-.. code-block:: cpp
+.. cppkokkos:function:: template <class IteratorType> void iter_swap(IteratorType first, IteratorType last);
 
-   template <class IteratorType>
-   KOKKOS_INLINE_FUNCTION
-   void iter_swap(IteratorType first, IteratorType last);
-
-Description
-~~~~~~~~~~~
-
-Swaps the values of the elements the given iterators are pointing to.
+   Swaps the values of the elements the given iterators are pointing to.
 
 Parameters and Requirements
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
