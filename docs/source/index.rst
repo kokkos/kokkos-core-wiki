@@ -91,7 +91,7 @@ Website Content
    ./API/containers-index
    ./API/algorithms-index
    ./API/alphabetical
-   DeprecationPage
+   deprecation_page
    known-issues
    usecases
    testing-and-issue-tracking
