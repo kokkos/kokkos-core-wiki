@@ -36,7 +36,9 @@ Parameters
 ~~~~~~~~~~
 
 * ExecSpace: An `ExecutionSpace <../execution_spaces.html>`_
+
 * ViewDest: A `view-like type <view_like.html>`_ with a non-const ``value_type``
+
 * ViewSrc: A `view-like type <view_like.html>`_.
 
 Requirements
