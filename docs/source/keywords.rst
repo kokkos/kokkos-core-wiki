@@ -306,31 +306,31 @@ Architecture Keywords
       * Optimize for HSW architecture
       * ``OFF``
 
-    * * ``KOKKOS_ARCH_INTEL_GEN``
+    * * ``Kokkos_ARCH_INTEL_GEN``
       * Optimize for Intel GPUs, Just-In-Time compilation*
       * ``OFF``
 
-    * * ``KOKKOS_ARCH_INTEL_DG1``
+    * * ``Kokkos_ARCH_INTEL_DG1``
       * Optimize for Intel Iris XeMAX GPU
       * ``OFF``
 
-    * * ``KOKKOS_ARCH_INTEL_GEN9``
+    * * ``Kokkos_ARCH_INTEL_GEN9``
       * Optimize for Intel GPU Gen9
       * ``OFF``
 
-    * * ``KOKKOS_ARCH_INTEL_GEN11``
+    * * ``Kokkos_ARCH_INTEL_GEN11``
       * Optimize for Intel GPU Gen11
       * ``OFF``
 
-    * * ``KOKKOS_ARCH_INTEL_GEN12LP``
+    * * ``Kokkos_ARCH_INTEL_GEN12LP``
       * Optimize for Intel GPU Gen12LP
       * ``OFF``
 
-    * * ``KOKKOS_ARCH_INTEL_XEHP``
+    * * ``Kokkos_ARCH_INTEL_XEHP``
       * Optimize for Intel GPU Xe-HP
       * ``OFF``
 
-    * * ``KOKKOS_ARCH_INTEL_PVC``
+    * * ``Kokkos_ARCH_INTEL_PVC``
       * Optimize for Intel GPU Ponte Vecchio/GPU Max
       * ``OFF``
 
@@ -450,7 +450,7 @@ Architecture Keywords
       * Optimize for Zen3 architecture
       * ``OFF``
 
-*) ``KOKKOS_ARCH_INTEL_GEN`` enables Just-In-Time compilation for Intel GPUs whereas all the other flags for Intel compilers
+*) ``Kokkos_ARCH_INTEL_GEN`` enables Just-In-Time compilation for Intel GPUs whereas all the other flags for Intel compilers
 request Ahead-Of-Time compilation. Just-In-Time compilation means that the compiler is invoked again when the binaries created
 are actually executed and only at that point the architecture to compile for is determined. On the other hand, Ahead-Of-Time
 compilation describes the standard model where the compiler is only invoked once to create the binary and the architecture to
