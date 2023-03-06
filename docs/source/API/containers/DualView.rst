@@ -58,59 +58,59 @@ Description
 
     .. rubric:: *Public* typedefs
 
-    .. cppkokkos:type:: traits
+    .. cppkokkos:type:: ViewTraits<DataType, Arg1Type, Arg2Type, Arg3Type> traits
 
        Typedefs for device types and various ``Kokkos::View`` specializations.
 
-    .. cppkokkos:type:: host_mirror_space
+    .. cppkokkos:type:: traits::host_mirror_space host_mirror_space
 
        The Kokkos Host Device type
 
-    .. cppkokkos:type:: t_dev
+    .. cppkokkos:type:: View<typename traits::data_type, Arg1Type, Arg2Type, Arg3Type> t_dev
 
        The type of a ``Kokkos::View`` on the device.
 
-    .. cppkokkos:type:: t_host
+    .. cppkokkos:type:: typename t_dev::HostMirror t_host
 
        The type of a ``Kokkos::View`` host mirror of ``t_dev``.
 
-    .. cppkokkos:type:: t_dev_const
+    .. cppkokkos:type:: View<typename traits::const_data_type, Arg1Type, Arg2Type, Arg3Type> t_dev_const
 
        The type of a const View on the device.
 
-    .. cppkokkos:type:: t_host_const
+    .. cppkokkos:type:: typename t_dev_const::HostMirror t_host_const
 
        The type of a const View host mirror of ``t_dev_const``.
 
-    .. cppkokkos:type:: t_dev_const_randomread
+    .. cppkokkos:type:: View<typename traits::const_data_type, typename traits::array_layout, typename traits::device_type, Kokkos::MemoryTraits<Kokkos::RandomAccess> > t_dev_const_randomread
 
        The type of a const, random-access View on the device.
 
-    .. cppkokkos:type:: t_host_const_randomread
+    .. cppkokkos:type:: typename t_dev_const_randomread::HostMirror t_host_const_randomread
 
        The type of a const, random-access View host mirror of ``t_dev_const_randomread``.
 
-    .. cppkokkos:type:: t_dev_um
+    .. cppkokkos:type:: View<typename traits::data_type, typename traits::array_layout, typename traits::device_type, MemoryUnmanaged> t_dev_um
 
        The type of an unmanaged View on the device.
 
-    .. cppkokkos:type:: t_host_um
+    .. cppkokkos:type:: View<typename t_host::data_type, typename t_host::array_layout, typename t_host::device_type, MemoryUnmanaged> t_host_um
 
        The type of an unmanaged View host mirror of \\c t_dev_um.
 
-    .. cppkokkos:type:: t_dev_const_um
+    .. cppkokkos:type:: View<typename traits::const_data_type, typename traits::array_layout, typename traits::device_type, MemoryUnmanaged> t_dev_const_um
 
        The type of a const unmanaged View on the device.
 
-    .. cppkokkos:type:: t_host_const_um
+    .. cppkokkos:type:: View<typename t_host::const_data_type, typename t_host::array_layout, typename t_host::device_type, MemoryUnmanaged> t_host_const_um
 
        The type of a const unmanaged View host mirror of \\c t_dev_const_um.
 
-    .. cppkokkos:type:: t_dev_const_randomread_um
+    .. cppkokkos:type:: View<typename t_host::const_data_type, typename t_host::array_layout, typename t_host::device_type, Kokkos::MemoryTraits<Kokkos::Unmanaged | Kokkos::RandomAccess> > t_dev_const_randomread_um
 
        The type of a const, random-access View on the device.
 
-    .. cppkokkos:type:: t_host_const_randomread_um
+    .. cppkokkos:type:: typename t_dev_const_randomread::HostMirror t_host_const_randomread_um
 
        The type of a const, random-access View host mirror of ``t_dev_const_randomread``.
 
