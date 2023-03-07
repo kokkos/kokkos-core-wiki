@@ -247,10 +247,10 @@ Description
 
        Get stride(s) for each dimension. Sets ``stride_`` [rank] to span().
 
-    .. cppkokkos:kokkosinlinefunction:: template <typename iType> typename std::enable_if<std::is_integral<iType>::value, size_t>::type extent(const iType& r) const;
+    .. cppkokkos:function:: template <typename iType> constexpr int extent(const iType& r) const;
 
        Return the extent for the requested rank
 
-    .. cppkokkos:kokkosinlinefunction:: template <typename iType> typename std::enable_if<std::is_integral<iType>::value, int>::type extent_int(const iType& r) const;
+    .. cppkokkos:function:: template <typename iType> constexpr int extent_int(const iType& r) const;
 
        Return integral extent for the requested rank
