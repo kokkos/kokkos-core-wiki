@@ -235,7 +235,7 @@ Description
 
     .. rubric:: *Public* Methods for querying capacity, stride, or dimension(s).
 
-    .. cppkokkos:kokkosinlinefunction:: size_t span() const;
+    .. cppkokkos:kokkosinlinefunction:: constexpr size_t span() const;
 
        Return the allocation size (same as ``Kokkos::View::span``).
 
@@ -247,10 +247,10 @@ Description
 
        Get stride(s) for each dimension. Sets ``stride_`` [rank] to span().
 
-    .. cppkokkos:function:: template <typename iType> constexpr int extent(const iType& r) const;
+    .. cppkokkos:kokkosinlinefunction:: template <typename iType> constexpr typename std::enable_if<std::is_integral<iType>::value, size_t>::type extent(const iType& r) const;
 
        Return the extent for the requested rank
 
-    .. cppkokkos:function:: template <typename iType> constexpr int extent_int(const iType& r) const;
+    .. cppkokkos:kokkosinlinefunction:: template <typename iType> constexpr typename std::enable_if<std::is_integral<iType>::value, int>::type extent_int(const iType& r) const;
 
        Return integral extent for the requested rank
