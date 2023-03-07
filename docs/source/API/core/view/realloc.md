@@ -9,6 +9,7 @@ Usage:
   ```
 
 Reallocates a view to have the new dimensions. Can grow or shrink, and will not preserve content.
+May not modify the view, if sizes already match.
 
 ## Synopsis
 
@@ -77,6 +78,7 @@ void realloc(const Impl::ViewCtorProp<ViewCtorArgs...>& arg_prop,
          const size_t n7 = KOKKOS_IMPL_CTOR_DEFAULT_ARG);
   ```
   Resizes `v` to have the new dimensions without preserving its contents.
+  May not modify `v` if the dimensions already match.
   * `v`: existing view, can be a default constructed one.
   * `n[X]`: new length for extent X.
 
@@ -96,6 +98,7 @@ void realloc(const Impl::ViewCtorProp<ViewCtorArgs...>& arg_prop,
          const size_t n7 = KOKKOS_IMPL_CTOR_DEFAULT_ARG);
   ```
   Resizes `v` to have the new dimensions without preserving its contents. The new `Kokkos::View` is constructed using the View constructor property `arg_prop`, e.g., Kokkos::WithoutInitializing.
+  May not modify `v` if the dimensions already match.
   * `v`: existing view, can be a default constructed one.
   * `n[X]`: new length for extent X.
   * `arg_prop`: View constructor property, e.g., `Kokkos::WithoutInitializing`.
@@ -117,6 +120,7 @@ void realloc(const Impl::ViewCtorProp<ViewCtorArgs...>& arg_prop,
          const size_t n7 = KOKKOS_IMPL_CTOR_DEFAULT_ARG);
   ```
   Resizes `v` to have the new dimensions without preserving its contents. The new `Kokkos::View` is constructed using the View constructor properties `arg_prop`, e.g., `Kokkos::view_alloc(Kokkos::WithoutInitializing)`.
+  May not modify `v` if the dimensions already match.
   * `v`: existing view, can be a default constructed one.
   * `n[X]`: new length for extent X.
   * `arg_prop`: View constructor properties, e.g., `Kokkos::view_alloc(Kokkos::WithoutInitializing)`.
@@ -131,6 +135,7 @@ void realloc(const Impl::ViewCtorProp<ViewCtorArgs...>& arg_prop,
          const typename Kokkos::View<T, P...>::array_layout& layout);
   ```
   Resizes `v` to have the new dimensions without preserving its contents.
+  May not modify `v` if the dimensions already match.
   * `v`: existing view, can be a default constructed one.
   * `layout`: a layout instance containing the new dimensions.
 
@@ -140,6 +145,7 @@ void realloc(const Impl::ViewCtorProp<ViewCtorArgs...>& arg_prop,
          const typename Kokkos::View<T, P...>::array_layout& layout);
   ```
   Resizes `v` to have the new dimensions without preserving its contents. The new `Kokkos::View` is constructed using the View constructor property `arg_prop`, e.g., Kokkos::WithoutInitializing.
+  May not modify `v` if the dimensions already match.
   * `v`: existing view, can be a default constructed one.
   * `layout`: a layout instance containing the new dimensions.
   * `arg_prop`: View constructor property, e.g., `Kokkos::WithoutInitializing`.
@@ -151,12 +157,22 @@ void realloc(const Impl::ViewCtorProp<ViewCtorArgs...>& arg_prop,
          const typename Kokkos::View<T, P...>::array_layout& layout);
   ```
   Resizes `v` to have the new dimensions without preserving its contents. The new `Kokkos::View` is constructed using the View constructor properties `arg_prop`, e.g., `Kokkos::view_alloc(Kokkos::WithoutInitializing)`.
+  May not modify `v` if the dimensions already match.
   * `v`: existing view, can be a default constructed one.
   * `layout`: a layout instance containing the new dimensions.
   * `arg_prop`: View constructor properties, e.g., `Kokkos::view_alloc(Kokkos::WithoutInitializing)`.
 
   Restrictions:
   * `arg_prop` must not include a pointer to memory, a label, or a memory space.
+
+## Possibly Unexpected Behavior Warning
+
+`realloc` will only modify the specific `View` instance passed to it.
+Any other `View` which aliases the same allocation will be unmodified.
+Consequently, if the `use_count()` of the `View` is larger than 1, the
+old allocation will not be deleted.
+Note that if the size arguments already match the extents of the `View`
+argument, that `realloc` may not create a new `View`.
 
 ## Example:
   * ```c++
