@@ -4,9 +4,9 @@ Requirements
 Compiler Versions
 =================
 
-Generally Kokkos should work with all compiler versions newer than the minimum.
+Generally, Kokkos should work with all compiler versions newer than the minimum.
 We also recommend using updated compilers where possible to benefit from improvements.
-However,in complex code, we have to work around compiler bugs. So compiler versions we don't test may have issues we are unaware of.
+However, in complex code, we have to work around compiler bugs. So compiler versions we don't test may have issues we are unaware of.
 
 Furthermore, compilers not listed here may work too.
 
