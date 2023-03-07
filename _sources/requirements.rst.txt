@@ -4,9 +4,73 @@ Requirements
 Compiler Versions
 =================
 
-Generally Kokkos should work with all compiler versions newer than the minimum.
-However,in complex code, we have to work around compiler bugs. So compiler versions we don't test may have issues
-we are unaware of.
+Generally, Kokkos should work with all compiler versions newer than the minimum.
+We also recommend using updated compilers where possible to benefit from improvements.
+However, in complex code, we have to work around compiler bugs. So compiler versions we don't test may have issues we are unaware of.
+
+Furthermore, compilers not listed here may work too.
+
+Kokkos 4.x
+----------
+
+.. list-table::
+    :widths: 30 35 35
+    :header-rows: 1
+    :align: center
+
+    * - Compiler
+      - Minimum version
+      - Primary tested versions
+
+    * * GCC 
+      * 8.2.0
+      * 8.4.0, latest
+
+    * * Clang (CPU)
+      * 8.0.0
+      * 8.0.0, latest
+
+    * * Clang (CUDA)
+      * 10.0.0
+
+    * * AppleClang 
+      * 8.0
+      * latest
+
+    * * Intel Classic (not recommended) 
+      * 19.0.5
+      * 2021.8.0
+
+    * * IntelLLVM (CPU)
+      * 2021.1.1
+      * 2023.0.0
+
+    * * IntelLLVM (SYCL) (experimental)
+      * 2022.0.0 
+      * 2023.0.0
+
+    * * NVCC 
+      * 11.0
+      * 11.0, 11.6, 11.7
+
+    * * NVC++ 
+      * 22.3
+      * 22.9
+
+    * * ROCM 
+      * 5.2.0
+      * 5.2.0 
+
+    * * MSVC 
+      * 19.29
+      * Latest
+ 
+    * * ARM/Clang 
+      * 20.1
+      * 20.1
+
+Kokkos 3.x
+----------
 
 .. list-table::
     :widths: 30 35 35
