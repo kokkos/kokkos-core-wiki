@@ -140,9 +140,10 @@ Description
 
       Performs an exclusive scan over the ``var`` provided by the team members. Let ``t = team_rank()`` and ``VALUES[t]`` the value of ``var`` from thread ``t``.
 
-      - Returns: ``VALUES[0] + VALUES[1] + ``...``+ VALUES[t-1]`` or zero for ``t==0``.
+      - Returns: ``VALUES[0]`` + ``VALUES[1]`` + ``...`` + ``VALUES[t-1]`` or zero for ``t==0``.
 
-      - ``global`` if provided will be set to ``VALUES[0] + VALUES[1] + ``...``+ VALUES[team_size()-1]``, must be the same pointer for every team member.
+      - ``global`` if provided will be set to ``VALUES[0]`` + ``VALUES[1]`` + ``...`` + ``VALUES[team_size()-1]``,
+	must be the same pointer for every team member.
 
 Examples
 --------
