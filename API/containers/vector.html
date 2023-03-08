@@ -474,7 +474,7 @@
         </a>
         <div class="content-icon-container">
 <div class="edit-this-page">
-  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/API/containers/vector.md" title="Edit this page">
+  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/API/containers/vector.rst" title="Edit this page">
     <svg aria-hidden="true" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
       <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4"></path>
@@ -498,154 +498,302 @@
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="vector">
+          <section id="vector">
 <h1><code class="docutils literal notranslate"><span class="pre">vector</span></code><a class="headerlink" href="#vector" title="Permalink to this heading">#</a></h1>
-<p>The Kokkos Vector is semantically similar to the std::vector, but it is designed to overcome issues with memory allocations and copies when working with devices that have different memory spaces.  The Kokkos::Vector is a Rank-1 DualView that implements the same interface as the std::vector.  This allows programs that rely heavily on std::vector to grant access to program data from within a non-host execution space.  Note that many of the std::vector compatible functions are host only, so access may be limited based on kernel complexity.  Below is a synopsis of the class and the description for each method specifies whether it is supported on the host, device or both.</p>
-<p>Usage:</p>
-<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">Kokkos</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Scalar</span><span class="p">,</span><span class="w"> </span><span class="n">Device</span><span class="o">&gt;</span><span class="w"> </span><span class="n">v</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<p>The Kokkos Vector is semantically similar to the std::vector, but it is designed to overcome issues with memory allocations and copies when working with devices that have different memory spaces. The <code class="docutils literal notranslate"><span class="pre">Kokkos::Vector</span></code> is a Rank-1 DualView that implements the same interface as the std::vector. This allows programs that rely heavily on std::vector to grant access to program data from within a non-host execution space. Note that many of the std::vector compatible functions are host only, so access may be limited based on kernel complexity. Below is a synopsis of the class and the description for each method specifies whether it is supported on the host, device or both.</p>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this heading">#</a></h2>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Kokkos</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Scalar</span><span class="p">,</span><span class="w"> </span><span class="n">Device</span><span class="o">&gt;</span><span class="w"> </span><span class="n">v</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
 <span class="n">v</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
 <span class="n">v</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">3</span><span class="p">);</span>
 <span class="n">v</span><span class="p">.[</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
 <span class="n">v</span><span class="p">.[</span><span class="n">n</span><span class="o">+</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span>
 </pre></div>
 </div>
-<section id="synopsis">
-<h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this heading">#</a></h2>
-<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">Scalar</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Arg1Type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">void</span><span class="o">&gt;</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">vector</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">DualView</span><span class="o">&lt;</span><span class="n">Scalar</span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="n">LayoutLeft</span><span class="p">,</span><span class="w"> </span><span class="n">Arg1Type</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+</section>
+<section id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this heading">#</a></h2>
+<dl class="cppkokkos class">
+<dt class="sig sig-object cppkokkos" id="_CPPv4I00E6vector">
+<span id="_CPPv3I00E6vector"></span><span id="_CPPv2I00E6vector"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Scalar</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Arg1Type</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">vector</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">DualView</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I00E6vector" title="vector::Scalar"><span class="n"><span class="pre">Scalar</span></span></a><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">LayoutLeft</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00E6vector" title="vector::Arg1Type"><span class="n"><span class="pre">Arg1Type</span></span></a><span class="p"><span class="pre">&gt;</span></span><a class="headerlink" href="#_CPPv4I00E6vector" title="Permalink to this definition">#</a><br /></dt>
+<dd><p class="rubric">Public Typedefs</p>
+<dl class="cppkokkos type">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N6vector10value_typeE">
+<span id="_CPPv3N6vector10value_typeE"></span><span id="_CPPv2N6vector10value_typeE"></span><span id="vector::value_type"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00E6vector" title="vector::Scalar"><span class="n"><span class="pre">Scalar</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">value_type</span></span></span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4N6vector10value_typeE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Scalar value type</p>
+</dd></dl>
 
-<span class="c1">// Typedefs </span>
+<dl class="cppkokkos type">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N6vector7pointerE">
+<span id="_CPPv3N6vector7pointerE"></span><span id="_CPPv2N6vector7pointerE"></span><span id="vector::pointer"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00E6vector" title="vector::Scalar"><span class="n"><span class="pre">Scalar</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">pointer</span></span></span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4N6vector7pointerE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Scalar pointer type</p>
+</dd></dl>
 
-<span class="w">  </span><span class="c1">// Scalar value type</span>
-<span class="w">  </span><span class="k">typedef</span><span class="w"> </span><span class="n">Scalar</span><span class="w"> </span><span class="n">value_type</span><span class="p">;</span>
+<dl class="cppkokkos type">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N6vector13const_pointerE">
+<span id="_CPPv3N6vector13const_pointerE"></span><span id="_CPPv2N6vector13const_pointerE"></span><span id="vector::const_pointer"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00E6vector" title="vector::Scalar"><span class="n"><span class="pre">Scalar</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">const_pointer</span></span></span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4N6vector13const_pointerE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Const Scalar pointer type</p>
+</dd></dl>
 
-<span class="w">  </span><span class="c1">// Scalar pointer type</span>
-<span class="w">  </span><span class="k">typedef</span><span class="w"> </span><span class="n">Scalar</span><span class="o">*</span><span class="w"> </span><span class="n">pointer</span><span class="p">;</span>
+<dl class="cppkokkos type">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N6vector9referenceE">
+<span id="_CPPv3N6vector9referenceE"></span><span id="_CPPv2N6vector9referenceE"></span><span id="vector::reference"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00E6vector" title="vector::Scalar"><span class="n"><span class="pre">Scalar</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">reference</span></span></span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4N6vector9referenceE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Scalar reference type</p>
+</dd></dl>
 
-<span class="w">  </span><span class="c1">// Const Scalar pointer type</span>
-<span class="w">  </span><span class="k">typedef</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Scalar</span><span class="o">*</span><span class="w"> </span><span class="n">const_pointer</span><span class="p">;</span>
+<dl class="cppkokkos type">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N6vector15const_referenceE">
+<span id="_CPPv3N6vector15const_referenceE"></span><span id="_CPPv2N6vector15const_referenceE"></span><span id="vector::const_reference"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00E6vector" title="vector::Scalar"><span class="n"><span class="pre">Scalar</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">const_reference</span></span></span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4N6vector15const_referenceE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Const Scalar reference type</p>
+</dd></dl>
 
-<span class="w">  </span><span class="c1">// Scalar reference type</span>
-<span class="w">  </span><span class="k">typedef</span><span class="w"> </span><span class="n">Scalar</span><span class="o">&amp;</span><span class="w"> </span><span class="n">reference</span><span class="p">;</span>
+<dl class="cppkokkos type">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N6vector8iteratorE">
+<span id="_CPPv3N6vector8iteratorE"></span><span id="_CPPv2N6vector8iteratorE"></span><span id="vector::iterator"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00E6vector" title="vector::Scalar"><span class="n"><span class="pre">Scalar</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">iterator</span></span></span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4N6vector8iteratorE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Iterator type</p>
+</dd></dl>
 
-<span class="w">  </span><span class="c1">// Const Scalar reference type</span>
-<span class="w">  </span><span class="k">typedef</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Scalar</span><span class="o">&amp;</span><span class="w"> </span><span class="n">const_reference</span><span class="p">;</span>
-<span class="w">  </span>
-<span class="w">  </span><span class="c1">// Iterator type</span>
-<span class="w">  </span><span class="k">typedef</span><span class="w"> </span><span class="n">Scalar</span><span class="o">*</span><span class="w"> </span><span class="n">iterator</span><span class="p">;</span>
+<dl class="cppkokkos type">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N6vector14const_iteratorE">
+<span id="_CPPv3N6vector14const_iteratorE"></span><span id="_CPPv2N6vector14const_iteratorE"></span><span id="vector::const_iterator"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00E6vector" title="vector::Scalar"><span class="n"><span class="pre">Scalar</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">const_iterator</span></span></span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4N6vector14const_iteratorE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Const iterator type</p>
+</dd></dl>
 
-<span class="w">  </span><span class="c1">// Const iterator type</span>
-<span class="w">  </span><span class="k">typedef</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Scalar</span><span class="o">*</span><span class="w"> </span><span class="n">const_iterator</span><span class="p">;</span>
-
-<span class="w">  </span><span class="c1">// Accessor [Host only]</span>
-<span class="w">  </span><span class="n">KOKKOS_INLINE_FUNCTION</span><span class="w"> </span><span class="n">reference</span><span class="w"> </span><span class="k">operator</span><span class="p">()(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
-
-<span class="w">  </span><span class="c1">// Accessor [Host only]</span>
-<span class="w">  </span><span class="n">KOKKOS_INLINE_FUNCTION</span><span class="w"> </span><span class="n">reference</span><span class="w"> </span><span class="k">operator</span><span class="p">[](</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
-
-<span class="c1">// Constructors</span>
-
-<span class="w">  </span><span class="c1">// Construct empty vector</span>
-<span class="w">  </span><span class="n">vector</span><span class="p">();</span>
-
-<span class="w">  </span><span class="c1">// Construct vector of size n + 10% and initialize values to `val` </span>
-<span class="w">  </span><span class="n">vector</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">Scalar</span><span class="w"> </span><span class="n">val</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Scalar</span><span class="p">());</span>
-
-<span class="w">  </span><span class="c1">// Resize vector to size n + 10%</span>
-<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">resize</span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">n</span><span class="p">);</span>
-
-<span class="w">  </span><span class="c1">// Resize vector to size n + 10% and set values to `val`</span>
-<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">resize</span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Scalar</span><span class="o">&amp;</span><span class="w"> </span><span class="n">val</span><span class="p">);</span>
-
-<span class="w">  </span><span class="c1">// Set n values to `val`</span>
-<span class="w">  </span><span class="c1">// will auto synchronize between host and device</span>
-<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">assign</span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Scalar</span><span class="o">&amp;</span><span class="w"> </span><span class="n">val</span><span class="p">);</span><span class="w"> </span>
-
-<span class="w">  </span><span class="c1">// same as resize (for compatibility)</span>
-<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">reserve</span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">n</span><span class="p">);</span>
-
-<span class="w">  </span><span class="c1">// resize vector to size() + 1 and set last value to val</span>
-<span class="w">  </span><span class="c1">// [Host only, auto synchronize device]</span>
-<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">push_back</span><span class="p">(</span><span class="n">Scalar</span><span class="w"> </span><span class="n">val</span><span class="p">);</span>
-
-<span class="w">  </span><span class="c1">// reduce size() by 1  </span>
-<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">pop_back</span><span class="p">();</span>
-
-<span class="w">  </span><span class="c1">// set size() to 0</span>
-<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">clear</span><span class="p">()</span><span class="w"> </span><span class="p">;</span>
-
-<span class="w">  </span><span class="c1">// return number of elements in vector</span>
-<span class="w">  </span><span class="n">size_type</span><span class="w"> </span><span class="nf">size</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
-
-<span class="w">  </span><span class="c1">// return maximum possible number of elements</span>
-<span class="w">  </span><span class="n">size_type</span><span class="w"> </span><span class="nf">max_size</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
-
-<span class="w">  </span><span class="c1">// return memory used by vector </span>
-<span class="w">  </span><span class="n">size_type</span><span class="w"> </span><span class="nf">span</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
-
-<span class="w">  </span><span class="c1">// returns true if vector is empty</span>
-<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="nf">empty</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
-
-<span class="w">  </span><span class="c1">// returns pointer to the underlying array</span>
-<span class="w">  </span><span class="c1">// [Host only]</span>
-<span class="w">  </span><span class="n">pointer</span><span class="w"> </span><span class="nf">data</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
-
-<span class="w">  </span><span class="c1">// returns iterator starting at the beginning</span>
-<span class="w">  </span><span class="c1">// [Host only]</span>
-<span class="w">  </span><span class="n">iterator</span><span class="w"> </span><span class="nf">begin</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
-
-<span class="w">  </span><span class="c1">// returns iterator past the last element</span>
-<span class="w">  </span><span class="c1">// [Host only]</span>
-<span class="w">  </span><span class="n">iterator</span><span class="w"> </span><span class="nf">end</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
-
-<span class="w">  </span><span class="c1">// returns reference to the front of the list</span>
-<span class="w">  </span><span class="c1">// [Host only]</span>
-<span class="w">  </span><span class="n">reference</span><span class="w"> </span><span class="nf">front</span><span class="p">();</span>
-
-<span class="w">  </span><span class="c1">// returns reference to the last element in the list</span>
-<span class="w">  </span><span class="c1">// [Host only]</span>
-<span class="w">  </span><span class="n">reference</span><span class="w"> </span><span class="nf">back</span><span class="p">();</span>
-
-<span class="w">  </span><span class="c1">// returns const reference to the front of the list</span>
-<span class="w">  </span><span class="c1">// [Host only]</span>
-<span class="w">  </span><span class="n">const_reference</span><span class="w"> </span><span class="nf">front</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
-
-<span class="w">  </span><span class="c1">// returns const reference to the last element in the list</span>
-<span class="w">  </span><span class="c1">// [Host only]</span>
-<span class="w">  </span><span class="n">const_reference</span><span class="w"> </span><span class="nf">back</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
-
-<span class="w">  </span><span class="c1">// Return the index of largest value satisfying val &lt; comp_val within the</span>
-<span class="w">  </span><span class="c1">// range start-theEnd, [Host only]</span>
-<span class="w">  </span><span class="kt">size_t</span><span class="w"> </span><span class="nf">lower_bound</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="o">&amp;</span><span class="w"> </span><span class="n">start</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="o">&amp;</span><span class="w"> </span><span class="n">theEnd</span><span class="p">,</span>
-<span class="w">                     </span><span class="k">const</span><span class="w"> </span><span class="n">Scalar</span><span class="o">&amp;</span><span class="w"> </span><span class="n">comp_val</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
-<span class="w">  </span><span class="c1">// Return true if the list is sorted</span>
-<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="nf">is_sorted</span><span class="p">();</span>
-
-<span class="w">  </span><span class="c1">// return iterator pointing to element matching `val` </span>
-<span class="w">  </span><span class="n">iterator</span><span class="w"> </span><span class="nf">find</span><span class="p">(</span><span class="n">Scalar</span><span class="w"> </span><span class="n">val</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
-<span class="w">  </span>
-<span class="w">  </span><span class="c1">// copy data from device to host</span>
-<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">device_to_host</span><span class="p">();</span>
-
-<span class="w">  </span><span class="c1">// copy data from host to device</span>
-<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">host_to_device</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
-
-<span class="w">  </span><span class="c1">// update/synchronize data in dual view from host perspective</span>
-<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">on_host</span><span class="p">();</span>
-
-<span class="w">  </span><span class="c1">// update/synchronize data in dual view from the device perspective </span>
-<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">on_device</span><span class="p">();</span><span class="w"> </span>
-
-<span class="w">  </span><span class="c1">// set the data buffer available at the end of the vector</span>
-<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">set_overallocation</span><span class="p">(</span><span class="kt">float</span><span class="w"> </span><span class="n">extra</span><span class="p">);</span>
-<span class="w">  </span>
-<span class="w">  </span><span class="c1">// returns true if the internal views (host and device) are allocated </span>
-<span class="w">  </span><span class="c1">// (non-null pointers).</span>
-<span class="w">  </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="nf">is_allocated</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
-<span class="w">    </span>
-<span class="p">};</span>
-</pre></div>
+<p class="rubric">Accessors</p>
+<dl class="cppkokkos kokkosinlinefunction">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK6vectorclEi">
+<span id="_CPPv3NK6vectorclEi"></span><span id="_CPPv2NK6vectorclEi"></span><span id="vector::call-operator__iC"></span><span class="k"><span class="pre">KOKKOS_INLINE_FUNCTION</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N6vector9referenceE" title="vector::reference"><span class="n"><span class="pre">reference</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">()</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">i</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4NK6vectorclEi" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Accessor</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Host only</p>
 </div>
+</dd></dl>
+
+<dl class="cppkokkos kokkosinlinefunction">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK6vectorixEi">
+<span id="_CPPv3NK6vectorixEi"></span><span id="_CPPv2NK6vectorixEi"></span><span id="vector::subscript-operator__iC"></span><span class="k"><span class="pre">KOKKOS_INLINE_FUNCTION</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N6vector9referenceE" title="vector::reference"><span class="n"><span class="pre">reference</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">[]</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">i</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4NK6vectorixEi" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Accessor</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Host only</p>
+</div>
+</dd></dl>
+
+<p class="rubric">Constructors</p>
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N6vector6vectorEv">
+<span id="_CPPv3N6vector6vectorEv"></span><span id="_CPPv2N6vector6vectorEv"></span><span id="vector::vector"></span><span class="sig-name descname"><span class="n"><span class="pre">vector</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4N6vector6vectorEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Construct empty vector</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N6vector6vectorEi6Scalar">
+<span id="_CPPv3N6vector6vectorEi6Scalar"></span><span id="_CPPv2N6vector6vectorEi6Scalar"></span><span id="vector::vector__i.Scalar"></span><span class="sig-name descname"><span class="n"><span class="pre">vector</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">n</span></span>, <a class="reference internal" href="#_CPPv4I00E6vector" title="vector::Scalar"><span class="n"><span class="pre">Scalar</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">val</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00E6vector" title="vector::Scalar"><span class="n"><span class="pre">Scalar</span></span></a><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">)</span></span><span class="sig-paren">)</span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4N6vector6vectorEi6Scalar" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Construct vector of size n + 10% and initialize values to <code class="docutils literal notranslate"><span class="pre">val</span></code></p>
+</dd></dl>
+
+<p class="rubric">Other Public Methods</p>
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N6vector6resizeE6size_t">
+<span id="_CPPv3N6vector6resizeE6size_t"></span><span id="_CPPv2N6vector6resizeE6size_t"></span><span id="vector::resize__s"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">resize</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">n</span></span><span class="sig-paren">)</span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4N6vector6resizeE6size_t" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Resize vector to size n + 10%</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N6vector6resizeE6size_tRK6Scalar">
+<span id="_CPPv3N6vector6resizeE6size_tRK6Scalar"></span><span id="_CPPv2N6vector6resizeE6size_tRK6Scalar"></span><span id="vector::resize__s.ScalarCR"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">resize</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">n</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00E6vector" title="vector::Scalar"><span class="n"><span class="pre">Scalar</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">val</span></span><span class="sig-paren">)</span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4N6vector6resizeE6size_tRK6Scalar" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Resize vector to size n + 10% and set values to <code class="docutils literal notranslate"><span class="pre">val</span></code></p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N6vector6assignE6size_tRK6Scalar">
+<span id="_CPPv3N6vector6assignE6size_tRK6Scalar"></span><span id="_CPPv2N6vector6assignE6size_tRK6Scalar"></span><span id="vector::assign__s.ScalarCR"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">assign</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">n</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00E6vector" title="vector::Scalar"><span class="n"><span class="pre">Scalar</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">val</span></span><span class="sig-paren">)</span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4N6vector6assignE6size_tRK6Scalar" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Set n values to <code class="docutils literal notranslate"><span class="pre">val</span></code> will auto synchronize between host and device</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N6vector7reserveE6size_t">
+<span id="_CPPv3N6vector7reserveE6size_t"></span><span id="_CPPv2N6vector7reserveE6size_t"></span><span id="vector::reserve__s"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">reserve</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">n</span></span><span class="sig-paren">)</span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4N6vector7reserveE6size_t" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Same as resize (for compatibility)</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N6vector9push_backE6Scalar">
+<span id="_CPPv3N6vector9push_backE6Scalar"></span><span id="_CPPv2N6vector9push_backE6Scalar"></span><span id="vector::push_back__Scalar"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">push_back</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I00E6vector" title="vector::Scalar"><span class="n"><span class="pre">Scalar</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">val</span></span><span class="sig-paren">)</span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4N6vector9push_backE6Scalar" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Resize vector to size() + 1 and set last value to val</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Host only, auto synchronize device</p>
+</div>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N6vector8pop_backEv">
+<span id="_CPPv3N6vector8pop_backEv"></span><span id="_CPPv2N6vector8pop_backEv"></span><span id="vector::pop_back"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pop_back</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4N6vector8pop_backEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Reduce size() by 1</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N6vector5clearEv">
+<span id="_CPPv3N6vector5clearEv"></span><span id="_CPPv2N6vector5clearEv"></span><span id="vector::clear"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">clear</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4N6vector5clearEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Set size() to 0</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK6vector4sizeEv">
+<span id="_CPPv3NK6vector4sizeEv"></span><span id="_CPPv2NK6vector4sizeEv"></span><span id="vector::sizeC"></span><span class="n"><span class="pre">size_type</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">size</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4NK6vector4sizeEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Return number of elements in vector</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK6vector8max_sizeEv">
+<span id="_CPPv3NK6vector8max_sizeEv"></span><span id="_CPPv2NK6vector8max_sizeEv"></span><span id="vector::max_sizeC"></span><span class="n"><span class="pre">size_type</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">max_size</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4NK6vector8max_sizeEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Return maximum possible number of elements</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK6vector4spanEv">
+<span id="_CPPv3NK6vector4spanEv"></span><span id="_CPPv2NK6vector4spanEv"></span><span id="vector::spanC"></span><span class="n"><span class="pre">size_type</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">span</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4NK6vector4spanEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Return memory used by vector</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK6vector5emptyEv">
+<span id="_CPPv3NK6vector5emptyEv"></span><span id="_CPPv2NK6vector5emptyEv"></span><span id="vector::emptyC"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">empty</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4NK6vector5emptyEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Returns true if vector is empty</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK6vector4dataEv">
+<span id="_CPPv3NK6vector4dataEv"></span><span id="_CPPv2NK6vector4dataEv"></span><span id="vector::dataC"></span><a class="reference internal" href="#_CPPv4N6vector7pointerE" title="vector::pointer"><span class="n"><span class="pre">pointer</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">data</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4NK6vector4dataEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Returns pointer to the underlying array</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Host only</p>
+</div>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK6vector5beginEv">
+<span id="_CPPv3NK6vector5beginEv"></span><span id="_CPPv2NK6vector5beginEv"></span><span id="vector::beginC"></span><a class="reference internal" href="#_CPPv4N6vector8iteratorE" title="vector::iterator"><span class="n"><span class="pre">iterator</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">begin</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4NK6vector5beginEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Returns iterator starting at the beginning</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Host only</p>
+</div>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK6vector3endEv">
+<span id="_CPPv3NK6vector3endEv"></span><span id="_CPPv2NK6vector3endEv"></span><span id="vector::endC"></span><a class="reference internal" href="#_CPPv4N6vector8iteratorE" title="vector::iterator"><span class="n"><span class="pre">iterator</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">end</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4NK6vector3endEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Returns iterator past the last element</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Host only</p>
+</div>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N6vector5frontEv">
+<span id="_CPPv3N6vector5frontEv"></span><span id="_CPPv2N6vector5frontEv"></span><span id="vector::front"></span><a class="reference internal" href="#_CPPv4N6vector9referenceE" title="vector::reference"><span class="n"><span class="pre">reference</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">front</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4N6vector5frontEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Returns reference to the front of the list</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Host only</p>
+</div>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N6vector4backEv">
+<span id="_CPPv3N6vector4backEv"></span><span id="_CPPv2N6vector4backEv"></span><span id="vector::back"></span><a class="reference internal" href="#_CPPv4N6vector9referenceE" title="vector::reference"><span class="n"><span class="pre">reference</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">back</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4N6vector4backEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Returns reference to the last element in the list</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Host only</p>
+</div>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK6vector5frontEv">
+<span id="_CPPv3NK6vector5frontEv"></span><span id="_CPPv2NK6vector5frontEv"></span><span id="vector::frontC"></span><a class="reference internal" href="#_CPPv4N6vector15const_referenceE" title="vector::const_reference"><span class="n"><span class="pre">const_reference</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">front</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4NK6vector5frontEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Returns const reference to the front of the list</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Host only</p>
+</div>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK6vector4backEv">
+<span id="_CPPv3NK6vector4backEv"></span><span id="_CPPv2NK6vector4backEv"></span><span id="vector::backC"></span><a class="reference internal" href="#_CPPv4N6vector15const_referenceE" title="vector::const_reference"><span class="n"><span class="pre">const_reference</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">back</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4NK6vector4backEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Returns const reference to the last element in the list</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Host only</p>
+</div>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK6vector11lower_boundERK6size_tRK6size_tRK6Scalar">
+<span id="_CPPv3NK6vector11lower_boundERK6size_tRK6size_tRK6Scalar"></span><span id="_CPPv2NK6vector11lower_boundERK6size_tRK6size_tRK6Scalar"></span><span id="vector::lower_bound__sCR.sCR.ScalarCRC"></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lower_bound</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">start</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">theEnd</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00E6vector" title="vector::Scalar"><span class="n"><span class="pre">Scalar</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">comp_val</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4NK6vector11lower_boundERK6size_tRK6size_tRK6Scalar" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Return the index of largest value satisfying val &lt; comp_val within the range start-theEnd</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Host only</p>
+</div>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N6vector9is_sortedEv">
+<span id="_CPPv3N6vector9is_sortedEv"></span><span id="_CPPv2N6vector9is_sortedEv"></span><span id="vector::is_sorted"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_sorted</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4N6vector9is_sortedEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Return true if the list is sorted</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK6vector4findE6Scalar">
+<span id="_CPPv3NK6vector4findE6Scalar"></span><span id="_CPPv2NK6vector4findE6Scalar"></span><span id="vector::find__ScalarC"></span><a class="reference internal" href="#_CPPv4N6vector8iteratorE" title="vector::iterator"><span class="n"><span class="pre">iterator</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">find</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I00E6vector" title="vector::Scalar"><span class="n"><span class="pre">Scalar</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">val</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4NK6vector4findE6Scalar" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Return iterator pointing to element matching <code class="docutils literal notranslate"><span class="pre">val</span></code></p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N6vector14device_to_hostEv">
+<span id="_CPPv3N6vector14device_to_hostEv"></span><span id="_CPPv2N6vector14device_to_hostEv"></span><span id="vector::device_to_host"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">device_to_host</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4N6vector14device_to_hostEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Copy data from device to host</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK6vector14host_to_deviceEv">
+<span id="_CPPv3NK6vector14host_to_deviceEv"></span><span id="_CPPv2NK6vector14host_to_deviceEv"></span><span id="vector::host_to_deviceC"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">host_to_device</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4NK6vector14host_to_deviceEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Copy data from host to device</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N6vector7on_hostEv">
+<span id="_CPPv3N6vector7on_hostEv"></span><span id="_CPPv2N6vector7on_hostEv"></span><span id="vector::on_host"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">on_host</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4N6vector7on_hostEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Update/synchronize data in dual view from host perspective</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N6vector9on_deviceEv">
+<span id="_CPPv3N6vector9on_deviceEv"></span><span id="_CPPv2N6vector9on_deviceEv"></span><span id="vector::on_device"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">on_device</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4N6vector9on_deviceEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Update/synchronize data in dual view from the device perspective</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N6vector18set_overallocationEf">
+<span id="_CPPv3N6vector18set_overallocationEf"></span><span id="_CPPv2N6vector18set_overallocationEf"></span><span id="vector::set_overallocation__float"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_overallocation</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">extra</span></span><span class="sig-paren">)</span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4N6vector18set_overallocationEf" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Set the data buffer available at the end of the vector</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK6vector12is_allocatedEv">
+<span id="_CPPv3NK6vector12is_allocatedEv"></span><span id="_CPPv2NK6vector12is_allocatedEv"></span><span id="vector::is_allocatedCCE"></span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_allocated</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4NK6vector12is_allocatedEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Returns true if the internal views (host and device) are allocated (non-null pointers).</p>
+</dd></dl>
+
+</dd></dl>
+
 </section>
 </section>
 
@@ -707,7 +855,8 @@
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">vector</span></code></a><ul>
-<li><a class="reference internal" href="#synopsis">Synopsis</a></li>
+<li><a class="reference internal" href="#usage">Usage</a></li>
+<li><a class="reference internal" href="#description">Description</a></li>
 </ul>
 </li>
 </ul>
