@@ -4,7 +4,7 @@
 .. role:: cppkokkos(code)
     :language: cppkokkos
 
-The Kokkos Vector is semantically similar to the std::vector, but it is designed to overcome issues with memory allocations and copies when working with devices that have different memory spaces. The ``Kokkos::Vector`` is a Rank-1 DualView that implements the same interface as the std::vector. This allows programs that rely heavily on std::vector to grant access to program data from within a non-host execution space. Note that many of the std::vector compatible functions are host only, so access may be limited based on kernel complexity. Below is a synopsis of the class and the description for each method specifies whether it is supported on the host, device or both. 
+The Kokkos Vector is semantically similar to the std::vector, but it is designed to overcome issues with memory allocations and copies when working with devices that have different memory spaces. The ``Kokkos::Vector`` is a Rank-1 DualView that implements the same interface as the std::vector. This allows programs that rely heavily on std::vector to grant access to program data from within a non-host execution space. Note that many of the std::vector compatible functions are host only, so access may be limited based on kernel complexity. Below is a synopsis of the class and the description for each method specifies whether it is supported on the host, device or both.
 
 Usage
 -----
@@ -17,51 +17,48 @@ Usage
     v.[n+1] = 3;
     v.[n+2] = 4;
 
-Public Class Members
---------------------
+Description
+-----------
 
 .. cppkokkos:class:: vector
 
-    All elements are ``public:``
+   .. rubric:: Public Typedefs
 
-Typedefs
-~~~~~~~~
+   .. cppkokkos:type:: Scalar value_type;
 
-.. cppkokkos:type:: Scalar value_type;
+      Scalar value type
 
-    * Scalar value type
+   .. cppkokkos:type:: Scalar* pointer;
 
-.. cppkokkos:type:: Scalar* pointer;
+      Scalar pointer type
 
-    * Scalar pointer type
+   .. cppkokkos:type:: const Scalar* const_pointer;
 
-.. cppkokkos:type:: const Scalar* const_pointer;
+      Const Scalar pointer type
 
-    * Const Scalar pointer type
+   .. cppkokkos:type:: Scalar& reference;
 
-.. cppkokkos:type:: Scalar& reference;
+      Scalar reference type
 
-    * Scalar reference type
+   .. cppkokkos:type:: const Scalar& const_reference;
 
-.. cppkokkos:type:: const Scalar& const_reference;
+      Const Scalar reference type
 
-    * Const Scalar reference type
+   .. cppkokkos:type:: Scalar* iterator;
 
-.. cppkokkos:type:: Scalar* iterator;
+      Iterator type
 
-    * Iterator type
+   .. cppkokkos:type:: const Scalar* const_iterator;
 
-.. cppkokkos:type:: const Scalar* const_iterator;
+      Const iterator type
 
-    * Const iterator type
+   .. cppkokkos:kokkosinlinefunction:: reference operator()(int i) const;
 
-.. cppkokkos:kokkosinlinefunction:: reference operator()(int i) const;
+      Accessor [Host only]
 
-    * Accessor [Host only]
+   .. cppkokkos:kokkosinlinefunction:: reference operator[](int i) const;
 
-.. cppkokkos:kokkosinlinefunction:: reference operator[](int i) const;
-
-    * Accessor [Host only]
+      Accessor [Host only]
 
 Constructors
 ~~~~~~~~~~~~
@@ -72,7 +69,7 @@ Constructors
 
 .. cppkokkos:function:: vector(int n, Scalar val = Scalar());
 
-    * Construct vector of size n + 10% and initialize values to ``val`` 
+    * Construct vector of size n + 10% and initialize values to ``val``
 
 .. cppkokkos:function:: void resize(size_t n);
 
@@ -82,7 +79,7 @@ Constructors
 
     * Resize vector to size n + 10% and set values to ``val``
 
-.. cppkokkos:function:: void assign(size_t n, const Scalar& val); 
+.. cppkokkos:function:: void assign(size_t n, const Scalar& val);
 
     * Set n values to ``val`` will auto synchronize between host and device
 
@@ -153,7 +150,7 @@ Constructors
 .. cppkokkos:function:: bool is_sorted();
 
     * Return true if the list is sorted
- 
+
 .. cppkokkos:function:: iterator find(Scalar val) const;
 
     * Return iterator pointing to element matching ``val``
@@ -170,7 +167,7 @@ Constructors
 
     * Update/synchronize data in dual view from host perspective
 
-.. cppkokkos:function:: void on_device(); 
+.. cppkokkos:function:: void on_device();
 
     * Update/synchronize data in dual view from the device perspective
 
