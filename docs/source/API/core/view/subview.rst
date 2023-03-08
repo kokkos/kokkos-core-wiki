@@ -13,7 +13,7 @@ Usage
 
     auto s = subview(view,std::pair<int,int>(5,191),Kokkos::ALL,1);
 
-Creates a ``Kokkos::View`` viewing a subset of another ``Kokkos::View``.
+Creates a ``Kokkos::View`` representing a subset of another ``Kokkos::View``.
 
 
 .. _KokkosAll: ../utilities/all.html#kokkosall
