@@ -20,7 +20,7 @@ Usage
 Description
 -----------
 
-.. cppkokkos:class:: vector
+.. cppkokkos:class:: template<class Scalar, class Arg1Type = void> vector :  public DualView<Scalar*, LayoutLeft, Arg1Type>
 
    .. rubric:: Public Typedefs
 
@@ -52,129 +52,154 @@ Description
 
       Const iterator type
 
+   .. rubric:: Accessors
+
    .. cppkokkos:kokkosinlinefunction:: reference operator()(int i) const;
 
-      Accessor [Host only]
+      Accessor
+
+      .. warning:: Host only
 
    .. cppkokkos:kokkosinlinefunction:: reference operator[](int i) const;
 
-      Accessor [Host only]
+      Accessor
 
-Constructors
-~~~~~~~~~~~~
+      .. warning:: Host only
 
-.. cppkokkos:function:: vector();
+   .. rubric:: Constructors
 
-    * Construct empty vector
+   .. cppkokkos:function:: vector();
 
-.. cppkokkos:function:: vector(int n, Scalar val = Scalar());
+      Construct empty vector
 
-    * Construct vector of size n + 10% and initialize values to ``val``
+   .. cppkokkos:function:: vector(int n, Scalar val = Scalar());
 
-.. cppkokkos:function:: void resize(size_t n);
+      Construct vector of size n + 10% and initialize values to ``val``
 
-    * Resize vector to size n + 10%
+   .. rubric:: Other Public Methods
 
-.. cppkokkos:function:: void resize(size_t n, const Scalar& val);
+   .. cppkokkos:function:: void resize(size_t n);
 
-    * Resize vector to size n + 10% and set values to ``val``
+      Resize vector to size n + 10%
 
-.. cppkokkos:function:: void assign(size_t n, const Scalar& val);
+   .. cppkokkos:function:: void resize(size_t n, const Scalar& val);
 
-    * Set n values to ``val`` will auto synchronize between host and device
+      Resize vector to size n + 10% and set values to ``val``
 
-.. cppkokkos:function:: void reserve(size_t n);
+   .. cppkokkos:function:: void assign(size_t n, const Scalar& val);
 
-    * Same as resize (for compatibility)
+      Set n values to ``val`` will auto synchronize between host and device
 
-.. cppkokkos:function:: void push_back(Scalar val);
+   .. cppkokkos:function:: void reserve(size_t n);
 
-    * Resize vector to size() + 1 and set last value to val [Host only, auto synchronize device]
+      Same as resize (for compatibility)
 
-.. cppkokkos:function:: void pop_back();
+   .. cppkokkos:function:: void push_back(Scalar val);
 
-    * Reduce size() by 1
+      Resize vector to size() + 1 and set last value to val
 
-.. cppkokkos:function:: void clear();
+      .. warning:: Host only, auto synchronize device
 
-    * Set size() to 0
+   .. cppkokkos:function:: void pop_back();
 
-.. cppkokkos:function:: size_type size() const;
+      Reduce size() by 1
 
-    * Return number of elements in vector
+   .. cppkokkos:function:: void clear();
 
-.. cppkokkos:function:: size_type max_size() const;
+      Set size() to 0
 
-    * Return maximum possible number of elements
+   .. cppkokkos:function:: size_type size() const;
 
-.. cppkokkos:function:: size_type span() const;
+      Return number of elements in vector
 
-    * Return memory used by vector
+   .. cppkokkos:function:: size_type max_size() const;
 
-.. cppkokkos:function:: bool empty() const;
+      Return maximum possible number of elements
 
-    * Returns true if vector is empty
+   .. cppkokkos:function:: size_type span() const;
 
-.. cppkokkos:function:: pointer data() const;
+      Return memory used by vector
 
-    * Returns pointer to the underlying array [Host only]
+   .. cppkokkos:function:: bool empty() const;
 
-.. cppkokkos:function:: iterator begin() const;
+      Returns true if vector is empty
 
-    * Returns iterator starting at the beginning [Host only]
+   .. cppkokkos:function:: pointer data() const;
 
-.. cppkokkos:function:: iterator end() const;
+      Returns pointer to the underlying array
 
-    * Returns iterator past the last element [Host only]
+      .. warning:: Host only
 
-.. cppkokkos:function:: reference front();
+   .. cppkokkos:function:: iterator begin() const;
 
-    * Returns reference to the front of the list [Host only]
+      Returns iterator starting at the beginning
 
-.. cppkokkos:function:: reference back();
+      .. warning:: Host only
 
-    * Returns reference to the last element in the list [Host only]
+   .. cppkokkos:function:: iterator end() const;
 
-.. cppkokkos:function:: const_reference front() const;
+      Returns iterator past the last element
 
-    * Returns const reference to the front of the list [Host only]
+      .. warning:: Host only
 
-.. cppkokkos:function:: const_reference back() const;
+   .. cppkokkos:function:: reference front();
 
-    * Returns const reference to the last element in the list [Host only]
+      Returns reference to the front of the list
 
-.. cppkokkos:function:: size_t lower_bound(const size_t& start, const size_t& theEnd, const Scalar& comp_val) const;
+      .. warning:: Host only
 
-    * Return the index of largest value satisfying val < comp_val within the range start-theEnd, [Host only]
+   .. cppkokkos:function:: reference back();
 
-.. cppkokkos:function:: bool is_sorted();
+      Returns reference to the last element in the list
 
-    * Return true if the list is sorted
+      .. warning:: Host only
 
-.. cppkokkos:function:: iterator find(Scalar val) const;
+   .. cppkokkos:function:: const_reference front() const;
 
-    * Return iterator pointing to element matching ``val``
+      Returns const reference to the front of the list
 
-.. cppkokkos:function:: void device_to_host();
+      .. warning:: Host only
 
-    * Copy data from device to host
+   .. cppkokkos:function:: const_reference back() const;
 
-.. cppkokkos:function:: void host_to_device() const;
+      Returns const reference to the last element in the list
 
-    * Copy data from host to device
+      .. warning:: Host only
 
-.. cppkokkos:function:: void on_host();
+   .. cppkokkos:function:: size_t lower_bound(const size_t& start, const size_t& theEnd, const Scalar& comp_val) const;
 
-    * Update/synchronize data in dual view from host perspective
+      Return the index of largest value satisfying val < comp_val within the range start-theEnd
 
-.. cppkokkos:function:: void on_device();
+      .. warning:: Host only
 
-    * Update/synchronize data in dual view from the device perspective
+   .. cppkokkos:function:: bool is_sorted();
 
-.. cppkokkos:function:: void set_overallocation(float extra);
+      Return true if the list is sorted
 
-    * Set the data buffer available at the end of the vector
+   .. cppkokkos:function:: iterator find(Scalar val) const;
 
-.. cppkokkos:function:: constexpr bool is_allocated() const;
+      Return iterator pointing to element matching ``val``
 
-    * Returns true if the internal views (host and device) are allocated (non-null pointers).
+   .. cppkokkos:function:: void device_to_host();
+
+      Copy data from device to host
+
+   .. cppkokkos:function:: void host_to_device() const;
+
+      Copy data from host to device
+
+   .. cppkokkos:function:: void on_host();
+
+      Update/synchronize data in dual view from host perspective
+
+   .. cppkokkos:function:: void on_device();
+
+      Update/synchronize data in dual view from the device perspective
+
+   .. cppkokkos:function:: void set_overallocation(float extra);
+
+      Set the data buffer available at the end of the vector
+
+   .. cppkokkos:function:: constexpr bool is_allocated() const;
+
+      Returns true if the internal views (host and device) are allocated (non-null pointers).
