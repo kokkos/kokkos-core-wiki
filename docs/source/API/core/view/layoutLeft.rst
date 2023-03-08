@@ -13,81 +13,53 @@ Usage
 
    Kokkos::View<float*, Kokkos::LayoutLeft> my_view;
 
-Synopsis
---------
+Description
+-----------
 
-.. code-block:: cpp
+.. cppkokkos:struct:: LayoutLeft
 
-    struct LayoutLeft {
+   When provided to a multidimensional View, lays out memory such that
+   the first index is the contiguous one. This matches the Fortran conventions for allocations.
 
-    typedef LayoutLeft array_layout;
+   .. rubric:: Nested Typedefs
 
-    size_t dimension[ARRAY_LAYOUT_MAX_RANK];
+   .. cppkokkos:type:: array_layout
 
-    enum { is_extent_constructible = true };
+       A tag signifying that this models the Layout concept.
 
-    LayoutLeft(LayoutLeft const&) = default;
-    LayoutLeft(LayoutLeft&&)      = default;
-    LayoutLeft& operator=(LayoutLeft const&) = default;
-    LayoutLeft& operator=(LayoutLeft&&) = default;
+   .. rubric:: Member Variables
 
-    KOKKOS_INLINE_FUNCTION
-    explicit constexpr LayoutLeft(size_t N0 = 0, size_t N1 = 0, size_t N2 = 0,
-                                  size_t N3 = 0, size_t N4 = 0, size_t N5 = 0,
-                                  size_t N6 = 0, size_t N7 = 0)
-        : dimension{N0, N1, N2, N3, N4, N5, N6, N7} {}
-    };
+   .. cppkokkos:member:: static constexpr bool is_extent_constructible;
+
+       A boolean to allow detection that this class is extent constructible.
+
+   .. cppkokkos:member:: size_t dimension[ARRAY_LAYOUT_MAX_RANK]
+
+       An array containing the size of each dimension of the Layout.
+
+   .. rubric:: Constructors
+
+   .. cppkokkos:kokkokinlinefunction:: explicit constexpr LayoutLeft(size_t N0 = 0, size_t N1 = 0,
+				       size_t N2 = 0, size_t N3 = 0, size_t N4 = 0, \
+				       size_t N5 = 0, size_t N6 = 0, size_t N7 = 0);
+
+      Constructor that takes in up to 8 sizes, to set the sizes of the corresponding dimensions of the Layout.
 
 
-Class Interface
----------------
+   .. cppkokkos:function:: LayoutLeft(LayoutLeft const&) = default;
 
-.. cppkokkos:class:: LayoutLeft
+       Default copy constructor, element-wise copies the other Layout.
 
-    This Kokkos Layout, when provided to a multidimensional View, lays out memory such that the first index is the contiguous one. This matches the Fortran conventions for allocations.
+   .. cppkokkos:function:: LayoutLeft(LayoutLeft&&) = default;
 
-    .. rubric:: Public Member Variables
+       Default move constructor, element-wise moves the other Layout.
 
-    .. cppkokkos:member:: static constexpr bool is_extent_constructible;
+   .. rubric:: Assignment operators
 
-        A boolean enum to allow detection that this class is extent constructible.
+   .. cppkokkos:function:: LayoutLeft& operator=(LayoutLeft const&) = default;
 
-    .. cppkokkos:member:: static constexpr unsigned dimension;
+       Default copy assignment, element-wise copies the other Layout.
 
-        An array containing the size of each dimension of the Layout.
+   .. cppkokkos:function:: LayoutLeft& operator=(LayoutLeft&&) = default;
 
-    .. rubric:: Other Types
-
-    .. cppkokkos:type:: array_layout
-
-        A tag signifying that this models the Layout concept.
-
-    .. rubric:: Constructors
-
-    .. cppkokkos:function:: LayoutLeft(LayoutLeft const&)
-
-        Default copy constructor, element-wise copies the other Layout.
-
-    .. cppkokkos:function:: LayoutLeft(LayoutLeft&&)
-
-        Default move constructor, element-wise moves the other Layout.
-
-    .. code-block:: cpp
-
-        KOKKOS_INLINE_FUNCTION
-        explicit constexpr LayoutLeft(size_t N0 = 0, size_t N1 = 0, size_t N2 = 0,
-                                      size_t N3 = 0, size_t N4 = 0, size_t N5 = 0,
-                                      size_t N6 = 0, size_t N7 = 0);
-
-    \
-        Constructor that takes in up to 8 sizes, to set the sizes of the corresponding dimensions of the Layout.
-
-    .. rubric:: Assignment operators
-
-    .. cppkokkos:function:: LayoutLeft& operator=(LayoutLeft const&) = default;
-
-        Default copy assignment, element-wise copies the other Layout.
-
-    .. cppkokkos:function:: LayoutLeft& operator=(LayoutLeft&&) = default;
-
-        Default move assignment, element-wise moves the other Layout.
+       Default move assignment, element-wise moves the other Layout.
