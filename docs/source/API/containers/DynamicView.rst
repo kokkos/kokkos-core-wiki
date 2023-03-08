@@ -6,10 +6,11 @@
 
 Header File: ``<Kokkos_DynamicView.hpp>``
 
-Class Interface
----------------
 
-.. cppkokkos:class:: template<typename DataType , typename ... P> DynamicView
+Description
+-----------
+
+.. cppkokkos:class:: template<typename DataType , typename ... P> DynamicView : public Kokkos::ViewTraits<DataType , P ...>
 
     A potentially reference-counted rank 1 array, without layout, that can be dynamically resized on the host.
 
@@ -21,11 +22,9 @@ Class Interface
 
     .. rubric:: Public Nested Typedefs
 
-    .. cppkokkos:type:: traits
+    .. cppkokkos:type:: Kokkos::ViewTraits< DataType , P ... > traits
 
         ``Kokkos::ViewTraits`` parent class type.
-
-    .. rubric:: Public View Types
 
     .. cppkokkos:type:: array_type
 
@@ -67,7 +66,9 @@ Class Interface
 
         The move constructor.
 
-    .. cppkokkos:function:: DynamicView(const std::string & arg_label, const unsigned min_chunk_size, const unsigned max_extent)
+    .. cppkokkos:function:: DynamicView(const std::string & arg_label, \
+			    const unsigned min_chunk_size,  \
+			    const unsigned max_extent)
 
         The standard allocating constructor.
 
@@ -85,23 +86,14 @@ Class Interface
 
     .. rubric:: Data Resizing, Dimensions, Strides
 
-    .. code-block:: cpp
 
-        template< typename IntType >
-        inline
-        typename std::enable_if
-        < std::is_integral<IntType>::value &&
-            Kokkos::Impl::MemorySpaceAccess< Kokkos::HostSpace
-                                            , typename Impl::ChunkArraySpace< typename traits::memory_space >::memory_space
-                                            >::accessible
-        >::type
-        resize_serial(IntType const & n)
+    .. cppkokkos:function:: template< typename IntType > inline void resize_serial(IntType const & n)
 
-    \
-        Resizes the DynamicView with sufficient chunks of memory of ``chunk_size`` to store the requested number of elements ``n``.
-        This method can only be called outside of parallel regions.
-        ``n`` is restricted to be smaller than the ``max_extent`` value passed to the DynamicView constructor.
-        This method must be called after the construction of the DynamicView as the constructor sets the requested sizes for ``chunk_size`` and ``max_extent``, but does not take input for the actual amount of memory to be used.
+       Resizes the DynamicView with sufficient chunks of memory of ``chunk_size`` to store the requested number of elements ``n``.
+       This method can only be called outside of parallel regions.
+       ``n`` is restricted to be smaller than the ``max_extent`` value passed to the DynamicView constructor.
+       This method must be called after the construction of the DynamicView as the constructor
+       sets the requested sizes for ``chunk_size`` and ``max_extent``, but does not take input for the actual amount of memory to be used.
 
     .. cppkokkos:kokkosinlinefunction:: size_t allocation_extent() const noexcept;
 
@@ -177,7 +169,7 @@ Class Interface
 
         :return: The current reference count of the underlying allocation.
 
-    .. cppkokkos:function:: const char* label() const;
+    .. cppkokkos:function:: inline const std::string label();
 
         :return: The label of the ``DynamicView``.
 
@@ -185,11 +177,15 @@ Class Interface
 
         :return: True if the View points to a valid set of allocated memory chunks. Note that this will return false until resize_serial is called with a size greater than 0.
 
-    .. code-block:: cpp
 
-        const int chunk_size = 16*1024;
-        Kokkos::Experimental::DynamicView<double*> view("v", chunk_size, 10*chunk_size);
-        view.resize_serial(3*chunk_size);
-        Kokkos::parallel_for("InitializeData", 3*chunk_size, KOKKOS_LAMBDA ( const int i) {
-            view(i) = i;
-        });
+Example
+-------
+
+.. code-block:: cpp
+
+   const int chunk_size = 16*1024;
+   Kokkos::Experimental::DynamicView<double*> view("v", chunk_size, 10*chunk_size);
+   view.resize_serial(3*chunk_size);
+   Kokkos::parallel_for("InitializeData", 3*chunk_size, KOKKOS_LAMBDA ( const int i) {
+     view(i) = i;
+   });
