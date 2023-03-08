@@ -2,7 +2,7 @@
 ===============
 
 .. role:: cppkokkos(code)
-    :language: cppkokkos
+   :language: cppkokkos
 
 Header File: ``<Kokkos_Layout.hpp>``
 
@@ -11,51 +11,54 @@ Usage
 
 .. code-block:: cpp
 
-    Kokkos::View<float*, Kokkos::LayoutRight> my_view;
+   Kokkos::View<float*, Kokkos::LayoutRight> my_view;
 
-Class Interface
----------------
+Description
+-----------
 
 .. cppkokkos:struct:: LayoutRight
 
-    This Kokkos Layout, when provided to a multidimensional View, lays out memory such that the last index is the contiguous one. This matches the C conventions for allocations.
+   When provided to a multidimensional View, lays out memory such that the
+   **last index is the contiguous one**. This matches the C conventions for allocations.
 
-    .. rubric:: Public Member Variables
+   .. rubric:: Nested Typedefs
 
-    .. cppkokkos:member:: static constexpr bool is_extent_constructible
+   .. cppkokkos:type:: array_layout
 
-        A boolean enum to allow detection that this class is extent constructible.
+       A tag signifying that this models the Layout concept.
 
-    .. cppkokkos:member:: static constexpr unsigned dimension
+   .. rubric:: Member Variables
 
-        An array containing the size of each dimension of the Layout.
+   .. cppkokkos:member:: static constexpr bool is_extent_constructible = true
 
-    .. rubric:: Other Types
+       A boolean to allow detection that this class is extent constructible.
 
-    .. cppkokkos:type:: array_layout
+   .. cppkokkos:member:: size_t dimension[8]
 
-        A tag signifying that this models the Layout concept.
+       An array containing the size of each dimension of the Layout.
 
-    .. rubric:: Constructors
+   .. rubric:: Constructors
 
-    .. cppkokkos:function:: LayoutRight(LayoutRight const&);
+   .. cppkokkos:kokkosinlinefunction:: explicit constexpr LayoutRight(size_t N0 = 0, size_t N1 = 0, \
+				       size_t N2 = 0, size_t N3 = 0, size_t N4 = 0, \
+				       size_t N5 = 0, size_t N6 = 0, size_t N7 = 0)
 
-        Default copy constructor, element-wise copies the other Layout.
+      Constructor that takes in up to 8 sizes, to set the sizes of the corresponding dimensions of the Layout.
 
-    .. cppkokkos:function:: LayoutRight(LayoutRight&&);
+   .. cppkokkos:function:: LayoutRight(LayoutRight const&) = default
 
-        Default move constructor, element-wise moves the other Layout.
+       Default copy constructor, element-wise copies the other Layout.
 
-    .. cppkokkos:function:: KOKKOS_INLINE_FUNCTION explicit constexpr LayoutRight(size_t N0 = 0, size_t N1 = 0, size_t N2 = 0, size_t N3 = 0, size_t N4 = 0, size_t N5 = 0, size_t N6 = 0, size_t N7 = 0);
+   .. cppkokkos:function:: LayoutRight(LayoutRight&&) = default
 
-        Constructor that takes in up to 8 sizes, to set the sizes of the corresponding dimensions of the Layout.
+       Default move constructor, element-wise moves the other Layout.
 
-    .. rubric:: Assignment operators
+   .. rubric:: Assignment operators
 
-    .. cppkokkos:function:: LayoutRight& operator=(LayoutRight const&) = default;
+   .. cppkokkos:function:: LayoutRight& operator=(LayoutRight const&) = default
 
-        Default copy assignment, element-wise copies the other Layout.
+       Default copy assignment, element-wise copies the other Layout.
 
-    .. cppkokkos:function:: LayoutRight& operator=(LayoutRight&&) = default;
+   .. cppkokkos:function:: LayoutRight& operator=(LayoutRight&&) = default
 
-        Default move assignment, element-wise moves the other Layout.
+       Default move assignment, element-wise moves the other Layout.
