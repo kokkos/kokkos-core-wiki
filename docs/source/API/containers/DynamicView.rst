@@ -19,13 +19,13 @@ Class Interface
 
         Whether the reference type is a C++ lvalue reference.
 
-    .. rubric:: Data Types
+    .. rubric:: Public Nested Typedefs
 
     .. cppkokkos:type:: traits
 
         ``Kokkos::ViewTraits`` parent class type.
 
-    .. rubric:: View Types
+    .. rubric:: Public View Types
 
     .. cppkokkos:type:: array_type
 
@@ -43,7 +43,7 @@ Class Interface
 
         The compatible view type with the same ``DataType`` and ``LayoutType`` stored in host accessible memory space.
 
-    .. rubric:: Data Handle Types
+    .. rubric:: Public Data Handle Types
 
     .. cppkokkos:type:: reference_type
 
@@ -77,7 +77,7 @@ Class Interface
 
         The ``resize_serial`` method must be called after construction to reserve the desired amount of memory, bound by ``max_extent``.
 
-    .. rubric:: Data Access Functions
+    .. rubric:: Public Data Access Functions
 
     .. cppkokkos:kokkosinlinefunction:: reference_type operator() (const I0 & i0 , const Args & ... args) const
 
