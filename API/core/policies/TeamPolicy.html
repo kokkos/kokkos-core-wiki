@@ -474,7 +474,7 @@
         </a>
         <div class="content-icon-container">
 <div class="edit-this-page">
-  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/API/core/policies/TeamPolicy.md" title="Edit this page">
+  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/API/core/policies/TeamPolicy.rst" title="Edit this page">
     <svg aria-hidden="true" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
       <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4"></path>
@@ -498,285 +498,237 @@
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="teampolicy">
+          <section id="teampolicy">
 <h1><code class="docutils literal notranslate"><span class="pre">TeamPolicy</span></code><a class="headerlink" href="#teampolicy" title="Permalink to this heading">#</a></h1>
-<p>Header File: <code class="docutils literal notranslate"><span class="pre">Kokkos_Core.hpp</span></code></p>
-<p>Usage:</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">Kokkos</span><span class="o">::</span><span class="n">TeamPolicy</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="w"> </span><span class="n">league_size</span><span class="p">,</span><span class="w"> </span><span class="n">team_size</span><span class="w"> </span><span class="p">[,</span><span class="w"> </span><span class="n">vector_length</span><span class="p">])</span>
+<p>Header File: <code class="docutils literal notranslate"><span class="pre">&lt;Kokkos_Core.hpp&gt;</span></code></p>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this heading">#</a></h2>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Kokkos</span><span class="o">::</span><span class="n">TeamPolicy</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="w"> </span><span class="n">league_size</span><span class="p">,</span><span class="w"> </span><span class="n">team_size</span><span class="w"> </span><span class="p">[,</span><span class="w"> </span><span class="n">vector_length</span><span class="p">])</span>
 <span class="n">Kokkos</span><span class="o">::</span><span class="n">TeamPolicy</span><span class="o">&lt;</span><span class="n">ARGS</span><span class="o">&gt;</span><span class="p">(</span><span class="n">league_size</span><span class="p">,</span><span class="w"> </span><span class="n">team_size</span><span class="w"> </span><span class="p">[,</span><span class="w"> </span><span class="n">vector_length</span><span class="p">])</span>
 <span class="n">Kokkos</span><span class="o">::</span><span class="n">TeamPolicy</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">Space</span><span class="p">,</span><span class="w"> </span><span class="n">league_size</span><span class="p">,</span><span class="w"> </span><span class="n">team_size</span><span class="w"> </span><span class="p">[,</span><span class="w"> </span><span class="n">vector_length</span><span class="p">])</span>
 <span class="n">Kokkos</span><span class="o">::</span><span class="n">TeamPolicy</span><span class="o">&lt;</span><span class="n">ARGS</span><span class="o">&gt;</span><span class="p">(</span><span class="n">Space</span><span class="p">,</span><span class="w"> </span><span class="n">league_size</span><span class="p">,</span><span class="w"> </span><span class="n">team_size</span><span class="w"> </span><span class="p">[,</span><span class="w"> </span><span class="n">vector_length</span><span class="p">])</span>
 </pre></div>
 </div>
-<p>TeamPolicy defines an execution policy for a 1D iteration space starting at begin and going to end with an open interval.</p>
-<p>See also: <a class="reference internal" href="TeamHandleConcept.html"><span class="doc std std-doc">TeamMember</span></a></p>
-<section id="synopsis">
-<h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this heading">#</a></h2>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="n">Args</span><span class="o">&gt;</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">Kokkos</span><span class="o">::</span><span class="n">TeamPolicy</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="n">execution_policy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TeamPolicy</span><span class="p">;</span>
-
-<span class="w">    </span><span class="c1">//Inherited from PolicyTraits&lt;Args...&gt;  </span>
-<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="n">execution_space</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="n">PolicyTraits</span><span class="o">&lt;</span><span class="n">Args</span><span class="p">...</span><span class="o">&gt;::</span><span class="n">execution_space</span><span class="p">;</span><span class="w"> </span>
-<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="n">schedule_type</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="n">PolicyTraits</span><span class="o">&lt;</span><span class="n">Args</span><span class="p">...</span><span class="o">&gt;::</span><span class="n">schedule_type</span><span class="p">;</span><span class="w"> </span>
-<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="n">work_tag</span><span class="w">          </span><span class="o">=</span><span class="w"> </span><span class="n">PolicyTraits</span><span class="o">&lt;</span><span class="n">Args</span><span class="p">...</span><span class="o">&gt;::</span><span class="n">work_tag</span><span class="p">;</span><span class="w"> </span>
-<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="n">index_type</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="n">PolicyTraits</span><span class="o">&lt;</span><span class="n">Args</span><span class="p">...</span><span class="o">&gt;::</span><span class="n">index_type</span><span class="p">;</span><span class="w"> </span>
-<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="n">iteration_pattern</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PolicyTraits</span><span class="o">&lt;</span><span class="n">Args</span><span class="p">...</span><span class="o">&gt;::</span><span class="n">iteration_pattern</span><span class="p">;</span><span class="w"> </span>
-<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="n">launch_bounds</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="n">PolicyTraits</span><span class="o">&lt;</span><span class="n">Args</span><span class="p">...</span><span class="o">&gt;::</span><span class="n">launch_bounds</span><span class="p">;</span>
-
-<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="n">member_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TeamMemberType</span><span class="o">&lt;</span><span class="n">execution_space</span><span class="o">&gt;</span><span class="p">;</span>
-
-<span class="w">    </span><span class="c1">//Constructors</span>
-<span class="w">    </span><span class="n">TeamPolicy</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">TeamPolicy</span><span class="o">&amp;</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="p">;</span>
-<span class="w">    </span><span class="n">TeamPolicy</span><span class="p">(</span><span class="n">TeamPolicy</span><span class="o">&amp;&amp;</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="p">;</span>
-
-<span class="w">    </span><span class="n">TeamPolicy</span><span class="p">();</span>
-
-<span class="w">    </span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="n">Args</span><span class="o">&gt;</span>
-<span class="w">    </span><span class="n">TeamPolicy</span><span class="p">(</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="nc">traits</span><span class="o">::</span><span class="n">execution_space</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">work_space</span>
-<span class="w">              </span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">index_type</span><span class="w"> </span><span class="n">league_size</span>
-<span class="w">              </span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">index_type</span><span class="w"> </span><span class="n">team_size</span>
-<span class="w">              </span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">index_type</span><span class="w"> </span><span class="n">vector_length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
-
-<span class="w">    </span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="n">Args</span><span class="o">&gt;</span>
-<span class="w">    </span><span class="n">TeamPolicy</span><span class="p">(</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">index_type</span><span class="w"> </span><span class="n">league_size</span>
-<span class="w">              </span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">index_type</span><span class="w"> </span><span class="n">team_size</span>
-<span class="w">              </span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">index_type</span><span class="w"> </span><span class="n">vector_length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
-
-<span class="w">    </span><span class="n">TeamPolicy</span><span class="o">&amp;</span><span class="w"> </span><span class="k">operator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">TeamPolicy</span><span class="o">&amp;</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="p">;</span>
-
-<span class="w">    </span>
-<span class="w">    </span><span class="c1">// set chunk_size to a discrete value</span>
-<span class="w">    </span><span class="n">TeamPolicy</span><span class="o">&amp;</span><span class="w"> </span><span class="nf">set_chunk_size</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">chunk</span><span class="p">);</span>
-<span class="w">    </span><span class="c1">// set scratch size for per-team and/or per-thread</span>
-<span class="w">    </span><span class="n">TeamPolicy</span><span class="o">&amp;</span><span class="w"> </span><span class="nf">set_scratch_size</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">level</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Impl</span><span class="o">::</span><span class="n">PerTeamValue</span><span class="o">&amp;</span><span class="w"> </span><span class="n">per_team</span><span class="p">);</span>
-<span class="w">    </span><span class="n">TeamPolicy</span><span class="o">&amp;</span><span class="w"> </span><span class="nf">set_scratch_size</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">level</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Impl</span><span class="o">::</span><span class="n">PerThreadValue</span><span class="o">&amp;</span><span class="w"> </span><span class="n">per_thread</span><span class="p">);</span>
-<span class="w">    </span><span class="n">TeamPolicy</span><span class="o">&amp;</span><span class="w"> </span><span class="nf">set_scratch_size</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">level</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Impl</span><span class="o">::</span><span class="n">PerTeamValue</span><span class="o">&amp;</span><span class="w"> </span><span class="n">per_team</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Impl</span><span class="o">::</span><span class="n">PerThreadValue</span><span class="o">&amp;</span><span class="w"> </span><span class="n">per_thread</span><span class="p">);</span>
-<span class="w">    </span><span class="n">TeamPolicy</span><span class="o">&amp;</span><span class="w"> </span><span class="nf">set_scratch_size</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">level</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Impl</span><span class="o">::</span><span class="n">PerThreadValue</span><span class="o">&amp;</span><span class="w"> </span><span class="n">per_thread</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Impl</span><span class="o">::</span><span class="n">PerTeamValue</span><span class="o">&amp;</span><span class="w"> </span><span class="n">per_team</span><span class="p">);</span>
-
-<span class="w">    </span><span class="c1">// querying configuration limits</span>
-<span class="w">    </span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">FunctorType</span><span class="o">&gt;</span>
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">team_size_max</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">FunctorType</span><span class="o">&amp;</span><span class="w"> </span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">ParallelForTag</span><span class="o">&amp;</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
-<span class="w">    </span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">FunctorType</span><span class="o">&gt;</span>
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">team_size_max</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">FunctorType</span><span class="o">&amp;</span><span class="w"> </span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">ParallelReduceTag</span><span class="o">&amp;</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
-<span class="w">    </span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">FunctorType</span><span class="o">&gt;</span>
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">team_size_recommended</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">FunctorType</span><span class="o">&amp;</span><span class="w"> </span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">ParallelForTag</span><span class="o">&amp;</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
-<span class="w">    </span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">FunctorType</span><span class="o">&gt;</span>
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">team_size_recommended</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">FunctorType</span><span class="o">&amp;</span><span class="w"> </span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">ParallelReduceTag</span><span class="o">&amp;</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
-<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">vector_length_max</span><span class="p">();</span><span class="w"> </span>
-<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">scratch_size_max</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">level</span><span class="p">);</span><span class="w"> </span>
-
-<span class="w">    </span><span class="c1">// querying configuration settings</span>
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="nf">team_size</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="nf">league_size</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="nf">scratch_size</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">level</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">team_size_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">-1</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="nf">team_scratch_size</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">level</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="nf">thread_scratch_size</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">level</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="nf">chunk_size</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
-
-<span class="w">    </span><span class="c1">// return ExecSpace instance provided to the constructor</span>
-<span class="w">    </span><span class="n">KOKKOS_INLINE_FUNCTION</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="nc">traits</span><span class="o">::</span><span class="n">execution_space</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">space</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
-<span class="p">};</span>
-</pre></div>
-</div>
+<p>Execution policy for a 1D iteration space starting at begin and going to end with an open interval.</p>
+<p>See also: <a class="reference external" href="TeamHandleConcept.html">TeamMember</a></p>
 </section>
-<section id="parameters">
-<h2>Parameters:<a class="headerlink" href="#parameters" title="Permalink to this heading">#</a></h2>
-<section id="common-arguments-for-all-execution-policies">
-<h3>Common Arguments for all Execution Policies<a class="headerlink" href="#common-arguments-for-all-execution-policies" title="Permalink to this heading">#</a></h3>
-<ul class="simple">
-<li><p>Execution Policies generally accept compile time arguments via template parameters and runtime parameters via constructor arguments or setter functions.</p></li>
-<li><p>Template arguments can be given in arbitrary order.</p></li>
-</ul>
-<div class="table-wrapper colwidths-auto docutils container">
-<table class="docutils align-default">
-<thead>
-<tr class="row-odd"><th class="head"><p>Argument</p></th>
-<th class="head"><p>Options</p></th>
-<th class="head"><p>Purpose</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>ExecutionSpace</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">Serial</span></code>, <code class="docutils literal notranslate"><span class="pre">OpenMP</span></code>, <code class="docutils literal notranslate"><span class="pre">Threads</span></code>, <code class="docutils literal notranslate"><span class="pre">Cuda</span></code>, <code class="docutils literal notranslate"><span class="pre">HIP</span></code>, <code class="docutils literal notranslate"><span class="pre">SYCL</span></code>, <code class="docutils literal notranslate"><span class="pre">HPX</span></code></p></td>
-<td><p>Specify the Execution Space to execute the kernel in. Defaults to <code class="docutils literal notranslate"><span class="pre">Kokkos::DefaultExecutionSpace</span></code>.</p></td>
-</tr>
-<tr class="row-odd"><td><p>Schedule</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">Schedule&lt;Dynamic&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">Schedule&lt;Static&gt;</span></code></p></td>
-<td><p>Specify scheduling policy for work items. <code class="docutils literal notranslate"><span class="pre">Dynamic</span></code> scheduling is implemented through a work stealing queue. Default is machine and backend specific.</p></td>
-</tr>
-<tr class="row-even"><td><p>IndexType</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">IndexType&lt;int&gt;</span></code></p></td>
-<td><p>Specify integer type to be used for traversing the iteration space. Defaults to <code class="docutils literal notranslate"><span class="pre">int64_t</span></code>.</p></td>
-</tr>
-<tr class="row-odd"><td><p>LaunchBounds</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">LaunchBounds&lt;MaxThreads,</span> <span class="pre">MinBlocks&gt;</span></code></p></td>
-<td><p>Specifies hints to to the compiler about CUDA/HIP launch bounds.</p></td>
-</tr>
-<tr class="row-even"><td><p>WorkTag</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">SomeClass</span></code></p></td>
-<td><p>Specify the work tag type used to call the functor operator. Any arbitrary type defaults to <code class="docutils literal notranslate"><span class="pre">void</span></code>.</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</section>
-<section id="requirements">
-<h3>Requirements:<a class="headerlink" href="#requirements" title="Permalink to this heading">#</a></h3>
-</section>
-</section>
-<section id="public-class-members">
-<h2>Public Class Members<a class="headerlink" href="#public-class-members" title="Permalink to this heading">#</a></h2>
-<section id="constructors">
-<h3>Constructors<a class="headerlink" href="#constructors" title="Permalink to this heading">#</a></h3>
-<ul>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">TeamPolicy</span><span class="p">()</span>
-</pre></div>
-</div>
-<p>Default Constructor uninitialized policy.</p>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">TeamPolicy</span><span class="p">(</span><span class="n">index_type</span><span class="w"> </span><span class="n">league_size</span><span class="p">,</span><span class="w"> </span><span class="n">index_type</span><span class="w"> </span><span class="n">team_size</span><span class="w"> </span><span class="p">[,</span><span class="w"> </span><span class="n">index_type</span><span class="w"> </span><span class="n">vector_length</span><span class="p">])</span>
-</pre></div>
-</div>
-<p>Request to launch <code class="docutils literal notranslate"><span class="pre">league_size</span></code> work items, each of which is assigned to a team of threads with <code class="docutils literal notranslate"><span class="pre">team_size</span></code> threads, using a vector length of <code class="docutils literal notranslate"><span class="pre">vector_length</span></code>.
-If the team size is not possible when calling a parallel policy, that kernel launch may throw.</p>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">TeamPolicy</span><span class="p">(</span><span class="n">index_type</span><span class="w"> </span><span class="n">league_size</span><span class="p">,</span><span class="w"> </span><span class="n">Impl</span><span class="o">::</span><span class="n">AUTO_t</span><span class="w"> </span><span class="p">[,</span><span class="w"> </span><span class="n">index_type</span><span class="w"> </span><span class="n">vector_length</span><span class="p">])</span>
-</pre></div>
-</div>
-<p>Request to launch <code class="docutils literal notranslate"><span class="pre">league_size</span></code> work items, each of which is assigned to a team of threads of a size determined by Kokkos, using a vector length of <code class="docutils literal notranslate"><span class="pre">vector_length</span></code>.
-The team size may be determined lazily at launch time, taking into account properties of the functor.</p>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">TeamPolicy</span><span class="p">(</span><span class="n">execution</span><span class="w"> </span><span class="n">space</span><span class="p">,</span><span class="w"> </span><span class="n">index_type</span><span class="w"> </span><span class="n">league_size</span><span class="p">,</span><span class="w"> </span><span class="n">index_type</span><span class="w"> </span><span class="n">team_size</span><span class="w"> </span><span class="p">[,</span><span class="w"> </span><span class="n">index_type</span><span class="w"> </span><span class="n">vector_length</span><span class="p">])</span>
-</pre></div>
-</div>
-<p>Request to launch <code class="docutils literal notranslate"><span class="pre">league_size</span></code> work items, each of which is assigned to a team of threads with <code class="docutils literal notranslate"><span class="pre">team_size</span></code> threads, using a vector length of <code class="docutils literal notranslate"><span class="pre">vector_length</span></code>.
-If the team size is not possible when calling a parallel policy, that kernel launch may throw.
-Use the provided execution space instance during a kernel launch.</p>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">TeamPolicy</span><span class="p">(</span><span class="n">execution_space</span><span class="w"> </span><span class="n">space</span><span class="p">,</span><span class="w"> </span><span class="n">index_type</span><span class="w"> </span><span class="n">league_size</span><span class="p">,</span><span class="w"> </span><span class="n">Impl</span><span class="o">::</span><span class="n">AUTO_t</span><span class="w"> </span><span class="p">[,</span><span class="w"> </span><span class="n">index_type</span><span class="w"> </span><span class="n">vector_length</span><span class="p">])</span>
-</pre></div>
-</div>
-<p>Request to launch <code class="docutils literal notranslate"><span class="pre">league_size</span></code> work items, each of which is assigned to a team of threads of a size determined by Kokkos, using a vector length of <code class="docutils literal notranslate"><span class="pre">vector_length</span></code>.
-The team size may be determined lazily at launch time, taking into account properties of the functor.
-Use the provided execution space instance during a kernel launch.</p>
-</li>
-</ul>
-</section>
-<section id="runtime-settings">
-<h3>Runtime Settings<a class="headerlink" href="#runtime-settings" title="Permalink to this heading">#</a></h3>
-<ul>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kr">inline</span><span class="w"> </span><span class="n">TeamPolicy</span><span class="o">&amp;</span><span class="w"> </span><span class="nf">set_chunk_size</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">chunk</span><span class="p">);</span>
-</pre></div>
-</div>
-<p>Set the chunk size. Each physical team of threads will get assigned <code class="docutils literal notranslate"><span class="pre">chunk</span></code> consecutive teams. Default is 1.</p>
+<section id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this heading">#</a></h2>
+<dl class="cppkokkos class">
+<dt class="sig sig-object cppkokkos" id="_CPPv4IDpE10TeamPolicy">
+<span id="_CPPv3IDpE10TeamPolicy"></span><span id="_CPPv2IDpE10TeamPolicy"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="sig-name descname"><span class="n"><span class="pre">Args</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TeamPolicy</span></span></span><a class="headerlink" href="#_CPPv4IDpE10TeamPolicy" title="Permalink to this definition">#</a><br /></dt>
+<dd><p class="rubric">Template Arguments</p>
+<p>Valid template arguments for TeamPolicy are described <a class="reference external" href="../Execution-Policies.html#common-arguments-for-all-execution-policies">here</a></p>
+<p class="rubric">Public nested typedefs</p>
+<dl class="cppkokkos type">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N10TeamPolicy15execution_spaceE">
+<span id="_CPPv3N10TeamPolicy15execution_spaceE"></span><span id="_CPPv2N10TeamPolicy15execution_spaceE"></span><span id="TeamPolicy::execution_space"></span><span class="k"></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">execution_space</span></span></span><a class="headerlink" href="#_CPPv4N10TeamPolicy15execution_spaceE" title="Permalink to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cppkokkos type">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N10TeamPolicy13schedule_typeE">
+<span id="_CPPv3N10TeamPolicy13schedule_typeE"></span><span id="_CPPv2N10TeamPolicy13schedule_typeE"></span><span id="TeamPolicy::schedule_type"></span><span class="k"></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">schedule_type</span></span></span><a class="headerlink" href="#_CPPv4N10TeamPolicy13schedule_typeE" title="Permalink to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cppkokkos type">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N10TeamPolicy8work_tagE">
+<span id="_CPPv3N10TeamPolicy8work_tagE"></span><span id="_CPPv2N10TeamPolicy8work_tagE"></span><span id="TeamPolicy::work_tag"></span><span class="k"></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">work_tag</span></span></span><a class="headerlink" href="#_CPPv4N10TeamPolicy8work_tagE" title="Permalink to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cppkokkos type">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N10TeamPolicy10index_typeE">
+<span id="_CPPv3N10TeamPolicy10index_typeE"></span><span id="_CPPv2N10TeamPolicy10index_typeE"></span><span id="TeamPolicy::index_type"></span><span class="k"></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">index_type</span></span></span><a class="headerlink" href="#_CPPv4N10TeamPolicy10index_typeE" title="Permalink to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cppkokkos type">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N10TeamPolicy17iteration_patternE">
+<span id="_CPPv3N10TeamPolicy17iteration_patternE"></span><span id="_CPPv2N10TeamPolicy17iteration_patternE"></span><span id="TeamPolicy::iteration_pattern"></span><span class="k"></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">iteration_pattern</span></span></span><a class="headerlink" href="#_CPPv4N10TeamPolicy17iteration_patternE" title="Permalink to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cppkokkos type">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N10TeamPolicy13launch_boundsE">
+<span id="_CPPv3N10TeamPolicy13launch_boundsE"></span><span id="_CPPv2N10TeamPolicy13launch_boundsE"></span><span id="TeamPolicy::launch_bounds"></span><span class="k"></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">launch_bounds</span></span></span><a class="headerlink" href="#_CPPv4N10TeamPolicy13launch_boundsE" title="Permalink to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cppkokkos type">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N10TeamPolicy11member_typeE">
+<span id="_CPPv3N10TeamPolicy11member_typeE"></span><span id="_CPPv2N10TeamPolicy11member_typeE"></span><span id="TeamPolicy::member_type"></span><span class="k"></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">member_type</span></span></span><a class="headerlink" href="#_CPPv4N10TeamPolicy11member_typeE" title="Permalink to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<p class="rubric">Constructors</p>
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N10TeamPolicy10TeamPolicyEv">
+<span id="_CPPv3N10TeamPolicy10TeamPolicyEv"></span><span id="_CPPv2N10TeamPolicy10TeamPolicyEv"></span><span id="TeamPolicy::TeamPolicy"></span><span class="sig-name descname"><span class="n"><span class="pre">TeamPolicy</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N10TeamPolicy10TeamPolicyEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Default constructor uninitialized policy.</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N10TeamPolicy10TeamPolicyERK10TeamPolicy">
+<span id="_CPPv3N10TeamPolicy10TeamPolicyERK10TeamPolicy"></span><span id="_CPPv2N10TeamPolicy10TeamPolicyERK10TeamPolicy"></span><span id="TeamPolicy::TeamPolicy__TeamPolicyCR"></span><span class="sig-name descname"><span class="n"><span class="pre">TeamPolicy</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N10TeamPolicy10TeamPolicyERK10TeamPolicy" title="TeamPolicy::TeamPolicy"><span class="n"><span class="pre">TeamPolicy</span></span></a><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4N10TeamPolicy10TeamPolicyERK10TeamPolicy" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Copy constructor</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N10TeamPolicy10TeamPolicyERR10TeamPolicy">
+<span id="_CPPv3N10TeamPolicy10TeamPolicyERR10TeamPolicy"></span><span id="_CPPv2N10TeamPolicy10TeamPolicyERR10TeamPolicy"></span><span id="TeamPolicy::TeamPolicy__TeamPolicyRR"></span><span class="sig-name descname"><span class="n"><span class="pre">TeamPolicy</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N10TeamPolicy10TeamPolicyERR10TeamPolicy" title="TeamPolicy::TeamPolicy"><span class="n"><span class="pre">TeamPolicy</span></span></a><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4N10TeamPolicy10TeamPolicyERR10TeamPolicy" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Move constructor</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N10TeamPolicy10TeamPolicyE10index_type10index_type10index_type">
+<span id="_CPPv3N10TeamPolicy10TeamPolicyE10index_type10index_type10index_type"></span><span id="_CPPv2N10TeamPolicy10TeamPolicyE10index_type10index_type10index_type"></span><span id="TeamPolicy::TeamPolicy__index_type.index_type.index_type"></span><span class="sig-name descname"><span class="n"><span class="pre">TeamPolicy</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N10TeamPolicy10index_typeE" title="TeamPolicy::index_type"><span class="n"><span class="pre">index_type</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">league_size</span></span>, <a class="reference internal" href="#_CPPv4N10TeamPolicy10index_typeE" title="TeamPolicy::index_type"><span class="n"><span class="pre">index_type</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">team_size</span></span>, <a class="reference internal" href="#_CPPv4N10TeamPolicy10index_typeE" title="TeamPolicy::index_type"><span class="n"><span class="pre">index_type</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">vector_length</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">1</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N10TeamPolicy10TeamPolicyE10index_type10index_type10index_type" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Request to launch <code class="docutils literal notranslate"><span class="pre">league_size</span></code> work items, each of which is assigned to a team of threads
+with <code class="docutils literal notranslate"><span class="pre">team_size</span></code> threads, using a vector length of <code class="docutils literal notranslate"><span class="pre">vector_length</span></code>. If the team size is not possible when
+calling a parallel policy, that kernel launch may throw.</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N10TeamPolicy10TeamPolicyE10index_typeN4Impl6AUTO_tE10index_type">
+<span id="_CPPv3N10TeamPolicy10TeamPolicyE10index_typeN4Impl6AUTO_tE10index_type"></span><span id="_CPPv2N10TeamPolicy10TeamPolicyE10index_typeN4Impl6AUTO_tE10index_type"></span><span id="TeamPolicy::TeamPolicy__index_type.Impl::AUTO_t.index_type"></span><span class="sig-name descname"><span class="n"><span class="pre">TeamPolicy</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N10TeamPolicy10index_typeE" title="TeamPolicy::index_type"><span class="n"><span class="pre">index_type</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">league_size</span></span>, <span class="n"><span class="pre">Impl</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">AUTO_t</span></span>, <a class="reference internal" href="#_CPPv4N10TeamPolicy10index_typeE" title="TeamPolicy::index_type"><span class="n"><span class="pre">index_type</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">vector_length</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">1</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N10TeamPolicy10TeamPolicyE10index_typeN4Impl6AUTO_tE10index_type" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Request to launch <code class="docutils literal notranslate"><span class="pre">league_size</span></code> work items, each of which is assigned to a team of threads of a
+size determined by Kokkos, using a vector length of <code class="docutils literal notranslate"><span class="pre">vector_length</span></code>. The team size may be determined
+lazily at launch time, taking into account properties of the functor.</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N10TeamPolicy10TeamPolicyE15execution_space10index_type10index_type10index_type">
+<span id="_CPPv3N10TeamPolicy10TeamPolicyE15execution_space10index_type10index_type10index_type"></span><span id="_CPPv2N10TeamPolicy10TeamPolicyE15execution_space10index_type10index_type10index_type"></span><span id="TeamPolicy::TeamPolicy__execution_space.index_type.index_type.index_type"></span><span class="sig-name descname"><span class="n"><span class="pre">TeamPolicy</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N10TeamPolicy15execution_spaceE" title="TeamPolicy::execution_space"><span class="n"><span class="pre">execution_space</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">space</span></span>, <a class="reference internal" href="#_CPPv4N10TeamPolicy10index_typeE" title="TeamPolicy::index_type"><span class="n"><span class="pre">index_type</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">league_size</span></span>, <a class="reference internal" href="#_CPPv4N10TeamPolicy10index_typeE" title="TeamPolicy::index_type"><span class="n"><span class="pre">index_type</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">team_size</span></span>, <a class="reference internal" href="#_CPPv4N10TeamPolicy10index_typeE" title="TeamPolicy::index_type"><span class="n"><span class="pre">index_type</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">vector_length</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">1</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N10TeamPolicy10TeamPolicyE15execution_space10index_type10index_type10index_type" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Request to launch <code class="docutils literal notranslate"><span class="pre">league_size</span></code> work items, each of which is assigned to a team of threads with <code class="docutils literal notranslate"><span class="pre">team_size</span></code> threads,
+using a vector length of <code class="docutils literal notranslate"><span class="pre">vector_length</span></code>. If the team size is not possible when calling a parallel policy,
+that kernel launch may throw. Use the provided execution space instance during a kernel launch.</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N10TeamPolicy10TeamPolicyE15execution_space10index_typeN4Impl6AUTO_tE10index_type">
+<span id="_CPPv3N10TeamPolicy10TeamPolicyE15execution_space10index_typeN4Impl6AUTO_tE10index_type"></span><span id="_CPPv2N10TeamPolicy10TeamPolicyE15execution_space10index_typeN4Impl6AUTO_tE10index_type"></span><span id="TeamPolicy::TeamPolicy__execution_space.index_type.Impl::AUTO_t.index_type"></span><span class="sig-name descname"><span class="n"><span class="pre">TeamPolicy</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N10TeamPolicy15execution_spaceE" title="TeamPolicy::execution_space"><span class="n"><span class="pre">execution_space</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">space</span></span>, <a class="reference internal" href="#_CPPv4N10TeamPolicy10index_typeE" title="TeamPolicy::index_type"><span class="n"><span class="pre">index_type</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">league_size</span></span>, <span class="n"><span class="pre">Impl</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">AUTO_t</span></span>, <a class="reference internal" href="#_CPPv4N10TeamPolicy10index_typeE" title="TeamPolicy::index_type"><span class="n"><span class="pre">index_type</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">vector_length</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">1</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N10TeamPolicy10TeamPolicyE15execution_space10index_typeN4Impl6AUTO_tE10index_type" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Request to launch <code class="docutils literal notranslate"><span class="pre">league_size</span></code> work items, each of which is assigned to a team of threads of a size determined by Kokkos,
+using a vector length of <code class="docutils literal notranslate"><span class="pre">vector_length</span></code>. The team size may be determined lazily at launch time, taking into
+account properties of the functor. Use the provided execution space instance during a kernel launch.</p>
+</dd></dl>
+
+<p class="rubric">Runtime Settings</p>
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N10TeamPolicy14set_chunk_sizeEi">
+<span id="_CPPv3N10TeamPolicy14set_chunk_sizeEi"></span><span id="_CPPv2N10TeamPolicy14set_chunk_sizeEi"></span><span id="TeamPolicy::set_chunk_size__i"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4IDpE10TeamPolicy" title="TeamPolicy"><span class="n"><span class="pre">TeamPolicy</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">set_chunk_size</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">chunk</span></span><span class="sig-paren">)</span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4N10TeamPolicy14set_chunk_sizeEi" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Set the chunk size. Each physical team of threads will get assigned <code class="docutils literal notranslate"><span class="pre">chunk</span></code> consecutive teams. Default is 1.</p>
 <p>Returns: reference to <code class="docutils literal notranslate"><span class="pre">*this</span></code></p>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kr">inline</span><span class="w"> </span><span class="n">TeamPolicy</span><span class="o">&amp;</span><span class="w"> </span><span class="nf">set_scratch_size</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">level</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Impl</span><span class="o">::</span><span class="n">PerTeamValue</span><span class="o">&amp;</span><span class="w"> </span><span class="n">per_team</span><span class="p">);</span>
-<span class="kr">inline</span><span class="w"> </span><span class="n">TeamPolicy</span><span class="o">&amp;</span><span class="w"> </span><span class="nf">set_scratch_size</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">level</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Impl</span><span class="o">::</span><span class="n">PerThreadValue</span><span class="o">&amp;</span><span class="w"> </span><span class="n">per_thread</span><span class="p">);</span>
-<span class="kr">inline</span><span class="w"> </span><span class="n">TeamPolicy</span><span class="o">&amp;</span><span class="w"> </span><span class="nf">set_scratch_size</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">level</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Impl</span><span class="o">::</span><span class="n">PerTeamValue</span><span class="o">&amp;</span><span class="w"> </span><span class="n">per_team</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Impl</span><span class="o">::</span><span class="n">PerThreadValue</span><span class="o">&amp;</span><span class="w"> </span><span class="n">per_thread</span><span class="p">);</span>
-<span class="kr">inline</span><span class="w"> </span><span class="n">TeamPolicy</span><span class="o">&amp;</span><span class="w"> </span><span class="nf">set_scratch_size</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">level</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Impl</span><span class="o">::</span><span class="n">PerThreadValue</span><span class="o">&amp;</span><span class="w"> </span><span class="n">per_thread</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Impl</span><span class="o">::</span><span class="n">PerTeamValue</span><span class="o">&amp;</span><span class="w"> </span><span class="n">per_team</span><span class="p">);</span>
-</pre></div>
-</div>
-<p>Set the per team and per thread scratch size.</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N10TeamPolicy16set_scratch_sizeERKiRKN4Impl12PerTeamValueE">
+<span id="_CPPv3N10TeamPolicy16set_scratch_sizeERKiRKN4Impl12PerTeamValueE"></span><span id="_CPPv2N10TeamPolicy16set_scratch_sizeERKiRKN4Impl12PerTeamValueE"></span><span id="TeamPolicy::set_scratch_size__iCR.Impl::PerTeamValueCR"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4IDpE10TeamPolicy" title="TeamPolicy"><span class="n"><span class="pre">TeamPolicy</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">set_scratch_size</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">level</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">Impl</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">PerTeamValue</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">per_team</span></span><span class="sig-paren">)</span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4N10TeamPolicy16set_scratch_sizeERKiRKN4Impl12PerTeamValueE" title="Permalink to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N10TeamPolicy16set_scratch_sizeERKiRKN4Impl14PerThreadValueE">
+<span id="_CPPv3N10TeamPolicy16set_scratch_sizeERKiRKN4Impl14PerThreadValueE"></span><span id="_CPPv2N10TeamPolicy16set_scratch_sizeERKiRKN4Impl14PerThreadValueE"></span><span id="TeamPolicy::set_scratch_size__iCR.Impl::PerThreadValueCR"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4IDpE10TeamPolicy" title="TeamPolicy"><span class="n"><span class="pre">TeamPolicy</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">set_scratch_size</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">level</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">Impl</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">PerThreadValue</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">per_thread</span></span><span class="sig-paren">)</span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4N10TeamPolicy16set_scratch_sizeERKiRKN4Impl14PerThreadValueE" title="Permalink to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N10TeamPolicy16set_scratch_sizeERKiRKN4Impl12PerTeamValueERKN4Impl14PerThreadValueE">
+<span id="_CPPv3N10TeamPolicy16set_scratch_sizeERKiRKN4Impl12PerTeamValueERKN4Impl14PerThreadValueE"></span><span id="_CPPv2N10TeamPolicy16set_scratch_sizeERKiRKN4Impl12PerTeamValueERKN4Impl14PerThreadValueE"></span><span id="TeamPolicy::set_scratch_size__iCR.Impl::PerTeamValueCR.Impl::PerThreadValueCR"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4IDpE10TeamPolicy" title="TeamPolicy"><span class="n"><span class="pre">TeamPolicy</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">set_scratch_size</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">level</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">Impl</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">PerTeamValue</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">per_team</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">Impl</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">PerThreadValue</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">per_thread</span></span><span class="sig-paren">)</span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4N10TeamPolicy16set_scratch_sizeERKiRKN4Impl12PerTeamValueERKN4Impl14PerThreadValueE" title="Permalink to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N10TeamPolicy16set_scratch_sizeERKiRKN4Impl14PerThreadValueERKN4Impl12PerTeamValueE">
+<span id="_CPPv3N10TeamPolicy16set_scratch_sizeERKiRKN4Impl14PerThreadValueERKN4Impl12PerTeamValueE"></span><span id="_CPPv2N10TeamPolicy16set_scratch_sizeERKiRKN4Impl14PerThreadValueERKN4Impl12PerTeamValueE"></span><span id="TeamPolicy::set_scratch_size__iCR.Impl::PerThreadValueCR.Impl::PerTeamValueCR"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4IDpE10TeamPolicy" title="TeamPolicy"><span class="n"><span class="pre">TeamPolicy</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">set_scratch_size</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">level</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">Impl</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">PerThreadValue</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">per_thread</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">Impl</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">PerTeamValue</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">per_team</span></span><span class="sig-paren">)</span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4N10TeamPolicy16set_scratch_sizeERKiRKN4Impl14PerThreadValueERKN4Impl12PerTeamValueE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Set the per team and per thread scratch size.</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">level</span></code>: set the storage level. 0 is closest cache. 1 is closest storage (e.g. high bandwidth memory)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">per_team</span></code>: wrapper for the per team size of scratch in bytes. Returned by the function <code class="docutils literal notranslate"><span class="pre">PerTeam(int)</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">per_thread</span></code>: wrapper for the per thread size of scratch in bytes. Returned by the function <code class="docutils literal notranslate"><span class="pre">PerThread(int)</span></code>.
-One can set the scratch size for level 0 and 1 independently by calling the function twice.
-Subsequent calls with the same level overwrite the previous value.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">per_thread</span></code>: wrapper for the per thread size of scratch in bytes. Returned by the function <code class="docutils literal notranslate"><span class="pre">PerThread(int)</span></code>.</p></li>
 </ul>
-<p>Returns: reference to <code class="docutils literal notranslate"><span class="pre">*this</span></code></p>
-</li>
-</ul>
-</section>
-<section id="query-limits-of-runtime-settings">
-<h3>Query Limits of Runtime Settings<a class="headerlink" href="#query-limits-of-runtime-settings" title="Permalink to this heading">#</a></h3>
-<ul>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">FunctorType</span><span class="o">&gt;</span>
-<span class="kt">int</span><span class="w"> </span><span class="n">team_size_max</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">FunctorType</span><span class="o">&amp;</span><span class="w"> </span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">ParallelForTag</span><span class="o">&amp;</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
-<span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">FunctorType</span><span class="o">&gt;</span>
-<span class="kt">int</span><span class="w"> </span><span class="n">team_size_max</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">FunctorType</span><span class="o">&amp;</span><span class="w"> </span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">ParallelReduceTag</span><span class="o">&amp;</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
-</pre></div>
-</div>
-<p>Query the maximum team size possible given a specific functor.
-The tag denotes whether this is for a <a class="reference internal" href="../parallel-dispatch/parallel_for.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">parallel_for</span></code></span></a> or a <a class="reference internal" href="../parallel-dispatch/parallel_reduce.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">parallel_reduce</span></code></span></a>.
-Note: this is not a static function! The function will take into account settings
-for vector length and scratch size of <code class="docutils literal notranslate"><span class="pre">*this</span></code>. Using a value larger than the
-return value will result in dispatch failure.</p>
-<p>Returns: The maximum value for <code class="docutils literal notranslate"><span class="pre">team_size</span></code> allowed to be given to be used with an
-otherwise identical <code class="docutils literal notranslate"><span class="pre">TeamPolicy</span></code> for dispatching the functor <code class="docutils literal notranslate"><span class="pre">f</span></code>.</p>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">FunctorType</span><span class="o">&gt;</span>
-<span class="kt">int</span><span class="w"> </span><span class="n">team_size_recommended</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">FunctorType</span><span class="o">&amp;</span><span class="w"> </span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">ParallelForTag</span><span class="o">&amp;</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
-<span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">FunctorType</span><span class="o">&gt;</span>
-<span class="kt">int</span><span class="w"> </span><span class="n">team_size_recommended</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">FunctorType</span><span class="o">&amp;</span><span class="w"> </span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">ParallelReduceTag</span><span class="o">&amp;</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
-</pre></div>
-</div>
-<p>Query the recommended team size for the specific functor <code class="docutils literal notranslate"><span class="pre">f</span></code>.
-The tag denotes whether this is for a <a class="reference internal" href="../parallel-dispatch/parallel_for.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">parallel_for</span></code></span></a> or a <a class="reference internal" href="../parallel-dispatch/parallel_reduce.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">parallel_reduce</span></code></span></a>.
-Note: this is not a static function! The function will take into account settings
-for vector length and scratch size of <code class="docutils literal notranslate"><span class="pre">*this</span></code>.</p>
-<p>Returns: The recommended value for <code class="docutils literal notranslate"><span class="pre">team_size</span></code> to be given to be used with an
-otherwise identical <code class="docutils literal notranslate"><span class="pre">TeamPolicy</span></code> for dispatching the functor <code class="docutils literal notranslate"><span class="pre">f</span></code>.</p>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">vector_length_max</span><span class="p">();</span><span class="w"> </span>
-</pre></div>
-</div>
-<p>Returns: the maximum valid value for vector length.</p>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">scratch_size_max</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">level</span><span class="p">);</span><span class="w"> </span>
-</pre></div>
-</div>
-<p>Returns: the maximum total scratch size in bytes, for the given level. Note: If a kernel performs
-team-level reductions or scan operations, not all of this memory will be available for dynamic
-user requests. Some of that maximal scratch size is being used for internal operations. The
-actual size of these internal allocations depends on the value type used in the reduction or scan.</p>
-</li>
-</ul>
-</section>
-<section id="query-runtime-settings">
-<h3>Query Runtime Settings<a class="headerlink" href="#query-runtime-settings" title="Permalink to this heading">#</a></h3>
-<ul>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">team_size</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
-</pre></div>
-</div>
-<p>Returns: the requested team size.</p>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">league_size</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
-</pre></div>
-</div>
-<p>Returns: the requested league size.</p>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">scratch_size</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">level</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">team_size_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">-1</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
-</pre></div>
-</div>
-<p>This function returns the total scratch size requested. If <code class="docutils literal notranslate"><span class="pre">team_size</span></code> is not provided, the
-team size for the calculation is used from the internal setting (i.e. the result of calling
-<code class="docutils literal notranslate"><span class="pre">this-&gt;team_size()</span></code>). Otherwise, the provided team size is used.</p>
-<p>Returns: the value for the total scratch size in bytes  in the specified scratch level.</p>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">team_scratch_size</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">level</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
-</pre></div>
-</div>
-<p>Returns: the value for the per team scratch size in bytes  in the specified scratch level.</p>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">thread_scratch_size</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">level</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
-</pre></div>
-</div>
-<p>Returns: the value for the per thread scratch size in bytes in the specified scratch level.</p>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">chunk_size</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
-</pre></div>
-</div>
-<p>Returns: the chunk size, set via <code class="docutils literal notranslate"><span class="pre">set_chunk_size()</span></code>.</p>
-</li>
-</ul>
-</section>
+<p>One can set the scratch size for level 0 and 1 independently by calling the function twice. Subsequent calls with the same level overwrite the previous value.
+Returns: reference to <code class="docutils literal notranslate"><span class="pre">*this</span></code></p>
+</dd></dl>
+
+<p class="rubric">Query Limits of Runtime Settings</p>
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4I0ENK10TeamPolicy13team_size_maxEiRK11FunctorTypeRK14ParallelForTag">
+<span id="_CPPv3I0ENK10TeamPolicy13team_size_maxERK11FunctorTypeRK14ParallelForTag"></span><span id="_CPPv2I0ENK10TeamPolicy13team_size_maxERK11FunctorTypeRK14ParallelForTag"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">FunctorType</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">team_size_max</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0ENK10TeamPolicy13team_size_maxEiRK11FunctorTypeRK14ParallelForTag" title="TeamPolicy::team_size_max::FunctorType"><span class="n"><span class="pre">FunctorType</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">f</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">ParallelForTag</span></span><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4I0ENK10TeamPolicy13team_size_maxEiRK11FunctorTypeRK14ParallelForTag" title="Permalink to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4I0ENK10TeamPolicy13team_size_maxEiRK11FunctorTypeRK17ParallelReduceTag">
+<span id="_CPPv3I0ENK10TeamPolicy13team_size_maxERK11FunctorTypeRK17ParallelReduceTag"></span><span id="_CPPv2I0ENK10TeamPolicy13team_size_maxERK11FunctorTypeRK17ParallelReduceTag"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">FunctorType</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">team_size_max</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0ENK10TeamPolicy13team_size_maxEiRK11FunctorTypeRK17ParallelReduceTag" title="TeamPolicy::team_size_max::FunctorType"><span class="n"><span class="pre">FunctorType</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">f</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">ParallelReduceTag</span></span><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4I0ENK10TeamPolicy13team_size_maxEiRK11FunctorTypeRK17ParallelReduceTag" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Query the maximum team size possible given a specific functor. The tag denotes whether this is for a <a class="reference external" href="../parallel-dispatch/parallel_for.html"><code class="xref cppkokkos cppkokkos-func docutils literal notranslate"><span class="pre">parallel_for()</span></code></a> or a <a class="reference external" href="../parallel-dispatch/parallel_reduce.html"><code class="xref cppkokkos cppkokkos-func docutils literal notranslate"><span class="pre">parallel_reduce()</span></code></a>.
+Note: this is not a static function! The function will take into account settings for vector length and scratch size of <code class="docutils literal notranslate"><span class="pre">*this</span></code>. Using a value larger than the return value will result in dispatch failure.
+Returns: The maximum value for <code class="docutils literal notranslate"><span class="pre">team_size</span></code> allowed to be given to be used with an otherwise identical <code class="docutils literal notranslate"><span class="pre">TeamPolicy</span></code> for dispatching the functor <code class="docutils literal notranslate"><span class="pre">f</span></code>.</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4I0ENK10TeamPolicy21team_size_recommendedEiRK11FunctorTypeRK14ParallelForTag">
+<span id="_CPPv3I0ENK10TeamPolicy21team_size_recommendedERK11FunctorTypeRK14ParallelForTag"></span><span id="_CPPv2I0ENK10TeamPolicy21team_size_recommendedERK11FunctorTypeRK14ParallelForTag"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">FunctorType</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">team_size_recommended</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0ENK10TeamPolicy21team_size_recommendedEiRK11FunctorTypeRK14ParallelForTag" title="TeamPolicy::team_size_recommended::FunctorType"><span class="n"><span class="pre">FunctorType</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">f</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">ParallelForTag</span></span><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4I0ENK10TeamPolicy21team_size_recommendedEiRK11FunctorTypeRK14ParallelForTag" title="Permalink to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4I0ENK10TeamPolicy21team_size_recommendedEiRK11FunctorTypeRK17ParallelReduceTag">
+<span id="_CPPv3I0ENK10TeamPolicy21team_size_recommendedERK11FunctorTypeRK17ParallelReduceTag"></span><span id="_CPPv2I0ENK10TeamPolicy21team_size_recommendedERK11FunctorTypeRK17ParallelReduceTag"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">FunctorType</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">team_size_recommended</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0ENK10TeamPolicy21team_size_recommendedEiRK11FunctorTypeRK17ParallelReduceTag" title="TeamPolicy::team_size_recommended::FunctorType"><span class="n"><span class="pre">FunctorType</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">f</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">ParallelReduceTag</span></span><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4I0ENK10TeamPolicy21team_size_recommendedEiRK11FunctorTypeRK17ParallelReduceTag" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Query the recommended team size for the specific functor <code class="docutils literal notranslate"><span class="pre">f</span></code>. The tag denotes whether this is for a <a class="reference external" href="../parallel-dispatch/parallel_for.html"><code class="xref cppkokkos cppkokkos-func docutils literal notranslate"><span class="pre">parallel_for()</span></code></a> or a <a class="reference external" href="../parallel-dispatch/parallel_reduce.html"><code class="xref cppkokkos cppkokkos-func docutils literal notranslate"><span class="pre">parallel_reduce()</span></code></a>.
+Note: this is not a static function! The function will take into account settings for vector length and scratch size of <code class="docutils literal notranslate"><span class="pre">*this</span></code>.
+Returns: The recommended value for <code class="docutils literal notranslate"><span class="pre">team_size</span></code> to be given to be used with an otherwise identical <code class="docutils literal notranslate"><span class="pre">TeamPolicy</span></code> for dispatching the functor <code class="docutils literal notranslate"><span class="pre">f</span></code>.</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N10TeamPolicy17vector_length_maxEv">
+<span id="_CPPv3N10TeamPolicy17vector_length_maxEv"></span><span id="_CPPv2N10TeamPolicy17vector_length_maxEv"></span><span id="TeamPolicy::vector_length_max"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">vector_length_max</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4N10TeamPolicy17vector_length_maxEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Returns: the maximum valid value for vector length.</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N10TeamPolicy16scratch_size_maxEi">
+<span id="_CPPv3N10TeamPolicy16scratch_size_maxEi"></span><span id="_CPPv2N10TeamPolicy16scratch_size_maxEi"></span><span id="TeamPolicy::scratch_size_max__i"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">scratch_size_max</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">level</span></span><span class="sig-paren">)</span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4N10TeamPolicy16scratch_size_maxEi" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Returns: the maximum total scratch size in bytes, for the given level.
+Note: If a kernel performs team-level reductions or scan operations, not all of this memory will be
+available for dynamic user requests. Some of that maximal scratch size is being used for internal operations.
+The actual size of these internal allocations depends on the value type used in the reduction or scan.</p>
+</dd></dl>
+
+<p class="rubric">Query Runtime Settings</p>
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK10TeamPolicy9team_sizeEv">
+<span id="_CPPv3NK10TeamPolicy9team_sizeEv"></span><span id="_CPPv2NK10TeamPolicy9team_sizeEv"></span><span id="TeamPolicy::team_sizeC"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">team_size</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4NK10TeamPolicy9team_sizeEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Returns: the requested team size.</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK10TeamPolicy11league_sizeEv">
+<span id="_CPPv3NK10TeamPolicy11league_sizeEv"></span><span id="_CPPv2NK10TeamPolicy11league_sizeEv"></span><span id="TeamPolicy::league_sizeC"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">league_size</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4NK10TeamPolicy11league_sizeEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Returns: the requested league size.</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK10TeamPolicy12scratch_sizeEii">
+<span id="_CPPv3NK10TeamPolicy12scratch_sizeEii"></span><span id="_CPPv2NK10TeamPolicy12scratch_sizeEii"></span><span id="TeamPolicy::scratch_size__i.iC"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">scratch_size</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">level</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">team_size_</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="o"><span class="pre">-</span></span><span class="m"><span class="pre">1</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4NK10TeamPolicy12scratch_sizeEii" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>This function returns the total scratch size requested. If <code class="docutils literal notranslate"><span class="pre">team_size</span></code> is not provided, the team size
+for the calculation is used from the internal setting (i.e. the result of calling <code class="docutils literal notranslate"><span class="pre">this-&gt;team_size()</span></code>). Otherwise, the provided team size is used.
+Returns: the value for the total scratch size in bytes in the specified scratch level.</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK10TeamPolicy17team_scratch_sizeEi">
+<span id="_CPPv3NK10TeamPolicy17team_scratch_sizeEi"></span><span id="_CPPv2NK10TeamPolicy17team_scratch_sizeEi"></span><span id="TeamPolicy::team_scratch_size__iC"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">team_scratch_size</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">level</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4NK10TeamPolicy17team_scratch_sizeEi" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Returns: the value for the per team scratch size in bytes in the specified scratch level.</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK10TeamPolicy19thread_scratch_sizeEi">
+<span id="_CPPv3NK10TeamPolicy19thread_scratch_sizeEi"></span><span id="_CPPv2NK10TeamPolicy19thread_scratch_sizeEi"></span><span id="TeamPolicy::thread_scratch_size__iC"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">thread_scratch_size</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">level</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4NK10TeamPolicy19thread_scratch_sizeEi" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Returns: the value for the per thread scratch size in bytes in the specified scratch level.</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK10TeamPolicy10chunk_sizeEv">
+<span id="_CPPv3NK10TeamPolicy10chunk_sizeEv"></span><span id="_CPPv2NK10TeamPolicy10chunk_sizeEv"></span><span id="TeamPolicy::chunk_sizeC"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">chunk_size</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4NK10TeamPolicy10chunk_sizeEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Returns: the chunk size, set via <code class="docutils literal notranslate"><span class="pre">set_chunk_size()</span></code>.</p>
+</dd></dl>
+
+</dd></dl>
+
 </section>
 <section id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading">#</a></h2>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">TeamPolicy</span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="n">policy_1</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">AUTO</span><span class="p">);</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">TeamPolicy</span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="n">policy_1</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">AUTO</span><span class="p">);</span>
 <span class="n">TeamPolicy</span><span class="o">&lt;</span><span class="n">Cuda</span><span class="o">&gt;</span><span class="w"> </span><span class="n">policy_2</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">T</span><span class="p">);</span>
 <span class="n">TeamPolicy</span><span class="o">&lt;</span><span class="n">Schedule</span><span class="o">&lt;</span><span class="n">Dynamic</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="n">OpenMP</span><span class="o">&gt;</span><span class="w"> </span><span class="n">policy_3</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">AUTO</span><span class="p">,</span><span class="mi">8</span><span class="p">);</span>
 <span class="n">TeamPolicy</span><span class="o">&lt;</span><span class="n">IndexType</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="n">Schedule</span><span class="o">&lt;</span><span class="n">Dynamic</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">policy_4</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">);</span>
@@ -844,19 +796,8 @@ team size for the calculation is used from the internal setting (i.e. the result
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">TeamPolicy</span></code></a><ul>
-<li><a class="reference internal" href="#synopsis">Synopsis</a></li>
-<li><a class="reference internal" href="#parameters">Parameters:</a><ul>
-<li><a class="reference internal" href="#common-arguments-for-all-execution-policies">Common Arguments for all Execution Policies</a></li>
-<li><a class="reference internal" href="#requirements">Requirements:</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#public-class-members">Public Class Members</a><ul>
-<li><a class="reference internal" href="#constructors">Constructors</a></li>
-<li><a class="reference internal" href="#runtime-settings">Runtime Settings</a></li>
-<li><a class="reference internal" href="#query-limits-of-runtime-settings">Query Limits of Runtime Settings</a></li>
-<li><a class="reference internal" href="#query-runtime-settings">Query Runtime Settings</a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#usage">Usage</a></li>
+<li><a class="reference internal" href="#description">Description</a></li>
 <li><a class="reference internal" href="#examples">Examples</a></li>
 </ul>
 </li>
