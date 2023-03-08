@@ -32,20 +32,17 @@ Description
 
       An array containing the stride for each dimension of the Layout
 
-   .. rubric:: Typedefs
+   .. cppkokkos:member:: static constexpr bool is_extent_constructible = false;
+
+      A boolean to allow detection that this class is extent constructible
+
+   .. rubric:: Public Typedefs
 
    .. cppkokkos:type:: array_layout
 
       A tag signifying that this models the Layout concept
 
-   .. rubric:: Enums
-
-   .. cppkokkos:member:: static constexpr bool is_extent_constructible = false;
-
-      A boolean enum to allow detection that this class is extent constructible
-
    .. rubric:: Constructors
-
 
    .. cppkokkos:kokkosinlinefunction:: explicit constexpr LayoutStride(size_t N0 = 0, size_t S0 = 0, \
 			   size_t N1 = 0, \
