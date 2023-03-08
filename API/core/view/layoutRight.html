@@ -474,7 +474,7 @@
         </a>
         <div class="content-icon-container">
 <div class="edit-this-page">
-  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/API/core/view/layoutRight.md" title="Edit this page">
+  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/API/core/view/layoutRight.rst" title="Edit this page">
     <svg aria-hidden="true" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
       <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4"></path>
@@ -498,97 +498,76 @@
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="layoutright">
+          <section id="layoutright">
 <h1><code class="docutils literal notranslate"><span class="pre">LayoutRight</span></code><a class="headerlink" href="#layoutright" title="Permalink to this heading">#</a></h1>
-<p>Header File: <code class="docutils literal notranslate"><span class="pre">Kokkos_Layout.hpp</span></code></p>
-<p>This Kokkos Layout, when provided to a multidimensional View, lays out memory such that the last index is the contiguous one. This matches the C conventions for allocations.</p>
-<p>Usage:</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">Kokkos</span><span class="o">::</span><span class="n">View</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">LayoutRight</span><span class="o">&gt;</span><span class="w"> </span><span class="n">my_view</span><span class="p">;</span>
-</pre></div>
-</div>
-<section id="synopsis">
-<h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this heading">#</a></h2>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span><span class="w"> </span><span class="nc">LayoutRight</span><span class="w"> </span><span class="p">{</span>
-
-<span class="k">typedef</span><span class="w"> </span><span class="n">LayoutRight</span><span class="w"> </span><span class="n">array_layout</span><span class="p">;</span>
-
-<span class="kt">size_t</span><span class="w"> </span><span class="n">dimension</span><span class="p">[</span><span class="n">ARRAY_LAYOUT_MAX_RANK</span><span class="p">];</span>
-
-<span class="k">enum</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">is_extent_constructible</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="w"> </span><span class="p">};</span>
-
-<span class="n">LayoutRight</span><span class="p">(</span><span class="n">LayoutRight</span><span class="w"> </span><span class="k">const</span><span class="o">&amp;</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="p">;</span>
-<span class="n">LayoutRight</span><span class="p">(</span><span class="n">LayoutRight</span><span class="o">&amp;&amp;</span><span class="p">)</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="p">;</span>
-<span class="n">LayoutRight</span><span class="o">&amp;</span><span class="w"> </span><span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="n">LayoutRight</span><span class="w"> </span><span class="k">const</span><span class="o">&amp;</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="p">;</span>
-<span class="n">LayoutRight</span><span class="o">&amp;</span><span class="w"> </span><span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="n">LayoutRight</span><span class="o">&amp;&amp;</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="p">;</span>
-
-<span class="n">KOKKOS_INLINE_FUNCTION</span>
-<span class="k">explicit</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="n">LayoutRight</span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">N0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">N1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">N2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
-<span class="w">                            </span><span class="kt">size_t</span><span class="w"> </span><span class="n">N3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">N4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">N5</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
-<span class="w">                            </span><span class="kt">size_t</span><span class="w"> </span><span class="n">N6</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">N7</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
-<span class="w">  </span><span class="o">:</span><span class="w"> </span><span class="n">dimension</span><span class="p">{</span><span class="n">N0</span><span class="p">,</span><span class="w"> </span><span class="n">N1</span><span class="p">,</span><span class="w"> </span><span class="n">N2</span><span class="p">,</span><span class="w"> </span><span class="n">N3</span><span class="p">,</span><span class="w"> </span><span class="n">N4</span><span class="p">,</span><span class="w"> </span><span class="n">N5</span><span class="p">,</span><span class="w"> </span><span class="n">N6</span><span class="p">,</span><span class="w"> </span><span class="n">N7</span><span class="p">}</span><span class="w"> </span><span class="p">{}</span>
-<span class="p">};</span>
+<p>Header File: <code class="docutils literal notranslate"><span class="pre">&lt;Kokkos_Layout.hpp&gt;</span></code></p>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this heading">#</a></h2>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Kokkos</span><span class="o">::</span><span class="n">View</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">LayoutRight</span><span class="o">&gt;</span><span class="w"> </span><span class="n">my_view</span><span class="p">;</span>
 </pre></div>
 </div>
 </section>
-<section id="public-class-members">
-<h2>Public Class Members<a class="headerlink" href="#public-class-members" title="Permalink to this heading">#</a></h2>
-<ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">dimension</span></code></p>
-<p>An array containing the size of each dimension of the Layout</p>
-</li>
-</ul>
-</section>
-<section id="typedefs">
-<h2>Typedefs<a class="headerlink" href="#typedefs" title="Permalink to this heading">#</a></h2>
-<ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">array_layout</span></code></p>
-<p>A tag signifying that this models the Layout concept</p>
-</li>
-</ul>
-</section>
-<section id="enums">
-<h2>Enums<a class="headerlink" href="#enums" title="Permalink to this heading">#</a></h2>
-<ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">is_extent_constructible</span></code></p>
-<p>A boolean enum to allow detection that this class is extent constructible</p>
-</li>
-</ul>
-<section id="constructors">
-<h3>Constructors<a class="headerlink" href="#constructors" title="Permalink to this heading">#</a></h3>
-<ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">LayoutRight(LayoutRight</span> <span class="pre">const&amp;)</span> <span class="pre">=</span> <span class="pre">default;</span></code></p>
-<p>Default copy constructor, element-wise copies the other Layout</p>
-</li>
-<li><p><code class="docutils literal notranslate"><span class="pre">LayoutRight(LayoutRight&amp;&amp;)</span> <span class="pre">=</span> <span class="pre">default;</span></code></p>
-<p>Default move constructor, element-wise moves the other Layout</p>
-</li>
-<li></li>
-</ul>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">KOKKOS_INLINE_FUNCTION</span>
-<span class="k">explicit</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="n">LayoutRight</span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">N0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">N1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">N2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
-<span class="w">                            </span><span class="kt">size_t</span><span class="w"> </span><span class="n">N3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">N4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">N5</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
-<span class="w">                            </span><span class="kt">size_t</span><span class="w"> </span><span class="n">N6</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">N7</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
-</pre></div>
-</div>
-<p>Constructor that takes in up to 8 sizes, to set the sizes of the corresponding dimensions of the Layout</p>
-</section>
-<section id="assignment-operators">
-<h3>Assignment operators<a class="headerlink" href="#assignment-operators" title="Permalink to this heading">#</a></h3>
-<ul>
-<li><p>LayoutRight&amp; operator=(LayoutRight const&amp;) = default;</p>
-<p>Default copy assignment, element-wise copies the other Layout</p>
-</li>
-<li><p>LayoutRight&amp; operator=(LayoutRight&amp;&amp;) = default;</p>
-<p>Default move assignment, element-wise moves the other Layout</p>
-</li>
-</ul>
-</section>
-<section id="functions">
-<h3>Functions<a class="headerlink" href="#functions" title="Permalink to this heading">#</a></h3>
-<ul class="simple">
-<li><p>None</p></li>
-</ul>
-</section>
+<section id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this heading">#</a></h2>
+<dl class="cppkokkos struct">
+<dt class="sig sig-object cppkokkos" id="_CPPv411LayoutRight">
+<span id="_CPPv311LayoutRight"></span><span id="_CPPv211LayoutRight"></span><span id="LayoutRight"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">LayoutRight</span></span></span><a class="headerlink" href="#_CPPv411LayoutRight" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>When provided to a multidimensional View, lays out memory such that the
+<strong>last index is the contiguous one</strong>. This matches the C conventions for allocations.</p>
+<p class="rubric">Nested Typedefs</p>
+<dl class="cppkokkos type">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N11LayoutRight12array_layoutE">
+<span id="_CPPv3N11LayoutRight12array_layoutE"></span><span id="_CPPv2N11LayoutRight12array_layoutE"></span><span id="LayoutRight::array_layout"></span><span class="k"></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">array_layout</span></span></span><a class="headerlink" href="#_CPPv4N11LayoutRight12array_layoutE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>A tag signifying that this models the Layout concept.</p>
+</dd></dl>
+
+<p class="rubric">Member Variables</p>
+<dl class="cppkokkos member">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N11LayoutRight23is_extent_constructibleE">
+<span id="_CPPv3N11LayoutRight23is_extent_constructibleE"></span><span id="_CPPv2N11LayoutRight23is_extent_constructibleE"></span><span id="LayoutRight::is_extent_constructible__b"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_extent_constructible</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">true</span></span><a class="headerlink" href="#_CPPv4N11LayoutRight23is_extent_constructibleE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>A boolean to allow detection that this class is extent constructible.</p>
+</dd></dl>
+
+<dl class="cppkokkos member">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N11LayoutRight9dimensionE">
+<span id="_CPPv3N11LayoutRight9dimensionE"></span><span id="_CPPv2N11LayoutRight9dimensionE"></span><span id="LayoutRight::dimension__sA"></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">dimension</span></span></span><span class="p"><span class="pre">[</span></span><span class="m"><span class="pre">8</span></span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#_CPPv4N11LayoutRight9dimensionE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>An array containing the size of each dimension of the Layout.</p>
+</dd></dl>
+
+<p class="rubric">Constructors</p>
+<dl class="cppkokkos kokkosinlinefunction">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N11LayoutRight11LayoutRightE6size_t6size_t6size_t6size_t6size_t6size_t6size_t6size_t">
+<span id="_CPPv3N11LayoutRight11LayoutRightE6size_t6size_t6size_t6size_t6size_t6size_t6size_t6size_t"></span><span id="_CPPv2N11LayoutRight11LayoutRightE6size_t6size_t6size_t6size_t6size_t6size_t6size_t6size_t"></span><span id="LayoutRight::LayoutRight__s.s.s.s.s.s.s.sCE"></span><span class="k"><span class="pre">KOKKOS_INLINE_FUNCTION</span></span><span class="w"> </span><span class="k"><span class="pre">explicit</span></span><span class="w"> </span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">LayoutRight</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">N0</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">N1</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">N2</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">N3</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">N4</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">N5</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">N6</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">N7</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11LayoutRight11LayoutRightE6size_t6size_t6size_t6size_t6size_t6size_t6size_t6size_t" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Constructor that takes in up to 8 sizes, to set the sizes of the corresponding dimensions of the Layout.</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N11LayoutRight11LayoutRightERK11LayoutRight">
+<span id="_CPPv3N11LayoutRight11LayoutRightERK11LayoutRight"></span><span id="_CPPv2N11LayoutRight11LayoutRightERK11LayoutRight"></span><span id="LayoutRight::LayoutRight__LayoutRightCR"></span><span class="sig-name descname"><span class="n"><span class="pre">LayoutRight</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N11LayoutRight11LayoutRightERK11LayoutRight" title="LayoutRight::LayoutRight"><span class="n"><span class="pre">LayoutRight</span></span></a><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><br /></dt>
+<dd><p>Default copy constructor, element-wise copies the other Layout.</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N11LayoutRight11LayoutRightERR11LayoutRight">
+<span id="_CPPv3N11LayoutRight11LayoutRightERR11LayoutRight"></span><span id="_CPPv2N11LayoutRight11LayoutRightERR11LayoutRight"></span><span id="LayoutRight::LayoutRight__LayoutRightRR"></span><span class="sig-name descname"><span class="n"><span class="pre">LayoutRight</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N11LayoutRight11LayoutRightERR11LayoutRight" title="LayoutRight::LayoutRight"><span class="n"><span class="pre">LayoutRight</span></span></a><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><br /></dt>
+<dd><p>Default move constructor, element-wise moves the other Layout.</p>
+</dd></dl>
+
+<p class="rubric">Assignment operators</p>
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N11LayoutRightaSERK11LayoutRight">
+<span id="_CPPv3N11LayoutRightaSERK11LayoutRight"></span><span id="_CPPv2N11LayoutRightaSERK11LayoutRight"></span><span id="LayoutRight::assign-operator__LayoutRightCR"></span><a class="reference internal" href="#_CPPv411LayoutRight" title="LayoutRight"><span class="n"><span class="pre">LayoutRight</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">=</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv411LayoutRight" title="LayoutRight"><span class="n"><span class="pre">LayoutRight</span></span></a><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N11LayoutRightaSERK11LayoutRight" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Default copy assignment, element-wise copies the other Layout.</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N11LayoutRightaSERR11LayoutRight">
+<span id="_CPPv3N11LayoutRightaSERR11LayoutRight"></span><span id="_CPPv2N11LayoutRightaSERR11LayoutRight"></span><span id="LayoutRight::assign-operator__LayoutRightRR"></span><a class="reference internal" href="#_CPPv411LayoutRight" title="LayoutRight"><span class="n"><span class="pre">LayoutRight</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">=</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv411LayoutRight" title="LayoutRight"><span class="n"><span class="pre">LayoutRight</span></span></a><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N11LayoutRightaSERR11LayoutRight" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Default move assignment, element-wise moves the other Layout.</p>
+</dd></dl>
+
+</dd></dl>
+
 </section>
 </section>
 
@@ -650,15 +629,8 @@
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">LayoutRight</span></code></a><ul>
-<li><a class="reference internal" href="#synopsis">Synopsis</a></li>
-<li><a class="reference internal" href="#public-class-members">Public Class Members</a></li>
-<li><a class="reference internal" href="#typedefs">Typedefs</a></li>
-<li><a class="reference internal" href="#enums">Enums</a><ul>
-<li><a class="reference internal" href="#constructors">Constructors</a></li>
-<li><a class="reference internal" href="#assignment-operators">Assignment operators</a></li>
-<li><a class="reference internal" href="#functions">Functions</a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#usage">Usage</a></li>
+<li><a class="reference internal" href="#description">Description</a></li>
 </ul>
 </li>
 </ul>
