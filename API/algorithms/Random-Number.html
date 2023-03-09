@@ -474,7 +474,7 @@
         </a>
         <div class="content-icon-container">
 <div class="edit-this-page">
-  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/API/algorithms/Random-Number.md" title="Edit this page">
+  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/API/algorithms/Random-Number.rst" title="Edit this page">
     <svg aria-hidden="true" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
       <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4"></path>
@@ -498,94 +498,109 @@
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="random-number">
+          <section id="random-number">
 <h1>Random-Number<a class="headerlink" href="#random-number" title="Permalink to this heading">#</a></h1>
-<section id="headers-kokkos-core-hpp-kokkos-complex-hpp">
-<h2>headers:  Kokkos_Core.hpp, Kokkos_Complex.hpp<a class="headerlink" href="#headers-kokkos-core-hpp-kokkos-complex-hpp" title="Permalink to this heading">#</a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">template&lt;class</span> <span class="pre">Generator&gt;</span></code>
-<code class="docutils literal notranslate"><span class="pre">struct</span> <span class="pre">rand&lt;Generator,</span> <span class="pre">gen_data_type&gt;</span></code></p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">KOKKOS_INLINE_FUNCTION</span>&#160; <span class="pre">static</span> <span class="pre">gen_func_type</span> <span class="pre">max(){return</span> <span class="pre">type_value}</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">KOKKOS_INLINE_FUNCTION</span>&#160; <span class="pre">static</span> <span class="pre">gen_func_type</span> <span class="pre">draw(Generator&amp;</span> <span class="pre">gen)</span>&#160; <span class="pre">{return</span> <span class="pre">gen_data_type((gen.rand()&amp;gen_return_value)}</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">KOKKOS_INLINE_FUNCTION</span>&#160; <span class="pre">static</span> <span class="pre">gen_func_type</span> <span class="pre">draw(Generator&amp;</span> <span class="pre">gen,</span> <span class="pre">const</span> <span class="pre">gen_data_type&amp;</span> <span class="pre">range)</span>&#160; <span class="pre">{return</span> <span class="pre">gen_data_type((gen.rand(range));}</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">KOKKOS_INLINE_FUNCTION</span>&#160; <span class="pre">static</span> <span class="pre">gen_func_type</span> <span class="pre">draw(Generator&amp;</span> <span class="pre">gen,</span> <span class="pre">const</span> <span class="pre">gen_data_type&amp;</span> <span class="pre">start,</span> <span class="pre">const</span> <span class="pre">gen_data_type&amp;</span> <span class="pre">end)</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">{return</span> <span class="pre">gen_data_type(gen.rand(start,end));}</span></code></p></li>
-</ul>
-<p>Function specializations for <em>gen_data_type</em>, <em>gen_func_type</em> and <em>type_value</em></p>
-<p>All functions and classes listed here are part of the <code class="docutils literal notranslate"><span class="pre">Kokkos::</span></code> namespace.</p>
-<div class="table-wrapper colwidths-auto docutils container">
+<section id="rand">
+<h2>Rand<a class="headerlink" href="#rand" title="Permalink to this heading">#</a></h2>
+<p>Header Files: <code class="docutils literal notranslate"><span class="pre">&lt;Kokkos_core.hpp&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;Kokkos_Complex.hpp&gt;</span></code></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">Generator</span><span class="o">&gt;</span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">rand</span><span class="o">&lt;</span><span class="n">Generator</span><span class="p">,</span><span class="w"> </span><span class="n">gen_data_type</span><span class="o">&gt;</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="n">KOKKOS_INLINE_FUNCTION</span>
+<span class="w">  </span><span class="k">static</span><span class="w"> </span><span class="n">gen_func_type</span><span class="w"> </span><span class="n">max</span><span class="p">(){</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">type_value</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="n">KOKKOS_INLINE_FUNCTION</span>
+<span class="w">  </span><span class="k">static</span><span class="w"> </span><span class="n">gen_func_type</span><span class="w"> </span><span class="n">draw</span><span class="p">(</span><span class="n">Generator</span><span class="o">&amp;</span><span class="w"> </span><span class="n">gen</span><span class="p">){</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">gen_data_type</span><span class="p">((</span><span class="n">gen</span><span class="p">.</span><span class="n">rand</span><span class="p">()</span><span class="o">&amp;</span><span class="n">gen_return_value</span><span class="p">)</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="n">KOKKOS_INLINE_FUNCTION</span>
+<span class="w">  </span><span class="k">static</span><span class="w"> </span><span class="n">gen_func_type</span><span class="w"> </span><span class="n">draw</span><span class="p">(</span><span class="n">Generator</span><span class="o">&amp;</span><span class="w"> </span><span class="n">gen</span><span class="p">,</span>
+<span class="w">                            </span><span class="k">const</span><span class="w"> </span><span class="n">gen_data_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">range</span><span class="p">){</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">gen_data_type</span><span class="p">((</span><span class="n">gen</span><span class="p">.</span><span class="n">rand</span><span class="p">(</span><span class="n">range</span><span class="p">));</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="n">KOKKOS_INLINE_FUNCTION</span>
+<span class="w">  </span><span class="k">static</span><span class="w"> </span><span class="n">gen_func_type</span><span class="w"> </span><span class="n">draw</span><span class="p">(</span><span class="n">Generator</span><span class="o">&amp;</span><span class="w"> </span><span class="n">gen</span><span class="p">,</span>
+<span class="w">                            </span><span class="k">const</span><span class="w"> </span><span class="n">gen_data_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">start</span><span class="p">,</span>
+<span class="w">                            </span><span class="k">const</span><span class="w"> </span><span class="n">gen_data_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">end</span><span class="p">){</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">gen_data_type</span><span class="p">(</span><span class="n">gen</span><span class="p">.</span><span class="n">rand</span><span class="p">(</span><span class="n">start</span><span class="p">,</span><span class="n">end</span><span class="p">));</span>
+<span class="w">  </span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Function specializations for <code class="docutils literal notranslate"><span class="pre">gen_data_type</span></code>, <code class="docutils literal notranslate"><span class="pre">gen_func_type</span></code> and <code class="docutils literal notranslate"><span class="pre">type_value</span></code>.
+All functions and classes listed here are part of the <code class="docutils literal notranslate"><span class="pre">Kokkos::</span></code> namespace.</p>
+<div class="table-wrapper docutils container">
 <table class="docutils align-default">
 <thead>
-<tr class="row-odd"><th class="head text-left"><p>gen_data_type</p></th>
-<th class="head text-left"><p>gen_func_type</p></th>
-<th class="head text-left"><p>type_value</p></th>
-<th class="head text-left"><p>gen_return_value</p></th>
+<tr class="row-odd"><th class="head"><p>gen_data_type</p></th>
+<th class="head"><p>gen_func_type</p></th>
+<th class="head"><p>type_value</p></th>
+<th class="head"><p>gen_return_value</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td class="text-left"><p>char</p></td>
-<td class="text-left"><p>short</p></td>
-<td class="text-left"><p>127</p></td>
-<td class="text-left"><p>(&amp;0xff+256)%256</p></td>
+<tr class="row-even"><td><p>char</p></td>
+<td><p>short</p></td>
+<td><p>127</p></td>
+<td><p>(&amp;0xff+256)%256</p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p>short</p></td>
-<td class="text-left"><p>short</p></td>
-<td class="text-left"><p>32767</p></td>
-<td class="text-left"><p>(&amp;0xffff+65536)%32768</p></td>
+<tr class="row-odd"><td><p>short</p></td>
+<td><p>short</p></td>
+<td><p>32767</p></td>
+<td><p>(&amp;0xffff+65536)%32768</p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p>int</p></td>
-<td class="text-left"><p>int</p></td>
-<td class="text-left"><p>MAX_RAND</p></td>
-<td class="text-left"><p>?</p></td>
+<tr class="row-even"><td><p>int</p></td>
+<td><p>int</p></td>
+<td><p>MAX_RAND</p></td>
+<td><p>?</p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p>uint</p></td>
-<td class="text-left"><p>uint</p></td>
-<td class="text-left"><p>MAX_URAND</p></td>
-<td class="text-left"><p>?</p></td>
+<tr class="row-odd"><td><p>uint</p></td>
+<td><p>uint</p></td>
+<td><p>MAX_URAND</p></td>
+<td><p>?</p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p>long</p></td>
-<td class="text-left"><p>long</p></td>
-<td class="text-left"><p>MAX_RAND or MAX_RAND64</p></td>
-<td class="text-left"><p>?</p></td>
+<tr class="row-even"><td><p>long</p></td>
+<td><p>long</p></td>
+<td><p>MAX_RAND or MAX_RAND64</p></td>
+<td><p>?</p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p>ulong</p></td>
-<td class="text-left"><p>ulong</p></td>
-<td class="text-left"><p>MAX_RAND or MAX_RAND64</p></td>
-<td class="text-left"><p>?</p></td>
+<tr class="row-odd"><td><p>ulong</p></td>
+<td><p>ulong</p></td>
+<td><p>MAX_RAND or MAX_RAND64</p></td>
+<td><p>?</p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p>long long</p></td>
-<td class="text-left"><p>long long</p></td>
-<td class="text-left"><p>MAX_RAND64</p></td>
-<td class="text-left"><p>?</p></td>
+<tr class="row-even"><td><p>long long</p></td>
+<td><p>long long</p></td>
+<td><p>MAX_RAND64</p></td>
+<td><p>?</p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p>ulong long</p></td>
-<td class="text-left"><p>ulong long</p></td>
-<td class="text-left"><p>MAX_URAND64</p></td>
-<td class="text-left"><p>?</p></td>
+<tr class="row-odd"><td><p>ulong long</p></td>
+<td><p>ulong long</p></td>
+<td><p>MAX_URAND64</p></td>
+<td><p>?</p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p>float</p></td>
-<td class="text-left"><p>float</p></td>
-<td class="text-left"><p>1.0f</p></td>
-<td class="text-left"><p>?</p></td>
+<tr class="row-even"><td><p>float</p></td>
+<td><p>float</p></td>
+<td><p>1.0f</p></td>
+<td><p>?</p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p>double</p></td>
-<td class="text-left"><p>double</p></td>
-<td class="text-left"><p>1.0</p></td>
-<td class="text-left"><p>?</p></td>
+<tr class="row-odd"><td><p>double</p></td>
+<td><p>double</p></td>
+<td><p>1.0</p></td>
+<td><p>?</p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p>complex<float></p></td>
-<td class="text-left"><p>complex<float></p></td>
-<td class="text-left"><p>1.0,1.0</p></td>
-<td class="text-left"><p>?</p></td>
+<tr class="row-even"><td><p>complex&lt;float&gt;</p></td>
+<td><p>complex&lt;float&gt;</p></td>
+<td><p>1.0,1.0</p></td>
+<td><p>?</p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p>complex<double></p></td>
-<td class="text-left"><p>complex<double></p></td>
-<td class="text-left"><p>1.0,1.0</p></td>
-<td class="text-left"><p>?</p></td>
-</tr>
-<tr class="row-even"><td class="text-left"><p></p></td>
-<td class="text-left"><p></p></td>
-<td class="text-left"><p></p></td>
-<td class="text-left"><p></p></td>
+<tr class="row-odd"><td><p>complex&lt;double&gt;</p></td>
+<td><p>complex&lt;double&gt;</p></td>
+<td><p>1.0,1.0</p></td>
+<td><p>?</p></td>
 </tr>
 </tbody>
 </table>
@@ -594,22 +609,17 @@
 <ul class="simple">
 <li><p>enum {MAX_URAND = 0xffffffffU};</p></li>
 <li><p>enum {MAX_URAND64 = 0xffffffffffffffffULL-1};</p></li>
-<li><p>enum {MAX_RAND = static_cast<int>(0xffffffffU/2)};</p></li>
+<li><p>enum {MAX_RAND = static_cast&lt;int&gt;(0xffffffffU/2)};</p></li>
 <li><p>enum {MAX_RAND64 = static_cast&lt;int64_t&gt;(0xffffffffffffffffULL/2-1)};</p></li>
 </ul>
 </section>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="generator">
+<section id="generator">
 <h1>Generator<a class="headerlink" href="#generator" title="Permalink to this heading">#</a></h1>
-<p>Header Files:  <code class="docutils literal notranslate"><span class="pre">Kokkos_core.hpp</span></code>
-<code class="docutils literal notranslate"><span class="pre">Kokkos_Complex.hpp</span></code></p>
+<p>Header Files: <code class="docutils literal notranslate"><span class="pre">&lt;Kokkos_core.hpp&gt;</span></code> <code class="docutils literal notranslate"><span class="pre">&lt;Kokkos_Complex.hpp&gt;</span></code></p>
 <section id="synopsis">
 <h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this heading">#</a></h2>
-<p>Kokkos_Random provides the structure necessary for
-pseudorandom number generators. These generators are
-based on Vigna, Sebastiano (2014). [”<em>An</em>
-<em>experimental exploration of Marsaglia’s xorshift generators,</em>
-<em>scrambled.”  See: http://arxiv.org/abs/1402.6246</em>] .</p>
+<p>Kokkos_Random provides the structure necessary for pseudorandom number generators. These generators are based on Vigna, Sebastiano (2014). [<em>“An experimental exploration of Marsaglia’s xorshift generators, scrambled.” See: http://arxiv.org/abs/1402.6246</em>].</p>
 <p>The Random number generators themselves have two components:
 a state-pool and the actual generator. A state-pool manages
 a number of generators so that each active thread is able
@@ -617,19 +627,20 @@ to grab its own. This allows the generation of random numbers
 which are independent between threads. Note that in contrast
 to <strong>CuRAND</strong>, none of the functions of the pool (or the generator)
 are collectives, i.e. all functions can be called inside conditionals.</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="w"> </span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">Device</span><span class="o">&gt;</span>
-<span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Pool</span><span class="w"> </span><span class="p">{</span>
-<span class="w">   </span><span class="k">public</span><span class="o">:</span>
-<span class="w">   </span><span class="k">typedef</span><span class="w"> </span><span class="n">Device</span><span class="w"> </span><span class="n">Device_Type</span><span class="p">;</span>
-<span class="w">   </span><span class="k">typedef</span><span class="w"> </span><span class="n">Generator</span><span class="o">&lt;</span><span class="n">Device</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Generator_Type</span><span class="p">;</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">Device</span><span class="o">&gt;</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Pool</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">public</span><span class="o">:</span>
 
-<span class="w">   </span><span class="n">Pool</span><span class="p">();</span>
-<span class="w">   </span><span class="n">Pool</span><span class="p">(</span><span class="n">RanNum_type</span><span class="w"> </span><span class="n">seed</span><span class="p">);</span>
+<span class="w">  </span><span class="k">typedef</span><span class="w"> </span><span class="n">Device</span><span class="w"> </span><span class="n">Device_Type</span><span class="p">;</span>
+<span class="w">  </span><span class="k">typedef</span><span class="w"> </span><span class="n">Generator</span><span class="o">&lt;</span><span class="n">Device</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Generator_Type</span><span class="p">;</span>
 
-<span class="w">   </span><span class="kt">void</span><span class="w"> </span><span class="nf">init</span><span class="p">(</span><span class="n">RanNum_type</span><span class="w"> </span><span class="n">seed</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">num_states</span><span class="p">);</span>
-<span class="w">   </span><span class="n">Generator_Type</span><span class="w"> </span><span class="nf">get_state</span><span class="p">();</span>
-<span class="w">   </span><span class="kt">void</span><span class="w"> </span><span class="nf">free_state</span><span class="p">(</span><span class="n">Generator_Type</span><span class="w"> </span><span class="n">Gen</span><span class="p">);</span>
-<span class="w"> </span><span class="p">}</span>
+<span class="w">  </span><span class="n">Pool</span><span class="p">();</span>
+<span class="w">  </span><span class="n">Pool</span><span class="p">(</span><span class="n">RanNum_type</span><span class="w"> </span><span class="n">seed</span><span class="p">);</span>
+
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">init</span><span class="p">(</span><span class="n">RanNum_type</span><span class="w"> </span><span class="n">seed</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">num_states</span><span class="p">);</span>
+<span class="w">  </span><span class="n">Generator_Type</span><span class="w"> </span><span class="nf">get_state</span><span class="p">();</span>
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">free_state</span><span class="p">(</span><span class="n">Generator_Type</span><span class="w"> </span><span class="n">Gen</span><span class="p">);</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 <p>A Pool of Generators are intialized using a starting seed and establishing
@@ -644,35 +655,35 @@ within the pool.</p>
 <p>Given a pool and selection of a generator from within that pool,
 the next step is development of a functor that will draw random
 numbers, of the desired type, using the generator.</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">Device</span><span class="o">&gt;</span>
-<span class="w">    </span><span class="k">class</span><span class="w"> </span><span class="nc">Generator</span><span class="w"> </span><span class="p">{</span>
-<span class="w">     </span><span class="k">public</span><span class="o">:</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">Device</span><span class="o">&gt;</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Generator</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">public</span><span class="o">:</span>
 
-<span class="w">    </span><span class="k">typedef</span><span class="w"> </span><span class="n">DeviceType</span><span class="w"> </span><span class="n">device_type</span><span class="p">;</span>
+<span class="w">  </span><span class="k">typedef</span><span class="w"> </span><span class="n">DeviceType</span><span class="w"> </span><span class="n">device_type</span><span class="p">;</span>
 
-<span class="w">    </span><span class="c1">//Max return values of respective [X]rand[S]() functions (XorShift).</span>
-<span class="w">    </span><span class="k">enum</span><span class="w"> </span><span class="p">{</span><span class="n">MAX_URAND</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0xffffffffU</span><span class="p">};</span>
-<span class="w">    </span><span class="k">enum</span><span class="w"> </span><span class="p">{</span><span class="n">MAX_URAND64</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0xffffffffffffffffULL</span><span class="mi">-1</span><span class="p">};</span>
-<span class="w">    </span><span class="k">enum</span><span class="w"> </span><span class="p">{</span><span class="n">MAX_RAND</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="mh">0xffffffffU</span><span class="o">/</span><span class="mi">2</span><span class="p">)};</span>
-<span class="w">    </span><span class="k">enum</span><span class="w"> </span><span class="p">{</span><span class="n">MAX_RAND64</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">int64_t</span><span class="o">&gt;</span><span class="p">(</span><span class="mh">0xffffffffffffffffULL</span><span class="o">/</span><span class="mi">2-1</span><span class="p">)};</span>
+<span class="w">  </span><span class="c1">//Max return values of respective [X]rand[S]() functions (XorShift).</span>
+<span class="w">  </span><span class="k">enum</span><span class="w"> </span><span class="p">{</span><span class="n">MAX_URAND</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0xffffffffU</span><span class="p">};</span>
+<span class="w">  </span><span class="k">enum</span><span class="w"> </span><span class="p">{</span><span class="n">MAX_URAND64</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0xffffffffffffffffULL</span><span class="mi">-1</span><span class="p">};</span>
+<span class="w">  </span><span class="k">enum</span><span class="w"> </span><span class="p">{</span><span class="n">MAX_RAND</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="mh">0xffffffffU</span><span class="o">/</span><span class="mi">2</span><span class="p">)};</span>
+<span class="w">  </span><span class="k">enum</span><span class="w"> </span><span class="p">{</span><span class="n">MAX_RAND64</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">int64_t</span><span class="o">&gt;</span><span class="p">(</span><span class="mh">0xffffffffffffffffULL</span><span class="o">/</span><span class="mi">2-1</span><span class="p">)};</span>
 
-<span class="w">    </span><span class="c1">//Init with a state and the idx with respect to pool. Note: in serial the</span>
-<span class="w">    </span><span class="c1">//Generator can be used by just giving it the necessary state arguments</span>
-<span class="w">    </span><span class="n">KOKKOS_INLINE_FUNCTION</span>
-<span class="w">    </span><span class="nf">Generator</span><span class="w"> </span><span class="p">(</span><span class="n">STATE_ARGUMENTS</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">state_idx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="w">  </span><span class="c1">//Init with a state and the idx with respect to pool. Note: in serial the</span>
+<span class="w">  </span><span class="c1">//Generator can be used by just giving it the necessary state arguments</span>
+<span class="w">  </span><span class="n">KOKKOS_INLINE_FUNCTION</span>
+<span class="w">  </span><span class="nf">Generator</span><span class="w"> </span><span class="p">(</span><span class="n">STATE_ARGUMENTS</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">state_idx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
 
-<span class="w">    </span><span class="c1">//Draw a equidistributed uint32_t in the range [0,MAX_URAND)</span>
-<span class="w">    </span><span class="n">KOKKOS_INLINE_FUNCTION</span>
-<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">urand</span><span class="p">();</span>
+<span class="w">  </span><span class="c1">//Draw a equidistributed uint32_t in the range [0,MAX_URAND)</span>
+<span class="w">  </span><span class="n">KOKKOS_INLINE_FUNCTION</span>
+<span class="w">  </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">urand</span><span class="p">();</span>
 
-<span class="w">    </span><span class="c1">//Draw a equidistributed uint32_t in the range [0,range)</span>
-<span class="w">    </span><span class="n">KOKKOS_INLINE_FUNCTION</span>
-<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">urand</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">uint32_t</span><span class="o">&amp;</span><span class="w"> </span><span class="n">range</span><span class="p">);</span>
+<span class="w">  </span><span class="c1">//Draw a equidistributed uint32_t in the range [0,range)</span>
+<span class="w">  </span><span class="n">KOKKOS_INLINE_FUNCTION</span>
+<span class="w">  </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">urand</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">uint32_t</span><span class="o">&amp;</span><span class="w"> </span><span class="n">range</span><span class="p">);</span>
 
-<span class="w">    </span><span class="c1">//Draw a equidistributed uint32_t in the range [start,end)</span>
-<span class="w">    </span><span class="n">KOKKOS_INLINE_FUNCTION</span>
-<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">urand</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">uint32_t</span><span class="o">&amp;</span><span class="w"> </span><span class="n">start</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">uint32_t</span><span class="o">&amp;</span><span class="w"> </span><span class="n">end</span><span class="w"> </span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="c1">//Draw a equidistributed uint32_t in the range [start,end)</span>
+<span class="w">  </span><span class="n">KOKKOS_INLINE_FUNCTION</span>
+<span class="w">  </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">urand</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">uint32_t</span><span class="o">&amp;</span><span class="w"> </span><span class="n">start</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">uint32_t</span><span class="o">&amp;</span><span class="w"> </span><span class="n">end</span><span class="w"> </span><span class="p">);</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 <p>For the selected 32-bit unsigned integer type, three range options are shown: [0,MAX_URAND), [0,range) and [start,end).
@@ -681,35 +692,35 @@ The first, and default, option selects unsigned integers over max possible range
 </section>
 <section id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this heading">#</a></h2>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Kokkos_Core.hpp&gt;</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Kokkos_Core.hpp&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Kokkos_Random.hpp&gt;</span>
 
 <span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">argv</span><span class="p">[])</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">ScopeGuarg</span><span class="w"> </span><span class="n">guard</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="n">argv</span><span class="p">);</span>
+<span class="w">    </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">ScopeGuarg</span><span class="w"> </span><span class="n">guard</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="n">argv</span><span class="p">);</span>
 
-<span class="w">  </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">Random_XorShift64_Pool</span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="n">random_pool</span><span class="p">(</span><span class="cm">/*seed=*/</span><span class="mi">12345</span><span class="p">);</span>
+<span class="w">    </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">Random_XorShift64_Pool</span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="n">random_pool</span><span class="p">(</span><span class="cm">/*seed=*/</span><span class="mi">12345</span><span class="p">);</span>
 
-<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">total</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1000000</span><span class="p">;</span>
-<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">count</span><span class="p">;</span>
-<span class="w">  </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">parallel_reduce</span><span class="p">(</span>
-<span class="w">      </span><span class="s">&quot;approximate_pi&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">total</span><span class="p">,</span>
-<span class="w">      </span><span class="n">KOKKOS_LAMBDA</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">local_count</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="c1">// acquire the state of the random number generator engine</span>
-<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">generator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">random_pool</span><span class="p">.</span><span class="n">get_state</span><span class="p">();</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">total</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1000000</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">count</span><span class="p">;</span>
+<span class="w">    </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">parallel_reduce</span><span class="p">(</span>
+<span class="w">        </span><span class="s">&quot;approximate_pi&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">total</span><span class="p">,</span>
+<span class="w">        </span><span class="n">KOKKOS_LAMBDA</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">local_count</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// acquire the state of the random number generator engine</span>
+<span class="w">            </span><span class="k">auto</span><span class="w"> </span><span class="n">generator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">random_pool</span><span class="p">.</span><span class="n">get_state</span><span class="p">();</span>
 
-<span class="w">        </span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">generator</span><span class="p">.</span><span class="n">drand</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span><span class="w"> </span><span class="mf">1.</span><span class="p">);</span>
-<span class="w">        </span><span class="kt">double</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">generator</span><span class="p">.</span><span class="n">drand</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span><span class="w"> </span><span class="mf">1.</span><span class="p">);</span>
+<span class="w">            </span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">generator</span><span class="p">.</span><span class="n">drand</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span><span class="w"> </span><span class="mf">1.</span><span class="p">);</span>
+<span class="w">            </span><span class="kt">double</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">generator</span><span class="p">.</span><span class="n">drand</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span><span class="w"> </span><span class="mf">1.</span><span class="p">);</span>
 
-<span class="w">        </span><span class="c1">// do not forget to release the state of the engine</span>
-<span class="w">        </span><span class="n">random_pool</span><span class="p">.</span><span class="n">free_state</span><span class="p">(</span><span class="n">generator</span><span class="p">);</span>
+<span class="w">            </span><span class="c1">// do not forget to release the state of the engine</span>
+<span class="w">            </span><span class="n">random_pool</span><span class="p">.</span><span class="n">free_state</span><span class="p">(</span><span class="n">generator</span><span class="p">);</span>
 
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mf">1.</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">          </span><span class="o">++</span><span class="n">local_count</span><span class="p">;</span>
-<span class="w">        </span><span class="p">}</span>
-<span class="w">      </span><span class="p">},</span>
-<span class="w">      </span><span class="n">count</span><span class="p">);</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mf">1.</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="o">++</span><span class="n">local_count</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="n">count</span><span class="p">);</span>
 
-<span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;pi = %f</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">4.</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">count</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">total</span><span class="p">);</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;pi = %f</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">4.</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">count</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">total</span><span class="p">);</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -774,7 +785,7 @@ The first, and default, option selects unsigned integers over max possible range
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">Random-Number</a><ul>
-<li><a class="reference internal" href="#headers-kokkos-core-hpp-kokkos-complex-hpp">headers:  Kokkos_Core.hpp, Kokkos_Complex.hpp</a></li>
+<li><a class="reference internal" href="#rand">Rand</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#generator">Generator</a><ul>
