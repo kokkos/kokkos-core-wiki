@@ -1,9 +1,6 @@
 ``ScopeGuard``
 ==============
 
-.. role::cpp(code)
-    :language: cpp
-
 .. role:: cppkokkos(code)
    :language: cppkokkos
 
@@ -40,29 +37,26 @@ Description
 
     .. cpp:function:: ScopeGuard(int& argc, char* argv[]);
 
-       * **until 3.7**
+       :param argc: number of command line arguments
+       :param argv: array of character pointers to null-terminated strings storing the command line arguments
 
-       * ``argc``: number of command line arguments,
-
-       * ``argv``: array of character pointers to null-terminated strings storing the command line arguments
+       .. warning:: Valid until 3.7
 
     .. cpp:function:: ScopeGuard(InitArguments const& arguments = InitArguments());
 
-        * **until 3.7**
+       :param arguments: ``struct`` object with valid initialization arguments
 
-	* ``arguments``: ``struct`` object with valid initialization arguments
+       .. warning:: Valid until 3.7
 
     .. cpp:function:: template <class... Args> ScopeGuard(Args&&... args);
 
-        * ``args``: arguments to pass to `Kokkos::initialize <initialize.html#kokkosinitialize>`_
+        :param args: arguments to pass to `Kokkos::initialize <initialize.html#kokkosinitialize>`_
 
 	Possible implementation:
 
 	.. code-block:: cpp
 
-	   template <class... Args> ScopeGuard(Args&&... args){
-	     initialize(std::forward<Args>(args)...);
-	   }
+	   template <class... Args> ScopeGuard(Args&&... args){ initialize(std::forward<Args>(args)...); }
 
     .. cpp:function:: ~ScopeGuard();
 
@@ -72,10 +66,7 @@ Description
 
        .. code-block:: cpp
 
-	  ~ScopeGuard() {
-	    // possible implementation
-            finalize();
-	  }
+	  ~ScopeGuard() { finalize(); }
 
     .. cpp:function:: ScopeGuard(ScopeGuard const&) = delete;
 
