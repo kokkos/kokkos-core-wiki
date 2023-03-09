@@ -271,114 +271,109 @@ Constructors
 Data Access Functions
 ~~~~~~~~~~~~~~~~~~~~~
 
+.. cppkokkos:function:: reference_type operator() (const IntType& ... indices) const
 
+    Returns a value of ``reference_type`` which may or not be reference itself. The number of index arguments must match the ``rank`` of the view. See notes on ``reference_type`` for properties of the return type.
 
-..
-
-
-    .. rubric:: Data Access Functions
-
-    .. cppkokkos:function:: reference_type operator() (const IntType& ... indices) const
-
-        :return: a value of ``reference_type`` which may or not be reference itself. The number of index arguments must match the ``rank`` of the view. See notes on ``reference_type`` for properties of the return type.
-
-    .. code-block:: cpp
-        
-        reference_type access (const IntType& i0=0, ... , const IntType& i6=0) const
+.. code-block:: cpp
     
-    \
-        :return: a value of ``reference_type`` which may or not be reference itself. The number of index arguments must be equal or larger than the ``rank`` of the view. Index arguments beyond ``rank`` must be ``0`` , which will be enforced if ``KOKKOS_DEBUG`` is defined. See notes on ``reference_type`` for properties of the return type.
+    reference_type access (const IntType& i0=0, ... , const IntType& i6=0) const
 
-    .. rubric:: Data Layout, Dimensions, Strides
+\
+    Returns a value of ``reference_type`` which may or not be reference itself. The number of index arguments must be equal or larger than the ``rank`` of the view. Index arguments beyond ``rank`` must be ``0`` , which will be enforced if ``KOKKOS_DEBUG`` is defined. See notes on ``reference_type`` for properties of the return type.
 
-    .. cppkokkos:function:: constexpr array_layout layout() const
+Data Layout, Dimensions, Strides
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-        :return: the layout object. Can be used to to construct other views with the same dimensions.
+.. cppkokkos:function:: constexpr array_layout layout() const
 
-    .. cppkokkos:function:: template<class iType> constexpr size_t extent( const iType& dim) const
+    Returns the layout object. Can be used to to construct other views with the same dimensions.
 
-        :return: the extent of the specified dimension. ``iType`` must be an integral type, and ``dim`` must be smaller than ``rank``.
+.. cppkokkos:function:: template<class iType> constexpr size_t extent(const iType& dim) const
 
-    .. cppkokkos:function:: template<class iType> constexpr int extent_int( const iType& dim) const
+    Returns the extent of the specified dimension. ``iType`` must be an integral type, and ``dim`` must be smaller than ``rank``.
 
-        :return: the extent of the specified dimension as an ``int``. ``iType`` must be an integral type, and ``dim`` must be smaller than ``rank``. Compared to ``extent`` this function can be useful on architectures where ``int`` operations are more efficient than ``size_t``. It also may eliminate the need for type casts in applications which otherwise perform all index operations with ``int``.
+.. cppkokkos:function:: template<class iType> constexpr int extent_int(const iType& dim) const
 
-    .. cppkokkos:function:: template<class iType> constexpr size_t stride(const iType& dim) const
+    Returns the extent of the specified dimension as an ``int``. ``iType`` must be an integral type, and ``dim`` must be smaller than ``rank``. Compared to ``extent`` this function can be useful on architectures where ``int`` operations are more efficient than ``size_t``. It also may eliminate the need for type casts in applications which otherwise perform all index operations with ``int``.
 
-        :return: the stride of the specified dimension. ``iType`` must be an integral type, and ``dim`` must be smaller than ``rank``. Example: ``a.stride(3) == (&a(i0,i1,i2,i3+1,i4)-&a(i0,i1,i2,i3,i4))``
+.. cppkokkos:function:: template<class iType> constexpr size_t stride(const iType& dim) const
 
-    .. cppkokkos:function:: constexpr size_t stride_0() const
+    Returns the stride of the specified dimension. ``iType`` must be an integral type, and ``dim`` must be smaller than ``rank``. Example: ``a.stride(3) == (&a(i0,i1,i2,i3+1,i4)-&a(i0,i1,i2,i3,i4))``
 
-        :return: the stride of dimension 0.
+.. cppkokkos:function:: constexpr size_t stride_0() const
 
-    .. cppkokkos:function:: constexpr size_t stride_1() const
+    Return the stride of dimension 0.
 
-        :return: the stride of dimension 1.
+.. cppkokkos:function:: constexpr size_t stride_1() const
 
-    .. cppkokkos:function:: constexpr size_t stride_2() const
+    Return the stride of dimension 1.
 
-        :return: the stride of dimension 2.
+.. cppkokkos:function:: constexpr size_t stride_2() const
 
-    .. cppkokkos:function:: constexpr size_t stride_3() const
+    Return the stride of dimension 2.
 
-        :return: the stride of dimension 3.
+.. cppkokkos:function:: constexpr size_t stride_3() const
 
-    .. cppkokkos:function:: constexpr size_t stride_4() const
+    Return the stride of dimension 3.
 
-        :return: the stride of dimension 4.
+.. cppkokkos:function:: constexpr size_t stride_4() const
 
-    .. cppkokkos:function:: constexpr size_t stride_5() const
+    Return the stride of dimension 4.
 
-        :return: the stride of dimension 5.
+.. cppkokkos:function:: constexpr size_t stride_5() const
 
-    .. cppkokkos:function:: constexpr size_t stride_6() const
+    Return the stride of dimension 5.
 
-        :return: the stride of dimension 6.
+.. cppkokkos:function:: constexpr size_t stride_6() const
 
-    .. cppkokkos:function:: constexpr size_t stride_7() const
+    Return the stride of dimension 6.
 
-        :return: the stride of dimension 7.
+.. cppkokkos:function:: constexpr size_t stride_7() const
 
-    .. cppkokkos:function:: constexpr size_t span() const
+    Return the stride of dimension 7.
 
-        :return: the memory span in elements between the element with the lowest and the highest address. This can be larger than the product of extents due to padding, and or non-contiguous data layout as for example ``LayoutStride`` allows.
+.. cppkokkos:function:: constexpr size_t span() const
 
-    .. cppkokkos:function:: constexpr pointer_type data() const
+    Return the memory span in elements between the element with the lowest and the highest address. This can be larger than the product of extents due to padding, and or non-contiguous data layout as for example ``LayoutStride`` allows.
 
-        :return: the pointer to the underlying data allocation.
+.. cppkokkos:function:: constexpr pointer_type data() const
 
-    .. cppkokkos:function:: bool span_is_contiguous() const
+    Return the pointer to the underlying data allocation.
 
-        :return: whether the span is contiguous (i.e. whether every memory location between in span belongs to the index space covered by the view).
+.. cppkokkos:function:: bool span_is_contiguous() const
 
-    .. code-block:: cpp
-        
-        static constexpr size_t required_allocation_size(size_t N0 = 0, ..., size_t N8 = 0)
+    Whether the span is contiguous (i.e. whether every memory location between in span belongs to the index space covered by the view).
+
+.. code-block:: cpp
     
-    \
-        :return: the number of bytes necessary for an unmanaged view of the provided dimensions. This function is only valid if ``array_layout::is_regular == true``.
+    static constexpr size_t required_allocation_size(size_t N0 = 0, ..., size_t N8 = 0);
 
-    .. cppkokkos:function:: static constexpr size_t required_allocation_size(const array_layout& layout)
+\
+    Returns the number of bytes necessary for an unmanaged view of the provided dimensions. This function is only valid if ``array_layout::is_regular == true``.
 
-        :return: the number of bytes necessary for an unmanaged view of the provided layout.
+.. cppkokkos:function:: static constexpr size_t required_allocation_size(const array_layout& layout);
 
-    .. rubric:: Other
+    :return: the number of bytes necessary for an unmanaged view of the provided layout.
 
-    .. cppkokkos:function:: int use_count() const
+Other
+~~~~~
 
-        :return: the current reference count of the underlying allocation.
+.. cppkokkos:function:: int use_count() const
 
-    .. cppkokkos:function:: const char* label() const;
+    :return: the current reference count of the underlying allocation.
 
-        :return: the label of the ``DynRankView``.
+.. cppkokkos:function:: const char* label() const;
 
-    .. cppkokkos:function:: constexpr unsigned rank() const
+    :return: the label of the ``DynRankView``.
 
-        :return: the dynamic rank of the ``DynRankView``
+.. cppkokkos:function:: constexpr unsigned rank() const
 
-    .. cppkokkos:function:: constexpr bool is_allocated() const
+    :return: the dynamic rank of the ``DynRankView``.
 
-        :return: true if the view points to a valid memory location. This function works for both managed and unmanaged views. With the unmanaged view, there is no guarantee that referenced address is valid, only that it is a non-null pointer.
+.. cppkokkos:function:: constexpr bool is_allocated() const
+
+    :return: true if the view points to a valid memory location. This function works for both managed and unmanaged views. With the unmanaged view, there is no guarantee that referenced address is valid, only that it is a non-null pointer.
 
 Assignment Rules
 ----------------
