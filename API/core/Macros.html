@@ -695,6 +695,176 @@ Kokkos was compiled with.</p>
 </section>
 <section id="architectures">
 <h2>Architectures<a class="headerlink" href="#architectures" title="Permalink to this heading">#</a></h2>
+<div class="table-wrapper docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Macro</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">KOKKOS_ARCH_SSE42</span></code></p></td>
+<td><p>Optimize for SSE 4.2</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">KOKKOS_ARCH_ARMV80</span></code></p></td>
+<td><p>Optimize for ARMv8.0 Compatible CPU (HOST)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">KOKKOS_ARCH_ARMV8_THUNDERX</span></code></p></td>
+<td><p>Optimize for ARMv8 Cavium ThunderX CPU (HOST)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">KOKKOS_ARCH_ARMV81</span></code></p></td>
+<td><p>Optimize for ARMv8.1 Compatible CPU (HOST)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">KOKKOS_ARCH_ARMV8_THUNDERX2</span></code></p></td>
+<td><p>Optimize for ARMv8 Cavium ThunderX2 CPU (HOST)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">KOKKOS_ARCH_AMD_AVX2</span></code></p></td>
+<td><p>Optimize for AVX2 (enabled for Zen)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">KOKKOS_ARCH_AVX</span></code></p></td>
+<td><p>Optimize for AVX</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">KOKKOS_ARCH_AVX2</span></code></p></td>
+<td><p>Optimize for AVX2</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">KOKKOS_ARCH_AVX512XEON</span></code></p></td>
+<td><p>Optimize for Skylake(AVX512)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">KOKKOS_ARCH_KNC</span></code></p></td>
+<td><p>Optimize for Intel Knights Corner Xeon Phi (HOST)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">KOKKOS_ARCH_AVX512MIC</span></code></p></td>
+<td><p>Optimize for Many Integrated Core (MIC; AVX512)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">KOKKOS_ARCH_POWER7</span></code></p></td>
+<td><p>Optimize for IBM POWER7 CPUs (HOST)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">KOKKOS_ARCH_POWER8</span></code></p></td>
+<td><p>Optimize for IBM POWER8 CPUs (HOST)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">KOKKOS_ARCH_POWER9</span></code></p></td>
+<td><p>Optimize for IBM POWER9 CPUs (HOST)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">KOKKOS_ARCH_INTEL_GEN</span></code></p></td>
+<td><p>Optimize for Intel GPUs, Just-In-Time compilation (GPU)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">KOKKOS_ARCH_INTEL_DG1</span></code></p></td>
+<td><p>Optimize for Intel Iris XeMAX GPU (GPU)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">KOKKOS_ARCH_INTEL_GEN9</span></code></p></td>
+<td><p>Optimize for Intel GPU Gen9 (GPU)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">KOKKOS_ARCH_INTEL_GEN11</span></code></p></td>
+<td><p>Optimize for Intel GPU Gen11 (GPU)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">KOKKOS_ARCH_INTEL_GEN12LP</span></code></p></td>
+<td><p>Optimize for Intel GPU Gen12LP (GPU)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">KOKKOS_ARCH_INTEL_XEHP</span></code></p></td>
+<td><p>Optimize for Intel GPU Xe-HP (GPU)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">KOKKOS_ARCH_INTEL_PVC</span></code></p></td>
+<td><p>Optimize for Intel GPU Ponte Vecchio/GPU Max (GPU)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">KOKKOS_ARCH_INTEL_GPU</span></code></p></td>
+<td><p>Set if any Intel GPU architecture has been enabled</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">KOKKOS_ARCH_KEPLER</span></code></p></td>
+<td><p>Set if any NVIDIA Kepler architecture has been enabled</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">KOKKOS_ARCH_KEPLER30</span></code></p></td>
+<td><p>Optimize for NVIDIA Kepler generation CC 3.0 (GPU)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">KOKKOS_ARCH_KEPLER32</span></code></p></td>
+<td><p>Optimize for NVIDIA Kepler generation CC 3.2 (GPU)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">KOKKOS_ARCH_KEPLER35</span></code></p></td>
+<td><p>Optimize for NVIDIA Kepler generation CC 3.5 (GPU)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">KOKKOS_ARCH_KEPLER37</span></code></p></td>
+<td><p>Optimize for NVIDIA Kepler generation CC 3.7 (GPU)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">KOKKOS_ARCH_MAXWELL</span></code></p></td>
+<td><p>Set if any NVIDIA Maxwell architecture has been enabled</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">KOKKOS_ARCH_MAXWELL50</span></code></p></td>
+<td><p>Optimize for NVIDIA Maxwell generation CC 5.0 (GPU)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">KOKKOS_ARCH_MAXWELL52</span></code></p></td>
+<td><p>Optimize for NVIDIA Maxwell generation CC 5.2 (GPU)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">KOKKOS_ARCH_MAXWELL53</span></code></p></td>
+<td><p>Optimize for NVIDIA Maxwell generation CC 5.3 (GPU)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">KOKKOS_ARCH_NAVI</span></code></p></td>
+<td><p>Set if any AMD Navi GPU architecture as been enabled <sup>Since Kokkos 4.0</sup></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">KOKKOS_ARCH_NAVI1030</span></code></p></td>
+<td><p>Optimize for AMD GPU V620/W6800 GFX1030 (GPU) <sup>Since Kokkos 4.0</sup></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">KOKKOS_ARCH_PASCAL</span></code></p></td>
+<td><p>Set if any NVIDIA Pascal architecture has been enabled</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">KOKKOS_ARCH_PASCAL60</span></code></p></td>
+<td><p>Optimize for NVIDIA Pascal generation CC 6.0 (GPU)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">KOKKOS_ARCH_PASCAL61</span></code></p></td>
+<td><p>Optimize for NVIDIA Pascal generation CC 6.1 (GPU)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">KOKKOS_ARCH_VOLTA</span></code></p></td>
+<td><p>Set if any NVIDIA Volta architecture has been enabled</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">KOKKOS_ARCH_VOLTA70</span></code></p></td>
+<td><p>Optimize for NVIDIA Volta generation CC 7.0 (GPU)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">KOKKOS_ARCH_VOLTA72</span></code></p></td>
+<td><p>Optimize for NVIDIA Volta generation CC 7.2 (GPU)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">KOKKOS_ARCH_TURING75</span></code></p></td>
+<td><p>Optimize for NVIDIA Turing generation CC 7.5 (GPU)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">KOKKOS_ARCH_AMPERE</span></code></p></td>
+<td><p>Set if any NVIDIA Ampere architecture has been enabled</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">KOKKOS_ARCH_AMPERE80</span></code></p></td>
+<td><p>Optimize for NVIDIA Ampere generation CC 8.0 (GPU)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">KOKKOS_ARCH_AMPERE86</span></code></p></td>
+<td><p>Optimize for NVIDIA Ampere generation CC 8.6 (GPU)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">KOKKOS_ARCH_HOPPER</span></code></p></td>
+<td><p>Set if any NVIDIA Hopper architecture has been enabled <sup>since Kokkos 4.0</sup></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">KOKKOS_ARCH_HOPPER90</span></code></p></td>
+<td><p>Optimize for NVIDIA Hopper generation CC 9.0 (GPU) <sup>since Kokkos 4.0</sup></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">KOKKOS_ARCH_AMD_ZEN</span></code></p></td>
+<td><p>Optimize for AMD Zen architecture (HOST)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">KOKKOS_ARCH_AMD_ZEN2</span></code></p></td>
+<td><p>Optimize for AMD Zen2 architecture (HOST)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">KOKKOS_ARCH_AMD_ZEN3</span></code></p></td>
+<td><p>Optimize for AMD Zen3 architecture (HOST)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">KOKKOS_ARCH_VEGA</span></code></p></td>
+<td><p>Set if any AMD Vega GPU architecture as been enabled</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">KOKKOS_ARCH_VEGA900</span></code></p></td>
+<td><p>Optimize for AMD GPU MI25 GFX900 (GPU) <sup>Removed in Kokkos 4.0</sup></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">KOKKOS_ARCH_VEGA906</span></code></p></td>
+<td><p>Optimize for AMD GPU MI50/MI60 GFX906 (GPU)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">KOKKOS_ARCH_VEGA908</span></code></p></td>
+<td><p>Optimize for AMD GPU MI100 GFX908 (GPU)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">KOKKOS_ARCH_VEGA90A</span></code></p></td>
+<td><p>Optimize for AMD GPU MI200 series GFX90A (GPU)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
 </section>
 </section>
 
