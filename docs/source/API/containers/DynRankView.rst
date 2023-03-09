@@ -6,240 +6,275 @@
 
 Header File: ``<Kokkos_DynRankView.hpp>``
 
-Class Interface
----------------
+Usage
+-----
 
-.. cppkokkos:class:: template <class DataType> DynRankView
+``DynRankView`` is a potential reference counted multidimensional array with compile time layouts and memory space. Its semantics are similar to that of ``std::shared_ptr``. The ``DynRankView`` differs from the [[View|Kokkos::View]] in that its rank is not provided with the ``DataType`` template parameter; it is determined dynamically based on the number of extent arguments passed to the constructor. The rank has an upper bound of 7 dimensions.
 
-.. cppkokkos:class:: template <class LayoutType> DynRankView
+Interface
+---------
 
-.. cppkokkos:class:: template <class MemorySpace> DynRankView
+.. code-block:: cpp
 
-.. cppkokkos:class:: template <class MemoryTraits> DynRankView
+    template <class DataType [, class LayoutType] [, class MemorySpace] [, class MemoryTraits]>
+    class DynRankView;
 
-    A potentially reference counted multidimensional array with compile time layouts and memory space. Its semantics are similar to that of ``std::shared_ptr``. The ``DynRankView`` differs from the ``Kokkos::View`` in that its rank is not provided with the ``DataType`` template parameter; it is determined dynamically based on the number of extent arguments passed to the constructor. The rank has an upper bound of 7 dimensions.
+Parameters
+~~~~~~~~~~
 
-    Template parameters other than ``DataType`` are optional, but ordering is enforced. That means for example that ``LayoutType`` can be omitted but if both ``MemorySpace`` and ``MemoryTraits`` are specified, ``MemorySpace`` must come before ``MemoryTraits``.
+Template parameters other than ``DataType`` are optional, but ordering is enforced. That means for example that ``LayoutType`` can be omitted but if both ``MemorySpace`` and ``MemoryTraits`` are specified, ``MemorySpace`` must come before ``MemoryTraits``.
+    
+.. cppkokkos:type:: DataType
 
-    :tparam DataType: Defines the fundamental scalar type of the ``DynRankView``. The basic structure is ``ScalarType``. Examples:
+    Defines the fundamental scalar type of the ``DynRankView``. The basic structure is ``ScalarType``. Examples:    
 
-        * ``double``: a ``DynRankView`` of ``double``, dimensions are passed as arguments to the constructor, the number of which determine the rank.
+    * ``double``: a ``DynRankView`` of ``double``, dimensions are passed as arguments to the constructor, the number of which determine the rank.
 
-    :tparam LayoutType: Determines the mapping of indices into the underlying 1D memory storage. Custom Layouts can be implemented, but Kokkos comes with some built-in ones:
+.. cppkokkos:type:: LayoutType
 
-        * ``LayoutRight``: Strides increase from the right most to the left most dimension. The last dimension has a stride of one. This corresponds to how C multi dimensional arrays (\ ``[][][]``\ ) are laid out in memory.
-        * ``LayoutLeft``: Strides increase from the left most to the right most dimension. The first dimension has a stride of one. This is the layout Fortran uses for its arrays.
-        * ``LayoutStride``: Strides can be arbitrary for each dimension.
+    Determines the mapping of indices into the underlying 1D memory storage. Custom Layouts can be implemented, but Kokkos comes with some built-in ones:
 
-    :tparam MemorySpace: Controls the storage location. If omitted, the default memory space of the default execution space is used (i.e. ``Kokkos::DefaultExecutionSpace::memory_space``)
-    :tparam MemoryTraits: Sets access properties via enum parameters for the templated ``Kokkos::MemoryTraits<>`` class. Enums can be bit combined. Possible values:
+    * ``LayoutRight``: Strides increase from the right most to the left most dimension. The last dimension has a stride of one. This corresponds to how C multi dimensional arrays (``[][][]``) are laid out in memory.
+    * ``LayoutLeft``: Strides increase from the left most to the right most dimension. The first dimension has a stride of one. This is the layout Fortran uses for its arrays.
+    * ``LayoutStride``: Strides can be arbitrary for each dimension.
 
-        * ``Unmanaged``: The DynRankView will not be reference counted. The allocation has to be provided to the constructor.
-        * ``Atomic``: All accesses to the view will use atomic operations.
-        * ``RandomAccess``: Hint that the view is used in a random access manner. If the view is also ``const``\ , this will trigger special load operations on GPUs (i.e. texture fetches).
-        * ``Restrict``: There is no aliasing of the view by other data structures in the current scope.
+.. cppkokkos:type:: MemorySpace
 
-    .. rubric:: Public Member Variables
+    Controls the storage location. If omitted, the default memory space of the default execution space is used (i.e. ``Kokkos::DefaultExecutionSpace::memory_space``)
 
-    .. cppkokkos:member:: static constexpr unsigned rank
+.. cppkokkos:type:: [[ MemoryTraits | Kokkos::MemoryTraits ]]
 
-        The rank of the view (i.e. the dimensionality).
+    * ``Unmanaged``: The DynRankView will not be reference counted. The allocation has to be provided to the constructor.
+    * ``Atomic``: All accesses to the view will use atomic operations.
+    * ``RandomAccess``: Hint that the view is used in a random access manner. If the view is also ``const``, this will trigger special load operations on GPUs (i.e. texture fetches).
+    * ``Restrict``: There is no aliasing of the view by other data structures in the current scope.
 
-    .. cppkokkos:member:: static constexpr unsigned rank_dynamic
+Requirements
+~~~~~~~~~~~~
 
-        The number of runtime determined dimensions.
+Public Class Members
+--------------------
 
-    .. cppkokkos:member:: static constexpr bool reference_type_is_lvalue_reference
+Enums
+~~~~~
 
-        Whether the reference type is a C++ lvalue reference.
+.. cppkokkos:type:: rank
 
-    .. rubric:: Data Types
+    Rank of the view (i.e. the dimensionality).
 
-    .. cppkokkos:type:: data_type
+.. cppkokkos:type:: rank_dynamic
 
-        The ``DataType`` of the DynRankView.
+    Number of runtime determined dimensions.    
 
-    .. cppkokkos:type:: const_data_type
+.. cppkokkos:type:: reference_type_is_lvalue_reference
 
-        The const version of ``DataType``, same as ``data_type`` if that is already const.
+    Whether the reference type is a C++ lvalue reference.
 
-    .. cppkokkos:type:: non_const_data_type
+Typedefs
+~~~~~~~~
 
-        The non-const version of ``DataType``, same as ``data_type`` if that is already non-const.
+Data Types
+^^^^^^^^^^
 
-    .. cppkokkos:type:: scalar_array_type
+.. cppkokkos:type:: data_type
 
-        If ``DataType`` represents some properly specialised array data type such as Sacado FAD types, ``scalar_array_type`` is the underlying fundamental scalar type.
+    The ``DataType`` of the DynRankView.
 
-    .. cppkokkos:type:: const_scalar_array_type
+.. cppkokkos:type:: const_data_type
 
-        The const version of ``scalar_array_type``, same as ``scalar_array_type`` if that is already const
+    Const version of ``DataType``, same as ``data_type`` if that is already const.
 
-    .. cppkokkos:type:: non_const_scalar_array_type
+.. cppkokkos:type:: non_const_data_type
 
-        The non-Const version of ``scalar_array_type``, same as ``scalar_array_type`` if that is already non-const.
+    Non-const version of ``DataType``, same as ``data_type`` if that is already non-const.
 
-    .. rubric:: Scalar Types
+.. cppkokkos:type:: scalar_array_type
 
-    .. cppkokkos:type:: value_type
+    If ``DataType`` represents some properly specialised array data type such as Sacado FAD types, ``scalar_array_type`` is the underlying fundamental scalar type.
 
-        The ``data_type`` stripped of its array specifiers, i.e. the scalar type of the data the view is referencing (e.g. if ``data_type`` is ``const int*******``, ``value_type`` is ``const int``).
+.. cppkokkos:type:: const_scalar_array_type
 
-    .. cppkokkos:type:: const_value_type
+    The const version of ``scalar_array_type``, same as ``scalar_array_type`` if that is already const
 
-        The const version of ``value_type``.
+.. cppkokkos:type:: non_const_scalar_array_type
 
-    .. cppkokkos:type:: non_const_value_type
+    The non-Const version of ``scalar_array_type``, same as ``scalar_array_type`` if that is already non-const.
 
-        The non-const version of ``value_type``.
+Scalar Types
+^^^^^^^^^^^^
 
-    .. rubric:: Spaces
+.. cppkokkos:type:: value_type
 
-    .. cppkokkos:type:: execution_space
+    The ``data_type`` stripped of its array specifiers, i.e. the scalar type of the data the view is referencing (e.g. if ``data_type`` is ``const int*******``, ``value_type`` is ``const int``).
 
-        The Execution Space associated with the view, will be used for performing view initialization, and certain ``deep_copy`` operations.
+.. cppkokkos:type:: const_value_type
 
-    .. cppkokkos:type:: memory_space
+    Const version of ``value_type``.
 
-        The data storage location type.
+.. cppkokkos:type:: non_const_value_type
 
-    .. cppkokkos:type:: device_type
+    Non-const version of ``value_type``.
 
-        The compound type defined by ``Device<execution_space,memory_space>``.
+Spaces
+^^^^^^
 
-    .. cppkokkos:type:: memory_traits
+.. cppkokkos:type:: execution_space
 
-        The memory traits of the view.
+    Execution space associated with the view, will be used for performing view initialization, and certain deep_copy operations.
 
-    .. cppkokkos:type:: host_mirror_space
+.. cppkokkos:type:: memory_space
 
-        The host accessible memory space used in ``HostMirror``.
+    Data storage location type.
 
-    .. rubric:: View Types
+.. cppkokkos:type:: device_type
 
-    .. cppkokkos:type:: non_const_type
+    The compound type defined by ``Device<execution_space,memory_space>``.
 
-        The view type with all template parameters explicitly defined.
+.. cppkokkos:type:: memory_traits
 
-    .. cppkokkos:type:: const_type
+    The memory traits of the view.
 
-        The view type with all template parameters explicitly defined using a ``const`` data type.
+.. cppkokkos:type:: host_mirror_space
 
-    .. cppkokkos:type:: HostMirror
+    Host accessible memory space used in ``HostMirror``.
 
-        A compatible view type with the same ``DataType`` and ``LayoutType`` stored in host accessible memory space.
+ViewTypes
+^^^^^^^^^
 
-    .. rubric:: Data Handle Types
+.. cppkokkos:type:: non_const_type
 
-    .. cppkokkos:type:: reference_type
+    This view type with all template parameters explicitly defined.
 
-        The return type of the view access operators.
+.. cppkokkos:type:: const_type
 
-    .. cppkokkos:type:: pointer_type
+    This view type with all template parameters explicitly defined using a ``const`` data type.
 
-        The pointer to scalar type.
+.. cppkokkos:type:: HostMirror
 
-    .. rubric:: Other Types
+    Compatible view type with the same ``DataType`` and ``LayoutType`` stored in host accessible memory space.
 
-    .. cppkokkos:type:: array_layout
+Data Handles
+^^^^^^^^^^^^
 
-        The layout of the ``DynRankView``.
+.. cppkokkos:type:: reference_type
 
-    .. cppkokkos:type:: size_type
+    Return type of the view access operators.
 
-        The index type associated with the memory space of this view.
+.. cppkokkos:type:: pointer_type
 
-    .. cppkokkos:type:: dimension
+    Pointer to scalar type.
 
-        An integer array like type, able to represent the extents of the view.
+Other
+^^^^^
 
-    .. cppkokkos:type:: specialize
+.. cppkokkos:type:: array_layout
 
-        A specialization tag used for partial specialization of the mapping construct underlying a Kokkos ``DynRankView``.
+    The layout of the ``DynRankView``.
 
-    .. rubric:: Constructors
+.. cppkokkos:type:: size_type
 
-    .. cppkokkos:function:: DynRankView()
+    Index type associated with the memory space of this view.
 
-        The default constructor. No allocations are made, no reference counting happens. All extents are zero and its data pointer is ``nullptr`` and its rank is set to 0.
+.. cppkokkos:type:: dimension
 
-    .. cppkokkos:function:: DynRankView(const DynRankView<DT, Prop...>& rhs)
+    An integer array like type, able to represent the extents of the view.
 
-        The copy constructor with compatible DynRankViews. Follows DynRankView assignment rules.
+.. cppkokkos:type:: specialize
 
-    .. cppkokkos:function:: DynRankView(DynRankView&& rhs)
+    A specialization tag used for partial specialization of the mapping construct underlying a Kokkos ``DynRankView``.
 
-        The move constructor.
+Constructors
+~~~~~~~~~~~~
 
-    .. cppkokkos:function:: DynRankView(const View<RT,RP...> & rhs)
+.. cppkokkos:function:: DynRankView()
 
-        The copy constructor taking View as input.
+    Default constructor. No allocations are made, no reference counting happens. All extents are zero and its data pointer is ``nullptr`` and its rank is set to 0.
 
-    .. cppkokkos:function:: DynRankView(const std::string& name, const IntType& ... indices)
+.. cppkokkos:function:: DynRankView(const DynRankView<DT, Prop...>& rhs)
 
-        *Requires:* ``array_layout::is_regular == true``
+    Copy constructor with compatible DynRankViews. Follows DynRankView assignment rules.
 
-        The standard allocating constructor.
+.. cppkokkos:function:: DynRankView(DynRankView&& rhs)
 
-        :param name: a user provided label, which is used for profiling and debugging purposes. Names are not required to be unique
-        :param indices: the runtime dimensions of the view
+    Move constructor.
 
-    .. cppkokkos:function:: DynRankView(const std::string& name, const array_layout& layout)
+.. cppkokkos:function:: DynRankView(const View<RT,RP...> & rhs)
 
-        The standard allocating constructor.
+    Copy constructor taking View as input.
 
-        :param name: a user provided label, which is used for profiling and debugging purposes. Names are not required to be unique
-        :param layout: the instance of a layout class
+.. cppkokkos:function:: DynRankView(const std::string& name, const IntType& ... indices)
 
-    .. cppkokkos:function:: DynRankView(const AllocProperties& prop, const IntType& ... indices)
+    Requires: ``array_layout::is_regular == true``
 
-        *Requires:* ``array_layout::is_regular == true``
+    Standard allocating constructor.
 
-        The allocating constructor with allocation properties. An allocation properties object is returned by the ``view_alloc`` function.
+    * ``name``: a user provided label, which is used for profiling and debugging purposes. Names are not required to be unique.
+    * ``indices``: runtime dimensions of the view.
 
-        :param indices: the runtime dimensions of the view
+.. cppkokkos:function:: DynRankView(const std::string& name, const array_layout& layout)
 
-    .. cppkokkos:function:: DynRankView(const AllocProperties& prop, const array_layout& layout)
+    Standard allocating constructor.
 
-        The allocating constructor with allocation properties and a layout object.
+    * ``name``: a user provided label, which is used for profiling and debugging purposes. Names are not required to be unique.
+    * ``layout``: an instance of a layout class.
 
-        :param layout: the instance of a layout class
+.. cppkokkos:function:: DynRankView(const AllocProperties& prop, const IntType& ... indices)
 
-    .. cppkokkos:function:: DynRankView(const pointer_type& ptr, const IntType& ... indices)
+    Requires: ``array_layout::is_regular == true``
 
-        *Requires:* ``array_layout::is_regular == true``
+    Allocating constructor with allocation properties. An allocation properties object is returned by the ``view_alloc`` function.
 
-        The unmanaged data wrapping constructor.
+    * ``indices``: runtime dimensions of the view.
 
-        :param ptr: pointer to a user provided memory allocation. Must provide storage of size ``DynRankView::required_allocation_size(n0,...,nR)``
-        :param indices: the runtime dimensions of the view
+.. cppkokkos:function:: DynRankView(const AllocProperties& prop, const array_layout& layout)
 
-    .. cppkokkos:function:: DynRankView(const std::string& name, const array_layout& layout)
+    Allocating constructor with allocation properties and a layout object.
 
-        The unmanaged data wrapper constructor.
+    * ``layout``: an instance of a layout class.
 
-        :param ptr: pointer to a user provided memory allocation. Must provide storage of size ``DynRankView::required_allocation_size(layout)`` (\ *NEEDS TO BE IMPLEMENTED*\ )
-        :param layout: the instance of a layout class
+.. cppkokkos:function:: DynRankView(const pointer_type& ptr, const IntType& ... indices)
 
-    .. cppkokkos:function:: DynRankView( const ScratchSpace& space, const IntType& ... indices)
+    Requires: ``array_layout::is_regular == true``
 
-        The constructor which acquires memory from a Scratch Memory handle.
+    Unmanaged data wrapping constructor.
 
-        *Requires:* ``sizeof(IntType...)==rank_dynamic()`` *and* ``array_layout::is_regular == true``.
+    * ``ptr``: pointer to a user provided memory allocation. Must provide storage of size ``DynRankView::required_allocation_size(n0,...,nR)``.
+    * ``indices``: runtime dimensions of the view.
 
-        :param space: scratch memory handle. Typically returned from ``team_handles`` in ``TeamPolicy`` kernels
-        :param indices: the runtime dimensions of the view
+.. cppkokkos:function:: DynRankView(const std::string& name, const array_layout& layout)
 
-    .. cppkokkos:function:: DynRankView(const ScratchSpace& space, const array_layout& layout)
+    Unmanaged data wrapper constructor.
 
-        The constructor which acquires memory from a Scratch Memory handle.
+    * ``ptr``: pointer to a user provided memory allocation. Must provide storage of size ``DynRankView::required_allocation_size(layout)`` (\ *NEEDS TO BE IMPLEMENTED*\ )
+    * ``layout``: an instance of a layout class.
 
-        :param space: scratch memory handle. Typically returned from ``team_handles`` in ``TeamPolicy`` kernels.
-        :param layout: the instance of a layout class
+.. cppkokkos:function:: DynRankView(const ScratchSpace& space, const IntType& ... indices)
 
-    .. cppkokkos:function:: DynRankView(const DynRankView<DT, Prop...>& rhs, Args ... args)
+    Requires: ``sizeof(IntType...)==rank_dynamic()`` and ``array_layout::is_regular == true``
 
-        The subview constructor. See ``subview`` function for arguments.
+    Constructor which acquires memory from a Scratch Memory handle.
+
+    * ``space``: scratch memory handle. Typically returned from ``team_handles`` in ``TeamPolicy`` kernels.
+    * ``indices``: runtime dimensions of the view.
+
+.. cppkokkos:function:: DynRankView(const ScratchSpace& space, const array_layout& layout)
+
+    Constructor which acquires memory from a Scratch Memory handle.
+
+    * ``space``: scratch memory handle. Typically returned from ``team_handles`` in ``TeamPolicy`` kernels.
+    * ``layout``: an instance of a layout class.
+
+.. cppkokkos:function:: DynRankView(const DynRankView<DT, Prop...>& rhs, Args ... args)
+
+    Subview constructor. See ``subview`` function for arguments.
+
+Data Access Functions
+~~~~~~~~~~~~~~~~~~~~~
+
+
+
+..
+
 
     .. rubric:: Data Access Functions
 
