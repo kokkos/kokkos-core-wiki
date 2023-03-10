@@ -25,12 +25,9 @@ Description
 
    :tparam Key: Must be a POD
 
-   :tparam Value: void indicates an unordered set, otherwise must be trivially copyable
+   :tparam Value: `void` indicates an unordered set, otherwise must be trivially copyable
 
-		  .. tip:: An ``UnorderedMap`` behaves like an unordered set if the template parameter ``Value`` is void.
-
-   :tparam Device: Device is any class or struct with the following typedefs or type aliases: execution_space, memory_space, and device_type
-
+   :tparam Device: Device is any class or struct with the following public typedefs or type aliases: `execution_space`, `memory_space`, and `device_type`
 
    .. rubric:: Constructor
 
@@ -39,6 +36,8 @@ Description
       Create map with enough space for at least capacity_hint number of objects
 
       .. warning:: Host Only
+
+   .. rubric:: Public Member Functions
 
    .. cppkokkos:function:: clear();
 
@@ -58,69 +57,67 @@ Description
 
       .. warning:: Host Only
 
-   .. cppkokkos:function:: KOKKOS_FORCEINLINE_FUNCTION uint32_t capacity() const;
+   .. cppkokkos:kokkosinlinefunction:: uint32_t capacity() const;
 
        Capacity of the map, O(1)
 
-   .. cppkokkos:function:: KOKKOS_INLINE_FUNCTION UnorderedMapInsertResult insert(key) const;
+   .. cppkokkos:kokkosinlinefunction:: UnorderedMapInsertResult insert(key) const;
 
       Insert the given key into the map with a default constructed value
 
-   .. cppkokkos:function:: KOKKOS_INLINE_FUNCTION UnorderedMapInsertResult insert(Key key, Value value) const;
+   .. cppkokkos:kokkosinlinefunction:: UnorderedMapInsertResult insert(Key key, Value value) const;
 
       Insert the given key/value pair into the map
 
-   .. cppkokkos:function:: KOKKOS_INLINE_FUNCTION uint32_t find(Key key) const
+   .. cppkokkos:kokkosinlinefunction:: uint32_t find(Key key) const
 
       Return the index of the key if it exist, otherwise return invalid_index
 
-   .. cppkokkos:function:: KOKKOS_INLINE_FUNCTION bool exists(Key key) const;
+   .. cppkokkos:kokkosinlinefunction:: bool exists(Key key) const;
 
       Does the key exist in the map
 
-   .. cppkokkos:function:: KOKKOS_INLINE_FUNCTION bool valid_at(uint32_t index) const;
+   .. cppkokkos:kokkosinlinefunction:: bool valid_at(uint32_t index) const;
 
       Is the current index a valid key/value pair
 
-   .. cppkokkos:function:: KOKKOS_INLINE_FUNCTION Key key_at(uint32_t index) const;
+   .. cppkokkos:kokkosinlinefunction:: Key key_at(uint32_t index) const;
 
       Return the current key at the index
 
-   .. cppkokkos:function:: KOKKOS_INLINE_FUNCTION Value value_at(uint32_t index) const;
+   .. cppkokkos:kokkosinlinefunction:: Value value_at(uint32_t index) const;
 
       Return the current value at the index
 
-   .. cppkokkos:function:: KOKKOS_INLINE_FUNCTION  constexpr bool is_allocated() const;
+   .. cppkokkos:kokkosinlinefunction:: constexpr bool is_allocated() const;
 
       Return true if the internal views (keys, values, hashmap) are allocated
-
-    };
 
 
 .. cppkokkos:class:: UnorderedMapInsertResult
 
    .. rubric:: Public Methods
 
-   .. cppkokkos:function:: KOKKOS_FORCEINLINE_FUNCTION  bool success() const;
+   .. cppkokkos:kokkosinlinefunction:: bool success() const;
 
       Was the key/value pair successfully inserted into the map
 
-   .. cppkokkos:function:: KOKKOS_FORCEINLINE_FUNCTION bool existing() const;
+   .. cppkokkos:kokkosinlinefunction:: bool existing() const;
 
       Is the key already present in the map
 
-   .. cppkokkos:function:: KOKKOS_FORCEINLINE_FUNCTION bool failed() const;
+   .. cppkokkos:kokkosinlinefunction:: bool failed() const;
 
       Did the insert fail?
 
-   .. cppkokkos:function:: KOKKOS_FORCEINLINE_FUNCTION uint32_t index() const;
+   .. cppkokkos:kokkosinlinefunction:: uint32_t index() const;
 
       Index where the key exists in the map as long as failed() == false
 
 Insertion
 ---------
 
-There are 3 potential states for every insertion which are reported by the ``UnorderedMapInsertResult``: success, existing, and failed.
+There are 3 potential states for every insertion which are reported by the ``UnorderedMapInsertResult``:
 
 - ``success``: implies that the current thread has successfully inserted its key/value pair
 
