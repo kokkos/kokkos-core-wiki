@@ -4,12 +4,10 @@
 .. role:: cppkokkos(code)
    :language: cppkokkos
 
-.. role:: cpp(code)
-   :language: cpp
+Header File: <Kokkos_Core.hpp>
 
-Header File: ``Kokkos_Core.hpp``
-
-Usage:
+Usage
+-----
 
 .. code-block:: cpp
 
@@ -18,107 +16,55 @@ Usage:
 
 Reallocates a view to have the new dimensions. Can grow or shrink, and will preserve content of the common subextents.
 
-Synopsis
---------
-
-.. code-block:: cpp
-
-    template <class T, class... P>
-    void resize(View<T, P...>& v,
-            const size_t n0 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
-            const size_t n1 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
-            const size_t n2 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
-            const size_t n3 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
-            const size_t n4 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
-            const size_t n5 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
-            const size_t n6 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
-            const size_t n7 = KOKKOS_IMPL_CTOR_DEFAULT_ARG);
-
-    template <class I, class T, class... P>
-    void resize(const I& arg_prop, Kokkos::View<T, P...>& v,
-            const size_t n0 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
-            const size_t n1 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
-            const size_t n2 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
-            const size_t n3 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
-            const size_t n4 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
-            const size_t n5 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
-            const size_t n6 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
-            const size_t n7 = KOKKOS_IMPL_CTOR_DEFAULT_ARG);
-
-    template <class T, class... P, class... ViewCtorArgs>
-    void resize(const Impl::ViewCtorProp<ViewCtorArgs...>& arg_prop,
-            Kokkos::View<T, P...>& v,
-            const size_t n0 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
-            const size_t n1 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
-            const size_t n2 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
-            const size_t n3 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
-            const size_t n4 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
-            const size_t n5 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
-            const size_t n6 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
-            const size_t n7 = KOKKOS_IMPL_CTOR_DEFAULT_ARG);
-
-    template <class T, class... P>
-    void resize(Kokkos::View<T, P...>& v,
-            const typename Kokkos::View<T, P...>::array_layout& layout);
-
-    template <class I, class T, class... P>
-    void resize(const I& arg_prop, Kokkos::View<T, P...>& v,
-            const typename Kokkos::View<T, P...>::array_layout& layout);
-
-    template <class T, class... P, class... ViewCtorArgs>
-    void resize(const Impl::ViewCtorProp<ViewCtorArgs...>& arg_prop,
-            Kokkos::View<T, P...>& v,
-            const typename Kokkos::View<T, P...>::array_layout& layout);
 
 Description
 -----------
 
-* .. code-block:: cpp
-
-        template <class T, class... P>
-        void resize(View<T, P...>& v,
-                const size_t n0 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
-                const size_t n1 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
-                const size_t n2 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
-                const size_t n3 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
-                const size_t n4 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
-                const size_t n5 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
-                const size_t n6 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
+.. cppkokkos::function: template <class T, class... P> \
+        void resize(View<T, P...>& v,\
+                const size_t n0 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,\
+                const size_t n1 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,\
+                const size_t n2 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,\
+                const size_t n3 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,\
+                const size_t n4 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,\
+                const size_t n5 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,\
+                const size_t n6 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,\
                 const size_t n7 = KOKKOS_IMPL_CTOR_DEFAULT_ARG);
 
-  Resizes ``v`` to have the new dimensions while preserving the contents for the common subview of the old and new view.
+   Resizes ``v`` to have the new dimensions while preserving the contents for the common subview of the old and new view.
 
-  * ``v``: existing view, can be a default constructed one.
-  * ``n[X]``: new length for extent X.
+   :param v: existing view, can be a default constructed one.
 
-  Restrictions:
+   :param n[X]: new length for extent X.
 
-  * ``View<T, P...>::array_layout`` is either ``LayoutLeft`` or ``LayoutRight``.
+   Restrictions: ``View<T, P...>::array_layout`` is either ``LayoutLeft`` or ``LayoutRight``.
 
-* .. code-block:: cpp
+|
 
-        template <class I, class T, class... P>
-        void resize(const I& arg_prop, Kokkos::View<T, P...>& v,
-                const size_t n0 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
-                const size_t n1 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
-                const size_t n2 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
-                const size_t n3 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
-                const size_t n4 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
-                const size_t n5 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
-                const size_t n6 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
+.. cppkokkos::function: template <class I, class T, class... P> \
+        void resize(const I& arg_prop, Kokkos::View<T, P...>& v, \
+                const size_t n0 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,\
+                const size_t n1 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,\
+                const size_t n2 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,\
+                const size_t n3 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,\
+                const size_t n4 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,\
+                const size_t n5 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,\
+                const size_t n6 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,\
                 const size_t n7 = KOKKOS_IMPL_CTOR_DEFAULT_ARG);
 
-  Resizes ``v`` to have the new dimensions while preserving the contents for the common subview of the old and new view. The new ``Kokkos::View`` is constructed using the View constructor property ``arg_prop``, e.g., Kokkos::WithoutInitializing.
+   Resizes ``v`` to have the new dimensions while preserving the contents for the
+   common subview of the old and new view. The new ``Kokkos::View`` is constructed using the View constructor property ``arg_prop``, e.g., Kokkos::WithoutInitializing.
 
-  * ``v``: existing view, can be a default constructed one.
+   :param v: existing view, can be a default constructed one.
 
-  * ``n[X]``: new length for extent X.
+   :param n[X]: new length for extent X.
 
-  * ``arg_prop``: View constructor property, e.g., ``Kokkos::WithoutInitializing``.
+   :param arg_prop: View constructor property, e.g., ``Kokkos::WithoutInitializing``.
 
-  Restrictions:
+   Restrictions: ``View<T, P...>::array_layout`` is either ``LayoutLeft` or `LayoutRight``.
 
-  * ``View<T, P...>::array_layout`` is either ``LayoutLeft` or `LayoutRight``.
+|
+
 
 * .. code-block:: cpp
 
