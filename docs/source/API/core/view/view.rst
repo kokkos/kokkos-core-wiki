@@ -293,12 +293,12 @@ Constructors
 
    - Requires: ``array_layout::is_regular == true``.
 
-.. cppkokkos:function:: View( const std::string& name, const array_layout& layout)
+.. cppkokkos:function:: View( const pointer_type& ptr, const array_layout& layout)
 
    Unmanaged data wrapper constructor.
 
    - ``ptr``: pointer to a user provided memory allocation. Must provide storage
-     of size ``View::required_allocation_size(layout)`` (*NEEDS TO BE IMPLEMENTED*)
+     of size ``View::required_allocation_size(layout)``
 
    - ``layout``: an instance of a layout class. The number of valid extents must
      either match the dynamic rank or the total rank. In the latter case, the extents
