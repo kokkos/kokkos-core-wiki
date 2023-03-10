@@ -280,7 +280,7 @@ Constructors
      match the dynamic rank or the total rank. In the latter case, the extents corresponding
      to compile-time dimensions must match the View type's compile-time extents.
 
-.. cppkokkos:function:: View( const pointer_type& ptr, const IntType& ... indices)
+.. cppkokkos:function:: View( pointer_type ptr, const IntType& ... indices)
 
    Unmanaged data wrapping constructor.
 
