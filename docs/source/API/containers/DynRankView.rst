@@ -4,7 +4,7 @@
 .. role:: cppkokkos(code)
     :language: cppkokkos
 
-Header File: ``<Kokkos_DynRankView.hpp>``
+Header File: <Kokkos_DynRankView.hpp>
 
 Usage
 -----
@@ -23,10 +23,10 @@ Parameters
 ~~~~~~~~~~
 
 Template parameters other than ``DataType`` are optional, but ordering is enforced. That means for example that ``LayoutType`` can be omitted but if both ``MemorySpace`` and ``MemoryTraits`` are specified, ``MemorySpace`` must come before ``MemoryTraits``.
-    
+
 .. cppkokkos:type:: DataType
 
-    Defines the fundamental scalar type of the ``DynRankView``. The basic structure is ``ScalarType``. Examples:    
+    Defines the fundamental scalar type of the ``DynRankView``. The basic structure is ``ScalarType``. Examples:
 
     * ``double``: a ``DynRankView`` of ``double``, dimensions are passed as arguments to the constructor, the number of which determine the rank.
 
@@ -64,7 +64,7 @@ Enums
 
 .. cppkokkos:type:: rank_dynamic
 
-    Number of runtime determined dimensions.    
+    Number of runtime determined dimensions.
 
 .. cppkokkos:type:: reference_type_is_lvalue_reference
 
@@ -276,7 +276,7 @@ Data Access Functions
     Returns a value of ``reference_type`` which may or not be reference itself. The number of index arguments must match the ``rank`` of the view. See notes on ``reference_type`` for properties of the return type.
 
 .. code-block:: cpp
-    
+
     reference_type access (const IntType& i0=0, ... , const IntType& i6=0) const
 
 \
@@ -346,7 +346,7 @@ Data Layout, Dimensions, Strides
     Whether the span is contiguous (i.e. whether every memory location between in span belongs to the index space covered by the view).
 
 .. code-block:: cpp
-    
+
     static constexpr size_t required_allocation_size(size_t N0 = 0, ..., size_t N8 = 0);
 
 \
@@ -407,7 +407,7 @@ Examples
 .. code-block:: cpp
 
     #include<Kokkos_Core.hpp>
-    #include<cstdio> 
+    #include<cstdio>
 
     int main(int argc, char* argv[]) {
         Kokkos::initialize(argc,argv);
