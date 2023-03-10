@@ -293,7 +293,7 @@ Constructors
 
    - Requires: ``array_layout::is_regular == true``.
 
-.. cppkokkos:function::  View( const std::string& name, const array_layout& layout)
+.. cppkokkos:function:: View( const std::string& name, const array_layout& layout)
 
    Unmanaged data wrapper constructor.
 
