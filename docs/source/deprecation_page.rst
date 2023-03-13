@@ -1,6 +1,9 @@
 Deprecation for Kokkos-3.x
 -----------
 
+.. IMPORTANT::
+   Kokkos-4.0 requires C++17
+
 .. list-table::  
    :widths: 1 1 1
    :header-rows: 1
