@@ -77,7 +77,7 @@ Bit manipulation function templates are defined in the ``Kokkos::`` namespace si
 
 ================== ============================================================
 :strike:`bit_cast` reinterpret the object representation of one type as that of another
-:strike:`byteswap` reverses the bytes in the given integer value 
+|byteswap|_        reverses the bytes in the given integer value 
 |has_single_bit|_  checks if a number is an integral power of two 
 |bit_ceil|_        finds the smallest integral power of two not less than the given value
 |bit_floor|_       finds the largest integral power of two not greater than the given value
