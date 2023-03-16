@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><link rel="next" title="API in Alphabetical Order" href="../alphabetical.html" /><link rel="prev" title="Experimental::simd_mask" href="simd_mask.html" />
 
     <meta name="generator" content="sphinx-5.0.1, furo 2022.06.04.1"/>
-        <title>Interface - Kokkos documentation</title>
+        <title>Experimental::where_expression - Kokkos documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?digest=40978830699223671f4072448e654b5958f38b89" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
@@ -410,8 +410,7 @@
 <li class="toctree-l1 current has-children"><a class="reference internal" href="../simd-index.html">API: SIMD</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-25" name="toctree-checkbox-25" role="switch" type="checkbox"/><label for="toctree-checkbox-25"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="simd.html"><code class="docutils literal notranslate"><span class="pre">Experimental::simd</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="simd_mask.html"><code class="docutils literal notranslate"><span class="pre">Experimental::simd_mask</span></code></a></li>
-<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Interface</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#example">Example</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">Experimental::where_expression</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../alphabetical.html">API in Alphabetical Order</a></li>
@@ -498,12 +497,13 @@
           </label>
         </div>
         <article role="main">
-          <p><code class="docutils literal notranslate"><span class="pre">Experimental::where_expression</span></code></p>
+          <section class="tex2jax_ignore mathjax_ignore" id="experimental-where-expression">
+<h1><code class="docutils literal notranslate"><span class="pre">Experimental::where_expression</span></code><a class="headerlink" href="#experimental-where-expression" title="Permalink to this heading">#</a></h1>
 <p>Header File: <code class="docutils literal notranslate"><span class="pre">Kokkos_SIMD.hpp</span></code></p>
 <p>Usage:</p>
 <p><code class="docutils literal notranslate"><span class="pre">Kokkos::Experimental::where_expression</span></code> references a subset of the values in a vector register. Which values are in the subset is described by a mask. <code class="docutils literal notranslate"><span class="pre">where_expression</span></code> thus forms the basis for masked operations on vector values.</p>
 <section id="interface">
-<h1>Interface<a class="headerlink" href="#interface" title="Permalink to this heading">#</a></h1>
+<h2>Interface<a class="headerlink" href="#interface" title="Permalink to this heading">#</a></h2>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">namespace</span><span class="w"> </span><span class="nn">Experimental</span><span class="w"> </span><span class="p">{</span>
 <span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">M</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">const_where_expression</span><span class="p">;</span>
@@ -513,12 +513,12 @@
 </pre></div>
 </div>
 <section id="template-parameters">
-<h2>Template Parameters<a class="headerlink" href="#template-parameters" title="Permalink to this heading">#</a></h2>
+<h3>Template Parameters<a class="headerlink" href="#template-parameters" title="Permalink to this heading">#</a></h3>
 <p>The first template parameter <code class="docutils literal notranslate"><span class="pre">M</span></code> is the mask type, and should either be an instance of class template <code class="docutils literal notranslate"><span class="pre">Kokkos::Experimental::simd_mask</span></code> or <code class="docutils literal notranslate"><span class="pre">bool</span></code>.
 The second template parameter <code class="docutils literal notranslate"><span class="pre">T</span></code> is the value type, and should either be an instance of class template <code class="docutils literal notranslate"><span class="pre">Kokkos::Experimental::simd</span></code> or a fundamental type such as <code class="docutils literal notranslate"><span class="pre">double</span></code>.</p>
 </section>
 <section id="where-function">
-<h2>Where Function<a class="headerlink" href="#where-function" title="Permalink to this heading">#</a></h2>
+<h3>Where Function<a class="headerlink" href="#where-function" title="Permalink to this heading">#</a></h3>
 <p>Where expression objects are only constructed by calling the non-member method <code class="docutils literal notranslate"><span class="pre">Kokkos::Experimental::where</span></code>:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">template</span> <span class="pre">&lt;class</span> <span class="pre">T,</span> <span class="pre">class</span> <span class="pre">Abi&gt;</span> <span class="pre">where_expression&lt;simd_mask&lt;T,</span> <span class="pre">Abi&gt;,</span> <span class="pre">simd&lt;T,</span> <span class="pre">Abi&gt;&gt;</span>&#160; <span class="pre">where(const</span> <span class="pre">simd_mask&lt;T,</span> <span class="pre">Abi&gt;&amp;,</span> <span class="pre">simd&lt;T,</span> <span class="pre">Abi&gt;&amp;)</span></code>: creates a non-const where expression that references the values in the <code class="docutils literal notranslate"><span class="pre">simd</span></code> argument selected by the <code class="docutils literal notranslate"><span class="pre">simd_mask</span></code> argument.</p></li>
@@ -526,14 +526,14 @@ The second template parameter <code class="docutils literal notranslate"><span c
 </ul>
 </section>
 <section id="load-store-methods">
-<h2>Load/Store Methods<a class="headerlink" href="#load-store-methods" title="Permalink to this heading">#</a></h2>
+<h3>Load/Store Methods<a class="headerlink" href="#load-store-methods" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">template&lt;class</span> <span class="pre">U,</span> <span class="pre">class</span> <span class="pre">Flags&gt;</span> <span class="pre">void</span> <span class="pre">const_where_expression::copy_to(U*</span> <span class="pre">mem,</span> <span class="pre">Flags)</span> <span class="pre">const</span></code>: Executes a masked store operation, storing vector value <code class="docutils literal notranslate"><span class="pre">i</span></code> at <code class="docutils literal notranslate"><span class="pre">mem[i]</span></code> only if mask value <code class="docutils literal notranslate"><span class="pre">i</span></code> is true. The only valid value of <code class="docutils literal notranslate"><span class="pre">Flags</span></code> is <code class="docutils literal notranslate"><span class="pre">Kokkos::Experimental::element_aligned_tag</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">template&lt;class</span> <span class="pre">U,</span> <span class="pre">class</span> <span class="pre">Flags&gt;</span> <span class="pre">void</span> <span class="pre">where_expression::copy_from(const</span> <span class="pre">U*</span> <span class="pre">mem,</span> <span class="pre">Flags)</span></code>: Executes a masked load operation, loading vector value <code class="docutils literal notranslate"><span class="pre">i</span></code> from <code class="docutils literal notranslate"><span class="pre">mem[i]</span></code> only if mask value <code class="docutils literal notranslate"><span class="pre">i</span></code> is true. The only valid value of <code class="docutils literal notranslate"><span class="pre">Flags</span></code> is <code class="docutils literal notranslate"><span class="pre">Kokkos::Experimental::element_aligned_tag</span></code>.</p></li>
 </ul>
 </section>
 <section id="gather-scatter-methods">
-<h2>Gather/Scatter Methods<a class="headerlink" href="#gather-scatter-methods" title="Permalink to this heading">#</a></h2>
+<h3>Gather/Scatter Methods<a class="headerlink" href="#gather-scatter-methods" title="Permalink to this heading">#</a></h3>
 <p>These methods were added by Kokkos and are not present in the ISO C++ proposal.</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">const_where_expression::scatter_to(double*</span> <span class="pre">mem,</span> <span class="pre">simd&lt;std::int32_t,</span> <span class="pre">Abi&gt;</span> <span class="pre">const&amp;</span> <span class="pre">index)</span> <span class="pre">const</span></code>: When the value type <code class="docutils literal notranslate"><span class="pre">T</span></code> is <code class="docutils literal notranslate"><span class="pre">Kokkos::Experimental::simd&lt;double,</span> <span class="pre">Abi&gt;</span></code>, this function scatters values into <code class="docutils literal notranslate"><span class="pre">mem[index[i]]</span></code> if the mask value <code class="docutils literal notranslate"><span class="pre">i</span></code> is true.</p></li>
@@ -541,14 +541,14 @@ The second template parameter <code class="docutils literal notranslate"><span c
 </ul>
 </section>
 <section id="assignment">
-<h2>Assignment<a class="headerlink" href="#assignment" title="Permalink to this heading">#</a></h2>
+<h3>Assignment<a class="headerlink" href="#assignment" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">template&lt;class</span> <span class="pre">U&gt;</span> <span class="pre">void</span> <span class="pre">where_expression::operator=(U&amp;&amp;</span> <span class="pre">x)</span></code>: Assigns to vector value <code class="docutils literal notranslate"><span class="pre">i</span></code> the value <code class="docutils literal notranslate"><span class="pre">x[i]</span></code> only if mask value <code class="docutils literal notranslate"><span class="pre">i</span></code> is true.</p></li>
 </ul>
 </section>
 </section>
 <section id="example">
-<h1>Example<a class="headerlink" href="#example" title="Permalink to this heading">#</a></h1>
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this heading">#</a></h2>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Kokkos_SIMD.hpp&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstdio&gt;</span>
 
@@ -567,6 +567,7 @@ The second template parameter <code class="docutils literal notranslate"><span c
 <span class="p">}</span>
 </pre></div>
 </div>
+</section>
 </section>
 
         </article>
@@ -626,7 +627,8 @@ The second template parameter <code class="docutils literal notranslate"><span c
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">Interface</a><ul>
+<li><a class="reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">Experimental::where_expression</span></code></a><ul>
+<li><a class="reference internal" href="#interface">Interface</a><ul>
 <li><a class="reference internal" href="#template-parameters">Template Parameters</a></li>
 <li><a class="reference internal" href="#where-function">Where Function</a></li>
 <li><a class="reference internal" href="#load-store-methods">Load/Store Methods</a></li>
@@ -635,6 +637,8 @@ The second template parameter <code class="docutils literal notranslate"><span c
 </ul>
 </li>
 <li><a class="reference internal" href="#example">Example</a></li>
+</ul>
+</li>
 </ul>
 
           </div>
