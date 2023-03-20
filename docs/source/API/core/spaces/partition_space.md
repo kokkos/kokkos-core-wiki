@@ -27,7 +27,8 @@ std::vector<ExecSpace> partition_space(const ExecSpace& space, Args...args);
 
 ### Requirements
 
-- `(std::is_arithmetic_v<Args> && ...)` is `true`. 
+- `(std::is_arithmetic_v<Args> && ...)` is `true`.
+- `ExecutionSpace().currency() >= N_PARTITIONS`
 
 ### Semantics
 
