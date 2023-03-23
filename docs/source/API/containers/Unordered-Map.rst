@@ -66,8 +66,10 @@ Description
    .. cppkokkos:kokkosinlinefunction:: UnorderedMapInsertResult insert(key) const;
 
       Insert the given key into the map with a default constructed value
+      Optionally specify the operator, op, used for combining values if
+      key already exists.
 
-   .. cppkokkos:kokkosinlinefunction:: UnorderedMapInsertResult insert(Key key, Value value) const;
+   .. cppkokkos:kokkosinlinefunction:: UnorderedMapInsertResult insert(Key key, Value value, Insert op = NoOp) const;
 
       Insert the given key/value pair into the map
 
@@ -116,8 +118,24 @@ Description
 
       Index where the key exists in the map as long as failed() == false
 
-Insertion
----------
+.. cppkokkos:struct:: template <class ValueTypeView, class ValuesIdxType> UnorderedMapInsertOpTypes
+
+   :tparam ValueTypeView: The UnorderedMap value array type.
+
+   :tparam ValuesIdxType: The index type for lookups in the value array.
+
+   .. rubric:: Public Methods
+
+   The first key inserted stores the associated value (default op).
+
+   .. cppkokkos:struct:: NoOp
+
+   Duplicate key insertions sum values together.
+
+   .. cppkokkos:struct:: AtomicAdd
+
+Insertion using default UnorderedMapInsertOpTypes::NoOp
+-------------------------------------------------------
 
 There are 3 potential states for every insertion which are reported by the ``UnorderedMapInsertResult``:
 
@@ -128,6 +146,40 @@ There are 3 potential states for every insertion which are reported by the ``Uno
 - ``failed`` means that either the capacity of the map was exhausted or that a free index was not found
   with a bounded search of the internal atomic bitset. A ``failed`` insertion requires the user to increase
   the capacity (``rehash``) and restart the algoritm.
+
+.. code-block:: cpp
+
+    // use the default NoOp insert operation
+    using map_op_type = Kokkos::UnorderedMapInsertOpTypes<value_view_type, size_type>;
+    using noop_type   = typename map_op_type::NoOp;
+    noop_type noop;
+    parallel_for(N, KOKKOS_LAMBDA (uint32_t i) {
+      map.insert(i, values(i), noop);
+    });
+    // OR;
+    parallel_for(N, KOKKOS_LAMBDA (uint32_t i) {
+      map.insert(i, values(i));
+    });
+  
+Insertion using UnorderedMapInsertOpTypes::AtomicAdd
+-------------------------------------------------------
+
+The behavior from ``Insertion using the default UnorderedMapInsertOpTypes::NoOp`` hold true with the
+exception that the ``UnorderedMapInsertResult``:
+
+- ``existing`` implies that the key is already in the map and the existing value at key was summed
+  with the new value being inserted.
+
+.. code-block:: cpp
+
+    // use the AtomicAdd insert operation
+    using map_op_type     = Kokkos::UnorderedMapInsertOpTypes<value_view_type, size_type>;
+    using atomic_add_type = typename map_op_type::AtomicAdd;
+    atomic_add_type atomic_add;
+    parallel_for(N, KOKKOS_LAMBDA (uint32_t i) {
+      map.insert(i, values(i), atomic_add);
+    });
+
 
 Iteration
 ---------
