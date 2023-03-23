@@ -121,7 +121,7 @@ parallel_for(N, KOKKOS_LAMBDA (uint32_t i) {
 });
 ```
 
-## Insertion using the default UnorderedMapInsertOpTypes::AtomicAdd
+## Insertion using the UnorderedMapInsertOpTypes::AtomicAdd
 
 The behavior from [above](Insertion using the default UnorderedMapInsertOpTypes::Noop) hold true with the exception that the `UnorderedMapInsertResult`: `existing` implies that the key is already in the map and the existing value at key was summed with the new value being inserted.
 
