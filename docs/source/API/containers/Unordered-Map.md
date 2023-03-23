@@ -128,7 +128,7 @@ The behavior from [above](Insertion using the default UnorderedMapInsertOpTypes:
 ```c++
 // use the AtomicAdd insert operation
 using map_op_type = Kokkos::UnorderedMapInsertOpTypes<value_view_type, size_type>;
-using atomic_add_type   = typename map_op_type::AtomicAdd;
+using atomic_add_type = typename map_op_type::AtomicAdd;
 atomic_add_type atomic_add;
 parallel_for(N, KOKKOS_LAMBDA (uint32_t i) {
   map.insert(i, values(i), atomic_add);
