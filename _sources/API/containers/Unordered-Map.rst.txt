@@ -1,9 +1,11 @@
-``UnorderedMap``
-================
 
 .. role:: cppkokkos(code)
 	:language: cppkokkos
 
+``UnorderedMap``
+================
+
+Header file: ``<Kokkos_UnorderedMap.hpp>``
 
 Kokkos's unordered map is designed to efficiently handle tens of thousands of concurrent insertions.
 Consequently, the API is significantly different from the standard unordered_map.

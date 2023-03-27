@@ -499,6 +499,7 @@
         <article role="main">
           <section id="vector">
 <h1><code class="docutils literal notranslate"><span class="pre">vector</span></code><a class="headerlink" href="#vector" title="Permalink to this heading">#</a></h1>
+<p>Header file: <code class="docutils literal notranslate"><span class="pre">&lt;Kokkos_Vector.hpp&gt;</span></code></p>
 <p>The Kokkos Vector is semantically similar to the std::vector, but it is designed to overcome issues with memory allocations and copies when working with devices that have different memory spaces. The <code class="docutils literal notranslate"><span class="pre">Kokkos::Vector</span></code> is a Rank-1 DualView that implements the same interface as the std::vector. This allows programs that rely heavily on std::vector to grant access to program data from within a non-host execution space. Note that many of the std::vector compatible functions are host only, so access may be limited based on kernel complexity. Below is a synopsis of the class and the description for each method specifies whether it is supported on the host, device or both.</p>
 <section id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Permalink to this heading">#</a></h2>

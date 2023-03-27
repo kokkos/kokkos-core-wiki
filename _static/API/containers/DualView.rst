@@ -1,8 +1,10 @@
+
 ``DualView``
 ============
 
-.. role:: cppkokkos(code)
-    :language: cppkokkos
+Header file: ``<Kokkos_DualView.hpp>``
+
+|
 
 Container to manage mirroring a ``Kokkos::View`` that references device memory with
 a ``Kokkos::View`` that references host memory. The class provides capabilities to manage
