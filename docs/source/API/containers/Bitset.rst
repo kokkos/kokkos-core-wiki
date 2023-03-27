@@ -1,8 +1,9 @@
-``Bitset``
-==========
 
 .. role:: cpp(code)
    :language: cpp
+
+``Bitset``
+==========
 
 Header file: ``<Kokkos_Bitset.hpp>``
 

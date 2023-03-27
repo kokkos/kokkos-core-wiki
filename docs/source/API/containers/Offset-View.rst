@@ -1,7 +1,4 @@
 
-.. role:: cppkokkos(code)
-	  :language: cppkokkos
-
 ``OffsetView``
 ==============
 

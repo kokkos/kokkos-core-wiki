@@ -1,8 +1,9 @@
-``DynamicView``
-===============
 
 .. role:: cppkokkos(code)
     :language: cppkokkos
+
+``DynamicView``
+===============
 
 Header file: ``<Kokkos_DynamicView.hpp>``
 

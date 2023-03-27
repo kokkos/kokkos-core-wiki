@@ -1,7 +1,4 @@
 
-.. role:: cpp(code)
-   :language: cpp
-
 ``StaticCrsGraph``
 ==================
 
