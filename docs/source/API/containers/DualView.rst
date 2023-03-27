@@ -1,8 +1,6 @@
+
 ``DualView``
 ============
-
-.. role:: cppkokkos(code)
-    :language: cppkokkos
 
 Header file: ``<Kokkos_DualView.hpp>``
 
