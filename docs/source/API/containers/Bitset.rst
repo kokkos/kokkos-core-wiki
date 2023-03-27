@@ -4,7 +4,7 @@
 .. role:: cpp(code)
    :language: cpp
 
-Header file: ``Kokkos_Bitset.hpp``
+Header file: ``<Kokkos_Bitset.hpp>``
 
 Class Interface
 ---------------
