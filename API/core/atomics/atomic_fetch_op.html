@@ -473,7 +473,7 @@
         </a>
         <div class="content-icon-container">
 <div class="edit-this-page">
-  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/API/core/atomics/atomic_fetch_op.md" title="Edit this page">
+  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/API/core/atomics/atomic_fetch_op.rst" title="Edit this page">
     <svg aria-hidden="true" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
       <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4"></path>
@@ -497,179 +497,187 @@
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="atomic-fetch-op">
+          <section id="atomic-fetch-op">
 <h1><code class="docutils literal notranslate"><span class="pre">atomic_fetch_[op]</span></code><a class="headerlink" href="#atomic-fetch-op" title="Permalink to this heading">#</a></h1>
-<p>Header File: <code class="docutils literal notranslate"><span class="pre">Kokkos_Core.hpp</span></code></p>
-<p>Usage:</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">old_value</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="n">atomic_fetch_</span><span class="p">[</span><span class="n">op</span><span class="p">](</span><span class="n">ptr_to_value</span><span class="p">,</span><span class="n">update_value</span><span class="p">);</span>
+<p>Header File: &lt;Kokkos_Core.hpp&gt;</p>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this heading">#</a></h2>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">old_value</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="n">atomic_fetch_</span><span class="p">[</span><span class="n">op</span><span class="p">](</span><span class="n">ptr_to_value</span><span class="p">,</span><span class="w"> </span><span class="n">update_value</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>Atomically updates the variable at the address given by <code class="docutils literal notranslate"><span class="pre">ptr_to_value</span></code> with <code class="docutils literal notranslate"><span class="pre">update_value</span></code> according to the relevant operation,
-and returns the previous value found at that address..</p>
-<section id="synopsis">
-<h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this heading">#</a></h2>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span>
-<span class="n">T</span><span class="w"> </span><span class="n">atomic_fetch_add</span><span class="p">(</span><span class="n">T</span><span class="o">*</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">ptr_to_value</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">value</span><span class="p">);</span>
-
-<span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span>
-<span class="n">T</span><span class="w"> </span><span class="n">atomic_fetch_and</span><span class="p">(</span><span class="n">T</span><span class="o">*</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">ptr_to_value</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">value</span><span class="p">);</span>
-
-<span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span>
-<span class="n">T</span><span class="w"> </span><span class="n">atomic_fetch_div</span><span class="p">(</span><span class="n">T</span><span class="o">*</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">ptr_to_value</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">value</span><span class="p">);</span>
-
-<span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span>
-<span class="n">T</span><span class="w"> </span><span class="n">atomic_fetch_lshift</span><span class="p">(</span><span class="n">T</span><span class="o">*</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">ptr_to_value</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="n">shift</span><span class="p">);</span>
-
-<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span>
-<span class="n">T</span><span class="w"> </span><span class="n">atomic_fetch_max</span><span class="p">(</span><span class="n">T</span><span class="o">*</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">ptr_to_value</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">val</span><span class="p">);</span>
-
-<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span>
-<span class="n">T</span><span class="w"> </span><span class="n">atomic_fetch_min</span><span class="p">(</span><span class="n">T</span><span class="o">*</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">ptr_to_value</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">val</span><span class="p">);</span>
-
-<span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span>
-<span class="n">T</span><span class="w"> </span><span class="n">atomic_fetch_mod</span><span class="p">(</span><span class="n">T</span><span class="o">*</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">ptr_to_value</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">value</span><span class="p">);</span>
-
-<span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span>
-<span class="n">T</span><span class="w"> </span><span class="n">atomic_fetch_mul</span><span class="p">(</span><span class="n">T</span><span class="o">*</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">ptr_to_value</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">value</span><span class="p">);</span>
-
-<span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span>
-<span class="n">T</span><span class="w"> </span><span class="n">atomic_fetch_or</span><span class="p">(</span><span class="n">T</span><span class="o">*</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">ptr_to_value</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">value</span><span class="p">);</span>
-
-<span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span>
-<span class="n">T</span><span class="w"> </span><span class="n">atomic_fetch_rshift</span><span class="p">(</span><span class="n">T</span><span class="o">*</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">ptr_to_value</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="n">shift</span><span class="p">);</span>
-
-<span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span>
-<span class="n">T</span><span class="w"> </span><span class="n">atomic_fetch_sub</span><span class="p">(</span><span class="n">T</span><span class="o">*</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">ptr_to_value</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">value</span><span class="p">);</span>
-
-<span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span>
-<span class="n">T</span><span class="w"> </span><span class="n">atomic_fetch_xor</span><span class="p">(</span><span class="n">T</span><span class="o">*</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">ptr_to_value</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">value</span><span class="p">);</span>
-</pre></div>
-</div>
+<p>Atomically updates the variable at the address given by <code class="docutils literal notranslate"><span class="pre">ptr_to_value</span></code> with <code class="docutils literal notranslate"><span class="pre">update_value</span></code>
+according to the relevant operation <code class="docutils literal notranslate"><span class="pre">op</span></code>, and returns the previous value found at that address.</p>
 </section>
 <section id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this heading">#</a></h2>
-<ul>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span>
-<span class="n">T</span><span class="w"> </span><span class="n">atomic_fetch_add</span><span class="p">(</span><span class="n">T</span><span class="o">*</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">ptr_to_value</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">value</span><span class="p">);</span>
-</pre></div>
-</div>
-<p>Atomically executes <code class="docutils literal notranslate"><span class="pre">tmp</span> <span class="pre">=</span> <span class="pre">*ptr_to_value;</span> <span class="pre">*ptr_to_value</span> <span class="pre">+=</span> <span class="pre">value;</span> <span class="pre">return</span> <span class="pre">tmp;</span></code>.</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">ptr_to_value</span></code>: address of the to be updated value.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">value</span></code>: value to be added.</p></li>
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4I0E16atomic_fetch_add1TPC1TK1T">
+<span id="_CPPv3I0E16atomic_fetch_addPC1TK1T"></span><span id="_CPPv2I0E16atomic_fetch_addPC1TK1T"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><a class="reference internal" href="#_CPPv4I0E16atomic_fetch_add1TPC1TK1T" title="atomic_fetch_add::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">atomic_fetch_add</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0E16atomic_fetch_add1TPC1TK1T" title="atomic_fetch_add::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">ptr_to_value</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E16atomic_fetch_add1TPC1TK1T" title="atomic_fetch_add::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">value</span></span><span class="sig-paren">)</span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4I0E16atomic_fetch_add1TPC1TK1T" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Atomically executes <code class="docutils literal notranslate"><span class="pre">tmp</span> <span class="pre">=</span> <span class="pre">*ptr_to_value;</span> <span class="pre">*ptr_to_value</span> <span class="pre">+=</span> <span class="pre">value;</span> <span class="pre">return</span> <span class="pre">tmp;</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ptr_to_value</strong> – address of the value to be updated</p></li>
+<li><p><strong>value</strong> – value to be added</p></li>
 </ul>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span>
-<span class="n">T</span><span class="w"> </span><span class="n">atomic_fetch_and</span><span class="p">(</span><span class="n">T</span><span class="o">*</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">ptr_to_value</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">value</span><span class="p">);</span>
-</pre></div>
-</div>
-<p>Atomically executes <code class="docutils literal notranslate"><span class="pre">tmp</span> <span class="pre">=</span> <span class="pre">*ptr_to_value;</span> <span class="pre">*ptr_to_value</span> <span class="pre">&amp;=</span> <span class="pre">value;</span> <span class="pre">return</span> <span class="pre">tmp;</span></code>.</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">ptr_to_value</span></code>: address of the to be updated value.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">value</span></code>: value with which to combine the original value.</p></li>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4I0E16atomic_fetch_and1TPC1TK1T">
+<span id="_CPPv3I0E16atomic_fetch_andPC1TK1T"></span><span id="_CPPv2I0E16atomic_fetch_andPC1TK1T"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><a class="reference internal" href="#_CPPv4I0E16atomic_fetch_and1TPC1TK1T" title="atomic_fetch_and::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">atomic_fetch_and</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0E16atomic_fetch_and1TPC1TK1T" title="atomic_fetch_and::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">ptr_to_value</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E16atomic_fetch_and1TPC1TK1T" title="atomic_fetch_and::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">value</span></span><span class="sig-paren">)</span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4I0E16atomic_fetch_and1TPC1TK1T" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Atomically executes <code class="docutils literal notranslate"><span class="pre">tmp</span> <span class="pre">=</span> <span class="pre">*ptr_to_value;</span> <span class="pre">*ptr_to_value</span> <span class="pre">&amp;=</span> <span class="pre">value;</span> <span class="pre">return</span> <span class="pre">tmp;</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ptr_to_value</strong> – address of the value to be updated</p></li>
+<li><p><strong>value</strong> – value with which to combine the original value.</p></li>
 </ul>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span>
-<span class="n">T</span><span class="w"> </span><span class="n">atomic_fetch_div</span><span class="p">(</span><span class="n">T</span><span class="o">*</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">ptr_to_value</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">value</span><span class="p">);</span>
-</pre></div>
-</div>
-<p>Atomically executes <code class="docutils literal notranslate"><span class="pre">tmp</span> <span class="pre">=</span> <span class="pre">*ptr_to_value;</span> <span class="pre">*ptr_to_value</span> <span class="pre">/=</span> <span class="pre">value;</span> <span class="pre">return</span> <span class="pre">tmp;</span></code>.</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">ptr_to_value</span></code>: address of the to be updated value.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">value</span></code>: value by which to divide the original value..</p></li>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4I0E16atomic_fetch_div1TPC1TK1T">
+<span id="_CPPv3I0E16atomic_fetch_divPC1TK1T"></span><span id="_CPPv2I0E16atomic_fetch_divPC1TK1T"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><a class="reference internal" href="#_CPPv4I0E16atomic_fetch_div1TPC1TK1T" title="atomic_fetch_div::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">atomic_fetch_div</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0E16atomic_fetch_div1TPC1TK1T" title="atomic_fetch_div::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">ptr_to_value</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E16atomic_fetch_div1TPC1TK1T" title="atomic_fetch_div::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">value</span></span><span class="sig-paren">)</span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4I0E16atomic_fetch_div1TPC1TK1T" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Atomically executes <code class="docutils literal notranslate"><span class="pre">tmp</span> <span class="pre">=</span> <span class="pre">*ptr_to_value;</span> <span class="pre">*ptr_to_value</span> <span class="pre">/=</span> <span class="pre">value;</span> <span class="pre">return</span> <span class="pre">tmp;</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ptr_to_value</strong> – address of the value to be updated</p></li>
+<li><p><strong>value</strong> – value by which to divide the original value..</p></li>
 </ul>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span>
-<span class="n">T</span><span class="w"> </span><span class="n">atomic_fetch_lshift</span><span class="p">(</span><span class="n">T</span><span class="o">*</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">ptr_to_value</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="n">shift</span><span class="p">);</span>
-</pre></div>
-</div>
-<p>Atomically executes <code class="docutils literal notranslate"><span class="pre">tmp</span> <span class="pre">=</span> <span class="pre">*ptr_to_value;</span> <span class="pre">*ptr_to_value</span> <span class="pre">&lt;&lt;</span> <span class="pre">shift;</span> <span class="pre">return</span> <span class="pre">tmp;</span></code>.</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">ptr_to_value</span></code>: address of the to be updated value.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">shift</span></code>: value by which to shift the original variable.</p></li>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4I0E19atomic_fetch_lshift1TPC1TKj">
+<span id="_CPPv3I0E19atomic_fetch_lshiftPC1TKj"></span><span id="_CPPv2I0E19atomic_fetch_lshiftPC1TKj"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><a class="reference internal" href="#_CPPv4I0E19atomic_fetch_lshift1TPC1TKj" title="atomic_fetch_lshift::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">atomic_fetch_lshift</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0E19atomic_fetch_lshift1TPC1TKj" title="atomic_fetch_lshift::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">ptr_to_value</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">shift</span></span><span class="sig-paren">)</span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4I0E19atomic_fetch_lshift1TPC1TKj" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Atomically executes <code class="docutils literal notranslate"><span class="pre">tmp</span> <span class="pre">=</span> <span class="pre">*ptr_to_value;</span> <span class="pre">*ptr_to_value</span> <span class="pre">&lt;&lt;</span> <span class="pre">shift;</span> <span class="pre">return</span> <span class="pre">tmp;</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ptr_to_value</strong> – address of the value to be updated</p></li>
+<li><p><strong>shift</strong> – value by which to shift the original variable.</p></li>
 </ul>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span>
-<span class="n">T</span><span class="w"> </span><span class="n">atomic_fetch_max</span><span class="p">(</span><span class="n">T</span><span class="o">*</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">ptr_to_value</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">value</span><span class="p">);</span>
-</pre></div>
-</div>
-<p>Atomically executes <code class="docutils literal notranslate"><span class="pre">tmp</span> <span class="pre">=</span> <span class="pre">*ptr_to_value;</span> <span class="pre">*ptr_to_value</span> <span class="pre">=</span> <span class="pre">max(*ptr_to_value,</span> <span class="pre">value);</span> <span class="pre">return</span> <span class="pre">tmp;</span></code>.</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">ptr_to_value</span></code>: address of the to be updated value.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">value</span></code>: value which to take the maximum with.</p></li>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4I0E16atomic_fetch_max1TPC1TK1T">
+<span id="_CPPv3I0E16atomic_fetch_maxPC1TK1T"></span><span id="_CPPv2I0E16atomic_fetch_maxPC1TK1T"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><a class="reference internal" href="#_CPPv4I0E16atomic_fetch_max1TPC1TK1T" title="atomic_fetch_max::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">atomic_fetch_max</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0E16atomic_fetch_max1TPC1TK1T" title="atomic_fetch_max::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">ptr_to_value</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E16atomic_fetch_max1TPC1TK1T" title="atomic_fetch_max::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">value</span></span><span class="sig-paren">)</span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4I0E16atomic_fetch_max1TPC1TK1T" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Atomically executes <code class="docutils literal notranslate"><span class="pre">tmp</span> <span class="pre">=</span> <span class="pre">*ptr_to_value;</span> <span class="pre">*ptr_to_value</span> <span class="pre">=</span> <span class="pre">max(*ptr_to_value,</span> <span class="pre">value);</span> <span class="pre">return</span> <span class="pre">tmp;</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ptr_to_value</strong> – address of the value to be updated</p></li>
+<li><p><strong>value</strong> – value which to take the maximum with.</p></li>
 </ul>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span>
-<span class="n">T</span><span class="w"> </span><span class="n">atomic_fetch_min</span><span class="p">(</span><span class="n">T</span><span class="o">*</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">ptr_to_value</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">value</span><span class="p">);</span>
-</pre></div>
-</div>
-<p>Atomically executes <code class="docutils literal notranslate"><span class="pre">tmp</span> <span class="pre">=</span> <span class="pre">*ptr_to_value;</span> <span class="pre">*ptr_to_value</span> <span class="pre">=</span> <span class="pre">min(*ptr_to_value,</span> <span class="pre">value);</span> <span class="pre">return</span> <span class="pre">tmp;</span></code>.</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">ptr_to_value</span></code>: address of the to be updated value.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">value</span></code>: value which to take the minimum with.</p></li>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4I0E16atomic_fetch_min1TPC1TK1T">
+<span id="_CPPv3I0E16atomic_fetch_minPC1TK1T"></span><span id="_CPPv2I0E16atomic_fetch_minPC1TK1T"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><a class="reference internal" href="#_CPPv4I0E16atomic_fetch_min1TPC1TK1T" title="atomic_fetch_min::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">atomic_fetch_min</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0E16atomic_fetch_min1TPC1TK1T" title="atomic_fetch_min::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">ptr_to_value</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E16atomic_fetch_min1TPC1TK1T" title="atomic_fetch_min::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">value</span></span><span class="sig-paren">)</span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4I0E16atomic_fetch_min1TPC1TK1T" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Atomically executes <code class="docutils literal notranslate"><span class="pre">tmp</span> <span class="pre">=</span> <span class="pre">*ptr_to_value;</span> <span class="pre">*ptr_to_value</span> <span class="pre">=</span> <span class="pre">min(*ptr_to_value,</span> <span class="pre">value);</span> <span class="pre">return</span> <span class="pre">tmp;</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ptr_to_value</strong> – address of the value to be updated</p></li>
+<li><p><strong>value</strong> – value which to take the minimum with.</p></li>
 </ul>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span>
-<span class="n">T</span><span class="w"> </span><span class="n">atomic_fetch_mul</span><span class="p">(</span><span class="n">T</span><span class="o">*</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">ptr_to_value</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">value</span><span class="p">);</span>
-</pre></div>
-</div>
-<p>Atomically executes <code class="docutils literal notranslate"><span class="pre">tmp</span> <span class="pre">=</span> <span class="pre">*ptr_to_value;</span> <span class="pre">*ptr_to_value</span> <span class="pre">*=</span> <span class="pre">value;</span> <span class="pre">return</span> <span class="pre">tmp;</span></code>.</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">ptr_to_value</span></code>: address of the to be updated value.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">value</span></code>: value by which to multiply the original value.</p></li>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4I0E16atomic_fetch_mul1TPC1TK1T">
+<span id="_CPPv3I0E16atomic_fetch_mulPC1TK1T"></span><span id="_CPPv2I0E16atomic_fetch_mulPC1TK1T"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><a class="reference internal" href="#_CPPv4I0E16atomic_fetch_mul1TPC1TK1T" title="atomic_fetch_mul::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">atomic_fetch_mul</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0E16atomic_fetch_mul1TPC1TK1T" title="atomic_fetch_mul::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">ptr_to_value</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E16atomic_fetch_mul1TPC1TK1T" title="atomic_fetch_mul::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">value</span></span><span class="sig-paren">)</span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4I0E16atomic_fetch_mul1TPC1TK1T" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Atomically executes <code class="docutils literal notranslate"><span class="pre">tmp</span> <span class="pre">=</span> <span class="pre">*ptr_to_value;</span> <span class="pre">*ptr_to_value</span> <span class="pre">*=</span> <span class="pre">value;</span> <span class="pre">return</span> <span class="pre">tmp;</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ptr_to_value</strong> – address of the value to be updated</p></li>
+<li><p><strong>value</strong> – value by which to multiply the original value.</p></li>
 </ul>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span>
-<span class="n">T</span><span class="w"> </span><span class="n">atomic_fetch_mod</span><span class="p">(</span><span class="n">T</span><span class="o">*</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">ptr_to_value</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">value</span><span class="p">);</span>
-</pre></div>
-</div>
-<p>Atomically executes <code class="docutils literal notranslate"><span class="pre">tmp</span> <span class="pre">=</span> <span class="pre">*ptr_to_value;</span> <span class="pre">*ptr_to_value</span> <span class="pre">%=</span> <span class="pre">value;</span> <span class="pre">return</span> <span class="pre">tmp;</span></code>.</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">ptr_to_value</span></code>: address of the to be updated value.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">value</span></code>: value with which to combine the original value.</p></li>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4I0E16atomic_fetch_mod1TPC1TK1T">
+<span id="_CPPv3I0E16atomic_fetch_modPC1TK1T"></span><span id="_CPPv2I0E16atomic_fetch_modPC1TK1T"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><a class="reference internal" href="#_CPPv4I0E16atomic_fetch_mod1TPC1TK1T" title="atomic_fetch_mod::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">atomic_fetch_mod</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0E16atomic_fetch_mod1TPC1TK1T" title="atomic_fetch_mod::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">ptr_to_value</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E16atomic_fetch_mod1TPC1TK1T" title="atomic_fetch_mod::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">value</span></span><span class="sig-paren">)</span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4I0E16atomic_fetch_mod1TPC1TK1T" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Atomically executes <code class="docutils literal notranslate"><span class="pre">tmp</span> <span class="pre">=</span> <span class="pre">*ptr_to_value;</span> <span class="pre">*ptr_to_value</span> <span class="pre">%=</span> <span class="pre">value;</span> <span class="pre">return</span> <span class="pre">tmp;</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ptr_to_value</strong> – address of the value to be updated</p></li>
+<li><p><strong>value</strong> – value with which to combine the original value.</p></li>
 </ul>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span>
-<span class="n">T</span><span class="w"> </span><span class="n">atomic_fetch_or</span><span class="p">(</span><span class="n">T</span><span class="o">*</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">ptr_to_value</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">value</span><span class="p">);</span>
-</pre></div>
-</div>
-<p>Atomically executes <code class="docutils literal notranslate"><span class="pre">tmp</span> <span class="pre">=</span> <span class="pre">*ptr_to_value;</span> <span class="pre">*ptr_to_value</span> <span class="pre">|=</span> <span class="pre">value;</span> <span class="pre">return</span> <span class="pre">tmp;</span></code>.</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">ptr_to_value</span></code>: address of the to be updated value.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">value</span></code>: value with which to combine the original value.</p></li>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4I0E15atomic_fetch_or1TPC1TK1T">
+<span id="_CPPv3I0E15atomic_fetch_orPC1TK1T"></span><span id="_CPPv2I0E15atomic_fetch_orPC1TK1T"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><a class="reference internal" href="#_CPPv4I0E15atomic_fetch_or1TPC1TK1T" title="atomic_fetch_or::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">atomic_fetch_or</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0E15atomic_fetch_or1TPC1TK1T" title="atomic_fetch_or::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">ptr_to_value</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E15atomic_fetch_or1TPC1TK1T" title="atomic_fetch_or::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">value</span></span><span class="sig-paren">)</span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4I0E15atomic_fetch_or1TPC1TK1T" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Atomically executes <code class="docutils literal notranslate"><span class="pre">tmp</span> <span class="pre">=</span> <span class="pre">*ptr_to_value;</span> <span class="pre">*ptr_to_value</span> <span class="pre">|=</span> <span class="pre">value;</span> <span class="pre">return</span> <span class="pre">tmp;</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ptr_to_value</strong> – address of the value to be updated</p></li>
+<li><p><strong>value</strong> – value with which to combine the original value.</p></li>
 </ul>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span>
-<span class="n">T</span><span class="w"> </span><span class="n">atomic_fetch_rshift</span><span class="p">(</span><span class="n">T</span><span class="o">*</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">ptr_to_value</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="n">shift</span><span class="p">);</span>
-</pre></div>
-</div>
-<p>Atomically executes <code class="docutils literal notranslate"><span class="pre">tmp</span> <span class="pre">=</span> <span class="pre">*ptr_to_value;</span> <span class="pre">*ptr_to_value</span> <span class="pre">&gt;&gt;</span> <span class="pre">shift;</span> <span class="pre">return</span> <span class="pre">tmp;</span></code>.</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">ptr_to_value</span></code>: address of the to be updated value.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">shift</span></code>: value by which to shift the original variable.</p></li>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4I0E19atomic_fetch_rshift1TPC1TKj">
+<span id="_CPPv3I0E19atomic_fetch_rshiftPC1TKj"></span><span id="_CPPv2I0E19atomic_fetch_rshiftPC1TKj"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><a class="reference internal" href="#_CPPv4I0E19atomic_fetch_rshift1TPC1TKj" title="atomic_fetch_rshift::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">atomic_fetch_rshift</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0E19atomic_fetch_rshift1TPC1TKj" title="atomic_fetch_rshift::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">ptr_to_value</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">shift</span></span><span class="sig-paren">)</span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4I0E19atomic_fetch_rshift1TPC1TKj" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Atomically executes <code class="docutils literal notranslate"><span class="pre">tmp</span> <span class="pre">=</span> <span class="pre">*ptr_to_value;</span> <span class="pre">*ptr_to_value</span> <span class="pre">&gt;&gt;</span> <span class="pre">shift;</span> <span class="pre">return</span> <span class="pre">tmp;</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ptr_to_value</strong> – address of the value to be updated</p></li>
+<li><p><strong>shift</strong> – value by which to shift the original variable.</p></li>
 </ul>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span>
-<span class="n">T</span><span class="w"> </span><span class="n">atomic_fetch_sub</span><span class="p">(</span><span class="n">T</span><span class="o">*</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">ptr_to_value</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">value</span><span class="p">);</span>
-</pre></div>
-</div>
-<p>Atomically executes <code class="docutils literal notranslate"><span class="pre">*ptr_to_value</span> <span class="pre">-=</span> <span class="pre">value</span></code>.</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">ptr_to_value</span></code>: address of the to be updated value.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">value</span></code>: value to be substracted..</p></li>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4I0E16atomic_fetch_sub1TPC1TK1T">
+<span id="_CPPv3I0E16atomic_fetch_subPC1TK1T"></span><span id="_CPPv2I0E16atomic_fetch_subPC1TK1T"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><a class="reference internal" href="#_CPPv4I0E16atomic_fetch_sub1TPC1TK1T" title="atomic_fetch_sub::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">atomic_fetch_sub</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0E16atomic_fetch_sub1TPC1TK1T" title="atomic_fetch_sub::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">ptr_to_value</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E16atomic_fetch_sub1TPC1TK1T" title="atomic_fetch_sub::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">value</span></span><span class="sig-paren">)</span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4I0E16atomic_fetch_sub1TPC1TK1T" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Atomically executes <code class="docutils literal notranslate"><span class="pre">*ptr_to_value</span> <span class="pre">-=</span> <span class="pre">value</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ptr_to_value</strong> – address of the value to be updated</p></li>
+<li><p><strong>value</strong> – value to be substracted..</p></li>
 </ul>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span>
-<span class="n">T</span><span class="w"> </span><span class="n">atomic_fetch_xor</span><span class="p">(</span><span class="n">T</span><span class="o">*</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">ptr_to_value</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">value</span><span class="p">);</span>
-</pre></div>
-</div>
-<p>Atomically executes <code class="docutils literal notranslate"><span class="pre">tmp</span> <span class="pre">=</span> <span class="pre">*ptr_to_value;</span> <span class="pre">*ptr_to_value</span> <span class="pre">^=</span> <span class="pre">value;</span> <span class="pre">return</span> <span class="pre">tmp;</span></code>.</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">ptr_to_value</span></code>: address of the to be updated value.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">value</span></code>: value with which to combine the original value.</p></li>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4I0E16atomic_fetch_xor1TPC1TK1T">
+<span id="_CPPv3I0E16atomic_fetch_xorPC1TK1T"></span><span id="_CPPv2I0E16atomic_fetch_xorPC1TK1T"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><a class="reference internal" href="#_CPPv4I0E16atomic_fetch_xor1TPC1TK1T" title="atomic_fetch_xor::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">atomic_fetch_xor</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0E16atomic_fetch_xor1TPC1TK1T" title="atomic_fetch_xor::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">ptr_to_value</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E16atomic_fetch_xor1TPC1TK1T" title="atomic_fetch_xor::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">value</span></span><span class="sig-paren">)</span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4I0E16atomic_fetch_xor1TPC1TK1T" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Atomically executes <code class="docutils literal notranslate"><span class="pre">tmp</span> <span class="pre">=</span> <span class="pre">*ptr_to_value;</span> <span class="pre">*ptr_to_value</span> <span class="pre">^=</span> <span class="pre">value;</span> <span class="pre">return</span> <span class="pre">tmp;</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ptr_to_value</strong> – address of the value to be updated</p></li>
+<li><p><strong>value</strong> – value with which to combine the original value.</p></li>
 </ul>
-</li>
-</ul>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
 </section>
 
@@ -731,7 +739,7 @@ and returns the previous value found at that address..</p>
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">atomic_fetch_[op]</span></code></a><ul>
-<li><a class="reference internal" href="#synopsis">Synopsis</a></li>
+<li><a class="reference internal" href="#usage">Usage</a></li>
 <li><a class="reference internal" href="#description">Description</a></li>
 </ul>
 </li>
