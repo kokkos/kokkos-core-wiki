@@ -9,7 +9,7 @@ Kokkos's unordered map is designed to efficiently handle tens of thousands of co
 Consequently, the API is significantly different from the standard unordered_map.
 The two key differences are *fixed capacity* and *index based*.
 
-- *Fixed capacity*: The capacity of the unordered_map is fix when inside a parallel algorithm.
+- *Fixed capacity*: The capacity of the unordered_map is fixed when inside a parallel algorithm.
   This means that an insert can fail when the capacity of the map is exceeded.
   The capacity of the map can be changed (rehash) from the host.
 
@@ -23,7 +23,7 @@ Description
 
 .. cppkokkos:class:: template <typename Key, typename Value, typename Device = Kokkos::DefaultExecutionSpace> UnorderedMap
 
-   :tparam Key: Must be a POD
+   :tparam Key: Must be a POD (Plain Old Data type)
 
    :tparam Value: `void` indicates an unordered set, otherwise must be trivially copyable
 
