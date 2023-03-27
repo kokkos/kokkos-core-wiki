@@ -7,7 +7,7 @@
 Header File: ``<Kokkos_Core.hpp>``
 
 TeamHandleConcept defines the concept for the ``member_type`` of ``TeamPolicy`` and ``TeamTask``.
-The actual type is defined through the policies, but meets the following API requirements.
+The actual type is defined through the policies, but meets the following API.
 Note that the specific classes are only part of the public API as provided by ``TeamPolicy`` and
 ``TeamTask`` and only their parts as defined by the ``TeamHandleConcept``.
 The actual name of the class, as well as potential template parameters, existing
