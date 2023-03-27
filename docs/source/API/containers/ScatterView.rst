@@ -10,24 +10,6 @@ Header File: ``<Kokkos_ScatterView.hpp>``
 
 .. |parallelReduce| replace:: :cpp:func:`parallel_reduce`
 
-Usage
------
-
-.. code-block:: cpp
-
-    KOKKOS_INLINE_FUNCTION int foo(int i) { return i; }
-    KOKKOS_INLINE_FUNCTION double bar(int i) { return i*i; }
-
-    Kokkos::View<double*> results("results", 1);
-    Kokkos::Experimental::ScatterView<double*> scatter(results);
-    Kokkos::parallel_for(1, KOKKOS_LAMBDA(int input_i) {
-        auto access = scatter.access();
-        auto result_i = foo(input_i);
-        auto contribution = bar(input_i);
-        access(result_i) += contribution;
-    });
-    Kokkos::Experimental::contribute(results, scatter);
-
 Description
 -----------
 
@@ -124,3 +106,22 @@ Description
 
    convenience function to perform final reduction of ScatterView
    results into a resultant View; may be called following |parallelReduce|_.
+
+
+Example
+-------
+
+.. code-block:: cpp
+
+    KOKKOS_INLINE_FUNCTION int foo(int i) { return i; }
+    KOKKOS_INLINE_FUNCTION double bar(int i) { return i*i; }
+
+    Kokkos::View<double*> results("results", 1);
+    Kokkos::Experimental::ScatterView<double*> scatter(results);
+    Kokkos::parallel_for(1, KOKKOS_LAMBDA(int input_i) {
+        auto access = scatter.access();
+        auto result_i = foo(input_i);
+        auto contribution = bar(input_i);
+        access(result_i) += contribution;
+    });
+    Kokkos::Experimental::contribute(results, scatter);
