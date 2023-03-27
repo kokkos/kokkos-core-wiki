@@ -1,10 +1,13 @@
-``OffsetView``
-==============
-
-An ``OffsetView`` can be used when the indices of an array begin at something other than zero.
 
 .. role:: cppkokkos(code)
 	  :language: cppkokkos
+
+``OffsetView``
+==============
+
+Header file: ``<Kokkos_OffsetView.hpp>``
+
+An ``OffsetView`` can be used when the indices of an array begin at something other than zero.
 
 .. warning::
 

@@ -7,7 +7,7 @@
 .. role:: cppkokkos(code)
     :language: cppkokkos
 
-Header File: ``<Kokkos_DynRankView.hpp>``
+Header file: ``<Kokkos_DynRankView.hpp>``
 
 Usage
 -----

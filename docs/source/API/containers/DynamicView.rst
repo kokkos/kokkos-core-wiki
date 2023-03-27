@@ -4,7 +4,7 @@
 .. role:: cppkokkos(code)
     :language: cppkokkos
 
-Header File: ``<Kokkos_DynamicView.hpp>``
+Header file: ``<Kokkos_DynamicView.hpp>``
 
 
 Description
