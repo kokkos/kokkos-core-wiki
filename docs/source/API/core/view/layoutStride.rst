@@ -6,8 +6,6 @@
 
 Header File: ``<Kokkos_Layout.hpp>``
 
-This Kokkos Layout, when provided to a multidimensional View, lays out memory with an arbitrary stride. Most frequently encountered when taking a noncontiguous subview of some larger view.
-
 Usage
 -----
 
@@ -21,6 +19,9 @@ Description
 -----------
 
 .. cpp:class:: LayoutStride
+
+   When provided to a multidimensional View, lays out memory with an arbitrary stride.
+   Most frequently encountered when taking a noncontiguous subview of some larger view.
 
    .. rubric:: Public Class Members
 
