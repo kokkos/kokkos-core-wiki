@@ -473,7 +473,7 @@
         </a>
         <div class="content-icon-container">
 <div class="edit-this-page">
-  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/API/containers/Unordered-Map.md" title="Edit this page">
+  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/API/containers/Unordered-Map.rst" title="Edit this page">
     <svg aria-hidden="true" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
       <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4"></path>
@@ -497,110 +497,189 @@
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="unorderedmap">
+          <section id="unorderedmap">
 <h1><code class="docutils literal notranslate"><span class="pre">UnorderedMap</span></code><a class="headerlink" href="#unorderedmap" title="Permalink to this heading">#</a></h1>
-<p>Kokkos’s unordered map is designed to efficiently handle tens of thousands of concurrent insertions.  Consequently, the API is significantly different from the standard unordered_map.  The two key differences are <em>fixed capacity</em> and <em>index based</em>.</p>
-<p><em>Fixed capacity</em>:  The capacity of the unordered_map is fix when inside a parallel algorithm.  This means that an insert can fail when the capacity of the map is exceeded.  The capacity of the map can be changed (rehash) from the host.</p>
-<p><em>Index based</em>:  Instead of returning pointers or iterators (which would not work when moving between memory spaces) the map uses integer indexes.  This also allows the map to store data in cache friendly ways.  The availability of indexes is managed by an internal atomic bitset based on <code class="docutils literal notranslate"><span class="pre">uint32_t</span></code>.</p>
-<p>An <code class="docutils literal notranslate"><span class="pre">UnorderedMap</span></code> behaves like an unordered set if the template parameter <code class="docutils literal notranslate"><span class="pre">Value</span></code> is void.</p>
-<section id="kokkos-unorderedmap-api">
-<h2>Kokkos::UnorderedMap API<a class="headerlink" href="#kokkos-unorderedmap-api" title="Permalink to this heading">#</a></h2>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">UnorderedMapInsertResult</span><span class="p">;</span>
-
-<span class="k">template</span><span class="o">&lt;</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="nc">Key</span><span class="w">    </span><span class="c1">// Must be a POD</span>
-<span class="w">        </span><span class="p">,</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="nc">Value</span><span class="w">  </span><span class="c1">// void indicates an unordered set, otherwise </span>
-<span class="w">                          </span><span class="c1">// must be trivially copyable</span>
-<span class="w">        </span><span class="p">,</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="nc">Device</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">DefaultExecutionSpace</span>
-<span class="w">                          </span><span class="c1">// Device is any class or struct with the </span>
-<span class="w">                          </span><span class="c1">// following typedefs or type aliases</span>
-<span class="w">                          </span><span class="c1">// execution_space, memory_space, and device_type</span>
-<span class="w">        </span><span class="o">&gt;</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">UnorderedMap</span><span class="w"> </span><span class="p">{</span>
-<span class="k">public</span><span class="o">:</span>
-<span class="w">  </span><span class="c1">// Host: create map with enough space for at least</span>
-<span class="w">  </span><span class="c1">// capacity_hint number of objects</span>
-<span class="w">  </span><span class="n">UnorderedMap</span><span class="p">(</span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">capacity_hint</span><span class="p">);</span>
-<span class="w">  </span>
-<span class="w">  </span><span class="c1">// Host: clear the map</span>
-<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">clear</span><span class="p">();</span>
-<span class="w">  </span>
-<span class="w">  </span><span class="c1">// Host: rehash map to given capacity,</span>
-<span class="w">  </span><span class="c1">// the current size is used as a lower bound</span>
-<span class="w">  </span><span class="c1">// O(capacity)</span>
-<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="nf">rehash</span><span class="p">(</span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">requested_capacity</span><span class="p">);</span>
-<span class="w">  </span>
-<span class="w">  </span><span class="c1">// Host: current size of the map, O(capacity)</span>
-<span class="w">  </span><span class="kt">uint32_t</span><span class="w"> </span><span class="nf">size</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
-<span class="w">  </span>
-<span class="w">  </span><span class="c1">// Host/Device: capacity of the map, O(1)</span>
-<span class="w">  </span><span class="kt">uint32_t</span><span class="w"> </span><span class="nf">capacity</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
-<span class="w">  </span>
-<span class="w">  </span><span class="c1">// Device: insert the given key into the map with a </span>
-<span class="w">  </span><span class="c1">// default constructed value</span>
-<span class="w">  </span><span class="n">UnorderedMapInsertResult</span><span class="w"> </span><span class="nf">insert</span><span class="p">(</span><span class="n">key</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
-<span class="w">  </span>
-<span class="w">  </span><span class="c1">// Device: insert the given key/value pair into the map</span>
-<span class="w">  </span><span class="n">UnorderedMapInsertResult</span><span class="w"> </span><span class="nf">insert</span><span class="p">(</span><span class="n">Key</span><span class="w"> </span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="n">Value</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
-<span class="w">  </span>
-<span class="w">  </span><span class="c1">// Device: return the index of the key if it exist, otherwise </span>
-<span class="w">  </span><span class="c1">// return invalid_index</span>
-<span class="w">  </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">find</span><span class="p">(</span><span class="n">Key</span><span class="w"> </span><span class="n">key</span><span class="p">)</span><span class="w"> </span><span class="k">const</span>
-<span class="w">  </span>
-<span class="w">  </span><span class="c1">// Device: Does the key exist in the map </span>
-<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="n">exists</span><span class="p">(</span><span class="n">Key</span><span class="w"> </span><span class="n">key</span><span class="p">)</span><span class="w"> </span><span class="k">const</span>
-
-<span class="w">  </span><span class="c1">// Device: is the current index a valid key/value pair</span>
-<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="n">valid_at</span><span class="p">(</span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">index</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
-<span class="w">  </span>
-<span class="w">  </span><span class="c1">// Device: return the current key at the index</span>
-<span class="w">  </span><span class="n">Key</span><span class="w"> </span><span class="nf">key_at</span><span class="p">(</span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">index</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
-<span class="w">  </span>
-<span class="w">  </span><span class="c1">// Device: return the current value at the index</span>
-<span class="w">  </span><span class="n">Value</span><span class="w"> </span><span class="nf">value_at</span><span class="p">(</span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">index</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
-
-<span class="w">  </span><span class="c1">// Host/Device: return true if the internal views (keys, values, </span>
-<span class="w">  </span><span class="c1">// hashmap) are allocated</span>
-<span class="w">  </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="nf">is_allocated</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
-<span class="w"> </span>
-<span class="p">};</span>
-
-
-<span class="k">class</span><span class="w"> </span><span class="nc">UnorderedMapInsertResult</span><span class="w"> </span><span class="p">{</span>
-<span class="k">public</span><span class="o">:</span>
-<span class="w">  </span><span class="c1">// Was the key/value pair successfully inserted into the map</span>
-<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="n">success</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
-<span class="w">  </span>
-<span class="w">  </span><span class="c1">// Is the key already present in the map</span>
-<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="nf">existing</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
-<span class="w">  </span>
-<span class="w">  </span><span class="c1">// Did the insert fail?</span>
-<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="nf">failed</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
-<span class="w">  </span>
-<span class="w">  </span><span class="c1">// Index where the key exists in the map</span>
-<span class="w">  </span><span class="c1">// as long as failed() == false</span>
-<span class="w">  </span><span class="kt">uint32_t</span><span class="w"> </span><span class="nf">index</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
-<span class="p">};</span>
-</pre></div>
+<p>Kokkos’s unordered map is designed to efficiently handle tens of thousands of concurrent insertions.
+Consequently, the API is significantly different from the standard unordered_map.
+The two key differences are <em>fixed capacity</em> and <em>index based</em>.</p>
+<ul class="simple">
+<li><p><em>Fixed capacity</em>: The capacity of the unordered_map is fixed when inside a parallel algorithm.
+This means that an insert can fail when the capacity of the map is exceeded.
+The capacity of the map can be changed (rehash) from the host.</p></li>
+<li><p><em>Index based</em>: Instead of returning pointers or iterators (which would not work when moving
+between memory spaces) the map uses integer indexes. This also allows the map to store data
+in cache friendly ways. The availability of indexes is managed by an internal atomic bitset based on <code class="docutils literal notranslate"><span class="pre">uint32_t</span></code>.</p></li>
+</ul>
+<section id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this heading">#</a></h2>
+<dl class="cppkokkos class">
+<dt class="sig sig-object cppkokkos" id="_CPPv4I000E12UnorderedMap">
+<span id="_CPPv3I000E12UnorderedMap"></span><span id="_CPPv2I000E12UnorderedMap"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Key</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Value</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Device</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">Kokkos</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">DefaultExecutionSpace</span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">UnorderedMap</span></span></span><a class="headerlink" href="#_CPPv4I000E12UnorderedMap" title="Permalink to this definition">#</a><br /></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Template Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Key</strong> – Must be a POD (Plain Old Data type)</p></li>
+<li><p><strong>Value</strong> – <cite>void</cite> indicates an unordered set, otherwise must be trivially copyable</p></li>
+<li><p><strong>Device</strong> – Device is any class or struct with the following public typedefs or type aliases: <cite>execution_space</cite>, <cite>memory_space</cite>, and <cite>device_type</cite></p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Constructor</p>
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N12UnorderedMap12UnorderedMapE8uint32_t">
+<span id="_CPPv3N12UnorderedMap12UnorderedMapE8uint32_t"></span><span id="_CPPv2N12UnorderedMap12UnorderedMapE8uint32_t"></span><span id="UnorderedMap::UnorderedMap__uint32_t"></span><span class="sig-name descname"><span class="n"><span class="pre">UnorderedMap</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">capacity_hint</span></span><span class="sig-paren">)</span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4N12UnorderedMap12UnorderedMapE8uint32_t" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Create map with enough space for at least capacity_hint number of objects</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Host Only</p>
 </div>
+</dd></dl>
+
+<p class="rubric">Public Member Functions</p>
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N12UnorderedMap5clearEv">
+<span id="_CPPv3N12UnorderedMap5clearEv"></span><span id="_CPPv2N12UnorderedMap5clearEv"></span><span id="UnorderedMap::clear"></span><span class="sig-name descname"><span class="n"><span class="pre">clear</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4N12UnorderedMap5clearEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Clear the map</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Host Only</p>
+</div>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N12UnorderedMap6rehashE8uint32_t">
+<span id="_CPPv3N12UnorderedMap6rehashE8uint32_t"></span><span id="_CPPv2N12UnorderedMap6rehashE8uint32_t"></span><span id="UnorderedMap::rehash__uint32_t"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">rehash</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">requested_capacity</span></span><span class="sig-paren">)</span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4N12UnorderedMap6rehashE8uint32_t" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Rehash map to given capacity, the current size is used as a lower bound O(capacity)</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Host Only</p>
+</div>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK12UnorderedMap4sizeEv">
+<span id="_CPPv3NK12UnorderedMap4sizeEv"></span><span id="_CPPv2NK12UnorderedMap4sizeEv"></span><span id="UnorderedMap::sizeC"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">size</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4NK12UnorderedMap4sizeEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Current size of the map, O(capacity)</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Host Only</p>
+</div>
+</dd></dl>
+
+<dl class="cppkokkos kokkosinlinefunction">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK12UnorderedMap8capacityEv">
+<span id="_CPPv3NK12UnorderedMap8capacityEv"></span><span id="_CPPv2NK12UnorderedMap8capacityEv"></span><span id="UnorderedMap::capacityC"></span><span class="k"><span class="pre">KOKKOS_INLINE_FUNCTION</span></span><span class="w"> </span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">capacity</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4NK12UnorderedMap8capacityEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Capacity of the map, O(1)</p>
+</dd></dl>
+
+<dl class="cppkokkos kokkosinlinefunction">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK12UnorderedMap6insertE3key">
+<span id="_CPPv3NK12UnorderedMap6insertE3key"></span><span id="_CPPv2NK12UnorderedMap6insertE3key"></span><span id="UnorderedMap::insert__keyC"></span><span class="k"><span class="pre">KOKKOS_INLINE_FUNCTION</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv424UnorderedMapInsertResult" title="UnorderedMapInsertResult"><span class="n"><span class="pre">UnorderedMapInsertResult</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">insert</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">key</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4NK12UnorderedMap6insertE3key" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Insert the given key into the map with a default constructed value</p>
+</dd></dl>
+
+<dl class="cppkokkos kokkosinlinefunction">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK12UnorderedMap6insertE3Key5Value">
+<span id="_CPPv3NK12UnorderedMap6insertE3Key5Value"></span><span id="_CPPv2NK12UnorderedMap6insertE3Key5Value"></span><span id="UnorderedMap::insert__Key.ValueC"></span><span class="k"><span class="pre">KOKKOS_INLINE_FUNCTION</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv424UnorderedMapInsertResult" title="UnorderedMapInsertResult"><span class="n"><span class="pre">UnorderedMapInsertResult</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">insert</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I000E12UnorderedMap" title="UnorderedMap::Key"><span class="n"><span class="pre">Key</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">key</span></span>, <a class="reference internal" href="#_CPPv4I000E12UnorderedMap" title="UnorderedMap::Value"><span class="n"><span class="pre">Value</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">value</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="p"><span class="pre">;</span></span><br /></dt>
+<dd><p>Insert the given key/value pair into the map</p>
+</dd></dl>
+
+<dl class="cppkokkos kokkosinlinefunction">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK12UnorderedMap4findE3Key">
+<span id="_CPPv3NK12UnorderedMap4findE3Key"></span><span id="_CPPv2NK12UnorderedMap4findE3Key"></span><span id="UnorderedMap::find__KeyC"></span><span class="k"><span class="pre">KOKKOS_INLINE_FUNCTION</span></span><span class="w"> </span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">find</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I000E12UnorderedMap" title="UnorderedMap::Key"><span class="n"><span class="pre">Key</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">key</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK12UnorderedMap4findE3Key" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Return the index of the key if it exist, otherwise return invalid_index</p>
+</dd></dl>
+
+<dl class="cppkokkos kokkosinlinefunction">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK12UnorderedMap6existsE3Key">
+<span id="_CPPv3NK12UnorderedMap6existsE3Key"></span><span id="_CPPv2NK12UnorderedMap6existsE3Key"></span><span id="UnorderedMap::exists__KeyC"></span><span class="k"><span class="pre">KOKKOS_INLINE_FUNCTION</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">exists</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I000E12UnorderedMap" title="UnorderedMap::Key"><span class="n"><span class="pre">Key</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">key</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4NK12UnorderedMap6existsE3Key" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Does the key exist in the map</p>
+</dd></dl>
+
+<dl class="cppkokkos kokkosinlinefunction">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK12UnorderedMap8valid_atE8uint32_t">
+<span id="_CPPv3NK12UnorderedMap8valid_atE8uint32_t"></span><span id="_CPPv2NK12UnorderedMap8valid_atE8uint32_t"></span><span id="UnorderedMap::valid_at__uint32_tC"></span><span class="k"><span class="pre">KOKKOS_INLINE_FUNCTION</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">valid_at</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">index</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4NK12UnorderedMap8valid_atE8uint32_t" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Is the current index a valid key/value pair</p>
+</dd></dl>
+
+<dl class="cppkokkos kokkosinlinefunction">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK12UnorderedMap6key_atE8uint32_t">
+<span id="_CPPv3NK12UnorderedMap6key_atE8uint32_t"></span><span id="_CPPv2NK12UnorderedMap6key_atE8uint32_t"></span><span id="UnorderedMap::key_at__uint32_tC"></span><span class="k"><span class="pre">KOKKOS_INLINE_FUNCTION</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I000E12UnorderedMap" title="UnorderedMap::Key"><span class="n"><span class="pre">Key</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">key_at</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">index</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4NK12UnorderedMap6key_atE8uint32_t" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Return the current key at the index</p>
+</dd></dl>
+
+<dl class="cppkokkos kokkosinlinefunction">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK12UnorderedMap8value_atE8uint32_t">
+<span id="_CPPv3NK12UnorderedMap8value_atE8uint32_t"></span><span id="_CPPv2NK12UnorderedMap8value_atE8uint32_t"></span><span id="UnorderedMap::value_at__uint32_tC"></span><span class="k"><span class="pre">KOKKOS_INLINE_FUNCTION</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I000E12UnorderedMap" title="UnorderedMap::Value"><span class="n"><span class="pre">Value</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">value_at</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">index</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4NK12UnorderedMap8value_atE8uint32_t" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Return the current value at the index</p>
+</dd></dl>
+
+<dl class="cppkokkos kokkosinlinefunction">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK12UnorderedMap12is_allocatedEv">
+<span id="_CPPv3NK12UnorderedMap12is_allocatedEv"></span><span id="_CPPv2NK12UnorderedMap12is_allocatedEv"></span><span id="UnorderedMap::is_allocatedCCE"></span><span class="k"><span class="pre">KOKKOS_INLINE_FUNCTION</span></span><span class="w"> </span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_allocated</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4NK12UnorderedMap12is_allocatedEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Return true if the internal views (keys, values, hashmap) are allocated</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="cppkokkos class">
+<dt class="sig sig-object cppkokkos" id="_CPPv424UnorderedMapInsertResult">
+<span id="_CPPv324UnorderedMapInsertResult"></span><span id="_CPPv224UnorderedMapInsertResult"></span><span id="UnorderedMapInsertResult"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">UnorderedMapInsertResult</span></span></span><a class="headerlink" href="#_CPPv424UnorderedMapInsertResult" title="Permalink to this definition">#</a><br /></dt>
+<dd><p class="rubric">Public Methods</p>
+<dl class="cppkokkos kokkosinlinefunction">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK24UnorderedMapInsertResult7successEv">
+<span id="_CPPv3NK24UnorderedMapInsertResult7successEv"></span><span id="_CPPv2NK24UnorderedMapInsertResult7successEv"></span><span id="UnorderedMapInsertResult::successC"></span><span class="k"><span class="pre">KOKKOS_INLINE_FUNCTION</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">success</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4NK24UnorderedMapInsertResult7successEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Was the key/value pair successfully inserted into the map</p>
+</dd></dl>
+
+<dl class="cppkokkos kokkosinlinefunction">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK24UnorderedMapInsertResult8existingEv">
+<span id="_CPPv3NK24UnorderedMapInsertResult8existingEv"></span><span id="_CPPv2NK24UnorderedMapInsertResult8existingEv"></span><span id="UnorderedMapInsertResult::existingC"></span><span class="k"><span class="pre">KOKKOS_INLINE_FUNCTION</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">existing</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4NK24UnorderedMapInsertResult8existingEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Is the key already present in the map</p>
+</dd></dl>
+
+<dl class="cppkokkos kokkosinlinefunction">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK24UnorderedMapInsertResult6failedEv">
+<span id="_CPPv3NK24UnorderedMapInsertResult6failedEv"></span><span id="_CPPv2NK24UnorderedMapInsertResult6failedEv"></span><span id="UnorderedMapInsertResult::failedC"></span><span class="k"><span class="pre">KOKKOS_INLINE_FUNCTION</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">failed</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4NK24UnorderedMapInsertResult6failedEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Did the insert fail?</p>
+</dd></dl>
+
+<dl class="cppkokkos kokkosinlinefunction">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK24UnorderedMapInsertResult5indexEv">
+<span id="_CPPv3NK24UnorderedMapInsertResult5indexEv"></span><span id="_CPPv2NK24UnorderedMapInsertResult5indexEv"></span><span id="UnorderedMapInsertResult::indexC"></span><span class="k"><span class="pre">KOKKOS_INLINE_FUNCTION</span></span><span class="w"> </span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">index</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4NK24UnorderedMapInsertResult5indexEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Index where the key exists in the map as long as failed() == false</p>
+</dd></dl>
+
+</dd></dl>
+
 </section>
 <section id="insertion">
 <h2>Insertion<a class="headerlink" href="#insertion" title="Permalink to this heading">#</a></h2>
-<p>There are 3 potential states for every insertion which are reported by the <code class="docutils literal notranslate"><span class="pre">UnorderedMapInsertResult</span></code>: success, existing, and failed.  <code class="docutils literal notranslate"><span class="pre">success</span></code> implies that the current thread has successfully inserted its key/value pair.  <code class="docutils literal notranslate"><span class="pre">existing</span></code> implies that the key is already in the map and its current value is unchanged.  <code class="docutils literal notranslate"><span class="pre">failed</span></code> means that either the capacity of the map was exhausted or that a free index was not found with a bounded search of the internal atomic bitset.  A <code class="docutils literal notranslate"><span class="pre">failed</span></code> insertion requires the user to increase the capacity (<code class="docutils literal notranslate"><span class="pre">rehash</span></code>) and restart the algoritm.</p>
+<p>There are 3 potential states for every insertion which are reported by the <code class="docutils literal notranslate"><span class="pre">UnorderedMapInsertResult</span></code>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">success</span></code>: implies that the current thread has successfully inserted its key/value pair</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">existing</span></code>: implies that the key is already in the map and its current value is unchanged</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">failed</span></code> means that either the capacity of the map was exhausted or that a free index was not found
+with a bounded search of the internal atomic bitset. A <code class="docutils literal notranslate"><span class="pre">failed</span></code> insertion requires the user to increase
+the capacity (<code class="docutils literal notranslate"><span class="pre">rehash</span></code>) and restart the algoritm.</p></li>
+</ul>
 </section>
 <section id="iteration">
 <h2>Iteration<a class="headerlink" href="#iteration" title="Permalink to this heading">#</a></h2>
-<p>Iterating over Kokkos’ <code class="docutils literal notranslate"><span class="pre">UnorderedMap</span></code> is different from iterating over a standard container.  The pattern is to iterate over the capacity of the map and check if the current index is valid.</p>
-<p>Example:</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="c1">// assume umap is an existing Kokkos::UnorderedMap</span>
+<p>Iterating over Kokkos’ <code class="docutils literal notranslate"><span class="pre">UnorderedMap</span></code> is different from iterating over a standard container. The pattern is to iterate over the capacity of the map and check if the current index is valid.</p>
+<section id="example">
+<h3>Example<a class="headerlink" href="#example" title="Permalink to this heading">#</a></h3>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// assume umap is an existing Kokkos::UnorderedMap</span>
 <span class="n">parallel_for</span><span class="p">(</span><span class="n">umap</span><span class="p">.</span><span class="n">capacity</span><span class="p">(),</span><span class="w"> </span><span class="n">KOKKOS_LAMBDA</span><span class="w"> </span><span class="p">(</span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">umap</span><span class="p">.</span><span class="n">valid_at</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">key</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="n">umap</span><span class="p">.</span><span class="n">key_at</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
-<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">umap</span><span class="p">.</span><span class="n">value_at</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
-<span class="w">    </span><span class="p">...</span>
-<span class="w">  </span><span class="p">}</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">umap</span><span class="p">.</span><span class="n">valid_at</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">key</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="n">umap</span><span class="p">.</span><span class="n">key_at</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">umap</span><span class="p">.</span><span class="n">value_at</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+<span class="w">        </span><span class="p">...</span>
+<span class="w">    </span><span class="p">}</span>
 <span class="p">});</span>
 </pre></div>
 </div>
+</section>
 </section>
 </section>
 
@@ -662,9 +741,12 @@
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">UnorderedMap</span></code></a><ul>
-<li><a class="reference internal" href="#kokkos-unorderedmap-api">Kokkos::UnorderedMap API</a></li>
+<li><a class="reference internal" href="#description">Description</a></li>
 <li><a class="reference internal" href="#insertion">Insertion</a></li>
-<li><a class="reference internal" href="#iteration">Iteration</a></li>
+<li><a class="reference internal" href="#iteration">Iteration</a><ul>
+<li><a class="reference internal" href="#example">Example</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
