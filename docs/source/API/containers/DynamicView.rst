@@ -1,10 +1,11 @@
-``DynamicView``
-===============
 
 .. role:: cppkokkos(code)
     :language: cppkokkos
 
-Header File: ``<Kokkos_DynamicView.hpp>``
+``DynamicView``
+===============
+
+Header file: ``<Kokkos_DynamicView.hpp>``
 
 
 Description

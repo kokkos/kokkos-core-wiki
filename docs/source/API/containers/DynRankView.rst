@@ -1,13 +1,13 @@
 
 .. include:: ../../mydefs.rst
 
-``DynRankView``
-===============
-
 .. role:: cppkokkos(code)
     :language: cppkokkos
 
-Header File: ``<Kokkos_DynRankView.hpp>``
+``DynRankView``
+===============
+
+Header file: ``<Kokkos_DynRankView.hpp>``
 
 Usage
 -----
