@@ -14,7 +14,7 @@ Usage
    old_value =  atomic_fetch_[op](ptr_to_value, update_value);
 
 Atomically updates the variable at the address given by ``ptr_to_value`` with ``update_value``
-according to the relevant operation, and returns the previous value found at that address.
+according to the relevant operation ``op``, and returns the previous value found at that address.
 
 Description
 -----------
