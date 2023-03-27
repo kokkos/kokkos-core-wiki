@@ -473,7 +473,7 @@
         </a>
         <div class="content-icon-container">
 <div class="edit-this-page">
-  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/API/containers/DynRankView.md" title="Edit this page">
+  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/API/containers/DynRankView.rst" title="Edit this page">
     <svg aria-hidden="true" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
       <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4"></path>
@@ -497,324 +497,534 @@
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="dynrankview">
+          <section id="dynrankview">
 <h1><code class="docutils literal notranslate"><span class="pre">DynRankView</span></code><a class="headerlink" href="#dynrankview" title="Permalink to this heading">#</a></h1>
-<p>Header File: <code class="docutils literal notranslate"><span class="pre">Kokkos_DynRankView.hpp</span></code></p>
-<p>Usage:</p>
-<p><code class="docutils literal notranslate"><span class="pre">DynRankView</span></code> is a potential reference counted multidimensional array with compile time layouts and memory space.
-Its semantics are similar to that of <code class="docutils literal notranslate"><span class="pre">std::shared_ptr</span></code>.
-The <code class="docutils literal notranslate"><span class="pre">DynRankView</span></code> differs from the [[View|Kokkos::View]] in that its rank is not provided with the <code class="docutils literal notranslate"><span class="pre">DataType</span></code> template parameter; it is determined dynamically based on the number of extent arguments passed to the constructor. The rank has an upper bound of 7 dimensions.</p>
-<section id="interface">
-<h2>Interface<a class="headerlink" href="#interface" title="Permalink to this heading">#</a></h2>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">DataType</span><span class="w"> </span><span class="p">[,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">LayoutType</span><span class="p">]</span><span class="w"> </span><span class="p">[,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">MemorySpace</span><span class="p">]</span><span class="w"> </span><span class="p">[,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">MemoryTraits</span><span class="p">]</span><span class="o">&gt;</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">DynRankView</span><span class="p">;</span>
-</pre></div>
+<p>Header File: <code class="docutils literal notranslate"><span class="pre">&lt;Kokkos_DynRankView.hpp&gt;</span></code></p>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">DynRankView</span></code> is a potential reference counted multidimensional array with
+compile time layouts and memory space. Its semantics are similar to that of <code class="docutils literal notranslate"><span class="pre">std::shared_ptr</span></code>.
+The <code class="docutils literal notranslate"><span class="pre">DynRankView</span></code> differs from the [[View|Kokkos::View]] in that its rank is not provided
+with the <code class="docutils literal notranslate"><span class="pre">DataType</span></code> template parameter; it is determined dynamically based on the
+number of extent arguments passed to the constructor. The rank has an upper bound of 7 dimensions.</p>
+</section>
+<section id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this heading">#</a></h2>
+<dl class="cppkokkos class">
+<dt class="sig sig-object cppkokkos" id="_CPPv4I0000E11DynRankView">
+<span id="_CPPv3I0000E11DynRankView"></span><span id="_CPPv2I0000E11DynRankView"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">DataType</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">LayoutType</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">MemorySpace</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">MemoryTraits</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">DynRankView</span></span></span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4I0000E11DynRankView" title="Permalink to this definition">#</a><br /></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Template Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>DataType</strong> – <p>Defines the fundamental scalar type of the <code class="docutils literal notranslate"><span class="pre">DynRankView</span></code></p>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>This parameter is mandatory</p>
 </div>
-<section id="parameters">
-<h3>Parameters<a class="headerlink" href="#parameters" title="Permalink to this heading">#</a></h3>
-<p>Template parameters other than <code class="docutils literal notranslate"><span class="pre">DataType</span></code> are optional, but ordering is enforced. That means for example that <code class="docutils literal notranslate"><span class="pre">LayoutType</span></code> can be omitted but if both <code class="docutils literal notranslate"><span class="pre">MemorySpace</span></code> and <code class="docutils literal notranslate"><span class="pre">MemoryTraits</span></code> are specified, <code class="docutils literal notranslate"><span class="pre">MemorySpace</span></code> must come before <code class="docutils literal notranslate"><span class="pre">MemoryTraits</span></code>.</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">DataType</span></code>: Defines the fundamental scalar type of the <code class="docutils literal notranslate"><span class="pre">DynRankView</span></code>. The basic structure is <code class="docutils literal notranslate"><span class="pre">ScalarType</span></code>. Examples:</p>
+<p>The basic structure is <code class="docutils literal notranslate"><span class="pre">ScalarType</span></code>.
+Examples:</p>
 <ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">double</span></code>: a <code class="docutils literal notranslate"><span class="pre">DynRankView</span></code> of <code class="docutils literal notranslate"><span class="pre">double</span></code>, dimensions are passed as arguments to the constructor, the number of which determine the rank.</p></li>
 </ul>
-</li>
-<li><p><code class="docutils literal notranslate"><span class="pre">LayoutType</span></code>: Determines the mapping of indices into the underlying 1D memory storage. Custom Layouts can be implemented, but Kokkos comes with some built-in ones:</p>
+</p></li>
+<li><p><strong>LayoutType</strong> – <p>Determines the mapping of indices into the underlying 1D memory storage</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>This parameter is optional</p>
+</div>
+<p>Custom Layouts can be implemented, but Kokkos comes with some built-in ones:</p>
 <ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">LayoutRight</span></code>: Strides increase from the right most to the left most dimension. The last dimension has a stride of one. This corresponds to how C multi dimensional arrays (<code class="docutils literal notranslate"><span class="pre">[][][]</span></code>) are laid out in memory.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">LayoutLeft</span></code>: Strides increase from the left most to the right most dimension. The first dimension has a stride of one. This is the layout Fortran uses for its arrays.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LayoutRight</span></code>: Strides increase from the right most to the left most dimension.
+The last dimension has a stride of one. This corresponds to how C multi dimensional arrays (<code class="docutils literal notranslate"><span class="pre">[][][]</span></code>) are laid out in memory.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LayoutLeft</span></code>: Strides increase from the left most to the right most dimension.
+The first dimension has a stride of one. This is the layout Fortran uses for its arrays.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">LayoutStride</span></code>: Strides can be arbitrary for each dimension.</p></li>
 </ul>
-</li>
-<li><p><code class="docutils literal notranslate"><span class="pre">MemorySpace</span></code>: Controls the storage location. If omitted, the default memory space of the default execution space is used (i.e. <code class="docutils literal notranslate"><span class="pre">Kokkos::DefaultExecutionSpace::memory_space</span></code>)</p></li>
-<li><p>[[<code class="docutils literal notranslate"><span class="pre">MemoryTraits</span></code>|Kokkos::MemoryTraits]]: Sets access properties via enum parameters for the templated <code class="docutils literal notranslate"><span class="pre">Kokkos::MemoryTraits&lt;&gt;</span></code> class. Enums can be bit combined. Possible values:</p>
+</p></li>
+<li><p><strong>MemorySpace</strong> – <p>Controls the storage location</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>This parameter is optional</p>
+</div>
+<p>If omitted, the default memory space of the default execution space is used (i.e. <code class="docutils literal notranslate"><span class="pre">Kokkos::DefaultExecutionSpace::memory_space</span></code>)</p>
+</p></li>
+<li><p><strong>MemoryTraits</strong> – <p>Finer-grained control on the memory access</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>This parameter is optional</p>
+</div>
 <ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">Unmanaged</span></code>: The DynRankView will not be reference counted. The allocation has to be provided to the constructor.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Atomic</span></code>: All accesses to the view will use atomic operations.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">RandomAccess</span></code>: Hint that the view is used in a random access manner. If the view is also <code class="docutils literal notranslate"><span class="pre">const</span></code>, this will trigger special load operations on GPUs (i.e. texture fetches).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">RandomAccess</span></code>: Hint that the view is used in a random access manner.
+If the view is also <code class="docutils literal notranslate"><span class="pre">const</span></code>, this will trigger special load operations on GPUs (i.e. texture fetches).</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Restrict</span></code>: There is no aliasing of the view by other data structures in the current scope.</p></li>
 </ul>
-</li>
+</p></li>
 </ul>
-</section>
-<section id="requirements">
-<h3>Requirements:<a class="headerlink" href="#requirements" title="Permalink to this heading">#</a></h3>
-</section>
-</section>
-<section id="public-class-members">
-<h2>Public Class Members<a class="headerlink" href="#public-class-members" title="Permalink to this heading">#</a></h2>
-<section id="enums">
-<h3>Enums<a class="headerlink" href="#enums" title="Permalink to this heading">#</a></h3>
+</dd>
+</dl>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Template parameters other than <code class="docutils literal notranslate"><span class="pre">DataType</span></code> are optional, but ordering is enforced.
+That means for example that <code class="docutils literal notranslate"><span class="pre">LayoutType</span></code> can be omitted but if both <code class="docutils literal notranslate"><span class="pre">MemorySpace</span></code> and <code class="docutils literal notranslate"><span class="pre">MemoryTraits</span></code>
+are specified, <code class="docutils literal notranslate"><span class="pre">MemorySpace</span></code> must come before <code class="docutils literal notranslate"><span class="pre">MemoryTraits</span></code>.</p>
+</div>
+<p class="rubric">Public Enums</p>
+<dl class="cppkokkos type">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N11DynRankView4rankE">
+<span id="_CPPv3N11DynRankView4rankE"></span><span id="_CPPv2N11DynRankView4rankE"></span><span id="DynRankView::rank"></span><span class="k"></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">rank</span></span></span><a class="headerlink" href="#_CPPv4N11DynRankView4rankE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Rank of the view (i.e. the dimensionality).</p>
+</dd></dl>
+
+<dl class="cppkokkos type">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N11DynRankView12rank_dynamicE">
+<span id="_CPPv3N11DynRankView12rank_dynamicE"></span><span id="_CPPv2N11DynRankView12rank_dynamicE"></span><span id="DynRankView::rank_dynamic"></span><span class="k"></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">rank_dynamic</span></span></span><a class="headerlink" href="#_CPPv4N11DynRankView12rank_dynamicE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Number of runtime determined dimensions.</p>
+</dd></dl>
+
+<dl class="cppkokkos type">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N11DynRankView34reference_type_is_lvalue_referenceE">
+<span id="_CPPv3N11DynRankView34reference_type_is_lvalue_referenceE"></span><span id="_CPPv2N11DynRankView34reference_type_is_lvalue_referenceE"></span><span id="DynRankView::reference_type_is_lvalue_reference"></span><span class="k"></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">reference_type_is_lvalue_reference</span></span></span><a class="headerlink" href="#_CPPv4N11DynRankView34reference_type_is_lvalue_referenceE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Whether the reference type is a C++ lvalue reference.</p>
+</dd></dl>
+
+<p class="rubric">Public Data Types Typedefs</p>
+<dl class="cppkokkos type">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N11DynRankView9data_typeE">
+<span id="_CPPv3N11DynRankView9data_typeE"></span><span id="_CPPv2N11DynRankView9data_typeE"></span><span id="DynRankView::data_type"></span><span class="k"></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">data_type</span></span></span><a class="headerlink" href="#_CPPv4N11DynRankView9data_typeE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>The <code class="docutils literal notranslate"><span class="pre">DataType</span></code> of the DynRankView.</p>
+</dd></dl>
+
+<dl class="cppkokkos type">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N11DynRankView15const_data_typeE">
+<span id="_CPPv3N11DynRankView15const_data_typeE"></span><span id="_CPPv2N11DynRankView15const_data_typeE"></span><span id="DynRankView::const_data_type"></span><span class="k"></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">const_data_type</span></span></span><a class="headerlink" href="#_CPPv4N11DynRankView15const_data_typeE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Const version of <code class="docutils literal notranslate"><span class="pre">DataType</span></code>, same as <code class="docutils literal notranslate"><span class="pre">data_type</span></code> if that is already const.</p>
+</dd></dl>
+
+<dl class="cppkokkos type">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N11DynRankView19non_const_data_typeE">
+<span id="_CPPv3N11DynRankView19non_const_data_typeE"></span><span id="_CPPv2N11DynRankView19non_const_data_typeE"></span><span id="DynRankView::non_const_data_type"></span><span class="k"></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">non_const_data_type</span></span></span><a class="headerlink" href="#_CPPv4N11DynRankView19non_const_data_typeE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Non-const version of <code class="docutils literal notranslate"><span class="pre">DataType</span></code>, same as <code class="docutils literal notranslate"><span class="pre">data_type</span></code> if that is already non-const.</p>
+</dd></dl>
+
+<dl class="cppkokkos type">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N11DynRankView17scalar_array_typeE">
+<span id="_CPPv3N11DynRankView17scalar_array_typeE"></span><span id="_CPPv2N11DynRankView17scalar_array_typeE"></span><span id="DynRankView::scalar_array_type"></span><span class="k"></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">scalar_array_type</span></span></span><a class="headerlink" href="#_CPPv4N11DynRankView17scalar_array_typeE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>If <code class="docutils literal notranslate"><span class="pre">DataType</span></code> represents some properly specialised array data type such as Sacado FAD types, <code class="docutils literal notranslate"><span class="pre">scalar_array_type</span></code> is the underlying fundamental scalar type.</p>
+</dd></dl>
+
+<dl class="cppkokkos type">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N11DynRankView23const_scalar_array_typeE">
+<span id="_CPPv3N11DynRankView23const_scalar_array_typeE"></span><span id="_CPPv2N11DynRankView23const_scalar_array_typeE"></span><span id="DynRankView::const_scalar_array_type"></span><span class="k"></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">const_scalar_array_type</span></span></span><a class="headerlink" href="#_CPPv4N11DynRankView23const_scalar_array_typeE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>The const version of <code class="docutils literal notranslate"><span class="pre">scalar_array_type</span></code>, same as <code class="docutils literal notranslate"><span class="pre">scalar_array_type</span></code> if that is already const</p>
+</dd></dl>
+
+<dl class="cppkokkos type">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N11DynRankView27non_const_scalar_array_typeE">
+<span id="_CPPv3N11DynRankView27non_const_scalar_array_typeE"></span><span id="_CPPv2N11DynRankView27non_const_scalar_array_typeE"></span><span id="DynRankView::non_const_scalar_array_type"></span><span class="k"></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">non_const_scalar_array_type</span></span></span><a class="headerlink" href="#_CPPv4N11DynRankView27non_const_scalar_array_typeE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>The non-Const version of <code class="docutils literal notranslate"><span class="pre">scalar_array_type</span></code>, same as <code class="docutils literal notranslate"><span class="pre">scalar_array_type</span></code> if that is already non-const.</p>
+</dd></dl>
+
+<p class="rubric">Public Scalar Typedefs</p>
+<dl class="cppkokkos type">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N11DynRankView10value_typeE">
+<span id="_CPPv3N11DynRankView10value_typeE"></span><span id="_CPPv2N11DynRankView10value_typeE"></span><span id="DynRankView::value_type"></span><span class="k"></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">value_type</span></span></span><a class="headerlink" href="#_CPPv4N11DynRankView10value_typeE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>The <code class="docutils literal notranslate"><span class="pre">data_type</span></code> stripped of its array specifiers, i.e. the scalar type of the
+data the view is referencing (e.g. if <code class="docutils literal notranslate"><span class="pre">data_type</span></code> is <code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">int*******</span></code>, <code class="docutils literal notranslate"><span class="pre">value_type</span></code> is <code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">int</span></code>).</p>
+</dd></dl>
+
+<dl class="cppkokkos type">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N11DynRankView16const_value_typeE">
+<span id="_CPPv3N11DynRankView16const_value_typeE"></span><span id="_CPPv2N11DynRankView16const_value_typeE"></span><span id="DynRankView::const_value_type"></span><span class="k"></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">const_value_type</span></span></span><a class="headerlink" href="#_CPPv4N11DynRankView16const_value_typeE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Const version of <code class="docutils literal notranslate"><span class="pre">value_type</span></code>.</p>
+</dd></dl>
+
+<dl class="cppkokkos type">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N11DynRankView20non_const_value_typeE">
+<span id="_CPPv3N11DynRankView20non_const_value_typeE"></span><span id="_CPPv2N11DynRankView20non_const_value_typeE"></span><span id="DynRankView::non_const_value_type"></span><span class="k"></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">non_const_value_type</span></span></span><a class="headerlink" href="#_CPPv4N11DynRankView20non_const_value_typeE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Non-const version of <code class="docutils literal notranslate"><span class="pre">value_type</span></code>.</p>
+</dd></dl>
+
+<p class="rubric">Public Spaces Typedefs</p>
+<dl class="cppkokkos type">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N11DynRankView15execution_spaceE">
+<span id="_CPPv3N11DynRankView15execution_spaceE"></span><span id="_CPPv2N11DynRankView15execution_spaceE"></span><span id="DynRankView::execution_space"></span><span class="k"></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">execution_space</span></span></span><a class="headerlink" href="#_CPPv4N11DynRankView15execution_spaceE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Execution space associated with the view, will be used for performing view initialization, and certain deep_copy operations.</p>
+</dd></dl>
+
+<dl class="cppkokkos type">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N11DynRankView12memory_spaceE">
+<span id="_CPPv3N11DynRankView12memory_spaceE"></span><span id="_CPPv2N11DynRankView12memory_spaceE"></span><span id="DynRankView::memory_space"></span><span class="k"></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">memory_space</span></span></span><a class="headerlink" href="#_CPPv4N11DynRankView12memory_spaceE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Data storage location type.</p>
+</dd></dl>
+
+<dl class="cppkokkos type">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N11DynRankView11device_typeE">
+<span id="_CPPv3N11DynRankView11device_typeE"></span><span id="_CPPv2N11DynRankView11device_typeE"></span><span id="DynRankView::device_type"></span><span class="k"></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">device_type</span></span></span><a class="headerlink" href="#_CPPv4N11DynRankView11device_typeE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>The compound type defined by <code class="docutils literal notranslate"><span class="pre">Device&lt;execution_space,memory_space&gt;</span></code>.</p>
+</dd></dl>
+
+<dl class="cppkokkos type">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N11DynRankView13memory_traitsE">
+<span id="_CPPv3N11DynRankView13memory_traitsE"></span><span id="_CPPv2N11DynRankView13memory_traitsE"></span><span id="DynRankView::memory_traits"></span><span class="k"></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">memory_traits</span></span></span><a class="headerlink" href="#_CPPv4N11DynRankView13memory_traitsE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>The memory traits of the view.</p>
+</dd></dl>
+
+<dl class="cppkokkos type">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N11DynRankView17host_mirror_spaceE">
+<span id="_CPPv3N11DynRankView17host_mirror_spaceE"></span><span id="_CPPv2N11DynRankView17host_mirror_spaceE"></span><span id="DynRankView::host_mirror_space"></span><span class="k"></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">host_mirror_space</span></span></span><a class="headerlink" href="#_CPPv4N11DynRankView17host_mirror_spaceE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Host accessible memory space used in <code class="docutils literal notranslate"><span class="pre">HostMirror</span></code>.</p>
+</dd></dl>
+
+<p class="rubric">Public View Typedefs</p>
+<dl class="cppkokkos type">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N11DynRankView14non_const_typeE">
+<span id="_CPPv3N11DynRankView14non_const_typeE"></span><span id="_CPPv2N11DynRankView14non_const_typeE"></span><span id="DynRankView::non_const_type"></span><span class="k"></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">non_const_type</span></span></span><a class="headerlink" href="#_CPPv4N11DynRankView14non_const_typeE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>This view type with all template parameters explicitly defined.</p>
+</dd></dl>
+
+<dl class="cppkokkos type">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N11DynRankView10const_typeE">
+<span id="_CPPv3N11DynRankView10const_typeE"></span><span id="_CPPv2N11DynRankView10const_typeE"></span><span id="DynRankView::const_type"></span><span class="k"></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">const_type</span></span></span><a class="headerlink" href="#_CPPv4N11DynRankView10const_typeE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>This view type with all template parameters explicitly defined using a <code class="docutils literal notranslate"><span class="pre">const</span></code> data type.</p>
+</dd></dl>
+
+<dl class="cppkokkos type">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N11DynRankView10HostMirrorE">
+<span id="_CPPv3N11DynRankView10HostMirrorE"></span><span id="_CPPv2N11DynRankView10HostMirrorE"></span><span id="DynRankView::HostMirror"></span><span class="k"></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">HostMirror</span></span></span><a class="headerlink" href="#_CPPv4N11DynRankView10HostMirrorE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Compatible view type with the same <code class="docutils literal notranslate"><span class="pre">DataType</span></code> and <code class="docutils literal notranslate"><span class="pre">LayoutType</span></code> stored in host accessible memory space.</p>
+</dd></dl>
+
+<p class="rubric">Public Data Handles Typedefs</p>
+<dl class="cppkokkos type">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N11DynRankView14reference_typeE">
+<span id="_CPPv3N11DynRankView14reference_typeE"></span><span id="_CPPv2N11DynRankView14reference_typeE"></span><span id="DynRankView::reference_type"></span><span class="k"></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">reference_type</span></span></span><a class="headerlink" href="#_CPPv4N11DynRankView14reference_typeE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Return type of the view access operators.</p>
+</dd></dl>
+
+<dl class="cppkokkos type">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N11DynRankView12pointer_typeE">
+<span id="_CPPv3N11DynRankView12pointer_typeE"></span><span id="_CPPv2N11DynRankView12pointer_typeE"></span><span id="DynRankView::pointer_type"></span><span class="k"></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pointer_type</span></span></span><a class="headerlink" href="#_CPPv4N11DynRankView12pointer_typeE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Pointer to scalar type.</p>
+</dd></dl>
+
+<p class="rubric">Other Public Typedefs</p>
+<dl class="cppkokkos type">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N11DynRankView12array_layoutE">
+<span id="_CPPv3N11DynRankView12array_layoutE"></span><span id="_CPPv2N11DynRankView12array_layoutE"></span><span id="DynRankView::array_layout"></span><span class="k"></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">array_layout</span></span></span><a class="headerlink" href="#_CPPv4N11DynRankView12array_layoutE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>The layout of the <code class="docutils literal notranslate"><span class="pre">DynRankView</span></code>.</p>
+</dd></dl>
+
+<dl class="cppkokkos type">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N11DynRankView9size_typeE">
+<span id="_CPPv3N11DynRankView9size_typeE"></span><span id="_CPPv2N11DynRankView9size_typeE"></span><span id="DynRankView::size_type"></span><span class="k"></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">size_type</span></span></span><a class="headerlink" href="#_CPPv4N11DynRankView9size_typeE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Index type associated with the memory space of this view.</p>
+</dd></dl>
+
+<dl class="cppkokkos type">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N11DynRankView9dimensionE">
+<span id="_CPPv3N11DynRankView9dimensionE"></span><span id="_CPPv2N11DynRankView9dimensionE"></span><span id="DynRankView::dimension"></span><span class="k"></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">dimension</span></span></span><a class="headerlink" href="#_CPPv4N11DynRankView9dimensionE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>An integer array like type, able to represent the extents of the view.</p>
+</dd></dl>
+
+<dl class="cppkokkos type">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N11DynRankView10specializeE">
+<span id="_CPPv3N11DynRankView10specializeE"></span><span id="_CPPv2N11DynRankView10specializeE"></span><span id="DynRankView::specialize"></span><span class="k"></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">specialize</span></span></span><a class="headerlink" href="#_CPPv4N11DynRankView10specializeE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>A specialization tag used for partial specialization of the mapping construct underlying a Kokkos <code class="docutils literal notranslate"><span class="pre">DynRankView</span></code>.</p>
+</dd></dl>
+
+<p class="rubric">Constructors</p>
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N11DynRankView11DynRankViewEv">
+<span id="_CPPv3N11DynRankView11DynRankViewEv"></span><span id="_CPPv2N11DynRankView11DynRankViewEv"></span><span id="DynRankView::DynRankView"></span><span class="sig-name descname"><span class="n"><span class="pre">DynRankView</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11DynRankView11DynRankViewEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Default constructor. No allocations are made, no reference counting happens. All extents are zero and its data pointer is <code class="docutils literal notranslate"><span class="pre">nullptr</span></code> and its rank is set to 0.</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N11DynRankView11DynRankViewERK11DynRankViewI2DTDp4PropE">
+<span id="_CPPv3N11DynRankView11DynRankViewERK11DynRankViewI2DTDp4PropE"></span><span id="_CPPv2N11DynRankView11DynRankViewERK11DynRankViewI2DTDp4PropE"></span><span id="DynRankView::DynRankView__DynRankView:DT.PropDp:CR"></span><span class="sig-name descname"><span class="n"><span class="pre">DynRankView</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N11DynRankView11DynRankViewERK11DynRankViewI2DTDp4PropE" title="DynRankView::DynRankView"><span class="n"><span class="pre">DynRankView</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">DT</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">Prop</span></span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">rhs</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11DynRankView11DynRankViewERK11DynRankViewI2DTDp4PropE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Copy constructor with compatible DynRankViews. Follows DynRankView assignment rules.</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N11DynRankView11DynRankViewERR11DynRankView">
+<span id="_CPPv3N11DynRankView11DynRankViewERR11DynRankView"></span><span id="_CPPv2N11DynRankView11DynRankViewERR11DynRankView"></span><span id="DynRankView::DynRankView__DynRankViewRR"></span><span class="sig-name descname"><span class="n"><span class="pre">DynRankView</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N11DynRankView11DynRankViewERR11DynRankView" title="DynRankView::DynRankView"><span class="n"><span class="pre">DynRankView</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">rhs</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11DynRankView11DynRankViewERR11DynRankView" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Move constructor.</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N11DynRankView11DynRankViewERK4ViewI2RTDp2RPE">
+<span id="_CPPv3N11DynRankView11DynRankViewERK4ViewI2RTDp2RPE"></span><span id="_CPPv2N11DynRankView11DynRankViewERK4ViewI2RTDp2RPE"></span><span id="DynRankView::DynRankView__View:RT.RPDp:CR"></span><span class="sig-name descname"><span class="n"><span class="pre">DynRankView</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="../core/view/view.html#_CPPv44Viewv" title="View"><span class="n"><span class="pre">View</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">RT</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">RP</span></span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">rhs</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11DynRankView11DynRankViewERK4ViewI2RTDp2RPE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Copy constructor taking View as input.</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N11DynRankView11DynRankViewERKNSt6stringEDpRK7IntType">
+<span id="_CPPv3N11DynRankView11DynRankViewERKNSt6stringEDpRK7IntType"></span><span id="_CPPv2N11DynRankView11DynRankViewERKNSt6stringEDpRK7IntType"></span><span id="DynRankView::DynRankView__ssCR.IntTypeCRDp"></span><span class="sig-name descname"><span class="n"><span class="pre">DynRankView</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">name</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">IntType</span></span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">...</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">indices</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11DynRankView11DynRankViewERKNSt6stringEDpRK7IntType" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Requires: <code class="docutils literal notranslate"><span class="pre">array_layout::is_regular</span> <span class="pre">==</span> <span class="pre">true</span></code></p>
+<p>Standard allocating constructor.</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">rank</span></code>: rank of the view (i.e. the dimensionality).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">rank_dynamic</span></code>: number of runtime determined dimensions.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">reference_type_is_lvalue_reference</span></code>: whether the reference type is a C++ lvalue reference.</p></li>
-</ul>
-</section>
-<section id="typedefs">
-<h3>Typedefs<a class="headerlink" href="#typedefs" title="Permalink to this heading">#</a></h3>
-<section id="data-types">
-<h4>Data Types<a class="headerlink" href="#data-types" title="Permalink to this heading">#</a></h4>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">data_type</span></code>: the <code class="docutils literal notranslate"><span class="pre">DataType</span></code> of the DynRankView.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">const_data_type</span></code>: const version of <code class="docutils literal notranslate"><span class="pre">DataType</span></code>, same as <code class="docutils literal notranslate"><span class="pre">data_type</span></code> if that is already const.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">non_const_data_type</span></code>: non-const version of <code class="docutils literal notranslate"><span class="pre">DataType</span></code>, same as <code class="docutils literal notranslate"><span class="pre">data_type</span></code> if that is already non-const.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">scalar_array_type</span></code>: If <code class="docutils literal notranslate"><span class="pre">DataType</span></code> represents some properly specialised array data type such as Sacado FAD types, <code class="docutils literal notranslate"><span class="pre">scalar_array_type</span></code> is the underlying fundamental scalar type.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">const_scalar_array_type</span></code>: const version of <code class="docutils literal notranslate"><span class="pre">scalar_array_type</span></code>, same as <code class="docutils literal notranslate"><span class="pre">scalar_array_type</span></code> if that is already const</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">non_const_scalar_array_type</span></code>: non-Const version of <code class="docutils literal notranslate"><span class="pre">scalar_array_type</span></code>, same as <code class="docutils literal notranslate"><span class="pre">scalar_array_type</span></code> if that is already non-const.</p></li>
-</ul>
-</section>
-<section id="scalar-types">
-<h4>Scalar Types<a class="headerlink" href="#scalar-types" title="Permalink to this heading">#</a></h4>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">value_type</span></code>: the <code class="docutils literal notranslate"><span class="pre">data_type</span></code> stripped of its array specifiers, i.e. the scalar type of the data the view is referencing (e.g. if <code class="docutils literal notranslate"><span class="pre">data_type</span></code> is <code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">int*******</span></code>, <code class="docutils literal notranslate"><span class="pre">value_type</span></code> is <code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">int</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">const_value_type</span></code>: const version of <code class="docutils literal notranslate"><span class="pre">value_type</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">non_const_value_type</span></code>: non-const version of <code class="docutils literal notranslate"><span class="pre">value_type</span></code>.</p></li>
-</ul>
-</section>
-<section id="spaces">
-<h4>Spaces<a class="headerlink" href="#spaces" title="Permalink to this heading">#</a></h4>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">execution_space</span></code>: execution space associated with the view, will be used for performing view initialization, and certain deep_copy operations.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">memory_space</span></code>: data storage location type.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">device_type</span></code>: the compound type defined by <code class="docutils literal notranslate"><span class="pre">Device&lt;execution_space,memory_space&gt;</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">memory_traits</span></code>: the memory traits of the view.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">host_mirror_space</span></code>: host accessible memory space used in <code class="docutils literal notranslate"><span class="pre">HostMirror</span></code>.</p></li>
-</ul>
-</section>
-<section id="viewtypes">
-<h4>ViewTypes<a class="headerlink" href="#viewtypes" title="Permalink to this heading">#</a></h4>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">non_const_type</span></code>: this view type with all template parameters explicitly defined.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">const_type</span></code>: this view type with all template parameters explicitly defined using a <code class="docutils literal notranslate"><span class="pre">const</span></code> data type.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">HostMirror</span></code>: compatible view type with the same <code class="docutils literal notranslate"><span class="pre">DataType</span></code> and <code class="docutils literal notranslate"><span class="pre">LayoutType</span></code> stored in host accessible memory space.</p></li>
-</ul>
-</section>
-<section id="data-handles">
-<h4>Data Handles<a class="headerlink" href="#data-handles" title="Permalink to this heading">#</a></h4>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">reference_type</span></code>: return type of the view access operators.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">pointer_type</span></code>: pointer to scalar type.</p></li>
-</ul>
-</section>
-<section id="other">
-<h4>Other<a class="headerlink" href="#other" title="Permalink to this heading">#</a></h4>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">array_layout</span></code>: the layout of the DynRankView.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">size_type</span></code>: index type associated with the memory space of this view.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">dimension</span></code>: an integer array like type, able to represent the extents of the view.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">specialize</span></code>: a specialization tag used for partial specialization of the mapping construct underlying a Kokkos DynRankView.</p></li>
-</ul>
-</section>
-</section>
-<section id="constructors">
-<h3>Constructors<a class="headerlink" href="#constructors" title="Permalink to this heading">#</a></h3>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">DynRankView()</span></code>: default constructor. No allocations are made, no reference counting happens. All extents are zero and its data pointer is <code class="docutils literal notranslate"><span class="pre">nullptr</span></code> and its rank is set to 0.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">DynRankView(</span> <span class="pre">const</span> <span class="pre">DynRankView&lt;DT,</span> <span class="pre">Prop...&gt;&amp;</span> <span class="pre">rhs)</span></code>: Copy constructor with compatible DynRankViews. Follows DynRankView assignment rules.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">DynRankView(</span> <span class="pre">DynRankView&amp;&amp;</span> <span class="pre">rhs)</span></code>: move constructor</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">DynRankView(</span> <span class="pre">const</span> <span class="pre">View&lt;RT,RP...&gt;</span> <span class="pre">&amp;</span> <span class="pre">rhs</span> <span class="pre">)</span></code>: copy constructor taking View as imput.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">DynRankView(</span> <span class="pre">const</span> <span class="pre">std::string&amp;</span> <span class="pre">name,</span> <span class="pre">const</span> <span class="pre">IntType&amp;</span> <span class="pre">...</span> <span class="pre">indices)</span></code>: standard allocating constructor.</p>
-<ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">name</span></code>: a user provided label, which is used for profiling and debugging purposes. Names are not required to be unique,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">name</span></code>: a user provided label, which is used for profiling and debugging purposes. Names are not required to be unique.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">indices</span></code>: runtime dimensions of the view.</p></li>
-<li><p>Requires: <code class="docutils literal notranslate"><span class="pre">array_layout::is_regular</span> <span class="pre">==</span> <span class="pre">true</span></code>.</p></li>
 </ul>
-</li>
-<li><p><code class="docutils literal notranslate"><span class="pre">DynRankView(</span> <span class="pre">const</span> <span class="pre">std::string&amp;</span> <span class="pre">name,</span> <span class="pre">const</span> <span class="pre">array_layout&amp;</span> <span class="pre">layout)</span></code>: standard allocating constructor.</p>
-<ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">name</span></code>: a user provided label, which is used for profiling and debugging purposes. Names are not required to be unique,</p></li>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N11DynRankView11DynRankViewERKNSt6stringERK12array_layout">
+<span id="_CPPv3N11DynRankView11DynRankViewERKNSt6stringERK12array_layout"></span><span id="_CPPv2N11DynRankView11DynRankViewERKNSt6stringERK12array_layout"></span><span id="DynRankView::DynRankView__ssCR.array_layoutCR"></span><span class="sig-name descname"><span class="n"><span class="pre">DynRankView</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">name</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N11DynRankView12array_layoutE" title="DynRankView::array_layout"><span class="n"><span class="pre">array_layout</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">layout</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11DynRankView11DynRankViewERKNSt6stringERK12array_layout" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Standard allocating constructor.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">name</span></code>: a user provided label, which is used for profiling and debugging purposes. Names are not required to be unique.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">layout</span></code>: an instance of a layout class.</p></li>
 </ul>
-</li>
-<li><p><code class="docutils literal notranslate"><span class="pre">DynRankView(</span> <span class="pre">const</span> <span class="pre">AllocProperties&amp;</span> <span class="pre">prop,</span> <span class="pre">,</span> <span class="pre">const</span> <span class="pre">IntType&amp;</span> <span class="pre">...</span> <span class="pre">indices)</span></code>: allocating constructor with allocation properties.</p>
-<ul>
-<li><p>An allocation properties object is returned by the <code class="docutils literal notranslate"><span class="pre">view_alloc</span></code> function.</p></li>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N11DynRankView11DynRankViewERK15AllocPropertiesDpRK7IntType">
+<span id="_CPPv3N11DynRankView11DynRankViewERK15AllocPropertiesDpRK7IntType"></span><span id="_CPPv2N11DynRankView11DynRankViewERK15AllocPropertiesDpRK7IntType"></span><span id="DynRankView::DynRankView__AllocPropertiesCR.IntTypeCRDp"></span><span class="sig-name descname"><span class="n"><span class="pre">DynRankView</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">AllocProperties</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">prop</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">IntType</span></span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">...</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">indices</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11DynRankView11DynRankViewERK15AllocPropertiesDpRK7IntType" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Requires: <code class="docutils literal notranslate"><span class="pre">array_layout::is_regular</span> <span class="pre">==</span> <span class="pre">true</span></code></p>
+<p>Allocating constructor with allocation properties. An allocation properties object is returned by the <code class="docutils literal notranslate"><span class="pre">view_alloc</span></code> function.</p>
+<ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">indices</span></code>: runtime dimensions of the view.</p></li>
-<li><p>Requires: <code class="docutils literal notranslate"><span class="pre">array_layout::is_regular</span> <span class="pre">==</span> <span class="pre">true</span></code>.</p></li>
 </ul>
-</li>
-<li><p><code class="docutils literal notranslate"><span class="pre">DynRankView(</span> <span class="pre">const</span> <span class="pre">AllocProperties&amp;</span> <span class="pre">prop,</span> <span class="pre">const</span> <span class="pre">array_layout&amp;</span> <span class="pre">layout)</span></code>: allocating constructor with allocation properties and a layout object.</p>
-<ul>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N11DynRankView11DynRankViewERK15AllocPropertiesRK12array_layout">
+<span id="_CPPv3N11DynRankView11DynRankViewERK15AllocPropertiesRK12array_layout"></span><span id="_CPPv2N11DynRankView11DynRankViewERK15AllocPropertiesRK12array_layout"></span><span id="DynRankView::DynRankView__AllocPropertiesCR.array_layoutCR"></span><span class="sig-name descname"><span class="n"><span class="pre">DynRankView</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">AllocProperties</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">prop</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N11DynRankView12array_layoutE" title="DynRankView::array_layout"><span class="n"><span class="pre">array_layout</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">layout</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11DynRankView11DynRankViewERK15AllocPropertiesRK12array_layout" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Allocating constructor with allocation properties and a layout object.</p>
+<ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">layout</span></code>: an instance of a layout class.</p></li>
 </ul>
-</li>
-<li><p><code class="docutils literal notranslate"><span class="pre">DynRankView(</span> <span class="pre">const</span> <span class="pre">pointer_type&amp;</span> <span class="pre">ptr,</span> <span class="pre">const</span> <span class="pre">IntType&amp;</span> <span class="pre">...</span> <span class="pre">indices)</span></code>: unmanaged data wrapping constructor.</p>
-<ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">ptr</span></code>: pointer to a user provided memory allocation. Must provide storage of size <code class="docutils literal notranslate"><span class="pre">DynRankView::required_allocation_size(n0,...,nR)</span></code></p></li>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N11DynRankView11DynRankViewERK12pointer_typeDpRK7IntType">
+<span id="_CPPv3N11DynRankView11DynRankViewERK12pointer_typeDpRK7IntType"></span><span id="_CPPv2N11DynRankView11DynRankViewERK12pointer_typeDpRK7IntType"></span><span id="DynRankView::DynRankView__pointer_typeCR.IntTypeCRDp"></span><span class="sig-name descname"><span class="n"><span class="pre">DynRankView</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N11DynRankView12pointer_typeE" title="DynRankView::pointer_type"><span class="n"><span class="pre">pointer_type</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">ptr</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">IntType</span></span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">...</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">indices</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11DynRankView11DynRankViewERK12pointer_typeDpRK7IntType" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Requires: <code class="docutils literal notranslate"><span class="pre">array_layout::is_regular</span> <span class="pre">==</span> <span class="pre">true</span></code></p>
+<p>Unmanaged data wrapping constructor.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ptr</span></code>: pointer to a user provided memory allocation. Must provide storage of size <code class="docutils literal notranslate"><span class="pre">DynRankView::required_allocation_size(n0,...,nR)</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">indices</span></code>: runtime dimensions of the view.</p></li>
-<li><p>Requires: <code class="docutils literal notranslate"><span class="pre">array_layout::is_regular</span> <span class="pre">==</span> <span class="pre">true</span></code>.</p></li>
 </ul>
-</li>
-<li><p><code class="docutils literal notranslate"><span class="pre">DynRankView(</span> <span class="pre">const</span> <span class="pre">std::string&amp;</span> <span class="pre">name,</span> <span class="pre">const</span> <span class="pre">array_layout&amp;</span> <span class="pre">layout)</span></code>: unmanaged data wrapper constructor.</p>
-<ul>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos">
+<span class="sig-name descname"><span class="n"><span class="pre">DynRankView</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">name</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N11DynRankView12array_layoutE" title="DynRankView::array_layout"><span class="n"><span class="pre">array_layout</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">layout</span></span><span class="sig-paren">)</span><br /></dt>
+<dd><p>Unmanaged data wrapper constructor.</p>
+<ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">ptr</span></code>: pointer to a user provided memory allocation. Must provide storage of size <code class="docutils literal notranslate"><span class="pre">DynRankView::required_allocation_size(layout)</span></code> (<em>NEEDS TO BE IMPLEMENTED</em>)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">layout</span></code>: an instance of a layout class.</p></li>
 </ul>
-</li>
-<li><p><code class="docutils literal notranslate"><span class="pre">DynRankView(</span> <span class="pre">const</span> <span class="pre">ScratchSpace&amp;</span> <span class="pre">space,</span> <span class="pre">const</span> <span class="pre">IntType&amp;</span> <span class="pre">...</span> <span class="pre">indices)</span></code>: constructor which acquires memory from a Scratch Memory handle.</p>
-<ul>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N11DynRankView11DynRankViewERK12ScratchSpaceDpRK7IntType">
+<span id="_CPPv3N11DynRankView11DynRankViewERK12ScratchSpaceDpRK7IntType"></span><span id="_CPPv2N11DynRankView11DynRankViewERK12ScratchSpaceDpRK7IntType"></span><span id="DynRankView::DynRankView__ScratchSpaceCR.IntTypeCRDp"></span><span class="sig-name descname"><span class="n"><span class="pre">DynRankView</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">ScratchSpace</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">space</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">IntType</span></span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">...</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">indices</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11DynRankView11DynRankViewERK12ScratchSpaceDpRK7IntType" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Requires: <code class="docutils literal notranslate"><span class="pre">sizeof(IntType...)==rank_dynamic()</span></code> and <code class="docutils literal notranslate"><span class="pre">array_layout::is_regular</span> <span class="pre">==</span> <span class="pre">true</span></code></p>
+<p>Constructor which acquires memory from a Scratch Memory handle.</p>
+<ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">space</span></code>: scratch memory handle. Typically returned from <code class="docutils literal notranslate"><span class="pre">team_handles</span></code> in <code class="docutils literal notranslate"><span class="pre">TeamPolicy</span></code> kernels.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">indices</span></code>: runtime dimensions of the view.</p></li>
-<li><p>Requires: <code class="docutils literal notranslate"><span class="pre">sizeof(IntType...)==rank_dynamic()</span></code></p></li>
-<li><p>Requires: <code class="docutils literal notranslate"><span class="pre">array_layout::is_regular</span> <span class="pre">==</span> <span class="pre">true</span></code>.</p></li>
 </ul>
-</li>
-<li><p><code class="docutils literal notranslate"><span class="pre">DynRankView(</span> <span class="pre">const</span> <span class="pre">ScratchSpace&amp;</span> <span class="pre">space,</span> <span class="pre">const</span> <span class="pre">array_layout&amp;</span> <span class="pre">layout)</span></code>: constructor which acquires memory from a Scratch Memory handle.</p>
-<ul>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N11DynRankView11DynRankViewERK12ScratchSpaceRK12array_layout">
+<span id="_CPPv3N11DynRankView11DynRankViewERK12ScratchSpaceRK12array_layout"></span><span id="_CPPv2N11DynRankView11DynRankViewERK12ScratchSpaceRK12array_layout"></span><span id="DynRankView::DynRankView__ScratchSpaceCR.array_layoutCR"></span><span class="sig-name descname"><span class="n"><span class="pre">DynRankView</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">ScratchSpace</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">space</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N11DynRankView12array_layoutE" title="DynRankView::array_layout"><span class="n"><span class="pre">array_layout</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">layout</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11DynRankView11DynRankViewERK12ScratchSpaceRK12array_layout" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Constructor which acquires memory from a Scratch Memory handle.</p>
+<ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">space</span></code>: scratch memory handle. Typically returned from <code class="docutils literal notranslate"><span class="pre">team_handles</span></code> in <code class="docutils literal notranslate"><span class="pre">TeamPolicy</span></code> kernels.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">layout</span></code>: an instance of a layout class.</p></li>
 </ul>
-</li>
-<li><p><code class="docutils literal notranslate"><span class="pre">DynRankView(</span> <span class="pre">const</span> <span class="pre">DynRankView&lt;DT,</span> <span class="pre">Prop...&gt;&amp;</span> <span class="pre">rhs,</span> <span class="pre">Args</span> <span class="pre">...</span> <span class="pre">args)</span></code>: subview constructor. See <code class="docutils literal notranslate"><span class="pre">subview</span></code> function for arguments.</p></li>
-</ul>
-</section>
-<section id="data-access-functions">
-<h3>Data Access Functions<a class="headerlink" href="#data-access-functions" title="Permalink to this heading">#</a></h3>
-<ul>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">reference_type</span><span class="w"> </span><span class="k">operator</span><span class="p">()</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">IntType</span><span class="o">&amp;</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="n">indices</span><span class="p">)</span><span class="w"> </span><span class="k">const</span>
-</pre></div>
-</div>
-<p>Returns a value of <code class="docutils literal notranslate"><span class="pre">reference_type</span></code> which may or not be reference itself. The number of index arguments must match the <code class="docutils literal notranslate"><span class="pre">rank</span></code> of the view.
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N11DynRankView11DynRankViewERK11DynRankViewI2DTDp4PropEDp4Args">
+<span id="_CPPv3N11DynRankView11DynRankViewERK11DynRankViewI2DTDp4PropEDp4Args"></span><span id="_CPPv2N11DynRankView11DynRankViewERK11DynRankViewI2DTDp4PropEDp4Args"></span><span id="DynRankView::DynRankView__DynRankView:DT.PropDp:CR.ArgsDp"></span><span class="sig-name descname"><span class="n"><span class="pre">DynRankView</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N11DynRankView11DynRankViewERK11DynRankViewI2DTDp4PropEDp4Args" title="DynRankView::DynRankView"><span class="n"><span class="pre">DynRankView</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">DT</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">Prop</span></span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">rhs</span></span>, <span class="n"><span class="pre">Args</span></span><span class="p"><span class="pre">...</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">args</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11DynRankView11DynRankViewERK11DynRankViewI2DTDp4PropEDp4Args" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Subview constructor. See <code class="docutils literal notranslate"><span class="pre">subview</span></code> function for arguments.</p>
+</dd></dl>
+
+<p class="rubric">Data Access Functions</p>
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK11DynRankViewclEDpRK7IntType">
+<span id="_CPPv3NK11DynRankViewclEDpRK7IntType"></span><span id="_CPPv2NK11DynRankViewclEDpRK7IntType"></span><span id="DynRankView::call-operator__IntTypeCRDpC"></span><a class="reference internal" href="#_CPPv4N11DynRankView14reference_typeE" title="DynRankView::reference_type"><span class="n"><span class="pre">reference_type</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">()</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">IntType</span></span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">...</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">indices</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK11DynRankViewclEDpRK7IntType" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Returns a value of <code class="docutils literal notranslate"><span class="pre">reference_type</span></code> which may or not be reference itself.
+The number of index arguments must match the <code class="docutils literal notranslate"><span class="pre">rank</span></code> of the view. See notes on <code class="docutils literal notranslate"><span class="pre">reference_type</span></code> for properties of the return type.</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK11DynRankView6accessERK7IntTypeRK7IntTypeRK7IntTypeRK7IntTypeRK7IntTypeRK7IntTypeRK7IntType">
+<span id="_CPPv3NK11DynRankView6accessERK7IntTypeRK7IntTypeRK7IntTypeRK7IntTypeRK7IntTypeRK7IntTypeRK7IntType"></span><span id="_CPPv2NK11DynRankView6accessERK7IntTypeRK7IntTypeRK7IntTypeRK7IntTypeRK7IntTypeRK7IntTypeRK7IntType"></span><span id="DynRankView::access__IntTypeCR.IntTypeCR.IntTypeCR.IntTypeCR.IntTypeCR.IntTypeCR.IntTypeCRC"></span><a class="reference internal" href="#_CPPv4N11DynRankView14reference_typeE" title="DynRankView::reference_type"><span class="n"><span class="pre">reference_type</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">access</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">IntType</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">i0</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">IntType</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">i1</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">IntType</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">i2</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">IntType</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">i3</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">IntType</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">i4</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">IntType</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">i5</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">IntType</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">i6</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK11DynRankView6accessERK7IntTypeRK7IntTypeRK7IntTypeRK7IntTypeRK7IntTypeRK7IntTypeRK7IntType" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Returns a value of <code class="docutils literal notranslate"><span class="pre">reference_type</span></code> which may or not be reference itself.
+The number of index arguments must be equal or larger than the <code class="docutils literal notranslate"><span class="pre">rank</span></code> of the view.
+Index arguments beyond <code class="docutils literal notranslate"><span class="pre">rank</span></code> must be <code class="docutils literal notranslate"><span class="pre">0</span></code> , which will be enforced if <code class="docutils literal notranslate"><span class="pre">KOKKOS_DEBUG</span></code> is defined.
 See notes on <code class="docutils literal notranslate"><span class="pre">reference_type</span></code> for properties of the return type.</p>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">reference_type</span><span class="w"> </span><span class="n">access</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">IntType</span><span class="o">&amp;</span><span class="w"> </span><span class="n">i0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">IntType</span><span class="o">&amp;</span><span class="w"> </span><span class="n">i6</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">const</span>
-</pre></div>
-</div>
-<p>Returns a value of <code class="docutils literal notranslate"><span class="pre">reference_type</span></code> which may or not be reference itself. The number of index arguments must be equal or larger than the <code class="docutils literal notranslate"><span class="pre">rank</span></code> of the view.
-Index arguments beyond <code class="docutils literal notranslate"><span class="pre">rank</span></code> must be <code class="docutils literal notranslate"><span class="pre">0</span></code>, which will be enforced if <code class="docutils literal notranslate"><span class="pre">KOKKOS_DEBUG</span></code> is defined.
-See notes on <code class="docutils literal notranslate"><span class="pre">reference_type</span></code> for properties of the return type.</p>
-</li>
-</ul>
-</section>
-<section id="data-layout-dimensions-strides">
-<h3>Data Layout, Dimensions, Strides<a class="headerlink" href="#data-layout-dimensions-strides" title="Permalink to this heading">#</a></h3>
-<ul>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">constexpr</span><span class="w"> </span><span class="n">array_layout</span><span class="w"> </span><span class="n">layout</span><span class="p">()</span><span class="w"> </span><span class="k">const</span>
-</pre></div>
-</div>
-<p>Returns the layout object. Can be used to to construct other views with the same dimensions.</p>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">iType</span><span class="o">&gt;</span>
-<span class="k">constexpr</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">extent</span><span class="p">(</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">iType</span><span class="o">&amp;</span><span class="w"> </span><span class="n">dim</span><span class="p">)</span><span class="w"> </span><span class="k">const</span>
-</pre></div>
-</div>
-<p>Return the extent of the specified dimension. <code class="docutils literal notranslate"><span class="pre">iType</span></code> must be an integral type, and <code class="docutils literal notranslate"><span class="pre">dim</span></code> must be smaller than <code class="docutils literal notranslate"><span class="pre">rank</span></code>.</p>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">iType</span><span class="o">&gt;</span>
-<span class="k">constexpr</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">extent_int</span><span class="p">(</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">iType</span><span class="o">&amp;</span><span class="w"> </span><span class="n">dim</span><span class="p">)</span><span class="w"> </span><span class="k">const</span>
-</pre></div>
-</div>
-<p>Return the extent of the specified dimension as an <code class="docutils literal notranslate"><span class="pre">int</span></code>. <code class="docutils literal notranslate"><span class="pre">iType</span></code> must be an integral type, and <code class="docutils literal notranslate"><span class="pre">dim</span></code> must be smaller than <code class="docutils literal notranslate"><span class="pre">rank</span></code>.
-Compared to <code class="docutils literal notranslate"><span class="pre">extent</span></code> this function can be useful on architectures where <code class="docutils literal notranslate"><span class="pre">int</span></code> operations are more efficient than <code class="docutils literal notranslate"><span class="pre">size_t</span></code>. It also may eliminate the need for type casts in applications which otherwise perform all index operations with <code class="docutils literal notranslate"><span class="pre">int</span></code>.</p>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">iType</span><span class="o">&gt;</span>
-<span class="k">constexpr</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">stride</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">iType</span><span class="o">&amp;</span><span class="w"> </span><span class="n">dim</span><span class="p">)</span><span class="w"> </span><span class="k">const</span>
-</pre></div>
-</div>
-<p>Return the stride of the specified dimension. <code class="docutils literal notranslate"><span class="pre">iType</span></code> must be an integral type, and <code class="docutils literal notranslate"><span class="pre">dim</span></code> must be smaller than <code class="docutils literal notranslate"><span class="pre">rank</span></code>.
-Example: <code class="docutils literal notranslate"><span class="pre">a.stride(3)</span> <span class="pre">==</span> <span class="pre">(&amp;a(i0,i1,i2,i3+1,i4)-&amp;a(i0,i1,i2,i3,i4))</span></code></p>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">constexpr</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">stride_0</span><span class="p">()</span><span class="w"> </span><span class="k">const</span>
-</pre></div>
-</div>
-<p>Return the stride of dimension 0.</p>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">constexpr</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">stride_1</span><span class="p">()</span><span class="w"> </span><span class="k">const</span>
-</pre></div>
-</div>
-<p>Return the stride of dimension 1.</p>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">constexpr</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">stride_2</span><span class="p">()</span><span class="w"> </span><span class="k">const</span>
-</pre></div>
-</div>
-<p>Return the stride of dimension 2.</p>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">constexpr</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">stride_3</span><span class="p">()</span><span class="w"> </span><span class="k">const</span>
-</pre></div>
-</div>
-<p>Return the stride of dimension 3.</p>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">constexpr</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">stride_4</span><span class="p">()</span><span class="w"> </span><span class="k">const</span>
-</pre></div>
-</div>
-<p>Return the stride of dimension 4.</p>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">constexpr</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">stride_5</span><span class="p">()</span><span class="w"> </span><span class="k">const</span>
-</pre></div>
-</div>
-<p>Return the stride of dimension 5.</p>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">constexpr</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">stride_6</span><span class="p">()</span><span class="w"> </span><span class="k">const</span>
-</pre></div>
-</div>
-<p>Return the stride of dimension 6.</p>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">constexpr</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">stride_7</span><span class="p">()</span><span class="w"> </span><span class="k">const</span>
-</pre></div>
-</div>
-<p>Return the stride of dimension 7.</p>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">constexpr</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">span</span><span class="p">()</span><span class="w"> </span><span class="k">const</span>
-</pre></div>
-</div>
-<p>Returns the memory span in elements between the element with the lowest and the highest address. This can be larger than the product of extents due to padding, and or non-contiguous data layout as for example <code class="docutils literal notranslate"><span class="pre">LayoutStride</span></code> allows.</p>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">constexpr</span><span class="w"> </span><span class="n">pointer_type</span><span class="w"> </span><span class="n">data</span><span class="p">()</span><span class="w"> </span><span class="k">const</span>
-</pre></div>
-</div>
-<p>Return the pointer to the underlying data allocation.</p>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="n">span_is_contiguous</span><span class="p">()</span><span class="w"> </span><span class="k">const</span>
-</pre></div>
-</div>
-<p>Whether the span is contiguous (i.e. whether every memory location between in span belongs to the index space covered by the view).</p>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="nf">required_allocation_size</span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">N0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="p">...,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">N8</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
-</pre></div>
-</div>
-<p>Returns the number of bytes necessary for an unmanaged view of the provided dimensions. This function is only valid if <code class="docutils literal notranslate"><span class="pre">array_layout::is_regular</span> <span class="pre">==</span> <span class="pre">true</span></code>.</p>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="nf">required_allocation_size</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">array_layout</span><span class="o">&amp;</span><span class="w"> </span><span class="n">layout</span><span class="p">);</span>
-</pre></div>
-</div>
-<p>Returns the number of bytes necessary for an unmanaged view of the provided layout.</p>
-</li>
-</ul>
-</section>
-<section id="id1">
-<h3>Other<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
-<ul>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">use_count</span><span class="p">()</span><span class="w"> </span><span class="k">const</span>
-</pre></div>
-</div>
-<p>Returns the current reference count of the underlying allocation.</p>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">label</span><span class="p">()</span><span class="w"> </span><span class="k">const</span>
-</pre></div>
-</div>
-<p>Returns the label of the DynRankView.</p>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">constexpr</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="n">rank</span><span class="p">()</span><span class="w"> </span><span class="k">const</span>
-</pre></div>
-</div>
-<p>Returns the dynamic rank of the DynRankView</p>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">constexpr</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="nf">is_allocated</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
-</pre></div>
-</div>
-<p>Returns true if the view points to a valid memory location.  This function works for both managed and unmanaged views. With the unmanaged view, there is no guarantee that referenced address is valid, only that it is a non-null pointer.</p>
-</li>
-</ul>
-</section>
+</dd></dl>
+
+<p class="rubric">Data Layout, Dimensions, Strides</p>
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK11DynRankView6layoutEv">
+<span id="_CPPv3NK11DynRankView6layoutEv"></span><span id="_CPPv2NK11DynRankView6layoutEv"></span><span id="DynRankView::layoutCCE"></span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N11DynRankView12array_layoutE" title="DynRankView::array_layout"><span class="n"><span class="pre">array_layout</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">layout</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK11DynRankView6layoutEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Returns the layout object. Can be used to to construct other views with the same dimensions.</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4I0ENK11DynRankView6extentE6size_tRK5iType">
+<span id="_CPPv3I0ENK11DynRankView6extentERK5iType"></span><span id="_CPPv2I0ENK11DynRankView6extentERK5iType"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">iType</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">extent</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0ENK11DynRankView6extentE6size_tRK5iType" title="DynRankView::extent::iType"><span class="n"><span class="pre">iType</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">dim</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4I0ENK11DynRankView6extentE6size_tRK5iType" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Returns the extent of the specified dimension. <code class="docutils literal notranslate"><span class="pre">iType</span></code> must be an integral type, and <code class="docutils literal notranslate"><span class="pre">dim</span></code> must be smaller than <code class="docutils literal notranslate"><span class="pre">rank</span></code>.</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4I0ENK11DynRankView10extent_intEiRK5iType">
+<span id="_CPPv3I0ENK11DynRankView10extent_intERK5iType"></span><span id="_CPPv2I0ENK11DynRankView10extent_intERK5iType"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">iType</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">extent_int</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0ENK11DynRankView10extent_intEiRK5iType" title="DynRankView::extent_int::iType"><span class="n"><span class="pre">iType</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">dim</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4I0ENK11DynRankView10extent_intEiRK5iType" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Returns the extent of the specified dimension as an <code class="docutils literal notranslate"><span class="pre">int</span></code>. <code class="docutils literal notranslate"><span class="pre">iType</span></code> must be an integral type,
+and <code class="docutils literal notranslate"><span class="pre">dim</span></code> must be smaller than <code class="docutils literal notranslate"><span class="pre">rank</span></code>. Compared to <code class="docutils literal notranslate"><span class="pre">extent</span></code> this function can be useful
+on architectures where <code class="docutils literal notranslate"><span class="pre">int</span></code> operations are more efficient than <code class="docutils literal notranslate"><span class="pre">size_t</span></code>.
+It also may eliminate the need for type casts in applications which otherwise perform all index operations with <code class="docutils literal notranslate"><span class="pre">int</span></code>.</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4I0ENK11DynRankView6strideE6size_tRK5iType">
+<span id="_CPPv3I0ENK11DynRankView6strideERK5iType"></span><span id="_CPPv2I0ENK11DynRankView6strideERK5iType"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">iType</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">stride</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0ENK11DynRankView6strideE6size_tRK5iType" title="DynRankView::stride::iType"><span class="n"><span class="pre">iType</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">dim</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4I0ENK11DynRankView6strideE6size_tRK5iType" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Returns the stride of the specified dimension. <code class="docutils literal notranslate"><span class="pre">iType</span></code> must be an integral type, and <code class="docutils literal notranslate"><span class="pre">dim</span></code> must be smaller than <code class="docutils literal notranslate"><span class="pre">rank</span></code>. Example: <code class="docutils literal notranslate"><span class="pre">a.stride(3)</span> <span class="pre">==</span> <span class="pre">(&amp;a(i0,i1,i2,i3+1,i4)-&amp;a(i0,i1,i2,i3,i4))</span></code></p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK11DynRankView8stride_0Ev">
+<span id="_CPPv3NK11DynRankView8stride_0Ev"></span><span id="_CPPv2NK11DynRankView8stride_0Ev"></span><span id="DynRankView::stride_0CCE"></span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">stride_0</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK11DynRankView8stride_0Ev" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Return the stride of dimension 0.</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK11DynRankView8stride_1Ev">
+<span id="_CPPv3NK11DynRankView8stride_1Ev"></span><span id="_CPPv2NK11DynRankView8stride_1Ev"></span><span id="DynRankView::stride_1CCE"></span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">stride_1</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK11DynRankView8stride_1Ev" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Return the stride of dimension 1.</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK11DynRankView8stride_2Ev">
+<span id="_CPPv3NK11DynRankView8stride_2Ev"></span><span id="_CPPv2NK11DynRankView8stride_2Ev"></span><span id="DynRankView::stride_2CCE"></span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">stride_2</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK11DynRankView8stride_2Ev" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Return the stride of dimension 2.</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK11DynRankView8stride_3Ev">
+<span id="_CPPv3NK11DynRankView8stride_3Ev"></span><span id="_CPPv2NK11DynRankView8stride_3Ev"></span><span id="DynRankView::stride_3CCE"></span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">stride_3</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK11DynRankView8stride_3Ev" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Return the stride of dimension 3.</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK11DynRankView8stride_4Ev">
+<span id="_CPPv3NK11DynRankView8stride_4Ev"></span><span id="_CPPv2NK11DynRankView8stride_4Ev"></span><span id="DynRankView::stride_4CCE"></span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">stride_4</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK11DynRankView8stride_4Ev" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Return the stride of dimension 4.</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK11DynRankView8stride_5Ev">
+<span id="_CPPv3NK11DynRankView8stride_5Ev"></span><span id="_CPPv2NK11DynRankView8stride_5Ev"></span><span id="DynRankView::stride_5CCE"></span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">stride_5</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK11DynRankView8stride_5Ev" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Return the stride of dimension 5.</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK11DynRankView8stride_6Ev">
+<span id="_CPPv3NK11DynRankView8stride_6Ev"></span><span id="_CPPv2NK11DynRankView8stride_6Ev"></span><span id="DynRankView::stride_6CCE"></span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">stride_6</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK11DynRankView8stride_6Ev" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Return the stride of dimension 6.</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK11DynRankView8stride_7Ev">
+<span id="_CPPv3NK11DynRankView8stride_7Ev"></span><span id="_CPPv2NK11DynRankView8stride_7Ev"></span><span id="DynRankView::stride_7CCE"></span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">stride_7</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK11DynRankView8stride_7Ev" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Return the stride of dimension 7.</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK11DynRankView4spanEv">
+<span id="_CPPv3NK11DynRankView4spanEv"></span><span id="_CPPv2NK11DynRankView4spanEv"></span><span id="DynRankView::spanCCE"></span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">span</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK11DynRankView4spanEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Return the memory span in elements between the element with the lowest and the highest address.
+This can be larger than the product of extents due to padding, and or non-contiguous data layout as for example <code class="docutils literal notranslate"><span class="pre">LayoutStride</span></code> allows.</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK11DynRankView4dataEv">
+<span id="_CPPv3NK11DynRankView4dataEv"></span><span id="_CPPv2NK11DynRankView4dataEv"></span><span id="DynRankView::dataCCE"></span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N11DynRankView12pointer_typeE" title="DynRankView::pointer_type"><span class="n"><span class="pre">pointer_type</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">data</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK11DynRankView4dataEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Return the pointer to the underlying data allocation.</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK11DynRankView18span_is_contiguousEv">
+<span id="_CPPv3NK11DynRankView18span_is_contiguousEv"></span><span id="_CPPv2NK11DynRankView18span_is_contiguousEv"></span><span id="DynRankView::span_is_contiguousC"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">span_is_contiguous</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK11DynRankView18span_is_contiguousEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Whether the span is contiguous (i.e. whether every memory location between in span belongs to the index space covered by the view).</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N11DynRankView24required_allocation_sizeE6size_t6size_t6size_t6size_t6size_t6size_t6size_t6size_t6size_t">
+<span id="_CPPv3N11DynRankView24required_allocation_sizeE6size_t6size_t6size_t6size_t6size_t6size_t6size_t6size_t6size_t"></span><span id="_CPPv2N11DynRankView24required_allocation_sizeE6size_t6size_t6size_t6size_t6size_t6size_t6size_t6size_t6size_t"></span><span id="DynRankView::required_allocation_size__s.s.s.s.s.s.s.s.sCE"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">required_allocation_size</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">N0</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">N1</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">N2</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">N3</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">N4</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">N5</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">N6</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">N7</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">N8</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><span class="sig-paren">)</span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4N11DynRankView24required_allocation_sizeE6size_t6size_t6size_t6size_t6size_t6size_t6size_t6size_t6size_t" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Returns the number of bytes necessary for an unmanaged view of the provided dimensions. This function is only valid if <code class="docutils literal notranslate"><span class="pre">array_layout::is_regular</span> <span class="pre">==</span> <span class="pre">true</span></code>.</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N11DynRankView24required_allocation_sizeERK12array_layout">
+<span id="_CPPv3N11DynRankView24required_allocation_sizeERK12array_layout"></span><span id="_CPPv2N11DynRankView24required_allocation_sizeERK12array_layout"></span><span id="DynRankView::required_allocation_size__array_layoutCRCE"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">required_allocation_size</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N11DynRankView12array_layoutE" title="DynRankView::array_layout"><span class="n"><span class="pre">array_layout</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">layout</span></span><span class="sig-paren">)</span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4N11DynRankView24required_allocation_sizeERK12array_layout" title="Permalink to this definition">#</a><br /></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>the number of bytes necessary for an unmanaged view of the provided layout.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Other Public Methods</p>
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK11DynRankView9use_countEv">
+<span id="_CPPv3NK11DynRankView9use_countEv"></span><span id="_CPPv2NK11DynRankView9use_countEv"></span><span id="DynRankView::use_countC"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">use_count</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK11DynRankView9use_countEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>the current reference count of the underlying allocation.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK11DynRankView5labelEv">
+<span id="_CPPv3NK11DynRankView5labelEv"></span><span id="_CPPv2NK11DynRankView5labelEv"></span><span id="DynRankView::labelC"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">label</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4NK11DynRankView5labelEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>the label of the <code class="docutils literal notranslate"><span class="pre">DynRankView</span></code>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK11DynRankView4rankEv">
+<span id="_CPPv3NK11DynRankView4rankEv"></span><span id="_CPPv2NK11DynRankView4rankEv"></span><span id="DynRankView::rankCCE"></span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">rank</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><br /></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>the dynamic rank of the <code class="docutils literal notranslate"><span class="pre">DynRankView</span></code>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK11DynRankView12is_allocatedEv">
+<span id="_CPPv3NK11DynRankView12is_allocatedEv"></span><span id="_CPPv2NK11DynRankView12is_allocatedEv"></span><span id="DynRankView::is_allocatedCCE"></span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_allocated</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK11DynRankView12is_allocatedEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>true if the view points to a valid memory location.
+This function works for both managed and unmanaged views.
+With the unmanaged view, there is no guarantee that referenced address is valid, only that it is a non-null pointer.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </section>
 <section id="assignment-rules">
 <h2>Assignment Rules<a class="headerlink" href="#assignment-rules" title="Permalink to this heading">#</a></h2>
-<p>Assignment rules cover the assignment operator as well as copy constructors. We aim at making all logically legal assignments possible,
-while intercepting illegal assignments if possible at compile time, otherwise at runtime.
-In the following, we use <code class="docutils literal notranslate"><span class="pre">DstType</span></code> and <code class="docutils literal notranslate"><span class="pre">SrcType</span></code> as the type of the destination view and source view respectively.
-<code class="docutils literal notranslate"><span class="pre">dst_view</span></code> and <code class="docutils literal notranslate"><span class="pre">src_view</span></code> refer to the runtime instances of the destination and source views, i.e.:</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">ScrType</span><span class="w"> </span><span class="nf">src_view</span><span class="p">(...);</span>
+<p>Assignment rules cover the assignment operator as well as copy constructors. We aim at making all logically legal assignments possible, while intercepting illegal assignments if possible at compile time, otherwise at runtime. In the following, we use <code class="docutils literal notranslate"><span class="pre">DstType</span></code> and <code class="docutils literal notranslate"><span class="pre">SrcType</span></code> as the type of the destination view and source view respectively. <code class="docutils literal notranslate"><span class="pre">dst_view</span></code> and <code class="docutils literal notranslate"><span class="pre">src_view</span></code> refer to the runtime instances of the destination and source views, i.e.:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">ScrType</span><span class="w"> </span><span class="nf">src_view</span><span class="p">(...);</span>
 <span class="n">DstType</span><span class="w"> </span><span class="nf">dst_view</span><span class="p">(</span><span class="n">src_view</span><span class="p">);</span>
 <span class="n">dst_view</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">src_view</span><span class="p">;</span>
 </pre></div>
@@ -826,54 +1036,57 @@ In the following, we use <code class="docutils literal notranslate"><span class=
 <li><p>If <code class="docutils literal notranslate"><span class="pre">std::is_const&lt;SrcType::value_type&gt;::value</span> <span class="pre">==</span> <span class="pre">true</span></code> than <code class="docutils literal notranslate"><span class="pre">std::is_const&lt;DstType::value_type&gt;::value</span> <span class="pre">==</span> <span class="pre">true</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">MemorySpaceAccess&lt;DstType::memory_space,SrcType::memory_space&gt;::assignable</span> <span class="pre">==</span> <span class="pre">true</span></code></p></li>
 </ul>
-<p>Furthermore there are rules which must be met if <code class="docutils literal notranslate"><span class="pre">DstType::array_layout</span></code> is not the same as <code class="docutils literal notranslate"><span class="pre">SrcType::array_layout</span></code>.
-These rules only cover cases where both layouts are one of <code class="docutils literal notranslate"><span class="pre">LayoutLeft</span></code>, <code class="docutils literal notranslate"><span class="pre">LayoutRight</span></code> or <code class="docutils literal notranslate"><span class="pre">LayoutStride</span></code></p>
+<p>Furthermore there are rules which must be met if <code class="docutils literal notranslate"><span class="pre">DstType::array_layout</span></code> is not the same as <code class="docutils literal notranslate"><span class="pre">SrcType::array_layout</span></code>. These rules only cover cases where both layouts are one of <code class="docutils literal notranslate"><span class="pre">LayoutLeft</span></code> , <code class="docutils literal notranslate"><span class="pre">LayoutRight</span></code> or <code class="docutils literal notranslate"><span class="pre">LayoutStride</span></code></p>
 <ul class="simple">
-<li><p>If neither <code class="docutils literal notranslate"><span class="pre">DstType::array_layout</span></code> nor <code class="docutils literal notranslate"><span class="pre">SrcType::array_layout</span></code> is <code class="docutils literal notranslate"><span class="pre">LayoutStride</span></code>:</p>
-<ul>
+<li><dl class="simple">
+<dt>If neither <code class="docutils literal notranslate"><span class="pre">DstType::array_layout</span></code> nor <code class="docutils literal notranslate"><span class="pre">SrcType::array_layout</span></code> is <code class="docutils literal notranslate"><span class="pre">LayoutStride</span></code>:</dt><dd><ul>
 <li><p>If <code class="docutils literal notranslate"><span class="pre">DstType::rank</span> <span class="pre">&gt;</span> <span class="pre">1</span></code> than <code class="docutils literal notranslate"><span class="pre">DstType::array_layout</span></code> must be the same as <code class="docutils literal notranslate"><span class="pre">SrcType::array_layout</span></code>.</p></li>
 </ul>
+</dd>
+</dl>
 </li>
-<li><p>If either <code class="docutils literal notranslate"><span class="pre">DstType::array_layout</span></code> or <code class="docutils literal notranslate"><span class="pre">SrcType::array_layout</span></code> is <code class="docutils literal notranslate"><span class="pre">LayoutStride</span></code></p>
-<ul>
+<li><dl class="simple">
+<dt>If either <code class="docutils literal notranslate"><span class="pre">DstType::array_layout</span></code> or <code class="docutils literal notranslate"><span class="pre">SrcType::array_layout</span></code> is <code class="docutils literal notranslate"><span class="pre">LayoutStride</span></code></dt><dd><ul>
 <li><p>For each dimension <code class="docutils literal notranslate"><span class="pre">k</span></code> it must hold that <code class="docutils literal notranslate"><span class="pre">dst_view.extent(k)</span> <span class="pre">==</span> <span class="pre">src_view.extent(k)</span></code></p></li>
 </ul>
+</dd>
+</dl>
 </li>
 </ul>
 </section>
 <section id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading">#</a></h2>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="cpf">&lt;Kokkos_Core.hpp&gt;</span>
-<span class="cp">#include</span><span class="cpf">&lt;cstdio&gt;</span><span class="c1"> </span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="cpf">&lt;Kokkos_Core.hpp&gt;</span>
+<span class="cp">#include</span><span class="cpf">&lt;cstdio&gt;</span>
 
 <span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">argv</span><span class="p">[])</span><span class="w"> </span><span class="p">{</span>
-<span class="w">   </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">initialize</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span><span class="n">argv</span><span class="p">);</span>
+<span class="w">    </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">initialize</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span><span class="n">argv</span><span class="p">);</span>
 
-<span class="w">   </span><span class="kt">int</span><span class="w"> </span><span class="n">N0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
-<span class="w">   </span><span class="kt">int</span><span class="w"> </span><span class="n">N1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">N0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">N1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
 
-<span class="w">   </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">DynRankView</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">a</span><span class="p">(</span><span class="s">&quot;A&quot;</span><span class="p">,</span><span class="n">N0</span><span class="p">);</span>
-<span class="w">   </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">DynRankView</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">b</span><span class="p">(</span><span class="s">&quot;B&quot;</span><span class="p">,</span><span class="n">N1</span><span class="p">);</span>
+<span class="w">    </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">DynRankView</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">a</span><span class="p">(</span><span class="s">&quot;A&quot;</span><span class="p">,</span><span class="n">N0</span><span class="p">);</span>
+<span class="w">    </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">DynRankView</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">b</span><span class="p">(</span><span class="s">&quot;B&quot;</span><span class="p">,</span><span class="n">N1</span><span class="p">);</span>
 
-<span class="w">   </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">parallel_for</span><span class="p">(</span><span class="s">&quot;InitA&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">N0</span><span class="p">,</span><span class="w"> </span><span class="n">KOKKOS_LAMBDA</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">     </span><span class="n">a</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
-<span class="w">   </span><span class="p">});</span>
+<span class="w">    </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">parallel_for</span><span class="p">(</span><span class="s">&quot;InitA&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">N0</span><span class="p">,</span><span class="w"> </span><span class="n">KOKKOS_LAMBDA</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">a</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+<span class="w">    </span><span class="p">});</span>
 
-<span class="w">   </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">parallel_for</span><span class="p">(</span><span class="s">&quot;InitB&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">N1</span><span class="p">,</span><span class="w"> </span><span class="n">KOKKOS_LAMBDA</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">     </span><span class="n">b</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
-<span class="w">   </span><span class="p">});</span>
+<span class="w">    </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">parallel_for</span><span class="p">(</span><span class="s">&quot;InitB&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">N1</span><span class="p">,</span><span class="w"> </span><span class="n">KOKKOS_LAMBDA</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">b</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+<span class="w">    </span><span class="p">});</span>
 
-<span class="w">   </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">DynRankView</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span><span class="n">Kokkos</span><span class="o">::</span><span class="n">LayoutLeft</span><span class="o">&gt;</span><span class="w"> </span><span class="n">c</span><span class="p">(</span><span class="s">&quot;C&quot;</span><span class="p">,</span><span class="n">N0</span><span class="p">,</span><span class="n">N1</span><span class="p">);</span>
-<span class="w">   </span><span class="p">{</span>
-<span class="w">     </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">DynRankView</span><span class="o">&lt;</span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">const_a</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
-<span class="w">     </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">DynRankView</span><span class="o">&lt;</span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">const_b</span><span class="p">(</span><span class="n">b</span><span class="p">);</span>
-<span class="w">     </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">parallel_for</span><span class="p">(</span><span class="s">&quot;SetC&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">MDRangePolicy</span><span class="o">&lt;</span><span class="n">Kokkos</span><span class="o">::</span><span class="n">Rank</span><span class="o">&lt;</span><span class="mi">2</span><span class="p">,</span><span class="n">Kokkos</span><span class="o">::</span><span class="n">Iterate</span><span class="o">::</span><span class="n">Left</span><span class="o">&gt;&gt;</span><span class="p">({</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">},{</span><span class="n">N0</span><span class="p">,</span><span class="n">N1</span><span class="p">}),</span>
-<span class="w">       </span><span class="n">KOKKOS_LAMBDA</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">i0</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">i1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">       </span><span class="n">c</span><span class="p">(</span><span class="n">i0</span><span class="p">,</span><span class="n">i1</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">(</span><span class="n">i0</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">b</span><span class="p">(</span><span class="n">i1</span><span class="p">);</span>
-<span class="w">     </span><span class="p">});</span>
-<span class="w">   </span><span class="p">}</span>
+<span class="w">    </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">DynRankView</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span><span class="n">Kokkos</span><span class="o">::</span><span class="n">LayoutLeft</span><span class="o">&gt;</span><span class="w"> </span><span class="n">c</span><span class="p">(</span><span class="s">&quot;C&quot;</span><span class="p">,</span><span class="n">N0</span><span class="p">,</span><span class="n">N1</span><span class="p">);</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">DynRankView</span><span class="o">&lt;</span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">const_a</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
+<span class="w">        </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">DynRankView</span><span class="o">&lt;</span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">const_b</span><span class="p">(</span><span class="n">b</span><span class="p">);</span>
+<span class="w">        </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">parallel_for</span><span class="p">(</span><span class="s">&quot;SetC&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">MDRangePolicy</span><span class="o">&lt;</span><span class="n">Kokkos</span><span class="o">::</span><span class="n">Rank</span><span class="o">&lt;</span><span class="mi">2</span><span class="p">,</span><span class="n">Kokkos</span><span class="o">::</span><span class="n">Iterate</span><span class="o">::</span><span class="n">Left</span><span class="o">&gt;&gt;</span><span class="p">({</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">},{</span><span class="n">N0</span><span class="p">,</span><span class="n">N1</span><span class="p">}),</span>
+<span class="w">            </span><span class="n">KOKKOS_LAMBDA</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">i0</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">i1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">c</span><span class="p">(</span><span class="n">i0</span><span class="p">,</span><span class="n">i1</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">(</span><span class="n">i0</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">b</span><span class="p">(</span><span class="n">i1</span><span class="p">);</span>
+<span class="w">        </span><span class="p">});</span>
+<span class="w">    </span><span class="p">}</span>
 
-<span class="w">   </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">finalize</span><span class="p">();</span>
+<span class="w">    </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">finalize</span><span class="p">();</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -938,28 +1151,8 @@ These rules only cover cases where both layouts are one of <code class="docutils
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">DynRankView</span></code></a><ul>
-<li><a class="reference internal" href="#interface">Interface</a><ul>
-<li><a class="reference internal" href="#parameters">Parameters</a></li>
-<li><a class="reference internal" href="#requirements">Requirements:</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#public-class-members">Public Class Members</a><ul>
-<li><a class="reference internal" href="#enums">Enums</a></li>
-<li><a class="reference internal" href="#typedefs">Typedefs</a><ul>
-<li><a class="reference internal" href="#data-types">Data Types</a></li>
-<li><a class="reference internal" href="#scalar-types">Scalar Types</a></li>
-<li><a class="reference internal" href="#spaces">Spaces</a></li>
-<li><a class="reference internal" href="#viewtypes">ViewTypes</a></li>
-<li><a class="reference internal" href="#data-handles">Data Handles</a></li>
-<li><a class="reference internal" href="#other">Other</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#constructors">Constructors</a></li>
-<li><a class="reference internal" href="#data-access-functions">Data Access Functions</a></li>
-<li><a class="reference internal" href="#data-layout-dimensions-strides">Data Layout, Dimensions, Strides</a></li>
-<li><a class="reference internal" href="#id1">Other</a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#usage">Usage</a></li>
+<li><a class="reference internal" href="#description">Description</a></li>
 <li><a class="reference internal" href="#assignment-rules">Assignment Rules</a></li>
 <li><a class="reference internal" href="#examples">Examples</a></li>
 </ul>
