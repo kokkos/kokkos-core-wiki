@@ -187,7 +187,7 @@
 <li class="toctree-l2 current has-children"><a class="reference internal" href="../Initialize-and-Finalize.html">Initialize and Finalize</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="initialize.html"><code class="docutils literal notranslate"><span class="pre">initialize</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="finalize.html"><code class="docutils literal notranslate"><span class="pre">finalize</span></code></a></li>
-<li class="toctree-l3 current current-page"><a class="current reference internal" href="#">ScopeGuard</a></li>
+<li class="toctree-l3 current current-page"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">ScopeGuard</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="InitializationSettings.html"><code class="docutils literal notranslate"><span class="pre">InitializationSettings</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="InitArguments.html">InitArguments</a></li>
 </ul>
@@ -473,7 +473,7 @@
         </a>
         <div class="content-icon-container">
 <div class="edit-this-page">
-  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/API/core/initialize_finalize/ScopeGuard.md" title="Edit this page">
+  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/API/core/initialize_finalize/ScopeGuard.rst" title="Edit this page">
     <svg aria-hidden="true" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
       <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4"></path>
@@ -497,94 +497,155 @@
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="scopeguard">
-<h1>ScopeGuard<a class="headerlink" href="#scopeguard" title="Permalink to this heading">#</a></h1>
+          <section id="scopeguard">
+<h1><code class="docutils literal notranslate"><span class="pre">ScopeGuard</span></code><a class="headerlink" href="#scopeguard" title="Permalink to this heading">#</a></h1>
 <p>Defined in header <code class="docutils literal notranslate"><span class="pre">&lt;Kokkos_Core.hpp&gt;</span></code></p>
-<p>Usage:</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">Kokkos</span><span class="o">::</span><span class="n">ScopeGuard</span><span class="w"> </span><span class="nf">guard</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="n">argv</span><span class="p">);</span>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this heading">#</a></h2>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Kokkos</span><span class="o">::</span><span class="n">ScopeGuard</span><span class="w"> </span><span class="nf">guard</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="n">argv</span><span class="p">);</span>
 <span class="n">Kokkos</span><span class="o">::</span><span class="n">ScopeGuard</span><span class="w"> </span><span class="n">guard</span><span class="p">(</span><span class="n">Kokkos</span><span class="o">::</span><span class="n">InitializationSettings</span><span class="p">()</span><span class="w">  </span><span class="c1">// (since 3.7)</span>
-<span class="w">                             </span><span class="p">.</span><span class="n">set_map_device_id_by</span><span class="p">(</span><span class="s">&quot;random&quot;</span><span class="p">)</span>
-<span class="w">                             </span><span class="p">.</span><span class="n">set_num_threads</span><span class="p">(</span><span class="mi">1</span><span class="p">));</span>
+<span class="w">                            </span><span class="p">.</span><span class="n">set_map_device_id_by</span><span class="p">(</span><span class="s">&quot;random&quot;</span><span class="p">)</span>
+<span class="w">                            </span><span class="p">.</span><span class="n">set_num_threads</span><span class="p">(</span><span class="mi">1</span><span class="p">));</span>
 </pre></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">ScopeGuard</span></code> is a class which ensure thats <a class="reference internal" href="initialize.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">Kokkos::initialize</span></code></span></a> and
-<a class="reference internal" href="finalize.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">Kokkos::finalize</span></code></span></a> are called correctly even in the presence of unhandled
+<p><code class="docutils literal notranslate"><span class="pre">ScopeGuard</span></code> is a class which ensure thats <a class="reference external" href="initialize.html#kokkosinitialize">Kokkos::initialize</a> and
+<a class="reference external" href="finalize.html#kokkosfinalize">Kokkos::finalize</a> are called correctly even in the presence of unhandled
 exceptions.
-It calls <a class="reference internal" href="initialize.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">Kokkos::intialize</span></code></span></a> with the provided arguments in the
-constructor and <a class="reference internal" href="finalize.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">Kokkos::finalize</span></code></span></a> in the destructor.</p>
-<p><strong>WARNING: change of behavior in version 3.7</strong>  (see <a class="reference internal" href="#notes"><span class="std std-doc">note</span></a> below)</p>
-<section id="interface">
-<h2>Interface<a class="headerlink" href="#interface" title="Permalink to this heading">#</a></h2>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">ScopeGuard</span><span class="w"> </span><span class="p">{</span>
-<span class="k">public</span><span class="o">:</span>
-<span class="w">  </span><span class="n">ScopeGuard</span><span class="p">(</span><span class="n">ScopeGuard</span><span class="w"> </span><span class="k">const</span><span class="o">&amp;</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">delete</span><span class="p">;</span>
-<span class="w">  </span><span class="n">ScopeGuard</span><span class="p">(</span><span class="n">ScopeGuard</span><span class="o">&amp;&amp;</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">delete</span><span class="p">;</span>
-<span class="w">  </span><span class="n">ScopeGuard</span><span class="o">&amp;</span><span class="w"> </span><span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="n">ScopeGuard</span><span class="w"> </span><span class="k">const</span><span class="o">&amp;</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">delete</span><span class="p">;</span>
-<span class="w">  </span><span class="n">ScopeGuard</span><span class="o">&amp;</span><span class="w"> </span><span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="n">ScopeGuard</span><span class="o">&amp;&amp;</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">delete</span><span class="p">;</span>
+It calls <a class="reference external" href="initialize.html#kokkosinitialize">Kokkos::initialize</a> with the provided arguments in the
+constructor and <a class="reference external" href="finalize.html#kokkosfinalize">Kokkos::finalize</a> in the destructor.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Change of behavior in version 3.7 (see below)</p>
+</div>
+</section>
+<section id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this heading">#</a></h2>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv410ScopeGuard">
+<span id="_CPPv310ScopeGuard"></span><span id="_CPPv210ScopeGuard"></span><span id="ScopeGuard"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ScopeGuard</span></span></span><a class="headerlink" href="#_CPPv410ScopeGuard" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>A class ensuring that <code class="docutils literal notranslate"><span class="pre">Kokkos::initialize</span></code> and <code class="docutils literal notranslate"><span class="pre">Kokkos::finalize</span></code> are called correctly even in the presence of unhandled exceptions.</p>
+<p class="rubric">Constructors</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N10ScopeGuard10ScopeGuardERiA_Pc">
+<span id="_CPPv3N10ScopeGuard10ScopeGuardERiA_Pc"></span><span id="_CPPv2N10ScopeGuard10ScopeGuardERiA_Pc"></span><span id="ScopeGuard::ScopeGuard__iR.cPA"></span><span class="sig-name descname"><span class="n"><span class="pre">ScopeGuard</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">argc</span></span>, <span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">argv</span></span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">]</span></span><span class="sig-paren">)</span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4N10ScopeGuard10ScopeGuardERiA_Pc" title="Permalink to this definition">#</a><br /></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>argc</strong> – number of command line arguments</p></li>
+<li><p><strong>argv</strong> – array of character pointers to null-terminated strings storing the command line arguments</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Valid until 3.7</p>
+</div>
+</dd></dl>
 
-<span class="w">  </span><span class="n">ScopeGuard</span><span class="p">(</span><span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">argv</span><span class="p">[]);</span><span class="w">                           </span><span class="c1">// (until 3.7)</span>
-<span class="w">  </span><span class="n">ScopeGuard</span><span class="p">(</span><span class="n">InitArguments</span><span class="w"> </span><span class="k">const</span><span class="o">&amp;</span><span class="w"> </span><span class="n">arguments</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">InitArguments</span><span class="p">());</span><span class="w">  </span><span class="c1">// (until 3.7)</span>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N10ScopeGuard10ScopeGuardERK13InitArguments">
+<span id="_CPPv3N10ScopeGuard10ScopeGuardERK13InitArguments"></span><span id="_CPPv2N10ScopeGuard10ScopeGuardERK13InitArguments"></span><span id="ScopeGuard::ScopeGuard__InitArgumentsCR"></span><span class="sig-name descname"><span class="n"><span class="pre">ScopeGuard</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">InitArguments</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">arguments</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">InitArguments</span></span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">)</span></span><span class="sig-paren">)</span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4N10ScopeGuard10ScopeGuardERK13InitArguments" title="Permalink to this definition">#</a><br /></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>arguments</strong> – <code class="docutils literal notranslate"><span class="pre">struct</span></code> object with valid initialization arguments</p>
+</dd>
+</dl>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Valid until 3.7</p>
+</div>
+</dd></dl>
 
-<span class="w">  </span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="p">...</span><span class="w"> </span><span class="n">Args</span><span class="o">&gt;</span>
-<span class="w">  </span><span class="n">ScopeGuard</span><span class="p">(</span><span class="n">Args</span><span class="o">&amp;&amp;</span><span class="p">...</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">                                   </span><span class="c1">// (since 3.7)</span>
-<span class="w">    </span><span class="c1">// possible implementation</span>
-<span class="w">    </span><span class="n">initialize</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">forward</span><span class="o">&lt;</span><span class="n">Args</span><span class="o">&gt;</span><span class="p">(</span><span class="n">args</span><span class="p">)...);</span>
-<span class="w">  </span><span class="p">}</span>
-
-<span class="w">  </span><span class="o">~</span><span class="n">ScopeGuard</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// possible implementation</span>
-<span class="w">    </span><span class="n">finalize</span><span class="p">();</span>
-<span class="w">  </span><span class="p">}</span>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4IDpEN10ScopeGuard10ScopeGuardEDpRR4Args">
+<span id="_CPPv3IDpEN10ScopeGuard10ScopeGuardEDpRR4Args"></span><span id="_CPPv2IDpEN10ScopeGuard10ScopeGuardEDpRR4Args"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="sig-name descname"><span class="n"><span class="pre">Args</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="sig-name descname"><span class="n"><span class="pre">ScopeGuard</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4IDpEN10ScopeGuard10ScopeGuardEDpRR4Args" title="ScopeGuard::ScopeGuard::Args"><span class="n"><span class="pre">Args</span></span></a><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">...</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">args</span></span><span class="sig-paren">)</span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4IDpEN10ScopeGuard10ScopeGuardEDpRR4Args" title="Permalink to this definition">#</a><br /></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>args</strong> – <p>arguments to pass to <a class="reference external" href="initialize.html#kokkosinitialize">Kokkos::initialize</a></p>
+</p>
+</dd>
+</dl>
+<p>Possible implementation:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="p">...</span><span class="w"> </span><span class="n">Args</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ScopeGuard</span><span class="p">(</span><span class="n">Args</span><span class="o">&amp;&amp;</span><span class="p">...</span><span class="w"> </span><span class="n">args</span><span class="p">){</span><span class="w"> </span><span class="n">initialize</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">forward</span><span class="o">&lt;</span><span class="n">Args</span><span class="o">&gt;</span><span class="p">(</span><span class="n">args</span><span class="p">)...);</span><span class="w"> </span><span class="p">}</span>
 </pre></div>
 </div>
-<section id="parameters">
-<h3>Parameters<a class="headerlink" href="#parameters" title="Permalink to this heading">#</a></h3>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">argc</span></code>: number of command line arguments</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">argv</span></code>: array of character pointers to null-terminated strings storing the command line arguments</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">arguments</span></code>: <code class="docutils literal notranslate"><span class="pre">struct</span></code> object with valid initialization arguments</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">args</span></code>: arguments to pass to <a class="reference internal" href="initialize.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">Kokkos::initialize</span></code></span></a></p></li>
-</ul>
-<p>Note that all of the parameters above are passed to the <code class="docutils literal notranslate"><span class="pre">Kokkos::initialize</span></code> called internally.  See <a class="reference internal" href="initialize.html"><span class="doc std std-doc">Kokkos::initialize</span></a> for more details.</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N10ScopeGuardD0Ev">
+<span id="_CPPv3N10ScopeGuardD0Ev"></span><span id="_CPPv2N10ScopeGuardD0Ev"></span><span id="ScopeGuard::~ScopeGuard"></span><span class="sig-name descname"><span class="n"><span class="pre">~ScopeGuard</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4N10ScopeGuardD0Ev" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Destructor</p>
+<p>Possible implementation:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="o">~</span><span class="n">ScopeGuard</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">finalize</span><span class="p">();</span><span class="w"> </span><span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N10ScopeGuard10ScopeGuardERK10ScopeGuard">
+<span id="_CPPv3N10ScopeGuard10ScopeGuardERK10ScopeGuard"></span><span id="_CPPv2N10ScopeGuard10ScopeGuardERK10ScopeGuard"></span><span id="ScopeGuard::ScopeGuard__ScopeGuardCR"></span><span class="sig-name descname"><span class="n"><span class="pre">ScopeGuard</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N10ScopeGuard10ScopeGuardERK10ScopeGuard" title="ScopeGuard::ScopeGuard"><span class="n"><span class="pre">ScopeGuard</span></span></a><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">delete</span></span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4N10ScopeGuard10ScopeGuardERK10ScopeGuard" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Copy constructor</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N10ScopeGuard10ScopeGuardERR10ScopeGuard">
+<span id="_CPPv3N10ScopeGuard10ScopeGuardERR10ScopeGuard"></span><span id="_CPPv2N10ScopeGuard10ScopeGuardERR10ScopeGuard"></span><span id="ScopeGuard::ScopeGuard__ScopeGuardRR"></span><span class="sig-name descname"><span class="n"><span class="pre">ScopeGuard</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N10ScopeGuard10ScopeGuardERR10ScopeGuard" title="ScopeGuard::ScopeGuard"><span class="n"><span class="pre">ScopeGuard</span></span></a><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">delete</span></span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4N10ScopeGuard10ScopeGuardERR10ScopeGuard" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Move constructor</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N10ScopeGuardaSERK10ScopeGuard">
+<span id="_CPPv3N10ScopeGuardaSERK10ScopeGuard"></span><span id="_CPPv2N10ScopeGuardaSERK10ScopeGuard"></span><span id="ScopeGuard::assign-operator__ScopeGuardCR"></span><a class="reference internal" href="#_CPPv410ScopeGuard" title="ScopeGuard"><span class="n"><span class="pre">ScopeGuard</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">=</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv410ScopeGuard" title="ScopeGuard"><span class="n"><span class="pre">ScopeGuard</span></span></a><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">delete</span></span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4N10ScopeGuardaSERK10ScopeGuard" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Copy assignment operator</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N10ScopeGuardaSERR10ScopeGuard">
+<span id="_CPPv3N10ScopeGuardaSERR10ScopeGuard"></span><span id="_CPPv2N10ScopeGuardaSERR10ScopeGuard"></span><span id="ScopeGuard::assign-operator__ScopeGuardRR"></span><a class="reference internal" href="#_CPPv410ScopeGuard" title="ScopeGuard"><span class="n"><span class="pre">ScopeGuard</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">=</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv410ScopeGuard" title="ScopeGuard"><span class="n"><span class="pre">ScopeGuard</span></span></a><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">delete</span></span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4N10ScopeGuardaSERR10ScopeGuard" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Move assignment operator</p>
+</dd></dl>
+
+</dd></dl>
+
 </section>
 <section id="notes">
-<h3>Notes<a class="headerlink" href="#notes" title="Permalink to this heading">#</a></h3>
-<p>Since Kokkos version 3.7, <code class="docutils literal notranslate"><span class="pre">ScopeGuard</span></code> unconditionally forwards the provided
-arguments to <a class="reference internal" href="initialize.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">Kokkos::initialize</span></code></span></a>, which means they have the same
+<h2>Notes<a class="headerlink" href="#notes" title="Permalink to this heading">#</a></h2>
+<ul>
+<li><p>In the constructors, all the parameters are passed to the <code class="docutils literal notranslate"><span class="pre">Kokkos::initialize</span></code> called internally.
+See <a class="reference external" href="initialize.html#kokkosinitialize">Kokkos::initialize</a> for more details.</p></li>
+<li><p>Since Kokkos version 3.7, <code class="docutils literal notranslate"><span class="pre">ScopeGuard</span></code> unconditionally forwards the provided
+arguments to <a class="reference external" href="initialize.html#kokkosinitialize">Kokkos::initialize</a>, which means they have the same
 preconditions.  Until version 3.7, <code class="docutils literal notranslate"><span class="pre">ScopeGuard</span></code> was calling
 <code class="docutils literal notranslate"><span class="pre">Kokkos::initialize</span></code> in its constructor only if <code class="docutils literal notranslate"><span class="pre">Kokkos::is_initialized()</span></code> was
 <code class="docutils literal notranslate"><span class="pre">false</span></code>, and it was calling <code class="docutils literal notranslate"><span class="pre">Kokkos::finalize</span></code> in its destructor only if it
 called <code class="docutils literal notranslate"><span class="pre">Kokkos::initialize</span></code> in its constructor.</p>
-<p>We dropped support for the old behavior.  If you think you really need it, you
-may do:</p>
-<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">guard</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">Kokkos</span><span class="o">::</span><span class="n">ScopeGuard</span><span class="o">&gt;</span><span class="p">(</span>
+<p>We dropped support for the old behavior.  If you think you really need it, you may do:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">guard</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">Kokkos</span><span class="o">::</span><span class="n">ScopeGuard</span><span class="o">&gt;</span><span class="p">(</span>
 <span class="w">    </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">is_initialized</span><span class="p">()</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">ScopeGuard</span><span class="p">()</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">nullptr</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>or</p>
-<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">guard</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">is_initialized</span><span class="p">()</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_optional</span><span class="o">&lt;</span><span class="n">Kokkos</span><span class="o">::</span><span class="n">ScopeGuard</span><span class="o">&gt;</span><span class="p">()</span>
-<span class="w">                                      </span><span class="o">:</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">nullopt</span><span class="p">;</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">guard</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">is_initialized</span><span class="p">()</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_optional</span><span class="o">&lt;</span><span class="n">Kokkos</span><span class="o">::</span><span class="n">ScopeGuard</span><span class="o">&gt;</span><span class="p">()</span>
+<span class="w">                                    </span><span class="o">:</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">nullopt</span><span class="p">;</span>
 </pre></div>
 </div>
 <p>with C++17.  This will work regardless of the Kokkos version.</p>
-</section>
+</li>
+</ul>
 <section id="example">
 <h3>Example<a class="headerlink" href="#example" title="Permalink to this heading">#</a></h3>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">argv</span><span class="p">[])</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">ScopeGuard</span><span class="w"> </span><span class="n">guard</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="n">argv</span><span class="p">);</span>
-<span class="w">  </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">View</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">*&gt;</span><span class="w"> </span><span class="n">my_view</span><span class="p">(</span><span class="s">&quot;my_view&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">);</span>
-<span class="w">  </span><span class="c1">// my_view destructor called before Kokkos::finalize</span>
-<span class="w">  </span><span class="c1">// ScopeGuard destructor called, calls Kokkos::finalize</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">argv</span><span class="p">[])</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">ScopeGuard</span><span class="w"> </span><span class="n">guard</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="n">argv</span><span class="p">);</span>
+<span class="w">    </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">View</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">*&gt;</span><span class="w"> </span><span class="n">my_view</span><span class="p">(</span><span class="s">&quot;my_view&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// my_view destructor called before Kokkos::finalize</span>
+<span class="w">    </span><span class="c1">// ScopeGuard destructor called, calls Kokkos::finalize</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 </section>
 <section id="see-also">
 <h3>See also<a class="headerlink" href="#see-also" title="Permalink to this heading">#</a></h3>
-<ul class="simple">
-<li><p><a class="reference internal" href="initialize.html"><span class="doc std std-doc">Kokkos::initialize</span></a></p></li>
-<li><p><a class="reference internal" href="finalize.html"><span class="doc std std-doc">Kokkos::finalize</span></a></p></li>
-</ul>
+<p><a class="reference external" href="initialize.html#kokkosinitialize">Kokkos::initialize</a>, <a class="reference external" href="finalize.html#kokkosfinalize">Kokkos::finalize</a></p>
 </section>
 </section>
 </section>
@@ -646,10 +707,10 @@ may do:</p>
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">ScopeGuard</a><ul>
-<li><a class="reference internal" href="#interface">Interface</a><ul>
-<li><a class="reference internal" href="#parameters">Parameters</a></li>
-<li><a class="reference internal" href="#notes">Notes</a></li>
+<li><a class="reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">ScopeGuard</span></code></a><ul>
+<li><a class="reference internal" href="#usage">Usage</a></li>
+<li><a class="reference internal" href="#description">Description</a></li>
+<li><a class="reference internal" href="#notes">Notes</a><ul>
 <li><a class="reference internal" href="#example">Example</a></li>
 <li><a class="reference internal" href="#see-also">See also</a></li>
 </ul>
