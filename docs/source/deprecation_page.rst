@@ -4,8 +4,18 @@ Deprecation for Kokkos-3.x
 .. IMPORTANT::
    Kokkos-4.0 requires C++17
 
+
+A number of Kokkos headers were made private in Kokkos-3.7.
+
+**Kokkos Core public headers:**  ``Kokkos_core.cpp``, ``Kokkos_Macros.hpp``, ``Kokkos_Atomic.hpp``, ``Kokkos_DetectionIdiom``, ``Kokkos_MathematicalConstants.hpp``, ``Kokkos_MathematicalFunctions.hpp``, ``Kokkos_NumericTraits.hpp``, ``Kokkos_Array.hpp``, ``Kokkos_Complex.hpp``, ``Kokkos_Pair.hpp``, ``Kokkos_Half.hpp``, ``Kokkos_Timer.hpp``;
+
+**Kokkos Algorithms public headers:**  ``Kokkos_StdAlgorithms.hpp``, ``Kokkos_Random.hpp``, ``Kokkos_Sort.hpp``;
+
+**Kokkos Containers public headers:**  ``Kokkos_Bit.hpp``, ``Kokkos_DualView.hpp``, ``Kokkos_DynRankView.hpp``, ``Kokkos_ErrorReporter.hpp``, ``Kokkos_Functional.hpp``, ``Kokkos_OffsetView.hpp``, ``Kokkos_ScatterView.hpp``, ``Kokkos_StaticCrsGraph.hpp``, ``Kokkos_UnorderedMap.hpp``, ``Kokkos_Vector.hpp``   
+
+
 .. list-table::  
-   :widths: 1 1 1
+   :widths: auto 
    :header-rows: 1
 
    * - Previous
