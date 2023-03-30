@@ -38,7 +38,8 @@ extensions = ["myst_parser",
               "sphinx.ext.viewcode",
               "sphinx.ext.intersphinx",
               "sphinx_copybutton",
-              "cppkokkos"]
+              "cppkokkos",
+              "sphinx_multiversion"]
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -71,6 +72,17 @@ source_suffix = {
     '.md': 'markdown',
 }
 
+html_sidebars = {
+    "**": [
+        "sidebar/brand.html",
+        "sidebar/search.html",
+        "sidebar/scroll-start.html",
+        "sidebar/navigation.html",
+        "sidebar/scroll-end.html",
+        "sidebar/variant-selector.html",
+    ]
+}
+
 myst_heading_anchors = 4
 
 myst_enable_extensions = [
@@ -81,3 +93,9 @@ myst_enable_extensions = [
 # rst_prolog = """
 # .. include:: special.rst
 # """
+
+# Multiversioning
+smv_tag_whitelist = r'^\d+\.\d+\.\d+$'   # Tags formatted with x.x.x
+smv_branch_whitelist = r'main|test'
+smv_released_pattern = r'^tags/\d+\.\d+\.\d+$'   # Tags formatted with x.x.x
+smv_outputdir_format = '{ref.name}'

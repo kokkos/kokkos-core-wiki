@@ -1,5 +1,5 @@
 html:
-	sphinx-build -b html ./source/ ./generated_docs/
+	sphinx-multiversion ./source/ ./generated_docs/
 	python3 ./source/edit_button_handler.py
 
 clean:
