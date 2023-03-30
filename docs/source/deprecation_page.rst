@@ -1,9 +1,6 @@
 Deprecation for Kokkos-3.x
 -----------
 
-.. IMPORTANT::
-   Kokkos-4.0 requires C++17
-
 
 A number of Kokkos headers were made private in Kokkos-3.7.
 
