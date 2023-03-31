@@ -4,7 +4,7 @@
 ``partition_space()``
 =====================
 
-Header file: <Kokkos_Core.hpp>
+Header file: ``<Kokkos_Core.hpp>``
 
 .. warning::
 
