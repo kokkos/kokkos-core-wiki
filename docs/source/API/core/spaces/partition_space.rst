@@ -18,8 +18,8 @@ Usage
 
    auto instances = Kokkos::partition_space(Kokkos::DefaultExecutionSpace(),1,1,1);
 
-Description
------------
+Interface
+---------
 
 .. cppkokkos:function:: template<class ExecSpace, class ... Args> std::vector<ExecSpace> partition_space(const ExecSpace& space, Args...args);
 
