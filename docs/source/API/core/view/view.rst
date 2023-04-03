@@ -96,9 +96,22 @@ Public Class Members
 Enums
 ~~~~~
 
-* ``rank``: rank of the view (i.e. the dimensionality).
-* ``rank_dynamic``: number of runtime determined dimensions.
+* ``rank``: rank of the view (i.e. the dimensionality) **(until Kokkos 4.1)**
+* ``rank_dynamic``: number of runtime determined dimensions **(until Kokkos 4.1)**
 * ``reference_type_is_lvalue_reference``: whether the reference type is a C++ lvalue reference.
+
+**(since Kokkos 4.1)** ``rank`` and ``rank_dynamic`` are static member constants that are convertible to ``size_t``.
+Their underlying types are unspecified, but equivalent to ``std::integral_constant`` with a nullary
+member function callable from host and device side.
+Users are encouraged to use ``rank()`` and ``rank_dynamic()`` (akin to a static member function call)
+instead of relying on implicit conversion to an integral type.
+
+The actual type of ``rank[_dymanic]`` as it was defined until Kokkos 4.1 was left up to the implementation
+(that is, up to the compiler not to Kokkos) but in practice it was often ``int`` which means
+this change may yield warnings about comparing signed and unsigned integral types.
+It may also break code that was using the type of ``View::rank``.
+Furthermore, it appears that MSVC has issues with the implicit conversion to
+``size_t`` in certain constexpr contexts. Calling ``rank()`` or ``rank_dynamic()`` will work in those cases.
 
 Typedefs
 ~~~~~~~~
@@ -353,6 +366,18 @@ Data Access Functions
 
 Data Layout, Dimensions, Strides
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. cppkokkos:function:: static constexpr size_t rank()
+
+   **since Kokkos 4.1**: Returns the rank of the view.
+
+.. cppkokkos:function:: static constexpr size_t rank_dynamic()
+
+   **since Kokkos 4.1**: Returns the number of runtime determined dimensions.
+
+Note: in practice, ``rank()`` and ``rank_dynamic()`` are not actually
+implemented as static member functions but ``rank`` and ``rank_dynamic`` underlying
+types have a nullary member function (i.e. callable with no argument).
 
 .. cppkokkos:function:: constexpr array_layout layout() const
 
