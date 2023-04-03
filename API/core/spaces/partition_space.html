@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" /><link rel="next" title="Memory Spaces" href="../memory_spaces.html" /><link rel="prev" title="Execution Spaces" href="../execution_spaces.html" />
 
     <meta name="generator" content="sphinx-5.0.1, furo 2022.06.04.1"/>
-        <title>Kokkos::partition_space() - Kokkos documentation</title>
+        <title>partition_space() - Kokkos documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?digest=40978830699223671f4072448e654b5958f38b89" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
@@ -256,7 +256,7 @@
 </li>
 <li class="toctree-l2 current has-children"><a class="reference internal" href="../Spaces.html">Spaces</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="../execution_spaces.html">Execution Spaces</a></li>
-<li class="toctree-l3 current current-page"><a class="current reference internal" href="#">Kokkos::partition_space()</a></li>
+<li class="toctree-l3 current current-page"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">partition_space()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../memory_spaces.html">Memory Spaces</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../SpaceAccessibility.html">Space Accessibility</a></li>
 </ul>
@@ -473,7 +473,7 @@
         </a>
         <div class="content-icon-container">
 <div class="edit-this-page">
-  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/API/core/spaces/partition_space.md" title="Edit this page">
+  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/API/core/spaces/partition_space.rst" title="Edit this page">
     <svg aria-hidden="true" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
       <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4"></path>
@@ -497,56 +497,69 @@
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="kokkos-partition-space">
-<h1>Kokkos::partition_space()<a class="headerlink" href="#kokkos-partition-space" title="Permalink to this heading">#</a></h1>
-<p>Header file: <code class="docutils literal notranslate"><span class="pre">Kokkos_Core.hpp</span></code></p>
-<p>Usage:</p>
-<p><em>Note: Currently <code class="docutils literal notranslate"><span class="pre">partition_space</span></code> is still in the namespace <code class="docutils literal notranslate"><span class="pre">Kokkos::Experimental</span></code></em></p>
+          <section id="partition-space">
+<h1><code class="docutils literal notranslate"><span class="pre">partition_space()</span></code><a class="headerlink" href="#partition-space" title="Permalink to this heading">#</a></h1>
+<p>Header file: <code class="docutils literal notranslate"><span class="pre">&lt;Kokkos_Core.hpp&gt;</span></code></p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Currently <code class="docutils literal notranslate"><span class="pre">partition_space</span></code> is still in the namespace <code class="docutils literal notranslate"><span class="pre">Kokkos::Experimental</span></code></p>
+</div>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this heading">#</a></h2>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">instances</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">partition_space</span><span class="p">(</span><span class="n">Kokkos</span><span class="o">::</span><span class="n">DefaultExecutionSpace</span><span class="p">(),</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>Creates new execution space instances which dispatch to the same underlying hardware resources as an existing execution space instance.
-There is no implied synchronization relationship between the newly created instances and the pre-existing instance.</p>
+</section>
 <section id="interface">
 <h2>Interface<a class="headerlink" href="#interface" title="Permalink to this heading">#</a></h2>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">ExecSpace</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="n">Args</span><span class="o">&gt;</span>
-<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">ExecSpace</span><span class="o">&gt;</span><span class="w"> </span><span class="n">partition_space</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">ExecSpace</span><span class="o">&amp;</span><span class="w"> </span><span class="n">space</span><span class="p">,</span><span class="w"> </span><span class="n">Args</span><span class="p">...</span><span class="n">args</span><span class="p">);</span>
-</pre></div>
-</div>
-<section id="parameters">
-<h3>Parameters<a class="headerlink" href="#parameters" title="Permalink to this heading">#</a></h3>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">space</span></code>: an execution space instance <span class="xref myst">ExecutionSpaceConcept</span></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">args</span></code>: the number of created instances is equal to <code class="docutils literal notranslate"><span class="pre">sizeof...(Args)</span></code>. The relative weight of <code class="docutils literal notranslate"><span class="pre">args</span></code> is a hint for the fraction of hardware resources of <code class="docutils literal notranslate"><span class="pre">space</span></code> to associate with each newly created instance.</p></li>
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4I0DpE15partition_spaceNSt6vectorI9ExecSpaceEERK9ExecSpaceDp4Args">
+<span id="_CPPv3I0DpE15partition_spaceRK9ExecSpaceDp4Args"></span><span id="_CPPv2I0DpE15partition_spaceRK9ExecSpaceDp4Args"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ExecSpace</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="sig-name descname"><span class="n"><span class="pre">Args</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0DpE15partition_spaceNSt6vectorI9ExecSpaceEERK9ExecSpaceDp4Args" title="partition_space::ExecSpace"><span class="n"><span class="pre">ExecSpace</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">partition_space</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0DpE15partition_spaceNSt6vectorI9ExecSpaceEERK9ExecSpaceDp4Args" title="partition_space::ExecSpace"><span class="n"><span class="pre">ExecSpace</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">space</span></span>, <a class="reference internal" href="#_CPPv4I0DpE15partition_spaceNSt6vectorI9ExecSpaceEERK9ExecSpaceDp4Args" title="partition_space::Args"><span class="n"><span class="pre">Args</span></span></a><span class="p"><span class="pre">...</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">args</span></span><span class="sig-paren">)</span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4I0DpE15partition_spaceNSt6vectorI9ExecSpaceEERK9ExecSpaceDp4Args" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Creates new execution space instances which dispatch to the same underlying
+hardware resources as an existing execution space instance.
+There is no implied synchronization relationship between the newly created instances and the pre-existing instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>space</strong> – an execution space instance (see ../execution_spaces.html)</p></li>
+<li><p><strong>args</strong> – the number of created instances is equal to <code class="docutils literal notranslate"><span class="pre">sizeof...(Args)</span></code>.
+The relative weight of <code class="docutils literal notranslate"><span class="pre">args</span></code> is a hint for the fraction of hardware resources of <code class="docutils literal notranslate"><span class="pre">space</span></code>
+to associate with each newly created instance.</p></li>
 </ul>
-</section>
+</dd>
+</dl>
+</dd></dl>
+
 <section id="requirements">
 <h3>Requirements<a class="headerlink" href="#requirements" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">(std::is_arithmetic_v&lt;Args&gt;</span> <span class="pre">&amp;&amp;</span> <span class="pre">...)</span></code> is <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ExecutionSpace().concurrency()</span> <span class="pre">&gt;=</span> <span class="pre">N_PARTITIONS</span></code></p></li>
 </ul>
 </section>
 <section id="semantics">
 <h3>Semantics<a class="headerlink" href="#semantics" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
-<li><p>There is no implied synchronization relationship between any of the instances, specifically:</p>
-<ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">instance[i]</span></code> is not fenced by <code class="docutils literal notranslate"><span class="pre">space.fence()</span></code>,</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">instance[i]</span></code> is not fenced by <code class="docutils literal notranslate"><span class="pre">instance[j].fence()</span></code>, and</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">space</span></code> is not fenced by <code class="docutils literal notranslate"><span class="pre">instance[i].fence()</span></code>.</p></li>
+<li><p>There is no implied synchronization relationship between any of the instances, specifically:
+- <code class="docutils literal notranslate"><span class="pre">instance[i]</span></code> is not fenced by <code class="docutils literal notranslate"><span class="pre">space.fence()</span></code>,
+- <code class="docutils literal notranslate"><span class="pre">instance[i]</span></code> is not fenced by <code class="docutils literal notranslate"><span class="pre">instance[j].fence()</span></code>, and
+- <code class="docutils literal notranslate"><span class="pre">space</span></code> is not fenced by <code class="docutils literal notranslate"><span class="pre">instance[i].fence()</span></code>.
+However, in practice these instances may block each other because they dispatch to the same hardware resources.</p></li>
+<li><p>The relative weight of <code class="docutils literal notranslate"><span class="pre">args</span></code> is used as a hint for the desired resource allocation.
+For example for a backend which uses discreet threads, weights of <code class="docutils literal notranslate"><span class="pre">{1,2}</span></code> would result
+in two instances where the first is associated with about 1/3rd of the threads of the original instance,
+and the second with 2/3rds. However, for some backends each returned instance may be a copy of the original one.</p></li>
 </ul>
-</li>
-<li><p>However, in practice these instances may block each other because they dispatch to the same hardware resources.</p></li>
-<li><p>The relative weight of <code class="docutils literal notranslate"><span class="pre">args</span></code> is used as a hint for the desired resource allocation. For example for a backend which uses discreet threads, weights of <code class="docutils literal notranslate"><span class="pre">{1,2}</span></code> would result in two instances where the first is associated with about 1/3rd of the threads of the original instance, and the second with 2/3rds. However, for some backends each returned instance may be a copy of the original one.</p></li>
-<li><p><em>Note:</em> For <code class="docutils literal notranslate"><span class="pre">Cuda</span></code>, <code class="docutils literal notranslate"><span class="pre">HIP</span></code> and <code class="docutils literal notranslate"><span class="pre">SYCL</span></code> each newly created instance is associated with its own <em>stream</em>/<em>queue</em>.</p></li>
-</ul>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>For <code class="docutils literal notranslate"><span class="pre">Cuda</span></code>, <code class="docutils literal notranslate"><span class="pre">HIP</span></code> and <code class="docutils literal notranslate"><span class="pre">SYCL</span></code> each newly created instance is associated with its own <em>stream</em>/<em>queue</em>.</p>
+</div>
 </section>
 </section>
 <section id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading">#</a></h2>
-<section id="splitting-an-existing-instance-for-use-with-concurrent-kernels">
-<h3>Splitting an existing instance for use with concurrent kernels<a class="headerlink" href="#splitting-an-existing-instance-for-use-with-concurrent-kernels" title="Permalink to this heading">#</a></h3>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">ExecSpace</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="n">OtherParams</span><span class="o">&gt;</span>
+<p>Splitting an existing instance for use with concurrent kernels</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">ExecSpace</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="n">OtherParams</span><span class="o">&gt;</span>
 <span class="kt">void</span><span class="w"> </span><span class="n">foo</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">ExecSpace</span><span class="o">&amp;</span><span class="w"> </span><span class="n">space</span><span class="p">,</span><span class="w"> </span><span class="n">OtherParams</span><span class="p">...</span><span class="n">params</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">instances</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">partition_space</span><span class="p">(</span><span class="n">space</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span>
 <span class="w">  </span><span class="c1">// dispatch two kernels, F1 needs less resources then F2</span>
@@ -568,7 +581,6 @@ There is no implied synchronization relationship between the newly created insta
 <span class="p">}</span>
 </pre></div>
 </div>
-</section>
 </section>
 </section>
 
@@ -629,17 +641,14 @@ There is no implied synchronization relationship between the newly created insta
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">Kokkos::partition_space()</a><ul>
+<li><a class="reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">partition_space()</span></code></a><ul>
+<li><a class="reference internal" href="#usage">Usage</a></li>
 <li><a class="reference internal" href="#interface">Interface</a><ul>
-<li><a class="reference internal" href="#parameters">Parameters</a></li>
 <li><a class="reference internal" href="#requirements">Requirements</a></li>
 <li><a class="reference internal" href="#semantics">Semantics</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#examples">Examples</a><ul>
-<li><a class="reference internal" href="#splitting-an-existing-instance-for-use-with-concurrent-kernels">Splitting an existing instance for use with concurrent kernels</a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#examples">Examples</a></li>
 </ul>
 </li>
 </ul>
