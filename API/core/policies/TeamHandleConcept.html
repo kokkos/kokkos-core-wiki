@@ -473,7 +473,7 @@
         </a>
         <div class="content-icon-container">
 <div class="edit-this-page">
-  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/API/core/policies/TeamHandleConcept.md" title="Edit this page">
+  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/API/core/policies/TeamHandleConcept.rst" title="Edit this page">
     <svg aria-hidden="true" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
       <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4"></path>
@@ -497,244 +497,201 @@
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="teamhandleconcept">
+          <section id="teamhandleconcept">
 <h1><code class="docutils literal notranslate"><span class="pre">TeamHandleConcept</span></code><a class="headerlink" href="#teamhandleconcept" title="Permalink to this heading">#</a></h1>
-<p>Header File: <code class="docutils literal notranslate"><span class="pre">Kokkos_Core.hpp</span></code></p>
+<p>Header File: <code class="docutils literal notranslate"><span class="pre">&lt;Kokkos_Core.hpp&gt;</span></code></p>
 <p>TeamHandleConcept defines the concept for the <code class="docutils literal notranslate"><span class="pre">member_type</span></code> of <code class="docutils literal notranslate"><span class="pre">TeamPolicy</span></code> and <code class="docutils literal notranslate"><span class="pre">TeamTask</span></code>.
-The actual type is defined through the policies, but meets the following API requirements.
+The actual type is defined through the policies, but meets the following API.
 Note that the specific classes are only part of the public API as provided by <code class="docutils literal notranslate"><span class="pre">TeamPolicy</span></code> and
 <code class="docutils literal notranslate"><span class="pre">TeamTask</span></code> and only their parts as defined by the <code class="docutils literal notranslate"><span class="pre">TeamHandleConcept</span></code>.
 The actual name of the class, as well as potential template parameters, existing
 constructors, member functions going beyond the concept, etc., are NOT part of the public Kokkos API
 and are thus subject to change.</p>
-<section id="synopsis">
-<h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this heading">#</a></h2>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">TeamHandleConcept</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">public</span><span class="o">:</span>
-<span class="w">    </span><span class="c1">// Nested aliases</span>
-<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="n">execution_space</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="cm">/*see details in the description below*/</span><span class="p">;</span>
-<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="n">scratch_memory_space</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="cm">/*see details in the description below*/</span><span class="p">;</span>
+<section id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this heading">#</a></h2>
+<dl class="cppkokkos class">
+<dt class="sig sig-object cppkokkos" id="_CPPv417TeamHandleConcept">
+<span id="_CPPv317TeamHandleConcept"></span><span id="_CPPv217TeamHandleConcept"></span><span id="TeamHandleConcept"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TeamHandleConcept</span></span></span><a class="headerlink" href="#_CPPv417TeamHandleConcept" title="Permalink to this definition">#</a><br /></dt>
+<dd><p class="rubric">Public nested aliases</p>
+<dl class="cppkokkos type">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N17TeamHandleConcept15execution_spaceE">
+<span id="_CPPv3N17TeamHandleConcept15execution_spaceE"></span><span id="_CPPv2N17TeamHandleConcept15execution_spaceE"></span><span id="TeamHandleConcept::execution_space"></span><span class="k"></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">execution_space</span></span></span><a class="headerlink" href="#_CPPv4N17TeamHandleConcept15execution_spaceE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Specifies the <a class="reference external" href="https://kokkos.github.io/kokkos-core-wiki/API/core/execution_spaces.html">execution space</a> associated to the team</p>
+</dd></dl>
 
-<span class="w">    </span><span class="c1">// Constructor, Destructor, Assignment</span>
-<span class="w">    </span><span class="n">TeamHandleConcept</span><span class="p">(</span><span class="w"> </span><span class="n">TeamHandleConcept</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="p">;</span>
-<span class="w">    </span><span class="n">TeamHandleConcept</span><span class="p">(</span><span class="w"> </span><span class="n">TeamHandleConcept</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="p">;</span>
-<span class="w">    </span><span class="o">~</span><span class="n">TeamHandleConcept</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="p">;</span>
-<span class="w">    </span><span class="n">TeamHandleConcept</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="k">operator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">TeamHandleConcept</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="p">;</span>
-<span class="w">    </span><span class="n">TeamHandleConcept</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="k">operator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">TeamHandleConcept</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="p">;</span>
+<dl class="cppkokkos type">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N17TeamHandleConcept20scratch_memory_spaceE">
+<span id="_CPPv3N17TeamHandleConcept20scratch_memory_spaceE"></span><span id="_CPPv2N17TeamHandleConcept20scratch_memory_spaceE"></span><span id="TeamHandleConcept::scratch_memory_space"></span><span class="k"></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">scratch_memory_space</span></span></span><a class="headerlink" href="#_CPPv4N17TeamHandleConcept20scratch_memory_spaceE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>The scratch memory space associated to this team’s execution space</p>
+</dd></dl>
 
-<span class="w">    </span><span class="c1">// Indices</span>
-<span class="w">    </span><span class="n">KOKKOS_INLINE_FUNCTION</span>
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">team_rank</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">noexcept</span><span class="p">;</span>
-<span class="w">    </span><span class="n">KOKKOS_INLINE_FUNCTION</span>
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">team_size</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">noexcept</span><span class="p">;</span>
-<span class="w">    </span><span class="n">KOKKOS_INLINE_FUNCTION</span>
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">league_rank</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">noexcept</span><span class="p">;</span>
-<span class="w">    </span><span class="n">KOKKOS_INLINE_FUNCTION</span>
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">league_size</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">noexcept</span><span class="p">;</span>
+<p class="rubric">Constructors</p>
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N17TeamHandleConcept17TeamHandleConceptEv">
+<span id="_CPPv3N17TeamHandleConcept17TeamHandleConceptEv"></span><span id="_CPPv2N17TeamHandleConcept17TeamHandleConceptEv"></span><span id="TeamHandleConcept::TeamHandleConcept"></span><span class="sig-name descname"><span class="n"><span class="pre">TeamHandleConcept</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N17TeamHandleConcept17TeamHandleConceptEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Default constructor.</p>
+</dd></dl>
 
-<span class="w">    </span><span class="c1">// Scratch Space</span>
-<span class="w">    </span><span class="n">KOKKOS_INLINE_FUNCTION</span>
-<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">scratch_memory_space</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">team_shmem</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
-<span class="w">    </span><span class="n">KOKKOS_INLINE_FUNCTION</span>
-<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">scratch_memory_space</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">team_scratch</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">level</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
-<span class="w">    </span><span class="n">KOKKOS_INLINE_FUNCTION</span>
-<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">scratch_memory_space</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">thread_scratch</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">level</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N17TeamHandleConcept17TeamHandleConceptERR17TeamHandleConcept">
+<span id="_CPPv3N17TeamHandleConcept17TeamHandleConceptERR17TeamHandleConcept"></span><span id="_CPPv2N17TeamHandleConcept17TeamHandleConceptERR17TeamHandleConcept"></span><span id="TeamHandleConcept::TeamHandleConcept__TeamHandleConceptRR"></span><span class="sig-name descname"><span class="n"><span class="pre">TeamHandleConcept</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N17TeamHandleConcept17TeamHandleConceptERR17TeamHandleConcept" title="TeamHandleConcept::TeamHandleConcept"><span class="n"><span class="pre">TeamHandleConcept</span></span></a><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N17TeamHandleConcept17TeamHandleConceptERR17TeamHandleConcept" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Move constructor.</p>
+</dd></dl>
 
-<span class="w">    </span><span class="c1">// Team collectives</span>
-<span class="w">    </span><span class="n">KOKKOS_INLINE_FUNCTION</span><span class="w"> </span>
-<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">team_barrier</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">noexcept</span><span class="p">;</span>
-<span class="w">    </span><span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span>
-<span class="w">    </span><span class="n">KOKKOS_INLINE_FUNCTION</span>
-<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">team_broadcast</span><span class="p">(</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">source_team_rank</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">noexcept</span><span class="p">;</span>
-<span class="w">    </span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">Closure</span><span class="p">,</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span>
-<span class="w">    </span><span class="n">KOKKOS_INLINE_FUNCTION</span>
-<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">team_broadcast</span><span class="p">(</span><span class="w"> </span><span class="n">Closure</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">source_team_rank</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">noexcept</span><span class="p">;</span>
-<span class="w">    </span><span class="k">template</span><span class="o">&lt;</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="nc">ReducerType</span><span class="w"> </span><span class="o">&gt;</span>
-<span class="w">    </span><span class="n">KOKKOS_INLINE_FUNCTION</span>
-<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">team_reduce</span><span class="p">(</span><span class="w"> </span><span class="n">ReducerType</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">reducer</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">noexcept</span><span class="p">;</span>
-<span class="w">    </span><span class="k">template</span><span class="o">&lt;</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="nc">T</span><span class="w"> </span><span class="o">&gt;</span>
-<span class="w">    </span><span class="n">KOKKOS_INLINE_FUNCTION</span>
-<span class="w">    </span><span class="n">T</span><span class="w"> </span><span class="n">team_scan</span><span class="p">(</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">global</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">noexcept</span><span class="p">;</span>
-<span class="p">};</span>
-</pre></div>
-</div>
-</section>
-<section id="public-class-members">
-<h2>Public Class Members<a class="headerlink" href="#public-class-members" title="Permalink to this heading">#</a></h2>
-<section id="nested-aliases">
-<h3>Nested aliases<a class="headerlink" href="#nested-aliases" title="Permalink to this heading">#</a></h3>
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N17TeamHandleConcept17TeamHandleConceptERK17TeamHandleConcept">
+<span id="_CPPv3N17TeamHandleConcept17TeamHandleConceptERK17TeamHandleConcept"></span><span id="_CPPv2N17TeamHandleConcept17TeamHandleConceptERK17TeamHandleConcept"></span><span id="TeamHandleConcept::TeamHandleConcept__TeamHandleConceptCR"></span><span class="sig-name descname"><span class="n"><span class="pre">TeamHandleConcept</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N17TeamHandleConcept17TeamHandleConceptERK17TeamHandleConcept" title="TeamHandleConcept::TeamHandleConcept"><span class="n"><span class="pre">TeamHandleConcept</span></span></a><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N17TeamHandleConcept17TeamHandleConceptERK17TeamHandleConcept" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Copy constructor.</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N17TeamHandleConceptD0Ev">
+<span id="_CPPv3N17TeamHandleConceptD0Ev"></span><span id="_CPPv2N17TeamHandleConceptD0Ev"></span><span id="TeamHandleConcept::~TeamHandleConcept"></span><span class="sig-name descname"><span class="n"><span class="pre">~TeamHandleConcept</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N17TeamHandleConceptD0Ev" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Destructor.</p>
+</dd></dl>
+
+<p class="rubric">Assignment</p>
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N17TeamHandleConceptaSERR17TeamHandleConcept">
+<span id="_CPPv3N17TeamHandleConceptaSERR17TeamHandleConcept"></span><span id="_CPPv2N17TeamHandleConceptaSERR17TeamHandleConcept"></span><span id="TeamHandleConcept::assign-operator__TeamHandleConceptRR"></span><a class="reference internal" href="#_CPPv417TeamHandleConcept" title="TeamHandleConcept"><span class="n"><span class="pre">TeamHandleConcept</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">=</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv417TeamHandleConcept" title="TeamHandleConcept"><span class="n"><span class="pre">TeamHandleConcept</span></span></a><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N17TeamHandleConceptaSERR17TeamHandleConcept" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Move assignment.</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N17TeamHandleConceptaSERK17TeamHandleConcept">
+<span id="_CPPv3N17TeamHandleConceptaSERK17TeamHandleConcept"></span><span id="_CPPv2N17TeamHandleConceptaSERK17TeamHandleConcept"></span><span id="TeamHandleConcept::assign-operator__TeamHandleConceptCR"></span><a class="reference internal" href="#_CPPv417TeamHandleConcept" title="TeamHandleConcept"><span class="n"><span class="pre">TeamHandleConcept</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">=</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv417TeamHandleConcept" title="TeamHandleConcept"><span class="n"><span class="pre">TeamHandleConcept</span></span></a><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N17TeamHandleConceptaSERK17TeamHandleConcept" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Assignment operators. Returns: <code class="docutils literal notranslate"><span class="pre">*this</span></code>.</p>
+</dd></dl>
+
+<p class="rubric">Index Queries</p>
+<dl class="cppkokkos kokkosinlinefunction">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK17TeamHandleConcept9team_rankEv">
+<span id="_CPPv3NK17TeamHandleConcept9team_rankEv"></span><span id="_CPPv2NK17TeamHandleConcept9team_rankEv"></span><span id="TeamHandleConcept::team_rankC"></span><span class="k"><span class="pre">KOKKOS_INLINE_FUNCTION</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">team_rank</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4NK17TeamHandleConcept9team_rankEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Returns: the index <code class="docutils literal notranslate"><span class="pre">i</span></code> of the calling thread within the team with <code class="docutils literal notranslate"><span class="pre">0</span> <span class="pre">&lt;=</span> <span class="pre">i</span> <span class="pre">&lt;</span> <span class="pre">team_size()</span></code></p>
+</dd></dl>
+
+<dl class="cppkokkos kokkosinlinefunction">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK17TeamHandleConcept9team_sizeEv">
+<span id="_CPPv3NK17TeamHandleConcept9team_sizeEv"></span><span id="_CPPv2NK17TeamHandleConcept9team_sizeEv"></span><span id="TeamHandleConcept::team_sizeC"></span><span class="k"><span class="pre">KOKKOS_INLINE_FUNCTION</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">team_size</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4NK17TeamHandleConcept9team_sizeEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Returns: the number of threads associated with the team.</p>
+</dd></dl>
+
+<dl class="cppkokkos kokkosinlinefunction">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK17TeamHandleConcept11league_rankEv">
+<span id="_CPPv3NK17TeamHandleConcept11league_rankEv"></span><span id="_CPPv2NK17TeamHandleConcept11league_rankEv"></span><span id="TeamHandleConcept::league_rankC"></span><span class="k"><span class="pre">KOKKOS_INLINE_FUNCTION</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">league_rank</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4NK17TeamHandleConcept11league_rankEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Returns: the index <code class="docutils literal notranslate"><span class="pre">i</span></code> of the calling team within the league with <code class="docutils literal notranslate"><span class="pre">0</span> <span class="pre">&lt;=</span> <span class="pre">i</span> <span class="pre">&lt;</span> <span class="pre">league_size()</span></code></p>
+</dd></dl>
+
+<dl class="cppkokkos kokkosinlinefunction">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK17TeamHandleConcept11league_sizeEv">
+<span id="_CPPv3NK17TeamHandleConcept11league_sizeEv"></span><span id="_CPPv2NK17TeamHandleConcept11league_sizeEv"></span><span id="TeamHandleConcept::league_sizeC"></span><span class="k"><span class="pre">KOKKOS_INLINE_FUNCTION</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">league_size</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4NK17TeamHandleConcept11league_sizeEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Returns: the number of teams/workitems launched in the kernel.</p>
+</dd></dl>
+
+<p class="rubric">Scratch Space Control</p>
+<dl class="cppkokkos kokkosinlinefunction">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK17TeamHandleConcept10team_shmemEv">
+<span id="_CPPv3NK17TeamHandleConcept10team_shmemEv"></span><span id="_CPPv2NK17TeamHandleConcept10team_shmemEv"></span><span id="TeamHandleConcept::team_shmemC"></span><span class="k"><span class="pre">KOKKOS_INLINE_FUNCTION</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N17TeamHandleConcept20scratch_memory_spaceE" title="TeamHandleConcept::scratch_memory_space"><span class="n"><span class="pre">scratch_memory_space</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">team_shmem</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4NK17TeamHandleConcept10team_shmemEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Equivalent to calling <code class="docutils literal notranslate"><span class="pre">team_scratch(0)</span></code>.</p>
+</dd></dl>
+
+<dl class="cppkokkos kokkosinlinefunction">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK17TeamHandleConcept12team_scratchEi">
+<span id="_CPPv3NK17TeamHandleConcept12team_scratchEi"></span><span id="_CPPv2NK17TeamHandleConcept12team_scratchEi"></span><span id="TeamHandleConcept::team_scratch__iC"></span><span class="k"><span class="pre">KOKKOS_INLINE_FUNCTION</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N17TeamHandleConcept20scratch_memory_spaceE" title="TeamHandleConcept::scratch_memory_space"><span class="n"><span class="pre">scratch_memory_space</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">team_scratch</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">level</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4NK17TeamHandleConcept12team_scratchEi" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>This function returns a scratch memory handle shared by all threads in a team, which allows access to scratch memory.
+This handle can be given as the first argument to a <code class="docutils literal notranslate"><span class="pre">Kokkos::View</span></code> to make it use scratch memory.</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">execution_space</span></code>: specifies the <a class="reference external" href="https://kokkos.github.io/kokkos-core-wiki/API/core/execution_spaces.html">execution space</a> associated to the team</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">scratch_memory_space</span></code>: the scratch memory space associated to this team’s execution space</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">level</span></code>: The level of requested scratch memory is either <code class="docutils literal notranslate"><span class="pre">0</span></code> or <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p></li>
+<li><p>Returns: a scratch memory handle to the team shared scratch memory specified by level.</p></li>
 </ul>
-</section>
-<section id="constructors">
-<h3>Constructors<a class="headerlink" href="#constructors" title="Permalink to this heading">#</a></h3>
-<ul>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">TeamHandleConcept</span><span class="p">()</span>
-<span class="n">TeamHandleConcept</span><span class="p">(</span><span class="n">TeamHandleConcept</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="p">)</span>
-<span class="n">TeamHandleConcept</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">TeamHandleConcept</span><span class="w"> </span><span class="o">&amp;</span><span class="p">)</span>
-<span class="o">~</span><span class="n">TeamHandleConcept</span><span class="p">()</span>
-</pre></div>
-</div>
-<p>Default, move and copy constructors as well as destructor.</p>
-</li>
-</ul>
-</section>
-<section id="assignment">
-<h3>Assignment<a class="headerlink" href="#assignment" title="Permalink to this heading">#</a></h3>
-<ul>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">TeamHandleConcept</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="k">operator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">TeamHandleConcept</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Move assignment.</p>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">TeamHandleConcept</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="k">operator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">TeamHandleConcept</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Assignment operators.
-Returns: <code class="docutils literal notranslate"><span class="pre">*this</span></code>.</p>
-</li>
-</ul>
-</section>
-<section id="index-queries">
-<h3>Index Queries<a class="headerlink" href="#index-queries" title="Permalink to this heading">#</a></h3>
-<ul>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kr">inline</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">team_size</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">noexcept</span><span class="p">;</span>
-</pre></div>
-</div>
-<p>Returns: the number of threads associated with the team.</p>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kr">inline</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">team_rank</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">noexcept</span><span class="p">;</span>
-</pre></div>
-</div>
-<p>Returns: the index <code class="docutils literal notranslate"><span class="pre">i</span></code> of the calling thread within the team with <code class="docutils literal notranslate"><span class="pre">0</span> <span class="pre">&lt;=</span> <span class="pre">i</span> <span class="pre">&lt;</span> <span class="pre">team_size()</span></code></p>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kr">inline</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">league_size</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">noexcept</span><span class="p">;</span>
-</pre></div>
-</div>
-<p>Returns: the number of teams/workitems launched in the kernel.</p>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kr">inline</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">league_rank</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">noexcept</span><span class="p">;</span>
-</pre></div>
-</div>
-<p>Returns: the index <code class="docutils literal notranslate"><span class="pre">i</span></code> of the calling team within the league with <code class="docutils literal notranslate"><span class="pre">0</span> <span class="pre">&lt;=</span> <span class="pre">i</span> <span class="pre">&lt;</span> <span class="pre">league_size()</span></code></p>
-</li>
-</ul>
-</section>
-<section id="scratch-space-control">
-<h3>Scratch Space Control<a class="headerlink" href="#scratch-space-control" title="Permalink to this heading">#</a></h3>
-<ul>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kr">inline</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">scratch_memory_space</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="nf">team_scratch</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">level</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
-</pre></div>
-</div>
-<p>This function returns a scratch memory handle shared by all threads in a team,
-which allows access to scratch memory. This handle can be given as the first
-argument to a <code class="docutils literal notranslate"><span class="pre">Kokkos::View</span></code> to make it use scratch memory.</p>
+</dd></dl>
+
+<dl class="cppkokkos kokkosinlinefunction">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK17TeamHandleConcept14thread_scratchEi">
+<span id="_CPPv3NK17TeamHandleConcept14thread_scratchEi"></span><span id="_CPPv2NK17TeamHandleConcept14thread_scratchEi"></span><span id="TeamHandleConcept::thread_scratch__iC"></span><span class="k"><span class="pre">KOKKOS_INLINE_FUNCTION</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N17TeamHandleConcept20scratch_memory_spaceE" title="TeamHandleConcept::scratch_memory_space"><span class="n"><span class="pre">scratch_memory_space</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">thread_scratch</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">level</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4NK17TeamHandleConcept14thread_scratchEi" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>This function returns a scratch memory handle specific to the calling thread,
+which allows access to its private scratch memory. This handle can be given as the
+first argument to a <code class="docutils literal notranslate"><span class="pre">Kokkos::View</span></code> to make it use scratch memory.</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">level</span></code>: The level of requested scratch memory is either <code class="docutils literal notranslate"><span class="pre">0</span></code> or <code class="docutils literal notranslate"><span class="pre">1</span></code>.
-Returns: a scratch memory handle to the team shared scratch memory specified by level.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">level</span></code>: The level of requested scratch memory is either <code class="docutils literal notranslate"><span class="pre">0</span></code> or <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p></li>
+<li><p>Returns: a scratch memory handle to the thread scratch memory specified by level.</p></li>
 </ul>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kr">inline</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">scratch_memory_space</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="nf">thread_scratch</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">level</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
-</pre></div>
-</div>
-<p>This function returns a scratch memory handle specific to the calling thread,
-which allows access to its private scratch memory.
-This handle can be given as the first argument to a <code class="docutils literal notranslate"><span class="pre">Kokkos::View</span></code> to make it use
-scratch memory.</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">level</span></code>: The level of requested scratch memory is either <code class="docutils literal notranslate"><span class="pre">0</span></code> or <code class="docutils literal notranslate"><span class="pre">1</span></code>.
-Returns: a scratch memory handle to the thread scratch memory specified by level.</p></li>
-</ul>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kr">inline</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">scratch_memory_space</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="nf">team_shmem</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
-</pre></div>
-</div>
-<p>Equivalent to calling <code class="docutils literal notranslate"><span class="pre">team_scratch(0)</span></code>.</p>
-</li>
-</ul>
-</section>
-<section id="team-collective-operations">
-<h3>Team Collective Operations<a class="headerlink" href="#team-collective-operations" title="Permalink to this heading">#</a></h3>
-<p>The following functions must be called collectively by all members of a team. These
-calls must be lexically the same call, i.e. it is not legal to have some members of a team
-call a collective in one branch and the others in another branch of the code (see example).</p>
-<ul>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">team_barrier</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">noexcept</span><span class="p">;</span>
-</pre></div>
-</div>
-<p>All members of the team wait at the barrier, until the whole team arrived. This also issues
-a memory fence.</p>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span>
-<span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">team_broadcast</span><span class="p">(</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">var</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">source_team_rank</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">noexcept</span><span class="p">;</span>
-</pre></div>
-</div>
-<p>After this call <code class="docutils literal notranslate"><span class="pre">var</span></code> contains for every member of the team the value of <code class="docutils literal notranslate"><span class="pre">var</span></code> from the thread
-for which <code class="docutils literal notranslate"><span class="pre">team_rank()</span> <span class="pre">==</span> <span class="pre">source_team_rank</span></code>.</p>
+</dd></dl>
+
+<p class="rubric">Team Collective Operations</p>
+<p>The following functions must be called collectively by all members of a team.
+These calls must be lexically the same call, i.e. it is not legal to have some members of a team call
+a collective in one branch and the others in another branch of the code (see example).</p>
+<dl class="cppkokkos kokkosinlinefunction">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK17TeamHandleConcept12team_barrierEv">
+<span id="_CPPv3NK17TeamHandleConcept12team_barrierEv"></span><span id="_CPPv2NK17TeamHandleConcept12team_barrierEv"></span><span id="TeamHandleConcept::team_barrierC"></span><span class="k"><span class="pre">KOKKOS_INLINE_FUNCTION</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">team_barrier</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4NK17TeamHandleConcept12team_barrierEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>All members of the team wait at the barrier, until the whole team arrived. This also issues a memory fence.</p>
+</dd></dl>
+
+<dl class="cppkokkos kokkosinlinefunction">
+<dt class="sig sig-object cppkokkos" id="_CPPv4I0ENK17TeamHandleConcept14team_broadcastEvR1TKi">
+<span id="_CPPv3I0ENK17TeamHandleConcept14team_broadcastER1TKi"></span><span id="_CPPv2I0ENK17TeamHandleConcept14team_broadcastER1TKi"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="k"><span class="pre">KOKKOS_INLINE_FUNCTION</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">team_broadcast</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0ENK17TeamHandleConcept14team_broadcastEvR1TKi" title="TeamHandleConcept::team_broadcast::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">value</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">source_team_rank</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4I0ENK17TeamHandleConcept14team_broadcastEvR1TKi" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>After this call <code class="docutils literal notranslate"><span class="pre">var</span></code> contains for every member of the team the value of <code class="docutils literal notranslate"><span class="pre">var</span></code> from the thread for which <code class="docutils literal notranslate"><span class="pre">team_rank()</span> <span class="pre">==</span> <span class="pre">source_team_rank</span></code>.</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">var</span></code>: a variable of type <code class="docutils literal notranslate"><span class="pre">T</span></code> which gets overwritten by the value of <code class="docutils literal notranslate"><span class="pre">var</span></code> from the source rank.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">source_team_rank</span></code>: identifies the broadcasting member of the team.</p></li>
 </ul>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">Closure</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span>
-<span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">team_broadcast</span><span class="p">(</span><span class="w"> </span><span class="n">Closure</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">var</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">source_team_rank</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">noexcept</span><span class="p">;</span>
-</pre></div>
-</div>
-<p>After this call <code class="docutils literal notranslate"><span class="pre">var</span></code> contains for every member of the team the value of <code class="docutils literal notranslate"><span class="pre">var</span></code> from the thread
-for which <code class="docutils literal notranslate"><span class="pre">team_rank()</span> <span class="pre">==</span> <span class="pre">source_team_rank</span></code> after applying <code class="docutils literal notranslate"><span class="pre">f</span></code>.</p>
+</dd></dl>
+
+<dl class="cppkokkos kokkosinlinefunction">
+<dt class="sig sig-object cppkokkos" id="_CPPv4I00ENK17TeamHandleConcept14team_broadcastEvRK7ClosureR1TKi">
+<span id="_CPPv3I00ENK17TeamHandleConcept14team_broadcastERK7ClosureR1TKi"></span><span id="_CPPv2I00ENK17TeamHandleConcept14team_broadcastERK7ClosureR1TKi"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Closure</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="k"><span class="pre">KOKKOS_INLINE_FUNCTION</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">team_broadcast</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I00ENK17TeamHandleConcept14team_broadcastEvRK7ClosureR1TKi" title="TeamHandleConcept::team_broadcast::Closure"><span class="n"><span class="pre">Closure</span></span></a><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">f</span></span>, <a class="reference internal" href="#_CPPv4I00ENK17TeamHandleConcept14team_broadcastEvRK7ClosureR1TKi" title="TeamHandleConcept::team_broadcast::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">value</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">source_team_rank</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4I00ENK17TeamHandleConcept14team_broadcastEvRK7ClosureR1TKi" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>After this call <code class="docutils literal notranslate"><span class="pre">var</span></code> contains for every member of the team the value of <code class="docutils literal notranslate"><span class="pre">var</span></code> from the thread for which <code class="docutils literal notranslate"><span class="pre">team_rank()</span> <span class="pre">==</span> <span class="pre">source_team_rank</span></code> after applying <code class="docutils literal notranslate"><span class="pre">f</span></code>.</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">f</span></code>: a function object with an <code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">operator()</span> <span class="pre">(</span> <span class="pre">T</span> <span class="pre">&amp;</span> <span class="pre">)</span></code> which is applied to <code class="docutils literal notranslate"><span class="pre">var</span></code> before broadcasting it.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">var</span></code>: a variable of type <code class="docutils literal notranslate"><span class="pre">T</span></code> which gets overwritten by the value of <code class="docutils literal notranslate"><span class="pre">f(var)</span></code> from the source rank.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">source_team_rank</span></code>: identifies the broadcasting member of the team.</p></li>
 </ul>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="o">&lt;</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">ReducerType</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span>
-<span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">team_reduce</span><span class="p">(</span><span class="w"> </span><span class="n">ReducerType</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">reducer</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">noexcept</span><span class="p">;</span>
-</pre></div>
-</div>
-<p>Performs a reduction accross all members of the team as specified by <code class="docutils literal notranslate"><span class="pre">reducer</span></code>.
-<code class="docutils literal notranslate"><span class="pre">ReducerType</span></code> must meet the concept of <code class="docutils literal notranslate"><span class="pre">Kokkos::Reducer</span></code>.</p>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="o">&lt;</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="w"> </span><span class="o">&gt;</span>
-<span class="kr">inline</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">team_scan</span><span class="p">(</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">var</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">global</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="n">cosnt</span><span class="w"> </span><span class="k">noexcept</span><span class="p">;</span>
-</pre></div>
-</div>
-<p>Performs an exclusive scan over the <code class="docutils literal notranslate"><span class="pre">var</span></code> provided by the team members.
-Let <code class="docutils literal notranslate"><span class="pre">t</span> <span class="pre">=</span> <span class="pre">team_rank()</span></code> and <code class="docutils literal notranslate"><span class="pre">VALUES[t]</span></code> the value of <code class="docutils literal notranslate"><span class="pre">var</span></code> from thread <code class="docutils literal notranslate"><span class="pre">t</span></code>.
-Returns: <code class="docutils literal notranslate"><span class="pre">VALUES[0]</span> <span class="pre">+</span> <span class="pre">VALUES[1]</span> <span class="pre">+</span> </code>…<code class="docutils literal notranslate"><span class="pre">+</span> <span class="pre">VALUES[t-1]</span></code> or zero for <code class="docutils literal notranslate"><span class="pre">t==0</span></code>.</p>
+</dd></dl>
+
+<dl class="cppkokkos kokkosinlinefunction">
+<dt class="sig sig-object cppkokkos" id="_CPPv4I0ENK17TeamHandleConcept11team_reduceEvRK11ReducerType">
+<span id="_CPPv3I0ENK17TeamHandleConcept11team_reduceERK11ReducerType"></span><span id="_CPPv2I0ENK17TeamHandleConcept11team_reduceERK11ReducerType"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ReducerType</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="k"><span class="pre">KOKKOS_INLINE_FUNCTION</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">team_reduce</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0ENK17TeamHandleConcept11team_reduceEvRK11ReducerType" title="TeamHandleConcept::team_reduce::ReducerType"><span class="n"><span class="pre">ReducerType</span></span></a><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">reducer</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4I0ENK17TeamHandleConcept11team_reduceEvRK11ReducerType" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Performs a reduction accross all members of the team as specified by <code class="docutils literal notranslate"><span class="pre">reducer</span></code>. <code class="docutils literal notranslate"><span class="pre">ReducerType</span></code> must meet the concept of <code class="docutils literal notranslate"><span class="pre">Kokkos::Reducer</span></code>.</p>
+</dd></dl>
+
+<dl class="cppkokkos kokkosinlinefunction">
+<dt class="sig sig-object cppkokkos" id="_CPPv4I0ENK17TeamHandleConcept9team_scanE1TRK1TPC1T">
+<span id="_CPPv3I0ENK17TeamHandleConcept9team_scanERK1TPC1T"></span><span id="_CPPv2I0ENK17TeamHandleConcept9team_scanERK1TPC1T"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="k"><span class="pre">KOKKOS_INLINE_FUNCTION</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0ENK17TeamHandleConcept9team_scanE1TRK1TPC1T" title="TeamHandleConcept::team_scan::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">team_scan</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0ENK17TeamHandleConcept9team_scanE1TRK1TPC1T" title="TeamHandleConcept::team_scan::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">value</span></span>, <a class="reference internal" href="#_CPPv4I0ENK17TeamHandleConcept9team_scanE1TRK1TPC1T" title="TeamHandleConcept::team_scan::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">global</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4I0ENK17TeamHandleConcept9team_scanE1TRK1TPC1T" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Performs an exclusive scan over the <code class="docutils literal notranslate"><span class="pre">var</span></code> provided by the team members. Let <code class="docutils literal notranslate"><span class="pre">t</span> <span class="pre">=</span> <span class="pre">team_rank()</span></code> and <code class="docutils literal notranslate"><span class="pre">VALUES[t]</span></code> the value of <code class="docutils literal notranslate"><span class="pre">var</span></code> from thread <code class="docutils literal notranslate"><span class="pre">t</span></code>.</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">global</span></code> if provided will be set to <code class="docutils literal notranslate"><span class="pre">VALUES[0]</span> <span class="pre">+</span> <span class="pre">VALUES[1]</span> <span class="pre">+</span> </code>…<code class="docutils literal notranslate"><span class="pre">+</span> <span class="pre">VALUES[team_size()-1]</span></code>, must be the same
-pointer for every team member.</p></li>
+<li><p>Returns: <code class="docutils literal notranslate"><span class="pre">VALUES[0]</span></code> + <code class="docutils literal notranslate"><span class="pre">VALUES[1]</span></code> + <code class="docutils literal notranslate"><span class="pre">...</span></code> + <code class="docutils literal notranslate"><span class="pre">VALUES[t-1]</span></code> or zero for <code class="docutils literal notranslate"><span class="pre">t==0</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">global</span></code> if provided will be set to <code class="docutils literal notranslate"><span class="pre">VALUES[0]</span></code> + <code class="docutils literal notranslate"><span class="pre">VALUES[1]</span></code> + <code class="docutils literal notranslate"><span class="pre">...</span></code> + <code class="docutils literal notranslate"><span class="pre">VALUES[team_size()-1]</span></code>,
+must be the same pointer for every team member.</p></li>
 </ul>
-</li>
-</ul>
-</section>
+</dd></dl>
+
+</dd></dl>
+
 </section>
 <section id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading">#</a></h2>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="n">TeamPolciy</span><span class="o">&lt;</span><span class="p">...</span><span class="o">&gt;</span><span class="w"> </span><span class="n">policy_type</span><span class="p">;</span>
-<span class="n">parallel_for</span><span class="p">(</span><span class="n">policy_type</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">TEAM_SIZE</span><span class="p">).</span><span class="n">set_scratch_size</span><span class="p">(</span><span class="n">PerTeam</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">4096</span><span class="p">)),</span><span class="w"> </span>
-<span class="w">             </span><span class="n">KOKKOS_LAMBDA</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="nc">policy_type</span><span class="o">::</span><span class="n">member_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">team_handle</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="n">TeamPolciy</span><span class="o">&lt;</span><span class="p">...</span><span class="o">&gt;</span><span class="w"> </span><span class="n">policy_type</span><span class="p">;</span>
+<span class="n">parallel_for</span><span class="p">(</span><span class="n">policy_type</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">TEAM_SIZE</span><span class="p">).</span><span class="n">set_scratch_size</span><span class="p">(</span><span class="n">PerTeam</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">4096</span><span class="p">)),</span>
+<span class="w">            </span><span class="n">KOKKOS_LAMBDA</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="nc">policy_type</span><span class="o">::</span><span class="n">member_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">team_handle</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">ts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">team_handle</span><span class="p">.</span><span class="n">team_size</span><span class="p">();</span><span class="w"> </span><span class="c1">// returns TEAM_SIZE</span>
 <span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">tid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">team_handle</span><span class="p">.</span><span class="n">team_rank</span><span class="p">();</span><span class="w"> </span><span class="c1">// returns a number between 0 and TEAM_SIZE</span>
 <span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">ls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">team_handle</span><span class="p">.</span><span class="n">league_size</span><span class="p">();</span><span class="w"> </span><span class="c1">// returns N</span>
 <span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">lid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">team_handle</span><span class="p">.</span><span class="n">league_rank</span><span class="p">();</span><span class="w"> </span><span class="c1">// returns a number between 0 and N</span>
 
 <span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tid</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
-<span class="w">    </span><span class="n">team_handle</span><span class="p">.</span><span class="n">team_broadcast</span><span class="p">(</span><span class="n">value</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">);</span><span class="w"> </span>
+<span class="w">    </span><span class="n">team_handle</span><span class="p">.</span><span class="n">team_broadcast</span><span class="p">(</span><span class="n">value</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">);</span>
 <span class="w">    </span><span class="c1">// value==15 on every thread</span>
 <span class="w">    </span><span class="n">value</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">tid</span><span class="p">;</span>
-<span class="w">    </span><span class="n">team_handle</span><span class="p">.</span><span class="n">team_broadcast</span><span class="p">([</span><span class="o">&amp;</span><span class="p">]</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">var</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">var</span><span class="o">*=</span><span class="mi">2</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="n">value</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span><span class="w"> </span>
+<span class="w">    </span><span class="n">team_handle</span><span class="p">.</span><span class="n">team_broadcast</span><span class="p">([</span><span class="o">&amp;</span><span class="p">]</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">var</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">var</span><span class="o">*=</span><span class="mi">2</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="n">value</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span>
 <span class="w">    </span><span class="c1">// value==34 on every thread</span>
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">global</span><span class="p">;</span><span class="w"> </span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">global</span><span class="p">;</span>
 <span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">scan</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">team_handle</span><span class="p">.</span><span class="n">team_scan</span><span class="p">(</span><span class="n">tid</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">global</span><span class="p">);</span>
 <span class="w">    </span><span class="c1">// scan == tid*(tid+1)/2 on every thread</span>
 <span class="w">    </span><span class="c1">// global == ts*(ts-1)/2 on every thread</span>
-<span class="w">    </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">View</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="n">policy_type</span><span class="o">::</span><span class="n">execution_space</span><span class="o">::</span><span class="n">scratch_memory_type</span><span class="o">&gt;</span><span class="w"> </span>
-<span class="w">      </span><span class="n">a</span><span class="p">(</span><span class="n">team_handle</span><span class="p">.</span><span class="n">team_scratch</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span><span class="w"> </span><span class="mi">1024</span><span class="p">);</span><span class="w"> </span>
-<span class="w">    </span>
+<span class="w">    </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">View</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="n">policy_type</span><span class="o">::</span><span class="n">execution_space</span><span class="o">::</span><span class="n">scratch_memory_type</span><span class="o">&gt;</span>
+<span class="w">    </span><span class="n">a</span><span class="p">(</span><span class="n">team_handle</span><span class="p">.</span><span class="n">team_scratch</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span><span class="w"> </span><span class="mi">1024</span><span class="p">);</span>
+
 <span class="p">});</span>
 </pre></div>
 </div>
@@ -799,16 +756,7 @@ pointer for every team member.</p></li>
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">TeamHandleConcept</span></code></a><ul>
-<li><a class="reference internal" href="#synopsis">Synopsis</a></li>
-<li><a class="reference internal" href="#public-class-members">Public Class Members</a><ul>
-<li><a class="reference internal" href="#nested-aliases">Nested aliases</a></li>
-<li><a class="reference internal" href="#constructors">Constructors</a></li>
-<li><a class="reference internal" href="#assignment">Assignment</a></li>
-<li><a class="reference internal" href="#index-queries">Index Queries</a></li>
-<li><a class="reference internal" href="#scratch-space-control">Scratch Space Control</a></li>
-<li><a class="reference internal" href="#team-collective-operations">Team Collective Operations</a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#description">Description</a></li>
 <li><a class="reference internal" href="#examples">Examples</a></li>
 </ul>
 </li>
