@@ -565,10 +565,21 @@ If the view is also <code class="docutils literal notranslate"><span class="pre"
 <section id="enums">
 <h3>Enums<a class="headerlink" href="#enums" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">rank</span></code>: rank of the view (i.e. the dimensionality).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">rank_dynamic</span></code>: number of runtime determined dimensions.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rank</span></code>: rank of the view (i.e. the dimensionality) <strong>(until Kokkos 4.1)</strong></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rank_dynamic</span></code>: number of runtime determined dimensions <strong>(until Kokkos 4.1)</strong></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">reference_type_is_lvalue_reference</span></code>: whether the reference type is a C++ lvalue reference.</p></li>
 </ul>
+<p><strong>(since Kokkos 4.1)</strong> <code class="docutils literal notranslate"><span class="pre">rank</span></code> and <code class="docutils literal notranslate"><span class="pre">rank_dynamic</span></code> are static member constants that are convertible to <code class="docutils literal notranslate"><span class="pre">size_t</span></code>.
+Their underlying types are unspecified, but equivalent to <code class="docutils literal notranslate"><span class="pre">std::integral_constant</span></code> with a nullary
+member function callable from host and device side.
+Users are encouraged to use <code class="docutils literal notranslate"><span class="pre">rank()</span></code> and <code class="docutils literal notranslate"><span class="pre">rank_dynamic()</span></code> (akin to a static member function call)
+instead of relying on implicit conversion to an integral type.</p>
+<p>The actual type of <code class="docutils literal notranslate"><span class="pre">rank[_dymanic]</span></code> as it was defined until Kokkos 4.1 was left up to the implementation
+(that is, up to the compiler not to Kokkos) but in practice it was often <code class="docutils literal notranslate"><span class="pre">int</span></code> which means
+this change may yield warnings about comparing signed and unsigned integral types.
+It may also break code that was using the type of <code class="docutils literal notranslate"><span class="pre">View::rank</span></code>.
+Furthermore, it appears that MSVC has issues with the implicit conversion to
+<code class="docutils literal notranslate"><span class="pre">size_t</span></code> in certain constexpr contexts. Calling <code class="docutils literal notranslate"><span class="pre">rank()</span></code> or <code class="docutils literal notranslate"><span class="pre">rank_dynamic()</span></code> will work in those cases.</p>
 </section>
 <section id="typedefs">
 <h3>Typedefs<a class="headerlink" href="#typedefs" title="Permalink to this heading">#</a></h3>
@@ -878,6 +889,21 @@ See notes on <code class="docutils literal notranslate"><span class="pre">refere
 </section>
 <section id="data-layout-dimensions-strides">
 <h3>Data Layout, Dimensions, Strides<a class="headerlink" href="#data-layout-dimensions-strides" title="Permalink to this heading">#</a></h3>
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv44rankv">
+<span id="_CPPv34rankv"></span><span id="_CPPv24rankv"></span><span id="rankCE"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">rank</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv44rankv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p><strong>since Kokkos 4.1</strong>: Returns the rank of the view.</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv412rank_dynamicv">
+<span id="_CPPv312rank_dynamicv"></span><span id="_CPPv212rank_dynamicv"></span><span id="rank_dynamicCE"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">rank_dynamic</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv412rank_dynamicv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p><strong>since Kokkos 4.1</strong>: Returns the number of runtime determined dimensions.</p>
+</dd></dl>
+
+<p>Note: in practice, <code class="docutils literal notranslate"><span class="pre">rank()</span></code> and <code class="docutils literal notranslate"><span class="pre">rank_dynamic()</span></code> are not actually
+implemented as static member functions but <code class="docutils literal notranslate"><span class="pre">rank</span></code> and <code class="docutils literal notranslate"><span class="pre">rank_dynamic</span></code> underlying
+types have a nullary member function (i.e. callable with no argument).</p>
 <dl class="cppkokkos function">
 <dt class="sig sig-object cppkokkos" id="_CPPv4NK6layoutEv">
 <span id="_CPPv3NK6layoutEv"></span><span id="_CPPv2NK6layoutEv"></span><span id="layoutCCE"></span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><a class="reference internal" href="layoutStride.html#_CPPv412array_layout" title="array_layout"><span class="n"><span class="pre">array_layout</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">layout</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6layoutEv" title="Permalink to this definition">#</a><br /></dt>
