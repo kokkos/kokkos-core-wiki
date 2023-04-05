@@ -1,5 +1,5 @@
-``ParallelReduceTag()``
-=======================
+``ParallelReduceTag``
+=====================
 
 .. role::cpp(code)
     :language: cpp

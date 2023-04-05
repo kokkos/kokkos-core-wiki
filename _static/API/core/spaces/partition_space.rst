@@ -2,8 +2,8 @@
 .. role:: cppkokkos(code)
    :language: cppkokkos
 
-``partition_space()``
-=====================
+``partition_space``
+===================
 
 Header file: ``<Kokkos_Core.hpp>``
 

@@ -1,5 +1,5 @@
-``ParallelScanTag()``
-=====================
+``ParallelScanTag``
+===================
 
 .. role::cpp(code)
     :language: cpp

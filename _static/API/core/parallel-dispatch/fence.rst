@@ -1,5 +1,5 @@
-``fence()``
-===========
+``fence``
+=========
 
 .. role::cpp(code)
     :language: cpp

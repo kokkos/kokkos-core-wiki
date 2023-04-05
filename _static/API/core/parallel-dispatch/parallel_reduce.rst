@@ -1,5 +1,5 @@
-``parallel_reduce()``
-=====================
+``parallel_reduce``
+===================
 
 .. role::cpp(code)
     :language: cpp

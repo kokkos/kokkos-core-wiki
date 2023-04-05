@@ -1,5 +1,5 @@
-``ParallelForTag()``
-====================
+``ParallelForTag``
+==================
 
 .. role::cpp(code)
     :language: cpp
