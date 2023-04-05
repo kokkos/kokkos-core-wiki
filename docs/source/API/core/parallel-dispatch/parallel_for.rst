@@ -1,5 +1,5 @@
-``parallel_for()``
-==================
+``parallel_for``
+================
 
 .. role::cpp(code)
     :language: cpp
