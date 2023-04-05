@@ -1,5 +1,5 @@
-``view_alloc()``
-================
+``view_alloc``
+==============
 
 .. role:: cppkokkos(code)
    :language: cppkokkos
