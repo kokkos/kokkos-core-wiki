@@ -71,7 +71,7 @@ Enable Options
 ===============
 
 .. list-table::
-    :widths: 25 65 10
+    :widths: 25 65 35
     :header-rows: 1
     :align: left
 
