@@ -381,7 +381,7 @@ Notes
 * ``round``, ``logb``, ``nextafter``, ``copysign``, and ``signbit`` are available since version 3.7
 * three-argument version of ``hypot`` is available since 4.0
 * ``fma`` is available since 4.0
-* Beware the using-directives ``using namespace Kokkos;`` will cause
+* Beware the using-directive ``using namespace Kokkos;`` will cause
   compilation errors with unqualified calls to math functions.  Use explicit
   qualification (``Kokkos::sqrt``) or using-declaration (``using
   Kokkos::sqrt;``) instead.  (See |KnownIssues|_)

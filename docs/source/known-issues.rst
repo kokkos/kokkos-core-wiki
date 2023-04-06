@@ -37,7 +37,7 @@ Mathematical functions
 .. |Compatibility| replace:: Kokkos compatibility guidelines
 
 The using-directive ``using namespace Kokkos;`` is highly discouraged (see
-|Compatibility|_) and will cause compileation errors in presence of unqualified
+|Compatibility|_) and will cause compilation errors in presence of unqualified
 calls to mathematical functions.  Instead, prefer explicit qualification
 ``Kokkos::sqrt`` or an using-declaration ``using Kokkos::sqrt;`` at local
 scope.
