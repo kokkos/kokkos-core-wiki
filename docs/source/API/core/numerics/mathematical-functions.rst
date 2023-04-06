@@ -372,11 +372,19 @@ Notes
 
 .. |issue4767| replace:: **Issue #4767**
 
+.. _KnownIssues: ../../known-issues.html
+
+.. |KnownIssues| replace:: known issues
+
 * **Feel free to** |openIssue|_ **if you need one of the functions that is currently not implemented.** |issue4767|_ **is keeping track of these and has notes about implementability.**
 * ``nearbyint`` is not available with the SYCL backend
 * ``round``, ``logb``, ``nextafter``, ``copysign``, and ``signbit`` are available since version 3.7
 * three-argument version of ``hypot`` is available since 4.0
 * ``fma`` is available since 4.0
+* Beware the using-directives ``using namespace Kokkos;`` will cause
+  compilation errors with unqualified calls to math functions.  Use explicit
+  qualification (``Kokkos::sqrt``) or using-declaration (``using
+  Kokkos::sqrt;``) instead.  (See |KnownIssues|_)
 
 ------------
 
