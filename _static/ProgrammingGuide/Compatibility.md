@@ -2,7 +2,7 @@
 
 For a sufficiently clever user, effectively any change we make to Kokkos will be a breaking change. The intent of this document is to make it clear about what does and does not constitute supported use of Kokkos, as well as how Kokkos moves forward.
 
-There is a tension between the freedom to make improvements and backwards compatability.  We are presenting a set of rules that both allows the Kokkos Team to make improvements going forward while maintaining a high level of backwards compatibility (which avoids frustration and pain on the part of users).  While we do not deliberately set out to break users, we'd like to minimize accidental breakage while still allowing the Kokkos Team a good path forward.
+There is a tension between the freedom to make improvements and backward compatibility.  We are presenting a set of rules that allows the Kokkos Team to make improvements going forward while maintaining a high level of backward compatibility (which avoids frustration and pain on the part of users).  While we do not deliberately set out to break users, we'd like to minimize accidental breakage while still allowing the Kokkos Team a good path forward.
 
 Unless we document otherwise, please:
 
