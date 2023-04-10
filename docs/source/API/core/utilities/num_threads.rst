@@ -33,4 +33,4 @@ host backend.
 
 |initialize|_: initializes the Kokkos execution environment
 
-|InitializationSettings|_: settings for intializing Kokkos
+|InitializationSettings|_: settings for initializing Kokkos

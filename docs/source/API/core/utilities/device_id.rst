@@ -33,4 +33,4 @@ backend or ``-1`` if only host backends are enabled.
 
 |initialize|_: initializes the Kokkos execution environment
 
-|InitializationSettings|_: settings for intializing Kokkos
+|InitializationSettings|_: settings for initializing Kokkos
