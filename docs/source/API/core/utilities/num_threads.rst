@@ -10,8 +10,7 @@ Defined in header ``<Kokkos_Core.hpp>``
 
     [[nodiscard]] int num_threads() noexcept;
 
-Returns the number of concurrent threads that are used by the Kokkos default
-host backend.
+Returns the number of concurrent threads that are used by ``DefaultHostExecutionSpace``.
 
 ----
 

@@ -10,8 +10,8 @@ Defined in header ``<Kokkos_Core.hpp>``
 
     [[nodiscard]] int device_id() noexcept;
 
-Returns the device id of the device that is used by the Kokkos default device
-backend or ``-1`` if only host backends are enabled.
+Returns the id of the device that is used by ``DefaultExecutionSpace`` or
+``-1`` if only host backends are enabled.
 
 ----
 
