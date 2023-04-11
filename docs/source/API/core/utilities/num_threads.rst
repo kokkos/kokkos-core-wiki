@@ -1,5 +1,5 @@
 ``Kokkos::num_threads``
-======================
+=======================
 
 .. role:: cppkokkos(code)
     :language: cppkokkos
