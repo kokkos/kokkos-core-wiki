@@ -4,11 +4,11 @@ Deprecation for Kokkos-3.x
 Public Headers in Kokkos-3.7 
 ----------------------------
 
-Starting from Kokkos-3.7, the following are *public* headers:
+From Kokkos-3.7, the following are *public* headers:
 
-Core Library 
+Core Library
 ~~~~~~~~~~~~
-``Kokkos_core.cpp``, ``Kokkos_Macros.hpp``, ``Kokkos_Atomic.hpp``, ``Kokkos_DetectionIdiom``, ``Kokkos_MathematicalConstants.hpp``, ``Kokkos_MathematicalFunctions.hpp``, ``Kokkos_NumericTraits.hpp``, ``Kokkos_Array.hpp``, ``Kokkos_Complex.hpp``, ``Kokkos_Pair.hpp``, ``Kokkos_Half.hpp``, ``Kokkos_Timer.hpp``
+``Kokkos_Core.hpp``, ``Kokkos_Macros.hpp``, ``Kokkos_Atomic.hpp``, ``Kokkos_DetectionIdiom.hpp``, ``Kokkos_MathematicalConstants.hpp``, ``Kokkos_MathematicalFunctions.hpp``, ``Kokkos_NumericTraits.hpp``, ``Kokkos_Array.hpp``, ``Kokkos_Complex.hpp``, ``Kokkos_Pair.hpp``, ``Kokkos_Half.hpp``, ``Kokkos_Timer.hpp``
 
 Algorithms Library
 ~~~~~~~~~~~~~~~~~~
@@ -40,50 +40,47 @@ Free-functions deprecated in Kokkos-3.7
    * - Name 
      - Where
 
-   * - .. code-block:: cpp
-
-          static void partition_master(F const& f, 
-                                      int requested_num_partitions = 0, 
-                                      int requested_partition_size = 0)
-     - TBD
-
    * - .. code-block:: cpp 
 
-          std::vector<OpenMP> OpenMP::partition(...) { 
+          std::vector<OpenMP> OpenMP::partition(...) {
             return std::vector<OpenMP>(1); 
           }
 
      - OpenMP
 
-   * - .. code-block:: cpp 
+   * - .. code-block:: cpp
 
-          OpenMP OpenMP::create_instance(...) { 
+          OpenMP OpenMP::create_instance(...) {
             return OpenMP(); 
           }
 
      - OpenMP
 
-   * - .. code-block:: cpp 
+   * - .. code-block:: cpp
 
-          static void validate_partition(const int nthreads, 
-                                         int& num_partitions, 
-                                         int& partition_size)
+          void OpenMP::partition_master(F const& f,
+                                        int num_partitions,
+                                        int partition_size)
 
-     - TBD
+     - OpenMP (Kokkos_OpenMP_Instance.hpp)
 
    * - .. code-block:: cpp
 
-          void OpenMP::partition_master(F const& f, 
-                                        int num_partitions, 
-                                        int partition_size)
+          void Experimental::HIPSpace::access_error()
 
-     - OpenMP
+     - ``namespace Kokkos`` (Kokkos_HIP_Space.cpp)
 
-   * - .. code-block:: cpp 
+   * - .. code-block:: cpp
 
-          partition(...), partition_master() 
+          void Experimental::HIPSpace::access_error(const void* const)
 
-     - HPX backend
+     - ``namespace Kokkos`` (Kokkos_HIP_Space.cpp)
+
+   * - ..  code-block:: cpp
+
+           inline void hip_internal_safe_call_deprecated
+
+     - ``namespace Kokkos::Impl`` (Kokkos_HIP_Error.hpp)
 
 
 Member functions deprecated in Kokkos-3.7
@@ -96,44 +93,43 @@ Member functions deprecated in Kokkos-3.7
    * - Method name
      - Class
 
+   * - ``static void partition_master(F const& f,
+                                      int requested_num_partitions = 0,
+                                      int requested_partition_size = 0)``
+     - ``class OpenMP`` (Kokkos_OpenMP.hpp)
+
+   * - ``static void validate_partition(const int nthreads,
+                                         int& num_partitions,
+                                         int& partition_size)``
+
+     - ``class OpenMPInternal`` (Kokkos_OpenMP_Instance.hpp)
+
    * - ``std::string getName() { return secName; }``
-     - TBD
+     - ``class ProfilingSection`` (Kokkos_Profiling_ProfileSection.hpp)
 
    * - ``uint32_t getSectionID() { return secID; }``
-     - TBD
+     - ``class ProfilingSection`` (Kokkos_Profiling_ProfileSection.hpp)
+
+   * - ``: secName(sectionName)`` 
+     - ``class ProfilingSection`` (Kokkos_Profiling_ProfileSection.hpp
 
    * - ``vector_length() const``
-     - TBD
+     - ``class TeamPolicyInternal`` (Kokkos_HIP_Parallel_Team.hpp, Kokkos_SYCL_Parallel_Team.hpp)
 
    * - ``inline int vector_length() const``
-     - TBD
-
-   * - ``void CudaSpace::access_error()``
-     - TBD
-
-   * - ``int CudaUVMSpace::number_of_allocations()``
-     - TBD
+     - ``class TeamPolicyInternal`` (Kokkos_OpenMPTarget_Exec.hpp, Kokkos_Cuda_Parallel_Team.hpp)
 
    * - ``static void access_error();``
-     - TBD
+     - ``class CudaSpace`` (Kokkos_CudaSpace.hpp), ``class HIPSpace`` (Kokkos_HIP_Space.hpp)
 
    * - ``static void access_error(const void* const);``
-     - TBD
+     - ``class CudaSpace`` (Kokkos_CudaSpace.hpp), ``class HIPSpace`` (Kokkos_HIP_Space.hpp)
 
    * - ``static int number_of_allocations();``
-     - TBD
+     - ``class CudaUVMSpace`` (Kokkos_CudaSpace.hpp)
 
-   * - ``void Experimental::HIPSpace::access_error()``
-     - TBD
-
-   * - ``void Experimental::HIPSpace::access_error(const void* const)``
-     - TBD
-
-   * - ``inline void hip_internal_safe_call_deprecated``
-     - TBD
-
-   * - ``: secName(sectionName)`` in ``class ProfilingSection``
-     - TBD
+   * - ``partition(...), partition_master()`` 
+     - ``class HPX`` (Kokkos_HPX.hpp)
 
 
 Classes deprecated in Kokkos-3.7
@@ -174,26 +170,6 @@ Namespace replacements
 
    * - ``Kokkos::Experimental::minmax``
      - ``namespace Kokkos``
-
-
-Tests removed
--------------
-
-.. list-table::  
-   :widths: auto
-   :header-rows: 1
-
-   * - 
-
-   * - Test reduction of a pointer to a 1D array ``parallel_reduce(range, functor, sums_ptr)``
-
-   * - ``void take_initialization_settings(Kokkos::InitializationSettings const&) {}``
-
-   * - Test scalar result in host pointer in ``parallel_reduce`` ``(ASSERT_EQ(host_result(j), (ScalarType)correct);``
-
-   * - ``Kokkos::parallel_reduce(policy, ReducerWithJoinThatTakesVolatileQualifiedArgs{}, result);``
-
-   * - ``TEST(openmp, partition_master)``
 
 
 Other deprecations
@@ -240,9 +216,6 @@ Other deprecations
    * - ``create_mirror_view`` taking ``WithOutInitializing`` as first argument
      - ``create_mirror_view(Kokkos::Impl::WithoutInitializing_t wi, Kokkos::View<T, P...> const& v)``
 
-   * - ``constexpr``
-     - Remove specifier
-
    * - ``#define KOKKOS_THREAD_LOCAL`` macro
      - ``thread_local``
 
@@ -257,16 +230,3 @@ Other deprecations
 
    * - ``parallel_*`` overloads taking the label as trailing argument
      - ``Kokkos::parallel_*("KokkosViewLabel", policy, f);``
-
-
-
-
-
-
-
-
-
-
-
-
-
