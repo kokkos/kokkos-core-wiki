@@ -71,7 +71,7 @@ Enable Options
 ===============
 
 .. list-table::
-    :widths: 25 65 10
+    :widths: 25 65 35
     :header-rows: 1
     :align: left
 
@@ -93,7 +93,7 @@ Enable Options
 
     * * ``Kokkos_ENABLE_CUDA_LAMBDA``
       * Activate experimental lambda features
-      * ``OFF``
+      * (see below)
 
     * * ``Kokkos_ENABLE_CUDA_LDG_INTRINSIC``
       * Use CUDA LDG intrinsics
@@ -146,6 +146,9 @@ Enable Options
     * * ``Kokkos_ENABLE_TESTS``
       * Build tests
       * ``OFF``
+       
+
+``Kokkos_ENABLE_CUDA_LAMBDA`` default value is ``OFF`` until 3.7 and ``ON`` since 4.0
 
 .. _keywords_tpls:
 
