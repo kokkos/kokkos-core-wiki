@@ -1,22 +1,6 @@
 Deprecation for Kokkos-3.x
 ==========================
 
-Public Headers in Kokkos-3.7 
-----------------------------
-
-From Kokkos-3.7, the following are *public* headers:
-
-Core Library
-~~~~~~~~~~~~
-``Kokkos_Core.hpp``, ``Kokkos_Macros.hpp``, ``Kokkos_Atomic.hpp``, ``Kokkos_DetectionIdiom.hpp``, ``Kokkos_MathematicalConstants.hpp``, ``Kokkos_MathematicalFunctions.hpp``, ``Kokkos_NumericTraits.hpp``, ``Kokkos_Array.hpp``, ``Kokkos_Complex.hpp``, ``Kokkos_Pair.hpp``, ``Kokkos_Half.hpp``, ``Kokkos_Timer.hpp``
-
-Algorithms Library
-~~~~~~~~~~~~~~~~~~
-``Kokkos_StdAlgorithms.hpp``, ``Kokkos_Random.hpp``, ``Kokkos_Sort.hpp``
-
-Containers Library
-~~~~~~~~~~~~~~~~~~
-``Kokkos_Bit.hpp``, ``Kokkos_DualView.hpp``, ``Kokkos_DynRankView.hpp``, ``Kokkos_ErrorReporter.hpp``, ``Kokkos_Functional.hpp``, ``Kokkos_OffsetView.hpp``, ``Kokkos_ScatterView.hpp``, ``Kokkos_StaticCrsGraph.hpp``, ``Kokkos_UnorderedMap.hpp``, ``Kokkos_Vector.hpp``   
 
 
 Type aliases deprecated in Kokkos-3.7
@@ -146,7 +130,7 @@ Classes deprecated in Kokkos-3.7
    * - ``class KOKKOS_ATTRIBUTE_NODISCARD ScopeGuard``
 
 
-Namespace replacements
+Namespace updates
 ----------------------
 
 .. list-table::  
@@ -230,3 +214,21 @@ Other deprecations
 
    * - ``parallel_*`` overloads taking the label as trailing argument
      - ``Kokkos::parallel_*("KokkosViewLabel", policy, f);``
+
+
+Public Headers in Kokkos-3.7 
+----------------------------
+
+From Kokkos-3.7, the following are *public* headers:
+
+Core
+~~~~~~~~~~~~
+``Kokkos_Core.hpp``, ``Kokkos_Macros.hpp``, ``Kokkos_Atomic.hpp``, ``Kokkos_DetectionIdiom.hpp``, ``Kokkos_MathematicalConstants.hpp``, ``Kokkos_MathematicalFunctions.hpp``, ``Kokkos_NumericTraits.hpp``, ``Kokkos_Array.hpp``, ``Kokkos_Complex.hpp``, ``Kokkos_Pair.hpp``, ``Kokkos_Half.hpp``, ``Kokkos_Timer.hpp``
+
+Algorithms
+~~~~~~~~~~~~~~~~~~
+``Kokkos_StdAlgorithms.hpp``, ``Kokkos_Random.hpp``, ``Kokkos_Sort.hpp``
+
+Containers
+~~~~~~~~~~~~~~~~~~
+``Kokkos_Bit.hpp``, ``Kokkos_DualView.hpp``, ``Kokkos_DynRankView.hpp``, ``Kokkos_ErrorReporter.hpp``, ``Kokkos_Functional.hpp``, ``Kokkos_OffsetView.hpp``, ``Kokkos_ScatterView.hpp``, ``Kokkos_StaticCrsGraph.hpp``, ``Kokkos_UnorderedMap.hpp``, ``Kokkos_Vector.hpp``   
