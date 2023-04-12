@@ -14,7 +14,6 @@ This page is organized in four sections:
 
 - :ref:`keywords_backends`
 - :ref:`keywords_enable_options`
-- :ref:`keywords_enable_other_options`
 - :ref:`keywords_tpls`
 - :ref:`keywords_arch`
 
