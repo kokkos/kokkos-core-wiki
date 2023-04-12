@@ -77,42 +77,37 @@ Member functions deprecated in Kokkos-3.7
    * - Method name
      - Class
 
-   * - ``static void partition_master(F const& f,
-                                      int requested_num_partitions = 0,
-                                      int requested_partition_size = 0)``
+   * - ``static void OpenMP::partition_master()``
      - ``class OpenMP`` (Kokkos_OpenMP.hpp)
 
-   * - ``static void validate_partition(const int nthreads,
-                                         int& num_partitions,
-                                         int& partition_size)``
-
+   * - ``static void OpenMPInternal::validate_partition()``
      - ``class OpenMPInternal`` (Kokkos_OpenMP_Instance.hpp)
 
-   * - ``std::string getName() { return secName; }``
+   * - ``std::string ProfilingSection::getName() { return secName; }``
      - ``class ProfilingSection`` (Kokkos_Profiling_ProfileSection.hpp)
 
-   * - ``uint32_t getSectionID() { return secID; }``
+   * - ``uint32_t ProfilingSection::getSectionID() { return secID; }``
      - ``class ProfilingSection`` (Kokkos_Profiling_ProfileSection.hpp)
 
-   * - ``: secName(sectionName)`` 
+   * - ``ProfilingSection:: : secName(sectionName)`` 
      - ``class ProfilingSection`` (Kokkos_Profiling_ProfileSection.hpp
 
-   * - ``vector_length() const``
+   * - ``int TeamPolicyInternal::vector_length() const``
      - ``class TeamPolicyInternal`` (Kokkos_HIP_Parallel_Team.hpp, Kokkos_SYCL_Parallel_Team.hpp)
 
-   * - ``inline int vector_length() const``
+   * - ``inline int TeamPolicyInternal::vector_length() const``
      - ``class TeamPolicyInternal`` (Kokkos_OpenMPTarget_Exec.hpp, Kokkos_Cuda_Parallel_Team.hpp)
 
-   * - ``static void access_error();``
+   * - ``static void CudaSpace::access_error();``
      - ``class CudaSpace`` (Kokkos_CudaSpace.hpp), ``class HIPSpace`` (Kokkos_HIP_Space.hpp)
 
-   * - ``static void access_error(const void* const);``
+   * - ``static void CudaSpace::access_error(const void* const);``
      - ``class CudaSpace`` (Kokkos_CudaSpace.hpp), ``class HIPSpace`` (Kokkos_HIP_Space.hpp)
 
-   * - ``static int number_of_allocations();``
+   * - ``static int CudaUVMSpace::number_of_allocations();``
      - ``class CudaUVMSpace`` (Kokkos_CudaSpace.hpp)
 
-   * - ``partition(...), partition_master()`` 
+   * - ``HPX::partition(...), HPX::partition_master()`` 
      - ``class HPX`` (Kokkos_HPX.hpp)
 
 
@@ -141,19 +136,19 @@ Namespace updates
      - You should now use
  
    * - ``Kokkos::Experimental::aMathFunction``
-     - ``namespace Kokkos``
+     - ``Kokkos::aMathFunction``
 
    * - ``Kokkos::Experimental::clamp``
-     - ``namespace Kokkos``
+     - ``Kokkos::clamp``
 
    * - ``Kokkos::Experimental::max;``
-     - ``namespace Kokkos``
+     - ``Kokkos::max``
 
    * - ``Kokkos::Experimental::min``
-     - ``namespace Kokkos``
+     - ``Kokkos::min``
 
    * - ``Kokkos::Experimental::minmax``
-     - ``namespace Kokkos``
+     - ``Kokkos::minmax``
 
 
 Other deprecations
@@ -180,12 +175,6 @@ Other deprecations
 
    * - Raise deprecation warnings if non-empty WorkTag class is used
      - Use empty WorkTag class
-
-   * - ``!std::is_empty<typename base_t::work_tag>::value && !std::is_void<typename base_t::work_tag>::value``
-     - Remove condition
-
-   * - ``const std::string secName``
-     - Remove variable
 
    * - ``InitArguments`` struct
      - ``InitializationSettings()`` class object with query-able attributes
