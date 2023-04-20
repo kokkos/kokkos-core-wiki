@@ -5,7 +5,7 @@ Deprecation for Kokkos-3.x
 
 Type aliases deprecated in Kokkos-3.7
 -------------------------------------
-``ActiveExecutionMemorySpace``, ``ActiveExecutionMemorySpace``, ``is_array_layout``, ``is_execution_policy``, ``is_execution_space``, ``is_memory_space``, ``is_memory_traits``, ``host_memory_space``, ``host_execution_space``, ``host_mirror_space``, ``is_space``, ``SpaceAccessibility``, ``ActiveExecutionMemorySpace``, ``ActiveExecutionMemorySpace``, ``ActiveExecutionMemorySpace``, ``Iterate``, ``MDRangePolicy``, ``Rank``
+``ActiveExecutionMemorySpace``, ``host_execution_space``, ``host_memory_space``, ``host_mirror_space``,``is_array_layout``, ``is_execution_policy``, ``is_execution_space``, ``is_memory_space``, ``is_memory_traits``, ``is_space``, ``Iterate``, ``MDRangePolicy``, ``Rank``, ``SpaceAccessibility``
 
 
 Macros deprecated in Kokkos-3.7
@@ -26,17 +26,13 @@ Free-functions deprecated in Kokkos-3.7
 
    * - .. code-block:: cpp 
 
-          std::vector<OpenMP> OpenMP::partition(...) {
-            return std::vector<OpenMP>(1); 
-          }
+          std::vector<OpenMP> OpenMP::partition(...)
 
      - OpenMP
 
    * - .. code-block:: cpp
 
-          OpenMP OpenMP::create_instance(...) {
-            return OpenMP(); 
-          }
+          OpenMP OpenMP::create_instance(...)
 
      - OpenMP
 
@@ -83,14 +79,11 @@ Member functions deprecated in Kokkos-3.7
    * - ``static void OpenMPInternal::validate_partition()``
      - ``class OpenMPInternal`` (Kokkos_OpenMP_Instance.hpp)
 
-   * - ``std::string ProfilingSection::getName() { return secName; }``
+   * - ``std::string ProfilingSection::getName()``
      - ``class ProfilingSection`` (Kokkos_Profiling_ProfileSection.hpp)
 
-   * - ``uint32_t ProfilingSection::getSectionID() { return secID; }``
+   * - ``uint32_t ProfilingSection::getSectionID()``
      - ``class ProfilingSection`` (Kokkos_Profiling_ProfileSection.hpp)
-
-   * - ``ProfilingSection:: : secName(sectionName)`` 
-     - ``class ProfilingSection`` (Kokkos_Profiling_ProfileSection.hpp
 
    * - ``int TeamPolicyInternal::vector_length() const``
      - ``class TeamPolicyInternal`` (Kokkos_HIP_Parallel_Team.hpp, Kokkos_SYCL_Parallel_Team.hpp)
