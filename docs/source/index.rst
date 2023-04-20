@@ -92,7 +92,7 @@ Website Content
    ./API/algorithms-index
    ./API/simd-index
    ./API/alphabetical
-   DeprecationPage
+   deprecation_page
    known-issues
    usecases
    testing-and-issue-tracking
