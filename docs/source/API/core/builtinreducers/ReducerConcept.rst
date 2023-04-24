@@ -95,7 +95,7 @@ Functions
 Requirements
 ~~~~~~~~~~~~
 
-The reducer is assumend to define a commutative monoid with respect to the value type it is used with, i.e., the binary operation
+The reducer is assumed to define a commutative monoid with respect to the value type it is used with, i.e., the binary operation
 
 .. code-block:: cpp
 
