@@ -31,8 +31,7 @@ ImplMirrorType create_mirror(decltype(Kokkos::ViewAllocateWithoutInitializing())
                              Space const& space, ViewType const&);
 
 template <class ViewType, class... ViewCtorArgs>
-auto create_mirror(Impl::ViewCtorProp<ViewCtorArgs...> const& arg_prop,
-                   ViewType const& v);
+auto create_mirror(/* is-alloc-prop */ const& arg_prop, ViewType const& v);
 
 template <class ViewType>
 typename ViewType::HostMirror create_mirror_view(ViewType const&);
@@ -49,15 +48,13 @@ ImplMirrorType create_mirror_view(decltype(Kokkos::ViewAllocateWithoutInitializi
                                   Space const& space, ViewType const&);
 
 template <class ViewType, class... ViewCtorArgs>
-auto create_mirror_view(Impl::ViewCtorProp<ViewCtorArgs...> const& arg_prop,
-                        ViewType const& v);
+auto create_mirror_view(/* is-alloc-prop */ const& arg_prop, ViewType const& v);
 
 template <class Space, class ViewType>
 ImplMirrorType create_mirror_view_and_copy(Space const& space, ViewType const&);
 
 template <class ViewType, class... ViewCtorArgs>
-auto create_mirror_view_and_copy(Impl::ViewCtorProp<ViewCtorArgs...> const& arg_prop,
-                                 ViewType const& v);
+auto create_mirror_view_and_copy(/* is-alloc-prop */ const& arg_prop, ViewType const& v);
 ```
 
 
@@ -99,8 +96,7 @@ auto create_mirror_view_and_copy(Impl::ViewCtorProp<ViewCtorArgs...> const& arg_
 
 * ```c++
   template <class ViewType, class... ViewCtorArgs>
-  auto create_mirror(Impl::ViewCtorProp<ViewCtorArgs...> const& arg_prop,
-                     ViewType const& v);
+  auto create_mirror(/* is-alloc-prop */ const& arg_prop, ViewType const& v);
   ```
   Creates a new [`View`](view) with the same layout and padding as `src` using the [`View`](view) constructor properties `arg_prop`, e.g., `Kokkos::view_alloc(Kokkos::WithoutInitializing)`. If `arg_prop` contains a memory space, a [`View`](view) in that space is created. Otherwise, a [`View`](view) in host-accessible memory is returned.
   * `src`: a `Kokkos::View`.
@@ -151,8 +147,7 @@ auto create_mirror_view_and_copy(Impl::ViewCtorProp<ViewCtorArgs...> const& arg_
 
 * ```c++
   template <class ViewType, class... ViewCtorArgs>
-  auto create_mirror_view(Impl::ViewCtorProp<ViewCtorArgs...> const& arg_prop,
-                          ViewType const& src);
+  auto create_mirror_view(/* is-alloc-prop */ const& arg_prop, ViewType const& src);
   ```
   If the [`View`](view) constructor arguments `arg_prop` include a memory space and the memory space doesn't match the memory space of `src`, a new [`View`](view) in the specified memory_space is created.
   If the `arg_prop` don't include a memory space and the memory space of `src` is not host-accessible, a new host-accessible [`View`](view) is created.
@@ -177,8 +172,7 @@ auto create_mirror_view_and_copy(Impl::ViewCtorProp<ViewCtorArgs...> const& arg_
 
 * ```c++
   template <class ViewType, class... ViewCtorArgs>
-  ImplMirrorType create_mirror_view_and_copy(Impl::ViewCtorProp<ViewCtorArgs...> const& arg_prop,
-                                             ViewType const& src);
+  ImplMirrorType create_mirror_view_and_copy(/* is-alloc-prop */ const& arg_prop, ViewType const& src);
   ```
   If the  memory space included in the [`View`](view) constructor arguments `arg_prop` matches the memory space of `src`, a new [`View`](view) in the specified memory space is created using `arg_prop` and the same layout andf padding as `src`. Additionally, a `deep_copy` from `src` to the new view is executed (using the execution space contained in `arg_prop` if provided).
 Otherwise returns `src`.
