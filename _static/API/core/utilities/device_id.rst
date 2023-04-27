@@ -8,7 +8,7 @@ Defined in header ``<Kokkos_Core.hpp>``
 
 .. code-block:: cpp
 
-    [[nodiscard]] int device_id() noexcept;
+    [[nodiscard]] int device_id() noexcept;  // (since 4.1)
 
 Returns the id of the device that is used by ``DefaultExecutionSpace`` or
 ``-1`` if only host backends are enabled.
