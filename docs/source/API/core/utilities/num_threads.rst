@@ -8,7 +8,7 @@ Defined in header ``<Kokkos_Core.hpp>``
 
 .. code-block:: cpp
 
-    [[nodiscard]] int num_threads() noexcept;
+    [[nodiscard]] int num_threads() noexcept;  // (since 4.1)
 
 Returns the number of concurrent threads that are used by ``DefaultHostExecutionSpace``.
 
