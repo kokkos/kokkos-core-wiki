@@ -105,7 +105,7 @@ The reducer is assumed to define a commutative monoid with respect to the value 
       return result;
     }
 
-is commutative and associative with identity element defined by ``reducer.init(el)``.
+is commutative and associative with identity element that can be set by calling ``reducer.init(el)``.
 
 
 Built-In Reducers
