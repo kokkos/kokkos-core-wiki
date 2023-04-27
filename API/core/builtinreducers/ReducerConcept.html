@@ -607,6 +607,18 @@
 </dd></dl>
 
 </section>
+<section id="requirements">
+<h3>Requirements<a class="headerlink" href="#requirements" title="Permalink to this heading">#</a></h3>
+<p>The reducer is assumed to define a commutative monoid with respect to the value type it is used with, i.e., the binary operation</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">value_type</span><span class="w"> </span><span class="nf">op</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">value_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">val1</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">value_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">val2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">value_type</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">val1</span><span class="p">;</span>
+<span class="w">  </span><span class="n">reducer</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="n">result</span><span class="p">,</span><span class="w"> </span><span class="n">val2</span><span class="p">);</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">result</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>is commutative and associative with identity element that can be set by calling <code class="docutils literal notranslate"><span class="pre">reducer.init(el)</span></code>.</p>
+</section>
 <section id="built-in-reducers">
 <h3>Built-In Reducers<a class="headerlink" href="#built-in-reducers" title="Permalink to this heading">#</a></h3>
 <p>Kokkos provides a number of built-in reducers that automatically work with the intrinsic C++ types as well as <code class="docutils literal notranslate"><span class="pre">Kokkos::complex</span></code>. In order to use a Built-in reducer with a custom type, a template specialization of <code class="docutils literal notranslate"><span class="pre">Kokkos::reduction_identity&lt;CustomType&gt;</span></code> must be defined. A simple example is shown below and more information can be found under <a class="reference external" href="../../../ProgrammingGuide/Custom-Reductions.html">Custom Reductions</a>.</p>
@@ -709,6 +721,7 @@
 <li><a class="reference internal" href="#typedefs">Typedefs</a></li>
 <li><a class="reference internal" href="#constructors">Constructors</a></li>
 <li><a class="reference internal" href="#functions">Functions</a></li>
+<li><a class="reference internal" href="#requirements">Requirements</a></li>
 <li><a class="reference internal" href="#built-in-reducers">Built-In Reducers</a></li>
 </ul>
 </li>

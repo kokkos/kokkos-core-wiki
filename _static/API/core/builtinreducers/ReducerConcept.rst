@@ -92,6 +92,22 @@ Functions
 
     * Returns a view of the result place.
 
+Requirements
+~~~~~~~~~~~~
+
+The reducer is assumed to define a commutative monoid with respect to the value type it is used with, i.e., the binary operation
+
+.. code-block:: cpp
+
+    value_type op(const value_type& val1, const value_type& val2) {
+      value_type result = val1;
+      reducer.join(result, val2);
+      return result;
+    }
+
+is commutative and associative with identity element that can be set by calling ``reducer.init(el)``.
+
+
 Built-In Reducers
 ~~~~~~~~~~~~~~~~~
 
