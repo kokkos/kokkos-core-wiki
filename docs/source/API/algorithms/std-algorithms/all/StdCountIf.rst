@@ -17,7 +17,7 @@ Interface
 .. code-block:: cpp
 
    //
-   // overload set accepting iterators
+   // overload set accepting an execution space
    //
    template <class ExecutionSpace, class IteratorType, class Predicate>
    typename IteratorType::difference_type count_if(const ExecutionSpace& exespace,
@@ -69,29 +69,31 @@ Parameters and Requirements
 
 - ``teamHandle``: team handle instance given inside a parallel region when using a TeamPolicy
 
-- ``label``:
+- ``label``: string forwarded to internal parallel kernels for debugging purposes
 
   - 1: The default string is "Kokkos::count_if_iterator_api_default".
 
   - 3: The default string is "Kokkos::count_if_view_api_default".
 
+  - NOTE: overloads accepting a team handle do not use a label internally
+
 - ``first, last``: range of elements to search in
 
   - must be *random access iterators*, e.g., returned from ``Kokkos::Experimental::(c)begin/(c)end``
 
-  - must represent a valid range, i.e., ``last >= first`` (asserted in debug mode)
+  - must represent a valid range, i.e., ``last >= first``
 
   - must be accessible from ``exespace`` or from the execution space associated with the team handle
-    (this check happens at compile-time)
+
 
 - ``view``:
 
   - must be rank-1, and have ``LayoutLeft``, ``LayoutRight``, or ``LayoutStride``
 
   - must be accessible from ``exespace`` or from the execution space associated with the team handle
-    (this check happens at compile-time)
 
 - ``pred``: *unary* functor returning ``true`` if an argument satisfies the desired condition.
+
   ``pred(v)`` must be valid to be called from the execution space passed, or the execution space
   associated with the team handle, and convertible to bool for every argument ``v``
   of type ``value_type``, where ``value_type`` is the value type of ``IteratorType`` or ``view``
