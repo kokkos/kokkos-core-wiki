@@ -1,6 +1,6 @@
 
 ``none_of``
-==========
+===========
 
 Header: ``<Kokkos_StdAlgorithms.hpp>``
 
@@ -39,7 +39,7 @@ Interface
 
    template <class ExecutionSpace, class DataType, class... Properties,
 	     class Predicate>
-   bool none_of(const std::string& label, const ExecutionSpace& exespace,   (4)
+   bool none_of(const std::string& label, const ExecutionSpace& exespace,    (4)
 		const ::Kokkos::View<DataType, Properties...>& v,
 		Predicate predicate);
 
@@ -48,14 +48,14 @@ Interface
    //
    template <class TeamHandleType, class IteratorType, class Predicate>
    KOKKOS_FUNCTION
-   bool none_of(const TeamHandleType& teamHandle,
-		IteratorType first, IteratorType last,  (1)
+   bool none_of(const TeamHandleType& teamHandle,                            (5)
+		IteratorType first, IteratorType last,
 		Predicate predicate);
 
    template <class TeamHandleType, class DataType, class... Properties,
 	     class Predicate>
    KOKKOS_FUNCTION
-   bool none_of(const TeamHandleType& teamHandle,
+   bool none_of(const TeamHandleType& teamHandle,                           (6)
 		const ::Kokkos::View<DataType, Properties...>& v,
 		Predicate predicate);
 
