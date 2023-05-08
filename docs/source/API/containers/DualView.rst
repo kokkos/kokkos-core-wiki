@@ -152,7 +152,7 @@ Description
        The arguments that follow are the dimensions of the View objects. For example, if the View has three dimensions,
        the first three integer arguments will be nonzero, and you may omit the integer arguments that follow.
 
-    .. cppkokkos:function:: DualView(const Impl::ViewCtorProp<P...>& arg_prop, typename std::enable_if<!Impl::ViewCtorProp<P...>::has_pointer, size_t>::type const n0 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n1 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n2 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n3 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n4 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n5 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n6 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n7 = KOKKOS_IMPL_CTOR_DEFAULT_ARG);
+    .. cppkokkos:function:: DualView(/* is-alloc-prop */ const& arg_prop, const size_t n0 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n1 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n2 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n3 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n4 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n5 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n6 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n7 = KOKKOS_IMPL_CTOR_DEFAULT_ARG);
 
        Constructor that allocates View objects on both host and device. This constructor works like the analogous constructor of View.
        The first arguments are wrapped up in a ViewCtor class, this allows for a label, without initializing,

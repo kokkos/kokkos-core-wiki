@@ -71,7 +71,7 @@ Description
 
    - ``ImplMirrorType``: an implementation defined specialization of ``Kokkos::View``.
 
-.. cppkokkos:function:: template <class ViewType, class... ViewCtorArgs> auto create_mirror(Impl::ViewCtorProp<ViewCtorArgs...> const& arg_prop, ViewType const& v);
+.. cppkokkos:function:: template <class ViewType, class... ViewCtorArgs> auto create_mirror(/* is-alloc-prop */ const& arg_prop, ViewType const& v);
 
    Creates a new |View|_ with the same layout and padding as ``src``
    using the |View|_ constructor properties ``arg_prop``, e.g., ``Kokkos::view_alloc(Kokkos::WithoutInitializing)``.
@@ -123,7 +123,7 @@ Description
 
    - ``ImplMirrorType``: an implementation defined specialization of ``Kokkos::View``.
 
-.. cppkokkos:function:: template <class ViewType, class... ViewCtorArgs> auto create_mirror_view(Impl::ViewCtorProp<ViewCtorArgs...> const& arg_prop, ViewType const& src);
+.. cppkokkos:function:: template <class ViewType, class... ViewCtorArgs> auto create_mirror_view(/* is-alloc-prop */ const& arg_prop, ViewType const& src);
 
    If the |View|_ constructor arguments ``arg_prop`` include a memory space and the memory space
    doesn't match the memory space of ``src``, creates a new |View|_ in the specified memory_space. If the ``arg_prop`` don't include a memory
@@ -151,7 +151,7 @@ Description
 
    - ``ImplMirrorType``: an implementation defined specialization of ``Kokkos::View``.
 
-.. cppkokkos:function:: template <class ViewType, class... ViewCtorArgs> ImplMirrorType create_mirror_view_and_copy(Impl::ViewCtorProp<ViewCtorArgs...> const& arg_prop, ViewType const& src);
+.. cppkokkos:function:: template <class ViewType, class... ViewCtorArgs> ImplMirrorType create_mirror_view_and_copy(/* is-alloc-prop */ const& arg_prop, ViewType const& src);
 
    If the  memory space included in the |View|_ constructor arguments ``arg_prop`` matches the memory
    space of ``src``, creates a new |View|_ in the specified memory space using ``arg_prop`` and the same layout
