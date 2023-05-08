@@ -67,7 +67,7 @@ Memory Spaces
 ``Kokkos::Experimental::SYCLSharedUSMSpace``
 ---------------------------
 
-``Kokkos::Experimental::SYCLSharedUSMSpace`` is a |MemorySpaceType|_ representing page-migrating memory on a GPU in the SYCL GPU programming environment. This memory is accessible by both host and SYCL execution spaces.
+``Kokkos::Experimental::SYCLSharedUSMSpace`` is a |MemorySpaceType|_ representing page-migrating memory on a GPU in the SYCL GPU programming environment. This memory is accessible from both host and SYCL execution spaces.
 
 ``Kokkos::HostSpace``
 ---------------------
