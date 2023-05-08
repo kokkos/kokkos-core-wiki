@@ -156,7 +156,7 @@ Description
 
        Constructor that allocates View objects on both host and device. This constructor works like the analogous constructor of View.
        The first arguments are wrapped up in a ViewCtor class, this allows for a label, without initializing,
-       and all of the other things that can be wrapped up in a Ctor class. The arguments that follow are the dimensions of the View objects.
+       and all of the other things that can be created using ``Kokkos::view_alloc()``. The arguments that follow are the dimensions of the View objects.
        For example, if the View has three dimensions, the first three integer arguments will be nonzero, and you may omit the integer arguments that follow.
 
     .. cppkokkos:function:: DualView(const DualView<SS, LS, DS, MS>& src);

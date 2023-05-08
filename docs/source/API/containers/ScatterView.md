@@ -132,8 +132,8 @@ private:
     ScatterView(/* is-alloc-prop */ const& arg_prop, Dims... dims);
    ```
    Constructor from variadic pack of dimension arguments. Constructs `internal_view` member.
-   This constructor allows specifying an execution space instance to be used by passing, e.g., 
-   Kokkos::view_alloc(exec_space, "label") as first argument.
+   This constructor allows passing an object created by `Kokkos::view_alloc`` as first argument, e.g., for specifying an execution space via
+   ``Kokkos::view_alloc(exec_space, "label")``.
 
 ### Functions
   * ```c++
