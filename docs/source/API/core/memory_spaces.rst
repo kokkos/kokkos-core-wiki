@@ -62,7 +62,7 @@ Memory Spaces
 ``Kokkos::Experimental::SYCLHostUSMSpace``
 ------------------------------
 
-``Kokkos::Experimental::SYCLHostUSMSpace`` is a |MemorySpaceType|_ representing host-side pinned memory accessible from a GPU in the SYCL GPU programming environment. This memory is accessible by both host and SYCL execution spaces.
+``Kokkos::Experimental::SYCLHostUSMSpace`` is a |MemorySpaceType|_ representing host-side pinned memory accessible from a GPU in the SYCL GPU programming environment. This memory is accessible from both host and SYCL execution spaces.
 
 ``Kokkos::Experimental::SYCLSharedUSMSpace``
 ---------------------------
