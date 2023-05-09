@@ -58,6 +58,8 @@ Interface
 		   const Kokkos::View<DataType, Properties...>& view, SizeType n,
 		   UnaryFunctorType func);
 
+Parameters and Requirements
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 - ``exespace``: execution space instance
 
