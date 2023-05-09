@@ -54,6 +54,21 @@ Memory Spaces
 
 ``Kokkos::HIPManagedSpace`` :sup:`promoted from` |Experimental|_ :sup:`since 4.0`  is a |MemorySpaceType|_ representing page-migrating memory on a GPU in the HIP GPU programming environment.  Page-migrating memory is accessible from most host execution spaces. Even though available with all combinations of operating system and HIP-supported hardware, it requires both operating system and hardware to support and enable the ``xnack`` feature. Except in rare instances, it should not be used directly, but instead should be used generically as an memory space.  For details, see |TheDocumentationOnTheMemorySpaceConcept|_.
 
+``Kokkos::Experimental::SYCLDeviceUSMSpace``
+--------------------
+
+``Kokkos::Experimental::SYCLDeviceUSMSpace`` is a |MemorySpaceType|_ representing device memory on a GPU in the SYCL GPU programming environment. This memory is only accessible from the SYCL execution space.
+
+``Kokkos::Experimental::SYCLHostUSMSpace``
+------------------------------
+
+``Kokkos::Experimental::SYCLHostUSMSpace`` is a |MemorySpaceType|_ representing host-side pinned memory accessible from a GPU in the SYCL GPU programming environment. This memory is accessible from both host and SYCL execution spaces.
+
+``Kokkos::Experimental::SYCLSharedUSMSpace``
+---------------------------
+
+``Kokkos::Experimental::SYCLSharedUSMSpace`` is a |MemorySpaceType|_ representing page-migrating memory on a GPU in the SYCL GPU programming environment. This memory is accessible from both host and SYCL execution spaces.
+
 ``Kokkos::HostSpace``
 ---------------------
 
