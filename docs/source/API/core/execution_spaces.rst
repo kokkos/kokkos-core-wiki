@@ -55,7 +55,7 @@ execution on a device supported by HIP. Except in rare instances, it should not 
 but instead should be used generically as an execution space. For details, see |DocExecutionSpaceConcept|_.
 
 ``Kokkos::Experimental::SYCL``
----------------
+------------------------------
 
 ``Kokkos::Experimental::SYCL`` is an |ExecutionSpaceConceptType|_ representing execution on a device supported by SYCL. 
 
