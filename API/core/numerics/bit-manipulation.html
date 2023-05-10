@@ -504,12 +504,11 @@
 <p>Defined in header <a class="reference external" href="https://github.com/kokkos/kokkos/blob/4.1.00/core/src/Kokkos_BitManipulation.hpp"><code class="docutils literal notranslate"><span class="pre">&lt;Kokkos_BitManipulation.hpp&gt;</span></code></a> which is included from <code class="docutils literal notranslate"><span class="pre">&lt;Kokkos_Core.hpp&gt;</span></code></p>
 <p>Provides function templates from the standard library header <a class="reference external" href="https://en.cppreference.com/w/cpp/header/bit"><code class="docutils literal notranslate"><span class="pre">&lt;bit&gt;</span></code></a> (since C++20).</p>
 <p>Bit manipulation function templates are defined in the <code class="docutils literal notranslate"><span class="pre">Kokkos::</span></code> namespace since Kokkos 4.1</p>
-<p><span class="strike">func</span> denotes function templates that have not been implemented.</p>
 <div class="table-wrapper docutils container">
 <table class="docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><span class="strike">bit_cast</span></p></td>
-<td><p>reinterpret the object representation of one type as that of another</p></td>
+<tr class="row-odd"><td><p><a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/bit_cast"><code class="docutils literal notranslate"><span class="pre">bit_cast</span></code></a></p></td>
+<td><p>reinterpret the object representation of one type as that of another (see note below)</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/byteswap"><code class="docutils literal notranslate"><span class="pre">byteswap</span></code></a></p></td>
 <td><p>reverses the bytes in the given integer value</p></td>
@@ -558,6 +557,10 @@
 with the <code class="docutils literal notranslate"><span class="pre">*_builtin</span></code> suffix is provided in the <code class="docutils literal notranslate"><span class="pre">Kokkos::Experimental::</span></code>
 namespace to make up for some compiler intrinsics that cannot appear in
 constant expressions.</p></li>
+<li><p>In contrast to its counterpart in the C++ standard library,
+<code class="docutils literal notranslate"><span class="pre">Kokkos::bit_cast</span></code> is not usable in constant expressions (not a
+<code class="docutils literal notranslate"><span class="pre">constexpr</span></code> function) as it is not implementable as a library facility
+and requires compiler magic which is not available to us.</p></li>
 </ul>
 </section>
 </section>
