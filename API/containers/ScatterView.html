@@ -475,7 +475,7 @@
         </a>
         <div class="content-icon-container">
 <div class="edit-this-page">
-  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/API/containers/ScatterView.md" title="Edit this page">
+  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/API/containers/ScatterView.rst" title="Edit this page">
     <svg aria-hidden="true" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
       <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4"></path>
@@ -499,200 +499,169 @@
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="scatterview">
+          <section id="scatterview">
 <h1><code class="docutils literal notranslate"><span class="pre">ScatterView</span></code><a class="headerlink" href="#scatterview" title="Permalink to this heading">#</a></h1>
-<p>Header File: <code class="docutils literal notranslate"><span class="pre">Kokkos_ScatterView.hpp</span></code></p>
-<p>Usage:</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">KOKKOS_INLINE_FUNCTION</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">foo</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">i</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<p>Header File: <code class="docutils literal notranslate"><span class="pre">&lt;Kokkos_ScatterView.hpp&gt;</span></code></p>
+<section id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this heading">#</a></h2>
+<dl class="cppkokkos class">
+<dt class="sig sig-object cppkokkos" id="_CPPv4I0_i00_iE11ScatterView">
+<span id="_CPPv3I0_i00_iE11ScatterView"></span><span id="_CPPv2I0_i00_iE11ScatterView"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">DataType</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Op</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ExecSpace</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Layout</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">contribution</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ScatterView</span></span></span><a class="headerlink" href="#_CPPv4I0_i00_iE11ScatterView" title="Permalink to this definition">#</a><br /></dt>
+<dd><p class="rubric">Public Member Variables</p>
+<dl class="cppkokkos type">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N11ScatterView18original_view_typeE">
+<span id="_CPPv3N11ScatterView18original_view_typeE"></span><span id="_CPPv2N11ScatterView18original_view_typeE"></span><span id="ScatterView::original_view_type"></span><span class="k"></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">original_view_type</span></span></span><a class="headerlink" href="#_CPPv4N11ScatterView18original_view_typeE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Type of View passed to ScatterView constructor.</p>
+</dd></dl>
+
+<dl class="cppkokkos type">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N11ScatterView19original_value_typeE">
+<span id="_CPPv3N11ScatterView19original_value_typeE"></span><span id="_CPPv2N11ScatterView19original_value_typeE"></span><span id="ScatterView::original_value_type"></span><span class="k"></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">original_value_type</span></span></span><a class="headerlink" href="#_CPPv4N11ScatterView19original_value_typeE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Value type of the original_view_type.</p>
+</dd></dl>
+
+<dl class="cppkokkos type">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N11ScatterView23original_reference_typeE">
+<span id="_CPPv3N11ScatterView23original_reference_typeE"></span><span id="_CPPv2N11ScatterView23original_reference_typeE"></span><span id="ScatterView::original_reference_type"></span><span class="k"></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">original_reference_type</span></span></span><a class="headerlink" href="#_CPPv4N11ScatterView23original_reference_typeE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Reference type of the original_view_type.</p>
+</dd></dl>
+
+<dl class="cppkokkos type">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N11ScatterView14data_type_infoE">
+<span id="_CPPv3N11ScatterView14data_type_infoE"></span><span id="_CPPv2N11ScatterView14data_type_infoE"></span><span id="ScatterView::data_type_info"></span><span class="k"></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">data_type_info</span></span></span><a class="headerlink" href="#_CPPv4N11ScatterView14data_type_infoE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>DuplicatedDataType, a newly created DataType that has a new runtime dimension which becomes the largest-stride dimension, from the given View DataType.</p>
+</dd></dl>
+
+<dl class="cppkokkos type">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N11ScatterView18internal_data_typeE">
+<span id="_CPPv3N11ScatterView18internal_data_typeE"></span><span id="_CPPv2N11ScatterView18internal_data_typeE"></span><span id="ScatterView::internal_data_type"></span><span class="k"></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">internal_data_type</span></span></span><a class="headerlink" href="#_CPPv4N11ScatterView18internal_data_typeE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Value type of data_type_info.</p>
+</dd></dl>
+
+<dl class="cppkokkos type">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N11ScatterView18internal_view_typeE">
+<span id="_CPPv3N11ScatterView18internal_view_typeE"></span><span id="_CPPv2N11ScatterView18internal_view_typeE"></span><span id="ScatterView::internal_view_type"></span><span class="k"></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">internal_view_type</span></span></span><a class="headerlink" href="#_CPPv4N11ScatterView18internal_view_typeE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>A View type created from the internal_data_type.</p>
+</dd></dl>
+
+<p class="rubric">Constructors</p>
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N11ScatterView11ScatterViewEv">
+<span id="_CPPv3N11ScatterView11ScatterViewEv"></span><span id="_CPPv2N11ScatterView11ScatterViewEv"></span><span id="ScatterView::ScatterView"></span><span class="sig-name descname"><span class="n"><span class="pre">ScatterView</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11ScatterView11ScatterViewEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>The default constructor. Default constructs members.</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N11ScatterView11ScatterViewERK4ViewI2RTDp2RPE">
+<span id="_CPPv3N11ScatterView11ScatterViewERK4ViewI2RTDp2RPE"></span><span id="_CPPv2N11ScatterView11ScatterViewERK4ViewI2RTDp2RPE"></span><span id="ScatterView::ScatterView__View:RT.RPDp:CR"></span><span class="sig-name descname"><span class="n"><span class="pre">ScatterView</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="../core/view/view.html#_CPPv44Viewv" title="View"><span class="n"><span class="pre">View</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">RT</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">RP</span></span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11ScatterView11ScatterViewERK4ViewI2RTDp2RPE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Constructor from a <code class="docutils literal notranslate"><span class="pre">Kokkos::View</span></code>. <code class="docutils literal notranslate"><span class="pre">internal_view</span></code> member is copy constructed from this input view.</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N11ScatterView11ScatterViewERKNSt6stringEDp4Dims">
+<span id="_CPPv3N11ScatterView11ScatterViewERKNSt6stringEDp4Dims"></span><span id="_CPPv2N11ScatterView11ScatterViewERKNSt6stringEDp4Dims"></span><span id="ScatterView::ScatterView__ssCR.DimsDp"></span><span class="sig-name descname"><span class="n"><span class="pre">ScatterView</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">name</span></span>, <span class="n"><span class="pre">Dims</span></span><span class="p"><span class="pre">...</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">dims</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11ScatterView11ScatterViewERKNSt6stringEDp4Dims" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Constructor from variadic pack of dimension arguments. Constructs <code class="docutils literal notranslate"><span class="pre">internal_view</span></code> member.</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N11ScatterView11ScatterViewERKN6Kokkos4Impl12ViewCtorPropIDp1PEEDp4Dims">
+<span id="_CPPv3N11ScatterView11ScatterViewERKN6Kokkos4Impl12ViewCtorPropIDp1PEEDp4Dims"></span><span id="_CPPv2N11ScatterView11ScatterViewERKN6Kokkos4Impl12ViewCtorPropIDp1PEEDp4Dims"></span><span id="ScatterView::ScatterView__Kokkos::Impl::ViewCtorProp:PDp:CR.DimsDp"></span><span class="sig-name descname"><span class="n"><span class="pre">ScatterView</span></span></span><span class="sig-paren">(</span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Kokkos</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Impl</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">ViewCtorProp</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">P</span></span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">arg_prop</span></span>, <span class="n"><span class="pre">Dims</span></span><span class="p"><span class="pre">...</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">dims</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11ScatterView11ScatterViewERKN6Kokkos4Impl12ViewCtorPropIDp1PEEDp4Dims" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Constructor from variadic pack of dimension arguments. Constructs <code class="docutils literal notranslate"><span class="pre">internal_view</span></code> member. This constructor allows specifying an execution space instance to be used by passing, e.g. <code class="docutils literal notranslate"><span class="pre">Kokkos::view_alloc(exec_space,</span> <span class="pre">&quot;label&quot;)</span></code> as first argument.</p>
+</dd></dl>
+
+<p class="rubric">Public Methods</p>
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK11ScatterView12is_allocatedEv">
+<span id="_CPPv3NK11ScatterView12is_allocatedEv"></span><span id="_CPPv2NK11ScatterView12is_allocatedEv"></span><span id="ScatterView::is_allocatedCCE"></span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_allocated</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK11ScatterView12is_allocatedEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>true if the <code class="docutils literal notranslate"><span class="pre">internal_view</span></code> points to a valid memory location. This function works for both managed and unmanaged views. With the unmanaged view, there is no guarantee that referenced address is valid, only that it is a non-null pointer.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK11ScatterView6accessEv">
+<span id="_CPPv3NK11ScatterView6accessEv"></span><span id="_CPPv2NK11ScatterView6accessEv"></span><span id="ScatterView::accessC"></span><span class="sig-name descname"><span class="n"><span class="pre">access</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK11ScatterView6accessEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>use within a kernel to return a <code class="docutils literal notranslate"><span class="pre">ScatterAccess</span></code> member; this member accumulates a given thread’s contribution to the reduction.</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK11ScatterView7subviewEv">
+<span id="_CPPv3NK11ScatterView7subviewEv"></span><span id="_CPPv2NK11ScatterView7subviewEv"></span><span id="ScatterView::subviewC"></span><span class="sig-name descname"><span class="n"><span class="pre">subview</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK11ScatterView7subviewEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>a subview of a <code class="docutils literal notranslate"><span class="pre">ScatterView</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK11ScatterView15contribute_intoERK4ViewI2DTDp2RPE">
+<span id="_CPPv3NK11ScatterView15contribute_intoERK4ViewI2DTDp2RPE"></span><span id="_CPPv2NK11ScatterView15contribute_intoERK4ViewI2DTDp2RPE"></span><span id="ScatterView::contribute_into__View:DT.RPDp:CRC"></span><span class="sig-name descname"><span class="n"><span class="pre">contribute_into</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="../core/view/view.html#_CPPv44Viewv" title="View"><span class="n"><span class="pre">View</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">DT</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">RP</span></span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">dest</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK11ScatterView15contribute_intoERK4ViewI2DTDp2RPE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>contribute <code class="docutils literal notranslate"><span class="pre">ScatterView</span></code> array’s results into the input View <code class="docutils literal notranslate"><span class="pre">dest</span></code></p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N11ScatterView5resetEv">
+<span id="_CPPv3N11ScatterView5resetEv"></span><span id="_CPPv2N11ScatterView5resetEv"></span><span id="ScatterView::reset"></span><span class="sig-name descname"><span class="n"><span class="pre">reset</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11ScatterView5resetEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>performs reset on destination array</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N11ScatterView12reset_exceptERK4ViewI2DTDp2RPE">
+<span id="_CPPv3N11ScatterView12reset_exceptERK4ViewI2DTDp2RPE"></span><span id="_CPPv2N11ScatterView12reset_exceptERK4ViewI2DTDp2RPE"></span><span id="ScatterView::reset_except__View:DT.RPDp:CR"></span><span class="sig-name descname"><span class="n"><span class="pre">reset_except</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="../core/view/view.html#_CPPv44Viewv" title="View"><span class="n"><span class="pre">View</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">DT</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">RP</span></span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">view</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11ScatterView12reset_exceptERK4ViewI2DTDp2RPE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>tbd</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N11ScatterView6resizeEK6size_tK6size_tK6size_tK6size_tK6size_tK6size_tK6size_tK6size_t">
+<span id="_CPPv3N11ScatterView6resizeEK6size_tK6size_tK6size_tK6size_tK6size_tK6size_tK6size_tK6size_t"></span><span id="_CPPv2N11ScatterView6resizeEK6size_tK6size_tK6size_tK6size_tK6size_tK6size_tK6size_tK6size_t"></span><span id="ScatterView::resize__sC.sC.sC.sC.sC.sC.sC.sC"></span><span class="sig-name descname"><span class="n"><span class="pre">resize</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">n0</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">n1</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">n2</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">n3</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">n4</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">n5</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">n6</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">n7</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11ScatterView6resizeEK6size_tK6size_tK6size_tK6size_tK6size_tK6size_tK6size_tK6size_t" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>resize a view with copying old data to new data at the corresponding indices</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N11ScatterView7reallocEK6size_tK6size_tK6size_tK6size_tK6size_tK6size_tK6size_tK6size_t">
+<span id="_CPPv3N11ScatterView7reallocEK6size_tK6size_tK6size_tK6size_tK6size_tK6size_tK6size_tK6size_t"></span><span id="_CPPv2N11ScatterView7reallocEK6size_tK6size_tK6size_tK6size_tK6size_tK6size_tK6size_tK6size_t"></span><span id="ScatterView::realloc__sC.sC.sC.sC.sC.sC.sC.sC"></span><span class="sig-name descname"><span class="n"><span class="pre">realloc</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">n0</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">n1</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">n2</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">n3</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">n4</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">n5</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">n6</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">n7</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11ScatterView7reallocEK6size_tK6size_tK6size_tK6size_tK6size_tK6size_tK6size_tK6size_t" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>resize a view with discarding old data</p>
+</dd></dl>
+
+<p class="rubric"><em>Private</em> Members</p>
+<dl class="field-list simple">
+<dt class="field-odd">Member<span class="colon">:</span></dt>
+<dd class="field-odd"><p>typedef original_view_type internal_view_type;</p>
+</dd>
+<dt class="field-even">Member<span class="colon">:</span></dt>
+<dd class="field-even"><p>internal_view_type internal_view;</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Free Functions</p>
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv410contributeR4ViewI3DT1Dp2VPERKN6Kokkos12Experimental11ScatterViewI3DT22LY2ES2OP2CT2DPEE">
+<span id="_CPPv310contributeR4ViewI3DT1Dp2VPERKN6Kokkos12Experimental11ScatterViewI3DT22LY2ES2OP2CT2DPEE"></span><span id="_CPPv210contributeR4ViewI3DT1Dp2VPERKN6Kokkos12Experimental11ScatterViewI3DT22LY2ES2OP2CT2DPEE"></span><span id="contribute__View:DT1.VPDp:R.Kokkos::Experimental::ScatterView:DT2.LY.ES.OP.CT.DP:CR"></span><span class="sig-name descname"><span class="n"><span class="pre">contribute</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="../core/view/view.html#_CPPv44Viewv" title="View"><span class="n"><span class="pre">View</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">DT1</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">VP</span></span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">dest</span></span>, <span class="n"><span class="pre">Kokkos</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Experimental</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">ScatterView</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">DT2</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">LY</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">ES</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">OP</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">CT</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">DP</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">src</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv410contributeR4ViewI3DT1Dp2VPERKN6Kokkos12Experimental11ScatterViewI3DT22LY2ES2OP2CT2DPEE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>convenience function to perform final reduction of ScatterView
+results into a resultant View; may be called following <a class="reference external" href="../core/parallel-dispatch/parallel_reduce.html"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">parallel_reduce()</span></code></a>.</p>
+</dd></dl>
+
+</section>
+<section id="example">
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this heading">#</a></h2>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">KOKKOS_INLINE_FUNCTION</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">foo</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">i</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
 <span class="n">KOKKOS_INLINE_FUNCTION</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">bar</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">i</span><span class="o">*</span><span class="n">i</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
 
 <span class="n">Kokkos</span><span class="o">::</span><span class="n">View</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">*&gt;</span><span class="w"> </span><span class="n">results</span><span class="p">(</span><span class="s">&quot;results&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
 <span class="n">Kokkos</span><span class="o">::</span><span class="n">Experimental</span><span class="o">::</span><span class="n">ScatterView</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">*&gt;</span><span class="w"> </span><span class="n">scatter</span><span class="p">(</span><span class="n">results</span><span class="p">);</span>
 <span class="n">Kokkos</span><span class="o">::</span><span class="n">parallel_for</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">KOKKOS_LAMBDA</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">input_i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">access</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">scatter</span><span class="p">.</span><span class="n">access</span><span class="p">();</span>
-<span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">result_i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">foo</span><span class="p">(</span><span class="n">input_i</span><span class="p">);</span>
-<span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">contribution</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bar</span><span class="p">(</span><span class="n">input_i</span><span class="p">);</span>
-<span class="w"> </span><span class="n">access</span><span class="p">(</span><span class="n">result_i</span><span class="p">)</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">contribution</span><span class="p">;</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">access</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">scatter</span><span class="p">.</span><span class="n">access</span><span class="p">();</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">result_i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">foo</span><span class="p">(</span><span class="n">input_i</span><span class="p">);</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">contribution</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bar</span><span class="p">(</span><span class="n">input_i</span><span class="p">);</span>
+<span class="w">    </span><span class="n">access</span><span class="p">(</span><span class="n">result_i</span><span class="p">)</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">contribution</span><span class="p">;</span>
 <span class="p">});</span>
 <span class="n">Kokkos</span><span class="o">::</span><span class="n">Experimental</span><span class="o">::</span><span class="n">contribute</span><span class="p">(</span><span class="n">results</span><span class="p">,</span><span class="w"> </span><span class="n">scatter</span><span class="p">);</span>
 </pre></div>
 </div>
-<section id="synopsis">
-<h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this heading">#</a></h2>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">DataType</span>
-<span class="w">        </span><span class="p">,</span><span class="kt">int</span><span class="w"> </span><span class="n">Op</span>
-<span class="w">        </span><span class="p">,</span><span class="k">typename</span><span class="w"> </span><span class="nc">ExecSpace</span>
-<span class="w">        </span><span class="p">,</span><span class="k">typename</span><span class="w"> </span><span class="nc">Layout</span>
-<span class="w">        </span><span class="p">,</span><span class="kt">int</span><span class="w"> </span><span class="n">contribution</span>
-<span class="w">        </span><span class="o">&gt;</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">ScatterView</span><span class="o">&lt;</span><span class="n">DataType</span>
-<span class="w">                  </span><span class="p">,</span><span class="n">Layout</span>
-<span class="w">                  </span><span class="p">,</span><span class="n">ExecSpace</span>
-<span class="w">                  </span><span class="p">,</span><span class="n">Op</span>
-<span class="w">                  </span><span class="p">,{</span><span class="n">ScatterNonDuplicated</span><span class="p">,</span><span class="n">ScatterDuplicated</span><span class="p">}</span>
-<span class="w">                  </span><span class="p">,</span><span class="n">contribution</span><span class="o">&gt;</span>
-<span class="p">{</span>
-<span class="k">public</span><span class="o">:</span>
-<span class="w"> </span><span class="k">typedef</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">View</span><span class="o">&lt;</span><span class="n">DataType</span><span class="p">,</span><span class="w"> </span><span class="n">Layout</span><span class="p">,</span><span class="w"> </span><span class="n">ExecSpace</span><span class="o">&gt;</span><span class="w"> </span><span class="n">original_view_type</span><span class="p">;</span>
-<span class="w"> </span><span class="k">typedef</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="nc">original_view_type</span><span class="o">::</span><span class="n">value_type</span><span class="w"> </span><span class="n">original_value_type</span><span class="p">;</span>
-<span class="w"> </span><span class="k">typedef</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="nc">original_view_type</span><span class="o">::</span><span class="n">reference_type</span><span class="w"> </span><span class="n">original_reference_type</span><span class="p">;</span>
-<span class="w"> </span><span class="k">friend</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">ScatterAccess</span><span class="o">&lt;</span><span class="n">DataType</span><span class="p">,</span><span class="w"> </span><span class="n">Op</span><span class="p">,</span><span class="w"> </span><span class="n">ExecSpace</span><span class="p">,</span><span class="w"> </span><span class="n">Layout</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="n">ScatterNonDuplicated</span><span class="p">,</span><span class="n">ScatterDuplicated</span><span class="p">},</span><span class="w"> </span><span class="n">contribution</span><span class="p">,</span><span class="w"> </span><span class="n">ScatterNonAtomic</span><span class="o">&gt;</span><span class="p">;</span>
-<span class="w"> </span><span class="k">friend</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">ScatterAccess</span><span class="o">&lt;</span><span class="n">DataType</span><span class="p">,</span><span class="w"> </span><span class="n">Op</span><span class="p">,</span><span class="w"> </span><span class="n">ExecSpace</span><span class="p">,</span><span class="w"> </span><span class="n">Layout</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="n">ScatterNonDuplicated</span><span class="p">,</span><span class="n">ScatterDuplicated</span><span class="p">},</span><span class="w"> </span><span class="n">contribution</span><span class="p">,</span><span class="w"> </span><span class="n">ScatterAtomic</span><span class="o">&gt;</span><span class="p">;</span>
-<span class="w"> </span><span class="k">typedef</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="nc">Kokkos</span><span class="o">::</span><span class="n">Impl</span><span class="o">::</span><span class="n">Experimental</span><span class="o">::</span><span class="n">DuplicatedDataType</span><span class="o">&lt;</span><span class="n">DataType</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="n">Kokkos</span><span class="o">::</span><span class="n">LayoutRight</span><span class="p">,</span><span class="n">Kokkos</span><span class="o">::</span><span class="n">LayoutLeft</span><span class="p">}</span><span class="o">&gt;</span><span class="w"> </span><span class="n">data_type_info</span><span class="p">;</span><span class="w"> </span><span class="c1">// ScatterDuplicated only</span>
-<span class="w"> </span><span class="k">typedef</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="nc">data_type_info</span><span class="o">::</span><span class="n">value_type</span><span class="w"> </span><span class="n">internal_data_type</span><span class="p">;</span><span class="w"> </span><span class="c1">// ScatterDuplicated only</span>
-<span class="w"> </span><span class="k">typedef</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">View</span><span class="o">&lt;</span><span class="n">internal_data_type</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="n">Kokkos</span><span class="o">::</span><span class="n">LayoutRight</span><span class="p">,</span><span class="n">Kokkos</span><span class="o">::</span><span class="n">LayoutLeft</span><span class="p">},</span><span class="w"> </span><span class="n">ExecSpace</span><span class="o">&gt;</span><span class="w"> </span><span class="n">internal_view_type</span><span class="p">;</span><span class="w"> </span><span class="c1">// ScatterDuplicated only</span>
-<span class="w"> </span>
-<span class="w"> </span><span class="n">ScatterView</span><span class="p">();</span>
-
-<span class="w"> </span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">RT</span><span class="p">,</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="n">RP</span><span class="o">&gt;</span>
-<span class="w"> </span><span class="n">ScatterView</span><span class="p">(</span><span class="n">View</span><span class="o">&lt;</span><span class="n">RT</span><span class="p">,</span><span class="w"> </span><span class="n">RP</span><span class="p">...</span><span class="o">&gt;</span><span class="w"> </span><span class="k">const</span><span class="o">&amp;</span><span class="w"> </span><span class="p">);</span>
-
-<span class="w"> </span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="n">Dims</span><span class="o">&gt;</span>
-<span class="w"> </span><span class="n">ScatterView</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="k">const</span><span class="o">&amp;</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">Dims</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="n">dims</span><span class="p">);</span>
-
-<span class="w"> </span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span><span class="p">...</span><span class="w"> </span><span class="n">P</span><span class="p">,</span><span class="w"> </span><span class="k">typename</span><span class="p">...</span><span class="w"> </span><span class="n">Dims</span><span class="o">&gt;</span>
-<span class="w"> </span><span class="n">ScatterView</span><span class="p">(</span><span class="o">::</span><span class="n">Kokkos</span><span class="o">::</span><span class="n">Impl</span><span class="o">::</span><span class="n">ViewCtorProp</span><span class="o">&lt;</span><span class="n">P</span><span class="p">...</span><span class="o">&gt;</span><span class="w"> </span><span class="k">const</span><span class="o">&amp;</span><span class="w"> </span><span class="n">arg_prop</span><span class="p">,</span><span class="w"> </span><span class="n">Dims</span><span class="p">...</span><span class="w"> </span><span class="n">dims</span><span class="p">);</span>
-
-<span class="w"> </span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="kt">int</span><span class="w"> </span><span class="n">override_contrib</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">contribution</span><span class="o">&gt;</span>
-<span class="w"> </span><span class="n">KOKKOS_FORCEINLINE_FUNCTION</span>
-<span class="w"> </span><span class="n">ScatterAccess</span><span class="o">&lt;</span><span class="n">DataType</span><span class="p">,</span><span class="w"> </span><span class="n">Op</span><span class="p">,</span><span class="w"> </span><span class="n">ExecSpace</span><span class="p">,</span><span class="w"> </span><span class="n">Layout</span><span class="p">,</span><span class="w"> </span><span class="n">ScatterNonDuplicated</span><span class="p">,</span><span class="w"> </span><span class="n">contribution</span><span class="p">,</span><span class="w"> </span><span class="n">override_contrib</span><span class="o">&gt;</span>
-<span class="w"> </span><span class="n">access</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
-
-<span class="w"> </span><span class="n">original_view_type</span><span class="w"> </span><span class="nf">subview</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
-
-<span class="w"> </span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">DT</span><span class="p">,</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="n">RP</span><span class="o">&gt;</span>
-<span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">contribute_into</span><span class="p">(</span><span class="n">View</span><span class="o">&lt;</span><span class="n">DT</span><span class="p">,</span><span class="w"> </span><span class="n">RP</span><span class="p">...</span><span class="o">&gt;</span><span class="w"> </span><span class="k">const</span><span class="o">&amp;</span><span class="w"> </span><span class="n">dest</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
-
-<span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">reset</span><span class="p">();</span>
-<span class="w"> </span>
-<span class="w"> </span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">DT</span><span class="p">,</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="n">RP</span><span class="o">&gt;</span>
-<span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">reset_except</span><span class="p">(</span><span class="n">View</span><span class="o">&lt;</span><span class="n">DT</span><span class="p">,</span><span class="w"> </span><span class="n">RP</span><span class="p">...</span><span class="o">&gt;</span><span class="w"> </span><span class="k">const</span><span class="o">&amp;</span><span class="w"> </span><span class="n">view</span><span class="p">);</span>
-
-<span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">resize</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">n0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
-<span class="w">          </span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">n1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
-<span class="w">          </span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">n2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
-<span class="w">          </span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">n3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
-<span class="w">          </span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">n4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
-<span class="w">          </span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">n5</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
-<span class="w">          </span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">n6</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
-<span class="w">          </span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">n7</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
-
-<span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">realloc</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">n0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
-<span class="w">          </span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">n1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
-<span class="w">          </span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">n2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
-<span class="w">          </span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">n3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
-<span class="w">          </span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">n4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
-<span class="w">          </span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">n5</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
-<span class="w">          </span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">n6</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
-<span class="w">          </span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">n7</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
-
-<span class="k">protected</span><span class="o">:</span>
-<span class="w"> </span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="n">Args</span><span class="o">&gt;</span>
-<span class="w"> </span><span class="n">KOKKOS_FORCEINLINE_FUNCTION</span>
-<span class="w"> </span><span class="n">original_reference_type</span><span class="w"> </span><span class="n">at</span><span class="p">(</span><span class="n">Args</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
-<span class="w"> </span>
-<span class="k">private</span><span class="o">:</span>
-<span class="w"> </span><span class="k">typedef</span><span class="w"> </span><span class="n">original_view_type</span><span class="w"> </span><span class="n">internal_view_type</span><span class="p">;</span>
-<span class="w"> </span><span class="n">internal_view_type</span><span class="w"> </span><span class="n">internal_view</span><span class="p">;</span>
-<span class="p">};</span>
-</pre></div>
-</div>
-</section>
-<section id="public-class-members">
-<h2>Public Class Members<a class="headerlink" href="#public-class-members" title="Permalink to this heading">#</a></h2>
-<section id="typedefs">
-<h3>Typedefs<a class="headerlink" href="#typedefs" title="Permalink to this heading">#</a></h3>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">original_view_type</span></code>: Type of View passed to ScatterView constructor.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">original_value_type</span></code>: Value type of the original_view_type.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">original_reference_type</span></code>: Reference type of the original_view_type.
-// ScatterDuplicated only</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">data_type_info</span></code>: DuplicatedDataType, a newly created DataType that has a new runtime dimension which becomes the largest-stride dimension, from the given View DataType.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">internal_data_type</span></code>: Value type of data_type_info.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">internal_view_type</span></code>: A View type created from the internal_data_type.</p></li>
-</ul>
-</section>
-<section id="constructors">
-<h3>Constructors<a class="headerlink" href="#constructors" title="Permalink to this heading">#</a></h3>
-<ul>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="w"> </span><span class="n">ScatterView</span><span class="p">();</span>
-</pre></div>
-</div>
-<p>Default constructor. Default constructs members.</p>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="w"> </span><span class="n">ScatterView</span><span class="p">(</span><span class="n">View</span><span class="o">&lt;</span><span class="n">RT</span><span class="p">,</span><span class="w"> </span><span class="n">RP</span><span class="p">...</span><span class="o">&gt;</span><span class="w"> </span><span class="k">const</span><span class="o">&amp;</span><span class="w"> </span><span class="p">);</span>
-</pre></div>
-</div>
-<p>Constructor from a <code class="docutils literal notranslate"><span class="pre">Kokkos::View</span></code>. <code class="docutils literal notranslate"><span class="pre">internal_view</span></code> member is copy constructed from this input view.</p>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="w"> </span><span class="n">ScatterView</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="k">const</span><span class="o">&amp;</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">Dims</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="n">dims</span><span class="p">);</span>
-</pre></div>
-</div>
-<p>Constructor from variadic pack of dimension arguments. Constructs <code class="docutils literal notranslate"><span class="pre">internal_view</span></code> member.</p>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="w"> </span><span class="n">ScatterView</span><span class="p">(</span><span class="o">::</span><span class="n">Kokkos</span><span class="o">::</span><span class="n">Impl</span><span class="o">::</span><span class="n">ViewCtorProp</span><span class="o">&lt;</span><span class="n">P</span><span class="p">...</span><span class="o">&gt;</span><span class="w"> </span><span class="k">const</span><span class="o">&amp;</span><span class="w"> </span><span class="n">arg_prop</span><span class="p">,</span><span class="w"> </span><span class="n">Dims</span><span class="p">...</span><span class="w"> </span><span class="n">dims</span><span class="p">);</span>
-</pre></div>
-</div>
-<p>Constructor from variadic pack of dimension arguments. Constructs <code class="docutils literal notranslate"><span class="pre">internal_view</span></code> member.
-This constructor allows specifying an execution space instance to be used by passing, e.g.,
-Kokkos::view_alloc(exec_space, “label”) as first argument.</p>
-</li>
-</ul>
-</section>
-<section id="functions">
-<h3>Functions<a class="headerlink" href="#functions" title="Permalink to this heading">#</a></h3>
-<ul>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">constexpr</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="nf">is_allocated</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
-</pre></div>
-</div>
-<p>Returns true if the <code class="docutils literal notranslate"><span class="pre">internal_view</span></code> points to a valid memory location.  This function works for both managed and unmanaged views. With the unmanaged view, there is no guarantee that referenced address is valid, only that it is a non-null pointer.</p>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="w"> </span><span class="n">access</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
-</pre></div>
-</div>
-<p>Use within a kernel to return a <code class="docutils literal notranslate"><span class="pre">ScatterAccess</span></code> member; this member accumulates a given thread’s contribution to the reduction.</p>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="w"> </span><span class="n">subview</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
-</pre></div>
-</div>
-<p>Return a subview of a <code class="docutils literal notranslate"><span class="pre">ScatterView</span></code>.</p>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="w"> </span><span class="n">contribute_into</span><span class="p">(</span><span class="n">View</span><span class="o">&lt;</span><span class="n">DT</span><span class="p">,</span><span class="w"> </span><span class="n">RP</span><span class="p">...</span><span class="o">&gt;</span><span class="w"> </span><span class="k">const</span><span class="o">&amp;</span><span class="w"> </span><span class="n">dest</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
-</pre></div>
-</div>
-<p>Contribute <code class="docutils literal notranslate"><span class="pre">ScatterView</span></code> array’s results into the input View <code class="docutils literal notranslate"><span class="pre">dest</span></code>.</p>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="w"> </span><span class="n">reset</span><span class="p">();</span>
-</pre></div>
-</div>
-<p>Performs reset on destination array.</p>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="w"> </span><span class="n">reset_except</span><span class="p">(</span><span class="n">View</span><span class="o">&lt;</span><span class="n">DT</span><span class="p">,</span><span class="w"> </span><span class="n">RP</span><span class="p">...</span><span class="o">&gt;</span><span class="w"> </span><span class="k">const</span><span class="o">&amp;</span><span class="w"> </span><span class="n">view</span><span class="p">);</span>
-</pre></div>
-</div>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="w"> </span><span class="n">resize</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">n0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">n1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">n2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">n3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">n4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">n5</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">n6</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">n7</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
-</pre></div>
-</div>
-<p>Resize a view with copying old data to new data at the corresponding indices.</p>
-</li>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="w"> </span><span class="n">realloc</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">n0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">n1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">n2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">n3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">n4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">n5</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">n6</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">n7</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
-</pre></div>
-</div>
-<p>Resize a view with discarding old data.</p>
-</li>
-</ul>
-</section>
-<section id="free-functions">
-<h3>Free Functions<a class="headerlink" href="#free-functions" title="Permalink to this heading">#</a></h3>
-<ul>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">contribute</span><span class="p">(</span><span class="n">View</span><span class="o">&lt;</span><span class="n">DT1</span><span class="p">,</span><span class="w"> </span><span class="n">VP</span><span class="p">...</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">dest</span><span class="p">,</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">Experimental</span><span class="o">::</span><span class="n">ScatterView</span><span class="o">&lt;</span><span class="n">DT2</span><span class="p">,</span><span class="w"> </span><span class="n">LY</span><span class="p">,</span><span class="w"> </span><span class="n">ES</span><span class="p">,</span><span class="w"> </span><span class="n">OP</span><span class="p">,</span><span class="w"> </span><span class="n">CT</span><span class="p">,</span><span class="w"> </span><span class="n">DP</span><span class="o">&gt;</span><span class="w"> </span><span class="k">const</span><span class="o">&amp;</span><span class="w"> </span><span class="n">src</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Convenience function to perform final reduction of ScatterView results into a resultant View; may be called following <a class="reference internal" href="../core/parallel-dispatch/parallel_reduce.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">parallel_reduce()</span></code></span></a>.</p>
-</li>
-</ul>
-</section>
 </section>
 </section>
 
@@ -754,14 +723,8 @@ Kokkos::view_alloc(exec_space, “label”) as first argument.</p>
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">ScatterView</span></code></a><ul>
-<li><a class="reference internal" href="#synopsis">Synopsis</a></li>
-<li><a class="reference internal" href="#public-class-members">Public Class Members</a><ul>
-<li><a class="reference internal" href="#typedefs">Typedefs</a></li>
-<li><a class="reference internal" href="#constructors">Constructors</a></li>
-<li><a class="reference internal" href="#functions">Functions</a></li>
-<li><a class="reference internal" href="#free-functions">Free Functions</a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#description">Description</a></li>
+<li><a class="reference internal" href="#example">Example</a></li>
 </ul>
 </li>
 </ul>
