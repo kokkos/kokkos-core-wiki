@@ -7,7 +7,7 @@ CMake Keywords
 
    With version 3.0 all Kokkos CMake keywords are prefixed with `Kokkos_` which is case-sensitive.
 
-   Recall that to set a keyword in CMake you used the syntax ``-Dkeyword_name``.
+   Recall that to set a keyword in CMake you used the syntax ``-Dkeyword_name=value``.
 
 
 This page is organized in four sections:
