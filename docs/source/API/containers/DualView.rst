@@ -147,16 +147,16 @@ Description
 
     .. cppkokkos:function:: DualView(const std::string& label, const size_t n0 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n1 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n2 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n3 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n4 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n5 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n6 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n7 = KOKKOS_IMPL_CTOR_DEFAULT_ARG);
 
-       Constructor that allocates View objects on both host and device. This constructor works like the analogous constructor of View.
+       Constructor that allocates View objects on both host and device.
        The first argument is a string label, which is entirely for your benefit. (Different DualView objects may have the same label if you like.)
        The arguments that follow are the dimensions of the View objects. For example, if the View has three dimensions,
        the first three integer arguments will be nonzero, and you may omit the integer arguments that follow.
 
     .. cppkokkos:function:: DualView(/* is-alloc-prop */ const& arg_prop, const size_t n0 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n1 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n2 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n3 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n4 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n5 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n6 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n7 = KOKKOS_IMPL_CTOR_DEFAULT_ARG);
 
-       Constructor that allocates View objects on both host and device. This constructor works like the analogous constructor of View.
-       The first arguments are wrapped up in a ViewCtor class, this allows for a label, without initializing,
-       and all of the other things that can be created using ``Kokkos::view_alloc()``. The arguments that follow are the dimensions of the View objects.
+       Constructor that allocates View objects on both host and device.
+       The first arguments are constructed from ``Kokkos::view_alloc()`` that allows, e.g., to provide a label, avoid initialization, or specifying an execution space instance.
+       The arguments that follow are the dimensions of the View objects.
        For example, if the View has three dimensions, the first three integer arguments will be nonzero, and you may omit the integer arguments that follow.
 
     .. cppkokkos:function:: DualView(const DualView<SS, LS, DS, MS>& src);
