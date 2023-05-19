@@ -145,6 +145,10 @@ Enable Options
     * * ``Kokkos_ENABLE_TESTS``
       * Build tests
       * ``OFF``
+
+    * * ``Kokkos_ENABLE_TUNING``
+      * Create bindings for tuning tools
+      * ``OFF``
        
 
 ``Kokkos_ENABLE_CUDA_LAMBDA`` default value is ``OFF`` until 3.7 and ``ON`` since 4.0
