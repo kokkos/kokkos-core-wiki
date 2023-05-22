@@ -138,10 +138,6 @@ Enable Options
       * Perform extra large memory tests
       * ``OFF``
 
-    * * ``Kokkos_ENABLE_PROFILING_LOAD_PRINT``
-      * Print information about which profiling tools got loaded
-      * ``OFF``
-
     * * ``Kokkos_ENABLE_TESTS``
       * Build tests
       * ``OFF``
