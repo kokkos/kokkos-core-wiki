@@ -41,24 +41,43 @@ Interface
                const Kokkos::View<DataType, Properties...>& view,
                SizeType n, const T& value);
 
+   //
+   // overload set accepting a team handle
+   //
+   template <class TeamHandleType, class IteratorType, class SizeType, class T>
+   KOKKOS_FUNCTION
+   IteratorType fill_n(const TeamHandleType& th,
+                       IteratorType first, SizeType n,
+                       const T& value);
+
+   template <
+       class TeamHandleType, class DataType, class... Properties, class SizeType,
+       class T, int>
+   KOKKOS_FUNCTION
+   IteratorType fill_n(const TeamHandleType& th,
+                       const Kokkos::View<DataType, Properties...>& view,
+                       SizeType n,
+                       const T& value);
+
 
 Parameters and Requirements
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 - ``exespace``, ``first``, ``view``, ``value``: same as in [``fill``](./StdFill): execution space instance
 
-- ``label``:
+- ``teamHandle``: team handle instance given inside a parallel region when using a TeamPolicy
 
-  - used to name the implementation kernels for debugging purposes
+- ``label``: used to name the implementation kernels for debugging purposes
 
   - for 1, the default string is: "Kokkos::fill_n_iterator_api_default"
 
   - for 3, the default string is: "Kokkos::fill_n_view_api_default"
 
-- ``n``:
+  - NOTE: overloads accepting a team handle do not use a label internally
 
-  - number of elements to modify (must be non-negative)
+- ``n``: number of elements to modify (must be non-negative)
 
+- ``value``: value to assign to each element
 
 Return Value
 ~~~~~~~~~~~~

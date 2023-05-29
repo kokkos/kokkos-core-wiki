@@ -42,22 +42,37 @@ Interface
                 const Kokkos::View<DataType, Properties...>& view,
                 const T& old_value, const T& new_value);
 
+   //
+   // overload set accepting a team handle
+   //
+   template <class TeamHandleType, class Iterator, class ValueType>
+   KOKKOS_FUNCTION
+   void replace(const TeamHandleType& teamHandle,
+                Iterator first, Iterator last,
+                const ValueType& old_value, const ValueType& new_value);
+
+   template <class TeamHandleType, class DataType1, class... Properties1,
+             class ValueType>
+   KOKKOS_FUNCTION
+   void replace(const TeamHandleType& teamHandle,
+                const ::Kokkos::View<DataType1, Properties1...>& view,
+                const ValueType& old_value, const ValueType& new_value);
 
 
 Parameters and Requirements
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- ``exespace``:
+- ``exespace``: execution space instance
 
-  - execution space instance
+- ``teamHandle``: team handle instance given inside a parallel region when using a TeamPolicy
 
-- ``label``:
-
-  - used to name the implementation kernels for debugging purposes
+- ``label``: used to name the implementation kernels for debugging purposes
 
   - for 1, the default string is: "Kokkos::replace_iterator_api_default"
 
   - for 3, the default string is: "Kokkos::replace_view_api_default"
+
+  - NOTE: overloads accepting a team handle do not use a label internally
 
 - ``first, last``:
 
@@ -75,9 +90,7 @@ Parameters and Requirements
 
   - must be accessible from ``exespace``
 
-- ``old_value``, ``new_value``:
-
-  - self-explanatory
+- ``old_value``, ``new_value``: self-explanatory
 
 
 Return Value

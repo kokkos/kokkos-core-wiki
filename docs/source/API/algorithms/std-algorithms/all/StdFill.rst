@@ -41,21 +41,38 @@ Interface
              const Kokkos::View<DataType, Properties...>& view,
              const T& value);
 
+   //
+   // overload set accepting a team handle
+   // Note: for now omit the overloads accepting a label
+   // since they cause issues on device because of the string allocation.
+   //
+   template <class TeamHandleType, class IteratorType, class T>
+   KOKKOS_FUNCTION
+   void fill(const TeamHandleType& th,
+             IteratorType first, IteratorType last,
+             const T& value);
+
+   template <class TeamHandleType, class DataType, class... Properties, class T>
+   KOKKOS_FUNCTION
+   void fill(const TeamHandleType& th,
+             const Kokkos::View<DataType, Properties...>& view,
+             const T& value);
+
 
 Parameters and Requirements
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- ``exespace``:
+- ``exespace``: execution space instance
 
-  - execution space instance
+- ``teamHandle``: team handle instance given inside a parallel region when using a TeamPolicy
 
-- ``label``:
-
-  - used to name the implementation kernels for debugging purposes
+- ``label``: string forwarded to internal parallel kernels for debugging purposes
 
   - for 1, the default string is: "Kokkos::fill_iterator_api_default"
 
   - for 3, the default string is: "Kokkos::fill_view_api_default"
+
+  - NOTE: overloads accepting a team handle do not use a label internally
 
 - ``first, last``: range of elements to search in
 
@@ -65,7 +82,7 @@ Parameters and Requirements
 
   - must represent a valid range, i.e., ``last >= first`` (checked in debug mode)
 
-  - must be accessible from ``exespace``
+  - must be accessible from ``exespace`` or from the execution space associated with the team handle
 
 - ``view``:
 
@@ -73,9 +90,7 @@ Parameters and Requirements
 
   - must be accessible from ``exespace``
 
-- ``value``:
-
-  - value to assign to each element
+- ``value``: value to assign to each element
 
 
 Return Value

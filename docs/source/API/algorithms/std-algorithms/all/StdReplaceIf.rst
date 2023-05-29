@@ -41,6 +41,22 @@ Interface
                    const Kokkos::View<DataType, Properties...>& view,
                    UnaryPredicateType pred, const T& new_value);
 
+   //
+   // overload set accepting a team handle
+   //
+   template <class TeamHandleType, class InputIterator, class Predicate,
+             class ValueType>
+   KOKKOS_FUNCTION
+   void replace_if(const TeamHandleType& teamHandle,
+                   InputIterator first, InputIterator last,
+                   Predicate pred, const ValueType& new_value);
+
+   template <class TeamHandleType, class DataType1, class... Properties1,
+             class Predicate, class ValueType>
+   KOKKOS_FUNCTION
+   void replace_if(const TeamHandleType& teamHandle,
+                   const ::Kokkos::View<DataType1, Properties1...>& view,
+                   Predicate pred, const ValueType& new_value);
 
 
 Parameters and Requirements
@@ -48,11 +64,15 @@ Parameters and Requirements
 
 - ``exespace``, ``first``, ``last``, ``view``, ``new_value``: same as in [``replace``](./StdReplace)
 
-- ``label``:
+- ``teamHandle``: team handle instance given inside a parallel region when using a TeamPolicy
+
+- ``label``: used to name the implementation kernels for debugging purposes
 
   - for 1, the default string is: "Kokkos::replace_if_iterator_api_default"
 
   - for 3, the default string is: "Kokkos::replace_if_view_api_default"
+
+  - NOTE: overloads accepting a team handle do not use a label internally
 
 - ``pred``:
 
@@ -77,6 +97,7 @@ Parameters and Requirements
       KOKKOS_INLINE_FUNCTION
       bool operator()(value_type v) const { return /* ... */; }
    };
+
 
 Return Value
 ~~~~~~~~~~~~

@@ -59,20 +59,41 @@ Interface
                      const Kokkos::View<DataType2, Properties2...>& view_to,
                      const T& old_value, const T& new_value);
 
+   //
+   // overload set accepting a team handle
+   //
+   template <class TeamHandleType, class InputIterator, class OutputIterator,
+             class ValueType>
+   KOKKOS_FUNCTION
+   OutputIterator replace_copy(const TeamHandleType& teamHandle,
+                               InputIterator first_from, InputIterator last_from,
+                               OutputIterator first_dest,
+                               const ValueType& old_value, const ValueType& new_value);
+
+   template <
+       class TeamHandleType, class DataType1, class... Properties1,
+       class DataType2, class... Properties2, class ValueType, int>
+   KOKKOS_FUNCTION
+   auto replace_copy(const TeamHandleType& teamHandle,
+                     const Kokkos::View<DataType1, Properties1...>& view_from,
+                     const Kokkos::View<DataType2, Properties2...>& view_dest,
+                     const ValueType& old_value, const ValueType& new_value);
+
+
 Parameters and Requirements
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- ``exespace``:
+- ``exespace``: execution space instance
 
-  - execution space instance
+- ``teamHandle``: team handle instance given inside a parallel region when using a TeamPolicy
 
-- ``label``:
-
-  - used to name the implementation kernels for debugging purposes
+- ``label``: used to name the implementation kernels for debugging purposes
 
   - for 1, the default string is: "Kokkos::replace_copy_iterator_api_default"
 
   - for 3, the default string is: "Kokkos::replace_copy_view_api_default"
+
+  - NOTE: overloads accepting a team handle do not use a label internally
 
 - ``first_from, last_from``:
 
@@ -100,9 +121,7 @@ Parameters and Requirements
 
   - must be accessible from ``exespace``
 
-- ``old_value``, ``new_value``:
-
-  - self-explanatory
+- ``old_value``, ``new_value``: self-explanatory
 
 
 Return Value
