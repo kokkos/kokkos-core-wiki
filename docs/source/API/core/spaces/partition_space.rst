@@ -23,6 +23,8 @@ Interface
 
 .. cppkokkos:function:: template<class ExecSpace, class ... Args> std::vector<ExecSpace> partition_space(const ExecSpace& space, Args...args);
 
+.. cppkokkos:function:: template<class ExecSpace, class T> std::vector<ExecSpace> partition_space(const ExecSpace& space, std::vector<T> const& weigths);
+
    Creates new execution space instances which dispatch to the same underlying
    hardware resources as an existing execution space instance.
    There is no implied synchronization relationship between the newly created instances and the pre-existing instance.
@@ -33,10 +35,15 @@ Interface
 		The relative weight of ``args`` is a hint for the fraction of hardware resources of ``space``
 		to associate with each newly created instance.
 
+   :param weights: ``std::vector`` of arithmetic type ``T`` providing a hint for the fraction of hardware resources of ``space``
+                   to associate with each newly created instance.
+
 Requirements
 ~~~~~~~~~~~~
 
 - ``(std::is_arithmetic_v<Args> && ...)`` is ``true``.
+
+- ``std::is_arithmetic_v<T>`` is ``true``.
 
 - ``ExecutionSpace().concurrency() >= N_PARTITIONS``
 
@@ -50,8 +57,8 @@ Semantics
   - ``space`` is not fenced by ``instance[i].fence()``.
   However, in practice these instances may block each other because they dispatch to the same hardware resources.
 
-- The relative weight of ``args`` is used as a hint for the desired resource allocation.
-  For example for a backend which uses discreet threads, weights of ``{1,2}`` would result
+- The relative weight of ``args``/``weights`` is used as a hint for the desired resource allocation.
+  For example for a backend which uses discrete threads, weights of ``{1,2}`` would result
   in two instances where the first is associated with about 1/3rd of the threads of the original instance,
   and the second with 2/3rds. However, for some backends each returned instance may be a copy of the original one.
 
