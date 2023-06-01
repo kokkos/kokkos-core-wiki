@@ -27,9 +27,9 @@ Interface
                            Generator g);
 
    template <class ExecutionSpace, class IteratorType, class Size, class Generator>
-   IteratorType  generate_n(const std::string& label, const ExecutionSpace& exespace,
-                            IteratorType first, Size count,
-                            Generator g);
+   IteratorType generate_n(const std::string& label, const ExecutionSpace& exespace,
+                           IteratorType first, Size count,
+                           Generator g);
 
    template <class ExecutionSpace, class DataType, class... Properties, class Size,
              class Generator>
@@ -80,7 +80,7 @@ Parameters and Requirements
 
   - must be *random access iterator*
 
-  - ``[first, first+n)`` must represent a valid range
+  - ``[first, first+count)`` must represent a valid range
 
   - must be accessible from ``exespace`` or from the execution space associated with the team handle
 
@@ -109,6 +109,6 @@ Parameters and Requirements
 Return Value
 ~~~~~~~~~~~~
 
-- 1,2,5: an iterator equal to ``first + n``
+- 1,2,5: an iterator equal to ``first + count``
 
-- 3,4,6: an iterator equal to ``Kokkos::begin(view) + n``
+- 3,4,6: an iterator equal to ``Kokkos::Experimental::begin(view) + count``
