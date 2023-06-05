@@ -22,24 +22,24 @@ Interface
    // overload set accepting an execution space
    //
    template <class ExecutionSpace, class IteratorType, class Size, class Generator>
-   IteratorType generate_n(const ExecutionSpace& exespace,
+   IteratorType generate_n(const ExecutionSpace& exespace,                           (1)
                            IteratorType first, Size count,
                            Generator g);
 
    template <class ExecutionSpace, class IteratorType, class Size, class Generator>
-   IteratorType generate_n(const std::string& label, const ExecutionSpace& exespace,
+   IteratorType generate_n(const std::string& label, const ExecutionSpace& exespace, (2)
                            IteratorType first, Size count,
                            Generator g);
 
    template <class ExecutionSpace, class DataType, class... Properties, class Size,
              class Generator>
-   auto generate_n(const ExecutionSpace& exespace,
+   auto generate_n(const ExecutionSpace& exespace,                                   (3)
                    const ::Kokkos::View<DataType, Properties...>& view, Size count,
                    Generator g);
 
    template <class ExecutionSpace, class DataType, class... Properties, class Size,
              class Generator>
-   auto generate_n(const std::string& label, const ExecutionSpace& ex,
+   auto generate_n(const std::string& label, const ExecutionSpace& ex,               (4)
                    const ::Kokkos::View<DataType, Properties...>& view, Size count,
                    Generator g);
 
@@ -48,14 +48,14 @@ Interface
    //
    template <class TeamHandleType, class IteratorType, class Size, class Generator>
    KOKKOS_FUNCTION
-   IteratorType generate_n(const TeamHandleType& teamHandle,
+   IteratorType generate_n(const TeamHandleType& teamHandle,                         (5)
                            IteratorType first, Size count,
                            Generator g);
 
    template <class TeamHandleType, class DataType, class... Properties, class Size,
              class Generator>
    KOKKOS_FUNCTION
-   auto generate_n(const TeamHandleType& teamHandle,
+   auto generate_n(const TeamHandleType& teamHandle,                                 (6)
                    const ::Kokkos::View<DataType, Properties...>& view, Size count,
                    Generator g);
 

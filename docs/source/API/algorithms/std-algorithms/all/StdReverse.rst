@@ -21,18 +21,18 @@ Interface
    // overload set accepting an execution space
    //
    template <class ExecutionSpace, class InputIterator>
-   void reverse(const ExecutionSpace& ex, InputIterator first, InputIterator last);
+   void reverse(const ExecutionSpace& ex, InputIterator first, InputIterator last);  (1)
 
    template <class ExecutionSpace, class InputIterator>
-   void reverse(const std::string& label, const ExecutionSpace& ex,
+   void reverse(const std::string& label, const ExecutionSpace& ex,                  (2)
                 InputIterator first, InputIterator last);
 
    template <class ExecutionSpace, class DataType, class... Properties>
-   void reverse(const ExecutionSpace& ex,
+   void reverse(const ExecutionSpace& ex,                                            (3)
                 const ::Kokkos::View<DataType, Properties...>& view);
 
    template <class ExecutionSpace, class DataType, class... Properties>
-   void reverse(const std::string& label, const ExecutionSpace& ex,
+   void reverse(const std::string& label, const ExecutionSpace& ex,                  (4)
                 const ::Kokkos::View<DataType, Properties...>& view);
 
    //
@@ -40,12 +40,12 @@ Interface
    //
    template <class TeamHandleType, class InputIterator>
    KOKKOS_FUNCTION
-   void reverse(const TeamHandleType& teamHandle, InputIterator first,
+   void reverse(const TeamHandleType& teamHandle, InputIterator first,               (5)
                 InputIterator last);
 
    template <class TeamHandleType, class DataType, class... Properties>
    KOKKOS_FUNCTION
-   void reverse(const TeamHandleType& teamHandle,
+   void reverse(const TeamHandleType& teamHandle,                                    (6)
                 const ::Kokkos::View<DataType, Properties...>& view);
 
 Parameters and Requirements
