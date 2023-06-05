@@ -1,14 +1,13 @@
 
-``move_backward``
-=================
+``swap_ranges``
+===============
 
 Header: ``<Kokkos_StdAlgorithms.hpp>``
 
 Description
 -----------
 
-Moves the elements from the range or from a rank-1 ``View`` in reverse order
-to the range beginning at ``d_last`` or to a target rank-1 ``View``.
+Swaps the elements between two ranges or two rank-1 ``View``
 
 Interface
 ---------
@@ -22,41 +21,40 @@ Interface
    // overload set accepting an execution space
    //
    template <class ExecutionSpace, class IteratorType1, class IteratorType2>
-   IteratorType2 move_backward(const ExecutionSpace& ex, IteratorType1 first,          (1)
-                               IteratorType1 last, IteratorType2 d_last);
+   IteratorType2 swap_ranges(const ExecutionSpace& ex, IteratorType1 first1,          (1)
+                             IteratorType1 last1, IteratorType2 first1);
 
    template <class ExecutionSpace, class DataType1, class... Properties1,
              class DataType2, class... Properties2>
-   auto move_backward(const ExecutionSpace& ex,                                        (2)
-                      const ::Kokkos::View<DataType1, Properties1...>& source,
-                      ::Kokkos::View<DataType2, Properties2...>& dest);
-
+   auto swap_ranges(const ExecutionSpace& ex,                                         (2)
+                    const ::Kokkos::View<DataType1, Properties1...>& source,
+                    ::Kokkos::View<DataType2, Properties2...>& dest);
 
    template <class ExecutionSpace, class IteratorType1, class IteratorType2>
-   IteratorType2 move_backward(const std::string& label, const ExecutionSpace& ex,     (3)
-                               IteratorType1 first, IteratorType1 last,
-                               IteratorType2 d_last);
+   IteratorType2 swap_ranges(const std::string& label, const ExecutionSpace& ex,      (3)
+                             IteratorType1 first1, IteratorType1 last1,
+                             IteratorType2 first1);
 
    template <class ExecutionSpace, class DataType1, class... Properties1,
              class DataType2, class... Properties2>
-   auto move_backward(const std::string& label, const ExecutionSpace& ex,              (4)
-                      const ::Kokkos::View<DataType1, Properties1...>& source,
-                      ::Kokkos::View<DataType2, Properties2...>& dest);
+   auto swap_ranges(const std::string& label, const ExecutionSpace& ex,               (4)
+                    const ::Kokkos::View<DataType1, Properties1...>& source,
+                    ::Kokkos::View<DataType2, Properties2...>& dest);
 
    //
    // overload set accepting a team handle
    //
    template <class TeamHandleType, class IteratorType1, class IteratorType2>
    KOKKOS_FUNCTION
-   IteratorType2 move_backward(const TeamHandleType& teamHandle, IteratorType1 first,  (5)
-                 IteratorType1 last, IteratorType2 d_last);
+   IteratorType2 swap_ranges(const TeamHandleType& teamHandle, IteratorType1 first1,  (5)
+                             IteratorType1 last1, IteratorType2 first1);
 
    template <class TeamHandleType, class DataType1, class... Properties1,
              class DataType2, class... Properties2>
    KOKKOS_FUNCTION
-   auto move_backward(const TeamHandleType& teamHandle,                                (6)
-                      const ::Kokkos::View<DataType1, Properties1...>& source,
-                      ::Kokkos::View<DataType2, Properties2...>& dest);
+   auto swap_ranges(const TeamHandleType& teamHandle,                                 (6)
+                    const ::Kokkos::View<DataType1, Properties1...>& source,
+                    ::Kokkos::View<DataType2, Properties2...>& dest);
 
 
 Parameters and Requirements
@@ -74,15 +72,15 @@ Parameters and Requirements
 
   - NOTE: overloads accepting a team handle do not use a label internally
 
-- ``first``, ``last``, ``d_last``: range of elements to move from and to in a reverse order
+- ``first1``, ``last1``, ``first2``: iterators defining the ranges to swap
 
   - must be *random access iterator*
 
-  - must represent a valid range, i.e., ``last >= first``
+  - must represent a valid range, i.e., ``last1 >= first1``
 
   - must be accessible from ``exespace`` or from the execution space associated with the team handle
 
-- ``source``, ``dest``: views to move from and to in a reverse order
+- ``source``, ``dest``: views to swap
 
   - must be rank-1, and have ``LayoutLeft``, ``LayoutRight``, or ``LayoutStride``
 
@@ -92,8 +90,8 @@ Parameters and Requirements
 Return Value
 ~~~~~~~~~~~~
 
-- 1,3,5: an iterator equal to ``d_last - Kokkos::Experimental::distance(first, last)``
+- 1,3,5: an iterator equal to ``first2 + Kokkos::Experimental::distance(first1, last1)``
 
 - 2,4,6: an iterator equal to
-  ``Kokkos::Experimental::end(dest) -
+  ``Kokkos::Experimental::begin(dest) +
   Kokkos::Experimental:distance(Kokkos::Experimental::begin(source), Kokkos::Experimental::end(source))``
