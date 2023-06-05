@@ -22,23 +22,23 @@ Interface
    // overload set accepting an execution space
    //
    template <class ExecutionSpace, class InputIterator, class OutputIterator>
-   OutputIterator reverse_copy(const ExecutionSpace& exespace, InputIterator first,
+   OutputIterator reverse_copy(const ExecutionSpace& exespace, InputIterator first,      (1)
                                InputIterator last, OutputIterator d_first);
 
    template <class ExecutionSpace, class InputIterator, class OutputIterator>
-   OutputIterator reverse_copy(const std::string& label, const ExecutionSpace& exespace,
+   OutputIterator reverse_copy(const std::string& label, const ExecutionSpace& exespace, (2)
                                InputIterator first, InputIterator last,
                                OutputIterator d_first);
 
    template <class ExecutionSpace, class DataType1, class... Properties1,
              class DataType2, class... Properties2>
-   auto reverse_copy(const ExecutionSpace& exespace,
+   auto reverse_copy(const ExecutionSpace& exespace,                                     (3)
                      const ::Kokkos::View<DataType1, Properties1...>& source,
                      ::Kokkos::View<DataType2, Properties2...>& dest);
 
    template <class ExecutionSpace, class DataType1, class... Properties1,
              class DataType2, class... Properties2>
-   auto reverse_copy(const std::string& label, const ExecutionSpace& exespace,
+   auto reverse_copy(const std::string& label, const ExecutionSpace& exespace,           (4)
                      const ::Kokkos::View<DataType1, Properties1...>& source,
                      ::Kokkos::View<DataType2, Properties2...>& dest);
 
@@ -47,14 +47,13 @@ Interface
    //
    template <class TeamHandleType, class InputIterator, class OutputIterator>
    KOKKOS_FUNCTION
-   OutputIterator
-   reverse_copy(const TeamHandleType& teamHandle, InputIterator first,
-                InputIterator last, OutputIterator d_first);
+   OutputIterator reverse_copy(const TeamHandleType& teamHandle, InputIterator first,    (5)
+                               InputIterator last, OutputIterator d_first);
 
    template <class TeamHandleType, class DataType1, class... Properties1,
              class DataType2, class... Properties2>
    KOKKOS_FUNCTION
-   auto reverse_copy(const TeamHandleType& teamHandle,
+   auto reverse_copy(const TeamHandleType& teamHandle,                                   (6)
                      const ::Kokkos::View<DataType1, Properties1...>& source,
                      ::Kokkos::View<DataType2, Properties2...>& dest);
 
@@ -94,4 +93,4 @@ Return Value
 
 - 3,4,6: an iterator equal to
   ``Kokkos::Experimental::begin(dest) +
-  Kokkos::Experimental:distance(Kokkos::Experimental::begin(source), Kokkos::Experimental::end(source))``
+  Kokkos::Experimental:distance(Kokkos::Experimental::cbegin(source), Kokkos::Experimental::cend(source))``
