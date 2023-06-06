@@ -8,8 +8,8 @@ Description
 -----------
 
 Copies the elements for which `pred` returns `true` from range `[first_from, last_from)`
-to another range beginning at `first_to` (overloads 1,2) or from `view_from` to `view_to`
-(overloads 3,4).
+to another range beginning at `first_to` (overloads 1,2,5) or from `view_from` to `view_to`
+(overloads 3,4,6).
 
 Interface
 ---------
@@ -18,6 +18,9 @@ Interface
 
 .. code-block:: cpp
 
+  //
+  // overload set accepting an execution space
+  //
   template <
     class ExecutionSpace, class InputIteratorType, class OutputIteratorType, class UnaryPredicateType
   >
@@ -59,12 +62,31 @@ Interface
                const Kokkos::View<DataType2, Properties2...>& view_to,
                UnaryPredicateType pred);
 
+  //
+  // overload set accepting a team handle
+  //
+  template <class TeamHandleType, class InputIterator, class Size,
+          class OutputIterator>
+  OutputIterator copy_n(const TeamHandleType& teamHandle, InputIterator first, (5)
+                        Size count, OutputIterator result);
+
+  template <
+    class TeamHandleType, class DataType1, class... Properties1, class Size,
+    class DataType2, class... Properties2>
+  auto copy_n(                                                                 (6)
+    const TeamHandleType& teamHandle,
+    const ::Kokkos::View<DataType1, Properties1...>& source, Size count,
+    ::Kokkos::View<DataType2, Properties2...>& dest);
+
 
 Parameters and Requirements
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 - `exespace`, `first_from`, `last_from`, `first_to`, `view_from`, `view_to`:
   - same as in [`copy`](./StdCopy)
+- `teamHandle`:
+  -  team handle instance given inside a parallel region when using a TeamPolicy
+  - NOTE: overloads accepting a team handle do not use a label internally
 - `label`:
   - for 1, the default string is: "Kokkos::copy_if_iterator_api_default"
   - for 3, the default string is: "Kokkos::copy_if_view_api_default"

@@ -8,8 +8,8 @@ Description
 -----------
 
 Copies the elements from range `[first_from, last_from)` to another
-range beginning at `first_to` (overloads 1,2) or from
-a source view `view_from` to a destination view `view_to` (overloads 3,4).
+range beginning at `first_to` (overloads 1,2,5) or from
+a source view `view_from` to a destination view `view_to` (overloads 3,4,6).
 
 Interface
 ---------
@@ -18,6 +18,9 @@ Interface
 
 .. code-block:: cpp
 
+  //
+  // overload set accepting an execution space
+  //
   template <class ExecutionSpace, class InputIteratorType, class OutputIteratorType>
   OutputIteratorType copy(const ExecutionSpace& exespace,                      (1)
                           InputIteratorType first_from,
@@ -46,16 +49,34 @@ Interface
             const Kokkos::View<DataType1, Properties1...>& view_from,
             const Kokkos::View<DataType2, Properties2...>& view_to);
 
+  //
+  // overload set accepting a team handle
+  //
+  template <class TeamHandleType, class InputIterator, class OutputIterator>
+  OutputIterator copy(const TeamHandleType& teamHandle, InputIterator first,   (5)
+                      InputIterator last, OutputIterator d_first);
+
+  template <
+    class TeamHandleType, class DataType1, class... Properties1,
+    class DataType2, class... Properties2>
+  auto copy(                                                                   (6)
+    const TeamHandleType& teamHandle,
+    const ::Kokkos::View<DataType1, Properties1...>& source,
+    ::Kokkos::View<DataType2, Properties2...>& dest);
+
 
 Parameters and Requirements
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 - `exespace`:
   - execution space instance
+- `teamHandle`:
+  -  team handle instance given inside a parallel region when using a TeamPolicy
 - `label`:
   - used to name the implementation kernels for debugging purposes
   - for 1, the default string is: "Kokkos::copy_iterator_api_default"
   - for 3, the default string is: "Kokkos::copy_view_api_default"
+  - NOTE: overloads accepting a team handle do not use a label internally
 - `first_from, last_from`:
   - range of elements to copy from
   - must be *random access iterators*
