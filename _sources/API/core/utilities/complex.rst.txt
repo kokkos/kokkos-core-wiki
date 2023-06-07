@@ -32,7 +32,9 @@ Description
 
    .. rubric:: Private Members
 
-   .. cppkokkos:member:: value_type im, re
+   .. cppkokkos:member:: value_type im
+
+   .. cppkokkos:member:: value_type re
 
       Private data members representing the real and the imaginary parts.
 
