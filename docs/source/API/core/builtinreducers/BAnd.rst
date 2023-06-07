@@ -50,9 +50,9 @@ Synopsis
 Interface
 ---------
 
-.. cppkokkos:class:: template<class Scalar, class Space> LayoutLeft
+.. cppkokkos:class:: template<class Scalar, class Space> BAnd
 
-   .. rubric:: Public Nested Typedefs
+   .. rubric:: Public Types
 
    .. cppkokkos:type:: reducer
 
@@ -76,7 +76,7 @@ Interface
 
       Constructs a reducer which references a specific view as its result location.
 
-   .. rubric:: Methods
+   .. rubric:: Public Member Functions
 
    .. cppkokkos:kokkosinlinefunction:: void join(value_type& dest, const value_type& src) const;
 
