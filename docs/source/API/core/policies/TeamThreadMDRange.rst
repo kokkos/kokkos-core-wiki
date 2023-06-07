@@ -6,8 +6,8 @@
 
 Header File: ``<Kokkos_Core.hpp>``
 
-Usage:
-------
+Usage
+-----
 
 .. code-block:: cpp
 
@@ -17,7 +17,7 @@ Usage:
      [=] (int i1, int i2, ..., double& lsum) {...}, sum);
 
 
-TeamThreadMDRange is a a `nested execution policy <./NestedPolicies.html>`_  used inside of hierarchical parallelism.
+TeamThreadMDRange is a `nested execution policy <./NestedPolicies.html>`_  used inside of hierarchical parallelism.
 
 Interface
 ---------
