@@ -4445,7 +4445,7 @@ class Symbol:
                 candSymbol.isRedeclaration = True
                 raise _DuplicateSymbolError(symbol, declaration)
 
-            if declaration.objectType != "function":
+            if declaration.objectType not in ['function', 'kokkosinlinefunction']:
                 assert len(withDecl) <= 1
                 handleDuplicateDeclaration(withDecl[0], candSymbol)
                 # (not reachable)
@@ -4457,7 +4457,7 @@ class Symbol:
             for symbol in withDecl:
                 # but all existing must be functions as well,
                 # otherwise we declare it to be a duplicate
-                if symbol.declaration.objectType != 'function':
+                if symbol.declaration.objectType not in ['function', 'kokkosinlinefunction']:
                     handleDuplicateDeclaration(symbol, candSymbol)
                     # (not reachable)
                 oldId = symbol.declaration.get_newest_id()
