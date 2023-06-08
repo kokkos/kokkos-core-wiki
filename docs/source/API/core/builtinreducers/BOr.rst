@@ -58,7 +58,7 @@ Interface
 
         The self type
 
-    .. cpkkokkos:type:: value_type
+    .. cppkokkos:type:: value_type
 
         The reduction scalar type.
 
