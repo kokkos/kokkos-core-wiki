@@ -7,14 +7,13 @@ CMake Keywords
 
    With version 3.0 all Kokkos CMake keywords are prefixed with `Kokkos_` which is case-sensitive.
 
-   Recall that to set a keyword in CMake you used the syntax ``-Dkeyword_name``.
+   Recall that to set a keyword in CMake you used the syntax ``-Dkeyword_name=value``.
 
 
 This page is organized in four sections:
 
 - :ref:`keywords_backends`
 - :ref:`keywords_enable_options`
-- :ref:`keywords_enable_other_options`
 - :ref:`keywords_tpls`
 - :ref:`keywords_arch`
 
@@ -71,7 +70,7 @@ Enable Options
 ===============
 
 .. list-table::
-    :widths: 25 65 10
+    :widths: 25 65 35
     :header-rows: 1
     :align: left
 
@@ -93,7 +92,7 @@ Enable Options
 
     * * ``Kokkos_ENABLE_CUDA_LAMBDA``
       * Activate experimental lambda features
-      * ``OFF``
+      * (see below)
 
     * * ``Kokkos_ENABLE_CUDA_LDG_INTRINSIC``
       * Use CUDA LDG intrinsics
@@ -135,21 +134,20 @@ Enable Options
       * Enable relocatable device code (RDC) for HIP
       * ``OFF``
 
-    * * ``Kokkos_ENABLE_HPX_ASYNC_DISPATCH``
-      * Whether HPX supports asynchronous dispatch
-      * ``OFF``
-
     * * ``Kokkos_ENABLE_LARGE_MEM_TESTS``
       * Perform extra large memory tests
-      * ``OFF``
-
-    * * ``Kokkos_ENABLE_PROFILING_LOAD_PRINT``
-      * Print information about which profiling tools got loaded
       * ``OFF``
 
     * * ``Kokkos_ENABLE_TESTS``
       * Build tests
       * ``OFF``
+
+    * * ``Kokkos_ENABLE_TUNING``
+      * Create bindings for tuning tools
+      * ``OFF``
+       
+
+``Kokkos_ENABLE_CUDA_LAMBDA`` default value is ``OFF`` until 3.7 and ``ON`` since 4.0
 
 .. _keywords_tpls:
 
@@ -172,9 +170,6 @@ The following options control enabling TPLs:
       * ``OFF``
     * * ``Kokkos_ENABLE_HWLOC``
       * Whether to enable the HWLOC library
-      * ``Off``
-    * * ``Kokkos_ENABLE_LIBNUMA``
-      * Whether to enable the LIBNUMA library
       * ``Off``
     * * ``Kokkos_ENABLE_MEMKIND``
       * Whether to enable the MEMKIND library
@@ -203,10 +198,6 @@ The following options control finding and configuring non-CMake TPLs:
 
     * * ``Kokkos_HWLOC_DIR`` or ``HWLOC_ROOT``
       * Location of HWLOC install prefix
-      * PATH Default:
-
-    * * ``Kokkos_LIBNUMA_DIR`` or ``LIBNUMA_ROOT``
-      * Location of LIBNUMA install prefix
       * PATH Default:
 
     * * ``Kokkos_MEMKIND_DIR`` or ``MEMKIND_ROOT``
@@ -258,6 +249,10 @@ Architecture Keywords
       * Optimize for ARMv8.2 with SVE Support
       * ``OFF``
 
+    * * ``Kokkos_ARCH_ADA89``
+      * Optimize for the NVIDIA Ada generation CC 8.9 :sup:`since Kokkos 4.1`
+      * ``OFF``
+
     * * ``Kokkos_ARCH_AMPERE80``
       * Optimize for the NVIDIA Ampere generation CC 8.0
       * ``OFF``
@@ -299,7 +294,7 @@ Architecture Keywords
       * ``OFF``
 
     * * ``Kokkos_ARCH_HOPPER90``
-      * Optimize for the NVIDIA Hopper generation CC 9.0 <sup>since Kokkos 4.0</sup>
+      * Optimize for the NVIDIA Hopper generation CC 9.0 :sup:`since Kokkos 4.0`
       * ``OFF``
 
     * * ``Kokkos_ARCH_HSW``
@@ -307,7 +302,31 @@ Architecture Keywords
       * ``OFF``
 
     * * ``Kokkos_ARCH_INTEL_GEN``
-      * Optimize for Intel GPUs Gen9+
+      * Optimize for Intel GPUs, Just-In-Time compilation*
+      * ``OFF``
+
+    * * ``Kokkos_ARCH_INTEL_DG1``
+      * Optimize for Intel Iris XeMAX GPU
+      * ``OFF``
+
+    * * ``Kokkos_ARCH_INTEL_GEN9``
+      * Optimize for Intel GPU Gen9
+      * ``OFF``
+
+    * * ``Kokkos_ARCH_INTEL_GEN11``
+      * Optimize for Intel GPU Gen11
+      * ``OFF``
+
+    * * ``Kokkos_ARCH_INTEL_GEN12LP``
+      * Optimize for Intel GPU Gen12LP
+      * ``OFF``
+
+    * * ``Kokkos_ARCH_INTEL_XEHP``
+      * Optimize for Intel GPU Xe-HP
+      * ``OFF``
+
+    * * ``Kokkos_ARCH_INTEL_PVC``
+      * Optimize for Intel GPU Ponte Vecchio/GPU Max
       * ``OFF``
 
     * * ``Kokkos_ARCH_KEPLER30``
@@ -346,6 +365,10 @@ Architecture Keywords
       * Optimize for MAXWELL53 architecture
       * ``OFF``
 
+    * * ``Kokkos_ARCH_NAVI1030`` :red:`[Since 4.0]`
+      * Optimize for AMD GPU V620/W6800 GFX1030
+      * ``OFF``
+
     * * ``Kokkos_ARCH_PASCAL60``
       * Optimize for PASCAL60 architecture
       * ``OFF``
@@ -374,11 +397,15 @@ Architecture Keywords
       * Optimize for SNB architecture
       * ``OFF``
 
+    * * ``Kokkos_ARCH_SPR``
+      * Optimize for Sapphire Rapids architecture
+      * ``OFF``
+
     * * ``Kokkos_ARCH_TURING75``
       * Optimize for TURING75 architecture
       * ``OFF``
 
-    * * ``Kokkos_ARCH_VEGA900``
+    * * ``Kokkos_ARCH_VEGA900`` :red:`[Removed in 4.0]`
       * Optimize for AMD GPU MI25 GFX900
       * ``OFF``
 
@@ -417,3 +444,9 @@ Architecture Keywords
     * * ``Kokkos_ARCH_ZEN3``
       * Optimize for Zen3 architecture
       * ``OFF``
+
+\* ``Kokkos_ARCH_INTEL_GEN`` enables Just-In-Time compilation for Intel GPUs whereas all the other flags for Intel compilers
+request Ahead-Of-Time compilation. Just-In-Time compilation means that the compiler is invoked again when the binaries created
+are actually executed and only at that point the architecture to compile for is determined. On the other hand, Ahead-Of-Time
+compilation describes the standard model where the compiler is only invoked once to create the binary and the architecture to
+compile for is determined before the program is run.

@@ -73,11 +73,9 @@ Bit manipulation function templates are defined in the ``Kokkos::`` namespace si
 
 .. |popcount| replace:: ``popcount``
 
-:strike:`func` denotes function templates that have not been implemented.
-
 ================== ============================================================
-:strike:`bit_cast` reinterpret the object representation of one type as that of another
-:strike:`byteswap` reverses the bytes in the given integer value 
+|bit_cast|_        reinterpret the object representation of one type as that of another (see note below)
+|byteswap|_        reverses the bytes in the given integer value 
 |has_single_bit|_  checks if a number is an integral power of two 
 |bit_ceil|_        finds the smallest integral power of two not less than the given value
 |bit_floor|_       finds the largest integral power of two not greater than the given value
@@ -100,3 +98,7 @@ Notes
   with the ``*_builtin`` suffix is provided in the ``Kokkos::Experimental::``
   namespace to make up for some compiler intrinsics that cannot appear in
   constant expressions.
+* In contrast to its counterpart in the C++ standard library,
+  ``Kokkos::bit_cast`` is not usable in constant expressions (not a
+  ``constexpr`` function) as it is not implementable as a library facility
+  and requires compiler magic which is not available to us.

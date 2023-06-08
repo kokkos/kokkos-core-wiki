@@ -1,5 +1,5 @@
-``parallel_scan()``
-===================
+``parallel_scan``
+=================
 
 .. role::cpp(code)
     :language: cpp

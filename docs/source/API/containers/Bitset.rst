@@ -1,10 +1,11 @@
-``Bitset``
-==========
 
 .. role:: cpp(code)
    :language: cpp
 
-Header file: ``Kokkos_Bitset.hpp``
+``Bitset``
+==========
+
+Header file: ``<Kokkos_Bitset.hpp>``
 
 Class Interface
 ---------------

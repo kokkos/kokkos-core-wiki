@@ -1,12 +1,12 @@
-``parallel_reduce()``
-=====================
+``parallel_reduce``
+===================
 
 .. role::cpp(code)
     :language: cpp
 
 Header File: ``<Kokkos_Core.hpp>``
 
-Usage 
+Usage
 -----
 
 .. code-block:: cpp
@@ -26,110 +26,65 @@ Interface
 .. code-block:: cpp
 
     template <class ExecPolicy, class FunctorType>
-    Kokkos::parallel_reduce(const std::string& name, 
-                            const ExecPolicy& policy, 
+    Kokkos::parallel_reduce(const std::string& name,
+                            const ExecPolicy& policy,
                             const FunctorType& functor);
 
 .. code-block:: cpp
 
     template <class ExecPolicy, class FunctorType>
-    Kokkos::parallel_reduce(const ExecPolicy& policy, 
+    Kokkos::parallel_reduce(const ExecPolicy& policy,
                             const FunctorType& functor);
 
 .. code-block:: cpp
 
-    template <class ExecPolicy, class FunctorType, class ReducerArgument>
-    Kokkos::parallel_reduce(const std::string& name, 
-                            const ExecPolicy& policy, 
-                            const FunctorType& functor, 
-                            const ReducerArgument& reducer...);
+    template <class ExecPolicy, class FunctorType, class... ReducerArgument>
+    Kokkos::parallel_reduce(const std::string& name,
+                            const ExecPolicy& policy,
+                            const FunctorType& functor,
+                            const ReducerArgument&... reducer);
 
 .. code-block:: cpp
 
-    template <class ExecPolicy, class FunctorType, class ReducerArgument>
-    Kokkos::parallel_reduce(const ExecPolicy& policy, 
-                            const FunctorType& functor, 
-                            const ReducerArgument& reducer...);
+    template <class ExecPolicy, class FunctorType, class... ReducerArgument>
+    Kokkos::parallel_reduce(const ExecPolicy& policy,
+                            const FunctorType& functor,
+                            const ReducerArgument&... reducer);
 
 .. code-block:: cpp
 
-    template <class ExecPolicy, class FunctorType, class ReducerArgumentNonConst>
-    Kokkos::parallel_reduce(const std::string& name, 
-                            const ExecPolicy& policy, 
-                            const FunctorType& functor, 
-                            ReducerArgumentNonConst& reducer...);
+    template <class ExecPolicy, class FunctorType, class... ReducerArgumentNonConst>
+    Kokkos::parallel_reduce(const std::string& name,
+                            const ExecPolicy& policy,
+                            const FunctorType& functor,
+                            ReducerArgumentNonConst&... reducer);
 
 .. code-block:: cpp
 
-    template <class ExecPolicy, class FunctorType, class ReducerArgumentNonConst>
-    Kokkos::parallel_reduce(const ExecPolicy& policy, 
-                            const FunctorType& functor, 
-                            ReducerArgumentNonConst& reducer...);
-    
-.. code-block:: cpp
-
-    template <class ExecPolicy, class FunctorType, class ReducerArgument1, class... ReducerArguments>
-    Kokkos::parallel_reduce(const std::string& name, 
-                            const ExecPolicy& policy, 
-                            const FunctorType& functor, 
-                            const ReducerArgument& reducer...);
-
-.. code-block:: cpp
-
-    template <class ExecPolicy, class FunctorType, class ReducerArgument1, class... ReducerArguments>
-    Kokkos::parallel_reduce(const ExecPolicy& policy, 
-                            const FunctorType& functor, 
-                            const ReducerArgument& reducer...);
-
-.. code-block:: cpp
-
-    template <class ExecPolicy, class FunctorType, class ReducerArgumentNonConst1, class... ReducerArgumentNonConsts>
-    Kokkos::parallel_reduce(const std::string& name, 
-                            const ExecPolicy& policy, 
-                            const FunctorType& functor, 
-                            ReducerArgumentNonConst& reducer...);
-
-.. code-block:: cpp
-
-    template <class ExecPolicy, class FunctorType, class ReducerArgumentNonConst1, class ReducerArgumentNonConsts>
-    Kokkos::parallel_reduce(const ExecPolicy& policy, 
-                            const FunctorType& functor, 
-                            ReducerArgumentNonConst& reducer...);
-
-.. code-block:: cpp
-
-    template <class ExecPolicy, class FunctorType>
-    Kokkos::parallel_reduce(const std::string& name, 
-                            const ExecPolicy& policy, 
-                            const FunctorType& functor, 
-                            const ResultType& result...);
-
-.. code-block:: cpp
-
-    template <class ExecPolicy, class FunctorType>
-    Kokkos::parallel_reduce(const ExecPolicy& policy, 
-                            const FunctorType& functor, 
-                            const ResultType& result...);
+    template <class ExecPolicy, class FunctorType, class... ReducerArgumentNonConst>
+    Kokkos::parallel_reduce(const ExecPolicy& policy,
+                            const FunctorType& functor,
+                            ReducerArgumentNonConst&... reducer);
 
 Parameters:
 ~~~~~~~~~~~
 
-* ``name``: A user provided string which is used in profiling and debugging tools via the Kokkos Profiling Hooks. 
+* ``name``: A user provided string which is used in profiling and debugging tools via the Kokkos Profiling Hooks.
 * ExecPolicy: An *ExecutionPolicy* which defines iteration space and other execution properties. Valid policies are:
 
   - ``IntegerType``: defines a 1D iteration range, starting from 0 and going to a count.
-  - `RangePolicy <../policies/RangePolicy.html>`_: defines a 1D iteration range. 
+  - `RangePolicy <../policies/RangePolicy.html>`_: defines a 1D iteration range.
   - `MDRangePolicy <../policies/MDRangePolicy.html>`_: defines a multi-dimensional iteration space.
   - `TeamPolicy <../policies/TeamPolicy.html>`_: defines a 1D iteration range, each of which is assigned to a thread team.
   - `TeamThreadRange <../policies/TeamThreadRange.html>`_: defines a 1D iteration range to be executed by a thread-team. Only valid inside a parallel region executed through a ``TeamPolicy`` or a ``TaskTeam``.
   - `ThreadVectorRange <../policies/ThreadVectorRange.html>`_: defines a 1D iteration range to be executed through vector parallelization dividing the threads within a team.  Only valid inside a parallel region executed through a ``TeamPolicy`` or a ``TaskTeam``.
 * FunctorType: A valid functor with (at minimum) an ``operator()`` with a matching signature for the ``ExecPolicy`` combined with the reduced type.
 * ReducerArgument: Either a class fullfilling the "Reducer" concept or a ``Kokkos::View``
-* ReducerArgumentNonConst: a class fullfilling the "Reducer" concept, a POD type with ``operator +=`` and ``operator =``, or a ``Kokkos::View``.  The ReducerArgumentNonConst can also be an array or a pointer; see below for functor requirements.
+* ReducerArgumentNonConst: A scalar type or an array type; see below for functor requirements.
 
 Requirements:
 ~~~~~~~~~~~~~
-  
+
 * If ``ExecPolicy`` is not ``MDRangePolicy``, the ``functor`` has a member function of the form ``operator() (const HandleType& handle, ReducerValueType& value) const`` or ``operator() (const WorkTag, const HandleType& handle, ReducerValueType& value) const``.
 
   - If ``ExecPolicy::work_tag`` is ``void`` or if ``ExecPolicy`` is an ``IntegerType``, the overload without a ``WorkTag`` argument is used.
@@ -140,38 +95,38 @@ Requirements:
   - ``N`` must match ``ExecPolicy::rank``.
 * If the ``functor`` is a lambda, ``ReducerArgument`` must satisfy the ``Reducer`` concept or ``ReducerArgumentNonConst`` must be a POD type with ``operator +=`` and ``operator =`` or a ``Kokkos::View``.  In the latter case, the default ``Sum`` reduction is applied. If provided, the ``init``/ ``join``/ ``final`` member functions must not take a ``WorkTag`` argument even for tagged reductions.
 * If ``ExecPolicy`` is ``TeamThreadRange`` a "reducing" ``functor`` is not allowed and the ``ReducerArgument`` must satisfy the ``Reducer`` concept or ``ReducerArgumentNonConst`` must be a POD type with ``operator +=`` and ``operator =`` or a ``Kokkos::View``.  In the latter case, the default ``Sum`` reduction is applied.
-* The reduction argument type ``ReducerValueType`` of the ``functor`` operator must be compatible with the ``ReducerArgument`` (or ``ReducerArgumentNonConst``) and must match the arguments of the ``init``, ``join`` and ``final`` functions of the functor if those exist and no reducer is specified (``ReducerArgument`` doesn't satisfy the ``Reducer`` concept but is a scalar, pointer, or ``Kokkos::View``). In case of tagged reductions, i.e., when specifying a tag in the policy, the functor's potential ``init``/ ``join``/ ``final`` member functions must also be tagged.
+* The reduction argument type ``ReducerValueType`` of the ``functor`` operator must be compatible with the ``ReducerArgument`` (or ``ReducerArgumentNonConst``) and must match the arguments of the ``init``, ``join`` and ``final`` functions of the functor if those exist and no reducer is specified (``ReducerArgument`` doesn't satisfy the ``Reducer`` concept but is a scalar, array or ``Kokkos::View``). In case of tagged reductions, i.e., when specifying a tag in the policy, the functor's potential ``init``/ ``join``/ ``final`` member functions must also be tagged.
 * If ``ReducerArgument`` (or ``ReducerArgumentNonConst``)
 
   - is a scalar type then ``ReducerValueType`` must be of the same type.
   - is a ``Kokkos::View`` then ``ReducerArgument::rank`` must be 0 and ``ReducerArgument::non_const_value_type`` must match ``ReducerValueType``.
   - satisfies the ``Reducer`` concept then ``ReducerArgument::value_type`` must match ``ReducerValueType``.
-  - is an array or a pointer
+  - is an array
 
-    + ReducerValueType must match the array or the pointer signature.
+    + ReducerValueType must match the array signature.
     + the functor must define FunctorType::value_type the same as ReducerValueType.
     + the functor must declare a public member variable ``int value_count`` which is the length of the array.
-    + the functor must implement the function ``void init( ReducerValueType dst [] ) const`` or ``void init( ReducerValueType * dst) const`` depending on whether ReducerArgumentNonConst is an array or pointer respectively.
-    + the functor must implement the function ``void join( ReducerValueType dst[], ReducerValueType src[] ) const`` or ``void join( ReducerValueType * dst, ReducerValueType * src ) const`` depending on whether.ReducerArgumentNonConst is an array or pointer respectively.  
+    + the functor must implement the function ``void init( ReducerValueType dst [] ) const``.
+    + the functor must implement the function ``void join( ReducerValueType dst[], ReducerValueType src[] ) const``.
     + If the functor implements the ``final`` function, the argument must also match those of init and join.
 
 Semantics
 ---------
 
-* Neither concurrency nor order of execution are guaranteed. 
-* The call is potentially asynchronous if the ``ReducerArgument`` is not a scalar type. 
-* The ``ReducerArgument`` content will be overwritten, i.e. the value does not need to be initialized to the reduction-neutral element. 
-* The input value to the operator may contain a partial reduction result, Kokkos may only combine the thread local contributions in the end. The operator must modify the input reduction value according to the requested reduction type. 
+* Neither concurrency nor order of execution are guaranteed.
+* The call is potentially asynchronous if the ``ReducerArgument`` is not a scalar type.
+* The ``ReducerArgument`` content will be overwritten, i.e. the value does not need to be initialized to the reduction-neutral element.
+* The input value to the operator may contain a partial reduction result, Kokkos may only combine the thread local contributions in the end. The operator must modify the input reduction value according to the requested reduction type.
 
 Examples
 --------
 
-Further examples are provided in the `Custom Reductions <../../../ProgrammingGuide/Custom-Reductions.html>`_ and `ExecutionPolicy <../policies/ExecutionPolicyConcept.html>`_ documentation. 
+Further examples are provided in the `Custom Reductions <../../../ProgrammingGuide/Custom-Reductions.html>`_ and `ExecutionPolicy <../policies/ExecutionPolicyConcept.html>`_ documentation.
 
 .. code-block:: cpp
 
     #include<Kokkos_Core.hpp>
-    #include<cstdio> 
+    #include<cstdio>
 
     int main(int argc, char* argv[]) {
         Kokkos::initialize(argc,argv);
@@ -189,7 +144,7 @@ Further examples are provided in the `Custom Reductions <../../../ProgrammingGui
 .. code-block:: cpp
 
     #include<Kokkos_Core.hpp>
-    #include<cstdio> 
+    #include<cstdio>
 
     int main(int argc, char* argv[]) {
         Kokkos::initialize(argc,argv);
@@ -208,7 +163,7 @@ Further examples are provided in the `Custom Reductions <../../../ProgrammingGui
 .. code-block:: cpp
 
     #include<Kokkos_Core.hpp>
-    #include<cstdio> 
+    #include<cstdio>
 
     struct TagMax {};
     struct TagMin {};
