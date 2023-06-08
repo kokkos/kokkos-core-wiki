@@ -16,7 +16,7 @@ Usage
     T result;
     parallel_reduce(N,Functor,BOr<T,S>(result));
 
-Synopsis 
+Synopsis
 --------
 
 .. code-block:: cpp
@@ -27,7 +27,7 @@ Synopsis
             typedef BOr reducer;
             typedef typename std::remove_cv<Scalar>::type value_type;
             typedef Kokkos::View<value_type, Space> result_view_type;
-            
+
             KOKKOS_INLINE_FUNCTION
             void join(value_type& dest, const value_type& src) const;
 
@@ -47,50 +47,60 @@ Synopsis
             BOr(const result_view_type& value_);
     };
 
-Public Class Members
---------------------
+Interface
+---------
 
-Typedefs
-~~~~~~~~
+.. cppkokkos:class:: template<class Scalar, class Space> BOr
 
-* ``reducer``: The self type.
-* ``value_type``: The reduction scalar type.
-* ``result_view_type``: A ``Kokkos::View`` referencing the reduction result 
+    .. rubric:: Public Types
 
-Constructors
-~~~~~~~~~~~~
+    .. cppkokkos:type:: reducer
 
-.. cppkokkos:kokkosinlinefunction:: BOr(value_type& value_);
+        The self type
 
-    * Constructs a reducer which references a local variable as its result location.
+    .. cpkkokkos:type:: value_type
 
-.. cppkokkos:kokkosinlinefunction:: BOr(const result_view_type& value_);
+        The reduction scalar type.
 
-    * Constructs a reducer which references a specific view as its result location.
+    .. cppkokkos:type:: result_view_type
 
-Functions
-~~~~~~~~~
+        A ``Kokkos::View`` referencing the reduction result
 
-.. cppkokkos:kokkosinlinefunction:: void join(value_type& dest, const value_type& src) const;
+    .. rubric:: Constructors
 
-    * Store logical ``or`` of ``src`` and ``dest`` into ``dest``:  ``dest = src | dest;``.
+    .. cppkokkos:kokkosinlinefunction:: BOr(value_type& value_);
 
-.. cppkokkos:kokkosinlinefunction:: void init(value_type& val) const;
+        Constructs a reducer which references a local variable as its result location.
 
-    * Initialize ``val`` using the ``Kokkos::reduction_identity<Scalar>::land()`` method. The default implementation sets ``val=0``.
+    .. cppkokkos:kokkosinlinefunction:: BOr(const result_view_type& value_);
 
-.. cppkokkos:kokkosinlinefunction:: value_type& reference() const;
+        Constructs a reducer which references a specific view as its result location.
 
-    * Returns a reference to the result provided in class constructor.
-    
-.. cppkokkos:kokkosinlinefunction:: result_view_type view() const;
+    .. rubric:: Public Member Functions
 
-    * Returns a view of the result place provided in class constructor.
-   
+    .. cppkokkos:kokkosinlinefunction:: void join(value_type& dest, const value_type& src) const;
+
+        Store logical ``or`` of ``src`` and ``dest`` into ``dest``:  ``dest = src | dest;``.
+
+    .. cppkokkos:kokkosinlinefunction:: void init(value_type& val) const;
+
+        Initialize ``val`` using the ``Kokkos::reduction_identity<Scalar>::land()`` method. The default implementation sets ``val=0``.
+
+    .. cppkokkos:kokkosinlinefunction:: value_type& reference() const;
+
+        Returns a reference to the result provided in class constructor.
+
+    .. cppkokkos:kokkosinlinefunction:: result_view_type view() const;
+
+        Returns a view of the result place provided in class constructor.
+
 Additional Information
 ~~~~~~~~~~~~~~~~~~~~~~
 
 * ``BOr<T,S>::value_type`` is non-const ``T``
+
 * ``BOr<T,S>::result_view_type`` is ``Kokkos::View<T,S,Kokkos::MemoryTraits<Kokkos::Unmanaged>>``. Note that the S (memory space) must be the same as the space where the result resides.
-* Requires: ``Scalar`` has ``operator =`` and ``operator |`` defined. ``Kokkos::reduction_identity<Scalar>::bor()`` is a valid expression. 
+
+* Requires: ``Scalar`` has ``operator =`` and ``operator |`` defined. ``Kokkos::reduction_identity<Scalar>::bor()`` is a valid expression.
+
 * In order to use BOr with a custom type, a template specialization of ``Kokkos::reduction_identity<CustomType>`` must be defined. See `Built-In Reducers with Custom Scalar Types <../../../ProgrammingGuide/Custom-Reductions-Built-In-Reducers-with-Custom-Scalar-Types.html>`_ for details
