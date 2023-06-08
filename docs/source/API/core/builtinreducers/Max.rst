@@ -47,50 +47,60 @@ Synopsis
             Max(const result_view_type& value_);
     };
 
-Public Class Members
---------------------
+Interface
+---------
 
-Typedefs
-~~~~~~~~
-   
-* ``reducer``: The self type.
-* ``value_type``: The reduction scalar type.
-* ``result_view_type``: A ``Kokkos::View`` referencing the reduction result 
+.. cppkokkos:class:: template<class Scalar, class Space> Max
 
-Constructors
-~~~~~~~~~~~~
- 
-.. cppkokkos:kokkosinlinefunction:: Max(value_type& value_);
+    .. rubric:: Public Types
 
-    * Constructs a reducer which references a local variable as its result location.
+    .. cppkokkos:type:: reducer
 
-.. cppkokkos:kokkosinlinefunction:: Max(const result_view_type& value_);
+        The self type.
 
-    * Constructs a reducer which references a specific view as its result location.
+    .. cppkokkos:type:: value_type
 
-Functions
-~~~~~~~~~
+        The reduction scalar type.
 
-.. cppkokkos:kokkosinlinefunction:: void join(value_type& dest, const value_type& src) const;
+    .. cppkokkos:type:: result_view_type
+        
+        A ``Kokkos::View`` referencing the reduction result 
 
-    * Store maximum of ``src`` and ``dest`` into ``dest``: ``dest = ( src > dest ) ? src :dest;``. 
+    .. rubric:: Constructors
 
-.. cppkokkos:kokkosinlinefunction:: void init(value_type& val) const;
+    .. cppkokkos:kokkosinlinefunction:: Max(value_type& value_);
 
-    * Initialize ``val`` using the ``Kokkos::reduction_identity<Scalar>::max()`` method. The default implementation sets ``val=<TYPE>_MIN``.
+        Constructs a reducer which references a local variable as its result location.
 
-.. cppkokkos:kokkosinlinefunction:: value_type& reference() const;
+    .. cppkokkos:kokkosinlinefunction:: Max(const result_view_type& value_);
 
-    * Returns a reference to the result provided in class constructor.
+        Constructs a reducer which references a specific view as its result location.
 
-.. cppkokkos:kokkosinlinefunction:: result_view_type view() const;
+    .. rubric:: Public Member Functions
 
-    * Returns a view of the result place provided in class constructor.
+    .. cppkokkos:kokkosinlinefunction:: void join(value_type& dest, const value_type& src) const;
+
+        Store maximum of ``src`` and ``dest`` into ``dest``: ``dest = ( src > dest ) ? src :dest;``. 
+
+    .. cppkokkos:kokkosinlinefunction:: void init(value_type& val) const;
+
+        Initialize ``val`` using the ``Kokkos::reduction_identity<Scalar>::max()`` method. The default implementation sets ``val=<TYPE>_MIN``.
+
+    .. cppkokkos:kokkosinlinefunction:: value_type& reference() const;
+
+        Returns a reference to the result provided in class constructor.
+
+    .. cppkokkos:kokkosinlinefunction:: result_view_type view() const;
+
+        Returns a view of the result place provided in class constructor.
 
 Additional Information
 ~~~~~~~~~~~~~~~~~~~~~~
 
 * ``Max<T,S>::value_type`` is non-const ``T``
+
 * ``Max<T,S>::result_view_type`` is ``Kokkos::View<T,S,Kokkos::MemoryTraits<Kokkos::Unmanaged>>``. Note that the S (memory space) must be the same as the space where the result resides.
+
 * Requires: ``Scalar`` has ``operator =`` and ``operator >`` defined. ``Kokkos::reduction_identity<Scalar>::max()`` is a valid expression. 
+
 * In order to use Max with a custom type, a template specialization of ``Kokkos::reduction_identity<CustomType>`` must be defined.  See `Built-In Reducers with Custom Scalar Types <../../../ProgrammingGuide/Custom-Reductions-Built-In-Reducers-with-Custom-Scalar-Types.html>`_ for details
