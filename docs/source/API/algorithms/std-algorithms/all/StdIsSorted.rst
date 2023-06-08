@@ -137,7 +137,9 @@ Parameters and Requirements
     struct Comparator
     {
       KOKKOS_INLINE_FUNCTION
-      bool operator()(const value_type & a, const value_type & b) const;
+      bool operator()(const value_type & a, const value_type & b) const {
+        return /* true if a is less than b, based on your logic of "less than" */;
+      }
     };
   
 Return Value
