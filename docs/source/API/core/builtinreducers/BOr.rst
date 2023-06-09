@@ -13,89 +13,89 @@ Usage
 
 .. code-block:: cpp
 
-    T result;
-    parallel_reduce(N,Functor,BOr<T,S>(result));
+   T result;
+   parallel_reduce(N,Functor,BOr<T,S>(result));
 
 Synopsis
 --------
 
 .. code-block:: cpp
 
-    template<class Scalar, class Space>
-    class BOr{
-        public:
-            typedef BOr reducer;
-            typedef typename std::remove_cv<Scalar>::type value_type;
-            typedef Kokkos::View<value_type, Space> result_view_type;
+   template<class Scalar, class Space>
+   class BOr{
+     public:
+       typedef BOr reducer;
+       typedef typename std::remove_cv<Scalar>::type value_type;
+       typedef Kokkos::View<value_type, Space> result_view_type;
 
-            KOKKOS_INLINE_FUNCTION
-            void join(value_type& dest, const value_type& src) const;
+       KOKKOS_INLINE_FUNCTION
+       void join(value_type& dest, const value_type& src) const;
 
-            KOKKOS_INLINE_FUNCTION
-            void init(value_type& val) const;
+       KOKKOS_INLINE_FUNCTION
+       void init(value_type& val) const;
 
-            KOKKOS_INLINE_FUNCTION
-            value_type& reference() const;
+       KOKKOS_INLINE_FUNCTION
+       value_type& reference() const;
 
-            KOKKOS_INLINE_FUNCTION
-            result_view_type view() const;
+       KOKKOS_INLINE_FUNCTION
+       result_view_type view() const;
 
-            KOKKOS_INLINE_FUNCTION
-            BOr(value_type& value_);
+       KOKKOS_INLINE_FUNCTION
+       BOr(value_type& value_);
 
-            KOKKOS_INLINE_FUNCTION
-            BOr(const result_view_type& value_);
-    };
+       KOKKOS_INLINE_FUNCTION
+       BOr(const result_view_type& value_);
+   };
 
 Interface
 ---------
 
 .. cppkokkos:class:: template<class Scalar, class Space> BOr
 
-    .. rubric:: Public Types
+   .. rubric:: Public Types
 
-    .. cppkokkos:type:: reducer
+   .. cppkokkos:type:: reducer
 
-        The self type
+     The self type
 
-    .. cppkokkos:type:: value_type
+   .. cppkokkos:type:: value_type
 
-        The reduction scalar type.
+     The reduction scalar type.
 
-    .. cppkokkos:type:: result_view_type
+   .. cppkokkos:type:: result_view_type
 
-        A ``Kokkos::View`` referencing the reduction result
+     A ``Kokkos::View`` referencing the reduction result
 
-    .. rubric:: Constructors
+   .. rubric:: Constructors
 
-    .. cppkokkos:kokkosinlinefunction:: BOr(value_type& value_);
+   .. cppkokkos:kokkosinlinefunction:: BOr(value_type& value_);
 
-        Constructs a reducer which references a local variable as its result location.
+     Constructs a reducer which references a local variable as its result location.
 
-    .. cppkokkos:kokkosinlinefunction:: BOr(const result_view_type& value_);
+   .. cppkokkos:kokkosinlinefunction:: BOr(const result_view_type& value_);
 
-        Constructs a reducer which references a specific view as its result location.
+     Constructs a reducer which references a specific view as its result location.
 
-    .. rubric:: Public Member Functions
+   .. rubric:: Public Member Functions
 
-    .. cppkokkos:kokkosinlinefunction:: void join(value_type& dest, const value_type& src) const;
+   .. cppkokkos:kokkosinlinefunction:: void join(value_type& dest, const value_type& src) const;
 
-        Store logical ``or`` of ``src`` and ``dest`` into ``dest``:  ``dest = src | dest;``.
+     Store logical ``or`` of ``src`` and ``dest`` into ``dest``:  ``dest = src | dest;``.
 
-    .. cppkokkos:kokkosinlinefunction:: void init(value_type& val) const;
+   .. cppkokkos:kokkosinlinefunction:: void init(value_type& val) const;
 
-        Initialize ``val`` using the ``Kokkos::reduction_identity<Scalar>::land()`` method. The default implementation sets ``val=0``.
+     Initialize ``val`` using the ``Kokkos::reduction_identity<Scalar>::land()`` method. The default implementation sets ``val=0``.
 
-    .. cppkokkos:kokkosinlinefunction:: value_type& reference() const;
+   .. cppkokkos:kokkosinlinefunction:: value_type& reference() const;
 
-        Returns a reference to the result provided in class constructor.
+     Returns a reference to the result provided in class constructor.
 
-    .. cppkokkos:kokkosinlinefunction:: result_view_type view() const;
+   .. cppkokkos:kokkosinlinefunction:: result_view_type view() const;
 
-        Returns a view of the result place provided in class constructor.
+     Returns a view of the result place provided in class constructor.
 
 Additional Information
-~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^
 
 * ``BOr<T,S>::value_type`` is non-const ``T``
 
