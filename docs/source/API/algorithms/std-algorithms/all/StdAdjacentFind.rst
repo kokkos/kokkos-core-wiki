@@ -21,8 +21,8 @@ Interface
    // overload set accepting an execution space
    //
    template <class ExecutionSpace, class IteratorType>
-   IteratorType adjacent_find(const ExecutionSpace& exespace, IteratorType first,          (1)
-			      IteratorType last);
+   IteratorType adjacent_find(const ExecutionSpace& exespace,                              (1)
+		              IteratorType first, IteratorType last);
 
    template <class ExecutionSpace, class IteratorType>
    IteratorType adjacent_find(const std::string& label, const ExecutionSpace& exespace,    (2)
@@ -37,8 +37,9 @@ Interface
 		      const ::Kokkos::View<DataType, Properties...>& view);
 
    template <class ExecutionSpace, class IteratorType, class BinaryPredicateType>
-   IteratorType adjacent_find(const ExecutionSpace& exespace, IteratorType first,          (5)
-			      IteratorType last, BinaryPredicateType pred);
+   IteratorType adjacent_find(const ExecutionSpace& exespace,                              (5)
+		              IteratorType first, IteratorType last,
+			      BinaryPredicateType pred);
 
    template <class ExecutionSpace, class IteratorType, class BinaryPredicateType>
    IteratorType adjacent_find(const std::string& label, const ExecutionSpace& exespace,    (6)
@@ -62,8 +63,8 @@ Interface
    //
    template <class TeamHandleType, class IteratorType>
    KOKKOS_FUNCTION
-   IteratorType adjacent_find(const TeamHandleType& teamHandle, IteratorType first,        (9)
-			      IteratorType last);
+   IteratorType adjacent_find(const TeamHandleType& teamHandle,                            (9)
+		              IteratorType first, IteratorType last);
 
    template <class TeamHandleType, class DataType, class... Properties>
    KOKKOS_FUNCTION
@@ -72,8 +73,9 @@ Interface
 
    template <class TeamHandleType, class IteratorType, class BinaryPredicateType>
    KOKKOS_FUNCTION
-   IteratorType adjacent_find(const TeamHandleType& teamHandle, IteratorType first,       (11)
-			      IteratorType last, BinaryPredicateType pred);
+   IteratorType adjacent_find(const TeamHandleType& teamHandle,                           (11)
+		              IteratorType first, IteratorType last,
+			      BinaryPredicateType pred);
 
    template <class TeamHandleType, class DataType, class... Properties,
 	     class BinaryPredicateType>
@@ -81,7 +83,6 @@ Interface
    auto adjacent_find(const TeamHandleType& teamHandle,
 		      const ::Kokkos::View<DataType, Properties...>& view,                (12)
 		      BinaryPredicateType pred);
-
 
 Parameters and Requirements
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -112,7 +113,6 @@ Parameters and Requirements
 
   - must be accessible from ``exespace`` or from the execution space associated with the team handle
 
-
 - ``pred``: *binary* functor returning ``true`` if two arguments should be considered "equal".
 
   ``pred(a,b)`` must be valid to be called from the execution space passed, or
@@ -136,10 +136,10 @@ Parameters and Requirements
 Return Value
 ~~~~~~~~~~~~
 
-- 1,2,9: returns the first iterator ``it`` where ``*it == *it+1`` is true
-- 5,6,11: returns the first iterator ``it`` where ``pred(*it, *it+1)`` is true
-- 3,4,10: returns the first Kokkos view iterator ``it`` where ``view(it) == view(it+1)`` is true
-- 7,8,12: returns the first Kokkos view iterator ``it`` ), where ``pred(view(it), view(it+1))`` is true
+- 1,2,9: returns the first iterator ``it`` such that ``*it == *it+1`` is true
+- 5,6,11: returns the first iterator ``it`` such that ``pred(*it, *it+1)`` returns true
+- 3,4,10: returns the first Kokkos iterator ``it`` such that ``view(it) == view(it+1)`` is true
+- 7,8,12: returns the first Kokkos iterator ``it`` ), such that ``pred(view(it), view(it+1))`` returns true
 
 If no such element is found, it returns ``last`` for all overloads accepting iterators,
 and ``Kokkos::Experimental::end(view)`` for all overloads acceptings a view.

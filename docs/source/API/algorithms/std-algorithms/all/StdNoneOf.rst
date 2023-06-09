@@ -7,8 +7,7 @@ Header: ``<Kokkos_StdAlgorithms.hpp>``
 Description
 -----------
 
-Returns ``true`` if no element in a range or rank-1 ``View`` satisfies
-a target unary predicate.
+Returns ``true`` if no element in a range or rank-1 ``View`` satisfies a target unary predicate.
 
 Interface
 ---------

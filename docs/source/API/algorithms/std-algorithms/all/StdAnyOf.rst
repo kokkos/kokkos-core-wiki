@@ -55,7 +55,7 @@ Interface
    template <class TeamHandleType, class DataType, class... Properties,
 	     class Predicate>
    KOKKOS_FUNCTION
-   bool any_of(const TeamHandleType& teamHandle,                              (7)
+   bool any_of(const TeamHandleType& teamHandle,                              (6)
 	       const ::Kokkos::View<DataType, Properties...>& v,
 	       Predicate predicate);
 
