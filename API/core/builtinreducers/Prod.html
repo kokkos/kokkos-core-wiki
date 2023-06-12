@@ -514,96 +514,96 @@
 <h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this heading">#</a></h2>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">Scalar</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Space</span><span class="o">&gt;</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">Prod</span><span class="p">{</span>
-<span class="w">    </span><span class="k">public</span><span class="o">:</span>
-<span class="w">        </span><span class="k">typedef</span><span class="w"> </span><span class="n">Prod</span><span class="w"> </span><span class="n">reducer</span><span class="p">;</span>
-<span class="w">        </span><span class="k">typedef</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="nc">std</span><span class="o">::</span><span class="n">remove_cv</span><span class="o">&lt;</span><span class="n">Scalar</span><span class="o">&gt;::</span><span class="n">type</span><span class="w"> </span><span class="n">value_type</span><span class="p">;</span>
-<span class="w">        </span><span class="k">typedef</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">View</span><span class="o">&lt;</span><span class="n">value_type</span><span class="p">,</span><span class="w"> </span><span class="n">Space</span><span class="o">&gt;</span><span class="w"> </span><span class="n">result_view_type</span><span class="p">;</span>
+<span class="w">  </span><span class="k">public</span><span class="o">:</span>
+<span class="w">    </span><span class="k">typedef</span><span class="w"> </span><span class="n">Prod</span><span class="w"> </span><span class="n">reducer</span><span class="p">;</span>
+<span class="w">    </span><span class="k">typedef</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="nc">std</span><span class="o">::</span><span class="n">remove_cv</span><span class="o">&lt;</span><span class="n">Scalar</span><span class="o">&gt;::</span><span class="n">type</span><span class="w"> </span><span class="n">value_type</span><span class="p">;</span>
+<span class="w">    </span><span class="k">typedef</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">View</span><span class="o">&lt;</span><span class="n">value_type</span><span class="p">,</span><span class="w"> </span><span class="n">Space</span><span class="o">&gt;</span><span class="w"> </span><span class="n">result_view_type</span><span class="p">;</span>
 
-<span class="w">        </span><span class="n">KOKKOS_INLINE_FUNCTION</span>
-<span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="n">join</span><span class="p">(</span><span class="n">value_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">dest</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">value_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">src</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
+<span class="w">    </span><span class="n">KOKKOS_INLINE_FUNCTION</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">join</span><span class="p">(</span><span class="n">value_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">dest</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">value_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">src</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
 
-<span class="w">        </span><span class="n">KOKKOS_INLINE_FUNCTION</span>
-<span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="n">init</span><span class="p">(</span><span class="n">value_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">val</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
+<span class="w">    </span><span class="n">KOKKOS_INLINE_FUNCTION</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">init</span><span class="p">(</span><span class="n">value_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">val</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
 
-<span class="w">        </span><span class="n">KOKKOS_INLINE_FUNCTION</span>
-<span class="w">        </span><span class="n">value_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">reference</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
+<span class="w">    </span><span class="n">KOKKOS_INLINE_FUNCTION</span>
+<span class="w">    </span><span class="n">value_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">reference</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
 
-<span class="w">        </span><span class="n">KOKKOS_INLINE_FUNCTION</span>
-<span class="w">        </span><span class="n">result_view_type</span><span class="w"> </span><span class="n">view</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
+<span class="w">    </span><span class="n">KOKKOS_INLINE_FUNCTION</span>
+<span class="w">    </span><span class="n">result_view_type</span><span class="w"> </span><span class="n">view</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
 
-<span class="w">        </span><span class="n">KOKKOS_INLINE_FUNCTION</span>
-<span class="w">        </span><span class="nf">Prod</span><span class="p">(</span><span class="n">value_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">value_</span><span class="p">);</span>
+<span class="w">    </span><span class="n">KOKKOS_INLINE_FUNCTION</span>
+<span class="w">    </span><span class="nf">Prod</span><span class="p">(</span><span class="n">value_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">value_</span><span class="p">);</span>
 
-<span class="w">        </span><span class="n">KOKKOS_INLINE_FUNCTION</span>
-<span class="w">        </span><span class="nf">Prod</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">result_view_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">value_</span><span class="p">);</span>
+<span class="w">    </span><span class="n">KOKKOS_INLINE_FUNCTION</span>
+<span class="w">    </span><span class="nf">Prod</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">result_view_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">value_</span><span class="p">);</span>
 <span class="p">};</span>
 </pre></div>
 </div>
 </section>
-<section id="public-class-members">
-<h2>Public Class Members<a class="headerlink" href="#public-class-members" title="Permalink to this heading">#</a></h2>
-<section id="typedefs">
-<h3>Typedefs<a class="headerlink" href="#typedefs" title="Permalink to this heading">#</a></h3>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">reducer</span></code>: The self type.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">value_type</span></code>: The reduction scalar type.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">result_view_type</span></code>: A <code class="docutils literal notranslate"><span class="pre">Kokkos::View</span></code> referencing the reduction result</p></li>
-</ul>
-</section>
-<section id="constructors">
-<h3>Constructors<a class="headerlink" href="#constructors" title="Permalink to this heading">#</a></h3>
+<section id="interface">
+<h2>Interface<a class="headerlink" href="#interface" title="Permalink to this heading">#</a></h2>
+<dl class="cppkokkos class">
+<dt class="sig sig-object cppkokkos" id="_CPPv4I00E4Prod">
+<span id="_CPPv3I00E4Prod"></span><span id="_CPPv2I00E4Prod"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Scalar</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Space</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Prod</span></span></span><a class="headerlink" href="#_CPPv4I00E4Prod" title="Permalink to this definition">#</a><br /></dt>
+<dd><p class="rubric">Public Types</p>
+<dl class="cppkokkos type">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N4Prod7reducerE">
+<span id="_CPPv3N4Prod7reducerE"></span><span id="_CPPv2N4Prod7reducerE"></span><span id="Prod::reducer"></span><span class="k"></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">reducer</span></span></span><a class="headerlink" href="#_CPPv4N4Prod7reducerE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>The self type.</p>
+</dd></dl>
+
+<dl class="cppkokkos type">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N4Prod10value_typeE">
+<span id="_CPPv3N4Prod10value_typeE"></span><span id="_CPPv2N4Prod10value_typeE"></span><span id="Prod::value_type"></span><span class="k"></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">value_type</span></span></span><a class="headerlink" href="#_CPPv4N4Prod10value_typeE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>The reduction scalar type.</p>
+</dd></dl>
+
+<dl class="cppkokkos type">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N4Prod16result_view_typeE">
+<span id="_CPPv3N4Prod16result_view_typeE"></span><span id="_CPPv2N4Prod16result_view_typeE"></span><span id="Prod::result_view_type"></span><span class="k"></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">result_view_type</span></span></span><a class="headerlink" href="#_CPPv4N4Prod16result_view_typeE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>A <code class="docutils literal notranslate"><span class="pre">Kokkos::View</span></code> referencing the reduction result</p>
+</dd></dl>
+
+<p class="rubric">Constructors</p>
 <dl class="cppkokkos kokkosinlinefunction">
-<dt class="sig sig-object cppkokkos" id="_CPPv44ProdR10value_type">
-<span id="_CPPv34ProdR10value_type"></span><span id="_CPPv24ProdR10value_type"></span><span id="Prod__value_typeR"></span><span class="k"><span class="pre">KOKKOS_INLINE_FUNCTION</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Prod</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">value_type</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">value_</span></span><span class="sig-paren">)</span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv44ProdR10value_type" title="Permalink to this definition">#</a><br /></dt>
-<dd><ul class="simple">
-<li><p>Constructs a reducer which references a local variable as its result location.</p></li>
-</ul>
+<dt class="sig sig-object cppkokkos" id="_CPPv4N4Prod4ProdER10value_type">
+<span id="_CPPv3N4Prod4ProdER10value_type"></span><span id="_CPPv2N4Prod4ProdER10value_type"></span><span id="Prod::Prod__value_typeR"></span><span class="k"><span class="pre">KOKKOS_INLINE_FUNCTION</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Prod</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N4Prod10value_typeE" title="Prod::value_type"><span class="n"><span class="pre">value_type</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">value_</span></span><span class="sig-paren">)</span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4N4Prod4ProdER10value_type" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Constructs a reducer which references a local variable as its result location.</p>
 </dd></dl>
 
 <dl class="cppkokkos kokkosinlinefunction">
-<dt class="sig sig-object cppkokkos" id="_CPPv44ProdRK16result_view_type">
-<span id="_CPPv34ProdRK16result_view_type"></span><span id="_CPPv24ProdRK16result_view_type"></span><span id="Prod__result_view_typeCR"></span><span class="k"><span class="pre">KOKKOS_INLINE_FUNCTION</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Prod</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">result_view_type</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">value_</span></span><span class="sig-paren">)</span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv44ProdRK16result_view_type" title="Permalink to this definition">#</a><br /></dt>
-<dd><ul class="simple">
-<li><p>Constructs a reducer which references a specific view as its result location.</p></li>
-</ul>
+<dt class="sig sig-object cppkokkos" id="_CPPv4N4Prod4ProdERK16result_view_type">
+<span id="_CPPv3N4Prod4ProdERK16result_view_type"></span><span id="_CPPv2N4Prod4ProdERK16result_view_type"></span><span id="Prod::Prod__result_view_typeCR"></span><span class="k"><span class="pre">KOKKOS_INLINE_FUNCTION</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Prod</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N4Prod16result_view_typeE" title="Prod::result_view_type"><span class="n"><span class="pre">result_view_type</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">value_</span></span><span class="sig-paren">)</span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4N4Prod4ProdERK16result_view_type" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Constructs a reducer which references a specific view as its result location.</p>
 </dd></dl>
 
-</section>
-<section id="functions">
-<h3>Functions<a class="headerlink" href="#functions" title="Permalink to this heading">#</a></h3>
+<p class="rubric">Public Member Functions</p>
 <dl class="cppkokkos kokkosinlinefunction">
-<dt class="sig sig-object cppkokkos" id="_CPPv4NK4joinER10value_typeRK10value_type">
-<span id="_CPPv3NK4joinER10value_typeRK10value_type"></span><span id="_CPPv2NK4joinER10value_typeRK10value_type"></span><span id="join__value_typeR.value_typeCRC"></span><span class="k"><span class="pre">KOKKOS_INLINE_FUNCTION</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">join</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">value_type</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">dest</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">value_type</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">src</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="p"><span class="pre">;</span></span><br /></dt>
-<dd><ul class="simple">
-<li><p>Multiply <code class="docutils literal notranslate"><span class="pre">src</span></code> and <code class="docutils literal notranslate"><span class="pre">dest</span></code> and store in <code class="docutils literal notranslate"><span class="pre">dest</span></code>:  <code class="docutils literal notranslate"><span class="pre">dest*=src;</span></code>.</p></li>
-</ul>
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK4Prod4joinER10value_typeRK10value_type">
+<span id="_CPPv3NK4Prod4joinER10value_typeRK10value_type"></span><span id="_CPPv2NK4Prod4joinER10value_typeRK10value_type"></span><span id="Prod::join__value_typeR.value_typeCRC"></span><span class="k"><span class="pre">KOKKOS_INLINE_FUNCTION</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">join</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N4Prod10value_typeE" title="Prod::value_type"><span class="n"><span class="pre">value_type</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">dest</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N4Prod10value_typeE" title="Prod::value_type"><span class="n"><span class="pre">value_type</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">src</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4NK4Prod4joinER10value_typeRK10value_type" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Multiply <code class="docutils literal notranslate"><span class="pre">src</span></code> and <code class="docutils literal notranslate"><span class="pre">dest</span></code> and store in <code class="docutils literal notranslate"><span class="pre">dest</span></code>:  <code class="docutils literal notranslate"><span class="pre">dest*=src;</span></code>.</p>
 </dd></dl>
 
 <dl class="cppkokkos kokkosinlinefunction">
-<dt class="sig sig-object cppkokkos" id="_CPPv4NK4initER10value_type">
-<span id="_CPPv3NK4initER10value_type"></span><span id="_CPPv2NK4initER10value_type"></span><span id="init__value_typeRC"></span><span class="k"><span class="pre">KOKKOS_INLINE_FUNCTION</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">init</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">value_type</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">val</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="p"><span class="pre">;</span></span><br /></dt>
-<dd><ul class="simple">
-<li><p>Initialize <code class="docutils literal notranslate"><span class="pre">val</span></code> using the <code class="docutils literal notranslate"><span class="pre">Kokkos::reduction_identity&lt;Scalar&gt;::prod()</span></code> method. The default implementation sets <code class="docutils literal notranslate"><span class="pre">val=1</span></code>.</p></li>
-</ul>
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK4Prod4initER10value_type">
+<span id="_CPPv3NK4Prod4initER10value_type"></span><span id="_CPPv2NK4Prod4initER10value_type"></span><span id="Prod::init__value_typeRC"></span><span class="k"><span class="pre">KOKKOS_INLINE_FUNCTION</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">init</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N4Prod10value_typeE" title="Prod::value_type"><span class="n"><span class="pre">value_type</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">val</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4NK4Prod4initER10value_type" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Initialize <code class="docutils literal notranslate"><span class="pre">val</span></code> using the <code class="docutils literal notranslate"><span class="pre">Kokkos::reduction_identity&lt;Scalar&gt;::prod()</span></code> method. The default implementation sets <code class="docutils literal notranslate"><span class="pre">val=1</span></code>.</p>
 </dd></dl>
 
 <dl class="cppkokkos kokkosinlinefunction">
-<dt class="sig sig-object cppkokkos" id="_CPPv4NK9referenceEv">
-<span id="_CPPv3NK9referenceEv"></span><span id="_CPPv2NK9referenceEv"></span><span id="referenceC"></span><span class="k"><span class="pre">KOKKOS_INLINE_FUNCTION</span></span><span class="w"> </span><span class="n"><span class="pre">value_type</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">reference</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="p"><span class="pre">;</span></span><br /></dt>
-<dd><ul class="simple">
-<li><p>Returns a reference to the result provided in class constructor.</p></li>
-</ul>
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK4Prod9referenceEv">
+<span id="_CPPv3NK4Prod9referenceEv"></span><span id="_CPPv2NK4Prod9referenceEv"></span><span id="Prod::referenceC"></span><span class="k"><span class="pre">KOKKOS_INLINE_FUNCTION</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N4Prod10value_typeE" title="Prod::value_type"><span class="n"><span class="pre">value_type</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">reference</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4NK4Prod9referenceEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Returns a reference to the result provided in class constructor.</p>
 </dd></dl>
 
 <dl class="cppkokkos kokkosinlinefunction">
-<dt class="sig sig-object cppkokkos" id="_CPPv4NK4viewEv">
-<span id="_CPPv3NK4viewEv"></span><span id="_CPPv2NK4viewEv"></span><span id="viewC"></span><span class="k"><span class="pre">KOKKOS_INLINE_FUNCTION</span></span><span class="w"> </span><span class="n"><span class="pre">result_view_type</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">view</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="p"><span class="pre">;</span></span><br /></dt>
-<dd><ul class="simple">
-<li><p>Returns a view of the result place provided in class constructor.</p></li>
-</ul>
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK4Prod4viewEv">
+<span id="_CPPv3NK4Prod4viewEv"></span><span id="_CPPv2NK4Prod4viewEv"></span><span id="Prod::viewC"></span><span class="k"><span class="pre">KOKKOS_INLINE_FUNCTION</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N4Prod16result_view_typeE" title="Prod::result_view_type"><span class="n"><span class="pre">result_view_type</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">view</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4NK4Prod4viewEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Returns a view of the result place provided in class constructor.</p>
 </dd></dl>
 
-</section>
+</dd></dl>
+
 <section id="additional-information">
 <h3>Additional Information<a class="headerlink" href="#additional-information" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
@@ -676,10 +676,7 @@
 <li><a class="reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">Prod</span></code></a><ul>
 <li><a class="reference internal" href="#usage">Usage</a></li>
 <li><a class="reference internal" href="#synopsis">Synopsis</a></li>
-<li><a class="reference internal" href="#public-class-members">Public Class Members</a><ul>
-<li><a class="reference internal" href="#typedefs">Typedefs</a></li>
-<li><a class="reference internal" href="#constructors">Constructors</a></li>
-<li><a class="reference internal" href="#functions">Functions</a></li>
+<li><a class="reference internal" href="#interface">Interface</a><ul>
 <li><a class="reference internal" href="#additional-information">Additional Information</a></li>
 </ul>
 </li>

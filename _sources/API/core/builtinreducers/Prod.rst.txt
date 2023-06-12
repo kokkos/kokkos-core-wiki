@@ -1,9 +1,6 @@
 ``Prod``
 ========
 
-.. role::cpp(code)
-    :language: cpp
-
 .. role:: cppkokkos(code)
     :language: cppkokkos
 
@@ -16,84 +13,94 @@ Usage
 
 .. code-block:: cpp
 
-    T result;
-    parallel_reduce(N,Functor,Prod<T,S>(result));
+   T result;
+   parallel_reduce(N,Functor,Prod<T,S>(result));
 
-Synopsis 
+Synopsis
 --------
 
 .. code-block:: cpp
-        
-    template<class Scalar, class Space>
-    class Prod{
-        public:
-            typedef Prod reducer;
-            typedef typename std::remove_cv<Scalar>::type value_type;
-            typedef Kokkos::View<value_type, Space> result_view_type;
-            
-            KOKKOS_INLINE_FUNCTION
-            void join(value_type& dest, const value_type& src) const;
 
-            KOKKOS_INLINE_FUNCTION
-            void init(value_type& val) const;
+   template<class Scalar, class Space>
+   class Prod{
+     public:
+       typedef Prod reducer;
+       typedef typename std::remove_cv<Scalar>::type value_type;
+       typedef Kokkos::View<value_type, Space> result_view_type;
 
-            KOKKOS_INLINE_FUNCTION
-            value_type& reference() const;
+       KOKKOS_INLINE_FUNCTION
+       void join(value_type& dest, const value_type& src) const;
 
-            KOKKOS_INLINE_FUNCTION
-            result_view_type view() const;
+       KOKKOS_INLINE_FUNCTION
+       void init(value_type& val) const;
 
-            KOKKOS_INLINE_FUNCTION
-            Prod(value_type& value_);
+       KOKKOS_INLINE_FUNCTION
+       value_type& reference() const;
 
-            KOKKOS_INLINE_FUNCTION
-            Prod(const result_view_type& value_);
-    };
+       KOKKOS_INLINE_FUNCTION
+       result_view_type view() const;
 
-Public Class Members
---------------------
+       KOKKOS_INLINE_FUNCTION
+       Prod(value_type& value_);
 
-Typedefs
-~~~~~~~~
+       KOKKOS_INLINE_FUNCTION
+       Prod(const result_view_type& value_);
+   };
 
-* ``reducer``: The self type.
-* ``value_type``: The reduction scalar type.
-* ``result_view_type``: A ``Kokkos::View`` referencing the reduction result 
+Interface
+---------
 
-Constructors
-~~~~~~~~~~~~
- 
-.. cppkokkos:kokkosinlinefunction:: Prod(value_type& value_);
+.. cppkokkos:class:: template<class Scalar, class Space> Prod
 
-    * Constructs a reducer which references a local variable as its result location.  
- 
-.. cppkokkos:kokkosinlinefunction:: Prod(const result_view_type& value_);
+   .. rubric:: Public Types
 
-    * Constructs a reducer which references a specific view as its result location.
+   .. cppkokkos:type:: reducer
 
-Functions
-~~~~~~~~~
+      The self type.
 
-.. cppkokkos:kokkosinlinefunction:: void join(value_type& dest, const value_type& src) const;
+   .. cppkokkos:type:: value_type
 
-    * Multiply ``src`` and ``dest`` and store in ``dest``:  ``dest*=src;``. 
+      The reduction scalar type.
 
-.. cppkokkos:kokkosinlinefunction:: void init(value_type& val) const;
+   .. cppkokkos:type:: result_view_type
 
-    * Initialize ``val`` using the ``Kokkos::reduction_identity<Scalar>::prod()`` method. The default implementation sets ``val=1``.
+      A ``Kokkos::View`` referencing the reduction result
 
-.. cppkokkos:kokkosinlinefunction:: value_type& reference() const;
+   .. rubric:: Constructors
 
-    * Returns a reference to the result provided in class constructor.
+   .. cppkokkos:kokkosinlinefunction:: Prod(value_type& value_);
 
-.. cppkokkos:kokkosinlinefunction:: result_view_type view() const;
+      Constructs a reducer which references a local variable as its result location.
 
-    * Returns a view of the result place provided in class constructor.
+   .. cppkokkos:kokkosinlinefunction:: Prod(const result_view_type& value_);
+
+      Constructs a reducer which references a specific view as its result location.
+
+   .. rubric:: Public Member Functions
+
+   .. cppkokkos:kokkosinlinefunction:: void join(value_type& dest, const value_type& src) const;
+
+      Multiply ``src`` and ``dest`` and store in ``dest``:  ``dest*=src;``.
+
+   .. cppkokkos:kokkosinlinefunction:: void init(value_type& val) const;
+
+      Initialize ``val`` using the ``Kokkos::reduction_identity<Scalar>::prod()`` method. The default implementation sets ``val=1``.
+
+   .. cppkokkos:kokkosinlinefunction:: value_type& reference() const;
+
+      Returns a reference to the result provided in class constructor.
+
+   .. cppkokkos:kokkosinlinefunction:: result_view_type view() const;
+
+      Returns a view of the result place provided in class constructor.
 
 Additional Information
-~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^
 
 * ``Prod<T,S>::value_type`` is non-const ``T``
+
 * ``Prod<T,S>::result_view_type`` is ``Kokkos::View<T,S,Kokkos::MemoryTraits<Kokkos::Unmanaged>>``. Note that the S (memory space) must be the same as the space where the result resides.
-* Requires: ``Scalar`` has ``operator =`` and ``operator *=`` defined. ``Kokkos::reduction_identity<Scalar>::prod()`` is a valid expression. 
+
+* Requires: ``Scalar`` has ``operator =`` and ``operator *=`` defined. ``Kokkos::reduction_identity<Scalar>::prod()`` is a valid expression.
+
 * In order to use Prod with a custom type, a template specialization of ``Kokkos::reduction_identity<CustomType>`` must be defined. See `Built-In Reducers with Custom Scalar Types <../../../ProgrammingGuide/Custom-Reductions-Built-In-Reducers-with-Custom-Scalar-Types.html>`_ for details
