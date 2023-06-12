@@ -7,8 +7,7 @@ Header: ``Kokkos_StdAlgorithms.hpp``
 Description
 -----------
 
-Checks if the elements in a range or in a rank-1 ``View`` are sorted in non-descending order using either ``operator<``
-to compare two elements or a user-provided comparison operator.
+Checks if the elements in a range or in a rank-1 ``View`` are sorted in non-descending order using either ``operator<`` to compare two elements or a user-provided comparison operator.
 
 Interface
 ---------
