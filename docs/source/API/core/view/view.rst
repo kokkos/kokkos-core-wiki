@@ -6,18 +6,18 @@
 
 Header File: ``<Kokkos_Core.hpp>``
 
-Usage
+Description
 -----
 
-Kokkos View is a potentially reference counted multi dimensional array with compile time layouts and memory space.
-Its semantics are similar to that of ``std::shared_ptr``.
+Kokkos View is the programming model's main data structure, with multi-dimensional (up to eight), array-like semantics.  It can be used on the CPU (host) and/or GPU (device), and has architecture-specific optimiztions, shared-memory parallelism, compile-time layouts and memory space.   
+
 
 Interface
 ---------
 
 .. code-block:: cpp
 
-    template <class DataType [, class LayoutType] [, class MemorySpace] [, class MemoryTraits]>
+    template <class DataType [, class Space] [, class Layout] [, class MemoryTraits]>
     class View;
 
 Parameters
@@ -25,41 +25,40 @@ Parameters
 
 .. _LayoutRight: layoutRight.html
 
-.. |LayoutRight| replace:: ``LayoutRight()``
+.. |LayoutRight| replace:: :cppkokkos:func:``LayoutRight``
 
 .. _LayoutLeft: layoutLeft.html
 
-.. |LayoutLeft| replace:: ``LayoutLeft()``
+.. |LayoutLeft| replace:: :cppkokkos:func:``LayoutLeft``
 
 .. _LayoutStride: layoutStride.html
 
-.. |LayoutStride| replace:: ``LayoutStride()``
+.. |LayoutStride| replace:: :cppkokkos:func:``LayoutStride``
 
-Template parameters other than ``DataType`` are optional, but ordering is enforced.
-That means for example that ``LayoutType`` can be omitted but if both ``MemorySpace``
-and ``MemoryTraits`` are specified, ``MemorySpace`` must come before ``MemoryTraits``.
+Template parameters other than ``DataType`` are optional, and ordering is enforced for only the first (``DataType``) and last (``MemoryTraits``) position.  That means, for example, that ``Layout`` can be omitted, but if both ``MemorySpace`` and ``MemoryTraits`` are specified, ``MemorySpace`` must come before ``MemoryTraits``.  Ordering is therefore not strongly enforced for the ``Space`` or ``ArrayLayout`` parameters.
+
 
 * ``DataType``:
 
   Defines the fundamental scalar type of the ``View`` and its dimensionality.
-  The basic structure is ``ScalarType STARS BRACKETS`` where the number of STARS denotes
-  the number of runtime length dimensions and the number of BRACKETS defines the compile time dimensions.
-  Due to C++ type restrictions runtime dimensions must come first.
+  The basic semantics are ``<ScalarType STARS SQUARE BRACKETS>``, where the STARS denote the number of runtime dimensions, and SQUARE BRACKETS define the compile-time dimensions.  Due to C++ type restrictions, runtime dimensions must come first, and cannot be interspersed with compile-time dimensions.
+
   Examples:
 
-  - ``double**``: 2D View of ``double`` with 2 runtime dimensions
+  - ``double**``: 2D View of ``double`` with 2 runtime dimensions (i.e., number of STARS).
 
-  - ``const int***[5][3]``: 5D View of ``int`` with 3 runtime and 2 compile dimensions. The data is ``const``.
+  - ``const int***[5][3]``: 5D View of ``int`` with 3 runtime and 2 compile dimensions (i.e., number of SQUARE BRACKET pairs). The data are ``const``.
 
-  - ``Foo[6][2]``: 2D View of a class ``Foo`` with 2 compile time dimensions.
+  - ``Foo[6][2]``: 2D View of type ``Foo`` with 2 compile-time dimensions.
 
-* ``LayoutType``:
+* ``Layout``:
 
   Determines the mapping of indices into the underlying 1D memory storage.
-  Custom Layouts can be implemented, but Kokkos comes with some built-in ones:
+  If no layout is given, the default layout for the memory space associated with the execution space is used.
+  Custom Layouts can be implemented, but Kokkos comes with some built-in layouts:
 
   - |LayoutRight|_: strides increase from the right most to the left most dimension. The last dimension has
-    a stride of one. This corresponds to how C multi dimensional arrays (``[][][]``) are laid out in memory.
+    a stride of one. This corresponds to how C multi-dimensional arrays (``[][][]``) are laid out in memory.
 
   - |LayoutLeft|_: strides increase from the left most to the right most dimension.
     The first dimension has a stride of one. This is the layout Fortran uses for its arrays.
@@ -68,8 +67,8 @@ and ``MemoryTraits`` are specified, ``MemorySpace`` must come before ``MemoryTra
 
 * ``MemorySpace``:
 
-  Controls the storage location.
-  If omitted the default memory space of the default execution space is used (i.e. ``Kokkos::DefaultExecutionSpace::memory_space``)
+  Views store data in Memory Spaces.
+  If omitted as a template parameter, the default memory space of the default execution space is used (i.e. ``Kokkos::DefaultExecutionSpace::memory_space``).
 
 .. _Atomic: ../atomics.html
 
@@ -77,18 +76,18 @@ and ``MemoryTraits`` are specified, ``MemorySpace`` must come before ``MemoryTra
 
 
 * ``MemoryTraits``:
-
-  Sets access properties via enum parameters for the templated ``Kokkos::MemoryTraits<>`` class.
+  MemoryTraits specify how a data structure is accessed.
+  Sets access properties via enum parameters for the templated ``Kokkos::MemoryTraits<>`` class.  
   Possible template parameters are bit-combinations of the following flags:
 
   - ``Unmanaged``: The View will not be reference counted. The allocation has to be provided to the constructor.
 
-  - |Atomic|_: All accesses to the view will use atomic operations.
+  - |Atomic|_: All accesses to the View will use atomic operations.
 
-  - ``RandomAccess``: Hint that the view is used in a random access manner.
-    If the view is also ``const`` this will trigger special load operations on GPUs (i.e. texture fetches).
+  - ``RandomAccess``: Hint that the View is used in a random-access manner.
+    If the View is also ``const`` this will trigger special load operations on GPUs (i.e. texture fetches).
 
-  - ``Restrict``: There is no aliasing of the view by other data structures in the current scope.
+  - ``Restrict``: There is no aliasing of the View by other data structures in the current scope.
 
 Public Class Members
 --------------------
@@ -96,7 +95,7 @@ Public Class Members
 Enums
 ~~~~~
 
-* ``rank``: rank of the view (i.e. the dimensionality) **(until Kokkos 4.1)**
+* ``rank``: rank of the View (i.e. the dimensionality) **(until Kokkos 4.1)**
 * ``rank_dynamic``: number of runtime determined dimensions **(until Kokkos 4.1)**
 * ``reference_type_is_lvalue_reference``: whether the reference type is a C++ lvalue reference.
 
@@ -120,11 +119,11 @@ Typedefs
 
 .. cpp:type:: data_type
 
-   The ``DataType`` of the View, note ``data_type`` contains the array specifiers (e.g. ``int**[3]``)
+   The ``DataType`` of the View; note ``data_type`` contains the array specifiers (e.g. ``int**[3]``).
 
 .. cpp:type:: const_data_type
 
-   Const version of ``DataType``, same as ``data_type`` if that is already const.
+   Const version of ``DataType``, same as ``data_type`` if that is already ``const``.
 
 .. cpp:type:: non_const_data_type
 
@@ -132,37 +131,54 @@ Typedefs
 
 .. cpp:type:: scalar_array_type
 
-   If ``DataType`` represents some properly specialised array data type such as Sacado FAD types, ``scalar_array_type`` is the underlying fundamental scalar type.
+   If ``DataType`` represents some properly specialised array data type, such as Sacado FAD types, ``scalar_array_type`` is the underlying fundamental scalar type.
 
 .. cpp:type:: const_scalar_array_type
 
-   Const version of ``scalar_array_type``, same as ``scalar_array_type`` if that is already const
+   Const version of ``scalar_array_type``, same as ``scalar_array_type`` if that is already ``const``.
 
 .. cpp:type:: non_const_scalar_array_type
 
-   Non-Const version of ``scalar_array_type``, same as ``scalar_array_type`` if that is already non-const.
+   Non-Const version of ``scalar_array_type``, same as ``scalar_array_type`` if that is already non-const
+
 
 .. rubric:: Scalar Types
 
 .. cpp:type:: value_type
 
    The ``data_type`` stripped of its array specifiers, i.e. the scalar type
-   of the data the view is referencing
-   (e.g. if ``data_type`` is ``const int**[3]``, ``value_type`` is ``const int``).
+   of the data the View is referencing
+   (e.g. if ``data_type`` is ``const int**[3]``, ``value_type`` is ``const int``)
 
 .. cpp:type:: const_value_type
 
-   const version of ``value_type``.
+   const version of ``value_type``
 
 .. cpp:type:: non_const_value_type
 
-   non-const version of ``value_type``.
+   non-const version of ``value_type``
+
+
+.. rubric:: Mapping
+
+.. cpp:type:: array_layout
+
+   The Layout of the View.
+
+.. cpp:type:: dimension
+
+   An integer array-like type, able to represent the extents of the View.
+
+.. cpp:type:: specialize
+
+   A specialization tag used for partial specialization of the mapping construct underlying a Kokkos View.
+
 
 .. rubric:: Spaces
 
 .. cpp:type:: execution_space
 
-   Execution Space associated with the view, will be used for
+   Execution Space associated with the View, will be used for
    performing view initialization, and certain deep_copy operations.
 
 .. cpp:type:: memory_space
@@ -171,59 +187,69 @@ Typedefs
 
 .. cpp:type:: device_type
 
-   the compound type defined by ``Device<execution_space,memory_space>``
+   The compound type defined by ``Device<execution_space,memory_space>``.
 
 .. cpp:type:: memory_traits
 
-   The memory traits of the view.
+   The memory traits of the View.
 
 .. cpp:type:: host_mirror_space
 
-   Host accessible memory space used in ``HostMirror``.
+   Host-accessible memory space used in ``HostMirror``.
+
+.. cpp:type:: hooks_policy
+
+   For Kokkos Tools- and Kokkos Resilience-based profiling on host and device.
+
+.. cpp:type:: size_type
+
+   Index type associated with the memory space of this View.
 
 .. rubric:: ViewTypes
 
+.. cpp:type:: array_type
+
 .. cpp:type:: non_const_type
 
-   this view type with all template parameters explicitly defined.
+   This View type with all template parameters explicitly defined.
 
 .. cpp:type:: const_type
 
-   this view type with all template parameters explicitly defined using a ``const`` data type.
+   This View type with all template parameters explicitly defined using a ``const`` data type.
 
 .. cpp:type:: HostMirror
 
-   compatible view type with the same ``DataType`` and ``LayoutType`` stored in host accessible memory space.
+   Compatible View type with the same ``DataType`` and ``Layout`` stored in host-accessible memory space.
+
+.. cpp:type:: host_mirror_type
+
+.. cpp:type:: uniform_type
+
+.. cpp:type:: uniform_const_type
+
+.. cpp:type:: uniform_runtime_type
+
+.. cpp:type:: uniform_runtime_const_type
+
+.. cpp:type:: uniform_nomemspace_type
+
+.. cpp:type:: uniform_const_nomemspace_type
+
+.. cpp:type:: uniform_runtime_nomemspace_type
+
+.. cpp:type:: uniform_runtime_const_nomemspace_type
 
 
 .. rubric:: Data Handles
 
 .. cpp:type:: reference_type
 
-   return type of the view access operators.
+   return type of the View access operators.
 
 .. cpp:type:: pointer_type
 
    pointer to scalar type.
 
-
-.. rubric:: Other
-
-.. cpp:type:: array_layout
-
-   The Layout of the View.
-
-.. cpp:type:: size_type
-
-   index type associated with the memory space of this view.
-
-.. cpp:type:: dimension
-
-   An integer array like type, able to represent the extents of the view.
-
-.. cpp:type:: specialize
-
-   A specialization tag used for partial specialization of the mapping construct underlying a Kokkos View.
 
 Constructors
 ~~~~~~~~~~~~
@@ -234,18 +260,17 @@ Constructors
 
 .. cppkokkos:function:: View( const View<DT, Prop...>& rhs)
 
-   Copy constructor with compatible view. Follows View assignment rules.
+   Copy constructor with compatible View. Follows View assignment rules.
 
 .. cppkokkos:function:: View( View&& rhs)
 
-   Move constructor
+   Move constructor.  
 
 .. cppkokkos:function:: View( const std::string& name, const IntType& ... indices)
 
-   Standard allocating constructor. The initialization is executed on the default
-   instance of the execution space corresponding to ``MemorySpace`` and fences it.
+   Standard allocating constructor. The initialization is executed on the default instance of the execution space corresponding to ``MemorySpace`` and fences it.
 
-   - ``name``: a user provided label, which is used for profiling and debugging purposes. Names are not required to be unique,
+   - ``name``: a user-provided label, which is used for profiling and debugging purposes. Names are not required to be unique.
 
    - ``indices``: Extents of the View.
 
@@ -259,11 +284,11 @@ Constructors
    Standard allocating constructor. The initialization is executed on the default
    instance of the execution space corresponding to ``MemorySpace`` and fences it.
 
-   - ``name``: a user provided label, which is used for profiling and debugging purposes.
-     Names are not required to be unique,
+   - ``name``: a user-provided label used for profiling and debugging.
+     Names are not required to be unique.
 
    - ``layout``: an instance of a layout class. The number of valid extents must
-     either match the dynamic rank or the total rank. In the latter case, the extents
+     either match the dynamic (runtime) rank or the total (runtime + compile time) rank. In the latter case, the extents
      corresponding to compile-time dimensions must match the View type's compile-time extents.
 
 .. cppkokkos:function:: View( const AllocProperties& prop, const IntType& ... indices)
@@ -295,11 +320,16 @@ Constructors
 
 .. cppkokkos:function:: View( pointer_type ptr, const IntType& ... indices)
 
-   Unmanaged data wrapping constructor.
+   Unmanaged data-wrapping constructor.
 
-   - ``ptr``: pointer to a user provided memory allocation. Must provide storage of size ``View::required_allocation_size(n0,...,nR)``
+   - ``ptr``: pointer to a user-provided memory allocation. Must provide storage of size ``View::required_allocation_size(n0,...,nR)`` or 
+              ``View::required_allocation_size(layout)``.
 
    - ``indices``: Extents of the View.
+
+   - ``layout``: an instance of a layout class. The number of valid extents must
+     either match the dynamic rank or the total rank. In the latter case, the extents
+     corresponding to compile-time dimensions must match the View type's compile-time extents.
 
    - Requires: ``sizeof(IntType...)==rank_dynamic()`` or ``sizeof(IntType...)==rank()``. In the latter case,
      the extents corresponding to compile-time dimensions must match the View type's compile-time extents.
@@ -308,18 +338,9 @@ Constructors
 
 .. cppkokkos:function:: View( pointer_type ptr, const array_layout& layout)
 
-   Unmanaged data wrapper constructor.
-
-   - ``ptr``: pointer to a user provided memory allocation. Must provide storage
-     of size ``View::required_allocation_size(layout)``
-
-   - ``layout``: an instance of a layout class. The number of valid extents must
-     either match the dynamic rank or the total rank. In the latter case, the extents
-     corresponding to compile-time dimensions must match the View type's compile-time extents.
-
 .. cppkokkos:function:: View( const ScratchSpace& space, const IntType& ... indices)
 
-   Constructor which acquires memory from a Scratch Memory handle.
+   Constructor which acquires memory from a Scratch Memory handle and takes View indices as second argument.
 
    - ``space``: scratch memory handle. Typically returned from ``team_handles`` in ``TeamPolicy`` kernels.
 
@@ -332,7 +353,7 @@ Constructors
 
 .. cppkokkos:function:: View( const ScratchSpace& space, const array_layout& layout)
 
-   Constructor which acquires memory from a Scratch Memory handle.
+   Constructor which acquires memory from a Scratch Memory handle and takes array layout as the second constructor argument.
 
    - ``space``: scratch memory handle. Typically returned from ``team_handles`` in ``TeamPolicy`` kernels.
 
@@ -356,8 +377,8 @@ Data Access Functions
    Requires: ``sizeof(IntType...)==rank_dynamic()``
 
 .. cppkokkos:function:: reference_type access(const IntType& i0=0, const IntType& i1=0, \
-			const IntType& i2=0, const IntType& i3=0, const IntType& i4=0, \
-			const IntType& i5=0, const IntType& i6=0, const IntType& i7=0) const
+      const IntType& i2=0, const IntType& i3=0, const IntType& i4=0, \
+      const IntType& i5=0, const IntType& i6=0, const IntType& i7=0) const
 
    Returns a value of ``reference_type`` which may or not be referenceable itself.
    The number of index arguments must be equal or larger than the ``rank`` of the view.
@@ -369,14 +390,14 @@ Data Layout, Dimensions, Strides
 
 .. cppkokkos:function:: static constexpr size_t rank()
 
-   **since Kokkos 4.1**: Returns the rank of the view.
+   **since Kokkos 4.1**: Returns the rank of the View.
 
 .. cppkokkos:function:: static constexpr size_t rank_dynamic()
 
-   **since Kokkos 4.1**: Returns the number of runtime determined dimensions.
+   **since Kokkos 4.1**: Returns the number of runtime-determined dimensions.
 
 Note: in practice, ``rank()`` and ``rank_dynamic()`` are not actually
-implemented as static member functions but ``rank`` and ``rank_dynamic`` underlying
+implemented as static member functions, but ``rank`` and ``rank_dynamic`` underlying
 types have a nullary member function (i.e. callable with no argument).
 
 .. cppkokkos:function:: constexpr array_layout layout() const
@@ -456,12 +477,12 @@ types have a nullary member function (i.e. callable with no argument).
 .. cppkokkos:function:: bool span_is_contiguous() const
 
    Whether the span is contiguous (i.e. whether every memory location between
-   in span belongs to the index space covered by the view).
+   in span belongs to the index space covered by the View).
 
 .. cppkokkos:function:: static constexpr size_t required_allocation_size(size_t N0=0, size_t N1=0, \
-			size_t N2=0, size_t N3=0, \
-			size_t N4=0, size_t N5=0, \
-			size_t N6=0, size_t N7=0, size_t N8 = 0);
+      size_t N2=0, size_t N3=0, \
+      size_t N4=0, size_t N5=0, \
+      size_t N6=0, size_t N7=0, size_t N8 = 0);
 
    Returns the number of bytes necessary for an unmanaged view of the provided dimensions. This function is only valid if ``array_layout::is_regular == true``.
 
@@ -487,15 +508,15 @@ Other
 .. cppkokkos:function:: void assign_data(pointer_type arg_data);
 
    Decrement reference count of previously assigned data and set the underlying pointer to arg_data.
-   Note that the effective result of this operation is that the view
-   is now an unmanaged view; thus, the deallocation of memory associated with
-   arg_data is not linked in anyway to the deallocation of the view.
+   Note that the effective result of this operation is that the View
+   is now an unmanaged View; thus, the deallocation of memory associated with
+   arg_data is not linked in anyway to the deallocation of the View.
 
 .. cppkokkos:function:: constexpr bool is_allocated() const;
 
-   Returns true if the view points to a valid memory location.
-   This function works for both managed and unmanaged views.
-   With the unmanaged view, there is no guarantee that referenced
+   Returns true if the View points to a valid memory location.
+   This function works for both managed and unmanaged Views.
+   With the unmanaged View, there is no guarantee that referenced
    address is valid, only that it is a non-null pointer.
 
 NonMember Functions
@@ -512,10 +533,10 @@ NonMember Functions
 Assignment Rules
 ----------------
 
-Assignment rules cover the assignment operator as well as copy constructors. We aim at making all logically legal assignments possible,
-while intercepting illegal assignments if possible at compile time, otherwise at runtime.
-In the following we use ``DstType`` and ``SrcType`` as the type of the destination view and source view respectively.
-``dst_view`` and ``src_view`` refer to the runtime instances of the destination and source views, i.e.:
+Assignment rules cover the assignment operator, as well as copy constructors. We aim at making all logically legal assignments possible,
+while intercepting illegal assignments at compile time, otherwise at runtime.
+In the following we use ``DstType`` and ``SrcType`` as the type of the destination View and source View, respectively.
+``dst_view`` and ``src_view`` refer to the runtime instances of the destination and source Views, i.e.:
 
 .. code-block:: cpp
 
@@ -523,7 +544,7 @@ In the following we use ``DstType`` and ``SrcType`` as the type of the destinati
     DstType dst_view(src_view);
     dst_view = src_view;
 
-The following conditions must be met at and are evaluated at compile time:
+The following conditions must be met at -, and are evaluated at - , compile time:
 
 * ``DstType::rank == SrcType::rank``
 * ``DstType::non_const_value_type`` is the same as ``SrcType::non_const_value_type``
@@ -531,11 +552,11 @@ The following conditions must be met at and are evaluated at compile time:
 * ``MemorySpaceAccess<DstType::memory_space,SrcType::memory_space>::assignable == true``
 * If ``DstType::dynamic_rank != DstType::rank`` and ``SrcType::dynamic_rank != SrcType::rank`` then for each dimension ``k`` which is compile time for both it must be true that ``dst_view.extent(k) == src_view.extent(k)``
 
-Additionally the following conditions must be met at runtime:
+Additionally, the following conditions must be met at runtime:
 
-* If ``DstType::dynamic_rank != DstType::rank`` then for each compile time dimension ``k`` it must be true that ``dst_view.extent(k) == src_view.extent(k)``.
+* If ``DstType::dynamic_rank != DstType::rank`` then for each compile time dimension, ``k``, it must be true that ``dst_view.extent(k) == src_view.extent(k)``.
 
-Furthermore there are rules which must be met if ``DstType::array_layout`` is not the same as ``SrcType::array_layout``.
+Furthermore, there are rules which must be met if ``DstType::array_layout`` is not the same as ``SrcType::array_layout``.
 These rules only cover cases where both layouts are one of ``LayoutLeft``, ``LayoutRight`` or ``LayoutStride``
 
 * If neither ``DstType::array_layout`` nor ``SrcType::array_layout`` is ``LayoutStride``:
@@ -557,7 +578,7 @@ Assignment Examples
     View<const int*> a4 = a1;                     // OK
     View<int*>       a5 = a4;                     // Error: const to non-const assignment
     View<int**>      a6 = a1;                     // Error: Ranks do not match
-    View<int*[8]>    a7 = a3;                     // Error: compile time dimensions do not match
+    View<int*[8]>    a7 = a3;                     // Error: compile time vs. runtime dimensions do not match
     View<int[4][10]> a8 = a3;                     // OK if N == 4 otherwise runtime failure
     View<int*, LayoutLeft>    a9  = a1;           // OK since a1 is either LayoutLeft or LayoutRight
     View<int**, LayoutStride> a10 = a8;           // OK
