@@ -13,40 +13,53 @@ Usage
 
 .. code-block:: cpp
 
-    MinMaxLoc<T,I,S>::value_type result;
-    parallel_reduce(N,Functor,MinMaxLoc<T,I,S>(result));
-    T minValue = result.min_val;
-    T maxValue = result.max_val;
-    I minLoc = result.min_loc;
-    I maxLoc = result.max_loc;
+   MinMaxLoc<T,I,S>::value_type result;
+   parallel_reduce(N,Functor,MinMaxLoc<T,I,S>(result));
+   T minValue = result.min_val;
+   T maxValue = result.max_val;
+   I minLoc = result.min_loc;
+   I maxLoc = result.max_loc;
 
 Synopsis
 --------
 
 .. code-block:: cpp
 
-    template<class Scalar, class Index>
-    struct MinMaxLocScalar{
-        Scalar min_val;
-        Scalar max_val;
-        Index min_loc;
-        Index max_loc;
+   template<class Scalar, class Index>
+   struct MinMaxLocScalar{
+     Scalar min_val;
+     Scalar max_val;
+     Index min_loc;
+     Index max_loc;
 
-        void operator = (const MinMaxLocScalar& rhs);
-    };
+     void operator = (const MinMaxLocScalar& rhs);
+   };
 
-Public Members
---------------
+Interface
+---------
 
-Variables
-~~~~~~~~~
+.. cppkokkos:struct:: template<class Scalar, class Index> MinMaxLocScalar
 
-* ``min_val``: Scalar minimum Value.
-* ``max_val``: Scalar maximum Value.
-* ``min_loc``: minimum location(Index).
-* ``max_loc``: maximum location(Index).
+   .. rubric:: Public Types
 
-Assignment operators
-~~~~~~~~~~~~~~~~~~~~
+   .. cppkokkos:type:: min_val
 
-* ``void operator = (const MinMaxLocScalar& rhs);`` assign ``min_val``, ``max_val``, ``min_loc`` and ``max_loc`` from ``rhs``;
+      Scalar minimum Value.
+
+   .. cppkokkos:type:: max_val
+
+      Scalar maximum Value.
+
+   .. cppkokkos:type:: min_loc
+
+      Minimum location(Index).
+
+   .. cppkokkos:type:: max_loc
+
+      Maximum location(Index).
+
+   .. rubric:: Public Member Functions
+
+   .. cppkokkos:function:: void operator = (const MinMaxLocScalar& rhs)
+
+      Assign ``min_val``, ``max_val``, ``min_loc`` and ``max_loc`` from ``rhs``
