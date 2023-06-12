@@ -4,7 +4,8 @@
 .. role::cpp(code)
     :language: cpp
 
-Template class for storing the min and max values for min/max reducers. Should be accessed via ``::value_type`` defined for particular reducer.
+Template class for storing the min and max values for min/max reducers.
+Should be accessed via ``::value_type`` defined for a particular reducer.
 
 Header File: ``<Kokkos_Core.hpp>``
 
@@ -39,15 +40,15 @@ Interface
 
    .. rubric:: Public Types
 
-   .. cppkokkos:type:: min_val
+   .. cppkokkos:member:: Scalar min_val
 
       Scalar minimum Value.
 
-   .. cppkokkos:type:: max_val
+   .. cppkokkos:member:: Scalar max_val
 
       Scalar maximum Value.
 
-   .. rubric:: Public Member Functions
+   .. rubric:: Assignment Operator
 
    .. cppkokkos:function:: void operator = (const MinMaxScalar& rhs)
 
