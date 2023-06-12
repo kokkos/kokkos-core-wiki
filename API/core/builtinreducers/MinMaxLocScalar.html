@@ -501,7 +501,8 @@
         <article role="main">
           <section id="minmaxlocscalar">
 <h1><code class="docutils literal notranslate"><span class="pre">MinMaxLocScalar</span></code><a class="headerlink" href="#minmaxlocscalar" title="Permalink to this heading">#</a></h1>
-<p>Template class for storing the min and max values with indices for min/max location reducers. Should be accessed via <code class="docutils literal notranslate"><span class="pre">::value_type</span></code> defined for particular reducer.</p>
+<p>Template class for storing the min and max values with indices for min/max location reducers.
+Should be accessed via <code class="docutils literal notranslate"><span class="pre">::value_type</span></code> defined for a particular reducer.</p>
 <p>Header File: <code class="docutils literal notranslate"><span class="pre">&lt;Kokkos_Core.hpp&gt;</span></code></p>
 <section id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Permalink to this heading">#</a></h2>
@@ -518,33 +519,55 @@
 <h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this heading">#</a></h2>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">Scalar</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Index</span><span class="o">&gt;</span>
 <span class="k">struct</span><span class="w"> </span><span class="nc">MinMaxLocScalar</span><span class="p">{</span>
-<span class="w">    </span><span class="n">Scalar</span><span class="w"> </span><span class="n">min_val</span><span class="p">;</span>
-<span class="w">    </span><span class="n">Scalar</span><span class="w"> </span><span class="n">max_val</span><span class="p">;</span>
-<span class="w">    </span><span class="n">Index</span><span class="w"> </span><span class="n">min_loc</span><span class="p">;</span>
-<span class="w">    </span><span class="n">Index</span><span class="w"> </span><span class="n">max_loc</span><span class="p">;</span>
+<span class="w">  </span><span class="n">Scalar</span><span class="w"> </span><span class="n">min_val</span><span class="p">;</span>
+<span class="w">  </span><span class="n">Scalar</span><span class="w"> </span><span class="n">max_val</span><span class="p">;</span>
+<span class="w">  </span><span class="n">Index</span><span class="w"> </span><span class="n">min_loc</span><span class="p">;</span>
+<span class="w">  </span><span class="n">Index</span><span class="w"> </span><span class="n">max_loc</span><span class="p">;</span>
 
-<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="k">operator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">MinMaxLocScalar</span><span class="o">&amp;</span><span class="w"> </span><span class="n">rhs</span><span class="p">);</span>
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="k">operator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">MinMaxLocScalar</span><span class="o">&amp;</span><span class="w"> </span><span class="n">rhs</span><span class="p">);</span>
 <span class="p">};</span>
 </pre></div>
 </div>
 </section>
-<section id="public-members">
-<h2>Public Members<a class="headerlink" href="#public-members" title="Permalink to this heading">#</a></h2>
-<section id="variables">
-<h3>Variables<a class="headerlink" href="#variables" title="Permalink to this heading">#</a></h3>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">min_val</span></code>: Scalar minimum Value.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">max_val</span></code>: Scalar maximum Value.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">min_loc</span></code>: minimum location(Index).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">max_loc</span></code>: maximum location(Index).</p></li>
-</ul>
-</section>
-<section id="assignment-operators">
-<h3>Assignment operators<a class="headerlink" href="#assignment-operators" title="Permalink to this heading">#</a></h3>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">operator</span> <span class="pre">=</span> <span class="pre">(const</span> <span class="pre">MinMaxLocScalar&amp;</span> <span class="pre">rhs);</span></code> assign <code class="docutils literal notranslate"><span class="pre">min_val</span></code>, <code class="docutils literal notranslate"><span class="pre">max_val</span></code>, <code class="docutils literal notranslate"><span class="pre">min_loc</span></code> and <code class="docutils literal notranslate"><span class="pre">max_loc</span></code> from <code class="docutils literal notranslate"><span class="pre">rhs</span></code>;</p></li>
-</ul>
-</section>
+<section id="interface">
+<h2>Interface<a class="headerlink" href="#interface" title="Permalink to this heading">#</a></h2>
+<dl class="cppkokkos struct">
+<dt class="sig sig-object cppkokkos" id="_CPPv4I00E15MinMaxLocScalar">
+<span id="_CPPv3I00E15MinMaxLocScalar"></span><span id="_CPPv2I00E15MinMaxLocScalar"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Scalar</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Index</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">MinMaxLocScalar</span></span></span><a class="headerlink" href="#_CPPv4I00E15MinMaxLocScalar" title="Permalink to this definition">#</a><br /></dt>
+<dd><p class="rubric">Public Members</p>
+<dl class="cppkokkos member">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N15MinMaxLocScalar7min_valE">
+<span id="_CPPv3N15MinMaxLocScalar7min_valE"></span><span id="_CPPv2N15MinMaxLocScalar7min_valE"></span><span id="MinMaxLocScalar::min_val__Scalar"></span><a class="reference internal" href="#_CPPv4I00E15MinMaxLocScalar" title="MinMaxLocScalar::Scalar"><span class="n"><span class="pre">Scalar</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">min_val</span></span></span><a class="headerlink" href="#_CPPv4N15MinMaxLocScalar7min_valE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Scalar minimum Value.</p>
+</dd></dl>
+
+<dl class="cppkokkos member">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N15MinMaxLocScalar7max_valE">
+<span id="_CPPv3N15MinMaxLocScalar7max_valE"></span><span id="_CPPv2N15MinMaxLocScalar7max_valE"></span><span id="MinMaxLocScalar::max_val__Scalar"></span><a class="reference internal" href="#_CPPv4I00E15MinMaxLocScalar" title="MinMaxLocScalar::Scalar"><span class="n"><span class="pre">Scalar</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">max_val</span></span></span><a class="headerlink" href="#_CPPv4N15MinMaxLocScalar7max_valE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Scalar maximum Value.</p>
+</dd></dl>
+
+<dl class="cppkokkos member">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N15MinMaxLocScalar7min_locE">
+<span id="_CPPv3N15MinMaxLocScalar7min_locE"></span><span id="_CPPv2N15MinMaxLocScalar7min_locE"></span><span id="MinMaxLocScalar::min_loc__Index"></span><a class="reference internal" href="#_CPPv4I00E15MinMaxLocScalar" title="MinMaxLocScalar::Index"><span class="n"><span class="pre">Index</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">min_loc</span></span></span><a class="headerlink" href="#_CPPv4N15MinMaxLocScalar7min_locE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Minimum location(Index).</p>
+</dd></dl>
+
+<dl class="cppkokkos member">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N15MinMaxLocScalar7max_locE">
+<span id="_CPPv3N15MinMaxLocScalar7max_locE"></span><span id="_CPPv2N15MinMaxLocScalar7max_locE"></span><span id="MinMaxLocScalar::max_loc__Index"></span><a class="reference internal" href="#_CPPv4I00E15MinMaxLocScalar" title="MinMaxLocScalar::Index"><span class="n"><span class="pre">Index</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">max_loc</span></span></span><a class="headerlink" href="#_CPPv4N15MinMaxLocScalar7max_locE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Maximum location(Index).</p>
+</dd></dl>
+
+<p class="rubric">Assignment Operator</p>
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N15MinMaxLocScalaraSERK15MinMaxLocScalar">
+<span id="_CPPv3N15MinMaxLocScalaraSERK15MinMaxLocScalar"></span><span id="_CPPv2N15MinMaxLocScalaraSERK15MinMaxLocScalar"></span><span id="MinMaxLocScalar::assign-operator__MinMaxLocScalarCR"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">=</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00E15MinMaxLocScalar" title="MinMaxLocScalar"><span class="n"><span class="pre">MinMaxLocScalar</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">rhs</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N15MinMaxLocScalaraSERK15MinMaxLocScalar" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Assign <code class="docutils literal notranslate"><span class="pre">min_val</span></code>, <code class="docutils literal notranslate"><span class="pre">max_val</span></code>, <code class="docutils literal notranslate"><span class="pre">min_loc</span></code> and <code class="docutils literal notranslate"><span class="pre">max_loc</span></code> from <code class="docutils literal notranslate"><span class="pre">rhs</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
 </section>
 </section>
 
@@ -608,11 +631,7 @@
 <li><a class="reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">MinMaxLocScalar</span></code></a><ul>
 <li><a class="reference internal" href="#usage">Usage</a></li>
 <li><a class="reference internal" href="#synopsis">Synopsis</a></li>
-<li><a class="reference internal" href="#public-members">Public Members</a><ul>
-<li><a class="reference internal" href="#variables">Variables</a></li>
-<li><a class="reference internal" href="#assignment-operators">Assignment operators</a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#interface">Interface</a></li>
 </ul>
 </li>
 </ul>
