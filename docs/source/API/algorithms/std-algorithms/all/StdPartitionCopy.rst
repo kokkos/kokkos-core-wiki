@@ -89,7 +89,7 @@ Interface
        const ::Kokkos::View<DataType1, Properties1...>& view_from,
        const ::Kokkos::View<DataType2, Properties2...>& view_dest_true,
        const ::Kokkos::View<DataType3, Properties3...>& view_dest_false,
-       PredicateType p);
+       PredicateType pred);
 
 Parameters and Requirements
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
