@@ -105,13 +105,13 @@ Parameters and Requirements
 
   - must represent a valid range, i.e., ``last >= first`` (checked in debug mode)
 
-  - must be accessible from ``exespace``
+  - must be accessible from ``exespace`` or from the execution space associated with the team handle
 
 - ``view``: Kokkos view to examine
 
   - must be rank-1, and have ``LayoutLeft``, ``LayoutRight``, or ``LayoutStride``
 
-  - must be accessible from ``exespace``
+  - must be accessible from ``exespace`` or from the execution space associated with the team handle
 
 - ``comp``:
 
