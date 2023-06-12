@@ -16,7 +16,7 @@ Interface
 .. code-block:: cpp
 
    //
-   // overload set accepting iterators
+   // overload set accepting an execution space
    //
    template <class ExecutionSpace, class IteratorType>
    auto minmax_element(const ExecutionSpace& exespace,                        (1)
@@ -38,9 +38,6 @@ Interface
                        IteratorType first, IteratorType last,
                        ComparatorType comp);
 
-   //
-   // overload set accepting views
-   //
    template <class ExecutionSpace, class DataType, class... Properties>
    auto minmax_element(const ExecutionSpace& exespace,                        (5)
                        const ::Kokkos::View<DataType, Properties...>& view);
@@ -61,6 +58,32 @@ Interface
                        const ::Kokkos::View<DataType, Properties...>& view,
                        ComparatorType comp);
 
+   //
+   // overload set accepting a team handle
+   //
+   template <class TeamHandleType, class IteratorType>
+   KOKKOS_FUNCTION
+   auto minmax_element(const TeamHandleType& teamHandle,                   (9)
+                       IteratorType first, IteratorType last);
+
+   template <class TeamHandleType, class IteratorType, class ComparatorType>
+   KOKKOS_FUNCTION
+   auto minmax_element(const TeamHandleType& teamHandle,                   (10)
+                       IteratorType first, IteratorType last,
+                       ComparatorType comp);
+
+   template <class TeamHandleType, class DataType, class... Properties>
+   KOKKOS_FUNCTION
+   auto minmax_element(const TeamHandleType& teamHandle,                   (11)
+                       const ::Kokkos::View<DataType, Properties...>& view);
+
+   template <class TeamHandleType, class DataType, class ComparatorType,
+             class... Properties>
+   KOKKOS_FUNCTION
+   auto minmax_element(const TeamHandleType& teamHandle,                   (12)
+                       const ::Kokkos::View<DataType, Properties...>& view,
+                       ComparatorType comp);
+
 Parameters and Requirements
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -70,11 +93,15 @@ Parameters and Requirements
 
 - ``exespace``, ``first``, ``last``, ``view``, ``comp``: same as in |min_element_link|_
 
+- ``teamHandle``: team handle instance given inside a parallel region when using a TeamPolicy
+
 - ``label``: string forwarded to internal parallel kernels for debugging purposes
 
   - 1 and 3: The default string is "Kokkos::minmax_element_iterator_api_default".
 
   - 5 and 7: The default string is "Kokkos::minmax_element_view_api_default".
+
+  - NOTE: overloads accepting a team handle do not use a label internally
 
 Return Value
 ~~~~~~~~~~~~
