@@ -63,24 +63,24 @@ Interface
    //
    template <class TeamHandleType, class IteratorType>
    KOKKOS_FUNCTION
-   auto minmax_element(const TeamHandleType& teamHandle,                   (9)
+   auto minmax_element(const TeamHandleType& teamHandle,                      (9)
                        IteratorType first, IteratorType last);
 
    template <class TeamHandleType, class IteratorType, class ComparatorType>
    KOKKOS_FUNCTION
-   auto minmax_element(const TeamHandleType& teamHandle,                   (10)
+   auto minmax_element(const TeamHandleType& teamHandle,                      (10)
                        IteratorType first, IteratorType last,
                        ComparatorType comp);
 
    template <class TeamHandleType, class DataType, class... Properties>
    KOKKOS_FUNCTION
-   auto minmax_element(const TeamHandleType& teamHandle,                   (11)
+   auto minmax_element(const TeamHandleType& teamHandle,                      (11)
                        const ::Kokkos::View<DataType, Properties...>& view);
 
    template <class TeamHandleType, class DataType, class ComparatorType,
              class... Properties>
    KOKKOS_FUNCTION
-   auto minmax_element(const TeamHandleType& teamHandle,                   (12)
+   auto minmax_element(const TeamHandleType& teamHandle,                      (12)
                        const ::Kokkos::View<DataType, Properties...>& view,
                        ComparatorType comp);
 
