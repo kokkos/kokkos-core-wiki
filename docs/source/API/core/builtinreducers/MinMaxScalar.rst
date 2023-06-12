@@ -38,7 +38,7 @@ Interface
 
 .. cppkokkos:struct:: template<class Scalar> MinMaxScalar
 
-   .. rubric:: Public Types
+   .. rubric:: Public Members
 
    .. cppkokkos:member:: Scalar min_val
 
