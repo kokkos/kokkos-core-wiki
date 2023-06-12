@@ -97,6 +97,8 @@ Parameters and Requirements
 
   - 5 and 7: The default string is "Kokkos::min_element_view_api_default".
 
+  - NOTE: overloads accepting a team handle do not use a label internally
+
 - ``first``, ``last``: range of elements to examine
 
   - must be *random access iterators*, e.g., returned from ``Kokkos::Experimental::(c)begin/(c)end``
