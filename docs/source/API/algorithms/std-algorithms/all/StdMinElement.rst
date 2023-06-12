@@ -16,7 +16,7 @@ Interface
 .. code-block:: cpp
 
    //
-   // overload set accepting iterators
+   // overload set accepting an execution space
    //
    template <class ExecutionSpace, class IteratorType>
    auto min_element(const ExecutionSpace& exespace,                        (1)
@@ -38,9 +38,6 @@ Interface
                     IteratorType first, IteratorType last,
                     ComparatorType comp);
 
-   //
-   // overload set accepting views
-   //
    template <class ExecutionSpace, class DataType, class... Properties>
    auto min_element(const ExecutionSpace& exespace,                        (5)
                     const ::Kokkos::View<DataType, Properties...>& view);
