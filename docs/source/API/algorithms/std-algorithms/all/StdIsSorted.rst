@@ -17,73 +17,73 @@ Interface
 
 .. code-block:: cpp
 
-  //
-  // overload set accepting an execution space
-  //
-  template <class ExecutionSpace, class IteratorType>
-  bool is_sorted(const ExecutionSpace& exespace,                              (1)
-                 IteratorType first, IteratorType last);
+   //
+   // overload set accepting an execution space
+   //
+   template <class ExecutionSpace, class IteratorType>
+   bool is_sorted(const ExecutionSpace& exespace,                              (1)
+                  IteratorType first, IteratorType last);
 
-  template <class ExecutionSpace, class IteratorType>
-  bool is_sorted(const std::string& label,                                    (2)
-                 const ExecutionSpace& exespace,
-                 IteratorType first, IteratorType last);
+   template <class ExecutionSpace, class IteratorType>
+   bool is_sorted(const std::string& label,                                    (2)
+                  const ExecutionSpace& exespace,
+                  IteratorType first, IteratorType last);
 
-  template <class ExecutionSpace, class DataType, class... Properties>
-  bool is_sorted(const ExecutionSpace& exespace,                              (3)
-                 const ::Kokkos::View<DataType, Properties...>& view);
+   template <class ExecutionSpace, class DataType, class... Properties>
+   bool is_sorted(const ExecutionSpace& exespace,                              (3)
+                  const ::Kokkos::View<DataType, Properties...>& view);
 
-  template <class ExecutionSpace, class DataType, class... Properties>
-  bool is_sorted(const std::string& label, const ExecutionSpace& exespace,    (4)
-                 const ::Kokkos::View<DataType, Properties...>& view);
+   template <class ExecutionSpace, class DataType, class... Properties>
+   bool is_sorted(const std::string& label, const ExecutionSpace& exespace,    (4)
+                  const ::Kokkos::View<DataType, Properties...>& view);
 
-  template <class ExecutionSpace, class IteratorType, class ComparatorType>
-  bool is_sorted(const ExecutionSpace& exespace,                              (5)
-                 IteratorType first, IteratorType last,
-                 ComparatorType comp);
+   template <class ExecutionSpace, class IteratorType, class ComparatorType>
+   bool is_sorted(const ExecutionSpace& exespace,                              (5)
+                  IteratorType first, IteratorType last,
+                  ComparatorType comp);
 
-  template <class ExecutionSpace, class IteratorType, class ComparatorType>
-  bool is_sorted(const std::string& label, const ExecutionSpace& exespace,    (6)
-                 IteratorType first, IteratorType last,
-                 ComparatorType comp);
+   template <class ExecutionSpace, class IteratorType, class ComparatorType>
+   bool is_sorted(const std::string& label, const ExecutionSpace& exespace,    (6)
+                  IteratorType first, IteratorType last,
+                  ComparatorType comp);
 
-  template <class ExecutionSpace, class DataType, class... Properties,
-            class ComparatorType>
-  bool is_sorted(const ExecutionSpace& exespace,                              (7)
-                 const ::Kokkos::View<DataType, Properties...>& view,
-                 ComparatorType comp);
+   template <class ExecutionSpace, class DataType, class... Properties,
+             class ComparatorType>
+   bool is_sorted(const ExecutionSpace& exespace,                              (7)
+                  const ::Kokkos::View<DataType, Properties...>& view,
+                  ComparatorType comp);
 
-  template <class ExecutionSpace, class DataType, class... Properties,
-            class ComparatorType>
-  bool is_sorted(const std::string& label, const ExecutionSpace& exespace,    (8)
-                 const ::Kokkos::View<DataType, Properties...>& view,
-                 ComparatorType comp);
+   template <class ExecutionSpace, class DataType, class... Properties,
+             class ComparatorType>
+   bool is_sorted(const std::string& label, const ExecutionSpace& exespace,    (8)
+                  const ::Kokkos::View<DataType, Properties...>& view,
+                  ComparatorType comp);
 
-  //
-  // overload set accepting a team handle
-  //
-  template <class TeamHandleType, class IteratorType>
-  KOKKOS_FUNCTION
-  bool is_sorted(const TeamHandleType& teamHandle,                            (9)
-                 IteratorType first, IteratorType last);
+   //
+   // overload set accepting a team handle
+   //
+   template <class TeamHandleType, class IteratorType>
+   KOKKOS_FUNCTION
+   bool is_sorted(const TeamHandleType& teamHandle,                            (9)
+                  IteratorType first, IteratorType last);
 
-  template <class TeamHandleType, class DataType, class... Properties>
-  KOKKOS_FUNCTION
-  bool is_sorted(const TeamHandleType& teamHandle,                            (10)
-                 const ::Kokkos::View<DataType, Properties...>& view);
+   template <class TeamHandleType, class DataType, class... Properties>
+   KOKKOS_FUNCTION
+   bool is_sorted(const TeamHandleType& teamHandle,                            (10)
+                  const ::Kokkos::View<DataType, Properties...>& view);
 
-  template <class TeamHandleType, class IteratorType, class ComparatorType>
-  KOKKOS_FUNCTION
-  bool is_sorted(const TeamHandleType& teamHandle,                            (11)
-                 IteratorType first, IteratorType last,
-                 ComparatorType comp);
+   template <class TeamHandleType, class IteratorType, class ComparatorType>
+   KOKKOS_FUNCTION
+   bool is_sorted(const TeamHandleType& teamHandle,                            (11)
+                  IteratorType first, IteratorType last,
+                  ComparatorType comp);
 
-  template <class TeamHandleType, class DataType, class... Properties,
-            class ComparatorType>
-  KOKKOS_FUNCTION
-  bool is_sorted(const TeamHandleType& teamHandle,                            (12)
-                 const ::Kokkos::View<DataType, Properties...>& view,
-                 ComparatorType comp);
+   template <class TeamHandleType, class DataType, class... Properties,
+             class ComparatorType>
+   KOKKOS_FUNCTION
+   bool is_sorted(const TeamHandleType& teamHandle,                            (12)
+                  const ::Kokkos::View<DataType, Properties...>& view,
+                  ComparatorType comp);
 
 
 Parameters and Requirements
@@ -131,13 +131,13 @@ Parameters and Requirements
 
   .. code-block:: cpp
 
-    struct Comparator
-    {
-      KOKKOS_INLINE_FUNCTION
-      bool operator()(const value_type & a, const value_type & b) const {
-        return /* true if a is less than b, based on your logic of "less than" */;
-      }
-    };
+     struct Comparator
+     {
+       KOKKOS_INLINE_FUNCTION
+       bool operator()(const value_type & a, const value_type & b) const {
+         return /* true if a is less than b, based on your logic of "less than" */;
+       }
+     };
 
 Return Value
 ~~~~~~~~~~~~
