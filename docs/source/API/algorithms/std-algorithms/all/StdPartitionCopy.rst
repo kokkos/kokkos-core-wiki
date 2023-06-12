@@ -146,10 +146,10 @@ Parameters and Requirements
 - ``pred``:
 
   - *unary* predicate returning ``true`` for the required element to replace; ``pred(v)``
-  must be valid to be called from the execution space passed, and convertible to bool for every
-  argument ``v`` of type (possible const) ``value_type``, where ``value_type``
-  is the value type of ``InputIteratorType`` (for 1,2) or the value type of ``view_from`` (for 3,4),
-  and must not modify ``v``.
+    must be valid to be called from the execution space passed, and convertible to bool for every
+    argument ``v`` of type (possible const) ``value_type``, where ``value_type``
+    is the value type of ``InputIteratorType`` (for 1,2) or the value type of ``view_from`` (for 3,4),
+    and must not modify ``v``.
 
   - must conform to:
 
