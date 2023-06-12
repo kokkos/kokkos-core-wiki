@@ -13,87 +13,98 @@ Usage
 
 .. code-block:: cpp
 
-    MaxLoc<T,I,S>::value_type result;
-    parallel_reduce(N,Functor,MaxLoc<T,I,S>(result));
+   MaxLoc<T,I,S>::value_type result;
+   parallel_reduce(N,Functor,MaxLoc<T,I,S>(result));
 
-Synopsis 
+Synopsis
 --------
 
 .. code-block:: cpp
 
-    template<class Scalar, class Index, class Space>
-    class MaxLoc{
-        public:
-            typedef MaxLoc reducer;
-            typedef ValLocScalar<typename std::remove_cv<Scalar>::type,
-                                    typename std::remove_cv<Index>::type > value_type;
-            typedef Kokkos::View<value_type, Space> result_view_type;
-            
-            KOKKOS_INLINE_FUNCTION
-            void join(value_type& dest, const value_type& src) const;
+   template<class Scalar, class Index, class Space>
+   class MaxLoc{
+     public:
+       typedef MaxLoc reducer;
+       typedef ValLocScalar<typename std::remove_cv<Scalar>::type,
+                               typename std::remove_cv<Index>::type > value_type;
+       typedef Kokkos::View<value_type, Space> result_view_type;
 
-            KOKKOS_INLINE_FUNCTION
-            void init(value_type& val) const;
+       KOKKOS_INLINE_FUNCTION
+       void join(value_type& dest, const value_type& src) const;
 
-            KOKKOS_INLINE_FUNCTION
-            value_type& reference() const;
+       KOKKOS_INLINE_FUNCTION
+       void init(value_type& val) const;
 
-            KOKKOS_INLINE_FUNCTION
-            result_view_type view() const;
+       KOKKOS_INLINE_FUNCTION
+       value_type& reference() const;
 
-            KOKKOS_INLINE_FUNCTION
-            MaxLoc(value_type& value_);
+       KOKKOS_INLINE_FUNCTION
+       result_view_type view() const;
 
-            KOKKOS_INLINE_FUNCTION
-            MaxLoc(const result_view_type& value_);
-    };
+       KOKKOS_INLINE_FUNCTION
+       MaxLoc(value_type& value_);
 
-Public Class Members
---------------------
+       KOKKOS_INLINE_FUNCTION
+       MaxLoc(const result_view_type& value_);
+   };
 
-Typedefs
-~~~~~~~~
+Interface
+---------
 
-* ``reducer``: The self type.
-* ``value_type``: The reduction scalar type (specialization of `ValLocScalar <ValLocScalar.html>`_)
-* ``result_view_type``: A ``Kokkos::View`` referencing the reduction result 
+.. cppkokkos:class:: template<class Scalar, class Index, class Space> MaxLoc
 
-Constructors
-~~~~~~~~~~~~
+   .. rubric:: Public Types
 
-.. cppkokkos:kokkosinlinefunction:: MaxLoc(value_type& value_);
+   .. cppkokkos:type:: reducer
 
-    * Constructs a reducer which references a local variable as its result location.
+      The self type.
 
-.. cppkokkos:kokkosinlinefunction:: MaxLoc(const result_view_type& value_);
- 
-    * Constructs a reducer which references a specific view as its result location.
+   .. cppkokkos:type:: value_type
 
-Functions
-~~~~~~~~~
+      The reduction scalar type (specialization of `ValLocScalar <ValLocScalar.html>`_)
 
-.. cppkokkos:kokkosinlinefunction:: void join(value_type& dest, const value_type& src) const;
+   .. cppkokkos:type:: result_view_type
 
-    * Store maximum with index of ``src`` and ``dest`` into ``dest``:  ``dest = (src.val > dest.val) ? src :dest;``. 
+      A ``Kokkos::View`` referencing the reduction result
 
-.. cppkokkos:kokkosinlinefunction:: void init(value_type& val) const;
+   .. rubric:: Constructors
 
-    * Initialize ``val.val`` using the ``Kokkos::reduction_identity<Scalar>::max()`` method. The default implementation sets ``val=<TYPE>_MIN``.
-    * Initialize ``val.loc`` using the ``Kokkos::reduction_identity<Index>::min()`` method. The default implementation sets ``val=<TYPE>_MAX``.
+   .. cppkokkos:kokkosinlinefunction:: MaxLoc(value_type& value_);
 
-.. cppkokkos:kokkosinlinefunction:: value_type& reference() const;
+      Constructs a reducer which references a local variable as its result location.
 
-    * Returns a reference to the result provided in class constructor.
+   .. cppkokkos:kokkosinlinefunction:: MaxLoc(const result_view_type& value_);
 
-.. cppkokkos:kokkosinlinefunction:: result_view_type view() const;
+      Constructs a reducer which references a specific view as its result location.
 
-    * Returns a view of the result place provided in class constructor.
+   .. rubric:: Public Member Functions
+
+   .. cppkokkos:kokkosinlinefunction:: void join(value_type& dest, const value_type& src) const;
+
+      Store maximum with index of ``src`` and ``dest`` into ``dest``: ``dest = (src.val > dest.val) ? src :dest;``.
+
+   .. cppkokkos:kokkosinlinefunction:: void init(value_type& val) const;
+
+      Initialize ``val.val`` using the ``Kokkos::reduction_identity<Scalar>::max()`` method. The default implementation sets ``val=<TYPE>_MIN``.
+      Initialize ``val.loc`` using the ``Kokkos::reduction_identity<Index>::min()`` method. The default implementation sets ``val=<TYPE>_MAX``.
+
+   .. cppkokkos:kokkosinlinefunction:: value_type& reference() const;
+
+      Returns a reference to the result provided in class constructor.
+
+   .. cppkokkos:kokkosinlinefunction:: result_view_type view() const;
+
+      Returns a view of the result place provided in class constructor.
 
 Additional Information
-~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^
 
 * ``MaxLoc<T,I,S>::value_type`` is Specialization of ValLocScalar on non-const ``T`` and non-const ``I``
+
 * ``MaxLoc<T,I,S>::result_view_type`` is ``Kokkos::View<T,S,Kokkos::MemoryTraits<Kokkos::Unmanaged>>``. Note that the S (memory space) must be the same as the space where the result resides.
-* Requires: ``Scalar`` has ``operator =`` and ``operator >`` defined. ``Kokkos::reduction_identity<Scalar>::max()`` is a valid expression. 
-* Requires: ``Index`` has ``operator =`` defined. ``Kokkos::reduction_identity<Index>::min()`` is a valid expression. 
+
+* Requires: ``Scalar`` has ``operator =`` and ``operator >`` defined. ``Kokkos::reduction_identity<Scalar>::max()`` is a valid expression.
+
+* Requires: ``Index`` has ``operator =`` defined. ``Kokkos::reduction_identity<Index>::min()`` is a valid expression.
+
 * In order to use MaxLoc with a custom type of either ``Scalar`` or ``Index``, a template specialization of ``Kokkos::reduction_identity<CustomType>`` must be defined. See `Built-In Reducers with Custom Scalar Types <../../../ProgrammingGuide/Custom-Reductions-Built-In-Reducers-with-Custom-Scalar-Types.html>`_ for details
