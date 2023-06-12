@@ -2,16 +2,13 @@
 ``is_sorted``
 =============
 
-Header: ``Kokkos_StdAlgorithms.hpp`` 
+Header: ``Kokkos_StdAlgorithms.hpp``
 
 Description
 -----------
 
-- (1,2,3,4): checks if the elements in the range ``[first, last)`` (1,2)
-  or in ``view`` (3,4) are sorted in non-descending order using ``operator<`` to compare two elements.
-
-- (5,6,7,8): checks if the elements in the range ``[first, last)`` (5,6)
-  or in ``view`` (7,8) are sorted in non-descending order using the binary functor ``comp`` to compare two elements.
+Checks if the elements in a range or in a rank-1 ``View`` are sorted in non-descending order using either ``operator<``
+to compare two elements or a user-provided comparison operator.
 
 Interface
 ---------
@@ -133,7 +130,7 @@ Parameters and Requirements
   - must conform to:
 
   .. code-block:: cpp
-  
+
     struct Comparator
     {
       KOKKOS_INLINE_FUNCTION
@@ -141,7 +138,7 @@ Parameters and Requirements
         return /* true if a is less than b, based on your logic of "less than" */;
       }
     };
-  
+
 Return Value
 ~~~~~~~~~~~~
 
