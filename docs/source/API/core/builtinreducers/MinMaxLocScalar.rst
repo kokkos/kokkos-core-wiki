@@ -4,7 +4,8 @@
 .. role::cpp(code)
     :language: cpp
 
-Template class for storing the min and max values with indices for min/max location reducers. Should be accessed via ``::value_type`` defined for particular reducer.
+Template class for storing the min and max values with indices for min/max location reducers.
+Should be accessed via ``::value_type`` defined for a particular reducer.
 
 Header File: ``<Kokkos_Core.hpp>``
 
@@ -40,25 +41,25 @@ Interface
 
 .. cppkokkos:struct:: template<class Scalar, class Index> MinMaxLocScalar
 
-   .. rubric:: Public Types
+   .. rubric:: Public Members
 
-   .. cppkokkos:type:: min_val
+   .. cppkokkos:member:: Scalar min_val
 
       Scalar minimum Value.
 
-   .. cppkokkos:type:: max_val
+   .. cppkokkos:member:: Scalar max_val
 
       Scalar maximum Value.
 
-   .. cppkokkos:type:: min_loc
+   .. cppkokkos:member:: Index min_loc
 
       Minimum location(Index).
 
-   .. cppkokkos:type:: max_loc
+   .. cppkokkos:member:: Index max_loc
 
       Maximum location(Index).
 
-   .. rubric:: Public Member Functions
+   .. rubric:: Assignment Operator
 
    .. cppkokkos:function:: void operator = (const MinMaxLocScalar& rhs)
 
