@@ -6,49 +6,70 @@
 
 Header File: ``<Kokkos_Core.hpp>``
 
-Usage
------
-
-.. code-block:: cpp
-
-   parallel_for(TeamThreadMDRange<Kokkos::Rank<...>, TeamHandle>(team, extent1, extent2, ...),
-     [=] (int i1, int i2, ...) {...});
-   parallel_reduce(TeamThreadMDRange<Kokkos::Rank<...>, TeamHandle>(team, extent1, extent2, ...),
-     [=] (int i1, int i2, ..., double& lsum) {...}, sum);
-
+Description
+-----------
 
 TeamThreadMDRange is a `nested execution policy <./NestedPolicies.html>`_  used inside of hierarchical parallelism.
+
 
 Interface
 ---------
 
-.. code-block:: cpp
+.. cppkokkos:class:: template <unsigned N, ..., typename TeamHandle> TeamThreadMDRange<Rank<N, ...>, TeamHandle>
 
+
+   .. rubric:: Constructors
+
+   .. cppkokkos:function:: TeamThreadMDRange(team, extent1, extent2, ..., extentN);
+
+      Splits the index range ``0`` to ``extent`` over the threads of the team,
+      where ``extent`` is the backend dependent rank that will be threaded
+
+      :param team: TeamHandle to the calling team execution context.
+
+      :param extent_i: index range length of each rank.
+
+
+      * **Requirements**
+
+	* ``TeamHandle`` is a type that models `TeamHandle <./TeamHandleConcept.html>`_
+
+	* extents are ints.
+
+	* Every member thread of ``team`` must call the operation in the same branch, i.e. it is not legal to have some
+	  threads call this function in one branch, and the other threads of ``team`` call it in another branch.
+
+	* ``N >= 2 && N <= 8`` is true;
+
+
+
+..
    template <unsigned N, ..., typename TeamHandle>
    struct TeamThreadMDRange<Rank<N, ...>, TeamHandle>
    {
      TeamThreadMDRange(team, extent1, extent2, ..., extentN) { /* ... */ }
    };
 
-Splits the index range ``0`` to ``extent`` over the threads of the team,
-where extent is the backend dependent rank that will be threaded
+..
+   Splits the index range ``0`` to ``extent`` over the threads of the team,
+   where extent is the backend dependent rank that will be threaded
 
-*  **Arguments**
+   *  **Arguments**
 
-   * ``team``: TeamHandle to the calling team execution context.
+      * ``team``: TeamHandle to the calling team execution context.
 
-   * ``extent_i``: index range length of each rank.
+      * ``extent_i``: index range length of each rank.
 
-* **Requirements**
+   * **Requirements**
 
-  * ``TeamHandle`` is a type that models `TeamHandle <./TeamHandleConcept.html>`_
+     * ``TeamHandle`` is a type that models `TeamHandle <./TeamHandleConcept.html>`_
 
-  * extents are ints.
+     * extents are ints.
 
-  * Every member thread of ``team`` must call the operation in the same branch, i.e. it is not legal to have some
-    threads call this function in one branch, and the other threads of ``team`` call it in another branch.
+     * Every member thread of ``team`` must call the operation in the same branch, i.e. it is not legal to have some
+       threads call this function in one branch, and the other threads of ``team`` call it in another branch.
 
-  * ``N >= 2 && N <= 8`` is true;
+     * ``N >= 2 && N <= 8`` is true;
 
 
 Examples
@@ -85,3 +106,15 @@ Examples
 
        A_rowSum[leagueRank] = leagueSum;
    });
+
+..
+
+   Usage
+   -----
+
+   .. code-block:: cpp
+
+      parallel_for(TeamThreadMDRange<Kokkos::Rank<...>, TeamHandle>(team, extent1, extent2, ...),
+	[=] (int i1, int i2, ...) {...});
+      parallel_reduce(TeamThreadMDRange<Kokkos::Rank<...>, TeamHandle>(team, extent1, extent2, ...),
+	[=] (int i1, int i2, ..., double& lsum) {...}, sum);
