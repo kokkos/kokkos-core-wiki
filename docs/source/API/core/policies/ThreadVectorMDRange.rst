@@ -6,49 +6,47 @@
 
 Header File: ``<Kokkos_Core.hpp>``
 
-Usage
------
-
-.. code-block:: cpp
-
-    parallel_for(ThreadVectorMDRange<Kokkos::Rank<...>, TeamHandle>(team, extent1, extent2, ...),
-      [=] (int i1, int i2, ...) {...});
-    parallel_reduce(ThreadVectorMDRange<Kokkos::Rank<...>, TeamHandle>(team, extent1, extent2, ...),
-      [=] (int i1, int i2, ..., double& lsum) {...}, sum);
-
+Description
+-----------
 
 ThreadVectorMDRange is a `nested execution policy <./NestedPolicies.html>`_  used inside of hierarchical parallelism.
 
 Interface
 ---------
 
-.. code-block:: cpp
+.. cppkokkos:class:: template <class Rank, typename TeamHandle> ThreadVectorMDRange
 
-   template <unsigned N, ..., typename TeamHandle>
-   struct ThreadVectorMDRange<Rank<N, ...>, TeamHandle>
-   {
-     ThreadVectorMDRange(team, extent1, extent2, ..., extentN) { /* ... */ }
-   };
+   .. rubric:: Constructor
 
-Splits the index range ``0`` to ``extent`` over the vector lanes of the calling thread,
-where extent is the backend dependent rank that will be vectorized
+   .. cppkokkos:function:: ThreadVectorMDRange(team, extent_1, extent_2, ...);
 
-*  **Arguments**
+      Splits the index range ``0`` to ``extent`` over the vector lanes of the calling thread,
+      where ``extent`` is the backend-dependent rank that will be vectorized
 
-   * ``team``: TeamHandle to the calling team execution context.
+      :param team: TeamHandle to the calling team execution context
 
-   * ``extent_i``: index range length of each rank.
+      :param extent_1, extent_2, ...: index range lengths of each rank
 
-*  **Requirements**
+      * **Requirements**
 
-   * ``TeamHandle`` is a type that models [TeamHandle](Kokkos%3A%3ATeamHandleConcept)
+	* ``TeamHandle`` is a type that models `TeamHandle <./TeamHandleConcept.html>`_
 
-   * extents are ints.
+	* ``extent_1, extent_2, ...`` are ints
 
-   * This function can not be called inside a parallel operation dispatched using a
-     ``TeamVectorRange`` policy, ``TeamVectorRange`` policy, ``TeamVectorMDRange`` policy or ``ThreadVectorMDRange`` policy.
+	* ``extent_i`` is such that ``i >= 2 && i <= 8`` is true.
+	  For example:
 
-   * ``N >= 2 && N <= 8`` is true;
+	  .. code-block:: cpp
+
+	     ThreadVectorMDRange(team, 4);               // NOT OK, violates i>=2
+
+	     ThreadVectorMDRange(team, 4,5);             // OK
+	     ThreadVectorMDRange(team, 4,5,6);           // OK
+	     ThreadVectorMDRange(team, 4,5,6,2,3,4,5,6); // OK, max num of extents allowed
+
+	* The constructor can not be called inside a parallel operation dispatched using a
+	  ``TeamVectorRange`` policy, ``TeamVectorRange`` policy, ``TeamVectorMDRange`` policy
+	  or ``ThreadVectorMDRange`` policy.
 
 Examples
 --------
@@ -71,11 +69,9 @@ Examples
            A(leagueRank, i0, i1, i2, i3) += B(leagueRank, i1) + C(i1, i2, i3);
          });
        });
-
        team.team_barrier();
 
        int teamSum = 0;
-
        parallel_for(teamThreadRange, [=, &teamSum](int const& i0) {
          int threadSum = 0;
          parallel_reduce(threadVectorMDRange,

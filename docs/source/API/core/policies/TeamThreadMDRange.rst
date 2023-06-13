@@ -22,7 +22,7 @@ Interface
    .. cppkokkos:function:: TeamThreadMDRange(team, extent_1, extent_2, ...);
 
       Splits the index range ``0`` to ``extent`` over the threads of the team,
-      where ``extent`` is the backend dependent rank that will be threaded
+      where ``extent`` is the backend-dependent rank that will be threaded
 
       :param team: TeamHandle to the calling team execution context
 
@@ -50,36 +50,6 @@ Interface
 	     TeamThreadMDRange(team, 4,5,6);           // OK
 	     TeamThreadMDRange(team, 4,5,6,2,3,4,5,6); // OK, max num of extents allowed
 
-
-..
-   template <unsigned N, ..., typename TeamHandle>
-   struct TeamThreadMDRange<Rank<N, ...>, TeamHandle>
-   {
-     TeamThreadMDRange(team, extent1, extent2, ..., extentN) { /* ... */ }
-   };
-
-..
-   Splits the index range ``0`` to ``extent`` over the threads of the team,
-   where extent is the backend dependent rank that will be threaded
-
-   *  **Arguments**
-
-      * ``team``: TeamHandle to the calling team execution context.
-
-      * ``extent_i``: index range length of each rank.
-
-   * **Requirements**
-
-     * ``TeamHandle`` is a type that models `TeamHandle <./TeamHandleConcept.html>`_
-
-     * extents are ints.
-
-     * Every member thread of ``team`` must call the operation in the same branch, i.e. it is not legal to have some
-       threads call this function in one branch, and the other threads of ``team`` call it in another branch.
-
-     * ``N >= 2 && N <= 8`` is true;
-
-
 Examples
 --------
 
@@ -105,16 +75,6 @@ Examples
            threadSum += D(leagueRank, i0, i1, i2, i3);
          }, teamSum
        );
-
        single(PerTeam(team), [&leagueSum, teamSum]() { leagueSum += teamSum; });
-
        A_rowSum[leagueRank] = leagueSum;
    });
-
-..
-   Usage
-   -----
-      parallel_for(TeamThreadMDRange<Kokkos::Rank<...>, TeamHandle>(team, extent1, extent2, ...),
-	[=] (int i1, int i2, ...) {...});
-      parallel_reduce(TeamThreadMDRange<Kokkos::Rank<...>, TeamHandle>(team, extent1, extent2, ...),
-	[=] (int i1, int i2, ..., double& lsum) {...}, sum);

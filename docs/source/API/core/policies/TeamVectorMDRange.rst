@@ -3,50 +3,47 @@
 
 Header File: ``<Kokkos_Core.hpp>``
 
-Usage
------
-
-.. code-block:: cpp
-
-   parallel_for(TeamVectorMDRange<Kokkos::Rank<...>, TeamHandle>(team, extent1, extent2, ...),
-     [=] (int i1, int i2, ...) {...});
-   parallel_reduce(TeamVectorMDRange<Kokkos::Rank<...>, TeamHandle>(team, extent1, extent2, ...),
-     [=] (int i1, int i2, ..., double& lsum) {...}, sum);
-
+Description
+-----------
 
 TeamVectorMDRange is a `nested execution policy <./NestedPolicies.html>`_  used inside of hierarchical parallelism.
 
 Interface
 ---------
 
-.. code-block:: cpp
+.. cppkokkos:class:: template <class Rank, typename TeamHandle> TeamVectorMDRange
 
-   template <unsigned N, ..., typename TeamHandle>
-   struct TeamVectorMDRange<Rank<N, ...>, TeamHandle>
-   {
-     TeamVectorMDRange(team, extent1, extent2, ..., extentN) { /* ... */ }
-   };
+   .. rubric:: Constructor
 
-Splits an index range ``0`` to ``extent1`` over the threads of the team and
-another index range ``0`` to ``extent2`` over their vector lanes.
-Ranks for threading and vectorization determined by the backend.
+   .. cppkokkos:function:: TeamVectorMDRange(team, extent_1, extent_2, ...);
 
-*  **Arguments**
+      Splits an index range over the threads of the team and another index range over their vector lanes.
+      Ranks for threading and vectorization determined by the backend.
 
-   * ``team``: TeamHandle to the calling team execution context.
+      :param team: TeamHandle to the calling team execution context
 
-   * ``extent_i``: index range length of each rank.
+      :param extent_1, extent_2, ...: index range lengths of each rank
 
-*  **Requirements**
+      * **Requirements**
 
-   * ``TeamHandle`` is a type that models [TeamHandle](Kokkos%3A%3ATeamHandleConcept)
+	* ``TeamHandle`` is a type that models `TeamHandle <./TeamHandleConcept.html>`_
 
-   * extents are ints.
+	* ``extent_1, extent_2, ...`` are ints
 
-   * Every member thread of ``team`` must call the operation in the same branch, i.e. it is not legal to have some
-       threads call this function in one branch, and the other threads of ``team`` call it in another branch.
+	* Every member thread of ``team`` must call the operation in the same branch,
+	  i.e. it is not legal to have some threads call this function in one branch,
+	  and the other threads of ``team`` call it in another branch
 
-   * ``N >= 2 && N <= 8`` is true;
+	* ``extent_i`` is such that ``i >= 2 && i <= 8`` is true.
+	  For example:
+
+	  .. code-block:: cpp
+
+	     TeamVectorMDRange(team, 4);               // NOT OK, violates i>=2
+
+	     TeamVectorMDRange(team, 4,5);             // OK
+	     TeamVectorMDRange(team, 4,5,6);           // OK
+	     TeamVectorMDRange(team, 4,5,6,2,3,4,5,6); // OK, max num of extents allowed
 
 Examples
 --------
@@ -60,26 +57,20 @@ Examples
 
        int leagueRank = team.league_rank();
 
-       auto teamVectorMDRange =
-           TeamVectorMDRange<Rank<4>, TeamType>(
-               team, n0, n1, n2, n3);
+       auto range = TeamVectorMDRange<Rank<4>, TeamType>(team, n0, n1, n2, n3);
 
-       parallel_for(teamVectorMDRange,
+       parallel_for(range,
          [=](int i0, int i1, int i2, int i3) {
            A(leagueRank, i0, i1, i2, i3) = B(leagueRank, i1) + C(i1, i2, i3);
        });
-
        team.team_barrier();
 
        int teamSum = 0;
-
-       parallel_reduce(teamVectorMDRange,
+       parallel_reduce(range,
            [=](int i0, int i1, int i2, int i3, int& vectorSum) {
              vectorSum += v(leagueRank, i, j, k, l);
            }, teamSum
        );
-
        single(PerTeam(team), [&leagueSum, teamSum]() { leagueSum += teamSum; });
-
        A_rowSum[leagueRank] = leagueSum;
      });
