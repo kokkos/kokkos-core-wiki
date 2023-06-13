@@ -501,7 +501,8 @@
         <article role="main">
           <section id="minmaxscalar">
 <h1><code class="docutils literal notranslate"><span class="pre">MinMaxScalar</span></code><a class="headerlink" href="#minmaxscalar" title="Permalink to this heading">#</a></h1>
-<p>Template class for storing the min and max values for min/max reducers. Should be accessed via <code class="docutils literal notranslate"><span class="pre">::value_type</span></code> defined for particular reducer.</p>
+<p>Template class for storing the min and max values for min/max reducers.
+Should be accessed via <code class="docutils literal notranslate"><span class="pre">::value_type</span></code> defined for a particular reducer.</p>
 <p>Header File: <code class="docutils literal notranslate"><span class="pre">&lt;Kokkos_Core.hpp&gt;</span></code></p>
 <section id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Permalink to this heading">#</a></h2>
@@ -516,29 +517,41 @@
 <h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this heading">#</a></h2>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">Scalar</span><span class="o">&gt;</span>
 <span class="k">struct</span><span class="w"> </span><span class="nc">MinMaxScalar</span><span class="p">{</span>
-<span class="w">    </span><span class="n">Scalar</span><span class="w"> </span><span class="n">min_val</span><span class="p">;</span>
-<span class="w">    </span><span class="n">Scalar</span><span class="w"> </span><span class="n">max_val</span><span class="p">;</span>
+<span class="w">  </span><span class="n">Scalar</span><span class="w"> </span><span class="n">min_val</span><span class="p">;</span>
+<span class="w">  </span><span class="n">Scalar</span><span class="w"> </span><span class="n">max_val</span><span class="p">;</span>
 
-<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="k">operator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">MinMaxScalar</span><span class="o">&amp;</span><span class="w"> </span><span class="n">rhs</span><span class="p">);</span>
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="k">operator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">MinMaxScalar</span><span class="o">&amp;</span><span class="w"> </span><span class="n">rhs</span><span class="p">);</span>
 <span class="p">};</span>
 </pre></div>
 </div>
 </section>
-<section id="public-members">
-<h2>Public Members<a class="headerlink" href="#public-members" title="Permalink to this heading">#</a></h2>
-<section id="variables">
-<h3>Variables<a class="headerlink" href="#variables" title="Permalink to this heading">#</a></h3>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">min_val</span></code>: Scalar minimum Value.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">max_val</span></code>: Scalar maximum Value.</p></li>
-</ul>
-</section>
-<section id="assignment-operators">
-<h3>Assignment operators<a class="headerlink" href="#assignment-operators" title="Permalink to this heading">#</a></h3>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">operator</span> <span class="pre">=</span> <span class="pre">(const</span> <span class="pre">MinMaxScalar&amp;</span> <span class="pre">rhs);</span></code> assign <code class="docutils literal notranslate"><span class="pre">min_val</span></code> and <code class="docutils literal notranslate"><span class="pre">max_val</span></code> from <code class="docutils literal notranslate"><span class="pre">rhs</span></code>;</p></li>
-</ul>
-</section>
+<section id="interface">
+<h2>Interface<a class="headerlink" href="#interface" title="Permalink to this heading">#</a></h2>
+<dl class="cppkokkos struct">
+<dt class="sig sig-object cppkokkos" id="_CPPv4I0E12MinMaxScalar">
+<span id="_CPPv3I0E12MinMaxScalar"></span><span id="_CPPv2I0E12MinMaxScalar"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Scalar</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">MinMaxScalar</span></span></span><a class="headerlink" href="#_CPPv4I0E12MinMaxScalar" title="Permalink to this definition">#</a><br /></dt>
+<dd><p class="rubric">Public Members</p>
+<dl class="cppkokkos member">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N12MinMaxScalar7min_valE">
+<span id="_CPPv3N12MinMaxScalar7min_valE"></span><span id="_CPPv2N12MinMaxScalar7min_valE"></span><span id="MinMaxScalar::min_val__Scalar"></span><a class="reference internal" href="#_CPPv4I0E12MinMaxScalar" title="MinMaxScalar::Scalar"><span class="n"><span class="pre">Scalar</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">min_val</span></span></span><a class="headerlink" href="#_CPPv4N12MinMaxScalar7min_valE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Scalar minimum Value.</p>
+</dd></dl>
+
+<dl class="cppkokkos member">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N12MinMaxScalar7max_valE">
+<span id="_CPPv3N12MinMaxScalar7max_valE"></span><span id="_CPPv2N12MinMaxScalar7max_valE"></span><span id="MinMaxScalar::max_val__Scalar"></span><a class="reference internal" href="#_CPPv4I0E12MinMaxScalar" title="MinMaxScalar::Scalar"><span class="n"><span class="pre">Scalar</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">max_val</span></span></span><a class="headerlink" href="#_CPPv4N12MinMaxScalar7max_valE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Scalar maximum Value.</p>
+</dd></dl>
+
+<p class="rubric">Assignment Operator</p>
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N12MinMaxScalaraSERK12MinMaxScalar">
+<span id="_CPPv3N12MinMaxScalaraSERK12MinMaxScalar"></span><span id="_CPPv2N12MinMaxScalaraSERK12MinMaxScalar"></span><span id="MinMaxScalar::assign-operator__MinMaxScalarCR"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">=</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E12MinMaxScalar" title="MinMaxScalar"><span class="n"><span class="pre">MinMaxScalar</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">rhs</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N12MinMaxScalaraSERK12MinMaxScalar" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Assign <code class="docutils literal notranslate"><span class="pre">min_val</span></code> and <code class="docutils literal notranslate"><span class="pre">max_val</span></code> from <code class="docutils literal notranslate"><span class="pre">rhs</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
 </section>
 </section>
 
@@ -602,11 +615,7 @@
 <li><a class="reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">MinMaxScalar</span></code></a><ul>
 <li><a class="reference internal" href="#usage">Usage</a></li>
 <li><a class="reference internal" href="#synopsis">Synopsis</a></li>
-<li><a class="reference internal" href="#public-members">Public Members</a><ul>
-<li><a class="reference internal" href="#variables">Variables</a></li>
-<li><a class="reference internal" href="#assignment-operators">Assignment operators</a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#interface">Interface</a></li>
 </ul>
 </li>
 </ul>
