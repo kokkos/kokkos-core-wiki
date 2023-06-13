@@ -15,32 +15,40 @@ TeamThreadMDRange is a `nested execution policy <./NestedPolicies.html>`_  used 
 Interface
 ---------
 
-.. cppkokkos:class:: template <unsigned N, ..., typename TeamHandle> TeamThreadMDRange<Rank<N, ...>, TeamHandle>
+.. cppkokkos:class:: template <class Rank, typename TeamHandle> TeamThreadMDRange
 
+   .. rubric:: Constructor
 
-   .. rubric:: Constructors
-
-   .. cppkokkos:function:: TeamThreadMDRange(team, extent1, extent2, ..., extentN);
+   .. cppkokkos:function:: TeamThreadMDRange(team, extent_1, extent_2, ...);
 
       Splits the index range ``0`` to ``extent`` over the threads of the team,
       where ``extent`` is the backend dependent rank that will be threaded
 
-      :param team: TeamHandle to the calling team execution context.
+      :param team: TeamHandle to the calling team execution context
 
-      :param extent_i: index range length of each rank.
+      :param extent_1, extent_2, ...: index range lengths of each rank
 
 
       * **Requirements**
 
 	* ``TeamHandle`` is a type that models `TeamHandle <./TeamHandleConcept.html>`_
 
-	* extents are ints.
+	* ``extent_1, extent_2, ...`` are ints
 
-	* Every member thread of ``team`` must call the operation in the same branch, i.e. it is not legal to have some
-	  threads call this function in one branch, and the other threads of ``team`` call it in another branch.
+	* Every member thread of ``team`` must call the operation in the same branch,
+	  i.e. it is not legal to have some threads call this function in one branch,
+	  and the other threads of ``team`` call it in another branch
 
-	* ``N >= 2 && N <= 8`` is true;
+	* ``extent_i`` is such that ``i >= 2 && i <= 8`` is true.
+	  For example:
 
+	  .. code-block:: cpp
+
+	     TeamThreadMDRange(team, 4);               // NOT OK, violates i>=2
+
+	     TeamThreadMDRange(team, 4,5);             // OK
+	     TeamThreadMDRange(team, 4,5,6);           // OK
+	     TeamThreadMDRange(team, 4,5,6,2,3,4,5,6); // OK, max num of extents allowed
 
 
 ..
@@ -84,19 +92,15 @@ Examples
 
        int leagueRank = team.league_rank();
 
-       auto teamThreadMDRange =
-           TeamThreadMDRange<Rank<4>, TeamHandle>(
-               team, n0, n1, n2, n3);
+       auto range = TeamThreadMDRange<Rank<4>, TeamHandle>(team, n0, n1, n2, n3);
 
-       parallel_for(teamThreadMDRange, [=](int i0, int i1, int i2, int i3) {
+       parallel_for(range, [=](int i0, int i1, int i2, int i3) {
          A(leagueRank, i0, i1, i2, i3) = B(leagueRank, i1) + C(i1, i2, i3);
        });
-
        team.team_barrier();
 
        int teamSum = 0;
-
-       parallel_reduce(teamThreadMDRange,
+       parallel_reduce(range,
          [=](int i0, int i1, int i2, int i3, int& threadSum) {
            threadSum += D(leagueRank, i0, i1, i2, i3);
          }, teamSum
@@ -108,12 +112,8 @@ Examples
    });
 
 ..
-
    Usage
    -----
-
-   .. code-block:: cpp
-
       parallel_for(TeamThreadMDRange<Kokkos::Rank<...>, TeamHandle>(team, extent1, extent2, ...),
 	[=] (int i1, int i2, ...) {...});
       parallel_reduce(TeamThreadMDRange<Kokkos::Rank<...>, TeamHandle>(team, extent1, extent2, ...),
