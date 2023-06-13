@@ -55,7 +55,7 @@ Description
 
         Constructor from variadic pack of dimension arguments. Constructs ``internal_view`` member.
 
-    .. cppkokkos:function:: ScatterView(/* is-alloc-prop */ const& arg_prop, Dims... dims)
+    .. cppkokkos:function:: ScatterView(ALLOC_PROP const& arg_prop, Dims... dims)
 
         Constructor from variadic pack of dimension arguments. Constructs ``internal_view`` member.
         This constructor allows passing an object created by `Kokkos::view_alloc`` as first argument, e.g., for specifying an execution space via
