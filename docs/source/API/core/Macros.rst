@@ -28,8 +28,6 @@ General Settings
 +-------------------------------------------------+-------------------------------------------------------------------------------------------------------------+
 | ``KOKKOS_ENABLE_HBWSPACE``                      | Defined if the experimental ``HBWSpace`` memory space is enabled, enabled by KOKKOS_ENABLE_MEMKIND.         |
 +-------------------------------------------------+-------------------------------------------------------------------------------------------------------------+
-| ``KOKKOS_ENABLE_PROFILING_LOAD_PRINT``          | Kokkos will output a message when the profiling library is loaded.                                          |
-+-------------------------------------------------+-------------------------------------------------------------------------------------------------------------+
 | ``KOKKOS_ENABLE_TUNING``                        | Whether bindings for tunings are available (see `#2422 <https://github.com/kokkos/kokkos/pull/2422>`_).     |
 +-------------------------------------------------+-------------------------------------------------------------------------------------------------------------+
 | ``KOKKOS_ENABLE_COMPLEX_ALIGN``                 | Whether complex types are aligned.                                                                          |
