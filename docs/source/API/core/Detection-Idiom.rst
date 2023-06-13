@@ -9,9 +9,9 @@ The Detection Idiom is used to recognize, in an SFINAE-friendly way, the validit
 Header File: ``<Kokkos_DetectionIdiom.hpp>``
 
 The Kokkos Detection Idiom is based upon the detection idiom from Version 2 of the C++ Extensions for
-Library Fundamentals, ISO/IEC TS 19568:2017, a draft of which can be found `here <https://cplusplus.github.io/fundamentals-ts/v2.html#meta.detect>`_.
+Library Fundamentals, ISO/IEC TS 19568:2017, a draft of which can be found `here <https://cplusplus.github.io/fundamentals-ts/v2.html#meta.detect>`.
 
-The original C++ proposal can be found at `here <https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2015/n4436.pdf>`_.
+The original C++ proposal can be found at `here <https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2015/n4436.pdf>`.
 
 API
 ---
@@ -103,21 +103,21 @@ Detecting an expression
 Suppose we needed to write a type trait to detect if a given type ``T`` is copy assignable. First we write an archetype helper alias:
 
 .. code-block:: cpp
-    
+
     template<class T>
     using copy_assign_t = decltype(std::declval<T&>() = std::declval<T const&>());
 
 Then the trait can be easily expressed as:
 
 .. code-block:: cpp
-    
+
     template<class T>
     using is_copy_assignable = Kokkos::is_detected<copy_assign_t, T>;
 
 If we also wanted to check that the return type of the copy assignment is ``T&``, we would use:
 
 .. code-block:: cpp
-    
+
     template<class T>
     using is_canonical_copy_assignable = Kokkos::is_detected_exact<T&, copy_assign_t, T>;
 
@@ -129,12 +129,12 @@ Suppose we want to use a nested ``MyType::difference_type`` if it exists, otherw
 First we write an archetype helper alias:
 
 .. code-block:: cpp
-    
+
     template<class T>
     using diff_t = typename T::difference_type;
 
 Then we can declare our type:
 
 .. code-block:: cpp
-    
+
     using our_difference_type = Kokkos::detected_or_t<std::ptrdiff_t, diff_t, MyType>;
