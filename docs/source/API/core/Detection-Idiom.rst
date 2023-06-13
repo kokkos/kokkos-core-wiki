@@ -9,9 +9,9 @@ The Detection Idiom is used to recognize, in an SFINAE-friendly way, the validit
 Header File: ``<Kokkos_DetectionIdiom.hpp>``
 
 The Kokkos Detection Idiom is based upon the detection idiom from Version 2 of the C++ Extensions for
-Library Fundamentals, ISO/IEC TS 19568:2017, a draft of which can be found `here <https://cplusplus.github.io/fundamentals-ts/v2.html#meta.detect>`__.
+Library Fundamentals, ISO/IEC TS 19568:2017, a draft of which can be found `here <https://cplusplus.github.io/fundamentals-ts/v2.html#meta.detect>`.
 
-The original C++ proposal can be found at `here <https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2015/n4436.pdf>`__.
+The original C++ proposal can be found at `here <https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2015/n4436.pdf>`.
 
 API
 ---
