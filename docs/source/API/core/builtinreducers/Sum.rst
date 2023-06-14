@@ -1,9 +1,6 @@
 ``Sum``
 =======
 
-.. role::cpp(code)
-    :language: cpp
-
 .. role:: cppkokkos(code)
     :language: cppkokkos
 
@@ -16,84 +13,94 @@ Usage
 
 .. code-block:: cpp
 
-    T result;
-    parallel_reduce(N,Functor,Sum<T,S>(result));
+   T result;
+   parallel_reduce(N,Functor,Sum<T,S>(result));
 
-Synopsis 
+Synopsis
 --------
 
 .. code-block:: cpp
 
-    template<class Scalar, class Space>
-    class Sum{
-        public:
-            typedef Sum reducer;
-            typedef typename std::remove_cv<Scalar>::type value_type;
-            typedef Kokkos::View<value_type, Space> result_view_type;
-            
-            KOKKOS_INLINE_FUNCTION
-            void join(value_type& dest, const value_type& src) const;
+   template<class Scalar, class Space>
+   class Sum{
+     public:
+       typedef Sum reducer;
+       typedef typename std::remove_cv<Scalar>::type value_type;
+       typedef Kokkos::View<value_type, Space> result_view_type;
 
-            KOKKOS_INLINE_FUNCTION
-            void init( value_type& val) const;
+       KOKKOS_INLINE_FUNCTION
+       void join(value_type& dest, const value_type& src) const;
 
-            KOKKOS_INLINE_FUNCTION
-            value_type& reference() const;
+       KOKKOS_INLINE_FUNCTION
+       void init( value_type& val) const;
 
-            KOKKOS_INLINE_FUNCTION
-            result_view_type view() const;
+       KOKKOS_INLINE_FUNCTION
+       value_type& reference() const;
 
-            KOKKOS_INLINE_FUNCTION
-            Sum(value_type& value_);
+       KOKKOS_INLINE_FUNCTION
+       result_view_type view() const;
 
-            KOKKOS_INLINE_FUNCTION
-            Sum(const result_view_type& value_);
-    };
+       KOKKOS_INLINE_FUNCTION
+       Sum(value_type& value_);
 
-Public Class Members
---------------------
+       KOKKOS_INLINE_FUNCTION
+       Sum(const result_view_type& value_);
+   };
 
-Typedefs
-~~~~~~~~
+Interface
+---------
 
-* ``reducer``: The self type.
-* ``value_type``: The reduction scalar type.
-* ``result_view_type``: A ``Kokkos::View`` referencing the reduction result 
+.. cppkokkos:class:: template<class Scalar, class Space> Sum
 
-Constructors
-~~~~~~~~~~~~
+   .. rubric:: Public Types
 
-.. cppkokkos:kokkosinlinefunction:: Sum(value_type& value_);
+   .. cppkokkos:type:: reducer
 
-    * Constructs a reducer which references a local variable as its result location.  
+      The self type.
 
-.. cppkokkos:kokkosinlinefunction:: Sum(const result_view_type& value_);
+   .. cppkokkos:type:: value_type
 
-    * Constructs a reducer which references a specific view as its result location.
+      The reduction scalar type.
 
-Functions
-~~~~~~~~~
+   .. cppkokkos:type:: result_view_type
 
-.. cppkokkos:kokkosinlinefunction:: void join(value_type& dest, const value_type& src) const;
+      A ``Kokkos::View`` referencing the reduction result
 
-    * Add ``src`` into ``dest``:  ``dest+=src;``. 
+   .. rubric:: Constructors
 
-.. cppkokkos:kokkosinlinefunction:: void init(value_type& val) const;
+   .. cppkokkos:kokkosinlinefunction:: Sum(value_type& value_);
 
-    * Initialize ``val`` using the ``Kokkos::reduction_identity<Scalar>::sum()`` method.  The default implementation sets ``val=0``.
+      Constructs a reducer which references a local variable as its result location.
 
-.. cppkokkos:kokkosinlinefunction:: value_type& reference() const;
+   .. cppkokkos:kokkosinlinefunction:: Sum(const result_view_type& value_);
 
-    * Returns a reference to the result provided in class constructor.
+      Constructs a reducer which references a specific view as its result location.
 
-.. cppkokkos:kokkosinlinefunction:: result_view_type view() const;
+   .. rubric:: Public Member Functions
 
-    * Returns a view of the result referenced in class constructor.
+   .. cppkokkos:kokkosinlinefunction:: void join(value_type& dest, const value_type& src) const;
+
+      Add ``src`` into ``dest``:  ``dest+=src;``.
+
+   .. cppkokkos:kokkosinlinefunction:: void init(value_type& val) const;
+
+      Initialize ``val`` using the ``Kokkos::reduction_identity<Scalar>::sum()`` method.  The default implementation sets ``val=0``.
+
+   .. cppkokkos:kokkosinlinefunction:: value_type& reference() const;
+
+      Returns a reference to the result provided in class constructor.
+
+   .. cppkokkos:kokkosinlinefunction:: result_view_type view() const;
+
+      Returns a view of the result referenced in class constructor.
 
 Additional Information
-~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^
 
 * ``Sum<T,S>::value_type`` is non-const ``T``
+
 * ``Sum<T,S>::result_view_type`` is ``Kokkos::View<T,S,Kokkos::MemoryTraits<Kokkos::Unmanaged>>``.  Note that the S (memory space) must be the same as the space where the result resides.
-* Requires: ``Scalar`` has ``operator =`` and ``operator +=`` defined. ``Kokkos::reduction_identity<Scalar>::sum()`` is a valid expression. 
+
+* Requires: ``Scalar`` has ``operator =`` and ``operator +=`` defined. ``Kokkos::reduction_identity<Scalar>::sum()`` is a valid expression.
+
 * In order to use Sum with a custom type, a template specialization of ``Kokkos::reduction_identity<CustomType>`` must be defined.  See `Built-In Reducers with Custom Scalar Types <../../../ProgrammingGuide/Custom-Reductions-Built-In-Reducers-with-Custom-Scalar-Types.html>`_ for details
