@@ -4,9 +4,15 @@ InitArguments
 .. role:: cppkokkos(code)
    :language: cppkokkos
 
+.. _KokkosInitialize: initialize.html
+.. |KokkosInitialize| replace:: ``Kokkos::initialize``
+
+.. _KokkosInitializationSetting: InitializationSettings.html
+.. |KokkosInitializationSetting| replace:: ``Kokkos::InitializationSettings``
+
 Defined in ``<Kokkos_Core.hpp>`` header.
 
-.. warning:: Deprecated since 3.7
+.. warning:: Deprecated since 3.7, **use** ``Kokkos::InitializationSettings`` **instead**
 
 Interface
 ---------
@@ -26,14 +32,6 @@ Interface
    .. cppkokkos:member:: bool disable_warnings
 
    .. cppkokkos:function:: InitArguments()
-
-.. _KokkosInitialize: initialize.html
-.. |KokkosInitialize| replace:: ``Kokkos::initialize``
-
-.. _KokkosInitializationSetting: InitializationSettings.html
-.. |KokkosInitializationSetting| replace:: ``Kokkos::InitializationSettings``
-
-**DEPRECATED: use** ``Kokkos::InitializationSettings`` **instead**
 
 ``InitArguments`` is a struct that can be used to programmatically define the arguments passed to |KokkosInitialize|_. It was deprecated in version 3.7 in favor of |KokkosInitializationSetting|_.
 
