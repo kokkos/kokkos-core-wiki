@@ -11,8 +11,6 @@ Algorithms
 +==========================+===========+===============+================================================================+
 | Rand                     | Algorithm | Random Number | Generator Type (12), draw options (3)                          |
 +--------------------------+-----------+---------------+----------------------------------------------------------------+
-| Rand                     | Algorithm | Random Number | Generator Type (12), draw options (3)                          |
-+--------------------------+-----------+---------------+----------------------------------------------------------------+
 | Random_XorShift64_Pool   | Algorithm | Random Number | Random Number Generator, pool for threads                      |
 +--------------------------+-----------+---------------+----------------------------------------------------------------+
 | Random_XorShift64        | Algorithm | Random Number | Random Number Generator for 12 types, plus normal distribution |
