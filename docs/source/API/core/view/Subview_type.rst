@@ -4,6 +4,9 @@
 .. role:: cppkokkos(code)
    :language: cppkokkos
 
+.. _KokkosSubview: subview.html
+.. |KokkosSubview| replace:: ``Kokkos::subview``
+
 Header File: ``Kokkos_Core.hpp``
 
 Alias template to deduce the type that is returned by a call to the subview function with given arguments.
@@ -22,10 +25,6 @@ Description
 
    template <class ViewType, class... Args>
    using Subview = IMPL_DETAIL; // deduce subview type from source view traits
-
-.. _KokkosSubview: subview.html
-
-.. |KokkosSubview| replace:: ``Kokkos::subview``
 
 Type of a ``Kokkos::View`` viewing a subset of ``ViewType`` specified by ``Args...``.
 Same type as returned by a call to the subview function with corresponding arguments.
