@@ -343,39 +343,39 @@ Description
 
    .. cppkokkos:function:: constexpr pointer_type data() const
 
-      Return the pointer to the underlying data allocation.
+       Return the pointer to the underlying data allocation.
 
    .. cppkokkos:function:: bool span_is_contiguous() const
 
-      Whether the span is contiguous (i.e. whether every memory location between in span belongs to the index space covered by the view).
+       Whether the span is contiguous (i.e. whether every memory location between in span belongs to the index space covered by the view).
 
    .. cppkokkos:function:: static constexpr size_t required_allocation_size(size_t N0 = 0, size_t N1 = 0, \
 			   size_t N2 = 0, size_t N3 = 0, size_t N4 = 0, \
 			   size_t N5 = 0, size_t N6 = 0, size_t N7 = 0, size_t N8 = 0);
 
-      Returns the number of bytes necessary for an unmanaged view of the provided dimensions. This function is only valid if ``array_layout::is_regular == true``.
+       Returns the number of bytes necessary for an unmanaged view of the provided dimensions. This function is only valid if ``array_layout::is_regular == true``.
 
    .. cppkokkos:function:: static constexpr size_t required_allocation_size(const array_layout& layout);
 
-      :return: the number of bytes necessary for an unmanaged view of the provided layout.
+       :return: the number of bytes necessary for an unmanaged view of the provided layout.
 
    .. rubric:: Other Public Methods
 
    .. cppkokkos:function:: int use_count() const
 
-      :return: the current reference count of the underlying allocation.
+       :return: the current reference count of the underlying allocation.
 
    .. cppkokkos:function:: const char* label() const;
 
-      :return: the label of the ``DynRankView``.
+       :return: the label of the ``DynRankView``.
 
    .. cppkokkos:function:: constexpr unsigned rank() const
 
-      :return: the dynamic rank of the ``DynRankView``.
+       :return: the dynamic rank of the ``DynRankView``.
 
    .. cppkokkos:function:: constexpr bool is_allocated() const
 
-      :return: true if the view points to a valid memory location.
+       :return: true if the view points to a valid memory location.
 		This function works for both managed and unmanaged views.
 		With the unmanaged view, there is no guarantee that referenced address is valid, only that it is a non-null pointer.
 
@@ -386,9 +386,9 @@ Assignment rules cover the assignment operator as well as copy constructors. We 
 
 .. code-block:: cpp
 
-   ScrType src_view(...);
-   DstType dst_view(src_view);
-   dst_view = src_view;
+    ScrType src_view(...);
+    DstType dst_view(src_view);
+    dst_view = src_view;
 
 The following conditions must be met at and are evaluated at compile time:
 
