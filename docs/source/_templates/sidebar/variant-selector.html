@@ -1,0 +1,28 @@
+<!-- Borrowed from https://github.com/pradyunsg/furo/compare/main...raddessi:main.issue-372-multiversion-example -->
+{% if versions %}
+<div class="sidebar-tree">
+  {%- if versions.branches %}
+  <p class="caption" role="heading">
+    <span class="caption-text">{{ _('Branches') }}</span>
+  </p>
+  <ul>
+    {%- for item in versions.branches %}
+    <li class="toctree-l1">
+      <a class="reference internal" href="{{ item.url }}">{{ item.name }}</a>
+    </li>
+    {%- endfor %}
+  </ul>
+  {%- endif %} {%- if versions.tags %}
+  <p class="caption" role="heading">
+    <span class="caption-text">{{ _('Tags') }}</span>
+  </p>
+  <ul>
+    {%- for item in versions.tags %}
+    <li class="toctree-l1">
+      <a class="reference internal" href="{{ item.url }}">{{ item.name }}</a>
+    </li>
+    {%- endfor %}
+  </ul>
+  {%- endif %}
+</div>
+{% endif %}

@@ -1,6 +1,8 @@
 import re
 import os
 import sys
+import subprocess
+import json
 
 try:
     project_path = f'{os.sep}'.join(os.path.abspath(__file__).split(os.sep)[:-1])
@@ -124,20 +126,24 @@ if __name__ == "__main__":
     print('==================================================')
     print('==> Starting adding buttons to html files:')
     # Getting lists of documents and html files
-    document_files = FileFinder(directory=project_path, file_extension=['.md', '.rst']).get_files()
-    generated_docs_dir = os.path.join(project_path, '../generated_docs')
-    html_files = FileFinder(directory=generated_docs_dir, file_extension=['.html']).get_files()
-    # Excluded files (Files created by Sphinx, not to be overwritten with edit button)
-    excluded_files = [os.path.abspath(os.path.join(generated_docs_dir, 'genindex.html')),
-                      os.path.abspath(os.path.join(generated_docs_dir, 'search.html'))]
-    # Final `html_files` list of files to add edit button to
-    html_files = [html_file for html_file in html_files if html_file not in excluded_files]
-    # HTML tag after edit button is injected
-    html_tag = '<div class="content-icon-container">'
-    print(f'=> Adding button after: {html_tag}')
-    # Wiki prefix pointing directly to GitHub
-    wiki_prefix = 'https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source'
-    print(f'=> Using prefix for Kokkos Wiki: {wiki_prefix}')
-    HTMLButtonAdder(document_files=document_files, html_files=html_files, excluded_files=excluded_files,
-                    html_tag=html_tag).add_button(wiki_prefix=wiki_prefix)
-    print('==================================================')
+    # We can get this info from the sphinx multiversioner
+    proc = subprocess.run(["sphinx-multiversion", "--dump-metadata", project_path, os.path.join(project_path, "../generated_docs")], capture_output=True)
+    proc.check_returncode()
+    meta = json.loads(proc.stdout)
+
+    for vers, vers_meta in meta.items():
+        print(f'==> Processing version "{vers}"...')
+        docnames = vers_meta["docnames"]
+        generated_docs_dir = vers_meta["outputdir"]
+
+        document_files = FileFinder(directory=project_path, file_extension=['.md', '.rst']).get_files()
+        html_files = [os.path.join(generated_docs_dir, f"{d}.html") for d in docnames]
+        # HTML tag after edit button is injected
+        html_tag = '<div class="content-icon-container">'
+        print(f'=> Adding button after: {html_tag}')
+        # Wiki prefix pointing directly to GitHub
+        wiki_prefix = 'https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source'
+        print(f'=> Using prefix for Kokkos Wiki: {wiki_prefix}')
+        HTMLButtonAdder(document_files=document_files, html_files=html_files, excluded_files=[],
+                        html_tag=html_tag).add_button(wiki_prefix=wiki_prefix)
+        print('==================================================')
