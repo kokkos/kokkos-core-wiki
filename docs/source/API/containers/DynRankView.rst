@@ -2,7 +2,7 @@
 .. include:: ../../mydefs.rst
 
 .. role:: cppkokkos(code)
-   :language: cppkokkos
+    :language: cppkokkos
 
 ``DynRankView``
 ===============
@@ -186,43 +186,43 @@ Description
 
    .. cppkokkos:function:: DynRankView()
 
-      Default constructor. No allocations are made, no reference counting happens. All extents are zero and its data pointer is ``nullptr`` and its rank is set to 0.
+       Default constructor. No allocations are made, no reference counting happens. All extents are zero and its data pointer is ``nullptr`` and its rank is set to 0.
 
    .. cppkokkos:function:: DynRankView(const DynRankView<DT, Prop...>& rhs)
 
-      Copy constructor with compatible DynRankViews. Follows DynRankView assignment rules.
+       Copy constructor with compatible DynRankViews. Follows DynRankView assignment rules.
 
    .. cppkokkos:function:: DynRankView(DynRankView&& rhs)
 
-      Move constructor.
+       Move constructor.
 
    .. cppkokkos:function:: DynRankView(const View<RT,RP...> & rhs)
 
-      Copy constructor taking View as input.
+       Copy constructor taking View as input.
 
    .. cppkokkos:function:: DynRankView(const std::string& name, const IntType& ... indices)
 
-      Requires: ``array_layout::is_regular == true``
+       Requires: ``array_layout::is_regular == true``
 
-      Standard allocating constructor.
+       Standard allocating constructor.
 
-      * ``name``: a user provided label, which is used for profiling and debugging purposes. Names are not required to be unique.
-      * ``indices``: runtime dimensions of the view.
+       * ``name``: a user provided label, which is used for profiling and debugging purposes. Names are not required to be unique.
+       * ``indices``: runtime dimensions of the view.
 
    .. cppkokkos:function:: DynRankView(const std::string& name, const array_layout& layout)
 
-      Standard allocating constructor.
+       Standard allocating constructor.
 
-      * ``name``: a user provided label, which is used for profiling and debugging purposes. Names are not required to be unique.
-      * ``layout``: an instance of a layout class.
+       * ``name``: a user provided label, which is used for profiling and debugging purposes. Names are not required to be unique.
+       * ``layout``: an instance of a layout class.
 
    .. cppkokkos:function:: DynRankView(const AllocProperties& prop, const IntType& ... indices)
 
-      Requires: ``array_layout::is_regular == true``
+       Requires: ``array_layout::is_regular == true``
 
-      Allocating constructor with allocation properties. An allocation properties object is returned by the ``view_alloc`` function.
+       Allocating constructor with allocation properties. An allocation properties object is returned by the ``view_alloc`` function.
 
-      * ``indices``: runtime dimensions of the view.
+       * ``indices``: runtime dimensions of the view.
 
    .. cppkokkos:function:: DynRankView(const AllocProperties& prop, const array_layout& layout)
 
