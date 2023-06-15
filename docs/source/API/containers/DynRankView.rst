@@ -2,7 +2,7 @@
 .. include:: ../../mydefs.rst
 
 .. role:: cppkokkos(code)
-    :language: cppkokkos
+   :language: cppkokkos
 
 ``DynRankView``
 ===============
@@ -70,19 +70,11 @@ Description
       are specified, ``MemorySpace`` must come before ``MemoryTraits``.
 
 
-   .. rubric:: Public Enums
+   .. rubric:: Public Static Variables
 
-   .. cppkokkos:type:: rank
-
-      Rank of the view (i.e. the dimensionality).
-
-   .. cppkokkos:type:: rank_dynamic
-
-      Number of runtime determined dimensions.
-
-   .. cppkokkos:type:: reference_type_is_lvalue_reference
-
-      Whether the reference type is a C++ lvalue reference.
+   * ``rank``: Rank of the view (i.e. the dimensionality).
+   * ``rank_dynamic``: Number of runtime determined dimensions.
+   * ``reference_type_is_lvalue_reference``: Whether the reference type is a C++ lvalue reference.
 
 
    .. rubric:: Public Data Types Typedefs
@@ -194,85 +186,85 @@ Description
 
    .. cppkokkos:function:: DynRankView()
 
-       Default constructor. No allocations are made, no reference counting happens. All extents are zero and its data pointer is ``nullptr`` and its rank is set to 0.
+      Default constructor. No allocations are made, no reference counting happens. All extents are zero and its data pointer is ``nullptr`` and its rank is set to 0.
 
    .. cppkokkos:function:: DynRankView(const DynRankView<DT, Prop...>& rhs)
 
-       Copy constructor with compatible DynRankViews. Follows DynRankView assignment rules.
+      Copy constructor with compatible DynRankViews. Follows DynRankView assignment rules.
 
    .. cppkokkos:function:: DynRankView(DynRankView&& rhs)
 
-       Move constructor.
+      Move constructor.
 
    .. cppkokkos:function:: DynRankView(const View<RT,RP...> & rhs)
 
-       Copy constructor taking View as input.
+      Copy constructor taking View as input.
 
    .. cppkokkos:function:: DynRankView(const std::string& name, const IntType& ... indices)
 
-       Requires: ``array_layout::is_regular == true``
+      Requires: ``array_layout::is_regular == true``
 
-       Standard allocating constructor.
+      Standard allocating constructor.
 
-       * ``name``: a user provided label, which is used for profiling and debugging purposes. Names are not required to be unique.
-       * ``indices``: runtime dimensions of the view.
+      * ``name``: a user provided label, which is used for profiling and debugging purposes. Names are not required to be unique.
+      * ``indices``: runtime dimensions of the view.
 
    .. cppkokkos:function:: DynRankView(const std::string& name, const array_layout& layout)
 
-       Standard allocating constructor.
+      Standard allocating constructor.
 
-       * ``name``: a user provided label, which is used for profiling and debugging purposes. Names are not required to be unique.
-       * ``layout``: an instance of a layout class.
+      * ``name``: a user provided label, which is used for profiling and debugging purposes. Names are not required to be unique.
+      * ``layout``: an instance of a layout class.
 
    .. cppkokkos:function:: DynRankView(const AllocProperties& prop, const IntType& ... indices)
 
-       Requires: ``array_layout::is_regular == true``
+      Requires: ``array_layout::is_regular == true``
 
-       Allocating constructor with allocation properties. An allocation properties object is returned by the ``view_alloc`` function.
+      Allocating constructor with allocation properties. An allocation properties object is returned by the ``view_alloc`` function.
 
-       * ``indices``: runtime dimensions of the view.
+      * ``indices``: runtime dimensions of the view.
 
    .. cppkokkos:function:: DynRankView(const AllocProperties& prop, const array_layout& layout)
 
-       Allocating constructor with allocation properties and a layout object.
+      Allocating constructor with allocation properties and a layout object.
 
-       * ``layout``: an instance of a layout class.
+      * ``layout``: an instance of a layout class.
 
    .. cppkokkos:function:: DynRankView(const pointer_type& ptr, const IntType& ... indices)
 
-       Requires: ``array_layout::is_regular == true``
+      Requires: ``array_layout::is_regular == true``
 
-       Unmanaged data wrapping constructor.
+      Unmanaged data wrapping constructor.
 
-       * ``ptr``: pointer to a user provided memory allocation. Must provide storage of size ``DynRankView::required_allocation_size(n0,...,nR)``.
-       * ``indices``: runtime dimensions of the view.
+      * ``ptr``: pointer to a user provided memory allocation. Must provide storage of size ``DynRankView::required_allocation_size(n0,...,nR)``.
+      * ``indices``: runtime dimensions of the view.
 
-   .. cppkokkos:function:: DynRankView(const std::string& name, const array_layout& layout)
+   .. cppkokkos:function:: DynRankView(const pointer_type& ptr, const array_layout& layout)
 
-       Unmanaged data wrapper constructor.
+      Unmanaged data wrapper constructor.
 
-       * ``ptr``: pointer to a user provided memory allocation. Must provide storage of size ``DynRankView::required_allocation_size(layout)`` (\ *NEEDS TO BE IMPLEMENTED*\ )
-       * ``layout``: an instance of a layout class.
+      * ``ptr``: pointer to a user provided memory allocation. Must provide storage of size ``DynRankView::required_allocation_size(layout)`` (\ *NEEDS TO BE IMPLEMENTED*\ )
+      * ``layout``: an instance of a layout class.
 
    .. cppkokkos:function:: DynRankView(const ScratchSpace& space, const IntType& ... indices)
 
-       Requires: ``sizeof(IntType...)==rank_dynamic()`` and ``array_layout::is_regular == true``
+      Requires: ``sizeof(IntType...)==rank_dynamic()`` and ``array_layout::is_regular == true``
 
-       Constructor which acquires memory from a Scratch Memory handle.
+      Constructor which acquires memory from a Scratch Memory handle.
 
-       * ``space``: scratch memory handle. Typically returned from ``team_handles`` in ``TeamPolicy`` kernels.
-       * ``indices``: runtime dimensions of the view.
+      * ``space``: scratch memory handle. Typically returned from ``team_handles`` in ``TeamPolicy`` kernels.
+      * ``indices``: runtime dimensions of the view.
 
    .. cppkokkos:function:: DynRankView(const ScratchSpace& space, const array_layout& layout)
 
-       Constructor which acquires memory from a Scratch Memory handle.
+      Constructor which acquires memory from a Scratch Memory handle.
 
-       * ``space``: scratch memory handle. Typically returned from ``team_handles`` in ``TeamPolicy`` kernels.
-       * ``layout``: an instance of a layout class.
+      * ``space``: scratch memory handle. Typically returned from ``team_handles`` in ``TeamPolicy`` kernels.
+      * ``layout``: an instance of a layout class.
 
    .. cppkokkos:function:: DynRankView(const DynRankView<DT, Prop...>& rhs, Args ... args)
 
-       Subview constructor. See ``subview`` function for arguments.
+      Subview constructor. See ``subview`` function for arguments.
 
    .. rubric:: Data Access Functions
 
@@ -310,80 +302,80 @@ Description
 
    .. cppkokkos:function:: template<class iType> constexpr size_t stride(const iType& dim) const
 
-       Returns the stride of the specified dimension. ``iType`` must be an integral type, and ``dim`` must be smaller than ``rank``. Example: ``a.stride(3) == (&a(i0,i1,i2,i3+1,i4)-&a(i0,i1,i2,i3,i4))``
+      Returns the stride of the specified dimension. ``iType`` must be an integral type, and ``dim`` must be smaller than ``rank``. Example: ``a.stride(3) == (&a(i0,i1,i2,i3+1,i4)-&a(i0,i1,i2,i3,i4))``
 
    .. cppkokkos:function:: constexpr size_t stride_0() const
 
-       Return the stride of dimension 0.
+      Return the stride of dimension 0.
 
    .. cppkokkos:function:: constexpr size_t stride_1() const
 
-       Return the stride of dimension 1.
+      Return the stride of dimension 1.
 
    .. cppkokkos:function:: constexpr size_t stride_2() const
 
-       Return the stride of dimension 2.
+      Return the stride of dimension 2.
 
    .. cppkokkos:function:: constexpr size_t stride_3() const
 
-       Return the stride of dimension 3.
+      Return the stride of dimension 3.
 
    .. cppkokkos:function:: constexpr size_t stride_4() const
 
-       Return the stride of dimension 4.
+      Return the stride of dimension 4.
 
    .. cppkokkos:function:: constexpr size_t stride_5() const
 
-       Return the stride of dimension 5.
+      Return the stride of dimension 5.
 
    .. cppkokkos:function:: constexpr size_t stride_6() const
 
-       Return the stride of dimension 6.
+      Return the stride of dimension 6.
 
    .. cppkokkos:function:: constexpr size_t stride_7() const
 
-       Return the stride of dimension 7.
+      Return the stride of dimension 7.
 
    .. cppkokkos:function:: constexpr size_t span() const
 
-       Return the memory span in elements between the element with the lowest and the highest address.
-       This can be larger than the product of extents due to padding, and or non-contiguous data layout as for example ``LayoutStride`` allows.
+      Return the memory span in elements between the element with the lowest and the highest address.
+      This can be larger than the product of extents due to padding, and or non-contiguous data layout as for example ``LayoutStride`` allows.
 
    .. cppkokkos:function:: constexpr pointer_type data() const
 
-       Return the pointer to the underlying data allocation.
+      Return the pointer to the underlying data allocation.
 
    .. cppkokkos:function:: bool span_is_contiguous() const
 
-       Whether the span is contiguous (i.e. whether every memory location between in span belongs to the index space covered by the view).
+      Whether the span is contiguous (i.e. whether every memory location between in span belongs to the index space covered by the view).
 
    .. cppkokkos:function:: static constexpr size_t required_allocation_size(size_t N0 = 0, size_t N1 = 0, \
 			   size_t N2 = 0, size_t N3 = 0, size_t N4 = 0, \
 			   size_t N5 = 0, size_t N6 = 0, size_t N7 = 0, size_t N8 = 0);
 
-       Returns the number of bytes necessary for an unmanaged view of the provided dimensions. This function is only valid if ``array_layout::is_regular == true``.
+      Returns the number of bytes necessary for an unmanaged view of the provided dimensions. This function is only valid if ``array_layout::is_regular == true``.
 
    .. cppkokkos:function:: static constexpr size_t required_allocation_size(const array_layout& layout);
 
-       :return: the number of bytes necessary for an unmanaged view of the provided layout.
+      :return: the number of bytes necessary for an unmanaged view of the provided layout.
 
    .. rubric:: Other Public Methods
 
    .. cppkokkos:function:: int use_count() const
 
-       :return: the current reference count of the underlying allocation.
+      :return: the current reference count of the underlying allocation.
 
    .. cppkokkos:function:: const char* label() const;
 
-       :return: the label of the ``DynRankView``.
+      :return: the label of the ``DynRankView``.
 
    .. cppkokkos:function:: constexpr unsigned rank() const
 
-       :return: the dynamic rank of the ``DynRankView``.
+      :return: the dynamic rank of the ``DynRankView``.
 
    .. cppkokkos:function:: constexpr bool is_allocated() const
 
-       :return: true if the view points to a valid memory location.
+      :return: true if the view points to a valid memory location.
 		This function works for both managed and unmanaged views.
 		With the unmanaged view, there is no guarantee that referenced address is valid, only that it is a non-null pointer.
 
@@ -394,9 +386,9 @@ Assignment rules cover the assignment operator as well as copy constructors. We 
 
 .. code-block:: cpp
 
-    ScrType src_view(...);
-    DstType dst_view(src_view);
-    dst_view = src_view;
+   ScrType src_view(...);
+   DstType dst_view(src_view);
+   dst_view = src_view;
 
 The following conditions must be met at and are evaluated at compile time:
 
