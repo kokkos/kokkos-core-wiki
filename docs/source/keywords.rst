@@ -138,6 +138,10 @@ Enable Options
       * Perform extra large memory tests
       * ``OFF``
 
+    * * ``Kokkos_ENABLE_SIMD_NATIVE``
+      * Allow detecting SIMD types based on compiler macros
+      * ``OFF``
+
     * * ``Kokkos_ENABLE_TESTS``
       * Build tests
       * ``OFF``

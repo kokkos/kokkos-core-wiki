@@ -34,6 +34,8 @@ General Settings
 +-------------------------------------------------+-------------------------------------------------------------------------------------------------------------+
 | ``KOKKOS_ENABLE_AGGRESSIVE_VECTORIZATION``      | Whether certain dependency assumptions are ignored for aggressive vectorization of internal Kokkos loops.   |
 +-------------------------------------------------+-------------------------------------------------------------------------------------------------------------+
+| ``KOKKOS_ENABLE_SIMD_NATIVE``                   | Whether to allow detecting SIMD types based on compiler macros.                                             |
++-------------------------------------------------+-------------------------------------------------------------------------------------------------------------+
 
 Execution Spaces
 ----------------
