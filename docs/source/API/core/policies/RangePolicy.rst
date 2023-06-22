@@ -11,60 +11,66 @@ Usage
 
 .. code-block:: cppkokkos
 
-    Kokkos::RangePolicy<>(begin, end, args...)
-    Kokkos::RangePolicy<ARGS>(begin, end, args...)
-    Kokkos::RangePolicy<>(Space(), begin, end, args...)
-    Kokkos::RangePolicy<ARGS>(Space(), begin, end, args...)
+    Kokkos::RangePolicy<...>(begin, end)
+    Kokkos::RangePolicy<...>(begin, end, ChunkSize(cs))
+    Kokkos::RangePolicy<...>(Space(), begin, end)
+    Kokkos::RangePolicy<...>(Space(), begin, end, ChunkSize(cs))
 
-RangePolicy defines an execution policy for a 1D iteration space starting at begin and going to end with an open interval.
+RangePolicy defines an execution policy for a 1D iteration space starting at ``begin`` and going to ``end`` with an open interval.
 
 Synopsis
 --------
 
 .. code-block:: cpp
 
-    template<class ... Args>
-    class Kokkos::RangePolicy {
-        typedef RangePolicy execution_policy;
-        typedef typename traits::index_type member_type ;
-        typedef typename traits::index_type index_type;
+   template<
+            typename ExecutionSpace = DefaultExecutionSpace
+          , typename S
+          , typename IT = int64_t
+          , unsigned MaxThreads
+          , unsigned MinBlocks,
+          , typename WorkTag = void>
+    class RangePolicy<
+                      ExecutionSpace
+                    , Schedule<S>
+                    , IndexType<IT>
+                    , LaunchBounds<MaxThreads, MinBlocks>
+                    , WorkTag> {
+        using execution_policy = RangePolicy;
+        using execution_space  = ExecutionSpace;
+        using schedule_type    = Schedule<S>;
+        using index_type       = IT;
+        using member_type      = IT;
+        using launch_bounds    = LaunchBounds<MaxThreads, MinBlocks>;
+        using work_tag         = WorkTag;
 
-        //Inherited from PolicyTraits<Args...>
-        using execution_space   = PolicyTraits<Args...>::execution_space;
-        using schedule_type     = PolicyTraits<Args...>::schedule_type;
-        using work_tag          = PolicyTraits<Args...>::work_tag;
-        using index_type        = PolicyTraits<Args...>::index_type;
-        using iteration_pattern = PolicyTraits<Args...>::iteration_pattern;
-        using launch_bounds     = PolicyTraits<Args...>::launch_bounds;
+        // Constructors
+        RangePolicy();
 
-        //Constructors
-        RangePolicy(const RangePolicy&) = default;
-        RangePolicy(RangePolicy&&) = default;
+        RangePolicy(index_type work_begin
+                  , index_type work_end);
 
-        inline RangePolicy();
+        RangePolicy(index_type work_begin
+                  , index_type work_end
+                  , ChunkSize cs);
 
-        template<class ... Args>
-        inline RangePolicy( const execution_space & work_space
-                          , const member_type work_begin
-                          , const member_type work_end
-                          , Args ... args);
+        RangePolicy(const execution_space& work_space
+                  , index_type work_begin
+                  , index_type work_end)
 
-        template<class ... Args>
-        inline RangePolicy( const member_type work_begin
-                          , const member_type work_end
-                          , Args ... args);
+        RangePolicy(const execution_space& work_space
+                  , index_type work_begin
+                  , index_type work_end
+                  , ChunkSize cs);
 
-        // retrieve chunk_size
-        inline member_type chunk_size() const;
-        // set chunk_size to a discrete value
-        inline RangePolicy set_chunk_size(int chunk_size_);
+        // Getters and setters
+        index_type chunk_size() const;
+        RangePolicy set_chunk_size(int chunk_size_);
 
-        // return ExecSpace instance provided to the constructor
-        KOKKOS_INLINE_FUNCTION const execution_space & space() const;
-        // return Range begin
-        KOKKOS_INLINE_FUNCTION member_type begin() const;
-        // return Range end
-        KOKKOS_INLINE_FUNCTION member_type end()   const;
+        const ExecutionSpace& space() const;
+
+        index_type begin() const;
+        index_type end()   const;
     };
 
 Parameters
@@ -75,21 +81,21 @@ Common Arguments for all Execution Policies
 
 * Execution Policies generally accept compile time arguments via template parameters and runtime parameters via constructor arguments or setter functions.
 
-* Template arguments can be given in arbitrary order.
+* Template arguments are all optional and can be given in arbitrary order.
 
-+-------------------+---------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Argument          | Options                                                                   | Purpose                                                                                                                                                 |
-+===================+===========================================================================+=========================================================================================================================================================+
-| ExecutionSpace    | ``Serial``, ``OpenMP``, ``Threads``, ``Cuda``, ``HIP``, ``SYCL``, ``HPX`` | Specify the Execution Space to execute the kernel in. Defaults to ``Kokkos::DefaultExecutionSpace``.                                                    |
-+-------------------+---------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Schedule          | ``Schedule<Dynamic>``, ``Schedule<Static>``                               | Specify scheduling policy for work items. ``Dynamic`` scheduling is implemented through a work stealing queue. Default is machine and backend specific. |
-+-------------------+---------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
-| IndexType         | ``IndexType<int>``                                                        | Specify integer type to be used for traversing the iteration space. Defaults to ``int64_t``.                                                            |
-+-------------------+---------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
-| LaunchBounds      | ``LaunchBounds<MaxThreads, MinBlocks>``                                   | Specifies hints to to the compiler about CUDA/HIP launch bounds.                                                                                        |
-+-------------------+---------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
-| WorkTag           | ``SomeClass``                                                             | Specify the work tag type used to call the functor operator. Any arbitrary type defaults to ``void``.                                                   |
-+-------------------+---------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
++-------------------+---------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------+----------------------------+
+| Argument          | Options                                                                   | Purpose                                                                                                        | Default                    |
++===================+===========================================================================+================================================================================================================+============================+
+| ExecutionSpace    | ``Serial``, ``OpenMP``, ``Threads``, ``Cuda``, ``HIP``, ``SYCL``, ``HPX`` | Specify the Execution Space to execute the kernel in.                                                          | ``DefaultExecutionSpace``  |
++-------------------+---------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------+----------------------------+
+| Schedule          | ``Schedule<Dynamic>``, ``Schedule<Static>``                               | Specify scheduling policy for work items. ``Dynamic`` scheduling is implemented through a work stealing queue. | machine / backend specific |
++-------------------+---------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------+----------------------------+
+| IndexType         | ``IndexType<IT>``                                                         | Specify integer type to be used for traversing the iteration space.                                            | ``IndexType<int64_t>``     |
++-------------------+---------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------+----------------------------+
+| LaunchBounds      | ``LaunchBounds<MaxThreads, MinBlocks>``                                   | Specifies hints to to the compiler about CUDA/HIP launch bounds.                                               |                            |
++-------------------+---------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------+----------------------------+
+| WorkTag           | ``SomeClass``                                                             | Specify the work tag type used to call the functor operator.                                                   | ``void``                   |
++-------------------+---------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------+----------------------------+
 
 Public Class Members
 --------------------
@@ -99,18 +105,23 @@ Constructors
 
 .. cppkokkos:function:: RangePolicy()
 
-   Default Constructor uninitialized policy.
+   Construct an uninitialized policy.
 
-.. cppkokkos:function:: template<class ... InitArgs> RangePolicy(const int64_t& begin, const int64_t& end, const InitArgs ... init_args)
+.. cppkokkos:function:: RangePolicy(index_type begin, index_type end)
 
-   Provide a start and end index as well as optional arguments to control certain behavior (see below).
+   Construct a policy with a start index and an end index.
 
-.. cppkokkos:function:: template<class ... InitArgs> RangePolicy(const ExecutionSpace& space, const int64_t& begin, const int64_t& end, const InitArgs ... init_args)
+.. cppkokkos:function:: RangePolicy(index_type begin, index_type end, ChunkSize cs)
 
-   Provide a start and end index and an ``ExecutionSpace`` instance to use as the execution resource, as well as optional arguments to control certain behavior (see below).
+   Construct a policy with a start index, an end index and a ChunkSize (see below).
 
-Optional ``InitArgs``:
-^^^^^^^^^^^^^^^^^^^^^^
+.. cppkokkos:function:: RangePolicy(const execution_space& space, index_type begin, index_type end)
+
+   Construct a policy with an execution space instance to be used as the execution resource, a start index, and an end index.
+
+.. cppkokkos:function:: RangePolicy(const execution_space& space, index_type begin, index_type end, ChunkSize cs)
+
+   Construct a policy with an execution space instance to be used as the execution resource, a start index, an end index and a ChunkSize (see below).
 
 * ``ChunkSize`` : Provide a hint for optimal chunk-size to be used during scheduling. For the SYCL backend, the workgroup size used in a ``parallel_for`` kernel can be set via this variable.
 
@@ -119,17 +130,17 @@ Examples
 
 .. code-block:: cppkokkos
 
-    RangePolicy<> policy_1(0, N);
-    RangePolicy<Cuda> policy_2(5,N-5);
-    RangePolicy<Schedule<Dynamic>, OpenMP> policy_3(n,m);
+    RangePolicy<>                                  policy_1(0, N);
+    RangePolicy<Cuda>                              policy_2(5, N-5);
+    RangePolicy<Schedule<Dynamic>, OpenMP>         policy_3(n, m);
     RangePolicy<IndexType<int>, Schedule<Dynamic>> policy_4(0, K);
-    RangePolicy<> policy_6(-3,N+3, ChunkSize(8));
-    RangePolicy<OpenMP> policy_7(OpenMP(), 0, N, ChunkSize(4));
+    RangePolicy<>                                  policy_5(-3, N+3, ChunkSize(8));
+    RangePolicy<OpenMP>                            policy_6(OpenMP(), 0, N, ChunkSize(4));
 
-Note: providing a single integer as a policy to a parallel pattern, implies a defaulted ``RangePolicy``
+Note: providing a single integer as a policy to a parallel pattern implies a defaulted ``RangePolicy``.
 
 .. code-block:: cppkokkos
 
-    // These two calls are identical
+    // These two calls act identically
     parallel_for("Loop", N, functor);
     parallel_for("Loop", RangePolicy<>(0, N), functor);
