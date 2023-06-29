@@ -475,7 +475,7 @@
         </a>
         <div class="content-icon-container">
 <div class="edit-this-page">
-  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/API/core/policies/TeamVectorMDRange.md" title="Edit this page">
+  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/API/core/policies/TeamVectorMDRange.rst" title="Edit this page">
     <svg aria-hidden="true" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
       <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4"></path>
@@ -499,91 +499,84 @@
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="teamvectormdrange">
+          <section id="teamvectormdrange">
 <h1><code class="docutils literal notranslate"><span class="pre">TeamVectorMDRange</span></code><a class="headerlink" href="#teamvectormdrange" title="Permalink to this heading">#</a></h1>
-<p>Header File: <code class="docutils literal notranslate"><span class="pre">Kokkos_Core.hpp</span></code></p>
-<p>Usage:</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="n">parallel_for</span><span class="p">(</span><span class="n">TeamVectorMDRange</span><span class="o">&lt;</span><span class="n">Kokkos</span><span class="o">::</span><span class="n">Rank</span><span class="o">&lt;</span><span class="p">...</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="n">TeamHandle</span><span class="o">&gt;</span><span class="p">(</span><span class="n">team</span><span class="p">,</span><span class="w"> </span><span class="n">extent1</span><span class="p">,</span><span class="w"> </span><span class="n">extent2</span><span class="p">,</span><span class="w"> </span><span class="p">...),</span>
-<span class="w">    </span><span class="p">[</span><span class="o">=</span><span class="p">]</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i1</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">i2</span><span class="p">,</span><span class="w"> </span><span class="p">...)</span><span class="w"> </span><span class="p">{...});</span>
-<span class="w">  </span><span class="n">parallel_reduce</span><span class="p">(</span><span class="n">TeamVectorMDRange</span><span class="o">&lt;</span><span class="n">Kokkos</span><span class="o">::</span><span class="n">Rank</span><span class="o">&lt;</span><span class="p">...</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="n">TeamHandle</span><span class="o">&gt;</span><span class="p">(</span><span class="n">team</span><span class="p">,</span><span class="w"> </span><span class="n">extent1</span><span class="p">,</span><span class="w"> </span><span class="n">extent2</span><span class="p">,</span><span class="w"> </span><span class="p">...),</span><span class="w"> </span>
-<span class="w">    </span><span class="p">[</span><span class="o">=</span><span class="p">]</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i1</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">i2</span><span class="p">,</span><span class="w"> </span><span class="p">...,</span><span class="w"> </span><span class="kt">double</span><span class="o">&amp;</span><span class="w"> </span><span class="n">lsum</span><span class="p">)</span><span class="w"> </span><span class="p">{...},</span><span class="w"> </span><span class="n">sum</span><span class="p">);</span>
-</pre></div>
-</div>
-<p>TeamVectorMDRange is a <a class="reference external" href="https://kokkos.github.io/kokkos-core-wiki/ProgrammingGuide/HierarchicalParallelism.html?highlight=nested#nested-parallelism">nested execution policy</a>
-used inside of hierarchical parallelism.</p>
-<section id="interface">
-<h2>Interface<a class="headerlink" href="#interface" title="Permalink to this heading">#</a></h2>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="w"> </span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="kt">unsigned</span><span class="w"> </span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="p">...,</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="nc">TeamHandle</span><span class="o">&gt;</span>
-<span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">TeamVectorMDRange</span><span class="o">&lt;</span><span class="n">Rank</span><span class="o">&lt;</span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="p">...</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="n">TeamHandle</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
-<span class="w">   </span><span class="n">TeamVectorMDRange</span><span class="p">(</span><span class="n">team</span><span class="p">,</span><span class="w"> </span><span class="n">extent1</span><span class="p">,</span><span class="w"> </span><span class="n">extent2</span><span class="p">,</span><span class="w"> </span><span class="p">...,</span><span class="w"> </span><span class="n">extentN</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* ... */</span><span class="w"> </span><span class="p">}</span>
-
-<span class="w">   </span><span class="cm">/* ... */</span>
-<span class="w"> </span><span class="p">};</span>
-</pre></div>
-</div>
-</section>
+<p>Header File: <code class="docutils literal notranslate"><span class="pre">&lt;Kokkos_Core.hpp&gt;</span></code></p>
 <section id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this heading">#</a></h2>
-<ul>
-<li><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="kt">unsigned</span><span class="w"> </span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="p">...,</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="nc">TeamHandle</span><span class="o">&gt;</span>
-<span class="k">struct</span><span class="w"> </span><span class="nc">TeamVectorMDRange</span><span class="o">&lt;</span><span class="n">Rank</span><span class="o">&lt;</span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="p">...</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="n">TeamHandle</span><span class="o">&gt;</span><span class="p">;</span>
-</pre></div>
-</div>
-<p>Splits an index range <code class="docutils literal notranslate"><span class="pre">0</span></code> to <code class="docutils literal notranslate"><span class="pre">extent1</span></code> over the threads of the team and
-another index range <code class="docutils literal notranslate"><span class="pre">0</span></code> to <code class="docutils literal notranslate"><span class="pre">extent2</span></code> over their vector lanes.
+<p>TeamVectorMDRange is a <a class="reference external" href="./NestedPolicies.html">nested execution policy</a>  used inside of hierarchical parallelism.</p>
+</section>
+<section id="interface">
+<h2>Interface<a class="headerlink" href="#interface" title="Permalink to this heading">#</a></h2>
+<dl class="cppkokkos class">
+<dt class="sig sig-object cppkokkos" id="_CPPv4I00E17TeamVectorMDRange">
+<span id="_CPPv3I00E17TeamVectorMDRange"></span><span id="_CPPv2I00E17TeamVectorMDRange"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Rank</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TeamHandle</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TeamVectorMDRange</span></span></span><a class="headerlink" href="#_CPPv4I00E17TeamVectorMDRange" title="Permalink to this definition">#</a><br /></dt>
+<dd><p class="rubric">Constructor</p>
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N17TeamVectorMDRange17TeamVectorMDRangeE4team8extent_18extent_2z">
+<span id="_CPPv3N17TeamVectorMDRange17TeamVectorMDRangeE4team8extent_18extent_2z"></span><span id="_CPPv2N17TeamVectorMDRange17TeamVectorMDRangeE4team8extent_18extent_2z"></span><span id="TeamVectorMDRange::TeamVectorMDRange__team.extent_1.extent_2.z"></span><span class="sig-name descname"><span class="n"><span class="pre">TeamVectorMDRange</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">team</span></span>, <span class="n"><span class="pre">extent_1</span></span>, <span class="n"><span class="pre">extent_2</span></span>, <span class="p"><span class="pre">...</span></span><span class="sig-paren">)</span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4N17TeamVectorMDRange17TeamVectorMDRangeE4team8extent_18extent_2z" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Splits an index range over the threads of the team and another index range over their vector lanes.
 Ranks for threading and vectorization determined by the backend.</p>
-<ul class="simple">
-<li><p><strong>Arguments</strong></p>
-<ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">team</span></code>: TeamHandle to the calling team execution context.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">extent_i</span></code>: index range length of each rank.</p></li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>team</strong> – TeamHandle to the calling team execution context</p></li>
+<li><p><strong>extent_1, extent_2, ...</strong> – index range lengths of each rank</p></li>
 </ul>
-</li>
+</dd>
+</dl>
+<ul>
 <li><p><strong>Requirements</strong></p>
 <ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">TeamHandle</span></code> is a type that models <span class="xref myst">TeamHandle</span></p></li>
-<li><p>extents are ints.</p></li>
-<li><p>Every member thread of <code class="docutils literal notranslate"><span class="pre">team</span></code> must call the operation in the same branch, i.e. it is not legal to have some
-threads call this function in one branch, and the other threads of <code class="docutils literal notranslate"><span class="pre">team</span></code> call it in another branch.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">N</span> <span class="pre">&gt;=</span> <span class="pre">2</span> <span class="pre">&amp;&amp;</span> <span class="pre">N</span> <span class="pre">&lt;=</span> <span class="pre">8</span></code> is true;</p></li>
-</ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">TeamHandle</span></code> is a type that models <a class="reference external" href="./TeamHandleConcept.html">TeamHandle</a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">extent_1,</span> <span class="pre">extent_2,</span> <span class="pre">...</span></code> are ints</p></li>
+<li><p>Every member thread of <code class="docutils literal notranslate"><span class="pre">team</span></code> must call the operation in the same branch,
+i.e. it is not legal to have some threads call this function in one branch,
+and the other threads of <code class="docutils literal notranslate"><span class="pre">team</span></code> call it in another branch</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">extent_i</span></code> is such that <code class="docutils literal notranslate"><span class="pre">i</span> <span class="pre">&gt;=</span> <span class="pre">2</span> <span class="pre">&amp;&amp;</span> <span class="pre">i</span> <span class="pre">&lt;=</span> <span class="pre">8</span></code> is true.
+For example:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">TeamVectorMDRange</span><span class="p">(</span><span class="n">team</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">);</span><span class="w">               </span><span class="c1">// NOT OK, violates i&gt;=2</span>
+
+<span class="n">TeamVectorMDRange</span><span class="p">(</span><span class="n">team</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">);</span><span class="w">             </span><span class="c1">// OK</span>
+<span class="n">TeamVectorMDRange</span><span class="p">(</span><span class="n">team</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">);</span><span class="w">           </span><span class="c1">// OK</span>
+<span class="n">TeamVectorMDRange</span><span class="p">(</span><span class="n">team</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">);</span><span class="w"> </span><span class="c1">// OK, max num of extents allowed</span>
+</pre></div>
+</div>
 </li>
 </ul>
 </li>
 </ul>
+</dd></dl>
+
+</dd></dl>
+
 </section>
 <section id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading">#</a></h2>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="w"> </span><span class="k">using</span><span class="w"> </span><span class="n">TeamHandle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TeamPolicy</span><span class="o">&lt;&gt;::</span><span class="n">member_type</span><span class="p">;</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">TeamHandle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TeamPolicy</span><span class="o">&lt;&gt;::</span><span class="n">member_type</span><span class="p">;</span>
 
-<span class="w"> </span><span class="n">parallel_for</span><span class="p">(</span><span class="n">TeamPolicy</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">AUTO</span><span class="p">),</span>
-<span class="w">   </span><span class="n">KOKKOS_LAMBDA</span><span class="p">(</span><span class="n">TeamHandle</span><span class="w"> </span><span class="k">const</span><span class="o">&amp;</span><span class="w"> </span><span class="n">team</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="n">parallel_for</span><span class="p">(</span><span class="n">TeamPolicy</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">AUTO</span><span class="p">),</span>
+<span class="w">  </span><span class="n">KOKKOS_LAMBDA</span><span class="p">(</span><span class="n">TeamHandle</span><span class="w"> </span><span class="k">const</span><span class="o">&amp;</span><span class="w"> </span><span class="n">team</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
-<span class="w">     </span><span class="kt">int</span><span class="w"> </span><span class="n">leagueRank</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">team</span><span class="p">.</span><span class="n">league_rank</span><span class="p">();</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">leagueRank</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">team</span><span class="p">.</span><span class="n">league_rank</span><span class="p">();</span>
 
-<span class="w">     </span><span class="k">auto</span><span class="w"> </span><span class="n">teamVectorMDRange</span><span class="w"> </span><span class="o">=</span>
-<span class="w">         </span><span class="n">TeamVectorMDRange</span><span class="o">&lt;</span><span class="n">Rank</span><span class="o">&lt;</span><span class="mi">4</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="n">TeamType</span><span class="o">&gt;</span><span class="p">(</span>
-<span class="w">             </span><span class="n">team</span><span class="p">,</span><span class="w"> </span><span class="n">n0</span><span class="p">,</span><span class="w"> </span><span class="n">n1</span><span class="p">,</span><span class="w"> </span><span class="n">n2</span><span class="p">,</span><span class="w"> </span><span class="n">n3</span><span class="p">);</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">range</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TeamVectorMDRange</span><span class="o">&lt;</span><span class="n">Rank</span><span class="o">&lt;</span><span class="mi">4</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="n">TeamType</span><span class="o">&gt;</span><span class="p">(</span><span class="n">team</span><span class="p">,</span><span class="w"> </span><span class="n">n0</span><span class="p">,</span><span class="w"> </span><span class="n">n1</span><span class="p">,</span><span class="w"> </span><span class="n">n2</span><span class="p">,</span><span class="w"> </span><span class="n">n3</span><span class="p">);</span>
 
-<span class="w">     </span><span class="n">parallel_for</span><span class="p">(</span><span class="n">teamVectorMDRange</span><span class="p">,</span>
-<span class="w">       </span><span class="p">[</span><span class="o">=</span><span class="p">](</span><span class="kt">int</span><span class="w"> </span><span class="n">i0</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">i1</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">i2</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">i3</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">         </span><span class="n">A</span><span class="p">(</span><span class="n">leagueRank</span><span class="p">,</span><span class="w"> </span><span class="n">i0</span><span class="p">,</span><span class="w"> </span><span class="n">i1</span><span class="p">,</span><span class="w"> </span><span class="n">i2</span><span class="p">,</span><span class="w"> </span><span class="n">i3</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">B</span><span class="p">(</span><span class="n">leagueRank</span><span class="p">,</span><span class="w"> </span><span class="n">i1</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">C</span><span class="p">(</span><span class="n">i1</span><span class="p">,</span><span class="w"> </span><span class="n">i2</span><span class="p">,</span><span class="w"> </span><span class="n">i3</span><span class="p">);</span>
-<span class="w">     </span><span class="p">});</span>
+<span class="w">    </span><span class="n">parallel_for</span><span class="p">(</span><span class="n">range</span><span class="p">,</span>
+<span class="w">      </span><span class="p">[</span><span class="o">=</span><span class="p">](</span><span class="kt">int</span><span class="w"> </span><span class="n">i0</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">i1</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">i2</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">i3</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">A</span><span class="p">(</span><span class="n">leagueRank</span><span class="p">,</span><span class="w"> </span><span class="n">i0</span><span class="p">,</span><span class="w"> </span><span class="n">i1</span><span class="p">,</span><span class="w"> </span><span class="n">i2</span><span class="p">,</span><span class="w"> </span><span class="n">i3</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">B</span><span class="p">(</span><span class="n">leagueRank</span><span class="p">,</span><span class="w"> </span><span class="n">i1</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">C</span><span class="p">(</span><span class="n">i1</span><span class="p">,</span><span class="w"> </span><span class="n">i2</span><span class="p">,</span><span class="w"> </span><span class="n">i3</span><span class="p">);</span>
+<span class="w">    </span><span class="p">});</span>
+<span class="w">    </span><span class="n">team</span><span class="p">.</span><span class="n">team_barrier</span><span class="p">();</span>
 
-<span class="w">     </span><span class="n">team</span><span class="p">.</span><span class="n">team_barrier</span><span class="p">();</span>
-
-<span class="w">     </span><span class="kt">int</span><span class="w"> </span><span class="n">teamSum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-
-<span class="w">     </span><span class="n">parallel_reduce</span><span class="p">(</span><span class="n">teamVectorMDRange</span><span class="p">,</span>
-<span class="w">         </span><span class="p">[</span><span class="o">=</span><span class="p">](</span><span class="kt">int</span><span class="w"> </span><span class="n">i0</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">i1</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">i2</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">i3</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">vectorSum</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">           </span><span class="n">vectorSum</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">v</span><span class="p">(</span><span class="n">leagueRank</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="n">l</span><span class="p">);</span>
-<span class="w">         </span><span class="p">},</span><span class="w"> </span><span class="n">teamSum</span>
-<span class="w">     </span><span class="p">);</span>
-
-<span class="w">     </span><span class="n">single</span><span class="p">(</span><span class="n">PerTeam</span><span class="p">(</span><span class="n">team</span><span class="p">),</span><span class="w"> </span><span class="p">[</span><span class="o">&amp;</span><span class="n">leagueSum</span><span class="p">,</span><span class="w"> </span><span class="n">teamSum</span><span class="p">]()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">leagueSum</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">teamSum</span><span class="p">;</span><span class="w"> </span><span class="p">});</span>
-
-<span class="w">     </span><span class="n">A_rowSum</span><span class="p">[</span><span class="n">leagueRank</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">leagueSum</span><span class="p">;</span>
-<span class="w">   </span><span class="p">});</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">teamSum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="n">parallel_reduce</span><span class="p">(</span><span class="n">range</span><span class="p">,</span>
+<span class="w">        </span><span class="p">[</span><span class="o">=</span><span class="p">](</span><span class="kt">int</span><span class="w"> </span><span class="n">i0</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">i1</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">i2</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">i3</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">vectorSum</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="n">vectorSum</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">v</span><span class="p">(</span><span class="n">leagueRank</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="n">l</span><span class="p">);</span>
+<span class="w">        </span><span class="p">},</span><span class="w"> </span><span class="n">teamSum</span>
+<span class="w">    </span><span class="p">);</span>
+<span class="w">    </span><span class="n">single</span><span class="p">(</span><span class="n">PerTeam</span><span class="p">(</span><span class="n">team</span><span class="p">),</span><span class="w"> </span><span class="p">[</span><span class="o">&amp;</span><span class="n">leagueSum</span><span class="p">,</span><span class="w"> </span><span class="n">teamSum</span><span class="p">]()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">leagueSum</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">teamSum</span><span class="p">;</span><span class="w"> </span><span class="p">});</span>
+<span class="w">    </span><span class="n">A_rowSum</span><span class="p">[</span><span class="n">leagueRank</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">leagueSum</span><span class="p">;</span>
+<span class="w">  </span><span class="p">});</span>
 </pre></div>
 </div>
 </section>
@@ -647,8 +640,8 @@ threads call this function in one branch, and the other threads of <code class="
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">TeamVectorMDRange</span></code></a><ul>
-<li><a class="reference internal" href="#interface">Interface</a></li>
 <li><a class="reference internal" href="#description">Description</a></li>
+<li><a class="reference internal" href="#interface">Interface</a></li>
 <li><a class="reference internal" href="#examples">Examples</a></li>
 </ul>
 </li>
