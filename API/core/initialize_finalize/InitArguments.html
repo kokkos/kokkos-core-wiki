@@ -475,7 +475,7 @@
         </a>
         <div class="content-icon-container">
 <div class="edit-this-page">
-  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/API/core/initialize_finalize/InitArguments.md" title="Edit this page">
+  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/API/core/initialize_finalize/InitArguments.rst" title="Edit this page">
     <svg aria-hidden="true" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
       <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4"></path>
@@ -499,32 +499,60 @@
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="initarguments">
+          <section id="initarguments">
 <h1>InitArguments<a class="headerlink" href="#initarguments" title="Permalink to this heading">#</a></h1>
 <p>Defined in <code class="docutils literal notranslate"><span class="pre">&lt;Kokkos_Core.hpp&gt;</span></code> header.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Deprecated since 3.7, <strong>use</strong> <code class="docutils literal notranslate"><span class="pre">Kokkos::InitializationSettings</span></code> <strong>instead</strong></p>
+</div>
 <section id="interface">
 <h2>Interface<a class="headerlink" href="#interface" title="Permalink to this heading">#</a></h2>
-<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span><span class="w"> </span><span class="nc">InitArguments</span><span class="w"> </span><span class="p">{</span><span class="w">  </span><span class="c1">// (deprecated since 3.7)</span>
-<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">num_threads</span><span class="p">;</span>
-<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">num_numa</span><span class="p">;</span>
-<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">device_id</span><span class="p">;</span>
-<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">ndevices</span><span class="p">;</span>
-<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">skip_device</span><span class="p">;</span>
-<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="n">disable_warnings</span><span class="p">;</span>
-<span class="w">  </span><span class="n">InitArguments</span><span class="p">();</span>
-<span class="p">};</span>
-</pre></div>
-</div>
-<p><strong>DEPRECATED: use <code class="docutils literal notranslate"><span class="pre">Kokkos::InitializationSettings</span></code> instead</strong><br />
-<code class="docutils literal notranslate"><span class="pre">InitArguments</span></code> is a struct that can be used to programmatically define the
-arguments passed to <a class="reference internal" href="initialize.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">Kokkos::initialize</span></code></span></a>.  It was deprecated in
-version 3.7 in favor of
-<a class="reference internal" href="InitializationSettings.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">Kokkos::InitializationSettings</span></code></span></a>.
-One of the main reasons for replacing it was that user-specified data members
-cannot be distinguished from defaulted ones.</p>
+<dl class="cppkokkos struct">
+<dt class="sig sig-object cppkokkos" id="_CPPv413InitArguments">
+<span id="_CPPv313InitArguments"></span><span id="_CPPv213InitArguments"></span><span id="InitArguments"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">InitArguments</span></span></span><a class="headerlink" href="#_CPPv413InitArguments" title="Permalink to this definition">#</a><br /></dt>
+<dd><dl class="cppkokkos member">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N13InitArguments11num_threadsE">
+<span id="_CPPv3N13InitArguments11num_threadsE"></span><span id="_CPPv2N13InitArguments11num_threadsE"></span><span id="InitArguments::num_threads__i"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">num_threads</span></span></span><a class="headerlink" href="#_CPPv4N13InitArguments11num_threadsE" title="Permalink to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cppkokkos member">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N13InitArguments8num_numaE">
+<span id="_CPPv3N13InitArguments8num_numaE"></span><span id="_CPPv2N13InitArguments8num_numaE"></span><span id="InitArguments::num_numa__i"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">num_numa</span></span></span><a class="headerlink" href="#_CPPv4N13InitArguments8num_numaE" title="Permalink to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cppkokkos member">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N13InitArguments9device_idE">
+<span id="_CPPv3N13InitArguments9device_idE"></span><span id="_CPPv2N13InitArguments9device_idE"></span><span id="InitArguments::device_id__i"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">device_id</span></span></span><a class="headerlink" href="#_CPPv4N13InitArguments9device_idE" title="Permalink to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cppkokkos member">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N13InitArguments8ndevicesE">
+<span id="_CPPv3N13InitArguments8ndevicesE"></span><span id="_CPPv2N13InitArguments8ndevicesE"></span><span id="InitArguments::ndevices__i"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ndevices</span></span></span><a class="headerlink" href="#_CPPv4N13InitArguments8ndevicesE" title="Permalink to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cppkokkos member">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N13InitArguments11skip_deviceE">
+<span id="_CPPv3N13InitArguments11skip_deviceE"></span><span id="_CPPv2N13InitArguments11skip_deviceE"></span><span id="InitArguments::skip_device__i"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">skip_device</span></span></span><a class="headerlink" href="#_CPPv4N13InitArguments11skip_deviceE" title="Permalink to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cppkokkos member">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N13InitArguments16disable_warningsE">
+<span id="_CPPv3N13InitArguments16disable_warningsE"></span><span id="_CPPv2N13InitArguments16disable_warningsE"></span><span id="InitArguments::disable_warnings__b"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">disable_warnings</span></span></span><a class="headerlink" href="#_CPPv4N13InitArguments16disable_warningsE" title="Permalink to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N13InitArguments13InitArgumentsEv">
+<span id="_CPPv3N13InitArguments13InitArgumentsEv"></span><span id="_CPPv2N13InitArguments13InitArgumentsEv"></span><span id="InitArguments::InitArguments"></span><span class="sig-name descname"><span class="n"><span class="pre">InitArguments</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N13InitArguments13InitArgumentsEv" title="Permalink to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<p><code class="docutils literal notranslate"><span class="pre">InitArguments</span></code> is a struct that can be used to programmatically define the arguments passed to <a class="reference external" href="initialize.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::initialize</span></code></a>. It was deprecated in version 3.7 in favor of <a class="reference external" href="InitializationSettings.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::InitializationSettings</span></code></a>.</p>
+<p>One of the main reasons for replacing it was that user-specified data members cannot be distinguished from defaulted ones.</p>
 <section id="example">
 <h3>Example<a class="headerlink" href="#example" title="Permalink to this heading">#</a></h3>
-<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Kokkos_Core.hpp&gt;</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Kokkos_Core.hpp&gt;</span>
 
 <span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">InitArguments</span><span class="w"> </span><span class="n">arguments</span><span class="p">;</span>
@@ -541,8 +569,8 @@ cannot be distinguished from defaulted ones.</p>
 <section id="see-also">
 <h3>See also<a class="headerlink" href="#see-also" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
-<li><p><a class="reference internal" href="InitializationSettings.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">Kokkos::InitializationSettings</span></code></span></a></p></li>
-<li><p><a class="reference internal" href="initialize.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">Kokkos::initialize</span></code></span></a></p></li>
+<li><p><a class="reference external" href="InitializationSettings.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::InitializationSettings</span></code></a></p></li>
+<li><p><a class="reference external" href="initialize.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::initialize</span></code></a></p></li>
 </ul>
 </section>
 </section>
