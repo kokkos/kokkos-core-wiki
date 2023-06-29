@@ -10,6 +10,9 @@
 
 Header File: ``Kokkos_Core.hpp``
 
+Description
+-----------
+
 Alias template to deduce the type that is returned by a call to the |subviewfunc|_ function with given arguments.
 
 Interface
@@ -20,9 +23,18 @@ Interface
    template <class ViewType, class... Args>
    using Subview = IMPL_DETAIL; // deduce subview type from source view traits
 
-Type of a ``Kokkos::View`` referencing a subset of ``ViewType`` specified by ``Args...``.
+Type of the result of ``Kokkos::subview(ViewType view_arg, Args .... args)``
 
-Requires: ``sizeof... (Args) == ViewType::rank()``.
+Requirements
+------------
+
+Requires:
+
+- ``ViewType`` is a specialization of ``Kokkos::View``
+
+- ``Args...`` are slice specifiers as defined in |subviewfunc|_.
+
+- ``sizeof... (Args) == ViewType::rank()``.
 
 
 Examples
