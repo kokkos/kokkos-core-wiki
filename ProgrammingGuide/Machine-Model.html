@@ -475,7 +475,7 @@
         </a>
         <div class="content-icon-container">
 <div class="edit-this-page">
-  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/ProgrammingGuide/Machine-Model.md" title="Edit this page">
+  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/ProgrammingGuide/Machine-Model.rst" title="Edit this page">
     <svg aria-hidden="true" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
       <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4"></path>
@@ -499,7 +499,7 @@
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="machine-model">
+          <section id="machine-model">
 <h1>2. Machine Model<a class="headerlink" href="#machine-model" title="Permalink to this heading">#</a></h1>
 <p>After reading this chapter you will understand the abstract model of a parallel computing node which underlies the design choices and structure of the Kokkos framework. The machine model ensures the applications written using Kokkos will have portability across architectures while being performant on a range of hardware.</p>
 <p>The machine model has two important components:</p>
@@ -518,18 +518,22 @@
 <p><sup>1</sup> Ang, J.A., et. al., <strong>Abstract Machine Models and Proxy Architectures for Exascale Computing</strong>,
 2014, Sandia National Laboratories and Lawrence Berkeley National Laboratory, DOE Computer Architecture Laboratories Project</p>
 <hr class="docutils" />
-<p><img alt="node" src="../_images/kokkos-node-doc.png" /></p>
-<h4>Figure 2.1 Conceptual Model of a Future High Performance Computing Node</h4>
+<p><img alt="Figure 2.1 Conceptual Model of a Future High Performance Computing Node" src="../_images/kokkos-node-doc.png" /></p>
+<section id="figure-2-1-conceptual-model-of-a-future-high-performance-computing-node">
+<h4>Figure 2.1 Conceptual Model of a Future High Performance Computing Node<a class="headerlink" href="#figure-2-1-conceptual-model-of-a-future-high-performance-computing-node" title="Permalink to this heading">#</a></h4>
+</section>
 </section>
 </section>
 <section id="kokkos-spaces">
 <h2>2.2 Kokkos Spaces<a class="headerlink" href="#kokkos-spaces" title="Permalink to this heading">#</a></h2>
-<p>Kokkos uses the term <em>execution spaces</em> to describe a logical grouping of computation units which share an identical set of performance properties. An execution space provides a set of parallel execution resources which can be utilized by the programmer using several types of fundamental parallel operation. For a list of the operations available see <a class="reference internal" href="ParallelDispatch.html"><span class="doc std std-doc">Chapter 7 - Parallel dispatch</span></a>. The term <em>memory spaces</em> is used to describe a logical distinct memory resource, which is available to allocate data.</p>
+<p>Kokkos uses the term <em>execution spaces</em> to describe a logical grouping of computation units which share an identical set of performance properties. An execution space provides a set of parallel execution resources which can be utilized by the programmer using several types of fundamental parallel operation. For a list of the operations available see <a class="reference external" href="ParallelDispatch.html">Chapter 7 - Parallel dispatch</a>. The term <em>memory spaces</em> is used to describe a logical distinct memory resource, which is available to allocate data.</p>
 <section id="execution-space-instances">
 <h3>2.2.1 Execution Space Instances<a class="headerlink" href="#execution-space-instances" title="Permalink to this heading">#</a></h3>
 <p>An <em>instance</em> of an execution space is a specific instantiation of an execution space to which a programmer can target parallel work. By means of example, an execution space might be used to describe a multicore processor. In this example, the execution space contains several homogeneous cores which share some logical grouping. In a program written to the Kokkos model, an instance of this execution space would be made available on which parallel kernels could be executed. As a second example, if we were to add a GPU to the multicore processor so a second execution space type is available in the system, the application programmer would then have two execution space instances available to select from. The important consideration here is that the method of compiling code for different execution spaces and the dispatch of kernels to instances is abstracted by the Kokkos model. This allows application programmers to be free from writing algorithms in hardware specific languages.</p>
-<p><img alt="execution-space" src="../_images/kokkos-execution-space-doc.png" /></p>
-<h4>Figure 2.2 Example Execution Spaces in a Future Computing Node</h4>
+<p><img alt="Figure 2.2 Example Execution Spaces in a Future Computing Node" src="../_images/kokkos-execution-space-doc.png" /></p>
+<section id="figure-2-2-example-execution-spaces-in-a-future-computing-node">
+<h4>Figure 2.2 Example Execution Spaces in a Future Computing Node<a class="headerlink" href="#figure-2-2-example-execution-spaces-in-a-future-computing-node" title="Permalink to this heading">#</a></h4>
+</section>
 </section>
 <section id="kokkos-memory-spaces">
 <h3>2.2.2 Kokkos Memory Spaces<a class="headerlink" href="#kokkos-memory-spaces" title="Permalink to this heading">#</a></h3>
@@ -538,31 +542,33 @@
 <section id="instances-of-kokkos-memory-spaces">
 <h3>2.2.3 Instances of Kokkos Memory Spaces<a class="headerlink" href="#instances-of-kokkos-memory-spaces" title="Permalink to this heading">#</a></h3>
 <p>In much the same way execution spaces have specific instantiations through the availability of an <em>instance</em> so do memory spaces. An instance of a memory space provides a concrete method for the application programmer to request data storage allocations. Returning to the examples provided for execution spaces, the multicore processor may have multiple memory spaces available including on-package memory, slower DRAM and additional sets of non-volatile memories. The GPU may also provide an additional memory space through its local on-package memory. The programmer is free to decide where each data structure may be allocated by requesting these from the specific instance associated with that memory space. Kokkos provides the appropriate abstraction of the allocation routines and any associated data management operations including releasing the memory, returning it for future use, as well as for copy operations.</p>
-<p><img alt="memory-space" src="../_images/kokkos-memory-space-doc.png" /></p>
-<h4>Figure 2.3 Example Memory Spaces in a Future Computing Node</h4>
+<p><img alt="Figure 2.3 Example Memory Spaces in a Future Computing Node" src="../_images/kokkos-memory-space-doc.png" /></p>
+<section id="figure-2-3-example-memory-spaces-in-a-future-computing-node">
+<h4>Figure 2.3 Example Memory Spaces in a Future Computing Node<a class="headerlink" href="#figure-2-3-example-memory-spaces-in-a-future-computing-node" title="Permalink to this heading">#</a></h4>
 <p><strong>Atomic accesses to Memory in Kokkos</strong> In cases where multiple executing threads attempt to read a memory address, complete a computation on the item, and write it back to same address in memory, an ordering collision may occur. These situations, known as <em>race conditions</em> (because the data value stored in memory as the threads complete is dependent on which thread completes its memory operation last), are often the cause of non-determinism in parallel programs. A number of methods can be employed to ensure that race conditions do not occur in parallel programs including the use of locks (which allow only a single thread to gain access to data structure at a time), critical regions (which allow only one thread to execute a code sequence at any point in time) and <em>atomic</em> operations. Memory operations which are atomic guarantee that a read, simple computation, and write to memory are completed as a single unit. This might allow application programmers to safely increment a memory value for instance, or more commonly, to safely accumulate values from multiple threads into a single memory location.</p>
 <p><strong>Memory Consistency in Kokkos</strong> Memory consistency models are a complex topic in and of themselves and usually rely on complex operations associated with hardware caches or memory access coherency (for more information see Hennessy and Paterson<sup>2</sup>). Kokkos does not <em>require</em> caches to be present in hardware and so assumes an extremely weak memory consistency model. In the Kokkos model, the programmer should not assume any specific ordering of memory operations being issued by a kernel. This has the potential to create race conditions between memory operations if these are not appropriately protected. In order to provide a guarantee that memory operations are completed, Kokkos provides a <em>fence</em> operation which forces the compute engine to complete all outstanding memory operations before any new ones can be issued. With appropriate use of fences, programmers are thereby able to ensure that guarantees can be made as to when data will <em>definitely</em> have been written to memory.</p>
 <hr class="docutils" />
 <p><sup>2</sup> Hennessy J.L. and Paterson D.A., <strong>Computer Architecture, Fifth Edition: A Quantitative Approach</strong>, Morgan Kaufmann, 2011.</p>
 </section>
 </section>
+</section>
 <hr class="docutils" />
 <section id="program-execution">
 <h2>2.3 Program execution<a class="headerlink" href="#program-execution" title="Permalink to this heading">#</a></h2>
 <p>It is tempting to try to define formally what it means for a processor to execute code. None of us authors have a background in logic or what computer scientists call “formal methods,” so our attempt might not go very far! We will stick with informal definitions and rely on Kokkos’ C++ implementation as an existence proof that the definitions make sense.</p>
-<p>Kokkos lets users tell execution spaces to execute parallel operations. These include parallel for, reduce, and scan (see <a class="reference internal" href="ParallelDispatch.html"><span class="doc std std-doc">Chapter 7 - Parallel dispatch</span></a>) as well as <a class="reference internal" href="View.html"><span class="doc std std-doc">View allocation</span></a> and <a class="reference internal" href="Initialization.html"><span class="doc std std-doc">Initialization</span></a>. We name the class of all such operations <em>parallel dispatch</em>.</p>
+<p>Kokkos lets users tell execution spaces to execute parallel operations. These include parallel for, reduce, and scan (see <a class="reference external" href="ParallelDispatch.html">Chapter 7 - Parallel dispatch</a>) as well as <a class="reference external" href="View.html">View allocation</a> and <a class="reference external" href="Initialization.html">Initialization</a>. We name the class of all such operations <em>parallel dispatch</em>.</p>
 <p>From our perspective, there are three kinds of code:</p>
 <ol class="arabic simple">
 <li><p>Code executing inside of a Kokkos parallel operation</p></li>
 <li><p>Code outside of a Kokkos parallel operation that asks Kokkos to do something (e.g., parallel dispatch itself)</p></li>
 <li><p>Code that has nothing to do with Kokkos</p></li>
 </ol>
-<p>The first category is the most restrictive. <a class="reference internal" href="HierarchicalParallelism.html#hp-thread-teams"><span class="std std-ref">Section 8.2</span></a> explains restrictions on inter-team synchronization. In general, we limit the ability of Kokkos-parallel code to invoke Kokkos operations (other than for nested parallelism; see <a class="reference internal" href="HierarchicalParallelism.html"><span class="doc std std-doc">Chapter 8 - Hierarchical Parallelism</span></a> and especially <a class="reference internal" href="HierarchicalParallelism.html#hp-thread-teams"><span class="std std-ref">Section 8.2</span></a>). We also forbid dynamic memory allocation (other than from the team’s scratch pad) in parallel operations. Whether Kokkos-parallel code may invoke operating system routines or third-party libraries depends on the execution and memory spaces being used. Regardless, restrictions on inter-team synchronization have implications for things like filesystem access.</p>
-<p><em>Kokkos threads are for computing in parallel</em>, not for overlapping I/O and computation, and not for making graphical user interfaces responsive. Use other kinds of threads (e.g., operating system threads) for the latter two purposes. You may be able to mix Kokkos’ parallelism with other kinds of threads; see <a class="reference internal" href="#mm-thread-safety"><span class="std std-ref">Section 2.3.1</span></a>. Kokkos’ developers are also working on a task parallelism model that will work with Kokkos’ existing data-parallel constructs.</p>
+<p>The first category is the most restrictive. <a class="reference external" href="HierarchicalParallelism.html#hp-thread-teams">Section 8.2</a> explains restrictions on inter-team synchronization. In general, we limit the ability of Kokkos-parallel code to invoke Kokkos operations (other than for nested parallelism; see <a class="reference external" href="HierarchicalParallelism.html">Chapter 8 - Hierarchical Parallelism</a> and especially <a class="reference external" href="HierarchicalParallelism.html#hp-thread-teams">Section 8.2</a>). We also forbid dynamic memory allocation (other than from the team’s scratch pad) in parallel operations. Whether Kokkos-parallel code may invoke operating system routines or third-party libraries depends on the execution and memory spaces being used. Regardless, restrictions on inter-team synchronization have implications for things like filesystem access.</p>
+<p><em>Kokkos threads are for computing in parallel</em>, not for overlapping I/O and computation, and not for making graphical user interfaces responsive. Use other kinds of threads (e.g., operating system threads) for the latter two purposes. You may be able to mix Kokkos’ parallelism with other kinds of threads; see <a class="reference external" href="Machine-Model.html#thread-safety">Section 2.3.1</a>. Kokkos’ developers are also working on a task parallelism model that will work with Kokkos’ existing data-parallel constructs.</p>
 <p><strong>Reproducible reductions and scans</strong> Kokkos promises <em>nothing</em> about the order in which the iterations of a parallel loop occur. However, it <em>does</em> promise that if you execute the same parallel reduction or scan, using the same hardware resources and run-time settings, then you will get the same results each time you run the operation. “Same results” even means “with respect to floating-point rounding error.”</p>
-<p><strong>Asynchronous parallel dispatch</strong> This concerns the second category of code that calls Kokkos operations. In Kokkos, parallel dispatch executes <em>asynchronously</em>. This means that it may return “early,” before it has actually completed. Nevertheless, it executes <em>in sequence</em> with respect to other Kokkos operations on the same execution or memory space. This matters for things like timing. For example, a <a class="reference internal" href="../API/core/parallel-dispatch/parallel_for.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">parallel_for()</span></code></span></a> may return “right away,” so if you want to measure how long it takes, you must first call <a class="reference internal" href="../API/core/parallel-dispatch/fence.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">fence()</span></code></span></a> on that execution space. This forces all functors to complete before <a class="reference internal" href="../API/core/parallel-dispatch/fence.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">fence()</span></code></span></a> returns.</p>
+<p><strong>Asynchronous parallel dispatch</strong> This concerns the second category of code that calls Kokkos operations. In Kokkos, parallel dispatch executes <em>asynchronously</em>. This means that it may return “early,” before it has actually completed. Nevertheless, it executes <em>in sequence</em> with respect to other Kokkos operations on the same execution or memory space. This matters for things like timing. For example, a <a class="reference external" href="../API/core/parallel-dispatch/parallel_for.html"><code class="docutils literal notranslate"><span class="pre">parallel_for()</span></code></a> may return “right away,” so if you want to measure how long it takes, you must first call <a class="reference external" href="../API/core/parallel-dispatch/fence.html"><code class="docutils literal notranslate"><span class="pre">fence()</span></code></a> on that execution space. This forces all functors to complete before <a class="reference external" href="../API/core/parallel-dispatch/fence.html"><code class="docutils literal notranslate"><span class="pre">fence()</span></code></a> returns.</p>
 <section id="thread-safety">
-<span id="mm-thread-safety"></span><h3>2.3.1 Thread safety?<a class="headerlink" href="#thread-safety" title="Permalink to this heading">#</a></h3>
+<h3>2.3.1 Thread safety?<a class="headerlink" href="#thread-safety" title="Permalink to this heading">#</a></h3>
 <p>Users may wonder about “thread safety,” that is, whether multiple operating system threads may safely call into Kokkos concurrently. Kokkos’ thread safety depends on both its implementation and on the execution and memory spaces that the implementation uses. The C++ implementation has made great progress towards (non-Kokkos) thread safety of View memory management. For now, however, the most portable approach is for only one (non-Kokkos) thread of execution to control Kokkos. Also, be aware that operating system threads might interfere with Kokkos’ performance depending on the execution space that you use.</p>
 </section>
 </section>
@@ -627,13 +633,22 @@
             <ul>
 <li><a class="reference internal" href="#">2. Machine Model</a><ul>
 <li><a class="reference internal" href="#motivations">2.1 Motivations</a><ul>
-<li><a class="reference internal" href="#kokkos-abstract-machine-model">2.1.1 Kokkos Abstract Machine Model</a></li>
+<li><a class="reference internal" href="#kokkos-abstract-machine-model">2.1.1 Kokkos Abstract Machine Model</a><ul>
+<li><a class="reference internal" href="#figure-2-1-conceptual-model-of-a-future-high-performance-computing-node">Figure 2.1 Conceptual Model of a Future High Performance Computing Node</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a class="reference internal" href="#kokkos-spaces">2.2 Kokkos Spaces</a><ul>
-<li><a class="reference internal" href="#execution-space-instances">2.2.1 Execution Space Instances</a></li>
+<li><a class="reference internal" href="#execution-space-instances">2.2.1 Execution Space Instances</a><ul>
+<li><a class="reference internal" href="#figure-2-2-example-execution-spaces-in-a-future-computing-node">Figure 2.2 Example Execution Spaces in a Future Computing Node</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#kokkos-memory-spaces">2.2.2 Kokkos Memory Spaces</a></li>
-<li><a class="reference internal" href="#instances-of-kokkos-memory-spaces">2.2.3 Instances of Kokkos Memory Spaces</a></li>
+<li><a class="reference internal" href="#instances-of-kokkos-memory-spaces">2.2.3 Instances of Kokkos Memory Spaces</a><ul>
+<li><a class="reference internal" href="#figure-2-3-example-memory-spaces-in-a-future-computing-node">Figure 2.3 Example Memory Spaces in a Future Computing Node</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a class="reference internal" href="#program-execution">2.3 Program execution</a><ul>
