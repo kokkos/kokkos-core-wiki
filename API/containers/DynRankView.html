@@ -572,25 +572,12 @@ If the view is also <code class="docutils literal notranslate"><span class="pre"
 That means for example that <code class="docutils literal notranslate"><span class="pre">LayoutType</span></code> can be omitted but if both <code class="docutils literal notranslate"><span class="pre">MemorySpace</span></code> and <code class="docutils literal notranslate"><span class="pre">MemoryTraits</span></code>
 are specified, <code class="docutils literal notranslate"><span class="pre">MemorySpace</span></code> must come before <code class="docutils literal notranslate"><span class="pre">MemoryTraits</span></code>.</p>
 </div>
-<p class="rubric">Public Enums</p>
-<dl class="cppkokkos type">
-<dt class="sig sig-object cppkokkos" id="_CPPv4N11DynRankView4rankE">
-<span id="_CPPv3N11DynRankView4rankE"></span><span id="_CPPv2N11DynRankView4rankE"></span><span id="DynRankView::rank"></span><span class="k"></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">rank</span></span></span><a class="headerlink" href="#_CPPv4N11DynRankView4rankE" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>Rank of the view (i.e. the dimensionality).</p>
-</dd></dl>
-
-<dl class="cppkokkos type">
-<dt class="sig sig-object cppkokkos" id="_CPPv4N11DynRankView12rank_dynamicE">
-<span id="_CPPv3N11DynRankView12rank_dynamicE"></span><span id="_CPPv2N11DynRankView12rank_dynamicE"></span><span id="DynRankView::rank_dynamic"></span><span class="k"></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">rank_dynamic</span></span></span><a class="headerlink" href="#_CPPv4N11DynRankView12rank_dynamicE" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>Number of runtime determined dimensions.</p>
-</dd></dl>
-
-<dl class="cppkokkos type">
-<dt class="sig sig-object cppkokkos" id="_CPPv4N11DynRankView34reference_type_is_lvalue_referenceE">
-<span id="_CPPv3N11DynRankView34reference_type_is_lvalue_referenceE"></span><span id="_CPPv2N11DynRankView34reference_type_is_lvalue_referenceE"></span><span id="DynRankView::reference_type_is_lvalue_reference"></span><span class="k"></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">reference_type_is_lvalue_reference</span></span></span><a class="headerlink" href="#_CPPv4N11DynRankView34reference_type_is_lvalue_referenceE" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>Whether the reference type is a C++ lvalue reference.</p>
-</dd></dl>
-
+<p class="rubric">Public Static Variables</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">rank</span></code>: Rank of the view (i.e. the dimensionality).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rank_dynamic</span></code>: Number of runtime determined dimensions.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">reference_type_is_lvalue_reference</span></code>: Whether the reference type is a C++ lvalue reference.</p></li>
+</ul>
 <p class="rubric">Public Data Types Typedefs</p>
 <dl class="cppkokkos type">
 <dt class="sig sig-object cppkokkos" id="_CPPv4N11DynRankView9data_typeE">
@@ -813,8 +800,8 @@ data the view is referencing (e.g. if <code class="docutils literal notranslate"
 </dd></dl>
 
 <dl class="cppkokkos function">
-<dt class="sig sig-object cppkokkos">
-<span class="sig-name descname"><span class="n"><span class="pre">DynRankView</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">name</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N11DynRankView12array_layoutE" title="DynRankView::array_layout"><span class="n"><span class="pre">array_layout</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">layout</span></span><span class="sig-paren">)</span><br /></dt>
+<dt class="sig sig-object cppkokkos" id="_CPPv4N11DynRankView11DynRankViewERK12pointer_typeRK12array_layout">
+<span id="_CPPv3N11DynRankView11DynRankViewERK12pointer_typeRK12array_layout"></span><span id="_CPPv2N11DynRankView11DynRankViewERK12pointer_typeRK12array_layout"></span><span id="DynRankView::DynRankView__pointer_typeCR.array_layoutCR"></span><span class="sig-name descname"><span class="n"><span class="pre">DynRankView</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N11DynRankView12pointer_typeE" title="DynRankView::pointer_type"><span class="n"><span class="pre">pointer_type</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">ptr</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N11DynRankView12array_layoutE" title="DynRankView::array_layout"><span class="n"><span class="pre">array_layout</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">layout</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11DynRankView11DynRankViewERK12pointer_typeRK12array_layout" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Unmanaged data wrapper constructor.</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">ptr</span></code>: pointer to a user provided memory allocation. Must provide storage of size <code class="docutils literal notranslate"><span class="pre">DynRankView::required_allocation_size(layout)</span></code> (<em>NEEDS TO BE IMPLEMENTED</em>)</p></li>
@@ -1000,7 +987,7 @@ This can be larger than the product of extents due to padding, and or non-contig
 
 <dl class="cppkokkos function">
 <dt class="sig sig-object cppkokkos" id="_CPPv4NK11DynRankView4rankEv">
-<span id="_CPPv3NK11DynRankView4rankEv"></span><span id="_CPPv2NK11DynRankView4rankEv"></span><span id="DynRankView::rankCCE"></span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">rank</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><br /></dt>
+<span id="_CPPv3NK11DynRankView4rankEv"></span><span id="_CPPv2NK11DynRankView4rankEv"></span><span id="DynRankView::rankCCE"></span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">rank</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK11DynRankView4rankEv" title="Permalink to this definition">#</a><br /></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>the dynamic rank of the <code class="docutils literal notranslate"><span class="pre">DynRankView</span></code>.</p>

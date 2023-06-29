@@ -70,19 +70,11 @@ Description
       are specified, ``MemorySpace`` must come before ``MemoryTraits``.
 
 
-   .. rubric:: Public Enums
+   .. rubric:: Public Static Variables
 
-   .. cppkokkos:type:: rank
-
-      Rank of the view (i.e. the dimensionality).
-
-   .. cppkokkos:type:: rank_dynamic
-
-      Number of runtime determined dimensions.
-
-   .. cppkokkos:type:: reference_type_is_lvalue_reference
-
-      Whether the reference type is a C++ lvalue reference.
+   * ``rank``: Rank of the view (i.e. the dimensionality).
+   * ``rank_dynamic``: Number of runtime determined dimensions.
+   * ``reference_type_is_lvalue_reference``: Whether the reference type is a C++ lvalue reference.
 
 
    .. rubric:: Public Data Types Typedefs
@@ -247,7 +239,7 @@ Description
        * ``ptr``: pointer to a user provided memory allocation. Must provide storage of size ``DynRankView::required_allocation_size(n0,...,nR)``.
        * ``indices``: runtime dimensions of the view.
 
-   .. cppkokkos:function:: DynRankView(const std::string& name, const array_layout& layout)
+   .. cppkokkos:function:: DynRankView(const pointer_type& ptr, const array_layout& layout)
 
        Unmanaged data wrapper constructor.
 
