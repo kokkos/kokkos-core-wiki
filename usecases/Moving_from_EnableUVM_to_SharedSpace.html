@@ -475,7 +475,7 @@
         </a>
         <div class="content-icon-container">
 <div class="edit-this-page">
-  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/usecases/Moving_from_EnableUVM_to_SharedSpace.md" title="Edit this page">
+  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/usecases/Moving_from_EnableUVM_to_SharedSpace.rst" title="Edit this page">
     <svg aria-hidden="true" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
       <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4"></path>
@@ -499,24 +499,24 @@
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="moving-code-from-requiring-kokkos-enable-cuda-uvm-to-using-sharedspace">
+          <section id="moving-code-from-requiring-kokkos-enable-cuda-uvm-to-using-sharedspace">
 <h1>Moving code from requiring <code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_CUDA_UVM</span></code> to using <code class="docutils literal notranslate"><span class="pre">SharedSpace</span></code><a class="headerlink" href="#moving-code-from-requiring-kokkos-enable-cuda-uvm-to-using-sharedspace" title="Permalink to this heading">#</a></h1>
 <p>With Kokkos 4.0 <code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_CUDA_UVM</span></code> is deprecated and can only be used with <code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_DEPRECATED_CODE_4</span></code>. The main reason for the deprecation was, that using the option changed the <code class="docutils literal notranslate"><span class="pre">memory_space</span></code> of the <code class="docutils literal notranslate"><span class="pre">Cuda</span></code> <code class="docutils literal notranslate"><span class="pre">ExecutionSpace</span></code>. This lead to several problems. For example: The driver is allowed to move chunks of this memory to the device or host depending on the access at any time without notice.
 The accesses in <code class="docutils literal notranslate"><span class="pre">parallel_for</span></code>, <code class="docutils literal notranslate"><span class="pre">parallel_reduce</span></code>, or <code class="docutils literal notranslate"><span class="pre">parallel_scan</span></code> do not occur in any guaranteed order and furthermore depend on other kernels running on the same GPU. This makes debugging tedious. Especially, if the memory an allocation resides in is not apparent but dependent on the options when running <code class="docutils literal notranslate"><span class="pre">cmake</span></code>.</p>
 <section id="the-alternative">
 <h2>The alternative<a class="headerlink" href="#the-alternative" title="Permalink to this heading">#</a></h2>
-<p>We introduced a new alias named <span class="xref myst"><code class="docutils literal notranslate"><span class="pre">SharedSpace</span></code></span> in Kokkos 4.0. This always points to memory that is accessible by every <span class="xref myst"><code class="docutils literal notranslate"><span class="pre">ExecutionSpace</span></code></span> and is migrated without user interaction to the acessing <code class="docutils literal notranslate"><span class="pre">ExecutionSpace</span></code> on demand. After migration the memory is accessed locally.
+<p>We introduced a new alias named <a class="reference external" href="../API/core/memory_spaces.html#kokkos-sharedspace"><code class="docutils literal notranslate"><span class="pre">SharedSpace</span></code></a> in Kokkos 4.0. This always points to memory that is accessible by every <a class="reference external" href="../API/core/execution_spaces.html#kokkos-executionspaceconcept"><code class="docutils literal notranslate"><span class="pre">ExecutionSpace</span></code></a> and is migrated without user interaction to the acessing <code class="docutils literal notranslate"><span class="pre">ExecutionSpace</span></code> on demand. After migration the memory is accessed locally.
 Using the alias e.g. in <code class="docutils literal notranslate"><span class="pre">Views</span></code> is expressive and thus easier to read. Furthermore, it is portable to every backend that can automatically migrate memory between <code class="docutils literal notranslate"><span class="pre">ExecutionSpaces</span></code>.
-Furthermore, we introduced the alias <span class="xref myst"><code class="docutils literal notranslate"><span class="pre">SharedHostPinnedSpace</span></code></span> which points to memory that is accessible by all enabled <code class="docutils literal notranslate"><span class="pre">ExecutionSpaces</span></code> but always resides in the memory of the host.</p>
+Furthermore, we introduced the alias <a class="reference external" href="../API/core/memory_spaces.html#kokkos-sharedhostpinnedspace"><code class="docutils literal notranslate"><span class="pre">SharedHostPinnedSpace</span></code></a> which points to memory that is accessible by all enabled <code class="docutils literal notranslate"><span class="pre">ExecutionSpaces</span></code> but always resides in the memory of the host.</p>
 </section>
 <section id="the-transition">
 <h2>The transition<a class="headerlink" href="#the-transition" title="Permalink to this heading">#</a></h2>
-<p>Basically it comes down to spelling <span class="xref myst"><code class="docutils literal notranslate"><span class="pre">Kokkos::SharedSpace</span></code></span> as a template argument in all allocations.
+<p>Basically it comes down to spelling <a class="reference external" href="../API/core/memory_spaces.html#kokkos-sharedspace"><code class="docutils literal notranslate"><span class="pre">Kokkos::SharedSpace</span></code></a> as a template argument in all allocations.
 Below is an example of a transition:</p>
 <ul class="simple">
 <li><p>Code requiring <code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_CUDA_UVM</span></code> at configure time (until 4.0)</p></li>
 </ul>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Kokkos_Core.hpp&gt;</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Kokkos_Core.hpp&gt;</span>
 
 <span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="w"> </span><span class="p">(){</span>
 <span class="w">  </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">initialize</span><span class="p">();</span>
@@ -528,7 +528,7 @@ Below is an example of a transition:</p>
 <span class="w">    </span><span class="p">...</span>
 
 <span class="w">    </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">kokkos_free</span><span class="p">(</span><span class="n">c_style_memory</span><span class="p">);</span>
-<span class="w">  </span><span class="p">}</span><span class="w"> </span>
+<span class="w">  </span><span class="p">}</span>
 <span class="w">  </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">finalize</span><span class="p">();</span>
 <span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
@@ -537,13 +537,13 @@ Below is an example of a transition:</p>
 <ul class="simple">
 <li><p>Code using <code class="docutils literal notranslate"><span class="pre">SharedSpace</span></code> (since 4.0)</p></li>
 </ul>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Kokkos_Core.hpp&gt;</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Kokkos_Core.hpp&gt;</span>
 
 <span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="w"> </span><span class="p">(){</span>
 <span class="w">  </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">initialize</span><span class="p">();</span>
 <span class="w">  </span><span class="p">{</span>
 <span class="w">    </span><span class="k">static_assert</span><span class="p">(</span><span class="n">Kokkos</span><span class="o">::</span><span class="n">has_shared_space</span><span class="p">(),</span><span class="s">&quot;code only works on backends with SharedSpace&quot;</span><span class="p">);</span>
-<span class="w">      </span>
+
 <span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span><span class="p">;</span>
 <span class="w">    </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">View</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">*</span><span class="p">,</span><span class="n">Kokkos</span><span class="o">::</span><span class="n">SharedSpace</span><span class="o">&gt;</span><span class="w"> </span><span class="n">myView</span><span class="p">(</span><span class="s">&quot;myView&quot;</span><span class="p">,</span><span class="n">N</span><span class="p">);</span>
 <span class="w">    </span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">c_style_memory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">kokkos_malloc</span><span class="o">&lt;</span><span class="n">Kokkos</span><span class="o">::</span><span class="n">SharedSpace</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;c_style_alloc&quot;</span><span class="p">,</span><span class="n">N</span><span class="o">*</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">double</span><span class="p">));</span>
@@ -551,7 +551,7 @@ Below is an example of a transition:</p>
 <span class="w">    </span><span class="p">...</span>
 
 <span class="w">    </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">kokkos_free</span><span class="o">&lt;</span><span class="n">Kokkos</span><span class="o">::</span><span class="n">SharedSpace</span><span class="o">&gt;</span><span class="p">(</span><span class="n">c_style_memory</span><span class="p">);</span>
-<span class="w">  </span><span class="p">}</span><span class="w"> </span>
+<span class="w">  </span><span class="p">}</span>
 <span class="w">  </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">finalize</span><span class="p">();</span>
 <span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
