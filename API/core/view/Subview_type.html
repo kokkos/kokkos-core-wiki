@@ -475,7 +475,7 @@
         </a>
         <div class="content-icon-container">
 <div class="edit-this-page">
-  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/API/core/view/Subview_type.md" title="Edit this page">
+  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/API/core/view/Subview_type.rst" title="Edit this page">
     <svg aria-hidden="true" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
       <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4"></path>
@@ -499,27 +499,33 @@
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="kokkos-subview">
+          <section id="kokkos-subview">
 <h1><code class="docutils literal notranslate"><span class="pre">Kokkos::Subview</span></code><a class="headerlink" href="#kokkos-subview" title="Permalink to this heading">#</a></h1>
 <p>Header File: <code class="docutils literal notranslate"><span class="pre">Kokkos_Core.hpp</span></code></p>
-<p>Alias template to deduce the type that is returned by a call to the subview function with given arguments.</p>
-<p>Usage:</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">Kokkos</span><span class="o">::</span><span class="n">Subview</span><span class="o">&lt;</span><span class="n">ViewType</span><span class="p">,</span><span class="n">Args</span><span class="o">&gt;</span><span class="w"> </span><span class="n">subView</span><span class="p">;</span>
-</pre></div>
-</div>
 <section id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this heading">#</a></h2>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">ViewType</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="p">...</span><span class="w"> </span><span class="n">Args</span><span class="o">&gt;</span>
+<p>Alias template to deduce the type that is returned by a call to the <a class="reference external" href="subview.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::subview()</span></code></a> function with given arguments.</p>
+</section>
+<section id="interface">
+<h2>Interface<a class="headerlink" href="#interface" title="Permalink to this heading">#</a></h2>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">ViewType</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="p">...</span><span class="w"> </span><span class="n">Args</span><span class="o">&gt;</span>
 <span class="k">using</span><span class="w"> </span><span class="n">Subview</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">IMPL_DETAIL</span><span class="p">;</span><span class="w"> </span><span class="c1">// deduce subview type from source view traits</span>
 </pre></div>
 </div>
-<p>Type of a <code class="docutils literal notranslate"><span class="pre">Kokkos::View</span></code> viewing a subset of <code class="docutils literal notranslate"><span class="pre">ViewType</span></code> specified by <code class="docutils literal notranslate"><span class="pre">Args...</span></code>.
-Same type as returned by a call to the subview function with corresponding arguments.
-For restrictions on Args see <span class="xref myst"><code class="docutils literal notranslate"><span class="pre">Kokkos::subview</span></code></span> documentation.</p>
+<p>Type of the result of <code class="docutils literal notranslate"><span class="pre">Kokkos::subview(ViewType</span> <span class="pre">view_arg,</span> <span class="pre">Args</span> <span class="pre">....</span> <span class="pre">args)</span></code></p>
+</section>
+<section id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this heading">#</a></h2>
+<p>Requires:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ViewType</span></code> is a specialization of <code class="docutils literal notranslate"><span class="pre">Kokkos::View</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Args...</span></code> are slice specifiers as defined in <a class="reference external" href="subview.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::subview()</span></code></a>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sizeof...</span> <span class="pre">(Args)</span> <span class="pre">==</span> <span class="pre">ViewType::rank()</span></code>.</p></li>
+</ul>
 </section>
 <section id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading">#</a></h2>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">view_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">View</span><span class="o">&lt;</span><span class="kt">double</span><span class="w"> </span><span class="o">***</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="o">&gt;</span><span class="p">;</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">view_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">View</span><span class="o">&lt;</span><span class="kt">double</span><span class="w"> </span><span class="o">***</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="o">&gt;</span><span class="p">;</span>
 <span class="n">view_type</span><span class="w"> </span><span class="n">a</span><span class="p">(</span><span class="s">&quot;A&quot;</span><span class="p">,</span><span class="n">N0</span><span class="p">,</span><span class="n">N1</span><span class="p">,</span><span class="n">N2</span><span class="p">);</span>
 
 <span class="k">struct</span><span class="w"> </span><span class="nc">subViewHolder</span><span class="w"> </span><span class="p">{</span>
@@ -599,6 +605,8 @@ For restrictions on Args see <span class="xref myst"><code class="docutils liter
             <ul>
 <li><a class="reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">Kokkos::Subview</span></code></a><ul>
 <li><a class="reference internal" href="#description">Description</a></li>
+<li><a class="reference internal" href="#interface">Interface</a></li>
+<li><a class="reference internal" href="#requirements">Requirements</a></li>
 <li><a class="reference internal" href="#examples">Examples</a></li>
 </ul>
 </li>
