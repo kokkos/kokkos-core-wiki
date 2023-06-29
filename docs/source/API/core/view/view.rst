@@ -25,15 +25,15 @@ Parameters
 
 .. _LayoutRight: layoutRight.html
 
-.. |LayoutRight| replace:: :cppkokkos:func:`LayoutRight`
+.. |LayoutRight| replace:: ``LayoutRight()``
 
 .. _LayoutLeft: layoutLeft.html
 
-.. |LayoutLeft| replace:: :cppkokkos:func:`LayoutLeft`
+.. |LayoutLeft| replace:: ``LayoutLeft()``
 
 .. _LayoutStride: layoutStride.html
 
-.. |LayoutStride| replace:: :cppkokkos:func:`LayoutStride`
+.. |LayoutStride| replace:: ``LayoutStride()``
 
 Template parameters other than ``DataType`` are optional, but ordering is enforced.
 That means for example that ``LayoutType`` can be omitted but if both ``MemorySpace``
