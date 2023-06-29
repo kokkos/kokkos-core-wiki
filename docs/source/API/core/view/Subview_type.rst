@@ -22,7 +22,7 @@ Interface
 
 Type of a ``Kokkos::View`` referencing a subset of ``ViewType`` specified by ``Args...``.
 
-Requires: ``sizeof... (Args...) == ViewType::rank()``.
+Requires: ``sizeof... (Args) == ViewType::rank()``.
 
 
 Examples
