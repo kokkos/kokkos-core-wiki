@@ -4,31 +4,26 @@
 .. role:: cppkokkos(code)
    :language: cppkokkos
 
-.. _KokkosSubview: subview.html
-.. |KokkosSubview| replace:: ``Kokkos::subview``
+.. _subviewfunc: subview.html
+
+.. |subviewfunc| replace:: ``Kokkos::subview()``
 
 Header File: ``Kokkos_Core.hpp``
 
-Alias template to deduce the type that is returned by a call to the subview function with given arguments.
+Alias template to deduce the type that is returned by a call to the |subviewfunc|_ function with given arguments.
 
-Usage
------
-
-.. code-block:: cpp
-
-   Kokkos::Subview<ViewType,Args> subView;
-
-Description
------------
+Interface
+---------
 
 .. code-block:: cpp
 
    template <class ViewType, class... Args>
    using Subview = IMPL_DETAIL; // deduce subview type from source view traits
 
-Type of a ``Kokkos::View`` viewing a subset of ``ViewType`` specified by ``Args...``.
-Same type as returned by a call to the subview function with corresponding arguments.
-For restrictions on Args see |KokkosSubview|_ documentation.
+Type of a ``Kokkos::View`` referencing a subset of ``ViewType`` specified by ``Args...``.
+
+Requires: ``sizeof... (Args...) == ViewType::rank()``.
+
 
 Examples
 --------
