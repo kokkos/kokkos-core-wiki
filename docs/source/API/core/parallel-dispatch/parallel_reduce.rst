@@ -154,7 +154,7 @@ Further examples are provided in the `Custom Reductions <../../../ProgrammingGui
         Kokkos::parallel_reduce("Loop1", N, KOKKOS_LAMBDA (const int& i, double& lsum, double& lmin ) {
             lsum += 1.0*i;
             lmin = lmin < 1.0*i ? lmin : 1.0*i;
-        },sum,Min<double>(min));
+        }, sum, Kokkos::Min<double>(min));
 
         printf("Result: %i %lf %lf\n",N,sum,min);
         Kokkos::finalize();
@@ -171,13 +171,13 @@ Further examples are provided in the `Custom Reductions <../../../ProgrammingGui
     struct Foo {
         KOKKOS_INLINE_FUNCTION
         void operator() (const TagMax, const Kokkos::TeamPolicy<>::member_type& team, double& lmax) const {
-            if( team.league_rank % 17 + team.team_rank % 13 > lmax )
-                lmax = team.league_rank % 17 + team.team_rank % 13;
+            if( team.league_rank() % 17 + team.team_rank() % 13 > lmax )
+                lmax = team.league_rank() % 17 + team.team_rank() % 13;
         }
         KOKKOS_INLINE_FUNCTION
         void operator() (const TagMin, const Kokkos::TeamPolicy<>::member_type& team, double& lmin ) const {
-            if( team.league_rank % 17 + team.team_rank % 13 < lmin )
-                lmin = team.league_rank % 17 + team.team_rank % 13;
+            if( team.league_rank() % 17 + team.team_rank() % 13 < lmin )
+                lmin = team.league_rank() % 17 + team.team_rank() % 13;
         }
     };
 
