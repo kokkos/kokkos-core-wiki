@@ -79,7 +79,7 @@ Parameters:
   - `TeamThreadRange <../policies/TeamThreadRange.html>`_: defines a 1D iteration range to be executed by a thread-team. Only valid inside a parallel region executed through a ``TeamPolicy`` or a ``TaskTeam``.
   - `ThreadVectorRange <../policies/ThreadVectorRange.html>`_: defines a 1D iteration range to be executed through vector parallelization dividing the threads within a team.  Only valid inside a parallel region executed through a ``TeamPolicy`` or a ``TaskTeam``.
 * FunctorType: A valid functor with (at minimum) an ``operator()`` with a matching signature for the ``ExecPolicy`` combined with the reduced type.
-* ReducerArgument: Either a class fullfilling the "Reducer" concept or a ``Kokkos::View``
+* ReducerArgument: Either a class fulfilling the "Reducer" concept or a ``Kokkos::View``.
 * ReducerArgumentNonConst: A scalar type or an array type; see below for functor requirements.
 
 Requirements:
