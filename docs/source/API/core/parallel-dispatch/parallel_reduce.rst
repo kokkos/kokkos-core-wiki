@@ -11,12 +11,12 @@ Usage
 
 .. code-block:: cpp
 
-    Kokkos::parallel_reduce( name, policy, functor, reducer... );
-    Kokkos::parallel_reduce( name, policy, functor, result...);
-    Kokkos::parallel_reduce( name, policy, functor);
-    Kokkos::parallel_reduce( policy, functor, reducer...);
-    Kokkos::parallel_reduce( policy, functor, result...);
-    Kokkos::parallel_reduce( policy, functor);
+    Kokkos::parallel_reduce(name, policy, functor, reducer...);
+    Kokkos::parallel_reduce(name, policy, functor, result...);
+    Kokkos::parallel_reduce(name, policy, functor);
+    Kokkos::parallel_reduce(policy, functor, reducer...);
+    Kokkos::parallel_reduce(policy, functor, result...);
+    Kokkos::parallel_reduce(policy, functor);
 
 Dispatches parallel work defined by ``functor`` according to the *ExecutionPolicy* and performs a reduction of the contributions provided by workers as defined by the execution policy. The optional label name is used by profiling and debugging tools. The reduction type is either a ``sum``, is defined by the ``reducer`` or is deduced from an optional ``join`` operator on the functor. The reduction result is stored in ``result``, or through the ``reducer`` handle. It is also provided to the ``functor.final()`` function if such a function exists. Multiple ``reducers`` can be used in a single ``parallel_reduce`` and thus, it is possible to compute the ``min`` and the ``max`` values in a single ``parallel_reduce``.
 
@@ -106,7 +106,7 @@ Requirements:
     + ReducerValueType must match the array signature.
     + the functor must define FunctorType::value_type the same as ReducerValueType.
     + the functor must declare a public member variable ``int value_count`` which is the length of the array.
-    + the functor must implement the function ``void init( ReducerValueType dst [] ) const``.
+    + the functor must implement the function ``void init( ReducerValueType dst[] ) const``.
     + the functor must implement the function ``void join( ReducerValueType dst[], ReducerValueType src[] ) const``.
     + If the functor implements the ``final`` function, the argument must also match those of init and join.
 
@@ -125,45 +125,45 @@ Further examples are provided in the `Custom Reductions <../../../ProgrammingGui
 
 .. code-block:: cpp
 
-    #include<Kokkos_Core.hpp>
-    #include<cstdio>
+    #include <Kokkos_Core.hpp>
+    #include <cstdio>
 
     int main(int argc, char* argv[]) {
-        Kokkos::initialize(argc,argv);
+        Kokkos::initialize(argc, argv);
 
         int N = atoi(argv[1]);
         double result;
-        Kokkos::parallel_reduce("Loop1", N, KOKKOS_LAMBDA (const int& i, double& lsum ) {
+        Kokkos::parallel_reduce("Loop1", N, KOKKOS_LAMBDA (const int& i, double& lsum) {
             lsum += 1.0*i;
-        },result);
+        }, result);
 
-        printf("Result: %i %lf\n",N,result);
+        printf("Result: %i %lf\n", N, result);
         Kokkos::finalize();
     }
 
 .. code-block:: cpp
 
-    #include<Kokkos_Core.hpp>
-    #include<cstdio>
+    #include <Kokkos_Core.hpp>
+    #include <cstdio>
 
     int main(int argc, char* argv[]) {
-        Kokkos::initialize(argc,argv);
+        Kokkos::initialize(argc, argv);
 
         int N = atoi(argv[1]);
         double sum, min;
-        Kokkos::parallel_reduce("Loop1", N, KOKKOS_LAMBDA (const int& i, double& lsum, double& lmin ) {
+        Kokkos::parallel_reduce("Loop1", N, KOKKOS_LAMBDA (const int& i, double& lsum, double& lmin) {
             lsum += 1.0*i;
             lmin = lmin < 1.0*i ? lmin : 1.0*i;
         }, sum, Kokkos::Min<double>(min));
 
-        printf("Result: %i %lf %lf\n",N,sum,min);
+        printf("Result: %i %lf %lf\n", N, sum, min);
         Kokkos::finalize();
     }
 
 .. code-block:: cpp
 
-    #include<Kokkos_Core.hpp>
-    #include<cstdio>
+    #include <Kokkos_Core.hpp>
+    #include <cstdio>
 
     struct TagMax {};
     struct TagMin {};
@@ -171,28 +171,28 @@ Further examples are provided in the `Custom Reductions <../../../ProgrammingGui
     struct Foo {
         KOKKOS_INLINE_FUNCTION
         void operator() (const TagMax, const Kokkos::TeamPolicy<>::member_type& team, double& lmax) const {
-            if( team.league_rank() % 17 + team.team_rank() % 13 > lmax )
+            if (team.league_rank() % 17 + team.team_rank() % 13 > lmax)
                 lmax = team.league_rank() % 17 + team.team_rank() % 13;
         }
         KOKKOS_INLINE_FUNCTION
-        void operator() (const TagMin, const Kokkos::TeamPolicy<>::member_type& team, double& lmin ) const {
-            if( team.league_rank() % 17 + team.team_rank() % 13 < lmin )
+        void operator() (const TagMin, const Kokkos::TeamPolicy<>::member_type& team, double& lmin) const {
+            if (team.league_rank() % 17 + team.team_rank() % 13 < lmin)
                 lmin = team.league_rank() % 17 + team.team_rank() % 13;
         }
     };
 
     int main(int argc, char* argv[]) {
-        Kokkos::initialize(argc,argv);
+        Kokkos::initialize(argc, argv);
 
         int N = atoi(argv[1]);
 
         Foo foo;
-        double max,min;
+        double max, min;
         Kokkos::parallel_reduce(Kokkos::TeamPolicy<TagMax>(N,Kokkos::AUTO), foo, Kokkos::Max<double>(max));
         Kokkos::parallel_reduce("Loop2", Kokkos::TeamPolicy<TagMin>(N,Kokkos::AUTO), foo, Kokkos::Min<double>(min));
         Kokkos::fence();
 
-        printf("Result: %lf %lf\n",min,max);
+        printf("Result: %lf %lf\n", min, max);
 
         Kokkos::finalize();
     }
