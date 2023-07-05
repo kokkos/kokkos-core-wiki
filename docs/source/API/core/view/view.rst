@@ -25,15 +25,15 @@ Parameters
 
 .. _LayoutRight: layoutRight.html
 
-.. |LayoutRight| replace:: :cppkokkos:func:`LayoutRight`
+.. |LayoutRight| replace:: ``LayoutRight()``
 
 .. _LayoutLeft: layoutLeft.html
 
-.. |LayoutLeft| replace:: :cppkokkos:func:`LayoutLeft`
+.. |LayoutLeft| replace:: ``LayoutLeft()``
 
 .. _LayoutStride: layoutStride.html
 
-.. |LayoutStride| replace:: :cppkokkos:func:`LayoutStride`
+.. |LayoutStride| replace:: ``LayoutStride()``
 
 Template parameters other than ``DataType`` are optional, but ordering is enforced.
 That means for example that ``LayoutType`` can be omitted but if both ``MemorySpace``
@@ -106,7 +106,7 @@ member function callable from host and device side.
 Users are encouraged to use ``rank()`` and ``rank_dynamic()`` (akin to a static member function call)
 instead of relying on implicit conversion to an integral type.
 
-The actual type of ``rank[_dymanic]`` as it was defined until Kokkos 4.1 was left up to the implementation
+The actual type of ``rank[_dynamic]`` as it was defined until Kokkos 4.1 was left up to the implementation
 (that is, up to the compiler not to Kokkos) but in practice it was often ``int`` which means
 this change may yield warnings about comparing signed and unsigned integral types.
 It may also break code that was using the type of ``View::rank``.
@@ -519,7 +519,7 @@ In the following we use ``DstType`` and ``SrcType`` as the type of the destinati
 
 .. code-block:: cpp
 
-    ScrType src_view(...);
+    SrcType src_view(...);
     DstType dst_view(src_view);
     dst_view = src_view;
 
