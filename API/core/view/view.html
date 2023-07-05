@@ -576,7 +576,7 @@ Their underlying types are unspecified, but equivalent to <code class="docutils 
 member function callable from host and device side.
 Users are encouraged to use <code class="docutils literal notranslate"><span class="pre">rank()</span></code> and <code class="docutils literal notranslate"><span class="pre">rank_dynamic()</span></code> (akin to a static member function call)
 instead of relying on implicit conversion to an integral type.</p>
-<p>The actual type of <code class="docutils literal notranslate"><span class="pre">rank[_dymanic]</span></code> as it was defined until Kokkos 4.1 was left up to the implementation
+<p>The actual type of <code class="docutils literal notranslate"><span class="pre">rank[_dynamic]</span></code> as it was defined until Kokkos 4.1 was left up to the implementation
 (that is, up to the compiler not to Kokkos) but in practice it was often <code class="docutils literal notranslate"><span class="pre">int</span></code> which means
 this change may yield warnings about comparing signed and unsigned integral types.
 It may also break code that was using the type of <code class="docutils literal notranslate"><span class="pre">View::rank</span></code>.
@@ -1093,7 +1093,7 @@ address is valid, only that it is a non-null pointer.</p>
 while intercepting illegal assignments if possible at compile time, otherwise at runtime.
 In the following we use <code class="docutils literal notranslate"><span class="pre">DstType</span></code> and <code class="docutils literal notranslate"><span class="pre">SrcType</span></code> as the type of the destination view and source view respectively.
 <code class="docutils literal notranslate"><span class="pre">dst_view</span></code> and <code class="docutils literal notranslate"><span class="pre">src_view</span></code> refer to the runtime instances of the destination and source views, i.e.:</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">ScrType</span><span class="w"> </span><span class="nf">src_view</span><span class="p">(...);</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">SrcType</span><span class="w"> </span><span class="nf">src_view</span><span class="p">(...);</span>
 <span class="n">DstType</span><span class="w"> </span><span class="nf">dst_view</span><span class="p">(</span><span class="n">src_view</span><span class="p">);</span>
 <span class="n">dst_view</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">src_view</span><span class="p">;</span>
 </pre></div>
