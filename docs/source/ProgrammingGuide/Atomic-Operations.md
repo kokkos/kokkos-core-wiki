@@ -9,7 +9,7 @@ After reading this chapter, you should understand the following:
 
 ## 10.1 Write Conflicts and Their Resolution With Atomic Operations
 
-Consider the simple task of creating a histogram of a number set.
+Consider the simple task of creating a histogram of a number set. 
 
 ```c++
 void create_histogram(View<int*> histogram, int min, int max, View<int*> values) {
@@ -21,22 +21,22 @@ void create_histogram(View<int*> histogram, int min, int max, View<int*> values)
 }
 ```
 
-When parallelizing this loop with a simple [`parallel_for()`](../API/core/parallel-dispatch/parallel_for) multiple threads may try to
+When parallelizing this loop with a simple [`parallel_for()`](../API/core/parallel-dispatch/parallel_for) multiple threads may try to 
 increment the same `index` at the same time. The increment on the other hand is actually
-three operations:
+three operations: 
   1. load `histogram(index)` into a register,
   2. increment the registers,
   3. store the register back to `&histogram(index)`
 
-When two threads try to do this to the same index at the same time, it can happen that both
-threads load the value, then increment and then store. Since both loaded the same original
+When two threads try to do this to the same index at the same time, it can happen that both 
+threads load the value, then increment and then store. Since both loaded the same original 
 value only one of the updates makes it through, while the second increment gets lost. This
-is called a *race condition*.
+is called a *race condition*. 
 
-Another typical situation for this situation are so called *scatter-add* algorithms.
+Another typical situation for this situation are so called *scatter-add* algorithms. 
 For example in particle codes one often loops over all particles, and then for each particle
 contribute something to each of its neighbours (such as a partial force). If two threads simultaneously
-work on two particles with shared neighbours, they may race on contributing to the same neighbour particle.
+work on two particles with shared neighbours, they may race on contributing to the same neighbour particle. 
 
 ```c++
 void compute_force(View<int**> neighbours, View<double*> values) {
@@ -52,11 +52,11 @@ void compute_force(View<int**> neighbours, View<double*> values) {
 
 There are a number of approaches to resolve such situations: One can (i) apply colouring and run the algorithm multiple times in a way that no conflicts appear with the subset of each colour, (ii) replicate the output array for every thread, or (iii) use atomic operations. All of these come with disadvantages.
 
-Colouring has the disadvantages that one has to create the sets. For the histogram example, the cost of creating the set is likely larger than the operation itself. Furthermore, since one has to run each colour separately, the total amount of memory transfer can be significantly larger, since you tend to loop through all the allocations multiple times while using only parts of each cache line.
+Colouring has the disadvantages that one has to create the sets. For the histogram example, the cost of creating the set is likely larger than the operation itself. Furthermore, since one has to run each colour separately, the total amount of memory transfer can be significantly larger, since you tend to loop through all the allocations multiple times while using only parts of each cache line. 
 
-Replicating the output array is a good strategy for low thread counts (2-8) but often tends to fall apart above that.
+Replicating the output array is a good strategy for low thread counts (2-8) but often tends to fall apart above that. 
 
-Atomic operations execute a whole logical operation uninterrupted. For example the load-modify-store cycle of the above examples will be executed with no other threads being able to access the modified library (via another atomic operation) until the atomic operation is finished. Note that non-atomic operations may still race with atomic operations. The disadvantage of atomic operation is that they hinder certain compiler optimizations, and the throughput of atomics may not be good depending on the architecture and the scalar type.
+Atomic operations execute a whole logical operation uninterrupted. For example the load-modify-store cycle of the above examples will be executed with no other threads being able to access the modified library (via another atomic operation) until the atomic operation is finished. Note that non-atomic operations may still race with atomic operations. The disadvantage of atomic operation is that they hinder certain compiler optimizations, and the throughput of atomics may not be good depending on the architecture and the scalar type. 
 
 ## 10.2 Atomic Free Functions
 
@@ -111,7 +111,7 @@ The full list of atomic operations can be found here:
 ## 10.3 Atomic Memory Trait
 
 If all operations on a specific `View` during a Kernel are atomic one can also use the atomic memory trait.
-Generally one creates an *atomic* `View` from a *non-atomic* `View` just for the one kernel, and then uses normal
+Generally one creates an *atomic* `View` from a *non-atomic* `View` just for the one kernel, and then uses normal 
 operations on it.
 
 ```c++
@@ -127,9 +127,9 @@ void create_histogram(View<int*> histogram, int min, int max, View<int*> values)
 
 ## 10.4 ScatterView
 
-On CPUs one often uses low thread counts, in particular if Kokkos is used in conjunction with MPI.
-In such situations data replication is often a more performance approach, than using atomic operations.
+On CPUs one often uses low thread counts, in particular if Kokkos is used in conjunction with MPI. 
+In such situations data replication is often a more performance approach, than using atomic operations. 
 In order to still have portable code, one can use the [`ScatterView`](../API/containers/ScatterView). It allows the transparent switch at
-compile time from using atomic operations to using data replication depending on the underlying hardware.
+compile time from using atomic operations to using data replication depending on the underlying hardware. 
 
 A full description can be found here: [ScatterView](../API/containers/ScatterView)
