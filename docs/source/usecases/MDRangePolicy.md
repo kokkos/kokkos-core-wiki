@@ -17,9 +17,9 @@ Such a use case occurs for example when working on numerical solution to PDEs su
   `outputField(C,F,P,D)` - a rank 4 View
 
 
-**Computation**:
+**Computation**: 
   For each triple in `C,F,P` compute an output field from the two input views:
-
+  
 ``` c++
 for each (c,f,p) in (C,F,P)
   compute the product inputData(c,p,:,:) * inputField(c,f,p,:)
@@ -38,14 +38,14 @@ for (int p = 0; p < P; ++p)
   auto result = Kokkos::subview(outputField, c, f, p, Kokkos::ALL);
   auto left   = Kokkos::subview(inputData, c, p, Kokkos::ALL, Kokkos::ALL);
   auto right  = Kokkos::subview(inputField, c, f, p, Kokkos::ALL);
-
+  
   for (int i=0;i<D;++i) {
-
+  
     double tmp(0);
-
+    
     for (int j=0;j<D;++j)
       tmp += left(i, j)*right(j);
-
+    
     result(i) = tmp;
   }
 }
@@ -60,7 +60,7 @@ The most straightforward way to parallize the serial code above is to convert th
 
 ``` c++
 
-Kokkos::parallel_for("for_all_cells",
+Kokkos::parallel_for("for_all_cells", 
   Kokkos::RangePolicy<>(0,C),
    KOKKOS_LAMBDA (const int c) {
      for (int f = 0; f < F; ++f)
@@ -70,14 +70,14 @@ Kokkos::parallel_for("for_all_cells",
       auto result = Kokkos::subview(outputField, c, f, p, Kokkos::ALL);
       auto left   = Kokkos::subview(inputData, c, p, Kokkos::ALL, Kokkos::ALL);
       auto right  = Kokkos::subview(inputField, c, f, p, Kokkos::ALL);
-
+  
       for (int i=0;i<D;++i) {
-
+  
         double tmp(0);
-
+    
         for (int j=0;j<D;++j)
           tmp += left(i, j)*right(j);
-
+    
         result(i) = tmp;
       }
      }
@@ -95,20 +95,20 @@ The [`MDRangePolicy`](../API/core/policies/MDRangePolicy) provides a natural way
 ### Implementation - `MDRangePolicy`
 
 ``` c++
-Kokkos::parallel_for("mdr_for_all_cells",
+Kokkos::parallel_for("mdr_for_all_cells", 
   Kokkos::MDRangePolicy< Kokkos::Rank<3> > ({0,0,0}, {C,F,P}),
    KOKKOS_LAMBDA (const int c, const int f, const int p) {
     auto result = Kokkos::subview(outputField, c, f, p, Kokkos::ALL);
     auto left   = Kokkos::subview(inputData, c, p, Kokkos::ALL, Kokkos::ALL);
     auto right  = Kokkos::subview(inputField, c, f, p, Kokkos::ALL);
-
+  
     for (int i=0;i<D;++i) {
-
+  
       double tmp(0);
-
+    
       for (int j=0;j<D;++j)
         tmp += left(i, j)*right(j);
-
+    
       result(i) = tmp;
     }
   });
@@ -133,9 +133,9 @@ The [`MDRangePolicy`](../API/core/policies/MDRangePolicy) can be used with both 
 
 The API reference for the [`MDRangePolicy`](../API/core/policies/MDRangePolicy) is available on the Kokkos wiki:
   [wiki link](https://github.com/kokkos/kokkos/wiki/Kokkos%3A%3AMDRangePolicy)
-
+ 
 The use case that this example is based on comes from the Intrepid2 package of Trilinos. For more examples, check out code in Trilinos in files at: `Trilinos/packages/intrepid2/src/Shared/Intrepid2_ArrayToolsDef*.hpp`.
 
-This link provides some overview of the Intrepid package:
+This link provides some overview of the Intrepid package: 
   [documentation link](https://trilinos.org/packages/intrepid/)
 
