@@ -94,7 +94,7 @@ Interface
        class BinaryPredicate>
    KOKKOS_FUNCTION
    auto unique(const TeamHandleType& teamHandle,                             (12)
-               const ::Kokkos::View<DataType, Properties...>& view,
+               const Kokkos::View<DataType, Properties...>& view,
                BinaryPredicate pred);
 
 Parameters and Requirements
