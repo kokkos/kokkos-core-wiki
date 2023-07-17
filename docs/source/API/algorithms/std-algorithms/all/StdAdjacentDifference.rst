@@ -154,6 +154,8 @@ Parameters and Requirements
 
   - 5 & 6: The default string is "Kokkos::adjacent_difference_view_api"
 
+  - NOTE: overloads accepting a team handle do not use a label internally
+
 - ``first_from``, ``last_from``, ``first_dest``: range of elements to read from ``*_from`` and write to ``first_dest``
 
   - must be *random access iterators*, e.g., returned from ``Kokkos::Experimental::(c)begin/(c)end``
