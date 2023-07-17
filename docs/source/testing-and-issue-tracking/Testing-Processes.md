@@ -28,6 +28,7 @@ the clang-format style specified in the repository.
 
 Test configurations are defined in the `kokkos/.jenkins`, and `kokkos/.github/workflows/*`  files, these files determine the official
 primary software stack support.
+The tested compiler versions are also listed [here](https://kokkos.github.io/kokkos-core-wiki/requirements.html).
 These test configurations (sparsely) cover the cross product of hardware platforms (e.g. NVIDIA. Intel, and AMD),
 compilers (e.g. GCC, Clang, NVC++), C++ standards (17-23), Kokkos backends (e.g. Cuda, OpenMP, and HIP) and Kokkos
 configuration options (e.g. Debug, Relocatable Device Code).

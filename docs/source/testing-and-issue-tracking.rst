@@ -1,5 +1,5 @@
-Testing and Issue Tracking
-##########################
+Kokkos Planning and Testing
+###########################
 
 .. toctree::
    :maxdepth: 1
