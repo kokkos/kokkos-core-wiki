@@ -1,5 +1,5 @@
 ``Kokkos::printf``
-=================
+==================
 
 .. role:: cppkokkos(code)
     :language: cppkokkos
