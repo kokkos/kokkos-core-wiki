@@ -77,6 +77,8 @@ Parameters and Requirements
 
   - 4: The default string is "Kokkos::partition_point_view_api_default"
 
+  - NOTE: overloads accepting a team handle do not use a label internally
+
 Return Value
 ~~~~~~~~~~~~
 
