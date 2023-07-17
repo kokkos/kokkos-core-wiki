@@ -55,7 +55,7 @@ Integration testing configurations are determined and maintained by the customer
 
 This testing has three components:
 
-#### Internal Integration Testing
+### Internal Integration Testing
 
 Kokkos team members will perform integration testing with a select number of customer codes, they are directly involved with.
 Currently that includes two code bases:
@@ -67,7 +67,7 @@ Trilinos in particular consists of several million lines of code over multiple p
 Both codes are tested on the primary hardware platforms, and possibly multiple software stacks (compilers in particular).
 They are also tested with a limited set of configurations during nightly testing, allowing the Kokkos team to catch issues early.
 
-#### Preferred Customer Testing
+### Preferred Customer Testing
 
 Customers funded by the same agencies as Kokkos are explicitly asked to test the release candidate before the actual release, and provide feedback.
 This includes currently NNSA and Office of Science DOE users, specifically:
@@ -79,7 +79,7 @@ This includes currently NNSA and Office of Science DOE users, specifically:
 - ORNL Cabana
 - ANL PETSc
 
-#### General Community testing
+### General Community testing
 
 The release candidate is publicly available as a GitHub branch, and is advertised on the Kokkos Slack channel.
 Any user of Kokkos is encouraged to test the release candidate and provide feedback.

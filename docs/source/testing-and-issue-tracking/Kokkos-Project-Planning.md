@@ -26,7 +26,7 @@ customers to test whether they rely on them.
 The deprecation-removal-cycle provides a minimum of 6 months warnings to users.
 During the deprecation phase customer feedback allows for a revision of the deprecation decision.
 
-##### Activities to support this requirement:
+#### Activities to support this requirement:
 
 - provide complete testing for existing features, to ensure no accidental breakage
 - evaluate features for continued usefulness and fundamental defects
@@ -48,7 +48,7 @@ on platforms as soon as they become available to the Kokkos team (ideally before
 Thus the  Kokkos team must engage with hardware vendors in CoDesign efforts both independently and in conjunction
 with system procurement efforts of funding agencies.
 
-##### Activities to support this requirement:
+#### Activities to support this requirement:
 
 - participate in facility system procurement efforts
 - monitor system software stack releases from vendors (AMD, Intel, NVIDIA, HPE)
@@ -73,7 +73,7 @@ They are then presented to the entire Kokkos team, and discussed for inclusion i
 These discussions lead to a decision on where a feature should go, wether it is important enough to be included in the primary core package,
 or whether it should live as a separate library in its own repository under the Kokkos GitHub organization.
 
-##### Activities to support this requirement:
+#### Activities to support this requirement:
 
 - monitor Slack chanel and GitHub issues for new feature requests
 - participate in Hackathons organized by the HPC community
@@ -95,7 +95,7 @@ The Kokkos team will write proposals for the ISO C++ committee when appropriate.
 If a feature is included in the ISO C++ standard, the Kokkos team will make the API variants provided in the future C++ standard
 available on currently Kokkos supported software stacks to the greatest extent possible.
 
-##### Activities to support this requirement:
+#### Activities to support this requirement:
 
 - participate in ISO C++ committee meetings
 - monitor requests for ISO C++ features to be provided by Kokkos
