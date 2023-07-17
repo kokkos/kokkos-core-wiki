@@ -72,6 +72,8 @@ Parameters and Requirements
 
 - ``exespace``, ``first``, ``last``, ``view``: same as in |remove|_
 
+- ``teamHandle``: team handle instance given inside a parallel region when using a TeamPolicy
+
 - ``label``: string forwarded to internal parallel kernels for debugging purposes
 
   - 1: The default string is "Kokkos::remove_if_iterator_api_default".
