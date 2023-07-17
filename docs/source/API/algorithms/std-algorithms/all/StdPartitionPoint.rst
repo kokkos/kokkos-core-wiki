@@ -64,10 +64,10 @@ Interface
 Parameters and Requirements
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. |IsPartioned| replace:: ``is_partioned``
-.. _IsPartioned: ./StdIsPartitioned.html
+.. |IsPartitioned| replace:: ``is_partitioned``
+.. _IsPartitioned: ./StdIsPartitioned.html
 
-- ``exespace``, ``first``, ``last``, ``view``, ``pred``: same as in |IsPartioned|_
+- ``exespace``, ``first``, ``last``, ``view``, ``pred``: same as in |IsPartitioned|_
 
 - ``teamHandle``: team handle instance given inside a parallel region when using a TeamPolicy
 
@@ -80,4 +80,4 @@ Parameters and Requirements
 Return Value
 ~~~~~~~~~~~~
 
-Iterator to the elment *after* the last element in the first partition, or ``last`` if all elements satisfy ``pred``.
+Iterator to the element *after* the last element in the first partition, or ``last`` if all elements satisfy ``pred``.
