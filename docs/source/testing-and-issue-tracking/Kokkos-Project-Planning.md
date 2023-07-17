@@ -155,7 +155,7 @@ Further issue prioritization happens at the developer meeting discussed below.
 ## Developer Coordination
 
 The team primarily use the #nucleus channel on Slack to communicate.
-Members are added by Christian or Damien once they have joined [Slack](https//kokkosteam.slack.com).
+Members are added by Christian or Damien once they have joined [Slack](https://kokkosteam.slack.com).
 Developers can have both public and private conversations with each other.
 They can ask questions about parts of the code they are less familiar with or
 ask for feedback on any ongoing issue.
