@@ -2,7 +2,7 @@
 
 ## Requirements Gathering
 
-There are three requirement categories for the Kokkos Core project:
+There are four requirement categories for the Kokkos Core project:
 
 - provide a stable, well tested API avoiding breakage
 - support all relevant compute platforms, at the time of their fielding
