@@ -477,7 +477,7 @@
         </a>
         <div class="content-icon-container">
 <div class="edit-this-page">
-  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/API/alphabetical.md" title="Edit this page">
+  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/API/alphabetical.rst" title="Edit this page">
     <svg aria-hidden="true" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
       <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4"></path>
@@ -501,60 +501,55 @@
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="api-in-alphabetical-order">
+          <section id="api-in-alphabetical-order">
 <h1>API in Alphabetical Order<a class="headerlink" href="#api-in-alphabetical-order" title="Permalink to this heading">#</a></h1>
 <p>All functions and classes listed here are part of the <code class="docutils literal notranslate"><span class="pre">Kokkos::</span></code> namespace.</p>
 <section id="algorithms">
 <h2>Algorithms<a class="headerlink" href="#algorithms" title="Permalink to this heading">#</a></h2>
-<div class="table-wrapper colwidths-auto docutils container">
+<div class="table-wrapper docutils container">
 <table class="docutils align-default">
 <thead>
-<tr class="row-odd"><th class="head text-left"><p>Name</p></th>
-<th class="head text-left"><p>Library</p></th>
-<th class="head text-left"><p>Category</p></th>
-<th class="head text-left"><p>Description</p></th>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Library</p></th>
+<th class="head"><p>Category</p></th>
+<th class="head"><p>Description</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td class="text-left"><p>Rand</p></td>
-<td class="text-left"><p>Algorithm</p></td>
-<td class="text-left"><p>Random Number</p></td>
-<td class="text-left"><p>Generator Type (12), draw options (3)</p></td>
+<tr class="row-even"><td><p>Rand</p></td>
+<td><p>Algorithm</p></td>
+<td><p>Random Number</p></td>
+<td><p>Generator Type (12), draw options (3)</p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p>Rand</p></td>
-<td class="text-left"><p>Algorithm</p></td>
-<td class="text-left"><p>Random Number</p></td>
-<td class="text-left"><p>Generator Type (12), draw options (3)</p></td>
+<tr class="row-odd"><td><p>Random_XorShift64_Pool</p></td>
+<td><p>Algorithm</p></td>
+<td><p>Random Number</p></td>
+<td><p>Random Number Generator, pool for threads</p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p>Random_XorShift64_Pool</p></td>
-<td class="text-left"><p>Algorithm</p></td>
-<td class="text-left"><p>Random Number</p></td>
-<td class="text-left"><p>Random Number Generator, pool for threads</p></td>
+<tr class="row-even"><td><p>Random_XorShift64</p></td>
+<td><p>Algorithm</p></td>
+<td><p>Random Number</p></td>
+<td><p>Random Number Generator for 12 types, plus normal distribution</p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p>Random_XorShift64</p></td>
-<td class="text-left"><p>Algorithm</p></td>
-<td class="text-left"><p>Random Number</p></td>
-<td class="text-left"><p>Random Number Generator for 12 types, plus normal distribution</p></td>
+<tr class="row-odd"><td><p>init</p></td>
+<td><p>Algorithm</p></td>
+<td><p>Random Number</p></td>
+<td><p>Initialize state using seed for Random_XorShift64_Pool</p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p>init</p></td>
-<td class="text-left"><p>Algorithm</p></td>
-<td class="text-left"><p>Random Number</p></td>
-<td class="text-left"><p>initialize state using seed for Random_XorShift64_Pool</p></td>
+<tr class="row-even"><td><p>Random_XorShift1024_Pool</p></td>
+<td><p>Algorithm</p></td>
+<td><p>Random Number</p></td>
+<td><p>Random Number Generator, 1024 bit, pool for threads</p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p>Random_XorShift1024_Pool</p></td>
-<td class="text-left"><p>Algorithm</p></td>
-<td class="text-left"><p>Random Number</p></td>
-<td class="text-left"><p>Random Number Generator, 1024 bit, pool for threads</p></td>
+<tr class="row-odd"><td><p>Random_XorShift1024</p></td>
+<td><p>Algorithm</p></td>
+<td><p>Random Number</p></td>
+<td><p>Random Number Generator for 12 types, plus normal distribution</p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p>Random_XorShift1024</p></td>
-<td class="text-left"><p>Algorithm</p></td>
-<td class="text-left"><p>Random Number</p></td>
-<td class="text-left"><p>Random Number Generator for 12 types, plus normal distribution)</p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p>fill_random</p></td>
-<td class="text-left"><p>Algorithm</p></td>
-<td class="text-left"><p>Random Number</p></td>
-<td class="text-left"><p>create sample space to fit a (0 to) range or begin-end space</p></td>
+<tr class="row-even"><td><p>fill_random</p></td>
+<td><p>Algorithm</p></td>
+<td><p>Random Number</p></td>
+<td><p>Create sample space to fit a (0 to) range or begin-end space</p></td>
 </tr>
 </tbody>
 </table>
@@ -562,65 +557,65 @@
 </section>
 <section id="containers">
 <h2>Containers<a class="headerlink" href="#containers" title="Permalink to this heading">#</a></h2>
-<div class="table-wrapper colwidths-auto docutils container">
+<div class="table-wrapper docutils container">
 <table class="docutils align-default">
 <thead>
-<tr class="row-odd"><th class="head text-left"><p>Name</p></th>
-<th class="head text-left"><p>Library</p></th>
-<th class="head text-left"><p>Category</p></th>
-<th class="head text-left"><p>Description</p></th>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Library</p></th>
+<th class="head"><p>Category</p></th>
+<th class="head"><p>Description</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="containers/Bitset.html"><span class="doc std std-doc">Bitset</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="containers-index.html"><span class="doc std std-doc">Containers</span></a></p></td>
-<td class="text-left"><p>View</p></td>
-<td class="text-left"><p>A concurrent Bitset class.</p></td>
+<tr class="row-even"><td><p><a class="reference external" href="containers/Bitset.html">Bitset</a></p></td>
+<td><p><a class="reference external" href="containers-index.html">Containers</a></p></td>
+<td><p>View</p></td>
+<td><p>A concurrent Bitset class.</p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="containers/DualView.html"><span class="doc std std-doc">DualView</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="containers-index.html"><span class="doc std std-doc">Containers</span></a></p></td>
-<td class="text-left"><p>View</p></td>
-<td class="text-left"><p>Host-Device Mirror of View with Host-Device Memory</p></td>
+<tr class="row-odd"><td><p><a class="reference external" href="containers/DualView.html">DualView</a></p></td>
+<td><p><a class="reference external" href="containers-index.html">Containers</a></p></td>
+<td><p>View</p></td>
+<td><p>Host-Device Mirror of View with Host-Device Memory</p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="containers/DynamicView.html"><span class="doc std std-doc">DynamicView</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="containers-index.html"><span class="doc std std-doc">Containers</span></a></p></td>
-<td class="text-left"><p>View</p></td>
-<td class="text-left"><p>A view which can change its size dynamically.</p></td>
+<tr class="row-even"><td><p><a class="reference external" href="containers/DynamicView.html">DynamicView</a></p></td>
+<td><p><a class="reference external" href="containers-index.html">Containers</a></p></td>
+<td><p>View</p></td>
+<td><p>A view which can change its size dynamically.</p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="containers/DynRankView.html"><span class="doc std std-doc">DynRankView</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="containers-index.html"><span class="doc std std-doc">Containers</span></a></p></td>
-<td class="text-left"><p>View</p></td>
-<td class="text-left"><p>A view which can determine its rank at runtime.</p></td>
+<tr class="row-odd"><td><p><a class="reference external" href="containers/DynRankView.html">DynRankView</a></p></td>
+<td><p><a class="reference external" href="containers-index.html">Containers</a></p></td>
+<td><p>View</p></td>
+<td><p>A view which can determine its rank at runtime.</p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p>ErrorReporter</p></td>
-<td class="text-left"><p><a class="reference internal" href="containers-index.html"><span class="doc std std-doc">Containers</span></a></p></td>
-<td class="text-left"><p>View</p></td>
-<td class="text-left"><p>A class supporting error recording in parallel code.</p></td>
+<tr class="row-even"><td><p>ErrorReporter</p></td>
+<td><p><a class="reference external" href="containers-index.html">Containers</a></p></td>
+<td><p>View</p></td>
+<td><p>A class supporting error recording in parallel code.</p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="containers/Offset-View.html"><span class="doc std std-doc">OffsetView</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="containers-index.html"><span class="doc std std-doc">Containers</span></a></p></td>
-<td class="text-left"><p>View</p></td>
-<td class="text-left"><p>View structure supporting non-zero start indicies.</p></td>
+<tr class="row-odd"><td><p><a class="reference external" href="containers/Offset-View.html">OffsetView</a></p></td>
+<td><p><a class="reference external" href="containers-index.html">Containers</a></p></td>
+<td><p>View</p></td>
+<td><p>View structure supporting non-zero start indicies.</p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="containers/ScatterView.html"><span class="doc std std-doc">ScatterView</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="containers-index.html"><span class="doc std std-doc">Containers</span></a></p></td>
-<td class="text-left"><p>View</p></td>
-<td class="text-left"><p>View structure to transpartently support atomic and data replication strategies for scatter-reduce algorithms.</p></td>
+<tr class="row-even"><td><p><a class="reference external" href="containers/ScatterView.html">ScatterView</a></p></td>
+<td><p><a class="reference external" href="containers-index.html">Containers</a></p></td>
+<td><p>View</p></td>
+<td><p>View structure to transpartently support atomic and data replication strategies for scatter-reduce algorithms.</p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="containers/StaticCrsGraph.html"><span class="doc std std-doc">StaticCrsGraph</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="containers-index.html"><span class="doc std std-doc">Containers</span></a></p></td>
-<td class="text-left"><p>View</p></td>
-<td class="text-left"><p>A non-resizable CRS graph structure with view semantics.</p></td>
+<tr class="row-odd"><td><p><a class="reference external" href="containers/StaticCrsGraph.html">StaticCrsGraph</a></p></td>
+<td><p><a class="reference external" href="containers-index.html">Containers</a></p></td>
+<td><p>View</p></td>
+<td><p>A non-resizable CRS graph structure with view semantics.</p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="containers/Unordered-Map.html"><span class="doc std std-doc">UnorderedMap</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="containers-index.html"><span class="doc std std-doc">Containers</span></a></p></td>
-<td class="text-left"><p>View</p></td>
-<td class="text-left"><p>A map data structure optimized for concurrent inserts.</p></td>
+<tr class="row-even"><td><p><a class="reference external" href="containers/Unordered-Map.html">UnorderedMap</a></p></td>
+<td><p><a class="reference external" href="containers-index.html">Containers</a></p></td>
+<td><p>View</p></td>
+<td><p>A map data structure optimized for concurrent inserts.</p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="containers/vector.html"><span class="doc std std-doc">vector</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="containers-index.html"><span class="doc std std-doc">Containers</span></a></p></td>
-<td class="text-left"><p>View</p></td>
-<td class="text-left"><p>A class providing similar interfaces to <code class="docutils literal notranslate"><span class="pre">std::vector</span></code>.</p></td>
+<tr class="row-odd"><td><p><a class="reference external" href="containers/vector.html">vector</a></p></td>
+<td><p><a class="reference external" href="containers-index.html">Containers</a></p></td>
+<td><p>View</p></td>
+<td><p>A class providing similar interfaces to <code class="docutils literal notranslate"><span class="pre">std::vector</span></code>.</p></td>
 </tr>
 </tbody>
 </table>
@@ -628,445 +623,445 @@
 </section>
 <section id="core">
 <h2>Core<a class="headerlink" href="#core" title="Permalink to this heading">#</a></h2>
-<div class="table-wrapper colwidths-auto docutils container">
+<div class="table-wrapper docutils container">
 <table class="docutils align-default">
 <thead>
-<tr class="row-odd"><th class="head text-left"><p>Name</p></th>
-<th class="head text-left"><p>Library</p></th>
-<th class="head text-left"><p>Category</p></th>
-<th class="head text-left"><p>Description</p></th>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Library</p></th>
+<th class="head"><p>Category</p></th>
+<th class="head"><p>Description</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/utilities/abort.html"><span class="doc std std-doc">abort</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core/Utilities.html"><span class="doc std std-doc">Utilities</span></a></p></td>
-<td class="text-left"><p>Causes abnormal program termination.</p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/utilities/all.html"><span class="doc std std-doc">ALL</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core/Utilities.html"><span class="doc std std-doc">Utilities</span></a></p></td>
-<td class="text-left"><p>Selects all elements in a dimension.</p></td>
-</tr>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/atomics/atomic_exchange.html"><span class="doc std std-doc">atomic_exchange</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core/atomics.html"><span class="doc std std-doc">Atomic-Operations</span></a></p></td>
-<td class="text-left"><p>Atomic operation which exchanges a value and returns the old.</p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/atomics/atomic_compare_exchange.html"><span class="doc std std-doc">atomic_compare_exchange</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core/atomics.html"><span class="doc std std-doc">Atomic-Operations</span></a></p></td>
-<td class="text-left"><p>Atomic operation which exchanges a value only if the old value matches a comparison value and returns the old value.</p></td>
-</tr>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/atomics/atomic_compare_exchange_strong.html"><span class="doc std std-doc">atomic_compare_exchange_strong</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core/atomics.html"><span class="doc std std-doc">Atomic-Operations</span></a></p></td>
-<td class="text-left"><p>Atomic operation which exchanges a value only if the old value matches a comparison value and returns true if the exchange is executed.</p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/atomics/atomic_load.html"><span class="doc std std-doc">atomic_load</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core/atomics.html"><span class="doc std std-doc">Atomic-Operations</span></a></p></td>
-<td class="text-left"><p>Atomic operation which loads a value.</p></td>
-</tr>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/atomics/atomic_op.html"><span class="doc std std-doc">atomic_[op]</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core/atomics.html"><span class="doc std std-doc">Atomic-Operations</span></a></p></td>
-<td class="text-left"><p>Atomic operation which don’t return anything.</p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/atomics/atomic_fetch_op.html"><span class="doc std std-doc">atomic_fetch_[op]</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core/atomics.html"><span class="doc std std-doc">Atomic-Operations</span></a></p></td>
-<td class="text-left"><p>Various atomic operations which return the old value.</p></td>
-</tr>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/atomics/atomic_op_fetch.html"><span class="doc std std-doc">atomic_[op]_fetch</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core/atomics.html"><span class="doc std std-doc">Atomic-Operations</span></a></p></td>
-<td class="text-left"><p>Various atomic operations which return the updated value.</p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/atomics/atomic_store.html"><span class="doc std std-doc">atomic_store</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core/atomics.html"><span class="doc std std-doc">Atomic-Operations</span></a></p></td>
-<td class="text-left"><p>Atomic operation which stores a value.</p></td>
-</tr>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/builtinreducers/BAnd.html"><span class="doc std std-doc">BAnd</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core/atomics.html"><span class="doc std std-doc">Atomic-Operations</span></a></p></td>
-<td class="text-left"><p>Reducer for Binary ‘And’ reduction</p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/builtinreducers/BOr.html"><span class="doc std std-doc">BOr</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core/atomics.html"><span class="doc std std-doc">Atomic-Operations</span></a></p></td>
-<td class="text-left"><p>Reducer for Binary ‘Or’ reduction</p></td>
-</tr>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/utilities/complex.html"><span class="doc std std-doc">complex</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core/STL-Compatibility.html"><span class="doc std std-doc">STL Compatibility</span></a></p></td>
-<td class="text-left"><p>Complex numbers which work on host and device</p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/view/create_mirror.html"><span class="doc std std-doc">(X)create_mirror</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core/View.html"><span class="doc std std-doc">View</span></a></p></td>
-<td class="text-left"><p>Mirror Host data to Device data</p></td>
-</tr>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/view/create_mirror.html"><span class="doc std std-doc">(X)create_mirror_view</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core/View.html"><span class="doc std std-doc">View</span></a></p></td>
-<td class="text-left"><p>Mirror Host data to Device data</p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p><span class="xref myst">Cuda</span></p></td>
-<td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core/Spaces.html"><span class="doc std std-doc">Spaces</span></a></p></td>
-<td class="text-left"><p>The CUDA Execution Space.</p></td>
-</tr>
-<tr class="row-even"><td class="text-left"><p><span class="xref myst">CudaSpace</span></p></td>
-<td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core/Spaces.html"><span class="doc std std-doc">Spaces</span></a></p></td>
-<td class="text-left"><p>The primary CUDA Memory Space.</p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p><span class="xref myst">CudaUVMSpace</span></p></td>
-<td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core/Spaces.html"><span class="doc std std-doc">Spaces</span></a></p></td>
-<td class="text-left"><p>The CUDA Memory Space providing access to unified memory page migratable allocations.</p></td>
-</tr>
-<tr class="row-even"><td class="text-left"><p><span class="xref myst">CudaHostPinnedSpace</span></p></td>
-<td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core/Spaces.html"><span class="doc std std-doc">Spaces</span></a></p></td>
-<td class="text-left"><p>The CUDA Memrory Space providing access to host pinned GPU-accessible host memory.</p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/view/deep_copy.html"><span class="doc std std-doc">deep_copy</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core/View.html"><span class="doc std std-doc">View</span></a></p></td>
-<td class="text-left"><p>Copy Views</p></td>
-</tr>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/policies/ExecutionPolicyConcept.html"><span class="doc std std-doc">ExecutionPolicy Concept</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core/Execution-Policies.html"><span class="doc std std-doc">Execution Policies</span></a></p></td>
-<td class="text-left"><p>Concept for execution policies.</p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p><span class="xref myst">ExecutionSpace concept</span></p></td>
-<td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core/Spaces.html"><span class="doc std std-doc">Spaces</span></a></p></td>
-<td class="text-left"><p>Concept for execution spaces.</p></td>
-</tr>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/parallel-dispatch/fence.html"><span class="doc std std-doc">fence</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
-<td class="text-left"><p></p></td>
-<td class="text-left"><p>Fences execution spaces.</p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/initialize_finalize/finalize.html"><span class="doc std std-doc">finalize</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core/Initialize-and-Finalize.html"><span class="doc std std-doc">Initialization and Finalization</span></a></p></td>
-<td class="text-left"><p>function to finalize Kokkos</p></td>
-</tr>
-<tr class="row-even"><td class="text-left"><p><span class="xref myst">HostSpace</span></p></td>
-<td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core/Spaces.html"><span class="doc std std-doc">Spaces</span></a></p></td>
-<td class="text-left"><p>The primary Host Memory Space.</p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p><span class="xref myst">HPX</span></p></td>
-<td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core/Spaces.html"><span class="doc std std-doc">Spaces</span></a></p></td>
-<td class="text-left"><p>Execution space using the HPX runtime system execution mechanisms.</p></td>
-</tr>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/initialize_finalize/InitArguments.html"><span class="doc std std-doc">InitArguments</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core/Initialize-and-Finalize.html"><span class="doc std std-doc">Initialization and Finalization</span></a></p></td>
-<td class="text-left"><p>struct to programmatically define how to initialize Kokkos (deprecated in version 3.7)</p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/initialize_finalize/InitializationSettings.html"><span class="doc std std-doc">InitializationSettings</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core/Initialize-and-Finalize.html"><span class="doc std std-doc">Initialization and Finalization</span></a></p></td>
-<td class="text-left"><p>class to programmatically define how to initialize Kokkos</p></td>
-</tr>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/initialize_finalize/initialize.html"><span class="doc std std-doc">initialize</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core/Initialize-and-Finalize.html"><span class="doc std std-doc">Initialization and Finalization</span></a></p></td>
-<td class="text-left"><p>function to initialize Kokkos</p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p><span class="xref myst">is_array_layout</span></p></td>
-<td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core/Traits.html"><span class="doc std std-doc">Traits</span></a></p></td>
-<td class="text-left"><p>Trait to detect types that model the Layout concept</p></td>
-</tr>
-<tr class="row-even"><td class="text-left"><p><span class="xref myst">is_execution_policy</span></p></td>
-<td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core/Traits.html"><span class="doc std std-doc">Traits</span></a></p></td>
-<td class="text-left"><p>Trait to detect types that model ExecutionPolicy concept</p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p>is_execution_space</p></td>
-<td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core/Traits.html"><span class="doc std std-doc">Traits</span></a></p></td>
-<td class="text-left"><p>Trait to detect types that model <span class="xref myst">ExecutionSpace concept</span></p></td>
-</tr>
-<tr class="row-even"><td class="text-left"><p><span class="xref myst">is_memory_space</span></p></td>
-<td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core/Traits.html"><span class="doc std std-doc">Traits</span></a></p></td>
-<td class="text-left"><p>Trait to detect types that model <span class="xref myst">MemorySpace concept</span></p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p><span class="xref myst">is_memory_traits</span></p></td>
-<td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core/Traits.html"><span class="doc std std-doc">Traits</span></a></p></td>
-<td class="text-left"><p>Trait to detect specializations of <code class="docutils literal notranslate"><span class="pre">Kokkos::MemoryTraits</span></code></p></td>
-</tr>
-<tr class="row-even"><td class="text-left"><p><span class="xref myst">is_reducer</span></p></td>
-<td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core/Traits.html"><span class="doc std std-doc">Traits</span></a></p></td>
-<td class="text-left"><p>Trait to detect types that model the <a class="reference internal" href="core/builtinreducers/ReducerConcept.html"><span class="doc std std-doc">Reducer concept</span></a></p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p><span class="xref myst">is_space</span></p></td>
-<td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core/Traits.html"><span class="doc std std-doc">Traits</span></a></p></td>
-<td class="text-left"><p>Trait to detect types that model the Space concept</p></td>
-</tr>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/view/layoutLeft.html"><span class="doc std std-doc">LayoutLeft</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core/View.html"><span class="doc std std-doc">Views</span></a></p></td>
-<td class="text-left"><p>Memory Layout matching Fortran</p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/view/layoutRight.html"><span class="doc std std-doc">LayoutRight</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core/View.html"><span class="doc std std-doc">Views</span></a></p></td>
-<td class="text-left"><p>Memory Layout matching C</p></td>
-</tr>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/view/layoutStride.html"><span class="doc std std-doc">LayoutStride</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core/View.html"><span class="doc std std-doc">Views</span></a></p></td>
-<td class="text-left"><p>Memory Layout for arbitrary strides</p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/c_style_memory_management/free.html"><span class="doc std std-doc">kokkos_free</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core/c_style_memory_management.html"><span class="doc std std-doc">Memory Management</span></a></p></td>
-<td class="text-left"><p>Dellocates previously allocated memory</p></td>
-</tr>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/c_style_memory_management/malloc.html"><span class="doc std std-doc">kokkos_malloc</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core/c_style_memory_management.html"><span class="doc std std-doc">Memory Management</span></a></p></td>
-<td class="text-left"><p>Allocates memory</p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/c_style_memory_management/realloc.html"><span class="doc std std-doc">kokkos_realloc</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core/c_style_memory_management.html"><span class="doc std std-doc">Memory Management</span></a></p></td>
-<td class="text-left"><p>Expands previously allocated memory block</p></td>
-</tr>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/builtinreducers/LAnd.html"><span class="doc std std-doc">LAnd</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core/builtin_reducers.html"><span class="doc std std-doc">Built-in Reducers</span></a></p></td>
-<td class="text-left"><p>Reducer for Logical ‘And’ reduction</p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/builtinreducers/LOr.html"><span class="doc std std-doc">LOr</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core/builtin_reducers.html"><span class="doc std std-doc">Built-in Reducers</span></a></p></td>
-<td class="text-left"><p>Reducer for Logical ‘Or’ reduction</p></td>
-</tr>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/builtinreducers/Max.html"><span class="doc std std-doc">Max</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core/builtin_reducers.html"><span class="doc std std-doc">Built-in Reducers</span></a></p></td>
-<td class="text-left"><p>Reducer for Maximum reduction</p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/builtinreducers/MaxLoc.html"><span class="doc std std-doc">MaxLoc</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core/builtin_reducers.html"><span class="doc std std-doc">Built-in Reducers</span></a></p></td>
-<td class="text-left"><p>Reducer for Reduction providing maximum and an associated index</p></td>
-</tr>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/policies/MDRangePolicy.html"><span class="doc std std-doc">(U)MDRangePolicy</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core/Execution-Policies.html"><span class="doc std std-doc">Execution Policies</span></a></p></td>
-<td class="text-left"><p>Policy to iterate over a multidimensional index range.</p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p><span class="xref myst">MemorySpace concept</span></p></td>
-<td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core/Spaces.html"><span class="doc std std-doc">Spaces</span></a></p></td>
-<td class="text-left"><p>Concept for execution spaces.</p></td>
-</tr>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/builtinreducers/Min.html"><span class="doc std std-doc">Min</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core/builtin_reducers.html"><span class="doc std std-doc">Built-in Reducers</span></a></p></td>
-<td class="text-left"><p>Reducer for Minimum reduction</p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/builtinreducers/MinLoc.html"><span class="doc std std-doc">MinLoc</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core/builtin_reducers.html"><span class="doc std std-doc">Built-in Reducers</span></a></p></td>
-<td class="text-left"><p>Reducer for Reduction providing minimum and an associated index</p></td>
-</tr>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/builtinreducers/MinMax.html"><span class="doc std std-doc">MinMax</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core/builtin_reducers.html"><span class="doc std std-doc">Built-in Reducers</span></a></p></td>
-<td class="text-left"><p>Reducer for Reduction providing both minimum and maximum</p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/builtinreducers/MinMaxLoc.html"><span class="doc std std-doc">MinMaxLoc</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core/builtin_reducers.html"><span class="doc std std-doc">Built-in Reducers</span></a></p></td>
-<td class="text-left"><p>Reducer for Reduction providing both minimum and maximum and associated indicies</p></td>
-</tr>
-<tr class="row-even"><td class="text-left"><p><span class="xref myst">OpenMP</span></p></td>
-<td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core/Spaces.html"><span class="doc std std-doc">Spaces</span></a></p></td>
-<td class="text-left"><p>Execution space using non-target OpenMP parallel execution mechanisms.</p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p><span class="xref myst">OpenMPTarget</span></p></td>
-<td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core/Spaces.html"><span class="doc std std-doc">Spaces</span></a></p></td>
-<td class="text-left"><p>Execution space using targetoffload OpenMP parallel execution mechanisms.</p></td>
-</tr>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/stl-compat/pair.html"><span class="doc std std-doc">pair</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core/STL-Compatibility.html"><span class="doc std std-doc">STL Compatibility</span></a></p></td>
-<td class="text-left"><p>Device compatible std::pair analogue</p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/parallel-dispatch/parallel_for.html"><span class="doc std std-doc">parallel_for</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
-<td class="text-left"><p></p></td>
-<td class="text-left"><p>Bulk execute of independent work items.</p></td>
-</tr>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/parallel-dispatch/ParallelForTag.html"><span class="doc std std-doc">ParallelForTag</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
-<td class="text-left"><p></p></td>
-<td class="text-left"><p>Tag passed to team_size functions</p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/parallel-dispatch/parallel_reduce.html"><span class="doc std std-doc">parallel_reduce</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
-<td class="text-left"><p></p></td>
-<td class="text-left"><p>Bulk execute of independent work items, which contribute to a reduction.</p></td>
-</tr>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/parallel-dispatch/ParallelReduceTag.html"><span class="doc std std-doc">ParallelReduceTag</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
-<td class="text-left"><p></p></td>
-<td class="text-left"><p>Tag passed to team_size functions</p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/parallel-dispatch/parallel_scan.html"><span class="doc std std-doc">parallel_scan</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
-<td class="text-left"><p></p></td>
-<td class="text-left"><p>Bulk execute of work items, which a simple pre- or postfix scan dependency.</p></td>
-</tr>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/parallel-dispatch/ParallelScanTag.html"><span class="doc std std-doc">ParallelScanTag</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
-<td class="text-left"><p></p></td>
-<td class="text-left"><p>Tag passed to team_size functions</p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/spaces/partition_space.html"><span class="doc std std-doc">partition_space</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core/Spaces.html"><span class="doc std std-doc">Spaces</span></a></p></td>
-<td class="text-left"><p>Split an existing execution space instance into multiple</p></td>
-</tr>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/policies/NestedPolicies.html#_CPPv47PerTeam14TeamMemberType" title="PerTeam"><span class="xref myst cppkokkos cppkokkos-func">PerTeam</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core/Execution-Policies.html"><span class="doc std std-doc">Execution Policies</span></a></p></td>
-<td class="text-left"><p>Policy used in single construct to indicate once per team execution.</p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/policies/NestedPolicies.html#_CPPv49PerThread14TeamMemberType" title="PerThread"><span class="xref myst cppkokkos cppkokkos-func">PerThread</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core/Execution-Policies.html"><span class="doc std std-doc">Execution Policies</span></a></p></td>
-<td class="text-left"><p>Policy used in single construct to indicate once per thread execution.</p></td>
-</tr>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/builtinreducers/Prod.html"><span class="doc std std-doc">Prod</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core/builtin_reducers.html"><span class="doc std std-doc">Built-in Reducers</span></a></p></td>
-<td class="text-left"><p>Reducer for Multiplicative reduction</p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/policies/RangePolicy.html"><span class="doc std std-doc">RangePolicy</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core/Execution-Policies.html"><span class="doc std std-doc">Execution Policies</span></a></p></td>
-<td class="text-left"><p>Policy to iterate over a 1D index range.</p></td>
-</tr>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/view/realloc.html"><span class="doc std std-doc">realloc</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core/View.html"><span class="doc std std-doc">View</span></a></p></td>
-<td class="text-left"><p>Resize an existing view without maintaining the content</p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/builtinreducers/ReducerConcept.html"><span class="doc std std-doc">ReducerConcept</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core/builtin_reducers.html"><span class="doc std std-doc">Built-in Reducers</span></a></p></td>
-<td class="text-left"><p>Provides the concept for Reducers.</p></td>
-</tr>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/view/resize.html"><span class="doc std std-doc">resize</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core/View.html"><span class="doc std std-doc">View</span></a></p></td>
-<td class="text-left"><p>Resize an existing view while maintaining the content</p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p><span class="xref myst">Serial</span></p></td>
-<td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core/Spaces.html"><span class="doc std std-doc">Spaces</span></a></p></td>
-<td class="text-left"><p>Execution space using serial execution the CPU.</p></td>
-</tr>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/initialize_finalize/ScopeGuard.html"><span class="doc std std-doc">ScopeGuard</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core/Initialize-and-Finalize.html"><span class="doc std std-doc">Initialization and Finalization</span></a></p></td>
-<td class="text-left"><p>class to aggregate initializing and finalizing Kokkos</p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/SpaceAccessibility.html"><span class="doc std std-doc">SpaceAccessibility</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core/Spaces.html"><span class="doc std std-doc">Spaces</span></a></p></td>
-<td class="text-left"><p>Facility to query accessibility rules between execution and memory spaces.</p></td>
-</tr>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/view/Subview_type.html"><span class="doc std std-doc">Subview</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core/View.html"><span class="doc std std-doc">View</span></a></p></td>
-<td class="text-left"><p>Type of multi-dimensional array which is returned by the subview function</p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/view/subview.html"><span class="doc std std-doc">subview</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core/View.html"><span class="doc std std-doc">View</span></a></p></td>
-<td class="text-left"><p>Crating multi-dimensional array which is a slice of a view</p></td>
-</tr>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/builtinreducers/Sum.html"><span class="doc std std-doc">Sum</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core/builtin_reducers.html"><span class="doc std std-doc">Built-in Reducers</span></a></p></td>
-<td class="text-left"><p>Reducer for Sum reduction</p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/policies/TeamHandleConcept.html"><span class="doc std std-doc">TeamHandle concept</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core/Execution-Policies.html"><span class="doc std std-doc">Execution Policies</span></a></p></td>
-<td class="text-left"><p>Provides the concept for the <code class="docutils literal notranslate"><span class="pre">member_type</span></code> of a <a class="reference internal" href="core/policies/TeamPolicy.html"><span class="doc std std-doc">TeamPolicy</span></a>.</p></td>
-</tr>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/policies/TeamPolicy.html"><span class="doc std std-doc">(U)TeamPolicy</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core/Execution-Policies.html"><span class="doc std std-doc">Execution Policies</span></a></p></td>
-<td class="text-left"><p>Policy to iterate over a 1D index range, assigning to each iteration a team of threads.</p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/policies/TeamThreadMDRange.html"><span class="doc std std-doc">TeamThreadMDRange</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core/Execution-Policies.html"><span class="doc std std-doc">Execution Policies</span></a></p></td>
-<td class="text-left"><p>Policy to iterate over a multidimensional index range with the threads of a team.</p></td>
-</tr>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/policies/TeamThreadRange.html"><span class="doc std std-doc">TeamThreadRange</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core/Execution-Policies.html"><span class="doc std std-doc">Execution Policies</span></a></p></td>
-<td class="text-left"><p>Policy to iterate over a 1D index range with the threads of a team.</p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/policies/TeamVectorMDRange.html"><span class="doc std std-doc">TeamVectorMDRange</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core/Execution-Policies.html"><span class="doc std std-doc">Execution Policies</span></a></p></td>
-<td class="text-left"><p>Policy to iterate over a multidimensional index range with the threads and vector lanes of a team.</p></td>
-</tr>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/policies/TeamVectorRange.html"><span class="doc std std-doc">TeamVectorRange</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core/Execution-Policies.html"><span class="doc std std-doc">Execution Policies</span></a></p></td>
-<td class="text-left"><p>Policy to iterate over a 1D index range with the threads and vector lanes of a team.</p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/policies/ThreadVectorMDRange.html"><span class="doc std std-doc">ThreadVectorMDRange</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core/Execution-Policies.html"><span class="doc std std-doc">Execution Policies</span></a></p></td>
-<td class="text-left"><p>Policy to iterate over a multidimensional index range with the vector lanes of a thread.</p></td>
-</tr>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/policies/ThreadVectorRange.html"><span class="doc std std-doc">ThreadVectorRange</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core/Execution-Policies.html"><span class="doc std std-doc">Execution Policies</span></a></p></td>
-<td class="text-left"><p>Policy to iterate over a 1D index range with the vector lanes of a thread.</p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/utilities/timer.html"><span class="doc std std-doc">Timer</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core/Utilities.html"><span class="doc std std-doc">Utilities</span></a></p></td>
-<td class="text-left"><p>A basic timer returning seconds</p></td>
-</tr>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="core/view/view.html"><span class="doc std std-doc">View</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core/View.html"><span class="doc std std-doc">View</span></a></p></td>
-<td class="text-left"><p>A multi-dimensional array</p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="core/view/view_like.html"><span class="doc std std-doc">View-like Type Concept</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core-index.html"><span class="doc std std-doc">Core</span></a></p></td>
-<td class="text-left"><p><a class="reference internal" href="core/View.html"><span class="doc std std-doc">View</span></a></p></td>
-<td class="text-left"><p>A set of class templates that act like a View</p></td>
+<tr class="row-even"><td><p><a class="reference external" href="core/utilities/abort.html">abort</a></p></td>
+<td><p><a class="reference external" href="core-index.html">Core</a></p></td>
+<td><p><a class="reference external" href="core/Utilities.html">Utilities</a></p></td>
+<td><p>Causes abnormal program termination.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="core/utilities/all.html">ALL</a></p></td>
+<td><p><a class="reference external" href="core-index.html">Core</a></p></td>
+<td><p><a class="reference external" href="core/Utilities.html">Utilities</a></p></td>
+<td><p>Selects all elements in a dimension.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="core/atomics/atomic_exchange.html">atomic_exchange</a></p></td>
+<td><p><a class="reference external" href="core-index.html">Core</a></p></td>
+<td><p><a class="reference external" href="core/atomics.html">Atomic-Operations</a></p></td>
+<td><p>Atomic operation which exchanges a value and returns the old.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="core/atomics/atomic_compare_exchange.html">atomic_compare_exchange</a></p></td>
+<td><p><a class="reference external" href="core-index.html">Core</a></p></td>
+<td><p><a class="reference external" href="core/atomics.html">Atomic-Operations</a></p></td>
+<td><p>Atomic operation which exchanges a value only if the old value matches a comparison value and returns the old value.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="core/atomics/atomic_compare_exchange_strong.html">atomic_compare_exchange_strong</a></p></td>
+<td><p><a class="reference external" href="core-index.html">Core</a></p></td>
+<td><p><a class="reference external" href="core/atomics.html">Atomic-Operations</a></p></td>
+<td><p>Atomic operation which exchanges a value only if the old value matches a comparison value and returns true if the exchange is executed.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="core/atomics/atomic_load.html">atomic_load</a></p></td>
+<td><p><a class="reference external" href="core-index.html">Core</a></p></td>
+<td><p><a class="reference external" href="core/atomics.html">Atomic-Operations</a></p></td>
+<td><p>Atomic operation which loads a value.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="core/atomics/atomic_op.html">atomic_[op]</a></p></td>
+<td><p><a class="reference external" href="core-index.html">Core</a></p></td>
+<td><p><a class="reference external" href="core/atomics.html">Atomic-Operations</a></p></td>
+<td><p>Atomic operation which don’t return anything.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="core/atomics/atomic_fetch_op.html">atomic_fetch_[op]</a></p></td>
+<td><p><a class="reference external" href="core-index.html">Core</a></p></td>
+<td><p><a class="reference external" href="core/atomics.html">Atomic-Operations</a></p></td>
+<td><p>Various atomic operations which return the old value.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="core/atomics/atomic_op_fetch.html">atomic_[op]_fetch</a></p></td>
+<td><p><a class="reference external" href="core-index.html">Core</a></p></td>
+<td><p><a class="reference external" href="core/atomics.html">Atomic-Operations</a></p></td>
+<td><p>Various atomic operations which return the updated value.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="core/atomics/atomic_store.html">atomic_store</a></p></td>
+<td><p><a class="reference external" href="core-index.html">Core</a></p></td>
+<td><p><a class="reference external" href="core/atomics.html">Atomic-Operations</a></p></td>
+<td><p>Atomic operation which stores a value.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="core/builtinreducers/BAnd.html">BAnd</a></p></td>
+<td><p><a class="reference external" href="core-index.html">Core</a></p></td>
+<td><p><a class="reference external" href="core/atomics.html">Atomic-Operations</a></p></td>
+<td><p>Reducer for Binary ‘And’ reduction</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="core/builtinreducers/BOr.html">BOr</a></p></td>
+<td><p><a class="reference external" href="core-index.html">Core</a></p></td>
+<td><p><a class="reference external" href="core/atomics.html">Atomic-Operations</a></p></td>
+<td><p>Reducer for Binary ‘Or’ reduction</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="core/utilities/complex.html">complex</a></p></td>
+<td><p><a class="reference external" href="core-index.html">Core</a></p></td>
+<td><p><a class="reference external" href="core/STL-Compatibility.html">STL Compatibility</a></p></td>
+<td><p>Complex numbers which work on host and device</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="core/view/create_mirror.html">(X)create_mirror</a></p></td>
+<td><p><a class="reference external" href="core-index.html">Core</a></p></td>
+<td><p><a class="reference external" href="core/View.html">View and related</a></p></td>
+<td><p>Mirror Host data to Device data</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="core/view/create_mirror.html">(X)create_mirror_view</a></p></td>
+<td><p><a class="reference external" href="core-index.html">Core</a></p></td>
+<td><p><a class="reference external" href="core/View.html">View and related</a></p></td>
+<td><p>Mirror Host data to Device data</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="core/execution_spaces.html#kokkos-cuda">Cuda</a></p></td>
+<td><p><a class="reference external" href="core-index.html">Core</a></p></td>
+<td><p><a class="reference external" href="core/Spaces.html">Spaces</a></p></td>
+<td><p>The CUDA Execution Space.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="core/memory_spaces.html#kokkos-cudaspace">CudaSpace</a></p></td>
+<td><p><a class="reference external" href="core-index.html">Core</a></p></td>
+<td><p><a class="reference external" href="core/Spaces.html">Spaces</a></p></td>
+<td><p>The primary CUDA Memory Space.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="core/memory_spaces.html#kokkos-cudauvmspace">CudaUVMSpace</a></p></td>
+<td><p><a class="reference external" href="core-index.html">Core</a></p></td>
+<td><p><a class="reference external" href="core/Spaces.html">Spaces</a></p></td>
+<td><p>The CUDA Memory Space providing access to unified memory page migratable allocations.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="core/memory_spaces.html#kokkos-cudahostpinnedspace">CudaHostPinnedSpace</a></p></td>
+<td><p><a class="reference external" href="core-index.html">Core</a></p></td>
+<td><p><a class="reference external" href="core/Spaces.html">Spaces</a></p></td>
+<td><p>The CUDA Memrory Space providing access to host pinned GPU-accessible host memory.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="core/view/deep_copy.html">deep_copy</a></p></td>
+<td><p><a class="reference external" href="core-index.html">Core</a></p></td>
+<td><p><a class="reference external" href="core/View.html">View and related</a></p></td>
+<td><p>Copy Views</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="core/policies/ExecutionPolicyConcept.html">ExecutionPolicy Concept</a></p></td>
+<td><p><a class="reference external" href="core-index.html">Core</a></p></td>
+<td><p><a class="reference external" href="core/Execution-Policies.html">Execution Policies</a></p></td>
+<td><p>Concept for execution policies.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="core/execution_spaces.html#kokkos-executionspaceconcept">ExecutionSpace concept</a></p></td>
+<td><p><a class="reference external" href="core-index.html">Core</a></p></td>
+<td><p><a class="reference external" href="core/Spaces.html">Spaces</a></p></td>
+<td><p>Concept for execution spaces.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="core/parallel-dispatch/fence.html">fence</a></p></td>
+<td><p><a class="reference external" href="core-index.html">Core</a></p></td>
+<td></td>
+<td><p>Fences execution spaces.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="core/initialize_finalize/finalize.html">finalize</a></p></td>
+<td><p><a class="reference external" href="core-index.html">Core</a></p></td>
+<td><p><a class="reference external" href="core/Initialize-and-Finalize.html">Initialization and Finalization</a></p></td>
+<td><p>function to finalize Kokkos</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="core/memory_spaces.html#kokkos-hostspace">HostSpace</a></p></td>
+<td><p><a class="reference external" href="core-index.html">Core</a></p></td>
+<td><p><a class="reference external" href="core/Spaces.html">Spaces</a></p></td>
+<td><p>The primary Host Memory Space.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="core/execution_spaces.html#kokkos-hpx">HPX</a></p></td>
+<td><p><a class="reference external" href="core-index.html">Core</a></p></td>
+<td><p><a class="reference external" href="core/Spaces.html">Spaces</a></p></td>
+<td><p>Execution space using the HPX runtime system execution mechanisms.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="core/initialize_finalize/InitArguments.html">InitArguments</a></p></td>
+<td><p><a class="reference external" href="core-index.html">Core</a></p></td>
+<td><p><a class="reference external" href="core/Initialize-and-Finalize.html">Initialization and Finalization</a></p></td>
+<td><p>struct to programmatically define how to initialize Kokkos (deprecated in version 3.7)</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="core/initialize_finalize/InitializationSettings.html">InitializationSettings</a></p></td>
+<td><p><a class="reference external" href="core-index.html">Core</a></p></td>
+<td><p><a class="reference external" href="core/Initialize-and-Finalize.html">Initialization and Finalization</a></p></td>
+<td><p>class to programmatically define how to initialize Kokkos</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="core/initialize_finalize/initialize.html">initialize</a></p></td>
+<td><p><a class="reference external" href="core-index.html">Core</a></p></td>
+<td><p><a class="reference external" href="core/Initialize-and-Finalize.html">Initialization and Finalization</a></p></td>
+<td><p>function to initialize Kokkos</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="core/Traits.html#is-array-layout">is_array_layout</a></p></td>
+<td><p><a class="reference external" href="core-index.html">Core</a></p></td>
+<td><p><a class="reference external" href="core/Traits.html">Traits</a></p></td>
+<td><p>Trait to detect types that model the Layout concept</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="core/Traits.html#is-execution-policy">is_execution_policy</a></p></td>
+<td><p><a class="reference external" href="core-index.html">Core</a></p></td>
+<td><p><a class="reference external" href="core/Traits.html">Traits</a></p></td>
+<td><p>Trait to detect types that model ExecutionPolicy concept</p></td>
+</tr>
+<tr class="row-odd"><td><p>is_execution_space</p></td>
+<td><p><a class="reference external" href="core-index.html">Core</a></p></td>
+<td><p><a class="reference external" href="core/Traits.html">Traits</a></p></td>
+<td><p>Trait to detect types that model <a class="reference external" href="core/execution_spaces.html#kokkos-executionspaceconcept">ExecutionSpace concept</a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="core/Traits.html#is-memory-space">is_memory_space</a></p></td>
+<td><p><a class="reference external" href="core-index.html">Core</a></p></td>
+<td><p><a class="reference external" href="core/Traits.html">Traits</a></p></td>
+<td><p>Trait to detect types that model <a class="reference external" href="core/memory_spaces.html#kokkos-memoryspaceconcept">MemorySpace concept</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="core/Traits.html#is-memory-traits">is_memory_traits</a></p></td>
+<td><p><a class="reference external" href="core-index.html">Core</a></p></td>
+<td><p><a class="reference external" href="core/Traits.html">Traits</a></p></td>
+<td><p>Trait to detect specializations of <cite>Kokkos::MemoryTraits</cite></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="core/Traits.html#is-reducer">is_reducer</a></p></td>
+<td><p><a class="reference external" href="core-index.html">Core</a></p></td>
+<td><p><a class="reference external" href="core/Traits.html">Traits</a></p></td>
+<td><p>Trait to detect types that model the <a class="reference external" href="core/builtinreducers/ReducerConcept.html">Reducer concept</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="core/Traits.html#is-space">is_space</a></p></td>
+<td><p><a class="reference external" href="core-index.html">Core</a></p></td>
+<td><p><a class="reference external" href="core/Traits.html">Traits</a></p></td>
+<td><p>Trait to detect types that model the Space concept</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="core/view/layoutLeft.html">LayoutLeft</a></p></td>
+<td><p><a class="reference external" href="core-index.html">Core</a></p></td>
+<td><p><a class="reference external" href="core/View.html">View and related</a></p></td>
+<td><p>Memory Layout matching Fortran</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="core/view/layoutRight.html">LayoutRight</a></p></td>
+<td><p><a class="reference external" href="core-index.html">Core</a></p></td>
+<td><p><a class="reference external" href="core/View.html">View and related</a></p></td>
+<td><p>Memory Layout matching C</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="core/view/layoutStride.html">LayoutStride</a></p></td>
+<td><p><a class="reference external" href="core-index.html">Core</a></p></td>
+<td><p><a class="reference external" href="core/View.html">View and related</a></p></td>
+<td><p>Memory Layout for arbitrary strides</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="core/c_style_memory_management/free.html">kokkos_free</a></p></td>
+<td><p><a class="reference external" href="core-index.html">Core</a></p></td>
+<td><p><a class="reference external" href="core/c_style_memory_management.html">Memory Management</a></p></td>
+<td><p>Dellocates previously allocated memory</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="core/c_style_memory_management/malloc.html">kokkos_malloc</a></p></td>
+<td><p><a class="reference external" href="core-index.html">Core</a></p></td>
+<td><p><a class="reference external" href="core/c_style_memory_management.html">Memory Management</a></p></td>
+<td><p>Allocates memory</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="core/c_style_memory_management/realloc.html">kokkos_realloc</a></p></td>
+<td><p><a class="reference external" href="core-index.html">Core</a></p></td>
+<td><p><a class="reference external" href="core/c_style_memory_management.html">Memory Management</a></p></td>
+<td><p>Expands previously allocated memory block</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="core/builtinreducers/LAnd.html">LAnd</a></p></td>
+<td><p><a class="reference external" href="core-index.html">Core</a></p></td>
+<td><p><a class="reference external" href="core/builtin_reducers.html">Built-in Reducers</a></p></td>
+<td><p>Reducer for Logical ‘And’ reduction</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="core/builtinreducers/LOr.html">LOr</a></p></td>
+<td><p><a class="reference external" href="core-index.html">Core</a></p></td>
+<td><p><a class="reference external" href="core/builtin_reducers.html">Built-in Reducers</a></p></td>
+<td><p>Reducer for Logical ‘Or’ reduction</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="core/builtinreducers/Max.html">Max</a></p></td>
+<td><p><a class="reference external" href="core-index.html">Core</a></p></td>
+<td><p><a class="reference external" href="core/builtin_reducers.html">Built-in Reducers</a></p></td>
+<td><p>Reducer for Maximum reduction</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="core/builtinreducers/MaxLoc.html">MaxLoc</a></p></td>
+<td><p><a class="reference external" href="core-index.html">Core</a></p></td>
+<td><p><a class="reference external" href="core/builtin_reducers.html">Built-in Reducers</a></p></td>
+<td><p>Reducer for Reduction providing maximum and an associated index</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="core/policies/MDRangePolicy.html">(U)MDRangePolicy</a></p></td>
+<td><p><a class="reference external" href="core-index.html">Core</a></p></td>
+<td><p><a class="reference external" href="core/Execution-Policies.html">Execution Policies</a></p></td>
+<td><p>Policy to iterate over a multidimensional index range.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="core/memory_spaces.html#kokkos-memoryspaceconcept">MemorySpace concept</a></p></td>
+<td><p><a class="reference external" href="core-index.html">Core</a></p></td>
+<td><p><a class="reference external" href="core/Spaces.html">Spaces</a></p></td>
+<td><p>Concept for execution spaces.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="core/builtinreducers/Min.html">Min</a></p></td>
+<td><p><a class="reference external" href="core-index.html">Core</a></p></td>
+<td><p><a class="reference external" href="core/builtin_reducers.html">Built-in Reducers</a></p></td>
+<td><p>Reducer for Minimum reduction</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="core/builtinreducers/MinLoc.html">MinLoc</a></p></td>
+<td><p><a class="reference external" href="core-index.html">Core</a></p></td>
+<td><p><a class="reference external" href="core/builtin_reducers.html">Built-in Reducers</a></p></td>
+<td><p>Reducer for Reduction providing minimum and an associated index</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="core/builtinreducers/MinMax.html">MinMax</a></p></td>
+<td><p><a class="reference external" href="core-index.html">Core</a></p></td>
+<td><p><a class="reference external" href="core/builtin_reducers.html">Built-in Reducers</a></p></td>
+<td><p>Reducer for Reduction providing both minimum and maximum</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="core/builtinreducers/MinMaxLoc.html">MinMaxLoc</a></p></td>
+<td><p><a class="reference external" href="core-index.html">Core</a></p></td>
+<td><p><a class="reference external" href="core/builtin_reducers.html">Built-in Reducers</a></p></td>
+<td><p>Reducer for Reduction providing both minimum and maximum and associated indicies</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="core/execution_spaces.html#kokkos-openmp">OpenMP</a></p></td>
+<td><p><a class="reference external" href="core-index.html">Core</a></p></td>
+<td><p><a class="reference external" href="core/Spaces.html">Spaces</a></p></td>
+<td><p>Execution space using non-target OpenMP parallel execution mechanisms.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="core/execution_spaces.html#kokkos-openmptarget">OpenMPTarget</a></p></td>
+<td><p><a class="reference external" href="core-index.html">Core</a></p></td>
+<td><p><a class="reference external" href="core/Spaces.html">Spaces</a></p></td>
+<td><p>Execution space using targetoffload OpenMP parallel execution mechanisms.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="core/stl-compat/pair.html">pair</a></p></td>
+<td><p><a class="reference external" href="core-index.html">Core</a></p></td>
+<td><p><a class="reference external" href="core/STL-Compatibility.html">STL Compatibility</a></p></td>
+<td><p>Device compatible std::pair analogue</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="core/parallel-dispatch/parallel_for.html">parallel_for</a></p></td>
+<td><p><a class="reference external" href="core-index.html">Core</a></p></td>
+<td></td>
+<td><p>Bulk execute of independent work items.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="core/parallel-dispatch/ParallelForTag.html">ParallelForTag</a></p></td>
+<td><p><a class="reference external" href="core-index.html">Core</a></p></td>
+<td></td>
+<td><p>Tag passed to team_size functions</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="core/parallel-dispatch/parallel_reduce.html">parallel_reduce</a></p></td>
+<td><p><a class="reference external" href="core-index.html">Core</a></p></td>
+<td></td>
+<td><p>Bulk execute of independent work items, which contribute to a reduction.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="core/parallel-dispatch/ParallelReduceTag.html">ParallelReduceTag</a></p></td>
+<td><p><a class="reference external" href="core-index.html">Core</a></p></td>
+<td></td>
+<td><p>Tag passed to team_size functions</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="core/parallel-dispatch/parallel_scan.html">parallel_scan</a></p></td>
+<td><p><a class="reference external" href="core-index.html">Core</a></p></td>
+<td></td>
+<td><p>Bulk execute of work items, which a simple pre- or postfix scan dependency.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="core/parallel-dispatch/ParallelScanTag.html">ParallelScanTag</a></p></td>
+<td><p><a class="reference external" href="core-index.html">Core</a></p></td>
+<td></td>
+<td><p>Tag passed to team_size functions</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="core/spaces/partition_space.html">partition_space</a></p></td>
+<td><p><a class="reference external" href="core-index.html">Core</a></p></td>
+<td><p><a class="reference external" href="core/Spaces.html">Spaces</a></p></td>
+<td><p>Split an existing execution space instance into multiple</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="core/policies/NestedPolicies.html#kokkos-perteam">PerTeam</a></p></td>
+<td><p><a class="reference external" href="core-index.html">Core</a></p></td>
+<td><p><a class="reference external" href="core/Execution-Policies.html">Execution Policies</a></p></td>
+<td><p>Policy used in single construct to indicate once per team execution.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="core/policies/NestedPolicies.html#kokkos-perthread">PerThread</a></p></td>
+<td><p><a class="reference external" href="core-index.html">Core</a></p></td>
+<td><p><a class="reference external" href="core/Execution-Policies.html">Execution Policies</a></p></td>
+<td><p>Policy used in single construct to indicate once per thread execution.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="core/builtinreducers/Prod.html">Prod</a></p></td>
+<td><p><a class="reference external" href="core-index.html">Core</a></p></td>
+<td><p><a class="reference external" href="core/builtin_reducers.html">Built-in Reducers</a></p></td>
+<td><p>Reducer for Multiplicative reduction</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="core/policies/RangePolicy.html">RangePolicy</a></p></td>
+<td><p><a class="reference external" href="core-index.html">Core</a></p></td>
+<td><p><a class="reference external" href="core/Execution-Policies.html">Execution Policies</a></p></td>
+<td><p>Policy to iterate over a 1D index range.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="core/view/realloc.html">realloc</a></p></td>
+<td><p><a class="reference external" href="core-index.html">Core</a></p></td>
+<td><p><a class="reference external" href="core/View.html">View and related</a></p></td>
+<td><p>Resize an existing view without maintaining the content</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="core/builtinreducers/ReducerConcept.html">ReducerConcept</a></p></td>
+<td><p><a class="reference external" href="core-index.html">Core</a></p></td>
+<td><p><a class="reference external" href="core/builtin_reducers.html">Built-in Reducers</a></p></td>
+<td><p>Provides the concept for Reducers.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="core/view/resize.html">resize</a></p></td>
+<td><p><a class="reference external" href="core-index.html">Core</a></p></td>
+<td><p><a class="reference external" href="core/View.html">View and related</a></p></td>
+<td><p>Resize an existing view while maintaining the content</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="core/execution_spaces.html#kokkos-serial">Serial</a></p></td>
+<td><p><a class="reference external" href="core-index.html">Core</a></p></td>
+<td><p><a class="reference external" href="core/Spaces.html">Spaces</a></p></td>
+<td><p>Execution space using serial execution the CPU.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="core/initialize_finalize/ScopeGuard.html">ScopeGuard</a></p></td>
+<td><p><a class="reference external" href="core-index.html">Core</a></p></td>
+<td><p><a class="reference external" href="core/Initialize-and-Finalize.html">Initialization and Finalization</a></p></td>
+<td><p>class to aggregate initializing and finalizing Kokkos</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="core/SpaceAccessibility.html">SpaceAccessibility</a></p></td>
+<td><p><a class="reference external" href="core-index.html">Core</a></p></td>
+<td><p><a class="reference external" href="core/Spaces.html">Spaces</a></p></td>
+<td><p>Facility to query accessibility rules between execution and memory spaces.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="core/view/Subview_type.html">Subview</a></p></td>
+<td><p><a class="reference external" href="core-index.html">Core</a></p></td>
+<td><p><a class="reference external" href="core/View.html">View and related</a></p></td>
+<td><p>Type of multi-dimensional array which is returned by the subview function</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="core/view/subview.html">subview</a></p></td>
+<td><p><a class="reference external" href="core-index.html">Core</a></p></td>
+<td><p><a class="reference external" href="core/View.html">View and related</a></p></td>
+<td><p>Crating multi-dimensional array which is a slice of a view</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="core/builtinreducers/Sum.html">Sum</a></p></td>
+<td><p><a class="reference external" href="core-index.html">Core</a></p></td>
+<td><p><a class="reference external" href="core/builtin_reducers.html">Built-in Reducers</a></p></td>
+<td><p>Reducer for Sum reduction</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="core/policies/TeamHandleConcept.html">TeamHandle concept</a></p></td>
+<td><p><a class="reference external" href="core-index.html">Core</a></p></td>
+<td><p><a class="reference external" href="core/Execution-Policies.html">Execution Policies</a></p></td>
+<td><p>Provides the concept for the <cite>member_type</cite> of a <a class="reference external" href="core/policies/TeamPolicy.html">TeamPolicy</a>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="core/policies/TeamPolicy.html">(U)TeamPolicy</a></p></td>
+<td><p><a class="reference external" href="core-index.html">Core</a></p></td>
+<td><p><a class="reference external" href="core/Execution-Policies.html">Execution Policies</a></p></td>
+<td><p>Policy to iterate over a 1D index range, assigning to each iteration a team of threads.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="core/policies/TeamThreadMDRange.html">TeamThreadMDRange</a></p></td>
+<td><p><a class="reference external" href="core-index.html">Core</a></p></td>
+<td><p><a class="reference external" href="core/Execution-Policies.html">Execution Policies</a></p></td>
+<td><p>Policy to iterate over a multidimensional index range with the threads of a team.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="core/policies/TeamThreadRange.html">TeamThreadRange</a></p></td>
+<td><p><a class="reference external" href="core-index.html">Core</a></p></td>
+<td><p><a class="reference external" href="core/Execution-Policies.html">Execution Policies</a></p></td>
+<td><p>Policy to iterate over a 1D index range with the threads of a team.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="core/policies/TeamVectorMDRange.html">TeamVectorMDRange</a></p></td>
+<td><p><a class="reference external" href="core-index.html">Core</a></p></td>
+<td><p><a class="reference external" href="core/Execution-Policies.html">Execution Policies</a></p></td>
+<td><p>Policy to iterate over a multidimensional index range with the threads and vector lanes of a team.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="core/policies/TeamVectorRange.html">TeamVectorRange</a></p></td>
+<td><p><a class="reference external" href="core-index.html">Core</a></p></td>
+<td><p><a class="reference external" href="core/Execution-Policies.html">Execution Policies</a></p></td>
+<td><p>Policy to iterate over a 1D index range with the threads and vector lanes of a team.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="core/policies/ThreadVectorMDRange.html">ThreadVectorMDRange</a></p></td>
+<td><p><a class="reference external" href="core-index.html">Core</a></p></td>
+<td><p><a class="reference external" href="core/Execution-Policies.html">Execution Policies</a></p></td>
+<td><p>Policy to iterate over a multidimensional index range with the vector lanes of a thread.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="core/policies/ThreadVectorRange.html">ThreadVectorRange</a></p></td>
+<td><p><a class="reference external" href="core-index.html">Core</a></p></td>
+<td><p><a class="reference external" href="core/Execution-Policies.html">Execution Policies</a></p></td>
+<td><p>Policy to iterate over a 1D index range with the vector lanes of a thread.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="core/utilities/timer.html">Timer</a></p></td>
+<td><p><a class="reference external" href="core-index.html">Core</a></p></td>
+<td><p><a class="reference external" href="core/Utilities.html">Utilities</a></p></td>
+<td><p>A basic timer returning seconds</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="core/view/view.html">View</a></p></td>
+<td><p><a class="reference external" href="core-index.html">Core</a></p></td>
+<td><p><a class="reference external" href="core/View.html">View and related</a></p></td>
+<td><p>A multi-dimensional array</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="core/view/view_like.html">View-like Type Concept</a></p></td>
+<td><p><a class="reference external" href="core-index.html">Core</a></p></td>
+<td><p><a class="reference external" href="core/View.html">View and related</a></p></td>
+<td><p>A set of class templates that act like a View</p></td>
 </tr>
 </tbody>
 </table>
