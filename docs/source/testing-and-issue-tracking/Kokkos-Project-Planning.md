@@ -4,48 +4,48 @@
 
 There are four requirement categories for the Kokkos Core project:
 
-- provide a stable, well tested API avoiding breakage
+- provide a stable, well-tested API avoiding breakage
 - support all relevant compute platforms, at the time of their fielding
 - provide programming model features enabling performance portability
 - enable an on-ramp to future ISO C++ features
 
-A separate overarching requirement is stability of the Kokkos API.
+A separate overarching requirement is the stability of the Kokkos API.
 
 All related specific actionable tasks are recorded and tracked in GitHub issues and pull requests.
 
 ### Kokkos API Stability
 
-Kokkos robustness and API stability is ensured through test driven development and an
+Robustness and API stability are ensured through test-driven development and an
 explicit deprecation and removal process of existing features.
 
 If an existing capability is determined to be outdated, or not useful anymore the Kokkos
-team will deprecate the feature and thus mark it for removal at the next major release (occuring every three years).
+team will deprecate the feature and thus mark it for removal in the next major release (occurring every three years).
 A Kokkos configure option furthermore allows the de-facto removal of deprecated features, enabling
 customers to test whether they rely on them.
 
-The deprecation-removal-cycle provides a minimum of 6 months warnings to users.
-During the deprecation phase customer feedback allows for a revision of the deprecation decision.
+The deprecation-removal cycle provides warnings for a minimum of 6 months to users.
+During the deprecation phase, customer feedback allows for a revision of the deprecation decision.
 
 #### Activities to support this requirement:
 
 - provide complete testing for existing features, to ensure no accidental breakage
 - evaluate features for continued usefulness and fundamental defects
-- mark features as deprecated, when put on the deprecation/removal path
-- remove deprecated feature only at major release version change
+- tag features as deprecated, when put on the deprecation/removal path
+- remove deprecated features only at major release version change
 
 ### Platform Support
 
 The primary requirement for the Kokkos project is to provide a robust performance-portability solution
 for current and upcoming computing platforms.
-The goal is to enable a seamless transition of codes between systems, and avoid situations where existing
-Kokkos based code cannot leverage a desired compute platform.
+The goal is to enable a seamless transition of codes between systems and avoid situations where existing
+Kokkos-based codes cannot leverage a desired computing platform.
 
 In order to meet this requirement, the Kokkos team has to anticipate new hardware platforms, before these
-are fielded by customers.
+are field-tested by customers.
 The Kokkos project also needs to verify functionality with updated software stacks (compilers, runtime libraries)
 on platforms as soon as they become available to the Kokkos team (ideally before deployment on customer platforms).
 
-Thus the  Kokkos team must engage with hardware vendors in CoDesign efforts both independently and in conjunction
+Thus, the  Kokkos team must engage with hardware vendors in co-design efforts both independently and in conjunction
 with system procurement efforts of funding agencies.
 
 #### Activities to support this requirement:
@@ -60,17 +60,17 @@ with system procurement efforts of funding agencies.
 
 Requirements for the Kokkos project are gathered from both customers, and research efforts conducted by Kokkos team members.
 
-Customer requirements are gathered via the Kokkos Slack channel, GitHub issues, Hackathons and at usergroup meetings.
-Kokkos team member assigned to a feature request will gather details of the use-case and perform an initial evaluation
-of the features general applicability.
-The findings will be reported and discussed at the Kokkos developer meeting, enabling a decisions on whether the feature
+Customer requirements are gathered via the Kokkos Slack channel, GitHub issues, Hackathons, and at user group meetings.
+Kokkos team members assigned to a feature request will gather details of the use case and perform an initial evaluation
+of the feature's general applicability.
+The findings will be reported and discussed at the Kokkos developer meeting, enabling a decision on whether the feature
 will be included in the roadmap.
 Feature discussions will be recorded and tracked in public GitHub issues.
 
-New capability requirements by Kokkos team members are developed in separate research efforts, which prove out functinality,
+New capability requirements by Kokkos team members are developed in separate research efforts, which explore functionality,
 use cases, and general applicability.
-They are then presented to the entire Kokkos team, and discussed for inclusion in the main project.
-These discussions lead to a decision on where a feature should go, wether it is important enough to be included in the primary core package,
+They are then presented to the entire Kokkos team and discussed for inclusion in the main project.
+These discussions lead to a decision on where a feature should go, whether it is important enough to be included in the primary core package,
 or whether it should live as a separate library in its own repository under the Kokkos GitHub organization.
 
 #### Activities to support this requirement:
@@ -83,17 +83,17 @@ or whether it should live as a separate library in its own repository under the 
 ### ISO C++ Compatibility
 
 A third requirement for Kokkos is to provide an on-ramp for future ISO C++ standards, as well as influence where the standard goes.
-This requirement serves the long term sustainability goals of Kokkos by enabling inclusion of Kokkos capabilities into ISO C++ and
+This requirement serves the long-term sustainability goals of Kokkos by enabling the inclusion of Kokkos capabilities into ISO C++ and
 thus share the maintenance burden with the entire C++ implementer community in the long run.
 
 To enable the on-ramp, Kokkos will provide backports of ISO C++ features to prior C++ standards, where appropriate and desired.
-Kokkos will also provide extensions of ISO C++ features which work on GPUs, something which is not available by default.
+Kokkos will also provide extensions of ISO C++ features that work on GPUs, something which is not available by default.
 
 Kokkos features which have proven themselves, and are of interest to a wide audience are evaluated for possible inclusion in the ISO C++ standard.
 The Kokkos team will write proposals for the ISO C++ committee when appropriate.
 
 If a feature is included in the ISO C++ standard, the Kokkos team will make the API variants provided in the future C++ standard
-available on currently Kokkos supported software stacks to the greatest extent possible.
+available on currently Kokkos-supported software stacks to the greatest extent possible.
 
 #### Activities to support this requirement:
 
@@ -110,12 +110,12 @@ not a specific feature list for each release.
 Major releases happen every three years, minor releases are aimed at every 3-4 months, with additional patch releases as necessary.
 
 The primary difference between a major and a minor release is that deprecated features are only removed at major releases, and
-major releases come with a bump in minimal compiler version requirements, and an updated minimum ISO C++ standard version.
-Other than that, there is no difference in planning and execution of major and minor releases.
+major releases come with a bump in minimal compiler version requirements and an updated minimum ISO C++ standard version.
+Other than that, there is no difference in the planning and execution of major and minor releases.
 
-The difference of patch releases to minor and major releases is that patch releases  will generally only contain bugfixes, and not new capabilities.
+In contrast to major and minor releases, patch releases generally only contain bug fixes and no new capabilities.
 
-At the beginning of a release cycle the Kokkos Core leadership will determine high priority thrusts for the release cycle.
+At the beginning of a release cycle, the Kokkos Core leadership will determine high-priority thrusts for the release cycle.
 Furthermore, each team member will make a list of their personal priorities for the release cycle.
 The priorities are discussed and refined at the Kokkos developer meeting and collected in internal documents.
 
@@ -125,11 +125,11 @@ The [Kokkos project plan](https://github.com/orgs/kokkos/projects/1) assigns iss
 
 - *Unassigned:* issues that aren't assigned yet to team members.
 - *Unassigned - Priority:* issues that aren't assigned yet to team members, but are high priority. These should be assigned at the next weekly developer meeting.
-- *To Do:* Issue was assigned to a team member, but is not yet actively worked on.
+- *To Do:* Issue was assigned to a team member but is not yet actively worked on.
 - *To Do - Priority:* Issue was assigned to a team member, but is not yet actively worked on. It is expected to be the next item in the queue of the assigned developer. If this item does not transition to *In Progress* by the next developer meeting, reassignment is considered.
 - *In Progress:* Issue is getting worked on.
-- *In Progress - Priority:* Issue is getting worked on. Code reviews for this issue are considered priority, in order to get this merged as soon as possible.
-- *Done:* Issue is addressed via merged pull request, or was closed because of new information which made it obsolete. For merged pull requests it is ensured that a Changelog entry was generated if appropriate, before removing the item from the project plan.
+- *In Progress - Priority:* Issue is getting worked on. Code reviews for this issue are considered a priority, in order to get this resolved as soon as possible.
+- *Done:* Issue is addressed via merged pull request, or was closed because of new information which made it obsolete. For merged pull requests it is ensured that a changelog entry was generated, if appropriate, before removing the item from the project plan.
 
 
 ## Issue Prioritization
@@ -178,17 +178,17 @@ The release process has six steps:
 - tag a release
 - conduct release briefing for user community
 
-When nearing a desired release date, the release candidate branch will created from the Kokkos develop branch.
+When nearing a desired release date, the release candidate branch will be created from the Kokkos develop branch.
 Before creating the release candidate, possible delay reasons will be discussed at the developer meeting.
 This could include important bug fixes, or an important feature being in the last phase of code review,
 but is generally done under exceptional circumstances.
-Furthermore, major new features may be delayed for merging into the development branch, until after the creation
+Furthermore, merging major new features into the development branch may be delayed until after the creation
 of the release candidate.
-This ensures that major new features have a period of testing in the develop branch, before they are shipped.
+This ensures that major new features have a period of testing in the develop branch before they are shipped.
 
 After creating the release candidate branch integration testing is started.
 This includes internal testing by the Kokkos team with selected customer codes, as well as partnering
-with some primary customers which will try the release candidate in their testing processes.
+with some primary customers who will try the release candidate in their testing processes.
 
 The release candidate creation is also announced on the Slack channel, inviting the general Kokkos
 user community to test it, and provide feedback.

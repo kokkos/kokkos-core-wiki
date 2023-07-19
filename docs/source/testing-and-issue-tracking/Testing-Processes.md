@@ -9,7 +9,7 @@ Kokkos testing falls into three categories:
 ## Pull Request Testing
 
 All changes to Kokkos are introduced via pull requests against the github.com develop branch of Kokkos. 
-Pull requests are tested using GitHub actions workflow, as well as external testing servers.
+Pull requests are tested using GitHub actions workflows, as well as external testing servers.
 
 In order to be merged two conditions must be met:
 
@@ -21,12 +21,12 @@ and are executed via jenkins and travis at various institutions.
 
 New test configurations are proposed to the Kokkos team in its developer meeting.
 Inclusion of new configurations is decided based on test resource availability,
-length of the entire testing pipeline, and primary computing facility software stacks.
+duration of the entire testing pipeline, and primary computing facility software stacks.
 
 Pull request testing also includes verification that the formatting meets 
 the clang-format style specified in the repository. 
 
-Test configurations are defined in the `kokkos/.jenkins`, and `kokkos/.github/workflows/*`  files, these files determine the official
+Test configurations are defined in the `kokkos/.jenkins`, and `kokkos/.github/workflows/*` files and determine the official
 primary software stack support.
 The tested compiler versions are also listed [here](https://kokkos.github.io/kokkos-core-wiki/requirements.html).
 These test configurations (sparsely) cover the cross product of hardware platforms (e.g. NVIDIA. Intel, and AMD),
