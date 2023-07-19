@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="6: View: Multidimensional array" href="View.html" /><link rel="prev" title="4. Compiling" href="Compiling.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Requirements, Issues and Feedback" href="Requirements-Issues-and-Feedback.html" /><link rel="prev" title="Kokkos Planning and Testing" href="../testing-and-issue-tracking.html" />
 
     <meta name="generator" content="sphinx-5.0.1, furo 2022.06.04.1"/>
-        <title>5. Initialization - Kokkos documentation</title>
+        <title>Kokkos Project Planning - Kokkos documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=40978830699223671f4072448e654b5958f38b89" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
@@ -157,27 +157,27 @@
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <ul class="current">
-<li class="toctree-l1 current has-children"><a class="reference internal" href="../programmingguide.html">Programming Guide</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="Introduction.html">1. Introduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Machine-Model.html">2. Machine Model</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ProgrammingModel.html">3: Programming Model</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Compiling.html">4. Compiling</a></li>
-<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">5. Initialization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="View.html">6: View: Multidimensional array</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ParallelDispatch.html">7. Parallel dispatch</a></li>
-<li class="toctree-l2"><a class="reference internal" href="HierarchicalParallelism.html">8. Hierarchical Parallelism</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="Custom-Reductions.html">9. Custom Reductions</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="Custom-Reductions-Built-In-Reducers.html">9.1 Built-In-Reducers</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Custom-Reductions-Built-In-Reducers-with-Custom-Scalar-Types.html">9.2 Built-In Reducers with Custom Scalar Types</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Custom-Reductions-Custom-Reducers.html">9.3 Custom Reducers</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../programmingguide.html">Programming Guide</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ProgrammingGuide/Introduction.html">1. Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ProgrammingGuide/Machine-Model.html">2. Machine Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ProgrammingGuide/ProgrammingModel.html">3: Programming Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ProgrammingGuide/Compiling.html">4. Compiling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ProgrammingGuide/Initialization.html">5. Initialization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ProgrammingGuide/View.html">6: View: Multidimensional array</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ProgrammingGuide/ParallelDispatch.html">7. Parallel dispatch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ProgrammingGuide/HierarchicalParallelism.html">8. Hierarchical Parallelism</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ProgrammingGuide/Custom-Reductions.html">9. Custom Reductions</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ProgrammingGuide/Custom-Reductions-Built-In-Reducers.html">9.1 Built-In-Reducers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ProgrammingGuide/Custom-Reductions-Built-In-Reducers-with-Custom-Scalar-Types.html">9.2 Built-In Reducers with Custom Scalar Types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ProgrammingGuide/Custom-Reductions-Custom-Reducers.html">9.3 Custom Reducers</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="Atomic-Operations.html">10. Atomic Operations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Subviews.html">11: Subviews</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Compatibility.html">12 Backwards &amp; Future Compatibility</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Interoperability.html">13. Interoperability and Legacy Codes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Kokkos-and-Virtual-Functions.html">14. Kokkos and Virtual Functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="SIMD.html">15. SIMD Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ProgrammingGuide/Atomic-Operations.html">10. Atomic Operations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ProgrammingGuide/Subviews.html">11: Subviews</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ProgrammingGuide/Compatibility.html">12 Backwards &amp; Future Compatibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ProgrammingGuide/Interoperability.html">13. Interoperability and Legacy Codes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ProgrammingGuide/Kokkos-and-Virtual-Functions.html">14. Kokkos and Virtual Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ProgrammingGuide/SIMD.html">15. SIMD Types</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../requirements.html">Requirements</a></li>
@@ -433,12 +433,12 @@
 <li class="toctree-l2"><a class="reference internal" href="../usecases/Moving_from_EnableUVM_to_SharedSpace.html">Moving code from requiring <code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_CUDA_UVM</span></code> to using <code class="docutils literal notranslate"><span class="pre">SharedSpace</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../testing-and-issue-tracking.html">Kokkos Planning and Testing</a><input class="toctree-checkbox" id="toctree-checkbox-27" name="toctree-checkbox-27" role="switch" type="checkbox"/><label for="toctree-checkbox-27"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../testing-and-issue-tracking/Kokkos-Project-Planning.html">Kokkos Project Planning</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../testing-and-issue-tracking/Requirements-Issues-and-Feedback.html">Requirements, Issues and Feedback</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../testing-and-issue-tracking/Testing-Process-Details.html">Attachments</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../testing-and-issue-tracking/Testing-Processes.html">Kokkos Testing Processes and Change Process</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../testing-and-issue-tracking/Testing-Workflow-Components.html">Kokkos Testing Workflow Components</a></li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../testing-and-issue-tracking.html">Kokkos Planning and Testing</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-27" name="toctree-checkbox-27" role="switch" type="checkbox"/><label for="toctree-checkbox-27"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Kokkos Project Planning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Requirements-Issues-and-Feedback.html">Requirements, Issues and Feedback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Testing-Process-Details.html">Attachments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Testing-Processes.html">Kokkos Testing Processes and Change Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Testing-Workflow-Components.html">Kokkos Testing Workflow Components</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference external" href="https://github.com/kokkos/kokkos-tutorials">Tutorials</a></li>
@@ -477,7 +477,7 @@
         </a>
         <div class="content-icon-container">
 <div class="edit-this-page">
-  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/ProgrammingGuide/Initialization.md" title="Edit this page">
+  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/testing-and-issue-tracking/Kokkos-Project-Planning.md" title="Edit this page">
     <svg aria-hidden="true" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
       <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4"></path>
@@ -501,131 +501,200 @@
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="initialization">
-<h1>5. Initialization<a class="headerlink" href="#initialization" title="Permalink to this heading">#</a></h1>
-<p>In order to use Kokkos an initialization call is required. That call is responsible for initializing internal objects and acquiring hardware resources such as threads. Typically, this call should be placed right at the start of a program. If you use both MPI and Kokkos, your program should initialize Kokkos right after calling <code class="docutils literal notranslate"><span class="pre">MPI_Init</span></code>. That way, if MPI sets up process binding masks, Kokkos will get that information and use it for best performance. Your program must also <em>finalize</em> Kokkos when done using it in order to free hardware resources.</p>
-<section id="include-headers">
-<h2>5.0 Include Headers<a class="headerlink" href="#include-headers" title="Permalink to this heading">#</a></h2>
-<p>All primary capabilities of Kokkos are provided by the <code class="docutils literal notranslate"><span class="pre">Kokkos_Core.hpp</span></code> header file.
-Some capabilities - specifically data structures in the <code class="docutils literal notranslate"><span class="pre">containers</span></code> subpackage and algorithmic capabilities in the <code class="docutils literal notranslate"><span class="pre">algorithms</span></code> subpackage are included via separate header files.
-For specific capabilities check their API reference:</p>
+          <section class="tex2jax_ignore mathjax_ignore" id="kokkos-project-planning">
+<h1>Kokkos Project Planning<a class="headerlink" href="#kokkos-project-planning" title="Permalink to this heading">#</a></h1>
+<section id="requirements-gathering">
+<h2>Requirements Gathering<a class="headerlink" href="#requirements-gathering" title="Permalink to this heading">#</a></h2>
+<p>There are four requirement categories for the Kokkos Core project:</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="../API/core-index.html"><span class="doc std std-doc">API: Core</span></a></p></li>
-<li><p><a class="reference internal" href="../API/containers-index.html"><span class="doc std std-doc">API: Containers</span></a></p></li>
-<li><p><a class="reference internal" href="../API/algorithms-index.html"><span class="doc std std-doc">API: Algorithms</span></a></p></li>
-<li><p><a class="reference internal" href="../API/alphabetical.html"><span class="doc std std-doc">API in Alphabetical Order</span></a></p></li>
+<li><p>provide a stable, well-tested API avoiding breakage</p></li>
+<li><p>support all relevant compute platforms, at the time of their fielding</p></li>
+<li><p>provide programming model features enabling performance portability</p></li>
+<li><p>enable an on-ramp to future ISO C++ features</p></li>
+</ul>
+<p>A separate overarching requirement is the stability of the Kokkos API.</p>
+<p>All related specific actionable tasks are recorded and tracked in GitHub issues and pull requests.</p>
+<section id="kokkos-api-stability">
+<h3>Kokkos API Stability<a class="headerlink" href="#kokkos-api-stability" title="Permalink to this heading">#</a></h3>
+<p>Robustness and API stability are ensured through test-driven development and an
+explicit deprecation and removal process of existing features.</p>
+<p>If an existing capability is determined to be outdated, or not useful anymore the Kokkos
+team will deprecate the feature and thus mark it for removal in the next major release (occurring every three years).
+A Kokkos configure option furthermore allows the de-facto removal of deprecated features, enabling
+customers to test whether they rely on them.</p>
+<p>The deprecation-removal cycle provides warnings for a minimum of 6 months to users.
+During the deprecation phase, customer feedback allows for a revision of the deprecation decision.</p>
+<section id="activities-to-support-this-requirement">
+<h4>Activities to support this requirement:<a class="headerlink" href="#activities-to-support-this-requirement" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p>provide complete testing for existing features, to ensure no accidental breakage</p></li>
+<li><p>evaluate features for continued usefulness and fundamental defects</p></li>
+<li><p>tag features as deprecated, when put on the deprecation/removal path</p></li>
+<li><p>remove deprecated features only at major release version change</p></li>
 </ul>
 </section>
-<section id="initialization-by-command-line-arguments">
-<h2>5.1 Initialization by command-line arguments<a class="headerlink" href="#initialization-by-command-line-arguments" title="Permalink to this heading">#</a></h2>
-<p>The simplest way to initialize Kokkos is by calling the following function:</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">Kokkos</span><span class="o">::</span><span class="n">initialize</span><span class="p">(</span><span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">argv</span><span class="p">[]);</span>
-</pre></div>
-</div>
-<p>Just like <code class="docutils literal notranslate"><span class="pre">MPI_Init</span></code>, this function interprets command-line arguments to determine the requested settings. Also like <code class="docutils literal notranslate"><span class="pre">MPI_Init</span></code>, it reserves the right to remove command-line arguments from the input list. This is why it takes <code class="docutils literal notranslate"><span class="pre">argc</span></code> by reference, rather than by value; it may change the value on output.</p>
-<p>During initialization one or more execution spaces will be initialized and assigned to one of the following aliases.</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">Kokkos</span><span class="o">::</span><span class="n">DefaultExecutionSpace</span><span class="p">;</span>
-</pre></div>
-</div>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">Kokkos</span><span class="o">::</span><span class="n">DefaultHostExecutionSpace</span><span class="p">;</span>
-</pre></div>
-</div>
-<p><code class="docutils literal notranslate"><span class="pre">DefaultExecutionSpace</span></code> is the execution space used with policies and views where one is not explicitly specified.  Primarily, Kokkos will initialize one of the heterogeneous backends (CUDA, OpenMPTarget, HIP, SYCL) as the <code class="docutils literal notranslate"><span class="pre">DefaultExecutionSpace</span></code> if enabled in the build configuration.  In addition, Kokkos requires a <code class="docutils literal notranslate"><span class="pre">DefaultHostExecutionSpace</span></code>.  The <code class="docutils literal notranslate"><span class="pre">DefaultHostExecutionSpace</span></code> is default execution space used when host operations are required.  If one of the parallel host execution spaces are enabled in the build environment then <code class="docutils literal notranslate"><span class="pre">Kokkos::Serial</span></code> is only initialized if it is explicitly enabled in the build configuration.  If a parallel host execution space is not enabled in the build configuration, then <code class="docutils literal notranslate"><span class="pre">Kokkos::Serial</span></code> is initialized as the <code class="docutils literal notranslate"><span class="pre">DefaultHostExecutionSpace</span></code>.
-Kokkos chooses the two spaces using the following list:</p>
-<ol class="arabic simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">Kokkos::Cuda</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Kokkos::Experimental::OpenMPTarget</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Kokkos::Experimental::HIP</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Kokkos::Experimental::SYCL</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Kokkos::OpenMP</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Kokkos::Threads</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Kokkos::Experimental::HPX</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Kokkos::Serial</span></code></p></li>
-</ol>
-<p>The highest execution space in the list which is enabled is Kokkos’ default execution space, and the highest enabled host execution space is Kokkos’ default host execution space. For example, if  <code class="docutils literal notranslate"><span class="pre">Kokkos::Cuda</span></code>, <code class="docutils literal notranslate"><span class="pre">Kokkos::OpenMP</span></code>, and <code class="docutils literal notranslate"><span class="pre">Kokkos::Serial</span></code> are enabled, then <code class="docutils literal notranslate"><span class="pre">Kokkos::Cuda</span></code> is the default execution space and <code class="docutils literal notranslate"><span class="pre">Kokkos::OpenMP</span></code> is the default host execution space.<sup>1</sup>  In cases where the highest enabled backend is a host parallel execution space the <code class="docutils literal notranslate"><span class="pre">DefaultExecutionSpace</span></code> and the <code class="docutils literal notranslate"><span class="pre">DefaultHostExecutionSpace</span></code> will be the same.</p>
-<p>Command-line arguments come in “prefixed” and “non-prefixed” versions. Prefixed versions start with the string <code class="docutils literal notranslate"><span class="pre">--kokkos-</span></code>. <a class="reference internal" href="../API/core/initialize_finalize/initialize.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">Kokkos::initialize</span></code></span></a> will remove prefixed options from the input list, but will preserve non-prefixed options. Argument options are given with an equals (<code class="docutils literal notranslate"><span class="pre">=</span></code>) sign. If the same argument occurs more than once, the last one is used. Furthermore, prefixed versions of the command line arguments take precedence over the non-prefixed ones. For example, the arguments</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>--kokkos-threads=4 --threads=2
-</pre></div>
-</div>
-<p>set the number of threads to 4, while</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>--kokkos-threads=4 --threads=2 --kokkos-threads=3
-</pre></div>
-</div>
-<p>set the number of threads to 3. Table 5.1 gives a full list of command-line options.</p>
-<h4>Table 5.1: Command-line options for Kokkos::initialize</h4>
-<div class="table-wrapper colwidths-auto docutils container">
-<table class="docutils align-default">
-<thead>
-<tr class="row-odd"><th class="head text-left"><p>Argument</p></th>
-<th class="head text-left"><p>Description</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td class="text-left"><p>–kokkos-help  <br/> –help</p></td>
-<td class="text-left"><p>print this message</p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p>–kokkos-threads=INT <br/> –threads=INT</p></td>
-<td class="text-left"><p>specify total number of threads or number of threads per NUMA region if used in conjunction with <code class="docutils literal notranslate"><span class="pre">--numa</span></code> option.</p></td>
-</tr>
-<tr class="row-even"><td class="text-left"><p>–kokkos-numa=INT <br/> –numa=INT</p></td>
-<td class="text-left"><p>specify number of NUMA regions used by process.</p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p>–device-id=INT</p></td>
-<td class="text-left"><p>specify device id to be used by Kokkos.</p></td>
-</tr>
-<tr class="row-even"><td class="text-left"><p>–num-devices=INT[,INT]</p></td>
-<td class="text-left"><p>used when running MPI jobs. Specify the number of devices per node to be used. Process to device mapping happens by obtaining the local MPI rank and assigning devices round-robin. The optional second argument allows for an existing device to be ignored. This is most useful on workstations with multiple GPUs, one of which is used to drive screen output.</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<hr class="docutils" />
-<p><sup>1</sup> This is the preferred set of defaults when CUDA and OpenMP are enabled. If you use a thread-parallel host execution space, we prefer Kokkos’ OpenMP back-end, as this ensures compatibility of Kokkos’ threads with the application’s direct use of OpenMP threads. Kokkos cannot promise that its Threads back-end will not conflict with the application’s direct use of operating system threads.</p>
 </section>
-<section id="initialization-by-struct">
-<h2>5.2 Initialization by struct<a class="headerlink" href="#initialization-by-struct" title="Permalink to this heading">#</a></h2>
-<p>Instead of giving <a class="reference internal" href="../API/core/initialize_finalize/initialize.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">Kokkos::initialize()</span></code></span></a> command-line arguments, one may directly pass in initialization parameters using the following struct:</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span><span class="w"> </span><span class="nc">Kokkos</span><span class="o">::</span><span class="n">InitArguments</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">num_threads</span><span class="p">;</span>
-<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">num_numa</span><span class="p">;</span>
-<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">device_id</span><span class="p">;</span>
-<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">ndevices</span><span class="p">;</span>
-<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">skip_device</span><span class="p">;</span>
-<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="n">disable_warnings</span><span class="p">;</span>
-<span class="p">};</span>
-</pre></div>
-</div>
-<p>The <code class="docutils literal notranslate"><span class="pre">num_threads</span></code> field corresponds to the <code class="docutils literal notranslate"><span class="pre">--kokkos-threads</span></code> command-line argument, <code class="docutils literal notranslate"><span class="pre">num_numa</span></code> to <code class="docutils literal notranslate"><span class="pre">--kokkos-numa</span></code>, <code class="docutils literal notranslate"><span class="pre">device_id</span></code> to <code class="docutils literal notranslate"><span class="pre">--device-id</span></code>, <code class="docutils literal notranslate"><span class="pre">ndevices</span></code> to the first value in <code class="docutils literal notranslate"><span class="pre">--num-devices</span></code> and <code class="docutils literal notranslate"><span class="pre">skip_devices</span></code> to the second value in <code class="docutils literal notranslate"><span class="pre">--num-devices</span></code>. (See Table 5.1 for details.) Not all parameters are observed by all execution spaces, and the struct might expand in the future if needed.</p>
-<p>If you set <code class="docutils literal notranslate"><span class="pre">num_threads</span></code> or <code class="docutils literal notranslate"><span class="pre">num_numa</span></code> to zero or less, Kokkos will try to determine default values if possible or otherwise set them to 1. In particular, Kokkos can use the <code class="docutils literal notranslate"><span class="pre">hwloc</span></code> library to determine default settings using the assumption that the process binding mask is unique, i.e., that this process does not share any cores with another process. Note that the default value of each parameter is -1.</p>
-<p>Here is an example of how to use the struct.</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">Kokkos</span><span class="o">::</span><span class="n">InitArguments</span><span class="w"> </span><span class="n">args</span><span class="p">;</span>
-<span class="c1">// 8 (CPU) threads per NUMA region</span>
-<span class="n">args</span><span class="p">.</span><span class="n">num_threads</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">8</span><span class="p">;</span>
-<span class="c1">// 2 (CPU) NUMA regions per process</span>
-<span class="n">args</span><span class="p">.</span><span class="n">num_numa</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
-<span class="c1">// If Kokkos was built with CUDA enabled, use the GPU with device ID 1.</span>
-<span class="n">args</span><span class="p">.</span><span class="n">device_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
-
-<span class="n">Kokkos</span><span class="o">::</span><span class="n">initialize</span><span class="p">(</span><span class="n">args</span><span class="p">);</span>
-</pre></div>
-</div>
+<section id="platform-support">
+<h3>Platform Support<a class="headerlink" href="#platform-support" title="Permalink to this heading">#</a></h3>
+<p>The primary requirement for the Kokkos project is to provide a robust performance-portability solution
+for current and upcoming computing platforms.
+The goal is to enable a seamless transition of codes between systems and avoid situations where existing
+Kokkos-based codes cannot leverage a desired computing platform.</p>
+<p>In order to meet this requirement, the Kokkos team has to anticipate new hardware platforms, before these
+are field-tested by customers.
+The Kokkos project also needs to verify functionality with updated software stacks (compilers, runtime libraries)
+on platforms as soon as they become available to the Kokkos team (ideally before deployment on customer platforms).</p>
+<p>Thus, the  Kokkos team must engage with hardware vendors in co-design efforts both independently and in conjunction
+with system procurement efforts of funding agencies.</p>
+<section id="id1">
+<h4>Activities to support this requirement:<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p>participate in facility system procurement efforts</p></li>
+<li><p>monitor system software stack releases from vendors (AMD, Intel, NVIDIA, HPE)</p></li>
+<li><p>engage vendors to enable testing of Kokkos with pre-release software development kits</p></li>
+<li><p>procure new test systems where necessary</p></li>
+<li><p>update testing processes to account for new software stacks</p></li>
+</ul>
 </section>
-<section id="finalization">
-<h2>5.3 Finalization<a class="headerlink" href="#finalization" title="Permalink to this heading">#</a></h2>
-<p>At the end of each program, Kokkos needs to be shut down in order to free resources; do this by calling <a class="reference internal" href="../API/core/initialize_finalize/finalize.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">Kokkos::finalize()</span></code></span></a>. You may wish to set this to be called automatically at program exit, either by setting an <code class="docutils literal notranslate"><span class="pre">atexit</span></code> hook or by attaching the function to <code class="docutils literal notranslate"><span class="pre">MPI_COMM_SELF</span></code> so that it is called automatically at <code class="docutils literal notranslate"><span class="pre">MPI_Finalize</span></code>.</p>
 </section>
-<section id="example-code">
-<h2>5.4 Example Code<a class="headerlink" href="#example-code" title="Permalink to this heading">#</a></h2>
-<p>A minimal Kokkos code thus would look like this:</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="cpf">&lt;Kokkos_Core.hpp&gt;</span>
-
-<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">argv</span><span class="p">[])</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">initialize</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span><span class="n">argv</span><span class="p">);</span>
-
-<span class="w">  </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">finalize</span><span class="p">();</span>
-<span class="p">}</span>
-</pre></div>
-</div>
+<section id="programming-model-capabilities">
+<h3>Programming Model Capabilities<a class="headerlink" href="#programming-model-capabilities" title="Permalink to this heading">#</a></h3>
+<p>Requirements for the Kokkos project are gathered from both customers, and research efforts conducted by Kokkos team members.</p>
+<p>Customer requirements are gathered via the Kokkos Slack channel, GitHub issues, Hackathons, and at user group meetings.
+Kokkos team members assigned to a feature request will gather details of the use case and perform an initial evaluation
+of the feature’s general applicability.
+The findings will be reported and discussed at the Kokkos developer meeting, enabling a decision on whether the feature
+will be included in the roadmap.
+Feature discussions will be recorded and tracked in public GitHub issues.</p>
+<p>New capability requirements by Kokkos team members are developed in separate research efforts, which explore functionality,
+use cases, and general applicability.
+They are then presented to the entire Kokkos team and discussed for inclusion in the main project.
+These discussions lead to a decision on where a feature should go, whether it is important enough to be included in the primary core package,
+or whether it should live as a separate library in its own repository under the Kokkos GitHub organization.</p>
+<section id="id2">
+<h4>Activities to support this requirement:<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p>monitor Slack chanel and GitHub issues for new feature requests</p></li>
+<li><p>participate in Hackathons organized by the HPC community</p></li>
+<li><p>organize bi-annual Usergroup meeting</p></li>
+<li><p>discuss proposed features at developer meeting for inclusion into roadmap</p></li>
+</ul>
+</section>
+</section>
+<section id="iso-c-compatibility">
+<h3>ISO C++ Compatibility<a class="headerlink" href="#iso-c-compatibility" title="Permalink to this heading">#</a></h3>
+<p>A third requirement for Kokkos is to provide an on-ramp for future ISO C++ standards, as well as influence where the standard goes.
+This requirement serves the long-term sustainability goals of Kokkos by enabling the inclusion of Kokkos capabilities into ISO C++ and
+thus share the maintenance burden with the entire C++ implementer community in the long run.</p>
+<p>To enable the on-ramp, Kokkos will provide backports of ISO C++ features to prior C++ standards, where appropriate and desired.
+Kokkos will also provide extensions of ISO C++ features that work on GPUs, something which is not available by default.</p>
+<p>Kokkos features which have proven themselves, and are of interest to a wide audience are evaluated for possible inclusion in the ISO C++ standard.
+The Kokkos team will write proposals for the ISO C++ committee when appropriate.</p>
+<p>If a feature is included in the ISO C++ standard, the Kokkos team will make the API variants provided in the future C++ standard
+available on currently Kokkos-supported software stacks to the greatest extent possible.</p>
+<section id="id3">
+<h4>Activities to support this requirement:<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p>participate in ISO C++ committee meetings</p></li>
+<li><p>monitor requests for ISO C++ features to be provided by Kokkos</p></li>
+<li><p>write proposals for ISO C++ for mature Kokkos features with wide applicability</p></li>
+<li><p>backport relevant future ISO C++ features to standards supported by Kokkos</p></li>
+</ul>
+</section>
+</section>
+</section>
+<section id="release-planning">
+<h2>Release Planning<a class="headerlink" href="#release-planning" title="Permalink to this heading">#</a></h2>
+<p>Kokkos releases are based on the “catch the train” model - i.e. the primary goal is to have regular releases,
+not a specific feature list for each release.</p>
+<p>Major releases happen every three years, minor releases are aimed at every 3-4 months, with additional patch releases as necessary.</p>
+<p>The primary difference between a major and a minor release is that deprecated features are only removed at major releases, and
+major releases come with a bump in minimal compiler version requirements and an updated minimum ISO C++ standard version.
+Other than that, there is no difference in the planning and execution of major and minor releases.</p>
+<p>In contrast to major and minor releases, patch releases generally only contain bug fixes and no new capabilities.</p>
+<p>At the beginning of a release cycle, the Kokkos Core leadership will determine high-priority thrusts for the release cycle.
+Furthermore, each team member will make a list of their personal priorities for the release cycle.
+The priorities are discussed and refined at the Kokkos developer meeting and collected in internal documents.</p>
+<p>Issues for each item are assigned to the <a class="reference external" href="https://github.com/orgs/kokkos/projects/1">Kokkos project plan</a> including team member assignments.</p>
+<p>The <a class="reference external" href="https://github.com/orgs/kokkos/projects/1">Kokkos project plan</a> assigns issues to one of 7 categories:</p>
+<ul class="simple">
+<li><p><em>Unassigned:</em> issues that aren’t assigned yet to team members.</p></li>
+<li><p><em>Unassigned - Priority:</em> issues that aren’t assigned yet to team members, but are high priority. These should be assigned at the next weekly developer meeting.</p></li>
+<li><p><em>To Do:</em> Issue was assigned to a team member but is not yet actively worked on.</p></li>
+<li><p><em>To Do - Priority:</em> Issue was assigned to a team member, but is not yet actively worked on. It is expected to be the next item in the queue of the assigned developer. If this item does not transition to <em>In Progress</em> by the next developer meeting, reassignment is considered.</p></li>
+<li><p><em>In Progress:</em> Issue is getting worked on.</p></li>
+<li><p><em>In Progress - Priority:</em> Issue is getting worked on. Code reviews for this issue are considered a priority, in order to get this resolved as soon as possible.</p></li>
+<li><p><em>Done:</em> Issue is addressed via merged pull request, or was closed because of new information which made it obsolete. For merged pull requests it is ensured that a changelog entry was generated, if appropriate, before removing the item from the project plan.</p></li>
+</ul>
+</section>
+<section id="issue-prioritization">
+<h2>Issue Prioritization<a class="headerlink" href="#issue-prioritization" title="Permalink to this heading">#</a></h2>
+<p>Issue prioritization is performed via two avenues:</p>
+<ul class="simple">
+<li><p>Kokkos Leadership meeting</p></li>
+<li><p>General Kokkos developer meeting.</p></li>
+</ul>
+<p>The Leadership meeting happens every week on Mondays.
+It serves multiple purposes:</p>
+<ul class="simple">
+<li><p>determine urgent action items for the week</p></li>
+<li><p>go through new issue list, and triage criticality</p></li>
+<li><p>work through Kokkos planning items</p></li>
+<li><p>perform preliminary team assignments for new action items</p></li>
+<li><p>generate a draft for the developer meeting agenda</p></li>
+</ul>
+<p>Prioritization of items is recorded in the <a class="reference external" href="https://github.com/orgs/kokkos/projects/1">Kokkos project plan</a></p>
+<p>Meeting notes are kept in a private repository: <a class="reference external" href="https://github.com/kokkos/internal-documents">internal repository</a></p>
+<p>Further issue prioritization happens at the developer meeting discussed below.</p>
+</section>
+<section id="developer-coordination">
+<h2>Developer Coordination<a class="headerlink" href="#developer-coordination" title="Permalink to this heading">#</a></h2>
+<p>The team primarily use the #nucleus channel on Slack to communicate.
+Members are added by Christian or Damien once they have joined <a class="reference external" href="https://kokkosteam.slack.com">Slack</a>.
+Developers can have both public and private conversations with each other.
+They can ask questions about parts of the code they are less familiar with or
+ask for feedback on any ongoing issue.
+Conversations on Slack are to be considered as ephemeral.  Messages older than 90 days are deleted (unpaid plan).
+If something needs to be referenceable longer term, then it needs to be discussed on GitHub wherever appropriate.
+Private information may be hosted on the <a class="reference external" href="https://github.com/kokkos/internal-documents">internal repository</a> but do not post NDA data on there.</p>
+<p>Kokkos developer meeting held once a week on Wednesdays 2pm ET / 12 pm MT / 18:00 UTC on Zoom.
+The agenda is posted on the internal repository ahead of time (it can be found under the <a class="reference external" href="https://github.com/kokkos/internal-documents/tree/master/meeting-notes/2023"><code class="docutils literal notranslate"><span class="pre">meeting-notes/</span></code></a> directory).
+Developers are allowed to edit the agenda and add topics or issues that they would like to be discussed at the meeting.</p>
+</section>
+<section id="release-process">
+<h2>Release Process<a class="headerlink" href="#release-process" title="Permalink to this heading">#</a></h2>
+<p>The release process has six steps:</p>
+<ul class="simple">
+<li><p>create release candidate branch</p></li>
+<li><p>perform integration tests with release candidate</p></li>
+<li><p>resolve issues and cherry-pick fixes to release candidate</p></li>
+<li><p>check Changelog</p></li>
+<li><p>tag a release</p></li>
+<li><p>conduct release briefing for user community</p></li>
+</ul>
+<p>When nearing a desired release date, the release candidate branch will be created from the Kokkos develop branch.
+Before creating the release candidate, possible delay reasons will be discussed at the developer meeting.
+This could include important bug fixes, or an important feature being in the last phase of code review,
+but is generally done under exceptional circumstances.
+Furthermore, merging major new features into the development branch may be delayed until after the creation
+of the release candidate.
+This ensures that major new features have a period of testing in the develop branch before they are shipped.</p>
+<p>After creating the release candidate branch integration testing is started.
+This includes internal testing by the Kokkos team with selected customer codes, as well as partnering
+with some primary customers who will try the release candidate in their testing processes.</p>
+<p>The release candidate creation is also announced on the Slack channel, inviting the general Kokkos
+user community to test it, and provide feedback.</p>
+<p>Defect reports (both functionality and performance) are collected as GitHub issues and marked with
+“Blocks Promotion”.
+These items are then assigned to Kokkos team members at highest priority.</p>
+<p>Defect resolutions are merged into the develop branch first, and then cherry picked onto the
+release candidate branch, ensuring that no regression remains unaddressed on the primary development
+branch.</p>
+<p>Upon resolution of all defect reports the release candidate branch is used to create a GitHub release tag,
+after checking and merging the Changelog.</p>
+<p>After the release is created a Release Briefing date is set approximately two to three weeks after the release,
+providing an overview of new capabilities to users.
+The release briefing also serves as an additional point for feedback collection.</p>
 </section>
 </section>
 
@@ -634,23 +703,23 @@ Kokkos chooses the two spaces using the following list:</p>
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="View.html">
+          <a class="next-page" href="Requirements-Issues-and-Feedback.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">6: View: Multidimensional array</div>
+                <div class="title">Requirements, Issues and Feedback</div>
               </div>
               <svg><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="Compiling.html">
+          <a class="prev-page" href="../testing-and-issue-tracking.html">
               <svg><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">4. Compiling</div>
+                <div class="title">Kokkos Planning and Testing</div>
                 
               </div>
             </a>
@@ -686,12 +755,30 @@ Kokkos chooses the two spaces using the following list:</p>
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">5. Initialization</a><ul>
-<li><a class="reference internal" href="#include-headers">5.0 Include Headers</a></li>
-<li><a class="reference internal" href="#initialization-by-command-line-arguments">5.1 Initialization by command-line arguments</a></li>
-<li><a class="reference internal" href="#initialization-by-struct">5.2 Initialization by struct</a></li>
-<li><a class="reference internal" href="#finalization">5.3 Finalization</a></li>
-<li><a class="reference internal" href="#example-code">5.4 Example Code</a></li>
+<li><a class="reference internal" href="#">Kokkos Project Planning</a><ul>
+<li><a class="reference internal" href="#requirements-gathering">Requirements Gathering</a><ul>
+<li><a class="reference internal" href="#kokkos-api-stability">Kokkos API Stability</a><ul>
+<li><a class="reference internal" href="#activities-to-support-this-requirement">Activities to support this requirement:</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#platform-support">Platform Support</a><ul>
+<li><a class="reference internal" href="#id1">Activities to support this requirement:</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#programming-model-capabilities">Programming Model Capabilities</a><ul>
+<li><a class="reference internal" href="#id2">Activities to support this requirement:</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#iso-c-compatibility">ISO C++ Compatibility</a><ul>
+<li><a class="reference internal" href="#id3">Activities to support this requirement:</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#release-planning">Release Planning</a></li>
+<li><a class="reference internal" href="#issue-prioritization">Issue Prioritization</a></li>
+<li><a class="reference internal" href="#developer-coordination">Developer Coordination</a></li>
+<li><a class="reference internal" href="#release-process">Release Process</a></li>
 </ul>
 </li>
 </ul>

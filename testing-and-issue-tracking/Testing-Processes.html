@@ -433,7 +433,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../usecases/Moving_from_EnableUVM_to_SharedSpace.html">Moving code from requiring <code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_CUDA_UVM</span></code> to using <code class="docutils literal notranslate"><span class="pre">SharedSpace</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l1 current has-children"><a class="reference internal" href="../testing-and-issue-tracking.html">Testing and Issue Tracking</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-27" name="toctree-checkbox-27" role="switch" type="checkbox"/><label for="toctree-checkbox-27"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../testing-and-issue-tracking.html">Kokkos Planning and Testing</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-27" name="toctree-checkbox-27" role="switch" type="checkbox"/><label for="toctree-checkbox-27"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Kokkos-Project-Planning.html">Kokkos Project Planning</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Requirements-Issues-and-Feedback.html">Requirements, Issues and Feedback</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Testing-Process-Details.html">Attachments</a></li>
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Kokkos Testing Processes and Change Process</a></li>
@@ -511,32 +512,73 @@
 <section id="pull-request-testing">
 <h2>Pull Request Testing<a class="headerlink" href="#pull-request-testing" title="Permalink to this heading">#</a></h2>
 <p>All changes to Kokkos are introduced via pull requests against the github.com develop branch of Kokkos.
-In order to be merged two conditions must be met:</p>
+Pull requests are tested using GitHub actions workflows, as well as external testing servers.</p>
+<p>In order to be merged two conditions must be met:</p>
 <ol class="arabic simple">
 <li><p>Automatic testing of the pull request must pass.</p></li>
-<li><p>A Kokkos core developer must approve the pull request, after checking the changes for alignment with Kokkos developer standards.</p></li>
+<li><p>Two Kokkos core developer must approve the pull request, after checking the changes for alignment with Kokkos developer standards.</p></li>
 </ol>
 <p>The tested configurations in Pull Request testing cover the major deployment systems
-and are executed via jenkins and travis at various institutions.
-Pull request testing also includes verification that the formatting meets
-the clang-format style specified in the repository.
-Test configurations are defined in the <code class="docutils literal notranslate"><span class="pre">kokkos/.jenkins</span></code> and <code class="docutils literal notranslate"><span class="pre">kokkos/.travis.yml</span></code> files.
-The clang-format style file is <code class="docutils literal notranslate"><span class="pre">kokkos/.clang-format</span></code>.</p>
+and are executed via jenkins and travis at various institutions.</p>
+<p>New test configurations are proposed to the Kokkos team in its developer meeting.
+Inclusion of new configurations is decided based on test resource availability,
+duration of the entire testing pipeline, and primary computing facility software stacks.</p>
+<p>Pull request testing also includes verification that the formatting meets
+the clang-format style specified in the repository.</p>
+<p>Test configurations are defined in the <code class="docutils literal notranslate"><span class="pre">kokkos/.jenkins</span></code>, and <code class="docutils literal notranslate"><span class="pre">kokkos/.github/workflows/*</span></code> files and determine the official
+primary software stack support.
+The tested compiler versions are also listed <a class="reference external" href="https://kokkos.github.io/kokkos-core-wiki/requirements.html">here</a>.
+These test configurations (sparsely) cover the cross product of hardware platforms (e.g. NVIDIA. Intel, and AMD),
+compilers (e.g. GCC, Clang, NVC++), C++ standards (17-23), Kokkos backends (e.g. Cuda, OpenMP, and HIP) and Kokkos
+configuration options (e.g. Debug, Relocatable Device Code).</p>
+<p>The clang-format style file is <code class="docutils literal notranslate"><span class="pre">kokkos/.clang-format</span></code>.</p>
+<p>Only the primary Kokkos maintainers can merge pull requests, they have the responsibility to judge whether conducted reviews meet the desired thoroughness.</p>
 </section>
 <section id="nightly-testing">
 <h2>Nightly Testing<a class="headerlink" href="#nightly-testing" title="Permalink to this heading">#</a></h2>
 <p>Nightly testing covers a wider range of compilers and configuration of Kokkos
-on an extensive list of platforms.
-Test configurations are given in <code class="docutils literal notranslate"><span class="pre">kokkos/scripts/testings/test_all_sandia</span></code>.
-Executing this script on the (in it) specified platforms will meet full testing requirements.
-Nightly tests are set up via Jenkins and execute this script in stages.</p>
+on an extensive list of platforms.</p>
+<p>All participating institutions are invited to perform nightly testing.
+Test configurations are given in <code class="docutils literal notranslate"><span class="pre">kokkos/scripts/testings/</span></code> in institution specific test configuration files.</p>
+<p>Each institution designates a test POC, who will report failures to the entire Kokkos team,
+and file github issues with reproduction steps.</p>
 </section>
 <section id="integration-testing-release-testing">
 <h2>Integration Testing (Release Testing)<a class="headerlink" href="#integration-testing-release-testing" title="Permalink to this heading">#</a></h2>
-<p>In order for a new Kokkos version to be released full integration testing is performed.
-A release is then formed by merging the Kokkos develop branch into its master branch,
-and creating a git tag with the version number.
-Details of the process are described in Testing Process Details.</p>
+<p>In order for a new Kokkos version to be released integration testing is performed.
+Integration testing configurations are determined and maintained by the customer projects.</p>
+<p>This testing has three components:</p>
+<section id="internal-integration-testing">
+<h3>Internal Integration Testing<a class="headerlink" href="#internal-integration-testing" title="Permalink to this heading">#</a></h3>
+<p>Kokkos team members will perform integration testing with a select number of customer codes, they are directly involved with.
+Currently that includes two code bases:</p>
+<ul class="simple">
+<li><p>Trilinos</p></li>
+<li><p>ArborX</p></li>
+</ul>
+<p>Trilinos in particular consists of several million lines of code over multiple packages.
+Both codes are tested on the primary hardware platforms, and possibly multiple software stacks (compilers in particular).
+They are also tested with a limited set of configurations during nightly testing, allowing the Kokkos team to catch issues early.</p>
+</section>
+<section id="preferred-customer-testing">
+<h3>Preferred Customer Testing<a class="headerlink" href="#preferred-customer-testing" title="Permalink to this heading">#</a></h3>
+<p>Customers funded by the same agencies as Kokkos are explicitly asked to test the release candidate before the actual release, and provide feedback.
+This includes currently NNSA and Office of Science DOE users, specifically:</p>
+<ul class="simple">
+<li><p>SNL Empire</p></li>
+<li><p>SNL LAMMPS</p></li>
+<li><p>SNL Sparta</p></li>
+<li><p>SNL Sierra - Aria</p></li>
+<li><p>ORNL Cabana</p></li>
+<li><p>ANL PETSc</p></li>
+</ul>
+</section>
+<section id="general-community-testing">
+<h3>General Community testing<a class="headerlink" href="#general-community-testing" title="Permalink to this heading">#</a></h3>
+<p>The release candidate is publicly available as a GitHub branch, and is advertised on the Kokkos Slack channel.
+Any user of Kokkos is encouraged to test the release candidate and provide feedback.
+The testing phase is at least two weeks.</p>
+</section>
 </section>
 </section>
 
@@ -600,7 +642,12 @@ Details of the process are described in Testing Process Details.</p>
 <li><a class="reference internal" href="#">Kokkos Testing Processes and Change Process</a><ul>
 <li><a class="reference internal" href="#pull-request-testing">Pull Request Testing</a></li>
 <li><a class="reference internal" href="#nightly-testing">Nightly Testing</a></li>
-<li><a class="reference internal" href="#integration-testing-release-testing">Integration Testing (Release Testing)</a></li>
+<li><a class="reference internal" href="#integration-testing-release-testing">Integration Testing (Release Testing)</a><ul>
+<li><a class="reference internal" href="#internal-integration-testing">Internal Integration Testing</a></li>
+<li><a class="reference internal" href="#preferred-customer-testing">Preferred Customer Testing</a></li>
+<li><a class="reference internal" href="#general-community-testing">General Community testing</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
