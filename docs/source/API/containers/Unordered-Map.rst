@@ -66,12 +66,11 @@ Description
    .. cppkokkos:kokkosinlinefunction:: UnorderedMapInsertResult insert(key) const;
 
       Insert the given key into the map with a default constructed value
-      Optionally specify the operator, op, used for combining values if
-      key already exists.
 
    .. cppkokkos:kokkosinlinefunction:: UnorderedMapInsertResult insert(Key key, Value value, Insert op = NoOp) const;
 
-      Insert the given key/value pair into the map
+      Insert the given key/value pair into the map and optionally specify
+      the operator, op, used for combining values if key already exists
 
    .. cppkokkos:kokkosinlinefunction:: uint32_t find(Key key) const
 
@@ -124,18 +123,21 @@ Description
 
    :tparam ValuesIdxType: The index type for lookups in the value array.
 
-   .. rubric:: Public Methods
-
-   The first key inserted stores the associated value (default op).
+   .. rubric:: *Public* Insertion Operator Types
 
    .. cppkokkos:struct:: NoOp
 
-   Duplicate key insertions sum values together.
+   The first key inserted stores the associated value (default op).
 
    .. cppkokkos:struct:: AtomicAdd
 
-Insertion using default UnorderedMapInsertOpTypes::NoOp
--------------------------------------------------------
+   Duplicate key insertions sum values together.
+
+
+.. _unordered_map_insert_op_types_noop:
+
+Insertion using default ``UnorderedMapInsertOpTypes::NoOp``
+-----------------------------------------------------------
 
 There are 3 potential states for every insertion which are reported by the ``UnorderedMapInsertResult``:
 
@@ -161,10 +163,10 @@ There are 3 potential states for every insertion which are reported by the ``Uno
       map.insert(i, values(i));
     });
   
-Insertion using UnorderedMapInsertOpTypes::AtomicAdd
--------------------------------------------------------
+Insertion using ``UnorderedMapInsertOpTypes::AtomicAdd``
+--------------------------------------------------------
 
-The behavior from ``Insertion using the default UnorderedMapInsertOpTypes::NoOp`` hold true with the
+The behavior from :ref:`unordered_map_insert_op_types_noop` holds true with the
 exception that the ``UnorderedMapInsertResult``:
 
 - ``existing`` implies that the key is already in the map and the existing value at key was summed
