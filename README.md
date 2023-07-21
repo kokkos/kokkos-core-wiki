@@ -62,6 +62,9 @@ python3 -m http.server
 ```
 
 ```bash
+# list installed packages
+python3 -m pip list
+
 # leave virtual environment
 deactivate
 ```
