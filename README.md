@@ -61,6 +61,7 @@ cd docs/generated_docs
 python3 -m http.server
 ```
 
+Usefull commands:
 ```bash
 # list installed packages
 python3 -m pip list
