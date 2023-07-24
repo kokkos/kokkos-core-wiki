@@ -36,13 +36,14 @@ Description
 
 ..
   The API of the entity.
+
 Interface
 ---------
 
 ..
   The declaration or signature of the entity.
 
-.. cpp:class:: template <class DataType, class... Traits> View
+.. cppkokkos:class:: template <class DataType, class... Traits> CoolerView
 
   ..
     Template parameters (if applicable)
@@ -67,7 +68,7 @@ Interface
 
   .. rubric:: Static Public Member Variables
 
-  .. cppkokkos:member:: some_var
+  .. cppkokkos:member:: int some_var = 5;
 
     Description of some_var
 
@@ -80,22 +81,23 @@ Interface
 
   .. rubric:: Constructor
 
-  .. cppkokkos:func:: View(View&& rhs)
+  .. cppkokkos:function:: CoolerView(CoolerView&& rhs)
 
     Whether it's a move/copy/default constructor. Describe what it does.
 
   ..
-    Only include the destructor if it does something interesting as part of the API. This usually not the case.
+    Only include the destructor if it does something interesting as part of the API, such as RAII classes that release a resource on their destructor. Classes that merely
+    clean up or destroy their members don't need this member documented.
 
   .. rubric:: Destructor
 
-  .. cppkokkos:func:: ~View()
+  .. cppkokkos:function:: ~CoolerView()
 
     Document what special effect the destructor has.
 
   .. rubric:: Public Member Functions
 
-  .. cppkokkos:func:: template<class U> foo(U x)
+  .. cppkokkos:function:: template<class U> foo(U x)
 
     Brief description of the function.
 
@@ -110,10 +112,9 @@ Non-Member Functions
   These should only be listed here if they are closely related. E.g. friend operators. However,
   something like view_alloc shouldn't be here for view
 
-.. cppkokkos:function:: template<class ViewDst, class ViewSrc> bool operator==(ViewDst, ViewSrc);
+.. cppkokkos:function:: template<cclass ViewSrc> bool operator==(CoolerView, ViewSrc);
 
-    :tparam ViewDst: the first view type
-    :tparam ViewSrc: the second view type
+    :tparam ViewDst: the other
 
     :return: true if :cppkokkos:type:`~View::value_type`, :cppkokkos:type:`~View::array_layout`, :cppkokkos:any:`~View::memory_space`, :cppkokkos:any:`~View::rank`, :cppkokkos:any:`~View::data()` and :cppkokkos:any:`~View::extent` (r), for :code:`0<=r<rank`, match.
 
@@ -124,12 +125,12 @@ Examples
 ..
   It may be useful to also have examples for individual functions above.
 
-  Prefer examples to usage.
+  Prefer working and compilable examples to prose descriptions (such as "Usage").
 
 .. code-block:: cpp
 
-  #include<Kokkos_Core.hpp>
-  #include<cstdio>
+  #include <Kokkos_Core.hpp>
+  #include <cstdio>
 
   int main(int argc, char* argv[]) {
      Kokkos::initialize(argc,argv);
