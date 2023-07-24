@@ -77,7 +77,10 @@ Interface
 
     .. seealso::
 
-      The :func:`frobrnicator` free function.
+      ..
+        We can cross-reference entities
+
+      The :cppkokkos:func:`frobrnicator` free function.
 
   .. rubric:: Constructor
 
@@ -105,6 +108,32 @@ Interface
 
     :param: description of x
 
+    ..
+      Describe any API changes between versions.
+
+    .. versionchanged:: 3.7.1
+
+      Only takes one parameter for foo-style operations instead of two.
+
+  ..
+    Deprecated types need special handling, both for the badge displayed beforehand and the deprecated version directive.
+    Note, there is not currently any functionality for other deprecated entities.
+
+  .. cppkokkos:deprecated-type:: 4.0.1 foobar
+
+    Represents the foobar capability.
+
+    .. deprecated:: 4.0.1
+
+      Use :cppkokkos:type:`foobat` instead.
+
+  .. cppkokkos:type:: foobat
+
+    A better version of foobar.
+
+    .. versionadded:: 4.0.1
+
+
 Non-Member Functions
 ----------------------
 
@@ -112,12 +141,17 @@ Non-Member Functions
   These should only be listed here if they are closely related. E.g. friend operators. However,
   something like view_alloc shouldn't be here for view
 
-.. cppkokkos:function:: template<cclass ViewSrc> bool operator==(CoolerView, ViewSrc);
+.. cppkokkos:function:: template<class ViewSrc> bool operator==(CoolerView, ViewSrc);
 
-    :tparam ViewDst: the other
+  :tparam ViewDst: the other
 
-    :return: true if :cppkokkos:type:`~View::value_type`, :cppkokkos:type:`~View::array_layout`, :cppkokkos:any:`~View::memory_space`, :cppkokkos:any:`~View::rank`, :cppkokkos:any:`~View::data()` and :cppkokkos:any:`~View::extent` (r), for :code:`0<=r<rank`, match.
+  :return: true if :cppkokkos:type:`~View::value_type`, :cppkokkos:type:`~View::array_layout`, :cppkokkos:any:`~View::memory_space`, :cppkokkos:any:`~View::rank`, :cppkokkos:any:`~View::data()` and :cppkokkos:any:`~View::extent` (r), for :code:`0<=r<rank`, match.
 
+.. cppkokkos:function:: void frobrnicator(CoolerView &v) noexcept
+
+  :param: v the :cppkokkos:class:`CoolerView` to frobnicate
+
+  Frobnicates a CoolerView.
 
 Examples
 --------
