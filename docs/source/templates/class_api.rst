@@ -47,7 +47,7 @@ Interface
 
   ..
     Template parameters (if applicable)
-    Omit template parameters that are just used for specialization/is deduced/ and/or should not be exposed to the user.
+    Omit template parameters that are just used for specialization/are deduced/ and/or should not be exposed to the user.
 
   .. rubric:: Template Parameters
 
@@ -96,7 +96,7 @@ Interface
 
   .. cppkokkos:function:: ~CoolerView()
 
-    Document what special effect the destructor has.
+    Performs some special operation when destroyed.
 
   .. rubric:: Public Member Functions
 
@@ -113,11 +113,11 @@ Interface
 
     .. versionchanged:: 3.7.1
 
-      Only takes one parameter for foo-style operations instead of two.
+      What changed between versions: e.g. Only takes one parameter for foo-style operations instead of two.
 
   ..
-    Deprecated types need special handling, both for the badge displayed beforehand and the deprecated version directive.
-    Note, there is not currently any functionality for other deprecated entities.
+    Use the C++ syntax for deprecation (don't use the Kokkos deprecated macro) as Sphinx will recognize it. We may in the future
+    add extra parsing after the html is generated to render this more nicely.
 
   .. cppkokkos:type:: [[deprecated("in version 4.0.1")]] foobar
 
@@ -145,7 +145,7 @@ Non-Member Functions
 
   :tparam ViewDst: the other
 
-  :return: true if :cppkokkos:type:`~View::value_type`, :cppkokkos:type:`~View::array_layout`, :cppkokkos:any:`~View::memory_space`, :cppkokkos:any:`~View::rank`, :cppkokkos:any:`~View::data()` and :cppkokkos:any:`~View::extent` (r), for :code:`0<=r<rank`, match.
+  :return: true if :cppkokkos:type:`View::value_type`, :cppkokkos:type:`View::array_layout`, :cppkokkos:type:`View::memory_space`, :cppkokkos:member:`View::rank`, :cppkokkos:func:`View::data()` and :cppkokkos:expr:`View::extent(r)`, for :cppkokkos:expr:`0<=r<rank`, match.
 
 .. cppkokkos:function:: void frobrnicator(CoolerView &v) noexcept
 
