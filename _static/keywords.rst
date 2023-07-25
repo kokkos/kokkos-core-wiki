@@ -278,11 +278,7 @@ Architecture Keywords
       * ``OFF``
 
     * * ``Kokkos_ARCH_ARMV8_THUNDERX2``
-      * Optimize for the ARMV8_TX2 architecture
-      * ``OFF``
-
-    * * ``Kokkos_ARCH_ARMV8_TX2``
-      * Optimize for ARMV8_TX2 architecture
+      * Optimize for the ARMV8_THUNDERX2 architecture
       * ``OFF``
 
     * * ``Kokkos_ARCH_BDW``
