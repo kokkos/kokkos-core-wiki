@@ -1,7 +1,7 @@
 ..
   Use the following convention for headings:
 
-    # with overline, for parts
+    # with overline, for parts (collections of chapters)
 
     * with overline, for chapters
 
@@ -17,7 +17,7 @@
   Class / method / container name)
   for free functions that are callable, preserve the naming convention, `view_alloc()`
 
-``{{ entity_name }}``
+``CoolerView``
 =====================
 
 .. role:: cppkokkos(code)
@@ -26,7 +26,7 @@
 ..
   The (pulic header) file the user will include in their code
 
-Header File: ``{{ core_header_file }}``
+Header File: ``Kokkos_Core.hpp``
 
 ..
   High-level, human-language summary of what the thing does, and if possible, brief statement about why it exists (2 - 3 sentences, max);
@@ -82,7 +82,7 @@ Interface
 
       The :cppkokkos:func:`frobrnicator` free function.
 
-  .. rubric:: Constructor
+  .. rubric:: Constructors
 
   .. cppkokkos:function:: CoolerView(CoolerView&& rhs)
 
@@ -119,7 +119,7 @@ Interface
     Deprecated types need special handling, both for the badge displayed beforehand and the deprecated version directive.
     Note, there is not currently any functionality for other deprecated entities.
 
-  .. cppkokkos:deprecated-type:: 4.0.1 foobar
+  .. cppkokkos:type:: [[deprecated("in version 4.0.1")]] foobar
 
     Represents the foobar capability.
 
