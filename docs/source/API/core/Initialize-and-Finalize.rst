@@ -51,6 +51,14 @@ Switching to ``Kokkos::ScopeGuard`` fixes it:
     // ScopeGuard destructor called, calls Kokkos::finalize
   }
 
+
+Included directly from Kokkos source:
+
+.. literalinclude::  ../../../../kokkos/example/tutorial/01_hello_world_lambda/hello_world_lambda.cpp
+  :language: cpp
+  :start-after: Kokkos::initialize
+  :end-before: Kokkos::finalize
+
 In the above example, ``my_view`` will not go out of scope until the end of the main() function.  Without ``ScopeGuard``, ``Kokkos::finalize`` will be called before ``my_view`` is out of scope.  With ``ScopeGuard``, ``ScopeGuard`` will be dereferenced (subsequently calling ``Kokkos::finalize``) after ``my_view`` is dereferenced, which ensures the proper order during shutdown.
 
 .. toctree::
