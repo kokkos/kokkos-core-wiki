@@ -154,8 +154,8 @@ Description
 
     .. cppkokkos:function:: DualView(ALLOC_PROP const& arg_prop, const size_t n0 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n1 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n2 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n3 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n4 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n5 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n6 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n7 = KOKKOS_IMPL_CTOR_DEFAULT_ARG);
 
-       Constructor that allocates View objects on both host and device.
-       The first arguments are constructed from ``Kokkos::view_alloc()`` that allows, e.g., to provide a label, avoid initialization, or specifying an execution space instance.
+       Constructor that allocates View objects on both host and device allowing to pass an object created by ``Kokkos::view_alloc`` as first argument,
+       e.g., to provide a label, avoid initialization, or specifying an execution space instance.
        The arguments that follow are the dimensions of the View objects.
        For example, if the View has three dimensions, the first three integer arguments will be nonzero, and you may omit the integer arguments that follow.
 

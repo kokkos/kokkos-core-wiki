@@ -125,7 +125,7 @@ Description
 
 .. cppkokkos:function:: template <class ViewType, class... ViewCtorArgs> auto create_mirror_view(ALLOC_PROP const& arg_prop, ViewType const& src);
 
-   If the |View|_ constructor arguments ``arg_prop`` include a memory space and the memory space
+   If the |View|_ constructor arguments ``arg_prop`` (created by a call to `Kokkos::view_alloc`) include a memory space and the memory space
    doesn't match the memory space of ``src``, creates a new |View|_ in the specified memory_space. If the ``arg_prop`` don't include a memory
    space and the memory space of ``src`` is not host-accessible, creates a new host-accessible |View|_.
    Otherwise, ``src`` is returned. If a new |View|_ is created, the implicitly called constructor respects ``arg_prop``
@@ -153,7 +153,7 @@ Description
 
 .. cppkokkos:function:: template <class ViewType, class... ViewCtorArgs> ImplMirrorType create_mirror_view_and_copy(ALLOC_PROP const& arg_prop, ViewType const& src);
 
-   If the  memory space included in the |View|_ constructor arguments ``arg_prop`` matches the memory
+   If the  memory space included in the |View|_ constructor arguments ``arg_prop`` (created by a call to `Kokkos::view_alloc`) matches the memory
    space of ``src``, creates a new |View|_ in the specified memory space using ``arg_prop`` and the same layout
    and padding as ``src``. Additionally, a ``deep_copy`` from ``src`` to the new view is executed
    (using the execution space contained in ``arg_prop`` if provided). Otherwise returns ``src``.
