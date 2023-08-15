@@ -1,5 +1,6 @@
 # Python Virtual Environment
 /venv
+.venv/
 # PyCharm files
 /.idea
 # Rendered html files
