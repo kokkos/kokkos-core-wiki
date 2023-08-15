@@ -18,7 +18,7 @@
   for free functions that are callable, preserve the naming convention, `view_alloc()`
 
 ``CoolerView``
-=====================
+==============
 
 .. role:: cppkokkos(code)
     :language: cppkokkos
@@ -135,7 +135,7 @@ Interface
 
 
 Non-Member Functions
-----------------------
+--------------------
 
 ..
   These should only be listed here if they are closely related. E.g. friend operators. However,
