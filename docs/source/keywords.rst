@@ -382,8 +382,7 @@ Architecture Keywords
       * ``OFF``
 
     * * ``Kokkos_ARCH_NAVI1030``
-      * Optimize for AMD GPU V620/W6800 GFX1030 :sup:`since Kokkos 4.0`
-      * Prefer ``Kokkos_ARCH_AMD_GFX1030``
+      * Optimize for AMD GPU V620/W6800 GFX1030 :sup:`since Kokkos 4.0` (Prefer ``Kokkos_ARCH_AMD_GFX1030``)
       * ``OFF``
 
     * * ``Kokkos_ARCH_PASCAL60``
@@ -427,18 +426,15 @@ Architecture Keywords
       * ``OFF``
 
     * * ``Kokkos_ARCH_VEGA906``
-      * Optimize for AMD GPU MI50/MI60 GFX906
-      * Prefer ``Kokkos_ARCH_AMD_GFX906``
+      * Optimize for AMD GPU MI50/MI60 GFX906 (Prefer ``Kokkos_ARCH_AMD_GFX906``)
       * ``OFF``
 
     * * ``Kokkos_ARCH_VEGA908``
-      * Optimize for AMD GPU MI100 GFX908
-      * Prefer ``Kokkos_ARCH_AMD_GFX908``
+      * Optimize for AMD GPU MI100 GFX908 (Prefer ``Kokkos_ARCH_AMD_GFX908``)
       * ``OFF``
 
     * * ``Kokkos_ARCH_VEGA90A``
-      * Optimize for AMD GPU MI200 series GFX90A
-      * Prefer ``Kokkos_ARCH_AMD_GFX90A``
+      * Optimize for AMD GPU MI200 series GFX90A (Prefer ``Kokkos_ARCH_AMD_GFX90A``)
       * ``OFF``
 
     * * ``Kokkos_ARCH_VOLTA70``
