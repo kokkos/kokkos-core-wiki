@@ -127,11 +127,11 @@ Description
 
    .. cppkokkos:struct:: NoOp
 
-   The first key inserted stores the associated value (default op).
+        Insert the given key/value pair into the map
 
    .. cppkokkos:struct:: AtomicAdd
 
-   Duplicate key insertions sum values together.
+       Duplicate key insertions sum values together.
 
 
 .. _unordered_map_insert_op_types_noop:
