@@ -584,9 +584,10 @@ in cache friendly ways. The availability of indexes is managed by an internal at
 </dd></dl>
 
 <dl class="cppkokkos kokkosinlinefunction">
-<dt class="sig sig-object cppkokkos" id="_CPPv4NK12UnorderedMap6insertE3Key5Value">
-<span id="_CPPv3NK12UnorderedMap6insertE3Key5Value"></span><span id="_CPPv2NK12UnorderedMap6insertE3Key5Value"></span><span id="UnorderedMap::insert__Key.ValueC"></span><span class="k"><span class="pre">KOKKOS_INLINE_FUNCTION</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv424UnorderedMapInsertResult" title="UnorderedMapInsertResult"><span class="n"><span class="pre">UnorderedMapInsertResult</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">insert</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I000E12UnorderedMap" title="UnorderedMap::Key"><span class="n"><span class="pre">Key</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">key</span></span>, <a class="reference internal" href="#_CPPv4I000E12UnorderedMap" title="UnorderedMap::Value"><span class="n"><span class="pre">Value</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">value</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4NK12UnorderedMap6insertE3Key5Value" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>Insert the given key/value pair into the map</p>
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK12UnorderedMap6insertE3Key5Value6Insert">
+<span id="_CPPv3NK12UnorderedMap6insertE3Key5Value6Insert"></span><span id="_CPPv2NK12UnorderedMap6insertE3Key5Value6Insert"></span><span id="UnorderedMap::insert__Key.Value.InsertC"></span><span class="k"><span class="pre">KOKKOS_INLINE_FUNCTION</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv424UnorderedMapInsertResult" title="UnorderedMapInsertResult"><span class="n"><span class="pre">UnorderedMapInsertResult</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">insert</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I000E12UnorderedMap" title="UnorderedMap::Key"><span class="n"><span class="pre">Key</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">key</span></span>, <a class="reference internal" href="#_CPPv4I000E12UnorderedMap" title="UnorderedMap::Value"><span class="n"><span class="pre">Value</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">value</span></span>, <span class="n"><span class="pre">Insert</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">op</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">NoOp</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4NK12UnorderedMap6insertE3Key5Value6Insert" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Insert the given key/value pair into the map and optionally specify
+the operator, op, used for combining values if key already exists</p>
 </dd></dl>
 
 <dl class="cppkokkos kokkosinlinefunction">
@@ -657,9 +658,35 @@ in cache friendly ways. The availability of indexes is managed by an internal at
 
 </dd></dl>
 
+<dl class="cppkokkos struct">
+<dt class="sig sig-object cppkokkos" id="_CPPv4I00E25UnorderedMapInsertOpTypes">
+<span id="_CPPv3I00E25UnorderedMapInsertOpTypes"></span><span id="_CPPv2I00E25UnorderedMapInsertOpTypes"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ValueTypeView</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ValuesIdxType</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">UnorderedMapInsertOpTypes</span></span></span><a class="headerlink" href="#_CPPv4I00E25UnorderedMapInsertOpTypes" title="Permalink to this definition">#</a><br /></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Template Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ValueTypeView</strong> – The UnorderedMap value array type.</p></li>
+<li><p><strong>ValuesIdxType</strong> – The index type for lookups in the value array.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric"><em>Public</em> Insertion Operator Types</p>
+<dl class="cppkokkos struct">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N25UnorderedMapInsertOpTypes4NoOpE">
+<span id="_CPPv3N25UnorderedMapInsertOpTypes4NoOpE"></span><span id="_CPPv2N25UnorderedMapInsertOpTypes4NoOpE"></span><span id="UnorderedMapInsertOpTypes::NoOp"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">NoOp</span></span></span><a class="headerlink" href="#_CPPv4N25UnorderedMapInsertOpTypes4NoOpE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Insert the given key/value pair into the map</p>
+</dd></dl>
+
+<dl class="cppkokkos struct">
+<dt class="sig sig-object cppkokkos" id="_CPPv4N25UnorderedMapInsertOpTypes9AtomicAddE">
+<span id="_CPPv3N25UnorderedMapInsertOpTypes9AtomicAddE"></span><span id="_CPPv2N25UnorderedMapInsertOpTypes9AtomicAddE"></span><span id="UnorderedMapInsertOpTypes::AtomicAdd"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">AtomicAdd</span></span></span><a class="headerlink" href="#_CPPv4N25UnorderedMapInsertOpTypes9AtomicAddE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Duplicate key insertions sum values together.</p>
+</dd></dl>
+
+</dd></dl>
+
 </section>
-<section id="insertion">
-<h2>Insertion<a class="headerlink" href="#insertion" title="Permalink to this heading">#</a></h2>
+<section id="insertion-using-default-unorderedmapinsertoptypes-noop">
+<span id="unordered-map-insert-op-types-noop"></span><h2>Insertion using default <code class="docutils literal notranslate"><span class="pre">UnorderedMapInsertOpTypes::NoOp</span></code><a class="headerlink" href="#insertion-using-default-unorderedmapinsertoptypes-noop" title="Permalink to this heading">#</a></h2>
 <p>There are 3 potential states for every insertion which are reported by the <code class="docutils literal notranslate"><span class="pre">UnorderedMapInsertResult</span></code>:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">success</span></code>: implies that the current thread has successfully inserted its key/value pair</p></li>
@@ -668,6 +695,37 @@ in cache friendly ways. The availability of indexes is managed by an internal at
 with a bounded search of the internal atomic bitset. A <code class="docutils literal notranslate"><span class="pre">failed</span></code> insertion requires the user to increase
 the capacity (<code class="docutils literal notranslate"><span class="pre">rehash</span></code>) and restart the algoritm.</p></li>
 </ul>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// use the default NoOp insert operation</span>
+<span class="k">using</span><span class="w"> </span><span class="n">map_op_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">UnorderedMapInsertOpTypes</span><span class="o">&lt;</span><span class="n">value_view_type</span><span class="p">,</span><span class="w"> </span><span class="n">size_type</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="k">using</span><span class="w"> </span><span class="n">noop_type</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="nc">map_op_type</span><span class="o">::</span><span class="n">NoOp</span><span class="p">;</span>
+<span class="n">noop_type</span><span class="w"> </span><span class="n">noop</span><span class="p">;</span>
+<span class="n">parallel_for</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">KOKKOS_LAMBDA</span><span class="w"> </span><span class="p">(</span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">map</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">values</span><span class="p">(</span><span class="n">i</span><span class="p">),</span><span class="w"> </span><span class="n">noop</span><span class="p">);</span>
+<span class="p">});</span>
+<span class="c1">// OR;</span>
+<span class="n">parallel_for</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">KOKKOS_LAMBDA</span><span class="w"> </span><span class="p">(</span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">map</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">values</span><span class="p">(</span><span class="n">i</span><span class="p">));</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</section>
+<section id="insertion-using-unorderedmapinsertoptypes-atomicadd">
+<h2>Insertion using <code class="docutils literal notranslate"><span class="pre">UnorderedMapInsertOpTypes::AtomicAdd</span></code><a class="headerlink" href="#insertion-using-unorderedmapinsertoptypes-atomicadd" title="Permalink to this heading">#</a></h2>
+<p>The behavior from <a class="reference internal" href="#unordered-map-insert-op-types-noop"><span class="std std-ref">Insertion using default UnorderedMapInsertOpTypes::NoOp</span></a> holds true with the
+exception that the <code class="docutils literal notranslate"><span class="pre">UnorderedMapInsertResult</span></code>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">existing</span></code> implies that the key is already in the map and the existing value at key was summed
+with the new value being inserted.</p></li>
+</ul>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// use the AtomicAdd insert operation</span>
+<span class="k">using</span><span class="w"> </span><span class="n">map_op_type</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">UnorderedMapInsertOpTypes</span><span class="o">&lt;</span><span class="n">value_view_type</span><span class="p">,</span><span class="w"> </span><span class="n">size_type</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="k">using</span><span class="w"> </span><span class="n">atomic_add_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="nc">map_op_type</span><span class="o">::</span><span class="n">AtomicAdd</span><span class="p">;</span>
+<span class="n">atomic_add_type</span><span class="w"> </span><span class="n">atomic_add</span><span class="p">;</span>
+<span class="n">parallel_for</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">KOKKOS_LAMBDA</span><span class="w"> </span><span class="p">(</span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">map</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">values</span><span class="p">(</span><span class="n">i</span><span class="p">),</span><span class="w"> </span><span class="n">atomic_add</span><span class="p">);</span>
+<span class="p">});</span>
+</pre></div>
+</div>
 </section>
 <section id="iteration">
 <h2>Iteration<a class="headerlink" href="#iteration" title="Permalink to this heading">#</a></h2>
@@ -747,7 +805,8 @@ the capacity (<code class="docutils literal notranslate"><span class="pre">rehas
             <ul>
 <li><a class="reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">UnorderedMap</span></code></a><ul>
 <li><a class="reference internal" href="#description">Description</a></li>
-<li><a class="reference internal" href="#insertion">Insertion</a></li>
+<li><a class="reference internal" href="#insertion-using-default-unorderedmapinsertoptypes-noop">Insertion using default <code class="docutils literal notranslate"><span class="pre">UnorderedMapInsertOpTypes::NoOp</span></code></a></li>
+<li><a class="reference internal" href="#insertion-using-unorderedmapinsertoptypes-atomicadd">Insertion using <code class="docutils literal notranslate"><span class="pre">UnorderedMapInsertOpTypes::AtomicAdd</span></code></a></li>
 <li><a class="reference internal" href="#iteration">Iteration</a><ul>
 <li><a class="reference internal" href="#example">Example</a></li>
 </ul>
