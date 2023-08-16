@@ -7,6 +7,7 @@ Utilities
    ./utilities/abort
    ./utilities/all
    ./utilities/complex
+   ./utilities/printf
    ./utilities/timer
    ./utilities/device_id
    ./utilities/num_threads
