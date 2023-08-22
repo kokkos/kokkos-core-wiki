@@ -2900,6 +2900,10 @@ class ASTType(ASTBase):
                         res.append('CE')
                 elif objectType == 'type':  # just the name
                     res.append(symbol.get_full_nested_name().get_id(version))
+                # @@@@@_
+                elif objectType == 'deprecated-type':  # just the name
+                    res.append(symbol.get_full_nested_name().get_id(version))
+                # @@@@@!
                 else:
                     raise AssertionError(objectType)
             else:  # only type encoding
@@ -2931,6 +2935,10 @@ class ASTType(ASTBase):
                 res.append(self.decl.get_param_id(version))
             elif objectType == 'type':  # just the name
                 res.append(symbol.get_full_nested_name().get_id(version))
+            # @@@@@_
+            elif objectType == 'deprecated-type':  # just the name
+                res.append(symbol.get_full_nested_name().get_id(version))
+            # @@@@@!
             else:
                 raise AssertionError(objectType)
         else:  # only type encoding
@@ -2953,6 +2961,14 @@ class ASTType(ASTBase):
     def get_type_declaration_prefix(self) -> str:
         if self.declSpecs.trailingTypeSpec:
             return 'typedef'
+        # @@@@@_
+        elif self.declSpecs.outer == 'deprecated-type':
+            if self.deprecated_version is None:
+                return '[DEPRECATED]'
+            return f'[DEPRECATED since {self.deprecated_version}]'
+        elif self.declSpecs.outer == 'type':
+            return ''
+        # @@@@@!
         else:
             return 'type'
 
@@ -3889,6 +3905,12 @@ class ASTDeclaration(ASTBase):
             prefix = self.declaration.get_type_declaration_prefix()
             mainDeclNode += addnodes.desc_sig_keyword(prefix, prefix)
             mainDeclNode += addnodes.desc_sig_space()
+        # @@@@@_
+        elif self.objectType == 'deprecated-type':
+            prefix = self.declaration.get_type_declaration_prefix()
+            mainDeclNode += addnodes.desc_sig_keyword(prefix, prefix)
+            mainDeclNode += addnodes.desc_sig_space()
+        # @@@@@!
         elif self.objectType == 'concept':
             mainDeclNode += addnodes.desc_sig_keyword('concept', 'concept')
             mainDeclNode += addnodes.desc_sig_space()
@@ -6513,6 +6535,11 @@ class DefinitionParser(BaseParser):
             paramMode = 'type'
             if outer == 'member':
                 named = True
+            # @@@@@_
+            elif outer == 'deprecated-type':
+                paramMode = 'deprecated-type'
+                outer = None
+            # @@@@@!
             elif outer == 'operatorCast':
                 paramMode = 'operatorCast'
                 outer = None
@@ -6948,6 +6975,26 @@ class DefinitionParser(BaseParser):
                 prevErrors.append((e, "If type alias or template alias"))
                 header = "Error in type declaration."
                 raise self._make_multi_error(prevErrors, header) from e
+        # @@@@@_
+        elif objectType == 'deprecated-type':
+            prevErrors = []
+            pos = self.pos
+            try:
+                if not templatePrefix:
+                    declaration = self._parse_type(named=True, outer='deprecated-type')
+            except DefinitionError as e:
+                prevErrors.append((e, "If typedef-like declaration"))
+                self.pos = pos
+            pos = self.pos
+            try:
+                if not declaration:
+                    declaration = self._parse_type_using()
+            except DefinitionError as e:
+                self.pos = pos
+                prevErrors.append((e, "If type alias or template alias"))
+                header = "Error in type declaration."
+                raise self._make_multi_error(prevErrors, header) from e
+        # @@@@@!
         elif objectType == 'concept':
             declaration = self._parse_concept()
         elif objectType == 'member':
@@ -7257,6 +7304,10 @@ class CPPKokkosObject(ObjectDescription[ASTDeclaration]):
         )
 
         parser = DefinitionParser(sig, location=signode, config=self.env.config)
+        # @@@@@_
+        if self.object_type == 'deprecated-type' and deprecated_version:
+            parser.deprecated_version = self.deprecated_version
+        # @@@@@!
         try:
             ast = self.parse_definition(parser)
             parser.assert_end()
@@ -7333,7 +7384,7 @@ class CPPKokkosObject(ObjectDescription[ASTDeclaration]):
 
     def _object_hierarchy_parts(self, sig_node: desc_signature) -> tuple[str, ...]:
         return tuple(s.identOrOp._stringify(str) for s in
-                     self.env.temp_data['cpp:last_symbol'].get_full_nested_name().names)
+                     self.env.temp_data['cppkokkos:last_symbol'].get_full_nested_name().names)
 
     def _toc_entry_name(self, sig_node: desc_signature) -> str:
         if not sig_node.get('_toc_parts'):
@@ -7833,11 +7884,17 @@ class CPPKokkosDomain(Domain):
     # @@@@@!
     label = 'C++'
     object_types = {
+        # @@@@@_
+        'kokkosinlinefunction':  ObjType(_('kokkosinlinefunction'), 'identifier', 'type'),
+        # @@@@@!
         'class':      ObjType(_('class'),      'class', 'struct',   'identifier', 'type'),
         'union':      ObjType(_('union'),      'union',             'identifier', 'type'),
         'function':   ObjType(_('function'),   'func',              'identifier', 'type'),
         'member':     ObjType(_('member'),     'member', 'var',     'identifier'),
         'type':       ObjType(_('type'),                            'identifier', 'type'),
+        # @@@@@_
+        'deprecated-type':       ObjType(_('deprecated-type'),      'identifier', 'type'),
+        # @@@@@!
         'concept':    ObjType(_('concept'),    'concept',           'identifier'),
         'enum':       ObjType(_('enum'),       'enum',              'identifier', 'type'),
         'enumerator': ObjType(_('enumerator'), 'enumerator',        'identifier'),
@@ -7854,9 +7911,11 @@ class CPPKokkosDomain(Domain):
         'struct': CPPKokkosClassObject,
         'union': CPPKokkosUnionObject,
         'function': CPPKokkosFunctionObject,
+        'kokkosinlinefunction': CPPKokkosInlinefunctionObject,
         'member': CPPKokkosMemberObject,
         'var': CPPKokkosMemberObject,
         'type': CPPKokkosTypeObject,
+        'deprecated-type': CPPKokkosDeprecatedTypeObject,
         'concept': CPPKokkosConceptObject,
         'enum': CPPEnumObject,
         'enum-struct': CPPEnumObject,
