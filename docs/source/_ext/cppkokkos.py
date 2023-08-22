@@ -7181,9 +7181,6 @@ class CPPKokkosInlinefunctionObject(CPPKokkosObject):
 class CPPKokkosDeprecatedTypeObject(CPPKokkosObject):
     object_type = 'deprecated-type'
 
-class CPPKokkosConceptObject(CPPKokkosObject):
-    object_type = 'concept'
-
 class CPPKokkosMemberObject(CPPKokkosObject):
     object_type = 'member'
 # @@@@@!
@@ -7690,7 +7687,6 @@ class CPPKokkosDomain(Domain):
         'var': CPPKokkosMemberObject,
         'type': CPPKokkosTypeObject,
         'deprecated-type': CPPKokkosDeprecatedTypeObject,
-        'concept': CPPKokkosConceptObject,
         'enum': CPPKokkosEnumObject,
         'enum-struct': CPPKokkosEnumObject,
         'enum-class': CPPKokkosEnumObject,
