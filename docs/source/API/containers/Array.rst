@@ -34,32 +34,41 @@ Header File: ``Kokkos_Core.hpp``
 Description
 -----------
 
-`Array` is a container that encapsulates fixed sized arrays.  There are four flavors:
+.. cppkokkos:class:: template<typename T = void, size_t N = KOKKOS_INVALID_INDEX, typename Proxy = void> Array
 
-template<typename T, size_t N, typename Proxy> Array<T, N, Proxy>
+is a container that encapsulates fixed sized arrays (models holding exactly N elements).  There are numerous flavors:
 
-This container is an owning container (the data is embedded in the container itself).
-This container is an aggregate type with the same semantics as a struct holding a C-style array T[N] as its only non-static data member.
-Unlike a C-style array, it doesn't decay to T* automatically.
-As an aggregate type, it can be initialized with aggregate-initialization given at most N initializers that are convertible to T: Kokkos::array<int, 3> a = {1, 2, 3};.
-This container does not support move semantics.
+.. cppkokkos:class:: template<typename T, size_t N, typename Proxy = void> Array<T, N, Proxy>
 
-Array<T, 0, Proxy>
-This container is an empty container.
+* This container is an owning container (the data is embedded in the container itself).
+* This container is an aggregate type with the same semantics as a struct holding a C-style array ``T[N]`` as its only non-static data member.
+* Unlike a C-style array, it doesn't decay to ``T*`` automatically.
+* As an aggregate type, it can be initialized with aggregate-initialization given at most ``N`` initializers that are convertible to ``T``: ``Kokkos::Array<int, 3> a = {1, 2, 3};``.
+* This container does not support move semantics.
 
-Array<T, KOKKOS_INVALID_INDEX, Array<>::contiguous>
-This container is a non-owning container.
-This container has its size determined at construction time.
-This container can be assigned from any Array<T, N , Proxy>.
-Assignment does not change the size of this container.
-This container does not support move semantics.
+.. cppkokkos:class:: template<typename T, typename Proxy = void> Array<T, 0, Proxy>
 
-Array<T, KOKKOS_INVALID_INDEX, Array<>::strided>
-This container is a non-owning container.
-This container has its size and stride determined at construction time.
-This container can be assigned from any Array<T, N , Proxy>.
-Assignment does not change the size or stride of this container.
-This container does not support move semantics.
+* This container is an empty container.
+
+.. cppkokkos:class:: template<typename T> Array<T, KOKKOS_INVALID_INDEX, Array<>::contiguous>
+
+* This container is a non-owning container.
+* This container has its size determined at construction time.
+* This container can be assigned from any ``Array<T, N , Proxy>``.
+* Assignment does not change the size of this container.
+* This container does not support move semantics.
+
+.. cppkokkos:class:: template<typename T> Array<T, KOKKOS_INVALID_INDEX, Array<>::strided>
+
+* This container is a non-owning container.
+* This container has its size and stride determined at construction time.
+* This container can be assigned from any ``Array<T, N , Proxy>``.
+* Assignment does not change the size or stride of this container.
+* This container does not support move semantics.
+
+.. cppkokkos:class:: template<> Array<void, KOKKOS_INVALID_INDEX, void>
+
+* This contains the embedded tag types: ``contiguous`` and ``strided``.
 
 ..
   The API of the entity.
