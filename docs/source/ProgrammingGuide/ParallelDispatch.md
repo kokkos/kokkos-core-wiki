@@ -20,7 +20,7 @@ Important notes on syntax:
 
 A _functor_ is one way to define the body of a parallel loop. It is a class or struct<sup>1</sup> with a public `operator()` instance method. That method's arguments depend on both which parallel operation you want to execute (for, reduce, or scan), and on the loop's execution policy (e.g., range or team). For an example of a functor see the section in this chapter for each type of parallel operation. In the most common case of a [`parallel_for()`](../API/core/parallel-dispatch/parallel_for), it takes an integer argument which is the for loop's index. Other arguments are possible; see [Chapter 8 - Hierarchical Parallelism](HierarchicalParallelism).
 
-The `operator()` method must be const, and must be marked with the `KOKKOS_INLINE_FUNCTION` macro. If building with CUDA, this macro will mark your method as suitable for running on the CUDA device (as well as on the host). If not building with CUDA, the macro is unnecessary but harmless. Here is an example of the signature of such a method:
+The `operator()` method must be const, and must be marked with the `KOKKOS_FUNCTION` or `KOKKOS_INLINE_FUNCTION` macro. If building with CUDA, this macro will mark your method as suitable for running on the CUDA device (as well as on the host). If not building with CUDA, `KOKKOS_INLINE_FUNCTION` expands to `inline`, and `KOKKOS_FUNCTION` is unnecessary but harmless. Here is an example of the signature of such a method:
 
 ```c++
 KOKKOS_INLINE_FUNCTION void operator() (...) const;
