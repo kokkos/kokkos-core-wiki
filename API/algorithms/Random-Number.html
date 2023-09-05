@@ -705,7 +705,7 @@ The first, and default, option selects unsigned integers over max possible range
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Kokkos_Random.hpp&gt;</span>
 
 <span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">argv</span><span class="p">[])</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">ScopeGuarg</span><span class="w"> </span><span class="n">guard</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="n">argv</span><span class="p">);</span>
+<span class="w">    </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">ScopeGuard</span><span class="w"> </span><span class="n">guard</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="n">argv</span><span class="p">);</span>
 
 <span class="w">    </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">Random_XorShift64_Pool</span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="n">random_pool</span><span class="p">(</span><span class="cm">/*seed=*/</span><span class="mi">12345</span><span class="p">);</span>
 
