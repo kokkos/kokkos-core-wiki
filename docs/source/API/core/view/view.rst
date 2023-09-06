@@ -1,5 +1,5 @@
 ``View``
-========
+============
 
 .. role:: cppkokkos(code)
     :language: cppkokkos
@@ -7,13 +7,13 @@
 Header File: ``<Kokkos_Core.hpp>``
 
 Description
------
+--------------
 
-The programming model's main data structure is the Kokkos View.  The View has multi-dimensional (up to eight), array-like semantics and operations.  It, and related data structures,  can be used on the CPU (host) and/or GPU (device), and has architecture-specific optimiztions, shared-memory parallelism, compile-time layouts and memory space.   
+The programming model's main data structure is the Kokkos View.  The View has multi-dimensional (up to eight) array-like semantics and operations.  It, and related data structures (*e.g.*, `View-like Types <view_like.html>`__)  can be used on the CPU (host) and/or GPU (device), and has architecture-specific optimiztions, shared-memory parallelism, compile-time layouts and memory space.   
 
 
 Interface
----------
+------------
 
 .. code-block:: cpp
 
@@ -35,7 +35,7 @@ Parameters
 
 .. |LayoutStride| replace:: :cppkokkos:func:``LayoutStride``
 
-Template parameters other than ``DataType`` are optional, and ordering is enforced for only the first (``DataType``) and last (``MemoryTraits``) position.  That means, for example, that ``Layout`` can be omitted, but if both ``MemorySpace`` and ``MemoryTraits`` are specified, ``MemorySpace`` must come before ``MemoryTraits``.  Ordering is therefore not strongly enforced for the ``Space`` or ``ArrayLayout`` parameters.
+The ``DataType`` template parameter is required, but the others are optional.  Ordering is enforced for only the first (``DataType``) and last (``MemoryTraits``) positions.  That means, for example, that ``Layout`` can be omitted, but if both ``MemorySpace`` and ``MemoryTraits`` are specified, ``MemorySpace`` must come before ``MemoryTraits``.  Ordering is therefore not strongly enforced for the ``Space`` or ``ArrayLayout`` parameters.
 
 
 * ``DataType``:
@@ -43,11 +43,11 @@ Template parameters other than ``DataType`` are optional, and ordering is enforc
   Defines the fundamental scalar type of the ``View`` and its dimensionality.
   The basic semantics are ``<ScalarType STARS SQUARE BRACKETS>``, where the STARS denote the number of runtime dimensions, and SQUARE BRACKETS define the compile-time dimensions.  Due to C++ type restrictions, runtime dimensions must come first, and cannot be interspersed with compile-time dimensions.
 
-  Examples:
+  **Examples**:
 
-  - ``double**``: 2D View of ``double`` with 2 runtime dimensions (i.e., number of STARS).
+  - ``double**``: 2D View of ``double`` with 2 runtime dimensions (*i.e.*, number of STARS).
 
-  - ``const int***[5][3]``: 5D View of ``int`` with 3 runtime and 2 compile dimensions (i.e., number of SQUARE BRACKET pairs). The data are ``const``.
+  - ``const int***[5][3]``: 5D View of ``int`` with 3 runtime and 2 compile dimensions (*i.e.*, number of SQUARE BRACKET pairs). The data are ``const``.
 
   - ``Foo[6][2]``: 2D View of type ``Foo`` with 2 compile-time dimensions.
 
@@ -68,7 +68,7 @@ Template parameters other than ``DataType`` are optional, and ordering is enforc
 * ``MemorySpace``:
 
   Views store data in Memory Spaces.
-  If omitted as a template parameter, the default memory space of the default execution space is used (i.e. ``Kokkos::DefaultExecutionSpace::memory_space``).
+  If omitted as a template parameter, the default memory space of the default execution space is used (*i.e.* ``Kokkos::DefaultExecutionSpace::memory_space``).
 
 .. _Atomic: ../atomics.html
 
@@ -85,7 +85,7 @@ Template parameters other than ``DataType`` are optional, and ordering is enforc
   - |Atomic|_: All accesses to the View will use atomic operations.
 
   - ``RandomAccess``: Hint that the View is used in a random-access manner.
-    If the View is also ``const`` this will trigger special load operations on GPUs (i.e. texture fetches).
+    If the View is also ``const`` this will trigger special load operations on GPUs (*i.e.,* texture fetches).
 
   - ``Restrict``: There is no aliasing of the View by other data structures in the current scope.
 
@@ -107,10 +107,12 @@ instead of relying on implicit conversion to an integral type.
 
 The actual type of ``rank[_dynamic]`` as it was defined until Kokkos 4.1 was left up to the implementation
 (that is, up to the compiler not to Kokkos) but in practice it was often ``int`` which means
-this change may yield warnings about comparing signed and unsigned integral types.
+this change may yield warnings about comparing signed and unsigned integral types.0
 It may also break code that was using the type of ``View::rank``.
-Furthermore, it appears that MSVC has issues with the implicit conversion to
-``size_t`` in certain constexpr contexts. Calling ``rank()`` or ``rank_dynamic()`` will work in those cases.
+
+**Caveat**
+The MSVC compiler may have issues with the implicit conversion to
+``size_t`` in certain ``constexpr`` contexts. Calling ``rank()`` or ``rank_dynamic()`` will work in those cases.
 
 Typedefs
 ~~~~~~~~
@@ -119,7 +121,7 @@ Typedefs
 
 .. cpp:type:: data_type
 
-   The ``DataType`` of the View; note ``data_type`` contains the array specifiers (e.g. ``int**[3]``).
+   The ``DataType`` of the View; note ``data_type`` contains the array specifiers (*e.g.,* ``int**[3]``).
 
 .. cpp:type:: const_data_type
 
@@ -146,9 +148,9 @@ Typedefs
 
 .. cpp:type:: value_type
 
-   The ``data_type`` stripped of its array specifiers, i.e. the scalar type
+   The ``data_type`` stripped of its array specifiers, *i.e.,* the scalar type
    of the data the View is referencing
-   (e.g. if ``data_type`` is ``const int**[3]``, ``value_type`` is ``const int``)
+   (*e.g.,* if ``data_type`` is ``const int**[3]``, ``value_type`` is ``const int``)
 
 .. cpp:type:: const_value_type
 
@@ -293,7 +295,7 @@ Constructors
 
 .. cppkokkos:function:: View( const AllocProperties& prop, const IntType& ... indices)
 
-   Allocating constructor with allocation properties. If an execution space is
+   **Allocating constructor with allocation properties.** If an execution space is
    specified in ``prop``, the initialization uses it and does not fence.
    Otherwise, the View is initialized using the default execution space instance corresponding to ``MemorySpace`` and fences it.
 
@@ -308,7 +310,7 @@ Constructors
 
 .. cppkokkos:function:: View( const AllocProperties& prop, const array_layout& layout)
 
-   Allocating constructor with allocation properties and a layout object. If an execution space is
+   **Allocating constructor with allocation properties and a layout object.** If an execution space is
    specified in ``prop``, the initialization uses it and does not fence. Otherwise, the View is
    initialized using the default execution space instance corresponding to ``MemorySpace`` and fences it.
 
@@ -398,7 +400,7 @@ Data Layout, Dimensions, Strides
 
 Note: in practice, ``rank()`` and ``rank_dynamic()`` are not actually
 implemented as static member functions, but ``rank`` and ``rank_dynamic`` underlying
-types have a nullary member function (i.e. callable with no argument).
+types have a nullary member function (*i.e.,* callable with no argument).
 
 .. cppkokkos:function:: constexpr array_layout layout() const
 
@@ -460,35 +462,34 @@ types have a nullary member function (i.e. callable with no argument).
 
 .. cppkokkos:function:: constexpr size_t span() const
 
-   Returns the memory span in elements between the element with the
-   lowest and the highest address. This can be larger than the product
+   Returns the memory span between the element with the
+   lowest and the highest addresses. This can be larger than the product
    of extents due to padding, and or non-contiguous data layout as for example ``LayoutStride`` allows.
 
 .. cppkokkos:function:: constexpr size_t size() const
 
-   Returns the product of extents, i.e. the logical number of elements in the view.
+   Returns the product of extents, *i.e.,* the logical number of elements in the view.
 
 .. cppkokkos:function:: constexpr pointer_type data() const
 
    Return the pointer to the underlying data allocation.
    WARNING: calling any function that manipulates the behavior
-   of the memory (e.g. ``memAdvise``) on memory managed by ``Kokkos`` results in undefined behavior.
+   of the memory (*e.g.,* ``memAdvise``) on memory managed by ``Kokkos`` results in undefined behavior.
 
 .. cppkokkos:function:: bool span_is_contiguous() const
 
-   Whether the span is contiguous (i.e. whether every memory location between
-   in span belongs to the index space covered by the View).
+   Whether the span is contiguous (*i.e.,* whether every memory location in a span belongs to the index space covered by the View).
 
 .. cppkokkos:function:: static constexpr size_t required_allocation_size(size_t N0=0, size_t N1=0, \
       size_t N2=0, size_t N3=0, \
       size_t N4=0, size_t N5=0, \
       size_t N6=0, size_t N7=0, size_t N8 = 0);
 
-   Returns the number of bytes necessary for an unmanaged view of the provided dimensions. This function is only valid if ``array_layout::is_regular == true``.
+   Returns the number of bytes necessary for an unmanaged View of the provided dimensions. This function is only valid if ``array_layout::is_regular == true``.
 
 .. cppkokkos:function:: static constexpr size_t required_allocation_size(const array_layout& layout);
 
-   Returns the number of bytes necessary for an unmanaged view of the provided layout.
+   Returns the number of bytes necessary for an unmanaged View of the provided layout.
 
 Other
 ~~~~~
@@ -536,7 +537,7 @@ Assignment Rules
 Assignment rules cover the assignment operator, as well as copy constructors. We aim at making all logically legal assignments possible,
 while intercepting illegal assignments at compile time, otherwise at runtime.
 In the following we use ``DstType`` and ``SrcType`` as the type of the destination View and source View, respectively.
-``dst_view`` and ``src_view`` refer to the runtime instances of the destination and source Views, i.e.:
+``dst_view`` and ``src_view`` refer to the runtime instances of the destination and source Views, *i.e.*:
 
 .. code-block:: cpp
 
