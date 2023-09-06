@@ -9,7 +9,7 @@ Header File: ``<Kokkos_Core.hpp>``
 Description
 -----
 
-Kokkos View is the programming model's main data structure, with multi-dimensional (up to eight), array-like semantics.  It can be used on the CPU (host) and/or GPU (device), and has architecture-specific optimiztions, shared-memory parallelism, compile-time layouts and memory space.   
+The programming model's main data structure is the Kokkos View.  The View has multi-dimensional (up to eight), array-like semantics and operations.  It, and related data structures,  can be used on the CPU (host) and/or GPU (device), and has architecture-specific optimiztions, shared-memory parallelism, compile-time layouts and memory space.   
 
 
 Interface
