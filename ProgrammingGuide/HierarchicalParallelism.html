@@ -787,7 +787,7 @@ With the lambda being considered as <code class="docutils literal notranslate"><
 <section id="restricting-execution-to-a-single-executor">
 <h3>8.4.3 Restricting execution to a single executor<a class="headerlink" href="#restricting-execution-to-a-single-executor" title="Permalink to this heading">#</a></h3>
 <p>As stated above, a kernel is a parallel region with respect to threads (and vector lanes) within a team. This means that global memory accesses outside of the respective nested levels potentially have to be protected against repetitive execution. A common example is the case where a team performs some calculation but only one result per team has to be written back to global memory.</p>
-<p>Kokkos provides the <code class="docutils literal notranslate"><span class="pre">Kokkkos::single(Policy,Lambda)</span></code> function for this case. It currently accepts two policies:</p>
+<p>Kokkos provides the <code class="docutils literal notranslate"><span class="pre">Kokkos::single(Policy,Lambda)</span></code> function for this case. It currently accepts two policies:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">Kokkos::PerTeam</span></code> restricts execution of the lambda’s body to once per team</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Kokkos::PerThread</span></code> restricts execution of the lambda’s body to once per thread (that is, to only one vector lane in a thread)</p></li>
