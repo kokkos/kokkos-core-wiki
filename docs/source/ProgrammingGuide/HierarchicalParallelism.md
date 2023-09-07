@@ -308,7 +308,7 @@ As the name indicates the vector-level must be vectorizable. The parallel patter
 
 As stated above, a kernel is a parallel region with respect to threads (and vector lanes) within a team. This means that global memory accesses outside of the respective nested levels potentially have to be protected against repetitive execution. A common example is the case where a team performs some calculation but only one result per team has to be written back to global memory.
 
-Kokkos provides the `Kokkkos::single(Policy,Lambda)` function for this case. It currently accepts two policies:
+Kokkos provides the `Kokkos::single(Policy,Lambda)` function for this case. It currently accepts two policies:
 
 * `Kokkos::PerTeam` restricts execution of the lambda's body to once per team
 * `Kokkos::PerThread` restricts execution of the lambda's body to once per thread (that is, to only one vector lane in a thread)
