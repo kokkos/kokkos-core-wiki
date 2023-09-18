@@ -126,7 +126,7 @@ Build system:
 =============
 
 * CMake >= 3.16: required
-* CMake >= 3.18: Fortran linkage. This does not affect most mixed Fortran/Kokkos builds. See [build issues](BUILD.md#KnownIssues).
+* CMake >= 3.18: Fortran linkage. This does not affect most mixed Fortran/Kokkos builds. See https://github.com/kokkos/kokkos/blob/master/BUILD.md#known-issues.
 * CMake >= 3.21.1 for NVC++
 
 Primary tested compiler are passing in release mode
