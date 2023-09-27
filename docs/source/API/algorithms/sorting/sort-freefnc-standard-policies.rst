@@ -12,6 +12,9 @@ This page describes the Kokkos' sorting API to use with standard host-based disp
 API
 ^^^
 
+Overload set using ``operator<`` for comparing elements
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 .. cppkokkos:function:: template <class ExecutionSpace, class DataType, class... Properties> void sort(const ExecutionSpace& exec, const Kokkos::View<DataType, Properties...>& view);
 
    Sort the elements in ``view`` in non-discending order using the provided ``exespace``.
@@ -22,7 +25,10 @@ API
 
    Semantics:
 
-   - this function is potentially asynchronous
+   - this function is potentially asynchronous. If needed, you can block either using
+     a `global fence <../core/parallel-dispatch/fence.html>`_ or you can just use `fence
+     the execution space instance <../core/execution_spaces.html>`_ argument
+     you pass to the function
 
    Constraints:
 
@@ -44,7 +50,9 @@ API
 
    Semantics:
 
-   - Before the actual sorting is executed, the function calls ``Kokkos::fence("Kokkos::sort: before")``; after the sort is completed the execution space is fenced with message ``exec.fence("Kokkos::sort: fence after sorting")``.
+   - This is a blocking function. Before the sorting is executed, the function internally
+     calls ``Kokkos::fence("Kokkos::sort: before")``, and after the sort is completed
+     the execution space is fenced with message ``exec.fence("Kokkos::sort: fence after sorting")``.
 
    Possible implementation:
 
@@ -57,13 +65,15 @@ API
 	sort(exec, view);
       }
 
+Overload set accepting a custom comparison object
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. versionadded:: 4.2.0
 
 .. cppkokkos:function:: template <class ExecutionSpace, class ComparatorType, class DataType, class... Properties> void sort(const ExecutionSpace& exec, const Kokkos::View<DataType, Properties...>& view, const ComparatorType& comparator)
 
    Sort the elements in ``view`` in non-discending order using the view's associated execution space.
    Elements are compared using the comparison functor ``comparator``.
-
-   .. versionadded:: 4.2.0
 
    :param exec: execution space instance
    :param view: view to sort
@@ -75,10 +85,10 @@ API
 
    - ``view`` must be accessible from ``exespace``
 
-   - ``comparator``: comparison function object returning true if the first argument is less than the second.
-     Must be valid to be called from the execution space passed, and callable with two arguments ``a,b``
-     of type (possible const-qualified) ``value_type``, where ``value_type`` is the non-const value type
-     of the view. Must conform to:
+   - ``comparator``: comparison function object returning ``true`` if the first
+     argument is less than the second. Must be valid to be called from the execution space passed,
+     and callable with two arguments ``a,b`` of type (possible const-qualified) ``value_type``,
+     where ``value_type`` is the non-const value type of the view. Must conform to:
 
      .. code-block:: cpp
 
@@ -91,15 +101,16 @@ API
 
    Semantics:
 
-   - this function is potentially asynchronous
+   - this function is potentially asynchronous. If needed, you can block either using
+     a `global fence <../core/parallel-dispatch/fence.html>`_ or you can just use `fence
+     the execution space instance <../core/execution_spaces.html>`_ argument
+     you pass to the function
 
 
 .. cppkokkos:function:: template <class ComparatorType, class DataType, class... Properties> void sort(const Kokkos::View<DataType, Properties...>& view, const ComparatorType& comparator)
 
    Sort the elements in ``view`` in non-discending order using the view's associated execution space.
    Elements are compared using the comparison functor ``comparator``.
-
-   .. versionadded:: 4.2.0
 
    :param view: view to sort
    :param comparator: comparison functor
@@ -112,7 +123,10 @@ API
 
    Semantics:
 
-   - Before the actual sorting is executed, the function calls ``Kokkos::fence("Kokkos::sort with comparator: before)"``; after the sort is completed the execution space is fenced with message ``exec.fence("Kokkos::sort with comparator: fence after sorting")``.
+   - This is a blocking function. Before the actual sorting is executed, the function
+     calls ``Kokkos::fence("Kokkos::sort with comparator: before)"``; after the sort is completed
+     the execution space is fenced with
+     message ``exec.fence("Kokkos::sort with comparator: fence after sorting")``.
 
    Possible implementation:
 
@@ -127,14 +141,16 @@ API
 	sort(exec, view, comparator);
       }
 
+Overload set to sort a View's subrange
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. cppkokkos:function:: template <class ExecutionSpace, class ViewType> void sort(const ExecutionSpace& exec, ViewType view, size_t const begin, size_t const end)
+.. cppkokkos:function:: template <class ExecutionSpace, class ViewType> void sort(const ExecutionSpace& exec, ViewType view, size_t const startIndex, size_t const endIndex)
 
    Sort a subrange of elements of ``view`` in non-discending order using the given execution space.
 
    :param exec: execution space instance
    :param view: view to sort
-   :param begin,end: indices representing the range of elements to sort (end is exclusive)
+   :param startIndex, endIndex: indices representing the range of elements to sort (``endIndex`` is exclusive)
 
    Constraints:
 
@@ -142,57 +158,36 @@ API
 
    Preconditions:
 
-   - ``begin, end`` must represent a valid range, i.e., ``end >= begin``, and be admissible for the given ``view``, i.e., ``end < view.extent(0)``
+   - ``startIndex, endIndex`` must represent a valid range, i.e., ``endIndex >= startIndex``, and be admissible for the given ``view``, i.e., ``endIndex < view.extent(0)``
 
    Semantics:
 
-   - this function is potentially asynchronous
+   - this function is potentially asynchronous. If needed, you can block either using
+     a `global fence <../core/parallel-dispatch/fence.html>`_ or you can just use `fence
+     the execution space instance <../core/execution_spaces.html>`_ argument
+     you pass to the function
 
 
-.. cppkokkos:function:: template<class ViewType> void sort(ViewType view, size_t const begin, size_t const end)
+.. cppkokkos:function:: template<class ViewType> void sort(ViewType view, size_t const startIndex, size_t const endIndex)
 
    Sort a subrange of elements of ``view`` in non-discending order using the view's associated execution space.
 
    :param view: view to sort
-   :param begin,end: indices representing the range of elements to sort (end is exclusive)
+   :param startIndex, endIndex: indices representing the range of elements to sort (``endIndex`` is exclusive)
 
    Constraints: same as overload above
 
    Semantics:
 
-   - ``Kokkos::fence("Kokkos::sort: before")`` is called before sorting, and the execution space is fenced after the sort with message "Kokkos::Sort: fence after sorting".
+   - This is a blocking function. ``Kokkos::fence("Kokkos::sort: before")`` is called before sorting,
+     and the execution space is fenced after the sort with message ``Kokkos::Sort: fence after sorting``.
 
    Possible implementation:
 
    .. code-block:: cpp
 
       template <class ViewType>
-      void sort(ViewType view, size_t const begin, size_t const end) {
+      void sort(ViewType view, size_t const startIndex, size_t const endIndex) {
 	typename ViewType::execution_space exec;
-	sort(exec, view, begin, end);
+	sort(exec, view, startIndex, endIndex);
       }
-
-|
-|
-|
-
-BinSort
-^^^^^^^
-
-.. code-block:: cpp
-
-    template<class DstViewType, class SrcViewType>
-    struct copy_functor { }
-
-    template<class DstViewType, class PermuteViewType, class SrcViewType>
-    struct copy_permute_functor { }
-
-    class BinSort {
-        template<class DstViewType, class SrcViewType> struct copy_functor { }
-        template<class DstViewType, class PermuteViewType, class SrcViewType> struct copy_permute_functor { }
-        template<class ValuesViewType> void sort( ValuesViewType const & values, int values_range_begin, int values_range_end ) const { }
-        template<class ValuesViewType> void sort( ValuesViewType const & values ) const { }
-    }
-
-    template<class KeyViewType> struct BinOp1D { }
-    template<class KeyViewType> struct BinOp3D { }

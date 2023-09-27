@@ -2,8 +2,8 @@
 .. role:: cppkokkos(code)
     :language: cppkokkos
 
-Sort for team- and thread-level
-===============================
+Sort with nested policies (team- and thread-level)
+==================================================
 
 Header File: ``<Kokkos_NestedSort.hpp>``.
 

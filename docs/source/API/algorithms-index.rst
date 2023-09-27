@@ -5,6 +5,5 @@ API: Algorithms
    :maxdepth: 1
 
    ./algorithms/Random-Number
-   ./algorithms/sort-standard-policies
-   ./algorithms/sort-nested-policies
+   ./algorithms/sorting-index
    ./algorithms/std-algorithms-index
