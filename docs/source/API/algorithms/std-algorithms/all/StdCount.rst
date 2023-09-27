@@ -13,11 +13,11 @@ Interface
 
 .. warning:: This is currently inside the ``Kokkos::Experimental`` namespace.
 
+Overload set accepting execution space
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 .. code-block:: cpp
 
-   //
-   // overload set accepting an execution space
-   //
    template <class ExecutionSpace, class IteratorType, class T>
    typename IteratorType::difference_type count(const ExecutionSpace& exespace,
 						IteratorType first,
@@ -40,9 +40,13 @@ Interface
 	      const ::Kokkos::View<DataType, Properties...>& view,
 	      const T& value);
 
-   //
-   // overload set accepting a team handle
-   //
+Overload set accepting a team handle
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. versionadded:: 4.2
+
+.. code-block:: cpp
+
    template <class TeamHandleType, class IteratorType, class T>
    KOKKOS_FUNCTION
    typename IteratorType::difference_type count(const TeamHandleType& teamHandle,
@@ -89,4 +93,4 @@ Parameters and Requirements
 Return Value
 ~~~~~~~~~~~~
 
-Returns the number of elements in the range ``first,last`` or in ``view`` that are equal to ``value``.
+Returns the number of elements in the range ``first, last`` or in ``view`` that are equal to ``value``.

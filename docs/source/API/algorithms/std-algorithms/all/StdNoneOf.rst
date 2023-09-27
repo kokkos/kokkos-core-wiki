@@ -14,12 +14,11 @@ Interface
 
 .. warning:: This is currently inside the ``Kokkos::Experimental`` namespace.
 
+Overload set accepting execution space
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: cpp
 
-   //
-   // overload set accepting an execution space
-   //
    template <class ExecutionSpace, class IteratorType, class Predicate>
    bool none_of(const ExecutionSpace& exespace,                              (1)
 		IteratorType first, IteratorType last,
@@ -42,9 +41,13 @@ Interface
 		const ::Kokkos::View<DataType, Properties...>& v,
 		Predicate predicate);
 
-   //
-   // overload set accepting a team handle
-   //
+Overload set accepting a team handle
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. versionadded:: 4.2
+
+.. code-block:: cpp
+
    template <class TeamHandleType, class IteratorType, class Predicate>
    KOKKOS_FUNCTION
    bool none_of(const TeamHandleType& teamHandle,                            (5)
@@ -97,8 +100,7 @@ Parameters and Requirements
 
   .. code-block:: cpp
 
-     struct CustomPredicate
-     {
+     struct CustomPredicate{
        KOKKOS_INLINE_FUNCTION
        bool operator()(const value_type & v) const;
      };

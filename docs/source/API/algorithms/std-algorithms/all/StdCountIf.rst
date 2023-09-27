@@ -14,11 +14,11 @@ Interface
 
 .. warning:: This is currently inside the ``Kokkos::Experimental`` namespace.
 
+Overload set accepting execution space
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 .. code-block:: cpp
 
-   //
-   // overload set accepting an execution space
-   //
    template <class ExecutionSpace, class IteratorType, class Predicate>
    typename IteratorType::difference_type count_if(const ExecutionSpace& exespace,
 						   IteratorType first,
@@ -45,9 +45,14 @@ Interface
 		 const ::Kokkos::View<DataType, Properties...>& view,                   (4)
 		 Predicate pred);
 
-   //
-   // overload set accepting a team handle
-   //
+
+Overload set accepting a team handle
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. versionadded:: 4.2
+
+.. code-block:: cpp
+
    template <class TeamHandleType, class IteratorType, class Predicate>
    KOKKOS_FUNCTION
    typename IteratorType::difference_type count_if(const TeamHandleType& teamHandle,
@@ -85,7 +90,6 @@ Parameters and Requirements
 
   - must be accessible from ``exespace`` or from the execution space associated with the team handle
 
-
 - ``view``:
 
   - must be rank-1, and have ``LayoutLeft``, ``LayoutRight``, or ``LayoutStride``
@@ -103,8 +107,7 @@ Parameters and Requirements
 
   .. code-block:: cpp
 
-     struct CustomPredicate
-     {
+     struct CustomPredicate{
        KOKKOS_INLINE_FUNCTION
        bool operator()(const value_type & v) const {
          return /* true if v satisfies your desired condition */;

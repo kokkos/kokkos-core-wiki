@@ -15,12 +15,11 @@ Interface
 
 .. warning:: This is currently inside the ``Kokkos::Experimental`` namespace.
 
+Overload set accepting execution space
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: cpp
 
-   //
-   // overload set accepting an execution space
-   //
    template <class ExecutionSpace, class InputIterator, class Predicate>
    bool all_of(const ExecutionSpace& exespace,                                       (1)
                InputIterator first, InputIterator last,
@@ -43,9 +42,13 @@ Interface
 	       const ::Kokkos::View<DataType, Properties...>& view,
 	       Predicate predicate);
 
-   //
-   // overload set accepting a team handle
-   //
+Overload set accepting a team handle
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. versionadded:: 4.2
+
+.. code-block:: cpp
+
    template <class TeamHandleType, class InputIterator, class Predicate>
    KOKKOS_FUNCTION
    bool all_of(const TeamHandleType& teamHandle,                                     (5)
@@ -58,7 +61,6 @@ Interface
    bool all_of(const TeamHandleType& teamHandle,                                     (6)
 	       const ::Kokkos::View<DataType, Properties...>& view,
 	       Predicate predicate);
-
 
 Parameters and Requirements
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -83,7 +85,6 @@ Parameters and Requirements
 
   - must be accessible from ``exespace`` or from the execution space associated with the team handle
 
-
 - ``view``:
 
   - must be rank-1, and have ``LayoutLeft``, ``LayoutRight``, or ``LayoutStride``
@@ -101,8 +102,7 @@ Parameters and Requirements
 
   .. code-block:: cpp
 
-     struct CustomPredicate
-     {
+     struct CustomPredicate{
        KOKKOS_INLINE_FUNCTION
        bool operator()(const value_type & v) const {
          return /* true if v satisfies your desired condition */;

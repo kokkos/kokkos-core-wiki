@@ -15,11 +15,11 @@ Interface
 .. warning:: This is currently inside the ``Kokkos::Experimental`` namespace.
 
 
+Overload set accepting execution space
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 .. code-block:: cpp
 
-   //
-   // overload set accepting an execution space
-   //
    template <class ExecutionSpace, class IteratorType>
    IteratorType adjacent_find(const ExecutionSpace& exespace,                              (1)
 		              IteratorType first, IteratorType last);
@@ -58,9 +58,13 @@ Interface
 		      const ::Kokkos::View<DataType, Properties...>& view,
 		      BinaryPredicateType pred);
 
-   //
-   // overload set accepting a team handle
-   //
+Overload set accepting a team handle
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. versionadded:: 4.2
+
+.. code-block:: cpp
+
    template <class TeamHandleType, class IteratorType>
    KOKKOS_FUNCTION
    IteratorType adjacent_find(const TeamHandleType& teamHandle,                            (9)
@@ -124,8 +128,7 @@ Parameters and Requirements
 
   .. code-block:: cpp
 
-     struct Comparator
-     {
+     struct Comparator{
        KOKKOS_INLINE_FUNCTION
        bool operator()(const value_type & a, const value_type & b) const {
          return /* true if a should be considered equal to b */;
@@ -136,10 +139,10 @@ Parameters and Requirements
 Return Value
 ~~~~~~~~~~~~
 
-- 1,2,9: returns the first iterator ``it`` such that ``*it == *it+1`` is true
+- 1,2,9: returns the first iterator ``it`` such that ``*it == *(it+1)`` is true
 - 5,6,11: returns the first iterator ``it`` such that ``pred(*it, *it+1)`` returns true
 - 3,4,10: returns the first Kokkos iterator ``it`` such that ``view(it) == view(it+1)`` is true
-- 7,8,12: returns the first Kokkos iterator ``it`` ), such that ``pred(view(it), view(it+1))`` returns true
+- 7,8,12: returns the first Kokkos iterator ``it``, such that ``pred(view(it), view(it+1))`` returns true
 
 If no such element is found, it returns ``last`` for all overloads accepting iterators,
 and ``Kokkos::Experimental::end(view)`` for all overloads acceptings a view.
