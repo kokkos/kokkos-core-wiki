@@ -15,11 +15,11 @@ Interface
 
 .. warning:: This is currently inside the ``Kokkos::Experimental`` namespace.
 
+Overload set accepting execution space
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 .. code-block:: cpp
 
-   //
-   // overload set accepting an execution space
-   //
    template <class ExecutionSpace, class IteratorType, class SizeType, class UnaryFunctorType>
    IteratorType for_each_n(const ExecutionSpace& exespace,                             (1)
 			   IteratorType first, SizeType n,
@@ -42,9 +42,13 @@ Interface
 		   const Kokkos::View<DataType, Properties...>& view, SizeType n,
 		   UnaryFunctorType func);
 
-   //
-   // overload set accepting a team handle
-   //
+Overload set accepting a team handle
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. versionadded:: 4.2
+
+.. code-block:: cpp
+
    template <class TeamHandleType, class IteratorType, class SizeType, class UnaryFunctorType>
    KOKKOS_FUNCTION
    IteratorType for_each_n(const TeamHandleType& teamHandle,                           (5)

@@ -14,11 +14,11 @@ Interface
 
 .. warning:: This is currently inside the ``Kokkos::Experimental`` namespace.
 
+Overload set accepting execution space
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 .. code-block:: cpp
 
-   //
-   // overload set accepting an execution space
-   //
    template <class ExecutionSpace, class IteratorType1, class IteratorType2>
    IteratorType1 search(const ExecutionSpace& exespace,                           (1)
 			IteratorType1 first, IteratorType1 last,
@@ -70,9 +70,13 @@ Interface
 	       const ::Kokkos::View<DataType2, Properties2...>& s_view,
 	       const BinaryPredicateType& pred)
 
-   //
-   // overload set accepting a team handle
-   //
+Overload set accepting a team handle
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. versionadded:: 4.2
+
+.. code-block:: cpp
+
    template <class TeamHandleType, class IteratorType1, class IteratorType2>
    KOKKOS_FUNCTION
    IteratorType1 search(const TeamHandleType& teamHandle,                         (9)

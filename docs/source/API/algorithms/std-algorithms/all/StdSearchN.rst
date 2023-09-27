@@ -1,6 +1,6 @@
 
 ``search_n``
-==========
+============
 
 Header: ``<Kokkos_StdAlgorithms.hpp>``
 
@@ -14,11 +14,11 @@ Interface
 
 .. warning:: This is currently inside the ``Kokkos::Experimental`` namespace.
 
+Overload set accepting execution space
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 .. code-block:: cpp
 
-   //
-   // overload set accepting an execution space
-   //
    template <class ExecutionSpace, class IteratorType, class SizeType,
 	     class ValueType>
    IteratorType search_n(const ExecutionSpace& exespace, IteratorType first,
@@ -70,9 +70,13 @@ Interface
 		 SizeType count, const ValueType& value,
 		 const BinaryPredicateType& pred);
 
-   //
-   // overload set accepting a team handle
-   //
+Overload set accepting a team handle
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. versionadded:: 4.2
+
+.. code-block:: cpp
+
    template <class TeamHandleType, class IteratorType, class SizeType,
 	     class ValueType>
    KOKKOS_FUNCTION
