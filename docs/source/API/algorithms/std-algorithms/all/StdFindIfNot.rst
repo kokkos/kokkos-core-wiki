@@ -15,11 +15,11 @@ Interface
 
 .. warning:: This is currently inside the ``Kokkos::Experimental`` namespace.
 
+Overload set accepting execution space
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 .. code-block:: cpp
 
-   //
-   // overload set accepting an execution space
-   //
    template <class ExecutionSpace, class InputIterator, class PredicateType>
    InputIterator find_if_not(const ExecutionSpace& exespace,                            (1)
 		             InputIterator first, InputIterator last,
@@ -40,9 +40,13 @@ Interface
 		    const Kokkos::View<DataType, Properties...>& view,
 		    PredicateType pred);
 
-   //
-   // overload set accepting a team handle
-   //
+Overload set accepting a team handle
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. versionadded:: 4.2
+
+.. code-block:: cpp
+
    template <class TeamHandleType, class InputIterator, class PredicateType>
    KOKKOS_FUNCTION
    InputIterator find_if_not(const TeamHandleType& teamHandle,                          (5)

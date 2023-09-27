@@ -14,10 +14,13 @@ Interface
 
 .. warning:: This is currently inside the ``Kokkos::Experimental`` namespace.
 
+Overload set accepting execution space
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 .. code-block:: cpp
 
    //
-   // overload set accepting an execution space and iterators
+   // overload set accepting iterators
    //
    template <class ExecutionSpace, class IteratorType1, class IteratorType2>
    bool equal(const ExecutionSpace& exespace,                                        (1)
@@ -68,7 +71,7 @@ Interface
 	      BinaryPredicateType predicate);
 
    //
-   // overload set accepting an execution space and Kokkos Views
+   // overload set accepting Kokkos Views
    //
    template <class ExecutionSpace, class DataType1, class... Properties1,
 	     class DataType2, class... Properties2>
@@ -96,8 +99,15 @@ Interface
 	      const Kokkos::View<DataType2, Properties2...>& view2,
 	      BinaryPredicate pred);
 
+Overload set accepting a team handle
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. versionadded:: 4.2
+
+.. code-block:: cpp
+
    //
-   // overload set accepting a team handle and iterators
+   // overload set accepting iterators
    //
    template <class TeamHandleType, class IteratorType1, class IteratorType2>
    KOKKOS_FUNCTION
@@ -128,7 +138,7 @@ Interface
 	      BinaryPredicateType predicate);
 
    //
-   // overload set accepting a team handle and Kokkos Views
+   // overload set accepting Kokkos Views
    //
    template <class TeamHandleType, class DataType1, class... Properties1,
 	     class DataType2, class... Properties2>
