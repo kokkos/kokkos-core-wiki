@@ -127,7 +127,7 @@ There are numerous device backends, options, and architecture-specific optimizat
  -DCMAKE_INSTALL_PREFIX=${my_install_folder} \
  -DKokkos_ENABLE_OPENMP=On
 ```
-which activates the OpenMP backend. All the options controlling device backends, options, architectures, and third-party libraries (TPLs) are given below under the keywords listing.
+which activates the OpenMP backend. All the options controlling device backends, options, architectures, and third-party libraries (TPLs) are given in [CMake Keywords](../keywords).
 
 ### Using generate_makefile.bash
 As an alternative to calling the cmake command directly, the generate_makefile.bash command can be used to configure the CMake build environment.  The generate_makefile.bash equivalent to the above OpenMP example is as follows:
