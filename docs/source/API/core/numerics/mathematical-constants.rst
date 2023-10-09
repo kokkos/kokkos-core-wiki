@@ -40,8 +40,13 @@ All constants are defined in the ``Kokkos::numbers::`` namespace since version 4
 Notes
 -----
 
+.. _KnownIssues: ../../../known-issues.html#mathematical-constants
+
+.. |KnownIssues| replace:: known issues
+
 * The mathematical constants are available in ``Kokkos::Experimental::`` since Kokkos 3.6
 * They were "promoted" to the ``Kokkos::numbers`` namespace in 4.0
+* Avoid taking the address of mathematical constants in device code.  It is not supported by some toolchains, hence not portable.  (See |KnownIssues|_)
 
 ------------
 
