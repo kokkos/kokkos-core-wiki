@@ -46,7 +46,7 @@ Notes
 
 * The mathematical constants are available in ``Kokkos::Experimental::`` since Kokkos 3.6
 * They were "promoted" to the ``Kokkos::numbers`` namespace in 4.0
-* Avoid taking the address of mathematical constants in device code.  It is not supported by some toolchains, hence not portable.  (See |KnownIssues|_)
+* Passing mathematical constants by reference or taking their address in device code is not supported by some toolchains and hence not portable.  (See |KnownIssues|_)
 
 ------------
 
