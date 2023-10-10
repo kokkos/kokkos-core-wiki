@@ -1,11 +1,21 @@
-# kokkos-core-documentation-website
+# kokkos-core-documentation project
 Welcome to the Kokkos Documentation repository.  This is the source for https://kokkos.github.io/kokkos-core-wiki/.
 
 ## Requirements to build html page locally
 
-This is needed just for local render of documentation, so it can be checked before push.
-Requirements are in `build_requirements.txt`
-Could be installed with: `pip install -r build_requirements.txt`
+The library-level dependencies needed for Kokkos documentation are:
+
+- Sphinx
+- furo
+- myst-parser
+- sphinx-copybutton
+- m2r2
+
+Each of the above libraries can be installed using `conda` or `pip`. 
+
+These libraries are needed for local documentation rendering, a critical check *before* creating pull requests (PR), and updating existing PR.
+
+These requirements are in `build_requirements.txt,` and can be installed with: `pip install -r build_requirements.txt`
 
 ## Build
 
@@ -24,11 +34,14 @@ make clean
 
 `docs/generated_docs/index.html` can be opened in a web browser, or alternatively you can use python's built-in http server:
 
-```bash
+```
+bash
 cd docs/generated_docs
 python3 -m http.server
 ```
 
 Then, navigate to http://localhost:8000
 
-Alternatively, if you would like to auto refresh every time you run make, the documentation works with [httpwatcher](https://pypi.org/project/httpwatcher/).
+- For `conda` or `pip`, please install `pytest-httpserver`
+
+Alternatively, if you would like to auto refresh every time you run make, the documentation works with [httpwatcher](https://pypi.org/project/httpwatcher/).  This library is only available for `pip` installation.
