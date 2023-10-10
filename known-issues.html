@@ -540,6 +540,28 @@ calls to mathematical functions.  Instead, prefer explicit qualification
 <code class="docutils literal notranslate"><span class="pre">Kokkos::sqrt</span></code> or an using-declaration <code class="docutils literal notranslate"><span class="pre">using</span> <span class="pre">Kokkos::sqrt;</span></code> at local
 scope.</p>
 </section>
+<section id="mathematical-constants">
+<h2>Mathematical constants<a class="headerlink" href="#mathematical-constants" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Avoid taking the address of mathematical constants in device code.  It is not supported by some toolchains, hence not portable.</p></li>
+</ul>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Kokkos_Core.hpp&gt;</span>
+
+<span class="n">KOKKOS_FUNCTION</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">do_math</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// complex constructor takes scalar arguments by reference!</span>
+<span class="w">  </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">complex</span><span class="w"> </span><span class="nf">z1</span><span class="p">(</span><span class="n">Kokkos</span><span class="o">::</span><span class="n">numbers</span><span class="o">::</span><span class="n">pi</span><span class="p">);</span>
+<span class="w">  </span><span class="c1">// error: identifier &quot;Kokkos::numbers::pi&quot; is undefined in device code</span>
+
+<span class="w">  </span><span class="c1">// 1*pi is a temporary</span>
+<span class="w">  </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">complex</span><span class="w"> </span><span class="nf">z2</span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">numbers</span><span class="o">::</span><span class="n">pi</span><span class="p">);</span><span class="w">  </span><span class="c1">// OK</span>
+
+<span class="w">  </span><span class="c1">// copy into a local variable</span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">pi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">numbers</span><span class="o">::</span><span class="n">pi</span><span class="p">;</span>
+<span class="w">  </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">complex</span><span class="w"> </span><span class="nf">z3</span><span class="p">(</span><span class="n">pi</span><span class="p">);</span><span class="w">  </span><span class="c1">// OK</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
 </section>
 
         </article>
@@ -602,6 +624,7 @@ scope.</p>
 <li><a class="reference internal" href="#">Known issues</a><ul>
 <li><a class="reference internal" href="#hip">HIP</a></li>
 <li><a class="reference internal" href="#mathematical-functions">Mathematical functions</a></li>
+<li><a class="reference internal" href="#mathematical-constants">Mathematical constants</a></li>
 </ul>
 </li>
 </ul>

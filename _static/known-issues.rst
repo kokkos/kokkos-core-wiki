@@ -41,3 +41,25 @@ The using-directive ``using namespace Kokkos;`` is highly discouraged (see
 calls to mathematical functions.  Instead, prefer explicit qualification
 ``Kokkos::sqrt`` or an using-declaration ``using Kokkos::sqrt;`` at local
 scope.
+
+Mathematical constants
+======================
+
+- Avoid taking the address of mathematical constants in device code.  It is not supported by some toolchains, hence not portable.
+
+.. code-block:: cpp
+
+    #include <Kokkos_Core.hpp>
+
+    KOKKOS_FUNCTION void do_math() {
+      // complex constructor takes scalar arguments by reference!
+      Kokkos::complex z1(Kokkos::numbers::pi);
+      // error: identifier "Kokkos::numbers::pi" is undefined in device code
+
+      // 1*pi is a temporary
+      Kokkos::complex z2(1 * Kokkos::numbers::pi);  // OK
+
+      // copy into a local variable
+      auto pi = Kokkos::numbers::pi;
+      Kokkos::complex z3(pi);  // OK
+    }
