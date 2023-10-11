@@ -1,21 +1,18 @@
-Consolidation:
-==============
+PRs and Reviews
+===============
 
-Overarching Goals of good Review
---------------------------------
-
-The goal of a review is to ensure that the proposed change is useful and maintainable over the long run.
+The goal of a review is to ensure that the proposed change is useful and maintainable over the long run. Submitters should consider and reviewers should evaluate the below criteria.
 
 PR Description
 ---------------
 
-- Have a meaningful title: it's easier when creating the changelog or when searching through old PR
+- Have a meaningful title: it's easier when creating the changelog or when searching through old PRs
 - Motivate why we should merge the PR: adding/changing code risks introducing a new bug. IMO one person asking for a nice to have feature doesn't qualify.
-- Explain the PR does in the description: it makes it easier/faster to review
-- Make the PR as small as possible: it's much easier to review five 200 lines PR than one 1000 lines PR
+- Explain what the PR does in the description: it makes it easier/faster to review
+- Make the PR as small as possible: it's much easier to review five PRs 200 lines each than one single PR with 1000 lines 
 - If a PR is known to create conflict with other active PRs, try to coordinate, and link to each other
-  - if appropriate explain desired review/merge order 
-- For complex changes that will require multiple PR, create an issue to keep track of what has been done and what's left to do.
+  - if appropriate, explain the desired review/merge order 
+- For complex changes that will require multiple PRs, create an issue to keep track of what has been done and what's left to do.
 - Is the PR focused on a single bugfix or feature?
   - consider moving self contained changes to separate PRs 
 
@@ -34,7 +31,7 @@ Public Interfaces
 - For any routine that's going to launch any parallel work, does it have an overload that takes an execution space instance, and does that overload use the instance for all parallel work?
 - if the functionality is similar to an ISO C++ functionality, is the interface and behavior similar, and in places where it's not is it a conscious decision
 - is there a corresponding API documentation PR
-- Are the corner cases handled (works correct, won't compile, detected at run time)?
+- Are the corner cases handled (works correctly, won't compile, detected at run time)?
 - Do the C++ defaulted functions do the right thing (including if needed to be marked with KOKKOS_DEFAULTED_FUNCTION)?
 
 
