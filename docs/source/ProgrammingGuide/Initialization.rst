@@ -19,9 +19,11 @@ For specific capabilities check their API reference:
 --------------------------------------------
 
 The simplest way to initialize Kokkos is by calling the following function:
-```c++
+
+.. code-block:: cpp
+
 Kokkos::initialize(int& argc, char* argv[]);
-```
+
 Just like `MPI_Init`, this function interprets command-line arguments to determine the requested settings. Also like `MPI_Init`, it reserves the right to remove command-line arguments from the input list. This is why it takes `argc` by reference, rather than by value; it may change the value on output.
 
 During initialization one or more execution spaces will be initialized and assigned to one of the following aliases.
