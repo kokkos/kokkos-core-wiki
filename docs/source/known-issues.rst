@@ -8,6 +8,11 @@ Known issues
 HIP
 ===
 
+- When using `HIPManagedSpace`, the memory migrates between the CPU and the GPU if:
+   - the hardware supports it
+   - the kernel was compiled to support page migration
+   - the environment variable `HSA_XNACK` is set to 1
+
 - Compatibility issue between HIP and gcc 8. You may encounter the following error:
 
   .. code-block::
