@@ -14,11 +14,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - name: Checkout kokkos
-        uses: actions/checkout@v3
-        with:
-          repository: kokkos/kokkos
-          path: kokkos
       - name: Set up Python ${{ env.python-version }}
         uses: actions/setup-python@v4
         with:
