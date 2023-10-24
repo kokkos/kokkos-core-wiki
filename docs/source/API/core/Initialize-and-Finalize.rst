@@ -35,11 +35,6 @@ ScopeGuard aids in the following common mistake which is allowing Kokkos objects
     // my_view destructor called after Kokkos::finalize !
   }
 
-
-.. raw:: html
-
-  <iframe width="800px" height="300px" src="https://godbolt.org/e?hideEditorToolbars=true#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:9,positionColumn:1,positionLineNumber:9,selectionStartColumn:1,selectionStartLineNumber:9,startColumn:1,startLineNumber:9),source:'%23include+%3CKokkos_Core.hpp%3E%0A%0Aint+main(int+argc,+char**+argv)+%7B%0A++Kokkos::initialize(argc,+argv)%3B%0A++Kokkos::View%3Cdouble*%3E+my_view(%22my_view%22,+10)%3B%0A++Kokkos::finalize()%3B%0A++//+my_view+destructor+called+after+Kokkos::finalize+!!%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50,l:'4',m:100,n:'0',o:'',s:0,t:'0'),(g:!((h:compiler,i:(compiler:clang1600,deviceViewOpen:'1',filters:(b:'0',binary:'1',binaryObject:'1',commentOnly:'0',debugCalls:'1',demangle:'0',directives:'0',execute:'1',intel:'0',libraryCode:'0',trim:'1'),flagsViewOpen:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!((name:kokkos,ver:'4100')),options:'',overrides:!(),selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:1),l:'5',n:'0',o:'+x86-64+clang+16.0.0+(Editor+%231)',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4"></iframe>
-
 Switching to ``Kokkos::ScopeGuard`` fixes it:
 
 .. code-block:: cpp
