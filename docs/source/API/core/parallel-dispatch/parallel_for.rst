@@ -81,6 +81,15 @@ More Detailed Examples are provided in the ExecutionPolicy documentation.
         Kokkos::finalize();
     }
 
+.. raw:: html
+
+   <a href="https://godbolt.org/z/q9h339vob" target="_blank">Edit on Compiler Explorer</a>
+
+.. ceinclude::  ../../../../../kokkos/example/tutorial/01_hello_world_lambda/hello_world_lambda.cpp
+  :language: cpp
+  :start-after: Kokkos::initialize
+  :end-before: Kokkos::finalize
+
 * ``TeamPolicy`` policy with C++ struct as  functor.  Note that the KOKKOS_INLINE_FUNCTION macro adds all of the function specifiers necessary for the target execution space.  The TagA/B structs also provide the ability to 'overload' the operators within the same functor.  Much like the lambda example, the functor and any member variables contained within are captured by value, which means they must have either implicit or explicit copy constructors.
 
 .. code-block:: cpp
