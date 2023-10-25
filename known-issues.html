@@ -512,6 +512,16 @@
 <section id="hip">
 <h2>HIP<a class="headerlink" href="#hip" title="Permalink to this heading">#</a></h2>
 <ul>
+<li><dl>
+<dt>When using <cite>HIPManagedSpace</cite>, the memory migrates between the CPU and the GPU if:</dt><dd><ul class="simple">
+<li><p>the hardware supports it</p></li>
+<li><p>the kernel was compiled to support page migration</p></li>
+<li><p>the environment variable <cite>HSA_XNACK</cite> is set to 1</p></li>
+</ul>
+<p>See <a class="reference external" href="https://docs.olcf.ornl.gov/systems/frontier_user_guide.html#enabling-gpu-page-migration">here</a> for more explanation.</p>
+</dd>
+</dl>
+</li>
 <li><p>Compatibility issue between HIP and gcc 8. You may encounter the following error:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">error</span><span class="p">:</span> <span class="n">reference</span> <span class="n">to</span> <span class="n">__host__</span> <span class="n">function</span> <span class="s1">&#39;operator new&#39;</span> <span class="ow">in</span> <span class="n">__host__</span> <span class="n">__device__</span> <span class="n">function</span>
 </pre></div>
