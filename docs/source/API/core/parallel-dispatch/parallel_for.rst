@@ -64,6 +64,9 @@ More Detailed Examples are provided in the ExecutionPolicy documentation.
 
 * ``IntegerType`` policy with lambda as the functor.  Note that KOKKOS_LAMBDA is the same as [=] KOKKOS_FUNCTION, which means that all of the variables used within the lambda are captured by value.  Also, the KOKKOS_LAMBDA and KOKKOS_FUNCTION macros add all of the function specifiers necessary for the target execution space.
 
+.. note::
+   Code snippet + a short link to compiler explorer.
+
 .. code-block:: cpp
 
     #include<Kokkos_Core.hpp>
@@ -84,6 +87,9 @@ More Detailed Examples are provided in the ExecutionPolicy documentation.
 .. raw:: html
 
    <a href="https://godbolt.org/z/q9h339vob" target="_blank">Edit on Compiler Explorer</a>
+
+.. note::
+   Code snippet taken directly from Kokkos Core (``hello_world_lambda.cpp``) + a link containing full source code of the example.
 
 .. ceinclude::  ../../../../../kokkos/example/tutorial/01_hello_world_lambda/hello_world_lambda.cpp
   :language: cpp
