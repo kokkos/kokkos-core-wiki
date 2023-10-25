@@ -13,6 +13,8 @@ HIP
    - the kernel was compiled to support page migration
    - the environment variable `HSA_XNACK` is set to 1
 
+   See `here <https://docs.olcf.ornl.gov/systems/frontier_user_guide.html#enabling-gpu-page-migration>`_ for more explanation.
+
 - Compatibility issue between HIP and gcc 8. You may encounter the following error:
 
   .. code-block::
