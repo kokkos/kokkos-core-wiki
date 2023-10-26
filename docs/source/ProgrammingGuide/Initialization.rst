@@ -1,7 +1,7 @@
 5. Initialization
 =================
 
-In order to use Kokkos an initialization call is required. That call is responsible for initializing internal objects and acquiring hardware resources such as threads. Typically, this call should be placed right at the start of a program. If you use both MPI and Kokkos, your program should initialize Kokkos right after calling `MPI_Init`. That way, if MPI sets up process binding masks, Kokkos will get that information and use it for best performance. Your program must also _finalize_ Kokkos when done using it in order to free hardware resources.
+In order to use Kokkos, an initialization call is required. That call is responsible for initializing internal objects and acquiring hardware resources such as threads. Typically, this call should be placed right at the start of a program. If you use both MPI and Kokkos, your program should initialize Kokkos right after calling `MPI_Init`. That way, if MPI sets up process binding masks, Kokkos will get that information and use it for best performance. Your program must also _finalize_ Kokkos when done using it in order to free hardware resources.
 
 5.0 Include Headers
 -------------------
@@ -24,9 +24,9 @@ The simplest way to initialize Kokkos is by calling the following function:
 
 Kokkos::initialize(int& argc, char* argv[]);
 
-Just like `MPI_Init`, this function interprets command-line arguments to determine the requested settings. Also like `MPI_Init`, it reserves the right to remove command-line arguments from the input list. This is why it takes `argc` by reference, rather than by value; it may change the value on output.
+Just like `MPI_Init`, this function interprets command-line arguments to determine the requested settings. Also like `MPI_Init`, it reserves the right to remove command-line arguments from the input list. This is why it takes `argc` by reference, rather than by value.
 
-During initialization one or more execution spaces will be initialized and assigned to one of the following aliases.
+During initialization, one or more execution spaces will be initialized and assigned to one of the following aliases.
 
 .. code-block:: cpp
 
@@ -36,19 +36,20 @@ Kokkos::DefaultExecutionSpace;
 
 Kokkos::DefaultHostExecutionSpace;
 
-`DefaultExecutionSpace` is the execution space used with policies and views where one is not explicitly specified.  Primarily, Kokkos will initialize one of the heterogeneous backends (CUDA, OpenMPTarget, HIP, SYCL) as the `DefaultExecutionSpace` if enabled in the build configuration.  In addition, Kokkos requires a `DefaultHostExecutionSpace`.  The `DefaultHostExecutionSpace` is default execution space used when host operations are required.  If one of the parallel host execution spaces are enabled in the build environment then `Kokkos::Serial` is only initialized if it is explicitly enabled in the build configuration.  If a parallel host execution space is not enabled in the build configuration, then `Kokkos::Serial` is initialized as the `DefaultHostExecutionSpace`.
+`DefaultExecutionSpace` is the execution space used with policies and views where one is not explicitly specified.  Primarily, Kokkos will initialize one of the heterogeneous backends (CUDA, HIP, OpenACC, OpenMPTarget, SYCL) as the `DefaultExecutionSpace` if enabled in the build configuration.  In addition, Kokkos requires a `DefaultHostExecutionSpace`.  The `DefaultHostExecutionSpace` is the default execution space used when host operations are required.  If one of the parallel host execution spaces is enabled in the build environment then `Kokkos::Serial` is only initialized if it is explicitly enabled in the build configuration.  If a parallel host execution space is not enabled in the build configuration, then `Kokkos::Serial` is initialized as the `DefaultHostExecutionSpace`.
 Kokkos chooses the two spaces using the following list:
 
 1. `Kokkos::Cuda`
 2. `Kokkos::Experimental::HPX`
-3. `Kokkos::Experimental::OpenMPTarget`
-4. `Kokkos::Experimental::SYCL`
-5. `Kokkos::HIP`
-6. `Kokkos::OpenMP`
-7. `Kokkos::Threads`
-8. `Kokkos::Serial`
+3. `Kokkos::Experimental::OpenACC`
+4. `Kokkos::Experimental::OpenMPTarget`
+5. `Kokkos::Experimental::SYCL`
+6. `Kokkos::HIP`
+7. `Kokkos::OpenMP`
+8. `Kokkos::Threads`
+9. `Kokkos::Serial`
 
-The highest execution space in the list which is enabled is Kokkos' default execution space, and the highest enabled host execution space is Kokkos' default host execution space. For example, if  `Kokkos::Cuda`, `Kokkos::OpenMP`, and `Kokkos::Serial` are enabled, then `Kokkos::Cuda` is the default execution space and `Kokkos::OpenMP` is the default host execution space.:sup:`1`  In cases where the highest enabled backend is a host parallel execution space the `DefaultExecutionSpace` and the `DefaultHostExecutionSpace` will be the same.
+The highest execution space in the list that is enabled is Kokkos' default execution space, and the highest enabled host execution space is Kokkos' default host execution space. For example, if  `Kokkos::Cuda`, `Kokkos::OpenMP`, and `Kokkos::Serial` are enabled, then `Kokkos::Cuda` is the default execution space and `Kokkos::OpenMP` is the default host execution space.:sup:`1`  In cases where the highest enabled backend is a host parallel execution space the `DefaultExecutionSpace` and the `DefaultHostExecutionSpace` will be the same.
 
 `Kokkos::initialize <../API/Initialize-and-Finalize.html#kokos-initialize>`_ parses the command line for flags prefixed with `--kokkos-`, and removes all recognized flags. Argument options are given with an equals (`=`) sign. If the same argument occurs more than once, the last one is used. For example, the arguments
 
@@ -72,7 +73,7 @@ Table 5.1: Command-line options for Kokkos::initialize
     - allow Kokkos to autotune policies and declare tuning features through the tuning system. If left off, Kokkos uses heuristics.
   * - --kokkos-num-threads=INT     
     - specify total number of threads to use for parallel regions on the host
-  * - --kokkos-map-device-id-by=(random\|mpi_rank)  
+  * - --kokkos-map-device-id-by=(random\|mpi_rank), default: mpi_rank
     - strategy to select device-id automatically from available devices: random or mpi_rank:sup:`2`
   * - --kokkos-tools-libs=STR      
     - specify which of the tools to use. Must either be full path to library or name of library if the path is present in the runtime library search path (e.g. LD_LIBRARY_PATH)
@@ -88,7 +89,7 @@ When passing a boolean as a string, the acceptable values are:
 The values are case insensitive.
 
 
-:sup:`1` This is the preferred set of defaults when CUDA and OpenMP are enabled. If you use a thread-parallel host execution space, we prefer Kokkos' OpenMP back-end, as this ensures compatibility of Kokkos' threads with the application's direct use of OpenMP threads. Kokkos cannot promise that its Threads back-end will not conflict with the application's direct use of operating system threads.
+:sup:`1` This is the preferred set of defaults when CUDA and OpenMP are enabled. If you use a thread-parallel host execution space, we prefer Kokkos' OpenMP backend, as this ensures compatibility of Kokkos' threads with the application's direct use of OpenMP threads. Kokkos cannot promise that its Threads backend will not conflict with the application's direct use of operating system threads.
 :sup:`2` The two device-id mapping strategies are:
 - random: select a random device from available.
 - mpi_rank: select device based on a round robin assignment of local MPI ranks. Works with OpenMPI, MVAPICH, SLURM, and derived implementations. Support for MPICH was added in Kokkos 4.0
