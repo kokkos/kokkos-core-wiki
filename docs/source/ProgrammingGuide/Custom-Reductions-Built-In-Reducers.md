@@ -53,8 +53,8 @@ minloc_type minloc;
 
 Kokkos::parallel_reduce( "MinLocReduce", N, KOKKOS_LAMBDA (const int& x, minloc_type& lminloc) {
   double val = (1.0*x- 7.2) * (1.0*x- 7.2) + 3.5;
-  if( val < lminloc.val ) { lminloc.val = val; lminloc.loc = i; }
-}, Kokkos::MinLoc<double,int> minloc_reducer(minloc));
+  if( val < lminloc.val ) { lminloc.val = val; lminloc.loc = x; }
+}, Kokkos::MinLoc<double,int>(minloc));
 
 printf("Min: %lf at %i\n", minloc.val, minloc.loc);
 ```
