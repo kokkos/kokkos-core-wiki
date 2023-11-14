@@ -9,7 +9,7 @@ Defined in header ``<Kokkos_Core.hpp>``
 .. code-block:: cpp
 
     template <typename... Args>
-    KOKKOS_FUNCTION void printf(const char* format, Args... args);
+    KOKKOS_FUNCTION void printf(const char* format, Args... args);  // (since 4.2)
 
 Prints the data specified in ``format`` and ``args...`` to ``stdout``.
 The behavior is analogous to ``std::printf``, but the return type is ``void``
