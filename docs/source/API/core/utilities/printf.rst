@@ -33,4 +33,4 @@ Example
 Notes
 ~~~~~
 * The ``Kokkos::printf()`` function was added in release 4.2
-* Calling ``printf()`` from a kernel may affect register usage and affect performance.
+* Calling ``Kokkos::printf()`` from a kernel may affect register usage and affect performance.
