@@ -16,7 +16,7 @@ Defined in header ``<Kokkos_Core.hpp>``
 
 .. _Kokkos_realloc: realloc.html
 
-.. |Kokkos_realloc| replace:: ``Kokkos::realloc()``
+.. |Kokkos_realloc| replace:: ``Kokkos::kokkos_realloc()``
 
 Allocate ``size`` bytes of uninitialized storage on the specified memory space |MemorySpace|_ plus some extra space for metadata such as the label.
 
