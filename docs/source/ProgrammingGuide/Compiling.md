@@ -129,17 +129,6 @@ There are numerous device backends, options, and architecture-specific optimizat
 ```
 which activates the OpenMP backend. All the options controlling device backends, options, architectures, and third-party libraries (TPLs) are given in [CMake Keywords](../keywords).
 
-### Using generate_makefile.bash
-As an alternative to calling the cmake command directly, the generate_makefile.bash command can be used to configure the CMake build environment.  The generate_makefile.bash equivalent to the above OpenMP example is as follows:
-
-```bash
-> ${srcdir}/generate_makefile.bash --compiler=g++ \
-  --with-openmp --prefix=${my_install_folder}
-```
-For a full list of generate_makefile.bash options use the command
-```bash
-> ${srcdir}/generate_makefile.bash --help
-```
 
 ### Spack
 An alternative to manually building with CMake is to use the Spack package manager.
@@ -255,7 +244,6 @@ A word of caution on where to include the `Makefile.kokkos`: since the embedded 
 
 More example application Makefiles can be found in the tutorial examples under `kokkos/example/tutorial`.
 
-Kokkos provides a script `generate_makefile.bash` which can generate a Makefile for building and installing the library as well as building and running the tests. Please run `generate_makefile.bash --help` to see options. Note that paths given to the script must be absolute paths, and the script must be run with the `bash` shell (the script will do this if it is run directly, i.e., as `./generate_makefile.bash`).
 
 <h4>Table 4.4: Variables for the GNU Makefile</h4>
 
