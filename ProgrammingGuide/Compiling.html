@@ -661,18 +661,6 @@ There are numerous device backends, options, and architecture-specific optimizat
 </pre></div>
 </div>
 <p>which activates the OpenMP backend. All the options controlling device backends, options, architectures, and third-party libraries (TPLs) are given in <a class="reference internal" href="../keywords.html"><span class="doc std std-doc">CMake Keywords</span></a>.</p>
-<section id="using-generate-makefile-bash">
-<h3>Using generate_makefile.bash<a class="headerlink" href="#using-generate-makefile-bash" title="Permalink to this heading">#</a></h3>
-<p>As an alternative to calling the cmake command directly, the generate_makefile.bash command can be used to configure the CMake build environment.  The generate_makefile.bash equivalent to the above OpenMP example is as follows:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>&gt;<span class="w"> </span><span class="si">${</span><span class="nv">srcdir</span><span class="si">}</span>/generate_makefile.bash<span class="w"> </span>--compiler<span class="o">=</span>g++<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--with-openmp<span class="w"> </span>--prefix<span class="o">=</span><span class="si">${</span><span class="nv">my_install_folder</span><span class="si">}</span>
-</pre></div>
-</div>
-<p>For a full list of generate_makefile.bash options use the command</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>&gt;<span class="w"> </span><span class="si">${</span><span class="nv">srcdir</span><span class="si">}</span>/generate_makefile.bash<span class="w"> </span>--help
-</pre></div>
-</div>
-</section>
 <section id="spack">
 <h3>Spack<a class="headerlink" href="#spack" title="Permalink to this heading">#</a></h3>
 <p>An alternative to manually building with CMake is to use the Spack package manager.
@@ -777,7 +765,6 @@ main: $(KOKKOS_LINK_DEPENDS) $(KOKKOS_CPP_DEPENDS) main.cpp
 </pre></div>
 </div>
 <p>More example application Makefiles can be found in the tutorial examples under <code class="docutils literal notranslate"><span class="pre">kokkos/example/tutorial</span></code>.</p>
-<p>Kokkos provides a script <code class="docutils literal notranslate"><span class="pre">generate_makefile.bash</span></code> which can generate a Makefile for building and installing the library as well as building and running the tests. Please run <code class="docutils literal notranslate"><span class="pre">generate_makefile.bash</span> <span class="pre">--help</span></code> to see options. Note that paths given to the script must be absolute paths, and the script must be run with the <code class="docutils literal notranslate"><span class="pre">bash</span></code> shell (the script will do this if it is run directly, i.e., as <code class="docutils literal notranslate"><span class="pre">./generate_makefile.bash</span></code>).</p>
 <h4>Table 4.4: Variables for the GNU Makefile</h4>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
@@ -950,7 +937,6 @@ main: $(KOKKOS_LINK_DEPENDS) $(KOKKOS_CPP_DEPENDS) main.cpp
 </ul>
 </li>
 <li><a class="reference internal" href="#configuring-kokkos-with-cmake">Configuring Kokkos with CMake</a><ul>
-<li><a class="reference internal" href="#using-generate-makefile-bash">Using generate_makefile.bash</a></li>
 <li><a class="reference internal" href="#spack">Spack</a><ul>
 <li><a class="reference internal" href="#spack-development">Spack Development</a></li>
 </ul>
