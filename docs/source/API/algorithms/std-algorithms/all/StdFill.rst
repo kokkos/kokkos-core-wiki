@@ -7,8 +7,8 @@ Header: ``<Kokkos_StdAlgorithms.hpp>``
 Description
 -----------
 
-Copy-assigns ``value`` to each element in the range ``[first, last)`` (overloads 1,2)
-or in ``view`` (overloads 3,4).
+Assigns a given ``value`` to each element in a given range or rank-1 ``View``.
+
 
 Interface
 ---------
@@ -16,11 +16,11 @@ Interface
 .. warning:: This is currently inside the ``Kokkos::Experimental`` namespace.
 
 
+Overload set accepting execution space
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 .. code-block:: cpp
 
-   //
-   // overload set accepting execution space
-   //
    template <class ExecutionSpace, class IteratorType, class T>
    void fill(const ExecutionSpace& exespace,                                    (1)
              IteratorType first, IteratorType last,
@@ -41,20 +41,22 @@ Interface
              const Kokkos::View<DataType, Properties...>& view,
              const T& value);
 
-   //
-   // overload set accepting a team handle
-   // Note: for now omit the overloads accepting a label
-   // since they cause issues on device because of the string allocation.
-   //
+Overload set accepting a team handle
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. versionadded:: 4.2
+
+.. code-block:: cpp
+
    template <class TeamHandleType, class IteratorType, class T>
    KOKKOS_FUNCTION
-   void fill(const TeamHandleType& th,
+   void fill(const TeamHandleType& teamHandle,                                  (5)
              IteratorType first, IteratorType last,
              const T& value);
 
    template <class TeamHandleType, class DataType, class... Properties, class T>
    KOKKOS_FUNCTION
-   void fill(const TeamHandleType& th,
+   void fill(const TeamHandleType& teamHandle,                                  (6)
              const Kokkos::View<DataType, Properties...>& view,
              const T& value);
 
@@ -74,13 +76,11 @@ Parameters and Requirements
 
   - NOTE: overloads accepting a team handle do not use a label internally
 
-- ``first, last``: range of elements to search in
-
-  - range of elements to assign to
+- ``first, last``: range of elements to modify
 
   - must be *random access iterators*, e.g., ``Kokkos::Experimental::begin/end``
 
-  - must represent a valid range, i.e., ``last >= first`` (checked in debug mode)
+  - must represent a valid range, i.e., ``last >= first``
 
   - must be accessible from ``exespace`` or from the execution space associated with the team handle
 

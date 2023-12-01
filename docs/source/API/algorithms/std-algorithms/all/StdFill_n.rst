@@ -7,8 +7,8 @@ Header: ``<Kokkos_StdAlgorithms.hpp>``
 Description
 -----------
 
-Copy-assigns ``value`` to the first ``n`` elements in the range starting at ``first`` (overloads 1,2)
-or the first ``n`` elements in ``view`` (overloads 3,4).
+Assigns a given ``value`` to the first ``n`` elements in a given range or rank-1 ``View``.
+
 
 Interface
 ---------
@@ -16,11 +16,11 @@ Interface
 .. warning:: This is currently inside the ``Kokkos::Experimental`` namespace.
 
 
+Overload set accepting execution space
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 .. code-block:: cpp
 
-   //
-   // overload set accepting execution space
-   //
    template <class ExecutionSpace, class IteratorType, class SizeType, class T>
    IteratorType fill_n(const ExecutionSpace& exespace,                             (1)
                        IteratorType first,
@@ -31,41 +31,46 @@ Interface
                        IteratorType first,
                        SizeType n, const T& value);
 
-   template <class ExecutionSpace, class DataType, class... Properties, class SizeType, class T>
+   template <
+     class ExecutionSpace, class DataType, class... Properties, 
+     class SizeType, class T>
    auto fill_n(const ExecutionSpace& exespace,                                     (3)
                const Kokkos::View<DataType, Properties...>& view,
                SizeType n, const T& value);
 
-   template <class ExecutionSpace, class DataType, class... Properties, class SizeType, class T>
+   template <
+     class ExecutionSpace, class DataType, class... Properties, 
+     class SizeType, class T>
    auto fill_n(const std::string& label, const ExecutionSpace& exespace,           (4)
                const Kokkos::View<DataType, Properties...>& view,
                SizeType n, const T& value);
 
-   //
-   // overload set accepting a team handle
-   //
+Overload set accepting a team handle
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. versionadded:: 4.2
+
+
+.. code-block:: cpp
+
    template <class TeamHandleType, class IteratorType, class SizeType, class T>
    KOKKOS_FUNCTION
-   IteratorType fill_n(const TeamHandleType& th,
-                       IteratorType first, SizeType n,
-                       const T& value);
+   IteratorType fill_n(const TeamHandleType& teamHandle,                           (5)
+                       IteratorType first, SizeType n, const T& value);
 
    template <
-       class TeamHandleType, class DataType, class... Properties, class SizeType,
-       class T, int>
+     class TeamHandleType, class DataType, class... Properties, class SizeType, 
+     class T>
    KOKKOS_FUNCTION
-   IteratorType fill_n(const TeamHandleType& th,
-                       const Kokkos::View<DataType, Properties...>& view,
-                       SizeType n,
-                       const T& value);
+   auto fill_n(const TeamHandleType& teamHandle,                           (6)
+               const Kokkos::View<DataType, Properties...>& view,
+               SizeType n, const T& value);
 
 
 Parameters and Requirements
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- ``exespace``, ``first``, ``view``, ``value``: same as in [``fill``](./StdFill): execution space instance
-
-- ``teamHandle``: team handle instance given inside a parallel region when using a TeamPolicy
+- ``exespace``, ``teamHandle``, ``first``, ``view``, ``value``: same as in [``fill``](./StdFill): execution space instance
 
 - ``label``: used to name the implementation kernels for debugging purposes
 
@@ -84,7 +89,7 @@ Return Value
 
 If ``n > 0``, returns an iterator to the element *after* the last element assigned.
 
-Otherwise, it returns ``first`` (for 1,2) or ``Kokkos::begin(view)`` (for 3,4).
+Otherwise, it returns ``first`` (for 1,2,5) or ``Kokkos::begin(view)`` (for 3,4,6).
 
 
 Example

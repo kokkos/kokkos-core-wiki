@@ -7,9 +7,8 @@ Header: ``<Kokkos_StdAlgorithms.hpp>``
 Description
 -----------
 
-Replaces with ``new_value`` all elements that are equal to ``old_value`` in the
-range ``[first, last)`` (overloads 1,2) or in ``view`` (overloads 3,4).
-Equality is checked using ``operator==``.
+Replaces with ``new_value`` all elements that are equal to ``old_value`` in 
+a given range or rank-1 ``View``. Equality is checked using ``operator==``.
 
 Interface
 ---------
@@ -17,11 +16,11 @@ Interface
 .. warning:: This is currently inside the ``Kokkos::Experimental`` namespace.
 
 
+Overload set accepting execution space
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 .. code-block:: cpp
 
-   //
-   // overload set accepting execution space
-   //
    template <class ExecutionSpace, class IteratorType, class T>
    void replace(const ExecutionSpace& exespace,                                 (1)
                 IteratorType first, IteratorType last,
@@ -42,19 +41,24 @@ Interface
                 const Kokkos::View<DataType, Properties...>& view,
                 const T& old_value, const T& new_value);
 
-   //
-   // overload set accepting a team handle
-   //
+
+Overload set accepting a team handle
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. versionadded:: 4.2
+
+.. code-block:: cpp
+
    template <class TeamHandleType, class Iterator, class ValueType>
    KOKKOS_FUNCTION
-   void replace(const TeamHandleType& teamHandle,
+   void replace(const TeamHandleType& teamHandle,                               (5)
                 Iterator first, Iterator last,
                 const ValueType& old_value, const ValueType& new_value);
 
    template <class TeamHandleType, class DataType1, class... Properties1,
              class ValueType>
    KOKKOS_FUNCTION
-   void replace(const TeamHandleType& teamHandle,
+   void replace(const TeamHandleType& teamHandle,                               (6)
                 const ::Kokkos::View<DataType1, Properties1...>& view,
                 const ValueType& old_value, const ValueType& new_value);
 
@@ -74,9 +78,7 @@ Parameters and Requirements
 
   - NOTE: overloads accepting a team handle do not use a label internally
 
-- ``first, last``:
-
-  - range of elements to search in
+- ``first, last``: range of elements to search in
 
   - must be *random access iterators*, e.g., ``Kokkos::Experimental::begin/end``
 
