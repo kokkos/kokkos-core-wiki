@@ -14,14 +14,12 @@ Interface
 
 .. warning:: This is currently inside the ``Kokkos::Experimental`` namespace.
 
+
 Overload set accepting execution space
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: cpp
 
-   //
-   // overload set accepting iterators
-   //
    template <class ExecutionSpace, class IteratorType1, class IteratorType2>
    bool equal(const ExecutionSpace& exespace,                                        (1)
               IteratorType1 first1, IteratorType1 last1,
@@ -70,9 +68,6 @@ Overload set accepting execution space
 	      IteratorType2 first2, IteratorType2 last2,
 	      BinaryPredicateType predicate);
 
-   //
-   // overload set accepting Kokkos Views
-   //
    template <class ExecutionSpace, class DataType1, class... Properties1,
 	     class DataType2, class... Properties2>
    bool equal(const ExecutionSpace& exespace,                                        (9)
@@ -106,9 +101,6 @@ Overload set accepting a team handle
 
 .. code-block:: cpp
 
-   //
-   // overload set accepting iterators
-   //
    template <class TeamHandleType, class IteratorType1, class IteratorType2>
    KOKKOS_FUNCTION
    bool equal(const TeamHandleType& teamHandle,                                     (13)
@@ -137,9 +129,6 @@ Overload set accepting a team handle
 	      IteratorType2 first2, IteratorType2 last2,
 	      BinaryPredicateType predicate);
 
-   //
-   // overload set accepting Kokkos Views
-   //
    template <class TeamHandleType, class DataType1, class... Properties1,
 	     class DataType2, class... Properties2>
    KOKKOS_FUNCTION
@@ -187,13 +176,13 @@ Parameters and Requirements
 
 - ``first1``, ``last1``, ``first2``, ``last2``: iterators defining the ranges to read and compare
 
-  - must be *random access iterators*
+  - must be *random access iterators*, e.g., returned from ``Kokkos::Experimental::(c)begin/(c)end``
 
   - must represent a valid range, i.e., ``last1 >= first1``
 
   - must be accessible from ``exespace`` or from the execution space associated with the team handle
 
-- ``view1``, ``view2``: views to read elements and compare
+- ``view1``, ``view2``: views to compare
 
   - must be rank-1, and have ``LayoutLeft``, ``LayoutRight``, or ``LayoutStride``
 
