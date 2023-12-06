@@ -6,6 +6,7 @@ Utilities
 
    ./utilities/abort
    ./utilities/all
+   ./utilities/assert
    ./utilities/complex
    ./utilities/printf
    ./utilities/timer
