@@ -65,7 +65,7 @@ The second template parameter `Abi` is one of the pre-defined ABI types in the n
   * `bool none_of(const simd_mask&)`: returns true iff none of the vector values in the mask are true
 
 ### Global Typedefs
-  * `template <class T> Kokkos::Experimental::native_simd_mask`: Alias for `Kokkos::Experimental::simd_mask<T, Kokkos::Experimental::simd_abi::native>`.
+  * `template <class T> Kokkos::Experimental::native_simd_mask`: Alias for `Kokkos::Experimental::simd_mask<T, Kokkos::Experimental::simd_abi::native<T>>`.
 
 ## Examples
 
@@ -77,9 +77,9 @@ int main(int argc, char* argv[]) {
   Kokkos::initialize(argc,argv);
   {
   using mask_type = Kokkos::Experimental::native_simd_mask<double>;
-  mask_type a([] (std::size_t i) { return i == 0 });
-  mask_type b([] (std::size_t i) { return i == 1 });
-  mask_type c([] (std::size_t i) { return i == 0 || i == 1 });
+  mask_type a([] (std::size_t i) { return i == 0; });
+  mask_type b([] (std::size_t i) { return i == 1; });
+  mask_type c([] (std::size_t i) { return i == 0 || i == 1; });
   if (all_of(c == (a || b))) {
     printf("Kokkos simd_mask works as expected!");
   }

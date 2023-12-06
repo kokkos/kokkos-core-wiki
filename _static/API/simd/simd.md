@@ -115,7 +115,7 @@ These functions are only defined for `value_type=double`.
   * `simd Kokkos::fma(const simd& x, const simd& y, const simd& z)`
 
 ### Global Typedefs
-  * `template <class T> Kokkos::Experimental::native_simd`: Alias for `Kokkos::Experimental::simd<T, Kokkos::Experimental::simd_abi::native>`.
+  * `template <class T> Kokkos::Experimental::native_simd`: Alias for `Kokkos::Experimental::simd<T, Kokkos::Experimental::simd_abi::native<T>>`.
 
 ## Examples
 
