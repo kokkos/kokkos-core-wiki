@@ -4,7 +4,11 @@
 .. role:: cppkokkos(code)
     :language: cppkokkos
 
-Defined in header ``<Kokkos_Core.hpp>``
+.. _KokkosPrintf: https://github.com/kokkos/kokkos/blob/4.2.00/core/src/Kokkos_Printf.hpp
+
+.. |KokkosPrintf| replace:: ``<Kokkos_Printf.hpp>``
+
+Defined in header |KokkosPrintf|_ which is included from ``<Kokkos_Core.hpp>``
 
 .. code-block:: cpp
 
