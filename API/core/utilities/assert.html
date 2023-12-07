@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" /><link rel="next" title="TeamThreadRange" href="TeamThreadRange.html" /><link rel="prev" title="TeamPolicy" href="TeamPolicy.html" />
+<link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" /><link rel="next" title="Kokkos::complex" href="complex.html" /><link rel="prev" title="Kokkos::ALL" href="all.html" />
 
     <meta name="generator" content="sphinx-5.0.1, furo 2022.06.04.1"/>
-        <title>TeamThreadMDRange - Kokkos documentation</title>
+        <title>KOKKOS_ASSERT - Kokkos documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?digest=40978830699223671f4072448e654b5958f38b89" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
@@ -239,19 +239,19 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l2 current has-children"><a class="reference internal" href="../Execution-Policies.html">Execution Policies</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="ExecutionPolicyConcept.html"><code class="docutils literal notranslate"><span class="pre">ExecutionPolicy</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="MDRangePolicy.html"><code class="docutils literal notranslate"><span class="pre">MDRangePolicy</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="NestedPolicies.html"><code class="docutils literal notranslate"><span class="pre">NestedPolicies</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="RangePolicy.html"><code class="docutils literal notranslate"><span class="pre">RangePolicy</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="TeamHandleConcept.html"><code class="docutils literal notranslate"><span class="pre">TeamHandleConcept</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="TeamPolicy.html"><code class="docutils literal notranslate"><span class="pre">TeamPolicy</span></code></a></li>
-<li class="toctree-l3 current current-page"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">TeamThreadMDRange</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="TeamThreadRange.html"><code class="docutils literal notranslate"><span class="pre">TeamThreadRange</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="TeamVectorMDRange.html"><code class="docutils literal notranslate"><span class="pre">TeamVectorMDRange</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="TeamVectorRange.html"><code class="docutils literal notranslate"><span class="pre">TeamVectorRange</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="ThreadVectorMDRange.html"><code class="docutils literal notranslate"><span class="pre">ThreadVectorMDRange</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="ThreadVectorRange.html"><code class="docutils literal notranslate"><span class="pre">ThreadVectorRange</span></code></a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../Execution-Policies.html">Execution Policies</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../policies/ExecutionPolicyConcept.html"><code class="docutils literal notranslate"><span class="pre">ExecutionPolicy</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../policies/MDRangePolicy.html"><code class="docutils literal notranslate"><span class="pre">MDRangePolicy</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../policies/NestedPolicies.html"><code class="docutils literal notranslate"><span class="pre">NestedPolicies</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../policies/RangePolicy.html"><code class="docutils literal notranslate"><span class="pre">RangePolicy</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../policies/TeamHandleConcept.html"><code class="docutils literal notranslate"><span class="pre">TeamHandleConcept</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../policies/TeamPolicy.html"><code class="docutils literal notranslate"><span class="pre">TeamPolicy</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../policies/TeamThreadMDRange.html"><code class="docutils literal notranslate"><span class="pre">TeamThreadMDRange</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../policies/TeamThreadRange.html"><code class="docutils literal notranslate"><span class="pre">TeamThreadRange</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../policies/TeamVectorMDRange.html"><code class="docutils literal notranslate"><span class="pre">TeamVectorMDRange</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../policies/TeamVectorRange.html"><code class="docutils literal notranslate"><span class="pre">TeamVectorRange</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../policies/ThreadVectorMDRange.html"><code class="docutils literal notranslate"><span class="pre">ThreadVectorMDRange</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../policies/ThreadVectorRange.html"><code class="docutils literal notranslate"><span class="pre">ThreadVectorRange</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../Spaces.html">Spaces</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -292,16 +292,16 @@
 <li class="toctree-l3"><a class="reference internal" href="../stl-compat/pair.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::pair</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../Utilities.html">Utilities</a><input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" role="switch" type="checkbox"/><label for="toctree-checkbox-15"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../utilities/abort.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::abort</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../utilities/all.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::ALL</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../utilities/assert.html"><code class="docutils literal notranslate"><span class="pre">KOKKOS_ASSERT</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../utilities/complex.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::complex</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../utilities/printf.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::printf</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../utilities/timer.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::Timer</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../utilities/device_id.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::device_id</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../utilities/num_threads.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::num_threads</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../utilities/experimental.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::Experimental</span></code></a></li>
+<li class="toctree-l2 current has-children"><a class="reference internal" href="../Utilities.html">Utilities</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" role="switch" type="checkbox"/><label for="toctree-checkbox-15"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="abort.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::abort</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="all.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::ALL</span></code></a></li>
+<li class="toctree-l3 current current-page"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">KOKKOS_ASSERT</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="complex.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::complex</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="printf.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::printf</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="timer.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::Timer</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="device_id.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::device_id</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="num_threads.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::num_threads</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="experimental.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::Experimental</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../Detection-Idiom.html">Detection Idiom</a></li>
@@ -484,7 +484,7 @@
         </a>
         <div class="content-icon-container">
 <div class="edit-this-page">
-  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/API/core/policies/TeamThreadMDRange.rst" title="Edit this page">
+  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/API/core/utilities/assert.rst" title="Edit this page">
     <svg aria-hidden="true" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
       <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4"></path>
@@ -508,85 +508,54 @@
           </label>
         </div>
         <article role="main">
-          <section id="teamthreadmdrange">
-<h1><code class="docutils literal notranslate"><span class="pre">TeamThreadMDRange</span></code><a class="headerlink" href="#teamthreadmdrange" title="Permalink to this heading">#</a></h1>
-<p>Header File: <code class="docutils literal notranslate"><span class="pre">&lt;Kokkos_Core.hpp&gt;</span></code></p>
-<section id="description">
-<h2>Description<a class="headerlink" href="#description" title="Permalink to this heading">#</a></h2>
-<p>TeamThreadMDRange is a <a class="reference external" href="./NestedPolicies.html">nested execution policy</a>  used inside of hierarchical parallelism.</p>
-</section>
-<section id="interface">
-<h2>Interface<a class="headerlink" href="#interface" title="Permalink to this heading">#</a></h2>
-<dl class="cppkokkos class">
-<dt class="sig sig-object cppkokkos" id="_CPPv4I00E17TeamThreadMDRange">
-<span id="_CPPv3I00E17TeamThreadMDRange"></span><span id="_CPPv2I00E17TeamThreadMDRange"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Rank</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TeamHandle</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TeamThreadMDRange</span></span></span><a class="headerlink" href="#_CPPv4I00E17TeamThreadMDRange" title="Permalink to this definition">#</a><br /></dt>
-<dd><p class="rubric">Constructor</p>
-<dl class="cppkokkos function">
-<dt class="sig sig-object cppkokkos" id="_CPPv4N17TeamThreadMDRange17TeamThreadMDRangeE4team8extent_18extent_2z">
-<span id="_CPPv3N17TeamThreadMDRange17TeamThreadMDRangeE4team8extent_18extent_2z"></span><span id="_CPPv2N17TeamThreadMDRange17TeamThreadMDRangeE4team8extent_18extent_2z"></span><span id="TeamThreadMDRange::TeamThreadMDRange__team.extent_1.extent_2.z"></span><span class="sig-name descname"><span class="n"><span class="pre">TeamThreadMDRange</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">team</span></span>, <span class="n"><span class="pre">extent_1</span></span>, <span class="n"><span class="pre">extent_2</span></span>, <span class="p"><span class="pre">...</span></span><span class="sig-paren">)</span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4N17TeamThreadMDRange17TeamThreadMDRangeE4team8extent_18extent_2z" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>Splits the index range <code class="docutils literal notranslate"><span class="pre">0</span></code> to <code class="docutils literal notranslate"><span class="pre">extent</span></code> over the threads of the team,
-where <code class="docutils literal notranslate"><span class="pre">extent</span></code> is the backend-dependent rank that will be threaded</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>team</strong> – TeamHandle to the calling team execution context</p></li>
-<li><p><strong>extent_1, extent_2, ...</strong> – index range lengths of each rank</p></li>
-</ul>
-</dd>
-</dl>
-<ul>
-<li><p><strong>Requirements</strong></p>
-<ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">TeamHandle</span></code> is a type that models <a class="reference external" href="./TeamHandleConcept.html">TeamHandle</a></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">extent_1,</span> <span class="pre">extent_2,</span> <span class="pre">...</span></code> are ints</p></li>
-<li><p>Every member thread of <code class="docutils literal notranslate"><span class="pre">team</span></code> must call the operation in the same branch,
-i.e. it is not legal to have some threads call this function in one branch,
-and the other threads of <code class="docutils literal notranslate"><span class="pre">team</span></code> call it in another branch</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">extent_i</span></code> is such that <code class="docutils literal notranslate"><span class="pre">i</span> <span class="pre">&gt;=</span> <span class="pre">2</span> <span class="pre">&amp;&amp;</span> <span class="pre">i</span> <span class="pre">&lt;=</span> <span class="pre">8</span></code> is true.
-For example:</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">TeamThreadMDRange</span><span class="p">(</span><span class="n">team</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">);</span><span class="w">               </span><span class="c1">// NOT OK, violates i&gt;=2</span>
-
-<span class="n">TeamThreadMDRange</span><span class="p">(</span><span class="n">team</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">);</span><span class="w">             </span><span class="c1">// OK</span>
-<span class="n">TeamThreadMDRange</span><span class="p">(</span><span class="n">team</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">);</span><span class="w">           </span><span class="c1">// OK</span>
-<span class="n">TeamThreadMDRange</span><span class="p">(</span><span class="n">team</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">);</span><span class="w"> </span><span class="c1">// OK, max num of extents allowed</span>
+          <section id="kokkos-assert">
+<h1><code class="docutils literal notranslate"><span class="pre">KOKKOS_ASSERT</span></code><a class="headerlink" href="#kokkos-assert" title="Permalink to this heading">#</a></h1>
+<p>Defined in header <code class="docutils literal notranslate"><span class="pre">&lt;Kokkos_Core.hpp&gt;</span></code></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#if defined(NDEBUG) and not defined(KOKKOS_ENABLE_DEBUG)</span>
+<span class="cp">#  define KOKKOS_ASSERT(condition) ((void)0)</span>
+<span class="cp">#else</span>
+<span class="cp">#  define KOKKOS_ASSERT(condition) if (!bool(condition)) </span><span class="cm">/*call Kokkos::abort()*/</span>
+<span class="cp">#endif</span>
 </pre></div>
 </div>
-</li>
-</ul>
-</li>
-</ul>
-</dd></dl>
+<p>The definition of the macro <code class="docutils literal notranslate"><span class="pre">KOKKOS_ASSERT</span></code> depends on other macros,
+<code class="docutils literal notranslate"><span class="pre">NDEBUG</span></code> and <code class="docutils literal notranslate"><span class="pre">KOKKOS_ENABLE_DEBUG</span></code>.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">NDEBUG</span></code> is a defined and <code class="docutils literal notranslate"><span class="pre">KOKKOS_ENABLE_DEBUG</span></code> is not
+defined at the point in the source code where <code class="docutils literal notranslate"><span class="pre">&lt;Kokkos_Assert.hpp&gt;</span></code> or <code class="docutils literal notranslate"><span class="pre">&lt;Kokkos_Core.hpp&gt;</span></code> is
+included, then assert does nothing.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">NDEBUG</span></code> is not defined or <code class="docutils literal notranslate"><span class="pre">KOKKOS_ENABLE_DEBUG</span></code> is defined,  then
+<code class="docutils literal notranslate"><span class="pre">KOKKOS_ASSERT</span></code> checks if its argument converted to <code class="docutils literal notranslate"><span class="pre">bool</span></code> evaluates to
+<code class="docutils literal notranslate"><span class="pre">false</span></code>. If it does, <code class="docutils literal notranslate"><span class="pre">KOKKOS_ASSERT</span></code> calls <code class="docutils literal notranslate"><span class="pre">Kokkos::abort</span></code> with
+diagnostic information that includes the text of expression, as well as the
+values of the predefined macros <code class="docutils literal notranslate"><span class="pre">__FILE__</span></code> and <code class="docutils literal notranslate"><span class="pre">__LINE__</span></code>.</p>
+<section id="example">
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this heading">#</a></h2>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">argv</span><span class="p">[])</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">initialize</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="n">argv</span><span class="p">);</span>
+<span class="w">    </span><span class="n">KOKKOS_ASSERT</span><span class="p">(</span><span class="n">Kokkos</span><span class="o">::</span><span class="n">is_initialized</span><span class="p">());</span><span class="w">  </span><span class="c1">// callable from the host</span>
 
-</dd></dl>
-
-</section>
-<section id="examples">
-<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading">#</a></h2>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">TeamHandle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TeamPolicy</span><span class="o">&lt;&gt;::</span><span class="n">member_type</span><span class="p">;</span>
-
-<span class="n">parallel_for</span><span class="p">(</span><span class="n">TeamPolicy</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">AUTO</span><span class="p">),</span>
-<span class="w">  </span><span class="n">KOKKOS_LAMBDA</span><span class="w"> </span><span class="p">(</span><span class="n">TeamHandle</span><span class="w"> </span><span class="k">const</span><span class="o">&amp;</span><span class="w"> </span><span class="n">team</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">leagueRank</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">team</span><span class="p">.</span><span class="n">league_rank</span><span class="p">();</span>
-
-<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">range</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TeamThreadMDRange</span><span class="o">&lt;</span><span class="n">Rank</span><span class="o">&lt;</span><span class="mi">4</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="n">TeamHandle</span><span class="o">&gt;</span><span class="p">(</span><span class="n">team</span><span class="p">,</span><span class="w"> </span><span class="n">n0</span><span class="p">,</span><span class="w"> </span><span class="n">n1</span><span class="p">,</span><span class="w"> </span><span class="n">n2</span><span class="p">,</span><span class="w"> </span><span class="n">n3</span><span class="p">);</span>
-
-<span class="w">    </span><span class="n">parallel_for</span><span class="p">(</span><span class="n">range</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="o">=</span><span class="p">](</span><span class="kt">int</span><span class="w"> </span><span class="n">i0</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">i1</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">i2</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">i3</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="n">A</span><span class="p">(</span><span class="n">leagueRank</span><span class="p">,</span><span class="w"> </span><span class="n">i0</span><span class="p">,</span><span class="w"> </span><span class="n">i1</span><span class="p">,</span><span class="w"> </span><span class="n">i2</span><span class="p">,</span><span class="w"> </span><span class="n">i3</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">B</span><span class="p">(</span><span class="n">leagueRank</span><span class="p">,</span><span class="w"> </span><span class="n">i1</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">C</span><span class="p">(</span><span class="n">i1</span><span class="p">,</span><span class="w"> </span><span class="n">i2</span><span class="p">,</span><span class="w"> </span><span class="n">i3</span><span class="p">);</span>
+<span class="w">    </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">parallel_for</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">KOKKOS_LAMBDA</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">KOKKOS_ASSERT</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span><span class="w">  </span><span class="c1">// also callable from the device side</span>
 <span class="w">    </span><span class="p">});</span>
-<span class="w">    </span><span class="n">team</span><span class="p">.</span><span class="n">team_barrier</span><span class="p">();</span>
 
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">teamSum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="w">    </span><span class="n">parallel_reduce</span><span class="p">(</span><span class="n">range</span><span class="p">,</span>
-<span class="w">      </span><span class="p">[</span><span class="o">=</span><span class="p">](</span><span class="kt">int</span><span class="w"> </span><span class="n">i0</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">i1</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">i2</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">i3</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">threadSum</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">threadSum</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">D</span><span class="p">(</span><span class="n">leagueRank</span><span class="p">,</span><span class="w"> </span><span class="n">i0</span><span class="p">,</span><span class="w"> </span><span class="n">i1</span><span class="p">,</span><span class="w"> </span><span class="n">i2</span><span class="p">,</span><span class="w"> </span><span class="n">i3</span><span class="p">);</span>
-<span class="w">      </span><span class="p">},</span><span class="w"> </span><span class="n">teamSum</span>
-<span class="w">    </span><span class="p">);</span>
-<span class="w">    </span><span class="n">single</span><span class="p">(</span><span class="n">PerTeam</span><span class="p">(</span><span class="n">team</span><span class="p">),</span><span class="w"> </span><span class="p">[</span><span class="o">&amp;</span><span class="n">leagueSum</span><span class="p">,</span><span class="w"> </span><span class="n">teamSum</span><span class="p">]()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">leagueSum</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">teamSum</span><span class="p">;</span><span class="w"> </span><span class="p">});</span>
-<span class="w">    </span><span class="n">A_rowSum</span><span class="p">[</span><span class="n">leagueRank</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">leagueSum</span><span class="p">;</span>
-<span class="p">});</span>
+<span class="w">    </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">finalize</span><span class="p">();</span>
+<span class="w">    </span><span class="n">assert</span><span class="p">(</span><span class="n">Kokkos</span><span class="o">::</span><span class="n">is_finalized</span><span class="p">());</span><span class="w">  </span><span class="c1">// exclusively callable on the host</span>
 </pre></div>
 </div>
+</section>
+<section id="notes">
+<h2>Notes<a class="headerlink" href="#notes" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Since version 4.2, <code class="docutils literal notranslate"><span class="pre">KOKKOS_ASSERT</span></code> is also available from <a class="reference external" href="https://github.com/kokkos/kokkos/blob/4.2.00/core/src/Kokkos_Assert.hpp"><code class="docutils literal notranslate"><span class="pre">&lt;Kokkos_Assert.hpp&gt;</span></code></a>.</p></li>
+<li><p>In contrast to <cite>assert</cite> from the C++ standard library, it is legal to call
+<code class="docutils literal notranslate"><span class="pre">KOKKOS_ASSERT</span></code> from a <code class="docutils literal notranslate"><span class="pre">KOKKOS_FUNCTION</span></code>.</p></li>
+</ul>
+</section>
+<section id="see-also">
+<h2>See also<a class="headerlink" href="#see-also" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="abort.html">Kokkos::abort()</a> causes abnormal program termination</p></li>
+</ul>
 </section>
 </section>
 
@@ -595,23 +564,23 @@ For example:</p>
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="TeamThreadRange.html">
+          <a class="next-page" href="complex.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title"><code class="docutils literal notranslate"><span class="pre">TeamThreadRange</span></code></div>
+                <div class="title"><code class="docutils literal notranslate"><span class="pre">Kokkos::complex</span></code></div>
               </div>
               <svg><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="TeamPolicy.html">
+          <a class="prev-page" href="all.html">
               <svg><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title"><code class="docutils literal notranslate"><span class="pre">TeamPolicy</span></code></div>
+                <div class="title"><code class="docutils literal notranslate"><span class="pre">Kokkos::ALL</span></code></div>
                 
               </div>
             </a>
@@ -647,10 +616,10 @@ For example:</p>
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">TeamThreadMDRange</span></code></a><ul>
-<li><a class="reference internal" href="#description">Description</a></li>
-<li><a class="reference internal" href="#interface">Interface</a></li>
-<li><a class="reference internal" href="#examples">Examples</a></li>
+<li><a class="reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">KOKKOS_ASSERT</span></code></a><ul>
+<li><a class="reference internal" href="#example">Example</a></li>
+<li><a class="reference internal" href="#notes">Notes</a></li>
+<li><a class="reference internal" href="#see-also">See also</a></li>
 </ul>
 </li>
 </ul>
