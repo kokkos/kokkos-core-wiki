@@ -17,8 +17,8 @@ Defined in header ``<Kokkos_Core.hpp>``
 The definition of the macro ``KOKKOS_ASSERT`` depends on other macros,
 ``NDEBUG`` and ``KOKKOS_ENABLE_DEBUG``.
 
-If ``NDEBUG`` is defined a macro name and ``KOKKOS_ENABLE_DEBUG`` is not
-defined at the point in the source code where ``<Kokkos_Assert.hpp>`` is
+If ``NDEBUG`` is a defined and ``KOKKOS_ENABLE_DEBUG`` is not
+defined at the point in the source code where ``<Kokkos_Assert.hpp>`` or ``<Kokkos_Core.hpp>`` is
 included, then assert does nothing.
 
 If ``NDEBUG`` is not defined or ``KOKKOS_ENABLE_DEBUG`` is defined,  then
