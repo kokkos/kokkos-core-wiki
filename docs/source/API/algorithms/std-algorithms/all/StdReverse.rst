@@ -14,12 +14,11 @@ Interface
 
 .. warning:: This is currently inside the ``Kokkos::Experimental`` namespace.
 
+Overload set accepting execution space
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: cpp
 
-   //
-   // overload set accepting an execution space
-   //
    template <class ExecutionSpace, class InputIterator>
    void reverse(const ExecutionSpace& ex, InputIterator first, InputIterator last);  (1)
 
@@ -35,9 +34,13 @@ Interface
    void reverse(const std::string& label, const ExecutionSpace& ex,                  (4)
                 const ::Kokkos::View<DataType, Properties...>& view);
 
-   //
-   // overload set accepting a team handle
-   //
+Overload set accepting a team handle
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. versionadded:: 4.2
+
+.. code-block:: cpp
+
    template <class TeamHandleType, class InputIterator>
    KOKKOS_FUNCTION
    void reverse(const TeamHandleType& teamHandle, InputIterator first,               (5)
@@ -57,9 +60,9 @@ Parameters and Requirements
 
 - ``label``: string forwarded to internal parallel kernels for debugging purposes
 
-  - for 1, the default string is: "Kokkos::for_each_n_iterator_api_default"
+  - for 1, the default string is: "Kokkos::reverse_iterator_api_default"
 
-  - for 3, the default string is: "Kokkos::for_each_n_view_api_default"
+  - for 3, the default string is: "Kokkos::reverse_view_api_default"
 
   - NOTE: overloads accepting a team handle do not use a label internally
 

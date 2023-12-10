@@ -16,11 +16,11 @@ Interface
 .. warning:: This is currently inside the ``Kokkos::Experimental`` namespace.
 
 
+Overload set accepting execution space
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 .. code-block:: cpp
 
-   //
-   // overload set accepting an execution space
-   //
    template <class ExecutionSpace, class InputIterator, class OutputIterator>
    OutputIterator move(const ExecutionSpace& ex, InputIterator first,          (1)
                        InputIterator last, OutputIterator d_first);
@@ -42,9 +42,13 @@ Interface
              const ::Kokkos::View<DataType1, Properties1...>& source,
              ::Kokkos::View<DataType2, Properties2...>& dest);
 
-   //
-   // overload set accepting a team handle
-   //
+Overload set accepting a team handle
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. versionadded:: 4.2
+
+.. code-block:: cpp
+
    template <class TeamHandleType, class InputIterator, class OutputIterator>
    KOKKOS_FUNCTION
    OutputIterator move(const TeamHandleType& teamHandle, InputIterator first,  (5)
@@ -66,9 +70,9 @@ Parameters and Requirements
 
 - ``label``: string forwarded to internal parallel kernels for debugging purposes
 
-  - for 1, the default string is: "Kokkos::for_each_n_iterator_api_default"
+  - for 1, the default string is: "Kokkos::move_iterator_api_default"
 
-  - for 3, the default string is: "Kokkos::for_each_n_view_api_default"
+  - for 3, the default string is: "Kokkos::move_view_api_default"
 
   - NOTE: overloads accepting a team handle do not use a label internally
 

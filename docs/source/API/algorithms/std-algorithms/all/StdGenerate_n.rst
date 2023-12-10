@@ -16,11 +16,11 @@ Interface
 .. warning:: This is currently inside the ``Kokkos::Experimental`` namespace.
 
 
+Overload set accepting execution space
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 .. code-block:: cpp
 
-   //
-   // overload set accepting an execution space
-   //
    template <class ExecutionSpace, class IteratorType, class Size, class Generator>
    IteratorType generate_n(const ExecutionSpace& exespace,                           (1)
                            IteratorType first, Size count,
@@ -43,9 +43,13 @@ Interface
                    const ::Kokkos::View<DataType, Properties...>& view, Size count,
                    Generator g);
 
-   //
-   // overload set accepting a team handle
-   //
+Overload set accepting a team handle
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. versionadded:: 4.2
+
+.. code-block:: cpp
+
    template <class TeamHandleType, class IteratorType, class Size, class Generator>
    KOKKOS_FUNCTION
    IteratorType generate_n(const TeamHandleType& teamHandle,                         (5)
@@ -68,9 +72,9 @@ Parameters and Requirements
 
 - ``label``: string forwarded to internal parallel kernels for debugging purposes
 
-  - for 1, the default string is: "Kokkos::for_each_n_iterator_api_default"
+  - for 1, the default string is: "Kokkos::generate_n_iterator_api_default"
 
-  - for 3, the default string is: "Kokkos::for_each_n_view_api_default"
+  - for 3, the default string is: "Kokkos::generate_n_view_api_default"
 
   - NOTE: overloads accepting a team handle do not use a label internally
 
