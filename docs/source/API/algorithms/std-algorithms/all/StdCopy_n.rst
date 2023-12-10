@@ -1,25 +1,23 @@
 ``copy_n``
 ==========
 
-Header: `<Kokkos_StdAlgorithms.hpp>`
+Header: ``<Kokkos_StdAlgorithms.hpp>``
 
 Description
 -----------
 
-Copies the first `n` elements starting at `first_from` to
-another range starting at `first_to` (overloads 1,2,5) or the first `n` elements
-from `view_from` to `view_to` (overloads 3,4,6).
+Copies the first ``n`` elements from a source range or ``View`` to another range or ``View``
 
 Interface
 ---------
 
 .. warning:: This is currently inside the ``Kokkos::Experimental`` namespace.
 
+Overload set accepting execution space
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 .. code-block:: cpp
 
-  //
-  // overload set accepting an execution space
-  //
   template <class ExecutionSpace, class InputIteratorType, class SizeType, class OutputIteratorType>
   OutputIteratorType copy_n(const ExecutionSpace& exespace,                    (1)
                             InputIteratorType first_from,
@@ -55,17 +53,23 @@ Interface
               SizeType n,
               const Kokkos::View<DataType2, Properties2...>& view_to);
 
-  //
-  // overload set accepting a team handle
-  //
+Overload set accepting a team handle
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. versionadded:: 4.2
+
+.. code-block:: cpp
+
   template <class TeamHandleType, class InputIterator, class Size,
           class OutputIterator>
+  KOKKOS_FUNCTION
   OutputIterator copy_n(const TeamHandleType& teamHandle, InputIterator first, (5)
                         Size count, OutputIterator result);
 
   template <
     class TeamHandleType, class DataType1, class... Properties1, class Size,
     class DataType2, class... Properties2>
+  KOKKOS_FUNCTION
   auto copy_n(                                                                 (6)
     const TeamHandleType& teamHandle,
     const ::Kokkos::View<DataType1, Properties1...>& source, Size count,
@@ -75,22 +79,23 @@ Interface
 Parameters and Requirements
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- `exespace`, `first_from`, `first_to`, `view_from`, `view_to`:
-  - same as in [`copy`](./StdCopy)
-- `teamHandle`:
-  -  team handle instance given inside a parallel region when using a TeamPolicy
-  - NOTE: overloads accepting a team handle do not use a label internally
-- `label`:
-  - used to name the implementation kernels for debugging purposes
+- ``exespace``, ``teamHandle``, ``first_from``, ``first_to``, ``view_from``, ``view_to``:
+  - same as in [``copy``](./StdCopy)
+
+- ``label``: used to name the implementation kernels for debugging purposes
+
   - for 1, the default string is: "Kokkos::copy_n_if_iterator_api_default"
+
   - for 3, the default string is: "Kokkos::copy_n_if_view_api_default"
-- `n`:
-  - number of elements to copy (must be non-negative)
+
+  - NOTE: overloads accepting a team handle do not use a label internally
+
+- ``n``: number of elements to copy (must be non-negative)
 
 
 Return Value
 ~~~~~~~~~~~~
 
-If `n>0`, returns an iterator to the destination element *after* the last element copied.
+If ``n>0``, returns an iterator to the destination element *after* the last element copied.
 
-Otherwise, returns `first_to` (for 1,2) or `Kokkos::begin(view_to)` (for 3,4).
+Otherwise, returns ``first_to`` (for 1,2,5) or ``Kokkos::begin(view_to)`` (for 3,4,6).
