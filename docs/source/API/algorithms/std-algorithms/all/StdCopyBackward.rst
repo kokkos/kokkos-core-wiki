@@ -59,20 +59,21 @@ Overload set accepting a team handle
 
 .. code-block:: cpp
 
-  template <class TeamHandleType, class IteratorType1, class IteratorType2>
+  template <class TeamHandleType, class InputIteratorType, class OutputIteratorType>
   KOKKOS_FUNCTION
-  IteratorType2 copy_backward(const TeamHandleType& teamHandle,                   (5)
-                              IteratorType1 first,
-                              IteratorType1 last, IteratorType2 d_last);
+  OutputIteratorType copy_backward(const TeamHandleType& teamHandle,             (5)
+                                   InputIteratorType first_from,
+                                   InputIteratorType last_from,
+			           OutputIteratorType last_to);
 
   template <
-    class TeamHandleType, class DataType1, class... Properties1,
+    class TeamHandleType,
+    class DataType1, class... Properties1,
     class DataType2, class... Properties2>
   KOKKOS_FUNCTION
-  auto copy_backward(                                                             (6)
-    const TeamHandleType& teamHandle,
-    const ::Kokkos::View<DataType1, Properties1...>& source,
-    ::Kokkos::View<DataType2, Properties2...>& dest);
+  auto copy_backward(const TeamHandleType& teamHandle,                           (6)
+                     const ::Kokkos::View<DataType1, Properties1...>& view_from,
+                     ::Kokkos::View<DataType2, Properties2...>& view_to);
 
 Parameters and Requirements
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~

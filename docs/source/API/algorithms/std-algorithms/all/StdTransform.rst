@@ -27,17 +27,21 @@ Overload set accepting execution space
 
 .. code-block:: cpp
 
-  template <class ExecutionSpace, class InputIterator, class OutputIterator, class UnaryOperation>
+  template <
+    class ExecutionSpace, class InputIterator,
+    class OutputIterator, class UnaryOperation>
   OutputIterator transform(const ExecutionSpace& exespace,                        (1)
                            InputIterator first_from, InputIterator last_from,
                            OutputIterator first_to,
                            UnaryOperation unary_op);
 
-  template <class ExecutionSpace, class InputIterator, class OutputIterator, class UnaryOperation>
+  template <
+    class ExecutionSpace, class InputIterator,
+    class OutputIterator, class UnaryOperation>
   OutputIterator transform(const std::string& label,                              (2)
                            const ExecutionSpace& exespace,
                            InputIterator first_from, InputIterator last_from,
-                           OutputIterator d_first,
+                           OutputIterator first_to,
                            UnaryOperation unary_op);
 
   template <
@@ -116,35 +120,45 @@ Overload set accepting a team handle
 
 .. code-block:: cpp
 
-  template <class TeamHandleType, class InputIterator, class OutputIterator,
-          class UnaryOperation>
+  template <
+    class TeamHandleType, class InputIterator,
+    class OutputIterator, class UnaryOperation>
   KOKKOS_FUNCTION
   OutputIterator transform(const TeamHandleType& teamHandle,                      (9)
-                           InputIterator first1,
-                           InputIterator last1, OutputIterator d_first,
+                           InputIterator first_from,
+                           InputIterator last_from,
+			   OutputIterator first_to,
                            UnaryOperation unary_op);
 
   template <
-    class TeamHandleType, class DataType1, class... Properties1,
-    class DataType2, class... Properties2, class UnaryOperation>
+    class TeamHandleType,
+    class DataType1, class... Properties1,
+    class DataType2, class... Properties2,
+    class UnaryOperation>
   KOKKOS_FUNCTION
-  auto transform(                                                                (10)
-    const TeamHandleType& teamHandle,
-    const ::Kokkos::View<DataType1, Properties1...>& source,
-    ::Kokkos::View<DataType2, Properties2...>& dest, UnaryOperation unary_op);
+  auto transform(const TeamHandleType& teamHandle,                               (10)
+                 const ::Kokkos::View<DataType1, Properties1...>& source,
+                 ::Kokkos::View<DataType2, Properties2...>& dest,
+		 UnaryOperation unary_op);
 
-  template <class TeamHandleType, class InputIterator1, class InputIterator2,
-          class OutputIterator, class BinaryOperation>
+  template <
+    class TeamHandleType, class InputIterator1,
+    class InputIterator2, class OutputIterator,
+    class BinaryOperation>
   KOKKOS_FUNCTION
   OutputIterator transform(const TeamHandleType& teamHandle,                     (11)
-                           InputIterator1 first1, InputIterator1 last1,
-                           InputIterator2 first2, OutputIterator d_first,
+                           InputIterator1 first_from1,
+			   InputIterator1 last_from1,
+                           InputIterator2 first_from2,
+			   OutputIterator first_to,
                            BinaryOperation binary_op);
 
   template <
-    class TeamHandleType, class DataType1, class... Properties1,
-    class DataType2, class... Properties2, class DataType3,
-    class... Properties3, class BinaryOperation>
+    class TeamHandleType,
+    class DataType1, class... Properties1,
+    class DataType2, class... Properties2,
+    class DataType3, class... Properties3,
+    class BinaryOperation>
   KOKKOS_FUNCTION
   auto transform(const TeamHandleType& teamHandle,                               (12)
                  const ::Kokkos::View<DataType1, Properties1...>& source1,

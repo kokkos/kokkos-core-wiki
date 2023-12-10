@@ -21,8 +21,8 @@ Overload set accepting execution space
 .. code-block:: cpp
 
   template <
-    class ExecutionSpace, class InputIteratorType, class OutputIteratorType, class UnaryPredicateType
-  >
+    class ExecutionSpace, class InputIteratorType,
+    class OutputIteratorType, class UnaryPredicateType>
   OutputIteratorType copy_if(const ExecutionSpace& exespace,                   (1)
                              InputIteratorType first_from,
                              InputIteratorType last_from,
@@ -30,8 +30,8 @@ Overload set accepting execution space
                              UnaryPredicateType pred);
 
   template <
-    class ExecutionSpace, class InputIteratorType, class OutputIteratorType, class UnaryPredicateType
-  >
+    class ExecutionSpace, class InputIteratorType,
+    class OutputIteratorType, class UnaryPredicateType>
   OutputIteratorType copy_if(const std::string& label,
                              const ExecutionSpace& exespace,                   (2)
                              InputIteratorType first_from,
@@ -69,27 +69,35 @@ Overload set accepting a team handle
 
 .. code-block:: cpp
 
-  template <class TeamHandleType, class InputIterator, class Size,
-          class OutputIterator>
+  template <
+    class TeamHandleType, class InputIteratorType,
+    class OutputIteratorType, class UnaryPredicateType>
   KOKKOS_FUNCTION
-  OutputIterator copy_n(const TeamHandleType& teamHandle, InputIterator first, (5)
-                        Size count, OutputIterator result);
+  OutputIteratorType copy_if(const TeamHandleType& teamHandle,                 (5)
+                             InputIteratorType first_from,
+                             InputIteratorType last_from,
+                             OutputIteratorType first_to,
+                             UnaryPredicateType pred);
 
   template <
-    class TeamHandleType, class DataType1, class... Properties1, class Size,
-    class DataType2, class... Properties2>
+    class TeamHandleType,
+    class DataType1, class... Properties1,
+    class DataType2, class... Properties2,
+    class UnaryPredicateType>
   KOKKOS_FUNCTION
-  auto copy_n(                                                                 (6)
-    const TeamHandleType& teamHandle,
-    const ::Kokkos::View<DataType1, Properties1...>& source, Size count,
-    ::Kokkos::View<DataType2, Properties2...>& dest);
+  auto copy_if(const TeamHandleType& teamHandle,                              (6)
+               const Kokkos::View<DataType1, Properties1...>& view_from,
+               const Kokkos::View<DataType2, Properties2...>& view_to,
+               UnaryPredicateType pred);
 
 
 Parameters and Requirements
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- ``exespace``, ``teamHandle``, ``first_from``, ``last_from``, ``first_to``, ``view_from``, ``view_to``:
-  - same as in [``copy``](./StdCopy)
+.. |copy| replace:: ``copy``
+.. _copy: ./StdCopy.html
+
+- ``exespace``, ``teamHandle``, ``first_from``, ``last_from``, ``first_to``, ``view_from``, ``view_to``: same as in |copy|_
 
 - ``label``:
 

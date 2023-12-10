@@ -6,7 +6,7 @@ Header: ``<Kokkos_StdAlgorithms.hpp>``
 Description
 -----------
 
-Copies the first ``n`` elements from a source range or ``View`` to another range or ``View``
+Copies the first ``n`` elements from a source range or rank-1 ``View`` to another range or rank-1 ``View``.
 
 Interface
 ---------
@@ -18,13 +18,17 @@ Overload set accepting execution space
 
 .. code-block:: cpp
 
-  template <class ExecutionSpace, class InputIteratorType, class SizeType, class OutputIteratorType>
+  template <
+    class ExecutionSpace, class InputIteratorType,
+    class SizeType, class OutputIteratorType>
   OutputIteratorType copy_n(const ExecutionSpace& exespace,                    (1)
                             InputIteratorType first_from,
                             SizeType n,
                             OutputIteratorType first_to);
 
-  template <class ExecutionSpace, class InputIteratorType, class SizeType, class OutputIteratorType>
+  template <
+    class ExecutionSpace, class InputIteratorType,
+    class SizeType, class OutputIteratorType>
   OutputIteratorType copy_n(const std::string & label,
                             const ExecutionSpace& exespace,                    (2)
                             InputIteratorType first_from,
@@ -35,8 +39,7 @@ Overload set accepting execution space
     class ExecutionSpace,
     class DataType1, class... Properties1,
     class SizeType,
-    class DataType2, class... Properties2
-  >
+    class DataType2, class... Properties2>
   auto copy_n(const ExecutionSpace& exespace,                                  (3)
               const Kokkos::View<DataType1, Properties1...>& view_from,
               SizeType n,
@@ -46,8 +49,7 @@ Overload set accepting execution space
     class ExecutionSpace,
     class DataType1, class... Properties1,
     class SizeType,
-    class DataType2, class... Properties2
-  >
+    class DataType2, class... Properties2>
   auto copy_n(const std::string& label, const ExecutionSpace& exespace,        (4)
               const Kokkos::View<DataType1, Properties1...>& view_from,
               SizeType n,
@@ -60,27 +62,33 @@ Overload set accepting a team handle
 
 .. code-block:: cpp
 
-  template <class TeamHandleType, class InputIterator, class Size,
-          class OutputIterator>
+  template <
+    class TeamHandleType, class InputIteratorType,
+    class SizeType, class OutputIteratorType>
   KOKKOS_FUNCTION
-  OutputIterator copy_n(const TeamHandleType& teamHandle, InputIterator first, (5)
-                        Size count, OutputIterator result);
+  OutputIteratorType copy_n(const TeamHandleType& teamHandle,                 (5)
+                            InputIteratorType first_from,
+                            SizeType n,
+			    OutputIteratorType first_to);
 
   template <
-    class TeamHandleType, class DataType1, class... Properties1, class Size,
+    class TeamHandleType,
+    class DataType1, class... Properties1, class SizeType,
     class DataType2, class... Properties2>
   KOKKOS_FUNCTION
-  auto copy_n(                                                                 (6)
-    const TeamHandleType& teamHandle,
-    const ::Kokkos::View<DataType1, Properties1...>& source, Size count,
-    ::Kokkos::View<DataType2, Properties2...>& dest);
-
+  auto copy_n(const TeamHandleType& teamHandle,                               (6)
+              const ::Kokkos::View<DataType1, Properties1...>& view_from,
+	      SizeType n,
+              ::Kokkos::View<DataType2, Properties2...>& view_to);
 
 Parameters and Requirements
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- ``exespace``, ``teamHandle``, ``first_from``, ``first_to``, ``view_from``, ``view_to``:
-  - same as in [``copy``](./StdCopy)
+.. |copy| replace:: ``copy``
+.. _copy: ./StdCopy.html
+
+
+- ``exespace``, ``teamHandle``, ``first_from``, ``first_to``, ``view_from``, ``view_to``: same as in |copy|_
 
 - ``label``: used to name the implementation kernels for debugging purposes
 

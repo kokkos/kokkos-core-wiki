@@ -47,20 +47,17 @@ Overload set accepting a team handle
 
 .. code-block:: cpp
 
-  template <class TeamHandleType, class IteratorType, class Size, class Generator>
+  template <class TeamHandleType, class IteratorType, class GeneratorType>
   KOKKOS_FUNCTION
-  IteratorType generate_n(const TeamHandleType& teamHandle,                    (5)
-                          IteratorType first, Size count, Generator g);
+  void generate(const TeamHandleType& teamHandle,                              (5)
+                IteratorType first, IteratorType last,
+                GeneratorType g);
 
-  template <
-    class TeamHandleType, class DataType, class... Properties, class Size,
-    class Generator>
+  template <class TeamHandleType, class DataType, class... Properties, class GeneratorType>
   KOKKOS_FUNCTION
-  auto generate_n(                                                             (6)
-    const TeamHandleType& teamHandle,
-    const ::Kokkos::View<DataType, Properties...>& view, Size count,
-    Generator g)
-
+  void generate(const TeamHandleType& teamHandle,                              (6)
+                const Kokkos::View<DataType, Properties...>& view,
+                GeneratorType g);
 
 Parameters and Requirements
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~

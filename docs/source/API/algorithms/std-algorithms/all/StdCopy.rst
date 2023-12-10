@@ -7,7 +7,7 @@ Header: ``<Kokkos_StdAlgorithms.hpp>``
 Description
 -----------
 
-Copies the elements from a source range or rank-1 ``View`` to destination range or rank-1 ``View``.
+Copies the elements from a source range or rank-1 ``View`` to a destination range or rank-1 ``View``.
 
 Interface
 ---------
@@ -24,6 +24,7 @@ Overload set accepting execution space
                           InputIteratorType first_from,
                           InputIteratorType last_from,
                           OutputIteratorType first_to);
+
   template <class ExecutionSpace, class InputIteratorType, class OutputIteratorType>
   OutputIteratorType copy(const std::string& label,                            (2)
                           const ExecutionSpace& exespace,
@@ -54,20 +55,20 @@ Overload set accepting a team handle
 
 .. code-block:: cpp
 
-  template <class TeamHandleType, class InputIterator, class OutputIterator>
+  template <class TeamHandleType, class InputIteratorType, class OutputIteratorType>
   KOKKOS_FUNCTION
-  OutputIterator copy(const TeamHandleType& teamHandle, InputIterator first,   (5)
-                      InputIterator last, OutputIterator d_first);
+  OutputIteratorType copy(const TeamHandleType& teamHandle,                    (5)
+                          InputIteratorType first_from,
+			  InputIteratorType last_from,
+			  OutputIteratorType first_to);
 
   template <
     class TeamHandleType, class DataType1, class... Properties1,
     class DataType2, class... Properties2>
   KOKKOS_FUNCTION
-  auto copy(                                                                   (6)
-    const TeamHandleType& teamHandle,
-    const ::Kokkos::View<DataType1, Properties1...>& source,
-    ::Kokkos::View<DataType2, Properties2...>& dest);
-
+  auto copy(const TeamHandleType& teamHandle,                                  (6)
+            const ::Kokkos::View<DataType1, Properties1...>& view_from,
+            ::Kokkos::View<DataType2, Properties2...>& view_to);
 
 Parameters and Requirements
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
