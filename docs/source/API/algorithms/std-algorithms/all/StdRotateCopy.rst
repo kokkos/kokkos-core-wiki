@@ -13,11 +13,11 @@ Interface
 
 .. warning:: This is currently inside the ``Kokkos::Experimental`` namespace.
 
+Overload set accepting execution space
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 .. code-block:: cpp
 
-   //
-   // overload set accepting execution space
-   //
    template <class ExecutionSpace, class InputIterator, class OutputIterator>
    OutputIterator rotate_copy(const ExecutionSpace& exespace,                   (1)
                               InputIterator first_from,
@@ -52,9 +52,13 @@ Interface
                     std::size_t n_location,
                     const Kokkos::View<DataType2, Properties2...>& dest);
 
-   //
-   // overload set accepting a team handle
-   //
+Overload set accepting a team handle
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. versionadded:: 4.2
+
+.. code-block:: cpp
+
    template <class TeamHandleType, class InputIterator, class OutputIterator>
    KOKKOS_FUNCTION
    OutputIterator rotate_copy(const TeamHandleType& teamHandle,                 (5)

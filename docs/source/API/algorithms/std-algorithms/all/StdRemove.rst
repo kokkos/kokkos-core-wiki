@@ -13,11 +13,11 @@ Interface
 
 .. warning:: This is currently inside the ``Kokkos::Experimental`` namespace.
 
+Overload set accepting execution space
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 .. code-block:: cpp
 
-   //
-   // overload set accepting execution space
-   //
    template <class ExecutionSpace, class Iterator, class ValueType>
    Iterator remove(const ExecutionSpace& exespace,                       (1)
                    Iterator first, Iterator last,
@@ -46,9 +46,13 @@ Interface
                const Kokkos::View<DataType, Properties...>& view,
                const ValueType& value);
 
-   //
-   // overload set accepting a team handle
-   //
+Overload set accepting a team handle
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. versionadded:: 4.2
+
+.. code-block:: cpp
+
    template <class TeamHandleType, class Iterator, class ValueType>
    KOKKOS_FUNCTION
    Iterator remove(const TeamHandleType& teamHandle,                     (5)
@@ -90,7 +94,7 @@ Parameters and Requirements
 - ``value``: target value to remove
 
 - ``view``: view of elements to modify
-  
+
   - must be rank-1, and have ``LayoutLeft``, ``LayoutRight``, or ``LayoutStride``
 
   - must be accessible from ``exespace`` or from the execution space associated with the team handle

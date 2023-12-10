@@ -13,11 +13,11 @@ Interface
 
 .. warning:: This is currently inside the ``Kokkos::Experimental`` namespace.
 
+Overload set accepting execution space
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 .. code-block:: cpp
 
-   //
-   // overload set: default predicate, accepting execution space
-   //
    template <class ExecutionSpace, class IteratorType>
    IteratorType unique(const ExecutionSpace& exespace,                       (1)
                        IteratorType first, IteratorType last);
@@ -35,9 +35,6 @@ Interface
    auto unique(const std::string& label, const ExecutionSpace& exespace,     (4)
                const Kokkos::View<DataType, Properties...>& view);
 
-   //
-   // overload set: custom predicate, accepting execution space
-   //
    template <class ExecutionSpace, class IteratorType, class BinaryPredicate>
    IteratorType unique(const ExecutionSpace& exespace,                       (5)
                        IteratorType first, IteratorType last,
@@ -66,9 +63,13 @@ Interface
                const Kokkos::View<DataType, Properties...>& view,
                BinaryPredicate pred);
 
-   //
-   // overload set: default predicate, accepting team handle
-   //
+Overload set accepting a team handle
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. versionadded:: 4.2
+
+.. code-block:: cpp
+
    template <class TeamHandleType, class IteratorType>
    KOKKOS_FUNCTION
    IteratorType unique(const TeamHandleType& teamHandle,                     (9)
@@ -79,9 +80,6 @@ Interface
    auto unique(const TeamHandleType& teamHandle,                             (10)
                const Kokkos::View<DataType, Properties...>& view);
 
-   //
-   // overload set: custom predicate, accepting team handle
-   //
    template <class TeamHandleType, class IteratorType, class BinaryPredicate>
    KOKKOS_FUNCTION
    IteratorType unique(const TeamHandleType& teamHandle,                     (11)
@@ -106,9 +104,9 @@ Parameters and Requirements
 
 - ``label``: string forwarded to internal parallel kernels for debugging purposes
 
-  - 1 & 5: The default string is "Kokkos::unique_iterator_api_default".
+  - 1, 5: The default string is "Kokkos::unique_iterator_api_default".
 
-  - 3 & 7: The default string is "Kokkos::unique_view_api_default".
+  - 3, 7: The default string is "Kokkos::unique_view_api_default".
 
   - NOTE: overloads accepting a team handle do not use a label internally
 

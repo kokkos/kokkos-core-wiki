@@ -13,11 +13,11 @@ Interface
 
 .. warning:: This is currently inside the ``Kokkos::Experimental`` namespace.
 
+Overload set accepting execution space
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 .. code-block:: cpp
 
-   //
-   // overload set: default predicate, accepting execution space
-   //
    template <class ExecutionSpace, class InputIterator, class OutputIterator>
    OutputIterator unique_copy(const ExecutionSpace& exespace,                 (1)
                               InputIterator first_from, InputIterator last_from,
@@ -46,9 +46,6 @@ Interface
                     const Kokkos::View<DataType1, Properties1...>& source,
                     const Kokkos::View<DataType2, Properties2...>& dest);
 
-   //
-   // overload set: custom predicate, accepting execution space
-   //
    template <
      class ExecutionSpace,
      class InputIterator, class OutputIterator,
@@ -89,9 +86,13 @@ Interface
                     const Kokkos::View<DataType2, Properties2...>& dest,
                     BinaryPredicate pred);
 
-   //
-   // overload set: default predicate, accepting team handle
-   //
+Overload set accepting a team handle
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. versionadded:: 4.2
+
+.. code-block:: cpp
+
    template <class TeamHandleType, class InputIterator, class OutputIterator>
    KOKKOS_FUNCTION
    OutputIterator unique_copy(const TeamHandleType& teamHandle,               (9)
@@ -107,9 +108,6 @@ Interface
                     const Kokkos::View<DataType1, Properties1...>& source,
                     const Kokkos::View<DataType2, Properties2...>& dest);
 
-   //
-   // overload set: custom predicate, accepting team handle
-   //
    template <
      class TeamHandleType,
      class InputIterator, class OutputIterator,
@@ -140,13 +138,14 @@ Parameters and Requirements
 
 - ``label``: string forwarded to internal parallel kernels for debugging purposes
 
-  - 1 & 5: The default string is "Kokkos::unique_copy_iterator_api_default".
+  - 1, 5: The default string is "Kokkos::unique_copy_iterator_api_default".
 
-  - 3 & 7: The default string is "Kokkos::unique_copy_view_api_default".
+  - 3, 7: The default string is "Kokkos::unique_copy_view_api_default".
 
   - NOTE: overloads accepting a team handle do not use a label internally
 
-- ``first_from, last_from``, ``first_to``: iterators to source range ``{first,last}_from`` and destination range ``first_to``
+- ``first_from, last_from``, ``first_to``: iterators to source range ``{first,last}_from``
+  and destination range ``first_to``
 
   - must be *random access iterators*, e.g., returned from ``Kokkos::Experimental::(c)begin/(c)end``
 

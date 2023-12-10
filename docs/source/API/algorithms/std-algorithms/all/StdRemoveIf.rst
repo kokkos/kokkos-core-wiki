@@ -13,11 +13,11 @@ Interface
 
 .. warning:: This is currently inside the ``Kokkos::Experimental`` namespace.
 
+Overload set accepting execution space
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 .. code-block:: cpp
 
-   //
-   // overload set accepting execution space
-   //
    template <class ExecutionSpace, class Iterator, class UnaryPredicate>
    Iterator remove_if(const ExecutionSpace& exespace,                           (1)
                       Iterator first, Iterator last,
@@ -46,9 +46,13 @@ Interface
                   const Kokkos::View<DataType, Properties...>& view,
                   UnaryPredicate pred);
 
-   //
-   // overload set accepting a team handle
-   //
+Overload set accepting a team handle
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. versionadded:: 4.2
+
+.. code-block:: cpp
+
    template <class TeamHandleType, class Iterator, class UnaryPredicate>
    KOKKOS_FUNCTION
    Iterator remove_if(const TeamHandleType& teamHandle,                         (5)
@@ -84,7 +88,12 @@ Parameters and Requirements
 
 - ``pred``:
 
-  - *unary* predicate returning ``true`` for the required element to replace; ``pred(v)`` must be valid to be called from the execution space passed, and convertible to bool for every argument ``v`` of type (possible const) ``value_type``, where ``value_type`` is the value type of ``Iterator`` (for 1,2,5) or the value type of ``view`` (for 3,4,6), and must not modify ``v``.
+  - *unary* predicate returning ``true`` for the required element to replace; ``pred(v)``
+    must be valid to be called from the execution space passed or the execution space
+    associated with the team handle, and convertible to bool for every argument ``v``
+    of type (possible const) ``value_type``, where ``value_type`` is the value type
+    of ``Iterator`` (for 1,2,5) or the value type of ``view`` (for 3,4,6),
+    and must not modify ``v``.
 
   - must conform to:
 

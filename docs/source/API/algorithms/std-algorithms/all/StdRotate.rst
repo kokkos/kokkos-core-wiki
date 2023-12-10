@@ -6,18 +6,20 @@ Header: ``Kokkos_StdAlgorithms.hpp``
 Description
 -----------
 
-Swaps the elements in the range or in ``view`` in such a way that the element ``n_first`` or ``view(n_location)`` becomes the first element of the new range and ``n_first - 1`` becomes the last element.
+Swaps the elements in the range or in ``view`` in such a way that
+the element ``n_first`` or ``view(n_location)`` becomes the first element
+of the new range and ``n_first - 1`` becomes the last element.
 
 Interface
 ---------
 
 .. warning:: This is currently inside the ``Kokkos::Experimental`` namespace.
 
+Overload set accepting execution space
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 .. code-block:: cpp
 
-   //
-   // overload set accepting execution space
-   //
    template <class ExecutionSpace, class IteratorType>
    IteratorType rotate(const ExecutionSpace& exespace,                            (1)
                        IteratorType first,
@@ -40,9 +42,13 @@ Interface
                const Kokkos::View<DataType, Properties...>& view,
                std::size_t n_location);
 
-   //
-   // overload set accepting a team handle
-   //
+Overload set accepting a team handle
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. versionadded:: 4.2
+
+.. code-block:: cpp
+
    template <class TeamHandleType, class IteratorType>
    KOKKOS_FUNCTION
    IteratorType rotate(const TeamHandleType& teamHandle,                          (5)
@@ -98,6 +104,6 @@ Parameters and Requirements
 Return Value
 ~~~~~~~~~~~~
 
-- 1 & 2: Returns the iterator computed as ``first + (last - n_first)``
+- 1, 2, 5: Returns the iterator computed as ``first + (last - n_first)``
 
-- 3 & 4: Returns ``Kokkos::begin(view) + (Kokkos::end(view) - n_location)``
+- 3, 4, 6: Returns ``Kokkos::begin(view) + (Kokkos::end(view) - n_location)``
