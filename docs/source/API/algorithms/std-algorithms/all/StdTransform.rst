@@ -7,18 +7,13 @@ Header: ``<Kokkos_StdAlgorithms.hpp>``
 Description
 -----------
 
-- Overloads (1,2,9): applies the given *unary* operation to all elements in the
-range ``[first_from, last_from)`` stores the result in the range starting at ``first_to``
+- Overloads (1,2,9): applies the given *unary* operation to all elements in the range ``[first_from, last_from)`` stores the result in the range starting at ``first_to``
 
-- Overloads (3,4,10): applies the given *unary* operation to all elements in
-the ``source`` view and stores the result in the ``dest`` view.
+- Overloads (3,4,10): applies the given *unary* operation to all elements in the ``source`` view and stores the result in the ``dest`` view.
 
-- Overloads (5,6,11): applies the given *binary* operation to pair of elements
-from the ranges ``[first_from1, last_from1)`` and ``[first_from2, last_from2]``
-and stores the result in range starting at ``first_to``
+- Overloads (5,6,11): applies the given *binary* operation to pair of elements from the ranges ``[first_from1, last_from1)`` and ``[first_from2, last_from2]`` and stores the result in range starting at ``first_to``
 
-- Overloads (7,8,12): applies the given *binary* operation to pair of elements
-from the views ``source1, source2`` and stores the result in ``dest`` view
+- Overloads (7,8,12): applies the given *binary* operation to pair of elements from the views ``source1, source2`` and stores the result in ``dest`` view
 
 
 Interface

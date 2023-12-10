@@ -93,17 +93,15 @@ Parameters and Requirements
 
 - ``g``:
 
-  - functor of the following form, where ``return_type`` must be assignable to
-  ``value_type``, with ``value_type`` being the value type of ``IteratorType``
-  or of ``view``:
+  - functor of the following form, where ``return_type`` must be assignable to ``value_type``, with ``value_type`` being the value type of ``IteratorType`` or of ``view``:
 
-.. code-block:: cpp
+  .. code-block:: cpp
 
-  struct Generate
-  {
-      KOKKOS_INLINE_FUNCTION
-      return_type operator()() const{ return /* ... */; }
-  };
+     struct Generate
+     {
+	 KOKKOS_INLINE_FUNCTION
+	 return_type operator()() const{ return /* ... */; }
+     };
 
 
 Return Value
