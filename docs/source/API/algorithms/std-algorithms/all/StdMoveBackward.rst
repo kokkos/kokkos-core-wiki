@@ -52,7 +52,7 @@ Overload set accepting a team handle
    template <class TeamHandleType, class IteratorType1, class IteratorType2>
    KOKKOS_FUNCTION
    IteratorType2 move_backward(const TeamHandleType& teamHandle, IteratorType1 first,  (5)
-                 IteratorType1 last, IteratorType2 d_last);
+                               IteratorType1 last, IteratorType2 d_last);
 
    template <class TeamHandleType, class DataType1, class... Properties1,
              class DataType2, class... Properties2>

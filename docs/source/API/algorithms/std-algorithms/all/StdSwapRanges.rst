@@ -22,7 +22,7 @@ Overload set accepting execution space
 
    template <class ExecutionSpace, class IteratorType1, class IteratorType2>
    IteratorType2 swap_ranges(const ExecutionSpace& ex, IteratorType1 first1,          (1)
-                             IteratorType1 last1, IteratorType2 first1);
+                             IteratorType1 last1, IteratorType2 first2);
 
    template <class ExecutionSpace, class DataType1, class... Properties1,
              class DataType2, class... Properties2>
@@ -33,7 +33,7 @@ Overload set accepting execution space
    template <class ExecutionSpace, class IteratorType1, class IteratorType2>
    IteratorType2 swap_ranges(const std::string& label, const ExecutionSpace& ex,      (3)
                              IteratorType1 first1, IteratorType1 last1,
-                             IteratorType2 first1);
+                             IteratorType2 first2);
 
    template <class ExecutionSpace, class DataType1, class... Properties1,
              class DataType2, class... Properties2>
@@ -51,7 +51,7 @@ Overload set accepting a team handle
    template <class TeamHandleType, class IteratorType1, class IteratorType2>
    KOKKOS_FUNCTION
    IteratorType2 swap_ranges(const TeamHandleType& teamHandle, IteratorType1 first1,  (5)
-                             IteratorType1 last1, IteratorType2 first1);
+                             IteratorType1 last1, IteratorType2 first2);
 
    template <class TeamHandleType, class DataType1, class... Properties1,
              class DataType2, class... Properties2>
