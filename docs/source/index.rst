@@ -100,5 +100,6 @@ Website Content
    videolectures
    GitHub Repo <https://github.com/kokkos/kokkos>
    contributing
+   faq
    citation
    license
