@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="CMake Keywords" href="keywords.html" /><link rel="prev" title="Requirements" href="requirements.html" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Citing Kokkos" href="citation.html" /><link rel="prev" title="CoolerView" href="templates/class_api.html" />
 
     <meta name="generator" content="sphinx-5.0.1, furo 2022.06.04.1"/>
-        <title>Build, Install and Use - Kokkos documentation</title>
+        <title>FAQ - Kokkos documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=40978830699223671f4072448e654b5958f38b89" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
@@ -136,7 +136,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -181,7 +181,7 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="requirements.html">Requirements</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Build, Install and Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="building.html">Build, Install and Use</a></li>
 <li class="toctree-l1"><a class="reference internal" href="keywords.html">CMake Keywords</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="API/core-index.html">API: Core</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2 has-children"><a class="reference internal" href="API/core/Initialize-and-Finalize.html">Initialize and Finalize</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -462,7 +462,7 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">FAQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="citation.html">Citing Kokkos</a></li>
 <li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
 </ul>
@@ -485,7 +485,7 @@
         </a>
         <div class="content-icon-container">
 <div class="edit-this-page">
-  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/building.md" title="Edit this page">
+  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/faq.rst" title="Edit this page">
     <svg aria-hidden="true" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
       <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4"></path>
@@ -503,164 +503,20 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="build-install-and-use">
-<h1>Build, Install and Use<a class="headerlink" href="#build-install-and-use" title="Permalink to this heading">#</a></h1>
-<section id="kokkos-philosophy">
-<h2>Kokkos Philosophy<a class="headerlink" href="#kokkos-philosophy" title="Permalink to this heading">#</a></h2>
-<p>Kokkos provides a modern CMake style build system.
-As C++ continues to develop for C++20 and beyond, CMake is likely to provide the most robust support
-for C++.  Applications heavily leveraging Kokkos are strongly encouraged to use a CMake build system.</p>
-<p>You can either use Kokkos as an installed package (encouraged) or use Kokkos in-tree in your project.
-Modern CMake is exceedingly simple at a high-level (with the devil in the details).
-Once Kokkos is installed In your <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> simply use:</p>
-<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">find_package</span><span class="p">(</span><span class="s">Kokkos</span><span class="w"> </span><span class="s">REQUIRED</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Then for every executable or library in your project:</p>
-<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">myTarget</span><span class="w"> </span><span class="s">Kokkos::kokkos</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>That’s it! There is no checking Kokkos preprocessor, compiler, or linker flags.
-Kokkos propagates all the necessary flags to your project.
-This means not only is linking to Kokkos easy, but Kokkos itself can actually configure compiler and linker flags for <em>your</em>
-project.
-When configuring your project just set:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>&gt;<span class="w"> </span>cmake<span class="w"> </span><span class="si">${</span><span class="nv">srcdir</span><span class="si">}</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-DKokkos_ROOT<span class="o">=</span><span class="si">${</span><span class="nv">kokkos_install_prefix</span><span class="si">}</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-DCMAKE_CXX_COMPILER<span class="o">=</span><span class="si">${</span><span class="nv">compiler_used_to_build_kokkos</span><span class="si">}</span>
-</pre></div>
-</div>
-<p>Note: You may need the following if using some versions of CMake (e.g. 3.12):</p>
-<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">cmake_policy</span><span class="p">(</span><span class="s">SET</span><span class="w"> </span><span class="s">CMP0074</span><span class="w"> </span><span class="s">NEW</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>If building in-tree, there is no <code class="docutils literal notranslate"><span class="pre">find_package</span></code>. You can use <code class="docutils literal notranslate"><span class="pre">add_subdirectory(kokkos)</span></code> with the Kokkos source and again just link with <code class="docutils literal notranslate"><span class="pre">target_link_libraries(Kokkos::kokkos)</span></code>.
-The examples in <code class="docutils literal notranslate"><span class="pre">examples/cmake_build_installed</span></code> and <code class="docutils literal notranslate"><span class="pre">examples/cmake_build_in_tree</span></code> can help get you started.</p>
-</section>
-<section id="configuring-cmake">
-<h2>Configuring CMake<a class="headerlink" href="#configuring-cmake" title="Permalink to this heading">#</a></h2>
-<p>A very basic installation of Kokkos is done with:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>&gt;<span class="w"> </span>cmake<span class="w"> </span><span class="si">${</span><span class="nv">srcdir</span><span class="si">}</span><span class="w"> </span><span class="se">\</span>
-<span class="w"> </span>-DCMAKE_CXX_COMPILER<span class="o">=</span>g++<span class="w"> </span><span class="se">\</span>
-<span class="w"> </span>-DCMAKE_INSTALL_PREFIX<span class="o">=</span><span class="si">${</span><span class="nv">kokkos_install_folder</span><span class="si">}</span>
-</pre></div>
-</div>
-<p>which builds and installed a default Kokkos when you run <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">install</span></code>.
-There are numerous device backends, options, and architecture-specific optimizations that can be configured, e.g.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>&gt;<span class="w"> </span>cmake<span class="w"> </span><span class="si">${</span><span class="nv">srcdir</span><span class="si">}</span><span class="w"> </span><span class="se">\</span>
-<span class="w"> </span>-DCMAKE_CXX_COMPILER<span class="o">=</span>g++<span class="w"> </span><span class="se">\</span>
-<span class="w"> </span>-DCMAKE_INSTALL_PREFIX<span class="o">=</span><span class="si">${</span><span class="nv">kokkos_install_folder</span><span class="si">}</span><span class="w"> </span><span class="se">\</span>
-<span class="w"> </span>-DKokkos_ENABLE_OPENMP<span class="o">=</span>ON
-</pre></div>
-</div>
-<p>which activates the OpenMP backend. All the options controlling device backends, options, architectures, and third-party libraries (TPLs) are given in <a class="reference internal" href="keywords.html"><span class="doc std std-doc">CMake Keywords</span></a>.</p>
-</section>
-<section id="known-issues-a-name-knownissues-a">
-<h2>Known Issues<a name="KnownIssues"></a><a class="headerlink" href="#known-issues-a-name-knownissues-a" title="Permalink to this heading">#</a></h2>
-<section id="cray">
-<h3>Cray<a class="headerlink" href="#cray" title="Permalink to this heading">#</a></h3>
-<ul class="simple">
-<li><p>The Cray compiler wrappers do static linking by default. This seems to break the Kokkos build. You will likely need to set the environment variable <code class="docutils literal notranslate"><span class="pre">CRAYPE_LINK_TYPE=dynamic</span></code> in order to link correctly. Kokkos warns during configure if this is missing.</p></li>
-<li><p>The Cray compiler identifies to CMake as Clang, but it sometimes has its own flags that differ from Clang. We try to include all exceptions, but flag errors may occur in which a Clang-specific flag is passed that the Cray compiler does not recognize.</p></li>
-</ul>
-</section>
-<section id="fortran">
-<h3>Fortran<a class="headerlink" href="#fortran" title="Permalink to this heading">#</a></h3>
-<ul class="simple">
-<li><p>In a mixed C++/Fortran code, CMake will use the C++ linker by default. If you override this behavior and use Fortran as the link language, the link may break because Kokkos adds linker flags expecting the linker to be C++. Prior to CMake 3.18, Kokkos has no way of detecting in downstream projects that the linker was changed to Fortran.  From CMake 3.18, Kokkos can use generator expressions to avoid adding flags when the linker is not C++. Note: Kokkos will not add any linker flags in this Fortran case. The user will be entirely on their own to add the appropriate linker flags.</p></li>
-</ul>
-</section>
-</section>
-<section id="raw-makefile">
-<h2>Raw Makefile<a class="headerlink" href="#raw-makefile" title="Permalink to this heading">#</a></h2>
-<p>Raw Makefiles are only supported via inline builds. See below.</p>
-</section>
-<section id="inline-builds-vs-installed-package">
-<h2>Inline Builds vs. Installed Package<a class="headerlink" href="#inline-builds-vs-installed-package" title="Permalink to this heading">#</a></h2>
-<p>For individual projects, it may be preferable to build Kokkos inline rather than link to an installed package.
-The main reason is that you may otherwise need many different
-configurations of Kokkos installed depending on the required compile time
-features an application needs. For example there is only one default
-execution space, which means you need different installations to have OpenMP
-or C++ threads as the default space. Also for the CUDA backend there are certain
-choices, such as allowing relocatable device code, which must be made at
-installation time. Building Kokkos inline uses largely the same process
-as compiling an application against an installed Kokkos library.</p>
-<p>For CMake, this means copying over the Kokkos source code into your project and adding <code class="docutils literal notranslate"><span class="pre">add_subdirectory(kokkos)</span></code> to your CMakeLists.txt.</p>
-<p>For raw Makefiles, see the example benchmarks/bytes_and_flops/Makefile which can be used with an installed library and or an inline build.</p>
-</section>
-<section id="kokkos-and-cuda-uvm">
-<h2>Kokkos and CUDA UVM<a class="headerlink" href="#kokkos-and-cuda-uvm" title="Permalink to this heading">#</a></h2>
-<p>Kokkos does support UVM as a specific memory space called CudaUVMSpace.
-Allocations made with that space are accessible from host and device.
-You can tell Kokkos to use that as the default space for Cuda allocations.
-In either case UVM comes with a number of restrictions:</p>
-<ul class="simple">
-<li><p>You can’t access allocations on the host while a kernel is potentially
-running. This will lead to segfaults. To avoid that you either need to
-call Kokkos::Cuda::fence() (or just Kokkos::fence()), after kernels, or
-you can set the environment variable CUDA_LAUNCH_BLOCKING=1.</p></li>
-<li><p>In multi socket multi GPU machines without NVLINK, UVM defaults
-to using zero copy allocations for technical reasons related to using multiple
-GPUs from the same process. If an executable doesn’t do that (e.g. each
-MPI rank of an application uses a single GPU [can be the same GPU for
-multiple MPI ranks]) you can set CUDA_MANAGED_FORCE_DEVICE_ALLOC=1.
-This will enforce proper UVM allocations, but can lead to errors if
-more than a single GPU is used by a single process.</p></li>
-</ul>
-</section>
-<section id="spack">
-<h2>Spack<a class="headerlink" href="#spack" title="Permalink to this heading">#</a></h2>
-<p>An alternative to manually building with the CMake is to use the Spack package manager.
-Make sure you have downloaded <a class="reference external" href="https://github.com/spack/spack">Spack</a>.
-The easiest way to configure the Spack environment is:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>&gt;<span class="w"> </span><span class="nb">source</span><span class="w"> </span>spack/share/spack/setup-env.sh
-</pre></div>
-</div>
-<p>with other scripts available for other shells.</p>
-<p>You can display information about how to install packages with:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>&gt;<span class="w"> </span>spack<span class="w"> </span>info<span class="w"> </span>kokkos
-</pre></div>
-</div>
-<p>A basic installation would be done as:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>&gt;<span class="w"> </span>spack<span class="w"> </span>install<span class="w"> </span>kokkos
-</pre></div>
-</div>
-<p>Spack allows options and and compilers to be tuned in the install command.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>&gt;<span class="w"> </span>spack<span class="w"> </span>install<span class="w"> </span>kokkos@3.0<span class="w"> </span>%gcc@7.3.0<span class="w"> </span>+openmp
-</pre></div>
-</div>
-<p>This example illustrates the three most common parameters to Spack:</p>
-<ul class="simple">
-<li><p>Variants: specified with, e.g. <code class="docutils literal notranslate"><span class="pre">+openmp</span></code>, this activates (or deactivates with, e.g. <code class="docutils literal notranslate"><span class="pre">~openmp</span></code>) certain options.</p></li>
-<li><p>Version:  immediately following <code class="docutils literal notranslate"><span class="pre">kokkos</span></code> the <code class="docutils literal notranslate"><span class="pre">&#64;version</span></code> can specify a particular Kokkos to build</p></li>
-<li><p>Compiler: a default compiler will be chosen if not specified, but an exact compiler version can be given with the <code class="docutils literal notranslate"><span class="pre">%</span></code>option.</p></li>
-</ul>
-<p>For a complete list of Kokkos options, run:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>&gt;<span class="w"> </span>spack<span class="w"> </span>info<span class="w"> </span>kokkos
-</pre></div>
-</div>
-<!-- More details can be found in the [Spack README](Spack.md) -->
-<section id="spack-development">
-<h3>Spack Development<a class="headerlink" href="#spack-development" title="Permalink to this heading">#</a></h3>
-<p>Spack currently installs packages to a location determined by a unique hash. This hash name is not really “human readable”.
-Generally, Spack usage should never really require you to reference the computer-generated unique install folder.
-If you must know, you can locate Spack Kokkos installations with:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>&gt;<span class="w"> </span>spack<span class="w"> </span>find<span class="w"> </span>-p<span class="w"> </span>kokkos<span class="w"> </span>...
-</pre></div>
-</div>
-<p>where <code class="docutils literal notranslate"><span class="pre">...</span></code> is the unique spec identifying the particular Kokkos configuration and version.</p>
-<p>A better way to use Spack for doing Kokkos development is the dev-build feature of Spack.
-For dev-build details, try using <code class="docutils literal notranslate"><span class="pre">spack</span> <span class="pre">test</span> <span class="pre">run</span></code>.</p>
-<!-- consult the kokkos-spack repository [README](https://github.com/kokkos/kokkos-spack/blob/master/README.md). -->
-</section>
-</section>
+          <section id="faq">
+<h1>FAQ<a class="headerlink" href="#faq" title="Permalink to this heading">#</a></h1>
+<dl class="simple">
+<dt>How do I join the Kokkos slack channel?</dt><dd><p>You can find the slack channel at <a class="reference external" href="https://kokkosteam.slack.com">kokkosteam.slack.com</a>. Register a new account with your email. We automatically whitelist emails from most organizations, but if your email address is not whitelisted, you can contact the Kokkos maintainers (their emails are in the LICENSE file).</p>
+</dd>
+<dt>How do I compile Kokkos with C++20 or C++23?</dt><dd><p>When configuring Kokkos with cmake, add the flag <code class="docutils literal notranslate"><span class="pre">-DCMAKE_CXX_STANDARD=20</span></code> (or <code class="docutils literal notranslate"><span class="pre">23</span></code>). Ensure that the flag is also set for any downstream applications.</p>
+</dd>
+</dl>
 </section>
 
         </article>
@@ -668,23 +524,23 @@ For dev-build details, try using <code class="docutils literal notranslate"><spa
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="keywords.html">
+          <a class="next-page" href="citation.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">CMake Keywords</div>
+                <div class="title">Citing Kokkos</div>
               </div>
               <svg><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="requirements.html">
+          <a class="prev-page" href="templates/class_api.html">
               <svg><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Requirements</div>
+                <div class="title"><code class="docutils literal notranslate"><span class="pre">CoolerView</span></code></div>
                 
               </div>
             </a>
@@ -708,40 +564,8 @@ For dev-build details, try using <code class="docutils literal notranslate"><spa
         
       </footer>
     </div>
-    <aside class="toc-drawer">
+    <aside class="toc-drawer no-toc">
       
-      
-      <div class="toc-sticky toc-scroll">
-        <div class="toc-title-container">
-          <span class="toc-title">
-            Contents
-          </span>
-        </div>
-        <div class="toc-tree-container">
-          <div class="toc-tree">
-            <ul>
-<li><a class="reference internal" href="#">Build, Install and Use</a><ul>
-<li><a class="reference internal" href="#kokkos-philosophy">Kokkos Philosophy</a></li>
-<li><a class="reference internal" href="#configuring-cmake">Configuring CMake</a></li>
-<li><a class="reference internal" href="#known-issues-a-name-knownissues-a">Known Issues<a name="KnownIssues"></a></a><ul>
-<li><a class="reference internal" href="#cray">Cray</a></li>
-<li><a class="reference internal" href="#fortran">Fortran</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#raw-makefile">Raw Makefile</a></li>
-<li><a class="reference internal" href="#inline-builds-vs-installed-package">Inline Builds vs. Installed Package</a></li>
-<li><a class="reference internal" href="#kokkos-and-cuda-uvm">Kokkos and CUDA UVM</a></li>
-<li><a class="reference internal" href="#spack">Spack</a><ul>
-<li><a class="reference internal" href="#spack-development">Spack Development</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
-          </div>
-        </div>
-      </div>
       
       
     </aside>
