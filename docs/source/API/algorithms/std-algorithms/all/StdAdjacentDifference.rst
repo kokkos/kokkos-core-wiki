@@ -1,24 +1,28 @@
 ``adjacent_difference``
 =======================
 
-Header: ``Kokkos_StdAlgorithms.hpp``
+Header: ``<Kokkos_StdAlgorithms.hpp>``
 
 Description
 -----------
 
-First, a copy of ``*first_from`` is written to ``*first_dest``, or a copy of ``view_from(0)`` is written to ``view_dest(0)``.
-Second, it computes the *difference* or calls the binary functor between the second and the first of each adjacent pair of elements of a range or in ``view_from``, and writes them to the range beginning at ``first_dest + 1``, or ``view_dest``.
+This function performs the following two operations.
+First, a copy of ``*first_from`` is written to ``*first_dest``, or a copy of ``view_from(0)``
+is written to ``view_dest(0)``.
+Second, it computes the *difference* or calls the binary functor between the second and
+the first of each adjacent pair of elements of a range or in ``view_from``,
+and writes them to the range beginning at ``first_dest + 1``, or ``view_dest``.
 
 Interface
 ---------
 
 .. warning:: This is currently inside the ``Kokkos::Experimental`` namespace.
 
+Overload set accepting execution space
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 .. code-block:: cpp
 
-   //
-   // overload set accepting execution space
-   //
    template <
       class ExecutionSpace,
       class InputIteratorType, class OutputIteratorType>
@@ -57,9 +61,6 @@ Interface
                                           OutputIteratorType first_dest,
                                           BinaryOp bin_op);
 
-   //
-   // overload set accepting views
-   //
    template <
       class ExecutionSpace,
       class DataType1, class... Properties1,
@@ -98,9 +99,13 @@ Interface
                             const Kokkos::View<DataType2, Properties2...>& view_dest,
                             BinaryOp bin_op);
 
-   //
-   // overload set accepting a team handle
-   //
+Overload set accepting a team handle
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. versionadded:: 4.2
+
+.. code-block:: cpp
+
    template <
       class TeamHandleType,
       class InputIteratorType, class OutputIteratorType>
@@ -150,13 +155,13 @@ Parameters and Requirements
 
 - ``label``: string forwarded to internal parallel kernels for debugging purposes
 
-  - 1 & 2: The default string is "Kokkos::adjacent_difference_iterator_api"
+  - 1, 2: The default string is "Kokkos::adjacent_difference_iterator_api"
 
-  - 5 & 6: The default string is "Kokkos::adjacent_difference_view_api"
+  - 5, 6: The default string is "Kokkos::adjacent_difference_view_api"
 
   - NOTE: overloads accepting a team handle do not use a label internally
 
-- ``first_from``, ``last_from``, ``first_dest``: range of elements to read from ``*_from`` and write to ``first_dest``
+- ``first_from``, ``last_from``, ``first_dest``: range of elements to read from and write to
 
   - must be *random access iterators*, e.g., returned from ``Kokkos::Experimental::(c)begin/(c)end``
 
@@ -164,7 +169,7 @@ Parameters and Requirements
 
   - must be accessible from ``exespace`` or from the execution space associated with the team handle
 
-- ``view_from``, ``view_dest``: views to read elements from ``view_from`` and write to ``view_dest``
+- ``view_from``, ``view_dest``: views to read elements from and write to
 
   - must be rank-1, and have ``LayoutLeft``, ``LayoutRight``, or ``LayoutStride``
 

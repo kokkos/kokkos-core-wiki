@@ -14,11 +14,11 @@ Interface
 
 .. warning:: This is currently inside the ``Kokkos::Experimental`` namespace.
 
+Overload set accepting execution space
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 .. code-block:: cpp
 
-   //
-   // overload set accepting execution space
-   //
    template <
       class ExecutionSpace, class InputIteratorType,
       class OutputIteratorType, class ValueType,
@@ -69,9 +69,13 @@ Interface
                                  BinaryOpType binary_op,
                                  UnaryOpType unary_op);
 
-   //
-   // overload set accepting a team handle
-   //
+Overload set accepting a team handle
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. versionadded:: 4.2
+
+.. code-block:: cpp
+
    template <
       class TeamHandleType, class InputIteratorType,
       class OutputIteratorType, class ValueType,

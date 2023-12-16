@@ -1,23 +1,24 @@
 ``partition_point``
 ===================
 
-Header: ``Kokkos_StdAlgorithms.hpp``
+Header: ``<Kokkos_StdAlgorithms.hpp>``
 
 Description
 -----------
 
-Examines a range or ``view`` and locates the first element that does not satisfy ``pred``. Assumes the range (or the view) already to be partitioned.
+Examines a range or ``view`` and locates the first element that does not satisfy ``pred``.
+Assumes the range (or the view) already to be partitioned.
 
 Interface
 ---------
 
 .. warning:: This is currently inside the ``Kokkos::Experimental`` namespace.
 
+Overload set accepting execution space
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 .. code-block:: cpp
 
-   //
-   // overload set accepting execution space
-   //
    template <class ExecutionSpace, class IteratorType, class UnaryPredicate>
    IteratorType partition_point(const ExecutionSpace& exespace,                   (1)
                                 IteratorType first, IteratorType last,
@@ -44,9 +45,14 @@ Interface
                         const Kokkos::View<DataType, Properties...>& view,
                         UnaryPredicate pred);
 
-   //
-   // overload set accepting a team handle
-   //
+
+Overload set accepting a team handle
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. versionadded:: 4.2
+
+.. code-block:: cpp
+
    template <class TeamHandleType, class IteratorType, class UnaryPredicate>
    KOKKOS_FUNCTION
    IteratorType partition_point(const TeamHandleType& teamHandle,                 (5)

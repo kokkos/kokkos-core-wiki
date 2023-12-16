@@ -17,11 +17,11 @@ Interface
 
 .. warning:: This is currently inside the ``Kokkos::Experimental`` namespace.
 
+Overload set accepting execution space
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 .. code-block:: cpp
 
-   //
-   // overload set A
-   //
    template <class ExecutionSpace, class IteratorType>
    typename IteratorType::value_type reduce(const ExecutionSpace& exespace,      (1)
                                             IteratorType first,
@@ -52,9 +52,6 @@ Interface
    auto reduce(const TeamHandleType& teamHandle,                                 (6)
                const Kokkos::View<DataType, Properties...>& view)
 
-   //
-   // overload set B
-   //
    template <class ExecutionSpace, class IteratorType, class ValueType>
    ValueType reduce(const ExecutionSpace& exespace,                              (7)
                     IteratorType first, IteratorType last,
@@ -95,9 +92,6 @@ Interface
                     const Kokkos::View<DataType, Properties...>& view,
                     ValueType init_reduction_value);
 
-   //
-   // overload set C
-   //
    template <
       class ExecutionSpace, class IteratorType,
       class ValueType, class BinaryOp>

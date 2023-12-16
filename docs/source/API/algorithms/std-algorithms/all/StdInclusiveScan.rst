@@ -14,11 +14,11 @@ Interface
 
 .. warning:: This is currently inside the ``Kokkos::Experimental`` namespace.
 
+Overload set accepting execution space
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 .. code-block:: cpp
 
-   //
-   // overload set A
-   //
    template <class ExecutionSpace, class InputIteratorType, class OutputIteratorType>
    OutputIteratorType inclusive_scan(const ExecutionSpace& exespace,                   (1)
                                      InputIteratorType first_from,
@@ -65,9 +65,6 @@ Interface
                        const Kokkos::View<DataType1, Properties1...>& view_from,
                        const Kokkos::View<DataType2, Properties2...>& view_dest);
 
-   //
-   // overload set B
-   //
    template <
       class ExecutionSpace, class InputIteratorType,
       class OutputIteratorType, class BinaryOp>
@@ -109,34 +106,10 @@ Interface
                        BinaryOp binary_op);
 
    template <
-      class TeamHandleType, class InputIteratorType,
-      class OutputIteratorType, class BinaryOp>
-   KOKKOS_FUNCTION
-   OutputIteratorType inclusive_scan(const TeamHandleType& teamHandle,                 (11)
-                                     InputIteratorType first_from,
-                                     InputIteratorType last_from,
-                                     OutputIteratorType first_dest,
-                                     BinaryOp binary_op);
-
-   template <
-      class TeamHandleType,
-      class DataType1, class... Properties1,
-      class DataType2, class... Properties2,
-      class BinaryOp>
-   KOKKOS_FUNCTION
-   auto inclusive_scan(const TeamHandleType& teamHandle,                               (12)
-                       const Kokkos::View<DataType1, Properties1...>& view_from,
-                       const Kokkos::View<DataType2, Properties2...>& view_dest,
-                       BinaryOp binary_op);
-
-   //
-   // overload set C
-   //
-   template <
       class ExecutionSpace,
       class InputIteratorType, class OutputIteratorType,
       class BinaryOp, class ValueType>
-   OutputIteratorType inclusive_scan(const ExecutionSpace& exespace,                   (13)
+   OutputIteratorType inclusive_scan(const ExecutionSpace& exespace,                   (11)
                                      InputIteratorType first_from,
                                      InputIteratorType last_from,
                                      OutputIteratorType first_dest,
@@ -146,7 +119,7 @@ Interface
    template <
       class ExecutionSpace, class InputIteratorType,
       class OutputIteratorType, class BinaryOp, class ValueType>
-   OutputIteratorType inclusive_scan(const std::string& label,                         (14)
+   OutputIteratorType inclusive_scan(const std::string& label,                         (12)
                                      const ExecutionSpace& exespace,
                                      InputIteratorType first_from,
                                      InputIteratorType last_from,
@@ -159,7 +132,7 @@ Interface
       class DataType1, class... Properties1,
       class DataType2, class... Properties2,
       class BinaryOp, class ValueType>
-   auto inclusive_scan(const ExecutionSpace& exespace,                                 (15)
+   auto inclusive_scan(const ExecutionSpace& exespace,                                 (13)
                        const Kokkos::View<DataType1, Properties1...>& view_from,
                        const Kokkos::View<DataType2, Properties2...>& view_dest,
                        BinaryOp binary_op,
@@ -170,12 +143,42 @@ Interface
       class DataType1, class... Properties1,
       class DataType2, class... Properties2,
       class BinaryOp, class ValueType>
-   auto inclusive_scan(const std::string& label,                                       (16)
+   auto inclusive_scan(const std::string& label,                                       (14)
                        const ExecutionSpace& exespace,
                        const Kokkos::View<DataType1, Properties1...>& view_from,
                        const Kokkos::View<DataType2, Properties2...>& view_dest,
                        BinaryOp binary_op,
                        ValueType init_value);
+
+
+Overload set accepting a team handle
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. versionadded:: 4.2
+
+.. code-block:: cpp
+
+   template <
+      class TeamHandleType, class InputIteratorType,
+      class OutputIteratorType, class BinaryOp>
+   KOKKOS_FUNCTION
+   OutputIteratorType inclusive_scan(const TeamHandleType& teamHandle,                 (15)
+                                     InputIteratorType first_from,
+                                     InputIteratorType last_from,
+                                     OutputIteratorType first_dest,
+                                     BinaryOp binary_op);
+
+   template <
+      class TeamHandleType,
+      class DataType1, class... Properties1,
+      class DataType2, class... Properties2,
+      class BinaryOp>
+   KOKKOS_FUNCTION
+   auto inclusive_scan(const TeamHandleType& teamHandle,                               (16)
+                       const Kokkos::View<DataType1, Properties1...>& view_from,
+                       const Kokkos::View<DataType2, Properties2...>& view_dest,
+                       BinaryOp binary_op);
+
 
    template <
       class TeamHandleType, class InputIteratorType,

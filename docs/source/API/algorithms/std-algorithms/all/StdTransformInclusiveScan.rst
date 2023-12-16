@@ -15,11 +15,11 @@ Interface
 
 .. warning:: This is currently inside the ``Kokkos::Experimental`` namespace.
 
+Overload set accepting execution space
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 .. code-block:: cpp
 
-   //
-   // overload set A: no init value
-   //
    template <
       class ExecutionSpace, class InputIteratorType,
       class OutputIteratorType, class BinaryOpType, class UnaryOpType>
@@ -65,36 +65,10 @@ Interface
                                  UnaryOpType unary_op);
 
    template <
-      class TeamHandleType, class InputIteratorType,
-      class OutputIteratorType, class BinaryOpType, class UnaryOpType>
-   KOKKOS_FUNCTION
-   OutputIteratorType transform_inclusive_scan(const TeamHandleType& teamHandle,    (5)
-                                               InputIteratorType first_from,
-                                               InputIteratorType last_from,
-                                               OutputIteratorType first_dest,
-                                               BinaryOpType binary_op,
-                                               UnaryOpType unary_op);
-
-   template <
-      class TeamHandleType,
-      class DataType1, class... Properties1,
-      class DataType2, class... Properties2,
-      class BinaryOpType, class UnaryOpType>
-   KOKKOS_FUNCTION
-   auto transform_inclusive_scan(const TeamHandleType& teamHandle,                  (6)
-                                 const Kokkos::View<DataType1, Properties1...>& view_from,
-                                 const Kokkos::View<DataType2, Properties2...>& view_dest,
-                                 BinaryOpType binary_op,
-                                 UnaryOpType unary_op);
-
-   //
-   // overload set B: init value
-   //
-   template <
       class ExecutionSpace, class InputIteratorType,
       class OutputIteratorType, class BinaryOpType, class UnaryOpType,
       class ValueType>
-   OutputIteratorType transform_inclusive_scan(const ExecutionSpace& exespace,      (7)
+   OutputIteratorType transform_inclusive_scan(const ExecutionSpace& exespace,      (5)
                                                InputIteratorType first_from,
                                                InputIteratorType last_from,
                                                OutputIteratorType first_dest,
@@ -106,7 +80,7 @@ Interface
       class ExecutionSpace, class InputIteratorType,
       class OutputIteratorType, class BinaryOpType, class UnaryOpType,
       class ValueType>
-   OutputIteratorType transform_inclusive_scan(const std::string& label,            (8)
+   OutputIteratorType transform_inclusive_scan(const std::string& label,            (6)
                                                const ExecutionSpace& exespace,
                                                InputIteratorType first_from,
                                                InputIteratorType last_from,
@@ -120,7 +94,7 @@ Interface
       class DataType1, class... Properties1,
       class DataType2, class... Properties2,
       class BinaryOpType, class UnaryOpType, class ValueType>
-   auto transform_inclusive_scan(const ExecutionSpace& exespace,                    (9)
+   auto transform_inclusive_scan(const ExecutionSpace& exespace,                    (7)
                                  const Kokkos::View<DataType1, Properties1...>& view_from,
                                  const Kokkos::View<DataType2, Properties2...>& view_dest,
                                  BinaryOpType binary_op,
@@ -132,7 +106,7 @@ Interface
       class DataType1, class... Properties1,
       class DataType2, class... Properties2,
       class BinaryOpType, class UnaryOpType, class ValueType>
-   auto transform_inclusive_scan(const std::string& label,                          (10)
+   auto transform_inclusive_scan(const std::string& label,                         (8)
                                  const ExecutionSpace& exespace,
                                  const Kokkos::View<DataType1, Properties1...>& view_from,
                                  const Kokkos::View<DataType2, Properties2...>& view_dest,
@@ -140,12 +114,44 @@ Interface
                                  UnaryOpType unary_op,
                                  ValueType init_value);
 
+
+Overload set accepting a team handle
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. versionadded:: 4.2
+
+.. code-block:: cpp
+
+   template <
+      class TeamHandleType, class InputIteratorType,
+      class OutputIteratorType, class BinaryOpType, class UnaryOpType>
+   KOKKOS_FUNCTION
+   OutputIteratorType transform_inclusive_scan(const TeamHandleType& teamHandle,   (9)
+                                               InputIteratorType first_from,
+                                               InputIteratorType last_from,
+                                               OutputIteratorType first_dest,
+                                               BinaryOpType binary_op,
+                                               UnaryOpType unary_op);
+
+   template <
+      class TeamHandleType,
+      class DataType1, class... Properties1,
+      class DataType2, class... Properties2,
+      class BinaryOpType, class UnaryOpType>
+   KOKKOS_FUNCTION
+   auto transform_inclusive_scan(const TeamHandleType& teamHandle,                 (10)
+                                 const Kokkos::View<DataType1, Properties1...>& view_from,
+                                 const Kokkos::View<DataType2, Properties2...>& view_dest,
+                                 BinaryOpType binary_op,
+                                 UnaryOpType unary_op);
+
+
    template <
       class TeamHandleType, class InputIteratorType,
       class OutputIteratorType, class BinaryOpType, class UnaryOpType,
       class ValueType>
    KOKKOS_FUNCTION
-   OutputIteratorType transform_inclusive_scan(const TeamHandleType& teamHandle,    (11)
+   OutputIteratorType transform_inclusive_scan(const TeamHandleType& teamHandle,   (11)
                                                InputIteratorType first_from,
                                                InputIteratorType last_from,
                                                OutputIteratorType first_dest,

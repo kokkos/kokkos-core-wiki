@@ -21,11 +21,11 @@ Interface
 
 .. warning:: This is currently inside the ``Kokkos::Experimental`` namespace.
 
+Overload set accepting execution space
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 .. code-block:: cpp
 
-   //
-   // overload set A
-   //
    template <
       class ExecutionSpace, class InputIteratorType,
       class OutputIteratorType, class ValueType>
@@ -66,33 +66,9 @@ Interface
                        ValueType init_value);
 
    template <
-      class TeamHandleType, class InputIteratorType,
-      class OutputIteratorType, class ValueType>
-   KOKKOS_FUNCTION
-   OutputIteratorType exclusive_scan(const TeamHandleType& teamHandle,           (5)
-                                     InputIteratorType first,
-                                     InputIteratorType last,
-                                     OutputIteratorType first_dest,
-                                     ValueType init_value);
-
-   template <
-      class TeamHandleType,
-      class DataType1, class... Properties1,
-      class DataType2, class... Properties2,
-      class ValueType>
-   KOKKOS_FUNCTION
-   auto exclusive_scan(const TeamHandleType& teamHandle,                         (6)
-                       const Kokkos::View<DataType1, Properties1...>& view_from,
-                       const Kokkos::View<DataType2, Properties2...>& view_dest,
-                       ValueType init_value);
-
-   //
-   // overload set B
-   //
-   template <
       class ExecutionSpace, class InputIteratorType,
       class OutputIteratorType, class ValueType, class BinaryOpType>
-   OutputIteratorType exclusive_scan(const ExecutionSpace& exespace,             (7)
+   OutputIteratorType exclusive_scan(const ExecutionSpace& exespace,             (5)
                                      InputIteratorType first,
                                      InputIteratorType last,
                                      OutputIteratorType first_dest,
@@ -101,7 +77,7 @@ Interface
    template <
       class ExecutionSpace, class InputIteratorType,
       class OutputIteratorType, class ValueType, class BinaryOpType>
-   OutputIteratorType exclusive_scan(const std::string& label,                   (8)
+   OutputIteratorType exclusive_scan(const std::string& label,                   (6)
                                      const ExecutionSpace& exespace,
                                      InputIteratorType first,
                                      InputIteratorType last,
@@ -114,7 +90,7 @@ Interface
       class DataType1, class... Properties1,
       class DataType2, class... Properties2,
       class ValueType, class BinaryOpType>
-   auto exclusive_scan(const ExecutionSpace& exespace,                           (9)
+   auto exclusive_scan(const ExecutionSpace& exespace,                           (7)
                        const Kokkos::View<DataType1, Properties1...>& view_from,
                        const Kokkos::View<DataType2, Properties2...>& view_dest,
                        ValueType init_value, BinaryOpType bop);
@@ -124,11 +100,41 @@ Interface
       class DataType1, class... Properties1,
       class DataType2, class... Properties2,
       class ValueType, class BinaryOpType>
-   auto exclusive_scan(const std::string& label,                                 (10)
+   auto exclusive_scan(const std::string& label,                                 (8)
                        const ExecutionSpace& exespace,
                        const Kokkos::View<DataType1, Properties1...>& view_from,
                        const Kokkos::View<DataType2, Properties2...>& view_dest,
                        ValueType init_value, BinaryOpType bop);
+
+
+Overload set accepting a team handle
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. versionadded:: 4.2
+
+.. code-block:: cpp
+
+   template <
+      class TeamHandleType, class InputIteratorType,
+      class OutputIteratorType, class ValueType>
+   KOKKOS_FUNCTION
+   OutputIteratorType exclusive_scan(const TeamHandleType& teamHandle,           (9)
+                                     InputIteratorType first,
+                                     InputIteratorType last,
+                                     OutputIteratorType first_dest,
+                                     ValueType init_value);
+
+   template <
+      class TeamHandleType,
+      class DataType1, class... Properties1,
+      class DataType2, class... Properties2,
+      class ValueType>
+   KOKKOS_FUNCTION
+   auto exclusive_scan(const TeamHandleType& teamHandle,                         (10)
+                       const Kokkos::View<DataType1, Properties1...>& view_from,
+                       const Kokkos::View<DataType2, Properties2...>& view_dest,
+                       ValueType init_value);
+
 
    template <
       class TeamHandleType, class InputIteratorType,
