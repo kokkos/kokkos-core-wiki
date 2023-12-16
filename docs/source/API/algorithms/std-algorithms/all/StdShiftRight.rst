@@ -13,11 +13,11 @@ Interface
 
 .. warning:: This is currently inside the ``Kokkos::Experimental`` namespace.
 
+Overload set accepting execution space
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 .. code-block:: cpp
 
-   //
-   // overload set accepting execution space
-   //
    template <class ExecutionSpace, class IteratorType>
    IteratorType shift_right(const ExecutionSpace& exespace,                  (1)
                             IteratorType first, IteratorType last,
@@ -40,9 +40,14 @@ Interface
                     const Kokkos::View<DataType, Properties...>& view,
                     typename decltype(begin(view))::difference_type n);
 
-   //
-   // overload set accepting a team handle
-   //
+
+Overload set accepting a team handle
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. versionadded:: 4.2
+
+.. code-block:: cpp
+
    template <class TeamHandleType, class IteratorType>
    KOKKOS_FUNCTION
    IteratorType shift_right(const TeamHandleType& teamHandle,                (5)
@@ -61,9 +66,7 @@ Parameters and Requirements
 .. |ShiftLeft| replace:: ``shift_left``
 .. _ShiftLeft: ./StdShiftLeft.html
 
-- ``exespace``, ``first``, ``last``, ``view``: same as in |ShiftLeft|_
-
-- ``teamHandle``: team handle instance given inside a parallel region when using a TeamPolicy
+- ``exespace`` ``teamHandle``, ``first``, ``last``, ``view``: same as in |ShiftLeft|_
 
 - ``label``: string forwarded to internal parallel kernels for debugging purposes
 

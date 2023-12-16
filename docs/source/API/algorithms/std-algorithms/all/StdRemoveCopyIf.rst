@@ -6,18 +6,19 @@ Header: ``Kokkos_StdAlgorithms.hpp``
 Description
 -----------
 
-Copies the elements from a range to a new range starting at ``first_to`` or from ``view_from`` to ``view_dest`` omitting those for which ``pred`` returns ``true``.
+Copies the elements from a range to a new range starting at ``first_to`` or from ``view_from``
+to ``view_dest`` omitting thos for which ``pred`` returns ``true``.
 
 Interface
 ---------
 
 .. warning:: This is currently inside the ``Kokkos::Experimental`` namespace.
 
+Overload set accepting execution space
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 .. code-block:: cpp
 
-   //
-   // overload set accepting execution space
-   //
    template <
      class ExecutionSpace,
      class InputIterator, class OutputIterator,
@@ -60,9 +61,13 @@ Interface
                        const Kokkos::View<DataType2, Properties2...>& view_dest,
                        const UnaryPredicate& pred);
 
-   //
-   // overload set accepting a team handle
-   //
+Overload set accepting a team handle
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. versionadded:: 4.2
+
+.. code-block:: cpp
+
    template <
      class TeamHandleType,
      class InputIterator, class OutputIterator,
@@ -91,7 +96,7 @@ Parameters and Requirements
 .. |RemoveCopy| replace:: ``remove_copy``
 .. _RemoveCopy: ./StdRemoveCopy.html
 
-- ``exespace``, ``first_from, last_from``, ``first_to``, ``view_from``, ``view_dest``: same as in |RemoveCopy|_
+- ``exespace``, ``teamHandle``, ``first_from, last_from``, ``first_to``, ``view_from``, ``view_dest``: same as in |RemoveCopy|_
 
 - ``label``: string forwarded to internal parallel kernels for debugging purposes
 

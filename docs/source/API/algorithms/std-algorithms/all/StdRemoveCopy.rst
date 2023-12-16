@@ -6,18 +6,19 @@ Header: ``Kokkos_StdAlgorithms.hpp``
 Description
 -----------
 
-Copies the elements from a range to a new range starting at ``first_to`` or from ``view_from`` to ``view_dest`` omitting those that are equal to ``value``.
+Copies the elements from a range to a new range starting at ``first_to`` or from ``view_from``
+to ``view_dest`` omitting those that are equal to ``value``.
 
 Interface
 ---------
 
 .. warning:: This is currently inside the ``Kokkos::Experimental`` namespace.
 
+Overload set accepting execution space
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 .. code-block:: cpp
 
-   //
-   // overload set accepting execution space
-   //
    template <
      class ExecutionSpace,
      class InputIterator, class OutputIterator,
@@ -60,9 +61,14 @@ Interface
                     const Kokkos::View<DataType2, Properties2...>& view_dest,
                     const ValueType& value);
 
-   //
-   // overload set accepting a team handle
-   //
+
+Overload set accepting a team handle
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. versionadded:: 4.2
+
+.. code-block:: cpp
+
    template <
      class TeamHandleType,
      class InputIterator, class OutputIterator,

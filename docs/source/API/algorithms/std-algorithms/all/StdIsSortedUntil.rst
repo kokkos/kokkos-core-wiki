@@ -13,11 +13,11 @@ Interface
 
 .. warning:: This is currently inside the ``Kokkos::Experimental`` namespace.
 
+Overload set accepting execution space
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 .. code-block:: cpp
 
-   //
-   // overload set accepting execution space
-   //
    template <class ExecutionSpace, class IteratorType>
    IteratorType is_sorted_until(const ExecutionSpace& exespace,                     (1)
                                 IteratorType first, IteratorType last);
@@ -38,9 +38,6 @@ Interface
                                 IteratorType first, IteratorType last,
                                 ComparatorType comp);
 
-   //
-   // overload set accepting views
-   //
    template <class ExecutionSpace, class DataType, class... Properties>
    auto is_sorted_until(const ExecutionSpace& exespace,                             (5)
                         const Kokkos::View<DataType, Properties...>& view);
@@ -64,9 +61,13 @@ Interface
                         const Kokkos::View<DataType, Properties...>& view,
                         ComparatorType comp);
 
-   //
-   // overload set accepting team handle
-   //
+Overload set accepting a team handle
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. versionadded:: 4.2
+
+.. code-block:: cpp
+
    template <class TeamHandleType, class IteratorType>
    KOKKOS_FUNCTION
    IteratorType is_sorted_until(const TeamHandleType& teamHandle,                   (9)
@@ -97,9 +98,7 @@ Parameters and Requirements
 .. |IsSorted| replace:: ``is_sorted``
 .. _IsSorted: ./StdIsSorted.html
 
-- ``exespace``, ``first``, ``last``, ``view``, ``comp``: same as in |IsSorted|_
-
-- ``teamHandle``: team handle instance given inside a parallel region when using a TeamPolicy
+- ``exespace``, ``teamHandle``, ``first``, ``last``, ``view``, ``comp``: same as in |IsSorted|_
 
 - ``label``: string forwarded to internal parallel kernels for debugging purposes
 
