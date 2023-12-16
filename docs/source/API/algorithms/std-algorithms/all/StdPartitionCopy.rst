@@ -13,11 +13,11 @@ Interface
 
 .. warning:: This is currently inside the ``Kokkos::Experimental`` namespace.
 
+Overload set accepting execution space
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 .. code-block:: cpp
 
-   //
-   // overload set accepting execution space
-   //
    template <class ExecutionSpace,
              class InputIteratorType,
              class OutputIteratorTrueType,
@@ -68,9 +68,13 @@ Interface
                        const ::Kokkos::View<DataType3, Properties3...>& view_dest_false,
                        PredicateType pred);
 
-   //
-   // overload set accepting a team handle
-   //
+Overload set accepting a team handle
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. versionadded:: 4.2
+
+.. code-block:: cpp
+
    template <class TeamHandleType, class InputIteratorType,
              class OutputIteratorTrueType, class OutputIteratorFalseType,
              class PredicateType>

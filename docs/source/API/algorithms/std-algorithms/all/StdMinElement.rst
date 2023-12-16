@@ -1,7 +1,7 @@
 ``min_element``
 ===============
 
-Header: ``Kokkos_StdAlgorithms.hpp``
+Header: ``<Kokkos_StdAlgorithms.hpp>``
 
 Description
 -----------
@@ -13,11 +13,11 @@ Interface
 
 .. warning:: This is currently inside the ``Kokkos::Experimental`` namespace.
 
+Overload set accepting execution space
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 .. code-block:: cpp
 
-   //
-   // overload set accepting an execution space
-   //
    template <class ExecutionSpace, class IteratorType>
    auto min_element(const ExecutionSpace& exespace,                        (1)
                     IteratorType first, IteratorType last);
@@ -58,9 +58,13 @@ Interface
                     const ::Kokkos::View<DataType, Properties...>& view,
                     ComparatorType comp);
 
-   //
-   // overload set accepting a team handle
-   //
+Overload set accepting a team handle
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. versionadded:: 4.2
+
+.. code-block:: cpp
+
    template <class TeamHandleType, class IteratorType>
    KOKKOS_FUNCTION
    auto min_element(const TeamHandleType& teamHandle,                      (9)

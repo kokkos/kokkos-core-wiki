@@ -1,12 +1,13 @@
 ``is_partitioned``
 ==================
 
-Header: ``Kokkos_StdAlgorithms.hpp``
+Header: ``<Kokkos_StdAlgorithms.hpp>``
 
 Description
 -----------
 
-Returns ``true`` if all elements in a range or in a rank-1 ``View`` satisfying the predicate ``pred`` appear *before* all elements that don't.
+Returns ``true`` if all elements in a range or in a rank-1 ``View`` satisfying
+the predicate ``pred`` appear *before* all elements that don't.
 If the range or the ``view`` is empty, returns ``true``.
 
 Interface
@@ -14,11 +15,11 @@ Interface
 
 .. warning:: This is currently inside the ``Kokkos::Experimental`` namespace.
 
+Overload set accepting execution space
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 .. code-block:: cpp
 
-   //
-   // overload set accepting execution space
-   //
    template <class ExecutionSpace, class InputIterator, class PredicateType>
    bool is_partitioned(const ExecutionSpace& exespace,                              (1)
                        InputIterator first, InputIterator last,
@@ -39,9 +40,14 @@ Interface
                        const ::Kokkos::View<DataType, Properties...>& view,         (4)
                        PredicateType pred);
 
-   //
-   // overload set accepting a team handle
-   //
+
+Overload set accepting a team handle
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. versionadded:: 4.2
+
+.. code-block:: cpp
+
    template <class TeamHandleType, class IteratorType, class PredicateType>
    KOKKOS_FUNCTION
    bool is_partitioned(const TeamHandleType& teamHandle, IteratorType first,        (5)
