@@ -9,6 +9,7 @@ Utilities
    ./utilities/assert
    ./utilities/complex
    ./utilities/printf
+   ./utilities/swap
    ./utilities/timer
    ./utilities/device_id
    ./utilities/num_threads
