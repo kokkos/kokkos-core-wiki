@@ -38,7 +38,7 @@ Parameters:
 
   - ``IntegerType``: defines a 1D iteration range, starting from 0 and going to a count.
   - `RangePolicy <../policies/RangePolicy.html>`_: defines a 1D iteration range.
-  - `TeamThreadRange <../policies/TeamThreadRange.html>`_: defined a 1D iteration range to be executed through thread parallelization dividing the range over the threads of the team.
+  - `TeamThreadRange <../policies/TeamThreadRange.html>`_: defined a 1D iteration range to be executed through thread parallelization dividing the range over the threads of the team. Only valid inside a parallel region executed through a ``TeamPolicy`` or a ``TaskTeam``.
   - `ThreadVectorRange <../policies/ThreadVectorRange.html>`_: defines a 1D iteration range to be executed through vector parallelization dividing the threads within a team.  Only valid inside a parallel region executed through a ``TeamPolicy`` or a ``TaskTeam``.
 * FunctorType: A valid functor with (at minimum) an ``operator()`` with a matching signature for the ``ExecPolicy`` combined with the reduced type.
 * ReturnType: a POD type with ``operator +=`` and ``operator =``, or a ``Kokkos::View``.
