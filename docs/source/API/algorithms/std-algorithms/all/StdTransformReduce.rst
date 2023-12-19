@@ -248,11 +248,11 @@ Parameters and Requirements
 
 - ``label``: string forwarded to internal parallel kernels for debugging purposes
 
-  - 1 & 3: The default string is "Kokkos::transform_reduce_default_functors_iterator_api"
+  - 1, 3: The default string is "Kokkos::transform_reduce_default_functors_iterator_api"
 
-  - 7 & 13: The default string is "Kokkos::transform_reduce_custom_functors_iterator_api"
+  - 7, 13: The default string is "Kokkos::transform_reduce_custom_functors_iterator_api"
 
-  - 9 & 15: The default string is "Kokkos::transform_reduce_custom_functors_view_api"
+  - 9, 15: The default string is "Kokkos::transform_reduce_custom_functors_view_api"
 
   - NOTE: overloads accepting a team handle do not use a label internally
 

@@ -33,105 +33,112 @@ Overload set accepting execution space
                                             IteratorType first,
                                             IteratorType last);
 
+   template <class ExecutionSpace, class DataType, class... Properties>
+   auto reduce(const ExecutionSpace& exespace,                                   (3)
+               const Kokkos::View<DataType, Properties...>& view)
+
+   template <class ExecutionSpace, class DataType, class... Properties>
+   auto reduce(const std::string& label, const ExecutionSpace& exespace,         (4)
+               const Kokkos::View<DataType, Properties...>& view);
+
+   template <class ExecutionSpace, class IteratorType, class ValueType>
+   ValueType reduce(const ExecutionSpace& exespace,                              (5)
+                    IteratorType first, IteratorType last,
+                    ValueType init_reduction_value);
+
+   template <class ExecutionSpace, class IteratorType, class ValueType>
+   ValueType reduce(const std::string& label,                                    (6)
+                    const ExecutionSpace& exespace,
+                    IteratorType first, IteratorType last,
+                    ValueType init_reduction_value);
+
+   template <
+      class ExecutionSpace, class DataType,
+      class... Properties, class ValueType>
+   ValueType reduce(const ExecutionSpace& exespace,                              (7)
+                    const Kokkos::View<DataType, Properties...>& view,
+                    ValueType init_reduction_value);
+
+   template <
+      class ExecutionSpace, class DataType,
+      class... Properties, class ValueType>
+   ValueType reduce(const std::string& label,                                    (8)
+                    const ExecutionSpace& exespace,
+                    const Kokkos::View<DataType, Properties...>& view,
+                    ValueType init_reduction_value);
+
+   template <
+      class ExecutionSpace, class IteratorType,
+      class ValueType, class BinaryOp>
+   ValueType reduce(const ExecutionSpace& exespace,                              (9)
+                    IteratorType first, IteratorType last,
+                    ValueType init_reduction_value,
+                    BinaryOp joiner);
+
+   template <
+      class ExecutionSpace, class IteratorType,
+      class ValueType, class BinaryOp>
+   ValueType reduce(const std::string& label,                                    (10)
+                    const ExecutionSpace& exespace,
+                    IteratorType first, IteratorType last,
+                    ValueType init_reduction_value,
+                    BinaryOp joiner);
+
+   template <
+      class ExecutionSpace, class DataType,
+      class... Properties, class ValueType, class BinaryOp>
+   ValueType reduce(const ExecutionSpace& exespace,                              (11)
+                    const Kokkos::View<DataType, Properties...>& view,
+                    ValueType init_reduction_value,
+                    BinaryOp joiner);
+
+   template <
+      class ExecutionSpace, class DataType,
+      class... Properties, class ValueType, class BinaryOp>
+   ValueType reduce(const std::string& label,                                    (12)
+                    const ExecutionSpace& exespace,
+                    const Kokkos::View<DataType, Properties...>& view,
+                    ValueType init_reduction_value,
+                    BinaryOp joiner);
+
+Overload set accepting a team handle
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. versionadded:: 4.2
+
+.. code-block:: cpp
+
    template <class TeamHandleType, class IteratorType>
    KOKKOS_FUNCTION
-   typename IteratorType::value_type reduce(const TeamHandleType& teamHandle,    (3)
+   typename IteratorType::value_type reduce(const TeamHandleType& teamHandle,    (13)
                                             IteratorType first,
                                             IteratorType last);
 
-   template <class ExecutionSpace, class DataType, class... Properties>
-   auto reduce(const ExecutionSpace& exespace,                                   (4)
-               const Kokkos::View<DataType, Properties...>& view)
-
-   template <class ExecutionSpace, class DataType, class... Properties>
-   auto reduce(const std::string& label, const ExecutionSpace& exespace,         (5)
-               const Kokkos::View<DataType, Properties...>& view);
-
    template <class TeamHandleType, class DataType, class... Properties>
    KOKKOS_FUNCTION
-   auto reduce(const TeamHandleType& teamHandle,                                 (6)
+   auto reduce(const TeamHandleType& teamHandle,                                 (14)
                const Kokkos::View<DataType, Properties...>& view)
-
-   template <class ExecutionSpace, class IteratorType, class ValueType>
-   ValueType reduce(const ExecutionSpace& exespace,                              (7)
-                    IteratorType first, IteratorType last,
-                    ValueType init_reduction_value);
-
-   template <class ExecutionSpace, class IteratorType, class ValueType>
-   ValueType reduce(const std::string& label,                                    (8)
-                    const ExecutionSpace& exespace,
-                    IteratorType first, IteratorType last,
-                    ValueType init_reduction_value);
 
    template <class TeamHandleType, class IteratorType, class ValueType>
    KOKKOS_FUNCTION
-   ValueType reduce(const TeamHandleType& teamHandle,                            (9)
+   ValueType reduce(const TeamHandleType& teamHandle,                            (15)
                     IteratorType first, IteratorType last,
-                    ValueType init_reduction_value);
-
-   template <
-      class ExecutionSpace, class DataType,
-      class... Properties, class ValueType>
-   ValueType reduce(const ExecutionSpace& exespace,                              (10)
-                    const Kokkos::View<DataType, Properties...>& view,
-                    ValueType init_reduction_value);
-
-   template <
-      class ExecutionSpace, class DataType,
-      class... Properties, class ValueType>
-   ValueType reduce(const std::string& label,                                    (11)
-                    const ExecutionSpace& exespace,
-                    const Kokkos::View<DataType, Properties...>& view,
                     ValueType init_reduction_value);
 
    template <
       class TeamHandleType, class DataType,
       class... Properties, class ValueType>
    KOKKOS_FUNCTION
-   ValueType reduce(const TeamHandleType& teamHandle,                            (12)
+   ValueType reduce(const TeamHandleType& teamHandle,                            (16)
                     const Kokkos::View<DataType, Properties...>& view,
                     ValueType init_reduction_value);
-
-   template <
-      class ExecutionSpace, class IteratorType,
-      class ValueType, class BinaryOp>
-   ValueType reduce(const ExecutionSpace& exespace,                              (13)
-                    IteratorType first, IteratorType last,
-                    ValueType init_reduction_value,
-                    BinaryOp joiner);
-
-   template <
-      class ExecutionSpace, class IteratorType,
-      class ValueType, class BinaryOp>
-   ValueType reduce(const std::string& label,                                    (14)
-                    const ExecutionSpace& exespace,
-                    IteratorType first, IteratorType last,
-                    ValueType init_reduction_value,
-                    BinaryOp joiner);
 
    template <
       class TeamHandleType, class IteratorType,
       class ValueType, class BinaryOp>
    KOKKOS_FUNCTION
-   ValueType reduce(const TeamHandleType& teamHandle,                            (15)
+   ValueType reduce(const TeamHandleType& teamHandle,                            (17)
                     IteratorType first, IteratorType last,
-                    ValueType init_reduction_value,
-                    BinaryOp joiner);
-
-   template <
-      class ExecutionSpace, class DataType,
-      class... Properties, class ValueType, class BinaryOp>
-   ValueType reduce(const ExecutionSpace& exespace,                              (16)
-                    const Kokkos::View<DataType, Properties...>& view,
-                    ValueType init_reduction_value,
-                    BinaryOp joiner);
-
-   template <
-      class ExecutionSpace, class DataType,
-      class... Properties, class ValueType, class BinaryOp>
-   ValueType reduce(const std::string& label,                                    (17)
-                    const ExecutionSpace& exespace,
-                    const Kokkos::View<DataType, Properties...>& view,
                     ValueType init_reduction_value,
                     BinaryOp joiner);
 

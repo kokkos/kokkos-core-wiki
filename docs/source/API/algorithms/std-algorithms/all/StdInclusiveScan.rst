@@ -6,7 +6,8 @@ Header: ``Kokkos_StdAlgorithms.hpp``
 Description
 -----------
 
-Computes an inclusive prefix scan over a range or a ``view_from`` using the binary op ``bin_op`` to combine two elements, and ``init`` as the initial value, and writes the results to the range beginning at ``first_dest`` or to ``view_dest``.
+Computes an inclusive prefix scan over a range or a ``view_from`` using the binary op ``bin_op`` to combine two elements,
+and ``init`` as the initial value, and writes the results to the range beginning at ``first_dest`` or to ``view_dest``.
 Inclusive means that the i-th input element is included in the i-th sum.
 
 Interface

@@ -6,7 +6,9 @@ Header: ``Kokkos_StdAlgorithms.hpp``
 Description
 -----------
 
-Transforms each element in a range or a ``view`` with ``unary_op`` then computes an exclusive prefix scan operation using ``binary_op`` over the resulting range, with ``init`` as the initial value, and writes the results to the range beginning at ``first_dest`` or to ``view_dest``.
+Transforms each element in a range or a ``view`` with ``unary_op`` then computes an exclusive
+prefix scan operation using ``binary_op`` over the resulting range, with ``init`` as the initial value,
+and writes the results to the range beginning at ``first_dest`` or to ``view_dest``.
 "exclusive" means that the i-th input element is not included in the i-th sum.
 
 Interface
@@ -122,7 +124,10 @@ Parameters and Requirements
 
 - ``unary_op``:
 
-  - *unary* functor performing the desired transformation operation to an element. Must be valid to be called from the execution space passed, and callable with an arguments ``v`` of type (possible const) ``value_type``, where ``value_type`` is the value type of ``first_from`` or value type of ``view_from``, and must not modify ``v``.
+  - *unary* functor performing the desired transformation operation to an element.
+    Must be valid to be called from the execution space passed, and callable with ``v`` of type
+    (possible const) ``value_type``, where ``value_type`` is the value type of ``first_from``
+    or value type of ``view_from``, and must not modify ``v``.
 
   - Must conform to:
 
