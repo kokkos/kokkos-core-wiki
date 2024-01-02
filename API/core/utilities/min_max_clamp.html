@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" /><link rel="next" title="atomic_fetch_[op]" href="atomic_fetch_op.html" /><link rel="prev" title="atomic_compare_exchange_strong" href="atomic_compare_exchange_strong.html" />
+<link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" /><link rel="next" title="Kokkos::printf" href="printf.html" /><link rel="prev" title="Kokkos::complex" href="complex.html" />
 
     <meta name="generator" content="sphinx-5.0.1, furo 2022.06.04.1"/>
-        <title>atomic_exchange - Kokkos documentation</title>
+        <title>Minimum/maximum operations - Kokkos documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?digest=40978830699223671f4072448e654b5958f38b89" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
@@ -262,15 +262,15 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../Task-Parallelism.html">Task-Parallelism</a></li>
-<li class="toctree-l2 current has-children"><a class="reference internal" href="../atomics.html">Atomics</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="atomic_compare_exchange.html"><code class="docutils literal notranslate"><span class="pre">atomic_compare_exchange</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="atomic_compare_exchange_strong.html"><code class="docutils literal notranslate"><span class="pre">atomic_compare_exchange_strong</span></code></a></li>
-<li class="toctree-l3 current current-page"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">atomic_exchange</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="atomic_fetch_op.html"><code class="docutils literal notranslate"><span class="pre">atomic_fetch_[op]</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="atomic_load.html"><code class="docutils literal notranslate"><span class="pre">atomic_load</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="atomic_op.html"><code class="docutils literal notranslate"><span class="pre">atomic_[op]</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="atomic_op_fetch.html"><code class="docutils literal notranslate"><span class="pre">atomic_[op]_fetch</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="atomic_store.html"><code class="docutils literal notranslate"><span class="pre">atomic_store</span></code></a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../atomics.html">Atomics</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../atomics/atomic_compare_exchange.html"><code class="docutils literal notranslate"><span class="pre">atomic_compare_exchange</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../atomics/atomic_compare_exchange_strong.html"><code class="docutils literal notranslate"><span class="pre">atomic_compare_exchange_strong</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../atomics/atomic_exchange.html"><code class="docutils literal notranslate"><span class="pre">atomic_exchange</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../atomics/atomic_fetch_op.html"><code class="docutils literal notranslate"><span class="pre">atomic_fetch_[op]</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../atomics/atomic_load.html"><code class="docutils literal notranslate"><span class="pre">atomic_load</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../atomics/atomic_op.html"><code class="docutils literal notranslate"><span class="pre">atomic_[op]</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../atomics/atomic_op_fetch.html"><code class="docutils literal notranslate"><span class="pre">atomic_[op]_fetch</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../atomics/atomic_store.html"><code class="docutils literal notranslate"><span class="pre">atomic_store</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../Numerics.html">Numerics</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -292,17 +292,17 @@
 <li class="toctree-l3"><a class="reference internal" href="../stl-compat/pair.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::pair</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../Utilities.html">Utilities</a><input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" role="switch" type="checkbox"/><label for="toctree-checkbox-15"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../utilities/abort.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::abort</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../utilities/all.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::ALL</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../utilities/assert.html"><code class="docutils literal notranslate"><span class="pre">KOKKOS_ASSERT</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../utilities/complex.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::complex</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../utilities/min_max_clamp.html">Minimum/maximum operations</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../utilities/printf.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::printf</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../utilities/timer.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::Timer</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../utilities/device_id.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::device_id</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../utilities/num_threads.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::num_threads</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../utilities/experimental.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::Experimental</span></code></a></li>
+<li class="toctree-l2 current has-children"><a class="reference internal" href="../Utilities.html">Utilities</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" role="switch" type="checkbox"/><label for="toctree-checkbox-15"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="abort.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::abort</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="all.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::ALL</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="assert.html"><code class="docutils literal notranslate"><span class="pre">KOKKOS_ASSERT</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="complex.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::complex</span></code></a></li>
+<li class="toctree-l3 current current-page"><a class="current reference internal" href="#">Minimum/maximum operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="printf.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::printf</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="timer.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::Timer</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="device_id.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::device_id</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="num_threads.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::num_threads</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="experimental.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::Experimental</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../Detection-Idiom.html">Detection Idiom</a></li>
@@ -486,7 +486,7 @@
         </a>
         <div class="content-icon-container">
 <div class="edit-this-page">
-  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/API/core/atomics/atomic_exchange.rst" title="Edit this page">
+  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/API/core/utilities/min_max_clamp.rst" title="Edit this page">
     <svg aria-hidden="true" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
       <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4"></path>
@@ -510,33 +510,35 @@
           </label>
         </div>
         <article role="main">
-          <section id="atomic-exchange">
-<h1><code class="docutils literal notranslate"><span class="pre">atomic_exchange</span></code><a class="headerlink" href="#atomic-exchange" title="Permalink to this heading">#</a></h1>
-<p>Header File: &lt;Kokkos_Core.hpp&gt;</p>
-<section id="usage">
-<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this heading">#</a></h2>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">old_val</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">atomic_exchange</span><span class="p">(</span><span class="n">ptr_to_value</span><span class="p">,</span><span class="w"> </span><span class="n">new_value</span><span class="p">);</span>
-</pre></div>
+          <section id="minimum-maximum-operations">
+<h1>Minimum/maximum operations<a class="headerlink" href="#minimum-maximum-operations" title="Permalink to this heading">#</a></h1>
+<p>Defined in header <code class="docutils literal notranslate"><span class="pre">&lt;Kokkos_Core.hpp&gt;</span></code></p>
+<p>Provides minimum/maximum and related operations from the standard library header <a class="reference external" href="https://en.cppreference.com/w/cpp/header/algorithm"><code class="docutils literal notranslate"><span class="pre">&lt;algorithm&gt;</span></code></a>.</p>
+<p>The min/max and clamp function templates are defined in the <code class="docutils literal notranslate"><span class="pre">Kokkos::</span></code> namespace since Kokkos 3.7</p>
+<div class="table-wrapper docutils container">
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference external" href="https://en.cppreference.com/w/cpp/algorithm/min"><code class="docutils literal notranslate"><span class="pre">min</span></code></a></p></td>
+<td><p>returns the smaller of the given values</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://en.cppreference.com/w/cpp/algorithm/max"><code class="docutils literal notranslate"><span class="pre">max</span></code></a></p></td>
+<td><p>returns the greater of the given values</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://en.cppreference.com/w/cpp/algorithm/minmax"><code class="docutils literal notranslate"><span class="pre">minmax</span></code></a></p></td>
+<td><p>returns the smaller and larger of the given values</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://en.cppreference.com/w/cpp/algorithm/clamp"><code class="docutils literal notranslate"><span class="pre">clamp</span></code></a></p></td>
+<td><p>clamps a value between a pair of boundary values</p></td>
+</tr>
+</tbody>
+</table>
 </div>
-<p>Atomically sets the value at the address given by <code class="docutils literal notranslate"><span class="pre">ptr_to_value</span></code> to <code class="docutils literal notranslate"><span class="pre">new_value</span></code> and returns the previously stored value at the address.</p>
-</section>
-<section id="description">
-<h2>Description<a class="headerlink" href="#description" title="Permalink to this heading">#</a></h2>
-<dl class="cppkokkos function">
-<dt class="sig sig-object cppkokkos" id="_CPPv4I0E15atomic_exchange1TPC1TK1T">
-<span id="_CPPv3I0E15atomic_exchangePC1TK1T"></span><span id="_CPPv2I0E15atomic_exchangePC1TK1T"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><a class="reference internal" href="#_CPPv4I0E15atomic_exchange1TPC1TK1T" title="atomic_exchange::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">atomic_exchange</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0E15atomic_exchange1TPC1TK1T" title="atomic_exchange::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">ptr_to_value</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E15atomic_exchange1TPC1TK1T" title="atomic_exchange::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">new_value</span></span><span class="sig-paren">)</span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4I0E15atomic_exchange1TPC1TK1T" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>Atomically executes <code class="docutils literal notranslate"><span class="pre">old_value</span> <span class="pre">=</span> <span class="pre">*ptr_to_value;</span> <span class="pre">*ptr_to_value</span> <span class="pre">=</span> <span class="pre">new_value;</span> <span class="pre">return</span> <span class="pre">old_value;</span></code>,
-where <code class="docutils literal notranslate"><span class="pre">old_value</span></code> is the value at address <code class="docutils literal notranslate"><span class="pre">ptr_to_value</span></code> before doing the exchange.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>ptr_to_value</strong> – address of the value to be updated</p></li>
-<li><p><strong>new_value</strong> – new value</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
+<hr class="docutils" />
+<section id="see-also">
+<h2>See also<a class="headerlink" href="#see-also" title="Permalink to this heading">#</a></h2>
+<p><a class="reference external" href="../../algorithms/std-algorithms/all/StdMinElement.html"><code class="docutils literal notranslate"><span class="pre">min_element</span></code></a>: returns the smallest element in a range</p>
+<p><a class="reference external" href="../../algorithms/std-algorithms/all/StdMaxElement.html"><code class="docutils literal notranslate"><span class="pre">max_element</span></code></a>: returns the largest element in a range</p>
+<p><a class="reference external" href="../../algorithms/std-algorithms/all/StdMinMaxElement.html"><code class="docutils literal notranslate"><span class="pre">minmax_element</span></code></a>: returns the smallest and the largest elements in a range</p>
 </section>
 </section>
 
@@ -545,23 +547,23 @@ where <code class="docutils literal notranslate"><span class="pre">old_value</sp
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="atomic_fetch_op.html">
+          <a class="next-page" href="printf.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title"><code class="docutils literal notranslate"><span class="pre">atomic_fetch_[op]</span></code></div>
+                <div class="title"><code class="docutils literal notranslate"><span class="pre">Kokkos::printf</span></code></div>
               </div>
               <svg><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="atomic_compare_exchange_strong.html">
+          <a class="prev-page" href="complex.html">
               <svg><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title"><code class="docutils literal notranslate"><span class="pre">atomic_compare_exchange_strong</span></code></div>
+                <div class="title"><code class="docutils literal notranslate"><span class="pre">Kokkos::complex</span></code></div>
                 
               </div>
             </a>
@@ -597,9 +599,8 @@ where <code class="docutils literal notranslate"><span class="pre">old_value</sp
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">atomic_exchange</span></code></a><ul>
-<li><a class="reference internal" href="#usage">Usage</a></li>
-<li><a class="reference internal" href="#description">Description</a></li>
+<li><a class="reference internal" href="#">Minimum/maximum operations</a><ul>
+<li><a class="reference internal" href="#see-also">See also</a></li>
 </ul>
 </li>
 </ul>
