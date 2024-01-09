@@ -62,37 +62,20 @@ You can alternatively set the corresponding environment variable of a flag (all 
 ***
 <sup>1</sup> This is the preferred set of defaults when CUDA and OpenMP are enabled. If you use a thread-parallel host execution space, we prefer Kokkos' OpenMP back-end, as this ensures compatibility of Kokkos' threads with the application's direct use of OpenMP threads. Kokkos cannot promise that its Threads back-end will not conflict with the application's direct use of operating system threads.
 
-## 5.2 Initialization by struct
+## 5.2 Programmatic Initialization
 
-Instead of giving [`Kokkos::initialize()`](../API/core/initialize_finalize/initialize) command-line arguments, one may directly pass in initialization parameters using the following struct:
-
-```c++
-struct Kokkos::InitArguments {
-  int num_threads;
-  int num_numa;
-  int device_id;
-  int ndevices;
-  int skip_device;
-  bool disable_warnings;
-};
-```
-The `num_threads` field corresponds to the `--kokkos-threads` command-line argument, `num_numa` to `--kokkos-numa`, `device_id` to `--device-id`, `ndevices` to the first value in `--num-devices` and `skip_devices` to the second value in `--num-devices`. (See Table 5.1 for details.) Not all parameters are observed by all execution spaces, and the struct might expand in the future if needed.
-
-If you set `num_threads` or `num_numa` to zero or less, Kokkos will try to determine default values if possible or otherwise set them to 1. In particular, Kokkos can use the `hwloc` library to determine default settings using the assumption that the process binding mask is unique, i.e., that this process does not share any cores with another process. Note that the default value of each parameter is -1.
-
-Here is an example of how to use the struct.
+Instead of giving [`Kokkos::initialize()`](../API/core/initialize_finalize/initialize) command-line arguments, one may directly pass in initialization parameters using the [`Kokkos::InitializationSettings`](../API/core/initialize_finalize/InitializationSettings) class.
 
 ```c++
-Kokkos::InitArguments args;
-// 8 (CPU) threads per NUMA region
-args.num_threads = 8;
-// 2 (CPU) NUMA regions per process
-args.num_numa = 2;
-// If Kokkos was built with CUDA enabled, use the GPU with device ID 1.
-args.device_id = 1;
+    auto settings = Kokkos::InitializationSettings()
+                    .set_num_threads(8)
+                    .set_device_id(0)
+                    .set_disable_warnings(false);
 
-Kokkos::initialize(args);
+	Kokkos::initialize(settings);
 ```
+
+The `set_num_threads` method corresponds to the `--kokkos-num-threads` command-line argument, etc. To use the default parameter value, simply do not call the `set_<parameter>` method.
 
 ## 5.3 Finalization
 
