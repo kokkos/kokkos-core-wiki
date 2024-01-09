@@ -53,15 +53,19 @@ set the number of threads to 4, while
 
 set the number of threads to 3. Table 5.1 gives a full list of command-line options.
 
-<h4>Table 5.1: Command-line options for Kokkos::initialize</h4>
+<h4>Table 5.1: Command-line Core options for Kokkos::initialize</h4>
 
 Argument | Description
 :---      | :---
---kokkos-help  <br/> --help   | print this message
---kokkos-threads=INT <br/> --threads=INT  | specify total number of threads or number of threads per NUMA region if used in conjunction with `--numa` option.
---kokkos-numa=INT <br/> --numa=INT | specify number of NUMA regions used by process.
---device-id=INT | specify device id to be used by Kokkos.
---num-devices=INT[,INT] | used when running MPI jobs. Specify the number of devices per node to be used. Process to device mapping happens by obtaining the local MPI rank and assigning devices round-robin. The optional second argument allows for an existing device to be ignored. This is most useful on workstations with multiple GPUs, one of which is used to drive screen output.
+  --kokkos-help                  | print this message
+  --kokkos-disable-warnings      | disable kokkos warning messages
+  --kokkos-print-configuration   | print configuration
+  --kokkos-tune-internals        | allow Kokkos to autotune policies and declare tuning features through the tuning system. If left off, Kokkos uses heuristics
+  --kokkos-num-threads=INT       | specify total number of threads to use for parallel regions on the host.
+  --kokkos-device-id=INT         | specify device id to be used by Kokkos.
+  --kokkos-map-device-id-by=(random\|mpi\_rank)| strategy to select device-id automatically from available devices. </br> - random:   choose a random device from available. </br> - mpi_rank: choose device-id based on a round robin assignment of local MPI ranks. Works with OpenMPI, MVAPICH, SLURM, and derived implementations.
+
+You can alternatively set the corresponding environment variable of a flag (all letters in upper-case and underscores instead of hyphens). For example, to disable warning messages, you can either specify `--kokkos-disable-warnings` or set the `KOKKOS_DISABLE_WARNINGS` environment variable to `yes`.
 
 ***
 <sup>1</sup> This is the preferred set of defaults when CUDA and OpenMP are enabled. If you use a thread-parallel host execution space, we prefer Kokkos' OpenMP back-end, as this ensures compatibility of Kokkos' threads with the application's direct use of OpenMP threads. Kokkos cannot promise that its Threads back-end will not conflict with the application's direct use of operating system threads.
