@@ -14,7 +14,7 @@ For specific capabilities check their API reference:
 
 ## 5.1 Initialization by command-line arguments
 
-The simplest way to initialize Kokkos is by calling the following function:
+The simplest way to initialize Kokkos is by calling the [`Kokkos::initialize()`](../API/core/initialize_finalize/initialize) function:
 ```c++
 Kokkos::initialize(int& argc, char* argv[]);
 ```
@@ -77,11 +77,15 @@ Instead of giving [`Kokkos::initialize()`](../API/core/initialize_finalize/initi
 
 The `set_num_threads` method corresponds to the `--kokkos-num-threads` command-line argument, etc. To use the default parameter value, simply do not call the `set_<parameter>` method.
 
-## 5.3 Finalization
+## 5.4 Interaction with MPI
+
+[`Kokkos::initialize()`](../API/core/initialize_finalize/initialize) generally should be called after `MPI_Init` when Kokkos is initialized within an MPI context. This allows proper device mapping.
+
+## 5.4 Finalization
 
 At the end of each program, Kokkos needs to be shut down in order to free resources; do this by calling [`Kokkos::finalize()`](../API/core/initialize_finalize/finalize). You may wish to set this to be called automatically at program exit, either by setting an `atexit` hook or by attaching the function to `MPI_COMM_SELF` so that it is called automatically at `MPI_Finalize`.
 
-## 5.4 Example Code
+## 5.5 Example Code
 
 A minimal Kokkos code thus would look like this:
 
