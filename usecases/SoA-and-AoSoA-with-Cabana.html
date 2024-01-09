@@ -550,9 +550,8 @@ It is required to be a specialization of <code class="docutils literal notransla
 <section id="cabana-aosoa">
 <h3>Cabana::AoSoA<a class="headerlink" href="#cabana-aosoa" title="Permalink to this heading">#</a></h3>
 <p>Defined in header <a class="reference external" href="https://github.com/ECP-copa/Cabana/blob/master/core/src/Cabana_AoSoA.hpp"><code class="docutils literal notranslate"><span class="pre">&lt;Cabana_AoSoA.hpp&gt;</span></code></a></p>
-<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">DataTypes</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">DeviceType</span><span class="p">,</span>
-<span class="w">          </span><span class="kt">int</span><span class="w"> </span><span class="n">VectorLength</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Impl</span><span class="o">::</span><span class="n">PerformanceTraits</span><span class="o">&lt;</span>
-<span class="w">              </span><span class="k">typename</span><span class="w"> </span><span class="nc">DeviceType</span><span class="o">::</span><span class="n">execution_space</span><span class="o">&gt;::</span><span class="n">vector_length</span><span class="p">,</span>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">DataTypes</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">MemorySpace</span><span class="p">,</span>
+<span class="w">          </span><span class="kt">int</span><span class="w"> </span><span class="n">VectorLength</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DEDUCED</span><span class="o">-</span><span class="n">FROM</span><span class="o">-</span><span class="n">MEMORY</span><span class="o">-</span><span class="n">SPACE</span><span class="p">,</span>
 <span class="w">          </span><span class="k">class</span><span class="w"> </span><span class="nc">MemoryTraits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">MemoryManaged</span><span class="o">&gt;</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">AoSoA</span><span class="p">;</span>
 </pre></div>
@@ -561,10 +560,10 @@ It is required to be a specialization of <code class="docutils literal notransla
 <h4>Template parameters<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h4>
 <p><code class="docutils literal notranslate"><span class="pre">DataTypes</span></code>
 : The types of the elements stored in the underlying <code class="docutils literal notranslate"><span class="pre">Cabana::SoA</span></code>s.</p>
-<p><code class="docutils literal notranslate"><span class="pre">DeviceType</span></code>
-: The Kokkos device type that carries the information about where to execute code and where to allocate storage.</p>
+<p><code class="docutils literal notranslate"><span class="pre">MemorySpace</span></code>
+: The Kokkos memory space that carries information about where to allocate storage.</p>
 <p><code class="docutils literal notranslate"><span class="pre">VectorLength</span></code>
-: The vector length for the structure of arrays (optional).</p>
+: The vector length for the structure of arrays (optional). If not specified, a default (defined per memory space) is used; this value may need to be modified for optimal performance.</p>
 <p><code class="docutils literal notranslate"><span class="pre">MemoryTraits</span></code>
 : The Kokkos memory traits that tells who controls memory allocation and deallocation (optional).</p>
 </section>

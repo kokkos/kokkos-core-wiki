@@ -41,9 +41,8 @@ MemberTypes<Types...>;
 Defined in header [`<Cabana_AoSoA.hpp>`](https://github.com/ECP-copa/Cabana/blob/master/core/src/Cabana_AoSoA.hpp)
 
 ```C++
-template <class DataTypes, class DeviceType,
-          int VectorLength = Impl::PerformanceTraits<
-              typename DeviceType::execution_space>::vector_length,
+template <class DataTypes, class MemorySpace,
+          int VectorLength = DEDUCED-FROM-MEMORY-SPACE,
           class MemoryTraits = Kokkos::MemoryManaged>
 class AoSoA;
 ```
@@ -52,11 +51,11 @@ class AoSoA;
 `DataTypes`
 : The types of the elements stored in the underlying `Cabana::SoA`s.
 
-`DeviceType`
-: The Kokkos device type that carries the information about where to execute code and where to allocate storage.
+`MemorySpace`
+: The Kokkos memory space that carries information about where to allocate storage.
 
 `VectorLength`
-: The vector length for the structure of arrays (optional).
+: The vector length for the structure of arrays (optional). If not specified, a default (defined per memory space) is used; this value may need to be modified for optimal performance.
 
 `MemoryTraits`
 : The Kokkos memory traits that tells who controls memory allocation and deallocation (optional).
