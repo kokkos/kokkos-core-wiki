@@ -81,11 +81,11 @@ The `set_num_threads` method corresponds to the `--kokkos-num-threads` command-l
 
 [`Kokkos::initialize()`](../API/core/initialize_finalize/initialize) generally should be called after `MPI_Init` when Kokkos is initialized within an MPI context. This allows proper device mapping.
 
-## 5.4 Finalization
+## 5.5 Finalization
 
 At the end of each program, Kokkos needs to be shut down in order to free resources; do this by calling [`Kokkos::finalize()`](../API/core/initialize_finalize/finalize). You may wish to set this to be called automatically at program exit, either by setting an `atexit` hook or by attaching the function to `MPI_COMM_SELF` so that it is called automatically at `MPI_Finalize`.
 
-## 5.5 Example Code
+## 5.6 Example Code
 
 A minimal Kokkos code thus would look like this:
 
