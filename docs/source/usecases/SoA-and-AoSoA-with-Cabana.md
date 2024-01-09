@@ -42,8 +42,7 @@ Defined in header [`<Cabana_AoSoA.hpp>`](https://github.com/ECP-copa/Cabana/blob
 
 ```C++
 template <class DataTypes, class MemorySpace,
-          int VectorLength = Impl::PerformanceTraits<
-              typename MemorySpace::execution_space>::vector_length,
+          int VectorLength = DEDUCED-FROM-MEMORY-SPACE,
           class MemoryTraits = Kokkos::MemoryManaged>
 class AoSoA;
 ```
