@@ -55,7 +55,7 @@ class AoSoA;
 : The Kokkos memory space that carries information about where to allocate storage.
 
 `VectorLength`
-: The vector length for the structure of arrays (optional). If not specified, a default defined for each each memory space is used; this value will likely need to be modified for optimal performance.
+: The vector length for the structure of arrays (optional). If not specified, a default (defined per memory space) is used; this value may need to be modified for optimal performance.
 
 `MemoryTraits`
 : The Kokkos memory traits that tells who controls memory allocation and deallocation (optional).
