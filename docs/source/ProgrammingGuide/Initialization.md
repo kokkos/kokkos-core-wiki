@@ -43,15 +43,7 @@ Kokkos chooses the two spaces using the following list:
 
 The highest execution space in the list which is enabled is Kokkos' default execution space, and the highest enabled host execution space is Kokkos' default host execution space. For example, if  `Kokkos::Cuda`, `Kokkos::OpenMP`, and `Kokkos::Serial` are enabled, then `Kokkos::Cuda` is the default execution space and `Kokkos::OpenMP` is the default host execution space.<sup>1</sup>  In cases where the highest enabled backend is a host parallel execution space the `DefaultExecutionSpace` and the `DefaultHostExecutionSpace` will be the same.
 
-Command-line arguments come in "prefixed" and "non-prefixed" versions. Prefixed versions start with the string `--kokkos-`. [`Kokkos::initialize`](../API/core/initialize_finalize/initialize) will remove prefixed options from the input list, but will preserve non-prefixed options. Argument options are given with an equals (`=`) sign. If the same argument occurs more than once, the last one is used. Furthermore, prefixed versions of the command line arguments take precedence over the non-prefixed ones. For example, the arguments
-
-    --kokkos-threads=4 --threads=2
-
-set the number of threads to 4, while
-
-    --kokkos-threads=4 --threads=2 --kokkos-threads=3
-
-set the number of threads to 3. Table 5.1 gives a full list of command-line options.
+Table 5.1 gives a full list of command-line options.
 
 <h4>Table 5.1: Command-line Core options for Kokkos::initialize</h4>
 
