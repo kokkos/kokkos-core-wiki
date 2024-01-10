@@ -24,3 +24,14 @@ Defined in header ``<Kokkos_Swap.hpp>``:sup:`(since 4.3)` which is included from
 
 2) Swaps the arrays ``a`` and ``b``. This overload does not participate in
    overload resolution unless ``T2`` is swappable.
+
+Notes
+-----
+.. _std_swap: https://en.cppreference.com/w/cpp/algorithm/swap
+
+.. |std_swap| replace:: ``std::swap``
+
+``kokkos_swap`` provides the same functionality as |std_swap|_.  It just
+cannot be called ``swap`` or it would yield some ambiguities in overload
+resolution in some situations because of `ADL
+<https://en.cppreference.com/w/cpp/language/adl>`_.
