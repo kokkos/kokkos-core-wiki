@@ -640,6 +640,10 @@
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">ChunkSize</span></code> : Provide a hint for optimal chunk-size to be used during scheduling. For the SYCL backend, the workgroup size used in a <code class="docutils literal notranslate"><span class="pre">parallel_for</span></code> kernel can be set via this variable.</p></li>
 </ul>
+<p>Preconditions:</p>
+<ul class="simple">
+<li><p>The start index must not be greater than the end index.</p></li>
+</ul>
 </section>
 </section>
 </section>
