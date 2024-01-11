@@ -88,7 +88,7 @@ Constructors
 
 Preconditions:
 
-* Provided start index must not be greater than the matching end index for all ranks. Otherwise, ``Kokkos::abort()`` is called.
+* The start index must not be greater than the matching end index for all ranks.
 
 Examples
 --------
