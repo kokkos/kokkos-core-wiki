@@ -86,8 +86,7 @@ Constructors
 
     * Provide a start and end index as well as the tiling dimensions. The length of the lists must match the rank of the policy.
 
-``Notes``:
-^^^^^^^^^^
+Preconditions:
 
 * Provided start index must not be greater than the matching end index for all ranks. Otherwise, ``Kokkos::abort()`` is called.
 
