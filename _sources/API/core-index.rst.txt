@@ -60,3 +60,4 @@ API: Core
    ./core/Utilities
    ./core/Detection-Idiom
    ./core/Macros
+   ./core/Profiling
