@@ -38,6 +38,19 @@ The min/max and clamp function templates are defined in the ``Kokkos::`` namespa
 |clamp|_   clamps a value between a pair of boundary values
 ========== ============================================================
 
+Notes
+-----
+
+.. _KokkosClamp: https://github.com/kokkos/kokkos/blob/4.3.00/core/src/Kokkos_Clamp.hpp
+
+.. |KokkosClamp| replace:: ``<Kokkos_Clamp.hpp>``
+
+.. _KokkosMinMax: https://github.com/kokkos/kokkos/blob/4.3.00/core/src/Kokkos_MinMax.hpp
+
+.. |KokkosMinMax| replace:: ``<Kokkos_MinMax.hpp>``
+
+* Since version 4.3, one may include |KokkosClamp|_ and |KokkosMinMax|_ respectively to make these functions available.
+
 ----
 
 See also
