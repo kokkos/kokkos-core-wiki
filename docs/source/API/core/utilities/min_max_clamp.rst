@@ -49,7 +49,7 @@ Notes
 
 .. |KokkosMinMax| replace:: ``<Kokkos_MinMax.hpp>``
 
-* Since version 4.3, one may include |KokkosClamp|_ and |KokkosMinMax|_ instead of ``<Kokkos_Core.hpp>``.
+* Since version 4.3, one may include |KokkosClamp|_ and |KokkosMinMax|_ respectively to make these functions available.
 
 ----
 
