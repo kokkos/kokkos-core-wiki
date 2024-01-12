@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" /><link rel="next" title="MinMaxScalar" href="MinMaxScalar.html" /><link rel="prev" title="Reduction Scalar Types" href="ReductionScalarTypes.html" />
+<link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" /><link rel="next" title="Kokkos::Timer" href="timer.html" /><link rel="prev" title="Kokkos::printf" href="printf.html" />
 
     <meta name="generator" content="sphinx-5.0.1, furo 2022.06.04.1"/>
-        <title>MinMaxLocScalar - Kokkos documentation</title>
+        <title>Kokkos::kokkos_swap - Kokkos documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?digest=40978830699223671f4072448e654b5958f38b89" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
@@ -217,24 +217,24 @@
 <li class="toctree-l3"><a class="reference internal" href="../parallel-dispatch/ParallelScanTag.html"><code class="docutils literal notranslate"><span class="pre">ParallelScanTag</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l2 current has-children"><a class="reference internal" href="../builtin_reducers.html">Built-in Reducers</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="ReducerConcept.html"><code class="docutils literal notranslate"><span class="pre">ReducerConcept</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="BAnd.html"><code class="docutils literal notranslate"><span class="pre">BAnd</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="BOr.html"><code class="docutils literal notranslate"><span class="pre">BOr</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="LAnd.html"><code class="docutils literal notranslate"><span class="pre">LAnd</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="LOr.html"><code class="docutils literal notranslate"><span class="pre">LOr</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="Max.html"><code class="docutils literal notranslate"><span class="pre">Max</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="MaxLoc.html"><code class="docutils literal notranslate"><span class="pre">MaxLoc</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="Min.html"><code class="docutils literal notranslate"><span class="pre">Min</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="MinLoc.html"><code class="docutils literal notranslate"><span class="pre">MinLoc</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="MinMax.html"><code class="docutils literal notranslate"><span class="pre">MinMax</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="MinMaxLoc.html"><code class="docutils literal notranslate"><span class="pre">MinMaxLoc</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="Prod.html"><code class="docutils literal notranslate"><span class="pre">Prod</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="Sum.html"><code class="docutils literal notranslate"><span class="pre">Sum</span></code></a></li>
-<li class="toctree-l3 current has-children"><a class="reference internal" href="ReductionScalarTypes.html">Reduction Scalar Types</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
-<li class="toctree-l4 current current-page"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">MinMaxLocScalar</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="MinMaxScalar.html"><code class="docutils literal notranslate"><span class="pre">MinMaxScalar</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="ValLocScalar.html"><code class="docutils literal notranslate"><span class="pre">ValLocScalar</span></code></a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../builtin_reducers.html">Built-in Reducers</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../builtinreducers/ReducerConcept.html"><code class="docutils literal notranslate"><span class="pre">ReducerConcept</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../builtinreducers/BAnd.html"><code class="docutils literal notranslate"><span class="pre">BAnd</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../builtinreducers/BOr.html"><code class="docutils literal notranslate"><span class="pre">BOr</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../builtinreducers/LAnd.html"><code class="docutils literal notranslate"><span class="pre">LAnd</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../builtinreducers/LOr.html"><code class="docutils literal notranslate"><span class="pre">LOr</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../builtinreducers/Max.html"><code class="docutils literal notranslate"><span class="pre">Max</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../builtinreducers/MaxLoc.html"><code class="docutils literal notranslate"><span class="pre">MaxLoc</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../builtinreducers/Min.html"><code class="docutils literal notranslate"><span class="pre">Min</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../builtinreducers/MinLoc.html"><code class="docutils literal notranslate"><span class="pre">MinLoc</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../builtinreducers/MinMax.html"><code class="docutils literal notranslate"><span class="pre">MinMax</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../builtinreducers/MinMaxLoc.html"><code class="docutils literal notranslate"><span class="pre">MinMaxLoc</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../builtinreducers/Prod.html"><code class="docutils literal notranslate"><span class="pre">Prod</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../builtinreducers/Sum.html"><code class="docutils literal notranslate"><span class="pre">Sum</span></code></a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../builtinreducers/ReductionScalarTypes.html">Reduction Scalar Types</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../builtinreducers/MinMaxLocScalar.html"><code class="docutils literal notranslate"><span class="pre">MinMaxLocScalar</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../builtinreducers/MinMaxScalar.html"><code class="docutils literal notranslate"><span class="pre">MinMaxScalar</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../builtinreducers/ValLocScalar.html"><code class="docutils literal notranslate"><span class="pre">ValLocScalar</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -292,18 +292,18 @@
 <li class="toctree-l3"><a class="reference internal" href="../stl-compat/pair.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::pair</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../Utilities.html">Utilities</a><input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" role="switch" type="checkbox"/><label for="toctree-checkbox-15"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../utilities/abort.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::abort</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../utilities/all.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::ALL</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../utilities/assert.html"><code class="docutils literal notranslate"><span class="pre">KOKKOS_ASSERT</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../utilities/complex.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::complex</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../utilities/min_max_clamp.html">Minimum/maximum operations</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../utilities/printf.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::printf</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../utilities/swap.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::kokkos_swap</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../utilities/timer.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::Timer</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../utilities/device_id.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::device_id</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../utilities/num_threads.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::num_threads</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../utilities/experimental.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::Experimental</span></code></a></li>
+<li class="toctree-l2 current has-children"><a class="reference internal" href="../Utilities.html">Utilities</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" role="switch" type="checkbox"/><label for="toctree-checkbox-15"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="abort.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::abort</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="all.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::ALL</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="assert.html"><code class="docutils literal notranslate"><span class="pre">KOKKOS_ASSERT</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="complex.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::complex</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="min_max_clamp.html">Minimum/maximum operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="printf.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::printf</span></code></a></li>
+<li class="toctree-l3 current current-page"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">Kokkos::kokkos_swap</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="timer.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::Timer</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="device_id.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::device_id</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="num_threads.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::num_threads</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="experimental.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::Experimental</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../Detection-Idiom.html">Detection Idiom</a></li>
@@ -492,7 +492,7 @@
         </a>
         <div class="content-icon-container">
 <div class="edit-this-page">
-  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/API/core/builtinreducers/MinMaxLocScalar.rst" title="Edit this page">
+  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/API/core/utilities/swap.rst" title="Edit this page">
     <svg aria-hidden="true" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
       <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4"></path>
@@ -516,75 +516,31 @@
           </label>
         </div>
         <article role="main">
-          <section id="minmaxlocscalar">
-<h1><code class="docutils literal notranslate"><span class="pre">MinMaxLocScalar</span></code><a class="headerlink" href="#minmaxlocscalar" title="Permalink to this heading">#</a></h1>
-<p>Template class for storing the min and max values with indices for min/max location reducers.
-Should be accessed via <code class="docutils literal notranslate"><span class="pre">::value_type</span></code> defined for a particular reducer.</p>
-<p>Header File: <code class="docutils literal notranslate"><span class="pre">&lt;Kokkos_Core.hpp&gt;</span></code></p>
-<section id="usage">
-<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this heading">#</a></h2>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">MinMaxLoc</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span><span class="n">I</span><span class="p">,</span><span class="n">S</span><span class="o">&gt;::</span><span class="n">value_type</span><span class="w"> </span><span class="n">result</span><span class="p">;</span>
-<span class="n">parallel_reduce</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">Functor</span><span class="p">,</span><span class="n">MinMaxLoc</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span><span class="n">I</span><span class="p">,</span><span class="n">S</span><span class="o">&gt;</span><span class="p">(</span><span class="n">result</span><span class="p">));</span>
-<span class="n">T</span><span class="w"> </span><span class="n">minValue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">result</span><span class="p">.</span><span class="n">min_val</span><span class="p">;</span>
-<span class="n">T</span><span class="w"> </span><span class="n">maxValue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">result</span><span class="p">.</span><span class="n">max_val</span><span class="p">;</span>
-<span class="n">I</span><span class="w"> </span><span class="n">minLoc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">result</span><span class="p">.</span><span class="n">min_loc</span><span class="p">;</span>
-<span class="n">I</span><span class="w"> </span><span class="n">maxLoc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">result</span><span class="p">.</span><span class="n">max_loc</span><span class="p">;</span>
+          <section id="kokkos-kokkos-swap">
+<h1><code class="docutils literal notranslate"><span class="pre">Kokkos::kokkos_swap</span></code><a class="headerlink" href="#kokkos-kokkos-swap" title="Permalink to this heading">#</a></h1>
+<p>Defined in header <code class="docutils literal notranslate"><span class="pre">&lt;Kokkos_Swap.hpp&gt;</span></code><sup>(since 4.3)</sup> which is included from <code class="docutils literal notranslate"><span class="pre">&lt;Kokkos_Core.hpp&gt;</span></code></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span>
+<span class="n">KOKKOS_FUNCTION</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">void</span>
+<span class="n">kokkos_swap</span><span class="p">(</span><span class="n">T</span><span class="o">&amp;</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="o">&amp;</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="k">noexcept</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">is_nothrow_move_constructible_v</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;&amp;</span>
+<span class="w">                                 </span><span class="n">std</span><span class="o">::</span><span class="n">is_nothrow_move_assignable_v</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">);</span><span class="w">  </span><span class="c1">// (1) (since 4.3)</span>
+
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">T2</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="kt">size_t</span><span class="w"> </span><span class="n">N</span><span class="o">&gt;</span>
+<span class="n">KOKKOS_FUNCTION</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">void</span>
+<span class="n">kokkos_swap</span><span class="p">(</span><span class="n">T2</span><span class="w"> </span><span class="p">(</span><span class="o">&amp;</span><span class="n">a</span><span class="p">)[</span><span class="n">N</span><span class="p">],</span><span class="w"> </span><span class="n">T2</span><span class="w"> </span><span class="p">(</span><span class="o">&amp;</span><span class="n">b</span><span class="p">)[</span><span class="n">N</span><span class="p">])</span><span class="w"> </span><span class="k">noexcept</span><span class="p">(</span><span class="k">noexcept</span><span class="p">(</span><span class="o">*</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="n">b</span><span class="p">));</span><span class="w">  </span><span class="c1">// (2) (since 4.3)</span>
 </pre></div>
 </div>
-</section>
-<section id="synopsis">
-<h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this heading">#</a></h2>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">Scalar</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Index</span><span class="o">&gt;</span>
-<span class="k">struct</span><span class="w"> </span><span class="nc">MinMaxLocScalar</span><span class="p">{</span>
-<span class="w">  </span><span class="n">Scalar</span><span class="w"> </span><span class="n">min_val</span><span class="p">;</span>
-<span class="w">  </span><span class="n">Scalar</span><span class="w"> </span><span class="n">max_val</span><span class="p">;</span>
-<span class="w">  </span><span class="n">Index</span><span class="w"> </span><span class="n">min_loc</span><span class="p">;</span>
-<span class="w">  </span><span class="n">Index</span><span class="w"> </span><span class="n">max_loc</span><span class="p">;</span>
-
-<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="k">operator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">MinMaxLocScalar</span><span class="o">&amp;</span><span class="w"> </span><span class="n">rhs</span><span class="p">);</span>
-<span class="p">};</span>
-</pre></div>
-</div>
-</section>
-<section id="interface">
-<h2>Interface<a class="headerlink" href="#interface" title="Permalink to this heading">#</a></h2>
-<dl class="cppkokkos struct">
-<dt class="sig sig-object cppkokkos" id="_CPPv4I00E15MinMaxLocScalar">
-<span id="_CPPv3I00E15MinMaxLocScalar"></span><span id="_CPPv2I00E15MinMaxLocScalar"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Scalar</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Index</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">MinMaxLocScalar</span></span></span><a class="headerlink" href="#_CPPv4I00E15MinMaxLocScalar" title="Permalink to this definition">#</a><br /></dt>
-<dd><p class="rubric">Public Members</p>
-<dl class="cppkokkos member">
-<dt class="sig sig-object cppkokkos" id="_CPPv4N15MinMaxLocScalar7min_valE">
-<span id="_CPPv3N15MinMaxLocScalar7min_valE"></span><span id="_CPPv2N15MinMaxLocScalar7min_valE"></span><span id="MinMaxLocScalar::min_val__Scalar"></span><a class="reference internal" href="#_CPPv4I00E15MinMaxLocScalar" title="MinMaxLocScalar::Scalar"><span class="n"><span class="pre">Scalar</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">min_val</span></span></span><a class="headerlink" href="#_CPPv4N15MinMaxLocScalar7min_valE" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>Scalar minimum Value.</p>
-</dd></dl>
-
-<dl class="cppkokkos member">
-<dt class="sig sig-object cppkokkos" id="_CPPv4N15MinMaxLocScalar7max_valE">
-<span id="_CPPv3N15MinMaxLocScalar7max_valE"></span><span id="_CPPv2N15MinMaxLocScalar7max_valE"></span><span id="MinMaxLocScalar::max_val__Scalar"></span><a class="reference internal" href="#_CPPv4I00E15MinMaxLocScalar" title="MinMaxLocScalar::Scalar"><span class="n"><span class="pre">Scalar</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">max_val</span></span></span><a class="headerlink" href="#_CPPv4N15MinMaxLocScalar7max_valE" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>Scalar maximum Value.</p>
-</dd></dl>
-
-<dl class="cppkokkos member">
-<dt class="sig sig-object cppkokkos" id="_CPPv4N15MinMaxLocScalar7min_locE">
-<span id="_CPPv3N15MinMaxLocScalar7min_locE"></span><span id="_CPPv2N15MinMaxLocScalar7min_locE"></span><span id="MinMaxLocScalar::min_loc__Index"></span><a class="reference internal" href="#_CPPv4I00E15MinMaxLocScalar" title="MinMaxLocScalar::Index"><span class="n"><span class="pre">Index</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">min_loc</span></span></span><a class="headerlink" href="#_CPPv4N15MinMaxLocScalar7min_locE" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>Minimum location(Index).</p>
-</dd></dl>
-
-<dl class="cppkokkos member">
-<dt class="sig sig-object cppkokkos" id="_CPPv4N15MinMaxLocScalar7max_locE">
-<span id="_CPPv3N15MinMaxLocScalar7max_locE"></span><span id="_CPPv2N15MinMaxLocScalar7max_locE"></span><span id="MinMaxLocScalar::max_loc__Index"></span><a class="reference internal" href="#_CPPv4I00E15MinMaxLocScalar" title="MinMaxLocScalar::Index"><span class="n"><span class="pre">Index</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">max_loc</span></span></span><a class="headerlink" href="#_CPPv4N15MinMaxLocScalar7max_locE" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>Maximum location(Index).</p>
-</dd></dl>
-
-<p class="rubric">Assignment Operator</p>
-<dl class="cppkokkos function">
-<dt class="sig sig-object cppkokkos" id="_CPPv4N15MinMaxLocScalaraSERK15MinMaxLocScalar">
-<span id="_CPPv3N15MinMaxLocScalaraSERK15MinMaxLocScalar"></span><span id="_CPPv2N15MinMaxLocScalaraSERK15MinMaxLocScalar"></span><span id="MinMaxLocScalar::assign-operator__MinMaxLocScalarCR"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">=</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00E15MinMaxLocScalar" title="MinMaxLocScalar"><span class="n"><span class="pre">MinMaxLocScalar</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">rhs</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N15MinMaxLocScalaraSERK15MinMaxLocScalar" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>Assign <code class="docutils literal notranslate"><span class="pre">min_val</span></code>, <code class="docutils literal notranslate"><span class="pre">max_val</span></code>, <code class="docutils literal notranslate"><span class="pre">min_loc</span></code> and <code class="docutils literal notranslate"><span class="pre">max_loc</span></code> from <code class="docutils literal notranslate"><span class="pre">rhs</span></code></p>
-</dd></dl>
-
-</dd></dl>
-
+<ol class="arabic simple">
+<li><p>Swaps the values <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code>. This overload does not participate in overload
+resolution unless <code class="docutils literal notranslate"><span class="pre">std::is_move_constructible_v&lt;T&gt;</span> <span class="pre">&amp;&amp;</span> <span class="pre">std::is_move_assignable_v&lt;T&gt;</span></code>
+is <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p></li>
+<li><p>Swaps the arrays <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code>. This overload does not participate in
+overload resolution unless <code class="docutils literal notranslate"><span class="pre">T2</span></code> is swappable.</p></li>
+</ol>
+<section id="notes">
+<h2>Notes<a class="headerlink" href="#notes" title="Permalink to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">kokkos_swap</span></code> provides the same functionality as <a class="reference external" href="https://en.cppreference.com/w/cpp/algorithm/swap"><code class="docutils literal notranslate"><span class="pre">std::swap</span></code></a>.  It just
+cannot be called <code class="docutils literal notranslate"><span class="pre">swap</span></code> or it would yield some ambiguities in overload
+resolution in some situations because of <a class="reference external" href="https://en.cppreference.com/w/cpp/language/adl">ADL</a>.</p>
 </section>
 </section>
 
@@ -593,23 +549,23 @@ Should be accessed via <code class="docutils literal notranslate"><span class="p
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="MinMaxScalar.html">
+          <a class="next-page" href="timer.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title"><code class="docutils literal notranslate"><span class="pre">MinMaxScalar</span></code></div>
+                <div class="title"><code class="docutils literal notranslate"><span class="pre">Kokkos::Timer</span></code></div>
               </div>
               <svg><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="ReductionScalarTypes.html">
+          <a class="prev-page" href="printf.html">
               <svg><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Reduction Scalar Types</div>
+                <div class="title"><code class="docutils literal notranslate"><span class="pre">Kokkos::printf</span></code></div>
                 
               </div>
             </a>
@@ -645,10 +601,8 @@ Should be accessed via <code class="docutils literal notranslate"><span class="p
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">MinMaxLocScalar</span></code></a><ul>
-<li><a class="reference internal" href="#usage">Usage</a></li>
-<li><a class="reference internal" href="#synopsis">Synopsis</a></li>
-<li><a class="reference internal" href="#interface">Interface</a></li>
+<li><a class="reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">Kokkos::kokkos_swap</span></code></a><ul>
+<li><a class="reference internal" href="#notes">Notes</a></li>
 </ul>
 </li>
 </ul>
