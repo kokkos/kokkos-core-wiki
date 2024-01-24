@@ -492,7 +492,7 @@
         </a>
         <div class="content-icon-container">
 <div class="edit-this-page">
-  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/ProgrammingGuide/Initialization.md" title="Edit this page">
+  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/ProgrammingGuide/Initialization.rst" title="Edit this page">
     <svg aria-hidden="true" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
       <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4"></path>
@@ -516,123 +516,137 @@
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="initialization">
+          <section id="initialization">
 <h1>5. Initialization<a class="headerlink" href="#initialization" title="Permalink to this heading">#</a></h1>
-<p>In order to use Kokkos an initialization call is required. That call is responsible for initializing internal objects and acquiring hardware resources such as threads. Typically, this call should be placed right at the start of a program. If you use both MPI and Kokkos, your program should initialize Kokkos right after calling <code class="docutils literal notranslate"><span class="pre">MPI_Init</span></code>. That way, if MPI sets up process binding masks, Kokkos will get that information and use it for best performance. Your program must also <em>finalize</em> Kokkos when done using it in order to free hardware resources.</p>
+<p>In order to use Kokkos, an initialization call is required. That call is responsible for initializing internal objects and acquiring hardware resources such as threads. Typically, this call should be placed right at the start of a program. If you use both MPI and Kokkos, your program should initialize Kokkos right after calling <cite>MPI_Init</cite>. That way, if MPI sets up process binding masks, Kokkos will get that information and use it for best performance. Your program must also _finalize_ Kokkos when done using it in order to free hardware resources.</p>
 <section id="include-headers">
 <h2>5.0 Include Headers<a class="headerlink" href="#include-headers" title="Permalink to this heading">#</a></h2>
-<p>All primary capabilities of Kokkos are provided by the <code class="docutils literal notranslate"><span class="pre">Kokkos_Core.hpp</span></code> header file.
-Some capabilities - specifically data structures in the <code class="docutils literal notranslate"><span class="pre">containers</span></code> subpackage and algorithmic capabilities in the <code class="docutils literal notranslate"><span class="pre">algorithms</span></code> subpackage are included via separate header files.
+<p>All primary capabilities of Kokkos are provided by the <cite>Kokkos_Core.hpp</cite> header file.
+Some capabilities - specifically data structures in the <cite>containers</cite> subpackage and algorithmic capabilities in the <cite>algorithms</cite> subpackage are included via separate header files.
 For specific capabilities check their API reference:</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="../API/core-index.html"><span class="doc std std-doc">API: Core</span></a></p></li>
-<li><p><a class="reference internal" href="../API/containers-index.html"><span class="doc std std-doc">API: Containers</span></a></p></li>
-<li><p><a class="reference internal" href="../API/algorithms-index.html"><span class="doc std std-doc">API: Algorithms</span></a></p></li>
-<li><p><a class="reference internal" href="../API/alphabetical.html"><span class="doc std std-doc">API in Alphabetical Order</span></a></p></li>
+<li><p><a class="reference external" href="../API/core-index.html">API: Core</a></p></li>
+<li><p><a class="reference external" href="../API/containers-index.html">API: Containers</a></p></li>
+<li><p><a class="reference external" href="../API/algorithms-index.html">API: Algorithms</a></p></li>
+<li><p><a class="reference external" href="../API/alphabetical.html">API in Alphabetical Order</a></p></li>
 </ul>
 </section>
 <section id="initialization-by-command-line-arguments">
 <h2>5.1 Initialization by command-line arguments<a class="headerlink" href="#initialization-by-command-line-arguments" title="Permalink to this heading">#</a></h2>
 <p>The simplest way to initialize Kokkos is by calling the following function:</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">Kokkos</span><span class="o">::</span><span class="n">initialize</span><span class="p">(</span><span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">argv</span><span class="p">[]);</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<p>Just like <code class="docutils literal notranslate"><span class="pre">MPI_Init</span></code>, this function interprets command-line arguments to determine the requested settings. Also like <code class="docutils literal notranslate"><span class="pre">MPI_Init</span></code>, it reserves the right to remove command-line arguments from the input list. This is why it takes <code class="docutils literal notranslate"><span class="pre">argc</span></code> by reference, rather than by value; it may change the value on output.</p>
-<p>During initialization one or more execution spaces will be initialized and assigned to one of the following aliases.</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">Kokkos</span><span class="o">::</span><span class="n">DefaultExecutionSpace</span><span class="p">;</span>
+<p>Kokkos::initialize(int&amp; argc, char* argv[]);</p>
+<p>Just like <cite>MPI_Init</cite>, this function interprets command-line arguments to determine the requested settings. Also like <cite>MPI_Init</cite>, it reserves the right to remove command-line arguments from the input list. This is why it takes <cite>argc</cite> by reference, rather than by value.</p>
+<p>During initialization, one or more execution spaces will be initialized and assigned to one of the following aliases.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">Kokkos</span><span class="o">::</span><span class="n">DefaultHostExecutionSpace</span><span class="p">;</span>
+<p>Kokkos::DefaultExecutionSpace;</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">DefaultExecutionSpace</span></code> is the execution space used with policies and views where one is not explicitly specified.  Primarily, Kokkos will initialize one of the heterogeneous backends (CUDA, OpenMPTarget, HIP, SYCL) as the <code class="docutils literal notranslate"><span class="pre">DefaultExecutionSpace</span></code> if enabled in the build configuration.  In addition, Kokkos requires a <code class="docutils literal notranslate"><span class="pre">DefaultHostExecutionSpace</span></code>.  The <code class="docutils literal notranslate"><span class="pre">DefaultHostExecutionSpace</span></code> is default execution space used when host operations are required.  If one of the parallel host execution spaces are enabled in the build environment then <code class="docutils literal notranslate"><span class="pre">Kokkos::Serial</span></code> is only initialized if it is explicitly enabled in the build configuration.  If a parallel host execution space is not enabled in the build configuration, then <code class="docutils literal notranslate"><span class="pre">Kokkos::Serial</span></code> is initialized as the <code class="docutils literal notranslate"><span class="pre">DefaultHostExecutionSpace</span></code>.
+<p>Kokkos::DefaultHostExecutionSpace;</p>
+<p><cite>DefaultExecutionSpace</cite> is the execution space used with policies and views where one is not explicitly specified.  Primarily, Kokkos will initialize one of the heterogeneous backends (CUDA, HIP, OpenACC, OpenMPTarget, SYCL) as the <cite>DefaultExecutionSpace</cite> if enabled in the build configuration.  In addition, Kokkos requires a <cite>DefaultHostExecutionSpace</cite>.  The <cite>DefaultHostExecutionSpace</cite> is the default execution space used when host operations are required.  If one of the parallel host execution spaces is enabled in the build environment then <cite>Kokkos::Serial</cite> is only initialized if it is explicitly enabled in the build configuration.  If a parallel host execution space is not enabled in the build configuration, then <cite>Kokkos::Serial</cite> is initialized as the <cite>DefaultHostExecutionSpace</cite>.
 Kokkos chooses the two spaces using the following list:</p>
 <ol class="arabic simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">Kokkos::Cuda</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Kokkos::Experimental::OpenMPTarget</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Kokkos::Experimental::HIP</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Kokkos::Experimental::SYCL</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Kokkos::OpenMP</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Kokkos::Threads</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Kokkos::Experimental::HPX</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Kokkos::Serial</span></code></p></li>
+<li><p><cite>Kokkos::Cuda</cite></p></li>
+<li><p><cite>Kokkos::Experimental::HPX</cite></p></li>
+<li><p><cite>Kokkos::Experimental::OpenACC</cite></p></li>
+<li><p><cite>Kokkos::Experimental::OpenMPTarget</cite></p></li>
+<li><p><cite>Kokkos::Experimental::SYCL</cite></p></li>
+<li><p><cite>Kokkos::HIP</cite></p></li>
+<li><p><cite>Kokkos::OpenMP</cite></p></li>
+<li><p><cite>Kokkos::Threads</cite></p></li>
+<li><p><cite>Kokkos::Serial</cite></p></li>
 </ol>
-<p>The highest execution space in the list which is enabled is Kokkos’ default execution space, and the highest enabled host execution space is Kokkos’ default host execution space. For example, if  <code class="docutils literal notranslate"><span class="pre">Kokkos::Cuda</span></code>, <code class="docutils literal notranslate"><span class="pre">Kokkos::OpenMP</span></code>, and <code class="docutils literal notranslate"><span class="pre">Kokkos::Serial</span></code> are enabled, then <code class="docutils literal notranslate"><span class="pre">Kokkos::Cuda</span></code> is the default execution space and <code class="docutils literal notranslate"><span class="pre">Kokkos::OpenMP</span></code> is the default host execution space.<sup>1</sup>  In cases where the highest enabled backend is a host parallel execution space the <code class="docutils literal notranslate"><span class="pre">DefaultExecutionSpace</span></code> and the <code class="docutils literal notranslate"><span class="pre">DefaultHostExecutionSpace</span></code> will be the same.</p>
-<p>Command-line arguments come in “prefixed” and “non-prefixed” versions. Prefixed versions start with the string <code class="docutils literal notranslate"><span class="pre">--kokkos-</span></code>. <a class="reference internal" href="../API/core/initialize_finalize/initialize.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">Kokkos::initialize</span></code></span></a> will remove prefixed options from the input list, but will preserve non-prefixed options. Argument options are given with an equals (<code class="docutils literal notranslate"><span class="pre">=</span></code>) sign. If the same argument occurs more than once, the last one is used. Furthermore, prefixed versions of the command line arguments take precedence over the non-prefixed ones. For example, the arguments</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>--kokkos-threads=4 --threads=2
-</pre></div>
-</div>
-<p>set the number of threads to 4, while</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>--kokkos-threads=4 --threads=2 --kokkos-threads=3
-</pre></div>
-</div>
+<p>The highest execution space in the list that is enabled is Kokkos’ default execution space, and the highest enabled host execution space is Kokkos’ default host execution space. For example, if  <cite>Kokkos::Cuda</cite>, <cite>Kokkos::OpenMP</cite>, and <cite>Kokkos::Serial</cite> are enabled, then <cite>Kokkos::Cuda</cite> is the default execution space and <cite>Kokkos::OpenMP</cite> is the default host execution space.:sup:<cite>1</cite>  In cases where the highest enabled backend is a host parallel execution space the <cite>DefaultExecutionSpace</cite> and the <cite>DefaultHostExecutionSpace</cite> will be the same.</p>
+<p><a class="reference external" href="../API/Initialize-and-Finalize.html#kokos-initialize">Kokkos::initialize</a> parses the command line for flags prefixed with <cite>–kokkos-</cite>, and removes all recognized flags. Argument options are given with an equals (<cite>=</cite>) sign. If the same argument occurs more than once, the last one is used. For example, the arguments</p>
+<blockquote>
+<div><p>–kokkos-threads=4 –kokkos-threads=3</p>
+</div></blockquote>
 <p>set the number of threads to 3. Table 5.1 gives a full list of command-line options.</p>
-<h4>Table 5.1: Command-line options for Kokkos::initialize</h4>
-<div class="table-wrapper colwidths-auto docutils container">
+<p>Table 5.1: Command-line options for Kokkos::initialize</p>
+<div class="table-wrapper docutils container">
 <table class="docutils align-default">
-<thead>
-<tr class="row-odd"><th class="head text-left"><p>Argument</p></th>
-<th class="head text-left"><p>Description</p></th>
-</tr>
-</thead>
 <tbody>
-<tr class="row-even"><td class="text-left"><p>–kokkos-help  <br/> –help</p></td>
-<td class="text-left"><p>print this message</p></td>
+<tr class="row-odd"><td><p>Argument</p></td>
+<td><p>Description</p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p>–kokkos-threads=INT <br/> –threads=INT</p></td>
-<td class="text-left"><p>specify total number of threads or number of threads per NUMA region if used in conjunction with <code class="docutils literal notranslate"><span class="pre">--numa</span></code> option.</p></td>
+<tr class="row-even"><td><p>–kokkos-help –help</p></td>
+<td><p>print this message</p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p>–kokkos-numa=INT <br/> –numa=INT</p></td>
-<td class="text-left"><p>specify number of NUMA regions used by process.</p></td>
+<tr class="row-odd"><td><p>–kokkos-disable-warnings</p></td>
+<td><p>disable kokkos warning messages</p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p>–device-id=INT</p></td>
-<td class="text-left"><p>specify device id to be used by Kokkos.</p></td>
+<tr class="row-even"><td><p>–kokkos-print-configuration</p></td>
+<td><p>print configuration</p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p>–num-devices=INT[,INT]</p></td>
-<td class="text-left"><p>used when running MPI jobs. Specify the number of devices per node to be used. Process to device mapping happens by obtaining the local MPI rank and assigning devices round-robin. The optional second argument allows for an existing device to be ignored. This is most useful on workstations with multiple GPUs, one of which is used to drive screen output.</p></td>
+<tr class="row-odd"><td><p>–kokkos-tune-internals</p></td>
+<td><p>allow Kokkos to autotune policies and declare tuning features through the tuning system. If left off, Kokkos uses heuristics.</p></td>
+</tr>
+<tr class="row-even"><td><p>–kokkos-num-threads=INT</p></td>
+<td><p>specify total number of threads to use for parallel regions on the host</p></td>
+</tr>
+<tr class="row-odd"><td><p>–kokkos-map-device-id-by=(random|mpi_rank), default: mpi_rank</p></td>
+<td><p>strategy to select device-id automatically from available devices: random or mpi_rank:sup:<cite>2</cite></p></td>
+</tr>
+<tr class="row-even"><td><p>–kokkos-tools-libs=STR</p></td>
+<td><p>specify which of the tools to use. Must either be full path to library or name of library if the path is present in the runtime library search path (e.g. LD_LIBRARY_PATH)</p></td>
+</tr>
+<tr class="row-odd"><td><p>–kokkos-tools-help</p></td>
+<td><p>query the (loaded) kokkos-tool for its command-line option support (which should then be passed via –kokkos-tools-args=”…”)</p></td>
+</tr>
+<tr class="row-even"><td><p>–kokkos-tools-args=STR</p></td>
+<td><p>a single (quoted) string of options which will be whitespace delimited and passed to the loaded kokkos-tool as command-line arguments. E.g. <cite>&lt;EXE&gt; –kokkos-tools-args=”-c input.txt”</cite> will pass <cite>&lt;EXE&gt; -c input.txt</cite> as argc/argv to tool</p></td>
 </tr>
 </tbody>
 </table>
 </div>
-<hr class="docutils" />
-<p><sup>1</sup> This is the preferred set of defaults when CUDA and OpenMP are enabled. If you use a thread-parallel host execution space, we prefer Kokkos’ OpenMP back-end, as this ensures compatibility of Kokkos’ threads with the application’s direct use of OpenMP threads. Kokkos cannot promise that its Threads back-end will not conflict with the application’s direct use of operating system threads.</p>
+<dl class="simple">
+<dt>When passing a boolean as a string, the acceptable values are:</dt><dd><ul class="simple">
+<li><p>true, yes, 1</p></li>
+<li><p>false, no, 0</p></li>
+</ul>
+</dd>
+</dl>
+<p>The values are case insensitive.</p>
+<p><sup>1</sup> This is the preferred set of defaults when CUDA and OpenMP are enabled. If you use a thread-parallel host execution space, we prefer Kokkos’ OpenMP backend, as this ensures compatibility of Kokkos’ threads with the application’s direct use of OpenMP threads. Kokkos cannot promise that its Threads backend will not conflict with the application’s direct use of operating system threads.
+<sup>2</sup> The two device-id mapping strategies are:
+- random: select a random device from available.
+- mpi_rank: select device based on a round robin assignment of local MPI ranks. Works with OpenMPI, MVAPICH, SLURM, and derived implementations. Support for MPICH was added in Kokkos 4.0</p>
+</section>
+<section id="initialization-by-environment-variable">
+<h2>5.2 Initialization by environment variable<a class="headerlink" href="#initialization-by-environment-variable" title="Permalink to this heading">#</a></h2>
+<p>Instead of using command-line arguments, one may use environment variables. The environment variables are identical to the arguments in Table 5.1 but they are upper case and the dash is replaced by an underscore. For example, if we want to set the number of threads to 3, we have</p>
+<blockquote>
+<div><p>KOKKOS_NUM_THREADS=3</p>
+</div></blockquote>
 </section>
 <section id="initialization-by-struct">
-<h2>5.2 Initialization by struct<a class="headerlink" href="#initialization-by-struct" title="Permalink to this heading">#</a></h2>
-<p>Instead of giving <a class="reference internal" href="../API/core/initialize_finalize/initialize.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">Kokkos::initialize()</span></code></span></a> command-line arguments, one may directly pass in initialization parameters using the following struct:</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span><span class="w"> </span><span class="nc">Kokkos</span><span class="o">::</span><span class="n">InitArguments</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">num_threads</span><span class="p">;</span>
-<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">num_numa</span><span class="p">;</span>
-<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">device_id</span><span class="p">;</span>
-<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">ndevices</span><span class="p">;</span>
-<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">skip_device</span><span class="p">;</span>
-<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="n">disable_warnings</span><span class="p">;</span>
-<span class="p">};</span>
-</pre></div>
-</div>
-<p>The <code class="docutils literal notranslate"><span class="pre">num_threads</span></code> field corresponds to the <code class="docutils literal notranslate"><span class="pre">--kokkos-threads</span></code> command-line argument, <code class="docutils literal notranslate"><span class="pre">num_numa</span></code> to <code class="docutils literal notranslate"><span class="pre">--kokkos-numa</span></code>, <code class="docutils literal notranslate"><span class="pre">device_id</span></code> to <code class="docutils literal notranslate"><span class="pre">--device-id</span></code>, <code class="docutils literal notranslate"><span class="pre">ndevices</span></code> to the first value in <code class="docutils literal notranslate"><span class="pre">--num-devices</span></code> and <code class="docutils literal notranslate"><span class="pre">skip_devices</span></code> to the second value in <code class="docutils literal notranslate"><span class="pre">--num-devices</span></code>. (See Table 5.1 for details.) Not all parameters are observed by all execution spaces, and the struct might expand in the future if needed.</p>
-<p>If you set <code class="docutils literal notranslate"><span class="pre">num_threads</span></code> or <code class="docutils literal notranslate"><span class="pre">num_numa</span></code> to zero or less, Kokkos will try to determine default values if possible or otherwise set them to 1. In particular, Kokkos can use the <code class="docutils literal notranslate"><span class="pre">hwloc</span></code> library to determine default settings using the assumption that the process binding mask is unique, i.e., that this process does not share any cores with another process. Note that the default value of each parameter is -1.</p>
+<h2>5.3 Initialization by struct<a class="headerlink" href="#initialization-by-struct" title="Permalink to this heading">#</a></h2>
+<p>Instead of giving <a class="reference external" href="../API/core/initialize_finalize/initialize.html">Kokkos::initialize()</a> command-line arguments, one may directly pass in initialization parameters using the <cite>Kokkos::InitializationSettings</cite> struct.  If one wants to set a options using the struct, one can use the set functions <cite>set_xxx</cite> where <cite>xxx</cite> is the identical to the arguments in Table 5.1 where the dash has been replaced by an underscore. To check if a variable has been set, one can use the <cite>has_xxx</cite> functions. Finally, to get the value that was set, one can use the <cite>get_xxx</cite> functions.</p>
+<p>If you do not set <cite>num_threads</cite>, Kokkos will try to determine a default value if possible or otherwise set it to 1. In particular, Kokkos can use the <cite>hwloc</cite> library to determine default settings using the assumption that the process binding mask is unique, i.e., that this process does not share any cores with another process. Note that the default value of each parameter is -1.</p>
 <p>Here is an example of how to use the struct.</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">Kokkos</span><span class="o">::</span><span class="n">InitArguments</span><span class="w"> </span><span class="n">args</span><span class="p">;</span>
-<span class="c1">// 8 (CPU) threads per NUMA region</span>
-<span class="n">args</span><span class="p">.</span><span class="n">num_threads</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">8</span><span class="p">;</span>
-<span class="c1">// 2 (CPU) NUMA regions per process</span>
-<span class="n">args</span><span class="p">.</span><span class="n">num_numa</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Kokkos</span><span class="o">::</span><span class="n">InitializationSettings</span><span class="w"> </span><span class="n">settings</span><span class="p">;</span>
+<span class="c1">// 8 (CPU) threads</span>
+<span class="n">settinge</span><span class="p">.</span><span class="n">set_num_threads</span><span class="p">(</span><span class="mi">8</span><span class="p">);</span>
 <span class="c1">// If Kokkos was built with CUDA enabled, use the GPU with device ID 1.</span>
-<span class="n">args</span><span class="p">.</span><span class="n">device_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="n">settings</span><span class="p">.</span><span class="n">set_device_id</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
 
-<span class="n">Kokkos</span><span class="o">::</span><span class="n">initialize</span><span class="p">(</span><span class="n">args</span><span class="p">);</span>
+<span class="n">Kokkos</span><span class="o">::</span><span class="n">initialize</span><span class="p">(</span><span class="n">settings</span><span class="p">);</span>
 </pre></div>
 </div>
 </section>
 <section id="finalization">
-<h2>5.3 Finalization<a class="headerlink" href="#finalization" title="Permalink to this heading">#</a></h2>
-<p>At the end of each program, Kokkos needs to be shut down in order to free resources; do this by calling <a class="reference internal" href="../API/core/initialize_finalize/finalize.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">Kokkos::finalize()</span></code></span></a>. You may wish to set this to be called automatically at program exit, either by setting an <code class="docutils literal notranslate"><span class="pre">atexit</span></code> hook or by attaching the function to <code class="docutils literal notranslate"><span class="pre">MPI_COMM_SELF</span></code> so that it is called automatically at <code class="docutils literal notranslate"><span class="pre">MPI_Finalize</span></code>.</p>
+<h2>5.4 Finalization<a class="headerlink" href="#finalization" title="Permalink to this heading">#</a></h2>
+<p>At the end of each program, Kokkos needs to be shut down in order to free resources; do this by calling <a class="reference external" href="../API/core/initialize_finalize/finalize.html">Kokkos::finalize()</a>. You may wish to set this to be called automatically at program exit, either by setting an <cite>atexit</cite> hook or by attaching the function to <cite>MPI_COMM_SELF</cite> so that it is called automatically at <cite>MPI_Finalize</cite>.</p>
 </section>
 <section id="example-code">
-<h2>5.4 Example Code<a class="headerlink" href="#example-code" title="Permalink to this heading">#</a></h2>
+<h2>5.5 Example Code<a class="headerlink" href="#example-code" title="Permalink to this heading">#</a></h2>
 <p>A minimal Kokkos code thus would look like this:</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="cpf">&lt;Kokkos_Core.hpp&gt;</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="cpf">&lt;Kokkos_Core.hpp&gt;</span>
 
 <span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">argv</span><span class="p">[])</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">initialize</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span><span class="n">argv</span><span class="p">);</span>
@@ -704,9 +718,10 @@ Kokkos chooses the two spaces using the following list:</p>
 <li><a class="reference internal" href="#">5. Initialization</a><ul>
 <li><a class="reference internal" href="#include-headers">5.0 Include Headers</a></li>
 <li><a class="reference internal" href="#initialization-by-command-line-arguments">5.1 Initialization by command-line arguments</a></li>
-<li><a class="reference internal" href="#initialization-by-struct">5.2 Initialization by struct</a></li>
-<li><a class="reference internal" href="#finalization">5.3 Finalization</a></li>
-<li><a class="reference internal" href="#example-code">5.4 Example Code</a></li>
+<li><a class="reference internal" href="#initialization-by-environment-variable">5.2 Initialization by environment variable</a></li>
+<li><a class="reference internal" href="#initialization-by-struct">5.3 Initialization by struct</a></li>
+<li><a class="reference internal" href="#finalization">5.4 Finalization</a></li>
+<li><a class="reference internal" href="#example-code">5.5 Example Code</a></li>
 </ul>
 </li>
 </ul>
