@@ -20,6 +20,10 @@ Returns the number of concurrent threads that are used by ``DefaultHostExecution
 
 .. |device_id| replace:: ``device_id``
 
+.. _num_devices : num_devices.html
+
+.. |num_devices| replace:: ``num_devices``
+
 .. _initialize: ../initialize_finalize/initialize.html
 
 .. |initialize| replace:: ``initialize``
@@ -27,6 +31,8 @@ Returns the number of concurrent threads that are used by ``DefaultHostExecution
 .. _InitializationSettings: ../initialize_finalize/InitializationSettings.html
 
 .. |InitializationSettings| replace:: ``InitializationSettings``
+
+|num_devices|_: returns the number of devices available to Kokkos
 
 |device_id|_: returns the id of the device used by Kokkos
 

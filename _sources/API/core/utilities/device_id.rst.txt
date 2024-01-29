@@ -17,6 +17,10 @@ Returns the id of the device that is used by ``DefaultExecutionSpace`` or
 
 **See also**
 
+.. _num_devices : num_devices.html
+
+.. |num_devices| replace:: ``num_devices``
+
 .. _num_threads : num_threads.html
 
 .. |num_threads| replace:: ``num_threads``
@@ -28,6 +32,8 @@ Returns the id of the device that is used by ``DefaultExecutionSpace`` or
 .. _InitializationSettings: ../initialize_finalize/InitializationSettings.html
 
 .. |InitializationSettings| replace:: ``InitializationSettings``
+
+|num_devices|_: returns the number of devices available to Kokkos
 
 |num_threads|_: returns the number of threads used by Kokkos
 
