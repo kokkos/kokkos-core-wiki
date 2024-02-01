@@ -47,7 +47,8 @@ There are numerous device backends, options, and architecture-specific optimizat
  -DCMAKE_INSTALL_PREFIX=${kokkos_install_folder} \
  -DKokkos_ENABLE_OPENMP=ON
 ````
-which activates the OpenMP backend. All the options controlling device backends, options, architectures, and third-party libraries (TPLs) are given below.
+which activates the OpenMP backend. All the options controlling device backends, options, architectures, and third-party libraries (TPLs) are given in [CMake Keywords](../keywords).
+
 
 ## Known Issues<a name="KnownIssues"></a>
 

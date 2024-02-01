@@ -170,7 +170,7 @@ Example
     #include <Kokkos_Random.hpp>
 
     int main(int argc, char *argv[]) {
-        Kokkos::ScopeGuarg guard(argc, argv);
+        Kokkos::ScopeGuard guard(argc, argv);
 
         Kokkos::Random_XorShift64_Pool<> random_pool(/*seed=*/12345);
 

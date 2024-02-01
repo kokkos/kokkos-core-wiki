@@ -114,6 +114,10 @@ Optional ``InitArgs``:
 
 * ``ChunkSize`` : Provide a hint for optimal chunk-size to be used during scheduling. For the SYCL backend, the workgroup size used in a ``parallel_for`` kernel can be set via this variable.
 
+Preconditions:
+
+* The start index must not be greater than the end index.
+
 Examples
 --------
 

@@ -32,7 +32,7 @@ Kokkos 4.x
 
     * * Clang (CUDA)
       * 10.0.0
-      * 10.0.0, 14.0.0
+      * 12.0.0, 14.0.0
 
     * * AppleClang 
       * 8.0
@@ -126,7 +126,7 @@ Build system:
 =============
 
 * CMake >= 3.16: required
-* CMake >= 3.18: Fortran linkage. This does not affect most mixed Fortran/Kokkos builds. See https://github.com/kokkos/kokkos/blob/master/BUILD.md#known-issues.
+* CMake >= 3.18: Fortran linkage. This does not affect most mixed Fortran/Kokkos builds. See `known build issues <https://github.com/kokkos/kokkos/blob/master/BUILD.md#known-issues>`_.
 * CMake >= 3.21.1 for NVC++
 
 Primary tested compiler are passing in release mode

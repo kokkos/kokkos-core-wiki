@@ -12,7 +12,7 @@ InitArguments
 
 Defined in ``<Kokkos_Core.hpp>`` header.
 
-.. warning:: Deprecated since 3.7, **use** ``Kokkos::InitializationSettings`` **instead**
+.. warning:: Deprecated since 3.7, removed in 4.3, **use** ``Kokkos::InitializationSettings`` **instead**
 
 Interface
 ---------
