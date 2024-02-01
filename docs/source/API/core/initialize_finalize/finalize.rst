@@ -54,3 +54,9 @@ Example
         }  // scope of my_view ends here
         Kokkos::finalize();
     }
+
+
+See also
+--------
+* `Kokkos::initialize <initialize.html>`_: initializes the Kokkos execution environment
+* `Kokkos::push_finalize_hook <push_finalize_hook.html>`_: registers a function to be called on ``Kokkos::finalize()`` invocation
