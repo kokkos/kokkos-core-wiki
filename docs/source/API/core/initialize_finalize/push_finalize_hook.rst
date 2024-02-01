@@ -13,7 +13,7 @@ Usage
 
     Kokkos::push_finalize_hook(func);
 
-Registers the callable object ``func`` to be called when Kokkos execution
+Registers the callable object ``func`` to be called when the Kokkos execution
 environment is terminated.
 
 The functions registered via ``Kokkos::push_finalize_hook()`` will be called in
