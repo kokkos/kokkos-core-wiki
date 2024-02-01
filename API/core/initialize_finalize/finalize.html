@@ -190,6 +190,7 @@
 <li class="toctree-l3"><a class="reference internal" href="ScopeGuard.html"><code class="docutils literal notranslate"><span class="pre">ScopeGuard</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="InitializationSettings.html"><code class="docutils literal notranslate"><span class="pre">InitializationSettings</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="InitArguments.html">InitArguments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="push_finalize_hook.html"><code class="docutils literal notranslate"><span class="pre">push_finalize_hook</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../View.html">View and related</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -528,11 +529,11 @@
 This functions cleans up all Kokkos states and released the associated
 resources.
 Once this function is called, no Kokkos API functions (not even
-<a class="reference external" href="initialize.html#kokkosinitialize">Kokkos::initialize</a>) may be called, except for
+<a class="reference external" href="initialize.html">Kokkos::initialize</a>) may be called, except for
 <code class="docutils literal notranslate"><span class="pre">Kokkos::is_initialized</span></code> or <code class="docutils literal notranslate"><span class="pre">Kokkos::is_finalized</span></code>.
 The user must ensure that all Kokkos objects (e.g. <code class="docutils literal notranslate"><span class="pre">Kokkos::View</span></code>) are detroyed
 before <code class="docutils literal notranslate"><span class="pre">Kokkos::finalize</span></code> gets called.</p>
-<p>Programs are ill-formed if they do not call this function after calling <a class="reference external" href="initialize.html#kokkosinitialize">Kokkos::initialize</a>.</p>
+<p>Programs are ill-formed if they do not call this function after calling <a class="reference external" href="initialize.html">Kokkos::initialize</a>.</p>
 <section id="interface">
 <h2>Interface<a class="headerlink" href="#interface" title="Permalink to this heading">#</a></h2>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Kokkos</span><span class="o">::</span><span class="n">finalize</span><span class="p">();</span>
@@ -565,6 +566,13 @@ before <code class="docutils literal notranslate"><span class="pre">Kokkos::fina
 </pre></div>
 </div>
 </section>
+</section>
+<section id="see-also">
+<h2>See also<a class="headerlink" href="#see-also" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="initialize.html">Kokkos::initialize</a>: initializes the Kokkos execution environment</p></li>
+<li><p><a class="reference external" href="push_finalize_hook.html">Kokkos::push_finalize_hook</a>: registers a function to be called on <code class="docutils literal notranslate"><span class="pre">Kokkos::finalize()</span></code> invocation</p></li>
+</ul>
 </section>
 </section>
 
@@ -632,6 +640,7 @@ before <code class="docutils literal notranslate"><span class="pre">Kokkos::fina
 <li><a class="reference internal" href="#example">Example</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#see-also">See also</a></li>
 </ul>
 </li>
 </ul>
