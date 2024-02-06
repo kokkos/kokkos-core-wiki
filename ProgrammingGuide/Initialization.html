@@ -536,20 +536,17 @@ For specific capabilities check their API reference:</p>
 <section id="initialization-by-command-line-arguments">
 <h2>5.1 Initialization by command-line arguments<a class="headerlink" href="#initialization-by-command-line-arguments" title="Permalink to this heading">#</a></h2>
 <p>The simplest way to initialize Kokkos is by calling the following function:</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Kokkos</span><span class="o">::</span><span class="n">initialize</span><span class="p">(</span><span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">argv</span><span class="p">[]);</span>
 </pre></div>
 </div>
-<p>Kokkos::initialize(int&amp; argc, char* argv[]);</p>
 <p>Just like <cite>MPI_Init</cite>, this function interprets command-line arguments to determine the requested settings. Also like <cite>MPI_Init</cite>, it reserves the right to remove command-line arguments from the input list. This is why it takes <cite>argc</cite> by reference, rather than by value.</p>
 <p>During initialization, one or more execution spaces will be initialized and assigned to one of the following aliases.</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Kokkos</span><span class="o">::</span><span class="n">DefaultExecutionSpace</span><span class="p">;</span>
 </pre></div>
 </div>
-<p>Kokkos::DefaultExecutionSpace;</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Kokkos</span><span class="o">::</span><span class="n">DefaultHostExecutionSpace</span><span class="p">;</span>
 </pre></div>
 </div>
-<p>Kokkos::DefaultHostExecutionSpace;</p>
 <p><cite>DefaultExecutionSpace</cite> is the execution space used with policies and views where one is not explicitly specified.  Primarily, Kokkos will initialize one of the heterogeneous backends (CUDA, HIP, OpenACC, OpenMPTarget, SYCL) as the <cite>DefaultExecutionSpace</cite> if enabled in the build configuration.  In addition, Kokkos requires a <cite>DefaultHostExecutionSpace</cite>.  The <cite>DefaultHostExecutionSpace</cite> is the default execution space used when host operations are required.  If one of the parallel host execution spaces is enabled in the build environment then <cite>Kokkos::Serial</cite> is only initialized if it is explicitly enabled in the build configuration.  If a parallel host execution space is not enabled in the build configuration, then <cite>Kokkos::Serial</cite> is initialized as the <cite>DefaultHostExecutionSpace</cite>.
 Kokkos chooses the two spaces using the following list:</p>
 <ol class="arabic simple">
