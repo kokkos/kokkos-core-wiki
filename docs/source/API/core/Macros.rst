@@ -130,8 +130,6 @@ These defines give information about what third-party libaries Kokkos was compil
 +-------------------------------+-----------------------------------------------------------------------------------------------------------------------+
 | ``KOKKOS_ENABLE_LIBRT``       | Defined if Kokkos links to the POSIX librt for backwards compatibility.                                               |
 +-------------------------------+-----------------------------------------------------------------------------------------------------------------------+
-| ``KOKKOS_ENABLE_MEMKIND``     | Defined if Kokkos enables the `Memkind <https://github.com/memkind/memkind>`_ heap manager, enables HBWSpace.         |
-+-------------------------------+-----------------------------------------------------------------------------------------------------------------------+
 | ``KOKKOS_ENABLE_LIBDL``       | Defined if Kokkos links to the dynamic linker (libdl).                                                                |
 +-------------------------------+-----------------------------------------------------------------------------------------------------------------------+
 | ``KOKKOS_ENABLE_LIBQUADMATH`` | Defined if Kokkos links to the `GCC Quad-Precision Math Library API <https://gcc.gnu.org/onlinedocs/libquadmath/>`_.  |

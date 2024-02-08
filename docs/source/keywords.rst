@@ -197,10 +197,6 @@ The following options control finding and configuring non-CMake TPLs:
       * Location of HWLOC install prefix
       * PATH Default:
 
-    * * ``Kokkos_MEMKIND_DIR`` or ``MEMKIND_ROOT``
-      * Location of MEMKIND install prefix
-      * PATH Default:
-
     * * ``Kokkos_LIBDL_DIR`` or ``LIBDL_ROOT``
       * Location of LIBDL install prefix
       * PATH Default:
