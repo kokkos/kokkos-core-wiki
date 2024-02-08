@@ -170,13 +170,13 @@ The following options control enabling TPLs:
       * ``OFF``
     * * ``Kokkos_ENABLE_HWLOC``
       * Whether to enable the HWLOC library
-      * ``Off``
+      * ``OFF``
     * * ``Kokkos_ENABLE_LIBDL``
       * Whether to enable the LIBDL library
-      * ``On``
+      * ``ON``
     * * ``Kokkos_ENABLE_LIBRT``
       * Whether to enable the LIBRT library
-      * ``Off``
+      * ``OFF``
 
 The following options control finding and configuring non-CMake TPLs:
 
