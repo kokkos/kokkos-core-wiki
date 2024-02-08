@@ -171,9 +171,6 @@ The following options control enabling TPLs:
     * * ``Kokkos_ENABLE_HWLOC``
       * Whether to enable the HWLOC library
       * ``Off``
-    * * ``Kokkos_ENABLE_MEMKIND``
-      * Whether to enable the MEMKIND library
-      * ``Off``
     * * ``Kokkos_ENABLE_LIBDL``
       * Whether to enable the LIBDL library
       * ``On``
