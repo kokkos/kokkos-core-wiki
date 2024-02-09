@@ -128,8 +128,6 @@ These defines give information about what third-party libaries Kokkos was compil
 +===============================+=======================================================================================================================+
 | ``KOKKOS_ENABLE_HWLOC``       | Defined if `libhwloc <https://www.open-mpi.org/projects/hwloc/>`_ is enabled for NUMA and architecture information.   |
 +-------------------------------+-----------------------------------------------------------------------------------------------------------------------+
-| ``KOKKOS_ENABLE_LIBRT``       | Defined if Kokkos links to the POSIX librt for backwards compatibility.                                               |
-+-------------------------------+-----------------------------------------------------------------------------------------------------------------------+
 | ``KOKKOS_ENABLE_LIBDL``       | Defined if Kokkos links to the dynamic linker (libdl).                                                                |
 +-------------------------------+-----------------------------------------------------------------------------------------------------------------------+
 | ``KOKKOS_ENABLE_LIBQUADMATH`` | Defined if Kokkos links to the `GCC Quad-Precision Math Library API <https://gcc.gnu.org/onlinedocs/libquadmath/>`_.  |
