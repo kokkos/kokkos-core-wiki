@@ -132,6 +132,8 @@ These defines give information about what third-party libaries Kokkos was compil
 +-------------------------------+-----------------------------------------------------------------------------------------------------------------------+
 | ``KOKKOS_ENABLE_LIBQUADMATH`` | Defined if Kokkos links to the `GCC Quad-Precision Math Library API <https://gcc.gnu.org/onlinedocs/libquadmath/>`_.  |
 +-------------------------------+-----------------------------------------------------------------------------------------------------------------------+
+| ``KOKKOS_ENABLE_ONEDPL``      | Defined if Kokkos links to the `oneDPL library <https://github.com/oneapi-src/oneDPL>`_ when using the SYCL backend.  |
++-------------------------------+-----------------------------------------------------------------------------------------------------------------------+
 
 Architectures
 -------------

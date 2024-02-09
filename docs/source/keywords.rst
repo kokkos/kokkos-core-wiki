@@ -225,6 +225,9 @@ The following options control enabling TPLs:
     * * ``Kokkos_ENABLE_LIBDL``
       * Whether to enable the LIBDL library
       * ``ON``
+    * * ``Kokkos_ENABLE_ONEDPL``
+      * Whether to enable the oneDPL library
+      * ``ON``
 
 The following options control finding and configuring non-CMake TPLs:
 
