@@ -527,13 +527,71 @@
 </div>
 <p>This page is organized in four sections:</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="#keywords-backends"><span class="std std-ref">Device Backends</span></a></p></li>
-<li><p><a class="reference internal" href="#keywords-enable-options"><span class="std std-ref">Enable Options</span></a></p></li>
+<li><p><a class="reference internal" href="#keywords-backends"><span class="std std-ref">Kokkos backends</span></a></p></li>
+<li><p><a class="reference internal" href="#keywords-enable-options"><span class="std std-ref">Options</span></a></p></li>
 <li><p><a class="reference internal" href="#keywords-tpls"><span class="std std-ref">Third-party Libraries (TPLs)</span></a></p></li>
-<li><p><a class="reference internal" href="#keywords-arch"><span class="std std-ref">Architecture Keywords</span></a></p></li>
+<li><p><a class="reference internal" href="#keywords-arch"><span class="std std-ref">Architectures</span></a></p></li>
 </ul>
+<section id="kokkos-backends">
+<span id="keywords-backends"></span><h2>Kokkos backends<a class="headerlink" href="#kokkos-backends" title="Permalink to this heading">#</a></h2>
+<section id="serial-backend">
+<h3>Serial backend<a class="headerlink" href="#serial-backend" title="Permalink to this heading">#</a></h3>
+<div class="table-wrapper colwidths-given docutils container">
+<table class="docutils align-left">
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 65%" />
+<col style="width: 10%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"></th>
+<th class="head"><p>Description/info</p></th>
+<th class="head"><p>Default</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_SERIAL</span></code></p></td>
+<td><p>To build Serial backend targeting CPUs</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="host-parallel-backends">
+<h3>Host parallel backends<a class="headerlink" href="#host-parallel-backends" title="Permalink to this heading">#</a></h3>
+<div class="table-wrapper colwidths-given docutils container">
+<table class="docutils align-left">
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 65%" />
+<col style="width: 10%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"></th>
+<th class="head"><p>Description/info</p></th>
+<th class="head"><p>Default</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_OPENMP</span></code></p></td>
+<td><p>To build OpenMP backend</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_THREADS</span></code></p></td>
+<td><p>To build C++ Threads backend</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_HPX</span></code></p></td>
+<td><p><span class="red">[Experimental]</span> To build HPX backend</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
 <section id="device-backends">
-<span id="keywords-backends"></span><h2>Device Backends<a class="headerlink" href="#device-backends" title="Permalink to this heading">#</a></h2>
+<h3>Device backends<a class="headerlink" href="#device-backends" title="Permalink to this heading">#</a></h3>
 <div class="table-wrapper colwidths-given docutils container">
 <table class="docutils align-left">
 <colgroup>
@@ -549,43 +607,30 @@
 </thead>
 <tbody>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_CUDA</span></code></p></td>
-<td><p>To build CUDA backend</p></td>
+<td><p>To build CUDA backend targeting NVIDIA GPUs</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_OPENMP</span></code></p></td>
-<td><p>To build OpenMP backend</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_THREADS</span></code></p></td>
-<td><p>To build C++ Threads backend</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_SERIAL</span></code></p></td>
-<td><p>To build serial backend</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">ON</span></code></p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_HIP</span></code></p></td>
-<td><p>To build HIP backend</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_OPENMPTARGET</span></code></p></td>
-<td><p><span class="red">[Experimental]</span> To build the OpenMP target backend</p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_HIP</span></code></p></td>
+<td><p>To build HIP backend targeting AMD GPUs</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_SYCL</span></code></p></td>
 <td><p><span class="red">[Experimental]</span> To build SYCL backend</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_HPX</span></code></p></td>
-<td><p><span class="red">[Experimental]</span> To build HPX backend</p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_OPENMPTARGET</span></code></p></td>
+<td><p><span class="red">[Experimental]</span> To build the OpenMP target backend</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
 </tr>
 </tbody>
 </table>
 </div>
 </section>
-<section id="enable-options">
-<span id="keywords-enable-options"></span><h2>Enable Options<a class="headerlink" href="#enable-options" title="Permalink to this heading">#</a></h2>
+</section>
+<section id="options">
+<span id="keywords-enable-options"></span><h2>Options<a class="headerlink" href="#options" title="Permalink to this heading">#</a></h2>
+<section id="general-options">
+<h3>General options<a class="headerlink" href="#general-options" title="Permalink to this heading">#</a></h3>
 <div class="table-wrapper colwidths-given docutils container">
 <table class="docutils align-left">
 <colgroup>
@@ -600,14 +645,78 @@
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_AGGRESSIVE_VECTORIZATION</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_BENCHMARKS</span></code></p></td>
+<td><p>Build benchmarks</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_EXAMPLES</span></code></p></td>
+<td><p>Build examples</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_TESTS</span></code></p></td>
+<td><p>Build tests</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_TUNING</span></code></p></td>
+<td><p>Create bindings for tuning tools</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_DEBUG</span></code></p></td>
+<td><p>Activate extra debug features - may increase compile times</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_DEBUG_BOUNDS_CHECK</span></code></p></td>
+<td><p>Use bounds checking - will increase runtime</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_DEBUG_DUALVIEW_MODIFY_CHECK</span></code></p></td>
+<td><p>Debug check on dual views</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_DEPRECATED_CODE_3</span></code></p></td>
+<td><p>Enable deprecated code in the Kokkos 3.x series</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_DEPRECATED_CODE_4</span></code></p></td>
+<td><p>Enable deprecated code in the Kokkos 4.x series</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ON</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_AGGRESSIVE_VECTORIZATION</span></code></p></td>
 <td><p>Aggressively vectorize loops</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_COMPILER_WARNINGS</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_COMPILER_WARNINGS</span></code></p></td>
 <td><p>Print all compiler warnings</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
 </tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_HEADER_SELF_CONTAINMENT_TESTS</span></code></p></td>
+<td><p>Check that headers are self-contained</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_LARGE_MEM_TESTS</span></code></p></td>
+<td><p>Perform extra large memory tests</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="backend-specific-options">
+<h3>Backend-specific options<a class="headerlink" href="#backend-specific-options" title="Permalink to this heading">#</a></h3>
+<div class="table-wrapper colwidths-given docutils container">
+<table class="docutils align-left">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 52%" />
+<col style="width: 28%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"></th>
+<th class="head"><p>Description/info</p></th>
+<th class="head"><p>Default</p></th>
+</tr>
+</thead>
+<tbody>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_CUDA_CONSTEXPR</span></code></p></td>
 <td><p>Activate experimental relaxed constexpr functions</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
@@ -628,50 +737,19 @@
 <td><p>Use unified memory (UM) by default for CUDA</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_DEBUG</span></code></p></td>
-<td><p>Activate extra debug features - may increase compile times</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_DEBUG_BOUNDS_CHECK</span></code></p></td>
-<td><p>Use bounds checking - will increase runtime</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_DEBUG_DUALVIEW_MODIFY_CHECK</span></code></p></td>
-<td><p>Debug check on dual views</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_DEPRECATED_CODE</span></code></p></td>
-<td><p>Enable deprecated code</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_EXAMPLES</span></code></p></td>
-<td><p>Enable building examples</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_HIP_MULTIPLE_KERNEL_INSTANTIATIONS</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_HIP_MULTIPLE_KERNEL_INSTANTIATIONS</span></code></p></td>
 <td><p>Instantiate multiple kernels at compile time - improve performance but increase compile time</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_HIP_RELOCATABLE_DEVICE_CODE</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_HIP_RELOCATABLE_DEVICE_CODE</span></code></p></td>
 <td><p>Enable relocatable device code (RDC) for HIP</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_LARGE_MEM_TESTS</span></code></p></td>
-<td><p>Perform extra large memory tests</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_TESTS</span></code></p></td>
-<td><p>Build tests</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_TUNING</span></code></p></td>
-<td><p>Create bindings for tuning tools</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
 </tr>
 </tbody>
 </table>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_CUDA_LAMBDA</span></code> default value is <code class="docutils literal notranslate"><span class="pre">OFF</span></code> until 3.7 and <code class="docutils literal notranslate"><span class="pre">ON</span></code> since 4.0</p>
+</section>
 </section>
 <section id="third-party-libraries-tpls">
 <span id="keywords-tpls"></span><h2>Third-party Libraries (TPLs)<a class="headerlink" href="#third-party-libraries-tpls" title="Permalink to this heading">#</a></h2>
@@ -690,15 +768,11 @@
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_HPX</span></code></p></td>
-<td><p>Whether to enable the HPX library</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_HWLOC</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_HWLOC</span></code></p></td>
 <td><p>Whether to enable the HWLOC library</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_LIBDL</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_LIBDL</span></code></p></td>
 <td><p>Whether to enable the LIBDL library</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">ON</span></code></p></td>
 </tr>
@@ -758,8 +832,10 @@
 </table>
 </div>
 </section>
-<section id="architecture-keywords">
-<span id="keywords-arch"></span><h2>Architecture Keywords<a class="headerlink" href="#architecture-keywords" title="Permalink to this heading">#</a></h2>
+<section id="architectures">
+<span id="keywords-arch"></span><h2>Architectures<a class="headerlink" href="#architectures" title="Permalink to this heading">#</a></h2>
+<section id="cpu-architectures">
+<h3>CPU architectures<a class="headerlink" href="#cpu-architectures" title="Permalink to this heading">#</a></h3>
 <div class="table-wrapper colwidths-given docutils container">
 <table class="docutils align-left">
 <colgroup>
@@ -780,38 +856,6 @@
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_A64FX</span></code></p></td>
 <td><p>Optimize for ARMv8.2 with SVE Support</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_ADA89</span></code></p></td>
-<td><p>Optimize for the NVIDIA Ada generation CC 8.9 <sup>since Kokkos 4.1</sup></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_AMD_GFX906</span></code></p></td>
-<td><p>Optimize for AMD GPU MI50/MI60 GFX906 <sup>since Kokkos 4.2</sup></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_AMD_GFX908</span></code></p></td>
-<td><p>Optimize for AMD GPU MI100 GFX908 <sup>since Kokkos 4.2</sup></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_AMD_GFX90A</span></code></p></td>
-<td><p>Optimize for AMD GPU MI200 series GFX90A <sup>since Kokkos 4.2</sup></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_AMD_GFX1030</span></code></p></td>
-<td><p>Optimize for AMD GPU V620/W6800 GFX1030 <sup>since Kokkos 4.2</sup></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_AMD_GFX1100</span></code></p></td>
-<td><p>Optimize for AMD GPU 7900xt GFX1100 <sup>since Kokkos 4.2</sup></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_AMPERE80</span></code></p></td>
-<td><p>Optimize for the NVIDIA Ampere generation CC 8.0</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_AMPERE86</span></code></p></td>
-<td><p>Optimize for the NVIDIA Ampere generation CC 8.6</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_AMDAVX</span></code></p></td>
@@ -842,56 +886,8 @@
 <td><p>Optimize for BGQ architecture</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_HOPPER90</span></code></p></td>
-<td><p>Optimize for the NVIDIA Hopper generation CC 9.0 <sup>since Kokkos 4.0</sup></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_HSW</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_HSW</span></code></p></td>
 <td><p>Optimize for HSW architecture</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_INTEL_GEN</span></code></p></td>
-<td><p>Optimize for Intel GPUs, Just-In-Time compilation*</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_INTEL_DG1</span></code></p></td>
-<td><p>Optimize for Intel Iris XeMAX GPU</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_INTEL_GEN9</span></code></p></td>
-<td><p>Optimize for Intel GPU Gen9</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_INTEL_GEN11</span></code></p></td>
-<td><p>Optimize for Intel GPU Gen11</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_INTEL_GEN12LP</span></code></p></td>
-<td><p>Optimize for Intel GPU Gen12LP</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_INTEL_XEHP</span></code></p></td>
-<td><p>Optimize for Intel GPU Xe-HP</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_INTEL_PVC</span></code></p></td>
-<td><p>Optimize for Intel GPU Ponte Vecchio/GPU Max</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_KEPLER30</span></code></p></td>
-<td><p>Optimize for KEPLER30 architecture</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_KEPLER32</span></code></p></td>
-<td><p>Optimize for KEPLER32 architecture</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_KEPLER35</span></code></p></td>
-<td><p>Optimize for KEPLER35 architecture</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_KEPLER37</span></code></p></td>
-<td><p>Optimize for KEPLER37 architecture</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_KNC</span></code></p></td>
@@ -900,30 +896,6 @@
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_KNL</span></code></p></td>
 <td><p>Optimize for KNL architecture</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_MAXWELL50</span></code></p></td>
-<td><p>Optimize for MAXWELL50 architecture</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_MAXWELL52</span></code></p></td>
-<td><p>Optimize for MAXWELL52 architecture</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_MAXWELL53</span></code></p></td>
-<td><p>Optimize for MAXWELL53 architecture</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_NAVI1030</span></code></p></td>
-<td><p>Optimize for AMD GPU V620/W6800 GFX1030 <sup>since Kokkos 4.0</sup> (Prefer <code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_AMD_GFX1030</span></code>)</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_PASCAL60</span></code></p></td>
-<td><p>Optimize for PASCAL60 architecture</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_PASCAL61</span></code></p></td>
-<td><p>Optimize for PASCAL61 architecture</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_POWER7</span></code></p></td>
@@ -950,8 +922,187 @@
 <td><p>Optimize for Sapphire Rapids architecture</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
 </tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_WSM</span></code></p></td>
+<td><p>Optimize for WSM architecture</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_ZEN</span></code></p></td>
+<td><p>Optimize for Zen architecture</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_ZEN2</span></code></p></td>
+<td><p>Optimize for Zen2 architecture</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_ZEN3</span></code></p></td>
+<td><p>Optimize for Zen3 architecture</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="gpu-architectures">
+<h3>GPU Architectures<a class="headerlink" href="#gpu-architectures" title="Permalink to this heading">#</a></h3>
+<section id="nvidia-gpus">
+<h4>NVIDIA GPUs<a class="headerlink" href="#nvidia-gpus" title="Permalink to this heading">#</a></h4>
+<p>The Kokkos naming convention is to aggregate the eponym of the Nvidia GPU
+microarchitecture and the associated CUDA Compute Capability.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_&lt;MICROARCHITECTURE&gt;&lt;COMPUTE_CAPABILITY&gt;</span></code></p>
+<p>If the CUDA backend is enabled and no NVIDIA GPU architecture is specified,
+Kokkos will attempt to autodetect the architecture flag at configuration time.</p>
+<div class="table-wrapper colwidths-given docutils container">
+<table class="docutils align-left">
+<colgroup>
+<col style="width: 19%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 24%" />
+<col style="width: 29%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>NVIDIA GPUs</strong></p></th>
+<th class="head"><p>Architecture</p></th>
+<th class="head"><p>Compute Capability</p></th>
+<th class="head"><p>Models</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_HOPPER90</span></code></p></td>
+<td><p>Hopper</p></td>
+<td><p>9.0</p></td>
+<td><p>H100</p></td>
+<td><p>(since Kokkos 4.0)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_ADA89</span></code></p></td>
+<td><p>Ada Lovelace</p></td>
+<td><p>8.9</p></td>
+<td><p>L4, L40</p></td>
+<td><p>(since Kokkos 4.1)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_AMPERE86</span></code></p></td>
+<td><p>Ampere</p></td>
+<td><p>8.6</p></td>
+<td><p>A40, A10, A16, A2</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_AMPERE80</span></code></p></td>
+<td><p>Ampere</p></td>
+<td><p>8.0</p></td>
+<td><p>A100, A30</p></td>
+<td></td>
+</tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_TURING75</span></code></p></td>
-<td><p>Optimize for TURING75 architecture</p></td>
+<td><p>Turing</p></td>
+<td><p>7.5</p></td>
+<td><p>T4</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_VOLTA72</span></code></p></td>
+<td><p>Volta</p></td>
+<td><p>7.2</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_VOLTA70</span></code></p></td>
+<td><p>Volta</p></td>
+<td><p>7.0</p></td>
+<td><p>V100</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_PASCAL61</span></code></p></td>
+<td><p>Pascal</p></td>
+<td><p>6.1</p></td>
+<td><p>P40, P4</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_PASCAL60</span></code></p></td>
+<td><p>Pascal</p></td>
+<td><p>6.0</p></td>
+<td><p>P100</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_MAXWELL53</span></code></p></td>
+<td><p>Maxwell</p></td>
+<td><p>5.3</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_MAXWELL52</span></code></p></td>
+<td><p>Maxwell</p></td>
+<td><p>5.2</p></td>
+<td><p>M60, M40</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_MAXWELL50</span></code></p></td>
+<td><p>Maxwell</p></td>
+<td><p>5.0</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_KEPLER37</span></code></p></td>
+<td><p>Kepler</p></td>
+<td><p>3.7</p></td>
+<td><p>K80</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_KEPLER35</span></code></p></td>
+<td><p>Kepler</p></td>
+<td><p>3.5</p></td>
+<td><p>K40, K20</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_KEPLER32</span></code></p></td>
+<td><p>Kepler</p></td>
+<td><p>3.2</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_KEPLER30</span></code></p></td>
+<td><p>Kepler</p></td>
+<td><p>3.0</p></td>
+<td><p>K10</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="amd-gpus">
+<h4>AMD GPUs<a class="headerlink" href="#amd-gpus" title="Permalink to this heading">#</a></h4>
+<div class="table-wrapper colwidths-given docutils container">
+<table class="docutils align-left">
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 65%" />
+<col style="width: 10%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>AMD GPUs</strong></p></th>
+<th class="head"><p>Description/info</p></th>
+<th class="head"><p>Default</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_AMD_GFX90A</span></code></p></td>
+<td><p>Optimize for AMD GPU MI200 series GFX90A <sup>since Kokkos 4.2</sup></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_AMD_GFX908</span></code></p></td>
+<td><p>Optimize for AMD GPU MI100 GFX908 <sup>since Kokkos 4.2</sup></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_AMD_GFX906</span></code></p></td>
+<td><p>Optimize for AMD GPU MI50/MI60 GFX906 <sup>since Kokkos 4.2</sup></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_AMD_GFX1100</span></code></p></td>
+<td><p>Optimize for AMD GPU 7900xt GFX1100 <sup>since Kokkos 4.2</sup></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_AMD_GFX1030</span></code></p></td>
+<td><p>Optimize for AMD GPU V620/W6800 GFX1030 <sup>since Kokkos 4.2</sup></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_VEGA900</span></code></p></td>
@@ -970,41 +1121,9 @@
 <td><p>Optimize for AMD GPU MI200 series GFX90A (Prefer <code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_AMD_GFX90A</span></code>)</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_VOLTA70</span></code></p></td>
-<td><p>Optimize for VOLTA70 architecture</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_VOLTA72</span></code></p></td>
-<td><p>Optimize for VOLTA72 architecture</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_WSM</span></code></p></td>
-<td><p>Optimize for WSM architecture</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_ZEN</span></code></p></td>
-<td><p>Optimize for Zen architecture</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_ZEN2</span></code></p></td>
-<td><p>Optimize for Zen2 architecture</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_ZEN3</span></code></p></td>
-<td><p>Optimize for Zen3 architecture</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
-</tr>
 </tbody>
 </table>
 </div>
-<p>* <code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_INTEL_GEN</span></code> enables Just-In-Time compilation for Intel GPUs whereas all the other flags for Intel compilers
-request Ahead-Of-Time compilation. Just-In-Time compilation means that the compiler is invoked again when the binaries created
-are actually executed and only at that point the architecture to compile for is determined. On the other hand, Ahead-Of-Time
-compilation describes the standard model where the compiler is only invoked once to create the binary and the architecture to
-compile for is determined before the program is run.</p>
-</section>
-<section id="amd-architectures">
-<span id="kweyword-amd"></span><h2>AMD Architectures<a class="headerlink" href="#amd-architectures" title="Permalink to this heading">#</a></h2>
 <div class="table-wrapper colwidths-given docutils container">
 <table class="docutils align-left">
 <colgroup>
@@ -1038,6 +1157,65 @@ compile for is determined before the program is run.</p>
 </tbody>
 </table>
 </div>
+</section>
+<section id="intel-gpus">
+<h4>Intel GPUs<a class="headerlink" href="#intel-gpus" title="Permalink to this heading">#</a></h4>
+<div class="table-wrapper colwidths-given docutils container">
+<table class="docutils align-left">
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 65%" />
+<col style="width: 10%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Intel GPUs</strong></p></th>
+<th class="head"><p>Description/info</p></th>
+<th class="head"><p>Default</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_INTEL_GEN</span></code></p></td>
+<td><p>Optimize for Intel GPUs, Just-In-Time compilation*</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_INTEL_DG1</span></code></p></td>
+<td><p>Optimize for Intel Iris XeMAX GPU</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_INTEL_GEN9</span></code></p></td>
+<td><p>Optimize for Intel GPU Gen9</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_INTEL_GEN11</span></code></p></td>
+<td><p>Optimize for Intel GPU Gen11</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_INTEL_GEN12LP</span></code></p></td>
+<td><p>Optimize for Intel GPU Gen12LP</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_INTEL_XEHP</span></code></p></td>
+<td><p>Optimize for Intel GPU Xe-HP</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_INTEL_PVC</span></code></p></td>
+<td><p>Optimize for Intel GPU Ponte Vecchio/GPU Max</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>* <code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_INTEL_GEN</span></code> enables Just-In-Time compilation for Intel GPUs
+whereas all the other flags for Intel compilers request Ahead-Of-Time
+compilation.</p>
+<p>Just-In-Time (JIT) compilation means that the compiler is invoked again when
+the binaries created are actually executed and only at that point the
+architecture to compile for is determined.</p>
+<p>On the other hand, Ahead-Of-Time (AOT) compilation describes the standard model
+where the compiler is only invoked once to create the binary and the
+architecture to compile for is determined before the program is run.</p>
+</section>
+</section>
 </section>
 </section>
 
@@ -1099,11 +1277,28 @@ compile for is determined before the program is run.</p>
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">CMake Keywords</a><ul>
-<li><a class="reference internal" href="#device-backends">Device Backends</a></li>
-<li><a class="reference internal" href="#enable-options">Enable Options</a></li>
+<li><a class="reference internal" href="#kokkos-backends">Kokkos backends</a><ul>
+<li><a class="reference internal" href="#serial-backend">Serial backend</a></li>
+<li><a class="reference internal" href="#host-parallel-backends">Host parallel backends</a></li>
+<li><a class="reference internal" href="#device-backends">Device backends</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#options">Options</a><ul>
+<li><a class="reference internal" href="#general-options">General options</a></li>
+<li><a class="reference internal" href="#backend-specific-options">Backend-specific options</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#third-party-libraries-tpls">Third-party Libraries (TPLs)</a></li>
-<li><a class="reference internal" href="#architecture-keywords">Architecture Keywords</a></li>
-<li><a class="reference internal" href="#amd-architectures">AMD Architectures</a></li>
+<li><a class="reference internal" href="#architectures">Architectures</a><ul>
+<li><a class="reference internal" href="#cpu-architectures">CPU architectures</a></li>
+<li><a class="reference internal" href="#gpu-architectures">GPU Architectures</a><ul>
+<li><a class="reference internal" href="#nvidia-gpus">NVIDIA GPUs</a></li>
+<li><a class="reference internal" href="#amd-gpus">AMD GPUs</a></li>
+<li><a class="reference internal" href="#intel-gpus">Intel GPUs</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
