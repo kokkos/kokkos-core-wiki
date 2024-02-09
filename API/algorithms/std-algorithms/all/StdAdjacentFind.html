@@ -494,7 +494,7 @@
         </a>
         <div class="content-icon-container">
 <div class="edit-this-page">
-  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/API/algorithms/std-algorithms/all/StdAdjacentFind.md" title="Edit this page">
+  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/API/algorithms/std-algorithms/all/StdAdjacentFind.rst" title="Edit this page">
     <svg aria-hidden="true" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
       <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4"></path>
@@ -518,15 +518,24 @@
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="adjacent-find">
+          <section id="adjacent-find">
 <h1><code class="docutils literal notranslate"><span class="pre">adjacent_find</span></code><a class="headerlink" href="#adjacent-find" title="Permalink to this heading">#</a></h1>
-<p>Header File: <code class="docutils literal notranslate"><span class="pre">Kokkos_StdAlgorithms.hpp</span></code></p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">namespace</span><span class="w"> </span><span class="nn">Kokkos</span><span class="p">{</span>
-<span class="k">namespace</span><span class="w"> </span><span class="nn">Experimental</span><span class="p">{</span>
-
-<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">ExecutionSpace</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">IteratorType</span><span class="o">&gt;</span>
-<span class="n">IteratorType</span><span class="w"> </span><span class="n">adjacent_find</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">ExecutionSpace</span><span class="o">&amp;</span><span class="w"> </span><span class="n">exespace</span><span class="p">,</span><span class="w"> </span><span class="n">IteratorType</span><span class="w"> </span><span class="n">first</span><span class="p">,</span><span class="w">          </span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-<span class="w">                           </span><span class="n">IteratorType</span><span class="w"> </span><span class="n">last</span><span class="p">);</span>
+<p>Header: <code class="docutils literal notranslate"><span class="pre">&lt;Kokkos_StdAlgorithms.hpp&gt;</span></code></p>
+<section id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this heading">#</a></h2>
+<p>Searches a given range or rank-1 <code class="docutils literal notranslate"><span class="pre">View</span></code> for two consecutive equal elements.</p>
+</section>
+<section id="interface">
+<h2>Interface<a class="headerlink" href="#interface" title="Permalink to this heading">#</a></h2>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This is currently inside the <code class="docutils literal notranslate"><span class="pre">Kokkos::Experimental</span></code> namespace.</p>
+</div>
+<section id="overload-set-accepting-execution-space">
+<h3>Overload set accepting execution space<a class="headerlink" href="#overload-set-accepting-execution-space" title="Permalink to this heading">#</a></h3>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">ExecutionSpace</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">IteratorType</span><span class="o">&gt;</span>
+<span class="n">IteratorType</span><span class="w"> </span><span class="n">adjacent_find</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">ExecutionSpace</span><span class="o">&amp;</span><span class="w"> </span><span class="n">exespace</span><span class="p">,</span><span class="w">                              </span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="w">                           </span><span class="n">IteratorType</span><span class="w"> </span><span class="n">first</span><span class="p">,</span><span class="w"> </span><span class="n">IteratorType</span><span class="w"> </span><span class="n">last</span><span class="p">);</span>
 
 <span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">ExecutionSpace</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">IteratorType</span><span class="o">&gt;</span>
 <span class="n">IteratorType</span><span class="w"> </span><span class="n">adjacent_find</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">label</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">ExecutionSpace</span><span class="o">&amp;</span><span class="w"> </span><span class="n">exespace</span><span class="p">,</span><span class="w">    </span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
@@ -541,8 +550,9 @@
 <span class="w">                   </span><span class="k">const</span><span class="w"> </span><span class="o">::</span><span class="n">Kokkos</span><span class="o">::</span><span class="n">View</span><span class="o">&lt;</span><span class="n">DataType</span><span class="p">,</span><span class="w"> </span><span class="n">Properties</span><span class="p">...</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">view</span><span class="p">);</span>
 
 <span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">ExecutionSpace</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">IteratorType</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">BinaryPredicateType</span><span class="o">&gt;</span>
-<span class="n">IteratorType</span><span class="w"> </span><span class="n">adjacent_find</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">ExecutionSpace</span><span class="o">&amp;</span><span class="w"> </span><span class="n">exespace</span><span class="p">,</span><span class="w"> </span><span class="n">IteratorType</span><span class="w"> </span><span class="n">first</span><span class="p">,</span><span class="w">          </span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
-<span class="w">                           </span><span class="n">IteratorType</span><span class="w"> </span><span class="n">last</span><span class="p">,</span><span class="w"> </span><span class="n">BinaryPredicateType</span><span class="w"> </span><span class="n">pred</span><span class="p">);</span>
+<span class="n">IteratorType</span><span class="w"> </span><span class="n">adjacent_find</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">ExecutionSpace</span><span class="o">&amp;</span><span class="w"> </span><span class="n">exespace</span><span class="p">,</span><span class="w">                              </span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="w">                           </span><span class="n">IteratorType</span><span class="w"> </span><span class="n">first</span><span class="p">,</span><span class="w"> </span><span class="n">IteratorType</span><span class="w"> </span><span class="n">last</span><span class="p">,</span>
+<span class="w">                           </span><span class="n">BinaryPredicateType</span><span class="w"> </span><span class="n">pred</span><span class="p">);</span>
 
 <span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">ExecutionSpace</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">IteratorType</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">BinaryPredicateType</span><span class="o">&gt;</span>
 <span class="n">IteratorType</span><span class="w"> </span><span class="n">adjacent_find</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">label</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">ExecutionSpace</span><span class="o">&amp;</span><span class="w"> </span><span class="n">exespace</span><span class="p">,</span><span class="w">    </span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
@@ -560,52 +570,94 @@
 <span class="k">auto</span><span class="w"> </span><span class="n">adjacent_find</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">label</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">ExecutionSpace</span><span class="o">&amp;</span><span class="w"> </span><span class="n">exespace</span><span class="p">,</span><span class="w">            </span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
 <span class="w">                   </span><span class="k">const</span><span class="w"> </span><span class="o">::</span><span class="n">Kokkos</span><span class="o">::</span><span class="n">View</span><span class="o">&lt;</span><span class="n">DataType</span><span class="p">,</span><span class="w"> </span><span class="n">Properties</span><span class="p">...</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">view</span><span class="p">,</span>
 <span class="w">                   </span><span class="n">BinaryPredicateType</span><span class="w"> </span><span class="n">pred</span><span class="p">);</span>
-
-<span class="p">}</span><span class="w"> </span><span class="c1">//end namespace Experimental</span>
-<span class="p">}</span><span class="w"> </span><span class="c1">//end namespace Kokkos</span>
 </pre></div>
 </div>
-<section id="description">
-<h2>Description<a class="headerlink" href="#description" title="Permalink to this heading">#</a></h2>
-<p>Searches the range <code class="docutils literal notranslate"><span class="pre">[first,last)</span></code> (1,2,5,6) or <code class="docutils literal notranslate"><span class="pre">view</span></code> (3,4,7,8) for two consecutive equal elements.</p>
+</section>
+<section id="overload-set-accepting-a-team-handle">
+<h3>Overload set accepting a team handle<a class="headerlink" href="#overload-set-accepting-a-team-handle" title="Permalink to this heading">#</a></h3>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 4.2.</span></p>
+</div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">TeamHandleType</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">IteratorType</span><span class="o">&gt;</span>
+<span class="n">KOKKOS_FUNCTION</span>
+<span class="n">IteratorType</span><span class="w"> </span><span class="n">adjacent_find</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">TeamHandleType</span><span class="o">&amp;</span><span class="w"> </span><span class="n">teamHandle</span><span class="p">,</span><span class="w">                            </span><span class="p">(</span><span class="mi">9</span><span class="p">)</span>
+<span class="w">                           </span><span class="n">IteratorType</span><span class="w"> </span><span class="n">first</span><span class="p">,</span><span class="w"> </span><span class="n">IteratorType</span><span class="w"> </span><span class="n">last</span><span class="p">);</span>
+
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">TeamHandleType</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">DataType</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="p">...</span><span class="w"> </span><span class="n">Properties</span><span class="o">&gt;</span>
+<span class="n">KOKKOS_FUNCTION</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">adjacent_find</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">TeamHandleType</span><span class="o">&amp;</span><span class="w"> </span><span class="n">teamHandle</span><span class="p">,</span><span class="w">                                   </span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="w">                   </span><span class="k">const</span><span class="w"> </span><span class="o">::</span><span class="n">Kokkos</span><span class="o">::</span><span class="n">View</span><span class="o">&lt;</span><span class="n">DataType</span><span class="p">,</span><span class="w"> </span><span class="n">Properties</span><span class="p">...</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">view</span><span class="p">);</span>
+
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">TeamHandleType</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">IteratorType</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">BinaryPredicateType</span><span class="o">&gt;</span>
+<span class="n">KOKKOS_FUNCTION</span>
+<span class="n">IteratorType</span><span class="w"> </span><span class="n">adjacent_find</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">TeamHandleType</span><span class="o">&amp;</span><span class="w"> </span><span class="n">teamHandle</span><span class="p">,</span><span class="w">                           </span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>
+<span class="w">                           </span><span class="n">IteratorType</span><span class="w"> </span><span class="n">first</span><span class="p">,</span><span class="w"> </span><span class="n">IteratorType</span><span class="w"> </span><span class="n">last</span><span class="p">,</span>
+<span class="w">                           </span><span class="n">BinaryPredicateType</span><span class="w"> </span><span class="n">pred</span><span class="p">);</span>
+
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">TeamHandleType</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">DataType</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="p">...</span><span class="w"> </span><span class="n">Properties</span><span class="p">,</span>
+<span class="w">          </span><span class="k">class</span><span class="w"> </span><span class="nc">BinaryPredicateType</span><span class="o">&gt;</span>
+<span class="n">KOKKOS_FUNCTION</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">adjacent_find</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">TeamHandleType</span><span class="o">&amp;</span><span class="w"> </span><span class="n">teamHandle</span><span class="p">,</span>
+<span class="w">                   </span><span class="k">const</span><span class="w"> </span><span class="o">::</span><span class="n">Kokkos</span><span class="o">::</span><span class="n">View</span><span class="o">&lt;</span><span class="n">DataType</span><span class="p">,</span><span class="w"> </span><span class="n">Properties</span><span class="p">...</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">view</span><span class="p">,</span><span class="w">                </span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+<span class="w">                   </span><span class="n">BinaryPredicateType</span><span class="w"> </span><span class="n">pred</span><span class="p">);</span>
+</pre></div>
+</div>
 </section>
 <section id="parameters-and-requirements">
-<h2>Parameters and Requirements<a class="headerlink" href="#parameters-and-requirements" title="Permalink to this heading">#</a></h2>
+<h3>Parameters and Requirements<a class="headerlink" href="#parameters-and-requirements" title="Permalink to this heading">#</a></h3>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">exespace</span></code>: execution space instance</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">teamHandle</span></code>: team handle instance given inside a parallel region when using a TeamPolicy</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">label</span></code>: string forwarded to internal parallel kernels for debugging purposes</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">exespace</span></code>:</p>
-<ul>
-<li><p>execution space instance</p></li>
-</ul>
-</li>
-<li><p><code class="docutils literal notranslate"><span class="pre">label</span></code>:</p>
-<ul>
 <li><p>1,5: The default string is “Kokkos::adjacent_find_iterator_api_default”.</p></li>
 <li><p>3,7: The default string is “Kokkos::adjacent_find_view_api_default”.</p></li>
+<li><p>NOTE: overloads accepting a team handle do not use a label internally</p></li>
 </ul>
 </li>
-<li><p><code class="docutils literal notranslate"><span class="pre">first,</span> <span class="pre">last</span></code>:</p>
-<ul>
-<li><p>range of elements to search in</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">first,</span> <span class="pre">last</span></code>: range of elements to search in</p>
+<ul class="simple">
 <li><p>must be <em>random access iterators</em>, e.g., returned from <code class="docutils literal notranslate"><span class="pre">Kokkos::Experimental::(c)begin/(c)end</span></code></p></li>
-<li><p>must represent a valid range, i.e., <code class="docutils literal notranslate"><span class="pre">last</span> <span class="pre">&gt;=</span> <span class="pre">first</span></code> (this condition is checked in debug mode)</p></li>
-<li><p>must be accessible from <code class="docutils literal notranslate"><span class="pre">exespace</span></code></p></li>
+<li><p>must represent a valid range, i.e., <code class="docutils literal notranslate"><span class="pre">last</span> <span class="pre">&gt;=</span> <span class="pre">first</span></code></p></li>
+<li><p>must be accessible from <code class="docutils literal notranslate"><span class="pre">exespace</span></code> or from the execution space associated with the team handle</p></li>
 </ul>
 </li>
 <li><p><code class="docutils literal notranslate"><span class="pre">view</span></code>:</p>
-<ul>
+<ul class="simple">
 <li><p>must be rank-1, and have <code class="docutils literal notranslate"><span class="pre">LayoutLeft</span></code>, <code class="docutils literal notranslate"><span class="pre">LayoutRight</span></code>, or <code class="docutils literal notranslate"><span class="pre">LayoutStride</span></code></p></li>
-<li><p>must be accessible from <code class="docutils literal notranslate"><span class="pre">exespace</span></code></p></li>
+<li><p>must be accessible from <code class="docutils literal notranslate"><span class="pre">exespace</span></code> or from the execution space associated with the team handle</p></li>
 </ul>
 </li>
-<li><p><code class="docutils literal notranslate"><span class="pre">pred</span></code> - similar to <a class="reference internal" href="StdEqual.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">equal</span></code></span></a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pred</span></code>: <em>binary</em> functor returning <code class="docutils literal notranslate"><span class="pre">true</span></code> if two arguments should be considered “equal”.</p>
+<p><code class="docutils literal notranslate"><span class="pre">pred(a,b)</span></code> must be valid to be called from the execution space passed, or
+the execution space associated with the team handle, and convertible to bool
+for every pair of arguments <code class="docutils literal notranslate"><span class="pre">a,b</span></code> of type <code class="docutils literal notranslate"><span class="pre">value_type</span></code>, where <code class="docutils literal notranslate"><span class="pre">value_type</span></code>
+is the value type of <code class="docutils literal notranslate"><span class="pre">IteratorType</span></code> or <code class="docutils literal notranslate"><span class="pre">view</span></code> and must not modify <code class="docutils literal notranslate"><span class="pre">a,b</span></code>.</p>
+<ul class="simple">
+<li><p>must conform to:</p></li>
+</ul>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span><span class="w"> </span><span class="nc">Comparator</span><span class="p">{</span>
+<span class="w">  </span><span class="n">KOKKOS_INLINE_FUNCTION</span>
+<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="k">operator</span><span class="p">()(</span><span class="k">const</span><span class="w"> </span><span class="n">value_type</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">value_type</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="cm">/* true if a should be considered equal to b */</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</li>
 </ul>
 </section>
-<section id="return">
-<h2>Return<a class="headerlink" href="#return" title="Permalink to this heading">#</a></h2>
-<p>Returns the first iterator <code class="docutils literal notranslate"><span class="pre">it</span></code> in (1,2), where <code class="docutils literal notranslate"><span class="pre">*it</span> <span class="pre">==</span> <span class="pre">*it+1</span></code> returns true.
-Returns the first iterator <code class="docutils literal notranslate"><span class="pre">it</span></code> in (5,6), where <code class="docutils literal notranslate"><span class="pre">pred(*it,</span> <span class="pre">*it+1)</span></code> returns true.
-Returns the first Kokkos view iterator <code class="docutils literal notranslate"><span class="pre">it</span></code> in (3,4), where <code class="docutils literal notranslate"><span class="pre">view(it)</span> <span class="pre">==</span> <span class="pre">view(it+1)</span></code> returns true.
-Returns the first Kokkos view iterator <code class="docutils literal notranslate"><span class="pre">it</span></code> in (7,8), where <code class="docutils literal notranslate"><span class="pre">pred(view(it),</span> <span class="pre">view(it+1))</span></code> returns true.</p>
+<section id="return-value">
+<h3>Return Value<a class="headerlink" href="#return-value" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>1,2,9: returns the first iterator <code class="docutils literal notranslate"><span class="pre">it</span></code> such that <code class="docutils literal notranslate"><span class="pre">*it</span> <span class="pre">==</span> <span class="pre">*(it+1)</span></code> is true</p></li>
+<li><p>5,6,11: returns the first iterator <code class="docutils literal notranslate"><span class="pre">it</span></code> such that <code class="docutils literal notranslate"><span class="pre">pred(*it,</span> <span class="pre">*it+1)</span></code> returns true</p></li>
+<li><p>3,4,10: returns the first Kokkos iterator <code class="docutils literal notranslate"><span class="pre">it</span></code> such that <code class="docutils literal notranslate"><span class="pre">view(it)</span> <span class="pre">==</span> <span class="pre">view(it+1)</span></code> is true</p></li>
+<li><p>7,8,12: returns the first Kokkos iterator <code class="docutils literal notranslate"><span class="pre">it</span></code>, such that <code class="docutils literal notranslate"><span class="pre">pred(view(it),</span> <span class="pre">view(it+1))</span></code> returns true</p></li>
+</ul>
+<p>If no such element is found, it returns <code class="docutils literal notranslate"><span class="pre">last</span></code> for all overloads accepting iterators,
+and <code class="docutils literal notranslate"><span class="pre">Kokkos::Experimental::end(view)</span></code> for all overloads acceptings a view.</p>
+</section>
 </section>
 </section>
 
@@ -668,8 +720,13 @@ Returns the first Kokkos view iterator <code class="docutils literal notranslate
             <ul>
 <li><a class="reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">adjacent_find</span></code></a><ul>
 <li><a class="reference internal" href="#description">Description</a></li>
+<li><a class="reference internal" href="#interface">Interface</a><ul>
+<li><a class="reference internal" href="#overload-set-accepting-execution-space">Overload set accepting execution space</a></li>
+<li><a class="reference internal" href="#overload-set-accepting-a-team-handle">Overload set accepting a team handle</a></li>
 <li><a class="reference internal" href="#parameters-and-requirements">Parameters and Requirements</a></li>
-<li><a class="reference internal" href="#return">Return</a></li>
+<li><a class="reference internal" href="#return-value">Return Value</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
