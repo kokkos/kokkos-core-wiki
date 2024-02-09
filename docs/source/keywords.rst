@@ -174,9 +174,6 @@ The following options control enabling TPLs:
     * * ``Kokkos_ENABLE_LIBDL``
       * Whether to enable the LIBDL library
       * ``ON``
-    * * ``Kokkos_ENABLE_LIBRT``
-      * Whether to enable the LIBRT library
-      * ``OFF``
 
 The following options control finding and configuring non-CMake TPLs:
 
@@ -199,10 +196,6 @@ The following options control finding and configuring non-CMake TPLs:
 
     * * ``Kokkos_LIBDL_DIR`` or ``LIBDL_ROOT``
       * Location of LIBDL install prefix
-      * PATH Default:
-
-    * * ``Kokkos_LIBRT_DIR`` or ``LIBRT_ROOT``
-      * Location of LIBRT install prefix
       * PATH Default:
 
 The following options control ``find_package`` paths for CMake-based TPLs:
