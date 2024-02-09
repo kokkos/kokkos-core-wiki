@@ -26,8 +26,6 @@ General Settings
 +-------------------------------------------------+-------------------------------------------------------------------------------------------------------------+
 | ``KOKKOS_ENABLE_DEPRECATION_WARNING``           | Defined if deprecated features generate deprecation warnings.                                               |
 +-------------------------------------------------+-------------------------------------------------------------------------------------------------------------+
-| ``KOKKOS_ENABLE_HBWSPACE``                      | Defined if the experimental ``HBWSpace`` memory space is enabled, enabled by KOKKOS_ENABLE_MEMKIND.         |
-+-------------------------------------------------+-------------------------------------------------------------------------------------------------------------+
 | ``KOKKOS_ENABLE_TUNING``                        | Whether bindings for tunings are available (see `#2422 <https://github.com/kokkos/kokkos/pull/2422>`_).     |
 +-------------------------------------------------+-------------------------------------------------------------------------------------------------------------+
 | ``KOKKOS_ENABLE_COMPLEX_ALIGN``                 | Whether complex types are aligned.                                                                          |
@@ -131,8 +129,6 @@ These defines give information about what third-party libaries Kokkos was compil
 | ``KOKKOS_ENABLE_HWLOC``       | Defined if `libhwloc <https://www.open-mpi.org/projects/hwloc/>`_ is enabled for NUMA and architecture information.   |
 +-------------------------------+-----------------------------------------------------------------------------------------------------------------------+
 | ``KOKKOS_ENABLE_LIBRT``       | Defined if Kokkos links to the POSIX librt for backwards compatibility.                                               |
-+-------------------------------+-----------------------------------------------------------------------------------------------------------------------+
-| ``KOKKOS_ENABLE_MEMKIND``     | Defined if Kokkos enables the `Memkind <https://github.com/memkind/memkind>`_ heap manager, enables HBWSpace.         |
 +-------------------------------+-----------------------------------------------------------------------------------------------------------------------+
 | ``KOKKOS_ENABLE_LIBDL``       | Defined if Kokkos links to the dynamic linker (libdl).                                                                |
 +-------------------------------+-----------------------------------------------------------------------------------------------------------------------+
