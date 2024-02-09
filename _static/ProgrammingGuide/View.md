@@ -387,7 +387,6 @@ The following is the accessibility matrix for execution and memory spaces:
 | | Serial | OpenMP | Threads | Cuda | HIP |
 |---|---|---|---|---|---|
 |HostSpace| x | x | x | - | - |
-|HBWSpace| x | x | x | - | - |
 |CudaSpace| - | - | - | x | - |
 |CudaUVMSpace| x | x | x | x | - |
 |CudaHostPinnedSpace| x | x | x | x | - |
