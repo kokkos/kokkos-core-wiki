@@ -697,6 +697,10 @@ Kokkos was compiled with.</p>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">KOKKOS_ENABLE_LIBQUADMATH</span></code></p></td>
 <td><p>Defined if Kokkos links to the <a class="reference external" href="https://gcc.gnu.org/onlinedocs/libquadmath/">GCC Quad-Precision Math Library API</a>.</p></td>
 </tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">KOKKOS_ENABLE_ONEDPL</span></code></p></td>
+<td><p>Defined if Kokkos links to the <a class="reference external" href="https://github.com/oneapi-src/oneDPL">oneDPL library</a> when using the SYCL backend.
+Enabling this TPL might affect performance for Kokkos algorithms that use it, e.g., <cite>sort</cite>.</p></td>
+</tr>
 </tbody>
 </table>
 </div>
