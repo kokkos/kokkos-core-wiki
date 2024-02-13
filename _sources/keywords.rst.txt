@@ -574,42 +574,45 @@ Intel GPUs
 ~~~~~~~~~~
 
 .. list-table::
-    :widths: 25 65 10
+    :widths: 25 35 40
     :header-rows: 1
     :align: left
 
-    * - **Intel GPUs**
-      - Description/info
-      - Default
-
-    * * ``Kokkos_ARCH_INTEL_GEN``
-      * Optimize for Intel GPUs, Just-In-Time compilation*
-      * ``OFF``
-
-    * * ``Kokkos_ARCH_INTEL_DG1``
-      * Optimize for Intel Iris XeMAX GPU
-      * ``OFF``
-
-    * * ``Kokkos_ARCH_INTEL_GEN9``
-      * Optimize for Intel GPU Gen9
-      * ``OFF``
-
-    * * ``Kokkos_ARCH_INTEL_GEN11``
-      * Optimize for Intel GPU Gen11
-      * ``OFF``
-
-    * * ``Kokkos_ARCH_INTEL_GEN12LP``
-      * Optimize for Intel GPU Gen12LP
-      * ``OFF``
-
-    * * ``Kokkos_ARCH_INTEL_XEHP``
-      * Optimize for Intel GPU Xe-HP
-      * ``OFF``
+    * - CMake option
+      - Architecture
+      - Models
 
     * * ``Kokkos_ARCH_INTEL_PVC``
-      * Optimize for Intel GPU Ponte Vecchio/GPU Max
-      * ``OFF``
+      * Xe-HPC (Ponte Vecchio)
+      * Intel Data Center GPU Max 1550
 
+    * * ``Kokkos_ARCH_INTEL_XEHP``
+      * Xe-HP
+      *
+
+    * * ``Kokkos_ARCH_INTEL_DG1``
+      * Iris Xe MAX (DG1)
+      *
+
+    * * ``Kokkos_ARCH_INTEL_GEN12LP``
+      * Gen12LP
+      * Intel UHD Graphics 770
+
+    * * ``Kokkos_ARCH_INTEL_GEN11``
+      * Gen11
+      * Intel UHD Graphics
+
+    * * ``Kokkos_ARCH_INTEL_GEN9``
+      * Gen9
+      * Intel HD Graphics 510, Intel Iris Pro Graphics 580
+
+    * *
+      *
+      *
+
+    * * ``Kokkos_ARCH_INTEL_GEN``
+      * Just-In-Time compilation*
+      *
 
 \* ``Kokkos_ARCH_INTEL_GEN`` enables Just-In-Time compilation for Intel GPUs
 whereas all the other flags for Intel compilers request Ahead-Of-Time

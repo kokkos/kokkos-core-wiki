@@ -1168,43 +1168,47 @@ Kokkos will attempt to autodetect the architecture flag at configuration time.</
 <table class="docutils align-left">
 <colgroup>
 <col style="width: 25%" />
-<col style="width: 65%" />
-<col style="width: 10%" />
+<col style="width: 35%" />
+<col style="width: 40%" />
 </colgroup>
 <thead>
-<tr class="row-odd"><th class="head"><p><strong>Intel GPUs</strong></p></th>
-<th class="head"><p>Description/info</p></th>
-<th class="head"><p>Default</p></th>
+<tr class="row-odd"><th class="head"><p>CMake option</p></th>
+<th class="head"><p>Architecture</p></th>
+<th class="head"><p>Models</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_INTEL_GEN</span></code></p></td>
-<td><p>Optimize for Intel GPUs, Just-In-Time compilation*</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_INTEL_DG1</span></code></p></td>
-<td><p>Optimize for Intel Iris XeMAX GPU</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_INTEL_GEN9</span></code></p></td>
-<td><p>Optimize for Intel GPU Gen9</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_INTEL_GEN11</span></code></p></td>
-<td><p>Optimize for Intel GPU Gen11</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_INTEL_GEN12LP</span></code></p></td>
-<td><p>Optimize for Intel GPU Gen12LP</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_INTEL_PVC</span></code></p></td>
+<td><p>Xe-HPC (Ponte Vecchio)</p></td>
+<td><p>Intel Data Center GPU Max 1550</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_INTEL_XEHP</span></code></p></td>
-<td><p>Optimize for Intel GPU Xe-HP</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
+<td><p>Xe-HP</p></td>
+<td></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_INTEL_PVC</span></code></p></td>
-<td><p>Optimize for Intel GPU Ponte Vecchio/GPU Max</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_INTEL_DG1</span></code></p></td>
+<td><p>Iris Xe MAX (DG1)</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_INTEL_GEN12LP</span></code></p></td>
+<td><p>Gen12LP</p></td>
+<td><p>Intel UHD Graphics 770</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_INTEL_GEN11</span></code></p></td>
+<td><p>Gen11</p></td>
+<td><p>Intel UHD Graphics</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_INTEL_GEN9</span></code></p></td>
+<td><p>Gen9</p></td>
+<td><p>Intel HD Graphics 510, Intel Iris Pro Graphics 580</p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_INTEL_GEN</span></code></p></td>
+<td><p>Just-In-Time compilation*</p></td>
+<td></td>
 </tr>
 </tbody>
 </table>
