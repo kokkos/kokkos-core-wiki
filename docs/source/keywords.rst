@@ -580,7 +580,7 @@ Intel GPUs
       - Models
 
     * * ``Kokkos_ARCH_INTEL_PVC``
-      * Xe-HPC(Ponte Vecchio)
+      * Xe-HPC (Ponte Vecchio)
       * Intel Data Center GPU Max 1550
 
     * * ``Kokkos_ARCH_INTEL_XEHP``
@@ -588,7 +588,7 @@ Intel GPUs
       *
 
     * * ``Kokkos_ARCH_INTEL_DG1``
-      * Iris XeMAX(DG1)
+      * Iris Xe MAX (DG1)
       *
 
     * * ``Kokkos_ARCH_INTEL_GEN12LP``
@@ -602,6 +602,10 @@ Intel GPUs
     * * ``Kokkos_ARCH_INTEL_GEN9``
       * Gen9
       * Intel HD Graphics 510, Intel Iris Pro Graphics 580
+
+    * *
+      *
+      *
 
     * * ``Kokkos_ARCH_INTEL_GEN``
       * Just-In-Time compilation*
