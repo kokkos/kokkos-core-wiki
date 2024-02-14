@@ -316,10 +316,6 @@ CPU architectures
       * Optimize for BDW architecture
       * ``OFF``
 
-    * * ``Kokkos_ARCH_BGQ``
-      * Optimize for BGQ architecture
-      * ``OFF``
-
     * * ``Kokkos_ARCH_HSW``
       * Optimize for HSW architecture
       * ``OFF``
@@ -330,10 +326,6 @@ CPU architectures
 
     * * ``Kokkos_ARCH_KNL``
       * Optimize for KNL architecture
-      * ``OFF``
-
-    * * ``Kokkos_ARCH_POWER7``
-      * Optimize for POWER7 architecture
       * ``OFF``
 
     * * ``Kokkos_ARCH_POWER8``
@@ -354,10 +346,6 @@ CPU architectures
 
     * * ``Kokkos_ARCH_SPR``
       * Optimize for Sapphire Rapids architecture
-      * ``OFF``
-
-    * * ``Kokkos_ARCH_WSM``
-      * Optimize for WSM architecture
       * ``OFF``
 
     * * ``Kokkos_ARCH_ZEN``
