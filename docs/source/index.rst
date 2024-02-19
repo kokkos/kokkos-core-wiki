@@ -103,3 +103,4 @@ Website Content
    faq
    citation
    license
+   quick_start
