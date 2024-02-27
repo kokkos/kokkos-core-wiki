@@ -1,11 +1,9 @@
-============
 Quick Start
 ============
 
 This guide is intended to jump start new Kokkos users.  Kokkos Core is the foundation for all other Kokkos Ecosystem projects, and is readily usable in your own for performance portability.
 
 
------------------------------
 Download Latest, Set Up Build 
 -----------------------------
 
@@ -15,21 +13,21 @@ Download Latest, Set Up Build
 
 
 ..
- Nota bene:  the link for "Latest" will need to be updated for each release 
+ Nota bene:  the link for "Latest" should be stable from one release to the next, but check periodically to be sure 
 ..
 
-:bdg-link-primary:`Latest Release <https://github.com/kokkos/kokkos/releases/tag/4.2.01>`
+:bdg-link-primary:`Latest Release <https://github.com/kokkos/kokkos/releases/latest>`
 
-
-::
-
-  unzip kokkos-x.y.z.zip (or tar -xzf kokkos-x.y.z.tar.gz)
+.. code-block:: sh
+  
+  # Uncomment according to the type of file you've downloaded
+  unzip kokkos-x.y.z.zip 
+  # tar -xzf kokkos-x.y.z.tar.gz
   cd kokkos-x.y.z
   mkdir build
   cd build
 
 
--------------------
 Basic Configuration
 -------------------
 
@@ -38,23 +36,11 @@ Basic Configuration
   You can create small shell scripts to manage and experiment with configuration details, following the GPU microarchitecture-appropriate examples below.  Upon successful configuration, ``make -j`` to build, and ``make install`` to install.
 
 
-Serial (CPU)
-~~~~~~~~~~~~
-::
-
-  cmake \
-    -DKokkos_ARCH_NATIVE=ON \
-    -DKokkos_ENABLE_OPENMP=OFF \
-    -DKokkos_ENABLE_SERIAL=ON \
-    -DCMAKE_BUILD_TYPE=Release ..
-
-.. note::
-
-  Kokkos will attempt to autodetect GPU microarchitecture, but it is also possible to specify the desired `GPU architecture <https://kokkos.org/kokkos-core-wiki/keywords.html#gpu-architectures>`_.   
 
 OpenMP (CPU Parallelism)
 ~~~~~~~~~~~~~~~~~~~~~~~~
-::
+
+.. code-block:: sh
 
   cmake \
    -DKokkos_ARCH_NATIVE=ON \
@@ -63,10 +49,14 @@ OpenMP (CPU Parallelism)
    -DCMAKE_BUILD_TYPE=Release ..
 
 
+.. note::
+
+  Kokkos will attempt to autodetect GPU microarchitecture, but it is also possible to specify the desired `GPU architecture <https://kokkos.org/kokkos-core-wiki/keywords.html#gpu-architectures>`_.   
+
 CUDA (CPU and GPU)
 ~~~~~~~~~~~~~~~~~~
 
-::
+.. code-block:: sh
 
   cmake \
     -DKokkos_ARCH_NATIVE=ON \
@@ -78,7 +68,8 @@ CUDA (CPU and GPU)
 
 HIP (CPU and GPU)
 ~~~~~~~~~~~~~~~~~
-::
+
+.. code-block:: sh
 
   cmake \
     -DKokkos_ARCH_NATIVE=ON \
@@ -88,7 +79,6 @@ HIP (CPU and GPU)
     -DCMAKE_BUILD_TYPE=Release ..
 
 
-----------------------------------------------
 Basic Configuration Examples for Spack Builds
 ----------------------------------------------
 
@@ -105,14 +95,14 @@ Diverse Kokkos variants can be built / installed via Spack.  You will need to se
 Serial
 ~~~~~~~
 
-::
+.. code-block:: sh
 
   spack spec kokkos@4.2 %gcc@10.3.0 +serial cxxstd=20
 
 OpenMP
 ~~~~~~
 
-::
+.. code-block:: sh
 
   spack spec kokkos@4.2 %gcc@10.3.0 +openmp cxxstd=20
 
@@ -120,7 +110,7 @@ OpenMP
 CUDA
 ~~~~
 
-:: 
+.. code-block:: sh
   
   spack spec / install kokkos@4.2 %gcc@12.2.0 +cuda cuda_arch=70 cxxstd=20 +cuda_relocatable_device_code
 
@@ -128,12 +118,11 @@ CUDA
 HIP
 ~~~
 
-::
+.. code-block:: sh
 
   spack spec / install kokkos@4.2 %gcc@12.2.0 +rocm amdgpu_target=gfx90a cxxstd=20
 
 
--------------------------------------------
 Building and Linking a Kokkos "Hello World"
 -------------------------------------------
 
@@ -142,7 +131,8 @@ Building and Linking a Kokkos "Hello World"
   You will need to set ``Kokkos_ROOT``, and also the root directory for you target backend SDK (i.e., ``CUDA_ROOT``, ``ROCM_PATH``).  Please see `Build, Install and Use <https://kokkos.org/kokkos-core-wiki/building.html>`_ for additional details.
 
 |br|
-::
+
+.. code-block:: sh
 
   git clone https://github.com/ajpowelsnl/View
   cd View
@@ -151,7 +141,6 @@ Building and Linking a Kokkos "Hello World"
   cmake ../
 
 
--------------
 Get Involved!
 -------------
 
