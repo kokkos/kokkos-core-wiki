@@ -4,6 +4,7 @@ Quick Start
 
 This guide is intended to jump start new Kokkos users.  Kokkos Core is the foundation for all other Kokkos Ecosystem projects, and is readily usable in your own for performance portability.
 
+
 -----------------------------
 Download Latest, Set Up Build 
 -----------------------------
@@ -28,9 +29,9 @@ Download Latest, Set Up Build
   cd build
 
 
-----------------------------------------------
-Basic Configuration Examples for Source Builds
-----------------------------------------------
+-------------------
+Basic Configuration
+-------------------
 
 .. note::
 
@@ -45,8 +46,6 @@ Serial
     -DKokkos_ARCH_NATIVE=ON \
     -DKokkos_ENABLE_OPENMP=OFF \
     -DKokkos_ENABLE_SERIAL=ON \
-    -DCMAKE_CXX_STANDARD=17 \
-    -DCMAKE_INSTALL_PREFIX=$INSTALL_DIR \
     -DCMAKE_BUILD_TYPE=Release ..
 
 
@@ -58,8 +57,6 @@ OpenMP
    -DKokkos_ARCH_NATIVE=ON \
    -DKokkos_ENABLE_OPENMP=ON \
    -DKokkos_ENABLE_SERIAL=ON \
-   -DCMAKE_CXX_STANDARD=17 \
-   -DCMAKE_INSTALL_PREFIX=$INSTALL_DIR \
    -DCMAKE_BUILD_TYPE=Release ..
 
 
@@ -73,30 +70,23 @@ CUDA
     -DKokkos_ENABLE_CUDA_RELOCATABLE_DEVICE_CODE=OFF \
     -DKokkos_ENABLE_CUDA=ON \
     -DKokkos_ENABLE_SERIAL=ON \
-    -DCMAKE_CXX_STANDARD=17 \
-    -DCMAKE_INSTALL_PREFIX=$INSTALL_DIR \
     -DCMAKE_BUILD_TYPE=Release ..
 
 .. note::
 
-  VEGA90A is for AMD MI200
-  AMD_GFX942 is for AMD MI300
+  Kokkos will attempt to autodetect GPU microarchitecture, but it is also possible to specify the desired `GPU architecture <https://kokkos.org/kokkos-core-wiki/keywords.html#gpu-architectures>`_.   
 
 HIP
 ~~~
 ::
 
   cmake \
-    -DCRAYPE_LINK_TYPE=dynamic \
-    -DKokkos_ENABLE_TESTS=ON \
+    -DKokkos_ARCH_NATIVE=ON \
     -DKokkos_ENABLE_HIP=ON \
-    -DKokkos_ARCH_AMD_GFX942=OFF \
-    -DKokkos_ARCH_VEGA90A=ON \
     -DKokkos_ENABLE_SERIAL=ON \
-    -DCMAKE_CXX_STANDARD=17 \
-    -DCMAKE_CXX_COMPILER=$(which hipcc) \
-    -DCMAKE_INSTALL_PREFIX=$INSTALL_DIR \
+    -DCMAKE_CXX_COMPILER=hipcc \
     -DCMAKE_BUILD_TYPE=Release ..
+
 
 ----------------------------------------------
 Basic Configuration Examples for Spack Builds
@@ -161,11 +151,9 @@ Building and Linking a Kokkos "Hello World"
   cmake ../
 
 
-
-
-----------
-Next Steps
-----------
+-------------
+Get Involved!
+-------------
 
 Joining the Kokkos Community
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -177,6 +165,12 @@ Acclerating learning
 ~~~~~~~~~~~~~~~~~~~~
 
 Take a deeper dive into Kokkos with over 16 hours of `Tutorials <https://github.com/kokkos/kokkos-tutorials>`_ and `Recorded Lectures <https://github.com/kokkos/kokkos-tutorials/wiki/Kokkos-Lecture-Series>`_.  For in-house workshops and training, please get in touch via Slack (below).
+|br|
+
+Coming to Release Demos
+~~~~~~~~~~~~~~~~~~~~~~~
+
+You have a standing invitation to attend our approximately quarterly release demos to hear what's new, what's gone, and where we're heading in the future.
 |br|
 
 Attending Kokkos Users' Group Meetings
@@ -195,10 +189,8 @@ Please join us in our annual Kokkos Users' Group Meeting, where we present recen
      - In V2, put the recipes for the different backends on different pages
      - Julien B. suggested using github templates for the View "Hello World" example
      - Nic M.:  CUDA as a CMake language example (using View):
-```
-cmake -S . -B build -DKokkos_ENABLE_CUDA=ON CMAKE_CUDA_COMPILER=nvcc Kokkos_ENABLE_COMPILE_AS_CMAKE_LANGUAGE=ON [-DCMAKE_BUILD_TYPE=Release]
 
-```
+"cmake -S . -B build -DKokkos_ENABLE_CUDA=ON CMAKE_CUDA_COMPILER=nvcc Kokkos_ENABLE_COMPILE_AS_CMAKE_LANGUAGE=ON [-DCMAKE_BUILD_TYPE=Release]"
 
 
 ..
