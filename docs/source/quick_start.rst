@@ -158,7 +158,7 @@ Get Involved!
 Joining the Kokkos Community
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You can find the Slack channel at `kokkosteam.slack.com <https://kokkosteam.slack.com>`_. Register a new account with your email. We automatically whitelist emails from most organizations, but if your email address is not whitelisted, you can contact the Kokkos maintainers (emails are in the LICENSE file).
+Participate in the lively virtual discussion on the `Kokkos Slack Channel <https://kokkosteam.slack.com>`_.  Here are `sign up details <https://kokkos.org/kokkos-core-wiki/faq.html#faq>`_.
 |br|
 
 Acclerating learning
@@ -188,9 +188,7 @@ Please join us in our annual Kokkos Users' Group Meeting, where we present recen
      - Add Quick Start to main Kokkos page, such that it is the first thing you encounter on the landing page (kokkos.org)
      - In V2, put the recipes for the different backends on different pages
      - Julien B. suggested using github templates for the View "Hello World" example
-     - Nic M.:  CUDA as a CMake language example (using View):
-
-"cmake -S . -B build -DKokkos_ENABLE_CUDA=ON CMAKE_CUDA_COMPILER=nvcc Kokkos_ENABLE_COMPILE_AS_CMAKE_LANGUAGE=ON [-DCMAKE_BUILD_TYPE=Release]"
+     - Nic M.:  CUDA as a CMake language example (using View): cmake -S . -B build -DKokkos_ENABLE_CUDA=ON CMAKE_CUDA_COMPILER=nvcc Kokkos_ENABLE_COMPILE_AS_CMAKE_LANGUAGE=ON [-DCMAKE_BUILD_TYPE=Release]
 
 
 ..
