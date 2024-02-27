@@ -38,8 +38,8 @@ Basic Configuration
   You can create small shell scripts to manage and experiment with configuration details, following the GPU microarchitecture-appropriate examples below.  Upon successful configuration, ``make -j`` to build, and ``make install`` to install.
 
 
-Serial
-~~~~~~
+Serial (CPU)
+~~~~~~~~~~~~
 ::
 
   cmake \
@@ -48,9 +48,12 @@ Serial
     -DKokkos_ENABLE_SERIAL=ON \
     -DCMAKE_BUILD_TYPE=Release ..
 
+.. note::
 
-OpenMP
-~~~~~~
+  Kokkos will attempt to autodetect GPU microarchitecture, but it is also possible to specify the desired `GPU architecture <https://kokkos.org/kokkos-core-wiki/keywords.html#gpu-architectures>`_.   
+
+OpenMP (CPU Parallelism)
+~~~~~~~~~~~~~~~~~~~~~~~~
 ::
 
   cmake \
@@ -60,8 +63,8 @@ OpenMP
    -DCMAKE_BUILD_TYPE=Release ..
 
 
-CUDA
-~~~~
+CUDA (CPU and GPU)
+~~~~~~~~~~~~~~~~~~
 
 ::
 
@@ -72,12 +75,9 @@ CUDA
     -DKokkos_ENABLE_SERIAL=ON \
     -DCMAKE_BUILD_TYPE=Release ..
 
-.. note::
 
-  Kokkos will attempt to autodetect GPU microarchitecture, but it is also possible to specify the desired `GPU architecture <https://kokkos.org/kokkos-core-wiki/keywords.html#gpu-architectures>`_.   
-
-HIP
-~~~
+HIP (CPU and GPU)
+~~~~~~~~~~~~~~~~~
 ::
 
   cmake \
