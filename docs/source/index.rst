@@ -83,6 +83,7 @@ Website Content
 .. toctree::
    :maxdepth: 1
 
+   quick_start
    programmingguide
    requirements
    building
@@ -103,4 +104,3 @@ Website Content
    faq
    citation
    license
-   quick_start
