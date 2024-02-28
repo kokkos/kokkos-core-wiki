@@ -4,7 +4,7 @@ Quick Start
 This guide is intended to jump start new Kokkos users (and beginners, in particular).  Kokkos Core is the foundation for all other Kokkos Ecosystem projects, and is readily usable in your own for performance portability.
 
 
-Download Latest, Set Up Build 
+Download Latest and Build 
 -----------------------------
 
 .. note::
@@ -43,15 +43,13 @@ OpenMP (CPU Parallelism)
 .. code-block:: sh
 
   cmake \
-   -DKokkos_ARCH_NATIVE=ON \
    -DKokkos_ENABLE_OPENMP=ON \
-   -DKokkos_ENABLE_SERIAL=ON \
    -DCMAKE_BUILD_TYPE=Release ..
 
 
 .. note::
 
-  Kokkos will attempt to autodetect GPU microarchitecture, but it is also possible to specify the desired `GPU architecture <https://kokkos.org/kokkos-core-wiki/keywords.html#gpu-architectures>`_.   
+  Kokkos will attempt to autodetect GPU microarchitecture, but it is also possible to specify the desired `GPU architecture <https://kokkos.org/kokkos-core-wiki/keywords.html#gpu-architectures>`_.  In scenarios where a backend (e.g., CUDA, HIP) is enabled, Kokkos will execute serially on the "host" (CPU).  
 
 CUDA (CPU and GPU)
 ~~~~~~~~~~~~~~~~~~
@@ -59,10 +57,7 @@ CUDA (CPU and GPU)
 .. code-block:: sh
 
   cmake \
-    -DKokkos_ARCH_NATIVE=ON \
-    -DKokkos_ENABLE_CUDA_RELOCATABLE_DEVICE_CODE=OFF \
     -DKokkos_ENABLE_CUDA=ON \
-    -DKokkos_ENABLE_SERIAL=ON \
     -DCMAKE_BUILD_TYPE=Release ..
 
 
@@ -72,9 +67,7 @@ HIP (CPU and GPU)
 .. code-block:: sh
 
   cmake \
-    -DKokkos_ARCH_NATIVE=ON \
     -DKokkos_ENABLE_HIP=ON \
-    -DKokkos_ENABLE_SERIAL=ON \
     -DCMAKE_CXX_COMPILER=hipcc \
     -DCMAKE_BUILD_TYPE=Release ..
 
