@@ -1,7 +1,7 @@
 Quick Start
 ============
 
-This guide is intended to jump start new Kokkos users.  Kokkos Core is the foundation for all other Kokkos Ecosystem projects, and is readily usable in your own for performance portability.
+This guide is intended to jump start new Kokkos users (and beginners, in particular).  Kokkos Core is the foundation for all other Kokkos Ecosystem projects, and is readily usable in your own for performance portability.
 
 
 Download Latest, Set Up Build 
@@ -20,7 +20,7 @@ Download Latest, Set Up Build
 
 .. code-block:: sh
   
-  # Uncomment according to the type of file you've downloaded
+  # Uncomment according to the type of file you've downloaded (zip or tar)
   unzip kokkos-x.y.z.zip 
   # tar -xzf kokkos-x.y.z.tar.gz
   cd kokkos-x.y.z
