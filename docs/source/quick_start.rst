@@ -144,25 +144,25 @@ Building and Linking a Kokkos "Hello World"
 Get Involved!
 -------------
 
-Joining the Kokkos Community
+Join the Kokkos Community
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Participate in the lively virtual discussion on the `Kokkos Slack Channel <https://kokkosteam.slack.com>`_.  Here are `sign up details <https://kokkos.org/kokkos-core-wiki/faq.html#faq>`_.
+Participate in the lively virtual discussion on the `Kokkos Slack Channel <https://kokkosteam.slack.com>`_.  Here are `sign up details <https://kokkos.org/kokkos-core-wiki/faq.html#faq>`_.  Joining Kokkos Slack is the on ramp for becoming a project contributor.
 |br|
 
-Acclerating learning
+Acclerate learning
 ~~~~~~~~~~~~~~~~~~~~
 
 Take a deeper dive into Kokkos with over 16 hours of `Tutorials <https://github.com/kokkos/kokkos-tutorials>`_ and `Recorded Lectures <https://github.com/kokkos/kokkos-tutorials/wiki/Kokkos-Lecture-Series>`_.  For in-house workshops and training, please get in touch via Slack (below).
 |br|
 
-Coming to Release Demos
+Come to Release Demos
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 You have a standing invitation to attend our approximately quarterly release demos to hear what's new, what's gone, and where we're heading in the future.
 |br|
 
-Attending Kokkos Users' Group Meetings
+Attend Kokkos Users' Group Meetings
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Please join us in our annual Kokkos Users' Group Meeting, where we present recent Kokkos work, and you showcase how you use Kokkos.  It's a great opportunity to build community and grow collaboration.
