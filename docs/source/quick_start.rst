@@ -24,8 +24,6 @@ Download Latest and Build
   unzip kokkos-x.y.z.zip 
   # tar -xzf kokkos-x.y.z.tar.gz
   cd kokkos-x.y.z
-  mkdir build
-  cd build
 
 
 Basic Configuration
