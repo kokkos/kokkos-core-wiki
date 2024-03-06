@@ -70,56 +70,12 @@ HIP (CPU and GPU)
     -DCMAKE_BUILD_TYPE=Release ..
 
 
-Basic Configuration Examples for Spack Builds
-----------------------------------------------
-
-|br|
-Diverse Kokkos variants can be built / installed via Spack.  You will need to select a variant for the desired backend, and appropriate GPU microarchitecture.  To explore the range of variants for a package, ``spack info kokkos``, ``spack info trilinos``, etc.  Please see basic `Spack installation  <https://spack.readthedocs.io/en/latest/getting_started.html>`_ instructions if you're new to the package manager.
-|br|
-|br|
-
-
-.. note::
-
-  Before installing, you can ``spack spec``  variants to verify the build type.
-
-Serial
-~~~~~~~
-
-.. code-block:: sh
-
-  spack spec kokkos@4.2 %gcc@10.3.0 +serial cxxstd=20
-
-OpenMP
-~~~~~~
-
-.. code-block:: sh
-
-  spack spec kokkos@4.1 %gcc@12.2.0 +openmp cxxstd=20
-
-
-CUDA
-~~~~
-
-.. code-block:: sh
-  
-  spack spec / install kokkos@4.1 %gcc@12.2.0 +cuda cuda_arch=70 cxxstd=20 +cuda_relocatable_device_code
-
-
-HIP
-~~~
-
-.. code-block:: sh
-
-  spack spec / install kokkos@4.1 %gcc@12.2.0 +rocm amdgpu_target=gfx90a cxxstd=20
-
-
 Building and Linking a Kokkos "Hello World"
 -------------------------------------------
 
 .. note::
 
-  ``Kokkos_ROOT`` and the root directory for you target backend SDK (i.e., ``CUDA_ROOT``, ``ROCM_PATH``) will need to be set.  If a modules environment, the SDK variables will often be set upon module loading (e.g., ``module load rocm/5.7.1).  Please see `Build, Install and Use <https://kokkos.org/kokkos-core-wiki/building.html>`_ for additional details.
+  ``Kokkos_ROOT`` and the root directory for you target backend SDK (i.e., ``CUDA_ROOT``, ``ROCM_PATH``) will need to be set.  ``Kokkos_ROOT`` should be set to the path to your installation.  If a modules environment, the SDK variables will be automatically set upon module loading (e.g., ``module load rocm/5.7.1).  Please see `Build, Install and Use <https://kokkos.org/kokkos-core-wiki/building.html>`_ for additional details.
 
 
 |br|
