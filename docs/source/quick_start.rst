@@ -40,9 +40,7 @@ OpenMP (CPU Parallelism)
 
 .. code-block:: sh
 
-  cmake \
-   -DKokkos_ENABLE_OPENMP=ON \
-   -DCMAKE_BUILD_TYPE=Release ..
+  cmake -B <name-of-build-directory> -DKokkos_ENABLE_OPENMP=ON -DCMAKE_BUILD_TYPE=Release -S <name-of-source-directory>
 
 
 .. note::
@@ -54,9 +52,7 @@ CUDA (CPU and GPU)
 
 .. code-block:: sh
 
-  cmake \
-    -DKokkos_ENABLE_CUDA=ON \
-    -DCMAKE_BUILD_TYPE=Release ..
+  cmake -B <name-of-build-directory> -DKokkos_ENABLE_CUDA=ON -DCMAKE_BUILD_TYPE=Release -S <name-of-source-directory>
 
 
 HIP (CPU and GPU)
@@ -64,10 +60,7 @@ HIP (CPU and GPU)
 
 .. code-block:: sh
 
-  cmake \
-    -DKokkos_ENABLE_HIP=ON \
-    -DCMAKE_CXX_COMPILER=hipcc \
-    -DCMAKE_BUILD_TYPE=Release ..
+  cmake -B <name-of-build-directory> -DKokkos_ENABLE_HIP=ON -DCMAKE_CXX_COMPILER=hipcc -DCMAKE_BUILD_TYPE=Release -S <name-of-source-directory>
 
 
 Building and Linking a Kokkos "Hello World"
@@ -82,21 +75,18 @@ Building and Linking a Kokkos "Hello World"
 
 .. code-block:: sh
 
-  git clone https://github.com/ajpowelsnl/View
-  cd View
-  mkdir build
-  cd build
-  cmake ../
-
+  git clone https://github.com/kokkos/kokkos.git 
+  cd example/build_cmake_installed
+  TBD/WIP
 
 Getting Help
 ------------
 
 If you need addtional help getting started, please join the `Kokkos Slack Channel <https://kokkosteam.slack.com>`_.  Here are `sign up details <https://kokkos.org/kokkos-core-wiki/faq.html#faq>`_.  Joining Kokkos Slack is the on ramp for becoming a project contributor.
-|br|
 
 
 ..
+  **THIS IS A COMMENT**
   *TODO*
      - Integrate (merged) Quick Start with Cédric's PR:  https://github.com/kokkos/kokkos/pull/6796
      - Ongoing reconciling with the Julien B. / KUG23- initiated discussion:  https://github.com/kokkos/internal-documents/pull/19
@@ -105,11 +95,5 @@ If you need addtional help getting started, please join the `Kokkos Slack Channe
      - In V2, put the recipes for the different backends on different pages
      - Julien B. suggested using github templates for the View "Hello World" example
      - Nic M.:  CUDA as a CMake language example (using View): cmake -S . -B build -DKokkos_ENABLE_CUDA=ON CMAKE_CUDA_COMPILER=nvcc Kokkos_ENABLE_COMPILE_AS_CMAKE_LANGUAGE=ON [-DCMAKE_BUILD_TYPE=Release]
-
-
 ..
-
-.. |br| raw:: html
-
-      <br>
 
