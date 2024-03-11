@@ -228,6 +228,9 @@ The following options control enabling TPLs:
     * * ``Kokkos_ENABLE_ONEDPL``
       * Whether to enable the oneDPL library when using the SYCL backend
       * ``ON``
+    * * ``Kokkos_ENABLE_ROCTHRUST``
+      * Whether to enable the rocThrust library when using the HIP backend
+      * ``ON``
 
 The following options control finding and configuring non-CMake TPLs:
 
