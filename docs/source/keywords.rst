@@ -211,26 +211,31 @@ Third-party Libraries (TPLs)
 The following options control enabling TPLs:
 
 .. list-table::
-    :widths: 30 60 10
+    :widths: 30 40 10 20
     :header-rows: 1
     :align: left
 
     * -
       - Description/info
       - Default
+      - Notes
 
     * * ``Kokkos_ENABLE_HWLOC``
       * Whether to enable the HWLOC library
       * ``OFF``
+      *
     * * ``Kokkos_ENABLE_LIBDL``
       * Whether to enable the LIBDL library
       * ``ON``
+      *
     * * ``Kokkos_ENABLE_ONEDPL``
       * Whether to enable the oneDPL library when using the SYCL backend
       * ``ON``
+      *
     * * ``Kokkos_ENABLE_ROCTHRUST``
       * Whether to enable the rocThrust library when using the HIP backend
       * ``ON``
+      * (since Kokkos 4.3)
 
 The following options control finding and configuring non-CMake TPLs:
 
