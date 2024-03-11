@@ -276,6 +276,8 @@ Synopsis
         int concurrency() const;
 
         void fence() const;
+
+        friend bool operator==(const execution_space& lhs, const execution_space& rhs);
     };
 
     template<class MS>
@@ -327,3 +329,5 @@ Non Member Facilities
 * ``template<class MS> struct is_execution_space;``: typetrait to check whether a class is a execution space.
 
 * ``template<class S1, class S2> struct SpaceAccessibility;``: typetraits to check whether two spaces are compatible (assignable, deep_copy-able, accessable). (see |KokkosSpaceAccessibility|_)
+
+* ``bool operator==(const execution_space& lhs, const execution_space& rhs)``: tests whether the two space instances (of the same type) are identical.

@@ -719,6 +719,8 @@ have the expression <code class="docutils literal notranslate"><span class="pre"
 <span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="nf">concurrency</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
 
 <span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">fence</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">friend</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="k">operator</span><span class="o">==</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">execution_space</span><span class="o">&amp;</span><span class="w"> </span><span class="n">lhs</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">execution_space</span><span class="o">&amp;</span><span class="w"> </span><span class="n">rhs</span><span class="p">);</span>
 <span class="p">};</span>
 
 <span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">MS</span><span class="o">&gt;</span>
@@ -765,6 +767,7 @@ have the expression <code class="docutils literal notranslate"><span class="pre"
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">template&lt;class</span> <span class="pre">MS&gt;</span> <span class="pre">struct</span> <span class="pre">is_execution_space;</span></code>: typetrait to check whether a class is a execution space.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">template&lt;class</span> <span class="pre">S1,</span> <span class="pre">class</span> <span class="pre">S2&gt;</span> <span class="pre">struct</span> <span class="pre">SpaceAccessibility;</span></code>: typetraits to check whether two spaces are compatible (assignable, deep_copy-able, accessable). (see <a class="reference external" href="SpaceAccessibility.html"><code class="xref cppkokkos cppkokkos-func docutils literal notranslate"><span class="pre">Kokkos::SpaceAccessibility()</span></code></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bool</span> <span class="pre">operator==(const</span> <span class="pre">execution_space&amp;</span> <span class="pre">lhs,</span> <span class="pre">const</span> <span class="pre">execution_space&amp;</span> <span class="pre">rhs)</span></code>: tests whether the two space instances (of the same type) are identical.</p></li>
 </ul>
 </section>
 </section>
