@@ -14,6 +14,8 @@ Usage
     parallel_for(TeamThreadRange(team,range), [=] (int i) {...});
     parallel_reduce(TeamThreadRange(team,begin,end), 
         [=] (int i, double& lsum) {...},sum);
+    parallel_scan(TeamThreadRange(team,begin,end),
+        [=] (lint i, double& lsum, bool final) {...},sum);
 
 TeamThreadRange is a `nested execution policy <./NestedPolicies.html>`_ used inside hierarchical parallelism. In contrast to global policies, the public interface for nested policies is implemented as functions, in order to enable implicit templating on the execution space type via the team handle.
 
