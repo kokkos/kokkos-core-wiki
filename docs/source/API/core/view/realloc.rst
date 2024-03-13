@@ -67,8 +67,8 @@ Description
 
 .. code-block:: cpp
 
-   template <class... ViewCtorArgs, class T, class... P>
-   void realloc(const Impl::ViewCtorProp<ViewCtorArgs...>& arg_prop,
+   template <class ALLOC_PROP, class T, class... P>
+   void realloc(const ALLOC_PROP& arg_prop,
 		Kokkos::View<T, P...>& v,
 		const size_t n0 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
 		const size_t n1 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
@@ -124,8 +124,8 @@ Description
 
 .. code-block:: cpp
 
-   template <class... ViewCtorArgs, class T, class... P>
-   void realloc(const Impl::ViewCtorProp<ViewCtorArgs...>& arg_prop,
+   template <class ALLOC_PROP, class T, class... P>
+   void realloc(const ALLOC_PROP& arg_prop,
                 Kokkos::View<T, P...>& v,
 		const typename Kokkos::View<T, P...>::array_layout& layout);
 

@@ -71,8 +71,8 @@ Description
 
 * .. code-block:: cpp
 
-     template <class T, class... P, class... ViewCtorArgs>
-     void resize(const Impl::ViewCtorProp<ViewCtorArgs...>& arg_prop,
+     template <class T, class... P, class ALLOC_PROP>
+     void resize(const ALLOC_PROP& arg_prop,
 		 Kokkos::View<T, P...>& v,
 		 const size_t n0 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
 		 const size_t n1 = KOKKOS_IMPL_CTOR_DEFAULT_ARG,
@@ -124,8 +124,8 @@ Description
 
 * .. code-block:: cpp
 
-     template <class T, class... P, class... ViewCtorArgs>
-     void resize(const Impl::ViewCtorProp<ViewCtorArgs...>& arg_prop,
+     template <class T, class... P, class ALLOC_PROP>
+     void resize(const ALLOC_PROP& arg_prop,
 	         Kokkos::View<T, P...>& v,
 	         const typename Kokkos::View<T, P...>::array_layout& layout);
 
