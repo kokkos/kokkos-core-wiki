@@ -494,77 +494,77 @@ Kokkos will attempt to autodetect the architecture flag at configuration time.
 AMD GPUs
 ~~~~~~~~
 
+The Kokkos naming convention is to aggregate AMD\_ and the architecture flag.
+
+``Kokkos_ARCH_AMD_<ARCHITECTURE_FLAG>``
+
+If the HIP backend is enabled and no AMD GPU architecture is specified,
+Kokkos will attempt to autodetect the architecture flag at configuration time.
+
 .. list-table::
-    :widths: 25 65 10
+    :widths: 30 15 25 30
     :header-rows: 1
     :align: left
 
     * - **AMD GPUs**
-      - Description/info
-      - Default
+      - Architecture flags
+      - Models
+      - Notes
+
+    * * ``Kokkos_ARCH_AMD_GFX942``
+      * GFX942
+      * MI300A, MI300X
+      * (since Kokkos 4.2)
+
+    * * ``Kokkos_ARCH_AMD_GFX940``
+      * GFX940
+      * MI300A (pre-production)
+      * (since Kokkos 4.2.1)
 
     * * ``Kokkos_ARCH_AMD_GFX90A``
-      * Optimize for AMD GPU MI200 series GFX90A :sup:`since Kokkos 4.2`
-      * ``OFF``
+      * GFX90A
+      * MI200 series 
+      * (since Kokkos 4.2)
 
     * * ``Kokkos_ARCH_AMD_GFX908``
-      * Optimize for AMD GPU MI100 GFX908 :sup:`since Kokkos 4.2`
-      * ``OFF``
+      * GFX90A
+      * MI100
+      * (since Kokkos 4.2)
 
     * * ``Kokkos_ARCH_AMD_GFX906``
-      * Optimize for AMD GPU MI50/MI60 GFX906 :sup:`since Kokkos 4.2`
-      * ``OFF``
+      * GFX906
+      * MI50, MI60
+      * (since Kokkos 4.2)
     
     * * ``Kokkos_ARCH_AMD_GFX1100``
-      * Optimize for AMD GPU 7900xt GFX1100 :sup:`since Kokkos 4.2` 
-      * ``OFF``
+      * GFX1100
+      * 7900xt
+      * (since Kokkos 4.2)
 
     * * ``Kokkos_ARCH_AMD_GFX1030``
-      * Optimize for AMD GPU V620/W6800 GFX1030 :sup:`since Kokkos 4.2` 
-      * ``OFF``
-
-    * * ``Kokkos_ARCH_VEGA900``
-      * Optimize for AMD GPU MI25 GFX900 :sup:`removed in 4.0`
-      * ``OFF``
-
-    * * ``Kokkos_ARCH_VEGA906``
-      * Optimize for AMD GPU MI50/MI60 GFX906 (Prefer ``Kokkos_ARCH_AMD_GFX906``)
-      * ``OFF``
-
-    * * ``Kokkos_ARCH_VEGA908``
-      * Optimize for AMD GPU MI100 GFX908 (Prefer ``Kokkos_ARCH_AMD_GFX908``)
-      * ``OFF``
+      * GFX1030
+      * V620, W6800
+      * (since Kokkos 4.2)
 
     * * ``Kokkos_ARCH_VEGA90A``
-      * Optimize for AMD GPU MI200 series GFX90A (Prefer ``Kokkos_ARCH_AMD_GFX90A``)
-      * ``OFF``
+      * GFX90A
+      * MI200 series
+      * Prefer ``Kokkos_ARCH_AMD_GFX90A``
 
+    * * ``Kokkos_ARCH_VEGA908``
+      * GFX908
+      * MI100 
+      * Prefer ``Kokkos_ARCH_AMD_GFX908``
 
-.. list-table::
-    :widths: 65 35
-    :header-rows: 1
-    :align: left
+    * * ``Kokkos_ARCH_VEGA906``
+      * GFX906
+      * MI50, MI60 
+      * Prefer ``Kokkos_ARCH_AMD_GFX906``
 
-    * - AMD GPU
-      - Kokkos ARCH
-    
-    * * ``7900xt``
-      * AMD_GFX1100
-      
-    * * ``MI50/MI60``
-      * AMD_GFX906
-      
-    * * ``MI100``
-      * AMD_GFX908
-      
-    * * ``MI200`` series: ``MI210``, ``MI250``, ``MI250X``
-      * AMD_GFX90A
-    
-    * * ``V620``
-      * AMD_GFX1030
-     
-    * * ``W6800``
-      * AMD_GFX1030
+    * * ``Kokkos_ARCH_VEGA900``
+      * GFX900
+      * MI25 
+      * removed in 4.0
 
 Intel GPUs
 ~~~~~~~~~~
