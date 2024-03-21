@@ -1073,88 +1073,80 @@ Kokkos will attempt to autodetect the architecture flag at configuration time.</
 </section>
 <section id="amd-gpus">
 <h4>AMD GPUs<a class="headerlink" href="#amd-gpus" title="Permalink to this heading">#</a></h4>
+<p>The Kokkos naming convention is to aggregate AMD_ and the architecture flag.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_AMD_&lt;ARCHITECTURE_FLAG&gt;</span></code></p>
+<p>If the HIP backend is enabled and no AMD GPU architecture is specified,
+Kokkos will attempt to autodetect the architecture flag at configuration time.</p>
 <div class="table-wrapper colwidths-given docutils container">
 <table class="docutils align-left">
 <colgroup>
+<col style="width: 30%" />
+<col style="width: 15%" />
 <col style="width: 25%" />
-<col style="width: 65%" />
-<col style="width: 10%" />
+<col style="width: 30%" />
 </colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p><strong>AMD GPUs</strong></p></th>
-<th class="head"><p>Description/info</p></th>
-<th class="head"><p>Default</p></th>
+<th class="head"><p>Architecture flags</p></th>
+<th class="head"><p>Models</p></th>
+<th class="head"><p>Notes</p></th>
 </tr>
 </thead>
 <tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_AMD_GFX942</span></code></p></td>
+<td><p>GFX942</p></td>
+<td><p>MI300A, MI300X</p></td>
+<td><p>(since Kokkos 4.2)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_AMD_GFX940</span></code></p></td>
+<td><p>GFX940</p></td>
+<td><p>MI300A (pre-production)</p></td>
+<td><p>(since Kokkos 4.2.1)</p></td>
+</tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_AMD_GFX90A</span></code></p></td>
-<td><p>Optimize for AMD GPU MI200 series GFX90A <sup>since Kokkos 4.2</sup></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
+<td><p>GFX90A</p></td>
+<td><p>MI200 series</p></td>
+<td><p>(since Kokkos 4.2)</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_AMD_GFX908</span></code></p></td>
-<td><p>Optimize for AMD GPU MI100 GFX908 <sup>since Kokkos 4.2</sup></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
+<td><p>GFX90A</p></td>
+<td><p>MI100</p></td>
+<td><p>(since Kokkos 4.2)</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_AMD_GFX906</span></code></p></td>
-<td><p>Optimize for AMD GPU MI50/MI60 GFX906 <sup>since Kokkos 4.2</sup></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
+<td><p>GFX906</p></td>
+<td><p>MI50, MI60</p></td>
+<td><p>(since Kokkos 4.2)</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_AMD_GFX1100</span></code></p></td>
-<td><p>Optimize for AMD GPU 7900xt GFX1100 <sup>since Kokkos 4.2</sup></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
+<td><p>GFX1100</p></td>
+<td><p>7900xt</p></td>
+<td><p>(since Kokkos 4.2)</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_AMD_GFX1030</span></code></p></td>
-<td><p>Optimize for AMD GPU V620/W6800 GFX1030 <sup>since Kokkos 4.2</sup></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
+<td><p>GFX1030</p></td>
+<td><p>V620, W6800</p></td>
+<td><p>(since Kokkos 4.2)</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_VEGA900</span></code></p></td>
-<td><p>Optimize for AMD GPU MI25 GFX900 <sup>removed in 4.0</sup></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_VEGA90A</span></code></p></td>
+<td><p>GFX90A</p></td>
+<td><p>MI200 series</p></td>
+<td><p>Prefer <code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_AMD_GFX90A</span></code></p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_VEGA906</span></code></p></td>
-<td><p>Optimize for AMD GPU MI50/MI60 GFX906 (Prefer <code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_AMD_GFX906</span></code>)</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_VEGA908</span></code></p></td>
+<td><p>GFX908</p></td>
+<td><p>MI100</p></td>
+<td><p>Prefer <code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_AMD_GFX908</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_VEGA908</span></code></p></td>
-<td><p>Optimize for AMD GPU MI100 GFX908 (Prefer <code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_AMD_GFX908</span></code>)</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_VEGA906</span></code></p></td>
+<td><p>GFX906</p></td>
+<td><p>MI50, MI60</p></td>
+<td><p>Prefer <code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_AMD_GFX906</span></code></p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_VEGA90A</span></code></p></td>
-<td><p>Optimize for AMD GPU MI200 series GFX90A (Prefer <code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_AMD_GFX90A</span></code>)</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="table-wrapper colwidths-given docutils container">
-<table class="docutils align-left">
-<colgroup>
-<col style="width: 65%" />
-<col style="width: 35%" />
-</colgroup>
-<thead>
-<tr class="row-odd"><th class="head"><p>AMD GPU</p></th>
-<th class="head"><p>Kokkos ARCH</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">7900xt</span></code></p></td>
-<td><p>AMD_GFX1100</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">MI50/MI60</span></code></p></td>
-<td><p>AMD_GFX906</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">MI100</span></code></p></td>
-<td><p>AMD_GFX908</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">MI200</span></code> series: <code class="docutils literal notranslate"><span class="pre">MI210</span></code>, <code class="docutils literal notranslate"><span class="pre">MI250</span></code>, <code class="docutils literal notranslate"><span class="pre">MI250X</span></code></p></td>
-<td><p>AMD_GFX90A</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">V620</span></code></p></td>
-<td><p>AMD_GFX1030</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">W6800</span></code></p></td>
-<td><p>AMD_GFX1030</p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_VEGA900</span></code></p></td>
+<td><p>GFX900</p></td>
+<td><p>MI25</p></td>
+<td><p>removed in 4.0</p></td>
 </tr>
 </tbody>
 </table>
