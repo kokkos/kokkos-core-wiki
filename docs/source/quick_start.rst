@@ -68,7 +68,7 @@ Building and Linking a Kokkos "Hello World"
 
 .. note::
 
-  ``Kokkos_ROOT`` and the root directory for you target backend SDK (i.e., ``CUDA_ROOT``, ``ROCM_PATH``) will need to be set.  ``Kokkos_ROOT`` should be set to the path to your installation.  If a modules environment, the SDK variables will be automatically set upon module loading (e.g., ``module load rocm/5.7.1).  Please see `Build, Install and Use <https://kokkos.org/kokkos-core-wiki/building.html>`_ for additional details.
+  ``Kokkos_ROOT`` and the root directory for you target backend SDK (i.e., ``CUDA_ROOT``, ``ROCM_PATH``) will need to be set.  ``Kokkos_ROOT`` should be set to the path of your Kokkos installation.  If a modules environment, the SDK variables will be automatically set upon module loading (e.g., ``module load rocm/5.7.1).  Please see `Build, Install and Use <https://kokkos.org/kokkos-core-wiki/building.html>`_ for additional details.  The example detailed below is in the Kokkos Core `examples` directory.
 
 
 |br|
@@ -77,7 +77,12 @@ Building and Linking a Kokkos "Hello World"
 
   git clone https://github.com/kokkos/kokkos.git 
   cd example/build_cmake_installed
-  TBD/WIP
+  cmake -B <build directory> -S . -DKokkos_ROOT=<path-to-installation>
+  cd <build directory>
+  make -j
+  ./example
+  
+
 
 Getting Help
 ------------
