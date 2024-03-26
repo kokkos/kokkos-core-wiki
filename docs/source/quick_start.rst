@@ -68,7 +68,7 @@ Building and Linking a Kokkos "Hello World"
 
 .. note::
 
-  ``Kokkos_ROOT`` and the root directory for you target backend SDK (i.e., ``CUDA_ROOT``, ``ROCM_PATH``) will need to be set.  ``Kokkos_ROOT`` should be set to the path of your Kokkos installation.  If a modules environment, the SDK variables will be automatically set upon module loading (e.g., ``module load rocm/5.7.1).  Please see `Build, Install and Use <https://kokkos.org/kokkos-core-wiki/building.html>`_ for additional details.  The example detailed below is in the Kokkos Core `examples` directory.
+  ``Kokkos_ROOT`` and the root directory for you target backend SDK (i.e., ``CUDA_ROOT``, ``ROCM_PATH``) will need to be set.  ``Kokkos_ROOT`` should be set to the path of your Kokkos installation.  If a modules environment, the SDK variables will be automatically set upon module loading (e.g., ``module load rocm/5.7.1).  Please see `Build, Install and Use <https://kokkos.org/kokkos-core-wiki/building.html>`_ for additional details.  The example detailed below is in the Kokkos Core `example` directory.
 
 
 |br|
