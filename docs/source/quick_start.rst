@@ -9,7 +9,7 @@ Download Latest and Build
 
 .. note::
 
-  Please become familiar with `Kokkos Requirements <https://kokkos.org/kokkos-core-wiki/requirements.html>`_, and verify that your machine has all necessary compilers, backend SDK and build system components.
+  Please become familiar with `Kokkos Requirements <https://kokkos.org/kokkos-core-wiki/requirements.html>`_, and verify that your machine has all necessary compilers, backend GPU SDK (e.g., CUDA, ROCM, Intel oneAPI, etc.),and build system components.
 
 
 ..
@@ -31,7 +31,7 @@ Basic Configuration
 
 .. note::
 
-  You can create small shell scripts to manage and experiment with configuration details, following the GPU microarchitecture-appropriate examples below.  Upon successful configuration, ``make -j`` to build, and ``make install`` to install.
+  You can create small shell scripts to manage and experiment with configuration details, following the GPU microarchitecture-appropriate examples below.  Upon successful configuration, ``make `` to build, and ``make install`` to install.
 
 
 
@@ -79,7 +79,7 @@ Building and Linking a Kokkos "Hello World"
   cd example/build_cmake_installed
   cmake -B <build directory> -S . -DKokkos_ROOT=<path-to-installation>
   cd <build directory>
-  make -j
+  make 
   ./example
   
 
@@ -99,6 +99,6 @@ If you need addtional help getting started, please join the `Kokkos Slack Channe
      - Add Quick Start to main Kokkos page, such that it is the first thing you encounter on the landing page (kokkos.org)
      - In V2, put the recipes for the different backends on different pages
      - Julien B. suggested using github templates for the View "Hello World" example
-     - Nic M.:  CUDA as a CMake language example (using View): cmake -S . -B build -DKokkos_ENABLE_CUDA=ON CMAKE_CUDA_COMPILER=nvcc Kokkos_ENABLE_COMPILE_AS_CMAKE_LANGUAGE=ON [-DCMAKE_BUILD_TYPE=Release]
+     - Add ``kokkos/example`` Nic M.:  CUDA as a CMake language example (using View): cmake -S . -B build -DKokkos_ENABLE_CUDA=ON CMAKE_CUDA_COMPILER=nvcc Kokkos_ENABLE_COMPILE_AS_CMAKE_LANGUAGE=ON [-DCMAKE_BUILD_TYPE=Release]
 ..
 
