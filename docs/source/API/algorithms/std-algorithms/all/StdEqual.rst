@@ -247,6 +247,6 @@ Example
    bool isEqual = KE::equal(exespace, KE::begin(a), KE::end(a),
                             KE::begin(b), KE::end(b) p);
 
-   // assuming OpenMP is enabled, then you can also explicitly call
-   bool isEqual = KE::equal(Kokkos::OpenMP(), KE::begin(a), KE::end(a),
+   // To run explicitly on the host (assuming a and b are accessible on Host)
+   bool isEqual = KE::equal(Kokkos::DefaultHostExecutionSpace(), KE::begin(a), KE::end(a),
                             KE::begin(b), KE::end(b), p);
