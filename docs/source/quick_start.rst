@@ -47,16 +47,16 @@ OpenMP (CPU Parallelism)
 
   Kokkos will attempt to autodetect GPU microarchitecture, but it is also possible to specify the desired `GPU architecture <https://kokkos.org/kokkos-core-wiki/keywords.html#gpu-architectures>`_.  In scenarios where a backend (e.g., CUDA, HIP) is enabled, Kokkos will execute serially on the "host" (CPU).  
 
-CUDA (CPU and GPU)
-~~~~~~~~~~~~~~~~~~
+CUDA
+~~~~
 
 .. code-block:: sh
 
   cmake -B <name-of-build-directory> -DKokkos_ENABLE_CUDA=ON -DCMAKE_BUILD_TYPE=Release -S <name-of-source-directory>
 
 
-HIP (CPU and GPU)
-~~~~~~~~~~~~~~~~~
+HIP
+~~~
 
 .. code-block:: sh
 
@@ -71,7 +71,6 @@ Building and Linking a Kokkos "Hello World"
   ``Kokkos_ROOT`` and the root directory for you target backend SDK (i.e., ``CUDA_ROOT``, ``ROCM_PATH``) will need to be set.  ``Kokkos_ROOT`` should be set to the path of your Kokkos installation.  If a modules environment, the SDK variables will be automatically set upon module loading (e.g., ``module load rocm/5.7.1).  Please see `Build, Install and Use <https://kokkos.org/kokkos-core-wiki/building.html>`_ for additional details.  The example detailed below is in the Kokkos Core `example` directory.
 
 
-|br|
 
 .. code-block:: sh
 
