@@ -45,7 +45,7 @@ OpenMP (CPU Parallelism)
 
 .. note::
 
-  Kokkos will attempt to autodetect GPU microarchitecture, but it is also possible to specify the desired `GPU architecture <https://kokkos.org/kokkos-core-wiki/keywords.html#gpu-architectures>`_.  In scenarios where a backend (e.g., CUDA, HIP) is enabled, Kokkos will execute serially on the "host" (CPU).  
+  Kokkos will attempt to autodetect GPU microarchitecture, but it is also possible to specify the desired `GPU architecture <https://kokkos.org/kokkos-core-wiki/keywords.html#gpu-architectures>`_.  In scenarios where a device (GPU) backend (e.g., CUDA, HIP) is enabled, Kokkos will default to serial execution on the host (CPU).
 
 CUDA
 ~~~~
