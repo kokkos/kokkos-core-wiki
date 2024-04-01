@@ -89,15 +89,4 @@ Getting Help
 If you need addtional help getting started, please join the `Kokkos Slack Channel <https://kokkosteam.slack.com>`_.  Here are `sign up details <https://kokkos.org/kokkos-core-wiki/faq.html#faq>`_.  Joining Kokkos Slack is the on ramp for becoming a project contributor.
 
 
-..
-  **THIS IS A COMMENT**
-  *TODO*
-     - Integrate (merged) Quick Start with Cédric's PR:  https://github.com/kokkos/kokkos/pull/6796
-     - Ongoing reconciling with the Julien B. / KUG23- initiated discussion:  https://github.com/kokkos/internal-documents/pull/19
-     - Add `git submodule` "how to" for Kokkos
-     - Add Quick Start to main Kokkos page, such that it is the first thing you encounter on the landing page (kokkos.org)
-     - In V2, put the recipes for the different backends on different pages
-     - Julien B. suggested using github templates for the View "Hello World" example
-     - Add ``kokkos/example`` Nic M.:  CUDA as a CMake language example (using View): cmake -S . -B build -DKokkos_ENABLE_CUDA=ON CMAKE_CUDA_COMPILER=nvcc Kokkos_ENABLE_COMPILE_AS_CMAKE_LANGUAGE=ON [-DCMAKE_BUILD_TYPE=Release]
-..
 
