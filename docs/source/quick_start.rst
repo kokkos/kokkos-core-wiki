@@ -12,10 +12,6 @@ Download Latest and Build
   Please become familiar with `Kokkos Requirements <https://kokkos.org/kokkos-core-wiki/requirements.html>`_, and verify that your machine has all necessary compilers, backend GPU SDK (e.g., CUDA, ROCM, Intel oneAPI, etc.),and build system components.
 
 
-..
- Nota bene:  the link for "Latest" should be stable from one release to the next, but check periodically to be sure 
-..
-
 :bdg-link-primary:`Latest Release <https://github.com/kokkos/kokkos/releases/latest>`
 
 .. code-block:: sh
@@ -26,13 +22,8 @@ Download Latest and Build
   cd kokkos-x.y.z
 
 
-Basic Configuration
--------------------
-
-.. note::
-
-  You can create small shell scripts to manage and experiment with configuration details, following the GPU microarchitecture-appropriate examples below.  Upon successful configuration, ``make `` to build, and ``make install`` to install.
-
+Basic Configure, Build, Install Recipes
+----------------------------------------
 
 
 OpenMP (CPU Parallelism)
@@ -40,7 +31,9 @@ OpenMP (CPU Parallelism)
 
 .. code-block:: sh
 
-  cmake -B <name-of-build-directory> -DKokkos_ENABLE_OPENMP=ON -DCMAKE_BUILD_TYPE=Release -S <name-of-source-directory>
+  cmake -B <build-directory> -DKokkos_ENABLE_OPENMP=ON -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=<install-directory> -S <source-directory>
+  cmake --build <build-directory>
+  cmake --install <build-directory>
 
 
 .. note::
@@ -52,15 +45,19 @@ CUDA
 
 .. code-block:: sh
 
-  cmake -B <name-of-build-directory> -DKokkos_ENABLE_CUDA=ON -DCMAKE_BUILD_TYPE=Release -S <name-of-source-directory>
-
+  cmake -B <build-directory> -DKokkos_ENABLE_CUDA=ON -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=<install-directory> -S <source-directory> 
+  cmake --build <build-directory>
+  cmake --install <build-directory>
+  
 
 HIP
 ~~~
 
 .. code-block:: sh
 
-  cmake -B <name-of-build-directory> -DKokkos_ENABLE_HIP=ON -DCMAKE_CXX_COMPILER=hipcc -DCMAKE_BUILD_TYPE=Release -S <name-of-source-directory>
+  cmake -B <build-directory> -DKokkos_ENABLE_HIP=ON -DCMAKE_CXX_COMPILER=hipcc -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=<install-directory> -S <source-directory>
+  cmake --build <build-directory>
+  cmake --install <build-directory>
 
 
 Building and Linking a Kokkos "Hello World"
@@ -76,9 +73,9 @@ Building and Linking a Kokkos "Hello World"
 
   git clone https://github.com/kokkos/kokkos.git 
   cd example/build_cmake_installed
-  cmake -B <build directory> -S . -DKokkos_ROOT=<path-to-installation>
-  cd <build directory>
-  make 
+  cmake -B <build-directory> -S . -DKokkos_ROOT=<install-directory>
+  cd <build-directory>
+  cmake --build . 
   ./example
   
 
@@ -87,6 +84,3 @@ Getting Help
 ------------
 
 If you need addtional help getting started, please join the `Kokkos Slack Channel <https://kokkosteam.slack.com>`_.  Here are `sign up details <https://kokkos.org/kokkos-core-wiki/faq.html#faq>`_.  Joining Kokkos Slack is the on ramp for becoming a project contributor.
-
-
-
