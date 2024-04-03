@@ -8,24 +8,24 @@ namespace Kokkos{
 namespace Experimental{
 
 template <class ExecutionSpace, class InputIterator, class UnaryFunctorType>
-UnaryFunctorType for_each(const ExecutionSpace& exespace,                            (1)
-                      InputIterator first, InputIterator last,
-                      UnaryFunctorType functor);
+void for_each(const ExecutionSpace& exespace,                            (1)
+              InputIterator first, InputIterator last,
+              UnaryFunctorType functor);
 
 template <class ExecutionSpace, class InputIterator, class UnaryFunctorType>
-UnaryFunctorType for_each(const std::string& label, const ExecutionSpace& exespace,  (2)
-                      InputIterator first, InputIterator last,
-                      UnaryFunctorType functor);
+void for_each(const std::string& label, const ExecutionSpace& exespace,  (2)
+              InputIterator first, InputIterator last,
+              UnaryFunctorType functor);
 
 template <class ExecutionSpace, class DataType, class... Properties, class UnaryFunctorType>
-UnaryFunctorType for_each(const ExecutionSpace& exespace,
-             const Kokkos::View<DataType, Properties...>& view,                      (3)
-             UnaryFunctorType functor);
+void for_each(const ExecutionSpace& exespace,
+              const Kokkos::View<DataType, Properties...>& view,                      (3)
+              UnaryFunctorType functor);
 
 template <class ExecutionSpace, class DataType, class... Properties, class PredicateType>
-UnaryFunctorType for_each(const std::string& label, const ExecutionSpace& exespace,
-             const Kokkos::View<DataType, Properties...>& view,                      (4)
-             UnaryFunctorType func);
+void for_each(const std::string& label, const ExecutionSpace& exespace,
+              const Kokkos::View<DataType, Properties...>& view,                      (4)
+              UnaryFunctorType func);
 
 } //end namespace Experimental
 } //end namespace Kokkos
@@ -74,7 +74,7 @@ Applies the UnaryFunctorType `func` to the result of dereferencing each iterator
 
 ## Return
 
-`func`
+(nothing)
 
 
 ## Example
