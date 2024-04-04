@@ -385,7 +385,7 @@ Notes
   compilation errors with unqualified calls to math functions.  Use explicit
   qualification (``Kokkos::sqrt``) or using-declaration (``using
   Kokkos::sqrt;``) instead.  (See |KnownIssues|_)
-* Math functions were removed from the ``Kokkos::Exerimental::`` namespace in version 4.3
+* Math functions were removed from the ``Kokkos::Experimental::`` namespace in version 4.3
 
 ------------
 
