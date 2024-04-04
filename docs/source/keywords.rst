@@ -19,76 +19,86 @@ This page is organized in four sections:
 
 .. _keywords_backends:
 
-Kokkos backends
-===============
+Backend selection
+=================
+
+**Default State:**
+All backends are disabled by default.  This ensures you explicitly choose the
+backends you need for your specific hardware setup.
+
+**Enabling Backends:**
+You can enable backends by configuring with ``-DKokkos_ENABLE_<BACKEND>=ON``
+flag, where ``<BACKEND>`` is replaced with the specific backend you want to
+enable (e.g. ``-DKokkos_ENABLE_CUDA=ON`` for CUDA).
+
+**Restrictions:**
+  Mutual Exclusion: You can only have one device backend (e.g., CUDA, HIP,
+  SYCL) and one host parallel backend (e.g., OpenMP, C++ threads) enabled at
+  the same time. This is because these backends manage parallelism in
+  potentially conflicting ways.
+
+  Host Backend Requirement: At least one host backend must always be enabled.
+  This is because Kokkos code execution typically starts on the host (CPU)
+  before potentially being offloaded to devices (GPUs, accelerators). If you
+  don't explicitly enable a host backend, Kokkos will automatically enable the
+  Serial backend, which provides a sequential execution model.
 
 Serial backend
 --------------
 
 .. list-table::
-    :widths: 25 65 10
+    :widths: 25 65
     :header-rows: 1
     :align: left
 
     * -
       - Description/info
-      - Default
 
     * - ``Kokkos_ENABLE_SERIAL``
-      - To build Serial backend targeting CPUs
-      - ``OFF``
+      - To build the Serial backend targeting CPUs
 
 Host parallel backends
 ----------------------
 
 .. list-table::
-    :widths: 25 65 10
+    :widths: 25 65
     :header-rows: 1
     :align: left
 
     * -
       - Description/info
-      - Default
 
     * - ``Kokkos_ENABLE_OPENMP``
-      - To build OpenMP backend
-      - ``OFF``
+      - To build the OpenMP backend targeting CPUs
 
     * - ``Kokkos_ENABLE_THREADS``
-      - To build C++ Threads backend
-      - ``OFF``
+      - To build the C++ Threads backend
 
     * - ``Kokkos_ENABLE_HPX``
-      - :red:`[Experimental]` To build HPX backend
-      - ``OFF``
+      - :red:`[Experimental]` To build the HPX backend
 
 Device backends
 ---------------
 
 .. list-table::
-    :widths: 25 65 10
+    :widths: 25 65
     :header-rows: 1
     :align: left
 
     * -
       - Description/info
-      - Default
 
     * - ``Kokkos_ENABLE_CUDA``
-      - To build CUDA backend targeting NVIDIA GPUs
-      - ``OFF``
+      - To build the CUDA backend targeting NVIDIA GPUs
 
     * - ``Kokkos_ENABLE_HIP``
-      - To build HIP backend targeting AMD GPUs
-      - ``OFF``
+      - To build the HIP backend targeting AMD GPUs
 
     * - ``Kokkos_ENABLE_SYCL``
-      - :red:`[Experimental]` To build SYCL backend
-      - ``OFF``
+      - :red:`[Experimental]` To build the SYCL backend targeting Intel GPUs
 
     * - ``Kokkos_ENABLE_OPENMPTARGET``
       - :red:`[Experimental]` To build the OpenMP target backend
-      - ``OFF``
 
 
 .. _keywords_enable_options:
