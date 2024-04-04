@@ -164,4 +164,4 @@ Description
 
      .. important::
 
-	``arg_prop`` must not include a pointer to memory, or a label, or allow padding and ``arg_prop`` must include a memory space.
+	``arg_prop`` must not include a pointer to memory, or a label, or allow padding and ``arg_prop`` must include a memory space. 
