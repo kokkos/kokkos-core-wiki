@@ -531,32 +531,49 @@
 </div>
 <p>This page is organized in four sections:</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="#keywords-backends"><span class="std std-ref">Kokkos backends</span></a></p></li>
+<li><p><a class="reference internal" href="#keywords-backends"><span class="std std-ref">Backend selection</span></a></p></li>
 <li><p><a class="reference internal" href="#keywords-enable-options"><span class="std std-ref">Options</span></a></p></li>
 <li><p><a class="reference internal" href="#keywords-tpls"><span class="std std-ref">Third-party Libraries (TPLs)</span></a></p></li>
 <li><p><a class="reference internal" href="#keywords-arch"><span class="std std-ref">Architectures</span></a></p></li>
 </ul>
-<section id="kokkos-backends">
-<span id="keywords-backends"></span><h2>Kokkos backends<a class="headerlink" href="#kokkos-backends" title="Permalink to this heading">#</a></h2>
+<section id="backend-selection">
+<span id="keywords-backends"></span><h2>Backend selection<a class="headerlink" href="#backend-selection" title="Permalink to this heading">#</a></h2>
+<p><strong>Default State:</strong>
+All backends are disabled by default.  This ensures you explicitly choose the
+backends you need for your specific hardware setup.
+If no backend is enabled explicitly, the Serial backend will be enabled.</p>
+<p><strong>Enabling Backends:</strong>
+You can enable backends by configuring with <code class="docutils literal notranslate"><span class="pre">-DKokkos_ENABLE_&lt;BACKEND&gt;=ON</span></code>
+flag, where <code class="docutils literal notranslate"><span class="pre">&lt;BACKEND&gt;</span></code> is replaced with the specific backend you want to
+enable (e.g. <code class="docutils literal notranslate"><span class="pre">-DKokkos_ENABLE_CUDA=ON</span></code> for CUDA).</p>
+<dl>
+<dt><strong>Restrictions:</strong></dt><dd><p>Mutual Exclusion: You can only have one device backend (e.g., CUDA, HIP,
+SYCL) and one host parallel backend (e.g., OpenMP, C++ threads) enabled at
+the same time. This is because these backends manage parallelism in
+potentially conflicting ways.</p>
+<p>Host Backend Requirement: At least one host backend must always be enabled.
+This is because Kokkos code execution typically starts on the host (CPU)
+before potentially being offloaded to devices (GPUs, accelerators). If you
+don’t explicitly enable a host backend, Kokkos will automatically enable the
+Serial backend, which provides a sequential execution model.</p>
+</dd>
+</dl>
 <section id="serial-backend">
 <h3>Serial backend<a class="headerlink" href="#serial-backend" title="Permalink to this heading">#</a></h3>
 <div class="table-wrapper colwidths-given docutils container">
 <table class="docutils align-left">
 <colgroup>
-<col style="width: 25%" />
-<col style="width: 65%" />
-<col style="width: 10%" />
+<col style="width: 28%" />
+<col style="width: 72%" />
 </colgroup>
 <thead>
 <tr class="row-odd"><th class="head"></th>
 <th class="head"><p>Description/info</p></th>
-<th class="head"><p>Default</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_SERIAL</span></code></p></td>
-<td><p>To build Serial backend targeting CPUs</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
+<td><p>To build the Serial backend targeting CPUs</p></td>
 </tr>
 </tbody>
 </table>
@@ -567,28 +584,23 @@
 <div class="table-wrapper colwidths-given docutils container">
 <table class="docutils align-left">
 <colgroup>
-<col style="width: 25%" />
-<col style="width: 65%" />
-<col style="width: 10%" />
+<col style="width: 28%" />
+<col style="width: 72%" />
 </colgroup>
 <thead>
 <tr class="row-odd"><th class="head"></th>
 <th class="head"><p>Description/info</p></th>
-<th class="head"><p>Default</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_OPENMP</span></code></p></td>
-<td><p>To build OpenMP backend</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
+<td><p>To build the OpenMP backend targeting CPUs</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_THREADS</span></code></p></td>
-<td><p>To build C++ Threads backend</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
+<td><p>To build the C++ Threads backend</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_HPX</span></code></p></td>
-<td><p><span class="red">[Experimental]</span> To build HPX backend</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
+<td><p><span class="red">[Experimental]</span> To build the HPX backend</p></td>
 </tr>
 </tbody>
 </table>
@@ -599,32 +611,26 @@
 <div class="table-wrapper colwidths-given docutils container">
 <table class="docutils align-left">
 <colgroup>
-<col style="width: 25%" />
-<col style="width: 65%" />
-<col style="width: 10%" />
+<col style="width: 28%" />
+<col style="width: 72%" />
 </colgroup>
 <thead>
 <tr class="row-odd"><th class="head"></th>
 <th class="head"><p>Description/info</p></th>
-<th class="head"><p>Default</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_CUDA</span></code></p></td>
-<td><p>To build CUDA backend targeting NVIDIA GPUs</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
+<td><p>To build the CUDA backend targeting NVIDIA GPUs</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_HIP</span></code></p></td>
-<td><p>To build HIP backend targeting AMD GPUs</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
+<td><p>To build the HIP backend targeting AMD GPUs</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_SYCL</span></code></p></td>
-<td><p><span class="red">[Experimental]</span> To build SYCL backend</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
+<td><p><span class="red">[Experimental]</span> To build the SYCL backend targeting Intel GPUs</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_OPENMPTARGET</span></code></p></td>
 <td><p><span class="red">[Experimental]</span> To build the OpenMP target backend</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
 </tr>
 </tbody>
 </table>
@@ -1279,7 +1285,7 @@ architecture to compile for is determined before the program is run.</p>
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">CMake Keywords</a><ul>
-<li><a class="reference internal" href="#kokkos-backends">Kokkos backends</a><ul>
+<li><a class="reference internal" href="#backend-selection">Backend selection</a><ul>
 <li><a class="reference internal" href="#serial-backend">Serial backend</a></li>
 <li><a class="reference internal" href="#host-parallel-backends">Host parallel backends</a></li>
 <li><a class="reference internal" href="#device-backends">Device backends</a></li>
