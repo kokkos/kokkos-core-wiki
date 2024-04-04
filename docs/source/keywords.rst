@@ -25,6 +25,7 @@ Backend selection
 **Default State:**
 All backends are disabled by default.  This ensures you explicitly choose the
 backends you need for your specific hardware setup.
+If no backend is enabled explicitly, the Serial backend will be enabled.
 
 **Enabling Backends:**
 You can enable backends by configuring with ``-DKokkos_ENABLE_<BACKEND>=ON``
