@@ -26,7 +26,7 @@ HIP
 SYCL
 ====
 
-- Multiple of the Kokkos algorithm functions use third-party libraries like oneDPL.
+- Several of the Kokkos algorithm functions use third-party libraries like oneDPL.
   When using these, Kokkos doesn't control the kernel launch and thus the user has to make sure that all arguments
   that are forwarded to the TPL satisfy the sycl::is_device_copyable trait to avoid compiler errors. This holds true in particular
   for comparators used with Kokkos::sort in Kokkos versions prior to 4.3. The best advice to give is to make sure the respective
