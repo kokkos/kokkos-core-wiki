@@ -35,7 +35,8 @@ SYCL
 
   .. code-block:: cpp
 
-     Kokkos::sort(exec, values, KOKKOS_LAMBDA(int i, int j) { return keys(i) < keys(j); });
+     MyComparator my_comparator;
+     Kokkos::sort(exec, values, my_comparator);
 
   would give errors similar to
 
@@ -65,6 +66,14 @@ SYCL
       2332 |     parallel_for_lambda_impl<KernelName, KernelType, 1, PropertiesT>(
            |     ^
      [...]
+
+  this is fixed by
+
+  .. code-block:: cpp
+
+    struct sycl::is_device_copyable<MyComparator>
+      : std::true_type {};
+
 
 Mathematical functions
 ======================
