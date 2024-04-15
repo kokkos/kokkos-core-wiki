@@ -547,6 +547,54 @@
 </li>
 </ul>
 </section>
+<section id="sycl">
+<h2>SYCL<a class="headerlink" href="#sycl" title="Permalink to this heading">#</a></h2>
+<ul>
+<li><p>Several of the Kokkos algorithm functions use third-party libraries like oneDPL.
+When using these, Kokkos doesn’t control the kernel launch and thus the user has to make sure that all arguments
+that are forwarded to the TPL satisfy the sycl::is_device_copyable trait to avoid compiler errors. This holds true in particular
+for comparators used with Kokkos::sort in Kokkos versions prior to 4.3. The best advice to give is to make sure the respective
+parameters are trivially-copyable. If this isn’t possible, sycl::is_device_copyable should be specialized and users should make
+sure to use raw pointers instead of Kokkos::Views.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">MyComparator</span><span class="w"> </span><span class="n">my_comparator</span><span class="p">;</span>
+<span class="n">Kokkos</span><span class="o">::</span><span class="n">sort</span><span class="p">(</span><span class="n">exec</span><span class="p">,</span><span class="w"> </span><span class="n">values</span><span class="p">,</span><span class="w"> </span><span class="n">my_comparator</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>would give errors similar to</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">/usr/bin/compiler/../../include/sycl/types.hpp:2572:17: error: static assertion failed due to requirement &#39;is_device_copyable_v&lt;(lambda at /usr/include/oneapi/dpl/pstl/hetero/dpcpp/parallel_backend_sycl.h:1816:20)&gt; || detail::IsDeprecatedDeviceCopyable&lt;(lambda at /usr/include/oneapi/dpl/pstl/hetero/dpcpp/parallel_backend_sycl.h:1816:20), void&gt;::value&#39;: The specified type is not device copyable</span>
+<span class="go"> 2572 |   static_assert(is_device_copyable_v&lt;FieldT&gt; ||</span>
+<span class="go">      |                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span>
+<span class="go"> 2573 |                     detail::IsDeprecatedDeviceCopyable&lt;FieldT&gt;::value,</span>
+<span class="go">      |                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span>
+<span class="go"> /usr/bin/compiler/../../include/sycl/types.hpp:2605:7: note: in instantiation of template class &#39;sycl::detail::CheckFieldsAreDeviceCopyable&lt;(lambda at /usr/include/oneapi/dpl/pstl/hetero/dpcpp/parallel_backend_sycl.h:1578:83), 4&gt;&#39; requested here</span>
+<span class="go"> 2605 |     : CheckFieldsAreDeviceCopyable&lt;FuncT, __builtin_num_fields(FuncT)&gt;,</span>
+<span class="go">      |       ^</span>
+<span class="go">/usr/bin/compiler/../../include/sycl/types.hpp:2613:7: note: in instantiation of template class &#39;sycl::detail::CheckDeviceCopyable&lt;(lambda at /usr/include/oneapi/dpl/pstl/hetero/dpcpp/parallel_backend_sycl.h:1578:83)&gt;&#39; requested here</span>
+<span class="go"> 2613 |     : CheckDeviceCopyable&lt;KernelType&gt; {};</span>
+<span class="go">      |       ^</span>
+<span class="go">/usr/bin/compiler/../../include/sycl/handler.hpp:1652:5: note: in instantiation of template class &#39;sycl::detail::CheckDeviceCopyable&lt;sycl::detail::RoundedRangeKernel&lt;sycl::item&lt;1, true&gt;, 1, (lambda at /usr/include/oneapi/dpl/pstl/hetero/dpcpp/parallel_backend_sycl.h:1578:83)&gt;&gt;&#39; requested here</span>
+<span class="go"> 1652 |     detail::CheckDeviceCopyable&lt;KernelType&gt;();</span>
+<span class="go">      |     ^</span>
+<span class="go">/usr/bin/compiler/../../include/sycl/handler.hpp:1694:5: note: in instantiation of function template specialization &#39;sycl::handler::unpack&lt;sycl::detail::RoundedRangeKernel&lt;sycl::item&lt;1, true&gt;, 1, (lambda at /usr/include/oneapi/dpl/pstl/hetero/dpcpp/parallel_backend_sycl.h:1578:83)&gt;, sycl::detail::RoundedRangeKernel&lt;sycl::item&lt;1, true&gt;, 1, (lambda at /usr/include/oneapi/dpl/pstl/hetero/dpcpp/parallel_backend_sycl.h:1578:83)&gt;, sycl::ext::oneapi::experimental::properties&lt;std::tuple&lt;&gt;&gt;, false, (lambda at /usr/bin/compiler/../../include/sycl/handler.hpp:1697:21)&gt;&#39; requested here</span>
+<span class="go"> 1694 |     unpack&lt;KernelName, KernelType, PropertiesT,</span>
+<span class="go">      |     ^</span>
+<span class="go">/usr/bin/compiler/../../include/sycl/handler.hpp:1293:7: note: in instantiation of function template specialization &#39;sycl::handler::kernel_parallel_for_wrapper&lt;sycl::detail::RoundedRangeKernel&lt;sycl::item&lt;1, true&gt;, 1, (lambda at /usr/include/oneapi/dpl/pstl/hetero/dpcpp/parallel_backend_sycl.h:1578:83)&gt;, sycl::item&lt;1, true&gt;, sycl::detail::RoundedRangeKernel&lt;sycl::item&lt;1, true&gt;, 1, (lambda at /usr/include/oneapi/dpl/pstl/hetero/dpcpp/parallel_backend_sycl.h:1578:83)&gt;, sycl::ext::oneapi::experimental::properties&lt;std::tuple&lt;&gt;&gt;&gt;&#39; requested here</span>
+<span class="go"> 1293 |       kernel_parallel_for_wrapper&lt;KName, TransformedArgType, decltype(Wrapper),</span>
+<span class="go">      |       ^</span>
+<span class="go">/usr/bin/compiler/../../include/sycl/handler.hpp:2332:5: note: (skipping 7 contexts in backtrace; use -ftemplate-backtrace-limit=0 to see all)</span>
+<span class="go"> 2332 |     parallel_for_lambda_impl&lt;KernelName, KernelType, 1, PropertiesT&gt;(</span>
+<span class="go">      |     ^</span>
+<span class="go">[...]</span>
+</pre></div>
+</div>
+<p>this is fixed by</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span><span class="w"> </span><span class="nc">sycl</span><span class="o">::</span><span class="n">is_device_copyable</span><span class="o">&lt;</span><span class="n">MyComparator</span><span class="o">&gt;</span>
+<span class="w">  </span><span class="o">:</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">true_type</span><span class="w"> </span><span class="p">{};</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
 <section id="mathematical-functions">
 <h2>Mathematical functions<a class="headerlink" href="#mathematical-functions" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
@@ -650,6 +698,7 @@ scope.</p>
             <ul>
 <li><a class="reference internal" href="#">Known issues</a><ul>
 <li><a class="reference internal" href="#hip">HIP</a></li>
+<li><a class="reference internal" href="#sycl">SYCL</a></li>
 <li><a class="reference internal" href="#mathematical-functions">Mathematical functions</a></li>
 <li><a class="reference internal" href="#mathematical-constants">Mathematical constants</a></li>
 </ul>
