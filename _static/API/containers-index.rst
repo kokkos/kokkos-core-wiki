@@ -24,7 +24,7 @@ API: Containers
    * - `Unordered-Map <containers/Unordered-Map.html>`__
      - UnorderedMap comment.
    * - `vector <containers/vector.html>`__
-     - std::vector compatible implementation that works with non-host memory spaces.
+     - [DEPRECATED] std::vector compatible implementation that works with non-host memory spaces.
 
 .. toctree::
    :hidden:

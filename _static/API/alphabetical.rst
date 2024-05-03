@@ -48,7 +48,7 @@ Containers
 +----------------------------------------------------+---------------------------------------+----------+----------------------------------------------------------------------------------------------------------------+
 | `UnorderedMap <containers/Unordered-Map.html>`_    | `Containers <containers-index.html>`_ | View     | A map data structure optimized for concurrent inserts.                                                         |
 +----------------------------------------------------+---------------------------------------+----------+----------------------------------------------------------------------------------------------------------------+
-| `vector <containers/vector.html>`_                 | `Containers <containers-index.html>`_ | View     | A class providing similar interfaces to ``std::vector``.                                                       |
+| `vector <containers/vector.html>`_                 | `Containers <containers-index.html>`_ | View     | [DEPRECATED] A class providing similar interfaces to ``std::vector``.                                          |
 +----------------------------------------------------+---------------------------------------+----------+----------------------------------------------------------------------------------------------------------------+
 
 Core
