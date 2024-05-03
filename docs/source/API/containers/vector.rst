@@ -2,10 +2,10 @@
 .. role:: cppkokkos(code)
     :language: cppkokkos
 
-``vector``
-==========
+``vector`` [DEPRECATED]
+=======================
 
-Header file: ``<Kokkos_Vector.hpp>``
+Header file: ``<Kokkos_Vector.hpp>`` (deprecated in Kokkos 4.3)
 
 The Kokkos Vector is semantically similar to the std::vector, but it is designed to overcome issues with memory allocations and copies when working with devices that have different memory spaces. The ``Kokkos::Vector`` is a Rank-1 DualView that implements the same interface as the std::vector. This allows programs that rely heavily on std::vector to grant access to program data from within a non-host execution space. Note that many of the std::vector compatible functions are host only, so access may be limited based on kernel complexity. Below is a synopsis of the class and the description for each method specifies whether it is supported on the host, device or both.
 
@@ -14,7 +14,7 @@ Usage
 
 .. code-block:: cpp
 
-    Kokkos::vector<Scalar, Device> v(n,1);
+    Kokkos::vector<Scalar, Device> v(n,1);  // (deprecated since 4.3)
     v.push_back(2);
     v.resize(n+3);
     v.[n+1] = 3;
