@@ -60,6 +60,9 @@ Avoid creating/removing/modifying header files whose names start with `Kokkos_`,
 The following are public headers:
 
     Kokkos_Core.hpp
+    Kokkos_Assert.hpp
+    Kokkos_Clamp.hpp
+    Kokkos_MinMax.hpp
 
 If a header is not public, please do not directly `#include` it.  It is not guaranteed to work now or continue to work in the future.  This includes any headers found in subdirectories.
 
