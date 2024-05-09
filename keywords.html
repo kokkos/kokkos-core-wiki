@@ -669,10 +669,46 @@ Serial backend, which provides a sequential execution model.</p>
 <td><p>Build tests</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_TUNING</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_DEPRECATED_CODE_3</span></code></p></td>
+<td><p>Enable deprecated code in the Kokkos 3.x series <span class="red">[Removed in 4.3]</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_DEPRECATED_CODE_4</span></code></p></td>
+<td><p>Enable deprecated code in the Kokkos 4.x series</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ON</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_DEPRECATION_WARNINGS</span></code></p></td>
+<td><p>Whether to raise warnings at compile time when using deprecated Kokkos facilities</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ON</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_TUNING</span></code></p></td>
 <td><p>Create bindings for tuning tools</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
 </tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_AGGRESSIVE_VECTORIZATION</span></code></p></td>
+<td><p>Aggressively vectorize loops</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="debugging">
+<h3>Debugging<a class="headerlink" href="#debugging" title="Permalink to this heading">#</a></h3>
+<div class="table-wrapper colwidths-given docutils container">
+<table class="docutils align-left">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 52%" />
+<col style="width: 28%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"></th>
+<th class="head"><p>Description/info</p></th>
+<th class="head"><p>Default</p></th>
+</tr>
+</thead>
+<tbody>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_DEBUG</span></code></p></td>
 <td><p>Activate extra debug features - may increase compile times</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
@@ -683,30 +719,6 @@ Serial backend, which provides a sequential execution model.</p>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_DEBUG_DUALVIEW_MODIFY_CHECK</span></code></p></td>
 <td><p>Debug check on dual views</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_DEPRECATED_CODE_3</span></code></p></td>
-<td><p>Enable deprecated code in the Kokkos 3.x series</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_DEPRECATED_CODE_4</span></code></p></td>
-<td><p>Enable deprecated code in the Kokkos 4.x series</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">ON</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_AGGRESSIVE_VECTORIZATION</span></code></p></td>
-<td><p>Aggressively vectorize loops</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_COMPILER_WARNINGS</span></code></p></td>
-<td><p>Print all compiler warnings</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_HEADER_SELF_CONTAINMENT_TESTS</span></code></p></td>
-<td><p>Check that headers are self-contained</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_LARGE_MEM_TESTS</span></code></p></td>
-<td><p>Perform extra large memory tests</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
 </tr>
 </tbody>
@@ -757,10 +769,48 @@ Serial backend, which provides a sequential execution model.</p>
 <td><p>Enable relocatable device code (RDC) for HIP</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
 </tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_ATOMICS_BYPASS</span></code></p></td>
+<td><p>Disable atomics when no host parallel nor device backend is enabled for Serial only builds (since Kokkos 4.3)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
+</tr>
 </tbody>
 </table>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_CUDA_LAMBDA</span></code> default value is <code class="docutils literal notranslate"><span class="pre">OFF</span></code> until 3.7 and <code class="docutils literal notranslate"><span class="pre">ON</span></code> since 4.0</p>
+</section>
+<section id="development">
+<h3>Development<a class="headerlink" href="#development" title="Permalink to this heading">#</a></h3>
+<p>These are intended for developers of Kokkos.  If you are a user, you probably
+should not be setting these.</p>
+<div class="table-wrapper colwidths-given docutils container">
+<table class="docutils align-left">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 52%" />
+<col style="width: 28%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"></th>
+<th class="head"><p>Description/info</p></th>
+<th class="head"><p>Default</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_COMPILER_WARNINGS</span></code></p></td>
+<td><p>Print all compiler warnings</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_HEADER_SELF_CONTAINMENT_TESTS</span></code></p></td>
+<td><p>Check that headers are self-contained</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_LARGE_MEM_TESTS</span></code></p></td>
+<td><p>Perform extra large memory tests</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
 </section>
 </section>
 <section id="third-party-libraries-tpls">
@@ -1295,7 +1345,9 @@ architecture to compile for is determined before the program is run.</p>
 </li>
 <li><a class="reference internal" href="#options">Options</a><ul>
 <li><a class="reference internal" href="#general-options">General options</a></li>
+<li><a class="reference internal" href="#debugging">Debugging</a></li>
 <li><a class="reference internal" href="#backend-specific-options">Backend-specific options</a></li>
+<li><a class="reference internal" href="#development">Development</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#third-party-libraries-tpls">Third-party Libraries (TPLs)</a></li>
