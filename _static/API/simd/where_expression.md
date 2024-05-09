@@ -29,8 +29,13 @@ Where expression objects are only constructed by calling the non-member method `
     where(const simd_mask<T, Abi>&, const simd<T, Abi>&)`: creates a const where expression that references the values in the `simd` argument selected by the `simd_mask` argument.
 
 ### Load/Store Methods
- * `template<class U, class Flags> void const_where_expression::copy_to(U* mem, Flags) const`: Executes a masked store operation, storing vector value `i` at `mem[i]` only if mask value `i` is true. The only valid value of `Flags` is `Kokkos::Experimental::element_aligned_tag`.
- * `template<class U, class Flags> void where_expression::copy_from(const U* mem, Flags)`: Executes a masked load operation, loading vector value `i` from `mem[i]` only if mask value `i` is true. The only valid value of `Flags` is `Kokkos::Experimental::element_aligned_tag`.
+ * `template<class U, class Flags> void const_where_expression::copy_to(U* mem, Flags) const`: Executes a masked store operation, storing vector value `i` at `mem[i]` only if mask value `i` is true. `Flags` is the `simd_flags` type that is used to describe the alignment at the address `mem`.
+ * `template<class U, class Flags> void where_expression::copy_from(const U* mem, Flags)`: Executes a masked load operation, loading vector value `i` from `mem[i]` only if mask value `i` is true. `Flags` is the `simd_flags` type that is used to describe the alignment at the address `mem`.
+
+#### Simd Flags
+ * Available `simd_flags` are `simd_flag_default` and `simd_flag_aligned`.
+ * For backward compatibility, `Kokkos::Experimental::element_aligned_tag` and `Kokkos::Experimental::vector_aligned_tag` types are available.
+ * `Kokkos::Experimental::element_aligned_tag` is a type alias for `decltype(simd_flag_default)` and `Kokkos::Experimental::vector_aligned_tag` is a type alias for `decltype(simd_flag_aligned)`.
 
 ### Gather/Scatter Methods
  These methods were added by Kokkos and are not present in the ISO C++ proposal.

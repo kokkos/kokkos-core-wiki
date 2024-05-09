@@ -542,6 +542,7 @@ It is based on the <code class="docutils literal notranslate"><span class="pre">
 <h3>Template Parameters<a class="headerlink" href="#template-parameters" title="Permalink to this heading">#</a></h3>
 <p>The first template parameter <code class="docutils literal notranslate"><span class="pre">T</span></code> should be a C++ fundamental type for which the current platform supports vector intrinsics. Kokkos supports the following types for <code class="docutils literal notranslate"><span class="pre">T</span></code>:</p>
 <ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">float</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">double</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">std::int32_t</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">std::int64_t</span></code></p></li>
@@ -575,15 +576,22 @@ It is based on the <code class="docutils literal notranslate"><span class="pre">
 <li><p><code class="docutils literal notranslate"><span class="pre">simd()</span></code>: Default Constructor. The vector values are not initialized by this constructor.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">template</span> <span class="pre">&lt;class</span> <span class="pre">U&gt;</span> <span class="pre">simd(U&amp;&amp;)</span></code>: Single-value constructor. The argument will be converted to <code class="docutils literal notranslate"><span class="pre">value_type</span></code> and all the vector values will be set equal to that value.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">template</span> <span class="pre">&lt;class</span> <span class="pre">G&gt;</span> <span class="pre">simd(G&amp;&amp;</span> <span class="pre">gen)</span></code>: Generator constructor. The generator <code class="docutils literal notranslate"><span class="pre">gen</span></code> should be a callable type (e.g. functor) that can accept <code class="docutils literal notranslate"><span class="pre">std::integral_constant&lt;std::size_t,</span> <span class="pre">i&gt;()</span></code> as an argument and return something convertible to <code class="docutils literal notranslate"><span class="pre">value_type</span></code>. Vector lane <code class="docutils literal notranslate"><span class="pre">i</span></code> will be initialized to the value of <code class="docutils literal notranslate"><span class="pre">gen(std::integral_constant&lt;std::size_t,</span> <span class="pre">i&gt;())</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">template</span> <span class="pre">&lt;class</span> <span class="pre">U,</span> <span class="pre">class</span> <span class="pre">Flags&gt;</span> <span class="pre">simd(const</span> <span class="pre">U*</span> <span class="pre">mem,</span> <span class="pre">Flags)</span></code>: loads the vector values from memory based on the guidance represented by the <code class="docutils literal notranslate"><span class="pre">Flags</span></code>. The only supported type for <code class="docutils literal notranslate"><span class="pre">Flags</span></code> is <code class="docutils literal notranslate"><span class="pre">Kokkos::Experimental::element_aligned_tag</span></code>.</p></li>
 </ul>
 </section>
 <section id="load-store-methods">
 <h3>Load/Store Methods<a class="headerlink" href="#load-store-methods" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">template</span> <span class="pre">&lt;class</span> <span class="pre">U,</span> <span class="pre">class</span> <span class="pre">Flags&gt;</span> <span class="pre">void</span> <span class="pre">copy_from(const</span> <span class="pre">U*</span> <span class="pre">mem,</span> <span class="pre">Flags</span> <span class="pre">flags)</span></code>: Loads the full vector of contiguous values starting at the address <code class="docutils literal notranslate"><span class="pre">mem</span></code>. The only valid type for <code class="docutils literal notranslate"><span class="pre">Flags</span></code> is <code class="docutils literal notranslate"><span class="pre">Kokkos::Experimental::element_aligned_tag</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">template</span> <span class="pre">&lt;class</span> <span class="pre">U,</span> <span class="pre">class</span> <span class="pre">Flags&gt;</span> <span class="pre">void</span> <span class="pre">copy_to(U*</span> <span class="pre">mem,</span> <span class="pre">Flags</span> <span class="pre">flags)</span></code>: Stores the full vector of contiguous values starting at the address <code class="docutils literal notranslate"><span class="pre">mem</span></code>. The only valid type for <code class="docutils literal notranslate"><span class="pre">Flags</span></code> is <code class="docutils literal notranslate"><span class="pre">Kokkos::Experimental::element_aligned_tag</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">template</span> <span class="pre">&lt;class</span> <span class="pre">U,</span> <span class="pre">class</span> <span class="pre">Flags&gt;</span> <span class="pre">void</span> <span class="pre">copy_from(const</span> <span class="pre">U*</span> <span class="pre">mem,</span> <span class="pre">Flags</span> <span class="pre">flags)</span></code>: Loads the full vector of contiguous values starting at the address <code class="docutils literal notranslate"><span class="pre">mem</span></code>. <code class="docutils literal notranslate"><span class="pre">Flags</span></code> is the <code class="docutils literal notranslate"><span class="pre">simd_flags</span></code> that is used to describe the alignment at the address <code class="docutils literal notranslate"><span class="pre">mem</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">template</span> <span class="pre">&lt;class</span> <span class="pre">U,</span> <span class="pre">class</span> <span class="pre">Flags&gt;</span> <span class="pre">void</span> <span class="pre">copy_to(U*</span> <span class="pre">mem,</span> <span class="pre">Flags</span> <span class="pre">flags)</span></code>: Stores the full vector of contiguous values starting at the address <code class="docutils literal notranslate"><span class="pre">mem</span></code>. <code class="docutils literal notranslate"><span class="pre">Flags</span></code> is the <code class="docutils literal notranslate"><span class="pre">simd_flags</span></code> that is used to describe the alignment at the address <code class="docutils literal notranslate"><span class="pre">mem</span></code>.</p></li>
 </ul>
+<section id="simd-flags">
+<h4>Simd Flags<a class="headerlink" href="#simd-flags" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Available <code class="docutils literal notranslate"><span class="pre">simd_flags</span></code> are <code class="docutils literal notranslate"><span class="pre">simd_flag_default</span></code> and <code class="docutils literal notranslate"><span class="pre">simd_flag_aligned</span></code>.</p></li>
+<li><p>For backward compatibility, <code class="docutils literal notranslate"><span class="pre">Kokkos::Experimental::element_aligned_tag</span></code> and <code class="docutils literal notranslate"><span class="pre">Kokkos::Experimental::vector_aligned_tag</span></code> types are available.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Kokkos::Experimental::element_aligned_tag</span></code> is a type alias for <code class="docutils literal notranslate"><span class="pre">decltype(simd_flag_default)</span></code> and <code class="docutils literal notranslate"><span class="pre">Kokkos::Experimental::vector_aligned_tag</span></code> is a type alias for <code class="docutils literal notranslate"><span class="pre">decltype(simd_flag_aligned)</span></code>.</p></li>
+</ul>
+</section>
 </section>
 <section id="value-access-methods">
 <h3>Value Access Methods<a class="headerlink" href="#value-access-methods" title="Permalink to this heading">#</a></h3>
@@ -601,7 +609,9 @@ It is based on the <code class="docutils literal notranslate"><span class="pre">
 <li><p><code class="docutils literal notranslate"><span class="pre">simd</span> <span class="pre">operator*(const</span> <span class="pre">simd&amp;</span> <span class="pre">lhs,</span> <span class="pre">const</span> <span class="pre">simd&amp;</span> <span class="pre">rhs)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">simd</span> <span class="pre">operator/(const</span> <span class="pre">simd&amp;</span> <span class="pre">lhs,</span> <span class="pre">const</span> <span class="pre">simd&amp;</span> <span class="pre">rhs)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">simd</span> <span class="pre">operator&gt;&gt;(const</span> <span class="pre">simd&amp;</span> <span class="pre">lhs,</span> <span class="pre">const</span> <span class="pre">simd&amp;</span> <span class="pre">rhs)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">simd</span> <span class="pre">operator&gt;&gt;(const</span> <span class="pre">simd&amp;</span> <span class="pre">lhs,</span> <span class="pre">int</span> <span class="pre">rhs)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">simd</span> <span class="pre">operator&lt;&lt;(const</span> <span class="pre">simd&amp;</span> <span class="pre">lhs,</span> <span class="pre">const</span> <span class="pre">simd&amp;</span> <span class="pre">rhs)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">simd</span> <span class="pre">operator&lt;&lt;(const</span> <span class="pre">simd&amp;</span> <span class="pre">lhs,</span> <span class="pre">int</span> <span class="pre">rhs)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">simd</span> <span class="pre">operator+=(simd&amp;</span> <span class="pre">lhs,</span> <span class="pre">const</span> <span class="pre">simd&amp;</span> <span class="pre">rhs)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">simd</span> <span class="pre">operator-=(simd&amp;</span> <span class="pre">lhs,</span> <span class="pre">const</span> <span class="pre">simd&amp;</span> <span class="pre">rhs)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">simd</span> <span class="pre">operator*=(simd&amp;</span> <span class="pre">lhs,</span> <span class="pre">const</span> <span class="pre">simd&amp;</span> <span class="pre">rhs)</span></code></p></li>
@@ -619,9 +629,17 @@ It is based on the <code class="docutils literal notranslate"><span class="pre">
 <li><p><code class="docutils literal notranslate"><span class="pre">mask_type</span> <span class="pre">operator&lt;(const</span> <span class="pre">simd&amp;</span> <span class="pre">lhs,</span> <span class="pre">const</span> <span class="pre">simd&amp;</span> <span class="pre">rhs)</span></code></p></li>
 </ul>
 </section>
+<section id="rounding-functions">
+<h3>Rounding Functions<a class="headerlink" href="#rounding-functions" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">simd</span> <span class="pre">Kokkos::floor(const</span> <span class="pre">simd&amp;</span> <span class="pre">lhs)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">simd</span> <span class="pre">Kokkos::ceil(const</span> <span class="pre">simd&amp;</span> <span class="pre">lhs)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">simd</span> <span class="pre">Kokkos::round(const</span> <span class="pre">simd&amp;</span> <span class="pre">lhs)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">simd</span> <span class="pre">Kokkos::trunc(const</span> <span class="pre">simd&amp;</span> <span class="pre">lhs)</span></code></p></li>
+</ul>
+</section>
 <section id="min-max-functions">
 <h3>Min/Max Functions<a class="headerlink" href="#min-max-functions" title="Permalink to this heading">#</a></h3>
-<p>These functions are defined for all supported <code class="docutils literal notranslate"><span class="pre">value_type</span></code>s.</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">simd</span> <span class="pre">Kokkos::min(const</span> <span class="pre">simd&amp;</span> <span class="pre">lhs,</span> <span class="pre">const</span> <span class="pre">simd&amp;</span> <span class="pre">rhs)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">simd</span> <span class="pre">Kokkos::max(const</span> <span class="pre">simd&amp;</span> <span class="pre">lhs,</span> <span class="pre">const</span> <span class="pre">simd&amp;</span> <span class="pre">rhs)</span></code></p></li>
@@ -629,7 +647,6 @@ It is based on the <code class="docutils literal notranslate"><span class="pre">
 </section>
 <section id="cmath-functions">
 <h3><code class="docutils literal notranslate"><span class="pre">&lt;cmath&gt;</span></code> Functions<a class="headerlink" href="#cmath-functions" title="Permalink to this heading">#</a></h3>
-<p>These functions are only defined for <code class="docutils literal notranslate"><span class="pre">value_type=double</span></code>.</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">simd</span> <span class="pre">Kokkos::abs(const</span> <span class="pre">simd&amp;</span> <span class="pre">lhs)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">simd</span> <span class="pre">Kokkos::exp(const</span> <span class="pre">simd&amp;</span> <span class="pre">lhs)</span></code></p></li>
@@ -661,11 +678,19 @@ It is based on the <code class="docutils literal notranslate"><span class="pre">
 <li><p><code class="docutils literal notranslate"><span class="pre">simd</span> <span class="pre">Kokkos::copysign(const</span> <span class="pre">simd&amp;</span> <span class="pre">mag,</span> <span class="pre">const</span> <span class="pre">simd&amp;</span> <span class="pre">sgn)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">simd</span> <span class="pre">Kokkos::fma(const</span> <span class="pre">simd&amp;</span> <span class="pre">x,</span> <span class="pre">const</span> <span class="pre">simd&amp;</span> <span class="pre">y,</span> <span class="pre">const</span> <span class="pre">simd&amp;</span> <span class="pre">z)</span></code></p></li>
 </ul>
+<p>These functions are only defined in <code class="docutils literal notranslate"><span class="pre">AVX2</span></code> and <code class="docutils literal notranslate"><span class="pre">AVX512</span></code> for <code class="docutils literal notranslate"><span class="pre">value_type=float</span></code> and <code class="docutils literal notranslate"><span class="pre">value_type=double</span></code></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">simd</span> <span class="pre">Kokkos::cbrt(simd&amp;</span> <span class="pre">lhs)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">simd</span> <span class="pre">Kokkos::exp(simd&amp;</span> <span class="pre">lhs)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">simd</span> <span class="pre">Kokkos::log(simd&amp;</span> <span class="pre">lhs)</span></code></p></li>
+</ul>
 </section>
 <section id="global-typedefs">
 <h3>Global Typedefs<a class="headerlink" href="#global-typedefs" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">template</span> <span class="pre">&lt;class</span> <span class="pre">T&gt;</span> <span class="pre">Kokkos::Experimental::native_simd</span></code>: Alias for <code class="docutils literal notranslate"><span class="pre">Kokkos::Experimental::simd&lt;T,</span> <span class="pre">Kokkos::Experimental::simd_abi::native&lt;T&gt;&gt;</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Kokkos::Experimental::element_aligned_tag</span></code>: Alias for <code class="docutils literal notranslate"><span class="pre">Kokkos::Experimental::simd_flags&lt;&gt;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Kokkos::Experimental::vector_aligned_tag</span></code>: Alias for <code class="docutils literal notranslate"><span class="pre">Kokkos::Experimental::simd_flags&lt;simd_alignment_vector_aligned&gt;</span></code></p></li>
 </ul>
 </section>
 </section>
@@ -755,10 +780,14 @@ It is based on the <code class="docutils literal notranslate"><span class="pre">
 <li><a class="reference internal" href="#typedefs">Typedefs</a></li>
 <li><a class="reference internal" href="#width">Width</a></li>
 <li><a class="reference internal" href="#constructors">Constructors</a></li>
-<li><a class="reference internal" href="#load-store-methods">Load/Store Methods</a></li>
+<li><a class="reference internal" href="#load-store-methods">Load/Store Methods</a><ul>
+<li><a class="reference internal" href="#simd-flags">Simd Flags</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#value-access-methods">Value Access Methods</a></li>
 <li><a class="reference internal" href="#arithmetic-operators">Arithmetic Operators</a></li>
 <li><a class="reference internal" href="#comparison-operators">Comparison Operators</a></li>
+<li><a class="reference internal" href="#rounding-functions">Rounding Functions</a></li>
 <li><a class="reference internal" href="#min-max-functions">Min/Max Functions</a></li>
 <li><a class="reference internal" href="#cmath-functions"><code class="docutils literal notranslate"><span class="pre">&lt;cmath&gt;</span></code> Functions</a></li>
 <li><a class="reference internal" href="#global-typedefs">Global Typedefs</a></li>

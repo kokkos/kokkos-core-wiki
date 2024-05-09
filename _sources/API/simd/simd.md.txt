@@ -19,6 +19,7 @@ class simd;
 ### Template Parameters
 
 The first template parameter `T` should be a C++ fundamental type for which the current platform supports vector intrinsics. Kokkos supports the following types for `T`:
+ - `float`
  - `double`
  - `std::int32_t`
  - `std::int64_t`
@@ -45,12 +46,17 @@ The second template parameter `Abi` is one of the pre-defined ABI types in the n
   * `simd()`: Default Constructor. The vector values are not initialized by this constructor.
   * `template <class U> simd(U&&)`: Single-value constructor. The argument will be converted to `value_type` and all the vector values will be set equal to that value.
   * `template <class G> simd(G&& gen)`: Generator constructor. The generator `gen` should be a callable type (e.g. functor) that can accept `std::integral_constant<std::size_t, i>()` as an argument and return something convertible to `value_type`. Vector lane `i` will be initialized to the value of `gen(std::integral_constant<std::size_t, i>())`.
-  * `template <class U, class Flags> simd(const U* mem, Flags)`: loads the vector values from memory based on the guidance represented by the `Flags`. The only supported type for `Flags` is `Kokkos::Experimental::element_aligned_tag`.
 
 ### Load/Store Methods
 
-  * `template <class U, class Flags> void copy_from(const U* mem, Flags flags)`: Loads the full vector of contiguous values starting at the address `mem`. The only valid type for `Flags` is `Kokkos::Experimental::element_aligned_tag`.
-  * `template <class U, class Flags> void copy_to(U* mem, Flags flags)`: Stores the full vector of contiguous values starting at the address `mem`. The only valid type for `Flags` is `Kokkos::Experimental::element_aligned_tag`.
+  * `template <class U, class Flags> void copy_from(const U* mem, Flags flags)`: Loads the full vector of contiguous values starting at the address `mem`. `Flags` is the `simd_flags` that is used to describe the alignment at the address `mem`.
+  * `template <class U, class Flags> void copy_to(U* mem, Flags flags)`: Stores the full vector of contiguous values starting at the address `mem`. `Flags` is the `simd_flags` that is used to describe the alignment at the address `mem`.
+
+#### Simd Flags
+
+  * Available `simd_flags` are `simd_flag_default` and `simd_flag_aligned`.
+  * For backward compatibility, `Kokkos::Experimental::element_aligned_tag` and `Kokkos::Experimental::vector_aligned_tag` types are available.
+  * `Kokkos::Experimental::element_aligned_tag` is a type alias for `decltype(simd_flag_default)` and `Kokkos::Experimental::vector_aligned_tag` is a type alias for `decltype(simd_flag_aligned)`.
 
 ### Value Access Methods
   * `reference operator[](std::size_t)`: returns a reference to vector value `i` that can be modified.
@@ -63,7 +69,9 @@ The second template parameter `Abi` is one of the pre-defined ABI types in the n
   * `simd operator*(const simd& lhs, const simd& rhs)`
   * `simd operator/(const simd& lhs, const simd& rhs)`
   * `simd operator>>(const simd& lhs, const simd& rhs)`
+  * `simd operator>>(const simd& lhs, int rhs)`
   * `simd operator<<(const simd& lhs, const simd& rhs)`
+  * `simd operator<<(const simd& lhs, int rhs)`
   * `simd operator+=(simd& lhs, const simd& rhs)`
   * `simd operator-=(simd& lhs, const simd& rhs)`
   * `simd operator*=(simd& lhs, const simd& rhs)`
@@ -77,13 +85,17 @@ The second template parameter `Abi` is one of the pre-defined ABI types in the n
   * `mask_type operator>(const simd& lhs, const simd& rhs)`
   * `mask_type operator<(const simd& lhs, const simd& rhs)`
 
+### Rounding Functions
+  * `simd Kokkos::floor(const simd& lhs)`
+  * `simd Kokkos::ceil(const simd& lhs)`
+  * `simd Kokkos::round(const simd& lhs)`
+  * `simd Kokkos::trunc(const simd& lhs)`
+
 ### Min/Max Functions
-These functions are defined for all supported `value_type`s.
   * `simd Kokkos::min(const simd& lhs, const simd& rhs)`
   * `simd Kokkos::max(const simd& lhs, const simd& rhs)`
 
 ### `<cmath>` Functions
-These functions are only defined for `value_type=double`.
   * `simd Kokkos::abs(const simd& lhs)`
   * `simd Kokkos::exp(const simd& lhs)`
   * `simd Kokkos::exp2(const simd& lhs)`
@@ -114,8 +126,16 @@ These functions are only defined for `value_type=double`.
   * `simd Kokkos::copysign(const simd& mag, const simd& sgn)`
   * `simd Kokkos::fma(const simd& x, const simd& y, const simd& z)`
 
+  These functions are only defined in `AVX2` and `AVX512` for `value_type=float` and `value_type=double`
+  * `simd Kokkos::cbrt(simd& lhs)`
+  * `simd Kokkos::exp(simd& lhs)`
+  * `simd Kokkos::log(simd& lhs)`
+
+
 ### Global Typedefs
   * `template <class T> Kokkos::Experimental::native_simd`: Alias for `Kokkos::Experimental::simd<T, Kokkos::Experimental::simd_abi::native<T>>`.
+  * `Kokkos::Experimental::element_aligned_tag`: Alias for `Kokkos::Experimental::simd_flags<>`
+  * `Kokkos::Experimental::vector_aligned_tag`: Alias for `Kokkos::Experimental::simd_flags<simd_alignment_vector_aligned>`
 
 ## Examples
 
