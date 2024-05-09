@@ -26,7 +26,7 @@ Synopsis
     template<class ... Args>
     class Kokkos::RangePolicy {
         typedef RangePolicy execution_policy;
-        typedef typename traits::index_type member_type ;
+        typedef typename traits::index_type member_type;
         typedef typename traits::index_type index_type;
 
         //Inherited from PolicyTraits<Args...>
@@ -41,23 +41,23 @@ Synopsis
         RangePolicy(const RangePolicy&) = default;
         RangePolicy(RangePolicy&&) = default;
 
-        inline RangePolicy();
+        RangePolicy();
 
         template<class ... Args>
-        inline RangePolicy( const execution_space & work_space
-                          , const member_type work_begin
-                          , const member_type work_end
-                          , Args ... args);
+        RangePolicy( const execution_space & work_space
+                   , member_type work_begin
+                   , member_type work_end
+                   , Args ... args );
 
         template<class ... Args>
-        inline RangePolicy( const member_type work_begin
-                          , const member_type work_end
-                          , Args ... args);
+        RangePolicy( member_type work_begin
+                   , member_type work_end
+                   , Args ... args );
 
         // retrieve chunk_size
-        inline member_type chunk_size() const;
+        member_type chunk_size() const;
         // set chunk_size to a discrete value
-        inline RangePolicy set_chunk_size(int chunk_size_);
+        RangePolicy& set_chunk_size(int chunk_size_);
 
         // return ExecSpace instance provided to the constructor
         KOKKOS_INLINE_FUNCTION const execution_space & space() const;
@@ -101,11 +101,11 @@ Constructors
 
    Default Constructor uninitialized policy.
 
-.. cppkokkos:function:: template<class ... InitArgs> RangePolicy(const int64_t& begin, const int64_t& end, const InitArgs ... init_args)
+.. cppkokkos:function:: template<class ... InitArgs> RangePolicy(int64_t begin, int64_t end, InitArgs ... init_args)
 
    Provide a start and end index as well as optional arguments to control certain behavior (see below).
 
-.. cppkokkos:function:: template<class ... InitArgs> RangePolicy(const ExecutionSpace& space, const int64_t& begin, const int64_t& end, const InitArgs ... init_args)
+.. cppkokkos:function:: template<class ... InitArgs> RangePolicy(const ExecutionSpace& space, int64_t begin, int64_t end, InitArgs ... init_args)
 
    Provide a start and end index and an ``ExecutionSpace`` instance to use as the execution resource, as well as optional arguments to control certain behavior (see below).
 
