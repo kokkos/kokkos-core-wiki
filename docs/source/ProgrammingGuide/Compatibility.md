@@ -60,7 +60,11 @@ Avoid creating/removing/modifying header files whose names start with `Kokkos_`,
 The following are public headers:
 
     Kokkos_Core.hpp
+
+    // Since 4.2
     Kokkos_Assert.hpp
+
+    // Since 4.3
     Kokkos_Clamp.hpp
     Kokkos_MinMax.hpp
 
