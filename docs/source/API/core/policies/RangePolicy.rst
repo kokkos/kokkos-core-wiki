@@ -11,10 +11,14 @@ Usage
 
 .. code-block:: cppkokkos
 
-    Kokkos::RangePolicy<>(begin, end, args...)
-    Kokkos::RangePolicy<ARGS>(begin, end, args...)
-    Kokkos::RangePolicy<>(Space(), begin, end, args...)
-    Kokkos::RangePolicy<ARGS>(Space(), begin, end, args...)
+    Kokkos::RangePolicy<>(begin, end)
+    Kokkos::RangePolicy<ARGS>(begin, end)
+    Kokkos::RangePolicy<>(begin, end, chunk_size)
+    Kokkos::RangePolicy<ARGS>(begin, end, chunk_size)
+    Kokkos::RangePolicy<>(Space(), begin, end)
+    Kokkos::RangePolicy<ARGS>(Space(), begin, end)
+    Kokkos::RangePolicy<>(Space(), begin, end, chunk_size)
+    Kokkos::RangePolicy<ARGS>(Space(), begin, end, chunk_size)
 
 RangePolicy defines an execution policy for a 1D iteration space starting at begin and going to end with an open interval.
 
@@ -22,6 +26,10 @@ Synopsis
 --------
 
 .. code-block:: cpp
+
+    struct Kokkos::ChunkSize {
+        ChunkSize(int value_);
+    };
 
     template<class ... Args>
     class Kokkos::RangePolicy {
@@ -43,12 +51,34 @@ Synopsis
 
         RangePolicy();
 
+        // since 4.3
+        RangePolicy( member_type work_begin
+                   , member_type work_end );
+
+        // since 4.3
+        RangePolicy( member_type work_begin
+                   , member_type work_end
+                   , ChunkSize chunk_size );
+
+        // since 4.3
+        RangePolicy( const execution_space & work_space
+                   , member_type work_begin
+                   , member_type work_end );
+
+        // since 4.3
+        RangePolicy( const execution_space & work_space
+                   , member_type work_begin
+                   , member_type work_end
+                   , ChunkSize chunk_size );
+
+        // until 4.3
         template<class ... Args>
         RangePolicy( const execution_space & work_space
                    , member_type work_begin
                    , member_type work_end
                    , Args ... args );
 
+        // until 4.3
         template<class ... Args>
         RangePolicy( member_type work_begin
                    , member_type work_end
@@ -97,9 +127,36 @@ Public Class Members
 Constructors
 ~~~~~~~~~~~~
 
+.. cppkokkos:function:: ChunkSize(int value_)
+
+   Provide a hint for optimal chunk-size to be used during scheduling.
+   For the SYCL backend, the workgroup size used in a ``parallel_for`` kernel can be set via this passed to ``RangePolicy``.
+
 .. cppkokkos:function:: RangePolicy()
 
    Default Constructor uninitialized policy.
+
+Since 4.3:
+^^^^^^^^^^
+
+.. cppkokkos:function:: RangePolicy(int64_t begin, int64_t end)
+
+   Provide a start and end index.
+
+.. cppkokkos:function:: RangePolicy(int64_t begin, int64_t end, ChunkSize chunk_size)
+
+   Provide a start and end index as well as a ``ChunkSize``.
+
+.. cppkokkos:function:: RangePolicy(const ExecutionSpace& space, int64_t begin, int64_t end)
+
+   Provide a start and end index and an ``ExecutionSpace`` instance to use as the execution resource.
+
+.. cppkokkos:function:: RangePolicy(const ExecutionSpace& space, int64_t begin, int64_t end, ChunkSize chunk_size)
+
+   Provide a start and end index and an ``ExecutionSpace`` instance to use as the execution resource, as well as a ``ChunkSize``.
+
+Until 4.3:
+^^^^^^^^^^
 
 .. cppkokkos:function:: template<class ... InitArgs> RangePolicy(int64_t begin, int64_t end, InitArgs ... init_args)
 
@@ -109,12 +166,13 @@ Constructors
 
    Provide a start and end index and an ``ExecutionSpace`` instance to use as the execution resource, as well as optional arguments to control certain behavior (see below).
 
-Optional ``InitArgs``:
-^^^^^^^^^^^^^^^^^^^^^^
+Optional ``InitArgs`` (until 4.3):
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-* ``ChunkSize`` : Provide a hint for optimal chunk-size to be used during scheduling. For the SYCL backend, the workgroup size used in a ``parallel_for`` kernel can be set via this variable.
+* ``ChunkSize``
 
 Preconditions:
+^^^^^^^^^^^^^^
 
 * The start index must not be greater than the end index.
 
