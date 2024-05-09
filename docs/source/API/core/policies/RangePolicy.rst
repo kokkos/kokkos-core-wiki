@@ -176,6 +176,28 @@ Preconditions:
 
 * The start index must not be greater than the end index.
 
+CTAD Constructors (since 4.3):
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: cppkokkos
+
+   int64_t work_begin = /* ... */; // conversions as well
+   int64_t work_end   = /* ... */; // conversions as well
+   ChunkSize cs       = /* ... */; // conversions as well
+   DefaultExecutionSpace des;      // conversions as well
+   SomeExecutionSpace ses;         // different from DefaultExecutionSpace
+
+   // Deduces to RangePolicy<>
+   RangePolicy rp0;
+   RangePolicy rp1(work_begin, work_end);
+   RangePolicy rp2(work_begin, work_end, cs);
+   RangePolicy rp3(des, work_begin, work_end);
+   RangePolicy rp4(des, work_begin, work_end, cs);
+
+   // Deduces to RangePolicy<SomeExecutionSpace>
+   RangePolicy rp5(ses, work_begin, work_end);
+   RangePolicy rp6(ses, work_begin, work_end, cs);
+
 Examples
 --------
 
