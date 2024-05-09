@@ -49,8 +49,8 @@ The second template parameter `Abi` is one of the pre-defined ABI types in the n
 
 ### Load/Store Methods
 
-  * `template <class U, class Flags> void copy_from(const U* mem, Flags flags)`: Loads the full vector of contiguous values starting at the address `mem`. `Flags` is `simd_flags` that is used to describe the alignment at the address `mem`.
-  * `template <class U, class Flags> void copy_to(U* mem, Flags flags)`: Stores the full vector of contiguous values starting at the address `mem`. `Flags` is `simd_flags` that is used to describe the alignment at the address `mem`.
+  * `template <class U, class Flags> void copy_from(const U* mem, Flags flags)`: Loads the full vector of contiguous values starting at the address `mem`. `Flags` is the `simd_flags` that is used to describe the alignment at the address `mem`.
+  * `template <class U, class Flags> void copy_to(U* mem, Flags flags)`: Stores the full vector of contiguous values starting at the address `mem`. `Flags` is the `simd_flags` that is used to describe the alignment at the address `mem`.
 
 #### Simd Flags
 
