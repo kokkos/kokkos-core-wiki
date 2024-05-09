@@ -131,9 +131,36 @@ General options
       * Build tests
       * ``OFF``
 
+    * * ``Kokkos_ENABLE_DEPRECATED_CODE_3``
+      * Enable deprecated code in the Kokkos 3.x series :red:`[Removed in 4.3]`
+      * ``OFF``
+
+    * * ``Kokkos_ENABLE_DEPRECATED_CODE_4``
+      * Enable deprecated code in the Kokkos 4.x series
+      * ``ON``
+
+    * * ``Kokkos_ENABLE_DEPRECATION_WARNINGS``
+      * Whether to raise warnings at compile time when using deprecated Kokkos facilities
+      * ``ON``
+
     * * ``Kokkos_ENABLE_TUNING``
       * Create bindings for tuning tools
       * ``OFF``
+
+    * * ``Kokkos_ENABLE_AGGRESSIVE_VECTORIZATION``
+      * Aggressively vectorize loops
+      * ``OFF``
+
+Debugging
+---------
+.. list-table::
+    :widths: 25 65 35
+    :header-rows: 1
+    :align: left
+
+    * -
+      - Description/info
+      - Default
 
     * * ``Kokkos_ENABLE_DEBUG``
       * Activate extra debug features - may increase compile times
@@ -145,30 +172,6 @@ General options
 
     * * ``Kokkos_ENABLE_DEBUG_DUALVIEW_MODIFY_CHECK``
       * Debug check on dual views
-      * ``OFF``
-
-    * * ``Kokkos_ENABLE_DEPRECATED_CODE_3``
-      * Enable deprecated code in the Kokkos 3.x series
-      * ``OFF``
-
-    * * ``Kokkos_ENABLE_DEPRECATED_CODE_4``
-      * Enable deprecated code in the Kokkos 4.x series
-      * ``ON``
-
-    * * ``Kokkos_ENABLE_AGGRESSIVE_VECTORIZATION``
-      * Aggressively vectorize loops
-      * ``OFF``
-
-    * * ``Kokkos_ENABLE_COMPILER_WARNINGS``
-      * Print all compiler warnings
-      * ``OFF``
-
-    * * ``Kokkos_ENABLE_HEADER_SELF_CONTAINMENT_TESTS``
-      * Check that headers are self-contained
-      * ``OFF``
-
-    * * ``Kokkos_ENABLE_LARGE_MEM_TESTS``
-      * Perform extra large memory tests
       * ``OFF``
 
 
@@ -210,9 +213,39 @@ Backend-specific options
     * * ``Kokkos_ENABLE_HIP_RELOCATABLE_DEVICE_CODE``
       * Enable relocatable device code (RDC) for HIP
       * ``OFF``
+
+    * * ``Kokkos_ENABLE_ATOMICS_BYPASS``
+      * Disable atomics when no host parallel nor device backend is enabled for Serial only builds (since Kokkos 4.3)
+      * ``OFF``
        
 
 ``Kokkos_ENABLE_CUDA_LAMBDA`` default value is ``OFF`` until 3.7 and ``ON`` since 4.0
+
+Development
+-----------
+These are intended for developers of Kokkos.  If you are a user, you probably
+should not be setting these.
+
+.. list-table::
+    :widths: 25 65 35
+    :header-rows: 1
+    :align: left
+
+    * -
+      - Description/info
+      - Default
+
+    * * ``Kokkos_ENABLE_COMPILER_WARNINGS``
+      * Print all compiler warnings
+      * ``OFF``
+
+    * * ``Kokkos_ENABLE_HEADER_SELF_CONTAINMENT_TESTS``
+      * Check that headers are self-contained
+      * ``OFF``
+
+    * * ``Kokkos_ENABLE_LARGE_MEM_TESTS``
+      * Perform extra large memory tests
+      * ``OFF``
 
 .. _keywords_tpls:
 
