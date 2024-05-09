@@ -578,6 +578,13 @@
 <p>Avoid creating/removing/modifying header files whose names start with <code class="docutils literal notranslate"><span class="pre">Kokkos_</span></code>, even under other parts of your project.  Depending on how your build system is set up, this can, for instance, cause the wrong file to be included and lead to many hours of wasted debugging time.</p>
 <p>The following are public headers:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Kokkos_Core.hpp
+
+// Since 4.2
+Kokkos_Assert.hpp
+
+// Since 4.3
+Kokkos_Clamp.hpp
+Kokkos_MinMax.hpp
 </pre></div>
 </div>
 <p>If a header is not public, please do not directly <code class="docutils literal notranslate"><span class="pre">#include</span></code> it.  It is not guaranteed to work now or continue to work in the future.  This includes any headers found in subdirectories.</p>
