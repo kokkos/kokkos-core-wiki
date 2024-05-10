@@ -86,7 +86,55 @@ Constructors
 
     * Provide a start and end index as well as the tiling dimensions. The length of the lists must match the rank of the policy.
 
+CTAD Constructors (since 4.3):
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: cppkokkos
+
+   DefaultExecutionSpace des;
+   SomeExecutionSpace ses; // different from DefaultExecutionSpace
+   int64_t i;
+
+   // Deduces to MDRangePolicy<Rank<5>>
+   MDRangePolicy pl0({1, 2, 3, 4, 5}, {1, 2, 3, 4, 5});
+   MDRangePolicy pl1({1, 2, 3, 4, 5}, {1, 2, 3, 4, 5}, { i });
+   MDRangePolicy pl2(des, {1, 2, 3, 4, 5}, {1, 2, 3, 4, 5});
+   MDRangePolicy pl3(des, {1, 2, 3, 4, 5}, {1, 2, 3, 4, 5}, { i });
+
+   // Deduces to MDRangePolicy<SomeExecutionSpace, Rank<5>>
+   MDRangePolicy pl4(ses, {1, 2, 3, 4, 5}, {1, 2, 3, 4, 5});
+   MDRangePolicy pl5(ses, {1, 2, 3, 4, 5}, {1, 2, 3, 4, 5}, { i });
+
+   int cbegin[3];
+   int cend[3];
+   int64_t ctiling[2];
+
+   // Deduces to MDRangePolicy<Rank<3>>
+   MDRangePolicy pc0(cbegin, cend);
+   MDRangePolicy pc1(cbegin, cend, ctiling);
+   MDRangePolicy pc2(des, cbegin, cend);
+   MDRangePolicy pc3(des, cbegin, cend, ctiling);
+
+   // Deduces to MDRangePolicy<SomeExecutionSpace, Rank<3>>
+   MDRangePolicy pc4(ses, cbegin, cend);
+   MDRangePolicy pc5(ses, cbegin, cend, ctiling);
+
+   Array<int, 2> abegin;
+   Array<int, 2> aend;
+   Array<int64_t, 2> atiling;
+
+   // Deduces to MDRangePolicy<Rank<2>>
+   MDRangePolicy pa0(abegin, aend);
+   MDRangePolicy pa1(abegin, aend, atiling);
+   MDRangePolicy pa2(des, abegin, aend);
+   MDRangePolicy pa3(des, abegin, aend, atiling);
+
+   // Deduces to MDRangePolicy<SomeExecutionSpace, Rank<2>>
+   MDRangePolicy pa4(ses, abegin, aend);
+   MDRangePolicy pa5(ses, abegin, aend, atiling);
+
 Preconditions:
+^^^^^^^^^^^^^^
 
 * The start index must not be greater than the matching end index for all ranks.
 
