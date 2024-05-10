@@ -595,6 +595,8 @@ provided by the work items. The optional label <code class="docutils literal not
 <li><p>Neither concurrency nor order of execution are guaranteed.</p></li>
 <li><p>The <code class="docutils literal notranslate"><span class="pre">ReturnType</span></code> content will be overwritten, i.e. the value does not need to be initialized to the reduction-neutral element.</p></li>
 <li><p>The input value to the operator may contain a partial result, Kokkos may only combine the thread local contributions in the end. The operator should modify the input value according to the desired scan operation.</p></li>
+<li><p>It is not guaranteed that the functor will ever be called with <code class="docutils literal notranslate"><span class="pre">final</span> <span class="pre">=</span> <span class="pre">false</span></code>.</p></li>
+<li><p>The functor might be called multiple times with <code class="docutils literal notranslate"><span class="pre">final</span> <span class="pre">=</span> <span class="pre">false</span></code> and the user has to make sure that the behavior in this case stays the same for repeated calls.</p></li>
 </ul>
 </section>
 <section id="examples">
