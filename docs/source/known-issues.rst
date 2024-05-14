@@ -4,6 +4,20 @@ Known issues
 .. role:: cppkokkos(code)
     :language: cppkokkos
 
+CUDA
+====
+
+- When using a legacy NVIDIA gpu, Kokkos' initialization can report errors like:
+
+  .. code-block::
+
+     terminate called after throwing an instance of 'Kokkos::Experimental::CudaRawMemoryAllocationFailure'
+
+  A fix is to disable asynchronous memory allocations by adding the following to CMake arguments:
+
+  .. code-block::
+
+     -DKokkos_ENABLE_IMPL_CUDA_MALLOC_ASYNC=OFF
 
 HIP
 ===
