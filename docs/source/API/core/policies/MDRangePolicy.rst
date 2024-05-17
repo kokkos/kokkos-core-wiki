@@ -11,10 +11,10 @@ Usage
 
 .. code-block:: cpp
 
-    Kokkos::MDRangePolicy<>(begin, end)
-    Kokkos::MDRangePolicy<>(Space, begin, end)
-    Kokkos::MDRangePolicy<ARGS>(begin, end, tiling)
-    Kokkos::MDRangePolicy<ARGS>(Space, begin, end, tiling)
+    Kokkos::MDRangePolicy<..., Rank<N>, ...>(begin, end)
+    Kokkos::MDRangePolicy<..., Rank<N>, ...>(Space, begin, end)
+    Kokkos::MDRangePolicy<..., Rank<N>, ...>(begin, end, tiling)
+    Kokkos::MDRangePolicy<..., Rank<N>, ...>(Space, begin, end, tiling)
 
 ``MDRangePolicy`` defines an execution policy for a multidimensional iteration space starting at a ``begin`` tuple and going to ``end`` with an open interval. The iteration space will be tiled, and the user can optionally provide tiling sizes.
 
@@ -49,13 +49,15 @@ Common Arguments for all Execution Policies
 | WorkTag        | ``SomeClass``                                                              | Specify the work tag type used to call the functor operator. Any arbitrary type defaults to ``void``.                                                   |
 +----------------+----------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-Arguments Specific to MDRangePolicy
+Required Arguments Specific to MDRangePolicy
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: cpp
 
-    template<int N, Iterate outer, Iterate inner>
-    class Rank;
+    template<int N,
+             Kokkos::Iterate outer = Kokkos::Iterate::Default,
+             Kokkos::Iterate inner = Kokkos::Iterate::Default>
+    class Kokkos::Rank;
 
 * Determines the rank of the index space as well as in which order to iterate over the tiles and how to iterate within the tiles. ``outer`` and ``inner`` can be ``Kokkos::Iterate::Default``, ``Kokkos::Iterate::Left``, or ``Kokkos::Iterate::Right``.
 
@@ -121,7 +123,7 @@ CTAD Constructors (since 4.3):
 
    Array<int, 2> abegin;
    Array<int, 2> aend;
-   Array<int64_t, 2> atiling;
+   Array<int, 1> atiling;
 
    // Deduces to MDRangePolicy<Rank<2>>
    MDRangePolicy pa0(abegin, aend);
@@ -137,6 +139,8 @@ Preconditions:
 ^^^^^^^^^^^^^^
 
 * The start index must not be greater than the matching end index for all ranks.
+* The begin & end array ranks must match.
+* The tiling array rank must be less than or equal to the begin/end array rank.
 
 Examples
 --------
