@@ -28,12 +28,11 @@ Synopsis
     };
 
     template<class ... Args>
-    class Kokkos::RangePolicy {
-        typedef RangePolicy execution_policy;
-        typedef typename traits::index_type member_type;
-        typedef typename traits::index_type index_type;
+    struct Kokkos::RangePolicy {
+        using execution_policy = RangePolicy;
+        using member_type = PolicyTraits<Args...>::index_type;
 
-        //Inherited from PolicyTraits<Args...>
+        // Inherited from PolicyTraits<Args...>
         using execution_space   = PolicyTraits<Args...>::execution_space;
         using schedule_type     = PolicyTraits<Args...>::schedule_type;
         using work_tag          = PolicyTraits<Args...>::work_tag;
@@ -41,7 +40,7 @@ Synopsis
         using iteration_pattern = PolicyTraits<Args...>::iteration_pattern;
         using launch_bounds     = PolicyTraits<Args...>::launch_bounds;
 
-        //Constructors
+        // Constructors
         RangePolicy(const RangePolicy&) = default;
         RangePolicy(RangePolicy&&) = default;
 
