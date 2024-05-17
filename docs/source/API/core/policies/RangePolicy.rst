@@ -11,14 +11,10 @@ Usage
 
 .. code-block:: cppkokkos
 
-    Kokkos::RangePolicy<>(begin, end)
-    Kokkos::RangePolicy<ARGS>(begin, end)
-    Kokkos::RangePolicy<>(begin, end, chunk_size)
-    Kokkos::RangePolicy<ARGS>(begin, end, chunk_size)
-    Kokkos::RangePolicy<>(Space(), begin, end)
-    Kokkos::RangePolicy<ARGS>(Space(), begin, end)
-    Kokkos::RangePolicy<>(Space(), begin, end, chunk_size)
-    Kokkos::RangePolicy<ARGS>(Space(), begin, end, chunk_size)
+    Kokkos::RangePolicy<...>(begin, end)
+    Kokkos::RangePolicy<...>(begin, end, chunk_size)
+    Kokkos::RangePolicy<...>(Space(), begin, end)
+    Kokkos::RangePolicy<...>(Space(), begin, end, chunk_size)
 
 RangePolicy defines an execution policy for a 1D iteration space starting at begin and going to end with an open interval.
 
