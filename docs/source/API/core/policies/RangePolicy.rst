@@ -47,38 +47,21 @@ Synopsis
 
         RangePolicy();
 
-        // since 4.3
         RangePolicy( member_type work_begin
                    , member_type work_end );
 
-        // since 4.3
         RangePolicy( member_type work_begin
                    , member_type work_end
                    , ChunkSize chunk_size );
 
-        // since 4.3
         RangePolicy( const execution_space & work_space
                    , member_type work_begin
                    , member_type work_end );
 
-        // since 4.3
         RangePolicy( const execution_space & work_space
                    , member_type work_begin
                    , member_type work_end
                    , ChunkSize chunk_size );
-
-        // until 4.3
-        template<class ... Args>
-        RangePolicy( const execution_space & work_space
-                   , member_type work_begin
-                   , member_type work_end
-                   , Args ... args );
-
-        // until 4.3
-        template<class ... Args>
-        RangePolicy( member_type work_begin
-                   , member_type work_end
-                   , Args ... args );
 
         // retrieve chunk_size
         member_type chunk_size() const;
@@ -132,9 +115,6 @@ Constructors
 
    Default Constructor uninitialized policy.
 
-Since 4.3:
-^^^^^^^^^^
-
 .. cppkokkos:function:: RangePolicy(int64_t begin, int64_t end)
 
    Provide a start and end index.
@@ -150,22 +130,6 @@ Since 4.3:
 .. cppkokkos:function:: RangePolicy(const ExecutionSpace& space, int64_t begin, int64_t end, ChunkSize chunk_size)
 
    Provide a start and end index and an ``ExecutionSpace`` instance to use as the execution resource, as well as a ``ChunkSize``.
-
-Until 4.3:
-^^^^^^^^^^
-
-.. cppkokkos:function:: template<class ... InitArgs> RangePolicy(int64_t begin, int64_t end, InitArgs ... init_args)
-
-   Provide a start and end index as well as optional arguments to control certain behavior (see below).
-
-.. cppkokkos:function:: template<class ... InitArgs> RangePolicy(const ExecutionSpace& space, int64_t begin, int64_t end, InitArgs ... init_args)
-
-   Provide a start and end index and an ``ExecutionSpace`` instance to use as the execution resource, as well as optional arguments to control certain behavior (see below).
-
-Optional ``InitArgs`` (until 4.3):
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-* ``ChunkSize``
 
 Preconditions:
 ^^^^^^^^^^^^^^
