@@ -548,14 +548,17 @@
 <span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="n">join</span><span class="p">(</span><span class="n">value_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">dest</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">value_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">src</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
 
 <span class="w">        </span><span class="n">KOKKOS_INLINE_FUNCTION</span>
-<span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="n">init</span><span class="p">(</span><span class="n">value_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">val</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
-
-<span class="w">        </span><span class="n">KOKKOS_INLINE_FUNCTION</span>
 <span class="w">        </span><span class="n">value_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">reference</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
 
 <span class="w">        </span><span class="n">KOKKOS_INLINE_FUNCTION</span>
 <span class="w">        </span><span class="n">result_view_type</span><span class="w"> </span><span class="n">view</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
 
+<span class="w">        </span><span class="c1">//Optional</span>
+<span class="w">        </span><span class="n">KOKKOS_INLINE_FUNCTION</span>
+<span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="n">init</span><span class="p">(</span><span class="n">value_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">val</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
+
+<span class="w">        </span><span class="n">KOKKOS_INLINE_FUNCTION</span>
+<span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="k">final</span><span class="p">(</span><span class="n">value_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">val</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
 
 <span class="w">        </span><span class="c1">//Part of Build-In reducers for Kokkos</span>
 <span class="w">        </span><span class="n">KOKKOS_INLINE_FUNCTION</span>
@@ -611,7 +614,16 @@
 <dt class="sig sig-object cppkokkos" id="_CPPv4NK4initER10value_type">
 <span id="_CPPv3NK4initER10value_type"></span><span id="_CPPv2NK4initER10value_type"></span><span id="init__value_typeRC"></span><span class="k"><span class="pre">KOKKOS_INLINE_FUNCTION</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">init</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">value_type</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">val</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4NK4initER10value_type" title="Permalink to this definition">#</a><br /></dt>
 <dd><ul class="simple">
-<li><p>Initialize <code class="docutils literal notranslate"><span class="pre">val</span></code> with appropriate initial value. For example, ‘Add’ assigns <code class="docutils literal notranslate"><span class="pre">val</span> <span class="pre">=</span> <span class="pre">0;</span></code>, but Prod assigns <code class="docutils literal notranslate"><span class="pre">val</span> <span class="pre">=</span> <span class="pre">1;</span></code></p></li>
+<li><p>Optional callback initializing <code class="docutils literal notranslate"><span class="pre">val</span></code> with appropriate initial value. For example, ‘Add’ assigns <code class="docutils literal notranslate"><span class="pre">val</span> <span class="pre">=</span> <span class="pre">0;</span></code>, but Prod assigns <code class="docutils literal notranslate"><span class="pre">val</span> <span class="pre">=</span> <span class="pre">1;</span></code>.
+Defaults to calling the default constructor.</p></li>
+</ul>
+</dd></dl>
+
+<dl class="cppkokkos kokkosinlinefunction">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK5finalER10value_type">
+<span id="_CPPv3NK5finalER10value_type"></span><span id="_CPPv2NK5finalER10value_type"></span><span id="final__value_typeRC"></span><span class="k"><span class="pre">KOKKOS_INLINE_FUNCTION</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">final</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">value_type</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">val</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4NK5finalER10value_type" title="Permalink to this definition">#</a><br /></dt>
+<dd><ul class="simple">
+<li><p>Optional callback modifying the result <code class="docutils literal notranslate"><span class="pre">val</span></code>. Defaults to a no-op.</p></li>
 </ul>
 </dd></dl>
 
