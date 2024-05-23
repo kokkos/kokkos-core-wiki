@@ -606,6 +606,25 @@ These rules only cover cases where both layouts are one of ``LayoutLeft``, ``Lay
 
   - For each dimension ``k`` it must hold that ``dst_view.extent(k) == src_view.extent(k)``
 
+Assignment Examples
+~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: cpp
+
+    View<int*>       a1 = View<int*>("A1",N);     // OK
+    View<int**>      a2 = View<int*[10]>("A2",N); // OK
+    View<int*[10]>   a3 = View<int**>("A3",N,M);  // OK if M == 10 otherwise runtime failure
+    View<const int*> a4 = a1;                     // OK
+    View<int*>       a5 = a4;                     // Error: const to non-const assignment
+    View<int**>      a6 = a1;                     // Error: Ranks do not match
+    View<int*[8]>    a7 = a3;                     // Error: compile time dimensions do not match
+    View<int[4][10]> a8 = a3;                     // OK if N == 4 otherwise runtime failure
+    View<int*, LayoutLeft>    a9  = a1;           // OK since a1 is either LayoutLeft or LayoutRight
+    View<int**, LayoutStride> a10 = a8;           // OK
+    View<int**>               a11 = a10;          // OK
+    View<int*, HostSpace> a12 = View<int*, CudaSpace>("A12",N); // Error: non-assignable memory spaces
+    View<int*, HostSpace> a13 = View<int*, CudaHostPinnedSpace>("A13",N); // OK
+
 Natural MDSpans
 ---------------
 
@@ -631,26 +650,7 @@ For an mdspan :cpp:`m` of type :cpp:`M` that is the *natural mdspan* of a :cpp:c
 
 #. :cpp:`M::accessor_type` is :cpp:`std::default_accessor<V::value_type>`
 
-Additionally, the *natural mdspan* is constructed so that :cpp:`m.data() == v.data()` and for each extent :cpp:`r`, `m.extents().extent(r) == v.extent(r)`.
-
-Assignment Examples
-~~~~~~~~~~~~~~~~~~~
-
-.. code-block:: cpp
-
-    View<int*>       a1 = View<int*>("A1",N);     // OK
-    View<int**>      a2 = View<int*[10]>("A2",N); // OK
-    View<int*[10]>   a3 = View<int**>("A3",N,M);  // OK if M == 10 otherwise runtime failure
-    View<const int*> a4 = a1;                     // OK
-    View<int*>       a5 = a4;                     // Error: const to non-const assignment
-    View<int**>      a6 = a1;                     // Error: Ranks do not match
-    View<int*[8]>    a7 = a3;                     // Error: compile time dimensions do not match
-    View<int[4][10]> a8 = a3;                     // OK if N == 4 otherwise runtime failure
-    View<int*, LayoutLeft>    a9  = a1;           // OK since a1 is either LayoutLeft or LayoutRight
-    View<int**, LayoutStride> a10 = a8;           // OK
-    View<int**>               a11 = a10;          // OK
-    View<int*, HostSpace> a12 = View<int*, CudaSpace>("A12",N); // Error: non-assignable memory spaces
-    View<int*, HostSpace> a13 = View<int*, CudaHostPinnedSpace>("A13",N); // OK
+Additionally, the *natural mdspan* is constructed so that :cpp:`m.data() == v.data()` and for each extent :cpp:`r`, :cpp:`m.extents().extent(r) == v.extent(r)`.
 
 Examples
 --------
