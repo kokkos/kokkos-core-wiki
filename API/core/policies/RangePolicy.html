@@ -529,23 +529,32 @@
 <p>Header File: <code class="docutils literal notranslate"><span class="pre">&lt;Kokkos_Core.hpp&gt;</span></code></p>
 <section id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Permalink to this heading">#</a></h2>
-<div class="highlight-cppkokkos notranslate"><div class="highlight"><pre><span></span><span class="n">Kokkos</span><span class="o">::</span><span class="n">RangePolicy</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">begin</span><span class="p">,</span><span class="w"> </span><span class="n">end</span><span class="p">,</span><span class="w"> </span><span class="n">args</span><span class="p">...)</span>
-<span class="n">Kokkos</span><span class="o">::</span><span class="n">RangePolicy</span><span class="o">&lt;</span><span class="n">ARGS</span><span class="o">&gt;</span><span class="p">(</span><span class="n">begin</span><span class="p">,</span><span class="w"> </span><span class="n">end</span><span class="p">,</span><span class="w"> </span><span class="n">args</span><span class="p">...)</span>
-<span class="n">Kokkos</span><span class="o">::</span><span class="n">RangePolicy</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">Space</span><span class="p">(),</span><span class="w"> </span><span class="n">begin</span><span class="p">,</span><span class="w"> </span><span class="n">end</span><span class="p">,</span><span class="w"> </span><span class="n">args</span><span class="p">...)</span>
-<span class="n">Kokkos</span><span class="o">::</span><span class="n">RangePolicy</span><span class="o">&lt;</span><span class="n">ARGS</span><span class="o">&gt;</span><span class="p">(</span><span class="n">Space</span><span class="p">(),</span><span class="w"> </span><span class="n">begin</span><span class="p">,</span><span class="w"> </span><span class="n">end</span><span class="p">,</span><span class="w"> </span><span class="n">args</span><span class="p">...)</span>
+<div class="highlight-cppkokkos notranslate"><div class="highlight"><pre><span></span><span class="n">Kokkos</span><span class="o">::</span><span class="n">RangePolicy</span><span class="o">&lt;</span><span class="p">...</span><span class="o">&gt;</span><span class="p">(</span><span class="n">begin</span><span class="p">,</span><span class="w"> </span><span class="n">end</span><span class="p">)</span>
+<span class="n">Kokkos</span><span class="o">::</span><span class="n">RangePolicy</span><span class="o">&lt;</span><span class="p">...</span><span class="o">&gt;</span><span class="p">(</span><span class="n">begin</span><span class="p">,</span><span class="w"> </span><span class="n">end</span><span class="p">,</span><span class="w"> </span><span class="n">chunk_size</span><span class="p">)</span>
+<span class="n">Kokkos</span><span class="o">::</span><span class="n">RangePolicy</span><span class="o">&lt;</span><span class="p">...</span><span class="o">&gt;</span><span class="p">(</span><span class="n">exec</span><span class="p">,</span><span class="w"> </span><span class="n">begin</span><span class="p">,</span><span class="w"> </span><span class="n">end</span><span class="p">)</span>
+<span class="n">Kokkos</span><span class="o">::</span><span class="n">RangePolicy</span><span class="o">&lt;</span><span class="p">...</span><span class="o">&gt;</span><span class="p">(</span><span class="n">exec</span><span class="p">,</span><span class="w"> </span><span class="n">begin</span><span class="p">,</span><span class="w"> </span><span class="n">end</span><span class="p">,</span><span class="w"> </span><span class="n">chunk_size</span><span class="p">)</span>
+
+<span class="c1">// CTAD Constructors (since 4.3)</span>
+<span class="n">Kokkos</span><span class="o">::</span><span class="n">RangePolicy</span><span class="p">(</span><span class="n">begin</span><span class="p">,</span><span class="w"> </span><span class="n">end</span><span class="p">)</span>
+<span class="n">Kokkos</span><span class="o">::</span><span class="n">RangePolicy</span><span class="p">(</span><span class="n">begin</span><span class="p">,</span><span class="w"> </span><span class="n">end</span><span class="p">,</span><span class="w"> </span><span class="n">chunk_size</span><span class="p">)</span>
+<span class="n">Kokkos</span><span class="o">::</span><span class="n">RangePolicy</span><span class="p">(</span><span class="n">exec</span><span class="p">,</span><span class="w"> </span><span class="n">begin</span><span class="p">,</span><span class="w"> </span><span class="n">end</span><span class="p">)</span>
+<span class="n">Kokkos</span><span class="o">::</span><span class="n">RangePolicy</span><span class="p">(</span><span class="n">exec</span><span class="p">,</span><span class="w"> </span><span class="n">begin</span><span class="p">,</span><span class="w"> </span><span class="n">end</span><span class="p">,</span><span class="w"> </span><span class="n">chunk_size</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>RangePolicy defines an execution policy for a 1D iteration space starting at begin and going to end with an open interval.</p>
+<p>RangePolicy defines an execution policy for a 1D iteration space starting at <code class="docutils literal notranslate"><span class="pre">begin</span></code> and going to <code class="docutils literal notranslate"><span class="pre">end</span></code> with an open interval.</p>
 </section>
 <section id="synopsis">
 <h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this heading">#</a></h2>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="n">Args</span><span class="o">&gt;</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">Kokkos</span><span class="o">::</span><span class="n">RangePolicy</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">typedef</span><span class="w"> </span><span class="n">RangePolicy</span><span class="w"> </span><span class="n">execution_policy</span><span class="p">;</span>
-<span class="w">    </span><span class="k">typedef</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="nc">traits</span><span class="o">::</span><span class="n">index_type</span><span class="w"> </span><span class="n">member_type</span><span class="w"> </span><span class="p">;</span>
-<span class="w">    </span><span class="k">typedef</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="nc">traits</span><span class="o">::</span><span class="n">index_type</span><span class="w"> </span><span class="n">index_type</span><span class="p">;</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span><span class="w"> </span><span class="nc">Kokkos</span><span class="o">::</span><span class="n">ChunkSize</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">ChunkSize</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">value_</span><span class="p">);</span>
+<span class="p">};</span>
 
-<span class="w">    </span><span class="c1">//Inherited from PolicyTraits&lt;Args...&gt;</span>
+<span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="n">Args</span><span class="o">&gt;</span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">Kokkos</span><span class="o">::</span><span class="n">RangePolicy</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="n">execution_policy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RangePolicy</span><span class="p">;</span>
+<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="n">member_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PolicyTraits</span><span class="o">&lt;</span><span class="n">Args</span><span class="p">...</span><span class="o">&gt;::</span><span class="n">index_type</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Inherited from PolicyTraits&lt;Args...&gt;</span>
 <span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="n">execution_space</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="n">PolicyTraits</span><span class="o">&lt;</span><span class="n">Args</span><span class="p">...</span><span class="o">&gt;::</span><span class="n">execution_space</span><span class="p">;</span>
 <span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="n">schedule_type</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="n">PolicyTraits</span><span class="o">&lt;</span><span class="n">Args</span><span class="p">...</span><span class="o">&gt;::</span><span class="n">schedule_type</span><span class="p">;</span>
 <span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="n">work_tag</span><span class="w">          </span><span class="o">=</span><span class="w"> </span><span class="n">PolicyTraits</span><span class="o">&lt;</span><span class="n">Args</span><span class="p">...</span><span class="o">&gt;::</span><span class="n">work_tag</span><span class="p">;</span>
@@ -553,34 +562,39 @@
 <span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="n">iteration_pattern</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PolicyTraits</span><span class="o">&lt;</span><span class="n">Args</span><span class="p">...</span><span class="o">&gt;::</span><span class="n">iteration_pattern</span><span class="p">;</span>
 <span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="n">launch_bounds</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="n">PolicyTraits</span><span class="o">&lt;</span><span class="n">Args</span><span class="p">...</span><span class="o">&gt;::</span><span class="n">launch_bounds</span><span class="p">;</span>
 
-<span class="w">    </span><span class="c1">//Constructors</span>
+<span class="w">    </span><span class="c1">// Constructors</span>
 <span class="w">    </span><span class="n">RangePolicy</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">RangePolicy</span><span class="o">&amp;</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="p">;</span>
 <span class="w">    </span><span class="n">RangePolicy</span><span class="p">(</span><span class="n">RangePolicy</span><span class="o">&amp;&amp;</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="p">;</span>
 
-<span class="w">    </span><span class="kr">inline</span><span class="w"> </span><span class="n">RangePolicy</span><span class="p">();</span>
+<span class="w">    </span><span class="n">RangePolicy</span><span class="p">();</span>
 
-<span class="w">    </span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="n">Args</span><span class="o">&gt;</span>
-<span class="w">    </span><span class="kr">inline</span><span class="w"> </span><span class="n">RangePolicy</span><span class="p">(</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">execution_space</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">work_space</span>
-<span class="w">                      </span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">member_type</span><span class="w"> </span><span class="n">work_begin</span>
-<span class="w">                      </span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">member_type</span><span class="w"> </span><span class="n">work_end</span>
-<span class="w">                      </span><span class="p">,</span><span class="w"> </span><span class="n">Args</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="n">args</span><span class="p">);</span>
+<span class="w">    </span><span class="n">RangePolicy</span><span class="p">(</span><span class="w"> </span><span class="n">index_type</span><span class="w"> </span><span class="n">work_begin</span>
+<span class="w">               </span><span class="p">,</span><span class="w"> </span><span class="n">index_type</span><span class="w"> </span><span class="n">work_end</span><span class="w"> </span><span class="p">);</span>
 
-<span class="w">    </span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="n">Args</span><span class="o">&gt;</span>
-<span class="w">    </span><span class="kr">inline</span><span class="w"> </span><span class="n">RangePolicy</span><span class="p">(</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">member_type</span><span class="w"> </span><span class="n">work_begin</span>
-<span class="w">                      </span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">member_type</span><span class="w"> </span><span class="n">work_end</span>
-<span class="w">                      </span><span class="p">,</span><span class="w"> </span><span class="n">Args</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="n">args</span><span class="p">);</span>
+<span class="w">    </span><span class="n">RangePolicy</span><span class="p">(</span><span class="w"> </span><span class="n">index_type</span><span class="w"> </span><span class="n">work_begin</span>
+<span class="w">               </span><span class="p">,</span><span class="w"> </span><span class="n">index_type</span><span class="w"> </span><span class="n">work_end</span>
+<span class="w">               </span><span class="p">,</span><span class="w"> </span><span class="n">ChunkSize</span><span class="w"> </span><span class="n">chunk_size</span><span class="w"> </span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">RangePolicy</span><span class="p">(</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">execution_space</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">work_space</span>
+<span class="w">               </span><span class="p">,</span><span class="w"> </span><span class="n">index_type</span><span class="w"> </span><span class="n">work_begin</span>
+<span class="w">               </span><span class="p">,</span><span class="w"> </span><span class="n">index_type</span><span class="w"> </span><span class="n">work_end</span><span class="w"> </span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">RangePolicy</span><span class="p">(</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">execution_space</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">work_space</span>
+<span class="w">               </span><span class="p">,</span><span class="w"> </span><span class="n">index_type</span><span class="w"> </span><span class="n">work_begin</span>
+<span class="w">               </span><span class="p">,</span><span class="w"> </span><span class="n">index_type</span><span class="w"> </span><span class="n">work_end</span>
+<span class="w">               </span><span class="p">,</span><span class="w"> </span><span class="n">ChunkSize</span><span class="w"> </span><span class="n">chunk_size</span><span class="w"> </span><span class="p">);</span>
 
 <span class="w">    </span><span class="c1">// retrieve chunk_size</span>
-<span class="w">    </span><span class="kr">inline</span><span class="w"> </span><span class="n">member_type</span><span class="w"> </span><span class="nf">chunk_size</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
+<span class="w">    </span><span class="n">index_type</span><span class="w"> </span><span class="nf">chunk_size</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
 <span class="w">    </span><span class="c1">// set chunk_size to a discrete value</span>
-<span class="w">    </span><span class="kr">inline</span><span class="w"> </span><span class="n">RangePolicy</span><span class="w"> </span><span class="nf">set_chunk_size</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">chunk_size_</span><span class="p">);</span>
+<span class="w">    </span><span class="n">RangePolicy</span><span class="o">&amp;</span><span class="w"> </span><span class="nf">set_chunk_size</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">chunk_size_</span><span class="p">);</span>
 
 <span class="w">    </span><span class="c1">// return ExecSpace instance provided to the constructor</span>
-<span class="w">    </span><span class="n">KOKKOS_INLINE_FUNCTION</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">execution_space</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">space</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
+<span class="w">    </span><span class="n">KOKKOS_FUNCTION</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">execution_space</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">space</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
 <span class="w">    </span><span class="c1">// return Range begin</span>
-<span class="w">    </span><span class="n">KOKKOS_INLINE_FUNCTION</span><span class="w"> </span><span class="n">member_type</span><span class="w"> </span><span class="n">begin</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
+<span class="w">    </span><span class="n">KOKKOS_FUNCTION</span><span class="w"> </span><span class="n">member_type</span><span class="w"> </span><span class="n">begin</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
 <span class="w">    </span><span class="c1">// return Range end</span>
-<span class="w">    </span><span class="n">KOKKOS_INLINE_FUNCTION</span><span class="w"> </span><span class="n">member_type</span><span class="w"> </span><span class="n">end</span><span class="p">()</span><span class="w">   </span><span class="k">const</span><span class="p">;</span>
+<span class="w">    </span><span class="n">KOKKOS_FUNCTION</span><span class="w"> </span><span class="n">member_type</span><span class="w"> </span><span class="n">end</span><span class="p">()</span><span class="w">   </span><span class="k">const</span><span class="p">;</span>
 <span class="p">};</span>
 </pre></div>
 </div>
@@ -632,32 +646,69 @@
 <section id="constructors">
 <h3>Constructors<a class="headerlink" href="#constructors" title="Permalink to this heading">#</a></h3>
 <dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv49ChunkSizei">
+<span id="_CPPv39ChunkSizei"></span><span id="_CPPv29ChunkSizei"></span><span id="ChunkSize__i"></span><span class="sig-name descname"><span class="n"><span class="pre">ChunkSize</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">value_</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv49ChunkSizei" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Provide a hint for optimal chunk-size to be used during scheduling.
+For the SYCL backend, the workgroup size used in a <code class="docutils literal notranslate"><span class="pre">parallel_for</span></code> kernel can be set via this passed to <code class="docutils literal notranslate"><span class="pre">RangePolicy</span></code>.</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
 <dt class="sig sig-object cppkokkos" id="_CPPv411RangePolicyv">
 <span id="_CPPv311RangePolicyv"></span><span id="_CPPv211RangePolicyv"></span><span id="RangePolicy"></span><span class="sig-name descname"><span class="n"><span class="pre">RangePolicy</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv411RangePolicyv" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Default Constructor uninitialized policy.</p>
 </dd></dl>
 
 <dl class="cppkokkos function">
-<dt class="sig sig-object cppkokkos" id="_CPPv4IDpE11RangePolicyRK7int64_tRK7int64_tDpK8InitArgs">
-<span id="_CPPv3IDpE11RangePolicyRK7int64_tRK7int64_tDpK8InitArgs"></span><span id="_CPPv2IDpE11RangePolicyRK7int64_tRK7int64_tDpK8InitArgs"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="sig-name descname"><span class="n"><span class="pre">InitArgs</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="sig-name descname"><span class="n"><span class="pre">RangePolicy</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">int64_t</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">begin</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">int64_t</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">end</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4IDpE11RangePolicyRK7int64_tRK7int64_tDpK8InitArgs" title="RangePolicy::InitArgs"><span class="n"><span class="pre">InitArgs</span></span></a><span class="p"><span class="pre">...</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">init_args</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4IDpE11RangePolicyRK7int64_tRK7int64_tDpK8InitArgs" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>Provide a start and end index as well as optional arguments to control certain behavior (see below).</p>
+<dt class="sig sig-object cppkokkos" id="_CPPv411RangePolicy7int64_t7int64_t">
+<span id="_CPPv311RangePolicy7int64_t7int64_t"></span><span id="_CPPv211RangePolicy7int64_t7int64_t"></span><span id="RangePolicy__int64_t.int64_t"></span><span class="sig-name descname"><span class="n"><span class="pre">RangePolicy</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">int64_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">begin</span></span>, <span class="n"><span class="pre">int64_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">end</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv411RangePolicy7int64_t7int64_t" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Provide a start and end index.</p>
 </dd></dl>
 
 <dl class="cppkokkos function">
-<dt class="sig sig-object cppkokkos" id="_CPPv4IDpE11RangePolicyRK14ExecutionSpaceRK7int64_tRK7int64_tDpK8InitArgs">
-<span id="_CPPv3IDpE11RangePolicyRK14ExecutionSpaceRK7int64_tRK7int64_tDpK8InitArgs"></span><span id="_CPPv2IDpE11RangePolicyRK14ExecutionSpaceRK7int64_tRK7int64_tDpK8InitArgs"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="sig-name descname"><span class="n"><span class="pre">InitArgs</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="sig-name descname"><span class="n"><span class="pre">RangePolicy</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">ExecutionSpace</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">space</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">int64_t</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">begin</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">int64_t</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">end</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4IDpE11RangePolicyRK14ExecutionSpaceRK7int64_tRK7int64_tDpK8InitArgs" title="RangePolicy::InitArgs"><span class="n"><span class="pre">InitArgs</span></span></a><span class="p"><span class="pre">...</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">init_args</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4IDpE11RangePolicyRK14ExecutionSpaceRK7int64_tRK7int64_tDpK8InitArgs" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>Provide a start and end index and an <code class="docutils literal notranslate"><span class="pre">ExecutionSpace</span></code> instance to use as the execution resource, as well as optional arguments to control certain behavior (see below).</p>
+<dt class="sig sig-object cppkokkos" id="_CPPv411RangePolicy7int64_t7int64_t9ChunkSize">
+<span id="_CPPv311RangePolicy7int64_t7int64_t9ChunkSize"></span><span id="_CPPv211RangePolicy7int64_t7int64_t9ChunkSize"></span><span id="RangePolicy__int64_t.int64_t.ChunkSize"></span><span class="sig-name descname"><span class="n"><span class="pre">RangePolicy</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">int64_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">begin</span></span>, <span class="n"><span class="pre">int64_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">end</span></span>, <a class="reference internal" href="#_CPPv49ChunkSizei" title="ChunkSize"><span class="n"><span class="pre">ChunkSize</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">chunk_size</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv411RangePolicy7int64_t7int64_t9ChunkSize" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Provide a start and end index as well as a <code class="docutils literal notranslate"><span class="pre">ChunkSize</span></code>.</p>
 </dd></dl>
 
-<section id="optional-initargs">
-<h4>Optional <code class="docutils literal notranslate"><span class="pre">InitArgs</span></code>:<a class="headerlink" href="#optional-initargs" title="Permalink to this heading">#</a></h4>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">ChunkSize</span></code> : Provide a hint for optimal chunk-size to be used during scheduling. For the SYCL backend, the workgroup size used in a <code class="docutils literal notranslate"><span class="pre">parallel_for</span></code> kernel can be set via this variable.</p></li>
-</ul>
-<p>Preconditions:</p>
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv411RangePolicyRK14ExecutionSpace7int64_t7int64_t">
+<span id="_CPPv311RangePolicyRK14ExecutionSpace7int64_t7int64_t"></span><span id="_CPPv211RangePolicyRK14ExecutionSpace7int64_t7int64_t"></span><span id="RangePolicy__ExecutionSpaceCR.int64_t.int64_t"></span><span class="sig-name descname"><span class="n"><span class="pre">RangePolicy</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">ExecutionSpace</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">space</span></span>, <span class="n"><span class="pre">int64_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">begin</span></span>, <span class="n"><span class="pre">int64_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">end</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv411RangePolicyRK14ExecutionSpace7int64_t7int64_t" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Provide a start and end index and an <code class="docutils literal notranslate"><span class="pre">ExecutionSpace</span></code> instance to use as the execution resource.</p>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv411RangePolicyRK14ExecutionSpace7int64_t7int64_t9ChunkSize">
+<span id="_CPPv311RangePolicyRK14ExecutionSpace7int64_t7int64_t9ChunkSize"></span><span id="_CPPv211RangePolicyRK14ExecutionSpace7int64_t7int64_t9ChunkSize"></span><span id="RangePolicy__ExecutionSpaceCR.int64_t.int64_t.ChunkSize"></span><span class="sig-name descname"><span class="n"><span class="pre">RangePolicy</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">ExecutionSpace</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">space</span></span>, <span class="n"><span class="pre">int64_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">begin</span></span>, <span class="n"><span class="pre">int64_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">end</span></span>, <a class="reference internal" href="#_CPPv49ChunkSizei" title="ChunkSize"><span class="n"><span class="pre">ChunkSize</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">chunk_size</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv411RangePolicyRK14ExecutionSpace7int64_t7int64_t9ChunkSize" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Provide a start and end index and an <code class="docutils literal notranslate"><span class="pre">ExecutionSpace</span></code> instance to use as the execution resource, as well as a <code class="docutils literal notranslate"><span class="pre">ChunkSize</span></code>.</p>
+</dd></dl>
+
+<section id="preconditions">
+<h4>Preconditions:<a class="headerlink" href="#preconditions" title="Permalink to this heading">#</a></h4>
 <ul class="simple">
 <li><p>The start index must not be greater than the end index.</p></li>
+<li><p>The actual constructors are templated so we can check that they are converted to <code class="docutils literal notranslate"><span class="pre">index_type</span></code> safely (see <a class="reference external" href="https://github.com/kokkos/kokkos/pull/6754">#6754</a>).</p></li>
 </ul>
+</section>
+<section id="ctad-constructors-since-4-3">
+<h4>CTAD Constructors (since 4.3):<a class="headerlink" href="#ctad-constructors-since-4-3" title="Permalink to this heading">#</a></h4>
+<div class="highlight-cppkokkos notranslate"><div class="highlight"><pre><span></span><span class="kt">int64_t</span><span class="w"> </span><span class="n">work_begin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="cm">/* ... */</span><span class="p">;</span><span class="w"> </span><span class="c1">// conversions as well</span>
+<span class="kt">int64_t</span><span class="w"> </span><span class="n">work_end</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="cm">/* ... */</span><span class="p">;</span><span class="w"> </span><span class="c1">// conversions as well</span>
+<span class="n">ChunkSize</span><span class="w"> </span><span class="n">cs</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="cm">/* ... */</span><span class="p">;</span><span class="w"> </span><span class="c1">// conversions as well</span>
+<span class="n">DefaultExecutionSpace</span><span class="w"> </span><span class="n">des</span><span class="p">;</span><span class="w">      </span><span class="c1">// conversions as well</span>
+<span class="n">SomeExecutionSpace</span><span class="w"> </span><span class="n">ses</span><span class="p">;</span><span class="w">         </span><span class="c1">// different from DefaultExecutionSpace</span>
+
+<span class="c1">// Deduces to RangePolicy&lt;&gt;</span>
+<span class="n">RangePolicy</span><span class="w"> </span><span class="n">rp0</span><span class="p">;</span>
+<span class="n">RangePolicy</span><span class="w"> </span><span class="nf">rp1</span><span class="p">(</span><span class="n">work_begin</span><span class="p">,</span><span class="w"> </span><span class="n">work_end</span><span class="p">);</span>
+<span class="n">RangePolicy</span><span class="w"> </span><span class="nf">rp2</span><span class="p">(</span><span class="n">work_begin</span><span class="p">,</span><span class="w"> </span><span class="n">work_end</span><span class="p">,</span><span class="w"> </span><span class="n">cs</span><span class="p">);</span>
+<span class="n">RangePolicy</span><span class="w"> </span><span class="nf">rp3</span><span class="p">(</span><span class="n">des</span><span class="p">,</span><span class="w"> </span><span class="n">work_begin</span><span class="p">,</span><span class="w"> </span><span class="n">work_end</span><span class="p">);</span>
+<span class="n">RangePolicy</span><span class="w"> </span><span class="nf">rp4</span><span class="p">(</span><span class="n">des</span><span class="p">,</span><span class="w"> </span><span class="n">work_begin</span><span class="p">,</span><span class="w"> </span><span class="n">work_end</span><span class="p">,</span><span class="w"> </span><span class="n">cs</span><span class="p">);</span>
+
+<span class="c1">// Deduces to RangePolicy&lt;SomeExecutionSpace&gt;</span>
+<span class="n">RangePolicy</span><span class="w"> </span><span class="nf">rp5</span><span class="p">(</span><span class="n">ses</span><span class="p">,</span><span class="w"> </span><span class="n">work_begin</span><span class="p">,</span><span class="w"> </span><span class="n">work_end</span><span class="p">);</span>
+<span class="n">RangePolicy</span><span class="w"> </span><span class="nf">rp6</span><span class="p">(</span><span class="n">ses</span><span class="p">,</span><span class="w"> </span><span class="n">work_begin</span><span class="p">,</span><span class="w"> </span><span class="n">work_end</span><span class="p">,</span><span class="w"> </span><span class="n">cs</span><span class="p">);</span>
+</pre></div>
+</div>
 </section>
 </section>
 </section>
@@ -746,7 +797,8 @@
 </li>
 <li><a class="reference internal" href="#public-class-members">Public Class Members</a><ul>
 <li><a class="reference internal" href="#constructors">Constructors</a><ul>
-<li><a class="reference internal" href="#optional-initargs">Optional <code class="docutils literal notranslate"><span class="pre">InitArgs</span></code>:</a></li>
+<li><a class="reference internal" href="#preconditions">Preconditions:</a></li>
+<li><a class="reference internal" href="#ctad-constructors-since-4-3">CTAD Constructors (since 4.3):</a></li>
 </ul>
 </li>
 </ul>
