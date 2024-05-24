@@ -16,7 +16,7 @@ Usage
     Kokkos::RangePolicy<...>(Space(), begin, end)
     Kokkos::RangePolicy<...>(Space(), begin, end, chunk_size)
 
-RangePolicy defines an execution policy for a 1D iteration space starting at begin and going to end with an open interval.
+RangePolicy defines an execution policy for a 1D iteration space starting at ``begin`` and going to ``end`` with an open interval.
 
 Synopsis
 --------
