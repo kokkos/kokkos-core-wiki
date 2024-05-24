@@ -13,8 +13,14 @@ Usage
 
     Kokkos::RangePolicy<...>(begin, end)
     Kokkos::RangePolicy<...>(begin, end, chunk_size)
-    Kokkos::RangePolicy<...>(Space(), begin, end)
-    Kokkos::RangePolicy<...>(Space(), begin, end, chunk_size)
+    Kokkos::RangePolicy<...>(exec, begin, end)
+    Kokkos::RangePolicy<...>(exec, begin, end, chunk_size)
+
+    // CTAD Constructors (since 4.3)
+    Kokkos::RangePolicy(begin, end)
+    Kokkos::RangePolicy(begin, end, chunk_size)
+    Kokkos::RangePolicy(exec, begin, end)
+    Kokkos::RangePolicy(exec, begin, end, chunk_size)
 
 RangePolicy defines an execution policy for a 1D iteration space starting at ``begin`` and going to ``end`` with an open interval.
 
@@ -46,33 +52,33 @@ Synopsis
 
         RangePolicy();
 
-        RangePolicy( member_type work_begin
-                   , member_type work_end );
+        RangePolicy( index_type work_begin
+                   , index_type work_end );
 
-        RangePolicy( member_type work_begin
-                   , member_type work_end
+        RangePolicy( index_type work_begin
+                   , index_type work_end
                    , ChunkSize chunk_size );
 
         RangePolicy( const execution_space & work_space
-                   , member_type work_begin
-                   , member_type work_end );
+                   , index_type work_begin
+                   , index_type work_end );
 
         RangePolicy( const execution_space & work_space
-                   , member_type work_begin
-                   , member_type work_end
+                   , index_type work_begin
+                   , index_type work_end
                    , ChunkSize chunk_size );
 
         // retrieve chunk_size
-        member_type chunk_size() const;
+        index_type chunk_size() const;
         // set chunk_size to a discrete value
         RangePolicy& set_chunk_size(int chunk_size_);
 
         // return ExecSpace instance provided to the constructor
-        KOKKOS_INLINE_FUNCTION const execution_space & space() const;
+        KOKKOS_FUNCTION const execution_space & space() const;
         // return Range begin
-        KOKKOS_INLINE_FUNCTION member_type begin() const;
+        KOKKOS_FUNCTION member_type begin() const;
         // return Range end
-        KOKKOS_INLINE_FUNCTION member_type end()   const;
+        KOKKOS_FUNCTION member_type end()   const;
     };
 
 Parameters
@@ -134,6 +140,7 @@ Preconditions:
 ^^^^^^^^^^^^^^
 
 * The start index must not be greater than the end index.
+* The actual constructors are templated so we can check that they are converted to ``index_type`` safely (see `#6754 <https://github.com/kokkos/kokkos/pull/6754>`_).
 
 CTAD Constructors (since 4.3):
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
