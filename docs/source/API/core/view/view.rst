@@ -644,7 +644,7 @@ For an mdspan :cpp:`m` of type :cpp:`M` that is the *natural mdspan* of a :cpp:c
    * :cpp:`sizeof(Extents...)` is :cpp:`V::rank()`
    * and each element at index :cpp:`r` of :cpp:`Extents...` is :cpp:`V::static_extents(r)` if :cpp:`V::static_extents(r) != 0`, otherwise :cpp:`std::dynamic_extent`
 
-#. :cpp:expr:`M::layout_type` is
+#. :cpp:`M::layout_type` is
 
    * :cpp:`std::layout_left_padded<std::dynamic_extent>` if :cpp:`V::array_layout` is :cpp:`LayoutLeft`
    * :cpp:`std::layout_right_padded<std::dynamic_extent>` if :cpp:`V::array_layout` is :cpp:`LayoutRight`
