@@ -536,7 +536,7 @@ Other
    address is valid, only that it is a non-null pointer.
 
 Conversion to mdspan
-~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~
 
 .. cppkokkos:function:: template <class OtherElementType, class OtherExtents, class OtherLayoutPolicy, class OtherAccessor> constexpr operator mdspan<OtherElementType, OtherExtents, OtherLayoutPolicy, OtherAccessor>()
 
@@ -624,35 +624,6 @@ Assignment Examples
     View<int**>               a11 = a10;          // OK
     View<int*, HostSpace> a12 = View<int*, CudaSpace>("A12",N); // Error: non-assignable memory spaces
     View<int*, HostSpace> a13 = View<int*, CudaHostPinnedSpace>("A13",N); // OK
-
-.. _api-view-natural-mdspans:
-
-Natural mdspans
----------------
-
-.. versionadded:: 4.4.0
-
-C++23 introduces `mdspan <https://en.cppreference.com/w/cpp/container/mdspan>`_, a non-owning multidimensional array view.
-:cpp:class:`View` is compatible with :cpp:`std::mdspan` and can be implicitly converted from and to valid mdspans.
-These conversion rules are dictated by the *natural mdspan* of a view.
-For an mdspan :cpp:`m` of type :cpp:`M` that is the *natural mdspan* of a :cpp:class:`View` :cpp:`v` of type :cpp:`V`, the following properties hold:
-
-#. :cpp:`M::value_type` is :cpp:`V::value_type`
-#. :cpp:`M::index_type` is :cpp:`std::size_t`.
-#. :cpp:`M::extents_type` is :cpp:`std::extents<M::index_type, Extents...>` where
-
-   * :cpp:`sizeof(Extents...)` is :cpp:`V::rank()`
-   * and each element at index :cpp:`r` of :cpp:`Extents...` is :cpp:`V::static_extents(r)` if :cpp:`V::static_extents(r) != 0`, otherwise :cpp:`std::dynamic_extent`
-
-#. :cpp:expr:`M::layout_type` is
-
-   * :cpp:`std::layout_left_padded<std::dynamic_extent>` if :cpp:`V::array_layout` is :cpp:`LayoutLeft`
-   * :cpp:`std::layout_right_padded<std::dynamic_extent>` if :cpp:`V::array_layout` is :cpp:`LayoutRight`
-   * :cpp:`std::layout_stride` if :cpp:`V::array_layout` is :cpp:any:`LayoutStride`
-
-#. :cpp:`M::accessor_type` is :cpp:`std::default_accessor<V::value_type>`
-
-Additionally, the *natural mdspan* is constructed so that :cpp:`m.data() == v.data()` and for each extent :cpp:`r`, :cpp:`m.extents().extent(r) == v.extent(r)`.
 
 .. _api-view-natural-mdspans:
 
