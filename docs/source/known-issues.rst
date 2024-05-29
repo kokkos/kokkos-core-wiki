@@ -7,7 +7,7 @@ Known issues
 CUDA
 ====
 
-- When using a legacy NVIDIA gpu, Kokkos' initialization can report errors like:
+- When using a legacy NVIDIA GPU, Kokkos' initialization can report errors like:
 
   .. code-block::
 
