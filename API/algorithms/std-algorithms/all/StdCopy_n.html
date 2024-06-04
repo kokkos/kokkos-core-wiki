@@ -499,7 +499,7 @@
         </a>
         <div class="content-icon-container">
 <div class="edit-this-page">
-  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/API/algorithms/std-algorithms/all/StdCopy_n.md" title="Edit this page">
+  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/API/algorithms/std-algorithms/all/StdCopy_n.rst" title="Edit this page">
     <svg aria-hidden="true" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
       <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4"></path>
@@ -523,19 +523,32 @@
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="copy-n">
+          <section id="copy-n">
 <h1><code class="docutils literal notranslate"><span class="pre">copy_n</span></code><a class="headerlink" href="#copy-n" title="Permalink to this heading">#</a></h1>
-<p>Header File: <code class="docutils literal notranslate"><span class="pre">Kokkos_StdAlgorithms.hpp</span></code></p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">namespace</span><span class="w"> </span><span class="nn">Kokkos</span><span class="p">{</span>
-<span class="k">namespace</span><span class="w"> </span><span class="nn">Experimental</span><span class="p">{</span>
-
-<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">ExecutionSpace</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">InputIteratorType</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">SizeType</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">OutputIteratorType</span><span class="o">&gt;</span>
+<p>Header: <code class="docutils literal notranslate"><span class="pre">&lt;Kokkos_StdAlgorithms.hpp&gt;</span></code></p>
+<section id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this heading">#</a></h2>
+<p>Copies the first <code class="docutils literal notranslate"><span class="pre">n</span></code> elements from a source range or rank-1 <code class="docutils literal notranslate"><span class="pre">View</span></code> to another range or rank-1 <code class="docutils literal notranslate"><span class="pre">View</span></code>.</p>
+</section>
+<section id="interface">
+<h2>Interface<a class="headerlink" href="#interface" title="Permalink to this heading">#</a></h2>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This is currently inside the <code class="docutils literal notranslate"><span class="pre">Kokkos::Experimental</span></code> namespace.</p>
+</div>
+<section id="overload-set-accepting-execution-space">
+<h3>Overload set accepting execution space<a class="headerlink" href="#overload-set-accepting-execution-space" title="Permalink to this heading">#</a></h3>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span>
+<span class="w">  </span><span class="k">class</span><span class="w"> </span><span class="nc">ExecutionSpace</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">InputIteratorType</span><span class="p">,</span>
+<span class="w">  </span><span class="k">class</span><span class="w"> </span><span class="nc">SizeType</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">OutputIteratorType</span><span class="o">&gt;</span>
 <span class="n">OutputIteratorType</span><span class="w"> </span><span class="n">copy_n</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">ExecutionSpace</span><span class="o">&amp;</span><span class="w"> </span><span class="n">exespace</span><span class="p">,</span><span class="w">                    </span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 <span class="w">                          </span><span class="n">InputIteratorType</span><span class="w"> </span><span class="n">first_from</span><span class="p">,</span>
 <span class="w">                          </span><span class="n">SizeType</span><span class="w"> </span><span class="n">n</span><span class="p">,</span>
 <span class="w">                          </span><span class="n">OutputIteratorType</span><span class="w"> </span><span class="n">first_to</span><span class="p">);</span>
 
-<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">ExecutionSpace</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">InputIteratorType</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">SizeType</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">OutputIteratorType</span><span class="o">&gt;</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span>
+<span class="w">  </span><span class="k">class</span><span class="w"> </span><span class="nc">ExecutionSpace</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">InputIteratorType</span><span class="p">,</span>
+<span class="w">  </span><span class="k">class</span><span class="w"> </span><span class="nc">SizeType</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">OutputIteratorType</span><span class="o">&gt;</span>
 <span class="n">OutputIteratorType</span><span class="w"> </span><span class="n">copy_n</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">label</span><span class="p">,</span>
 <span class="w">                          </span><span class="k">const</span><span class="w"> </span><span class="n">ExecutionSpace</span><span class="o">&amp;</span><span class="w"> </span><span class="n">exespace</span><span class="p">,</span><span class="w">                    </span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 <span class="w">                          </span><span class="n">InputIteratorType</span><span class="w"> </span><span class="n">first_from</span><span class="p">,</span>
@@ -546,8 +559,7 @@
 <span class="w">  </span><span class="k">class</span><span class="w"> </span><span class="nc">ExecutionSpace</span><span class="p">,</span>
 <span class="w">  </span><span class="k">class</span><span class="w"> </span><span class="nc">DataType1</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="p">...</span><span class="w"> </span><span class="n">Properties1</span><span class="p">,</span>
 <span class="w">  </span><span class="k">class</span><span class="w"> </span><span class="nc">SizeType</span><span class="p">,</span>
-<span class="w">  </span><span class="k">class</span><span class="w"> </span><span class="nc">DataType2</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="p">...</span><span class="w"> </span><span class="n">Properties2</span>
-<span class="o">&gt;</span>
+<span class="w">  </span><span class="k">class</span><span class="w"> </span><span class="nc">DataType2</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="p">...</span><span class="w"> </span><span class="n">Properties2</span><span class="o">&gt;</span>
 <span class="k">auto</span><span class="w"> </span><span class="n">copy_n</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">ExecutionSpace</span><span class="o">&amp;</span><span class="w"> </span><span class="n">exespace</span><span class="p">,</span><span class="w">                                  </span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 <span class="w">            </span><span class="k">const</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">View</span><span class="o">&lt;</span><span class="n">DataType1</span><span class="p">,</span><span class="w"> </span><span class="n">Properties1</span><span class="p">...</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">view_from</span><span class="p">,</span>
 <span class="w">            </span><span class="n">SizeType</span><span class="w"> </span><span class="n">n</span><span class="p">,</span>
@@ -557,46 +569,59 @@
 <span class="w">  </span><span class="k">class</span><span class="w"> </span><span class="nc">ExecutionSpace</span><span class="p">,</span>
 <span class="w">  </span><span class="k">class</span><span class="w"> </span><span class="nc">DataType1</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="p">...</span><span class="w"> </span><span class="n">Properties1</span><span class="p">,</span>
 <span class="w">  </span><span class="k">class</span><span class="w"> </span><span class="nc">SizeType</span><span class="p">,</span>
-<span class="w">  </span><span class="k">class</span><span class="w"> </span><span class="nc">DataType2</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="p">...</span><span class="w"> </span><span class="n">Properties2</span>
-<span class="o">&gt;</span>
+<span class="w">  </span><span class="k">class</span><span class="w"> </span><span class="nc">DataType2</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="p">...</span><span class="w"> </span><span class="n">Properties2</span><span class="o">&gt;</span>
 <span class="k">auto</span><span class="w"> </span><span class="n">copy_n</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">label</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">ExecutionSpace</span><span class="o">&amp;</span><span class="w"> </span><span class="n">exespace</span><span class="p">,</span><span class="w">        </span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
 <span class="w">            </span><span class="k">const</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">View</span><span class="o">&lt;</span><span class="n">DataType1</span><span class="p">,</span><span class="w"> </span><span class="n">Properties1</span><span class="p">...</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">view_from</span><span class="p">,</span>
 <span class="w">            </span><span class="n">SizeType</span><span class="w"> </span><span class="n">n</span><span class="p">,</span>
 <span class="w">            </span><span class="k">const</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">View</span><span class="o">&lt;</span><span class="n">DataType2</span><span class="p">,</span><span class="w"> </span><span class="n">Properties2</span><span class="p">...</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">view_to</span><span class="p">);</span>
-
-<span class="p">}</span><span class="w"> </span><span class="c1">//end namespace Experimental</span>
-<span class="p">}</span><span class="w"> </span><span class="c1">//end namespace Kokkos</span>
 </pre></div>
 </div>
-<p>Copies the first <code class="docutils literal notranslate"><span class="pre">n</span></code> elements starting at <code class="docutils literal notranslate"><span class="pre">first_from</span></code> to
-another range starting at <code class="docutils literal notranslate"><span class="pre">first_to</span></code> (overloads 1,2) or the first <code class="docutils literal notranslate"><span class="pre">n</span></code> elements
-from <code class="docutils literal notranslate"><span class="pre">view_from</span></code> to <code class="docutils literal notranslate"><span class="pre">view_to</span></code> (overloads 3,4).</p>
+</section>
+<section id="overload-set-accepting-a-team-handle">
+<h3>Overload set accepting a team handle<a class="headerlink" href="#overload-set-accepting-a-team-handle" title="Permalink to this heading">#</a></h3>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 4.2.</span></p>
+</div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span>
+<span class="w">  </span><span class="k">class</span><span class="w"> </span><span class="nc">TeamHandleType</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">InputIteratorType</span><span class="p">,</span>
+<span class="w">  </span><span class="k">class</span><span class="w"> </span><span class="nc">SizeType</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">OutputIteratorType</span><span class="o">&gt;</span>
+<span class="n">KOKKOS_FUNCTION</span>
+<span class="n">OutputIteratorType</span><span class="w"> </span><span class="n">copy_n</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">TeamHandleType</span><span class="o">&amp;</span><span class="w"> </span><span class="n">teamHandle</span><span class="p">,</span><span class="w">                 </span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="w">                          </span><span class="n">InputIteratorType</span><span class="w"> </span><span class="n">first_from</span><span class="p">,</span>
+<span class="w">                          </span><span class="n">SizeType</span><span class="w"> </span><span class="n">n</span><span class="p">,</span>
+<span class="w">                          </span><span class="n">OutputIteratorType</span><span class="w"> </span><span class="n">first_to</span><span class="p">);</span>
+
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span>
+<span class="w">  </span><span class="k">class</span><span class="w"> </span><span class="nc">TeamHandleType</span><span class="p">,</span>
+<span class="w">  </span><span class="k">class</span><span class="w"> </span><span class="nc">DataType1</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="p">...</span><span class="w"> </span><span class="n">Properties1</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">SizeType</span><span class="p">,</span>
+<span class="w">  </span><span class="k">class</span><span class="w"> </span><span class="nc">DataType2</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="p">...</span><span class="w"> </span><span class="n">Properties2</span><span class="o">&gt;</span>
+<span class="n">KOKKOS_FUNCTION</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">copy_n</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">TeamHandleType</span><span class="o">&amp;</span><span class="w"> </span><span class="n">teamHandle</span><span class="p">,</span><span class="w">                               </span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+<span class="w">            </span><span class="k">const</span><span class="w"> </span><span class="o">::</span><span class="n">Kokkos</span><span class="o">::</span><span class="n">View</span><span class="o">&lt;</span><span class="n">DataType1</span><span class="p">,</span><span class="w"> </span><span class="n">Properties1</span><span class="p">...</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">view_from</span><span class="p">,</span>
+<span class="w">            </span><span class="n">SizeType</span><span class="w"> </span><span class="n">n</span><span class="p">,</span>
+<span class="w">            </span><span class="o">::</span><span class="n">Kokkos</span><span class="o">::</span><span class="n">View</span><span class="o">&lt;</span><span class="n">DataType2</span><span class="p">,</span><span class="w"> </span><span class="n">Properties2</span><span class="p">...</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">view_to</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
 <section id="parameters-and-requirements">
-<h2>Parameters and Requirements<a class="headerlink" href="#parameters-and-requirements" title="Permalink to this heading">#</a></h2>
+<h3>Parameters and Requirements<a class="headerlink" href="#parameters-and-requirements" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">exespace</span></code>, <code class="docutils literal notranslate"><span class="pre">first_from</span></code>, <code class="docutils literal notranslate"><span class="pre">first_to</span></code>, <code class="docutils literal notranslate"><span class="pre">view_from</span></code>, <code class="docutils literal notranslate"><span class="pre">view_to</span></code>:</p>
+<li><p><code class="docutils literal notranslate"><span class="pre">exespace</span></code>, <code class="docutils literal notranslate"><span class="pre">teamHandle</span></code>, <code class="docutils literal notranslate"><span class="pre">first_from</span></code>, <code class="docutils literal notranslate"><span class="pre">first_to</span></code>, <code class="docutils literal notranslate"><span class="pre">view_from</span></code>, <code class="docutils literal notranslate"><span class="pre">view_to</span></code>: same as in <a class="reference external" href="./StdCopy.html"><code class="docutils literal notranslate"><span class="pre">copy</span></code></a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">label</span></code>: used to name the implementation kernels for debugging purposes</p>
 <ul>
-<li><p>same as in <a class="reference internal" href="StdCopy.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">copy</span></code></span></a></p></li>
-</ul>
-</li>
-<li><p><code class="docutils literal notranslate"><span class="pre">label</span></code>:</p>
-<ul>
-<li><p>used to name the implementation kernels for debugging purposes</p></li>
 <li><p>for 1, the default string is: “Kokkos::copy_n_if_iterator_api_default”</p></li>
 <li><p>for 3, the default string is: “Kokkos::copy_n_if_view_api_default”</p></li>
+<li><p>NOTE: overloads accepting a team handle do not use a label internally</p></li>
 </ul>
 </li>
-<li><p><code class="docutils literal notranslate"><span class="pre">n</span></code>:</p>
-<ul>
-<li><p>number of elements to copy (must be non-negative)</p></li>
-</ul>
-</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">n</span></code>: number of elements to copy (must be non-negative)</p></li>
 </ul>
 </section>
-<section id="return">
-<h2>Return<a class="headerlink" href="#return" title="Permalink to this heading">#</a></h2>
+<section id="return-value">
+<h3>Return Value<a class="headerlink" href="#return-value" title="Permalink to this heading">#</a></h3>
 <p>If <code class="docutils literal notranslate"><span class="pre">n&gt;0</span></code>, returns an iterator to the destination element <em>after</em> the last element copied.</p>
-<p>Otherwise, returns <code class="docutils literal notranslate"><span class="pre">first_to</span></code> (for 1,2) or <code class="docutils literal notranslate"><span class="pre">Kokkos::begin(view_to)</span></code> (for 3,4).</p>
+<p>Otherwise, returns <code class="docutils literal notranslate"><span class="pre">first_to</span></code> (for 1,2,5) or <code class="docutils literal notranslate"><span class="pre">Kokkos::begin(view_to)</span></code> (for 3,4,6).</p>
+</section>
 </section>
 </section>
 
@@ -658,8 +683,14 @@ from <code class="docutils literal notranslate"><span class="pre">view_from</spa
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">copy_n</span></code></a><ul>
+<li><a class="reference internal" href="#description">Description</a></li>
+<li><a class="reference internal" href="#interface">Interface</a><ul>
+<li><a class="reference internal" href="#overload-set-accepting-execution-space">Overload set accepting execution space</a></li>
+<li><a class="reference internal" href="#overload-set-accepting-a-team-handle">Overload set accepting a team handle</a></li>
 <li><a class="reference internal" href="#parameters-and-requirements">Parameters and Requirements</a></li>
-<li><a class="reference internal" href="#return">Return</a></li>
+<li><a class="reference internal" href="#return-value">Return Value</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
