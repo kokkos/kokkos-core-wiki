@@ -82,3 +82,11 @@ myst_enable_extensions = [
 # rst_prolog = """
 # .. include:: special.rst
 # """
+
+rst_prolog = """
+.. role:: cppkokkos(code)
+    :language: cppkokkos
+
+.. role:: cpp(code)
+   :language: cpp
+"""

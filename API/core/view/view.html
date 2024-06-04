@@ -892,6 +892,63 @@ corresponding to compile-time dimensions must match the View type’s compile-ti
 <dd><p>Subview constructor. See <code class="docutils literal notranslate"><span class="pre">subview</span></code> function for arguments.</p>
 </dd></dl>
 
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv44ViewRK19NATURAL_MDSPAN_TYPE">
+<span id="_CPPv34ViewRK19NATURAL_MDSPAN_TYPE"></span><span id="_CPPv24ViewRK19NATURAL_MDSPAN_TYPE"></span><span id="View__NATURAL_MDSPAN_TYPECR"></span><span class="k"><span class="pre">explicit</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">traits</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">is_managed</span></span><span class="p"><span class="pre">)</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">View</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">NATURAL_MDSPAN_TYPE</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">mds</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv44ViewRK19NATURAL_MDSPAN_TYPE" title="Permalink to this definition">#</a><br /></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>mds</strong> – the mdspan to convert from.</p>
+</dd>
+</dl>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><code class="code highlight cpp docutils literal highlight-cpp"><span class="k">explicit</span><span class="p">(</span><span class="kt">bool</span><span class="p">)</span></code> is only available on C++20 and later. When building Kokkos with C++17, this constructor will be fully implicit.
+Be aware that later upgrading to C++20 will in some cases cause compilation issues in cases where <code class="code highlight cpp docutils literal highlight-cpp"><span class="n">traits</span><span class="o">::</span><span class="n">is_managed</span></code> is <code class="code highlight cpp docutils literal highlight-cpp"><span class="nb">false</span></code>.</p>
+</div>
+<p><code class="code highlight cpp docutils literal highlight-cpp"><span class="n">NATURAL_MDSPAN_TYPE</span></code> is the <a class="reference internal" href="#api-view-natural-mdspans"><span class="std std-ref">natural mdspan</span></a> of the View. The <em>natural mdspan</em> is only available if <a class="reference internal" href="#_CPPv412array_layout" title="array_layout"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">array_layout</span></code></a> is one of <a class="reference internal" href="layoutLeft.html#_CPPv410LayoutLeft" title="LayoutLeft"><code class="xref cppkokkos cppkokkos-struct docutils literal notranslate"><span class="pre">LayoutLeft</span></code></a>, <a class="reference internal" href="layoutRight.html#_CPPv411LayoutRight" title="LayoutRight"><code class="xref cppkokkos cppkokkos-struct docutils literal notranslate"><span class="pre">LayoutRight</span></code></a>,
+or <a class="reference internal" href="layoutStride.html#_CPPv412LayoutStride" title="LayoutStride"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">LayoutStride</span></code></a>. This constructor is only available if <em>natural mdspan</em> is available.</p>
+<p>Constructs a <code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">View</span></code> by converting from <code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">mds</span></code>. The <code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">View</span></code> will be unmanaged and constructed as if by <code class="code highlight cpp docutils literal highlight-cpp"><span class="n">View</span><span class="p">(</span><span class="n">mds</span><span class="p">.</span><span class="n">data</span><span class="p">(),</span><span class="w"> </span><span class="n">array_layout_from_mapping</span><span class="p">(</span><span class="n">mds</span><span class="p">.</span><span class="n">mapping</span><span class="p">()))</span></code></p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#api-view-natural-mdspans"><span class="std std-ref">Natural mdspans</span></a></p>
+</div>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 4.4.0.</span></p>
+</div>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4I0000E4ViewRK6mdspanI11ElementType11ExtentsType10LayoutType12AccessorTypeE">
+<span id="_CPPv3I0000E4ViewRK6mdspanI11ElementType11ExtentsType10LayoutType12AccessorTypeE"></span><span id="_CPPv2I0000E4ViewRK6mdspanI11ElementType11ExtentsType10LayoutType12AccessorTypeE"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ElementType</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ExtentsType</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">LayoutType</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">AccessorType</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="k"><span class="pre">explicit</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">SEE_BELOW</span></span><span class="p"><span class="pre">)</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">View</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">mdspan</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0000E4ViewRK6mdspanI11ElementType11ExtentsType10LayoutType12AccessorTypeE" title="View::ElementType"><span class="n"><span class="pre">ElementType</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0000E4ViewRK6mdspanI11ElementType11ExtentsType10LayoutType12AccessorTypeE" title="View::ExtentsType"><span class="n"><span class="pre">ExtentsType</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0000E4ViewRK6mdspanI11ElementType11ExtentsType10LayoutType12AccessorTypeE" title="View::LayoutType"><span class="n"><span class="pre">LayoutType</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0000E4ViewRK6mdspanI11ElementType11ExtentsType10LayoutType12AccessorTypeE" title="View::AccessorType"><span class="n"><span class="pre">AccessorType</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">mds</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0000E4ViewRK6mdspanI11ElementType11ExtentsType10LayoutType12AccessorTypeE" title="Permalink to this definition">#</a><br /></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Template Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ElementType</strong> – the mdspan element type</p></li>
+<li><p><strong>ExtentsType</strong> – the mdspan extents</p></li>
+<li><p><strong>LayoutType</strong> – the mdspan layout</p></li>
+<li><p><strong>AccessorType</strong> – the mdspan extents</p></li>
+</ul>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>mds</strong> – the mdspan to convert from</p>
+</dd>
+</dl>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><code class="code highlight cpp docutils literal highlight-cpp"><span class="k">explicit</span><span class="p">(</span><span class="kt">bool</span><span class="p">)</span></code> is only available on C++20 and later. When building Kokkos with C++17, this constructor will be fully implicit.
+Be aware that later upgrading to C++20 will in some cases cause compilation issues in cases where the condition is false.</p>
+</div>
+<p>Constructs a <code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">View</span></code> by converting from <code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">mds</span></code>.
+The <code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">View</span></code>’s <a class="reference internal" href="#api-view-natural-mdspans"><span class="std std-ref">natural mdspan</span></a> must be constructible from <code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">mds</span></code>. The <code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">View</span></code> will be constructed as if by <code class="code highlight cpp docutils literal highlight-cpp"><span class="n">View</span><span class="p">(</span><span class="n">NATURAL_MDSPAN_TYPE</span><span class="p">(</span><span class="n">mds</span><span class="p">))</span></code></p>
+<dl class="simple">
+<dt>In C++20:</dt><dd><p>This constructor is implicit if <code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">mds</span></code> is implicitly convertible to the <em>natural mdspan</em> of the <code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">View</span></code>.</p>
+</dd>
+</dl>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 4.4.0.</span></p>
+</div>
+</dd></dl>
+
 </section>
 <section id="data-access-functions">
 <h3>Data Access Functions<a class="headerlink" href="#data-access-functions" title="Permalink to this heading">#</a></h3>
@@ -1096,6 +1153,46 @@ address is valid, only that it is a non-null pointer.</p>
 </dd></dl>
 
 </section>
+<section id="conversion-to-mdspan">
+<h3>Conversion to mdspan<a class="headerlink" href="#conversion-to-mdspan" title="Permalink to this heading">#</a></h3>
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4I0000Ecv6mdspanI16OtherElementType12OtherExtents17OtherLayoutPolicy13OtherAccessorEv">
+<span id="_CPPv3I0000Ecv6mdspanI16OtherElementType12OtherExtents17OtherLayoutPolicy13OtherAccessorEv"></span><span id="_CPPv2I0000Ecv6mdspanI16OtherElementType12OtherExtents17OtherLayoutPolicy13OtherAccessorEv"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">OtherElementType</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">OtherExtents</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">OtherLayoutPolicy</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">OtherAccessor</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="w"> </span><span class="n"><span class="pre">mdspan</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0000Ecv6mdspanI16OtherElementType12OtherExtents17OtherLayoutPolicy13OtherAccessorEv" title="operator mdspan&lt;OtherElementType, OtherExtents, OtherLayoutPolicy, OtherAccessor&gt;::OtherElementType"><span class="n"><span class="pre">OtherElementType</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0000Ecv6mdspanI16OtherElementType12OtherExtents17OtherLayoutPolicy13OtherAccessorEv" title="operator mdspan&lt;OtherElementType, OtherExtents, OtherLayoutPolicy, OtherAccessor&gt;::OtherExtents"><span class="n"><span class="pre">OtherExtents</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0000Ecv6mdspanI16OtherElementType12OtherExtents17OtherLayoutPolicy13OtherAccessorEv" title="operator mdspan&lt;OtherElementType, OtherExtents, OtherLayoutPolicy, OtherAccessor&gt;::OtherLayoutPolicy"><span class="n"><span class="pre">OtherLayoutPolicy</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0000Ecv6mdspanI16OtherElementType12OtherExtents17OtherLayoutPolicy13OtherAccessorEv" title="operator mdspan&lt;OtherElementType, OtherExtents, OtherLayoutPolicy, OtherAccessor&gt;::OtherAccessor"><span class="n"><span class="pre">OtherAccessor</span></span></a><span class="p"><span class="pre">&gt;</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0000Ecv6mdspanI16OtherElementType12OtherExtents17OtherLayoutPolicy13OtherAccessorEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Template Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>OtherElementType</strong> – the target mdspan element type</p></li>
+<li><p><strong>OtherExtents</strong> – the target mdspan extents</p></li>
+<li><p><strong>OtherLayoutPolicy</strong> – the target mdspan layout</p></li>
+<li><p><strong>OtherAccessor</strong> – the target mdspan accessor</p></li>
+</ul>
+</dd>
+<dt class="field-even">Constraints<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">View</span></code>‘s <a class="reference internal" href="#api-view-natural-mdspans"><span class="std std-ref">natural mdspan</span></a> must be assignable to <code class="code highlight cpp docutils literal highlight-cpp"><span class="n">mdspan</span><span class="o">&lt;</span><span class="n">OtherElementType</span><span class="p">,</span><span class="w"> </span><span class="n">OtherExtents</span><span class="p">,</span><span class="w"> </span><span class="n">OtherLayoutPolicy</span><span class="p">,</span><span class="w"> </span><span class="n">OtherAccessor</span><span class="o">&gt;</span></code></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>an mdspan with extents and a layout converted from the <code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">View</span></code>’s <em>natural mdspan</em>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4I0E9to_mdspanDaRK17OtherAccessorType">
+<span id="_CPPv3I0E9to_mdspanRK17OtherAccessorType"></span><span id="_CPPv2I0E9to_mdspanRK17OtherAccessorType"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">OtherAccessorType</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">Kokkos</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">default_accessor</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="n"><span class="pre">traits</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">value_type</span></span><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">to_mdspan</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E9to_mdspanDaRK17OtherAccessorType" title="to_mdspan::OtherAccessorType"><span class="n"><span class="pre">OtherAccessorType</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">other_accessor</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E9to_mdspanDaRK17OtherAccessorType" title="to_mdspan::OtherAccessorType"><span class="n"><span class="pre">OtherAccessorType</span></span></a><span class="p"><span class="pre">{</span></span><span class="p"><span class="pre">}</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0E9to_mdspanDaRK17OtherAccessorType" title="Permalink to this definition">#</a><br /></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Template Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>OtherAccessor</strong> – the target mdspan accessor</p>
+</dd>
+<dt class="field-even">Constraints<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="code highlight cpp docutils literal highlight-cpp"><span class="k">typename</span><span class="w"> </span><span class="nc">OtherAccessorType</span><span class="o">::</span><span class="n">data_handle_type</span></code> must be assignable to <code class="code highlight cpp docutils literal highlight-cpp"><span class="n">value_type</span><span class="o">*</span></code></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">View</span></code>‘s <a class="reference internal" href="#api-view-natural-mdspans"><span class="std std-ref">natural mdspan</span></a>, but with an accessor policy constructed from <code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">other_accessor</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
 </section>
 <section id="nonmember-functions">
 <h2>NonMember Functions<a class="headerlink" href="#nonmember-functions" title="Permalink to this heading">#</a></h2>
@@ -1167,6 +1264,35 @@ These rules only cover cases where both layouts are one of <code class="docutils
 </pre></div>
 </div>
 </section>
+</section>
+<section id="natural-mdspans">
+<span id="api-view-natural-mdspans"></span><h2>Natural mdspans<a class="headerlink" href="#natural-mdspans" title="Permalink to this heading">#</a></h2>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 4.4.0.</span></p>
+</div>
+<p>C++23 introduces <a class="reference external" href="https://en.cppreference.com/w/cpp/container/mdspan">mdspan</a>, a non-owning multidimensional array view.
+<code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">View</span></code> is compatible with <code class="code highlight cpp docutils literal highlight-cpp"><span class="n">std</span><span class="o">::</span><span class="n">mdspan</span></code> and can be implicitly converted from and to valid mdspans.
+These conversion rules are dictated by the <em>natural mdspan</em> of a view.
+For an mdspan <code class="code highlight cpp docutils literal highlight-cpp"><span class="n">m</span></code> of type <code class="code highlight cpp docutils literal highlight-cpp"><span class="n">M</span></code> that is the <em>natural mdspan</em> of a <code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">View</span></code> <code class="code highlight cpp docutils literal highlight-cpp"><span class="n">v</span></code> of type <code class="code highlight cpp docutils literal highlight-cpp"><span class="n">V</span></code>, the following properties hold:</p>
+<ol class="arabic simple">
+<li><p><code class="code highlight cpp docutils literal highlight-cpp"><span class="n">M</span><span class="o">::</span><span class="n">value_type</span></code> is <code class="code highlight cpp docutils literal highlight-cpp"><span class="n">V</span><span class="o">::</span><span class="n">value_type</span></code></p></li>
+<li><p><code class="code highlight cpp docutils literal highlight-cpp"><span class="n">M</span><span class="o">::</span><span class="n">index_type</span></code> is <code class="code highlight cpp docutils literal highlight-cpp"><span class="n">std</span><span class="o">::</span><span class="kt">size_t</span></code>.</p></li>
+<li><p><code class="code highlight cpp docutils literal highlight-cpp"><span class="n">M</span><span class="o">::</span><span class="n">extents_type</span></code> is <code class="code highlight cpp docutils literal highlight-cpp"><span class="n">std</span><span class="o">::</span><span class="n">extents</span><span class="o">&lt;</span><span class="n">M</span><span class="o">::</span><span class="n">index_type</span><span class="p">,</span><span class="w"> </span><span class="n">Extents</span><span class="p">...</span><span class="o">&gt;</span></code> where</p>
+<ul class="simple">
+<li><p><code class="code highlight cpp docutils literal highlight-cpp"><span class="k">sizeof</span><span class="p">(</span><span class="n">Extents</span><span class="p">...)</span></code> is <code class="code highlight cpp docutils literal highlight-cpp"><span class="n">V</span><span class="o">::</span><span class="n">rank</span><span class="p">()</span></code></p></li>
+<li><p>and each element at index <code class="code highlight cpp docutils literal highlight-cpp"><span class="n">r</span></code> of <code class="code highlight cpp docutils literal highlight-cpp"><span class="n">Extents</span><span class="p">...</span></code> is <code class="code highlight cpp docutils literal highlight-cpp"><span class="n">V</span><span class="o">::</span><span class="n">static_extents</span><span class="p">(</span><span class="n">r</span><span class="p">)</span></code> if <code class="code highlight cpp docutils literal highlight-cpp"><span class="n">V</span><span class="o">::</span><span class="n">static_extents</span><span class="p">(</span><span class="n">r</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">0</span></code>, otherwise <code class="code highlight cpp docutils literal highlight-cpp"><span class="n">std</span><span class="o">::</span><span class="n">dynamic_extent</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="code highlight cpp docutils literal highlight-cpp"><span class="n">M</span><span class="o">::</span><span class="n">layout_type</span></code> is</p>
+<ul class="simple">
+<li><p><code class="code highlight cpp docutils literal highlight-cpp"><span class="n">std</span><span class="o">::</span><span class="n">layout_left_padded</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">dynamic_extent</span><span class="o">&gt;</span></code> if <code class="code highlight cpp docutils literal highlight-cpp"><span class="n">V</span><span class="o">::</span><span class="n">array_layout</span></code> is <code class="code highlight cpp docutils literal highlight-cpp"><span class="n">LayoutLeft</span></code></p></li>
+<li><p><code class="code highlight cpp docutils literal highlight-cpp"><span class="n">std</span><span class="o">::</span><span class="n">layout_right_padded</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">dynamic_extent</span><span class="o">&gt;</span></code> if <code class="code highlight cpp docutils literal highlight-cpp"><span class="n">V</span><span class="o">::</span><span class="n">array_layout</span></code> is <code class="code highlight cpp docutils literal highlight-cpp"><span class="n">LayoutRight</span></code></p></li>
+<li><p><code class="code highlight cpp docutils literal highlight-cpp"><span class="n">std</span><span class="o">::</span><span class="n">layout_stride</span></code> if <code class="code highlight cpp docutils literal highlight-cpp"><span class="n">V</span><span class="o">::</span><span class="n">array_layout</span></code> is <a class="reference internal" href="layoutStride.html#_CPPv412LayoutStride" title="LayoutStride"><code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">LayoutStride</span></code></a></p></li>
+</ul>
+</li>
+<li><p><code class="code highlight cpp docutils literal highlight-cpp"><span class="n">M</span><span class="o">::</span><span class="n">accessor_type</span></code> is <code class="code highlight cpp docutils literal highlight-cpp"><span class="n">std</span><span class="o">::</span><span class="n">default_accessor</span><span class="o">&lt;</span><span class="n">V</span><span class="o">::</span><span class="n">value_type</span><span class="o">&gt;</span></code></p></li>
+</ol>
+<p>Additionally, the <em>natural mdspan</em> is constructed so that <code class="code highlight cpp docutils literal highlight-cpp"><span class="n">m</span><span class="p">.</span><span class="n">data</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">data</span><span class="p">()</span></code> and for each extent <code class="code highlight cpp docutils literal highlight-cpp"><span class="n">r</span></code>, <code class="code highlight cpp docutils literal highlight-cpp"><span class="n">m</span><span class="p">.</span><span class="n">extents</span><span class="p">().</span><span class="n">extent</span><span class="p">(</span><span class="n">r</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">extent</span><span class="p">(</span><span class="n">r</span><span class="p">)</span></code>.</p>
 </section>
 <section id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading">#</a></h2>
@@ -1277,6 +1403,7 @@ These rules only cover cases where both layouts are one of <code class="docutils
 <li><a class="reference internal" href="#data-access-functions">Data Access Functions</a></li>
 <li><a class="reference internal" href="#data-layout-dimensions-strides">Data Layout, Dimensions, Strides</a></li>
 <li><a class="reference internal" href="#other">Other</a></li>
+<li><a class="reference internal" href="#conversion-to-mdspan">Conversion to mdspan</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#nonmember-functions">NonMember Functions</a></li>
@@ -1284,6 +1411,7 @@ These rules only cover cases where both layouts are one of <code class="docutils
 <li><a class="reference internal" href="#assignment-examples">Assignment Examples</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#natural-mdspans">Natural mdspans</a></li>
 <li><a class="reference internal" href="#examples">Examples</a></li>
 </ul>
 </li>
