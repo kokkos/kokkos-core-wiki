@@ -499,7 +499,7 @@
         </a>
         <div class="content-icon-container">
 <div class="edit-this-page">
-  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/API/algorithms/std-algorithms/all/StdRotate.md" title="Edit this page">
+  <a class="muted-link" href="https://github.com/kokkos/kokkos-core-wiki/blob/main/docs/source/API/algorithms/std-algorithms/all/StdRotate.rst" title="Edit this page">
     <svg aria-hidden="true" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
       <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4"></path>
@@ -523,13 +523,24 @@
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="rotate">
+          <section id="rotate">
 <h1><code class="docutils literal notranslate"><span class="pre">rotate</span></code><a class="headerlink" href="#rotate" title="Permalink to this heading">#</a></h1>
-<p>Header File: <code class="docutils literal notranslate"><span class="pre">Kokkos_StdAlgorithms.hpp</span></code></p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">namespace</span><span class="w"> </span><span class="nn">Kokkos</span><span class="p">{</span>
-<span class="k">namespace</span><span class="w"> </span><span class="nn">Experimental</span><span class="p">{</span>
-
-<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">ExecutionSpace</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">IteratorType</span><span class="o">&gt;</span>
+<p>Header: <code class="docutils literal notranslate"><span class="pre">Kokkos_StdAlgorithms.hpp</span></code></p>
+<section id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this heading">#</a></h2>
+<p>Swaps the elements in the range or in <code class="docutils literal notranslate"><span class="pre">view</span></code> in such a way that
+the element <code class="docutils literal notranslate"><span class="pre">n_first</span></code> or <code class="docutils literal notranslate"><span class="pre">view(n_location)</span></code> becomes the first element
+of the new range and <code class="docutils literal notranslate"><span class="pre">n_first</span> <span class="pre">-</span> <span class="pre">1</span></code> becomes the last element.</p>
+</section>
+<section id="interface">
+<h2>Interface<a class="headerlink" href="#interface" title="Permalink to this heading">#</a></h2>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This is currently inside the <code class="docutils literal notranslate"><span class="pre">Kokkos::Experimental</span></code> namespace.</p>
+</div>
+<section id="overload-set-accepting-execution-space">
+<h3>Overload set accepting execution space<a class="headerlink" href="#overload-set-accepting-execution-space" title="Permalink to this heading">#</a></h3>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">ExecutionSpace</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">IteratorType</span><span class="o">&gt;</span>
 <span class="n">IteratorType</span><span class="w"> </span><span class="n">rotate</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">ExecutionSpace</span><span class="o">&amp;</span><span class="w"> </span><span class="n">exespace</span><span class="p">,</span><span class="w">                            </span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 <span class="w">                    </span><span class="n">IteratorType</span><span class="w"> </span><span class="n">first</span><span class="p">,</span>
 <span class="w">                    </span><span class="n">IteratorType</span><span class="w"> </span><span class="n">n_first</span><span class="p">,</span>
@@ -543,74 +554,78 @@
 
 <span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">ExecutionSpace</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">DataType</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="p">...</span><span class="w"> </span><span class="n">Properties</span><span class="o">&gt;</span>
 <span class="k">auto</span><span class="w"> </span><span class="n">rotate</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">ExecutionSpace</span><span class="o">&amp;</span><span class="w"> </span><span class="n">exespace</span><span class="p">,</span><span class="w">                                    </span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-<span class="w">            </span><span class="k">const</span><span class="w"> </span><span class="o">::</span><span class="n">Kokkos</span><span class="o">::</span><span class="n">View</span><span class="o">&lt;</span><span class="n">DataType</span><span class="p">,</span><span class="w"> </span><span class="n">Properties</span><span class="p">...</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">view</span><span class="p">,</span>
+<span class="w">            </span><span class="k">const</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">View</span><span class="o">&lt;</span><span class="n">DataType</span><span class="p">,</span><span class="w"> </span><span class="n">Properties</span><span class="p">...</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">view</span><span class="p">,</span>
 <span class="w">            </span><span class="n">std</span><span class="o">::</span><span class="kt">size_t</span><span class="w"> </span><span class="n">n_location</span><span class="p">);</span>
 
 <span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">ExecutionSpace</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">DataType</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="p">...</span><span class="w"> </span><span class="n">Properties</span><span class="o">&gt;</span>
 <span class="k">auto</span><span class="w"> </span><span class="n">rotate</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">label</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">ExecutionSpace</span><span class="o">&amp;</span><span class="w"> </span><span class="n">exespace</span><span class="p">,</span><span class="w">          </span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
-<span class="w">            </span><span class="k">const</span><span class="w"> </span><span class="o">::</span><span class="n">Kokkos</span><span class="o">::</span><span class="n">View</span><span class="o">&lt;</span><span class="n">DataType</span><span class="p">,</span><span class="w"> </span><span class="n">Properties</span><span class="p">...</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">view</span><span class="p">,</span>
+<span class="w">            </span><span class="k">const</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">View</span><span class="o">&lt;</span><span class="n">DataType</span><span class="p">,</span><span class="w"> </span><span class="n">Properties</span><span class="p">...</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">view</span><span class="p">,</span>
 <span class="w">            </span><span class="n">std</span><span class="o">::</span><span class="kt">size_t</span><span class="w"> </span><span class="n">n_location</span><span class="p">);</span>
-
-<span class="p">}</span><span class="w"> </span><span class="c1">//end namespace Experimental</span>
-<span class="p">}</span><span class="w"> </span><span class="c1">//end namespace Kokkos</span>
 </pre></div>
 </div>
-<section id="description">
-<h2>Description<a class="headerlink" href="#description" title="Permalink to this heading">#</a></h2>
-<p>Swaps the elements in the range <code class="docutils literal notranslate"><span class="pre">[first,</span> <span class="pre">last)</span></code> or in <code class="docutils literal notranslate"><span class="pre">view</span></code> in such a way that
-the element <code class="docutils literal notranslate"><span class="pre">n_first</span></code> or <code class="docutils literal notranslate"><span class="pre">view(n_location)</span></code> becomes the first element of the
-new range and <code class="docutils literal notranslate"><span class="pre">n_first</span> <span class="pre">-</span> <span class="pre">1</span></code> becomes the last element.</p>
+</section>
+<section id="overload-set-accepting-a-team-handle">
+<h3>Overload set accepting a team handle<a class="headerlink" href="#overload-set-accepting-a-team-handle" title="Permalink to this heading">#</a></h3>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 4.2.</span></p>
+</div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">TeamHandleType</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">IteratorType</span><span class="o">&gt;</span>
+<span class="n">KOKKOS_FUNCTION</span>
+<span class="n">IteratorType</span><span class="w"> </span><span class="n">rotate</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">TeamHandleType</span><span class="o">&amp;</span><span class="w"> </span><span class="n">teamHandle</span><span class="p">,</span><span class="w">                          </span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="w">                    </span><span class="n">IteratorType</span><span class="w"> </span><span class="n">first</span><span class="p">,</span>
+<span class="w">                    </span><span class="n">IteratorType</span><span class="w"> </span><span class="n">n_first</span><span class="p">,</span>
+<span class="w">                    </span><span class="n">IteratorType</span><span class="w"> </span><span class="n">last</span><span class="p">);</span>
+
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">TeamHandleType</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">DataType</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="p">...</span><span class="w"> </span><span class="n">Properties</span><span class="o">&gt;</span>
+<span class="n">KOKKOS_FUNCTION</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">rotate</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">TeamHandleType</span><span class="o">&amp;</span><span class="w"> </span><span class="n">teamHandle</span><span class="p">,</span><span class="w">                                  </span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+<span class="w">            </span><span class="k">const</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">View</span><span class="o">&lt;</span><span class="n">DataType</span><span class="p">,</span><span class="w"> </span><span class="n">Properties</span><span class="p">...</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">view</span><span class="p">,</span>
+<span class="w">            </span><span class="n">std</span><span class="o">::</span><span class="kt">size_t</span><span class="w"> </span><span class="n">n_location</span><span class="p">);</span>
+</pre></div>
+</div>
 </section>
 <section id="parameters-and-requirements">
-<h2>Parameters and Requirements<a class="headerlink" href="#parameters-and-requirements" title="Permalink to this heading">#</a></h2>
+<h3>Parameters and Requirements<a class="headerlink" href="#parameters-and-requirements" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">exespace</span></code>:</p>
+<li><p><code class="docutils literal notranslate"><span class="pre">exespace</span></code>: execution space instance</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">teamHandle</span></code>: team handle instance given inside a parallel region when using a TeamPolicy</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">label</span></code>: string forwarded to internal parallel kernels for debugging purposes</p>
 <ul>
-<li><p>execution space instance</p></li>
+<li><p>1: The default string is “Kokkos::rotate_iterator_api_default”.</p></li>
+<li><p>3: The default string is “Kokkos::rotate_view_api_default”.</p></li>
+<li><p>NOTE: overloads accepting a team handle do not use a label internally</p></li>
 </ul>
 </li>
-<li><p><code class="docutils literal notranslate"><span class="pre">label</span></code>:</p>
+<li><p><code class="docutils literal notranslate"><span class="pre">first,</span> <span class="pre">last</span></code>: range of elements to modify</p>
 <ul>
-<li><p>used to name the implementation kernels for debugging purposes</p></li>
-<li><p>for 1, the default string is: “Kokkos::rotate_iterator_api_default”</p></li>
-<li><p>for 3, the default string is: “Kokkos::rotate_view_api_default”</p></li>
+<li><p>must be <em>random access iterators</em>, e.g., returned from <code class="docutils literal notranslate"><span class="pre">Kokkos::Experimental::(c)begin/(c)end</span></code></p></li>
+<li><p>must represent a valid range, i.e., <code class="docutils literal notranslate"><span class="pre">last</span> <span class="pre">&gt;=</span> <span class="pre">first</span></code></p></li>
+<li><p>must be accessible from <code class="docutils literal notranslate"><span class="pre">exespace</span></code> or from the execution space associated with the team handle</p></li>
 </ul>
 </li>
-<li><p><code class="docutils literal notranslate"><span class="pre">first,</span> <span class="pre">last</span></code>:</p>
+<li><p><code class="docutils literal notranslate"><span class="pre">n_first</span></code>: iterator to element that should be the first of the rotated range</p>
 <ul>
-<li><p>range of elements to modify</p></li>
-<li><p>must be <em>random access iterators</em></p></li>
-<li><p>must represent a valid range, i.e., <code class="docutils literal notranslate"><span class="pre">last</span> <span class="pre">&gt;=</span> <span class="pre">first</span></code> (checked in debug mode)</p></li>
-<li><p>must be accessible from <code class="docutils literal notranslate"><span class="pre">exespace</span></code></p></li>
-</ul>
-</li>
-<li><p><code class="docutils literal notranslate"><span class="pre">n_first</span></code>:</p>
-<ul>
-<li><p>iterator to element that should be the first of the rotated range</p></li>
-<li><p>must be a <em>random access iterator</em></p></li>
+<li><p>must be <em>random access iterators</em>, e.g., returned from <code class="docutils literal notranslate"><span class="pre">Kokkos::Experimental::(c)begin/(c)end</span></code></p></li>
 <li><p>must be such that <code class="docutils literal notranslate"><span class="pre">[first,</span> <span class="pre">n_first)</span></code> and <code class="docutils literal notranslate"><span class="pre">[n_first,</span> <span class="pre">last)</span></code> are valid ranges.</p></li>
-<li><p>must be accessible from <code class="docutils literal notranslate"><span class="pre">exespace</span></code></p></li>
+<li><p>must be accessible from <code class="docutils literal notranslate"><span class="pre">exespace</span></code> or from the execution space associated with the team handle</p></li>
 </ul>
 </li>
 <li><p><code class="docutils literal notranslate"><span class="pre">view</span></code>:</p>
 <ul>
 <li><p>must be rank-1, and have <code class="docutils literal notranslate"><span class="pre">LayoutLeft</span></code>, <code class="docutils literal notranslate"><span class="pre">LayoutRight</span></code>, or <code class="docutils literal notranslate"><span class="pre">LayoutStride</span></code></p></li>
-<li><p>must be accessible from <code class="docutils literal notranslate"><span class="pre">exespace</span></code></p></li>
+<li><p>must be accessible from <code class="docutils literal notranslate"><span class="pre">exespace</span></code> or from the execution space associated with the team handle</p></li>
 </ul>
 </li>
-<li><p><code class="docutils literal notranslate"><span class="pre">n_location</span></code>:</p>
-<ul>
-<li><p>integer value identifying the element to rotate about</p></li>
-</ul>
-</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">n_location</span></code>: integer value identifying the element to rotate about</p></li>
 </ul>
 </section>
-<section id="return">
-<h2>Return<a class="headerlink" href="#return" title="Permalink to this heading">#</a></h2>
+<section id="return-value">
+<h3>Return Value<a class="headerlink" href="#return-value" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
-<li><p>For (1,2), returns the iterator computed as <code class="docutils literal notranslate"><span class="pre">first</span> <span class="pre">+</span> <span class="pre">(last</span> <span class="pre">-</span> <span class="pre">n_first)</span></code></p></li>
-<li><p>For (3,4), returns <code class="docutils literal notranslate"><span class="pre">Kokkos::begin(view)</span> <span class="pre">+</span> <span class="pre">(Kokkos::end(view)</span> <span class="pre">-</span> <span class="pre">n_location)</span></code></p></li>
+<li><p>1, 2, 5: Returns the iterator computed as <code class="docutils literal notranslate"><span class="pre">first</span> <span class="pre">+</span> <span class="pre">(last</span> <span class="pre">-</span> <span class="pre">n_first)</span></code></p></li>
+<li><p>3, 4, 6: Returns <code class="docutils literal notranslate"><span class="pre">Kokkos::begin(view)</span> <span class="pre">+</span> <span class="pre">(Kokkos::end(view)</span> <span class="pre">-</span> <span class="pre">n_location)</span></code></p></li>
 </ul>
+</section>
 </section>
 </section>
 
@@ -673,8 +688,13 @@ new range and <code class="docutils literal notranslate"><span class="pre">n_fir
             <ul>
 <li><a class="reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">rotate</span></code></a><ul>
 <li><a class="reference internal" href="#description">Description</a></li>
+<li><a class="reference internal" href="#interface">Interface</a><ul>
+<li><a class="reference internal" href="#overload-set-accepting-execution-space">Overload set accepting execution space</a></li>
+<li><a class="reference internal" href="#overload-set-accepting-a-team-handle">Overload set accepting a team handle</a></li>
 <li><a class="reference internal" href="#parameters-and-requirements">Parameters and Requirements</a></li>
-<li><a class="reference internal" href="#return">Return</a></li>
+<li><a class="reference internal" href="#return-value">Return Value</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
