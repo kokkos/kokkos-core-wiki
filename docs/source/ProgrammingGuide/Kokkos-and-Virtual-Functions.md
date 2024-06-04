@@ -31,13 +31,13 @@ At a glance this should be fine, we've made a device instance of a class, copied
 
 Virtual functions allow a program to handle Derived classes through a pointer to their Base class and have things work as they should. To make this work, the compiler needs some way to identify whether a pointer which is nominally to a Base class really is a pointer to the Base, or whether it's really a pointer to any Derived class. This happens through VPointers and VTables. For every class with virtual functions, there is one VTable shared among all instances, this table contains function pointers for all the virtual functions the class implements. 
 
-![VTable](../usecases/VirtualFunctions-VTables.png)
+![VTable](./figures/VirtualFunctions-VTables.png)
 
 Okay, so now we have VTables, if a class knows what type it is it could call the correct function. But how does it know?
 
 Remember that we have one VTable shared amongst all instances of a type. Each instance, however, has a hidden member called the VPointer, which on initialization the compiler points at the correct table. So a call to a virtual function simply dereferences that pointer, and then indexes into the VTable to find the precise virtual function called.
 
-![VPointer](../usecases/VirtualFunctions-VPointers.png)
+![VPointer](./figures/VirtualFunctions-VPointers.png)
 
 Now that we know what the compiler is doing to implement virtual functions, we'll look at why it doesn't work with GPU's
 
