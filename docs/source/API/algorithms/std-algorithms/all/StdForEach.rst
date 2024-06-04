@@ -144,4 +144,5 @@ Example
    KE::for_each(exespace, KE::begin(a), KE::end(a), p);
 
    // assuming OpenMP is enabled, then you can also explicitly call
-   KE::for_each(Kokkos::OpenMP(), KE::begin(a), KE::end(a), p);
+   // To run explicitly on the host (assuming a and b are accessible on Host)
+ KE::equal(Kokkos::DefaultHostExecutionSpace(), KE::begin(a), KE::end(a),
