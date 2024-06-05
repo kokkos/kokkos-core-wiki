@@ -9,7 +9,7 @@ Header File: ``<Kokkos_Core.hpp>``
 Usage
 -----
 
-.. code-block:: cppkokkos
+.. code-block:: cpp
 
     Kokkos::RangePolicy<...>(begin, end)
     Kokkos::RangePolicy<...>(begin, end, chunk_size)
@@ -167,7 +167,7 @@ CTAD Constructors (since 4.3):
 Examples
 --------
 
-.. code-block:: cppkokkos
+.. code-block:: cpp
 
     RangePolicy<> policy_1(0, N);
     RangePolicy<Cuda> policy_2(5,N-5);
@@ -178,7 +178,7 @@ Examples
 
 Note: providing a single integer as a policy to a parallel pattern, implies a defaulted ``RangePolicy``
 
-.. code-block:: cppkokkos
+.. code-block:: cpp
 
     // These two calls are identical
     parallel_for("Loop", N, functor);
