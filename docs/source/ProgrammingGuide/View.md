@@ -80,7 +80,7 @@ While it is in principle possible to have Kokkos Views of arbitrary objects, Kok
 * `T`'s assignment operators as well as its default constructor and deconstructor must be marked with the `KOKKOS_INLINE_FUNCTION` or `KOKKOS_FUNCTION` macro.
 
 All restrictions but the first come from the requirement that `View<T*>` work with every execution and memory space,
-including those that use CUDA. The constructor of `View<T*>` does not just allocate memory; it also initializes the allocation by iterating over it using a [`Kokkos::parallel_for`](../API/core/parallel-dispatch/parallel_for), and invoking `T`'s default constructor for each entry. If the View's execution space is `Cuda`, then that means `T`'s default constructor needs to be correct to call on device. Keep in mind that the semantics of the resulting `View` are a combination of the `Views 'view'` semantics and the behavior of the element type.
+including those that use CUDA. The constructor of `View<T*>` does not just allocate memory; it also initializes the allocation with `T`'s default value for each entry. If the View's execution space is `Cuda`, then that means `T`'s default constructor needs to be correct to call on device. Keep in mind that the semantics of the resulting `View` are a combination of the `Views 'view'` semantics and the behavior of the element type.
 
 The requirement that the destructor of `T` not deallocate memory technically disallows `T` being a managed View, or a structure which directly or indirectly contains a managed View. In extreme cases we do allow users to have managed Views in their type `T`, so long as a non-parallel loop is used to safely deallocate the Views contained in each `T` prior to the deallocation of the `View<T>` itself. This can be done by assigning to each contained View a default-constructed View of the same type. Having managed Views in `T` is not recommended.
 
@@ -106,7 +106,7 @@ You might also want a View of some class that itself contains Views. If you want
 
 #### 6.2.3.2 What's the problem with a View of Views?
 
-A View of Views would have an "outer View," with zero or more "inner Views." [Section 6.2.2](view_types_of_data) above explains how the outer View's constructor would work.  The outer View's constructor does not just allocate memory; it also initializes the allocation by iterating over it using a [`Kokkos::parallel_for`](../API/core/parallel-dispatch/parallel_for), and invoking the entry type's default constructor for each entry.  If the View's execution space is `Cuda`, then that means the entry type's default constructor needs to be correct to call on device. That is a problem, because the entry type in this case is itself View. View's constructor wants to allocate memory, and thus does not work on device. Kokkos parallel regions generally forbid memory allocation.
+A View of Views would have an "outer View," with zero or more "inner Views." [Section 6.2.2](view_types_of_data) above explains how the outer View's constructor would work.  The outer View's constructor does not just allocate memory; it also initializes the allocation with `T`'s default value for each entry. If the View's execution space is `Cuda`, then that means the entry type's default constructor needs to be correct to call on device. That is a problem, because the entry type in this case is itself View. View's constructor wants to allocate memory, and thus does not work on device. Kokkos parallel regions generally forbid memory allocation.
 
 You could create the outer View without initializing, like this:
 ```c++
