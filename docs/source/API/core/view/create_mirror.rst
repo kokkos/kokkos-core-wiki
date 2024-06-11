@@ -26,9 +26,9 @@ Use ``create_mirror_view`` when you want to skip the memory allocation and copy 
     // host_mirror_view may point to the same memory as a_view, if a_view is host-accessible
     auto host_mirror_view = create_mirror_view(a_view);
 
-    // You can specify the execution space from which the mirror view must be accessible
-    auto host_mirror_space = create_mirror(ExecSpace(),a_view);
-    auto host_mirror_view_space = create_mirror_view(ExecSpace(),a_view);
+    // You can specify the space from which the mirror view must be accessible
+    auto mirror = create_mirror(memory_space_instance, a_view);
+    auto mirror_view = create_mirror_view(memory_space_instance, a_view);
 
 
 Description
