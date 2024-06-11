@@ -684,7 +684,7 @@ operations on it.</p>
 <section id="scatterview">
 <h2>10.4 ScatterView<a class="headerlink" href="#scatterview" title="Permalink to this heading">#</a></h2>
 <p>On CPUs one often uses low thread counts, in particular if Kokkos is used in conjunction with MPI.
-In such situations data replication is often a more performance approach, than using atomic operations.
+In such situations data replication often performs better than using atomic operations.
 In order to still have portable code, one can use the <a class="reference internal" href="../API/containers/ScatterView.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">ScatterView</span></code></span></a>. It allows the transparent switch at
 compile time from using atomic operations to using data replication depending on the underlying hardware.</p>
 <p>A full description can be found here: <a class="reference internal" href="../API/containers/ScatterView.html"><span class="doc std std-doc">ScatterView</span></a></p>
