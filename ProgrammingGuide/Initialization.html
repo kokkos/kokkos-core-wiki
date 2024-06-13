@@ -593,16 +593,19 @@ Kokkos chooses the two spaces using the following list:</p>
 <tr class="row-even"><td><p>–kokkos-num-threads=INT</p></td>
 <td><p>specify total number of threads to use for parallel regions on the host</p></td>
 </tr>
-<tr class="row-odd"><td><p>–kokkos-map-device-id-by=(random|mpi_rank), default: mpi_rank</p></td>
+<tr class="row-odd"><td><p>–kokkos-device-id=INT</p></td>
+<td><p>specify device id to be used by Kokkos</p></td>
+</tr>
+<tr class="row-even"><td><p>–kokkos-map-device-id-by=(random|mpi_rank), default: mpi_rank</p></td>
 <td><p>strategy to select device-id automatically from available devices: random or mpi_rank:sup:<cite>2</cite></p></td>
 </tr>
-<tr class="row-even"><td><p>–kokkos-tools-libs=STR</p></td>
+<tr class="row-odd"><td><p>–kokkos-tools-libs=STR</p></td>
 <td><p>specify which of the tools to use. Must either be full path to library or name of library if the path is present in the runtime library search path (e.g. LD_LIBRARY_PATH)</p></td>
 </tr>
-<tr class="row-odd"><td><p>–kokkos-tools-help</p></td>
+<tr class="row-even"><td><p>–kokkos-tools-help</p></td>
 <td><p>query the (loaded) kokkos-tool for its command-line option support (which should then be passed via –kokkos-tools-args=”…”)</p></td>
 </tr>
-<tr class="row-even"><td><p>–kokkos-tools-args=STR</p></td>
+<tr class="row-odd"><td><p>–kokkos-tools-args=STR</p></td>
 <td><p>a single (quoted) string of options which will be whitespace delimited and passed to the loaded kokkos-tool as command-line arguments. E.g. <cite>&lt;EXE&gt; –kokkos-tools-args=”-c input.txt”</cite> will pass <cite>&lt;EXE&gt; -c input.txt</cite> as argc/argv to tool</p></td>
 </tr>
 </tbody>

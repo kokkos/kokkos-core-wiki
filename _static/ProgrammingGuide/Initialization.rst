@@ -73,6 +73,8 @@ Table 5.1: Command-line options for Kokkos::initialize
     - allow Kokkos to autotune policies and declare tuning features through the tuning system. If left off, Kokkos uses heuristics.
   * - --kokkos-num-threads=INT     
     - specify total number of threads to use for parallel regions on the host
+  * - --kokkos-device-id=INT
+    - specify device id to be used by Kokkos
   * - --kokkos-map-device-id-by=(random\|mpi_rank), default: mpi_rank
     - strategy to select device-id automatically from available devices: random or mpi_rank:sup:`2`
   * - --kokkos-tools-libs=STR      
