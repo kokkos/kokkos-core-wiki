@@ -23,7 +23,7 @@ convenient `RAII-style <https://en.cppreference.com/w/cpp/language/raii>`_
 mechanism to manage a user-defined profiling section.
 
 When a ``ProfilingSection`` object is created, a profiling section is created
-with the user-provided stringand the objects holds on to the section ID.
+with the user-provided string, and the objects holds on to the section ID.
 
 When control leaves the scope in which the ``ProfilingSection`` object was
 created, the ``ProfilingSection`` is destructed, and the underlying section is
