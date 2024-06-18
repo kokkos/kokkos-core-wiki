@@ -104,7 +104,7 @@ You might also want a View of some class that itself contains Views. If you want
 
 #### 6.2.3.2 What's the problem with a View of Views?
 
-A View of Views would have an "outer View," with zero or more "inner Views." [Section 6.2.2](view_types_of_data) above explains how the outer View's constructor would work.  The outer View's constructor does not just allocate memory; it also initializes the allocation with `T`'s default value for each entry. If the View's execution space is `Cuda`, then that means the entry type's default constructor needs to be correct to call on device. That is a problem, because the entry type in this case is itself View. View's constructor wants to allocate memory, and thus does not work on device. Kokkos parallel regions generally forbid memory allocation.
+A View of Views would have an "outer View," with zero or more "inner Views." [Section 6.2.2](view_types_of_data) above explains how the outer View's constructor would work.  The outer View's constructor does not just allocate memory; it also initializes the allocation with `T`'s default value for each entry. If the View's execution space is `Cuda`, then that means the entry type's default constructor needs to be correct to call on device. That is a problem, because the entry type in this case is itself `View`. `View`'s constructor wants to allocate memory, and thus does not work on device. If the outer `View` does not allow access on Host, one must go through extra mechanisms to allocate the inner `View` (e.g. a host mirror of the outer `View`). Kokkos parallel regions generally forbid memory allocation.
 
 You could create the outer View without initializing, like this:
 ```c++
