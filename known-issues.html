@@ -525,6 +525,20 @@
         <article role="main">
           <section id="known-issues">
 <h1>Known issues<a class="headerlink" href="#known-issues" title="Permalink to this heading">#</a></h1>
+<section id="cuda">
+<h2>CUDA<a class="headerlink" href="#cuda" title="Permalink to this heading">#</a></h2>
+<ul>
+<li><p>With older MPI versions and when using a legacy NVIDIA GPU the default allocation mechanism of Kokkos for <cite>CudaSpace</cite> can cause issues. For example MPI may crash with illegal memory accesses or Kokkos’ initialization can report errors like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">terminate</span> <span class="n">called</span> <span class="n">after</span> <span class="n">throwing</span> <span class="n">an</span> <span class="n">instance</span> <span class="n">of</span> <span class="s1">&#39;Kokkos::Experimental::CudaRawMemoryAllocationFailure&#39;</span>
+</pre></div>
+</div>
+<p>A fix is to disable asynchronous memory allocations by adding the following to CMake arguments:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">DKokkos_ENABLE_IMPL_CUDA_MALLOC_ASYNC</span><span class="o">=</span><span class="n">OFF</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
 <section id="hip">
 <h2>HIP<a class="headerlink" href="#hip" title="Permalink to this heading">#</a></h2>
 <ul>
@@ -696,6 +710,7 @@ scope.</p>
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">Known issues</a><ul>
+<li><a class="reference internal" href="#cuda">CUDA</a></li>
 <li><a class="reference internal" href="#hip">HIP</a></li>
 <li><a class="reference internal" href="#sycl">SYCL</a></li>
 <li><a class="reference internal" href="#mathematical-functions">Mathematical functions</a></li>
