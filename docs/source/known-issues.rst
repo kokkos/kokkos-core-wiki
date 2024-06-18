@@ -7,7 +7,7 @@ Known issues
 CUDA
 ====
 
-- When using a legacy NVIDIA GPU, Kokkos' initialization can report errors like:
+- With older MPI versions and when using a legacy NVIDIA GPU the default allocation mechanism of Kokkos for `CudaSpace` can cause issues. For example MPI may crash with illegal memory accesses or Kokkos' initialization can report errors like:
 
   .. code-block::
 
