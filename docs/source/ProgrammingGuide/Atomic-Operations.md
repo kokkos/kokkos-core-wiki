@@ -128,7 +128,7 @@ void create_histogram(View<int*> histogram, int min, int max, View<int*> values)
 ## 10.4 ScatterView
 
 On CPUs one often uses low thread counts, in particular if Kokkos is used in conjunction with MPI. 
-In such situations data replication is often a more performance approach, than using atomic operations. 
+In such situations data replication often performs better than using atomic operations. 
 In order to still have portable code, one can use the [`ScatterView`](../API/containers/ScatterView). It allows the transparent switch at
 compile time from using atomic operations to using data replication depending on the underlying hardware. 
 

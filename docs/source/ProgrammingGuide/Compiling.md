@@ -254,9 +254,9 @@ Variable  | Description
 `KOKKOS_DEVICES (IN)` | Execution and Memory Spaces that should be enabled.
 `Options`<br>`    Default` | OpenMP, Serial, C++ Threads, Cuda <br> OpenMP
 `KOKKOS_ARCH (IN)` | The backend architecture to build for.
-`Options` <br><br><br> `Default` | KNL, KNC, SNB, HSW, BDW, Kepler, Kepler30, Kepler35, Kepler37, Maxwell, Maxwell50, Pascal60, Pascal61, ARMv8, ARMv81, ARMv8-ThunderX, BGQ, Power7, Power8 <br><br> (no particular architecture flags are set).
+`Options` <br><br><br> `Default` | KNL, KNC, SNB, HSW, BDW, Kepler, Kepler30, Kepler35, Kepler37, Maxwell, Maxwell50, Pascal60, Pascal61, ARMv8, ARMv81, ARMv8-ThunderX, Power8 <br><br> (no particular architecture flags are set).
 `KOKKOS_USE_TPLS (IN)` | Enable optional third party libraries.
-`Options` <br> `Default`  | hwloc, librt, experimental_memkind <br> (none)
+`Options` <br> `Default`  | hwloc, libdl <br> (none)
 `KOKKOS_OPTIONS (IN)` | Enable optional settings
 `Options` <br> `Default` | aggressive_vectorization <br> (none)
 `KOKKOS_CUDA_OPTIONS (IN)` | Enable optional settings specific to CUDA.

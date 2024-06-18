@@ -22,7 +22,7 @@ The simplest way to initialize Kokkos is by calling the following function:
 
 .. code-block:: cpp
 
-Kokkos::initialize(int& argc, char* argv[]);
+    Kokkos::initialize(int& argc, char* argv[]);
 
 Just like `MPI_Init`, this function interprets command-line arguments to determine the requested settings. Also like `MPI_Init`, it reserves the right to remove command-line arguments from the input list. This is why it takes `argc` by reference, rather than by value.
 
@@ -30,11 +30,11 @@ During initialization, one or more execution spaces will be initialized and assi
 
 .. code-block:: cpp
 
-Kokkos::DefaultExecutionSpace;
+    Kokkos::DefaultExecutionSpace;
 
 .. code-block:: cpp
 
-Kokkos::DefaultHostExecutionSpace;
+    Kokkos::DefaultHostExecutionSpace;
 
 `DefaultExecutionSpace` is the execution space used with policies and views where one is not explicitly specified.  Primarily, Kokkos will initialize one of the heterogeneous backends (CUDA, HIP, OpenACC, OpenMPTarget, SYCL) as the `DefaultExecutionSpace` if enabled in the build configuration.  In addition, Kokkos requires a `DefaultHostExecutionSpace`.  The `DefaultHostExecutionSpace` is the default execution space used when host operations are required.  If one of the parallel host execution spaces is enabled in the build environment then `Kokkos::Serial` is only initialized if it is explicitly enabled in the build configuration.  If a parallel host execution space is not enabled in the build configuration, then `Kokkos::Serial` is initialized as the `DefaultHostExecutionSpace`.
 Kokkos chooses the two spaces using the following list:
@@ -73,6 +73,8 @@ Table 5.1: Command-line options for Kokkos::initialize
     - allow Kokkos to autotune policies and declare tuning features through the tuning system. If left off, Kokkos uses heuristics.
   * - --kokkos-num-threads=INT     
     - specify total number of threads to use for parallel regions on the host
+  * - --kokkos-device-id=INT
+    - specify device id to be used by Kokkos
   * - --kokkos-map-device-id-by=(random\|mpi_rank), default: mpi_rank
     - strategy to select device-id automatically from available devices: random or mpi_rank:sup:`2`
   * - --kokkos-tools-libs=STR      

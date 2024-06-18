@@ -58,6 +58,8 @@ Semantics
 * Neither concurrency nor order of execution are guaranteed.
 * The ``ReturnType`` content will be overwritten, i.e. the value does not need to be initialized to the reduction-neutral element.
 * The input value to the operator may contain a partial result, Kokkos may only combine the thread local contributions in the end. The operator should modify the input value according to the desired scan operation.
+* It is not guaranteed that the functor will ever be called with ``final = false``.
+* The functor might be called multiple times with ``final = false`` and the user has to make sure that the behavior in this case stays the same for repeated calls.
 
 Examples
 --------

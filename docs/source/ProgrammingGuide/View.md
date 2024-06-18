@@ -74,13 +74,11 @@ C++ lets users construct data types that may "look like" numbers in terms of syn
 
 While it is in principle possible to have Kokkos Views of arbitrary objects, Kokkos imposes restrictions on the set of types `T` for which one can construct a `View<T*>`.  For example:
 
-* `T` must have a default constructor and destructor. 
 * `T` must not have virtual methods.
 * `T`'s default constructor and destructor must not allocate or deallocate data, and must be thread safe. 
 * `T`'s assignment operators as well as its default constructor and deconstructor must be marked with the `KOKKOS_INLINE_FUNCTION` or `KOKKOS_FUNCTION` macro.
 
-All restrictions but the first come from the requirement that `View<T*>` work with every execution and memory space,
-including those that use CUDA. The constructor of `View<T*>` does not just allocate memory; it also initializes the allocation by iterating over it using a [`Kokkos::parallel_for`](../API/core/parallel-dispatch/parallel_for), and invoking `T`'s default constructor for each entry. If the View's execution space is `Cuda`, then that means `T`'s default constructor needs to be correct to call on device. Keep in mind that the semantics of the resulting `View` are a combination of the `Views 'view'` semantics and the behavior of the element type.
+All those restrictions come from the requirement that `View<T*>` work with every execution and memory space. The constructor of `View<T*>` does not just allocate memory; by default, it also initializes the allocation with `T`'s default value for each entry. Hence, `T`'s default constructor needs to be correct to call on the `ExecutionSpace` associated with the `MemorySpace` of the `View`. Keep in mind that the semantics of the resulting `View` are a combination of the `Views 'view'` semantics and the behavior of the element type.
 
 The requirement that the destructor of `T` not deallocate memory technically disallows `T` being a managed View, or a structure which directly or indirectly contains a managed View. In extreme cases we do allow users to have managed Views in their type `T`, so long as a non-parallel loop is used to safely deallocate the Views contained in each `T` prior to the deallocation of the `View<T>` itself. This can be done by assigning to each contained View a default-constructed View of the same type. Having managed Views in `T` is not recommended.
 
@@ -106,7 +104,7 @@ You might also want a View of some class that itself contains Views. If you want
 
 #### 6.2.3.2 What's the problem with a View of Views?
 
-A View of Views would have an "outer View," with zero or more "inner Views." [Section 6.2.2](view_types_of_data) above explains how the outer View's constructor would work.  The outer View's constructor does not just allocate memory; it also initializes the allocation by iterating over it using a [`Kokkos::parallel_for`](../API/core/parallel-dispatch/parallel_for), and invoking the entry type's default constructor for each entry.  If the View's execution space is `Cuda`, then that means the entry type's default constructor needs to be correct to call on device. That is a problem, because the entry type in this case is itself View. View's constructor wants to allocate memory, and thus does not work on device. Kokkos parallel regions generally forbid memory allocation.
+A View of Views would have an "outer View," with zero or more "inner Views." [Section 6.2.2](view_types_of_data) above explains how the outer View's constructor would work.  The outer View's constructor does not just allocate memory; it also initializes the allocation with `T`'s default value for each entry. If the View's execution space is `Cuda`, then that means the entry type's default constructor needs to be correct to call on device. That is a problem, because the entry type in this case is itself `View`. `View`'s constructor wants to allocate memory, and thus does not work on device. If the outer `View` does not allow access on Host, one must go through extra mechanisms to allocate the inner `View` (e.g. a host mirror of the outer `View`). Kokkos parallel regions generally forbid memory allocation.
 
 You could create the outer View without initializing, like this:
 ```c++
@@ -265,7 +263,7 @@ int main() {
 
 ### 6.2.7 Resizing
 
-Kokkos Views can be resized using the `resize` non-member function. It takes an existing view as its input by reference and the new dimension information corresponding to the constructor arguments. A new view with the new dimensions will be created and a kernel will be run in the views execution space to copy the data element by element from the old view to the new one. Note that the old allocation is only deleted if the view to be resized was the _only_ view referencing the underlying allocation.
+Kokkos Views can be resized using the `resize` non-member function. It takes an existing view as its input by reference and the new dimension information corresponding to the constructor arguments. A new view with the new dimensions will be created and a kernel will be run in the view's execution space to copy the data element by element from the old view to the new one. Note that the old allocation is only deleted if the view to be resized was the _only_ view referencing the underlying allocation.
 
 ```c++
 // Allocate a view with 100x50x4 elements
@@ -378,7 +376,7 @@ Kokkos::View<int*, Kokkos::Device<Kokkos::OpenMP,Kokkos::CudaUVMSpace> > b ("b",
 ```
 
 In this case `a` and `b` will live in the same memory space, but `a` will be initialized on the GPU while `b` will be
-initialized on the host. The `Device` type can be accessed as a views `device_type` typedef. A `Device` has only three typedef members: `device_type`, `execution_space` and `memory_space`. The `execution_space` and `memory_space` typedefs are the same for a view as the `device_type` typedef.
+initialized on the host. The `Device` type can be accessed as a view's `device_type` typedef. A `Device` has only three typedef members: `device_type`, `execution_space` and `memory_space`. The `execution_space` and `memory_space` typedefs are the same for a view as the `device_type` typedef.
 
 It is important to understand that accessibility of a View does not depend on its execution space directly. It is only determined by its memory space. Therefore both `a` and `b` have the same access properties. They differ only in how they are initialized and in where parallel kernels associated with operations such as resizing or deep copies are run.
 
@@ -387,7 +385,6 @@ The following is the accessibility matrix for execution and memory spaces:
 | | Serial | OpenMP | Threads | Cuda | HIP |
 |---|---|---|---|---|---|
 |HostSpace| x | x | x | - | - |
-|HBWSpace| x | x | x | - | - |
 |CudaSpace| - | - | - | x | - |
 |CudaUVMSpace| x | x | x | x | - |
 |CudaHostPinnedSpace| x | x | x | x | - |
@@ -453,7 +450,7 @@ The first one will not work because the default layouts of `CudaSpace` and `Host
 
 The reasoning for allowing only direct bitwise copies is that a deep copy between different memory spaces would otherwise require a temporary copy of the data to which a bitwise copy is performed followed by a parallel kernel to transfer the data element by element.
 
-Kokkos provides the following way to work around those limitations. First views have a `HostMirror` typedef which is a view type with compatible layout inside the `HostSpace`. Additionally, there is a `create_mirror` and `create_mirror_view` function which allocate views of the `HostMirror` type of view. The difference between the two is that `create_mirror` will always allocate a new view, while `create_mirror_view` will only create a new view if the original one is not in `HostSpace`.
+Kokkos provides the following way to work around those limitations. Firstly, views have a `HostMirror` typedef which is a view type with compatible layout inside the `HostSpace`. Additionally, there is a `create_mirror` and `create_mirror_view` function which allocate views of the `HostMirror` type of view. The difference between the two is that `create_mirror` will always allocate a new view, while `create_mirror_view` will only create a new view if the original one is not in `HostSpace`.
 
 ```c++
 Kokkos::View<int*[3], MemorySpace> a ("a", 10);
@@ -471,7 +468,7 @@ Kokkos::deep_copy (c, a)
 
 ### 6.4.4 How do I get the raw pointer?
 
-We discourage access to a View's "raw" pointer. This circumvents reference counting, that is, the memory may be deallocated once the View's reference count goes to zero so holding on to a raw pointer may result in invalid memory access. Furthermore, it may not even be possible to access the View's memory from a given execution space. For example, a View in the `Cuda` space points to CUDA device memory. Also using raw pointers would normally defeat the usability of polymorpic layouts and automatic padding. Nevertheless, for instances you really need access to the pointer, we provide the `data()` method. For example:
+We discourage access to a View's "raw" pointer. This circumvents reference counting, that is, the memory may be deallocated once the View's reference count goes to zero so holding on to a raw pointer may result in invalid memory access. Furthermore, it may not even be possible to access the View's memory from a given execution space. For example, a View in the `Cuda` space points to CUDA device memory. Also using raw pointers would normally defeat the usability of polymorphic layouts and automatic padding. Nevertheless, for instances where you really need access to the pointer, we provide the `data()` method. For example:
 
 ```c++
 // Legacy function that takes a raw pointer.
@@ -519,7 +516,7 @@ The `Atomic` access trait lets you create a View of data such that every read or
 1. not allowed to alias data for which atomic operations are performed, and 
 1. the results of non-atomic accesses (including read) to data which is at the same time atomically accessed is not defined.
 
-Performance characteristics of atomic operations depend on the data type. Some types (in particular integer types) are natively supported and might even provide asynchronous atomic operations. Others (such as 32 bit and 64 bit atomics for non-integer types) are often implemented using CAS loops of integers. Everything else is implemented with a locking approach where an atomic operation acquires a lock based on a hash of the pointer value of the data element.
+Performance characteristics of atomic operations depend on the data type. Some types (in particular integer types) are natively supported and might even provide asynchronous atomic operations. Others (such as 32 bit and 64 bit atomics for non-integer types) are often implemented using compare-and-swap (CAS) loops of integers. Everything else is implemented with a locking approach where an atomic operation acquires a lock based on a hash of the pointer value of the data element.
 
 Types for which atomic access are performed must support the necessary operators such as =, +=, -=, +, - etc. as well as have a number of `volatile` overloads of functions such as assign and copy constructors defined. 
 

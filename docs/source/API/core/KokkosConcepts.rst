@@ -244,7 +244,7 @@ The ``MemorySpace`` Concept
 ---------------------------
 
 Looking at the common functionality in the current implementations of ``CudaSpace``, ``CudaUVMSpace``,
-``HostSpace``, ``OpenMPTargetSpace``, and ``HBWSpace``, the current concept for ``MemorySpace`` looks something like:
+``HostSpace``, and ``OpenMPTargetSpace``, the current concept for ``MemorySpace`` looks something like:
 
 .. code-block:: cpp
 

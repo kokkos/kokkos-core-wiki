@@ -26,8 +26,6 @@ General Settings
 +-------------------------------------------------+-------------------------------------------------------------------------------------------------------------+
 | ``KOKKOS_ENABLE_DEPRECATION_WARNING``           | Defined if deprecated features generate deprecation warnings.                                               |
 +-------------------------------------------------+-------------------------------------------------------------------------------------------------------------+
-| ``KOKKOS_ENABLE_HBWSPACE``                      | Defined if the experimental ``HBWSpace`` memory space is enabled, enabled by KOKKOS_ENABLE_MEMKIND.         |
-+-------------------------------------------------+-------------------------------------------------------------------------------------------------------------+
 | ``KOKKOS_ENABLE_TUNING``                        | Whether bindings for tunings are available (see `#2422 <https://github.com/kokkos/kokkos/pull/2422>`_).     |
 +-------------------------------------------------+-------------------------------------------------------------------------------------------------------------+
 | ``KOKKOS_ENABLE_COMPLEX_ALIGN``                 | Whether complex types are aligned.                                                                          |
@@ -130,13 +128,12 @@ These defines give information about what third-party libaries Kokkos was compil
 +===============================+=======================================================================================================================+
 | ``KOKKOS_ENABLE_HWLOC``       | Defined if `libhwloc <https://www.open-mpi.org/projects/hwloc/>`_ is enabled for NUMA and architecture information.   |
 +-------------------------------+-----------------------------------------------------------------------------------------------------------------------+
-| ``KOKKOS_ENABLE_LIBRT``       | Defined if Kokkos links to the POSIX librt for backwards compatibility.                                               |
-+-------------------------------+-----------------------------------------------------------------------------------------------------------------------+
-| ``KOKKOS_ENABLE_MEMKIND``     | Defined if Kokkos enables the `Memkind <https://github.com/memkind/memkind>`_ heap manager, enables HBWSpace.         |
-+-------------------------------+-----------------------------------------------------------------------------------------------------------------------+
 | ``KOKKOS_ENABLE_LIBDL``       | Defined if Kokkos links to the dynamic linker (libdl).                                                                |
 +-------------------------------+-----------------------------------------------------------------------------------------------------------------------+
 | ``KOKKOS_ENABLE_LIBQUADMATH`` | Defined if Kokkos links to the `GCC Quad-Precision Math Library API <https://gcc.gnu.org/onlinedocs/libquadmath/>`_.  |
++-------------------------------+-----------------------------------------------------------------------------------------------------------------------+
+| ``KOKKOS_ENABLE_ONEDPL``      | Defined if Kokkos links to the `oneDPL library <https://github.com/oneapi-src/oneDPL>`_ when using the SYCL backend.  |
+|                               | Enabling this TPL might affect performance for Kokkos algorithms that use it, e.g., `sort`.                           |
 +-------------------------------+-----------------------------------------------------------------------------------------------------------------------+
 
 Architectures
@@ -145,8 +142,6 @@ Architectures
 +-----------------------------------+-----------------------------------------------------------------------------------+
 | Macro                             | Description                                                                       |
 +===================================+===================================================================================+
-| ``KOKKOS_ARCH_SSE42``             | Optimize for SSE 4.2                                                              |
-+-----------------------------------+-----------------------------------------------------------------------------------+
 | ``KOKKOS_ARCH_ARMV80``            | Optimize for ARMv8.0 Compatible CPU (HOST)                                        |
 +-----------------------------------+-----------------------------------------------------------------------------------+
 | ``KOKKOS_ARCH_ARMV8_THUNDERX``    | Optimize for ARMv8 Cavium ThunderX CPU (HOST)                                     |
@@ -166,8 +161,6 @@ Architectures
 | ``KOKKOS_ARCH_KNC``               | Optimize for Intel Knights Corner Xeon Phi (HOST)                                 |
 +-----------------------------------+-----------------------------------------------------------------------------------+
 | ``KOKKOS_ARCH_AVX512MIC``         | Optimize for Many Integrated Core (MIC; AVX512)                                   |
-+-----------------------------------+-----------------------------------------------------------------------------------+
-| ``KOKKOS_ARCH_POWER7``            | Optimize for IBM POWER7 CPUs (HOST)                                               |
 +-----------------------------------+-----------------------------------------------------------------------------------+
 | ``KOKKOS_ARCH_POWER8``            | Optimize for IBM POWER8 CPUs (HOST)                                               |
 +-----------------------------------+-----------------------------------------------------------------------------------+

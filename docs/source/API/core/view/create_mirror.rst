@@ -51,7 +51,7 @@ Description
 
    - ``src``: a ``Kokkos::View``.
 
-.. cppkokkos:function:: template <class Space, class ViewType> ImplMirrorType create_mirror(Space const& space, ViewType const&);
+.. cppkokkos:function:: template <class Space, class ViewType> ImplMirrorType create_mirror(Space const& space, ViewType const& src);
 
    Creates a new |View|_ with the same layout and padding as ``src`` but with a device type of ``Space::device_type``.
 
@@ -61,7 +61,7 @@ Description
 
    - ``ImplMirrorType``: an implementation defined specialization of ``Kokkos::View``.
 
-.. cppkokkos:function:: template <class Space, class ViewType> ImplMirrorType create_mirror(decltype(Kokkos::WithoutInitializing), Space const& space, ViewType const&);
+.. cppkokkos:function:: template <class Space, class ViewType> ImplMirrorType create_mirror(decltype(Kokkos::WithoutInitializing), Space const& space, ViewType const& src);
 
    Creates a new |View|_ with the same layout and padding as ``src`` but with a device type of ``Space::device_type``. The new view will have uninitialized data.
 
@@ -71,7 +71,7 @@ Description
 
    - ``ImplMirrorType``: an implementation defined specialization of ``Kokkos::View``.
 
-.. cppkokkos:function:: template <class ViewType, class ALLOC_PROP> auto create_mirror(ALLOC_PROP const& arg_prop, ViewType const& v);
+.. cppkokkos:function:: template <class ViewType, class ALLOC_PROP> auto create_mirror(ALLOC_PROP const& arg_prop, ViewType const& src);
 
    Creates a new |View|_ with the same layout and padding as ``src``
    using the |View|_ constructor properties ``arg_prop``, e.g., ``Kokkos::view_alloc(Kokkos::WithoutInitializing)``.
@@ -100,7 +100,7 @@ Description
 
    - ``src``: a ``Kokkos::View``.
 
-.. cppkokkos:function:: template <class Space, class ViewType> ImplMirrorType create_mirror_view(Space const& space, ViewType const&);
+.. cppkokkos:function:: template <class Space, class ViewType> ImplMirrorType create_mirror_view(Space const& space, ViewType const& src);
 
    If ``std::is_same<typename Space::memory_space, typename ViewType::memory_space>::value`` is ``false``, creates a new |View|_ with
    the same layout and padding as ``src`` but with a device type of ``Space::device_type``. Otherwise returns ``src``.
@@ -139,7 +139,7 @@ Description
 
 	``arg_prop`` must not include a pointer to memory, or a label, or allow padding.
 
-.. cppkokkos:function:: template <class Space, class ViewType> ImplMirrorType create_mirror_view_and_copy(Space const& space, ViewType const&);
+.. cppkokkos:function:: template <class Space, class ViewType> ImplMirrorType create_mirror_view_and_copy(Space const& space, ViewType const& src);
 
    If ``std::is_same<typename Space::memory_space, typename ViewType::memory_space>::value`` is ``false``,
    creates a new ``Kokkos::View`` with the same layout and padding as ``src`` but with a device type of ``Space::device_type``

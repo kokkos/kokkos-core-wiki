@@ -38,6 +38,7 @@ extensions = ["myst_parser",
               "sphinx.ext.viewcode",
               "sphinx.ext.intersphinx",
               "sphinx_copybutton",
+              "sphinx_design",
               "cppkokkos"]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -81,3 +82,11 @@ myst_enable_extensions = [
 # rst_prolog = """
 # .. include:: special.rst
 # """
+
+rst_prolog = """
+.. role:: cppkokkos(code)
+    :language: cppkokkos
+
+.. role:: cpp(code)
+   :language: cpp
+"""

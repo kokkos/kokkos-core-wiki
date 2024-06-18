@@ -1,9 +1,6 @@
 ``View``
 ========
 
-.. role:: cppkokkos(code)
-    :language: cppkokkos
-
 Header File: ``<Kokkos_Core.hpp>``
 
 Usage
@@ -344,6 +341,46 @@ Constructors
 
    Subview constructor. See ``subview`` function for arguments.
 
+.. cppkokkos:function:: explicit(traits::is_managed) View( const NATURAL_MDSPAN_TYPE& mds )
+
+   :param mds: the mdspan to convert from.
+
+   .. warning::
+
+      :cpp:`explicit(bool)` is only available on C++20 and later. When building Kokkos with C++17, this constructor will be fully implicit.
+      Be aware that later upgrading to C++20 will in some cases cause compilation issues in cases where :cpp:`traits::is_managed` is :cpp:`false`.
+
+   :cpp:`NATURAL_MDSPAN_TYPE` is the :ref:`natural mdspan <api-view-natural-mdspans>` of the View. The *natural mdspan* is only available if :cpp:type:`array_layout` is one of :cppkokkos:struct:`LayoutLeft`, :cppkokkos:struct:`LayoutRight`,
+   or :cpp:class:`LayoutStride`. This constructor is only available if *natural mdspan* is available.
+
+   Constructs a :cpp:class:`View` by converting from :cpp:any:`mds`. The :cpp:class:`View` will be unmanaged and constructed as if by :cpp:`View(mds.data(), array_layout_from_mapping(mds.mapping()))`
+
+   .. seealso:: :ref:`Natural mdspans <api-view-natural-mdspans>`
+
+   .. versionadded:: 4.4.0
+
+.. cppkokkos:function:: template <class ElementType, class ExtentsType, class LayoutType, class AccessorType> explicit(SEE_BELOW) View(const mdspan<ElementType, ExtentsType, LayoutType, AccessorType>& mds)
+
+   :tparam ElementType: the mdspan element type
+   :tparam ExtentsType: the mdspan extents
+   :tparam LayoutType: the mdspan layout
+   :tparam AccessorType: the mdspan extents
+
+   :param mds: the mdspan to convert from
+
+   .. warning::
+
+      :cpp:`explicit(bool)` is only available on C++20 and later. When building Kokkos with C++17, this constructor will be fully implicit.
+      Be aware that later upgrading to C++20 will in some cases cause compilation issues in cases where the condition is false.
+
+   Constructs a :cpp:class:`View` by converting from :cpp:any:`mds`.
+   The :cpp:class:`View`'s :ref:`natural mdspan <api-view-natural-mdspans>` must be constructible from :cpp:any:`mds`. The :cpp:class:`View` will be constructed as if by :cpp:`View(NATURAL_MDSPAN_TYPE(mds))`
+
+   In C++20:
+      This constructor is implicit if :cpp:any:`mds` is implicitly convertible to the *natural mdspan* of the :cpp:class:`View`.
+
+   .. versionadded:: 4.4.0
+
 
 Data Access Functions
 ~~~~~~~~~~~~~~~~~~~~~
@@ -498,6 +535,29 @@ Other
    With the unmanaged view, there is no guarantee that referenced
    address is valid, only that it is a non-null pointer.
 
+Conversion to mdspan
+~~~~~~~~~~~~~~~~~~~~
+
+.. cppkokkos:function:: template <class OtherElementType, class OtherExtents, class OtherLayoutPolicy, class OtherAccessor> constexpr operator mdspan<OtherElementType, OtherExtents, OtherLayoutPolicy, OtherAccessor>()
+
+   :tparam OtherElementType: the target mdspan element type
+   :tparam OtherExtents: the target mdspan extents
+   :tparam OtherLayoutPolicy: the target mdspan layout
+   :tparam OtherAccessor: the target mdspan accessor
+
+   :constraints: :cpp:class:`View`\ 's :ref:`natural mdspan <api-view-natural-mdspans>` must be assignable to :cpp:`mdspan<OtherElementType, OtherExtents, OtherLayoutPolicy, OtherAccessor>`
+
+   :returns: an mdspan with extents and a layout converted from the :cpp:class:`View`'s *natural mdspan*.
+
+.. cppkokkos:function:: template <class OtherAccessorType = Kokkos::default_accessor<typename traits::value_type>> constexpr auto to_mdspan(const OtherAccessorType& other_accessor = OtherAccessorType{})
+
+   :tparam OtherAccessor: the target mdspan accessor
+
+   :constraints: :cpp:`typename OtherAccessorType::data_handle_type` must be assignable to :cpp:`value_type*`
+
+   :returns: :cpp:class:`View`\ 's :ref:`natural mdspan <api-view-natural-mdspans>`, but with an accessor policy constructed from :cpp:any:`other_accessor`
+
+
 NonMember Functions
 -------------------
 
@@ -564,6 +624,35 @@ Assignment Examples
     View<int**>               a11 = a10;          // OK
     View<int*, HostSpace> a12 = View<int*, CudaSpace>("A12",N); // Error: non-assignable memory spaces
     View<int*, HostSpace> a13 = View<int*, CudaHostPinnedSpace>("A13",N); // OK
+
+.. _api-view-natural-mdspans:
+
+Natural mdspans
+---------------
+
+.. versionadded:: 4.4.0
+
+C++23 introduces `mdspan <https://en.cppreference.com/w/cpp/container/mdspan>`_, a non-owning multidimensional array view.
+:cpp:class:`View` is compatible with :cpp:`std::mdspan` and can be implicitly converted from and to valid mdspans.
+These conversion rules are dictated by the *natural mdspan* of a view.
+For an mdspan :cpp:`m` of type :cpp:`M` that is the *natural mdspan* of a :cpp:class:`View` :cpp:`v` of type :cpp:`V`, the following properties hold:
+
+#. :cpp:`M::value_type` is :cpp:`V::value_type`
+#. :cpp:`M::index_type` is :cpp:`std::size_t`.
+#. :cpp:`M::extents_type` is :cpp:`std::extents<M::index_type, Extents...>` where
+
+   * :cpp:`sizeof(Extents...)` is :cpp:`V::rank()`
+   * and each element at index :cpp:`r` of :cpp:`Extents...` is :cpp:`V::static_extents(r)` if :cpp:`V::static_extents(r) != 0`, otherwise :cpp:`std::dynamic_extent`
+
+#. :cpp:`M::layout_type` is
+
+   * :cpp:`std::layout_left_padded<std::dynamic_extent>` if :cpp:`V::array_layout` is :cpp:`LayoutLeft`
+   * :cpp:`std::layout_right_padded<std::dynamic_extent>` if :cpp:`V::array_layout` is :cpp:`LayoutRight`
+   * :cpp:`std::layout_stride` if :cpp:`V::array_layout` is :cpp:any:`LayoutStride`
+
+#. :cpp:`M::accessor_type` is :cpp:`std::default_accessor<V::value_type>`
+
+Additionally, the *natural mdspan* is constructed so that :cpp:`m.data() == v.data()` and for each extent :cpp:`r`, :cpp:`m.extents().extent(r) == v.extent(r)`.
 
 Examples
 --------
