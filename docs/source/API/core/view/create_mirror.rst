@@ -15,13 +15,21 @@ A common desired use case is to have a memory allocation in GPU memory and an id
 Usage
 -----
 
+The key difference between ``create_mirror`` and ``create_mirror_view`` is the following: ``create_mirror`` `always` allocates new memory in the specified space (shown below for host space), while ``create_mirror_view`` only allocates memory if the View to be mirrored (``a_view``) is not already accessible from the specified space, and otherwise simply returns ``a_view``.
+Use ``create_mirror_view`` when the mirror is solely used for providing access in different execution spaces, and use ``create_mirror`` if you need the data to be independent, e.g. for having a previous and an updated version of the data.
+
 .. code-block:: cpp
 
+    // Both host_mirror and host_mirror_view have the correct properties for deep_copy from/to a_view
+    // host_mirror is guaranteed to have separately allocated memory from a_view
     auto host_mirror = create_mirror(a_view);
+    // host_mirror_view may point to the same memory as a_view, if a_view is host-accessible
     auto host_mirror_view = create_mirror_view(a_view);
 
-    auto host_mirror_space = create_mirror(ExecSpace(),a_view);
-    auto host_mirror_view_space = create_mirror_view(ExecSpace(),a_view);
+    // You can specify the space from which the mirror view must be accessible
+    auto mirror = create_mirror(memory_space_instance, a_view);
+    auto mirror_view = create_mirror_view(memory_space_instance, a_view);
+
 
 Description
 -----------
