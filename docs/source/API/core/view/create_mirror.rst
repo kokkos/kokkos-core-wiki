@@ -16,7 +16,7 @@ Usage
 -----
 
 The key difference between ``create_mirror`` and ``create_mirror_view`` is the following: ``create_mirror`` `always` allocates new memory in the specified space (shown below for host space), while ``create_mirror_view`` only allocates memory if the View to be mirrored (``a_view``) is not already accessible from the specified space, and otherwise simply returns ``a_view``.
-Use ``create_mirror_view`` when the mirror is solely used for providing access in different execution spaces, and use ``create_mirror`` if you need the data to be independent, e.g. for having an previous and a updated version of the data.
+Use ``create_mirror_view`` when the mirror is solely used for providing access in different execution spaces, and use ``create_mirror`` if you need the data to be independent, e.g. for having a previous and an updated version of the data.
 
 .. code-block:: cpp
 
