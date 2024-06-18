@@ -88,28 +88,25 @@ Constructors
 
     * Provide a start and end index as well as the tiling dimensions. The length of the lists must match the rank of the policy.
 
-CTAD Constructors (since 4.3):
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+CTAD Constructors (since 4.3)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: cppkokkos
 
    DefaultExecutionSpace des;
    SomeExecutionSpace ses; // different from DefaultExecutionSpace
-   int64_t i;
 
-   // Deduces to MDRangePolicy<Rank<5>>
-   MDRangePolicy pl0({1, 2, 3, 4, 5}, {1, 2, 3, 4, 5});
-   MDRangePolicy pl1({1, 2, 3, 4, 5}, {1, 2, 3, 4, 5}, { i });
-   MDRangePolicy pl2(des, {1, 2, 3, 4, 5}, {1, 2, 3, 4, 5});
-   MDRangePolicy pl3(des, {1, 2, 3, 4, 5}, {1, 2, 3, 4, 5}, { i });
+   // Deduces to MDRangePolicy<Rank<3>>
+   MDRangePolicy pl0({0, 0, 0}, {4, 5, 10}};
+   MDRangePolicy pl1({0, 0, 0}, {4, 5, 10}, {3, 3, 3}};
 
-   // Deduces to MDRangePolicy<SomeExecutionSpace, Rank<5>>
-   MDRangePolicy pl4(ses, {1, 2, 3, 4, 5}, {1, 2, 3, 4, 5});
-   MDRangePolicy pl5(ses, {1, 2, 3, 4, 5}, {1, 2, 3, 4, 5}, { i });
+   // Deduces to MDRangePolicy<SomeExecutionSpace, Rank<3>>
+   MDRangePolicy pl4(ses, {0, 0, 0}, {4, 5, 10}};
+   MDRangePolicy pl5(ses, {0, 0, 0}, {4, 5, 10}, {3, 3, 3}};
 
    int cbegin[3];
    int cend[3];
-   int64_t ctiling[2];
+   int64_t ctiling[3];
 
    // Deduces to MDRangePolicy<Rank<3>>
    MDRangePolicy pc0(cbegin, cend);
@@ -123,7 +120,7 @@ CTAD Constructors (since 4.3):
 
    Array<int, 2> abegin;
    Array<int, 2> aend;
-   Array<int, 1> atiling;
+   Array<int, 2> atiling;
 
    // Deduces to MDRangePolicy<Rank<2>>
    MDRangePolicy pa0(abegin, aend);
@@ -135,17 +132,17 @@ CTAD Constructors (since 4.3):
    MDRangePolicy pa4(ses, abegin, aend);
    MDRangePolicy pa5(ses, abegin, aend, atiling);
 
-Preconditions:
-^^^^^^^^^^^^^^
+Notes
+^^^^^
 
 * The start index must not be greater than the matching end index for all ranks.
-* The begin & end array ranks must match.
+* The begin and end array ranks must match.
 * The tiling array rank must be less than or equal to the begin/end array rank.
 
 Examples
 --------
 
-.. code-block:: cpp
+.. code-block:: cppkokkos
 
     MDRangePolicy<Rank<3>> policy_1({0,0,0},{N0,N1,N2});
     MDRangePolicy<Cuda,Rank<3,Iterate::Right,Iterate::Left>> policy_2({5,5,5},{N0-5,N1-5,N2-5},{T0,T1,T2});
