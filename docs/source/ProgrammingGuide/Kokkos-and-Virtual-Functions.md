@@ -49,7 +49,7 @@ The reason the intro code might break is that when dealing with GPU-compatible c
 
 ![VTableDevice](./figures/VirtualFunctions-VTablesHostDevice.png)
 
-Since we construct the class instance on the host, so it's vpointer points to the host VTable.
+Since we construct the class instance on the host, so it's Vpointer points to the host VTable.
 
 ![VPointerToHost](./figures/VirtualFunctions-VPointerToHost.png)
 
@@ -77,7 +77,7 @@ Kokkos::parallel_for(... {
 });
 ```
 
-This code is extremely ugly, but leads to functional virtual function calls on the device. The vpointer now points to the device Vtable.
+This code is extremely ugly, but leads to functional virtual function calls on the device. The Vpointer now points to the device Vtable.
 
 ![VPointerToDevice](./figures/VirtualFunctions-VPointerToDevice.png)
 
