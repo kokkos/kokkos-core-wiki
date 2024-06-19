@@ -29,13 +29,13 @@ At a glance this should be fine, we've made a device instance of a class, copied
 
 ## V-Tables, V-Pointers, V-ery annoying with GPUs
 
-Virtual functions allow a program to handle Derived classes through a pointer to their Base class and have things work as they should. To make this work, the compiler needs some way to identify whether a pointer which is nominally to a Base class really is a pointer to the Base, or whether it's really a pointer to any Derived class. This happens through VPointers and VTables. For every class with virtual functions, there is one VTable shared among all instances, this table contains function pointers for all the virtual functions the class implements. 
+Virtual functions allow a program to handle Derived classes through a pointer to their Base class and have things work as they should. To make this work, the compiler needs some way to identify whether a pointer which is nominally to a Base class really is a pointer to the Base, or whether it's really a pointer to any Derived class. This happens through Vpointers and Vtables. For every class with virtual functions, there is one Vtable shared among all instances, this table contains function pointers for all the virtual functions the class implements. 
 
 ![VTable](./figures/VirtualFunctions-VTables.png)
 
-Okay, so now we have VTables, if a class knows what type it is it could call the correct function. But how does it know?
+Okay, so now we have Vtables, if a class knows what type it is it could call the correct function. But how does it know?
 
-Remember that we have one VTable shared amongst all instances of a type. Each instance, however, has a hidden member called the VPointer, which the compiler points at construction to the correct Vtable. So a call to a virtual function simply dereferences that pointer, and then indexes into the VTable to find the precise virtual function called.
+Remember that we have one Vtable shared amongst all instances of a type. Each instance, however, has a hidden member called the Vpointer, which the compiler points at construction to the correct Vtable. So a call to a virtual function simply dereferences that pointer, and then indexes into the Vtable to find the precise virtual function called.
 
 ![VPointer](./figures/VirtualFunctions-VPointers.png)
 
@@ -45,19 +45,19 @@ Credit: the content of this section is adapted from Pablo Arias [here](https://p
 
 ## Then why doesn't my code work?
 
-The reason the intro code might break is that when dealing with GPU-compatible classes with virtual functions, there isn't one VTable, but two. The first holds the host versions of the virtual functions, while the second holds the device functions. 
+The reason the intro code might break is that when dealing with GPU-compatible classes with virtual functions, there isn't one Vtable, but two. The first holds the host versions of the virtual functions, while the second holds the device functions. 
 
 ![VTableDevice](./figures/VirtualFunctions-VTablesHostDevice.png)
 
-Since we construct the class instance on the host, so it's Vpointer points to the host VTable.
+Since we construct the class instance on the host, so it's Vpointer points to the host Vtable.
 
 ![VPointerToHost](./figures/VirtualFunctions-VPointerToHost.png)
 
-Our cudaMemcpy faithfully copied all of the members of the class, including the VPointer merrily pointing at host functions, which we then call on the device. 
+Our cudaMemcpy faithfully copied all of the members of the class, including the Vpointer merrily pointing at host functions, which we then call on the device. 
 
 ## How to fix this
 
-The problem here is that we are constructing the class on the Host. If we were constructing on the Device, we'd get the correct VPointer, and thus the correct functions (but only for calls on the device). In pseudocode, we want to move from
+The problem here is that we are constructing the class on the Host. If we were constructing on the Device, we'd get the correct Vpointer, and thus the correct functions (but only for calls on the device). In pseudocode, we want to move from
 
 ```c++
 Base* hostInstance = new Derived(); // allocate and initialize host
