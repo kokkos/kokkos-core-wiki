@@ -24,7 +24,7 @@ Execution Spaces
 
 .. |ExecutionSpaceS| replace:: :cppkokkos:func:`ExecutionSpace` s
 
-.. _MemorySpace: memory_spaces.html#memoryspaceconcept
+.. _MemorySpace: memory_spaces.html#kokkos-memoryspaceconcept
 
 .. |MemorySpace| replace:: :cppkokkos:func:`MemorySpace`
 
