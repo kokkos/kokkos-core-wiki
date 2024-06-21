@@ -80,6 +80,13 @@ generically as an execution space. For details, see |DocExecutionSpaceConcept|_.
 feature of the OpenMP runtime system. Except in rare instances, it should not be used directly, but instead
 should be used generically as an execution space. For details, see |DocExecutionSpaceConcept|_.
 
+``Kokkos::Threads``
+------------------
+
+``Kokkos::Threads`` is an |ExecutionSpaceConceptType|_ representing parallel execution with std::threads.
+Except in rare instances, it should not be used directly, but instead should be used
+generically as an execution space. For details, see |DocExecutionSpaceConcept|_.
+
 ``Kokkos::Serial``
 ------------------
 
