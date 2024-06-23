@@ -513,7 +513,7 @@ Other
 
    Returns the current reference count of the underlying allocation.
 
-.. cppkokkos:function:: const char* label() const;
+.. cppkokkos:function:: std::string label() const;
 
    Returns the label of the View.
 
