@@ -7,21 +7,21 @@ Due to oddities of GPU programming, the use of virtual functions in Kokkos paral
 In GPU programming, you might have run into the bug of calling a host function from the device. A similar thing can happen for subtle reasons in code using virtual functions. Consider the following code
 
 ```c++
-class ClassWithVirtualFunctions : public SomeBase {
+class Derived : public Base {
   /** fields */
   public:
-  KOKKOS_FUNCTION virtual void virtualFunction(){
+  KOKKOS_FUNCTION virtual void Bar(){
     // TODO: implement all of physics
   } 
 };
 
-ClassWithVirtualFunctions* hostClassInstance = new hostClassInstance();
-ClassWithVirtualFunction*  deviceClassInstance;
-cudaMalloc((void**)&deviceClassInstance, sizeof(ClassWithVirtualFunction));
-cudaMemcpy(deviceClassInstance, hostClassInstance, sizeof(ClassWithVirtualFunction), cudaMemcpyHostToDevice);
+Base* hostClassInstance = new Derived();
+Base* deviceClassInstance;
+cudaMalloc((void**)&deviceClassInstance, sizeof(Derived));
+cudaMemcpy(deviceClassInstance, hostClassInstance, sizeof(Derived), cudaMemcpyHostToDevice);
 
 Kokkos::parallel_for("DeviceKernel", SomeCudaPolicy, KOKKOS_LAMBDA(const int i) {
-  deviceClassInstance->virtualFunction();
+  deviceClassInstance->Bar();
 });
 ```
 
@@ -29,13 +29,13 @@ At a glance this should be fine, we've made a device instance of a class, copied
 
 ## V-Tables, V-Pointers, V-ery annoying with GPUs
 
-Virtual functions allow a program to handle Derived classes through a pointer to their Base class and have things work as they should. To make this work, the compiler needs some way to identify whether a pointer which is nominally to a Base class really is a pointer to the Base, or whether it's really a pointer to any Derived class. This happens through VPointers and VTables. For every class with virtual functions, there is one VTable shared among all instances, this table contains function pointers for all the virtual functions the class implements. 
+Virtual functions allow a program to handle Derived classes through a pointer to their Base class and have things work as they should. To make this work, the compiler needs some way to identify whether a pointer which is nominally to a Base class really is a pointer to the Base, or whether it's really a pointer to any Derived class. This happens through Vpointers and Vtables. For every class with virtual functions, there is one Vtable shared among all instances, this table contains function pointers for all the virtual functions the class implements. 
 
 ![VTable](./figures/VirtualFunctions-VTables.png)
 
-Okay, so now we have VTables, if a class knows what type it is it could call the correct function. But how does it know?
+Okay, so now we have Vtables, if a class knows what type it is it could call the correct function. But how does it know?
 
-Remember that we have one VTable shared amongst all instances of a type. Each instance, however, has a hidden member called the VPointer, which on initialization the compiler points at the correct table. So a call to a virtual function simply dereferences that pointer, and then indexes into the VTable to find the precise virtual function called.
+Remember that we have one Vtable shared amongst all instances of a type. Each instance, however, has a hidden member called the Vpointer, which the compiler points at construction to the correct Vtable. So a call to a virtual function simply dereferences that pointer, and then indexes into the Vtable to find the precise virtual function called.
 
 ![VPointer](./figures/VirtualFunctions-VPointers.png)
 
@@ -45,34 +45,43 @@ Credit: the content of this section is adapted from Pablo Arias [here](https://p
 
 ## Then why doesn't my code work?
 
-The reason the intro code might break is that when dealing with GPU-compatible classes with virtual functions, there isn't one VTable, but two. The first has the host versions of the virtual functions, while the second has the device functions. We're initializing the class on the host, so it points to the host VTable.
+The reason the intro code might break is that when dealing with GPU-compatible classes with virtual functions, there isn't one Vtable, but two. The first holds the host versions of the virtual functions, while the second holds the device functions. 
 
-Our cudaMemcpy faithfully copied all of the members of the class, including the VPointer merrily pointing at host functions, which we then call on the device. 
+![VTableDevice](./figures/VirtualFunctions-VTablesHostDevice.png)
+
+Since we construct the class instance on the host, so it's Vpointer points to the host Vtable.
+
+![VPointerToHost](./figures/VirtualFunctions-VPointerToHost.png)
+
+Our cudaMemcpy faithfully copied all of the members of the class, including the Vpointer merrily pointing at host functions, which we then call on the device. 
 
 ## How to fix this
 
-The problem here is that we are initializing the class on the Host. If we were initializing on the Device, we'd get the correct VPointer, and thus the correct functions. In pseudocode, we want to move from
+The problem here is that we are constructing the class on the Host. If we were constructing on the Device, we'd get the correct Vpointer, and thus the correct functions (but only for calls on the device). In pseudocode, we want to move from
 
 ```c++
-Instance* hostInstance = new Instance(); // allocate and initialize host
-Instance* deviceInstance; // cudaMalloc'd to allocate
+Base* hostInstance = new Derived(); // allocate and initialize host
+Base* deviceInstance; // cudaMalloc'd to allocate
 cudaMemcpy(deviceInstance, hostInstance); // to initialize the deivce
 Kokkos::parallel_for(... {
   // use deviceInstance
 });
 ```
 
-To one where we initialize on the device using a technique called `placement new`
+To one where we construct on the device using a technique called `placement new`
 
 ```c++
-Instance* deviceInstance; // cudaMalloc'd to allocate it
+Base* deviceInstance; // cudaMalloc'd to allocate it
 Kokkos::parallel_for(... {
-  new((Instance*)deviceInstance) Instance(); // initialize an instance, and place the result in the pointer deviceInstance
+  new((Derived*)deviceInstance) Derived(); // construct an instance in the place, the pointer deviceInstance points to
 });
 ```
 
-This code is extremely ugly, but leads to a properly initialized instance of the class. Note that like with other uses of `new`, you need to later `free` the memory
+This code is extremely ugly, but leads to functional virtual function calls on the device. The Vpointer now points to the device Vtable.
 
+![VPointerToDevice](./figures/VirtualFunctions-VPointerToDevice.png)
+
+Note that like with other uses of `new`, you need to later `free` the memory.
 For a full working example, see [the example in the repo](https://github.com/kokkos/kokkos/blob/master/example/virtual_functions/main.cpp).
 
 ## Complications and Fixes
@@ -80,9 +89,9 @@ For a full working example, see [the example in the repo](https://github.com/kok
 The first problem people run into with this is that they want to initialize some fields or nested classes based on host data before moving data down to the device
 
 ```c++
-Instance* hostInstance = new Instance(); // allocate and initialize host
+Base* hostInstance = new Derived(); // allocate and initialize host
 hostInstance->setAField(someHostValue);
-Instance* deviceInstance; // cudaMalloc'd to allocate
+Base* deviceInstance; // cudaMalloc'd to allocate
 cudaMemcpy(deviceInstance, hostInstance); // to initialize the deivce
 Kokkos::parallel_for(... {
   // use deviceInstance
@@ -92,50 +101,50 @@ Kokkos::parallel_for(... {
 We can't translate this easily, the naive translation would be
 
 ```c++
-Instance* deviceInstance; // cudaMalloc'd to allocate it
+Base* deviceInstance; // cudaMalloc'd to allocate it
 Kokkos::parallel_for(... {
-  new((Instance*)deviceInstance) Instance(); // initialize an instance, and place the result in the pointer deviceInstance
+  new((Derived*)deviceInstance) Derived(); // initialize an instance, and place the result in the pointer deviceInstance
   deviceInstance->setAField(someHostValue);
 });
 ```
 
-Which would crash for accessing the host value `someHostValue` on the device. The most productive solution we've found in these cases is to allocate the class in UVM, initialize it on the device, and then fill in fields on the host. To wit:
+Which would crash for accessing the host value `someHostValue` on the device (or this value would need to be copied into the `parallel_for`). The most productive solution we've found in these cases is to allocate the class in `SharedSpace`, initialize it on the device, and then fill in fields on the host. To wit:
 
 ```c++
-Instance* deviceInstance = Kokkos::kokkos_malloc<Kokkos::CudaUVMSpace>(sizeof(Instance));
+Base* deviceInstance = Kokkos::kokkos_malloc<Kokkos::SharedSpace>(sizeof(Derived));
 Kokkos::parallel_for(... {
-  new((Instance*)deviceInstance) Instance(); // initialize an instance, and place the result in the pointer deviceInstance
+  new((Derived*)deviceInstance) Derived(); // construct an instance in the place the the pointer deviceInstance points to
 });
 deviceInstance->setAField(someHostValue); // set some field on the host
 ```
 
-This is the solution that the code teams we have talked to have said is the most productive way to solve the problem.
+This is the solution that the code teams we have talked to have said is the most productive way to solve the problem. Nevertheless, it should be kept in mind, that this restricts virtual function calls to the device.
 
 ## But what if I do not really need the V-Tables on the device side?
-Consider the following example which calls the `virtual operator()` on the device from a pointer of derived class type.
+Consider the following example which calls the `virtual Bar()` on the device from a pointer of derived class type.
 One might think this should work because no V-Table lookup on the device is neccessary.
 ```c++
 #include <Kokkos_Core.hpp>
 #include <cstdio>
 
-struct Interface
+struct Base
 {
     KOKKOS_DEFAULTED_FUNCTION
-    virtual ~Interface() = default;
+    virtual ~Base() = default;
 
     KOKKOS_FUNCTION
-    virtual void operator()( const size_t) const = 0;
+    virtual void Bar() const = 0;
 };
 
-struct Implementation : public Interface
+struct Derived : public Base
 {
     KOKKOS_FUNCTION
-    void operator()(const size_t i) const override
-    { printf("%zu from Implementation\n", i); }
+    void Bar() const override
+    { printf("Hello from Derived\n"); }
 
     void apply(){
         Kokkos::parallel_for("myLoop",10,
-            KOKKOS_CLASS_LAMBDA (const size_t i) { this->operator()(i); }
+            KOKKOS_CLASS_LAMBDA (const size_t i) { this->Bar(); }
         );
     }
 };
@@ -144,8 +153,8 @@ int main (int argc, char *argv[])
 {
     Kokkos::initialize(argc,argv);
     {
-      auto implementationPtr = std::make_shared<Implementation>();
-      implementationPtr->apply();
+      auto derivedPtr = std::make_shared<Derived>();
+      derivedPtr->apply();
       Kokkos::fence();
     }
     Kokkos::finalize();
@@ -153,23 +162,23 @@ int main (int argc, char *argv[])
 ```
 ### Why is this not portable?
 
-Inside the `parallel_for` the `operator()` is called. As `Implementation` derives from the pure virtual class `Interface`, the 'operator()' is marked `override`.
+Inside the `parallel_for` `Bar()` is called. As `Derived` derives from the pure virtual class `Base`, the 'Bar()' function is marked `override`.
 On ROCm 5.2 this results in a memory access violation.
-When executing the `this->operator()(i)` call, the runtime looks into the V-Table and dereferences a host function pointer on the device.
+When executing the `this->Bar()` call, the runtime looks into the V-Table and dereferences a host function pointer on the device.
 
 ### But if that is the case, why does it work with NVCC?
 
-Notice, that the `parallel_for` is called from a pointer of type `Implementation` and not a pointer of type `Interface` pointing to an `Implementation` object.
-Thus, no V-Table lookup for the `operator()` would be necessary as it can be deduced from the context of the call that it will be `Implementation::operator()`.
-But here it comes down to how the compiler handles the lookup. NVCC understands that the call is coming from an `Implementation` object and thinks: "Oh, I see, that you are calling from an `Implementation` object, I know it will be the `operator()` in this class scope, I will do this for you".
+Notice, that the `parallel_for` is called from a pointer of type `Derived` and not a pointer of type `Base` pointing to an `Derived` object.
+Thus, no V-Table lookup for the `Bar()` would be necessary as it can be deduced from the context of the call that it will be `Derived::Bar()`.
+But here it comes down to how the compiler handles the lookup. NVCC understands that the call is coming from an `Derived` object and thinks: "Oh, I see, that you are calling from an `Derived` object, I know it will be the `Bar()` in this class scope, I will do this for you".
 ROCm, on the other hand, sees your call and thinks “Oh, this is a call to a virtual method, I will look that up for you” - failing to dereference the host function pointer in the host virtual function table.
 
 ### How to solve this?
 Strictly speaking, the observed behavior on NVCC is an optimization that uses the context information to avoid the V-Table lookup.
 If the compiler does not apply this optimization, you can help in different ways by providing additional information. Unfortunately, none of these strategies is fully portable to all backends.
 
-- Tell the compiler not to look up any function name in the V-Table when calling `operator()` by using [qualified name lookup](https://en.cppreference.com/w/cpp/language/qualified_lookup). For this, you tell the compiler which function you want by spelling out the class scope in which the function should be found e.g. `this->Implementation::operator() (i);`. This behavior is specified in the C++ Standard. Nevertheless, some backends are not fully compliant to the Standard.
-- Changing the `override` to `final` on the `operator()` in the `Implementation` class. This tells the compiler the `operator()` is not changing in derived objects. Many compilers do use this in optimization and deduce which function to call without the V-Table. Nevertheless, this might only work with certain compilers, as this effect of adding `final` is not specified in the C++ Standard. 
+- Tell the compiler not to look up any function name in the V-Table when calling `Bar()` by using [qualified name lookup](https://en.cppreference.com/w/cpp/language/qualified_lookup). For this, you tell the compiler which function you want by spelling out the class scope in which the function should be found e.g. `this->Derived::Bar();`. This behavior is specified in the C++ Standard. Nevertheless, some backends are not fully compliant to the Standard.
+- Changing the `override` to `final` on the `Bar()` in the `Derived` class. This tells the compiler `Bar()` is not changing in derived objects. Many compilers do use this in optimization and deduce which function to call without the V-Table. Nevertheless, this might only work with certain compilers, as this effect of adding `final` is not specified in the C++ Standard. 
 - Similarly, the entire derived class `Implementation` can be marked `final`. This is compiler dependent too, for the same reasons.
 
 ## Questions/Follow-up
