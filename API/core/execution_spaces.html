@@ -558,6 +558,12 @@ generically as an execution space. For details, see <a class="reference external
 feature of the OpenMP runtime system. Except in rare instances, it should not be used directly, but instead
 should be used generically as an execution space. For details, see <a class="reference external" href="#kokkos-executionspaceconcept">the documentation on the <code class="xref cppkokkos cppkokkos-func docutils literal notranslate"><span class="pre">ExecutionSpace()</span></code> concept</a>.</p>
 </section>
+<section id="kokkos-threads">
+<h2><code class="docutils literal notranslate"><span class="pre">Kokkos::Threads</span></code><a class="headerlink" href="#kokkos-threads" title="Permalink to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">Kokkos::Threads</span></code> is an <a class="reference external" href="#kokkos-executionspaceconcept"><code class="xref cppkokkos cppkokkos-func docutils literal notranslate"><span class="pre">ExecutionSpace()</span></code> type</a> representing parallel execution with std::threads.
+Except in rare instances, it should not be used directly, but instead should be used
+generically as an execution space. For details, see <a class="reference external" href="#kokkos-executionspaceconcept">the documentation on the <code class="xref cppkokkos cppkokkos-func docutils literal notranslate"><span class="pre">ExecutionSpace()</span></code> concept</a>.</p>
+</section>
 <section id="kokkos-serial">
 <h2><code class="docutils literal notranslate"><span class="pre">Kokkos::Serial</span></code><a class="headerlink" href="#kokkos-serial" title="Permalink to this heading">#</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">Kokkos::Serial</span></code> is an <a class="reference external" href="#kokkos-executionspaceconcept"><code class="xref cppkokkos cppkokkos-func docutils literal notranslate"><span class="pre">ExecutionSpace()</span></code> type</a> representing serial execution the CPU.
@@ -842,6 +848,7 @@ have the expression <code class="docutils literal notranslate"><span class="pre"
 <li><a class="reference internal" href="#kokkos-hpx"><code class="docutils literal notranslate"><span class="pre">Kokkos::HPX</span></code></a></li>
 <li><a class="reference internal" href="#kokkos-openmp"><code class="docutils literal notranslate"><span class="pre">Kokkos::OpenMP</span></code></a></li>
 <li><a class="reference internal" href="#kokkos-openmptarget"><code class="docutils literal notranslate"><span class="pre">Kokkos::OpenMPTarget</span></code></a></li>
+<li><a class="reference internal" href="#kokkos-threads"><code class="docutils literal notranslate"><span class="pre">Kokkos::Threads</span></code></a></li>
 <li><a class="reference internal" href="#kokkos-serial"><code class="docutils literal notranslate"><span class="pre">Kokkos::Serial</span></code></a></li>
 <li><a class="reference internal" href="#kokkos-executionspaceconcept"><code class="docutils literal notranslate"><span class="pre">Kokkos::ExecutionSpaceConcept</span></code></a><ul>
 <li><a class="reference internal" href="#aliases-based-on-configuration">Aliases based on configuration</a></li>
