@@ -528,10 +528,10 @@
 <p>Header File: <code class="docutils literal notranslate"><span class="pre">&lt;Kokkos_Core.hpp&gt;</span></code></p>
 <section id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Permalink to this heading">#</a></h2>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Kokkos</span><span class="o">::</span><span class="n">MDRangePolicy</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">begin</span><span class="p">,</span><span class="w"> </span><span class="n">end</span><span class="p">)</span>
-<span class="n">Kokkos</span><span class="o">::</span><span class="n">MDRangePolicy</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">Space</span><span class="p">,</span><span class="w"> </span><span class="n">begin</span><span class="p">,</span><span class="w"> </span><span class="n">end</span><span class="p">)</span>
-<span class="n">Kokkos</span><span class="o">::</span><span class="n">MDRangePolicy</span><span class="o">&lt;</span><span class="n">ARGS</span><span class="o">&gt;</span><span class="p">(</span><span class="n">begin</span><span class="p">,</span><span class="w"> </span><span class="n">end</span><span class="p">,</span><span class="w"> </span><span class="n">tiling</span><span class="p">)</span>
-<span class="n">Kokkos</span><span class="o">::</span><span class="n">MDRangePolicy</span><span class="o">&lt;</span><span class="n">ARGS</span><span class="o">&gt;</span><span class="p">(</span><span class="n">Space</span><span class="p">,</span><span class="w"> </span><span class="n">begin</span><span class="p">,</span><span class="w"> </span><span class="n">end</span><span class="p">,</span><span class="w"> </span><span class="n">tiling</span><span class="p">)</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Kokkos</span><span class="o">::</span><span class="n">MDRangePolicy</span><span class="o">&lt;</span><span class="p">...,</span><span class="w"> </span><span class="n">Rank</span><span class="o">&lt;</span><span class="n">N</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="p">...</span><span class="o">&gt;</span><span class="p">(</span><span class="n">begin</span><span class="p">,</span><span class="w"> </span><span class="n">end</span><span class="p">)</span>
+<span class="n">Kokkos</span><span class="o">::</span><span class="n">MDRangePolicy</span><span class="o">&lt;</span><span class="p">...,</span><span class="w"> </span><span class="n">Rank</span><span class="o">&lt;</span><span class="n">N</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="p">...</span><span class="o">&gt;</span><span class="p">(</span><span class="n">Space</span><span class="p">,</span><span class="w"> </span><span class="n">begin</span><span class="p">,</span><span class="w"> </span><span class="n">end</span><span class="p">)</span>
+<span class="n">Kokkos</span><span class="o">::</span><span class="n">MDRangePolicy</span><span class="o">&lt;</span><span class="p">...,</span><span class="w"> </span><span class="n">Rank</span><span class="o">&lt;</span><span class="n">N</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="p">...</span><span class="o">&gt;</span><span class="p">(</span><span class="n">begin</span><span class="p">,</span><span class="w"> </span><span class="n">end</span><span class="p">,</span><span class="w"> </span><span class="n">tiling</span><span class="p">)</span>
+<span class="n">Kokkos</span><span class="o">::</span><span class="n">MDRangePolicy</span><span class="o">&lt;</span><span class="p">...,</span><span class="w"> </span><span class="n">Rank</span><span class="o">&lt;</span><span class="n">N</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="p">...</span><span class="o">&gt;</span><span class="p">(</span><span class="n">Space</span><span class="p">,</span><span class="w"> </span><span class="n">begin</span><span class="p">,</span><span class="w"> </span><span class="n">end</span><span class="p">,</span><span class="w"> </span><span class="n">tiling</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">MDRangePolicy</span></code> defines an execution policy for a multidimensional iteration space starting at a <code class="docutils literal notranslate"><span class="pre">begin</span></code> tuple and going to <code class="docutils literal notranslate"><span class="pre">end</span></code> with an open interval. The iteration space will be tiled, and the user can optionally provide tiling sizes.</p>
@@ -584,10 +584,12 @@
 </table>
 </div>
 </section>
-<section id="arguments-specific-to-mdrangepolicy">
-<h3>Arguments Specific to MDRangePolicy<a class="headerlink" href="#arguments-specific-to-mdrangepolicy" title="Permalink to this heading">#</a></h3>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="o">&lt;</span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">Iterate</span><span class="w"> </span><span class="n">outer</span><span class="p">,</span><span class="w"> </span><span class="n">Iterate</span><span class="w"> </span><span class="n">inner</span><span class="o">&gt;</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">Rank</span><span class="p">;</span>
+<section id="required-arguments-specific-to-mdrangepolicy">
+<h3>Required Arguments Specific to MDRangePolicy<a class="headerlink" href="#required-arguments-specific-to-mdrangepolicy" title="Permalink to this heading">#</a></h3>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="o">&lt;</span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="p">,</span>
+<span class="w">         </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">Iterate</span><span class="w"> </span><span class="n">outer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">Iterate</span><span class="o">::</span><span class="n">Default</span><span class="p">,</span>
+<span class="w">         </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">Iterate</span><span class="w"> </span><span class="n">inner</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">Iterate</span><span class="o">::</span><span class="n">Default</span><span class="o">&gt;</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Kokkos</span><span class="o">::</span><span class="n">Rank</span><span class="p">;</span>
 </pre></div>
 </div>
 <ul class="simple">
@@ -639,15 +641,62 @@
 </ul>
 </dd></dl>
 
-<p>Preconditions:</p>
+<section id="ctad-constructors-since-4-3">
+<h4>CTAD Constructors (since 4.3)<a class="headerlink" href="#ctad-constructors-since-4-3" title="Permalink to this heading">#</a></h4>
+<div class="highlight-cppkokkos notranslate"><div class="highlight"><pre><span></span><span class="n">DefaultExecutionSpace</span><span class="w"> </span><span class="n">des</span><span class="p">;</span>
+<span class="n">SomeExecutionSpace</span><span class="w"> </span><span class="n">ses</span><span class="p">;</span><span class="w"> </span><span class="c1">// different from DefaultExecutionSpace</span>
+
+<span class="c1">// Deduces to MDRangePolicy&lt;Rank&lt;3&gt;&gt;</span>
+<span class="n">MDRangePolicy</span><span class="w"> </span><span class="n">pl0</span><span class="p">({</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">}};</span>
+<span class="n">MDRangePolicy</span><span class="w"> </span><span class="n">pl1</span><span class="p">({</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">}};</span>
+
+<span class="c1">// Deduces to MDRangePolicy&lt;SomeExecutionSpace, Rank&lt;3&gt;&gt;</span>
+<span class="n">MDRangePolicy</span><span class="w"> </span><span class="n">pl4</span><span class="p">(</span><span class="n">ses</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">}};</span>
+<span class="n">MDRangePolicy</span><span class="w"> </span><span class="n">pl5</span><span class="p">(</span><span class="n">ses</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">}};</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="n">cbegin</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">cend</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>
+<span class="kt">int64_t</span><span class="w"> </span><span class="n">ctiling</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>
+
+<span class="c1">// Deduces to MDRangePolicy&lt;Rank&lt;3&gt;&gt;</span>
+<span class="n">MDRangePolicy</span><span class="w"> </span><span class="nf">pc0</span><span class="p">(</span><span class="n">cbegin</span><span class="p">,</span><span class="w"> </span><span class="n">cend</span><span class="p">);</span>
+<span class="n">MDRangePolicy</span><span class="w"> </span><span class="nf">pc1</span><span class="p">(</span><span class="n">cbegin</span><span class="p">,</span><span class="w"> </span><span class="n">cend</span><span class="p">,</span><span class="w"> </span><span class="n">ctiling</span><span class="p">);</span>
+<span class="n">MDRangePolicy</span><span class="w"> </span><span class="nf">pc2</span><span class="p">(</span><span class="n">des</span><span class="p">,</span><span class="w"> </span><span class="n">cbegin</span><span class="p">,</span><span class="w"> </span><span class="n">cend</span><span class="p">);</span>
+<span class="n">MDRangePolicy</span><span class="w"> </span><span class="nf">pc3</span><span class="p">(</span><span class="n">des</span><span class="p">,</span><span class="w"> </span><span class="n">cbegin</span><span class="p">,</span><span class="w"> </span><span class="n">cend</span><span class="p">,</span><span class="w"> </span><span class="n">ctiling</span><span class="p">);</span>
+
+<span class="c1">// Deduces to MDRangePolicy&lt;SomeExecutionSpace, Rank&lt;3&gt;&gt;</span>
+<span class="n">MDRangePolicy</span><span class="w"> </span><span class="nf">pc4</span><span class="p">(</span><span class="n">ses</span><span class="p">,</span><span class="w"> </span><span class="n">cbegin</span><span class="p">,</span><span class="w"> </span><span class="n">cend</span><span class="p">);</span>
+<span class="n">MDRangePolicy</span><span class="w"> </span><span class="nf">pc5</span><span class="p">(</span><span class="n">ses</span><span class="p">,</span><span class="w"> </span><span class="n">cbegin</span><span class="p">,</span><span class="w"> </span><span class="n">cend</span><span class="p">,</span><span class="w"> </span><span class="n">ctiling</span><span class="p">);</span>
+
+<span class="n">Array</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="o">&gt;</span><span class="w"> </span><span class="n">abegin</span><span class="p">;</span>
+<span class="n">Array</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="o">&gt;</span><span class="w"> </span><span class="n">aend</span><span class="p">;</span>
+<span class="n">Array</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="o">&gt;</span><span class="w"> </span><span class="n">atiling</span><span class="p">;</span>
+
+<span class="c1">// Deduces to MDRangePolicy&lt;Rank&lt;2&gt;&gt;</span>
+<span class="n">MDRangePolicy</span><span class="w"> </span><span class="nf">pa0</span><span class="p">(</span><span class="n">abegin</span><span class="p">,</span><span class="w"> </span><span class="n">aend</span><span class="p">);</span>
+<span class="n">MDRangePolicy</span><span class="w"> </span><span class="nf">pa1</span><span class="p">(</span><span class="n">abegin</span><span class="p">,</span><span class="w"> </span><span class="n">aend</span><span class="p">,</span><span class="w"> </span><span class="n">atiling</span><span class="p">);</span>
+<span class="n">MDRangePolicy</span><span class="w"> </span><span class="nf">pa2</span><span class="p">(</span><span class="n">des</span><span class="p">,</span><span class="w"> </span><span class="n">abegin</span><span class="p">,</span><span class="w"> </span><span class="n">aend</span><span class="p">);</span>
+<span class="n">MDRangePolicy</span><span class="w"> </span><span class="nf">pa3</span><span class="p">(</span><span class="n">des</span><span class="p">,</span><span class="w"> </span><span class="n">abegin</span><span class="p">,</span><span class="w"> </span><span class="n">aend</span><span class="p">,</span><span class="w"> </span><span class="n">atiling</span><span class="p">);</span>
+
+<span class="c1">// Deduces to MDRangePolicy&lt;SomeExecutionSpace, Rank&lt;2&gt;&gt;</span>
+<span class="n">MDRangePolicy</span><span class="w"> </span><span class="nf">pa4</span><span class="p">(</span><span class="n">ses</span><span class="p">,</span><span class="w"> </span><span class="n">abegin</span><span class="p">,</span><span class="w"> </span><span class="n">aend</span><span class="p">);</span>
+<span class="n">MDRangePolicy</span><span class="w"> </span><span class="nf">pa5</span><span class="p">(</span><span class="n">ses</span><span class="p">,</span><span class="w"> </span><span class="n">abegin</span><span class="p">,</span><span class="w"> </span><span class="n">aend</span><span class="p">,</span><span class="w"> </span><span class="n">atiling</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="notes">
+<h4>Notes<a class="headerlink" href="#notes" title="Permalink to this heading">#</a></h4>
 <ul class="simple">
 <li><p>The start index must not be greater than the matching end index for all ranks.</p></li>
+<li><p>The begin and end array ranks must match.</p></li>
+<li><p>The tiling array rank must be less than or equal to the begin/end array rank.</p></li>
 </ul>
+</section>
 </section>
 </section>
 <section id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading">#</a></h2>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">MDRangePolicy</span><span class="o">&lt;</span><span class="n">Rank</span><span class="o">&lt;</span><span class="mi">3</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">policy_1</span><span class="p">({</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">},{</span><span class="n">N0</span><span class="p">,</span><span class="n">N1</span><span class="p">,</span><span class="n">N2</span><span class="p">});</span>
+<div class="highlight-cppkokkos notranslate"><div class="highlight"><pre><span></span><span class="n">MDRangePolicy</span><span class="o">&lt;</span><span class="n">Rank</span><span class="o">&lt;</span><span class="mi">3</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">policy_1</span><span class="p">({</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">},{</span><span class="n">N0</span><span class="p">,</span><span class="n">N1</span><span class="p">,</span><span class="n">N2</span><span class="p">});</span>
 <span class="n">MDRangePolicy</span><span class="o">&lt;</span><span class="n">Cuda</span><span class="p">,</span><span class="n">Rank</span><span class="o">&lt;</span><span class="mi">3</span><span class="p">,</span><span class="n">Iterate</span><span class="o">::</span><span class="n">Right</span><span class="p">,</span><span class="n">Iterate</span><span class="o">::</span><span class="n">Left</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">policy_2</span><span class="p">({</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">},{</span><span class="n">N0</span><span class="mi">-5</span><span class="p">,</span><span class="n">N1</span><span class="mi">-5</span><span class="p">,</span><span class="n">N2</span><span class="mi">-5</span><span class="p">},{</span><span class="n">T0</span><span class="p">,</span><span class="n">T1</span><span class="p">,</span><span class="n">T2</span><span class="p">});</span>
 </pre></div>
 </div>
@@ -716,11 +765,15 @@
 <li><a class="reference internal" href="#interface">Interface</a></li>
 <li><a class="reference internal" href="#parameters">Parameters</a><ul>
 <li><a class="reference internal" href="#common-arguments-for-all-execution-policies">Common Arguments for all Execution Policies</a></li>
-<li><a class="reference internal" href="#arguments-specific-to-mdrangepolicy">Arguments Specific to MDRangePolicy</a></li>
+<li><a class="reference internal" href="#required-arguments-specific-to-mdrangepolicy">Required Arguments Specific to MDRangePolicy</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#public-class-members">Public Class Members</a><ul>
-<li><a class="reference internal" href="#constructors">Constructors</a></li>
+<li><a class="reference internal" href="#constructors">Constructors</a><ul>
+<li><a class="reference internal" href="#ctad-constructors-since-4-3">CTAD Constructors (since 4.3)</a></li>
+<li><a class="reference internal" href="#notes">Notes</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a class="reference internal" href="#examples">Examples</a></li>
