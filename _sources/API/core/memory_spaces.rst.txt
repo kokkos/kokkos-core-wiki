@@ -4,11 +4,11 @@ Memory Spaces
 .. role:: cppkokkos(code)
     :language: cppkokkos
 
-.. _MemorySpaceType: #kokkos-memoryspaceconcept
+.. _MemorySpaceType: #memoryspaceconcept
 
 .. |MemorySpaceType| replace:: :cppkokkos:func:`MemorySpace` type
 
-.. _TheDocumentationOnTheMemorySpaceConcept: #kokkos-memoryspaceconcept
+.. _TheDocumentationOnTheMemorySpaceConcept: #memoryspaceconcept
 
 .. |TheDocumentationOnTheMemorySpaceConcept| replace:: the documentation on the :cppkokkos:func:`MemorySpace` concept
 
@@ -16,11 +16,11 @@ Memory Spaces
 
 .. |Experimental| replace:: Experimental
 
-.. _ExecutionSpaceType: ./execution_spaces.html#kokkos-executionspaceconcept
+.. _ExecutionSpaceType: ./execution_spaces.html#executionspaceconcept
 
 .. |ExecutionSpaceType| replace:: :cppkokkos:func:`ExecutionSpace` type
 
-.. _ExecutionSpaceTypes: ./execution_spaces.html#kokkos-executionspaceconcept
+.. _ExecutionSpaceTypes: ./execution_spaces.html#executionspaceconcept
 
 .. |ExecutionSpaceTypes| replace:: :cppkokkos:func:`ExecutionSpace` types
 
