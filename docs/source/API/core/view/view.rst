@@ -263,9 +263,9 @@ Constructors
      either match the dynamic rank or the total rank. In the latter case, the extents
      corresponding to compile-time dimensions must match the View type's compile-time extents.
 
-.. cppkokkos:function:: View( const AllocProperties& prop, const IntType& ... indices)
+.. cppkokkos:function:: View( const ALLOC_PROP &prop, const IntType& ... indices)
 
-   Allocating constructor with allocation properties. If an execution space is
+   Allocating constructor with allocation properties (created by a call to `Kokkos::view_alloc`). If an execution space is
    specified in ``prop``, the initialization uses it and does not fence.
    Otherwise, the View is initialized using the default execution space instance corresponding to ``MemorySpace`` and fences it.
 
@@ -278,9 +278,9 @@ Constructors
 
    - Requires: ``array_layout::is_regular == true``.
 
-.. cppkokkos:function:: View( const AllocProperties& prop, const array_layout& layout)
+.. cppkokkos:function:: View( const ALLOC_PROP &prop, const array_layout& layout)
 
-   Allocating constructor with allocation properties and a layout object. If an execution space is
+   Allocating constructor with allocation properties (created by a call to `Kokkos::view_alloc`) and a layout object. If an execution space is
    specified in ``prop``, the initialization uses it and does not fence. Otherwise, the View is
    initialized using the default execution space instance corresponding to ``MemorySpace`` and fences it.
 
@@ -513,7 +513,7 @@ Other
 
    Returns the current reference count of the underlying allocation.
 
-.. cppkokkos:function:: const char* label() const;
+.. cppkokkos:function:: const std::string label() const;
 
    Returns the label of the View.
 

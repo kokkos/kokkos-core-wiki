@@ -4,6 +4,20 @@ Known issues
 .. role:: cppkokkos(code)
     :language: cppkokkos
 
+CUDA
+====
+
+- With older MPI versions and when using a legacy NVIDIA GPU the default allocation mechanism of Kokkos for `CudaSpace` can cause issues. For example MPI may crash with illegal memory accesses or Kokkos' initialization can report errors like:
+
+  .. code-block::
+
+     terminate called after throwing an instance of 'Kokkos::Experimental::CudaRawMemoryAllocationFailure'
+
+  A fix is to disable asynchronous memory allocations by adding the following to CMake arguments:
+
+  .. code-block::
+
+     -DKokkos_ENABLE_IMPL_CUDA_MALLOC_ASYNC=OFF
 
 HIP
 ===

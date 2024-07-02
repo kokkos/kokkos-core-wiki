@@ -15,13 +15,21 @@ A common desired use case is to have a memory allocation in GPU memory and an id
 Usage
 -----
 
+The key difference between ``create_mirror`` and ``create_mirror_view`` is the following: ``create_mirror`` `always` allocates new memory in the specified space (shown below for host space), while ``create_mirror_view`` only allocates memory if the View to be mirrored (``a_view``) is not already accessible from the specified space, and otherwise simply returns ``a_view``.
+Use ``create_mirror_view`` when the mirror is solely used for providing access in different execution spaces, and use ``create_mirror`` if you need the data to be independent, e.g. for having a previous and an updated version of the data.
+
 .. code-block:: cpp
 
+    // Both host_mirror and host_mirror_view have the correct properties for deep_copy from/to a_view
+    // host_mirror is guaranteed to have separately allocated memory from a_view
     auto host_mirror = create_mirror(a_view);
+    // host_mirror_view may point to the same memory as a_view, if a_view is host-accessible
     auto host_mirror_view = create_mirror_view(a_view);
 
-    auto host_mirror_space = create_mirror(ExecSpace(),a_view);
-    auto host_mirror_view_space = create_mirror_view(ExecSpace(),a_view);
+    // You can specify the space from which the mirror view must be accessible
+    auto mirror = create_mirror(memory_space_instance, a_view);
+    auto mirror_view = create_mirror_view(memory_space_instance, a_view);
+
 
 Description
 -----------
@@ -71,7 +79,7 @@ Description
 
    - ``ImplMirrorType``: an implementation defined specialization of ``Kokkos::View``.
 
-.. cppkokkos:function:: template <class ViewType, class... ViewCtorArgs> auto create_mirror(Impl::ViewCtorProp<ViewCtorArgs...> const& arg_prop, ViewType const& src);
+.. cppkokkos:function:: template <class ViewType, class ALLOC_PROP> auto create_mirror(ALLOC_PROP const& arg_prop, ViewType const& src);
 
    Creates a new |View|_ with the same layout and padding as ``src``
    using the |View|_ constructor properties ``arg_prop``, e.g., ``Kokkos::view_alloc(Kokkos::WithoutInitializing)``.
@@ -123,9 +131,9 @@ Description
 
    - ``ImplMirrorType``: an implementation defined specialization of ``Kokkos::View``.
 
-.. cppkokkos:function:: template <class ViewType, class... ViewCtorArgs> auto create_mirror_view(Impl::ViewCtorProp<ViewCtorArgs...> const& arg_prop, ViewType const& src);
+.. cppkokkos:function:: template <class ViewType, class ALLOC_PROP> auto create_mirror_view(ALLOC_PROP const& arg_prop, ViewType const& src);
 
-   If the |View|_ constructor arguments ``arg_prop`` include a memory space and the memory space
+   If the |View|_ constructor arguments ``arg_prop`` (created by a call to `Kokkos::view_alloc`) include a memory space and the memory space
    doesn't match the memory space of ``src``, creates a new |View|_ in the specified memory_space. If the ``arg_prop`` don't include a memory
    space and the memory space of ``src`` is not host-accessible, creates a new host-accessible |View|_.
    Otherwise, ``src`` is returned. If a new |View|_ is created, the implicitly called constructor respects ``arg_prop``
@@ -151,9 +159,9 @@ Description
 
    - ``ImplMirrorType``: an implementation defined specialization of ``Kokkos::View``.
 
-.. cppkokkos:function:: template <class ViewType, class... ViewCtorArgs> ImplMirrorType create_mirror_view_and_copy(Impl::ViewCtorProp<ViewCtorArgs...> const& arg_prop, ViewType const& src);
+.. cppkokkos:function:: template <class ViewType, class ALLOC_PROP> ImplMirrorType create_mirror_view_and_copy(ALLOC_PROP const& arg_prop, ViewType const& src);
 
-   If the  memory space included in the |View|_ constructor arguments ``arg_prop`` matches the memory
+   If the  memory space included in the |View|_ constructor arguments ``arg_prop`` (created by a call to `Kokkos::view_alloc`) matches the memory
    space of ``src``, creates a new |View|_ in the specified memory space using ``arg_prop`` and the same layout
    and padding as ``src``. Additionally, a ``deep_copy`` from ``src`` to the new view is executed
    (using the execution space contained in ``arg_prop`` if provided). Otherwise returns ``src``.
