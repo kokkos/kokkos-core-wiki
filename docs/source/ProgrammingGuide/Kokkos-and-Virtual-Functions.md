@@ -34,15 +34,15 @@ Virtual functions allow a program to handle Derived classes through a pointer to
 
 ![VTable](./figures/VirtualFunctions-VTables.png)
 
-Okay, so now we have Vtables, if a class knows what type it is it could call the correct function. But how does it know?
+Okay, so now we have Vtables, if a class knows what type it is, it could call the correct function. But how does it know?
 
 Remember that we have one Vtable shared amongst all instances of a type. Each instance, however, has a hidden member called the Vpointer, which the compiler points at construction to the correct Vtable. So a call to a virtual function simply dereferences that pointer, and then indexes into the Vtable to find the precise virtual function called.
 
 ![VPointer](./figures/VirtualFunctions-VPointers.png)
 
-Now that we know what the compiler is doing to implement virtual functions, we'll look at why it doesn't work with GPU's
+Now that we know what the compiler is doing to implement virtual functions, we'll look at why it doesn't work with GPU's.
 
-Credit: the content of this section is adapted from Pablo Arias [here](https://pabloariasal.github.io/2017/06/10/understanding-virtual-tables/)
+Credit: the content of this section is adapted from Pablo Arias [here](https://pabloariasal.github.io/2017/06/10/understanding-virtual-tables/).
 
 ## Then why doesn't my code work?
 
@@ -171,7 +171,7 @@ In the case presented above, `setAField()` is not a virtual function.
 
 ## But what if I do not really need the V-Tables on the device side?
 
-Consider the following example which calls the `virtual` `Bar()` on the device from a pointer of derived class type.
+Consider the following example which calls the virtual function `Bar()` on the device from a pointer of derived class type.
 One might think this should work because no V-Table lookup on the device is necessary.
 
 ```c++
