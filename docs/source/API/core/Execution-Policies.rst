@@ -82,7 +82,7 @@ Execution Policies generally accept compile time arguments via template paramete
 
     * * IndexType
       * ``IndexType<int>``
-      * Specify integer type to be used for traversing the iteration space. Defaults to ``int64_t``.
+      * Specify integer type to be used for traversing the iteration space. Defaults to the ``size_type`` of `MemorySpaceConcept <memory_spaces.html#typedefs>`__.
 
     * * LaunchBounds
       * ``LaunchBounds<MaxThreads, MinBlocks>``
