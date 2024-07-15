@@ -325,7 +325,7 @@ Typedefs
    - ``unsigned int``
  * - ``SYCL``
    - ``int``
- * - ``OpenaACC``
+ * - ``OpenACC``
    - ``size_t``
  * - ``OpenMPTarget``
    - ``unsigned int``
