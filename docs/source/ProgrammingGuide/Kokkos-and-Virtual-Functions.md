@@ -1,6 +1,15 @@
 # 14. Kokkos and Virtual Functions
 
+```{warning}
+Using virtual functions in parallel regions is not a good idea in general. It often degrades performance, it requires specific code for a correct execution on GPU, and it is not portable on every backend. We recommend to use a different approach whenever possible.
+```
+
 Due to oddities of GPU programming, the use of virtual functions in Kokkos parallel regions can be complicated. This document describes the problems you're likely to face, where they come from, and how to work around them.
+
+Please note that virtual functions can be executed on device for the following backends:
+
+- Cuda; and
+- HIP.
 
 ## The Problem
 
@@ -12,8 +21,8 @@ class Derived : public Base {
 
   public:
   KOKKOS_FUNCTION virtual void Bar(){
-    // all of physics
-  } 
+    // function body
+  }
 };
 
 Base* hostInstance = new Derived();
