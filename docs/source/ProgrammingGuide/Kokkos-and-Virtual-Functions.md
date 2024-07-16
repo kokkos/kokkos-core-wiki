@@ -75,7 +75,7 @@ to one where we construct on the device using a technique called *placement new*
 
 ```c++
 Base* deviceInstance; // declare
-cudaMalloc((void**)&deviceInstance, sizeof(Derived)); // alocate on device
+cudaMalloc((void**)&deviceInstance, sizeof(Derived)); // allocate on device
 Kokkos::parallel_for("Initialize", 1, KOKKOS_LAMBDA (const int i) {
   new (static_cast<Derived*>(deviceInstance)) Derived(); // initialize on device
 });
