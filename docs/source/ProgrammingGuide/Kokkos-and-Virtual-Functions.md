@@ -6,16 +6,16 @@ Using virtual functions in parallel regions is not a good idea in general. It of
 
 Due to oddities of GPU programming, the use of virtual functions in Kokkos parallel regions can be complicated. This document describes the problems you're likely to face, where they come from, and how to work around them.
 
-Please note that virtual functions can be executed on device for the following backends:
+Please note that virtual functions can be executed on the device for the following backends:
 
 - Cuda; and
 - HIP (with a limitation, as explained at the end).
 
-Especially, SYCL 2020 [cannot handle virtual functions](https://github.com/AlexeySachkov/llvm/blob/private/asachkov/virtual-functions-extension-spec/sycl/doc/design/VirtualFunctions.md?rgh-link-date=2024-07-16T15%3A15%3A11Z).
+Especially, SYCL 2020 [cannot handle virtual functions](https://registry.khronos.org/SYCL/specs/sycl-2020/html/sycl-2020.html#_overview).
 
 ## The Problem
 
-In GPU programming, you might have run into the bug of calling a host function from the device. A similar thing can happen for subtle reasons in code using virtual functions. Consider the following serial code to accelerate
+In GPU programming, you might have run into the bug of calling a host function from the device. A similar thing can happen for subtle reasons in code using virtual functions. Consider the following serial code
 
 ```c++
 class Base {
@@ -46,7 +46,7 @@ int main(int argc, char *argv[])
 ```
 
 This code is more complex to port on GPU than it looks like.
-Using a straightforward approach, we would accelerate the `for` loop with `parallel_for` and copy `instance` on the GPU memory (not disclosing how for now).
+Using a straightforward approach, we would replace the `for` loop with `parallel_for` and copy `instance` on the GPU memory (not disclosing how for now).
 Then, we would call `Bar()` inside the `parallel_for`.
 At a glance this should be fine, but it will typically crash, however, because `instance` will call a host version of `Bar()`.
 To understand why, we need to understand a bit about how virtual functions are implemented.
@@ -73,7 +73,7 @@ The reason the straightforward approach described above fails is that when deali
 
 ![VTableDevice](./figures/VirtualFunctions-VTablesHostDevice.png)
 
-Since we construct the class instance on the host, so it's Vpointer points to the host Vtable.
+Since we construct the class instance on the host, its Vpointer points to the host Vtable.
 
 ![VPointerToHost](./figures/VirtualFunctions-VPointerToHost.png)
 
@@ -133,8 +133,8 @@ int main(int argc, char *argv[])
 
 We first use the `KOKKOS_FUNCTION` macro to make the methods callable from a kernel.
 When creating the instance, note that we introduce a distinction between the *memory* that the it uses, and the actual instantiated *object*.
-The construct is done on the device, withing a single-iteration `parallel_for`, using placement new.
-Since the kernel does not have a return type, we use a static cast to associate the object to the memory allocation.
+The construct is done on the device, within a single-iteration `parallel_for`, using placement new.
+Since the kernel does not have a return type, we use a static cast to associate the object with the memory allocation.
 
 Like with other uses of `new`, we need to later free the memory.
 The destruct is done on the device, again with a single-iteration `parallel_for`.
