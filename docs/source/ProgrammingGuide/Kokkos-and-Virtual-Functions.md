@@ -9,7 +9,9 @@ Due to oddities of GPU programming, the use of virtual functions in Kokkos paral
 Please note that virtual functions can be executed on device for the following backends:
 
 - Cuda; and
-- HIP.
+- HIP (with a limitation, as explained at the end).
+
+Especially, SYCL 2020 [cannot handle virtual functions](https://github.com/AlexeySachkov/llvm/blob/private/asachkov/virtual-functions-extension-spec/sycl/doc/design/VirtualFunctions.md?rgh-link-date=2024-07-16T15%3A15%3A11Z).
 
 ## The Problem
 
@@ -43,11 +45,11 @@ int main(int argc, char *argv[])
 }
 ```
 
-This code is more complex to accelerate than it looks like.
+This code is more complex to port on GPU than it looks like.
 Using a straightforward approach, we would accelerate the `for` loop with `parallel_for` and copy `instance` on the GPU memory (not disclosing how for now).
 Then, we would call `Bar()` inside the `parallel_for`.
 At a glance this should be fine, but it will typically crash, however, because `instance` will call a host version of `Bar()`.
-To understand why, you'll need to understand a bit about how virtual functions are implemented.
+To understand why, we need to understand a bit about how virtual functions are implemented.
 
 ## Vtables, Vpointers, Very annoying with GPUs
 
@@ -81,7 +83,7 @@ We faithfully copied all of the members of the class on the GPU memory, includin
 
 The problem here is that we are constructing the instance on the Host.
 If we were constructing it on the Device, we'd get the correct Vpointer, and thus the correct functions.
-Note that this would allow to call virtual functions on the device only, not on the host.
+Note that this would allow to call virtual functions on the device only, not on the host anymore.
 
 To that aim, we first allocate memory on the device, then construct on the device using a technique called *placement new*
 
@@ -144,7 +146,7 @@ Remember that those virtual functions cannot be called on the host anymore!
 
 For a full working example, see [the example in the repo](https://github.com/kokkos/kokkos/blob/master/example/virtual_functions/main.cpp).
 
-## What if I need a setter with host values?
+## What if I need a setter that works with host values?
 
 The first problem people run into with this is that they want to initialize some fields based on host data, with a setter which is *not* a virtual function.
 Calling this setter on the device would crash if the host data is not easily copyable on the device (e.g. for a small array).
@@ -201,7 +203,7 @@ int main(int argc, char *argv[])
 ### Why is this not portable?
 
 Inside the `parallel_for`, `Bar()` is called. As `Derived` derives from the pure virtual class `Base`, the `Bar()` function is marked `override`.
-On ROCm 5.2 this results in a memory access violation.
+On ROCm 6.0 this results in a memory access violation.
 When executing the `this->Bar()` call, the runtime looks into the Vtable and dereferences a host function pointer on the device.
 
 ### But if that is the case, why does it work with NVCC?
@@ -209,7 +211,7 @@ When executing the `this->Bar()` call, the runtime looks into the Vtable and der
 Notice, that the `parallel_for` is called from a pointer of type `Derived` and not a pointer of type `Base` pointing to an `Derived` object.
 Thus, no Vtable lookup for the `Bar()` would be necessary as it can be deduced from the context of the call that it will be `Derived::Bar()`.
 But here it comes down to how the compiler handles the lookup. NVCC understands that the call is coming from an `Derived` object and thinks: "Oh, I see, that you are calling from an `Derived` object, I know it will be the `Bar()` in this class scope, I will do this for you".
-ROCm, on the other hand, sees your call and thinks "Oh, this is a call to a virtual method, I will look that up for you", failing to dereference the host function pointer in the host virtual function table.
+ROCm, on the other hand, sees the call and thinks "Oh, this is a call to a virtual method, I will look that up for you", failing to dereference the host function pointer in the host virtual function table.
 
 ### How to solve this?
 Strictly speaking, the observed behavior on NVCC is an optimization that uses the context information to avoid the Vtable lookup.
