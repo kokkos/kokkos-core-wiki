@@ -46,7 +46,7 @@ int main(int argc, char *argv[])
 ```
 
 This code is more complex to port on GPU than it looks like.
-Using a straightforward approach, we would replace the `for` loop with `parallel_for` and copy `instance` on the GPU memory (not disclosing how for now).
+Using a straightforward approach, we would annotate functions with `KOKKOS_FUNCTION`, replace the `for` loop with `parallel_for` and copy `instance` on the GPU memory (not disclosing how for now).
 Then, we would call `Bar()` inside the `parallel_for`.
 At a glance this should be fine, but it will typically crash, however, because `instance` will call a host version of `Bar()`.
 To understand why, we need to understand a bit about how virtual functions are implemented.
@@ -136,8 +136,7 @@ When creating the instance, note that we introduce a distinction between the *me
 The construct is done on the device, within a single-iteration `parallel_for`, using placement new.
 Since the kernel does not have a return type, we use a static cast to associate the object with the memory allocation.
 
-Like with other uses of `new`, we need to later free the memory.
-The destruct is done on the device, again with a single-iteration `parallel_for`.
+The destructor must explicitly be called from the device, again with a single-iteration `parallel_for`. Then the memory allocation can be release with `kokkos_free`.
 
 This code is extremely ugly, but leads to functional virtual function calls on the device. The Vpointer now points to the device Vtable.
 Remember that those virtual functions cannot be called on the host anymore!
