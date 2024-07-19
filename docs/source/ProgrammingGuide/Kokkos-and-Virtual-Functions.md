@@ -161,6 +161,8 @@ deviceInstance->setAField(someHostValue); // set on host
 The setter is still called on the host.
 Beware that this is only valid for backends that support `SharedSpace`.
 
+Keep in mind that, despite using a "unified" `SharedSpace`, you still have to resort to placement new in order to have the correct Vpointer and hence Vtable on the device!
+
 ## But what if I do not really need the Vtables on the device side?
 
 Consider the following example which calls the virtual function `Bar()` on the device from a pointer of derived class type.
