@@ -109,7 +109,7 @@ int main(int argc, char *argv[])
   Kokkos::ScopeGuard kokkos(argc, argv);
 
   // create
-  auto deviceInstanceMemory = Kokkos::kokkos_malloc(sizeof(Derived)); // allocate memory on device
+  void* deviceInstanceMemory = Kokkos::kokkos_malloc(sizeof(Derived)); // allocate memory on device
   Kokkos::parallel_for("initialize", 1, KOKKOS_LAMBDA (const int i) {
     new (static_cast<Derived*>(deviceInstanceMemory)) Derived(); // initialize on device
   });
@@ -153,7 +153,7 @@ The most productive solution we've found in these cases is to allocate the insta
 
 ```c++
 // create
-auto deviceInstanceMemory = Kokkos::kokkos_malloc<Kokkos::SharedSpace>(sizeof(Derived)); // allocate on shared space
+void* deviceInstanceMemory = Kokkos::kokkos_malloc<Kokkos::SharedSpace>(sizeof(Derived)); // allocate on shared space
 // ...
 deviceInstance->setAField(someHostValue); // set on host
 ```
