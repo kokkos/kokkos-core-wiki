@@ -147,8 +147,8 @@ For a full working example, see [the example in the repo](https://github.com/kok
 
 ## What if I need a setter that works with host values?
 
-The first problem people run into with this is that they want to initialize some fields based on host data, with a setter which is *not* a virtual function.
-Calling this setter on the device would crash if the host data is not easily copyable on the device (e.g. for a small array).
+The first problem people run into with this is when they want to initialize some fields based on host data, using a setter which is *not* a virtual function.
+Calling this setter on the device would crash if the host data doesn't form a valid type on the device: especially, if the data type is not copyable on the device (e.g. for a pointer), or if the data instance is invalid on the device.
 The most productive solution we've found in these cases is to allocate the instance in `SharedSpace`, initialize it on the device, and then fill in fields on the host
 
 ```c++
