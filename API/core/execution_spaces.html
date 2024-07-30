@@ -718,6 +718,7 @@ have the expression <code class="docutils literal notranslate"><span class="pre"
 <span class="w">    </span><span class="k">typedef</span><span class="w"> </span><span class="n">Device</span><span class="o">&lt;</span><span class="n">execution_space</span><span class="p">,</span><span class="w"> </span><span class="n">memory_space</span><span class="o">&gt;</span><span class="w"> </span><span class="n">device_type</span><span class="p">;</span>
 <span class="w">    </span><span class="k">typedef</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="n">scratch_memory_space</span><span class="p">;</span>
 <span class="w">    </span><span class="k">typedef</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="n">array_layout</span><span class="p">;</span>
+<span class="w">    </span><span class="k">typedef</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="n">size_type</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">ExecutionSpaceConcept</span><span class="p">();</span>
 <span class="w">    </span><span class="n">ExecutionSpaceConcept</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">ExecutionSpaceConcept</span><span class="o">&amp;</span><span class="w"> </span><span class="n">src</span><span class="p">);</span>
@@ -754,6 +755,7 @@ have the expression <code class="docutils literal notranslate"><span class="pre"
 <li><p><code class="docutils literal notranslate"><span class="pre">device_type</span></code>: <code class="docutils literal notranslate"><span class="pre">DeviceType&lt;execution_space,memory_space&gt;</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">array_layout</span></code>: The default <code class="docutils literal notranslate"><span class="pre">ArrayLayout</span></code> recommended for use with <code class="docutils literal notranslate"><span class="pre">View</span></code> types accessed from <a class="reference external" href="#kokkos-executionspaceconcept"><code class="xref cppkokkos cppkokkos-func docutils literal notranslate"><span class="pre">ExecutionSpaceConcept()</span></code></a>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">scratch_memory_space</span></code>: The <code class="docutils literal notranslate"><span class="pre">ScratchMemorySpace</span></code> that parallel patterns will use for allocation of scratch memory (for instance, as requested by a <a class="reference external" href="policies/TeamPolicy.html"><code class="xref cppkokkos cppkokkos-func docutils literal notranslate"><span class="pre">Kokkos::TeamPolicy()</span></code></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">size_type</span></code>: The default integer type associated with this space. Signed or unsigned, 32 or 64 bit integer type, used as preferred type for indexing.</p></li>
 </ul>
 </section>
 <section id="constructors">

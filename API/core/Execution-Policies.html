@@ -620,8 +620,8 @@
 <td><p>Specify scheduling policy for work items. <code class="docutils literal notranslate"><span class="pre">Dynamic</span></code> scheduling is implemented through a work stealing queue. Default is machine and backend specific.</p></td>
 </tr>
 <tr class="row-even"><td><p>IndexType</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">IndexType&lt;int&gt;</span></code></p></td>
-<td><p>Specify integer type to be used for traversing the iteration space. Defaults to <code class="docutils literal notranslate"><span class="pre">int64_t</span></code>.</p></td>
+<td><p>e.g. <code class="docutils literal notranslate"><span class="pre">IndexType&lt;int&gt;</span></code></p></td>
+<td><p>Specify integer type to be used for traversing the iteration space. Defaults to the <code class="docutils literal notranslate"><span class="pre">size_type</span></code> of <a class="reference external" href="execution_spaces.html#typedefs">ExecutionSpaceConcept</a>. Can affect the performance depending on the backend.</p></td>
 </tr>
 <tr class="row-odd"><td><p>LaunchBounds</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">LaunchBounds&lt;MaxThreads,</span> <span class="pre">MinBlocks&gt;</span></code></p></td>

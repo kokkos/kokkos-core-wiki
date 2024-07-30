@@ -81,8 +81,8 @@ Execution Policies generally accept compile time arguments via template paramete
       * Specify scheduling policy for work items. ``Dynamic`` scheduling is implemented through a work stealing queue. Default is machine and backend specific.
 
     * * IndexType
-      * ``IndexType<int>``
-      * Specify integer type to be used for traversing the iteration space. Defaults to ``int64_t``.
+      * e.g. ``IndexType<int>``
+      * Specify integer type to be used for traversing the iteration space. Defaults to the ``size_type`` of `ExecutionSpaceConcept <execution_spaces.html#typedefs>`__. Can affect the performance depending on the backend.
 
     * * LaunchBounds
       * ``LaunchBounds<MaxThreads, MinBlocks>``
