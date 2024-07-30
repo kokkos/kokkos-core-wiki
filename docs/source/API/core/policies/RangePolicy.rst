@@ -108,26 +108,26 @@ Constructors
 
 .. cppkokkos:function:: RangePolicy(IndexType begin, IndexType end)
 
-   Provide a start and end index.
+   Provide a begin and end index.
 
 .. cppkokkos:function:: RangePolicy(IndexType begin, IndexType end, ChunkSize chunk_size)
 
-   Provide a start and end index as well as a ``ChunkSize``.
+   Provide a begin and end index as well as a ``ChunkSize``.
 
 .. cppkokkos:function:: RangePolicy(const ExecutionSpace& space, IndexType begin, IndexType end)
 
-   Provide a start and end index and an ``ExecutionSpace`` instance to use as the execution resource.
+   Provide a begin and end index and an ``ExecutionSpace`` instance to use as the execution resource.
 
 .. cppkokkos:function:: RangePolicy(const ExecutionSpace& space, IndexType begin, IndexType end, ChunkSize chunk_size)
 
-   Provide a start and end index and an ``ExecutionSpace`` instance to use as the execution resource, as well as a ``ChunkSize``.
+   Provide a begin and end index and an ``ExecutionSpace`` instance to use as the execution resource, as well as a ``ChunkSize``.
 
 Preconditions:
 ^^^^^^^^^^^^^^
 
-* The start index must not be greater than the end index.
+* The begin index must not be greater than the end index.
 * The actual constructors are templated so we can check that they are converted to ``index_type`` safely (see `#6754 <https://github.com/kokkos/kokkos/pull/6754>`_).
-   * The conversion safety check is only performed if ``index_type`` is convertible to the start and end index types.
+   * The conversion safety check is only performed if ``index_type`` is convertible to the begin and end index types.
 
 CTAD Constructors (since 4.3):
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
