@@ -545,44 +545,9 @@
 </section>
 <section id="parameters">
 <h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this heading">#</a></h2>
-<section id="common-arguments-for-all-execution-policies">
-<h3>Common Arguments for all Execution Policies<a class="headerlink" href="#common-arguments-for-all-execution-policies" title="Permalink to this heading">#</a></h3>
-<ul class="simple">
-<li><p>Execution Policies generally accept compile time arguments via template parameters and runtime parameters via constructor arguments or setter functions.</p></li>
-<li><p>Template arguments can be given in arbitrary order.</p></li>
-</ul>
-<div class="table-wrapper docutils container">
-<table class="docutils align-default">
-<thead>
-<tr class="row-odd"><th class="head"><p>Argument</p></th>
-<th class="head"><p>Options</p></th>
-<th class="head"><p>Purpose</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>ExecutionSpace</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">Serial</span></code>, <code class="docutils literal notranslate"><span class="pre">OpenMP</span></code>, <code class="docutils literal notranslate"><span class="pre">Threads</span></code>, <code class="docutils literal notranslate"><span class="pre">Cuda</span></code>, <code class="docutils literal notranslate"><span class="pre">HIP</span></code>, <code class="docutils literal notranslate"><span class="pre">SYCL</span></code>, <code class="docutils literal notranslate"><span class="pre">HPX</span></code></p></td>
-<td><p>Specify the Execution Space to execute the kernel in. Defaults to <code class="docutils literal notranslate"><span class="pre">Kokkos::DefaultExecutionSpace</span></code>.</p></td>
-</tr>
-<tr class="row-odd"><td><p>Schedule</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">Schedule&lt;Dynamic&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">Schedule&lt;Static&gt;</span></code></p></td>
-<td><p>Specify scheduling policy for work items. <code class="docutils literal notranslate"><span class="pre">Dynamic</span></code> scheduling is implemented through a work stealing queue. Default is machine and backend specific.</p></td>
-</tr>
-<tr class="row-even"><td><p>IndexType</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">IndexType&lt;int&gt;</span></code></p></td>
-<td><p>Specify integer type to be used for traversing the iteration space. Defaults to <code class="docutils literal notranslate"><span class="pre">int64_t</span></code>.</p></td>
-</tr>
-<tr class="row-odd"><td><p>LaunchBounds</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">LaunchBounds&lt;MaxThreads,</span> <span class="pre">MinBlocks&gt;</span></code></p></td>
-<td><p>Specifies hints to to the compiler about CUDA/HIP launch bounds.</p></td>
-</tr>
-<tr class="row-even"><td><p>WorkTag</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">SomeClass</span></code></p></td>
-<td><p>Specify the work tag type used to call the functor operator. Any arbitrary type defaults to <code class="docutils literal notranslate"><span class="pre">void</span></code>.</p></td>
-</tr>
-</tbody>
-</table>
-</div>
+<section id="general-template-aguments">
+<h3>General Template Aguments<a class="headerlink" href="#general-template-aguments" title="Permalink to this heading">#</a></h3>
+<p>Valid template arguments for <code class="docutils literal notranslate"><span class="pre">MDRangePolicy</span></code> are described <a class="reference external" href="../Execution-Policies.html#common-arguments-for-all-execution-policies">here</a></p>
 </section>
 <section id="required-arguments-specific-to-mdrangepolicy">
 <h3>Required Arguments Specific to MDRangePolicy<a class="headerlink" href="#required-arguments-specific-to-mdrangepolicy" title="Permalink to this heading">#</a></h3>
@@ -764,7 +729,7 @@
 <li><a class="reference internal" href="#usage">Usage</a></li>
 <li><a class="reference internal" href="#interface">Interface</a></li>
 <li><a class="reference internal" href="#parameters">Parameters</a><ul>
-<li><a class="reference internal" href="#common-arguments-for-all-execution-policies">Common Arguments for all Execution Policies</a></li>
+<li><a class="reference internal" href="#general-template-aguments">General Template Aguments</a></li>
 <li><a class="reference internal" href="#required-arguments-specific-to-mdrangepolicy">Required Arguments Specific to MDRangePolicy</a></li>
 </ul>
 </li>
