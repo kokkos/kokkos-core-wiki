@@ -100,6 +100,8 @@ Constructors
    Provide a hint for optimal chunk-size to be used during scheduling.
    For the SYCL backend, the workgroup size used in a ``parallel_for`` kernel can be set via this passed to ``RangePolicy``.
 
+   .. note:: ``ChunkSize`` constructor ``explicit`` since Kokkos 4.4
+
 .. cppkokkos:function:: RangePolicy()
 
    Default Constructor uninitialized policy.
