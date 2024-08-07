@@ -30,7 +30,7 @@ Synopsis
 .. code-block:: cpp
 
     struct Kokkos::ChunkSize {
-        ChunkSize(int value_);
+        explicit ChunkSize(int value_);
     };
 
     template<class ... Args>
@@ -95,7 +95,7 @@ Public Class Members
 Constructors
 ~~~~~~~~~~~~
 
-.. cppkokkos:function:: ChunkSize(int value_)
+.. cppkokkos:function:: explicit ChunkSize(int value_)
 
    Provide a hint for optimal chunk-size to be used during scheduling.
    For the SYCL backend, the workgroup size used in a ``parallel_for`` kernel can be set via this passed to ``RangePolicy``.
