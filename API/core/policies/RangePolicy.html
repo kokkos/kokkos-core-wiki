@@ -545,7 +545,7 @@
 <section id="synopsis">
 <h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this heading">#</a></h2>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span><span class="w"> </span><span class="nc">Kokkos</span><span class="o">::</span><span class="n">ChunkSize</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">ChunkSize</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">value_</span><span class="p">);</span>
+<span class="w">    </span><span class="k">explicit</span><span class="w"> </span><span class="n">ChunkSize</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">value_</span><span class="p">);</span>
 <span class="p">};</span>
 
 <span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="n">Args</span><span class="o">&gt;</span>
@@ -611,9 +611,13 @@
 <h3>Constructors<a class="headerlink" href="#constructors" title="Permalink to this heading">#</a></h3>
 <dl class="cppkokkos function">
 <dt class="sig sig-object cppkokkos" id="_CPPv49ChunkSizei">
-<span id="_CPPv39ChunkSizei"></span><span id="_CPPv29ChunkSizei"></span><span id="ChunkSize__i"></span><span class="sig-name descname"><span class="n"><span class="pre">ChunkSize</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">value_</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv49ChunkSizei" title="Permalink to this definition">#</a><br /></dt>
+<span id="_CPPv39ChunkSizei"></span><span id="_CPPv29ChunkSizei"></span><span id="ChunkSize__i"></span><span class="k"><span class="pre">explicit</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ChunkSize</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">value_</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv49ChunkSizei" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Provide a hint for optimal chunk-size to be used during scheduling.
 For the SYCL backend, the workgroup size used in a <code class="docutils literal notranslate"><span class="pre">parallel_for</span></code> kernel can be set via this passed to <code class="docutils literal notranslate"><span class="pre">RangePolicy</span></code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">ChunkSize</span></code> constructor <code class="docutils literal notranslate"><span class="pre">explicit</span></code> since Kokkos 4.4</p>
+</div>
 </dd></dl>
 
 <dl class="cppkokkos function">
