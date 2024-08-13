@@ -1,0 +1,15 @@
+[default]
+# Don't check text that matches the following regexes'
+extend-ignore-re = []
+
+[default.extend-identifiers]
+# Don't correct these whole identifiers (word-groups)
+
+[default.extend-words]
+# Don't correct these word (parts)
+countr = "countr"
+OT = "OT"
+
+# Don't check the following files
+[files]
+extend-exclude = [] 

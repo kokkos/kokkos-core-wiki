@@ -43,7 +43,7 @@ Assumes the range (or the view) already to be partitioned.
 
 ## Parameters and Requirements
 
-- `exespace`, `first`, `last`, `view`, `pred`: same as in [`is_partioned`](./StdIsPartitioned)
+- `exespace`, `first`, `last`, `view`, `pred`: same as in [`is_partitioned`](./StdIsPartitioned)
   - execution space instance
 - `label`:
   - used to name the implementation kernels for debugging purposes
@@ -52,5 +52,5 @@ Assumes the range (or the view) already to be partitioned.
 
 ## Return
 
-Iterator to the elment *after* the last element in the first partition,
+Iterator to the element *after* the last element in the first partition,
 or `last` if all elements satisfy `pred`.
