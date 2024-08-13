@@ -147,7 +147,7 @@ There are 3 potential states for every insertion which are reported by the ``Uno
 
 - ``failed`` means that either the capacity of the map was exhausted or that a free index was not found
   with a bounded search of the internal atomic bitset. A ``failed`` insertion requires the user to increase
-  the capacity (``rehash``) and restart the algoritm.
+  the capacity (``rehash``) and restart the algorithm.
 
 .. code-block:: cpp
 
