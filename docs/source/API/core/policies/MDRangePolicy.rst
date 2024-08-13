@@ -121,7 +121,7 @@ Member Functions
 ^^^^^^^^^^^^^^^^
 .. cppkokkos:function:: tile_type tile_size_recommended() const
 
-    * Returns a ``Kokkos::Array<array_index_type, rank>`` type containing per-rank tile sizes that ``MDRangePolicy`` interally uses by default. The default tile sizes are static and are set based on specified backend.
+    * Returns a ``Kokkos::Array<array_index_type, rank>`` type containing per-rank tile sizes that ``MDRangePolicy`` interally uses by default. The default tile sizes are static and are set based on the specified backend.
 
 .. cppkokkos:function:: int max_total_tile_size() const
 
