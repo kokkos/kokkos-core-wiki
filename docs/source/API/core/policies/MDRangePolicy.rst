@@ -117,6 +117,16 @@ CTAD Constructors (since 4.3)
    MDRangePolicy pa4(ses, abegin, aend);
    MDRangePolicy pa5(ses, abegin, aend, atiling);
 
+Member Functions
+^^^^^^^^^^^^^^^^
+.. cppkokkos:function:: tile_type tile_size_recommended() const
+
+    * Returns a ``Kokkos::Array<array_index_type, rank>`` type containing per-rank tile sizes that ``MDRangePolicy`` interally uses by default. The default tile sizes are static and are set based on specified backend.
+
+.. cppkokkos:function:: int max_total_tile_size() const
+
+    * Returns a value that represents the upper limit for the product of all tile sizes.
+
 Notes
 ^^^^^
 
