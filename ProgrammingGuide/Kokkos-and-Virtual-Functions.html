@@ -407,7 +407,7 @@
 <li class="toctree-l4"><a class="reference internal" href="../API/algorithms/std-algorithms/all/StdTransformInclusiveScan.html"><code class="docutils literal notranslate"><span class="pre">transform_inclusive_scan</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3 has-children"><a class="reference internal" href="../API/algorithms/std-algorithms/StdPartioningOps.html">Partitioning</a><input class="toctree-checkbox" id="toctree-checkbox-24" name="toctree-checkbox-24" role="switch" type="checkbox"/><label for="toctree-checkbox-24"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../API/algorithms/std-algorithms/StdPartitioningOps.html">Partitioning</a><input class="toctree-checkbox" id="toctree-checkbox-24" name="toctree-checkbox-24" role="switch" type="checkbox"/><label for="toctree-checkbox-24"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="../API/algorithms/std-algorithms/all/StdIsPartitioned.html"><code class="docutils literal notranslate"><span class="pre">is_partitioned</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="../API/algorithms/std-algorithms/all/StdPartitionPoint.html"><code class="docutils literal notranslate"><span class="pre">partition_point</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="../API/algorithms/std-algorithms/all/StdPartitionCopy.html"><code class="docutils literal notranslate"><span class="pre">partition_copy</span></code></a></li>
@@ -572,7 +572,7 @@
 <p>The problem here is that we are constructing the class on the Host. If we were constructing on the Device, we’d get the correct Vpointer, and thus the correct functions (but only for calls on the device). In pseudocode, we want to move from</p>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">Base</span><span class="o">*</span><span class="w"> </span><span class="n">hostInstance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Derived</span><span class="p">();</span><span class="w"> </span><span class="c1">// allocate and initialize host</span>
 <span class="n">Base</span><span class="o">*</span><span class="w"> </span><span class="n">deviceInstance</span><span class="p">;</span><span class="w"> </span><span class="c1">// cudaMalloc&#39;d to allocate</span>
-<span class="n">cudaMemcpy</span><span class="p">(</span><span class="n">deviceInstance</span><span class="p">,</span><span class="w"> </span><span class="n">hostInstance</span><span class="p">);</span><span class="w"> </span><span class="c1">// to initialize the deivce</span>
+<span class="n">cudaMemcpy</span><span class="p">(</span><span class="n">deviceInstance</span><span class="p">,</span><span class="w"> </span><span class="n">hostInstance</span><span class="p">);</span><span class="w"> </span><span class="c1">// to initialize the device</span>
 <span class="n">Kokkos</span><span class="o">::</span><span class="n">parallel_for</span><span class="p">(...</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="c1">// use deviceInstance</span>
 <span class="p">});</span>
@@ -596,7 +596,7 @@ For a full working example, see <a class="reference external" href="https://gith
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">Base</span><span class="o">*</span><span class="w"> </span><span class="n">hostInstance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Derived</span><span class="p">();</span><span class="w"> </span><span class="c1">// allocate and initialize host</span>
 <span class="n">hostInstance</span><span class="o">-&gt;</span><span class="n">setAField</span><span class="p">(</span><span class="n">someHostValue</span><span class="p">);</span>
 <span class="n">Base</span><span class="o">*</span><span class="w"> </span><span class="n">deviceInstance</span><span class="p">;</span><span class="w"> </span><span class="c1">// cudaMalloc&#39;d to allocate</span>
-<span class="n">cudaMemcpy</span><span class="p">(</span><span class="n">deviceInstance</span><span class="p">,</span><span class="w"> </span><span class="n">hostInstance</span><span class="p">);</span><span class="w"> </span><span class="c1">// to initialize the deivce</span>
+<span class="n">cudaMemcpy</span><span class="p">(</span><span class="n">deviceInstance</span><span class="p">,</span><span class="w"> </span><span class="n">hostInstance</span><span class="p">);</span><span class="w"> </span><span class="c1">// to initialize the device</span>
 <span class="n">Kokkos</span><span class="o">::</span><span class="n">parallel_for</span><span class="p">(...</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="c1">// use deviceInstance</span>
 <span class="p">});</span>
@@ -623,7 +623,7 @@ For a full working example, see <a class="reference external" href="https://gith
 <section id="but-what-if-i-do-not-really-need-the-v-tables-on-the-device-side">
 <h2>But what if I do not really need the V-Tables on the device side?<a class="headerlink" href="#but-what-if-i-do-not-really-need-the-v-tables-on-the-device-side" title="Permalink to this heading">#</a></h2>
 <p>Consider the following example which calls the <code class="docutils literal notranslate"><span class="pre">virtual</span> <span class="pre">Bar()</span></code> on the device from a pointer of derived class type.
-One might think this should work because no V-Table lookup on the device is neccessary.</p>
+One might think this should work because no V-Table lookup on the device is necessary.</p>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Kokkos_Core.hpp&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstdio&gt;</span>
 

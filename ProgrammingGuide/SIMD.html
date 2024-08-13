@@ -407,7 +407,7 @@
 <li class="toctree-l4"><a class="reference internal" href="../API/algorithms/std-algorithms/all/StdTransformInclusiveScan.html"><code class="docutils literal notranslate"><span class="pre">transform_inclusive_scan</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3 has-children"><a class="reference internal" href="../API/algorithms/std-algorithms/StdPartioningOps.html">Partitioning</a><input class="toctree-checkbox" id="toctree-checkbox-24" name="toctree-checkbox-24" role="switch" type="checkbox"/><label for="toctree-checkbox-24"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../API/algorithms/std-algorithms/StdPartitioningOps.html">Partitioning</a><input class="toctree-checkbox" id="toctree-checkbox-24" name="toctree-checkbox-24" role="switch" type="checkbox"/><label for="toctree-checkbox-24"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="../API/algorithms/std-algorithms/all/StdIsPartitioned.html"><code class="docutils literal notranslate"><span class="pre">is_partitioned</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="../API/algorithms/std-algorithms/all/StdPartitionPoint.html"><code class="docutils literal notranslate"><span class="pre">partition_point</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="../API/algorithms/std-algorithms/all/StdPartitionCopy.html"><code class="docutils literal notranslate"><span class="pre">partition_copy</span></code></a></li>
@@ -543,7 +543,7 @@ The vendor-specific portions are abstracted away from user code through template
 <p>The reason that SIMD types are so effective at producing high-performance code is that users are directly expressing what the vector parallelism is that they would like, and doing so in a way that is guaranteed to generate the vector instructions they expect.
 When using SIMD types, the compiler cannot fail to auto-vectorize, because auto-vectorization is not part of the picture.
 Users are more clearly able to reason about the available parallelism in their code in ways that an auto-vectorizer is almost never able to do.
-By allowing users to have direct control of how vectorization is done while protecting them from both vendor lock-in and the odd quirks of different vendor instruction sets, SIMD types allow users to write performance portable code accross CPUs and also GPUs.</p>
+By allowing users to have direct control of how vectorization is done while protecting them from both vendor lock-in and the odd quirks of different vendor instruction sets, SIMD types allow users to write performance portable code across CPUs and also GPUs.</p>
 </section>
 <section id="an-example">
 <h2>An Example<a class="headerlink" href="#an-example" title="Permalink to this heading">#</a></h2>

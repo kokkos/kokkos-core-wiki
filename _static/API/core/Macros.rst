@@ -121,7 +121,7 @@ Kokkos was compiled with.
 Third-Party Library Settings
 ----------------------------
 
-These defines give information about what third-party libaries Kokkos was compiled with.
+These defines give information about what third-party libraries Kokkos was compiled with.
 
 +-------------------------------+-----------------------------------------------------------------------------------------------------------------------+
 | Macro                         | Description                                                                                                           |

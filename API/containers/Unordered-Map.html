@@ -407,7 +407,7 @@
 <li class="toctree-l4"><a class="reference internal" href="../algorithms/std-algorithms/all/StdTransformInclusiveScan.html"><code class="docutils literal notranslate"><span class="pre">transform_inclusive_scan</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3 has-children"><a class="reference internal" href="../algorithms/std-algorithms/StdPartioningOps.html">Partitioning</a><input class="toctree-checkbox" id="toctree-checkbox-24" name="toctree-checkbox-24" role="switch" type="checkbox"/><label for="toctree-checkbox-24"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../algorithms/std-algorithms/StdPartitioningOps.html">Partitioning</a><input class="toctree-checkbox" id="toctree-checkbox-24" name="toctree-checkbox-24" role="switch" type="checkbox"/><label for="toctree-checkbox-24"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="../algorithms/std-algorithms/all/StdIsPartitioned.html"><code class="docutils literal notranslate"><span class="pre">is_partitioned</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="../algorithms/std-algorithms/all/StdPartitionPoint.html"><code class="docutils literal notranslate"><span class="pre">partition_point</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="../algorithms/std-algorithms/all/StdPartitionCopy.html"><code class="docutils literal notranslate"><span class="pre">partition_copy</span></code></a></li>
@@ -715,7 +715,7 @@ the operator, op, used for combining values if key already exists</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">existing</span></code>: implies that the key is already in the map and its current value is unchanged</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">failed</span></code> means that either the capacity of the map was exhausted or that a free index was not found
 with a bounded search of the internal atomic bitset. A <code class="docutils literal notranslate"><span class="pre">failed</span></code> insertion requires the user to increase
-the capacity (<code class="docutils literal notranslate"><span class="pre">rehash</span></code>) and restart the algoritm.</p></li>
+the capacity (<code class="docutils literal notranslate"><span class="pre">rehash</span></code>) and restart the algorithm.</p></li>
 </ul>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// use the default NoOp insert operation</span>
 <span class="k">using</span><span class="w"> </span><span class="n">map_op_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">UnorderedMapInsertOpTypes</span><span class="o">&lt;</span><span class="n">value_view_type</span><span class="p">,</span><span class="w"> </span><span class="n">size_type</span><span class="o">&gt;</span><span class="p">;</span>

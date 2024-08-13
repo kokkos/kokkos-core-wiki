@@ -407,7 +407,7 @@
 <li class="toctree-l4"><a class="reference internal" href="../../algorithms/std-algorithms/all/StdTransformInclusiveScan.html"><code class="docutils literal notranslate"><span class="pre">transform_inclusive_scan</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3 has-children"><a class="reference internal" href="../../algorithms/std-algorithms/StdPartioningOps.html">Partitioning</a><input class="toctree-checkbox" id="toctree-checkbox-24" name="toctree-checkbox-24" role="switch" type="checkbox"/><label for="toctree-checkbox-24"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../algorithms/std-algorithms/StdPartitioningOps.html">Partitioning</a><input class="toctree-checkbox" id="toctree-checkbox-24" name="toctree-checkbox-24" role="switch" type="checkbox"/><label for="toctree-checkbox-24"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="../../algorithms/std-algorithms/all/StdIsPartitioned.html"><code class="docutils literal notranslate"><span class="pre">is_partitioned</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../algorithms/std-algorithms/all/StdPartitionPoint.html"><code class="docutils literal notranslate"><span class="pre">partition_point</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../algorithms/std-algorithms/all/StdPartitionCopy.html"><code class="docutils literal notranslate"><span class="pre">partition_copy</span></code></a></li>
@@ -536,7 +536,7 @@ resources.
 Once this function is called, no Kokkos API functions (not even
 <a class="reference external" href="initialize.html">Kokkos::initialize</a>) may be called, except for
 <code class="docutils literal notranslate"><span class="pre">Kokkos::is_initialized</span></code> or <code class="docutils literal notranslate"><span class="pre">Kokkos::is_finalized</span></code>.
-The user must ensure that all Kokkos objects (e.g. <code class="docutils literal notranslate"><span class="pre">Kokkos::View</span></code>) are detroyed
+The user must ensure that all Kokkos objects (e.g. <code class="docutils literal notranslate"><span class="pre">Kokkos::View</span></code>) are destroyed
 before <code class="docutils literal notranslate"><span class="pre">Kokkos::finalize</span></code> gets called.</p>
 <p>Programs are ill-formed if they do not call this function after calling <a class="reference external" href="initialize.html">Kokkos::initialize</a>.</p>
 <section id="interface">

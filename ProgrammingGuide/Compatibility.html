@@ -407,7 +407,7 @@
 <li class="toctree-l4"><a class="reference internal" href="../API/algorithms/std-algorithms/all/StdTransformInclusiveScan.html"><code class="docutils literal notranslate"><span class="pre">transform_inclusive_scan</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3 has-children"><a class="reference internal" href="../API/algorithms/std-algorithms/StdPartioningOps.html">Partitioning</a><input class="toctree-checkbox" id="toctree-checkbox-24" name="toctree-checkbox-24" role="switch" type="checkbox"/><label for="toctree-checkbox-24"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../API/algorithms/std-algorithms/StdPartitioningOps.html">Partitioning</a><input class="toctree-checkbox" id="toctree-checkbox-24" name="toctree-checkbox-24" role="switch" type="checkbox"/><label for="toctree-checkbox-24"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="../API/algorithms/std-algorithms/all/StdIsPartitioned.html"><code class="docutils literal notranslate"><span class="pre">is_partitioned</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="../API/algorithms/std-algorithms/all/StdPartitionPoint.html"><code class="docutils literal notranslate"><span class="pre">partition_point</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="../API/algorithms/std-algorithms/all/StdPartitionCopy.html"><code class="docutils literal notranslate"><span class="pre">partition_copy</span></code></a></li>
@@ -557,7 +557,7 @@
 <section id="user-defined-macros-compatibility">
 <h2>User Defined Macros &amp; Compatibility<a class="headerlink" href="#user-defined-macros-compatibility" title="Permalink to this heading">#</a></h2>
 <p>User defined macros can be particularly problematic, as they change what is lexically seen by the compiler and do not obey the language scoping rules.  They could interfere with variable names, functions, etc., including private ones used in Kokkos and other libraries.</p>
-<p>In order to minimize the risk of collisons, user defined macros should be prefaced with <code class="docutils literal notranslate"><span class="pre">MYPROJECT_</span></code> (or a similar way to disambiguate them) and be in all caps (this informs code readers that macros don’t obey the usual syntactic and semantic rules of C++).</p>
+<p>In order to minimize the risk of collisions, user defined macros should be prefaced with <code class="docutils literal notranslate"><span class="pre">MYPROJECT_</span></code> (or a similar way to disambiguate them) and be in all caps (this informs code readers that macros don’t obey the usual syntactic and semantic rules of C++).</p>
 </section>
 <section id="c-compatibility">
 <h2>C++ Compatibility<a class="headerlink" href="#c-compatibility" title="Permalink to this heading">#</a></h2>

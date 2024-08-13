@@ -407,7 +407,7 @@
 <li class="toctree-l4"><a class="reference internal" href="std-algorithms/all/StdTransformInclusiveScan.html"><code class="docutils literal notranslate"><span class="pre">transform_inclusive_scan</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3 has-children"><a class="reference internal" href="std-algorithms/StdPartioningOps.html">Partitioning</a><input class="toctree-checkbox" id="toctree-checkbox-24" name="toctree-checkbox-24" role="switch" type="checkbox"/><label for="toctree-checkbox-24"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="std-algorithms/StdPartitioningOps.html">Partitioning</a><input class="toctree-checkbox" id="toctree-checkbox-24" name="toctree-checkbox-24" role="switch" type="checkbox"/><label for="toctree-checkbox-24"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="std-algorithms/all/StdIsPartitioned.html"><code class="docutils literal notranslate"><span class="pre">is_partitioned</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="std-algorithms/all/StdPartitionPoint.html"><code class="docutils literal notranslate"><span class="pre">partition_point</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="std-algorithms/all/StdPartitionCopy.html"><code class="docutils literal notranslate"><span class="pre">partition_copy</span></code></a></li>
@@ -668,9 +668,9 @@ are collectives, i.e. all functions can be called inside conditionals.</p>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>A Pool of Generators are intialized using a starting seed and establishing
+<p>A Pool of Generators are initialized using a starting seed and establishing
 a pool_size of num_states. The Random_XorShift64 generator is used in serial
-to initialize all states making the intialization process platform independent
+to initialize all states making the initialization process platform independent
 and deterministic. Requesting a generator locks it’s state guaranteeing that
 each thread has a private (independent) generator. (Note, getting a state on a Cuda
 device involves atomics, making it non-deterministic!)

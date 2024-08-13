@@ -134,7 +134,7 @@ Description
 
    .. cppkokkos:kokkosinlinefunction:: template< typename ReducerType> void team_reduce( ReducerType const & reducer ) const noexcept;
 
-      Performs a reduction accross all members of the team as specified by ``reducer``. ``ReducerType`` must meet the concept of ``Kokkos::Reducer``.
+      Performs a reduction across all members of the team as specified by ``reducer``. ``ReducerType`` must meet the concept of ``Kokkos::Reducer``.
 
    .. cppkokkos:kokkosinlinefunction:: template< typename T > T team_scan( T const & value , T * const global = 0 ) const noexcept;
 
@@ -150,7 +150,7 @@ Examples
 
 .. code-block:: cpp
 
-    typedef TeamPolciy<...> policy_type;
+    typedef TeamPolicy<...> policy_type;
     parallel_for(policy_type(N,TEAM_SIZE).set_scratch_size(PerTeam(0,4096)),
                 KOKKOS_LAMBDA (const typename policy_type::member_type& team_handle) {
         int ts = team_handle.team_size(); // returns TEAM_SIZE

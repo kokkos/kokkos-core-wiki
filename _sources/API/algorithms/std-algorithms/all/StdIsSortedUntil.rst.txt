@@ -115,4 +115,4 @@ Parameters and Requirements
 Return Value
 ~~~~~~~~~~~~
 
-- The last iterator ``it`` for which range ``[first, it)`` is sorted and where the following is true: ``std::is_same_v<decltype(it), IteratorType>``, or for which range ``[Kokkos::Experimental::begin(view), it)`` is sorted. For this second case, note that ``it`` is computed as: ``Kokkos::Experimental::begin(view) + increment`` where ``increment`` is found in the algoritm.
+- The last iterator ``it`` for which range ``[first, it)`` is sorted and where the following is true: ``std::is_same_v<decltype(it), IteratorType>``, or for which range ``[Kokkos::Experimental::begin(view), it)`` is sorted. For this second case, note that ``it`` is computed as: ``Kokkos::Experimental::begin(view) + increment`` where ``increment`` is found in the algorithm.

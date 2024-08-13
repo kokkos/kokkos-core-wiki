@@ -115,7 +115,7 @@ Aliases based on configuration
 
 ``Kokkos::DefaultExecutionSpace`` is an alias of |ExecutionSpaceConceptType|_ pointing to an ``ExecutionSpace``
 based on the current configuration of Kokkos. It is set to the highest available in the hierarchy ``device,host-parallel,host-serial``.
-It also serves as default for optionally specified template prameters of |ExecutionSpaceConceptType|_.
+It also serves as default for optionally specified template parameters of |ExecutionSpaceConceptType|_.
 
 ``Kokkos::DefaultHostExecutionSpace``
 -------------------------------------
@@ -338,6 +338,6 @@ Non Member Facilities
 
 * ``template<class MS> struct is_execution_space;``: typetrait to check whether a class is a execution space.
 
-* ``template<class S1, class S2> struct SpaceAccessibility;``: typetraits to check whether two spaces are compatible (assignable, deep_copy-able, accessable). (see |KokkosSpaceAccessibility|_)
+* ``template<class S1, class S2> struct SpaceAccessibility;``: typetraits to check whether two spaces are compatible (assignable, deep_copy-able, accessible). (see |KokkosSpaceAccessibility|_)
 
 * ``bool operator==(const execution_space& lhs, const execution_space& rhs)``: tests whether the two space instances (of the same type) are identical.

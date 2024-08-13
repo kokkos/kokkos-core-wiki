@@ -23,7 +23,7 @@ Interface
 
 .. cppkokkos:function:: template<class ExecSpace, class ... Args> std::vector<ExecSpace> partition_space(const ExecSpace& space, Args...args);
 
-.. cppkokkos:function:: template<class ExecSpace, class T> std::vector<ExecSpace> partition_space(const ExecSpace& space, std::vector<T> const& weigths);
+.. cppkokkos:function:: template<class ExecSpace, class T> std::vector<ExecSpace> partition_space(const ExecSpace& space, std::vector<T> const& weights);
 
    Creates new execution space instances which dispatch to the same underlying
    hardware resources as an existing execution space instance.

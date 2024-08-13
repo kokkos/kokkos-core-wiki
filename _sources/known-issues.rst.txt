@@ -92,7 +92,7 @@ SYCL
 Mathematical functions
 ======================
 
-- Compatibilty issue with using-directives and mathematical functions:
+- Compatibility issue with using-directives and mathematical functions:
 
 .. code-block:: cpp
 
