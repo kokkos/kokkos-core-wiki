@@ -649,6 +649,33 @@
 </pre></div>
 </div>
 </section>
+<section id="member-functions">
+<h4>Member Functions<a class="headerlink" href="#member-functions" title="Permalink to this heading">#</a></h4>
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK21tile_size_recommendedEv">
+<span id="_CPPv3NK21tile_size_recommendedEv"></span><span id="_CPPv2NK21tile_size_recommendedEv"></span><span id="tile_size_recommendedC"></span><span class="n"><span class="pre">tile_type</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">tile_size_recommended</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK21tile_size_recommendedEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><ul class="simple">
+<li><p>Returns a <code class="docutils literal notranslate"><span class="pre">Kokkos::Array&lt;array_index_type,</span> <span class="pre">rank&gt;</span></code> type containing per-rank tile sizes that <code class="docutils literal notranslate"><span class="pre">MDRangePolicy</span></code> internally uses by default. The default tile sizes are static and are set based on the specified backend.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">tile_size_recommended()</span></code> available since Kokkos 4.5</p>
+</div>
+</dd></dl>
+
+<dl class="cppkokkos function">
+<dt class="sig sig-object cppkokkos" id="_CPPv4NK19max_total_tile_sizeEv">
+<span id="_CPPv3NK19max_total_tile_sizeEv"></span><span id="_CPPv2NK19max_total_tile_sizeEv"></span><span id="max_total_tile_sizeC"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">max_total_tile_size</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK19max_total_tile_sizeEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><ul class="simple">
+<li><p>Returns a value that represents the upper limit for the product of all tile sizes.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">max_total_tile_size()</span></code> available since Kokkos 4.5</p>
+</div>
+</dd></dl>
+
+</section>
 <section id="notes">
 <h4>Notes<a class="headerlink" href="#notes" title="Permalink to this heading">#</a></h4>
 <ul class="simple">
@@ -736,6 +763,7 @@
 <li><a class="reference internal" href="#public-class-members">Public Class Members</a><ul>
 <li><a class="reference internal" href="#constructors">Constructors</a><ul>
 <li><a class="reference internal" href="#ctad-constructors-since-4-3">CTAD Constructors (since 4.3)</a></li>
+<li><a class="reference internal" href="#member-functions">Member Functions</a></li>
 <li><a class="reference internal" href="#notes">Notes</a></li>
 </ul>
 </li>
