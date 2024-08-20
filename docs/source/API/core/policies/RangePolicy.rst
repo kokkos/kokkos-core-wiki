@@ -126,8 +126,7 @@ Preconditions:
 ^^^^^^^^^^^^^^
 
 * The begin index must not be greater than the end index.
-* The actual constructors are templated so we can check that they are converted to ``index_type`` safely (see `#6754 <https://github.com/kokkos/kokkos/pull/6754>`_).
-   * The conversion safety check is performed only if ``index_type`` is convertible to the begin and end index types.
+* The actual constructors are templated so we can check that they are converted to ``index_type`` safely if possible (see `#6754 <https://github.com/kokkos/kokkos/pull/6754>`_).
 
 CTAD Constructors (since 4.3):
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
