@@ -37,6 +37,8 @@ API: Core
      - Utility functionality part of Kokkos Core.
    * - `Detection Idiom <core/Detection-Idiom.html>`__
      - Used to recognize, in an SFINAE-friendly way, the validity of any C++ expression.
+   * - `Graph and related <core/Graph.html>`_
+     - Kokkos Graph abstraction.
    * - `Macros <core/Macros.html>`__
      - Global macros defined by Kokkos, used for architectures, general settings, etc.
 
@@ -60,4 +62,5 @@ API: Core
    ./core/Utilities
    ./core/Detection-Idiom
    ./core/Macros
+   ./core/Graph
    ./core/Profiling
