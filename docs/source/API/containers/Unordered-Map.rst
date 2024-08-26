@@ -96,6 +96,29 @@ Description
 
       Return true if the internal views (keys, values, hashmap) are allocated
 
+   .. cppkokkos:function:: create_copy_view(UnorderedMap<SKey, SValue, SDevice, Hasher, EqualTo> const &src);
+
+      For the calling ``UnorderedMap``, allocate views to have the same capacity as ``src``, and copy data from ``src``.
+
+   .. cppkokkos:function:: allocate_view(UnorderedMap<SKey, SValue, SDevice, Hasher, EqualTo> const &src);
+
+      Allocate views of the calling ``UnorderedMap`` to have the same capacity as ``src``.
+
+   .. cppkokkos:function:: deep_copy_view(UnorderedMap<SKey, SValue, SDevice, Hasher, EqualTo> const &src);
+
+      Copy data from ``src`` to the calling ``UnorderedMap``.
+
+   .. rubric:: Non-Member Functions
+
+   .. cppkokkos:function:: inline void deep_copy(UnorderedMap<DKey, DT, DDevice, Hasher, EqualTo> &dst, const UnorderedMap<SKey, ST, SDevice, Hasher, EqualTo> &src);
+
+      Copy an ``UnorderedMap`` from ``src`` to ``dst``.
+
+      .. warning::  From Kokkos 4.4, ``src.capacity() == dst.capacity()`` is required
+
+   .. cppkokkos:function:: UnorderedMap<Key, ValueType, Device, Hasher, EqualTo>::HostMirror create_mirror(const UnorderedMap<Key, ValueType, Device, Hasher, EqualTo> &src);
+
+      Create a ``HostMirror`` for an ``UnorderedMap``.
 
 .. cppkokkos:class:: UnorderedMapInsertResult
 
