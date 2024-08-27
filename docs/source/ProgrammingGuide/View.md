@@ -413,7 +413,7 @@ A View's entries are initialized to zero by default. Initialization happens in p
 You may allocate a View without initializing. For example:
 
 ```c++
-Kokkos::View<int*> x (Kokkos::ViewAllocateWithoutInitializing (label), 100000);
+Kokkos::View<int*> x (Kokkos::view_alloc(Kokkos::WithoutInitializing, label), 100000);
 ```
 
 This is mainly useful in cases when the initial values of the view are not important because
