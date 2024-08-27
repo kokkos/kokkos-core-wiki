@@ -171,6 +171,9 @@ Graph topology is known at compile, thus enabling a lot of optimizations (kernel
 
     auto node_A = then(graph, parallel_...(...label..., ...policy..., ...functor...));
 
+    // what happens to an exec space instance passed to the policy ? is it used somehow or just ignored ?
+    // when dispatching the driver to global memory, what exec space instance is used for the async copies ?
+
     auto node_B = then(node_A, parallel_...(...label..., ...policy..., ...functor...));
     auto node_C = then(node_A, parallel_...(...label..., ...policy..., ...functor...));
 
@@ -348,3 +351,26 @@ For instance, disabling a node from host (:code:`hipGraphNodeSetEnabled`, not in
     The user is not required to wait on any previous submissions of a graph before updating it.
 
 As the topology is fixed, we can only reasonably update kernel parameters.
+
+Iterative process
+-----------------
+
+- iterative solver (our assembly case)
+- line search in optimization
+
+
+
+They also use graphs...
+-----------------------
+
+* `PyTorch` https://pytorch.org/blog/accelerating-pytorch-with-cuda-graphs/
+* `GROMACS` https://developer.nvidia.com/blog/a-guide-to-cuda-graphs-in-gromacs-2023/
+
+
+Homework
+
+- what does Kokkos during dispatching ? (HIP CUDA SYCL) Execution space instance from the policy, used or ignored ?
+- for each example 3 columns how to write it in CUDA SYCL P2300 Kokkos
+- développer l'update
+- essayer de démontrer qu'on peut écrire un seul code, et dire si on veut que ce soit un graph ou pas
+  (why it matters: write single source code , kokkos premise 'single source code')
