@@ -460,6 +460,14 @@ in a way that reflects how first-touch affinity to threads is desired.
 Typically it is sufficient to use the parallel iteration index as the index of the location in the
 view to write to.
 
+.. warning::
+
+  :cppkokkos:`WithoutInitialization` implies that the destructor of each element of the :cppkokkos:`View` **will not be called**.
+  For instance, if the :cppkokkos:`View`'s value type is not trivially destructible,
+  you **should not use** :cppkokkos:`WithoutInitialization` unless you are taking care of calling the destructor manually before the :cppkokkos:`View` deallocates its memory.
+
+  The mental model is that whenever placement new is used to call the constructor, the destructor also isn't called before the memory is deallocated but it needs to be called manually.
+
 6.4.3 Deep copy and HostMirror
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
