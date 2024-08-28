@@ -415,13 +415,11 @@ The following is the accessibility matrix for execution and memory spaces:
 
 .. csv-table::
 
-  ,Serial, OpenMP, Threads, Cuda, HIP,
-  HostSpace,           x , x , x ,   ,  ,
-  CudaSpace,             ,   ,   , x ,  ,
-  CudaUVMSpace,        x , x , x , x ,  ,
-  CudaHostPinnedSpace, x , x , x , x ,  ,
-  HIPSpace,              ,   ,   ,  , x ,
-  HIPHostPinnedSpace,  x , x , x ,  , x ,
+  ,Serial, OpenMP, Threads, Cuda
+  HostSpace,           :octicon:`check` , :octicon:`check` , :octicon:`check` , :octicon:`x`     ,
+  CudaSpace,           :octicon:`x`     , :octicon:`x`     , :octicon:`x`     , :octicon:`check` ,
+  CudaUVMSpace,        :octicon:`check` , :octicon:`check` , :octicon:`check` , :octicon:`check` ,
+  CudaHostPinnedSpace, :octicon:`check` , :octicon:`check` , :octicon:`check` , :octicon:`check` ,
 
 This relationship can be queried via the `SpaceAccessibility` class:
 
@@ -534,7 +532,7 @@ A user is in most cases also allowed to obtain a pointer to a specific element v
     someLibraryFunction(&x(3));
   }
 
-This is only valid if a Views reference type is an `lvalue`. That property can be queried statically at compile time from the view through its `reference_is_lvalue` member.
+This is only valid if a Views reference type is an `lvalue`. That property can be queried statically at compile time from the view through its `reference_type_is_lvalue` member.
 
 
 6.5 Access traits
