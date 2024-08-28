@@ -415,13 +415,11 @@ The following is the accessibility matrix for execution and memory spaces:
 
 .. csv-table::
 
-  ,Serial, OpenMP, Threads, Cuda, HIP,
-  HostSpace,           :octicon:`check` , :octicon:`check` , :octicon:`check` , :octicon:`x`     , :octicon:`x` ,
-  CudaSpace,           :octicon:`x`     , :octicon:`x`     , :octicon:`x`     , :octicon:`check` , :octicon:`x` ,
-  CudaUVMSpace,        :octicon:`check` , :octicon:`check` , :octicon:`check` , :octicon:`check` , :octicon:`x` ,
-  CudaHostPinnedSpace, :octicon:`check` , :octicon:`check` , :octicon:`check` , :octicon:`check` , :octicon:`x` ,
-  HIPSpace,            :octicon:`x`     , :octicon:`x`     , :octicon:`x`     , :octicon:`x`     , :octicon:`check` ,
-  HIPHostPinnedSpace,  :octicon:`check` , :octicon:`check` , :octicon:`check` , :octicon:`x`     , :octicon:`check` ,
+  ,Serial, OpenMP, Threads, Cuda
+  HostSpace,           :octicon:`check` , :octicon:`check` , :octicon:`check` , :octicon:`x`     ,
+  CudaSpace,           :octicon:`x`     , :octicon:`x`     , :octicon:`x`     , :octicon:`check` ,
+  CudaUVMSpace,        :octicon:`check` , :octicon:`check` , :octicon:`check` , :octicon:`check` ,
+  CudaHostPinnedSpace, :octicon:`check` , :octicon:`check` , :octicon:`check` , :octicon:`check` ,
 
 This relationship can be queried via the `SpaceAccessibility` class:
 
