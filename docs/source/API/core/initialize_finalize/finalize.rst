@@ -1,3 +1,5 @@
+.. _kokkos_finalize:
+
 ``finalize``
 ============
 
