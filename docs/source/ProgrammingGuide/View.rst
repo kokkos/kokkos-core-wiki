@@ -534,7 +534,7 @@ A user is in most cases also allowed to obtain a pointer to a specific element v
     someLibraryFunction(&x(3));
   }
 
-This is only valid if a Views reference type is an `lvalue`. That property can be queried statically at compile time from the view through its `reference_is_lvalue` member.
+This is only valid if a Views reference type is an `lvalue`. That property can be queried statically at compile time from the view through its `reference_type_is_lvalue` member.
 
 
 6.5 Access traits
