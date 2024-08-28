@@ -743,7 +743,7 @@ specified).</p>
 </pre></div>
 </div>
 <p>The lifetime of an allocation ends when there are no more Views which reference that allocation (see reference counting above).</p>
-<p>Kokkos requires that the lifetime of all allocations ends before the call to [<cite>Kokkos::finalize</cite>](../API/core/initialize_finalize/finalize)!</p>
+<p>Kokkos requires that the lifetime of all allocations ends before the call to <a class="reference internal" href="../API/core/initialize_finalize/finalize.html#kokkos-finalize"><span class="std std-ref">Kokkos::finalize</span></a>.</p>
 <p>For example, the following is incorrect usage of Kokkos:</p>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">initialize</span><span class="p">();</span>
