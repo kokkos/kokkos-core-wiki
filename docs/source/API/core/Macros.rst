@@ -11,7 +11,7 @@ Version Macros
    * - Version integer macros
      - Example value assuming Kokkos version 4.2.1
    * - ``KOKKOS_VERSION``
-     - ``4'02'01``
+     - ``40201``
    * - ``KOKKOS_VERSION_MAJOR``
      - ``4``
    * - ``KOKKOS_VERSION_MINOR``
