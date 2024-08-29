@@ -70,7 +70,7 @@ the three arguments ``major.minor.patch``.  These are available since Kokkos
    static_assert(KOKKOS_VERSION_GREATER_EQUAL(4, 5, 0));
 
    void do_work() {
-     #if KOKKOS_VERSION_GREATER_EQUAL(4, 1, 0)
+     #if KOKKOS_VERSION_GREATER_EQUAL(4, 3, 0)
      // using the new rad functionality
      #else
      // falling back to the old boring stuff
