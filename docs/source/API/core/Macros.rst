@@ -6,12 +6,18 @@ Version Macros
 
 .. list-table::
    :header-rows: 1
+   :align: left
 
    * - Version integer macros
+     - Example value assuming Kokkos version 4.2.1
    * - ``KOKKOS_VERSION``
+     - ``4'02'01``
    * - ``KOKKOS_VERSION_MAJOR``
+     - ``4``
    * - ``KOKKOS_VERSION_MINOR``
+     - ``2``
    * - ``KOKKOS_VERSION_PATCH``
+     - ``1``
 
 Kokkos version macros are defined as integers.
 ``KOKKOS_VERSION`` is equal to ``<MAJOR>*10000 + <MINOR>*100 + <PATCH>``.
@@ -39,6 +45,7 @@ corresponds to the Kokkos development version post release 4.1
 
 .. list-table::
    :header-rows: 1
+   :align: left
 
    * - Function-like version helper macros (since Kokkos 4.1)
    * - ``KOKKOS_VERSION_LESS(major, minor, patch)``
