@@ -12,11 +12,17 @@ sender library_stuff(sender start)
     if constexpr (Kokkos::is_a_sender<sender>) {
         exec_A = exec_B = start;
     } else {
-        std::tie(exec_A, exec_B) = Kokkos::partition_space(start, 1, 1);
+        /// How do we partition ?
+        exec_A = start;
+        exec_B = Kokkos::partition_space(start, 1);
     }
 
     auto node_xpy = Kokkos::parallel_for(exec_A, policy(N), MyAxpby{x, y, alpha, beta});
     auto node_zpy = Kokkos::parallel_for(exec_B, policy(N), MyAxpby{z, y, gamma, beta});
+
+    /// In the non-graph case,how do we enforce that e.g. node_zpy is done and launch
+    /// the parallel-reduce on the same execution space instance as node_xpy without writing
+    /// any additional piece of code ?
 
     /// No need to fence, because @c Kokkos::when_all will take care of that.
     return Kokkos::parallel_reduce(
@@ -28,30 +34,40 @@ sender library_stuff(sender start)
 
 int main()
 {
-    scheduler auto exec = Kokkos::DefaultExecutionSpace{};
+    /// A @c Kokkos execution space instance is a scheduler.
+    stdexec::scheduler auto scheduler = Kokkos::DefaultExecutionSpace{};
 
     /**
-    * Start the chain of nodes with an "empty" node, similar to @c std::execution::schedule.
-    * Under the hood, it creates the @c Kokkos::Graph.
-    * All nodes created from this sender will share a handle to the underlying @c Kokkos::Graph.
-    */
-    sender auto start = Kokkos::construct_empty_node(exec);
+     * Start the chain of nodes with an "empty" node, similar to @c std::execution::schedule.
+     * Under the hood, it creates the @c Kokkos::Graph.
+     * All nodes created from this sender will share a handle to the underlying @c Kokkos::Graph.
+     */
+    stdexec::sender auto start = Kokkos::Graph::schedule(scheduler);
 
-    sender auto seeding = Kokkos::parallel_for(start, policy(N), SomeWork{...});
+    /// @c Kokkos::parallel_for would behave much like @c std::execution::bulk.
+    stdexec::sender auto my_work = Kokkos::parallel_for(start, policy(N), ForFunctor{...});
 
     /// Pass our chain to some external library function.
-    sender auto subgraph = library_stuff(seeding);
+    stdexec::sender auto subgraph = library_stuff(mywork);
 
-    sender auto last_action = Kokkos::parallel_scan(subgraph, policy(N), ScanFunctor{...});
+    /// Add some work again.
+    stdexec::sender auto my_other_work = Kokkos::parallel_scan(subgraph, policy(N), ScanFunctor{...});
 
-    /// @c Kokkos has a free function for instantiating the underlying graph.
-    /// All nodes connected to the same handle are notified that they cannot be used as senders anymore,
-    /// because they are locked in an instantiated graph.
-    sender auto executable_whatever = Kokkos::Graph::instantiate(last_action);
+    /// @c Kokkos::Graph has a free function for instantiating the underlying graph.
+    /// All nodes connected to the same handle (i.e. that are on the same chain) are notified
+    /// that they cannot be used as senders anymore,
+    /// because they are locked in an instantiated graph. In other words, the chain is a DAG, and it
+    /// cannot change anymore.
+    stdexec::sender auto executable_chain = Kokkos::Graph::instantiate(my_other_work);
 
-    /// Submission is a no-op if the received sender is an execution space instance.
+    /// Submission is a no-op if the passed sender is a @c Kokkos execution space instance.
     /// Otherwise, it submits the underlying graph.
-    Kokkos::Graph::submit(my_exec, executable_whatever)
+    Kokkos::Graph::submit(scheduler, executable_chain)
 
-    my_exec.fence();
+    ::stdexec::sync_wait(scheduler);
+
+    /// Submit the chain again, using another scheduler.
+    /// In essence, what @c Kokkos::Graph::submit can do is pertty much similar to what
+    /// @c std::execution::starts_on does. It allows the sender to be executed elsewhere.
+    Kokkos::Graph::submit(another_scheduler, executable_chain);
 }
