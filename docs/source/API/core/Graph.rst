@@ -312,6 +312,21 @@ relies on `Kokkos` for both *instantiation* and *submission*.
     kokkos_graph.instantiate();
     kokkos_graph.submit();
 
+Interweaving
+~~~~~~~~~~~~
+
+When a user does not use :cppkokkos:`Graph`, but calls some external library function that does.
+
+In this case, :code:`submit` really needs to be passed an execution space instance to ensure that the graph
+is nicely inserted into the user's kernel queues.
+
+Stated verbosely:
+
+    The stream-based (execution space instance based) approach can co-exist in the same code with
+    the graph-based approach, thereby making :cppkokkos:`Graph` a very attractive abstraction.
+    A use case in which "at the global level" the code uses a stream-based approach can play well with
+    some (possibly external) calls that use :cppkokkos:`Graph` under the hood.
+
 Graph update
 ~~~~~~~~~~~~
 
@@ -324,28 +339,9 @@ For instance, disabling a node from host (:code:`hipGraphNodeSetEnabled`) can su
 
 As the topology is fixed, we can only reasonably update kernel parameters or skip a node.
 
-.. graphviz::
-    :caption: Some iterative loop that needs to seed under some condition (to be enhanced).
-
-    digraph graph_update {
-
-        S[label="start", shape=diamond];
-
-        A[label="seed"];
-        B[label="compute"];
-        C[label="solve"];
-        
-        S -> A[color=green];
-        
-        A -> B[color=green];
-        
-        B -> C;
-        
-        C -> S;
-        
-        S -> B[color="red"];
-
-    }
+.. tikz:: Some iterative loop that needs to seed under some condition, as well as a library call for compute.
+   :include: Graph.update.tikz
+   :libs: backgrounds, calc, positioning, shapes
 
 Iterative processes
 ~~~~~~~~~~~~~~~~~~~
@@ -376,6 +372,16 @@ Let's take the `AXPBY` micro-benchmark from https://hihat.opencommons.org/images
 .. literalinclude:: Graph.axpby.kokkos.graph.cpp
     :language: c++
     :caption: Current :cppkokkos:`Kokkos::Graph`.
+
+Why/when should I choose :cppkokkos:`Kokkos::Graph`
+---------------------------------------------------
+
+Two obvious but different cases:
+
+#. A few kernels, probably small, easily manually stream-managed, submitted several times. Then using :cppkokkos:`Graph`
+   will help you reduce kernel launch overheads. TODO: link to A1 A2 A3 B graph.
+#. A lot of kernels, very complex DAG, probably not worth it thinking too much how they could be efficiently orchestrated
+   if :cppkokkos:`Graph` guarentees that it will take care of that for you.
 
 They also use graphs...
 -----------------------
