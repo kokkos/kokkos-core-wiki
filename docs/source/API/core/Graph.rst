@@ -377,10 +377,6 @@ Let's take the `AXPBY` micro-benchmark from https://hihat.opencommons.org/images
     :language: c++
     :caption: Current :cppkokkos:`Kokkos::Graph`.
 
-.. literalinclude:: Graph.axpby.kokkos.graph.p2300.cpp
-    :language: c++
-    :caption: *à la* P2300.
-
 They also use graphs...
 -----------------------
 
@@ -405,6 +401,17 @@ We should be able to write a single source code and decide if we want the graph 
 execute nodes.
 
 This would greatly benefit adoption, and respect `Kokkos` single source code promise.
+
+Design we would like to agree on
+--------------------------------
+
+This should be the kind of design we'd like to have (kind of conforming to P2300).
+
+Might be worth reading: https://docs.nvidia.com/hpc-sdk/archive/23.9/pdf/hpc239c++_par_alg.pdf.
+
+.. literalinclude:: Graph.axpby.kokkos.graph.p2300.cpp
+    :language: c++
+    :caption: *à la* P2300.
 
 References
 ----------
