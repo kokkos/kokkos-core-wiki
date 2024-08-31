@@ -17,21 +17,20 @@ Usage
                                 .set_num_threads(1));
 
 
-``ScopeGuard`` is a class which ensure thats `Kokkos::initialize <initialize.html#kokkosinitialize>`_ and
-`Kokkos::finalize <finalize.html#kokkosfinalize>`_ are called correctly even in the presence of unhandled
-exceptions.
+``ScopeGuard`` is a class to initialize and finalize Kokkos using RAII.
 It calls `Kokkos::initialize <initialize.html#kokkosinitialize>`_ with the provided arguments in the
 constructor and `Kokkos::finalize <finalize.html#kokkosfinalize>`_ in the destructor.
+For correct usage, it is mandatory to create a named instance of a ``ScopeGuard`` before any calls to Kokkos are issued.
 
 
-.. warning:: Change of behavior in version 3.7 (see below)
+.. warning:: Change of behavior in version 3.7 (see below). ``ScopeGuard`` will abort if either ``is_intialized()`` or ``is_finalized()`` return ``true``.
 
 Description
 -----------
 
 .. cpp:class:: ScopeGuard
 
-    A class ensuring that ``Kokkos::initialize`` and ``Kokkos::finalize`` are called correctly even in the presence of unhandled exceptions.
+    A class calling ``Kokkos::initialize`` at the start of its lifetime and ``Kokkos::finalize`` at the end of its lifetime.
 
     .. rubric:: Constructors
 
