@@ -17,7 +17,7 @@ Usage
                                 .set_num_threads(1));
 
 
-``ScopeGuard`` is a class to initialize and finalize Kokkos using RAII.
+``ScopeGuard`` is a class to initialize and finalize Kokkos using `RAII <https://en.cppreference.com/w/cpp/language/raii>`_.
 It calls `Kokkos::initialize <initialize.html#kokkosinitialize>`_ with the provided arguments in the
 constructor and `Kokkos::finalize <finalize.html#kokkosfinalize>`_ in the destructor.
 For correct usage, it is mandatory to create a named instance of a ``ScopeGuard`` before any calls to Kokkos are issued.
