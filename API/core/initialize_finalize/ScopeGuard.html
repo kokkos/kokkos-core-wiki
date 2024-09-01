@@ -534,14 +534,13 @@
 <span class="w">                            </span><span class="p">.</span><span class="n">set_num_threads</span><span class="p">(</span><span class="mi">1</span><span class="p">));</span>
 </pre></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">ScopeGuard</span></code> is a class which ensure thats <a class="reference external" href="initialize.html#kokkosinitialize">Kokkos::initialize</a> and
-<a class="reference external" href="finalize.html#kokkosfinalize">Kokkos::finalize</a> are called correctly even in the presence of unhandled
-exceptions.
+<p><code class="docutils literal notranslate"><span class="pre">ScopeGuard</span></code> is a class to initialize and finalize Kokkos using <a class="reference external" href="https://en.cppreference.com/w/cpp/language/raii">RAII</a>.
 It calls <a class="reference external" href="initialize.html#kokkosinitialize">Kokkos::initialize</a> with the provided arguments in the
-constructor and <a class="reference external" href="finalize.html#kokkosfinalize">Kokkos::finalize</a> in the destructor.</p>
+constructor and <a class="reference external" href="finalize.html#kokkosfinalize">Kokkos::finalize</a> in the destructor.
+For correct usage, it is mandatory to create a named instance of a <code class="docutils literal notranslate"><span class="pre">ScopeGuard</span></code> before any calls to Kokkos are issued.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>Change of behavior in version 3.7 (see below)</p>
+<p>Change of behavior in version 3.7 (see below). <code class="docutils literal notranslate"><span class="pre">ScopeGuard</span></code> will abort if either <code class="docutils literal notranslate"><span class="pre">is_intialized()</span></code> or <code class="docutils literal notranslate"><span class="pre">is_finalized()</span></code> return <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p>
 </div>
 </section>
 <section id="description">
@@ -549,7 +548,7 @@ constructor and <a class="reference external" href="finalize.html#kokkosfinalize
 <dl class="cpp class">
 <dt class="sig sig-object cpp" id="_CPPv410ScopeGuard">
 <span id="_CPPv310ScopeGuard"></span><span id="_CPPv210ScopeGuard"></span><span id="ScopeGuard"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ScopeGuard</span></span></span><a class="headerlink" href="#_CPPv410ScopeGuard" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>A class ensuring that <code class="docutils literal notranslate"><span class="pre">Kokkos::initialize</span></code> and <code class="docutils literal notranslate"><span class="pre">Kokkos::finalize</span></code> are called correctly even in the presence of unhandled exceptions.</p>
+<dd><p>A class calling <code class="docutils literal notranslate"><span class="pre">Kokkos::initialize</span></code> at the start of its lifetime and <code class="docutils literal notranslate"><span class="pre">Kokkos::finalize</span></code> at the end of its lifetime.</p>
 <p class="rubric">Constructors</p>
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N10ScopeGuard10ScopeGuardERiA_Pc">
