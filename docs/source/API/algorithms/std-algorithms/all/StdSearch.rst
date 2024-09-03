@@ -179,6 +179,6 @@ Return Value
   of the sequence ``[s_first, s_last)`` in the range ``[first, last)``, or ``last`` if no such element is found.
   If the sequence ``[s_first, s_last)`` is empty, ``first`` is returend.
 
-- for overloads accepting Views: returns a Kokkos iterator to the first element in ``view`` that markes the beginning of ``s_view``
+- for overloads accepting Views: returns a Kokkos iterator to the first element in ``view`` that marks the beginning of ``s_view``
   or ``Kokkos::Experimental::end(view)`` if no such element is found.
   If the sequence ``[s_first, s_last)`` is empty, ``Kokkos::Experimental::begin(view)`` is returend.
