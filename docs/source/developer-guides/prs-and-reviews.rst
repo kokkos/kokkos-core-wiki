@@ -38,7 +38,7 @@ Public Interfaces
 Internal Implementation
 -----------------------
 
-- is the implementation style consistent with the rest of Kokkos
+- Format proposed code using clang utility, "clang-format -i," to be consistent with the Kokkos code base
 - is there unnecessary code duplication
   - in particular: is code that can be shared across backends shared?
 - did it go in the right sub-part of Kokkos (core, algorithms, containers etc.)

@@ -161,6 +161,8 @@ Examples
 
   Prefer working and compilable examples to prose descriptions (such as "Usage").
 
+  Example code should be formatted (in a separate temporary file) using the clang compiler "clang-format -i" utility, and subsequently transferred to documentation entry. 
+
 .. code-block:: cpp
 
   #include <Kokkos_Core.hpp>
