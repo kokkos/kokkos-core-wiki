@@ -127,19 +127,8 @@ There are numerous device backends, options, and architecture-specific optimizat
  -DCMAKE_INSTALL_PREFIX=${my_install_folder} \
  -DKokkos_ENABLE_OPENMP=On
 ```
-which activates the OpenMP backend. All the options controlling device backends, options, architectures, and third-party libraries (TPLs) are given below under the keywords listing.
+which activates the OpenMP backend. All the options controlling device backends, options, architectures, and third-party libraries (TPLs) are given in [CMake Keywords](../keywords).
 
-### Using generate_makefile.bash
-As an alternative to calling the cmake command directly, the generate_makefile.bash command can be used to configure the CMake build environment.  The generate_makefile.bash equivalent to the above OpenMP example is as follows:
-
-```bash
-> ${srcdir}/generate_makefile.bash --compiler=g++ \
-  --with-openmp --prefix=${my_install_folder}
-```
-For a full list of generate_makefile.bash options use the command
-```bash
-> ${srcdir}/generate_makefile.bash --help
-```
 
 ### Spack
 An alternative to manually building with CMake is to use the Spack package manager.
@@ -255,7 +244,6 @@ A word of caution on where to include the `Makefile.kokkos`: since the embedded 
 
 More example application Makefiles can be found in the tutorial examples under `kokkos/example/tutorial`.
 
-Kokkos provides a script `generate_makefile.bash` which can generate a Makefile for building and installing the library as well as building and running the tests. Please run `generate_makefile.bash --help` to see options. Note that paths given to the script must be absolute paths, and the script must be run with the `bash` shell (the script will do this if it is run directly, i.e., as `./generate_makefile.bash`).
 
 <h4>Table 4.4: Variables for the GNU Makefile</h4>
 
@@ -266,9 +254,9 @@ Variable  | Description
 `KOKKOS_DEVICES (IN)` | Execution and Memory Spaces that should be enabled.
 `Options`<br>`    Default` | OpenMP, Serial, C++ Threads, Cuda <br> OpenMP
 `KOKKOS_ARCH (IN)` | The backend architecture to build for.
-`Options` <br><br><br> `Default` | KNL, KNC, SNB, HSW, BDW, Kepler, Kepler30, Kepler35, Kepler37, Maxwell, Maxwell50, Pascal60, Pascal61, ARMv8, ARMv81, ARMv8-ThunderX, BGQ, Power7, Power8 <br><br> (no particular architecture flags are set).
+`Options` <br><br><br> `Default` | KNL, KNC, SNB, HSW, BDW, Kepler, Kepler30, Kepler35, Kepler37, Maxwell, Maxwell50, Pascal60, Pascal61, ARMv8, ARMv81, ARMv8-ThunderX, Power8 <br><br> (no particular architecture flags are set).
 `KOKKOS_USE_TPLS (IN)` | Enable optional third party libraries.
-`Options` <br> `Default`  | hwloc, librt, experimental_memkind <br> (none)
+`Options` <br> `Default`  | hwloc, libdl <br> (none)
 `KOKKOS_OPTIONS (IN)` | Enable optional settings
 `Options` <br> `Default` | aggressive_vectorization <br> (none)
 `KOKKOS_CUDA_OPTIONS (IN)` | Enable optional settings specific to CUDA.

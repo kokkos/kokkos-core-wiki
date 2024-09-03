@@ -84,12 +84,12 @@ void compute_force(View<int**> neighbours, View<double*> values) {
 
 There are also atomic operations which return the old or the new value. They follow the [`atomic_fetch_[op]`](../API/core/atomics/atomic_fetch_op) and [`atomic_[op]_fetch`](../API/core/atomics/atomic_op_fetch) naming scheme. For example if one would want to find all the indices of negative values in an array and store them in a list this would be the algorithm:
 ```c++
-void find_indicies(View<int*> indicies, View<double*> values) {
+void find_indices(View<int*> indices, View<double*> values) {
   View<int> count("Count");
-  parallel_for("FindIndicies", values.extent(0), KOKKOS_LAMBDA(const int i) {
+  parallel_for("FindIndices", values.extent(0), KOKKOS_LAMBDA(const int i) {
     if(values(i) < 0) {
       int index = atomic_fetch_add(&count(),1);
-      indicies(index) = i;
+      indices(index) = i;
     }
   });
 }
@@ -128,7 +128,7 @@ void create_histogram(View<int*> histogram, int min, int max, View<int*> values)
 ## 10.4 ScatterView
 
 On CPUs one often uses low thread counts, in particular if Kokkos is used in conjunction with MPI. 
-In such situations data replication is often a more performance approach, than using atomic operations. 
+In such situations data replication often performs better than using atomic operations. 
 In order to still have portable code, one can use the [`ScatterView`](../API/containers/ScatterView). It allows the transparent switch at
 compile time from using atomic operations to using data replication depending on the underlying hardware. 
 

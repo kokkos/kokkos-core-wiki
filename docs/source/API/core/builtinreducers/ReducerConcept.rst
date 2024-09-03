@@ -33,14 +33,17 @@ Synopsis
             void join(value_type& dest, const value_type& src) const;
 
             KOKKOS_INLINE_FUNCTION
-            void init(value_type& val) const;
-
-            KOKKOS_INLINE_FUNCTION
             value_type& reference() const;
 
             KOKKOS_INLINE_FUNCTION
             result_view_type view() const;
 
+            //Optional
+            KOKKOS_INLINE_FUNCTION
+            void init(value_type& val) const;
+
+            KOKKOS_INLINE_FUNCTION
+            void final(value_type& val) const;
 
             //Part of Build-In reducers for Kokkos
             KOKKOS_INLINE_FUNCTION
@@ -82,7 +85,12 @@ Functions
 
 .. cppkokkos:kokkosinlinefunction:: void init(value_type& val) const;
 
-    * Initialize ``val`` with appropriate initial value. For example, 'Add' assigns ``val = 0;``, but Prod assigns ``val = 1;``
+    * Optional callback initializing ``val`` with appropriate initial value. For example, 'Add' assigns ``val = 0;``, but Prod assigns ``val = 1;``.
+      Defaults to calling the default constructor.
+
+.. cppkokkos:kokkosinlinefunction:: void final(value_type& val) const;
+
+    * Optional callback modifying the result ``val``. Defaults to a no-op.
 
 .. cppkokkos:kokkosinlinefunction:: value_type& reference() const;
 

@@ -49,7 +49,7 @@ Requirements:
 
   - The ``WorkTag`` free form of the operator is used if ``ExecPolicy`` is an ``IntegerType`` or ``ExecPolicy::work_tag`` is ``void``.
   - ``HandleType`` is an ``IntegerType`` if ``ExecPolicy`` is an ``IntegerType`` else it is ``ExecPolicy::member_type``.
-* The type ``ReturnType`` of the ``functor`` operator must be compatible with the ``ReturnType`` of the parallel_scan and must match the arguments of the ``init`` and ``join`` functions of the functor.
+* The type ``ReturnType`` of the ``functor`` operator must be compatible with the ``ReturnType`` of the parallel_scan and must match the arguments of the ``init`` and ``join`` functions of the functor if provided. If the functor doesn't have an ``init`` member function, it is assumed that the identity for the scan operation is given by the default constructor of the value type (and not by ``reduction_identity```).
 * the functor must define FunctorType::value_type the same as ReturnType
 
 Semantics
@@ -58,6 +58,8 @@ Semantics
 * Neither concurrency nor order of execution are guaranteed.
 * The ``ReturnType`` content will be overwritten, i.e. the value does not need to be initialized to the reduction-neutral element.
 * The input value to the operator may contain a partial result, Kokkos may only combine the thread local contributions in the end. The operator should modify the input value according to the desired scan operation.
+* It is not guaranteed that the functor will ever be called with ``final = false``.
+* The functor might be called multiple times with ``final = false`` and the user has to make sure that the behavior in this case stays the same for repeated calls.
 
 Examples
 --------

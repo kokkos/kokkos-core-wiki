@@ -1,3 +1,5 @@
+.. _kokkos_finalize:
+
 ``finalize``
 ============
 
@@ -16,12 +18,12 @@ Terminates the Kokkos execution environment.
 This functions cleans up all Kokkos states and released the associated
 resources.
 Once this function is called, no Kokkos API functions (not even
-`Kokkos::initialize <initialize.html#kokkosinitialize>`_) may be called, except for
+`Kokkos::initialize <initialize.html>`_) may be called, except for
 ``Kokkos::is_initialized`` or ``Kokkos::is_finalized``.
-The user must ensure that all Kokkos objects (e.g. ``Kokkos::View``) are detroyed
+The user must ensure that all Kokkos objects (e.g. ``Kokkos::View``) are destroyed
 before ``Kokkos::finalize`` gets called.
 
-Programs are ill-formed if they do not call this function after calling `Kokkos::initialize <initialize.html#kokkosinitialize>`_.
+Programs are ill-formed if they do not call this function after calling `Kokkos::initialize <initialize.html>`_.
 
 Interface
 ---------
@@ -54,3 +56,9 @@ Example
         }  // scope of my_view ends here
         Kokkos::finalize();
     }
+
+
+See also
+--------
+* `Kokkos::initialize <initialize.html>`_: initializes the Kokkos execution environment
+* `Kokkos::push_finalize_hook <push_finalize_hook.html>`_: registers a function to be called on ``Kokkos::finalize()`` invocation

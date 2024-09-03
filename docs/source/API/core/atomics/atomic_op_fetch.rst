@@ -100,11 +100,11 @@ Description
 
 .. cppkokkos:function:: template<class T> T atomic_sub_fetch(T* const ptr_to_value, const T value);
 
-   Atomically executes ``*ptr_to_value -= value``.
+   Atomically executes ``*ptr_to_value -= value; return *ptr_to_value;``.
 
    * ``ptr_to_value``: address of the to be updated value.
 
-   * ``value``: value to be substracted.
+   * ``value``: value to be subtracted.
 
 .. cppkokkos:function:: template<class T> T atomic_xor_fetch(T* const ptr_to_value, const T value);
 

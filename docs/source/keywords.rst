@@ -19,55 +19,96 @@ This page is organized in four sections:
 
 .. _keywords_backends:
 
-Device Backends
-===============
+Backend selection
+=================
+
+**Default State:**
+All backends are disabled by default.  This ensures you explicitly choose the
+backends you need for your specific hardware setup.
+If no backend is enabled explicitly, the Serial backend will be enabled.
+
+**Enabling Backends:**
+You can enable backends by configuring with ``-DKokkos_ENABLE_<BACKEND>=ON``
+flag, where ``<BACKEND>`` is replaced with the specific backend you want to
+enable (e.g. ``-DKokkos_ENABLE_CUDA=ON`` for CUDA).
+
+**Restrictions:**
+  Mutual Exclusion: You can only have one device backend (e.g., CUDA, HIP,
+  SYCL) and one host parallel backend (e.g., OpenMP, C++ threads) enabled at
+  the same time. This is because these backends manage parallelism in
+  potentially conflicting ways.
+
+  Host Backend Requirement: At least one host backend must always be enabled.
+  This is because Kokkos code execution typically starts on the host (CPU)
+  before potentially being offloaded to devices (GPUs, accelerators). If you
+  don't explicitly enable a host backend, Kokkos will automatically enable the
+  Serial backend, which provides a sequential execution model.
+
+Serial backend
+--------------
 
 .. list-table::
-    :widths: 25 65 10
+    :widths: 25 65
     :header-rows: 1
     :align: left
 
     * -
       - Description/info
-      - Default
-
-    * - ``Kokkos_ENABLE_CUDA``
-      - To build CUDA backend
-      - ``OFF``
-
-    * - ``Kokkos_ENABLE_OPENMP``
-      - To build OpenMP backend
-      - ``OFF``
-
-    * - ``Kokkos_ENABLE_THREADS``
-      - To build C++ Threads backend
-      - ``OFF``
 
     * - ``Kokkos_ENABLE_SERIAL``
-      - To build serial backend
-      - ``ON``
+      - To build the Serial backend targeting CPUs
+
+Host parallel backends
+----------------------
+
+.. list-table::
+    :widths: 25 65
+    :header-rows: 1
+    :align: left
+
+    * -
+      - Description/info
+
+    * - ``Kokkos_ENABLE_OPENMP``
+      - To build the OpenMP backend targeting CPUs
+
+    * - ``Kokkos_ENABLE_THREADS``
+      - To build the C++ Threads backend
+
+    * - ``Kokkos_ENABLE_HPX``
+      - :red:`[Experimental]` To build the HPX backend
+
+Device backends
+---------------
+
+.. list-table::
+    :widths: 25 65
+    :header-rows: 1
+    :align: left
+
+    * -
+      - Description/info
+
+    * - ``Kokkos_ENABLE_CUDA``
+      - To build the CUDA backend targeting NVIDIA GPUs
 
     * - ``Kokkos_ENABLE_HIP``
-      - To build HIP backend
-      - ``OFF``
+      - To build the HIP backend targeting AMD GPUs
+
+    * - ``Kokkos_ENABLE_SYCL``
+      - :red:`[Experimental]` To build the SYCL backend targeting Intel GPUs
 
     * - ``Kokkos_ENABLE_OPENMPTARGET``
       - :red:`[Experimental]` To build the OpenMP target backend
-      - ``OFF``
-
-    * - ``Kokkos_ENABLE_SYCL``
-      - :red:`[Experimental]` To build SYCL backend
-      - ``OFF``
-
-    * - ``Kokkos_ENABLE_HPX``
-      - :red:`[Experimental]` To build HPX backend
-      - ``OFF``
 
 
 .. _keywords_enable_options:
 
-Enable Options
-===============
+Options
+=======
+
+General options
+---------------
 
 .. list-table::
     :widths: 25 65 35
@@ -78,13 +119,72 @@ Enable Options
       - Description/info
       - Default
 
+    * * ``Kokkos_ENABLE_BENCHMARKS``
+      * Build benchmarks
+      * ``OFF``
+
+    * * ``Kokkos_ENABLE_EXAMPLES``
+      * Build examples
+      * ``OFF``
+
+    * * ``Kokkos_ENABLE_TESTS``
+      * Build tests
+      * ``OFF``
+
+    * * ``Kokkos_ENABLE_DEPRECATED_CODE_3``
+      * Enable deprecated code in the Kokkos 3.x series :red:`[Removed in 4.3]`
+      * ``OFF``
+
+    * * ``Kokkos_ENABLE_DEPRECATED_CODE_4``
+      * Enable deprecated code in the Kokkos 4.x series
+      * ``ON``
+
+    * * ``Kokkos_ENABLE_DEPRECATION_WARNINGS``
+      * Whether to raise warnings at compile time when using deprecated Kokkos facilities
+      * ``ON``
+
+    * * ``Kokkos_ENABLE_TUNING``
+      * Create bindings for tuning tools
+      * ``OFF``
+
     * * ``Kokkos_ENABLE_AGGRESSIVE_VECTORIZATION``
       * Aggressively vectorize loops
       * ``OFF``
 
-    * * ``Kokkos_ENABLE_COMPILER_WARNINGS``
-      * Print all compiler warnings
+Debugging
+---------
+.. list-table::
+    :widths: 25 65 35
+    :header-rows: 1
+    :align: left
+
+    * -
+      - Description/info
+      - Default
+
+    * * ``Kokkos_ENABLE_DEBUG``
+      * Activate extra debug features - may increase compile times
       * ``OFF``
+
+    * * ``Kokkos_ENABLE_DEBUG_BOUNDS_CHECK``
+      * Use bounds checking - will increase runtime
+      * ``OFF``
+
+    * * ``Kokkos_ENABLE_DEBUG_DUALVIEW_MODIFY_CHECK``
+      * Debug check on dual views
+      * ``OFF``
+
+
+Backend-specific options
+------------------------
+.. list-table::
+    :widths: 25 65 35
+    :header-rows: 1
+    :align: left
+
+    * -
+      - Description/info
+      - Default
 
     * * ``Kokkos_ENABLE_CUDA_CONSTEXPR``
       * Activate experimental relaxed constexpr functions
@@ -106,26 +206,6 @@ Enable Options
       * Use unified memory (UM) by default for CUDA
       * ``OFF``
 
-    * * ``Kokkos_ENABLE_DEBUG``
-      * Activate extra debug features - may increase compile times
-      * ``OFF``
-
-    * * ``Kokkos_ENABLE_DEBUG_BOUNDS_CHECK``
-      * Use bounds checking - will increase runtime
-      * ``OFF``
-
-    * * ``Kokkos_ENABLE_DEBUG_DUALVIEW_MODIFY_CHECK``
-      * Debug check on dual views
-      * ``OFF``
-
-    * * ``Kokkos_ENABLE_DEPRECATED_CODE``
-      * Enable deprecated code
-      * ``OFF``
-
-    * * ``Kokkos_ENABLE_EXAMPLES``
-      * Enable building examples
-      * ``OFF``
-
     * * ``Kokkos_ENABLE_HIP_MULTIPLE_KERNEL_INSTANTIATIONS``
       * Instantiate multiple kernels at compile time - improve performance but increase compile time
       * ``OFF``
@@ -134,20 +214,38 @@ Enable Options
       * Enable relocatable device code (RDC) for HIP
       * ``OFF``
 
-    * * ``Kokkos_ENABLE_LARGE_MEM_TESTS``
-      * Perform extra large memory tests
-      * ``OFF``
-
-    * * ``Kokkos_ENABLE_TESTS``
-      * Build tests
-      * ``OFF``
-
-    * * ``Kokkos_ENABLE_TUNING``
-      * Create bindings for tuning tools
+    * * ``Kokkos_ENABLE_ATOMICS_BYPASS``
+      * Disable atomics when no host parallel nor device backend is enabled for Serial only builds (since Kokkos 4.3)
       * ``OFF``
        
 
 ``Kokkos_ENABLE_CUDA_LAMBDA`` default value is ``OFF`` until 3.7 and ``ON`` since 4.0
+
+Development
+-----------
+These are intended for developers of Kokkos.  If you are a user, you probably
+should not be setting these.
+
+.. list-table::
+    :widths: 25 65 35
+    :header-rows: 1
+    :align: left
+
+    * -
+      - Description/info
+      - Default
+
+    * * ``Kokkos_ENABLE_COMPILER_WARNINGS``
+      * Print all compiler warnings
+      * ``OFF``
+
+    * * ``Kokkos_ENABLE_HEADER_SELF_CONTAINMENT_TESTS``
+      * Check that headers are self-contained
+      * ``OFF``
+
+    * * ``Kokkos_ENABLE_LARGE_MEM_TESTS``
+      * Perform extra large memory tests
+      * ``OFF``
 
 .. _keywords_tpls:
 
@@ -157,29 +255,31 @@ Third-party Libraries (TPLs)
 The following options control enabling TPLs:
 
 .. list-table::
-    :widths: 30 60 10
+    :widths: 30 40 10 20
     :header-rows: 1
     :align: left
 
     * -
       - Description/info
       - Default
+      - Notes
 
-    * * ``Kokkos_ENABLE_HPX``
-      * Whether to enable the HPX library
-      * ``OFF``
     * * ``Kokkos_ENABLE_HWLOC``
       * Whether to enable the HWLOC library
-      * ``Off``
-    * * ``Kokkos_ENABLE_MEMKIND``
-      * Whether to enable the MEMKIND library
-      * ``Off``
+      * ``OFF``
+      *
     * * ``Kokkos_ENABLE_LIBDL``
       * Whether to enable the LIBDL library
-      * ``On``
-    * * ``Kokkos_ENABLE_LIBRT``
-      * Whether to enable the LIBRT library
-      * ``Off``
+      * ``ON``
+      *
+    * * ``Kokkos_ENABLE_ONEDPL``
+      * Whether to enable the oneDPL library when using the SYCL backend
+      * ``ON``
+      *
+    * * ``Kokkos_ENABLE_ROCTHRUST``
+      * Whether to enable the rocThrust library when using the HIP backend
+      * ``ON``
+      * (since Kokkos 4.3)
 
 The following options control finding and configuring non-CMake TPLs:
 
@@ -200,16 +300,8 @@ The following options control finding and configuring non-CMake TPLs:
       * Location of HWLOC install prefix
       * PATH Default:
 
-    * * ``Kokkos_MEMKIND_DIR`` or ``MEMKIND_ROOT``
-      * Location of MEMKIND install prefix
-      * PATH Default:
-
     * * ``Kokkos_LIBDL_DIR`` or ``LIBDL_ROOT``
       * Location of LIBDL install prefix
-      * PATH Default:
-
-    * * ``Kokkos_LIBRT_DIR`` or ``LIBRT_ROOT``
-      * Location of LIBRT install prefix
       * PATH Default:
 
 The following options control ``find_package`` paths for CMake-based TPLs:
@@ -229,8 +321,11 @@ The following options control ``find_package`` paths for CMake-based TPLs:
 
 .. _keywords_arch:
 
-Architecture Keywords
-=====================
+Architectures
+=============
+
+CPU architectures
+-----------------
 
 .. list-table::
     :widths: 25 65 10
@@ -247,38 +342,6 @@ Architecture Keywords
 
     * * ``Kokkos_ARCH_A64FX``
       * Optimize for ARMv8.2 with SVE Support
-      * ``OFF``
-
-    * * ``Kokkos_ARCH_ADA89``
-      * Optimize for the NVIDIA Ada generation CC 8.9 :sup:`since Kokkos 4.1`
-      * ``OFF``
-
-    * * ``Kokkos_ARCH_AMD_GFX906``
-      * Optimize for AMD GPU MI50/MI60 GFX906 :sup:`since Kokkos 4.2`
-      * ``OFF``
-
-    * * ``Kokkos_ARCH_AMD_GFX908``
-      * Optimize for AMD GPU MI100 GFX908 :sup:`since Kokkos 4.2`
-      * ``OFF``
-
-    * * ``Kokkos_ARCH_AMD_GFX90A``
-      * Optimize for AMD GPU MI200 series GFX90A :sup:`since Kokkos 4.2`
-      * ``OFF``
-
-    * * ``Kokkos_ARCH_AMD_GFX1030``
-      * Optimize for AMD GPU V620/W6800 GFX1030 :sup:`since Kokkos 4.2` 
-      * ``OFF``
-    
-    * * ``Kokkos_ARCH_AMD_GFX1100``
-      * Optimize for AMD GPU 7900xt GFX1100 :sup:`since Kokkos 4.2` 
-      * ``OFF``
-
-    * * ``Kokkos_ARCH_AMPERE80``
-      * Optimize for the NVIDIA Ampere generation CC 8.0
-      * ``OFF``
-
-    * * ``Kokkos_ARCH_AMPERE86``
-      * Optimize for the NVIDIA Ampere generation CC 8.6
       * ``OFF``
 
     * * ``Kokkos_ARCH_AMDAVX``
@@ -305,60 +368,8 @@ Architecture Keywords
       * Optimize for BDW architecture
       * ``OFF``
 
-    * * ``Kokkos_ARCH_BGQ``
-      * Optimize for BGQ architecture
-      * ``OFF``
-
-    * * ``Kokkos_ARCH_HOPPER90``
-      * Optimize for the NVIDIA Hopper generation CC 9.0 :sup:`since Kokkos 4.0`
-      * ``OFF``
-
     * * ``Kokkos_ARCH_HSW``
       * Optimize for HSW architecture
-      * ``OFF``
-
-    * * ``Kokkos_ARCH_INTEL_GEN``
-      * Optimize for Intel GPUs, Just-In-Time compilation*
-      * ``OFF``
-
-    * * ``Kokkos_ARCH_INTEL_DG1``
-      * Optimize for Intel Iris XeMAX GPU
-      * ``OFF``
-
-    * * ``Kokkos_ARCH_INTEL_GEN9``
-      * Optimize for Intel GPU Gen9
-      * ``OFF``
-
-    * * ``Kokkos_ARCH_INTEL_GEN11``
-      * Optimize for Intel GPU Gen11
-      * ``OFF``
-
-    * * ``Kokkos_ARCH_INTEL_GEN12LP``
-      * Optimize for Intel GPU Gen12LP
-      * ``OFF``
-
-    * * ``Kokkos_ARCH_INTEL_XEHP``
-      * Optimize for Intel GPU Xe-HP
-      * ``OFF``
-
-    * * ``Kokkos_ARCH_INTEL_PVC``
-      * Optimize for Intel GPU Ponte Vecchio/GPU Max
-      * ``OFF``
-
-    * * ``Kokkos_ARCH_KEPLER30``
-      * Optimize for KEPLER30 architecture
-      * ``OFF``
-
-    * * ``Kokkos_ARCH_KEPLER32``
-      * Optimize for KEPLER32 architecture
-      * ``OFF``
-
-    * * ``Kokkos_ARCH_KEPLER35``
-      * Optimize for KEPLER35 architecture
-      * ``OFF``
-
-    * * ``Kokkos_ARCH_KEPLER37``
-      * Optimize for KEPLER37 architecture
       * ``OFF``
 
     * * ``Kokkos_ARCH_KNC``
@@ -367,34 +378,6 @@ Architecture Keywords
 
     * * ``Kokkos_ARCH_KNL``
       * Optimize for KNL architecture
-      * ``OFF``
-
-    * * ``Kokkos_ARCH_MAXWELL50``
-      * Optimize for MAXWELL50 architecture
-      * ``OFF``
-
-    * * ``Kokkos_ARCH_MAXWELL52``
-      * Optimize for MAXWELL52 architecture
-      * ``OFF``
-
-    * * ``Kokkos_ARCH_MAXWELL53``
-      * Optimize for MAXWELL53 architecture
-      * ``OFF``
-
-    * * ``Kokkos_ARCH_NAVI1030``
-      * Optimize for AMD GPU V620/W6800 GFX1030 :sup:`since Kokkos 4.0` (Prefer ``Kokkos_ARCH_AMD_GFX1030``)
-      * ``OFF``
-
-    * * ``Kokkos_ARCH_PASCAL60``
-      * Optimize for PASCAL60 architecture
-      * ``OFF``
-
-    * * ``Kokkos_ARCH_PASCAL61``
-      * Optimize for PASCAL61 architecture
-      * ``OFF``
-
-    * * ``Kokkos_ARCH_POWER7``
-      * Optimize for POWER7 architecture
       * ``OFF``
 
     * * ``Kokkos_ARCH_POWER8``
@@ -417,38 +400,6 @@ Architecture Keywords
       * Optimize for Sapphire Rapids architecture
       * ``OFF``
 
-    * * ``Kokkos_ARCH_TURING75``
-      * Optimize for TURING75 architecture
-      * ``OFF``
-
-    * * ``Kokkos_ARCH_VEGA900``
-      * Optimize for AMD GPU MI25 GFX900 :sup:`removed in 4.0`
-      * ``OFF``
-
-    * * ``Kokkos_ARCH_VEGA906``
-      * Optimize for AMD GPU MI50/MI60 GFX906 (Prefer ``Kokkos_ARCH_AMD_GFX906``)
-      * ``OFF``
-
-    * * ``Kokkos_ARCH_VEGA908``
-      * Optimize for AMD GPU MI100 GFX908 (Prefer ``Kokkos_ARCH_AMD_GFX908``)
-      * ``OFF``
-
-    * * ``Kokkos_ARCH_VEGA90A``
-      * Optimize for AMD GPU MI200 series GFX90A (Prefer ``Kokkos_ARCH_AMD_GFX90A``)
-      * ``OFF``
-
-    * * ``Kokkos_ARCH_VOLTA70``
-      * Optimize for VOLTA70 architecture
-      * ``OFF``
-
-    * * ``Kokkos_ARCH_VOLTA72``
-      * Optimize for VOLTA72 architecture
-      * ``OFF``
-
-    * * ``Kokkos_ARCH_WSM``
-      * Optimize for WSM architecture
-      * ``OFF``
-
     * * ``Kokkos_ARCH_ZEN``
       * Optimize for Zen architecture
       * ``OFF``
@@ -461,39 +412,256 @@ Architecture Keywords
       * Optimize for Zen3 architecture
       * ``OFF``
 
-\* ``Kokkos_ARCH_INTEL_GEN`` enables Just-In-Time compilation for Intel GPUs whereas all the other flags for Intel compilers
-request Ahead-Of-Time compilation. Just-In-Time compilation means that the compiler is invoked again when the binaries created
-are actually executed and only at that point the architecture to compile for is determined. On the other hand, Ahead-Of-Time
-compilation describes the standard model where the compiler is only invoked once to create the binary and the architecture to
-compile for is determined before the program is run.
 
-.. _kweyword_amd:
+GPU Architectures
+-----------------
 
-AMD Architectures
-=================
+NVIDIA GPUs
+~~~~~~~~~~~
+
+The Kokkos naming convention is to aggregate the eponym of the Nvidia GPU
+microarchitecture and the associated CUDA Compute Capability.
+
+``Kokkos_ARCH_<MICROARCHITECTURE><COMPUTE_CAPABILITY>``
+
+If the CUDA backend is enabled and no NVIDIA GPU architecture is specified,
+Kokkos will attempt to autodetect the architecture flag at configuration time.
 
 .. list-table::
-    :widths: 65 35
+    :widths: 20 15 15 25 30
     :header-rows: 1
     :align: left
 
-    * - AMD GPU
-      - Kokkos ARCH
+    * - **NVIDIA GPUs**
+      - Architecture
+      - Compute Capability
+      - Models
+      - Notes
+
+    * * ``Kokkos_ARCH_HOPPER90``
+      * Hopper
+      * 9.0
+      * H100
+      * (since Kokkos 4.0)
+
+    * * ``Kokkos_ARCH_ADA89``
+      * Ada Lovelace
+      * 8.9
+      * L4, L40
+      * (since Kokkos 4.1)
+
+    * * ``Kokkos_ARCH_AMPERE86``
+      * Ampere
+      * 8.6
+      * A40, A10, A16, A2
+      *
+
+    * * ``Kokkos_ARCH_AMPERE80``
+      * Ampere
+      * 8.0
+      * A100, A30
+      *
+
+    * * ``Kokkos_ARCH_TURING75``
+      * Turing
+      * 7.5
+      * T4
+      *
+
+    * * ``Kokkos_ARCH_VOLTA72``
+      * Volta
+      * 7.2
+      *
+      *
+
+    * * ``Kokkos_ARCH_VOLTA70``
+      * Volta
+      * 7.0
+      * V100
+      *
+
+    * * ``Kokkos_ARCH_PASCAL61``
+      * Pascal
+      * 6.1
+      * P40, P4
+      *
+
+    * * ``Kokkos_ARCH_PASCAL60``
+      * Pascal
+      * 6.0
+      * P100
+      *
+
+    * * ``Kokkos_ARCH_MAXWELL53``
+      * Maxwell
+      * 5.3
+      *
+      *
+
+    * * ``Kokkos_ARCH_MAXWELL52``
+      * Maxwell
+      * 5.2
+      * M60, M40
+      *
+
+    * * ``Kokkos_ARCH_MAXWELL50``
+      * Maxwell
+      * 5.0
+      *
+      *
+
+    * * ``Kokkos_ARCH_KEPLER37``
+      * Kepler
+      * 3.7
+      * K80
+      *
+
+    * * ``Kokkos_ARCH_KEPLER35``
+      * Kepler
+      * 3.5
+      * K40, K20
+      *
+
+    * * ``Kokkos_ARCH_KEPLER32``
+      * Kepler
+      * 3.2
+      *
+      *
+
+    * * ``Kokkos_ARCH_KEPLER30``
+      * Kepler
+      * 3.0
+      * K10
+      *
+
+
+AMD GPUs
+~~~~~~~~
+
+The Kokkos naming convention is to aggregate AMD\_ and the architecture flag.
+
+``Kokkos_ARCH_AMD_<ARCHITECTURE_FLAG>``
+
+If the HIP backend is enabled and no AMD GPU architecture is specified,
+Kokkos will attempt to autodetect the architecture flag at configuration time.
+
+.. list-table::
+    :widths: 30 15 25 30
+    :header-rows: 1
+    :align: left
+
+    * - **AMD GPUs**
+      - Architecture flags
+      - Models
+      - Notes
+
+    * * ``Kokkos_ARCH_AMD_GFX942``
+      * GFX942
+      * MI300A, MI300X
+      * (since Kokkos 4.2)
+
+    * * ``Kokkos_ARCH_AMD_GFX940``
+      * GFX940
+      * MI300A (pre-production)
+      * (since Kokkos 4.2.1)
+
+    * * ``Kokkos_ARCH_AMD_GFX90A``
+      * GFX90A
+      * MI200 series 
+      * (since Kokkos 4.2)
+
+    * * ``Kokkos_ARCH_AMD_GFX908``
+      * GFX90A
+      * MI100
+      * (since Kokkos 4.2)
+
+    * * ``Kokkos_ARCH_AMD_GFX906``
+      * GFX906
+      * MI50, MI60
+      * (since Kokkos 4.2)
     
-    * * ``7900xt``
-      * AMD_GFX1100
-      
-    * * ``MI50/MI60``
-      * AMD_GFX906
-      
-    * * ``MI100``
-      * AMD_GFX908
-      
-    * * ``MI200`` series: ``MI210``, ``MI250``, ``MI250X``
-      * AMD_GFX90A
-    
-    * * ``V620``
-      * AMD_GFX1030
-     
-    * * ``W6800``
-      * AMD_GFX1030
+    * * ``Kokkos_ARCH_AMD_GFX1100``
+      * GFX1100
+      * 7900xt
+      * (since Kokkos 4.2)
+
+    * * ``Kokkos_ARCH_AMD_GFX1030``
+      * GFX1030
+      * V620, W6800
+      * (since Kokkos 4.2)
+
+    * * ``Kokkos_ARCH_VEGA90A``
+      * GFX90A
+      * MI200 series
+      * Prefer ``Kokkos_ARCH_AMD_GFX90A``
+
+    * * ``Kokkos_ARCH_VEGA908``
+      * GFX908
+      * MI100 
+      * Prefer ``Kokkos_ARCH_AMD_GFX908``
+
+    * * ``Kokkos_ARCH_VEGA906``
+      * GFX906
+      * MI50, MI60 
+      * Prefer ``Kokkos_ARCH_AMD_GFX906``
+
+    * * ``Kokkos_ARCH_VEGA900``
+      * GFX900
+      * MI25 
+      * removed in 4.0
+
+Intel GPUs
+~~~~~~~~~~
+
+.. list-table::
+    :widths: 25 35 40
+    :header-rows: 1
+    :align: left
+
+    * - CMake option
+      - Architecture
+      - Models
+
+    * * ``Kokkos_ARCH_INTEL_PVC``
+      * Xe-HPC (Ponte Vecchio)
+      * Intel Data Center GPU Max 1550
+
+    * * ``Kokkos_ARCH_INTEL_XEHP``
+      * Xe-HP
+      *
+
+    * * ``Kokkos_ARCH_INTEL_DG1``
+      * Iris Xe MAX (DG1)
+      *
+
+    * * ``Kokkos_ARCH_INTEL_GEN12LP``
+      * Gen12LP
+      * Intel UHD Graphics 770
+
+    * * ``Kokkos_ARCH_INTEL_GEN11``
+      * Gen11
+      * Intel UHD Graphics
+
+    * * ``Kokkos_ARCH_INTEL_GEN9``
+      * Gen9
+      * Intel HD Graphics 510, Intel Iris Pro Graphics 580
+
+    * *
+      *
+      *
+
+    * * ``Kokkos_ARCH_INTEL_GEN``
+      * Just-In-Time compilation*
+      *
+
+\* ``Kokkos_ARCH_INTEL_GEN`` enables Just-In-Time compilation for Intel GPUs
+whereas all the other flags for Intel compilers request Ahead-Of-Time
+compilation.
+
+Just-In-Time (JIT) compilation means that the compiler is invoked again when
+the binaries created are actually executed and only at that point the
+architecture to compile for is determined.
+
+On the other hand, Ahead-Of-Time (AOT) compilation describes the standard model
+where the compiler is only invoked once to create the binary and the
+architecture to compile for is determined before the program is run.

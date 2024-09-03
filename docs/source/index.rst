@@ -83,6 +83,7 @@ Website Content
 .. toctree::
    :maxdepth: 1
 
+   quick_start
    programmingguide
    requirements
    building
@@ -100,5 +101,6 @@ Website Content
    videolectures
    GitHub Repo <https://github.com/kokkos/kokkos>
    contributing
+   faq
    citation
    license

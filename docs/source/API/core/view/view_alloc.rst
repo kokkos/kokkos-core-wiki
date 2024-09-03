@@ -32,14 +32,20 @@ Create View allocation parameter bundle from argument list. Valid argument list 
 Description
 -----------
 
-.. cppkokkos:function:: template <class... Args> impl_defined view_alloc(Args const&... args)
+.. cppkokkos:function:: template <class... Args> ALLOC_PROP view_alloc(Args const&... args)
 
    Create View allocation parameter bundle from argument list.
 
    ``args`` : Cannot contain a pointer to memory.
 
-.. cppkokkos:function:: template <class... Args> impl_defined view_wrap(Args const&... args)
+.. cppkokkos:function:: template <class... Args> ALLOC_PROP view_wrap(Args const&... args)
 
    Create View allocation parameter bundle from argument list.
 
    ``args`` : Can only be a pointer to memory.
+
+.. cppkokkos:type:: ALLOC_PROP
+
+   :cppkokkos:type:`ALLOC_PROP` is a special, unspellable implementation-defined type that is returned by :cppkokkos:func:`view_alloc`
+   and :cppkokkos:func:`view_wrap`. It represents a bundle of allocator parameters, including the View label, the memory space instance,
+   the execution space instance, whether to initialize the memory, whether to allow padding, and the raw pointer value (for wrapped unmanaged views).

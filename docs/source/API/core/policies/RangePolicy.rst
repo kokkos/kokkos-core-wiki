@@ -11,25 +11,34 @@ Usage
 
 .. code-block:: cppkokkos
 
-    Kokkos::RangePolicy<>(begin, end, args...)
-    Kokkos::RangePolicy<ARGS>(begin, end, args...)
-    Kokkos::RangePolicy<>(Space(), begin, end, args...)
-    Kokkos::RangePolicy<ARGS>(Space(), begin, end, args...)
+    Kokkos::RangePolicy<...>(begin, end)
+    Kokkos::RangePolicy<...>(begin, end, chunk_size)
+    Kokkos::RangePolicy<...>(exec, begin, end)
+    Kokkos::RangePolicy<...>(exec, begin, end, chunk_size)
 
-RangePolicy defines an execution policy for a 1D iteration space starting at begin and going to end with an open interval.
+    // CTAD Constructors (since 4.3)
+    Kokkos::RangePolicy(begin, end)
+    Kokkos::RangePolicy(begin, end, chunk_size)
+    Kokkos::RangePolicy(exec, begin, end)
+    Kokkos::RangePolicy(exec, begin, end, chunk_size)
+
+RangePolicy defines an execution policy for a 1D iteration space starting at ``begin`` and going to ``end`` with an open interval.
 
 Synopsis
 --------
 
 .. code-block:: cpp
 
-    template<class ... Args>
-    class Kokkos::RangePolicy {
-        typedef RangePolicy execution_policy;
-        typedef typename traits::index_type member_type ;
-        typedef typename traits::index_type index_type;
+    struct Kokkos::ChunkSize {
+        explicit ChunkSize(int value_);
+    };
 
-        //Inherited from PolicyTraits<Args...>
+    template<class ... Args>
+    struct Kokkos::RangePolicy {
+        using execution_policy = RangePolicy;
+        using member_type = PolicyTraits<Args...>::index_type;
+
+        // Inherited from PolicyTraits<Args...>
         using execution_space   = PolicyTraits<Args...>::execution_space;
         using schedule_type     = PolicyTraits<Args...>::schedule_type;
         using work_tag          = PolicyTraits<Args...>::work_tag;
@@ -37,59 +46,48 @@ Synopsis
         using iteration_pattern = PolicyTraits<Args...>::iteration_pattern;
         using launch_bounds     = PolicyTraits<Args...>::launch_bounds;
 
-        //Constructors
+        // Constructors
         RangePolicy(const RangePolicy&) = default;
         RangePolicy(RangePolicy&&) = default;
 
-        inline RangePolicy();
+        RangePolicy();
 
-        template<class ... Args>
-        inline RangePolicy( const execution_space & work_space
-                          , const member_type work_begin
-                          , const member_type work_end
-                          , Args ... args);
+        RangePolicy( index_type work_begin
+                   , index_type work_end );
 
-        template<class ... Args>
-        inline RangePolicy( const member_type work_begin
-                          , const member_type work_end
-                          , Args ... args);
+        RangePolicy( index_type work_begin
+                   , index_type work_end
+                   , ChunkSize chunk_size );
+
+        RangePolicy( const execution_space & work_space
+                   , index_type work_begin
+                   , index_type work_end );
+
+        RangePolicy( const execution_space & work_space
+                   , index_type work_begin
+                   , index_type work_end
+                   , ChunkSize chunk_size );
 
         // retrieve chunk_size
-        inline member_type chunk_size() const;
+        index_type chunk_size() const;
         // set chunk_size to a discrete value
-        inline RangePolicy set_chunk_size(int chunk_size_);
+        RangePolicy& set_chunk_size(int chunk_size_);
 
         // return ExecSpace instance provided to the constructor
-        KOKKOS_INLINE_FUNCTION const execution_space & space() const;
+        KOKKOS_FUNCTION const execution_space & space() const;
         // return Range begin
-        KOKKOS_INLINE_FUNCTION member_type begin() const;
+        KOKKOS_FUNCTION member_type begin() const;
         // return Range end
-        KOKKOS_INLINE_FUNCTION member_type end()   const;
+        KOKKOS_FUNCTION member_type end()   const;
     };
 
 Parameters
 ----------
 
-Common Arguments for all Execution Policies
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+General Template Aguments
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
-* Execution Policies generally accept compile time arguments via template parameters and runtime parameters via constructor arguments or setter functions.
-
-* Template arguments can be given in arbitrary order.
-
-+-------------------+---------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Argument          | Options                                                                   | Purpose                                                                                                                                                 |
-+===================+===========================================================================+=========================================================================================================================================================+
-| ExecutionSpace    | ``Serial``, ``OpenMP``, ``Threads``, ``Cuda``, ``HIP``, ``SYCL``, ``HPX`` | Specify the Execution Space to execute the kernel in. Defaults to ``Kokkos::DefaultExecutionSpace``.                                                    |
-+-------------------+---------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Schedule          | ``Schedule<Dynamic>``, ``Schedule<Static>``                               | Specify scheduling policy for work items. ``Dynamic`` scheduling is implemented through a work stealing queue. Default is machine and backend specific. |
-+-------------------+---------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
-| IndexType         | ``IndexType<int>``                                                        | Specify integer type to be used for traversing the iteration space. Defaults to ``int64_t``.                                                            |
-+-------------------+---------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
-| LaunchBounds      | ``LaunchBounds<MaxThreads, MinBlocks>``                                   | Specifies hints to to the compiler about CUDA/HIP launch bounds.                                                                                        |
-+-------------------+---------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
-| WorkTag           | ``SomeClass``                                                             | Specify the work tag type used to call the functor operator. Any arbitrary type defaults to ``void``.                                                   |
-+-------------------+---------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
+Valid template arguments for ``RangePolicy`` are described `here <../Execution-Policies.html#common-arguments-for-all-execution-policies>`_
 
 Public Class Members
 --------------------
@@ -97,22 +95,60 @@ Public Class Members
 Constructors
 ~~~~~~~~~~~~
 
+.. cppkokkos:function:: explicit ChunkSize(int value_)
+
+   Provide a hint for optimal chunk-size to be used during scheduling.
+   For the SYCL backend, the workgroup size used in a ``parallel_for`` kernel can be set via this passed to ``RangePolicy``.
+
+   .. note:: ``ChunkSize`` constructor ``explicit`` since Kokkos 4.4
+
 .. cppkokkos:function:: RangePolicy()
 
    Default Constructor uninitialized policy.
 
-.. cppkokkos:function:: template<class ... InitArgs> RangePolicy(const int64_t& begin, const int64_t& end, const InitArgs ... init_args)
+.. cppkokkos:function:: RangePolicy(int64_t begin, int64_t end)
 
-   Provide a start and end index as well as optional arguments to control certain behavior (see below).
+   Provide a start and end index.
 
-.. cppkokkos:function:: template<class ... InitArgs> RangePolicy(const ExecutionSpace& space, const int64_t& begin, const int64_t& end, const InitArgs ... init_args)
+.. cppkokkos:function:: RangePolicy(int64_t begin, int64_t end, ChunkSize chunk_size)
 
-   Provide a start and end index and an ``ExecutionSpace`` instance to use as the execution resource, as well as optional arguments to control certain behavior (see below).
+   Provide a start and end index as well as a ``ChunkSize``.
 
-Optional ``InitArgs``:
-^^^^^^^^^^^^^^^^^^^^^^
+.. cppkokkos:function:: RangePolicy(const ExecutionSpace& space, int64_t begin, int64_t end)
 
-* ``ChunkSize`` : Provide a hint for optimal chunk-size to be used during scheduling. For the SYCL backend, the workgroup size used in a ``parallel_for`` kernel can be set via this variable.
+   Provide a start and end index and an ``ExecutionSpace`` instance to use as the execution resource.
+
+.. cppkokkos:function:: RangePolicy(const ExecutionSpace& space, int64_t begin, int64_t end, ChunkSize chunk_size)
+
+   Provide a start and end index and an ``ExecutionSpace`` instance to use as the execution resource, as well as a ``ChunkSize``.
+
+Preconditions:
+^^^^^^^^^^^^^^
+
+* The start index must not be greater than the end index.
+* The actual constructors are templated so we can check that they are converted to ``index_type`` safely (see `#6754 <https://github.com/kokkos/kokkos/pull/6754>`_).
+
+CTAD Constructors (since 4.3):
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: cppkokkos
+
+   int64_t work_begin = /* ... */; // conversions as well
+   int64_t work_end   = /* ... */; // conversions as well
+   ChunkSize cs       = /* ... */; // conversions as well
+   DefaultExecutionSpace des;      // conversions as well
+   SomeExecutionSpace ses;         // different from DefaultExecutionSpace
+
+   // Deduces to RangePolicy<>
+   RangePolicy rp0;
+   RangePolicy rp1(work_begin, work_end);
+   RangePolicy rp2(work_begin, work_end, cs);
+   RangePolicy rp3(des, work_begin, work_end);
+   RangePolicy rp4(des, work_begin, work_end, cs);
+
+   // Deduces to RangePolicy<SomeExecutionSpace>
+   RangePolicy rp5(ses, work_begin, work_end);
+   RangePolicy rp6(ses, work_begin, work_end, cs);
 
 Examples
 --------
