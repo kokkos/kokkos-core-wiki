@@ -202,7 +202,7 @@ Example
    // fill a,b somehow
 
    // create functor
-   MisMatchFunctor<int, int> p();
+   MismatchFunctor<int, int> p();
 
    Kokkos::pair<int,int> mismatch_index = KE::mismatch(exespace, KE::begin(a), KE::end(a), KE::begin(b), KE::end(b) p);
 
