@@ -11,7 +11,7 @@ Please note that virtual functions can be executed on the device for the followi
 - Cuda; and
 - HIP (with a limitation, as explained at the end).
 
-Especially, SYCL 2020 [cannot handle virtual functions](https://registry.khronos.org/SYCL/specs/sycl-2020/html/sycl-2020.html#_overview).
+<!-- Especially, SYCL 2020 [cannot handle virtual functions](https://registry.khronos.org/SYCL/specs/sycl-2020/html/sycl-2020.html#_overview). -->
 
 ## The Problem
 
@@ -106,7 +106,8 @@ class Derived : public Base {
 
 int main(int argc, char *argv[])
 {
-  Kokkos::ScopeGuard kokkos(argc, argv);
+  Kokkos::initialize(argc, argv);
+  {
 
   // create
   void* deviceInstanceMemory = Kokkos::kokkos_malloc(sizeof(Derived)); // allocate memory on device
@@ -126,6 +127,9 @@ int main(int argc, char *argv[])
   });
   Kokkos::fence("wait for destroy");
   Kokkos::kokkos_free(deviceInstanceMemory); // free
+
+  }
+  Kokkos::finalize();
 }
 ```
 
@@ -191,18 +195,22 @@ class Derived : Base {
 
 int main(int argc, char *argv[])
 {
-  Kokkos::ScopeGuard kokkos(argc, argv);
+  Kokkos::initialize(argc, argv);
+  {
 
-  auto derivedPtr = std::make_shared<Derived>();
+  auto derivedPtr = std::make_unique<Derived>();
   derivedPtr->apply();
   Kokkos::fence();
+
+  }
+  Kokkos::finalize();
 }
 ```
 
 ### Why is this not portable?
 
 Inside the `parallel_for`, `Bar()` is called. As `Derived` derives from the pure virtual class `Base`, the `Bar()` function is marked `override`.
-On ROCm 6.0 this results in a memory access violation.
+On ROCm (tested up to 6.0) this results in a memory access violation.
 When executing the `this->Bar()` call, the runtime looks into the Vtable and dereferences a host function pointer on the device.
 
 ### But if that is the case, why does it work with NVCC?
