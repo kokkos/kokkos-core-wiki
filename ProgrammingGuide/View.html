@@ -599,7 +599,10 @@
 </section>
 <section id="can-i-make-a-view-of-views">
 <h3>6.2.3 Can I make a View of Views?<a class="headerlink" href="#can-i-make-a-view-of-views" title="Permalink to this heading">#</a></h3>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
 <p>NOVICES: THE ANSWER FOR YOU IS “NO.”  PLEASE SKIP THIS SECTION.</p>
+</div>
 <p>A “View of Views” is a special case of View, where the type of each entry is itself a View. It is possible to make this, but before you try, please see below.</p>
 </section>
 <section id="you-probably-don-t-want-this">
@@ -924,6 +927,13 @@ It is still important that the first write to each location be done within a par
 in a way that reflects how first-touch affinity to threads is desired.
 Typically it is sufficient to use the parallel iteration index as the index of the location in the
 view to write to.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><code class="code highlight cppkokkos docutils literal highlight-cppkokkos"><span class="n">WithoutInitialization</span></code> implies that the destructor of each element of the <code class="code highlight cppkokkos docutils literal highlight-cppkokkos"><span class="n">View</span></code> <strong>will not be called</strong>.
+For instance, if the <code class="code highlight cppkokkos docutils literal highlight-cppkokkos"><span class="n">View</span></code>’s value type is not trivially destructible,
+you <strong>should not use</strong> <code class="code highlight cppkokkos docutils literal highlight-cppkokkos"><span class="n">WithoutInitialization</span></code> unless you are taking care of calling the destructor manually before the <code class="code highlight cppkokkos docutils literal highlight-cppkokkos"><span class="n">View</span></code> deallocates its memory.</p>
+<p>The mental model is that whenever placement new is used to call the constructor, the destructor also isn’t called before the memory is deallocated but it needs to be called manually.</p>
+</div>
 </section>
 <section id="deep-copy-and-hostmirror">
 <h3>6.4.3 Deep copy and HostMirror<a class="headerlink" href="#deep-copy-and-hostmirror" title="Permalink to this heading">#</a></h3>
