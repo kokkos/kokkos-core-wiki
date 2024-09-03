@@ -113,14 +113,12 @@ int main(int argc, char *argv[])
   Kokkos::parallel_for("initialize", 1, KOKKOS_LAMBDA (const int i) {
     new (static_cast<Derived*>(deviceInstanceMemory)) Derived(); // initialize on device
   });
-  Kokkos::fence("wait for initialize");
   Base* deviceInstance = static_cast<Derived*>(deviceInstanceMemory); // declare on this memory
 
   // use
   Kokkos::parallel_for("myKernel", 10, KOKKOS_LAMBDA (const int i) {
       deviceInstance->Bar();
   });
-  Kokkos::fence();
 
   // cleanup
   Kokkos::parallel_for("destroy", 1, KOKKOS_LAMBDA (const int i) {
