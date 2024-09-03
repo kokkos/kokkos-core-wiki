@@ -207,5 +207,7 @@ Example
    Kokkos::pair<int,int> mismatch_index = KE::mismatch(exespace, KE::begin(a), KE::end(a), KE::begin(b), KE::end(b) p);
 
    // assuming OpenMP is enabled, then you can also explicitly call
-// To run explicitly on the Host, (assuming a and b are accessible on Host)
+   // To run explicitly on the Host, (assuming a and b are accessible on Host)
+   
    Kokkos::pair<int,int> mismatch_index = KE::mismatch(Kokkos::DefaultHostExecutionSpace(), KE::begin(a), KE::end(a), KE::begin(b), KE::end(b), p);
+
