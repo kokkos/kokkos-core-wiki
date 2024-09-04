@@ -1,6 +1,6 @@
 
-``Function markup macros``
-==========================
+``Function Annotation Macros``
+==============================
 
 .. role::cpp(code)
     :language: cpp
@@ -131,11 +131,76 @@ This macro provides default capture clause and host device markup for lambdas cr
     class Foo {
       public:
         Foo() { ... };
+        int data;
 
+        KOKKOS_FUNCTION print_data() const {
+          printf("Data: %i\n",data);
+        }
         void bar() const {
           parallel_for("Name", N, KOKKOS_CLASS_LAMBDA(int i) {
             ...
+            print_data();
+            printf("%i %i\n",i,data);
           });
         }
     };
 
+Note: If one wants to avoid capturing a copy of the entire class in the lambda, one has to create local
+copies of any accessed data members, and can not use non-static member functions inside the lambda:
+
+.. code-block:: cpp
+
+    class Foo {
+      public:
+        Foo() { ... };
+        int data;
+
+        KOKKOS_FUNCTION print_data() const {
+          printf("Data: %i\n",data);
+        }
+        void bar() const {
+          int data_copy = data;
+          parallel_for("Name", N, KOKKOS_LAMBDA(int i) {
+            ...
+            // can't call member functions
+            // print_data();
+            // use the copy of data
+            printf("%i %i\n",i,data_copy);
+          });
+        }
+    };
+
+
+``KOKKOS_DEDUCTION_GUIDE``
+-----------------------
+
+This macro is used to annotate deduciont guides.
+
+
+.. code-block:: cpp
+
+    template<class T, size_t N>
+    class Foo {
+      T data[N];
+      public:
+        template<class ... Args>
+        KOKKOS_FUNCTION
+        Foo(Args ... args):data{static_cast<T>(args)...} {}
+
+        KOKKOS_FUNCTION void print(int i) const {
+          printf("%i\n",static_cast<int>(data[i]));
+        }
+    };
+
+    template<class T, class ... Args>
+    KOKKOS_DEDUCTION_GUIDE
+    Foo(T, Args...) -> Foo<T, 1+sizeof...(Args)>;
+
+    void bar() {
+      Kokkos::parallel_for(1, KOKKOS_LAMBDA(int) {
+        Foo f(1, 2., 3.2f);
+        f.print(0);
+        f.print(1);
+        f.print(2);
+      });
+    }
