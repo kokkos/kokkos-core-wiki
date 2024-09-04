@@ -6,11 +6,12 @@
 
 Header File: ``<Kokkos_ScatterView.hpp>``
 
-.. _parallelReduce: ../core/parallel-dispatch/parallel_reduce.html
-
-.. |parallelReduce| replace:: :cpp:func:`parallel_reduce`
-
 Description
+-----------
+`Kokkos View-based <../core/view/view.html>`_ data structure that abstracts over "scatter - contribute" algorithms, where many contributors (over multiple indices) are reduced to fewer output resultants (*e.g.*, sum, product, maximum or minimum). ``ScatterView`` transparently switches between **Atomic**-,  and **Data Replication**-based scatter algorithms.  Typically, a ``ScatterView`` wraps an existing View. 
+
+
+Interface
 -----------
 
 .. cppkokkos:class:: template <typename DataType, int Op, typename ExecSpace, typename Layout, int contribution> ScatterView
@@ -101,13 +102,18 @@ Description
     :member: typedef original_view_type internal_view_type;
     :member: internal_view_type internal_view;
 
+.. rubric:: Operations
+.. cppkokkos:type::  ScatterSum
+.. cppkokkos:type::  ScatterProd
+.. cppkokkos:type::  ScatterMax
+.. cppkokkos:type::  ScatterMin
 
 .. rubric:: Free Functions
 
 .. cppkokkos:function:: contribute(View<DT1, VP...>& dest, Kokkos::Experimental::ScatterView<DT2, LY, ES, OP, CT, DP> const& src)
 
    convenience function to perform final reduction of ScatterView
-   results into a resultant View; may be called following |parallelReduce|_.
+   results into a resultant View; may be called following `parallel_reduce <../core/parallel-dispatch/parallel_reduce.html>`_ .
 
 
 Example
