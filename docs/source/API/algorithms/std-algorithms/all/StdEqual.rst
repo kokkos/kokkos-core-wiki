@@ -217,7 +217,7 @@ Corner cases when ``false`` is returned:
 
 - if ``view1.extent(0) != view2.extent(1)`` for all overloads accepting Views
 
-- if the lenght of the range ``[first1, last)`` is not equal to lenght of ``[first2,last2)``
+- if the length of the range ``[first1, last)`` is not equal to length of ``[first2,last2)``
 
 
 Example

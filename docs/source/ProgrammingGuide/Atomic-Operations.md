@@ -84,12 +84,12 @@ void compute_force(View<int**> neighbours, View<double*> values) {
 
 There are also atomic operations which return the old or the new value. They follow the [`atomic_fetch_[op]`](../API/core/atomics/atomic_fetch_op) and [`atomic_[op]_fetch`](../API/core/atomics/atomic_op_fetch) naming scheme. For example if one would want to find all the indices of negative values in an array and store them in a list this would be the algorithm:
 ```c++
-void find_indicies(View<int*> indicies, View<double*> values) {
+void find_indices(View<int*> indices, View<double*> values) {
   View<int> count("Count");
-  parallel_for("FindIndicies", values.extent(0), KOKKOS_LAMBDA(const int i) {
+  parallel_for("FindIndices", values.extent(0), KOKKOS_LAMBDA(const int i) {
     if(values(i) < 0) {
       int index = atomic_fetch_add(&count(),1);
-      indicies(index) = i;
+      indices(index) = i;
     }
   });
 }

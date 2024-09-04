@@ -20,7 +20,7 @@ API
 
     // VOID_T and DETECTOR are exposition-only and not intended to be used directly.
 
-    // Convienent metafunction to leverage SFINAE
+    // Convenient metafunction to leverage SFINAE
     template<class...>
     using VOID_T = void;
 

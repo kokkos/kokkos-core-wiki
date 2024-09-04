@@ -19,7 +19,7 @@ The vendor-specific portions are abstracted away from user code through template
 The reason that SIMD types are so effective at producing high-performance code is that users are directly expressing what the vector parallelism is that they would like, and doing so in a way that is guaranteed to generate the vector instructions they expect.
 When using SIMD types, the compiler cannot fail to auto-vectorize, because auto-vectorization is not part of the picture. 
 Users are more clearly able to reason about the available parallelism in their code in ways that an auto-vectorizer is almost never able to do.
-By allowing users to have direct control of how vectorization is done while protecting them from both vendor lock-in and the odd quirks of different vendor instruction sets, SIMD types allow users to write performance portable code accross CPUs and also GPUs.
+By allowing users to have direct control of how vectorization is done while protecting them from both vendor lock-in and the odd quirks of different vendor instruction sets, SIMD types allow users to write performance portable code across CPUs and also GPUs.
 
 ## An Example
 

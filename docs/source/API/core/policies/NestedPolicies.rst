@@ -35,6 +35,11 @@ List
 
 |
 
+General Template Aguments
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Valid template arguments are described `here <../Execution-Policies.html#common-arguments-for-all-execution-policies>`_
+
 Usage
 ~~~~~
 

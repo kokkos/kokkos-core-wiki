@@ -76,7 +76,7 @@ Elements (5,6,7,8) are compared using `comp`.
   - execution space instance
 
 - `label`:
-    - 1,5: The default string is "Kokkos::lexicographical_compare_iterator_api_defaul".
+    - 1,5: The default string is "Kokkos::lexicographical_compare_iterator_api_default".
     - 3,7: The default string is "Kokkos::lexicographical_compare_view_api_default".
 
 - `first1`, `last1`, `first2`, `last2`:

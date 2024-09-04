@@ -104,7 +104,7 @@ Description
 
    * ``ptr_to_value``: address of the to be updated value.
 
-   * ``value``: value to be substracted.
+   * ``value``: value to be subtracted.
 
 .. cppkokkos:function:: template<class T> T atomic_xor_fetch(T* const ptr_to_value, const T value);
 

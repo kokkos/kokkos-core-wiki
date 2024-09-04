@@ -62,7 +62,7 @@ The problem here is that we are constructing the class on the Host. If we were c
 ```c++
 Base* hostInstance = new Derived(); // allocate and initialize host
 Base* deviceInstance; // cudaMalloc'd to allocate
-cudaMemcpy(deviceInstance, hostInstance); // to initialize the deivce
+cudaMemcpy(deviceInstance, hostInstance); // to initialize the device
 Kokkos::parallel_for(... {
   // use deviceInstance
 });
@@ -92,7 +92,7 @@ The first problem people run into with this is that they want to initialize some
 Base* hostInstance = new Derived(); // allocate and initialize host
 hostInstance->setAField(someHostValue);
 Base* deviceInstance; // cudaMalloc'd to allocate
-cudaMemcpy(deviceInstance, hostInstance); // to initialize the deivce
+cudaMemcpy(deviceInstance, hostInstance); // to initialize the device
 Kokkos::parallel_for(... {
   // use deviceInstance
 });
@@ -122,7 +122,7 @@ This is the solution that the code teams we have talked to have said is the most
 
 ## But what if I do not really need the V-Tables on the device side?
 Consider the following example which calls the `virtual Bar()` on the device from a pointer of derived class type.
-One might think this should work because no V-Table lookup on the device is neccessary.
+One might think this should work because no V-Table lookup on the device is necessary.
 ```c++
 #include <Kokkos_Core.hpp>
 #include <cstdio>

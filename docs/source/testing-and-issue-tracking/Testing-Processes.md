@@ -33,7 +33,9 @@ These test configurations (sparsely) cover the cross product of hardware platfor
 compilers (e.g. GCC, Clang, NVC++), C++ standards (17-23), Kokkos backends (e.g. Cuda, OpenMP, and HIP) and Kokkos
 configuration options (e.g. Debug, Relocatable Device Code).
 
-The clang-format style file is `kokkos/.clang-format`.
+The clang-format style file is `kokkos/.clang-format`. The clang-format version
+to use is specified as a comment in the header of the `.clang-format`
+configuration file.
 
 Only the primary Kokkos maintainers can merge pull requests, they have the responsibility to judge whether conducted reviews meet the desired thoroughness.
 

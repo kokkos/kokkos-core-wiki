@@ -173,7 +173,7 @@ Return Value
 ~~~~~~~~~~~~
 
 Iterator to the beginning of the last occurrence of the sequence ``[s_first, s_last)``
-in range ``[first, last)``, or the last occurence of ``s_view`` in ``view``.
+in range ``[first, last)``, or the last occurrence of ``s_view`` in ``view``.
 
 If ``[s_first, s_last)`` or ``[first, last)`` is empty, ``last`` is returned.
 

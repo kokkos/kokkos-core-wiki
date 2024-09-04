@@ -7,7 +7,7 @@ Header: ``<Kokkos_StdAlgorithms.hpp>``
 Description
 -----------
 
-Reverses ther order of the elements in a range or in rank-1 ``View``.
+Reverses the order of the elements in a range or in rank-1 ``View``.
 
 Interface
 ---------

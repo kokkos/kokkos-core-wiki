@@ -26,6 +26,11 @@ jobs:
         working-directory: ${{ env.docs-directory }}
         run: |
           make html
+      - name: Archive documentation
+        uses: actions/upload-artifact@v4
+        with:
+          name: documentation.tar.gz
+          path: ${{ env.docs-directory }}/generated_docs
       # .nojekyll file is needed for GitHub Pages to know it's getting a ready webpage
       # and there is no need to generate anything
       - name: Generate nojekyll file

@@ -79,7 +79,7 @@ Memory Spaces
 
 ``Kokkos::SharedSpace`` :sup:`since 4.0` is a |MemorySpaceType|_ alias representing memory that can be accessed by any enabled |ExecutionSpaceType|_. To achieve this, the memory can be moved to and from the local memory of the processing units represented by the ``ExecutionSpaces``. The movement is done automatically by the OS and driver at the moment of access. If not currently located in the local memory of the accessing processing unit, the memory is moved in chunks (size is backend dependent). These chunks can be moved independently (e.g. only the part that is accessed on the GPU is moved to the GPU) and are treated like local memory while residing on the processing unit. For details, see |TheDocumentationOnTheMemorySpaceConcept|_.
 Availability can be checked with the preprocessor define ``KOKKOS_HAS_SHARED_SPACE`` or the ``constexpr bool Kokkos::has_shared_space``.
-For the following backends ``Kokkos::SharedSpace`` is pointing to the correspoinding |MemorySpaceType|_:
+For the following backends ``Kokkos::SharedSpace`` is pointing to the corresponding |MemorySpaceType|_:
 
 * Cuda -> ``CudaUVMSpace``
 * HIP -> ``HIPManagedSpace``
@@ -89,9 +89,9 @@ For the following backends ``Kokkos::SharedSpace`` is pointing to the correspoin
 ``Kokkos::SharedHostPinnedSpace``
 ---------------------------------
 
-``Kokkos::SharedHostPinnedSpace`` :sup:`since 4.0` is a |MemorySpaceType|_ alias which is accessible by all enabled |ExecutionSpaceTypes|_. The memory stays pinned on the host and is availabe on the device via zero copy access in small chunks (cache lines, memory pages, etc. depending on the backend). Writes to the memory in one ``ExecutionSpace`` become visible in other ``ExecutionSpaces`` at synchronization events. Which events trigger a synchronization depend on the backend specifics. Nevertheless, fences are synchronization events on all backends.
+``Kokkos::SharedHostPinnedSpace`` :sup:`since 4.0` is a |MemorySpaceType|_ alias which is accessible by all enabled |ExecutionSpaceTypes|_. The memory stays pinned on the host and is available on the device via zero copy access in small chunks (cache lines, memory pages, etc. depending on the backend). Writes to the memory in one ``ExecutionSpace`` become visible in other ``ExecutionSpaces`` at synchronization events. Which events trigger a synchronization depend on the backend specifics. Nevertheless, fences are synchronization events on all backends.
 Availability can be checked with the preprocessor define ``KOKKOS_HAS_SHARED_HOST_PINNED_SPACE`` or the ``constexpr bool Kokkos::has_shared_host_pinned_space``.
-For the following backends ``Kokkos::SharedHostPinnedSpace`` is pointing to the correspoinding |MemorySpaceType|_:
+For the following backends ``Kokkos::SharedHostPinnedSpace`` is pointing to the corresponding |MemorySpaceType|_:
 
 * Cuda -> ``CudaHostPinnedSpace``
 * HIP -> ``HipHostPinnedSpace``

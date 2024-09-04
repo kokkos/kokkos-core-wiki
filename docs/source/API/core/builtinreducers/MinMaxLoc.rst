@@ -4,7 +4,7 @@
 .. role:: cppkokkos(code)
     :language: cppkokkos
 
-Specific implementation of `ReducerConcept <ReducerConcept.html>`_ storing both the minimum and maximum values with corresponding indicies
+Specific implementation of `ReducerConcept <ReducerConcept.html>`_ storing both the minimum and maximum values with corresponding indices
 
 Header File: ``<Kokkos_Core.hpp>``
 

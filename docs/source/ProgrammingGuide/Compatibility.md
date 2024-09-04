@@ -38,7 +38,7 @@ This namespace houses experimental features that are not yet ready for prime tim
 
 User defined macros can be particularly problematic, as they change what is lexically seen by the compiler and do not obey the language scoping rules.  They could interfere with variable names, functions, etc., including private ones used in Kokkos and other libraries.
 
-In order to minimize the risk of collisons, user defined macros should be prefaced with `MYPROJECT_` (or a similar way to disambiguate them) and be in all caps (this informs code readers that macros don't obey the usual syntactic and semantic rules of C++).
+In order to minimize the risk of collisions, user defined macros should be prefaced with `MYPROJECT_` (or a similar way to disambiguate them) and be in all caps (this informs code readers that macros don't obey the usual syntactic and semantic rules of C++).
 
 ## C++ Compatibility
 

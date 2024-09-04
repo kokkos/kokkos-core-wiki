@@ -30,7 +30,7 @@ Synopsis
 .. code-block:: cpp
 
     struct Kokkos::ChunkSize {
-        ChunkSize(int value_);
+        explicit ChunkSize(int value_);
     };
 
     template<class ... Args>
@@ -84,26 +84,10 @@ Synopsis
 Parameters
 ----------
 
-Common Arguments for all Execution Policies
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+General Template Aguments
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
-* Execution Policies generally accept compile time arguments via template parameters and runtime parameters via constructor arguments or setter functions.
-
-* Template arguments can be given in arbitrary order.
-
-+-------------------+---------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Argument          | Options                                                                   | Purpose                                                                                                                                                 |
-+===================+===========================================================================+=========================================================================================================================================================+
-| ExecutionSpace    | ``Serial``, ``OpenMP``, ``Threads``, ``Cuda``, ``HIP``, ``SYCL``, ``HPX`` | Specify the Execution Space to execute the kernel in. Defaults to ``Kokkos::DefaultExecutionSpace``.                                                    |
-+-------------------+---------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Schedule          | ``Schedule<Dynamic>``, ``Schedule<Static>``                               | Specify scheduling policy for work items. ``Dynamic`` scheduling is implemented through a work stealing queue. Default is machine and backend specific. |
-+-------------------+---------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
-| IndexType         | ``IndexType<int>``                                                        | Specify integer type to be used for traversing the iteration space. Defaults to ``int64_t``.                                                            |
-+-------------------+---------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
-| LaunchBounds      | ``LaunchBounds<MaxThreads, MinBlocks>``                                   | Specifies hints to to the compiler about CUDA/HIP launch bounds.                                                                                        |
-+-------------------+---------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
-| WorkTag           | ``SomeClass``                                                             | Specify the work tag type used to call the functor operator. Any arbitrary type defaults to ``void``.                                                   |
-+-------------------+---------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
+Valid template arguments for ``RangePolicy`` are described `here <../Execution-Policies.html#common-arguments-for-all-execution-policies>`_
 
 Public Class Members
 --------------------
@@ -111,10 +95,12 @@ Public Class Members
 Constructors
 ~~~~~~~~~~~~
 
-.. cppkokkos:function:: ChunkSize(int value_)
+.. cppkokkos:function:: explicit ChunkSize(int value_)
 
    Provide a hint for optimal chunk-size to be used during scheduling.
    For the SYCL backend, the workgroup size used in a ``parallel_for`` kernel can be set via this passed to ``RangePolicy``.
+
+   .. note:: ``ChunkSize`` constructor ``explicit`` since Kokkos 4.4
 
 .. cppkokkos:function:: RangePolicy()
 

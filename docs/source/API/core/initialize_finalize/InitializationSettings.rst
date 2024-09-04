@@ -17,7 +17,7 @@ Usage:
 
 .. versionadded:: 3.7
    ``InitializationSettings`` is a class that can be used to define the settings for
-   initializating Kokkos programmatically without having to call the two parameter
+   initializing Kokkos programmatically without having to call the two parameter
    form (``argc`` and ``argv``) of `Kokkos::initialize() <initialize.html#kokkosinitialize>`_.
    It was introduced as a replacement for the `Kokkos::InitArguments <InitArguments.html#kokkosInitArguments>`_ structure.
 

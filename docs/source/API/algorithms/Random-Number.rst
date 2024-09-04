@@ -110,9 +110,9 @@ are collectives, i.e. all functions can be called inside conditionals.
       void free_state(Generator_Type Gen);
     }
 
-A Pool of Generators are intialized using a starting seed and establishing
+A Pool of Generators are initialized using a starting seed and establishing
 a pool_size of num_states. The Random_XorShift64 generator is used in serial
-to initialize all states making the intialization process platform independent
+to initialize all states making the initialization process platform independent
 and deterministic. Requesting a generator locks it's state guaranteeing that
 each thread has a private (independent) generator. (Note, getting a state on a Cuda
 device involves atomics, making it non-deterministic!)

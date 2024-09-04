@@ -9,5 +9,5 @@ Std Algorithms
    ./std-algorithms/StdModSeq
    ./std-algorithms/StdNonModSeq
    ./std-algorithms/StdNumeric
-   ./std-algorithms/StdPartioningOps
+   ./std-algorithms/StdPartitioningOps
    ./std-algorithms/StdSorting

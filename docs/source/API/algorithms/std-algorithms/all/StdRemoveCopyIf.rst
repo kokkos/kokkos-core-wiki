@@ -7,7 +7,7 @@ Description
 -----------
 
 Copies the elements from a range to a new range starting at ``first_to`` or from ``view_from``
-to ``view_dest`` omitting thos for which ``pred`` returns ``true``.
+to ``view_dest`` omitting those for which ``pred`` returns ``true``.
 
 Interface
 ---------

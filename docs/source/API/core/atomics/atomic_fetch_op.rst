@@ -94,7 +94,7 @@ Description
    Atomically executes ``*ptr_to_value -= value``.
 
    :param ptr_to_value: address of the value to be updated
-   :param value: value to be substracted..
+   :param value: value to be subtracted..
 
 .. cppkokkos:function:: template<class T> T atomic_fetch_xor(T* const ptr_to_value, const T value);
 

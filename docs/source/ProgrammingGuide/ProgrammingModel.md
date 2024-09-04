@@ -47,7 +47,7 @@ Memory Spaces are the places _Where_ data resides. They specify physical locatio
 
 ## 3.5 Memory Layout
 
-Layouts express the _mapping_ from logical (or algorithmical) indices to address offset for a data allocation. By adopting appropriate layouts for memory structures, an application can optimise data access patterns in a given algorithm. If an implementation provides polymorphic layouts (i.e. a data structure can be instantiated at compile or runtime with different layouts), an architecture dependent optimisation can be performed.
+Layouts express the _mapping_ from logical (or algorithmically) indices to address offset for a data allocation. By adopting appropriate layouts for memory structures, an application can optimise data access patterns in a given algorithm. If an implementation provides polymorphic layouts (i.e. a data structure can be instantiated at compile or runtime with different layouts), an architecture dependent optimisation can be performed.
 
 ## 3.6 Memory Traits
 

@@ -11,13 +11,13 @@ Bit manipulation
 
 .. |KokkosBitManipulation| replace:: ``<Kokkos_BitManipulation.hpp>``
 
-.. _StandarLibraryHeaderBit: https://en.cppreference.com/w/cpp/header/bit
+.. _StandardLibraryHeaderBit: https://en.cppreference.com/w/cpp/header/bit
 
-.. |StandarLibraryHeaderBit| replace:: ``<bit>``
+.. |StandardLibraryHeaderBit| replace:: ``<bit>``
 
 Defined in header |KokkosBitManipulation|_ which is included from ``<Kokkos_Core.hpp>``
 
-Provides function templates from the standard library header |StandarLibraryHeaderBit|_ (since C++20).
+Provides function templates from the standard library header |StandardLibraryHeaderBit|_ (since C++20).
 
 Bit manipulation function templates are defined in the ``Kokkos::`` namespace since Kokkos 4.1
 

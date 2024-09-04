@@ -96,7 +96,7 @@ Return Value
   or ``last`` if no element is found
 
 - (3,4,6): iterator to the first element that equals ``value``,
-  or ``Kokkos::Experimental::end(view)`` if no elememt is found
+  or ``Kokkos::Experimental::end(view)`` if no element is found
 
 
 Example
