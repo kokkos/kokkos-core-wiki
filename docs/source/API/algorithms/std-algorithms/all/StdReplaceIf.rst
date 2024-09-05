@@ -7,8 +7,9 @@ Header: ``<Kokkos_StdAlgorithms.hpp>``
 Description
 -----------
 
-Replaces with ``new_value`` all the elements for which ``pred`` is ``true`` in
-the range ``[first, last)`` (overloads 1,2) or in ``view`` (overloads 3,4).
+Replaces all the elements in
+the range ``[first, last)``  for which ``pred`` is ``true`` with with ``new_value``.
+The overload taking a ``View`` uses the ``begin`` and ``end`` iterators of the ``View``.
 
 Interface
 ---------
