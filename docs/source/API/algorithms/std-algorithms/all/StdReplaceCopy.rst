@@ -8,8 +8,9 @@ Description
 -----------
 
 Copies the elements from a given range ``[first_from, last_from)`` to another range
-beginning at ``first_to`` or from ``view_from`` to ``view_to`` replacing 
-with ``new_value`` all elements that equal ``old_value``.
+beginning at ``first_to``, while replacing all elements that equal ``old_value`` 
+with ``new_value``.
+The overload taking a ``View`` uses the ``begin`` and ``end`` iterators of the ``View``.
 Comparison between elements is done using ``operator==``.
 
 Interface
