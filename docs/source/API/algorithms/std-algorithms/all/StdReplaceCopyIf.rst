@@ -8,8 +8,8 @@ Description
 -----------
 
 Copies the elements from range ``[first_from, last_from)`` to another range
-beginning at ``first_to`` (overloads 1,2) or from ``view_from`` to ``view_to``
-(overloads 3,4) replacing with ``new_value`` all elements for which ``pred`` returns ``true``.
+beginning at ``first_to`` while replacing all elements for which ``pred`` returns ``true`` with ``new_value``.
+The overload taking a ``View`` uses the ``begin`` and ``end`` iterators of the ``View``.
 
 Interface
 ---------
