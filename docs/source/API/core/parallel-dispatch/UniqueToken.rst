@@ -34,6 +34,12 @@ Parameters
 *  ``UniqueTokenScope``:  defaults to ``Instance``, but ``Global`` can be employed when thread awareness is needed for more than one ``ExecutionSpace`` instance, as in the case of submitting concurrent kernels to CUDA streams.
 
 
+Constructors
+-------------
+  .. cppkokkos:function:: UniqueToken(size_t max_size, ExecutionSpace execution_space, UniqueTokenScope :: Global)
+
+
+
 
 Examples
 ---------
