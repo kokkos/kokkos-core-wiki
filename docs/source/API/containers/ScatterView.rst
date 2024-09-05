@@ -14,9 +14,26 @@ Description
 Interface
 -----------
 
-.. cppkokkos:class:: template <typename DataType, int Op, typename ExecSpace, typename Layout, int contribution> ScatterView
+.. cppkokkos:class:: template <class DataType, class LayoutType, class ExecutionSpace, class Operation, class Duplication, class Contribution> ScatterView
 
-    .. rubric:: Public Member Variables
+
+Parameters
+-----------
+
+*  ``DataType``:  See `Kokkos View DataType <../core/view/view.html>`_
+
+*  ``Layout``:  See  `Kokkos View LayoutType <../core/view/view.html>`_
+
+*  ``ExecutionSpace``:  Where the code will be executed (CPU or GPU); typical values are ``Kokkos::DefaultHostExecutionSpace``, ``Kokkos::DefaultExecutionSpace``
+
+*  ``Operation``:  ScatterSum, ScatterProd, ScatterMin, ScatterMax
+
+*  ``Duplication``:  TBD
+
+*  ``Contribution``:  ScatterAtomic, ScatterNonAtomic  
+
+Public Class Members
+--------------------
 
     .. cppkokkos:type:: original_view_type
 
@@ -32,7 +49,7 @@ Interface
 
     .. cppkokkos:type:: data_type_info
 
-        DuplicatedDataType, a newly created DataType that has a new runtime dimension which becomes the largest-stride dimension, from the given View DataType.
+        DuplicatedDataType, a newly created DataType with a new runtime dimension that becomes the largest-stride dimension from the given View DataType.
 
     .. cppkokkos:type:: internal_data_type
 
@@ -40,9 +57,10 @@ Interface
 
     .. cppkokkos:type:: internal_view_type
 
-        A View type created from the internal_data_type.
+        Type alias for a View type created from the internal_data_type.
 
-    .. rubric:: Constructors
+Constructors
+-------------
 
     .. cppkokkos:function:: ScatterView()
 
@@ -62,11 +80,9 @@ Interface
         This constructor allows passing an object created by ``Kokkos::view_alloc`` as first argument, e.g., for specifying an execution space via
         ``Kokkos::view_alloc(exec_space, "label")``.
 
-    .. rubric:: Public Methods
+Public Class Methods
+--------------------
 
-    .. cppkokkos:function:: constexpr bool is_allocated() const
-
-        :return: true if the ``internal_view`` points to a valid memory location. This function works for both managed and unmanaged views. With the unmanaged view, there is no guarantee that referenced address is valid, only that it is a non-null pointer.
 
     .. cppkokkos:function:: access() const
 
@@ -86,7 +102,7 @@ Interface
 
     .. cppkokkos:function:: reset_except(View<DT, RP...> const& view)
 
-       tbd
+       excludes a Kokkos View from reset
 
     .. cppkokkos:function:: resize(const size_t n0 = 0, const size_t n1 = 0, const size_t n2 = 0, const size_t n3 = 0, const size_t n4 = 0, const size_t n5 = 0, const size_t n6 = 0, const size_t n7 = 0)
 
@@ -97,18 +113,10 @@ Interface
        resize a view with discarding old data
 
 
-    .. rubric:: *Private* Members
 
-    :member: typedef original_view_type internal_view_type;
-    :member: internal_view_type internal_view;
+Free Functions
+--------------------
 
-.. rubric:: Operations
-.. cppkokkos:type::  ScatterSum
-.. cppkokkos:type::  ScatterProd
-.. cppkokkos:type::  ScatterMax
-.. cppkokkos:type::  ScatterMin
-
-.. rubric:: Free Functions
 
 .. cppkokkos:function:: contribute(View<DT1, VP...>& dest, Kokkos::Experimental::ScatterView<DT2, LY, ES, OP, CT, DP> const& src)
 
