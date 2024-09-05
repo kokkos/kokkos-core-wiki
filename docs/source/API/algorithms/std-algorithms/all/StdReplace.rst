@@ -7,7 +7,7 @@ Header: ``<Kokkos_StdAlgorithms.hpp>``
 Description
 -----------
 
-Replaces with ``new_value`` all elements that are equal to ``old_value`` in 
+Replaces all elements that are equal to ``old_value`` with ``new_value`` in 
 a given range or rank-1 ``View``. Equality is checked using ``operator==``.
 
 Interface
