@@ -28,7 +28,7 @@ Parameters
 
 *  ``Operation``:  ScatterSum, ScatterProd, ScatterMin, ScatterMax
 
-*  ``Duplication``:  TODO
+*  ``Duplication``:  ScatterDuplicated, ScatterNonDuplicated
 
 *  ``Contribution``:  ScatterAtomic, ScatterNonAtomic  
 
