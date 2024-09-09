@@ -7,7 +7,7 @@ Random-Number
 Rand
 ----
 
-Header Files: ``<Kokkos_core.hpp>``, ``<Kokkos_Random.hpp>``
+Header Files: ``<Kokkos_Core.hpp>``, ``<Kokkos_Random.hpp>``
 
 .. code-block:: cpp
 
@@ -78,7 +78,7 @@ where the maximum values of the XorShift function values are given by the follow
 Generator
 =========
 
-Header Files: ``<Kokkos_core.hpp>`` ``<Kokkos_Random.hpp>``
+Header Files: ``<Kokkos_Core.hpp>`` ``<Kokkos_Random.hpp>``
 
 Synopsis
 --------
