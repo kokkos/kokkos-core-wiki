@@ -180,3 +180,21 @@ Examples
     TeamPolicy<Schedule<Dynamic>, OpenMP> policy_3(N,AUTO,8);
     TeamPolicy<IndexType<int>, Schedule<Dynamic>> policy_4(N,1,4);
     TeamPolicy<OpenMP> policy_5(OpenMP(), N, AUTO);
+
+.. code-block:: cpp
+
+    using team_handle = TeamPolicy<>::member_type;
+    parallel_for(TeamPolicy<>(N,AUTO), KOKKOS_LAMBDA (const team_handle& team) {
+        int n = team.league_rank();
+        parallel_for(TeamThreadRange(team,M), [&] (const int& i) {
+            A(n,i) = B(n) + i;
+        });
+        team.team_barrier();
+        int team_sum;
+        parallel_reduce(TeamThreadRange(team,M), [&] (const int& i, int& lsum) {
+            lsum += A(n,i);
+        },team_sum);
+        single(PerTeam(team),[&] () {
+            A_rowsum(n) = team_sum;
+        });
+    });
