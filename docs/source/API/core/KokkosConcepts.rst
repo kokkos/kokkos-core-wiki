@@ -102,7 +102,7 @@ and ``OpenMPTarget``, the current state of the Kokkos |ExecutionSpaceTwo|_ conce
 
     template <typename Ex>
     concept ExecutionSpace =
-        SemiRegular<Ex> &&
+        Regular<Ex> &&
         Destructible<Ex> &&
         // Member type requirements:
         requires() {
