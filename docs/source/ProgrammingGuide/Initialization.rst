@@ -43,7 +43,7 @@ Kokkos chooses the two spaces using the following list:
 2. `Kokkos::Experimental::HPX`
 3. `Kokkos::Experimental::OpenACC`
 4. `Kokkos::Experimental::OpenMPTarget`
-5. `Kokkos::Experimental::SYCL`
+5. `Kokkos::SYCL`
 6. `Kokkos::HIP`
 7. `Kokkos::OpenMP`
 8. `Kokkos::Threads`
