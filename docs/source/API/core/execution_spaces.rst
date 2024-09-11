@@ -212,7 +212,7 @@ and an instance of that type ``ex``, Kokkos guarantees the following expressions
 
     ex.fence(str);
 
-*Effects:* Upon return, all parallel patterns executed on the instance ``ex`` are guaranteed to have completed, and their effects are guaranteed visible to the calling thread. ``str`` is reported to Kokkos Tools.
+*Effects:* Upon return, all parallel patterns executed on the instance ``ex`` are guaranteed to have completed, and their effects are guaranteed visible to the calling thread. The optiopnal ``str`` argument allows customizing the event reported to Kokkos Tools.
 *Returns:* Nothing.
 *Note:* This *cannot* be called from within a parallel pattern.  Doing so will lead to unspecified effects (i.e., it might work, but only for some execution spaces, so be extra careful not to do it).
 
@@ -276,6 +276,7 @@ Synopsis
         int concurrency() const;
 
         void fence(const std::string&) const;
+        void fence() const;
 
         friend bool operator==(const execution_space& lhs, const execution_space& rhs);
     };
@@ -319,7 +320,7 @@ Functions
 
 * ``int concurrency() const;`` *Returns* the maximum amount of concurrently executing work items in a parallel setting, i.e. the maximum number of threads utilized by an execution space instance.
 
-* ``void fence(const std::string&) const;`` *Effects:* Upon return, all parallel patterns executed on the instance |ExecutionSpaceConcept|_ are guaranteed to have completed, and their effects are guaranteed visible to the calling thread. *Note:* This *cannot* be called from within a parallel pattern. Doing so will lead to unspecified effects (i.e., it might work, but only for some execution spaces, so be extra careful not to do it). The argument will be reported to Kokkos Tools.
+* ``void fence(const std::string& label) const;`` *Effects:* Upon return, all parallel patterns executed on the instance |ExecutionSpaceConcept|_ are guaranteed to have completed, and their effects are guaranteed visible to the calling thread. *Note:* This *cannot* be called from within a parallel pattern. Doing so will lead to unspecified effects (i.e., it might work, but only for some execution spaces, so be extra careful not to do it). The optional ``label`` argument allows customizing the event reported to Kokkos Tools.
 
 * ``void print_configuration(std::ostream ostr) const;``: *Effects:* Outputs the configuration of ``ex`` to the given ``std::ostream``. *Note:* This *cannot* be called from within a parallel pattern.
 

@@ -121,6 +121,7 @@ and ``OpenMPTarget``, the current state of the Kokkos |ExecutionSpaceTwo|_ conce
         // Required methods:
         requires(Ex ex, std::string str, std::ostream& ostr, bool detail) {
             { ex.fence(str) };
+            { ex.fence() };
             { ex.name() } -> const char*;
             { ex.concurrency() } -> int;
             { ex.print_configuration(ostr) };
