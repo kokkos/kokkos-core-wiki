@@ -116,12 +116,28 @@ Synopsis
         typedef MemorySpaceConcept memory_space;
         typedef ... execution_space;
         typedef Device<execution_space, memory_space> device_type;
+        typedef ... size_type;
 
         MemorySpaceConcept();
-        MemorySpaceConcept(const MemorySpaceConcept& src);
-        const char* name() const;
-        void * allocate(ptrdiff_t size) const;
-        void deallocate(void* ptr, ptrdiff_t size) const;
+
+        template <typename AccessibleExecutionSpace>
+        void* allocate(const AccessibleExecutionSpace& exec_space,
+                             const std::size_t arg_alloc_size) const;
+        template <typename AccessibleExecutionSpace>
+        void* allocate(const AccessibleExecutionSpace& exec_space, const char* arg_label,
+                 const size_t arg_alloc_size,
+                 const size_t arg_logical_size = 0) const;
+        void* allocate(const std::size_t arg_alloc_size) const;
+        void* allocate(const char* arg_label, const size_t arg_alloc_size,
+                 const size_t arg_logical_size = 0) const;
+
+        void deallocate(void* const arg_alloc_ptr,
+                  const std::size_t arg_alloc_size) const;
+        void deallocate(const char* arg_label, void* const arg_alloc_ptr,
+                  const size_t arg_alloc_size,
+                  const size_t arg_logical_size = 0) const;
+
+        static constexpr const char* name();
     };
 
     template<class MS>
@@ -132,7 +148,7 @@ Synopsis
     template<>
     struct is_memory_space<MemorySpaceConcept> {
     enum { value = true };
-    };  
+    };
 
 Typedefs
 ~~~~~~~~
@@ -157,17 +173,16 @@ Constructors
 ~~~~~~~~~~~~
 
 * ``MemorySpaceConcept()``: Default constructor.
-* ``MemorySpaceConcept(const MemorySpaceConcept& src)``: Copy constructor.
 
 Functions
 ~~~~~~~~~
 
 * ``const char* name() const;``: Returns the label of the memory space instance.
-* ``void * allocate(ptrdiff_t size) const;``: Allocates a buffer of at least ``size`` bytes using the memory resource that ``MemorySpaceConcept`` represents.
-* ``void deallocate(void* ptr, ptrdiff_t size) const;``: Frees the buffer starting at ``ptr`` (of type ``void*``) previously allocated with exactly ``allocate(size)``.
+* ``void * allocate(ptrdiff_t size) const;``: Allocates a buffer of at least ``size`` bytes using the memory resource that ``MemorySpaceConcept`` represents. An optional execution space argument allows enqueuing the allocation operation on a particular execution space instance that can access the memory space. An optional label argument allows customizing the event reported to Kokkos Tools.
+* ``void deallocate(void* ptr, ptrdiff_t size) const;``: Frees the buffer starting at ``ptr`` (of type ``void*``) previously allocated with exactly ``allocate(size)``. An optional label argument allows customizing the event reported to Kokkos Tools.
 
 Non Member Facilities
 ~~~~~~~~~~~~~~~~~~~~~
 
 * ``template<class MS> struct is_memory_space;``: typetrait to check whether a class is a memory space.
-* ``template<class S1, class S2> struct SpaceAccessibility;``: typetraits to check whether two spaces are compatible (assignable, deep_copy-able, accessible). 
+* ``template<class S1, class S2> struct SpaceAccessibility;``: typetraits to check whether two spaces are compatible (assignable, deep_copy-able, accessible).
