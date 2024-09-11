@@ -320,7 +320,7 @@ Functions
 
 * ``int concurrency() const;`` *Returns* the maximum amount of concurrently executing work items in a parallel setting, i.e. the maximum number of threads utilized by an execution space instance.
 
-* ``void fence(const std::string& label) const;`` *Effects:* Upon return, all parallel patterns executed on the instance |ExecutionSpaceConcept|_ are guaranteed to have completed, and their effects are guaranteed visible to the calling thread. *Note:* This *cannot* be called from within a parallel pattern. Doing so will lead to unspecified effects (i.e., it might work, but only for some execution spaces, so be extra careful not to do it). The optional ``label`` argument allows customizing the event reported to Kokkos Tools.
+* ``void fence(const std::string& label = unspecified-default-value) const;`` *Effects:* Upon return, all parallel patterns executed on the instance |ExecutionSpaceConcept|_ are guaranteed to have completed, and their effects are guaranteed visible to the calling thread. *Note:* This *cannot* be called from within a parallel pattern. Doing so will lead to unspecified effects (i.e., it might work, but only for some execution spaces, so be extra careful not to do it). The optional ``label`` argument allows customizing the event reported to Kokkos Tools.
 
 * ``void print_configuration(std::ostream ostr) const;``: *Effects:* Outputs the configuration of ``ex`` to the given ``std::ostream``. *Note:* This *cannot* be called from within a parallel pattern.
 
