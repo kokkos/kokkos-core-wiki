@@ -210,13 +210,6 @@ and an instance of that type ``ex``, Kokkos guarantees the following expressions
 
 .. code-block:: cpp
 
-    ex.in_parallel();
-
-*Returns:* a value convertible to ``bool`` indicating whether or not the caller is executing as part of a Kokkos parallel pattern.
-*Note:* as currently implemented, there is no guarantee that ``true`` means the caller is necessarily executing as part of a pattern on the particular instance ``ex``; just *some* instance of ``Ex``. This may be strengthened in the future.
-
-.. code-block:: cpp
-
     ex.fence();
 
 *Effects:* Upon return, all parallel patterns executed on the instance ``ex`` are guaranteed to have completed, and their effects are guaranteed visible to the calling thread.
@@ -280,7 +273,6 @@ Synopsis
         void print_configuration(std::ostream ostr&) const;
         void print_configuration(std::ostream ostr&, bool details) const;
 
-        bool in_parallel() const;
         int concurrency() const;
 
         void fence() const;
@@ -324,10 +316,6 @@ Functions
 ~~~~~~~~~
 
 * ``const char* name() const;``: *Returns* the label of the execution space instance.
-
-* ``bool in_parallel() const;``: *Returns* a value convertible to ``bool`` indicating whether the caller is executing as part of a Kokkos parallel pattern. *Note:* as currently implemented, there is no guarantee that ``true`` means the caller is necessarily executing as part of a pattern on the particular instance |ExecutionSpaceConcept|_; just *some* instance of |ExecutionSpaceConcept|_. This may be strengthened in the future.
-
-* ``int concurrency() const;`` *Returns* the maximum amount of concurrently executing work items in a parallel setting, i.e. the maximum number of threads utilized by an execution space instance.
 
 * ``void fence() const;`` *Effects:* Upon return, all parallel patterns executed on the instance |ExecutionSpaceConcept|_ are guaranteed to have completed, and their effects are guaranteed visible to the calling thread. *Note:* This *cannot* be called from within a parallel pattern. Doing so will lead to unspecified effects (i.e., it might work, but only for some execution spaces, so be extra careful not to do it).
 
