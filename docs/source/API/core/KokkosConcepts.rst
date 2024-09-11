@@ -207,23 +207,6 @@ Support for ``UniqueToken`` adds the following requirements:
         && CopyConstructible<Experimental::UniqueToken<Ex, Experimental::UniqueTokenScope::Global>>
         && DefaultConstructible<Experimental::UniqueToken<Ex, Experimental::UniqueTokenScope::Global>>;
 
-An Additional Concept for ``DeviceExecutionSpace``?
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-All the device execution spaces, in their current state, have two extra member functions,
-``sleep()`` and ``wake()``.  It's unclear whether this is intended to be general,
-but if it is, there is an additional concept in the hierarchy:
-
-.. code-block:: cpp
-
-    template <typename Ex>
-    concept DeviceExecutionSpace =
-        ExecutionSpace<Ex> &&
-        requires(Ex ex) {
-            { ex.sleep() };
-            { ex.wake() };
-        }
-
 Some *de facto* Requirements
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
