@@ -4,7 +4,7 @@
 .. role:: cppkokkos(code)
    :language: cppkokkos
 
-Header File: ``<Kokkos_View.hpp>``
+Header File: ``<Kokkos_Core.hpp>``
 
 Usage
 -----
