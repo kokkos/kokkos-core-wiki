@@ -9,6 +9,10 @@ CMake Keywords
 
    Recall that to set a keyword in CMake you used the syntax ``-Dkeyword_name=value``.
 
+.. note::
+   It is recommended to use the ``ccmake`` curses GUI to browse the complete list of
+   available CMake options and their current settings. It may be more current to the
+   Kokkos version than this Wiki's list.
 
 This page is organized in four sections:
 
