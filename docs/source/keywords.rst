@@ -236,6 +236,9 @@ Backend-specific options
 
 ``Kokkos_ENABLE_IMPL_CUDA_MALLOC_ASYNC`` default value is ``OFF`` until 4.2, and ``ON`` until 4.5
 
+Any CMake keywords containing `IMPL` can fundamentally alter the underlying implementation
+of Kokkos on a given backend. It is encouraged not to set these unless the user knows what
+they are doing can accept the behavior changing without warning.
 
 
 Development
