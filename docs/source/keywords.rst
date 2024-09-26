@@ -238,7 +238,7 @@ Backend-specific options
 
 Any CMake keyword containing `IMPL` can fundamentally alter the underlying implementation
 of Kokkos on a given backend. It is encouraged not to set these unless the user knows what
-they are doing can accept the behavior changing without warning.
+they are doing and can accept the behavior changing without warning.
 
 
 Development
