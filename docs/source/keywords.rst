@@ -222,7 +222,7 @@ Backend-specific options
       * Disable atomics when no host parallel nor device backend is enabled for Serial only builds (since Kokkos 4.3)
       * ``OFF``
     * * ``Kokkos_ENABLE_IMPL_CUDA_MALLOC_ASYNC``
-      * Enable ``cudaMallocAsync`` (requires CUDA Toolkit 11.2). This optimization may
+      * Enable ``cudaMallocAsync`` (requires CUDA Toolkit version 11.2 or higher). This optimization may
 	improve performance in applications with multiple CUDA streams per device, but it
 	is known to be incompatible with MPI distributions built on older versions of UCX
 	and many Cray MPICH instances. See `kokkos/kokkos#7353 <https://github.com/kokkos/kokkos/pull/7353>`_
