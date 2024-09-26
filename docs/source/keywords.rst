@@ -226,11 +226,17 @@ Backend-specific options
 	improve performance in applications with multiple CUDA streams per device, but it
 	is known to be incompatible with MPI distributions built on older versions of UCX
 	and many Cray MPICH instances. See `kokkos/kokkos#7353 <https://github.com/kokkos/kokkos/pull/7353>`_
-      * ``ON``       
+      * ``ON``
+	
+    * * ``Kokkos_ENABLE_IMPL_HPX_ASYNC_DISPATCH``
+      * Enable asynchronous dispatch for the HPX backend
+      * ``ON``
 	
 ``Kokkos_ENABLE_CUDA_LAMBDA`` default value is ``OFF`` until 3.7 and ``ON`` since 4.0
 
 ``Kokkos_ENABLE_IMPL_CUDA_MALLOC_ASYNC`` default value is ``OFF`` until 4.2, and ``ON`` until 4.5
+
+
 
 Development
 -----------
