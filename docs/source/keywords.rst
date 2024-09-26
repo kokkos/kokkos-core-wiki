@@ -231,7 +231,7 @@ Backend-specific options
       * Enable ``cudaMallocAsync`` (requires CUDA Toolkit version 11.2 or higher). This optimization may
       improve performance in applications with multiple CUDA streams per device, but it
       is known to be incompatible with MPI distributions built on older versions of UCX
-      and many Cray MPICH instances. See `kokkos/kokkos#7353 <https://github.com/kokkos/kokkos/pull/7353>`_
+      and many Cray MPICH instances. See `known issues <known-issues.rst#cuda>`_.
       * ``ON``
 	
     * * ``Kokkos_ENABLE_IMPL_HPX_ASYNC_DISPATCH``
