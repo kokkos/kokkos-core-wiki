@@ -65,7 +65,7 @@ Remember that we have one Vtable shared amongst all instances of a type. Each in
 
 Now that we know what the compiler is doing to implement virtual functions, we'll look at why it doesn't work with GPU's.
 
-Credit: the content of this section is adapted from [this article of Pablo Arias(https://pabloariasal.github.io/2017/06/10/understanding-virtual-tables/).
+Credit: the content of this section is adapted from [this article of Pablo Arias](https://pabloariasal.github.io/2017/06/10/understanding-virtual-tables/).
 
 ## Then why doesn't the straightforward approach work?
 
@@ -210,24 +210,24 @@ int main(int argc, char *argv[])
 ### Why is this not portable?
 
 Inside the `parallel_for`, `Bar()` is called. As `Derived` derives from the pure virtual class `Base`, the `Bar()` function is marked `override`.
-On ROCm (tested up to 6.0) this results in a memory access violation.
+On ROCm (at least up to 6.0) this results in a memory access violation.
 When executing the `this->Bar()` call, the runtime looks into the Vtable and dereferences a host function pointer on the device.
 
 ### But if that is the case, why does it work with NVCC?
 
-Notice, that the `parallel_for` is called from a pointer of type `Derived` and not a pointer of type `Base` pointing to an `Derived` object.
+Notice that the `parallel_for` is called from a pointer of type `Derived` and not a pointer of type `Base` pointing to an `Derived` object.
 Thus, no Vtable lookup for the `Bar()` would be necessary as it can be deduced from the context of the call that it will be `Derived::Bar()`.
 But here it comes down to how the compiler handles the lookup. NVCC understands that the call is coming from an `Derived` object and thinks: "Oh, I see, that you are calling from an `Derived` object, I know it will be the `Bar()` in this class scope, I will do this for you".
 ROCm, on the other hand, sees the call and thinks "Oh, this is a call to a virtual method, I will look that up for you", failing to dereference the host function pointer in the host virtual function table.
 
 ### How to solve this?
 Strictly speaking, the observed behavior on NVCC is an optimization that uses the context information to avoid the Vtable lookup.
-If the compiler does not apply this optimization, you can help in different ways by providing additional information. Unfortunately, none of these strategies is fully portable to all backends.
+If the compiler does not apply this optimization, you can help in different ways by providing additional information. Unfortunately, none of these strategies are fully portable to all backends.
 
-- Tell the compiler not to look up any function name in the Vtable when calling `Bar()` by using [qualified name lookup](https://en.cppreference.com/w/cpp/language/qualified_lookup). For this, you tell the compiler which function you want by spelling out the class scope in which the function should be found e.g. `this->Derived::Bar();`. This behavior is specified in the C++ Standard. Nevertheless, some backends are not fully compliant to the Standard.
-- Changing the `override` to `final` on the `Bar()` in the `Derived` class. This tells the compiler `Bar()` is not changing in derived objects. Many compilers do use this in optimization and deduce which function to call without the Vtable. Nevertheless, this might only work with certain compilers, as this effect of adding `final` is not specified in the C++ Standard.
-- Similarly, the entire derived class `Implementation` can be marked `final`. This is compiler dependent too, for the same reasons.
+- Tell the compiler not to look up any function name in the Vtable when calling `Bar()` by using [qualified name lookup](https://en.cppreference.com/w/cpp/language/qualified_lookup). For this, you tell the compiler which function you want by spelling out the class scope in which the function should be found e.g. `this->Derived::Bar();`. This behavior is specified in the C++ standard. Nevertheless, some backends are not fully compliant to the standard.
+- Changing the `override` to `final` on the `Bar()` in the `Derived` class. This tells the compiler `Bar()` is not changing in derived objects. Many compilers do use this in optimization and deduce which function to call without the Vtable. Nevertheless, this might only work with certain compilers, as this effect of adding `final` is not specified in the C++ standard.
+- Similarly, the entire derived class `Derived` can be marked `final`. This is compiler dependent too, for the same reasons.
 
 ## Questions/Follow-up
 
-This is intended to be an educational resource for our users. If something doesn't make sense, or you have further questions, you'd be doing us a favor by letting us know on [Slack](https://kokkosteam.slack.com) or [GitHub](https://github.com/kokkos/kokkos)
+This is intended to be an educational resource for our users. If something doesn't make sense, or you have further questions, you'd be doing us a favor by letting us know on [Slack](https://kokkosteam.slack.com) or [GitHub](https://github.com/kokkos/kokkos).
