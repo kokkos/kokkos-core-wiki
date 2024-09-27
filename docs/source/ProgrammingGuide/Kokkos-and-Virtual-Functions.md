@@ -11,7 +11,7 @@ Please note that virtual functions can be executed on the device for the followi
 - Cuda; and
 - HIP (with a limitation, as explained at the end).
 
-<!-- Especially, SYCL 2020 [cannot handle virtual functions](https://registry.khronos.org/SYCL/specs/sycl-2020/html/sycl-2020.html#_overview). -->
+Especially, SYCL 2020 [cannot handle virtual functions](https://registry.khronos.org/SYCL/specs/sycl-2020/html/sycl-2020.html#architecture).
 
 ## The Problem
 
@@ -65,11 +65,11 @@ Remember that we have one Vtable shared amongst all instances of a type. Each in
 
 Now that we know what the compiler is doing to implement virtual functions, we'll look at why it doesn't work with GPU's.
 
-Credit: the content of this section is adapted from Pablo Arias [here](https://pabloariasal.github.io/2017/06/10/understanding-virtual-tables/).
+Credit: the content of this section is adapted from [this article of Pablo Arias(https://pabloariasal.github.io/2017/06/10/understanding-virtual-tables/).
 
 ## Then why doesn't the straightforward approach work?
 
-The reason the straightforward approach described above fails is that when dealing with GPU-compatible classes with virtual functions, there isn't one Vtable, but two. The first holds the host version of the virtual functions, while the second holds the device functions.
+The reason why the straightforward approach described above fails is that when dealing with GPU-compatible classes with virtual functions, there isn't one Vtable, but two. The first holds the host version of the virtual functions, while the second holds the device functions.
 
 ![VTableDevice](./figures/VirtualFunctions-VTablesHostDevice.png)
 
@@ -134,7 +134,7 @@ int main(int argc, char *argv[])
 ```
 
 We first use the `KOKKOS_FUNCTION` macro to make the methods callable from a kernel.
-When creating the instance, note that we introduce a distinction between the *memory* that the it uses, and the actual instantiated *object*.
+When creating the instance, note that we introduce a distinction between the *memory* that it uses, and the actual instantiated *object*.
 The object instance is constructed on the device, within a single-iteration `parallel_for`, using [placement new](https://en.cppreference.com/w/cpp/language/new#Placement_new).
 Since the kernel does not have a return type, we use a static cast to associate the object type with the memory allocation.
 
