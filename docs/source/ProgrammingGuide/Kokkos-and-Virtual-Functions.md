@@ -15,7 +15,7 @@ Please note that virtual functions can be executed on the device for the followi
 
 ## The Problem
 
-In GPU programming, you might have run into the bug of calling a host function from the device. A similar thing can happen for subtle reasons in code using virtual functions. Consider the following serial code
+In GPU programming, you might have run into the bug of calling a host function from the device. A similar thing can happen for subtle reasons in code using virtual functions. Consider the following serial code:
 
 ```c++
 class Base {
@@ -27,13 +27,11 @@ class Base {
 
 class Derived : public Base {
   public:
-  public:
   void Bar() override {}
 };
 
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
   // create
   Base* instance = new Derived();
 
@@ -87,7 +85,7 @@ The problem here is that we are constructing the instance on the host.
 If we were constructing it on the device, we'd get the correct Vpointer, and thus the correct functions.
 Note that this would allow to call virtual functions on the device only, not on the host anymore.
 
-To that aim, we first allocate memory on the device, then construct on the device using a technique called *placement new*
+Therefore, we first allocate memory on the device, then construct on the device using a technique called [*placement new*](https://en.cppreference.com/w/cpp/language/new#Placement_new):
 
 ```cpp
 #include <Kokkos_Core.hpp>
@@ -137,10 +135,11 @@ int main(int argc, char *argv[])
 
 We first use the `KOKKOS_FUNCTION` macro to make the methods callable from a kernel.
 When creating the instance, note that we introduce a distinction between the *memory* that the it uses, and the actual instantiated *object*.
-The construct is done on the device, within a single-iteration `parallel_for`, using placement new.
+The object instance is constructed on the device, within a single-iteration `parallel_for`, using [placement new](https://en.cppreference.com/w/cpp/language/new#Placement_new).
 Since the kernel does not have a return type, we use a static cast to associate the object type with the memory allocation.
 
-The destructor must explicitly be called from the device, again with a single-iteration `parallel_for`. Then the memory allocation can be release with `kokkos_free`.
+For not [trivially destructable](https://en.cppreference.com/w/cpp/language/destructor#Trivial_destructor) objects the destructor must explicitly be called on the device.
+After destructing the object in a single-iteration `parallel_for`, the memory allocation can be finally release with `kokkos_free`.
 
 This code is extremely ugly, but leads to functional virtual function calls on the device. The Vpointer now points to the device Vtable.
 Remember that those virtual functions cannot be called on the host anymore!
@@ -152,7 +151,7 @@ For a full working example, see [the example in the repo](https://github.com/kok
 ## What if I need a setter that works with host values?
 
 The first problem people run into with this is when they want to set some fields based on host data. As the object instance resides in device memory, it might not be accessible by the host. But the fields can be set within a `parallel_for` on the device. Nevertheless, this requires that the lambda or functor that sets the fields on the device must have access to the host data.
-The most productive solution we've found in these cases is to allocate the instance in `SharedSpace`, initialize it on the device, and then fill in fields on the host
+The most productive solution we've found in these cases is to allocate the object instance in `SharedSpace`, which allows to have the object constructed on the device, and then to set fields on the host:
 
 ```c++
 // create
