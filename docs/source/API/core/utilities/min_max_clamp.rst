@@ -4,13 +4,13 @@ Minimum/maximum operations
 .. role:: cppkokkos(code)
     :language: cpp
 
-.. _StandarLibraryHeaderAlgorithm: https://en.cppreference.com/w/cpp/header/algorithm
+.. _StandardLibraryHeaderAlgorithm: https://en.cppreference.com/w/cpp/header/algorithm
 
-.. |StandarLibraryHeaderAlgorithm| replace:: ``<algorithm>``
+.. |StandardLibraryHeaderAlgorithm| replace:: ``<algorithm>``
 
 Defined in header ``<Kokkos_Core.hpp>``
 
-Provides minimum/maximum and related operations from the standard library header |StandarLibraryHeaderAlgorithm|_.
+Provides minimum/maximum and related operations from the standard library header |StandardLibraryHeaderAlgorithm|_.
 
 The min/max and clamp function templates are defined in the ``Kokkos::`` namespace since Kokkos 3.7
 
