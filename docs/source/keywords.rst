@@ -14,7 +14,7 @@ CMake Keywords
    available CMake options and their current values. It may be more up to date
    with the Kokkos version that you are using.
    **A word of warning:** variables with names containing ``IMPL`` are private
-   implementation detailis. Avoid modifying these unless you have a deep
+   implementation details. Avoid modifying these unless you have a deep
    understanding of their implications and are aware that they might change
    without notice.
    
