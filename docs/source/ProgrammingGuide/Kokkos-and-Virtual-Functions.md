@@ -27,11 +27,13 @@ class Base {
 
 class Derived : public Base {
   public:
+  public:
   void Bar() override {}
 };
 
 
 int main(int argc, char *argv[])
+{
   // create
   Base* instance = new Derived();
 
@@ -67,7 +69,7 @@ Now that we know what the compiler is doing to implement virtual functions, we'l
 
 Credit: the content of this section is adapted from Pablo Arias [here](https://pabloariasal.github.io/2017/06/10/understanding-virtual-tables/).
 
-## Then why the straightforward approach doesn't work?
+## Then why doesn't the straightforward approach work?
 
 The reason the straightforward approach described above fails is that when dealing with GPU-compatible classes with virtual functions, there isn't one Vtable, but two. The first holds the host version of the virtual functions, while the second holds the device functions.
 
@@ -81,8 +83,8 @@ We faithfully copied all of the members of the class on the GPU memory, includin
 
 ## Make it work
 
-The problem here is that we are constructing the instance on the Host.
-If we were constructing it on the Device, we'd get the correct Vpointer, and thus the correct functions.
+The problem here is that we are constructing the instance on the host.
+If we were constructing it on the device, we'd get the correct Vpointer, and thus the correct functions.
 Note that this would allow to call virtual functions on the device only, not on the host anymore.
 
 To that aim, we first allocate memory on the device, then construct on the device using a technique called *placement new*
@@ -136,7 +138,7 @@ int main(int argc, char *argv[])
 We first use the `KOKKOS_FUNCTION` macro to make the methods callable from a kernel.
 When creating the instance, note that we introduce a distinction between the *memory* that the it uses, and the actual instantiated *object*.
 The construct is done on the device, within a single-iteration `parallel_for`, using placement new.
-Since the kernel does not have a return type, we use a static cast to associate the object with the memory allocation.
+Since the kernel does not have a return type, we use a static cast to associate the object type with the memory allocation.
 
 The destructor must explicitly be called from the device, again with a single-iteration `parallel_for`. Then the memory allocation can be release with `kokkos_free`.
 
@@ -149,8 +151,7 @@ For a full working example, see [the example in the repo](https://github.com/kok
 
 ## What if I need a setter that works with host values?
 
-The first problem people run into with this is when they want to initialize some fields based on host data, using a setter which is *not* a virtual function.
-Calling this setter on the device would crash if the host data doesn't form a valid type on the device: especially, if the data type is not copyable on the device (e.g. for a pointer), or if the data instance is invalid on the device.
+The first problem people run into with this is when they want to set some fields based on host data. As the object instance resides in device memory, it might not be accessible by the host. But the fields can be set within a `parallel_for` on the device. Nevertheless, this requires that the lambda or functor that sets the fields on the device must have access to the host data.
 The most productive solution we've found in these cases is to allocate the instance in `SharedSpace`, initialize it on the device, and then fill in fields on the host
 
 ```c++
