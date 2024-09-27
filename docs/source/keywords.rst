@@ -10,14 +10,13 @@ CMake Keywords
    Recall that to set a keyword in CMake you used the syntax ``-Dkeyword_name=value``.
 
 .. note::
-   You may use the ``ccmake`` curses GUI to browse the complete list of
-   available CMake options and their current settings. It may be more current to your
-   Kokkos version than this Wiki's list.
-
-.. warning::
-   Any CMake keyword containing `IMPL_` can fundamentally alter the underlying implementation
-   of Kokkos on a given backend. It is encouraged not to set these unless the user knows what
-   they are doing and can accept the behavior changing without warning.
+   The ``ccmake`` graphical user interface offers a convenient way to explore
+   available CMake options and their current values. It may be more up to date
+   with the Kokkos version that you are using.
+   **A word of warning:** variables with names containing ``IMPL`` are private
+   implementation detailis. Avoid modifying these unless you have a deep
+   understanding of their implications and are aware that they might change
+   without notice.
    
 
 This page is organized in four sections:
@@ -216,6 +215,13 @@ Backend-specific options
       * Use unified memory (UM) by default for CUDA
       * ``OFF``
 
+    * * ``Kokkos_ENABLE_IMPL_CUDA_MALLOC_ASYNC``
+      * Use ``cudaMallocAsync`` (requires CUDA Toolkit version 11.2 or higher). This
+	optimization may improve performance in applications with multiple CUDA streams per device, but it
+	is known to be incompatible with MPI distributions built on older versions of UCX
+	and many Cray MPICH instances. See `known issues <known-issues.html#cuda>`_.
+      * (see below)
+
     * * ``Kokkos_ENABLE_HIP_MULTIPLE_KERNEL_INSTANTIATIONS``
       * Instantiate multiple kernels at compile time - improve performance but increase compile time
       * ``OFF``
@@ -227,12 +233,6 @@ Backend-specific options
     * * ``Kokkos_ENABLE_ATOMICS_BYPASS``
       * Disable atomics when no host parallel nor device backend is enabled for Serial only builds (since Kokkos 4.3)
       * ``OFF``
-    * * ``Kokkos_ENABLE_IMPL_CUDA_MALLOC_ASYNC``
-      * Enable ``cudaMallocAsync`` (requires CUDA Toolkit version 11.2 or higher). This
-	optimization may improve performance in applications with multiple CUDA streams per device, but it
-	is known to be incompatible with MPI distributions built on older versions of UCX
-	and many Cray MPICH instances. See `known issues <known-issues.html#cuda>`_.
-      * ``ON``
 	
     * * ``Kokkos_ENABLE_IMPL_HPX_ASYNC_DISPATCH``
       * Enable asynchronous dispatch for the HPX backend
@@ -241,7 +241,7 @@ Backend-specific options
 	
 ``Kokkos_ENABLE_CUDA_LAMBDA`` default value is ``OFF`` until 3.7 and ``ON`` since 4.0
 
-``Kokkos_ENABLE_IMPL_CUDA_MALLOC_ASYNC`` default value is ``OFF`` until 4.2, and ``ON`` until 4.5
+``Kokkos_ENABLE_IMPL_CUDA_MALLOC_ASYNC`` default value is ``OFF`` except in 4.2, 4.3, and 4.4
 
 
 
