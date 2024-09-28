@@ -199,13 +199,9 @@ Backend-specific options
       * Activate experimental relaxed constexpr functions
       * ``OFF``
 
-    * * ``Kokkos_ENABLE_CUDA_LAMBDA``
+    * * ``Kokkos_ENABLE_CUDA_LAMBDA`` :red:`[Deprecated since 4.1]`
       * Activate experimental lambda features
       * (see below)
-
-    * * ``Kokkos_ENABLE_CUDA_LDG_INTRINSIC``
-      * Use CUDA LDG intrinsics
-      * ``OFF``
 
     * * ``Kokkos_ENABLE_CUDA_RELOCATABLE_DEVICE_CODE``
       * Enable relocatable device code (RDC) for CUDA
