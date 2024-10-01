@@ -525,169 +525,213 @@
         <article role="main">
           <section class="tex2jax_ignore mathjax_ignore" id="kokkos-and-virtual-functions">
 <h1>14. Kokkos and Virtual Functions<a class="headerlink" href="#kokkos-and-virtual-functions" title="Permalink to this heading">#</a></h1>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Using virtual functions in parallel regions is not a good idea in general. It often degrades performance, requires specific code for a correct execution on GPU, and is not portable on every backend. We recommend to use a different approach whenever possible.</p>
+</div>
 <p>Due to oddities of GPU programming, the use of virtual functions in Kokkos parallel regions can be complicated. This document describes the problems you’re likely to face, where they come from, and how to work around them.</p>
+<p>Please note that virtual functions can be executed on the device for the following backends:</p>
+<ul class="simple">
+<li><p>Cuda; and</p></li>
+<li><p>HIP (with a limitation, as explained at the end).</p></li>
+</ul>
+<p>Especially, SYCL 2020 <a class="reference external" href="https://registry.khronos.org/SYCL/specs/sycl-2020/html/sycl-2020.html#architecture">cannot handle virtual functions</a>.</p>
 <section id="the-problem">
 <h2>The Problem<a class="headerlink" href="#the-problem" title="Permalink to this heading">#</a></h2>
-<p>In GPU programming, you might have run into the bug of calling a host function from the device. A similar thing can happen for subtle reasons in code using virtual functions. Consider the following code</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Derived</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">Base</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="cm">/** fields */</span>
+<p>In GPU programming, you might have run into the bug of calling a host function from the device. A similar thing can happen for subtle reasons in code using virtual functions. Consider the following serial code:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Base</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="k">public</span><span class="o">:</span>
-<span class="w">  </span><span class="n">KOKKOS_FUNCTION</span><span class="w"> </span><span class="k">virtual</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">Bar</span><span class="p">(){</span>
-<span class="w">    </span><span class="c1">// TODO: implement all of physics</span>
-<span class="w">  </span><span class="p">}</span><span class="w"> </span>
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="n">Foo</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span>
+
+<span class="w">  </span><span class="k">virtual</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">Bar</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span>
 <span class="p">};</span>
 
-<span class="n">Base</span><span class="o">*</span><span class="w"> </span><span class="n">hostClassInstance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Derived</span><span class="p">();</span>
-<span class="n">Base</span><span class="o">*</span><span class="w"> </span><span class="n">deviceClassInstance</span><span class="p">;</span>
-<span class="n">cudaMalloc</span><span class="p">((</span><span class="kt">void</span><span class="o">**</span><span class="p">)</span><span class="o">&amp;</span><span class="n">deviceClassInstance</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">Derived</span><span class="p">));</span>
-<span class="n">cudaMemcpy</span><span class="p">(</span><span class="n">deviceClassInstance</span><span class="p">,</span><span class="w"> </span><span class="n">hostClassInstance</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">Derived</span><span class="p">),</span><span class="w"> </span><span class="n">cudaMemcpyHostToDevice</span><span class="p">);</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Derived</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">Base</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">public</span><span class="o">:</span>
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="n">Bar</span><span class="p">()</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{}</span>
+<span class="p">};</span>
 
-<span class="n">Kokkos</span><span class="o">::</span><span class="n">parallel_for</span><span class="p">(</span><span class="s">&quot;DeviceKernel&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">SomeCudaPolicy</span><span class="p">,</span><span class="w"> </span><span class="n">KOKKOS_LAMBDA</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="n">deviceClassInstance</span><span class="o">-&gt;</span><span class="n">Bar</span><span class="p">();</span>
-<span class="p">});</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">argv</span><span class="p">[])</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// create</span>
+<span class="w">  </span><span class="n">Base</span><span class="o">*</span><span class="w"> </span><span class="n">instance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Derived</span><span class="p">();</span>
+
+<span class="w">  </span><span class="c1">// use</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">instance</span><span class="o">-&gt;</span><span class="n">Bar</span><span class="p">();</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="c1">// cleanup</span>
+<span class="w">  </span><span class="k">delete</span><span class="w"> </span><span class="n">instance</span><span class="p">;</span>
+<span class="p">}</span>
 </pre></div>
 </div>
-<p>At a glance this should be fine, we’ve made a device instance of a class, copied the contents of a host instance into it, and then used it. This code will typically crash, however, because <code class="docutils literal notranslate"><span class="pre">virtualFunction</span></code> will call a host version of the function. To understand why, you’ll need to understand a bit about how virtual functions are implemented.</p>
+<p>This code is more complex to port on GPU than it looks like.
+Using a straightforward approach, we would annotate functions with <code class="docutils literal notranslate"><span class="pre">KOKKOS_FUNCTION</span></code>, replace the <code class="docutils literal notranslate"><span class="pre">for</span></code> loop with <code class="docutils literal notranslate"><span class="pre">parallel_for</span></code> and copy <code class="docutils literal notranslate"><span class="pre">instance</span></code> on the GPU memory (not disclosing how for now).
+Then, we would call <code class="docutils literal notranslate"><span class="pre">Bar()</span></code> inside the <code class="docutils literal notranslate"><span class="pre">parallel_for</span></code>.
+At a glance this should be fine, but it will typically crash, however, because <code class="docutils literal notranslate"><span class="pre">instance</span></code> will call a host version of <code class="docutils literal notranslate"><span class="pre">Bar()</span></code>.
+To understand why, we need to understand a bit about how virtual functions are implemented.</p>
 </section>
-<section id="v-tables-v-pointers-v-ery-annoying-with-gpus">
-<h2>V-Tables, V-Pointers, V-ery annoying with GPUs<a class="headerlink" href="#v-tables-v-pointers-v-ery-annoying-with-gpus" title="Permalink to this heading">#</a></h2>
+<section id="vtables-vpointers-very-annoying-with-gpus">
+<h2>Vtables, Vpointers, Very annoying with GPUs<a class="headerlink" href="#vtables-vpointers-very-annoying-with-gpus" title="Permalink to this heading">#</a></h2>
 <p>Virtual functions allow a program to handle Derived classes through a pointer to their Base class and have things work as they should. To make this work, the compiler needs some way to identify whether a pointer which is nominally to a Base class really is a pointer to the Base, or whether it’s really a pointer to any Derived class. This happens through Vpointers and Vtables. For every class with virtual functions, there is one Vtable shared among all instances, this table contains function pointers for all the virtual functions the class implements.</p>
 <p><img alt="VTable" src="../_images/VirtualFunctions-VTables.png" /></p>
-<p>Okay, so now we have Vtables, if a class knows what type it is it could call the correct function. But how does it know?</p>
+<p>Okay, so now we have Vtables, if a class knows what type it is, it could call the correct function. But how does it know?</p>
 <p>Remember that we have one Vtable shared amongst all instances of a type. Each instance, however, has a hidden member called the Vpointer, which the compiler points at construction to the correct Vtable. So a call to a virtual function simply dereferences that pointer, and then indexes into the Vtable to find the precise virtual function called.</p>
 <p><img alt="VPointer" src="../_images/VirtualFunctions-VPointers.png" /></p>
-<p>Now that we know what the compiler is doing to implement virtual functions, we’ll look at why it doesn’t work with GPU’s</p>
-<p>Credit: the content of this section is adapted from Pablo Arias <a class="reference external" href="https://pabloariasal.github.io/2017/06/10/understanding-virtual-tables/">here</a></p>
+<p>Now that we know what the compiler is doing to implement virtual functions, we’ll look at why it doesn’t work with GPU’s.</p>
+<p>Credit: the content of this section is adapted from <a class="reference external" href="https://pabloariasal.github.io/2017/06/10/understanding-virtual-tables/">this article of Pablo Arias</a>.</p>
 </section>
-<section id="then-why-doesn-t-my-code-work">
-<h2>Then why doesn’t my code work?<a class="headerlink" href="#then-why-doesn-t-my-code-work" title="Permalink to this heading">#</a></h2>
-<p>The reason the intro code might break is that when dealing with GPU-compatible classes with virtual functions, there isn’t one Vtable, but two. The first holds the host versions of the virtual functions, while the second holds the device functions.</p>
+<section id="then-why-doesn-t-the-straightforward-approach-work">
+<h2>Then why doesn’t the straightforward approach work?<a class="headerlink" href="#then-why-doesn-t-the-straightforward-approach-work" title="Permalink to this heading">#</a></h2>
+<p>The reason why the straightforward approach described above fails is that when dealing with GPU-compatible classes with virtual functions, there isn’t one Vtable, but two. The first holds the host version of the virtual functions, while the second holds the device functions.</p>
 <p><img alt="VTableDevice" src="../_images/VirtualFunctions-VTablesHostDevice.png" /></p>
-<p>Since we construct the class instance on the host, so it’s Vpointer points to the host Vtable.</p>
+<p>Since we construct the class instance on the host, its Vpointer points to the host Vtable.</p>
 <p><img alt="VPointerToHost" src="../_images/VirtualFunctions-VPointerToHost.png" /></p>
-<p>Our cudaMemcpy faithfully copied all of the members of the class, including the Vpointer merrily pointing at host functions, which we then call on the device.</p>
+<p>We faithfully copied all of the members of the class on the GPU memory, including the Vpointer happily pointing at host functions, which we then call on the device.</p>
 </section>
-<section id="how-to-fix-this">
-<h2>How to fix this<a class="headerlink" href="#how-to-fix-this" title="Permalink to this heading">#</a></h2>
-<p>The problem here is that we are constructing the class on the Host. If we were constructing on the Device, we’d get the correct Vpointer, and thus the correct functions (but only for calls on the device). In pseudocode, we want to move from</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">Base</span><span class="o">*</span><span class="w"> </span><span class="n">hostInstance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Derived</span><span class="p">();</span><span class="w"> </span><span class="c1">// allocate and initialize host</span>
-<span class="n">Base</span><span class="o">*</span><span class="w"> </span><span class="n">deviceInstance</span><span class="p">;</span><span class="w"> </span><span class="c1">// cudaMalloc&#39;d to allocate</span>
-<span class="n">cudaMemcpy</span><span class="p">(</span><span class="n">deviceInstance</span><span class="p">,</span><span class="w"> </span><span class="n">hostInstance</span><span class="p">);</span><span class="w"> </span><span class="c1">// to initialize the device</span>
-<span class="n">Kokkos</span><span class="o">::</span><span class="n">parallel_for</span><span class="p">(...</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="c1">// use deviceInstance</span>
-<span class="p">});</span>
+<section id="make-it-work">
+<h2>Make it work<a class="headerlink" href="#make-it-work" title="Permalink to this heading">#</a></h2>
+<p>The problem here is that we are constructing the instance on the host.
+If we were constructing it on the device, we’d get the correct Vpointer, and thus the correct functions.
+Note that this would allow to call virtual functions on the device only, not on the host anymore.</p>
+<p>Therefore, we first allocate memory on the device, then construct on the device using a technique called <a class="reference external" href="https://en.cppreference.com/w/cpp/language/new#Placement_new"><em>placement new</em></a>:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Kokkos_Core.hpp&gt;</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Base</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">public</span><span class="o">:</span>
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="n">Foo</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span>
+
+<span class="w">  </span><span class="n">KOKKOS_FUNCTION</span>
+<span class="w">  </span><span class="k">virtual</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">Bar</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span>
+<span class="p">};</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Derived</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">Base</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">public</span><span class="o">:</span>
+<span class="w">  </span><span class="n">KOKKOS_FUNCTION</span>
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="n">Bar</span><span class="p">()</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{}</span>
+<span class="p">};</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">initialize</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="n">argv</span><span class="p">);</span>
+<span class="w">  </span><span class="p">{</span>
+
+<span class="w">  </span><span class="c1">// create</span>
+<span class="w">  </span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">deviceInstanceMemory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">kokkos_malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">Derived</span><span class="p">));</span><span class="w"> </span><span class="c1">// allocate memory on device</span>
+<span class="w">  </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">parallel_for</span><span class="p">(</span><span class="s">&quot;initialize&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">KOKKOS_LAMBDA</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="p">(</span><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">Derived</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">deviceInstanceMemory</span><span class="p">))</span><span class="w"> </span><span class="n">Derived</span><span class="p">();</span><span class="w"> </span><span class="c1">// initialize on device</span>
+<span class="w">  </span><span class="p">});</span>
+<span class="w">  </span><span class="n">Base</span><span class="o">*</span><span class="w"> </span><span class="n">deviceInstance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">Derived</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">deviceInstanceMemory</span><span class="p">);</span><span class="w"> </span><span class="c1">// declare on this memory</span>
+
+<span class="w">  </span><span class="c1">// use</span>
+<span class="w">  </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">parallel_for</span><span class="p">(</span><span class="s">&quot;myKernel&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="n">KOKKOS_LAMBDA</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">deviceInstance</span><span class="o">-&gt;</span><span class="n">Bar</span><span class="p">();</span>
+<span class="w">  </span><span class="p">});</span>
+
+<span class="w">  </span><span class="c1">// cleanup</span>
+<span class="w">  </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">parallel_for</span><span class="p">(</span><span class="s">&quot;destroy&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">KOKKOS_LAMBDA</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">deviceInstance</span><span class="o">-&gt;~</span><span class="n">Base</span><span class="p">();</span><span class="w"> </span><span class="c1">// destroy on device</span>
+<span class="w">  </span><span class="p">});</span>
+<span class="w">  </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">kokkos_free</span><span class="p">(</span><span class="n">deviceInstanceMemory</span><span class="p">);</span><span class="w"> </span><span class="c1">// free</span>
+
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">finalize</span><span class="p">();</span>
+<span class="p">}</span>
 </pre></div>
 </div>
-<p>To one where we construct on the device using a technique called <code class="docutils literal notranslate"><span class="pre">placement</span> <span class="pre">new</span></code></p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">Base</span><span class="o">*</span><span class="w"> </span><span class="n">deviceInstance</span><span class="p">;</span><span class="w"> </span><span class="c1">// cudaMalloc&#39;d to allocate it</span>
-<span class="n">Kokkos</span><span class="o">::</span><span class="n">parallel_for</span><span class="p">(...</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="k">new</span><span class="p">((</span><span class="n">Derived</span><span class="o">*</span><span class="p">)</span><span class="n">deviceInstance</span><span class="p">)</span><span class="w"> </span><span class="n">Derived</span><span class="p">();</span><span class="w"> </span><span class="c1">// construct an instance in the place, the pointer deviceInstance points to</span>
-<span class="p">});</span>
-</pre></div>
-</div>
-<p>This code is extremely ugly, but leads to functional virtual function calls on the device. The Vpointer now points to the device Vtable.</p>
+<p>We first use the <code class="docutils literal notranslate"><span class="pre">KOKKOS_FUNCTION</span></code> macro to make the methods callable from a kernel.
+When creating the instance, note that we introduce a distinction between the <em>memory</em> that it uses, and the actual instantiated <em>object</em>.
+The object instance is constructed on the device, within a single-iteration <code class="docutils literal notranslate"><span class="pre">parallel_for</span></code>, using <a class="reference external" href="https://en.cppreference.com/w/cpp/language/new#Placement_new">placement new</a>.
+Since the kernel does not have a return type, we use a static cast to associate the object type with the memory allocation.</p>
+<p>For not <a class="reference external" href="https://en.cppreference.com/w/cpp/language/destructor#Trivial_destructor">trivially destructible</a> objects the destructor must explicitly be called on the device.
+After destructing the object in a single-iteration <code class="docutils literal notranslate"><span class="pre">parallel_for</span></code>, the memory allocation can be finally release with <code class="docutils literal notranslate"><span class="pre">kokkos_free</span></code>.</p>
+<p>This code is extremely ugly, but leads to functional virtual function calls on the device. The Vpointer now points to the device Vtable.
+Remember that those virtual functions cannot be called on the host anymore!</p>
 <p><img alt="VPointerToDevice" src="../_images/VirtualFunctions-VPointerToDevice.png" /></p>
-<p>Note that like with other uses of <code class="docutils literal notranslate"><span class="pre">new</span></code>, you need to later <code class="docutils literal notranslate"><span class="pre">free</span></code> the memory.
-For a full working example, see <a class="reference external" href="https://github.com/kokkos/kokkos/blob/master/example/virtual_functions/main.cpp">the example in the repo</a>.</p>
+<p>For a full working example, see <a class="reference external" href="https://github.com/kokkos/kokkos/blob/master/example/virtual_functions/main.cpp">the example in the repo</a>.</p>
 </section>
-<section id="complications-and-fixes">
-<h2>Complications and Fixes<a class="headerlink" href="#complications-and-fixes" title="Permalink to this heading">#</a></h2>
-<p>The first problem people run into with this is that they want to initialize some fields or nested classes based on host data before moving data down to the device</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">Base</span><span class="o">*</span><span class="w"> </span><span class="n">hostInstance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Derived</span><span class="p">();</span><span class="w"> </span><span class="c1">// allocate and initialize host</span>
-<span class="n">hostInstance</span><span class="o">-&gt;</span><span class="n">setAField</span><span class="p">(</span><span class="n">someHostValue</span><span class="p">);</span>
-<span class="n">Base</span><span class="o">*</span><span class="w"> </span><span class="n">deviceInstance</span><span class="p">;</span><span class="w"> </span><span class="c1">// cudaMalloc&#39;d to allocate</span>
-<span class="n">cudaMemcpy</span><span class="p">(</span><span class="n">deviceInstance</span><span class="p">,</span><span class="w"> </span><span class="n">hostInstance</span><span class="p">);</span><span class="w"> </span><span class="c1">// to initialize the device</span>
-<span class="n">Kokkos</span><span class="o">::</span><span class="n">parallel_for</span><span class="p">(...</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="c1">// use deviceInstance</span>
-<span class="p">});</span>
+<section id="what-if-i-need-a-setter-that-works-with-host-values">
+<h2>What if I need a setter that works with host values?<a class="headerlink" href="#what-if-i-need-a-setter-that-works-with-host-values" title="Permalink to this heading">#</a></h2>
+<p>The first problem people run into with this is when they want to set some fields based on host data. As the object instance resides in device memory, it might not be accessible by the host. But the fields can be set within a <code class="docutils literal notranslate"><span class="pre">parallel_for</span></code> on the device. Nevertheless, this requires that the lambda or functor that sets the fields on the device must have access to the host data.
+The most productive solution we’ve found in these cases is to allocate the object instance in <code class="docutils literal notranslate"><span class="pre">SharedSpace</span></code>, which allows to have the object constructed on the device, and then to set fields on the host:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="c1">// create</span>
+<span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">deviceInstanceMemory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">kokkos_malloc</span><span class="o">&lt;</span><span class="n">Kokkos</span><span class="o">::</span><span class="n">SharedSpace</span><span class="o">&gt;</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">Derived</span><span class="p">));</span><span class="w"> </span><span class="c1">// allocate on shared space</span>
+<span class="c1">// ...</span>
+<span class="n">deviceInstance</span><span class="o">-&gt;</span><span class="n">setAField</span><span class="p">(</span><span class="n">someHostValue</span><span class="p">);</span><span class="w"> </span><span class="c1">// set on host</span>
 </pre></div>
 </div>
-<p>We can’t translate this easily, the naive translation would be</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">Base</span><span class="o">*</span><span class="w"> </span><span class="n">deviceInstance</span><span class="p">;</span><span class="w"> </span><span class="c1">// cudaMalloc&#39;d to allocate it</span>
-<span class="n">Kokkos</span><span class="o">::</span><span class="n">parallel_for</span><span class="p">(...</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="k">new</span><span class="p">((</span><span class="n">Derived</span><span class="o">*</span><span class="p">)</span><span class="n">deviceInstance</span><span class="p">)</span><span class="w"> </span><span class="n">Derived</span><span class="p">();</span><span class="w"> </span><span class="c1">// initialize an instance, and place the result in the pointer deviceInstance</span>
-<span class="w">  </span><span class="n">deviceInstance</span><span class="o">-&gt;</span><span class="n">setAField</span><span class="p">(</span><span class="n">someHostValue</span><span class="p">);</span>
-<span class="p">});</span>
-</pre></div>
-</div>
-<p>Which would crash for accessing the host value <code class="docutils literal notranslate"><span class="pre">someHostValue</span></code> on the device (or this value would need to be copied into the <code class="docutils literal notranslate"><span class="pre">parallel_for</span></code>). The most productive solution we’ve found in these cases is to allocate the class in <code class="docutils literal notranslate"><span class="pre">SharedSpace</span></code>, initialize it on the device, and then fill in fields on the host. To wit:</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">Base</span><span class="o">*</span><span class="w"> </span><span class="n">deviceInstance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">kokkos_malloc</span><span class="o">&lt;</span><span class="n">Kokkos</span><span class="o">::</span><span class="n">SharedSpace</span><span class="o">&gt;</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">Derived</span><span class="p">));</span>
-<span class="n">Kokkos</span><span class="o">::</span><span class="n">parallel_for</span><span class="p">(...</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="k">new</span><span class="p">((</span><span class="n">Derived</span><span class="o">*</span><span class="p">)</span><span class="n">deviceInstance</span><span class="p">)</span><span class="w"> </span><span class="n">Derived</span><span class="p">();</span><span class="w"> </span><span class="c1">// construct an instance in the place the the pointer deviceInstance points to</span>
-<span class="p">});</span>
-<span class="n">deviceInstance</span><span class="o">-&gt;</span><span class="n">setAField</span><span class="p">(</span><span class="n">someHostValue</span><span class="p">);</span><span class="w"> </span><span class="c1">// set some field on the host</span>
-</pre></div>
-</div>
-<p>This is the solution that the code teams we have talked to have said is the most productive way to solve the problem. Nevertheless, it should be kept in mind, that this restricts virtual function calls to the device.</p>
+<p>The setter is still called on the host.
+Beware that this is only valid for backends that support <code class="docutils literal notranslate"><span class="pre">SharedSpace</span></code>.</p>
+<p>Keep in mind that, despite using a “unified” <code class="docutils literal notranslate"><span class="pre">SharedSpace</span></code>, you still have to resort to placement new in order to have the correct Vpointer and hence Vtable on the device!</p>
 </section>
-<section id="but-what-if-i-do-not-really-need-the-v-tables-on-the-device-side">
-<h2>But what if I do not really need the V-Tables on the device side?<a class="headerlink" href="#but-what-if-i-do-not-really-need-the-v-tables-on-the-device-side" title="Permalink to this heading">#</a></h2>
-<p>Consider the following example which calls the <code class="docutils literal notranslate"><span class="pre">virtual</span> <span class="pre">Bar()</span></code> on the device from a pointer of derived class type.
-One might think this should work because no V-Table lookup on the device is necessary.</p>
+<section id="but-what-if-i-do-not-really-need-the-vtables-on-the-device-side">
+<h2>But what if I do not really need the Vtables on the device side?<a class="headerlink" href="#but-what-if-i-do-not-really-need-the-vtables-on-the-device-side" title="Permalink to this heading">#</a></h2>
+<p>Consider the following example which calls the virtual function <code class="docutils literal notranslate"><span class="pre">Bar()</span></code> on the device from a pointer of derived class type.
+One might think this should work because no Vtable lookup on the device is necessary.</p>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Kokkos_Core.hpp&gt;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstdio&gt;</span>
 
-<span class="k">struct</span><span class="w"> </span><span class="nc">Base</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="n">KOKKOS_DEFAULTED_FUNCTION</span>
-<span class="w">    </span><span class="k">virtual</span><span class="w"> </span><span class="o">~</span><span class="n">Base</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="p">;</span>
-
-<span class="w">    </span><span class="n">KOKKOS_FUNCTION</span>
-<span class="w">    </span><span class="k">virtual</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">Bar</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Base</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">public</span><span class="o">:</span>
+<span class="w">  </span><span class="n">KOKKOS_FUNCTION</span>
+<span class="w">  </span><span class="k">virtual</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">Bar</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <span class="p">};</span>
 
-<span class="k">struct</span><span class="w"> </span><span class="nc">Derived</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">Base</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="n">KOKKOS_FUNCTION</span>
-<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">Bar</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">override</span>
-<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Hello from Derived</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Derived</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Base</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">public</span><span class="o">:</span>
+<span class="w">  </span><span class="n">KOKKOS_FUNCTION</span>
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="n">Bar</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Hello from Derived</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
 
-<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">apply</span><span class="p">(){</span>
-<span class="w">        </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">parallel_for</span><span class="p">(</span><span class="s">&quot;myLoop&quot;</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span>
-<span class="w">            </span><span class="n">KOKKOS_CLASS_LAMBDA</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">this</span><span class="o">-&gt;</span><span class="n">Bar</span><span class="p">();</span><span class="w"> </span><span class="p">}</span>
-<span class="w">        </span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="n">apply</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">parallel_for</span><span class="p">(</span><span class="s">&quot;myLoop&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span>
+<span class="w">      </span><span class="n">KOKKOS_CLASS_LAMBDA</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">this</span><span class="o">-&gt;</span><span class="n">Bar</span><span class="p">();</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
 <span class="p">};</span>
 
-<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">argv</span><span class="p">[])</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">argv</span><span class="p">[])</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">initialize</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span><span class="n">argv</span><span class="p">);</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">      </span><span class="k">auto</span><span class="w"> </span><span class="n">derivedPtr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">Derived</span><span class="o">&gt;</span><span class="p">();</span>
-<span class="w">      </span><span class="n">derivedPtr</span><span class="o">-&gt;</span><span class="n">apply</span><span class="p">();</span>
-<span class="w">      </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">fence</span><span class="p">();</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">finalize</span><span class="p">();</span>
+<span class="w">  </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">initialize</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="n">argv</span><span class="p">);</span>
+<span class="w">  </span><span class="p">{</span>
+
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">derivedPtr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="n">Derived</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="w">  </span><span class="n">derivedPtr</span><span class="o">-&gt;</span><span class="n">apply</span><span class="p">();</span>
+<span class="w">  </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">fence</span><span class="p">();</span>
+
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">finalize</span><span class="p">();</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 <section id="why-is-this-not-portable">
 <h3>Why is this not portable?<a class="headerlink" href="#why-is-this-not-portable" title="Permalink to this heading">#</a></h3>
-<p>Inside the <code class="docutils literal notranslate"><span class="pre">parallel_for</span></code> <code class="docutils literal notranslate"><span class="pre">Bar()</span></code> is called. As <code class="docutils literal notranslate"><span class="pre">Derived</span></code> derives from the pure virtual class <code class="docutils literal notranslate"><span class="pre">Base</span></code>, the ‘Bar()’ function is marked <code class="docutils literal notranslate"><span class="pre">override</span></code>.
-On ROCm 5.2 this results in a memory access violation.
-When executing the <code class="docutils literal notranslate"><span class="pre">this-&gt;Bar()</span></code> call, the runtime looks into the V-Table and dereferences a host function pointer on the device.</p>
+<p>Inside the <code class="docutils literal notranslate"><span class="pre">parallel_for</span></code>, <code class="docutils literal notranslate"><span class="pre">Bar()</span></code> is called. As <code class="docutils literal notranslate"><span class="pre">Derived</span></code> derives from the pure virtual class <code class="docutils literal notranslate"><span class="pre">Base</span></code>, the <code class="docutils literal notranslate"><span class="pre">Bar()</span></code> function is marked <code class="docutils literal notranslate"><span class="pre">override</span></code>.
+On ROCm (at least up to 6.0) this results in a memory access violation.
+When executing the <code class="docutils literal notranslate"><span class="pre">this-&gt;Bar()</span></code> call, the runtime looks into the Vtable and dereferences a host function pointer on the device.</p>
 </section>
 <section id="but-if-that-is-the-case-why-does-it-work-with-nvcc">
 <h3>But if that is the case, why does it work with NVCC?<a class="headerlink" href="#but-if-that-is-the-case-why-does-it-work-with-nvcc" title="Permalink to this heading">#</a></h3>
-<p>Notice, that the <code class="docutils literal notranslate"><span class="pre">parallel_for</span></code> is called from a pointer of type <code class="docutils literal notranslate"><span class="pre">Derived</span></code> and not a pointer of type <code class="docutils literal notranslate"><span class="pre">Base</span></code> pointing to an <code class="docutils literal notranslate"><span class="pre">Derived</span></code> object.
-Thus, no V-Table lookup for the <code class="docutils literal notranslate"><span class="pre">Bar()</span></code> would be necessary as it can be deduced from the context of the call that it will be <code class="docutils literal notranslate"><span class="pre">Derived::Bar()</span></code>.
+<p>Notice that the <code class="docutils literal notranslate"><span class="pre">parallel_for</span></code> is called from a pointer of type <code class="docutils literal notranslate"><span class="pre">Derived</span></code> and not a pointer of type <code class="docutils literal notranslate"><span class="pre">Base</span></code> pointing to an <code class="docutils literal notranslate"><span class="pre">Derived</span></code> object.
+Thus, no Vtable lookup for the <code class="docutils literal notranslate"><span class="pre">Bar()</span></code> would be necessary as it can be deduced from the context of the call that it will be <code class="docutils literal notranslate"><span class="pre">Derived::Bar()</span></code>.
 But here it comes down to how the compiler handles the lookup. NVCC understands that the call is coming from an <code class="docutils literal notranslate"><span class="pre">Derived</span></code> object and thinks: “Oh, I see, that you are calling from an <code class="docutils literal notranslate"><span class="pre">Derived</span></code> object, I know it will be the <code class="docutils literal notranslate"><span class="pre">Bar()</span></code> in this class scope, I will do this for you”.
-ROCm, on the other hand, sees your call and thinks “Oh, this is a call to a virtual method, I will look that up for you” - failing to dereference the host function pointer in the host virtual function table.</p>
+ROCm, on the other hand, sees the call and thinks “Oh, this is a call to a virtual method, I will look that up for you”, failing to dereference the host function pointer in the host virtual function table.</p>
 </section>
 <section id="how-to-solve-this">
 <h3>How to solve this?<a class="headerlink" href="#how-to-solve-this" title="Permalink to this heading">#</a></h3>
-<p>Strictly speaking, the observed behavior on NVCC is an optimization that uses the context information to avoid the V-Table lookup.
-If the compiler does not apply this optimization, you can help in different ways by providing additional information. Unfortunately, none of these strategies is fully portable to all backends.</p>
+<p>Strictly speaking, the observed behavior on NVCC is an optimization that uses the context information to avoid the Vtable lookup.
+If the compiler does not apply this optimization, you can help in different ways by providing additional information. Unfortunately, none of these strategies are fully portable to all backends.</p>
 <ul class="simple">
-<li><p>Tell the compiler not to look up any function name in the V-Table when calling <code class="docutils literal notranslate"><span class="pre">Bar()</span></code> by using <a class="reference external" href="https://en.cppreference.com/w/cpp/language/qualified_lookup">qualified name lookup</a>. For this, you tell the compiler which function you want by spelling out the class scope in which the function should be found e.g. <code class="docutils literal notranslate"><span class="pre">this-&gt;Derived::Bar();</span></code>. This behavior is specified in the C++ Standard. Nevertheless, some backends are not fully compliant to the Standard.</p></li>
-<li><p>Changing the <code class="docutils literal notranslate"><span class="pre">override</span></code> to <code class="docutils literal notranslate"><span class="pre">final</span></code> on the <code class="docutils literal notranslate"><span class="pre">Bar()</span></code> in the <code class="docutils literal notranslate"><span class="pre">Derived</span></code> class. This tells the compiler <code class="docutils literal notranslate"><span class="pre">Bar()</span></code> is not changing in derived objects. Many compilers do use this in optimization and deduce which function to call without the V-Table. Nevertheless, this might only work with certain compilers, as this effect of adding <code class="docutils literal notranslate"><span class="pre">final</span></code> is not specified in the C++ Standard.</p></li>
-<li><p>Similarly, the entire derived class <code class="docutils literal notranslate"><span class="pre">Implementation</span></code> can be marked <code class="docutils literal notranslate"><span class="pre">final</span></code>. This is compiler dependent too, for the same reasons.</p></li>
+<li><p>Tell the compiler not to look up any function name in the Vtable when calling <code class="docutils literal notranslate"><span class="pre">Bar()</span></code> by using <a class="reference external" href="https://en.cppreference.com/w/cpp/language/qualified_lookup">qualified name lookup</a>. For this, you tell the compiler which function you want by spelling out the class scope in which the function should be found e.g. <code class="docutils literal notranslate"><span class="pre">this-&gt;Derived::Bar();</span></code>. This behavior is specified in the C++ standard. Nevertheless, some backends are not fully compliant to the standard.</p></li>
+<li><p>Changing the <code class="docutils literal notranslate"><span class="pre">override</span></code> to <code class="docutils literal notranslate"><span class="pre">final</span></code> on the <code class="docutils literal notranslate"><span class="pre">Bar()</span></code> in the <code class="docutils literal notranslate"><span class="pre">Derived</span></code> class. This tells the compiler <code class="docutils literal notranslate"><span class="pre">Bar()</span></code> is not changing in derived objects. Many compilers do use this in optimization and deduce which function to call without the Vtable. Nevertheless, this might only work with certain compilers, as this effect of adding <code class="docutils literal notranslate"><span class="pre">final</span></code> is not specified in the C++ standard.</p></li>
+<li><p>Similarly, the entire derived class <code class="docutils literal notranslate"><span class="pre">Derived</span></code> can be marked <code class="docutils literal notranslate"><span class="pre">final</span></code>. This is compiler dependent too, for the same reasons.</p></li>
 </ul>
 </section>
 </section>
 <section id="questions-follow-up">
 <h2>Questions/Follow-up<a class="headerlink" href="#questions-follow-up" title="Permalink to this heading">#</a></h2>
-<p>This is intended to be an educational resource for our users. If something doesn’t make sense, or you have further questions, you’d be doing us a favor by letting us know on <a class="reference external" href="https://kokkosteam.slack.com">Slack</a> or <a class="reference external" href="https://github.com/kokkos/kokkos">GitHub</a></p>
+<p>This is intended to be an educational resource for our users. If something doesn’t make sense, or you have further questions, you’d be doing us a favor by letting us know on <a class="reference external" href="https://kokkosteam.slack.com">Slack</a> or <a class="reference external" href="https://github.com/kokkos/kokkos">GitHub</a>.</p>
 </section>
 </section>
 
@@ -750,11 +794,11 @@ If the compiler does not apply this optimization, you can help in different ways
             <ul>
 <li><a class="reference internal" href="#">14. Kokkos and Virtual Functions</a><ul>
 <li><a class="reference internal" href="#the-problem">The Problem</a></li>
-<li><a class="reference internal" href="#v-tables-v-pointers-v-ery-annoying-with-gpus">V-Tables, V-Pointers, V-ery annoying with GPUs</a></li>
-<li><a class="reference internal" href="#then-why-doesn-t-my-code-work">Then why doesn’t my code work?</a></li>
-<li><a class="reference internal" href="#how-to-fix-this">How to fix this</a></li>
-<li><a class="reference internal" href="#complications-and-fixes">Complications and Fixes</a></li>
-<li><a class="reference internal" href="#but-what-if-i-do-not-really-need-the-v-tables-on-the-device-side">But what if I do not really need the V-Tables on the device side?</a><ul>
+<li><a class="reference internal" href="#vtables-vpointers-very-annoying-with-gpus">Vtables, Vpointers, Very annoying with GPUs</a></li>
+<li><a class="reference internal" href="#then-why-doesn-t-the-straightforward-approach-work">Then why doesn’t the straightforward approach work?</a></li>
+<li><a class="reference internal" href="#make-it-work">Make it work</a></li>
+<li><a class="reference internal" href="#what-if-i-need-a-setter-that-works-with-host-values">What if I need a setter that works with host values?</a></li>
+<li><a class="reference internal" href="#but-what-if-i-do-not-really-need-the-vtables-on-the-device-side">But what if I do not really need the Vtables on the device side?</a><ul>
 <li><a class="reference internal" href="#why-is-this-not-portable">Why is this not portable?</a></li>
 <li><a class="reference internal" href="#but-if-that-is-the-case-why-does-it-work-with-nvcc">But if that is the case, why does it work with NVCC?</a></li>
 <li><a class="reference internal" href="#how-to-solve-this">How to solve this?</a></li>
