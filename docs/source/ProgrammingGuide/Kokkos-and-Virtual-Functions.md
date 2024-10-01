@@ -138,7 +138,7 @@ When creating the instance, note that we introduce a distinction between the *me
 The object instance is constructed on the device, within a single-iteration `parallel_for`, using [placement new](https://en.cppreference.com/w/cpp/language/new#Placement_new).
 Since the kernel does not have a return type, we use a static cast to associate the object type with the memory allocation.
 
-For not [trivially destructable](https://en.cppreference.com/w/cpp/language/destructor#Trivial_destructor) objects the destructor must explicitly be called on the device.
+For not [trivially destructible](https://en.cppreference.com/w/cpp/language/destructor#Trivial_destructor) objects the destructor must explicitly be called on the device.
 After destructing the object in a single-iteration `parallel_for`, the memory allocation can be finally release with `kokkos_free`.
 
 This code is extremely ugly, but leads to functional virtual function calls on the device. The Vpointer now points to the device Vtable.
