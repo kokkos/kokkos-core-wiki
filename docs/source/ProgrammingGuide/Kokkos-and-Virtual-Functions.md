@@ -125,7 +125,6 @@ int main(int argc, char *argv[])
   Kokkos::parallel_for("destroy", 1, KOKKOS_LAMBDA (const int i) {
     deviceInstance->~Base(); // destroy on device
   });
-  Kokkos::fence("wait for destroy");
   Kokkos::kokkos_free(deviceInstanceMemory); // free
 
   }
