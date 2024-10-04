@@ -161,6 +161,7 @@ General options
       * ``OFF``
 
     * * ``Kokkos_ENABLE_COMPILE_AS_CMAKE_LANGUAGE``
+      * Use native CMake language support
       * Analogous to CUDA/HIP as CMake language
       * ``OFF``
  
