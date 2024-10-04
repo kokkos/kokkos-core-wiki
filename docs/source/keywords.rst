@@ -160,6 +160,10 @@ General options
       * Aggressively vectorize loops
       * ``OFF``
 
+    * * ``Kokkos_ENABLE_COMPILE_AS_CMAKE_LANGUAGE``
+      * Analogous to CUDA/HIP as CMake language
+      * ``OFF``
+ 
 Debugging
 ---------
 .. list-table::
