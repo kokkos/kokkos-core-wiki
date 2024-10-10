@@ -161,7 +161,7 @@ Description
 
 .. cppkokkos:function:: template <class ViewType, class ALLOC_PROP> ImplMirrorType create_mirror_view_and_copy(ALLOC_PROP const& arg_prop, ViewType const& src);
 
-   If the  memory space included in the |View|_ constructor arguments ``arg_prop`` (created by a call to `Kokkos::view_alloc`) matches the memory
+   If the  memory space included in the |View|_ constructor arguments ``arg_prop`` (created by a call to `Kokkos::view_alloc`) does not match the memory
    space of ``src``, creates a new |View|_ in the specified memory space using ``arg_prop`` and the same layout
    and padding as ``src``. Additionally, a ``deep_copy`` from ``src`` to the new view is executed
    (using the execution space contained in ``arg_prop`` if provided). Otherwise returns ``src``.
