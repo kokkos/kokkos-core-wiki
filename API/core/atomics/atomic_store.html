@@ -525,26 +525,33 @@
         <article role="main">
           <section id="atomic-store">
 <h1><code class="docutils literal notranslate"><span class="pre">atomic_store</span></code><a class="headerlink" href="#atomic-store" title="Permalink to this heading">#</a></h1>
-<p>Header File: <code class="docutils literal notranslate"><span class="pre">&lt;Kokkos_Core.hpp&gt;</span></code></p>
+<p>Defined in header <code class="docutils literal notranslate"><span class="pre">&lt;Kokkos_Atomic.hpp&gt;</span></code> which is included from <code class="docutils literal notranslate"><span class="pre">&lt;Kokkos_Core.hpp&gt;</span></code></p>
 <section id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Permalink to this heading">#</a></h2>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">atomic_store</span><span class="p">(</span><span class="n">ptr_to_value</span><span class="p">,</span><span class="n">new_value</span><span class="p">);</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">atomic_store</span><span class="p">(</span><span class="o">&amp;</span><span class="n">obj</span><span class="p">,</span><span class="w"> </span><span class="n">desired</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>Atomically sets the value at the address given by <code class="docutils literal notranslate"><span class="pre">ptr_to_value</span></code> to <code class="docutils literal notranslate"><span class="pre">new_value</span></code>.</p>
+<p>Atomically replaces <code class="docutils literal notranslate"><span class="pre">obj</span></code>’s value with <code class="docutils literal notranslate"><span class="pre">desired</span></code>.</p>
 </section>
 <section id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this heading">#</a></h2>
 <dl class="cppkokkos function">
-<dt class="sig sig-object cppkokkos" id="_CPPv4I0E12atomic_storevPC1TK1T">
-<span id="_CPPv3I0E12atomic_storePC1TK1T"></span><span id="_CPPv2I0E12atomic_storePC1TK1T"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">atomic_store</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0E12atomic_storevPC1TK1T" title="atomic_store::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">ptr_to_value</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E12atomic_storevPC1TK1T" title="atomic_store::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">new_value</span></span><span class="sig-paren">)</span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4I0E12atomic_storevPC1TK1T" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>Atomically executes <code class="docutils literal notranslate"><span class="pre">*ptr_to_value</span> <span class="pre">=</span> <span class="pre">new_value;</span></code>.</p>
+<dt class="sig sig-object cppkokkos" id="_CPPv4I0E12atomic_storevP1TNSt15type_identity_tI1TEE">
+<span id="_CPPv3I0E12atomic_storeP1TNSt15type_identity_tI1TEE"></span><span id="_CPPv2I0E12atomic_storeP1TNSt15type_identity_tI1TEE"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">atomic_store</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0E12atomic_storevP1TNSt15type_identity_tI1TEE" title="atomic_store::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">ptr</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">type_identity_t</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0E12atomic_storevP1TNSt15type_identity_tI1TEE" title="atomic_store::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">val</span></span><span class="sig-paren">)</span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4I0E12atomic_storevP1TNSt15type_identity_tI1TEE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Atomically writes <code class="docutils literal notranslate"><span class="pre">val</span></code> into <code class="docutils literal notranslate"><span class="pre">*ptr</span></code> (<code class="docutils literal notranslate"><span class="pre">*ptr</span> <span class="pre">=</span> <span class="pre">val;</span></code>).</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">ptr_to_value</span></code>: address of the to be updated value.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">new_value</span></code>: new value.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ptr</span></code>: address of the object whose value is to be replaced.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">val</span></code>: value to store in the referenced object.</p></li>
 </ul>
 </dd></dl>
 
+</section>
+<section id="see-also">
+<h2>See also<a class="headerlink" href="#see-also" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="atomic_load.html">atomic_load</a>: atomically obtains the value of the referenced object</p></li>
+<li><p><a class="reference external" href="atomic_exchange.html">atomic_exchange</a>: atomically replaces the value of the referenced object and obtains the value held previously</p></li>
+</ul>
 </section>
 </section>
 
@@ -608,6 +615,7 @@
 <li><a class="reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">atomic_store</span></code></a><ul>
 <li><a class="reference internal" href="#usage">Usage</a></li>
 <li><a class="reference internal" href="#description">Description</a></li>
+<li><a class="reference internal" href="#see-also">See also</a></li>
 </ul>
 </li>
 </ul>
