@@ -49,6 +49,20 @@ There are numerous device backends, options, and architecture-specific optimizat
 ````
 which activates the OpenMP backend. All the options controlling device backends, options, architectures, and third-party libraries (TPLs) are given in [CMake Keywords](../keywords).
 
+## Separate Compilation via CMake Language
+
+Kokkos supports separating the compilation of source files using Kokkos from others. This is controlled similarly to a CMake language. The feature requires Kokkos to be compiled with the keyword `Kokkos_ENABLE_COMPILE_AS_CMAKE_LANGUAGE=ON`. The availability of the feature can be requested via `find_package(Kokkos COMPONENTS separable_compilation)`.
+The `kokkos_compilation` CMake function marks files in the application's source that contain Kokkos code to be compiled with the correct compiler and flags.
+````cmake
+# this function is provided to easily select which files use the same compiler as Kokkos
+#       GLOBAL      --> all files
+#       TARGET      --> all files in a target
+#       SOURCE      --> specific source files
+#       DIRECTORY   --> all files in directory
+#       PROJECT     --> all files/targets in a project/subproject
+kokkos_compilation(SOURCE example.cpp)
+````
+The example in `examples/cmake_build_installed_kk_as_language` can help get you started.
 
 ## Known Issues<a name="KnownIssues"></a>
 
@@ -60,6 +74,9 @@ which activates the OpenMP backend. All the options controlling device backends,
 ### Fortran
 
 * In a mixed C++/Fortran code, CMake will use the C++ linker by default. If you override this behavior and use Fortran as the link language, the link may break because Kokkos adds linker flags expecting the linker to be C++. Prior to CMake 3.18, Kokkos has no way of detecting in downstream projects that the linker was changed to Fortran.  From CMake 3.18, Kokkos can use generator expressions to avoid adding flags when the linker is not C++. Note: Kokkos will not add any linker flags in this Fortran case. The user will be entirely on their own to add the appropriate linker flags.
+
+### MSVC
+* Building an application that uses Kokkos with Microsoft Visual Studio and the `Cuda` backend enabled, requires the use of the CMake language feature, see [Separate Compilation](#separate-compilation-via-cmake-language).
 
 ## Raw Makefile
 

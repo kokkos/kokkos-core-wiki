@@ -160,6 +160,10 @@ General options
       * Aggressively vectorize loops
       * ``OFF``
 
+    * * ``Kokkos_ENABLE_COMPILE_AS_CMAKE_LANGUAGE``
+      * Enables Kokkos behaving like a CMake language, see `Separate Compilation <building.html#separate-compilation-via-cmake-language>`_.
+      * ``OFF``
+
 Debugging
 ---------
 .. list-table::
