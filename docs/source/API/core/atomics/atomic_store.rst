@@ -18,7 +18,7 @@ Atomically replaces ``obj``'s value with ``desired``.
 Description
 -----------
 
-.. cppkokkos:function:: template<class T> void atomic_store(T* ptr, std::identity_type_t<T> val);
+.. cppkokkos:function:: template<class T> void atomic_store(T* ptr, std::type_identity_t<T> val);
 
    Atomically writes ``val`` into ``*ptr`` (``*ptr = val;``).
 
