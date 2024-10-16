@@ -1,6 +1,14 @@
 Macros
 ======
 
+Function Markup Macros
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+   macros-special/host_device_macros.rst
+
 Version Macros
 --------------
 
