@@ -258,12 +258,17 @@ Looking at the common functionality in the current implementations of ``CudaSpac
             std::is_same_v<Mem, typename Mem::memory_space>;
             Kokkos::is_execution_space<typename Mem::execution_space>::value;
             typename Mem::device_type;
+            typename Mem::size_type;
         }
         // Required methods:
-        requires(Mem m, size_t size, void* ptr) {
+        requires(Mem m, size_t size, void* ptr, const char* label, typename Mem::execution_space exec) {
             { m.name() } -> const char*;
+            { m.allocate(exec, size) } -> void*;
+            { m.allocate(exec, label, size) } -> void*;
             { m.allocate(size) } -> void*;
+            { m.allocate(label, size) } -> void*;
             { m.deallocate(ptr, size) };
+            { m.deallocate(label, ptr, size) };
         };
 
 Implementation Requirements
