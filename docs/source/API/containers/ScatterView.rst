@@ -24,7 +24,7 @@ Parameters
 
 *  ``Layout``:  See  `Kokkos View LayoutType <../core/view/view.html>`_
 
-*  ``ExecutionSpace``:  Where the code will be executed (CPU or GPU); typical values are ``Kokkos::DefaultHostExecutionSpace``, ``Kokkos::DefaultExecutionSpace``
+*  ``ExecutionSpace``:  Defaults to ``Kokkos::DefaultExecutionSpace``
 
 *  ``Operation``:  ScatterSum, ScatterProd, ScatterMin, ScatterMax
 
@@ -59,6 +59,29 @@ Public Class Members
 
         Type alias for a View type created from the internal_data_type.
 
+
+Constructors
+-------------
+
+    .. cppkokkos:function:: ScatterView()
+
+        The default constructor. Default constructs members.
+
+    .. cppkokkos:function:: ScatterView(View<RT, RP...> const&)
+
+        Constructor from a ``Kokkos::View``. ``internal_view`` member is copy constructed from this input view.
+
+    .. cppkokkos:function:: ScatterView(std::string const& name, Dims ... dims)
+
+        Constructor from variadic pack of dimension arguments. Constructs ``internal_view`` member.
+
+    .. cppkokkos:function:: ScatterView(ALLOC_PROP const& arg_prop, Dims... dims)
+
+        Constructor from variadic pack of dimension arguments. Constructs ``internal_view`` member.
+        This constructor allows passing an object created by ``Kokkos::view_alloc`` as first argument, e.g., for specifying an execution space via
+        ``Kokkos::view_alloc(exec_space, "label")``.
+
+
 Public Class Methods
 --------------------
 
@@ -91,27 +114,6 @@ Public Class Methods
        resize a view with discarding old data
 
 
-Constructors
--------------
-
-    .. cppkokkos:function:: ScatterView()
-
-        The default constructor. Default constructs members.
-
-    .. cppkokkos:function:: ScatterView(View<RT, RP...> const&)
-
-        Constructor from a ``Kokkos::View``. ``internal_view`` member is copy constructed from this input view.
-
-    .. cppkokkos:function:: ScatterView(std::string const& name, Dims ... dims)
-
-        Constructor from variadic pack of dimension arguments. Constructs ``internal_view`` member.
-
-    .. cppkokkos:function:: ScatterView(ALLOC_PROP const& arg_prop, Dims... dims)
-
-        Constructor from variadic pack of dimension arguments. Constructs ``internal_view`` member.
-        This constructor allows passing an object created by ``Kokkos::view_alloc`` as first argument, e.g., for specifying an execution space via
-        ``Kokkos::view_alloc(exec_space, "label")``.
-
 
 Free Functions
 --------------------
@@ -120,7 +122,7 @@ Free Functions
 .. cppkokkos:function:: contribute(View<DT1, VP...>& dest, Kokkos::Experimental::ScatterView<DT2, LY, ES, OP, CT, DP> const& src)
 
    convenience function to perform final reduction of ScatterView
-   results into a resultant View; may be called following `parallel_reduce <../core/parallel-dispatch/parallel_reduce.html>`_ .
+   (intermediate) results into a (final) resultant View; may be called following `parallel_reduce <../core/parallel-dispatch/parallel_reduce.html>`_ .
 
 
 Example
