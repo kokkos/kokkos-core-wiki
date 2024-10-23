@@ -8,20 +8,20 @@ CUDA
 ====
 
 - From Kokkos 4.2 to 4.4.01, `cudaMallocAsync` was used by default by Kokkos to allocate memory because
-  it can lead to better performance than the regular `cudaMalloc`.
-  However, it has been reported to not work well with some MPI implementations, specially in low level layers
-  like UCX. This is partly due to the fact that `cudaMallocAsync` uses `cudaMemPool_t`, and the default memory pool
+  it can lead to better performance than the regular `cudaMalloc.`
+  However, it has been reported to not work well with some MPI implementations, especially in low-level layers
+  like UCX. This is partly due to the fact that `cudaMallocAsync` uses `cudaMemPool_t,` and the default memory pool
   does not support interprocess communication (IPC) without tweaking (https://developer.nvidia.com/blog/using-cuda-stream-ordered-memory-allocator-part-2/#interprocess_communication_support).
-  The correct set up of the default memory pool should be done by the user (https://developer.nvidia.com/blog/using-cuda-stream-ordered-memory-allocator-part-2/#library_composability).
+  The user should set up the default memory pool to support IPC (https://developer.nvidia.com/blog/using-cuda-stream-ordered-memory-allocator-part-2/#library_composability).
 
-  If needed, Kokkos can be set to use `cudaMallocAsync` by adding the following to CMake arguments:
+  The old default behavior of enabling `cudaMallocAsync` can be restored by adding the following to CMake arguments:
 
   .. code-block::
 
-     -DKokkos_ENABLE_IMPL_CUDA_MALLOC_ASYNC=OFF
+     -DKokkos_ENABLE_IMPL_CUDA_MALLOC_ASYNC=ON
 
-- With older MPI versions and when using a legacy NVIDIA GPU the default allocation mechanism of Kokkos for
-  `CudaSpace` can cause issues. For example MPI may crash with illegal memory accesses or Kokkos' initialization
+- With older MPI versions and when using a legacy NVIDIA GPU, the default allocation mechanism of Kokkos for
+  `CudaSpace` can cause issues. For example, MPI may crash with illegal memory accesses or Kokkos' initialization
   can report errors like:
 
   .. code-block::
