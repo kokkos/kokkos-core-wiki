@@ -54,10 +54,10 @@ Except in rare instances, it should not be used directly, but instead should be 
 execution on a device supported by HIP. Except in rare instances, it should not be used directly,
 but instead should be used generically as an execution space. For details, see |DocExecutionSpaceConcept|_.
 
-``Kokkos::Experimental::SYCL``
+``Kokkos::SYCL``
 ------------------------------
 
-``Kokkos::Experimental::SYCL`` is an |ExecutionSpaceConceptType|_ representing execution on a device supported by SYCL. 
+``Kokkos::SYCL`` :sup:`promoted from` |Experimental|_ :sup:`since 4.5` is an |ExecutionSpaceConceptType|_ representing execution on a device supported by SYCL.
 
 ``Kokkos::HPX``
 ---------------
