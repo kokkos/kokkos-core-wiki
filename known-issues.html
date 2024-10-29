@@ -528,7 +528,9 @@
 <section id="cuda">
 <h2>CUDA<a class="headerlink" href="#cuda" title="Permalink to this heading">#</a></h2>
 <ul>
-<li><p>With older MPI versions and when using a legacy NVIDIA GPU the default allocation mechanism of Kokkos for <cite>CudaSpace</cite> can cause issues. For example MPI may crash with illegal memory accesses or Kokkos’ initialization can report errors like:</p>
+<li><p>With some MPI versions or when using a legacy NVIDIA GPU, the default allocation mechanism of Kokkos (from version 4.2 to 4.4) for
+<cite>CudaSpace</cite> can cause issues. For example, MPI may crash with illegal memory accesses, or Kokkos’ initialization
+can report errors like:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">terminate</span> <span class="n">called</span> <span class="n">after</span> <span class="n">throwing</span> <span class="n">an</span> <span class="n">instance</span> <span class="n">of</span> <span class="s1">&#39;Kokkos::Experimental::CudaRawMemoryAllocationFailure&#39;</span>
 </pre></div>
 </div>
@@ -536,6 +538,11 @@
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">DKokkos_ENABLE_IMPL_CUDA_MALLOC_ASYNC</span><span class="o">=</span><span class="n">OFF</span>
 </pre></div>
 </div>
+<p>A technical explanation of why disabling this policy is helpful for making some MPI implementations work, especially in their low-level layers
+like UCX, is partly due to the fact that <cite>cudaMallocAsync</cite> uses <cite>cudaMemPool_t,</cite> and the default memory pool
+does not support interprocess communication (IPC) without tweaking (<a class="reference external" href="https://developer.nvidia.com/blog/using-cuda-stream-ordered-memory-allocator-part-2/#interprocess_communication_support">https://developer.nvidia.com/blog/using-cuda-stream-ordered-memory-allocator-part-2/#interprocess_communication_support</a>).
+The user should set up the default memory pool to properly support IPC (<a class="reference external" href="https://developer.nvidia.com/blog/using-cuda-stream-ordered-memory-allocator-part-2/#library_composability">https://developer.nvidia.com/blog/using-cuda-stream-ordered-memory-allocator-part-2/#library_composability</a>).</p>
+<p>Therefore, from version 4.5, the default behavior for Kokkos is to preventively disable <cite>cudaMallocAsync.</cite></p>
 </li>
 </ul>
 </section>
