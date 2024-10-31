@@ -10,18 +10,18 @@ up to 43a30195af81b6d1aa5b1efec939af8423857f2c
 - Experimental::swap -> kokkos_swap
 - vector
 - ExecutionSpace::in_parallel
-- Cuda::Cuda(cudaStream_t stream) -> Cuda(cudaStream_t stream, Impl::ManageStream manage_stream)
-- Cuda::Cuda(cudaStream_t stream, bool manage_stream) -> Cuda(cudaStream_t stream, Impl::ManageStream manage_stream)
+- Cuda::Cuda(cudaStream_t stream) -> Cuda::Cuda(cudaStream_t stream, Impl::ManageStream manage_stream)
+- Cuda::Cuda(cudaStream_t stream, bool manage_stream) -> Cuda::Cuda(cudaStream_t stream, Impl::ManageStream manage_stream)
 - Cuda::device_arch()
 - Cuda::detect_device_count()
 - Cuda::detect_device_arch()
 - CudaUVMSpace::available()
-- HIP::HIP(hipStream_t const stream, bool manage_stream) -> HIP(cudaStream_t stream, Impl::ManageStream manage_stream)
-- HIP(hipStream_t st) -> HIP(cudaStream_t stream, Impl::ManageStream manage_stream)
-- HIP::detect_device_count()
-- HPX(instance_mode mode)
-- HPX(hpx::execution::experimental::unique_any_sender<> &&sender)
-- HPX::is_asynchronous(HPX const & = HPX())
+- HIP::HIP(hipStream_t const stream, bool manage_stream) -> HIP::HIP(cudaStream_t stream, Impl::ManageStream manage_stream)
+- HIP::HIP(hipStream_t st) -> HIP::HIP(cudaStream_t stream, Impl::ManageStream manage_stream)
+- HIP::HIP::detect_device_count()
+- HPX::HPX(instance_mode mode)
+- HPX::HPX(hpx::execution::experimental::unique_any_sender<> &&sender)
+- HPX::HPX::is_asynchronous(HPX const & = HPX())
 - Complex volatile overloads
 - Tasking
 - Array<void, KOKKOS_INVALID_INDEX, void>
