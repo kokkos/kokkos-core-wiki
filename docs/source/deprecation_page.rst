@@ -6,6 +6,19 @@ Deprecations for Kokkos 4
 
 up to 43a30195af81b6d1aa5b1efec939af8423857f2c
 
+.. list-table::
+   :widths: 20 10 20 50
+   :header-rows: 1
+
+   * - Deprecated symbol
+     - Since
+     - Replacement
+     - Additional information
+   * - ``Cuda::Cuda(cudaStream_t stream, bool manage_stream)``
+     - 4.2.00
+     - ``Cuda::Cuda(cudaStream_t stream)``
+     - constructing from a Cuda execution space instance should alwyas used an externally managed cudaStream object
+
 - Default constructor for BinOp1D, BinOp3D
 - Experimental::swap -> kokkos_swap
 - vector
