@@ -1,5 +1,54 @@
-Deprecation for Kokkos-3.x
-==========================
+Deprecations
+************
+
+Deprecations for Kokkos 4
+=========================
+
+up to 43a30195af81b6d1aa5b1efec939af8423857f2c
+
+- Default constructor for BinOp1D, BinOp3D
+- Experimental::swap -> kokkos_swap
+- vector
+- ExecutionSpace::in_parallel
+- Cuda::Cuda(cudaStream_t stream) -> Cuda(cudaStream_t stream, Impl::ManageStream manage_stream)
+- Cuda::Cuda(cudaStream_t stream, bool manage_stream) -> Cuda(cudaStream_t stream, Impl::ManageStream manage_stream)
+- Cuda::device_arch()
+- Cuda::detect_device_count()
+- Cuda::detect_device_arch()
+- CudaUVMSpace::available()
+- HIP::HIP(hipStream_t const stream, bool manage_stream) -> HIP(cudaStream_t stream, Impl::ManageStream manage_stream)
+- HIP(hipStream_t st) -> HIP(cudaStream_t stream, Impl::ManageStream manage_stream)
+- HIP::detect_device_count()
+- HPX(instance_mode mode)
+- HPX(hpx::execution::experimental::unique_any_sender<> &&sender)
+- HPX::is_asynchronous(HPX const & = HPX())
+- Complex volatile overloads
+- Tasking
+- Array<void, KOKKOS_INVALID_INDEX, void>
+- Array<T, KOKKOS_INVALID_INDEX, Impl::KokkosArrayContiguous>
+- Array<T, KOKKOS_INVALID_INDEX, Impl::KokkosArrayStrided>
+- ChunkSize::ChunkSize(int value) -> explicit ChunkSize::ChunkSize(int value)
+- RangePolicy::set(ChunkSize chunksize) -> RangePolicy::set_chunk_size(int chunk_size)
+- HostSpace::AllocationMechanism, HostSpace::HostSpace(AllocationMechanism)
+- is_layouttiled
+- layout_iterate_type_selector
+- pair volatile overloads
+- pair<T1, void>
+- ScratchMemeorySpace::align(const IntType& size)
+- OpenMP::OpenMP(int pool_size) -> explicit OpenMP::OpenMP(int pool_size)
+- OpenMP::is_asynchronous(OpenMP const& = OpenMP())
+- Serial::Serial(NewInstance) -> explicit Serial::Serial(NewInstance)
+- View::Rank -> View::rank()
+- View::subview<MemoryTraits>(...) -> View::subview(...)
+- Impl::ALL_t -> ALL_t
+- Reduce/scan join() taking volatile-qualified parameters
+- InitializationSettings::set_num_devices, InitializationSettings::has_num_devices, InitializationSettings::get_num_devices
+- InitializationSettings::set_skip_devices, InitializationSettings::has_skip_devices, InitializationSettings::get_skip_devices
+- SIMD math functions in the Kokkos::Experimental namespace -> SIMD math function in the Kokkos namespace
+
+
+Deprecations for Kokkos-3.x
+===========================
 
 
 
