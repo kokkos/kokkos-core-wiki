@@ -4,25 +4,33 @@
 .. role:: cppkokkos(code)
    :language: cppkokkos
 
-Header File: <Kokkos_Core.hpp>
+Defined in header ``<Kokkos_Atomic.hpp>`` which is included from ``<Kokkos_Core.hpp>``
 
 Usage
 -----
 
 .. code-block:: cpp
 
-   old_val = atomic_exchange(ptr_to_value, new_value);
+   auto old = atomic_exchange(&obj, desired);
 
-Atomically sets the value at the address given by ``ptr_to_value`` to ``new_value`` and returns the previously stored value at the address.
+Atomically replaces the value of ``obj`` with ``desired`` and returs the value before the call.
 
 Description
 -----------
 
-.. cppkokkos:function:: template<class T> T atomic_exchange(T* const ptr_to_value, const T new_value);
+.. cppkokkos:function:: template<class T> T atomic_exchange(T* ptr, std::type_identity_t<T> val);
 
-   Atomically executes ``old_value = *ptr_to_value; *ptr_to_value = new_value; return old_value;``,
-   where ``old_value`` is the value at address ``ptr_to_value`` before doing the exchange.
+   Atomically writes ``val`` into ``*ptr`` and returns the original value of ``*ptr``.
 
-   :param ptr_to_value: address of the value to be updated
+   ``{ auto old = *ptr; *ptr = val; return old; }``
 
-   :param new_value: new value
+   :param ptr: address of the object to modify
+   :param val: the value to store in the referenced object
+   :returns: the value held previously by the object pointed to by ``ptr``
+
+
+See also
+--------
+* `atomic_load <atomic_load.html>`_: atomically obtains the value of the referenced object
+* `atomic_store <atomic_store.html>`_: atomically replaces the value of the referenced object with a non-atomic argument
+* `atomic_compare_exchange <atomic_compare_exchange.html>`_: atomically compares the value of the referenced object with non-atomic argument and performs atomic exchange if equal or atomic load if not

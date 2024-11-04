@@ -4,31 +4,34 @@
 .. role:: cppkokkos(code)
    :language: cppkokkos
 
-Header File: <Kokkos_Core.hpp>
+Defined in header ``<Kokkos_Atomic.hpp>`` which is included from ``<Kokkos_Core.hpp>``
 
 Usage
 -----
 
 .. code-block:: cpp
 
-   old_val = atomic_compare_exchange(ptr_to_value,
-				     comparison_value,
-				     new_value);
+   auto old = atomic_compare_exchange(&obj, expected, desired);
 
-Atomically sets the value at the address given by ``ptr_to_value`` to ``new_value`` if the current value at ``ptr_to_value``
-is equal to ``comparison_value``, and returns the previously stored value at the address independent on whether
-the exchange has happened.
+Atomically compares the current value of ``obj`` with ``expected``,
+replaces its value with ``desired`` if equal, and
+always returs the previously stored value at the address ``&obj`` regardless of whether the exchange has happened or not.
 
 Description
 -----------
 
-.. cppkokkos:function:: template<class T> T atomic_compare_exchange(T* const ptr_to_value, const T comparison_value, const T new_value);
+.. cppkokkos:function:: template<class T> T atomic_compare_exchange(T* ptr, std::type_identity_t<T> expected, std::type_identity_t<T> desired);
 
-   Atomically executes ``old_value = *ptr_to_value; if(old_value==comparison_value) *ptr_to_value = new_value; return old_value;``,
-   where ``old_value`` is the value at address ``ptr_to_value`` before doing the exchange.
+   Atomically compares ``*ptr`` with ``expected``, and if those are bitwise-equal, replaces the former with ``desired``, and always returns the actual value that was pointed to by ``ptr`` before the call.
 
-   :param ptr_to_value: address of the value to be updated
+   ``{ old = *ptr; if (old == expected) *ptr = desired; return old; }``
 
-   :param comparison_value: value to be compared to
+   :param ptr: address of the object to test and to modify
+   :param expected: value expected to be found in the object
+   :param desired: the value to store in the object if as expected
+   :returns: the value held previously by the object pointed to by ``ptr``
 
-   :param new_value: new value
+
+See also
+--------
+* `atomic_exchange <atomic_exchange.html>`_: atomically replaces the value of the referenced object and obtains the value held previously
