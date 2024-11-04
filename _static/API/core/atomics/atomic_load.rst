@@ -13,16 +13,19 @@ Usage
 
     auto current = atomic_load(&obj);
 
-Atomically obtains ``obj``'s value.
+Atomically obtains the current value of ``obj``.
 
 Description
 -----------
 
 .. cppkokkos:function:: template<class T> T atomic_load(T* ptr);
 
-   Atomically reads the content of ``*ptr`` and returns it (``T val = *ptr; return val;``). 
+   Atomically reads the content of ``*ptr`` and returns it.
 
-   - ``ptr``: address of the object whose current value is to be returned.
+   ``{ T val = *ptr; return val; }``
+
+   :param ptr: address of the object whose current value is to be returned
+   :returns: the value that is held by the object pointed to by ``ptr``
 
 See also
 --------

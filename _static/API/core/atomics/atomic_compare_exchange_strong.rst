@@ -1,33 +1,41 @@
 ``atomic_compare_exchange_strong``
 ==================================
 
+.. warning::
+   Deprecated since Kokkos 4.5,
+   use `atomic_compare_exchange <atomic_compare_exchange.html>`_ instead.
+
 .. role:: cppkokkos(code)
    :language: cppkokkos
 
-Header File: <Kokkos_Core.hpp>
+Defined in header ``<Kokkos_Atomic.hpp>`` which is included from ``<Kokkos_Core.hpp>``
 
 Usage
 -----
 
 .. code-block:: cpp
 
-   bool was_exchanged = atomic_compare_exchange_strong(ptr_to_value,
-						       comparison_value,
-						       new_value);
+   bool was_exchanged = atomic_compare_exchange_strong(&obj, expected, desired);
+   //                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   //                   deprecated since Kokkos 4.5
+   //                   instead prefer
+   //                   expected == atomic_compare_exchange(&obj, expected, desired)
 
-Atomically sets the value at the address given by ``ptr_to_value`` to ``new_value`` if the current value at ``ptr_to_value``
-is equal to ``comparison_value``, and returns true if the exchange has happened.
+Atomically compares the current value of ``obj`` with ``expected``
+and replaces its value with ``desired`` if equal.
+The function returns ``true`` if the exchange has happened, ``false`` otherwise.
 
 Description
 -----------
 
-.. cppkokkos:function:: template<class T> bool atomic_compare_exchange_strong(T* const ptr_to_value, const T comparison_value, const T new_value);
+.. cppkokkos:function:: template<class T> bool atomic_compare_exchange_strong(T* ptr, std::type_identity_t<T> expected, std::type_identity_t<T> desired);
 
-   Atomically executes ``old_value = *ptr_to_value; if(old_value==comparison_value) *ptr_to_value = new_value; return old_value==comparison_value;``,
-   where ``old_value`` is the value at address ``ptr_to_value`` before doing the exchange.
+   Atomically compares ``*ptr`` with ``expected``, and if those are bitwise-equal, replaces the former with ``desired``.
+   If ``desired`` is written into ``*ptr`` then ``true`` is returned.
 
-   :param ptr_to_value: address of the value to be updated
+   ``if (*ptr == expected) { *ptr = desired; return true; } else return false;``
 
-   :param comparison_value: value to be compared to
-
-   :param new_value: new value
+   :param ptr: address of the object to test and to modify
+   :param expected: value expected to be found in the object
+   :param desired: the value to store in the object if as expected
+   :returns: the result of the comparison, ``true`` if ``*ptr`` was equal to ``expected``, ``false`` otherwise

@@ -531,17 +531,23 @@
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">current</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">atomic_load</span><span class="p">(</span><span class="o">&amp;</span><span class="n">obj</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>Atomically obtains <code class="docutils literal notranslate"><span class="pre">obj</span></code>’s value.</p>
+<p>Atomically obtains the current value of <code class="docutils literal notranslate"><span class="pre">obj</span></code>.</p>
 </section>
 <section id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this heading">#</a></h2>
 <dl class="cppkokkos function">
 <dt class="sig sig-object cppkokkos" id="_CPPv4I0E11atomic_load1TP1T">
 <span id="_CPPv3I0E11atomic_loadP1T"></span><span id="_CPPv2I0E11atomic_loadP1T"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><a class="reference internal" href="#_CPPv4I0E11atomic_load1TP1T" title="atomic_load::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">atomic_load</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0E11atomic_load1TP1T" title="atomic_load::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">ptr</span></span><span class="sig-paren">)</span><span class="p"><span class="pre">;</span></span><a class="headerlink" href="#_CPPv4I0E11atomic_load1TP1T" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>Atomically reads the content of <code class="docutils literal notranslate"><span class="pre">*ptr</span></code> and returns it (<code class="docutils literal notranslate"><span class="pre">T</span> <span class="pre">val</span> <span class="pre">=</span> <span class="pre">*ptr;</span> <span class="pre">return</span> <span class="pre">val;</span></code>).</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">ptr</span></code>: address of the object whose current value is to be returned.</p></li>
-</ul>
+<dd><p>Atomically reads the content of <code class="docutils literal notranslate"><span class="pre">*ptr</span></code> and returns it.</p>
+<p><code class="docutils literal notranslate"><span class="pre">{</span> <span class="pre">T</span> <span class="pre">val</span> <span class="pre">=</span> <span class="pre">*ptr;</span> <span class="pre">return</span> <span class="pre">val;</span> <span class="pre">}</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ptr</strong> – address of the object whose current value is to be returned</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>the value that is held by the object pointed to by <code class="docutils literal notranslate"><span class="pre">ptr</span></code></p>
+</dd>
+</dl>
 </dd></dl>
 
 </section>
