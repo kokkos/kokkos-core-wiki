@@ -13,18 +13,20 @@ Usage
 
     atomic_store(&obj, desired);
 
-Atomically replaces ``obj``'s value with ``desired``.
+Atomically replaces the current value of ``obj`` with ``desired``.
 
 Description
 -----------
 
 .. cppkokkos:function:: template<class T> void atomic_store(T* ptr, std::type_identity_t<T> val);
 
-   Atomically writes ``val`` into ``*ptr`` (``*ptr = val;``).
+   Atomically writes ``val`` into ``*ptr``.
 
-   - ``ptr``: address of the object whose value is to be replaced.
+   ``{ *ptr = val; }``
 
-   - ``val``: value to store in the referenced object.
+   :param ptr: address of the object whose value is to be replaced
+   :param val: the value to store in the referenced object
+   :returns: (nothing)
 
 
 See also
