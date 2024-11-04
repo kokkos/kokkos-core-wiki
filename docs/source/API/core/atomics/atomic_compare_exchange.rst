@@ -15,7 +15,7 @@ Usage
 
 Atomically compares the current value of ``obj`` with ``expected``,
 replaces its value with ``desired`` if equal, and
-always returs the previously stored value at the address ``&obj`` regardless of whether the exchange has happened or not.
+always returns the previously stored value at the address ``&obj`` regardless of whether the exchange has happened or not.
 
 Description
 -----------
