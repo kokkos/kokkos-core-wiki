@@ -809,6 +809,36 @@ Enabling this TPL might affect performance for Kokkos algorithms that use it, e.
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">KOKKOS_ARCH_AMD_AVX2</span></code></p></td>
 <td><p>Optimize for AVX2 (enabled for Zen)</p></td>
 </tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">KOKKOS_ARCH_AMD_GFX906</span></code></p></td>
+<td><p>Optimize for AMD GPU MI50, MI60 (GPU)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">KOKKOS_ARCH_AMD_GFX908</span></code></p></td>
+<td><p>Optimize for AMD GPU MI100 (GPU)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">KOKKOS_ARCH_AMD_GFX90A</span></code></p></td>
+<td><p>Optimize for AMD GPU MI200 series (GPU)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">KOKKOS_ARCH_AMD_GFX940</span></code></p></td>
+<td><p>Optimize for AMD GPU MI300A pre-production (GPU)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">KOKKOS_ARCH_AMD_GFX942</span></code></p></td>
+<td><p>Optimize for AMD GPU MI300X (GPU)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">KOKKOS_ARCH_AMD_GFX942_APU</span></code></p></td>
+<td><p>Optimize for AMD GPU MI300A (GPU)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">KOKKOS_ARCH_AMD_GFX1030</span></code></p></td>
+<td><p>Optimize for AMD GPU V620, W6800 (GPU)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">KOKKOS_ARCH_AMD_GFX1100</span></code></p></td>
+<td><p>Optimize for AMD GPU 7900xt (GPU)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">KOKKOS_ARCH_AMD_GFX1103</span></code></p></td>
+<td><p>Optimize for AMD Phoenix APU (GPU)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">KOKKOS_ARCH_AMD_GPU</span></code></p></td>
+<td><p>String of the architecture flag for AMD GPU (e.g. “gfx90A” when targeting a MI250X accelerator)</p></td>
+</tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">KOKKOS_ARCH_AVX</span></code></p></td>
 <td><p>Optimize for AVX</p></td>
 </tr>
