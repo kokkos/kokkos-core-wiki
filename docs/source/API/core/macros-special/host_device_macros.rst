@@ -7,15 +7,16 @@
 
 Defined in header ``<Kokkos_Macros.hpp>``
 
-Usage: 
+Usage:
 
 .. code-block:: cpp
 
     KOKKOS_FUNCTION void foo();
     KOKKOS_INLINE_FUNCTION void foo();
     KOKKOS_FORCEINLINE_FUNCTION void foo();
+    KOKKOS_RELOCATABLE_FUNCTION void foo();
     auto l = KOKKOS_LAMBDA(int i) { ... };
-    auto l = KOKKOS_CLASS_LAMBDA(int i) { ... }; 
+    auto l = KOKKOS_CLASS_LAMBDA(int i) { ... };
 
 These macros deal with the management of split compilation for device and host code.
 They fullfill the same purpose as the ``__host__ __device__`` markup in CUDA and HIP.
@@ -27,7 +28,7 @@ of these macros.
 -------------------
 
 This macro is the equivalent of ``__host__ __device__`` markup in CUDA and HIP.
-Use it primarily on inline-defined member functions of classes and templated 
+Use it primarily on inline-defined member functions of classes and templated
 free functions
 
 .. code-block:: cpp
@@ -44,10 +45,6 @@ free functions
 
     template<class T>
     KOKKOS_FUNCTION void foo(T v) { ... }
-         
-This macro is also used for non-templated free functions in conjunction with relocatable device code -
-i.e. if one wants to compile functions in some compilation unit A but call them from Kokkos
-parallel constructs defined in compilation unit B.
 
 
 ``KOKKOS_INLINE_FUNCTION``
@@ -88,11 +85,40 @@ Use this macro only in conjunction with performing extensive performance checks.
     template<class T>
     KOKKOS_FORCEINLINE_FUNCTION
     void foo(T v) { ... }
-         
-This macro is also used for non-templated free functions in conjunction with relocatable device code -
-i.e. if one wants to compile functions in some compilation unit A but call them from Kokkos
-parallel constructs defined in compilation unit B.
 
+``KOKKOS_RELOCATABLE_FUNCTION``
+-------------------------------
+
+This macro is the equivalent of ``__host__ __device__`` markup in CUDA and HIP, and ``SYCL_EXTERNAL`` in SYCL.
+Use it for free functions that are compiled in one compilation unit but called from Kokkos
+parallel constructs defined in a different compilation unit.
+
+.. code-block:: cpp
+
+    // functor.cpp
+    #include <Kokkos_Macros.hpp>
+
+    KOKKOS_RELOCATABLE_FUNCTION void count_even(const long i, long& lcount) {
+      lcount += (i % 2) == 0;
+    }
+
+.. code-block:: cpp
+
+    // main.cpp
+    #include <Kokkos_Core.hpp>
+
+    KOKKOS_RELOCATABLE_FUNCTION void count_even(const long i, long& lcount);
+
+    int main(int argc, char* argv[]) {
+      Kokkos::ScopeGuard scope_guard(argc, argv);
+      long count = 0;
+      Kokkos::parallel_reduce(
+        n, KOKKOS_LAMBDA(const long i, long& lcount) { count_even(i, lcount); },
+        count);
+    }
+
+Note that this macro can only be used if Kokkos was configured with only host execution spaces
+or if relocatable device code support was explicitly enabled for the CUDA, HIP, or SYCL backend.
 
 ``KOKKOS_LAMBDA``
 -----------------
@@ -172,7 +198,7 @@ copies of any accessed data members, and can not use non-static member functions
 
 
 ``KOKKOS_DEDUCTION_GUIDE``
------------------------
+--------------------------
 
 This macro is used to annotate deduciont guides.
 
