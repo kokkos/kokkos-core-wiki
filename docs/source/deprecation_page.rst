@@ -27,6 +27,19 @@ up to 43a30195af81b6d1aa5b1efec939af8423857f2c
      - none
      - non-standard behavior, doesn't work well with Kokkos concepts 
 
+* ``Cuda::Cuda(cudaStream_t stream, bool manage_stream)``
+   * deprecated in `4.2.00 <https://github.com/kokkos/kokkos/pull/6401>`__
+   * replacement: ``Cuda::Cuda(cudaStream_t stream)``
+   * constructing a Cuda execution space instance should always use an externally managed ``cudaStream`` object
+* ``HIP::HIP(hipStream_t stream, bool manage_stream)``
+    * deprecated in `4.2.00 <https://github.com/kokkos/kokkos/pull/6401>`__
+    * replacement ``HIP::HIP(hipStream_t stream)``
+    * constructing a HIP execution space instance should always use an externally managed ``hipStream`` object
+* ``vector``
+    * deprecated in `4.2.00 <https://github.com/kokkos/kokkos/pull/6252>`__
+    * replacement: none
+    * non-standard behavior, doesn't work well with Kokkos concepts 
+
 - Default constructor for BinOp1D, BinOp3D
 - Experimental::swap -> kokkos_swap
 - ExecutionSpace::in_parallel
