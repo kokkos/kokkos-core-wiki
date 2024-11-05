@@ -607,7 +607,7 @@ Kokkos will attempt to autodetect the architecture flag at configuration time.
 
     * * ``Kokkos_ARCH_AMD_GFX1103``
       * GFX1103
-      * Phoenix APU
+      * Ryzen 8000G Phoenix series APU
       * (since Kokkos 4.5)
     
     * * ``Kokkos_ARCH_AMD_GFX1100``
