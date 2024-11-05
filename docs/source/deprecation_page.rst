@@ -15,22 +15,25 @@ up to 43a30195af81b6d1aa5b1efec939af8423857f2c
      - Replacement
      - Additional information
    * - ``Cuda::Cuda(cudaStream_t stream, bool manage_stream)``
-     - 4.2.00
+     - `4.2.00 <https://github.com/kokkos/kokkos/pull/6401>`__
      - ``Cuda::Cuda(cudaStream_t stream)``
-     - constructing from a Cuda execution space instance should alwyas used an externally managed cudaStream object
+     - constructing a Cuda execution space instance should always use an externally managed ``cudaStream`` object
+   * - ``HIP::HIP(hipStream_t stream, bool manage_stream)``
+     - `4.2.00 <https://github.com/kokkos/kokkos/pull/6401>`__
+     - ``HIP::HIP(hipStream_t stream)``
+     - constructing a HIP execution space instance should always use an externally managed ``hipStream`` object
+   * - ``vector``
+     - `4.2.00 <https://github.com/kokkos/kokkos/pull/6252>`__
+     - none
+     - non-standard behavior, doesn't work well with Kokkos concepts 
 
 - Default constructor for BinOp1D, BinOp3D
 - Experimental::swap -> kokkos_swap
-- vector
 - ExecutionSpace::in_parallel
-- Cuda::Cuda(cudaStream_t stream) -> Cuda::Cuda(cudaStream_t stream, Impl::ManageStream manage_stream)
-- Cuda::Cuda(cudaStream_t stream, bool manage_stream) -> Cuda::Cuda(cudaStream_t stream, Impl::ManageStream manage_stream)
 - Cuda::device_arch()
 - Cuda::detect_device_count()
 - Cuda::detect_device_arch()
 - CudaUVMSpace::available()
-- HIP::HIP(hipStream_t const stream, bool manage_stream) -> HIP::HIP(cudaStream_t stream, Impl::ManageStream manage_stream)
-- HIP::HIP(hipStream_t st) -> HIP::HIP(cudaStream_t stream, Impl::ManageStream manage_stream)
 - HIP::HIP::detect_device_count()
 - HPX::HPX(instance_mode mode)
 - HPX::HPX(hpx::execution::experimental::unique_any_sender<> &&sender)
