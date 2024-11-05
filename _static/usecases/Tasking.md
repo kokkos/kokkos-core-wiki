@@ -1,5 +1,7 @@
 # Kokkos Tasking Use Case
 
+> Deprecated since Kokkos 4.5.
+
 Kokkos provides an execution pattern that enables end-user code to dynamically execute a body of work that 
 is not easily prescribed to structured flat or hierarchical parallelism.  This use case describes the characteristics
 of an end-user program that is best designed using a tasking execution pattern, and provides examples of program structure

@@ -4,6 +4,9 @@ Task-Parallelism
 .. role:: cppkokkos(code)
     :language: cppkokkos
 
+.. warning::
+   Deprecated since Kokkos 4.5.
+
 Kokkos has support for lightweight task-based programming, which is currently pretty limited but we plan to substantially expand in the future.
 
 Will Kokkos Tasking work for my problem?
