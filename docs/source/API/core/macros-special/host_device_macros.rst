@@ -200,7 +200,7 @@ copies of any accessed data members, and can not use non-static member functions
 ``KOKKOS_DEDUCTION_GUIDE``
 --------------------------
 
-This macro is used to annotate deduciont guides.
+This macro is used to annotate user-defined deduction guides.
 
 
 .. code-block:: cpp
