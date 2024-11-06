@@ -212,7 +212,7 @@ and an instance of that type ``ex``, Kokkos guarantees the following expressions
 
     ex.fence(str);
 
-*Effects:* Upon return, all parallel patterns executed on the instance ``ex`` are guaranteed to have completed, and their effects are guaranteed visible to the calling thread. The optiopnal ``str`` argument allows customizing the event reported to Kokkos Tools.
+*Effects:* Upon return, all parallel patterns and deep_copy calls executed on the instance ``ex`` are guaranteed to have completed, and their effects are guaranteed visible to the calling thread. The optiopnal ``str`` argument allows customizing the event reported to Kokkos Tools.
 *Returns:* Nothing.
 *Note:* This *cannot* be called from within a parallel pattern.  Doing so will lead to unspecified effects (i.e., it might work, but only for some execution spaces, so be extra careful not to do it).
 
