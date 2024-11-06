@@ -325,6 +325,8 @@ Functions
 
 * ``const char* name() const;``: *Returns* the label of the execution space instance.
 
+* ``bool is_running() const;``: *Returns* ``true`` if the execution space is currently executing a kernel, otherwise returns ``false``. Therefore, if the function returns ``false``, all kernels submitted by the current thread have been completed.
+
 * ``bool in_parallel() const;``: *Returns* a value convertible to ``bool`` indicating whether the caller is executing as part of a Kokkos parallel pattern. *Note:* as currently implemented, there is no guarantee that ``true`` means the caller is necessarily executing as part of a pattern on the particular instance |ExecutionSpaceConcept|_; just *some* instance of |ExecutionSpaceConcept|_. This may be strengthened in the future.
 
 * ``int concurrency() const;`` *Returns* the maximum amount of concurrently executing work items in a parallel setting, i.e. the maximum number of threads utilized by an execution space instance.
