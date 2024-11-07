@@ -102,9 +102,7 @@ and ``OpenMPTarget``, the current state of the Kokkos |ExecutionSpaceTwo|_ conce
 
     template <typename Ex>
     concept ExecutionSpace =
-        CopyConstructible<Ex> &&
-        DefaultConstructible<Ex> &&
-        Destructible<Ex> &&
+        std::regular<Ex> &&
         // Member type requirements:
         requires() {
             typename Ex::execution_space;
@@ -120,10 +118,11 @@ and ``OpenMPTarget``, the current state of the Kokkos |ExecutionSpaceTwo|_ conce
             typename Ex::device_type;
         } &&
         // Required methods:
-        requires(Ex ex, std::ostream& ostr, bool detail) {
-            { ex.in_parallel() } -> bool;
+        requires(Ex ex, std::string str, std::ostream& ostr, bool detail) {
+            { ex.fence(str) };
             { ex.fence() };
             { ex.name() } -> const char*;
+            { ex.concurrency() } -> int;
             { ex.print_configuration(ostr) };
             { ex.print_configuration(ostr, detail) };
         } &&
@@ -207,23 +206,6 @@ Support for ``UniqueToken`` adds the following requirements:
         && CopyConstructible<Experimental::UniqueToken<Ex, Experimental::UniqueTokenScope::Global>>
         && DefaultConstructible<Experimental::UniqueToken<Ex, Experimental::UniqueTokenScope::Global>>;
 
-An Additional Concept for ``DeviceExecutionSpace``?
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-All the device execution spaces, in their current state, have two extra member functions,
-``sleep()`` and ``wake()``.  It's unclear whether this is intended to be general,
-but if it is, there is an additional concept in the hierarchy:
-
-.. code-block:: cpp
-
-    template <typename Ex>
-    concept DeviceExecutionSpace =
-        ExecutionSpace<Ex> &&
-        requires(Ex ex) {
-            { ex.sleep() };
-            { ex.wake() };
-        }
-
 Some *de facto* Requirements
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -231,14 +213,6 @@ There are other places where we're providing partial specializations using concr
 such as ``Impl::TeamPolicyInternal``. These also qualify as "requirements" on an ``ExecutionSpace``,
 just like ``Impl::ParallelFor<...>``. In many of these cases, it would be nice if we could refactor
 some things to use a less "all-or-nothing" approach to customization than partial class template specialization.
-
-Design Thoughts
-~~~~~~~~~~~~~~~
-
-The first thing that comes to mind is that ``CopyConstructible<T> && DefaultConstructible<T> && Destructible<T>``
-is very close to ``SemiRegular<T>``; all we need to do is add ``operator==()``.
-
-TODO more here
 
 The ``MemorySpace`` Concept
 ---------------------------

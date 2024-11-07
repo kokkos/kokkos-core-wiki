@@ -596,9 +596,7 @@ class templates such as <code class="docutils literal notranslate"><span class="
 and <code class="docutils literal notranslate"><span class="pre">OpenMPTarget</span></code>, the current state of the Kokkos <a class="reference external" href="execution_spaces.html#executionspaceconcept"><code class="docutils literal notranslate"><span class="pre">ExecutionSpace</span></code></a> concept looks something like:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">Ex</span><span class="o">&gt;</span>
 <span class="k">concept</span><span class="w"> </span><span class="nc">ExecutionSpace</span><span class="w"> </span><span class="o">=</span>
-<span class="w">    </span><span class="n">CopyConstructible</span><span class="o">&lt;</span><span class="n">Ex</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;&amp;</span>
-<span class="w">    </span><span class="n">DefaultConstructible</span><span class="o">&lt;</span><span class="n">Ex</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;&amp;</span>
-<span class="w">    </span><span class="n">Destructible</span><span class="o">&lt;</span><span class="n">Ex</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;&amp;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">regular</span><span class="o">&lt;</span><span class="n">Ex</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;&amp;</span>
 <span class="w">    </span><span class="c1">// Member type requirements:</span>
 <span class="w">    </span><span class="k">requires</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="k">typename</span><span class="w"> </span><span class="nc">Ex</span><span class="o">::</span><span class="n">execution_space</span><span class="p">;</span>
@@ -614,10 +612,11 @@ and <code class="docutils literal notranslate"><span class="pre">OpenMPTarget</s
 <span class="w">        </span><span class="k">typename</span><span class="w"> </span><span class="nc">Ex</span><span class="o">::</span><span class="n">device_type</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="o">&amp;&amp;</span>
 <span class="w">    </span><span class="c1">// Required methods:</span>
-<span class="w">    </span><span class="k">requires</span><span class="p">(</span><span class="n">Ex</span><span class="w"> </span><span class="n">ex</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">ostream</span><span class="o">&amp;</span><span class="w"> </span><span class="n">ostr</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">detail</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="n">ex</span><span class="p">.</span><span class="n">in_parallel</span><span class="p">()</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="kt">bool</span><span class="p">;</span>
+<span class="w">    </span><span class="k">requires</span><span class="p">(</span><span class="n">Ex</span><span class="w"> </span><span class="n">ex</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">str</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">ostream</span><span class="o">&amp;</span><span class="w"> </span><span class="n">ostr</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">detail</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="n">ex</span><span class="p">.</span><span class="n">fence</span><span class="p">(</span><span class="n">str</span><span class="p">)</span><span class="w"> </span><span class="p">};</span>
 <span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="n">ex</span><span class="p">.</span><span class="n">fence</span><span class="p">()</span><span class="w"> </span><span class="p">};</span>
 <span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="n">ex</span><span class="p">.</span><span class="n">name</span><span class="p">()</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="p">;</span>
+<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="n">ex</span><span class="p">.</span><span class="n">concurrency</span><span class="p">()</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="kt">int</span><span class="p">;</span>
 <span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="n">ex</span><span class="p">.</span><span class="n">print_configuration</span><span class="p">(</span><span class="n">ostr</span><span class="p">)</span><span class="w"> </span><span class="p">};</span>
 <span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="n">ex</span><span class="p">.</span><span class="n">print_configuration</span><span class="p">(</span><span class="n">ostr</span><span class="p">,</span><span class="w"> </span><span class="n">detail</span><span class="p">)</span><span class="w"> </span><span class="p">};</span>
 <span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="o">&amp;&amp;</span>
@@ -692,33 +691,12 @@ and the user-visible concept should exclude these requirements.</p>
 </pre></div>
 </div>
 </section>
-<section id="an-additional-concept-for-deviceexecutionspace">
-<h3>An Additional Concept for <code class="docutils literal notranslate"><span class="pre">DeviceExecutionSpace</span></code>?<a class="headerlink" href="#an-additional-concept-for-deviceexecutionspace" title="Permalink to this heading">#</a></h3>
-<p>All the device execution spaces, in their current state, have two extra member functions,
-<code class="docutils literal notranslate"><span class="pre">sleep()</span></code> and <code class="docutils literal notranslate"><span class="pre">wake()</span></code>.  It’s unclear whether this is intended to be general,
-but if it is, there is an additional concept in the hierarchy:</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">Ex</span><span class="o">&gt;</span>
-<span class="k">concept</span><span class="w"> </span><span class="nc">DeviceExecutionSpace</span><span class="w"> </span><span class="o">=</span>
-<span class="w">    </span><span class="n">ExecutionSpace</span><span class="o">&lt;</span><span class="n">Ex</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;&amp;</span>
-<span class="w">    </span><span class="k">requires</span><span class="p">(</span><span class="n">Ex</span><span class="w"> </span><span class="n">ex</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="n">ex</span><span class="p">.</span><span class="n">sleep</span><span class="p">()</span><span class="w"> </span><span class="p">};</span>
-<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="n">ex</span><span class="p">.</span><span class="n">wake</span><span class="p">()</span><span class="w"> </span><span class="p">};</span>
-<span class="w">    </span><span class="p">}</span>
-</pre></div>
-</div>
-</section>
 <section id="some-de-facto-requirements">
 <h3>Some <em>de facto</em> Requirements<a class="headerlink" href="#some-de-facto-requirements" title="Permalink to this heading">#</a></h3>
 <p>There are other places where we’re providing partial specializations using concrete execution spaces,
 such as <code class="docutils literal notranslate"><span class="pre">Impl::TeamPolicyInternal</span></code>. These also qualify as “requirements” on an <code class="docutils literal notranslate"><span class="pre">ExecutionSpace</span></code>,
 just like <code class="docutils literal notranslate"><span class="pre">Impl::ParallelFor&lt;...&gt;</span></code>. In many of these cases, it would be nice if we could refactor
 some things to use a less “all-or-nothing” approach to customization than partial class template specialization.</p>
-</section>
-<section id="design-thoughts">
-<h3>Design Thoughts<a class="headerlink" href="#design-thoughts" title="Permalink to this heading">#</a></h3>
-<p>The first thing that comes to mind is that <code class="docutils literal notranslate"><span class="pre">CopyConstructible&lt;T&gt;</span> <span class="pre">&amp;&amp;</span> <span class="pre">DefaultConstructible&lt;T&gt;</span> <span class="pre">&amp;&amp;</span> <span class="pre">Destructible&lt;T&gt;</span></code>
-is very close to <code class="docutils literal notranslate"><span class="pre">SemiRegular&lt;T&gt;</span></code>; all we need to do is add <code class="docutils literal notranslate"><span class="pre">operator==()</span></code>.</p>
-<p>TODO more here</p>
 </section>
 </section>
 <section id="the-memoryspace-concept">
@@ -926,9 +904,7 @@ But as long as we’re looking at hardening Kokkos concepts, we should at least 
 <li><a class="reference internal" href="#overview">Overview</a></li>
 <li><a class="reference internal" href="#the-executionspace-concept">The <code class="docutils literal notranslate"><span class="pre">ExecutionSpace</span></code> Concept</a><ul>
 <li><a class="reference internal" href="#implementation-requirements">Implementation Requirements</a></li>
-<li><a class="reference internal" href="#an-additional-concept-for-deviceexecutionspace">An Additional Concept for <code class="docutils literal notranslate"><span class="pre">DeviceExecutionSpace</span></code>?</a></li>
 <li><a class="reference internal" href="#some-de-facto-requirements">Some <em>de facto</em> Requirements</a></li>
-<li><a class="reference internal" href="#design-thoughts">Design Thoughts</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#the-memoryspace-concept">The <code class="docutils literal notranslate"><span class="pre">MemorySpace</span></code> Concept</a><ul>
