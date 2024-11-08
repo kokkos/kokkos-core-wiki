@@ -34,14 +34,6 @@ Description
 
    * ``value``: value with which to combine the original value.
 
-.. cppkokkos:function:: template<class T> void atomic_assign(T* const ptr_to_value, const T value);
-
-   Atomically executes ``*ptr_to_value = value``.
-
-   * ``ptr_to_value``: address of the to be updated value.
-
-   * ``value``: new value.
-
 .. cppkokkos:function:: template<class T> void atomic_decrement(T* const ptr_to_value);
 
    Atomically executes ``(*ptr_to_value)--`` or calls ``atomic_fetch_sub(ptr_to_value, T(-1))``.
