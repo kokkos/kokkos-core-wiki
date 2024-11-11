@@ -13,7 +13,7 @@ Usage
 
    auto old = atomic_exchange(&obj, desired);
 
-Atomically replaces the value of ``obj`` with ``desired`` and returs the value before the call.
+Atomically replaces the value of ``obj`` with ``desired`` and returns the value before the call.
 
 Description
 -----------
