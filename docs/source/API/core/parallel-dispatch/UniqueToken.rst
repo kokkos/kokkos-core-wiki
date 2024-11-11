@@ -1,21 +1,20 @@
 ``UniqueToken``
 ===============
 
-.. role:: cppkokkos(code)
-    :language: cppkokkos
-
 Header File: ``Kokkos_Core.hpp``
 
 
 Description
 ------------
 
-``UniqueToken`` is a portable way to acquire a unique ID for calling a thread (``thread-id`` is not portable execution environments).  ``UniqueToken`` is thus analogous to ``thread-id``, and has a ``UniqueTokenScope`` template parameter (default: ``Instance``, but can be ``Global``).    
+``UniqueToken`` is a portable way to acquire a unique ID for a thread (``thread-id`` is not portable across execution environments).  The unique ID is scoped by the ``UniqueTokenScope`` template parameter (defaults to ``Instance``, but can be set to ``Global``).
 
 Interface
 ---------
 
-.. cppkokkos:class:: template <class ExecutionSpace, UniqueTokenScope :: Global> UniqueToken
+.. code-block:: cpp 
+
+    template <class ExecutionSpace = DefaultExecutionSpace, UniqueTokenScope = UniqueTokenScope::Instance> UniqueToken
 
 
 
@@ -24,20 +23,55 @@ Parameters
 
 *  ``ExecutionSpace``:  See `Execution Spaces <../execution_spaces.html>`_
 
+*  ``UniqueTokenScope``:  defaults to ``Instance``, and every instance is independent of another.  In contrast, ``Global`` uses one set of unique IDs for all instances.
+
 .. note::
-   In a parallel region, before the main computation, a pool of ``UniqueToken`` (integer) Id is generated, and each Id is released following iteration.
+   In a parallel region, before the main computation, a pool of ``UniqueToken`` (integer) ID is generated, and each ID is released following iteration.
 
 .. warning::
    ``UniqueToken <ExecutionSpace> token`` *can* be called inside a parallel region, *but* must be released at the end of *each* iteration.
 
 
-*  ``UniqueTokenScope``:  defaults to ``Instance``, but ``Global`` can be employed when thread awareness is needed for more than one ``ExecutionSpace`` instance, as in the case of submitting concurrent kernels to CUDA streams.
-
 
 Constructors
 -------------
-  .. cppkokkos:function:: UniqueToken(size_t max_size, ExecutionSpace execution_space, UniqueTokenScope :: Global)
 
+  .. code-block:: cpp
+
+     UniqueToken(size_type max_size, ExecutionSpace execution_space = ExecutionSpace())
+     // Scope is instance
+  
+  .. code-block:: cpp
+     
+     UniqueToken(size_type max_size, ExecutionSpace execution_space = ExecutionSpace()) requires(TokenScope == Global); 
+     // Scope is global
+
+
+Public Member Functions
+------------------------
+
+ .. code-block:: cpp
+    
+    UniqueToken(size_type max_size, ExecutionSpace execution_space=ExecutionSpace())
+     
+ .. code-block:: cpp
+    
+    size_type size()
+    // Returns the size of the token pool    
+ 
+ .. code-block:: cpp
+
+    size_type acquire()
+    // Returns the token for the executing tread     
+
+ .. code-block:: cpp
+
+    void release(size_type idx)
+    // Releases the passed token
+
+.. warning::
+   Acquired tokens *must* be released at the end of the parallel region in which they were acquired
+ 
 
 
 
@@ -52,20 +86,18 @@ Examples
   RandomGenPool pool ( number_of_unique_ids , seed );
 
   parallel_for ("L", N, KOKKOS_LAMBDA ( int i) {
-    int id = token . acquire ();
-    RandomGen gen = pool (id );
+    auto id = token.acquire ();
+    RandomGen gen = pool (id);
     // Computation Body
-    token . release (id );
+    token.release (id);
     });
 
   // Submitting concurrent kernels to (e.g., CUDA) streams
 
   void foo () {
-  UniqueToken < ExecSpace , UniqueTokenScope :: Global > token_foo ;
-  parallel_for ("L", RangePolicy < ExecSpace >( stream1 ,0,N), functor_a ( token_foo ));}
+    UniqueToken < ExecSpace , UniqueTokenScope :: Global > token_foo ;
+    parallel_for ("L", RangePolicy < ExecSpace >( stream1 ,0,N), functor_a ( token_foo ));}
 
   void bar () {
-  UniqueToken < ExecSpace , UniqueTokenScope :: Global > token_bar ;
-  parallel_for ("L", RangePolicy < ExecSpace >( stream2 ,0,N), functor_b ( token_bar ));}
-
-
+    UniqueToken < ExecSpace , UniqueTokenScope :: Global > token_bar ;
+    parallel_for ("L", RangePolicy < ExecSpace >( stream2,0,N), functor_b ( token_bar ));}
