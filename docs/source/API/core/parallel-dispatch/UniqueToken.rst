@@ -38,13 +38,14 @@ Constructors
 
   .. code-block:: cpp
 
-     UniqueToken(size_t max_size, ExecutionSpace execution_space = ExecutionSpace())
+     UniqueToken(size_t max_size, ExecutionSpace execution_space = ExecutionSpace{})
      // Scope is instance
   
   .. code-block:: cpp
      
-     UniqueToken(size_t max_size, ExecutionSpace execution_space = ExecutionSpace()) requires(TokenScope == Global); 
-     // Scope is global
+     UniqueToken(ExecutionSpace execution_space = ExecutionSpace{}); 
+     // Scope is instance or global
+
 
 
 Public Member Functions
