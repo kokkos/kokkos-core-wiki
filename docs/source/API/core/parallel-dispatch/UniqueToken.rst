@@ -26,10 +26,10 @@ Parameters
 *  ``UniqueTokenScope``:  defaults to ``Instance``, and every instance is independent of another.  In contrast, ``Global`` uses one set of unique IDs for all instances.
 
 .. note::
-   In a parallel region, before the main computation, a pool of ``UniqueToken`` (integer) ID is generated, and each ID is released following iteration.
+   In a parallel region, before the main computation, a pool of ``UniqueToken`` (integer) ID is generated.  A generated ID is released following iteration (see ``void release(size_t idx)`` below).
 
 .. warning::
-   ``UniqueToken <ExecutionSpace> token`` *can* be called inside a parallel region, *but* must be released at the end of *each* iteration.
+   ``UniqueToken <ExecutionSpace> token`` *can* be called inside a parallel region, *but* must be released at the end of *each* work item.
 
 
 
@@ -38,35 +38,31 @@ Constructors
 
   .. code-block:: cpp
 
-     UniqueToken(size_type max_size, ExecutionSpace execution_space = ExecutionSpace())
+     UniqueToken(size_t max_size, ExecutionSpace execution_space = ExecutionSpace())
      // Scope is instance
   
   .. code-block:: cpp
      
-     UniqueToken(size_type max_size, ExecutionSpace execution_space = ExecutionSpace()) requires(TokenScope == Global); 
+     UniqueToken(size_t max_size, ExecutionSpace execution_space = ExecutionSpace()) requires(TokenScope == Global); 
      // Scope is global
 
 
 Public Member Functions
 ------------------------
-
- .. code-block:: cpp
-    
-    UniqueToken(size_type max_size, ExecutionSpace execution_space=ExecutionSpace())
      
  .. code-block:: cpp
     
-    size_type size()
+    size_t size()
     // Returns the size of the token pool    
  
  .. code-block:: cpp
 
-    size_type acquire()
+    size_t acquire()
     // Returns the token for the executing tread     
 
  .. code-block:: cpp
 
-    void release(size_type idx)
+    void release(size_t idx)
     // Releases the passed token
 
 .. warning::
