@@ -1,42 +1,18 @@
 Deprecations
 ************
 
-Deprecations for Kokkos 4
-=========================
-
 up to 43a30195af81b6d1aa5b1efec939af8423857f2c
 
-.. list-table::
-   :widths: 20 10 20 50
-   :header-rows: 1
-
-   * - Deprecated symbol
-     - Since
-     - Replacement
-     - Additional information
-   * - ``Cuda::Cuda(cudaStream_t stream, bool manage_stream)``
-     - `4.2.00 <https://github.com/kokkos/kokkos/pull/6401>`__
-     - ``Cuda::Cuda(cudaStream_t stream)``
-     - constructing a Cuda execution space instance should always use an externally managed ``cudaStream`` object
-   * - ``HIP::HIP(hipStream_t stream, bool manage_stream)``
-     - `4.2.00 <https://github.com/kokkos/kokkos/pull/6401>`__
-     - ``HIP::HIP(hipStream_t stream)``
-     - constructing a HIP execution space instance should always use an externally managed ``hipStream`` object
-   * - ``vector``
-     - `4.2.00 <https://github.com/kokkos/kokkos/pull/6252>`__
-     - none
-     - non-standard behavior, doesn't work well with Kokkos concepts 
+Deprecations for Kokkos 4.2
+===========================
 
 * ``Cuda::Cuda(cudaStream_t stream, bool manage_stream)``
-   * deprecated in `4.2.00 <https://github.com/kokkos/kokkos/pull/6401>`__
    * replacement: ``Cuda::Cuda(cudaStream_t stream)``
    * constructing a Cuda execution space instance should always use an externally managed ``cudaStream`` object
 * ``HIP::HIP(hipStream_t stream, bool manage_stream)``
-    * deprecated in `4.2.00 <https://github.com/kokkos/kokkos/pull/6401>`__
     * replacement ``HIP::HIP(hipStream_t stream)``
     * constructing a HIP execution space instance should always use an externally managed ``hipStream`` object
 * ``vector``
-    * deprecated in `4.2.00 <https://github.com/kokkos/kokkos/pull/6252>`__
     * replacement: none
     * non-standard behavior, doesn't work well with Kokkos concepts 
 
