@@ -3,19 +3,6 @@ Deprecations
 
 up to 43a30195af81b6d1aa5b1efec939af8423857f2c
 
-Deprecations for Kokkos 4.2
-===========================
-
-* ``Cuda::Cuda(cudaStream_t stream, bool manage_stream)``
-   * replacement: ``Cuda::Cuda(cudaStream_t stream)``
-   * constructing a Cuda execution space instance should always use an externally managed ``cudaStream`` object
-* ``HIP::HIP(hipStream_t stream, bool manage_stream)``
-    * replacement ``HIP::HIP(hipStream_t stream)``
-    * constructing a HIP execution space instance should always use an externally managed ``hipStream`` object
-* ``vector``
-    * replacement: none
-    * non-standard behavior, doesn't work well with Kokkos concepts 
-
 - Default constructor for BinOp1D, BinOp3D
 - Experimental::swap -> kokkos_swap
 - ExecutionSpace::in_parallel
@@ -50,6 +37,38 @@ Deprecations for Kokkos 4.2
 - InitializationSettings::set_num_devices, InitializationSettings::has_num_devices, InitializationSettings::get_num_devices
 - InitializationSettings::set_skip_devices, InitializationSettings::has_skip_devices, InitializationSettings::get_skip_devices
 - SIMD math functions in the Kokkos::Experimental namespace -> SIMD math function in the Kokkos namespace
+
+Deprecations for Kokkos 4.x
+===========================
+
+Deprecations for Kokkos 4.5
+---------------------------
+
+Deprecations for Kokkos 4.4
+---------------------------
+
+Deprecations for Kokkos 4.3
+---------------------------
+
+Deprecations for Kokkos 4.2
+---------------------------
+
+* ``Cuda::Cuda(cudaStream_t stream, bool manage_stream)``
+   * replacement: ``Cuda::Cuda(cudaStream_t stream)``
+   * constructing a Cuda execution space instance should always use an externally managed ``cudaStream`` object
+* ``HIP::HIP(hipStream_t stream, bool manage_stream)``
+    * replacement ``HIP::HIP(hipStream_t stream)``
+    * constructing a HIP execution space instance should always use an externally managed ``hipStream`` object
+* ``vector``
+    * replacement: none
+    * non-standard behavior, doesn't work well with Kokkos concepts 
+
+Deprecations for Kokkos 4.1
+---------------------------
+
+
+Deprecations for Kokkos 4.0
+---------------------------
 
 
 Deprecations for Kokkos-3.x
