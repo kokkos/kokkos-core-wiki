@@ -364,7 +364,7 @@ When compiling on the machine that the code also runs on, the easiest way to get
 
 In case of compiling for another machine, or if you want to be specific, the CPU architecture can be passed to kokkos manually. For the available architectures see the following list.
 
-.. flat-table:: CPU architectures
+.. flat-table::
     :header-rows: 1
     :stub-columns: 0
     :widths: 20 20 40 20
