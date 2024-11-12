@@ -347,9 +347,22 @@ Architectures
 CPU architectures
 -----------------
 
-Kokkos does not automatically add compiler flags to optimize for a specific CPU architecture.
-When compiling on the machine that the code also runs on, the easiest way to get the CPU code optimized is using ``Kokkos_ARCH_NATIVE=ON`` when configuring.
-In case of compiling for another machine, the CPU architecture can be manually specified. For the available architectures see the following list.
+Kokkos does not automatically add or need compiler flags to optimize for a specific CPU architecture.
+Nevertheless, targeting a specific architecture allows the compiler to use simd instructions on the CPU.
+When compiling on the machine that the code also runs on, the easiest way to get the CPU code optimized is using the native option.
+
+.. list-table::
+    :widths: 25 75
+    :header-rows: 1
+    :align: left
+
+    * -
+      - Description/info
+
+    * - ``Kokkos_ARCH_NATIVE``
+      - Target the architecture of the compiling CPU (``-march=native``)
+
+In case of compiling for another machine, or if you want to be specific, the CPU architecture can be passed to kokkos manually. For the available architectures see the following list.
 
 .. flat-table:: CPU architectures
     :header-rows: 1
