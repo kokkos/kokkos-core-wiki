@@ -347,91 +347,102 @@ Architectures
 CPU architectures
 -----------------
 
-.. list-table::
-    :widths: 25 65 10
+Kokkos does not automatically add compiler flags to optimize for a specific CPU architecture.
+When compiling on the machine that the code also runs on, the easiest way to get the CPU code optimized is using ``Kokkos_ARCH_NATIVE=ON`` when configuring.
+In case of compiling for another machine, the CPU architecture can be manually specified. For the available architectures see the following list.
+
+.. flat-table:: CPU architectures
     :header-rows: 1
-    :align: left
+    :stub-columns: 0
+    :widths: 20 20 40 20
 
-    * -
-      - Description/info
-      - Default
+    * - Cmake keyword
+      - Architecture/Instruction set
+      - Examples
+      - Vendor
 
-    * * ``Kokkos_ARCH_NATIVE``
-      * Optimize for the local CPU architecture
-      * ``OFF``
+    * - ``Kokkos_ARCH_ZEN3``
+      - Zen 3/amd64
+      - Epyc 7713 @ ORNL Frontier
+      - :rspan:`3`
+        AMD
 
-    * * ``Kokkos_ARCH_A64FX``
-      * Optimize for ARMv8.2 with SVE Support
-      * ``OFF``
+    * - ``Kokkos_ARCH_ZEN2``
+      - Zen 2/amd64
+      - Epyc 7742 @ NOAA
 
-    * * ``Kokkos_ARCH_AMDAVX``
-      * Optimize for AMDAVX architecture
-      * ``OFF``
+    * - ``Kokkos_ARCH_ZEN``
+      - Zen/amd64
+      - Epyc @ ANL Selene
 
-    * * ``Kokkos_ARCH_ARMV80``
-      * Optimize for ARMV80 architecture
-      * ``OFF``
+    * - ``Kokkos_ARCH_AMDAVX``
+      - Bullozer/amd64
+      - 
 
-    * * ``Kokkos_ARCH_ARMV81``
-      * Optimize for ARMV81 architecture
-      * ``OFF``
+    * - ``Kokkos_ARCH_A64FX``
+      - ARMv8.2/A64
+      - A64FX @ Fugaku
+      - :rspan:`4`
+        ARM
 
-    * * ``Kokkos_ARCH_ARMV8_THUNDERX``
-      * Optimize for ARMV8_THUNDERX architecture
-      * ``OFF``
+    * - ``Kokkos_ARCH_ARMV8_THUNDERX2``
+      - ARMv8/A64
+      - ThunderX2 @ SNL Astra
+        ThunderX2 @ CEA BullSequana
 
-    * * ``Kokkos_ARCH_ARMV8_THUNDERX2``
-      * Optimize for the ARMV8_THUNDERX2 architecture
-      * ``OFF``
+    * - ``Kokkos_ARCH_ARMV81``
+      - ARMv8.1/A64,A32
+      -
 
-    * * ``Kokkos_ARCH_BDW``
-      * Optimize for BDW architecture
-      * ``OFF``
+    * - ``Kokkos_ARCH_ARMV8_THUNDERX``
+      - ARMv8/A64
+      -
 
-    * * ``Kokkos_ARCH_HSW``
-      * Optimize for HSW architecture
-      * ``OFF``
+    * - ``Kokkos_ARCH_ARMV80``
+      - ARMv8.0/A64,A32
+      -
 
-    * * ``Kokkos_ARCH_KNC``
-      * Optimize for KNC architecture
-      * ``OFF``
+    * - ``Kokkos_ARCH_POWER8``
+      - Power8/Power ISA
+      - 
+      - :rspan:`1`
+        IBM
 
-    * * ``Kokkos_ARCH_KNL``
-      * Optimize for KNL architecture
-      * ``OFF``
+    * - ``Kokkos_ARCH_POWER9``
+      - Power9/Power ISA
+      - POWER9 @ ORNL Summit
+        POWER9 @ LLNL Sierra  
 
-    * * ``Kokkos_ARCH_POWER8``
-      * Optimize for POWER8 architecture
-      * ``OFF``
+    * - ``Kokkos_ARCH_SNB``
+      - Sandy Bridge/x86-64
+      - 
+      - :rspan:`6`
+        Intel
 
-    * * ``Kokkos_ARCH_POWER9``
-      * Optimize for POWER9 architecture
-      * ``OFF``
+    * - ``Kokkos_ARCH_KNC``
+      - knc/x86-64
+      - 
 
-    * * ``Kokkos_ARCH_SKX``
-      * Optimize for SKX architecture
-      * ``OFF``
+    * - ``Kokkos_ARCH_KNL``
+      - knl/x86-64
+      - 31S1P @ Tianhe-2
 
-    * * ``Kokkos_ARCH_SNB``
-      * Optimize for SNB architecture
-      * ``OFF``
+    * - ``Kokkos_ARCH_HSW``
+      - Haswell/x86-64
+      - 2680v3 @ NASA Pleiades 
 
-    * * ``Kokkos_ARCH_SPR``
-      * Optimize for Sapphire Rapids architecture
-      * ``OFF``
+    * - ``Kokkos_ARCH_BDW``
+      - Braodwell/x86-64
+      - 2680v4 @ NASA Pleiades 
 
-    * * ``Kokkos_ARCH_ZEN``
-      * Optimize for Zen architecture
-      * ``OFF``
+    * - ``Kokkos_ARCH_SKX``
+      - Skylake/x86-64
+      - 6130 @ OSU Pete 
 
-    * * ``Kokkos_ARCH_ZEN2``
-      * Optimize for Zen2 architecture
-      * ``OFF``
-
-    * * ``Kokkos_ARCH_ZEN3``
-      * Optimize for Zen3 architecture
-      * ``OFF``
-
+    * - ``Kokkos_ARCH_SPR``
+      - Sapphire Rapids/x86-64
+      - Xeon 9470C @ ANL Aurora
+        Xeon @ LANL Crossroads
 
 GPU Architectures
 -----------------
