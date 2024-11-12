@@ -392,6 +392,10 @@ In case of compiling for another machine, or if you want to be specific, the CPU
       - Bullozer/amd64
       - 
 
+    * -  
+    * -  
+    * -  
+
     * - ``Kokkos_ARCH_A64FX``
       - ARMv8.2/A64
       - A64FX @ Fugaku
@@ -420,6 +424,9 @@ In case of compiling for another machine, or if you want to be specific, the CPU
       - 
       - :rspan:`1`
         IBM
+    * -  
+    * -  
+    * -  
 
     * - ``Kokkos_ARCH_POWER9``
       - Power9/Power ISA
@@ -429,6 +436,11 @@ In case of compiling for another machine, or if you want to be specific, the CPU
     * - ``Kokkos_ARCH_SNB``
       - Sandy Bridge/x86-64
       - 
+
+    * -  
+    * -  
+    * -  
+
       - :rspan:`6`
         Intel
 
