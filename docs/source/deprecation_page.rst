@@ -1,42 +1,7 @@
 Deprecations
 ************
 
-up to 43a30195af81b6d1aa5b1efec939af8423857f2c
-
-- Default constructor for BinOp1D, BinOp3D
-- Experimental::swap -> kokkos_swap
-- ExecutionSpace::in_parallel
-- Cuda::device_arch()
-- Cuda::detect_device_count()
-- Cuda::detect_device_arch()
-- CudaUVMSpace::available()
-- HIP::HIP::detect_device_count()
-- HPX::HPX(instance_mode mode)
-- HPX::HPX(hpx::execution::experimental::unique_any_sender<> &&sender)
-- HPX::HPX::is_asynchronous(HPX const & = HPX())
-- Complex volatile overloads
-- Tasking
-- Array<void, KOKKOS_INVALID_INDEX, void>
-- Array<T, KOKKOS_INVALID_INDEX, Impl::KokkosArrayContiguous>
-- Array<T, KOKKOS_INVALID_INDEX, Impl::KokkosArrayStrided>
-- ChunkSize::ChunkSize(int value) -> explicit ChunkSize::ChunkSize(int value)
-- RangePolicy::set(ChunkSize chunksize) -> RangePolicy::set_chunk_size(int chunk_size)
-- HostSpace::AllocationMechanism, HostSpace::HostSpace(AllocationMechanism)
-- is_layouttiled
-- layout_iterate_type_selector
-- pair volatile overloads
-- pair<T1, void>
-- ScratchMemeorySpace::align(const IntType& size)
-- OpenMP::OpenMP(int pool_size) -> explicit OpenMP::OpenMP(int pool_size)
-- OpenMP::is_asynchronous(OpenMP const& = OpenMP())
-- Serial::Serial(NewInstance) -> explicit Serial::Serial(NewInstance)
-- View::Rank -> View::rank()
-- View::subview<MemoryTraits>(...) -> View::subview(...)
-- Impl::ALL_t -> ALL_t
-- Reduce/scan join() taking volatile-qualified parameters
-- InitializationSettings::set_num_devices, InitializationSettings::has_num_devices, InitializationSettings::get_num_devices
-- InitializationSettings::set_skip_devices, InitializationSettings::has_skip_devices, InitializationSettings::get_skip_devices
-- SIMD math functions in the Kokkos::Experimental namespace -> SIMD math function in the Kokkos namespace
+up to https://github.com/kokkos/kokkos/commit/43a30195af81b6d1aa5b1efec939af8423857f2c
 
 Deprecations for Kokkos 4.x
 ===========================
@@ -44,11 +9,97 @@ Deprecations for Kokkos 4.x
 Deprecations for Kokkos 4.5
 ---------------------------
 
+* Tasking interface
+   * replacement: none
+   * unused, limited implementation
+
+* ``HPX::HPX::is_asynchronous(HPX const & = HPX())``
+   * replacement: none
+   * unused, conformity of execution spaces
+
+* ``OpenMP::is_asynchronous(OpenMP const& = OpenMP())``
+   * replacement: none
+   * unused, conformity of execution spaces
+
 Deprecations for Kokkos 4.4
 ---------------------------
 
+* ``is_layouttiled``
+   * replacement: none
+   * unused
+
+* ``layout_iterate_type_selector``
+   * replacement: none
+   * only useful internally
+
+* ``Array<T, N, Proxy>``
+   * replacement: none
+   * alignment with std::array
+
+* ``HPX::HPX(instance_mode mode)``
+   * replacement: ``explicit HPX(instance_mode mode)``
+   * execution space instance constructors should be ``explicit``
+
+* ``HPX::HPX(hpx::execution::experimental::unique_any_sender<> &&sender)``
+   * replacement: ``explicit HPX::HPX(hpx::execution::experimental::unique_any_sender<> &&sender)``
+   * execution space instance constructors should be ``explicit``
+
+* ``OpenMP::OpenMP(int pool_size)``
+   * replacement: ``explicit OpenMP::OpenMP(int pool_size)``
+   * execution space instance constructors should be ``explicit``
+
+* ``Serial::Serial(NewInstance)``
+   * replacement: ``explicit Serial::Serial(NewInstance)``
+   * execution space instance constructors should be ``explicit``
+
+* ``ChunkSize::ChunkSize(int value)``
+   * replacement: ``explicit ChunkSize::ChunkSize(int value)``
+   * ``ChunkSize`` ahould be constructed explicitly
+
+* ``pair<T, void>``
+   * replacement: none
+   * the specialization is not documented, does not follow the standard library, it is not tested and has no known usage
+
+
 Deprecations for Kokkos 4.3
 ---------------------------
+
+* ``Experimental::swap``
+   * replacement: ``kokkos_swap``
+   * avoiding ambiguities due to ADL
+
+* ``ExecutionSpace::in_parallel``
+   * replacement: ``KOKKOS_IF_ON_HOST``/``KOKKOS_IF_ON_DEVICE`` partly provide similar behavior
+   * inconsistent implementation, limited use
+
+* ``Cuda::device_arch()``
+   * replacement: none
+   * uniformity between execution spaces
+
+* ``Cuda::detect_device_count()``
+   * replacement: num_devices()
+   * uniformity between execution spaces
+
+* ``Cuda::detect_device_arch()``
+   * replacement: none
+   * uniformity between execution spaces
+
+* ``HIP::HIP::detect_device_count()``
+   * replacement: ``num_devices()``
+   * uniformity between execution spaces
+
+* ``RangePolicy::set(ChunkSize chunksize)``
+   * replacement: ``RangePolicy::set_chunk_size(int chunk_size)``
+   * ``ChunkSize`` was the only extra parameter usable with ``RangePolicy::set()`` 
+
+* ``InitializationSettings::set_num_devices``, ``InitializationSettings::has_num_devices``, ``InitializationSettings::get_num_devices``
+   * replacement: ``num_devices``
+   * changes in `InitializationSettings` made these superfluous
+
+* ``InitializationSettings::set_skip_devices``, ``InitializationSettings::has_skip_devices``, ``InitializationSettings::get_skip_devices``
+   * replacement: ``KOKKOS_VISIBLE_DEVICES``
+   * changes in `InitializationSettings` made these superfluous
+
 
 Deprecations for Kokkos 4.2
 ---------------------------
@@ -63,12 +114,53 @@ Deprecations for Kokkos 4.2
     * replacement: none
     * non-standard behavior, doesn't work well with Kokkos concepts 
 
+* ``HostSpace::HostSpace(AllocationMechanism)``
+    * replacement: ``HostSpace::HostSpoace()``
+    * ``AllocationMechanism`` is unused, ``operator new`` with alignment is used unconditionally
+
+* SIMD math functions in the ``Kokkos::Experimental`` namespace
+    * replacement: SIMD math function in the ``Kokkos`` namespace
+    * issues with ADL, consistency with other math function overloads 
+
+
 Deprecations for Kokkos 4.1
 ---------------------------
+
+* Default constructor for ``BinOp1D``, ``BinOp3D``
+   * replacement: none
+   * the default constructors created invalid, unusable objects
+
+* ``View::Rank``
+   * replacement: ``View::rank()``
+   * undocumented, redundant due to existence of ``View::rank()``
+
+* ``View::subview<MemoryTraits>(...)``
+   * replacement: ``View::subview(...)``
+   * not useful, unused
+
+* ``Impl::ALL_t``
+   * ``ALL_t``
+   * Making the type of `ALL` public helps with documentation
 
 
 Deprecations for Kokkos 4.0
 ---------------------------
+
+* ``CudaUVMSpace::available()``
+   * replacement: ``SharedSpace``
+   * not portable, would always return ``true``
+
+* ``Complex`` ``volatile`` overloads
+   * replacement: none
+   * no need for using ``volatile`` overloads
+
+* ``pair`` ``volatile`` overloads
+   * replacement: none
+   * no need for using ``volatile`` overloads
+
+* ``ScratchMemeorySpace::align(const IntType& size)``
+   * replacement: none
+   * unused, not useful
 
 
 Deprecations for Kokkos-3.x
