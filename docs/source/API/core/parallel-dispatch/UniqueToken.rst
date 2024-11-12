@@ -28,10 +28,6 @@ Parameters
 .. note::
    In a parallel region, before the main computation, a pool of ``UniqueToken`` (integer) ID is generated.  A generated ID is released following iteration (see ``void release(size_t idx)`` below).
 
-.. warning::
-   ``UniqueToken <ExecutionSpace> token`` *can* be called inside a parallel region, *but* must be released at the end of *each* work item.
-
-
 
 Constructors
 -------------
