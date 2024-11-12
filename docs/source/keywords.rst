@@ -419,11 +419,6 @@ In case of compiling for another machine, or if you want to be specific, the CPU
       - ARMv8.0/A64,A32
       -
 
-    * - ``Kokkos_ARCH_POWER8``
-      - Power8/Power ISA
-      - 
-      - :rspan:`1`
-        IBM
     * -  
     * -  
     * -  
@@ -432,42 +427,47 @@ In case of compiling for another machine, or if you want to be specific, the CPU
       - Power9/Power ISA
       - POWER9 @ ORNL Summit
         POWER9 @ LLNL Sierra  
+      - :rspan:`1`
+        IBM
 
-    * - ``Kokkos_ARCH_SNB``
-      - Sandy Bridge/x86-64
+    * - ``Kokkos_ARCH_POWER8``
+      - Power8/Power ISA
       - 
 
     * -  
     * -  
     * -  
 
+    * - ``Kokkos_ARCH_SPR``
+      - Sapphire Rapids/x86-64
+      - Xeon 9470C @ ANL Aurora
+        Xeon @ LANL Crossroads
       - :rspan:`6`
         Intel
 
-    * - ``Kokkos_ARCH_KNC``
-      - knc/x86-64
-      - 
-
-    * - ``Kokkos_ARCH_KNL``
-      - knl/x86-64
-      - 31S1P @ Tianhe-2
+    * - ``Kokkos_ARCH_SKX``
+      - Skylake/x86-64
+      - 6130 @ OSU Pete 
 
     * - ``Kokkos_ARCH_HSW``
       - Haswell/x86-64
       - 2680v3 @ NASA Pleiades 
 
     * - ``Kokkos_ARCH_BDW``
-      - Braodwell/x86-64
+      - Broadwell/x86-64
       - 2680v4 @ NASA Pleiades 
 
-    * - ``Kokkos_ARCH_SKX``
-      - Skylake/x86-64
-      - 6130 @ OSU Pete 
+    * - ``Kokkos_ARCH_KNL``
+      - Knights Landing/x86-64
+      - 31S1P @ Tianhe-2
 
-    * - ``Kokkos_ARCH_SPR``
-      - Sapphire Rapids/x86-64
-      - Xeon 9470C @ ANL Aurora
-        Xeon @ LANL Crossroads
+    * - ``Kokkos_ARCH_KNC``
+      - Knights Corner/x86-64
+      - 
+
+    * - ``Kokkos_ARCH_SNB``
+      - Sandy Bridge/x86-64
+      - 
 
 GPU Architectures
 -----------------
