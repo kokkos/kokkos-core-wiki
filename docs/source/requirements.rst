@@ -34,6 +34,10 @@ Kokkos 4.x
       * 10.0.0
       * 12.0.0, 14.0.0
 
+    * * Clacc (OpenACC) (experimental)
+      * 40cad5ea5c42
+      * 40cad5ea5c42
+
     * * AppleClang 
       * 8.0
       * latest
@@ -57,6 +61,10 @@ Kokkos 4.x
     * * NVC++ 
       * 22.3
       * 22.9
+
+    * * NVC++ (OpenACC) (experimental) 
+      * 23.7
+      * 24.5
 
     * * ROCM 
       * 5.2.0
