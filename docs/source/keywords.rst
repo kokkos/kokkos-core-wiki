@@ -431,7 +431,12 @@ CPU architectures
     * * ``Kokkos_ARCH_ZEN3``
       * Optimize for Zen3 architecture
       * ``OFF``
-
+    * * ``KOKKOS_ARCH_RISCV_RVA22V``
+      * Optimize for RISC-V_RVA22V architecture
+      * ``OFF``
+    * * ``KOKKOS_ARCH_RISCV_SG2042``
+      * Optimize for RISC-V_SG2042  architecture
+      * ``OFF``
 
 GPU Architectures
 -----------------
