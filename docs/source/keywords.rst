@@ -364,21 +364,18 @@ When compiling on the machine that the code also runs on, the easiest way to get
 
 In case of compiling for another machine, or if you want to be specific, the CPU architecture can be passed to kokkos manually. For the available architectures see the following list.
 
-.. flat-table::
+.. list-table:: AMD CPU architectures
+    :widths: 30 30 30
     :header-rows: 1
-    :stub-columns: 0
-    :widths: 20 20 40 20
+    :align: left
 
     * - Cmake keyword
       - Architecture/Instruction set
       - Examples
-      - Vendor
 
     * - ``Kokkos_ARCH_ZEN3``
       - Zen 3/amd64
       - Epyc 7713 @ ORNL Frontier
-      - :rspan:`3`
-        AMD
 
     * - ``Kokkos_ARCH_ZEN2``
       - Zen 2/amd64
@@ -392,15 +389,18 @@ In case of compiling for another machine, or if you want to be specific, the CPU
       - Bullozer/amd64
       - 
 
-    * -  
-    * -  
-    * -  
+.. list-table:: ARM CPU architectures
+    :widths: 30 30 30
+    :header-rows: 1
+    :align: left
+
+    * - Cmake keyword
+      - Architecture/Instruction set
+      - Examples
 
     * - ``Kokkos_ARCH_A64FX``
       - ARMv8.2/A64
       - A64FX @ Fugaku
-      - :rspan:`4`
-        ARM
 
     * - ``Kokkos_ARCH_ARMV8_THUNDERX2``
       - ARMv8/A64
@@ -419,31 +419,37 @@ In case of compiling for another machine, or if you want to be specific, the CPU
       - ARMv8.0/A64,A32
       -
 
-    * -  
-    * -  
-    * -  
+.. list-table:: IBM CPU architectures
+    :widths: 30 30 30
+    :header-rows: 1
+    :align: left
+
+    * - Cmake keyword
+      - Architecture/Instruction set
+      - Examples
 
     * - ``Kokkos_ARCH_POWER9``
       - Power9/Power ISA
       - POWER9 @ ORNL Summit
         POWER9 @ LLNL Sierra  
-      - :rspan:`1`
-        IBM
 
     * - ``Kokkos_ARCH_POWER8``
       - Power8/Power ISA
       - 
 
-    * -  
-    * -  
-    * -  
+.. list-table:: Intel CPU architectures
+    :widths: 30 30 30
+    :header-rows: 1
+    :align: left
+
+    * - Cmake keyword
+      - Architecture/Instruction set
+      - Examples
 
     * - ``Kokkos_ARCH_SPR``
       - Sapphire Rapids/x86-64
       - Xeon 9470C @ ANL Aurora
         Xeon @ LANL Crossroads
-      - :rspan:`6`
-        Intel
 
     * - ``Kokkos_ARCH_SKX``
       - Skylake/x86-64
