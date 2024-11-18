@@ -348,7 +348,7 @@ CPU architectures
 -----------------
 
 Kokkos does not automatically add or need compiler flags to optimize for a specific CPU architecture.
-Nevertheless, targeting a specific architecture allows the compiler to use simd instructions on the CPU.
+Nevertheless, targeting a specific architecture allows the compiler to use SIMD instructions on the CPU.
 When compiling on the machine that the code also runs on, the easiest way to get the CPU code optimized is using the native option.
 
 .. list-table::
