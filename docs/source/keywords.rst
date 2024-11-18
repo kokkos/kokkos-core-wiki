@@ -369,7 +369,7 @@ In case of compiling for another machine, or if you want to be specific, the CPU
     :header-rows: 1
     :align: left
 
-    * - Cmake keyword
+    * - CMake keyword
       - Architecture/Instruction set
       - Examples
 
