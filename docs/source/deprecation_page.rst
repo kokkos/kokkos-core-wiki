@@ -1,8 +1,6 @@
 Deprecations
 ************
 
-up to https://github.com/kokkos/kokkos/commit/43a30195af81b6d1aa5b1efec939af8423857f2c
-
 Deprecations for Kokkos 4.x
 ===========================
 
@@ -20,6 +18,26 @@ Deprecations for Kokkos 4.5
 * ``OpenMP::is_asynchronous(OpenMP const& = OpenMP())``
    * replacement: none
    * unused, conformity of execution spaces
+
+* ``atomic_query_version``
+   * replacement: none
+   * no known use case
+
+* ``atomic_assign``
+   * replacement: ``atomic_store``
+   * duplicated functionality
+
+* ``atomic_increment``
+   * replacement: ``atoimc_inc``
+   * duplicated functionality
+
+* ``atomic_decremnent``
+   * replacement: ``atomic_dec``
+   * duplicated functionality
+
+* ``atomic_compare_exchange_strong``
+   * replacement: ``atomic_compare_exchange``
+   * duplicated functionality
 
 Deprecations for Kokkos 4.4
 ---------------------------
