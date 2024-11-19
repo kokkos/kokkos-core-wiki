@@ -7,7 +7,7 @@ Deprecated in Kokkos 4.x
 Deprecated in Kokkos 4.5
 ---------------------------
 
-* Tasking interface: ``BasicFuture``, ``TaskSingle``, ``TaskPriority``, ``task_spawn``, ``host_spawn``, ``respawn``, ``when_all``, ``wait`
+* Tasking interface: ``BasicFuture``, ``TaskSingle``, ``TaskPriority``, ``task_spawn``, ``host_spawn``, ``respawn``, ``when_all``, ``wait``
    * replacement: none
    * unused, limited implementation
 
