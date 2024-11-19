@@ -156,10 +156,6 @@ Deprecated in Kokkos 4.1
    * replacement: ``View::subview(...)``
    * not useful, unused
 
-* ``Impl::ALL_t``
-   * ``ALL_t``
-   * Making the type of `ALL` public helps with documentation
-
 
 Deprecated in Kokkos 4.0
 ---------------------------
