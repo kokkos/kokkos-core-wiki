@@ -1,10 +1,10 @@
 Deprecations
 ************
 
-Deprecations for Kokkos 4.x
+Deprecated in Kokkos 4.x
 ===========================
 
-Deprecations for Kokkos 4.5
+Deprecated in Kokkos 4.5
 ---------------------------
 
 * Tasking interface
@@ -39,7 +39,7 @@ Deprecations for Kokkos 4.5
    * replacement: ``atomic_compare_exchange``
    * duplicated functionality
 
-Deprecations for Kokkos 4.4
+Deprecated in Kokkos 4.4
 ---------------------------
 
 * ``is_layouttiled``
@@ -79,7 +79,7 @@ Deprecations for Kokkos 4.4
    * the specialization is not documented, does not follow the standard library, it is not tested and has no known usage
 
 
-Deprecations for Kokkos 4.3
+Deprecated in Kokkos 4.3
 ---------------------------
 
 * ``Experimental::swap``
@@ -119,7 +119,7 @@ Deprecations for Kokkos 4.3
    * changes in `InitializationSettings` made these superfluous
 
 
-Deprecations for Kokkos 4.2
+Deprecated in Kokkos 4.2
 ---------------------------
 
 * ``Cuda::Cuda(cudaStream_t stream, bool manage_stream)``
@@ -141,7 +141,7 @@ Deprecations for Kokkos 4.2
     * issues with ADL, consistency with other math function overloads 
 
 
-Deprecations for Kokkos 4.1
+Deprecated in Kokkos 4.1
 ---------------------------
 
 * Default constructor for ``BinOp1D``, ``BinOp3D``
@@ -161,7 +161,7 @@ Deprecations for Kokkos 4.1
    * Making the type of `ALL` public helps with documentation
 
 
-Deprecations for Kokkos 4.0
+Deprecated in Kokkos 4.0
 ---------------------------
 
 * ``CudaUVMSpace::available()``
@@ -181,7 +181,7 @@ Deprecations for Kokkos 4.0
    * unused, not useful
 
 
-Deprecations for Kokkos-3.x
+Deprecated in Kokkos-3.x
 ===========================
 
 
