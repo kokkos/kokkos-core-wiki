@@ -172,7 +172,7 @@ Deprecated in Kokkos 4.0
    * replacement: none
    * no need for using ``volatile`` overloads
 
-* ``ScratchMemeorySpace::align(const IntType& size)``
+* ``ScratchMemorySpace::align(const IntType& size)``
    * replacement: none
    * unused, not useful
 
