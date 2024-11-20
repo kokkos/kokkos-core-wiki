@@ -362,7 +362,7 @@ When compiling on the machine that the code also runs on, the easiest way to get
     * - ``Kokkos_ARCH_NATIVE``
       - Target the architecture of the compiling CPU (``-march=native``)
 
-In case of compiling for another machine, or if you want to be specific, the CPU architecture can be passed to kokkos manually. For the available architectures see the following list.
+If cross-compiling, or if you want to be specific, the CPU architecture can be passed to Kokkos manually. For the available architectures see the following list.
 
 .. list-table:: AMD CPU architectures
     :widths: 30 30 30
