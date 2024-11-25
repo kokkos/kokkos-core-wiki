@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Known issues" href="known-issues.html" /><link rel="prev" title="API in Alphabetical Order" href="API/alphabetical.html" />
 
     <meta name="generator" content="sphinx-5.0.1, furo 2022.06.04.1"/>
-        <title>Deprecation for Kokkos-3.x - Kokkos documentation</title>
+        <title>Deprecations - Kokkos documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=40978830699223671f4072448e654b5958f38b89" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
@@ -433,7 +433,7 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="API/alphabetical.html">API in Alphabetical Order</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Deprecation for Kokkos-3.x</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Deprecations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="known-issues.html">Known issues</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="usecases.html">Use Cases and Examples</a><input class="toctree-checkbox" id="toctree-checkbox-28" name="toctree-checkbox-28" role="switch" type="checkbox"/><label for="toctree-checkbox-28"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="usecases/MPI-Halo-Exchange.html">MPI Halo Exchange</a></li>
@@ -527,18 +527,357 @@
           </label>
         </div>
         <article role="main">
-          <section id="deprecation-for-kokkos-3-x">
-<h1>Deprecation for Kokkos-3.x<a class="headerlink" href="#deprecation-for-kokkos-3-x" title="Permalink to this heading">#</a></h1>
+          <section id="deprecations">
+<h1>Deprecations<a class="headerlink" href="#deprecations" title="Permalink to this heading">#</a></h1>
+<section id="deprecated-in-kokkos-4-x">
+<h2>Deprecated in Kokkos 4.x<a class="headerlink" href="#deprecated-in-kokkos-4-x" title="Permalink to this heading">#</a></h2>
+<section id="deprecated-in-kokkos-4-5">
+<h3>Deprecated in Kokkos 4.5<a class="headerlink" href="#deprecated-in-kokkos-4-5" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><dl class="simple">
+<dt>Tasking interface: <code class="docutils literal notranslate"><span class="pre">BasicFuture</span></code>, <code class="docutils literal notranslate"><span class="pre">TaskSingle</span></code>, <code class="docutils literal notranslate"><span class="pre">TaskPriority</span></code>, <code class="docutils literal notranslate"><span class="pre">task_spawn</span></code>, <code class="docutils literal notranslate"><span class="pre">host_spawn</span></code>, <code class="docutils literal notranslate"><span class="pre">respawn</span></code>, <code class="docutils literal notranslate"><span class="pre">when_all</span></code>, <code class="docutils literal notranslate"><span class="pre">wait</span></code></dt><dd><ul>
+<li><p>replacement: none</p></li>
+<li><p>unused, limited implementation</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">HPX::HPX::is_asynchronous(HPX</span> <span class="pre">const</span> <span class="pre">&amp;</span> <span class="pre">=</span> <span class="pre">HPX())</span></code></dt><dd><ul>
+<li><p>replacement: none</p></li>
+<li><p>unused, conformity of execution spaces</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">OpenMP::is_asynchronous(OpenMP</span> <span class="pre">const&amp;</span> <span class="pre">=</span> <span class="pre">OpenMP())</span></code></dt><dd><ul>
+<li><p>replacement: none</p></li>
+<li><p>unused, conformity of execution spaces</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">atomic_query_version</span></code></dt><dd><ul>
+<li><p>replacement: none</p></li>
+<li><p>no known use case</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">atomic_assign</span></code></dt><dd><ul>
+<li><p>replacement: <code class="docutils literal notranslate"><span class="pre">atomic_store</span></code></p></li>
+<li><p>duplicated functionality</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">atomic_increment</span></code></dt><dd><ul>
+<li><p>replacement: <code class="docutils literal notranslate"><span class="pre">atoimc_inc</span></code></p></li>
+<li><p>duplicated functionality</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">atomic_decremnent</span></code></dt><dd><ul>
+<li><p>replacement: <code class="docutils literal notranslate"><span class="pre">atomic_dec</span></code></p></li>
+<li><p>duplicated functionality</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">atomic_compare_exchange_strong</span></code></dt><dd><ul>
+<li><p>replacement: <code class="docutils literal notranslate"><span class="pre">atomic_compare_exchange</span></code></p></li>
+<li><p>duplicated functionality</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+<section id="deprecated-in-kokkos-4-4">
+<h3>Deprecated in Kokkos 4.4<a class="headerlink" href="#deprecated-in-kokkos-4-4" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">is_layouttiled</span></code></dt><dd><ul>
+<li><p>replacement: none</p></li>
+<li><p>unused</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">layout_iterate_type_selector</span></code></dt><dd><ul>
+<li><p>replacement: none</p></li>
+<li><p>only useful internally</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">Array&lt;T,</span> <span class="pre">N,</span> <span class="pre">Proxy&gt;</span></code></dt><dd><ul>
+<li><p>replacement: none</p></li>
+<li><p>alignment with std::array</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">HPX::HPX(instance_mode</span> <span class="pre">mode)</span></code></dt><dd><ul>
+<li><p>replacement: <code class="docutils literal notranslate"><span class="pre">explicit</span> <span class="pre">HPX(instance_mode</span> <span class="pre">mode)</span></code></p></li>
+<li><p>execution space instance constructors should be <code class="docutils literal notranslate"><span class="pre">explicit</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">HPX::HPX(hpx::execution::experimental::unique_any_sender&lt;&gt;</span> <span class="pre">&amp;&amp;sender)</span></code></dt><dd><ul>
+<li><p>replacement: <code class="docutils literal notranslate"><span class="pre">explicit</span> <span class="pre">HPX::HPX(hpx::execution::experimental::unique_any_sender&lt;&gt;</span> <span class="pre">&amp;&amp;sender)</span></code></p></li>
+<li><p>execution space instance constructors should be <code class="docutils literal notranslate"><span class="pre">explicit</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">OpenMP::OpenMP(int</span> <span class="pre">pool_size)</span></code></dt><dd><ul>
+<li><p>replacement: <code class="docutils literal notranslate"><span class="pre">explicit</span> <span class="pre">OpenMP::OpenMP(int</span> <span class="pre">pool_size)</span></code></p></li>
+<li><p>execution space instance constructors should be <code class="docutils literal notranslate"><span class="pre">explicit</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">Serial::Serial(NewInstance)</span></code></dt><dd><ul>
+<li><p>replacement: <code class="docutils literal notranslate"><span class="pre">explicit</span> <span class="pre">Serial::Serial(NewInstance)</span></code></p></li>
+<li><p>execution space instance constructors should be <code class="docutils literal notranslate"><span class="pre">explicit</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">ChunkSize::ChunkSize(int</span> <span class="pre">value)</span></code></dt><dd><ul>
+<li><p>replacement: <code class="docutils literal notranslate"><span class="pre">explicit</span> <span class="pre">ChunkSize::ChunkSize(int</span> <span class="pre">value)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ChunkSize</span></code> ahould be constructed explicitly</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">pair&lt;T,</span> <span class="pre">void&gt;</span></code></dt><dd><ul>
+<li><p>replacement: none</p></li>
+<li><p>the specialization is not documented, does not follow the standard library, it is not tested and has no known usage</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+<section id="deprecated-in-kokkos-4-3">
+<h3>Deprecated in Kokkos 4.3<a class="headerlink" href="#deprecated-in-kokkos-4-3" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">Experimental::swap</span></code></dt><dd><ul>
+<li><p>replacement: <code class="docutils literal notranslate"><span class="pre">kokkos_swap</span></code></p></li>
+<li><p>avoiding ambiguities due to ADL</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">ExecutionSpace::in_parallel</span></code></dt><dd><ul>
+<li><p>replacement: <code class="docutils literal notranslate"><span class="pre">KOKKOS_IF_ON_HOST</span></code>/<code class="docutils literal notranslate"><span class="pre">KOKKOS_IF_ON_DEVICE</span></code> partly provide similar behavior</p></li>
+<li><p>inconsistent implementation, limited use</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">Cuda::device_arch()</span></code></dt><dd><ul>
+<li><p>replacement: none</p></li>
+<li><p>uniformity between execution spaces</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">Cuda::detect_device_count()</span></code></dt><dd><ul>
+<li><p>replacement: num_devices()</p></li>
+<li><p>uniformity between execution spaces</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">Cuda::detect_device_arch()</span></code></dt><dd><ul>
+<li><p>replacement: none</p></li>
+<li><p>uniformity between execution spaces</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">HIP::HIP::detect_device_count()</span></code></dt><dd><ul>
+<li><p>replacement: <code class="docutils literal notranslate"><span class="pre">num_devices()</span></code></p></li>
+<li><p>uniformity between execution spaces</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">RangePolicy::set(ChunkSize</span> <span class="pre">chunksize)</span></code></dt><dd><ul>
+<li><p>replacement: <code class="docutils literal notranslate"><span class="pre">RangePolicy::set_chunk_size(int</span> <span class="pre">chunk_size)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ChunkSize</span></code> was the only extra parameter usable with <code class="docutils literal notranslate"><span class="pre">RangePolicy::set()</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">InitializationSettings::set_num_devices</span></code>, <code class="docutils literal notranslate"><span class="pre">InitializationSettings::has_num_devices</span></code>, <code class="docutils literal notranslate"><span class="pre">InitializationSettings::get_num_devices</span></code></dt><dd><ul>
+<li><p>replacement: <code class="docutils literal notranslate"><span class="pre">num_devices</span></code></p></li>
+<li><p>changes in <cite>InitializationSettings</cite> made these superfluous</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">InitializationSettings::set_skip_devices</span></code>, <code class="docutils literal notranslate"><span class="pre">InitializationSettings::has_skip_devices</span></code>, <code class="docutils literal notranslate"><span class="pre">InitializationSettings::get_skip_devices</span></code></dt><dd><ul>
+<li><p>replacement: <code class="docutils literal notranslate"><span class="pre">KOKKOS_VISIBLE_DEVICES</span></code></p></li>
+<li><p>changes in <cite>InitializationSettings</cite> made these superfluous</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+<section id="deprecated-in-kokkos-4-2">
+<h3>Deprecated in Kokkos 4.2<a class="headerlink" href="#deprecated-in-kokkos-4-2" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">Cuda::Cuda(cudaStream_t</span> <span class="pre">stream,</span> <span class="pre">bool</span> <span class="pre">manage_stream)</span></code></dt><dd><ul>
+<li><p>replacement: <code class="docutils literal notranslate"><span class="pre">Cuda::Cuda(cudaStream_t</span> <span class="pre">stream)</span></code></p></li>
+<li><p>constructing a Cuda execution space instance should always use an externally managed <code class="docutils literal notranslate"><span class="pre">cudaStream</span></code> object</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">HIP::HIP(hipStream_t</span> <span class="pre">stream,</span> <span class="pre">bool</span> <span class="pre">manage_stream)</span></code></dt><dd><ul>
+<li><p>replacement <code class="docutils literal notranslate"><span class="pre">HIP::HIP(hipStream_t</span> <span class="pre">stream)</span></code></p></li>
+<li><p>constructing a HIP execution space instance should always use an externally managed <code class="docutils literal notranslate"><span class="pre">hipStream</span></code> object</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">vector</span></code></dt><dd><ul>
+<li><p>replacement: none</p></li>
+<li><p>non-standard behavior, doesn’t work well with Kokkos concepts</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">HostSpace::HostSpace(AllocationMechanism)</span></code></dt><dd><ul>
+<li><p>replacement: <code class="docutils literal notranslate"><span class="pre">HostSpace::HostSpoace()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">AllocationMechanism</span></code> is unused, <code class="docutils literal notranslate"><span class="pre">operator</span> <span class="pre">new</span></code> with alignment is used unconditionally</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>SIMD math functions in the <code class="docutils literal notranslate"><span class="pre">Kokkos::Experimental</span></code> namespace</dt><dd><ul>
+<li><p>replacement: SIMD math function in the <code class="docutils literal notranslate"><span class="pre">Kokkos</span></code> namespace</p></li>
+<li><p>issues with ADL, consistency with other math function overloads</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+<section id="deprecated-in-kokkos-4-1">
+<h3>Deprecated in Kokkos 4.1<a class="headerlink" href="#deprecated-in-kokkos-4-1" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><dl class="simple">
+<dt>Default constructor for <code class="docutils literal notranslate"><span class="pre">BinSort</span></code>, <code class="docutils literal notranslate"><span class="pre">BinOp1D</span></code>, and <code class="docutils literal notranslate"><span class="pre">BinOp3D</span></code></dt><dd><ul>
+<li><p>replacement: none</p></li>
+<li><p>the default constructors created invalid, unusable objects</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">View::Rank</span></code></dt><dd><ul>
+<li><p>replacement: <code class="docutils literal notranslate"><span class="pre">View::rank()</span></code></p></li>
+<li><p>undocumented, redundant due to existence of <code class="docutils literal notranslate"><span class="pre">View::rank()</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">View::subview&lt;MemoryTraits&gt;(...)</span></code></dt><dd><ul>
+<li><p>replacement: <code class="docutils literal notranslate"><span class="pre">View::subview(...)</span></code></p></li>
+<li><p>not useful, unused</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+<section id="deprecated-in-kokkos-4-0">
+<h3>Deprecated in Kokkos 4.0<a class="headerlink" href="#deprecated-in-kokkos-4-0" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">CudaUVMSpace::available()</span></code></dt><dd><ul>
+<li><p>replacement: <code class="docutils literal notranslate"><span class="pre">SharedSpace</span></code></p></li>
+<li><p>not portable, would always return <code class="docutils literal notranslate"><span class="pre">true</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">Complex</span></code> <code class="docutils literal notranslate"><span class="pre">volatile</span></code> overloads</dt><dd><ul>
+<li><p>replacement: none</p></li>
+<li><p>no need for using <code class="docutils literal notranslate"><span class="pre">volatile</span></code> overloads</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">pair</span></code> <code class="docutils literal notranslate"><span class="pre">volatile</span></code> overloads</dt><dd><ul>
+<li><p>replacement: none</p></li>
+<li><p>no need for using <code class="docutils literal notranslate"><span class="pre">volatile</span></code> overloads</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">ScratchMemorySpace::align(const</span> <span class="pre">IntType&amp;</span> <span class="pre">size)</span></code></dt><dd><ul>
+<li><p>replacement: none</p></li>
+<li><p>unused, not useful</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+</section>
+<section id="deprecated-in-kokkos-3-x">
+<h2>Deprecated in Kokkos-3.x<a class="headerlink" href="#deprecated-in-kokkos-3-x" title="Permalink to this heading">#</a></h2>
 <section id="type-aliases-deprecated-in-kokkos-3-7">
-<h2>Type aliases deprecated in Kokkos-3.7<a class="headerlink" href="#type-aliases-deprecated-in-kokkos-3-7" title="Permalink to this heading">#</a></h2>
+<h3>Type aliases deprecated in Kokkos-3.7<a class="headerlink" href="#type-aliases-deprecated-in-kokkos-3-7" title="Permalink to this heading">#</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">ActiveExecutionMemorySpace</span></code>, <code class="docutils literal notranslate"><span class="pre">host_execution_space</span></code>, <code class="docutils literal notranslate"><span class="pre">host_memory_space</span></code>, <code class="docutils literal notranslate"><span class="pre">host_mirror_space</span></code>, <code class="docutils literal notranslate"><span class="pre">is_array_layout</span></code>, <code class="docutils literal notranslate"><span class="pre">is_execution_policy</span></code>, <code class="docutils literal notranslate"><span class="pre">is_execution_space</span></code>, <code class="docutils literal notranslate"><span class="pre">is_memory_space</span></code>, <code class="docutils literal notranslate"><span class="pre">is_memory_traits</span></code>, <code class="docutils literal notranslate"><span class="pre">is_space</span></code>, <code class="docutils literal notranslate"><span class="pre">Iterate</span></code>, <code class="docutils literal notranslate"><span class="pre">MDRangePolicy</span></code>, <code class="docutils literal notranslate"><span class="pre">Rank</span></code>, <code class="docutils literal notranslate"><span class="pre">SpaceAccessibility</span></code></p>
 </section>
 <section id="macros-deprecated-in-kokkos-3-7">
-<h2>Macros deprecated in Kokkos-3.7<a class="headerlink" href="#macros-deprecated-in-kokkos-3-7" title="Permalink to this heading">#</a></h2>
+<h3>Macros deprecated in Kokkos-3.7<a class="headerlink" href="#macros-deprecated-in-kokkos-3-7" title="Permalink to this heading">#</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">KOKKOS_RESTRICT_EXECUTION_TO_(DATA_SPACE)</span></code>, <code class="docutils literal notranslate"><span class="pre">HIP_SAFE_CALL(call)</span></code></p>
 </section>
 <section id="free-functions-deprecated-in-kokkos-3-7">
-<h2>Free-functions deprecated in Kokkos-3.7<a class="headerlink" href="#free-functions-deprecated-in-kokkos-3-7" title="Permalink to this heading">#</a></h2>
+<h3>Free-functions deprecated in Kokkos-3.7<a class="headerlink" href="#free-functions-deprecated-in-kokkos-3-7" title="Permalink to this heading">#</a></h3>
 <div class="table-wrapper colwidths-given docutils container">
 <table class="docutils align-default">
 <colgroup>
@@ -594,7 +933,7 @@
 </div>
 </section>
 <section id="member-functions-deprecated-in-kokkos-3-7">
-<h2>Member functions deprecated in Kokkos-3.7<a class="headerlink" href="#member-functions-deprecated-in-kokkos-3-7" title="Permalink to this heading">#</a></h2>
+<h3>Member functions deprecated in Kokkos-3.7<a class="headerlink" href="#member-functions-deprecated-in-kokkos-3-7" title="Permalink to this heading">#</a></h3>
 <div class="table-wrapper colwidths-given docutils container">
 <table class="docutils align-default">
 <colgroup>
@@ -642,7 +981,7 @@
 </div>
 </section>
 <section id="classes-deprecated-in-kokkos-3-7">
-<h2>Classes deprecated in Kokkos-3.7<a class="headerlink" href="#classes-deprecated-in-kokkos-3-7" title="Permalink to this heading">#</a></h2>
+<h3>Classes deprecated in Kokkos-3.7<a class="headerlink" href="#classes-deprecated-in-kokkos-3-7" title="Permalink to this heading">#</a></h3>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -659,7 +998,7 @@
 </div>
 </section>
 <section id="namespace-updates">
-<h2>Namespace updates<a class="headerlink" href="#namespace-updates" title="Permalink to this heading">#</a></h2>
+<h3>Namespace updates<a class="headerlink" href="#namespace-updates" title="Permalink to this heading">#</a></h3>
 <div class="table-wrapper colwidths-given docutils container">
 <table class="docutils align-default">
 <colgroup>
@@ -692,7 +1031,7 @@
 </div>
 </section>
 <section id="other-deprecations">
-<h2>Other deprecations<a class="headerlink" href="#other-deprecations" title="Permalink to this heading">#</a></h2>
+<h3>Other deprecations<a class="headerlink" href="#other-deprecations" title="Permalink to this heading">#</a></h3>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -748,19 +1087,20 @@
 </div>
 </section>
 <section id="public-headers-in-kokkos-3-7">
-<h2>Public Headers in Kokkos-3.7<a class="headerlink" href="#public-headers-in-kokkos-3-7" title="Permalink to this heading">#</a></h2>
+<h3>Public Headers in Kokkos-3.7<a class="headerlink" href="#public-headers-in-kokkos-3-7" title="Permalink to this heading">#</a></h3>
 <p>From Kokkos-3.7, the following are <em>public</em> headers:</p>
 <section id="core">
-<h3>Core<a class="headerlink" href="#core" title="Permalink to this heading">#</a></h3>
+<h4>Core<a class="headerlink" href="#core" title="Permalink to this heading">#</a></h4>
 <p><code class="docutils literal notranslate"><span class="pre">Kokkos_Core.hpp</span></code>, <code class="docutils literal notranslate"><span class="pre">Kokkos_Macros.hpp</span></code>, <code class="docutils literal notranslate"><span class="pre">Kokkos_Atomic.hpp</span></code>, <code class="docutils literal notranslate"><span class="pre">Kokkos_DetectionIdiom.hpp</span></code>, <code class="docutils literal notranslate"><span class="pre">Kokkos_MathematicalConstants.hpp</span></code>, <code class="docutils literal notranslate"><span class="pre">Kokkos_MathematicalFunctions.hpp</span></code>, <code class="docutils literal notranslate"><span class="pre">Kokkos_NumericTraits.hpp</span></code>, <code class="docutils literal notranslate"><span class="pre">Kokkos_Array.hpp</span></code>, <code class="docutils literal notranslate"><span class="pre">Kokkos_Complex.hpp</span></code>, <code class="docutils literal notranslate"><span class="pre">Kokkos_Pair.hpp</span></code>, <code class="docutils literal notranslate"><span class="pre">Kokkos_Half.hpp</span></code>, <code class="docutils literal notranslate"><span class="pre">Kokkos_Timer.hpp</span></code></p>
 </section>
 <section id="algorithms">
-<h3>Algorithms<a class="headerlink" href="#algorithms" title="Permalink to this heading">#</a></h3>
+<h4>Algorithms<a class="headerlink" href="#algorithms" title="Permalink to this heading">#</a></h4>
 <p><code class="docutils literal notranslate"><span class="pre">Kokkos_StdAlgorithms.hpp</span></code>, <code class="docutils literal notranslate"><span class="pre">Kokkos_Random.hpp</span></code>, <code class="docutils literal notranslate"><span class="pre">Kokkos_Sort.hpp</span></code></p>
 </section>
 <section id="containers">
-<h3>Containers<a class="headerlink" href="#containers" title="Permalink to this heading">#</a></h3>
+<h4>Containers<a class="headerlink" href="#containers" title="Permalink to this heading">#</a></h4>
 <p><code class="docutils literal notranslate"><span class="pre">Kokkos_Bit.hpp</span></code>, <code class="docutils literal notranslate"><span class="pre">Kokkos_DualView.hpp</span></code>, <code class="docutils literal notranslate"><span class="pre">Kokkos_DynRankView.hpp</span></code>, <code class="docutils literal notranslate"><span class="pre">Kokkos_ErrorReporter.hpp</span></code>, <code class="docutils literal notranslate"><span class="pre">Kokkos_Functional.hpp</span></code>, <code class="docutils literal notranslate"><span class="pre">Kokkos_OffsetView.hpp</span></code>, <code class="docutils literal notranslate"><span class="pre">Kokkos_ScatterView.hpp</span></code>, <code class="docutils literal notranslate"><span class="pre">Kokkos_StaticCrsGraph.hpp</span></code>, <code class="docutils literal notranslate"><span class="pre">Kokkos_UnorderedMap.hpp</span></code>, <code class="docutils literal notranslate"><span class="pre">Kokkos_Vector.hpp</span></code></p>
+</section>
 </section>
 </section>
 </section>
@@ -822,7 +1162,17 @@
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">Deprecation for Kokkos-3.x</a><ul>
+<li><a class="reference internal" href="#">Deprecations</a><ul>
+<li><a class="reference internal" href="#deprecated-in-kokkos-4-x">Deprecated in Kokkos 4.x</a><ul>
+<li><a class="reference internal" href="#deprecated-in-kokkos-4-5">Deprecated in Kokkos 4.5</a></li>
+<li><a class="reference internal" href="#deprecated-in-kokkos-4-4">Deprecated in Kokkos 4.4</a></li>
+<li><a class="reference internal" href="#deprecated-in-kokkos-4-3">Deprecated in Kokkos 4.3</a></li>
+<li><a class="reference internal" href="#deprecated-in-kokkos-4-2">Deprecated in Kokkos 4.2</a></li>
+<li><a class="reference internal" href="#deprecated-in-kokkos-4-1">Deprecated in Kokkos 4.1</a></li>
+<li><a class="reference internal" href="#deprecated-in-kokkos-4-0">Deprecated in Kokkos 4.0</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#deprecated-in-kokkos-3-x">Deprecated in Kokkos-3.x</a><ul>
 <li><a class="reference internal" href="#type-aliases-deprecated-in-kokkos-3-7">Type aliases deprecated in Kokkos-3.7</a></li>
 <li><a class="reference internal" href="#macros-deprecated-in-kokkos-3-7">Macros deprecated in Kokkos-3.7</a></li>
 <li><a class="reference internal" href="#free-functions-deprecated-in-kokkos-3-7">Free-functions deprecated in Kokkos-3.7</a></li>
@@ -834,6 +1184,8 @@
 <li><a class="reference internal" href="#core">Core</a></li>
 <li><a class="reference internal" href="#algorithms">Algorithms</a></li>
 <li><a class="reference internal" href="#containers">Containers</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
