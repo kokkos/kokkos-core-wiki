@@ -125,9 +125,11 @@ Deprecated in Kokkos 4.2
 * ``Cuda::Cuda(cudaStream_t stream, bool manage_stream)``
    * replacement: ``Cuda::Cuda(cudaStream_t stream)``
    * constructing a Cuda execution space instance should always use an externally managed ``cudaStream`` object
+   
 * ``HIP::HIP(hipStream_t stream, bool manage_stream)``
     * replacement ``HIP::HIP(hipStream_t stream)``
     * constructing a HIP execution space instance should always use an externally managed ``hipStream`` object
+    
 * ``vector``
     * replacement: none
     * non-standard behavior, doesn't work well with Kokkos concepts 
@@ -144,7 +146,7 @@ Deprecated in Kokkos 4.2
 Deprecated in Kokkos 4.1
 ---------------------------
 
-* Default constructor for ``BinOp1D``, ``BinOp3D``
+* Default constructor for ``BinSort``, ``BinOp1D``, and ``BinOp3D``
    * replacement: none
    * the default constructors created invalid, unusable objects
 
