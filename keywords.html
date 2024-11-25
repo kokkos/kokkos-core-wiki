@@ -933,95 +933,171 @@ should not be setting these.</p>
 <span id="keywords-arch"></span><h2>Architectures<a class="headerlink" href="#architectures" title="Permalink to this heading">#</a></h2>
 <section id="cpu-architectures">
 <h3>CPU architectures<a class="headerlink" href="#cpu-architectures" title="Permalink to this heading">#</a></h3>
+<p>Kokkos does not automatically add or need compiler flags to optimize for a specific CPU architecture.
+Nevertheless, targeting a specific architecture allows the compiler to use SIMD instructions on the CPU.
+When compiling on the machine that the code also runs on, the easiest way to get the CPU code optimized is using the native option.</p>
 <div class="table-wrapper colwidths-given docutils container">
 <table class="docutils align-left">
 <colgroup>
 <col style="width: 25%" />
-<col style="width: 65%" />
-<col style="width: 10%" />
+<col style="width: 75%" />
 </colgroup>
 <thead>
 <tr class="row-odd"><th class="head"></th>
 <th class="head"><p>Description/info</p></th>
-<th class="head"><p>Default</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_NATIVE</span></code></p></td>
-<td><p>Optimize for the local CPU architecture</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
+<td><p>Target the architecture of the compiling CPU (<code class="docutils literal notranslate"><span class="pre">-march=native</span></code>)</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_A64FX</span></code></p></td>
-<td><p>Optimize for ARMv8.2 with SVE Support</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
+</tbody>
+</table>
+</div>
+<p>If cross-compiling, or if you want to be specific, the CPU architecture can be passed to Kokkos manually. For the available architectures see the following list.</p>
+<div class="table-wrapper colwidths-given docutils container" id="id1">
+<table class="docutils align-left" id="id1">
+<caption><span class="caption-text">AMD CPU architectures</span><a class="headerlink" href="#id1" title="Permalink to this table">#</a></caption>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>CMake keyword</p></th>
+<th class="head"><p>Architecture/Instruction set</p></th>
+<th class="head"><p>Examples</p></th>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_AMDAVX</span></code></p></td>
-<td><p>Optimize for AMDAVX architecture</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_ARMV80</span></code></p></td>
-<td><p>Optimize for ARMV80 architecture</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_ARMV81</span></code></p></td>
-<td><p>Optimize for ARMV81 architecture</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_ARMV8_THUNDERX</span></code></p></td>
-<td><p>Optimize for ARMV8_THUNDERX architecture</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_ARMV8_THUNDERX2</span></code></p></td>
-<td><p>Optimize for the ARMV8_THUNDERX2 architecture</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_BDW</span></code></p></td>
-<td><p>Optimize for BDW architecture</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_HSW</span></code></p></td>
-<td><p>Optimize for HSW architecture</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_KNC</span></code></p></td>
-<td><p>Optimize for KNC architecture</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_KNL</span></code></p></td>
-<td><p>Optimize for KNL architecture</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_POWER8</span></code></p></td>
-<td><p>Optimize for POWER8 architecture</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_POWER9</span></code></p></td>
-<td><p>Optimize for POWER9 architecture</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_SKX</span></code></p></td>
-<td><p>Optimize for SKX architecture</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_SNB</span></code></p></td>
-<td><p>Optimize for SNB architecture</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_SPR</span></code></p></td>
-<td><p>Optimize for Sapphire Rapids architecture</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_ZEN</span></code></p></td>
-<td><p>Optimize for Zen architecture</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_ZEN3</span></code></p></td>
+<td><p>Zen 3/amd64</p></td>
+<td><p>Epyc 7713 &#64; ORNL Frontier</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_ZEN2</span></code></p></td>
-<td><p>Optimize for Zen2 architecture</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
+<td><p>Zen 2/amd64</p></td>
+<td><p>Epyc 7742 &#64; NOAA</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_ZEN3</span></code></p></td>
-<td><p>Optimize for Zen3 architecture</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_ZEN</span></code></p></td>
+<td><p>Zen/amd64</p></td>
+<td><p>Epyc &#64; ANL Selene</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_AMDAVX</span></code></p></td>
+<td><p>Bullozer/amd64</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="table-wrapper colwidths-given docutils container" id="id2">
+<table class="docutils align-left" id="id2">
+<caption><span class="caption-text">ARM CPU architectures</span><a class="headerlink" href="#id2" title="Permalink to this table">#</a></caption>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>CMake keyword</p></th>
+<th class="head"><p>Architecture/Instruction set</p></th>
+<th class="head"><p>Examples</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_A64FX</span></code></p></td>
+<td><p>ARMv8.2/A64</p></td>
+<td><p>A64FX &#64; Fugaku</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_ARMV8_THUNDERX2</span></code></p></td>
+<td><p>ARMv8/A64</p></td>
+<td><p>ThunderX2 &#64; SNL Astra
+ThunderX2 &#64; CEA BullSequana</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_ARMV81</span></code></p></td>
+<td><p>ARMv8.1/A64,A32</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_ARMV8_THUNDERX</span></code></p></td>
+<td><p>ARMv8/A64</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_ARMV80</span></code></p></td>
+<td><p>ARMv8.0/A64,A32</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="table-wrapper colwidths-given docutils container" id="id3">
+<table class="docutils align-left" id="id3">
+<caption><span class="caption-text">IBM CPU architectures</span><a class="headerlink" href="#id3" title="Permalink to this table">#</a></caption>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>CMake keyword</p></th>
+<th class="head"><p>Architecture/Instruction set</p></th>
+<th class="head"><p>Examples</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_POWER9</span></code></p></td>
+<td><p>Power9/Power ISA</p></td>
+<td><p>POWER9 &#64; ORNL Summit
+POWER9 &#64; LLNL Sierra</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_POWER8</span></code></p></td>
+<td><p>Power8/Power ISA</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="table-wrapper colwidths-given docutils container" id="id4">
+<table class="docutils align-left" id="id4">
+<caption><span class="caption-text">Intel CPU architectures</span><a class="headerlink" href="#id4" title="Permalink to this table">#</a></caption>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>CMake keyword</p></th>
+<th class="head"><p>Architecture/Instruction set</p></th>
+<th class="head"><p>Examples</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_SPR</span></code></p></td>
+<td><p>Sapphire Rapids/x86-64</p></td>
+<td><p>Xeon 9470C &#64; ANL Aurora
+Xeon &#64; LANL Crossroads</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_SKX</span></code></p></td>
+<td><p>Skylake/x86-64</p></td>
+<td><p>6130 &#64; OSU Pete</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_HSW</span></code></p></td>
+<td><p>Haswell/x86-64</p></td>
+<td><p>2680v3 &#64; NASA Pleiades</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_BDW</span></code></p></td>
+<td><p>Broadwell/x86-64</p></td>
+<td><p>2680v4 &#64; NASA Pleiades</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_KNL</span></code></p></td>
+<td><p>Knights Landing/x86-64</p></td>
+<td><p>31S1P &#64; Tianhe-2</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_KNC</span></code></p></td>
+<td><p>Knights Corner/x86-64</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_SNB</span></code></p></td>
+<td><p>Sandy Bridge/x86-64</p></td>
+<td></td>
 </tr>
 </tbody>
 </table>
