@@ -400,7 +400,7 @@ If cross-compiling, or if you want to be specific, the CPU architecture can be p
 
     * - ``Kokkos_ARCH_ARMV9_GRACE``
       - ARMv9-A/A64/neoverse-v2
-      - GH200 @ ALPS CSCS
+      - GH200 @ CSCS ALPS
 
     * - ``Kokkos_ARCH_A64FX``
       - ARMv8.2/A64
