@@ -400,37 +400,44 @@ If cross-compiling, or if you want to be specific, the CPU architecture can be p
       -
 
 .. list-table:: ARM CPU architectures
-    :widths: 30 30 30
+    :widths: 30 30 30 30
     :header-rows: 1
     :align: left
 
     * - CMake keyword
       - Architecture/Instruction set
       - Examples
+      - Notes
 
     * - ``Kokkos_ARCH_ARMV9_GRACE``
       - ARMv9-A/A64/neoverse-v2
       - GH200 @ CSCS ALPS
+      - (since Kokkos 4.4.1)
 
     * - ``Kokkos_ARCH_A64FX``
       - ARMv8.2/A64
       - A64FX @ Fugaku
+      -
 
     * - ``Kokkos_ARCH_ARMV8_THUNDERX2``
       - ARMv8/A64
       - ThunderX2 @ SNL Astra
         ThunderX2 @ CEA BullSequana
+      -
 
     * - ``Kokkos_ARCH_ARMV81``
       - ARMv8.1/A64,A32
+      -
       -
 
     * - ``Kokkos_ARCH_ARMV8_THUNDERX``
       - ARMv8/A64
       -
+      -
 
     * - ``Kokkos_ARCH_ARMV80``
       - ARMv8.0/A64,A32
+      -
       -
 
 .. list-table:: IBM CPU architectures
