@@ -17,7 +17,7 @@ CMake Keywords
    implementation details. Avoid modifying these unless you have a deep
    understanding of their implications and are aware that they might change
    without notice.
-   
+
 
 This page is organized in four sections:
 
@@ -229,12 +229,12 @@ Backend-specific options
     * * ``Kokkos_ENABLE_ATOMICS_BYPASS``
       * Disable atomics when no host parallel nor device backend is enabled for Serial only builds (since Kokkos 4.3)
       * ``OFF``
-	
+
     * * ``Kokkos_ENABLE_IMPL_HPX_ASYNC_DISPATCH``
       * Enable asynchronous dispatch for the HPX backend
       * ``ON``
 
-	
+
 ``Kokkos_ENABLE_CUDA_LAMBDA`` default value is ``OFF`` until 3.7 and ``ON`` since 4.0
 
 ``Kokkos_ENABLE_IMPL_CUDA_MALLOC_ASYNC`` default value is ``OFF`` except in 4.2, 4.3, and 4.4
@@ -387,7 +387,7 @@ If cross-compiling, or if you want to be specific, the CPU architecture can be p
 
     * - ``Kokkos_ARCH_AMDAVX``
       - Bullozer/amd64
-      - 
+      -
 
 .. list-table:: ARM CPU architectures
     :widths: 30 30 30
@@ -435,11 +435,11 @@ If cross-compiling, or if you want to be specific, the CPU architecture can be p
     * - ``Kokkos_ARCH_POWER9``
       - Power9/Power ISA
       - POWER9 @ ORNL Summit
-        POWER9 @ LLNL Sierra  
+        POWER9 @ LLNL Sierra
 
     * - ``Kokkos_ARCH_POWER8``
       - Power8/Power ISA
-      - 
+      -
 
 .. list-table:: Intel CPU architectures
     :widths: 30 30 30
@@ -457,15 +457,15 @@ If cross-compiling, or if you want to be specific, the CPU architecture can be p
 
     * - ``Kokkos_ARCH_SKX``
       - Skylake/x86-64
-      - 6130 @ OSU Pete 
+      - 6130 @ OSU Pete
 
     * - ``Kokkos_ARCH_HSW``
       - Haswell/x86-64
-      - 2680v3 @ NASA Pleiades 
+      - 2680v3 @ NASA Pleiades
 
     * - ``Kokkos_ARCH_BDW``
       - Broadwell/x86-64
-      - 2680v4 @ NASA Pleiades 
+      - 2680v4 @ NASA Pleiades
 
     * - ``Kokkos_ARCH_KNL``
       - Knights Landing/x86-64
@@ -473,11 +473,11 @@ If cross-compiling, or if you want to be specific, the CPU architecture can be p
 
     * - ``Kokkos_ARCH_KNC``
       - Knights Corner/x86-64
-      - 
+      -
 
     * - ``Kokkos_ARCH_SNB``
       - Sandy Bridge/x86-64
-      - 
+      -
 
 GPU Architectures
 -----------------
@@ -638,7 +638,7 @@ Kokkos will attempt to autodetect the architecture flag at configuration time.
 
     * * ``Kokkos_ARCH_AMD_GFX90A``
       * GFX90A
-      * MI200 series 
+      * MI200 series
       * (since Kokkos 4.2)
 
     * * ``Kokkos_ARCH_AMD_GFX908``
@@ -655,7 +655,7 @@ Kokkos will attempt to autodetect the architecture flag at configuration time.
       * GFX1103
       * Ryzen 8000G Phoenix series APU
       * (since Kokkos 4.5)
-    
+
     * * ``Kokkos_ARCH_AMD_GFX1100``
       * GFX1100
       * 7900xt
@@ -673,17 +673,17 @@ Kokkos will attempt to autodetect the architecture flag at configuration time.
 
     * * ``Kokkos_ARCH_VEGA908``
       * GFX908
-      * MI100 
+      * MI100
       * Prefer ``Kokkos_ARCH_AMD_GFX908``
 
     * * ``Kokkos_ARCH_VEGA906``
       * GFX906
-      * MI50, MI60 
+      * MI50, MI60
       * Prefer ``Kokkos_ARCH_AMD_GFX906``
 
     * * ``Kokkos_ARCH_VEGA900``
       * GFX900
-      * MI25 
+      * MI25
       * removed in 4.0
 
 Intel GPUs
