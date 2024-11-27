@@ -28,7 +28,7 @@ CUDA
   
   Therefore, from version 4.5, the default behavior for Kokkos is to preventively disable `cudaMallocAsync.`
 
-- cuda 11.0 and 11.2 are not compatible with glibc 2.34 librt stubs. That issue is related to how the CMake package handles linking with librt. For more information please look at issue `#7512 <https://github.com/kokkos/kokkos/issues/7512>`_.
+- CUDA 11.0 through 11.2 are not compatible with glibc 2.34 librt stubs. That issue is related to how the CMake package handles linking with librt. For more information please look at issue `#7512 <https://github.com/kokkos/kokkos/issues/7512>`_.
 
 
 HIP
