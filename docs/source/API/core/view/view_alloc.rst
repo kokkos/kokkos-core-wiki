@@ -24,7 +24,7 @@ Create View allocation parameter bundle from argument list. Valid argument list 
 
 * ``Kokkos::WithoutInitializing`` to bypass element initialization and destruction
 
-* ``Kokkos::SequentialHostInit`` to perform element initialization and destruction serially on host
+* ``Kokkos::SequentialHostInit`` to perform element initialization and destruction serially on host (since 4.4.01)
 
 * ``Kokkos::AllowPadding`` to allow allocation to pad dimensions for memory alignment
 
@@ -70,3 +70,10 @@ Description
    * call Kokkos parallel operations
 
    When using this allocation option the `View` constructor/destructor will create/destroy elements in a serial loop on the Host.
+
+   .. warning::
+
+     `SequentialHostInit` can only be used when creating host accessible `View`s, such as `View`s with `HostSpace`, `SharedSpace`,
+     or `SharedHostPinnedSpace` as memory space.
+
+   .. versionadded:: 4.4.01
