@@ -62,7 +62,7 @@ Description
 
 .. cppkokkos:type:: SequentialHostInit
 
-   :cppkokkos:type:`SequentialHostInit` is intended to be used to inititialize elements that do not have a default constructor or destructor that
+   :cppkokkos:type:`SequentialHostInit` is intended to be used to initialize elements that do not have a default constructor or destructor that
    can be called inside a Kokkos parallel region. In particular this includes constructors and destructors which:
 
    * allocate or deallocate memory
