@@ -959,31 +959,42 @@ When compiling on the machine that the code also runs on, the easiest way to get
 <table class="docutils align-left" id="id1">
 <caption><span class="caption-text">AMD CPU architectures</span><a class="headerlink" href="#id1" title="Permalink to this table">#</a></caption>
 <colgroup>
-<col style="width: 33%" />
-<col style="width: 33%" />
-<col style="width: 33%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
 </colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>CMake keyword</p></th>
 <th class="head"><p>Architecture/Instruction set</p></th>
 <th class="head"><p>Examples</p></th>
+<th class="head"><p>Notes</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_ZEN3</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_ZEN4</span></code></p></td>
+<td><p>Zen 4/amd64</p></td>
+<td><p>Epyc Genoa &#64; LLNL El Capitan</p></td>
+<td><p>(since Kokkos 4.6)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_ZEN3</span></code></p></td>
 <td><p>Zen 3/amd64</p></td>
 <td><p>Epyc 7713 &#64; ORNL Frontier</p></td>
+<td></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_ZEN2</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_ZEN2</span></code></p></td>
 <td><p>Zen 2/amd64</p></td>
 <td><p>Epyc 7742 &#64; NOAA</p></td>
+<td></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_ZEN</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_ZEN</span></code></p></td>
 <td><p>Zen/amd64</p></td>
 <td><p>Epyc &#64; ANL Selene</p></td>
+<td></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_AMDAVX</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_AMDAVX</span></code></p></td>
 <td><p>Bullozer/amd64</p></td>
+<td></td>
 <td></td>
 </tr>
 </tbody>
@@ -993,40 +1004,48 @@ When compiling on the machine that the code also runs on, the easiest way to get
 <table class="docutils align-left" id="id2">
 <caption><span class="caption-text">ARM CPU architectures</span><a class="headerlink" href="#id2" title="Permalink to this table">#</a></caption>
 <colgroup>
-<col style="width: 33%" />
-<col style="width: 33%" />
-<col style="width: 33%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
 </colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>CMake keyword</p></th>
 <th class="head"><p>Architecture/Instruction set</p></th>
 <th class="head"><p>Examples</p></th>
+<th class="head"><p>Notes</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_ARMV9_GRACE</span></code></p></td>
 <td><p>ARMv9-A/A64/neoverse-v2</p></td>
 <td><p>GH200 &#64; CSCS ALPS</p></td>
+<td><p>(since Kokkos 4.4.1)</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_A64FX</span></code></p></td>
 <td><p>ARMv8.2/A64</p></td>
 <td><p>A64FX &#64; Fugaku</p></td>
+<td></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_ARMV8_THUNDERX2</span></code></p></td>
 <td><p>ARMv8/A64</p></td>
 <td><p>ThunderX2 &#64; SNL Astra
 ThunderX2 &#64; CEA BullSequana</p></td>
+<td></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_ARMV81</span></code></p></td>
 <td><p>ARMv8.1/A64,A32</p></td>
+<td></td>
 <td></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_ARMV8_THUNDERX</span></code></p></td>
 <td><p>ARMv8/A64</p></td>
 <td></td>
+<td></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ARCH_ARMV80</span></code></p></td>
 <td><p>ARMv8.0/A64,A32</p></td>
+<td></td>
 <td></td>
 </tr>
 </tbody>

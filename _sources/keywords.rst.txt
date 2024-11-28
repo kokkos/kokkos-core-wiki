@@ -365,62 +365,79 @@ When compiling on the machine that the code also runs on, the easiest way to get
 If cross-compiling, or if you want to be specific, the CPU architecture can be passed to Kokkos manually. For the available architectures see the following list.
 
 .. list-table:: AMD CPU architectures
-    :widths: 30 30 30
+    :widths: 30 30 30 30
     :header-rows: 1
     :align: left
 
     * - CMake keyword
       - Architecture/Instruction set
       - Examples
+      - Notes
+
+    * - ``Kokkos_ARCH_ZEN4``
+      - Zen 4/amd64
+      - Epyc Genoa @ LLNL El Capitan
+      - (since Kokkos 4.6)
 
     * - ``Kokkos_ARCH_ZEN3``
       - Zen 3/amd64
       - Epyc 7713 @ ORNL Frontier
+      -
 
     * - ``Kokkos_ARCH_ZEN2``
       - Zen 2/amd64
       - Epyc 7742 @ NOAA
+      -
 
     * - ``Kokkos_ARCH_ZEN``
       - Zen/amd64
       - Epyc @ ANL Selene
+      -
 
     * - ``Kokkos_ARCH_AMDAVX``
       - Bullozer/amd64
       -
+      -
 
 .. list-table:: ARM CPU architectures
-    :widths: 30 30 30
+    :widths: 30 30 30 30
     :header-rows: 1
     :align: left
 
     * - CMake keyword
       - Architecture/Instruction set
       - Examples
+      - Notes
 
     * - ``Kokkos_ARCH_ARMV9_GRACE``
       - ARMv9-A/A64/neoverse-v2
       - GH200 @ CSCS ALPS
+      - (since Kokkos 4.4.1)
 
     * - ``Kokkos_ARCH_A64FX``
       - ARMv8.2/A64
       - A64FX @ Fugaku
+      -
 
     * - ``Kokkos_ARCH_ARMV8_THUNDERX2``
       - ARMv8/A64
       - ThunderX2 @ SNL Astra
         ThunderX2 @ CEA BullSequana
+      -
 
     * - ``Kokkos_ARCH_ARMV81``
       - ARMv8.1/A64,A32
+      -
       -
 
     * - ``Kokkos_ARCH_ARMV8_THUNDERX``
       - ARMv8/A64
       -
+      -
 
     * - ``Kokkos_ARCH_ARMV80``
       - ARMv8.0/A64,A32
+      -
       -
 
 .. list-table:: IBM CPU architectures
