@@ -17,7 +17,7 @@ CMake Keywords
    implementation details. Avoid modifying these unless you have a deep
    understanding of their implications and are aware that they might change
    without notice.
-   
+
 
 This page is organized in four sections:
 
@@ -229,12 +229,12 @@ Backend-specific options
     * * ``Kokkos_ENABLE_ATOMICS_BYPASS``
       * Disable atomics when no host parallel nor device backend is enabled for Serial only builds (since Kokkos 4.3)
       * ``OFF``
-	
+
     * * ``Kokkos_ENABLE_IMPL_HPX_ASYNC_DISPATCH``
       * Enable asynchronous dispatch for the HPX backend
       * ``ON``
 
-	
+
 ``Kokkos_ENABLE_CUDA_LAMBDA`` default value is ``OFF`` until 3.7 and ``ON`` since 4.0
 
 ``Kokkos_ENABLE_IMPL_CUDA_MALLOC_ASYNC`` default value is ``OFF`` except in 4.2, 4.3, and 4.4
@@ -347,96 +347,170 @@ Architectures
 CPU architectures
 -----------------
 
+Kokkos does not automatically add or need compiler flags to optimize for a specific CPU architecture.
+Nevertheless, targeting a specific architecture allows the compiler to use SIMD instructions on the CPU.
+When compiling on the machine that the code also runs on, the easiest way to get the CPU code optimized is using the native option.
+
 .. list-table::
-    :widths: 25 65 10
+    :widths: 25 75
     :header-rows: 1
     :align: left
 
     * -
       - Description/info
-      - Default
 
-    * * ``Kokkos_ARCH_NATIVE``
-      * Optimize for the local CPU architecture
-      * ``OFF``
+    * - ``Kokkos_ARCH_NATIVE``
+      - Target the architecture of the compiling CPU (``-march=native``)
 
-    * * ``Kokkos_ARCH_A64FX``
-      * Optimize for ARMv8.2 with SVE Support
-      * ``OFF``
+If cross-compiling, or if you want to be specific, the CPU architecture can be passed to Kokkos manually. For the available architectures see the following list.
 
-    * * ``Kokkos_ARCH_AMDAVX``
-      * Optimize for AMDAVX architecture
-      * ``OFF``
+.. list-table:: AMD CPU architectures
+    :widths: 30 30 30 30
+    :header-rows: 1
+    :align: left
 
-    * * ``Kokkos_ARCH_ARMV80``
-      * Optimize for ARMV80 architecture
-      * ``OFF``
+    * - CMake keyword
+      - Architecture/Instruction set
+      - Examples
+      - Notes
 
-    * * ``Kokkos_ARCH_ARMV81``
-      * Optimize for ARMV81 architecture
-      * ``OFF``
+    * - ``Kokkos_ARCH_ZEN4``
+      - Zen 4/amd64
+      - Epyc Genoa @ LLNL El Capitan
+      - (since Kokkos 4.6)
 
-    * * ``Kokkos_ARCH_ARMV8_THUNDERX``
-      * Optimize for ARMV8_THUNDERX architecture
-      * ``OFF``
+    * - ``Kokkos_ARCH_ZEN3``
+      - Zen 3/amd64
+      - Epyc 7713 @ ORNL Frontier
+      -
 
-    * * ``Kokkos_ARCH_ARMV8_THUNDERX2``
-      * Optimize for the ARMV8_THUNDERX2 architecture
-      * ``OFF``
+    * - ``Kokkos_ARCH_ZEN2``
+      - Zen 2/amd64
+      - Epyc 7742 @ NOAA
+      -
 
-    * * ``Kokkos_ARCH_BDW``
-      * Optimize for BDW architecture
-      * ``OFF``
+    * - ``Kokkos_ARCH_ZEN``
+      - Zen/amd64
+      - Epyc @ ANL Selene
+      -
 
-    * * ``Kokkos_ARCH_HSW``
-      * Optimize for HSW architecture
-      * ``OFF``
+    * - ``Kokkos_ARCH_AMDAVX``
+      - Bullozer/amd64
+      -
+      -
 
-    * * ``Kokkos_ARCH_KNC``
-      * Optimize for KNC architecture
-      * ``OFF``
+.. list-table:: ARM CPU architectures
+    :widths: 30 30 30 30
+    :header-rows: 1
+    :align: left
 
-    * * ``Kokkos_ARCH_KNL``
-      * Optimize for KNL architecture
-      * ``OFF``
+    * - CMake keyword
+      - Architecture/Instruction set
+      - Examples
+      - Notes
 
-    * * ``Kokkos_ARCH_POWER8``
-      * Optimize for POWER8 architecture
-      * ``OFF``
+    * - ``Kokkos_ARCH_ARMV9_GRACE``
+      - ARMv9-A/A64/neoverse-v2
+      - GH200 @ CSCS ALPS
+      - (since Kokkos 4.4.1)
 
-    * * ``Kokkos_ARCH_POWER9``
-      * Optimize for POWER9 architecture
-      * ``OFF``
+    * - ``Kokkos_ARCH_A64FX``
+      - ARMv8.2/A64
+      - A64FX @ Fugaku
+      -
 
-    * * ``Kokkos_ARCH_SKX``
-      * Optimize for SKX architecture
-      * ``OFF``
+    * - ``Kokkos_ARCH_ARMV8_THUNDERX2``
+      - ARMv8/A64
+      - ThunderX2 @ SNL Astra
+        ThunderX2 @ CEA BullSequana
+      -
 
-    * * ``Kokkos_ARCH_SNB``
-      * Optimize for SNB architecture
-      * ``OFF``
+    * - ``Kokkos_ARCH_ARMV81``
+      - ARMv8.1/A64,A32
+      -
+      -
 
-    * * ``Kokkos_ARCH_SPR``
-      * Optimize for Sapphire Rapids architecture
-      * ``OFF``
+    * - ``Kokkos_ARCH_ARMV8_THUNDERX``
+      - ARMv8/A64
+      -
+      -
 
-    * * ``Kokkos_ARCH_ZEN``
-      * Optimize for Zen architecture
-      * ``OFF``
+    * - ``Kokkos_ARCH_ARMV80``
+      - ARMv8.0/A64,A32
+      -
+      -
 
-    * * ``Kokkos_ARCH_ZEN2``
-      * Optimize for Zen2 architecture
-      * ``OFF``
+.. list-table:: IBM CPU architectures
+    :widths: 30 30 30
+    :header-rows: 1
+    :align: left
 
-    * * ``Kokkos_ARCH_ZEN3``
-      * Optimize for Zen3 architecture
-      * ``OFF``
-    * * ``KOKKOS_ARCH_RISCV_RVA22V``
-      * Optimize for RISC-V_RVA22V architecture
-      * ``OFF``
-    * * ``KOKKOS_ARCH_RISCV_SG2042``
-      * Optimize for RISC-V_SG2042  architecture
-      * ``OFF``
+    * - CMake keyword
+      - Architecture/Instruction set
+      - Examples
+
+    * - ``Kokkos_ARCH_POWER9``
+      - Power9/Power ISA
+      - POWER9 @ ORNL Summit
+        POWER9 @ LLNL Sierra
+
+    * - ``Kokkos_ARCH_POWER8``
+      - Power8/Power ISA
+      -
+
+.. list-table:: Intel CPU architectures
+    :widths: 30 30 30
+    :header-rows: 1
+    :align: left
+
+    * - CMake keyword
+      - Architecture/Instruction set
+      - Examples
+
+    * - ``Kokkos_ARCH_SPR``
+      - Sapphire Rapids/x86-64
+      - Xeon 9470C @ ANL Aurora
+        Xeon @ LANL Crossroads
+
+    * - ``Kokkos_ARCH_SKX``
+      - Skylake/x86-64
+      - 6130 @ OSU Pete
+
+    * - ``Kokkos_ARCH_HSW``
+      - Haswell/x86-64
+      - 2680v3 @ NASA Pleiades
+
+    * - ``Kokkos_ARCH_BDW``
+      - Broadwell/x86-64
+      - 2680v4 @ NASA Pleiades
+
+    * - ``Kokkos_ARCH_KNL``
+      - Knights Landing/x86-64
+      - 31S1P @ Tianhe-2
+    * - ``Kokkos_ARCH_KNC``
+      - Knights Corner/x86-64
+      -
+
+    * - ``Kokkos_ARCH_SNB``
+      - Sandy Bridge/x86-64
+      -
+      
+ .. list-table:: RISC-V CPU architectures
+    :widths: 30 30 30
+    :header-rows: 1
+    :align: left
+    
+    * - CMake keyword
+      - Architecture/Instruction set
+      - Examples   
+    
+    * - ``KOKKOS_ARCH_RISCV_RVA22V``
+      -  RVA22V/RISC-V ISA
+      -
+      
+    * - ``KOKKOS_ARCH_RISCV_SG2042``
+      -  SG2042/RISC-V ISA
+      -   
 
 GPU Architectures
 -----------------
@@ -597,7 +671,7 @@ Kokkos will attempt to autodetect the architecture flag at configuration time.
 
     * * ``Kokkos_ARCH_AMD_GFX90A``
       * GFX90A
-      * MI200 series 
+      * MI200 series
       * (since Kokkos 4.2)
 
     * * ``Kokkos_ARCH_AMD_GFX908``
@@ -614,7 +688,7 @@ Kokkos will attempt to autodetect the architecture flag at configuration time.
       * GFX1103
       * Ryzen 8000G Phoenix series APU
       * (since Kokkos 4.5)
-    
+
     * * ``Kokkos_ARCH_AMD_GFX1100``
       * GFX1100
       * 7900xt
@@ -632,17 +706,17 @@ Kokkos will attempt to autodetect the architecture flag at configuration time.
 
     * * ``Kokkos_ARCH_VEGA908``
       * GFX908
-      * MI100 
+      * MI100
       * Prefer ``Kokkos_ARCH_AMD_GFX908``
 
     * * ``Kokkos_ARCH_VEGA906``
       * GFX906
-      * MI50, MI60 
+      * MI50, MI60
       * Prefer ``Kokkos_ARCH_AMD_GFX906``
 
     * * ``Kokkos_ARCH_VEGA900``
       * GFX900
-      * MI25 
+      * MI25
       * removed in 4.0
 
 Intel GPUs
