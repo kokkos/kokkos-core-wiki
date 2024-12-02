@@ -1,0 +1,38 @@
+\tikzset{
+    decide/.style = {draw, shape = diamond, fill = red!25, aspect = 2, inner sep = 1pt},
+    endpoint/.style = {draw, circle, fill = black!20, inner sep = 1pt},
+    yesorno/.style = {rectangle,draw,fill=white,inner sep=1pt},
+    work/.style = {rectangle, draw, fill = orange!25},
+    % We need to enforce a white background for folks in dark mode.
+    background rectangle/.style={fill=white},
+    show background rectangle
+}
+\node[endpoint] (start) {Start};
+
+\node[decide,below=0.5cm of start] (decision) { Seeding ?};
+
+\node[work, below=1cm of decision] (seeding) {Seeding};
+
+\node[work, below=0.5cm of seeding, minimum height=2cm, minimum width = 2cm] (compute) {Compute};
+
+\node[work, below=1cm of compute] (solve) {Solve};
+
+\node[decide,right=0.5cm of solve] (convergence) {Convergence ?};
+
+\node[endpoint, right=1cm of convergence] (end) {End};
+
+\draw [-stealth,solid](start) -- (decision.north);
+
+\draw [-stealth,solid](decision) -- (seeding.north) node[midway, yesorno] {yes};
+
+\draw [-stealth,solid](seeding)--(compute.north);
+
+\draw [-stealth,solid](compute)--(solve.north);
+
+\draw [-stealth,solid](solve)--(convergence.west);
+
+\draw [-stealth,solid](convergence.east)--(end.west) node[midway, yesorno] {yes};
+
+\draw [-stealth,solid](convergence.north) -- node[midway, yesorno]{no} (convergence.north|-decision.east) -- (decision.east);
+
+\draw [-stealth,solid](decision.west) -- ({$(decision.west)-0.25*(convergence.north)+0.25*(decision.east)$}|-decision.west) |- node[near start, yesorno] {no} (compute.west);
