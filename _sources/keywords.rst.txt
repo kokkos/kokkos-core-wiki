@@ -496,6 +496,27 @@ If cross-compiling, or if you want to be specific, the CPU architecture can be p
       - Sandy Bridge/x86-64
       -
 
+.. list-table:: RISC-V CPU architectures
+    :widths: 30 30 30 30
+    :header-rows: 1
+    :align: left
+
+    * - CMake keyword
+      - Architecture/Instruction set
+      - Examples
+      - Notes
+
+    * - ``Kokkos_ARCH_RISCV_RVA22V``
+      - RVA22V/RISC-V ISA
+      - SpacemiT K1
+      - (since Kokkos 4.5)
+
+    * - ``Kokkos_ARCH_RISCV_SG2042``
+      - SG2042/RISC-V ISA
+      - Milk-V Pioneer
+      - (since Kokkos 4.3)
+
+
 GPU Architectures
 -----------------
 
