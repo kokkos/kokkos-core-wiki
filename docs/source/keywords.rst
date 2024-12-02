@@ -506,12 +506,12 @@ If cross-compiling, or if you want to be specific, the CPU architecture can be p
       - Examples 
       - Notes
     
-    * - ``KOKKOS_ARCH_RISCV_RVA22V``
+    * - ``Kokkos_ARCH_RISCV_RVA22V``
       - RVA22V/RISC-V ISA
       - SpacemiT K1
       - (since Kokkos 4.5)
       
-    * - ``KOKKOS_ARCH_RISCV_SG2042``
+    * - ``Kokkos_ARCH_RISCV_SG2042``
       -  SG2042/RISC-V ISA
       -  Milk-V Pioneer
       - (since Kokkos 4.3)
