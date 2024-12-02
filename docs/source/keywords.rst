@@ -502,15 +502,18 @@ If cross-compiling, or if you want to be specific, the CPU architecture can be p
     
     * - CMake keyword
       - Architecture/Instruction set
-      - Examples   
+      - Examples 
+      - Notes
     
     * - ``KOKKOS_ARCH_RISCV_RVA22V``
       -  RVA22V/RISC-V ISA
       -
+      - (since Kokkos 4.5.0)
       
     * - ``KOKKOS_ARCH_RISCV_SG2042``
       -  SG2042/RISC-V ISA
-      -   
+      -  
+      - (since Kokkos 4.3.0)
 
 GPU Architectures
 -----------------
