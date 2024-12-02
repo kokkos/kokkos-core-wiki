@@ -541,7 +541,8 @@
 <li><p>label as <code class="docutils literal notranslate"><span class="pre">C</span></code>-string or <code class="docutils literal notranslate"><span class="pre">std::string</span></code></p></li>
 <li><p>memory space instance of the <code class="docutils literal notranslate"><span class="pre">View::memory_space</span></code> type</p></li>
 <li><p>execution space instance able to access <code class="docutils literal notranslate"><span class="pre">View::memory_space</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Kokkos::WithoutInitializing</span></code> to bypass initialization</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Kokkos::WithoutInitializing</span></code> to bypass element initialization and destruction</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Kokkos::SequentialHostInit</span></code> to perform element initialization and destruction serially on host (since 4.4.01)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Kokkos::AllowPadding</span></code> to allow allocation to pad dimensions for memory alignment</p></li>
 <li><p>a pointer to create an unmanaged View wrapping that pointer</p></li>
 </ul>
@@ -568,6 +569,36 @@
 <dd><p><a class="reference internal" href="#_CPPv410ALLOC_PROP" title="ALLOC_PROP"><code class="xref cppkokkos cppkokkos-type docutils literal notranslate"><span class="pre">ALLOC_PROP</span></code></a> is a special, unspellable implementation-defined type that is returned by <a class="reference internal" href="#_CPPv4IDpE10view_alloc10ALLOC_PROPDpRK4Args" title="view_alloc"><code class="xref cppkokkos cppkokkos-func docutils literal notranslate"><span class="pre">view_alloc()</span></code></a>
 and <a class="reference internal" href="#_CPPv4IDpE9view_wrap10ALLOC_PROPDpRK4Args" title="view_wrap"><code class="xref cppkokkos cppkokkos-func docutils literal notranslate"><span class="pre">view_wrap()</span></code></a>. It represents a bundle of allocator parameters, including the View label, the memory space instance,
 the execution space instance, whether to initialize the memory, whether to allow padding, and the raw pointer value (for wrapped unmanaged views).</p>
+</dd></dl>
+
+<dl class="cppkokkos type">
+<dt class="sig sig-object cppkokkos" id="_CPPv419WithoutInitializing">
+<span id="_CPPv319WithoutInitializing"></span><span id="_CPPv219WithoutInitializing"></span><span id="WithoutInitializing"></span><span class="k"></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">WithoutInitializing</span></span></span><a class="headerlink" href="#_CPPv419WithoutInitializing" title="Permalink to this definition">#</a><br /></dt>
+<dd><p><a class="reference internal" href="#_CPPv419WithoutInitializing" title="WithoutInitializing"><code class="xref cppkokkos cppkokkos-type docutils literal notranslate"><span class="pre">WithoutInitializing</span></code></a> is intended to be used in situations where default construction of <cite>View</cite> elements in its
+associated execution space is not needed or not viable. In particular, it may not be viable in situations such as the construction of objects with virtual functions,
+or for <cite>Views</cite> of elements without default constructor. In such situations, this option is often used in conjunction with manual in-place <cite>new</cite>
+construction of objects and manual destruction of elements.</p>
+</dd></dl>
+
+<dl class="cppkokkos type">
+<dt class="sig sig-object cppkokkos" id="_CPPv418SequentialHostInit">
+<span id="_CPPv318SequentialHostInit"></span><span id="_CPPv218SequentialHostInit"></span><span id="SequentialHostInit"></span><span class="k"></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SequentialHostInit</span></span></span><a class="headerlink" href="#_CPPv418SequentialHostInit" title="Permalink to this definition">#</a><br /></dt>
+<dd><p><a class="reference internal" href="#_CPPv418SequentialHostInit" title="SequentialHostInit"><code class="xref cppkokkos cppkokkos-type docutils literal notranslate"><span class="pre">SequentialHostInit</span></code></a> is intended to be used to initialize elements that do not have a default constructor or destructor that
+can be called inside a Kokkos parallel region. In particular this includes constructors and destructors which:</p>
+<ul class="simple">
+<li><p>allocate or deallocate memory</p></li>
+<li><p>create or destroy managed <cite>Kokkos::View</cite> objects</p></li>
+<li><p>call Kokkos parallel operations</p></li>
+</ul>
+<p>When using this allocation option the <cite>View</cite> constructor/destructor will create/destroy elements in a serial loop on the Host.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><cite>SequentialHostInit</cite> can only be used when creating host accessible <cite>View`s, such as `View`s with `HostSpace</cite>, <cite>SharedSpace</cite>,
+or <cite>SharedHostPinnedSpace</cite> as memory space.</p>
+</div>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 4.4.01.</span></p>
+</div>
 </dd></dl>
 
 </section>

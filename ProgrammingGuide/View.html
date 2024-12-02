@@ -638,7 +638,55 @@
 <h4>6.2.3.3 I really want a View of Views; what do I do?<a class="headerlink" href="#i-really-want-a-view-of-views-what-do-i-do" title="Permalink to this heading">#</a></h4>
 <p>Here is how to create a View of Views, where each inner View has a separate owning allocation:</p>
 <ol class="arabic simple">
-<li><p>The outer View must have a memory space that is both host and device accessible, such as <cite>CudaUVMSpace</cite>.</p></li>
+<li><p>The outer View must have a memory space that is both host and device accessible, such as <code class="xref cppkokkos cppkokkos-type docutils literal notranslate"><span class="pre">SharedSpace</span></code>.</p></li>
+<li><p>Create the outer View using the <a class="reference internal" href="../API/core/view/view_alloc.html#_CPPv418SequentialHostInit" title="SequentialHostInit"><code class="xref cppkokkos cppkokkos-type docutils literal notranslate"><span class="pre">SequentialHostInit</span></code></a> property.</p></li>
+<li><p>Create inner Views in a sequential host loop.  (Prefer creating the inner Views uninitialized.  Creating the inner Views initialized launches one device kernel per inner View.  This is likely much slower than just initializing them all yourself from a single kernel over the outer View.)</p></li>
+<li><p>At this point, you may access the outer and inner Views on device.</p></li>
+<li><p>Get rid of the outer View as you normally would.</p></li>
+</ol>
+<p>Here is an example:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">SharedSapce</span><span class="p">;</span>
+<span class="k">using</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">View</span><span class="p">;</span>
+<span class="k">using</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">view_alloc</span><span class="p">;</span>
+<span class="k">using</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">SequentialHostInit</span><span class="p">;</span>
+<span class="k">using</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">WithoutInitializing</span><span class="p">;</span>
+
+<span class="k">using</span><span class="w"> </span><span class="n">inner_view_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">View</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">*&gt;</span><span class="p">;</span>
+<span class="k">using</span><span class="w"> </span><span class="n">outer_view_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">View</span><span class="o">&lt;</span><span class="n">inner_view_type</span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="n">SharedSpace</span><span class="o">&gt;</span><span class="p">;</span>
+
+<span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">numOuter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+<span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">numInner</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span>
+<span class="n">outer_view_type</span><span class="w"> </span><span class="n">outer</span><span class="w"> </span><span class="p">(</span><span class="n">view_alloc</span><span class="w"> </span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="p">(</span><span class="s">&quot;Outer&quot;</span><span class="p">),</span><span class="w"> </span><span class="n">SequentialHostInit</span><span class="p">),</span><span class="w"> </span><span class="n">numOuter</span><span class="p">);</span>
+
+<span class="c1">// Create inner Views on host, outside of a parallel region, uninitialized</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">numOuter</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="p">(</span><span class="s">&quot;Inner &quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">to_string</span><span class="w"> </span><span class="p">(</span><span class="n">k</span><span class="p">);</span>
+<span class="w">  </span><span class="n">outer</span><span class="p">(</span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">inner_view_type</span><span class="w"> </span><span class="p">(</span><span class="n">view_alloc</span><span class="w"> </span><span class="p">(</span><span class="n">label</span><span class="p">,</span><span class="w"> </span><span class="n">WithoutInitializing</span><span class="p">),</span><span class="w"> </span><span class="n">numInner</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// Outer and inner views are now ready for use on device</span>
+
+<span class="n">Kokkos</span><span class="o">::</span><span class="n">RangePolicy</span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="n">range</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">numOuter</span><span class="p">);</span>
+<span class="n">Kokkos</span><span class="o">::</span><span class="n">parallel_for</span><span class="w"> </span><span class="p">(</span><span class="s">&quot;my kernel label&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">range</span><span class="p">,</span>
+<span class="w">    </span><span class="n">KOKKOS_LAMBDA</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">numInner</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">j</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">device_outer</span><span class="p">(</span><span class="n">i</span><span class="p">)(</span><span class="n">j</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">10.0</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="p">(</span><span class="n">j</span><span class="p">);</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">});</span>
+<span class="n">Kokkos</span><span class="o">::</span><span class="n">fence</span><span class="p">();</span>
+
+<span class="c1">// Destroy the View of Views - this will call destructors sequentially on the host!</span>
+<span class="n">outer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">outer_view_type</span><span class="w"> </span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Another approach is to create the inner Views as nonowning, from a single pool of memory. This makes it unnecessary to invoke their destructors.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><cite>SequentialHostInit</cite> was added in version 4.4.01. Prior to that the process was more involved.</p>
+</div>
+<ol class="arabic simple">
+<li><p>The outer View must have a memory space that is both host and device accessible, such as <cite>SharedSpace</cite>.</p></li>
 <li><p>Create the outer View without initializing it.</p></li>
 <li><p>Create inner Views using placement new, in a sequential host loop.  (Prefer creating the inner Views uninitialized.  Creating the inner Views initialized launches one device kernel per inner View.  This is likely much slower than just initializing them all yourself from a single kernel over the outer View.)</p></li>
 <li><p>At this point, you may access the outer and inner Views on device.</p></li>
@@ -647,15 +695,13 @@
 <li><p>Get rid of the outer View as you normally would.</p></li>
 </ol>
 <p>Here is an example:</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">Cuda</span><span class="p">;</span>
-<span class="k">using</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">CudaSpace</span><span class="p">;</span>
-<span class="k">using</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">CudaUVMSpace</span><span class="p">;</span>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">SharedSpace</span><span class="p">;</span>
 <span class="k">using</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">View</span><span class="p">;</span>
 <span class="k">using</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">view_alloc</span><span class="p">;</span>
 <span class="k">using</span><span class="w"> </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">WithoutInitializing</span><span class="p">;</span>
 
-<span class="k">using</span><span class="w"> </span><span class="n">inner_view_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">View</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="n">CudaSpace</span><span class="o">&gt;</span><span class="p">;</span>
-<span class="k">using</span><span class="w"> </span><span class="n">outer_view_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">View</span><span class="o">&lt;</span><span class="n">inner_view_type</span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="n">CudaUVMSpace</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="k">using</span><span class="w"> </span><span class="n">inner_view_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">View</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">*&gt;</span><span class="p">;</span>
+<span class="k">using</span><span class="w"> </span><span class="n">outer_view_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">View</span><span class="o">&lt;</span><span class="n">inner_view_type</span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="n">SharedSpace</span><span class="o">&gt;</span><span class="p">;</span>
 
 <span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">numOuter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
 <span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">numInner</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span>
@@ -664,36 +710,33 @@
 <span class="c1">// Create inner Views on host, outside of a parallel region, uninitialized</span>
 <span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">numOuter</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="p">(</span><span class="s">&quot;Inner &quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">to_string</span><span class="w"> </span><span class="p">(</span><span class="n">k</span><span class="p">);</span>
-<span class="w">  </span><span class="k">new</span><span class="w"> </span><span class="p">(</span><span class="o">&amp;</span><span class="n">outer</span><span class="p">[</span><span class="n">k</span><span class="p">])</span><span class="w"> </span><span class="n">inner_view_type</span><span class="w"> </span><span class="p">(</span><span class="n">view_alloc</span><span class="w"> </span><span class="p">(</span><span class="n">label</span><span class="p">,</span><span class="w"> </span><span class="n">WithoutInitializing</span><span class="p">),</span><span class="w"> </span><span class="n">numInner</span><span class="p">);</span>
+<span class="w">  </span><span class="k">new</span><span class="w"> </span><span class="p">(</span><span class="o">&amp;</span><span class="n">outer</span><span class="p">(</span><span class="n">k</span><span class="p">))</span><span class="w"> </span><span class="n">inner_view_type</span><span class="w"> </span><span class="p">(</span><span class="n">view_alloc</span><span class="w"> </span><span class="p">(</span><span class="n">label</span><span class="p">,</span><span class="w"> </span><span class="n">WithoutInitializing</span><span class="p">),</span><span class="w"> </span><span class="n">numInner</span><span class="p">);</span>
 <span class="p">}</span>
 
 <span class="c1">// Outer and inner views are now ready for use on device</span>
 
-<span class="n">Kokkos</span><span class="o">::</span><span class="n">RangePolicy</span><span class="o">&lt;</span><span class="n">Cuda</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">range</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">numOuter</span><span class="p">);</span>
+<span class="n">Kokkos</span><span class="o">::</span><span class="n">RangePolicy</span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="n">range</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">numOuter</span><span class="p">);</span>
 <span class="n">Kokkos</span><span class="o">::</span><span class="n">parallel_for</span><span class="w"> </span><span class="p">(</span><span class="s">&quot;my kernel label&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">range</span><span class="p">,</span>
 <span class="w">    </span><span class="n">KOKKOS_LAMBDA</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">      </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">numInner</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">j</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">device_outer</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">10.0</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="p">(</span><span class="n">j</span><span class="p">);</span>
+<span class="w">        </span><span class="n">device_outer</span><span class="p">(</span><span class="n">i</span><span class="p">)(</span><span class="n">j</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">10.0</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="p">(</span><span class="n">j</span><span class="p">);</span>
 <span class="w">      </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="w">  </span><span class="p">});</span>
 
 <span class="c1">// Fence before deallocation on host, to make sure</span>
 <span class="c1">// that the device kernel is done first.</span>
-<span class="c1">// Note the new fence syntax that requires an instance.</span>
-<span class="c1">// This will work with other CUDA streams, etc.</span>
-<span class="n">Cuda</span><span class="w"> </span><span class="p">().</span><span class="n">fence</span><span class="w"> </span><span class="p">();</span>
+<span class="n">Kokkos</span><span class="o">::</span><span class="n">fence</span><span class="w"> </span><span class="p">();</span>
 
 <span class="c1">// Destroy inner Views, again on host, outside of a parallel region.</span>
 <span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="n">outer</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="o">~</span><span class="n">inner_view_type</span><span class="w"> </span><span class="p">();</span>
+<span class="w">  </span><span class="n">outer</span><span class="p">(</span><span class="n">k</span><span class="p">).</span><span class="o">~</span><span class="n">inner_view_type</span><span class="w"> </span><span class="p">();</span>
 <span class="p">}</span>
 
 <span class="c1">// You&#39;re better off disposing of outer immediately.</span>
 <span class="n">outer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">outer_view_type</span><span class="w"> </span><span class="p">();</span>
 </pre></div>
 </div>
-<p>Another approach is to create the inner Views as nonowning, from a single pool of memory. This makes it unnecessary to invoke their destructors.</p>
 </section>
 </section>
 <section id="const-views">

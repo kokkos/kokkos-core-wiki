@@ -145,7 +145,57 @@ Another issue is that View construction in a Kokkos parallel region does not upd
 
 Here is how to create a View of Views, where each inner View has a separate owning allocation:
 
-1. The outer View must have a memory space that is both host and device accessible, such as `CudaUVMSpace`.
+1. The outer View must have a memory space that is both host and device accessible, such as :cppkokkos:type:`SharedSpace`.
+2. Create the outer View using the :cppkokkos:type:`SequentialHostInit` property.
+3. Create inner Views in a sequential host loop.  (Prefer creating the inner Views uninitialized.  Creating the inner Views initialized launches one device kernel per inner View.  This is likely much slower than just initializing them all yourself from a single kernel over the outer View.)
+4. At this point, you may access the outer and inner Views on device.
+5. Get rid of the outer View as you normally would.
+
+Here is an example:
+
+.. code-block:: c++
+
+  using Kokkos::SharedSapce;
+  using Kokkos::View;
+  using Kokkos::view_alloc;
+  using Kokkos::SequentialHostInit;
+  using Kokkos::WithoutInitializing;
+
+  using inner_view_type = View<double*>;
+  using outer_view_type = View<inner_view_type*, SharedSpace>;
+
+  const int numOuter = 5;
+  const int numInner = 4;
+  outer_view_type outer (view_alloc (std::string ("Outer"), SequentialHostInit), numOuter);
+
+  // Create inner Views on host, outside of a parallel region, uninitialized
+  for (int k = 0; k < numOuter; ++k) {
+    const std::string label = std::string ("Inner ") + std::to_string (k);
+    outer(k) = inner_view_type (view_alloc (label, WithoutInitializing), numInner);
+  }
+
+  // Outer and inner views are now ready for use on device
+
+  Kokkos::RangePolicy<> range (0, numOuter);
+  Kokkos::parallel_for ("my kernel label", range,
+      KOKKOS_LAMBDA (const int i) {
+        for (int j = 0; j < numInner; ++j) {
+          device_outer(i)(j) = 10.0 * double (i) + double (j);
+        }
+      }
+    });
+  Kokkos::fence();
+
+  // Destroy the View of Views - this will call destructors sequentially on the host!
+  outer = outer_view_type ();
+
+Another approach is to create the inner Views as nonowning, from a single pool of memory. This makes it unnecessary to invoke their destructors.
+
+.. warning::
+
+  `SequentialHostInit` was added in version 4.4.01. Prior to that the process was more involved.
+
+1. The outer View must have a memory space that is both host and device accessible, such as `SharedSpace`.
 2. Create the outer View without initializing it.
 3. Create inner Views using placement new, in a sequential host loop.  (Prefer creating the inner Views uninitialized.  Creating the inner Views initialized launches one device kernel per inner View.  This is likely much slower than just initializing them all yourself from a single kernel over the outer View.)
 4. At this point, you may access the outer and inner Views on device.
@@ -157,15 +207,13 @@ Here is an example:
 
 .. code-block:: c++
 
-  using Kokkos::Cuda;
-  using Kokkos::CudaSpace;
-  using Kokkos::CudaUVMSpace;
+  using Kokkos::SharedSpace;
   using Kokkos::View;
   using Kokkos::view_alloc;
   using Kokkos::WithoutInitializing;
 
-  using inner_view_type = View<double*, CudaSpace>;
-  using outer_view_type = View<inner_view_type*, CudaUVMSpace>;
+  using inner_view_type = View<double*>;
+  using outer_view_type = View<inner_view_type*, SharedSpace>;
 
   const int numOuter = 5;
   const int numInner = 4;
@@ -174,35 +222,31 @@ Here is an example:
   // Create inner Views on host, outside of a parallel region, uninitialized
   for (int k = 0; k < numOuter; ++k) {
     const std::string label = std::string ("Inner ") + std::to_string (k);
-    new (&outer[k]) inner_view_type (view_alloc (label, WithoutInitializing), numInner);
+    new (&outer(k)) inner_view_type (view_alloc (label, WithoutInitializing), numInner);
   }
 
   // Outer and inner views are now ready for use on device
 
-  Kokkos::RangePolicy<Cuda, int> range (0, numOuter);
+  Kokkos::RangePolicy<> range (0, numOuter);
   Kokkos::parallel_for ("my kernel label", range, 
       KOKKOS_LAMBDA (const int i) {  
         for (int j = 0; j < numInner; ++j) {
-          device_outer[i][j] = 10.0 * double (i) + double (j);
+          device_outer(i)(j) = 10.0 * double (i) + double (j);
         }
       }
     });
 
   // Fence before deallocation on host, to make sure 
   // that the device kernel is done first.
-  // Note the new fence syntax that requires an instance.
-  // This will work with other CUDA streams, etc.
-  Cuda ().fence ();
+  Kokkos::fence ();
 
   // Destroy inner Views, again on host, outside of a parallel region.
   for (int k = 0; k < 5; ++k) {
-    outer[k].~inner_view_type ();
+    outer(k).~inner_view_type ();
   }
 
   // You're better off disposing of outer immediately.
   outer = outer_view_type ();
-
-Another approach is to create the inner Views as nonowning, from a single pool of memory. This makes it unnecessary to invoke their destructors.
 
 6.2.4 Const Views
 ~~~~~~~~~~~~~~~~~
