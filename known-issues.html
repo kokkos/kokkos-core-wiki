@@ -548,6 +548,7 @@ does not support interprocess communication (IPC) without tweaking (<a class="re
 The user should set up the default memory pool to properly support IPC (<a class="reference external" href="https://developer.nvidia.com/blog/using-cuda-stream-ordered-memory-allocator-part-2/#library_composability">https://developer.nvidia.com/blog/using-cuda-stream-ordered-memory-allocator-part-2/#library_composability</a>).</p>
 <p>Therefore, from version 4.5, the default behavior for Kokkos is to preventively disable <cite>cudaMallocAsync.</cite></p>
 </li>
+<li><p>CUDA 11.0 through 11.2 are not compatible with glibc 2.34 librt stubs. That issue is related to how the CMake package handles linking with librt. For more information please look at issue <a class="reference external" href="https://github.com/kokkos/kokkos/issues/7512">#7512</a>.</p></li>
 </ul>
 </section>
 <section id="hip">
