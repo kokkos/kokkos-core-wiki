@@ -56,8 +56,8 @@ Description
 .. cppkokkos:type:: WithoutInitializing
 
    :cppkokkos:type:`WithoutInitializing` is intended to be used in situations where default construction of `View` elements in its
-   associated execution space is not viable. This includes situations such as the construction of objects with virtual functions,
-   or `Views` of elements which do not have a default constructor. Typically, this option is used in conjunction with manual in-place `new`
+   associated execution space is not needed or not viable. In particular, it may not be viable in situations such as the construction of objects with virtual functions,
+   or for `Views` of elements without default constructor. In such situations, this option is often used in conjunction with manual in-place `new`
    construction of objects and manual destruction of elements.
 
 .. cppkokkos:type:: SequentialHostInit
