@@ -487,6 +487,7 @@ If cross-compiling, or if you want to be specific, the CPU architecture can be p
     * - ``Kokkos_ARCH_KNL``
       - Knights Landing/x86-64
       - 31S1P @ Tianhe-2
+
     * - ``Kokkos_ARCH_KNC``
       - Knights Corner/x86-64
       -
