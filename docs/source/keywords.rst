@@ -497,7 +497,7 @@ If cross-compiling, or if you want to be specific, the CPU architecture can be p
       -
       
  .. list-table:: RISC-V CPU architectures
-    :widths: 30 30 30
+    :widths: 30 30 30 30
     :header-rows: 1
     :align: left
     
@@ -508,13 +508,13 @@ If cross-compiling, or if you want to be specific, the CPU architecture can be p
     
     * - ``KOKKOS_ARCH_RISCV_RVA22V``
       -  RVA22V/RISC-V ISA
-      -
-      - (since Kokkos 4.5.0)
+      - SpacemiT K1
+      - (since Kokkos 4.5)
       
     * - ``KOKKOS_ARCH_RISCV_SG2042``
       -  SG2042/RISC-V ISA
-      -  
-      - (since Kokkos 4.3.0)
+      -  Milk-V Pioneer
+      - (since Kokkos 4.3)
 
 GPU Architectures
 -----------------
