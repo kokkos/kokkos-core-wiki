@@ -105,10 +105,13 @@ Device backends
       - To build the HIP backend targeting AMD GPUs
 
     * - ``Kokkos_ENABLE_SYCL``
-      - :red:`[Experimental]` To build the SYCL backend targeting Intel GPUs
+      - To build the SYCL backend targeting Intel GPUs
 
     * - ``Kokkos_ENABLE_OPENMPTARGET``
-      - :red:`[Experimental]` To build the OpenMP target backend
+      - :red:`[Experimental]` To build the OpenMP Target backend for offloading to accelerator devices
+
+    * - ``Kokkos_ENABLE_OPENACC``
+      - :red:`[Experimental]` To build the OpenACC backend for offloading to accelerator devices
 
 
 .. _keywords_enable_options:
