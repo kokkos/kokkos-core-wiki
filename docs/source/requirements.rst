@@ -58,6 +58,10 @@ Kokkos 4.x
       * 22.3
       * 22.9
 
+    * * NVC++ (OpenACC) (experimental) 
+      * 23.7
+      * 23.7
+
     * * ROCM 
       * 5.2.0
       * 5.2.0 
