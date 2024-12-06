@@ -788,11 +788,15 @@ and many Cray MPICH instances. See <a class="reference external" href="known-iss
 <td><p>Enable relocatable device code (RDC) for HIP</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_ATOMICS_BYPASS</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_SYCL_RELOCATABLE_DEVICE_CODE</span></code></p></td>
+<td><p>Enable relocatable device code (RDC) for SYCL (since Kokkos 4.5)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_ATOMICS_BYPASS</span></code></p></td>
 <td><p>Disable atomics when no host parallel nor device backend is enabled for Serial only builds (since Kokkos 4.3)</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_IMPL_HPX_ASYNC_DISPATCH</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Kokkos_ENABLE_IMPL_HPX_ASYNC_DISPATCH</span></code></p></td>
 <td><p>Enable asynchronous dispatch for the HPX backend</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">ON</span></code></p></td>
 </tr>

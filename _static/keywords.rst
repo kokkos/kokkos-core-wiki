@@ -229,6 +229,10 @@ Backend-specific options
       * Enable relocatable device code (RDC) for HIP
       * ``OFF``
 
+    * * ``Kokkos_ENABLE_SYCL_RELOCATABLE_DEVICE_CODE``
+      * Enable relocatable device code (RDC) for SYCL (since Kokkos 4.5)
+      * ``OFF``
+
     * * ``Kokkos_ENABLE_ATOMICS_BYPASS``
       * Disable atomics when no host parallel nor device backend is enabled for Serial only builds (since Kokkos 4.3)
       * ``OFF``
