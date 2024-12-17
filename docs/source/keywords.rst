@@ -163,6 +163,14 @@ General options
       * Aggressively vectorize loops
       * ``OFF``
 
+    * * ``Kokkos_GLOBAL_COMPILATION``
+      * Set compiler to the CXX compiler Kokkos needs for the whole project
+      * ``ON``
+
+    * * ``Kokkos_FORCE_COMPILER_LAUNCHER``
+      * Use the kokkos_compiler_launcher script on all targets in the project. Redirects files in targets that link to Kokkos to the CXX compiler Kokkos needs.
+      * ``OFF``
+
 Debugging
 ---------
 .. list-table::
