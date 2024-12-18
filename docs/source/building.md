@@ -54,10 +54,10 @@ which activates the OpenMP backend. All the options controlling device backends,
 Kokkos allows projects to specify if they want Kokkos to set the `CXX` compiler in a way that allows the build system to work independent of the used backend.
 This is controlled via the options `Kokkos_GLOBAL_COMPILATION` and  `Kokkos_FORCE_COMPILER_LAUNCHER` that have to be set before `find_package(Kokkos)` is called.
 
-|   | Description | Default |
-|---|-------------|---------|
-| `Kokkos_GLOBAL_COMPILATION` | Set compiler to the CXX compiler Kokkos needs for the whole project | `ON` |
-| `Kokkos_FORCE_COMPILER_LAUNCHER` | Use the `kokkos_compiler_launcher` script on all targets in the project. Redirects cpp files in targets that link to Kokkos to the CXX compiler Kokkos needs and to the respective CMake detected compiler otherwise | `OFF` |
+|   | Description | Default | Info |
+|---|-------------|---------|------|
+| `Kokkos_GLOBAL_COMPILATION` | Set compiler to the CXX compiler Kokkos needs for the whole project | `ON` | (Since Kokkos 4.5) |
+| `Kokkos_FORCE_COMPILER_LAUNCHER` | Use the `kokkos_compiler_launcher` script on all targets in the project. Redirects cpp files in targets that link to Kokkos to the CXX compiler Kokkos needs and to the respective CMake detected compiler otherwise | `OFF` | (Since Kokkos 4.5) |
 
 Minimal working examples can be found in the `example` folder.
 
