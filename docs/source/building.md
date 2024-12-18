@@ -49,6 +49,17 @@ There are numerous device backends, options, and architecture-specific optimizat
 ````
 which activates the OpenMP backend. All the options controlling device backends, options, architectures, and third-party libraries (TPLs) are given in [CMake Keywords](../keywords).
 
+## Advanced Build Options
+
+Kokkos allows projects to specify if they want Kokkos to set the `CXX` compiler in a way that allows the build system to work independent of the used backend.
+This is controlled via the options `Kokkos_GLOBAL_COMPILATION` and  `Kokkos_FORCE_COMPILER_LAUNCHER` that have to be set before `find_package(Kokkos)` is called.
+
+|   | Description | Default | Info |
+|---|-------------|---------|------|
+| `Kokkos_GLOBAL_COMPILATION` | Set compiler to the CXX compiler Kokkos needs for the whole project | `ON` | (Since Kokkos 4.5) |
+| `Kokkos_FORCE_COMPILER_LAUNCHER` | Use the `kokkos_compiler_launcher` script on all targets in the project. Redirects cpp files in targets that link to Kokkos to the CXX compiler Kokkos needs and to the respective CMake detected compiler otherwise | `OFF` | (Since Kokkos 4.5) |
+
+Minimal working examples can be found in the `example` folder.
 
 ## Known Issues<a name="KnownIssues"></a>
 
