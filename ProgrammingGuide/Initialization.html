@@ -642,7 +642,7 @@ Kokkos chooses the two spaces using the following list:</p>
 <p>Here is an example of how to use the struct.</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Kokkos</span><span class="o">::</span><span class="n">InitializationSettings</span><span class="w"> </span><span class="n">settings</span><span class="p">;</span>
 <span class="c1">// 8 (CPU) threads</span>
-<span class="n">settinge</span><span class="p">.</span><span class="n">set_num_threads</span><span class="p">(</span><span class="mi">8</span><span class="p">);</span>
+<span class="n">settings</span><span class="p">.</span><span class="n">set_num_threads</span><span class="p">(</span><span class="mi">8</span><span class="p">);</span>
 <span class="c1">// If Kokkos was built with CUDA enabled, use the GPU with device ID 1.</span>
 <span class="n">settings</span><span class="p">.</span><span class="n">set_device_id</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
 

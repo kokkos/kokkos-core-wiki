@@ -118,7 +118,7 @@ Here is an example of how to use the struct.
 
     Kokkos::InitializationSettings settings;
     // 8 (CPU) threads
-    settinge.set_num_threads(8);
+    settings.set_num_threads(8);
     // If Kokkos was built with CUDA enabled, use the GPU with device ID 1.
     settings.set_device_id(1);
 
