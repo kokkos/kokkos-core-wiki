@@ -160,7 +160,7 @@ General options
       * Aggressively vectorize loops
       * ``OFF``
 
-   * * ``Kokkos_ENABLE_COMPILE_AS_CMAKE_LANGUAGE``
+    * * ``Kokkos_ENABLE_COMPILE_AS_CMAKE_LANGUAGE``
       * Build with the CMake language feature.
       * ``OFF``
 
