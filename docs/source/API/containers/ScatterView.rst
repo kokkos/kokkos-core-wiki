@@ -10,10 +10,62 @@ Header File: ``<Kokkos_ScatterView.hpp>``
 
 .. |parallelReduce| replace:: :cpp:func:`parallel_reduce`
 
+.. _View: ../core/view/view.html
+
+.. |View| replace:: ``View``
+
+Usage
+-----
+A Kokkos ScatterView wraps a standard Kokkos::|View|_ and allow access to it either via Atomic or Data Replication based scatter algorithms, choosing the strategy that should be the fastest for the ScatterView Execution Space.
+
+Construction of a ScatterView can be expensive, so you should try to reuse the same one if possible, in which case, you should call ``reset()`` between uses.
+
+ScatterView can not be addressed directly: each thread inside a parallel region needs to make a call to ``access()`` and access the underlying View through the return value of ``access()``.
+
+Following the parallel region, a call to the free function ``contribute`` should be made to perform the final reduction.
+
+It is part of the Experimental namespace.
+
+Interface
+---------
+.. code-block:: cpp
+
+    template <typename DataType [, typename Layout [, typename ExecSpace [, typename Op [, typename Duplication [, typename Contribution]]]]]>
+    class ScatterView
+
+Parameters
+~~~~~~~~~~
+Template parameters other than ``DataType`` are optional, but if one is specified, preceding ones must also be specified.
+That means for example that ``Op`` can be omitted but if it is specified, ``Layout`` and ``ExecSpace`` must also be specified.
+
+* ``DataType``:
+  Works the same as a |View|_'s DataType.
+
+* ``Layout``:
+
+* ``ExecSpace``: Defaults to ``Kokkos::DefaultExecutionSpace``
+
+* ``Op``:
+  Can take the values:
+
+  - ``Kokkos::Experimental::ScatterSum``: performs a Sum.
+
+  - ``Kokkos::Experimental::ScatterProd``: performs a Multiplication.
+
+  - ``Kokkos::Experimental::ScatterMin``: takes the min.
+
+  - ``Kokkos::Experimental::ScatterMax``: takes the max.
+
+* ``Duplication``:
+  Whether to duplicate the grid or not; defaults to ``Kokkos::Experimental::ScatterDuplicated``, other option is ``Kokkos::Experimental::ScatterNonDuplicated``.
+
+* ``Contribution``:
+  Whether to contribute to use atomics; defaults to ``Kokkos::Experimental::ScatterAtomics``, other option is ``Kokkoss::Experimental::ScatterNonAtomic``.
+
 Description
 -----------
 
-.. cppkokkos:class:: template <typename DataType, int Op, typename ExecSpace, typename Layout, int contribution> ScatterView
+.. cppkokkos:class:: template <typename DataType, typename Layout, typename ExecSpace, typename Op, typename Duplication, typename Contribution> ScatterView
 
     .. rubric:: Public Member Variables
 
