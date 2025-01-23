@@ -34,8 +34,14 @@ Header File: ``Kokkos_Core.hpp``
 Description
 -----------
 
-``Array`` is a contiguous aggregate container storing a fixed_size sequence of objects (models holding exactly N elements).
+``Array`` is a contiguous aggregate owning container storing a fixed size sequence of objects (models holding exactly N elements).
 
+* This container is an owning container (the data is embeddded in the container itself).
+* This container is an aggregate type with the same semantics as a struct holding a C-style array ``T[N]`` as its only non-static data member when ``N > 0``; otherwise, it is an empty container.
+* Unlike a C-style array, it doesn't decay to ``T*`` automatically.
+* As an aggregate type, it can be initialized with aggregate-initialization given at most ``N`` initializers that are convertible to ``T``: ``Kokkos::Array<int, 3> a = { 1, 2, 3 };``.
+
+..
   The API of the entity.
 
 Interface
@@ -86,7 +92,7 @@ Interface
   .. cppkokkos:function:: constexpr pointer data()
   .. cppkokkos:function:: constexpr const_pointer data() const
 
-    :return: A pointer to the first element of the array.  If ``N == 0``, the return value is unspecified.
+    :return: A pointer to the first element of the array.  If ``N == 0``, the return value is unspecified and not dereferenceable.
 
 
 Deduction Guides
@@ -103,7 +109,7 @@ Non-Member Functions
 
 .. cppkokkos:function:: template<class T, size_t N> constexpr bool operator==(const Array<T, N>& l, const Array<T, N>& r) noexcept
 
-   :return: ``true`` if ∀ the elements in ``l`` and ``r`` ``l[i] == r[i]``.
+   :return: ``true`` if and only if ∀ the elements in ``l`` and ``r`` compare equal.
 
 .. cppkokkos:function:: template<class T, size_t N> constexpr bool operator!=(const Array<T, N>& l, const Array<T, N>& r) noexcept
 
@@ -128,4 +134,40 @@ Non-Member Functions
 
    :return: ``std::move(a[I])`` (for tuple protocol / structured binding support)
 
+
+Deprecated since 4.4.00:
+------------------------
+.. cppkokkos:struct:: template<class T = void, size_t N = KOKKOS_INVALID_INDEX, class Proxy = void> Array
+
+* The primary template was an contiguous aggregate owning container of exactly ``N`` elements of type ``T``.
+* This container did not support move semantics.
+
+.. cppkokkos:struct:: template<class T, class Proxy> Array<T, 0, Proxy>
+
+* This container was an empty container.
+
+.. cppkokkos:struct:: template<class T> Array<T, KOKKOS_INVALID_INDEX, Array<>::contiguous>
+
+* This container was a non-owning container.
+* This container had its size determined at construction time.
+* This container could be assigned from any ``Array<T, N , Proxy>``.
+* Assignment did not change the size of this container.
+* This container did not support move semantics.
+
+.. cppkokkos:struct:: template<class T> Array<T, KOKKOS_INVALID_INDEX, Array<>::strided>
+
+* This container was a non-owning container.
+* This container had its size and stride determined at construction time.
+* This container could be assigned from any ``Array<T, N , Proxy>``.
+* Assignment did not change the size or stride of this container.
+* This container did not support move semantics.
+
+.. cppkokkos:struct:: template<> Array<void, KOKKOS_INVALID_INDEX, void>
+
+   .. rubric:: Public Types
+
+   .. cppkokkos:type:: contiguous
+   .. cppkokkos:type:: stided
+
+* This specialization defined the embedded tag types: ``contiguous`` and ``strided``.
 
