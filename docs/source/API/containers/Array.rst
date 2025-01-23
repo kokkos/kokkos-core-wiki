@@ -88,6 +88,12 @@ Interface
 
     :return: A pointer to the first element of the array.  If ``N == 0``, the return value is unspecified.
 
+
+Deduction Guides
+----------------
+
+.. cppkokkos:function:: template<class T, class... U> Array(T, U...) -> Array<T, 1 + sizeof...(U)>
+
 Non-Member Functions
 --------------------
 
