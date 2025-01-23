@@ -97,18 +97,29 @@ Non-Member Functions
 
 .. cppkokkos:function:: template<class T, size_t N> constexpr bool operator==(const Array<T, N>& l, const Array<T, N>& r) noexcept
 
-   :return: true if l[i] == r[i] for all elements in l and r.
+   :return: ``true`` if ∀ the elements in ``l`` and ``r`` ``l[i] == r[i]``.
 
 .. cppkokkos:function:: template<class T, size_t N> constexpr bool operator!=(const Array<T, N>& l, const Array<T, N>& r) noexcept
 
-   :return: !(l == r)
+   :return: ``!(l == r)``
 
 .. cppkokkos:function:: template<class T, size_t N> constexpr kokkos_swap(Array<T, N>& l, Array<T, N>& r) noexcept(N == 0 || is_nothrow_swappable_V<T>)
 
-   :return: If T is swappable or N == 0, each of the elements in `l` and `r` are swapped via ``kokkos_swap``.
+   :return: If ``T`` is swappable or ``N == 0``, each of the elements in `l` and `r` are swapped via ``kokkos_swap``.
 
 .. cppkokkos:function:: template<class T, size_t N> constexpr Array<remove_cv_t<T>, N> to_Array(T (&a)[N])
 .. cppkokkos:function:: template<class T, size_t N> constexpr Array<remove_cv_t<T>, N> to_Array(T (&&a)[N])
 
-   :return: An Array containing the elements copied/moved from a.
+   :return: An ``Array`` containing the elements copied/moved from ``a``.
+
+.. cppkokkos:function:: template<size_t I, class T, size_t N> constexpr T& get(Array<T, N>& a) noexcept
+.. cppkokkos:function:: template<size_t I, class T, size_t N> constexpr const T& get(const Array<T, N>& a) noexcept
+
+   :return: ``a[I]`` for (tuple protocol / structured binding support)
+
+.. cppkokkos:function:: template<size_t I, class T, size_t N> constexpr T&& get(Array<T, N>&& a) noexcept
+.. cppkokkos:function:: template<size_t I, class T, size_t N> constexpr const T&& get(const Array<T, N>&& a) noexcept
+
+   :return: ``std::move(a[I])`` (for tuple protocol / structured binding support)
+
 
