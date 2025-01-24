@@ -171,3 +171,53 @@ Deprecated since 4.4.00:
 
 * This specialization defined the embedded tag types: ``contiguous`` and ``strided``.
 
+Examples
+________
+
+.. code-block:: cpp
+
+  #include "Kokkos_Core.hpp"
+  #include <algorithm>
+  #include <iostream>
+  #include <iterator>
+  #include <string>
+
+  int main()
+  {
+    Kokkos::ScopeGuard _;
+
+    // Construction uses aggregate initialization
+    [[maybe_unused]] Kokkos::Array<int, 3> a1{
+        {1, 2, 3}}; // Double-braces required in C++11
+                    // and still allowed in C++14 and beyond
+
+    Kokkos::Array<int, 3> a2 = {1, 2, 3}; // Double braces never required after =
+
+    // data() is supported
+    // Output is 3 2 1
+    std::reverse_copy(a2.data(), a2.data() + a2.size(), std::ostream_iterator<int>(std::cout, " "));
+    std::cout << '\n';
+
+    // Ranged for loop is supported
+    // Output is E Ǝ
+    Kokkos::Array<std::string, 2> a3{"E", "\u018E"};
+    for (const auto &s : a3)
+      std::cout << s << ' ';
+    std::cout << '\n';
+
+    // Deduction guide for array creation
+    [[maybe_unused]] Kokkos::Array a4{3.0, 1.0, 4.0}; // Kokkos::Array<double, 3>
+
+    // Behavior of unspecified elements is the same as with built-in arrays
+    [[maybe_unused]] Kokkos::Array<int, 2> a5; // No list init, a5[0] and a5[1]
+                                               // are default initialized
+    [[maybe_unused]] Kokkos::Array<int, 2>
+        a6{}; // List init, both elements are value
+              // initialized, a6[0] = a6[1] = 0
+    [[maybe_unused]] Kokkos::Array<int, 2> a7{
+        1}; // List init, unspecified element is value
+            // initialized, a7[0] = 1, a7[1] = 0
+
+    return 0;
+  }
+
