@@ -134,6 +134,16 @@ Non-Member Functions
 
    :return: ``std::move(a[I])`` (for tuple protocol / structured binding support)
 
+.. cppkokkos:function:: template<class T, size_t N> constexpr T* begin(Array<T, N>& a) noexcept
+.. cppkokkos:function:: template<class T, size_t N> constexpr const T* begin(const Array<T, N>& a) noexcept
+
+   :return: ``a.data()``
+
+.. cppkokkos:function:: template<class T, size_t N> constexpr T* end(Array<T, N>& a) noexcept
+.. cppkokkos:function:: template<class T, size_t N> constexpr const T* end(const Array<T, N>& a) noexcept
+
+   :return: ``a.data() + a.size()``
+
 
 Deprecated since 4.4.00:
 ------------------------
@@ -194,9 +204,8 @@ ________
 
     Kokkos::Array<int, 3> a2 = {1, 2, 3}; // Double braces never required after =
 
-    // data() is supported
     // Output is 3 2 1
-    std::reverse_copy(a2.data(), a2.data() + a2.size(), std::ostream_iterator<int>(std::cout, " "));
+    std::reverse_copy(std::data(a2), end(a2), std::ostream_iterator<int>(std::cout, " "));
     std::cout << '\n';
 
     // Ranged for loop is supported
