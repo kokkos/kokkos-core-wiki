@@ -175,6 +175,7 @@ Examples
 ________
 
 .. code-block:: cpp
+  :linenos:
 
   #include "Kokkos_Core.hpp"
   #include <algorithm>
