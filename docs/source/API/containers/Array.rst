@@ -119,8 +119,8 @@ Non-Member Functions
 
    :return: If ``T`` is swappable or ``N == 0``, each of the elements in `l` and `r` are swapped via ``kokkos_swap``.
 
-.. cppkokkos:function:: template<class T, size_t N> constexpr Array<remove_cv_t<T>, N> to_Array(T (&a)[N])
-.. cppkokkos:function:: template<class T, size_t N> constexpr Array<remove_cv_t<T>, N> to_Array(T (&&a)[N])
+.. cppkokkos:function:: template<class T, size_t N> constexpr Array<remove_cv_t<T>, N> to_array(T (&a)[N])
+.. cppkokkos:function:: template<class T, size_t N> constexpr Array<remove_cv_t<T>, N> to_array(T (&&a)[N])
 
    :return: An ``Array`` containing the elements copied/moved from ``a``.
 
@@ -185,49 +185,85 @@ Examples
 ________
 
 .. code-block:: cpp
-  :linenos:
 
-  #include "Kokkos_Core.hpp"
-  #include <algorithm>
-  #include <iostream>
-  #include <iterator>
-  #include <string>
+ #include "Kokkos_Core.hpp"
+ #include <algorithm>
+ #include <iostream>
+ #include <iterator>
+ #include <memory>
+ #include <string>
+ #include <string_view>
+ #include <type_traits>
+ #include <utility>
 
-  int main()
-  {
-    Kokkos::ScopeGuard _;
+ // creates a constexpr array of string_view's
+ constexpr auto w1n = Kokkos::to_array<std::string_view>(
+     {"Mary", "Patricia", "Linda", "Barbara", "Elizabeth", "Jennifer"});
+ static_assert(
+     std::is_same_v<decltype(w1n), const Kokkos::Array<std::string_view, 6>>);
+ static_assert(w1n.size() == 6 and w1n[5] == "Jennifer");
 
-    // Construction uses aggregate initialization
-    [[maybe_unused]] Kokkos::Array<int, 3> a1{
-        {1, 2, 3}}; // Double-braces required in C++11
-                    // and still allowed in C++14 and beyond
+ extern int Main(int /* argc */, char const *const /* argv */[]);
+ int Main(int /* argc */, char const *const /* argv */[]) {
+   Kokkos::ScopeGuard _;
 
-    Kokkos::Array<int, 3> a2 = {1, 2, 3}; // Double braces never required after =
+   // Construction uses aggregate initialization
+   [[maybe_unused]] Kokkos::Array<int, 3> a1{
+       {1, 2, 3}}; // Double-braces required in C++11
+                   // and still allowed in C++14 and beyond
 
-    // Output is 3 2 1
-    std::reverse_copy(std::data(a2), end(a2), std::ostream_iterator<int>(std::cout, " "));
-    std::cout << '\n';
+   Kokkos::Array<int, 3> a2 = {1, 2, 3}; // Double braces never required after =
 
-    // Ranged for loop is supported
-    // Output is E Ǝ
-    Kokkos::Array<std::string, 2> a3{"E", "\u018E"};
-    for (const auto &s : a3)
-      std::cout << s << ' ';
-    std::cout << '\n';
+   // Output is 3 2 1
+   std::reverse_copy(std::data(a2), end(a2),
+                     std::ostream_iterator<int>(std::cout, " "));
+   std::cout << '\n';
 
-    // Deduction guide for array creation
-    [[maybe_unused]] Kokkos::Array a4{3.0, 1.0, 4.0}; // Kokkos::Array<double, 3>
+   // Ranged for loop is supported
+   // Output is E Ǝ
+   Kokkos::Array<std::string, 2> a3{"E", "\u018E"};
+   for (const auto &s : a3)
+     std::cout << s << ' ';
+   std::cout << '\n';
 
-    // Behavior of unspecified elements is the same as with built-in arrays
-    [[maybe_unused]] Kokkos::Array<int, 2> a5; // No list init, a5[0] and a5[1]
-                                               // are default initialized
-    [[maybe_unused]] Kokkos::Array<int, 2>
-        a6{}; // List init, both elements are value
-              // initialized, a6[0] = a6[1] = 0
-    [[maybe_unused]] Kokkos::Array<int, 2> a7{
-        1}; // List init, unspecified element is value
-            // initialized, a7[0] = 1, a7[1] = 0
+   // Deduction guide for array creation
+   [[maybe_unused]] Kokkos::Array a4{3.0, 1.0, 4.0}; // Kokkos::Array<double, 3>
 
-    return 0;
-  }
+   // Behavior of unspecified elements is the same as with built-in arrays
+   [[maybe_unused]] Kokkos::Array<int, 2> a5; // No list init, a5[0] and a5[1]
+                                              // are default initialized
+   [[maybe_unused]] Kokkos::Array<int, 2>
+       a6{}; // List init, both elements are value
+             // initialized, a6[0] = a6[1] = 0
+   [[maybe_unused]] Kokkos::Array<int, 2> a7{
+       1}; // List init, unspecified element is value
+           // initialized, a7[0] = 1, a7[1] = 0
+
+   // copies a string literal
+   auto t1 = Kokkos::to_array("foo");
+   static_assert(t1.size() == 4);
+
+   // deduces both element type and length
+   auto t2 = Kokkos::to_array({0, 2, 1, 3});
+   static_assert(std::is_same_v<decltype(t2), Kokkos::Array<int, 4>>);
+
+   // deduces length with element type specified
+   // implicit conversion happens
+   auto t3 = Kokkos::to_array<long>({0, 1, 3});
+   static_assert(std::is_same_v<decltype(t3), Kokkos::Array<long, 3>>);
+
+   auto t4 = Kokkos::to_array<std::pair<int, float>>(
+       {{3, 0.0f}, {4, 0.1f}, {4, 0.1e23f}});
+   static_assert(t4.size() == 3);
+
+   // creates a non-copyable Kokkos::Array
+   auto t5 = Kokkos::to_array({std::make_unique<int>(3)});
+   static_assert(t5.size() == 1);
+
+   // error: copying multidimensional arrays is not supported
+   // char s[2][6] = {"nice", "thing"};
+   // auto a6 = Kokkos::to_array(s);
+
+   return 0;
+ }
 
