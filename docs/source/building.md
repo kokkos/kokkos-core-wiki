@@ -25,10 +25,6 @@ When configuring your project just set:
   -DKokkos_ROOT=${kokkos_install_prefix} \
   -DCMAKE_CXX_COMPILER=${compiler_used_to_build_kokkos}
 ````
-Note: You may need the following if using some versions of CMake (e.g. 3.12):
-````cmake
-cmake_policy(SET CMP0074 NEW)
-````
 If building in-tree, there is no `find_package`. You can use `add_subdirectory(kokkos)` with the Kokkos source and again just link with `target_link_libraries(Kokkos::kokkos)`.
 The examples in `examples/cmake_build_installed` and `examples/cmake_build_in_tree` can help get you started.
 
