@@ -6,6 +6,11 @@
 
 Header File: ``<Kokkos_ScatterView.hpp>``
 
+.. warning::
+
+   Currently ``ScatterView`` is still in the namespace ``Kokkos::Experimental``
+
+
 .. _parallelReduce: ../core/parallel-dispatch/parallel_reduce.html
 
 .. |parallelReduce| replace:: :cpp:func:`parallel_reduce`
@@ -14,17 +19,22 @@ Header File: ``<Kokkos_ScatterView.hpp>``
 
 .. |View| replace:: ``View``
 
+.. |reset| replace:: ``reset()``
+
+.. |access| replace:: ``access()``
+
+.. |contribute| replace:: ``contribute()``
+
 Usage
 -----
+
 A Kokkos ScatterView wraps a standard Kokkos::|View|_ and allow access to it either via Atomic or Data Replication based scatter algorithms, choosing the strategy that should be the fastest for the ScatterView Execution Space.
 
-Construction of a ScatterView can be expensive, so you should try to reuse the same one if possible, in which case, you should call ``reset()`` between uses.
+Construction of a ScatterView can be expensive, so you should try to reuse the same one if possible, in which case, you should call |reset|_ between uses.
 
-ScatterView can not be addressed directly: each thread inside a parallel region needs to make a call to ``access()`` and access the underlying View through the return value of ``access()``.
+ScatterView can not be addressed directly: each thread inside a parallel region needs to make a call to |access|_ and access the underlying View through the return value of |access|_.
 
-Following the parallel region, a call to the free function ``contribute`` should be made to perform the final reduction.
-
-It is part of the Experimental namespace.
+Following the parallel region, a call to the free function |contribute|_ should be made to perform the final reduction.
 
 Interface
 ---------
@@ -119,6 +129,8 @@ Description
 
         :return: true if the ``internal_view`` points to a valid memory location. This function works for both managed and unmanaged views. With the unmanaged view, there is no guarantee that referenced address is valid, only that it is a non-null pointer.
 
+    .. _access:
+
     .. cppkokkos:function:: access() const
 
        use within a kernel to return a ``ScatterAccess`` member; this member accumulates a given thread's contribution to the reduction.
@@ -130,6 +142,8 @@ Description
     .. cppkokkos:function:: contribute_into(View<DT, RP...> const& dest) const
 
        contribute ``ScatterView`` array's results into the input View ``dest``
+
+    .. _reset:
 
     .. cppkokkos:function:: reset()
 
@@ -156,6 +170,8 @@ Description
 
 .. rubric:: Free Functions
 
+.. _contribute:
+
 .. cppkokkos:function:: contribute(View<DT1, VP...>& dest, Kokkos::Experimental::ScatterView<DT2, LY, ES, OP, CT, DP> const& src)
 
    convenience function to perform final reduction of ScatterView
@@ -167,15 +183,23 @@ Example
 
 .. code-block:: cpp
 
+
+    #include <Kokkos_Core.hpp>
+    #include <Kokkos_ScatterView.hpp>
+
     KOKKOS_INLINE_FUNCTION int foo(int i) { return i; }
     KOKKOS_INLINE_FUNCTION double bar(int i) { return i*i; }
 
-    Kokkos::View<double*> results("results", 1);
-    Kokkos::Experimental::ScatterView<double*> scatter(results);
-    Kokkos::parallel_for(1, KOKKOS_LAMBDA(int input_i) {
-        auto access = scatter.access();
-        auto result_i = foo(input_i);
-        auto contribution = bar(input_i);
-        access(result_i) += contribution;
-    });
-    Kokkos::Experimental::contribute(results, scatter);
+    int main (int argc, char* argv[]) {
+        Kokkos::ScopeGuard guard(argc, argv);
+
+        Kokkos::View<double*> results("results", 1);
+        Kokkos::Experimental::ScatterView<double*> scatter(results);
+        Kokkos::parallel_for(1, KOKKOS_LAMBDA(int input_i) {
+            auto access = scatter.access();
+            auto result_i = foo(input_i);
+            auto contribution = bar(input_i);
+            access(result_i) += contribution;
+        });
+        Kokkos::Experimental::contribute(results, scatter);
+    }
