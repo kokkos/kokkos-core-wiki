@@ -30,9 +30,9 @@ Note: You may need the following if using some versions of CMake (e.g. 3.12):
 cmake_policy(SET CMP0074 NEW)
 ````
 If building in-tree, there is no `find_package`. You can use `add_subdirectory(kokkos)` with the Kokkos source and again just link with `target_link_libraries(Kokkos::kokkos)`.
-The examples in `examples/cmake_build_installed` and `examples/cmake_build_in_tree` can help get you started.
+The examples in `examples/build_installed` and `examples/build_in_tree` can help get you started.
 
-## Configuring CMake
+## Configuring CMake to buid Kokkos
 A very basic installation of Kokkos is done with:
 ````bash
 > cmake ${srcdir} \
