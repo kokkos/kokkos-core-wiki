@@ -7,8 +7,8 @@ Header file: ``<Kokkos_DualView.hpp>``
 |
 
 Container to manage mirroring a ``Kokkos::View`` that references device memory with
-a ``Kokkos::View`` that references host memory. The class provides capabilities to manage
-data which exists in two different memory spaces at the same time. It supports views with
+a ``Kokkos::View`` that is host-accessible. The class provides capabilities to manage
+data which exists in two different memory spaces at the same time. It supports Views with
 the same layout on two memory spaces as well as modified flags for both allocations.
 Users are responsible for updating the modified flags manually if they change the data
 in either memory space, by calling the ``sync()`` method, which is templated on the device
@@ -24,7 +24,7 @@ The four template arguments are the same as those of ``Kokkos::View``.
 
 * Layout, The array's layout in memory.
 
-* Device, The Kokkos Device type. If its memory space is not the same as the host's memory space,
+* Device, The Kokkos Device type. If its memory space is not host-accessible,
   then DualView will contain two separate Views: one in device memory,
   and one in host memory. Otherwise, DualView will only store one View.
 
@@ -172,7 +172,8 @@ Description
        Create DualView from existing device and host View objects.
        This constructor assumes that the device and host View objects are synchronized. You, the caller, are responsible for making sure this
        is the case before calling this constructor. After this constructor returns, you may use DualView's ``sync()`` and ``modify()``
-       methods to ensure synchronization of the View objects.
+       methods to ensure synchronization of the View objects. In case the DualView only stores one View, i.e., DualView's memory space is host-accessible,
+       both arguments must reference the same allocation.
 
        - ``d_view_`` Device View
 
@@ -182,18 +183,29 @@ Description
 
     .. rubric:: *Public* Methods for synchronizing, marking as modified, and getting Views.
 
-    .. cppkokkos:kokkosinlinefunction:: template <class Device> const typename Impl::if_c<std::is_same<typename t_dev::memory_space, typename Device::memory_space>::value, t_dev, t_host>::type& view();
+    .. cppkokkos:kokkosinlinefunction:: template <class Device> const auto& view();
 
     .. cppkokkos:function:: template <class Device> static int get_device_side();
 
-       * Return a View on a specific device ``Device``.
-       * Please don't be afraid of the if_c expression in the return value's type. That just tells the method what the return type should be: ``t_dev`` if the \\c Device template parameter matches this DualView's device type, else ``t_host``.
+       * Return a View on a specific device ``Device``. ``Device`` can be a ``Kokkos::Device`` type, a memory space or a execution space corresponding to either the device View or the host-accessible View.
        * For example, suppose you create a DualView on Cuda, like this:
-	   - ``typedef Kokkos::DualView<float, Kokkos::LayoutRight, Kokkos::Cuda> dual_view_type; dual_view_type DV ("my dual view", 100);``
-	   - If you want to get the CUDA device View, do this:
-	   - ``typename dual_view_type::t_dev cudaView = DV.view<Kokkos::Cuda> ();``
-	   - and if you want to get the host mirror of that View, do this:
-	   - ``typedef typename Kokkos::HostSpace::execution_space host_device_type; typename dual_view_type::t_host hostView = DV.view<host_device_type> ();``
+
+         .. code-block:: cpp
+
+           using dual_view_type = Kokkos::DualView<float, Kokkos::Cuda>;
+           dual_view_type DV ("my dual view", 100);
+
+         If you want to get the CUDA device View, do this:
+
+         .. code-block:: cpp
+
+           dual_view_type::t_dev cudaView = DV.view<dual_view_type::t_dev::memory_space>();
+
+         and if you want to get the host mirror of that View, do this:
+
+         .. code-block:: cpp
+
+           dual_view_type::t_host hostView = DV.view<dual_view_type::t_host::memory_space>();
 
     .. cppkokkos:function:: template <class Device> void sync(const typename Impl::enable_if<(std::is_same<typename traits::data_type, typename traits::non_const_data_type>::value) || (std::is_same<Device, int>::value), int>::type& = 0);
 
