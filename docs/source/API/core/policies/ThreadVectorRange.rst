@@ -111,7 +111,7 @@ Examples
      int team_sum;
      parallel_reduce(TeamThreadRange(team,M), [&] (const int& i, int& threadsum) {
        int tsum = 0;
-       parallel_reduce(ThreadVectorRange(team,M), [&] (const int& j, int& lsum) {
+       parallel_reduce(ThreadVectorRange(team,K), [&] (const int& j, int& lsum) {
          lsum += A(n,i,j);
        },tsum);
        single(PerThread(team),[&] () {
