@@ -1,22 +1,3 @@
-..
-  Use the following convention for headings:
-
-    # with overline, for parts (collections of chapters)
-
-    * with overline, for chapters
-
-    = for sections
-
-    - for subsections
-
-    ^ for subsubsections
-
-    " for paragraphs
-
-..
-  Class / method / container name)
-  for free functions that are callable, preserve the naming convention, `view_alloc()`
-
 ``Array``
 ==============
 
@@ -47,8 +28,7 @@ Description
 Interface
 ---------
 
-..
-  The declaration or signature of the entity.
+.. versionchanged:: 4.4.0
 
 .. cppkokkos:struct:: template <class T, size_t N> Array
 
@@ -144,9 +124,10 @@ Non-Member Functions
 
    :return: ``a.data() + a.size()``
 
+Deprecated Interface
+--------------------
+.. deprecated:: 4.4.00
 
-Deprecated since 4.4.00:
-------------------------
 .. cppkokkos:struct:: template<class T = void, size_t N = KOKKOS_INVALID_INDEX, class Proxy = void> Array
 
 * The primary template was an contiguous aggregate owning container of exactly ``N`` elements of type ``T``.
