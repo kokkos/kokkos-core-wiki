@@ -262,7 +262,7 @@ ________
 
    // error: copying multidimensional arrays is not supported
    // char s[2][6] = {"nice", "thing"};
-   // auto a6 = Kokkos::to_array(s);
+   // auto t6 = Kokkos::to_array(s);
 
    return 0;
  }

@@ -10,4 +10,5 @@ Select the links below to see the details.
 .. toctree::
    :maxdepth: 1
 
+   ./stl-compat/Array
    ./stl-compat/pair

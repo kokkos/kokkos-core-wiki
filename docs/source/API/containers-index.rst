@@ -32,7 +32,6 @@ API: Containers
    :hidden:
    :maxdepth: 1
 
-   ./containers/Array
    ./containers/Bitset
    ./containers/DualView
    ./containers/DynamicView
