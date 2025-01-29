@@ -12,13 +12,14 @@ It is based on the `simd_mask` type proposed for ISO C++ in [this document](http
 ```c++
 namespace Experimental {
 template <class T, class Abi>
-class simd_mask;
+class basic_simd_mask;
 }
 ```
 
 ### Template Parameters
 
 The first template parameter `T` should be a C++ fundamental type for which the current platform supports vector intrinsics. Kokkos supports the following types for `T`:
+ - `float`
  - `double`
  - `std::int32_t`
  - `std::int64_t`
@@ -27,7 +28,7 @@ The first template parameter `T` should be a C++ fundamental type for which the 
 
 The second template parameter `Abi` is one of the pre-defined ABI types in the namespace `Kokkos::Experimental::simd_abi`. This type determines the size of the vector and what architecture-specific intrinsics will be used. The following types are always available in that namespace:
  - `scalar`: a fallback ABI which always has vector size of 1 and uses no special intrinsics.
- - `native`: the "best" ABI for the architecture for which Kokkos was compiled.
+ - `native`: the "best" ABI for the architecture for which Kokkos was compiled. (deprecated since Kokkos 4.6)
 
 ### Typedefs
 
@@ -65,7 +66,8 @@ The second template parameter `Abi` is one of the pre-defined ABI types in the n
   * `bool none_of(const simd_mask&)`: returns true iff none of the vector values in the mask are true
 
 ### Global Typedefs
-  * `template <class T> Kokkos::Experimental::native_simd_mask`: Alias for `Kokkos::Experimental::simd_mask<T, Kokkos::Experimental::simd_abi::native<T>>`.
+  * `template <class T> Kokkos::Experimental::native_simd_mask`: Alias for `Kokkos::Experimental::simd_mask<T, Kokkos::Experimental::simd_abi::native<T>>`. (deprecated since Kokkos 4.6)
+  * `template <class T, int N> Kokkos::Experimental::simd_mask`: Alias for `Kokkos::Experimental::basic_simd_mask<T, ...>`. (since Kokkos 4.6)
 
 ## Examples
 
@@ -76,7 +78,7 @@ The second template parameter `Abi` is one of the pre-defined ABI types in the n
 int main(int argc, char* argv[]) {
   Kokkos::initialize(argc,argv);
   {
-  using mask_type = Kokkos::Experimental::native_simd_mask<double>;
+  using mask_type = Kokkos::Experimental::simd_mask<double>;
   mask_type a([] (std::size_t i) { return i == 0; });
   mask_type b([] (std::size_t i) { return i == 1; });
   mask_type c([] (std::size_t i) { return i == 0 || i == 1; });
