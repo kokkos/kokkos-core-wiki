@@ -7,7 +7,7 @@
 ..
   The (pulic header) file the user will include in their code
 
-Header File: ``Kokkos_Core.hpp``
+Defined in header ``<Kokkos_Array.hpp>`` which is included from ``<Kokkos_Core.hpp>``
 
 ..
   High-level, human-language summary of what the thing does, and if possible, brief statement about why it exists (2 - 3 sentences, max);
