@@ -17,6 +17,7 @@ Description
 
 ``Array`` is a contiguous aggregate owning container storing a fixed size sequence of objects (models holding exactly N elements).
 
+* This is intended as a replacement for ``std::array<T, N>``.
 * This container is an owning container (the data is embeddded in the container itself).
 * This container is an aggregate type with the same semantics as a struct holding a C-style array ``T[N]`` as its only non-static data member when ``N > 0``; otherwise, it is an empty container.
 * Unlike a C-style array, it doesn't decay to ``T*`` automatically.
