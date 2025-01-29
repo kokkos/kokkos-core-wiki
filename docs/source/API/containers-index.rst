@@ -7,8 +7,6 @@ API: Containers
 
    * - Container
      - Description
-   * - `Array <containers/Array.html>`__
-     - A container that encapsulates fixed sized arrays
    * - `Bitset <containers/Bitset.html>`__
      - A concurrent Bitset class.
    * - `DualView <containers/DualView.html>`__
