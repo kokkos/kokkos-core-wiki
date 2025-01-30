@@ -10,7 +10,6 @@ jobs:
     runs-on: ubuntu-latest
     env:
       docs-directory: /home/runner/work/kokkos-core-wiki/kokkos-core-wiki/docs
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4.2.2
       - uses: actions/setup-python@v5.4.0
