@@ -10,19 +10,19 @@ Iterators
 Header File: ``<Kokkos_StdAlgorithms.hpp>``
 
 
-.. cppkokkos:kokkosinlinefunction:: template <class DataType, class... Properties> auto begin(const Kokkos::View<DataType, Properties...>& view);
+.. cppkokkos:kokkosinlinefunction:: template <class DataType, class... Properties> auto begin(const View<DataType, Properties...>& view);
 
    Returns a Kokkos **random access** iterator to the beginning of ``view``
 
-.. cppkokkos:kokkosinlinefunction:: template <class DataType, class... Properties> auto cbegin(const Kokkos::View<DataType, Properties...>& view);
+.. cppkokkos:kokkosinlinefunction:: template <class DataType, class... Properties> auto cbegin(const View<DataType, Properties...>& view);
 
    Returns a Kokkos const-qualified **random access** iterator to the beginning of ``view``
 
-.. cppkokkos:kokkosinlinefunction:: template <class DataType, class... Properties> auto end(const Kokkos::View<DataType, Properties...>& view);
+.. cppkokkos:kokkosinlinefunction:: template <class DataType, class... Properties> auto end(const View<DataType, Properties...>& view);
 
    Returns a Kokkos **random access** iterator to the element past the end of ``view``
 
-.. cppkokkos:kokkosinlinefunction:: template <class DataType, class... Properties> auto cend(const Kokkos::View<DataType, Properties...>& view);
+.. cppkokkos:kokkosinlinefunction:: template <class DataType, class... Properties> auto cend(const View<DataType, Properties...>& view);
 
    Returns a const-qualified Kokkos **random access** iterator to the element past the end of ``view``
 
