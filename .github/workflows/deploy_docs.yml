@@ -24,6 +24,7 @@ jobs:
         id: deployment
         uses: actions/upload-pages-artifact@v3.0.1
         with:
+          name: github-pages
           path: ${{ env.docs-directory }}/generated_docs
 
   deploy:
