@@ -1,6 +1,8 @@
 FAQ
 ###
 
+.. _join-slack-workspace:
+
 **How do I join the Kokkos slack channel?**
   You can find the slack channel at `kokkosteam.slack.com <https://kokkosteam.slack.com>`_. Register a new account with your email. We reached the limit of whitelisted organizations, but every member of the Kokkos Slack workspace can invite more people. If no one you know is in the Slack workspace you can contact the Kokkos maintainers (their emails are in the LICENSE file).
 
