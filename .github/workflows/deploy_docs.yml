@@ -11,6 +11,8 @@ jobs:
     env:
       docs-directory: /home/runner/work/kokkos-core-wiki/kokkos-core-wiki/docs
       python-version: '3.10'
+    permissions:
+      contents: write
 
     steps:
       - uses: actions/checkout@v3
