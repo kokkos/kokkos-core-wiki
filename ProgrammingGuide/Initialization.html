@@ -293,6 +293,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../API/core/Traits.html">Traits</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../API/core/KokkosConcepts.html">Kokkos Concepts</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../API/core/STL-Compatibility.html">STL Compatibility Issues</a><input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" role="switch" type="checkbox"/><label for="toctree-checkbox-14"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../API/core/stl-compat/Array.html"><code class="docutils literal notranslate"><span class="pre">Array</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../API/core/stl-compat/pair.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::pair</span></code></a></li>
 </ul>
 </li>
@@ -569,12 +570,12 @@ Kokkos chooses the two spaces using the following list:</p>
 <li><p><cite>Kokkos::Threads</cite></p></li>
 <li><p><cite>Kokkos::Serial</cite></p></li>
 </ol>
-<p>The highest execution space in the list that is enabled is Kokkos’ default execution space, and the highest enabled host execution space is Kokkos’ default host execution space. For example, if  <cite>Kokkos::Cuda</cite>, <cite>Kokkos::OpenMP</cite>, and <cite>Kokkos::Serial</cite> are enabled, then <cite>Kokkos::Cuda</cite> is the default execution space and <cite>Kokkos::OpenMP</cite> is the default host execution space.:sup:<cite>1</cite>  In cases where the highest enabled backend is a host parallel execution space the <cite>DefaultExecutionSpace</cite> and the <cite>DefaultHostExecutionSpace</cite> will be the same.</p>
+<p>The highest execution space in the list that is enabled is Kokkos’ default execution space, and the highest enabled host execution space is Kokkos’ default host execution space. For example, if  <cite>Kokkos::Cuda</cite>, <cite>Kokkos::OpenMP</cite>, and <cite>Kokkos::Serial</cite> are enabled, then <cite>Kokkos::Cuda</cite> is the default execution space and <cite>Kokkos::OpenMP</cite> is the default host execution space<sup>1</sup>.  In cases where the highest enabled backend is a host parallel execution space the <cite>DefaultExecutionSpace</cite> and the <cite>DefaultHostExecutionSpace</cite> will be the same.</p>
 <p><a class="reference external" href="../API/Initialize-and-Finalize.html#kokos-initialize">Kokkos::initialize</a> parses the command line for flags prefixed with <cite>–kokkos-</cite>, and removes all recognized flags. Argument options are given with an equals (<cite>=</cite>) sign. If the same argument occurs more than once, the last one is used. For example, the arguments</p>
 <blockquote>
 <div><p>–kokkos-threads=4 –kokkos-threads=3</p>
 </div></blockquote>
-<p>set the number of threads to 3. Table 5.1 gives a full list of command-line options.</p>
+<p>set the number of threads to 3. <a class="reference external" href="Table_cli-opts">Table 5.1</a> gives a full list of command-line options.</p>
 <p>Table 5.1: Command-line options for Kokkos::initialize</p>
 <div class="table-wrapper docutils container">
 <table class="docutils align-default">
@@ -582,35 +583,35 @@ Kokkos chooses the two spaces using the following list:</p>
 <tr class="row-odd"><td><p>Argument</p></td>
 <td><p>Description</p></td>
 </tr>
-<tr class="row-even"><td><p>–kokkos-help –help</p></td>
+<tr class="row-even"><td><p><code class="code docutils literal notranslate"><span class="pre">--kokkos-help</span></code></p></td>
 <td><p>print this message</p></td>
 </tr>
-<tr class="row-odd"><td><p>–kokkos-disable-warnings</p></td>
+<tr class="row-odd"><td><p><code class="code docutils literal notranslate"><span class="pre">--kokkos-disable-warnings</span></code></p></td>
 <td><p>disable kokkos warning messages</p></td>
 </tr>
-<tr class="row-even"><td><p>–kokkos-print-configuration</p></td>
+<tr class="row-even"><td><p><code class="code docutils literal notranslate"><span class="pre">--kokkos-print-configuration</span></code></p></td>
 <td><p>print configuration</p></td>
 </tr>
-<tr class="row-odd"><td><p>–kokkos-tune-internals</p></td>
+<tr class="row-odd"><td><p><code class="code docutils literal notranslate"><span class="pre">--kokkos-tune-internals</span></code></p></td>
 <td><p>allow Kokkos to autotune policies and declare tuning features through the tuning system. If left off, Kokkos uses heuristics.</p></td>
 </tr>
-<tr class="row-even"><td><p>–kokkos-num-threads=INT</p></td>
+<tr class="row-even"><td><p><code class="code docutils literal notranslate"><span class="pre">--kokkos-num-threads=INT</span></code></p></td>
 <td><p>specify total number of threads to use for parallel regions on the host</p></td>
 </tr>
-<tr class="row-odd"><td><p>–kokkos-device-id=INT</p></td>
+<tr class="row-odd"><td><p>:code”<cite>–kokkos-device-id=INT</cite></p></td>
 <td><p>specify device id to be used by Kokkos</p></td>
 </tr>
-<tr class="row-even"><td><p>–kokkos-map-device-id-by=(random|mpi_rank), default: mpi_rank</p></td>
-<td><p>strategy to select device-id automatically from available devices: random or mpi_rank:sup:<cite>2</cite></p></td>
+<tr class="row-even"><td><p><code class="code docutils literal notranslate"><span class="pre">--kokkos-map-device-id-by=(random|mpi_rank)</span></code>, default: <code class="code docutils literal notranslate"><span class="pre">mpi_rank</span></code></p></td>
+<td><p>strategy to select device-id automatically from available devices: random or mpi_rank<sup>2</sup></p></td>
 </tr>
-<tr class="row-odd"><td><p>–kokkos-tools-libs=STR</p></td>
+<tr class="row-odd"><td><p><code class="code docutils literal notranslate"><span class="pre">--kokkos-tools-libs=STR</span></code></p></td>
 <td><p>specify which of the tools to use. Must either be full path to library or name of library if the path is present in the runtime library search path (e.g. LD_LIBRARY_PATH)</p></td>
 </tr>
-<tr class="row-even"><td><p>–kokkos-tools-help</p></td>
+<tr class="row-even"><td><p><code class="code docutils literal notranslate"><span class="pre">--kokkos-tools-help</span></code></p></td>
 <td><p>query the (loaded) kokkos-tool for its command-line option support (which should then be passed via –kokkos-tools-args=”…”)</p></td>
 </tr>
-<tr class="row-odd"><td><p>–kokkos-tools-args=STR</p></td>
-<td><p>a single (quoted) string of options which will be whitespace delimited and passed to the loaded kokkos-tool as command-line arguments. E.g. <cite>&lt;EXE&gt; –kokkos-tools-args=”-c input.txt”</cite> will pass <cite>&lt;EXE&gt; -c input.txt</cite> as argc/argv to tool</p></td>
+<tr class="row-odd"><td><p><code class="code docutils literal notranslate"><span class="pre">--kokkos-tools-args=STR</span></code></p></td>
+<td><p>a single (quoted) string of options which will be whitespace delimited and passed to the loaded kokkos-tool as command-line arguments. E.g. <code class="code docutils literal notranslate"><span class="pre">&lt;EXE&gt;</span> <span class="pre">--kokkos-tools-args=&quot;-c</span> <span class="pre">input.txt&quot;</span></code> will pass <code class="code docutils literal notranslate"><span class="pre">&lt;EXE&gt;</span> <span class="pre">-c</span> <span class="pre">input.txt</span></code> as argc/argv to tool</p></td>
 </tr>
 </tbody>
 </table>
@@ -630,14 +631,14 @@ Kokkos chooses the two spaces using the following list:</p>
 </section>
 <section id="initialization-by-environment-variable">
 <h2>5.2 Initialization by environment variable<a class="headerlink" href="#initialization-by-environment-variable" title="Permalink to this heading">#</a></h2>
-<p>Instead of using command-line arguments, one may use environment variables. The environment variables are identical to the arguments in Table 5.1 but they are upper case and the dash is replaced by an underscore. For example, if we want to set the number of threads to 3, we have</p>
-<blockquote>
-<div><p>KOKKOS_NUM_THREADS=3</p>
-</div></blockquote>
+<p>Instead of using command-line arguments, one may use environment variables. The environment variables are identical to the arguments in <a class="reference external" href="Table_cli-opts">Table 5.1</a> but they are upper case and the dash is replaced by an underscore. For example, if we want to set the number of threads to 3, we may use</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nv">KOKKOS_NUM_THREADS</span><span class="o">=</span><span class="m">3</span>
+</pre></div>
+</div>
 </section>
 <section id="initialization-by-struct">
 <h2>5.3 Initialization by struct<a class="headerlink" href="#initialization-by-struct" title="Permalink to this heading">#</a></h2>
-<p>Instead of giving <a class="reference external" href="../API/core/initialize_finalize/initialize.html">Kokkos::initialize()</a> command-line arguments, one may directly pass in initialization parameters using the <cite>Kokkos::InitializationSettings</cite> struct.  If one wants to set a options using the struct, one can use the set functions <cite>set_xxx</cite> where <cite>xxx</cite> is the identical to the arguments in Table 5.1 where the dash has been replaced by an underscore. To check if a variable has been set, one can use the <cite>has_xxx</cite> functions. Finally, to get the value that was set, one can use the <cite>get_xxx</cite> functions.</p>
+<p>Instead of giving <a class="reference external" href="../API/core/initialize_finalize/initialize.html">Kokkos::initialize()</a> command-line arguments, one may directly pass in initialization parameters using the <cite>Kokkos::InitializationSettings</cite> struct.  If one wants to set options using the struct, one can use the functions <cite>set_xxx</cite> where <cite>xxx</cite> is identical to the arguments in <a class="reference external" href="Table_cli-opts">Table 5.1</a> where the dash has been replaced by an underscore. To check if a variable has been set, one can use the <cite>has_xxx</cite> functions. Finally, to get the value that was set, one can use the <cite>get_xxx</cite> functions.</p>
 <p>If you do not set <cite>num_threads</cite>, Kokkos will try to determine a default value if possible or otherwise set it to 1. In particular, Kokkos can use the <cite>hwloc</cite> library to determine default settings using the assumption that the process binding mask is unique, i.e., that this process does not share any cores with another process. Note that the default value of each parameter is -1.</p>
 <p>Here is an example of how to use the struct.</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Kokkos</span><span class="o">::</span><span class="n">InitializationSettings</span><span class="w"> </span><span class="n">settings</span><span class="p">;</span>

@@ -293,6 +293,7 @@
 <li class="toctree-l2"><a class="reference internal" href="API/core/Traits.html">Traits</a></li>
 <li class="toctree-l2"><a class="reference internal" href="API/core/KokkosConcepts.html">Kokkos Concepts</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="API/core/STL-Compatibility.html">STL Compatibility Issues</a><input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" role="switch" type="checkbox"/><label for="toctree-checkbox-14"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="API/core/stl-compat/Array.html"><code class="docutils literal notranslate"><span class="pre">Array</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="API/core/stl-compat/pair.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::pair</span></code></a></li>
 </ul>
 </li>
@@ -529,7 +530,7 @@
         <article role="main">
           <section id="faq">
 <h1>FAQ<a class="headerlink" href="#faq" title="Permalink to this heading">#</a></h1>
-<dl class="simple">
+<dl class="simple" id="join-slack-workspace">
 <dt><strong>How do I join the Kokkos slack channel?</strong></dt><dd><p>You can find the slack channel at <a class="reference external" href="https://kokkosteam.slack.com">kokkosteam.slack.com</a>. Register a new account with your email. We reached the limit of whitelisted organizations, but every member of the Kokkos Slack workspace can invite more people. If no one you know is in the Slack workspace you can contact the Kokkos maintainers (their emails are in the LICENSE file).</p>
 </dd>
 <dt><strong>How do I compile Kokkos with C++20 or C++23?</strong></dt><dd><p>When configuring Kokkos with cmake, add the flag <code class="docutils literal notranslate"><span class="pre">-DCMAKE_CXX_STANDARD=20</span></code> (or <code class="docutils literal notranslate"><span class="pre">23</span></code>). Ensure that the flag is also set for any downstream applications.</p>

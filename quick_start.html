@@ -293,6 +293,7 @@
 <li class="toctree-l2"><a class="reference internal" href="API/core/Traits.html">Traits</a></li>
 <li class="toctree-l2"><a class="reference internal" href="API/core/KokkosConcepts.html">Kokkos Concepts</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="API/core/STL-Compatibility.html">STL Compatibility Issues</a><input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" role="switch" type="checkbox"/><label for="toctree-checkbox-14"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="API/core/stl-compat/Array.html"><code class="docutils literal notranslate"><span class="pre">Array</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="API/core/stl-compat/pair.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::pair</span></code></a></li>
 </ul>
 </li>
@@ -530,69 +531,140 @@
           <section id="quick-start">
 <h1>Quick Start<a class="headerlink" href="#quick-start" title="Permalink to this heading">#</a></h1>
 <p>This guide is intended to jump start new Kokkos users (and beginners, in particular).</p>
-<section id="download-latest-and-build">
-<h2>Download Latest and Build<a class="headerlink" href="#download-latest-and-build" title="Permalink to this heading">#</a></h2>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this heading">#</a></h2>
+<p>To complete this tutorial, you’ll need:</p>
+<ul class="simple">
+<li><p>a compatible operating system (e.g. Linux, macOS, Windows).</p></li>
+<li><p>a compatible C++ compiler that supports at least C++17.</p></li>
+<li><p><a class="reference external" href="https://cmake.org/">CMake</a> and a compatible build tool for building the
+project.</p>
+<ul>
+<li><p>Compatible build tools include <a class="reference external" href="https://www.gnu.org/software/make/">Make</a>, <a class="reference external" href="https://ninja-build.org">Ninja</a>,
+and others - see <a class="reference external" href="https://cmake.org/cmake/help/latest/manual/cmake-generators.7.html">CMake Generators</a> for
+more information.</p></li>
+</ul>
+</li>
+</ul>
+<p>See <a class="reference internal" href="requirements.html"><span class="doc">Requirements</span></a> for more information about platforms compatible with
+Kokkos and a list of supported versions of compilers and software development
+kits (SDKs).</p>
+<p>If you don’t already have CMake installed, see the <a class="reference external" href="https://cmake.org/install">CMake installation guide</a>.</p>
+</section>
+<section id="set-up-a-project">
+<h2>Set up a project<a class="headerlink" href="#set-up-a-project" title="Permalink to this heading">#</a></h2>
+<p>CMake uses a file named <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> to configure the build system for a
+project. You’ll use this file to set up your project and declare a dependency
+on Kokkos.</p>
+<p>First, create a directory for your project:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>&gt;<span class="w"> </span>mkdir<span class="w"> </span>MyProject<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>MyProject
+</pre></div>
+</div>
+<p>Next, you’ll create the <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> file and declare a dependency on
+Kokkos. There are many ways to express dependencies in the CMake ecosystem; in
+this tutorial, you’ll use the <a class="reference external" href="https://cmake.org/cmake/help/latest/module/FetchContent.html">FetchContent CMake module</a>. To do this,
+in your project directory (<code class="docutils literal notranslate"><span class="pre">MyProject</span></code>), create a file named
+<code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> with the following contents:</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span><span class="w"> </span><span class="s">3.16</span><span class="p">)</span>
+<span class="nb">project</span><span class="p">(</span><span class="s">MyProject</span><span class="p">)</span>
+
+<span class="nb">include</span><span class="p">(</span><span class="s">FetchContent</span><span class="p">)</span>
+<span class="nb">FetchContent_Declare</span><span class="p">(</span>
+<span class="w">  </span><span class="s">Kokkos</span>
+<span class="w">  </span><span class="s">URL</span><span class="w"> </span><span class="s">https://github.com/kokkos/kokkos/archive/refs/tags/4.5.01.zip</span>
+<span class="p">)</span>
+<span class="nb">FetchContent_MakeAvailable</span><span class="p">(</span><span class="s">Kokkos</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The above configuration declares a dependency on Kokkos which is downloaded
+from GitHub.
+<code class="docutils literal notranslate"><span class="pre">4.5.01</span></code> is the Kokkos version to use; we generally recommend using the
+<a class="reference external" href="https://github.com/kokkos/kokkos/releases/latest">latest available</a>.</p>
+<p>For more information about how to create <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span> <span class="pre">files</span></code>, see the
+<a class="reference external" href="https://cmake.org/cmake/help/latest/guide/tutorial/index.html">CMake Tutorial</a>.</p>
+</section>
+<section id="create-and-run-an-executable">
+<h2>Create and run an executable<a class="headerlink" href="#create-and-run-an-executable" title="Permalink to this heading">#</a></h2>
+<p>With Kokkos declared as a dependency, you can use Kokkos code within your own
+project.</p>
+<p>As an example, create a <code class="docutils literal notranslate"><span class="pre">HelloKokkos.cpp</span></code> with the following content:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Kokkos_Core.hpp&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">**</span><span class="w"> </span><span class="n">argv</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">initialize</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="n">argv</span><span class="p">);</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Allocate a 1-dimensional view of integers</span>
+<span class="w">    </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">View</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">*&gt;</span><span class="w"> </span><span class="n">v</span><span class="p">(</span><span class="s">&quot;v&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// Fill view with sequentially increasing values v=[0,1,2,3,4]</span>
+<span class="w">    </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">parallel_for</span><span class="p">(</span><span class="s">&quot;fill&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="n">KOKKOS_LAMBDA</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">v</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="p">;</span><span class="w"> </span><span class="p">});</span>
+<span class="w">    </span><span class="c1">// Compute accumulated sum of v&#39;s elements r=0+1+2+3+4</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">r</span><span class="p">;</span>
+<span class="w">    </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">parallel_reduce</span><span class="p">(</span>
+<span class="w">      </span><span class="s">&quot;accumulate&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span>
+<span class="w">      </span><span class="n">KOKKOS_LAMBDA</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">partial_r</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">partial_r</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">v</span><span class="p">(</span><span class="n">i</span><span class="p">);</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="n">r</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// Check the result</span>
+<span class="w">    </span><span class="n">KOKKOS_ASSERT</span><span class="p">(</span><span class="n">r</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">10</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Goodbye World</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="n">Kokkos</span><span class="o">::</span><span class="n">finalize</span><span class="p">();</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The above program code includes the main Kokkos header file and demonstrates
+how to initialize and finalize the Kokkos execution environment.</p>
+<p>To build the code, add the following couple lines to the end of your
+<code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> file:</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">add_executable</span><span class="p">(</span><span class="s">HelloKokkos</span><span class="w"> </span><span class="s">HelloKokkos.cpp</span><span class="p">)</span>
+<span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">HelloKokkos</span><span class="w"> </span><span class="s">Kokkos::kokkos</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The above configuration declares the executable you want to build
+(<code class="docutils literal notranslate"><span class="pre">HelloKokkos</span></code>), and links it to Kokkos.</p>
+<p>Now you can build and run your Kokkos program.</p>
+<p>Start with calling <code class="docutils literal notranslate"><span class="pre">cmake</span></code> to configure the project and generate a native
+build system:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>MyProject&gt;<span class="w"> </span>cmake<span class="w"> </span>-B<span class="w"> </span>build
+--<span class="w"> </span>The<span class="w"> </span>C<span class="w"> </span>compiler<span class="w"> </span>identification<span class="w"> </span>is<span class="w"> </span>GNU<span class="w"> </span><span class="m">10</span>.2.1
+--<span class="w"> </span>The<span class="w"> </span>CXX<span class="w"> </span>compiler<span class="w"> </span>identification<span class="w"> </span>is<span class="w"> </span>GNU<span class="w"> </span><span class="m">10</span>.2.1
+...
+--<span class="w"> </span>Build<span class="w"> </span>files<span class="w"> </span>have<span class="w"> </span>been<span class="w"> </span>written<span class="w"> </span>to:<span class="w"> </span>.../MyProject/build
+</pre></div>
+</div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Please become familiar with <a class="reference external" href="https://kokkos.org/kokkos-core-wiki/requirements.html">Kokkos Requirements</a>, and verify that your machine has all necessary compilers, backend GPU SDK (e.g., CUDA, ROCM, Intel oneAPI, etc.),and build system components.</p>
+<p>If you want to target a NVIDIA GPU, you will need to pass an extra
+<code class="docutils literal notranslate"><span class="pre">-DKokkos_ENABLE_CUDA=ON</span></code> argument to the cmake command above. For an AMD
+or an Intel GPU, you would use <code class="docutils literal notranslate"><span class="pre">-DKokkos_ENABLE_HIP=ON</span></code> or
+<code class="docutils literal notranslate"><span class="pre">-DKokkos_ENABLE_SYCL=ON</span></code> respectively. For a list of options and variables
+available at configuration time, see <a class="reference internal" href="keywords.html"><span class="doc">CMake Keywords</span></a>.</p>
 </div>
-<p><a class="sd-sphinx-override sd-badge sd-bg-primary sd-bg-text-primary reference external" href="https://github.com/kokkos/kokkos/releases/latest"><span>Latest Release</span></a></p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="c1"># Uncomment according to the type of file you&#39;ve downloaded (zip or tar)</span>
-unzip<span class="w"> </span>kokkos-x.y.z.zip
-<span class="c1"># tar -xzf kokkos-x.y.z.tar.gz</span>
-<span class="nb">cd</span><span class="w"> </span>kokkos-x.y.z
+<p>Then invoke that build system to actually compile/link the project:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>MyProject&gt;<span class="w"> </span>cmake<span class="w"> </span>--build<span class="w"> </span>build
+Scanning<span class="w"> </span>dependencies<span class="w"> </span>of<span class="w"> </span>target<span class="w"> </span>...
+...
+<span class="o">[</span><span class="m">100</span>%<span class="o">]</span><span class="w"> </span>Built<span class="w"> </span>target<span class="w"> </span>HelloKokkos
 </pre></div>
 </div>
-</section>
-<section id="basic-configure-build-install-recipes">
-<h2>Basic Configure, Build, Install Recipes<a class="headerlink" href="#basic-configure-build-install-recipes" title="Permalink to this heading">#</a></h2>
-<section id="openmp-cpu-parallelism">
-<h3>OpenMP (CPU Parallelism)<a class="headerlink" href="#openmp-cpu-parallelism" title="Permalink to this heading">#</a></h3>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>cmake<span class="w"> </span>-B<span class="w"> </span>&lt;build-directory&gt;<span class="w"> </span>-DKokkos_ENABLE_OPENMP<span class="o">=</span>ON<span class="w"> </span>-DCMAKE_BUILD_TYPE<span class="o">=</span>Release<span class="w"> </span>-DCMAKE_INSTALL_PREFIX<span class="o">=</span>&lt;install-directory&gt;<span class="w"> </span>-S<span class="w"> </span>&lt;source-directory&gt;
-cmake<span class="w"> </span>--build<span class="w"> </span>&lt;build-directory&gt;
-cmake<span class="w"> </span>--install<span class="w"> </span>&lt;build-directory&gt;
+<p>Finally try to use the newly built <code class="docutils literal notranslate"><span class="pre">HelloKokkos</span></code>:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>MyProject&gt;<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>build
+
+MyProject/build&gt;<span class="w"> </span>HelloKokkos
+Goodbye<span class="w"> </span>World
 </pre></div>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Kokkos will attempt to autodetect GPU microarchitecture, but it is also possible to specify the desired <a class="reference external" href="https://kokkos.org/kokkos-core-wiki/keywords.html#gpu-architectures">GPU architecture</a>.  In scenarios where a device (GPU) backend (e.g., CUDA, HIP) is enabled, Kokkos will default to serial execution on the host (CPU).</p>
+<p>Depending on your shell, the correct syntax may be <code class="docutils literal notranslate"><span class="pre">HelloKokkos</span></code>,
+<code class="docutils literal notranslate"><span class="pre">./HelloKokkos</span></code> or <code class="docutils literal notranslate"><span class="pre">.\HelloKokkos</span></code>.</p>
 </div>
-</section>
-<section id="cuda">
-<h3>CUDA<a class="headerlink" href="#cuda" title="Permalink to this heading">#</a></h3>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>cmake<span class="w"> </span>-B<span class="w"> </span>&lt;build-directory&gt;<span class="w"> </span>-DKokkos_ENABLE_CUDA<span class="o">=</span>ON<span class="w"> </span>-DCMAKE_BUILD_TYPE<span class="o">=</span>Release<span class="w"> </span>-DCMAKE_INSTALL_PREFIX<span class="o">=</span>&lt;install-directory&gt;<span class="w"> </span>-S<span class="w"> </span>&lt;source-directory&gt;
-cmake<span class="w"> </span>--build<span class="w"> </span>&lt;build-directory&gt;
-cmake<span class="w"> </span>--install<span class="w"> </span>&lt;build-directory&gt;
-</pre></div>
-</div>
-</section>
-<section id="hip">
-<h3>HIP<a class="headerlink" href="#hip" title="Permalink to this heading">#</a></h3>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>cmake<span class="w"> </span>-B<span class="w"> </span>&lt;build-directory&gt;<span class="w"> </span>-DKokkos_ENABLE_HIP<span class="o">=</span>ON<span class="w"> </span>-DCMAKE_CXX_COMPILER<span class="o">=</span>hipcc<span class="w"> </span>-DCMAKE_BUILD_TYPE<span class="o">=</span>Release<span class="w"> </span>-DCMAKE_INSTALL_PREFIX<span class="o">=</span>&lt;install-directory&gt;<span class="w"> </span>-S<span class="w"> </span>&lt;source-directory&gt;
-cmake<span class="w"> </span>--build<span class="w"> </span>&lt;build-directory&gt;
-cmake<span class="w"> </span>--install<span class="w"> </span>&lt;build-directory&gt;
-</pre></div>
-</div>
-</section>
-</section>
-<section id="building-and-linking-a-kokkos-hello-world">
-<h2>Building and Linking a Kokkos “Hello World”<a class="headerlink" href="#building-and-linking-a-kokkos-hello-world" title="Permalink to this heading">#</a></h2>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p><code class="docutils literal notranslate"><span class="pre">Kokkos_ROOT</span></code> and the root directory for you target backend SDK (i.e., <code class="docutils literal notranslate"><span class="pre">CUDA_ROOT</span></code>, <code class="docutils literal notranslate"><span class="pre">ROCM_PATH</span></code>) will need to be set.  <code class="docutils literal notranslate"><span class="pre">Kokkos_ROOT</span></code> should be set to the path of your Kokkos installation.  In a modules environment, the SDK variables will be typically automatically set upon module loading (e.g., <code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">load</span> <span class="pre">rocm/5.7.1</span></code>).  Please see <a class="reference external" href="https://kokkos.org/kokkos-core-wiki/building.html">Build, Install and Use</a> for additional details.  The example detailed below is in the Kokkos Core <cite>example</cite> directory.</p>
-</div>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/kokkos/kokkos.git
-<span class="nb">cd</span><span class="w"> </span>example/build_cmake_installed
-cmake<span class="w"> </span>-B<span class="w"> </span>&lt;build-directory&gt;<span class="w"> </span>-S<span class="w"> </span>.<span class="w"> </span>-DKokkos_ROOT<span class="o">=</span>&lt;install-directory&gt;
-<span class="nb">cd</span><span class="w"> </span>&lt;build-directory&gt;
-cmake<span class="w"> </span>--build<span class="w"> </span>.
-./example
-</pre></div>
-</div>
+<p>Congratulations! You’ve successfully built and run a test binary using Kokkos.</p>
 </section>
 <section id="getting-help">
-<h2>Getting Help<a class="headerlink" href="#getting-help" title="Permalink to this heading">#</a></h2>
-<p>If you need additional help getting started, please join the <a class="reference external" href="https://kokkosteam.slack.com">Kokkos Slack Channel</a>.  Here are <a class="reference external" href="https://kokkos.org/kokkos-core-wiki/faq.html#faq">sign up details</a>.  Joining Kokkos Slack is the on ramp for becoming a project contributor.</p>
+<h2>Getting help<a class="headerlink" href="#getting-help" title="Permalink to this heading">#</a></h2>
+<p>If you need additional help getting started, please join the <a class="reference external" href="https://kokkosteam.slack.com">Kokkos Slack
+Workspace</a>. If you have trouble signing up see the
+<a class="reference internal" href="faq.html#join-slack-workspace"><span class="std std-ref">FAQ entry on how to join</span></a>.</p>
 </section>
 </section>
 
@@ -654,15 +726,10 @@ cmake<span class="w"> </span>--build<span class="w"> </span>.
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">Quick Start</a><ul>
-<li><a class="reference internal" href="#download-latest-and-build">Download Latest and Build</a></li>
-<li><a class="reference internal" href="#basic-configure-build-install-recipes">Basic Configure, Build, Install Recipes</a><ul>
-<li><a class="reference internal" href="#openmp-cpu-parallelism">OpenMP (CPU Parallelism)</a></li>
-<li><a class="reference internal" href="#cuda">CUDA</a></li>
-<li><a class="reference internal" href="#hip">HIP</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#building-and-linking-a-kokkos-hello-world">Building and Linking a Kokkos “Hello World”</a></li>
-<li><a class="reference internal" href="#getting-help">Getting Help</a></li>
+<li><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li><a class="reference internal" href="#set-up-a-project">Set up a project</a></li>
+<li><a class="reference internal" href="#create-and-run-an-executable">Create and run an executable</a></li>
+<li><a class="reference internal" href="#getting-help">Getting help</a></li>
 </ul>
 </li>
 </ul>

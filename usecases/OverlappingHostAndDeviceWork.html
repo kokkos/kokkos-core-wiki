@@ -293,6 +293,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../API/core/Traits.html">Traits</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../API/core/KokkosConcepts.html">Kokkos Concepts</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../API/core/STL-Compatibility.html">STL Compatibility Issues</a><input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" role="switch" type="checkbox"/><label for="toctree-checkbox-14"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../API/core/stl-compat/Array.html"><code class="docutils literal notranslate"><span class="pre">Array</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../API/core/stl-compat/pair.html"><code class="docutils literal notranslate"><span class="pre">Kokkos::pair</span></code></a></li>
 </ul>
 </li>
@@ -665,7 +666,7 @@ overlapping pattern may require modifications to the overall algorithm.</p>
 <span class="o">|-</span> <span class="n">Synchronize</span> <span class="n">host</span> <span class="ow">and</span> <span class="n">device</span> <span class="n">data</span>
 <span class="o">|--------------------------------------------------------</span>
     <span class="o">|-&gt;|-</span> <span class="n">Perform</span> <span class="n">device</span> <span class="n">operation</span> <span class="n">N</span>         \ <span class="n">asynchronous</span>
-    <span class="o">|</span>  <span class="o">|-</span> <span class="n">Serialize</span> <span class="n">host</span> <span class="n">data</span> <span class="kn">from</span> <span class="nn">N</span> <span class="n">to</span> <span class="n">disk</span> <span class="o">/</span>
+    <span class="o">|</span>  <span class="o">|-</span> <span class="n">Serialize</span> <span class="n">host</span> <span class="n">data</span> <span class="kn">from</span><span class="w"> </span><span class="nn">N</span> <span class="n">to</span> <span class="n">disk</span> <span class="o">/</span>
     <span class="o">|</span>  <span class="o">|------------</span> <span class="k">global</span> <span class="n">barrier</span> <span class="o">-----------------------</span>
     <span class="o">|</span>  <span class="o">|-</span> <span class="n">Synchronize</span> <span class="n">host</span> <span class="ow">and</span> <span class="n">device</span> <span class="n">data</span> <span class="k">for</span> <span class="n">start</span> <span class="n">of</span> <span class="n">N</span><span class="o">+</span><span class="mi">1</span>
     <span class="o">|-&lt;----------------------------------------------------</span>

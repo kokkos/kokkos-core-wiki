@@ -49,13 +49,15 @@ Kokkos chooses the two spaces using the following list:
 8. `Kokkos::Threads`
 9. `Kokkos::Serial`
 
-The highest execution space in the list that is enabled is Kokkos' default execution space, and the highest enabled host execution space is Kokkos' default host execution space. For example, if  `Kokkos::Cuda`, `Kokkos::OpenMP`, and `Kokkos::Serial` are enabled, then `Kokkos::Cuda` is the default execution space and `Kokkos::OpenMP` is the default host execution space.:sup:`1`  In cases where the highest enabled backend is a host parallel execution space the `DefaultExecutionSpace` and the `DefaultHostExecutionSpace` will be the same.
+The highest execution space in the list that is enabled is Kokkos' default execution space, and the highest enabled host execution space is Kokkos' default host execution space. For example, if  `Kokkos::Cuda`, `Kokkos::OpenMP`, and `Kokkos::Serial` are enabled, then `Kokkos::Cuda` is the default execution space and `Kokkos::OpenMP` is the default host execution space\ :sup:`1`.  In cases where the highest enabled backend is a host parallel execution space the `DefaultExecutionSpace` and the `DefaultHostExecutionSpace` will be the same.
 
 `Kokkos::initialize <../API/Initialize-and-Finalize.html#kokos-initialize>`_ parses the command line for flags prefixed with `--kokkos-`, and removes all recognized flags. Argument options are given with an equals (`=`) sign. If the same argument occurs more than once, the last one is used. For example, the arguments
 
     --kokkos-threads=4 --kokkos-threads=3
 
-set the number of threads to 3. Table 5.1 gives a full list of command-line options.
+set the number of threads to 3. `Table 5.1 <Table_cli-opts>`_ gives a full list of command-line options.
+
+.. Table_cli-opts:
 
 Table 5.1: Command-line options for Kokkos::initialize
 
@@ -63,26 +65,26 @@ Table 5.1: Command-line options for Kokkos::initialize
 
   * - Argument
     - Description
-  * - --kokkos-help --help
+  * - :code:`--kokkos-help`
     - print this message
-  * - --kokkos-disable-warnings     
+  * - :code:`--kokkos-disable-warnings`     
     - disable kokkos warning messages
-  * - --kokkos-print-configuration 
+  * - :code:`--kokkos-print-configuration` 
     - print configuration
-  * - --kokkos-tune-internals      
+  * - :code:`--kokkos-tune-internals`      
     - allow Kokkos to autotune policies and declare tuning features through the tuning system. If left off, Kokkos uses heuristics.
-  * - --kokkos-num-threads=INT     
+  * - :code:`--kokkos-num-threads=INT`     
     - specify total number of threads to use for parallel regions on the host
-  * - --kokkos-device-id=INT
+  * - :code"`--kokkos-device-id=INT`
     - specify device id to be used by Kokkos
-  * - --kokkos-map-device-id-by=(random\|mpi_rank), default: mpi_rank
-    - strategy to select device-id automatically from available devices: random or mpi_rank:sup:`2`
-  * - --kokkos-tools-libs=STR      
+  * - :code:`--kokkos-map-device-id-by=(random\|mpi_rank)`, default: :code:`mpi_rank`
+    - strategy to select device-id automatically from available devices: random or mpi_rank\ :sup:`2`
+  * - :code:`--kokkos-tools-libs=STR`      
     - specify which of the tools to use. Must either be full path to library or name of library if the path is present in the runtime library search path (e.g. LD_LIBRARY_PATH)
-  * - --kokkos-tools-help          
+  * - :code:`--kokkos-tools-help`          
     - query the (loaded) kokkos-tool for its command-line option support (which should then be passed via --kokkos-tools-args="...")
-  * - --kokkos-tools-args=STR      
-    - a single (quoted) string of options which will be whitespace delimited and passed to the loaded kokkos-tool as command-line arguments. E.g. `<EXE> --kokkos-tools-args="-c input.txt"` will pass `<EXE> -c input.txt` as argc/argv to tool
+  * - :code:`--kokkos-tools-args=STR`      
+    - a single (quoted) string of options which will be whitespace delimited and passed to the loaded kokkos-tool as command-line arguments. E.g. :code:`<EXE> --kokkos-tools-args="-c input.txt"` will pass :code:`<EXE> -c input.txt` as argc/argv to tool
 
 When passing a boolean as a string, the acceptable values are:
  - true, yes, 1
@@ -100,14 +102,17 @@ The values are case insensitive.
 5.2 Initialization by environment variable
 ------------------------------------------
 
-Instead of using command-line arguments, one may use environment variables. The environment variables are identical to the arguments in Table 5.1 but they are upper case and the dash is replaced by an underscore. For example, if we want to set the number of threads to 3, we have
+Instead of using command-line arguments, one may use environment variables. The environment variables are identical to the arguments in `Table 5.1 <Table_cli-opts>`_ but they are upper case and the dash is replaced by an underscore. For example, if we want to set the number of threads to 3, we may use
+
+.. code-block:: sh
 
   KOKKOS_NUM_THREADS=3
+
 
 5.3 Initialization by struct
 ----------------------------
 
-Instead of giving `Kokkos::initialize() <../API/core/initialize_finalize/initialize.html>`_ command-line arguments, one may directly pass in initialization parameters using the `Kokkos::InitializationSettings` struct.  If one wants to set a options using the struct, one can use the set functions `set_xxx` where `xxx` is the identical to the arguments in Table 5.1 where the dash has been replaced by an underscore. To check if a variable has been set, one can use the `has_xxx` functions. Finally, to get the value that was set, one can use the `get_xxx` functions.
+Instead of giving `Kokkos::initialize() <../API/core/initialize_finalize/initialize.html>`_ command-line arguments, one may directly pass in initialization parameters using the `Kokkos::InitializationSettings` struct.  If one wants to set options using the struct, one can use the functions `set_xxx` where `xxx` is identical to the arguments in `Table 5.1 <Table_cli-opts>`_ where the dash has been replaced by an underscore. To check if a variable has been set, one can use the `has_xxx` functions. Finally, to get the value that was set, one can use the `get_xxx` functions.
 
 
 If you do not set `num_threads`, Kokkos will try to determine a default value if possible or otherwise set it to 1. In particular, Kokkos can use the `hwloc` library to determine default settings using the assumption that the process binding mask is unique, i.e., that this process does not share any cores with another process. Note that the default value of each parameter is -1.
