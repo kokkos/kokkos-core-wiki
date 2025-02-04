@@ -26,6 +26,7 @@ jobs:
         working-directory: ${{ env.docs-directory }}
         run: |
           make html
+      # .nojekyll file is needed for GitHub Pages to know it's getting a ready webpage
       # and there is no need to generate anything
       - name: Generate nojekyll file
         working-directory: ${{ env.docs-directory }}/generated_docs
