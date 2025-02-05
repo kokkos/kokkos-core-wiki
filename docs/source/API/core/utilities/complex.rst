@@ -60,11 +60,39 @@ Interface
 
   Initializes the real component to ``r`` and the imaginary component to ``i``.
 
-  .. deprecated:: 4.x.x
+  .. deprecated:: 4.0.0
   .. cppkokkos:function:: void operator=(const complex&) volatile noexcept
   .. cppkokkos:function:: volatile complex& operator=(const volatile complex&) volatile noexcept
   .. cppkokkos:function:: complex& operator=(const volatile complex&) noexcept
   .. cppkokkos:function:: void operator=(const volatile T&) noexcept
   .. cppkokkos:function:: void operator=(const T&) volatile noexcept
 
-  Note: These have templated implementations so as not to be copy assignment operators
+  Note: These have templated implementations so as not to be copy assignment operators.
+
+  .. rubric:: Public Member Functions
+
+  .. cppkokkos:function:: operator std::complex<T>() const noexcept
+
+  Conversion operator to ``std::complex``.
+
+  .. cppkokkos:function:: constexpr T& real() noexcept
+  .. cppkokkos:function:: constexpr T real() const noexcept
+  .. cppkokkos:function:: [[deprecated("in version 4.0.0")]] volatile T& real() volatile noexcept
+  .. cppkokkos:function:: [[deprecated("in version 4.0.0")]] T real() const volatile noexcept
+
+  :return: The value of the real component.
+
+  .. cppkokkos:function:: constexpr void real(T r) noexcept
+
+  Assigns ``r`` to the real component.
+
+  .. cppkokkos:function:: constexpr T& imag() noexcept
+  .. cppkokkos:function:: constexpr T imag() const noexcept
+  .. cppkokkos:function:: [[deprecated("in version 4.0.0")]] volatile T& imag() volatile noexcept
+  .. cppkokkos:function:: [[deprecated("in version 4.0.0")]] T imag() const volatile noexcept
+
+  :return: The value of the imaginary component.
+
+  .. cppkokkos:function:: constexpr void imag(T i) noexcept
+
+  Assigns ``i`` to the imaginary component.
