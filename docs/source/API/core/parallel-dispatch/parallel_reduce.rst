@@ -113,6 +113,7 @@ Requirements:
 Semantics
 ---------
 
+* For every element of the iteration space defined in ``policy`` the functors call operator is invoked exactly once, except for ``TeamPolicy`` and ``TeamThreadRange`` where the call operator is invoked by each vector lane of the team and thread respectively.
 * Neither concurrency nor order of execution are guaranteed.
 * The call is potentially asynchronous if the ``ReducerArgument`` is not a scalar type.
 * The ``ReducerArgument`` content will be overwritten, i.e. the value does not need to be initialized to the reduction-neutral element.

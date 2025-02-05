@@ -54,6 +54,7 @@ Requirements
 Semantics
 ---------
 
+* For every element of the iteration space defined in ``policy`` the functors call operator is invoked exactly once, except for ``TeamPolicy`` and ``TeamThreadRange`` where the call operator is invoked by each vector lane of the team and thread respectively.
 * Neither concurrency nor order of execution of iterations are guaranteed.
 * The call is potentially asynchronous. To guarantee a kernel has finished, a developer should call fence on the execution space on which the kernel is run.
 
