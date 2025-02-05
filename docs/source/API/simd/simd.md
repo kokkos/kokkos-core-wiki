@@ -12,7 +12,7 @@ It is based on the `simd` type proposed for ISO C++ in [this document](https://w
 ```c++
 namespace Experimental {
 template <class T, class Abi>
-class simd;
+class basic_simd;
 }
 ```
 
@@ -28,7 +28,7 @@ The first template parameter `T` should be a C++ fundamental type for which the 
 
 The second template parameter `Abi` is one of the pre-defined ABI types in the namespace `Kokkos::Experimental::simd_abi`. This type determines the size of the vector and what architecture-specific intrinsics will be used. The following types are always available in that namespace:
  - `scalar`: a fallback ABI which always has vector size of 1 and uses no special intrinsics.
- - `native`: the "best" ABI for the architecture for which Kokkos was compiled.
+ - `native`: the "best" ABI for the architecture for which Kokkos was compiled. (deprecated since Kokkos 4.6)
 
 ### Typedefs
 
@@ -133,7 +133,8 @@ The second template parameter `Abi` is one of the pre-defined ABI types in the n
 
 
 ### Global Typedefs
-  * `template <class T> Kokkos::Experimental::native_simd`: Alias for `Kokkos::Experimental::simd<T, Kokkos::Experimental::simd_abi::native<T>>`.
+  * `template <class T> Kokkos::Experimental::native_simd`: Alias for `Kokkos::Experimental::simd<T, Kokkos::Experimental::simd_abi::native<T>>`. (deprecated since Kokkos 4.6)
+  * `template <class T, int N> Kokkos::Experimental::simd`: Alias for `Kokkos::Experimental::basic_simd<T, ...>` (since Kokkos 4.6)
   * `Kokkos::Experimental::element_aligned_tag`: Alias for `Kokkos::Experimental::simd_flags<>`
   * `Kokkos::Experimental::vector_aligned_tag`: Alias for `Kokkos::Experimental::simd_flags<simd_alignment_vector_aligned>`
 
@@ -146,7 +147,7 @@ The second template parameter `Abi` is one of the pre-defined ABI types in the n
 int main(int argc, char* argv[]) {
   Kokkos::initialize(argc,argv);
   {
-  using simd_type = Kokkos::Experimental::native_simd<double>;
+  using simd_type = Kokkos::Experimental::simd<double>;
   simd_type a([] (std::size_t i) { return 0.1 * i; });
   simd_type b(2.0);
   simd_type c = Kokkos::sqrt(a * a + b * b);
