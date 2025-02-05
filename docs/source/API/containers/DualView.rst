@@ -41,11 +41,11 @@ Usage
                                        Device>
     view_type a("A", n, m);
 
-    Kokkos::deep_copy(a.d_view, 1);
+    Kokkos::deep_copy(a.view_device(), 1);
     a.template modify<typename view_type::execution_space>();
     a.template sync<typename view_type::host_mirror_space>();
 
-    Kokkos::deep_copy(a.h_view, 2);
+    Kokkos::deep_copy(a.view_host(), 2);
     a.template modify<typename ViewType::host_mirror_space>();
     a.template sync<typename ViewType::execution_space>();
 
@@ -124,11 +124,11 @@ Description
 
     .. cppkokkos:member:: t_dev d_view
 
-       The view instance on the *device*
+       The view instance on the *device*, public access deprecated from Kokkos 4.6 on.
 
     .. cppkokkos:member:: t_host h_view
 
-       The view instance on the *host*
+       The view instance on the *host*, public access deprecated from Kokkos 4.6 on.
 
     .. cppkokkos:member:: t_modified_flags modified_flags
 
@@ -206,6 +206,14 @@ Description
          .. code-block:: cpp
 
            dual_view_type::t_host hostView = DV.view<dual_view_type::t_host::memory_space>();
+
+    .. cppkokkos:function:: const t_host& view_host() const;
+
+       * Return the host-accessible View. With deprecated code enabled, return the View by value.
+
+    .. cppkokkos:function:: const t_dev& view_device() const;
+
+       * Return the View on the device. With deprecated code enabled, return the View by value.
 
     .. cppkokkos:function:: template <class Device> void sync(const typename Impl::enable_if<(std::is_same<typename traits::data_type, typename traits::non_const_data_type>::value) || (std::is_same<Device, int>::value), int>::type& = 0);
 
