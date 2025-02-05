@@ -30,9 +30,9 @@ Note: You may need the following if using some versions of CMake (e.g. 3.12):
 cmake_policy(SET CMP0074 NEW)
 ````
 If building in-tree, there is no `find_package`. You can use `add_subdirectory(kokkos)` with the Kokkos source and again just link with `target_link_libraries(Kokkos::kokkos)`.
-The examples in `examples/cmake_build_installed` and `examples/cmake_build_in_tree` can help get you started.
+The examples in `examples/build_installed` and `examples/build_in_tree` can help get you started.
 
-## Configuring CMake
+## Configuring CMake to buid Kokkos
 A very basic installation of Kokkos is done with:
 ````bash
 > cmake ${srcdir} \
@@ -48,6 +48,27 @@ There are numerous device backends, options, and architecture-specific optimizat
  -DKokkos_ENABLE_OPENMP=ON
 ````
 which activates the OpenMP backend. All the options controlling device backends, options, architectures, and third-party libraries (TPLs) are given in [CMake Keywords](../keywords).
+
+## Advanced ways of integrating Kokkos in a project
+(since Kokkos 4.5)
+In general, Kokkos reserves the right to traverse all targets that have been defined in your project, check them for `PRIVATE` and `PUBLIC` dependency to Kokkos and set properties like the compile language, architecture, compiler, etc. on your sources and targets.
+This is required as Kokkos and CMake need to set compiler and linker settings so your source files can be compiled for the architecture you specified when building Kokkos.
+To do this, `find_package(Kokkos)` injects a call that CMake executes when it reaches the end of the top-level `CMakeLists.txt` file. This call only changes properties if the target links to Kokkos and only for `.cpp` and `.cxx` source files.
+`examples/build_installed/complex` shows this strategy for a complex project.
+
+If your project uses multiple libraries that depend on Kokkos, not all your source files can be compiled with the compiler Kokkos requires, or you write a library that exposes kokkos in interfaces, you might require fine control on the rules used for building your project.
+To opt-out of Kokkos setting the properties on sources and targets, we export the CMake function `kokkos_exclude_from_setting_build_properties` which takes `GLOBAL` as an option or a list of directories with the keyword `DIRECTORY`.
+To opt-in individual sources and targets, Kokkos defines the CMake function `kokkos_set_source_and_target_properties` which sets the properties in alignment with the found Kokkos package.
+The function accepts the option `GLOBAL` and the keywords `DIRECTORY`, `SOURCE`, `TARGET`, `LINK_ONLY_TARGET` which take lists.
+These two options together allow fine grained control on the level of individual source files and targets.
+An example of setting the properties at an individual level can be found in `examples/build_installed/complex_mark_kokkos_files`.
+
+Setting these properties at indiviual source and target level can be tedious. Consider the situation of writing a library that uses Kokkos in its interfaces and that is used by users downstream, possibly together with other libraries that might link to Kokkos.
+This can create a situation where downstream users opt-out of Kokkos setting source and target properties but because your library exposes Kokkos in its interfaces, the sources and targets using your library depend on the correct compiler settings to work.
+To adress this, Kokkos provides the CMake function `kokkos_defer_set_dependent_library_properties` which takes a `LIBRARY` keyword and a `PUBLIC` option. This function injects a call that CMake executes when it reaces the end of the top-level `CMakeLists.txt`.
+In the injected call, CMake traverses all targets defined in the project and sets the corresponding Kokkos compile and link properties. The option `PUBLIC` lets you specify if your library links `PUBLIC` to Kokkos, without the option it assumes `PRIVATE`.
+This propagates the properites Kokkos requires to the dependants of your library and is independent of the directories excluded by `kokkos_exclude_from_setting_build_properties`.
+An example can be found in `examples/build_installed/complex_mark_library`.
 
 
 ## Known Issues<a name="KnownIssues"></a>
