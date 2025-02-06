@@ -12,10 +12,9 @@ Its semantics are similar to that of ``std::shared_ptr``.
 Interface
 ---------
 
-.. code-block:: cpp
+.. cppkokkos:class:: template <typename DataType> View
 
-    template <class DataType [, class LayoutType] [, class MemorySpace] [, class MemoryTraits]>
-    class View;
+   We should still describe DataType LayoutType MemorySpace MemoryTraits....
 
 Parameters
 ~~~~~~~~~~
@@ -70,7 +69,7 @@ and ``MemoryTraits`` are specified, ``MemorySpace`` must come before ``MemoryTra
 
 .. _Atomic: ../atomics.html
 
-.. |Atomic| replace:: :cppkokkos:func:`Atomic`
+.. |Atomic| replace:: :code:`Atomic`
 
 
 * ``MemoryTraits``:
@@ -114,6 +113,10 @@ Typedefs
 ~~~~~~~~
 
 .. rubric:: Data Types
+
+.. cppkokkos:type:: traits
+
+   To do.
 
 .. cpp:type:: data_type
 
@@ -195,11 +198,11 @@ Typedefs
 
 .. rubric:: Data Handles
 
-.. cpp:type:: reference_type
+.. cppkokkos:type:: reference_type
 
    return type of the view access operators.
 
-.. cpp:type:: pointer_type
+.. cppkokkos:type:: pointer_type
 
    pointer to scalar type.
 
@@ -225,19 +228,19 @@ Typedefs
 Constructors
 ~~~~~~~~~~~~
 
-.. cppkokkos:function:: View()
+.. cppkokkos:function:: View::View()
 
    Default Constructor. No allocations are made, no reference counting happens. All extents are zero and its data pointer is NULL.
 
-.. cppkokkos:function:: View( const View<DT, Prop...>& rhs)
+.. cppkokkos:function:: template <class RT, class... RP> View::View( const View<RT, RP...>& rhs)
 
    Copy constructor with compatible view. Follows View assignment rules.
 
-.. cppkokkos:function:: View( View&& rhs)
+.. cppkokkos:function:: View::View( View&& rhs)
 
    Move constructor
 
-.. cppkokkos:function:: View( const std::string& name, const IntType& ... indices)
+.. cppkokkos:function:: View::View( const std::string& name, const IntType& ... indices)
 
    Standard allocating constructor. The initialization is executed on the default
    instance of the execution space corresponding to ``MemorySpace`` and fences it.
@@ -251,7 +254,7 @@ Constructors
 
    - Requires: ``array_layout::is_regular == true``.
 
-.. cppkokkos:function:: View( const std::string& name, const array_layout& layout)
+.. cppkokkos:function:: View::View( const std::string& name, const array_layout& layout)
 
    Standard allocating constructor. The initialization is executed on the default
    instance of the execution space corresponding to ``MemorySpace`` and fences it.
@@ -263,7 +266,7 @@ Constructors
      either match the dynamic rank or the total rank. In the latter case, the extents
      corresponding to compile-time dimensions must match the View type's compile-time extents.
 
-.. cppkokkos:function:: View( const ALLOC_PROP &prop, const IntType& ... indices)
+.. cppkokkos:function:: View::View( const ALLOC_PROP &prop, const IntType& ... indices)
 
    Allocating constructor with allocation properties (created by a call to `Kokkos::view_alloc`). If an execution space is
    specified in ``prop``, the initialization uses it and does not fence.
@@ -278,7 +281,7 @@ Constructors
 
    - Requires: ``array_layout::is_regular == true``.
 
-.. cppkokkos:function:: View( const ALLOC_PROP &prop, const array_layout& layout)
+.. cppkokkos:function:: View::View( const ALLOC_PROP &prop, const array_layout& layout)
 
    Allocating constructor with allocation properties (created by a call to `Kokkos::view_alloc`) and a layout object. If an execution space is
    specified in ``prop``, the initialization uses it and does not fence. Otherwise, the View is
@@ -290,7 +293,7 @@ Constructors
      match the dynamic rank or the total rank. In the latter case, the extents corresponding
      to compile-time dimensions must match the View type's compile-time extents.
 
-.. cppkokkos:function:: View( pointer_type ptr, const IntType& ... indices)
+.. cppkokkos:function:: View::View( pointer_type ptr, const IntType& ... indices)
 
    Unmanaged data wrapping constructor.
 
@@ -303,7 +306,7 @@ Constructors
 
    - Requires: ``array_layout::is_regular == true``.
 
-.. cppkokkos:function:: View( pointer_type ptr, const array_layout& layout)
+.. cppkokkos:function:: View::View( pointer_type ptr, const array_layout& layout)
 
    Unmanaged data wrapper constructor.
 
@@ -314,7 +317,7 @@ Constructors
      either match the dynamic rank or the total rank. In the latter case, the extents
      corresponding to compile-time dimensions must match the View type's compile-time extents.
 
-.. cppkokkos:function:: View( const ScratchSpace& space, const IntType& ... indices)
+.. cppkokkos:function:: View::View( const ScratchSpace& space, const IntType& ... indices)
 
    Constructor which acquires memory from a Scratch Memory handle.
 
@@ -327,7 +330,7 @@ Constructors
 
    - Requires: ``array_layout::is_regular == true``.
 
-.. cppkokkos:function:: View( const ScratchSpace& space, const array_layout& layout)
+.. cppkokkos:function:: View::View( const ScratchSpace& space, const array_layout& layout)
 
    Constructor which acquires memory from a Scratch Memory handle.
 
@@ -337,11 +340,11 @@ Constructors
      either match the dynamic rank or the total rank. In the latter case, the extents
      corresponding to compile-time dimensions must match the View type's compile-time extents.
 
-.. cppkokkos:function:: View( const View<DT, Prop...>& rhs, Args ... args)
+.. cppkokkos:function:: View::View( const View<DT, Prop...>& rhs, Args ... args)
 
    Subview constructor. See ``subview`` function for arguments.
 
-.. cppkokkos:function:: explicit(traits::is_managed) View( const NATURAL_MDSPAN_TYPE& mds )
+.. cppkokkos:function:: explicit(traits::is_managed) View::View( const NATURAL_MDSPAN_TYPE& mds )
 
    :param mds: the mdspan to convert from.
 
@@ -353,13 +356,13 @@ Constructors
    :cpp:`NATURAL_MDSPAN_TYPE` is the :ref:`natural mdspan <api-view-natural-mdspans>` of the View. The *natural mdspan* is only available if :cpp:type:`array_layout` is one of :cppkokkos:struct:`LayoutLeft`, :cppkokkos:struct:`LayoutRight`,
    or :cpp:class:`LayoutStride`. This constructor is only available if *natural mdspan* is available.
 
-   Constructs a :cpp:class:`View` by converting from :cpp:any:`mds`. The :cpp:class:`View` will be unmanaged and constructed as if by :cpp:`View(mds.data(), array_layout_from_mapping(mds.mapping()))`
+   Constructs a :cppkokkos:class:`View` by converting from :cpp:any:`mds`. The :cppkokkos:class:`View` will be unmanaged and constructed as if by :cpp:`View(mds.data(), array_layout_from_mapping(mds.mapping()))`
 
    .. seealso:: :ref:`Natural mdspans <api-view-natural-mdspans>`
 
    .. versionadded:: 4.4.0
 
-.. cppkokkos:function:: template <class ElementType, class ExtentsType, class LayoutType, class AccessorType> explicit(SEE_BELOW) View(const mdspan<ElementType, ExtentsType, LayoutType, AccessorType>& mds)
+.. cppkokkos:function:: template <class ElementType, class ExtentsType, class LayoutType, class AccessorType> explicit(SEE_BELOW) View::View(const mdspan<ElementType, ExtentsType, LayoutType, AccessorType>& mds)
 
    :tparam ElementType: the mdspan element type
    :tparam ExtentsType: the mdspan extents
@@ -373,11 +376,11 @@ Constructors
       :cpp:`explicit(bool)` is only available on C++20 and later. When building Kokkos with C++17, this constructor will be fully implicit.
       Be aware that later upgrading to C++20 will in some cases cause compilation issues in cases where the condition is false.
 
-   Constructs a :cpp:class:`View` by converting from :cpp:any:`mds`.
-   The :cpp:class:`View`'s :ref:`natural mdspan <api-view-natural-mdspans>` must be constructible from :cpp:any:`mds`. The :cpp:class:`View` will be constructed as if by :cpp:`View(NATURAL_MDSPAN_TYPE(mds))`
+   Constructs a :cppkokkos:class:`View` by converting from :cpp:any:`mds`.
+   The :cppkokkos:class:`View`'s :ref:`natural mdspan <api-view-natural-mdspans>` must be constructible from :cpp:any:`mds`. The :cppkokkos:class:`View` will be constructed as if by :cpp:`View(NATURAL_MDSPAN_TYPE(mds))`
 
    In C++20:
-      This constructor is implicit if :cpp:any:`mds` is implicitly convertible to the *natural mdspan* of the :cpp:class:`View`.
+      This constructor is implicit if :cpp:any:`mds` is implicitly convertible to the *natural mdspan* of the :cppkokkos:class:`View`.
 
    .. versionadded:: 4.4.0
 
@@ -484,7 +487,7 @@ types have a nullary member function (i.e. callable with no argument).
 
    Returns the product of extents, i.e. the logical number of elements in the view.
 
-.. cppkokkos:function:: constexpr pointer_type data() const
+.. cppkokkos:function:: constexpr pointer_type View::data() const
 
    Return the pointer to the underlying data allocation.
    WARNING: calling any function that manipulates the behavior
@@ -517,7 +520,7 @@ Other
 
    Returns the label of the View.
 
-.. cppkokkos:function:: const bool is_assignable(const View<DT, Prop...>& rhs);
+.. cppkokkos:function:: const bool is_assignable(const View<DataType, Properties...>& rhs);
 
    Returns true if the View can be assigned to rhs.  See below for assignment rules.
 
@@ -545,9 +548,9 @@ Conversion to mdspan
    :tparam OtherLayoutPolicy: the target mdspan layout
    :tparam OtherAccessor: the target mdspan accessor
 
-   :constraints: :cpp:class:`View`\ 's :ref:`natural mdspan <api-view-natural-mdspans>` must be assignable to :cpp:`mdspan<OtherElementType, OtherExtents, OtherLayoutPolicy, OtherAccessor>`
+   :constraints: :cppkokkos:class:`View`\ 's :ref:`natural mdspan <api-view-natural-mdspans>` must be assignable to :cpp:`mdspan<OtherElementType, OtherExtents, OtherLayoutPolicy, OtherAccessor>`
 
-   :returns: an mdspan with extents and a layout converted from the :cpp:class:`View`'s *natural mdspan*.
+   :returns: an mdspan with extents and a layout converted from the :cppkokkos:class:`View`'s *natural mdspan*.
 
 .. cppkokkos:function:: template <class OtherAccessorType = Kokkos::default_accessor<typename traits::value_type>> constexpr auto to_mdspan(const OtherAccessorType& other_accessor = OtherAccessorType{})
 
@@ -555,7 +558,7 @@ Conversion to mdspan
 
    :constraints: :cpp:`typename OtherAccessorType::data_handle_type` must be assignable to :cpp:`value_type*`
 
-   :returns: :cpp:class:`View`\ 's :ref:`natural mdspan <api-view-natural-mdspans>`, but with an accessor policy constructed from :cpp:any:`other_accessor`
+   :returns: :cppkokkos:class:`View`\ 's :ref:`natural mdspan <api-view-natural-mdspans>`, but with an accessor policy constructed from :cpp:any:`other_accessor`
 
 
 NonMember Functions
@@ -633,9 +636,9 @@ Natural mdspans
 .. versionadded:: 4.4.0
 
 C++23 introduces `mdspan <https://en.cppreference.com/w/cpp/container/mdspan>`_, a non-owning multidimensional array view.
-:cpp:class:`View` is compatible with :cpp:`std::mdspan` and can be implicitly converted from and to valid mdspans.
+:cppkokkos:class:`View` is compatible with :cpp:`std::mdspan` and can be implicitly converted from and to valid mdspans.
 These conversion rules are dictated by the *natural mdspan* of a view.
-For an mdspan :cpp:`m` of type :cpp:`M` that is the *natural mdspan* of a :cpp:class:`View` :cpp:`v` of type :cpp:`V`, the following properties hold:
+For an mdspan :cpp:`m` of type :cpp:`M` that is the *natural mdspan* of a :cppkokkos:class:`View` :cpp:`v` of type :cpp:`V`, the following properties hold:
 
 #. :cpp:`M::value_type` is :cpp:`V::value_type`
 #. :cpp:`M::index_type` is :cpp:`std::size_t`.
