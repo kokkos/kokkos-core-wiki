@@ -35,10 +35,12 @@ author = 'lots of people'
 # ones.
 extensions = ["myst_parser",
               "sphinx.ext.autodoc",
+              "sphinx.ext.graphviz",
               "sphinx.ext.viewcode",
               "sphinx.ext.intersphinx",
               "sphinx_copybutton",
               "sphinx_design",
+              "sphinxcontrib.tikz",
               "cppkokkos"]
 
 # Add any paths that contain templates here, relative to this directory.
