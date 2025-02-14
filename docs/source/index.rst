@@ -87,6 +87,7 @@ Website Content
    programmingguide
    requirements
    building
+   ./integrating_kokkos_into_your_cmake_project
    keywords
    ./API/core-index
    ./API/containers-index

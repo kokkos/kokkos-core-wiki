@@ -6,31 +6,7 @@ As C++ continues to develop for C++20 and beyond, CMake is likely to provide the
 for C++.  Applications heavily leveraging Kokkos are strongly encouraged to use a CMake build system.
 
 You can either use Kokkos as an installed package (encouraged) or use Kokkos in-tree in your project.
-Modern CMake is exceedingly simple at a high-level (with the devil in the details).
-Once Kokkos is installed In your `CMakeLists.txt` simply use:
-````cmake
-find_package(Kokkos REQUIRED)
-````
-Then for every executable or library in your project:
-````cmake
-target_link_libraries(myTarget Kokkos::kokkos)
-````
-That's it! There is no checking Kokkos preprocessor, compiler, or linker flags.
-Kokkos propagates all the necessary flags to your project.
-This means not only is linking to Kokkos easy, but Kokkos itself can actually configure compiler and linker flags for *your*
-project.
-When configuring your project just set:
-````bash
-> cmake ${srcdir} \
-  -DKokkos_ROOT=${kokkos_install_prefix} \
-  -DCMAKE_CXX_COMPILER=${compiler_used_to_build_kokkos}
-````
-Note: You may need the following if using some versions of CMake (e.g. 3.12):
-````cmake
-cmake_policy(SET CMP0074 NEW)
-````
-If building in-tree, there is no `find_package`. You can use `add_subdirectory(kokkos)` with the Kokkos source and again just link with `target_link_libraries(Kokkos::kokkos)`.
-The examples in `examples/cmake_build_installed` and `examples/cmake_build_in_tree` can help get you started.
+See [Integrating Kokkos into Your Project](https://kokkos.org/kokkos-core-wiki/integrating_kokkos_into_your_cmake_project.html).
 
 ## Configuring CMake
 A very basic installation of Kokkos is done with:
