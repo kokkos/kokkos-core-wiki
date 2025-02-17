@@ -1,5 +1,5 @@
-API: Containers
-###############
+Containers API
+##############
 
 .. list-table::
    :widths: 25 75
@@ -15,13 +15,13 @@ API: Containers
      - DynamicView comment.
    * - `DynRankView <containers/DynRankView.html>`__
      - Kokkos Runtime-determined-dimension DynRankView class.
-   * - `Offset-View <containers/Offset-View.html>`__
+   * - `OffsetView <containers/Offset-View.html>`__
      - OffsetView comment.
    * - `ScatterView <containers/ScatterView.html>`__
      - ScatterView comment.
    * - `StaticCrsGraph <containers/StaticCrsGraph.html>`__
-     - StaticCrsGraph comment.
-   * - `Unordered-Map <containers/Unordered-Map.html>`__
+     - [DEPRECATED] StaticCrsGraph compressed raw storage graph
+   * - `UnorderedMap <containers/Unordered-Map.html>`__
      - UnorderedMap comment.
    * - `vector <containers/vector.html>`__
      - [DEPRECATED] std::vector compatible implementation that works with non-host memory spaces.

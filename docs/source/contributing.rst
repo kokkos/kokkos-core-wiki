@@ -7,6 +7,7 @@ Contributing
 
    templates/index
    developer-guides/index
+   testing-and-issue-tracking
 
 We are open and try to encourage contributions from external developers.
 To do so please first open an issue describing the contribution and then
@@ -27,3 +28,11 @@ Contributing Documentation
 Please see the `README <https://github.com/kokkos/kokkos-core-wiki/blob/main/README.md>`_ for general instructions on building the documentation.
 
 To make it easier to contribute API documentation, we have a page of documentation templates :doc:`here <templates/index>`
+
+Developers' Corner
+------------------
+
+* :doc:`Developer Guide  <developer-guides/index>`
+
+* :doc:`Kokkos Panning and Testing <testing-and-issue-tracking>`
+

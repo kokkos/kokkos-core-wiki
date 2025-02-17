@@ -1,5 +1,5 @@
-API: Algorithms
-###############
+Algorithms API
+##############
 
 .. toctree::
    :maxdepth: 1

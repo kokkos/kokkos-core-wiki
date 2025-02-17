@@ -1,5 +1,5 @@
 Quick Start
-============
+===========
 
 This guide is intended to jump start new Kokkos users (and beginners, in particular).
 
@@ -124,11 +124,11 @@ build system:
 
 .. code-block:: sh
 
-  MyProject> cmake -B build
+  MyProject> cmake -B builddir
   -- The C compiler identification is GNU 10.2.1
   -- The CXX compiler identification is GNU 10.2.1
   ...
-  -- Build files have been written to: .../MyProject/build
+  -- Build files have been written to: .../MyProject/builddir
 
 
 .. note::
@@ -137,14 +137,14 @@ build system:
   ``-DKokkos_ENABLE_CUDA=ON`` argument to the cmake command above. For an AMD
   or an Intel GPU, you would use ``-DKokkos_ENABLE_HIP=ON`` or
   ``-DKokkos_ENABLE_SYCL=ON`` respectively. For a list of options and variables
-  available at configuration time, see :doc:`keywords`.
+  available at configuration time, see :doc:`configuration-guide`.
 
 
 Then invoke that build system to actually compile/link the project:
 
 .. code-block:: sh
 
-  MyProject> cmake --build build
+  MyProject> cmake --build builddir
   Scanning dependencies of target ...
   ...
   [100%] Built target HelloKokkos
@@ -153,9 +153,9 @@ Finally try to use the newly built ``HelloKokkos``:
 
 .. code-block:: sh
 
-  MyProject> cd build
+  MyProject> cd builddir
 
-  MyProject/build> HelloKokkos
+  MyProject/builddir> HelloKokkos
   Goodbye World
 
 .. note::

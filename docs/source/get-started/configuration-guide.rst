@@ -1,4 +1,4 @@
-.. include:: mydefs.rst
+.. include:: ../mydefs.rst
 
 CMake Keywords
 ##############
@@ -186,6 +186,7 @@ Debugging
       * Debug check on dual views
       * ``OFF``
 
+.. _keywords_enable_backend_specific_options:
 
 Backend-specific options
 ------------------------
@@ -276,7 +277,7 @@ should not be setting these.
 
 .. _keywords_tpls:
 
-Third-party Libraries (TPLs)
+Third-Party Libraries (TPLs)
 ============================
 
 The following options control enabling TPLs:

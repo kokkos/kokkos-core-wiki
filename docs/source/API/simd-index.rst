@@ -1,5 +1,5 @@
-API: SIMD
-###############
+SIMD API
+########
 
 .. toctree::
    :maxdepth: 1
