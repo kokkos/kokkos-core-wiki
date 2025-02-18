@@ -209,11 +209,11 @@ Description
 
     .. cppkokkos:function:: const t_host& view_host() const;
 
-       * Return the host-accessible View. With deprecated code enabled, return the View by value.
+       *  Return the host-accessible View. Returns the View by value with `Kokkos_ENABLE_DEPRECATED_CODE_4=ON`
 
     .. cppkokkos:function:: const t_dev& view_device() const;
 
-       * Return the View on the device. With deprecated code enabled, return the View by value.
+       * Return the View on the device. Returns the View by value with `Kokkos_ENABLE_DEPRECATED_CODE_4=ON`.
 
     .. cppkokkos:function:: template <class Device> void sync(const typename Impl::enable_if<(std::is_same<typename traits::data_type, typename traits::non_const_data_type>::value) || (std::is_same<Device, int>::value), int>::type& = 0);
 
