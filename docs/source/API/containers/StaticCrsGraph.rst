@@ -1,8 +1,10 @@
 
-``StaticCrsGraph``
-==================
+``StaticCrsGraph`` [DEPRECATED]
+===============================
 
-Header file: ``<Kokkos_StaticCrsGraph.hpp>``
+Header file: ``<Kokkos_StaticCrsGraph.hpp>`` (deprecated since Kokkos 4.5)
+
+``StaticCrsGraph`` was moved to KokkosKernels.
 
 The StaticCrsGraph is a Compressed row storage array with the row map, the column indices and the non-zero entries stored in 3 different Kokkos::Views.  Appropriate types and functions are provided to simplify manipulation and access to CRS data on either a host or device.
 

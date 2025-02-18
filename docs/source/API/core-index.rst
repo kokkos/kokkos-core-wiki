@@ -1,5 +1,5 @@
-API: Core
-#########
+Core API
+########
 
 .. list-table::
    :widths: 20 80

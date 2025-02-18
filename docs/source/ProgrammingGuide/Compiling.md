@@ -127,7 +127,7 @@ There are numerous device backends, options, and architecture-specific optimizat
  -DCMAKE_INSTALL_PREFIX=${my_install_folder} \
  -DKokkos_ENABLE_OPENMP=On
 ```
-which activates the OpenMP backend. All the options controlling device backends, options, architectures, and third-party libraries (TPLs) are given in [CMake Keywords](../keywords).
+which activates the OpenMP backend. All the options controlling device backends, options, architectures, and third-party libraries (TPLs) are given in the [Configuration Guide](../get-started/configuration-guide).
 
 
 ### Spack
@@ -192,7 +192,7 @@ endif()
 
 ### Kokkos CMake Keyword Listing
 
-Please see the [documentation page with all keywords](../keywords).
+Please see the [documentation page with all keywords](../get-started/configuration-guide).
 
 ## 4.3 Using Trilinos' CMake build system
 
@@ -200,7 +200,7 @@ The Trilinos project (see [`trilinos.org`](https://trilinos.org) and github for 
 
 Trilinos' build system uses CMake. Thus, to build Kokkos as part of Trilinos, you must first install CMake (version `3.17` or newer). To enable Kokkos when building Trilinos, set the CMake option `Trilinos_ENABLE_Kokkos`. Trilinos' build system lets packages express dependencies on other packages or external libraries. If you enable any Trilinos package (e.g., Tpetra) that has a required dependency on Kokkos, Trilinos will enable Kokkos automatically. Configuration macros are automatically inferred from Trilinos settings. For example, if the CMake option `Trilinos_ENABLE_OpenMP` is `ON`, Trilinos will define the macro `Kokkos_ENABLE_OPENMP`. Trilinos' build system will autogenerate the previously mentioned `KokkosCore_config.h` file that contains those macros.
 
-Trilinos' CMake build system utilizes Kokkos' build system to set compiler flags, compiler options, architectures, etc. CMake variables `CMAKE_CXX_COMPILER`, `CMAKE_C_COMPILER`, and `CMAKE_FORTRAN_COMPILER` are used to specify the compiler. To configure Trilinos for various architectures, with Kokkos enabled, the CMake variable `Kokkos_ARCH_<ArchCode>` should be set, matching ArchCode to the appropriate architecture as specified in [Architecture Keywords](../keywords).
+Trilinos' CMake build system utilizes Kokkos' build system to set compiler flags, compiler options, architectures, etc. CMake variables `CMAKE_CXX_COMPILER`, `CMAKE_C_COMPILER`, and `CMAKE_FORTRAN_COMPILER` are used to specify the compiler. To configure Trilinos for various architectures, with Kokkos enabled, the CMake variable `Kokkos_ARCH_<ArchCode>` should be set, matching ArchCode to the appropriate architecture as specified in [Architecture Keywords](../get-started/configuration-guide).
 
 For example, `Kokkos_ARCH_HSW` sets the architecture variables for a machine with Intel Haswell CPUs. Also, when setting the `Kokkos_ARCH_<ArchCode>` variable it is not necessary to pass required architecture-specific flags to CMake, for example via the `CMAKE_CXX_FLAGS` variable.
 

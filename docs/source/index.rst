@@ -83,24 +83,13 @@ Website Content
 .. toctree::
    :maxdepth: 1
 
-   quick_start
+   get-started
    programmingguide
-   requirements
-   building
-   keywords
-   ./API/core-index
-   ./API/containers-index
-   ./API/algorithms-index
-   ./API/simd-index
-   ./API/alphabetical
-   deprecation_page
-   known-issues
-   usecases
-   testing-and-issue-tracking
-   Tutorials <https://github.com/kokkos/kokkos-tutorials>
-   videolectures
-   GitHub Repo <https://github.com/kokkos/kokkos>
+   api-references
+   tutorials-and-examples
    contributing
+   GitHub Repo <https://github.com/kokkos/kokkos>
+   known-issues
    faq
    citation
    license
