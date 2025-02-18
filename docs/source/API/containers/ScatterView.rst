@@ -8,7 +8,7 @@ Header File: ``<Kokkos_ScatterView.hpp>``
 
 .. warning::
 
-   Currently ``ScatterView`` is still in the namespace ``Kokkos::Experimental``
+   ``ScatterView`` is still in the namespace ``Kokkos::Experimental``
 
 
 .. _parallelReduce: ../core/parallel-dispatch/parallel_reduce.html
@@ -30,7 +30,7 @@ Header File: ``<Kokkos_ScatterView.hpp>``
 Usage
 -----
 
-A Kokkos ScatterView serves as an interface for a standard Kokkos::|View|_ and allow access to it either via Atomic or Data Replication based scatter algorithms, choosing the strategy that should be the fastest for the ScatterView Execution Space.
+A Kokkos ScatterView serves as an interface for a standard Kokkos::|View|_ implementing a scatter-add pattern either via atomics or data replication.
 
 The best option to create a ScatterView is to make a call to the free function Kokkos::Experimental::|create_scatter_view|_.
 
