@@ -32,8 +32,6 @@ Usage
 
 A Kokkos ScatterView serves as an interface for a standard Kokkos::|View|_ implementing a scatter-add pattern either via atomics or data replication.
 
-The best option to create a ScatterView is to make a call to the free function Kokkos::Experimental::|create_scatter_view|_.
-
 Construction of a ScatterView can be expensive, so you should try to reuse the same one if possible, in which case, you should call |reset|_ between uses.
 
 ScatterView can not be addressed directly: each thread inside a parallel region needs to make a call to |access|_ and access the underlying View through the return value of |access|_.
