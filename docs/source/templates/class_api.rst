@@ -24,7 +24,7 @@
     :language: cppkokkos
 
 ..
-  The (pulic header) file the user will include in their code
+  The (public header) file the user will include in their code
 
 Header File: ``Kokkos_Core.hpp``
 

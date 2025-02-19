@@ -66,7 +66,7 @@ class ParticleInteractions {
   }
 };
 ```
-If `this` is not dereferencable in the scope of the execution space, the execution will fail.
+If `this` is not dereferenceable in the scope of the execution space, the execution will fail.
 
 In C++17 the situation can be rectified by using the `[*this]` capture clause. In that case,
 the whole class instance will be captured and copied to the accelerator as part of the dispatch.

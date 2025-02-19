@@ -56,7 +56,7 @@ for (int p = 0; p < P; ++p)
 
 ### Initial implementation - `RangePolicy`
 
-The most straightforward way to parallize the serial code above is to convert the outer `for` loop over cells with the sequential iteration pattern into a parallel for loop using a [`RangePolicy`](../API/core/policies/RangePolicy)
+The most straightforward way to parallelize the serial code above is to convert the outer `for` loop over cells with the sequential iteration pattern into a parallel for loop using a [`RangePolicy`](../API/core/policies/RangePolicy)
 
 ``` c++
 

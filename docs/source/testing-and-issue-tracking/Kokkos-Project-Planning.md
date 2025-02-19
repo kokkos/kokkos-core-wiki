@@ -75,7 +75,7 @@ or whether it should live as a separate library in its own repository under the 
 
 #### Activities to support this requirement:
 
-- monitor Slack chanel and GitHub issues for new feature requests
+- monitor Slack channel and GitHub issues for new feature requests
 - participate in Hackathons organized by the HPC community
 - organize bi-annual Usergroup meeting
 - discuss proposed features at developer meeting for inclusion into roadmap

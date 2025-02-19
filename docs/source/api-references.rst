@@ -19,7 +19,7 @@ The fundamental abstractions for execution (``parallel_for``,
 
 :doc:`API/algorithms-index`
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Utility classes for pseudo-random number generation, sorting algorthms,
+Utility classes for pseudo-random number generation, sorting algorithms,
 STL-like parallel algorithms.
 
 :doc:`API/containers-index`
