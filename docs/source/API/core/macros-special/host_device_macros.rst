@@ -19,7 +19,7 @@ Usage:
     auto l = KOKKOS_CLASS_LAMBDA(int i) { ... };
 
 These macros deal with the management of split compilation for device and host code.
-They fullfill the same purpose as the ``__host__ __device__`` markup in CUDA and HIP.
+They fulfill the same purpose as the ``__host__ __device__`` markup in CUDA and HIP.
 Generally only functions marked with one of these macros can be used inside of parallel
 Kokkos code - i.e. all code executed in parallel algorithms must be marked up by one
 of these macros.

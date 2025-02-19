@@ -1,15 +1,25 @@
 [default]
 # Don't check text that matches the following regexes'
-extend-ignore-re = []
+extend-ignore-re = [
+  "shepard_",
+  "countr_",
+  "nd_array",
+  "ND_ARRAY",
+]
 
 [default.extend-identifiers]
 # Don't correct these whole identifiers (word-groups)
+HPE = "HPE"
+HSA_XNACK = "HSA_XNACK"
+HAAPs = "HAAPs"
+Shepard = "Shepard"
+OT = "OT"
 
 [default.extend-words]
 # Don't correct these word (parts)
-countr = "countr"
-OT = "OT"
 
 # Don't check the following files
 [files]
-extend-exclude = [] 
+extend-exclude = [
+  "cppkokkos.py"
+]

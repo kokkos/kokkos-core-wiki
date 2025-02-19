@@ -19,7 +19,7 @@ Want to try Kokkos right away?  Check it out on `Compiler Explorer
 :doc:`Quick Start <get-started/quick-start>`
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 This guide provides the minimal first-steps instructions to get started with a
-CMake project and start writting Kokkos code.
+CMake project and start writing Kokkos code.
 
 :doc:`Integrating Kokkos into Your Project <get-started/integrating-kokkos-into-your-cmake-project>`
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

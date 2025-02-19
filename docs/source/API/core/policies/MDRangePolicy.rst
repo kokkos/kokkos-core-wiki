@@ -29,8 +29,8 @@ Interface
 Parameters
 ----------
 
-General Template Aguments
-~~~~~~~~~~~~~~~~~~~~~~~~~
+General Template Arguments
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Valid template arguments for ``MDRangePolicy`` are described `here <../Execution-Policies.html#common-arguments-for-all-execution-policies>`_
 

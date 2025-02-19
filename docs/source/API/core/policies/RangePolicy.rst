@@ -84,8 +84,8 @@ Synopsis
 Parameters
 ----------
 
-General Template Aguments
-~~~~~~~~~~~~~~~~~~~~~~~~~
+General Template Arguments
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Valid template arguments for ``RangePolicy`` are described `here <../Execution-Policies.html#common-arguments-for-all-execution-policies>`_
 

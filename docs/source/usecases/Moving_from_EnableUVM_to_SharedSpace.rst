@@ -22,7 +22,7 @@ The accesses in ``parallel_for``, ``parallel_reduce``, or ``parallel_scan`` do n
 The alternative
 ---------------
 
-We introduced a new alias named |SharedSpace|_ in Kokkos 4.0. This always points to memory that is accessible by every |ExecutionSpace|_ and is migrated without user interaction to the acessing ``ExecutionSpace`` on demand. After migration the memory is accessed locally.
+We introduced a new alias named |SharedSpace|_ in Kokkos 4.0. This always points to memory that is accessible by every |ExecutionSpace|_ and is migrated without user interaction to the accessing ``ExecutionSpace`` on demand. After migration the memory is accessed locally.
 Using the alias e.g. in ``Views`` is expressive and thus easier to read. Furthermore, it is portable to every backend that can automatically migrate memory between ``ExecutionSpaces``.
 Furthermore, we introduced the alias |SharedHostPinnedSpace|_ which points to memory that is accessible by all enabled ``ExecutionSpaces`` but always resides in the memory of the host.
 

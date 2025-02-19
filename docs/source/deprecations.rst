@@ -72,7 +72,7 @@ Deprecated in Kokkos 4.4
 
 * ``ChunkSize::ChunkSize(int value)``
    * replacement: ``explicit ChunkSize::ChunkSize(int value)``
-   * ``ChunkSize`` ahould be constructed explicitly
+   * ``ChunkSize`` should be constructed explicitly
 
 * ``pair<T, void>``
    * replacement: none
@@ -135,7 +135,7 @@ Deprecated in Kokkos 4.2
     * non-standard behavior, doesn't work well with Kokkos concepts 
 
 * ``HostSpace::HostSpace(AllocationMechanism)``
-    * replacement: ``HostSpace::HostSpoace()``
+    * replacement: ``HostSpace::HostSpace()``
     * ``AllocationMechanism`` is unused, ``operator new`` with alignment is used unconditionally
 
 * SIMD math functions in the ``Kokkos::Experimental`` namespace
