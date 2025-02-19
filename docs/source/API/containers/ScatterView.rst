@@ -6,14 +6,75 @@
 
 Header File: ``<Kokkos_ScatterView.hpp>``
 
+.. warning::
+
+   ``ScatterView`` is still in the namespace ``Kokkos::Experimental``
+
+
 .. _parallelReduce: ../core/parallel-dispatch/parallel_reduce.html
 
 .. |parallelReduce| replace:: :cpp:func:`parallel_reduce`
 
+.. _View: ../core/view/view.html
+
+.. |View| replace:: ``View``
+
+.. |reset| replace:: ``reset()``
+
+.. |access| replace:: ``access()``
+
+.. |contribute| replace:: ``contribute()``
+
+.. |create_scatter_view| replace:: ``create_scatter_view()``
+
+Usage
+-----
+
+A Kokkos ScatterView serves as an interface for a standard Kokkos::|View|_ implementing a scatter-add pattern either via atomics or data replication.
+
+Construction of a ScatterView can be expensive, so you should try to reuse the same one if possible, in which case, you should call |reset|_ between uses.
+
+ScatterView can not be addressed directly: each thread inside a parallel region needs to make a call to |access|_ and access the underlying View through the return value of |access|_.
+
+Following the parallel region, a call to the free function Kokkos::Experimental::|contribute|_ should be made to perform the final reduction.
+
+Interface
+---------
+.. code-block:: cpp
+
+    template <typename DataType [, typename Layout [, typename ExecSpace [, typename Operation [, typename Duplication [, typename Contribution]]]]]>
+    class ScatterView
+
+Parameters
+~~~~~~~~~~
+Template parameters other than ``DataType`` are optional, but if one is specified, preceding ones must also be specified.
+That means for example that ``Operation`` can be omitted but if it is specified, ``Layout`` and ``ExecSpace`` must also be specified.
+
+* ``DataType``, ``Layout`` and ``ExecSpace`` need to be the same types as the one from the Kokkos::View this ScatterView is interfacing.
+
+* ``Operation``:
+  Can take the values:
+
+  - ``Kokkos::Experimental::ScatterSum``: performs a Sum. It is the default value.
+
+  - ``Kokkos::Experimental::ScatterProd``: performs a Multiplication.
+
+  - ``Kokkos::Experimental::ScatterMin``: takes the min.
+
+  - ``Kokkos::Experimental::ScatterMax``: takes the max.
+
+* ``Duplication``:
+  Whether to duplicate the grid or not; defaults to ``Kokkos::Experimental::ScatterDuplicated``, other option is ``Kokkos::Experimental::ScatterNonDuplicated``.
+
+* ``Contribution``:
+  Whether to contribute to use atomics; defaults to ``Kokkos::Experimental::ScatterAtomics``, other option is ``Kokkoss::Experimental::ScatterNonAtomic``.
+
+Creating a ScatterView with non default ``Operation``, ``Duplication`` or ``Contribution`` using this interface can become complicated, because you need to specify the exact type for ``DataType``, ``Layout`` and ``ExecSpace``. This is why it is advised that you instead use the function Kokkos::Experimental::|create_scatter_view|_.
+
 Description
 -----------
 
-.. cppkokkos:class:: template <typename DataType, int Op, typename ExecSpace, typename Layout, int contribution> ScatterView
+.. cppkokkos:class:: template <typename DataType, typename Layout, typename ExecSpace, typename Op, typename Duplication, typename Contribution> ScatterView
 
     .. rubric:: Public Member Variables
 
@@ -67,6 +128,8 @@ Description
 
         :return: true if the ``internal_view`` points to a valid memory location. This function works for both managed and unmanaged views. With the unmanaged view, there is no guarantee that referenced address is valid, only that it is a non-null pointer.
 
+    .. _access:
+
     .. cppkokkos:function:: access() const
 
        use within a kernel to return a ``ScatterAccess`` member; this member accumulates a given thread's contribution to the reduction.
@@ -78,6 +141,8 @@ Description
     .. cppkokkos:function:: contribute_into(View<DT, RP...> const& dest) const
 
        contribute ``ScatterView`` array's results into the input View ``dest``
+
+    .. _reset:
 
     .. cppkokkos:function:: reset()
 
@@ -104,6 +169,15 @@ Description
 
 .. rubric:: Free Functions
 
+.. _create_scatter_view:
+
+.. cppkokkos:function:: template <typename Operation, typename Duplication, typename Contribution> create_scatter_view(const View<DT1, VP...>& view)
+
+   create a new ScatterView interfacing the View ``view``.
+   Default value for ``Operation`` is ``Kokkos::Experimental::ScatterSum``, ``Duplication`` and ``Contribution`` are chosen to make the ScatterView as efficient as possible when running on its ``ExecSpace``.
+
+.. _contribute:
+
 .. cppkokkos:function:: contribute(View<DT1, VP...>& dest, Kokkos::Experimental::ScatterView<DT2, LY, ES, OP, CT, DP> const& src)
 
    convenience function to perform final reduction of ScatterView
@@ -115,15 +189,23 @@ Example
 
 .. code-block:: cpp
 
+
+    #include <Kokkos_Core.hpp>
+    #include <Kokkos_ScatterView.hpp>
+
     KOKKOS_INLINE_FUNCTION int foo(int i) { return i; }
     KOKKOS_INLINE_FUNCTION double bar(int i) { return i*i; }
 
-    Kokkos::View<double*> results("results", 1);
-    Kokkos::Experimental::ScatterView<double*> scatter(results);
-    Kokkos::parallel_for(1, KOKKOS_LAMBDA(int input_i) {
-        auto access = scatter.access();
-        auto result_i = foo(input_i);
-        auto contribution = bar(input_i);
-        access(result_i) += contribution;
-    });
-    Kokkos::Experimental::contribute(results, scatter);
+    int main (int argc, char* argv[]) {
+        Kokkos::ScopeGuard guard(argc, argv);
+
+        Kokkos::View<double*> results("results", 1);
+        auto scatter = Kokkos::Experimental::create_scatter_view(results);
+        Kokkos::parallel_for(1, KOKKOS_LAMBDA(int input_i) {
+            auto access = scatter.access();
+            auto result_i = foo(input_i);
+            auto contribution = bar(input_i);
+            access(result_i) += contribution;
+        });
+        Kokkos::Experimental::contribute(results, scatter);
+    }
