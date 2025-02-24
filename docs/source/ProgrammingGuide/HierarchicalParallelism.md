@@ -78,7 +78,7 @@ parallel_for (policy, KOKKOS_LAMBDA (member_type team_member) {
             team_member.team_rank ();
     // Calculate the sum of the global thread ids of this team
     int team_sum = k;
-    team_member.team_reduce(Sum<int>(team_sum));
+    team_member.team_reduce(Sum<int, typename ExecutionSpace::memory_space>(team_sum));
     // Atomically add the value to a global value
     a() += team_sum;
   });
