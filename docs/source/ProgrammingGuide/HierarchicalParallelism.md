@@ -64,6 +64,8 @@ Kokkos::TeamPolicy<SomeTag, ExecutionSpace>
 The team policy's `member_type` provides the necessary functionality to use teams within a parallel kernel. It allows access to thread identifiers such as the league rank and size, and the team rank and size. It also provides team-synchronous actions such as team barriers, reductions and scans.
 
 ```c++
+using Kokkos::atomic_add;
+using Kokkos::PerTeam;
 using Kokkos::Sum;
 using Kokkos::TeamPolicy;
 using Kokkos::parallel_for;
@@ -76,11 +78,15 @@ parallel_for (policy, KOKKOS_LAMBDA (member_type team_member) {
     // Calculate a global thread id
     int k = team_member.league_rank () * team_member.team_size () +
             team_member.team_rank ();
+
     // Calculate the sum of the global thread ids of this team
     int team_sum = k;
     team_member.team_reduce(Sum<int, typename ExecutionSpace::memory_space>(team_sum));
-    // Atomically add the value to a global value
-    a() += team_sum;
+
+    // Atomically add the computed sum to a global value
+    Kokkos::single (PerTeam (team_member), [=] () {
+      atomic_add(&global_value(), team_sum);
+    });
   });
 ```
 
