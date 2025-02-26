@@ -20,7 +20,8 @@ Other package managers
 
 Spack is a popular package manager for HPC.  Spack comes with installation recipes for Kokkos.
 
-https://packages.spack.io/package.html?name=kokkos summarizes the available versions of Kokkos and their options.
+The `Kokkos recipe webpage <https://packages.spack.io/package.html?name=kokkos>`_ summarizes the available versions of Kokkos
+and their options.
 
 Most of the time, Spack Kokkos' variants follow the same options as the Kokkos `CMake options <./configuration-guide.html>`_.
 List of available variants can be found by running
@@ -29,8 +30,11 @@ List of available variants can be found by running
 
     spack info kokkos
 
+
+Note that CPU micro-architectures are automatically inherited from Spack's configuration.
+
 Installing Kokkos with Spack
-+++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++
 
 To install Kokkos with Spack with default options, run:
 
@@ -50,8 +54,17 @@ Note that the `cuda_arch` option is specific to the target GPU architecture.  He
 to the NVIDIA Ampere architecture. With Spack, the architecture must be specified explicitly (no auto-detection).
 
 
+Using the installed Kokkos can simply be done by loading the Kokkos module:
+
+.. code-block::
+
+    spack load kokkos
+
+
+This will inject the Kokkos environment into your shell session.
+
 Packaging your own Kokkos dependent project with Spack
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 Let's say you have a project `Foo` that depends on `Kokkos`. You can package your project with Spack and include `Kokkos` as a dependency.
 
@@ -81,3 +94,12 @@ Here is an example of a `package.py` file that includes Kokkos as a dependency:
             # It might be nvcc_wrapper
             args.append(self.define("CMAKE_CXX_COMPILER", self["kokkos"].kokkos_cxx))
             return args
+
+
+For more complete examples, you can look at already existing recipes in the *Required by* section of
+`Kokkos Spack recipe <https://packages.spack.io/package.html?name=kokkos>`_ or by running:
+
+.. code-block::
+
+    spack dependents kokkos
+
