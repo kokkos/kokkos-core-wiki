@@ -47,6 +47,8 @@ Notes
 * The mathematical constants are available in ``Kokkos::Experimental::`` since Kokkos 3.6
 * They were "promoted" to the ``Kokkos::numbers`` namespace in 4.0 and removed from ``Kokkos::Experimental::`` in 4.3
 * Passing mathematical constants by reference or taking their address in device code is not supported by some toolchains and hence not portable.  (See |KnownIssues|_)
+* Support for quadruple precision floating-point ``__float128`` can be enabled
+  via ``-DKokkos_ENABLE_LIBQUADMATH=ON``.
 
 ------------
 
