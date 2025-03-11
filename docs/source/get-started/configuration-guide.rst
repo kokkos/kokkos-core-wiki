@@ -301,7 +301,7 @@ The following options control enabling TPLs:
       * ``ON``
       *
     * * ``Kokkos_ENABLE_LIBQUADMATH``
-      * Whether to enable support for 128-bit floating-point types via the GCC Quad-Precision Math Library 
+      * Whether to enable support for 128-bit floating-point types via GCC's Quad-Precision Math Library 
       * ``OFF``
       *
     * * ``Kokkos_ENABLE_ONEDPL``
