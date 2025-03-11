@@ -115,3 +115,5 @@ Kokkos::parallel_reduce( "MinLocReduce", Kokkos::TeamPolicy<>(N,AUTO),
 printf("Min %lf at (%i, %i)\n",minmaxloc.min_val, minmaxloc.min_loc.first, minmaxloc.min_loc.second);
 printf("Max %lf at (%i, %i)\n",minmaxloc.max_val, minmaxloc.max_loc.first, minmaxloc.max_loc.second);
 ```
+
+Note that when using the [`TeamVectorMDRange`](../API/core/policies/ThreadVectorMDRange), the [`TeamThreadMDRange`](../API/core/policies/TeamThreadMDRange), or the [`ThreadVectorMDRange`](../API/core/policies/ThreadVectorMDRange) execution policy, only a scalar value may be passed, for which the reduction is limited to a sum.
