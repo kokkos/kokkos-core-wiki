@@ -31,7 +31,11 @@ List of available variants can be found by running
     spack info kokkos
 
 
-Note that CPU micro-architectures are automatically inherited from Spack's configuration.
+When using Spack, Kokkos hardware autodetection is disabled. That means that the user always has to manually specify the 
+architecture. However, for CPU, Spack already specify the CPU micro-architecture, so it is not needed to specify it again.
+For GPU, no such mecanism exists in Spack and the user always need to specify the correct architecture, using a dedicated
+backend keyword (see next section).
+
 
 Installing Kokkos with Spack
 ++++++++++++++++++++++++++++
@@ -54,7 +58,29 @@ Note that the `cuda_arch` option is specific to the target GPU architecture.  He
 to the NVIDIA Ampere architecture. With Spack, the architecture must be specified explicitly (no auto-detection).
 
 
-Using the installed Kokkos can simply be done by loading the Kokkos module:
+For AMD GPU, the traditional Spack's keyword is `rocm` instead of `hip` in Kokkos' CMake. So to install Kokkos with the HIP backend enable, run:
+
+.. code-block::
+
+    spack install kokkos +rocm amdgpu_target=gfx942
+
+
+Note that the `amdgpu_target` option is specific to the target GPU architecture.
+With Spack, the architecture must be specified explicitly (no auto-detection).
+
+
+For Intel GPU, using the SYCL backend, run:
+
+.. code-block::
+
+    spack spec kokkos +sycl intel_gpu_arch=intel_pvc
+
+
+Note that the `intel_gpu_arch` option is specific to the target GPU architecture.
+With Spack, the architecture must be specified explicitly (no auto-detection).
+
+
+To use the installed Kokkos, you can simply load the Kokkos module:
 
 .. code-block::
 
