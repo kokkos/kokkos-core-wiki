@@ -550,10 +550,16 @@ Kokkos will attempt to autodetect the architecture flag at configuration time.
       - Models
       - Notes
 
+    * * ``Kokkos_ARCH_BLACKWELL120``
+      * Blackwell
+      * 12.0
+      * RTX 5080
+      * (since Kokkos 4.7)
+
     * * ``Kokkos_ARCH_BLACKWELL100``
       * Blackwell
       * 10.0
-      * B200, RTX 5080
+      * B200, B100
       * (since Kokkos 4.7)
 
     * * ``Kokkos_ARCH_HOPPER90``
