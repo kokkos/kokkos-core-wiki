@@ -47,15 +47,15 @@ To install Kokkos with Spack with default options, run:
     spack install kokkos
 
 
-To install Kokkos with Cuda backend enabled, run:
+To install Kokkos with CUDA backend enabled, run:
 
 .. code-block::
 
-    spack install kokkos +cuda cuda_arch=86
+    spack install kokkos +cuda cuda_arch=90
 
 
-Note that the `cuda_arch` option is specific to the target GPU architecture.  Here, the `cuda_arch` value `86` corresponds
-to the NVIDIA Ampere architecture. With Spack, the architecture must be specified explicitly (no auto-detection).
+Note that the `cuda_arch` option is specific to the target GPU architecture.  Here, the `cuda_arch` value `90` corresponds
+to the NVIDIA Hopper architecture. With Spack, the architecture must be specified explicitly (no auto-detection).
 
 
 For AMD GPU, the traditional Spack's keyword is `rocm` instead of `hip` in Kokkos' CMake. So to install Kokkos with the HIP backend enable, run:
@@ -98,8 +98,7 @@ You have to create a recipe that is contained in a file named `package.py` in th
 You can package as usual with Spack (for example, you can follow the `packaging tutorial <https://spack-tutorial.readthedocs.io/en/latest/tutorial_packaging.html>`_),
 but you have to take into account that for certain backends, you might need to specify the compiler to use.
 
-The compiler might be a wrapper, like `nvcc_wrapper` for CUDA. It is exported by the Kokkos package as the `kokkos_cxx` attribute
-(Currently only available on the develop branch of Spack).
+The compiler might be a wrapper, like `nvcc_wrapper` for CUDA. It is exported by the Kokkos package as the `kokkos_cxx` attribute.
 
 Here is an example of a `package.py` file that includes Kokkos as a dependency:
 
