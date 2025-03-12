@@ -79,14 +79,12 @@ Here is an example of a `package.py` file that includes Kokkos as a dependency:
 
 .. code-block:: python
 
-    from spack import *
+    from spack.package import *
 
     class Foo(CMakePackage):
-        homepage = "Foo"
+        # Usual description of a Spack package
 
-        version('1.0', git='foo.git', tag='v1.0')
-
-        depends_on('kokkos')
+        depends_on("kokkos")
 
         def cmake_args(self):
             args = []
