@@ -87,6 +87,8 @@ and ``MemoryTraits`` are specified, ``MemorySpace`` must come before ``MemoryTra
 
   - ``Restrict``: There is no aliasing of the view by other data structures in the current scope.
 
+ Example usage: ``Kokkos::MemoryTraits<Kokkos::Unmanaged | Kokkos::RandomAccess>``
+
 Public Class Members
 --------------------
 
