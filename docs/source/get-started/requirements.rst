@@ -44,11 +44,11 @@ Kokkos 4.x
 
     * * IntelLLVM (CPU)
       * 2021.1.1
-      * 2023.0.0
+      * 2023.2.4
 
-    * * IntelLLVM (SYCL) (experimental)
-      * 2022.0.0 
+    * * IntelLLVM (SYCL)
       * 2023.0.0
+      * 2024.2.1 2025.0.0
 
     * * NVCC 
       * 11.0
