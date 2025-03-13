@@ -54,13 +54,13 @@ Where expression objects are only constructed by calling the non-member method `
 int main(int argc, char* argv[]) {
   Kokkos::initialize(argc,argv);
   {
-  using simd_type = Kokkos::Experimental::simd<double>;
-  // the first value in vector a will be negative after this
-  simd_type a([] (std::size_t i) { return 1.0 * i - 1.0; });
-  // we can use where expressions to set negative values to 0.0
-  where(a < 0.0, a) = 0.0;
-  // now it might be safer to call a function with domain limitations
-  auto b = Kokkos::sqrt(a);
+    using simd_type = Kokkos::Experimental::simd<double>;
+    // the first value in vector a will be negative after this
+    simd_type a([] (std::size_t i) { return 1.0 * i - 1.0; });
+    // we can use where expressions to set negative values to 0.0
+    where(a < 0.0, a) = 0.0;
+    // now it might be safer to call a function with domain limitations
+    auto b = Kokkos::sqrt(a);
   }
   Kokkos::finalize();
 }
