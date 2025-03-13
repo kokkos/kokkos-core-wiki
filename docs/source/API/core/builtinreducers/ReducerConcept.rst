@@ -134,6 +134,8 @@ Kokkos provides a number of built-in reducers that automatically work with the i
 * `Kokkos::Prod <Prod.html>`_
 * `Kokkos::Sum <Sum.html>`_
 
+Note that when using the [`TeamVectorMDRange`](../policies/ThreadVectorMDRange), the [`TeamThreadMDRange`](../policies/TeamThreadMDRange), or the [`ThreadVectorMDRange`](../policies/ThreadVectorMDRange) execution policy, built-in reducers cannot be used and the reduction is limited to a sum.
+
 Examples
 --------
 
