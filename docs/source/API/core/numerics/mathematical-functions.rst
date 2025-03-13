@@ -361,6 +361,12 @@ See below the list of common mathematical functions supported. We refer the read
 
 ------------
 
+**Other math functions not provided by the C++ standard library**
+
+``rsqrt(x)`` reciprocal square root (i.e. computes :math:`\frac{1}{\sqrt(x)}`) (since Kokkos 4.1)
+
+------------
+
 Notes
 -----
 
