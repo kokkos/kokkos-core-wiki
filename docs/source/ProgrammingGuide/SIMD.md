@@ -41,20 +41,19 @@ Here is one way to convert such a loop to use Kokkos SIMD types:
 ```c++
 #include <Kokkos_SIMD.hpp>
 
-using simd_type = Kokkos::Experimental::native_simd<double>;
-using tag_type = Kokkos::Experimental::element_aligned_tag;
+using simd_type = Kokkos::Experimental::simd<double>;
 constexpr int width = int(simd_type::size());
 assert(n % width == 0);
 for (int i = 0; i < n; i += width) {
-  simd_type sx(x + i, tag_type());
-  simd_type sy(y + i, tag_type());
-  simd_type sz(z + i, tag_type());
+  simd_type sx(x + i, Kokkos::Experimental::simd_flag_default);
+  simd_type sy(y + i, Kokkos::Experimental::simd_flag_default);
+  simd_type sz(z + i, Kokkos::Experimental::simd_flag_default);
   simd_type sr = Kokkos::sqrt(sx * sx + sy * sy + sz * sz);
-  sr.copy_to(r + i, tag_type());
+  sr.copy_to(r + i, Kokkos::Experimental::simd_flag_default);
 }
 ```
 
-`Kokkos::Experimental::native_simd<double>` is the basic SIMD type for a vector register
+`Kokkos::Experimental::simd<double>` is the basic SIMD type for a vector register
 containing values of 64-bit floating-point type.
 Constructing one given a pointer (and alignment tag) will execute a vectorized load instruction,
 and `copy_to` will generate a vectorized store instruction.
@@ -83,7 +82,7 @@ There are at least three major approaches to dealing with this issue in general:
    ```c++
    #include <Kokkos_SIMD.hpp>
    
-   using simd_type = Kokkos::Experimental::native_simd<double>;
+   using simd_type = Kokkos::Experimental::simd<double>;
    simd_type* x;
    simd_type* y;
    simd_type* z;
@@ -103,16 +102,14 @@ There are at least three major approaches to dealing with this issue in general:
    ```c++
    #include <Kokkos_SIMD.hpp>
  
-   using simd_type = Kokkos::Experimental::native_simd<double>;
-   using tag_type = Kokkos::Experimental::element_aligned_tag;
+   using simd_type = Kokkos::Experimental::simd<double>;
    constexpr int width = int(simd_type::size());
-   int i;
-   for (i = 0; i + width <= n; i += width) {
-     simd_type sx(x + i, tag_type());
-     simd_type sy(y + i, tag_type());
-     simd_type sz(z + i, tag_type());
+   for (int i = 0; i + width <= n; i += width) {
+     simd_type sx(x + i, Kokkos::Experimental::simd_flag_default);
+     simd_type sy(y + i, Kokkos::Experimental::simd_flag_default);
+     simd_type sz(z + i, Kokkos::Experimental::simd_flag_default);
      simd_type sr = Kokkos::sqrt(sx * sx + sy * sy + sz * sz);
-     sr.copy_to(r + i, tag_type());
+     sr.copy_to(r + i, Kokkos::Experimental::simd_flag_default);
    }
    for (; i < n; ++i) {
      r[i] = sqrt(x[i] * x[i] + y[i] * y[i] + z[i] * z[i]);
@@ -126,20 +123,19 @@ There are at least three major approaches to dealing with this issue in general:
    ```c++
    #include <Kokkos_SIMD.hpp>
  
-   using simd_type = Kokkos::Experimental::native_simd<double>;
-   using mask_type = Kokkos::Experimental::native_simd_mask<double>;
-   using tag_type = Kokkos::Experimental::element_aligned_tag;
+   using simd_type = Kokkos::Experimental::simd<double>;
+   using mask_type = Kokkos::Experimental::simd_mask<double>;
    constexpr int width = int(simd_type::size());
    for (int i = 0; i < n; i += width) {
      mask_type mask([] (std::size_t lane) { return i + int(lane) < n; });
      simd_type sx;
      simd_type sy;
      simd_type sz;
-     where(mask, sx).copy_from(x + i, tag_type());
-     where(mask, sy).copy_from(y + i, tag_type());
-     where(mask, sz).copy_from(z + i, tag_type());
+     where(mask, sx).copy_from(x + i, Kokkos::Experimental::simd_flag_default);
+     where(mask, sy).copy_from(y + i, Kokkos::Experimental::simd_flag_default);
+     where(mask, sz).copy_from(z + i, Kokkos::Experimental::simd_flag_default);
      simd_type sr = Kokkos::sqrt(sx * sx + sy * sy + sz * sz);
-     where(mask, sr).copy_to(r + i, tag_type());
+     where(mask, sr).copy_to(r + i, Kokkos::Experimental::simd_flag_default);
    }
    ```
   
@@ -168,7 +164,7 @@ KOKKOS_FUNCTION void quadratic_formula(
 ```
 
 When instantiated with `T=double`, this function behaves in the classic, familiar, serial sense.
-If we simply instantiate it with `T=Kokkos::Experimental::native_simd<double>`, it still compiles just the same but now every mathematical operation is guaranteed to emit a vector instruction and the function can compute 4 quadratic formulas at a time on a 256-bit vector CPU.
+If we simply instantiate it with `T=Kokkos::Experimental::simd<double>`, it still compiles just the same but now every mathematical operation is guaranteed to emit a vector instruction and the function can compute 4 quadratic formulas at a time on a 256-bit vector CPU.
 
 Note that Kokkos takes special care to ensure everything that can be done with `double` can also be done with SIMD types, including the multiplication by integer literals `4` and `2` in this example code.
 
@@ -186,14 +182,14 @@ if (x < 0) x = 0;
 We cannot naively use SIMD types in this scenario, because `x < 0` is not a boolean value, instead it is a `simd_mask<double, Abi>` object which represents possibly multiple booleans.
 
 ```c++
-Kokkos::Experimental::native_simd<double> x;
+Kokkos::Experimental::simd<double> x;
 if (x < 0 /* <- this is not a boolean */) x = 0;
 ```
 
 The ISO C++ consistent solution is to use `where` expressions as follows:
 
 ```c++
-Kokkos::Experimental::native_simd<double> x;
+Kokkos::Experimental::simd<double> x;
 where(x < 0, x) = 0;
 ```
 
@@ -209,16 +205,16 @@ auto d = a ? b : c;
 ```
 
 ```c++
-Kokkos::Experimental::native_simd_mask<double> a;
-Kokkos::Experimental::native_simd<double> b;
-Kokkos::Experimental::native_simd<double> c;
+Kokkos::Experimental::simd_mask<double> a;
+Kokkos::Experimental::simd<double> b;
+Kokkos::Experimental::simd<double> c;
 auto d = Kokkos::Experimental::condition(a, b, c);
 ```
 
 ```c++
-Kokkos::Experimental::native_simd_mask<double> a;
-Kokkos::Experimental::native_simd<double> b;
-Kokkos::Experimental::native_simd<double> c;
+Kokkos::Experimental::simd_mask<double> a;
+Kokkos::Experimental::simd<double> b;
+Kokkos::Experimental::simd<double> c;
 auto d = c;
 where(a, d) = b;
 ```
@@ -240,8 +236,8 @@ if (a) b = very_expensive_function(c, d, e);
 When using `if` statements, `very_expensive_function` is not executed at all unless `a` is `true`. However, in SIMD mode:
 
 ```c++
-Kokkos::Experimental::native_simd_mask<double> a;
-Kokkos::Experimental::native_simd<double> b = 1.0;
+Kokkos::Experimental::simd_mask<double> a;
+Kokkos::Experimental::simd<double> b = 1.0;
 where(a, b) = very_expensive_function(c, d, e);
 ```
 
@@ -250,8 +246,8 @@ Now `very_expensive_function` is always being executed. What if the probability 
 For this, we have boolean reductions across masks called `all_of`, `none_of`, and `any_of`:
 
 ```c++
-Kokkos::Experimental::native_simd_mask<double> a;
-Kokkos::Experimental::native_simd<double> b = 1.0;
+Kokkos::Experimental::simd_mask<double> a;
+Kokkos::Experimental::simd<double> b = 1.0;
 if (Kokkos::Experimental::any_of(a)) {
   where(a, b) = very_expensive_function(c, d, e);
 }

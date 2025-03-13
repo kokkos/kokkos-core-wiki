@@ -33,7 +33,7 @@ The second template parameter `Abi` is one of the pre-defined ABI types in the n
 ### Typedefs
 
  *  `value_type`: Equal to `bool`
- *  `reference`: This type should be convertible to `bool` and `bool` should be assignable to `reference`. It may be a plain reference or it may be a special class that calls vector intrinsics to extract or fill in one mask bit.
+ *  `reference`: This type should be convertible to `bool` and `bool` should be assignable to `reference`. It may be a plain reference or it may be a special class that calls vector intrinsics to extract or fill in one mask bit. (removed in Kokkos 4.6)
  *  `simd_type`: Equal to `simd<T, Abi>`
  *  `abi_type`: Equal to `Abi`
 
@@ -48,17 +48,31 @@ The second template parameter `Abi` is one of the pre-defined ABI types in the n
   * `template <class G> simd_mask(G&& gen)`: Generator constructor. The generator `gen` should be a callable type (e.g. functor) that can accept `std::integral_constant<std::size_t, i>()` as an argument and return something convertible to `bool`. Vector mask value `i` will be initialized to the value of `gen(std::integral_constant<std::size_t, i>())`.
 
 ### Value Access Methods
-  * `reference operator[](std::size_t)`: returns a reference to mask value `i` that can be modified.
   * `bool operator[](std::size_t) const`: returns the mask value `i`.
+  * `reference operator[](std::size_t)`: returns a reference to mask value `i` that can be modified. (removed in Kokkos 4.6)
 
 ### Boolean Operators
   * `simd_mask simd_mask::operator!() const`
   * `simd_mask operator&&(const simd_mask& lhs, const simd_mask& rhs)`
   * `simd_mask operator||(const simd_mask& lhs, const simd_mask& rhs)`
 
+### Bitwise Operators
+  * `simd_mask operator&(const simd_mask& lhs, const simd_mask& rhs)`
+  * `simd_mask operator|(const simd_mask& lhs, const simd_mask& rhs)`
+  * `simd_mask operator^(const simd_mask& lhs, const simd_mask& rhs)`
+
+### Compound Assignment Operators
+  * `simd_mask operator&=(simd_mask& lhs, const simd_mask& rhs)`
+  * `simd_mask operator|=(simd_mask& lhs, const simd_mask& rhs)`
+  * `simd_mask operator^=(simd_mask& lhs, const simd_mask& rhs)`
+
 ### Comparison Operators
   * `simd_mask operator==(const simd_mask& lhs, const simd_mask& rhs)`
   * `simd_mask operator!=(const simd_mask& lhs, const simd_mask& rhs)`
+  * `simd_mask operator>=(const simd_mask& lhs, const simd_mask& rhs)`
+  * `simd_mask operator<=(const simd_mask& lhs, const simd_mask& rhs)`
+  * `simd_mask operator>(const simd_mask& lhs, const simd_mask& rhs)`
+  * `simd_mask operator<(const simd_mask& lhs, const simd_mask& rhs)`
 
 ### Reductions
   * `bool all_of(const simd_mask&)`: returns true iff all of the vector values in the mask are true
@@ -78,13 +92,13 @@ The second template parameter `Abi` is one of the pre-defined ABI types in the n
 int main(int argc, char* argv[]) {
   Kokkos::initialize(argc,argv);
   {
-  using mask_type = Kokkos::Experimental::simd_mask<double>;
-  mask_type a([] (std::size_t i) { return i == 0; });
-  mask_type b([] (std::size_t i) { return i == 1; });
-  mask_type c([] (std::size_t i) { return i == 0 || i == 1; });
-  if (all_of(c == (a || b))) {
-    printf("Kokkos simd_mask works as expected!");
-  }
+    using mask_type = Kokkos::Experimental::simd_mask<double>;
+    mask_type a([] (std::size_t i) { return i == 0; });
+    mask_type b([] (std::size_t i) { return i == 1; });
+    mask_type c([] (std::size_t i) { return i == 0 || i == 1; });
+    if (all_of(c == (a || b))) {
+      printf("Kokkos simd_mask works as expected!");
+    }
   }
   Kokkos::finalize();
 }
