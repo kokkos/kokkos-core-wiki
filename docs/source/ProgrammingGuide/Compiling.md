@@ -13,39 +13,8 @@ Note that the build methods listed above should not be mixed. For example, do no
 
 Kokkos consists mainly of header files. Only a few functions have to be compiled into object files outside of the application's source code. Those functions are contained in `.cpp` files inside the `kokkos/core/src` directory and its subdirectories. The files are internally protected with macros to prevent compilation if the related execution space is not enabled. Thus, it is not necessary to create a list of included object files specific to your compilation target; one may simply compile all `.cpp` files. The enabled features are controlled via macros which have to be provided in the compilation line or the generated `KokkosCore_config.h` include file; a subset of the macros can be found in Table 4.1.  For the most part, all of these macros are enabled/disabled using the options and settings controlled through one of the build methods previously mentioned.
 
-To compile Kokkos, a C++14 compliant compiler is needed. For an up-to-date list of compilers that are tested on a nightly basis, please refer to the README on the GitHub repository. At the time of writing supported compilers include:
+For an up-to-date list on build system requirements, please refer to [Requirements](../get-started/requirements.rst).
 
-```
-Minimum Compiler Versions
-
-    GCC: 5.3.0
-    Clang: 4.0.0  (CPU)
-    Clang: 10.0.0 (as CUDA compiler) 
-    NVCC: 9.2.88
-    NVC++: 21.5
-    ROCM: 4.5
-    MSVC: 19.29
-    IBM XL: 16.1.1
-    Fujitsu: 4.5.0
-    ARM/Clang 20.1
-
-Primary Tested Compilers
-
-    GCC: 5.3.0, 6.1.0, 7.3.0, 8.3, 9.2, 10.0
-    NVCC: 9.2.88, 10.1, 11.0
-    Clang: 8.0.0, 9.0.0, 10.0.0, 12.0.0
-    MSVC: 19.29
-    ARM/Clang: 20.1
-    IBM XL: 16.1.1
-    ROCM: 4.5.0
-
-Build system:
-
-    CMake >= 3.16: required
-    CMake >= 3.18: Fortran linkage. This does not affect most mixed Fortran/Kokkos builds. See build issues.
-    CMake >= 3.21.1 for NVC++
-
-```
 <h4>Table 4.1: Configuration Macros (KokkosCore_config.h)</h4>
 
  Macro | Effect | Comment
