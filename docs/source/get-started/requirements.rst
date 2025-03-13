@@ -38,7 +38,7 @@ Kokkos 4.x
       * 8.0
       * latest
 
-    * * Intel Classic (not recommended)  :red:`[Deprecated since 4.6]`
+    * * Intel Classic (not recommended)  :red:`[until 4.5]`
       * 19.0.5
       * 2021.8.0
 
