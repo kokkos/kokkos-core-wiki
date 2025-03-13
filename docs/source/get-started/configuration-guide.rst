@@ -382,6 +382,11 @@ If cross-compiling, or if you want to be specific, the CPU architecture can be p
       - Examples
       - Notes
 
+    * - ``Kokkos_ARCH_ZEN5``
+      - Zen 5/amd64
+      -
+      - (since Kokkos 4.7)
+
     * - ``Kokkos_ARCH_ZEN4``
       - Zen 4/amd64
       - Epyc Genoa @ LLNL El Capitan
