@@ -1,5 +1,5 @@
 ``is_initialized``
-==============
+==================
 
 .. role::cpp(code)
     :language: cpp
