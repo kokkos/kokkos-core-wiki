@@ -1,5 +1,5 @@
 ``is_finalized``
-==============
+================
 
 .. role::cpp(code)
     :language: cpp
