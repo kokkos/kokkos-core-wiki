@@ -18,7 +18,7 @@ See `Kokkos::finalize <initialize_finalize/finalize.html>`_ for details.
 
 
 Kokkos::is_initialized
-------------------
+----------------------
 Allows to query initialization status of Kokkos and returns `true` if Kokkos is initialized.
 
 See `Kokkos::is_initialized <initialize_finalize/is_Initialized.rst>`_ for details.
