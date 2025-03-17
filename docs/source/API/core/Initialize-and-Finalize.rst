@@ -24,7 +24,7 @@ Allows to query initialization status of Kokkos and returns `true` if Kokkos is 
 See `Kokkos::is_initialized <initialize_finalize/is_Initialized.rst>`_ for details.
 
 Kokkos::is_finalized
-------------------
+--------------------
 Allows to query initialization status of Kokkos and retuns `true` is Kokkos is finalized.
 
 See `Kokkos::is_finalized <initialize_finalize/is_Finalized.rst>`_ for details.
