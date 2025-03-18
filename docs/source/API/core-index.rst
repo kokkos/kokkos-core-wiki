@@ -21,6 +21,8 @@ Core API
      - Description of Memory and Execution Spaces.
    * - `Task-Parallelism <core/Task-Parallelism.html>`__
      - Creating and dispatching Task Graphs.
+   * - `MultiGPU Support <core/MultiGPUSupport.html>`__
+     - Launching kernels on multiple GPU nodes from host.
    * - `Atomics <core/atomics.html>`__
      - Atomics
    * - `Numerics <core/Numerics.html>`__
@@ -51,6 +53,7 @@ Core API
    ./core/Execution-Policies
    ./core/Spaces
    ./core/Task-Parallelism
+   ./core/MultiGPUSupport
    ./core/atomics
    ./core/Numerics
    ./core/c_style_memory_management
