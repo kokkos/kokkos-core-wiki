@@ -4,23 +4,22 @@
 Multi-GPU Support
 =================
 
-Kokkos has support for launching kernels on multiple GPU devices within a single node from host on a single MPI rank for the Cuda, HIP, and SYCL backends.
+Kokkos has support for launching kernels on multiple GPU devices within a single node from host on a single MPI rank for the CUDA, HIP, and SYCL backends.
 
-Using this feature requires knowledge of backend specific API calls for setting devices, creating streams, and (potentially)
-allocating device specific data.
+Using this feature requires knowledge of backend specific API calls for creating non-default execution space instances. Once the execution space has been
+created, it can be used to create execution policies, allocate views, etc. all on the device chosen by the user.
 
-Basic Usage
------------
+Constructing Execution Spaces
+-----------------------------
 
-For allocating and launching kernels on a chosen device, the user is responsible for creating device specific streams to pass to backend constructor.
-Once these are created, they can be passed as any other execution space instance to create policies, allocated managed views, asynchronous deep copies, etc. For creating unmanaged
-views, the user must manually allocate device specific memory to pass to the view constructor.
+CUDA
+~~~~
 
-Contructing Execution Space
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+For CUDA backend, the user creates a ``cudaStream_t`` object and passes it to the ``Kokkos::Cuda`` constructor.
 
-Cuda
-^^^^
+.. note:: The user is expected to manage the lifetime of the stream. Only after the execution space is destroyed
+          can the user safely destroy the stream.
+
 
 .. code-block:: cpp
 
@@ -51,11 +50,16 @@ Cuda
     cudaStreamDestroy(stream);
 
 HIP
-^^^
+~~~
 
-.. warning:: Multi-GPU only supported for rocm 5.6 and later. Because of the lack of HIP API functions for querying a stream's device
-             in pre rocm 5.6, constructing a ``Kokkos::HIP`` instance on the non-default device will not be able to throw an error,
-             problems will just likely arise downstream.
+For the HIP backend, like with CUDA, the user creates a ``hipStream_t`` object and passes it to the ``Kokkos::HIP`` constructor.
+
+.. note:: The user is expected to manage the lifetime of the stream. Only after the execution space is destroyed
+          can the user safely destroy the stream.
+
+.. warning:: Multi-GPU only supported for ROCm 5.6 and later. Because of the lack of HIP API functions for querying a
+             stream's device before ROCm 5.6, constructing a ``Kokkos::HIP`` instance on a non-default device isn't
+             supported, and problems will likely arise downstream.
 
 
 .. code-block:: cpp
@@ -87,7 +91,9 @@ HIP
     hipStreamDestroy(stream);
 
 SYCL
-^^^^
+~~~~
+
+For the SYCL backend, the user creates a ``sycl::queue`` object and passes it to the ``Kokkos::SYCL`` constructor.
 
 .. code-block:: cpp
 
@@ -108,10 +114,40 @@ SYCL
     // Use execution space
     /* ... */
 
+Using Kokkos Methods
+--------------------
+
+Once an execution space has been created on the chosen device, the execution space must be passed to all Kokkos methods
+intended to be used on device. In the absence of an execution space, Kokkos will use the execution space on the default
+device.
+
+Allocating Managed Views
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+To allocate a managed view on device, pass the execution space to ``Kokkos::view_alloc()``.
+
+Example:
+
+.. code-block:: cpp
+
+    using ExecutionSpace = decltype(exec_space);
+    Kokkos::View<int*, ExecutionSpace> V(Kokkos::view_alloc("V", exec_space), 10);
+
+Launching Kernels
+~~~~~~~~~~~~~~~~~
+
+To launch a kernel on device, pass the execution space to the policy constructor.
+
+Example:
+
+.. code-block:: cpp
+
+    Kokkos::parallel_for("inc_V", Kokkos::RangePolicy<ExecutionSpace>(exec_space, 0, 10),
+      KOKKOS_LAMBDA (const int i) {
+        V(i) += i;
+    });
+
 Notes
 -----
 
-- For ``parallel_reduce(..., const ReducerArgument&... reducer)``, it is important to pass rank-0 views for the ``reducer`` arguments
-  instead of scalar types. Scalar reductions imply a fence on all execution spaces.
-- When passing a stream to an execution space constructor, the user is expected the manage the lifetime of the stream. Only after the
-  execution space is destroyed can the user safely destroy the stream.
+- A `tutorial <https://github.com/kokkos/kokkos-tutorials/tree/main/Exercises/multi_gpu_cuda>`_ for using multi-gpu on CUDA is available.
