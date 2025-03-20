@@ -50,6 +50,11 @@ Interface
 	     TeamThreadMDRange(team, 4,5,6);           // OK
 	     TeamThreadMDRange(team, 4,5,6,2,3,4,5,6); // OK, max num of extents allowed
 
+Restrictions
+------------
+
+Note that when used in `parallel_reduce <../parallel-dispatch/parallel_reduce.html>`_, the reduction is limited to a sum.
+
 Examples
 --------
 

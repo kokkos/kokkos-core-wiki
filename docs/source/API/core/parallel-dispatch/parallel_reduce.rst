@@ -76,8 +76,12 @@ Parameters:
   - `RangePolicy <../policies/RangePolicy.html>`_: defines a 1D iteration range.
   - `MDRangePolicy <../policies/MDRangePolicy.html>`_: defines a multi-dimensional iteration space.
   - `TeamPolicy <../policies/TeamPolicy.html>`_: defines a 1D iteration range, each of which is assigned to a thread team.
+  - `TeamVectorRange <../policies/TeamVectorRange.html>`_: defines a 1D iteration range to be executed by a thread-team. Only valid inside a parallel region executed through a ``TeamPolicy`` or a ``TaskTeam``.
+  - `TeamVectorMDRange <../policies/TeamVectorMDRange.html>`_: defines a multi-dimensional iteration space to be executed by a thread-team. Only valid inside a parallel region executed through a ``TeamPolicy`` or a ``TaskTeam``.
   - `TeamThreadRange <../policies/TeamThreadRange.html>`_: defines a 1D iteration range to be executed by a thread-team. Only valid inside a parallel region executed through a ``TeamPolicy`` or a ``TaskTeam``.
+  - `TeamThreadMDRange <../policies/TeamThreadMDRange.html>`_: defines a multi-dimensional iteration space to be executed by a thread-team. Only valid inside a parallel region executed through a ``TeamPolicy`` or a ``TaskTeam``.
   - `ThreadVectorRange <../policies/ThreadVectorRange.html>`_: defines a 1D iteration range to be executed through vector parallelization dividing the threads within a team.  Only valid inside a parallel region executed through a ``TeamPolicy`` or a ``TaskTeam``.
+  - `ThreadVectorMDRange <../policies/ThreadVectorMDRange.html>`_: defines a multi-dimensional iteration space to be executed through vector parallelization dividing the threads within a team.  Only valid inside a parallel region executed through a ``TeamPolicy`` or a ``TaskTeam``.
 * FunctorType: A valid functor with (at minimum) an ``operator()`` with a matching signature for the ``ExecPolicy`` combined with the reduced type.
 * ReducerArgument: Either a class fulfilling the "Reducer" concept or a ``Kokkos::View``.
 * ReducerArgumentNonConst: A scalar type or an array type; see below for functor requirements.
@@ -95,6 +99,7 @@ Requirements:
   - ``N`` must match ``ExecPolicy::rank``.
 * If the ``functor`` is a lambda, ``ReducerArgument`` must satisfy the ``Reducer`` concept or ``ReducerArgumentNonConst`` must be a POD type with ``operator +=`` and ``operator =`` or a ``Kokkos::View``.  In the latter case, a sum reduction is applied where the identity is assumed to be given by the default constructor of the value type (and not by ``reduction_identity```). If provided, the ``init``/ ``join``/ ``final`` member functions must not take a ``WorkTag`` argument even for tagged reductions.
 * If ``ExecPolicy`` is ``TeamThreadRange`` a "reducing" ``functor`` is not allowed and the ``ReducerArgument`` must satisfy the ``Reducer`` concept or ``ReducerArgumentNonConst`` must be a POD type with ``operator +=`` and ``operator =`` or a ``Kokkos::View``.  In the latter case, a sum reduction is applied where the identity is assumed to be given by the default constructor of the value type (and not by ``reduction_identity```).
+* If ``ExecPolicty`` is ``TeamVectorMDRange``, ``TeamThreadMDRange``, or ``ThreadVectorMDRange``, only a ``ReducerArgumentNonConst`` is allowed, and it must be a POD type with ``operator +=`` and ``operator =``.
 * The reduction argument type ``ReducerValueType`` of the ``functor`` operator must be compatible with the ``ReducerArgument`` (or ``ReducerArgumentNonConst``) and must match the arguments of the ``init``, ``join`` and ``final`` functions of the functor if those exist and no reducer is specified (``ReducerArgument`` doesn't satisfy the ``Reducer`` concept but is a scalar, array or ``Kokkos::View``). In case of tagged reductions, i.e., when specifying a tag in the policy, the functor's potential ``init``/ ``join``/ ``final`` member functions must also be tagged.
 * If ``ReducerArgument`` (or ``ReducerArgumentNonConst``)
 
