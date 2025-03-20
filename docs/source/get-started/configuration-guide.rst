@@ -300,6 +300,10 @@ The following options control enabling TPLs:
       * Whether to enable the LIBDL library
       * ``ON``
       *
+    * * ``Kokkos_ENABLE_LIBQUADMATH``
+      * Whether to enable support for 128-bit floating-point types via GCC's Quad-Precision Math Library 
+      * ``OFF``
+      *
     * * ``Kokkos_ENABLE_ONEDPL``
       * Whether to enable the oneDPL library when using the SYCL backend
       * ``ON``
