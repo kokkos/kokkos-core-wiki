@@ -127,8 +127,7 @@ Example:
 
 .. code-block:: cpp
 
-    using ExecutionSpace = decltype(exec_space);
-    Kokkos::View<int*, ExecutionSpace> V(Kokkos::view_alloc("V", exec_space), 10);
+    Kokkos::View<int*> V(Kokkos::view_alloc("V", exec_space), 10);
 
 Launching Kernels
 ~~~~~~~~~~~~~~~~~
