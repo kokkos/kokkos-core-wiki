@@ -22,7 +22,7 @@ Core API
    * - `Task-Parallelism <core/Task-Parallelism.html>`__
      - Creating and dispatching Task Graphs.
    * - `MultiGPU Support <core/MultiGPUSupport.html>`__
-     - Launching kernels on multiple GPU nodes from host.
+     - Launching kernels on multiple GPUs from one process.
    * - `Atomics <core/atomics.html>`__
      - Atomics
    * - `Numerics <core/Numerics.html>`__

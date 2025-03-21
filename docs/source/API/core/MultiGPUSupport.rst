@@ -4,7 +4,8 @@
 Multi-GPU Support
 =================
 
-Kokkos has support for launching kernels on multiple GPU devices within a single node from host on a single MPI rank for the CUDA, HIP, and SYCL backends.
+Kokkos has support for launching kernels on multiple GPUs from a single host process, e.g., a single MPI rank. This feature currently
+exists for the CUDA, HIP, and SYCL backends.
 
 Using this feature requires knowledge of backend specific API calls for creating non-default execution space instances. Once the execution space has been
 created, it can be used to create execution policies, allocate views, etc. all on the device chosen by the user.
@@ -17,9 +18,7 @@ CUDA
 
 For CUDA backend, the user creates a ``cudaStream_t`` object and passes it to the ``Kokkos::Cuda`` constructor.
 
-.. note:: The user is expected to manage the lifetime of the stream. Only after the execution space is destroyed
-          can the user safely destroy the stream.
-
+.. note:: The user is expected to manage the lifetime of the stream. The related execution space needs to be destroyed before destroying the stream.
 
 .. code-block:: cpp
 
@@ -54,12 +53,11 @@ HIP
 
 For the HIP backend, like with CUDA, the user creates a ``hipStream_t`` object and passes it to the ``Kokkos::HIP`` constructor.
 
-.. note:: The user is expected to manage the lifetime of the stream. Only after the execution space is destroyed
-          can the user safely destroy the stream.
+.. note:: The user is expected to manage the lifetime of the stream. The related execution space needs to be destroyed before destroying the stream.
 
 .. warning:: Multi-GPU only supported for ROCm 5.6 and later. Because of the lack of HIP API functions for querying a
              stream's device before ROCm 5.6, constructing a ``Kokkos::HIP`` instance on a non-default device isn't
-             supported, and problems will likely arise downstream.
+             supported.
 
 
 .. code-block:: cpp
@@ -118,8 +116,7 @@ Using Kokkos Methods
 --------------------
 
 Once an execution space has been created on the chosen device, the execution space must be passed to all Kokkos methods
-intended to be used on device. In the absence of an execution space, Kokkos will use the execution space on the default
-device.
+intended to be used on the chosen device. If no execution space is passed, Kokkos will use `DefaultExecutionSpace`.
 
 Allocating Managed Views
 ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -142,7 +139,7 @@ Example:
 
 .. code-block:: cpp
 
-    Kokkos::parallel_for("inc_V", Kokkos::RangePolicy<ExecutionSpace>(exec_space, 0, 10),
+    Kokkos::parallel_for("inc_V", Kokkos::RangePolicy(exec_space, 0, 10),
       KOKKOS_LAMBDA (const int i) {
         V(i) += i;
     });
