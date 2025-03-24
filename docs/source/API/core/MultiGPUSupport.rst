@@ -18,7 +18,9 @@ CUDA
 
 For CUDA backend, the user creates a ``cudaStream_t`` object and passes it to the ``Kokkos::Cuda`` constructor.
 
-.. note:: The user is expected to manage the lifetime of the stream. The related execution space needs to be destroyed before destroying the stream.
+.. note:: The lifetime of all Kokkos objects related to the stream (e.g., the execution space) needs to end before the stream itself is invalidated
+          via ``cudaStreamDestroy``. This can be done by adding a scope around such objects, as is done below.
+
 
 .. code-block:: cpp
 
@@ -53,7 +55,8 @@ HIP
 
 For the HIP backend, like with CUDA, the user creates a ``hipStream_t`` object and passes it to the ``Kokkos::HIP`` constructor.
 
-.. note:: The user is expected to manage the lifetime of the stream. The related execution space needs to be destroyed before destroying the stream.
+.. note:: The lifetime of all Kokkos objects related to the stream (e.g., the execution space) needs to end before the stream itself is invalidated
+          via ``cudaStreamDestroy``. This can be done by adding a scope around such objects, as is done below.
 
 .. warning:: Multi-GPU only supported for ROCm 5.6 and later. Because of the lack of HIP API functions for querying a
              stream's device before ROCm 5.6, constructing a ``Kokkos::HIP`` instance on a non-default device isn't
