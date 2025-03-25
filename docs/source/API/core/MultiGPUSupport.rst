@@ -151,4 +151,4 @@ Example:
 Notes
 -----
 
-- A `tutorial <https://github.com/kokkos/kokkos-tutorials/tree/main/Exercises/multi_gpu_cuda>`_ for using multi-gpu on CUDA is available.
+- A `tutorial <https://github.com/kokkos/kokkos-tutorials/tree/main/Exercises/multi_gpu_cuda>`_ for using multi-GPU on CUDA is available.
