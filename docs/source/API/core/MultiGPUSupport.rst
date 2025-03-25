@@ -56,7 +56,7 @@ HIP
 For the HIP backend, like with CUDA, the user creates a ``hipStream_t`` object and passes it to the ``Kokkos::HIP`` constructor.
 
 .. note:: The lifetime of all Kokkos objects related to the stream (e.g., the execution space) needs to end before the stream itself is invalidated
-          via ``cudaStreamDestroy``. This can be done by adding a scope around such objects, as is done below.
+          via ``hipStreamDestroy``. This can be done by adding a scope around such objects, as is done below.
 
 .. warning:: Multi-GPU only supported for ROCm 5.6 and later. Because of the lack of HIP API functions for querying a
              stream's device before ROCm 5.6, constructing a ``Kokkos::HIP`` instance on a non-default device isn't
@@ -119,7 +119,8 @@ Using Kokkos Methods
 --------------------
 
 Once an execution space has been created on the chosen device, the execution space must be passed to all Kokkos methods
-intended to be used on the chosen device. If no execution space is passed, Kokkos will use `DefaultExecutionSpace`.
+intended to be used on the chosen device. If no execution space is passed, Kokkos will use the default execution space
+instance associated with the device with which Kokkos was initialized.
 
 Allocating Managed Views
 ~~~~~~~~~~~~~~~~~~~~~~~~
