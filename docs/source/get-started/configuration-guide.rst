@@ -752,7 +752,7 @@ Kokkos will attempt to autodetect the architecture flag at configuration time.
 Intel GPUs
 ~~~~~~~~~~
 
-If the SYCL backend is enabled and no GPU architecture is specified, Kokkos will use Just-In-Time (JIT) compilation*t.
+If the SYCL backend is enabled and no GPU architecture is specified, Kokkos will use Just-In-Time (JIT) compilation*.
 There is no restriction to a particular SYCL device type.
 Thus, this is the only option to target a CPU with the SYCL backend (which is experimental, untested, and not optimized for).
 
