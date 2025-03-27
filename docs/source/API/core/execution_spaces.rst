@@ -59,6 +59,9 @@ but instead should be used generically as an execution space. For details, see |
 
 ``Kokkos::SYCL`` :sup:`promoted from` |Experimental|_ :sup:`since 4.5` is an |ExecutionSpaceConceptType|_ representing execution on a device supported by SYCL.
 
+If the SYCL backend is enabled and no GPU architecture is specified, Kokkos will use Just-In-Time compilation without any restriction to a particular SYCL device type.
+Thus, this is the only option to target a CPU with the SYCL backend (which is experimental, untested, and not optimized for).
+
 ``Kokkos::HPX``
 ---------------
 

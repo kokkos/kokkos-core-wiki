@@ -790,7 +790,7 @@ Intel GPUs
       *
 
     * * ``Kokkos_ARCH_INTEL_GEN``
-      * Just-In-Time compilation*
+      * Just-In-Time compilation* for Intel GPUs in particular
       *
 
 \* ``Kokkos_ARCH_INTEL_GEN`` enables Just-In-Time compilation for Intel GPUs
