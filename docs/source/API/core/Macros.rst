@@ -325,6 +325,12 @@ Architectures
 +-----------------------------------+-------------------------------------------------------------------------------------------------+
 | ``KOKKOS_ARCH_HOPPER90``          | Optimize for NVIDIA Hopper generation CC 9.0 (GPU) :sup:`since Kokkos 4.0`                      |
 +-----------------------------------+-------------------------------------------------------------------------------------------------+
+| ``KOKKOS_ARCH_BLACKWELL``         | Set if any NVIDIA Blackwell architecture has been enabled :sup:`since Kokkos 4.7`               |
++-----------------------------------+-------------------------------------------------------------------------------------------------+
+| ``KOKKOS_ARCH_BLACKWELL100``      | Optimize for NVIDIA Blackwell generation CC 10.0 (GPU) :sup:`since Kokkos 4.7`                  |
++-----------------------------------+-------------------------------------------------------------------------------------------------+
+| ``KOKKOS_ARCH_BLACKWELL120``      | Optimize for NVIDIA Blackwell generation CC 12.0 (GPU) :sup:`since Kokkos 4.7`                  |
++-----------------------------------+-------------------------------------------------------------------------------------------------+
 | ``KOKKOS_ARCH_AMD_ZEN``           | Optimize for AMD Zen architecture (HOST)                                                        |
 +-----------------------------------+-------------------------------------------------------------------------------------------------+
 | ``KOKKOS_ARCH_AMD_ZEN2``          | Optimize for AMD Zen2 architecture (HOST)                                                       |

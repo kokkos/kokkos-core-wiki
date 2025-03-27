@@ -38,17 +38,17 @@ Kokkos 4.x
       * 8.0
       * latest
 
-    * * Intel Classic (not recommended) 
+    * * Intel Classic (not recommended)  :red:`[until 4.5]`
       * 19.0.5
       * 2021.8.0
 
     * * IntelLLVM (CPU)
       * 2021.1.1
-      * 2023.0.0
+      * 2023.2.4
 
-    * * IntelLLVM (SYCL) (experimental)
-      * 2022.0.0 
+    * * IntelLLVM (SYCL)
       * 2023.0.0
+      * 2024.2.1 2025.0.0
 
     * * NVCC 
       * 11.0

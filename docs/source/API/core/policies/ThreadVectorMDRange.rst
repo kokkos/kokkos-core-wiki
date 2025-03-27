@@ -48,6 +48,11 @@ Interface
 	  ``TeamVectorRange`` policy, ``TeamVectorRange`` policy, ``TeamVectorMDRange`` policy
 	  or ``ThreadVectorMDRange`` policy.
 
+Restrictions
+------------
+
+Note that when used in `parallel_reduce <../parallel-dispatch/parallel_reduce.html>`_, the reduction is limited to a sum.
+
 Examples
 --------
 

@@ -13,41 +13,8 @@ Note that the build methods listed above should not be mixed. For example, do no
 
 Kokkos consists mainly of header files. Only a few functions have to be compiled into object files outside of the application's source code. Those functions are contained in `.cpp` files inside the `kokkos/core/src` directory and its subdirectories. The files are internally protected with macros to prevent compilation if the related execution space is not enabled. Thus, it is not necessary to create a list of included object files specific to your compilation target; one may simply compile all `.cpp` files. The enabled features are controlled via macros which have to be provided in the compilation line or the generated `KokkosCore_config.h` include file; a subset of the macros can be found in Table 4.1.  For the most part, all of these macros are enabled/disabled using the options and settings controlled through one of the build methods previously mentioned.
 
-To compile Kokkos, a C++14 compliant compiler is needed. For an up-to-date list of compilers that are tested on a nightly basis, please refer to the README on the GitHub repository. At the time of writing supported compilers include:
+For an up-to-date list on build system requirements, please refer to [Requirements](../get-started/requirements.rst).
 
-```
-Minimum Compiler Versions
-
-    GCC: 5.3.0
-    Clang: 4.0.0  (CPU)
-    Clang: 10.0.0 (as CUDA compiler) 
-    Intel: 17.0.1
-    NVCC: 9.2.88
-    NVC++: 21.5
-    ROCM: 4.5
-    MSVC: 19.29
-    IBM XL: 16.1.1
-    Fujitsu: 4.5.0
-    ARM/Clang 20.1
-
-Primary Tested Compilers
-
-    GCC: 5.3.0, 6.1.0, 7.3.0, 8.3, 9.2, 10.0
-    NVCC: 9.2.88, 10.1, 11.0
-    Clang: 8.0.0, 9.0.0, 10.0.0, 12.0.0
-    Intel 17.4, 18.1, 19.5
-    MSVC: 19.29
-    ARM/Clang: 20.1
-    IBM XL: 16.1.1
-    ROCM: 4.5.0
-
-Build system:
-
-    CMake >= 3.16: required
-    CMake >= 3.18: Fortran linkage. This does not affect most mixed Fortran/Kokkos builds. See build issues.
-    CMake >= 3.21.1 for NVC++
-
-```
 <h4>Table 4.1: Configuration Macros (KokkosCore_config.h)</h4>
 
  Macro | Effect | Comment
@@ -281,7 +248,7 @@ Any Kokkos application compiled for CUDA embeds CUDA code via template metaprogr
 
 All current versions of the NVCC compiler have shortcomings when used as the main compiler for a project, in particular when part of a complex build system. For example, it does not understand most GCC command-line options, which must be prepended by the `-Xcompiler` flag when calling NVCC. Kokkos comes with a shell script, called `nvcc_wrapper`, that wraps NVCC to address these issues. We intend this as a drop-in replacement for a normal GCC-compatible compiler (e.g., GCC or Intel) in your build system. It analyzes the provided command-line options and prepends them correctly. It also adds the correct flags for compiling generic C++ files containing CUDA code (e.g., `*.cpp, *.cxx,` or `*.CC`). By default `nvcc_wrapper` calls `g++` as the host compiler. You may override this by providing NVCC's `-ccbin` option as a compiler flag. The default can be set by editing the script itself or by setting the environment variable `NVCC_WRAPPER_DEFAULT_COMPILER`.
 
-Many people use a system like [Environment Modules](http://modules.sourceforge.net) to manage their shell environment. When using a module system, it can be useful to provide different versions for different back-end compiler types (e.g., `icpc, pgc++, g++,` and `clang`). To use the `nvcc_wrapper` in conjunction with MPI wrappers, simply overwrite which C++ compiler is called by the MPI wrapper. For example, you can reset OpenMPI's C++ compiler by setting the `OMPI_CXX` environment variable. Make sure that `nvcc_wrapper` calls the host compiler with which the MPI library was compiled.
+Many people use a system like [Environment Modules](http://modules.sourceforge.net) to manage their shell environment. When using a module system, it can be useful to provide different versions for different back-end compiler types (e.g., `pgc++, g++,` and `clang`). To use the `nvcc_wrapper` in conjunction with MPI wrappers, simply overwrite which C++ compiler is called by the MPI wrapper. For example, you can reset OpenMPI's C++ compiler by setting the `OMPI_CXX` environment variable. Make sure that `nvcc_wrapper` calls the host compiler with which the MPI library was compiled.
 
 ## 4.6 Execution Space Restrictions
 

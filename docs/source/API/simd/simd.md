@@ -33,7 +33,7 @@ The second template parameter `Abi` is one of the pre-defined ABI types in the n
 ### Typedefs
 
  *  `value_type`: Equal to `T`
- *  `reference`: This type should be convertible to `value_type` and `value_type` should be assignable to `reference`. It may be a plain reference or it may be an implementation-defined type that calls vector intrinsics to extract or fill in one vector lane.
+ *  `reference`: This type should be convertible to `value_type` and `value_type` should be assignable to `reference`. It may be a plain reference or it may be an implementation-defined type that calls vector intrinsics to extract or fill in one vector lane. (removed in Kokkos 4.6)
  *  `mask_type`: Equal to `simd_mask<T, Abi>`
  *  `abi_type`: Equal to `Abi`
 
@@ -59,8 +59,8 @@ The second template parameter `Abi` is one of the pre-defined ABI types in the n
   * `Kokkos::Experimental::element_aligned_tag` is a type alias for `decltype(simd_flag_default)` and `Kokkos::Experimental::vector_aligned_tag` is a type alias for `decltype(simd_flag_aligned)`.
 
 ### Value Access Methods
-  * `reference operator[](std::size_t)`: returns a reference to vector value `i` that can be modified.
   * `value_type operator[](std::size_t) const`: returns the vector value `i`.
+  * `reference operator[](std::size_t)`: returns a reference to vector value `i` that can be modified. (removed in Kokkos 4.6)
 
 ### Arithmetic Operators
   * `simd simd::operator-() const`
@@ -72,10 +72,14 @@ The second template parameter `Abi` is one of the pre-defined ABI types in the n
   * `simd operator>>(const simd& lhs, int rhs)`
   * `simd operator<<(const simd& lhs, const simd& rhs)`
   * `simd operator<<(const simd& lhs, int rhs)`
+
+### Compound Assignment Operators
   * `simd operator+=(simd& lhs, const simd& rhs)`
   * `simd operator-=(simd& lhs, const simd& rhs)`
   * `simd operator*=(simd& lhs, const simd& rhs)`
   * `simd operator/=(simd& lhs, const simd& rhs)`
+  * `simd operator>>=(simd& lhs, const simd& rhs)`
+  * `simd operator<<=(simd& lhs, const simd& rhs)`
 
 ### Comparison Operators
   * `mask_type operator==(const simd& lhs, const simd& rhs)`
@@ -94,6 +98,14 @@ The second template parameter `Abi` is one of the pre-defined ABI types in the n
 ### Min/Max Functions
   * `simd Kokkos::min(const simd& lhs, const simd& rhs)`
   * `simd Kokkos::max(const simd& lhs, const simd& rhs)`
+
+### Reductions 
+  * `T Kokkos::Experimental::reduce(const simd& lhs, const simd_mask& mask)`
+  * `T Kokkos::Experimental::reduce(const simd& lhs, Op binary_op)`
+  * `T Kokkos::Experimental::reduce_min(const simd& lhs, const simd_mask& mask)`
+  * `T Kokkos::Experimental::reduce_min(const simd& lhs)`
+  * `T Kokkos::Experimental::reduce_max(const simd& lhs, const simd_mask& mask)`
+  * `T Kokkos::Experimental::reduce_max(const simd& lhs)`
 
 ### `<cmath>` Functions
   * `simd Kokkos::abs(const simd& lhs)`
@@ -147,13 +159,13 @@ The second template parameter `Abi` is one of the pre-defined ABI types in the n
 int main(int argc, char* argv[]) {
   Kokkos::initialize(argc,argv);
   {
-  using simd_type = Kokkos::Experimental::simd<double>;
-  simd_type a([] (std::size_t i) { return 0.1 * i; });
-  simd_type b(2.0);
-  simd_type c = Kokkos::sqrt(a * a + b * b);
-  for (std::size_t i = 0; i < simd_type::size(); ++i) {
-    printf("[%zu] = %g\n", i, c[i]);
-  }
+    using simd_type = Kokkos::Experimental::simd<double>;
+    simd_type a([] (std::size_t i) { return 0.1 * i; });
+    simd_type b(2.0);
+    simd_type c = Kokkos::sqrt(a * a + b * b);
+    for (std::size_t i = 0; i < simd_type::size(); ++i) {
+      printf("[%zu] = %g\n", i, c[i]);
+    }
   }
   Kokkos::finalize();
 }
