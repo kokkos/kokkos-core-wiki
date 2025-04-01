@@ -339,6 +339,12 @@ For instance, disabling a node from host (:code:`hipGraphNodeSetEnabled`) can su
 
 As the topology is fixed, we can only reasonably update kernel parameters or skip a node.
 
+.. note::
+
+    Todo: in solve take Emil work and say that at compile time we could not reasonnably know what its graph
+    would look like. But our own assembly graph could be determined at compile time (knowing the system at stake,
+    how we partition it and so on -> still a burden)
+
 .. tikz:: Some iterative loop that needs to seed under some condition, as well as a library call for compute.
    :include: Graph.update.tikz
    :libs: backgrounds, calc, positioning, shapes
@@ -372,6 +378,18 @@ Let's take the `AXPBY` micro-benchmark from https://hihat.opencommons.org/images
 .. literalinclude:: Graph.axpby.kokkos.graph.cpp
     :language: c++
     :caption: Current :cppkokkos:`Kokkos::Graph`.
+
+Runtime graph
+~~~~~~~~~~~~~
+
+It can happen that a graph cannot be known at compile time. Examples of programs that could not
+determine the control flow completely at compile time:
+- MPI partitioning
+- BLAS routines and system size
+- you name it
+
+Therefore, we must support both pure compile time graphs and runtime graphs.
+This implies type-erasure. And this is not possible by default in `std::execution` apparently.
 
 Why/when should I choose :cppkokkos:`Kokkos::Graph`
 ---------------------------------------------------
@@ -426,3 +444,83 @@ References
 * https://github.com/intel/llvm/blob/sycl/sycl/doc/syclgraph/SYCLGraphUsageGuide.md
 * https://developer.nvidia.com/blog/a-guide-to-cuda-graphs-in-gromacs-2023/
 * https://hihat.opencommons.org/images/1/1a/Kokkos-graphs-presentation.pdf
+
+
+*********************************
+
+Ecrire nos exemples de graphes en P2300 -> compiler + tester
+
+Puis en current kokkos graph -> compiler + tester
+
+Puis en draft el kokkos graph à la p2300 -> à titre de guideline (where we want to go)
+
+* TFE Emil Geleleens example: Solver for matrix L -> backsubstitution for lower triangular
+  matrix -> dependencies between unknowns to speed up things -> creates a graph with "as many nodes
+  there are unknowns" (with variants, but whatsoever we get many nodes) in the input matrix L
+  -> his work is not about efficiently launchign this graph and in fact he did it with manual kernel launches
+  -> could be nice to use kokkos graph to focus on other things
+  -> there might be some sweet spot above which the backend graph makes sense (cost of instantiate and launch)
+
+=> repo privé "uliegecsm/kokkos-graph-p2300"
+
+
+One blcoker (https://docs.nvidia.com/cuda/pdf/CUSPARSE_Library.pdf): we would need to use graph capture
+to embed the cu solver into our graph...
+
+    Most of the cuSPARSE routines can be optimized by exploiting CUDA Graphs capture and
+    Hardware Memory Compression features.
+    More in details, a single cuSPARSE call or a sequence of calls can be captured by a CUDA
+    Graph and executed in a second moment. This minimizes kernels launch overhead and allows
+    the CUDA runtime to optimize the whole workflow. A full example of CUDA graphs capture
+    applied to a cuSPARSE routine can be found in cuSPARSE Library Samples - CUDA Graph.
+
+
+
+Meeting notes
+=============
+
+0. Do you know :cppkokkos:`Kokkos::Graph` ?
+
+   :cppkokkos:`Kokkos::Graph` is an abstraction of a DAG of asynchronous workloads that maps to a backend graph,
+   or to the defaulted implementation.
+
+   Advantages of the graph: asynchronous management done by the backend driver + launch overhead reduces especially
+   when submitting many times.
+
+   .. figure:: Graph.kokkos.3.paper.jpg
+
+     Example from Kokkos 3 paper.
+
+1. We want to refactor the public API of :cppkokkos:`Kokkos::Graph` so that it feels more like `std::execution` (P2300).
+
+   We could think of a graph (e.g. :cppkokkos:`Kokkos::Graph`) as a **multi-shot sender chain** (?).
+
+    .. code-block:: c++
+        :caption: Old way
+
+        child = parent.then_parallel_(policy, body);
+
+    .. code-block:: c++
+        :caption: P2300-alike way
+
+        child = parallel_for(parent, policy, body);  // usual
+        child = parent | parallel_for(policy, body); // piping
+
+   This seems to be an easy step. A few wrappers could be used in a first step to "transport"
+   the P2300-alike way arguments to the old way (thereby keeping the `Kokkos::Graph` implementation
+   untouched).
+
+2. Deeper refactoring of :cppkokkos:`Kokkos::Graph`:
+
+   * Should the nodes of the graph be senders ? Or should `Kokkos` nodes and graph
+     be wrapped in an adaptor-like API to remain an implementation detail hidden to the user ?
+     "P2300 nodes" would then have handlers to their :cppkokkos:`Kokkos::Impl` (nodes and graph) counterparts.
+     How is this implemented in `HPX` ? When creating a sender, is there some under-the-hood implementation
+     class that maps to some `HPX` pre-existing internals ?
+   * Current :cppkokkos:`Kokkos::Graph` restrictions:
+      - All nodes are targeting the same backend :math:`\implies` only one scheduler type can be used.
+      - The chain cannot contain `transfer`, `starts_on`, and so. The scheduling is left to `Kokkos` through
+        :cppkokkos:`Kokkos::Graph::submit(exec)`.
+
+
+https://accu.org/journals/overload/29/164/teodorescu/
