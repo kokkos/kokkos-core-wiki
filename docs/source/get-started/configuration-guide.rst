@@ -773,6 +773,10 @@ Intel GPUs
       * Iris Xe MAX (DG1)
       *
 
+    * * ``Kokkos_ARCH_INTEL_DG2``
+      * Intel DG2
+      * Intel Flex, Intel Arc
+
     * * ``Kokkos_ARCH_INTEL_GEN12LP``
       * Gen12LP
       * Intel UHD Graphics 770
