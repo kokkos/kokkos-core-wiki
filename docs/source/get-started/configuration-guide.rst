@@ -531,7 +531,7 @@ If cross-compiling, or if you want to be specific, the CPU architecture can be p
 
     * - ``KOKKOS_ARCH_RISCV_U74MC``
       - U74MC/RISC-V ISA
-      - Sifive Unmatched
+      - SiFive Unmatched
       - (since Kokkos 4.7)
 
 GPU Architectures
