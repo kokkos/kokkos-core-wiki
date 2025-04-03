@@ -757,44 +757,58 @@ Intel GPUs
 ~~~~~~~~~~
 
 .. list-table::
-    :widths: 25 35 40
+    :widths: 15 25 35 25
     :header-rows: 1
     :align: left
 
     * - CMake option
       - Architecture
       - Models
+      - Notes
 
     * * ``Kokkos_ARCH_INTEL_PVC``
       * Xe-HPC (Ponte Vecchio)
       * Intel Data Center GPU Max 1550
+      *
 
     * * ``Kokkos_ARCH_INTEL_XEHP``
       * Xe-HP
+      *
       *
 
     * * ``Kokkos_ARCH_INTEL_DG1``
       * Iris Xe MAX (DG1)
       *
+      *
+
+    * * ``Kokkos_ARCH_INTEL_DG2``
+      * Intel DG2
+      * Intel Flex, Intel Arc
+      * (since Kokkos 4.7)
 
     * * ``Kokkos_ARCH_INTEL_GEN12LP``
       * Gen12LP
       * Intel UHD Graphics 770
+      *
 
     * * ``Kokkos_ARCH_INTEL_GEN11``
       * Gen11
       * Intel UHD Graphics
+      *
 
     * * ``Kokkos_ARCH_INTEL_GEN9``
       * Gen9
       * Intel HD Graphics 510, Intel Iris Pro Graphics 580
+      *
 
     * *
+      *
       *
       *
 
     * * ``Kokkos_ARCH_INTEL_GEN``
       * Just-In-Time compilation* for Intel GPUs in particular
+      *
       *
 
 \* ``Kokkos_ARCH_INTEL_GEN`` enables Just-In-Time compilation for Intel GPUs
