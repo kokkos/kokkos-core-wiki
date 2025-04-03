@@ -780,7 +780,7 @@ Intel GPUs
     * * ``Kokkos_ARCH_INTEL_DG2``
       * Intel DG2
       * Intel Flex, Intel Arc
-      * (since Kokkos 4.7.00)
+      * (since Kokkos 4.7)
 
     * * ``Kokkos_ARCH_INTEL_GEN12LP``
       * Gen12LP
