@@ -10,12 +10,12 @@ jobs:
     runs-on: ubuntu-latest
     env:
       docs-directory: /home/runner/work/kokkos-core-wiki/kokkos-core-wiki/docs
+    container:
+      image: python:3.10
     steps:
       - uses: actions/checkout@v4.2.2
-      - uses: actions/setup-python@v5.4.0
-        with:
-          python-version: '3.10'
       - run: pip install -r build_requirements.txt
+      - run: apt update && apt --yes --no-install-recommends install graphviz
       - name: Build documentation
         working-directory: ${{ env.docs-directory }}
         run: |
