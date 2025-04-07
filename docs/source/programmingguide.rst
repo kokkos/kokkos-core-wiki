@@ -19,3 +19,4 @@ Programming Guide
    ./ProgrammingGuide/Interoperability
    ./ProgrammingGuide/Kokkos-and-Virtual-Functions
    ./ProgrammingGuide/SIMD
+   ./ProgrammingGuide/Graph
