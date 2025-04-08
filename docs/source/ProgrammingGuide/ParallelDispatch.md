@@ -1,4 +1,4 @@
-# 7. Parallel dispatch
+# Parallel dispatch
 
 You probably started reading this Guide because you wanted to learn how Kokkos can parallelize your code. This chapter will teach you different kinds of parallel operations that Kokkos can execute. We call these operations collectively _parallel dispatch_, because Kokkos "dispatches" them for execution by a particular execution space. Kokkos provides three different parallel operations:
 
@@ -14,9 +14,9 @@ Important notes on syntax:
 * Use the `KOKKOS_LAMBDA` macro to replace a lambda's capture clause when giving the lambda to Kokkos for parallel
   execution
 
-## 7.1 Specifying the parallel loop body
+## Specifying the parallel loop body
 
-### 7.1.1 Functors
+### Functors
 
 A _functor_ is one way to define the body of a parallel loop. It is a class or struct<sup>1</sup> with a public `operator()` instance method. That method's arguments depend on both which parallel operation you want to execute (for, reduce, or scan), and on the loop's execution policy (e.g., range or team). For an example of a functor see the section in this chapter for each type of parallel operation. In the most common case of a [`parallel_for()`](../API/core/parallel-dispatch/parallel_for), it takes an integer argument which is the for loop's index. Other arguments are possible; see [Chapter 8 - Hierarchical Parallelism](HierarchicalParallelism).
 
@@ -32,7 +32,7 @@ The entire parallel operation (for, reduce, or scan) shares the same instance of
 <sup>1</sup>  A "struct" in C++ is just a class, all of whose members are public by default.
 ***
 
-### 7.1.2 Lambdas
+### Lambdas
 
 The 2011 version of the C++ standard ("C++11") provides a new language construct, the _lambda_, also called "anonymous function" or "closure." Kokkos lets users supply parallel loop bodies as either functors (see above) or lambdas. Lambdas work like automatically generated functors. Just like a class, a lambda may have state.  The only difference is that with a lambda, the state comes in from the environment. (The name "closure" means that the function "closes over" state from the environment.) Just like with functors, lambdas must bring in state by "value" (copy), not by reference or pointer.
 
@@ -44,23 +44,23 @@ It is a violation of Kokkos semantics to capture by reference `[&]` for two reas
 
 When using lambdas for nested parallelism (see [Chapter 8](HierarchicalParallelism) for details) using capture by reference can be useful for performance reasons, but the code is only valid Kokkos code if it also works with capturing by copy.
 
-### 7.1.3 Should I use a functor or a lambda?
+### Should I use a functor or a lambda?
 
 Kokkos lets users choose whether to use a functor or a lambda. Lambdas are convenient for short loop bodies. For a much more complicated loop body, you might find it easier for testing to separate it out and name it as a functor. Lambdas by definition are "anonymous functions," meaning that they have no name. This makes it harder to test them. Furthermore, if you would like to use lambdas with CUDA, you must have a sufficiently new version of CUDA. At the time of writing, CUDA 7.5 and later versions support host-device lambda with the special flag. CUDA 8.0 has improved interoperability with the host compiler. To enable this support, use the `KOKKOS_CUDA_OPTIONS=enable_lambda` option.
 
 Finally, the "execution tag" feature, which lets you put together several different parallel loop bodies into a single functor, only works with functors.  (See [Chapter 8](HierarchicalParallelism) for details.)
 
-### 7.1.4 Specifying the execution space
+### Specifying the execution space
 
 If a functor has an `execution_space` public typedef, a parallel dispatch will only run the functor in that execution space. That's a good way to mark a functor as specific to an execution space. If the functor lacks this typedef, [`parallel_for()`](../API/core/parallel-dispatch/parallel_for) will run it in the default execution space unless you tell it otherwise (that's an advanced topic; see "execution policies"). Lambdas do not have typedefs, so they run on the default execution space unless you tell Kokkos otherwise.
 
-## 7.2 Parallel for
+## Parallel for
 
 The most common parallel dispatch operation is a [`parallel_for()`](../API/core/parallel-dispatch/parallel_for) call. It corresponds to the OpenMP construct `#pragma omp parallel for`. [`parallel_for()`](../API/core/parallel-dispatch/parallel_for) splits the index range over the available hardware resources and executes the loop body in parallel. Each iteration is executed independently. Kokkos promises nothing about the loop order or the amount of work which actually runs concurrently. This means in particular that not all loop iterations are active at the same time. Consequently, it is not legal to use wait constructs (e.g., wait for a prior iteration to finish). Kokkos also doesn't guarantee that it will use all available parallelism. For example, it can decide to execute in serial if the loop count is very small, and it would typically be faster to run in serial instead of introducing parallelization overhead. The `RangePolicy` allows you to specify minimal chunk sizes in order to control potential concurrency for low trip count loops.
 
 The lambda or the `operator()` method of the functor takes one argument. That argument is the parallel loop "index." The type of the index depends on the execution policy used for the [`parallel_for()`](../API/core/parallel-dispatch/parallel_for). It is an integer type for the implicit or explicit [`RangePolicy`](../API/core/policies/RangePolicy). The former is used if the first argument to [`parallel_for()`](../API/core/parallel-dispatch/parallel_for) is an integer.
 
-## 7.3 Parallel reduce
+## Parallel reduce
 
 Kokkos' [`parallel_reduce()`](../API/core/parallel-dispatch/parallel_reduce) operation implements a reduction. It is like [`parallel_for()`](../API/core/parallel-dispatch/parallel_for), except that each iteration produces a value and these iteration values are accumulated into a single value with a user-specified associative binary operation. It corresponds to the OpenMP construct `#pragma omp parallel reduction` but with fewer restrictions on the reduction operation.
 
@@ -70,7 +70,7 @@ The lambda or the `operator()` method of the functor takes two arguments. The fi
 
 When not providing a `reducer` the reduction is performed with a sum reduction using the + or += operator of the scalar type. Custom reduction can also be implemented by providing a functor with a `join` and an `init` function. 
 
-### 7.3.1 Example using lambda
+### Example using lambda
 
 Here is an example reduction using a lambda, where the reduction result is a `double`.
 
@@ -85,7 +85,7 @@ parallel_reduce ("Reduction", N, KOKKOS_LAMBDA (const int i, double& update) {
 }, sum);
 ```
 
-### 7.3.2 Example using functor with `join` and `init`.
+### Example using functor with `join` and `init`.
 
 The following example shows a reduction using the _max-plus semiring_, where `max(a,b)` corresponds to addition and ordinary addition corresponds to multiplication:
 
@@ -152,7 +152,7 @@ double result;
 parallel_reduce ("Reduction", N, MaxPlus (x), result);
 ```
 
-### 7.3.3 Reductions with an array of results
+### Reductions with an array of results
 
 Kokkos lets you compute reductions with an array of reduction results, as long as that array has a (run-time) constant number of entries. This currently only works with functors. Here is an example functor that computes column sums of a 2-D View.
 
@@ -222,7 +222,7 @@ float sums[10];
 parallel_reduce (X.extent(0), cs, sums);
 ```   
 
-## 7.4 Parallel scan
+## Parallel scan
 
 Kokkos' [`parallel_scan()`](../API/core/parallel-dispatch/parallel_scan) operation implements a _prefix scan_. A prefix scan is like a reduction over a 1-D array, but it also stores all intermediate results ("partial sums"). It can use any associative binary operator. The default is `operator+` and we call a scan with that operator a "sum scan" if we need to distinguish it from scans with other operators. The scan operation comes in two variants. An _exclusive scan_ excludes (hence the name) the first entry of the array, and an _inclusive scan_ includes that entry. Given an example array `(1, 2, 3, 4, 5)`, an exclusive sum scan overwrites the array with `(0, 1, 3, 6, 10)`, and an inclusive sum scan overwrites the array with `(1, 3, 6, 10, 15)`.
 
@@ -255,7 +255,7 @@ For an exclusive scan, change the `update` value after updating the array, as in
 <sup>2</sup>  Blelloch, Guy, _Vector Models for Data-Parallel Computing_, The MIT Press, 1990.
 ***
 
-## 7.5 Function Name Tags
+## Function Name Tags
 
 When writing class-based applications it is often useful to make the classes themselves functors. Using that approach allows the kernels to access all other class members, both data and functions. An issue coming up in that case is the necessity for multiple parallel kernels in the same class. Kokkos supports that through function name tags. An application can use optional (unused) first arguments to differentiate multiple operators in the same class. Execution policies can take the type of that argument as an optional template parameter. The same applies to init, join and final functions.
 

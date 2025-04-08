@@ -1,4 +1,4 @@
-# 9.1 Built-In-Reducers
+# Built-In-Reducers
 
 Kokkos provides Reducers for the most common reduction types:
 * [BAnd](../API/core/builtinreducers/BAnd): Do a binary “and” reduction

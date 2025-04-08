@@ -1,4 +1,4 @@
-# 12 Backwards & Future Compatibility
+# Backwards & Future Compatibility
 
 For a sufficiently clever user, effectively any change we make to Kokkos will be a breaking change. The intent of this document is to make it clear about what does and does not constitute supported use of Kokkos, as well as how Kokkos moves forward.
 
