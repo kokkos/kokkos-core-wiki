@@ -1,74 +1,44 @@
-Sort
-====
 
 .. role:: cppkokkos(code)
     :language: cppkokkos
 
-.. code-block:: cpp
+Sort with nested policies (team- and thread-level)
+==================================================
 
-    template<class DstViewType, class SrcViewType>
-    struct copy_functor { }
+Header File: ``<Kokkos_NestedSort.hpp>``.
 
-    template<class DstViewType, class PermuteViewType, class SrcViewType>
-    struct copy_permute_functor { }
 
-    class BinSort {
-        template<class DstViewType, class SrcViewType> struct copy_functor { }
-        template<class DstViewType, class PermuteViewType, class SrcViewType> struct copy_permute_functor { }
-        template<class ValuesViewType> void sort( ValuesViewType const & values, int values_range_begin, int values_range_end ) const { }
-        template<class ValuesViewType> void sort( ValuesViewType const & values ) const { }
-    }
+Parallel sort functions to use within ``TeamPolicy`` kernels.
+These perform sorting using team-level (``TeamThreadRange``) or thread-level (``ThreadVectorRange``) parallelism.
 
-    template<class KeyViewType> struct BinOp1D { }
-    template<class KeyViewType> struct BinOp3D { }
 
-    template<class ViewType> void sort( ViewType const & view ) { }
-    template<class ViewType> void sort( ViewType view, size_t const begin, size_t const end ) {  }
+API
+---
 
-Sorting with nested policies (team- and thread-level)
-=====================================================
+.. warning:: The following functions are currently inside the ``Kokkos::Experimental`` namespace.
 
-Parallel sort functions for use within ``TeamPolicy`` kernels. These perform sorting using team-level (``TeamThreadRange``) or thread-level (``ThreadVectorRange``) parallelism.
 
-Header: ``<Kokkos_NestedSort.hpp>``
+.. cppkokkos:kokkosinlinefunction:: template <class TeamMember, class ViewType> void sort_team(const TeamMember& t, const ViewType& view);
 
-Synopsis
---------
+.. cppkokkos:kokkosinlinefunction:: template <class TeamMember, class ViewType, class Comparator> void sort_team(const TeamMember& t, const ViewType& view, const Comparator& comp);
 
-.. code-block:: cpp
-        
-    //namespace Kokkos::Experimental
+.. cppkokkos:kokkosinlinefunction:: template <class TeamMember, class KeyViewType, class ValueViewType> void sort_by_key_team(const TeamMember& t, const KeyViewType& keyView, const ValueViewType& valueView);
 
-    template <class TeamMember, class ViewType>
-    KOKKOS_INLINE_FUNCTION void sort_team(const TeamMember& t, const ViewType& view);
+.. cppkokkos:kokkosinlinefunction:: template <class TeamMember, class KeyViewType, class ValueViewType, class Comparator> void sort_by_key_team(const TeamMember& t, const KeyViewType& keyView, const ValueViewType& valueView, const Comparator& comp);
 
-    template <class TeamMember, class ViewType, class Comparator>
-    KOKKOS_INLINE_FUNCTION void sort_team(const TeamMember& t, const ViewType& view, const Comparator& comp);
+.. cppkokkos:kokkosinlinefunction:: template <class TeamMember, class ViewType> void sort_thread(const TeamMember& t, const ViewType& view);
 
-    template <class TeamMember, class KeyViewType, class ValueViewType>
-    KOKKOS_INLINE_FUNCTION void sort_by_key_team(
-        const TeamMember& t, const KeyViewType& keyView, const ValueViewType& valueView);
+.. cppkokkos:kokkosinlinefunction:: template <class TeamMember, class ViewType, class Comparator> void sort_thread(const TeamMember& t, const ViewType& view);
 
-    template <class TeamMember, class KeyViewType, class ValueViewType, class Comparator>
-    KOKKOS_INLINE_FUNCTION void sort_by_key_team(
-        const TeamMember& t, const KeyViewType& keyView, const ValueViewType& valueView, const Comparator& comp);
+.. cppkokkos:kokkosinlinefunction:: template <class TeamMember, class ViewType, class Comparator> void sort_thread(const TeamMember& t, const ViewType& view, const Comparator& comp);
 
-    template <class TeamMember, class ViewType>
-    KOKKOS_INLINE_FUNCTION void sort_thread(const TeamMember& t, const ViewType& view);
+.. cppkokkos:kokkosinlinefunction:: template <class TeamMember, class KeyViewType, class ValueViewType> void sort_by_key_thread(const TeamMember& t, const KeyViewType& keyView, const ValueViewType& valueView);
 
-    template <class TeamMember, class ViewType, class Comparator>
-    KOKKOS_INLINE_FUNCTION void sort_thread(const TeamMember& t, const ViewType& view);
+.. cppkokkos:kokkosinlinefunction:: template <class TeamMember, class KeyViewType, class ValueViewType, class Comparator> void sort_by_key_thread(const TeamMember& t, const KeyViewType& keyView, const ValueViewType& valueView, const Comparator& comp);
 
-    template <class TeamMember, class ViewType, class Comparator>
-    KOKKOS_INLINE_FUNCTION void sort_thread(const TeamMember& t, const ViewType& view, const Comparator& comp);
 
-    template <class TeamMember, class KeyViewType, class ValueViewType>
-    KOKKOS_INLINE_FUNCTION void sort_by_key_thread(
-        const TeamMember& t, const KeyViewType& keyView, const ValueViewType& valueView);
+|
 
-    template <class TeamMember, class KeyViewType, class ValueViewType, class Comparator>
-    KOKKOS_INLINE_FUNCTION void sort_by_key_thread(
-        const TeamMember& t, const KeyViewType& keyView, const ValueViewType& valueView, const Comparator& comp);
 
 ``sort_team`` and ``sort_by_key_team`` internally use the entire team, so they may be called inside the top level of ``TeamPolicy`` lambdas and functors. ``sort_thread`` and ``sort_by_key_thread`` use the vector lanes of a thread, so they may be called within either ``TeamPolicy`` or ``TeamThreadRange`` loops.
 
@@ -97,7 +67,7 @@ Example
 -------
 
 .. code-block:: cpp
-        
+
     #include <Kokkos_Core.hpp>
     #include <Kokkos_NestedSort.hpp>
     #include <Kokkos_Random.hpp>
@@ -158,27 +128,27 @@ Sample output
 ~~~~~~~~~~~~~
 
 .. code-block:: cpp
-        
+
     A, with each row sorted:
-    0 9 38 68 74 76 83 89 91 95 
-    19 41 41 55 65 68 78 92 99 99 
-    2 13 16 17 19 40 44 54 96 99 
-    17 18 65 68 77 80 82 94 94 95 
-    0 14 34 35 45 46 47 52 58 96 
-    2 6 9 13 25 32 37 51 80 81 
-    3 5 14 16 20 25 33 39 60 97 
-    7 8 15 31 33 38 40 40 42 86 
-    4 19 20 29 42 56 60 63 68 90 
-    1 16 16 17 33 39 60 64 78 94 
+    0 9 38 68 74 76 83 89 91 95
+    19 41 41 55 65 68 78 92 99 99
+    2 13 16 17 19 40 44 54 96 99
+    17 18 65 68 77 80 82 94 94 95
+    0 14 34 35 45 46 47 52 58 96
+    2 6 9 13 25 32 37 51 80 81
+    3 5 14 16 20 25 33 39 60 97
+    7 8 15 31 33 38 40 40 42 86
+    4 19 20 29 42 56 60 63 68 90
+    1 16 16 17 33 39 60 64 78 94
 
     A, with each column sorted:
-    0 5 9 13 19 25 33 39 42 81 
-    0 6 14 16 20 32 37 40 58 86 
-    1 8 15 17 25 38 40 51 60 90 
-    2 9 16 17 33 39 44 52 68 94 
-    2 13 16 29 33 40 47 54 78 95 
-    3 14 20 31 42 46 60 63 80 95 
-    4 16 34 35 45 56 60 64 91 96 
-    7 18 38 55 65 68 78 89 94 97 
-    17 19 41 68 74 76 82 92 96 99 
-    19 41 65 68 77 80 83 94 99 99 
+    0 5 9 13 19 25 33 39 42 81
+    0 6 14 16 20 32 37 40 58 86
+    1 8 15 17 25 38 40 51 60 90
+    2 9 16 17 33 39 44 52 68 94
+    2 13 16 29 33 40 47 54 78 95
+    3 14 20 31 42 46 60 63 80 95
+    4 16 34 35 45 56 60 64 91 96
+    7 18 38 55 65 68 78 89 94 97
+    17 19 41 68 74 76 82 92 96 99
+    19 41 65 68 77 80 83 94 99 99
