@@ -1,16 +1,14 @@
-name: Test GitHub Action
+name: Spelling
+
 on: [push, pull_request]
 
 jobs:
-  run:
+  spell-check-crate:
     name: Spell Check with Typos
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout Actions Repository
-      uses: actions/checkout@v4
+    - uses: actions/checkout@v4
 
-    - name: Writes changes in the local checkout
-      uses: crate-ci/typos@v1.31.1
+    - uses: crate-ci/typos@v1.31.1
       with:
-        write_changes: true
         config: ./.typos.toml

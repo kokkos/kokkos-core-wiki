@@ -33,7 +33,7 @@ List of available variants can be found by running
 
 When using Spack, Kokkos hardware autodetection is disabled. That means that the user always has to manually specify the 
 architecture. However, for CPU, Spack already specify the CPU micro-architecture, so it is not needed to specify it again.
-For GPU, no such mecanism exists in Spack and the user always need to specify the correct architecture, using a dedicated
+For GPU, no such mechanism exists in Spack and the user always need to specify the correct architecture, using a dedicated
 backend keyword (see next section).
 
 
