@@ -1,5 +1,5 @@
-9. Custom Reductions
-====================
+Custom Reductions
+=================
 
 As described previously Kokkos reductions perform a "sum" reduction by default. But while that is the most common type of reduction it is not the only one required by more complex applications. Kokkos provides the "Reducer" concept to accommodate custom reductions. 
 

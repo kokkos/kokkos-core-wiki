@@ -1,10 +1,10 @@
-5. Initialization
-=================
+Initialization
+==============
 
 In order to use Kokkos, an initialization call is required. That call is responsible for initializing internal objects and acquiring hardware resources such as threads. Typically, this call should be placed right at the start of a program. If you use both MPI and Kokkos, your program should initialize Kokkos right after calling `MPI_Init`. That way, if MPI sets up process binding masks, Kokkos will get that information and use it for best performance. Your program must also _finalize_ Kokkos when done using it in order to free hardware resources.
 
-5.0 Include Headers
--------------------
+Include Headers
+---------------
 
 All primary capabilities of Kokkos are provided by the `Kokkos_Core.hpp` header file.
 Some capabilities - specifically data structures in the `containers` subpackage and algorithmic capabilities in the `algorithms` subpackage are included via separate header files.
@@ -15,8 +15,8 @@ For specific capabilities check their API reference:
 - `API: Algorithms <../API/algorithms-index.html>`_
 - `API in Alphabetical Order <../API/alphabetical.html>`_
 
-5.1 Initialization by command-line arguments
---------------------------------------------
+Initialization by command-line arguments
+----------------------------------------
 
 The simplest way to initialize Kokkos is by calling the following function:
 
@@ -99,8 +99,8 @@ The values are case insensitive.
 - random: select a random device from available.
 - mpi_rank: select device based on a round robin assignment of local MPI ranks. Works with OpenMPI, MVAPICH, SLURM, and derived implementations. Support for MPICH was added in Kokkos 4.0
 
-5.2 Initialization by environment variable
-------------------------------------------
+Initialization by environment variable
+--------------------------------------
 
 Instead of using command-line arguments, one may use environment variables. The environment variables are identical to the arguments in `Table 5.1 <Table_cli-opts>`_ but they are upper case and the dash is replaced by an underscore. For example, if we want to set the number of threads to 3, we may use
 
@@ -109,8 +109,8 @@ Instead of using command-line arguments, one may use environment variables. The 
   KOKKOS_NUM_THREADS=3
 
 
-5.3 Initialization by struct
-----------------------------
+Initialization by struct
+------------------------
 
 Instead of giving `Kokkos::initialize() <../API/core/initialize_finalize/initialize.html>`_ command-line arguments, one may directly pass in initialization parameters using the `Kokkos::InitializationSettings` struct.  If one wants to set options using the struct, one can use the functions `set_xxx` where `xxx` is identical to the arguments in `Table 5.1 <Table_cli-opts>`_ where the dash has been replaced by an underscore. To check if a variable has been set, one can use the `has_xxx` functions. Finally, to get the value that was set, one can use the `get_xxx` functions.
 
@@ -129,13 +129,13 @@ Here is an example of how to use the struct.
 
     Kokkos::initialize(settings);
 
-5.4 Finalization
-----------------
+Finalization
+------------
 
 At the end of each program, Kokkos needs to be shut down in order to free resources; do this by calling `Kokkos::finalize() <../API/core/initialize_finalize/finalize.html>`_. You may wish to set this to be called automatically at program exit, either by setting an `atexit` hook or by attaching the function to `MPI_COMM_SELF` so that it is called automatically at `MPI_Finalize`.
 
-5.5 Example Code
-----------------
+Example Code
+------------
 
 A minimal Kokkos code thus would look like this:
 

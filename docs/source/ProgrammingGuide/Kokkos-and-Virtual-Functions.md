@@ -1,4 +1,4 @@
-# 14. Kokkos and Virtual Functions
+# Kokkos and Virtual Functions
 
 ```{warning}
 Using virtual functions in parallel regions is not a good idea in general. It often degrades performance, requires specific code for a correct execution on GPU, and is not portable on every backend. We recommend to use a different approach whenever possible.

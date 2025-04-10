@@ -1,5 +1,4 @@
-
-# 4. Compiling
+# Compiling
 
 This chapter explains how to compile Kokkos and how to link your application against Kokkos. Kokkos supports three methods to build:
 
@@ -9,7 +8,7 @@ This chapter explains how to compile Kokkos and how to link your application aga
 
 Note that the build methods listed above should not be mixed. For example, do not include the GNU Makefile in your application build process, while explicitly linking against a pre-compiled Kokkos library in Trilinos. We also include specific advice for building for NVIDIA GPUs and Intel Xeon Phi.
 
-## 4.1 General Information
+## General Information
 
 Kokkos consists mainly of header files. Only a few functions have to be compiled into object files outside of the application's source code. Those functions are contained in `.cpp` files inside the `kokkos/core/src` directory and its subdirectories. The files are internally protected with macros to prevent compilation if the related execution space is not enabled. Thus, it is not necessary to create a list of included object files specific to your compilation target; one may simply compile all `.cpp` files. The enabled features are controlled via macros which have to be provided in the compilation line or the generated `KokkosCore_config.h` include file; a subset of the macros can be found in Table 4.1.  For the most part, all of these macros are enabled/disabled using the options and settings controlled through one of the build methods previously mentioned.
 
@@ -27,7 +26,7 @@ For an up-to-date list on build system requirements, please refer to [Requiremen
 `KOKKOS_ENABLE_HIP`| Enable the HIP execution space. | Requires a compiler capable of understanding HIP.
 `KOKKOS_ENABLE_SYCL`| Enable the SYCL execution space. | Requires a compiler capable of understanding SYCL.
 
-## 4.2 Using General CMake build system
+## Using General CMake build system
 
 ### Installing and Using Kokkos
 
@@ -38,6 +37,7 @@ for C++.  Applications heavily leveraging Kokkos are strongly encouraged to use 
 You can either use Kokkos as an installed package (encouraged) or use Kokkos in-tree included in your project.
 
 ### Using Kokkos installed Package
+
 With the Kokkos package installed, you build and link with the Kokkos library using CMake by adding the following to you your `CMakeLists.txt`:
 ```cmake
 find_package(Kokkos REQUIRED)
@@ -64,6 +64,7 @@ With Kokkos release 3.0 the externally defined CMAKE_CXX_FLAGS are not propagate
 ```
 
 ### Using Kokkos in-tree build
+
 If building in-tree, the Kokkos source directory must be within a subdirectory of your application source tree (relative to the location of your application CMakeLists.txt)
 
 To include Kokkos in the application add the following to CMakeLists.txt:
@@ -77,6 +78,7 @@ Using this method, the Kokkos options necessary to specify the devices, arch and
 
 
 ## Configuring Kokkos with CMake
+
 A very basic installation is done with:
 
 ```bash
@@ -122,6 +124,7 @@ For a complete list of Kokkos options, run:
 ```
 
 #### Spack Development
+
 Spack currently installs packages to a location determined by a unique hash. This hash name is not really "human readable".
 Generally, Spack usage should never really require you to reference the computer-generated unique install folder.
 If you must know, you can locate Spack Kokkos installations with:
@@ -161,7 +164,7 @@ endif()
 
 Please see the [documentation page with all keywords](../get-started/configuration-guide).
 
-## 4.3 Using Trilinos' CMake build system
+## Using Trilinos' CMake build system
 
 The Trilinos project (see [`trilinos.org`](https://trilinos.org) and github for the [source code](https://github.com/trilinos/Trilinos) repository) is an effort to develop algorithms and enabling technologies within an object-oriented software framework for the solution of large-scale, complex multiphysics engineering and scientific problems. Trilinos is organized into packages. Even though Kokkos is a stand-alone software project, Trilinos uses Kokkos extensively. Thus, Trilinos' source code includes Kokkos' source code, and builds Kokkos as part of its build process.
 
@@ -194,7 +197,7 @@ For builds with CUDA enabled, the path to the `nvcc_wrapper` script should also 
 We refer readers to Trilinos' documentation for further details.
 
 (GNU_makefile_system)=
-## 4.4 Using Kokkos' GNU Makefile system
+## Using Kokkos' GNU Makefile system
 
 The base of the build system is the file `Makefile.kokkos`; it is designed to be included by application Makefiles. It contains logic to (re)generate the `KokkosCore_config.h` file if necessary, build the Kokkos library, and provide updated compiler and linker flags.
 
@@ -242,7 +245,7 @@ Variable  | Description
 `CXXFLAGS (IN)` | User provided compiler flags which will be used to compile the Kokkos library.
 `CXX (IN)` | The compiler used to compile the Kokkos library.
 
-## 4.5 Building for CUDA
+## Building for CUDA
 
 Any Kokkos application compiled for CUDA embeds CUDA code via template metaprogramming. Thus, the whole application must be built with a CUDA-capable compiler. (At the moment, the only such compilers are NVIDIA's NVCC and Clang 10.0+) More precisely, every compilation unit containing a Kokkos kernel or a function called from a Kokkos kernel has to be compiled with a CUDA-capable compiler. This includes files containing [`Kokkos::View`](../API/core/view/view) allocations which call an initialization kernel.
 
@@ -250,7 +253,7 @@ All current versions of the NVCC compiler have shortcomings when used as the mai
 
 Many people use a system like [Environment Modules](http://modules.sourceforge.net) to manage their shell environment. When using a module system, it can be useful to provide different versions for different back-end compiler types (e.g., `pgc++, g++,` and `clang`). To use the `nvcc_wrapper` in conjunction with MPI wrappers, simply overwrite which C++ compiler is called by the MPI wrapper. For example, you can reset OpenMPI's C++ compiler by setting the `OMPI_CXX` environment variable. Make sure that `nvcc_wrapper` calls the host compiler with which the MPI library was compiled.
 
-## 4.6 Execution Space Restrictions
+## Execution Space Restrictions
 
 Currently, Kokkos organizes its execution spaces into three categories:
 

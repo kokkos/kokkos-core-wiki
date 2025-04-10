@@ -2,6 +2,7 @@ Programming Guide
 #################
 
 .. toctree::
+   :numbered:
    :maxdepth: 1
 
    ./ProgrammingGuide/Introduction

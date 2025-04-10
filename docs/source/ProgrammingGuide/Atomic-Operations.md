@@ -1,4 +1,4 @@
-# 10. Atomic Operations
+# Atomic Operations
 
 After reading this chapter, you should understand the following:
 
@@ -7,7 +7,7 @@ After reading this chapter, you should understand the following:
 * How to use the Atomic memory trait.
 * Using [ScatterView](../API/containers/ScatterView) for scatter add patterns
 
-## 10.1 Write Conflicts and Their Resolution With Atomic Operations
+## Write Conflicts and Their Resolution With Atomic Operations
 
 Consider the simple task of creating a histogram of a number set. 
 
@@ -58,7 +58,7 @@ Replicating the output array is a good strategy for low thread counts (2-8) but 
 
 Atomic operations execute a whole logical operation uninterrupted. For example the load-modify-store cycle of the above examples will be executed with no other threads being able to access the modified library (via another atomic operation) until the atomic operation is finished. Note that non-atomic operations may still race with atomic operations. The disadvantage of atomic operation is that they hinder certain compiler optimizations, and the throughput of atomics may not be good depending on the architecture and the scalar type. 
 
-## 10.2 Atomic Free Functions
+## Atomic Free Functions
 
 Atomic free functions are functions which take a pointer to the to-be-updated value, plus the update. Every typical operation has its own atomic free function. The two example above would be like this:
 
@@ -108,7 +108,7 @@ The full list of atomic operations can be found here:
 | [atomic_\[op\]_fetch](../API/core/atomics/atomic_op_fetch)                            | [Core](../API/core-index) | [Atomic-Operations](Atomic-Operations) | Various atomic operations which return the updated value. [op] might be `add`, `and`, `div`, `lshift`, `max`, `min`, `mod`, `mul`, `or`, `rshift`, `sub` or `xor` |
 | [atomic_store](../API/core/atomics/atomic_store)                                      | [Core](../API/core-index) | [Atomic-Operations](Atomic-Operations) | Atomic operation which stores a value. |
 
-## 10.3 Atomic Memory Trait
+## Atomic Memory Trait
 
 If all operations on a specific `View` during a Kernel are atomic one can also use the atomic memory trait.
 Generally one creates an *atomic* `View` from a *non-atomic* `View` just for the one kernel, and then uses normal 
@@ -125,7 +125,7 @@ void create_histogram(View<int*> histogram, int min, int max, View<int*> values)
 }
 ```
 
-## 10.4 ScatterView
+## ScatterView
 
 On CPUs one often uses low thread counts, in particular if Kokkos is used in conjunction with MPI. 
 In such situations data replication often performs better than using atomic operations. 

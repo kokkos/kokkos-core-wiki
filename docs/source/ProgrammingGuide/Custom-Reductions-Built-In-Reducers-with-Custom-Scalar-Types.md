@@ -1,4 +1,4 @@
-# 9.2 Built-In Reducers with Custom Scalar Types
+# Built-In Reducers with Custom Scalar Types
 
 In order to use a Custom Scalar Type with Built-in reductions, the following requirements must be fulfilled.
 
@@ -64,5 +64,4 @@ int main( int argc, char* argv[] )
 
   return 0;
 }
-
 ```
