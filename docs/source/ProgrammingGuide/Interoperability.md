@@ -127,9 +127,10 @@ Alternatively one can create a view which directly references the external alloc
 ```c++
 void MyKokkosFunction(int* a, const double* b, int n, int m) {
   // Define the host execution space and the view types
-  typedef View<int*, DefaultHostExecutionSpace, Unmanaged> t_1d_view;
+  typedef View<int*, DefaultHostExecutionSpace, MemoryTraits<Unmanaged>> t_1d_view;
   typedef View<double**[3],LayoutRight, DefaultHostExecutionSpace,
-               Unmanaged> t_3d_view;
+               MemoryTraits<Unmanaged>> t_3d_view;
+  // Unmanaged views cannot have labels
 
   // Create a 1D view of the external allocation
   t_1d_view d_a(a,n);
