@@ -157,7 +157,7 @@ These options are generally useful for any CMake project:
   * ``SYCL``: Intel GPUs
     
   Example: ``-DKokkos_ENABLE_CUDA=ON``
-  Note that ``-DKokkos_ENABLE_COMPILE_AS_CMAKE_LANGUAGE=ON`` is required when building with cuda and MSVC/CL
+  Note that ``-DKokkos_ENABLE_COMPILE_AS_CMAKE_LANGUAGE=ON`` is required when building with CUDA and MSVC on Windows.
 
 
 
