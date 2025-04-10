@@ -57,6 +57,64 @@ There are many advantages. Here are a few:
   the backend driver and/or compiler can leverage optimization opportunities.
 * Launch overhead is reduced, benefitting DAGs consisting of small workloads.
 
+Capture
+~~~~~~~
+
+It might be necessary to add nodes whose workloads are not
+defined using any :cppkokkos:`Kokkos` code to a :cppkokkos:`Kokkos::Graph`.
+This is the case *e.g.* when calling external math libraries like `cuBLAS`.
+
+Such a scenario can be encountered in many situations like building and training a neural network,
+running a conjugate gradient method, and so on.
+
+Capturing into a :cppkokkos:`Kokkos::Graph` boils down to writing the following snippet:
+
+.. code:: c++
+
+    auto my_captured_node = predecessor.cuda_capture(
+        exec,
+        [data = data](const Kokkos::Cuda& exec_) { ... }
+    );
+
+When the node is added to the :cppkokkos:`Kokkos::Graph`, the workloads are not directly dispatched to the device.
+Rather, the backend operations are "saved" for later "reuse" in the *capture* node.
+
+This is achieved by setting the underlying "stream" to "*capture* mode" before invoking the function object,
+such that backend operations are saved to the *capture* node instead of being enqueued in the passed execution space instance.
+The underlying "stream" is then restored to "no-*capture* mode".
+
+Some important aspects of *capture* are worth pointing out:
+
+1. The function object will be stored by the :cppkokkos:`Kokkos::Graph` instance,
+   thereby ensuring that any data bound to the function object is guaranteed to
+   stay alive until the graph is destroyed.
+2. The execution space instance `exec` associates the captured workloads to a device.
+3. The *capture* mechanism will temporarily alter the `exec`'s state by setting the underlying "stream" to "*capture* mode".
+   While in "*capture* mode", backend-specific restrictions may apply (see `the Cuda programming guide <https://docs.nvidia.com/cuda/cuda-c-programming-guide/#prohibited-and-unhandled-operations>`_
+   for instance).
+
+.. warning::
+
+    When a "stream" is used by many threads, capturing on one thread may affect other threads
+    (see `CUDA`'s :cpp:`cudaThreadExchangeStreamCaptureMode` for instance).
+
+For now, *capture* is only supported for the following backends:
+
+.. list-table::
+
+  * - Backend
+    - Resources
+  * - :cppkokkos:`Cuda`
+    - `CUDA Graphs <https://docs.nvidia.com/cuda/cuda-c-programming-guide/#cuda-graphs>`_
+  * - :cppkokkos:`HIP`
+    - `HIP stream capture <https://rocm.docs.amd.com/projects/HIP/en/latest/reference/hip_runtime_api/modules/graph_management.html#_CPPv421hipStreamBeginCapture11hipStream_t20hipStreamCaptureMode>`_
+  * - :cppkokkos:`SYCL`
+    - `SYCL Graph <https://github.com/intel/llvm/blob/ee5e1ca95c78576c1b6f12b1c2d461ef4b537a9b/sycl/doc/extensions/experimental/sycl_ext_oneapi_graph.asciidoc?plain=1#L167-LL170>`_
+
+.. note::
+
+    The :cppkokkos:`SYCL` documentation will use *recording* instead of *capture*, but it is essentially the same thing.
+
 Examples
 --------
 
@@ -91,3 +149,13 @@ for this DAG.
     graph.instantiate();
 
     graph.submit();
+
+Capture of a `cuBLAS` call
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This example shows how to create a node that captures a `cuBLAS` call.
+It also demonstrates how data is kept alive during
+the whole lifetime of the :cppkokkos:`Kokkos::Graph` (*e.g.* the `cuBLAS` handle).
+
+.. literalinclude:: examples/graph_capture.cpp
+   :language: c++
