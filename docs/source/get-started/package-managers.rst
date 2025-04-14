@@ -6,11 +6,35 @@ Use your favorite package manager to install Kokkos.
 System package managers
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-DNF
----
+Fedora
+------
 
-You may use the Fedora Project package manager to install Kokkos
-https://packages.fedoraproject.org/pkgs/kokkos/
+You may use the Fedora Project package manager to install Kokkos:
+
+.. code-block::
+
+    dnf install kokkos-devel
+
+
+Debian/Ubuntu
+-------------
+
+You may use the Debian/Ubuntu Project package manager to install Kokkos:
+
+.. code-block::
+
+    apt-get install kokkos-dev
+
+
+openSUSE
+--------
+
+You may use the openSUSE Project package manager to install Kokkos:
+
+.. code-block::
+
+    zypper install kokkos-devel
+
 
 Other package managers
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -125,4 +149,14 @@ For more complete examples, you can look at already existing recipes in the *Req
 .. code-block::
 
     spack dependents kokkos
+
+
+`Conda <https://https://anaconda.org/>`_
+----------------------------------------
+
+You may use the Conda package manager to install Kokkos:
+
+.. code-block::
+
+    conda install conda-forge::kokkos
 
