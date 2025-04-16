@@ -392,6 +392,8 @@ Notes
   qualification (``Kokkos::sqrt``) or using-declaration (``using
   Kokkos::sqrt;``) instead.  (See |KnownIssues|_)
 * Math functions were removed from the ``Kokkos::Experimental::`` namespace in version 4.3
+* Support for quadruple precision floating-point ``__float128`` can be enabled
+  via ``-DKokkos_ENABLE_LIBQUADMATH=ON``.
 
 ------------
 
