@@ -1,4 +1,4 @@
-# 15. SIMD Types
+# SIMD Types
 
 ## Background
 

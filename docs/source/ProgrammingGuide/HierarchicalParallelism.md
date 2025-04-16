@@ -1,9 +1,9 @@
-# 8. Hierarchical Parallelism
+# Hierarchical Parallelism
 
 This chapter explains how to use Kokkos to exploit multiple levels of shared-memory parallelism. These levels include thread teams, threads within a team, and vector lanes. You may nest these levels of parallelism, and execute [`parallel_for()`](../API/core/parallel-dispatch/parallel_for), [`parallel_reduce()`](../API/core/parallel-dispatch/parallel_reduce), or [`parallel_scan()`](../API/core/parallel-dispatch/parallel_scan) at each level. The syntax differs only by the execution policy,
 which is the first argument to the `parallel_*` operation. Kokkos also exposes a "scratch pad" memory which provides thread private and team private allocations.
 
-## 8.1 Motivation
+## Motivation
 
 Node architectures on modern high-performance computers are characterized by ever more _hierarchical parallelism_.
 A level in the hierarchy is determined by the hardware resources which are shared between compute units at that level.
@@ -33,13 +33,13 @@ You should use Hierarchical Parallelism in particular in a number of cases:
 On the other hand you should probably not use Hierarchical Parallelism if you have tightly nested loops. For that use case, a multidimensional Range Policy is the better fit.
 
 (HP_thread_teams)=
-## 8.2 Thread teams
+## Thread teams
 
 Kokkos' most basic hierarchical parallelism concept is a thread team. A _thread team_ is a collection of threads which can synchronize and which share a "scratch pad" memory (see [Section 8.3](Team_scratch_pad_memory)).
 
 Instead of mapping a 1-D range of indices to hardware resources, Kokkos' thread teams map a 2-D index range. The first index is the _league rank_, the index of the team. The second index is the _team rank_, the thread index within a team. In CUDA this is equivalent to launching a 1-D grid of 1-D blocks. The league size is arbitrary -- that is, it is only limited by the integer size type -- while the team size must fit in the hardware constraints. As in CUDA, only a limited number of teams are actually active at the same time, and they must run to completion before new ones are executed. Consequently, it is not valid to use inter thread-team synchronization mechanisms such as waits for events initiated by other thread teams.
 
-### 8.2.1 Creating a Policy instance
+### Creating a Policy instance
 
 Kokkos exposes use of thread teams with the [`Kokkos::TeamPolicy`](../API/core/policies/TeamPolicy) execution policy. To use thread teams you need to create a [`Kokkos::TeamPolicy`](../API/core/policies/TeamPolicy) instance. It can be created inline for the parallel dispatch call. The constructors require two arguments: a league size and a team size. In place of the team size, a user can utilize `Kokkos::AUTO` to let Kokkos guess a good team size for a given architecture. Doing that is the recommended way for most developers to utilize the [`TeamPolicy`](../API/core/policies/TeamPolicy). As with the  [`Kokkos::RangePolicy`](../API/core/policies/RangePolicy) a specific execution tag, a specific execution space, a `Kokkos::IndexType`, and a `Kokkos::Schedule` can be given as optional template arguments.
 
@@ -59,7 +59,7 @@ Kokkos::TeamPolicy<SomeTag, ExecutionSpace>
         policy( league_size, team_size );
 ```
 
-### 8.2.2 Basic kernels
+### Basic kernels
 
 The team policy's `member_type` provides the necessary functionality to use teams within a parallel kernel. It allows access to thread identifiers such as the league rank and size, and the team rank and size. It also provides team-synchronous actions such as team barriers, reductions and scans.
 
@@ -116,7 +116,7 @@ parallel_for (policy, KOKKOS_LAMBDA (member_type team_member) {
 ```
 
 (Team_scratch_pad_memory)=
-## 8.3 Team scratch pad memory
+## Team scratch pad memory
 
 Each Kokkos team has a "scratch pad." This is an instance of a memory space accessible only by threads in that team. Scratch pads let an algorithm load a workset into a shared space and then collaboratively work on it with all members of a team. The lifetime of data in a scratch pad is the lifetime of the team. In particular, scratch pads are recycled by all logical teams running on the same physical set of cores. During the lifetime of the team all operations allowed on global memory are allowed on the scratch memory. This includes taking addresses and performing atomic operations on elements located in scratch space. Team-level scratch pads correspond to the per-block shared memory in Cuda, or to the "local store" memory on the Cell processor.
 
@@ -198,7 +198,7 @@ Kokkos::parallel_for(Kokkos::TeamPolicy<>(league_size,team_size).
 });
 ```
 
-## 8.4 Nested parallelism
+## Nested parallelism
 
 Instead of writing code which explicitly uses league and team rank indices, one can use nested parallelism to implement hierarchical algorithms. Kokkos lets the user have up to three nested layers of parallelism. The team and thread levels are the first two levels. The third level is _vector_ parallelism.
 
@@ -209,7 +209,7 @@ You may nest them and use them in conjunction with code that is aware of the lea
 <sup>1</sup> The parallel scan operation is not implemented for all execution spaces on the thread level, and it doesn't support a TeamPolicy on the top level.
 ***
 
-### 8.4.1 Team loops
+### Team loops
 
 The first nested level of parallel loops splits an index range over the threads of a team. This motivates the policy name [`TeamThreadRange`](../API/core/policies/TeamThreadRange), which indicates that the loop is executed once by the team with the index range split over threads. The loop count is not limited to the number of threads in a team, and how the index range is mapped to threads is architecture dependent. It is not legal to nest multiple parallel loops using the [`TeamThreadRange`](../API/core/policies/TeamThreadRange) policy. However, it is valid to have multiple parallel loops using the [`TeamThreadRange`](../API/core/policies/TeamThreadRange) policy follow each other in sequence, in the same kernel. Note that it is not legal to make a write access to POD data outside the closure of a nested parallel layer. This is a conscious choice to prevent difficult-to-debug issues related to thread private, team shared and globally shared variables. A simple way to enforce this is by using the "capture by value"' clause with lambdas,
 but "capture by reference" is recommended for release builds since it typically results in better performance.
@@ -269,11 +269,11 @@ Note that custom reductions must employ one of the functor join patterns recogni
 
 The third pattern is [`parallel_scan()`](../API/core/parallel-dispatch/parallel_scan) which can be used to perform prefix scans.
 
-#### 8.4.1.1 Team Barriers
+#### Team Barriers
 
 In instances where one loop operation might need to be sequenced with a different loop operation, such as filling of arrays as a preparation stage for following computations on that data, it is important to be able to control threads in time; this can be done through the use of barriers. In nested loops, the outside loop ( [`TeamPolicy<> ()`](../API/core/policies/TeamPolicy) ) has a built-in (implicit) team barrier; inner loops ( [`TeamThreadRange ()`](../API/core/policies/TeamThreadRange) ) do not. This latter condition is often referred to as a 'non-blocking' condition. When necessary, an explicit barrier can be introduced to synchronize team threads; an example is shown in the previous example. 
 
-### 8.4.2 Vector loops
+### Vector loops
 
 The innermost level of nesting parallel loops in a kernel comprises the _vector_-loop. Vector level parallelism works identically to the team level loops using the execution policy [`ThreadVectorRange`](../API/core/policies/ThreadVectorRange). In contrast to the team-level, there is no legal way to exploit the vector level outside a parallel pattern using the [`ThreadVectorRange`](../API/core/policies/ThreadVectorRange). However, one can use such a parallel construct in- and outside- of a [`TeamThreadRange`](../API/core/policies/TeamThreadRange) parallel operation.
 
@@ -312,7 +312,7 @@ parallel_for (TeamPolicy<> (league_size, team_size),
 
 As the name indicates the vector-level must be vectorizable. The parallel patterns will exploit available mechanisms to encourage vectorization by the compiler. When using the Intel compiler for example, the vector level loop will be internally decorated with `#pragma ivdep`, telling the compiler to ignore assumed vector dependencies.
 
-### 8.4.3 Restricting execution to a single executor
+### Restricting execution to a single executor
 
 As stated above, a kernel is a parallel region with respect to threads (and vector lanes) within a team. This means that global memory accesses outside of the respective nested levels potentially have to be protected against repetitive execution. A common example is the case where a team performs some calculation but only one result per team has to be written back to global memory.
 
