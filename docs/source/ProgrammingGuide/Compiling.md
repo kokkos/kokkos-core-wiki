@@ -199,7 +199,7 @@ We refer readers to Trilinos' documentation for further details.
 (GNU_makefile_system)=
 ## Using Kokkos' GNU Makefile system (deprecated)
 
-<b>Make file report will be remioved with the next major release</b>
+<b>Makefile support will be removed with the next major release</b>
 
 The base of the build system is the file `Makefile.kokkos`; it is designed to be included by application Makefiles. It contains logic to (re)generate the `KokkosCore_config.h` file if necessary, build the Kokkos library, and provide updated compiler and linker flags.
 
