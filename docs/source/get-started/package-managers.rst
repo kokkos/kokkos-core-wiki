@@ -138,4 +138,3 @@ For more complete examples, you can look at already existing recipes in the *Req
 
     spack dependents kokkos
 
-
