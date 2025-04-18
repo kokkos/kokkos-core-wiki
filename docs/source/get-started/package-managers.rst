@@ -3,7 +3,7 @@ Package Managers
 
 Use your favorite package manager to install Kokkos.
 
-System package managers
+Package managers
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 +----------+---------------------------------------+----------------------+--------+---------------------------------------+----------------------------------------------------------------------------------------------------------+
@@ -26,11 +26,9 @@ System package managers
 | Spack    | ``spack install kokkos``              | whatever enabled     | yes    | cedricchevalier19, nmm0, lucbv        | `here <https://github.com/spack/spack/blob/develop/var/spack/repos/builtin/packages/kokkos/package.py>`_ |
 +----------+---------------------------------------+----------------------+--------+---------------------------------------+----------------------------------------------------------------------------------------------------------+
 
-Other package managers
-~~~~~~~~~~~~~~~~~~~~~~
 
-`Spack <https://spack.io>`_
----------------------------
+More on `Spack <https://spack.io>`_
+-----------------------------------
 
 Spack is a popular package manager for HPC.  Spack comes with installation recipes for Kokkos.
 
@@ -140,13 +138,4 @@ For more complete examples, you can look at already existing recipes in the *Req
 
     spack dependents kokkos
 
-
-`Conda <https://https://anaconda.org/>`_
-----------------------------------------
-
-You may use the Conda package manager to install Kokkos:
-
-.. code-block::
-
-    conda install conda-forge::kokkos
 
