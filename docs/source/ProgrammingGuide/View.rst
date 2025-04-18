@@ -588,11 +588,10 @@ A user is in most cases also allowed to obtain a pointer to a specific element v
 
 This is only valid if a Views reference type is an `lvalue`. That property can be queried statically at compile time from the view through its `reference_type_is_lvalue` member.
 
+Memory access traits
+--------------------
 
-Access traits
--------------
-
-Another way to get optimized data accesses is to specify a memory trait. These traits are used to declare intended use of the particular view of an allocation. For example, a particular kernel might use a view only for streaming writes. By declaring that intention, Kokkos can insert the appropriate store intrinsics on each architecture if available. Access traits are specified through an optional template parameter which comes last in the list of parameters. Multiple traits can be combined with binary "or" operators:
+Another way to get optimized data accesses is to specify memory traits. These traits are used to declare intended use of the particular view of an allocation. For example, a particular kernel might use a view only for streaming writes. By declaring that intention, Kokkos can insert the appropriate store intrinsics on each architecture if available. Access traits are specified through an optional template parameter which comes last in the list of parameters. Multiple traits can be combined with binary "or" operators:
 
 .. code-block:: c++
 
@@ -601,6 +600,46 @@ Another way to get optimized data accesses is to specify a memory trait. These t
   Kokkos::View<int*, Kokkos::LayoutLeft, Kokkos::MemoryTraits<SomeTrait | SomeOtherTrait> > c;
   Kokkos::View<int*, MemorySpace, Kokkos::MemoryTraits<SomeTrait | SomeOtherTrait> > d;
   Kokkos::View<int*, Kokkos::LayoutLeft, MemorySpace, Kokkos::MemoryTraits<SomeTrait> > e;
+
+Unmanaged Views
+~~~~~~~~~~~~~~~
+
+It's always better to let Kokkos control memory allocation, but sometimes you don't have a choice. You might have to work with an application or an interface that returns a raw pointer, for example. Kokkos lets you wrap raw pointers in an *unmanaged View*. "Unmanaged" means that Kokkos does *not* do reference counting or automatic deallocation for those Views. The following example shows how to create an unmanaged View of host memory. You may do this for CUDA device memory too, or indeed for memory allocated in any memory space, by specifying the View's execution or memory space accordingly.
+
+.. code-block:: c++
+
+  // Sometimes other code gives you a raw pointer, ...
+  const size_t N0 = ...;
+  double* x_raw = malloc (N0 * sizeof (double));
+  {
+    // ... but you want to access it with Kokkos.
+    //
+    // malloc() returns host memory, so we use the host memory space HostSpace.  
+    // Unmanaged Views have no label because labels work with the reference counting system.
+    Kokkos::View<double*, Kokkos::HostSpace, Kokkos::MemoryTraits<Kokkos::Unmanaged> >
+      x_view (x_raw, N0);
+  
+    functionThatTakesKokkosView (x_view);
+    
+    // It's safest for unmanaged Views to fall out of scope before freeing their memory.
+  }
+  free (x_raw);
+
+Random Access
+~~~~~~~~~~~~~
+
+The `RandomAccess` trait declares the intent to access a View irregularly (in particular non consecutively). If used for a const View in the `CudaSpace` or `CudaUVMSpace`, Kokkos will use texture fetches for accesses when executing in the `Cuda` execution space. For example:
+
+.. code-block:: c++
+
+  const size_t N0 = ...;
+  Kokkos::View<int*> a_nonconst ("a", N0); // allocate nonconst View
+  // Assign to const, RandomAccess View
+  Kokkos::View<const int*, Kokkos::MemoryTraits<Kokkos::RandomAccess>> a_ra = a_nonconst;
+
+If the default execution space is `Cuda`, access to a `RandomAccess` View may use CUDA texture fetches. Texture fetches are not cache-coherent with respect to writes, so you must use read-only access. The texture cache is optimized for noncontiguous access since it has a shorter cache line than the regular cache.
+
+While `RandomAccess` is valid for other execution spaces, currently no specific optimizations are performed. But in the future a view allocated with the `RandomAccess` attribute might for example, use a larger page size, and thus reduce page faults in the memory system.
 
 Atomic access
 ~~~~~~~~~~~~~
@@ -621,21 +660,10 @@ Types for which atomic access are performed must support the necessary operators
       
   a_atomic(1) += 1; // This access will do an atomic addition
 
-Random Access
+Other traits
 ~~~~~~~~~~~~~
 
-The `RandomAccess` trait declares the intent to access a View irregularly (in particular non consecutively). If used for a const View in the `CudaSpace` or `CudaUVMSpace`, Kokkos will use texture fetches for accesses when executing in the `Cuda` execution space. For example:
-
-.. code-block:: c++
-
-  const size_t N0 = ...;
-  Kokkos::View<int*> a_nonconst ("a", N0); // allocate nonconst View
-  // Assign to const, RandomAccess View
-  Kokkos::View<const int*, Kokkos::MemoryTraits<Kokkos::RandomAccess>> a_ra = a_nonconst;
-
-If the default execution space is `Cuda`, access to a `RandomAccess` View may use CUDA texture fetches. Texture fetches are not cache-coherent with respect to writes, so you must use read-only access. The texture cache is optimized for noncontiguous access since it has a shorter cache line than the regular cache.
-
-While `RandomAccess` is valid for other execution spaces, currently no specific optimizations are performed. But in the future a view allocated with the `RandomAccess` attribute might for example, use a larger page size, and thus reduce page faults in the memory system.
+Other possible memory traits are `Restrict` and `Aligned`. 
 
 Standard idiom for specifying access traits
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -665,32 +693,8 @@ The standard idiom for View is to pass it around using as few template parameter
     });
   }
 
-Unmanaged Views
-~~~~~~~~~~~~~~~
-
-It's always better to let Kokkos control memory allocation, but sometimes you don't have a choice. You might have to work with an application or an interface that returns a raw pointer, for example. Kokkos lets you wrap raw pointers in an *unmanaged View*. "Unmanaged" means that Kokkos does *not* do reference counting or automatic deallocation for those Views. The following example shows how to create an unmanaged View of host memory. You may do this for CUDA device memory too, or indeed for memory allocated in any memory space, by specifying the View's execution or memory space accordingly.
-
-.. code-block:: c++
-
-  // Sometimes other code gives you a raw pointer, ...
-  const size_t N0 = ...;
-  double* x_raw = malloc (N0 * sizeof (double));
-  {
-    // ... but you want to access it with Kokkos.
-    //
-    // malloc() returns host memory, so we use the host memory space HostSpace.  
-    // Unmanaged Views have no label because labels work with the reference counting system.
-    Kokkos::View<double*, Kokkos::HostSpace, Kokkos::MemoryTraits<Kokkos::Unmanaged> >
-      x_view (x_raw, N0);
-  
-    functionThatTakesKokkosView (x_view);
-    
-    // It's safest for unmanaged Views to fall out of scope before freeing their memory.
-  }
-  free (x_raw);
-
 Conversion Rules and Function Specialization
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+--------------------------------------------
 
 Not all view types can be assigned to each other. Requirements are:
 
