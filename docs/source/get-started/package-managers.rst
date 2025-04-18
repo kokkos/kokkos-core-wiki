@@ -6,35 +6,25 @@ Use your favorite package manager to install Kokkos.
 System package managers
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-Fedora
-------
-
-You may use the Fedora Project package manager to install Kokkos:
-
-.. code-block::
-
-    dnf install kokkos-devel
-
-
-Debian/Ubuntu
--------------
-
-You may use the Debian/Ubuntu Project package manager to install Kokkos:
-
-.. code-block::
-
-    apt-get install kokkos-dev
-
-
-openSUSE
---------
-
-You may use the openSUSE Project package manager to install Kokkos:
-
-.. code-block::
-
-    zypper install kokkos-devel
-
++----------+---------------------------------------+----------------------+--------+---------------------------------------+----------------------------------------------------------------------------------------------------------+
+| Distro   | Command to install                    | Backend              | Vetted | Maintainer                            | Build Source                                                                                             |
++==========+=======================================+======================+========+=======================================+==========================================================================================================+
+| Fedora   | ``dnf install kokkos-devel``          | openMP, rocm, serial | a bit  | rbberger                              | `here <https://src.fedoraproject.org/rpms/kokkos/blob/rawhide/f/kokkos.spec>`_                           |
++----------+---------------------------------------+----------------------+--------+---------------------------------------+----------------------------------------------------------------------------------------------------------+
+| Debian   | ``apt-get install libkokkos-dev``     | openMP               | a bit  | alexmyczko                            | `here <https://salsa.debian.org/debian/kokkos/-/blob/master/debian/rules>`_                              |
++----------+---------------------------------------+----------------------+--------+---------------------------------------+----------------------------------------------------------------------------------------------------------+
+| Conda    | ``conda install conda-forge::kokkos`` | openMP, serial, CUDA | nope   | carterbox                             | `here <https://github.com/conda-forge/kokkos-feedstock/blob/main/recipe/build.sh>`_                      |
++----------+---------------------------------------+----------------------+--------+---------------------------------------+----------------------------------------------------------------------------------------------------------+
+| openSUSE | ``zypper install kokkos-devel``       | openMP, serial       | nope   | `mli@suse.com <mailto:mli@suse.com>`_ | `here <https://build.opensuse.org/projects/science/packages/kokkos/files/kokkos.spec?expand=1>`_         |
++----------+---------------------------------------+----------------------+--------+---------------------------------------+----------------------------------------------------------------------------------------------------------+
+| Gentoo   | ``emerge kokkos``                     | whatever enabled     | a bit  | tamiko                                | `here <https://gitweb.gentoo.org/repo/gentoo.git/tree/dev-cpp/kokkos/kokkos-4.3.1.ebuild>`_              |
++----------+---------------------------------------+----------------------+--------+---------------------------------------+----------------------------------------------------------------------------------------------------------+
+| Arch     | ``pacman -S kokkos``                  | Threads, serial      | maybe  | carlosal1015                          | `here <https://aur.archlinux.org/cgit/aur.git/tree/PKGBUILD?h=kokkos>`_                                  |
++----------+---------------------------------------+----------------------+--------+---------------------------------------+----------------------------------------------------------------------------------------------------------+
+| Mac Port | ``port install kokkos-devel``         | openMP, serial       | no     | MarcusCalhoun-Lopez                   | `here <https://github.com/macports/macports-ports/blob/master/devel/kokkos/Portfile>`_                   |
++----------+---------------------------------------+----------------------+--------+---------------------------------------+----------------------------------------------------------------------------------------------------------+
+| Spack    | ``spack install kokkos``              | whatever enabled     | yes    | cedricchevalier19, nmm0, lucbv        | `here <https://github.com/spack/spack/blob/develop/var/spack/repos/builtin/packages/kokkos/package.py>`_ |
++----------+---------------------------------------+----------------------+--------+---------------------------------------+----------------------------------------------------------------------------------------------------------+
 
 Other package managers
 ~~~~~~~~~~~~~~~~~~~~~~
