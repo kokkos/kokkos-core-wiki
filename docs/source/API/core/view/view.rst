@@ -70,24 +70,27 @@ and ``MemoryTraits`` are specified, ``MemorySpace`` must come before ``MemoryTra
 
 .. _Atomic: ../atomics.html
 
-.. |Atomic| replace:: :cppkokkos:func:`Atomic`
+.. |Atomic| replace:: Atomic
 
+.. _MemoryTraits: memoryTraits.html
 
-* ``MemoryTraits``:
+.. |MemoryTraits| replace:: MemoryTraits 
+
+* |MemoryTraits|_:
 
   Sets access properties via enum parameters for the templated ``Kokkos::MemoryTraits<>`` class.
   Possible template parameters are bit-combinations of the following flags:
 
   - ``Unmanaged``: The View will not be reference counted. The allocation has to be provided to the constructor.
 
-  - |Atomic|_: All accesses to the view will use atomic operations.
-
   - ``RandomAccess``: Hint that the view is used in a random access manner.
     If the view is also ``const`` this will trigger special load operations on GPUs (i.e. texture fetches).
 
+  - |Atomic|_: All accesses to the view will use atomic operations.
+
   - ``Restrict``: There is no aliasing of the view by other data structures in the current scope.
 
- Example usage: ``Kokkos::MemoryTraits<Kokkos::Unmanaged | Kokkos::RandomAccess>``
+  - ``Aligned``: TBD.
 
 Public Class Members
 --------------------
