@@ -27,7 +27,7 @@ Struct template
 Description
 ~~~~~~~~~~~
 
-When provided to a multidimensional View, ``MemoryTraits<N>`` enables better access of the underlying memory. The hints are provided as the non-type template parameter ``N`` (an unsigned int). ``N`` is obtained by bitwise OR of values from the enumeration type ``MemoryTraitsFlags`` described below.
+When provided to a multidimensional View, ``MemoryTraits`` allow passing extra information about the treatment of the allocation. The template argument is expected to be a bitwise OR of enumeration values described below.
 
 Nested Typedefs
 +++++++++++++++
@@ -37,10 +37,6 @@ Nested Typedefs
 
 Member Variables
 ++++++++++++++++
-   .. cppkokkos:member::  static constexpr unsigned impl_value
-
-      An unsigned integer having the value of N.
-
    .. cppkokkos:member::  static constexpr bool is_unmanaged
 
        A boolean that indicates whether the Unmanaged trait is enabled.
@@ -63,21 +59,16 @@ Member Variables
 
 The following enumeration values are used to specify the memory access traits.
 
-.. code-block:: cpp
-
- enum MemoryTraitsFlags {
-   Unmanaged    = 0x01,
-   RandomAccess = 0x02,
-   Atomic       = 0x04,
-   Restrict     = 0x08,
-   Aligned      = 0x10
- };
+   - ``Kokkos::Unmanaged``
+   - ``Kokkos::RandomAccess``
+   - ``Kokkos::Atomic``
+   - ``Kokkos::Restrict``
+   - ``Kokkos::Aligned``
 
 A few useful type aliases are also available in the ``Kokkos`` namespace.
 
 .. code-block:: cpp
 
- using MemoryManaged   = Kokkos::MemoryTraits<0>;
  using MemoryUnmanaged = Kokkos::MemoryTraits<Kokkos::Unmanaged>;
  using MemoryRandomAccess =
      Kokkos::MemoryTraits<Kokkos::Unmanaged | Kokkos::RandomAccess>;
