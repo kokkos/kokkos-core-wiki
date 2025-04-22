@@ -68,9 +68,9 @@ and ``MemoryTraits`` are specified, ``MemorySpace`` must come before ``MemoryTra
   Controls the storage location.
   If omitted the default memory space of the default execution space is used (i.e. ``Kokkos::DefaultExecutionSpace::memory_space``)
 
-.. _Atomic: ../atomics.html
+.. _ProgrammingGuide: ../../../ProgrammingGuide/View.html#memory-access-traits
 
-.. |Atomic| replace:: Atomic
+.. |ProgrammingGuide| replace:: Programming Guide
 
 .. _MemoryTraits: memoryTraits.html
 
@@ -78,19 +78,16 @@ and ``MemoryTraits`` are specified, ``MemorySpace`` must come before ``MemoryTra
 
 * |MemoryTraits|_:
 
-  Sets access properties via enum parameters for the templated ``Kokkos::MemoryTraits<>`` class.
-  Possible template parameters are bit-combinations of the following flags:
+  Sets access properties via enum parameters for the class template ``Kokkos::MemoryTraits<>``.
+  Possible template parameters are bitwise OR of the following flags:
 
-  - ``Unmanaged``: The View will not be reference counted. The allocation has to be provided to the constructor.
+  - ``Unmanaged``
+  - ``RandomAccess``
+  - ``Atomic``
+  - ``Restrict``
+  - ``Aligned``
 
-  - ``RandomAccess``: Hint that the view is used in a random access manner.
-    If the view is also ``const`` this will trigger special load operations on GPUs (i.e. texture fetches).
-
-  - |Atomic|_: All accesses to the view will use atomic operations.
-
-  - ``Restrict``: There is no aliasing of the view by other data structures in the current scope.
-
-  - ``Aligned``: TBD.
+  See |ProgrammingGuide|_ also for further information.
 
 Public Class Members
 --------------------

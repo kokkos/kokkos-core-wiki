@@ -604,7 +604,7 @@ Another way to get optimized data accesses is to specify memory traits. These tr
 Unmanaged Views
 ~~~~~~~~~~~~~~~
 
-It's always better to let Kokkos control memory allocation, but sometimes you don't have a choice. You might have to work with an application or an interface that returns a raw pointer, for example. Kokkos lets you wrap raw pointers in an *unmanaged View*. "Unmanaged" means that Kokkos does *not* do reference counting or automatic deallocation for those Views. The following example shows how to create an unmanaged View of host memory. You may do this for CUDA device memory too, or indeed for memory allocated in any memory space, by specifying the View's execution or memory space accordingly.
+It's always better to let Kokkos control memory allocation, but sometimes you don't have a choice. You might have to work with an application or an interface that returns a raw pointer, for example. Kokkos lets you wrap raw pointers in an *unmanaged View*. "Unmanaged" means that Kokkos does *neither* reference counting *nor* automatic deallocation for those Views. The following example shows how to create an unmanaged View of host memory. You may do this for CUDA device memory too, or indeed for memory allocated in any memory space, by specifying the View's execution or memory space accordingly. Note that the allocation has to be provided to the constructor.
 
 .. code-block:: c++
 
@@ -628,7 +628,7 @@ It's always better to let Kokkos control memory allocation, but sometimes you do
 Random Access
 ~~~~~~~~~~~~~
 
-The `RandomAccess` trait declares the intent to access a View irregularly (in particular non consecutively). If used for a const View in the `CudaSpace` or `CudaUVMSpace`, Kokkos will use texture fetches for accesses when executing in the `Cuda` execution space. For example:
+The `RandomAccess` trait declares the intent to access a View irregularly (in particular non consecutively). If the default execution space is `Cuda`, access to a `RandomAccess` View may use `CUDA` texture fetches. In more detail, if used for a ``const`` View in the `CudaSpace` or `CudaUVMSpace`, Kokkos will use texture fetches for accesses when executing in the `Cuda` execution space. For example:
 
 .. code-block:: c++
 
@@ -637,12 +637,16 @@ The `RandomAccess` trait declares the intent to access a View irregularly (in pa
   // Assign to const, RandomAccess View
   Kokkos::View<const int*, Kokkos::MemoryTraits<Kokkos::RandomAccess>> a_ra = a_nonconst;
 
-If the default execution space is `Cuda`, access to a `RandomAccess` View may use CUDA texture fetches. Texture fetches are not cache-coherent with respect to writes, so you must use read-only access. The texture cache is optimized for noncontiguous access since it has a shorter cache line than the regular cache.
+Note that texture fetches are not cache-coherent with respect to writes, so you must use read-only access. The texture cache is optimized for noncontiguous access since it has a shorter cache line than the regular cache.
 
 While `RandomAccess` is valid for other execution spaces, currently no specific optimizations are performed. But in the future a view allocated with the `RandomAccess` attribute might for example, use a larger page size, and thus reduce page faults in the memory system.
 
-Atomic access
-~~~~~~~~~~~~~
+.. _Atomic: ../API/core/atomics.html
+
+.. |Atomic| replace:: Atomic
+
+|Atomic|_ Access
+~~~~~~~~~~~~~~~~
 
 The `Atomic` access trait lets you create a View of data such that every read or write to any entry uses an atomic update. Kokkos supports atomics for all data types independent of size. Restrictions are that you are
 
@@ -663,7 +667,8 @@ Types for which atomic access are performed must support the necessary operators
 Other traits
 ~~~~~~~~~~~~~
 
-Other possible memory traits are `Restrict` and `Aligned`. 
+Other possible memory traits are `Restrict` and `Aligned`. The `Restrict` trait indicates that the memory of this view doesn't alias/overlap with another data structure in the current scope. This enables compiler optimizations. TBD for ``Aligned``.
+ 
 
 Standard idiom for specifying access traits
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
