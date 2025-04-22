@@ -41,8 +41,7 @@ extensions = ["myst_parser",
               "sphinx.ext.intersphinx",
               "sphinx_copybutton",
               "sphinx_design",
-              "sphinxcontrib.googleanalytics",
-              "cppkokkos"]
+              "sphinxcontrib.googleanalytics"]
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -88,10 +87,16 @@ myst_enable_extensions = [
 # .. include:: special.rst
 # """
 
-rst_prolog = """
-.. role:: cppkokkos(code)
-    :language: cppkokkos
+cpp_id_attributes = [
+    'KOKKOS_FUNCTION',
+    'KOKKOS_INLINE_FUNCTION',
+    'KOKKOS_FORCEINLINE_FUNCTION',
+    'KOKKOS_DEFAULTED_FUNCTION',
+    'KOKKOS_RELOCATABLE_FUNCTION',
+    'KOKKOS_DEDUCTION_GUIDE'
+]
 
+rst_prolog = """
 .. role:: cpp(code)
    :language: cpp
 """

@@ -1,8 +1,8 @@
 ``atomic_load``
 ===============
 
-.. role:: cppkokkos(code)
-    :language: cppkokkos
+.. role:: cpp(code)
+    :language: cpp
 
 Defined in header ``<Kokkos_Atomic.hpp>`` which is included from ``<Kokkos_Core.hpp>``
 
@@ -18,7 +18,7 @@ Atomically obtains the current value of ``obj``.
 Description
 -----------
 
-.. cppkokkos:function:: template<class T> T atomic_load(T* ptr);
+.. cpp:function:: template<class T> T atomic_load(T* ptr);
 
    Atomically reads the content of ``*ptr`` and returns it.
 

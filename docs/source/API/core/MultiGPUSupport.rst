@@ -1,5 +1,5 @@
-.. role:: cppkokkos(code)
-    :language: cppkokkos
+.. role:: cpp(code)
+    :language: cpp
 
 Multi-GPU Support
 =================

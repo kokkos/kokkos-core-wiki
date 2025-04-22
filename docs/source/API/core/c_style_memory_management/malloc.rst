@@ -1,8 +1,8 @@
 ``kokkos_malloc``
 =================
 
-.. role:: cppkokkos(code)
-    :language: cppkokkos
+.. role:: cpp(code)
+    :language: cpp
 
 Defined in header ``<Kokkos_Core.hpp>``
 
@@ -31,9 +31,9 @@ If allocation fails, an exception of type ``Kokkos::Experimental::RawMemoryAlloc
 Description
 -----------
 
-.. cppkokkos:function:: template <class MemorySpace = Kokkos::DefaultExecutionSpace::memory_space> void* kokkos_malloc(const string& label, size_t size);
+.. cpp:function:: template <class MemorySpace = Kokkos::DefaultExecutionSpace::memory_space> void* kokkos_malloc(const string& label, size_t size);
 
-.. cppkokkos:function:: template <class MemorySpace = Kokkos::DefaultExecutionSpace::memory_space> void* kokkos_malloc(size_t size);
+.. cpp:function:: template <class MemorySpace = Kokkos::DefaultExecutionSpace::memory_space> void* kokkos_malloc(size_t size);
 
     :tparam MemorySpace: Controls the storage location. If omitted the memory space of the default execution space is used (i.e. ``Kokkos::DefaultExecutionSpace::memory_space``).
 

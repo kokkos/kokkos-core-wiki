@@ -1,8 +1,8 @@
 Task-Parallelism
 ================
 
-.. role:: cppkokkos(code)
-    :language: cppkokkos
+.. role:: cpp(code)
+    :language: cpp
 
 .. warning::
    Deprecated since Kokkos 4.5.

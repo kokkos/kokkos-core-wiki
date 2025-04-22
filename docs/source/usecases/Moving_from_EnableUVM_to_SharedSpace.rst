@@ -1,8 +1,8 @@
 Moving code from requiring ``Kokkos_ENABLE_CUDA_UVM`` to using ``SharedSpace``
 ==============================================================================
 
-.. role:: cppkokkos(code)
-   :language: cppkokkos
+.. role:: cpp(code)
+   :language: cpp
 
 .. _SharedSpace: ../API/core/memory_spaces.html#kokkos-sharedspace
 .. |SharedSpace| replace:: ``SharedSpace``

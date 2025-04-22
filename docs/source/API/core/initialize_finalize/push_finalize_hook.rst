@@ -25,7 +25,7 @@ If a function exits via a thrown exception, ``std::terminate`` is called.
 Interface
 ---------
 
-.. cppkokkos:Function:: void push_finalize_hook(std::function<void()> func);
+.. cpp:Function:: void push_finalize_hook(std::function<void()> func);
 
    Register the function object ``func`` to be called when entering
    ``Kokkos::finalize()``

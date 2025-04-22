@@ -1,8 +1,8 @@
 ``TeamVectorRange``
 ===================
 
-.. role::cppkokkos(code)
-   :language: cppkokkos
+.. role::cpp(code)
+   :language: cpp
 
 Header File: ``<Kokkos_Core.hpp>``
 

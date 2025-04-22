@@ -3,8 +3,8 @@
 
 Header File: ``<Kokkos_Core.hpp>``
 
-.. role:: cppkokkos(code)
-    :language: cppkokkos
+.. role:: cpp(code)
+    :language: cpp
 
 Usage
 -----

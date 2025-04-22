@@ -1,8 +1,8 @@
 ``atomic_[op]_fetch``
 =====================
 
-.. role:: cppkokkos(code)
-    :language: cppkokkos
+.. role:: cpp(code)
+    :language: cpp
 
 Header File: ``<Kokkos_Core.hpp>``
 
@@ -18,7 +18,7 @@ Atomically updates the variable at the address given by ``ptr_to_value`` with ``
 Description
 -----------
 
-.. cppkokkos:function:: template<class T> T atomic_add_fetch(T* const ptr_to_value, const T value);
+.. cpp:function:: template<class T> T atomic_add_fetch(T* const ptr_to_value, const T value);
 
    Atomically executes ``*ptr_to_value += value; return *ptr_to_value;``.
 
@@ -26,7 +26,7 @@ Description
 
    * ``value``: value to be added.
 
-.. cppkokkos:function:: template<class T> T atomic_and_fetch(T* const ptr_to_value, const T value);
+.. cpp:function:: template<class T> T atomic_and_fetch(T* const ptr_to_value, const T value);
 
    Atomically executes ``*ptr_to_value &= value; return *ptr_to_value;``.
 
@@ -34,7 +34,7 @@ Description
 
    * ``value``: value with which to combine the original value.
 
-.. cppkokkos:function:: template<class T> T atomic_div_fetch(T* const ptr_to_value, const T value);
+.. cpp:function:: template<class T> T atomic_div_fetch(T* const ptr_to_value, const T value);
 
    Atomically executes ``*ptr_to_value /= value; return *ptr_to_value;``.
 
@@ -42,7 +42,7 @@ Description
 
    * ``value``: value by which to divide the original value..
 
-.. cppkokkos:function:: template<class T> T atomic_lshift_fetch(T* const ptr_to_value, const unsigned shift);
+.. cpp:function:: template<class T> T atomic_lshift_fetch(T* const ptr_to_value, const unsigned shift);
 
    Atomically executes ``*ptr_to_value << shift; return *ptr_to_value;``.
 
@@ -50,7 +50,7 @@ Description
 
    * ``shift``: value by which to shift the original variable.
 
-.. cppkokkos:function:: template<class T> T atomic_max_fetch(T* const ptr_to_value, const T value);
+.. cpp:function:: template<class T> T atomic_max_fetch(T* const ptr_to_value, const T value);
 
    Atomically executes ``*ptr_to_value = max(*ptr_to_value, value); return *ptr_to_value;``.
 
@@ -58,7 +58,7 @@ Description
 
    * ``value``: value which to take the maximum with.
 
-.. cppkokkos:function:: template<class T> T atomic_min_fetch(T* const ptr_to_value, const T value);
+.. cpp:function:: template<class T> T atomic_min_fetch(T* const ptr_to_value, const T value);
 
    Atomically executes ``*ptr_to_value = min(*ptr_to_value, value); return *ptr_to_value;``.
 
@@ -66,7 +66,7 @@ Description
 
    * ``value``: value which to take the minimum with.
 
-.. cppkokkos:function:: template<class T> T atomic_mul_fetch(T* const ptr_to_value, const T value);
+.. cpp:function:: template<class T> T atomic_mul_fetch(T* const ptr_to_value, const T value);
 
    Atomically executes ``*ptr_to_value *= value; return *ptr_to_value;``.
 
@@ -74,7 +74,7 @@ Description
 
    * ``value``: value by which to multiply the original value.
 
-.. cppkokkos:function:: template<class T> T atomic_mod_fetch(T* const ptr_to_value, const T value);
+.. cpp:function:: template<class T> T atomic_mod_fetch(T* const ptr_to_value, const T value);
 
    Atomically executes ``*ptr_to_value %= value; return *ptr_to_value;``.
 
@@ -82,7 +82,7 @@ Description
 
    * ``value``: value with which to combine the original value.
 
-.. cppkokkos:function:: template<class T> T atomic_or_fetch(T* const ptr_to_value, const T value);
+.. cpp:function:: template<class T> T atomic_or_fetch(T* const ptr_to_value, const T value);
 
    Atomically executes ``*ptr_to_value |= value; return *ptr_to_value;``.
 
@@ -90,7 +90,7 @@ Description
 
    * ``value``: value with which to combine the original value.
 
-.. cppkokkos:function:: template<class T> T atomic_rshift_fetch(T* const ptr_to_value, const unsigned shift);
+.. cpp:function:: template<class T> T atomic_rshift_fetch(T* const ptr_to_value, const unsigned shift);
 
    Atomically executes ``*ptr_to_value >> shift; return *ptr_to_value;``.
 
@@ -98,7 +98,7 @@ Description
 
    * ``shift``: value by which to shift the original variable.
 
-.. cppkokkos:function:: template<class T> T atomic_sub_fetch(T* const ptr_to_value, const T value);
+.. cpp:function:: template<class T> T atomic_sub_fetch(T* const ptr_to_value, const T value);
 
    Atomically executes ``*ptr_to_value -= value; return *ptr_to_value;``.
 
@@ -106,7 +106,7 @@ Description
 
    * ``value``: value to be subtracted.
 
-.. cppkokkos:function:: template<class T> T atomic_xor_fetch(T* const ptr_to_value, const T value);
+.. cpp:function:: template<class T> T atomic_xor_fetch(T* const ptr_to_value, const T value);
 
    Atomically executes ``*ptr_to_value ^= value; return *ptr_to_value;``.
 

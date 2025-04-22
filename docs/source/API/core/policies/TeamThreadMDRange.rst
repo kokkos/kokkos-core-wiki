@@ -15,11 +15,11 @@ TeamThreadMDRange is a `nested execution policy <./NestedPolicies.html>`_  used 
 Interface
 ---------
 
-.. cppkokkos:class:: template <class Rank, typename TeamHandle> TeamThreadMDRange
+.. cpp:class:: template <class Rank, typename TeamHandle> TeamThreadMDRange
 
    .. rubric:: Constructor
 
-   .. cppkokkos:function:: TeamThreadMDRange(team, extent_1, extent_2, ...);
+   .. cpp:function:: TeamThreadMDRange(team, extent_1, extent_2, ...);
 
       Splits the index range ``0`` to ``extent`` over the threads of the team,
       where ``extent`` is the backend-dependent rank that will be threaded

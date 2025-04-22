@@ -1,8 +1,8 @@
 ``atomic_store``
 ================
 
-.. role:: cppkokkos(code)
-    :language: cppkokkos
+.. role:: cpp(code)
+    :language: cpp
 
 Defined in header ``<Kokkos_Atomic.hpp>`` which is included from ``<Kokkos_Core.hpp>``
 
@@ -18,7 +18,7 @@ Atomically replaces the current value of ``obj`` with ``desired``.
 Description
 -----------
 
-.. cppkokkos:function:: template<class T> void atomic_store(T* ptr, std::type_identity_t<T> val);
+.. cpp:function:: template<class T> void atomic_store(T* ptr, std::type_identity_t<T> val);
 
    Atomically writes ``val`` into ``*ptr``.
 

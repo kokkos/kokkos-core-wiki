@@ -1,15 +1,15 @@
 ``RangePolicy``
 ===============
 
-.. role::cppkokkos(code)
-    :language: cppkokkos
+.. role::cpp(code)
+    :language: cpp
 
 Header File: ``<Kokkos_Core.hpp>``
 
 Usage
 -----
 
-.. code-block:: cppkokkos
+.. code-block:: cpp
 
     Kokkos::RangePolicy<...>(begin, end)
     Kokkos::RangePolicy<...>(begin, end, chunk_size)
@@ -95,30 +95,30 @@ Public Class Members
 Constructors
 ~~~~~~~~~~~~
 
-.. cppkokkos:function:: explicit ChunkSize(int value_)
+.. cpp:function:: explicit ChunkSize(int value_)
 
    Provide a hint for optimal chunk-size to be used during scheduling.
    For the SYCL backend, the workgroup size used in a ``parallel_for`` kernel can be set via this passed to ``RangePolicy``.
 
    .. note:: ``ChunkSize`` constructor ``explicit`` since Kokkos 4.4
 
-.. cppkokkos:function:: RangePolicy()
+.. cpp:function:: RangePolicy()
 
    Default Constructor uninitialized policy.
 
-.. cppkokkos:function:: RangePolicy(int64_t begin, int64_t end)
+.. cpp:function:: RangePolicy(int64_t begin, int64_t end)
 
    Provide a start and end index.
 
-.. cppkokkos:function:: RangePolicy(int64_t begin, int64_t end, ChunkSize chunk_size)
+.. cpp:function:: RangePolicy(int64_t begin, int64_t end, ChunkSize chunk_size)
 
    Provide a start and end index as well as a ``ChunkSize``.
 
-.. cppkokkos:function:: RangePolicy(const ExecutionSpace& space, int64_t begin, int64_t end)
+.. cpp:function:: RangePolicy(const ExecutionSpace& space, int64_t begin, int64_t end)
 
    Provide a start and end index and an ``ExecutionSpace`` instance to use as the execution resource.
 
-.. cppkokkos:function:: RangePolicy(const ExecutionSpace& space, int64_t begin, int64_t end, ChunkSize chunk_size)
+.. cpp:function:: RangePolicy(const ExecutionSpace& space, int64_t begin, int64_t end, ChunkSize chunk_size)
 
    Provide a start and end index and an ``ExecutionSpace`` instance to use as the execution resource, as well as a ``ChunkSize``.
 
@@ -131,7 +131,7 @@ Preconditions:
 CTAD Constructors (since 4.3):
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. code-block:: cppkokkos
+.. code-block:: cpp
 
    int64_t work_begin = /* ... */; // conversions as well
    int64_t work_end   = /* ... */; // conversions as well
@@ -153,7 +153,7 @@ CTAD Constructors (since 4.3):
 Examples
 --------
 
-.. code-block:: cppkokkos
+.. code-block:: cpp
 
     RangePolicy<> policy_1(0, N);
     RangePolicy<Cuda> policy_2(5,N-5);
@@ -164,7 +164,7 @@ Examples
 
 Note: providing a single integer as a policy to a parallel pattern, implies a defaulted ``RangePolicy``
 
-.. code-block:: cppkokkos
+.. code-block:: cpp
 
     // These two calls are identical
     parallel_for("Loop", N, functor);

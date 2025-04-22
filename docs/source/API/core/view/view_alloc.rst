@@ -1,8 +1,8 @@
 ``view_alloc``
 ==============
 
-.. role:: cppkokkos(code)
-   :language: cppkokkos
+.. role:: cpp(code)
+   :language: cpp
 
 Header File: ``<Kokkos_Core.hpp>``
 
@@ -34,35 +34,35 @@ Create View allocation parameter bundle from argument list. Valid argument list 
 Description
 -----------
 
-.. cppkokkos:function:: template <class... Args> ALLOC_PROP view_alloc(Args const&... args)
+.. cpp:function:: template <class... Args> ALLOC_PROP view_alloc(Args const&... args)
 
    Create View allocation parameter bundle from argument list.
 
    ``args`` : Cannot contain a pointer to memory.
 
-.. cppkokkos:function:: template <class... Args> ALLOC_PROP view_wrap(Args const&... args)
+.. cpp:function:: template <class... Args> ALLOC_PROP view_wrap(Args const&... args)
 
    Create View allocation parameter bundle from argument list.
 
    ``args`` : Can only be a pointer to memory.
 
 
-.. cppkokkos:type:: ALLOC_PROP
+.. cpp:type:: ALLOC_PROP
 
-   :cppkokkos:type:`ALLOC_PROP` is a special, unspellable implementation-defined type that is returned by :cppkokkos:func:`view_alloc`
-   and :cppkokkos:func:`view_wrap`. It represents a bundle of allocator parameters, including the View label, the memory space instance,
+   :cpp:type:`ALLOC_PROP` is a special, unspellable implementation-defined type that is returned by :cpp:func:`view_alloc`
+   and :cpp:func:`view_wrap`. It represents a bundle of allocator parameters, including the View label, the memory space instance,
    the execution space instance, whether to initialize the memory, whether to allow padding, and the raw pointer value (for wrapped unmanaged views).
 
-.. cppkokkos:type:: WithoutInitializing
+.. cpp:type:: WithoutInitializing
 
-   :cppkokkos:type:`WithoutInitializing` is intended to be used in situations where default construction of `View` elements in its
+   :cpp:type:`WithoutInitializing` is intended to be used in situations where default construction of `View` elements in its
    associated execution space is not needed or not viable. In particular, it may not be viable in situations such as the construction of objects with virtual functions,
    or for `Views` of elements without default constructor. In such situations, this option is often used in conjunction with manual in-place `new`
    construction of objects and manual destruction of elements.
 
-.. cppkokkos:type:: SequentialHostInit
+.. cpp:type:: SequentialHostInit
 
-   :cppkokkos:type:`SequentialHostInit` is intended to be used to initialize elements that do not have a default constructor or destructor that
+   :cpp:type:`SequentialHostInit` is intended to be used to initialize elements that do not have a default constructor or destructor that
    can be called inside a Kokkos parallel region. In particular this includes constructors and destructors which:
 
    * allocate or deallocate memory

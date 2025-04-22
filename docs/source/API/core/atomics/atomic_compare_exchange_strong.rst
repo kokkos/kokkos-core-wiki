@@ -5,8 +5,8 @@
    Deprecated since Kokkos 4.5,
    use `atomic_compare_exchange <atomic_compare_exchange.html>`_ instead.
 
-.. role:: cppkokkos(code)
-   :language: cppkokkos
+.. role:: cpp(code)
+   :language: cpp
 
 Defined in header ``<Kokkos_Atomic.hpp>`` which is included from ``<Kokkos_Core.hpp>``
 
@@ -28,7 +28,7 @@ The function returns ``true`` if the exchange has happened, ``false`` otherwise.
 Description
 -----------
 
-.. cppkokkos:function:: template<class T> bool atomic_compare_exchange_strong(T* ptr, std::type_identity_t<T> expected, std::type_identity_t<T> desired);
+.. cpp:function:: template<class T> bool atomic_compare_exchange_strong(T* ptr, std::type_identity_t<T> expected, std::type_identity_t<T> desired);
 
    Atomically compares ``*ptr`` with ``expected``, and if those are bitwise-equal, replaces the former with ``desired``.
    If ``desired`` is written into ``*ptr`` then ``true`` is returned.

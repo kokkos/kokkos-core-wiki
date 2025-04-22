@@ -1,8 +1,8 @@
 ``MDRangePolicy``
 =================
 
-.. role:: cppkokkos(code)
-    :language: cppkokkos
+.. role:: cpp(code)
+    :language: cpp
 
 Header File: ``<Kokkos_Core.hpp>``
 
@@ -53,30 +53,30 @@ Public Class Members
 Constructors
 ~~~~~~~~~~~~
 
-.. cppkokkos:function:: MDRangePolicy()
+.. cpp:function:: MDRangePolicy()
 
     * Default Constructor uninitialized policy.
 
-.. cppkokkos:function:: MDRangePolicy(const Kokkos::Array<int64_t,rank>& begin, const Kokkos::Array<int64_t,rank>& end)
+.. cpp:function:: MDRangePolicy(const Kokkos::Array<int64_t,rank>& begin, const Kokkos::Array<int64_t,rank>& end)
 
     * Provide a start and end index.
 
-.. cppkokkos:function:: MDRangePolicy(const Kokkos::Array<int64_t,rank>& begin, const Kokkos::Array<int64_t,rank>& end,  const Kokkos::Array<int64_t,rank>& tiling)
+.. cpp:function:: MDRangePolicy(const Kokkos::Array<int64_t,rank>& begin, const Kokkos::Array<int64_t,rank>& end,  const Kokkos::Array<int64_t,rank>& tiling)
 
     * Provide a start and end index as well as the tiling dimensions.
 
-.. cppkokkos:function:: template<class OT, class IT, class TT> MDRangePolicy(const std::initializer_list<OT>& begin, const std::initializer_list<IT>& end)
+.. cpp:function:: template<class OT, class IT, class TT> MDRangePolicy(const std::initializer_list<OT>& begin, const std::initializer_list<IT>& end)
 
     * Provide a start and end index. The length of the lists must match the rank of the policy.
 
-.. cppkokkos:function:: template<class OT, class IT, class TT> MDRangePolicy(const std::initializer_list<OT>& begin, const std::initializer_list<IT>& end,  std::initializer_list<TT>& tiling)
+.. cpp:function:: template<class OT, class IT, class TT> MDRangePolicy(const std::initializer_list<OT>& begin, const std::initializer_list<IT>& end,  std::initializer_list<TT>& tiling)
 
     * Provide a start and end index as well as the tiling dimensions. The length of the lists must match the rank of the policy.
 
 CTAD Constructors (since 4.3)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. code-block:: cppkokkos
+.. code-block:: cpp
 
    DefaultExecutionSpace des;
    SomeExecutionSpace ses; // different from DefaultExecutionSpace
@@ -119,13 +119,13 @@ CTAD Constructors (since 4.3)
 
 Member Functions
 ^^^^^^^^^^^^^^^^
-.. cppkokkos:function:: tile_type tile_size_recommended() const
+.. cpp:function:: tile_type tile_size_recommended() const
 
     * Returns a ``Kokkos::Array<array_index_type, rank>`` type containing per-rank tile sizes that ``MDRangePolicy`` internally uses by default. The default tile sizes are static and are set based on the specified backend.
 
     .. note:: ``tile_size_recommended()`` available since Kokkos 4.5
 
-.. cppkokkos:function:: int max_total_tile_size() const
+.. cpp:function:: int max_total_tile_size() const
 
     * Returns a value that represents the upper limit for the product of all tile sizes.
 
@@ -141,7 +141,7 @@ Notes
 Examples
 --------
 
-.. code-block:: cppkokkos
+.. code-block:: cpp
 
     MDRangePolicy<Rank<3>> policy_1({0,0,0},{N0,N1,N2});
     MDRangePolicy<Cuda,Rank<3,Iterate::Right,Iterate::Left>> policy_2({5,5,5},{N0-5,N1-5,N2-5},{T0,T1,T2});

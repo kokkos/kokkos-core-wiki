@@ -1,8 +1,8 @@
 Common math functions
 =====================
 
-.. role:: cppkokkos(code)
-    :language: cppkokkos
+.. role:: cpp(code)
+    :language: cpp
 
 .. role:: strike
     :class: strike

@@ -1,6 +1,6 @@
 
-.. role:: cppkokkos(code)
-	:language: cppkokkos
+.. role:: cpp(code)
+	:language: cpp
 
 ``UnorderedMap``
 ================
@@ -23,7 +23,7 @@ The two key differences are *fixed capacity* and *index based*.
 Description
 -----------
 
-.. cppkokkos:class:: template <typename Key, typename Value, typename Device = Kokkos::DefaultExecutionSpace> UnorderedMap
+.. cpp:class:: template <typename Key, typename Value, typename Device = Kokkos::DefaultExecutionSpace> UnorderedMap
 
    :tparam Key: Must be a POD (Plain Old Data type)
 
@@ -33,7 +33,7 @@ Description
 
    .. rubric:: Constructor
 
-   .. cppkokkos:function:: UnorderedMap(uint32_t capacity_hint);
+   .. cpp:function:: UnorderedMap(uint32_t capacity_hint);
 
       Create map with enough space for at least capacity_hint number of objects
 
@@ -41,106 +41,106 @@ Description
 
    .. rubric:: Public Member Functions
 
-   .. cppkokkos:function:: clear();
+   .. cpp:function:: clear();
 
       Clear the map
 
       .. warning:: Host Only
 
-   .. cppkokkos:function:: bool rehash(uint32_t requested_capacity);
+   .. cpp:function:: bool rehash(uint32_t requested_capacity);
 
       Rehash map to given capacity, the current size is used as a lower bound O(capacity)
 
       .. warning:: Host Only
 
-   .. cppkokkos:function:: uint32_t size() const;
+   .. cpp:function:: uint32_t size() const;
 
       Current size of the map, O(capacity)
 
       .. warning:: Host Only
 
-   .. cppkokkos:kokkosinlinefunction:: uint32_t capacity() const;
+   .. cpp:function:: KOKKOS_INLINE_FUNCTION uint32_t capacity() const;
 
        Capacity of the map, O(1)
 
-   .. cppkokkos:kokkosinlinefunction:: UnorderedMapInsertResult insert(key) const;
+   .. cpp:function:: KOKKOS_INLINE_FUNCTION UnorderedMapInsertResult insert(key) const;
 
       Insert the given key into the map with a default constructed value
 
-   .. cppkokkos:kokkosinlinefunction:: UnorderedMapInsertResult insert(Key key, Value value, Insert op = NoOp) const;
+   .. cpp:function:: KOKKOS_INLINE_FUNCTION UnorderedMapInsertResult insert(Key key, Value value, Insert op = NoOp) const;
 
       Insert the given key/value pair into the map and optionally specify
       the operator, op, used for combining values if key already exists
 
-   .. cppkokkos:kokkosinlinefunction:: uint32_t find(Key key) const
+   .. cpp:function:: KOKKOS_INLINE_FUNCTION uint32_t find(Key key) const
 
       Return the index of the key if it exist, otherwise return invalid_index
 
-   .. cppkokkos:kokkosinlinefunction:: bool exists(Key key) const;
+   .. cpp:function:: KOKKOS_INLINE_FUNCTION bool exists(Key key) const;
 
       Does the key exist in the map
 
-   .. cppkokkos:kokkosinlinefunction:: bool valid_at(uint32_t index) const;
+   .. cpp:function:: KOKKOS_INLINE_FUNCTION bool valid_at(uint32_t index) const;
 
       Is the current index a valid key/value pair
 
-   .. cppkokkos:kokkosinlinefunction:: Key key_at(uint32_t index) const;
+   .. cpp:function:: KOKKOS_INLINE_FUNCTION Key key_at(uint32_t index) const;
 
       Return the current key at the index
 
-   .. cppkokkos:kokkosinlinefunction:: Value value_at(uint32_t index) const;
+   .. cpp:function:: KOKKOS_INLINE_FUNCTION Value value_at(uint32_t index) const;
 
       Return the current value at the index
 
-   .. cppkokkos:kokkosinlinefunction:: constexpr bool is_allocated() const;
+   .. cpp:function:: KOKKOS_INLINE_FUNCTION constexpr bool is_allocated() const;
 
       Return true if the internal views (keys, values, hashmap) are allocated
 
-   .. cppkokkos:function:: create_copy_view(UnorderedMap<SKey, SValue, SDevice, Hasher, EqualTo> const &src);
+   .. cpp:function:: create_copy_view(UnorderedMap<SKey, SValue, SDevice, Hasher, EqualTo> const &src);
 
       For the calling ``UnorderedMap``, allocate views to have the same capacity as ``src``, and copy data from ``src``.
 
-   .. cppkokkos:function:: allocate_view(UnorderedMap<SKey, SValue, SDevice, Hasher, EqualTo> const &src);
+   .. cpp:function:: allocate_view(UnorderedMap<SKey, SValue, SDevice, Hasher, EqualTo> const &src);
 
       Allocate views of the calling ``UnorderedMap`` to have the same capacity as ``src``.
 
-   .. cppkokkos:function:: deep_copy_view(UnorderedMap<SKey, SValue, SDevice, Hasher, EqualTo> const &src);
+   .. cpp:function:: deep_copy_view(UnorderedMap<SKey, SValue, SDevice, Hasher, EqualTo> const &src);
 
       Copy data from ``src`` to the calling ``UnorderedMap``.
 
    .. rubric:: Non-Member Functions
 
-   .. cppkokkos:function:: inline void deep_copy(UnorderedMap<DKey, DT, DDevice, Hasher, EqualTo> &dst, const UnorderedMap<SKey, ST, SDevice, Hasher, EqualTo> &src);
+   .. cpp:function:: inline void deep_copy(UnorderedMap<DKey, DT, DDevice, Hasher, EqualTo> &dst, const UnorderedMap<SKey, ST, SDevice, Hasher, EqualTo> &src);
 
       Copy an ``UnorderedMap`` from ``src`` to ``dst``.
 
       .. warning::  From Kokkos 4.4, ``src.capacity() == dst.capacity()`` is required
 
-   .. cppkokkos:function:: UnorderedMap<Key, ValueType, Device, Hasher, EqualTo>::HostMirror create_mirror(const UnorderedMap<Key, ValueType, Device, Hasher, EqualTo> &src);
+   .. cpp:function:: UnorderedMap<Key, ValueType, Device, Hasher, EqualTo>::HostMirror create_mirror(const UnorderedMap<Key, ValueType, Device, Hasher, EqualTo> &src);
 
       Create a ``HostMirror`` for an ``UnorderedMap``.
 
-.. cppkokkos:class:: UnorderedMapInsertResult
+.. cpp:class:: UnorderedMapInsertResult
 
    .. rubric:: Public Methods
 
-   .. cppkokkos:kokkosinlinefunction:: bool success() const;
+   .. cpp:function:: KOKKOS_INLINE_FUNCTION bool success() const;
 
       Was the key/value pair successfully inserted into the map
 
-   .. cppkokkos:kokkosinlinefunction:: bool existing() const;
+   .. cpp:function:: KOKKOS_INLINE_FUNCTION bool existing() const;
 
       Is the key already present in the map
 
-   .. cppkokkos:kokkosinlinefunction:: bool failed() const;
+   .. cpp:function:: KOKKOS_INLINE_FUNCTION bool failed() const;
 
       Did the insert fail?
 
-   .. cppkokkos:kokkosinlinefunction:: uint32_t index() const;
+   .. cpp:function:: KOKKOS_INLINE_FUNCTION uint32_t index() const;
 
       Index where the key exists in the map as long as failed() == false
 
-.. cppkokkos:struct:: template <class ValueTypeView, class ValuesIdxType> UnorderedMapInsertOpTypes
+.. cpp:struct:: template <class ValueTypeView, class ValuesIdxType> UnorderedMapInsertOpTypes
 
    :tparam ValueTypeView: The UnorderedMap value array type.
 
@@ -148,11 +148,11 @@ Description
 
    .. rubric:: *Public* Insertion Operator Types
 
-   .. cppkokkos:struct:: NoOp
+   .. cpp:struct:: NoOp
 
         Insert the given key/value pair into the map
 
-   .. cppkokkos:struct:: AtomicAdd
+   .. cpp:struct:: AtomicAdd
 
        Duplicate key insertions sum values together.
 

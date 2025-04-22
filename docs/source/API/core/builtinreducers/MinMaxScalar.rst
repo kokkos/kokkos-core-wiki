@@ -36,20 +36,20 @@ Synopsis
 Interface
 ---------
 
-.. cppkokkos:struct:: template<class Scalar> MinMaxScalar
+.. cpp:struct:: template<class Scalar> MinMaxScalar
 
    .. rubric:: Public Members
 
-   .. cppkokkos:member:: Scalar min_val
+   .. cpp:member:: Scalar min_val
 
       Scalar minimum Value.
 
-   .. cppkokkos:member:: Scalar max_val
+   .. cpp:member:: Scalar max_val
 
       Scalar maximum Value.
 
    .. rubric:: Assignment Operator
 
-   .. cppkokkos:function:: void operator = (const MinMaxScalar& rhs)
+   .. cpp:function:: void operator = (const MinMaxScalar& rhs)
 
       Assign ``min_val`` and ``max_val`` from ``rhs``

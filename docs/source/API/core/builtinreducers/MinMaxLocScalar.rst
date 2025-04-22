@@ -39,28 +39,28 @@ Synopsis
 Interface
 ---------
 
-.. cppkokkos:struct:: template<class Scalar, class Index> MinMaxLocScalar
+.. cpp:struct:: template<class Scalar, class Index> MinMaxLocScalar
 
    .. rubric:: Public Members
 
-   .. cppkokkos:member:: Scalar min_val
+   .. cpp:member:: Scalar min_val
 
       Scalar minimum Value.
 
-   .. cppkokkos:member:: Scalar max_val
+   .. cpp:member:: Scalar max_val
 
       Scalar maximum Value.
 
-   .. cppkokkos:member:: Index min_loc
+   .. cpp:member:: Index min_loc
 
       Minimum location(Index).
 
-   .. cppkokkos:member:: Index max_loc
+   .. cpp:member:: Index max_loc
 
       Maximum location(Index).
 
    .. rubric:: Assignment Operator
 
-   .. cppkokkos:function:: void operator = (const MinMaxLocScalar& rhs)
+   .. cpp:function:: void operator = (const MinMaxLocScalar& rhs)
 
       Assign ``min_val``, ``max_val``, ``min_loc`` and ``max_loc`` from ``rhs``

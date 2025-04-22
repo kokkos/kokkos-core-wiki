@@ -1,8 +1,8 @@
 ``atomic_compare_exchange``
 ===========================
 
-.. role:: cppkokkos(code)
-   :language: cppkokkos
+.. role:: cpp(code)
+   :language: cpp
 
 Defined in header ``<Kokkos_Atomic.hpp>`` which is included from ``<Kokkos_Core.hpp>``
 
@@ -20,7 +20,7 @@ always returns the previously stored value at the address ``&obj`` regardless of
 Description
 -----------
 
-.. cppkokkos:function:: template<class T> T atomic_compare_exchange(T* ptr, std::type_identity_t<T> expected, std::type_identity_t<T> desired);
+.. cpp:function:: template<class T> T atomic_compare_exchange(T* ptr, std::type_identity_t<T> expected, std::type_identity_t<T> desired);
 
    Atomically compares ``*ptr`` with ``expected``, and if those are bitwise-equal, replaces the former with ``desired``, and always returns the actual value that was pointed to by ``ptr`` before the call.
 

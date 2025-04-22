@@ -17,9 +17,3 @@ OT = "OT"
 
 [default.extend-words]
 # Don't correct these word (parts)
-
-# Don't check the following files
-[files]
-extend-exclude = [
-  "cppkokkos.py"
-]

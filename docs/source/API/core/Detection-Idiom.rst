@@ -1,8 +1,8 @@
 Detection Idiom
 ===============
 
-.. role:: cppkokkos(code)
-    :language: cppkokkos
+.. role:: cpp(code)
+    :language: cpp
 
 The Detection Idiom is used to recognize, in an SFINAE-friendly way, the validity of any C++ expression.
 

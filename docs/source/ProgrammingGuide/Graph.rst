@@ -4,29 +4,29 @@ Graphs
 Usage
 -----
 
-:cppkokkos:`Kokkos::Graph` is an abstraction that describes
+:cpp:`Kokkos::Graph` is an abstraction that describes
 asynchronous workloads organised as a direct acyclic graph (DAG).
 
 Once defined, the graph can be executed many times.
 
-:cppkokkos:`Kokkos::Graph` is specialized for some backends:
+:cpp:`Kokkos::Graph` is specialized for some backends:
 
-* :cppkokkos:`Cuda`
-* :cppkokkos:`HIP`
-* :cppkokkos:`SYCL`
+* :cpp:`Cuda`
+* :cpp:`HIP`
+* :cpp:`SYCL`
 
-On these backends, the :cppkokkos:`Kokkos::Graph` specialisations map to the native graph API, namely, the CUDA Graph API, the HIP Graph API, and the SYCL (command) Graph API, respectively.
+On these backends, the :cpp:`Kokkos::Graph` specialisations map to the native graph API, namely, the CUDA Graph API, the HIP Graph API, and the SYCL (command) Graph API, respectively.
 
-For other backends, :cppkokkos:`Kokkos::Graph` provides a defaulted implementation.
+For other backends, :cpp:`Kokkos::Graph` provides a defaulted implementation.
 
 Execution space instance versus graph
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Workloads submitted on :cppkokkos:`Kokkos` execution space instances execute *eagerly*, *i.e.*,
-once the :cppkokkos:`Kokkos::parallel_` function is called, the workload is immediately launched on the device.
+Workloads submitted on :cpp:`Kokkos` execution space instances execute *eagerly*, *i.e.*,
+once the :cpp:`Kokkos::parallel_` function is called, the workload is immediately launched on the device.
 
-By contrast, the :cppkokkos:`Kokkos::Graph` abstraction follows *lazy* execution,
-*i.e*, workloads added to a :cppkokkos:`Kokkos::Graph` are **not** executed *until*
+By contrast, the :cpp:`Kokkos::Graph` abstraction follows *lazy* execution,
+*i.e*, workloads added to a :cpp:`Kokkos::Graph` are **not** executed *until*
 the whole graph is ready and submitted.
 
 Always in 3 phases
@@ -74,7 +74,7 @@ Consider a diamond-like DAG.
         C -> D;
     }
 
-The following snippet defines, instantiates and submits a :cppkokkos:`Kokkos::Graph`
+The following snippet defines, instantiates and submits a :cpp:`Kokkos::Graph`
 for this DAG.
 
 .. code-block:: c++

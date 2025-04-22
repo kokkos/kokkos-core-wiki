@@ -54,120 +54,120 @@ Description
 
 
 
-.. cppkokkos:class:: template <class DataType, class Arg1Type = void, class Arg2Type = void, class Arg3Type = void> DualView
+.. cpp:class:: template <class DataType, class Arg1Type = void, class Arg2Type = void, class Arg3Type = void> DualView
 
     |
 
     .. rubric:: *Public* typedefs
 
-    .. cppkokkos:type:: ViewTraits<DataType, Arg1Type, Arg2Type, Arg3Type> traits
+    .. cpp:type:: ViewTraits<DataType, Arg1Type, Arg2Type, Arg3Type> traits
 
        Typedefs for device types and various ``Kokkos::View`` specializations.
 
-    .. cppkokkos:type:: traits::host_mirror_space host_mirror_space
+    .. cpp:type:: traits::host_mirror_space host_mirror_space
 
        The Kokkos Host Device type
 
-    .. cppkokkos:type:: View<typename traits::data_type, Arg1Type, Arg2Type, Arg3Type> t_dev
+    .. cpp:type:: View<typename traits::data_type, Arg1Type, Arg2Type, Arg3Type> t_dev
 
        The type of a ``Kokkos::View`` on the device.
 
-    .. cppkokkos:type:: typename t_dev::HostMirror t_host
+    .. cpp:type:: typename t_dev::HostMirror t_host
 
        The type of a ``Kokkos::View`` host mirror of ``t_dev``.
 
-    .. cppkokkos:type:: View<typename traits::const_data_type, Arg1Type, Arg2Type, Arg3Type> t_dev_const
+    .. cpp:type:: View<typename traits::const_data_type, Arg1Type, Arg2Type, Arg3Type> t_dev_const
 
        The type of a const View on the device.
 
-    .. cppkokkos:type:: typename t_dev_const::HostMirror t_host_const
+    .. cpp:type:: typename t_dev_const::HostMirror t_host_const
 
        The type of a const View host mirror of ``t_dev_const``.
 
-    .. cppkokkos:type:: View<typename traits::const_data_type, typename traits::array_layout, typename traits::device_type, Kokkos::MemoryTraits<Kokkos::RandomAccess> > t_dev_const_randomread
+    .. cpp:type:: View<typename traits::const_data_type, typename traits::array_layout, typename traits::device_type, Kokkos::MemoryTraits<Kokkos::RandomAccess> > t_dev_const_randomread
 
        The type of a const, random-access View on the device.
 
-    .. cppkokkos:type:: typename t_dev_const_randomread::HostMirror t_host_const_randomread
+    .. cpp:type:: typename t_dev_const_randomread::HostMirror t_host_const_randomread
 
        The type of a const, random-access View host mirror of ``t_dev_const_randomread``.
 
-    .. cppkokkos:type:: View<typename traits::data_type, typename traits::array_layout, typename traits::device_type, MemoryUnmanaged> t_dev_um
+    .. cpp:type:: View<typename traits::data_type, typename traits::array_layout, typename traits::device_type, MemoryUnmanaged> t_dev_um
 
        The type of an unmanaged View on the device.
 
-    .. cppkokkos:type:: View<typename t_host::data_type, typename t_host::array_layout, typename t_host::device_type, MemoryUnmanaged> t_host_um
+    .. cpp:type:: View<typename t_host::data_type, typename t_host::array_layout, typename t_host::device_type, MemoryUnmanaged> t_host_um
 
        The type of an unmanaged View host mirror of \\c t_dev_um.
 
-    .. cppkokkos:type:: View<typename traits::const_data_type, typename traits::array_layout, typename traits::device_type, MemoryUnmanaged> t_dev_const_um
+    .. cpp:type:: View<typename traits::const_data_type, typename traits::array_layout, typename traits::device_type, MemoryUnmanaged> t_dev_const_um
 
        The type of a const unmanaged View on the device.
 
-    .. cppkokkos:type:: View<typename t_host::const_data_type, typename t_host::array_layout, typename t_host::device_type, MemoryUnmanaged> t_host_const_um
+    .. cpp:type:: View<typename t_host::const_data_type, typename t_host::array_layout, typename t_host::device_type, MemoryUnmanaged> t_host_const_um
 
        The type of a const unmanaged View host mirror of \\c t_dev_const_um.
 
-    .. cppkokkos:type:: View<typename t_host::const_data_type, typename t_host::array_layout, typename t_host::device_type, Kokkos::MemoryTraits<Kokkos::Unmanaged | Kokkos::RandomAccess> > t_dev_const_randomread_um
+    .. cpp:type:: View<typename t_host::const_data_type, typename t_host::array_layout, typename t_host::device_type, Kokkos::MemoryTraits<Kokkos::Unmanaged | Kokkos::RandomAccess> > t_dev_const_randomread_um
 
        The type of a const, random-access View on the device.
 
-    .. cppkokkos:type:: typename t_dev_const_randomread::HostMirror t_host_const_randomread_um
+    .. cpp:type:: typename t_dev_const_randomread::HostMirror t_host_const_randomread_um
 
        The type of a const, random-access View host mirror of ``t_dev_const_randomread``.
 
-    .. cppkokkos:type:: View<unsigned int[2], LayoutLeft, typename t_host::execution_space> t_modified_flags;
+    .. cpp:type:: View<unsigned int[2], LayoutLeft, typename t_host::execution_space> t_modified_flags;
 
-    .. cppkokkos:type:: View<unsigned int, LayoutLeft, typename t_host::execution_space> t_modified_flag;
+    .. cpp:type:: View<unsigned int, LayoutLeft, typename t_host::execution_space> t_modified_flag;
 
     .. rubric:: Data Members
 
-    .. cppkokkos:member:: t_dev d_view
+    .. cpp:member:: t_dev d_view
 
        The view instance on the *device*, public access deprecated from Kokkos 4.6 on.
 
-    .. cppkokkos:member:: t_host h_view
+    .. cpp:member:: t_host h_view
 
        The view instance on the *host*, public access deprecated from Kokkos 4.6 on.
 
-    .. cppkokkos:member:: t_modified_flags modified_flags
+    .. cpp:member:: t_modified_flags modified_flags
 
-    .. cppkokkos:member:: t_modified_flag modified_host;
+    .. cpp:member:: t_modified_flag modified_host;
 
-    .. cppkokkos:member:: t_modified_flag modified_device;
+    .. cpp:member:: t_modified_flag modified_device;
 
     |
 
     .. rubric:: *Public* constructors
 
-    .. cppkokkos:function:: DualView();
+    .. cpp:function:: DualView();
 
        Empty constructor. Both device and host View objects are constructed using their default constructors.
        The "modified" flags are both initialized to "unmodified."
 
-    .. cppkokkos:function:: DualView(const std::string& label, const size_t n0 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n1 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n2 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n3 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n4 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n5 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n6 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n7 = KOKKOS_IMPL_CTOR_DEFAULT_ARG);
+    .. cpp:function:: DualView(const std::string& label, const size_t n0 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n1 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n2 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n3 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n4 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n5 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n6 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n7 = KOKKOS_IMPL_CTOR_DEFAULT_ARG);
 
        Constructor that allocates View objects on both host and device.
        The first argument is a string label, which is entirely for your benefit. (Different DualView objects may have the same label if you like.)
        The arguments that follow are the dimensions of the View objects. For example, if the View has three dimensions,
        the first three integer arguments will be nonzero, and you may omit the integer arguments that follow.
 
-    .. cppkokkos:function:: DualView(ALLOC_PROP const& arg_prop, const size_t n0 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n1 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n2 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n3 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n4 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n5 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n6 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n7 = KOKKOS_IMPL_CTOR_DEFAULT_ARG);
+    .. cpp:function:: DualView(ALLOC_PROP const& arg_prop, const size_t n0 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n1 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n2 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n3 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n4 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n5 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n6 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n7 = KOKKOS_IMPL_CTOR_DEFAULT_ARG);
 
        Constructor that allocates View objects on both host and device allowing to pass an object created by ``Kokkos::view_alloc`` as first argument,
        e.g., to provide a label, avoid initialization, or specifying an execution space instance.
        The arguments that follow are the dimensions of the View objects.
        For example, if the View has three dimensions, the first three integer arguments will be nonzero, and you may omit the integer arguments that follow.
 
-    .. cppkokkos:function:: DualView(const DualView<SS, LS, DS, MS>& src);
+    .. cpp:function:: DualView(const DualView<SS, LS, DS, MS>& src);
 
        Copy constructor (shallow copy)
 
-    .. cppkokkos:function:: DualView(const DualView<SD, S1, S2, S3>& src, const Arg0& arg0, Args... args);
+    .. cpp:function:: DualView(const DualView<SD, S1, S2, S3>& src, const Arg0& arg0, Args... args);
 
        Subview constructor
 
-    .. cppkokkos:function:: DualView(const t_dev& d_view_, const t_host& h_view_);
+    .. cpp:function:: DualView(const t_dev& d_view_, const t_host& h_view_);
 
        Create DualView from existing device and host View objects.
        This constructor assumes that the device and host View objects are synchronized. You, the caller, are responsible for making sure this
@@ -183,9 +183,9 @@ Description
 
     .. rubric:: *Public* Methods for synchronizing, marking as modified, and getting Views.
 
-    .. cppkokkos:kokkosinlinefunction:: template <class Device> const auto& view();
+    .. cpp:function:: template <class Device> KOKKOS_INLINE_FUNCTION const auto& view();
 
-    .. cppkokkos:function:: template <class Device> static int get_device_side();
+    .. cpp:function:: template <class Device> static int get_device_side();
 
        * Return a View on a specific device ``Device``. ``Device`` can be a ``Kokkos::Device`` type, a memory space or a execution space corresponding to either the device View or the host-accessible View.
        * For example, suppose you create a DualView on Cuda, like this:
@@ -207,28 +207,28 @@ Description
 
            dual_view_type::t_host hostView = DV.view<dual_view_type::t_host::memory_space>();
 
-    .. cppkokkos:function:: const t_host& view_host() const;
+    .. cpp:function:: const t_host& view_host() const;
 
        *  Return the host-accessible View. Returns the View by value with `Kokkos_ENABLE_DEPRECATED_CODE_4=ON`
 
-    .. cppkokkos:function:: const t_dev& view_device() const;
+    .. cpp:function:: const t_dev& view_device() const;
 
        * Return the View on the device. Returns the View by value with `Kokkos_ENABLE_DEPRECATED_CODE_4=ON`.
 
-    .. cppkokkos:function:: template <class Device> void sync(const typename Impl::enable_if<(std::is_same<typename traits::data_type, typename traits::non_const_data_type>::value) || (std::is_same<Device, int>::value), int>::type& = 0);
+    .. cpp:function:: template <class Device> void sync(const typename Impl::enable_if<(std::is_same<typename traits::data_type, typename traits::non_const_data_type>::value) || (std::is_same<Device, int>::value), int>::type& = 0);
 
-    .. cppkokkos:function:: template <class Device> void sync(const typename Impl::enable_if<(!std::is_same<typename traits::data_type, typename traits::non_const_data_type>::value) || (std::is_same<Device, int>::value), int>::type& = 0);
+    .. cpp:function:: template <class Device> void sync(const typename Impl::enable_if<(!std::is_same<typename traits::data_type, typename traits::non_const_data_type>::value) || (std::is_same<Device, int>::value), int>::type& = 0);
 
-    .. cppkokkos:function:: template <class Device> bool need_sync() const;
+    .. cpp:function:: template <class Device> bool need_sync() const;
 
        * Update data on device or host only if data in the other space has been marked as modified.
        * If ``Device`` is the same as this DualView's device type, then copy data from host to device. Otherwise, copy data from device to host. In either case, only copy if the source of the copy has been modified.
        * This is a one-way synchronization only. If the target of the copy has been modified, this operation will discard those modifications. It will also reset both device and host modified flags.
        * This method doesn't know on its own whether you modified the data in either View. You must manually mark modified data as modified, by calling the ``modify()`` method with the appropriate template parameter.
 
-    .. cppkokkos:function:: template <class Device> void modify();
+    .. cpp:function:: template <class Device> void modify();
 
-    .. cppkokkos:function:: inline void clear_sync_state();
+    .. cpp:function:: inline void clear_sync_state();
 
        Mark data as modified on the given device \\c Device. If ``Device`` is the same as this
        DualView's device type, then mark the device's data as modified. Otherwise, mark the host's data as modified.
@@ -237,18 +237,18 @@ Description
 
     .. rubric:: *Public* Methods for reallocating or resizing the View objects
 
-    .. cppkokkos:function:: constexpr bool is_allocated() const;
+    .. cpp:function:: constexpr bool is_allocated() const;
 
        Return allocation state of underlying views. Returns true if both the host and device
        views points to a valid memory location. This function works for both managed and unmanaged views.
        With the unmanaged view, there is no guarantee that referenced address is valid, only that it is a non-null pointer.
 
-    .. cppkokkos:function:: void realloc(const size_t n0 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n1 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n2 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n3 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n4 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n5 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n6 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n7 = KOKKOS_IMPL_CTOR_DEFAULT_ARG);
+    .. cpp:function:: void realloc(const size_t n0 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n1 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n2 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n3 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n4 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n5 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n6 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n7 = KOKKOS_IMPL_CTOR_DEFAULT_ARG);
 
        Reallocate both View objects. This discards any existing contents of the objects,
        and resets their modified flags. It does *not* copy the old contents of either View into the new View objects.
 
-    .. cppkokkos:function:: void resize(const size_t n0 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n1 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n2 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n3 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n4 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n5 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n6 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n7 = KOKKOS_IMPL_CTOR_DEFAULT_ARG);
+    .. cpp:function:: void resize(const size_t n0 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n1 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n2 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n3 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n4 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n5 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n6 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n7 = KOKKOS_IMPL_CTOR_DEFAULT_ARG);
 
        Resize both views, copying old contents into new if necessary. This method only copies the old
        contents into the new View objects for the device which was last marked as modified.
@@ -257,22 +257,22 @@ Description
 
     .. rubric:: *Public* Methods for querying capacity, stride, or dimension(s).
 
-    .. cppkokkos:kokkosinlinefunction:: constexpr size_t span() const;
+    .. cpp:function:: KOKKOS_INLINE_FUNCTION constexpr size_t span() const;
 
        Return the allocation size (same as ``Kokkos::View::span``).
 
-    .. cppkokkos:kokkosinlinefunction:: bool span_is_contiguous();
+    .. cpp:function:: KOKKOS_INLINE_FUNCTION bool span_is_contiguous();
 
        Return true if the span is contiguous
 
-    .. cppkokkos:function:: template <typename iType> void stride(iType* stride_) const;
+    .. cpp:function:: template <typename iType> void stride(iType* stride_) const;
 
        Get stride(s) for each dimension. Sets ``stride_`` [rank] to span().
 
-    .. cppkokkos:kokkosinlinefunction:: template <typename iType> constexpr typename std::enable_if<std::is_integral<iType>::value, size_t>::type extent(const iType& r) const;
+    .. cpp:function:: template <typename iType> KOKKOS_INLINE_FUNCTION constexpr typename std::enable_if<std::is_integral<iType>::value, size_t>::type extent(const iType& r) const;
 
        Return the extent for the requested rank
 
-    .. cppkokkos:kokkosinlinefunction:: template <typename iType> constexpr typename std::enable_if<std::is_integral<iType>::value, int>::type extent_int(const iType& r) const;
+    .. cpp:function:: template <typename iType> KOKKOS_INLINE_FUNCTION constexpr typename std::enable_if<std::is_integral<iType>::value, int>::type extent_int(const iType& r) const;
 
        Return integral extent for the requested rank

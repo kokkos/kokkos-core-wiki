@@ -1,16 +1,16 @@
 Memory Spaces
 =============
 
-.. role:: cppkokkos(code)
-    :language: cppkokkos
+.. role:: cpp(code)
+    :language: cpp
 
 .. _MemorySpaceType: #kokkos-memoryspaceconcept
 
-.. |MemorySpaceType| replace:: :cppkokkos:func:`MemorySpace` type
+.. |MemorySpaceType| replace:: :cpp:func:`MemorySpace` type
 
 .. _TheDocumentationOnTheMemorySpaceConcept: #kokkos-memoryspaceconcept
 
-.. |TheDocumentationOnTheMemorySpaceConcept| replace:: the documentation on the :cppkokkos:func:`MemorySpace` concept
+.. |TheDocumentationOnTheMemorySpaceConcept| replace:: the documentation on the :cpp:func:`MemorySpace` concept
 
 .. _Experimental: utilities/experimental.html#experimentalnamespace
 
@@ -18,11 +18,11 @@ Memory Spaces
 
 .. _ExecutionSpaceType: ./execution_spaces.html#kokkos-executionspaceconcept
 
-.. |ExecutionSpaceType| replace:: :cppkokkos:func:`ExecutionSpace` type
+.. |ExecutionSpaceType| replace:: :cpp:func:`ExecutionSpace` type
 
 .. _ExecutionSpaceTypes: ./execution_spaces.html#kokkos-executionspaceconcept
 
-.. |ExecutionSpaceTypes| replace:: :cppkokkos:func:`ExecutionSpace` types
+.. |ExecutionSpaceTypes| replace:: :cpp:func:`ExecutionSpace` types
 
 ``Kokkos::CudaSpace``
 ---------------------
@@ -139,15 +139,15 @@ Typedefs
 
 .. _ExecutionSpace: execution_spaces.html#executionspaceconcept
 
-.. |ExecutionSpace| replace:: :cppkokkos:func:`ExecutionSpace`
+.. |ExecutionSpace| replace:: :cpp:func:`ExecutionSpace`
 
 .. _DeepCopyDocumentation: view/deep_copy.html
 
-.. |DeepCopyDocumentation| replace:: :cppkokkos:func:`deep_copy` documentation
+.. |DeepCopyDocumentation| replace:: :cpp:func:`deep_copy` documentation
 
 .. _KokkosSpaceAccessibility: SpaceAccessibility.html
 
-.. |KokkosSpaceAccessibility| replace:: :cppkokkos:func:`Kokkos::SpaceAccessibility`
+.. |KokkosSpaceAccessibility| replace:: :cpp:func:`Kokkos::SpaceAccessibility`
 
 * ``memory_space``: The self type;
 * ``execution_space``: the default |ExecutionSpace|_ to use when constructing objects in memory provided by an instance of ``MemorySpace``, or (potentially) when deep copying from or to such memory (see |DeepCopyDocumentation|_ for details). Kokkos guarantees that ``Kokkos::SpaceAccessibility<execution_space, memory_space>::accessible`` will be ``true`` (see |KokkosSpaceAccessibility|_).

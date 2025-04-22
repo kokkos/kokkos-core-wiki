@@ -1,8 +1,8 @@
 ``kokkos_free``
 ===============
 
-.. role:: cppkokkos(code)
-    :language: cppkokkos
+.. role:: cpp(code)
+    :language: cpp
 
 Defined in header ``<Kokkos_Core.hpp>``
 
@@ -21,7 +21,7 @@ If ``ptr`` is a null pointer, the function does nothing.
 Description
 -----------
 
-.. cppkokkos:function:: template <class MemorySpace = Kokkos::DefaultExecutionSpace::memory_space> void kokkos_free(void* ptr);
+.. cpp:function:: template <class MemorySpace = Kokkos::DefaultExecutionSpace::memory_space> void kokkos_free(void* ptr);
 
     :tparam MemorySpace: Controls the storage location. If omitted the memory space of the default execution space is used (i.e. ``Kokkos::DefaultExecutionSpace::memory_space``).
 

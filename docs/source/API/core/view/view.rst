@@ -70,7 +70,7 @@ and ``MemoryTraits`` are specified, ``MemorySpace`` must come before ``MemoryTra
 
 .. _Atomic: ../atomics.html
 
-.. |Atomic| replace:: :cppkokkos:func:`Atomic`
+.. |Atomic| replace:: :cpp:func:`Atomic`
 
 
 * ``MemoryTraits``:
@@ -227,19 +227,19 @@ Typedefs
 Constructors
 ~~~~~~~~~~~~
 
-.. cppkokkos:function:: View()
+.. cpp:function:: View::View()
 
    Default Constructor. No allocations are made, no reference counting happens. All extents are zero and its data pointer is NULL.
 
-.. cppkokkos:function:: View( const View<DT, Prop...>& rhs)
+.. cpp:function:: View::View( const View<DT, Prop...>& rhs)
 
    Copy constructor with compatible view. Follows View assignment rules.
 
-.. cppkokkos:function:: View( View&& rhs)
+.. cpp:function:: View::View( View&& rhs)
 
    Move constructor
 
-.. cppkokkos:function:: View( const std::string& name, const IntType& ... indices)
+.. cpp:function:: View::View( const std::string& name, const IntType& ... indices)
 
    Standard allocating constructor. The initialization is executed on the default
    instance of the execution space corresponding to ``MemorySpace`` and fences it.
@@ -253,7 +253,7 @@ Constructors
 
    - Requires: ``array_layout::is_regular == true``.
 
-.. cppkokkos:function:: View( const std::string& name, const array_layout& layout)
+.. cpp:function:: View::View( const std::string& name, const array_layout& layout)
 
    Standard allocating constructor. The initialization is executed on the default
    instance of the execution space corresponding to ``MemorySpace`` and fences it.
@@ -265,7 +265,7 @@ Constructors
      either match the dynamic rank or the total rank. In the latter case, the extents
      corresponding to compile-time dimensions must match the View type's compile-time extents.
 
-.. cppkokkos:function:: View( const ALLOC_PROP &prop, const IntType& ... indices)
+.. cpp:function:: View::View( const ALLOC_PROP &prop, const IntType& ... indices)
 
    Allocating constructor with allocation properties (created by a call to `Kokkos::view_alloc`). If an execution space is
    specified in ``prop``, the initialization uses it and does not fence.
@@ -280,7 +280,7 @@ Constructors
 
    - Requires: ``array_layout::is_regular == true``.
 
-.. cppkokkos:function:: View( const ALLOC_PROP &prop, const array_layout& layout)
+.. cpp:function:: View::View( const ALLOC_PROP &prop, const array_layout& layout)
 
    Allocating constructor with allocation properties (created by a call to `Kokkos::view_alloc`) and a layout object. If an execution space is
    specified in ``prop``, the initialization uses it and does not fence. Otherwise, the View is
@@ -292,7 +292,7 @@ Constructors
      match the dynamic rank or the total rank. In the latter case, the extents corresponding
      to compile-time dimensions must match the View type's compile-time extents.
 
-.. cppkokkos:function:: View( pointer_type ptr, const IntType& ... indices)
+.. cpp:function:: View::View( pointer_type ptr, const IntType& ... indices)
 
    Unmanaged data wrapping constructor.
 
@@ -305,7 +305,7 @@ Constructors
 
    - Requires: ``array_layout::is_regular == true``.
 
-.. cppkokkos:function:: View( pointer_type ptr, const array_layout& layout)
+.. cpp:function:: View::View( pointer_type ptr, const array_layout& layout)
 
    Unmanaged data wrapper constructor.
 
@@ -316,7 +316,7 @@ Constructors
      either match the dynamic rank or the total rank. In the latter case, the extents
      corresponding to compile-time dimensions must match the View type's compile-time extents.
 
-.. cppkokkos:function:: View( const ScratchSpace& space, const IntType& ... indices)
+.. cpp:function:: View::View( const ScratchSpace& space, const IntType& ... indices)
 
    Constructor which acquires memory from a Scratch Memory handle.
 
@@ -329,7 +329,7 @@ Constructors
 
    - Requires: ``array_layout::is_regular == true``.
 
-.. cppkokkos:function:: View( const ScratchSpace& space, const array_layout& layout)
+.. cpp:function:: View::View( const ScratchSpace& space, const array_layout& layout)
 
    Constructor which acquires memory from a Scratch Memory handle.
 
@@ -339,11 +339,11 @@ Constructors
      either match the dynamic rank or the total rank. In the latter case, the extents
      corresponding to compile-time dimensions must match the View type's compile-time extents.
 
-.. cppkokkos:function:: View( const View<DT, Prop...>& rhs, Args ... args)
+.. cpp:function:: View::View( const View<DT, Prop...>& rhs, Args ... args)
 
    Subview constructor. See ``subview`` function for arguments.
 
-.. cppkokkos:function:: explicit(traits::is_managed) View( const NATURAL_MDSPAN_TYPE& mds )
+.. cpp:function:: explicit(traits::is_managed) View::View( const NATURAL_MDSPAN_TYPE& mds )
 
    :param mds: the mdspan to convert from.
 
@@ -352,7 +352,7 @@ Constructors
       :cpp:`explicit(bool)` is only available on C++20 and later. When building Kokkos with C++17, this constructor will be fully implicit.
       Be aware that later upgrading to C++20 will in some cases cause compilation issues in cases where :cpp:`traits::is_managed` is :cpp:`false`.
 
-   :cpp:`NATURAL_MDSPAN_TYPE` is the :ref:`natural mdspan <api-view-natural-mdspans>` of the View. The *natural mdspan* is only available if :cpp:type:`array_layout` is one of :cppkokkos:struct:`LayoutLeft`, :cppkokkos:struct:`LayoutRight`,
+   :cpp:`NATURAL_MDSPAN_TYPE` is the :ref:`natural mdspan <api-view-natural-mdspans>` of the View. The *natural mdspan* is only available if :cpp:type:`array_layout` is one of :cpp:struct:`LayoutLeft`, :cpp:struct:`LayoutRight`,
    or :cpp:class:`LayoutStride`. This constructor is only available if *natural mdspan* is available.
 
    Constructs a :cpp:class:`View` by converting from :cpp:any:`mds`. The :cpp:class:`View` will be unmanaged and constructed as if by :cpp:`View(mds.data(), array_layout_from_mapping(mds.mapping()))`
@@ -361,7 +361,7 @@ Constructors
 
    .. versionadded:: 4.4.0
 
-.. cppkokkos:function:: template <class ElementType, class ExtentsType, class LayoutType, class AccessorType> explicit(SEE_BELOW) View(const mdspan<ElementType, ExtentsType, LayoutType, AccessorType>& mds)
+.. cpp:function:: template <class ElementType, class ExtentsType, class LayoutType, class AccessorType> explicit(SEE_BELOW) View::View(const mdspan<ElementType, ExtentsType, LayoutType, AccessorType>& mds)
 
    :tparam ElementType: the mdspan element type
    :tparam ExtentsType: the mdspan extents
@@ -387,14 +387,14 @@ Constructors
 Data Access Functions
 ~~~~~~~~~~~~~~~~~~~~~
 
-.. cppkokkos:function:: reference_type operator() (const IntType& ... indices) const
+.. cpp:function:: reference_type operator() (const IntType& ... indices) const
 
    Returns a value of ``reference_type`` which may or not be referenceable itself.
    The number of index arguments must match the ``rank`` of the view.
    See notes on ``reference_type`` for properties of the return type.
    Requires: ``sizeof(IntType...)==rank_dynamic()``
 
-.. cppkokkos:function:: reference_type access(const IntType& i0=0, const IntType& i1=0, \
+.. cpp:function:: reference_type access(const IntType& i0=0, const IntType& i1=0, \
 			const IntType& i2=0, const IntType& i3=0, const IntType& i4=0, \
 			const IntType& i5=0, const IntType& i6=0, const IntType& i7=0) const
 
@@ -406,11 +406,11 @@ Data Access Functions
 Data Layout, Dimensions, Strides
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. cppkokkos:function:: static constexpr size_t rank()
+.. cpp:function:: static constexpr size_t rank()
 
    **since Kokkos 4.1**: Returns the rank of the view.
 
-.. cppkokkos:function:: static constexpr size_t rank_dynamic()
+.. cpp:function:: static constexpr size_t rank_dynamic()
 
    **since Kokkos 4.1**: Returns the number of runtime determined dimensions.
 
@@ -418,15 +418,15 @@ Note: in practice, ``rank()`` and ``rank_dynamic()`` are not actually
 implemented as static member functions but ``rank`` and ``rank_dynamic`` underlying
 types have a nullary member function (i.e. callable with no argument).
 
-.. cppkokkos:function:: constexpr array_layout layout() const
+.. cpp:function:: constexpr array_layout layout() const
 
    Returns the layout object. Can be used to to construct other views with the same dimensions.
 
-.. cppkokkos:function:: template<class iType> constexpr size_t extent( const iType& dim) const
+.. cpp:function:: template<class iType> constexpr size_t extent( const iType& dim) const
 
    Return the extent of the specified dimension. ``iType`` must be an integral type, and ``dim`` must be smaller than ``rank``.
 
-.. cppkokkos:function:: template<class iType> constexpr int extent_int( const iType& dim) const
+.. cpp:function:: template<class iType> constexpr int extent_int( const iType& dim) const
 
    Return the extent of the specified dimension as an ``int``. ``iType`` must be an integral type,
    and ``dim`` must be smaller than ``rank``. Compared to ``extent`` this function can be
@@ -434,103 +434,103 @@ types have a nullary member function (i.e. callable with no argument).
    It also may eliminate the need for type casts in applications which
    otherwise perform all index operations with ``int``.
 
-.. cppkokkos:function:: template<class iType> constexpr size_t stride(const iType& dim) const
+.. cpp:function:: template<class iType> constexpr size_t stride(const iType& dim) const
 
    Return the stride of the specified dimension. ``iType`` must be an integral type,
    and ``dim`` must be smaller than ``rank``. Example: ``a.stride(3) == (&a(i0,i1,i2,i3+1,i4)-&a(i0,i1,i2,i3,i4))``
 
-.. cppkokkos:function:: constexpr size_t stride_0() const
+.. cpp:function:: constexpr size_t stride_0() const
 
    Return the stride of dimension 0.
 
-.. cppkokkos:function:: constexpr size_t stride_1() const
+.. cpp:function:: constexpr size_t stride_1() const
 
    Return the stride of dimension 1.
 
-.. cppkokkos:function:: constexpr size_t stride_2() const
+.. cpp:function:: constexpr size_t stride_2() const
 
    Return the stride of dimension 2.
 
-.. cppkokkos:function:: constexpr size_t stride_3() const
+.. cpp:function:: constexpr size_t stride_3() const
 
    Return the stride of dimension 3.
 
-.. cppkokkos:function:: constexpr size_t stride_4() const
+.. cpp:function:: constexpr size_t stride_4() const
 
    Return the stride of dimension 4.
 
-.. cppkokkos:function:: constexpr size_t stride_5() const
+.. cpp:function:: constexpr size_t stride_5() const
 
    Return the stride of dimension 5.
 
-.. cppkokkos:function:: constexpr size_t stride_6() const
+.. cpp:function:: constexpr size_t stride_6() const
 
    Return the stride of dimension 6.
 
-.. cppkokkos:function:: constexpr size_t stride_7() const
+.. cpp:function:: constexpr size_t stride_7() const
 
    Return the stride of dimension 7.
 
-.. cppkokkos:function:: template<class iType> void stride(iType* strides) const
+.. cpp:function:: template<class iType> void stride(iType* strides) const
 
    Sets ``strides[r]`` to ``stride(r)`` for all ``r`` with ``0<=r<rank``.
    Sets ``strides[rank]`` to ``span()``. ``iType`` must be an integral type, and ``strides`` must be an array of length ``rank+1``.
 
-.. cppkokkos:function:: constexpr size_t span() const
+.. cpp:function:: constexpr size_t span() const
 
    Returns the memory span in elements between the element with the
    lowest and the highest address. This can be larger than the product
    of extents due to padding, and or non-contiguous data layout as for example ``LayoutStride`` allows.
 
-.. cppkokkos:function:: constexpr size_t size() const
+.. cpp:function:: constexpr size_t size() const
 
    Returns the product of extents, i.e. the logical number of elements in the view.
 
-.. cppkokkos:function:: constexpr pointer_type data() const
+.. cpp:function:: constexpr pointer_type data() const
 
    Return the pointer to the underlying data allocation.
    WARNING: calling any function that manipulates the behavior
    of the memory (e.g. ``memAdvise``) on memory managed by ``Kokkos`` results in undefined behavior.
 
-.. cppkokkos:function:: bool span_is_contiguous() const
+.. cpp:function:: bool span_is_contiguous() const
 
    Whether the span is contiguous (i.e. whether every memory location between
    in span belongs to the index space covered by the view).
 
-.. cppkokkos:function:: static constexpr size_t required_allocation_size(size_t N0=0, size_t N1=0, \
+.. cpp:function:: static constexpr size_t required_allocation_size(size_t N0=0, size_t N1=0, \
 			size_t N2=0, size_t N3=0, \
 			size_t N4=0, size_t N5=0, \
 			size_t N6=0, size_t N7=0, size_t N8 = 0);
 
    Returns the number of bytes necessary for an unmanaged view of the provided dimensions. This function is only valid if ``array_layout::is_regular == true``.
 
-.. cppkokkos:function:: static constexpr size_t required_allocation_size(const array_layout& layout);
+.. cpp:function:: static constexpr size_t required_allocation_size(const array_layout& layout);
 
    Returns the number of bytes necessary for an unmanaged view of the provided layout.
 
 Other
 ~~~~~
 
-.. cppkokkos:function:: int use_count() const;
+.. cpp:function:: int use_count() const;
 
    Returns the current reference count of the underlying allocation.
 
-.. cppkokkos:function:: const std::string label() const;
+.. cpp:function:: const std::string label() const;
 
    Returns the label of the View.
 
-.. cppkokkos:function:: const bool is_assignable(const View<DT, Prop...>& rhs);
+.. cpp:function:: const bool is_assignable(const View<DT, Prop...>& rhs);
 
    Returns true if the View can be assigned to rhs.  See below for assignment rules.
 
-.. cppkokkos:function:: void assign_data(pointer_type arg_data);
+.. cpp:function:: void assign_data(pointer_type arg_data);
 
    Decrement reference count of previously assigned data and set the underlying pointer to arg_data.
    Note that the effective result of this operation is that the view
    is now an unmanaged view; thus, the deallocation of memory associated with
    arg_data is not linked in anyway to the deallocation of the view.
 
-.. cppkokkos:function:: constexpr bool is_allocated() const;
+.. cpp:function:: constexpr bool is_allocated() const;
 
    Returns true if the view points to a valid memory location.
    This function works for both managed and unmanaged views.
@@ -540,7 +540,7 @@ Other
 Conversion to mdspan
 ~~~~~~~~~~~~~~~~~~~~
 
-.. cppkokkos:function:: template <class OtherElementType, class OtherExtents, class OtherLayoutPolicy, class OtherAccessor> constexpr operator mdspan<OtherElementType, OtherExtents, OtherLayoutPolicy, OtherAccessor>()
+.. cpp:function:: template <class OtherElementType, class OtherExtents, class OtherLayoutPolicy, class OtherAccessor> constexpr operator mdspan<OtherElementType, OtherExtents, OtherLayoutPolicy, OtherAccessor>()
 
    :tparam OtherElementType: the target mdspan element type
    :tparam OtherExtents: the target mdspan extents
@@ -551,7 +551,7 @@ Conversion to mdspan
 
    :returns: an mdspan with extents and a layout converted from the :cpp:class:`View`'s *natural mdspan*.
 
-.. cppkokkos:function:: template <class OtherAccessorType = Kokkos::default_accessor<typename traits::value_type>> constexpr auto to_mdspan(const OtherAccessorType& other_accessor = OtherAccessorType{})
+.. cpp:function:: template <class OtherAccessorType = Kokkos::default_accessor<typename traits::value_type>> constexpr auto to_mdspan(const OtherAccessorType& other_accessor = OtherAccessorType{})
 
    :tparam OtherAccessor: the target mdspan accessor
 
@@ -563,11 +563,11 @@ Conversion to mdspan
 NonMember Functions
 -------------------
 
-.. cppkokkos:function:: template<class ViewDst, class ViewSrc> bool operator==(ViewDst, ViewSrc);
+.. cpp:function:: template<class ViewDst, class ViewSrc> bool operator==(ViewDst, ViewSrc);
 
    Returns true if ``value_type``, ``array_layout``, ``memory_space``, ``rank``, ``data()`` and ``extent(r)``, for ``0<=r<rank``, match.
 
-.. cppkokkos:function:: template<class ViewDst, class ViewSrc> bool operator!=(ViewDst, ViewSrc);
+.. cpp:function:: template<class ViewDst, class ViewSrc> bool operator!=(ViewDst, ViewSrc);
 
    Returns true if any of ``value_type``, ``array_layout``, ``memory_space``, ``rank``, ``data()`` and ``extent(r)``, for ``0<=r<rank`` don't match.
 

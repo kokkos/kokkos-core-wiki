@@ -1,8 +1,8 @@
 ``Array``
 ==============
 
-.. role:: cppkokkos(code)
-    :language: cppkokkos
+.. role:: cpp(code)
+    :language: cpp
 
 ..
   The (public header) file the user will include in their code
@@ -31,7 +31,7 @@ Interface
 
 .. versionchanged:: 4.4.0
 
-.. cppkokkos:struct:: template <class T, size_t N> Array
+.. cpp:struct:: template <class T, size_t N> Array
 
   ..
     Template parameters (if applicable)
@@ -44,34 +44,34 @@ Interface
 
   .. rubric:: Public Types
 
-  .. cppkokkos:type:: value_type = T
-  .. cppkokkos:type:: pointer = T*
-  .. cppkokkos:type:: const_pointer = const T*
-  .. cppkokkos:type:: reference = T&
-  .. cppkokkos:type:: const_reference = const T&
-  .. cppkokkos:type:: size_type = size_t
-  .. cppkokkos:type:: difference_type = ptrdiff_t
+  .. cpp:type:: value_type = T
+  .. cpp:type:: pointer = T*
+  .. cpp:type:: const_pointer = const T*
+  .. cpp:type:: reference = T&
+  .. cpp:type:: const_reference = const T&
+  .. cpp:type:: size_type = size_t
+  .. cpp:type:: difference_type = ptrdiff_t
 
   .. rubric:: Public Member Functions
 
-  .. cppkokkos:function:: static constexpr bool empty()
+  .. cpp:function:: static constexpr bool empty()
 
     :return: ``N == 0``
 
-  .. cppkokkos:function:: static constexpr size_type size()
-  .. cppkokkos:function:: constexpr size_type max_size() const
+  .. cpp:function:: static constexpr size_type size()
+  .. cpp:function:: constexpr size_type max_size() const
 
     :return: ``N``
 
-  .. cppkokkos:function:: template<class iType> constexpr reference operator[](const iType& i)
-  .. cppkokkos:function:: template<class iType> constexpr const_reference operator[](const iType& i) const
+  .. cpp:function:: template<class iType> constexpr reference operator[](const iType& i)
+  .. cpp:function:: template<class iType> constexpr const_reference operator[](const iType& i) const
 
     :tparam iType: An integral type or an unscoped enum type.
 
     :return: A reference to the ``i``-th element of the array.
 
-  .. cppkokkos:function:: constexpr pointer data()
-  .. cppkokkos:function:: constexpr const_pointer data() const
+  .. cpp:function:: constexpr pointer data()
+  .. cpp:function:: constexpr const_pointer data() const
 
     :return: A pointer to the first element of the array.  If ``N == 0``, the return value is unspecified and not dereferenceable.
 
@@ -79,7 +79,7 @@ Interface
 Deduction Guides
 ----------------
 
-.. cppkokkos:function:: template<class T, class... U> Array(T, U...) -> Array<T, 1 + sizeof...(U)>
+.. cpp:function:: template<class T, class... U> Array(T, U...) -> Array<T, 1 + sizeof...(U)>
 
 Non-Member Functions
 --------------------
@@ -88,40 +88,40 @@ Non-Member Functions
   These should only be listed here if they are closely related. E.g. friend operators. However,
   something like view_alloc shouldn't be here for view
 
-.. cppkokkos:function:: template<class T, size_t N> constexpr bool operator==(const Array<T, N>& l, const Array<T, N>& r) noexcept
+.. cpp:function:: template<class T, size_t N> constexpr bool operator==(const Array<T, N>& l, const Array<T, N>& r) noexcept
 
    :return: ``true`` if and only if ∀ the elements in ``l`` and ``r`` compare equal.
 
-.. cppkokkos:function:: template<class T, size_t N> constexpr bool operator!=(const Array<T, N>& l, const Array<T, N>& r) noexcept
+.. cpp:function:: template<class T, size_t N> constexpr bool operator!=(const Array<T, N>& l, const Array<T, N>& r) noexcept
 
    :return: ``!(l == r)``
 
-.. cppkokkos:function:: template<class T, size_t N> constexpr kokkos_swap(Array<T, N>& l, Array<T, N>& r) noexcept(N == 0 || is_nothrow_swappable_V<T>)
+.. cpp:function:: template<class T, size_t N> constexpr kokkos_swap(Array<T, N>& l, Array<T, N>& r) noexcept(N == 0 || is_nothrow_swappable_V<T>)
 
    :return: If ``T`` is swappable or ``N == 0``, each of the elements in `l` and `r` are swapped via ``kokkos_swap``.
 
-.. cppkokkos:function:: template<class T, size_t N> constexpr Array<remove_cv_t<T>, N> to_array(T (&a)[N])
-.. cppkokkos:function:: template<class T, size_t N> constexpr Array<remove_cv_t<T>, N> to_array(T (&&a)[N])
+.. cpp:function:: template<class T, size_t N> constexpr Array<remove_cv_t<T>, N> to_array(T (&a)[N])
+.. cpp:function:: template<class T, size_t N> constexpr Array<remove_cv_t<T>, N> to_array(T (&&a)[N])
 
    :return: An ``Array`` containing the elements copied/moved from ``a``.
 
-.. cppkokkos:function:: template<size_t I, class T, size_t N> constexpr T& get(Array<T, N>& a) noexcept
-.. cppkokkos:function:: template<size_t I, class T, size_t N> constexpr const T& get(const Array<T, N>& a) noexcept
+.. cpp:function:: template<size_t I, class T, size_t N> constexpr T& get(Array<T, N>& a) noexcept
+.. cpp:function:: template<size_t I, class T, size_t N> constexpr const T& get(const Array<T, N>& a) noexcept
 
    :return: ``a[I]`` for (tuple protocol / structured binding support)
 
-.. cppkokkos:function:: template<size_t I, class T, size_t N> constexpr T&& get(Array<T, N>&& a) noexcept
-.. cppkokkos:function:: template<size_t I, class T, size_t N> constexpr const T&& get(const Array<T, N>&& a) noexcept
+.. cpp:function:: template<size_t I, class T, size_t N> constexpr T&& get(Array<T, N>&& a) noexcept
+.. cpp:function:: template<size_t I, class T, size_t N> constexpr const T&& get(const Array<T, N>&& a) noexcept
 
    :return: ``std::move(a[I])`` (for tuple protocol / structured binding support)
 
-.. cppkokkos:function:: template<class T, size_t N> constexpr T* begin(Array<T, N>& a) noexcept
-.. cppkokkos:function:: template<class T, size_t N> constexpr const T* begin(const Array<T, N>& a) noexcept
+.. cpp:function:: template<class T, size_t N> constexpr T* begin(Array<T, N>& a) noexcept
+.. cpp:function:: template<class T, size_t N> constexpr const T* begin(const Array<T, N>& a) noexcept
 
    :return: ``a.data()``
 
-.. cppkokkos:function:: template<class T, size_t N> constexpr T* end(Array<T, N>& a) noexcept
-.. cppkokkos:function:: template<class T, size_t N> constexpr const T* end(const Array<T, N>& a) noexcept
+.. cpp:function:: template<class T, size_t N> constexpr T* end(Array<T, N>& a) noexcept
+.. cpp:function:: template<class T, size_t N> constexpr const T* end(const Array<T, N>& a) noexcept
 
    :return: ``a.data() + a.size()``
 
@@ -129,16 +129,16 @@ Deprecated Interface
 --------------------
 .. deprecated:: 4.4.00
 
-.. cppkokkos:struct:: template<class T = void, size_t N = KOKKOS_INVALID_INDEX, class Proxy = void> Array
+.. cpp:struct:: template<class T = void, size_t N = KOKKOS_INVALID_INDEX, class Proxy = void> Array
 
 * The primary template was an contiguous aggregate owning container of exactly ``N`` elements of type ``T``.
 * This container did not support move semantics.
 
-.. cppkokkos:struct:: template<class T, class Proxy> Array<T, 0, Proxy>
+.. cpp:struct:: template<class T, class Proxy> Array<T, 0, Proxy>
 
 * This container was an empty container.
 
-.. cppkokkos:struct:: template<class T> Array<T, KOKKOS_INVALID_INDEX, Array<>::contiguous>
+.. cpp:struct:: template<class T> Array<T, KOKKOS_INVALID_INDEX, Array<>::contiguous>
 
 * This container was a non-owning container.
 * This container had its size determined at construction time.
@@ -146,7 +146,7 @@ Deprecated Interface
 * Assignment did not change the size of this container.
 * This container did not support move semantics.
 
-.. cppkokkos:struct:: template<class T> Array<T, KOKKOS_INVALID_INDEX, Array<>::strided>
+.. cpp:struct:: template<class T> Array<T, KOKKOS_INVALID_INDEX, Array<>::strided>
 
 * This container was a non-owning container.
 * This container had its size and stride determined at construction time.
@@ -154,12 +154,12 @@ Deprecated Interface
 * Assignment did not change the size or stride of this container.
 * This container did not support move semantics.
 
-.. cppkokkos:struct:: template<> Array<void, KOKKOS_INVALID_INDEX, void>
+.. cpp:struct:: template<> Array<void, KOKKOS_INVALID_INDEX, void>
 
    .. rubric:: Public Types
 
-   .. cppkokkos:type:: contiguous
-   .. cppkokkos:type:: stided
+   .. cpp:type:: contiguous
+   .. cpp:type:: stided
 
 * This specialization defined the embedded tag types: ``contiguous`` and ``strided``.
 
@@ -248,4 +248,3 @@ ________
 
    return 0;
  }
-

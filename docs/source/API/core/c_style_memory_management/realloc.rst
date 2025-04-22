@@ -1,8 +1,8 @@
 ``kokkos_realloc``
 ==================
 
-.. role:: cppkokkos(code)
-    :language: cppkokkos
+.. role:: cpp(code)
+    :language: cpp
 
 Defined in header ``<Kokkos_Core.hpp>``
 
@@ -33,7 +33,7 @@ on the same memory space |MemorySpace|_ and not yet freed with |Kokkos_kokkos_fr
 Description
 -----------
 
-.. cppkokkos:function:: template <class MemorySpace = Kokkos::DefaultExecutionSpace::memory_space> void* kokkos_realloc(void* ptr, size_t new_size);
+.. cpp:function:: template <class MemorySpace = Kokkos::DefaultExecutionSpace::memory_space> void* kokkos_realloc(void* ptr, size_t new_size);
 
   :tparam MemorySpace: Controls the storage location. If omitted the memory space of the default execution space is used (i.e. ``Kokkos::DefaultExecutionSpace::memory_space``).
 

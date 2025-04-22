@@ -1,8 +1,8 @@
 ``InitializationSettings``
 ==========================
 
-.. role:: cppkokkos(code)
-   :language: cppkokkos
+.. role:: cpp(code)
+   :language: cpp
 
 Defined in header ``<KokkosCore.cpp>``
 
@@ -24,25 +24,25 @@ Usage:
 Interface
 ---------
 
-.. cppkokkos:class:: InitializationSettings
+.. cpp:class:: InitializationSettings
 
-   .. cppkokkos:function:: InitializationSettings();
+   .. cpp:function:: InitializationSettings();
 
       Constructs a new object that does not contain any value for any of the settings.
 
-   .. cppkokkos:function:: InitializationSettings(InitArguments const& arguments);
+   .. cpp:function:: InitializationSettings(InitArguments const& arguments);
 
       **DEPRECATED** Converts the deprecated structure to a new object. Data members from the structure that compare equal to their default value are assumed to be unset. Let ``PARAMETER-NAME`` be a valid setting of type ``PARAMETER-TYPE`` as defined in the table below.
 
-   .. cppkokkos:function:: InitializationSettings& set_PARAMETER_NAME(PARAMETER_TYPE value);
+   .. cpp:function:: InitializationSettings& set_PARAMETER_NAME(PARAMETER_TYPE value);
 
       Replaces the content of the ``PARAMETER_NAME`` setting with ``value`` and return a reference to the object. ``value`` must be a valid value for ``PARAMETER_NAME``.
 
-   .. cppkokkos:function:: bool has_PARAMETER_NAME() const;
+   .. cpp:function:: bool has_PARAMETER_NAME() const;
 
       Checks whether the object contains a value for the ``PARAMETER_NAME`` setting. Returns ``true`` if it contains a value, ``false`` otherwise.
 
-   .. cppkokkos:function:: PARAMETER_TYPE get_PARAMETER_NAME() const;
+   .. cpp:function:: PARAMETER_TYPE get_PARAMETER_NAME() const;
 
       Accesses the contained value for the ``PARAMETER_NAME`` setting. The behavior is undefined if the object does not contain a value for setting ``PARAMETER_NAME``.
 

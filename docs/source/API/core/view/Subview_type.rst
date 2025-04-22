@@ -1,8 +1,8 @@
 ``Kokkos::Subview``
 ===================
 
-.. role:: cppkokkos(code)
-   :language: cppkokkos
+.. role:: cpp(code)
+   :language: cpp
 
 .. _subviewfunc: subview.html
 
