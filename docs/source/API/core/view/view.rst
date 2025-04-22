@@ -8,9 +8,13 @@ Header File: ``<Kokkos_Core.hpp>``
 .. |CppReferenceSharedPtr| replace:: ``std::shared_ptr``
 
 
-.. _Atomic: ../atomics.html
+.. _ProgrammingGuide: ../../../ProgrammingGuide/View.html#memory-access-traits
 
+<<<<<<< HEAD
 .. |Atomic| replace:: ``Atomic``
+=======
+.. |ProgrammingGuide| replace:: Programming Guide
+>>>>>>> 385c699 (More info in API/core/view/memoryTraits.rst. Moved traits info from API/core/view/view.rst to ProgrammingGuide/View.rst)
 
 
 Class Interface
@@ -18,6 +22,7 @@ Class Interface
 
 .. cpp:class:: template <class DataType, class... Properties> View
 
+<<<<<<< HEAD
    Kokkos View is a potentially reference counted multi dimensional array with compile time layouts and memory space.
    Its semantics are similar to that of |CppReferenceSharedPtr|_.
    
@@ -42,6 +47,18 @@ Class Interface
 
          template <class DataType [, class LayoutType] [, class MemorySpace] [, class MemoryTraits]>
          class View;
+=======
+  Sets access properties via enum parameters for the class template ``Kokkos::MemoryTraits<>``.
+  Possible template parameters are bitwise OR of the following flags:
+
+  - ``Unmanaged``
+  - ``RandomAccess``
+  - ``Atomic``
+  - ``Restrict``
+  - ``Aligned``
+
+  See |ProgrammingGuide|_ also for further information.
+>>>>>>> 385c699 (More info in API/core/view/memoryTraits.rst. Moved traits info from API/core/view/view.rst to ProgrammingGuide/View.rst)
 
    :tparam LayoutType: Determines the mapping of indices into the underlying 1D memory storage.
    

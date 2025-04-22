@@ -57,19 +57,27 @@ Member Variables
  
        A boolean that indicates whether the Aligned trait is enabled.
 
-The following enumeration values are used to specify the memory access traits.
+.. _ProgrammingGuide: ../../../ProgrammingGuide/View.html#memory-access-traits
+
+.. |ProgrammingGuide| replace:: Programming Guide
+
+The following enumeration values are used to specify the memory access traits. Check the |ProgrammingGuide|_ for further information about how these traits can be used in practice.
 
    - ``Kokkos::Unmanaged``
+     ``Unmanaged`` means that Kokkos does neither reference counting nor automatic deallocation for such Views. This trait can be associated with memory allocated in any memory space. For example, an *unmanaged view* can be created by wrapping raw pointers of allocated memory, while also specifying the execution or memory space accordingly.
    - ``Kokkos::RandomAccess``
+     Views that are going to be accessed irregularly (e.g., non-sequentially) can be declared as `RandomAccess`. 
    - ``Kokkos::Atomic``
+     In such a view, every access (read or write) to any element will be atomic. 
    - ``Kokkos::Restrict``
+     The ``Restrict`` trait indicates that the memory of this view doesn't alias/overlap with another data structure in the current scope. 
    - ``Kokkos::Aligned``
+     TBD
 
 A few useful type aliases are also available in the ``Kokkos`` namespace.
 
 .. code-block:: cpp
 
  using MemoryUnmanaged = Kokkos::MemoryTraits<Kokkos::Unmanaged>;
- using MemoryRandomAccess =
-     Kokkos::MemoryTraits<Kokkos::Unmanaged | Kokkos::RandomAccess>;
+ using MemoryRandomAccess = Kokkos::MemoryTraits<Kokkos::RandomAccess>;
 
