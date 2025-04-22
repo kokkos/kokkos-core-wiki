@@ -1,8 +1,8 @@
 Sort
 ====
 
-.. role:: cppkokkos(code)
-    :language: cppkokkos
+.. role:: cpp(code)
+    :language: cpp
 
 .. code-block:: cpp
 

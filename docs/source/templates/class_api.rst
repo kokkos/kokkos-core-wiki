@@ -20,8 +20,8 @@
 ``CoolerView``
 ==============
 
-.. role:: cppkokkos(code)
-    :language: cppkokkos
+.. role:: cpp(code)
+    :language: cpp
 
 ..
   The (public header) file the user will include in their code
@@ -43,7 +43,7 @@ Interface
 ..
   The declaration or signature of the entity.
 
-.. cppkokkos:class:: template <class DataType, class... Traits> CoolerView
+.. cpp:class:: template <class DataType, class... Traits> CoolerView
 
   ..
     Template parameters (if applicable)
@@ -62,13 +62,13 @@ Interface
 
   .. rubric:: Public Types
 
-  .. cppkokkos:type:: data_type
+  .. cpp:type:: data_type
 
     Some interesting description of the type and how to use it.
 
   .. rubric:: Static Public Member Variables
 
-  .. cppkokkos:member:: int some_var = 5;
+  .. cpp:member:: int some_var = 5;
 
     Description of some_var
 
@@ -80,11 +80,11 @@ Interface
       ..
         We can cross-reference entities
 
-      The :cppkokkos:func:`frobrnicator` free function.
+      The :cpp:func:`frobrnicator` free function.
 
   .. rubric:: Constructors
 
-  .. cppkokkos:function:: CoolerView(CoolerView&& rhs)
+  .. cpp:function:: CoolerView(CoolerView&& rhs)
 
     Whether it's a move/copy/default constructor. Describe what it does.
 
@@ -94,13 +94,13 @@ Interface
 
   .. rubric:: Destructor
 
-  .. cppkokkos:function:: ~CoolerView()
+  .. cpp:function:: ~CoolerView()
 
     Performs some special operation when destroyed.
 
   .. rubric:: Public Member Functions
 
-  .. cppkokkos:function:: template<class U> foo(U x)
+  .. cpp:function:: template<class U> foo(U x)
 
     Brief description of the function.
 
@@ -119,15 +119,15 @@ Interface
     Use the C++ syntax for deprecation (don't use the Kokkos deprecated macro) as Sphinx will recognize it. We may in the future
     add extra parsing after the html is generated to render this more nicely.
 
-  .. cppkokkos:type:: [[deprecated("in version 4.0.1")]] foobar
+  .. cpp:type:: [[deprecated("in version 4.0.1")]] foobar
 
     Represents the foobar capability.
 
     .. deprecated:: 4.0.1
 
-      Use :cppkokkos:type:`foobat` instead.
+      Use :cpp:type:`foobat` instead.
 
-  .. cppkokkos:type:: foobat
+  .. cpp:type:: foobat
 
     A better version of foobar.
 
@@ -141,15 +141,15 @@ Non-Member Functions
   These should only be listed here if they are closely related. E.g. friend operators. However,
   something like view_alloc shouldn't be here for view
 
-.. cppkokkos:function:: template<class ViewSrc> bool operator==(CoolerView, ViewSrc);
+.. cpp:function:: template<class ViewSrc> bool operator==(CoolerView, ViewSrc);
 
   :tparam ViewDst: the other
 
-  :return: true if :cppkokkos:type:`View::value_type`, :cppkokkos:type:`View::array_layout`, :cppkokkos:type:`View::memory_space`, :cppkokkos:member:`View::rank`, :cppkokkos:func:`View::data()` and :cppkokkos:expr:`View::extent(r)`, for :cppkokkos:expr:`0<=r<rank`, match.
+  :return: true if :cpp:type:`View::value_type`, :cpp:type:`View::array_layout`, :cpp:type:`View::memory_space`, :cpp:member:`View::rank`, :cpp:func:`View::data()` and :cpp:expr:`View::extent(r)`, for :cpp:expr:`0<=r<rank`, match.
 
-.. cppkokkos:function:: void frobrnicator(CoolerView &v) noexcept
+.. cpp:function:: void frobrnicator(CoolerView &v) noexcept
 
-  :param: v the :cppkokkos:class:`CoolerView` to frobnicate
+  :param: v the :cpp:class:`CoolerView` to frobnicate
 
   Frobnicates a CoolerView.
 

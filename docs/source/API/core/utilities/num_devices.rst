@@ -1,8 +1,8 @@
 ``Kokkos::num_devices``
 =======================
 
-.. role:: cppkokkos(code)
-    :language: cppkokkos
+.. role:: cpp(code)
+    :language: cpp
 
 Defined in header ``<Kokkos_Core.hpp>``
 
@@ -67,4 +67,3 @@ Example
 |initialize|_: initializes the Kokkos execution environment
 
 |InitializationSettings|_: settings for initializing Kokkos
-

@@ -116,23 +116,23 @@ is enabled. They can be tested for existence (e.g. ``#ifdef KOKKOS_ENABLE_SERIAL
 
 .. _Serial: execution_spaces.html
 
-.. |Serial| replace:: :cppkokkos:func:`Serial`
+.. |Serial| replace:: :cpp:func:`Serial`
 
 .. _OpenMP: execution_spaces.html
 
-.. |OpenMP| replace:: :cppkokkos:func:`OpenMP`
+.. |OpenMP| replace:: :cpp:func:`OpenMP`
 
 .. _Threads: execution_spaces.html
 
-.. |Threads| replace:: :cppkokkos:func:`Threads`
+.. |Threads| replace:: :cpp:func:`Threads`
 
 .. _Cuda: execution_spaces.html
 
-.. |Cuda| replace:: :cppkokkos:func:`Cuda`
+.. |Cuda| replace:: :cpp:func:`Cuda`
 
 .. _HPX: execution_spaces.html
 
-.. |HPX| replace:: :cppkokkos:func:`HPX`
+.. |HPX| replace:: :cpp:func:`HPX`
 
 +--------------------------------+--------------------------------------------------------------------------+
 | Macro                          | Description                                                              |

@@ -1,8 +1,8 @@
 Random-Number
 =============
 
-.. role:: cppkokkos(code)
-    :language: cppkokkos
+.. role:: cpp(code)
+    :language: cpp
 
 Rand
 ----

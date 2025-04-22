@@ -1,8 +1,8 @@
 ``Kokkos::num_threads``
 =======================
 
-.. role:: cppkokkos(code)
-    :language: cppkokkos
+.. role:: cpp(code)
+    :language: cpp
 
 Defined in header ``<Kokkos_Core.hpp>``
 

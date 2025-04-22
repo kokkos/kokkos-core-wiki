@@ -1,8 +1,8 @@
 ``Profiling::ScopedRegion``
 ===========================
 
-.. role:: cppkokkos(code)
-   :language: cppkokkos
+.. role:: cpp(code)
+   :language: cpp
 
 Defined in header ``<Kokkos_Profiling_ScopedRegion.hpp>``
 
@@ -24,12 +24,12 @@ return).
 
 The ``ScopedRegion`` class is non-copyable.
 
-.. cppkokkos:Function:: ScopedRegion(std::string const& regionName);
+.. cpp:Function:: ScopedRegion(std::string const& regionName);
 
    Starts a user-defined region with provided label.
    Calls ``Profiling::pushRegion(regionName)``
 
-.. cppkokkos:Function:: ~ScopedRegion();
+.. cpp:Function:: ~ScopedRegion();
 
    Ends the region.
    Calls ``Profiling::popRegion()``

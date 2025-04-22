@@ -1,7 +1,7 @@
 Minimum/maximum operations
 ==========================
 
-.. role:: cppkokkos(code)
+.. role:: cpp(code)
     :language: cpp
 
 .. _StandardLibraryHeaderAlgorithm: https://en.cppreference.com/w/cpp/header/algorithm
@@ -73,4 +73,3 @@ See also
 |max_element|_: returns the largest element in a range
 
 |minmax_element|_: returns the smallest and the largest elements in a range
-

@@ -1,8 +1,8 @@
 Machine Model
 =============
 
-.. role:: cppkokkos(code)
-   :language: cppkokkos
+.. role:: cpp(code)
+   :language: cpp
 
 .. |node| image:: figures/kokkos-node-doc.png
    :alt: Figure 2.1 Conceptual Model of a Future High Performance Computing Node

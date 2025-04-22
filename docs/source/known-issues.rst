@@ -1,8 +1,8 @@
 Known issues
 ############
 
-.. role:: cppkokkos(code)
-    :language: cppkokkos
+.. role:: cpp(code)
+    :language: cpp
 
 CUDA
 ====

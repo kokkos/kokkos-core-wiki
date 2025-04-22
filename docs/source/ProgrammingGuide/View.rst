@@ -145,8 +145,8 @@ I really want a View of Views; what do I do?
 
 Here is how to create a View of Views, where each inner View has a separate owning allocation:
 
-1. The outer View must have a memory space that is both host and device accessible, such as :cppkokkos:type:`SharedSpace`.
-2. Create the outer View using the :cppkokkos:type:`SequentialHostInit` property.
+1. The outer View must have a memory space that is both host and device accessible, such as :cpp:type:`SharedSpace`.
+2. Create the outer View using the :cpp:type:`SequentialHostInit` property.
 3. Create inner Views in a sequential host loop.  (Prefer creating the inner Views uninitialized.  Creating the inner Views initialized launches one device kernel per inner View.  This is likely much slower than just initializing them all yourself from a single kernel over the outer View.)
 4. At this point, you may access the outer and inner Views on device.
 5. Get rid of the outer View as you normally would.
@@ -506,9 +506,9 @@ view to write to.
 
 .. warning::
 
-  :cppkokkos:`WithoutInitialization` implies that the destructor of each element of the :cppkokkos:`View` **will not be called**.
-  For instance, if the :cppkokkos:`View`'s value type is not trivially destructible,
-  you **should not use** :cppkokkos:`WithoutInitialization` unless you are taking care of calling the destructor manually before the :cppkokkos:`View` deallocates its memory.
+  :cpp:`WithoutInitialization` implies that the destructor of each element of the :cpp:`View` **will not be called**.
+  For instance, if the :cpp:`View`'s value type is not trivially destructible,
+  you **should not use** :cpp:`WithoutInitialization` unless you are taking care of calling the destructor manually before the :cpp:`View` deallocates its memory.
 
   The mental model is that whenever placement new is used to call the constructor, the destructor also isn't called before the memory is deallocated but it needs to be called manually.
 

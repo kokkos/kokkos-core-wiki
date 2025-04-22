@@ -1,8 +1,8 @@
 ``Kokkos::kokkos_swap``
 =======================
 
-.. role:: cppkokkos(code)
-    :language: cppkokkos
+.. role:: cpp(code)
+    :language: cpp
 
 Defined in header ``<Kokkos_Swap.hpp>``:sup:`(since 4.3)` which is included from ``<Kokkos_Core.hpp>``
 

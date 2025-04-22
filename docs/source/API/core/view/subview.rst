@@ -1,8 +1,8 @@
 ``subview``
 ===========
 
-.. role:: cppkokkos(code)
-    :language: cppkokkos
+.. role:: cpp(code)
+    :language: cpp
 
 Header File: ``<Kokkos_Core.hpp>``
 
@@ -18,12 +18,12 @@ Creates a ``Kokkos::View`` representing a subset of another ``Kokkos::View``.
 
 .. _KokkosAll: ../utilities/all.html#kokkosall
 
-.. |KokkosAll| replace:: :cppkokkos:func:`Kokkos::ALL`
+.. |KokkosAll| replace:: :cpp:func:`Kokkos::ALL`
 
 Description
 -----------
 
-.. cppkokkos:function:: template<class ViewType, class ... Args> IMPL_DETAIL subview(const ViewType& v, Args ... args)
+.. cpp:function:: template<class ViewType, class ... Args> IMPL_DETAIL subview(const ViewType& v, Args ... args)
 
    Returns a new ``Kokkos::View`` ``s`` representing a subset of ``v`` specified by ``args...``. The return type of subview is an implementation detail and is determined by the types in ``Args...``.
 

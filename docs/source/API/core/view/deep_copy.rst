@@ -1,8 +1,8 @@
 ``deep_copy``
 =============
 
-.. role:: cppkokkos(code)
-    :language: cppkokkos
+.. role:: cpp(code)
+    :language: cpp
 
 Header File: ``<Kokkos_Core.hpp>``
 
@@ -20,17 +20,17 @@ can be `Kokkos::Views <view.html>`_ or scalars under certain circumstances.
 Interface
 ---------
 
-.. cppkokkos:function:: template <class ExecSpace, class ViewDest, class ViewSrc> void Kokkos::deep_copy(const ExecSpace& exec_space, const ViewDest& dest, const ViewSrc& src);
+.. cpp:function:: template <class ExecSpace, class ViewDest, class ViewSrc> void Kokkos::deep_copy(const ExecSpace& exec_space, const ViewDest& dest, const ViewSrc& src);
 
-.. cppkokkos:function:: template <class ExecSpace, class ViewDest> void Kokkos::deep_copy(const ExecSpace& exec_space, const ViewDest& dest, const typename ViewDest::value_type& src);
+.. cpp:function:: template <class ExecSpace, class ViewDest> void Kokkos::deep_copy(const ExecSpace& exec_space, const ViewDest& dest, const typename ViewDest::value_type& src);
 
-.. cppkokkos:function:: template <class ExecSpace, class ViewSrc> void Kokkos::deep_copy(const ExecSpace& exec_space, ViewSrc::value_type& dest, const ViewSrc& src);
+.. cpp:function:: template <class ExecSpace, class ViewSrc> void Kokkos::deep_copy(const ExecSpace& exec_space, ViewSrc::value_type& dest, const ViewSrc& src);
 
-.. cppkokkos:function:: template <class ViewDest, class ViewSrc> void Kokkos::deep_copy(const ViewDest& dest, const ViewSrc& src);
+.. cpp:function:: template <class ViewDest, class ViewSrc> void Kokkos::deep_copy(const ViewDest& dest, const ViewSrc& src);
 
-.. cppkokkos:function:: template <class ViewDest> void Kokkos::deep_copy(const ViewDest& dest, const typename ViewDest::value_type& src);
+.. cpp:function:: template <class ViewDest> void Kokkos::deep_copy(const ViewDest& dest, const typename ViewDest::value_type& src);
 
-.. cppkokkos:function:: template <class ViewSrc> void Kokkos::deep_copy(ViewSrc::value_type& dest, const ViewSrc& src);
+.. cpp:function:: template <class ViewSrc> void Kokkos::deep_copy(ViewSrc::value_type& dest, const ViewSrc& src);
 
 Parameters
 ~~~~~~~~~~

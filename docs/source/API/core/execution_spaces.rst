@@ -1,16 +1,16 @@
 Execution Spaces
 ================
 
-.. role:: cppkokkos(code)
-    :language: cppkokkos
+.. role:: cpp(code)
+    :language: cpp
 
 .. _ExecutionSpaceConceptType: #kokkos-executionspaceconcept
 
-.. |ExecutionSpaceConceptType| replace:: :cppkokkos:func:`ExecutionSpace` type
+.. |ExecutionSpaceConceptType| replace:: :cpp:func:`ExecutionSpace` type
 
 .. _DocExecutionSpaceConcept: #kokkos-executionspaceconcept
 
-.. |DocExecutionSpaceConcept| replace:: the documentation on the :cppkokkos:func:`ExecutionSpace` concept
+.. |DocExecutionSpaceConcept| replace:: the documentation on the :cpp:func:`ExecutionSpace` concept
 
 .. _Experimental: utilities/experimental.html#experimentalnamespace
 
@@ -22,23 +22,23 @@ Execution Spaces
 
 .. _ExecutionSpaceS: #kokkos-executionspaceconcept
 
-.. |ExecutionSpaceS| replace:: :cppkokkos:func:`ExecutionSpace` s
+.. |ExecutionSpaceS| replace:: :cpp:func:`ExecutionSpace` s
 
 .. _MemorySpace: memory_spaces.html#kokkos-memoryspaceconcept
 
-.. |MemorySpace| replace:: :cppkokkos:func:`MemorySpace`
+.. |MemorySpace| replace:: :cpp:func:`MemorySpace`
 
 .. _KokkosSpaceAccessibility: SpaceAccessibility.html
 
-.. |KokkosSpaceAccessibility| replace:: :cppkokkos:func:`Kokkos::SpaceAccessibility`
+.. |KokkosSpaceAccessibility| replace:: :cpp:func:`Kokkos::SpaceAccessibility`
 
 .. _KokkosTeamPolicy: policies/TeamPolicy.html
 
-.. |KokkosTeamPolicy| replace:: :cppkokkos:func:`Kokkos::TeamPolicy`
+.. |KokkosTeamPolicy| replace:: :cpp:func:`Kokkos::TeamPolicy`
 
 .. _ExecutionSpaceConcept: #kokkos-executionspaceconcept
 
-.. |ExecutionSpaceConcept| replace:: :cppkokkos:func:`ExecutionSpaceConcept`
+.. |ExecutionSpaceConcept| replace:: :cpp:func:`ExecutionSpaceConcept`
 
 ``Kokkos::Cuda``
 ----------------

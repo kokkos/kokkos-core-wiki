@@ -1,8 +1,8 @@
 ``LayoutStride``
 ================
 
-.. role:: cppkokkos(code)
-    :language: cppkokkos
+.. role:: cpp(code)
+    :language: cpp
 
 Header File: ``<Kokkos_Core.hpp>``
 
@@ -25,27 +25,27 @@ Description
 
    .. rubric:: Public Class Members
 
-   .. cppkokkos:member:: size_t dimension[ARRAY_LAYOUT_MAX_RANK];
+   .. cpp:member:: size_t dimension[ARRAY_LAYOUT_MAX_RANK];
 
       An array containing the size of each dimension of the Layout
 
-   .. cppkokkos:member:: size_t stride[ARRAY_LAYOUT_MAX_RANK];
+   .. cpp:member:: size_t stride[ARRAY_LAYOUT_MAX_RANK];
 
       An array containing the stride for each dimension of the Layout
 
-   .. cppkokkos:member:: static constexpr bool is_extent_constructible = false;
+   .. cpp:member:: static constexpr bool is_extent_constructible = false;
 
       A boolean to allow detection that this class is extent constructible
 
    .. rubric:: Public Typedefs
 
-   .. cppkokkos:type:: array_layout
+   .. cpp:type:: array_layout
 
       A tag signifying that this models the Layout concept
 
    .. rubric:: Constructors
 
-   .. cppkokkos:kokkosinlinefunction:: explicit constexpr LayoutStride(size_t N0 = 0, size_t S0 = 0, \
+   .. cpp:function:: KOKKOS_INLINE_FUNCTION explicit constexpr LayoutStride(size_t N0 = 0, size_t S0 = 0, \
 			   size_t N1 = 0, \
                            size_t S1 = 0, size_t N2 = 0, size_t S2 = 0, \
                            size_t N3 = 0, size_t S3 = 0, size_t N4 = 0, \
@@ -54,27 +54,27 @@ Description
 
       Constructor that takes in up to 8 sizes, to set the sizes of the corresponding dimensions of the Layout
 
-   .. cppkokkos:function:: LayoutStride(LayoutStride const&) = default;
+   .. cpp:function:: LayoutStride(LayoutStride const&) = default;
 
       Default copy constructor, element-wise copies the other Layout
 
-   .. cppkokkos:function:: LayoutStride(LayoutStride&&) = default;
+   .. cpp:function:: LayoutStride(LayoutStride&&) = default;
 
       Default move constructor, element-wise moves the other Layout
 
    .. rubric:: Assignment operators
 
-   .. cppkokkos:function:: LayoutStride& operator=(LayoutStride const&) = default;
+   .. cpp:function:: LayoutStride& operator=(LayoutStride const&) = default;
 
       Default copy assignment, element-wise copies the other Layout
 
-   .. cppkokkos:function:: LayoutStride& operator=(LayoutStride&&) = default;
+   .. cpp:function:: LayoutStride& operator=(LayoutStride&&) = default;
 
       Default move assignment, element-wise moves the other Layout
 
    .. rubric:: Functions
 
-   .. cppkokkos:kokkosinlinefunction:: static LayoutStride order_dimensions(int const rank, \
+   .. cpp:function:: KOKKOS_INLINE_FUNCTION static LayoutStride order_dimensions(int const rank, \
 		   iTypeOrder const* const order, iTypeDimen const* const dimen);
 
       Calculates the strides given ordered dimensions

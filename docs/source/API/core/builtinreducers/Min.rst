@@ -1,8 +1,8 @@
 ``Min``
 =======
 
-.. role:: cppkokkos(code)
-    :language: cppkokkos
+.. role:: cpp(code)
+    :language: cpp
 
 Specific implementation of `ReducerConcept <ReducerConcept.html>`_ storing the minimum value
 
@@ -50,47 +50,47 @@ Synopsis
 Interface
 ---------
 
-.. cppkokkos:class:: template<class Scalar, class Space> Min
+.. cpp:class:: template<class Scalar, class Space> Min
 
    .. rubric:: Public Types
 
-   .. cppkokkos:type:: reducer
+   .. cpp:type:: reducer
 
       The self type
 
-   .. cppkokkos:type:: value_type
+   .. cpp:type:: value_type
 
       The reduction scalar type.
 
-   .. cppkokkos:type:: result_view_type
+   .. cpp:type:: result_view_type
 
       A ``Kokkos::View`` referencing the reduction result
 
    .. rubric:: Constructors
 
-   .. cppkokkos:kokkosinlinefunction:: Min(value_type& value_);
+   .. cpp:function:: KOKKOS_INLINE_FUNCTION Min(value_type& value_);
 
       Constructs a reducer which references a local variable as its result location.
 
-   .. cppkokkos:kokkosinlinefunction:: Min(const result_view_type& value_);
+   .. cpp:function:: KOKKOS_INLINE_FUNCTION Min(const result_view_type& value_);
 
       Constructs a reducer which references a specific view as its result location.
 
    .. rubric:: Public Member Functions
 
-   .. cppkokkos:kokkosinlinefunction:: void join(value_type& dest, const value_type& src) const;
+   .. cpp:function:: KOKKOS_INLINE_FUNCTION void join(value_type& dest, const value_type& src) const;
 
       Store minimum of ``src`` and ``dest`` into ``dest``:  ``dest = (src < dest) ? src :dest;``.
 
-   .. cppkokkos:kokkosinlinefunction:: void init(value_type& val) const;
+   .. cpp:function:: KOKKOS_INLINE_FUNCTION void init(value_type& val) const;
 
       Initialize ``val`` using the ``Kokkos::reduction_identity<Scalar>::min()`` method. The default implementation sets ``val=<TYPE>_MAX``.
 
-   .. cppkokkos:kokkosinlinefunction:: value_type& reference() const;
+   .. cpp:function:: KOKKOS_INLINE_FUNCTION value_type& reference() const;
 
       Returns a reference to the result provided in class constructor.
 
-   .. cppkokkos:kokkosinlinefunction:: result_view_type view() const;
+   .. cpp:function:: KOKKOS_INLINE_FUNCTION result_view_type view() const;
 
       Returns a view of the result place provided in class constructor.
 

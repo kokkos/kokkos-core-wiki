@@ -11,11 +11,11 @@ TeamVectorMDRange is a `nested execution policy <./NestedPolicies.html>`_  used 
 Interface
 ---------
 
-.. cppkokkos:class:: template <class Rank, typename TeamHandle> TeamVectorMDRange
+.. cpp:class:: template <class Rank, typename TeamHandle> TeamVectorMDRange
 
    .. rubric:: Constructor
 
-   .. cppkokkos:function:: TeamVectorMDRange(team, extent_1, extent_2, ...);
+   .. cpp:function:: TeamVectorMDRange(team, extent_1, extent_2, ...);
 
       Splits an index range over the threads of the team and another index range over their vector lanes.
       Ranks for threading and vectorization determined by the backend.

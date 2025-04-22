@@ -1,8 +1,8 @@
 ``ReducerConcept``
 ==================
 
-.. role:: cppkokkos(code)
-    :language: cppkokkos
+.. role:: cpp(code)
+    :language: cpp
 
 The concept of a Reducer is the abstraction that defines the "how" a "Reduction" is performed during the parallel reduce execution pattern. The abstraction of "what" is given as a template parameter and corresponds to the "what" that is being reduced in the `parallel_reduce <../parallel-dispatch/parallel_reduce.html>`_ operation. This page describes the definitions and functions expected from a Reducer with a hypothetical 'Reducer' class definition. A brief description of built-in reducers is also included.
 
@@ -68,35 +68,35 @@ Constructors
 
 Constructors are not part of the concept. A custom reducer can have complex custom constructors. All Build-In reducers in Kokkos have the following two constructors:
 
-.. cppkokkos:kokkosinlinefunction:: Reducer(value_type& value_);
+.. cpp:function:: KOKKOS_INLINE_FUNCTION Reducer(value_type& value_);
 
     * Constructs a reducer which references a local variable as its result location.
 
-.. cppkokkos:kokkosinlinefunction:: Reducer(const result_view_type& value_);
+.. cpp:function:: KOKKOS_INLINE_FUNCTION Reducer(const result_view_type& value_);
 
     * Constructs a reducer which references a specific view as its result location.
 
 Functions
 ~~~~~~~~~
 
-.. cppkokkos:kokkosinlinefunction:: void join(value_type& dest, const value_type& src) const;
+.. cpp:function:: KOKKOS_INLINE_FUNCTION void join(value_type& dest, const value_type& src) const;
 
     * Combine ``src`` into ``dest``. For example, ``Add`` performs ``dest+=src;``.
 
-.. cppkokkos:kokkosinlinefunction:: void init(value_type& val) const;
+.. cpp:function:: KOKKOS_INLINE_FUNCTION void init(value_type& val) const;
 
     * Optional callback initializing ``val`` with appropriate initial value. For example, 'Add' assigns ``val = 0;``, but Prod assigns ``val = 1;``.
       Defaults to calling the default constructor.
 
-.. cppkokkos:kokkosinlinefunction:: void final(value_type& val) const;
+.. cpp:function:: KOKKOS_INLINE_FUNCTION void final(value_type& val) const;
 
     * Optional callback modifying the result ``val``. Defaults to a no-op.
 
-.. cppkokkos:kokkosinlinefunction:: value_type& reference() const;
+.. cpp:function:: KOKKOS_INLINE_FUNCTION value_type& reference() const;
 
     * Returns a reference to the result place.
 
-.. cppkokkos:kokkosinlinefunction:: result_view_type view() const;
+.. cpp:function:: KOKKOS_INLINE_FUNCTION result_view_type view() const;
 
     * Returns a view of the result place.
 

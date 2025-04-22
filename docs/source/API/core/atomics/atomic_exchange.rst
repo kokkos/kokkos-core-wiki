@@ -1,8 +1,8 @@
 ``atomic_exchange``
 ===================
 
-.. role:: cppkokkos(code)
-   :language: cppkokkos
+.. role:: cpp(code)
+   :language: cpp
 
 Defined in header ``<Kokkos_Atomic.hpp>`` which is included from ``<Kokkos_Core.hpp>``
 
@@ -18,7 +18,7 @@ Atomically replaces the value of ``obj`` with ``desired`` and returns the value 
 Description
 -----------
 
-.. cppkokkos:function:: template<class T> T atomic_exchange(T* ptr, std::type_identity_t<T> val);
+.. cpp:function:: template<class T> T atomic_exchange(T* ptr, std::type_identity_t<T> val);
 
    Atomically writes ``val`` into ``*ptr`` and returns the original value of ``*ptr``.
 

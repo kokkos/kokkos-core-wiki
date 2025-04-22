@@ -1,8 +1,8 @@
 ``Profiling::ProfilingSection``
 ===============================
 
-.. role:: cppkokkos(code)
-   :language: cppkokkos
+.. role:: cpp(code)
+   :language: cpp
 
 Defined in header ``<Kokkos_Profiling_ProfileSection.hpp>``
 
@@ -32,22 +32,22 @@ properly destroyed.
 The ``ProfilingSection`` class is non-copyable.
 
 
-.. cppkokkos:Function:: ProfilingSection(std::string const& sectionName);
+.. cpp:Function:: ProfilingSection(std::string const& sectionName);
 
    Constructs a section with user-provided label.
    Calls ``Profiling::createProfileSection(sectionName, &sectionID);``
 
-.. cppkokkos:Function:: ~ProfilingSection();
+.. cpp:Function:: ~ProfilingSection();
 
    Deletes the section.
    Calls ``Profiling.destroyProfileSection(sectionID);``
 
-.. cppkokkos:Function:: void start();
+.. cpp:Function:: void start();
 
    Starts the section.
    Calls ``Profiling::startSection(sectionID);``
 
-.. cppkokkos:Function:: void stop();
+.. cpp:Function:: void stop();
 
    Ends the section.
    Calls ``Profiling::stopSection(sectionID);``
