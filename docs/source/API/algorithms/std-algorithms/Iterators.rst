@@ -60,7 +60,7 @@ Example
 ``Kokkos::Experimental::distance``
 ----------------------------------
 
-.. cpp:function:: template <class IteratorType> constexpr typename IteratorType::difference_type distance(IteratorType first, IteratorType last);
+.. cpp:function:: template <class IteratorType> KOKKOS_INLINE_FUNCTION constexpr typename IteratorType::difference_type distance(IteratorType first, IteratorType last);
 
    Returns the number of steps needed to go from ``first`` to ``last``.
 
