@@ -664,11 +664,17 @@ Types for which atomic access are performed must support the necessary operators
       
   a_atomic(1) += 1; // This access will do an atomic addition
 
-Other traits
-~~~~~~~~~~~~~
+Restrict
+~~~~~~~~
 
-Other possible memory traits are `Restrict` and `Aligned`. The `Restrict` trait indicates that the memory of this view doesn't alias/overlap with another data structure in the current scope. This enables compiler optimizations. TBD for ``Aligned``.
- 
+The `Restrict` trait indicates that the memory of this View doesn't alias/overlap with another data structure in the current scope. This enables compiler optimizations.
+
+Aligned
+~~~~~~~
+
+Allocation of Kokkos Views is 64-byte aligned. The only exception being the allocation of unmanaged Views, which may or may not be aligned. The `Aligned` trait can be used to indicate to the compiler that it can expect the memory allocation of the View to be aligned by 64-bytes. The compiler can perform optimizations accordingly.
+
+Note that it is not possible to specify this trait for sub-Views. Sub-Views may or not be aligned depending on their parent View. Assigning a View with the `Aligned` trait to an unaligned sub-View will lead to a run-time error.
 
 Standard idiom for specifying access traits
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
