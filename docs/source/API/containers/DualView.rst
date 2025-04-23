@@ -251,7 +251,7 @@ Description
     .. cppkokkos:function:: void resize(const size_t n0 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n1 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n2 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n3 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n4 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n5 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n6 = KOKKOS_IMPL_CTOR_DEFAULT_ARG, const size_t n7 = KOKKOS_IMPL_CTOR_DEFAULT_ARG);
 
        Resize both views, copying old contents into new if necessary. This method only copies the old
-       contents into the new View objects for the device which was last marked as modified. Thus, users are advised to call ``sync()`` before using the resized object.
+       contents into the new View objects for the device which was last marked as modified. Thus, users are required to call ``sync()`` before using the resized object.
 
     |
 
