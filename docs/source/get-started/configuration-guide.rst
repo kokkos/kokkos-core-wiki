@@ -184,7 +184,7 @@ Debugging
 
     * * ``Kokkos_ENABLE_DEBUG_DUALVIEW_MODIFY_CHECK``
       * Debug check on dual views
-      * ``OFF``
+      * ``ON`` if ``CMAKE_BUILD_TYPE`` is ``Debug``, ``OFF`` otherwise
 
 .. _keywords_enable_backend_specific_options:
 
