@@ -11,7 +11,7 @@ jobs:
     env:
       docs-directory: /home/runner/work/kokkos-core-wiki/kokkos-core-wiki/docs
     container:
-      image: python:3.10
+      image: python:3.12
     steps:
       - uses: actions/checkout@v4.2.2
       - run: pip install -r build_requirements.txt
