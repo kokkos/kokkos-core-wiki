@@ -176,7 +176,7 @@ Debugging
 
     * * ``Kokkos_ENABLE_DEBUG``
       * Activate extra debug features - may increase compile times
-      * ``OFF``
+      * ``ON`` if ``CMAKE_BUILD_TYPE`` is ``Debug``, ``OFF`` otherwise
 
     * * ``Kokkos_ENABLE_DEBUG_BOUNDS_CHECK``
       * Use bounds checking - will increase runtime
