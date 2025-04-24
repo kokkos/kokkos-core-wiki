@@ -3,7 +3,7 @@ Welcome to the Kokkos Documentation repository.  This is the source for https://
 
 ## Requirements to build html page locally
 
-The documentation requires Python 3.12 to build. Usually this can be installed with a system package manager, but if your system does not support python 3.12 you can install it easily with [pyenv](https://github.com/pyenv/pyenv).
+The documentation requires a minimum of Python 3.12 to build. Usually this can be installed with a system package manager, but if your system does not support python 3.12 or above you can install it easily with [pyenv](https://github.com/pyenv/pyenv).
 This is needed just for local render of documentation, so it can be checked before push.
 Requirements are in `build_requirements.txt`
 Could be installed with: `pip install -r build_requirements.txt`
