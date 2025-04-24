@@ -67,13 +67,13 @@ Header File: ``<Kokkos_Core.hpp>``
 
       Example usage: ``Kokkos::MemoryTraits<Kokkos::Unmanaged | Kokkos::RandomAccess>``
 
-   .. rubric:: Public Constants
+   .. rubric:: Public Constants:
    
    .. cpp:member:: static constexpr bool reference_type_is_lvalue_reference
 
       whether the reference type is a C++ lvalue reference.
 
-   .. rubric:: Data Types
+   .. rubric:: Data Types:
 
    .. cpp:type:: data_type
 
@@ -100,7 +100,7 @@ Header File: ``<Kokkos_Core.hpp>``
       Non-:cpp:`const` version of :cpp:type:`scalar_array_type`, same as :cpp:type:`scalar_array_type` if that is already non-:cpp:`const`.
 
 
-   .. rubric:: Scalar Types
+   .. rubric:: Scalar Types:
 
    .. cpp:type:: value_type
 
@@ -115,7 +115,7 @@ Header File: ``<Kokkos_Core.hpp>``
       non-:cpp:`const` version of :cpp:type:`value_type`.
 
 
-   .. rubric:: Spaces
+   .. rubric:: Spaces:
 
    .. cpp:type:: execution_space
 
@@ -138,7 +138,7 @@ Header File: ``<Kokkos_Core.hpp>``
 
       Host accessible memory space used in :cpp:type:`HostMirror`.
 
-   .. rubric:: ViewTypes
+   .. rubric:: ViewTypes:
 
    .. cpp:type:: non_const_type
 
@@ -153,7 +153,7 @@ Header File: ``<Kokkos_Core.hpp>``
       compatible view type with the same :cpp:type:`data_type` and :cpp:type:`array_layout` stored in host accessible memory space.
 
 
-   .. rubric:: Data Handles
+   .. rubric:: Data Handles:
 
    .. cpp:type:: reference_type
 
@@ -164,7 +164,7 @@ Header File: ``<Kokkos_Core.hpp>``
       pointer to :cpp:type:`value_type`.
 
 
-   .. rubric:: Other Types
+   .. rubric:: Other Types:
 
    .. cpp:type:: array_layout
 
@@ -183,7 +183,7 @@ Header File: ``<Kokkos_Core.hpp>``
       A specialization tag used for partial specialization of the mapping construct underlying a :cpp:class:`View`.
 
 
-   .. rubric:: Constructors
+   .. rubric:: Constructors:
 
    .. cpp:function:: View()
 
@@ -356,7 +356,7 @@ Header File: ``<Kokkos_Core.hpp>``
       .. versionadded:: 4.4.0
 
 
-   .. rubric:: Data Access Functions
+   .. rubric:: Data Access Functions:
 
    .. cpp:function:: reference_type operator() (const IntType& ... indices) const
 
@@ -382,7 +382,7 @@ Header File: ``<Kokkos_Core.hpp>``
       Index arguments beyond :cpp:func:`rank` must be :cpp:`0`, which will be enforced if :cpp:any:`KOKKOS_DEBUG` is defined.
 
 
-   .. rubric:: Data Layout, Dimensions, Strides
+   .. rubric:: Data Layout, Dimensions, Strides:
 
    .. cpp:function:: static constexpr size_t rank()
 
@@ -536,7 +536,7 @@ Header File: ``<Kokkos_Core.hpp>``
       :param layout: the layout to query
       :return: the number of bytes necessary for an unmanaged :cpp:class:`View` of the provided layout.
 
-   .. rubric:: Other Utility Methods
+   .. rubric:: Other Utility Methods:
 
    .. cpp:function:: int use_count() const;
 
@@ -566,7 +566,7 @@ Header File: ``<Kokkos_Core.hpp>``
       This function works for both managed and unmanaged views.
       With the unmanaged view, there is no guarantee that referenced address is valid, only that it is a non-null pointer.
 
-   .. rubric:: Conversion to mdspan
+   .. rubric:: Conversion to mdspan:
 
    .. cpp:function:: template <class OtherElementType, class OtherExtents, class OtherLayoutPolicy, class OtherAccessor> constexpr operator mdspan<OtherElementType, OtherExtents, OtherLayoutPolicy, OtherAccessor>()
 
