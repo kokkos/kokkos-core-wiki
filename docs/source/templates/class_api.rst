@@ -49,24 +49,20 @@ Interface
     Template parameters (if applicable)
     Omit template parameters that are just used for specialization/are deduced/ and/or should not be exposed to the user.
 
-  .. rubric:: Template Parameters
-
   :tparam Foo: Description of the Foo template parameter
 
   ..
     Parameters (if applicable)
 
-  .. rubric:: Parameters
-
   :param bar: Description of the bar parameter
 
-  .. rubric:: Public Types
+  .. rubric:: Public Types:
 
   .. cpp:type:: data_type
 
     Some interesting description of the type and how to use it.
 
-  .. rubric:: Static Public Member Variables
+  .. rubric:: Static Public Member Variables:
 
   .. cpp:member:: int some_var = 5;
 
@@ -82,7 +78,7 @@ Interface
 
       The :cpp:func:`frobrnicator` free function.
 
-  .. rubric:: Constructors
+  .. rubric:: Constructors:
 
   .. cpp:function:: CoolerView(CoolerView&& rhs)
 
@@ -92,13 +88,13 @@ Interface
     Only include the destructor if it does something interesting as part of the API, such as RAII classes that release a resource on their destructor. Classes that merely
     clean up or destroy their members don't need this member documented.
 
-  .. rubric:: Destructor
+  .. rubric:: Destructor:
 
   .. cpp:function:: ~CoolerView()
 
     Performs some special operation when destroyed.
 
-  .. rubric:: Public Member Functions
+  .. rubric:: Public Member Functions:
 
   .. cpp:function:: template<class U> foo(U x)
 
@@ -145,7 +141,7 @@ Non-Member Functions
 
   :tparam ViewDst: the other
 
-  :return: true if :cpp:type:`View::value_type`, :cpp:type:`View::array_layout`, :cpp:type:`View::memory_space`, :cpp:member:`View::rank`, :cpp:func:`View::data()` and :cpp:expr:`View::extent(r)`, for :cpp:expr:`0<=r<rank`, match.
+  :return: true if :cpp:type:`View::value_type`, :cpp:type:`View::array_layout`, :cpp:type:`View::memory_space`, :cpp:member:`View::func`, :cpp:func:`View::data()` and :cpp:expr:`View::extent(r)`, for :cpp:expr:`0<=r<rank`, match.
 
 .. cpp:function:: void frobrnicator(CoolerView &v) noexcept
 
