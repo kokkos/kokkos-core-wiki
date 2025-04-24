@@ -164,7 +164,7 @@ Header File: ``<Kokkos_Core.hpp>``
       pointer to :cpp:type:`value_type`.
 
 
-   .. rubric:: Other
+   .. rubric:: Other Types
 
    .. cpp:type:: array_layout
 
@@ -187,20 +187,24 @@ Header File: ``<Kokkos_Core.hpp>``
 
    .. cpp:function:: View()
 
-      Default Constructor. No allocations are made, no reference counting happens. All extents are zero and its data pointer is NULL.
+      Default Constructor. No allocations are made, no reference counting happens. All extents are zero and its data pointer is :cpp:`nullptr`.
 
-   .. cpp:function:: View( const View<DT, Prop...>& rhs)
+   .. cpp:function:: template<class DT, class... Prop> View( const View<DT, Prop...>& rhs)
 
       Copy constructor with compatible view. Follows View assignment rules.
 
-   .. cpp:function:: View( View&& rhs)
+      .. seealso:: :ref:`api-view-assignment`
+
+   .. cpp:function:: View(View&& rhs)
 
       Move constructor
 
-   .. cpp:function:: View( const std::string& name, const IntType& ... extents)
+   .. cpp:function:: template<class IntType> View( const std::string& name, const IntType& ... extents)
 
       Standard allocating constructor. The initialization is executed on the default
       instance of the execution space corresponding to ``MemorySpace`` and fences it.
+
+      :tparam IntType: an integral type
 
       :param name: a user provided label, which is used for profiling and debugging purposes. Names are not required to be unique,
 
@@ -304,7 +308,12 @@ Header File: ``<Kokkos_Core.hpp>``
 
    .. cpp:function:: View( const View<DT, Prop...>& rhs, Args ... args)
 
-      Subview constructor. See ``subview`` function for arguments.
+      :param rhs: the :cpp:class:`View` to take a subview of
+      :param args...: the subview slices as specified in :cpp:func:`subview`
+
+      Subview constructor.
+
+      .. seealso:: :cpp:func:`subview`
 
    .. cpp:function:: explicit(traits::is_managed) View( const NATURAL_MDSPAN_TYPE& mds )
 
@@ -401,199 +410,196 @@ Header File: ``<Kokkos_Core.hpp>``
       It may also break code that was using the type of :cpp:func:`rank`.
       Furthermore, it appears that MSVC has issues with the implicit conversion to :cpp:`size_t` in certain constexpr contexts. Calling :cpp:func:`rank()` or :cpp:func:`rank_dynamic()` will work in those cases.
 
-.. cpp:function:: constexpr array_layout layout() const
+   .. cpp:function:: constexpr array_layout layout() const
 
-   :return: the layout object that can be used to to construct other views with the same dimensions.
+      :return: the layout object that can be used to to construct other views with the same dimensions.
 
-.. cpp:function:: template<class iType> constexpr size_t extent( const iType& dim) const
+   .. cpp:function:: template<class iType> constexpr size_t extent( const iType& dim) const
 
-   :tparam iType: an integral type
-   :param dim: the dimension to get the extent of
-   :return: the extent of dimension :cpp:any:`dim`
+      :tparam iType: an integral type
+      :param dim: the dimension to get the extent of
+      :return: the extent of dimension :cpp:any:`dim`
 
-   **Preconditions**
+      **Preconditions**
 
-   - :cpp:any:`dim` must be smaller than :cpp:func:`rank`.
+      - :cpp:any:`dim` must be smaller than :cpp:func:`rank`.
 
-.. cpp:function:: template<class iType> constexpr int extent_int( const iType& dim) const
+   .. cpp:function:: template<class iType> constexpr int extent_int( const iType& dim) const
 
-   :tparam iType: an integral type
-   :param dim: the dimension to get the extent of
-   :return: the extent of dimension :cpp:any:`dim` as an :cpp:`int`
+      :tparam iType: an integral type
+      :param dim: the dimension to get the extent of
+      :return: the extent of dimension :cpp:any:`dim` as an :cpp:`int`
 
-   Compared to :cpp:func:`extent` this function can be
-   useful on architectures where :cpp:`int` operations are more efficient than :cpp:`size_t`.
-   It also may eliminate the need for type casts in applications which
-   otherwise perform all index operations with :cpp:`int`.
+      Compared to :cpp:func:`extent` this function can be
+      useful on architectures where :cpp:`int` operations are more efficient than :cpp:`size_t`.
+      It also may eliminate the need for type casts in applications which
+      otherwise perform all index operations with :cpp:`int`.
 
-   **Preconditions**
+      **Preconditions**
 
-   - :cpp:any:`dim` must be smaller than :cpp:func:`rank`.
+      - :cpp:any:`dim` must be smaller than :cpp:func:`rank`.
 
-.. cpp:function:: template<class iType> constexpr size_t stride(const iType& dim) const
+   .. cpp:function:: template<class iType> constexpr size_t stride(const iType& dim) const
 
-   :tparam iType: an integral type
-   :param dim: the dimension to get the stride of
-   :return: the stride of dimension :cpp:any:`dim`
+      :tparam iType: an integral type
+      :param dim: the dimension to get the stride of
+      :return: the stride of dimension :cpp:any:`dim`
 
-   Example: :cpp:expr:`a.stride(3) == (&a(i0,i1,i2,i3+1,i4)-&a(i0,i1,i2,i3,i4))`
+      Example: :cpp:expr:`a.stride(3) == (&a(i0,i1,i2,i3+1,i4)-&a(i0,i1,i2,i3,i4))`
 
-   **Preconditions**
+      **Preconditions**
 
-   - :cpp:any:`dim` must be smaller than :cpp:func:`rank`.
+      - :cpp:any:`dim` must be smaller than :cpp:func:`rank`.
 
-.. cpp:function:: constexpr size_t stride_0() const
+   .. cpp:function:: constexpr size_t stride_0() const
 
-   :return: the stride of dimension 0.
+      :return: the stride of dimension 0.
 
-.. cpp:function:: constexpr size_t stride_1() const
+   .. cpp:function:: constexpr size_t stride_1() const
 
-   :return: the stride of dimension 1.
+      :return: the stride of dimension 1.
 
-.. cpp:function:: constexpr size_t stride_2() const
+   .. cpp:function:: constexpr size_t stride_2() const
 
-   :return: the stride of dimension 2.
+      :return: the stride of dimension 2.
 
-.. cpp:function:: constexpr size_t stride_3() const
+   .. cpp:function:: constexpr size_t stride_3() const
 
-   :return: the stride of dimension 3.
+      :return: the stride of dimension 3.
 
-.. cpp:function:: constexpr size_t stride_4() const
+   .. cpp:function:: constexpr size_t stride_4() const
 
-   :return: the stride of dimension 4.
+      :return: the stride of dimension 4.
 
-.. cpp:function:: constexpr size_t stride_5() const
+   .. cpp:function:: constexpr size_t stride_5() const
 
-   :return: the stride of dimension 5.
+      :return: the stride of dimension 5.
 
-.. cpp:function:: constexpr size_t stride_6() const
+   .. cpp:function:: constexpr size_t stride_6() const
 
-   :return: the stride of dimension 6.
+      :return: the stride of dimension 6.
 
-.. cpp:function:: constexpr size_t stride_7() const
+   .. cpp:function:: constexpr size_t stride_7() const
 
-   :return: the stride of dimension 7.
+      :return: the stride of dimension 7.
 
-.. cpp:function:: template<class iType> void stride(iType* strides) const
+   .. cpp:function:: template<class iType> void stride(iType* strides) const
 
-   :tparam iType: an integral type
-   :param strides: the output array of length :cpp:expr:`rank() + 1`
+      :tparam iType: an integral type
+      :param strides: the output array of length :cpp:expr:`rank() + 1`
 
-   Sets :cpp:expr:`strides[r]` to :cpp:expr:`stride(r)` for all :math:`r` with :math:`0 \le r \lt \texttt{rank()}`.
-   Sets :cpp:expr:`strides[rank()]` to :cpp:func:`span()`.
+      Sets :cpp:expr:`strides[r]` to :cpp:expr:`stride(r)` for all :math:`r` with :math:`0 \le r \lt \texttt{rank()}`.
+      Sets :cpp:expr:`strides[rank()]` to :cpp:func:`span()`.
 
-   **Preconditions**
+      **Preconditions**
 
-   - :cpp:any:`strides` must be an array of length :cpp:expr:`rank() + 1`
+      - :cpp:any:`strides` must be an array of length :cpp:expr:`rank() + 1`
 
-.. cpp:function:: constexpr size_t span() const
+   .. cpp:function:: constexpr size_t span() const
 
-   :return: the size of the span of memory between the element with the lowest and highest address
+      :return: the size of the span of memory between the element with the lowest and highest address
 
-   Obtains the memory span in elements between the element with the
-   lowest and the highest address. This can be larger than the product
-   of extents due to padding, and or non-contiguous data layout as for example :cpp:struct:`LayoutStride` allows.
+      Obtains the memory span in elements between the element with the
+      lowest and the highest address. This can be larger than the product
+      of extents due to padding, and or non-contiguous data layout as for example :cpp:struct:`LayoutStride` allows.
 
-.. cpp:function:: constexpr size_t size() const
+   .. cpp:function:: constexpr size_t size() const
 
-   :return: the product of extents, i.e. the logical number of elements in the :cpp:class:`View`.
+      :return: the product of extents, i.e. the logical number of elements in the :cpp:class:`View`.
 
-.. cpp:function:: constexpr pointer_type data() const
+   .. cpp:function:: constexpr pointer_type data() const
 
-   :return: the pointer to the underlying data allocation.
+      :return: the pointer to the underlying data allocation.
 
-   .. warning::
-   
-      Calling any function that manipulates the behavior of the memory (e.g. ``memAdvise``) on memory managed by Kokkos results in undefined behavior.
+      .. warning::
+      
+         Calling any function that manipulates the behavior of the memory (e.g. ``memAdvise``) on memory managed by Kokkos results in undefined behavior.
 
-.. cpp:function:: bool span_is_contiguous() const
+   .. cpp:function:: bool span_is_contiguous() const
 
-   :return: whether the span is contiguous (i.e. whether every memory location between in span belongs to the index space covered by the :cpp:class:`View`).
+      :return: whether the span is contiguous (i.e. whether every memory location between in span belongs to the index space covered by the :cpp:class:`View`).
 
-.. cpp:function:: static constexpr size_t required_allocation_size(size_t N0=0, size_t N1=0, \
-			size_t N2=0, size_t N3=0, \
-			size_t N4=0, size_t N5=0, \
-			size_t N6=0, size_t N7=0, size_t N8 = 0);
-   
-   :param N0, N1, N2, N3, N4, N5, N6, N7, N8: the dimensions to query
-   :return: the number of bytes necessary for an unmanaged :cpp:class:`View` of the provided dimensions.
-   
-   **Requirements**
-   
-   - :cpp:expr:`array_layout::is_regular == true`.
+   .. cpp:function:: static constexpr size_t required_allocation_size(size_t N0=0, size_t N1=0, \
+            size_t N2=0, size_t N3=0, \
+            size_t N4=0, size_t N5=0, \
+            size_t N6=0, size_t N7=0, size_t N8 = 0);
+      
+      :param N0, N1, N2, N3, N4, N5, N6, N7, N8: the dimensions to query
+      :return: the number of bytes necessary for an unmanaged :cpp:class:`View` of the provided dimensions.
+      
+      **Requirements**
+      
+      - :cpp:expr:`array_layout::is_regular == true`.
 
-.. cpp:function:: static constexpr size_t required_allocation_size(const array_layout& layout);
+   .. cpp:function:: static constexpr size_t required_allocation_size(const array_layout& layout);
 
-   :param layout: the layout to query
-   :return: the number of bytes necessary for an unmanaged :cpp:class:`View` of the provided layout.
+      :param layout: the layout to query
+      :return: the number of bytes necessary for an unmanaged :cpp:class:`View` of the provided layout.
 
-Other
-~~~~~
+   .. rubric:: Other Utility Methods
 
-.. cpp:function:: int use_count() const;
+   .. cpp:function:: int use_count() const;
 
-   Returns the current reference count of the underlying allocation.
+      :return: the current reference count of the underlying allocation.
 
-.. cpp:function:: const std::string label() const;
+   .. cpp:function:: const std::string label() const;
 
-   Returns the label of the View.
+      :return: the label of the View.
 
-.. cpp:function:: const bool is_assignable(const View<DT, Prop...>& rhs);
+   .. cpp:function:: const bool is_assignable(const View<DT, Prop...>& rhs);
 
-   Returns true if the View can be assigned to rhs.  See below for assignment rules.
+      :return: true if the View can be assigned to rhs.
 
-.. cpp:function:: void assign_data(pointer_type arg_data);
+      .. seealso:: :ref:`api-view-assignment`
 
-   Decrement reference count of previously assigned data and set the underlying pointer to arg_data.
-   Note that the effective result of this operation is that the view
-   is now an unmanaged view; thus, the deallocation of memory associated with
-   arg_data is not linked in anyway to the deallocation of the view.
+   .. cpp:function:: void assign_data(pointer_type arg_data);
 
-.. cpp:function:: constexpr bool is_allocated() const;
+      :param arg_data: the pointer to set the underlying :cpp:class:`View` data pointer to
 
-   Returns true if the view points to a valid memory location.
-   This function works for both managed and unmanaged views.
-   With the unmanaged view, there is no guarantee that referenced
-   address is valid, only that it is a non-null pointer.
+      Decrement reference count of previously assigned data and set the underlying pointer to arg_data.
+      Note that the effective result of this operation is that the view is now an unmanaged view; thus, the deallocation of memory associated with arg_data is not linked in anyway to the deallocation of the view.
 
-Conversion to mdspan
-~~~~~~~~~~~~~~~~~~~~
+   .. cpp:function:: constexpr bool is_allocated() const;
 
-.. cpp:function:: template <class OtherElementType, class OtherExtents, class OtherLayoutPolicy, class OtherAccessor> constexpr operator mdspan<OtherElementType, OtherExtents, OtherLayoutPolicy, OtherAccessor>()
+      :return: true if the view points to a valid memory location.
 
-   :tparam OtherElementType: the target mdspan element type
-   :tparam OtherExtents: the target mdspan extents
-   :tparam OtherLayoutPolicy: the target mdspan layout
-   :tparam OtherAccessor: the target mdspan accessor
+      This function works for both managed and unmanaged views.
+      With the unmanaged view, there is no guarantee that referenced address is valid, only that it is a non-null pointer.
 
-   :constraints: :cpp:class:`View`\ 's :ref:`natural mdspan <api-view-natural-mdspans>` must be assignable to :cpp:`mdspan<OtherElementType, OtherExtents, OtherLayoutPolicy, OtherAccessor>`
+   .. rubric:: Conversion to mdspan
 
-   :returns: an mdspan with extents and a layout converted from the :cpp:class:`View`'s *natural mdspan*.
+   .. cpp:function:: template <class OtherElementType, class OtherExtents, class OtherLayoutPolicy, class OtherAccessor> constexpr operator mdspan<OtherElementType, OtherExtents, OtherLayoutPolicy, OtherAccessor>()
 
-.. cpp:function:: template <class OtherAccessorType = Kokkos::default_accessor<typename traits::value_type>> constexpr auto to_mdspan(const OtherAccessorType& other_accessor = OtherAccessorType{})
+      :tparam OtherElementType: the target mdspan element type
+      :tparam OtherExtents: the target mdspan extents
+      :tparam OtherLayoutPolicy: the target mdspan layout
+      :tparam OtherAccessor: the target mdspan accessor
 
-   :tparam OtherAccessor: the target mdspan accessor
+      :constraints: :cpp:class:`View`\ 's :ref:`natural mdspan <api-view-natural-mdspans>` must be assignable to :cpp:`mdspan<OtherElementType, OtherExtents, OtherLayoutPolicy, OtherAccessor>`
 
-   :constraints: :cpp:`typename OtherAccessorType::data_handle_type` must be assignable to :cpp:`value_type*`
+      :returns: an mdspan with extents and a layout converted from the :cpp:class:`View`'s *natural mdspan*.
 
-   :returns: :cpp:class:`View`\ 's :ref:`natural mdspan <api-view-natural-mdspans>`, but with an accessor policy constructed from :cpp:any:`other_accessor`
+   .. cpp:function:: template <class OtherAccessorType = Kokkos::default_accessor<typename traits::value_type>> constexpr auto to_mdspan(const OtherAccessorType& other_accessor = OtherAccessorType{})
 
+      :tparam OtherAccessor: the target mdspan accessor
 
-NonMember Functions
--------------------
+      :constraints: :cpp:`typename OtherAccessorType::data_handle_type` must be assignable to :cpp:`value_type*`
+
+      :returns: :cpp:class:`View`\ 's :ref:`natural mdspan <api-view-natural-mdspans>`, but with an accessor policy constructed from :cpp:any:`other_accessor`
+
+
+Non-Member Functions
+--------------------
 
 .. cpp:function:: template<class ViewDst, class ViewSrc> bool operator==(ViewDst, ViewSrc);
 
-   Returns true if ``value_type``, ``array_layout``, ``memory_space``, ``rank``, ``data()`` and ``extent(r)``, for ``0<=r<rank``, match.
+   :return: :cpp:`true` if :cpp:type:`~View::value_type`, :cpp:type:`~View::array_layout`, :cpp:type:`~View::memory_space`, :cpp:func:`~View::rank()`, :cpp:func:`~View::data()` and :cpp:expr:`extent(r)`, for :math:`0 \le r \lt \texttt{rank()}`, match.
 
 .. cpp:function:: template<class ViewDst, class ViewSrc> bool operator!=(ViewDst, ViewSrc);
 
    Returns true if any of ``value_type``, ``array_layout``, ``memory_space``, ``rank``, ``data()`` and ``extent(r)``, for ``0<=r<rank`` don't match.
 
-.. _api-view-datatype:
-
-:cpp:class:`View` DataType
---------------------------
+.. _api-view-assignment:
 
 Assignment Rules
 ----------------
@@ -632,10 +638,8 @@ These rules only cover cases where both layouts are one of ``LayoutLeft``, ``Lay
 
   - For each dimension ``k`` it must hold that ``dst_view.extent(k) == src_view.extent(k)``
 
-Assignment Examples
-~~~~~~~~~~~~~~~~~~~
-
 .. code-block:: cpp
+   :caption: Assignment Examples
 
     View<int*>       a1 = View<int*>("A1",N);     // OK
     View<int**>      a2 = View<int*[10]>("A2",N); // OK

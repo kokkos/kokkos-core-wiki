@@ -36,7 +36,7 @@ Description
 
 .. _View: view.html
 
-.. |View| replace:: :cpp:func:`View`
+.. |View| replace:: :cpp:class:`View`
 
 .. _ExecutionSpaceConcept: ../execution_spaces.html#executionspaceconcept
 
