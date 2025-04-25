@@ -243,7 +243,7 @@ Backend-specific options
       * ``ON``
 
     * * ``Kokkos_ENABLE_COMPILE_AS_CMAKE_LANGUAGE``
-      * Build with the CMake language feature (HIP, CUDA only)
+      * Build with the CMake language feature (CUDA or HIP only)
       * ``OFF``
 
 
