@@ -163,10 +163,6 @@ General options
       * Aggressively vectorize loops
       * ``OFF``
 
-    * * ``Kokkos_ENABLE_COMPILE_AS_CMAKE_LANGUAGE``
-      * Build with the CMake language feature (HIP, CUDA only)
-      * ``OFF``
-
 Debugging
 ---------
 .. list-table::
@@ -245,6 +241,11 @@ Backend-specific options
     * * ``Kokkos_ENABLE_IMPL_HPX_ASYNC_DISPATCH``
       * Enable asynchronous dispatch for the HPX backend
       * ``ON``
+
+    * * ``Kokkos_ENABLE_COMPILE_AS_CMAKE_LANGUAGE``
+      * Build with the CMake language feature (HIP, CUDA only)
+      * ``OFF``
+
 
 
 ``Kokkos_ENABLE_CUDA_LAMBDA`` default value is ``OFF`` until 3.7 and ``ON`` since 4.0
