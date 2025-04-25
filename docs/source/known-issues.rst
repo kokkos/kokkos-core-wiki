@@ -31,6 +31,7 @@ CUDA
 - CUDA 11.0 through 11.2 are not compatible with glibc 2.34 librt stubs. That issue is related to how the CMake package handles linking with librt. For more information please look at issue `#7512 <https://github.com/kokkos/kokkos/issues/7512>`_.
 
 - Building an application that uses Kokkos with Microsoft Visual Studio and the `Cuda` backend enabled, requires the use of the CMake language feature, see :ref:`keywords_enable_backend_specific_options`.
+  An example for marking the files accordingly can be found in `example/build_cmake_installed_kk_as_language`
 
 HIP
 ===
