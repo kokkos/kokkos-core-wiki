@@ -12,8 +12,8 @@ Deprecated in Kokkos 4.6
    * ``KokkosSparse::StaticCrsGraph``
    * aligns better with functionality provoided by ``KokkosKernels``.
 
-* ``native_simd`` type and ``simd_abi`` interface
-   * replacement: none
+* ``native_simd`` and ``native_simd_mask`` types
+   * replacement: ``simd`` and ``simd_mask``
    * alignment with the C++ standard
 
 * Makefile support
