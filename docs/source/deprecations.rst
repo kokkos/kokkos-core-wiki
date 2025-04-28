@@ -4,6 +4,26 @@ Deprecations
 Deprecated in Kokkos 4.x
 ===========================
 
+
+Deprecated in Kokkos 4.6
+---------------------------
+
+* ``StaticCrsGraph`` moved to Kokkos Kernels
+   * ``KokkosSparse::StaticCrsGraph``
+   * aligns better with functionality provided by ``KokkosKernels``.
+
+* ``native_simd`` and ``native_simd_mask`` types
+   * replacement: ``simd`` and ``simd_mask``
+   * alignment with the C++ standard
+
+* Makefile support
+   * replacement: CMake
+   * reducing maintenance burden for a little-used build system 
+
+* Direct access to ``d_view`` and ``h_view`` members in ``DualView``
+   * replacement: ``view_host()`` and ``view_device()``
+   * enforcing invariants in ``DualView``, e.g., consistency between the two ``View`` instances referenced
+
 Deprecated in Kokkos 4.5
 ---------------------------
 
