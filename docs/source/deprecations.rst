@@ -10,7 +10,7 @@ Deprecated in Kokkos 4.6
 
 * ``StaticCrsGraph`` moved to Kokkos Kernels
    * ``KokkosSparse::StaticCrsGraph``
-   * aligns better with functionality provoided by ``KokkosKernels``.
+   * aligns better with functionality provided by ``KokkosKernels``.
 
 * ``native_simd`` and ``native_simd_mask`` types
    * replacement: ``simd`` and ``simd_mask``
