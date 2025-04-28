@@ -182,9 +182,12 @@ Debugging
       * Use bounds checking - will increase runtime
       * ``OFF``
 
-    * * ``Kokkos_ENABLE_DEBUG_DUALVIEW_MODIFY_CHECK``
+    * * ``Kokkos_ENABLE_DEBUG_DUALVIEW_MODIFY_CHECK`` :red:`[Deprecated since 4.7]`
       * Debug check on dual views
-      * ``ON`` if ``CMAKE_BUILD_TYPE`` is ``Debug``, ``OFF`` otherwise
+      * (see below)
+
+
+``Kokkos_ENABLE_DEBUG_DUALVIEW_MODIFY_CHECK`` default value is "``ON`` if ``CMAKE_BUILD_TYPE`` is ``Debug``, ``OFF`` otherwise" until 4.7 and effectively always ``ON`` since 4.7
 
 .. _keywords_enable_backend_specific_options:
 
