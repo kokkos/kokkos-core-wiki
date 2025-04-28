@@ -14,7 +14,7 @@ Deprecated in Kokkos 4.6
 
 * ``native_simd`` type and ``simd_abi`` interface
    * replacement: none
-   * alignment with the c++ standard
+   * alignment with the C++ standard
 
 * Makefile support
    * replacement: CMake
