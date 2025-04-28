@@ -18,7 +18,7 @@ Deprecated in Kokkos 4.6
 
 * Makefile support
    * replacement: CMake
-   * transition to a modern build system
+   * reducing maintenance burden for a little-used build system 
 
 * Direct access to ``d_view`` and ``h_view`` members in ``DualView``
    * replacement: ``view_host()`` and ``view_device()``
