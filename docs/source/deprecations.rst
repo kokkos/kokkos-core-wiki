@@ -22,7 +22,7 @@ Deprecated in Kokkos 4.6
 
 * Direct access to ``d_view`` and ``h_view`` members in ``DualView``
    * replacement: ``view_host()`` and ``view_device()``
-   * prevent assignment of a view
+   * enforcing invariants in ``DualView``, e.g., consistency between the ``View``s referenced
 
 Deprecated in Kokkos 4.5
 ---------------------------
