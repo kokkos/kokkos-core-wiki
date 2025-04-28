@@ -9,7 +9,7 @@ Deprecated in Kokkos 4.6
 ---------------------------
 
 * ``StaticCrsGraph`` moved to Kokkos Kernels
-   * replacement: none
+   * ``KokkosSparse::StaticCrsGraph``
    * affinity
 
 * ``native_simd`` type and ``simd_abi`` interface
