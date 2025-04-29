@@ -53,9 +53,9 @@ Header File: ``<Kokkos_Core.hpp>``
    
    :tparam MemorySpace: Controls the storage location of the View.
 
-      If omitted the default memory space of the default execution space is used (i.e. :cpp:expr:`Kokkos::DefaultExecutionSpace::memory_space`)
+      If omitted the default memory space of the default execution space is used (i.e. :cpp:expr:`DefaultExecutionSpace::memory_space`)
 
-   :tparam MemoryTraits: Sets access properties via enum parameters for the templated :cpp:expr:`Kokkos::MemoryTraits<>` class.
+   :tparam MemoryTraits: Sets access properties via enum parameters for the templated :cpp:class:`MemoryTraits\<>` class.
 
       Possible template parameters are bit-combinations of the following flags:
 
@@ -65,7 +65,7 @@ Header File: ``<Kokkos_Core.hpp>``
          If the view is also :cpp:`const` this will trigger special load operations on GPUs (i.e. texture fetches).
       - ``Restrict``: There is no aliasing of the view by other data structures in the current scope.
 
-      Example usage: ``Kokkos::MemoryTraits<Kokkos::Unmanaged | Kokkos::RandomAccess>``
+      Example usage: :cpp:`MemoryTraits<Unmanaged | RandomAccess>`
 
    .. rubric:: Public Constants:
    
@@ -589,7 +589,7 @@ Header File: ``<Kokkos_Core.hpp>``
 
       :returns: an mdspan with extents and a layout converted from the :cpp:class:`View`'s *natural mdspan*.
 
-   .. cpp:function:: template <class OtherAccessorType = Kokkos::default_accessor<typename traits::value_type>> constexpr auto to_mdspan(const OtherAccessorType& other_accessor = OtherAccessorType{})
+   .. cpp:function:: template <class OtherAccessorType = default_accessor<typename traits::value_type>> constexpr auto to_mdspan(const OtherAccessorType& other_accessor = OtherAccessorType{})
 
       :tparam OtherAccessor: the target mdspan accessor
 
