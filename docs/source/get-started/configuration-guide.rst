@@ -187,7 +187,7 @@ Debugging
       * (see below)
 
 
-``Kokkos_ENABLE_DEBUG_DUALVIEW_MODIFY_CHECK`` default value is "``ON`` if ``CMAKE_BUILD_TYPE`` is ``Debug``, ``OFF`` otherwise" until 4.7 and effectively always ``ON`` since 4.7
+``Kokkos_ENABLE_DEBUG_DUALVIEW_MODIFY_CHECK`` default value is "``ON`` if ``CMAKE_BUILD_TYPE`` is ``Debug``, ``OFF`` otherwise" until 4.7 and always ``ON`` since 4.7
 
 .. _keywords_enable_backend_specific_options:
 
