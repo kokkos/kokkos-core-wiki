@@ -32,7 +32,7 @@ Header File: ``<Kokkos_Core.hpp>``
 
    :tparam Properties...: Defines various properties of the :cpp:class:`View`, including layout, memory space, and memory traits.
    
-      :cpp:class:`View`'s template parameters after ``DataType`` are variadic and optional, but must be specified in order. That means for example that ``LayoutType`` can be omitted but if both ``MemorySpace`` and ``MemoryTraits`` are specified, ``MemorySpace`` must come before ``MemoryTraits``.
+      :cpp:class:`View`'s template parameters after ``DataType`` are variadic and optional, but must be specified in order. That means for example that :cpp:any:`LayoutType` can be omitted but if both :cpp:any:`MemorySpace` and :cpp:`MemoryTraits` are specified, :cpp:any:`MemorySpace` must come before :cpp:any:`MemoryTraits`.
 
       .. code-block:: cpp
          :caption: The ordering of View template parameters.
@@ -174,7 +174,7 @@ Header File: ``<Kokkos_Core.hpp>``
 
    .. cpp:type:: array_layout
 
-      The ``Layout`` of the :cpp:class:`View`.
+      The :cpp:any:`LayoutType` of the :cpp:class:`View`.
 
    .. cpp:type:: size_type
 
