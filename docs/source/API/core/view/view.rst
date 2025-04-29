@@ -42,7 +42,7 @@ Header File: ``<Kokkos_Core.hpp>``
 
    :tparam LayoutType: Determines the mapping of indices into the underlying 1D memory storage.
    
-      Custom Layouts can be implemented, but Kokkos comes with some built-in ones:
+      Kokkos comes with some built-in layouts:
 
       - :cpp:struct:`LayoutRight`: strides increase from the right most to the left most dimension.
          The last dimension has a stride of one.
@@ -77,19 +77,19 @@ Header File: ``<Kokkos_Core.hpp>``
 
    .. cpp:type:: data_type
 
-      The ``DataType`` of the :cpp:class:`View`, note :cpp:type:`data_type` contains the array specifiers (e.g. ``int**[3]``)
+      The :cpp:any:`DataType` of the :cpp:class:`View`, note :cpp:type:`data_type` contains the array specifiers (e.g. :cpp:`int**[3]`)
 
    .. cpp:type:: const_data_type
 
-      :cpp:`const` version of ``DataType``, same as :cpp:type:`data_type` if that is already  :cpp:`const`.
+      :cpp:`const` version of :cpp:any:`DataType`, same as :cpp:type:`data_type` if that is already  :cpp:`const`.
 
    .. cpp:type:: non_const_data_type
 
-      Non-:cpp:`const` version of ``DataType``, same as :cpp:type:`data_type` if that is already non-:cpp:`const`.
+      Non-:cpp:`const` version of :cpp:any:`DataType`, same as :cpp:type:`data_type` if that is already non-:cpp:`const`.
 
    .. cpp:type:: scalar_array_type
 
-      If ``DataType`` represents some properly specialised array data type such as Sacado FAD types, :cpp:type:`scalar_array_type` is the underlying fundamental scalar type.
+      If :cpp:any:`DataType` represents some properly specialised array data type such as Sacado FAD types, :cpp:type:`scalar_array_type` is the underlying fundamental scalar type.
 
    .. cpp:type:: const_scalar_array_type
 
@@ -142,11 +142,11 @@ Header File: ``<Kokkos_Core.hpp>``
 
    .. cpp:type:: non_const_type
 
-      this view type with all template parameters explicitly defined.
+      this :cpp:class:`View` type with :cpp:type:`non_const_data_type` passed as the :cpp:any:`DataType` template parameter
 
    .. cpp:type:: const_type
 
-      this view type with all template parameters explicitly defined using a ``const`` data type.
+      this :cpp:class:`View` type with :cpp:type:`const_data_type` passed as the :cpp:any:`DataType` template parameter
 
    .. cpp:type:: HostMirror
 
@@ -158,6 +158,12 @@ Header File: ``<Kokkos_Core.hpp>``
    .. cpp:type:: reference_type
 
       return type of the view access operators.
+
+      .. seealso::
+         :cpp:func:`operator()`
+
+         :cpp:func:`access()`
+
 
    .. cpp:type:: pointer_type
 
@@ -191,7 +197,7 @@ Header File: ``<Kokkos_Core.hpp>``
 
    .. cpp:function:: template<class DT, class... Prop> View( const View<DT, Prop...>& rhs)
 
-      Copy constructor with compatible view. Follows View assignment rules.
+      Copy constructor with a compatible view. Follows :cpp:class:`View` assignment rules.
 
       .. seealso:: :ref:`api-view-assignment`
 
@@ -202,7 +208,7 @@ Header File: ``<Kokkos_Core.hpp>``
    .. cpp:function:: template<class IntType> View( const std::string& name, const IntType& ... extents)
 
       Standard allocating constructor. The initialization is executed on the default
-      instance of the execution space corresponding to ``MemorySpace`` and fences it.
+      instance of the execution space corresponding to :cpp:type:`memory_space` and fences it.
 
       :tparam IntType: an integral type
 
@@ -210,7 +216,7 @@ Header File: ``<Kokkos_Core.hpp>``
 
       :param extents: Extents of the :cpp:class:`View`.
 
-      **Requirements**
+      .. rubric:: Requirements:
 
       - :cpp:expr:`sizeof(IntType...) == rank_dynamic()` or :cpp:expr:`sizeof(IntType...) == rank()`.
          In the latter case, the extents corresponding to compile-time dimensions must match the :cpp:class:`View` type's compile-time extents.
@@ -226,19 +232,21 @@ Header File: ``<Kokkos_Core.hpp>``
 
       :param layout: an instance of a layout class.
          The number of valid extents must either match the :cpp:func:`dynamic_rank` or :cpp:func:`rank`.
-         In the latter case, the extents corresponding to compile-time dimensions must match the View type's compile-time extents.
+         In the latter case, the extents corresponding to compile-time dimensions must match the :cpp:class:`View` type's compile-time extents.
 
-   .. cpp:function:: View( const ALLOC_PROP &prop, const IntType& ... extents)
+   .. cpp:function:: template<class IntType> View( const ALLOC_PROP &prop, const IntType& ... extents)
 
-      Allocating constructor with allocation properties (created by a call to :cpp:expr:`Kokkos::view_alloc`). If an execution space is
-      specified in ``prop``, the initialization uses it and does not fence.
-      Otherwise, the View is initialized using the default execution space instance corresponding to :cpp:type:`memory_space` and fences it.
+      Allocating constructor with allocation properties (created by a call to :cpp:func:`view_alloc`). If an execution space is
+      specified in :cpp:any:`prop`, the initialization uses it and does not fence.
+      Otherwise, the :cpp:class:`View` is initialized using the default execution space instance corresponding to :cpp:type:`memory_space` and fences it.
+
+      :tparam IntType: an integral type
 
       :param prop: An allocation properties object that is returned by :cpp:func:`view_alloc`.
 
       :param extents: Extents of the View.
 
-      **Requirements**
+      .. rubric:: Requirements:
 
       - :cpp:expr:`sizeof(IntType...) == rank_dynamic()` or :cpp:expr:`sizeof(IntType...) == rank()`.
          In the latter case, the extents corresponding to compile-time dimensions must match the :cpp:class:`View` type's compile-time extents.
@@ -246,26 +254,28 @@ Header File: ``<Kokkos_Core.hpp>``
 
    .. cpp:function:: View( const ALLOC_PROP &prop, const array_layout& layout)
 
-      Allocating constructor with allocation properties (created by a call to :cpp:expr:`Kokkos::view_alloc`) and a layout object. If an execution space is
-      specified in ``prop``, the initialization uses it and does not fence. Otherwise, the View is
-      initialized using the default execution space instance corresponding to :cpp:type:`memory_space` and fences it.
+      Allocating constructor with allocation properties (created by a call to :cpp:func:`view_alloc`) and a layout object. If an execution space is
+      specified in :cpp:any:`prop`, the initialization uses it and does not fence.
+      Otherwise, the :cpp:class:`View` is initialized using the default execution space instance corresponding to :cpp:type:`memory_space` and fences it.
 
       :param prop: An allocation properties object that is returned by :cpp:func:`view_alloc`.
 
       :param layout: an instance of a layout class.
          The number of valid extents must either match the :cpp:func:`dynamic_rank` or :cpp:func:`rank`.
-         In the latter case, the extents corresponding to compile-time dimensions must match the View type's compile-time extents.
+         In the latter case, the extents corresponding to compile-time dimensions must match the :cpp:class:`View` type's compile-time extents.
 
-   .. cpp:function:: View( pointer_type ptr, const IntType& ... extents)
+   .. cpp:function:: template<class IntType> View( pointer_type ptr, const IntType& ... extents)
 
       Unmanaged data wrapping constructor.
 
+      :tparam IntType: an integral type
+
       :param ptr: pointer to a user provided memory allocation.
-         Must provide storage of size :cpp:expr:`View::required_allocation_size(extents...)`
+         Must provide storage of size :cpp:expr:`required_allocation_size(extents...)`
 
       :param extents: Extents of the :cpp:class:`View`.
 
-      **Requirements**
+      .. rubric:: Requirements:
 
       - :cpp:expr:`sizeof(IntType...) == rank_dynamic()` or :cpp:expr:`sizeof(IntType...) == rank()`.
          In the latter case, the extents corresponding to compile-time dimensions must match the :cpp:class:`View` type's compile-time extents.
@@ -281,16 +291,18 @@ Header File: ``<Kokkos_Core.hpp>``
       :param layout: an instance of a layout class.
          The number of valid extents must either match the dynamic rank or the total rank. In the latter case, the extents corresponding to compile-time dimensions must match the :cpp:class:`View` type's compile-time extents.
 
-   .. cpp:function:: View( const ScratchSpace& space, const IntType& ... extents)
+   .. cpp:function:: template<class IntType> View( const ScratchSpace& space, const IntType& ... extents)
 
       Constructor which acquires memory from a Scratch Memory handle.
+
+      :tparam IntType: an integral type
 
       :param space: scratch memory handle.
          Typically returned from :cpp:func:`team_shmem`, :cpp:func:`team_scratch`, or :cpp:func:`thread_scratch` in ``TeamPolicy`` kernels.
 
       :param extents: Extents of the :cpp:class:`View`.
 
-      **Requirements**
+      .. rubric:: Requirements:
 
       - :cpp:expr:`sizeof(IntType...) == rank_dynamic()` or :cpp:expr:`sizeof(IntType...) == rank()`.
          In the latter case, the extents corresponding to compile-time dimensions must match the :cpp:class:`View` type's compile-time extents.
@@ -306,7 +318,7 @@ Header File: ``<Kokkos_Core.hpp>``
       :param layout: an instance of a layout class.
          The number of valid extents must either match the dynamic rank or the total rank. In the latter case, the extents corresponding to compile-time dimensions must match the :cpp:class:`View` type's compile-time extents.
 
-   .. cpp:function:: View( const View<DT, Prop...>& rhs, Args ... args)
+   .. cpp:function:: template<class DT, class... Prop> View( const View<DT, Prop...>& rhs, Args ... args)
 
       :param rhs: the :cpp:class:`View` to take a subview of
       :param args...: the subview slices as specified in :cpp:func:`subview`
@@ -358,7 +370,9 @@ Header File: ``<Kokkos_Core.hpp>``
 
    .. rubric:: Data Access Functions:
 
-   .. cpp:function:: reference_type operator() (const IntType& ... indices) const
+   .. cpp:function:: template<class IntType> reference_type operator() (const IntType& ... indices) const
+
+      :tparam IntType: an integral type
 
       :param indices: the indices of the element to get a reference to
       :return: a reference to the element at the given indices
@@ -366,13 +380,15 @@ Header File: ``<Kokkos_Core.hpp>``
       Returns a value of :cpp:type:`reference_type` which may or not be referenceable itself.
       The number of index arguments must match the :cpp:func:`rank` of the view.
 
-      **Requirements**
+      .. rubric:: Requirements:
       
       - :cpp:expr:`sizeof(IntType...) == rank_dynamic()`
 
-   .. cpp:function:: reference_type access(const IntType& i0=0, const IntType& i1=0, \
+   .. cpp:function:: template<class IntType> reference_type access(const IntType& i0=0, const IntType& i1=0, \
             const IntType& i2=0, const IntType& i3=0, const IntType& i4=0, \
             const IntType& i5=0, const IntType& i6=0, const IntType& i7=0) const
+
+      :tparam IntType: an integral type
       
       :param i0, i1, i2, i3, i4, i5, i6, i7: the indices of the element to get a reference to
       :return: a reference to the element at the given indices
@@ -420,7 +436,7 @@ Header File: ``<Kokkos_Core.hpp>``
       :param dim: the dimension to get the extent of
       :return: the extent of dimension :cpp:any:`dim`
 
-      **Preconditions**
+      .. rubric:: Preconditions:
 
       - :cpp:any:`dim` must be smaller than :cpp:func:`rank`.
 
@@ -435,7 +451,7 @@ Header File: ``<Kokkos_Core.hpp>``
       It also may eliminate the need for type casts in applications which
       otherwise perform all index operations with :cpp:`int`.
 
-      **Preconditions**
+      .. rubric:: Preconditions:
 
       - :cpp:any:`dim` must be smaller than :cpp:func:`rank`.
 
@@ -447,7 +463,7 @@ Header File: ``<Kokkos_Core.hpp>``
 
       Example: :cpp:expr:`a.stride(3) == (&a(i0,i1,i2,i3+1,i4)-&a(i0,i1,i2,i3,i4))`
 
-      **Preconditions**
+      .. rubric:: Preconditions:
 
       - :cpp:any:`dim` must be smaller than :cpp:func:`rank`.
 
@@ -491,7 +507,7 @@ Header File: ``<Kokkos_Core.hpp>``
       Sets :cpp:expr:`strides[r]` to :cpp:expr:`stride(r)` for all :math:`r` with :math:`0 \le r \lt \texttt{rank()}`.
       Sets :cpp:expr:`strides[rank()]` to :cpp:func:`span()`.
 
-      **Preconditions**
+      .. rubric:: Preconditions:
 
       - :cpp:any:`strides` must be an array of length :cpp:expr:`rank() + 1`
 
@@ -526,8 +542,8 @@ Header File: ``<Kokkos_Core.hpp>``
       
       :param N0, N1, N2, N3, N4, N5, N6, N7, N8: the dimensions to query
       :return: the number of bytes necessary for an unmanaged :cpp:class:`View` of the provided dimensions.
-      
-      **Requirements**
+
+      .. rubric:: Requirements:
       
       - :cpp:expr:`array_layout::is_regular == true`.
 
@@ -545,12 +561,6 @@ Header File: ``<Kokkos_Core.hpp>``
    .. cpp:function:: const std::string label() const;
 
       :return: the label of the View.
-
-   .. cpp:function:: const bool is_assignable(const View<DT, Prop...>& rhs);
-
-      :return: true if the View can be assigned to rhs.
-
-      .. seealso:: :ref:`api-view-assignment`
 
    .. cpp:function:: void assign_data(pointer_type arg_data);
 
@@ -591,13 +601,19 @@ Header File: ``<Kokkos_Core.hpp>``
 Non-Member Functions
 --------------------
 
-.. cpp:function:: template<class ViewDst, class ViewSrc> bool operator==(ViewDst, ViewSrc);
+.. cpp:function:: template <class... ViewTDst, class... ViewTSrc> bool is_assignable(const View<ViewTDst...>& dst, const View<ViewTSrc...>& src)
+
+   :return: true if src can be assigned to dst.
+
+   .. seealso:: :ref:`api-view-assignment`
+
+.. cpp:function:: template <class LT, class... LP, class RT, class... RP> bool operator==(const View<LT, LP...>& lhs, const View<RT, RP...>& rhs)
 
    :return: :cpp:`true` if :cpp:type:`~View::value_type`, :cpp:type:`~View::array_layout`, :cpp:type:`~View::memory_space`, :cpp:func:`~View::rank()`, :cpp:func:`~View::data()` and :cpp:expr:`extent(r)`, for :math:`0 \le r \lt \texttt{rank()}`, match.
 
-.. cpp:function:: template<class ViewDst, class ViewSrc> bool operator!=(ViewDst, ViewSrc);
+.. cpp:function:: template <class LT, class... LP, class RT, class... RP> bool operator!=(const View<LT, LP...>& lhs, const View<RT, RP...>& rhs)
 
-   Returns true if any of ``value_type``, ``array_layout``, ``memory_space``, ``rank``, ``data()`` and ``extent(r)``, for ``0<=r<rank`` don't match.
+   :return: :cpp:expr:`!(lhs == rhs)`
 
 .. _api-view-assignment:
 
