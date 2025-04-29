@@ -231,7 +231,7 @@ Header File: ``<Kokkos_Core.hpp>``
          Names are not required to be unique,
 
       :param layout: an instance of a layout class.
-         The number of valid extents must either match the :cpp:func:`dynamic_rank` or :cpp:func:`rank`.
+         The number of valid extents must either match the :cpp:func:`rank_dynamic` or :cpp:func:`rank`.
          In the latter case, the extents corresponding to compile-time dimensions must match the :cpp:class:`View` type's compile-time extents.
 
    .. cpp:function:: template<class IntType> View( const ALLOC_PROP &prop, const IntType& ... extents)
@@ -261,7 +261,7 @@ Header File: ``<Kokkos_Core.hpp>``
       :param prop: An allocation properties object that is returned by :cpp:func:`view_alloc`.
 
       :param layout: an instance of a layout class.
-         The number of valid extents must either match the :cpp:func:`dynamic_rank` or :cpp:func:`rank`.
+         The number of valid extents must either match the :cpp:func:`rank_dynamic` or :cpp:func:`rank`.
          In the latter case, the extents corresponding to compile-time dimensions must match the :cpp:class:`View` type's compile-time extents.
 
    .. cpp:function:: template<class IntType> View( pointer_type ptr, const IntType& ... extents)
@@ -620,9 +620,9 @@ Non-Member Functions
 Assignment Rules
 ----------------
 
-Assignment rules cover the assignment operator as well as copy constructors. We aim at making all logically legal assignments possible,
-while intercepting illegal assignments if possible at compile time, otherwise at runtime.
-In the following we use ``DstType`` and ``SrcType`` as the type of the destination view and source view respectively.
+Assignment rules cover the assignment operator as well as copy constructors.
+We aim at making all logically legal assignments possible, while intercepting illegal assignments if possible at compile time, otherwise at runtime.
+In the following we use ``DstType`` and ``SrcType`` as the type of the destination view and source view respectively. 
 ``dst_view`` and ``src_view`` refer to the runtime instances of the destination and source views, i.e.:
 
 .. code-block:: cpp
@@ -633,26 +633,26 @@ In the following we use ``DstType`` and ``SrcType`` as the type of the destinati
 
 The following conditions must be met at and are evaluated at compile time:
 
-* ``DstType::rank == SrcType::rank``
-* ``DstType::non_const_value_type`` is the same as ``SrcType::non_const_value_type``
-* If ``std::is_const<SrcType::value_type>::value == true`` than ``std::is_const<DstType::value_type>::value == true``.
-* ``MemorySpaceAccess<DstType::memory_space,SrcType::memory_space>::assignable == true``
-* If ``DstType::dynamic_rank != DstType::rank`` and ``SrcType::dynamic_rank != SrcType::rank`` then for each dimension ``k`` which is compile time for both it must be true that ``dst_view.extent(k) == src_view.extent(k)``
+* :cpp:`DstType::rank() == SrcType::rank()`
+* :cpp:`DstType::non_const_value_type` is the same as :cpp:`SrcType::non_const_value_type`
+* If :cpp:`std::is_const_v<SrcType::value_type> == true` then :cpp:`std::is_const_v<DstType::value_type>` must also be :cpp:`true`.
+* :cpp:`MemorySpaceAccess<DstType::memory_space,SrcType::memory_space>::assignable == true`
+* If :cpp:`DstType::rank_dynamic() != DstType::rank()` and :cpp:`SrcType::rank_dynamic() != SrcType::rank()` then for each dimension :cpp:`k` that is compile time for both it must be true that :cpp:`dst_view.extent(k) == src_view.extent(k)`
 
 Additionally the following conditions must be met at runtime:
 
-* If ``DstType::dynamic_rank != DstType::rank`` then for each compile time dimension ``k`` it must be true that ``dst_view.extent(k) == src_view.extent(k)``.
+* If :cpp:`DstType::rank_dynamic() != DstType::rank()` then for each compile time dimension :cpp:`k` it must be true that :cpp:`dst_view.extent(k) == src_view.extent(k)`.
 
-Furthermore there are rules which must be met if ``DstType::array_layout`` is not the same as ``SrcType::array_layout``.
-These rules only cover cases where both layouts are one of ``LayoutLeft``, ``LayoutRight`` or ``LayoutStride``
+Furthermore there are rules which must be met if :cpp:`DstType::array_layout` is not the same as :cpp:`SrcType::array_layout`.
+These rules only cover cases where both layouts are one of :cpp:class:`LayoutLeft`, :cpp:class:`LayoutRight` or :cpp:class:`LayoutStride`
 
-* If neither ``DstType::array_layout`` nor ``SrcType::array_layout`` is ``LayoutStride``:
+* If neither :cpp:`DstType::array_layout` nor :cpp:`SrcType::array_layout` is :cpp:class:`LayoutStride`:
 
-  - If ``DstType::rank > 1`` then ``DstType::array_layout`` must be the same as ``SrcType::array_layout``.
+  - If :cpp:`DstType::rank > 1` then :cpp:`DstType::array_layout` must be the same as :cpp:`SrcType::array_layout`.
 
-* If either ``DstType::array_layout`` or ``SrcType::array_layout`` is ``LayoutStride``
+* If either :cpp:`DstType::array_layout` or :cpp:`SrcType::array_layout` is :cpp:class:`LayoutStride`
 
-  - For each dimension ``k`` it must hold that ``dst_view.extent(k) == src_view.extent(k)``
+  - For each dimension :cpp:`k` it must hold that :cpp:`dst_view.extent(k) == src_view.extent(k)`
 
 .. code-block:: cpp
    :caption: Assignment Examples
