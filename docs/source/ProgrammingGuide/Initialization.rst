@@ -55,9 +55,9 @@ The highest execution space in the list that is enabled is Kokkos' default execu
 
     --kokkos-threads=4 --kokkos-threads=3
 
-set the number of threads to 3. `Table 5.1 <Table_cli-opts>`_ gives a full list of command-line options.
+set the number of threads to 3. :ref:`Table 5.1 <Table_cli-opts>` gives a full list of command-line options.
 
-.. Table_cli-opts:
+.. _Table_cli-opts:
 
 Table 5.1: Command-line options for Kokkos::initialize
 
@@ -75,7 +75,7 @@ Table 5.1: Command-line options for Kokkos::initialize
     - allow Kokkos to autotune policies and declare tuning features through the tuning system. If left off, Kokkos uses heuristics.
   * - :code:`--kokkos-num-threads=INT`     
     - specify total number of threads to use for parallel regions on the host
-  * - :code"`--kokkos-device-id=INT`
+  * - :code:`--kokkos-device-id=INT`
     - specify device id to be used by Kokkos
   * - :code:`--kokkos-map-device-id-by=(random\|mpi_rank)`, default: :code:`mpi_rank`
     - strategy to select device-id automatically from available devices: random or mpi_rank\ :sup:`2`
@@ -102,7 +102,7 @@ The values are case insensitive.
 Initialization by environment variable
 --------------------------------------
 
-Instead of using command-line arguments, one may use environment variables. The environment variables are identical to the arguments in `Table 5.1 <Table_cli-opts>`_ but they are upper case and the dash is replaced by an underscore. For example, if we want to set the number of threads to 3, we may use
+Instead of using command-line arguments, one may use environment variables. The environment variables are identical to the arguments in :ref:`Table 5.1 <Table_cli-opts>` but they are upper case and the dash is replaced by an underscore. For example, if we want to set the number of threads to 3, we may use
 
 .. code-block:: sh
 
@@ -112,7 +112,7 @@ Instead of using command-line arguments, one may use environment variables. The 
 Initialization by struct
 ------------------------
 
-Instead of giving `Kokkos::initialize() <../API/core/initialize_finalize/initialize.html>`_ command-line arguments, one may directly pass in initialization parameters using the `Kokkos::InitializationSettings` struct.  If one wants to set options using the struct, one can use the functions `set_xxx` where `xxx` is identical to the arguments in `Table 5.1 <Table_cli-opts>`_ where the dash has been replaced by an underscore. To check if a variable has been set, one can use the `has_xxx` functions. Finally, to get the value that was set, one can use the `get_xxx` functions.
+Instead of giving `Kokkos::initialize() <../API/core/initialize_finalize/initialize.html>`_ command-line arguments, one may directly pass in initialization parameters using the `Kokkos::InitializationSettings` struct.  If one wants to set options using the struct, one can use the functions `set_xxx` where `xxx` is identical to the arguments in :ref:`Table 5.1 <Table_cli-opts>` where the dash has been replaced by an underscore. To check if a variable has been set, one can use the `has_xxx` functions. Finally, to get the value that was set, one can use the `get_xxx` functions.
 
 
 If you do not set `num_threads`, Kokkos will try to determine a default value if possible or otherwise set it to 1. In particular, Kokkos can use the `hwloc` library to determine default settings using the assumption that the process binding mask is unique, i.e., that this process does not share any cores with another process. Note that the default value of each parameter is -1.
