@@ -1,3 +1,5 @@
+.. _api-execution-spaces:
+
 Execution Spaces
 ================
 

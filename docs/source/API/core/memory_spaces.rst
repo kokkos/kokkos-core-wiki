@@ -1,3 +1,5 @@
+.. _api-memory-spaces:
+
 Memory Spaces
 =============
 
