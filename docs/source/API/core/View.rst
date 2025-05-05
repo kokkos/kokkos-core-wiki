@@ -20,6 +20,8 @@ The following facilities are available:
      - Memory Layout matching C.
    * - `LayoutStride <view/layoutStride.html>`__
      - Memory Layout for arbitrary strides.
+   * - `MemoryTraits <view/memoryTraits.html>`__
+     - Memory access traits.
    * - `realloc <view/realloc.html>`__
      - Reallocating a ``Kokkos::View``.
    * - `resize <view/resize.html>`__
@@ -42,6 +44,7 @@ The following facilities are available:
    ./view/layoutLeft
    ./view/layoutRight
    ./view/layoutStride
+   ./view/memoryTraits
    ./view/realloc
    ./view/resize
    ./view/subview
