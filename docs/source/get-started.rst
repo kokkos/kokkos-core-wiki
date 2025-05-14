@@ -11,6 +11,7 @@ Get Started
    get-started/building-from-source
    get-started/configuration-guide
    get-started/package-managers
+   get-started/advanced-build-configurations.rst
 
 
 Want to try Kokkos right away?  Check it out on `Compiler Explorer
@@ -49,3 +50,7 @@ usage, and a complete list of supported CPU and GPU architectures.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 This page lists package managers that offer pre-built Kokkos packages,
 providing a convenient alternative to building from source.
+
+:doc:`Advanced Build Configurations <get-started/advanced-build-configurations.rst>`
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+This page explains which advanced methods are available to integrate Kokkos into a project.
