@@ -212,7 +212,7 @@ Header File: ``<Kokkos_Core.hpp>``
 
       :tparam IntType: an integral type
 
-      :param name: a user provided label, which is used for profiling and debugging purposes. Names are not required to be unique,
+      :param name: a user provided label, which is used for profiling and debugging purposes. Names are not required to be unique.
 
       :param extents: Extents of the :cpp:class:`View`.
 
@@ -228,7 +228,7 @@ Header File: ``<Kokkos_Core.hpp>``
       instance of the execution space corresponding to :cpp:type:`memory_space` and fences it.
 
       :param name: a user provided label, which is used for profiling and debugging purposes.
-         Names are not required to be unique,
+         Names are not required to be unique.
 
       :param layout: an instance of a layout class.
          The number of valid extents must either match the :cpp:func:`rank_dynamic` or :cpp:func:`rank`.

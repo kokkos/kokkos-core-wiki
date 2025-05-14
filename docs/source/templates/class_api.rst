@@ -141,7 +141,7 @@ Non-Member Functions
 
   :tparam ViewDst: the other
 
-  :return: true if :cpp:type:`View::value_type`, :cpp:type:`View::array_layout`, :cpp:type:`View::memory_space`, :cpp:member:`View::func`, :cpp:func:`View::data()` and :cpp:expr:`View::extent(r)`, for :cpp:expr:`0<=r<rank`, match.
+  :return: true if :cpp:type:`View::value_type`, :cpp:type:`View::array_layout`, :cpp:type:`View::memory_space`, :cpp:func:`View::rank`, :cpp:func:`View::data()` and :cpp:expr:`View::extent(r)`, for :cpp:expr:`0<=r<rank`, match.
 
 .. cpp:function:: void frobrnicator(CoolerView &v) noexcept
 
