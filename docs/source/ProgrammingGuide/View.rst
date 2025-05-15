@@ -591,7 +591,7 @@ This is only valid if a Views reference type is an `lvalue`. That property can b
 Memory access traits
 --------------------
 
-Another way to get optimized data accesses is to specify memory traits. These traits are used to declare intended use of the particular view of an allocation. For example, a particular kernel might use a view only for streaming writes. By declaring that intention, Kokkos can insert the appropriate store intrinsics on each architecture if available. Access traits are specified through an optional template parameter which comes last in the list of parameters. Multiple traits can be combined with binary "or" operators:
+Another way to get optimized data accesses is to specify memory traits. These traits are used to declare intended use of the particular view of an allocation. For example, a particular kernel might use a view only for streaming writes. By declaring that intention, Kokkos can insert the appropriate store intrinsics on each architecture if available. Access traits are specified through an optional template parameter which comes last in the list of parameters. Multiple traits can be combined with binary OR operators:
 
 .. code-block:: c++
 
@@ -672,7 +672,7 @@ The `Restrict` trait indicates that the memory of this View doesn't alias/overla
 Aligned
 ~~~~~~~
 
-Allocation of Kokkos Views is 64-byte aligned. The only exception being the allocation of unmanaged Views, which may or may not be aligned. The `Aligned` trait can be used to indicate to the compiler that it can expect the memory allocation of the View to be aligned by 64-bytes. The compiler can perform optimizations accordingly.
+Allocation of Kokkos Views is 64-byte aligned. The exception being the allocation of unmanaged Views, which may or may not be aligned. The `Aligned` trait can be used to indicate to the compiler that it can expect the memory allocation of the View to be aligned by 64-bytes. The compiler can perform optimizations accordingly.
 
 Note that it is not possible to specify this trait for sub-Views. Sub-Views may or not be aligned depending on their parent View. Assigning a View with the `Aligned` trait to an unaligned sub-View will lead to a run-time error.
 

@@ -7,22 +7,19 @@ Header File: ``<Kokkos_Core.hpp>``
 
 .. |CppReferenceSharedPtr| replace:: ``std::shared_ptr``
 
-
 .. _ProgrammingGuide: ../../../ProgrammingGuide/View.html#memory-access-traits
 
-<<<<<<< HEAD
-.. |Atomic| replace:: ``Atomic``
-=======
 .. |ProgrammingGuide| replace:: Programming Guide
->>>>>>> 385c699 (More info in API/core/view/memoryTraits.rst. Moved traits info from API/core/view/view.rst to ProgrammingGuide/View.rst)
 
+.. _MemoryTraits: memoryTraits.html
+
+.. |MemoryTraits| replace:: MemoryTraits
 
 Class Interface
 ---------------
 
 .. cpp:class:: template <class DataType, class... Properties> View
 
-<<<<<<< HEAD
    Kokkos View is a potentially reference counted multi dimensional array with compile time layouts and memory space.
    Its semantics are similar to that of |CppReferenceSharedPtr|_.
    
@@ -47,18 +44,6 @@ Class Interface
 
          template <class DataType [, class LayoutType] [, class MemorySpace] [, class MemoryTraits]>
          class View;
-=======
-  Sets access properties via enum parameters for the class template ``Kokkos::MemoryTraits<>``.
-  Possible template parameters are bitwise OR of the following flags:
-
-  - ``Unmanaged``
-  - ``RandomAccess``
-  - ``Atomic``
-  - ``Restrict``
-  - ``Aligned``
-
-  See |ProgrammingGuide|_ also for further information.
->>>>>>> 385c699 (More info in API/core/view/memoryTraits.rst. Moved traits info from API/core/view/view.rst to ProgrammingGuide/View.rst)
 
    :tparam LayoutType: Determines the mapping of indices into the underlying 1D memory storage.
    
@@ -75,17 +60,15 @@ Class Interface
 
       If omitted the default memory space of the default execution space is used (i.e. :cpp:expr:`DefaultExecutionSpace::memory_space`)
 
-   :tparam MemoryTraits: Sets access properties via enum parameters for the templated :cpp:class:`MemoryTraits\<>` class.
+   :tparam |MemoryTraits|_: Sets access properties via enum parameters for the class template ``Kokkos::MemoryTraits<>``. Possible template parameters are bitwise OR of the following flags: 
 
-      Possible template parameters are bit-combinations of the following flags:
+      - ``Unmanaged``
+      - ``RandomAccess``
+      - ``Atomic``
+      - ``Restrict``
+      - ``Aligned``
 
-      - ``Unmanaged``: The View will not be reference counted. The allocation has to be provided to the constructor.
-      - |Atomic|_: All accesses to the view will use atomic operations.
-      - ``RandomAccess``: Hint that the view is used in a random access manner.
-         If the view is also :cpp:`const` this will trigger special load operations on GPUs (i.e. texture fetches).
-      - ``Restrict``: There is no aliasing of the view by other data structures in the current scope.
-
-      Example usage: :cpp:`MemoryTraits<Unmanaged | RandomAccess>`
+      See |ProgrammingGuide|_ also for further information.
 
 ..
    Pushing a "namespace" here; this doesn't create a namespace entity but tells Sphinx that everything between here and the pop is part of the View class.

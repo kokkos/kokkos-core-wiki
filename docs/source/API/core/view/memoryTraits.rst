@@ -1,22 +1,18 @@
 ``MemoryTraits``
 ================
 
-.. role:: cpp(code)
-   :language: cpp
-
 Header File: ``<Kokkos_MemoryTraits.hpp>``
 
+:cpp:struct:`MemoryTraits` is the last template parameter of :cpp:class:`View`.
 
-``Kokkos::MemoryTraits`` is the last template parameter of Kokkos::View.
-
-Struct template
----------------
+Struct Interface
+----------------
 
 .. cpp:struct:: template <unsigned N> MemoryTraits
 
   When provided to a multidimensional View, ``MemoryTraits`` allow passing extra information about the treatment of the allocation. The template argument is expected to be a bitwise OR of enumeration values described below.
 
-.. rubric:: Nested Typedefs
+.. rubric:: Nested type
 
 .. cpp:type::  memory_traits
 
@@ -80,10 +76,11 @@ The following enumeration values are used to specify the memory access traits. C
 Non-Member Types
 ----------------
 
-A few useful type aliases are also available in the ``Kokkos`` namespace.
+The following type aliases are also available in the ``Kokkos`` namespace.
 
+.. cpp:type:: MemoryManaged = Kokkos::MemoryTraits<>;
 .. cpp:type:: MemoryUnmanaged = Kokkos::MemoryTraits<Kokkos::Unmanaged>;
-.. cpp:type:: MemoryRandomAccess = Kokkos::MemoryTraits<Kokkos::RandomAccess>;
+.. cpp:type:: MemoryRandomAccess = Kokkos::MemoryTraits<Kokkos::Unmanaged | Kokkos::RandomAccess>;
 
 Examples
 --------
