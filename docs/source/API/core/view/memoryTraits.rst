@@ -1,8 +1,6 @@
 ``MemoryTraits``
 ================
 
-Header File: ``<Kokkos_MemoryTraits.hpp>``
-
 :cpp:struct:`MemoryTraits` is the last template parameter of :cpp:class:`View`.
 
 Struct Interface
@@ -45,9 +43,9 @@ Struct Interface
 .. |ProgrammingGuide| replace:: Programming Guide
 
 Non-Member Enums
-----------------
+^^^^^^^^^^^^^^^^
 
-The following enumeration values are used to specify the memory access traits. Check the |ProgrammingGuide|_ for further information about how these traits can be used in practice.
+The following enumeration values are used to specify the memory access traits. Check the sub-section on memory access traits in the |ProgrammingGuide|_ for further information about how these traits can be used in practice.
 
 .. cpp:enum:: MemoryTraitsFlags
 
@@ -59,7 +57,7 @@ The following enumeration values are used to specify the memory access traits. C
 
 .. cpp:enumerator:: RandomAccess
 
-  Views that are going to be accessed irregularly (e.g., non-sequentially) can be declared as :cpp:enumerator:`RandomAccess`. 
+  Views that are going to be accessed irregularly (e.g., non-sequentially) can be declared as random access. 
 
 .. cpp:enumerator:: Atomic
 
@@ -73,8 +71,8 @@ The following enumeration values are used to specify the memory access traits. C
 
   This trait provides additional information to the compiler that the memory allocation in this ``View`` has an alignment of 64. 
 
-Non-Member Types
-----------------
+Non-Member Type aliases
+^^^^^^^^^^^^^^^^^^^^^^^
 
 The following type aliases are also available in the ``Kokkos`` namespace.
 
@@ -82,12 +80,14 @@ The following type aliases are also available in the ``Kokkos`` namespace.
 .. cpp:type:: MemoryUnmanaged = Kokkos::MemoryTraits<Kokkos::Unmanaged>;
 .. cpp:type:: MemoryRandomAccess = Kokkos::MemoryTraits<Kokkos::Unmanaged | Kokkos::RandomAccess>;
 
+Note that in order to use a managed View in a random access manner, the memory trait should be specified as ``Kokkos::MemoryTraits<Kokkos::RandomAccess>`` and not ``Kokkos::MemoryRandomAccess``.
+
 Examples
---------
+^^^^^^^^
 
 .. code-block:: cpp
 
-   Kokkos::View<DayaType, LayoutType, MemorySpace, Kokkos::MemoryTraits<SomeTrait | SomeOtherTrait> > my_view;
+   Kokkos::View<DayaType, LayoutType, MemorySpace, Kokkos::MemoryTraits<SomeFlag | SomeOtherFlag> > my_view;
 
 Example MemoryTraits type: ``Kokkos::MemoryTraits<Kokkos::Unmanaged | Kokkos::RandomAccess>``
 

@@ -11,10 +11,6 @@ Header File: ``<Kokkos_Core.hpp>``
 
 .. |ProgrammingGuide| replace:: Programming Guide
 
-.. _MemoryTraits: memoryTraits.html
-
-.. |MemoryTraits| replace:: MemoryTraits
-
 Class Interface
 ---------------
 
@@ -60,7 +56,7 @@ Class Interface
 
       If omitted the default memory space of the default execution space is used (i.e. :cpp:expr:`DefaultExecutionSpace::memory_space`)
 
-   :tparam |MemoryTraits|_: Sets access properties via enum parameters for the class template ``Kokkos::MemoryTraits<>``. Possible template parameters are bitwise OR of the following flags: 
+   :tparam MemoryTraits: Sets access properties via enum parameters for the struct template :cpp:struct:`MemoryTraits`. Possible template parameters are bitwise OR of the following flags: 
 
       - ``Unmanaged``
       - ``RandomAccess``
@@ -68,7 +64,7 @@ Class Interface
       - ``Restrict``
       - ``Aligned``
 
-      See |ProgrammingGuide|_ also for further information.
+      See the sub-section on memory access traits in the |ProgrammingGuide|_ also for further information.
 
 ..
    Pushing a "namespace" here; this doesn't create a namespace entity but tells Sphinx that everything between here and the pop is part of the View class.
