@@ -12,7 +12,7 @@ Description
 ``complex`` is a class template for representing and manipulating complex numbers.
 
 * This is intended as a replacement for ``std::complex<T>``.
-* If ``z`` has type ``Kokkos::complex<T>``, casting such as ``reinterpret_cast<T(&)[2](z)`` lead to undefined behavior.  Note: This differs from ``std::complex``.
+* Note: If ``z`` has type ``Kokkos::complex<T>``, casting such as ``reinterpret_cast<T(&)[2]>(z)`` leads to undefined behavior (this differs from ``std::complex``).
 
 Interface
 ---------
@@ -61,13 +61,14 @@ Interface
   Initializes the real component to ``r`` and the imaginary component to ``i``.
 
   .. deprecated:: 4.0.0
+  .. cppkokkos:function:: template<class U> complex(const volatile complex<U>&) noexcept
   .. cppkokkos:function:: void operator=(const complex&) volatile noexcept
   .. cppkokkos:function:: volatile complex& operator=(const volatile complex&) volatile noexcept
   .. cppkokkos:function:: complex& operator=(const volatile complex&) noexcept
   .. cppkokkos:function:: void operator=(const volatile T&) noexcept
   .. cppkokkos:function:: void operator=(const T&) volatile noexcept
 
-  Note: These have templated implementations so as not to be copy assignment operators.
+  Note: The assignment operators have templated implementations so as not to be copy assignment operators.
 
   .. rubric:: Public Member Functions
 
@@ -77,8 +78,6 @@ Interface
 
   .. cppkokkos:function:: constexpr T& real() noexcept
   .. cppkokkos:function:: constexpr T real() const noexcept
-  .. cppkokkos:function:: [[deprecated("in version 4.0.0")]] volatile T& real() volatile noexcept
-  .. cppkokkos:function:: [[deprecated("in version 4.0.0")]] T real() const volatile noexcept
 
   :return: The value of the real component.
 
@@ -88,11 +87,44 @@ Interface
 
   .. cppkokkos:function:: constexpr T& imag() noexcept
   .. cppkokkos:function:: constexpr T imag() const noexcept
-  .. cppkokkos:function:: [[deprecated("in version 4.0.0")]] volatile T& imag() volatile noexcept
-  .. cppkokkos:function:: [[deprecated("in version 4.0.0")]] T imag() const volatile noexcept
 
   :return: The value of the imaginary component.
 
   .. cppkokkos:function:: constexpr void imag(T i) noexcept
 
   Assigns ``i`` to the imaginary component.
+
+  .. cppkokkos:function:: constexpr complex& operator+=(complex v) noexcept
+  .. cppkokkos:function:: constexpr complex& operator+=(T v) noexcept
+
+  Adds the complex value ``complex(v)`` to the complex value ``*this`` and stores the sum in ``*this``.
+
+  .. cppkokkos:function:: constexpr complex& operator-=(complex v) noexcept
+  .. cppkokkos:function:: constexpr complex& operator-=(T v) noexcept
+
+  Subtracts the complex value ``complex(v)`` from the complex value ``*this`` and stores the difference in ``*this``.
+
+  .. cppkokkos:function:: constexpr complex& operator*=(complex v) noexcept
+  .. cppkokkos:function:: constexpr complex& operator*=(T v) noexcept
+
+  Multiplies the complex value ``complex(v)`` by the complex value ``*this`` and stores the product in ``*this``.
+
+  .. cppkokkos:function:: constexpr complex& operator/=(complex v) noexcept(noexcept(T{}/T{}))
+  .. cppkokkos:function:: constexpr complex& operator/=(T v) noexcept(noexcept(T{}/T{}))
+
+  Divides the complex value ``complex(v)`` into the complex value ``*this`` and stores the quotient in ``*this``.
+
+  .. deprecated:: 4.0.0
+  .. cppkokkos:function:: volatile T& real() volatile noexcept
+  .. cppkokkos:function:: T real() const volatile noexcept
+  .. cppkokkos:function:: volatile T& imag() volatile noexcept
+  .. cppkokkos:function:: T imag() const volatile noexcept
+  .. cppkokkos:function:: void operator+=(const volatile complex& v) volatile noexcept
+  .. cppkokkos:function:: void operator+=(const volatile T& v) volatile noexcept
+  .. cppkokkos:function:: void operator-=(const volatile complex& v) volatile noexcept
+  .. cppkokkos:function:: void operator-=(const volatile T& v) volatile noexcept
+  .. cppkokkos:function:: void operator*=(const volatile complex& v) volatile noexcept
+  .. cppkokkos:function:: void operator*=(const volatile T& v) volatile noexcept
+  .. cppkokkos:function:: void operator/=(const volatile complex& v) volatile noexcept(noexcept(T{}/T{}))
+  .. cppkokkos:function:: void operator/=(const volatile T& v) volatile noexcept(noexcept(T{}/T{}))
+
