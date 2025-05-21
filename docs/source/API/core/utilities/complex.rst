@@ -188,6 +188,35 @@ ____________________
 
   :return: ``o << std::complex(x)``
 
+  .. cpp:function:: template<typename T> T real(complex<T> x) noexcept
+
+  :return: ``x.real()``
+
+  .. cpp:function:: template<typename T> T imag(complex<T> x) noexcept
+
+  :return: ``x.imag()``
+
+  .. cpp:function:: template<typenmame T> complex<T> polar(T rho, T theta = T())
+
+  :return: The ``complex`` value corresponding to a complex number whose magnitude  is ``rho`` and whose phase angle is ``theta``.
+
+  .. cpp:function:: template<typename T> T abs(complex<T> x)
+
+  :return: The magnitude of ``x``.
+
+  TODO pow
+
+  .. cpp:function:: template<typename T> complex<T> sqrt(complex<T> x)
+
+  :return: The complex square root of ``x``, in the range of the right half-plane.
+
+  .. cpp:function:: template<typename T> complex<T> conj(complex<T> x) noexcept
+
+  :return: The complex conjugate of ``x``.
+
+  TODO conj(ArithmeticType)
+
+
   .. cpp:function:: template<size_t I, typename T> constexpr T& get(complex<T>& z) noexcept
   .. cpp:function:: template<size_t I, typename T> constexpr T&& get(complex<T>&& z) noexcept
   .. cpp:function:: template<size_t I, typename T> constexpr const T& get(const complex<T>& z) noexcept
