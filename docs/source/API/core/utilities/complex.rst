@@ -147,11 +147,19 @@ ____________________
 
   :return: ``!(x == y)``
 
+  .. cpp:function:: template<typename T> complex<T> operator+(complex<T> x) noexcept
+
+  :return: ``x``
+
   .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator+(complex<T1> x, complex<T2> y) noexcept
   .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator+(complex<T1> x, T2 y) noexcept
   .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator+(T1 x, complex<T2> y) noexcept
 
   :return: The complex value ``complex(x)`` added to the complex value ``complex(y)``.
+
+  .. cpp:function:: template<typename T> complex<T> operator-(complex<T> x) noexcept
+
+  :return: ``complex(-x.real(), -x.imag())``
 
   .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator-(complex<T1> x, complex<T2> y) noexcept
   .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator-(complex<T1> x, T2 y) noexcept
@@ -171,6 +179,14 @@ ____________________
   .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator/(T1 x, complex<T2> y) noexcept
 
   :return: The complex value ``complex(y)`` divided into the complex value ``complex(x)``.
+
+  .. cpp:function:: template<typename T> std::istream& operator>>(std::ostream& i, complex<T>& x)
+
+  Extracts a complex number `x` of the form: ``u``, ``(u)`` or ``(u,v)`` where ``u`` is the real part and ``v`` is the imaginary part and returns ``i``.
+
+  .. cpp:function:: template<typename T> std::ostream& operator<<(std::ostream& o, complex<T> x)
+
+  :return: ``o << std::complex(x)``
 
   .. cpp:function:: template<size_t I, typename T> constexpr T& get(complex<T>& z) noexcept
   .. cpp:function:: template<size_t I, typename T> constexpr T&& get(complex<T>&& z) noexcept
