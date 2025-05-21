@@ -128,3 +128,18 @@ Interface
   .. cpp:function:: void operator/=(const volatile complex& v) volatile noexcept(noexcept(T{}/T{}))
   .. cpp:function:: void operator/=(const volatile T& v) volatile noexcept(noexcept(T{}/T{}))
 
+Non-Member Functions
+____________________
+
+  .. cpp:function:: template<size_t I, typename RealType> constexpr RealType& get(complex<RealType>& z) noexcept
+  .. cpp:function:: template<size_t I, typename RealType> constexpr RealType&& get(complex<RealType>&& z) noexcept
+  .. cpp:function:: template<size_t I, typename RealType> constexpr const RealType& get(const complex<RealType>& z) noexcept
+  .. cpp:function:: template<size_t I, typename RealType> constexpr const RealType&& get(complex<RealType>&& z) noexcept
+
+  Tuple protocol / structured binding support.
+
+  :return: if ``I`` == 0 returns a reference to the real component of ``z``;
+           if ``I`` == 1 returns a reference the imaginary component of ``z``.
+
+
+
