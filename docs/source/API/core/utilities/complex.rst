@@ -131,6 +131,22 @@ Interface
 Non-Member Functions
 ____________________
 
+  .. cpp:function:: template<typename RealType1, typename RealType2> bool operator==(complex<RealType1> x, complex<RealType2> y) noexcept
+  .. cpp:function:: template<typename RealType1, typename RealType2> bool operator==(complex<RealType1> x, RealType2 y) noexcept
+  .. cpp:function:: template<typename RealType1, typename RealType2> bool operator==(RealType1 x, complex<RealType2> y) noexcept
+  .. cpp:function:: template<typename RealType1, typename RealType2> bool operator==(complex<RealType1> x, std::complex<RealType2> y) noexcept
+  .. cpp:function:: template<typename RealType1, typename RealType2> bool operator==(std::complex<RealType1> x, complex<RealType2> y) noexcept
+
+  :return: ``true`` if and only if the real component of ``complex(x)`` equals the real component of ``complex(y)`` and the imaginary component of ``complex(x)`` equals the imaginary component of ``complex(y)``.
+
+  .. cpp:function:: template<typename RealType1, typename RealType2> bool operator!=(complex<RealType1> x, complex<RealType2> y) noexcept
+  .. cpp:function:: template<typename RealType1, typename RealType2> bool operator!=(complex<RealType1> x, RealType2 y) noexcept
+  .. cpp:function:: template<typename RealType1, typename RealType2> bool operator!=(RealType1 x, complex<RealType2> y) noexcept
+  .. cpp:function:: template<typename RealType1, typename RealType2> bool operator!=(complex<RealType1> x, std::complex<RealType2> y) noexcept
+  .. cpp:function:: template<typename RealType1, typename RealType2> bool operator!=(std::complex<RealType1> x, complex<RealType2> y) noexcept
+
+  :return: ``!(x == y)``
+
   .. cpp:function:: template<size_t I, typename RealType> constexpr RealType& get(complex<RealType>& z) noexcept
   .. cpp:function:: template<size_t I, typename RealType> constexpr RealType&& get(complex<RealType>&& z) noexcept
   .. cpp:function:: template<size_t I, typename RealType> constexpr const RealType& get(const complex<RealType>& z) noexcept
@@ -139,7 +155,7 @@ ____________________
   Tuple protocol / structured binding support.
 
   :return: if ``I`` == 0 returns a reference to the real component of ``z``;
-           if ``I`` == 1 returns a reference the imaginary component of ``z``.
+           if ``I`` == 1 returns a reference to the imaginary component of ``z``.
 
 
 
