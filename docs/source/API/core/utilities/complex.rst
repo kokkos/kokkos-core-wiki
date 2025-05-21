@@ -131,26 +131,51 @@ Interface
 Non-Member Functions
 ____________________
 
-  .. cpp:function:: template<typename RealType1, typename RealType2> bool operator==(complex<RealType1> x, complex<RealType2> y) noexcept
-  .. cpp:function:: template<typename RealType1, typename RealType2> bool operator==(complex<RealType1> x, RealType2 y) noexcept
-  .. cpp:function:: template<typename RealType1, typename RealType2> bool operator==(RealType1 x, complex<RealType2> y) noexcept
-  .. cpp:function:: template<typename RealType1, typename RealType2> bool operator==(complex<RealType1> x, std::complex<RealType2> y) noexcept
-  .. cpp:function:: template<typename RealType1, typename RealType2> bool operator==(std::complex<RealType1> x, complex<RealType2> y) noexcept
+  .. cpp:function:: template<typename T1, typename T2> bool operator==(complex<T1> x, complex<T2> y) noexcept
+  .. cpp:function:: template<typename T1, typename T2> bool operator==(complex<T1> x, T2 y) noexcept
+  .. cpp:function:: template<typename T1, typename T2> bool operator==(T1 x, complex<T2> y) noexcept
+  .. cpp:function:: template<typename T1, typename T2> bool operator==(complex<T1> x, std::complex<T2> y) noexcept
+  .. cpp:function:: template<typename T1, typename T2> bool operator==(std::complex<T1> x, complex<T2> y) noexcept
 
   :return: ``true`` if and only if the real component of ``complex(x)`` equals the real component of ``complex(y)`` and the imaginary component of ``complex(x)`` equals the imaginary component of ``complex(y)``.
 
-  .. cpp:function:: template<typename RealType1, typename RealType2> bool operator!=(complex<RealType1> x, complex<RealType2> y) noexcept
-  .. cpp:function:: template<typename RealType1, typename RealType2> bool operator!=(complex<RealType1> x, RealType2 y) noexcept
-  .. cpp:function:: template<typename RealType1, typename RealType2> bool operator!=(RealType1 x, complex<RealType2> y) noexcept
-  .. cpp:function:: template<typename RealType1, typename RealType2> bool operator!=(complex<RealType1> x, std::complex<RealType2> y) noexcept
-  .. cpp:function:: template<typename RealType1, typename RealType2> bool operator!=(std::complex<RealType1> x, complex<RealType2> y) noexcept
+  .. cpp:function:: template<typename T1, typename T2> bool operator!=(complex<T1> x, complex<T2> y) noexcept
+  .. cpp:function:: template<typename T1, typename T2> bool operator!=(complex<T1> x, T2 y) noexcept
+  .. cpp:function:: template<typename T1, typename T2> bool operator!=(T1 x, complex<T2> y) noexcept
+  .. cpp:function:: template<typename T1, typename T2> bool operator!=(complex<T1> x, std::complex<T2> y) noexcept
+  .. cpp:function:: template<typename T1, typename T2> bool operator!=(std::complex<T1> x, complex<T2> y) noexcept
 
   :return: ``!(x == y)``
 
-  .. cpp:function:: template<size_t I, typename RealType> constexpr RealType& get(complex<RealType>& z) noexcept
-  .. cpp:function:: template<size_t I, typename RealType> constexpr RealType&& get(complex<RealType>&& z) noexcept
-  .. cpp:function:: template<size_t I, typename RealType> constexpr const RealType& get(const complex<RealType>& z) noexcept
-  .. cpp:function:: template<size_t I, typename RealType> constexpr const RealType&& get(complex<RealType>&& z) noexcept
+  .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator+(complex<T1> x, complex<T2> y) noexcept
+  .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator+(complex<T1> x, T2 y) noexcept
+  .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator+(T1 x, complex<T2> y) noexcept
+
+  :return: The complex value ``complex(x)`` added to the complex value ``complex(y)``.
+
+  .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator-(complex<T1> x, complex<T2> y) noexcept
+  .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator-(complex<T1> x, T2 y) noexcept
+  .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator-(T1 x, complex<T2> y) noexcept
+
+  :return: The complex value ``complex(y)`` substracted from the complex value ``complex(x)``.
+
+  .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator*(complex<T1> x, complex<T2> y) noexcept
+  .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator*(complex<T1> x, T2 y) noexcept
+  .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator*(T1 x, complex<T2> y) noexcept
+  .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator*(std::complex<T1> x, complex<T2> y) noexcept
+
+  :return: The complex value ``complex(x)`` multiplied by the complex value ``complex(y)``.
+
+  .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator/(complex<T1> x, complex<T2> y) noexcept
+  .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator/(complex<T1> x, T2 y) noexcept
+  .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator/(T1 x, complex<T2> y) noexcept
+
+  :return: The complex value ``complex(y)`` divided into the complex value ``complex(x)``.
+
+  .. cpp:function:: template<size_t I, typename T> constexpr T& get(complex<T>& z) noexcept
+  .. cpp:function:: template<size_t I, typename T> constexpr T&& get(complex<T>&& z) noexcept
+  .. cpp:function:: template<size_t I, typename T> constexpr const T& get(const complex<T>& z) noexcept
+  .. cpp:function:: template<size_t I, typename T> constexpr const T&& get(complex<T>&& z) noexcept
 
   Tuple protocol / structured binding support.
 
