@@ -233,3 +233,16 @@ Advanced: Configuring Against the Build Directory
 (For experts only) You can configure your project directly against the
 ``<builddir>/cmake_packages/`` directory in the out-of-tree build, similar to
 using an install tree.  This can be useful for development purposes.
+
+Optional: Testing your Kokkos Build
+-----------------------------------
+
+To verify your Kokkos build and ensure everything is working as expected, you
+can configure and run the internal test suite.
+
+To do this, configure with ``-DKokkos_ENABLE_TESTS=ON``, build, and then run
+the tests with:
+
+.. code-block:: sh
+
+    ctest --test-dir builddir --output-on-failure
