@@ -128,8 +128,7 @@ Interface
   .. cpp:function:: void operator/=(const volatile complex& v) volatile noexcept(noexcept(T{}/T{}))
   .. cpp:function:: void operator/=(const volatile T& v) volatile noexcept(noexcept(T{}/T{}))
 
-Non-Member Functions
-____________________
+  .. rubric:: Non-Member Functions
 
   .. cpp:function:: template<typename T1, typename T2> bool operator==(complex<T1> x, complex<T2> y) noexcept
   .. cpp:function:: template<typename T1, typename T2> bool operator==(complex<T1> x, T2 y) noexcept
@@ -216,6 +215,66 @@ ____________________
 
   TODO conj(ArithmeticType)
 
+  .. cpp:function:: template<typename T> complex<T> exp(complex<T> x)
+  .. cpp:function:: template<typename T> complex<T> exp(std::complex<T> x)
+
+  :return: The complex base-e exponential of ``complex(x)``.
+
+  .. cpp:function:: template<typename T> complex<T> log(complex<T> x)
+
+  :return: The complex natural (base-e) logarithm of x.
+
+  .. cpp:function:: template<typename T> complex<T> log10(complex<T> x)
+
+  :return: The complex common (base-10) logarithm of ``x``, defined as ``log(x) / log(10)``.
+
+  .. cpp:function:: template<typename T> complex<T> sin(complex<T> x)
+
+  :return: The complex sine of ``x``.
+
+  .. cpp:function:: template<typename T> complex<T> cos(complex<T> x)
+
+  :return: The complex cosine of ``x``.
+
+  .. cpp:function:: template<typename T> complex<T> tan(complex<T> x)
+
+  :return: The complex tangent of ``x``.
+
+  .. cpp:function:: template<typename T> complex<T> sinh(complex<T> x)
+
+  :return: The complex hyperbolic sine of ``x``.
+
+  .. cpp:function:: template<typename T> complex<T> cosh(complex<T> x)
+
+  :return: The complex hyperbolic cosine of ``x``.
+
+  .. cpp:function:: template<typename T> complex<T> tanh(complex<T> x)
+
+  :return: The complex hyperbolic tangent of ``x``.
+
+  .. cpp:function:: template<typename T> complex<T> asinh(complex<T> x)
+
+  :return: The complex arc hyperbolic sine of ``x``.
+
+  .. cpp:function:: template<typename T> complex<T> acosh(complex<T> x)
+
+  :return: The complex arc hyperbolic cosine of ``x``.
+
+  .. cpp:function:: template<typename T> complex<T> atanh(complex<T> x)
+
+  :return: The complex arc hyperbolic tangent of ``x``.
+
+  .. cpp:function:: template<typename T> complex<T> asin(complex<T> x)
+
+  :return: The complex arc sine of ``x``.
+
+  .. cpp:function:: template<typename T> complex<T> acos(complex<T> x)
+
+  :return: The complex arc cosine of ``x``.
+
+  .. cpp:function:: template<typename T> complex<T> atan(complex<T> x)
+
+  :return: The complex arc tangent of ``x``.
 
   .. cpp:function:: template<size_t I, typename T> constexpr T& get(complex<T>& z) noexcept
   .. cpp:function:: template<size_t I, typename T> constexpr T&& get(complex<T>&& z) noexcept
@@ -224,8 +283,8 @@ ____________________
 
   Tuple protocol / structured binding support.
 
-  :return: if ``I`` == 0 returns a reference to the real component of ``z``;
-           if ``I`` == 1 returns a reference to the imaginary component of ``z``.
+  :return: A reference to the real part of ``z`` if ``I == 0`` is ``true``;
+           a reference to the imaginary part of ``z`` if ``I == 1`` is ``true``.
 
 
 
