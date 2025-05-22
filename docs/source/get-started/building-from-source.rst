@@ -226,14 +226,6 @@ The ``--prefix <prefix>`` option specifies the installation directory.  If
 omitted, Kokkos will be installed to a default location, often ``/usr/local``
 (**not recommended**).
 
-
-Advanced: Configuring Against the Build Directory
--------------------------------------------------
-
-(For experts only) You can configure your project directly against the
-``<builddir>/cmake_packages/`` directory in the out-of-tree build, similar to
-using an install tree.  This can be useful for development purposes.
-
 Optional: Testing your Kokkos Build
 -----------------------------------
 
@@ -246,3 +238,11 @@ the tests with:
 .. code-block:: sh
 
     ctest --test-dir builddir --output-on-failure
+
+
+Advanced: Configuring Against the Build Directory
+-------------------------------------------------
+
+(For experts only) You can configure your project directly against the
+``<builddir>/cmake_packages/`` directory in the out-of-tree build, similar to
+using an install tree.  This can be useful for development purposes.
