@@ -226,6 +226,19 @@ The ``--prefix <prefix>`` option specifies the installation directory.  If
 omitted, Kokkos will be installed to a default location, often ``/usr/local``
 (**not recommended**).
 
+Optional: Testing your Kokkos Build
+-----------------------------------
+
+To verify your Kokkos build and ensure everything is working as expected, you
+can configure and run the internal test suite.
+
+To do this, configure with ``-DKokkos_ENABLE_TESTS=ON``, build, and then run
+the tests with:
+
+.. code-block:: sh
+
+    ctest --test-dir builddir --output-on-failure
+
 
 Advanced: Configuring Against the Build Directory
 -------------------------------------------------
