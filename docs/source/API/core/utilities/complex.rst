@@ -109,8 +109,8 @@ Interface
 
   Multiplies the complex value ``complex(v)`` by the complex value ``*this`` and stores the product in ``*this``.
 
-  .. cpp:function:: constexpr complex& operator/=(complex v) noexcept(noexcept(T{}/T{}))
-  .. cpp:function:: constexpr complex& operator/=(T v) noexcept(noexcept(T{}/T{}))
+  .. cpp:function:: constexpr complex& operator/=(complex v) noexcept
+  .. cpp:function:: constexpr complex& operator/=(T v) noexcept
 
   Divides the complex value ``complex(v)`` into the complex value ``*this`` and stores the quotient in ``*this``.
 
@@ -189,11 +189,11 @@ Interface
 
   .. cpp:function:: template<typename T> T real(complex<T> x) noexcept
 
-  :return: ``x.real()``
+  :return: ``x.real()``.
 
   .. cpp:function:: template<typename T> T imag(complex<T> x) noexcept
 
-  :return: ``x.imag()``
+  :return: ``x.imag()``.
 
   .. cpp:function:: template<typenmame T> complex<T> polar(T rho, T theta = T())
 
@@ -203,7 +203,15 @@ Interface
 
   :return: The magnitude of ``x``.
 
-  TODO pow
+  .. cpp:function:: template<typename T1, typename T2> complex<U> pow(complex<T1> x, complex<T2> y)
+  .. cpp:function:: template<typename T1, typename T2> complex<U> pow(complex<T1> x, T2 y)
+  .. cpp:function:: template<typename T1, typename T2> complex<U> pow(T1 x, complex<T2> y)
+
+  :return: The complex power of base ``x`` raised to the ``y``-th power,
+           defined as ``exp(y * log(x))``.
+           ``U`` is ``float`` if ``T1`` and ``T2`` are ``float``;
+           otherwise ``U`` is ``long double`` if ``T1`` or ``T2`` is ``long double``;
+           otherwise ``U`` is ``double``.
 
   .. cpp:function:: template<typename T> complex<T> sqrt(complex<T> x)
 
@@ -212,8 +220,6 @@ Interface
   .. cpp:function:: template<typename T> complex<T> conj(complex<T> x) noexcept
 
   :return: The complex conjugate of ``x``.
-
-  TODO conj(ArithmeticType)
 
   .. cpp:function:: template<typename T> complex<T> exp(complex<T> x)
   .. cpp:function:: template<typename T> complex<T> exp(std::complex<T> x)
