@@ -90,7 +90,7 @@ Execution Policies generally accept compile time arguments via template paramete
 
     * * WorkTag
       * ``SomeClass``
-      * Specify the work tag type used to call the functor operator. Any arbitrary type defaults to ``void``.
+      * Specify the work tag type used to call the functor operator. Can be any arbitrary type. Defaults to ``void``.
 
 
 .. toctree::
