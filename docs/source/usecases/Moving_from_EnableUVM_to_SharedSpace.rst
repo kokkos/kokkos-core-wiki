@@ -62,7 +62,7 @@ Below is an example of a transition:
    int main (){
      Kokkos::initialize();
      {
-       static_assert(Kokkos::has_shared_space(),"code only works on backends with SharedSpace");
+       static_assert(Kokkos::has_shared_space,"code only works on backends with SharedSpace");
 
        unsigned int N = 100;
        Kokkos::View<int*,Kokkos::SharedSpace> myView("myView",N);
