@@ -351,7 +351,7 @@ Description
 
    .. cpp:function:: static constexpr size_t required_allocation_size(size_t N0 = 0, size_t N1 = 0, \
 			   size_t N2 = 0, size_t N3 = 0, size_t N4 = 0, \
-			   size_t N5 = 0, size_t N6 = 0, size_t N7 = 0, size_t N8 = 0);
+			   size_t N5 = 0, size_t N6 = 0);
 
        Returns the number of bytes necessary for an unmanaged view of the provided dimensions. This function is only valid if ``array_layout::is_regular == true``.
 
