@@ -56,8 +56,8 @@ SYCL
   When using these, Kokkos doesn't control the kernel launch and thus the user has to make sure that all arguments
   that are forwarded to the TPL satisfy the sycl::is_device_copyable trait to avoid compiler errors. This holds true in particular
   for comparators used with Kokkos::sort in Kokkos versions prior to 4.7 and oneDPL versions prior to 2022.8.0.
-  The best advice to give is to make sure the respective parameters are trivially-copyable, e.g., by using raw pointers instead of Kokkos::Views
-  or specializing sycl::is_device_copyable.
+  The best advice to give is to make sure the respective parameters are trivially-copyable, e.g., by using raw pointers instead of Kokkos::Views.
+  If that's not possible and the oneDPL version is at least 2022.8.0, specializing sycl::is_device_copyable provides another workaround.
 
   .. code-block:: cpp
 
