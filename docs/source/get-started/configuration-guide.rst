@@ -590,6 +590,12 @@ Kokkos will attempt to autodetect the architecture flag at configuration time.
       * L4, L40
       * (since Kokkos 4.1)
 
+    * * ``Kokkos_ARCH_AMPERE87``
+      * Ampere
+      * 8.7
+      * Jetson Orin
+      * (since Kokkos 4.7)
+
     * * ``Kokkos_ARCH_AMPERE86``
       * Ampere
       * 8.6
