@@ -553,9 +553,9 @@ Data Layout, Dimensions, Strides
 .. cpp:function:: static constexpr size_t required_allocation_size(size_t N0=0, size_t N1=0, \
          size_t N2=0, size_t N3=0, \
          size_t N4=0, size_t N5=0, \
-         size_t N6=0, size_t N7=0, size_t N8 = 0);
+         size_t N6=0, size_t N7=0);
    
-   :param N0, N1, N2, N3, N4, N5, N6, N7, N8: the dimensions to query
+   :param N0, N1, N2, N3, N4, N5, N6, N7: the dimensions to query
    :return: the number of bytes necessary for an unmanaged :cpp:class:`View` of the provided dimensions.
 
    .. rubric:: Requirements:
