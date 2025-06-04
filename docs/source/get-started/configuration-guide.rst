@@ -245,6 +245,10 @@ Backend-specific options
       * Enable asynchronous dispatch for the HPX backend
       * ``ON``
 
+    * * ``Kokkos_ENABLE_COMPILE_AS_CMAKE_LANGUAGE``
+      * Build with the CMake language feature (CUDA or HIP only). For info see `language issues <../known-issues.html>`_
+      * ``OFF``
+
 
 ``Kokkos_ENABLE_CUDA_LAMBDA`` default value is ``OFF`` until 3.7 and ``ON`` since 4.0
 

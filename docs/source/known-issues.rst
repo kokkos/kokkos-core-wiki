@@ -4,6 +4,18 @@ Known issues
 .. role:: cpp(code)
     :language: cpp
 
+
+Kokkos_ENABLE_COMPILE_AS_CMAKE_LANGUAGE
+=======================================
+
+Building with the CMake language feature can cause problems in downstream libraries/applications.
+CMake uses the file endings to determine the language a file should be compiled with. Since Kokkos files are named `cpp` and `hpp`, they are associated with `CXX` in CMake.
+This implies that source and header files that use Kokkos might need to be redefined to be treated as another language. Otherwise, the language is detected based on the file endings. This might lead to files not being able to compile (e.g. using Kokkos in a `.cpp` file instead of a `.cu` file leads to CMake detecting `CXX` instead of `CUDA`).
+Without specifying the language the compilation might fail depending on the capabilities of the `CXX` compiler to compile device code.
+Furthermore, the architecture needs to be specified for every target in accordance with what `Kokkos_ARCH_...` is set and not with `CMAKE_<LANG>_ARCHITECTURES`. This also implies only one architecture can be active.
+
+An example for marking the files accordingly can be found in `example/build_cmake_installed_kk_as_language`
+
 CUDA
 ====
 
@@ -25,11 +37,12 @@ CUDA
   like UCX, is partly due to the fact that `cudaMallocAsync` uses `cudaMemPool_t,` and the default memory pool
   does not support interprocess communication (IPC) without tweaking (https://developer.nvidia.com/blog/using-cuda-stream-ordered-memory-allocator-part-2/#interprocess_communication_support).
   The user should set up the default memory pool to properly support IPC (https://developer.nvidia.com/blog/using-cuda-stream-ordered-memory-allocator-part-2/#library_composability).
-  
+
   Therefore, from version 4.5, the default behavior for Kokkos is to preventively disable `cudaMallocAsync.`
 
 - CUDA 11.0 through 11.2 are not compatible with glibc 2.34 librt stubs. That issue is related to how the CMake package handles linking with librt. For more information please look at issue `#7512 <https://github.com/kokkos/kokkos/issues/7512>`_.
 
+- Building an application that uses Kokkos with Microsoft Visual Studio and the `Cuda` backend enabled, requires the use of the CMake language feature, see :ref:`keywords_enable_backend_specific_options`.
 
 HIP
 ===
