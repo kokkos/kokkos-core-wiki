@@ -23,13 +23,12 @@ Synopsis
 
    template<typename Scalar, typename Index, typename Space>
    struct MaxFirstLoc{
-       MaxFirstLoc(value_type& value_);
-       MaxFirstLoc(const result_view_type& value_);
-
        using reducer = MaxFirstLoc;
        using value_type = ValLocScalar<std::remove_cv_t<Scalar>, std::remove_cv_t<Index>>;
-       using result_view_type = Kokkos::View<value_type, Space>;
-       typedef Kokkos::View<value_type, Space> result_view_type;
+       using result_view_type = View<value_type, Space>;
+
+       MaxFirstLoc(value_type& value_);
+       MaxFirstLoc(const result_view_type& value_);
 
        void join(value_type& dest, const value_type& src) const;
        void init(value_type& val) const;
@@ -55,7 +54,7 @@ Interface
 
    .. cpp:type:: result_view_type
 
-      A ``Kokkos::View`` referencing the reduction result
+      A ``View`` referencing the reduction result
 
    .. rubric:: Constructors
 
@@ -75,8 +74,8 @@ Interface
 
    .. cpp:function:: void init(value_type& val) const;
 
-      Initialize ``val.val`` using the ``Kokkos::reduction_identity<Scalar>::max()`` method. The default implementation sets ``val=<TYPE>_MIN``.
-      Initialize ``val.loc`` using the ``Kokkos::reduction_identity<Index>::min()`` method. The default implementation sets ``val=<TYPE>_MAX``.
+      Initialize ``val.val`` using the ``reduction_identity<Scalar>::max()`` method. The default implementation sets ``val=<TYPE>_MIN``.
+      Initialize ``val.loc`` using the ``reduction_identity<Index>::min()`` method. The default implementation sets ``val=<TYPE>_MAX``.
 
    .. cpp:function:: value_type& reference() const;
 
@@ -96,10 +95,10 @@ Additional Information
 
 * ``MaxFirstLoc<T,I,S>::value_type`` is Specialization of ValLocScalar on non-const ``T`` and non-const ``I``
 
-* ``MaxFirstLoc<T,I,S>::result_view_type`` is ``Kokkos::View<T,S,Kokkos::MemoryTraits<Kokkos::Unmanaged>>``. Note that the S (memory space) must be the same as the space where the result resides.
+* ``MaxFirstLoc<T,I,S>::result_view_type`` is ``View<T,S,MemoryTraits<Unmanaged>>``. Note that the S (memory space) must be the same as the space where the result resides.
 
-* Requires: ``Scalar`` has ``operator =`` and ``operator >`` defined. ``Kokkos::reduction_identity<Scalar>::max()`` is a valid expression.
+* Requires: ``Scalar`` has ``operator =`` and ``operator >`` defined. ``reduction_identity<Scalar>::max()`` is a valid expression.
 
-* Requires: ``Index`` has ``operator =`` defined. ``Kokkos::reduction_identity<Index>::min()`` is a valid expression.
+* Requires: ``Index`` has ``operator =`` defined. ``reduction_identity<Index>::min()`` is a valid expression.
 
-* In order to use MaxFirstLoc with a custom type of either ``Scalar`` or ``Index``, a template specialization of ``Kokkos::reduction_identity<CustomType>`` must be defined. See `Built-In Reducers with Custom Scalar Types <../../../ProgrammingGuide/Custom-Reductions-Built-In-Reducers-with-Custom-Scalar-Types.html>`_ for details
+* In order to use MaxFirstLoc with a custom type of either ``Scalar`` or ``Index``, a template specialization of ``reduction_identity<CustomType>`` must be defined. See `Built-In Reducers with Custom Scalar Types <../../../ProgrammingGuide/Custom-Reductions-Built-In-Reducers-with-Custom-Scalar-Types.html>`_ for details
