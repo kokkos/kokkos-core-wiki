@@ -21,6 +21,8 @@ Reducer objects used in conjunction with `parallel_reduce <parallel-dispatch/par
      - Logical 'Or' reduction
    * - `Max <builtinreducers/Max.html>`__
      - Maximum reduction
+   * - `MaxFirstLoc <builtinreducers/MaxFirstLoc.html>`__
+     - Maximum reduction
    * - `MaxLoc <builtinreducers/MaxLoc.html>`__
      - Reduction providing maximum and an associated index
    * - `Min <builtinreducers/Min.html>`__
@@ -48,6 +50,7 @@ Reducer objects used in conjunction with `parallel_reduce <parallel-dispatch/par
    ./builtinreducers/LAnd
    ./builtinreducers/LOr
    ./builtinreducers/Max
+   ./builtinreducers/MaxFirstLoc
    ./builtinreducers/MaxLoc
    ./builtinreducers/Min
    ./builtinreducers/MinLoc

@@ -1,0 +1,105 @@
+``MaxFirstLoc``
+===============
+
+.. role:: cpp(code)
+    :language: cpp
+
+Specific implementation of `ReducerConcept <ReducerConcept.html>`_ storing the maximum value
+
+Header File: ``<Kokkos_Core.hpp>``
+
+Usage
+-----
+
+.. code-block:: cpp
+
+   MaxFirstLoc<T,I,S>::value_type result;
+   parallel_reduce(N,Functor,MaxFirstLoc<T,I,S>(result));
+
+Synopsis
+--------
+
+.. code-block:: cpp
+
+   template<typename Scalar, typename Index, typename Space>
+   struct MaxFirstLoc{
+       MaxFirstLoc(value_type& value_);
+       MaxFirstLoc(const result_view_type& value_);
+
+       using reducer = MaxFirstLoc;
+       using value_type = ValLocScalar<std::remove_cv_t<Scalar>, std::remove_cv_t<Index>>;
+       using result_view_type = Kokkos::View<value_type, Space>;
+       typedef Kokkos::View<value_type, Space> result_view_type;
+
+       void join(value_type& dest, const value_type& src) const;
+       void init(value_type& val) const;
+       value_type& reference() const;
+       result_view_type view() const;
+       bool references_scalar() const;
+   };
+
+Interface
+---------
+
+.. cpp:class:: template<class Scalar, class Index, class Space> MaxFirstLoc
+
+   .. rubric:: Public Types
+
+   .. cpp:type:: reducer
+
+      The self type.
+
+   .. cpp:type:: value_type
+
+      The reduction scalar type (specialization of `ValLocScalar <ValLocScalar.html>`_)
+
+   .. cpp:type:: result_view_type
+
+      A ``Kokkos::View`` referencing the reduction result
+
+   .. rubric:: Constructors
+
+   .. cpp:function:: MaxFirstLoc(value_type& value_);
+
+      Constructs a reducer which references a local variable as its result location.
+
+   .. cpp:function:: MaxFirstLoc(const result_view_type& value_);
+
+      Constructs a reducer which references a specific view as its result location.
+
+   .. rubric:: Public Member Functions
+
+   .. cpp:function:: void join(value_type& dest, const value_type& src) const;
+
+      Store maximum with index of ``src`` and ``dest`` into ``dest``: ``dest = (src.val > dest.val) ? src :dest;``.
+
+   .. cpp:function:: void init(value_type& val) const;
+
+      Initialize ``val.val`` using the ``Kokkos::reduction_identity<Scalar>::max()`` method. The default implementation sets ``val=<TYPE>_MIN``.
+      Initialize ``val.loc`` using the ``Kokkos::reduction_identity<Index>::min()`` method. The default implementation sets ``val=<TYPE>_MAX``.
+
+   .. cpp:function:: value_type& reference() const;
+
+      Returns a reference to the result provided in class constructor.
+
+   .. cpp:function:: result_view_type view() const;
+
+      Returns a view of the result place provided in class constructor.
+
+   .. cpp:function:: bool references_scalar() const;
+
+      Returns true if the reducer was constructed with a scalar;
+      returns false if the reducer was constructed with a view.
+
+Additional Information
+^^^^^^^^^^^^^^^^^^^^^^
+
+* ``MaxFirstLoc<T,I,S>::value_type`` is Specialization of ValLocScalar on non-const ``T`` and non-const ``I``
+
+* ``MaxFirstLoc<T,I,S>::result_view_type`` is ``Kokkos::View<T,S,Kokkos::MemoryTraits<Kokkos::Unmanaged>>``. Note that the S (memory space) must be the same as the space where the result resides.
+
+* Requires: ``Scalar`` has ``operator =`` and ``operator >`` defined. ``Kokkos::reduction_identity<Scalar>::max()`` is a valid expression.
+
+* Requires: ``Index`` has ``operator =`` defined. ``Kokkos::reduction_identity<Index>::min()`` is a valid expression.
+
+* In order to use MaxFirstLoc with a custom type of either ``Scalar`` or ``Index``, a template specialization of ``Kokkos::reduction_identity<CustomType>`` must be defined. See `Built-In Reducers with Custom Scalar Types <../../../ProgrammingGuide/Custom-Reductions-Built-In-Reducers-with-Custom-Scalar-Types.html>`_ for details

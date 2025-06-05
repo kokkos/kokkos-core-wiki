@@ -6,6 +6,7 @@ Kokkos provides Reducers for the most common reduction types:
 * [LAnd](../API/core/builtinreducers/LAnd): Do a logical “and” reduction
 * [LOr](../API/core/builtinreducers/LOr): Do a logical “or” reduction
 * [Max](../API/core/builtinreducers/Max): Finding the maximum value
+* [MaxFirstLoc](../API/core/builtinreducers/MaxLoc): Retrieve the maximum value and its first index position
 * [MaxLoc](../API/core/builtinreducers/MaxLoc): Retrieve the maximum value as well as its associated index
 * [Min](../API/core/builtinreducers/Min): Finding the minimum value
 * [MinLoc](../API/core/builtinreducers/MinLoc): Retrieve the minimum value as well as its associated index
