@@ -202,14 +202,14 @@ Scalar dot(View<const Scalar* , Device> a,
      std::is_same<typename Device::memory_space,
                            CudaUVMSpace>::value) {
     return call_cublas_dot(a.ptr_on_device(), b.ptr_on_device(),
-                           a.extent_0() );
+                           a.extent(0) );
   }
 #endif
 
 // Call CBlas on the host otherwise
   if(std::is_same<typename Device::memory_space,HostSpace>::value) {
     return call_cblas_dot(a.ptr_on_device(), b.ptr_on_device(),
-                          a.extent_0() );
+                          a.extent(0) );
   }
 }
 ```

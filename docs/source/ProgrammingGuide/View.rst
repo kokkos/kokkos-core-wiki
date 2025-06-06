@@ -372,14 +372,12 @@ Strides are accessed using the `stride` method. It takes a raw integer array, an
   size_t strides[3]
   a.stride (strides); // fill 'strides' with strides
 
-You may also refer to specific dimensions without a runtime parameter:
-
 .. code-block:: c++
 
-  const size_t n0 = a.extent_0 ();
-  const size_t n2 = a.extent_2 ();
+  const size_t n0 = a.extent (0);
+  const size_t n2 = a.extent (2);
 
-Note the return type of `extent_N()` is the `size_type` of the views memory space. This causes some issues if warning-free compilation should be achieved since it will typically be necessary to cast the return value. In particular, in cases where the `size_type` is more conservative than required, it can be beneficial to cast the value to `int` since signed 32-bit integers typically give the best performance when used as index types. In index heavy codes, this performance difference can be significant compared to using `size_t` since the vector length on many architectures is twice as long for 32 bit values as for 64 bit values and signed integers have less stringent overflow testing requirements than unsigned integers.
+Note the return type of `extent(N)` is the `size_type` of the views memory space. This causes some issues if warning-free compilation should be achieved since it will typically be necessary to cast the return value. In particular, in cases where the `size_type` is more conservative than required, it can be beneficial to cast the value to `int` since signed 32-bit integers typically give the best performance when used as index types. In index heavy codes, this performance difference can be significant compared to using `size_t` since the vector length on many architectures is twice as long for 32 bit values as for 64 bit values and signed integers have less stringent overflow testing requirements than unsigned integers.
 
 Users of the BLAS and LAPACK libraries may be familiar with the ideas of layout and stride. These libraries only accept matrices in column-major format. The stride between consecutive entries in the same column is 1, and the stride between consecutive entries in the same row is `LDA` ("leading dimension of the matrix A"). The number of rows may be less than `LDA`, but may not be greater.
 
@@ -695,7 +693,7 @@ The standard idiom for View is to pass it around using as few template parameter
     Kokkos::View<const double*, Kokkos::MemoryTraits<Kokkos::RandomAccess>> x_ra = x;
     typedef Kokkos::View<const size_t*>::size_type size_type;
       
-    Kokkos::parallel_for (y.extent_0 (), KOKKOS_LAMBDA (const size_type i) {
+    Kokkos::parallel_for (y.extent (0), KOKKOS_LAMBDA (const size_type i) {
       double y_i = y(i);
       for (size_t k = ptr(i); k < ptr(i+1); ++k) {
         y_i += val(k) * x_ra(ind(k));
