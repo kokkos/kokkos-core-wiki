@@ -1,5 +1,5 @@
 ``complex``
-===================
+===========
 
 .. role:: cpp(code)
     :language: cpp
@@ -40,7 +40,6 @@ Interface
   Default constructor zero initializes the real and imaginary components.
 
   .. cpp:function:: template<class U> complex(complex<U> z) noexcept
-
 
   Conversion constructor initializes the real component to ``static_cast<T>(z.real())`` and the imaginary component to ``static_cast<T>(z.imag())``.
 
