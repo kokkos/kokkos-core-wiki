@@ -19,7 +19,6 @@ Interface
 
 .. cpp:class:: template<class T> complex
 
-  .. rubric:: Template Parameters
 
   :tparam T: The type of the real and imaginary components.
 
