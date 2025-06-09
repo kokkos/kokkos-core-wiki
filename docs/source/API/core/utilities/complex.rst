@@ -33,7 +33,7 @@ Interface
 
   .. cpp:type:: value_type = T
 
-  .. rubric:: Constructors & Assignment Operators
+  .. rubric:: Constructors & Assignment Operators:
 
   .. cpp:function:: complex()
 
