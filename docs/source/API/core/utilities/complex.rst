@@ -41,7 +41,7 @@ Interface
 
   .. cpp:function:: template<class U> complex(complex<U> z) noexcept
 
-  Conversion constructor initializes the real component to ``static_cast<T>(z.real())`` and the imaginary component to ``static_cast<T>(z.imag())``.
+    Conversion constructor initializes the real component to ``static_cast<T>(z.real())`` and the imaginary component to ``static_cast<T>(z.imag())``.
 
   Constraints: ``U`` is convertible to ``T``.
 
