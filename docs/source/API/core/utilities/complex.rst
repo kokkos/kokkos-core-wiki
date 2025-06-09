@@ -37,7 +37,7 @@ Interface
 
   .. cpp:function:: complex()
 
-  Default constructor zero initializes the real and imaginary components.
+    Default constructor zero initializes the real and imaginary components.
 
   .. cpp:function:: template<class U> complex(complex<U> z) noexcept
 
