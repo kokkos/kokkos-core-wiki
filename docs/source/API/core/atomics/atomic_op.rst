@@ -34,9 +34,24 @@ Description
 
    * ``value``: value with which to combine the original value.
 
+.. cpp:function:: template<class T> void atomic_dec(T* ptr_to_value);
+
+   Atomically executes ``(*ptr_to_value)--`` or calls ``atomic_fetch_sub(ptr_to_value, T(-1))``.
+
+   * ``ptr_to_value``: address of the to be updated value.
+
 .. cpp:function:: template<class T> void atomic_decrement(T* const ptr_to_value);
 
    Atomically executes ``(*ptr_to_value)--`` or calls ``atomic_fetch_sub(ptr_to_value, T(-1))``.
+
+   * ``ptr_to_value``: address of the to be updated value.
+
+   .. deprecated:: 4.5
+      Use :cpp:func:`atomic_dec` instead.
+
+.. cpp:function:: template<class T> void atomic_inc(T* ptr_to_value);
+
+   Atomically executes ``(*ptr_to_value)++`` or calls ``atomic_fetch_add(ptr_to_value, T(1))``.
 
    * ``ptr_to_value``: address of the to be updated value.
 
@@ -45,6 +60,9 @@ Description
    Atomically executes ``(*ptr_to_value)++`` or calls ``atomic_fetch_add(ptr_to_value, T(1))``.
 
    * ``ptr_to_value``: address of the to be updated value.
+
+   .. deprecated:: 4.5
+      Use :cpp:func:`atomic_inc` instead.
 
 .. cpp:function:: template<class T> void atomic_max(T* const ptr_to_value, const T value);
 

@@ -48,7 +48,7 @@ Deprecated in Kokkos 4.5
    * duplicated functionality
 
 * ``atomic_increment``
-   * replacement: ``atoimc_inc``
+   * replacement: ``atomic_inc``
    * duplicated functionality
 
 * ``atomic_decremnent``
