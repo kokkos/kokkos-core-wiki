@@ -4,7 +4,8 @@
 .. role:: cpp(code)
     :language: cpp
 
-Specific implementation of `ReducerConcept <ReducerConcept.html>`_ storing the maximum value
+Specific implementation of `ReducerConcept <ReducerConcept.html>`_ storing the maximum value.
+If there are equivalent values, stores the smallest index.
 
 Header File: ``<Kokkos_Core.hpp>``
 
@@ -50,11 +51,11 @@ Interface
 
    .. cpp:type:: value_type
 
-      The reduction scalar type (specialization of `ValLocScalar <ValLocScalar.html>`_)
+      The reduction scalar type (specialization of `ValLocScalar <ValLocScalar.html>`_).
 
    .. cpp:type:: result_view_type
 
-      A ``View`` referencing the reduction result
+      A ``View`` referencing the reduction result.
 
    .. rubric:: Constructors
 
@@ -70,7 +71,7 @@ Interface
 
    .. cpp:function:: void join(value_type& dest, const value_type& src) const;
 
-      Store maximum with index of ``src`` and ``dest`` into ``dest``: ``dest = (src.val > dest.val) ? src :dest;``.
+      Store maximum with index of ``dest`` and ``src`` into ``dest``. If ``dest.val == src.val``, the location stored is ``std::min(dest.loc, src.loc)`` (the first one found).
 
    .. cpp:function:: void init(value_type& val) const;
 
@@ -87,8 +88,7 @@ Interface
 
    .. cpp:function:: bool references_scalar() const;
 
-      Returns true if the reducer was constructed with a scalar;
-      returns false if the reducer was constructed with a view.
+      :return: ``true`` if the reducer was constructed with a scalar; ``false`` if the reducer was constructed with a ``View``.
 
 Additional Information
 ^^^^^^^^^^^^^^^^^^^^^^
