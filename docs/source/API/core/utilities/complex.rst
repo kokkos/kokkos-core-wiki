@@ -28,7 +28,7 @@ Interface
 
   * Some types might not work with a specific backend (such as ``long double`` on CUDA or SYCL).
 
-  .. rubric:: Public Types
+  .. rubric:: Public Types:
 
   .. cpp:type:: value_type = T
 
