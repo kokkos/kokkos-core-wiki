@@ -67,7 +67,9 @@ Interface
   .. cpp:function:: void operator=(const volatile T&) noexcept
   .. cpp:function:: void operator=(const T&) volatile noexcept
 
-    Note: The assignment operators have templated implementations so as not to be copy assignment operators.
+    .. note::
+      
+      The assignment operators have templated implementations so as not to be copy assignment operators.
 
   .. rubric:: Public Member Functions:
 
