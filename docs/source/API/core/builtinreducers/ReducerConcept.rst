@@ -129,6 +129,7 @@ Kokkos provides a number of built-in reducers that automatically work with the i
 * `Kokkos::MaxFirstLoc <MaxFirstLoc.html>`_
 * `Kokkos::MaxLoc <MaxLoc.html>`_
 * `Kokkos::Min <Min.html>`_
+* `Kokkos::MinFirstLoc <MinFirstLoc.html>`_
 * `Kokkos::MinLoc <MinLoc.html>`_
 * `Kokkos::MinMax <MinMax.html>`_
 * `Kokkos::MinMaxLoc <MinMaxLoc.html>`_

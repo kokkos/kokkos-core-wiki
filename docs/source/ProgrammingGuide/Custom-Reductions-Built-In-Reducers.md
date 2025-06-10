@@ -6,9 +6,10 @@ Kokkos provides Reducers for the most common reduction types:
 * [LAnd](../API/core/builtinreducers/LAnd): Do a logical “and” reduction
 * [LOr](../API/core/builtinreducers/LOr): Do a logical “or” reduction
 * [Max](../API/core/builtinreducers/Max): Finding the maximum value
-* [MaxFirstLoc](../API/core/builtinreducers/MaxLoc): Retrieve the maximum value and its first index position
+* [MaxFirstLoc](../API/core/builtinreducers/MaxFirstLoc): Retrieve the maximum value and its smallest index position
 * [MaxLoc](../API/core/builtinreducers/MaxLoc): Retrieve the maximum value as well as its associated index
 * [Min](../API/core/builtinreducers/Min): Finding the minimum value
+* [MaxFirstLoc](../API/core/builtinreducers/MinFirstLoc): Retrieve the minimum value and its smallest index position
 * [MinLoc](../API/core/builtinreducers/MinLoc): Retrieve the minimum value as well as its associated index
 * [MinMax](../API/core/builtinreducers/MinMax): Finding the minimum and the maximum value
 * [MinMaxLoc](../API/core/builtinreducers/MinMaxLoc): Find both the maximum and minimum value as well as their associated indices
@@ -45,7 +46,7 @@ Kokkos::parallel_reduce( "MinReduce", N, KOKKOS_LAMBDA (const int& x, double& lm
 printf("Min: %lf\n", min);
 ```
 
-For the [`MinLoc`](../API/core/builtinreducers/MinLoc), [`MaxLoc`](../API/core/builtinreducers/MaxLoc) and [`MinMaxLoc`](../API/core/builtinreducers/MinMaxLoc) reducers the reduction type is a complex scalar type which is accessible through a `value_type` typedef. 
+For the [`MinFirstLoc`](../API/core/builtinreducers/MinLoc), [`MinLoc`](../API/core/builtinreducers/MinLoc), [`MaxFirstLoc`](../API/core/builtinreducers/MaxFirstLoc), [`MaxLoc`](../API/core/builtinreducers/MaxLoc) and [`MinMaxLoc`](../API/core/builtinreducers/MinMaxLoc) reducers the reduction type is a complex scalar type which is accessible through a `value_type` typedef. 
 [`MinLoc`](../API/core/builtinreducers/MinLoc) and [`MaxLoc`](../API/core/builtinreducers/MaxLoc) have value types which contain a `val` and `loc` member to store the reduction value and the index respectively. Note that index (`loc`) can be a struct itself, for example to store a multidimensional index result (see later). 
 
 ```c++
