@@ -22,9 +22,9 @@ Interface
 
   :tparam T: The type of the real and imaginary components.
 
-  * ``T`` must be a floating point type (``float``, ``double``, ``long double``) or an extended floating point type.
+  * :cpp:any:`T` must be a floating point type (``float``, ``double``, ``long double``) or an extended floating point type.
 
-  * ``T`` cannot be ``const`` and/or ``volatile`` qualified.
+  * :cpp:any:`T` cannot be ``const`` and/or ``volatile`` qualified.
 
   * Some types might not work with a specific backend (such as ``long double`` on CUDA or SYCL).
 
