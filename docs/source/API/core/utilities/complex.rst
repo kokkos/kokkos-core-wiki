@@ -58,8 +58,9 @@ Interface
 
     Initializes the real component to ``r`` and the imaginary component to ``i``.
 
-  .. deprecated:: 4.0.0
   .. cpp:function:: template<class U> complex(const volatile complex<U>&) noexcept
+  
+    .. deprecated:: 4.0.0
   .. cpp:function:: void operator=(const complex&) volatile noexcept
   .. cpp:function:: volatile complex& operator=(const volatile complex&) volatile noexcept
   .. cpp:function:: complex& operator=(const volatile complex&) noexcept
