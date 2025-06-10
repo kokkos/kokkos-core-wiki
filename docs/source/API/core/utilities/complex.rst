@@ -61,15 +61,30 @@ Interface
   .. cpp:function:: template<class U> complex(const volatile complex<U>&) noexcept
   
     .. deprecated:: 4.0.0
+
   .. cpp:function:: void operator=(const complex&) volatile noexcept
+  
+    .. deprecated:: 4.0.0
+
   .. cpp:function:: volatile complex& operator=(const volatile complex&) volatile noexcept
+  
+    .. deprecated:: 4.0.0
+
   .. cpp:function:: complex& operator=(const volatile complex&) noexcept
+  
+    .. deprecated:: 4.0.0
+
   .. cpp:function:: void operator=(const volatile T&) noexcept
+  
+    .. deprecated:: 4.0.0
+
   .. cpp:function:: void operator=(const T&) volatile noexcept
+  
+    .. deprecated:: 4.0.0
 
     .. note::
       
-      The assignment operators have templated implementations so as not to be copy assignment operators.
+      Some of the deprecated assignment operators have templated implementations so as not to be copy assignment operators.
 
   .. rubric:: Public Member Functions:
 
@@ -115,19 +130,54 @@ Interface
 
     Divides the complex value ``complex(v)`` into the complex value ``*this`` and stores the quotient in ``*this``.
 
-  .. deprecated:: 4.0.0
   .. cpp:function:: volatile T& real() volatile noexcept
+  
+    .. deprecated:: 4.0.0
+
   .. cpp:function:: T real() const volatile noexcept
+  
+    .. deprecated:: 4.0.0
+
   .. cpp:function:: volatile T& imag() volatile noexcept
+  
+    .. deprecated:: 4.0.0
+
   .. cpp:function:: T imag() const volatile noexcept
+  
+    .. deprecated:: 4.0.0
+
   .. cpp:function:: void operator+=(const volatile complex& v) volatile noexcept
+  
+    .. deprecated:: 4.0.0
+
   .. cpp:function:: void operator+=(const volatile T& v) volatile noexcept
+  
+    .. deprecated:: 4.0.0
+
   .. cpp:function:: void operator-=(const volatile complex& v) volatile noexcept
+  
+    .. deprecated:: 4.0.0
+
   .. cpp:function:: void operator-=(const volatile T& v) volatile noexcept
+  
+    .. deprecated:: 4.0.0
+
   .. cpp:function:: void operator*=(const volatile complex& v) volatile noexcept
+  
+    .. deprecated:: 4.0.0
+
   .. cpp:function:: void operator*=(const volatile T& v) volatile noexcept
+  
+    .. deprecated:: 4.0.0
+
   .. cpp:function:: void operator/=(const volatile complex& v) volatile noexcept(noexcept(T{}/T{}))
+  
+    .. deprecated:: 4.0.0
+
   .. cpp:function:: void operator/=(const volatile T& v) volatile noexcept(noexcept(T{}/T{}))
+  
+    .. deprecated:: 4.0.0
+
 
   .. rubric:: Non-Member Functions:
 
