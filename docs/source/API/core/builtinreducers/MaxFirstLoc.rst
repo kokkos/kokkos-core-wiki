@@ -14,15 +14,15 @@ Usage
 
 .. code-block:: cpp
 
-   MaxFirstLoc<T,I,S>::value_type result;
-   parallel_reduce(N,Functor,MaxFirstLoc<T,I,S>(result));
+   MaxFirstLoc<T, I, S>::value_type result;
+   parallel_reduce(N, Functor, MaxFirstLoc<T, I, S>(result));
 
 Synopsis
 --------
 
 .. code-block:: cpp
 
-   template<typename Scalar, typename Index, typename Space>
+   template<typename Scalar, typename Index, typename Space = HostSpace>
    struct MaxFirstLoc{
        using reducer = MaxFirstLoc;
        using value_type = ValLocScalar<std::remove_cv_t<Scalar>, std::remove_cv_t<Index>>;
@@ -38,12 +38,16 @@ Synopsis
        bool references_scalar() const;
    };
 
+   template<typename T, typename I, typename... Ps>
+   MaxFirstLoc(View<ValLocScalar<T, I>, Ps...> const&)
+   -> MaxFirstLoc<T, I, View<ValLocScalar<T, I>, Ps...>::memory_space>;
+
 Interface
 ---------
 
 .. cpp:class:: template<class Scalar, class Index, class Space> MaxFirstLoc
 
-   .. rubric:: Public Types
+   .. rubric:: Public Types:
 
    .. cpp:type:: reducer
 
@@ -57,7 +61,7 @@ Interface
 
       A ``View`` referencing the reduction result.
 
-   .. rubric:: Constructors
+   .. rubric:: Constructors:
 
    .. cpp:function:: MaxFirstLoc(value_type& value_);
 
@@ -67,11 +71,11 @@ Interface
 
       Constructs a reducer which references a specific view as its result location.
 
-   .. rubric:: Public Member Functions
+   .. rubric:: Public Member Functions:
 
    .. cpp:function:: void join(value_type& dest, const value_type& src) const;
 
-      Store maximum with index of ``dest`` and ``src`` into ``dest``. If ``dest.val == src.val``, the location stored is ``std::min(dest.loc, src.loc)`` (the first one found).
+      Store maximum with index of ``dest`` and ``src`` into ``dest``. If ``dest.val == src.val``, the location stored is ``std::min(dest.loc, src.loc)``.
 
    .. cpp:function:: void init(value_type& val) const;
 
@@ -80,25 +84,29 @@ Interface
 
    .. cpp:function:: value_type& reference() const;
 
-      Returns a reference to the result provided in class constructor.
+      :return: A reference to the result provided in class constructor.
 
    .. cpp:function:: result_view_type view() const;
 
-      Returns a view of the result place provided in class constructor.
+      :return: A ``View`` of the result place provided in class constructor.
 
    .. cpp:function:: bool references_scalar() const;
 
       :return: ``true`` if the reducer was constructed with a scalar; ``false`` if the reducer was constructed with a ``View``.
 
+   .. rubric:: Explicit Deduction Guides (CTAD):
+
+   .. cpp:function:: template<typename T, typename I, typename... Ps> MaxFirstLoc(View<ValLocScalar<T, I>, Ps...> const&) -> MaxFirstLoc<T, I, View<ValLocScalar<T, I>, Ps...>::memory_space>;
+
 Additional Information
 ^^^^^^^^^^^^^^^^^^^^^^
 
-* ``MaxFirstLoc<T,I,S>::value_type`` is Specialization of ValLocScalar on non-const ``T`` and non-const ``I``
+* ``MaxFirstLoc<T, I, S>::value_type`` is specialization of ``ValLocScalar`` on non-``const`` ``T`` and non-``const`` ``I``.
 
-* ``MaxFirstLoc<T,I,S>::result_view_type`` is ``View<T,S,MemoryTraits<Unmanaged>>``. Note that the S (memory space) must be the same as the space where the result resides.
+* ``MaxFirstLoc<T, I, S>::result_view_type`` is ``View<T, S, MemoryTraits<Unmanaged>>``. Note that the ``S`` (memory space) must be the same as the space where the result resides.
 
-* Requires: ``Scalar`` has ``operator =`` and ``operator >`` defined. ``reduction_identity<Scalar>::max()`` is a valid expression.
+* Requires: ``Scalar`` has ``operator=`` and ``operator>`` defined. ``reduction_identity<Scalar>::max()`` is a valid expression.
 
-* Requires: ``Index`` has ``operator =`` defined. ``reduction_identity<Index>::min()`` is a valid expression.
+* Requires: ``Index`` has ``operator=`` defined. ``reduction_identity<Index>::min()`` is a valid expression.
 
-* In order to use MaxFirstLoc with a custom type of either ``Scalar`` or ``Index``, a template specialization of ``reduction_identity<CustomType>`` must be defined. See `Built-In Reducers with Custom Scalar Types <../../../ProgrammingGuide/Custom-Reductions-Built-In-Reducers-with-Custom-Scalar-Types.html>`_ for details
+* In order to use ``MaxFirstLoc`` with a custom type of either ``Scalar`` or ``Index``, a template specialization of ``reduction_identity<CustomType>`` must be defined. See `Built-In Reducers with Custom Scalar Types <../../../ProgrammingGuide/Custom-Reductions-Built-In-Reducers-with-Custom-Scalar-Types.html>`_ for details.
