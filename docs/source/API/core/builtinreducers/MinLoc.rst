@@ -83,6 +83,8 @@ Interface
 
       Store minimum with index of ``src`` and ``dest`` into ``dest``:  ``dest = (src.val < dest.val) ? src :dest;``.
 
+   .. note:: It is unspecified which index is stored if there are duplicate equivalent minimum values.  To guarantee the smallest index, use ``MinFirstLoc`` instead of ``MinLoc``.
+
    .. cpp:function:: KOKKOS_INLINE_FUNCTION void init(value_type& val) const;
 
       Initialize ``val.val`` using the ``Kokkos::reduction_identity<Scalar>::min()`` method. The default implementation sets ``val=<TYPE>_MAX``.
