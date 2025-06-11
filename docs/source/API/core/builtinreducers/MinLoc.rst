@@ -83,7 +83,9 @@ Interface
 
       Store minimum with index of ``src`` and ``dest`` into ``dest``:  ``dest = (src.val < dest.val) ? src :dest;``.
 
-   .. note:: It is unspecified which index is stored if there are duplicate equivalent minimum values.  To guarantee the smallest index, use ``MinFirstLoc`` instead of ``MinLoc``.
+   .. note:: It is unspecified which index is stored if there are duplicate equivalent minimum values.  To guarantee the smallest index, use MinFirstLoc_ instead of ``MinLoc``.
+
+   .. _MinFirstLoc: ../builtinreducers/MinFirstLoc.html
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION void init(value_type& val) const;
 
