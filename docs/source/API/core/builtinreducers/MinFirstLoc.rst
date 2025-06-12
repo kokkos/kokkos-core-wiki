@@ -76,7 +76,7 @@ Interface
    .. cpp:function:: void join(value_type& dest, const value_type& src) const;
 
       If ``src.val == dest.val`` && ``src.loc < dest.loc`` then ``dest.loc = src.loc``;
-      otherwise if ``src.val < dest.val`` then ``dest.val = src.val`` && `dest.loc = src.loc``.
+      otherwise if ``src.val < dest.val`` then ``dest.val = src.val`` && ``dest.loc = src.loc``.
 
    .. cpp:function:: void init(value_type& val) const;
 
