@@ -254,7 +254,7 @@ Backend-specific options
 
 ``Kokkos_ENABLE_IMPL_CUDA_MALLOC_ASYNC`` default value is ``OFF`` except in 4.2, 4.3, and 4.4
 
-``Kokkos_ENABLE_CUDA_RELOCATABLE_DEVICE_CODE`` this only works with static library buileds (BUILD_SHARED_LIBS=OFF)
+``Kokkos_ENABLE_CUDA_RELOCATABLE_DEVICE_CODE`` this only works for static library builds (BUILD_SHARED_LIBS=OFF)
 
 
 Development
