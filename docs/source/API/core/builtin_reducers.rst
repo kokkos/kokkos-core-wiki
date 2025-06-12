@@ -33,6 +33,8 @@ Reducer objects used in conjunction with `parallel_reduce <parallel-dispatch/par
      - Reduction providing minimum and an associated index
    * - `MinMax <builtinreducers/MinMax.html>`__
      - Reduction providing both minimum and maximum
+   * - `MinMaxFirstLastLoc <builtinreducers/MinMaxFirstLastLoc.html>`__
+     - Reduction providing both minimum at its smallest index & maximum at its largest index
    * - `MinMaxLoc <builtinreducers/MinMaxLoc.html>`__
      - Reduction providing both minimum and maximum and associated indices
    * - `Prod <builtinreducers/Prod.html>`__
@@ -58,6 +60,7 @@ Reducer objects used in conjunction with `parallel_reduce <parallel-dispatch/par
    ./builtinreducers/MinFirstLoc
    ./builtinreducers/MinLoc
    ./builtinreducers/MinMax
+   ./builtinreducers/MinMaxFirstLastLoc
    ./builtinreducers/MinMaxLoc
    ./builtinreducers/Prod
    ./builtinreducers/Sum

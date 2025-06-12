@@ -12,12 +12,13 @@ Kokkos provides Reducers for the most common reduction types:
 * [MinFirstLoc](../API/core/builtinreducers/MinFirstLoc): Retrieve the minimum value and its smallest index position
 * [MinLoc](../API/core/builtinreducers/MinLoc): Retrieve the minimum value as well as its associated index
 * [MinMax](../API/core/builtinreducers/MinMax): Finding the minimum and the maximum value
+* [MinMaxFirstLastLoc](../API/core/builtinreducers/MinMaxFirstLastLoc): Find both the maximum with its largest index & the minimum with its smallest index
 * [MinMaxLoc](../API/core/builtinreducers/MinMaxLoc): Find both the maximum and minimum value as well as their associated indices
 * [Prod](../API/core/builtinreducers/Prod): Computing the product of all input values
 * [Sum](../API/core/builtinreducers/Sum): For simple Summations
 
 These reducers work only for scalar data, i.e. you can’t have a runtime length array as the reduction type (for example finding the minimum values for each vector in a multi vector concurrently).
-Generally the Reducers are templated on the Scalar type for the reduction as well as an optional template parameter for the memory space of the result (more on that later). The [`MinLoc`](../API/core/builtinreducers/MinLoc), [`MaxLoc`](../API/core/builtinreducers/MaxLoc) and [`MinMaxLoc`](../API/core/builtinreducers/MinMaxLoc) reducers are additionally templated on the index type. 
+Generally the Reducers are templated on the Scalar type for the reduction as well as an optional template parameter for the memory space of the result (more on that later). The [`MinLoc`](../API/core/builtinreducers/MinLoc), [`MaxLoc`](../API/core/builtinreducers/MaxLoc), [`MinMaxFirstLastLoc`](../API/core/builtinreducers/MinMaxFirstLastLoc) and [`MinMaxLoc`](../API/core/builtinreducers/MinMaxLoc) reducers are additionally templated on the index type. 
 
 The following is an example for doing a simple min-reduction, finding the minimal value in a discretization of a parable.
 
@@ -46,7 +47,7 @@ Kokkos::parallel_reduce( "MinReduce", N, KOKKOS_LAMBDA (const int& x, double& lm
 printf("Min: %lf\n", min);
 ```
 
-For the [`MinFirstLoc`](../API/core/builtinreducers/MinFirstLoc), [`MinLoc`](../API/core/builtinreducers/MinLoc), [`MaxFirstLoc`](../API/core/builtinreducers/MaxFirstLoc), [`MaxLoc`](../API/core/builtinreducers/MaxLoc) and [`MinMaxLoc`](../API/core/builtinreducers/MinMaxLoc) reducers the reduction type is a complex scalar type which is accessible through a `value_type` typedef. 
+For the [`MinFirstLoc`](../API/core/builtinreducers/MinFirstLoc), [`MinLoc`](../API/core/builtinreducers/MinLoc), [`MaxFirstLoc`](../API/core/builtinreducers/MaxFirstLoc), [`MaxLoc`](../API/core/builtinreducers/MaxLoc), [`MinMaxFirstLastLoc`](../API/core/builtinreducers/MinMaxFirstLastLoc) and [`MinMaxLoc`](../API/core/builtinreducers/MinMaxLoc) reducers the reduction type is a complex scalar type which is accessible through a `value_type` typedef. 
 [`MinLoc`](../API/core/builtinreducers/MinLoc) and [`MaxLoc`](../API/core/builtinreducers/MaxLoc) have value types which contain a `val` and `loc` member to store the reduction value and the index respectively. Note that index (`loc`) can be a struct itself, for example to store a multidimensional index result (see later). 
 
 ```c++
