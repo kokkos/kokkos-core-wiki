@@ -211,7 +211,7 @@ Backend-specific options
       * (see below)
 
     * * ``Kokkos_ENABLE_CUDA_RELOCATABLE_DEVICE_CODE``
-      * Enable relocatable device code (RDC) for CUDA
+      * Enable relocatable device code (RDC) for CUDA (see below)
       * ``OFF``
 
     * * ``Kokkos_ENABLE_CUDA_UVM`` :red:`[Deprecated since 4.0]` see `Transition to alternatives <../usecases/Moving_from_EnableUVM_to_SharedSpace.html>`_
@@ -254,6 +254,7 @@ Backend-specific options
 
 ``Kokkos_ENABLE_IMPL_CUDA_MALLOC_ASYNC`` default value is ``OFF`` except in 4.2, 4.3, and 4.4
 
+``Kokkos_ENABLE_CUDA_RELOCATABLE_DEVICE_CODE`` this only works with static library buileds (BUILD_SHARED_LIBS=OFF)
 
 
 Development
