@@ -12,5 +12,4 @@ Use Cases and Examples
    ../usecases/Tasking
    ../usecases/Kokkos-Fortran-Interoperability
    ../usecases/SoA-and-AoSoA-with-Cabana
-   ../usecases/WindowsHeader
    ../usecases/Moving_from_EnableUVM_to_SharedSpace
