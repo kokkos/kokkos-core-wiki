@@ -7,7 +7,6 @@ Utilities
    ./utilities/abort
    ./utilities/all
    ./utilities/assert
-   ./utilities/complex
    ./utilities/min_max_clamp
    ./utilities/printf
    ./utilities/swap
