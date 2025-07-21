@@ -168,7 +168,7 @@ Examples
         int scan = team_handle.team_scan(tid+1, &global);
         // scan == tid*(tid+1)/2 on every thread
         // global == ts*(ts-1)/2 on every thread
-        Kokkos::View<int*, policy_type::execution_space::scratch_memory_type>
+        Kokkos::View<int*, policy_type::execution_space::scratch_memory_type, Kokkos::MemoryTraits<Kokkos::Unmanaged>>
         a(team_handle.team_scratch(0), 1024);
 
     });
