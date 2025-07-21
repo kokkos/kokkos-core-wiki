@@ -34,11 +34,8 @@ The header ``<Kokkos_BitManipulation.hpp>`` is a backport of the C++20 standard 
 provides several function templates to access, manipulate, and process individual bits and bit sequences.
 
 .. toctree::
-   :hidden:
    :maxdepth: 1
 
-   numerics/complex
-
-* `Complex number arithmnetic <numerics/complex.html>`_
+   Complex number arithmetic <numerics/complex>
 
 The header ``<Kokkos_Complex.hpp>`` provides a Kokkos-compatible implementation of complex numbers, mirroring the functionality of ``std::complex``.
