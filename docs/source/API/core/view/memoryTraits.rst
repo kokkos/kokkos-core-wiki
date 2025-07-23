@@ -84,7 +84,7 @@ The following type aliases are also available in the ``Kokkos`` namespace.
 .. cpp:type:: MemoryUnmanaged = Kokkos::MemoryTraits<Kokkos::Unmanaged>;
 .. cpp:type:: MemoryRandomAccess = Kokkos::MemoryTraits<Kokkos::Unmanaged | Kokkos::RandomAccess>;
 
-Note that managed memory as an explicit memory trait (i.e., ``using MemoryManaged = Kokkos::MemoryTraits<>;``) has been deprecated in Kokkos 4.7. Also, in earlier versions of Kokkos, the alias ``Kokkos::MemoryManaged`` was defined as ``Kokkos::MemoryTraits<0>``. Check the sub-section on |UnmanagedViews|_ for further discussion about this.
+Note that managed memory as an explicit memory trait (i.e., ``using MemoryManaged = Kokkos::MemoryTraits<>;``) has been deprecated in Kokkos 4.7. Also, in earlier versions of Kokkos, the enumeration value of ``0`` had to be explicitly mentioned, i.e., ``Kokkos::MemoryTraits<0>``. Check the sub-section on |UnmanagedViews|_ for further discussion about this.
 
 Note that in order to use a managed View in a random access manner, the memory trait should be specified as ``Kokkos::MemoryTraits<Kokkos::RandomAccess>`` and not ``Kokkos::MemoryRandomAccess``.
 

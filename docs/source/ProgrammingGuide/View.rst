@@ -602,13 +602,13 @@ Another way to get optimized data accesses is to specify memory traits. These tr
 Unmanaged Views
 ~~~~~~~~~~~~~~~
 
-.. _MemoryTraits: ../../../API/core/view/memoryTraits.html
+.. _MemoryTraits: ../API/core/view/memoryTraits.html
 
 .. |MemoryTraits| replace:: memory traits
 
 It's always better to let Kokkos control memory allocation, but sometimes you don't have a choice. You might have to work with an application or an interface that returns a raw pointer, for example. Kokkos lets you wrap raw pointers in an *unmanaged View*. "Unmanaged" means that Kokkos does *neither* reference counting *nor* automatic deallocation for those Views. The following example shows how to create an unmanaged View of host memory. You may do this for CUDA device memory too, or indeed for memory allocated in any memory space, by specifying the View's execution or memory space accordingly. Note that the pointer to the allocation has to be provided to the constructor.
 
-We would like to highlight that in Kokkos, Views are managed by default. Thus, an explicit memory trait that corresponds to managed Views (with an alias called ``Kokkos::Managed``), has been deprecated in Kokkos 4.7. See the API reference on |MemoryTraits|_. 
+We would like to highlight that in Kokkos, Views are managed by default. Thus, an explicit memory trait for managed Views (with an alias called ``Kokkos::MemoryManaged``), has been deprecated in Kokkos 4.7. See the API reference on |MemoryTraits|_. 
 
 .. code-block:: c++
 
