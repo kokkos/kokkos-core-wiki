@@ -19,6 +19,7 @@ The macros ``KOKKOS_HALF_T_IS_FLOAT`` and ``KOKKOS_BHALF_T_IS_FLOAT`` are set to
 Functions
 ---------
 The following table list the standard mathematical functions that can be used with the ``half_t`` and ``bhalf_t`` type.
+
 In addition, for the Cuda and SYCL backends, the marked functions are performed using specific half precision functions and may thus be more performant.
 The default behaviour if the specific function doesn't exist is to cast the half precision float to ``float``, perform the operation with the standard function and cast back the result to half precision.
 
@@ -76,7 +77,7 @@ The default behaviour if the specific function doesn't exist is to cast the half
 
 ¹Only if GPU_ARCH >= 80
 
-²Not for nvcc version between 12.1 and 13.0 due to a compiler bug
+²Not for nvcc-12.2 when compiling with --std=c++20 (https://docs.nvidia.com/cuda/archive/12.3.2/cuda-toolkit-release-notes/index.html#cuda-math-release-12-3)
 
 Example
 ~~~~~~~
