@@ -88,6 +88,7 @@ Description
 
       This function returns a scratch memory handle shared by all threads in a team, which allows access to scratch memory.
       This handle can be given as the first argument to a ``Kokkos::View`` to make it use scratch memory.
+      The handle is automatically incremented by the size of the ``Kokkos::View`` allocation.
 
       - ``level``: The level of requested scratch memory is either ``0`` or ``1``.
 
@@ -168,6 +169,8 @@ Examples
         int scan = team_handle.team_scan(tid+1, &global);
         // scan == tid*(tid+1)/2 on every thread
         // global == ts*(ts-1)/2 on every thread
+        // The view does not require the Unmanaged trait, since team_handle.team_scratch(0) decays to a pointer,
+        // but it is added for clarity here. The View constructor that creates an unmanaged view is triggered by the pointer passed.
         Kokkos::View<int*, policy_type::execution_space::scratch_memory_space, Kokkos::MemoryTraits<Kokkos::Unmanaged>>
         a(team_handle.team_scratch(0), 1024);
 
