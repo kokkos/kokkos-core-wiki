@@ -27,7 +27,7 @@ Description
 
    :tparam Key: Must be a POD (Plain Old Data type)
 
-   :tparam Value: `void` indicates an unordered set, otherwise must be trivially copyable
+   :tparam Value: `void` indicates an unordered set. If the map is created with the `SequentialHostInit` property, Views as `Value` are allowed. Otherwise the `Value` must be trivially copyable
 
    :tparam Device: Device is any class or struct with the following public typedefs or type aliases: `execution_space`, `memory_space`, and `device_type`
 
@@ -36,6 +36,12 @@ Description
    .. cpp:function:: UnorderedMap(uint32_t capacity_hint);
 
       Create map with enough space for at least capacity_hint number of objects
+
+      .. warning:: Host Only
+
+   .. cpp:function:: UnorderedMap(const ALLOC_PROP &prop, uint32_t capacity_hint);
+
+      Create map using the properties with enough space for at least capacity_hint number of objects
 
       .. warning:: Host Only
 
