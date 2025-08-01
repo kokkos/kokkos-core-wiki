@@ -4,7 +4,7 @@ Half precision types
 ====================
 
 .. warning::
-   ``half_t`` and ``bhalf_t`` are still in the namespace ``Kokkos::Experimental``
+   ``half_t`` and ``bhalf_t`` are still in the ``Kokkos::Experimental`` namespace.
 
 Types
 -----
@@ -19,11 +19,11 @@ The macros ``KOKKOS_HALF_T_IS_FLOAT`` and ``KOKKOS_BHALF_T_IS_FLOAT`` are set to
 Functions
 ---------
 The following table list the standard mathematical functions that can be used with the ``half_t`` and ``bhalf_t`` type.
-In addition, for the Cuda and Sycl backends, the marked functions are performed using specific half precision functions and may thus be quicker.
+In addition, for the Cuda and SYCL backends, the marked functions are performed using specific half precision functions and may thus be more performant.
 The default behaviour if the specific function doesn't exist is to cast the half precision float to ``float``, perform the operation with the standard function and cast back the result to half precision.
 
 .. csv-table::
-   :header: "Function", "``half_t`` Cuda", "``bhalf_t`` Cuda", "``half_t`` Sycl", "``bhalf_t`` Sycl"
+   :header: "Function", "``half_t`` Cuda", "``bhalf_t`` Cuda", "``half_t`` SYCL", "``bhalf_t`` SYCL"
    :widths: auto
 
    "abs", "X", "X", "X", 
