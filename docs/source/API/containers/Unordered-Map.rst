@@ -27,7 +27,7 @@ Description
 
    :tparam Key: Must be a POD (Plain Old Data type)
 
-   :tparam Value: `void` indicates an unordered set. If the map is created with the `SequentialHostInit` property, Views as `Value` are allowed. Otherwise the `Value` must be trivially copyable
+   :tparam Value: `void` indicates an unordered set. Otherwise the `Value` must be trivially copyable. (since Kokkos 4.7) If the map is created with the `SequentialHostInit` property, Views as `Value` are allowed.
 
    :tparam Device: Device is any class or struct with the following public typedefs or type aliases: `execution_space`, `memory_space`, and `device_type`
 
