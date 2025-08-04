@@ -6,28 +6,17 @@
 
 Defined in header ``<Kokkos_Core.hpp>``
 
-Queries the initialization status of Kokkos and returns ``true`` if Kokkos is initialized and ``false`` if Kokkos is not initialized. This function can be called prior or after Kokkos initialization or finalization.
-
 Interface
 ---------
 
-.. code-block:: cpp
+.. cpp:function:: bool is_initialized()
 
-    Kokkos::is_initialized();
-    
-Requirements
-~~~~~~~~~~~~
+   Queries the initialization status of Kokkos and returns ``true`` if Kokkos is initialized and ``false`` if Kokkos is not initialized. This function can be called prior or after Kokkos initialization or finalization.
 
-* ``Kokkos::is_initialized`` can be called before ``Kokkos::initialize``.
-* ``Kokkos::is_initialized`` can be called after ``Kokkos::finalize``.
+   :return: ``true`` if :cpp:func:`initialize` has been called; `false` otherwise. 
 
-Semantics
-~~~~~~~~~
-
-* After calling ``Kokkos::initialize()``, ``Kokkos::is_initialized()`` should return true.
-
-Example
-~~~~~~~
+Examples
+--------
 
 .. code-block:: cpp
 
