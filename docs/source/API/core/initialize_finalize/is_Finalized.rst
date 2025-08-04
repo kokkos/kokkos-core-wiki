@@ -6,27 +6,14 @@
 
 Defined in header ``<Kokkos_Core.hpp>``
 
-
-
-Queries the finalization status of Kokkos and returns ``true`` if Kokkos is finalized and ``false`` if Kokkos is not finalized. This function can be called prior or after Kokkos initialization or finalization.
-
 Interface
 ---------
 
-.. code-block:: cpp
+.. cpp:function:: bool is_finalized()
 
-    Kokkos::is_finalized();
-    
-Requirements
-~~~~~~~~~~~~
-
-* ``Kokkos::is_finalized`` can be called before ``Kokkos::initialize``.
-* ``Kokkos::is_finalized`` can be called after ``Kokkos::finalize``.
-
-Semantics
-~~~~~~~~~
-
-* After calling ``Kokkos::finalize()``, ``Kokkos::is_finalized()`` should return true.
+   Queries the finalization status of Kokkos and returns ``true`` if Kokkos is finalized and ``false`` if Kokkos is not finalized. This function can be called prior or after Kokkos initialization or finalization.
+   
+   :return: ``true`` if :cpp:func:`finalize` has been called; `false` otherwise.
 
 Example
 ~~~~~~~
