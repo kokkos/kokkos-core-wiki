@@ -51,7 +51,7 @@ Description
       .. versionadded:: 4.2
       
       .. versionchanged:: 4.7
-              :cpp:any:`prop` can now contain :cpp:class:`SequentialHostInit`
+              :cpp:any:`prop` can now contain :cpp:type:`SequentialHostInit`
    .. rubric:: Public Member Functions
 
    .. cpp:function:: clear();
