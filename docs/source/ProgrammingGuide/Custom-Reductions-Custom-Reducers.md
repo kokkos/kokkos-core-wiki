@@ -54,13 +54,6 @@ struct array_type {
     }
     return *this;
   }
-
-  KOKKOS_INLINE_FUNCTION
-  void operator+=(const array_type& src) {
-    for (int i = 0; i < N; i++) {
-      myArray[i] += src.myArray[i];
-    }
-  }
 };
 
 template <class T, class Space, int N>
