@@ -145,7 +145,7 @@ Spaces
 
 .. cpp:type:: host_mirror_space
 
-   Host accessible memory space used in :cpp:type:`HostMirror`.
+   Host accessible memory space used in :cpp:type:`host_mirror_type`.
 
 View Types
 ^^^^^^^^^^
@@ -158,7 +158,7 @@ View Types
 
    this :cpp:class:`View` type with :cpp:type:`const_data_type` passed as the :cpp:any:`DataType` template parameter
 
-.. cpp:type:: HostMirror
+.. cpp:type:: host_mirror_type
 
    compatible view type with the same :cpp:type:`data_type` and :cpp:type:`array_layout` stored in host accessible memory space.
 

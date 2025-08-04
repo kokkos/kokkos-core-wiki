@@ -510,8 +510,8 @@ view to write to.
 
   The mental model is that whenever placement new is used to call the constructor, the destructor also isn't called before the memory is deallocated but it needs to be called manually.
 
-Deep copy and HostMirror
-~~~~~~~~~~~~~~~~~~~~~~~~
+Deep copy and host mirror
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Copying data from one view to another, in particular between views in different memory spaces, is called deep copy.
 Kokkos never performs a hidden deep copy. To do so a user has to call the `deep_copy` function. For example:
@@ -538,18 +538,18 @@ The first one will not work because the default layouts of `CudaSpace` and `Host
 
 The reasoning for allowing only direct bitwise copies is that a deep copy between different memory spaces would otherwise require a temporary copy of the data to which a bitwise copy is performed followed by a parallel kernel to transfer the data element by element.
 
-Kokkos provides the following way to work around those limitations. Firstly, views have a `HostMirror` typedef which is a view type with compatible layout inside the `HostSpace`. Additionally, there is a `create_mirror` and `create_mirror_view` function which allocate views of the `HostMirror` type of view. The difference between the two is that `create_mirror` will always allocate a new view, while `create_mirror_view` will only create a new view if the original one is not in `HostSpace`.
+Kokkos provides the following way to work around those limitations. Firstly, views have a `host_mirror_type` typedef which is a view type with compatible layout inside the `HostSpace`. Additionally, there is a `create_mirror` and `create_mirror_view` function which allocate views of the `host_mirror_type` type of view. The difference between the two is that `create_mirror` will always allocate a new view, while `create_mirror_view` will only create a new view if the original one is not in `HostSpace`.
 
 .. code-block:: c++
 
   Kokkos::View<int*[3], MemorySpace> a ("a", 10);
   // Allocate a view in HostSpace with the layout and padding of a
-  typename Kokkos::View<int*[3], MemorySpace>::HostMirror b =
+  typename Kokkos::View<int*[3], MemorySpace>::host_mirror_type b =
       create_mirror(a);
   // This is always a memcopy
   Kokkos::deep_copy (b, a);
       
-  typename Kokkos::View<int*[3]>::HostMirror c =
+  typename Kokkos::View<int*[3]>::host_mirror_type c =
   Kokkos::create_mirror_view(a);
   // This is a no-op if MemorySpace is HostSpace
   Kokkos::deep_copy (c, a)
