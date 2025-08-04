@@ -13,7 +13,7 @@ Usage:
     Kokkos::is_finalized();
 
 
-Queries the initialization status of Kokkos and returns ``true`` if Kokkos is finalized and ``false`` is Kokkos is not finalized. This function can be called prior or after Kokkos initialization or finalization.
+Queries the finalization status of Kokkos and returns ``true`` if Kokkos is finalized and ``false`` if Kokkos is not finalized. This function can be called prior or after Kokkos initialization or finalization.
 
 Interface
 ---------
