@@ -57,6 +57,67 @@ There are many advantages. Here are a few:
   the backend driver and/or compiler can leverage optimization opportunities.
 * Launch overhead is reduced, benefitting DAGs consisting of small workloads.
 
+Capture
+~~~~~~~
+
+Some use cases might require adding nodes to a :cpp:`Kokkos::Graph`
+with workloads that aren't expressed in terms of :cpp:`Kokkos` API
+but rather in native code, *e.g.*, calling external math libraries like `cuBLAS`.
+
+Such a scenario can be encountered in many situations like building and training a neural network,
+running a conjugate gradient method, and so on.
+
+Capturing into a :cpp:`Kokkos::Graph` boils down to writing the following snippet:
+
+.. code:: c++
+
+    struct MyCudaCapture {
+        ViewType data;
+
+        void operator()(const Kokkos::Cuda& exec) const { ... }
+    };
+
+    ...
+
+    auto my_captured_node = predecessor.cuda_capture(
+        exec,
+        MyCudaCapture{.data = my_data}
+    );
+
+When the node is added to the :cpp:`Kokkos::Graph`, the workloads are not directly dispatched to the device.
+Rather, the backend operations are "saved" for later "reuse" in the *capture* node.
+
+Some important aspects of *capture* are worth pointing out:
+
+1. The function object will be stored by the :cpp:`Kokkos::Graph` instance,
+   thereby ensuring that any data bound to the function object is guaranteed to
+   stay alive until the graph is destroyed.
+2. The execution space instance `exec` associates the captured workloads to a device.
+3. While in "*capture* mode", backend-specific restrictions may apply (see `the Cuda programming guide <https://docs.nvidia.com/cuda/cuda-c-programming-guide/#prohibited-and-unhandled-operations>`_
+   for instance).
+
+   .. warning::
+
+      When a "stream" is used by multiple threads, capturing on one thread may affect other threads
+      (search for :cpp:`cudaThreadExchangeStreamCaptureMode` on `Cuda runtime API documentation <https://docs.nvidia.com/cuda/cuda-runtime-api/>`_ for instance).
+
+For now, *capture* is only supported for the following backends:
+
+.. list-table::
+
+  * - Backend
+    - Resources
+  * - :cpp:`Cuda`
+    - `CUDA stream capture <https://docs.nvidia.com/cuda/cuda-c-programming-guide/#creating-a-graph-using-stream-capture>`_
+  * - :cpp:`HIP`
+    - `HIP stream capture <https://rocm.docs.amd.com/projects/HIP/en/latest/reference/hip_runtime_api/modules/graph_management.html#_CPPv421hipStreamBeginCapture11hipStream_t20hipStreamCaptureMode>`_
+  * - :cpp:`SYCL`
+    - `SYCL queue recording <https://github.com/intel/llvm/blob/ee5e1ca95c78576c1b6f12b1c2d461ef4b537a9b/sycl/doc/extensions/experimental/sycl_ext_oneapi_graph.asciidoc?plain=1#L167-LL170>`_
+
+.. note::
+
+    The :cpp:`SYCL` documentation will use the term *recording* instead of *capture*, but it is essentially the same thing.
+
 Examples
 --------
 
@@ -91,3 +152,13 @@ for this DAG.
     graph.instantiate();
 
     graph.submit();
+
+Capture of a `cuBLAS` call
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This example shows how to create a node that captures a `cuBLAS` call.
+It also demonstrates how data is kept alive during
+the whole lifetime of the :cpp:`Kokkos::Graph` (*e.g.* the `cuBLAS` handle).
+
+.. literalinclude:: examples/graph_capture.cpp
+   :language: c++
