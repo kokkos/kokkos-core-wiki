@@ -48,7 +48,10 @@ Description
 
       .. warning:: Host Only
 
-      .. versionadded:: 4.7
+      .. versionadded:: 4.2
+      
+      .. versionchanged:: 4.7
+              :cpp:any:`prop` can now contain :cpp:class:`SequentialHostInit`
    .. rubric:: Public Member Functions
 
    .. cpp:function:: clear();
