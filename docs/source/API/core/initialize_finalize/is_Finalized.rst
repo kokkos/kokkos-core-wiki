@@ -15,8 +15,8 @@ Interface
    
    :return: ``true`` if :cpp:func:`finalize` has been called; `false` otherwise.
 
-Example
-~~~~~~~
+Examples
+--------
 
 .. code-block:: cpp
 
