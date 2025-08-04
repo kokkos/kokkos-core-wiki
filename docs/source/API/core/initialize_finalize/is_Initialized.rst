@@ -31,7 +31,7 @@ Requirements
 Semantics
 ~~~~~~~~~
 
-* After calling ``Kokkos::initialize``, ``Kokkos::is_initialized()`` should return true.
+* After calling ``Kokkos::initialize()``, ``Kokkos::is_initialized()`` should return true.
 
 Example
 ~~~~~~~
@@ -46,7 +46,7 @@ Example
         Kokkos::initialize(argc, argv);
 	assert(Kokkos::is_initialized());
         Kokkos::finalize();
-        assert(!Kokkos::is_initialized());
+        assert(Kokkos::is_finalized());
     }    
 
 See also
