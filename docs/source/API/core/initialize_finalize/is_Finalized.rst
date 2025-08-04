@@ -6,11 +6,6 @@
 
 Defined in header ``<Kokkos_Core.hpp>``
 
-Usage: 
-
-.. code-block:: cpp
-
-    Kokkos::is_finalized();
 
 
 Queries the finalization status of Kokkos and returns ``true`` if Kokkos is finalized and ``false`` if Kokkos is not finalized. This function can be called prior or after Kokkos initialization or finalization.
