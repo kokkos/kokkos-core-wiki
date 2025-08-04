@@ -36,6 +36,11 @@ Reducer objects used in conjunction with `parallel_reduce <parallel-dispatch/par
    * - `Sum <builtinreducers/Sum.html>`__
      - Sum reduction
 
+
+:cpp:struct:`reduction_identity` defines the neutral elements (identity values)
+for various reduction operations. Specializing it is crucial for enabling
+built-in reducers to work with user-defined types.
+
 `Reduction Scalar Types <builtinreducers/ReductionScalarTypes.html>`__ are template classes for storage for reducers.
 
 .. toctree::
@@ -56,3 +61,4 @@ Reducer objects used in conjunction with `parallel_reduce <parallel-dispatch/par
    ./builtinreducers/Prod
    ./builtinreducers/Sum
    ./builtinreducers/ReductionScalarTypes
+   ./builtinreducers/reduction_identity
