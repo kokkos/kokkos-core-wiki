@@ -31,8 +31,9 @@ Example
         assert(Kokkos::is_finalized());
     }    
 
-See also
---------
+.. seealso::
 
-* `Kokkos::InitializationSettings <InitializationSettings.html#kokkosInitializationSettings>`_
-* `Kokkos::ScopeGuard <ScopeGuard.html#kokkosScopeGuard>`_
+   `Kokkos::InitializationSettings <InitializationSettings.html#kokkosInitializationSettings>`_
+      Define the settings for initializing Kokkos programmatically.
+   `Kokkos::ScopeGuard <ScopeGuard.html#kokkosScopeGuard>`_
+      A class to initialize and finalize Kokkos using RAII.
