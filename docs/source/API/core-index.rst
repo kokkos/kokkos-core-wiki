@@ -41,6 +41,8 @@ Core API
      - Used to recognize, in an SFINAE-friendly way, the validity of any C++ expression.
    * - `Macros <core/Macros.html>`__
      - Global macros defined by Kokkos, used for architectures, general settings, etc.
+   * - `Half precision types <core/Half-precision-types.html>`__
+     - Helpers to get a portable access to half precision types.
 
 .. toctree::
    :hidden:
@@ -64,3 +66,4 @@ Core API
    ./core/Detection-Idiom
    ./core/Macros
    ./core/Profiling
+   ./core/Half-precision-types
