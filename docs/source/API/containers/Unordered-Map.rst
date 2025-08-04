@@ -48,6 +48,7 @@ Description
 
       .. warning:: Host Only
 
+      .. versionadded:: 4.7
    .. rubric:: Public Member Functions
 
    .. cpp:function:: clear();
