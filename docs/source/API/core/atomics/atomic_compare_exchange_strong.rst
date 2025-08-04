@@ -16,10 +16,6 @@ Usage
 .. code-block:: cpp
 
    bool was_exchanged = atomic_compare_exchange_strong(&obj, expected, desired);
-   //                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-   //                   deprecated since Kokkos 4.5
-   //                   instead prefer
-   //                   expected == atomic_compare_exchange(&obj, expected, desired)
 
 Atomically compares the current value of ``obj`` with ``expected``
 and replaces its value with ``desired`` if equal.
@@ -39,3 +35,6 @@ Description
    :param expected: value expected to be found in the object
    :param desired: the value to store in the object if as expected
    :returns: the result of the comparison, ``true`` if ``*ptr`` was equal to ``expected``, ``false`` otherwise
+
+   .. deprecated:: 4.5
+      Prefer :cpp:expr:`expected == atomic_compare_exchange(&obj, expected, desired)`
