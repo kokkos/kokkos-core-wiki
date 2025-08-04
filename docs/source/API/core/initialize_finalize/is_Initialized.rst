@@ -6,13 +6,6 @@
 
 Defined in header ``<Kokkos_Core.hpp>``
 
-Usage: 
-
-.. code-block:: cpp
-
-    Kokkos::is_initialized();
-
-
 Queries the initialization status of Kokkos and returns ``true`` if Kokkos is initialized and ``false`` if Kokkos is not initialized. This function can be called prior or after Kokkos initialization or finalization.
 
 Interface
