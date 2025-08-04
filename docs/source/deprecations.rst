@@ -18,7 +18,7 @@ Deprecated in Kokkos 4.6
 
 * Makefile support
    * replacement: CMake
-   * reducing maintenance burden for a little-used build system 
+   * reducing maintenance burden for a little-used build system
 
 * Direct access to ``d_view`` and ``h_view`` members in ``DualView``
    * replacement: ``view_host()`` and ``view_device()``
@@ -43,20 +43,20 @@ Deprecated in Kokkos 4.5
    * replacement: none
    * no known use case
 
-* ``atomic_assign``
-   * replacement: ``atomic_store``
+* :cpp:func:`atomic_assign`
+   * replacement: :cpp:func:`atomic_store`
    * duplicated functionality
 
-* ``atomic_increment``
-   * replacement: ``atomic_inc``
+* :cpp:func:`atomic_increment`
+   * replacement: :cpp:func:`atomic_inc`
    * duplicated functionality
 
-* ``atomic_decremnent``
-   * replacement: ``atomic_dec``
+* :cpp:func:`atomic_decrement`
+   * replacement: :cpp:func:`atomic_dec`
    * duplicated functionality
 
-* ``atomic_compare_exchange_strong``
-   * replacement: ``atomic_compare_exchange``
+* :cpp:func:`atomic_compare_exchange_strong`
+   * replacement: :cpp:func:`atomic_compare_exchange`
    * duplicated functionality
 
 Deprecated in Kokkos 4.4
@@ -128,7 +128,7 @@ Deprecated in Kokkos 4.3
 
 * ``RangePolicy::set(ChunkSize chunksize)``
    * replacement: ``RangePolicy::set_chunk_size(int chunk_size)``
-   * ``ChunkSize`` was the only extra parameter usable with ``RangePolicy::set()`` 
+   * ``ChunkSize`` was the only extra parameter usable with ``RangePolicy::set()``
 
 * ``InitializationSettings::set_num_devices``, ``InitializationSettings::has_num_devices``, ``InitializationSettings::get_num_devices``
    * replacement: ``num_devices``
@@ -145,14 +145,14 @@ Deprecated in Kokkos 4.2
 * ``Cuda::Cuda(cudaStream_t stream, bool manage_stream)``
    * replacement: ``Cuda::Cuda(cudaStream_t stream)``
    * constructing a Cuda execution space instance should always use an externally managed ``cudaStream`` object
-   
+
 * ``HIP::HIP(hipStream_t stream, bool manage_stream)``
     * replacement ``HIP::HIP(hipStream_t stream)``
     * constructing a HIP execution space instance should always use an externally managed ``hipStream`` object
-    
+
 * ``vector``
     * replacement: none
-    * non-standard behavior, doesn't work well with Kokkos concepts 
+    * non-standard behavior, doesn't work well with Kokkos concepts
 
 * ``HostSpace::HostSpace(AllocationMechanism)``
     * replacement: ``HostSpace::HostSpace()``
@@ -160,7 +160,7 @@ Deprecated in Kokkos 4.2
 
 * SIMD math functions in the ``Kokkos::Experimental`` namespace
     * replacement: SIMD math function in the ``Kokkos`` namespace
-    * issues with ADL, consistency with other math function overloads 
+    * issues with ADL, consistency with other math function overloads
 
 
 Deprecated in Kokkos 4.1
@@ -218,14 +218,14 @@ Macros deprecated in Kokkos-3.7
 Free-functions deprecated in Kokkos-3.7
 ---------------------------------------
 
-.. list-table::  
+.. list-table::
    :widths: 30 70
    :header-rows: 1
 
-   * - Name 
+   * - Name
      - Where
 
-   * - .. code-block:: cpp 
+   * - .. code-block:: cpp
 
           std::vector<OpenMP> OpenMP::partition(...)
 
@@ -267,7 +267,7 @@ Free-functions deprecated in Kokkos-3.7
 Member functions deprecated in Kokkos-3.7
 ------------------------------------------
 
-.. list-table::  
+.. list-table::
    :widths: 70 30
    :header-rows: 1
 
@@ -301,18 +301,18 @@ Member functions deprecated in Kokkos-3.7
    * - ``static int CudaUVMSpace::number_of_allocations();``
      - ``class CudaUVMSpace`` (Kokkos_CudaSpace.hpp)
 
-   * - ``HPX::partition(...), HPX::partition_master()`` 
+   * - ``HPX::partition(...), HPX::partition_master()``
      - ``class HPX`` (Kokkos_HPX.hpp)
 
 
 Classes deprecated in Kokkos-3.7
 --------------------------------
 
-.. list-table::  
+.. list-table::
    :widths: auto
    :header-rows: 1
 
-   * - 
+   * -
 
    * - ``class MasterLock<OpenMP>``
 
@@ -322,13 +322,13 @@ Classes deprecated in Kokkos-3.7
 Namespace updates
 ----------------------
 
-.. list-table::  
+.. list-table::
    :widths: 40 60
    :header-rows: 1
 
    * - Previous
      - You should now use
- 
+
    * - ``Kokkos::Experimental::aMathFunction``
      - ``Kokkos::aMathFunction``
 
@@ -348,7 +348,7 @@ Namespace updates
 Other deprecations
 ------------------
 
-.. list-table::  
+.. list-table::
    :widths: auto
    :header-rows: 1
 
@@ -399,7 +399,7 @@ Other deprecations
      - ``Kokkos::parallel_*("KokkosViewLabel", policy, f);``
 
 
-Public Headers in Kokkos-3.7 
+Public Headers in Kokkos-3.7
 ----------------------------
 
 From Kokkos-3.7, the following are *public* headers:
@@ -414,4 +414,4 @@ Algorithms
 
 Containers
 ~~~~~~~~~~~~~~~~~~
-``Kokkos_Bit.hpp``, ``Kokkos_DualView.hpp``, ``Kokkos_DynRankView.hpp``, ``Kokkos_ErrorReporter.hpp``, ``Kokkos_Functional.hpp``, ``Kokkos_OffsetView.hpp``, ``Kokkos_ScatterView.hpp``, ``Kokkos_StaticCrsGraph.hpp``, ``Kokkos_UnorderedMap.hpp``, ``Kokkos_Vector.hpp``   
+``Kokkos_Bit.hpp``, ``Kokkos_DualView.hpp``, ``Kokkos_DynRankView.hpp``, ``Kokkos_ErrorReporter.hpp``, ``Kokkos_Functional.hpp``, ``Kokkos_OffsetView.hpp``, ``Kokkos_ScatterView.hpp``, ``Kokkos_StaticCrsGraph.hpp``, ``Kokkos_UnorderedMap.hpp``, ``Kokkos_Vector.hpp``
