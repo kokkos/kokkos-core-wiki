@@ -4,6 +4,20 @@ Deprecations
 Deprecated in Kokkos 4.x
 ===========================
 
+Deprecated in Kokkos 4.7
+---------------------------
+
+* ``KOKKOS_MEMORY_ALIGNMENT[_THRESHOLD]``
+   * replacement: none
+   * unused
+
+* ``Kokkos::MemoryManaged``
+  * replacement: none
+  * consistency with View API
+
+* ``KOKKOS_NONTEMPORAL_PREFETCH_{LOAD,STORE}``
+  * replacement: none
+  * unused
 
 Deprecated in Kokkos 4.6
 ---------------------------
