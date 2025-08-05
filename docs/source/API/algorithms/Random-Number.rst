@@ -95,30 +95,42 @@ are collectives, i.e. all functions can be called inside conditionals.
 
 .. code-block:: cpp
 
-    template<class Device>
+    template<class DeviceType>
     class Pool {
       public:
 
-      typedef Device Device_Type;
-      typedef Generator<Device> Generator_Type;
+      using device_type = DeviceType;
+      using generator_type = Generator<DeviceType>;
 
       Pool();
-      Pool(RanNum_type seed);
+      Pool(uint64_t seed);
+      Pool(uint64_t seed, uint64_t num_states);
+      Pool(const typename DeviceType::execution_space& exec, uint64_t seed);
+      Pool(const typename DeviceType::execution_space& exec, uint64_t seed, uint64_t num_states);
 
-      void init(RanNum_type seed, int num_states);
-      Generator_Type get_state();
-      void free_state(Generator_Type Gen);
+      void init(uint64_t seed, uint64_t num_states);
+      generator_type get_state();
+      void free_state(generator_type Gen);
     }
+
+Construction and Initialization
+-------------------------------
 
 A Pool of Generators are initialized using a starting seed and establishing
 a pool_size of num_states. The Random_XorShift64 generator is used in serial
 to initialize all states making the initialization process platform independent
-and deterministic. Requesting a generator locks it's state guaranteeing that
+and deterministic. Requesting a generator locks its state guaranteeing that
 each thread has a private (independent) generator. (Note, getting a state on a Cuda
 device involves atomics, making it non-deterministic!)
 Upon completion, a generator is returned to the state pool, unlocking
 it, and upon updating of it's status, once again becomes available
 within the pool.
+
+Pool constructors that do not take an execution space instance are synchronous, and use the default execution space instance of the provided `DeviceType`.
+Pool constructors that take an execution space instance are asynchronous.
+
+Use
+---
 
 Given a pool and selection of a generator from within that pool,
 the next step is development of a functor that will draw random
