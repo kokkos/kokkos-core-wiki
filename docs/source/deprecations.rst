@@ -9,7 +9,7 @@ Deprecated in Kokkos 4.7
 
 * ``KOKKOS_MEMORY_ALIGNMENT[_THRESHOLD]``
    * replacement: none
-   * unused
+   * Not intended for non-internal use.
 
 * ``Kokkos::MemoryManaged``
   * replacement: none
