@@ -116,9 +116,9 @@ Description
 
       .. warning::  From Kokkos 4.4, ``src.capacity() == dst.capacity()`` is required
 
-   .. cpp:function:: UnorderedMap<Key, ValueType, Device, Hasher, EqualTo>::HostMirror create_mirror(const UnorderedMap<Key, ValueType, Device, Hasher, EqualTo> &src);
+   .. cpp:function:: UnorderedMap<Key, ValueType, Device, Hasher, EqualTo>::host_mirror_type create_mirror(const UnorderedMap<Key, ValueType, Device, Hasher, EqualTo> &src)
 
-      Create a ``HostMirror`` for an ``UnorderedMap``.
+      Create a ``host_mirror_type`` for an ``UnorderedMap``.
 
 .. cpp:class:: UnorderedMapInsertResult
 
