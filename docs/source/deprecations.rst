@@ -13,11 +13,11 @@ Deprecated in Kokkos 4.7
 
 * ``Kokkos::MemoryManaged``
   * replacement: none
-  * consistency with View API
+  * Unneeded due to redundancy with default memory trait and confusing use when requesting unmanaged views with MemoryManaged
 
 * ``KOKKOS_NONTEMPORAL_PREFETCH_{LOAD,STORE}``
   * replacement: none
-  * unused
+  * Not intended for non-internal use.
 
 Deprecated in Kokkos 4.6
 ---------------------------
