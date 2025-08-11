@@ -57,7 +57,7 @@ Semantics
   - ``space`` is not fenced by ``instance[i].fence()``.
   However, in practice these instances may block each other because they dispatch to the same hardware resources.
 
-- The relative weight of ``args``(or of the ``weights`` elements) is used as a hint for the desired resource allocation.
+- The relative weight of ``args`` (or of the ``weights`` elements) is used as a hint for the desired resource allocation.
   For example for a backend which uses discrete threads, weights of ``{1,2}`` would result
   in two instances where the first is associated with about 1/3rd of the threads of the original instance,
   and the second with 2/3rds. However, for some backends each returned instance may be a copy of the original one.
