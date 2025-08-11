@@ -43,13 +43,13 @@ Description
 
         The compatible view type with the same ``DataType`` and ``LayoutType`` stored in host accessible memory space.
 
-        .. versionadded:: 4.7.1
+        .. versionadded:: 5.0
 
     .. cpp:type:: HostMirror
 
         The compatible view type with the same ``DataType`` and ``LayoutType`` stored in host accessible memory space.
 
-        .. deprecated:: 4.7.1
+        .. deprecated:: 5.0
 
     .. rubric:: Public Data Handle Types
 

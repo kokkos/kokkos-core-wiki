@@ -162,13 +162,13 @@ View Types
 
    compatible view type with the same :cpp:type:`data_type` and :cpp:type:`array_layout` stored in host accessible memory space.
 
-   .. versionadded:: 4.7.1
+   .. versionadded:: 5.0
 
 .. cpp:type:: HostMirror
 
    compatible view type with the same :cpp:type:`data_type` and :cpp:type:`array_layout` stored in host accessible memory space.
 
-   .. deprecated:: 4.7.1
+   .. deprecated:: 5.0
 
 Data Handles
 ^^^^^^^^^^^^
