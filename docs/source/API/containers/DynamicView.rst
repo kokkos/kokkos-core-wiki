@@ -49,7 +49,7 @@ Description
 
         The compatible view type with the same ``DataType`` and ``LayoutType`` stored in host accessible memory space.
 
-        deprecated:: 4.7.1
+        .. deprecated:: 4.7.1
 
     .. rubric:: Public Data Handle Types
 
