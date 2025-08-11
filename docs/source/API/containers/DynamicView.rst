@@ -43,7 +43,7 @@ Description
 
         The compatible view type with the same ``DataType`` and ``LayoutType`` stored in host accessible memory space.
 
-        versionadded:: 4.7.1
+        .. versionadded:: 4.7.1
 
     .. cpp:type:: HostMirror
 
