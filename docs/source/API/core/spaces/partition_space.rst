@@ -21,7 +21,7 @@ Usage
 Interface
 ---------
 
-.. cpp:function:: template<class ExecSpace, class ... Args> std::vector<ExecSpace> partition_space(const ExecSpace& space, Args...args);
+.. cpp:function:: template<class ExecSpace, class ... Args> std::array<ExecSpace, sizeof...(Args)> partition_space(const ExecSpace& space, Args...args);
 
 .. cpp:function:: template<class ExecSpace, class T> std::vector<ExecSpace> partition_space(const ExecSpace& space, std::vector<T> const& weights);
 
