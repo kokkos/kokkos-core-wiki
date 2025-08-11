@@ -21,7 +21,7 @@ Usage
 Interface
 ---------
 
-.. cpp:function:: template<class ExecSpace, class ... Args> std::vector<ExecSpace> partition_space(const ExecSpace& space, Args...args);
+.. cpp:function:: template<class ExecSpace, class ... Args> std::array<ExecSpace, sizeof...(Args)> partition_space(const ExecSpace& space, Args...args);
 
 .. cpp:function:: template<class ExecSpace, class T> std::vector<ExecSpace> partition_space(const ExecSpace& space, std::vector<T> const& weights);
 
@@ -57,7 +57,7 @@ Semantics
   - ``space`` is not fenced by ``instance[i].fence()``.
   However, in practice these instances may block each other because they dispatch to the same hardware resources.
 
-- The relative weight of ``args``(or of the ``weights`` elements) is used as a hint for the desired resource allocation.
+- The relative weight of ``args`` (or of the ``weights`` elements) is used as a hint for the desired resource allocation.
   For example for a backend which uses discrete threads, weights of ``{1,2}`` would result
   in two instances where the first is associated with about 1/3rd of the threads of the original instance,
   and the second with 2/3rds. However, for some backends each returned instance may be a copy of the original one.
@@ -76,20 +76,20 @@ Splitting an existing instance for use with concurrent kernels
 
    template<class ExecSpace, class ... OtherParams>
    void foo(const ExecSpace& space, OtherParams...params) {
-     auto instances = Kokkos::partition_space(space,1,2);
+     auto [instance0, instance1] = Kokkos::partition_space(space,1,2);
      // dispatch two kernels, F1 needs less resources then F2
      // F1 and F2 may now execute concurrently
      Kokkos::parallel_for("F1",
-       Kokkos::RangePolicy<ExecSpace>(instances[0],0,N1),
+       Kokkos::RangePolicy<ExecSpace>(instance0,0,N1),
        Functor1(params...));
      Kokkos::parallel_for("F2",
-       Kokkos::RangePolicy<ExecSpace>(instances[1],0,N2),
+       Kokkos::RangePolicy<ExecSpace>(instance1,0,N2),
        Functor2(params...));
 
      // Wait for both
      // Note: space.fence() would NOT block execution of the instances
-     instances[0].fence();
-     instances[1].fence();
+     instance0.fence();
+     instance1.fence();
      Kokkos::parallel_for("F3",
        Kokkos::RangePolicy<ExecSpace>(space,0,N3),
        Functor3(params...));
