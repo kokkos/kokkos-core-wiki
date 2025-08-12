@@ -55,8 +55,8 @@ typedef Kokkos::View<double**, Kokkos::CudaSpace>  ViewMatrixType;
 
 // Setup data on host  
 // use parameter xVal to demonstrate variability between iterations
-void init_src_views(ViewVectorType::HostMirror p_x,
-                  ViewMatrixType::HostMirror p_A,
+void init_src_views(ViewVectorType::host_mirror_type p_x,
+                  ViewMatrixType::host_mirror_type p_A,
                   const value_type xVal ) {
     
   Kokkos::parallel_for( "init_A", host_range_policy(0,N), [=] ( int i ) {
@@ -74,9 +74,9 @@ ViewVectorType y( "y", N );
 ViewVectorType x( "x", M );
 ViewMatrixType A( "A", N, M );
 
-ViewVectorType::HostMirror h_y = Kokkos::create_mirror_view( y );
-ViewVectorType::HostMirror h_x = Kokkos::create_mirror_view( x );
-ViewMatrixType::HostMirror h_A = Kokkos::create_mirror_view( A );
+ViewVectorType::host_mirror_type h_y = Kokkos::create_mirror_view( y );
+ViewVectorType::host_mirror_type h_x = Kokkos::create_mirror_view( x );
+ViewMatrixType::host_mirror_type h_A = Kokkos::create_mirror_view( A );
   
 for ( int repeat = 0; repeat < nrepeat; repeat++ ) {
   init_src_views( h_x, h_A, repeat+1);  // setup data for next device launch
@@ -142,7 +142,7 @@ typedef Kokkos::View<double*>    ViewVectorType;
 
 ViewVectorType V_r;
 ViewVectorType V_r1;
-ViewVectorType::HostMirror h_V = Kokkos::create_mirror_view( y );
+ViewVectorType::host_mirror_type h_V = Kokkos::create_mirror_view( y );
 
 get_initial_state(h_V); // function to initialize V on host
 
