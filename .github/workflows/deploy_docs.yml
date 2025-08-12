@@ -13,7 +13,7 @@ jobs:
     container:
       image: python:3.12
     steps:
-      - uses: actions/checkout@v4.2.2
+      - uses: actions/checkout@v5
       - run: pip install -r build_requirements.txt
       - run: apt update && apt --yes --no-install-recommends install graphviz
       - name: Build documentation
