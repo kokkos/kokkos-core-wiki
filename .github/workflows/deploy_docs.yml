@@ -22,7 +22,7 @@ jobs:
           make html
       - name: Updload documentation as artifact
         id: deployment
-        uses: actions/upload-pages-artifact@v3.0.1
+        uses: actions/upload-pages-artifact@v4.0.0
         with:
           name: github-pages
           path: ${{ env.docs-directory }}/generated_docs
