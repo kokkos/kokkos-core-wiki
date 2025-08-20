@@ -2,17 +2,21 @@ Reduction Scalar Types
 ######################
 
 .. list-table::
-   :widths: 25 75
+   :widths: 20 65 15
    :header-rows: 1
 
-   * - Class
+   * - Class template
      - Description
-   * - `MinMaxLocScalar <MinMaxLocScalar.html>`__
-     - Template class for storing the min and max values with indices for min/max location reducers.
-   * - `MinMaxScalar <MinMaxScalar.html>`__
-     - Template class for storing the min and max values for min/max reducers.
-   * - `ValLocScalar <ValLocScalar.html>`__
-     - Template class for storing a value plus index for min/max location reducers.
+     - Builtin Reducer
+   * - :doc:`MinMaxLocScalar`
+     - stores a minimum, a maximum, and their respective locations
+     - :cpp:class:`MinMaxLoc`
+   * - :doc:`MinMaxScalar`
+     - stores a minimum value and a maximum value
+     - :cpp:class:`MinMax`
+   * - :doc:`ValLocScalar`
+     - stores a single value and its location
+     - :cpp:class:`MinLoc`, :cpp:class:`MaxLoc`
 
 .. toctree::
    :hidden:

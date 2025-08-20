@@ -4,7 +4,14 @@
 .. role::cpp(code)
     :language: cpp
 
-Template class for storing a value plus index for min/max location reducers. Should be accessed via ``::value_type`` defined for particular reducer.
+:cpp:struct:`ValLocScalar` is a class template that stores a **value** and its
+corresponding **location** (index) as a single, convenient unit. It is
+primarily designed to hold the result of :cpp:func:`parallel_reduce` operations
+using the :cpp:class:`MinLoc` and :cpp:class:`MaxLoc` builtin reducers.
+
+It is generally recommended to get this type by using the reducer's
+``::value_type`` member (e.g., ``MaxLoc<Scalar,Index,Space>::value_type``) to
+ensure the correct template parameters are used.
 
 Header File: ``<Kokkos_Core.hpp>``
 
@@ -18,29 +25,21 @@ Usage
     T resultValue = result.val;
     I resultIndex = result.loc;
 
-Synopsis 
---------
+Interface
+---------
 
-.. code-block:: cpp
-    
-    template<class Scalar, class Index>
-    struct ValLocScalar{
-        Scalar val;
-        Index loc;
+.. cpp:struct::  template<class Scalar, class Index> ValLocScalar
 
-        void operator = (const ValLocScalar& rhs);
-    };
+   :tparam Scalar: The data type of the value being reduced (e.g., ``double``, ``int``).
 
-Public Members
---------------
+   :tparam Index: The data type of the location or iteration index (e.g., ``int``, ``long long``).
 
-Variables
-~~~~~~~~~
-   
-* ``val``: Scalar Value.
-* ``loc``: Scalar index.
+   .. rubric:: Data members
 
-Assignment operators
-~~~~~~~~~~~~~~~~~~~~
+   .. cpp:var:: Scalar val
 
-* ``void operator = (const ValLocScalar& rhs);`` assign ``val`` and ``loc`` from ``rhs``;
+      The reduced value.
+
+   .. cpp:var:: Index loc
+
+      The location (iteration index) of the reduced value

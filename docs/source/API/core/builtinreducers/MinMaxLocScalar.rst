@@ -21,46 +21,28 @@ Usage
    I minLoc = result.min_loc;
    I maxLoc = result.max_loc;
 
-Synopsis
---------
-
-.. code-block:: cpp
-
-   template<class Scalar, class Index>
-   struct MinMaxLocScalar{
-     Scalar min_val;
-     Scalar max_val;
-     Index min_loc;
-     Index max_loc;
-
-     void operator = (const MinMaxLocScalar& rhs);
-   };
-
 Interface
 ---------
 
-.. cpp:struct:: template<class Scalar, class Index> MinMaxLocScalar
+.. cpp:struct::  template<class Scalar, class Index> MinMaxLocScalar
 
-   .. rubric:: Public Members
+   :tparam Scalar: The data type of the value being reduced.
+   :tparam Index: The data type of the locations (indices) of the values.
 
-   .. cpp:member:: Scalar min_val
+   .. rubric:: Data members
 
-      Scalar minimum Value.
+   .. cpp:var:: Scalar min_val
 
-   .. cpp:member:: Scalar max_val
+      The reduced minimum value.
 
-      Scalar maximum Value.
+   .. cpp:var:: Scalar max_val
 
-   .. cpp:member:: Index min_loc
+      The reduced maximum value.
 
-      Minimum location(Index).
+   .. cpp:var:: Index min_loc
 
-   .. cpp:member:: Index max_loc
+      The location (iteration index) of the minimum value
 
-      Maximum location(Index).
+   .. cpp:var:: Index max_loc
 
-   .. rubric:: Assignment Operator
-
-   .. cpp:function:: void operator = (const MinMaxLocScalar& rhs)
-
-      Assign ``min_val``, ``max_val``, ``min_loc`` and ``max_loc`` from ``rhs``
+      The location (iteration index) of the maximum value
