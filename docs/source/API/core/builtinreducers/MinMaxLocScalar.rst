@@ -4,8 +4,14 @@
 .. role::cpp(code)
     :language: cpp
 
-Template class for storing the min and max values with indices for min/max location reducers.
-Should be accessed via ``::value_type`` defined for a particular reducer.
+The :cpp:struct:`MinMaxLocScalar` is a class template that stores both a
+minimum, a maximum, and their respective locations as a single unit. It's
+designed to hold the result of :cpp:func:`parallel_reduce` operations using
+a :cpp:class:`MinMaxLoc` builtin reducer.
+
+It is generally recommended to get this type by using the reducer's
+``::value_type`` member (e.g., ``MinMaxLoc<Scalar,Index,Space>::value_type``)
+to ensure the correct template parameters are used.
 
 Header File: ``<Kokkos_Core.hpp>``
 
