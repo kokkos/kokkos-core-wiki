@@ -10,6 +10,53 @@ However, in complex code, we have to work around compiler bugs. So compiler vers
 
 Furthermore, compilers not listed here may work too.
 
+Kokkos 5.x
+----------
+
+.. list-table::
+    :widths: 30 35
+    :header-rows: 1
+    :align: center
+
+    * - Compiler
+      - Minimum version
+
+    * * GCC 
+      * 10.4.0
+
+    * * Clang (CPU)
+      * 14.0.0
+
+    * * Clang (CUDA)
+      * 14.0.0
+
+    * * AppleClang 
+      * 8.0
+
+    * * IntelLLVM (CPU)
+      * 2022.0.0
+
+    * * IntelLLVM (SYCL)
+      * 2024.2.1
+
+    * * NVCC 
+      * 12.2
+
+    * * NVC++ 
+      * 22.3
+
+    * * NVC++ (OpenACC) (experimental) 
+      * 23.7
+
+    * * ROCM 
+      * 6.2.0 
+
+    * * MSVC 
+      * 19.30
+ 
+    * * ARM/Clang 
+      * 20.1
+
 Kokkos 4.x
 ----------
 
