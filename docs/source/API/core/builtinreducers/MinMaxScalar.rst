@@ -4,8 +4,14 @@
 .. role::cpp(code)
     :language: cpp
 
-Template class for storing the min and max values for min/max reducers.
-Should be accessed via ``::value_type`` defined for a particular reducer.
+:cpp:struct:`MinMaxScalar` is a class template that stores both a minimum and a
+maximum value as a single, convenient unit. It is primarily designed to hold
+the result of :cpp:func:`parallel_reduce` operations using the
+:cpp:class:`MinMax` builtin reducer.
+
+It is generally recommended to get this type by using the reducer's
+``::value_type`` member (e.g., ``MinMax<Scalar,Space>::value_type``) to ensure
+the correct template parameters are used.
 
 Header File: ``<Kokkos_Core.hpp>``
 
@@ -19,37 +25,19 @@ Usage
    T minValue = result.min_val;
    T maxValue = result.max_val;
 
-Synopsis
---------
-
-.. code-block:: cpp
-
-   template<class Scalar>
-   struct MinMaxScalar{
-     Scalar min_val;
-     Scalar max_val;
-
-     void operator = (const MinMaxScalar& rhs);
-   };
-
-
 Interface
 ---------
 
-.. cpp:struct:: template<class Scalar> MinMaxScalar
+.. cpp:struct::  template<class Scalar> MinMaxScalar
 
-   .. rubric:: Public Members
+   :tparam Scalar: The data type of the value being reduced (e.g., ``double``, ``int``).
 
-   .. cpp:member:: Scalar min_val
+   .. rubric:: Data members
 
-      Scalar minimum Value.
+   .. cpp:var:: Scalar min_val
 
-   .. cpp:member:: Scalar max_val
+      The reduced minimum value.
 
-      Scalar maximum Value.
+   .. cpp:var:: Scalar max_val
 
-   .. rubric:: Assignment Operator
-
-   .. cpp:function:: void operator = (const MinMaxScalar& rhs)
-
-      Assign ``min_val`` and ``max_val`` from ``rhs``
+      The reduced maximum value.
