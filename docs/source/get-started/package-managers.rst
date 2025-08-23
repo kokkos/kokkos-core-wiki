@@ -126,3 +126,22 @@ For more complete examples, you can look at already existing recipes in the *Req
 
     spack dependents kokkos
 
+`Homebrew <https://docs.brew.sh/>`_
+
+Homebrew is a package manager for macOS. `Kokkos` can be installed with:
+
+.. code-block::
+
+    brew install kokkos
+
+This implementation includes `OpenMP`, but does not have `CUDA`, `ROCm`, or `SYCL` backend support.
+
+`AUR <https://aur.archlinux.org/packages/kokkos/>`_
+
+The AUR is a user-submission-based repository for Arch Linux. `Kokkos` can be installed with:
+
+.. code-block::
+
+    yay -Sy kokkos
+
+This implementation includes the base `Serial` backend. Other backends can be activated by modifying the `PKGBUILD` file.
