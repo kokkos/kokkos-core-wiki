@@ -134,7 +134,7 @@ Homebrew is a package manager for macOS. `Kokkos` can be installed with:
 
     brew install kokkos
 
-This implementation includes `OpenMP`, but does not have `CUDA`, `ROCm`, or `SYCL` backend support.
+This implementation includes `OpenMP`, but does not have `CUDA`, `HIP`, or `SYCL` backend support.
 
 `AUR <https://aur.archlinux.org/packages/kokkos/>`_
 
