@@ -8,7 +8,6 @@ Programming Guide
    ./ProgrammingGuide/Introduction
    ./ProgrammingGuide/Machine-Model
    ./ProgrammingGuide/ProgrammingModel
-   ./ProgrammingGuide/Compiling
    ./ProgrammingGuide/Initialization
    ./ProgrammingGuide/View
    ./ProgrammingGuide/ParallelDispatch
