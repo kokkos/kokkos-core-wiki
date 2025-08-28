@@ -35,7 +35,7 @@ On the other hand you should probably not use Hierarchical Parallelism if you ha
 (HP_thread_teams)=
 ## Thread teams
 
-Kokkos' most basic hierarchical parallelism concept is a thread team. A _thread team_ is a collection of threads which can synchronize and which share a "scratch pad" memory (see [Section 8.3](Team_scratch_pad_memory)).
+Kokkos' most basic hierarchical parallelism concept is a thread team. A _thread team_ is a collection of threads which can synchronize and which share a "scratch pad" memory (see [Section 7.3](Team_scratch_pad_memory)).
 
 Instead of mapping a 1-D range of indices to hardware resources, Kokkos' thread teams map a 2-D index range. The first index is the _league rank_, the index of the team. The second index is the _team rank_, the thread index within a team. In CUDA this is equivalent to launching a 1-D grid of 1-D blocks. The league size is arbitrary -- that is, it is only limited by the integer size type -- while the team size must fit in the hardware constraints. As in CUDA, only a limited number of teams are actually active at the same time, and they must run to completion before new ones are executed. Consequently, it is not valid to use inter thread-team synchronization mechanisms such as waits for events initiated by other thread teams.
 
