@@ -59,6 +59,7 @@ Avoid creating/removing/modifying header files whose names start with `Kokkos_`,
 
 The following are public headers:
 
+    // Core API
     Kokkos_Core.hpp
 
     Kokkos_Abort.hpp                     // since Kokkos 4.2
@@ -79,6 +80,22 @@ The following are public headers:
     Kokkos_Profiling_ScopedRegion.hpp
     Kokkos_Swap.hpp                      // since Kokkos 4.3
     Kokkos_Timer.hpp
+
+    // Containers API
+    Kokkos_Bitset.hpp
+    Kokkos_DualView.hpp
+    Kokkos_DynamicView.hpp
+    Kokkos_DynRankView.hpp
+    Kokkos_OffsetView.hpp
+    Kokkos_ScatterView.hpp
+    Kokkos_UnorderedMap.hpp
+
+    // Algorithms API
+    Kokkos_NestedSort.hpp
+    Kokkos_Random.hpp
+    Kokkos_Sort.cppm
+    Kokkos_Sort.hpp
+    Kokkos_StdAlgorithms.hpp
 
 
 If a header is not public, please do not directly `#include` it.  It is not guaranteed to work now or continue to work in the future.  This includes any headers found in subdirectories.
