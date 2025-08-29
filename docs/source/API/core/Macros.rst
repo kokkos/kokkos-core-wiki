@@ -9,6 +9,14 @@ Function Markup Macros
 
    macros-special/host_device_macros.rst
 
+``KOKKOS_IF_ON_HOST`` and ``KOKKOS_IF_ON_DEVICE``
+-------------------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+   macros-special/if_on_host_or_device.rst
+
 Version Macros
 --------------
 
