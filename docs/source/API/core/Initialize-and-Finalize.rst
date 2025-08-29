@@ -17,6 +17,18 @@ Shutdown Kokkos initialized execution spaces and release internally managed reso
 See `Kokkos::finalize <initialize_finalize/finalize.html>`_ for details.
 
 
+Kokkos::is_initialized
+----------------------
+Allows to query initialization status of Kokkos and returns `true` if Kokkos is initialized.
+
+See `Kokkos::is_initialized <initialize_finalize/is_Initialized.rst>`_ for details.
+
+Kokkos::is_finalized
+--------------------
+Allows to query finalizaton status of Kokkos and returns `true` is Kokkos is finalized.
+
+See `Kokkos::is_finalized <initialize_finalize/is_Finalized.rst>`_ for details.
+
 Kokkos::ScopeGuard
 ------------------
 
@@ -54,6 +66,8 @@ In the above example, ``my_view`` will not go out of scope until the end of the 
 
    ./initialize_finalize/initialize
    ./initialize_finalize/finalize
+   ./initialize_finalize/is_Initialized
+   ./initialize_finalize/is_Finalized
    ./initialize_finalize/ScopeGuard
    ./initialize_finalize/InitializationSettings
    ./initialize_finalize/InitArguments
