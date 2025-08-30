@@ -21,10 +21,12 @@ Motivation
 ==========
 Traditional preprocessor directives like ``#ifdef __CUDA_ARCH__`` rely on a
 split compilation model, where host and device code are compiled in separate
-passes.  This model is not supported by modern unified compilation approaches,
-such as the one used by the NVIDIA HPC compiler (NVC++). As a result, code
-written with ``__CUDA_ARCH__`` is not portable across different compilers and
-backends.
+passes.  While this model is supported by some compilers (like ``nvcc``), it is
+not universally portable.  Other modern compilers for GPU-accelerated code,
+such as those that support OpenACC or OpenMPTarget, use a unified compilation
+approach where both host and device code are compiled in a single pass. As a
+result, code written with backend-specific macros is not portable across
+different compilers and programming models
 
 The ``KOKKOS_IF_ON_HOST`` and ``KOKKOS_IF_ON_DEVICE`` macros solve this
 portability problem by allowing the compiler to conditionally compile code
