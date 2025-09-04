@@ -24,8 +24,8 @@ Interface
 
    .. note::
 
-        This class is a convenience for use in tutorials and is not intended
-        for production code. For serious performance profiling, it is
+        This class is intended for "quick and dirty" timing as well as situations where
+        timing is meant to be "always on". For serious performance profiling, it is
         recommended to use the **Kokkos Tools** API. Kokkos Tools provides the
         flexibility to enable or disable profiling at runtime without modifying
         your application, avoiding the need to clutter your code with explicit
