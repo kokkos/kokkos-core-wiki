@@ -72,7 +72,7 @@ Description
 
        The type of a ``Kokkos::View`` on the device.
 
-    .. cpp:type:: typename t_dev::HostMirror t_host
+    .. cpp:type:: typename t_dev::host_mirror_type t_host
 
        The type of a ``Kokkos::View`` host mirror of ``t_dev``.
 
@@ -80,7 +80,7 @@ Description
 
        The type of a const View on the device.
 
-    .. cpp:type:: typename t_dev_const::HostMirror t_host_const
+    .. cpp:type:: typename t_dev_const::host_mirror_type t_host_const
 
        The type of a const View host mirror of ``t_dev_const``.
 
@@ -88,7 +88,7 @@ Description
 
        The type of a const, random-access View on the device.
 
-    .. cpp:type:: typename t_dev_const_randomread::HostMirror t_host_const_randomread
+    .. cpp:type:: typename t_dev_const_randomread::host_mirror_type t_host_const_randomread
 
        The type of a const, random-access View host mirror of ``t_dev_const_randomread``.
 
@@ -112,7 +112,7 @@ Description
 
        The type of a const, random-access View on the device.
 
-    .. cpp:type:: typename t_dev_const_randomread::HostMirror t_host_const_randomread_um
+    .. cpp:type:: typename t_dev_const_randomread::host_mirror_type t_host_const_randomread_um
 
        The type of a const, random-access View host mirror of ``t_dev_const_randomread``.
 
@@ -177,7 +177,7 @@ Description
 
        - ``d_view_`` Device View
 
-       - ``h_view_`` Host View (must have type ``t_host = t_dev::HostMirror``)
+       - ``h_view_`` Host View (must have type ``t_host = t_dev::host_mirror_type``)
 
     |
 
