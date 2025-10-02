@@ -737,6 +737,11 @@ Kokkos will attempt to autodetect the architecture flag at configuration time.
       * MI50, MI60
       * (since Kokkos 4.2)
 
+    * * ``Kokkos_ARCH_AMD_GFX1201``
+      * GFX1201
+      * Radeon AI PRO R9700, Radeon RX 9070 XT
+      * (since Kokkos 5.0)
+
     * * ``Kokkos_ARCH_AMD_GFX1103``
       * GFX1103
       * Ryzen 8000G Phoenix series APU
