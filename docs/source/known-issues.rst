@@ -20,7 +20,8 @@ Kokkos_ENABLE_MULTIPLE_CMAKE_LANGUAGES
 ======================================
 
 This option allows to use one installed Kokkos library in multiple CMake languages (`CXX` and the language of the respective backend (`CUDA` or `HIP`)).
-With this option enabled, Kokkos will use its compiler launcher script to redirect the `CXX` compiler if necessary.
+With this option enabled, Kokkos will use its compiler launcher script to redirect the `CXX` compiler unless the `separable_compilation` component is requested.
+With the `separable_compilation` component, targets/projects/directories that link to Kokkos need to be marked manually via the CMake function `kokkos_compilation`.
 Since Kokkos is limited to a single architecture, the `CMAKE_<LANG>_ARCHITECTURES` must correspond to the architecture enabled in Kokkos.
 
 An example for using Kokkos with multiple languages can be found in `example/build_cmake_installed_multilanguage`
