@@ -249,6 +249,10 @@ Backend-specific options
       * Build with the CMake language feature (CUDA or HIP only). For info see `language issues <../known-issues.html>`_
       * ``OFF``
 
+    * * ``Kokkos_ENABLE_MULTIPLE_CMAKE_LANGUAGES``
+      * Make Kokkos installation usable in CXX and backend-compatible languages (CUDA or HIP). For info see `multilanguage issues <../known-issues.html>`_
+      * ``OFF``
+
 
 ``Kokkos_ENABLE_CUDA_LAMBDA`` default value is ``OFF`` until 3.7 and ``ON`` since 4.0
 

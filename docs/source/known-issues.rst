@@ -16,6 +16,15 @@ Furthermore, the architecture needs to be specified for every target in accordan
 
 An example for marking the files accordingly can be found in `example/build_cmake_installed_kk_as_language`
 
+Kokkos_ENABLE_MULTIPLE_CMAKE_LANGUAGES
+======================================
+
+This option allows to use one installed Kokkos library in multiple CMake languages (`CXX` and the language of the respective backend (`CUDA` or `HIP`)).
+With this option enabled, Kokkos will use its compiler launcher script to redirect the `CXX` compiler if necessary.
+Since Kokkos is limited to a single architecture, the `CMAKE_<LANG>_ARCHITECTURES` must correspond to the architecture enabled in Kokkos.
+
+An example for using Kokkos with multiple languages can be found in `example/build_cmake_installed_multilanguage`
+
 ``Windows.h`` header
 ====================
 
