@@ -172,7 +172,7 @@ Backend options
 +-------------------------------------------------------+---------------------------------------------------------------------------------------+
 | ``KOKKOS_ENABLE_CUDA_LAMBDA``                         | Defined if the CUDA backend supports lambdas.                                         |
 +-------------------------------------------------------+---------------------------------------------------------------------------------------+
-| ``KOKKOS_ENABLE_CUDA_LDG_INTRINSINCS``                | Defined if the CUDA backend supports LDG intrinsic.                                   |
+| ``KOKKOS_ENABLE_CUDA_LDG_INTRINSICS``                 | Defined if the CUDA backend supports LDG intrinsic.                                   |
 +-------------------------------------------------------+---------------------------------------------------------------------------------------+
 | ``KOKKOS_ENABLE_CUDA_RELOCATABLE_DEVICE_CODE``        | Defined if the CUDA backend supports relocatable device code.                         |
 +-------------------------------------------------------+---------------------------------------------------------------------------------------+
