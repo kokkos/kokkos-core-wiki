@@ -38,7 +38,7 @@ Containers
 +----------------------------------------------------+---------------------------------------+----------+----------------------------------------------------------------------------------------------------------------+
 | `DynRankView <containers/DynRankView.html>`_       | `Containers <containers-index.html>`_ | View     | A view which can determine its rank at runtime.                                                                |
 +----------------------------------------------------+---------------------------------------+----------+----------------------------------------------------------------------------------------------------------------+
-| ErrorReporter                                      | `Containers <containers-index.html>`_ | View     | A class supporting error recording in parallel code.                                                           |
+| `ErrorReporter <containers/ErrorReporter.html>`_   | `Containers <containers-index.html>`_ | View     | A class supporting error recording in parallel code.                                                           |
 +----------------------------------------------------+---------------------------------------+----------+----------------------------------------------------------------------------------------------------------------+
 | `OffsetView <containers/Offset-View.html>`_        | `Containers <containers-index.html>`_ | View     | View structure supporting non-zero start indices.                                                              |
 +----------------------------------------------------+---------------------------------------+----------+----------------------------------------------------------------------------------------------------------------+
