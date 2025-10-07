@@ -108,6 +108,7 @@ are collectives, i.e. all functions can be called inside conditionals.
       Pool(const typename DeviceType::execution_space& exec, uint64_t seed);
       Pool(const typename DeviceType::execution_space& exec, uint64_t seed, uint64_t num_states);
 
+      void init(uint64_t seed, uint64_t num_states);  // deprecated since Kokkos 5.0
       generator_type get_state();
       void free_state(generator_type Gen);
     }
