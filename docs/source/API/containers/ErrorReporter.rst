@@ -6,7 +6,7 @@
 
 Defined in header ``<Kokkos_ErrorReporter.hpp>``
 
-``ErrorReporter`` is an class that can collect error reports in a thread safe manner.
+``ErrorReporter`` is a class that can collect error reports in a thread safe manner.
 The report type is user defined, and it will only store errors up to a defined capacity.
 
 Interface
