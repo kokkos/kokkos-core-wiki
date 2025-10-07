@@ -666,25 +666,25 @@ Kokkos will attempt to autodetect the architecture flag at configuration time.
       * Kepler
       * 3.7
       * K80
-      * Removed in 5.0
+      * (removed in Kokkos 5.0)
 
     * * ``Kokkos_ARCH_KEPLER35``
       * Kepler
       * 3.5
       * K40, K20
-      * Removed in 5.0
+      * (removed in Kokkos 5.0)
 
     * * ``Kokkos_ARCH_KEPLER32``
       * Kepler
       * 3.2
       *
-      * Removed in 5.0
+      * (removed in Kokkos 5.0)
 
     * * ``Kokkos_ARCH_KEPLER30``
       * Kepler
       * 3.0
       * K10
-      * Removed in 5.0
+      * (removed in Kokkos 5.0)
 
 
 AMD GPUs
