@@ -246,7 +246,7 @@ Backend-specific options
       * ``ON``
 
     * * ``Kokkos_ENABLE_COMPILE_AS_CMAKE_LANGUAGE``
-      * Build with the CMake language feature (CUDA or HIP only). For info see `language issues <../known-issues.html>`_
+      * Build with the CMake language feature (CUDA or HIP only). (see below)
       * ``OFF``
 
     * * ``Kokkos_ENABLE_MULTIPLE_CMAKE_LANGUAGES``
@@ -260,6 +260,14 @@ Backend-specific options
 
 ``Kokkos_ENABLE_<CUDA/HIP/SYCL>_RELOCATABLE_DEVICE_CODE`` requires a static library build.
  RDC is not compatible with shared libraries. Therefore, this option can only be enabled when the ``BUILD_SHARED_LIBS`` variable is false.
+
+``Kokkos_ENABLE_COMPILE_AS_CMAKE_LANGUAGE`` Building with the CMake language feature can cause problems in downstream libraries/applications.
+CMake uses the file endings to determine the language a file should be compiled with. Since Kokkos files are named `cpp` and `hpp`, they are associated with `CXX` in CMake.
+This implies that source and header files that use Kokkos might need to be redefined to be treated as another language. Otherwise, the language is detected based on the file endings. This might lead to files not being able to compile (e.g. using Kokkos in a `.cpp` file instead of a `.cu` file leads to CMake detecting `CXX` instead of `CUDA`).
+Without specifying the language the compilation might fail depending on the capabilities of the `CXX` compiler to compile device code.
+Furthermore, the architecture needs to be specified for every target in accordance with what `Kokkos_ARCH_...` is set and not with `CMAKE_<LANG>_ARCHITECTURES`. This also implies only one architecture can be active.
+
+An example for marking the files accordingly can be found in `example/build_cmake_installed_kk_as_language`
 
 ``Kokkos_ENABLE_MULTIPLE_CMAKE_LANGUAGES`` This option allows to use one installed Kokkos library in multiple CMake languages (`CXX` and the language of the respective backend (`CUDA` or `HIP`)).
 With this option enabled, Kokkos will use its compiler launcher script to redirect the `CXX` compiler unless the `separable_compilation` component is requested.
