@@ -250,7 +250,7 @@ Backend-specific options
       * ``OFF``
 
     * * ``Kokkos_ENABLE_MULTIPLE_CMAKE_LANGUAGES``
-      * Make Kokkos installation usable in CXX and backend-compatible languages (CUDA or HIP). For info see `multilanguage issues <../known-issues.html>`_
+      * Make Kokkos installation usable in CXX and backend-compatible languages (CUDA or HIP). (see below, since Kokkos 5.0)
       * ``OFF``
 
 
@@ -261,6 +261,12 @@ Backend-specific options
 ``Kokkos_ENABLE_<CUDA/HIP/SYCL>_RELOCATABLE_DEVICE_CODE`` requires a static library build.
  RDC is not compatible with shared libraries. Therefore, this option can only be enabled when the ``BUILD_SHARED_LIBS`` variable is false.
 
+``Kokkos_ENABLE_MULTIPLE_CMAKE_LANGUAGES`` This option allows to use one installed Kokkos library in multiple CMake languages (`CXX` and the language of the respective backend (`CUDA` or `HIP`)).
+With this option enabled, Kokkos will use its compiler launcher script to redirect the `CXX` compiler unless the `separable_compilation` component is requested.
+With the `separable_compilation` component, targets/projects/directories that link to Kokkos need to be marked manually via the CMake function `kokkos_compilation`.
+Since Kokkos is limited to a single architecture, the `CMAKE_<LANG>_ARCHITECTURES` must correspond to the architecture enabled in Kokkos.
+
+An example for using Kokkos with multiple languages can be found in `example/build_cmake_installed_multilanguage`
 
 Development
 -----------
