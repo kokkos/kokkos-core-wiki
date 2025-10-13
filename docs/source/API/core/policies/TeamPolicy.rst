@@ -185,15 +185,21 @@ Examples
 
     using team_handle = TeamPolicy<>::member_type;
     parallel_for(TeamPolicy<>(N,AUTO), KOKKOS_LAMBDA (const team_handle& team) {
+
+        // each team initializes a row of A
         int n = team.league_rank();
         parallel_for(TeamThreadRange(team,M), [&] (const int& i) {
             A(n,i) = B(n) + i;
         });
         team.team_barrier();
+
+        // Compute the sum of the nth row of matrix A, stored as a rank-2 view
         int team_sum;
         parallel_reduce(TeamThreadRange(team,M), [&] (const int& i, int& lsum) {
             lsum += A(n,i);
         },team_sum);
+        
+        // store the sum of the row in corresponding entry of A_rowsum vector
         single(PerTeam(team),[&] () {
             A_rowsum(n) = team_sum;
         });
