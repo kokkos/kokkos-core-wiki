@@ -4,6 +4,12 @@ Traits
 is_array_layout
 ---------------
 
+Boolean type trait to detect types that model the Layout concept. (Deprecated since Kokkos 5.0)
+
+
+is_layout_type
+--------------
+
 Boolean type trait to detect types that model the Layout concept.
 
 is_execution_policy

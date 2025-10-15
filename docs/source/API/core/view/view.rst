@@ -160,7 +160,7 @@ View Types
 
 .. cpp:type:: HostMirror
 
-   compatible view type with the same :cpp:type:`data_type` and :cpp:type:`array_layout` stored in host accessible memory space.
+   compatible view type with the same :cpp:type:`data_type` and :cpp:type:`layout_type` stored in host accessible memory space.
 
 
 Data Handles
@@ -184,7 +184,13 @@ Data Handles
 Other Types
 ^^^^^^^^^^^
 
-.. cpp:type:: array_layout
+  .. deprecated:: 5.0
+
+.. cpp:type:: array_type
+
+   The :cpp:any:`LayoutType` of the :cpp:class:`View`.
+
+.. cpp:type:: layout_type
 
    The :cpp:any:`LayoutType` of the :cpp:class:`View`.
 
@@ -233,9 +239,9 @@ Constructors
 
    - :cpp:expr:`sizeof(IntType...) == rank_dynamic()` or :cpp:expr:`sizeof(IntType...) == rank()`.
       In the latter case, the extents corresponding to compile-time dimensions must match the :cpp:class:`View` type's compile-time extents.
-   - :cpp:expr:`array_layout::is_regular == true`.
+   - :cpp:expr:`layout_type::is_regular == true`.
 
-.. cpp:function:: View( const std::string& name, const array_layout& layout)
+.. cpp:function:: View( const std::string& name, const layout_type& layout)
 
    Standard allocating constructor. The initialization is executed on the default
    instance of the execution space corresponding to :cpp:type:`memory_space` and fences it.
@@ -263,9 +269,9 @@ Constructors
 
    - :cpp:expr:`sizeof(IntType...) == rank_dynamic()` or :cpp:expr:`sizeof(IntType...) == rank()`.
       In the latter case, the extents corresponding to compile-time dimensions must match the :cpp:class:`View` type's compile-time extents.
-   - :cpp:expr:`array_layout::is_regular == true`.
+   - :cpp:expr:`layout_type::is_regular == true`.
 
-.. cpp:function:: View( const ALLOC_PROP &prop, const array_layout& layout)
+.. cpp:function:: View( const ALLOC_PROP &prop, const layout_type& layout)
 
    Allocating constructor with allocation properties (created by a call to :cpp:func:`view_alloc`) and a layout object. If an execution space is
    specified in :cpp:any:`prop`, the initialization uses it and does not fence.
@@ -292,9 +298,9 @@ Constructors
 
    - :cpp:expr:`sizeof(IntType...) == rank_dynamic()` or :cpp:expr:`sizeof(IntType...) == rank()`.
       In the latter case, the extents corresponding to compile-time dimensions must match the :cpp:class:`View` type's compile-time extents.
-   - :cpp:expr:`array_layout::is_regular == true`.
+   - :cpp:expr:`layout_type::is_regular == true`.
 
-.. cpp:function:: View( pointer_type ptr, const array_layout& layout)
+.. cpp:function:: View( pointer_type ptr, const layout_type& layout)
 
    Unmanaged data wrapper constructor.
 
@@ -319,9 +325,9 @@ Constructors
 
    - :cpp:expr:`sizeof(IntType...) == rank_dynamic()` or :cpp:expr:`sizeof(IntType...) == rank()`.
       In the latter case, the extents corresponding to compile-time dimensions must match the :cpp:class:`View` type's compile-time extents.
-   - :cpp:expr:`array_layout::is_regular == true`.
+   - :cpp:expr:`layout_type::is_regular == true`.
 
-.. cpp:function:: View( const ScratchSpace& space, const array_layout& layout)
+.. cpp:function:: View( const ScratchSpace& space, const layout_type& layout)
 
    Constructor which acquires memory from a Scratch Memory handle.
 
@@ -349,10 +355,10 @@ Constructors
       :cpp:`explicit(bool)` is only available on C++20 and later. When building Kokkos with C++17, this constructor will be fully implicit.
       Be aware that later upgrading to C++20 will in some cases cause compilation issues in cases where :cpp:`traits::is_managed` is :cpp:`false`.
 
-   :cpp:`NATURAL_MDSPAN_TYPE` is the :ref:`natural mdspan <api-view-natural-mdspans>` of the View. The *natural mdspan* is only available if :cpp:type:`array_layout` is one of :cpp:struct:`LayoutLeft`, :cpp:struct:`LayoutRight`,
+   :cpp:`NATURAL_MDSPAN_TYPE` is the :ref:`natural mdspan <api-view-natural-mdspans>` of the View. The *natural mdspan* is only available if :cpp:type:`layout_type` is one of :cpp:struct:`LayoutLeft`, :cpp:struct:`LayoutRight`,
    or :cpp:class:`LayoutStride`. This constructor is only available if *natural mdspan* is available.
 
-   Constructs a :cpp:class:`View` by converting from :cpp:any:`mds`. The :cpp:class:`View` will be unmanaged and constructed as if by :cpp:`View(mds.data(), array_layout_from_mapping(mds.mapping()))`
+   Constructs a :cpp:class:`View` by converting from :cpp:any:`mds`. The :cpp:class:`View` will be unmanaged and constructed as if by :cpp:`View(mds.data(), layout_type_from_mapping(mds.mapping()))`
 
    .. seealso:: :ref:`Natural mdspans <api-view-natural-mdspans>`
 
@@ -441,7 +447,7 @@ Data Layout, Dimensions, Strides
    It may also break code that was using the type of :cpp:func:`rank`.
    Furthermore, it appears that MSVC has issues with the implicit conversion to :cpp:`size_t` in certain constexpr contexts. Calling :cpp:func:`rank()` or :cpp:func:`rank_dynamic()` will work in those cases.
 
-.. cpp:function:: constexpr array_layout layout() const
+.. cpp:function:: constexpr layout_type layout() const
 
    :return: the layout object that can be used to to construct other views with the same dimensions.
 
@@ -560,9 +566,9 @@ Data Layout, Dimensions, Strides
 
    .. rubric:: Requirements:
    
-   - :cpp:expr:`array_layout::is_regular == true`.
+   - :cpp:expr:`layout_type::is_regular == true`.
 
-.. cpp:function:: static constexpr size_t required_allocation_size(const array_layout& layout);
+.. cpp:function:: static constexpr size_t required_allocation_size(const layout_type& layout);
 
    :param layout: the layout to query
    :return: the number of bytes necessary for an unmanaged :cpp:class:`View` of the provided layout.
@@ -628,7 +634,7 @@ Non-Member Functions
 
 .. cpp:function:: template <class LT, class... LP, class RT, class... RP> bool operator==(const View<LT, LP...>& lhs, const View<RT, RP...>& rhs)
 
-   :return: :cpp:`true` if :cpp:type:`~View::value_type`, :cpp:type:`~View::array_layout`, :cpp:type:`~View::memory_space`, :cpp:func:`~View::rank()`, :cpp:func:`~View::data()` and :cpp:expr:`extent(r)`, for :math:`0 \le r \lt \texttt{rank()}`, match.
+   :return: :cpp:`true` if :cpp:type:`~View::value_type`, :cpp:type:`~View::layout_type`, :cpp:type:`~View::memory_space`, :cpp:func:`~View::rank()`, :cpp:func:`~View::data()` and :cpp:expr:`extent(r)`, for :math:`0 \le r \lt \texttt{rank()}`, match.
 
 .. cpp:function:: template <class LT, class... LP, class RT, class... RP> bool operator!=(const View<LT, LP...>& lhs, const View<RT, RP...>& rhs)
 
@@ -662,14 +668,14 @@ Additionally the following conditions must be met at runtime:
 
 * If :cpp:`DstType::rank_dynamic() != DstType::rank()` then for each compile time dimension :cpp:`k` it must be true that :cpp:`dst_view.extent(k) == src_view.extent(k)`.
 
-Furthermore there are rules which must be met if :cpp:`DstType::array_layout` is not the same as :cpp:`SrcType::array_layout`.
+Furthermore there are rules which must be met if :cpp:`DstType::layout_type` is not the same as :cpp:`SrcType::layout_type`.
 These rules only cover cases where both layouts are one of :cpp:class:`LayoutLeft`, :cpp:class:`LayoutRight` or :cpp:class:`LayoutStride`
 
-* If neither :cpp:`DstType::array_layout` nor :cpp:`SrcType::array_layout` is :cpp:class:`LayoutStride`:
+* If neither :cpp:`DstType::layout_type` nor :cpp:`SrcType::layout_type` is :cpp:class:`LayoutStride`:
 
-  - If :cpp:`DstType::rank > 1` then :cpp:`DstType::array_layout` must be the same as :cpp:`SrcType::array_layout`.
+  - If :cpp:`DstType::rank > 1` then :cpp:`DstType::layout_type` must be the same as :cpp:`SrcType::layout_type`.
 
-* If either :cpp:`DstType::array_layout` or :cpp:`SrcType::array_layout` is :cpp:class:`LayoutStride`
+* If either :cpp:`DstType::layout_type` or :cpp:`SrcType::layout_type` is :cpp:class:`LayoutStride`
 
   - For each dimension :cpp:`k` it must hold that :cpp:`dst_view.extent(k) == src_view.extent(k)`
 
@@ -711,9 +717,9 @@ For an mdspan :cpp:`m` of type :cpp:`M` that is the *natural mdspan* of a :cpp:c
 
 #. :cpp:`M::layout_type` is
 
-   * :cpp:`std::layout_left_padded<std::dynamic_extent>` if :cpp:`V::array_layout` is :cpp:`LayoutLeft`
-   * :cpp:`std::layout_right_padded<std::dynamic_extent>` if :cpp:`V::array_layout` is :cpp:`LayoutRight`
-   * :cpp:`std::layout_stride` if :cpp:`V::array_layout` is :cpp:any:`LayoutStride`
+   * :cpp:`std::layout_left_padded<std::dynamic_extent>` if :cpp:`V::layout_type` is :cpp:`LayoutLeft`
+   * :cpp:`std::layout_right_padded<std::dynamic_extent>` if :cpp:`V::layout_type` is :cpp:`LayoutRight`
+   * :cpp:`std::layout_stride` if :cpp:`V::layout_type` is :cpp:any:`LayoutStride`
 
 #. :cpp:`M::accessor_type` is :cpp:`std::default_accessor<V::value_type>`
 

@@ -52,7 +52,7 @@ Requirements
 
   - For all ``k`` in ``[0, dest.rank)`` ``dest.extent(k) == src.extent(k)`` (or the same as ``dest.rank()``)
 
-  - ``src.span_is_contiguous() && dest.span_is_contiguous() && std::is_same<ViewDest::array_layout,ViewSrc::array_layout>::value``, *or* there exists an `ExecutionSpace <../execution_spaces.html>`_ ``copy_space`` (either given or defaulted) such that both ``SpaceAccessibility<copy_space, ViewDest::memory_space>::accessible == true`` and ``SpaceAccessibility<copy_space,ViewSrc::memory_space>::accessible == true``.
+  - ``src.span_is_contiguous() && dest.span_is_contiguous() && std::is_same<ViewDest::layout_type,ViewSrc::layout_type>::value``, *or* there exists an `ExecutionSpace <../execution_spaces.html>`_ ``copy_space`` (either given or defaulted) such that both ``SpaceAccessibility<copy_space, ViewDest::memory_space>::accessible == true`` and ``SpaceAccessibility<copy_space,ViewSrc::memory_space>::accessible == true``.
 
 * If ``src`` is a `Kokkos::View <view.html>`_ and ``dest`` is a scalar, then ``src.rank == 0`` is true.
 
@@ -138,7 +138,7 @@ How to get layout incompatible views copied
             auto h_view_tmp = Kokkos::create_mirror_view(d_view);
 
             // This inherits the Layout from d_view
-            static_assert(std::is_same<decltype(h_view_tmp)::array_layout,
+            static_assert(std::is_same<decltype(h_view_tmp)::layout_type,
                                        Kokkos::LayoutLeft>::value);
 
             // This now works since h_view_tmp and h_view are both accessible

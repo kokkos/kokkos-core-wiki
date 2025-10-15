@@ -409,14 +409,14 @@ We prefer that users let Kokkos determine a View's layout, based on its executio
   A.stride (strides);
   const int LDA = strides[1];
 
-You may ask a View for its layout via its `array_layout` typedef. This can be helpful for C++ template metaprogramming. For example:
+You may ask a View for its layout via its `layout_type` typedef. This can be helpful for C++ template metaprogramming. For example:
 
 .. code-block:: c++
 
   template<class ViewType>
   void callBlas (const ViewType& A) {
-    typedef typename ViewType::array_layout array_layout;
-    if (std::is_same<array_layout, LayoutLeft>::value) {
+    typedef typename ViewType::layout_type layout_type;
+    if (std::is_same<layout_type, LayoutLeft>::value) {
       callSomeBlasFunction (A.data(), ...);
     } else {
       throw std::invalid_argument ("A is not LayoutLeft");

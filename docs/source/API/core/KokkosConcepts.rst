@@ -111,8 +111,8 @@ and ``OpenMPTarget``, the current state of the Kokkos |ExecutionSpaceTwo|_ conce
             is_memory_space<typename Ex::memory_space>::value;
             typename Ex::size_type;
             std::is_integral_v<typename Ex::size_type>;
-            typename Ex::array_layout;
-            is_array_layout<typename Ex::array_layout>::value;
+            typename Ex::layout_type;
+            is_layout_type<typename Ex::layout_type>::value;
             typename Ex::scratch_memory_space;
             is_memory_space<typename Ex::scratch_memory_space>::value;
             typename Ex::device_type;

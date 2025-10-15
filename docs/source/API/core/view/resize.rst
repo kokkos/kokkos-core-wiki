@@ -40,7 +40,7 @@ Description
 
   Restrictions:
 
-  * ``View<T, P...>::array_layout`` is either ``LayoutLeft`` or ``LayoutRight``.
+  * ``View<T, P...>::layout_type`` is either ``LayoutLeft`` or ``LayoutRight``.
 
 * .. code-block:: cpp
 
@@ -67,7 +67,7 @@ Description
 
   Restrictions:
 
-  * ``View<T, P...>::array_layout`` is either ``LayoutLeft` or `LayoutRight``.
+  * ``View<T, P...>::layout_type`` is either ``LayoutLeft` or `LayoutRight``.
 
 * .. code-block:: cpp
 
@@ -94,14 +94,14 @@ Description
 
   Restrictions:
 
-  * ``View<T, P...>::array_layout`` is either ``LayoutLeft`` or ``LayoutRight``.
+  * ``View<T, P...>::layout_type`` is either ``LayoutLeft`` or ``LayoutRight``.
   * ``arg_prop`` must not include a pointer to memory, a label, or a memory space.
 
 * .. code-block:: cpp
 
      template <class T, class... P>
      void resize(Kokkos::View<T, P...>& v,
-                 const typename Kokkos::View<T, P...>::array_layout& layout);
+                 const typename Kokkos::View<T, P...>::layout_type& layout);
 
   Resizes ``v`` to have the new dimensions while preserving the contents for the common subview of the old and new view.
 
@@ -112,7 +112,7 @@ Description
 
      template <class T, class... P>
      void resize(const I& arg_prop, Kokkos::View<T, P...>& v,
-	         const typename Kokkos::View<T, P...>::array_layout& layout);
+	         const typename Kokkos::View<T, P...>::layout_type& layout);
 
   Resizes ``v`` to have the new dimensions while preserving the contents for the common subview
   of the old and new view. The new ``Kokkos::View`` is constructed using the View constructor
@@ -127,7 +127,7 @@ Description
      template <class T, class... P, class ALLOC_PROP>
      void resize(const ALLOC_PROP& arg_prop,
 	         Kokkos::View<T, P...>& v,
-	         const typename Kokkos::View<T, P...>::array_layout& layout);
+	         const typename Kokkos::View<T, P...>::layout_type& layout);
 
   Resizes ``v`` to have the new dimensions while preserving the contents for the
   common subview of the old and new view. The new ``Kokkos::View`` is constructed using
