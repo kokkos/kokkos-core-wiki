@@ -26,7 +26,7 @@ type, bind(C) :: nd_array_t
     integer(c_size_t) :: dims(ND_ARRAY_MAX_RANK)
     integer(c_size_t) :: strides(ND_ARRAY_MAX_RANK)
     type(c_ptr) :: data
-  end type nd_array_t
+end type nd_array_t
 ```
 
 To convert a Fortran allocated array into a ndarray we use a set of procedures (behind an interface) defined in [flcl-f.f90](https://github.com/kokkos/kokkos-fortran-interop/blob/master/src/flcl-f.f90)
@@ -81,7 +81,7 @@ Performing the DAXPY in Fortran is simply:
 ``` fortran 
 do ii = 1, mm
     f_y(ii) = f_y(ii) + alpha * x(ii)
-  end do
+end do
 ``` 
 
 Performing the DAXPY in Kokkos begins with a call to axpy: 
@@ -92,48 +92,47 @@ call axpy(c_y, x, alpha)
 This is defined in [axpy-f.90](https://github.com/kokkos/kokkos-fortran-interop/blob/master/examples/01-axpy/axpy-f.f90)
 ``` fortran 
 subroutine axpy( y, x, alpha )
-          use, intrinsic :: iso_c_binding
-          use :: flcl_mod
-          implicit none
-          real(c_double), dimension(:), intent(inout) :: y
-          real(c_double), dimension(:), intent(in) :: x
-          real(c_double), intent(in) :: alpha
+   use, intrinsic :: iso_c_binding
+   use :: flcl_mod
+   implicit none
+   real(c_double), dimension(:), intent(inout) :: y
+   real(c_double), dimension(:), intent(in) :: x
+   real(c_double), intent(in) :: alpha
 
-          call f_axpy(to_nd_array(y), to_nd_array(x), alpha)
-
-        end subroutine axpy
+   call f_axpy(to_nd_array(y), to_nd_array(x), alpha)
+end subroutine axpy
 ```
 Which calls the subroutine f_axpy but prior to doing so converts the Fortran arrays into nd_arrays. 
 f_axpy is defined earlier and note that f_axpy is bound to the C routine 'c_axpy'. 
 ``` fortran
 interface
-        subroutine f_axpy( nd_array_y, nd_array_x, alpha ) &
-          & bind(c, name='c_axpy')
-          use, intrinsic :: iso_c_binding
-          use :: flcl_mod
-          type(nd_array_t) :: nd_array_y
-          type(nd_array_t) :: nd_array_x
-          real(c_double) :: alpha
-        end subroutine f_axpy
-      end interface
+    subroutine f_axpy( nd_array_y, nd_array_x, alpha ) &
+        & bind(c, name='c_axpy')
+        use, intrinsic :: iso_c_binding
+        use :: flcl_mod
+        type(nd_array_t) :: nd_array_y
+        type(nd_array_t) :: nd_array_x
+        real(c_double) :: alpha
+    end subroutine f_axpy
+end interface
 ```
 
 c_axpy is where we make use of Kokkos for the computation and is defined in [axpy-cxx.cc](https://github.com/kokkos/kokkos-fortran-interop/blob/master/examples/01-axpy/axpy-cxx.cc).
 
 ```c++ 
 void c_axpy( flcl_ndarray_t *nd_array_y, flcl_ndarray_t *nd_array_x, double *alpha ) {
-    using flcl::view_from_ndarray;
+  using flcl::view_from_ndarray;
 
-    auto y = view_from_ndarray<double*>(*nd_array_y);
-    auto x = view_from_ndarray<double*>(*nd_array_x);
+  auto y = view_from_ndarray<double*>(*nd_array_y);
+  auto x = view_from_ndarray<double*>(*nd_array_x);
 
-    Kokkos::parallel_for( "axpy", y.extent(0), KOKKOS_LAMBDA( const size_t idx)
-    {
-      y(idx) += *alpha * x(idx);
-    });
-  
-    return;
-  }
+  Kokkos::parallel_for( "axpy", y.extent(0), KOKKOS_LAMBDA( const size_t idx)
+  {
+    y(idx) += *alpha * x(idx);
+  });
+
+  return;
+}
 ```
 
 In this function we first convert our two nd_array to [`Kokkos::View`](../API/core/view/view) and then use [`Kokkos::parallel_for`](../API/core/parallel-dispatch/parallel_for) with a simply DAXPY lambda.  
