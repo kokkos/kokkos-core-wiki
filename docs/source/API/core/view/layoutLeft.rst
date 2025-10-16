@@ -25,6 +25,10 @@ Description
 
    .. cpp:type:: array_layout
 
+       A tag signifying that this models the Layout concept. (Deprecated since Kokkos 5.0)
+
+   .. cpp:type:: layout_type
+
        A tag signifying that this models the Layout concept.
 
    .. rubric:: Member Variables

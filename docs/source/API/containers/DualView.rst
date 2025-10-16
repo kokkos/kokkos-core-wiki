@@ -84,7 +84,7 @@ Description
 
        The type of a const View host mirror of ``t_dev_const``.
 
-    .. cpp:type:: View<typename traits::const_data_type, typename traits::array_layout, typename traits::device_type, Kokkos::MemoryTraits<Kokkos::RandomAccess> > t_dev_const_randomread
+    .. cpp:type:: View<typename traits::const_data_type, typename traits::layout_type, typename traits::device_type, Kokkos::MemoryTraits<Kokkos::RandomAccess> > t_dev_const_randomread
 
        The type of a const, random-access View on the device.
 
@@ -92,23 +92,23 @@ Description
 
        The type of a const, random-access View host mirror of ``t_dev_const_randomread``.
 
-    .. cpp:type:: View<typename traits::data_type, typename traits::array_layout, typename traits::device_type, MemoryUnmanaged> t_dev_um
+    .. cpp:type:: View<typename traits::data_type, typename traits::layout_type, typename traits::device_type, MemoryUnmanaged> t_dev_um
 
        The type of an unmanaged View on the device.
 
-    .. cpp:type:: View<typename t_host::data_type, typename t_host::array_layout, typename t_host::device_type, MemoryUnmanaged> t_host_um
+    .. cpp:type:: View<typename t_host::data_type, typename t_host::layout_type, typename t_host::device_type, MemoryUnmanaged> t_host_um
 
        The type of an unmanaged View host mirror of \\c t_dev_um.
 
-    .. cpp:type:: View<typename traits::const_data_type, typename traits::array_layout, typename traits::device_type, MemoryUnmanaged> t_dev_const_um
+    .. cpp:type:: View<typename traits::const_data_type, typename traits::layout_type, typename traits::device_type, MemoryUnmanaged> t_dev_const_um
 
        The type of a const unmanaged View on the device.
 
-    .. cpp:type:: View<typename t_host::const_data_type, typename t_host::array_layout, typename t_host::device_type, MemoryUnmanaged> t_host_const_um
+    .. cpp:type:: View<typename t_host::const_data_type, typename t_host::layout_type, typename t_host::device_type, MemoryUnmanaged> t_host_const_um
 
        The type of a const unmanaged View host mirror of \\c t_dev_const_um.
 
-    .. cpp:type:: View<typename t_host::const_data_type, typename t_host::array_layout, typename t_host::device_type, Kokkos::MemoryTraits<Kokkos::Unmanaged | Kokkos::RandomAccess> > t_dev_const_randomread_um
+    .. cpp:type:: View<typename t_host::const_data_type, typename t_host::layout_type, typename t_host::device_type, Kokkos::MemoryTraits<Kokkos::Unmanaged | Kokkos::RandomAccess> > t_dev_const_randomread_um
 
        The type of a const, random-access View on the device.
 
