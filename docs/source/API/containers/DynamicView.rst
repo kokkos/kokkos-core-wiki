@@ -39,9 +39,17 @@ Description
 
         ``DynamicView`` type templated on ``traits::non_const_data_type`` and ``traits::device_type``.
 
+    .. cpp:type:: host_mirror_type
+
+        The compatible view type with the same ``DataType`` and ``LayoutType`` stored in host accessible memory space.
+
+        .. versionadded:: 5.0
+
     .. cpp:type:: HostMirror
 
         The compatible view type with the same ``DataType`` and ``LayoutType`` stored in host accessible memory space.
+
+        .. deprecated:: 5.0
 
     .. rubric:: Public Data Handle Types
 
