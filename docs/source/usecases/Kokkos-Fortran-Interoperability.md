@@ -64,7 +64,7 @@ template <typename DataType>
 
 These are the main utilities that will be used in our DAXPY example. 
 
-We begin with a Fortran program defined in [axpy-main.f90](https://github.com/kokkos/kokkos-fortran-interop/blob/master/examples/01-axpy/axpy-main.f90)
+We begin with a Fortran program defined in [axpy-ndarray-main.f90](https://github.com/kokkos/kokkos-fortran-interop/blob/master/examples/01-axpy-ndarray/axpy-ndarray-main.F90)
 
 We start by bringing in the flcl module: 
 ``` fortran
@@ -89,7 +89,7 @@ Performing the DAXPY in Kokkos begins with a call to axpy:
 call axpy(c_y, x, alpha)
 ``` 
 
-This is defined in [axpy-f.90](https://github.com/kokkos/kokkos-fortran-interop/blob/master/examples/01-axpy/axpy-f.f90)
+This is defined in [axpy-ndarray-f.f90](https://github.com/kokkos/kokkos-fortran-interop/blob/master/examples/01-axpy-ndarray/axpy-ndarray-f.f90)
 ``` fortran 
 subroutine axpy( y, x, alpha )
    use, intrinsic :: iso_c_binding
@@ -117,7 +117,7 @@ interface
 end interface
 ```
 
-c_axpy is where we make use of Kokkos for the computation and is defined in [axpy-cxx.cc](https://github.com/kokkos/kokkos-fortran-interop/blob/master/examples/01-axpy/axpy-cxx.cc).
+c_axpy is where we make use of Kokkos for the computation and is defined in [axpy-ndarray-cxx.cc](https://github.com/kokkos/kokkos-fortran-interop/blob/master/examples/01-axpy-ndarray/axpy-ndarray-cxx.cc)
 
 ```c++ 
 void c_axpy( flcl_ndarray_t *nd_array_y, flcl_ndarray_t *nd_array_x, double *alpha ) {
