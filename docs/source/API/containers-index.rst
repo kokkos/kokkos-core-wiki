@@ -15,6 +15,8 @@ Containers API
      - DynamicView comment.
    * - `DynRankView <containers/DynRankView.html>`__
      - Kokkos Runtime-determined-dimension DynRankView class.
+   * - `ErrorReporter <containers/ErrorReporter.html>`__
+     - A class to facilitate thread-safe error output.
    * - `OffsetView <containers/Offset-View.html>`__
      - OffsetView comment.
    * - `ScatterView <containers/ScatterView.html>`__
@@ -34,6 +36,7 @@ Containers API
    ./containers/DualView
    ./containers/DynamicView
    ./containers/DynRankView
+   ./containers/ErrorReporter
    ./containers/Offset-View
    ./containers/ScatterView
    ./containers/StaticCrsGraph
