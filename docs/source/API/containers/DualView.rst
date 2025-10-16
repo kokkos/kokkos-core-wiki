@@ -10,10 +10,8 @@ Container to manage mirroring a ``Kokkos::View`` that references device memory w
 a ``Kokkos::View`` that is host-accessible. The class provides capabilities to manage
 data which exists in two different memory spaces at the same time. It supports Views with
 the same layout on two memory spaces as well as modified flags for both allocations.
-Users are responsible for updating the modified flags manually if they change the data
-in either memory space, by calling the ``sync()`` method, which is templated on the device
-with the modified data. Users may also synchronize data by calling the ``modify()`` function,
-which is templated on the device that requires synchronization (i.e., the target of the one-way copy operation).
+Users are responsible for updating the modified flags manually if they change the data in either memory space, by calling the ``modify()`` function, which is templated on the device with the modified data.
+Users may also synchronize data by calling the ``sync()`` method, which is templated on the device that requires synchronization (i.e., the target of the one-way copy operation).
 
 The DualView class also provides convenience methods such as realloc, resize and capacity
 which call the appropriate methods of the underlying `Kokkos::View <../core/view/view.html>`_ objects.
@@ -41,13 +39,13 @@ Usage
                                        Device>
     view_type a("A", n, m);
 
-    Kokkos::deep_copy(a.view_device(), 1);
-    a.template modify<typename view_type::execution_space>();
-    a.template sync<typename view_type::host_mirror_space>();
+    Kokkos::deep_copy(a.view_device(), 1); // set device-side entries to 1
+    a.template modify<typename view_type::execution_space>(); // mark device-side as modified
+    a.template sync<typename view_type::host_mirror_space>(); // sync modified data to host
 
-    Kokkos::deep_copy(a.view_host(), 2);
-    a.template modify<typename ViewType::host_mirror_space>();
-    a.template sync<typename ViewType::execution_space>();
+    Kokkos::deep_copy(a.view_host(), 2); // set host-side entries to 2
+    a.template modify<typename ViewType::host_mirror_space>(); // mark host-side as modified
+    a.template sync<typename ViewType::execution_space>(); // sync modified data to device
 
 Description
 -----------
