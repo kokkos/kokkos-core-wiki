@@ -217,12 +217,12 @@ Description
 
     .. cpp:function:: template <class Device> void sync(const typename Impl::enable_if<(!std::is_same<typename traits::data_type, typename traits::non_const_data_type>::value) || (std::is_same<Device, int>::value), int>::type& = 0);
 
-    .. cpp:function:: template <class Device> bool need_sync() const;
-
        * Update data on device or host only if data in the other space has been marked as modified.
        * If ``Device`` is the same as this DualView's device type, then copy data from host to device. Otherwise, copy data from device to host. In either case, only copy if the source of the copy has been modified.
        * This is a one-way synchronization only. If the target of the copy has been modified, this operation will discard those modifications. It will also reset both device and host modified flags.
        * This method doesn't know on its own whether you modified the data in either View. You must manually mark modified data as modified, by calling the ``modify()`` method with the appropriate template parameter.
+
+    .. cpp:function:: template <class Device> bool need_sync() const;
 
     .. cpp:function:: template <class Device> void modify();
 
