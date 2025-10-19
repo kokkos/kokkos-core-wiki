@@ -57,9 +57,13 @@ The second template parameter `Abi` is one of the pre-defined ABI types in the n
   * `simd_mask operator||(const simd_mask& lhs, const simd_mask& rhs)`
 
 ### Bitwise Operators
+  * `simd_mask simd_mask::operator~() const`
   * `simd_mask operator&(const simd_mask& lhs, const simd_mask& rhs)`
   * `simd_mask operator|(const simd_mask& lhs, const simd_mask& rhs)`
   * `simd_mask operator^(const simd_mask& lhs, const simd_mask& rhs)`
+  * `simd_mask operator&=(simd_mask& lhs, const simd_mask& rhs)`
+  * `simd_mask operator|=(simd_mask& lhs, const simd_mask& rhs)`
+  * `simd_mask operator^=(simd_mask& lhs, const simd_mask& rhs)`
 
 ### Comparison Operators
   * `simd_mask operator==(const simd_mask& lhs, const simd_mask& rhs)`
