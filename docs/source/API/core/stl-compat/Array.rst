@@ -75,6 +75,18 @@ Interface
 
     :return: A pointer to the first element of the array.  If ``N == 0``, the return value is unspecified and not dereferenceable.
 
+  .. cpp:function:: constexpr pointer begin() noexcept
+  .. cpp:function:: constexpr const_pointer begin() const noexcept
+  .. cpp:function:: constexpr const_pointer cbegin() const  noexcept
+
+    :return: `data()`
+
+  .. cpp:function:: constexpr pointer end() noexcept
+  .. cpp:function:: constexpr const_pointer end() const noexcept
+  .. cpp:function:: constexpr const_pointer cend() const noexcept
+
+    :return: `data() + size()`
+
 
 Deduction Guides
 ----------------
