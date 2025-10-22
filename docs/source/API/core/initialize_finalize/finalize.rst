@@ -19,7 +19,8 @@ This functions cleans up all Kokkos states and released the associated
 resources.
 Once this function is called, no Kokkos API functions (not even
 `Kokkos::initialize <initialize.html>`_) may be called, except for
-``Kokkos::is_initialized`` or ``Kokkos::is_finalized``.
+:cpp:func:`Kokkos::is_initialized() <is_initialized()>` or
+:cpp:func:`Kokkos::is_finalized() <is_finalized()>`.
 The user must ensure that all Kokkos objects (e.g. ``Kokkos::View``) are destroyed
 before ``Kokkos::finalize`` gets called.
 
@@ -40,7 +41,7 @@ Requirements
 Semantics
 ~~~~~~~~~
 
-* ``Kokkos::is_initialized()`` should return false after calling ``Kokkos::finalize``
+* :cpp:func:`Kokkos::is_initialized() <is_initialized()>` should return false after calling ``Kokkos::finalize``
 
 Example
 ~~~~~~~
