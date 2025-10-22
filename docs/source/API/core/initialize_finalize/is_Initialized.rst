@@ -28,7 +28,7 @@ Examples
         Kokkos::initialize(argc, argv);
 	assert(Kokkos::is_initialized());
         Kokkos::finalize();
-        assert(Kokkos::is_finalized());
+        assert(!Kokkos::is_initialized());
     }    
 
 See also
