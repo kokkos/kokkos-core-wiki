@@ -38,7 +38,7 @@ Description
 
   - ``n[X]``: new length for extent X.
 
-* Restrictions: ``View<T, P...>::array_layout`` is either ``LayoutLeft`` or ``LayoutRight``.
+* Restrictions: ``View<T, P...>::layout_type`` is either ``LayoutLeft`` or ``LayoutRight``.
 
 .. code-block:: cpp
 
@@ -63,7 +63,7 @@ Description
   - ``arg_prop``: View constructor property, e.g., ``Kokkos::WithoutInitializing``.
 
 
-* Restrictions: ``View<T, P...>::array_layout`` is either ``LayoutLeft`` or ``LayoutRight``.
+* Restrictions: ``View<T, P...>::layout_type`` is either ``LayoutLeft`` or ``LayoutRight``.
 
 .. code-block:: cpp
 
@@ -91,7 +91,7 @@ Description
 
 * Restrictions:
 
-  - ``View<T, P...>::array_layout`` is either ``LayoutLeft`` or ``LayoutRight``.
+  - ``View<T, P...>::layout_type`` is either ``LayoutLeft`` or ``LayoutRight``.
 
   - ``arg_prop`` must not include a pointer to memory, a label, or a memory space.
 
@@ -99,7 +99,7 @@ Description
 
    template <class T, class... P>
    void realloc(Kokkos::View<T, P...>& v,
-		const typename Kokkos::View<T, P...>::array_layout& layout);
+		const typename Kokkos::View<T, P...>::layout_type& layout);
 
 * Resizes ``v`` to have the new dimensions without preserving its contents.
 
@@ -111,7 +111,7 @@ Description
 
    template <class I, class T, class... P>
    void realloc(const I& arg_prop, Kokkos::View<T, P...>& v,
-                const typename Kokkos::View<T, P...>::array_layout& layout);
+                const typename Kokkos::View<T, P...>::layout_type& layout);
 
 * Resizes ``v`` to have the new dimensions without preserving its contents.
   The new ``Kokkos::View`` is constructed using the View constructor property ``arg_prop``, e.g., Kokkos::WithoutInitializing.
@@ -127,7 +127,7 @@ Description
    template <class ALLOC_PROP, class T, class... P>
    void realloc(const ALLOC_PROP& arg_prop,
                 Kokkos::View<T, P...>& v,
-		const typename Kokkos::View<T, P...>::array_layout& layout);
+		const typename Kokkos::View<T, P...>::layout_type& layout);
 
 * Resizes ``v`` to have the new dimensions without preserving its contents.
   The new ``Kokkos::View`` is constructed using the View constructor properties ``arg_prop``, e.g., ``Kokkos::view_alloc(Kokkos::WithoutInitializing)``.
