@@ -68,6 +68,10 @@ The second template parameter `Abi` is one of the pre-defined ABI types in the n
   * `simd operator-(const simd& lhs, const simd& rhs)`
   * `simd operator*(const simd& lhs, const simd& rhs)`
   * `simd operator/(const simd& lhs, const simd& rhs)`
+  * `simd simd::operator~() const`
+  * `simd operator&(const simd& lhs, const simd& rhs)`
+  * `simd operator|(const simd& lhs, const simd& rhs)`
+  * `simd operator^(const simd& lhs, const simd& rhs)`
   * `simd operator>>(const simd& lhs, const simd& rhs)`
   * `simd operator>>(const simd& lhs, int rhs)`
   * `simd operator<<(const simd& lhs, const simd& rhs)`
@@ -78,6 +82,9 @@ The second template parameter `Abi` is one of the pre-defined ABI types in the n
   * `simd operator-=(simd& lhs, const simd& rhs)`
   * `simd operator*=(simd& lhs, const simd& rhs)`
   * `simd operator/=(simd& lhs, const simd& rhs)`
+  * `simd operator&=(simd& lhs, const simd& rhs)`
+  * `simd operator|=(simd& lhs, const simd& rhs)`
+  * `simd operator^=(simd& lhs, const simd& rhs)`
   * `simd operator>>=(simd& lhs, const simd& rhs)`
   * `simd operator<<=(simd& lhs, const simd& rhs)`
 
