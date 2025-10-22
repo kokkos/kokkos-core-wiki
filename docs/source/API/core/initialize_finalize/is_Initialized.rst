@@ -26,9 +26,9 @@ Examples
     int main(int argc, char* argv[]) {
         assert(!Kokkos::is_initialized());
         Kokkos::initialize(argc, argv);
-	assert(Kokkos::is_initialized());
+        assert(Kokkos::is_initialized());
         Kokkos::finalize();
-        assert(Kokkos::is_finalized());
+        assert(!Kokkos::is_initialized());
     }    
 
 See also
