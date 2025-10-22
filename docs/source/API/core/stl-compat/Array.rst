@@ -54,14 +54,16 @@ Interface
 
   .. rubric:: Public Member Functions
 
-  .. cpp:function:: static constexpr bool empty()
+  .. cpp:function:: static constexpr bool empty() noexcept
 
     :return: ``N == 0``
+    :since: ``noexcept`` since 5.0
 
-  .. cpp:function:: static constexpr size_type size()
-  .. cpp:function:: constexpr size_type max_size() const
+  .. cpp:function:: static constexpr size_type size() noexcept
+  .. cpp:function:: constexpr size_type max_size() const noexcept
 
     :return: ``N``
+    :since: ``noexcept`` since 5.0
 
   .. cpp:function:: template<class iType> constexpr reference operator[](const iType& i)
   .. cpp:function:: template<class iType> constexpr const_reference operator[](const iType& i) const
@@ -70,10 +72,11 @@ Interface
 
     :return: A reference to the ``i``-th element of the array.
 
-  .. cpp:function:: constexpr pointer data()
-  .. cpp:function:: constexpr const_pointer data() const
+  .. cpp:function:: constexpr pointer data() noexcept
+  .. cpp:function:: constexpr const_pointer data() const noexcept
 
     :return: A pointer to the first element of the array.  If ``N == 0``, the return value is unspecified and not dereferenceable.
+    :since: ``noexcept`` since 5.0
 
 
 Deduction Guides
