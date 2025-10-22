@@ -19,7 +19,8 @@ Usage:
 Initializes the Kokkos execution environment.
 This function must be called before any other Kokkos API functions or
 constructors.  There are a small number of exceptions, such as
-``Kokkos::is_initialized`` and ``Kokkos::is_finalized``.
+:cpp:func:`Kokkos::is_initialized() <is_initialized()>` or
+:cpp:func:`Kokkos::is_finalized() <is_finalized()>`.
 Kokkos can be initialized at most once; subsequent calls are erroneous.
 
 The function has two overloads.
@@ -67,7 +68,7 @@ Requirements
 Semantics
 ~~~~~~~~~
 
-* After calling ``Kokkos::initialize``, ``Kokkos::is_initialized()`` should return true.
+* After calling ``Kokkos::initialize``, :cpp:func:`Kokkos::is_initialized() <is_initialized()>` should return true.
 
 Example
 ~~~~~~~

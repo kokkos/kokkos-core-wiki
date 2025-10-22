@@ -23,7 +23,7 @@ constructor and `Kokkos::finalize <finalize.html#kokkosfinalize>`_ in the destru
 For correct usage, it is mandatory to create a named instance of a ``ScopeGuard`` before any calls to Kokkos are issued.
 
 
-.. warning:: Change of behavior in version 3.7 (see below). ``ScopeGuard`` will abort if either ``is_initialized()`` or ``is_finalized()`` return ``true``.
+.. warning:: Change of behavior in version 3.7 (see below). ``ScopeGuard`` will abort if either :cpp:func:`is_initialized()` or :cpp:func:`is_finalized()` return ``true``.
 
 Description
 -----------
