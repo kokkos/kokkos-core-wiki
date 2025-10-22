@@ -9,7 +9,7 @@ Defined in header ``<Kokkos_Core.hpp>``
 Interface
 ---------
 
-.. cpp:function:: bool is_finalized()
+.. cpp:function:: bool is_finalized() noexcept
 
    Queries the finalization status of Kokkos and returns ``true`` if Kokkos is finalized and ``false`` if Kokkos is not finalized. This function can be called prior or after Kokkos initialization or finalization.
    

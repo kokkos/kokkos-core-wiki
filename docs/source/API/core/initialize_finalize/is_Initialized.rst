@@ -9,7 +9,7 @@ Defined in header ``<Kokkos_Core.hpp>``
 Interface
 ---------
 
-.. cpp:function:: bool is_initialized()
+.. cpp:function:: bool is_initialized() noexcept
 
    Queries the initialization status of Kokkos and returns ``true`` if Kokkos is initialized and ``false`` if Kokkos is not initialized. This function can be called prior or after Kokkos initialization or finalization.
 
