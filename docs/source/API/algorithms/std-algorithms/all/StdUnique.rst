@@ -6,7 +6,9 @@ Header: ``Kokkos_StdAlgorithms.hpp``
 Description
 -----------
 
-Eliminates all except the first element from every consecutive group of equivalent elements in a range or in a ``View`` and returns an iterator to the element *after* the new logical end of the range. Equivalence is checked using ``operator==`` and the binary predicate ``pred``.
+Eliminates all except the last element from every consecutive group of equivalent elements in a range or in a ``View`` and returns an iterator to the element *after* the new logical end of the range. Equivalence is checked using ``operator==`` and the binary predicate ``pred``.
+
+.. note:: This behavior deviates from that of ``std::unique``. Specifically, ``std::unique`` eliminates all except the **first** element from every consecutive group of equivalent elements.
 
 Interface
 ---------
