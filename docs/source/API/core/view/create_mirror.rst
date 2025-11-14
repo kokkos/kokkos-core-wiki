@@ -47,13 +47,13 @@ Description
 .. |MemorySpaceConcept| replace:: :cpp:func:`MemorySpaceConcept`
 
 
-.. cpp:function:: template <class ViewType> typename ViewType::HostMirror create_mirror(ViewType const& src);
+.. cpp:function:: template <class ViewType> typename ViewType::host_mirror_type create_mirror(ViewType const& src);
 
    Creates a new host accessible |View|_ with the same layout and padding as ``src``
 
    - ``src``: a ``Kokkos::View``.
 
-.. cpp:function:: template <class ViewType> typename ViewType::HostMirror create_mirror(decltype(Kokkos::WithoutInitializing), ViewType const& src);
+.. cpp:function:: template <class ViewType> typename ViewType::host_mirror_type create_mirror(decltype(Kokkos::WithoutInitializing), ViewType const& src);
 
    Creates a new host accessible |View|_ with the same layout and padding as ``src``. The new view will have uninitialized data.
 
@@ -94,14 +94,14 @@ Description
 	``arg_prop`` must not include a pointer to memory, or a label, or allow padding.
 
 
-.. cpp:function:: template <class ViewType> typename ViewType::HostMirror create_mirror_view(ViewType const& src);
+.. cpp:function:: template <class ViewType> typename ViewType::host_mirror_type create_mirror_view(ViewType const& src);
 
    If ``src`` is not host accessible (i.e. if ``SpaceAccessibility<HostSpace,ViewType::memory_space>::accessible`` is ``false``)
    it creates a new host accessible |View|_ with the same layout and padding as ``src``. Otherwise returns ``src``.
 
    - ``src``: a ``Kokkos::View``.
 
-.. cpp:function:: template <class ViewType> typename ViewType::HostMirror create_mirror_view(decltype(Kokkos::WithoutInitializing), ViewType const& src);
+.. cpp:function:: template <class ViewType> typename ViewType::host_mirror_type create_mirror_view(decltype(Kokkos::WithoutInitializing), ViewType const& src);
 
    If ``src`` is not host accessible (i.e. if ``SpaceAccessibility<HostSpace,ViewType::memory_space>::accessible`` is ``false``)
    it creates a new host accessible |View|_ with the same layout and padding as ``src``. The new view will have uninitialized data. Otherwise returns ``src``.
