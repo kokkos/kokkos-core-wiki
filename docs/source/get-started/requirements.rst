@@ -28,7 +28,7 @@ Kokkos 5.x
       * 14.0.0
 
     * * Clang (CUDA)
-      * 14.0.0
+      * 15.0.0
 
     * * AppleClang 
       * 8.0
