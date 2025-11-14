@@ -84,6 +84,10 @@ Interface
       Store minimum with location of ``src`` and ``dest`` into ``dest``.
       Store maximum with location of ``src`` and ``dest`` into ``dest``.
 
+   .. note:: It is unspecified which index is stored if there are duplicate equivalent minimum or maximum values.  To ensure the smallest index for the minimum value and the largest index for the maximum value, use MinMaxFirstLastLoc_ instead of ``MinMaxLoc``.
+
+   .. _MinMaxFirstLastLoc: ../builtinreducers/MinMaxFirstLastLoc.html
+
    .. cpp:function:: KOKKOS_INLINE_FUNCTION void init( value_type& val) const;
 
       Initialize ``val.min_val`` using the ``Kokkos::reduction_identity<Scalar>::min()`` method. The default implementation sets ``val=<TYPE>_MAX``.
