@@ -127,9 +127,9 @@ These options are generally useful for any CMake project:
 
   Example: ``-DCMAKE_CXX_COMPILER=/path/to/hipcc``
  
-* ``-DCMAKE_CXX_STANDARD=<standard>``: Sets the C++ standard. The default is ``17``.
+* ``-DCMAKE_CXX_STANDARD=<standard>``: Sets the C++ standard. The default is ``20``.
 
-  Example: ``-DCMAKE_CXX_STANDARD=20``
+  Example: ``-DCMAKE_CXX_STANDARD=23``
 
 * ``-DCMAKE_BUILD_TYPE=<type>``: Controls optimization level and debugging
   information. Common options are ``Debug``, ``Release``, ``RelWithDebInfo``
