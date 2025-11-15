@@ -212,10 +212,10 @@ Backend-specific options
 
     * * ``Kokkos_ENABLE_CUDA_LAMBDA`` :red:`[Deprecated since 4.1]`
       * Activate experimental lambda features
-      * (see below)
+      * (see below [#cuda_lambda]_)
 
     * * ``Kokkos_ENABLE_CUDA_RELOCATABLE_DEVICE_CODE``
-      * Enable relocatable device code (RDC) for CUDA (see below)
+      * Enable relocatable device code (RDC) for CUDA [#rdc_with_shared_libs]_
       * ``OFF``
 
     * * ``Kokkos_ENABLE_CUDA_UVM`` :red:`[Deprecated since 4.0]` see `Transition to alternatives <../usecases/Moving_from_EnableUVM_to_SharedSpace.html>`_
@@ -227,18 +227,18 @@ Backend-specific options
 	optimization may improve performance in applications with multiple CUDA streams per device, but it
 	is known to be incompatible with MPI distributions built on older versions of UCX
 	and many Cray MPICH instances. See `known issues <../known-issues.html#cuda>`_.
-      * (see below)
+      * (see below [#cuda_malloc_async]_)
 
     * * ``Kokkos_ENABLE_HIP_MULTIPLE_KERNEL_INSTANTIATIONS``
       * Instantiate multiple kernels at compile time - improve performance but increase compile time
       * ``OFF``
 
     * * ``Kokkos_ENABLE_HIP_RELOCATABLE_DEVICE_CODE``
-      * Enable relocatable device code (RDC) for HIP (see below)
+      * Enable relocatable device code (RDC) for HIP [#rdc_with_shared_libs]_
       * ``OFF``
 
     * * ``Kokkos_ENABLE_SYCL_RELOCATABLE_DEVICE_CODE``
-      * Enable relocatable device code (RDC) for SYCL (see below, since Kokkos 4.5)
+      * Enable relocatable device code (RDC) for SYCL [#rdc_with_shared_libs]_ (since Kokkos 4.5)
       * ``OFF``
 
     * * ``Kokkos_ENABLE_ATOMICS_BYPASS``
@@ -250,35 +250,35 @@ Backend-specific options
       * ``ON``
 
     * * ``Kokkos_ENABLE_COMPILE_AS_CMAKE_LANGUAGE``
-      * Build with the CMake language feature (CUDA or HIP only). (see below)
+      * Build with the CMake language feature (CUDA or HIP only) [#cmake_language]_
       * ``OFF``
 
     * * ``Kokkos_ENABLE_MULTIPLE_CMAKE_LANGUAGES``
-      * Make Kokkos installation usable in CXX and backend-compatible languages (CUDA or HIP). (see below, since Kokkos 5.0)
+      * Make Kokkos installation usable in CXX and backend-compatible languages (CUDA or HIP) [#multiple_languages]_ (since Kokkos 5.0)
       * ``OFF``
 
 
-``Kokkos_ENABLE_CUDA_LAMBDA`` default value is ``OFF`` until 3.7 and ``ON`` since 4.0
+.. [#cuda_lambda] ``Kokkos_ENABLE_CUDA_LAMBDA`` default value is ``OFF`` until 3.7 and ``ON`` since 4.0
 
-``Kokkos_ENABLE_IMPL_CUDA_MALLOC_ASYNC`` default value is ``OFF`` except in 4.2, 4.3, and 4.4
+.. [#cuda_malloc_async] ``Kokkos_ENABLE_IMPL_CUDA_MALLOC_ASYNC`` default value is ``OFF`` except in 4.2, 4.3, and 4.4
 
-``Kokkos_ENABLE_<CUDA/HIP/SYCL>_RELOCATABLE_DEVICE_CODE`` requires a static library build.
- RDC is not compatible with shared libraries. Therefore, this option can only be enabled when the ``BUILD_SHARED_LIBS`` variable is false.
+.. [#rdc_with_shared_libs] ``Kokkos_ENABLE_<CUDA/HIP/SYCL>_RELOCATABLE_DEVICE_CODE`` requires a static library build.
+  RDC is not compatible with shared libraries. Therefore, this option can only be enabled when the ``BUILD_SHARED_LIBS`` variable is false.
 
-``Kokkos_ENABLE_COMPILE_AS_CMAKE_LANGUAGE`` Building with the CMake language feature can cause problems in downstream libraries/applications.
-CMake uses the file endings to determine the language a file should be compiled with. Since Kokkos files are named `cpp` and `hpp`, they are associated with `CXX` in CMake.
-This implies that source and header files that use Kokkos might need to be redefined to be treated as another language. Otherwise, the language is detected based on the file endings. This might lead to files not being able to compile (e.g. using Kokkos in a `.cpp` file instead of a `.cu` file leads to CMake detecting `CXX` instead of `CUDA`).
-Without specifying the language the compilation might fail depending on the capabilities of the `CXX` compiler to compile device code.
-Furthermore, the architecture needs to be specified for every target in accordance with what `Kokkos_ARCH_...` is set and not with `CMAKE_<LANG>_ARCHITECTURES`. This also implies only one architecture can be active.
+.. [#cmake_language] ``Kokkos_ENABLE_COMPILE_AS_CMAKE_LANGUAGE`` Building with the CMake language feature can cause problems in downstream libraries/applications.
+  CMake uses the file endings to determine the language a file should be compiled with. Since Kokkos files are named ``.cpp`` and ``.hpp``, they are associated with ``CXX`` in CMake.
+  This implies that source and header files that use Kokkos might need to be redefined to be treated as another language. Otherwise, the language is detected based on the file endings. This might lead to files not being able to compile (e.g. using Kokkos in a ``.cpp`` file instead of a ``.cu`` file leads to CMake detecting ``CXX`` instead of ``CUDA``).
+  Without specifying the language the compilation might fail depending on the capabilities of the ``CXX`` compiler to compile device code.
+  Furthermore, the architecture needs to be specified for every target in accordance with what ``Kokkos_ARCH_<...>`` is set and not with ``CMAKE_<LANG>_ARCHITECTURES``. This also implies only one architecture can be active.
 
-An example for marking the files accordingly can be found in `example/build_cmake_installed_kk_as_language`
+  An example for marking the files accordingly can be found in ``example/build_cmake_installed_kk_as_language``.
 
-``Kokkos_ENABLE_MULTIPLE_CMAKE_LANGUAGES`` This option allows to use one installed Kokkos library in multiple CMake languages (`CXX` and the language of the respective backend (`CUDA` or `HIP`)).
-With this option enabled, Kokkos will use its compiler launcher script to redirect the `CXX` compiler unless the `separable_compilation` component is requested.
-With the `separable_compilation` component, targets/projects/directories that link to Kokkos need to be marked manually via the CMake function `kokkos_compilation`.
-Since Kokkos is limited to a single architecture, the `CMAKE_<LANG>_ARCHITECTURES` must correspond to the architecture enabled in Kokkos.
+.. [#multiple_languages] ``Kokkos_ENABLE_MULTIPLE_CMAKE_LANGUAGES`` This option allows to use one installed Kokkos library in multiple CMake languages (``CXX`` and the language of the respective backend (``CUDA`` or ``HIP``)).
+  With this option enabled, Kokkos will use its compiler launcher script to redirect the ``CXX`` compiler unless the ``separable_compilation`` component is requested.
+  With the ``separable_compilation`` component, targets/projects/directories that link to Kokkos need to be marked manually via the CMake function ``kokkos_compilation``.
+  Since Kokkos is limited to a single architecture, the ``CMAKE_<LANG>_ARCHITECTURES`` must correspond to the architecture enabled in Kokkos.
 
-An example for using Kokkos with multiple languages can be found in `example/build_cmake_installed_multilanguage`
+  An example for using Kokkos with multiple languages can be found in ``example/build_cmake_installed_multilanguage``.
 
 Development
 -----------
