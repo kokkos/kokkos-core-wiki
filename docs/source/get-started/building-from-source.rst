@@ -113,7 +113,7 @@ Use the following command to configure Kokkos:
     cmake -B builddir [<options...>]
 
 
-``-B builddir`` creates a ``builddir`` directory named build (you can choose a
+``-B builddir`` creates a build directory named ``builddir`` (you can choose a
 different name if you prefer).  Kokkos requires out-of-source builds.  The
 ``[<options...>]`` part is where you specify the configuration options.
 
