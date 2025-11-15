@@ -43,7 +43,7 @@ enable (e.g. ``-DKokkos_ENABLE_CUDA=ON`` for CUDA).
 
 **Restrictions:**
   Mutual Exclusion: You can only have one device backend (e.g., CUDA, HIP,
-  SYCL) and one host parallel backend (e.g., OpenMP, C++ threads) enabled at
+  SYCL) and one host parallel backend (e.g., OpenMP, C++ Threads) enabled at
   the same time. This is because these backends manage parallelism in
   potentially conflicting ways.
 
