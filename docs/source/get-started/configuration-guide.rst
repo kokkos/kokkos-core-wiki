@@ -3,12 +3,6 @@
 Configuration Guide
 ###################
 
-.. important::
-
-   With version 3.0 all Kokkos CMake keywords are prefixed with `Kokkos_` which is case-sensitive.
-
-   Recall that to set a keyword in CMake you used the syntax ``-Dkeyword_name=value``.
-
 .. note::
    The ``ccmake`` graphical user interface offers a convenient way to explore
    available CMake options and their current values. It may be more up to date
