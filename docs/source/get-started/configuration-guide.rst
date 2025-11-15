@@ -1,7 +1,7 @@
 .. include:: ../mydefs.rst
 
-CMake Keywords
-##############
+Configuration Guide
+###################
 
 .. important::
 
