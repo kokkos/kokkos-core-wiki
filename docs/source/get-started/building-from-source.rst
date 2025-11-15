@@ -182,7 +182,7 @@ These options are generally useful for any CMake project:
   deprecated. Setting this to ``OFF`` removes deprecated symbols.
   
 * ``-DKokkos_ENABLE_DEPRECATION_WARNINGS=ON``: Enables deprecation warnings.
-  **Strongly recommended** to avoid surprises in future releases. Don't disable
+  Strongly recommended to avoid surprises in future releases. Don't disable
   this unless you have a very good reason.
  
 
