@@ -151,6 +151,10 @@ General options
       * Enable deprecated code in the Kokkos 4.x series
       * ``ON``
 
+    * * ``Kokkos_ENABLE_DEPRECATED_CODE_5``
+      * Enable deprecated code in the Kokkos 5.x series
+      * ``OFF``
+
     * * ``Kokkos_ENABLE_DEPRECATION_WARNINGS``
       * Whether to raise warnings at compile time when using deprecated Kokkos facilities
       * ``ON``
