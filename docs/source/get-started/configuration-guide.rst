@@ -188,10 +188,13 @@ Debugging
 
     * * ``Kokkos_ENABLE_DEBUG_DUALVIEW_MODIFY_CHECK`` :red:`[Deprecated since 4.7]`
       * Debug check on dual views
-      * (see below)
+      * (see below [#dual_view_modify_check]_)
 
 
-``Kokkos_ENABLE_DEBUG_DUALVIEW_MODIFY_CHECK`` default value is "``ON`` if ``CMAKE_BUILD_TYPE`` is ``Debug``, ``OFF`` otherwise" until 4.7 and always ``ON`` since 4.7
+.. [#dual_view_modify_check] ``Kokkos_ENABLE_DEBUG_DUALVIEW_MODIFY_CHECK`` default value is:
+  
+  * ``ON`` if ``CMAKE_BUILD_TYPE`` is ``Debug``, ``OFF`` otherwise (until Kokkos 4.7)
+  * always ``ON`` (since Kokkos 4.7)
 
 .. _keywords_enable_backend_specific_options:
 
@@ -853,18 +856,18 @@ Intel GPUs
       *
 
     * * ``Kokkos_ARCH_INTEL_GEN``
-      * Just-In-Time compilation* for Intel GPUs in particular
+      * Just-In-Time compilation [#arch_intel_gen]_ for Intel GPUs in particular
       *
       *
 
-\* ``Kokkos_ARCH_INTEL_GEN`` enables Just-In-Time compilation for Intel GPUs
-whereas all the other flags for Intel compilers request Ahead-Of-Time
-compilation.
+.. [#arch_intel_gen] ``Kokkos_ARCH_INTEL_GEN`` enables Just-In-Time compilation
+  for Intel GPUs whereas all the other flags for Intel compilers request
+  Ahead-Of-Time compilation.
 
-Just-In-Time (JIT) compilation means that the compiler is invoked again when
-the binaries created are actually executed and only at that point the
-architecture to compile for is determined.
+  Just-In-Time (JIT) compilation means that the compiler is invoked again when
+  the binaries created are actually executed and only at that point the
+  architecture to compile for is determined.
 
-On the other hand, Ahead-Of-Time (AOT) compilation describes the standard model
-where the compiler is only invoked once to create the binary and the
-architecture to compile for is determined before the program is run.
+  On the other hand, Ahead-Of-Time (AOT) compilation describes the standard
+  model where the compiler is only invoked once to create the binary and the
+  architecture to compile for is determined before the program is run.
