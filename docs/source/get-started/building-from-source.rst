@@ -113,7 +113,7 @@ Use the following command to configure Kokkos:
     cmake -B builddir [<options...>]
 
 
-``-B builddir`` creates a ``builddir`` directory named build (you can choose a
+``-B builddir`` creates a build directory named ``builddir`` (you can choose a
 different name if you prefer).  Kokkos requires out-of-source builds.  The
 ``[<options...>]`` part is where you specify the configuration options.
 
@@ -127,9 +127,9 @@ These options are generally useful for any CMake project:
 
   Example: ``-DCMAKE_CXX_COMPILER=/path/to/hipcc``
  
-* ``-DCMAKE_CXX_STANDARD=<standard>``: Sets the C++ standard. The default is ``17``.
+* ``-DCMAKE_CXX_STANDARD=<standard>``: Sets the C++ standard. The default is ``20``.
 
-  Example: ``-DCMAKE_CXX_STANDARD=20``
+  Example: ``-DCMAKE_CXX_STANDARD=23``
 
 * ``-DCMAKE_BUILD_TYPE=<type>``: Controls optimization level and debugging
   information. Common options are ``Debug``, ``Release``, ``RelWithDebInfo``
@@ -182,7 +182,7 @@ These options are generally useful for any CMake project:
   deprecated. Setting this to ``OFF`` removes deprecated symbols.
   
 * ``-DKokkos_ENABLE_DEPRECATION_WARNINGS=ON``: Enables deprecation warnings.
-  **Strongly recommended** to avoid surprises in future releases. Don't disable
+  This is strongly recommended to avoid surprises in future releases. Don't disable
   this unless you have a very good reason.
  
 
