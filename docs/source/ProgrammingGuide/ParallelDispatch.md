@@ -223,13 +223,13 @@ parallel_reduce (X.extent(0), cs, sums);
 ```
 
 The result view could also use `Kokkos::HostSpace`, in which case
-the results are immediately available on host after reduce returns:
+the results accessing the results on the host requires a fence:
 
 ```c++
 Kokkos::View<float*, Kokkos::HostSpace> sums ("sums", numCols);
 parallel_reduce (X.extent(0), cs, sums);
+Kokkos::fence();
 std::cout << sums(0) << '\n';
-```
 
 If the number of elements in the reduced array is a compile-time constant,
 it is also possible to place the results directly into a C array:
