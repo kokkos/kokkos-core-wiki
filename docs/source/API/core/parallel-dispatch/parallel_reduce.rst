@@ -104,11 +104,11 @@ Requirements:
 * If ``ReducerArgument`` (or ``ReducerArgumentNonConst``)
 
   - is a scalar type then ``ReducerValueType`` must be of the same type.
-  - is a ``Kokkos::View`` then ``ReducerArgument::rank`` must be 0 and ``ReducerArgument::non_const_value_type`` must match ``ReducerValueType``.
+  - is a rank-0 ``Kokkos::View``, then ``ReducerArgument::non_const_value_type`` must match ``ReducerValueType``.
   - satisfies the ``Reducer`` concept then ``ReducerArgument::value_type`` must match ``ReducerValueType``.
-  - is an array
-
-    + ReducerValueType must match the array signature.
+  - is an array or rank-1 ``Kokkos::View``, then:
+    + ReducerValueType must be ``T[]`` where ``T`` is the element type of the array or View.
+    + If ``ReducerArgument`` is an array then it must be statically sized.
     + the functor must define FunctorType::value_type the same as ReducerValueType.
     + the functor must declare a public member variable ``int value_count`` which is the length of the array.
     + the functor must implement the function ``void init( ReducerValueType dst[] ) const``.
