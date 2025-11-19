@@ -1,13 +1,7 @@
 .. include:: ../mydefs.rst
 
-CMake Keywords
-##############
-
-.. important::
-
-   With version 3.0 all Kokkos CMake keywords are prefixed with `Kokkos_` which is case-sensitive.
-
-   Recall that to set a keyword in CMake you used the syntax ``-Dkeyword_name=value``.
+Configuration Guide
+###################
 
 .. note::
    The ``ccmake`` graphical user interface offers a convenient way to explore
@@ -43,7 +37,7 @@ enable (e.g. ``-DKokkos_ENABLE_CUDA=ON`` for CUDA).
 
 **Restrictions:**
   Mutual Exclusion: You can only have one device backend (e.g., CUDA, HIP,
-  SYCL) and one host parallel backend (e.g., OpenMP, C++ threads) enabled at
+  SYCL) and one host parallel backend (e.g., OpenMP, C++ Threads) enabled at
   the same time. This is because these backends manage parallelism in
   potentially conflicting ways.
 
@@ -151,6 +145,10 @@ General options
       * Enable deprecated code in the Kokkos 4.x series
       * ``ON``
 
+    * * ``Kokkos_ENABLE_DEPRECATED_CODE_5``
+      * Enable deprecated code in the Kokkos 5.x series
+      * ``OFF``
+
     * * ``Kokkos_ENABLE_DEPRECATION_WARNINGS``
       * Whether to raise warnings at compile time when using deprecated Kokkos facilities
       * ``ON``
@@ -184,10 +182,13 @@ Debugging
 
     * * ``Kokkos_ENABLE_DEBUG_DUALVIEW_MODIFY_CHECK`` :red:`[Deprecated since 4.7]`
       * Debug check on dual views
-      * (see below)
+      * (see below [#dual_view_modify_check]_)
 
 
-``Kokkos_ENABLE_DEBUG_DUALVIEW_MODIFY_CHECK`` default value is "``ON`` if ``CMAKE_BUILD_TYPE`` is ``Debug``, ``OFF`` otherwise" until 4.7 and always ``ON`` since 4.7
+.. [#dual_view_modify_check] ``Kokkos_ENABLE_DEBUG_DUALVIEW_MODIFY_CHECK`` default value is:
+  
+  * ``ON`` if ``CMAKE_BUILD_TYPE`` is ``Debug``, ``OFF`` otherwise (until Kokkos 4.7)
+  * always ``ON`` (since Kokkos 4.7)
 
 .. _keywords_enable_backend_specific_options:
 
@@ -208,10 +209,10 @@ Backend-specific options
 
     * * ``Kokkos_ENABLE_CUDA_LAMBDA`` :red:`[Deprecated since 4.1]`
       * Activate experimental lambda features
-      * (see below)
+      * (see below [#cuda_lambda]_)
 
     * * ``Kokkos_ENABLE_CUDA_RELOCATABLE_DEVICE_CODE``
-      * Enable relocatable device code (RDC) for CUDA (see below)
+      * Enable relocatable device code (RDC) for CUDA [#rdc_with_shared_libs]_
       * ``OFF``
 
     * * ``Kokkos_ENABLE_CUDA_UVM`` :red:`[Deprecated since 4.0]` see `Transition to alternatives <../usecases/Moving_from_EnableUVM_to_SharedSpace.html>`_
@@ -223,18 +224,18 @@ Backend-specific options
 	optimization may improve performance in applications with multiple CUDA streams per device, but it
 	is known to be incompatible with MPI distributions built on older versions of UCX
 	and many Cray MPICH instances. See `known issues <../known-issues.html#cuda>`_.
-      * (see below)
+      * (see below [#cuda_malloc_async]_)
 
     * * ``Kokkos_ENABLE_HIP_MULTIPLE_KERNEL_INSTANTIATIONS``
       * Instantiate multiple kernels at compile time - improve performance but increase compile time
       * ``OFF``
 
     * * ``Kokkos_ENABLE_HIP_RELOCATABLE_DEVICE_CODE``
-      * Enable relocatable device code (RDC) for HIP (see below)
+      * Enable relocatable device code (RDC) for HIP [#rdc_with_shared_libs]_
       * ``OFF``
 
     * * ``Kokkos_ENABLE_SYCL_RELOCATABLE_DEVICE_CODE``
-      * Enable relocatable device code (RDC) for SYCL (see below, since Kokkos 4.5)
+      * Enable relocatable device code (RDC) for SYCL [#rdc_with_shared_libs]_ (since Kokkos 4.5)
       * ``OFF``
 
     * * ``Kokkos_ENABLE_ATOMICS_BYPASS``
@@ -246,35 +247,35 @@ Backend-specific options
       * ``ON``
 
     * * ``Kokkos_ENABLE_COMPILE_AS_CMAKE_LANGUAGE``
-      * Build with the CMake language feature (CUDA or HIP only). (see below)
+      * Build with the CMake language feature (CUDA or HIP only) [#cmake_language]_
       * ``OFF``
 
     * * ``Kokkos_ENABLE_MULTIPLE_CMAKE_LANGUAGES``
-      * Make Kokkos installation usable in CXX and backend-compatible languages (CUDA or HIP). (see below, since Kokkos 5.0)
+      * Make Kokkos installation usable in CXX and backend-compatible languages (CUDA or HIP) [#multiple_languages]_ (since Kokkos 5.0)
       * ``OFF``
 
 
-``Kokkos_ENABLE_CUDA_LAMBDA`` default value is ``OFF`` until 3.7 and ``ON`` since 4.0
+.. [#cuda_lambda] ``Kokkos_ENABLE_CUDA_LAMBDA`` default value is ``OFF`` until 3.7 and ``ON`` since 4.0
 
-``Kokkos_ENABLE_IMPL_CUDA_MALLOC_ASYNC`` default value is ``OFF`` except in 4.2, 4.3, and 4.4
+.. [#cuda_malloc_async] ``Kokkos_ENABLE_IMPL_CUDA_MALLOC_ASYNC`` default value is ``OFF`` except in 4.2, 4.3, and 4.4
 
-``Kokkos_ENABLE_<CUDA/HIP/SYCL>_RELOCATABLE_DEVICE_CODE`` requires a static library build.
- RDC is not compatible with shared libraries. Therefore, this option can only be enabled when the ``BUILD_SHARED_LIBS`` variable is false.
+.. [#rdc_with_shared_libs] ``Kokkos_ENABLE_<CUDA/HIP/SYCL>_RELOCATABLE_DEVICE_CODE`` requires a static library build.
+  RDC is not compatible with shared libraries. Therefore, this option can only be enabled when the ``BUILD_SHARED_LIBS`` variable is false.
 
-``Kokkos_ENABLE_COMPILE_AS_CMAKE_LANGUAGE`` Building with the CMake language feature can cause problems in downstream libraries/applications.
-CMake uses the file endings to determine the language a file should be compiled with. Since Kokkos files are named `cpp` and `hpp`, they are associated with `CXX` in CMake.
-This implies that source and header files that use Kokkos might need to be redefined to be treated as another language. Otherwise, the language is detected based on the file endings. This might lead to files not being able to compile (e.g. using Kokkos in a `.cpp` file instead of a `.cu` file leads to CMake detecting `CXX` instead of `CUDA`).
-Without specifying the language the compilation might fail depending on the capabilities of the `CXX` compiler to compile device code.
-Furthermore, the architecture needs to be specified for every target in accordance with what `Kokkos_ARCH_...` is set and not with `CMAKE_<LANG>_ARCHITECTURES`. This also implies only one architecture can be active.
+.. [#cmake_language] ``Kokkos_ENABLE_COMPILE_AS_CMAKE_LANGUAGE`` Building with the CMake language feature can cause problems in downstream libraries/applications.
+  CMake uses the file endings to determine the language a file should be compiled with. Since Kokkos files are named ``.cpp`` and ``.hpp``, they are associated with ``CXX`` in CMake.
+  This implies that source and header files that use Kokkos might need to be redefined to be treated as another language. Otherwise, the language is detected based on the file endings. This might lead to files not being able to compile (e.g. using Kokkos in a ``.cpp`` file instead of a ``.cu`` file leads to CMake detecting ``CXX`` instead of ``CUDA``).
+  Without specifying the language the compilation might fail depending on the capabilities of the ``CXX`` compiler to compile device code.
+  Furthermore, the architecture needs to be specified for every target in accordance with what ``Kokkos_ARCH_<...>`` is set and not with ``CMAKE_<LANG>_ARCHITECTURES``. This also implies only one architecture can be active.
 
-An example for marking the files accordingly can be found in `example/build_cmake_installed_kk_as_language`
+  An example for marking the files accordingly can be found in ``example/build_cmake_installed_kk_as_language``.
 
-``Kokkos_ENABLE_MULTIPLE_CMAKE_LANGUAGES`` This option allows to use one installed Kokkos library in multiple CMake languages (`CXX` and the language of the respective backend (`CUDA` or `HIP`)).
-With this option enabled, Kokkos will use its compiler launcher script to redirect the `CXX` compiler unless the `separable_compilation` component is requested.
-With the `separable_compilation` component, targets/projects/directories that link to Kokkos need to be marked manually via the CMake function `kokkos_compilation`.
-Since Kokkos is limited to a single architecture, the `CMAKE_<LANG>_ARCHITECTURES` must correspond to the architecture enabled in Kokkos.
+.. [#multiple_languages] ``Kokkos_ENABLE_MULTIPLE_CMAKE_LANGUAGES`` This option allows to use one installed Kokkos library in multiple CMake languages (``CXX`` and the language of the respective backend (``CUDA`` or ``HIP``)).
+  With this option enabled, Kokkos will use its compiler launcher script to redirect the ``CXX`` compiler unless the ``separable_compilation`` component is requested.
+  With the ``separable_compilation`` component, targets/projects/directories that link to Kokkos need to be marked manually via the CMake function ``kokkos_compilation``.
+  Since Kokkos is limited to a single architecture, the ``CMAKE_<LANG>_ARCHITECTURES`` must correspond to the architecture enabled in Kokkos.
 
-An example for using Kokkos with multiple languages can be found in `example/build_cmake_installed_multilanguage`
+  An example for using Kokkos with multiple languages can be found in ``example/build_cmake_installed_multilanguage``.
 
 Development
 -----------
@@ -818,15 +819,15 @@ Intel GPUs
       *
       *
 
-    * * ``Kokkos_ARCH_INTEL_DG1``
-      * Iris Xe MAX (DG1)
-      *
-      *
-
     * * ``Kokkos_ARCH_INTEL_DG2``
       * Intel DG2
       * Intel Flex, Intel Arc
       * (since Kokkos 4.7)
+
+    * * ``Kokkos_ARCH_INTEL_DG1``
+      * Iris Xe MAX (DG1)
+      *
+      *
 
     * * ``Kokkos_ARCH_INTEL_GEN12LP``
       * Gen12LP
@@ -849,18 +850,18 @@ Intel GPUs
       *
 
     * * ``Kokkos_ARCH_INTEL_GEN``
-      * Just-In-Time compilation* for Intel GPUs in particular
+      * Just-In-Time compilation [#arch_intel_gen]_ for Intel GPUs in particular
       *
       *
 
-\* ``Kokkos_ARCH_INTEL_GEN`` enables Just-In-Time compilation for Intel GPUs
-whereas all the other flags for Intel compilers request Ahead-Of-Time
-compilation.
+.. [#arch_intel_gen] ``Kokkos_ARCH_INTEL_GEN`` enables Just-In-Time compilation
+  for Intel GPUs whereas all the other flags for Intel compilers request
+  Ahead-Of-Time compilation.
 
-Just-In-Time (JIT) compilation means that the compiler is invoked again when
-the binaries created are actually executed and only at that point the
-architecture to compile for is determined.
+  Just-In-Time (JIT) compilation means that the compiler is invoked again when
+  the binaries created are actually executed and only at that point the
+  architecture to compile for is determined.
 
-On the other hand, Ahead-Of-Time (AOT) compilation describes the standard model
-where the compiler is only invoked once to create the binary and the
-architecture to compile for is determined before the program is run.
+  On the other hand, Ahead-Of-Time (AOT) compilation describes the standard
+  model where the compiler is only invoked once to create the binary and the
+  architecture to compile for is determined before the program is run.
