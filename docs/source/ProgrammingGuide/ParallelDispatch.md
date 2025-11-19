@@ -223,7 +223,7 @@ parallel_reduce (X.extent(0), cs, sums);
 ```
 
 The result view could also use `Kokkos::HostSpace`, in which case
-the results accessing the results on the host requires a fence:
+accessing the results on the host requires a fence:
 
 ```c++
 Kokkos::View<float*, Kokkos::HostSpace> sums ("sums", numCols);
