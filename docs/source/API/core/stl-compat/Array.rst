@@ -65,12 +65,11 @@ Interface
     :return: ``N``
     :since: ``noexcept`` since 5.0
 
-  .. cpp:function:: template<class iType> constexpr reference operator[](const iType& i)
-  .. cpp:function:: template<class iType> constexpr const_reference operator[](const iType& i) const
-
-    :tparam iType: An integral type or an unscoped enum type.
+  .. cpp:function:: constexpr reference operator[](size_t i)
+  .. cpp:function:: constexpr const_reference operator[](size_t i) const
 
     :return: A reference to the ``i``-th element of the array.
+    :since: No longer requires the argument to be of an integral type or an unscoped enum type. (since 5.1)
 
   .. cpp:function:: constexpr pointer data() noexcept
   .. cpp:function:: constexpr const_pointer data() const noexcept
