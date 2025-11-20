@@ -69,7 +69,7 @@ Interface
   .. cpp:function:: constexpr const_reference operator[](size_t i) const
 
     :return: A reference to the ``i``-th element of the array.
-    :since: No longer requires the argument to be of an integral type or an unscoped enum type. since 5.1
+    :since: No longer requires the argument to be of an integral type or an unscoped enum type. (since 5.1)
 
   .. cpp:function:: constexpr pointer data() noexcept
   .. cpp:function:: constexpr const_pointer data() const noexcept
