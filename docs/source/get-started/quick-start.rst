@@ -10,7 +10,7 @@ Prerequisites
 To complete this tutorial, you'll need:
 
 * a compatible operating system (e.g. Linux, macOS, Windows).
-* a compatible C++ compiler that supports at least C++17.
+* a compatible C++ compiler that supports at least C++20.
 * `CMake <https://cmake.org/>`_ and a compatible build tool for building the
   project.
 
@@ -50,19 +50,19 @@ in your project directory (``MyProject``), create a file named
 
 .. code-block:: cmake
 
-  cmake_minimum_required(VERSION 3.16)
+  cmake_minimum_required(VERSION 3.22)
   project(MyProject)
   
   include(FetchContent)
   FetchContent_Declare(
     Kokkos
-    URL https://github.com/kokkos/kokkos/archive/refs/tags/4.5.01.zip
+    URL https://github.com/kokkos/kokkos/archive/refs/tags/5.0.0.zip
   )
   FetchContent_MakeAvailable(Kokkos)
 
 The above configuration declares a dependency on Kokkos which is downloaded
 from GitHub.
-``4.5.01`` is the Kokkos version to use; we generally recommend using the
+``5.0.0`` is the Kokkos version to use; we generally recommend using the
 `latest available <https://github.com/kokkos/kokkos/releases/latest>`_.
 
 For more information about how to create ``CMakeLists.txt files``, see the
@@ -125,8 +125,8 @@ build system:
 .. code-block:: sh
 
   MyProject> cmake -B builddir
-  -- The C compiler identification is GNU 10.2.1
-  -- The CXX compiler identification is GNU 10.2.1
+  -- The C compiler identification is GNU 13.3.0
+  -- The CXX compiler identification is GNU 13.3.0
   ...
   -- Build files have been written to: .../MyProject/builddir
 
