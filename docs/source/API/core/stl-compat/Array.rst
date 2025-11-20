@@ -82,13 +82,15 @@ Interface
   .. cpp:function:: constexpr const_pointer begin() const noexcept
   .. cpp:function:: constexpr const_pointer cbegin() const  noexcept
 
-    :return: `data()`
+    :return: ``data()``
+    :since: since 5.0
 
   .. cpp:function:: constexpr pointer end() noexcept
   .. cpp:function:: constexpr const_pointer end() const noexcept
   .. cpp:function:: constexpr const_pointer cend() const noexcept
 
-    :return: `data() + size()`. The return value is not dereferenceable. If ``N == 0``, the return value will be equal to `begin()`.
+    :return: ``data() + size()``. The return value is not dereferenceable. If ``N == 0``, the return value will be equal to ``begin()``.
+    :since: since 5.0
 
 
 Deduction Guides
