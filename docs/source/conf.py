@@ -22,7 +22,7 @@ sys.path.insert(0, os.path.abspath('.'))
 master_doc = "index"
 
 project = 'Kokkos'
-copyright = f'{datetime.datetime.now().year}, National Technology & Engineering Solutions of Sandia, LLC (NTESS)'
+copyright = f'{datetime.datetime.now().year}, Contributors to the Kokkos project'
 author = 'lots of people'
 
 # The full version, including alpha/beta/rc tags
