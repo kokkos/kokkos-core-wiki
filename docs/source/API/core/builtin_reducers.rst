@@ -21,14 +21,20 @@ Reducer objects used in conjunction with `parallel_reduce <parallel-dispatch/par
      - Logical 'Or' reduction
    * - `Max <builtinreducers/Max.html>`__
      - Maximum reduction
+   * - `MaxFirstLoc <builtinreducers/MaxFirstLoc.html>`__
+     - Reduction providing maximum and its smallest associated index
    * - `MaxLoc <builtinreducers/MaxLoc.html>`__
      - Reduction providing maximum and an associated index
    * - `Min <builtinreducers/Min.html>`__
      - Minimum reduction
+   * - `MinFirstLoc <builtinreducers/MinFirstLoc.html>`__
+     - Reduction providing minimum and its smallest associated index
    * - `MinLoc <builtinreducers/MinLoc.html>`__
      - Reduction providing minimum and an associated index
    * - `MinMax <builtinreducers/MinMax.html>`__
      - Reduction providing both minimum and maximum
+   * - `MinMaxFirstLastLoc <builtinreducers/MinMaxFirstLastLoc.html>`__
+     - Reduction providing both minimum at its smallest index & maximum at its largest index
    * - `MinMaxLoc <builtinreducers/MinMaxLoc.html>`__
      - Reduction providing both minimum and maximum and associated indices
    * - `Prod <builtinreducers/Prod.html>`__
@@ -53,10 +59,13 @@ built-in reducers to work with user-defined types.
    ./builtinreducers/LAnd
    ./builtinreducers/LOr
    ./builtinreducers/Max
+   ./builtinreducers/MaxFirstLoc
    ./builtinreducers/MaxLoc
    ./builtinreducers/Min
+   ./builtinreducers/MinFirstLoc
    ./builtinreducers/MinLoc
    ./builtinreducers/MinMax
+   ./builtinreducers/MinMaxFirstLastLoc
    ./builtinreducers/MinMaxLoc
    ./builtinreducers/Prod
    ./builtinreducers/Sum
