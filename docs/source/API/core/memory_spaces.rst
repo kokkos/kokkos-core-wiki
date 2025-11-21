@@ -29,32 +29,32 @@ Memory Spaces
 ``Kokkos::CudaSpace``
 ---------------------
 
-``Kokkos::CudaSpace`` is a |MemorySpaceType|_ representing device memory on a Cuda-capable GPU. Except in rare instances, it should not be used directly, but instead should be used generically as an memory space.  For details, see |TheDocumentationOnTheMemorySpaceConcept|_.
+``Kokkos::CudaSpace`` is a |MemorySpaceType|_ representing device memory on a Cuda-capable GPU. Except in rare instances, it should not be used directly, but instead should be used generically as a memory space.  For details, see |TheDocumentationOnTheMemorySpaceConcept|_.
 
 ``Kokkos::CudaHostPinnedSpace``
 -------------------------------
 
-``Kokkos::CudaHostPinnedSpace`` is a |MemorySpaceType|_ representing host-side pinned memory accessible from a Cuda-capable GPU.  This memory is typically accessible by both host and device execution spaces.  Except in rare instances, it should not be used directly, but instead should be used generically as an memory space.  For details, see |TheDocumentationOnTheMemorySpaceConcept|_.
+``Kokkos::CudaHostPinnedSpace`` is a |MemorySpaceType|_ representing host-side pinned memory accessible from a Cuda-capable GPU.  This memory is typically accessible by both host and device execution spaces.  Except in rare instances, it should not be used directly, but instead should be used generically as a memory space.  For details, see |TheDocumentationOnTheMemorySpaceConcept|_.
 
 ``Kokkos::CudaUVMSpace``
 ------------------------
 
-``Kokkos::CudaUVMSpace`` is a |MemorySpaceType|_ representing unified virtual memory on a Cuda-capable GPU system.  Unified virtual memory is also accessible from most host execution spaces.  Except in rare instances, it should not be used directly, but instead should be used generically as an memory space.  For details, see |TheDocumentationOnTheMemorySpaceConcept|_.
+``Kokkos::CudaUVMSpace`` is a |MemorySpaceType|_ representing unified virtual memory on a Cuda-capable GPU system.  Unified virtual memory is also accessible from most host execution spaces.  Except in rare instances, it should not be used directly, but instead should be used generically as a memory space.  For details, see |TheDocumentationOnTheMemorySpaceConcept|_.
 
 ``Kokkos::HIPSpace``
 --------------------
 
-``Kokkos::HIPSpace`` :sup:`promoted from` |Experimental|_ :sup:`since 4.0` is a |MemorySpaceType|_ representing device memory on a GPU in the HIP GPU programming environment.  Except in rare instances, it should not be used directly, but instead should be used generically as an memory space.  For details, see |TheDocumentationOnTheMemorySpaceConcept|_.
+``Kokkos::HIPSpace`` :sup:`promoted from` |Experimental|_ :sup:`since 4.0` is a |MemorySpaceType|_ representing device memory on a GPU in the HIP GPU programming environment.  Except in rare instances, it should not be used directly, but instead should be used generically as a memory space.  For details, see |TheDocumentationOnTheMemorySpaceConcept|_.
 
 ``Kokkos::HIPHostPinnedSpace``
 ------------------------------
 
-``Kokkos::HIPHostPinnedSpace`` :sup:`promoted from` |Experimental|_ :sup:`since 4.0` is a |MemorySpaceType|_ representing host-side pinned memory accessible from a GPU in the HIP GPU programming environment.  This memory is accessible by both host and device execution spaces.  Except in rare instances, it should not be used directly, but instead should be used generically as an memory space.  For details, see |TheDocumentationOnTheMemorySpaceConcept|_.
+``Kokkos::HIPHostPinnedSpace`` :sup:`promoted from` |Experimental|_ :sup:`since 4.0` is a |MemorySpaceType|_ representing host-side pinned memory accessible from a GPU in the HIP GPU programming environment.  This memory is accessible by both host and device execution spaces.  Except in rare instances, it should not be used directly, but instead should be used generically as a memory space.  For details, see |TheDocumentationOnTheMemorySpaceConcept|_.
 
 ``Kokkos::HIPManagedSpace``
 ---------------------------
 
-``Kokkos::HIPManagedSpace`` :sup:`promoted from` |Experimental|_ :sup:`since 4.0`  is a |MemorySpaceType|_ representing page-migrating memory on a GPU in the HIP GPU programming environment.  Page-migrating memory is accessible from most host execution spaces. Even though available with all combinations of operating system and HIP-supported hardware, it requires both operating system and hardware to support and enable the ``xnack`` feature. Except in rare instances, it should not be used directly, but instead should be used generically as an memory space.  For details, see |TheDocumentationOnTheMemorySpaceConcept|_.
+``Kokkos::HIPManagedSpace`` :sup:`promoted from` |Experimental|_ :sup:`since 4.0`  is a |MemorySpaceType|_ representing page-migrating memory on a GPU in the HIP GPU programming environment.  Page-migrating memory is accessible from most host execution spaces. Even though available with all combinations of operating system and HIP-supported hardware, it requires both operating system and hardware to support and enable the ``xnack`` feature. Except in rare instances, it should not be used directly, but instead should be used generically as a memory space.  For details, see |TheDocumentationOnTheMemorySpaceConcept|_.
 
 ``Kokkos::SYCLDeviceUSMSpace``
 --------------------------------------------
@@ -74,7 +74,7 @@ Memory Spaces
 ``Kokkos::HostSpace``
 ---------------------
 
-``Kokkos::HostSpace`` is a |MemorySpaceType|_ representing traditional random access memory accessible from the CPU.  Except in rare instances, it should not be used directly, but instead should be used generically as an memory space.  For details, see |TheDocumentationOnTheMemorySpaceConcept|_.
+``Kokkos::HostSpace`` is a |MemorySpaceType|_ representing traditional random access memory accessible from the CPU.  Except in rare instances, it should not be used directly, but instead should be used generically as a memory space.  For details, see |TheDocumentationOnTheMemorySpaceConcept|_.
 
 ``Kokkos::SharedSpace``
 -----------------------
