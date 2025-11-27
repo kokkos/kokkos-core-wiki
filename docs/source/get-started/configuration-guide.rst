@@ -747,7 +747,7 @@ Kokkos will attempt to autodetect the architecture flag at configuration time.
       * (since Kokkos 4.2)
 
     * * ``Kokkos_ARCH_AMD_GFX908``
-      * GFX90A
+      * GFX908
       * MI100
       * (since Kokkos 4.2)
 
