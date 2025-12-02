@@ -1,5 +1,5 @@
-``Array``
-==============
+``Kokkos::Array``
+=================
 
 .. role:: cpp(code)
     :language: cpp
@@ -15,7 +15,7 @@ Defined in header ``<Kokkos_Array.hpp>`` which is included from ``<Kokkos_Core.h
 Description
 -----------
 
-``Array`` is a contiguous aggregate owning container storing a fixed size sequence of objects (models holding exactly N elements).
+``Kokkos::Array`` is a contiguous aggregate owning container storing a fixed size sequence of objects (models holding exactly N elements).
 
 * This is intended as a replacement for ``std::array<T, N>``.
 * This container is an owning container (the data is embedded in the container itself).
