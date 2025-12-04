@@ -1,7 +1,7 @@
 ``ThreadVectorRange``
 =====================
 
-Header File: ``Kokkos_Core.hpp``
+Header File: ``<Kokkos_Core.hpp>``
 
 Usage: 
 
