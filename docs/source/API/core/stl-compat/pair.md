@@ -1,4 +1,4 @@
-# `Kokkos::pair`
+# `pair`
 
 Header File: `Kokkos_Pair.hpp`
 
