@@ -1,5 +1,5 @@
-``Kokkos::Array``
-=================
+``Array``
+=========
 
 .. role:: cpp(code)
     :language: cpp
