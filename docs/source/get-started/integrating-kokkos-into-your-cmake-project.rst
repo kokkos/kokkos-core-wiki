@@ -20,7 +20,7 @@ command to locate and link against an existing Kokkos installation:
 
 .. code-block:: cmake
 
-  find_package(Kokkos 4.2 REQUIRED CONFIG) # Find Kokkos version 4.2 or later
+  find_package(Kokkos 4.2 REQUIRED CONFIG) # Find Kokkos version 4.2 or any newer version
   # ...
   target_link_libraries(MyTarget PRIVATE Kokkos::kokkos)
 
@@ -28,7 +28,18 @@ command to locate and link against an existing Kokkos installation:
   generated when Kokkos is built and installed. This file contains the
   necessary information for linking against Kokkos.
 * The ``4.2`` argument specifies the minimum required Kokkos version. It's
-  optional but recommended for ensuring compatibility.
+  optional but recommended for ensuring compatibility.  Note that it will setup
+  your project accept any newer version, including the next major release
+  (e.g., ``5.0``).
+
+  * If you need to strictly stay on Kokkos ``4.x`` (to avoid breaking changes
+    in ``5.0``), you must specify a version range instead:
+
+    .. code-block:: cmake
+
+      # Find Kokkos 4.2+, but stop before 5.0
+      find_package(Kokkos 4.2...<5.0 REQUIRED CONFIG)
+
 * ``Kokkos::kokkos`` is the namespaced imported target that provides all
   necessary build flags.
 * The ``CONFIG`` keyword tells CMake to use the configuration files.
