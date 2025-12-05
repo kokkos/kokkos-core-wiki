@@ -29,7 +29,7 @@ command to locate and link against an existing Kokkos installation:
   necessary information for linking against Kokkos.
 * The ``4.2`` argument specifies the minimum required Kokkos version. It's
   optional but recommended for ensuring compatibility.  Note that it will setup
-  your project accept any newer version, including the next major release
+  your project to accept any newer version, including the next major release
   (e.g., ``5.0``).
 
   * If you need to strictly stay on Kokkos ``4.x`` (to avoid breaking changes
