@@ -68,16 +68,18 @@ The default behaviour if the specific function doesn't exist is to cast the half
    "round", , , "X", 
    "nearbyint", "X", "X", , 
    "logb", , , "X", 
-   "nextafter", , , "X", 
+   "nextafter", "X²", "X²", "X", "X"
    "copysign", , , "X", 
    "isfinite", , , "X", 
-   "isinf", "X²", "X²", "X", 
+   "isinf", "X³", "X³", "X", 
    "isnan", "X", "X", "X", "X"
    "signbit", , , "X", 
 
 ¹Only if GPU_ARCH >= 80
 
-²Not for nvcc-12.2 when compiling with --std=c++20 (https://docs.nvidia.com/cuda/archive/12.3.2/cuda-toolkit-release-notes/index.html#cuda-math-release-12-3)
+²Not supported with MSVC
+
+³Not for nvcc-12.2 when compiling with --std=c++20 (https://docs.nvidia.com/cuda/archive/12.3.2/cuda-toolkit-release-notes/index.html#cuda-math-release-12-3)
 
 Example
 ~~~~~~~
