@@ -7,4 +7,4 @@ The following pages provide information for existing and prospective developers 
    :maxdepth: 1
 
    PRs and Reviews <prs-and-reviews.rst>
-   Coding Sandards <coding-standards>
+   Coding Standards <coding-standards>
