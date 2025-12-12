@@ -60,7 +60,7 @@ Description
       with ``team_size`` threads, using a vector length of ``vector_length``. If the team size is not possible when
       calling a parallel policy, that kernel launch may throw.
 
-   .. cpp:function:: TeamPolicy(index_type league_size, Impl::AUTO_t, index_type vector_length=1)
+   .. cpp:function:: TeamPolicy(index_type league_size, AUTO_t, index_type vector_length=1)
 
       Request to launch ``league_size`` work items, each of which is assigned to a team of threads of a
       size determined by Kokkos, using a vector length of ``vector_length``. The team size may be determined
@@ -72,7 +72,7 @@ Description
       using a vector length of ``vector_length``. If the team size is not possible when calling a parallel policy,
       that kernel launch may throw. Use the provided execution space instance during a kernel launch.
 
-   .. cpp:function:: TeamPolicy(execution_space space, index_type league_size, Impl::AUTO_t, index_type vector_length=1)
+   .. cpp:function:: TeamPolicy(execution_space space, index_type league_size, AUTO_t, index_type vector_length=1)
 
       Request to launch ``league_size`` work items, each of which is assigned to a team of threads of a size determined by Kokkos,
       using a vector length of ``vector_length``. The team size may be determined lazily at launch time, taking into
