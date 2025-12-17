@@ -21,6 +21,8 @@ with LLVM Exception**. This allows your contributions to be used in
 closed-source commercial contexts. See the `LICENSE <license.html>`__ for
 details.
 
+Authors retain copyright on their own contributions.
+
 Contributing Documentation
 --------------------------
 
