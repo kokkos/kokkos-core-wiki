@@ -9,18 +9,19 @@ Contributing
    developer-guides/index
    testing-and-issue-tracking
 
-We are open and try to encourage contributions from external developers.
-To do so please first open an issue describing the contribution and then
-issue a pull request against the develop branch.
-For larger features it may be good to get guidance from
-the core development team first through the github issue.
+We welcome external contributions. Please `open an issue
+<https://github.com/kokkos/kokkos/issues>`_ to discuss your changes
+first—especially for larger features—and submit your pull request against the
+``develop`` branch.
+If you are unsure about opening an issue, feel free to `reach out on Slack
+<https://kokkos.org/community/chat/#slack>`__ for initial feedback.
 
-Note that Kokkos Core is licensed under standard 3-clause BSD terms of use.
-Which means contributing to Kokkos allows anyone else to use your contributions
-not just for public purposes but also for closed source commercial projects.
-For specifics see the `LICENSE <license.html>`__.
+Note that by contributing to Kokkos Core, you agree to the **Apache License 2.0
+with LLVM Exception**. This allows your contributions to be used in
+closed-source commercial contexts. See the `LICENSE <license.html>`__ for
+details.
 
-Open an issue/feature req. `ISSUES <https://github.com/kokkos/kokkos/issues>`_
+Authors retain copyright on their own contributions.
 
 Contributing Documentation
 --------------------------
