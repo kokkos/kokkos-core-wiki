@@ -114,7 +114,7 @@ Description
 
 .. cpp:function:: template<class T> void atomic_nand(T* const ptr_to_value, const T value);
 
-   Atomically executes ``*ptr_to_value = !(*ptr_to_value & value)``.
+   Atomically executes ``*ptr_to_value = ~(*ptr_to_value & value)``.
 
    * ``ptr_to_value``: address of the to be updated value.
 

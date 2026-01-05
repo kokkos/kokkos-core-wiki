@@ -73,6 +73,13 @@ Description
    Atomically executes ``tmp = *ptr_to_value; *ptr_to_value %= value; return tmp;``.
 
    :param ptr_to_value: address of the value to be updated
+   :param value: value to be used as modulus.
+
+.. cpp:function:: template<class T> T atomic_fetch_nand(T* const ptr_to_value, const T value);
+
+   Atomically executes ``tmp = *ptr_to_value; *ptr_to_value = ~(*ptr_to_value & val); return tmp;``.
+
+   :param ptr_to_value: address of the value to be updated
    :param value: value with which to combine the original value.
 
 .. cpp:function:: template<class T> T atomic_fetch_or(T* const ptr_to_value, const T value);
