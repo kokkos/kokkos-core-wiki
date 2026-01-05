@@ -36,7 +36,7 @@ Description
 
 .. cpp:function:: template<class T>  T atomic_dec_fetch(T* const ptr_to_value);
 
-   Atomically executes ``(*ptr_to_value)--; return *ptr_to_value;`` or calls ``atomic_sub_fetch(ptr_to_value, T(1))``.
+   Atomically executes ``(*ptr_to_value)--; return *ptr_to_value;``.
 
    * ``ptr_to_value``: address of the value to be updated
 
@@ -50,7 +50,7 @@ Description
 
 .. cpp:function:: template<class T>  T atomic_inc_fetch(T* const ptr_to_value);
 
-   Atomically executes ``(*ptr_to_value)++; return *ptr_to_value;`` or calls ``atomic_inc_fetch(ptr_to_value, T(1))``.
+   Atomically executes ``(*ptr_to_value)++; return *ptr_to_value;``.
 
    * ``ptr_to_value``: address of the value to be updated
 
