@@ -275,9 +275,9 @@ See below the list of common mathematical functions supported. We refer the read
 
 .. |ldexp| replace:: ``ldexp``
 
-.. _modf: https://en.cppreference.com/w/cpp/numeric/math/modf
+.. _modf*: https://en.cppreference.com/w/cpp/numeric/math/modf
 
-.. |modf| replace:: ``modf``
+.. |modf*| replace:: ``modf*``
 
 .. _scalbn: https://en.cppreference.com/w/cpp/numeric/math/scalbn
 
@@ -307,7 +307,7 @@ See below the list of common mathematical functions supported. We refer the read
 
 .. |copysign*| replace:: ``copysign*``
 
-**Floating point manipulation functions** |logb*|_ |nextafter*|_ |copysign*|_ (currently not provided by Kokkos: |frexp|_ |ldexp|_ |modf|_ |scalbn|_ |scalbln|_ |ilog|_ |nexttoward|_)
+**Floating point manipulation functions** |logb*|_ |nextafter*|_ |copysign*|_ |modf*|_ (currently not provided by Kokkos: |frexp|_ |ldexp|_ |scalbn|_ |scalbln|_ |ilog|_ |nexttoward|_)
 
 .. _fpclassify: https://en.cppreference.com/w/cpp/numeric/math/fpclassify
 
@@ -387,6 +387,7 @@ Notes
 * ``round``, ``logb``, ``nextafter``, ``copysign``, and ``signbit`` are available since version 3.7
 * three-argument version of ``hypot`` is available since 4.0
 * ``fma`` is available since 4.0
+* ``modf`` is available since 5.1
 * Beware the using-directive ``using namespace Kokkos;`` will cause
   compilation errors with unqualified calls to math functions.  Use explicit
   qualification (``Kokkos::sqrt``) or using-declaration (``using
