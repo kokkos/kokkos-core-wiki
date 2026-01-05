@@ -33,12 +33,25 @@ Description
    :param ptr_to_value: address of the value to be updated
    :param value: value with which to combine the original value.
 
+.. cpp:function:: template<class T>  T atomic_fetch_dec(T* const ptr_to_value);
+
+   Atomically executes ``tmp = *ptr_to_value; (*ptr_to_value)--; return tmp;`` or calls ``atomic_fetch_sub(ptr_to_value, T(1))``.
+
+   :param ptr_to_value: address of the value to be updated
+
 .. cpp:function:: template<class T>  T atomic_fetch_div(T* const ptr_to_value, const T value);
 
    Atomically executes ``tmp = *ptr_to_value; *ptr_to_value /= value; return tmp;``.
 
    :param ptr_to_value: address of the value to be updated
    :param value: value by which to divide the original value..
+
+.. cpp:function:: template<class T>  T atomic_fetch_inc(T* const ptr_to_value);
+
+   Atomically executes ``tmp = *ptr_to_value; (*ptr_to_value)++; return tmp;``
+   or calls ``atomic_fetch_add(ptr_to_value, T(1))``.
+
+   :param ptr_to_value: address of the value to be updated
 
 .. cpp:function:: template<class T> T atomic_fetch_lshift(T* const ptr_to_value, const unsigned shift);
 
