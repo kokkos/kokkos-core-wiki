@@ -80,6 +80,14 @@ Description
 
    * ``ptr_to_value``: address of the to be updated value.
 
+   * ``value``: value to be used as modulus.
+
+.. cpp:function:: template<class T> T atomic_nand_fetch(T* const ptr_to_value, const T value);
+
+   Atomically executes ``*ptr_to_value = !(*ptr_to_value & value); return *ptr_to_value;``.
+
+   * ``ptr_to_value``: address of the to be updated value.
+
    * ``value``: value with which to combine the original value.
 
 .. cpp:function:: template<class T> T atomic_or_fetch(T* const ptr_to_value, const T value);
