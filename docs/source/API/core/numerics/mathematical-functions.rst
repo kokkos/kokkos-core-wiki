@@ -77,9 +77,9 @@ See below the list of common mathematical functions supported. We refer the read
 
 .. |remainder| replace:: ``remainder``
 
-.. _remquo: https://en.cppreference.com/w/cpp/numeric/math/remquo
+.. _remquo*: https://en.cppreference.com/w/cpp/numeric/math/remquo
 
-.. |remquo| replace:: ``remquo``
+.. |remquo*| replace:: ``remquo*``
 
 .. _fma*: https://en.cppreference.com/w/cpp/numeric/math/fma
 
@@ -101,7 +101,7 @@ See below the list of common mathematical functions supported. We refer the read
 
 .. |nan| replace:: ``nan``
 
-**Basic operations** |abs|_ |fabs|_ |fmod|_ |remainder|_ |fma*|_ |fmax|_ |fmin|_ |fdim|_ |nan|_ (currently not provided by Kokkos: |remquo|_)
+**Basic operations** |abs|_ |fabs|_ |fmod|_ |remainder|_ |fma*|_ |fmax|_ |fmin|_ |fdim|_ |nan|_ |remquo*|_
 
 .. _exp: https://en.cppreference.com/w/cpp/numeric/math/exp
 
@@ -241,31 +241,31 @@ See below the list of common mathematical functions supported. We refer the read
 
 .. |round*| replace:: ``round*``
 
-.. _lround: https://en.cppreference.com/w/cpp/numeric/math/round
+.. _lround*: https://en.cppreference.com/w/cpp/numeric/math/round
 
-.. |lround| replace:: ``lround``
+.. |lround*| replace:: ``lround*``
 
-.. _llround: https://en.cppreference.com/w/cpp/numeric/math/round
+.. _llround*: https://en.cppreference.com/w/cpp/numeric/math/round
 
-.. |llround| replace:: ``llround``
+.. |llround*| replace:: ``llround*``
 
 .. _nearbyint*: https://en.cppreference.com/w/cpp/numeric/math/nearbyint
 
 .. |nearbyint*| replace:: ``nearbyint*``
 
-.. _rint: https://en.cppreference.com/w/cpp/numeric/math/rint
+.. _rint*: https://en.cppreference.com/w/cpp/numeric/math/rint
 
-.. |rint| replace:: ``rint``
+.. |rint*| replace:: ``rint*``
 
-.. _lrint: https://en.cppreference.com/w/cpp/numeric/math/rint
+.. _lrint*: https://en.cppreference.com/w/cpp/numeric/math/rint
 
-.. |lrint| replace:: ``lrint``
+.. |lrint*| replace:: ``lrint*``
 
-.. _llrint: https://en.cppreference.com/w/cpp/numeric/math/rint
+.. _llrint*: https://en.cppreference.com/w/cpp/numeric/math/rint
 
-.. |llrint| replace:: ``llrint``
+.. |llrint*| replace:: ``llrint*``
 
-**Nearest integer floating point operations** |ceil|_ |floor|_ |trunc|_ |round*|_ |nearbyint*|_ (currently not provided by Kokkos: |lround|_ |llround|_ |rint|_ |lrint|_ |llrint|_)
+**Nearest integer floating point operations** |ceil|_ |floor|_ |trunc|_ |nearbyint*|_ |round*|_ |lround*|_ |llround*|_ |rint*|_ |lrint*|_ |llrint*|_
 
 .. _frexp: https://en.cppreference.com/w/cpp/numeric/math/frexp
 
@@ -383,11 +383,11 @@ Notes
 .. |KnownIssues| replace:: known issues
 
 * **Feel free to** |openIssue|_ **if you need one of the functions that is currently not implemented.** |issue4767|_ **is keeping track of these and has notes about implementability.**
-* ``nearbyint`` is not available with the SYCL backend
+* ``nearbyint``, ``lround``, ``llround``, ``lrint`` and ``llrint`` are not available with the SYCL backend
 * ``round``, ``logb``, ``nextafter``, ``copysign``, and ``signbit`` are available since version 3.7
 * three-argument version of ``hypot`` is available since 4.0
 * ``fma`` is available since 4.0
-* ``modf`` is available since 5.1
+* ``remquo``, ``modf``, ``lround``, ``llround``, ``rint``, ``lrint`` and ``llrint`` are available since 5.1
 * Beware the using-directive ``using namespace Kokkos;`` will cause
   compilation errors with unqualified calls to math functions.  Use explicit
   qualification (``Kokkos::sqrt``) or using-declaration (``using
