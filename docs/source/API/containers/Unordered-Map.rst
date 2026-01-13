@@ -9,12 +9,15 @@ Header file: ``<Kokkos_UnorderedMap.hpp>``
 
 Kokkos's unordered map is designed to efficiently handle tens of thousands of concurrent insertions.
 Consequently, the API is significantly different from the standard unordered_map.
-The two key differences are *fixed capacity* and *index based*.
+The three key differences are *fixed capacity*, *maximum number of insert attempts* and *index based*.
 
 - *Fixed capacity*: The capacity of the unordered_map is fixed when inside a parallel algorithm.
-  This means that an insert can fail when the capacity of the map is exceeded, or when all possible
-  buckets that could contain the new key are already occupied.
-  The capacity of the map can be changed (rehash) from the host.
+  This means that an insert can fail when the capacity of the map is exceeded.
+  The capacity of the map can be only changed (rehash) on the host.
+
+- *maximum number of insert attempts*: An insert can fail if no free space is found in less than
+  a certain number of (internal) attempts to insert. This can happen independently of the
+  capacity of the map.
 
 - *Index based*: Instead of returning pointers or iterators (which would not work when moving
   between memory spaces) the map uses integer indexes. This also allows the map to store data
