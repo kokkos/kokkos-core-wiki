@@ -349,6 +349,8 @@ Architectures
 +-----------------------------------+-------------------------------------------------------------------------------------------------+
 | ``KOKKOS_ARCH_BLACKWELL100``      | Optimize for NVIDIA Blackwell generation CC 10.0 (GPU) :sup:`since Kokkos 4.7`                  |
 +-----------------------------------+-------------------------------------------------------------------------------------------------+
+| ``KOKKOS_ARCH_BLACKWELL103``      | Optimize for NVIDIA Blackwell generation CC 10.3 (GPU) :sup:`since Kokkos 5.1`                  |
++-----------------------------------+-------------------------------------------------------------------------------------------------+
 | ``KOKKOS_ARCH_BLACKWELL120``      | Optimize for NVIDIA Blackwell generation CC 12.0 (GPU) :sup:`since Kokkos 4.7`                  |
 +-----------------------------------+-------------------------------------------------------------------------------------------------+
 | ``KOKKOS_ARCH_AMD_ZEN``           | Optimize for AMD Zen architecture (HOST)                                                        |
