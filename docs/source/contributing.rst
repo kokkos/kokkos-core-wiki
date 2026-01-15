@@ -35,5 +35,5 @@ Developers' Corner
 
 * :doc:`Developer Guide  <developer-guides/index>`
 
-* :doc:`Kokkos Panning and Testing <testing-and-issue-tracking>`
+* :doc:`Kokkos Planning and Testing <testing-and-issue-tracking>`
 
