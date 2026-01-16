@@ -138,7 +138,7 @@ Description
 
    .. cpp:type:: host_mirror_space
 
-      Host accessible memory space used in ``HostMirror``.
+      Compatible view type with the same ``DataType`` and ``LayoutType`` stored in host accessible memory space.
 
    .. rubric:: Public View Typedefs
 
@@ -150,9 +150,14 @@ Description
 
       This view type with all template parameters explicitly defined using a ``const`` data type.
 
+   .. deprecated:: 4.7
+      The ``HostMirror`` type has been deprecated in Kokkos 4.7
+
    .. cpp:type:: HostMirror
 
       Compatible view type with the same ``DataType`` and ``LayoutType`` stored in host accessible memory space.
+
+      For Kokkos 5.0+, use :cpp:type:`host_mirror_type`
 
    .. rubric:: Public Data Handles Typedefs
 
@@ -304,37 +309,56 @@ Description
 
        Returns the stride of the specified dimension. ``iType`` must be an integral type, and ``dim`` must be smaller than ``rank``. Example: ``a.stride(3) == (&a(i0,i1,i2,i3+1,i4)-&a(i0,i1,i2,i3,i4))``
 
+   .. deprecated:: 4.7
+      The ``stride_0()``, ``stride_1()``, ``stride_2()``, ``stride_3()``, ``stride_4()``, ``stride_5()``, ``stride_6()``, ``stride_7()``, routines are deprecated since Kokkos 4.7. Use instead ``stride(N)`` where ``N`` matches to ``0, 1, 2, 3, 4, 5, 6, 7`` in the corresponding ``stride_N()`` routine.
+
    .. cpp:function:: constexpr size_t stride_0() const
 
-       Return the stride of dimension 0.
+       :return: the stride of dimension 0.
+
+       For Kokkos 5.0+, use :cpp:type:`stride(0)`
 
    .. cpp:function:: constexpr size_t stride_1() const
 
-       Return the stride of dimension 1.
+       :return: the stride of dimension 1.
+
+       For Kokkos 5.0+, use :cpp:type:`stride(1)`
 
    .. cpp:function:: constexpr size_t stride_2() const
 
-       Return the stride of dimension 2.
+       :return: the stride of dimension 2.
+
+       For Kokkos 5.0+, use :cpp:type:`stride(2)`
 
    .. cpp:function:: constexpr size_t stride_3() const
 
-       Return the stride of dimension 3.
+       :return: the stride of dimension 3.
+
+       For Kokkos 5.0+, use :cpp:type:`stride(3)`
 
    .. cpp:function:: constexpr size_t stride_4() const
 
-       Return the stride of dimension 4.
+       :return: the stride of dimension 4.
+
+       For Kokkos 5.0+, use :cpp:type:`stride(4)`
 
    .. cpp:function:: constexpr size_t stride_5() const
 
-       Return the stride of dimension 5.
+       :return: the stride of dimension 5.
+
+       For Kokkos 5.0+, use :cpp:type:`stride(5)`
 
    .. cpp:function:: constexpr size_t stride_6() const
 
-       Return the stride of dimension 6.
+       :return: the stride of dimension 6.
+
+       For Kokkos 5.0+, use :cpp:type:`stride(6)`
 
    .. cpp:function:: constexpr size_t stride_7() const
 
-       Return the stride of dimension 7.
+       :return: the stride of dimension 7.
+
+       For Kokkos 5.0+, use :cpp:type:`stride(7)`
 
    .. cpp:function:: constexpr size_t span() const
 
