@@ -77,10 +77,8 @@ Description
 
        The type of a ``Kokkos::View`` host mirror of ``t_dev``.
 
-    .. cpp:type:: typename t_dev::HostMirror t_host
-
-       Deprecated alias for ``t_dev::host_mirror_type``
-
+    .. deprecated:: 4.7
+       ``typename t_dev::HostMirror t_host`` is a deprecated alias for ``t_dev::host_mirror_type``
        For Kokkos 5.0+, use ``t_dev::host_mirror_type``.
 
     .. cpp:type:: View<typename traits::const_data_type, Arg1Type, Arg2Type, Arg3Type> t_dev_const
@@ -91,10 +89,8 @@ Description
 
        The type of a const View host mirror of ``t_dev_const``.
 
-    .. cpp:type:: typename t_dev_const::HostMirror t_host_const
-
-       Deprecated alias for ``t_dev_const::host_mirror_type``
-
+    .. deprecated::4.7
+       ``typename t_dev_const::HostMirror t_host_const`` is a deprecated alias for ``t_dev_const::host_mirror_type``
        For Kokkos 5.0+, use ``t_dev_const::host_mirror_type``.
 
     .. cpp:type:: View<typename traits::const_data_type, typename traits::array_layout, typename traits::device_type, Kokkos::MemoryTraits<Kokkos::RandomAccess> > t_dev_const_randomread
@@ -105,10 +101,8 @@ Description
 
        The type of a const, random-access View host mirror of ``t_dev_const_randomread``.
 
-    .. cpp:type:: typename t_dev_const_randomread::HostMirror t_host_const_randomread
-
-       Deprecated alias for ``t_dev_const_randomread::host_mirror_type``
-
+    .. deprecated::4.7
+       ``typename t_dev_const_randomread::HostMirror t_host_const_randomread`` is a deprecated alias for ``t_dev_const_randomread::host_mirror_type``
        For Kokkos 5.0+, use ``t_dev_const_randomread::host_mirror_type``.
 
     .. cpp:type:: View<typename traits::data_type, typename traits::array_layout, typename traits::device_type, MemoryUnmanaged> t_dev_um
@@ -135,10 +129,8 @@ Description
 
        The type of a const, random-access View host mirror of ``t_dev_const_randomread_um``.
 
-    .. cpp:type:: typename t_dev_const_randomread_um::HostMirror t_host_const_randomread_um
-
-       Deprecated alias for ``t_dev_const_randomread_um::host_mirror_type``
-
+    .. deprecated::4.7
+       ``typename t_dev_const_randomread_um::HostMirror t_host_const_randomread_um`` is a deprecated alias for ``t_dev_const_randomread_um::host_mirror_type``
        For Kokkos 5.0+, use ``t_dev_const_randomread_um::host_mirror_type``.
 
     .. cpp:type:: View<unsigned int[2], LayoutLeft, typename t_host::execution_space> t_modified_flags;
