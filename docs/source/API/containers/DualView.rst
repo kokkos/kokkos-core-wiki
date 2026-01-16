@@ -79,7 +79,7 @@ Description
 
     .. cpp:type:: typename t_dev::HostMirror t_host
 
-       The type of a ``Kokkos::View`` host mirror of ``t_dev``.
+       Deprecated alias for ``t_dev::host_mirror_type``
 
        For Kokkos 5.0+, use ``t_dev::host_mirror_type``.
 
@@ -93,7 +93,7 @@ Description
 
     .. cpp:type:: typename t_dev_const::HostMirror t_host_const
 
-       The type of a const View host mirror of ``t_dev_const``.
+       Deprecated alias for ``t_dev_const::host_mirror_type``
 
        For Kokkos 5.0+, use ``t_dev_const::host_mirror_type``.
 
@@ -107,7 +107,7 @@ Description
 
     .. cpp:type:: typename t_dev_const_randomread::HostMirror t_host_const_randomread
 
-       The type of a const, random-access View host mirror of ``t_dev_const_randomread``.
+       Deprecated alias for ``t_dev_const_randomread::host_mirror_type``
 
        For Kokkos 5.0+, use ``t_dev_const_randomread::host_mirror_type``.
 
@@ -131,15 +131,15 @@ Description
 
        The type of a const, random-access View on the device.
 
-    .. cpp:type:: typename t_dev_const_randomread::host_mirror_type t_host_const_randomread_um
+    .. cpp:type:: typename t_dev_const_randomread_um::host_mirror_type t_host_const_randomread_um
 
-       The type of a const, random-access View host mirror of ``t_dev_const_randomread``.
+       The type of a const, random-access View host mirror of ``t_dev_const_randomread_um``.
 
-    .. cpp:type:: typename t_dev_const_randomread::HostMirror t_host_const_randomread_um
+    .. cpp:type:: typename t_dev_const_randomread_um::HostMirror t_host_const_randomread_um
 
-       The type of a const, random-access View host mirror of ``t_dev_const_randomread``.
+       Deprecated alias for ``t_dev_const_randomread_um::host_mirror_type``
 
-       For Kokkos 5.0+, use ``t_dev_const_randomread::host_mirror_type``.
+       For Kokkos 5.0+, use ``t_dev_const_randomread_um::host_mirror_type``.
 
     .. cpp:type:: View<unsigned int[2], LayoutLeft, typename t_host::execution_space> t_modified_flags;
 

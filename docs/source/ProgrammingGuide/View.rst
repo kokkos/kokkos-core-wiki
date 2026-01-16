@@ -510,8 +510,8 @@ view to write to.
 
   The mental model is that whenever placement new is used to call the constructor, the destructor also isn't called before the memory is deallocated but it needs to be called manually.
 
-Deep copy and Host Mirror
-~~~~~~~~~~~~~~~~~~~~~~~~
+Deep copy and host mirror
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Copying data from one view to another, in particular between views in different memory spaces, is called deep copy.
 Kokkos never performs a hidden deep copy. To do so a user has to call the `deep_copy` function. For example:
