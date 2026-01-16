@@ -494,49 +494,49 @@ Data Layout, Dimensions, Strides
 
    :return: the stride of dimension 0.
 
-   For Kokkos 5.0+, use :cpp:type:`stride(0)`
+   For Kokkos 5.0+, use ``stride(0)``
 
 .. cpp:function:: constexpr size_t stride_1() const
 
    :return: the stride of dimension 1.
 
-   For Kokkos 5.0+, use :cpp:type:`stride(1)`
+   For Kokkos 5.0+, use ``stride(1)``
 
 .. cpp:function:: constexpr size_t stride_2() const
 
    :return: the stride of dimension 2.
 
-   For Kokkos 5.0+, use :cpp:type:`stride(2)`
+   For Kokkos 5.0+, use ``stride(2)``
 
 .. cpp:function:: constexpr size_t stride_3() const
 
    :return: the stride of dimension 3.
 
-   For Kokkos 5.0+, use :cpp:type:`stride(3)`
+   For Kokkos 5.0+, use ``stride(3)``
 
 .. cpp:function:: constexpr size_t stride_4() const
 
    :return: the stride of dimension 4.
 
-   For Kokkos 5.0+, use :cpp:type:`stride(4)`
+   For Kokkos 5.0+, use ``stride(4)``
 
 .. cpp:function:: constexpr size_t stride_5() const
 
    :return: the stride of dimension 5.
 
-   For Kokkos 5.0+, use :cpp:type:`stride(5)`
+   For Kokkos 5.0+, use ``stride(5)``
 
 .. cpp:function:: constexpr size_t stride_6() const
 
    :return: the stride of dimension 6.
 
-   For Kokkos 5.0+, use :cpp:type:`stride(6)`
+   For Kokkos 5.0+, use ``stride(6)``
 
 .. cpp:function:: constexpr size_t stride_7() const
 
    :return: the stride of dimension 7.
 
-   For Kokkos 5.0+, use :cpp:type:`stride(7)`
+   For Kokkos 5.0+, use ``stride(7)``
 
 .. cpp:function:: template<class iType> void stride(iType* strides) const
 
