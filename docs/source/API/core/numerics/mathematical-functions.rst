@@ -110,8 +110,8 @@ Basic operations
 .. list-table::
    :align: left
 
-   * - | |abs|_
-       | |fabs|_
+   * - |abs|_
+       |fabs|_
      - absolute value of a floating point value (:math:`|x|`)
    * - |fmod|_
      - remainder of the floating point division operation
@@ -387,15 +387,15 @@ Nearest integer floating point operations
      - nearest integer not greater than the given value
    * - |trunc|_
      - nearest integer not greater in magnitude than the given value
-   * - | |round|_
-       | |lround|_ [#since_kokkos_5_1]_ [#not_available_with_sycl]_
-       | |llround|_ [#since_kokkos_5_1]_ [#not_available_with_sycl]_
+   * - |round|_
+       |lround|_ [#since_kokkos_5_1]_ [#not_available_with_sycl]_
+       |llround|_ [#since_kokkos_5_1]_ [#not_available_with_sycl]_
      - nearest integer, rounding away from zero in halfway cases
    * - |nearbyint|_ [#not_available_with_sycl]_
      - nearest integer using current rounding mode
-   * - | |rint|_ [#since_kokkos_5_1]_
-       | |lrint|_ [#since_kokkos_5_1]_ [#not_available_with_sycl]_
-       | |llrint|_ [#since_kokkos_5_1]_ [#not_available_with_sycl]_
+   * - |rint|_ [#since_kokkos_5_1]_
+       |lrint|_ [#since_kokkos_5_1]_ [#not_available_with_sycl]_
+       |llrint|_ [#since_kokkos_5_1]_ [#not_available_with_sycl]_
      - nearest integer using current rounding mode with exception if the result differs
 
 Floating point manipulation functions
@@ -450,15 +450,15 @@ Floating point manipulation functions
      - multiplies a number by :math:`2` raised to an integral power
    * - |modf|_ [#since_kokkos_5_1]_
      - decomposes a number into integer and fractional parts
-   * - | |scalbn|_ [#not_implemented]_
-       | |scalbln|_ [#not_implemented]_
+   * - |scalbn|_ [#not_implemented]_
+       |scalbln|_ [#not_implemented]_
      - multiplies a number by ``FLT_RADIX`` raised to a power
    * - |ilogb|_ [#since_kokkos_5_1]_
      - extracts exponent of the number
    * - |logb|_
      - extracts exponent of the number
-   * - | |nextafter|_
-       | |nexttoward|_ [#not_implemented]_
+   * - |nextafter|_
+       |nexttoward|_ [#not_implemented]_
      - next representable floating-point value towards the given value
    * - |copysign|_
      - copies the sign of a floating point value
