@@ -13,6 +13,9 @@ Description
 
 * This is intended as a replacement for ``std::complex<T>``.
 * Note: If ``z`` has type ``Kokkos::complex<T>``, casting such as ``reinterpret_cast<T(&)[2]>(z)`` leads to undefined behavior (this differs from ``std::complex``).
+* Note: operations involving ``std::complex`` are not available on the device.
+* Note: while operators may be listed as public member functions or non-member functions, they may be implemented as member functions, free functions or hidden friends.
+
 
 Interface
 ---------
@@ -111,24 +114,32 @@ Interface
     Assigns ``i`` to the imaginary component.
 
   .. cpp:function:: constexpr complex& operator+=(complex v) noexcept
+  .. cpp:function:: constexpr complex& operator+=(std::complex<T> v)
   .. cpp:function:: constexpr complex& operator+=(T v) noexcept
 
     Adds the complex value ``complex(v)`` to the complex value ``*this`` and stores the sum in ``*this``.
 
   .. cpp:function:: constexpr complex& operator-=(complex v) noexcept
+  .. cpp:function:: constexpr complex& operator-=(std::complex<T> v)
   .. cpp:function:: constexpr complex& operator-=(T v) noexcept
 
     Subtracts the complex value ``complex(v)`` from the complex value ``*this`` and stores the difference in ``*this``.
 
   .. cpp:function:: constexpr complex& operator*=(complex v) noexcept
+  .. cpp:function:: constexpr complex& operator*=(std::complex<T> v)
   .. cpp:function:: constexpr complex& operator*=(T v) noexcept
 
     Multiplies the complex value ``complex(v)`` by the complex value ``*this`` and stores the product in ``*this``.
 
   .. cpp:function:: constexpr complex& operator/=(complex v) noexcept
+  .. cpp:function:: constexpr complex& operator/=(std::complex<T> v) noexcept
   .. cpp:function:: constexpr complex& operator/=(T v) noexcept
 
     Divides the complex value ``complex(v)`` into the complex value ``*this`` and stores the quotient in ``*this``.
+
+    .. note::
+
+     The Kokkos implementation of division uses a scaled method, and the result does not necessarily match a similar operation using ``std::complex``.
 
   .. cpp:function:: volatile T& real() volatile noexcept
   
@@ -181,21 +192,61 @@ Interface
 
   .. rubric:: Non-Member Functions:
 
-  .. cpp:function:: template<typename T1, typename T2> bool operator==(complex<T1> x, complex<T2> y) noexcept
-  .. cpp:function:: template<typename T1, typename T2> bool operator==(complex<T1> x, T2 y) noexcept
-  .. cpp:function:: template<typename T1, typename T2> bool operator==(T1 x, complex<T2> y) noexcept
-  .. cpp:function:: template<typename T1, typename T2> bool operator==(complex<T1> x, std::complex<T2> y) noexcept
-  .. cpp:function:: template<typename T1, typename T2> bool operator==(std::complex<T1> x, complex<T2> y) noexcept
+  .. cpp:function:: template<typename T> bool operator==(complex<T> x, complex<T> y)
+  .. cpp:function:: template<typename T> bool operator==(complex<T> x, T y)
+  .. cpp:function:: template<typename T> bool operator==(T x, complex<T> y)
+  .. cpp:function:: template<typename T> bool operator==(complex<T> x, std::complex<T> y)
+  .. cpp:function:: template<typename T> bool operator==(std::complex<T> x, complex<T> y)
 
     :return: ``true`` if and only if the real component of ``complex(x)`` equals the real component of ``complex(y)`` and the imaginary component of ``complex(x)`` equals the imaginary component of ``complex(y)``.
 
-  .. cpp:function:: template<typename T1, typename T2> bool operator!=(complex<T1> x, complex<T2> y) noexcept
-  .. cpp:function:: template<typename T1, typename T2> bool operator!=(complex<T1> x, T2 y) noexcept
-  .. cpp:function:: template<typename T1, typename T2> bool operator!=(T1 x, complex<T2> y) noexcept
-  .. cpp:function:: template<typename T1, typename T2> bool operator!=(complex<T1> x, std::complex<T2> y) noexcept
-  .. cpp:function:: template<typename T1, typename T2> bool operator!=(std::complex<T1> x, complex<T2> y) noexcept
+  .. cpp:function:: template<typename T1, typename T2> bool operator==(complex<T1> x, complex<T2> y) noexcept
+
+    .. deprecated:: 5.0.0
+
+  .. cpp:function:: template<typename T1, typename T2> bool operator==(complex<T1> x, T2 y) noexcept
+
+    .. deprecated:: 5.0.0
+
+  .. cpp:function:: template<typename T1, typename T2> bool operator==(T1 x, complex<T2> y) noexcept
+
+    .. deprecated:: 5.0.0
+
+  .. cpp:function:: template<typename T1, typename T2> bool operator==(complex<T1> x, std::complex<T2> y) noexcept
+
+    .. deprecated:: 5.0.0
+
+  .. cpp:function:: template<typename T1, typename T2> bool operator==(std::complex<T1> x, complex<T2> y) noexcept
+
+    .. deprecated:: 5.0.0
+
+  .. cpp:function:: template<typename T> bool operator!=(complex<T> x, complex<T> y)
+  .. cpp:function:: template<typename T> bool operator!=(complex<T> x, T y)
+  .. cpp:function:: template<typename T> bool operator!=(T x, complex<T> y)
+  .. cpp:function:: template<typename T> bool operator!=(complex<T> x, std::complex<T> y)
+  .. cpp:function:: template<typename T> bool operator!=(std::complex<T> x, complex<T> y)
 
     :return: ``!(x == y)``
+
+  .. cpp:function:: template<typename T1, typename T2> bool operator!=(complex<T1> x, complex<T2> y) noexcept
+
+    .. deprecated:: 5.0.0
+
+  .. cpp:function:: template<typename T1, typename T2> bool operator!=(complex<T1> x, T2 y) noexcept
+
+    .. deprecated:: 5.0.0
+
+  .. cpp:function:: template<typename T1, typename T2> bool operator!=(T1 x, complex<T2> y) noexcept
+
+    .. deprecated:: 5.0.0
+
+  .. cpp:function:: template<typename T1, typename T2> bool operator!=(complex<T1> x, std::complex<T2> y) noexcept
+
+    .. deprecated:: 5.0.0
+
+  .. cpp:function:: template<typename T1, typename T2> bool operator!=(std::complex<T1> x, complex<T2> y) noexcept
+
+    .. deprecated:: 5.0.0
 
   .. cpp:function:: template<typename T> complex<T> operator+(complex<T> x) noexcept
 
@@ -204,6 +255,8 @@ Interface
   .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator+(complex<T1> x, complex<T2> y) noexcept
   .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator+(complex<T1> x, T2 y) noexcept
   .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator+(T1 x, complex<T2> y) noexcept
+  .. cpp:function:: complex operator+(complex x, std::complex<T> y)
+  .. cpp:function:: complex operator+(std::complex<T> x, complex y)
 
     :return: The complex value ``complex(x)`` added to the complex value ``complex(y)``.
 
@@ -214,6 +267,8 @@ Interface
   .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator-(complex<T1> x, complex<T2> y) noexcept
   .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator-(complex<T1> x, T2 y) noexcept
   .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator-(T1 x, complex<T2> y) noexcept
+  .. cpp:function:: complex operator-(complex x, std::complex<T> y)
+  .. cpp:function:: complex operator-(std::complex<T> x, complex y)
 
     :return: The complex value ``complex(y)`` subtracted from the complex value ``complex(x)``.
 
@@ -221,12 +276,16 @@ Interface
   .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator*(complex<T1> x, T2 y) noexcept
   .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator*(T1 x, complex<T2> y) noexcept
   .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator*(std::complex<T1> x, complex<T2> y) noexcept
+  .. cpp:function:: complex operator*(complex x, std::complex<T> y)
+  .. cpp:function:: complex operator*(std::complex<T> x, complex y)
 
     :return: The complex value ``complex(x)`` multiplied by the complex value ``complex(y)``.
 
   .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator/(complex<T1> x, complex<T2> y) noexcept
   .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator/(complex<T1> x, T2 y) noexcept
   .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator/(T1 x, complex<T2> y) noexcept
+  .. cpp:function:: complex operator/(complex x, std::complex<T> y)
+  .. cpp:function:: complex operator/(std::complex<T> x, complex y)
 
     :return: The complex value ``complex(y)`` divided into the complex value ``complex(x)``.
 
