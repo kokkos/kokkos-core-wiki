@@ -13,7 +13,7 @@ Description
 
 * This is intended as a replacement for ``std::complex<T>``.
 * Note: If ``z`` has type ``Kokkos::complex<T>``, casting such as ``reinterpret_cast<T(&)[2]>(z)`` leads to undefined behavior (this differs from ``std::complex``).
-* Note: operations involving ``std::complex`` are not available on the device.
+* Note: operations involving ``std::complex``, ``std::istream`` or ``std::ostream`` are not available on the device.
 * Note: while operators may be listed as public member functions or non-member functions, they may be implemented as member functions, free functions or hidden friends.
 
 
@@ -192,11 +192,11 @@ Interface
 
   .. rubric:: Non-Member Functions:
 
-  .. cpp:function:: template<typename T> bool operator==(complex<T> x, complex<T> y)
-  .. cpp:function:: template<typename T> bool operator==(complex<T> x, T y)
-  .. cpp:function:: template<typename T> bool operator==(T x, complex<T> y)
-  .. cpp:function:: template<typename T> bool operator==(complex<T> x, std::complex<T> y)
-  .. cpp:function:: template<typename T> bool operator==(std::complex<T> x, complex<T> y)
+  .. cpp:function:: bool operator==(complex x, complex y)
+  .. cpp:function:: bool operator==(complex x, T y)
+  .. cpp:function:: bool operator==(T x, complex y)
+  .. cpp:function:: bool operator==(complex x, std::complex<T> y)
+  .. cpp:function:: bool operator==(std::complex<T> x, complex y)
 
     :return: ``true`` if and only if the real component of ``complex(x)`` equals the real component of ``complex(y)`` and the imaginary component of ``complex(x)`` equals the imaginary component of ``complex(y)``.
 
@@ -220,11 +220,11 @@ Interface
 
     .. deprecated:: 5.0.0
 
-  .. cpp:function:: template<typename T> bool operator!=(complex<T> x, complex<T> y)
-  .. cpp:function:: template<typename T> bool operator!=(complex<T> x, T y)
-  .. cpp:function:: template<typename T> bool operator!=(T x, complex<T> y)
-  .. cpp:function:: template<typename T> bool operator!=(complex<T> x, std::complex<T> y)
-  .. cpp:function:: template<typename T> bool operator!=(std::complex<T> x, complex<T> y)
+  .. cpp:function:: bool operator!=(complex x, complex y)
+  .. cpp:function:: bool operator!=(complex x, T y)
+  .. cpp:function:: bool operator!=(T x, complex y)
+  .. cpp:function:: bool operator!=(complex x, std::complex<T> y)
+  .. cpp:function:: bool operator!=(std::complex<T> x, complex y)
 
     :return: ``!(x == y)``
 
@@ -248,46 +248,101 @@ Interface
 
     .. deprecated:: 5.0.0
 
-  .. cpp:function:: template<typename T> complex<T> operator+(complex<T> x) noexcept
+  .. cpp:function:: complex operator+(complex x) noexcept
 
     :return: ``x``
 
-  .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator+(complex<T1> x, complex<T2> y) noexcept
-  .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator+(complex<T1> x, T2 y) noexcept
-  .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator+(T1 x, complex<T2> y) noexcept
+  .. cpp:function:: complex operator+(complex x, complex y)
+  .. cpp:function:: complex operator+(complex x, T y)
+  .. cpp:function:: complex operator+(T x, complex y)
   .. cpp:function:: complex operator+(complex x, std::complex<T> y)
   .. cpp:function:: complex operator+(std::complex<T> x, complex y)
 
     :return: The complex value ``complex(x)`` added to the complex value ``complex(y)``.
 
-  .. cpp:function:: template<typename T> complex<T> operator-(complex<T> x) noexcept
+  .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator+(complex<T1> x, complex<T2> y) noexcept
+
+    .. deprecated:: 5.0.0
+
+  .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator+(complex<T1> x, T2 y) noexcept
+
+    .. deprecated:: 5.0.0
+
+  .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator+(T1 x, complex<T2> y) noexcept
+
+    .. deprecated:: 5.0.0
+
+  .. cpp:function:: complex operator-(complex x) noexcept
 
     :return: ``complex(-x.real(), -x.imag())``
 
-  .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator-(complex<T1> x, complex<T2> y) noexcept
-  .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator-(complex<T1> x, T2 y) noexcept
-  .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator-(T1 x, complex<T2> y) noexcept
+  .. cpp:function:: complex operator-(complex x, complex y)
+  .. cpp:function:: complex operator-(complex x, T y)
+  .. cpp:function:: complex operator-(T x, complex y)
   .. cpp:function:: complex operator-(complex x, std::complex<T> y)
   .. cpp:function:: complex operator-(std::complex<T> x, complex y)
 
     :return: The complex value ``complex(y)`` subtracted from the complex value ``complex(x)``.
 
-  .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator*(complex<T1> x, complex<T2> y) noexcept
-  .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator*(complex<T1> x, T2 y) noexcept
-  .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator*(T1 x, complex<T2> y) noexcept
-  .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator*(std::complex<T1> x, complex<T2> y) noexcept
+  .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator-(complex<T1> x, complex<T2> y) noexcept
+
+    .. deprecated:: 5.0.0
+
+  .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator-(complex<T1> x, T2 y) noexcept
+
+    .. deprecated:: 5.0.0
+
+  .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator-(T1 x, complex<T2> y) noexcept
+
+    .. deprecated:: 5.0.0
+
+  .. cpp:function:: complex operator*(complex x, complex y)
+  .. cpp:function:: complex operator*(complex x, T y)
+  .. cpp:function:: complex operator*(T x, complex y)
   .. cpp:function:: complex operator*(complex x, std::complex<T> y)
   .. cpp:function:: complex operator*(std::complex<T> x, complex y)
 
     :return: The complex value ``complex(x)`` multiplied by the complex value ``complex(y)``.
 
-  .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator/(complex<T1> x, complex<T2> y) noexcept
-  .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator/(complex<T1> x, T2 y) noexcept
-  .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator/(T1 x, complex<T2> y) noexcept
+  .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator*(complex<T1> x, complex<T2> y) noexcept
+
+    .. deprecated:: 5.0.0
+
+  .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator*(complex<T1> x, T2 y) noexcept
+
+    .. deprecated:: 5.0.0
+
+  .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator*(T1 x, complex<T2> y) noexcept
+
+    .. deprecated:: 5.0.0
+
+  .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator*(std::complex<T1> x, complex<T2> y) noexcept
+
+    .. deprecated:: 5.0.0
+
+  .. cpp:function:: complex operator/(complex x, complex y)
+  .. cpp:function:: complex operator/(complex x, T y)
+  .. cpp:function:: complex operator/(T x, complex y)
   .. cpp:function:: complex operator/(complex x, std::complex<T> y)
   .. cpp:function:: complex operator/(std::complex<T> x, complex y)
 
     :return: The complex value ``complex(y)`` divided into the complex value ``complex(x)``.
+
+    .. note::
+
+     The Kokkos implementation of division uses a scaled method, and the result does not necessarily match a similar operation using ``std::complex``.
+
+  .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator/(complex<T1> x, complex<T2> y) noexcept
+
+    .. deprecated:: 5.0.0
+
+  .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator/(complex<T1> x, T2 y) noexcept
+
+    .. deprecated:: 5.0.0
+
+  .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator/(T1 x, complex<T2> y) noexcept
+
+    .. deprecated:: 5.0.0
 
   .. cpp:function:: template<typename T> std::istream& operator>>(std::ostream& i, complex<T>& x)
 
