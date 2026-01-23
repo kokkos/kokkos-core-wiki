@@ -202,23 +202,23 @@ Interface
 
   .. cpp:function:: template<typename T1, typename T2> bool operator==(complex<T1> x, complex<T2> y) noexcept
 
-    .. deprecated:: 5.0.0
+    .. deprecated:: 5.0.2
 
   .. cpp:function:: template<typename T1, typename T2> bool operator==(complex<T1> x, T2 y) noexcept
 
-    .. deprecated:: 5.0.0
+    .. deprecated:: 5.0.2
 
   .. cpp:function:: template<typename T1, typename T2> bool operator==(T1 x, complex<T2> y) noexcept
 
-    .. deprecated:: 5.0.0
+    .. deprecated:: 5.0.2
 
   .. cpp:function:: template<typename T1, typename T2> bool operator==(complex<T1> x, std::complex<T2> y) noexcept
 
-    .. deprecated:: 5.0.0
+    .. deprecated:: 5.0.2
 
   .. cpp:function:: template<typename T1, typename T2> bool operator==(std::complex<T1> x, complex<T2> y) noexcept
 
-    .. deprecated:: 5.0.0
+    .. deprecated:: 5.0.2
 
   .. cpp:function:: constexpr bool operator!=(complex x, complex y)
   .. cpp:function:: constexpr bool operator!=(complex x, T y)
@@ -230,23 +230,23 @@ Interface
 
   .. cpp:function:: template<typename T1, typename T2> bool operator!=(complex<T1> x, complex<T2> y) noexcept
 
-    .. deprecated:: 5.0.0
+    .. deprecated:: 5.0.2
 
   .. cpp:function:: template<typename T1, typename T2> bool operator!=(complex<T1> x, T2 y) noexcept
 
-    .. deprecated:: 5.0.0
+    .. deprecated:: 5.0.2
 
   .. cpp:function:: template<typename T1, typename T2> bool operator!=(T1 x, complex<T2> y) noexcept
 
-    .. deprecated:: 5.0.0
+    .. deprecated:: 5.0.2
 
   .. cpp:function:: template<typename T1, typename T2> bool operator!=(complex<T1> x, std::complex<T2> y) noexcept
 
-    .. deprecated:: 5.0.0
+    .. deprecated:: 5.0.2
 
   .. cpp:function:: template<typename T1, typename T2> bool operator!=(std::complex<T1> x, complex<T2> y) noexcept
 
-    .. deprecated:: 5.0.0
+    .. deprecated:: 5.0.2
 
   .. cpp:function:: constexpr complex operator+(complex x) noexcept
 
@@ -262,15 +262,15 @@ Interface
 
   .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator+(complex<T1> x, complex<T2> y) noexcept
 
-    .. deprecated:: 5.0.0
+    .. deprecated:: 5.0.2
 
   .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator+(complex<T1> x, T2 y) noexcept
 
-    .. deprecated:: 5.0.0
+    .. deprecated:: 5.0.2
 
   .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator+(T1 x, complex<T2> y) noexcept
 
-    .. deprecated:: 5.0.0
+    .. deprecated:: 5.0.2
 
   .. cpp:function:: constexpr complex operator-(complex x) noexcept
 
@@ -286,15 +286,15 @@ Interface
 
   .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator-(complex<T1> x, complex<T2> y) noexcept
 
-    .. deprecated:: 5.0.0
+    .. deprecated:: 5.0.2
 
   .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator-(complex<T1> x, T2 y) noexcept
 
-    .. deprecated:: 5.0.0
+    .. deprecated:: 5.0.2
 
   .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator-(T1 x, complex<T2> y) noexcept
 
-    .. deprecated:: 5.0.0
+    .. deprecated:: 5.0.2
 
   .. cpp:function:: constexpr complex operator*(complex x, complex y)
   .. cpp:function:: constexpr complex operator*(complex x, T y)
@@ -306,19 +306,19 @@ Interface
 
   .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator*(complex<T1> x, complex<T2> y) noexcept
 
-    .. deprecated:: 5.0.0
+    .. deprecated:: 5.0.2
 
   .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator*(complex<T1> x, T2 y) noexcept
 
-    .. deprecated:: 5.0.0
+    .. deprecated:: 5.0.2
 
   .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator*(T1 x, complex<T2> y) noexcept
 
-    .. deprecated:: 5.0.0
+    .. deprecated:: 5.0.2
 
   .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator*(std::complex<T1> x, complex<T2> y) noexcept
 
-    .. deprecated:: 5.0.0
+    .. deprecated:: 5.0.2
 
   .. cpp:function:: constexpr complex operator/(complex x, complex y)
   .. cpp:function:: constexpr complex operator/(complex x, T y)
@@ -334,15 +334,15 @@ Interface
 
   .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator/(complex<T1> x, complex<T2> y) noexcept
 
-    .. deprecated:: 5.0.0
+    .. deprecated:: 5.0.2
 
   .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator/(complex<T1> x, T2 y) noexcept
 
-    .. deprecated:: 5.0.0
+    .. deprecated:: 5.0.2
 
   .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator/(T1 x, complex<T2> y) noexcept
 
-    .. deprecated:: 5.0.0
+    .. deprecated:: 5.0.2
 
   .. cpp:function:: template<typename T> std::istream& operator>>(std::ostream& i, complex<T>& x)
 
