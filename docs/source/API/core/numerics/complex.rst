@@ -139,7 +139,7 @@ Interface
 
     .. note::
 
-     The Kokkos implementation of division uses a scaled method, and the result does not necessarily match a similar operation using ``std::complex``.
+     The Kokkos implementation of division uses a scaled method, and the result does not necessarily match a similar operation using ``std::complex``, nor are they ``constexpr`` until C++23.
 
   .. cpp:function:: volatile T& real() volatile noexcept
   
@@ -192,11 +192,11 @@ Interface
 
   .. rubric:: Non-Member Functions:
 
-  .. cpp:function:: bool operator==(complex x, complex y)
-  .. cpp:function:: bool operator==(complex x, T y)
-  .. cpp:function:: bool operator==(T x, complex y)
-  .. cpp:function:: bool operator==(complex x, std::complex<T> y)
-  .. cpp:function:: bool operator==(std::complex<T> x, complex y)
+  .. cpp:function:: constexpr bool operator==(complex x, complex y)
+  .. cpp:function:: constexpr bool operator==(complex x, T y)
+  .. cpp:function:: constexpr bool operator==(T x, complex y)
+  .. cpp:function:: constexpr bool operator==(complex x, std::complex<T> y)
+  .. cpp:function:: constexpr bool operator==(std::complex<T> x, complex y)
 
     :return: ``true`` if and only if the real component of ``complex(x)`` equals the real component of ``complex(y)`` and the imaginary component of ``complex(x)`` equals the imaginary component of ``complex(y)``.
 
@@ -220,11 +220,11 @@ Interface
 
     .. deprecated:: 5.0.0
 
-  .. cpp:function:: bool operator!=(complex x, complex y)
-  .. cpp:function:: bool operator!=(complex x, T y)
-  .. cpp:function:: bool operator!=(T x, complex y)
-  .. cpp:function:: bool operator!=(complex x, std::complex<T> y)
-  .. cpp:function:: bool operator!=(std::complex<T> x, complex y)
+  .. cpp:function:: constexpr bool operator!=(complex x, complex y)
+  .. cpp:function:: constexpr bool operator!=(complex x, T y)
+  .. cpp:function:: constexpr bool operator!=(T x, complex y)
+  .. cpp:function:: constexpr bool operator!=(complex x, std::complex<T> y)
+  .. cpp:function:: constexpr bool operator!=(std::complex<T> x, complex y)
 
     :return: ``!(x == y)``
 
@@ -252,11 +252,11 @@ Interface
 
     :return: ``x``
 
-  .. cpp:function:: complex operator+(complex x, complex y)
-  .. cpp:function:: complex operator+(complex x, T y)
-  .. cpp:function:: complex operator+(T x, complex y)
-  .. cpp:function:: complex operator+(complex x, std::complex<T> y)
-  .. cpp:function:: complex operator+(std::complex<T> x, complex y)
+  .. cpp:function:: constexpr complex operator+(complex x, complex y)
+  .. cpp:function:: constexpr complex operator+(complex x, T y)
+  .. cpp:function:: constexpr complex operator+(T x, complex y)
+  .. cpp:function:: constexpr complex operator+(complex x, std::complex<T> y)
+  .. cpp:function:: constexpr complex operator+(std::complex<T> x, complex y)
 
     :return: The complex value ``complex(x)`` added to the complex value ``complex(y)``.
 
@@ -276,11 +276,11 @@ Interface
 
     :return: ``complex(-x.real(), -x.imag())``
 
-  .. cpp:function:: complex operator-(complex x, complex y)
-  .. cpp:function:: complex operator-(complex x, T y)
-  .. cpp:function:: complex operator-(T x, complex y)
-  .. cpp:function:: complex operator-(complex x, std::complex<T> y)
-  .. cpp:function:: complex operator-(std::complex<T> x, complex y)
+  .. cpp:function:: constexpr complex operator-(complex x, complex y)
+  .. cpp:function:: constexpr complex operator-(complex x, T y)
+  .. cpp:function:: constexpr complex operator-(T x, complex y)
+  .. cpp:function:: constexpr complex operator-(complex x, std::complex<T> y)
+  .. cpp:function:: constexpr complex operator-(std::complex<T> x, complex y)
 
     :return: The complex value ``complex(y)`` subtracted from the complex value ``complex(x)``.
 
@@ -296,11 +296,11 @@ Interface
 
     .. deprecated:: 5.0.0
 
-  .. cpp:function:: complex operator*(complex x, complex y)
-  .. cpp:function:: complex operator*(complex x, T y)
-  .. cpp:function:: complex operator*(T x, complex y)
-  .. cpp:function:: complex operator*(complex x, std::complex<T> y)
-  .. cpp:function:: complex operator*(std::complex<T> x, complex y)
+  .. cpp:function:: constexpr complex operator*(complex x, complex y)
+  .. cpp:function:: constexpr complex operator*(complex x, T y)
+  .. cpp:function:: constexpr complex operator*(T x, complex y)
+  .. cpp:function:: constexpr complex operator*(complex x, std::complex<T> y)
+  .. cpp:function:: constexpr complex operator*(std::complex<T> x, complex y)
 
     :return: The complex value ``complex(x)`` multiplied by the complex value ``complex(y)``.
 
@@ -320,17 +320,17 @@ Interface
 
     .. deprecated:: 5.0.0
 
-  .. cpp:function:: complex operator/(complex x, complex y)
-  .. cpp:function:: complex operator/(complex x, T y)
-  .. cpp:function:: complex operator/(T x, complex y)
-  .. cpp:function:: complex operator/(complex x, std::complex<T> y)
-  .. cpp:function:: complex operator/(std::complex<T> x, complex y)
+  .. cpp:function:: constexpr complex operator/(complex x, complex y)
+  .. cpp:function:: constexpr complex operator/(complex x, T y)
+  .. cpp:function:: constexpr complex operator/(T x, complex y)
+  .. cpp:function:: constexpr complex operator/(complex x, std::complex<T> y)
+  .. cpp:function:: constexpr complex operator/(std::complex<T> x, complex y)
 
     :return: The complex value ``complex(y)`` divided into the complex value ``complex(x)``.
 
     .. note::
 
-     The Kokkos implementation of division uses a scaled method, and the result does not necessarily match a similar operation using ``std::complex``.
+     The Kokkos implementation of division uses a scaled method, and the result does not necessarily match a similar operation using ``std::complex``, nor are they ``constexpr`` until C++23.
 
   .. cpp:function:: template<typename T1, typename T2> complex<std::common_type_t<T1, T2>> operator/(complex<T1> x, complex<T2> y) noexcept
 
