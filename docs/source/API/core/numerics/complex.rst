@@ -248,7 +248,7 @@ Interface
 
     .. deprecated:: 5.0.0
 
-  .. cpp:function:: complex operator+(complex x) noexcept
+  .. cpp:function:: constexpr complex operator+(complex x) noexcept
 
     :return: ``x``
 
@@ -272,7 +272,7 @@ Interface
 
     .. deprecated:: 5.0.0
 
-  .. cpp:function:: complex operator-(complex x) noexcept
+  .. cpp:function:: constexpr complex operator-(complex x) noexcept
 
     :return: ``complex(-x.real(), -x.imag())``
 
