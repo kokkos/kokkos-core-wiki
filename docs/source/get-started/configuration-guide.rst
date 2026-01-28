@@ -732,6 +732,11 @@ Kokkos will attempt to autodetect the architecture flag at configuration time.
       - Models
       - Notes
 
+    * * ``Kokkos_ARCH_AMD_GFX950``
+      * GFX950
+      * MI355X, MI350X
+      * (since Kokkos 5.1)
+
     * * ``Kokkos_ARCH_AMD_GFX942_APU``
       * GFX942
       * MI300A
