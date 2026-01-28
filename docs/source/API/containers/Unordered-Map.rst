@@ -15,7 +15,7 @@ The three key differences are *fixed capacity*, *maximum number of insert attemp
   This means that an insert can fail when the capacity of the map is exceeded.
   The capacity of the map can be only changed (rehash) on the host.
 
-- *maximum number of insert attempts*: An insert can fail if no free space is found in less than
+- *Maximum number of insert attempts*: An insert can fail if no free space is found in less than
   a certain number of (internal) attempts to insert. This can happen independently of the
   capacity of the map.
 
