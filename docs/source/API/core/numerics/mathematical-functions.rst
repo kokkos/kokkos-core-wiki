@@ -532,11 +532,11 @@ Classification and comparison
    * - |isgreater|_ [#not_implemented]_
      - checks if the first floating-point argument is greater than the second
    * - |isgreaterequal|_ [#not_implemented]_
-     - checks if the first floating-point argument is greater or equal than the second
+     - checks if the first floating-point argument is greater than or equal to the second
    * - |isless|_ [#not_implemented]_
      - checks if the first floating-point argument is less than the second
    * - |islessequal|_ [#not_implemented]_
-     - checks if the first floating-point argument is less or equal than the second
+     - checks if the first floating-point argument is less than or equal to the second
    * - |islessgreater|_ [#not_implemented]_
      - checks if the first floating-point argument is less or greater than the second
    * - |isunordered|_ [#not_implemented]_
