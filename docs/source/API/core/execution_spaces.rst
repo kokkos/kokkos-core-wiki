@@ -236,7 +236,9 @@ Additionally, the following type aliases (a.k.a. ``typedef`` s) will be defined 
 
 * ``Ex::memory_space``: the default |MemorySpace|_ to use when executing with ``Ex``. Kokkos guarantees that ``Kokkos::SpaceAccessibility<Ex, Ex::memory_space>::accessible`` will be ``true`` (see |KokkosSpaceAccessibility|_)
 
-* ``Ex::array_layout``: the default ``ArrayLayout`` recommended for use with ``View`` types accessed from ``Ex``.
+* ``Ex::array_layout``: the default ``ArrayLayout`` recommended for use with ``View`` types accessed from ``Ex``. //Deprecated since Kokkos 5.0
+
+* ``Ex::layout_type``: the default ``LayoutType`` recommended for use with ``View`` types accessed from ``Ex``.
 
 * ``Ex::scratch_memory_space``: the ``ScratchMemorySpace`` that parallel patterns will use for allocation of scratch memory (for instance, as requested by a |KokkosTeamPolicy|_). Only unmanaged Views can be created using this memory space.
 
@@ -268,7 +270,8 @@ Synopsis
         typedef ... memory_space;
         typedef Device<execution_space, memory_space> device_type;
         typedef ... scratch_memory_space;
-        typedef ... array_layout;
+        typedef ... layout_type;
+        typedef ... array_layout; // Deprecated since Kokkos 5.0
         typedef ... size_type;
 
         ExecutionSpaceConcept();
@@ -305,7 +308,7 @@ Typedefs
 
 * ``device_type``: ``DeviceType<execution_space,memory_space>``.
 
-* ``array_layout``: The default ``ArrayLayout`` recommended for use with ``View`` types accessed from |ExecutionSpaceConcept|_.
+* ``layout_type``: The default ``LayoutType`` recommended for use with ``View`` types accessed from |ExecutionSpaceConcept|_.
 
 * ``scratch_memory_space``: The ``ScratchMemorySpace`` that parallel patterns will use for allocation of scratch memory (for instance, as requested by a |KokkosTeamPolicy|_). Only unmanaged Views can be created using this memory space.
 
