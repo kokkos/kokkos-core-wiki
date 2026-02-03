@@ -433,7 +433,8 @@ Floating point manipulation functions
 
 .. |nextafter| replace:: ``nextafter``
 
-.. _nexttoward: https://en.cppreference.com/w/cpp/numeric/math/nexttoward
+.. Next line is not a typo, nexttoward is documented on the same page as nextafter.
+.. _nexttoward: https://en.cppreference.com/w/cpp/numeric/math/nextafter
 
 .. |nexttoward| replace:: ``nexttoward``
 
