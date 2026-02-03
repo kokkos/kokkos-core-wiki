@@ -21,8 +21,7 @@ All constants are defined in the ``Kokkos::numbers::`` namespace since version 4
 
 Variable Templates
 ------------------
-The following are variable templates defined for standard floating-point types
-(``float``, ``double``, ``long double``) and Kokkos half types.
+The following are variable templates defined for standard floating-point types (``float``, ``double``, ``long double``).
 
 .. list-table::
    :align: left
