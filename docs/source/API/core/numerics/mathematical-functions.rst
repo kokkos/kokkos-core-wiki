@@ -518,7 +518,7 @@ Classification and comparison
 .. list-table::
    :align: left
 
-   * - |fpclassify|_ [#not_implemented]_
+   * - |fpclassify|_ [#since_kokkos_5_1]_
      - categorizes the given floating-point value
    * - |isfinite|_
      - checks if the given number has finite value
