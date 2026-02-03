@@ -9,6 +9,6 @@ jobs:
     steps:
     - uses: actions/checkout@v6
 
-    - uses: crate-ci/typos@v1.42.2
+    - uses: crate-ci/typos@v1.43.0
       with:
         config: ./.typos.toml
