@@ -544,9 +544,23 @@ Classification and comparison
 
 ------------
 
-**Other math functions not provided by the C++ standard library**
+Other (non-standard) functions
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-``rsqrt(x)`` reciprocal square root (i.e. computes :math:`\frac{1}{\sqrt(x)}`) (since Kokkos 4.1)
+.. note:: These functions are not provided by the C++ standard library.
+
+   Additional functions with ``f`` and ``l`` suffixes are not provided at this time.
+
+
+.. list-table::
+   :align: left
+
+   * - ``rsqrt`` [#since_kokkos_4_1]_
+     - computes the reciprocal square root (:math:`1/\sqrt{x}`)
+   * - ``rcp`` [#since_kokkos_5_1]_
+     - computes the reciprocal (:math:`1/x`)
+
+.. [#since_kokkos_4_1] (since Kokkos 4.1)
 
 ------------
 
