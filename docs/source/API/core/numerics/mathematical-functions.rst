@@ -550,8 +550,6 @@ Other (non-standard) functions
 
 .. note:: These functions are not provided by the C++ standard library.
 
-   Additional functions with ``f`` and ``l`` suffixes are not provided at this time.
-
 
 .. list-table::
    :align: left
