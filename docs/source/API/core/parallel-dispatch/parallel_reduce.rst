@@ -76,12 +76,12 @@ Parameters:
   - `RangePolicy <../policies/RangePolicy.html>`_: defines a 1D iteration range.
   - `MDRangePolicy <../policies/MDRangePolicy.html>`_: defines a multi-dimensional iteration space.
   - `TeamPolicy <../policies/TeamPolicy.html>`_: defines a 1D iteration range, each of which is assigned to a thread team.
-  - `TeamVectorRange <../policies/TeamVectorRange.html>`_: defines a 1D iteration range to be executed by a thread-team. Only valid inside a parallel region executed through a ``TeamPolicy`` or a ``TaskTeam``.
-  - `TeamVectorMDRange <../policies/TeamVectorMDRange.html>`_: defines a multi-dimensional iteration space to be executed by a thread-team. Only valid inside a parallel region executed through a ``TeamPolicy`` or a ``TaskTeam``.
-  - `TeamThreadRange <../policies/TeamThreadRange.html>`_: defines a 1D iteration range to be executed by a thread-team. Only valid inside a parallel region executed through a ``TeamPolicy`` or a ``TaskTeam``.
-  - `TeamThreadMDRange <../policies/TeamThreadMDRange.html>`_: defines a multi-dimensional iteration space to be executed by a thread-team. Only valid inside a parallel region executed through a ``TeamPolicy`` or a ``TaskTeam``.
-  - `ThreadVectorRange <../policies/ThreadVectorRange.html>`_: defines a 1D iteration range to be executed through vector parallelization dividing the threads within a team.  Only valid inside a parallel region executed through a ``TeamPolicy`` or a ``TaskTeam``.
-  - `ThreadVectorMDRange <../policies/ThreadVectorMDRange.html>`_: defines a multi-dimensional iteration space to be executed through vector parallelization dividing the threads within a team.  Only valid inside a parallel region executed through a ``TeamPolicy`` or a ``TaskTeam``.
+  - `TeamVectorRange <../policies/TeamVectorRange.html>`_: defines a 1D iteration range to be executed by a thread-team. Only valid inside a parallel region executed through a ``TeamPolicy``.
+  - `TeamVectorMDRange <../policies/TeamVectorMDRange.html>`_: defines a multi-dimensional iteration space to be executed by a thread-team. Only valid inside a parallel region executed through a ``TeamPolicy``.
+  - `TeamThreadRange <../policies/TeamThreadRange.html>`_: defines a 1D iteration range to be executed by a thread-team. Only valid inside a parallel region executed through a ``TeamPolicy``.
+  - `TeamThreadMDRange <../policies/TeamThreadMDRange.html>`_: defines a multi-dimensional iteration space to be executed by a thread-team. Only valid inside a parallel region executed through a ``TeamPolicy``.
+  - `ThreadVectorRange <../policies/ThreadVectorRange.html>`_: defines a 1D iteration range to be executed through vector parallelization dividing the threads within a team.  Only valid inside a parallel region executed through a ``TeamPolicy``.
+  - `ThreadVectorMDRange <../policies/ThreadVectorMDRange.html>`_: defines a multi-dimensional iteration space to be executed through vector parallelization dividing the threads within a team.  Only valid inside a parallel region executed through a ``TeamPolicy``.
 * FunctorType: A valid functor with (at minimum) an ``operator()`` with a matching signature for the ``ExecPolicy`` combined with the reduced type.
 * ReducerArgument: Either a class fulfilling the "Reducer" concept or a ``Kokkos::View``.
 * ReducerArgumentNonConst: A scalar type or an array type; see below for functor requirements.
