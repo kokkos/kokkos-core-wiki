@@ -445,14 +445,14 @@ Floating point manipulation functions
 .. list-table::
    :align: left
 
-   * - |frexp|_ [#not_implemented]_
+   * - |frexp|_ [#since_kokkos_5_1]_
      - decomposes a number into significand and base-:math:`2` exponent
-   * - |ldexp|_ [#not_implemented]_
+   * - |ldexp|_ [#since_kokkos_5_1]_
      - multiplies a number by :math:`2` raised to an integral power
    * - |modf|_ [#since_kokkos_5_1]_
      - decomposes a number into integer and fractional parts
-   * - |scalbn|_ [#not_implemented]_
-       |scalbln|_ [#not_implemented]_
+   * - |scalbn|_ [#since_kokkos_5_1]_
+       |scalbln|_ [#since_kokkos_5_1]_
      - multiplies a number by ``FLT_RADIX`` raised to a power
    * - |ilogb|_ [#since_kokkos_5_1]_
      - extracts exponent of the number
