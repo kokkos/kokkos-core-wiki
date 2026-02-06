@@ -4,36 +4,80 @@ Mathematical constants
 .. role::cpp(code)
     :language: cpp
 
-.. _text: https://github.com/kokkos/kokkos/blob/develop/core/src/Kokkos_MathematicalConstants.hpp
+.. _source_math_constants: https://github.com/kokkos/kokkos/blob/develop/core/src/Kokkos_MathematicalConstants.hpp
 
-.. |text| replace:: ``<Kokkos_MathematicalConstants.hpp>``
+.. |source_math_constants| replace:: ``<Kokkos_MathematicalConstants.hpp>``
 
-Defined in header |text|_
+Defined in header |source_math_constants|_
 which is included from ``<Kokkos_Core.hpp>``
 
-.. _text2: https://en.cppreference.com/w/cpp/numeric/constants
+.. _cpp_reference_numbers: https://en.cppreference.com/w/cpp/numeric/constants
 
-.. |text2| replace:: ``<numbers>``
+.. |cpp_reference_numbers| replace:: ``<numbers>``
 
-Provides all mathematical constants from |text2|_ (since C++20).
+Provides all mathematical constants from |cpp_reference_numbers|_ (since C++20).
 
 All constants are defined in the ``Kokkos::numbers::`` namespace since version 4.0, in ``Kokkos::Experimental`` in previous versions.
 
-**Mathematical constants**
+Variable Templates
+------------------
+The following are variable templates defined for standard floating-point types (``float``, ``double``, ``long double``).
 
-``e``
-``log2e``
-``log10e``
-``pi``
-``inv_pi``
-``inv_sqrtpi``
-``ln2``
-``ln10``
-``sqrt2``
-``sqrt3``
-``inv_sqrt3``
-``egamma``
-``phi``
+.. list-table::
+   :align: left
+   :header-rows: 1
+
+   * - Template name
+     - Math symbol
+     - Description
+   * - ``e_v``
+     - :math:`e`
+     - Base of the natural logarithm
+   * - ``log2e_v``
+     - :math:`\log_{2}{e}`
+     - Base-2 logarithm of e
+   * - ``log10e_v``
+     - :math:`\log_{10}{e}`
+     - Base-10 logarithm of e
+   * - ``pi_v``
+     - :math:`\pi`
+     - Ratio of a circle's circumference to its diameter
+   * - ``inv_pi_v``
+     - :math:`\frac{1}{\pi}`
+     - Inverse of pi
+   * - ``inv_sqrtpi_v``
+     - :math:`\frac{1}{\sqrt{\pi}}`
+     - Inverse of the square root of pi
+   * - ``ln2_v``
+     - :math:`\ln{2}`
+     - Natural logarithm of 2
+   * - ``ln10_v``
+     - :math:`\ln{10}`
+     - Natural logarithm of 10
+   * - ``sqrt2_v``
+     - :math:`\sqrt{2}`
+     - Square root of 2
+   * - ``sqrt3_v``
+     - :math:`\sqrt{3}`
+     - Square root of 3
+   * - ``inv_sqrt3_v``
+     - :math:`\frac{1}{\sqrt{3}}`
+     - Inverse of the square root of 3
+   * - ``egamma_v``
+     - :math:`\gamma`
+     - Euler-Mascheroni constant
+   * - ``phi_v``
+     - :math:`\varphi`
+     - Golden ratio constant :math:`\frac{1+\sqrt{5}}{2}`
+
+Convenience Constants (``double``)
+----------------------------------
+For each variable template listed above, Kokkos provides an ``inline constexpr
+double`` constant without the ``_v`` suffix. These are shorthand for the
+``double`` specialization.
+
+* ``Kokkos::numbers::pi`` is equivalent to ``Kokkos::numbers::pi_v<double>``
+* ``Kokkos::numbers::e`` is equivalent to ``Kokkos::numbers::e_v<double>``
 
 ------------
 
