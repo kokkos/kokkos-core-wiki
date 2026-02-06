@@ -26,7 +26,8 @@ Core API
    * - `Atomics <core/atomics.html>`__
      - Atomics
    * - `Numerics <core/Numerics.html>`__
-     - Common mathematical functions, mathematical constants, numeric traits.
+     - Common mathematical functions, mathematical constants, numeric traits,
+       complex numbers, half-precision floating-point types.
    * - `C-style memory management <core/c_style_memory_management.html>`__
      - C-style memory management
    * - `Traits <core/Prod.html>`__
@@ -41,8 +42,6 @@ Core API
      - Used to recognize, in an SFINAE-friendly way, the validity of any C++ expression.
    * - `Macros <core/Macros.html>`__
      - Global macros defined by Kokkos, used for architectures, general settings, etc.
-   * - `Half precision types <core/Half-precision-types.html>`__
-     - Helpers to get a portable access to half precision types.
 
 .. toctree::
    :hidden:
@@ -66,4 +65,3 @@ Core API
    ./core/Detection-Idiom
    ./core/Macros
    ./core/Profiling
-   ./core/Half-precision-types

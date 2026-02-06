@@ -39,3 +39,10 @@ provides several function templates to access, manipulate, and process individua
    Complex number arithmetic <numerics/complex>
 
 The header ``<Kokkos_Complex.hpp>`` provides a Kokkos-compatible implementation of complex numbers, mirroring the functionality of ``std::complex``.
+
+.. toctree::
+   :maxdepth: 1
+
+   Reduced precision floating-point types <numerics/half-precision-types>
+
+The header ``<Kokkos_Half.hpp>`` implements 16-bit "half-precision" ``half_t`` and "brain floating point" ``bhalf_t`` floating-point.
