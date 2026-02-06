@@ -168,6 +168,10 @@ Description
 
    .. cpp:type:: array_layout
 
+      The layout of the ``DynRankView``. (Deprecated since Kokkos 5.0)
+
+   .. cpp:type:: layout_type
+
       The layout of the ``DynRankView``.
 
    .. cpp:type:: size_type
@@ -202,14 +206,14 @@ Description
 
    .. cpp:function:: DynRankView(const std::string& name, const IntType& ... indices)
 
-       Requires: ``array_layout::is_regular == true``
+       Requires: ``layout_type::is_regular == true``
 
        Standard allocating constructor.
 
        * ``name``: a user provided label, which is used for profiling and debugging purposes. Names are not required to be unique.
        * ``indices``: runtime dimensions of the view.
 
-   .. cpp:function:: DynRankView(const std::string& name, const array_layout& layout)
+   .. cpp:function:: DynRankView(const std::string& name, const layout_type& layout)
 
        Standard allocating constructor.
 
@@ -218,13 +222,13 @@ Description
 
    .. cpp:function:: DynRankView(const AllocProperties& prop, const IntType& ... indices)
 
-       Requires: ``array_layout::is_regular == true``
+       Requires: ``layout_type::is_regular == true``
 
        Allocating constructor with allocation properties. An allocation properties object is returned by the ``view_alloc`` function.
 
        * ``indices``: runtime dimensions of the view.
 
-   .. cpp:function:: DynRankView(const AllocProperties& prop, const array_layout& layout)
+   .. cpp:function:: DynRankView(const AllocProperties& prop, const layout_type& layout)
 
        Allocating constructor with allocation properties and a layout object.
 
@@ -232,14 +236,14 @@ Description
 
    .. cpp:function:: DynRankView(const pointer_type& ptr, const IntType& ... indices)
 
-       Requires: ``array_layout::is_regular == true``
+       Requires: ``layout_type::is_regular == true``
 
        Unmanaged data wrapping constructor.
 
        * ``ptr``: pointer to a user provided memory allocation. Must provide storage of size ``DynRankView::required_allocation_size(n0,...,nR)``.
        * ``indices``: runtime dimensions of the view.
 
-   .. cpp:function:: DynRankView(const pointer_type& ptr, const array_layout& layout)
+   .. cpp:function:: DynRankView(const pointer_type& ptr, const layout_type& layout)
 
        Unmanaged data wrapper constructor.
 
@@ -248,14 +252,14 @@ Description
 
    .. cpp:function:: DynRankView(const ScratchSpace& space, const IntType& ... indices)
 
-       Requires: ``sizeof(IntType...)==rank_dynamic()`` and ``array_layout::is_regular == true``
+       Requires: ``sizeof(IntType...)==rank_dynamic()`` and ``layout_type::is_regular == true``
 
        Constructor which acquires memory from a Scratch Memory handle.
 
        * ``space``: scratch memory handle. Typically returned from ``team_handles`` in ``TeamPolicy`` kernels.
        * ``indices``: runtime dimensions of the view.
 
-   .. cpp:function:: DynRankView(const ScratchSpace& space, const array_layout& layout)
+   .. cpp:function:: DynRankView(const ScratchSpace& space, const layout_type& layout)
 
        Constructor which acquires memory from a Scratch Memory handle.
 
@@ -285,7 +289,7 @@ Description
 
    .. rubric:: Data Layout, Dimensions, Strides
 
-   .. cpp:function:: constexpr array_layout layout() const
+   .. cpp:function:: constexpr layout_type layout() const
 
       Returns the layout object. Can be used to to construct other views with the same dimensions.
 
@@ -353,9 +357,9 @@ Description
 			   size_t N2 = 0, size_t N3 = 0, size_t N4 = 0, \
 			   size_t N5 = 0, size_t N6 = 0);
 
-       Returns the number of bytes necessary for an unmanaged view of the provided dimensions. This function is only valid if ``array_layout::is_regular == true``.
+       Returns the number of bytes necessary for an unmanaged view of the provided dimensions. This function is only valid if ``layout_type::is_regular == true``.
 
-   .. cpp:function:: static constexpr size_t required_allocation_size(const array_layout& layout);
+   .. cpp:function:: static constexpr size_t required_allocation_size(const layout_type& layout);
 
        :return: the number of bytes necessary for an unmanaged view of the provided layout.
 
@@ -397,12 +401,12 @@ The following conditions must be met at and are evaluated at compile time:
 * If ``std::is_const<SrcType::value_type>::value == true`` than ``std::is_const<DstType::value_type>::value == true``.
 * ``MemorySpaceAccess<DstType::memory_space,SrcType::memory_space>::assignable == true``
 
-Furthermore there are rules which must be met if ``DstType::array_layout`` is not the same as ``SrcType::array_layout``. These rules only cover cases where both layouts are one of ``LayoutLeft`` , ``LayoutRight`` or ``LayoutStride``
+Furthermore there are rules which must be met if ``DstType::layout_type`` is not the same as ``SrcType::layout_type``. These rules only cover cases where both layouts are one of ``LayoutLeft`` , ``LayoutRight`` or ``LayoutStride``
 
-* If neither ``DstType::array_layout`` nor ``SrcType::array_layout`` is ``LayoutStride``:
-    - If ``DstType::rank > 1`` than ``DstType::array_layout`` must be the same as ``SrcType::array_layout``.
+* If neither ``DstType::layout_type`` nor ``SrcType::layout_type`` is ``LayoutStride``:
+    - If ``DstType::rank > 1`` than ``DstType::layout_type`` must be the same as ``SrcType::layout_type``.
 
-* If either ``DstType::array_layout`` or ``SrcType::array_layout`` is ``LayoutStride``
+* If either ``DstType::layout_type`` or ``SrcType::layout_type`` is ``LayoutStride``
     - For each dimension ``k`` it must hold that ``dst_view.extent(k) == src_view.extent(k)``
 
 Examples
