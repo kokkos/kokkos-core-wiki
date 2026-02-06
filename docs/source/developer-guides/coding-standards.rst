@@ -46,3 +46,39 @@ Comment Formatting
 ^^^^^^^^^^^^^^^^^^
 In general, prefer C++-style comments (``//`` for normal comments, ``///`` for
 doxygen documentation comments).
+
+Style Issues
+~~~~~~~~~~~~
+
+Don’t use ``inline`` when defining a function within the class definition
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C++ implicitly treats any member function defined within the class body as
+inline. Adding the ``inline`` keyword, or using ``KOKKOS_INLINE_FUNCTION``,
+adds unnecessary syntactic noise without changing the compiler's behavior.
+
+Don't:
+
+.. code-block:: cpp
+
+    class Foo {
+    public:
+      // Redundant: already implicitly inline
+      inline void bar() { /* ... */ }
+
+      // Redundant: KOKKOS_INLINE_FUNCTION expands to 'inline'
+      KOKKOS_INLINE_FUNCTION void baz() { /* ... */ }
+    };
+
+
+Do:
+
+.. code-block:: cpp
+
+  class Foo {
+  public:
+    // Clean: standard C++ handles inlining
+    void bar() { /* ... */ }
+
+    // Correct: Provides __host__ __device__ tags; inlining is implicit
+    KOKKOS_FUNCTION void baz() { /* ... */ }
+  };
