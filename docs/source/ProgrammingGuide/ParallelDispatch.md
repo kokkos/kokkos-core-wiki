@@ -230,10 +230,11 @@ Kokkos::View<float*, Kokkos::HostSpace> sums ("sums", numCols);
 parallel_reduce (X.extent(0), cs, sums);
 Kokkos::fence();
 std::cout << sums(0) << '\n';
+```
 
 If the number of elements in the reduced array is a compile-time constant,
 it is also possible to place the results directly into a C array:
-```
+```c++
 float sums[10];
 parallel_reduce (X.extent(0), cs, sums);
 ```
