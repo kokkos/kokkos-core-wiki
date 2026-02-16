@@ -173,7 +173,7 @@ Debugging
       - Default
 
     * * ``Kokkos_ENABLE_DEBUG``
-      * Activate extra debug features - may increase compile times
+      * Activate extra debug features - may increase compile times [#enable_debug]_
       * ``ON`` if ``CMAKE_BUILD_TYPE`` is ``Debug``, ``OFF`` otherwise
 
     * * ``Kokkos_ENABLE_DEBUG_BOUNDS_CHECK``
@@ -189,6 +189,11 @@ Debugging
   
   * ``ON`` if ``CMAKE_BUILD_TYPE`` is ``Debug``, ``OFF`` otherwise (until Kokkos 4.7)
   * always ``ON`` (since Kokkos 4.7)
+
+.. [#enable_debug] ``Kokkos_ENABLE_DEBUG``
+
+  * ``Kokkos_ENABLE_DEBUG=ON`` does not imply the CMake ``Debug`` build type.  For full debug executable use ``Debug`` as build type.
+  * In order to generate debug symbols for device code with CUDA, configure with ``nvcc_wrapper`` as cxx compiler and ``-DCMAKE_CXX_FLAGS=-G``.
 
 .. _keywords_enable_backend_specific_options:
 
