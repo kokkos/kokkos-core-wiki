@@ -13,7 +13,6 @@ For specific capabilities check their API reference:
 - `API: Core <../API/core-index.html>`_
 - `API: Containers <../API/containers-index.html>`_
 - `API: Algorithms <../API/algorithms-index.html>`_
-- `API in Alphabetical Order <../API/alphabetical.html>`_
 
 Initialization by command-line arguments
 ----------------------------------------

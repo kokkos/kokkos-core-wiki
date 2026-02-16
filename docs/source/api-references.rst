@@ -9,7 +9,6 @@ API References
    API/algorithms-index
    API/containers-index
    API/simd-index
-   API/alphabetical
    deprecations
 
 :doc:`API/core-index`
@@ -29,10 +28,6 @@ Exotic view-based containers, such as ``DualView``, ``ScatterView``, or ``Offset
 :doc:`API/simd-index`
 ~~~~~~~~~~~~~~~~~~~~~
 Data-parallel vector types.
-
-:doc:`Alphabetical <API/alphabetical>`
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-List of all library features in alphabetical order.
 
 :doc:`deprecations`
 ~~~~~~~~~~~~~~~~~~~
