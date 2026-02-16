@@ -192,7 +192,8 @@ Debugging
 
 .. [#enable_debug] ``Kokkos_ENABLE_DEBUG``
 
-  * to enable all debug symbols on a device with ``Kokkos_ENABLE_CUDA=ON`` add ``CMAKE_CXX_FLAGS=-G``
+  * ``Kokkos_ENABLE_DEBUG=ON`` does not imply the CMake ``Debug`` build type.  For full debug executable use ``Debug`` as build type.
+  * In order to generate debug symbols for device code with CUDA, configure with ``nvcc_wrapper`` as cxx compiler and ``-DCMAKE_CXX_FLAGS=-G``.
 
 .. _keywords_enable_backend_specific_options:
 
