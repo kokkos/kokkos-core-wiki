@@ -158,10 +158,10 @@ and device, causing serious memory corruption issues when passed between them.
       int a = 0;
       double b = 1.0;
       auto lambda = KOKKOS_LAMBDA(int) {
-        KOKKOS_IF_ON_HOST((printf("%i\n", a);))     // Captures 'a' (4 bytes)
-        KOKKOS_IF_ON_DEVICE((printf("%lf\n", b);))  // Captures 'b' (8 bytes)
+        KOKKOS_IF_ON_HOST((printf("%i\n", a);))     // Captures 'a'
+        KOKKOS_IF_ON_DEVICE((printf("%lf\n", b);))  // Captures 'b'
       };
-      // Lambda has different size on host (4 bytes) vs device (8 bytes)
+      // Lambda has different size on host vs device due to different captures
     }
 
 The lambda object has different sizes on host and device because of the
