@@ -216,7 +216,7 @@ spaces:
     };
 
     template<>
-    struct BlockSize<Kokkos::HostSpace> {
+    struct BlockSize<Kokkos::DefaultHostExecutionSpace> {
       static constexpr int value = 4; // Specialized for host
     };
 
