@@ -185,15 +185,15 @@ Debugging
       * (see below [#dual_view_modify_check]_)
 
 
+.. [#enable_debug] ``Kokkos_ENABLE_DEBUG``
+
+  * ``Kokkos_ENABLE_DEBUG=ON`` does not imply the CMake ``Debug`` build type.  For full debug executable use ``Debug`` as build type.
+  * See :ref:`FAQ <setup-debug-build>`.
+
 .. [#dual_view_modify_check] ``Kokkos_ENABLE_DEBUG_DUALVIEW_MODIFY_CHECK`` default value is:
   
   * ``ON`` if ``CMAKE_BUILD_TYPE`` is ``Debug``, ``OFF`` otherwise (until Kokkos 4.7)
   * always ``ON`` (since Kokkos 4.7)
-
-.. [#enable_debug] ``Kokkos_ENABLE_DEBUG``
-
-  * ``Kokkos_ENABLE_DEBUG=ON`` does not imply the CMake ``Debug`` build type.  For full debug executable use ``Debug`` as build type.
-  * In order to generate debug symbols for device code with CUDA, configure with ``nvcc_wrapper`` as cxx compiler and ``-DCMAKE_CXX_FLAGS=-G``.
 
 .. _keywords_enable_backend_specific_options:
 
