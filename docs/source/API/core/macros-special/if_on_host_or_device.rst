@@ -92,8 +92,133 @@ accessible outside of it.
 ``constexpr`` Context
 ---------------------
 
-These macros cannot be used in a context that requires a ``constexpr``
-(constant expression).
+These macros **must not** be used in a context that requires a ``constexpr``
+(constant expression). Using ``KOKKOS_IF_ON_HOST`` or ``KOKKOS_IF_ON_DEVICE``
+within ``constexpr`` functions or to initialize ``constexpr`` variables leads to
+**One Definition Rule (ODR) violations** and undefined behavior.
+
+Why This Is Problematic
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Unlike runtime function calls, ``constexpr`` functions and variables generate
+compile-time values that can affect the structure of types, the size of objects,
+and template instantiations. When ``KOKKOS_IF_ON_HOST`` and
+``KOKKOS_IF_ON_DEVICE`` are used in ``constexpr`` contexts, they cause the same
+function or variable to have different compile-time values on the host versus
+the device—similar to using architecture-specific preprocessor macros like
+``#ifdef __AVX2__`` in different translation units.
+
+This is analogous to the following problematic pattern:
+
+.. code-block:: cpp
+
+    // DO NOT DO THIS - ODR violation
+    static constexpr int foo() {
+      #ifdef __AVX2__
+        return 4;
+      #else
+        return 2;
+      #endif
+    }
+
+If you compile this code in two different translation units with different
+compiler flags (one with AVX2 and one without) and then link them together, you
+have an ODR violation because the same function has different definitions.
+
+The same principle applies to host/device compilation: a ``constexpr`` function
+that returns different values on host and device violates the ODR.
+
+Examples of ODR Violations
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Problematic: Using in** ``constexpr`` **function**
+
+.. code-block:: cpp
+
+    // DO NOT DO THIS - causes ODR violation
+    static constexpr KOKKOS_FUNCTION int compute_block_size() {
+      KOKKOS_IF_ON_HOST((return 4;))
+      KOKKOS_IF_ON_DEVICE((return 2;))
+    }
+
+    struct Functor {
+      int data[compute_block_size()]; // Size differs on host vs device!
+      // This creates an ODR violation and undefined behavior
+    };
+
+In this example, the ``Functor`` struct would have different sizes on the host
+and device, causing serious memory corruption issues when passed between them.
+
+**Problematic: Lambda captures with** ``constexpr`` **usage**
+
+.. code-block:: cpp
+
+    // DO NOT DO THIS - causes ODR violation
+    void foo() {
+      int a = 0;
+      double b = 1.0;
+      auto lambda = KOKKOS_LAMBDA(int) {
+        KOKKOS_IF_ON_HOST((printf("%i\n", a);))     // Captures 'a' (4 bytes)
+        KOKKOS_IF_ON_DEVICE((printf("%lf\n", b);))  // Captures 'b' (8 bytes)
+      };
+      // Lambda has different size on host (4 bytes) vs device (8 bytes)
+    }
+
+The lambda object has different sizes on host and device because of the
+different captures, violating the ODR.
+
+Correct Alternatives
+^^^^^^^^^^^^^^^^^^^^
+
+**Alternative 1: Use non-**``constexpr`` **runtime function**
+
+If the value doesn't need to be a compile-time constant, simply remove
+``constexpr``:
+
+.. code-block:: cpp
+
+    // This is OK - runtime function
+    static KOKKOS_FUNCTION int compute_block_size() {
+      KOKKOS_IF_ON_HOST((return 4;))
+      KOKKOS_IF_ON_DEVICE((return 2;))
+    }
+
+**Alternative 2: Move** ``KOKKOS_IF_ON_*`` **to calling context**
+
+If you need compile-time constants, move the conditional compilation up one
+level:
+
+.. code-block:: cpp
+
+    // This is OK - separate constexpr values in each branch
+    KOKKOS_INLINE_FUNCTION void process() {
+      KOKKOS_IF_ON_HOST((
+        constexpr int block_size = 4;
+        // Use block_size here...
+      ))
+      KOKKOS_IF_ON_DEVICE((
+        constexpr int block_size = 2;
+        // Use block_size here...
+      ))
+    }
+
+**Alternative 3: Use template specialization**
+
+For more complex cases, consider using template specialization on execution
+spaces:
+
+.. code-block:: cpp
+
+    // This is OK - different specializations
+    template<typename ExecutionSpace>
+    struct BlockSize {
+      static constexpr int value = 2; // Default for devices
+    };
+
+    template<>
+    struct BlockSize<Kokkos::HostSpace> {
+      static constexpr int value = 4; // Specialized for host
+    };
 
 Best Practices
 --------------
