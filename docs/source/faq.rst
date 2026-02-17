@@ -28,7 +28,7 @@ Debug behavior in Kokoks is both affected by the build type and additional debug
 
    .. warning:: ``-G`` disables nearly all GPU optimizations and will significantly slow down your kernels.
 
-2. CMake debug options:
+2. CMake options for tweaking debug settings:
 
    ``Kokkos_ENABLE_DEBUG``
 
