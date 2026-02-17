@@ -149,7 +149,7 @@ Examples of ODR Violations
 In this example, the ``Functor`` struct would have different sizes on the host
 and device, causing serious memory corruption issues when passed between them.
 
-**Problematic: Lambda captures with** ``constexpr`` **usage**
+**Problematic: Lambda capture dependency**
 
 .. code-block:: cpp
 
@@ -202,9 +202,9 @@ level:
       ))
     }
 
-**Alternative 3: Use template specialization**
+**Alternative 3 (Preferred): Use template specialization**
 
-For more complex cases, consider using template specialization on execution
+If possible use template specialization on execution
 spaces:
 
 .. code-block:: cpp
