@@ -49,14 +49,14 @@ for (int i = 0; i < n; i += width) {
   simd_type sy(y + i, Kokkos::Experimental::simd_flag_default);
   simd_type sz(z + i, Kokkos::Experimental::simd_flag_default);
   simd_type sr = Kokkos::sqrt(sx * sx + sy * sy + sz * sz);
-  sr.copy_to(r + i, Kokkos::Experimental::simd_flag_default);
+  Kokkos::Experimental::simd_unchecked_store(sr, r + i, Kokkos::Experimental::simd_flag_default);
 }
 ```
 
 `Kokkos::Experimental::simd<double>` is the basic SIMD type for a vector register
 containing values of 64-bit floating-point type.
 Constructing one given a pointer (and alignment tag) will execute a vectorized load instruction,
-and `copy_to` will generate a vectorized store instruction.
+and `simd_uncheckd_store` will generate a vectorized store instruction.
 Often these instructions are the only way to get the full memory bandwidth from your CPU.
 The SIMD type provides the basic math operators, so the three multiplications
 and two additions are guaranteed to turn into vector instructions for multiplication and addition.
@@ -109,7 +109,7 @@ There are at least three major approaches to dealing with this issue in general:
      simd_type sy(y + i, Kokkos::Experimental::simd_flag_default);
      simd_type sz(z + i, Kokkos::Experimental::simd_flag_default);
      simd_type sr = Kokkos::sqrt(sx * sx + sy * sy + sz * sz);
-     sr.copy_to(r + i, Kokkos::Experimental::simd_flag_default);
+     Kokkos::Experimental::simd_unchecked_store(sr, r + i, Kokkos::Experimental::simd_flag_default);
    }
    for (; i < n; ++i) {
      r[i] = sqrt(x[i] * x[i] + y[i] * y[i] + z[i] * z[i]);
@@ -128,14 +128,11 @@ There are at least three major approaches to dealing with this issue in general:
    constexpr int width = int(simd_type::size());
    for (int i = 0; i < n; i += width) {
      mask_type mask([] (std::size_t lane) { return i + int(lane) < n; });
-     simd_type sx;
-     simd_type sy;
-     simd_type sz;
-     where(mask, sx).copy_from(x + i, Kokkos::Experimental::simd_flag_default);
-     where(mask, sy).copy_from(y + i, Kokkos::Experimental::simd_flag_default);
-     where(mask, sz).copy_from(z + i, Kokkos::Experimental::simd_flag_default);
+     simd_type sx = Kokkos::Experimental::simd_partial_load(x + i, mask, Kokkos::Experimental::simd_flag_default);
+     simd_type sy = Kokkos::Experimental::simd_partial_load(y + i, mask, Kokkos::Experimental::simd_flag_default);
+     simd_type sz = Kokkos::Experimental::simd_partial_load(z + i, mask, Kokkos::Experimental::simd_flag_default);
      simd_type sr = Kokkos::sqrt(sx * sx + sy * sy + sz * sz);
-     where(mask, sr).copy_to(r + i, Kokkos::Experimental::simd_flag_default);
+     Kokkos::Experimental::simd_partial_store(sr, r + i, mask, Kokkos::Experimental::simd_flag_default);
    }
    ```
   
@@ -170,8 +167,6 @@ Note that Kokkos takes special care to ensure everything that can be done with `
 
 ## Conditionals
 
-### Conditional assignment
-
 One of the more difficult things to do with SIMD types is conditional logic. Consider the following code which is responsible for ensuring that the value `x` is not negative (we will ignore the existence of `max` functions for this discussion because it makes for a nice simple example):
 
 ```c++
@@ -186,16 +181,17 @@ Kokkos::Experimental::simd<double> x;
 if (x < 0 /* <- this is not a boolean */) x = 0;
 ```
 
-The ISO C++ consistent solution is to use `where` expressions as follows:
+A solution to this is to use a `simd_mask` to construct a simd object:
 
 ```c++
 Kokkos::Experimental::simd<double> x;
-where(x < 0, x) = 0;
+Kokkos::Experimental::simd_mask<double> mask([](std::size_t i) { return x[i] < 0; });
+Kokkos::Experimental::simd<double> r([](std::size_t i) { return (mask[i]) ? 0 : x[i]; });
 ```
 
 ### Ternary operator
 
-At the time of this writing, there is also a common practice of using a function that mimics the behavior of the ternary conditional operator `a ? b : c` in a SIMD sense. This means the following are functionally equivalent:
+A common practice of using a function that mimics the behavior of the ternary conditional operator `a ? b : c` in a SIMD sense. This means the following are functionally equivalent:
 
 ```c++
 bool a;
@@ -211,46 +207,3 @@ Kokkos::Experimental::simd<double> c;
 auto d = Kokkos::Experimental::condition(a, b, c);
 ```
 
-```c++
-Kokkos::Experimental::simd_mask<double> a;
-Kokkos::Experimental::simd<double> b;
-Kokkos::Experimental::simd<double> c;
-auto d = c;
-where(a, d) = b;
-```
-
-The roadmap regarding the ternary operator is as follows: ISO C++ will likely add the ability to overload this operator in later versions of the language, and the standard library's SIMD types will overload it.
-
-It is recommended that programmers use `where` expressions as much as possible for conditional logic when using Kokkos SIMD types, because this is consistent with the library solution currently proposed to ISO C++ without relying on non-standard functions or language features not yet available.
-
-### Reductions for performance
-
-One frustrating aspect of the solutions for conditional logic above is that computations are not skipped, they are simply masked out. Consider the following serial logic:
-
-```c++
-bool a;
-double b = 1.0;
-if (a) b = very_expensive_function(c, d, e);
-```
-
-When using `if` statements, `very_expensive_function` is not executed at all unless `a` is `true`. However, in SIMD mode:
-
-```c++
-Kokkos::Experimental::simd_mask<double> a;
-Kokkos::Experimental::simd<double> b = 1.0;
-where(a, b) = very_expensive_function(c, d, e);
-```
-
-Now `very_expensive_function` is always being executed. What if the probability of `a` being `true` is very low? We would want to skip the computation of `very_expensive_function` if at all possible.
-
-For this, we have boolean reductions across masks called `all_of`, `none_of`, and `any_of`:
-
-```c++
-Kokkos::Experimental::simd_mask<double> a;
-Kokkos::Experimental::simd<double> b = 1.0;
-if (Kokkos::Experimental::any_of(a)) {
-  where(a, b) = very_expensive_function(c, d, e);
-}
-```
-
-Now `very_expensive_function` will only be executed if any of the boolean values in the mask `a` are `true`. If it is common that all of the boolean values in `a` are `false`, then we will spend a lot less time in `very_expensive_function`.

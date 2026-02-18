@@ -1,5 +1,7 @@
 # `Experimental::where_expression`
 
+(Deprecated since Kokkos 5.0)
+
 Header File: `Kokkos_SIMD.hpp`
 
 Usage:

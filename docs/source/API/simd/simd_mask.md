@@ -39,7 +39,7 @@ The second template parameter `Abi` is one of the pre-defined ABI types in the n
 
 ### Width
 
- * `static constexpr std::size_t size()`: `simd_mask<T, Abi>::size()` is a compile-time constant of the width of the vector, i.e. the number of values of type `T` in the vector.
+ * `static constexpr std::integral_constant<simd_size_t, N> size()`: `basic_simd_mask<T, Abi>::size()` is a compile-time constant of the width of the vector, i.e. the number of values of type `T` in the vector.
 
 ### Constructors
 
