@@ -34,23 +34,18 @@ The second template parameter `Abi` is one of the pre-defined ABI types in the n
 
  *  `value_type`: Equal to `T`
  *  `reference`: This type should be convertible to `value_type` and `value_type` should be assignable to `reference`. It may be a plain reference or it may be an implementation-defined type that calls vector intrinsics to extract or fill in one vector lane. (removed in Kokkos 4.6)
- *  `mask_type`: Equal to `simd_mask<T, Abi>`
+ *  `mask_type`: Equal to `basic_simd_mask<T, Abi>`
  *  `abi_type`: Equal to `Abi`
 
 ### Width
 
- * `static constexpr std::size_t size()`: `simd<T, Abi>::size()` is a compile-time constant of the width of the vector, i.e. the number of values of type `T` in the vector.
+ * `static constexpr std::integral_constant<simd_size_t, N> size()`: `basic_simd<T, Abi>::size()` is a compile-time constant of the width of the vector, i.e. the number of values of type `T` in the vector.
 
 ### Constructors
 
   * `simd()`: Default Constructor. The vector values are not initialized by this constructor.
   * `template <class U> simd(U&&)`: Single-value constructor. The argument will be converted to `value_type` and all the vector values will be set equal to that value.
   * `template <class G> simd(G&& gen)`: Generator constructor. The generator `gen` should be a callable type (e.g. functor) that can accept `std::integral_constant<std::size_t, i>()` as an argument and return something convertible to `value_type`. Vector lane `i` will be initialized to the value of `gen(std::integral_constant<std::size_t, i>())`.
-
-### Load/Store Methods
-
-  * `template <class U, class Flags> void copy_from(const U* mem, Flags flags)`: Loads the full vector of contiguous values starting at the address `mem`. `Flags` is the `simd_flags` that is used to describe the alignment at the address `mem`.
-  * `template <class U, class Flags> void copy_to(U* mem, Flags flags)`: Stores the full vector of contiguous values starting at the address `mem`. `Flags` is the `simd_flags` that is used to describe the alignment at the address `mem`.
 
 #### Simd Flags
 
@@ -59,7 +54,7 @@ The second template parameter `Abi` is one of the pre-defined ABI types in the n
   * `Kokkos::Experimental::element_aligned_tag` is a type alias for `decltype(simd_flag_default)` and `Kokkos::Experimental::vector_aligned_tag` is a type alias for `decltype(simd_flag_aligned)`.
 
 ### Value Access Methods
-  * `value_type operator[](std::size_t) const`: returns the vector value `i`.
+  * `value_type operator[](simd_size_t) const`: returns the vector value `i`.
   * `reference operator[](std::size_t)`: returns a reference to vector value `i` that can be modified. (removed in Kokkos 4.6)
 
 ### Arithmetic Operators
@@ -150,8 +145,35 @@ The second template parameter `Abi` is one of the pre-defined ABI types in the n
   * `simd Kokkos::exp(simd& lhs)`
   * `simd Kokkos::log(simd& lhs)`
 
+### Load/Store Functions
+
+  * `template <class U, class Flags> void copy_from(const U* mem, Flags flags)`: Loads the full vector of contiguous values starting at the address `mem`. `Flags` is the `simd_flags` that is used to describe the alignment at the address `mem`. (deprecated since Kokkos 5.0)
+  * `template <class U, class Flags> void copy_to(U* mem, Flags flags)`: Stores the full vector of contiguous values starting at the address `mem`. `Flags` is the `simd_flags` that is used to describe the alignment at the address `mem`. (deprecated since Kokkos 5.0)
+
+  * `template <class U, class Flags> simd simd_unchecked_load(U* mem, Flags flags)`: Loads the full vector of contiguous values starting at the address `mem`and returns a Kokkos simd type. `Flags` is the `simd_flags` that is used to describe the alignment at the address `mem`. (since Kokkos 5.0)
+  * `template <class U, class Flags> simd simd_unchecked_load(U* mem, mask_type mask, Flags flags)`: Executes a masked load operation, loading vector value i at `mem[i]` if mask value mask[i] is true and returns a Kokkos simd type. `Flags` is the `simd_flags` that is used to describe the alignment at the address `mem`. (since Kokkos 5.0)
+  * `template <class U, class Flags> simd simd_partial_load(U* mem, Flags flags)`: Loads the full vector of contiguous values starting at the address `mem` and returns a Kokkos simd type. `Flags` is the `simd_flags` that is used to describe the alignment at the address `mem`. (since Kokkos 5.0)
+  * `template <class U, class Flags> simd simd_partial_load(U* mem, mask_type mask, Flags flags)`: Executes a masked load operation, loading vector value i at `mem[i]` if mask value mask[i] is true and returns a Kokkos simd type. `Flags` is the `simd_flags` that is used to describe the alignment at the address `mem`. (since Kokkos 5.0)
+
+  * `template <class U, class Flags> void simd_unchecked_store(simd& s, U* mem, Flags flags)`: Stores the full vector of contiguous values starting at the address `mem`. `Flags` is the `simd_flags` that is used to describe the alignment at the address `mem`. (since Kokkos 5.0)
+  * `template <class U, class Flags> void simd_unchecked_store(simd& s, U* mem, mask_type mask, Flags flags)`: Executes a masked store operation, storing vector value i at `mem[i]` if mask value mask[i] is true. `Flags` is the `simd_flags` that is used to describe the alignment at the address `mem`. (since Kokkos 5.0)
+  * `template <class U, class Flags> void simd_unchecked_store(simd& s, U* mem, Flags flags)`: Stores the full vector of contiguous values starting at the address `mem`. `Flags` is the `simd_flags` that is used to describe the alignment at the address `mem`. (since Kokkos 5.0)
+  * `template <class U, class Flags> void simd_unchecked_store(simd& s, U* mem, mask_type mask, Flags flags)`: Executes a masked store operation, storing vector value i at `mem[i]` if mask value mask[i] is true. `Flags` is the `simd_flags` that is used to describe the alignment at the address `mem`. (since Kokkos 5.0)
+
+### Memory Permutes
+
+  * `template <class R, class I, class Flags> simd Kokkos::Experimental::unchecked_gather_from(R&& in, const I& indices, Flags flags)`: Gathers values from `in[indices[i]]` and returns a Kokkos simd type. (since Kokkos 5.1)
+  * `template <class R, class I, class Flags> simd Kokkos::Experimental::unchecked_gather_from(R&& in, const mask_type& mask, const I& indices, Flags flags)`: Gathers values from `in[indices[i]]` if the mask value `mask[i]` is true and returns a Kokkos simd type. (since Kokkos 5.1)
+  * `template <class R, class I, class Flags> simd Kokkos::Experimental::partial_gather_from(R&& in, const I& indices, Flags flags)`: Gathers values from `in[indices[i]]` and returns a Kokkos simd type. (since Kokkos 5.1)
+  * `template <class R, class I, class Flags> simd Kokkos::Experimental::partial_gather_from(R&& in, const mask_type& mask, const I& indices, Flags flags)`: Gathers values from `in[indices[i]]` if the mask value `mask[i]` is true and returns a Kokkos simd type. (since Kokkos 5.1)
+
+  * `template <class R, class I, class Flags> void Kokkos::Experimental::unchecked_scatter_to(const simd& s, R&& out, const I& indices, Flags flags)`: Scatters values from s to `out[indices[i]]`. (since Kokkos 5.1)
+  * `template <class R, class I, class Flags> void Kokkos::Experimental::unchecked_scatter_from(const simd& s, R&& in, const mask_type& mask, const I& indices, Flags flags)`: Scatters values from s to `out[indices[i]]` if the mask value `mask[i]` is true. (since Kokkos 5.1)
+  * `template <class R, class I, class Flags> void Kokkos::Experimental::partial_scatter_to(const simd& s, R&& out, const I& indices, Flags flags)`: Scatters values from s to `out[indices[i]]`. (since Kokkos 5.1)
+  * `template <class R, class I, class Flags> void Kokkos::Experimental::partial_scatter_from(const simd& s, R&& in, const mask_type& mask, const I& indices, Flags flags)`: Scatters values from s to `out[indices[i]]` if the mask value `mask[i]` is true. (since Kokkos 5.1)
 
 ### Global Typedefs
+
   * `template <class T> Kokkos::Experimental::native_simd`: Alias for `Kokkos::Experimental::simd<T, Kokkos::Experimental::simd_abi::native<T>>`. (deprecated since Kokkos 4.6)
   * `template <class T, int N> Kokkos::Experimental::simd`: Alias for `Kokkos::Experimental::basic_simd<T, ...>` (since Kokkos 4.6)
   * `Kokkos::Experimental::element_aligned_tag`: Alias for `Kokkos::Experimental::simd_flags<>`
