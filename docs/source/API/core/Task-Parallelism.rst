@@ -5,7 +5,7 @@ Task-Parallelism
     :language: cpp
 
 .. warning::
-   Deprecated since Kokkos 4.5, removed since Kokkos 5.0.
+   Deprecated since Kokkos 4.5, removed in Kokkos 5.0.
 
 Kokkos has support for lightweight task-based programming, which is currently pretty limited but we plan to substantially expand in the future.
 
