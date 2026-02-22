@@ -15,29 +15,35 @@ When configuring Kokkos with cmake, add the flag ``-DCMAKE_CXX_STANDARD=20`` (or
 
 How do I set up a debug build?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+To set up a debug build in Kokkos, you can choose between a full symbolic debug (slowest) or a "fast debug" that keeps optimizations while enabling safety checks.
+See the :ref:`Debugging section in the Configuration Guide <debugging>` for more information.
 
-Debug behavior in Kokoks is both affected by the build type and additional debug CMake options:
+1. **Standard (Full) Debug Build**
 
-1. CMake build type and compiler flags:
+   Use this for full source-level debugging (e.g., using GDB, LLDB, or cuda-gdb).
 
-   * ``CMAKE_BUILD_TYPE=Debug``: Commonly enables flags for debug symbols (``-g``) without specifying optimization flags. Enables ``Kokkos_ENABLE_DEBUG`` by default. Enables ``KOKKOS_ASSERT``.
+   * **CMake Flags:** ``-DCMAKE_BUILD_TYPE=Debug``
 
-   * ``CMAKE_BUILD_TYPE=RelWithDebInfo``: Commonly enables flags for debug symbols (``-g``) with optimization flags (``-O2``).
+   * **Effects**: Adds host debug symbols (``-g``), and enables ``KOKKOS_ASSERT``.
 
-   **NVCC Specifics:** To get full device debug symbols, you must manually add ``-DCMAKE_CXX_FLAGS="-G"`` and use ``nvcc_wrapper`` as ``CMAKE_CXX_COMPILER``. If building with ``-DKokkos_ENABLE_COMPILE_AS_CMAKE_LANGUAGE=ON``, specify ``-DCMAKE_CUDA_FLAGS="-G"`` instead.
+   * **NVCC Specifics:** To get full device-side symbolic information, you must manually add ``-DCMAKE_CXX_FLAGS="-G"`` and use ``nvcc_wrapper`` as ``CMAKE_CXX_COMPILER``.
 
    .. warning:: ``-G`` disables nearly all GPU optimizations and will significantly slow down your kernels.
 
-2. CMake options for tweaking debug settings:
 
-   ``Kokkos_ENABLE_DEBUG``
+2. **Fast Debug**
 
-   * Enables ``KOKKOS_ASSERT``. By default activated when compiling with ``CMAKE_BUILD_TYPE=Debug``.
+   This is a good compromise for development. It keeps optimizations enabled but turns on internal safety logic.
 
-   * **NVCC Specifics:** Only ``-lineinfo`` is added for device debug symbols. This provides source-line information for profilers (like Nsight) without the massive performance penalty of ``-G``.
+   * **CMake Flags:** ``-DCMAKE_BUILD_TYPE=RelWithDebInfo`` and ``-DKokkos_ENABLE_DEBUG=ON``
 
-   ``Kokkos_ENABLE_DEBUG_BOUNDS_CHECK``
+   * **Effects:** Keeps code fast (``-O2``) while still adding host debug symbols (``-g``) and enables ``KOKKOS_ASSERT``.
 
-   * Enables out-of-bounds checks in Views. Due to high overhead, this option is disabled for all build types by default.
+   * **NVCC Specifics:** Setting ``-DKokkos_ENABLE_DEBUG=ON`` automatically adds ``-lineinfo`` with NVCC. This provides source-line information for profilers (like Nsight) without the massive performance penalty of ``-G``. No extra flags are required for "fast" GPU debugging.
 
-   * Enabling this option implies synchronization after every kernel with the CUDA or HIP backend.
+
+3. **Bounds Checking**
+
+   By default, neither of the above options enables bounds checking due to the high overhead. To catch "out-of-bounds" errors in your Views:
+
+   * **CMake Flag:** ``-DKokkos_ENABLE_DEBUG_BOUNDS_CHECK=ON``
