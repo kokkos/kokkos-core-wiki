@@ -185,8 +185,8 @@ A solution to this is to use a `simd_mask` to construct a simd object:
 
 ```c++
 Kokkos::Experimental::simd<double> x;
-Kokkos::Experimental::simd_mask<double> mask([](std::size_t i) { return x[i] < 0; });
-Kokkos::Experimental::simd<double> r([](std::size_t i) { return (mask[i]) ? 0 : x[i]; });
+Kokkos::Experimental::simd_mask<double> mask([=](std::size_t i) { return x[i] < 0; });
+Kokkos::Experimental::simd<double> r([=](std::size_t i) { return (mask[i]) ? 0 : x[i]; });
 ```
 
 ### Ternary operator

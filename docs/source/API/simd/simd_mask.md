@@ -48,7 +48,7 @@ The second template parameter `Abi` is one of the pre-defined ABI types in the n
   * `template <class G> simd_mask(G&& gen)`: Generator constructor. The generator `gen` should be a callable type (e.g. functor) that can accept `std::integral_constant<std::size_t, i>()` as an argument and return something convertible to `bool`. Vector mask value `i` will be initialized to the value of `gen(std::integral_constant<std::size_t, i>())`.
 
 ### Value Access Methods
-  * `bool operator[](std::size_t) const`: returns the mask value `i`.
+  * `bool operator[](simd_size_t) const`: returns the mask value `i`.
   * `reference operator[](std::size_t)`: returns a reference to mask value `i` that can be modified. (removed in Kokkos 4.6)
 
 ### Boolean Operators

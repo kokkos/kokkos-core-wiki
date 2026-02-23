@@ -157,8 +157,8 @@ The second template parameter `Abi` is one of the pre-defined ABI types in the n
 
   * `template <class U, class Flags> void simd_unchecked_store(simd& s, U* mem, Flags flags)`: Stores the full vector of contiguous values starting at the address `mem`. `Flags` is the `simd_flags` that is used to describe the alignment at the address `mem`. (since Kokkos 5.0)
   * `template <class U, class Flags> void simd_unchecked_store(simd& s, U* mem, mask_type mask, Flags flags)`: Executes a masked store operation, storing vector value i at `mem[i]` if mask value mask[i] is true. `Flags` is the `simd_flags` that is used to describe the alignment at the address `mem`. (since Kokkos 5.0)
-  * `template <class U, class Flags> void simd_unchecked_store(simd& s, U* mem, Flags flags)`: Stores the full vector of contiguous values starting at the address `mem`. `Flags` is the `simd_flags` that is used to describe the alignment at the address `mem`. (since Kokkos 5.0)
-  * `template <class U, class Flags> void simd_unchecked_store(simd& s, U* mem, mask_type mask, Flags flags)`: Executes a masked store operation, storing vector value i at `mem[i]` if mask value mask[i] is true. `Flags` is the `simd_flags` that is used to describe the alignment at the address `mem`. (since Kokkos 5.0)
+  * `template <class U, class Flags> void simd_partial_store(simd& s, U* mem, Flags flags)`: Stores the full vector of contiguous values starting at the address `mem`. `Flags` is the `simd_flags` that is used to describe the alignment at the address `mem`. (since Kokkos 5.0)
+  * `template <class U, class Flags> void simd_partial_store(simd& s, U* mem, mask_type mask, Flags flags)`: Executes a masked store operation, storing vector value i at `mem[i]` if mask value mask[i] is true. `Flags` is the `simd_flags` that is used to describe the alignment at the address `mem`. (since Kokkos 5.0)
 
 ### Memory Permutes
 
