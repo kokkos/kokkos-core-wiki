@@ -127,7 +127,7 @@ There are at least three major approaches to dealing with this issue in general:
    using mask_type = Kokkos::Experimental::simd_mask<double>;
    constexpr int width = int(simd_type::size());
    for (int i = 0; i < n; i += width) {
-     mask_type mask([] (std::size_t lane) { return i + int(lane) < n; });
+     mask_type mask([=] (std::size_t lane) { return i + int(lane) < n; });
      simd_type sx = Kokkos::Experimental::simd_partial_load(x + i, mask, Kokkos::Experimental::simd_flag_default);
      simd_type sy = Kokkos::Experimental::simd_partial_load(y + i, mask, Kokkos::Experimental::simd_flag_default);
      simd_type sz = Kokkos::Experimental::simd_partial_load(z + i, mask, Kokkos::Experimental::simd_flag_default);
