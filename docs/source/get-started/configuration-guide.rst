@@ -201,6 +201,8 @@ CMake options for tweaking debug settings:
       * Debug check on dual views
       * (see below [#dual_view_modify_check]_)
 
+Also, see the :ref:`FAQ <setup-debug-build>` for debug configurations.
+
 .. [#dual_view_modify_check] ``Kokkos_ENABLE_DEBUG_DUALVIEW_MODIFY_CHECK`` default value is:
   
   * ``ON`` if ``CMAKE_BUILD_TYPE`` is ``Debug``, ``OFF`` otherwise (until Kokkos 4.7)
