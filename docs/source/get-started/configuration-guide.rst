@@ -166,7 +166,7 @@ General options
 Debugging
 ---------
 
-Debug behavior in Kokoks is both affected by the build type and additional debug CMake options:
+Debug behavior in Kokkos is both affected by the build type and additional debug CMake options:
 
 CMake build type and compiler flags:
    * ``CMAKE_BUILD_TYPE=Debug``: Commonly enables flags for debug symbols (``-g``) without specifying optimization flags. Enables ``Kokkos_ENABLE_DEBUG`` by default. Enables ``KOKKOS_ASSERT``.
