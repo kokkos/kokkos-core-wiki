@@ -110,6 +110,11 @@ SYCL
     struct sycl::is_device_copyable<MyComparator>
       : std::true_type {};
 
+Clang 22
+========
+
+Compiling our tests for `DynamicView` for rank 7 results in an internal compiler error on Clang 22 with Kokkos 5.x. We therefore disable the respective test for this compiler.
+
 
 Mathematical functions
 ======================
