@@ -113,7 +113,7 @@ SYCL
 Clang 22
 ========
 
-Compiling our tests for `DynamicView` for rank 7 results in an internal compiler error on Clang 22 with Kokkos 5.x. We therefore disable the respective test for this compiler.
+Compiling our tests for `DynRankView` for rank 7 results in an internal compiler error on Clang 22 with Kokkos 5.x. We therefore disable the respective test for this compiler.
 
 
 Mathematical functions
