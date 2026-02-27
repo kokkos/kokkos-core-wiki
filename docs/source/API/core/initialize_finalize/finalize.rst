@@ -1,5 +1,3 @@
-.. _kokkos_finalize:
-
 ``finalize``
 ============
 
@@ -8,7 +6,8 @@
 
 Defined in header ``<Kokkos_Core.hpp>``
 
-Usage:
+Usage
+-----
 
 .. code-block:: cpp
 
@@ -18,33 +17,25 @@ Terminates the Kokkos execution environment.
 This functions cleans up all Kokkos states and released the associated
 resources.
 Once this function is called, no Kokkos API functions (not even
-`Kokkos::initialize <initialize.html>`_) may be called, except for
-:cpp:func:`Kokkos::is_initialized() <is_initialized()>` or
-:cpp:func:`Kokkos::is_finalized() <is_finalized()>`.
-The user must ensure that all Kokkos objects (e.g. ``Kokkos::View``) are destroyed
-before ``Kokkos::finalize`` gets called.
+:cpp:func:`initialize`) may be called, except for :cpp:func:`is_initialized` or
+:cpp:func:`is_finalized`.
+The user must ensure that all Kokkos objects (e.g. :cpp:class:`View`) are destroyed
+before ``finalize`` gets called.
 
-Programs are ill-formed if they do not call this function after calling `Kokkos::initialize <initialize.html>`_.
+Programs are ill-formed if they do not call this function after calling
+:cpp:func:`initialize`, before program termination.
 
 Interface
 ---------
 
-.. code-block:: cpp
+.. cpp:function:: void finalize();
 
-    Kokkos::finalize();
+   :preconditions:
+     * :cpp:func:`is_initialized` returns ``true``
+     * :cpp:func:`is_finalized` returns ``false``
 
-Requirements
-~~~~~~~~~~~~
-* ``Kokkos::finalize`` must be called before ``MPI_Finalize`` if Kokkos is used in an MPI context.
-* ``Kokkos::finalize`` must be called after user initialized Kokkos objects are out of scope.
-
-Semantics
-~~~~~~~~~
-
-* :cpp:func:`Kokkos::is_initialized() <is_initialized()>` should return false after calling ``Kokkos::finalize``
-
-Example
-~~~~~~~
+Examples
+--------
 
 .. code-block:: cpp
 
@@ -58,8 +49,27 @@ Example
         Kokkos::finalize();
     }
 
+.. code-block:: cpp
+
+    #include <Kokkos_Core.hpp>
+    #include <cstdlib>
+
+    int main(int argc, char* argv[]) {
+        Kokkos::initialize(argc, argv);
+        std::atexit(Kokkos::finalize); // register to be called on program termination
+        Kokkos::View<double*> my_view("my_view", 10);
+    } // my_view is properly destructed before Kokkos::finalize
+
 
 See also
 --------
-* `Kokkos::initialize <initialize.html>`_: initializes the Kokkos execution environment
-* `Kokkos::push_finalize_hook <push_finalize_hook.html>`_: registers a function to be called on ``Kokkos::finalize()`` invocation
+
+.. seealso::
+
+  :doc:`ScopeGuard`
+    A RAII-based approach to ensure initialization and finalization are handled
+    correctly.
+  :doc:`push_finalize_hook`
+    Register a function to be called on finalize() invocation.
+  :doc:`is_initialized_or_finalized`
+    Query the current state of the Kokkos execution environment.

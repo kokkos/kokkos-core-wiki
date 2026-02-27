@@ -6,7 +6,8 @@
 
 Defined in header ``<KokkosCore.cpp>``
 
-Usage:
+Usage
+-----
 
 .. code-block:: cpp
 
@@ -15,11 +16,9 @@ Usage:
                     .set_device_id(0)
                     .set_disable_warnings(false);
 
-.. versionadded:: 3.7
-   ``InitializationSettings`` is a class that can be used to define the settings for
-   initializing Kokkos programmatically without having to call the two parameter
-   form (``argc`` and ``argv``) of `Kokkos::initialize() <initialize.html#kokkosinitialize>`_.
-   It was introduced as a replacement for the `Kokkos::InitArguments <InitArguments.html#kokkosInitArguments>`_ structure.
+``InitializationSettings`` is a class that can be used to define the settings
+for initializing Kokkos programmatically without having to call the two
+parameter form (``argc`` and ``argv``) of :cpp:func:`initialize`.
 
 Interface
 ---------
@@ -29,10 +28,6 @@ Interface
    .. cpp:function:: InitializationSettings();
 
       Constructs a new object that does not contain any value for any of the settings.
-
-   .. cpp:function:: InitializationSettings(InitArguments const& arguments);
-
-      **DEPRECATED** Converts the deprecated structure to a new object. Data members from the structure that compare equal to their default value are assumed to be unset. Let ``PARAMETER-NAME`` be a valid setting of type ``PARAMETER-TYPE`` as defined in the table below.
 
    .. cpp:function:: InitializationSettings& set_PARAMETER_NAME(PARAMETER_TYPE value);
 
@@ -78,7 +73,10 @@ Example
         Kokkos::finalize();
     }
 
-See also
-~~~~~~~~
+.. seealso::
 
-* `Kokkos::initialize <initialize.html#kokkosinitialize>`_: initializes the Kokkos execution environment
+  :doc:`initialize`
+    Start the Kokkos execution environment.
+  :doc:`ScopeGuard`
+    A RAII-based approach to ensure initialization and finalization are handled
+    correctly.

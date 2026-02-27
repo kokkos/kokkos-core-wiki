@@ -316,7 +316,7 @@ The lifetime of an allocation begins when a View is constructed by an allocating
 
 The lifetime of an allocation ends when there are no more Views which reference that allocation (see reference counting above).
 
-Kokkos requires that the lifetime of all allocations ends before the call to :ref:`Kokkos::finalize<kokkos_finalize>`.
+Kokkos requires that the lifetime of all allocations ends before the call to :cpp:func:`Kokkos::finalize <finalize>`.
 
 For example, the following is incorrect usage of Kokkos:
 

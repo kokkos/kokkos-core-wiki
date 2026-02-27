@@ -16,9 +16,9 @@ Usage
 Registers the callable object ``func`` to be called when the Kokkos execution
 environment is terminated.
 
-The functions registered via ``Kokkos::push_finalize_hook()`` will be called in
-reverse order when entering ``Kokkos::finalize()``, before releasing acquired
-resources and finalizing all backends.
+The functions registered via ``push_finalize_hook()`` will be called in reverse
+order when entering :cpp:func:`finalize`, before releasing acquired resources
+and finalizing all backends.
 
 If a function exits via a thrown exception, ``std::terminate`` is called.
 
@@ -28,7 +28,7 @@ Interface
 .. cpp:Function:: void push_finalize_hook(std::function<void()> func);
 
    Register the function object ``func`` to be called when entering
-   ``Kokkos::finalize()``
+   :cpp:func:`finalize`
 
 
 
@@ -65,4 +65,8 @@ Output:
 
 See also
 --------
-* `Kokkos::finalize <finalize.html>`_: terminates the Kokkos execution environment
+
+.. seealso::
+
+  :doc:`finalize`
+    Terminate the Kokkos execution environment

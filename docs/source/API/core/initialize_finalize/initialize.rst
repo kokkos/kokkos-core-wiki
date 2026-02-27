@@ -6,21 +6,22 @@
 
 Defined in header ``<Kokkos_Core.hpp>``
 
-Usage: 
+Usage 
+-----
 
 .. code-block:: cpp
 
     Kokkos::initialize(argc, argv);
-    Kokkos::initialize(Kokkos::InitializationSettings()  // (since 3.7)
+    Kokkos::initialize(Kokkos::InitializationSettings()
                            .set_disable_warnings(true)
                            .set_num_threads(8)
                            .set_map_device_id_by("random"));
+    Kokkos::initialize();
 
 Initializes the Kokkos execution environment.
 This function must be called before any other Kokkos API functions or
 constructors.  There are a small number of exceptions, such as
-:cpp:func:`Kokkos::is_initialized() <is_initialized()>` or
-:cpp:func:`Kokkos::is_finalized() <is_finalized()>`.
+:cpp:func:`is_initialized` or :cpp:func:`is_finalized`.
 Kokkos can be initialized at most once; subsequent calls are erroneous.
 
 The function has two overloads.
@@ -29,49 +30,40 @@ the command line arguments passed to the program from the environment in which
 the program is run.  Kokkos parses the arguments for the flags that it
 recognizes.  Whenever a Kokkos flag is seen, it is removed from ``argv``, and
 ``argc`` is decremented.
-The second one takes a `Kokkos::InitializationSettings <InitializationSettings.html#kokkosInitializationSettings>`_ class object
+The second one takes a :cpp:class:`InitializationSettings` class object
 which allows for programmatic control of arguments.
-`Kokkos::InitializationSettings <InitializationSettings.html#kokkosInitializationSettings>`_ is implicitly
-constructible from the ``Kokkos::InitArguments`` :sup:`deprecated in version 3.7`.
 
 Interface
 ---------
 
-.. code-block:: cpp
+.. cpp:function:: void initialize(int& argc, char* argv[]);
+.. cpp:function:: void initialize(const InitializationSettings& settings = {});
 
-    Kokkos::initialize(int& argc, char* argv[]);                 //             (1)
-    Kokkos::initialize(InitArguments const& arguments);          // (until 3.7) (2)
-    Kokkos::initialize(InitializationSettings const& settings);  // (since 3.7) (3)
-    
-Parameters
-~~~~~~~~~~
+   :param argc: Non-negative value, representing the number of command line
+     arguments passed to the program.
 
-* ``argc``: Non-negative value, representing the number of command line
-  arguments passed to the program.
-* ``argv``: Pointer to the first element of an array of ``argc + 1`` pointers,
-  of which the last one is null and the previous, if any, point to
-  null-terminated multibyte strings that represent the arguments passed to the
-  program.
-* ``arguments``: (deprecated since version 3.7) C-style ``struct`` object is
-  converted to ``Kokkos::InitializationSettings`` for backward compatibility.
-* ``settings``: ``class`` object that contains settings to control the
-  initialization of Kokkos.
+   :param argv: Pointer to the first element of an array of ``argc + 1``
+     pointers, of which the last one is null and the previous, if any, point to
+     null-terminated multibyte strings that represent the arguments passed to
+     the program.
 
-Requirements
-~~~~~~~~~~~~
+   :param settings: ``class`` object that contains settings to control the
+     initialization of Kokkos.
 
-* ``Kokkos::finalize`` must be called after ``Kokkos::initialize``.
-* ``Kokkos::initialize`` generally should be called after ``MPI_Init`` when Kokkos is initialized within an MPI context.
-* User-initiated Kokkos objects cannot be constructed until after ``Kokkos::initialize`` is called.
-* ``Kokkos::initialize`` may not be called after a call to ``Kokkos::finalize``.
+   :preconditions:
+     * :cpp:func:`is_initialized` returns ``false``
+     * :cpp:func:`is_finalized` returns ``false``
 
-Semantics
-~~~~~~~~~
 
-* After calling ``Kokkos::initialize``, :cpp:func:`Kokkos::is_initialized() <is_initialized()>` should return true.
+Note
+----
+.. important::
+
+   ``Kokkos::initialize`` generally should be called after ``MPI_Init`` when
+   Kokkos is initialized within an MPI context.
 
 Example
-~~~~~~~
+-------
 
 .. code-block:: cpp
 
@@ -88,5 +80,12 @@ Example
 See also
 --------
 
-* `Kokkos::InitializationSettings <InitializationSettings.html#kokkosInitializationSettings>`_
-* `Kokkos::ScopeGuard <ScopeGuard.html#kokkosScopeGuard>`_
+.. seealso::
+
+  :doc:`finalize`
+    Terminate the Kokkos execution environment.
+  :doc:`ScopeGuard`
+    A RAII-based approach to ensure initialization and finalization are handled
+    correctly.
+  :doc:`is_initialized_or_finalized`
+    Query the current state of the Kokkos execution environment.
