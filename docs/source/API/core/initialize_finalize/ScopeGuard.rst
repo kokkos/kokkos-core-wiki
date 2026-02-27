@@ -12,54 +12,38 @@ Usage
 .. code-block:: cpp
 
     Kokkos::ScopeGuard guard(argc, argv);
-    Kokkos::ScopeGuard guard(Kokkos::InitializationSettings()  // (since 3.7)
+    Kokkos::ScopeGuard guard(Kokkos::InitializationSettings()
                                 .set_map_device_id_by("random")
                                 .set_num_threads(1));
+    Kokkos::ScopeGuard guard;
 
 
-``ScopeGuard`` is a class to initialize and finalize Kokkos using `RAII <https://en.cppreference.com/w/cpp/language/raii>`_.
-It calls `Kokkos::initialize <initialize.html#kokkosinitialize>`_ with the provided arguments in the
-constructor and `Kokkos::finalize <finalize.html#kokkosfinalize>`_ in the destructor.
-For correct usage, it is mandatory to create a named instance of a ``ScopeGuard`` before any calls to Kokkos are issued.
+``ScopeGuard`` is a class to initialize and finalize Kokkos using `RAII
+<https://en.cppreference.com/w/cpp/language/raii>`_.
+It calls :cpp:func:`initialize` with the provided arguments in the constructor
+and :cpp:func:`finalize` in the destructor.
 
-
-.. warning:: Change of behavior in version 3.7 (see below). ``ScopeGuard`` will abort if either :cpp:func:`is_initialized()` or :cpp:func:`is_finalized()` return ``true``.
-
-Description
------------
+Interface
+---------
 
 .. cpp:class:: ScopeGuard
 
-    A class calling ``Kokkos::initialize`` at the start of its lifetime and ``Kokkos::finalize`` at the end of its lifetime.
-
-    .. rubric:: Constructors
-
-    .. cpp:function:: ScopeGuard(int& argc, char* argv[]);
-
-       :param argc: number of command line arguments
-       :param argv: array of character pointers to null-terminated strings storing the command line arguments
-
-       .. warning:: Valid until 3.7
-
-    .. cpp:function:: ScopeGuard(InitArguments const& arguments = InitArguments());
-
-       :param arguments: ``struct`` object with valid initialization arguments
-
-       .. warning:: Valid until 3.7
+    A class calling :cpp:func:`initialize` at the start of its lifetime and
+    :cpp:func:`finalize` at the end of its lifetime.
 
     .. cpp:function:: template <class... Args> ScopeGuard(Args&&... args);
 
-        :param args: arguments to pass to `Kokkos::initialize <initialize.html#kokkosinitialize>`_
+        :param args: arguments to pass to :cpp:func:`initialize`
 
 	Possible implementation:
 
 	.. code-block:: cpp
 
-	   template <class... Args> ScopeGuard(Args&&... args){ initialize(std::forward<Args>(args)...); }
+	   template <class... Args> ScopeGuard(Args&&... args){
+             initialize(std::forward<Args>(args)...);
+           }
 
     .. cpp:function:: ~ScopeGuard();
-
-       Destructor
 
        Possible implementation:
 
@@ -86,35 +70,40 @@ Description
 Notes
 -----
 
-- In the constructors, all the parameters are passed to the ``Kokkos::initialize`` called internally.
-  See `Kokkos::initialize <initialize.html#kokkosinitialize>`_ for more details.
+.. caution::
 
+  Using ``ScopeGuard`` is mutually exclusive with calling
+  :cpp:func:`initialize` and :cpp:func:`finalize` directly.
+  Furthermore, only a single ``ScopeGuard`` object can be created during the
+  lifetime of the program, and most Kokkos functionality can only be used
+  during the lifetime of that object.
 
-- Since Kokkos version 3.7, ``ScopeGuard`` unconditionally forwards the provided
-  arguments to `Kokkos::initialize <initialize.html#kokkosinitialize>`_, which means they have the same
+  .. code-block:: cpp
+
+     Kokkos::ScopeGuard(argc, argv);  // Temporary object get destroyed immediately and
+     //                ^                 the Kokkos execution environment is finalized with it
+     //                Forgot to define a named variable
+     Kokkos::View<int> v("v");  // ERROR Kokkos finalized
+
+.. note::
+
+  ``ScopeGuard`` unconditionally forwards the provided
+  arguments to :cpp:func:`initialize`, which means they have the same
   preconditions.  Until version 3.7, ``ScopeGuard`` was calling
-  ``Kokkos::initialize`` in its constructor only if ``Kokkos::is_initialized()`` was
-  ``false``, and it was calling ``Kokkos::finalize`` in its destructor only if it
-  called ``Kokkos::initialize`` in its constructor.
+  :cpp:func:`initialize` in its constructor if and only if :cpp:func:`is_initialized` would return
+  ``false``, and it was calling :cpp:func:`finalize` in its destructor if and only if it
+  called :cpp:func:`initialize` in its constructor.
 
   We dropped support for the old behavior.  If you think you really need it, you may do:
 
   .. code-block:: cpp
 
-      auto guard = std::unique_ptr<Kokkos::ScopeGuard>(
-	  Kokkos::is_initialized() ? new Kokkos::ScopeGuard() : nullptr);
-
-  or
-
-  .. code-block:: cpp
-
-      auto guard = Kokkos::is_initialized() ? std::make_optional<Kokkos::ScopeGuard>()
-					  : std::nullopt;
-
-  with C++17.  This will work regardless of the Kokkos version.
+    auto guard = Kokkos::is_initialized()
+                     ? std::make_optional<Kokkos::ScopeGuard>()
+                     : std::nullopt;
 
 Example
-~~~~~~~
+-------
 
 .. code-block:: cpp
 
@@ -127,6 +116,11 @@ Example
 
 
 See also
-~~~~~~~~
+--------
 
-`Kokkos::initialize <initialize.html#kokkosinitialize>`_, `Kokkos::finalize <finalize.html#kokkosfinalize>`_
+.. seealso::
+
+  :doc:`initialize`
+    Start the Kokkos execution environment.
+  :doc:`finalize`
+    Terminate the Kokkos execution environment.
