@@ -72,8 +72,11 @@ Notes
 
 .. caution::
 
-  For correct usage, it is mandatory to create a named instance of a
-  ``ScopeGuard`` before any calls to Kokkos are issued.
+  Using ``ScopeGuard`` is mutually exclusive with calling
+  :cpp:func:`initialize` and :cpp:func:`finalize` directly.
+  Furthermore, only a single ``ScopeGuard`` object can be created during the
+  lifetime of the program, and most Kokkos functionality can only be used
+  during the lifetime of that object.
 
   .. code-block:: cpp
 
