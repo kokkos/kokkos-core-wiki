@@ -62,6 +62,36 @@ HIP
 SYCL
 ====
 
+- Compiling with debug symbols might result in compilation errors such as
+
+  .. code-block:: console
+
+     /usr/lib/../lib64/crti.o: in function `_init':
+     /home/abuild/rpmbuild/BUILD/glibc-2.31/csu/../sysdeps/x86_64/crti.S:68:(.init+0x7): relocation truncated to fit: R_X86_64_REX_GOTPCRELX against undefined symbol `__gmon_start__'
+     /tmp/icpx-7201809d34/KokkosKernels_EagerInitialize-d3f517.o: in function `KokkosKernels::eager_initialize()':
+     /tmp/Trilinos/packages/kokkos-kernels/common/src/KokkosKernels_EagerInitialize.cpp:33:(.text+0x34): relocation truncated to fit: R_X86_64_REX_GOTPCRELX against symbol `typeinfo for std::runtime_error@@GLIBCXX_3.4' defined in .data.rel.ro section in /opt/aurora/24.347.0/spack/unified/0.9.2/install/linux-sles15-x86_64/gcc-13.3.0/gcc-13.3.0-4enwbrb/lib/gcc/x86_64-pc-linux-gnu/13.3.0/../../../../lib64/libstdc++.so
+     /tmp/Trilinos/packages/kokkos-kernels/common/src/KokkosKernels_EagerInitialize.cpp:33:(.text+0x3b): relocation truncated to fit: R_X86_64_REX_GOTPCRELX against symbol `std::runtime_error::~runtime_error()@@GLIBCXX_3.4' defined in .text section in /opt/aurora/24.347.0/spack/unified/0.9.2/install/linux-sles15-x86_64/gcc-13.3.0/gcc-13.3.0-4enwbrb/lib/gcc/x86_64-pc-linux-gnu/13.3.0/../../../../lib64/libstdc++.so
+     /tmp/icpx-7201809d34/KokkosKernels_EagerInitialize-d3f517.o: in function `sycl::_V1::detail::(anonymous namespace)::__sycl_device_global_registration::__sycl_device_global_registration()':
+     /tmp/icpx-f67500da4c/KokkosKernels_EagerInitialize-footer-f7ef7c.h:6:(.text.startup+0x4): relocation truncated to fit: R_X86_64_PC32 against `.bss'
+     /tmp/icpx-f67500da4c/KokkosKernels_EagerInitialize-footer-f7ef7c.h:7:(.text.startup+0x17): relocation truncated to fit: R_X86_64_PC32 against `.bss'
+     /tmp/icpx-7201809d34/KokkosKernels_EagerInitialize-d3f517.o: in function `std::_Rb_tree_header::_Rb_tree_header()':
+     /opt/aurora/24.347.0/spack/unified/0.9.2/install/linux-sles15-x86_64/gcc-13.3.0/gcc-13.3.0-4enwbrb/lib/gcc/x86_64-pc-linux-gnu/13.3.0/../../../../include/c++/13.3.0/bits/stl_tree.h:175:(.text.startup+0x29): relocation truncated to fit: R_X86_64_PC32 against `.bss'
+     /opt/aurora/24.347.0/spack/unified/0.9.2/install/linux-sles15-x86_64/gcc-13.3.0/gcc-13.3.0-4enwbrb/lib/gcc/x86_64-pc-linux-gnu/13.3.0/../../../../include/c++/13.3.0/bits/stl_tree.h:175:(.text.startup+0x34): relocation truncated to fit: R_X86_64_PC32 against `.bss'
+     /opt/aurora/24.347.0/spack/unified/0.9.2/install/linux-sles15-x86_64/gcc-13.3.0/gcc-13.3.0-4enwbrb/lib/gcc/x86_64-pc-linux-gnu/13.3.0/../../../../include/c++/13.3.0/bits/stl_tree.h:175:(.text.startup+0x3b): relocation truncated to fit: R_X86_64_PC32 against `.bss'
+     /tmp/icpx-7201809d34/KokkosKernels_EagerInitialize-d3f517.o: in function `std::_Rb_tree_header::_M_reset()':
+     /opt/aurora/24.347.0/spack/unified/0.9.2/install/linux-sles15-x86_64/gcc-13.3.0/gcc-13.3.0-4enwbrb/lib/gcc/x86_64-pc-linux-gnu/13.3.0/../../../../include/c++/13.3.0/bits/stl_tree.h:208:(.text.startup+0x42): relocation truncated to fit: R_X86_64_PC32 against `.bss'
+     /opt/aurora/24.347.0/spack/unified/0.9.2/install/linux-sles15-x86_64/gcc-13.3.0/gcc-13.3.0-4enwbrb/lib/gcc/x86_64-pc-linux-gnu/13.3.0/../../../../include/c++/13.3.0/bits/stl_tree.h:209:(.text.startup+0x4d): relocation truncated to fit: R_X86_64_PC32 against `.bss'
+     /opt/aurora/24.347.0/spack/unified/0.9.2/install/linux-sles15-x86_64/gcc-13.3.0/gcc-13.3.0-4enwbrb/lib/gcc/x86_64-pc-linux-gnu/13.3.0/../../../../include/c++/13.3.0/bits/stl_tree.h:210:(.text.startup+0x54): additional relocation overflows omitted from the output
+     packages/kokkos-kernels/libkokkoskernels.so.16.2.0: PC-relative offset overflow in PLT entry for `_ZN10KokkosBlas4Impl15Nrm2_MV_FunctorIN6Kokkos4SYCLENS2_4ViewIPdJNS2_18SYCLDeviceUSMSpaceEEEENS4_IPPKdJNS2_10LayoutLeftENS2_6DeviceIS3_S6_EENS2_12MemoryTraitsILj1EEEEEElED2Ev'
+
+  this is fixed by adding ``-flink-huge-device-code``, also see https://www.intel.com/content/www/us/en/docs/dpcpp-cpp-compiler/developer-guide-reference/2025-2/flink-huge-device-code.html, to the link line for the respective target, e.g.,
+
+  .. code-block:: console
+    
+     cmake -D CMAKE_EXE_LINKER_FLAGS="-fsycl -flink-huge-device-code"
+
+  for executables.
+
 - Several of the Kokkos algorithm functions use third-party libraries like oneDPL.
   When using these, Kokkos doesn't control the kernel launch and thus the user has to make sure that all arguments
   that are forwarded to the TPL satisfy the sycl::is_device_copyable trait to avoid compiler errors. This holds true in particular
