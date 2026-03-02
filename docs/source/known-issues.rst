@@ -84,7 +84,13 @@ SYCL
      /opt/aurora/24.347.0/spack/unified/0.9.2/install/linux-sles15-x86_64/gcc-13.3.0/gcc-13.3.0-4enwbrb/lib/gcc/x86_64-pc-linux-gnu/13.3.0/../../../../include/c++/13.3.0/bits/stl_tree.h:210:(.text.startup+0x54): additional relocation overflows omitted from the output
      packages/kokkos-kernels/libkokkoskernels.so.16.2.0: PC-relative offset overflow in PLT entry for `_ZN10KokkosBlas4Impl15Nrm2_MV_FunctorIN6Kokkos4SYCLENS2_4ViewIPdJNS2_18SYCLDeviceUSMSpaceEEEENS4_IPPKdJNS2_10LayoutLeftENS2_6DeviceIS3_S6_EENS2_12MemoryTraitsILj1EEEEEElED2Ev'
 
-  this is fixed by compiling with ``-flink-huge-device-code`` , also see https://www.intel.com/content/www/us/en/docs/dpcpp-cpp-compiler/developer-guide-reference/2025-2/flink-huge-device-code.html.
+  this is fixed by adding ``-flink-huge-device-code``, also see https://www.intel.com/content/www/us/en/docs/dpcpp-cpp-compiler/developer-guide-reference/2025-2/flink-huge-device-code.html, to the link line for the respective target, e.g.,
+
+  .. code-block:: console
+    
+     cmake -D CMAKE_EXE_LINKER_FLAGS="-fsycl -flink-huge-device-code"
+
+  for executables.
 
 - Several of the Kokkos algorithm functions use third-party libraries like oneDPL.
   When using these, Kokkos doesn't control the kernel launch and thus the user has to make sure that all arguments
