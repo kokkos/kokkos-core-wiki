@@ -93,7 +93,7 @@ void MyKokkosFunction(double* a, const double** b, int n, int m) {
   // Allocate the view in the memory space of ExecutionSpace
   t_1d_device_view d_a("a",n);
   // Create a host copy of that view
-  typename t_1d_device_view::HostMirror h_a = create_mirror_view(a);
+  typename t_1d_device_view::host_mirror_type h_a = create_mirror_view(a);
   // Copy the data from the external allocation into the host view
   parallel_for(RangePolicy<host_space>(0,n),
     KOKKOS_LAMBDA (const int& i) {
@@ -105,7 +105,7 @@ void MyKokkosFunction(double* a, const double** b, int n, int m) {
   // Allocate a 2D view in the memory space of ExecutionSpace
   t_2d_device_view d_b("b",n,m);
   // Create a host copy of that view
-  typename t_2d_device_view::HostMirror h_b = create_mirror_view(b);
+  typename t_2d_device_view::host_mirror_type h_b = create_mirror_view(b);
 
   // Get the member_type of the team policy
   typedef TeamPolicy<host_space>::member_type t_team;
