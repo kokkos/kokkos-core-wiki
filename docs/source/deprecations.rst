@@ -28,7 +28,7 @@ Deprecated in Kokkos 5.0
    * Not intended for non-internal use.
 
 * ``[const_]where_expression``
-   * replacment: none
+   * replacement: none
    * Does not align with std::simd interface.
 
 * ``View::HostMirror``
