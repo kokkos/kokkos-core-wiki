@@ -104,29 +104,8 @@ Unlike runtime function calls, ``constexpr`` functions and variables generate
 compile-time values that can affect the structure of types, the size of objects,
 and template instantiations. When ``KOKKOS_IF_ON_HOST`` and
 ``KOKKOS_IF_ON_DEVICE`` are used in ``constexpr`` contexts, they cause the same
-function or variable to have different compile-time values on the host versus
-the device—similar to using architecture-specific preprocessor macros like
-``#ifdef __AVX2__`` in different translation units.
-
-This is analogous to the following problematic pattern:
-
-.. code-block:: cpp
-
-    // DO NOT DO THIS - ODR violation
-    static constexpr int foo() {
-      #ifdef __AVX2__
-        return 4;
-      #else
-        return 2;
-      #endif
-    }
-
-If you compile this code in two different translation units with different
-compiler flags (one with AVX2 and one without) and then link them together, you
-have an ODR violation because the same function has different definitions.
-
-The same principle applies to host/device compilation: a ``constexpr`` function
-that returns different values on host and device violates the ODR.
+function or variable to have different compile-time values or types on the host versus
+the device, potentially leading to ODR violations.
 
 Examples of ODR Violations
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -170,7 +149,25 @@ different captures, violating the ODR.
 Correct Alternatives
 ^^^^^^^^^^^^^^^^^^^^
 
-**Alternative 1: Use non-**``constexpr`` **runtime function**
+**Alternative 1 (Preferred): Use template specialization**
+
+If possible use template specialization on execution
+spaces:
+
+.. code-block:: cpp
+
+    // This is OK - different specializations
+    template<typename ExecutionSpace>
+    struct BlockSize {
+      static constexpr int value = 2; // Default for devices
+    };
+
+    template<>
+    struct BlockSize<Kokkos::DefaultHostExecutionSpace> {
+      static constexpr int value = 4; // Specialized for host
+    };
+
+**Alternative 2: Use non-**``constexpr`` **runtime function**
 
 If the value doesn't need to be a compile-time constant, simply remove
 ``constexpr``:
@@ -183,7 +180,7 @@ If the value doesn't need to be a compile-time constant, simply remove
       KOKKOS_IF_ON_DEVICE((return 2;))
     }
 
-**Alternative 2: Move** ``KOKKOS_IF_ON_*`` **to calling context**
+**Alternative 3: Move** ``KOKKOS_IF_ON_*`` **to calling context**
 
 If you need compile-time constants, move the conditional compilation up one
 level:
@@ -202,23 +199,6 @@ level:
       ))
     }
 
-**Alternative 3 (Preferred): Use template specialization**
-
-If possible use template specialization on execution
-spaces:
-
-.. code-block:: cpp
-
-    // This is OK - different specializations
-    template<typename ExecutionSpace>
-    struct BlockSize {
-      static constexpr int value = 2; // Default for devices
-    };
-
-    template<>
-    struct BlockSize<Kokkos::DefaultHostExecutionSpace> {
-      static constexpr int value = 4; // Specialized for host
-    };
 
 Best Practices
 --------------
