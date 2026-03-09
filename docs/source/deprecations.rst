@@ -33,43 +33,43 @@ Deprecated in Kokkos 5.0
 
 * ``View::HostMirror``
    * replacement: ``View::host_mirror_type``
-   * Consistency
+   * naming style consistency
 
 * ``{DynRankView,OffsetView,View}::scalar_array_type``
    * replacement: ``{DynRankView,OffsetView,View}::data_type``
-   * Consistency
+   * Only relevant for certain external partial specializations of ``{DynRankView, OffsetView, View}`` with the pre Kokkos 5 ``View`` implementation. Equal to ``data_type`` in most cases.
 
 * ``{DynRankView,OffsetView,View}::const_scalar_array_type``
    * replacement: ``{DynRankView,OffsetView,View}::const_data_type``
-   * Consistency
+   * Only relevant for certain external partial specializations of ``{DynRankView, OffsetView, View}`` with the pre Kokkos 5 ``View`` implementation. Equal to ``const_data_type`` in most cases.
 
 * ``{DynRankView,OffsetView,View}::non_const_scalar_array_type``
    * replacement: ``{DynRankView,OffsetView,View}::non_const_data_type``
-   * Consistency
+   * Only relevant for certain external partial specializations of ``{DynRankView, OffsetView, View}`` with the pre Kokkos 5 ``View`` implementation. Equal to ``non_const_data_type`` in most cases.
 
 * ``{DynRankView,OffsetView,View}::array_type``
    * replacement: ``{DynRankView,OffsetView,View}::type``
-   * Consistency
+   * ``array`` is an extremely outdated reference to ``View``.
 
 * ``DynamicView::array_type``
    * replacement: ``DynamicView::uniform_type``
-   * Consistency
+   * consistency with ``View``
 
 * ``ErrorReporter::getCapacity``
    * replacement: ``ErrorReporter::capacity``
-   * Consistency
+   * naming style consistency
 
 * ``ErrorReporter::getNumReports``
    * replacement: ``ErrorReporter::num_reports``
-   * Consistency
+   * naming style consistency
 
 * ``ErrorReporter::getNumReportAttempts``
    * replacement: ``ErrorReporter::num_report_attempts``
-   * Consistency
+   * naming style consistency
 
 * ``ErrorReporter::getReports``
    * replacement: ``ErrorReporter::get_reports``
-   * Consistency
+   * naming style consistency
 
 Deprecated in Kokkos 4.x
 ===========================
