@@ -13,6 +13,11 @@ Library Fundamentals, ISO/IEC TS 19568:2017, a draft of which can be found `here
 
 The original C++ proposal can be found at `here <https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2015/n4436.pdf>`.
 
+.. warning::
+   Prior to C++20, The Detection Idiom was the best-in-class mechanism for detecting embedded typedefs and the
+   validity of C++ expressions.  Concepts, the language feature added in C++20, is superior to and easier to
+   use than The Detection Idiom and should be the first approach going forward.
+
 API
 ---
 
@@ -97,8 +102,75 @@ API
 Examples
 --------
 
-Detecting an expression
-~~~~~~~~~~~~~~~~~~~~~~~
+Detecting an expression via Concepts
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _Concepts: https://eel.is/c++draft/concepts
+
+Suppose we wanted to detect if a given type ``T`` is copy assignable.
+
+First, we write a concept to detect it:
+
+.. code-block:: cpp
+
+   template<class T>
+   concept CopyAssignable = requires(T& lhs, const T& rhs) {
+      lhs = rhs;
+   };
+
+Then, constrain a function template:
+
+.. code-block:: cpp
+
+   template<class U>
+       requires(CopyAssignable<U>)
+   void DoSomething(U& u) {
+    // ...
+   }
+
+
+Better:
+
+.. code-block:: cpp
+
+   template<CopyAssignable U>
+   void DoSomething(U& u) {
+    // ...
+   }
+
+If we also wanted to check that the return type of the copy assignment is ``T&``, we would use:
+
+.. code-block:: cpp
+
+   #include <concepts>
+
+   template<class T>
+   concept CanonicalCopyAssignable = requires(T& lhs, const T& rhs) {
+       { lhs = rhs } -> std::same_as<T&>;
+   };
+
+.. important::
+   Both Kokkos and the C++ standard library have
+   already defined many concepts. One should prefer to use those over rolling your own,
+   as they are both standardized and are rigorous about covering corner cases.
+   The concepts provided by the standard library can be found at 
+   <https://eel.is/c++draft/concepts> (although this list may contain concepts added since C++20).
+
+Constraining a function template with the standard library concept:
+
+.. code-block:: cpp
+
+   #include <concepts>
+
+   template<class U>
+       requires std::assignable_from<U&, const U&>
+   void DoSomething(U& u) {
+    // ...
+   }
+
+
+Detecting an expression using The Detection Idiom
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Suppose we needed to write a type trait to detect if a given type ``T`` is copy assignable. First we write an archetype helper alias:
 
