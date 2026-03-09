@@ -173,7 +173,10 @@ CMake build type and compiler flags:
 
    * ``CMAKE_BUILD_TYPE=RelWithDebInfo``: Commonly enables flags for debug symbols (``-g``) with optimization flags (``-O2``).
 
-   **NVCC Specifics:** To get full device debug symbols, you must manually add ``-DCMAKE_CXX_FLAGS="-G"`` and use ``nvcc_wrapper`` as ``CMAKE_CXX_COMPILER``. If building with ``-DKokkos_ENABLE_COMPILE_AS_CMAKE_LANGUAGE=ON``, specify ``-DCMAKE_CUDA_FLAGS="-G"`` instead.
+   **NVCC Specifics:** To get full device debug symbols, you must manually add 
+    * ``-DCMAKE_CXX_FLAGS="-G"`` 
+    * use ``nvcc_wrapper`` as ``CMAKE_CXX_COMPILER``. 
+    * If building with ``-DKokkos_ENABLE_COMPILE_AS_CMAKE_LANGUAGE=ON``, specify ``-DCMAKE_CUDA_FLAGS="-G"`` instead.
 
    .. warning:: ``-G`` disables nearly all GPU optimizations and will significantly slow down your kernels.
 
