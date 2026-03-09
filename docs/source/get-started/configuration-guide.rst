@@ -161,8 +161,27 @@ General options
       * Aggressively vectorize loops
       * ``OFF``
 
+.. _debugging:
+
 Debugging
 ---------
+
+Debug behavior in Kokkos is both affected by the build type and additional debug CMake options:
+
+CMake build type and compiler flags:
+   * ``CMAKE_BUILD_TYPE=Debug``: Commonly enables flags for debug symbols (``-g``) without specifying optimization flags. Enables ``Kokkos_ENABLE_DEBUG`` by default. Enables ``KOKKOS_ASSERT``.
+
+   * ``CMAKE_BUILD_TYPE=RelWithDebInfo``: Commonly enables flags for debug symbols (``-g``) with optimization flags (``-O2``).
+
+   **NVCC Specifics:** To get full device debug symbols, you must manually add
+    * ``CMAKE_CXX_FLAGS="-G"`` use ``nvcc_wrapper`` as ``CMAKE_CXX_COMPILER``.
+    * If building with ``Kokkos_ENABLE_COMPILE_AS_CMAKE_LANGUAGE=ON``, specify ``CMAKE_CUDA_FLAGS="-G"`` instead.
+
+   .. warning:: ``-G`` disables nearly all GPU optimizations and will significantly slow down your kernels.
+
+
+The following options allow to toggle specific debugging features regardless of the build type.
+
 .. list-table::
     :widths: 25 65 35
     :header-rows: 1
@@ -173,22 +192,18 @@ Debugging
       - Default
 
     * * ``Kokkos_ENABLE_DEBUG``
-      * Activate extra debug features - may increase compile times [#enable_debug]_
+      * Activate extra debug features such as ``KOKKOS_ASSERT`` - may increase compile times. Adds ``-lineinfo`` to the compiler flags when compiling with ``nvcc``.
       * ``ON`` if ``CMAKE_BUILD_TYPE`` is ``Debug``, ``OFF`` otherwise
 
     * * ``Kokkos_ENABLE_DEBUG_BOUNDS_CHECK``
-      * Use bounds checking - will increase runtime
+      * Use bounds checking - will increase runtime. Implies synchronization after every kernel with the CUDA or HIP backend
       * ``OFF``
 
     * * ``Kokkos_ENABLE_DEBUG_DUALVIEW_MODIFY_CHECK`` :red:`[Deprecated since 4.7]`
       * Debug check on dual views
       * (see below [#dual_view_modify_check]_)
 
-
-.. [#enable_debug] ``Kokkos_ENABLE_DEBUG``
-
-  * ``Kokkos_ENABLE_DEBUG=ON`` does not imply the CMake ``Debug`` build type.  For full debug executable use ``Debug`` as build type.
-  * See :ref:`FAQ <setup-debug-build>`.
+Also, see the :ref:`FAQ <setup-debug-build>` for recommended "Full debug" or "Fast debug" configurations.
 
 .. [#dual_view_modify_check] ``Kokkos_ENABLE_DEBUG_DUALVIEW_MODIFY_CHECK`` default value is:
   
