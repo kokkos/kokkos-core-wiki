@@ -94,7 +94,7 @@ accessible outside of it.
 
 These macros **must not** be used in a context that requires a ``constexpr``
 (constant expression). Using ``KOKKOS_IF_ON_HOST`` or ``KOKKOS_IF_ON_DEVICE``
-within ``constexpr`` functions or to initialize ``constexpr`` variables leads to
+within ``constexpr`` functions or to initialize ``constexpr`` variables can lead to
 **One Definition Rule (ODR) violations** and undefined behavior.
 
 Why This Is Problematic
