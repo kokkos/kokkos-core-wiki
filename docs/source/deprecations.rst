@@ -1,6 +1,76 @@
 Deprecations
 ************
 
+Deprecated in Kokkos 5.x
+===========================
+
+Deprecated in Kokkos 5.0
+---------------------------
+
+* ``KOKKOS_ATTRIBUTE_NODISCARD``
+   * replacement: none
+   * Not intended for non-internal use.
+
+* ``{Owning,Observing}RawPtr``
+   * replacement: none
+   * Not intended for non-internal use.
+
+* Nested OpenMP parallel usage without nested OpenMP enabled
+   * replacement: none
+   * Avoids using a buggy code path when compiled without deprecated code.
+
+* ``OpenMP`` instance creation inside of OpenMP parallel regions
+   * replacement: none
+   * Avoids ``partition_space`` aborting when the number of threads for a partition is 0.
+
+* ``Random_XorShift{64,1024}_Pool::init``
+   * replacmement: none
+   * Not intended for non-internal use.
+
+* ``[const_]where_expression``
+   * replacement: none
+   * Does not align with std::simd interface.
+
+* ``View::HostMirror``
+   * replacement: ``View::host_mirror_type``
+   * Consistency
+
+* ``{DynRankView,OffsetView,View}::scalar_array_type``
+   * replacement: ``{DynRankView,OffsetView,View}::data_type``
+   * Consistency
+
+* ``{DynRankView,OffsetView,View}::const_scalar_array_type``
+   * replacement: ``{DynRankView,OffsetView,View}::const_data_type``
+   * Consistency
+
+* ``{DynRankView,OffsetView,View}::non_const_scalar_array_type``
+   * replacement: ``{DynRankView,OffsetView,View}::non_const_data_type``
+   * Consistency
+
+* ``{DynRankView,OffsetView,View}::array_type``
+   * replacement: ``{DynRankView,OffsetView,View}::type``
+   * Consistency
+
+* ``DynamicView::array_type``
+   * replacement: ``DynamicView::uniform_type``
+   * Consistency
+
+* ``ErrorReporter::getCapacity``
+   * replacement: ``ErrorReporter::capacity``
+   * Consistency
+
+* ``ErrorReporter::getNumReports``
+   * replacement: ``ErrorReporter::num_reports``
+   * Consistency
+
+* ``ErrorReporter::getNumReportAttempts``
+   * replacement: ``ErrorReporter::num_report_attempts``
+   * Consistency
+
+* ``ErrorReporter::getReports``
+   * replacement: ``ErrorReporter::get_reports``
+   * Consistency
+
 Deprecated in Kokkos 4.x
 ===========================
 
