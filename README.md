@@ -8,7 +8,7 @@ This is needed just for local render of documentation, so it can be checked befo
 Requirements are in `build_requirements.txt`
 Could be installed with: `pip install -r build_requirements.txt`
 
-We recommend using a virtual environment, e.g. if your system python is >= 3.12:
+We recommend using a virtual environment, e.g. if your system Python is >= 3.12:
 
 ```sh
 python -m venv venv
