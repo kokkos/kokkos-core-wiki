@@ -76,11 +76,6 @@ SYCL
      /tmp/icpx-f67500da4c/KokkosKernels_EagerInitialize-footer-f7ef7c.h:7:(.text.startup+0x17): relocation truncated to fit: R_X86_64_PC32 against `.bss'
      /tmp/icpx-7201809d34/KokkosKernels_EagerInitialize-d3f517.o: in function `std::_Rb_tree_header::_Rb_tree_header()':
      /opt/aurora/24.347.0/spack/unified/0.9.2/install/linux-sles15-x86_64/gcc-13.3.0/gcc-13.3.0-4enwbrb/lib/gcc/x86_64-pc-linux-gnu/13.3.0/../../../../include/c++/13.3.0/bits/stl_tree.h:175:(.text.startup+0x29): relocation truncated to fit: R_X86_64_PC32 against `.bss'
-     /opt/aurora/24.347.0/spack/unified/0.9.2/install/linux-sles15-x86_64/gcc-13.3.0/gcc-13.3.0-4enwbrb/lib/gcc/x86_64-pc-linux-gnu/13.3.0/../../../../include/c++/13.3.0/bits/stl_tree.h:175:(.text.startup+0x34): relocation truncated to fit: R_X86_64_PC32 against `.bss'
-     /opt/aurora/24.347.0/spack/unified/0.9.2/install/linux-sles15-x86_64/gcc-13.3.0/gcc-13.3.0-4enwbrb/lib/gcc/x86_64-pc-linux-gnu/13.3.0/../../../../include/c++/13.3.0/bits/stl_tree.h:175:(.text.startup+0x3b): relocation truncated to fit: R_X86_64_PC32 against `.bss'
-     /tmp/icpx-7201809d34/KokkosKernels_EagerInitialize-d3f517.o: in function `std::_Rb_tree_header::_M_reset()':
-     /opt/aurora/24.347.0/spack/unified/0.9.2/install/linux-sles15-x86_64/gcc-13.3.0/gcc-13.3.0-4enwbrb/lib/gcc/x86_64-pc-linux-gnu/13.3.0/../../../../include/c++/13.3.0/bits/stl_tree.h:208:(.text.startup+0x42): relocation truncated to fit: R_X86_64_PC32 against `.bss'
-     /opt/aurora/24.347.0/spack/unified/0.9.2/install/linux-sles15-x86_64/gcc-13.3.0/gcc-13.3.0-4enwbrb/lib/gcc/x86_64-pc-linux-gnu/13.3.0/../../../../include/c++/13.3.0/bits/stl_tree.h:209:(.text.startup+0x4d): relocation truncated to fit: R_X86_64_PC32 against `.bss'
      /opt/aurora/24.347.0/spack/unified/0.9.2/install/linux-sles15-x86_64/gcc-13.3.0/gcc-13.3.0-4enwbrb/lib/gcc/x86_64-pc-linux-gnu/13.3.0/../../../../include/c++/13.3.0/bits/stl_tree.h:210:(.text.startup+0x54): additional relocation overflows omitted from the output
      packages/kokkos-kernels/libkokkoskernels.so.16.2.0: PC-relative offset overflow in PLT entry for `_ZN10KokkosBlas4Impl15Nrm2_MV_FunctorIN6Kokkos4SYCLENS2_4ViewIPdJNS2_18SYCLDeviceUSMSpaceEEEENS4_IPPKdJNS2_10LayoutLeftENS2_6DeviceIS3_S6_EENS2_12MemoryTraitsILj1EEEEEElED2Ev'
 
