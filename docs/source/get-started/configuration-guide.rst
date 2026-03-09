@@ -178,7 +178,7 @@ CMake build type and compiler flags:
    .. warning:: ``-G`` disables nearly all GPU optimizations and will significantly slow down your kernels.
 
 
-CMake options for tweaking debug settings:
+The following options allow to toggle specific debugging features regardless of the build type.
 
 .. list-table::
     :widths: 25 65 35
@@ -201,7 +201,7 @@ CMake options for tweaking debug settings:
       * Debug check on dual views
       * (see below [#dual_view_modify_check]_)
 
-Also, see the :ref:`FAQ <setup-debug-build>` for debug configurations.
+Also, see the :ref:`FAQ <setup-debug-build>` for recommended "Full debug" or "Fast debug" configurations.
 
 .. [#dual_view_modify_check] ``Kokkos_ENABLE_DEBUG_DUALVIEW_MODIFY_CHECK`` default value is:
   
