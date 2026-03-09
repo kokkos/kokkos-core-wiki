@@ -15,7 +15,6 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - run: pip install -r build_requirements.txt
-      - run: apt update && apt --yes --no-install-recommends install graphviz
       - name: Build documentation
         working-directory: ${{ env.docs-directory }}
         run: |
