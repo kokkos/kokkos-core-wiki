@@ -4,6 +4,11 @@ Detection Idiom
 .. role:: cpp(code)
     :language: cpp
 
+.. attention::
+   Prior to C++20, the Detection Idiom was the best-in-class mechanism for detecting embedded typedefs and the
+   validity of C++ expressions.  Concepts, the language feature added in C++20, is superior to and easier to
+   use than the Detection Idiom and should be the first approach going forward.
+
 The Detection Idiom is used to recognize, in an SFINAE-friendly way, the validity of any C++ expression.
 
 Header File: ``<Kokkos_DetectionIdiom.hpp>``
@@ -97,8 +102,75 @@ API
 Examples
 --------
 
-Detecting an expression
-~~~~~~~~~~~~~~~~~~~~~~~
+Detecting an expression via Concepts
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _Concepts: https://eel.is/c++draft/concepts
+
+Suppose we wanted to detect if a given type ``T`` is copy assignable.
+
+First, we write a concept to detect it:
+
+.. code-block:: cpp
+
+   template<class T>
+   concept CopyAssignable = requires(T& lhs, const T& rhs) {
+      lhs = rhs;
+   };
+
+Then, constrain a function template:
+
+.. code-block:: cpp
+
+   template<class U>
+       requires(CopyAssignable<U>)
+   void DoSomething(U& u) {
+    // ...
+   }
+
+
+Alternate terse syntax:
+
+.. code-block:: cpp
+
+   template<CopyAssignable U>
+   void DoSomething(U& u) {
+    // ...
+   }
+
+If we also wanted to check that the return type of the copy assignment is ``T&``, we would use:
+
+.. code-block:: cpp
+
+   #include <concepts>
+
+   template<class T>
+   concept CanonicalCopyAssignable = requires(T& lhs, const T& rhs) {
+       { lhs = rhs } -> std::same_as<T&>;
+   };
+
+.. important::
+   Both Kokkos and the C++ standard library have
+   already defined many concepts. One should prefer to use those over rolling your own.
+   Besides being standardized, they are rigorous about covering corner cases.
+   The concepts provided by the standard library can be found at 
+   <https://eel.is/c++draft/concepts> (although this list may contain concepts added since C++20).
+
+Constraining a function template with the standard library concept ``std::assignable_from``:
+
+.. code-block:: cpp
+
+   #include <concepts>
+
+   template<class U>
+       requires std::assignable_from<U&, const U&>
+   void DoSomething(U& u) {
+    // ...
+   }
+
+
+Detecting an expression via The Detection Idiom
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Suppose we needed to write a type trait to detect if a given type ``T`` is copy assignable. First we write an archetype helper alias:
 
@@ -121,8 +193,47 @@ If we also wanted to check that the return type of the copy assignment is ``T&``
     template<class T>
     using is_canonical_copy_assignable = Kokkos::is_detected_exact<T&, copy_assign_t, T>;
 
-Detecting a nested typedef
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+Detecting a nested typedef via Concepts
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Suppose we want to use a nested ``MyType::difference_type`` if it exists, otherwise, we want to use ``std::ptrdiff_t``:
+
+First, we need a concept to detect if ``MyType`` has a nested ``difference_type``:
+
+.. code-block:: cpp
+
+   template<class T>
+   concept HasDifferenceType = requires {
+       typename T::difference_type;
+   };
+
+Next, we write a helper struct to extract the type:
+
+.. code-block:: cpp
+
+   template<class In, class U>
+   struct Select {
+       using type = U;
+   };
+
+   template<class In, class U>
+       requires HasDifferenceType<In>
+   struct Select<In, U> {
+       using type = typename In::difference_type;
+   };
+
+   template<class In, class U>
+   using Select_t = typename Select<In, U>::type;
+
+Then we can declare our type:
+
+.. code-block:: cpp
+
+   using our_difference_type = Select_t<MyType, std::ptrdiff_t>;
+
+
+Detecting a nested typedef via The Detection Idiom
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Suppose we want to use a nested ``MyType::difference_type`` if it exists, otherwise, we want to use ``std::ptrdiff_t``:
 
