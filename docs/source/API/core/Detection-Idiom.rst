@@ -4,7 +4,7 @@ Detection Idiom
 .. role:: cpp(code)
     :language: cpp
 
-.. important::
+.. attention::
    Prior to C++20, the Detection Idiom was the best-in-class mechanism for detecting embedded typedefs and the
    validity of C++ expressions.  Concepts, the language feature added in C++20, is superior to and easier to
    use than the Detection Idiom and should be the first approach going forward.
