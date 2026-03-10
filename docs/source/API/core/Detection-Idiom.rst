@@ -4,6 +4,11 @@ Detection Idiom
 .. role:: cpp(code)
     :language: cpp
 
+.. important::
+   Prior to C++20, the Detection Idiom was the best-in-class mechanism for detecting embedded typedefs and the
+   validity of C++ expressions.  Concepts, the language feature added in C++20, is superior to and easier to
+   use than the Detection Idiom and should be the first approach going forward.
+
 The Detection Idiom is used to recognize, in an SFINAE-friendly way, the validity of any C++ expression.
 
 Header File: ``<Kokkos_DetectionIdiom.hpp>``
@@ -12,11 +17,6 @@ The Kokkos Detection Idiom is based upon the detection idiom from Version 2 of t
 Library Fundamentals, ISO/IEC TS 19568:2017, a draft of which can be found `here <https://cplusplus.github.io/fundamentals-ts/v2.html#meta.detect>`.
 
 The original C++ proposal can be found at `here <https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2015/n4436.pdf>`.
-
-.. warning::
-   Prior to C++20, The Detection Idiom was the best-in-class mechanism for detecting embedded typedefs and the
-   validity of C++ expressions.  Concepts, the language feature added in C++20, is superior to and easier to
-   use than The Detection Idiom and should be the first approach going forward.
 
 API
 ---
@@ -129,7 +129,7 @@ Then, constrain a function template:
    }
 
 
-Better:
+Alternate terse syntax:
 
 .. code-block:: cpp
 
@@ -151,12 +151,12 @@ If we also wanted to check that the return type of the copy assignment is ``T&``
 
 .. important::
    Both Kokkos and the C++ standard library have
-   already defined many concepts. One should prefer to use those over rolling your own,
-   as they are both standardized and are rigorous about covering corner cases.
+   already defined many concepts. One should prefer to use those over rolling your own.
+   Besides being standardized, they are rigorous about covering corner cases.
    The concepts provided by the standard library can be found at 
    <https://eel.is/c++draft/concepts> (although this list may contain concepts added since C++20).
 
-Constraining a function template with the standard library concept:
+Constraining a function template with the standard library concept ``std::assignable_from``:
 
 .. code-block:: cpp
 
@@ -169,8 +169,8 @@ Constraining a function template with the standard library concept:
    }
 
 
-Detecting an expression using The Detection Idiom
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Detecting an expression via The Detection Idiom
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Suppose we needed to write a type trait to detect if a given type ``T`` is copy assignable. First we write an archetype helper alias:
 
@@ -193,8 +193,47 @@ If we also wanted to check that the return type of the copy assignment is ``T&``
     template<class T>
     using is_canonical_copy_assignable = Kokkos::is_detected_exact<T&, copy_assign_t, T>;
 
-Detecting a nested typedef
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+Detecting a nested typedef via Concepts
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Suppose we want to use a nested ``MyType::difference_type`` if it exists, otherwise, we want to use ``std::ptrdiff_t``:
+
+First, we need a concept to detect if ``MyType`` has a nested ``difference_type``:
+
+.. code-block:: cpp
+
+   template<class T>
+   concept HasDifferenceType = requires {
+       typename T::difference_type;
+   }
+
+Next, we write a helper struct to extract the type:
+
+.. code-block:: cpp
+
+   template<class L, class R>
+   struct LNestedTypeOrR {
+       using type = R;
+   };
+
+   template<class L, class R>
+       requires HasDifferenceType<L>
+   struct LNestedTypeOrR<L, R> {
+       using type = typename L::difference_type;
+   };
+
+   template<class L, class R>
+   using LNestedTypeOrR_t = LNestedTypeOrR<L, R>::type;
+
+Then we can declare our type:
+
+.. code-block:: cpp
+
+   using our_difference_type = LNestedTypeOrR_t<MyType, std::ptrdiff_t>;
+
+
+Detecting a nested typedef via The Detection Idiom
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Suppose we want to use a nested ``MyType::difference_type`` if it exists, otherwise, we want to use ``std::ptrdiff_t``:
 
