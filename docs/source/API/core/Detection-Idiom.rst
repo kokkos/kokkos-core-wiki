@@ -205,31 +205,31 @@ First, we need a concept to detect if ``MyType`` has a nested ``difference_type`
    template<class T>
    concept HasDifferenceType = requires {
        typename T::difference_type;
-   }
+   };
 
 Next, we write a helper struct to extract the type:
 
 .. code-block:: cpp
 
-   template<class L, class R>
-   struct LNestedTypeOrR {
-       using type = R;
+   template<class In, class U>
+   struct Select {
+       using type = U;
    };
 
-   template<class L, class R>
-       requires HasDifferenceType<L>
-   struct LNestedTypeOrR<L, R> {
-       using type = typename L::difference_type;
+   template<class In, class U>
+       requires HasDifferenceType<In>
+   struct Select<In, U> {
+       using type = typename In::difference_type;
    };
 
-   template<class L, class R>
-   using LNestedTypeOrR_t = LNestedTypeOrR<L, R>::type;
+   template<class In, class U>
+   using Select_t = typename Select<In, U>::type;
 
 Then we can declare our type:
 
 .. code-block:: cpp
 
-   using our_difference_type = LNestedTypeOrR_t<MyType, std::ptrdiff_t>;
+   using our_difference_type = Select_t<MyType, std::ptrdiff_t>;
 
 
 Detecting a nested typedef via The Detection Idiom
