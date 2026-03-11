@@ -93,7 +93,7 @@ Deprecated in Kokkos 4.6
 ---------------------------
 
 * ``StaticCrsGraph`` moved to Kokkos Kernels
-   * ``KokkosSparse::StaticCrsGraph``
+   * replacement: ``KokkosSparse::StaticCrsGraph``
    * aligns better with functionality provided by ``KokkosKernels``.
 
 * ``native_simd`` and ``native_simd_mask`` types
@@ -206,7 +206,7 @@ Deprecated in Kokkos 4.3
    * replacement: none
    * uniformity between execution spaces
 
-* ``HIP::HIP::detect_device_count()``
+* ``HIP::detect_device_count()``
    * replacement: ``num_devices()``
    * uniformity between execution spaces
 
@@ -281,3 +281,7 @@ Deprecated in Kokkos 4.0
 * ``ScratchMemorySpace::align(const IntType& size)``
    * replacement: none
    * unused, not useful
+
+* static ``ExecutionSpace::concurrency()``
+   * replacement: non-static ``ExecutionSpace::concurrency()`` member function
+   * concurrency is a property of an execution space instance, not of its type
