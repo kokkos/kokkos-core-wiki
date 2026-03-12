@@ -157,7 +157,7 @@ or
       FetchContent_Declare(
           Kokkos
           URL https://github.com/kokkos/kokkos/archive/refs/tags/4.4.01.tar.gz
-          FIND_PACKAGE_ARGS
+          FIND_PACKAGE_ARGS 4.2 CONFIG 
       )
       FetchContent_MakeAvailable(Kokkos)
 
