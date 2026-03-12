@@ -162,7 +162,7 @@ or
       )
       FetchContent_MakeAvailable(Kokkos)
 
-   The `FIND_PACKAGE_ARGS <https://cmake.org/cmake/help/latest/module/FetchContent.html#integrating-with-find-package>` option tells CMake to first try to find ``Kokkos`` via ``find_package`` before downloading it via ``FetchContent``.
+   The `FIND_PACKAGE_ARGS <https://cmake.org/cmake/help/latest/module/FetchContent.html#integrating-with-find-package>` keyword tells CMake to first try call ``find_package()`` with the provided arguments, before downloading it via ``FetchContent``.
    To always prefer to fetch ``Kokkos``, use the `OVERRIDE_FIND_PACKAGE <https://cmake.org/cmake/help/latest/module/FetchContent.html#integrating-with-find-package>` option:
 
    .. code-block:: cmake
