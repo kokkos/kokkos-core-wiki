@@ -155,6 +155,7 @@ or
    As in the above example, for trying to find Kokkos via `find_package()` first before falling back to download and build from source, one can use the following terser syntax:
 
    .. code-block:: cmake
+
       FetchContent_Declare(
           Kokkos
           URL https://github.com/kokkos/kokkos/archive/refs/tags/4.4.01.tar.gz
@@ -166,6 +167,7 @@ or
    To always prefer to fetch ``Kokkos``, use the `OVERRIDE_FIND_PACKAGE <https://cmake.org/cmake/help/latest/module/FetchContent.html#integrating-with-find-package>` option:
 
    .. code-block:: cmake
+
       FetchContent_Declare(
           Kokkos
           URL https://github.com/kokkos/kokkos/archive/refs/tags/4.4.01.tar.gz
