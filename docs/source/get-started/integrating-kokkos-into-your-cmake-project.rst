@@ -127,13 +127,8 @@ or an embedded version, providing flexibility for different build environments.
   # ...
   target_link_libraries(MyTarget PRIVATE Kokkos::kokkos)
 
-
 Controlling the Kokkos integration:
 
-* `OVERRIDE_FIND_PACKAGE <https://cmake.org/cmake/help/latest/module/FetchContent.html#integrating-with-find-package>`:
-  Add this option to the ``FetchContent_Declare`` call of ``Kokkos`` to use the fetched ``Kokkos`` to satisfy all following ``find_package(Kokkos)`` calls.
-  This implies the fetched version of ``Kokkos`` fulfills the version requirement of all ``find_package(Kokkos)`` calls.
-  Requires CMake >= 3.24.
 * `CMAKE_DISABLE_FIND_PACKAGE_Kokkos <https://cmake.org/cmake/help/latest/variable/CMAKE_DISABLE_FIND_PACKAGE_PackageName.html>`_:
   Set this variable to ``TRUE`` to force the use of the embedded Kokkos, even if
   an external installation is found.
@@ -154,3 +149,28 @@ or
 .. code-block:: sh
 
   cmake -DCMAKE_DISABLE_FIND_PACKAGE_Kokkos=ON
+
+.. note::
+   Using CMake > 3.24, there is an alternative way of integrating both ``find_package`` and ``FetchContent_Declare``:
+
+   .. code-block:: cmake
+      FetchContent_Declare(
+          Kokkos
+          URL https://github.com/kokkos/kokkos/archive/refs/tags/4.4.01.tar.gz
+          FIND_PACKAGE_ARGS
+      )
+      FetchContent_MakeAvailable(Kokkos)
+
+   The `FIND_PACKAGE_ARGS <https://cmake.org/cmake/help/latest/module/FetchContent.html#integrating-with-find-package>` option tells CMake to first try to find ``Kokkos`` via ``find_package`` before downloading it via ``FetchContent``.
+   To always prefer to fetch ``Kokkos``, use the `OVERRIDE_FIND_PACKAGE <https://cmake.org/cmake/help/latest/module/FetchContent.html#integrating-with-find-package>` option:
+
+   .. code-block:: cmake
+      FetchContent_Declare(
+          Kokkos
+          URL https://github.com/kokkos/kokkos/archive/refs/tags/4.4.01.tar.gz
+          OVERRIDE_FIND_PACKAGE
+      )
+      FetchContent_MakeAvailable(Kokkos)
+
+   This option tells CMake to use the fetched ``Kokkos`` to satisfy all following ``find_package(Kokkos)`` calls.
+   This implies the fetched version of ``Kokkos`` fulfills the version requirement of all ``find_package(Kokkos)`` calls.
