@@ -130,6 +130,10 @@ or an embedded version, providing flexibility for different build environments.
 
 Controlling the Kokkos integration:
 
+* `OVERRIDE_FIND_PACKAGE <https://cmake.org/cmake/help/latest/module/FetchContent.html#integrating-with-find-package>`:
+  Add this option to the ``FetchContent_Declare`` call of ``Kokkos`` to use the fetched ``Kokkos`` to satisfy all following ``find_package(Kokkos)`` calls.
+  This implies the fetched version of ``Kokkos`` fulfills the version requirement of all ``find_package(Kokkos)`` calls.
+  Requires CMake >= 3.24.
 * `CMAKE_DISABLE_FIND_PACKAGE_Kokkos <https://cmake.org/cmake/help/latest/variable/CMAKE_DISABLE_FIND_PACKAGE_PackageName.html>`_:
   Set this variable to ``TRUE`` to force the use of the embedded Kokkos, even if
   an external installation is found.
