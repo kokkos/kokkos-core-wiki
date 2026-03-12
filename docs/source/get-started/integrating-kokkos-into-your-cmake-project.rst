@@ -151,7 +151,8 @@ or
   cmake -DCMAKE_DISABLE_FIND_PACKAGE_Kokkos=ON
 
 .. note::
-   Using CMake > 3.24, there is an alternative way of integrating both ``find_package`` and ``FetchContent_Declare``:
+   CMake version >= 3.24 introduced canonical ways of integrating ``FetchContent`` with ``find_package()``.
+   As in the above example, for trying to find Kokkos via `find_package()` first before falling back to download and build from source, one can use the following terser syntax:
 
    .. code-block:: cmake
       FetchContent_Declare(
