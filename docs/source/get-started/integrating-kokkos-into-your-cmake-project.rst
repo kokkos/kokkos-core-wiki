@@ -171,7 +171,8 @@ or
           URL https://github.com/kokkos/kokkos/archive/refs/tags/4.4.01.tar.gz
           OVERRIDE_FIND_PACKAGE
       )
-      FetchContent_MakeAvailable(Kokkos)
+      # The following will automatically forward through to FetchContent_MakeAvailable()
+      find_package(Kokkos 4.4 CONFIG)
 
    This option tells CMake to use the fetched ``Kokkos`` to satisfy all following ``find_package(Kokkos)`` calls.
    This implies the fetched version of ``Kokkos`` fulfills the version requirement of all ``find_package(Kokkos)`` calls.
