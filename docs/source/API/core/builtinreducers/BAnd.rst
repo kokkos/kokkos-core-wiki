@@ -4,7 +4,7 @@
 .. role:: cpp(code)
     :language: cpp
 
-Specific implementation of `ReducerConcept <ReducerConcept.html>`_ performing bitwise ``AND`` operation
+Specific implementation of :doc:`ReducerConcept <ReducerConcept>` performing bitwise ``AND`` operation
 
 Header File: ``<Kokkos_Core.hpp>``
 
@@ -104,4 +104,4 @@ Additional Information
 
 * Requires: ``Scalar`` has ``operator =`` and ``operator &`` defined. ``Kokkos::reduction_identity<Scalar>::band()`` is a valid expression.
 
-* In order to use BAnd with a custom type, a template specialization of ``Kokkos::reduction_identity<CustomType>`` must be defined. See `Built-In Reducers with Custom Scalar Types <../../../ProgrammingGuide/Custom-Reductions-Built-In-Reducers-with-Custom-Scalar-Types.html>`_ for details
+* In order to use BAnd with a custom type, a template specialization of ``Kokkos::reduction_identity<CustomType>`` must be defined. See :doc:`Built-In Reducers with Custom Scalar Types <../../../ProgrammingGuide/Custom-Reductions-Built-In-Reducers-with-Custom-Scalar-Types>` for details

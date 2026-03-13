@@ -10,15 +10,6 @@ Header File: ``<Kokkos_ScatterView.hpp>``
 
    ``ScatterView`` is still in the namespace ``Kokkos::Experimental``
 
-
-.. _parallelReduce: ../core/parallel-dispatch/parallel_reduce.html
-
-.. |parallelReduce| replace:: :cpp:func:`parallel_reduce`
-
-.. _View: ../core/view/view.html
-
-.. |View| replace:: ``View``
-
 .. |reset| replace:: ``reset()``
 
 .. |access| replace:: ``access()``
@@ -30,7 +21,7 @@ Header File: ``<Kokkos_ScatterView.hpp>``
 Usage
 -----
 
-A Kokkos ScatterView serves as an interface for a standard Kokkos::|View|_ implementing a scatter-add pattern either via atomics or data replication.
+A Kokkos ScatterView serves as an interface for a standard Kokkos:::cpp:class:`View` implementing a scatter-add pattern either via atomics or data replication.
 
 Construction of a ScatterView can be expensive, so you should try to reuse the same one if possible, in which case, you should call |reset|_ between uses.
 
@@ -181,7 +172,7 @@ Description
 .. cpp:function:: contribute(View<DT1, VP...>& dest, Kokkos::Experimental::ScatterView<DT2, LY, ES, OP, CT, DP> const& src)
 
    convenience function to perform final reduction of ScatterView
-   results into a resultant View; may be called following |parallelReduce|_.
+   results into a resultant View; may be called following :doc:`parallel_reduce <../core/parallel-dispatch/parallel_reduce>`.
 
 
 Example

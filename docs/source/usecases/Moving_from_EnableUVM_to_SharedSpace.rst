@@ -22,14 +22,14 @@ The accesses in ``parallel_for``, ``parallel_reduce``, or ``parallel_scan`` do n
 The alternative
 ---------------
 
-We introduced a new alias named |SharedSpace|_ in Kokkos 4.0. This always points to memory that is accessible by every |ExecutionSpace|_ and is migrated without user interaction to the accessing ``ExecutionSpace`` on demand. After migration the memory is accessed locally.
+We introduced a new alias named :doc:`SharedSpace <../API/core/memory_spaces>` in Kokkos 4.0. This always points to memory that is accessible by every :doc:`ExecutionSpace <../API/core/execution_spaces>` and is migrated without user interaction to the accessing ``ExecutionSpace`` on demand. After migration the memory is accessed locally.
 Using the alias e.g. in ``Views`` is expressive and thus easier to read. Furthermore, it is portable to every backend that can automatically migrate memory between ``ExecutionSpaces``.
-Furthermore, we introduced the alias |SharedHostPinnedSpace|_ which points to memory that is accessible by all enabled ``ExecutionSpaces`` but always resides in the memory of the host.
+Furthermore, we introduced the alias :doc:`SharedHostPinnedSpace <../API/core/memory_spaces>` which points to memory that is accessible by all enabled ``ExecutionSpaces`` but always resides in the memory of the host.
 
 The transition
 --------------
 
-Basically it comes down to spelling |KokkosSharedSpace|_ as a template argument in all allocations.
+Basically it comes down to spelling :doc:`Kokkos::SharedSpace <../API/core/memory_spaces>` as a template argument in all allocations.
 Below is an example of a transition:
 
 * Code requiring ``Kokkos_ENABLE_CUDA_UVM`` at configure time (until 4.0)

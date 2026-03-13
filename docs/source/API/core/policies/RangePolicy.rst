@@ -87,7 +87,7 @@ Parameters
 General Template Arguments
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Valid template arguments for ``RangePolicy`` are described `here <../Execution-Policies.html#common-arguments-for-all-execution-policies>`_
+Valid template arguments for ``RangePolicy`` are described :doc:`here <../Execution-Policies>`
 
 Public Class Members
 --------------------

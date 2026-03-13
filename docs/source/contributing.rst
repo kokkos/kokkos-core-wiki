@@ -22,7 +22,7 @@ License
 ^^^^^^^
 Note that by contributing to Kokkos Core, you agree to the **Apache License 2.0
 with LLVM Exception**. This allows your contributions to be used in
-closed-source commercial contexts. See the `LICENSE <license.html>`__ for
+closed-source commercial contexts. See the :doc:`LICENSE <license>` for
 details. Authors retain copyright on their own contributions.
 
 Developer Certificate of Origin (DCO)

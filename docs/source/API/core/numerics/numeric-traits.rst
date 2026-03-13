@@ -131,14 +131,6 @@ Individual traits are SFINAE-friendly, you can detect value presence/absence.
 
 **See also**
 
-.. _MathematicalConstants : mathematical-constants.html
+:doc:`Mathematical constants <mathematical-constants>`
 
-.. |MathematicalConstants| replace:: Mathematical constants
-
-.. _CommonMathematicalFunctions : mathematical-functions.html 
-
-.. |CommonMathematicalFunctions| replace:: Common mathematical functions
-
-|MathematicalConstants|_
-
-|CommonMathematicalFunctions|_
+:doc:`Common mathematical functions <mathematical-functions>`

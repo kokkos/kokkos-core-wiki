@@ -14,7 +14,7 @@ Users are responsible for updating the modified flags manually if they change th
 Users may also synchronize data by calling the ``sync()`` method, which is templated on the device that requires synchronization (i.e., the target of the one-way copy operation).
 
 The DualView class also provides convenience methods such as realloc, resize and capacity
-which call the appropriate methods of the underlying `Kokkos::View <../core/view/view.html>`_ objects.
+which call the appropriate methods of the underlying :doc:`Kokkos::View <../core/view/view>` objects.
 
 The four template arguments are the same as those of ``Kokkos::View``.
 
@@ -27,7 +27,7 @@ The four template arguments are the same as those of ``Kokkos::View``.
   and one in host memory. Otherwise, DualView will only store one View.
 
 * MemoryTraits (optional) The user's intended memory access behavior. Please see the documentation
-  of `Kokkos::View <../core/view/view.html>`_ for examples. The default suffices for most users.
+  of :doc:`Kokkos::View <../core/view/view>` for examples. The default suffices for most users.
 
 Usage
 -----

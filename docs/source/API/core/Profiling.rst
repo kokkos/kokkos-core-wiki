@@ -3,11 +3,11 @@ Profiling
 
 Kokkos::Profiling::ScopedRegion
 -------------------------------
-See `Profiling::ScopedRegion <profiling/scoped_region.html>`_ for details.`
+See :doc:`Profiling::ScopedRegion <profiling/scoped_region>` for details.`
 
 Kokkos::Profiling::ProfilingSection
 -----------------------------------
-See `Profiling::ProfilingSection <profiling/profiling_section.html>`_ for details.`
+See :doc:`Profiling::ProfilingSection <profiling/profiling_section>` for details.`
 
 .. toctree::
    :hidden:

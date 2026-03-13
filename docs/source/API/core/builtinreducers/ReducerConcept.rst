@@ -4,7 +4,7 @@
 .. role:: cpp(code)
     :language: cpp
 
-The concept of a Reducer is the abstraction that defines the "how" a "Reduction" is performed during the parallel reduce execution pattern. The abstraction of "what" is given as a template parameter and corresponds to the "what" that is being reduced in the `parallel_reduce <../parallel-dispatch/parallel_reduce.html>`_ operation. This page describes the definitions and functions expected from a Reducer with a hypothetical 'Reducer' class definition. A brief description of built-in reducers is also included.
+The concept of a Reducer is the abstraction that defines the "how" a "Reduction" is performed during the parallel reduce execution pattern. The abstraction of "what" is given as a template parameter and corresponds to the "what" that is being reduced in the :doc:`parallel_reduce <../parallel-dispatch/parallel_reduce>` operation. This page describes the definitions and functions expected from a Reducer with a hypothetical 'Reducer' class definition. A brief description of built-in reducers is also included.
 
 Header File: ``<Kokkos_Core.hpp>``
 
@@ -119,20 +119,20 @@ is commutative and associative with identity element that can be set by calling 
 Built-In Reducers
 ~~~~~~~~~~~~~~~~~
 
-Kokkos provides a number of built-in reducers that automatically work with the intrinsic C++ types as well as ``Kokkos::complex``. In order to use a Built-in reducer with a custom type, a template specialization of ``Kokkos::reduction_identity<CustomType>`` must be defined. A simple example is shown below and more information can be found under `Custom Reductions <../../../ProgrammingGuide/Custom-Reductions.html>`_.
+Kokkos provides a number of built-in reducers that automatically work with the intrinsic C++ types as well as ``Kokkos::complex``. In order to use a Built-in reducer with a custom type, a template specialization of ``Kokkos::reduction_identity<CustomType>`` must be defined. A simple example is shown below and more information can be found under :doc:`Custom Reductions <../../../ProgrammingGuide/Custom-Reductions>`.
 
-* `Kokkos::BAnd <BAnd.html>`_
-* `Kokkos::BOr <BOr.html>`_
-* `Kokkos::LAnd <LAnd.html>`_
-* `Kokkos::LOr <LOr.html>`_
-* `Kokkos::Max <Max.html>`_
-* `Kokkos::MaxLoc <MaxLoc.html>`_
-* `Kokkos::Min <Min.html>`_
-* `Kokkos::MinLoc <MinLoc.html>`_
-* `Kokkos::MinMax <MinMax.html>`_
-* `Kokkos::MinMaxLoc <MinMaxLoc.html>`_
-* `Kokkos::Prod <Prod.html>`_
-* `Kokkos::Sum <Sum.html>`_
+* :doc:`Kokkos::BAnd <BAnd>`
+* :doc:`Kokkos::BOr <BOr>`
+* :doc:`Kokkos::LAnd <LAnd>`
+* :doc:`Kokkos::LOr <LOr>`
+* :doc:`Kokkos::Max <Max>`
+* :doc:`Kokkos::MaxLoc <MaxLoc>`
+* :doc:`Kokkos::Min <Min>`
+* :doc:`Kokkos::MinLoc <MinLoc>`
+* :doc:`Kokkos::MinMax <MinMax>`
+* :doc:`Kokkos::MinMaxLoc <MinMaxLoc>`
+* :doc:`Kokkos::Prod <Prod>`
+* :doc:`Kokkos::Sum <Sum>`
 
 Examples
 --------

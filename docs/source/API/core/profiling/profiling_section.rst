@@ -55,4 +55,4 @@ The ``ProfilingSection`` class is non-copyable.
 
 **See also**
 
-`ScopedRegion <scoped_region.html>`_: implements a scope-based region ownership wrapper
+:doc:`ScopedRegion <scoped_region>`: implements a scope-based region ownership wrapper

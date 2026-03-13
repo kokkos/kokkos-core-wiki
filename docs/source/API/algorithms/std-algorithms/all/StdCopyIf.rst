@@ -94,10 +94,7 @@ Overload set accepting a team handle
 Parameters and Requirements
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. |copy| replace:: ``copy``
-.. _copy: ./StdCopy.html
-
-- ``exespace``, ``teamHandle``, ``first_from``, ``last_from``, ``first_to``, ``view_from``, ``view_to``: same as in |copy|_
+- ``exespace``, ``teamHandle``, ``first_from``, ``last_from``, ``first_to``, ``view_from``, ``view_to``: same as in :doc:`copy <./StdCopy>`
 
 - ``label``:
 

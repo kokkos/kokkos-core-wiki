@@ -63,10 +63,7 @@ Overload set accepting a team handle
 Parameters and Requirements
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. |ShiftLeft| replace:: ``shift_left``
-.. _ShiftLeft: ./StdShiftLeft.html
-
-- ``exespace`` ``teamHandle``, ``first``, ``last``, ``view``: same as in |ShiftLeft|_
+- ``exespace`` ``teamHandle``, ``first``, ``last``, ``view``: same as in :doc:`shift_left <./StdShiftLeft>`
 
 - ``label``: string forwarded to internal parallel kernels for debugging purposes
 

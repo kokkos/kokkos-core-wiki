@@ -63,4 +63,4 @@ Example
 
 **See also**
 
-`ProfilingSection <profiling_section.html>`_: Implements a scope-based section ownership wrapper
+:doc:`ProfilingSection <profiling_section>`: Implements a scope-based section ownership wrapper

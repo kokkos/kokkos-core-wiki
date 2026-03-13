@@ -34,4 +34,4 @@ Description
 
 See also
 --------
-* `atomic_exchange <atomic_exchange.html>`_: atomically replaces the value of the referenced object and obtains the value held previously
+* :doc:`atomic_exchange <atomic_exchange>`: atomically replaces the value of the referenced object and obtains the value held previously

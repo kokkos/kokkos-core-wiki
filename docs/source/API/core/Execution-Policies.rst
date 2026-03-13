@@ -4,7 +4,7 @@ Execution Policies
 Top Level Execution Policies
 ============================
 
-`ExecutionPolicyConcept <policies/ExecutionPolicyConcept.html>`__ is the fundamental abstraction to represent “how” the execution of a Kokkos parallel pattern takes place.
+:doc:`ExecutionPolicyConcept <policies/ExecutionPolicyConcept>` is the fundamental abstraction to represent “how” the execution of a Kokkos parallel pattern takes place.
 
 .. list-table::
     :widths: 35 65
@@ -14,19 +14,19 @@ Top Level Execution Policies
     * - Policy
       - Description
 
-    * * `RangePolicy <policies/RangePolicy.html>`__
+    * * :doc:`RangePolicy <policies/RangePolicy>`
       * Each iterate is an integer in a contiguous range
 
-    * * `MDRangePolicy <policies/MDRangePolicy.html>`_
+    * * :doc:`MDRangePolicy <policies/MDRangePolicy>`
       * Each iterate for each rank is an integer in a contiguous range
 
-    * * `TeamPolicy <policies/TeamPolicy.html>`__
+    * * :doc:`TeamPolicy <policies/TeamPolicy>`
       * Assigns to each iterate in a contiguous range a team of threads
 
 Nested Execution Policies
 ============================
 
-Nested Execution Policies are used to dispatch parallel work inside of an already executing parallel region either dispatched with a `TeamPolicy <policies/TeamPolicy.html>`__ or a task policy. `NestedPolicies <policies/NestedPolicies.html>`__ summary.
+Nested Execution Policies are used to dispatch parallel work inside of an already executing parallel region either dispatched with a :doc:`TeamPolicy <policies/TeamPolicy>` or a task policy. :doc:`NestedPolicies <policies/NestedPolicies>` summary.
 
 .. list-table::
     :widths: 25 75
@@ -36,22 +36,22 @@ Nested Execution Policies are used to dispatch parallel work inside of an alread
     * - Policy
       - Description
 
-    * * `TeamThreadMDRange <policies/TeamThreadMDRange.html>`__
+    * * :doc:`TeamThreadMDRange <policies/TeamThreadMDRange>`
       * Used inside of a TeamPolicy kernel to perform nested parallel loops over a multidimensional range split over threads of a team.
 
-    * * `TeamThreadRange <policies/TeamThreadRange.html>`__
+    * * :doc:`TeamThreadRange <policies/TeamThreadRange>`
       * Used inside of a TeamPolicy kernel to perform nested parallel loops split over threads of a team.
 
-    * * `TeamVectorMDRange <policies/TeamVectorMDRange.html>`__
+    * * :doc:`TeamVectorMDRange <policies/TeamVectorMDRange>`
       * Used inside of a TeamPolicy kernel to perform nested parallel loops over a multidimensional range split over threads of a team and their vector lanes.
 
-    * * `TeamVectorRange <policies/TeamVectorRange.html>`__
+    * * :doc:`TeamVectorRange <policies/TeamVectorRange>`
       * Used inside of a TeamPolicy kernel to perform nested parallel loops split over threads of a team and their vector lanes.
 
-    * * `ThreadVectorMDRange <policies/ThreadVectorMDRange.html>`__
+    * * :doc:`ThreadVectorMDRange <policies/ThreadVectorMDRange>`
       * Used inside of a TeamPolicy kernel to perform nested parallel loops over a multidimensional range with vector lanes of a thread.
 
-    * * `ThreadVectorRange <policies/ThreadVectorRange.html>`__
+    * * :doc:`ThreadVectorRange <policies/ThreadVectorRange>`
       * Used inside of a TeamPolicy kernel to perform nested parallel loops with vector lanes of a thread.
 
 Common Arguments for all Execution Policies
@@ -82,7 +82,7 @@ Execution Policies generally accept compile time arguments via template paramete
 
     * * IndexType
       * e.g. ``IndexType<int>``
-      * Specify integer type to be used for traversing the iteration space. Defaults to the ``size_type`` of `ExecutionSpaceConcept <execution_spaces.html#typedefs>`__. Can affect the performance depending on the backend.
+      * Specify integer type to be used for traversing the iteration space. Defaults to the ``size_type`` of :doc:`ExecutionSpaceConcept <execution_spaces>`. Can affect the performance depending on the backend.
 
     * * LaunchBounds
       * ``LaunchBounds<MaxThreads, MinBlocks>``

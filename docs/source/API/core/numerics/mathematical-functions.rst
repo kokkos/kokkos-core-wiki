@@ -582,7 +582,7 @@ Notes
 * Beware the using-directive ``using namespace Kokkos;`` will cause
   compilation errors with unqualified calls to math functions.  Use explicit
   qualification (``Kokkos::sqrt``) or using-declaration (``using
-  Kokkos::sqrt;``) instead.  (See |KnownIssues|_)
+  Kokkos::sqrt;``) instead.  (See :doc:`known issues <../../../known-issues>`)
 * Math functions were removed from the ``Kokkos::Experimental::`` namespace in version 4.3
 * Support for quadruple precision floating-point ``__float128`` can be enabled
   via ``-DKokkos_ENABLE_LIBQUADMATH=ON``.
@@ -592,6 +592,6 @@ Notes
 See also
 --------
 
-`Mathematical constant <mathematical-constants.html>`_
+:doc:`Mathematical constant <mathematical-constants>`
 
-`Numeric traits <numeric-traits.html>`_  
+:doc:`Numeric traits <numeric-traits>`

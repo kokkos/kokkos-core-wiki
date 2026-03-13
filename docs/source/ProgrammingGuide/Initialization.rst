@@ -10,9 +10,9 @@ All primary capabilities of Kokkos are provided by the `Kokkos_Core.hpp` header 
 Some capabilities - specifically data structures in the `containers` subpackage and algorithmic capabilities in the `algorithms` subpackage are included via separate header files.
 For specific capabilities check their API reference:
 
-- `API: Core <../API/core-index.html>`_
-- `API: Containers <../API/containers-index.html>`_
-- `API: Algorithms <../API/algorithms-index.html>`_
+- :doc:`API: Core <../API/core-index>`
+- :doc:`API: Containers <../API/containers-index>`
+- :doc:`API: Algorithms <../API/algorithms-index>`
 
 Initialization by command-line arguments
 ----------------------------------------
@@ -50,7 +50,7 @@ Kokkos chooses the two spaces using the following list:
 
 The highest execution space in the list that is enabled is Kokkos' default execution space, and the highest enabled host execution space is Kokkos' default host execution space. For example, if  `Kokkos::Cuda`, `Kokkos::OpenMP`, and `Kokkos::Serial` are enabled, then `Kokkos::Cuda` is the default execution space and `Kokkos::OpenMP` is the default host execution space\ :sup:`1`.  In cases where the highest enabled backend is a host parallel execution space the `DefaultExecutionSpace` and the `DefaultHostExecutionSpace` will be the same.
 
-`Kokkos::initialize <../API/Initialize-and-Finalize.html#kokos-initialize>`_ parses the command line for flags prefixed with `--kokkos-`, and removes all recognized flags. Argument options are given with an equals (`=`) sign. If the same argument occurs more than once, the last one is used. For example, the arguments
+:doc:`Kokkos::initialize <../API/core/Initialize-and-Finalize>` parses the command line for flags prefixed with `--kokkos-`, and removes all recognized flags. Argument options are given with an equals (`=`) sign. If the same argument occurs more than once, the last one is used. For example, the arguments
 
     --kokkos-threads=4 --kokkos-threads=3
 
@@ -111,7 +111,7 @@ Instead of using command-line arguments, one may use environment variables. The 
 Initialization by struct
 ------------------------
 
-Instead of giving `Kokkos::initialize() <../API/core/initialize_finalize/initialize.html>`_ command-line arguments, one may directly pass in initialization parameters using the `Kokkos::InitializationSettings` struct.  If one wants to set options using the struct, one can use the functions `set_xxx` where `xxx` is identical to the arguments in :ref:`Table 4.1 <Table_cli-opts>` where the dash has been replaced by an underscore. To check if a variable has been set, one can use the `has_xxx` functions. Finally, to get the value that was set, one can use the `get_xxx` functions.
+Instead of giving :doc:`Kokkos::initialize() <../API/core/initialize_finalize/initialize>` command-line arguments, one may directly pass in initialization parameters using the `Kokkos::InitializationSettings` struct.  If one wants to set options using the struct, one can use the functions `set_xxx` where `xxx` is identical to the arguments in :ref:`Table 4.1 <Table_cli-opts>` where the dash has been replaced by an underscore. To check if a variable has been set, one can use the `has_xxx` functions. Finally, to get the value that was set, one can use the `get_xxx` functions.
 
 
 If you do not set `num_threads`, Kokkos will try to determine a default value if possible or otherwise set it to 1. In particular, Kokkos can use the `hwloc` library to determine default settings using the assumption that the process binding mask is unique, i.e., that this process does not share any cores with another process. Note that the default value of each parameter is -1.
@@ -131,7 +131,7 @@ Here is an example of how to use the struct.
 Finalization
 ------------
 
-At the end of each program, Kokkos needs to be shut down in order to free resources; do this by calling `Kokkos::finalize() <../API/core/initialize_finalize/finalize.html>`_. You may wish to set this to be called automatically at program exit, either by setting an `atexit` hook or by attaching the function to `MPI_COMM_SELF` so that it is called automatically at `MPI_Finalize`.
+At the end of each program, Kokkos needs to be shut down in order to free resources; do this by calling :doc:`Kokkos::finalize() <../API/core/initialize_finalize/finalize>`. You may wish to set this to be called automatically at program exit, either by setting an `atexit` hook or by attaching the function to `MPI_COMM_SELF` so that it is called automatically at `MPI_Finalize`.
 
 Example Code
 ------------

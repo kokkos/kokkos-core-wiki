@@ -6,11 +6,7 @@
 
 Header File: ``<Kokkos_Core.hpp>``
 
-.. _deepCopy: deep_copy.html
-
-.. |deepCopy| replace:: :cpp:func:`deep_copy`
-
-A common desired use case is to have a memory allocation in GPU memory and an identical memory allocation in CPU memory, such that copying from one to another is straightforward. To satisfy this use case and others, Kokkos has facilities for dealing with "mirrors" of View. A "mirror" of a View type ``A`` is loosely defined a View type ``B`` such that Views of type ``B`` are accessible from the CPU and |deepCopy|_ between Views of type ``A`` and ``B`` are direct. The most common functions for dealing with mirrors are ``create_mirror``, ``create_mirror_view`` and ``create_mirror_view_and_copy``.
+A common desired use case is to have a memory allocation in GPU memory and an identical memory allocation in CPU memory, such that copying from one to another is straightforward. To satisfy this use case and others, Kokkos has facilities for dealing with "mirrors" of View. A "mirror" of a View type ``A`` is loosely defined a View type ``B`` such that Views of type ``B`` are accessible from the CPU and :cpp:func:`Kokkos::deep_copy <Kokkos::deep_copy>` between Views of type ``A`` and ``B`` are direct. The most common functions for dealing with mirrors are ``create_mirror``, ``create_mirror_view`` and ``create_mirror_view_and_copy``.
 
 Usage
 -----
@@ -34,114 +30,106 @@ Use ``create_mirror_view`` when the mirror is solely used for providing access i
 Description
 -----------
 
-.. _View: view.html
+.. |View| replace:: :doc:`View <view>`
 
-.. |View| replace:: :cpp:class:`View`
+.. |ExecutionSpaceConcept| replace:: :ref:`kokkos-executionspaceconcept`
 
-.. _ExecutionSpaceConcept: ../execution_spaces.html#executionspaceconcept
-
-.. |ExecutionSpaceConcept| replace:: :cpp:func:`ExecutionSpaceConcept`
-
-.. _MemorySpaceConcept: ../memory_spaces.html#memoryspaceconcept
-
-.. |MemorySpaceConcept| replace:: :cpp:func:`MemorySpaceConcept`
-
+.. |MemorySpaceConcept| replace:: :ref:`kokkos-memoryspaceconcept`
 
 .. cpp:function:: template <class ViewType> typename ViewType::host_mirror_type create_mirror(ViewType const& src);
 
-   Creates a new host accessible |View|_ with the same layout and padding as ``src``
+   Creates a new host accessible |View| with the same layout and padding as ``src``
 
    - ``src``: a ``Kokkos::View``.
 
 .. cpp:function:: template <class ViewType> typename ViewType::host_mirror_type create_mirror(decltype(Kokkos::WithoutInitializing), ViewType const& src);
 
-   Creates a new host accessible |View|_ with the same layout and padding as ``src``. The new view will have uninitialized data.
+   Creates a new host accessible |View| with the same layout and padding as ``src``. The new view will have uninitialized data.
 
    - ``src``: a ``Kokkos::View``.
 
 .. cpp:function:: template <class Space, class ViewType> ImplMirrorType create_mirror(Space const& space, ViewType const& src);
 
-   Creates a new |View|_ with the same layout and padding as ``src`` but with a device type of ``Space::device_type``.
+   Creates a new |View| with the same layout and padding as ``src`` but with a device type of ``Space::device_type``.
 
    - ``src``: a ``Kokkos::View``.
 
-   - ``Space``: a class meeting the requirements of |ExecutionSpaceConcept|_ or |MemorySpaceConcept|_
+   - ``Space``: a class meeting the requirements of |ExecutionSpaceConcept| or |MemorySpaceConcept|
 
    - ``ImplMirrorType``: an implementation defined specialization of ``Kokkos::View``.
 
 .. cpp:function:: template <class Space, class ViewType> ImplMirrorType create_mirror(decltype(Kokkos::WithoutInitializing), Space const& space, ViewType const& src);
 
-   Creates a new |View|_ with the same layout and padding as ``src`` but with a device type of ``Space::device_type``. The new view will have uninitialized data.
+   Creates a new |View| with the same layout and padding as ``src`` but with a device type of ``Space::device_type``. The new view will have uninitialized data.
 
    - ``src``: a ``Kokkos::View``.
 
-   - ``Space``: a class meeting the requirements of |ExecutionSpaceConcept|_ or |MemorySpaceConcept|_
+   - ``Space``: a class meeting the requirements of |ExecutionSpaceConcept| or |MemorySpaceConcept|
 
    - ``ImplMirrorType``: an implementation defined specialization of ``Kokkos::View``.
 
 .. cpp:function:: template <class ViewType, class ALLOC_PROP> auto create_mirror(ALLOC_PROP const& arg_prop, ViewType const& src);
 
-   Creates a new |View|_ with the same layout and padding as ``src``
-   using the |View|_ constructor properties ``arg_prop``, e.g., ``Kokkos::view_alloc(Kokkos::WithoutInitializing)``.
-   If ``arg_prop`` contains a memory space, a |View|_ in that space is created. Otherwise, a |View|_ in host-accessible memory is returned.
+   Creates a new |View| with the same layout and padding as ``src``
+   using the |View| constructor properties ``arg_prop``, e.g., ``Kokkos::view_alloc(Kokkos::WithoutInitializing)``.
+   If ``arg_prop`` contains a memory space, a |View| in that space is created. Otherwise, a |View| in host-accessible memory is returned.
 
    - ``src``: a ``Kokkos::View``.
 
-   - ``arg_prop``: |View|_ constructor properties, e.g., ``Kokkos::view_alloc(Kokkos::WithoutInitializing)``.
+   - ``arg_prop``: |View| constructor properties, e.g., ``Kokkos::view_alloc(Kokkos::WithoutInitializing)``.
 
      .. important::
 
 	``arg_prop`` must not include a pointer to memory, or a label, or allow padding.
 
-
 .. cpp:function:: template <class ViewType> typename ViewType::host_mirror_type create_mirror_view(ViewType const& src);
 
    If ``src`` is not host accessible (i.e. if ``SpaceAccessibility<HostSpace,ViewType::memory_space>::accessible`` is ``false``)
-   it creates a new host accessible |View|_ with the same layout and padding as ``src``. Otherwise returns ``src``.
+   it creates a new host accessible |View| with the same layout and padding as ``src``. Otherwise returns ``src``.
 
    - ``src``: a ``Kokkos::View``.
 
 .. cpp:function:: template <class ViewType> typename ViewType::host_mirror_type create_mirror_view(decltype(Kokkos::WithoutInitializing), ViewType const& src);
 
    If ``src`` is not host accessible (i.e. if ``SpaceAccessibility<HostSpace,ViewType::memory_space>::accessible`` is ``false``)
-   it creates a new host accessible |View|_ with the same layout and padding as ``src``. The new view will have uninitialized data. Otherwise returns ``src``.
+   it creates a new host accessible |View| with the same layout and padding as ``src``. The new view will have uninitialized data. Otherwise returns ``src``.
 
    - ``src``: a ``Kokkos::View``.
 
 .. cpp:function:: template <class Space, class ViewType> ImplMirrorType create_mirror_view(Space const& space, ViewType const& src);
 
-   If ``std::is_same<typename Space::memory_space, typename ViewType::memory_space>::value`` is ``false``, creates a new |View|_ with
+   If ``std::is_same<typename Space::memory_space, typename ViewType::memory_space>::value`` is ``false``, creates a new |View| with
    the same layout and padding as ``src`` but with a device type of ``Space::device_type``. Otherwise returns ``src``.
 
    - ``src``: a ``Kokkos::View``.
 
-   - ``Space`` : a class meeting the requirements of |ExecutionSpaceConcept|_ or |MemorySpaceConcept|_
+   - ``Space`` : a class meeting the requirements of |ExecutionSpaceConcept| or |MemorySpaceConcept|
 
    - ``ImplMirrorType``: an implementation defined specialization of ``Kokkos::View``.
 
 .. cpp:function:: template <class Space, class ViewType> ImplMirrorType create_mirror_view(decltype(Kokkos::WithoutInitializing), Space const& space, ViewType const& src);
 
    If ``std::is_same<typename Space::memory_space, typename ViewType::memory_space>::value`` is ``false``,
-   creates a new |View|_ with the same layout and padding as ``src`` but with a device type of ``Space::device_type``.
+   creates a new |View| with the same layout and padding as ``src`` but with a device type of ``Space::device_type``.
    The new view will have uninitialized data. Otherwise returns ``src``.
 
    - ``src``: a ``Kokkos::View``.
 
-   - ``Space``: a class meeting the requirements of |ExecutionSpaceConcept|_ or |MemorySpaceConcept|_
+   - ``Space``: a class meeting the requirements of |ExecutionSpaceConcept| or |MemorySpaceConcept|
 
    - ``ImplMirrorType``: an implementation defined specialization of ``Kokkos::View``.
 
 .. cpp:function:: template <class ViewType, class ALLOC_PROP> auto create_mirror_view(ALLOC_PROP const& arg_prop, ViewType const& src);
 
-   If the |View|_ constructor arguments ``arg_prop`` (created by a call to `Kokkos::view_alloc`) include a memory space and the memory space
-   doesn't match the memory space of ``src``, creates a new |View|_ in the specified memory_space. If the ``arg_prop`` don't include a memory
-   space and the memory space of ``src`` is not host-accessible, creates a new host-accessible |View|_.
-   Otherwise, ``src`` is returned. If a new |View|_ is created, the implicitly called constructor respects ``arg_prop``
+   If the |View| constructor arguments ``arg_prop`` (created by a call to `Kokkos::view_alloc`) include a memory space and the memory space
+   doesn't match the memory space of ``src``, creates a new |View| in the specified memory_space. If the ``arg_prop`` don't include a memory
+   space and the memory space of ``src`` is not host-accessible, creates a new host-accessible |View|.
+   Otherwise, ``src`` is returned. If a new |View| is created, the implicitly called constructor respects ``arg_prop``
    and uses the same layout and padding as ``src``.
 
    - ``src``: a ``Kokkos::View``.
 
-   - ``arg_prop``: |View|_ constructor properties, e.g., ``Kokkos::view_alloc(Kokkos::WithoutInitializing)``.
+   - ``arg_prop``: |View| constructor properties, e.g., ``Kokkos::view_alloc(Kokkos::WithoutInitializing)``.
 
      .. important::
 
@@ -155,20 +143,20 @@ Description
 
    - ``src``: a ``Kokkos::View``.
 
-   - ``Space``: a class meeting the requirements of |ExecutionSpaceConcept|_ or |MemorySpaceConcept|_
+   - ``Space``: a class meeting the requirements of |ExecutionSpaceConcept| or |MemorySpaceConcept|
 
    - ``ImplMirrorType``: an implementation defined specialization of ``Kokkos::View``.
 
 .. cpp:function:: template <class ViewType, class ALLOC_PROP> ImplMirrorType create_mirror_view_and_copy(ALLOC_PROP const& arg_prop, ViewType const& src);
 
-   If the  memory space included in the |View|_ constructor arguments ``arg_prop`` (created by a call to `Kokkos::view_alloc`) does not match the memory
-   space of ``src``, creates a new |View|_ in the specified memory space using ``arg_prop`` and the same layout
+   If the  memory space included in the |View| constructor arguments ``arg_prop`` (created by a call to `Kokkos::view_alloc`) does not match the memory
+   space of ``src``, creates a new |View| in the specified memory space using ``arg_prop`` and the same layout
    and padding as ``src``. Additionally, a ``deep_copy`` from ``src`` to the new view is executed
    (using the execution space contained in ``arg_prop`` if provided). Otherwise returns ``src``.
 
    - ``src``: a ``Kokkos::View``.
 
-   - ``arg_prop``: |View|_ constructor properties, e.g., ``Kokkos::view_alloc(Kokkos::HostSpace{}, Kokkos::WithoutInitializing)``.
+   - ``arg_prop``: |View| constructor properties, e.g., ``Kokkos::view_alloc(Kokkos::HostSpace{}, Kokkos::WithoutInitializing)``.
 
      .. important::
 

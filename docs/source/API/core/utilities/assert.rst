@@ -57,4 +57,4 @@ Notes
 
 See also
 --------
-* `Kokkos::abort() <abort.html>`_ causes abnormal program termination
+* :doc:`Kokkos::abort() <abort>` causes abnormal program termination

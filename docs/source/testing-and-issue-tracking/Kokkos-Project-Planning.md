@@ -148,7 +148,7 @@ It serves multiple purposes:
 
 Prioritization of items is recorded in the [Kokkos project plan](https://github.com/orgs/kokkos/projects/1)
 
-Meeting notes are kept in a private repository: [internal repository](https://github.com/kokkos/internal-documents)
+Meeting notes are kept in a public repository: [public repository](https://github.com/kokkos/development)
 
 Further issue prioritization happens at the developer meeting discussed below.
 
@@ -164,7 +164,7 @@ If something needs to be referenceable longer term, then it needs to be discusse
 Private information may be hosted on the [internal repository](https://github.com/kokkos/internal-documents) but do not post NDA data on there.
 
 Kokkos developer meeting held once a week on Wednesdays 2pm ET / 12 pm MT / 18:00 UTC on Zoom.
-The agenda is posted on the internal repository ahead of time (it can be found under the [`meeting-notes/`](https://github.com/kokkos/internal-documents/tree/master/meeting-notes/2023) directory).
+The agenda is posted on the internal repository ahead of time (it can be found under the [`meeting-notes/`](https://github.com/kokkos/development/tree/main/meeting_notes) directory).
 Developers are allowed to edit the agenda and add topics or issues that they would like to be discussed at the meeting.
 
 ## Release Process

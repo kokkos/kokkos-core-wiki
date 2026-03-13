@@ -6,24 +6,8 @@
 
 Defined in header ``<Kokkos_Core.hpp>``
 
-.. _Kokkos_kokkos_malloc: malloc.html
-
-.. |Kokkos_kokkos_malloc| replace:: ``Kokkos::kokkos_malloc()``
-
-.. _Kokkos_kokkos_realloc: realloc.html
-
-.. |Kokkos_kokkos_realloc| replace:: ``Kokkos::kokkos_realloc()``
-
-.. _MemorySpace: ../memory_spaces.html
-
-.. |MemorySpace| replace:: ``MemorySpace``
-
-.. _Kokkos_kokkos_free: free.html
-
-.. |Kokkos_kokkos_free| replace:: ``Kokkos::kokkos_free()``
-
-Reallocates the given area of memory. It must be previously allocated by |Kokkos_kokkos_malloc|_ or |Kokkos_kokkos_realloc|_
-on the same memory space |MemorySpace|_ and not yet freed with |Kokkos_kokkos_free|_, otherwise, the results are undefined.
+Reallocates the given area of memory. It must be previously allocated by :cpp:func:`kokkos_malloc` or :cpp:func:`kokkos_realloc`
+on the same memory space :doc:`MemorySpace <../memory_spaces>` and not yet freed with :cpp:func:`kokkos_free`, otherwise, the results are undefined.
 
 .. warning::
 
@@ -41,6 +25,6 @@ Description
 
   :param new_size: The new size in bytes.
 
-  :returns: On success, returns a pointer to the beginning of the newly allocated memory. To avoid a memory leak, the returned pointer must be deallocated with |Kokkos_kokkos_free|_, the original pointer ``ptr`` is invalidated and any access to it is undefined behavior (even if reallocation was in-place). On failure, returns a null pointer. The original pointer ptr remains valid and may need to be deallocated with |Kokkos_kokkos_free|_.
+  :returns: On success, returns a pointer to the beginning of the newly allocated memory. To avoid a memory leak, the returned pointer must be deallocated with :cpp:func:`kokkos_free`, the original pointer ``ptr`` is invalidated and any access to it is undefined behavior (even if reallocation was in-place). On failure, returns a null pointer. The original pointer ptr remains valid and may need to be deallocated with :cpp:func:`kokkos_free`.
 
   :throws: On failure, throws ``Kokkos::Experimental::RawMemoryAllocationFailure``.

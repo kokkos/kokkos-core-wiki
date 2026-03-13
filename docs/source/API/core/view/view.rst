@@ -64,7 +64,7 @@ Class Interface
       - ``Restrict``
       - ``Aligned``
 
-      See the sub-section on memory access traits in the |ProgrammingGuide|_ also for further information.
+      See the sub-section on memory access traits in the :doc:`Programming Guide <../../../ProgrammingGuide/View>` also for further information.
 
 ..
    Pushing a "namespace" here; this doesn't create a namespace entity but tells Sphinx that everything between here and the pop is part of the View class.
@@ -181,7 +181,6 @@ Data Handles
       :cpp:func:`operator()`
 
       :cpp:func:`access()`
-
 
 .. cpp:type:: pointer_type
 
