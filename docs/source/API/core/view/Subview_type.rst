@@ -1,5 +1,5 @@
-``Kokkos::Subview``
-===================
+``Subview``
+===========
 
 .. role:: cpp(code)
    :language: cpp
