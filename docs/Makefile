@@ -4,3 +4,6 @@ html:
 
 clean:
 	rm -rf ./generated_docs/
+
+linkcheck:
+	sphinx-build -b linkcheck ./source/ ./generated_docs/ -n -W --keep-going

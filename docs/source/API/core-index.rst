@@ -30,7 +30,7 @@ Core API
        complex numbers, half-precision floating-point types.
    * - `C-style memory management <core/c_style_memory_management.html>`__
      - C-style memory management
-   * - `Traits <core/Prod.html>`__
+   * - `Traits <core/Traits.html>`__
      - Traits
    * - `Kokkos Concepts <core/KokkosConcepts.html>`__
      - Kokkos Concepts
