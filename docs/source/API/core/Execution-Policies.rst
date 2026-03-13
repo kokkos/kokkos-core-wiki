@@ -92,14 +92,6 @@ Execution Policies generally accept compile time arguments via template paramete
       * ``SomeClass``
       * Specify the work tag type used to call the functor operator. Can be any arbitrary tag type (i.e. an [empty](https://en.cppreference.com/w/cpp/types/is_empty) struct or class). Defaults to ``void``.
 
-Experimental Execution Policy Arguments
----------------------------------------
-
-.. cpp:struct:: template <unsigned int BatchSize = 1> StaticBatchSize;
-
-  Specify a batch size for unrolling loops at compile time. Have effect only effect `RangePolicy <policies/RangePolicy.html>`__ for ``CUDA`` and ``HIP`` backends.
-
-  .. versionadded:: 5.0
 
 .. toctree::
    :hidden:
