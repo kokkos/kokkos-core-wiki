@@ -1,3 +1,5 @@
+.. include:: ../mydefs.rst
+
 Requirements
 ############
 
@@ -177,7 +179,7 @@ Build system:
 =============
 
 * CMake >= 3.16: required
-* CMake >= 3.18: Fortran linkage. This does not affect most mixed Fortran/Kokkos builds. See `known build issues <https://github.com/kokkos/kokkos/blob/master/BUILD.md#known-issues>`_.
+* CMake >= 3.18: Fortran linkage. This does not affect most mixed Fortran/Kokkos builds. See `known issues <../known-issues.html#fortran-interoperability>`_.
 * CMake >= 3.21.1 for NVC++
 
 Primary tested compiler are passing in release mode

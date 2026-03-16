@@ -417,7 +417,7 @@ Floating point manipulation functions
 
 .. |scalbn| replace:: ``scalbn``
 
-.. _scalbln: https://en.cppreference.com/w/cpp/numeric/math/scalbln
+.. _scalbln: https://en.cppreference.com/w/cpp/numeric/math/scalbn
 
 .. |scalbln| replace:: ``scalbln``
 

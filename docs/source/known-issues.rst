@@ -161,6 +161,11 @@ calls to mathematical functions.  Instead, prefer explicit qualification
 ``Kokkos::sqrt`` or an using-declaration ``using Kokkos::sqrt;`` at local
 scope.
 
+Fortran interoperability
+========================
+
+- Fortran interoperability with Kokkos requires CMake 3.18 or later because previous versions cannot distinguish linker language. See `known build issues <https://github.com/kokkos/kokkos/issues/3325>`_.
+
 Mathematical constants
 ======================
 
