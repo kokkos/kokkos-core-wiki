@@ -11,7 +11,6 @@ Deprecated in Kokkos 5.0
    * replacement: ``View::stride(N)``
    * Alignment with ``std::mdspan``
 
-
 * ``KOKKOS_ATTRIBUTE_NODISCARD``
    * replacement: none
    * Not intended for non-internal use.
