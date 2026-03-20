@@ -46,7 +46,7 @@ Requirements
 
 * If ``src`` and ``dest`` are `Kokkos::View <view.html>`_ s, then all the following are true:
 
-  - ``std::is_same<ViewDest::non_const_value_type, ViewSrc::non_const_value_type>::value == true``
+  - ``ViewDst::non_const_value_type`` is assignable from ``ViewSrc::non_const_value_type``
 
   - ``src.rank == dest.rank`` (or, for ``Kokkos::DynRankView`` , ``src.rank() == dest.rank()`` )
 
