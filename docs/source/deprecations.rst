@@ -7,7 +7,7 @@ Deprecated in Kokkos 5.x
 Deprecated in Kokkos 5.0
 ---------------------------
 
-# ``View::stride_N()``
+* ``View::stride_N()``
    * replacement: ``View::stride(N)``
    * Alignment with ``std::mdspan``
 
