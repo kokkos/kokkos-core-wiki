@@ -22,10 +22,8 @@ A series of video lectures on Kokkos was recorded in 2020 as part of an
 Exascale Computing Project (ECP) initiative during the COVID-19 pandemic.
 These lectures provide a comprehensive introduction to Kokkos and cover many of
 its key features. While some details might be slightly outdated due to ongoing
-development, most of the content is fully applicable even today.  The lectures
-are available on the `ECP event page
-<https://www.exascaleproject.org/event/kokkos-class-series/>`_.  A complete list
-of videos and accompanying slides can be found :doc:`here
+development, most of the content is fully applicable even today.
+A complete list of videos and accompanying slides can be found :doc:`here
 <tutorials-and-examples/video-lectures>`.
 
 :doc:`Use Cases and Examples <tutorials-and-examples/use-cases-and-examples>`
