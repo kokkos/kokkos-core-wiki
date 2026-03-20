@@ -128,38 +128,6 @@ Description
 
         :return: The stride of the specified dimension, always returns 0 for ``DynamicView``.
 
-    .. cpp:function:: KOKKOS_INLINE_FUNCTION constexpr size_t stride_0() const;
-
-        :return: The stride of dimension 0, always returns 0 for ``DynamicView`` s.
-
-    .. cpp:function:: KOKKOS_INLINE_FUNCTION constexpr size_t stride_1() const;
-
-        :return: The stride of dimension 1, always returns 0 for ``DynamicView`` s.
-
-    .. cpp:function:: KOKKOS_INLINE_FUNCTION constexpr size_t stride_2() const;
-
-        :return: The stride of dimension 2, always returns 0 for ``DynamicView`` s.
-
-    .. cpp:function:: KOKKOS_INLINE_FUNCTION constexpr size_t stride_3() const;
-
-        :return: The stride of dimension 3, always returns 0 for ``DynamicView`` s.
-
-    .. cpp:function:: KOKKOS_INLINE_FUNCTION constexpr size_t stride_4() const;
-
-        :return: The stride of dimension 4, always returns 0 for ``DynamicView`` s.
-
-    .. cpp:function:: KOKKOS_INLINE_FUNCTION constexpr size_t stride_5() const;
-
-        :return: The stride of dimension 5, always returns 0 for ``DynamicView`` s.
-
-    .. cpp:function:: KOKKOS_INLINE_FUNCTION constexpr size_t stride_6() const;
-
-        :return: The stride of dimension 6, always returns 0 for ``DynamicView`` s.
-
-    .. cpp:function:: KOKKOS_INLINE_FUNCTION constexpr size_t stride_7() const;
-
-        :return: The stride of dimension 7, always returns 0 for ``DynamicView`` s.
-
     .. cpp:function:: KOKKOS_INLINE_FUNCTION constexpr size_t span() const;
 
         :return: Always returns 0 for ``DynamicView`` s.

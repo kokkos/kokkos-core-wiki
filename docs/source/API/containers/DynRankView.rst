@@ -304,38 +304,6 @@ Description
 
        Returns the stride of the specified dimension. ``iType`` must be an integral type, and ``dim`` must be smaller than ``rank``. Example: ``a.stride(3) == (&a(i0,i1,i2,i3+1,i4)-&a(i0,i1,i2,i3,i4))``
 
-   .. cpp:function:: constexpr size_t stride_0() const
-
-       Return the stride of dimension 0.
-
-   .. cpp:function:: constexpr size_t stride_1() const
-
-       Return the stride of dimension 1.
-
-   .. cpp:function:: constexpr size_t stride_2() const
-
-       Return the stride of dimension 2.
-
-   .. cpp:function:: constexpr size_t stride_3() const
-
-       Return the stride of dimension 3.
-
-   .. cpp:function:: constexpr size_t stride_4() const
-
-       Return the stride of dimension 4.
-
-   .. cpp:function:: constexpr size_t stride_5() const
-
-       Return the stride of dimension 5.
-
-   .. cpp:function:: constexpr size_t stride_6() const
-
-       Return the stride of dimension 6.
-
-   .. cpp:function:: constexpr size_t stride_7() const
-
-       Return the stride of dimension 7.
-
    .. cpp:function:: constexpr size_t span() const
 
        Return the memory span in elements between the element with the lowest and the highest address.
