@@ -17,6 +17,13 @@ Usage
 Copies data from ``src`` to ``dest``, where ``src`` and ``dest``
 can be `Kokkos::Views <view.html>`_ or scalars under certain circumstances.
 
+If the provided execution space can access ``src`` and ``dest`` (for
+the three-argument overload) or the execution space corresponding to
+the source or destination's memory space can access both views,
+deep_copy() can convert value types and different layouts by assigning
+entry by entry. Otherwise, value types and layouts have to be
+identical and contiguous as a memcopy is performed.
+
 Interface
 ---------
 
@@ -66,7 +73,7 @@ Semantics
 Examples
 --------
 
-Some Things you can and cannot do
+Some things you can and cannot do
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: cpp
@@ -116,6 +123,9 @@ Some Things you can and cannot do
 
 How to get layout incompatible views copied
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+To move data from a device view to an incompatible host view, the operation
+needs to be done in two steps by using a temporary allocation:
 
 .. code-block:: cpp
 
