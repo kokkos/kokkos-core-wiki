@@ -13,10 +13,10 @@ Usage:
     Kokkos::fence();
 
 Blocks on completion of all outstanding asynchronous Kokkos operations.
-That includes parallel dispatch (e.g. :doc:`parallel_for() <parallel_for>`, :doc:`parallel_reduce() <parallel_reduce>` 
-and :doc:`parallel_scan() <parallel_scan>`) as well as asynchronous data operations such as three-argument :doc:`deep_copy <../view/deep_copy>`.
+That includes parallel dispatch (e.g. :cpp:func:`Kokkos::parallel_for`, :cpp:func:`Kokkos::parallel_reduce`
+and :cpp:func:`Kokkos::parallel_scan`) as well as asynchronous data operations such as three-argument :cpp:func:`Kokkos::deep_copy`.
 
-Note: there is a execution space instance specific ``fence`` too: :doc:`ExecutionSpaceConcept <../execution_spaces>`
+Note: there is a execution space instance specific ``fence`` too: :ref:`ExecutionSpaceConcept <kokkos-executionspaceconcept>`
 
 Interface
 ---------

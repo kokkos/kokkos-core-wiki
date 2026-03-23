@@ -54,6 +54,8 @@ Nested Execution Policies are used to dispatch parallel work inside of an alread
     * * :doc:`ThreadVectorRange <policies/ThreadVectorRange>`
       * Used inside of a TeamPolicy kernel to perform nested parallel loops with vector lanes of a thread.
 
+.. _kokkos-common-arguments-for-all-execution-policies:
+
 Common Arguments for all Execution Policies
 ===========================================
 

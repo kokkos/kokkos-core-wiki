@@ -18,7 +18,7 @@ Important notes on syntax:
 
 ### Functors
 
-A _functor_ is one way to define the body of a parallel loop. It is a class or struct<sup>1</sup> with a public `operator()` instance method. That method's arguments depend on both which parallel operation you want to execute (for, reduce, or scan), and on the loop's execution policy (e.g., range or team). For an example of a functor see the section in this chapter for each type of parallel operation. In the most common case of a [`parallel_for()`](../API/core/parallel-dispatch/parallel_for), it takes an integer argument which is the for loop's index. Other arguments are possible; see [Chapter 8 - Hierarchical Parallelism](HierarchicalParallelism).
+A _functor_ is one way to define the body of a parallel loop. It is a class or struct<sup>1</sup> with a public `operator()` instance method. That method's arguments depend on both which parallel operation you want to execute (for, reduce, or scan), and on the loop's execution policy (e.g., range or team). For an example of a functor see the section in this chapter for each type of parallel operation. In the most common case of a [`parallel_for()`](../API/core/parallel-dispatch/parallel_for), it takes an integer argument which is the for loop's index. Other arguments are possible; see [Chapter 7 - Hierarchical Parallelism](HierarchicalParallelism).
 
 The `operator()` method must be const, and must be marked with the `KOKKOS_FUNCTION` or `KOKKOS_INLINE_FUNCTION` macro. For some backends (such as CUDA and HIP) this macro is necessary to mark your method as suitable for running on both accelerator devices and the host. If not building with any backends requiring markup, `KOKKOS_INLINE_FUNCTION` expands to `inline`, and `KOKKOS_FUNCTION` is unnecessary but harmless. Here is an example of the signature of such a method:
 
@@ -36,19 +36,19 @@ The entire parallel operation (for, reduce, or scan) shares the same instance of
 
 The 2011 version of the C++ standard ("C++11") provides a new language construct, the _lambda_, also called "anonymous function" or "closure." Kokkos lets users supply parallel loop bodies as either functors (see above) or lambdas. Lambdas work like automatically generated functors. Just like a class, a lambda may have state.  The only difference is that with a lambda, the state comes in from the environment. (The name "closure" means that the function "closes over" state from the environment.) Just like with functors, lambdas must bring in state by "value" (copy), not by reference or pointer.
 
-By default, lambdas capture nothing (as the default capture specifier `[]` specifies). This is not likely to be useful, since [`parallel_for()`](../API/core/parallel-dispatch/parallel_for) generally works by its side effects. Because Kokkos reserves the right to make copies of the closure, and its operations are potentially asynchronous users must ``capture by value'' to be semantically correct. We recommend doing so via the KOKKOS_LAMBDA macro for the outermost level of parallelism (see [Chapter 8](HierarchicalParallelism)).
+By default, lambdas capture nothing (as the default capture specifier `[]` specifies). This is not likely to be useful, since [`parallel_for()`](../API/core/parallel-dispatch/parallel_for) generally works by its side effects. Because Kokkos reserves the right to make copies of the closure, and its operations are potentially asynchronous users must ``capture by value'' to be semantically correct. We recommend doing so via the KOKKOS_LAMBDA macro for the outermost level of parallelism (see [Chapter 7](HierarchicalParallelism)).
 For some backends, this just turns into the usual capture-by-value clause `[=]`. That captures variables from the surrounding scope by value. Do NOT capture them by reference! For other backends (e.g. CUDA and HIP), this macro may have a special definition
 that makes the lambda work correctly, same as the `KOKKOS_INLINE_FUNCTION` macro. 
 
 It is a violation of Kokkos semantics to capture by reference `[&]` for two reasons. First Kokkos might give the lambda to an execution space which can not access the stack of the dispatching thread. Secondly, capturing by reference allows the programmer to violate the const semantics of the lambda. For correctness and portability reasons lambdas and functors are treated as const objects inside the parallel code section. Capturing by reference allows a circumvention of that const property, and enables many more possibilities of writing non-threads-safe code.
 
-When using lambdas for nested parallelism (see [Chapter 8](HierarchicalParallelism) for details) using capture by reference can be useful for performance reasons, but the code is only valid Kokkos code if it also works with capturing by copy.
+When using lambdas for nested parallelism (see [Chapter 7](HierarchicalParallelism) for details) using capture by reference can be useful for performance reasons, but the code is only valid Kokkos code if it also works with capturing by copy.
 
 ### Should I use a functor or a lambda?
 
 Kokkos lets users choose whether to use a functor or a lambda. Lambdas are convenient for short loop bodies. For a much more complicated loop body, you might find it easier for testing to separate it out and name it as a functor. Lambdas by definition are "anonymous functions," meaning that they have no name. This makes it harder to test them. Furthermore, if you would like to use lambdas with CUDA, you must have a sufficiently new version of CUDA. At the time of writing, CUDA 7.5 and later versions support host-device lambda with the special flag. CUDA 8.0 has improved interoperability with the host compiler. To enable this support, use the `KOKKOS_CUDA_OPTIONS=enable_lambda` option.
 
-Finally, the "execution tag" feature, which lets you put together several different parallel loop bodies into a single functor, only works with functors.  (See [Chapter 8](HierarchicalParallelism) for details.)
+Finally, the "execution tag" feature, which lets you put together several different parallel loop bodies into a single functor, only works with functors.  (See [Chapter 7](HierarchicalParallelism) for details.)
 
 ### Specifying the execution space
 

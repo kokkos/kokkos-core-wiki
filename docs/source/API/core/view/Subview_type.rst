@@ -4,16 +4,14 @@
 .. role:: cpp(code)
    :language: cpp
 
-.. _subviewfunc: subview.html
-
-.. |subviewfunc| replace:: ``Kokkos::subview()``
+.. |subviewfunc| replace:: :doc:`Kokkos::subview() <subview>`
 
 Header File: ``Kokkos_Core.hpp``
 
 Description
 -----------
 
-Alias template to deduce the type that is returned by a call to the :doc:`Kokkos::subview() <subview>` function with given arguments.
+Alias template to deduce the type that is returned by a call to the |subviewfunc| function with given arguments.
 
 Interface
 ---------
@@ -32,7 +30,7 @@ Requires:
 
 - ``ViewType`` is a specialization of ``Kokkos::View``
 
-- ``Args...`` are slice specifiers as defined in :doc:`Kokkos::subview() <subview>`.
+- ``Args...`` are slice specifiers as defined in |subviewfunc|.
 
 - ``sizeof... (Args) == ViewType::rank()``.
 

@@ -27,7 +27,7 @@ Description
 
    .. rubric:: Template Arguments
 
-   Valid template arguments for TeamPolicy are described :doc:`here <../Execution-Policies>`
+   Valid template arguments for TeamPolicy are described :ref:`here <kokkos-common-arguments-for-all-execution-policies>`
 
    .. rubric:: Public nested typedefs
 
@@ -119,7 +119,7 @@ Description
 
    .. cpp:function:: template<class FunctorType> int team_size_max(const FunctorType& f, const ParallelReduceTag&) const;
 
-      Query the maximum team size possible given a specific functor. The tag denotes whether this is for a :cpp:func:`parallel_for` or a :cpp:func:`parallel_reduce`.
+      Query the maximum team size possible given a specific functor. The tag denotes whether this is for a :cpp:func:`Kokkos::parallel_for` or a :cpp:func:`Kokkos::parallel_reduce`.
       Note: this is not a static function! The function will take into account settings for vector length and scratch size of ``*this``. Using a value larger than the return value will result in dispatch failure. If the value returned is non-positive, no valid team size could be found. A common reason is that too much scratch cache memory was requested.
       Returns: The maximum value for ``team_size`` allowed to be given to be used with an otherwise identical ``TeamPolicy`` for dispatching the functor ``f``.
 
@@ -127,7 +127,7 @@ Description
 
    .. cpp:function:: template<class FunctorType> int team_size_recommended(const FunctorType& f, const ParallelReduceTag&) const;
 
-      Query the recommended team size for the specific functor ``f``. The tag denotes whether this is for a :cpp:func:`parallel_for` or a :cpp:func:`parallel_reduce`.
+      Query the recommended team size for the specific functor ``f``. The tag denotes whether this is for a :cpp:func:`Kokkos::parallel_for` or a :cpp:func:`Kokkos::parallel_reduce`.
       Note: this is not a static function! The function will take into account settings for vector length and scratch size of ``*this``. If the value returned is non-positive, no valid team size could be found. A common reason is that too much scratch cache memory was requested.
       Returns: The recommended value for ``team_size`` to be given to be used with an otherwise identical ``TeamPolicy`` for dispatching the functor ``f``.
 

@@ -82,6 +82,7 @@ Description
 
 	``arg_prop`` must not include a pointer to memory, or a label, or allow padding.
 
+
 .. cpp:function:: template <class ViewType> typename ViewType::host_mirror_type create_mirror_view(ViewType const& src);
 
    If ``src`` is not host accessible (i.e. if ``SpaceAccessibility<HostSpace,ViewType::memory_space>::accessible`` is ``false``)

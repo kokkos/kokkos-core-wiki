@@ -4,7 +4,7 @@ Space Accessibility
 .. role::cpp(code)
     :language: cpp
 
-``Kokkos::SpaceAccessibility<>`` is a traits class template that takes an :ref:`ExecutionSpace <kokkos-executionspaceconcept>` type or :ref:`MemorySpace <kokkos-memoryspaceconcept>` type as the first template argument and a :ref:`MemorySpace <kokkos-memoryspaceconcept>` type as the second type and expresses details about the relationship between those entities. Given memory space types ``MSp1`` and ``MSp2`` and an execution space type ``Ex``, the following expressions will be valid with the specified meaning:
+``Kokkos::SpaceAccessibility<>`` is a traits class template that takes an :doc:`ExecutionSpace <execution_spaces>` type or :doc:`MemorySpace <memory_spaces>` type as the first template argument and a :doc:`MemorySpace <memory_spaces>` type as the second type and expresses details about the relationship between those entities. Given memory space types ``MSp1`` and ``MSp2`` and an execution space type ``Ex``, the following expressions will be valid with the specified meaning:
 
 ------------
 
@@ -28,9 +28,7 @@ Equivalent to ``Kokkos::SpaceAccessibility<MSp1::execution_space, MSp2>::accessi
     
     Kokkos::SpaceAccessibility<MSp1, MSp2>::assignable
 
-.. _KokkosView: :doc:`Kokkos::View <view/view>` 
-
-.. |KokkosView| replace:: ``Kokkos::View``
+.. |KokkosView| replace:: :cpp:class:`View`
 
 A compile-time value convertible to ``bool`` guaranteed to be ``true`` if and only if it is valid within the Kokkos programming model to assign values from  any (otherwise valid) instance of |KokkosView| type ``V2`` (with ``std::is_same<V2::memory_space, MSp2>::value`` equal to ``true``) to references retrieved from any (otherwise valid) instance of a |KokkosView| type ``V1`` (with ``std::is_same<V1::memory_space, MSp1>::value`` equal to ``true``).
 
@@ -48,7 +46,7 @@ Equivalent to ``Kokkos::SpaceAccessibility<Ex::memory_space, MSp1>::assignable``
     
     Kokkos::SpaceAccessibility<MSp1, MSp2>::deepcopy
 
-A compile-time value convertible to ``bool`` guaranteed to be ``true`` if and only if it is valid within the Kokkos programming model to :doc:`Kokkos::deep_copy <view/deep_copy>` from any (otherwise valid) instance of :doc:`Kokkos::View <view/view>` type ``V2`` (with ``std::is_same<V2::memory_space, MSp2>::value`` equal to ``true``) to any (otherwise valid and otherwise compatible) instance of a ``View`` type ``V1`` (with ``std::is_same<V1::memory_space, MSp1>::value`` equal to ``true``).  In other words, if ``v2`` is a valid instance of ``V2`` and ``v1`` is a valid instance of ``V1`` (with shape and other attributes otherwise compatible with ``v2``), the following expression will be well-defined and valid in the Kokkos programming model:
+A compile-time value convertible to ``bool`` guaranteed to be ``true`` if and only if it is valid within the Kokkos programming model to :cpp:func:`Kokkos::deep_copy` from any (otherwise valid) instance of |KokkosView| type ``V2`` (with ``std::is_same<V2::memory_space, MSp2>::value`` equal to ``true``) to any (otherwise valid and otherwise compatible) instance of a ``View`` type ``V1`` (with ``std::is_same<V1::memory_space, MSp1>::value`` equal to ``true``).  In other words, if ``v2`` is a valid instance of ``V2`` and ``v1`` is a valid instance of ``V1`` (with shape and other attributes otherwise compatible with ``v2``), the following expression will be well-defined and valid in the Kokkos programming model:
 
 .. code-block:: cpp
     

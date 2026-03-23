@@ -38,7 +38,7 @@ List
 General Template Arguments
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Valid template arguments are described :doc:`here <../Execution-Policies>`
+Valid template arguments are described :ref:`here <kokkos-common-arguments-for-all-execution-policies>`
 
 Usage
 ~~~~~

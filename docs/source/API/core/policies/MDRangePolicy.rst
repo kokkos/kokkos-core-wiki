@@ -32,7 +32,7 @@ Parameters
 General Template Arguments
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Valid template arguments for ``MDRangePolicy`` are described :doc:`here <../Execution-Policies>`
+Valid template arguments for ``MDRangePolicy`` are described :ref:`here <kokkos-common-arguments-for-all-execution-policies>`
 
 Required Arguments Specific to MDRangePolicy
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

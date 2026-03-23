@@ -6,10 +6,6 @@
 
 Header File: ``<Kokkos_ExecPolicy.hpp>``
 
-.. _parallelReduce: ../parallel-dispatch/parallel_reduce.html
-
-.. |parallelReduce| replace:: :cpp:func:`parallel_reduce`
-
 A tag used in team size calculation functions to indicate that the functor for which a team size is being requested is being used in a :doc:`parallel_reduce <../parallel-dispatch/parallel_reduce>`
 
 Usage

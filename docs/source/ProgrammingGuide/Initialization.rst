@@ -50,7 +50,9 @@ Kokkos chooses the two spaces using the following list:
 
 The highest execution space in the list that is enabled is Kokkos' default execution space, and the highest enabled host execution space is Kokkos' default host execution space. For example, if  `Kokkos::Cuda`, `Kokkos::OpenMP`, and `Kokkos::Serial` are enabled, then `Kokkos::Cuda` is the default execution space and `Kokkos::OpenMP` is the default host execution space\ :sup:`1`.  In cases where the highest enabled backend is a host parallel execution space the `DefaultExecutionSpace` and the `DefaultHostExecutionSpace` will be the same.
 
-:doc:`Kokkos::initialize <../API/core/Initialize-and-Finalize>` parses the command line for flags prefixed with `--kokkos-`, and removes all recognized flags. Argument options are given with an equals (`=`) sign. If the same argument occurs more than once, the last one is used. For example, the arguments
+:doc:`Kokkos::initialize <../API/core/initialize_finalize/initialize>` parses the command line for flags prefixed with `--kokkos-`, and removes all recognized flags. Argument options are given with an equals (`=`) sign. If the same argument occurs more than once, the last one is used. For example, the arguments
+
+.. code-block:: bash
 
     --kokkos-threads=4 --kokkos-threads=3
 
@@ -103,9 +105,9 @@ Initialization by environment variable
 
 Instead of using command-line arguments, one may use environment variables. The environment variables are identical to the arguments in :ref:`Table 4.1 <Table_cli-opts>` but they are upper case and the dash is replaced by an underscore. For example, if we want to set the number of threads to 3, we may use
 
-.. code-block:: sh
+.. code-block:: bash
 
-  KOKKOS_NUM_THREADS=3
+  export KOKKOS_NUM_THREADS=3
 
 
 Initialization by struct

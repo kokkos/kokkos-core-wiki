@@ -13,11 +13,7 @@ Usage:
     Kokkos::parallel_for(name, policy, functor);
     Kokkos::parallel_for(policy, functor);
 
-.. _text: ../policies/ExecutionPolicyConcept.html
-
-.. |text| replace:: *ExecutionPolicy*
-
-Dispatches parallel work defined by ``functor`` according to the :doc:`*ExecutionPolicy* <../policies/ExecutionPolicyConcept>` ``policy``. The optional label ``name`` is
+Dispatches parallel work defined by ``functor`` according to the :doc:`ExecutionPolicy <../policies/ExecutionPolicyConcept>` ``policy``. The optional label ``name`` is
 used by profiling and debugging tools. This call may be asynchronous and return to the callee immediately. 
 
 Interface

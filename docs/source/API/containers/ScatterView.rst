@@ -172,7 +172,7 @@ Description
 .. cpp:function:: contribute(View<DT1, VP...>& dest, Kokkos::Experimental::ScatterView<DT2, LY, ES, OP, CT, DP> const& src)
 
    convenience function to perform final reduction of ScatterView
-   results into a resultant View; may be called following :doc:`parallel_reduce <../core/parallel-dispatch/parallel_reduce>`.
+   results into a resultant View; may be called following :cpp:func:`Kokkos::parallel_reduce`.
 
 
 Example

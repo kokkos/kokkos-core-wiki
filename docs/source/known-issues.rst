@@ -13,6 +13,8 @@ Therefore, the header `Kokkos_Core.hpp` is protected against these macros, meani
 Even though definitions inside `Kokkos_Core.hpp` are protected against the macros, code outside is not.
 Thus, it is on the user to deal with the macros being defined, either by defining `-DNOMINMAX` or `/DNOMINMAX` in the compile line (preferred) or by putting `()` around names that contain `min` or `max`.
 
+.. _kokkos-known-issues-cuda:
+
 CUDA
 ====
 
@@ -150,10 +152,6 @@ Mathematical functions
       auto sqrt5 = sqrt(5);  // error: ambiguous ::sqrt or Kokkos::sqrt?
     }
 
-
-.. _Compatibility: ./ProgrammingGuide/Compatibility.html
-
-.. |Compatibility| replace:: Kokkos compatibility guidelines
 
 The using-directive ``using namespace Kokkos;`` is highly discouraged (see
 :doc:`Kokkos compatibility guidelines <./ProgrammingGuide/Compatibility>`) and will cause compilation errors in presence of unqualified

@@ -14,7 +14,7 @@ Boolean type trait to detect types that model :doc:`ExecutionPolicy concept <pol
 is_memory_space
 ---------------
 
-Boolean type trait to detect types that model :doc:`MemorySpace concept <memory_spaces>`.
+Boolean type trait to detect types that model :ref:`MemorySpace concept <kokkos-memoryspaceconcept>`.
 
 is_memory_traits
 ----------------

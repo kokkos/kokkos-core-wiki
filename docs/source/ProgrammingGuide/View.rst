@@ -586,6 +586,8 @@ A user is in most cases also allowed to obtain a pointer to a specific element v
 
 This is only valid if a Views reference type is an `lvalue`. That property can be queried statically at compile time from the view through its `reference_type_is_lvalue` member.
 
+.. _kokkos-memory-access-traits:
+
 Memory access traits
 --------------------
 
@@ -598,6 +600,8 @@ Another way to get optimized data accesses is to specify memory traits. These tr
   Kokkos::View<int*, Kokkos::LayoutLeft, Kokkos::MemoryTraits<SomeTrait | SomeOtherTrait> > c;
   Kokkos::View<int*, MemorySpace, Kokkos::MemoryTraits<SomeTrait | SomeOtherTrait> > d;
   Kokkos::View<int*, Kokkos::LayoutLeft, MemorySpace, Kokkos::MemoryTraits<SomeTrait> > e;
+
+.. _kokkos-unmanaged-view:
 
 Unmanaged Views
 ~~~~~~~~~~~~~~~
