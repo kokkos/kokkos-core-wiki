@@ -59,6 +59,9 @@ HIP
 
   gcc 7, 9, and later do not have this issue.
 
+- When compiling for architectures gfx10+ or gfx11+, the amd compiler can generate illegal instructions (https://github.com/ROCm/ROCm/issues/5826).
+  A possible work around is to replace the `-O0` optimization flag with `-Og`, this can be set via `DCMAKE_CXX_FLAGS_DEBUG="-Og -g"` (https://rocm.docs.amd.com/en/7.11.0-preview/about/release-notes.html#clang-illegal-instruction-error-on-radeon-gpus).
+
 SYCL
 ====
 
