@@ -370,7 +370,8 @@ parallel_for (policy, KOKKOS_LAMBDA (const team_member& thread) {
 });
 ```
 
-Here is an example of using the broadcast capabilities to determine the start offset for a team in a buffer:
+Here is an example of using the broadcast capabilities to determine the start offset for a team in a buffer.
+All threads within the team will observe the same value for ``team_offset`` after the call to ``single``.
 
 ```c++
 using Kokkos::parallel_for;
@@ -392,9 +393,10 @@ parallel_for (policy, KOKKOS_LAMBDA (const team_member& thread) {
     KOKKOS_LAMBDA (const int& i, int& lsum) {
       if(...) lsum++;
   });
+  int team_offset;
   Kokkos::single (PerTeam (thread), [=] (int& my_offset) {
    my_offset = Kokkos::atomic_fetch_add(&offset(),lsum);
-  });
+  }, team_offset);
   ...
 });
 ```
