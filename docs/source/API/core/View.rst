@@ -10,29 +10,29 @@ The following facilities are available:
 
    * - Class
      - Description
-   * - `create_mirror[_view] <view/create_mirror.html>`__
+   * - :doc:`create_mirror[_view] <view/create_mirror>`
      - Creating a copy of a ``Kokkos::View`` in a different memory space.
-   * - `deep_copy() <view/deep_copy.html>`__
+   * - :doc:`deep_copy() <view/deep_copy>`
      - Copying data between views and scalars.
-   * - `LayoutLeft <view/layoutLeft.html>`__
+   * - :doc:`LayoutLeft <view/layoutLeft>`
      - Memory Layout matching Fortran.
-   * - `LayoutRight <view/layoutRight.html>`__
+   * - :doc:`LayoutRight <view/layoutRight>`
      - Memory Layout matching C.
-   * - `LayoutStride <view/layoutStride.html>`__
+   * - :doc:`LayoutStride <view/layoutStride>`
      - Memory Layout for arbitrary strides.
-   * - `MemoryTraits <view/memoryTraits.html>`__
+   * - :doc:`MemoryTraits <view/memoryTraits>`
      - Memory access traits.
-   * - `realloc <view/realloc.html>`__
+   * - :doc:`realloc <view/realloc>`
      - Reallocating a ``Kokkos::View``.
-   * - `resize <view/resize.html>`__
+   * - :doc:`resize <view/resize>`
      - Resizing a ``Kokkos::View``.
-   * - `subview <view/subview.html>`__
+   * - :doc:`subview <view/subview>`
      - Getting slices from a ``Kokkos::View``.
-   * - `View <view/view.html>`__
+   * - :doc:`View <view/view>`
      - The main Kokkos data structure, a multidimensional memory space and layout aware array.
-   * - `view_alloc() <view/view_alloc.html>`__
+   * - :doc:`view_alloc() <view/view_alloc>`
      - Create View allocation parameter bundle from argument list.
-   * - `View-like Types <view/view_like.html>`__
+   * - :doc:`View-like Types <view/view_like>`
      - Loosely defined as the set of class templates that behave like ``Kokkos::View``.
 
 .. toctree::

@@ -87,7 +87,7 @@ Parameters
 General Template Arguments
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Valid template arguments for ``RangePolicy`` are described `here <../Execution-Policies.html#common-arguments-for-all-execution-policies>`_
+Valid template arguments for ``RangePolicy`` are described :ref:`here <kokkos-common-arguments-for-all-execution-policies>`
 
 Public Class Members
 --------------------

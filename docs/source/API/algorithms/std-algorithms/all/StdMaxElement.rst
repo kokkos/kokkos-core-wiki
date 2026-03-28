@@ -92,11 +92,7 @@ Overload set accepting a team handle
 Parameters and Requirements
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. _min_element_link: ./StdMinElement.html
-
-.. |min_element_link| replace:: ``min_element``
-
-- ``exespace``, ``first``, ``last``, ``view``, ``comp``: same as in |min_element_link|_
+- ``exespace``, ``first``, ``last``, ``view``, ``comp``: same as in :doc:`min_element <./StdMinElement>`
 
 - ``teamHandle``: team handle instance given inside a parallel region when using a TeamPolicy
 

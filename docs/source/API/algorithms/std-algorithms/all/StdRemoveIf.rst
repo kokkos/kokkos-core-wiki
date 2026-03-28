@@ -71,10 +71,7 @@ Overload set accepting a team handle
 Parameters and Requirements
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. |remove| replace:: ``remove``
-.. _remove: ./StdRemove.html
-
-- ``exespace``, ``first``, ``last``, ``view``: same as in |remove|_
+- ``exespace``, ``first``, ``last``, ``view``: same as in :doc:`remove <./StdRemove>`
 
 - ``teamHandle``: team handle instance given inside a parallel region when using a TeamPolicy
 

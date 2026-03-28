@@ -34,35 +34,15 @@ we can maintain the flexibility we need while minimizing cognitive load on users
 Overview
 --------
 
-.. _ExecutionSpace: execution_spaces.html
-
-.. |ExecutionSpace| replace:: ``ExecutionSpace``
-
-.. _MemorySpace: memory_spaces.html
-
-.. |MemorySpace| replace:: ``MemorySpace``
-
-.. _ExecutionPolicy: Execution-Policies.html
-
-.. |ExecutionPolicy| replace:: ``ExecutionPolicy``
-
-.. _RangePolicy: policies/RangePolicy.html
-
-.. |RangePolicy| replace:: ``RangePolicy``
-
-.. _TeamMember: policies/TeamHandleConcept.html
-
-.. |TeamMember| replace:: ``TeamMember``
-
 When it comes to cognitive load, perhaps even more important than limiting the total number of
 concepts is limiting the number of *subsumption hierarchies* of concepts. Experience with C++ ranges has also shown that
 limiting the branching width of these hierarchies increases ease of learning.
 Roughly speaking and from a high-level perspective, the major user-visible concept hierarchies that Kokkos currently uses are:
 
-* |ExecutionSpace|_
-* |MemorySpace|_
-* |ExecutionPolicy|_ (includes, for instance, |RangePolicy|_)
-* |TeamMember|_
+* :doc:`ExecutionSpace <execution_spaces>`
+* :doc:`MemorySpace <memory_spaces>`
+* :doc:`ExecutionPolicy <Execution-Policies>` (includes, for instance, :doc:`RangePolicy <policies/RangePolicy>`)
+* :doc:`TeamMember <policies/TeamHandleConcept>`
 * ``Functor``
 
 Some minor hierarchies include:
@@ -80,11 +60,7 @@ Some things currently being treated as concepts (according to ``Kokkos_Concepts.
     - The ``LaunchBounds<>`` tag
     - ``IterationPattern`` (a.k.a. ``Kokkos::Iterate``)
 
-.. _Kokkos_View: view/view.html
-
-.. |Kokkos_View| replace:: ``Kokkos::View``
-
-There is also some question as to whether |Kokkos_View|_ (and friends) should be presented
+There is also some question as to whether :doc:`Kokkos::View <view/view>` (and friends) should be presented
 as a concept rather than just a class template, given the existence of act-alike
 class templates such as ``DualView`` and ``OffsetView`` external to Kokkos.
 
@@ -96,7 +72,7 @@ The ``ExecutionSpace`` Concept
 .. |ExecutionSpaceTwo| replace:: ``ExecutionSpace``
 
 Working off the functionality currently common to ``Serial``, ``Cuda``, ``OpenMP``, ``Threads``, ``HIP``,
-and ``OpenMPTarget``, the current state of the Kokkos |ExecutionSpaceTwo|_ concept looks something like:
+and ``OpenMPTarget``, the current state of the Kokkos :doc:`ExecutionSpace <execution_spaces>` concept looks something like:
 
 .. code-block:: cpp
 
@@ -133,10 +109,6 @@ currently implemented as static methods eventually need only be instance methods
 Implementation Requirements
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. _Kokkos_parallel_for: parallel-dispatch/parallel_for.html
-
-.. |Kokkos_parallel_for| replace:: ``Kokkos::parallel_for``
-
 Further requirements cannot be expressed without additional types constrained by additional concepts
 (this is a well-known limitation of the concepts mechanism in C++, and is necessary to preserve decidability of the type system).
 Though some argue for using an archetype pattern to get around this (whereby an archetype with an implementation-private
@@ -145,7 +117,7 @@ the state of practice appears to be converging on a strategy that involves creat
 concept templated on all relevant types and constraining them together, which can then be used at relevant call site.
 Most argue that this is a necessary artifact of the language feature, but that constraining concepts together
 in this way does not count as an "extra" concept for the purposes of cognitive load assessment.
-Applying this approach and assuming the intention is for things like |Kokkos_parallel_for|_ to remain
+Applying this approach and assuming the intention is for things like :doc:`Kokkos::parallel_for <parallel-dispatch/parallel_for>` to remain
 as algorithms rather than customization points, we get some further requirements from the ``Kokkos::Impl`` namespace:
 
 .. code-block:: cpp

@@ -7,40 +7,40 @@ Core API
 
    * - Reducer
      - Description
-   * - `Initialization and Finalization <core/Initialize-and-Finalize.html>`__
+   * - :doc:`Initialization and Finalization <core/Initialize-and-Finalize>`
      - Initialization and finalization of Kokkos.
-   * - `View and related <core/View.html>`__
+   * - :doc:`View and related <core/View>`
      - Kokkos MultiDimensional View class and related free functions.
-   * - `Parallel Execution/Dispatch <core/ParallelDispatch.html>`__
+   * - :doc:`Parallel Execution/Dispatch <core/ParallelDispatch>`
      - Parallel Execution Dispatch.
-   * - `Built-in Reducers <core/builtin_reducers.html>`__
+   * - :doc:`Built-in Reducers <core/builtin_reducers>`
      - Built-in Reducers
-   * - `Execution Policies <core/Execution-Policies.html>`__
+   * - :doc:`Execution Policies <core/Execution-Policies>`
      - Execution policies.
-   * - `Spaces <core/Spaces.html>`__
+   * - :doc:`Spaces <core/Spaces>`
      - Description of Memory and Execution Spaces.
-   * - `Task-Parallelism <core/Task-Parallelism.html>`__
+   * - :doc:`Task-Parallelism <core/Task-Parallelism>`
      - Creating and dispatching Task Graphs.
-   * - `MultiGPU Support <core/MultiGPUSupport.html>`__
+   * - :doc:`MultiGPU Support <core/MultiGPUSupport>`
      - Launching kernels on multiple GPUs from one process.
-   * - `Atomics <core/atomics.html>`__
+   * - :doc:`Atomics <core/atomics>`
      - Atomics
-   * - `Numerics <core/Numerics.html>`__
+   * - :doc:`Numerics <core/Numerics>`
      - Common mathematical functions, mathematical constants, numeric traits,
        complex numbers, half-precision floating-point types.
-   * - `C-style memory management <core/c_style_memory_management.html>`__
+   * - :doc:`C-style memory management <core/c_style_memory_management>`
      - C-style memory management
-   * - `Traits <core/Prod.html>`__
+   * - :doc:`Traits <core/Traits>`
      - Traits
-   * - `Kokkos Concepts <core/KokkosConcepts.html>`__
+   * - :doc:`Kokkos Concepts <core/KokkosConcepts>`
      - Kokkos Concepts
-   * - `STL Compatibility Issues <core/STL-Compatibility.html>`__
+   * - :doc:`STL Compatibility Issues <core/STL-Compatibility>`
      - Ports of standard C++ capabilities, which otherwise do not work on various hardware platforms.
-   * - `Utilities <core/Utilities.html>`__
+   * - :doc:`Utilities <core/Utilities>`
      - Utility functionality part of Kokkos Core.
-   * - `Detection Idiom <core/Detection-Idiom.html>`__
+   * - :doc:`Detection Idiom <core/Detection-Idiom>`
      - Used to recognize, in an SFINAE-friendly way, the validity of any C++ expression.
-   * - `Macros <core/Macros.html>`__
+   * - :doc:`Macros <core/Macros>`
      - Global macros defined by Kokkos, used for architectures, general settings, etc.
 
 .. toctree::

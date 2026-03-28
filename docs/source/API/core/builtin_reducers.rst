@@ -1,9 +1,9 @@
 Built-in Reducers
 =================
 
-`ReducerConcept <builtinreducers/ReducerConcept.html>`__ provides the concept for Reducers.
+:doc:`ReducerConcept <builtinreducers/ReducerConcept>` provides the concept for Reducers.
 
-Reducer objects used in conjunction with `parallel_reduce <parallel-dispatch/parallel_reduce.html>`__
+Reducer objects used in conjunction with :doc:`parallel_reduce <parallel-dispatch/parallel_reduce>`
 
 .. list-table::
    :widths: 25 75
@@ -11,29 +11,29 @@ Reducer objects used in conjunction with `parallel_reduce <parallel-dispatch/par
 
    * - Reducer
      - Description
-   * - `BAnd <builtinreducers/BAnd.html>`__
+   * - :doc:`BAnd <builtinreducers/BAnd>`
      - Binary 'And' reduction
-   * - `BOr <builtinreducers/BOr.html>`__
+   * - :doc:`BOr <builtinreducers/BOr>`
      - Binary 'Or' reduction
-   * - `LAnd <builtinreducers/LAnd.html>`__
+   * - :doc:`LAnd <builtinreducers/LAnd>`
      - Logical 'And' reduction
-   * - `LOr <builtinreducers/LOr.html>`__
+   * - :doc:`LOr <builtinreducers/LOr>`
      - Logical 'Or' reduction
-   * - `Max <builtinreducers/Max.html>`__
+   * - :doc:`Max <builtinreducers/Max>`
      - Maximum reduction
-   * - `MaxLoc <builtinreducers/MaxLoc.html>`__
+   * - :doc:`MaxLoc <builtinreducers/MaxLoc>`
      - Reduction providing maximum and an associated index
-   * - `Min <builtinreducers/Min.html>`__
+   * - :doc:`Min <builtinreducers/Min>`
      - Minimum reduction
-   * - `MinLoc <builtinreducers/MinLoc.html>`__
+   * - :doc:`MinLoc <builtinreducers/MinLoc>`
      - Reduction providing minimum and an associated index
-   * - `MinMax <builtinreducers/MinMax.html>`__
+   * - :doc:`MinMax <builtinreducers/MinMax>`
      - Reduction providing both minimum and maximum
-   * - `MinMaxLoc <builtinreducers/MinMaxLoc.html>`__
+   * - :doc:`MinMaxLoc <builtinreducers/MinMaxLoc>`
      - Reduction providing both minimum and maximum and associated indices
-   * - `Prod <builtinreducers/Prod.html>`__
+   * - :doc:`Prod <builtinreducers/Prod>`
      - Multiplicative reduction
-   * - `Sum <builtinreducers/Sum.html>`__
+   * - :doc:`Sum <builtinreducers/Sum>`
      - Sum reduction
 
 
@@ -41,7 +41,7 @@ Reducer objects used in conjunction with `parallel_reduce <parallel-dispatch/par
 for various reduction operations. Specializing it is crucial for enabling
 built-in reducers to work with user-defined types.
 
-`Reduction Scalar Types <builtinreducers/ReductionScalarTypes.html>`__ are template classes for storage for reducers.
+:doc:`Reduction Scalar Types <builtinreducers/ReductionScalarTypes>` are template classes for storage for reducers.
 
 .. toctree::
    :hidden:

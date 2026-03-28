@@ -3,7 +3,7 @@
 
 .. warning::
    Deprecated since Kokkos 4.5,
-   use `atomic_compare_exchange <atomic_compare_exchange.html>`_ instead.
+   use :doc:`atomic_compare_exchange <atomic_compare_exchange>` instead.
 
 .. role:: cpp(code)
    :language: cpp

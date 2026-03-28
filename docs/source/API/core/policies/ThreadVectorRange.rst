@@ -13,7 +13,7 @@ Usage:
    parallel_scan(ThreadVectorRange(team,range), 
      [=] (int i, double& lsum, bool final) {...});
 
-ThreadVectorRange is a `nested execution policy <NestedPolicies.html>`__ used inside hierarchical parallelism. 
+ThreadVectorRange is a :doc:`nested execution policy <NestedPolicies>` used inside hierarchical parallelism. 
 In contrast to global policies, the public interface for nested policies is implemented 
 as functions, in order to enable implicit templating on the execution space type via 
 the team handle.
@@ -52,13 +52,13 @@ Splits the index range ``0`` to ``count-1`` over the vector lanes of the calling
 
 *  **Requirements**
 
-   * ``TeamMemberType`` is a type that models `TeamHandle <TeamHandleConcept>`__
+   * ``TeamMemberType`` is a type that models :doc:`TeamHandle <TeamHandleConcept>`
 
    * ``std::is_integral<iType>::value`` is true.
 
    * ``count >= 0`` is true;
 
-   * This function can not be called inside a parallel operation dispatched using a `TeamVectorRange <TeamVectorRange>`__ policy or ``ThreadVectorRange`` policy.
+   * This function can not be called inside a parallel operation dispatched using a :doc:`TeamVectorRange <TeamVectorRange>` policy or ``ThreadVectorRange`` policy.
 
 
 .. code-block:: cpp
@@ -83,7 +83,7 @@ Splits the index range ``begin`` to ``end-1`` over the vector lanes of the calli
 
 * **Requirements**:
 
-  * ``TeamMemberType`` is a type that models `TeamHandle <TeamHandleConcept.html>`__   
+  * ``TeamMemberType`` is a type that models :doc:`TeamHandle <TeamHandleConcept>`   
   
   * ``std::is_integral<iType1>::value`` is true.
 
@@ -91,7 +91,7 @@ Splits the index range ``begin`` to ``end-1`` over the vector lanes of the calli
 
   * ``end >= begin`` is true;
 
-  * This function can not be called inside a parallel operation dispatched using a `TeamVectorRange <TeamVectorRange.html>`__ policy or ``ThreadVectorRange`` policy.
+  * This function can not be called inside a parallel operation dispatched using a :doc:`TeamVectorRange <TeamVectorRange>` policy or ``ThreadVectorRange`` policy.
 
   
 Examples

@@ -7,9 +7,7 @@ Header File: ``<Kokkos_Core.hpp>``
 
 .. |CppReferenceSharedPtr| replace:: ``std::shared_ptr``
 
-.. _ProgrammingGuide: ../../../ProgrammingGuide/View.html#memory-access-traits
-
-.. |ProgrammingGuide| replace:: Programming Guide
+.. |ProgrammingGuide| replace:: :ref:`Programming Guide  <kokkos-memory-access-traits>`
 
 Class Interface
 ---------------
@@ -64,7 +62,7 @@ Class Interface
       - ``Restrict``
       - ``Aligned``
 
-      See the sub-section on memory access traits in the |ProgrammingGuide|_ also for further information.
+      See the sub-section on memory access traits in the |ProgrammingGuide| also for further information.
 
 ..
    Pushing a "namespace" here; this doesn't create a namespace entity but tells Sphinx that everything between here and the pop is part of the View class.
@@ -181,7 +179,6 @@ Data Handles
       :cpp:func:`operator()`
 
       :cpp:func:`access()`
-
 
 .. cpp:type:: pointer_type
 

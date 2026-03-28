@@ -14,29 +14,17 @@ Execution Spaces
 
 .. |DocExecutionSpaceConcept| replace:: the documentation on the :cpp:func:`ExecutionSpace` concept
 
-.. _Experimental: utilities/experimental.html#experimentalnamespace
-
-.. |Experimental| replace:: Experimental
-
-.. _KokkosConcepts: KokkosConcepts.html
-
-.. |KokkosConcepts| replace:: this document
+.. |Experimental| replace:: :doc:`Experimental <utilities/experimental>`
 
 .. _ExecutionSpaceS: #kokkos-executionspaceconcept
 
 .. |ExecutionSpaceS| replace:: :cpp:func:`ExecutionSpace` s
 
-.. _MemorySpace: memory_spaces.html#kokkos-memoryspaceconcept
+.. |MemorySpace| replace:: :ref:`MemorySpace <kokkos-memoryspaceconcept>`
 
-.. |MemorySpace| replace:: :cpp:func:`MemorySpace`
+.. |KokkosSpaceAccessibility| replace:: :doc:`Kokkos::SpaceAccessibility <SpaceAccessibility>`
 
-.. _KokkosSpaceAccessibility: SpaceAccessibility.html
-
-.. |KokkosSpaceAccessibility| replace:: :cpp:func:`Kokkos::SpaceAccessibility`
-
-.. _KokkosTeamPolicy: policies/TeamPolicy.html
-
-.. |KokkosTeamPolicy| replace:: :cpp:func:`Kokkos::TeamPolicy`
+.. |KokkosTeamPolicy| replace:: :cpp:class:`TeamPolicy`
 
 .. _ExecutionSpaceConcept: #kokkos-executionspaceconcept
 
@@ -48,18 +36,17 @@ Execution Spaces
 ``Kokkos::Cuda`` is an |ExecutionSpaceConceptType|_ representing execution on a Cuda device.
 Except in rare instances, it should not be used directly, but instead should be used generically as an execution space. For details, see |DocExecutionSpaceConcept|_.
 
-
 ``Kokkos::HIP``
 ---------------
 
-``Kokkos::HIP`` :sup:`promoted from` |Experimental|_ :sup:`since 4.0` is an |ExecutionSpaceConceptType|_ representing
+``Kokkos::HIP`` :sup:`promoted from` |Experimental| :sup:`since 4.0` is an |ExecutionSpaceConceptType|_ representing
 execution on a device supported by HIP. Except in rare instances, it should not be used directly,
 but instead should be used generically as an execution space. For details, see |DocExecutionSpaceConcept|_.
 
 ``Kokkos::SYCL``
 ------------------------------
 
-``Kokkos::SYCL`` :sup:`promoted from` |Experimental|_ :sup:`since 4.5` is an |ExecutionSpaceConceptType|_ representing execution on a device supported by SYCL.
+``Kokkos::SYCL`` :sup:`promoted from` |Experimental| :sup:`since 4.5` is an |ExecutionSpaceConceptType|_ representing execution on a device supported by SYCL.
 
 If the SYCL backend is enabled and no GPU architecture is specified, Kokkos will use Just-In-Time compilation without any restriction to a particular SYCL device type.
 Thus, this is the only option to target a CPU with the SYCL backend (which is experimental, untested, and not optimized for).
@@ -99,13 +86,15 @@ generically as an execution space. For details, see |DocExecutionSpaceConcept|_.
 Except in rare instances, it should not be used directly, but instead should be
 used generically as an execution space. For details, see |DocExecutionSpaceConcept|_.
 
+.. _kokkos-executionspaceconcept:
+
 ``Kokkos::ExecutionSpaceConcept``
 ---------------------------------
 
 The concept of an ``ExecutionSpace`` is the fundamental abstraction to represent the "where" and the "how"
 that execution takes place in Kokkos.  Most code that uses Kokkos should be written to the *generic concept*
 of an ``ExecutionSpace`` rather than any specific instance.  This page talks practically about how to *use*
-the common features of execution spaces in Kokkos; for a more formal and theoretical treatment, see |KokkosConcepts|_.
+the common features of execution spaces in Kokkos; for a more formal and theoretical treatment, see :doc:`this document <KokkosConcepts>`.
 
   *Disclaimer*: There is nothing new about the term "concept" in C++; anyone who has ever used templates
   in C++ has used concepts whether they knew it or not.  Please do not be confused by the word "concept" itself,
@@ -234,11 +223,11 @@ where ``ostr`` is a ``std::ostream`` (like ``std::cout``, for instance) and ``de
 
 Additionally, the following type aliases (a.k.a. ``typedef`` s) will be defined by all execution space types:
 
-* ``Ex::memory_space``: the default |MemorySpace|_ to use when executing with ``Ex``. Kokkos guarantees that ``Kokkos::SpaceAccessibility<Ex, Ex::memory_space>::accessible`` will be ``true`` (see |KokkosSpaceAccessibility|_)
+* ``Ex::memory_space``: the default |MemorySpace| to use when executing with ``Ex``. Kokkos guarantees that ``Kokkos::SpaceAccessibility<Ex, Ex::memory_space>::accessible`` will be ``true`` (see |KokkosSpaceAccessibility|)
 
 * ``Ex::array_layout``: the default ``ArrayLayout`` recommended for use with ``View`` types accessed from ``Ex``.
 
-* ``Ex::scratch_memory_space``: the ``ScratchMemorySpace`` that parallel patterns will use for allocation of scratch memory (for instance, as requested by a |KokkosTeamPolicy|_). Only unmanaged Views can be created using this memory space.
+* ``Ex::scratch_memory_space``: the ``ScratchMemorySpace`` that parallel patterns will use for allocation of scratch memory (for instance, as requested by a |KokkosTeamPolicy|). Only unmanaged Views can be created using this memory space.
 
 Default Constructibility, Copy Constructibility
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -301,13 +290,13 @@ Typedefs
 
 * ``execution_space``: The self type;
 
-* ``memory_space``: The default |MemorySpace|_ to use when executing with |ExecutionSpaceConcept|_. Kokkos guarantees that ``Kokkos::SpaceAccessibility<Ex, Ex::memory_space>::accessible`` will be ``true`` (see |KokkosSpaceAccessibility|_)
+* ``memory_space``: The default |MemorySpace| to use when executing with |ExecutionSpaceConcept|_. Kokkos guarantees that ``Kokkos::SpaceAccessibility<Ex, Ex::memory_space>::accessible`` will be ``true`` (see |KokkosSpaceAccessibility|)
 
 * ``device_type``: ``DeviceType<execution_space,memory_space>``.
 
 * ``array_layout``: The default ``ArrayLayout`` recommended for use with ``View`` types accessed from |ExecutionSpaceConcept|_.
 
-* ``scratch_memory_space``: The ``ScratchMemorySpace`` that parallel patterns will use for allocation of scratch memory (for instance, as requested by a |KokkosTeamPolicy|_). Only unmanaged Views can be created using this memory space.
+* ``scratch_memory_space``: The ``ScratchMemorySpace`` that parallel patterns will use for allocation of scratch memory (for instance, as requested by a |KokkosTeamPolicy|). Only unmanaged Views can be created using this memory space.
 
 * ``size_type``: The default integer type associated with this space. Signed or unsigned, 32 or 64 bit integer type, used as preferred type for indexing.
 
@@ -334,6 +323,6 @@ Non Member Facilities
 
 * ``template<class MS> struct is_execution_space;``: typetrait to check whether a class is a execution space.
 
-* ``template<class S1, class S2> struct SpaceAccessibility;``: typetraits to check whether two spaces are compatible (assignable, deep_copy-able, accessible). (see |KokkosSpaceAccessibility|_)
+* ``template<class S1, class S2> struct SpaceAccessibility;``: typetraits to check whether two spaces are compatible (assignable, deep_copy-able, accessible). (see |KokkosSpaceAccessibility|)
 
 * ``bool operator==(const execution_space& lhs, const execution_space& rhs)``: tests whether the two space instances (of the same type) are identical.

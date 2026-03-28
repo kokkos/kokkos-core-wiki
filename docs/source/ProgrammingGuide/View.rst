@@ -586,6 +586,8 @@ A user is in most cases also allowed to obtain a pointer to a specific element v
 
 This is only valid if a Views reference type is an `lvalue`. That property can be queried statically at compile time from the view through its `reference_type_is_lvalue` member.
 
+.. _kokkos-memory-access-traits:
+
 Memory access traits
 --------------------
 
@@ -599,6 +601,8 @@ Another way to get optimized data accesses is to specify memory traits. These tr
   Kokkos::View<int*, MemorySpace, Kokkos::MemoryTraits<SomeTrait | SomeOtherTrait> > d;
   Kokkos::View<int*, Kokkos::LayoutLeft, MemorySpace, Kokkos::MemoryTraits<SomeTrait> > e;
 
+.. _kokkos-unmanaged-view:
+
 Unmanaged Views
 ~~~~~~~~~~~~~~~
 
@@ -608,7 +612,7 @@ Unmanaged Views
 
 It's always better to let Kokkos control memory allocation, but sometimes you don't have a choice. You might have to work with an application or an interface that returns a raw pointer, for example. Kokkos lets you wrap raw pointers in an *unmanaged View*. "Unmanaged" means that Kokkos does *neither* reference counting *nor* automatic deallocation for those Views. The following example shows how to create an unmanaged View of host memory. You may do this for CUDA device memory too, or indeed for memory allocated in any memory space, by specifying the View's execution or memory space accordingly. Note that the pointer to the allocation has to be provided to the constructor.
 
-We would like to highlight that in Kokkos, Views are managed by default. In other words, if a View is not created as an unmanaged View, then it is managed, irrespective of other memory traits. Thus, an explicit memory trait for managed Views (with an alias called ``Kokkos::MemoryManaged``), has been deprecated in Kokkos 4.7. Since, it has no practical value. See the API reference on |MemoryTraits|_. 
+We would like to highlight that in Kokkos, Views are managed by default. In other words, if a View is not created as an unmanaged View, then it is managed, irrespective of other memory traits. Thus, an explicit memory trait for managed Views (with an alias called ``Kokkos::MemoryManaged``), has been deprecated in Kokkos 4.7. Since, it has no practical value. See the API reference on :doc:`memory traits <../API/core/view/memoryTraits>`. 
 
 .. code-block:: c++
 
@@ -649,8 +653,8 @@ While `RandomAccess` is valid for other execution spaces, currently no specific 
 
 .. |Atomic| replace:: Atomic
 
-|Atomic|_ Access
-~~~~~~~~~~~~~~~~
+:doc:`Atomic <../API/core/atomics>` Access
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The `Atomic` access trait lets you create a View of data such that every read or write to any entry uses an atomic update. Kokkos supports atomics for all data types independent of size. Restrictions are that you are
 

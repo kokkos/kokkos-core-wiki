@@ -31,6 +31,6 @@ Description
 
 See also
 --------
-* `atomic_load <atomic_load.html>`_: atomically obtains the value of the referenced object
-* `atomic_store <atomic_store.html>`_: atomically replaces the value of the referenced object with a non-atomic argument
-* `atomic_compare_exchange <atomic_compare_exchange.html>`_: atomically compares the value of the referenced object with non-atomic argument and performs atomic exchange if equal or atomic load if not
+* :doc:`atomic_load <atomic_load>`: atomically obtains the value of the referenced object
+* :doc:`atomic_store <atomic_store>`: atomically replaces the value of the referenced object with a non-atomic argument
+* :doc:`atomic_compare_exchange <atomic_compare_exchange>`: atomically compares the value of the referenced object with non-atomic argument and performs atomic exchange if equal or atomic load if not

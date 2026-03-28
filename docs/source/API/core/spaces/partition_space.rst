@@ -29,7 +29,7 @@ Interface
    hardware resources as an existing execution space instance.
    There is no implied synchronization relationship between the newly created instances and the pre-existing instance.
 
-   :param space: an execution space instance (see ../execution_spaces.html)
+   :param space: an execution space instance (see :doc:`execution_spaces <../execution_spaces>`)
 
    :param args: the number of created instances is equal to ``sizeof...(Args)``.
 		The relative weight of ``args`` is a hint for the fraction of hardware resources of ``space``

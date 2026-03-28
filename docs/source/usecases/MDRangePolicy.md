@@ -137,5 +137,4 @@ The API reference for the [`MDRangePolicy`](../API/core/policies/MDRangePolicy) 
 The use case that this example is based on comes from the Intrepid2 package of Trilinos. For more examples, check out code in Trilinos in files at: `Trilinos/packages/intrepid2/src/Shared/Intrepid2_ArrayToolsDef*.hpp`.
 
 This link provides some overview of the Intrepid package: 
-  [documentation link](https://trilinos.org/packages/intrepid/)
-
+  [documentation link](https://trilinos.github.io/docs/intrepid2/index.html)

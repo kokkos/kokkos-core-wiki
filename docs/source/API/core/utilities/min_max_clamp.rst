@@ -56,20 +56,8 @@ Notes
 See also
 --------
 
-.. _min_element: ../../algorithms/std-algorithms/all/StdMinElement.html
+:doc:`min_element <../../algorithms/std-algorithms/all/StdMinElement>`: returns the smallest element in a range
 
-.. |min_element| replace:: ``min_element``
+:doc:`max_element <../../algorithms/std-algorithms/all/StdMaxElement>`: returns the largest element in a range
 
-.. _max_element: ../../algorithms/std-algorithms/all/StdMaxElement.html
-
-.. |max_element| replace:: ``max_element``
-
-.. _minmax_element: ../../algorithms/std-algorithms/all/StdMinMaxElement.html
-
-.. |minmax_element| replace:: ``minmax_element``
-
-|min_element|_: returns the smallest element in a range
-
-|max_element|_: returns the largest element in a range
-
-|minmax_element|_: returns the smallest and the largest elements in a range
+:doc:`minmax_element <../../algorithms/std-algorithms/all/StdMinMaxElement>`: returns the smallest and the largest elements in a range

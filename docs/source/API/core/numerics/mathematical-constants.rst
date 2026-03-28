@@ -84,13 +84,9 @@ double`` constant without the ``_v`` suffix. These are shorthand for the
 Notes
 -----
 
-.. _KnownIssues: ../../../known-issues.html#mathematical-constants
-
-.. |KnownIssues| replace:: known issues
-
 * The mathematical constants are available in ``Kokkos::Experimental::`` since Kokkos 3.6
 * They were "promoted" to the ``Kokkos::numbers`` namespace in 4.0 and removed from ``Kokkos::Experimental::`` in 4.3
-* Passing mathematical constants by reference or taking their address in device code is not supported by some toolchains and hence not portable.  (See |KnownIssues|_)
+* Passing mathematical constants by reference or taking their address in device code is not supported by some toolchains and hence not portable. (See :ref:`known issue <kokkos-known-issues-mathematical-constants>`)
 * Support for quadruple precision floating-point ``__float128`` can be enabled
   via ``-DKokkos_ENABLE_LIBQUADMATH=ON``.
 
@@ -111,6 +107,6 @@ Example
 See also
 --------
 
-`Common mathematical functions <mathematical-functions.html>`_
+:doc:`Common mathematical functions <mathematical-functions>`
 
-`Numeric traits <numeric-traits.html>`_
+:doc:`Numeric traits <numeric-traits>`

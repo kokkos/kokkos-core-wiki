@@ -235,7 +235,7 @@ Backend-specific options
       * Enable relocatable device code (RDC) for CUDA [#rdc_with_shared_libs]_
       * ``OFF``
 
-    * * ``Kokkos_ENABLE_CUDA_UVM`` :red:`[Deprecated since 4.0]` see `Transition to alternatives <../usecases/Moving_from_EnableUVM_to_SharedSpace.html>`_
+    * * ``Kokkos_ENABLE_CUDA_UVM`` :red:`[Deprecated since 4.0]` see :doc:`Transition to alternatives <../usecases/Moving_from_EnableUVM_to_SharedSpace>`
       * Use unified memory (UM) by default for CUDA
       * ``OFF``
 
@@ -243,7 +243,7 @@ Backend-specific options
       * Use ``cudaMallocAsync`` (requires CUDA Toolkit version 11.2 or higher). This
 	optimization may improve performance in applications with multiple CUDA streams per device, but it
 	is known to be incompatible with MPI distributions built on older versions of UCX
-	and many Cray MPICH instances. See `known issues <../known-issues.html#cuda>`_.
+	and many Cray MPICH instances. See :ref:`known issues <kokkos-known-issues-cuda>`.
       * (see below [#cuda_malloc_async]_)
 
     * * ``Kokkos_ENABLE_HIP_MULTIPLE_KERNEL_INSTANTIATIONS``

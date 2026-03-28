@@ -95,10 +95,7 @@ Overload set accepting a team handle
 Parameters and Requirements
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. |IsSorted| replace:: ``is_sorted``
-.. _IsSorted: ./StdIsSorted.html
-
-- ``exespace``, ``teamHandle``, ``first``, ``last``, ``view``, ``comp``: same as in |IsSorted|_
+- ``exespace``, ``teamHandle``, ``first``, ``last``, ``view``, ``comp``: same as in :doc:`is_sorted <./StdIsSorted>`
 
 - ``label``: string forwarded to internal parallel kernels for debugging purposes
 

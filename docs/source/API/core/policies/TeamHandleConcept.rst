@@ -24,7 +24,7 @@ Description
 
    .. cpp:type:: execution_space
 
-      Specifies the `execution space <https://kokkos.github.io/kokkos-core-wiki/API/core/execution_spaces.html>`_ associated to the team
+      Specifies the `execution space <https://kokkos.org/kokkos-core-wiki/API/core/execution_spaces.html>`_ associated to the team
 
    .. cpp:type:: scratch_memory_space
 

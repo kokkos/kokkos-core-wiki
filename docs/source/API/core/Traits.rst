@@ -9,12 +9,12 @@ Boolean type trait to detect types that model the Layout concept.
 is_execution_policy
 -------------------
 
-Boolean type trait to detect types that model `ExecutionPolicy concept <policies/ExecutionPolicyConcept.html>`_.
+Boolean type trait to detect types that model :doc:`ExecutionPolicy concept <policies/ExecutionPolicyConcept>`.
 
 is_memory_space
 ---------------
 
-Boolean type trait to detect types that model `MemorySpace concept <memory_spaces.html#memoryspaceconcept>`_.
+Boolean type trait to detect types that model :ref:`MemorySpace concept <kokkos-memoryspaceconcept>`.
 
 is_memory_traits
 ----------------
@@ -24,7 +24,7 @@ Boolean type trait to detect specializations of ``Kokkos::MemoryTraits``.
 is_reducer
 ----------
 
-Boolean type trait to detect types that model the `Reducer concept <builtinreducers/ReducerConcept.html>`_.
+Boolean type trait to detect types that model the :doc:`Reducer concept <builtinreducers/ReducerConcept>`.
 
 is_space
 --------

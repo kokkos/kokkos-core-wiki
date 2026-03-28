@@ -38,18 +38,14 @@ Struct Interface
 
   A boolean that indicates whether the Aligned trait is enabled.
 
-.. _MemoryAccessTraits: ../../../ProgrammingGuide/View.html#memory-access-traits
+.. |MemoryAccessTraits| replace:: :ref:`memory access traits <kokkos-memory-access-traits>`
 
-.. |MemoryAccessTraits| replace:: memory access traits
-
-.. _UnmanagedViews: ../../../ProgrammingGuide/View.html#unmanaged-views
-
-.. |UnmanagedViews| replace:: unmanaged views
+.. |UnmanagedViews| replace:: :ref:`unmanaged views <kokkos-unmanaged-view>`
 
 Non-Member Enums
 ^^^^^^^^^^^^^^^^
 
-The following enumeration values are used to specify the memory access traits. Check the sub-section on |MemoryAccessTraits|_ in the Programming Guide for further information about how these traits can be used in practice.
+The following enumeration values are used to specify the memory access traits. Check the sub-section on |MemoryAccessTraits| in the Programming Guide for further information about how these traits can be used in practice.
 
 .. cpp:enum:: MemoryTraitsFlags
 
@@ -85,7 +81,7 @@ The following type aliases are also available in the ``Kokkos`` namespace.
 .. cpp:type:: MemoryRandomAccess = Kokkos::MemoryTraits<Kokkos::Unmanaged | Kokkos::RandomAccess>;
 
 .. deprecated:: 4.7
-  Managed memory as an explicit memory trait (i.e., ``using MemoryManaged = Kokkos::MemoryTraits<>;``) has been deprecated in Kokkos 4.7. Also, in earlier versions of Kokkos, the enumeration value of ``0`` had to be explicitly mentioned, i.e., ``Kokkos::MemoryTraits<0>``. Check the sub-section on |UnmanagedViews|_ for a discussion about this.
+  Managed memory as an explicit memory trait (i.e., ``using MemoryManaged = Kokkos::MemoryTraits<>;``) has been deprecated in Kokkos 4.7. Also, in earlier versions of Kokkos, the enumeration value of ``0`` had to be explicitly mentioned, i.e., ``Kokkos::MemoryTraits<0>``. Check the sub-section on |UnmanagedViews| for a discussion about this.
 
 Note that in order to use a managed View in a random access manner, the memory trait should be specified as ``Kokkos::MemoryTraits<Kokkos::RandomAccess>`` and not ``Kokkos::MemoryRandomAccess``.
 

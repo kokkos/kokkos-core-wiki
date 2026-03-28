@@ -15,7 +15,7 @@ Usage
    Kokkos::deep_copy(dest, src);
 
 Copies data from ``src`` to ``dest``, where ``src`` and ``dest``
-can be `Kokkos::Views <view.html>`_ or scalars under certain circumstances.
+can be :doc:`Kokkos::Views <view>` or scalars under certain circumstances.
 
 If the provided execution space can access ``src`` and ``dest`` (for
 the three-argument overload) or the execution space corresponding to
@@ -42,16 +42,16 @@ Interface
 Parameters
 ~~~~~~~~~~
 
-* ExecSpace: An `ExecutionSpace <../execution_spaces.html>`_
+* ExecSpace: An :doc:`ExecutionSpace <../execution_spaces>`
 
-* ViewDest: A `view-like type <view_like.html>`_ with a non-const ``value_type``
+* ViewDest: A :doc:`view-like type <view_like>` with a non-const ``value_type``
 
-* ViewSrc: A `view-like type <view_like.html>`_.
+* ViewSrc: A :doc:`view-like type <view_like>`.
 
 Requirements
 ~~~~~~~~~~~~
 
-* If ``src`` and ``dest`` are `Kokkos::View <view.html>`_ s, then all the following are true:
+* If ``src`` and ``dest`` are :doc:`Kokkos::View <view>` s, then all the following are true:
 
   - ``std::is_same<ViewDest::non_const_value_type, ViewSrc::non_const_value_type>::value == true``
 
@@ -59,16 +59,16 @@ Requirements
 
   - For all ``k`` in ``[0, dest.rank)`` ``dest.extent(k) == src.extent(k)`` (or the same as ``dest.rank()``)
 
-  - ``src.span_is_contiguous() && dest.span_is_contiguous() && std::is_same<ViewDest::array_layout,ViewSrc::array_layout>::value``, *or* there exists an `ExecutionSpace <../execution_spaces.html>`_ ``copy_space`` (either given or defaulted) such that both ``SpaceAccessibility<copy_space, ViewDest::memory_space>::accessible == true`` and ``SpaceAccessibility<copy_space,ViewSrc::memory_space>::accessible == true``.
+  - ``src.span_is_contiguous() && dest.span_is_contiguous() && std::is_same<ViewDest::array_layout,ViewSrc::array_layout>::value``, *or* there exists an :doc:`ExecutionSpace <../execution_spaces>` ``copy_space`` (either given or defaulted) such that both ``SpaceAccessibility<copy_space, ViewDest::memory_space>::accessible == true`` and ``SpaceAccessibility<copy_space,ViewSrc::memory_space>::accessible == true``.
 
-* If ``src`` is a `Kokkos::View <view.html>`_ and ``dest`` is a scalar, then ``src.rank == 0`` is true.
+* If ``src`` is a :doc:`Kokkos::View <view>` and ``dest`` is a scalar, then ``src.rank == 0`` is true.
 
 Semantics
 ---------
 
-* If no `ExecutionSpace <../execution_spaces.html>`_ argument is provided, all outstanding operations (kernels, copy operation) in any execution spaces will be finished before the copy is executed, and the copy operation is finished before the call returns.
+* If no :doc:`ExecutionSpace <../execution_spaces>` argument is provided, all outstanding operations (kernels, copy operation) in any execution spaces will be finished before the copy is executed, and the copy operation is finished before the call returns.
 
-* If an `ExecutionSpace <../execution_spaces.html>`_ argument ``exec_space`` is provided the call is potentially asynchronous—i.e., the call returns before the copy operation is executed. In that case the copy operation will occur only after any already submitted work to ``exec_space`` is finished, and the copy operation will be finished before any work submitted to ``exec_space`` after the ``deep_copy`` call returns is executed. Note: the copy operation is only synchronous with respect to work in the specific execution space instance, but not necessarily with work in other instances of the same type. This behaves analogous to issuing a ``cudaMemcpyAsync`` into a specific CUDA stream, without any additional synchronization.
+* If an :doc:`ExecutionSpace <../execution_spaces>` argument ``exec_space`` is provided the call is potentially asynchronous—i.e., the call returns before the copy operation is executed. In that case the copy operation will occur only after any already submitted work to ``exec_space`` is finished, and the copy operation will be finished before any work submitted to ``exec_space`` after the ``deep_copy`` call returns is executed. Note: the copy operation is only synchronous with respect to work in the specific execution space instance, but not necessarily with work in other instances of the same type. This behaves analogous to issuing a ``cudaMemcpyAsync`` into a specific CUDA stream, without any additional synchronization.
 
 Examples
 --------

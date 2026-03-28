@@ -23,48 +23,36 @@ Dispatches parallel work defined by ``functor`` according to the *ExecutionPolic
 Interface
 ---------
 
-.. code-block:: cpp
+.. cpp:function:: template <class ExecPolicy, class FunctorType> \
+                  Kokkos::parallel_reduce(const std::string& name, \
+                                          const ExecPolicy& policy, \
+                                          const FunctorType& functor)
 
-    template <class ExecPolicy, class FunctorType>
-    Kokkos::parallel_reduce(const std::string& name,
-                            const ExecPolicy& policy,
-                            const FunctorType& functor);
+.. cpp:function:: template <class ExecPolicy, class FunctorType> \
+                  Kokkos::parallel_reduce(const ExecPolicy& policy, \
+                                          const FunctorType& functor)
 
-.. code-block:: cpp
+.. cpp:function:: template <class ExecPolicy, class FunctorType, class... ReducerArgument> \
+                  Kokkos::parallel_reduce(const std::string& name, \
+                                          const ExecPolicy& policy, \
+                                          const FunctorType& functor, \
+                                          const ReducerArgument&... reducer)
 
-    template <class ExecPolicy, class FunctorType>
-    Kokkos::parallel_reduce(const ExecPolicy& policy,
-                            const FunctorType& functor);
+.. cpp:function:: template <class ExecPolicy, class FunctorType, class... ReducerArgument> \
+                  Kokkos::parallel_reduce(const ExecPolicy& policy, \
+                                          const FunctorType& functor, \
+                                          const ReducerArgument&... reducer)
 
-.. code-block:: cpp
+.. cpp:function:: template <class ExecPolicy, class FunctorType, class... ReducerArgumentNonConst> \
+                  Kokkos::parallel_reduce(const std::string& name, \
+                                          const ExecPolicy& policy, \
+                                          const FunctorType& functor, \
+                                          ReducerArgumentNonConst&... reducer)
 
-    template <class ExecPolicy, class FunctorType, class... ReducerArgument>
-    Kokkos::parallel_reduce(const std::string& name,
-                            const ExecPolicy& policy,
-                            const FunctorType& functor,
-                            const ReducerArgument&... reducer);
-
-.. code-block:: cpp
-
-    template <class ExecPolicy, class FunctorType, class... ReducerArgument>
-    Kokkos::parallel_reduce(const ExecPolicy& policy,
-                            const FunctorType& functor,
-                            const ReducerArgument&... reducer);
-
-.. code-block:: cpp
-
-    template <class ExecPolicy, class FunctorType, class... ReducerArgumentNonConst>
-    Kokkos::parallel_reduce(const std::string& name,
-                            const ExecPolicy& policy,
-                            const FunctorType& functor,
-                            ReducerArgumentNonConst&... reducer);
-
-.. code-block:: cpp
-
-    template <class ExecPolicy, class FunctorType, class... ReducerArgumentNonConst>
-    Kokkos::parallel_reduce(const ExecPolicy& policy,
-                            const FunctorType& functor,
-                            ReducerArgumentNonConst&... reducer);
+.. cpp:function:: template <class ExecPolicy, class FunctorType, class... ReducerArgumentNonConst> \
+                  Kokkos::parallel_reduce(const ExecPolicy& policy, \
+                                          const FunctorType& functor, \
+                                          ReducerArgumentNonConst&... reducer)
 
 Parameters:
 ~~~~~~~~~~~
@@ -73,15 +61,15 @@ Parameters:
 * ExecPolicy: An *ExecutionPolicy* which defines iteration space and other execution properties. Valid policies are:
 
   - ``IntegerType``: defines a 1D iteration range, starting from 0 and going to a count.
-  - `RangePolicy <../policies/RangePolicy.html>`_: defines a 1D iteration range.
-  - `MDRangePolicy <../policies/MDRangePolicy.html>`_: defines a multi-dimensional iteration space.
-  - `TeamPolicy <../policies/TeamPolicy.html>`_: defines a 1D iteration range, each of which is assigned to a thread team.
-  - `TeamVectorRange <../policies/TeamVectorRange.html>`_: defines a 1D iteration range to be executed by a thread-team. Only valid inside a parallel region executed through a ``TeamPolicy``.
-  - `TeamVectorMDRange <../policies/TeamVectorMDRange.html>`_: defines a multi-dimensional iteration space to be executed by a thread-team. Only valid inside a parallel region executed through a ``TeamPolicy``.
-  - `TeamThreadRange <../policies/TeamThreadRange.html>`_: defines a 1D iteration range to be executed by a thread-team. Only valid inside a parallel region executed through a ``TeamPolicy``.
-  - `TeamThreadMDRange <../policies/TeamThreadMDRange.html>`_: defines a multi-dimensional iteration space to be executed by a thread-team. Only valid inside a parallel region executed through a ``TeamPolicy``.
-  - `ThreadVectorRange <../policies/ThreadVectorRange.html>`_: defines a 1D iteration range to be executed through vector parallelization dividing the threads within a team.  Only valid inside a parallel region executed through a ``TeamPolicy``.
-  - `ThreadVectorMDRange <../policies/ThreadVectorMDRange.html>`_: defines a multi-dimensional iteration space to be executed through vector parallelization dividing the threads within a team.  Only valid inside a parallel region executed through a ``TeamPolicy``.
+  - :doc:`RangePolicy <../policies/RangePolicy>`: defines a 1D iteration range.
+  - :doc:`MDRangePolicy <../policies/MDRangePolicy>`: defines a multi-dimensional iteration space.
+  - :doc:`TeamPolicy <../policies/TeamPolicy>`: defines a 1D iteration range, each of which is assigned to a thread team.
+  - :doc:`TeamVectorRange <../policies/TeamVectorRange>`: defines a 1D iteration range to be executed by a thread-team. Only valid inside a parallel region executed through a ``TeamPolicy``.
+  - :doc:`TeamVectorMDRange <../policies/TeamVectorMDRange>`: defines a multi-dimensional iteration space to be executed by a thread-team. Only valid inside a parallel region executed through a ``TeamPolicy``.
+  - :doc:`TeamThreadRange <../policies/TeamThreadRange>`: defines a 1D iteration range to be executed by a thread-team. Only valid inside a parallel region executed through a ``TeamPolicy``.
+  - :doc:`TeamThreadMDRange <../policies/TeamThreadMDRange>`: defines a multi-dimensional iteration space to be executed by a thread-team. Only valid inside a parallel region executed through a ``TeamPolicy``.
+  - :doc:`ThreadVectorRange <../policies/ThreadVectorRange>`: defines a 1D iteration range to be executed through vector parallelization dividing the threads within a team.  Only valid inside a parallel region executed through a ``TeamPolicy``.
+  - :doc:`ThreadVectorMDRange <../policies/ThreadVectorMDRange>`: defines a multi-dimensional iteration space to be executed through vector parallelization dividing the threads within a team.  Only valid inside a parallel region executed through a ``TeamPolicy``.
 * FunctorType: A valid functor with (at minimum) an ``operator()`` with a matching signature for the ``ExecPolicy`` combined with the reduced type.
 * ReducerArgument: Either a class fulfilling the "Reducer" concept or a ``Kokkos::View``.
 * ReducerArgumentNonConst: A scalar type or an array type; see below for functor requirements.
@@ -127,7 +115,7 @@ Semantics
 Examples
 --------
 
-Further examples are provided in the `Custom Reductions <../../../ProgrammingGuide/Custom-Reductions.html>`_ and `ExecutionPolicy <../policies/ExecutionPolicyConcept.html>`_ documentation.
+Further examples are provided in the :doc:`Custom Reductions <../../../ProgrammingGuide/Custom-Reductions>` and :doc:`ExecutionPolicy <../policies/ExecutionPolicyConcept>` documentation.
 
 .. code-block:: cpp
 

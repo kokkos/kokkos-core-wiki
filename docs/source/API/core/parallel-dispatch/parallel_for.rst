@@ -13,11 +13,7 @@ Usage:
     Kokkos::parallel_for(name, policy, functor);
     Kokkos::parallel_for(policy, functor);
 
-.. _text: ../policies/ExecutionPolicyConcept.html
-
-.. |text| replace:: *ExecutionPolicy*
-
-Dispatches parallel work defined by ``functor`` according to the |text|_ ``policy``. The optional label ``name`` is
+Dispatches parallel work defined by ``functor`` according to the :doc:`ExecutionPolicy <../policies/ExecutionPolicyConcept>` ``policy``. The optional label ``name`` is
 used by profiling and debugging tools. This call may be asynchronous and return to the callee immediately. 
 
 Interface
@@ -34,15 +30,15 @@ Parameters:
 * ExecPolicy: An *ExecutionPolicy* which defines iteration space and other execution properties. Valid policies are:
 
   - ``IntegerType``: defines a 1D iteration range, starting from 0 and going to a count.
-  - `RangePolicy <../policies/RangePolicy.html>`_: defines a 1D iteration range.
-  - `MDRangePolicy <../policies/MDRangePolicy.html>`_: defines a multi-dimensional iteration space.
-  - `TeamPolicy <../policies/TeamPolicy.html>`_: defines a 1D iteration range, each of which is assigned to a thread team.
-  - `TeamVectorRange <../policies/TeamVectorRange.html>`_: defines a 1D iteration range to be executed by a thread-team. Only valid inside a parallel region executed through a ``TeamPolicy``.
-  - `TeamThreadRange <../policies/TeamThreadRange.html>`_: defines a 1D iteration range to be executed by a thread-team. Only valid inside a parallel region executed through a ``TeamPolicy``.
-  - `ThreadVectorRange <../policies/ThreadVectorRange.html>`_: defines a 1D iteration range to be executed through vector parallelization dividing the threads within a team.  Only valid inside a parallel region executed through a ``TeamPolicy``.
-  - `TeamVectorMDRange <../policies/TeamVectorMDRange.html>`_: defines a multi-dimensional iteration space to be executed by a thread-team. Only valid inside a parallel region executed through a ``TeamPolicy``.
-  - `TeamThreadMDRange <../policies/TeamThreadMDRange.html>`_: defines a multi-dimensional iteration space to be executed by a thread-team. Only valid inside a parallel region executed through a ``TeamPolicy``.
-  - `ThreadVectorMDRange <../policies/ThreadVectorMDRange.html>`_: defines a multi-dimensional iteration space to be executed through vector parallelization dividing the threads within a team.  Only valid inside a parallel region executed through a ``TeamPolicy``.
+  - :doc:`RangePolicy <../policies/RangePolicy>`: defines a 1D iteration range.
+  - :doc:`MDRangePolicy <../policies/MDRangePolicy>`: defines a multi-dimensional iteration space.
+  - :doc:`TeamPolicy <../policies/TeamPolicy>`: defines a 1D iteration range, each of which is assigned to a thread team.
+  - :doc:`TeamVectorRange <../policies/TeamVectorRange>`: defines a 1D iteration range to be executed by a thread-team. Only valid inside a parallel region executed through a ``TeamPolicy``.
+  - :doc:`TeamThreadRange <../policies/TeamThreadRange>`: defines a 1D iteration range to be executed by a thread-team. Only valid inside a parallel region executed through a ``TeamPolicy``.
+  - :doc:`ThreadVectorRange <../policies/ThreadVectorRange>`: defines a 1D iteration range to be executed through vector parallelization dividing the threads within a team.  Only valid inside a parallel region executed through a ``TeamPolicy``.
+  - :doc:`TeamVectorMDRange <../policies/TeamVectorMDRange>`: defines a multi-dimensional iteration space to be executed by a thread-team. Only valid inside a parallel region executed through a ``TeamPolicy``.
+  - :doc:`TeamThreadMDRange <../policies/TeamThreadMDRange>`: defines a multi-dimensional iteration space to be executed by a thread-team. Only valid inside a parallel region executed through a ``TeamPolicy``.
+  - :doc:`ThreadVectorMDRange <../policies/ThreadVectorMDRange>`: defines a multi-dimensional iteration space to be executed through vector parallelization dividing the threads within a team.  Only valid inside a parallel region executed through a ``TeamPolicy``.
 
 * FunctorType: A valid functor having an ``operator()`` with a matching signature for the ``ExecPolicy``.  The functor can be defined using a C++ class/struct or lambda.  See Examples below for more detail.
 

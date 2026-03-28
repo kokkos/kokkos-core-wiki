@@ -36,11 +36,11 @@ Parameters:
 * ExecPolicy: An *ExecutionPolicy* which defines iteration space and other execution properties. Valid policies are:
 
   - ``IntegerType``: defines a 1D iteration range, starting from 0 and going to a count.
-  - `RangePolicy <../policies/RangePolicy.html>`_: defines a 1D iteration range.
-  - `TeamPolicy <../policies/TeamPolicy.html>`_: defines a 1D iteration range, each of which is assigned to a thread team.
-  - `TeamVectorRange <../policies/TeamVectorRange.html>`_: defines a 1D iteration range to be executed by a thread-team. Only valid inside a parallel region executed through a ``TeamPolicy``.
-  - `TeamThreadRange <../policies/TeamThreadRange.html>`_: defined a 1D iteration range to be executed through thread parallelization dividing the range over the threads of the team. Only valid inside a parallel region executed through a ``TeamPolicy``.
-  - `ThreadVectorRange <../policies/ThreadVectorRange.html>`_: defines a 1D iteration range to be executed through vector parallelization dividing the threads within a team.  Only valid inside a parallel region executed through a ``TeamPolicy``.
+  - :doc:`RangePolicy <../policies/RangePolicy>`: defines a 1D iteration range.
+  - :doc:`TeamPolicy <../policies/TeamPolicy>`: defines a 1D iteration range, each of which is assigned to a thread team.
+  - :doc:`TeamVectorRange <../policies/TeamVectorRange>`: defines a 1D iteration range to be executed by a thread-team. Only valid inside a parallel region executed through a ``TeamPolicy``.
+  - :doc:`TeamThreadRange <../policies/TeamThreadRange>`: defined a 1D iteration range to be executed through thread parallelization dividing the range over the threads of the team. Only valid inside a parallel region executed through a ``TeamPolicy``.
+  - :doc:`ThreadVectorRange <../policies/ThreadVectorRange>`: defines a 1D iteration range to be executed through vector parallelization dividing the threads within a team.  Only valid inside a parallel region executed through a ``TeamPolicy``.
 * FunctorType: A valid functor with (at minimum) an ``operator()`` with a signature compatible with the ``ExecPolicy`` and the ``ReturnType``.
 * ReturnType: a POD type with ``operator +=`` and ``operator =``, or a ``Kokkos::View``.
 
@@ -51,7 +51,7 @@ Requirements:
 
   - The ``operator()`` overload without the ``WorkTag`` is used if ``ExecPolicy`` is an ``IntegerType`` or ``ExecPolicy::work_tag`` is ``void``.
   - ``HandleType`` is an ``IntegerType`` if ``ExecPolicy`` is an ``IntegerType`` else it is ``ExecPolicy::member_type``.
-* The type ``ReturnType`` of the ``functor`` operator must be compatible with the ``ReturnType`` of the parallel_scan and must match the arguments of the ``init`` and ``join`` functions of the functor if provided. If the functor doesn't have an ``init`` member function, it is assumed that the identity for the scan operation is given by the default constructor of the value type (and not by `reduction_identity <../builtinreducers/reduction_identity.html>`_).
+* The type ``ReturnType`` of the ``functor`` operator must be compatible with the ``ReturnType`` of the parallel_scan and must match the arguments of the ``init`` and ``join`` functions of the functor if provided. If the functor doesn't have an ``init`` member function, it is assumed that the identity for the scan operation is given by the default constructor of the value type (and not by :doc:`reduction_identity <../builtinreducers/reduction_identity>`).
 * The functor must define ``FunctorType::value_type`` the same as ``ReturnType``.
 
 Semantics

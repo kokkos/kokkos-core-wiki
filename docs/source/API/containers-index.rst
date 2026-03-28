@@ -7,25 +7,25 @@ Containers API
 
    * - Container
      - Description
-   * - `Bitset <containers/Bitset.html>`__
+   * - :doc:`Bitset <containers/Bitset>`
      - A concurrent Bitset class.
-   * - `DualView <containers/DualView.html>`__
+   * - :doc:`DualView <containers/DualView>`
      - Container to manage access to mirrored views in different memory spaces.
-   * - `DynamicView <containers/DynamicView.html>`__
+   * - :doc:`DynamicView <containers/DynamicView>`
      - DynamicView comment.
-   * - `DynRankView <containers/DynRankView.html>`__
+   * - :doc:`DynRankView <containers/DynRankView>`
      - Kokkos Runtime-determined-dimension DynRankView class.
-   * - `ErrorReporter <containers/ErrorReporter.html>`__
+   * - :doc:`ErrorReporter <containers/ErrorReporter>`
      - A class to facilitate thread-safe error output.
-   * - `OffsetView <containers/Offset-View.html>`__
+   * - :doc:`OffsetView <containers/Offset-View>`
      - OffsetView comment.
-   * - `ScatterView <containers/ScatterView.html>`__
+   * - :doc:`ScatterView <containers/ScatterView>`
      - ScatterView comment.
-   * - `StaticCrsGraph <containers/StaticCrsGraph.html>`__
+   * - :doc:`StaticCrsGraph <containers/StaticCrsGraph>`
      - [DEPRECATED] StaticCrsGraph compressed raw storage graph
-   * - `UnorderedMap <containers/Unordered-Map.html>`__
+   * - :doc:`UnorderedMap <containers/Unordered-Map>`
      - UnorderedMap comment.
-   * - `vector <containers/vector.html>`__
+   * - :doc:`vector <containers/vector>`
      - [DEPRECATED] std::vector compatible implementation that works with non-host memory spaces.
 
 .. toctree::

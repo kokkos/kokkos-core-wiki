@@ -122,45 +122,25 @@ Execution Spaces
 The following macros can be used to test whether or not a specified execution space
 is enabled. They can be tested for existence (e.g. ``#ifdef KOKKOS_ENABLE_SERIAL``).
 
-.. _Serial: execution_spaces.html
-
-.. |Serial| replace:: :cpp:func:`Serial`
-
-.. _OpenMP: execution_spaces.html
-
-.. |OpenMP| replace:: :cpp:func:`OpenMP`
-
-.. _Threads: execution_spaces.html
-
-.. |Threads| replace:: :cpp:func:`Threads`
-
-.. _Cuda: execution_spaces.html
-
-.. |Cuda| replace:: :cpp:func:`Cuda`
-
-.. _HPX: execution_spaces.html
-
-.. |HPX| replace:: :cpp:func:`HPX`
-
-+--------------------------------+--------------------------------------------------------------------------+
-| Macro                          | Description                                                              |
-+================================+==========================================================================+
-| ``KOKKOS_ENABLE_SERIAL``       | Defined if the |Serial|_ execution space is enabled.                     |
-+--------------------------------+--------------------------------------------------------------------------+
-| ``KOKKOS_ENABLE_OPENMP``       | Defined if the |OpenMP|_ execution space is enabled.                     |
-+--------------------------------+--------------------------------------------------------------------------+
-| ``KOKKOS_ENABLE_OPENMPTARGET`` | Defined if the experimental ``OpenMPTarget`` execution space is enabled. |
-+--------------------------------+--------------------------------------------------------------------------+
-| ``KOKKOS_ENABLE_THREADS``      | Defined if the |Threads|_ execution space is enabled.                    |
-+--------------------------------+--------------------------------------------------------------------------+
-| ``KOKKOS_ENABLE_CUDA``         | Defined if the |Cuda|_ execution space is enabled.                       |
-+--------------------------------+--------------------------------------------------------------------------+
-| ``KOKKOS_ENABLE_HIP``          | Defined if the experimental ``HIP`` execution space is enabled.          |
-+--------------------------------+--------------------------------------------------------------------------+
-| ``KOKKOS_ENABLE_HPX``          | Defined if the |HPX|_ execution space is enabled.                        |
-+--------------------------------+--------------------------------------------------------------------------+
-| ``KOKKOS_ENABLE_SYCL``         | Defined if the experimental ``SYCL`` execution space is enabled.         |
-+--------------------------------+--------------------------------------------------------------------------+
++--------------------------------+------------------------------------------------------------------------------+
+| Macro                          | Description                                                                  |
++================================+==============================================================================+
+| ``KOKKOS_ENABLE_SERIAL``       | Defined if the :doc:`Serial <execution_spaces>` execution space is enabled.  |
++--------------------------------+------------------------------------------------------------------------------+
+| ``KOKKOS_ENABLE_OPENMP``       | Defined if the :doc:`OpenMP <execution_spaces>` execution space is enabled.  |
++--------------------------------+------------------------------------------------------------------------------+
+| ``KOKKOS_ENABLE_OPENMPTARGET`` | Defined if the experimental ``OpenMPTarget`` execution space is enabled.     |
++--------------------------------+------------------------------------------------------------------------------+
+| ``KOKKOS_ENABLE_THREADS``      | Defined if the :doc:`Threads <execution_spaces>` execution space is enabled. |
++--------------------------------+------------------------------------------------------------------------------+
+| ``KOKKOS_ENABLE_CUDA``         | Defined if the :doc:`Cuda <execution_spaces>` execution space is enabled.    |
++--------------------------------+------------------------------------------------------------------------------+
+| ``KOKKOS_ENABLE_HIP``          | Defined if the experimental ``HIP`` execution space is enabled.              |
++--------------------------------+------------------------------------------------------------------------------+
+| ``KOKKOS_ENABLE_HPX``          | Defined if the :doc:`HPX <execution_spaces>` execution space is enabled.     |
++--------------------------------+------------------------------------------------------------------------------+
+| ``KOKKOS_ENABLE_SYCL``         | Defined if the experimental ``SYCL`` execution space is enabled.             |
++--------------------------------+------------------------------------------------------------------------------+
 
 Backend options
 ---------------
@@ -206,18 +186,18 @@ Third-Party Library Settings
 
 These defines give information about what third-party libraries Kokkos was compiled with.
 
-+-------------------------------+-----------------------------------------------------------------------------------------------------------------------+
-| Macro                         | Description                                                                                                           |
-+===============================+=======================================================================================================================+
-| ``KOKKOS_ENABLE_HWLOC``       | Defined if `libhwloc <https://www.open-mpi.org/projects/hwloc/>`_ is enabled for NUMA and architecture information.   |
-+-------------------------------+-----------------------------------------------------------------------------------------------------------------------+
-| ``KOKKOS_ENABLE_LIBDL``       | Defined if Kokkos links to the dynamic linker (libdl).                                                                |
-+-------------------------------+-----------------------------------------------------------------------------------------------------------------------+
-| ``KOKKOS_ENABLE_LIBQUADMATH`` | Defined if Kokkos links to the `GCC Quad-Precision Math Library API <https://gcc.gnu.org/onlinedocs/libquadmath/>`_.  |
-+-------------------------------+-----------------------------------------------------------------------------------------------------------------------+
-| ``KOKKOS_ENABLE_ONEDPL``      | Defined if Kokkos links to the `oneDPL library <https://github.com/oneapi-src/oneDPL>`_ when using the SYCL backend.  |
-|                               | Enabling this TPL might affect performance for Kokkos algorithms that use it, e.g., `sort`.                           |
-+-------------------------------+-----------------------------------------------------------------------------------------------------------------------+
++-------------------------------+--------------------------------------------------------------------------------------------------------------------------+
+| Macro                         | Description                                                                                                              |
++===============================+==========================================================================================================================+
+| ``KOKKOS_ENABLE_HWLOC``       | Defined if `libhwloc <https://www.open-mpi.org/projects/hwloc/>`_ is enabled for NUMA and architecture information.      |
++-------------------------------+--------------------------------------------------------------------------------------------------------------------------+
+| ``KOKKOS_ENABLE_LIBDL``       | Defined if Kokkos links to the dynamic linker (libdl).                                                                   |
++-------------------------------+--------------------------------------------------------------------------------------------------------------------------+
+| ``KOKKOS_ENABLE_LIBQUADMATH`` | Defined if Kokkos links to the `GCC Quad-Precision Math Library API <https://gcc.gnu.org/onlinedocs/libquadmath/>`_.     |
++-------------------------------+--------------------------------------------------------------------------------------------------------------------------+
+| ``KOKKOS_ENABLE_ONEDPL``      | Defined if Kokkos links to the `oneDPL library <https://github.com/uxlfoundation/oneDPL>`_ when using the SYCL backend.  |
+|                               | Enabling this TPL might affect performance for Kokkos algorithms that use it, e.g., `sort`.                              |
++-------------------------------+--------------------------------------------------------------------------------------------------------------------------+
 
 Architectures
 -------------

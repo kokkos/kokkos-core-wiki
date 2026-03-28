@@ -93,10 +93,7 @@ Overload set accepting a team handle
 Parameters and Requirements
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. |RemoveCopy| replace:: ``remove_copy``
-.. _RemoveCopy: ./StdRemoveCopy.html
-
-- ``exespace``, ``teamHandle``, ``first_from, last_from``, ``first_to``, ``view_from``, ``view_dest``: same as in |RemoveCopy|_
+- ``exespace``, ``teamHandle``, ``first_from, last_from``, ``first_to``, ``view_from``, ``view_dest``: same as in :doc:`remove_copy <./StdRemoveCopy>`
 
 - ``label``: string forwarded to internal parallel kernels for debugging purposes
 

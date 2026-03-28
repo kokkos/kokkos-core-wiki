@@ -13,6 +13,8 @@ Therefore, the header `Kokkos_Core.hpp` is protected against these macros, meani
 Even though definitions inside `Kokkos_Core.hpp` are protected against the macros, code outside is not.
 Thus, it is on the user to deal with the macros being defined, either by defining `-DNOMINMAX` or `/DNOMINMAX` in the compile line (preferred) or by putting `()` around names that contain `min` or `max`.
 
+.. _kokkos-known-issues-cuda:
+
 CUDA
 ====
 
@@ -154,15 +156,20 @@ Mathematical functions
     }
 
 
-.. _Compatibility: ./ProgrammingGuide/Compatibility.html
-
-.. |Compatibility| replace:: Kokkos compatibility guidelines
-
 The using-directive ``using namespace Kokkos;`` is highly discouraged (see
-|Compatibility|_) and will cause compilation errors in presence of unqualified
+:doc:`Kokkos compatibility guidelines <./ProgrammingGuide/Compatibility>`) and will cause compilation errors in presence of unqualified
 calls to mathematical functions.  Instead, prefer explicit qualification
 ``Kokkos::sqrt`` or an using-declaration ``using Kokkos::sqrt;`` at local
 scope.
+
+.. _kokkos-known-issues-fortran:
+
+Fortran 
+=======
+
+- In a mixed C++/Fortran code, CMake will use the C++ linker by default. If you override this behavior and use Fortran as the link language, the link may break because Kokkos adds linker flags expecting the linker to be C++. Prior to CMake 3.18, Kokkos has no way of detecting in downstream projects that the linker was changed to Fortran. From CMake 3.18, Kokkos can use generator expressions to avoid adding flags when the linker is not C++. Note: Kokkos will not add any linker flags in this Fortran case. The user will be entirely on their own to add the appropriate linker flags. See `known build issues <https://github.com/kokkos/kokkos/issues/3325>`_.
+
+.. _kokkos-known-issues-mathematical-constants:
 
 Mathematical constants
 ======================

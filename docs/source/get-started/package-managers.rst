@@ -23,7 +23,7 @@ Spack is a popular package manager for HPC.  Spack comes with installation recip
 The `Kokkos recipe webpage <https://packages.spack.io/package.html?name=kokkos>`_ summarizes the available versions of Kokkos
 and their options.
 
-Most of the time, Spack Kokkos' variants follow the same options as the Kokkos `CMake options <./configuration-guide.html>`_.
+Most of the time, Spack Kokkos' variants follow the same options as the Kokkos :doc:`CMake options <./configuration-guide>`.
 List of available variants can be found by running
 
 .. code-block::

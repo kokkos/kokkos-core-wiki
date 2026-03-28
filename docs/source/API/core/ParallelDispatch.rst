@@ -12,13 +12,13 @@ Parallel execution patterns for composing algorithms.
 
    * - Function
      - Description
-   * - `parallel_for <parallel-dispatch/parallel_for.html>`__
+   * - :doc:`parallel_for <parallel-dispatch/parallel_for>`
      - Executes user code in parallel
-   * - `parallel_reduce <parallel-dispatch/parallel_reduce.html>`__
+   * - :doc:`parallel_reduce <parallel-dispatch/parallel_reduce>`
      - Executes user code to perform a reduction in parallel
-   * - `parallel_scan <parallel-dispatch/parallel_scan.html>`__
+   * - :doc:`parallel_scan <parallel-dispatch/parallel_scan>`
      - Executes user code to generate a prefix sum in parallel
-   * - `fence <parallel-dispatch/fence.html>`__
+   * - :doc:`fence <parallel-dispatch/fence>`
      - Fences execution spaces
 
 Tags for Team Policy Calculations
@@ -32,11 +32,11 @@ The following parallel pattern tags are used to call the correct overload for te
 
    * - Tag
      - Pattern
-   * - `ParallelForTag <parallel-dispatch/ParallelForTag.html>`__
+   * - :doc:`ParallelForTag <parallel-dispatch/ParallelForTag>`
      - parallel_for
-   * - `ParallelReduceTag <parallel-dispatch/ParallelReduceTag.html>`__
+   * - :doc:`ParallelReduceTag <parallel-dispatch/ParallelReduceTag>`
      - parallel_reduce
-   * - `ParallelScanTag <parallel-dispatch/ParallelScanTag.html>`__
+   * - :doc:`ParallelScanTag <parallel-dispatch/ParallelScanTag>`
      - parallel_scan
 
 .. toctree::

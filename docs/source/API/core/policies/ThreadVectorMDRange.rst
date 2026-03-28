@@ -9,7 +9,7 @@ Header File: ``<Kokkos_Core.hpp>``
 Description
 -----------
 
-ThreadVectorMDRange is a `nested execution policy <./NestedPolicies.html>`_  used inside of hierarchical parallelism.
+ThreadVectorMDRange is a :doc:`nested execution policy <./NestedPolicies>`  used inside of hierarchical parallelism.
 
 Interface
 ---------
@@ -29,7 +29,7 @@ Interface
 
       * **Requirements**
 
-	* ``TeamHandle`` is a type that models `TeamHandle <./TeamHandleConcept.html>`_
+	* ``TeamHandle`` is a type that models :doc:`TeamHandle <./TeamHandleConcept>`
 
 	* ``extent_1, extent_2, ...`` are ints
 
@@ -51,7 +51,7 @@ Interface
 Restrictions
 ------------
 
-Note that when used in `parallel_reduce <../parallel-dispatch/parallel_reduce.html>`_, the reduction is limited to a sum.
+Note that when used in :doc:`parallel_reduce <../parallel-dispatch/parallel_reduce>`, the reduction is limited to a sum.
 
 Examples
 --------
