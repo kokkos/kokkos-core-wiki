@@ -24,8 +24,8 @@ Use case example
 ----------------
 
 This policy is particularly well-suited for operations on multidimensional arrays or tensor data.
-A typical example arises when working on numerical methods for PDEs, such as finite element methods, where discretization of the domain result in ``C`` cells (elements), and basis
-functions that are evaluated at ``P`` points, producing as input arguments and return output whose rank and dimensions ``D`` depend on the field rank ``F`` of the basis function.
+A typical example arises when working on numerical methods for PDEs, such as finite element methods, where discretization of the domain results in ``C`` cells (elements), and basis
+functions that are evaluated at ``P`` points, producing input and output whose rank and dimensions ``D`` depend on the field rank ``F`` of the basis function.
 
 Problem formulation
 ~~~~~~~~~~~~~~~~~~~
@@ -85,16 +85,16 @@ The most straightforward way to parallelize the serial code above is to convert 
      });
 
 
-If the number of cells is large enough to merit parallelization. That is, if the overhead for parallel dispatch plus computation time is less than total serial execution time, then this simple approach will already improve performance over the serial version.
+This works well if the number of cells is large enough to merit parallelization, that is, if the overhead for parallel dispatch plus computation time is less than total serial execution time, then this simple approach will already improve performance over the serial version.
 
 However, there is more parallelism to exploit in the loops over fields ``F`` and points ``P``. This is especially important on device backends (GPU), which need a large number of concurrent work-items to hide memory latency.
 
-One way to accomplish this would would be to flatten the three iteration ranges into a single range of size ``C*F*P``, and performing a ``ParallelFor`` with ``RangePolicy`` over that product. But, this would require extraction routines to map between the flat 1-D index (``C*F*P``) and the multidimensional ``(C,F,P)`` indices required by data structures. In addition, to be performance portable the mapping must be architecture-aware, akin to the notion of `LayoutLeft <../API/core/view/layoutLeft.html>`_ and `LayoutRight <../API/core/view/layoutRight.html>`_ used in Kokkos to establish data access patterns.
+One way to accomplish this would be to flatten the three iteration ranges into a single range of size ``C*F*P``, and perform a ``ParallelFor`` with ``RangePolicy`` over that product. But this would require extraction routines to map between the flat 1-D index (``C*F*P``) and the multidimensional ``(C,F,P)`` indices required by data structures. In addition, to be performance portable the mapping must be architecture-aware, akin to the notion of `LayoutLeft <../API/core/view/layoutLeft.html>`_ and `LayoutRight <../API/core/view/layoutRight.html>`_ used in Kokkos to establish data access patterns.
 
 Multi-dimensional parallelization - ``MDRangePolicy``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The |MDRangePolicy|_ provides a natural way to accomplish the goal of parallelize over all three iteration ranges without requiring manually computing the product of the iteration ranges and mapping between 1-D and 3-D multidimensional indices. The ``MDRangePolicy`` is suitable for use with tightly-nested for loops and provides a method to expose additional parallelism in computations beyond simply parallelize in a single dimension, as was shown in the first implementation using the ``RangePolicy``.
+The |MDRangePolicy|_ provides a natural way to accomplish the goal of parallelizing over all three iteration ranges without requiring manually computing the product of the iteration ranges and mapping between 1-D and 3-D multidimensional indices. The ``MDRangePolicy`` is suitable for use with tightly-nested for loops and provides a method to expose additional parallelism in computations beyond simply parallelizing in a single dimension, as was shown in the first implementation using the ``RangePolicy``.
 
 .. code-block:: cpp
 
@@ -172,16 +172,16 @@ The iteration order is specified with the :cpp:class:`Kokkos::Rank` template par
 
   // One mandatory template parameter is the rank of the iteration space
   Kokkos::Rank<3>;
-  // Optonally, you can specify the iteration order
+  // Optionally, you can specify the iteration order
   Kokkos::Rank<3, Kokkos::Iterate::Default, Kokkos::Iterate::Default>;
   
-  // Then use it inside the MDRangePolicy template parameters, and use an alias for convenience
-  using MDR_3D_LR = Kokkos::MDRangePolicy<Kokkos::Rank<3, Kokkos::Iterate::Left, Kokkos::Iterate::Right>>;
+  // Then use it inside the MDRangePolicy template parameters
+  Kokkos::MDRangePolicy<Kokkos::Rank<3, Kokkos::Iterate::Left, Kokkos::Iterate::Right>>;
 
 By default, the iteration order depends on the default execution space. 
 
 By default, the iteration order and the data layout should match.
-For example, if you configured Kokkos with ``CUDA`` the default iteration order is ``Kokkos::Iterate::Left`` and the defaut data layout is ``LayoutLeft``. 
+For example, if you configured Kokkos with ``CUDA`` the default iteration order is ``Kokkos::Iterate::Left`` and the default data layout is ``LayoutLeft``.
 If you configured Kokkos with ``OpenMP`` the default iteration order is ``Kokkos::Iterate::Right`` and the default data layout is ``LayoutRight``.
 
 .. note:: Match your iteration pattern to your data layout for best cache performance on host backends, and to ensure coalesced memory access on device backends.
