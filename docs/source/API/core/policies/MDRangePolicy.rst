@@ -46,11 +46,9 @@ Interface
              Kokkos::Iterate inner = Kokkos::Iterate::Default>
     class Kokkos::Rank;
 
-``Kokkos::Rank`` is a required template argument unique to ``MDRangePolicy``.
-It specifies the rank of the iteration space and, optionally, the iteration order over and within tiles.
+``Kokkos::Rank`` is a required template argument unique to ``MDRangePolicy``. It specifies the rank of the iteration space and, optionally, the iteration order over and within tiles.
 
-``outer`` and ``inner`` default to ``Kokkos::Iterate::Default`` and can be set to
-``Kokkos::Iterate::Left`` or ``Kokkos::Iterate::Right``.
+``outer`` and ``inner`` default to ``Kokkos::Iterate::Default`` and can be set to ``Kokkos::Iterate::Left`` or ``Kokkos::Iterate::Right``.
 
 Template Arguments
 ^^^^^^^^^^^^^^^^^^
