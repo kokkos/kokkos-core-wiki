@@ -30,7 +30,7 @@ You should use Hierarchical Parallelism in particular in a number of cases:
 1. Data gather + reuse: If you gather data for a particular iteration of an outer loop, and then repeatably use it in an inner loop, Hierarchical Parallelism with scratch memory may match the use case well.
 1. Force Cache Blocking: Using Hierarchical Parallelism forces a developer into algorithmic choices which are good for cache blocking. This can sometimes lead to better performing algorithms than a simple flat parallelism.
 
-On the other hand you should probably not use Hierarchical Parallelism if you have tightly nested loops. For that use case, a multidimensional Range Policy is the better fit.
+On the other hand you should probably not use Hierarchical Parallelism if you have tightly nested loops. For that use case, a multidimensional Range Policy (`Kokkos::MDRangePolicy`) is the better fit.
 
 (HP_thread_teams)=
 ## Thread teams
