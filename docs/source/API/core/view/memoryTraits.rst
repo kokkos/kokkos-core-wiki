@@ -113,8 +113,8 @@ The following type aliases are also available in the ``Kokkos`` namespace.
 .. cpp:type:: MemoryRandomAccess = MemoryTraits<Unmanaged | RandomAccess>;
 
   .. versionchanged:: 4.7
-    ``MemoryRandomAccess`` was changed to ``MemoryTraits<Unmanaged>`` and does
-    not imply ``RandomAccess`` any more.
+    ``MemoryRandomAccess`` was changed to ``MemoryTraits<RandomAccess>`` and does
+    not imply ``Unmanaged`` any more.
 
 Example
 ^^^^^^^
