@@ -3,12 +3,31 @@
 
 :cpp:struct:`MemoryTraits` is the last template parameter of :cpp:class:`View`.
 
+
+Usage
+-----
+
+.. code-block:: cpp
+
+   using DefaultMT = Kokkos::MemoryTraits<>;
+   using UnmanagedMT = Kokkos::MemoryTraits<Kokkos::Unmanaged>;
+   using AtomicRandomAccessMT =
+       Kokkos::MemoryTraits<Kokkos::Atomic | Kokkos::RandomAccess>;
+
 Struct Interface
 ----------------
 
 .. cpp:struct:: template <unsigned N> MemoryTraits
 
   When provided to a multidimensional View, ``MemoryTraits`` allow passing extra information about the treatment of the allocation. The template argument is expected to be a bitwise OR of enumeration values described below.
+
+  .. versionchanged:: 4.7
+    ``0`` was added as the default value for the template parameter ``N``.
+
+    .. code-block:: cpp
+
+      template <unsigned N = 0>
+      struct MemoryTraits;
 
 .. rubric:: Nested type
 
@@ -80,21 +99,28 @@ Non-Member Type aliases
 
 The following type aliases are also available in the ``Kokkos`` namespace.
 
-.. cpp:type:: MemoryManaged = Kokkos::MemoryTraits<>;
-.. cpp:type:: MemoryUnmanaged = Kokkos::MemoryTraits<Kokkos::Unmanaged>;
-.. cpp:type:: MemoryRandomAccess = Kokkos::MemoryTraits<Kokkos::Unmanaged | Kokkos::RandomAccess>;
+.. cpp:type:: MemoryManaged = MemoryTraits<0>;
 
-.. deprecated:: 4.7
-  Managed memory as an explicit memory trait (i.e., ``using MemoryManaged = Kokkos::MemoryTraits<>;``) has been deprecated in Kokkos 4.7. Also, in earlier versions of Kokkos, the enumeration value of ``0`` had to be explicitly mentioned, i.e., ``Kokkos::MemoryTraits<0>``. Check the sub-section on |UnmanagedViews|_ for a discussion about this.
+  .. deprecated:: 4.7
+    
+    The ``MemoryManaged`` alias is deprecated.  Use ``MemoryTraits<>`` instead.
+    Note that prior Kokkos versions require an explicit ``0`` template
+    argument.
 
-Note that in order to use a managed View in a random access manner, the memory trait should be specified as ``Kokkos::MemoryTraits<Kokkos::RandomAccess>`` and not ``Kokkos::MemoryRandomAccess``.
+     
+.. cpp:type:: MemoryUnmanaged = MemoryTraits<Unmanaged>;
+.. cpp:type:: MemoryRandomAccess = MemoryTraits<Unmanaged | RandomAccess>;
 
-Examples
-^^^^^^^^
+  .. versionchanged:: 4.7
+    ``MemoryRandomAccess`` was changed to ``MemoryTraits<RandomAccess>`` and does
+    not imply ``Unmanaged`` any more.
+
+Example
+^^^^^^^
 
 .. code-block:: cpp
 
-   Kokkos::View<DayaType, LayoutType, MemorySpace, Kokkos::MemoryTraits<SomeFlag | SomeOtherFlag> > my_view;
-
-Example MemoryTraits type: ``Kokkos::MemoryTraits<Kokkos::Unmanaged | Kokkos::RandomAccess>``
-
+   Kokkos::View<DayaType,
+                LayoutType,
+                MemorySpace,
+                Kokkos::MemoryTraits<SomeFlag | SomeOtherFlag>> my_view;
