@@ -32,11 +32,13 @@ Parameters
 General Template Arguments
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Valid template arguments for ``MDRangePolicy`` are described `here <../Execution-Policies.html#common-arguments-for-all-execution-policies>`_
+Valid template arguments for ``MDRangePolicy`` are described `here <../Execution-Policies.html#common-arguments-for-all-execution-policies>`_.
 
-Required Arguments Specific to MDRangePolicy
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Required Argument Specific to MDRangePolicy - ``Kokkos::Rank``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+Interface
+^^^^^^^^^
 .. code-block:: cpp
 
     template<int N,
@@ -44,8 +46,36 @@ Required Arguments Specific to MDRangePolicy
              Kokkos::Iterate inner = Kokkos::Iterate::Default>
     class Kokkos::Rank;
 
-* Determines the rank of the index space as well as in which order to iterate over the tiles and how to iterate within the tiles. ``outer`` and ``inner`` can be ``Kokkos::Iterate::Default``, ``Kokkos::Iterate::Left``, or ``Kokkos::Iterate::Right``.
+``Kokkos::Rank`` is a required template argument unique to ``MDRangePolicy``. It specifies the rank of the iteration space and, optionally, the iteration order over and within tiles.
 
+``outer`` and ``inner`` default to ``Kokkos::Iterate::Default`` and can be set to ``Kokkos::Iterate::Left`` or ``Kokkos::Iterate::Right``.
+
+Template Arguments
+^^^^^^^^^^^^^^^^^^
+
+.. cpp:class:: template<int N, Kokkos::Iterate outer, Kokkos::Iterate inner> Kokkos::Rank;
+
+   :tparam N: Rank of the iteration space (2 to 6).
+   :tparam outer: Iteration order over tiles (optional).
+   :tparam inner: Iteration order within each tile (optional).
+
+.. cpp:enum-class:: Kokkos::Iterate
+
+   .. cpp:enumerator:: Kokkos::Iterate::Default
+
+      Use the natural iteration order for the execution space.
+
+   .. cpp:enumerator:: Kokkos::Iterate::Left
+
+      Column-major: leftmost index varies fastest.
+
+   .. cpp:enumerator:: Kokkos::Iterate::Right
+
+      Row-major: rightmost index varies fastest.
+
+.. note::
+
+   For best performance, match the iteration order to your View's memory layout. See :ref:`Iteration Order <MDRangePolicy-Iteration-order>` in the Programming Guide.
 
 Public Class Members
 --------------------
@@ -65,11 +95,11 @@ Constructors
 
     * Provide a start and end index as well as the tiling dimensions.
 
-.. cpp:function:: template<class OT, class IT, class TT> MDRangePolicy(const std::initializer_list<OT>& begin, const std::initializer_list<IT>& end)
+.. cpp:function:: template<class OT, class IT> MDRangePolicy(const std::initializer_list<OT>& begin, const std::initializer_list<IT>& end)
 
     * Provide a start and end index. The length of the lists must match the rank of the policy.
 
-.. cpp:function:: template<class OT, class IT, class TT> MDRangePolicy(const std::initializer_list<OT>& begin, const std::initializer_list<IT>& end,  std::initializer_list<TT>& tiling)
+.. cpp:function:: template<class OT, class IT, class TT> MDRangePolicy(const std::initializer_list<OT>& begin, const std::initializer_list<IT>& end, const std::initializer_list<TT>& tiling)
 
     * Provide a start and end index as well as the tiling dimensions. The length of the lists must match the rank of the policy.
 
@@ -82,12 +112,12 @@ CTAD Constructors (since 4.3)
    SomeExecutionSpace ses; // different from DefaultExecutionSpace
 
    // Deduces to MDRangePolicy<Rank<3>>
-   MDRangePolicy pl0({0, 0, 0}, {4, 5, 10}};
-   MDRangePolicy pl1({0, 0, 0}, {4, 5, 10}, {3, 3, 3}};
+   MDRangePolicy pl0({0, 0, 0}, {4, 5, 10});
+   MDRangePolicy pl1({0, 0, 0}, {4, 5, 10}, {3, 3, 3});
 
    // Deduces to MDRangePolicy<SomeExecutionSpace, Rank<3>>
-   MDRangePolicy pl4(ses, {0, 0, 0}, {4, 5, 10}};
-   MDRangePolicy pl5(ses, {0, 0, 0}, {4, 5, 10}, {3, 3, 3}};
+   MDRangePolicy pl2(ses, {0, 0, 0}, {4, 5, 10});
+   MDRangePolicy pl3(ses, {0, 0, 0}, {4, 5, 10}, {3, 3, 3});
 
    int cbegin[3];
    int cend[3];
@@ -118,7 +148,7 @@ CTAD Constructors (since 4.3)
    MDRangePolicy pa5(ses, abegin, aend, atiling);
 
 Member Functions
-^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~
 .. cpp:function:: tile_type tile_size_recommended() const
 
     * Returns a ``Kokkos::Array<array_index_type, rank>`` type containing per-rank tile sizes that ``MDRangePolicy`` internally uses by default. The default tile sizes are static and are set based on the specified backend.
@@ -132,7 +162,7 @@ Member Functions
     .. note:: ``max_total_tile_size()`` available since Kokkos 4.5
 
 Notes
-^^^^^
+~~~~~
 
 * The start index must not be greater than the matching end index for all ranks.
 * The begin and end array ranks must match.
