@@ -41,7 +41,7 @@ CUDA
 
 - Building an application that uses Kokkos with Microsoft Visual Studio and the `Cuda` backend enabled, requires the use of the CMake language feature, see :ref:`keywords_enable_backend_specific_options`.
 
-- Using `clang` version 17 and 18 with the `Cuda` backend enabled result in compile errors related to `__float128`. This originates from the definitons in `<limits>`. For more details see this `pull-request <https://github.com/llvm/llvm-project/pull/83918>`_ and the linked issues.
+- Using `clang` version 17 and 18 with the `Cuda` backend enabled result in compile errors related to `__float128`. This originates from the definition in `<limits>`. For more details see this `pull-request <https://github.com/llvm/llvm-project/pull/83918>`_ and the linked issues.
 
 HIP
 ===
