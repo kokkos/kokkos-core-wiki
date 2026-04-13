@@ -1,7 +1,7 @@
-PRs and Reviews
-===============
+PRs
+===
 
-The goal of a review is to ensure that the proposed change is useful and maintainable over the long run. Submitters should consider and reviewers should evaluate the below criteria.
+The goal of the pull-request and review process is to ensure that the proposed change is useful and maintainable over the long run. Submitters should consider and reviewers should evaluate the below criteria.
 
 PR Description
 ---------------
@@ -59,14 +59,3 @@ Tests
 - For bug fix PRs: add test which would catch the issue without the fix
 - Do newly added tests have the correct granularity?
 - Do tests have a suitable runtime or are unnecessarily large?
-
-Reviewer Behavior
------------------
-
-- provide timely feedback and respond to changes by the author of the pull request in a reasonable amount of time; it's best to give feedback to pull requests as quickly as possible.
-- only request changes if they are ready to resolve the request upon changes by the author of the pull request; stalling pull requests for requested changes that have been addressed is a problem.
-- only review pull requests that have been marked as ready; we have a bunch of pull requests that explore the feasibility of ideas and just need the CI to run. Similarly, pull requests should only be marked as "ready for review" if the author is reasonably happy with the status. If the author mostly seeks feedback on general design and direction, this should be clearly communicated in the pull request description (either "draft" or "ready for review").
-- mirror communication with pull request author outside of pull requests (on slack, in person, video calls, etc.) in comments to the pull request.
-- contact authors directly if more clarification is needed.
-- not be afraid of reviewing pull requests even if they are (slightly) outside their comfort zone.
-- work with authors to bring issues/questions that need a quorum/discussion with a larger audience to the developer meeting.
