@@ -537,6 +537,10 @@ If cross-compiling, or if you want to be specific, the CPU architecture can be p
       - Xeon 9470C @ ANL Aurora
         Xeon @ LANL Crossroads
 
+    * - ``Kokkos_ARCH_ICX``
+      - Icelake/x86-64
+      -
+
     * - ``Kokkos_ARCH_SKX``
       - Skylake/x86-64
       - 6130 @ OSU Pete
