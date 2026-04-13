@@ -15,7 +15,7 @@ Reviewer Behavior
 - work with authors to bring issues/questions that need a quorum/discussion with a larger audience to the developer meeting.
 
 Checklist
----------
+=========
 
 The following checklist can serve as guidance for a thorough review. It is extensive and tries to be general, thus it might be overkill for small PRs (e.g. simple bugfixes)
 
