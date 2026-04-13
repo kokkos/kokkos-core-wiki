@@ -538,7 +538,7 @@ If cross-compiling, or if you want to be specific, the CPU architecture can be p
         Xeon @ LANL Crossroads
 
     * - ``Kokkos_ARCH_ICX``
-      - Icelake
+      - Icelake/x86-64
       -
 
     * - ``Kokkos_ARCH_SKX``
