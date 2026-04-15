@@ -7,7 +7,7 @@ PR Description
 ---------------
 
 - Have a meaningful title: it's easier when creating the changelog or when searching through old PRs
-- Motivate why we should merge the PR: adding/changing code risks introducing a new bug. IMO one person asking for a nice to have feature doesn't qualify.
+- New features add code that needs to be maintained and tested, and risk introducing bugs. You need to motivate why the PR should be merged
 - Explain what the PR does in the description: it makes it easier/faster to review
 - Make the PR as small as possible: it's much easier to review five PRs 200 lines each than one single PR with 1000 lines 
 - If a PR is known to create conflict with other active PRs, try to coordinate, and link to each other
