@@ -23,7 +23,7 @@ Fundamental Qestions
 --------------------
 
 - Is clear what problem the PR is trying to resolve?
-- Is the proposed solution appropriate for the the problem?
+- Is the proposed solution appropriate for the problem?
 - Is it working (check the CI)?
 - Does the PR introduce/change abstractions? If yes, what behavior has changed?
 - Which other abstractions/classes/concepts in Kokkos interact with the change?
