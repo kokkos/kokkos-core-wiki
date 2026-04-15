@@ -22,6 +22,7 @@ The following checklist can serve as guidance for a thorough review. It is exten
 Fundamental Qestions
 --------------------
 
+- Is the PR title clear enough about the scope of the changes?
 - Is clear what problem the PR is trying to resolve?
 - Is the proposed solution appropriate for the problem?
 - Is it working (check the CI)?
