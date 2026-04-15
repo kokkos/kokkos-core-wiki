@@ -70,7 +70,7 @@ Interactions
 Includes
 --------
 
-- Does my header use minimal includes?
+- Does the header use minimal includes?
 - Are the new headers self-contained?
 
 Run
