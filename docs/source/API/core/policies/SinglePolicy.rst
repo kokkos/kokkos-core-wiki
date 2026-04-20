@@ -12,6 +12,7 @@ Usage
 .. code-block:: cpp
 
     Kokkos::SinglePolicy<...>()
+    Kokkos::SinglePolicy<...>(exec_space)
 
     // CTAD Constructor
     Kokkos::SinglePolicy()
@@ -60,6 +61,10 @@ Constructors
 .. cpp:function:: SinglePolicy()
 
    Default Constructor. Uses the default execution space.
+
+.. cpp:function:: SinglePolicy(const ExecutionSpace& exec_space)
+
+    Constructor that takes an ``ExecutionSpace`` instance.
 
 Examples
 --------
