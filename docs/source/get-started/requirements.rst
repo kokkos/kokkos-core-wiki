@@ -30,9 +30,6 @@ Kokkos 5.x
     * * Clang (CUDA)
       * 15.0.0 and CUDA 11.8.0 (newer versions depending on LLVM support)
 
-    * * AppleClang 
-      * 8.0
-
     * * IntelLLVM (CPU)
       * 2022.0.0
 
