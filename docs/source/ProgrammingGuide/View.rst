@@ -68,7 +68,7 @@ Another important thing to keep in mind is that a `View` handle is a stateful ob
 
 .. code-block:: c++
 
-  Kokkos::View<int*> *a_ptr = (Kokkos::View<int*>*) malloc(10*sizeof(View<int*);
+  Kokkos::View<int*> *a_ptr = (Kokkos::View<int*>*) malloc(10*sizeof(Kokkos::View<int*>));
   a_ptr[0] = Kokkos::View<int*>("A0",1000); // This is illegal
   new(&a_ptr[1]) Kokkos::View<int*>("A1",10000); // This is legal 
 
