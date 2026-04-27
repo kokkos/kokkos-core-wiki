@@ -13,7 +13,7 @@ This requirement of ``nvcc`` for separate flags implies that other libraries tha
 To help users with this problem, Kokkos comes with a small ``bash`` script called ``nvcc_wrapper`` located in the ``bin`` subdirectory (At the current state there is no way to use this script in ``MSVC`` builds. Please see the section on compiling Kokkos in CMake language mode below).
 This script has two functions. It redirects compile and link commands to ``nvcc``, and it sorts the given compiler and linker flags into the ones for the host and the device compiler.
 
-To use it, set ``CMAKE_CXX_COMPILER=<path_to_kokkos>/bin/nvcc_wrapper``, replacing ``<path_to_kokkos>`` with the path of the Kokkos you are using. If you don't do that, Kokkos will use ``kokkos_launch_compiler`` (see next section) to redirect calls to ``nvcc_wrapper`` automatically.
+To use it, set ``CMAKE_CXX_COMPILER=<path_to_kokkos>/bin/nvcc_wrapper``, replacing ``<path_to_kokkos>`` with the path of the Kokkos you are using. If you do not do that, Kokkos will use ``kokkos_launch_compiler`` (see next section) to redirect calls to ``nvcc_wrapper`` automatically.
 
 kokkos_launch_compiler: What does it do and how to control it
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
