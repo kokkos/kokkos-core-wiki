@@ -18,7 +18,7 @@ To use it, set ``CMAKE_CXX_COMPILER=<path_to_kokkos>/bin/nvcc_wrapper``, replaci
 kokkos_launch_compiler: What does it do and how to control it
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-In complex software projects that rely on multiple libraries it can occur, that the compiler Kokkos requires for the enabled backend can not compile one of the other libraries the project depends on.
+In complex software projects that rely on multiple libraries, it can occur that the compiler Kokkos requires for the enabled backend can not compile one of the other libraries the project depends on.
 To work around these situations, Kokkos introduced another ``bash`` script called ``kokkos_launch_compiler``.
 This script **only** redirects compiler and linker commands that compile a ``C++`` file that uses Kokkos to a compiler that can compile Kokkos code (e.g. ``nvcc_wrapper`` for the ``CUDA`` backend). Compiler and linker commands of ``C++`` files that don't use Kokkos, or files in different languages will not be redirected.
 
