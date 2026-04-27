@@ -23,7 +23,7 @@ To work around these situations, Kokkos introduced another ``bash`` script calle
 This script **only** redirects compiler and linker commands that compile a ``C++`` file that uses Kokkos to a compiler that can compile Kokkos code (e.g. ``nvcc_wrapper`` for the ``CUDA`` backend). Compiler and linker commands of ``C++`` files that don't use Kokkos, or files in different languages will not be redirected.
 
 This script, located in the ``bin`` subdirectory, is meant to be used like a compiler launcher in ``CMake``.
-But (except when being configured with ``Kokkos_ENABLE_COMPILE_AS_CMAKE_LANGUAGE=ON``) Kokkos will try to detect if the ``CXX`` compiler that ``CMake`` uses can compile the code for the enabled backend. If the ``CXX`` compiler can **not** compile the backend code, Kokkos automatically uses ``kokkos_launch_compiler``. The idea of this to help users to create performance-portable libraries that seamlessly integrate into complex software projects.
+But (except when being configured with ``Kokkos_ENABLE_COMPILE_AS_CMAKE_LANGUAGE=ON``) Kokkos will try to detect if the ``CXX`` compiler that ``CMake`` uses can compile the code for the enabled backend. If the ``CXX`` compiler can **not** compile the backend code, Kokkos automatically uses ``kokkos_launch_compiler``. The idea is to help users create performance-portable libraries that seamlessly integrate into complex software projects.
 
 Although, this covers most usecases, Kokkos provides ways for users to request ``kokkos_launch_compiler`` to be used **always** or **never**.
 To always use ``kokkos_launch_compiler``, users can ask for the ``launch_compiler`` component when calling ``find_packlage``:
