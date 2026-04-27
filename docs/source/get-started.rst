@@ -11,7 +11,7 @@ Get Started
    get-started/building-from-source
    get-started/configuration-guide
    get-started/package-managers
-
+   get-started/advanced-configuration-and-build
 
 Want to try Kokkos right away?  Check it out on `Compiler Explorer
 <https://godbolt.org/z/svrE563Kn>`_.
@@ -49,3 +49,7 @@ usage, and a complete list of supported CPU and GPU architectures.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 This page lists package managers that offer pre-built Kokkos packages,
 providing a convenient alternative to building from source.
+
+:doc:`Advanced Configuration and Build <get-started/advanced-configuration-and-build>`
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+This page lists advaced topics regarding the configuration and build that are available in Kokkos.
