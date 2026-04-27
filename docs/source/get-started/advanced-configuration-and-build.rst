@@ -41,7 +41,7 @@ In contrast, when users want that ``kokkos_launch_compiler`` to never be used:
 Compile in the CMake language of the backend
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-For the backends ``CUDA`` and ``HIP``, that have dedicated ``CMake`` languages corresponding to them, Kokkos can be configured to only set compiler and linker flags in the respective ``CMake`` language. This effectively causes Kokkos to identify as a ``CUDA`` or ``HIP`` library to ``CMake`` (**instead** of identifying as a ``CXX`` library). This does allow additional host backends to be enabled (e.g. ``CUDA`` and ``OPENMP`` and ``Serial`` can be compiled in ``CUDA`` language mode).
+For the backends ``CUDA`` and ``HIP``, that have dedicated ``CMake`` languages corresponding to them, Kokkos can be configured to only set compiler and linker flags in the respective ``CMake`` language. This effectively causes Kokkos to identify as a ``CUDA`` or ``HIP`` library to ``CMake`` (**instead** of identifying as a ``CXX`` library). This does allow additional host backends to be enabled (e.g. ``CUDA``, ``OPENMP`` and ``SERIAL`` can be compiled in ``CUDA`` language mode).
 This implies, that files that link to Kokkos also have to identify as the respective ``CMake`` language, and need to be compiled for the architecture that is enabled in Kokkos.
 To enable this behavior, enable the option `Kokkos_ENABLE_COMPILE_AS_CMAKE_LANGUAGE <configuration-guide.html#backend-specific-options>`_. For a detailed example and explanation check the notes on the option.
 
