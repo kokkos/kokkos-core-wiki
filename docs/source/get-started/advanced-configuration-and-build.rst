@@ -25,7 +25,7 @@ This script **only** redirects compiler and linker commands that compile a ``C++
 This script, located in the ``bin`` subdirectory, is meant to be used like a compiler launcher in ``CMake``.
 But (except when being configured with ``Kokkos_ENABLE_COMPILE_AS_CMAKE_LANGUAGE=ON``) Kokkos will try to detect if the ``CXX`` compiler that ``CMake`` uses can compile the code for the enabled backend. If the ``CXX`` compiler can **not** compile the backend code, Kokkos automatically uses ``kokkos_launch_compiler``. The idea is to help users create performance-portable libraries that seamlessly integrate into complex software projects.
 
-Although, this covers most usecases, Kokkos provides ways for users to request ``kokkos_launch_compiler`` to be used **always** or **never**.
+Although this covers most usecases, Kokkos provides ways for users to request ``kokkos_launch_compiler`` to be used **always** or **never**.
 To always use ``kokkos_launch_compiler``, users can ask for the ``launch_compiler`` component when calling ``find_packlage``:
 
 .. code-block:: sh
