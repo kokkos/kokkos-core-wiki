@@ -4,8 +4,8 @@ Advanced Configuration and Build
 nvcc_wrapper: Why do we have it and what does it do
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-In general (except when being configured with ``Kokkos_ENABLE_COMPILE_AS_CMAKE_LANGUAGE=ON``) performance-portable code depending on Kokkos identifies itself as ``CXX`` code in ``CMake``.
-This implies, that the compiler used by ``CMake`` to compile ``CXX`` code must be able to compile the code for the backend and architecture enabled in Kokkos.
+In general (except when being configured with ``Kokkos_ENABLE_COMPILE_AS_CMAKE_LANGUAGE=ON``), performance-portable code depending on Kokkos identifies itself as ``CXX`` code in ``CMake``.
+This implies that the compiler used by ``CMake`` to compile ``CXX`` code must be able to compile the code for the backend and architecture enabled in Kokkos.
 
 For the ``CUDA`` backend this implies setting ``CMAKE_CXX_COMPILER=nvcc`` during configuration. But ``nvcc`` needed separate flags for the host and the device compilation (newer ``nvcc`` versions have improved support for unknown flags).
 This requirement of ``nvcc`` for separate flags implies that other libraries that are linked to the same target also need to adhere to do this.
