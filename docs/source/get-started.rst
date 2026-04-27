@@ -52,4 +52,4 @@ providing a convenient alternative to building from source.
 
 :doc:`Advanced Configuration and Build <get-started/advanced-configuration-and-build>`
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-This page lists advaced topics regarding the configuration and build that are available in Kokkos.
+This page lists advanced topics regarding the configuration and build that are available in Kokkos.
