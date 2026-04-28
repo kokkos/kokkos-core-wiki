@@ -47,6 +47,67 @@ Comment Formatting
 In general, prefer C++-style comments (``//`` for normal comments, ``///`` for
 doxygen documentation comments).
 
+----
+
+To ensure compliance with these standards and reduce CI noise, Kokkos utilizes
+`pre-commit <https://pre-commit.com>`__ to automate linting and formatting.
+This tool runs a series of "hooks" on your staged changes to ensure they meet
+our standards for C++ (``clang-format``), CMake (``cmake-format``), and
+metadata.
+
+Environment Setup
+^^^^^^^^^^^^^^^^^
+To avoid conflicts with system-level packages, we recommend installing
+``pre-commit`` within a Python virtual environment:
+
+.. code-block:: bash
+
+   # Create and activate a virtual environment
+   python3 -m venv .kokkos-venv
+   source .kokkos-venv/bin/activate
+
+   # Install pre-commit
+   pip install pre-commit
+
+Installation and Automated Usage (Optional)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+To have these checks run automatically every time you execute ``git commit``,
+install the git hook scripts:
+
+.. code-block:: bash
+
+   pre-commit install
+
+Once installed, if a hook finds an issue, it will automatically apply the fix
+and "fail" the commit. You can then restage the fixed files and commit again.
+
+Manual Execution and Targeted Checks
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+The first time you run ``pre-commit``, it will download and build the
+environments for the formatting tools. This initial setup can take several
+minutes, but subsequent runs are cached and fast.
+
+If you prefer to run specific tools directly without waiting for the entire
+suite, you can invoke them by their hook ID:
+
+* **Run all checks on staged changes:**
+  ``pre-commit run``
+* **Run only Clang-format (C++ files):**
+  ``pre-commit run clang-format``
+* **Run only CMake-format:**
+  ``pre-commit run cmake-format``
+* **Run a specific check on all files in the repository:**
+  ``pre-commit run clang-format --all-files``
+
+Leveraging these hooks locally ensures that your contributions are clean before
+they reach the CI, allowing reviewers to focus on technical logic rather than
+formatting minutiae.
+
+.. note::
+   While you can bypass hooks using ``git commit --no-verify``, this is
+   discouraged. The CI will still enforce these checks and will fail the build
+   if the standards are not met.
+
 Style Issues
 ~~~~~~~~~~~~
 
