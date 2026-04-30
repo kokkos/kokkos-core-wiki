@@ -1,6 +1,10 @@
 ``SinglePolicy``
 ================
 
+.. _single: ../parallel-dispatch/single.html
+
+.. |single| replace:: ``Kokkos::single``
+
 .. role::cpp(code)
     :language: cpp
 
@@ -18,8 +22,8 @@ Usage
     Kokkos::SinglePolicy()
 
 ``SinglePolicy`` defines an execution policy that executes a functor or lambda exactly once.
-It can be used with ``parallel_for`` to perform a single operation and with ``parallel_reduce``
-to produce one or more scalar outputs.
+It has to be used with |single|_ to perform a single operation or to produce one
+or more scalar outputs.
 
 Synopsis
 --------
@@ -39,6 +43,8 @@ Synopsis
         SinglePolicy(SinglePolicy&&) = default;
 
         SinglePolicy();
+
+        SinglePolicy(const execution_space& exec_space);
 
         // return ExecSpace instance provided to the constructor
         KOKKOS_FUNCTION const execution_space & space() const;
@@ -69,8 +75,10 @@ Constructors
 Examples
 --------
 
-Using ``SinglePolicy`` with ``parallel_for``
+Using ``SinglePolicy`` for a single operation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Execute a functor once with zero arguments. The functor can also be called with a WorkTag.
 
 .. code-block:: cpp
 
@@ -84,20 +92,22 @@ Using ``SinglePolicy`` with ``parallel_for``
     Functor f{v};
 
     // Default execution space
-    Kokkos::parallel_for("label", Kokkos::SinglePolicy(), f);
+    Kokkos::single("label", Kokkos::SinglePolicy(), f);
 
     // With an ExecutionSpace
-    Kokkos::parallel_for("label",
+    Kokkos::single("label",
         Kokkos::SinglePolicy<Kokkos::DefaultExecutionSpace>(), f);
 
     // With both a WorkTag and an ExecutionSpace
-    Kokkos::parallel_for("label",
+    Kokkos::single("label",
         Kokkos::SinglePolicy<TimesTwoTag, Kokkos::DefaultExecutionSpace>(), f);
 
-Using ``SinglePolicy`` with ``parallel_reduce`` (single output)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The functor's ``operator()`` receives a reference to the reduction value.
+Using ``SinglePolicy`` to produce scalar output
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Produce a single scalar output by passing a reference to the output variable as an argument to the functor's ``operator()``. 
+The functor can also be called with a WorkTag. The functor's ``operator()`` receives a reference to the reduction value.
 
 .. code-block:: cpp
 
@@ -110,23 +120,23 @@ The functor's ``operator()`` receives a reference to the reduction value.
     ReductionFunctor f;
 
     // With a WorkTag and an ExecutionSpace
-    Kokkos::parallel_reduce("label",
+    Kokkos::single("label",
         Kokkos::SinglePolicy<Kokkos::DefaultExecutionSpace, TenTag>(), f, val);
     // val == 10
 
     // With a lambda
-    Kokkos::parallel_reduce("label",
+    Kokkos::single("label",
         Kokkos::SinglePolicy<Kokkos::DefaultExecutionSpace>(),
         KOKKOS_LAMBDA(int& ret) { ret = 5; }, val);
     // val == 5
 
     // Minimal (default execution space, no work tag)
-    Kokkos::parallel_reduce(Kokkos::SinglePolicy(), f, val);
+    Kokkos::single("label", Kokkos::SinglePolicy(), f, val);
     // val == 5
 
 
-Using ``SinglePolicy`` with ``parallel_reduce`` (multiple outputs)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Using ``SinglePolicy`` to produce multiple outputs
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The functor's ``operator()`` can receive multiple reduction arguments.
 
@@ -135,10 +145,9 @@ The functor's ``operator()`` can receive multiple reduction arguments.
     int val1, val2;
 
     // With a lambda producing 2 outputs
-    Kokkos::parallel_reduce("label", Kokkos::SinglePolicy(),
+    Kokkos::single("label", Kokkos::SinglePolicy(),
         KOKKOS_LAMBDA(int& s1, int& s2) {
           s1 = 1;
           s2 = 2;
         }, val1, val2);
-    // val1 == 1, val2 == 2
 

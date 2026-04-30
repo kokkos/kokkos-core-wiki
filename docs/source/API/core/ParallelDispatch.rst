@@ -21,6 +21,20 @@ Parallel execution patterns for composing algorithms.
    * - `fence <parallel-dispatch/fence.html>`__
      - Fences execution spaces
 
+Special Dispatch
+----------------
+
+Restrict Execution to a certain ressources
+
+.. list-table::
+   :widths: 25 75
+   :header-rows: 1
+
+   * - Function
+     - Description
+   * - `single <parallel-dispatch/single.html>`__
+     - Executes a functor or lambda exactly once
+
 Tags for Team Policy Calculations
 ---------------------------------
 
@@ -46,6 +60,7 @@ The following parallel pattern tags are used to call the correct overload for te
    ./parallel-dispatch/parallel_for
    ./parallel-dispatch/parallel_reduce
    ./parallel-dispatch/parallel_scan
+   ./parallel-dispatch/single
    ./parallel-dispatch/fence
    ./parallel-dispatch/ParallelForTag
    ./parallel-dispatch/ParallelReduceTag
