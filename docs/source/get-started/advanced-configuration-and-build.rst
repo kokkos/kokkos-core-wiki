@@ -10,10 +10,10 @@ This implies that the compiler used by ``CMake`` to compile ``CXX`` code must be
 For the ``CUDA`` backend this implies setting ``CMAKE_CXX_COMPILER=nvcc`` during configuration. But ``nvcc`` needed separate flags for the host and the device compilation (newer ``nvcc`` versions have improved support for unknown flags).
 This requirement of ``nvcc`` for separate flags implies that other libraries that are linked to the same target also need to adhere to do this.
 
-To help users with this problem, Kokkos comes with a small ``bash`` script called ``nvcc_wrapper`` located in the ``bin`` subdirectory (At the current state there is no way to use this script in ``MSVC`` builds. Please see the section on compiling Kokkos in CMake language mode below).
+To help users with this problem, Kokkos comes with a small ``bash`` script called ``nvcc_wrapper`` located in the ``bin`` subdirectory.
 This script has two functions. It redirects compile and link commands to ``nvcc``, and it sorts the given compiler and linker flags into the ones for the host and the device compiler.
 
-To use it, set ``CMAKE_CXX_COMPILER=<path_to_kokkos>/bin/nvcc_wrapper``, replacing ``<path_to_kokkos>`` with the path of the Kokkos you are using. If you do not do that, Kokkos will use ``kokkos_launch_compiler`` (see next section) to redirect calls to ``nvcc_wrapper`` automatically.
+To use it explicitly, set ``CMAKE_CXX_COMPILER`` accordingly. If the compiler can't compile device code, Kokkos will use ``kokkos_launch_compiler`` (see next section) to redirect calls to ``nvcc_wrapper`` automatically.
 
 kokkos_launch_compiler: What does it do and how to control it
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -23,7 +23,7 @@ To work around these situations, Kokkos introduced another ``bash`` script calle
 This script **only** redirects compiler and linker commands that compile a ``C++`` file that uses Kokkos to a compiler that can compile Kokkos code (e.g. ``nvcc_wrapper`` for the ``CUDA`` backend). Compiler and linker commands of ``C++`` files that don't use Kokkos, or files in different languages will not be redirected.
 
 This script, located in the ``bin`` subdirectory, is meant to be used like a compiler launcher in ``CMake``.
-But (except when being configured with ``Kokkos_ENABLE_COMPILE_AS_CMAKE_LANGUAGE=ON``) Kokkos will try to detect if the ``CXX`` compiler that ``CMake`` uses can compile the code for the enabled backend. If the ``CXX`` compiler can **not** compile the backend code, Kokkos automatically uses ``kokkos_launch_compiler``. The idea is to help users create performance-portable libraries that seamlessly integrate into complex software projects.
+But (except when being configured with ``Kokkos_ENABLE_COMPILE_AS_CMAKE_LANGUAGE=ON``) Kokkos will try to detect if the ``CXX`` compiler that ``CMake`` uses can compile the code for the enabled backend. If the ``CXX`` compiler can **not** compile the backend code, Kokkos automatically uses ``kokkos_launch_compiler``. If it redirects to ``nvcc_wrapper``, it will set ``nvcc``'s host compiler to the ``CXX`` compiler. The idea of this is to simplify the usage of Kokkos performance-portable build system.
 
 Although this covers most usecases, Kokkos provides ways for users to request ``kokkos_launch_compiler`` to be used **always** or **never**.
 To always use ``kokkos_launch_compiler``, users can ask for the ``launch_compiler`` component when calling ``find_packlage``:
