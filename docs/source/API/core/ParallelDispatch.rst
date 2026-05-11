@@ -24,7 +24,7 @@ Parallel execution patterns for composing algorithms.
 Special Dispatch
 ----------------
 
-Restrict Execution to a certain ressources
+Restrict Execution to a certain resources
 
 .. list-table::
    :widths: 25 75

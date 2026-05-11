@@ -35,8 +35,10 @@ Synopsis
         using execution_policy = SinglePolicy;
 
         // Inherited from PolicyTraits<Args...>
-        using execution_space   = PolicyTraits<Args...>::execution_space;
-        using work_tag          = PolicyTraits<Args...>::work_tag;
+        using execution_space = PolicyTraits<Args...>::execution_space;
+        using work_tag        = PolicyTraits<Args...>::work_tag;
+
+        using base_class      = RangePolicy<Kokkos::LaunchBounds<1>, Args...>;
 
         // Constructors
         SinglePolicy(const SinglePolicy&) = default;
@@ -94,9 +96,9 @@ Execute a functor once with zero arguments. The functor can also be called with 
     // Default execution space
     Kokkos::single("label", Kokkos::SinglePolicy(), f);
 
-    // With an ExecutionSpace
-    Kokkos::single("label",
-        Kokkos::SinglePolicy<Kokkos::DefaultExecutionSpace>(), f);
+    // With an ExecutionSpace instance
+    Kokkos::DefaultExecutionSpace exec_space;
+    Kokkos::single("label",Kokkos::SinglePolicy(exec_space), f);
 
     // With both a WorkTag and an ExecutionSpace
     Kokkos::single("label",
@@ -119,6 +121,10 @@ The functor can also be called with a WorkTag. The functor's ``operator()`` rece
     int val;
     ReductionFunctor f;
 
+    // Default execution space
+    Kokkos::single("label", Kokkos::SinglePolicy(), f, val);
+    // val == 5
+
     // With a WorkTag and an ExecutionSpace
     Kokkos::single("label",
         Kokkos::SinglePolicy<Kokkos::DefaultExecutionSpace, TenTag>(), f, val);
@@ -129,11 +135,6 @@ The functor can also be called with a WorkTag. The functor's ``operator()`` rece
         Kokkos::SinglePolicy<Kokkos::DefaultExecutionSpace>(),
         KOKKOS_LAMBDA(int& ret) { ret = 5; }, val);
     // val == 5
-
-    // Minimal (default execution space, no work tag)
-    Kokkos::single("label", Kokkos::SinglePolicy(), f, val);
-    // val == 5
-
 
 Using ``SinglePolicy`` to produce multiple outputs
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -150,4 +151,6 @@ The functor's ``operator()`` can receive multiple reduction arguments.
           s1 = 1;
           s2 = 2;
         }, val1, val2);
+    // val1 == 1
+    // val2 == 2
 

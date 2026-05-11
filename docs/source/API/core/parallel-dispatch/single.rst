@@ -22,7 +22,7 @@ Usage
     Kokkos::single(functor);
     Kokkos::single(name, functor);
 
-Execute functor on restricted ressource defined by the policy
+Execute functor on restricted resource defined by the policy
 
 Interface
 ---------
