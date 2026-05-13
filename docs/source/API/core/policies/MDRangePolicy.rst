@@ -56,6 +56,9 @@ Template Arguments
 .. cpp:class:: template<int N, Kokkos::Iterate outer, Kokkos::Iterate inner> Kokkos::Rank;
 
    :tparam N: Rank of the iteration space (1 to 6).
+
+   .. note:: Rank 1 is supported since Kokkos 5.2.
+
    :tparam outer: Iteration order over tiles (optional).
    :tparam inner: Iteration order within each tile (optional).
 
