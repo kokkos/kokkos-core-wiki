@@ -19,7 +19,7 @@ Checklist
 
 The following checklist can serve as guidance for a thorough review. It is extensive and tries to be general, thus it might be overkill for small PRs (e.g. simple bugfixes)
 
-Fundamental Qestions
+Fundamental Questions
 --------------------
 
 - Is the PR title clear enough about the scope of the changes?
