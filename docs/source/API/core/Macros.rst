@@ -149,8 +149,6 @@ is enabled. They can be tested for existence (e.g. ``#ifdef KOKKOS_ENABLE_SERIAL
 +--------------------------------+--------------------------------------------------------------------------+
 | ``KOKKOS_ENABLE_OPENMP``       | Defined if the |OpenMP|_ execution space is enabled.                     |
 +--------------------------------+--------------------------------------------------------------------------+
-| ``KOKKOS_ENABLE_OPENMPTARGET`` | Defined if the experimental ``OpenMPTarget`` execution space is enabled. |
-+--------------------------------+--------------------------------------------------------------------------+
 | ``KOKKOS_ENABLE_THREADS``      | Defined if the |Threads|_ execution space is enabled.                    |
 +--------------------------------+--------------------------------------------------------------------------+
 | ``KOKKOS_ENABLE_CUDA``         | Defined if the |Cuda|_ execution space is enabled.                       |

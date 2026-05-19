@@ -95,8 +95,7 @@ The ``ExecutionSpace`` Concept
 
 .. |ExecutionSpaceTwo| replace:: ``ExecutionSpace``
 
-Working off the functionality currently common to ``Serial``, ``Cuda``, ``OpenMP``, ``Threads``, ``HIP``,
-and ``OpenMPTarget``, the current state of the Kokkos |ExecutionSpaceTwo|_ concept looks something like:
+The current state of the Kokkos |ExecutionSpaceTwo|_ concept looks something like:
 
 .. code-block:: cpp
 
@@ -217,8 +216,7 @@ some things to use a less "all-or-nothing" approach to customization than partia
 The ``MemorySpace`` Concept
 ---------------------------
 
-Looking at the common functionality in the current implementations of ``CudaSpace``, ``CudaUVMSpace``,
-``HostSpace``, and ``OpenMPTargetSpace``, the current concept for ``MemorySpace`` looks something like:
+The current concept for ``MemorySpace`` looks something like:
 
 .. code-block:: cpp
 

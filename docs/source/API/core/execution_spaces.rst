@@ -78,13 +78,6 @@ For details, see |DocExecutionSpaceConcept|_.
 Except in rare instances, it should not be used directly, but instead should be used
 generically as an execution space. For details, see |DocExecutionSpaceConcept|_.
 
-``Kokkos::OpenMPTarget``
-------------------------
-
-``Kokkos::OpenMPTarget`` is an |ExecutionSpaceConceptType|_ representing execution using the target offloading
-feature of the OpenMP runtime system. Except in rare instances, it should not be used directly, but instead
-should be used generically as an execution space. For details, see |DocExecutionSpaceConcept|_.
-
 ``Kokkos::Threads``
 -------------------
 
