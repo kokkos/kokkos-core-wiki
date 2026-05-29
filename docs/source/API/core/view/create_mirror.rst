@@ -173,3 +173,11 @@ Description
      .. important::
 
 	``arg_prop`` must not include a pointer to memory, or a label, or allow padding and ``arg_prop`` must include a memory space.
+
+.. cpp:function:: template <class ViewType> ImplMirrorType create_mirror_view_and_copy(ViewType const& src);
+
+   Equivalent to calling ``create_mirror_view_and_copy(typename ViewType::host_mirror_type::memory_space{}, src)``, i.e, returns a host-accessible View
+   containing the same values as the original |View|_. If the |View|_ was already host-accessible, a (shallow) copy of the original |View|_ is returned.
+   Otherwise a new |View|_ is allocated. :sup:`since Kokkos 5.2`
+
+   - ``src``: a ``Kokkos::View``.
