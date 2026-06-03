@@ -798,9 +798,14 @@ Kokkos will attempt to autodetect the architecture flag at configuration time.
       * Ryzen 8000G Phoenix series APU
       * (since Kokkos 4.5)
 
+    * * ``Kokkos_ARCH_AMD_GFX1101``
+      * GFX1101
+      * Radeon RX 7800 XT, RX 7700 XT, RX 7700
+      * (since Kokkos 5.2)
+
     * * ``Kokkos_ARCH_AMD_GFX1100``
       * GFX1100
-      * 7900xt
+      * Radeon RX 7900 XT
       * (since Kokkos 4.2)
 
     * * ``Kokkos_ARCH_AMD_GFX1030``
