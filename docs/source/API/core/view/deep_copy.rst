@@ -53,13 +53,15 @@ Requirements
 
 * If ``src`` and ``dest`` are `Kokkos::View <view.html>`_ s, then all the following are true:
 
-  - ``std::is_same<ViewDest::non_const_value_type, ViewSrc::non_const_value_type>::value == true``
-
-  - ``src.rank == dest.rank`` (or, for ``Kokkos::DynRankView`` , ``src.rank() == dest.rank()`` )
+  - ``src.rank() == dest.rank()``
 
   - For all ``k`` in ``[0, dest.rank)`` ``dest.extent(k) == src.extent(k)`` (or the same as ``dest.rank()``)
 
-  - ``src.span_is_contiguous() && dest.span_is_contiguous() && std::is_same<ViewDest::array_layout,ViewSrc::array_layout>::value``, *or* there exists an `ExecutionSpace <../execution_spaces.html>`_ ``copy_space`` (either given or defaulted) such that both ``SpaceAccessibility<copy_space, ViewDest::memory_space>::accessible == true`` and ``SpaceAccessibility<copy_space,ViewSrc::memory_space>::accessible == true``.
+  - One of the following set of conditions must be true:
+
+    - Either ``std::is_assignable_v<ViewSrc::value_type, DestView::value_type>`` and there exists an `ExecutionSpace <../execution_spaces.html>`_ ``copy_space`` (either given or defaulted) such that both ``SpaceAccessibility<copy_space, ViewDest::memory_space>::accessible == true`` and ``SpaceAccessibility<copy_space,ViewSrc::memory_space>::accessible == true``.
+
+    - Or ``src.span_is_contiguous() && dest.span_is_contiguous()``, ``std::is_same_v<ViewDest::array_layout,ViewSrc::array_layout>``, and ``std::is_same_v<DestView::value_type, SrcView::non_const_value_type>``.
 
 * If ``src`` is a `Kokkos::View <view.html>`_ and ``dest`` is a scalar, then ``src.rank == 0`` is true.
 
