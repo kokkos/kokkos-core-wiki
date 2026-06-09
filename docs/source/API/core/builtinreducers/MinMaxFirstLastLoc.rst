@@ -4,7 +4,7 @@
 .. role:: cpp(code)
     :language: cpp
 
-Specific implementation of `ReducerConcept <ReducerConcept.html>`_ storing both the minimum and maximum values with corresponding indices
+Specific implementation of `ReducerConcept <ReducerConcept.html>`_ storing both the minimum and maximum values with corresponding first and last indices
 
 Header File: ``<Kokkos_Core.hpp>``
 
@@ -114,4 +114,4 @@ Additional Information
 
 * Requires: ``Index`` has ``operator =`` defined. ``Kokkos::reduction_identity<Index>::min()`` is a valid expressions.
 
-* In order to use MinMaxFirstLastLoc with a custom type of either ``Scalar`` or ``Index``, a template specialization of ``Kokkos::reduction_identity<CustomType>`` must be defined. See `Built-In Reducers with Custom Scalar Types <../../../ProgrammingGuide/Custom-Reductions-Built-In-Reducers-with-Custom-Scalar-Types.html>`_ for details.
+* In order to use ``MinMaxFirstLastLoc`` with a custom type of either ``Scalar`` or ``Index``, a template specialization of ``Kokkos::reduction_identity<CustomType>`` must be defined. See `Built-In Reducers with Custom Scalar Types <../../../ProgrammingGuide/Custom-Reductions-Built-In-Reducers-with-Custom-Scalar-Types.html>`_ for details.

@@ -99,7 +99,7 @@ Interface
 Additional Information
 ^^^^^^^^^^^^^^^^^^^^^^
 
-* ``MaxFirstLoc<T,I,S>::value_type`` is Specialization of ValLocScalar on non-const ``T`` and non-const ``I``
+* ``MaxFirstLoc<T,I,S>::value_type`` is Specialization of ``ValLocScalar`` on non-const ``T`` and non-const ``I``
 
 * ``MaxFirstLoc<T,I,S>::result_view_type`` is ``Kokkos::View<T,S,Kokkos::MemoryTraits<Kokkos::Unmanaged>>``. Note that the S (memory space) must be the same as the space where the result resides.
 
@@ -107,4 +107,4 @@ Additional Information
 
 * Requires: ``Index`` has ``operator =`` defined. ``Kokkos::reduction_identity<Index>::min()`` is a valid expression.
 
-* In order to use MaxFirstLoc with a custom type of either ``Scalar`` or ``Index``, a template specialization of ``Kokkos::reduction_identity<CustomType>`` must be defined. See `Built-In Reducers with Custom Scalar Types <../../../ProgrammingGuide/Custom-Reductions-Built-In-Reducers-with-Custom-Scalar-Types.html>`_ for details
+* In order to use ``MaxFirstLoc`` with a custom type of either ``Scalar`` or ``Index``, a template specialization of ``Kokkos::reduction_identity<CustomType>`` must be defined. See `Built-In Reducers with Custom Scalar Types <../../../ProgrammingGuide/Custom-Reductions-Built-In-Reducers-with-Custom-Scalar-Types.html>`_ for details
