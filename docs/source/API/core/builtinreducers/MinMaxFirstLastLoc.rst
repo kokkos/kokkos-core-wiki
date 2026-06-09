@@ -97,16 +97,14 @@ Interface
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION value_type& reference() const;
 
-      Returns a reference to the result provided in class constructor.
+      Returns a reference to the result provided in the class constructor.
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION result_view_type view() const;
 
-      Returns a view of the result place provided in class constructor.
+      Returns a view of the result provided in the class constructor.
 
 Additional Information
 ^^^^^^^^^^^^^^^^^^^^^^
-
-* ``MinMaxFirstLastLoc<T,I,S>::value_type`` is Specialization of MinMaxFirstLastLocScalar on non-const ``T`` and non-const ``I``
 
 * ``MinMaxFirstLastLoc<T,I,S>::result_view_type`` is ``Kokkos::View<T,S,Kokkos::MemoryTraits<Kokkos::Unmanaged>>``. Note that the S (memory space) must be the same as the space where the result resides.
 

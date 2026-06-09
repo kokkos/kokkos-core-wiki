@@ -4,7 +4,7 @@
 .. role:: cpp(code)
     :language: cpp
 
-Specific implementation of `ReducerConcept <ReducerConcept.html>`_ storing the minimum value with an index
+Specific implementation of `ReducerConcept <ReducerConcept.html>`_ storing the minimum value and the first index satisfying a condition.
 
 Header File: ``<Kokkos_Core.hpp>``
 
@@ -26,7 +26,7 @@ Synopsis
      public:
        using reducer = MinFirstLoc;
        using value_type = ValLocScalar<typename std::remove_cv<Scalar>::type,
-                               typename std::remove_cv<Index>::type >;
+                               typename std::remove_cv<Index>::type>;
        using result_view_type = Kokkos::View<value_type, Space>;
 
        KOKKOS_INLINE_FUNCTION
@@ -90,16 +90,14 @@ Interface
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION value_type& reference() const;
 
-      Returns a reference to the result provided in class constructor.
+      Returns a reference to the result provided in the class constructor.
 
    .. cpp:function:: KOKKOS_INLINE_FUNCTION result_view_type view() const;
 
-      Returns a view of the result place provided in class constructor.
+      Returns a view of the result provided in the class constructor.
 
 Additional Information
 ^^^^^^^^^^^^^^^^^^^^^^
-
-* ``MinFirstLoc<T,I,S>::value_type`` is Specialization of ValLocScalar on non-const ``T`` and non-const ``I``
 
 * ``MinFirstLoc<T,I,S>::result_view_type`` is ``Kokkos::View<T,S,Kokkos::MemoryTraits<Kokkos::Unmanaged>>``. Note that the S (memory space) must be the same as the space where the result resides.
 
