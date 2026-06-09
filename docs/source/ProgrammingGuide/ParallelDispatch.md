@@ -48,8 +48,7 @@ When using lambdas for nested parallelism (see [Chapter 7](HierarchicalParalleli
 
 Kokkos lets users choose whether to use a functor or a lambda. Lambdas are convenient for short loop bodies. For a much more complicated loop body, you might find it easier for testing to separate it out and name it as a functor. Lambdas by definition are "anonymous functions," meaning that they have no name. This makes it harder to test them. Furthermore, certain restrictions regarding lambdas apply depending on the backend [^footnotecudalambda].
 
-[^footnotecudalambda]: Current restrictions
-for CUDA lambdas are explained at https://docs.nvidia.com/cuda/cuda-programming-guide/05-appendices/cpp-language-support.html#extended-lambda-restrictions.
+[^footnotecudalambda]: Current restrictions for CUDA lambdas are explained at https://docs.nvidia.com/cuda/cuda-programming-guide/05-appendices/cpp-language-support.html#extended-lambda-restrictions.
 
 Finally, the "execution tag" feature, which lets you put together several different parallel loop bodies into a single functor, only works with functors.  (See [Chapter 7](HierarchicalParallelism) for details.)
 
