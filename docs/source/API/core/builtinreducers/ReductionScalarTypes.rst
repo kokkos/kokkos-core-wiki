@@ -8,6 +8,12 @@ Reduction Scalar Types
    * - Class template
      - Description
      - Builtin Reducer
+   * - :doc:`FirstLocScalar`
+     - stores the first location that satisfies a condition
+     - :cpp:class:`FirstLoc`
+   * - :doc:`LastLocScalar`
+     - stores the last location that satisfies a condition
+     - :cpp:class:`LastLoc`
    * - :doc:`MinMaxLocScalar`
      - stores a minimum, a maximum, and their respective locations
      - :cpp:class:`MinMaxLoc`
@@ -22,6 +28,8 @@ Reduction Scalar Types
    :hidden:
    :maxdepth: 1
 
+   FirstLocScalar
+   LastLocScalar
    MinMaxLocScalar
    MinMaxScalar
    ValLocScalar
