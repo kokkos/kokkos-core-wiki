@@ -1,6 +1,8 @@
 Reduction Scalar Types
 ######################
 
+Types designed to hold the result of ``parallel_reduce()``, while using the corresponding builtin reducers.
+
 .. list-table::
    :widths: 20 65 15
    :header-rows: 1
