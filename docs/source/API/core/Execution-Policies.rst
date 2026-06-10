@@ -92,6 +92,29 @@ Execution Policies generally accept compile time arguments via template paramete
       * ``SomeClass``
       * Specify the work tag type used to call the functor operator. Can be any arbitrary tag type (i.e. an [empty](https://en.cppreference.com/w/cpp/types/is_empty) struct or class). Defaults to ``void``.
 
+Other arguments for certain Execution Policies
+==============================================
+
+Apart from the common arguments listed above, certain Execution Policies accept additional compile time arguments via template parameters.
+
+.. tip::
+
+    These template arguments can be given in any order along with the other arguments.
+
+.. list-table::
+    :widths: 30 30 30 40
+    :header-rows: 1
+    :align: left
+
+    * - Argument
+      - Execution Policy
+      - Backend
+      - Description
+
+    * * StaticBatchSize
+      * ``RangePolicy``
+      * ``CUDA``, ``HIP``
+      * A scalar integer that specifies the unroll factor for the grid stride loops. Refer further to the `Programming Guide <../../ProgrammingGuide/FurtherPerfOptimization.html#static-batch-size>`__. Defaults to 1.
 
 .. toctree::
    :hidden:
