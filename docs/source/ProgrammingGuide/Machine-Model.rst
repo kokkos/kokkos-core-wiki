@@ -7,8 +7,8 @@ Machine Model
 .. |node| image:: figures/kokkos-node-doc.png
    :alt: Figure 2.1 Conceptual Model of a Future High Performance Computing Node
 
-.. _Chap7ParallelDispatch: ParallelDispatch.html
-.. |Chap7ParallelDispatch| replace:: Chapter 7 - Parallel dispatch
+.. _ParallelDispatch: ParallelDispatch.html
+.. |ParallelDispatch| replace:: Parallel dispatch
 
 .. |execution-space| image:: figures/kokkos-execution-space-doc.png
    :alt: Figure 2.2 Example Execution Spaces in a Future Computing Node
@@ -23,13 +23,13 @@ Machine Model
 .. |Initialization| replace:: Initialization
 
 .. _Section82: HierarchicalParallelism.html#hp-thread-teams
-.. |Section82| replace:: Section 8.2
+.. |Section82| replace:: Thread teams
 
-.. _Chap8HierarchicalParallelism: HierarchicalParallelism.html
-.. |Chap8HierarchicalParallelism| replace:: Chapter 8 - Hierarchical Parallelism
+.. _HierarchicalParallelism: HierarchicalParallelism.html
+.. |HierarchicalParallelism| replace:: Hierarchical Parallelism
 
 .. _Section231: Machine-Model.html#thread-safety
-.. |Section231| replace:: Section 2.3.1
+.. |Section231| replace:: Thread safety
 
 .. _ParallelFor: ../API/core/parallel-dispatch/parallel_for.html
 .. |ParallelFor| replace:: ``parallel_for()``
@@ -70,7 +70,7 @@ Figure 2.1 Conceptual Model of a Future High Performance Computing Node
 Kokkos Spaces
 -------------
 
-Kokkos uses the term *execution spaces* to describe a logical grouping of computation units which share an identical set of performance properties. An execution space provides a set of parallel execution resources which can be utilized by the programmer using several types of fundamental parallel operation. For a list of the operations available see |Chap7ParallelDispatch|_. The term *memory spaces* is used to describe a logical distinct memory resource, which is available to allocate data.
+Kokkos uses the term *execution spaces* to describe a logical grouping of computation units which share an identical set of performance properties. An execution space provides a set of parallel execution resources which can be utilized by the programmer using several types of fundamental parallel operation. For a list of the operations available see |ParallelDispatch|_. The term *memory spaces* is used to describe a logical distinct memory resource, which is available to allocate data.
 
 Execution Space Instances
 ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -112,7 +112,7 @@ Program execution
 
 It is tempting to try to define formally what it means for a processor to execute code. None of us authors have a background in logic or what computer scientists call "formal methods," so our attempt might not go very far! We will stick with informal definitions and rely on Kokkos' C++ implementation as an existence proof that the definitions make sense.
 
-Kokkos lets users tell execution spaces to execute parallel operations. These include parallel for, reduce, and scan (see |Chap7ParallelDispatch|_) as well as |ViewAllocation|_ and |Initialization|_. We name the class of all such operations *parallel dispatch*.
+Kokkos lets users tell execution spaces to execute parallel operations. These include parallel for, reduce, and scan (see |ParallelDispatch|_) as well as |ViewAllocation|_ and |Initialization|_. We name the class of all such operations *parallel dispatch*.
 
 From our perspective, there are three kinds of code:
 
@@ -120,7 +120,7 @@ From our perspective, there are three kinds of code:
 #. Code outside of a Kokkos parallel operation that asks Kokkos to do something (e.g., parallel dispatch itself)
 #. Code that has nothing to do with Kokkos
 
-The first category is the most restrictive. |Section82|_ explains restrictions on inter-team synchronization. In general, we limit the ability of Kokkos-parallel code to invoke Kokkos operations (other than for nested parallelism; see |Chap8HierarchicalParallelism|_ and especially |Section82|_). We also forbid dynamic memory allocation (other than from the team's scratch pad) in parallel operations. Whether Kokkos-parallel code may invoke operating system routines or third-party libraries depends on the execution and memory spaces being used. Regardless, restrictions on inter-team synchronization have implications for things like filesystem access.
+The first category is the most restrictive. |Section82|_ explains restrictions on inter-team synchronization. In general, we limit the ability of Kokkos-parallel code to invoke Kokkos operations (other than for nested parallelism; see |HierarchicalParallelism|_ and especially |Section82|_). We also forbid dynamic memory allocation (other than from the team's scratch pad) in parallel operations. Whether Kokkos-parallel code may invoke operating system routines or third-party libraries depends on the execution and memory spaces being used. Regardless, restrictions on inter-team synchronization have implications for things like filesystem access.
 
 *Kokkos threads are for computing in parallel*, not for overlapping I/O and computation, and not for making graphical user interfaces responsive. Use other kinds of threads (e.g., operating system threads) for the latter two purposes. You may be able to mix Kokkos' parallelism with other kinds of threads; see |Section231|_. Kokkos' developers are also working on a task parallelism model that will work with Kokkos' existing data-parallel constructs.
 
