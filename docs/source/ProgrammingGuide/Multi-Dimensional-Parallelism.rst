@@ -18,7 +18,7 @@ If your problem exposes multiple dimensions of parallelism and does not require 
 you can use the |MDRangePolicy|_ to parallelize over several dimensions simultaneously.
 
 ``MDRangePolicy`` is best for tightly nested loops. For non-tightly-nested or loops requiring scratch memory,
-prefer ``TeamPolicy`` (see `TeamPolicy <../API/core/policies/TeamPolicy.html>`_).
+prefer ``TeamPolicy`` <../API/core/policies/TeamPolicy.html>`_.
 
 Use case example
 ----------------
