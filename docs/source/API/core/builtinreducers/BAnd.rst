@@ -53,7 +53,7 @@ All the public types, constructors and methods from `ReducerConcept <ReducerConc
 
    .. cpp:type:: value_type
 
-      The non-const version of the ``Scalar`` template parameter.      
+      The ``Scalar`` template parameter stripped of its potential const qualifier.
 
    .. rubric:: Public Member Functions
 
