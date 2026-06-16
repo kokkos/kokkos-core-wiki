@@ -36,6 +36,8 @@ Synopsis
        void init(value_type& val) const {
          val = Kokkos::reduction_identity<value_type>::bor();
        }
+
+       // other members to fulfill the ReducerConcept
    };
 
 Interface
@@ -53,7 +55,7 @@ All the public types, constructors and methods from `ReducerConcept <ReducerConc
 
    .. cpp:type:: value_type
 
-      The ``Scalar`` template parameter stripped of its potential const qualifier.
+      The ``Scalar`` template parameter stripped of its potential ``const`` and/or ``volatile`` qualifier.
 
    .. rubric:: Public Member Functions
 
@@ -68,6 +70,6 @@ All the public types, constructors and methods from `ReducerConcept <ReducerConc
 Additional Information
 ^^^^^^^^^^^^^^^^^^^^^^
 
-* Requires: ``Scalar`` has ``operator =`` and ``operator |`` defined. ``Kokkos::reduction_identity<value_type>::bor()`` is a valid expression.
+* Requires: ``value_type`` has ``operator =`` and ``operator |`` defined. ``Kokkos::reduction_identity<value_type>::bor()`` is a valid expression.
 
 * In order to use ``BOr`` with a custom type, a template specialization of ``Kokkos::reduction_identity<CustomType>`` must be defined. See `Built-In Reducers with Custom Scalar Types <../../../ProgrammingGuide/Custom-Reductions-Built-In-Reducers-with-Custom-Scalar-Types.html>`_ for details
