@@ -84,6 +84,10 @@ Execution Policies generally accept compile time arguments via template paramete
       * e.g. ``IndexType<int>``
       * Specify integer type to be used for traversing the iteration space. Defaults to the ``size_type`` of `ExecutionSpaceConcept <execution_spaces.html#typedefs>`__. Can affect the performance depending on the backend.
 
+    * * LaunchBounds
+      * ``LaunchBounds<MaxThreads, MinBlocks>``
+      * Specifies hints to to the compiler about CUDA/HIP launch bounds.
+
     * * WorkTag
       * ``SomeClass``
       * Specify the work tag type used to call the functor operator. Can be any arbitrary tag type (i.e. an `empty <https://en.cppreference.com/w/cpp/types/is_empty>`_ struct or class). Defaults to ``void``.
@@ -91,7 +95,7 @@ Execution Policies generally accept compile time arguments via template paramete
 Other arguments for certain Execution Policies
 ==============================================
 
-Apart from the common arguments listed above, certain Execution Policies accept additional compile time arguments via template parameters.
+Apart from the common arguments listed above, certain Execution Policies accept additional compile-time arguments via template parameters.
 
 .. tip::
 
@@ -106,11 +110,6 @@ Apart from the common arguments listed above, certain Execution Policies accept 
       - Execution Policy
       - Backend
       - Description
-
-    * * LaunchBounds
-      * ``RangePolicy``, ``MDRangePolicy``
-      * ``CUDA``, ``HIP``
-      * Specifies hints to to the compiler about CUDA/HIP launch bounds. Set as :cpp:`Kokkos::LaunchBounds<MaxThreads, MinBlocks>`.
 
     * * StaticBatchSize
       * ``RangePolicy``
