@@ -6,5 +6,6 @@ The following pages provide information for existing and prospective developers 
 .. toctree::
    :maxdepth: 1
 
-   PRs and Reviews <prs-and-reviews.rst>
+   Creating Pull-Requests <prs.rst>
    Coding Standards <coding-standards>
+   Giving Reviews <reviews.rst>
