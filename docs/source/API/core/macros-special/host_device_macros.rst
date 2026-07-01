@@ -16,7 +16,9 @@ Usage:
     KOKKOS_FORCEINLINE_FUNCTION void foo();
     KOKKOS_RELOCATABLE_FUNCTION void foo();
     auto l = KOKKOS_LAMBDA(int i) { ... };
+    auto l = KOKKOS_FORCEINLINE_LAMBDA(int i) { ... };
     auto l = KOKKOS_CLASS_LAMBDA(int i) { ... };
+    auto l = KOKKOS_FORCEINLINE_CLASS_LAMBDA(int i) { ... };
 
 These macros deal with the management of split compilation for device and host code.
 They fulfill the same purpose as the ``__host__ __device__`` markup in CUDA and HIP.
@@ -146,6 +148,30 @@ It is used than creating C++ lambdas to be passed to Kokkos parallel dispatch me
 
 .. warning:: When creating lambdas inside of class member functions you may need to use ``KOKKOS_CLASS_LAMBDA`` instead.
 
+``KOKKOS_FORCEINLINE_LAMBDA``
+-----------------------------
+
+This macro is the equivalent of ``[=] __host__ __device__`` markup in CUDA and HIP, but also uses
+compiler dependent hints (if available) to enforce inlining.
+This can help improving runtime performance with lambdas that are commonly used, but it may also cause longer compilation time.
+Similar to ``KOKKOS_FORCEINLINE_FUNCTION``, execessive inlining in template-heavy code can contribute to template bloat which may cause compilation errors.
+
+.. versionadded:: 5.2
+.. code-block:: cpp
+
+    void foo(...) {
+      ...
+      parallel_for("Name", N, KOKKOS_FORCEINLINE_LAMBDA(int i) {
+        ...
+      });
+      ...
+      parallel_reduce("Name", N, KOKKOS_FORCEINLINE_LAMBDA(int i, double& v) {
+        ...
+      }, result);
+      ...
+    }
+
+
 ``KOKKOS_CLASS_LAMBDA``
 -----------------------
 
@@ -192,6 +218,33 @@ copies of any accessed data members, and can not use non-static member functions
             // print_data();
             // use the copy of data
             printf("%i %i\n",i,data_copy);
+          });
+        }
+    };
+
+``KOKKOS_FORCEINLINE_CLASS_LAMBDA``
+-----------------------------------
+
+This macro provides default capture clause and host device markup for lambdas created inside of class member functions. It is the equivalent of
+``[=, *this] __host__ __device__`` markup in CUDA and HIP, but also uses compiler dependent hints (if available) to enforce inlining.
+Similar to ``KOKKOS_FORCEINLINE_FUNCTION``, execessive inlining in template-heavy code can contribute to template bloat which may cause compilation errors.
+
+.. versionadded:: 5.2
+.. code-block:: cpp
+
+    class Foo {
+      public:
+        Foo() { ... };
+        int data;
+
+        KOKKOS_FUNCTION print_data() const {
+          printf("Data: %i\n",data);
+        }
+        void bar() const {
+          parallel_for("Name", N, KOKKOS_FORCEINLINE_CLASS_LAMBDA(int i) {
+            ...
+            print_data();
+            printf("%i %i\n",i,data);
           });
         }
     };
