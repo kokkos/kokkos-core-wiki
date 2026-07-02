@@ -154,7 +154,7 @@ It is used than creating C++ lambdas to be passed to Kokkos parallel dispatch me
 This macro is the equivalent of ``[=] __host__ __device__`` markup in CUDA and HIP, but also uses
 compiler dependent hints (if available) to enforce inlining.
 This can help improving runtime performance with lambdas that are commonly used, but it may also cause longer compilation time.
-Similar to ``KOKKOS_FORCEINLINE_FUNCTION``, execessive inlining in template-heavy code can contribute to template bloat which may cause compilation errors.
+Similar to ``KOKKOS_FORCEINLINE_FUNCTION``, excessive inlining in template-heavy code can contribute to template bloat which may cause compilation errors.
 
 .. versionadded:: 5.2
 .. code-block:: cpp
@@ -227,7 +227,7 @@ copies of any accessed data members, and can not use non-static member functions
 
 This macro provides default capture clause and host device markup for lambdas created inside of class member functions. It is the equivalent of
 ``[=, *this] __host__ __device__`` markup in CUDA and HIP, but also uses compiler dependent hints (if available) to enforce inlining.
-Similar to ``KOKKOS_FORCEINLINE_FUNCTION``, execessive inlining in template-heavy code can contribute to template bloat which may cause compilation errors.
+Similar to ``KOKKOS_FORCEINLINE_FUNCTION``, excessive inlining in template-heavy code can contribute to template bloat which may cause compilation errors.
 
 .. versionadded:: 5.2
 .. code-block:: cpp
