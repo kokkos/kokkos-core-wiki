@@ -45,11 +45,11 @@ using simd_type = Kokkos::Experimental::simd<double>;
 constexpr int width = int(simd_type::size());
 assert(n % width == 0);
 for (int i = 0; i < n; i += width) {
-  simd_type sx(x + i, Kokkos::Experimental::simd_flag_default);
-  simd_type sy(y + i, Kokkos::Experimental::simd_flag_default);
-  simd_type sz(z + i, Kokkos::Experimental::simd_flag_default);
+  simd_type sx(x + i);
+  simd_type sy(y + i);
+  simd_type sz(z + i);
   simd_type sr = Kokkos::sqrt(sx * sx + sy * sy + sz * sz);
-  Kokkos::Experimental::simd_unchecked_store(sr, r + i, Kokkos::Experimental::simd_flag_default);
+  Kokkos::Experimental::simd_unchecked_store(sr, r + i);
 }
 ```
 
@@ -105,11 +105,11 @@ There are at least three major approaches to dealing with this issue in general:
    using simd_type = Kokkos::Experimental::simd<double>;
    constexpr int width = int(simd_type::size());
    for (int i = 0; i + width <= n; i += width) {
-     simd_type sx(x + i, Kokkos::Experimental::simd_flag_default);
-     simd_type sy(y + i, Kokkos::Experimental::simd_flag_default);
-     simd_type sz(z + i, Kokkos::Experimental::simd_flag_default);
+     simd_type sx(x + i);
+     simd_type sy(y + i);
+     simd_type sz(z + i);
      simd_type sr = Kokkos::sqrt(sx * sx + sy * sy + sz * sz);
-     Kokkos::Experimental::simd_unchecked_store(sr, r + i, Kokkos::Experimental::simd_flag_default);
+     Kokkos::Experimental::simd_unchecked_store(sr, r + i);
    }
    for (; i < n; ++i) {
      r[i] = sqrt(x[i] * x[i] + y[i] * y[i] + z[i] * z[i]);
@@ -128,11 +128,11 @@ There are at least three major approaches to dealing with this issue in general:
    constexpr int width = int(simd_type::size());
    for (int i = 0; i < n; i += width) {
      mask_type mask([=] (std::size_t lane) { return i + int(lane) < n; });
-     simd_type sx = Kokkos::Experimental::simd_partial_load(x + i, mask, Kokkos::Experimental::simd_flag_default);
-     simd_type sy = Kokkos::Experimental::simd_partial_load(y + i, mask, Kokkos::Experimental::simd_flag_default);
-     simd_type sz = Kokkos::Experimental::simd_partial_load(z + i, mask, Kokkos::Experimental::simd_flag_default);
+     simd_type sx = Kokkos::Experimental::simd_partial_load(x + i, mask);
+     simd_type sy = Kokkos::Experimental::simd_partial_load(y + i, mask);
+     simd_type sz = Kokkos::Experimental::simd_partial_load(z + i, mask);
      simd_type sr = Kokkos::sqrt(sx * sx + sy * sy + sz * sz);
-     Kokkos::Experimental::simd_partial_store(sr, r + i, mask, Kokkos::Experimental::simd_flag_default);
+     Kokkos::Experimental::simd_partial_store(sr, r + i, mask);
    }
    ```
   
