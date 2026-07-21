@@ -34,6 +34,8 @@ The following facilities are available:
      - Create View allocation parameter bundle from argument list.
    * - `View-like Types <view/view_like.html>`__
      - Loosely defined as the set of class templates that behave like ``Kokkos::View``.
+   * - `Iterators <view/iterators.html>`__
+     - Helper functions to work with iterators on ``Kokkos::View``
 
 .. toctree::
    :hidden:
@@ -52,3 +54,4 @@ The following facilities are available:
    ./view/view
    ./view/view_alloc
    ./view/view_like
+   ./view/iterators
