@@ -25,7 +25,7 @@ Provides a replacement for |NumericLimits|_. Implements a new facility that is b
 breaks the monolithic ``numeric_limits`` class template apart into individual
 trait templates. For details, please refer to |P1841|_.
 
-Numeric traits are defined in the ``Kokkos::Experimental`` namespace since Kokkos 3.5
+Numeric traits are defined in the ``Kokkos`` namespace since Kokkos 5.2 and in the ``Kokkos::Experimental`` namespace for earlier versions.
 
 See below the list of available traits.
 
@@ -109,7 +109,7 @@ Individual traits are SFINAE-friendly, you can detect value presence/absence.
 
     template <class T>
     constexpr auto has_infinity(T)
-            -> decltype(Kokkos::Experimental::infinity<T>::value, std::true_type{}) {
+            -> decltype(Kokkos::infinity<T>::value, std::true_type{}) {
         return {};
     }
 
@@ -118,7 +118,7 @@ Individual traits are SFINAE-friendly, you can detect value presence/absence.
     template <class T>
     KOKKOS_FUNCTION constexpr std::enable_if_t<has_infinity(T{}), T>
     legacy_std_numeric_limits_infinity() {
-        return Kokkos::Experimental::infinity<T>::value;
+        return Kokkos::infinity<T>::value;
     }
 
     template <class T>
