@@ -305,7 +305,7 @@ Typedefs
 
 * ``size_type``: The 32 or 64 bit unsigned integer type best suited for computations in this execution space.
 
-* ``index_type``: The 32 or 64 bit signed integer type best suited for computations in this execution space.
+* ``index_type``: The 32 or 64 bit signed integer type best suited for computations in this execution space (since Kokkos 5.2).
 
 Constructors
 ~~~~~~~~~~~~

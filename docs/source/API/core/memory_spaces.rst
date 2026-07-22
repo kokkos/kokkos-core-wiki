@@ -157,7 +157,7 @@ Typedefs
 * ``execution_space``: the default |ExecutionSpace|_ to use when constructing objects in memory provided by an instance of ``MemorySpace``, or (potentially) when deep copying from or to such memory (see |DeepCopyDocumentation|_ for details). Kokkos guarantees that ``Kokkos::SpaceAccessibility<execution_space, memory_space>::accessible`` will be ``true`` (see |KokkosSpaceAccessibility|_).
 * ``device_type``: ``DeviceType<execution_space,memory_space>``.
 * ``size_type``: The unsigned integer type best suited for execution spaces associated with this memory space.
-* ``index_type``: The signed integer type best suited for execution spaces associated with this memory space.
+* ``index_type``: The signed integer type best suited for execution spaces associated with this memory space (since Kokkos 5.2).
 
 Constructors
 ~~~~~~~~~~~~
