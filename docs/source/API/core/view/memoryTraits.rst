@@ -108,6 +108,7 @@ The following type aliases are also available in the ``Kokkos`` namespace.
     argument.
 
   .. versionremoved:: 5.3
+
      
 .. cpp:type:: MemoryUnmanaged = MemoryTraits<Unmanaged>;
 .. cpp:type:: MemoryRandomAccess = MemoryTraits<Unmanaged | RandomAccess>;
