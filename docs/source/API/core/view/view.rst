@@ -210,6 +210,9 @@ Other Types
 
    A specialization tag used for partial specialization of the mapping construct underlying a :cpp:class:`View`.
 
+   .. versionremoved:: 5.3
+
+
 
 Constructors
 ^^^^^^^^^^^^

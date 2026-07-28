@@ -193,6 +193,8 @@ Description
 
       A specialization tag used for partial specialization of the mapping construct underlying a Kokkos ``DynRankView``.
 
+      .. versionremoved:: 5.3
+
    .. rubric:: Constructors
 
    .. cpp:function:: DynRankView()
