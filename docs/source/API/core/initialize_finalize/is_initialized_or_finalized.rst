@@ -14,7 +14,7 @@ Usage
   if(Kokkos::is_initialized()) {
     // do work
   }
-  if(!Kokkos::is_initialized() && Kokkos::is_finalized()) {
+  if(!Kokkos::is_initialized() && !Kokkos::is_finalized()) {
     // may initialize Kokkos
   }
 
