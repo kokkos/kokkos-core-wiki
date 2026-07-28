@@ -50,6 +50,9 @@ Description
         The compatible view type with the same ``DataType`` and ``LayoutType`` stored in host accessible memory space.
 
         .. deprecated:: 5.0
+           Use :cpp:type:`host_mirror_type` instead.
+
+        .. versionremoved:: 5.3
 
     .. rubric:: Public Data Handle Types
 
