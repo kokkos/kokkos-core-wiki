@@ -4,6 +4,17 @@ Deprecations
 Deprecated in Kokkos 5.x
 ===========================
 
+Deprecated in Kokkos 5.2
+---------------------------
+
+* ``Kokkos::Experimental::HIP``, ``Kokkos::Experimental::HIPSpace``, ``Kokkos::Experimental::HIPHostPinnedSpace``, ``Kokkos::Experimental::HIPManagedSpace``
+   * replacement: ``Kokkos::HIP``, ``Kokkos::HIPSpace``, ``Kokkos::HIPHostPinnedSpace``, ``Kokkos::HIPManagedSpace``
+   * maturing of the HIP backend
+
+* ``Kokkos::Experimental::SYCL``, ``Kokkos::Experimental::SYCLDeviceUSMSpace``, ``Kokkos::Experimental::SYCLHostUSMSpace``, ``Kokkos::Experimental::SYCLSharedUSMSpace``
+   * replacement: ``Kokkos::SYCL``, ``Kokkos::SYCLDeviceUSMSpace``, ``Kokkos::SYCLHostUSMSpace``, ``Kokkos::SYCLSharedUSMSpace``
+   * maturing of the SYCL backend
+
 Deprecated in Kokkos 5.0
 ---------------------------
 
