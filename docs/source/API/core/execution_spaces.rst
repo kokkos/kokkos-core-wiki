@@ -262,7 +262,8 @@ Synopsis
         typedef Device<execution_space, memory_space> device_type;
         typedef ... scratch_memory_space;
         typedef ... array_layout;
-        typedef ... size_type;
+        typedef memory_space::size_type size_type;
+        typedef memory_space::index_type index_type;
 
         ExecutionSpaceConcept();
         ExecutionSpaceConcept(const ExecutionSpaceConcept& src);
@@ -302,7 +303,9 @@ Typedefs
 
 * ``scratch_memory_space``: The ``ScratchMemorySpace`` that parallel patterns will use for allocation of scratch memory (for instance, as requested by a |KokkosTeamPolicy|_). Only unmanaged Views can be created using this memory space.
 
-* ``size_type``: The default integer type associated with this space. Signed or unsigned, 32 or 64 bit integer type, used as preferred type for indexing.
+* ``size_type``: The 32- or 64-bit unsigned integer type best suited for computations in this execution space.
+
+* ``index_type``: The 32- or 64-bit signed integer type best suited for computations in this execution space (since Kokkos 5.2).
 
 Constructors
 ~~~~~~~~~~~~

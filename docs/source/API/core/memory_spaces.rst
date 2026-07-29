@@ -118,6 +118,8 @@ Synopsis
         typedef MemorySpaceConcept memory_space;
         typedef ... execution_space;
         typedef Device<execution_space, memory_space> device_type;
+        typedef ... size_type;
+        typedef std::make_signed_t<size_type> index_type;
 
         MemorySpaceConcept();
         MemorySpaceConcept(const MemorySpaceConcept& src);
@@ -154,6 +156,8 @@ Typedefs
 * ``memory_space``: The self type;
 * ``execution_space``: the default |ExecutionSpace|_ to use when constructing objects in memory provided by an instance of ``MemorySpace``, or (potentially) when deep copying from or to such memory (see |DeepCopyDocumentation|_ for details). Kokkos guarantees that ``Kokkos::SpaceAccessibility<execution_space, memory_space>::accessible`` will be ``true`` (see |KokkosSpaceAccessibility|_).
 * ``device_type``: ``DeviceType<execution_space,memory_space>``.
+* ``size_type``: The unsigned integer type best suited for execution spaces associated with this memory space.
+* ``index_type``: The signed integer type best suited for execution spaces associated with this memory space (since Kokkos 5.2).
 
 Constructors
 ~~~~~~~~~~~~
