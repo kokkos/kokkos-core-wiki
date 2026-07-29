@@ -303,9 +303,9 @@ Typedefs
 
 * ``scratch_memory_space``: The ``ScratchMemorySpace`` that parallel patterns will use for allocation of scratch memory (for instance, as requested by a |KokkosTeamPolicy|_). Only unmanaged Views can be created using this memory space.
 
-* ``size_type``: The 32 or 64 bit unsigned integer type best suited for computations in this execution space.
+* ``size_type``: The 32- or 64-bit unsigned integer type best suited for computations in this execution space.
 
-* ``index_type``: The 32 or 64 bit signed integer type best suited for computations in this execution space (since Kokkos 5.2).
+* ``index_type``: The 32- or 64-bit signed integer type best suited for computations in this execution space (since Kokkos 5.2).
 
 Constructors
 ~~~~~~~~~~~~
