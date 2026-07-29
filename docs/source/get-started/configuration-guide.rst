@@ -139,7 +139,7 @@ General options
       * ``OFF``
 
     * * ``Kokkos_ENABLE_DEPRECATED_CODE_4``
-      * Enable deprecated code in the Kokkos 4.x series
+      * Enable deprecated code in the Kokkos 4.x series :red:`[Removed in 5.3]`
       * ``OFF``
 
     * * ``Kokkos_ENABLE_DEPRECATED_CODE_5``

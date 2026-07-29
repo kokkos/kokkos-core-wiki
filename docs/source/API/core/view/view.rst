@@ -169,6 +169,9 @@ View Types
    compatible view type with the same :cpp:type:`data_type` and :cpp:type:`array_layout` stored in host accessible memory space.
 
    .. deprecated:: 5.0
+      Use :cpp:type:`host_mirror_type` instead.
+
+   .. versionremoved:: 5.3
 
 Data Handles
 ^^^^^^^^^^^^
@@ -206,6 +209,9 @@ Other Types
 .. cpp:type:: specialize
 
    A specialization tag used for partial specialization of the mapping construct underlying a :cpp:class:`View`.
+
+   .. versionremoved:: 5.3
+
 
 
 Constructors

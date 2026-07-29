@@ -138,7 +138,7 @@ Description
 
    .. cpp:type:: host_mirror_space
 
-      Host accessible memory space used in ``HostMirror``.
+      Host accessible memory space used in ``host_mirror_type``.
 
    .. rubric:: Public View Typedefs
 
@@ -150,9 +150,20 @@ Description
 
       This view type with all template parameters explicitly defined using a ``const`` data type.
 
+   .. cpp:type:: host_mirror_type
+
+      Compatible view type with the same ``DataType`` and ``LayoutType`` stored in host accessible memory space.
+
+      .. versionadded:: 5.0
+
    .. cpp:type:: HostMirror
 
       Compatible view type with the same ``DataType`` and ``LayoutType`` stored in host accessible memory space.
+
+      .. deprecated:: 5.0
+         Use :cpp:type:`host_mirror_type` instead
+
+      .. versionremoved:: 5.3
 
    .. rubric:: Public Data Handles Typedefs
 
@@ -181,6 +192,8 @@ Description
    .. cpp:type:: specialize
 
       A specialization tag used for partial specialization of the mapping construct underlying a Kokkos ``DynRankView``.
+
+      .. versionremoved:: 5.3
 
    .. rubric:: Constructors
 
