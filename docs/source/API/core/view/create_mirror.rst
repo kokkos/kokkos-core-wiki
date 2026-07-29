@@ -178,6 +178,8 @@ Description
 
    Equivalent to calling ``create_mirror_view_and_copy(typename ViewType::host_mirror_type::memory_space{}, src)``, i.e, returns a host-accessible View
    containing the same values as the original |View|_. If the |View|_ was already host-accessible, a (shallow) copy of the original |View|_ is returned.
-   Otherwise a new |View|_ is allocated. :sup:`since Kokkos 5.2`
+   Otherwise a new |View|_ is allocated.
+
+   .. versionadded:: 5.2
 
    - ``src``: a ``Kokkos::View``.
