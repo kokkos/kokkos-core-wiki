@@ -4,7 +4,7 @@
 .. role::cpp(code)
     :language: cpp
 
-Defined in header ``<Kokkos_Core.hpp>``
+Defined in header ``<Kokkos_InitializeFinalize.hpp>``:sup:`since Kokkos 5.3` which is included from ``<Kokkos_Core.hpp>``
 
 Usage
 -----
