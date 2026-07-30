@@ -352,7 +352,7 @@ to the generator object itself.
               random_numbers(i) = Kokkos::rand<decltype(generator), double>::draw(generator);
 
               // Alternatively, generate a number in a specific range [min, max)
-              // double val_range = Kokkos::rand<decltype(generator), double>::draw(generator, 10.0, 20.0);
+              double val_range = Kokkos::rand<decltype(generator), double>::draw(generator, 10.0, 20.0);
 
               // Return the state back to the pool to avoid deadlocks
               rand_pool.free_state(generator);
