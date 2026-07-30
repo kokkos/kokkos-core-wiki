@@ -45,6 +45,13 @@ Backend-Specific Behavior
    the SYCL backend and ``NDEBUG`` is defined, the function does **not** cause
    abnormal termination. Instead, it prints to the standard output stream and
    continues program execution.
+   See :ref:`Known Issues <known-issues-sycl-abort>`.
+
+.. warning::
+   **NextSilicon Backend:** When calling :cpp:func:`abort` from a parallel
+   region with the NextSilicon backend, the function will cause abnormal
+   program termination but will not print the message if the region has been
+   offloaded to the accelerator.
 
 
 Example

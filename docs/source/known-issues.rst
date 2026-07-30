@@ -139,6 +139,10 @@ SYCL
     struct sycl::is_device_copyable<MyComparator>
       : std::true_type {};
 
+.. _known-issues-sycl-abort:
+
+- Longer explanation here.
+
 
 Mathematical functions
 ======================
