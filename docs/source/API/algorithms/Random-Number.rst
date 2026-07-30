@@ -252,7 +252,7 @@ internal state. From a single 64-bit seed, this gives access to
 2\ :sup:`64`\  independent streams, each with a period of at least
 2\ :sup:`64`\  (with an expected period on the order of 2\ :sup:`255`\ ).
 
-.. code-block::
+.. code-block:: cpp
 
   template<class DeviceType>
   class Random_SFC64_Pool {
