@@ -141,7 +141,7 @@ SYCL
 
 .. _known-issues-sycl-abort:
 
-- Longer explanation here.
+- Longer explanation here explaining limitations with :cpp:func:`abort` in the SYCL backend.
 
 
 Mathematical functions
