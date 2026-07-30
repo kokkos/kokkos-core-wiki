@@ -13,7 +13,8 @@ Usage
 
     Kokkos::abort("helpful error message");
 
-Causes abnormal program termination and prints an error message.
+Causes abnormal program termination and prints an error message to the standard
+error stream.
 This function can be called from both host and device code, including within
 parallel kernels.
 
@@ -23,7 +24,8 @@ Interface
 
 .. cpp:function:: KOKKOS_FUNCTION void abort(const char * msg);
 
-   :param msg: Null-terminated string containing the error message to print before termination
+   :param msg: Null-terminated string containing the error message to print
+     before aborting the process.
    :returns: Does not return
 
 
