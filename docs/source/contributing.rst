@@ -20,10 +20,12 @@ Legal Requirements
 ------------------
 License
 ^^^^^^^
-Note that by contributing to Kokkos Core, you agree to the **Apache License 2.0
-with LLVM Exception**. This allows your contributions to be used in
-closed-source commercial contexts. See the `LICENSE <license.html>`__ for
-details. Authors retain copyright on their own contributions.
+By contributing to Kokkos Core, you agree that your contribution will be
+licensed under the **Apache License 2.0 with LLVM Exception**.  This exception
+allows Kokkos to be compiled and linked into binaries (including closed-source
+commercial software) without requiring the end-user to distribute the Kokkos
+license text. See the `LICENSE <license.html>`__ for details. Contributors (or
+their employers) retain copyright on their own contributions.
 
 Developer Certificate of Origin (DCO)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -32,12 +34,53 @@ contributions to be "signed off" according to the `Developer Certificate of
 Origin <https://developercertificate.org/>`_.
 
 By adding a ``Signed-off-by`` line to your commit message, you certify that
-you have the right to submit the work under the project's license. You can
-automate this by using the ``-s`` flag when committing:
+you have the right to submit the work under the project's license.
+
+If using the command line, you can automate this by adding the ``-s`` flag:
 
 .. code-block:: bash
 
    git commit -s -m "My informative commit message"
+
+If you are using a Git GUI or web interface, you must manually type the line at the 
+very end of your commit description:
+
+.. code-block:: text
+
+   Signed-off-by: Jane Doe <jane.doe@example.com>
+
+Generative AI and Assisted-By Contributions
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+The use of Generative AI tools (such as GitHub Copilot, ChatGPT, Claude, or
+similar models) to assist in writing code for Kokkos is permitted under strict
+conditions of human oversight and transparency.
+
+**Human Accountability:**
+AI-generated code often contains subtle logic bugs, security risks, or
+licensing compliance issues. Because AI tools cannot sign a Developer
+Certificate of Origin (DCO), **you** remain fully responsible for every line
+of code you submit. You must thoroughly review, test, and understand all
+AI-assisted contributions before submitting them.
+
+**Attribution and Disclosure:**
+To maintain a clear and transparent history of how code is authored, any
+commit that contains a significant amount of code generated or heavily modified
+by an AI tool must include an ``Assisted-By`` trailer in the commit message.
+
+This trailer should specify the tool name and version used, placed directly alongside
+your ``Signed-off-by`` line.
+
+.. code-block:: text
+
+   Fix out-of-bounds error in View layout initialization
+
+   Detailed explanation of the fix goes here...
+
+   Assisted-By: Copilot:gpt-4o
+   Signed-off-by: Jane Doe <jane.doe@example.com>
+
+Submissions generated entirely by automated AI agents without active human
+oversight and code review are strictly prohibited.
 
 Contributing Documentation
 --------------------------
