@@ -612,6 +612,12 @@ Kokkos will attempt to autodetect the architecture flag at configuration time.
       - Models
       - Notes
 
+    * * ``Kokkos_ARCH_RUBIN107``
+      * Rubin
+      * 10.7
+      * R100
+      * (since Kokkos 5.3)
+
     * * ``Kokkos_ARCH_BLACKWELL120``
       * Blackwell
       * 12.0
