@@ -15,7 +15,7 @@ Final Tasks
 
 **Automated Steps**
 
-1. Tag the final release source code:
+1. Tag and push the release:
 
 .. code-block:: console
 
