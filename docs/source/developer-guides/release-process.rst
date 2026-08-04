@@ -33,8 +33,8 @@ distributions and summary files.
 
 2. Verify checksums:
 
-Once the GitHub CI Action has run, verify the integrity of the generated
-artifacts:
+Once the GitHub CI Action has run, download and verify the integrity of the
+generated artifacts:
 
 
 .. code-block:: console
