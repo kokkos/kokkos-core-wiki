@@ -39,14 +39,13 @@ artifacts:
 
 .. code-block:: console
 
-  grep zip kokkos-X.Y.Z-SHA-256.txt | shasum -a 256 -c
-  grep tar.gz kokkos-X.Y.Z-SHA-256.txt | shasum -a 256 -c
+  sha256sum -c kokkos-X.Y.Z-SHA-256.txt
 
 3. Sign the checksum file:
 
 .. code-block:: console
 
-  gpg --sign --detach --armor kokkos-X.Y.Z-SHA-256.txt
+  gpg --detach-sig --armor kokkos-X.Y.Z-SHA-256.txt
 
 **Publish the Release**
 
