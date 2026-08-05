@@ -139,6 +139,14 @@ SYCL
     struct sycl::is_device_copyable<MyComparator>
       : std::true_type {};
 
+.. _known-issues-sycl-abort:
+
+- When calling :cpp:func:`abort` from a parallel region with the SYCL backend
+  and ``NDEBUG`` is defined, the function does **not** cause abnormal
+  termination. Instead, it prints to the standard output stream and continues
+  program execution. Note that ``NDEBUG`` is typically defined for ``CMake``'s
+  ``RelWithDebInfo`` and ``Release`` build types, but not for ``Debug``.
+
 
 Mathematical functions
 ======================
