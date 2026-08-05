@@ -8,3 +8,4 @@ The following pages provide information for existing and prospective developers 
 
    PRs and Reviews <prs-and-reviews.rst>
    Coding Standards <coding-standards>
+   Release Process <release-process>
