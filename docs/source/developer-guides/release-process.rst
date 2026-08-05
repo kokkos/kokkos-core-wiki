@@ -7,12 +7,6 @@ Final Tasks
 -----------
 (For maintainers)
 
-**Prerequisites**
-
-- Write access to the Kokkos repository
-- GPG key configured for signing
-- Git configured to sign tags
-
 **Automated Steps**
 
 1. Tag and push the release:
