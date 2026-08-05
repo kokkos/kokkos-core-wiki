@@ -55,6 +55,7 @@ Except in rare instances, it should not be used directly, but instead should be 
 ``Kokkos::HIP`` :sup:`promoted from` |Experimental|_ :sup:`since 4.0` is an |ExecutionSpaceConceptType|_ representing
 execution on a device supported by HIP. Except in rare instances, it should not be used directly,
 but instead should be used generically as an execution space. For details, see |DocExecutionSpaceConcept|_.
+``Kokkos::Experimental::HIP`` was deprecated in the 5.2 release.
 
 ``Kokkos::SYCL``
 ------------------------------
@@ -63,6 +64,7 @@ but instead should be used generically as an execution space. For details, see |
 
 If the SYCL backend is enabled and no GPU architecture is specified, Kokkos will use Just-In-Time compilation without any restriction to a particular SYCL device type.
 Thus, this is the only option to target a CPU with the SYCL backend (which is experimental, untested, and not optimized for).
+``Kokkos::Experimental::SYCL`` was deprecated in the 5.2 release.
 
 ``Kokkos::HPX``
 ---------------

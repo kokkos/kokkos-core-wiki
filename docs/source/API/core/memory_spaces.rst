@@ -45,31 +45,37 @@ Memory Spaces
 --------------------
 
 ``Kokkos::HIPSpace`` :sup:`promoted from` |Experimental|_ :sup:`since 4.0` is a |MemorySpaceType|_ representing device memory on a GPU in the HIP GPU programming environment.  Except in rare instances, it should not be used directly, but instead should be used generically as a memory space.  For details, see |TheDocumentationOnTheMemorySpaceConcept|_.
+``Kokkos::Experimental::HIPSpace`` was deprecated in the 5.2 release.
 
 ``Kokkos::HIPHostPinnedSpace``
 ------------------------------
 
 ``Kokkos::HIPHostPinnedSpace`` :sup:`promoted from` |Experimental|_ :sup:`since 4.0` is a |MemorySpaceType|_ representing host-side pinned memory accessible from a GPU in the HIP GPU programming environment.  This memory is accessible by both host and device execution spaces.  Except in rare instances, it should not be used directly, but instead should be used generically as a memory space.  For details, see |TheDocumentationOnTheMemorySpaceConcept|_.
+``Kokkos::Experimental::HIPHostPinnedSpace`` was deprecated in the 5.2 release.
 
 ``Kokkos::HIPManagedSpace``
 ---------------------------
 
 ``Kokkos::HIPManagedSpace`` :sup:`promoted from` |Experimental|_ :sup:`since 4.0`  is a |MemorySpaceType|_ representing page-migrating memory on a GPU in the HIP GPU programming environment.  Page-migrating memory is accessible from most host execution spaces. Even though available with all combinations of operating system and HIP-supported hardware, it requires both operating system and hardware to support and enable the ``xnack`` feature. Except in rare instances, it should not be used directly, but instead should be used generically as a memory space.  For details, see |TheDocumentationOnTheMemorySpaceConcept|_.
+``Kokkos::Experimental::HIPManagedSpace`` was deprecated in the 5.2 release.
 
 ``Kokkos::SYCLDeviceUSMSpace``
 --------------------------------------------
 
 ``Kokkos::SYCLDeviceUSMSpace`` :sup:`promoted from` |Experimental|_ :sup:`since 4.5` is a |MemorySpaceType|_ representing device memory on a GPU in the SYCL GPU programming environment. This memory is only accessible from the SYCL execution space.
+``Kokkos::Experimental::SYCLDeviceUSMSpace`` was deprecated in the 5.2 release.
 
 ``Kokkos::SYCLHostUSMSpace``
 ------------------------------------------
 
 ``Kokkos::SYCLHostUSMSpace`` :sup:`promoted from` |Experimental|_ :sup:`since 4.5` is a |MemorySpaceType|_ representing host-side pinned memory accessible from a GPU in the SYCL GPU programming environment. This memory is accessible from both host and SYCL execution spaces.
+``Kokkos::Experimental::SYCLHostUSMSpace`` was deprecated in the 5.2 release.
 
 ``Kokkos::SYCLSharedUSMSpace``
 --------------------------------------------
 
 ``Kokkos::SYCLSharedUSMSpace`` :sup:`promoted from` |Experimental|_ :sup:`since 4.5` is a |MemorySpaceType|_ representing page-migrating memory on a GPU in the SYCL GPU programming environment. This memory is accessible from both host and SYCL execution spaces.
+``Kokkos::Experimental::SYCLSharedUSMSpace`` was deprecated in the 5.2 release.
 
 ``Kokkos::HostSpace``
 ---------------------
