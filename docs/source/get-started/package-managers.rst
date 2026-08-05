@@ -89,6 +89,11 @@ To use the installed Kokkos, you can simply load the Kokkos module:
 
 This will inject the Kokkos environment into your shell session.
 
+.. note::
+   Spack's `deprecated_code` variant automatically enables deprecated code for the 
+   installed major version (e.g., `Kokkos_ENABLE_DEPRECATED_CODE_5` for version 5.2.0). 
+   Separate variants for different major versions are not provided.
+
 Packaging your own Kokkos dependent project with Spack
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
