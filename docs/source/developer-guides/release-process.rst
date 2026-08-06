@@ -5,6 +5,7 @@ Release Process
 
 Create Release Branch and Update Project Version
 -------------------------------------------------
+(For maintainers)
 
 .. note::
    **Version Numbering Scheme**
