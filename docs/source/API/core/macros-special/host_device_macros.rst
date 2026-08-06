@@ -160,16 +160,17 @@ Similar to ``KOKKOS_FORCEINLINE_FUNCTION``, excessive inlining in template-heavy
 .. versionadded:: 5.2
 .. code-block:: cpp
 
-    void foo(...) {
-      ...
+    void foo() {
+      constexpr auto N = 10;
+
       parallel_for("Name", N, KOKKOS_FORCEINLINE_LAMBDA(int i) {
-        ...
+        /* ... */
       });
-      ...
+
+      double result = 0.0;
       parallel_reduce("Name", N, KOKKOS_FORCEINLINE_LAMBDA(int i, double& v) {
-        ...
+        /* ... */
       }, result);
-      ...
     }
 
 
@@ -239,15 +240,17 @@ Similar to ``KOKKOS_FORCEINLINE_FUNCTION``, excessive inlining in template-heavy
 
     class Foo {
       public:
-        Foo() { ... };
+        Foo() { /* ... */ };
         int data;
 
-        KOKKOS_FUNCTION print_data() const {
+        KOKKOS_FUNCTION
+        void print_data() const {
           printf("Data: %i\n",data);
         }
+
         void bar() const {
+          constexpr auto N = 10;
           parallel_for("Name", N, KOKKOS_FORCEINLINE_CLASS_LAMBDA(int i) {
-            ...
             print_data();
             printf("%i %i\n",i,data);
           });
