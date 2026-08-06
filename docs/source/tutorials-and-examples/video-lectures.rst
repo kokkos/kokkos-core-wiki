@@ -10,7 +10,7 @@ Video lectures and slides
      - Slides
    * - 1.
      - `Intro, Build, Parallel dispatch <https://www.youtube.com/watch?v=rUIcWtFU5qM>`_
-     - `Slides <https://github.com/kokkos/kokkos-tutorials/blob/legacy/LectureSeries/KokkosTutorial_01_Introduction.pdf>`__
+     - `Slides <https://kokkos.org/kokkos-tutorials/main/KokkosTutorial_01_Introduction.pdf>`__
    * - 1.1.
      - `Introduction <https://www.youtube.com/watch?v=rUIcWtFU5qM&feature=youtu.be&t=698>`_
      -
@@ -25,7 +25,7 @@ Video lectures and slides
      -
    * - 2.
      - `Views and Spaces <https://www.youtube.com/watch?v=O-asHTtO7O4>`_
-     - `Slides <https://github.com/kokkos/kokkos-tutorials/blob/legacy/LectureSeries/KokkosTutorial_02_ViewsAndSpaces.pdf>`__
+     - `Slides <https://kokkos.org/kokkos-tutorials/main/KokkosTutorial_02_ViewsAndSpaces.pdf>`__
    * - 2.1.
      - `Views <https://www.youtube.com/watch?v=O-asHTtO7O4&feature=youtu.be&t=1413>`_
      -
@@ -40,7 +40,7 @@ Video lectures and slides
      -
    * - 3.
      - `Multidim loops and Data Structures <https://www.youtube.com/watch?v=nGyJS8u-6GY>`_
-     - `Slides <https://github.com/kokkos/kokkos-tutorials/blob/legacy/LectureSeries/KokkosTutorial_03_MDRangeMoreViews.pdf>`__
+     - `Slides <https://kokkos.org/kokkos-tutorials/main/KokkosTutorial_03_MDRangeMoreViews.pdf>`__
    * - 3.1.
      - `Tightly Nested Loops with MDRangePolicy <https://www.youtube.com/watch?v=nGyJS8u-6GY&feature=youtu.be&t=1319>`_
      -
@@ -61,7 +61,7 @@ Video lectures and slides
      -
    * - 4.
      - `Hierarchical Parallelism <https://www.youtube.com/watch?v=s9ecpeWRePs>`_
-     - `Slides <https://github.com/kokkos/kokkos-tutorials/blob/legacy/LectureSeries/KokkosTutorial_04_HierarchicalParallelism.pdf>`__
+     - `Slides <https://kokkos.org/kokkos-tutorials/main/KokkosTutorial_04_HierarchicalParallelism.pdf>`__
    * - 4.1.
      - `Hierarchical parallelism <https://www.youtube.com/watch?v=s9ecpeWRePs&feature=youtu.be&t=2036>`__
      -
@@ -73,7 +73,7 @@ Video lectures and slides
      -
    * - 5.
      - `SIMD, Streams, Tasking <https://www.youtube.com/watch?v=xEAyOod57-c>`_
-     - `Slides <https://github.com/kokkos/kokkos-tutorials/blob/legacy/LectureSeries/KokkosTutorial_05_SIMDStreamsTasking.pdf>`__
+     - `Slides <https://kokkos.org/kokkos-tutorials/main/KokkosTutorial_05_SIMDStreamsTasking.pdf>`__
    * - 5.1.
      - `SIMD <https://www.youtube.com/watch?v=xEAyOod57-c&feature=youtu.be&t=1510>`_
      -
@@ -85,7 +85,7 @@ Video lectures and slides
      -
    * - 6.
      - `Fortran/Python interop, MPI, PGAS <https://www.youtube.com/watch?v=1J3JQ3d3cRc&t=1s>`_
-     - `Slides <https://github.com/kokkos/kokkos-tutorials/blob/legacy/LectureSeries/KokkosTutorial_06_FortranPythonMPIAndPGAS.pdf>`__
+     - `Slides <https://kokkos.org/kokkos-tutorials/main/KokkosTutorial_06_FortranPythonMPIAndPGAS.pdf>`__
    * - 6.1.
      - `Fortran InterOp <https://www.youtube.com/watch?v=1J3JQ3d3cRc&feature=youtu.be&t=1298>`_
      -
@@ -100,7 +100,7 @@ Video lectures and slides
      -
    * - 7.
      - `Kokkos Tools <https://www.youtube.com/watch?v=MH6zFYGw0HU>`_
-     - `Slides <https://github.com/kokkos/kokkos-tutorials/blob/legacy/LectureSeries/KokkosTutorial_07_Tools.pdf>`__
+     - `Slides <https://kokkos.org/kokkos-tutorials/main/KokkosTutorial_07_Tools.pdf>`__
    * - 7.1.
      - `Kokkos Tools <https://www.youtube.com/watch?v=MH6zFYGw0HU&feature=youtu.be&t=1275>`__
      -
@@ -118,7 +118,7 @@ Video lectures and slides
      -
    * - 8.
      - `Kokkos Kernels Math Library <https://www.youtube.com/watch?v=_qD4X66MQF8&t=1s>`_
-     - `Slides <https://github.com/kokkos/kokkos-tutorials/blob/legacy/LectureSeries/KokkosTutorial_08_KokkosKernels.pdf>`__
+     - `Slides <https://kokkos.org/kokkos-tutorials/main/KokkosTutorial_08_KokkosKernels.pdf>`__
    * - 8.1.
      - `Kokkos Kernels: Library Based Approach for Performance Portable Sparse/Dense linear algebra and Graph Kernels <https://www.youtube.com/watch?v=_qD4X66MQF8&feature=youtu.be&t=1166>`_
      -
