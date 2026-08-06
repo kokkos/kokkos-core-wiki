@@ -243,8 +243,7 @@ Similar to ``KOKKOS_FORCEINLINE_FUNCTION``, excessive inlining in template-heavy
         Foo() { /* ... */ };
         int data;
 
-        KOKKOS_FUNCTION
-        void print_data() const {
+        KOKKOS_FUNCTION void print_data() const {
           printf("Data: %i\n",data);
         }
 
