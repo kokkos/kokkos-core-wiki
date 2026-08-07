@@ -15,6 +15,9 @@ Create Release Branch and Update Project Version
    ``4.2.5``). This allows code to reliably discriminate between development
    and release versions.
 
+Feature Releases (X.Y.0)
+~~~~~~~~~~~~~~~~~~~~~~~~
+
 .. important::
    Steps 1-7 must be completed in sequence without merging other changes to
    ``develop``. This ensures accurate version tracking throughout the codebase.
@@ -90,6 +93,110 @@ to maintain version integrity in the development branch.
    <https://kokkosteam.slack.com/archives/G5CBLMFLP>`_ channel that the release
    branch has been created and that the version bump PR needs to be merged as
    the next change to ``develop``.
+
+Patch Releases (X.Y.Z)
+~~~~~~~~~~~~~~~~~~~~~~
+
+Patch releases are created from the previous release tag to incorporate
+critical bug fixes into an existing release series.
+
+
+.. note::
+   Unlike feature releases, patch releases do not require updating the
+   ``develop`` branch version, as it already uses the ``.99`` patch number for
+   the current development series.
+
+1. Create the release candidate branch from the latest patch release tag:
+
+.. code-block:: console
+
+   git checkout -b release-candidate-X.Y.(Z+1) X.Y.Z
+
+2. Update the version number from ``X.Y.Z`` to ``X.Y.(Z+1)`` in the root ``CMakeLists.txt``:
+
+.. code-block:: cmake
+
+   # Edit these lines in CMakeLists.txt:
+   set(Kokkos_VERSION_MAJOR X)
+   set(Kokkos_VERSION_MINOR Y)
+   set(Kokkos_VERSION_PATCH Z+1)
+
+Then commit the change:
+
+.. code-block:: console
+
+   git commit -s -m 'Bump version from X.Y.Z to X.Y.(Z+1)' CMakeLists.txt
+
+3. Push the release candidate branch to the upstream repository:
+
+.. code-block:: console
+
+   git push https://github.com/kokkos/kokkos.git release-candidate-X.Y.(Z+1)
+
+4. Proceed to cherry-picking approved changes (see next section).
+
+
+Cherry-Picking Changes into Release Candidates
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**General Workflow**
+
+Changes should follow the develop-first workflow unless there is an exceptional
+reason, such as:
+
+- Develop has diverged significantly, making cherry-picking impractical
+- Develop is temporarily broken or in an untestable state
+- The bug only exists in the release branch due to subsequent fixes in develop
+- Develop contains incompatible changes requiring a fundamentally different fix
+
+1. **Merge to develop first:** All changes must be integrated and tested on the
+   ``develop`` branch before being considered for backporting.
+
+2. **Get authorization:** Once merged to develop, obtain approval from a maintainer,
+   through the weekly developer meeting, or on the `#nucleus <https://kokkosteam.slack.com/archives/G5CBLMFLP>`_
+   channel before backporting.
+
+3. **Open cherry-pick PR:** Create a pull request targeting the release candidate
+   branch with:
+
+   - **Title format:** ``[X.Y.Z] Original Well-Crafted Subject Line``
+   - **Description starts with:** "Cherry-picking the changes from PR #1234 into
+     the X.Y.(Z+1) release candidate branch"
+
+.. tip::
+   Developers are encouraged (but not required) to seek approval **before**
+   opening the backport PR to avoid unnecessary work if the change is deemed
+   inappropriate for the release.
+
+**Scope Guidelines for Feature Release Candidates (X.Y.0)**
+
+During the release candidate phase for a new feature release, patches should be
+limited to:
+
+- **Bug fixes** discovered during testing
+- **Important optimization improvements** that significantly impact performance
+- **Completion of features** that were started before the branch was created
+
+.. warning::
+   **As the release date approaches**, patches should be increasingly conservative
+   and limited to:
+
+   - Critical bugs that affect core functionality
+   - Regressions from the previous release
+   - Build system failures on supported platforms
+
+**Scope Guidelines for Patch Releases (X.Y.Z, Z > 0)**
+
+Patches for bug fix releases have stricter requirements:
+
+- **Bug fixes only** (preferred)
+- **Very safe and critical performance improvements** (requires strong justification)
+- **Must maintain full API compatibility** with the X.Y.0 release
+
+.. important::
+   Patch releases exist to provide stability for users who have already deployed
+   the X.Y.0 release. Breaking changes of any kind are not acceptable.
+
 
 Final Tasks
 -----------
