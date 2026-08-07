@@ -38,15 +38,15 @@ free functions
     class Foo {
       public:
         // inline defined constructor
-        KOKKOS_FUNCTION Foo() { ... };
+        KOKKOS_FUNCTION Foo() { /* ... */ };
 
         // inline defined member function
-        template<class T>
-        KOKKOS_FUNCTION void bar() const { ... }
+        template <class T>
+        KOKKOS_FUNCTION void bar() const { /* ... */ }
     };
 
-    template<class T>
-    KOKKOS_FUNCTION void foo(T v) { ... }
+    template <class T>
+    KOKKOS_FUNCTION void foo(T v) { /* ... */ }
 
 
 ``KOKKOS_INLINE_FUNCTION``
@@ -77,16 +77,16 @@ Use this macro only in conjunction with performing extensive performance checks.
     class Foo {
       public:
         KOKKOS_FORCEINLINE_FUNCTION
-        Foo() { ... };
+        Foo() { /* ... */ };
 
-        template<class T>
+        template <class T>
         KOKKOS_FORCEINLINE_FUNCTION
-        void bar() const { ... }
+        void bar() const { /* ... */ }
     };
 
-    template<class T>
+    template <class T>
     KOKKOS_FORCEINLINE_FUNCTION
-    void foo(T v) { ... }
+    void foo(T v) { /* ... */ }
 
 ``KOKKOS_RELOCATABLE_FUNCTION``
 -------------------------------
@@ -132,16 +132,17 @@ It is used than creating C++ lambdas to be passed to Kokkos parallel dispatch me
 
 .. code-block:: cpp
 
-    void foo(...) {
-      ...
-      parallel_for("Name", N, KOKKOS_LAMBDA(int i) {
-        ...
+    constexpr auto n = 10;
+
+    void foo() {
+      parallel_for("Name", n, KOKKOS_LAMBDA(int i) {
+        /* ... */
       });
-      ...
-      parallel_reduce("Name", N, KOKKOS_LAMBDA(int i, double& v) {
-        ...
+
+      double result = 0.0;
+      parallel_reduce("Name", n, KOKKOS_LAMBDA(int i, double& v) {
+        /* ... */
       }, result);
-      ...
     }
 
 .. warning:: Do not use ``KOKKOS_LAMBDA`` inside functions marked as ``KOKKOS_FUNCTION`` etc. or within a lambda marked with ``KOKKOS_LAMBDA``. Specifically do not use ``KOKKOS_LAMBDA`` to define lambdas for nested parallel calls. CUDA does not support that. Use plain C++ syntax instead: ``[=] (int i) {...}``.
@@ -159,16 +160,17 @@ Similar to ``KOKKOS_FORCEINLINE_FUNCTION``, excessive inlining in template-heavy
 .. versionadded:: 5.2
 .. code-block:: cpp
 
-    void foo(...) {
-      ...
+    void foo() {
+      constexpr auto N = 10;
+
       parallel_for("Name", N, KOKKOS_FORCEINLINE_LAMBDA(int i) {
-        ...
+        /* ... */
       });
-      ...
+
+      double result = 0.0;
       parallel_reduce("Name", N, KOKKOS_FORCEINLINE_LAMBDA(int i, double& v) {
-        ...
+        /* ... */
       }, result);
-      ...
     }
 
 
@@ -182,17 +184,19 @@ This macro provides default capture clause and host device markup for lambdas cr
 
     class Foo {
       public:
-        Foo() { ... };
+        Foo() { /* ... */ };
         int data;
 
-        KOKKOS_FUNCTION print_data() const {
+        KOKKOS_FUNCTION void print_data() const {
           printf("Data: %i\n",data);
         }
+
         void bar() const {
-          parallel_for("Name", N, KOKKOS_CLASS_LAMBDA(int i) {
-            ...
+          constexpr auto n = 10;
+          parallel_for("Name", n, KOKKOS_CLASS_LAMBDA(int i) {
+            /* ... */
             print_data();
-            printf("%i %i\n",i,data);
+            printf("%i %i\n", i, data);
           });
         }
     };
@@ -204,20 +208,22 @@ copies of any accessed data members, and can not use non-static member functions
 
     class Foo {
       public:
-        Foo() { ... };
+        Foo() { /* ... */ };
         int data;
 
-        KOKKOS_FUNCTION print_data() const {
-          printf("Data: %i\n",data);
+        KOKKOS_FUNCTION void print_data() const {
+          printf("Data: %i\n", data);
         }
         void bar() const {
+          constexpr auto n = 10;
           int data_copy = data;
-          parallel_for("Name", N, KOKKOS_LAMBDA(int i) {
-            ...
+          parallel_for("Name", n, KOKKOS_LAMBDA(int i) {
+            /* ... */
+
             // can't call member functions
             // print_data();
             // use the copy of data
-            printf("%i %i\n",i,data_copy);
+            printf("%i %i\n", i, data_copy);
           });
         }
     };
@@ -234,15 +240,16 @@ Similar to ``KOKKOS_FORCEINLINE_FUNCTION``, excessive inlining in template-heavy
 
     class Foo {
       public:
-        Foo() { ... };
+        Foo() { /* ... */ };
         int data;
 
-        KOKKOS_FUNCTION print_data() const {
+        KOKKOS_FUNCTION void print_data() const {
           printf("Data: %i\n",data);
         }
+
         void bar() const {
+          constexpr auto N = 10;
           parallel_for("Name", N, KOKKOS_FORCEINLINE_CLASS_LAMBDA(int i) {
-            ...
             print_data();
             printf("%i %i\n",i,data);
           });
@@ -276,7 +283,7 @@ This macro is used to annotate user-defined deduction guides.
     Foo(T, Args...) -> Foo<T, 1+sizeof...(Args)>;
 
     void bar() {
-      Kokkos::parallel_for(1, KOKKOS_LAMBDA(int) {
+      parallel_for(1, KOKKOS_LAMBDA(int) {
         Foo f(1, 2., 3.2f);
         f.print(0);
         f.print(1);
