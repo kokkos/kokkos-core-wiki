@@ -24,6 +24,8 @@ Interface
 
 .. cpp:function:: KOKKOS_FUNCTION void abort(const char * msg);
 
+   .. versionadded:: 4.2
+
    :param msg: Null-terminated string containing the error message to print
      before aborting the process.
    :returns: Does not return
