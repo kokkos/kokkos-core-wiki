@@ -81,6 +81,8 @@ Each minor release follows a structured timeline:
             - Publish GitHub release
             - Announce to community
 
+   Week  5: Release briefing
+
    Week  6: X.Y.1 Released (as needed)
             - First patch release with accumulated bug fixes
 
