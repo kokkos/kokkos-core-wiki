@@ -70,6 +70,7 @@ The following are public headers:
     Kokkos_Clamp.hpp                     // since Kokkos 4.3
     Kokkos_Complex.hpp
     Kokkos_DetectionIdiom.hpp
+    Kokkos_InitializeFinalize.hpp        // since Kokkos 5.3
     Kokkos_Macros.hpp
     Kokkos_MathematicalConstants.hpp
     Kokkos_MathematicalFunctions.hpp
@@ -78,6 +79,7 @@ The following are public headers:
     Kokkos_Printf.hpp                    // since Kokkos 4.2
     Kokkos_Profiling_ProfileSection.hpp
     Kokkos_Profiling_ScopedRegion.hpp
+    Kokkos_ScopeGuard.hpp                // since Kokkos 5.3
     Kokkos_Swap.hpp                      // since Kokkos 4.3
     Kokkos_Timer.hpp
 
