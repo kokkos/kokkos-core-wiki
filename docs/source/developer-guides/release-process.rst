@@ -3,6 +3,120 @@ Release Process
 
 (Work In Progress)
 
+Release Timeline and Schedule
+-----------------------------
+
+Kokkos follows a time-based release schedule to provide predictable updates to
+the community:
+
+- **Major releases (X.0.0):** Every 3 years
+- **Minor releases (X.Y.0):** Every 4 months
+- **Patch releases (X.Y.Z):** As needed for bug fixes
+
+Annual Release Cadence
+~~~~~~~~~~~~~~~~~~~~~~
+
+Kokkos follows a three-cycle annual schedule with releases in **March**,
+**July**, and **November**:
+
+.. list-table:: Release Calendar
+   :header-rows: 1
+   :widths: 15 25 60
+
+   * - Month
+     - Activity
+     - Notes
+   * - **February**
+     - Branch Creation
+     - Last week: Create ``release-candidate-X.Y.0`` branch
+   * - **March**
+     - **X.Y.0 Release**
+     - Mid-to-late March (3 weeks after branch creation)
+   * - **April**
+     - Patch Release
+     - X.Y.1 released if needed (~6 weeks after branch creation)
+   * - **May**
+     - Patch Releases
+     - X.Y.2+ released as needed
+   * - **June**
+     - Branch Creation
+     - Last week: Create next release candidate branch
+   * - **July**
+     - **X.Y.0 Release**
+     - Mid-to-late July
+   * - **August**
+     - Patch Release
+     - X.Y.1 released if needed
+   * - **September**
+     - Patch Releases
+     - X.Y.2+ released as needed
+   * - **October**
+     - Branch Creation
+     - Last week: Create next release candidate branch
+   * - **November**
+     - **X.Y.0 Release**
+     - Mid-to-late November
+   * - **December**
+     - Patch Release
+     - X.Y.1 released if needed
+
+Release Cycle Timeline
+~~~~~~~~~~~~~~~~~~~~~~
+
+Each minor release follows a structured timeline:
+
+.. code-block:: text
+
+   Week  0: Release branch created (last week of Feb/Jun/Oct)
+            - Feature freeze for this release
+            - Develop branch version bumped to X.Y.99
+
+   Week  1-3: Testing and stabilization phase
+              - Cherry-pick critical fixes
+              - Run extended CI and integration tests
+              - Update changelog and documentation
+
+   Week  3: X.Y.0 Released (mid-to-late Mar/Jul/Nov)
+            - Create Git tag
+            - Publish GitHub release
+            - Announce to community
+
+   Week  5: Release briefing
+
+   Week  6: X.Y.1 Released (as needed)
+            - First patch release with accumulated bug fixes
+
+   Week  6-17: X.Y.2+ Released (as needed)
+               - Additional patches for critical issues
+
+   Week 17: Next release branch created
+            - Cycle repeats (approximately 4 months or 17 weeks)
+
+Release Phase Guidelines
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+**Weeks 0-1 (Early Release Candidate):**
+
+- Cherry-pick bug fixes, and feature completions
+- Broad testing across supported platforms
+- Documentation updates
+
+**Weeks 2-3 (Late Release Candidate):**
+
+- **Increasingly conservative** - focus on critical bugs and regressions only
+- Final documentation review
+- Changelog finalization
+
+**Week 3 onwards (Post-Release):**
+
+- Patch releases follow stricter criteria (bug fixes only)
+- Maintain API compatibility with X.Y.0
+
+.. note::
+   The release schedule may be adjusted for holidays, critical bugs, or
+   coordination with major downstream projects.
+
+
 Create Release Branch and Update Project Version
 -------------------------------------------------
 (For maintainers)
