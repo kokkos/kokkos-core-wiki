@@ -1,5 +1,5 @@
-Minimum/maximum operations
-==========================
+``Minimum/maximum operations``
+==============================
 
 .. role:: cpp(code)
     :language: cpp

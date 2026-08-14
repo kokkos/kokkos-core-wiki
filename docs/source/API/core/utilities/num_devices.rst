@@ -1,4 +1,4 @@
-``Kokkos::num_devices``
+``num_devices``
 =======================
 
 .. role:: cpp(code)

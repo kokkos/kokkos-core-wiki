@@ -1,4 +1,4 @@
-``Kokkos::num_threads``
+``num_threads``
 =======================
 
 .. role:: cpp(code)
