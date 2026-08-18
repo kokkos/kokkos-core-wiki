@@ -33,7 +33,6 @@ Other
 .. toctree::
    :maxdepth: 1
 
-   ./utilities/all
    ./utilities/min_max_clamp
    ./utilities/swap
    ./utilities/timer
