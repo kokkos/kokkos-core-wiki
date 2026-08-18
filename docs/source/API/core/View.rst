@@ -28,6 +28,8 @@ The following facilities are available:
      - Resizing a ``Kokkos::View``.
    * - `subview <view/subview.html>`__
      - Getting slices from a ``Kokkos::View``.
+   * - :doc:`view/ALL`
+     - Selecting full range of indices in a dimension with :cpp:func:`subview`.
    * - `View <view/view.html>`__
      - The main Kokkos data structure, a multidimensional memory space and layout aware array.
    * - `view_alloc() <view/view_alloc.html>`__
@@ -51,6 +53,7 @@ The following facilities are available:
    ./view/resize
    ./view/subview
    ./view/Subview_type
+   ./view/ALL
    ./view/view
    ./view/view_alloc
    ./view/view_like

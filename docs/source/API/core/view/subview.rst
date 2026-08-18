@@ -33,9 +33,9 @@ Description
      than the rank of ``v`` and the values referenced by ``s`` correspond to the values associated
      with using the integer argument in the corresponding position during indexing into ``v``.
 
-   * Passing |KokkosAll|_ as the ``r``\ th argument is equivalent to passing ``pair<ptrdiff_t,ptrdiff_t>(0,v.extent(r))`` as the ``r``\ th argument.
+   * Passing :cpp:var:`ALL` as the ``r``\ th argument is equivalent to passing ``pair<ptrdiff_t,ptrdiff_t>(0,v.extent(r))`` as the ``r``\ th argument.
 
-   * If the ``r``\ th argument ``arg_r`` is the ``d``\ th range (\ ``std::pair``\ , ``Kokkos::pair`` or |KokkosAll|_ )
+   * If the ``r``\ th argument ``arg_r`` is the ``d``\ th range (\ ``std::pair``\ , ``Kokkos::pair`` or :cpp:var:`ALL` )
      in the argument list than ``s.extent(d) = arg_r.second-arg_r.first``\ , and dimension ``d`` of ``s``
      references the range ``[arg_r.first,arg_r.second)`` of dimension ``r`` of ``v``.
 
@@ -51,7 +51,7 @@ Description
 
      - ``iType`` with ``std::is_integral<iType>::value`` being true.
 
-     - ``std::remove_const_t< decltype(``\ |KokkosAll|_ ``)>``
+     - ``std::remove_const_t< decltype(``\ :cpp:var:`ALL` ``)>`` (which is the same as :cpp:struct:`ALL_t`)
 
    * If the ``r``\ th argument ``arg_r`` is of type ``std::pair<iType,iType>`` or ``Kokkos::pair<iType,iType>`` it must meet:
 
