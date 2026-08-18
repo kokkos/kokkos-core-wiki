@@ -40,4 +40,3 @@ Other
    ./utilities/device_id
    ./utilities/num_devices
    ./utilities/num_threads
-   ./utilities/experimental

@@ -1,5 +1,5 @@
-``Kokkos::kokkos_swap``
-=======================
+``kokkos_swap``
+===============
 
 .. role:: cpp(code)
     :language: cpp
