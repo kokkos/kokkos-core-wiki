@@ -128,7 +128,7 @@ Scalar Types
    May be :cpp:`const`-qualified (e.g., :cpp:`const double`) for read-only views.
    Equivalent to :cpp:type:`value_type` for Kokkos views.
 
-   .. versionadded:: 4.4
+   .. versionadded:: 4.5
 
 
 Spaces
@@ -247,7 +247,7 @@ Data Handles
    The data handle type following the :cpp:`std::mdspan` convention.
    For managed views this is a reference-counted handle; for unmanaged views it is a raw pointer (e.g., :cpp:`double*`).
 
-   .. versionadded:: 4.4
+   .. versionadded:: 4.5
 
 
 Other Types
@@ -272,14 +272,14 @@ Other Types
    Integral type used for indexing, following the :cpp:`std::mdspan` convention.
    Default is :cpp:`std::size_t`.
 
-   .. versionadded:: 4.4
+   .. versionadded:: 4.5
 
 .. cpp:type:: rank_type
 
    Type used to represent the rank of the :cpp:class:`View` (i.e., the type of :cpp:func:`rank` and :cpp:func:`rank_dynamic`).
    It is :cpp:`std::size_t`.
 
-   .. versionadded:: 4.4
+   .. versionadded:: 4.5
 
 .. cpp:type:: dimension
 
@@ -303,7 +303,7 @@ They describe the :ref:`natural mdspan <api-view-natural-mdspans>` of the :cpp:c
    Only available when :cpp:type:`array_layout` is one of :cpp:struct:`LayoutLeft`,
    :cpp:struct:`LayoutRight`, or :cpp:class:`LayoutStride`.
 
-   .. versionadded:: 4.4
+   .. versionadded:: 5.0
 
    .. seealso:: :ref:`Natural mdspans <api-view-natural-mdspans>`
 
@@ -312,7 +312,7 @@ They describe the :ref:`natural mdspan <api-view-natural-mdspans>` of the :cpp:c
    The :cpp:`std::extents` type of :cpp:type:`mdspan_type`, encoding the rank and
    static/dynamic extent information of the :cpp:class:`View`.
 
-   .. versionadded:: 4.4
+   .. versionadded:: 5.0
 
 .. cpp:type:: layout_type
 
@@ -320,21 +320,21 @@ They describe the :ref:`natural mdspan <api-view-natural-mdspans>` of the :cpp:c
    Note that this is the mdspan layout type (e.g., :cpp:`std::layout_left`) and is
    distinct from :cpp:type:`array_layout` (the Kokkos layout tag, e.g., :cpp:struct:`LayoutLeft`).
 
-   .. versionadded:: 4.4
+   .. versionadded:: 5.0
 
 .. cpp:type:: accessor_type
 
    The mdspan accessor policy type of :cpp:type:`mdspan_type`.
    Encodes the memory space and access properties (e.g., atomic access).
 
-   .. versionadded:: 4.4
+   .. versionadded:: 5.0
 
 .. cpp:type:: mapping_type
 
    The mdspan mapping type of :cpp:type:`mdspan_type`, i.e., :cpp:`layout_type::mapping<extents_type>`.
    Describes the mapping from multi-dimensional indices to a linear offset.
 
-   .. versionadded:: 4.4
+   .. versionadded:: 5.0
 
 
 
