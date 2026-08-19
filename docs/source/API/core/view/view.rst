@@ -276,8 +276,8 @@ Other Types
 
 .. cpp:type:: rank_type
 
-   Unsigned integral type used to represent the rank of the :cpp:class:`View` (i.e., the type of :cpp:func:`rank` and :cpp:func:`rank_dynamic`).
-   Typically :cpp:`std::size_t`.
+   Type used to represent the rank of the :cpp:class:`View` (i.e., the type of :cpp:func:`rank` and :cpp:func:`rank_dynamic`).
+   It is :cpp:`std::size_t`.
 
    .. versionadded:: 4.4
 
