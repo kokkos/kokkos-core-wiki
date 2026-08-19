@@ -269,8 +269,8 @@ Other Types
 
 .. cpp:type:: index_type
 
-   Unsigned integral type used for indexing, following the :cpp:`std::mdspan` convention.
-   Typically :cpp:`std::size_t`.
+   Integral type used for indexing, following the :cpp:`std::mdspan` convention.
+   Default is :cpp:`std::size_t`.
 
    .. versionadded:: 4.4
 
