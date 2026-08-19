@@ -195,7 +195,6 @@ View Types
 .. cpp:type:: uniform_type
 
    Canonical form of this :cpp:class:`View` with static extents preserved.
-   Used by generic Kokkos utilities.
 
 .. cpp:type:: uniform_const_type
 
@@ -203,7 +202,7 @@ View Types
 
 .. cpp:type:: uniform_runtime_type
 
-   Version of :cpp:type:`uniform_type` with all extents made dynamic (runtime-determined).
+   Version of :cpp:type:`uniform_type` with all extents made dynamic.
 
 .. cpp:type:: uniform_runtime_const_type
 
