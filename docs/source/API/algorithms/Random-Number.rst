@@ -83,7 +83,19 @@ Header Files: ``<Kokkos_Core.hpp>`` ``<Kokkos_Random.hpp>``
 Synopsis
 --------
 
-Kokkos_Random provides the structure necessary for pseudorandom number generators. These generators are based on Vigna, Sebastiano (2014). [*"An experimental exploration of Marsaglia's xorshift generators, scrambled." See: http://arxiv.org/abs/1402.6246*].
+Kokkos_Random provides the structure necessary for pseudorandom number generators.
+Kokkos currently ships two families of generators:
+
+* the XorShift generators (``Random_XorShift64_Pool``, ``Random_XorShift1024_Pool``),
+  based on Vigna, Sebastiano (2014). [*"An experimental exploration of
+  Marsaglia's xorshift generators, scrambled." See:
+  http://arxiv.org/abs/1402.6246*];
+* ``Random_SFC64_Pool``, implementing Chris Doty-Humphrey's Small Fast
+  Counting (SFC64) generator (see the :ref:`dedicated section
+  <random_sfc64_pool>` below for its distinguishing properties).
+
+All of these share the same ``Pool``/``Generator`` interface described in
+this page, and can be used interchangeably.
 
 The Random number generators themselves have two components:
 a state-pool and the actual generator. A state-pool manages
@@ -114,17 +126,27 @@ are collectives, i.e. all functions can be called inside conditionals.
     }
 
 Construction and Initialization
--------------------------------
+--------------------------------
 
-A Pool of Generators are initialized using a starting seed and establishing
-a pool_size of num_states. The Random_XorShift64 generator is used in serial
-to initialize all states making the initialization process platform independent
-and deterministic. Requesting a generator locks its state guaranteeing that
-each thread has a private (independent) generator. (Note, getting a state on a Cuda
-device involves atomics, making it non-deterministic!)
-Upon completion, a generator is returned to the state pool, unlocking
-it, and upon updating of it's status, once again becomes available
-within the pool.
+A Pool of Generators is initialized using a starting seed and establishing
+a pool_size of num_states. This initialization process is always platform
+independent and deterministic, but its execution differs depending on the
+underlying generator family:
+
+* For the XorShift generators, a single ``Random_XorShift64`` generator is
+  run **serially** (on the host) to seed every state in the pool one after
+  the other, one state's seed being derived from the previous one's.
+* For ``Random_SFC64_Pool``, each stream's initial state depends only on
+  the pair ``(seed, stream index)``, so the pool's states can instead be
+  initialized **in parallel** by the target backend when one is available
+  — see :ref:`Parallel initialization <random_sfc64_pool>` below. This can
+  be noticeably faster for large pools.
+
+In both cases, requesting a generator locks its state, guaranteeing that
+each thread has a private (independent) generator. (Note, getting a state
+on a Cuda device involves atomics, making it non-deterministic!) Upon
+completion, a generator is returned to the state pool, unlocking it, and
+upon updating of its status, once again becomes available within the pool.
 
 Pool constructors that do not take an execution space instance are synchronous, and use the default execution space instance of the provided `DeviceType`.
 Pool constructors that take an execution space instance are asynchronous.
@@ -208,3 +230,134 @@ Example
 
         printf("pi = %f\n", 4. * count / total);
     }
+
+.. _random_sfc64_pool:
+
+Random_SFC64_Pool
+------------------
+
+Header Files: ``<Kokkos_Core.hpp>``, ``<Kokkos_Random.hpp>``
+
+``Random_SFC64_Pool`` is an alternative pool/generator pair implementing
+Chris Doty-Humphrey's Small Fast Counting (SFC64) pseudorandom number
+generator, released into the public domain. (Note: this generator is
+sometimes referred to as "Small Fast Chaotic", e.g. in NumPy's
+documentation)
+It follows the same ``Pool``/``Generator`` interface described above
+(``get_state()``, ``free_state()``, etc.), and can be used as a drop-in
+replacement for ``Random_XorShift64_Pool``.
+
+Unlike the XorShift generators, SFC64 embeds a 64-bit counter in its
+internal state. From a single 64-bit seed, this gives access to
+2\ :sup:`64`\  independent streams, each with a period of at least
+2\ :sup:`64`\  (with an expected period on the order of 2\ :sup:`255`\ ).
+
+.. code-block:: cpp
+
+  template<class DeviceType>
+  class Random_SFC64_Pool {
+    public:
+
+    using device_type = DeviceType;
+    using generator_type = Random_SFC64<DeviceType>;
+
+    Random_SFC64_Pool();
+    Random_SFC64_Pool(uint64_t seed);
+    Random_SFC64_Pool(uint64_t seed, uint64_t num_states);
+    // Useful in distributed settings to be reproducible
+    Random_SFC64_Pool(uint64_t seed, uint64_t seed_offset, uint64_t num_states);
+
+    // Asynchronous constructors :
+    Random_SFC64_Pool(const execution_space& exec, uint64_t seed);
+    Random_SFC64_Pool(const execution_space& exec, uint64_t seed, uint64_t num_states);
+    Random_SFC64_Pool(const execution_space& exec, uint64_t seed,
+                       uint64_t seed_offset, uint64_t num_states);
+
+    generator_type get_state();
+    void free_state(generator_type gen);
+  }
+
+Parallel Initialization
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+Because each SFC64 stream can be seeded independently from its index
+(seed, counter offset), the pool's states can be initialized concurrently
+by the target backend. This is in contrast to ``Random_XorShift64_Pool``
+and ``Random_XorShift1024_Pool``, whose states are chained from one
+another and must therefore be initialized serially. When a parallel
+backend is enabled, constructing a ``Random_SFC64_Pool`` will initialize
+its states in parallel, which can be noticeably faster for large pools.
+
+Reproducible Stream Partitioning
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Because each stream is uniquely determined by ``(seed, stream_index)``,
+splitting a computation across multiple pools (for instance one per MPI
+rank) while preserving bit-for-bit reproducibility only requires giving
+every pool the same seed and a ``seed_offset`` equal to the number of
+streams already handed out to previous pools. For example, requesting
+1000 states from a single pool is equivalent to requesting 500 states
+from one pool with ``seed_offset = 0`` and 500 states from a second pool
+with the same seed and ``seed_offset = 500``: both setups produce the
+exact same 1000 streams.
+
+.. code-block:: cpp
+
+  #include <Kokkos_Core.hpp>
+  #include <Kokkos_Random.hpp>
+
+  int main(int argc, char *argv[]) {
+      Kokkos::ScopeGuard guard(argc, argv);
+
+      uint64_t seed = 12345;
+
+      // Pool 0 handles streams [0, 500), pool 1 handles streams [500, 1000)
+      // — identical results to a single pool of 1000 states with seed_offset 0.
+      Kokkos::Random_SFC64_Pool<> pool0(seed, /*seed_offset=*/0, /*num_states=*/500);
+      Kokkos::Random_SFC64_Pool<> pool1(seed, /*seed_offset=*/500, /*num_states=*/500);
+
+      // ... use pool0 / pool1 exactly like Random_XorShift64_Pool
+  }
+
+Use
+~~~
+
+As with the other pools, it is highly recommended to use the generic
+``Kokkos::rand`` struct to generate numbers of specific types or within
+specific distributions, rather than relying on legacy methods attached
+to the generator object itself.
+
+.. code-block:: cpp
+
+  #include <Kokkos_Core.hpp>
+  #include <Kokkos_Random.hpp>
+
+  int main(int argc, char* argv[]) {
+      Kokkos::initialize(argc, argv);
+      {
+          // 1. Initialize the SFC64 generator pool with a seed
+          uint64_t seed = 123456789;
+          Kokkos::Random_SFC64_Pool<Kokkos::DefaultExecutionSpace> rand_pool(seed);
+
+          int N = 1000;
+          Kokkos::View<double*> random_numbers("random_numbers", N);
+
+          // 2. Use the pool in a parallel kernel
+          Kokkos::parallel_for("GenerateRandomNumbers", N, KOKKOS_LAMBDA(const int i) {
+              // Get a state/generator from the pool
+              auto generator = rand_pool.get_state();
+
+              // Generate a random double (e.g., between 0.0 and 1.0)
+              // Recommended API using the Kokkos::rand struct:
+              random_numbers(i) = Kokkos::rand<decltype(generator), double>::draw(generator);
+
+              // Alternatively, generate a number in a specific range [min, max)
+              double val_range = Kokkos::rand<decltype(generator), double>::draw(generator, 10.0, 20.0);
+
+              // Return the state back to the pool to avoid deadlocks
+              rand_pool.free_state(generator);
+          });
+      }
+      Kokkos::finalize();
+      return 0;
+  }
