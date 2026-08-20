@@ -277,7 +277,7 @@ internal state. From a single 64-bit seed, this gives access to
     void free_state(generator_type gen);
   }
 
-Parallel initialization
+Parallel Initialization
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 Because each SFC64 stream can be seeded independently from its index
@@ -288,7 +288,7 @@ another and must therefore be initialized serially. When a parallel
 backend is enabled, constructing a ``Random_SFC64_Pool`` will initialize
 its states in parallel, which can be noticeably faster for large pools.
 
-Reproducible stream partitioning
+Reproducible Stream Partitioning
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Because each stream is uniquely determined by ``(seed, stream_index)``,
