@@ -57,39 +57,49 @@ Interface
   .. cpp:function:: static constexpr bool empty() noexcept
 
     :return: ``N == 0``
-    :since: ``noexcept`` since 5.0
+
+    .. versionadded:: 5.0
+       ``noexcept`` specifier added
 
   .. cpp:function:: static constexpr size_type size() noexcept
   .. cpp:function:: constexpr size_type max_size() const noexcept
 
     :return: ``N``
-    :since: ``noexcept`` since 5.0
+
+    .. versionadded:: 5.0
+       ``noexcept`` specifier added
 
   .. cpp:function:: constexpr reference operator[](size_t i)
   .. cpp:function:: constexpr const_reference operator[](size_t i) const
 
     :return: A reference to the ``i``-th element of the array.
-    :since: No longer requires the argument to be of an integral type or an unscoped enum type. (since 5.1)
+
+    .. versionadded:: 5.1
+      No longer requires the argument to be of an integral type or an unscoped enum type.
 
   .. cpp:function:: constexpr pointer data() noexcept
   .. cpp:function:: constexpr const_pointer data() const noexcept
 
     :return: A pointer to the first element of the array.  If ``N == 0``, the return value is unspecified and not dereferenceable.
-    :since: ``noexcept`` since 5.0
+
+    .. versionadded:: 5.0
+       ``noexcept`` specifier added
 
   .. cpp:function:: constexpr pointer begin() noexcept
   .. cpp:function:: constexpr const_pointer begin() const noexcept
   .. cpp:function:: constexpr const_pointer cbegin() const  noexcept
 
     :return: ``data()``
-    :since: since 5.0
+
+    .. versionadded:: 5.0
 
   .. cpp:function:: constexpr pointer end() noexcept
   .. cpp:function:: constexpr const_pointer end() const noexcept
   .. cpp:function:: constexpr const_pointer cend() const noexcept
 
     :return: ``data() + size()``. The return value is not dereferenceable. If ``N == 0``, the return value will be equal to ``begin()``.
-    :since: since 5.0
+
+    .. versionadded:: 5.0
 
 
 Deduction Guides
