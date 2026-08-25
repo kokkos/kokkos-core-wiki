@@ -480,7 +480,7 @@ Data Layout, Dimensions, Strides
 .. cpp:function:: constexpr extents_type extents() const
 
    :return: the extents of all dimensions
-   :versionadded: 5.0
+   .. versionadded:: 5.0
 
 .. cpp:function:: template<class iType> constexpr size_t stride(const iType& dim) const
 
