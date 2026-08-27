@@ -135,19 +135,19 @@ General options
       * ``OFF``
 
     * * ``Kokkos_ENABLE_DEPRECATED_CODE_3``
-      * Enable deprecated code in the Kokkos 3.x series :red:`[Removed in 4.3]`
+      * Enable code that has been deprecated in the Kokkos 3.x series :red:`[Removed in 4.3]`
       * ``OFF``
 
     * * ``Kokkos_ENABLE_DEPRECATED_CODE_4``
-      * Enable deprecated code in the Kokkos 4.x series :red:`[Removed in 5.3]`
+      * Enable code that has been deprecated in the Kokkos 4.x series :red:`[Removed in 5.3]`
       * ``OFF``
 
     * * ``Kokkos_ENABLE_DEPRECATED_CODE_5``
-      * Enable deprecated code in the Kokkos 5.x series
+      * Enable code that has been deprecated in the Kokkos 5.x series
       * ``ON``
 
     * * ``Kokkos_ENABLE_DEPRECATION_WARNINGS``
-      * Whether to raise warnings at compile time when using deprecated Kokkos facilities
+      * Whether to raise warnings at compile time when using deprecated Kokkos code
       * ``ON``
 
     * * ``Kokkos_ENABLE_TUNING``
