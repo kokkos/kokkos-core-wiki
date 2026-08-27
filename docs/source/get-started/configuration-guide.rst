@@ -147,7 +147,7 @@ General options
       * ``ON``
 
     * * ``Kokkos_ENABLE_DEPRECATION_WARNINGS``
-      * Whether to flag deprecated code (and thus raise warnings at compile time)
+      * Whether to raise warnings at compile time when using deprecated Kokkos code
       * ``ON``
 
     * * ``Kokkos_ENABLE_TUNING``
