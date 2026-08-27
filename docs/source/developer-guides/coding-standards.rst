@@ -143,3 +143,54 @@ Do:
     // Correct: Provides __host__ __device__ tags; inlining is implicit
     KOKKOS_FUNCTION void baz() { /* ... */ }
   };
+
+Be consistent with the placement of specifiers and qualifiers
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Both the ``const West`` style (specifier/qualifier on the left) and the
+``East const`` style (specifier/qualifier on the right) are acceptable. We do
+not impose one over the other. We only request that you don't mix the two
+styles within the same block of code.
+
+There is one exception: we request you please always use ``constexpr West``.
+
+Additionally, when multiple qualifiers are present, they must appear on the
+same side. Don't split them (e.g. ``const int volatile``).
+
+Don't:
+
+.. code-block:: cpp
+
+    // Mixing left and right alignment in the same block
+    const int i  = 42;
+    auto const f = 3.14f;
+
+    // constexpr on the right
+    int constexpr c = 3;
+
+    // Qualifiers split on both sides
+    const int volatile d = 4;
+
+
+Do:
+
+.. code-block:: cpp
+
+    // Consistent left alignment within the block
+    const int i  = 42;
+    const auto f = 3.14f;
+
+    // Or consistent right alignment within the block
+    int const i  = 42;
+    auto const f = 3.14f;
+
+    // constexpr always on the left
+    constexpr int c = 3;
+
+    // Qualifiers grouped on the same side
+    const volatile int d = 4;
+    // or
+    int const volatile d = 4;
+
+    // A const pointer to a const, using either style
+    const int* const p   = &i;
+    float const* const q = &f;
