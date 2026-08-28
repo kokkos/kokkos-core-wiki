@@ -147,6 +147,14 @@ SYCL
   program execution. Note that ``NDEBUG`` is typically defined for ``CMake``'s
   ``RelWithDebInfo`` and ``Release`` build types, but not for ``Debug``.
 
+Cray Clang with HIP
+===================
+
+Compiling for the HIP backend with Cray Clang may produce incorrect code for Kokkos reductions.
+This has been observed with Cray Clang 19 and 20 (see issue `#9476 <https://github.com/kokkos/kokkos/issues/9476>`_).
+To check whether the problem actually comes from the Cray enhancements, you can add ``-fno-cray`` to the compiler flags to fall back to the base Clang/LLVM behavior.
+Support for the HPE Cray Programming Environment is approaching end of life, see this `HPE community post <https://community.hpe.com/t5/high-performance-computing/when-software-moves-faster-than-supercomputers/td-p/7271549>`_.
+If you can switch to a different compiler, we recommend building with ``hipcc`` instead.
 
 Mathematical functions
 ======================
