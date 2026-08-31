@@ -11,8 +11,7 @@ Usage
     Kokkos::print_configuration(std::cout);
     Kokkos::print_configuration(output_stream, /*verbose=*/ true);
 
-Prints Kokkos configuration information ("bill of materials") to an output
-stream.
+Prints Kokkos configuration information to an output stream.
 This includes both compile-time configuration details (enabled backends,
 compiler settings, version information, build configuration) and runtime
 information determined during :cpp:func:`initialize` (such as number of
