@@ -27,8 +27,12 @@ Interface
 
 .. cpp:function:: void push_finalize_hook(std::function<void()> func);
 
-   Register the function object ``func`` to be called when entering
-   :cpp:func:`finalize`
+   :param func: Function object to be called when entering :cpp:func:`finalize`
+
+   .. versionchanged:: 5.3
+
+      Thread-safe: may be called concurrently from multiple threads without
+      additional synchronization.
 
 
 Notes
