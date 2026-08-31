@@ -155,7 +155,7 @@ Here is an example:
 
 .. code-block:: c++
 
-  using Kokkos::SharedSapce;
+  using Kokkos::SharedSpace;
   using Kokkos::View;
   using Kokkos::view_alloc;
   using Kokkos::SequentialHostInit;
