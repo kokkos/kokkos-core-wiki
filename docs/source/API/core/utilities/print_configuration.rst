@@ -39,17 +39,19 @@ Example
    
    int main(int argc, char* argv[]) {
        Kokkos::initialize(argc, argv);
+       {
        
-       // Print basic configuration to the standard output
-       Kokkos::print_configuration(std::cout);
+         // Print basic configuration to the standard output
+         Kokkos::print_configuration(std::cout);
+
+         // Write vebose configuration to a log file
+         std::ofstream log_file("kokkos_config.log");
+         if (log_file.is_open()) {
+             Kokkos::print_configuration(log_file, /*verbose=*/ true);
+             log_file.close();
+         }
        
-       // Write vebose configuration to a log file
-       std::ofstream log_file("kokkos_config.log");
-       if (log_file.is_open()) {
-           Kokkos::print_configuration(log_file, /*verbose=*/ true);
-           log_file.close();
        }
-       
        Kokkos::finalize();
    }
 
