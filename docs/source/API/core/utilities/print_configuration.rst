@@ -56,15 +56,6 @@ Example
 Notes
 -----
 
-.. note::
-   * Useful for debugging and verifying the Kokkos build configuration and runtime settings
-   * The output includes both compile-time and runtime information:
-
-     * **Compile-time**: Enabled execution spaces, memory spaces, compiler information, and feature flags
-     * **Runtime**: Number of threads (for host parallel backends like OpenMP, Threads), number of visible devices and device ID in use (for device backends like CUDA, HIP, SYCL)
-
-   * Must be called after :cpp:func:`Kokkos::initialize` to display runtime information
-
 .. warning::
    Kokkos makes no guarantees about the format of the output. The format is subject to change between releases.
 
