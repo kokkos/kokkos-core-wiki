@@ -1,24 +1,28 @@
 ``num_devices``
 ===============
 
-.. role:: cpp(code)
-    :language: cpp
-
 Defined in header ``<Kokkos_Core.hpp>``
+
+Usage
+-----
 
 .. code-block:: cpp
 
-    [[nodiscard]] int num_devices() noexcept;  // (since 4.3)
+    Kokkos::num_devices();
 
-Returns the number of available devices on the system or ``-1`` if only host backends are enabled.
+Returns the number of available devices on the system, or ``-1`` if only host
+backends are enabled.
 
-Notes
------
+Interface
+---------
 
-``Kokkos::num_devices()`` may be used to determine the number of devices that
-are available to Kokkos for execution.
-It is one of the few runtime functions that may be called before
-``Kokkos::initialize()`` or after ``Kokkos::finalize()``.
+.. cpp:function:: [[nodiscard]] int num_devices() noexcept
+
+   :return: The number of devices available to Kokkos, or ``-1`` if only host
+     backends are enabled.
+
+   .. versionadded:: 4.3
+
 
 Example
 -------
@@ -40,30 +44,29 @@ Example
    }
 
 
-----
+Notes
+-----
 
-**See also**
+.. note::
+   :cpp:func:`num_devices` is one of the few runtime functions that may be
+   called before :cpp:func:`initialize` or after :cpp:func:`finalize`.
 
-.. _device_id : device_id.html
 
-.. |device_id| replace:: ``device_id``
+See Also
+--------
+.. seealso::
 
-.. _num_threads : num_threads.html
+   :doc:`device_id`
+      Returns the id of the device used by Kokkos
 
-.. |num_threads| replace:: ``num_threads``
+   :doc:`num_threads`
+      Returns the number of threads used by Kokkos
 
-.. _initialize: ../initialize_finalize/initialize.html
+   :doc:`print_configuration`
+      Prints Kokkos configuration information to an output stream
 
-.. |initialize| replace:: ``initialize``
+   :doc:`../initialize_finalize/initialize`
+     Initialize the Kokkos execution environment
 
-.. _InitializationSettings: ../initialize_finalize/InitializationSettings.html
-
-.. |InitializationSettings| replace:: ``InitializationSettings``
-
-|device_id|_: returns the id of the device used by Kokkos
-
-|num_threads|_: returns the number of threads used by Kokkos
-
-|initialize|_: initializes the Kokkos execution environment
-
-|InitializationSettings|_: settings for initializing Kokkos
+   :doc:`../initialize_finalize/InitializationSettings`
+     Settings for initializing Kokkos
