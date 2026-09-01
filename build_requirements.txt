@@ -1,6 +1,6 @@
 Sphinx==8.2.3
 furo==2024.8.6
-myst-parser==4.0.1
+myst-parser==5.1.0
 sphinx-copybutton==0.5.2
 sphinx-design==0.7.0
 sphinxcontrib-googleanalytics==0.5
