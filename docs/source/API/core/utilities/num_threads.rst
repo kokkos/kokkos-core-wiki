@@ -1,41 +1,61 @@
 ``num_threads``
 ===============
 
-.. role:: cpp(code)
-    :language: cpp
-
 Defined in header ``<Kokkos_Core.hpp>``
+
+Usage
+-----
 
 .. code-block:: cpp
 
-    [[nodiscard]] int num_threads() noexcept;  // (since 4.1)
+    Kokkos::num_threads();
 
-Returns the number of concurrent threads that are used by ``DefaultHostExecutionSpace``.
+Returns the number of concurrent threads that are used by
+``DefaultHostExecutionSpace``.
 
-----
+Interface
+---------
 
-**See also**
+.. cpp:function:: [[nodiscard]] int num_threads() noexcept
 
-.. _device_id : device_id.html
+   :return: The number of concurrent threads used by
+     ``DefaultHostExecutionSpace``.
 
-.. |device_id| replace:: ``device_id``
+   .. versionadded:: 4.1
 
-.. _num_devices : num_devices.html
 
-.. |num_devices| replace:: ``num_devices``
+Example
+-------
 
-.. _initialize: ../initialize_finalize/initialize.html
+.. code-block:: cpp
 
-.. |initialize| replace:: ``initialize``
+   #include <Kokkos_Core.hpp>
+   #include <iostream>
 
-.. _InitializationSettings: ../initialize_finalize/InitializationSettings.html
+   int main(int argc, char* argv[]) {
+       Kokkos::initialize(argc, argv);
+       {
+         std::cout << "num_threads: " << Kokkos::num_threads() << '\n';
+       }
+       Kokkos::finalize();
+   }
 
-.. |InitializationSettings| replace:: ``InitializationSettings``
 
-|num_devices|_: returns the number of devices available to Kokkos
+See Also
+--------
+.. seealso::
 
-|device_id|_: returns the id of the device used by Kokkos
+   :doc:`device_id`
+      Returns the id of the device used by Kokkos
 
-|initialize|_: initializes the Kokkos execution environment
+   :doc:`num_devices`
+      Returns the number of devices available to Kokkos
 
-|InitializationSettings|_: settings for initializing Kokkos
+   :doc:`print_configuration`
+      Prints Kokkos configuration information to an output stream
+
+   :doc:`../initialize_finalize/initialize`
+     Initialize the Kokkos execution environment
+
+   :doc:`../initialize_finalize/InitializationSettings`
+     Settings for initializing Kokkos

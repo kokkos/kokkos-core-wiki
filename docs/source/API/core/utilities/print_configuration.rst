@@ -18,8 +18,8 @@ information determined during :cpp:func:`initialize` (such as number of
 threads for host parallel backends, or number of visible devices and device IDs
 for device backends).
 
-API Reference
--------------
+Interface
+---------
 
 .. cpp:function:: void print_configuration(std::ostream& os, bool verbose = false)
 
@@ -36,24 +36,23 @@ Example
 
    #include <Kokkos_Core.hpp>
    #include <iostream>
-   
+
    int main(int argc, char* argv[]) {
        Kokkos::initialize(argc, argv);
        {
-       
          // Print basic configuration to the standard output
          Kokkos::print_configuration(std::cout);
 
-         // Write vebose configuration to a log file
+         // Write verbose configuration to a log file
          std::ofstream log_file("kokkos_config.log");
          if (log_file.is_open()) {
              Kokkos::print_configuration(log_file, /*verbose=*/ true);
              log_file.close();
          }
-       
        }
        Kokkos::finalize();
    }
+
 
 Notes
 -----
@@ -66,6 +65,7 @@ Notes
    explicit :cpp:func:`print_configuration` call and recompiling by setting the
    environment variable ``KOKKOS_PRINT_CONFIGURATION=1`` before running your
    application.
+
 
 See Also
 --------

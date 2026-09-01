@@ -1,42 +1,61 @@
 ``device_id``
 =============
 
-.. role:: cpp(code)
-    :language: cpp
-
 Defined in header ``<Kokkos_Core.hpp>``
+
+Usage
+-----
 
 .. code-block:: cpp
 
-    [[nodiscard]] int device_id() noexcept;  // (since 4.1)
+    Kokkos::device_id();
 
-Returns the id of the device that is used by ``DefaultExecutionSpace`` or
+Returns the id of the device that is used by ``DefaultExecutionSpace``, or
 ``-1`` if only host backends are enabled.
 
-----
+Interface
+---------
 
-**See also**
+.. cpp:function:: [[nodiscard]] int device_id() noexcept
 
-.. _num_devices : num_devices.html
+   :return: The id of the device used by ``DefaultExecutionSpace``, or ``-1``
+     if only host backends are enabled.
 
-.. |num_devices| replace:: ``num_devices``
+   .. versionadded:: 4.1
 
-.. _num_threads : num_threads.html
 
-.. |num_threads| replace:: ``num_threads``
+Example
+-------
 
-.. _initialize: ../initialize_finalize/initialize.html
+.. code-block:: cpp
 
-.. |initialize| replace:: ``initialize``
+   #include <Kokkos_Core.hpp>
+   #include <iostream>
 
-.. _InitializationSettings: ../initialize_finalize/InitializationSettings.html
+   int main(int argc, char* argv[]) {
+       Kokkos::initialize(argc, argv);
+       {
+         std::cout << "device_id: " << Kokkos::device_id() << '\n';
+       }
+       Kokkos::finalize();
+   }
 
-.. |InitializationSettings| replace:: ``InitializationSettings``
 
-|num_devices|_: returns the number of devices available to Kokkos
+See Also
+--------
+.. seealso::
 
-|num_threads|_: returns the number of threads used by Kokkos
+   :doc:`num_devices`
+      Returns the number of devices available to Kokkos
 
-|initialize|_: initializes the Kokkos execution environment
+   :doc:`num_threads`
+      Returns the number of threads used by Kokkos
 
-|InitializationSettings|_: settings for initializing Kokkos
+   :doc:`print_configuration`
+      Prints Kokkos configuration information to an output stream
+
+   :doc:`../initialize_finalize/initialize`
+     Initialize the Kokkos execution environment
+
+   :doc:`../initialize_finalize/InitializationSettings`
+     Settings for initializing Kokkos
