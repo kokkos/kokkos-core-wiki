@@ -194,10 +194,6 @@ Member Functions
 
     * Returns the tile size used by the policy.
 
-.. cpp:function:: point_type tile_end() const
-
-    * Returns the number of tiles needed to cover the multi-dimensional range.
-
 .. cpp:function:: tile_type tile_size_recommended() const
 
     * Returns a ``Kokkos::Array<array_index_type, rank>`` type containing per-rank tile sizes that ``MDRangePolicy`` internally uses by default. The default tile sizes are static and are set based on the specified backend.
