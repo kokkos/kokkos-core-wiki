@@ -82,7 +82,7 @@ Execution Policies generally accept compile time arguments via template paramete
 
     * * IndexType
       * e.g. ``IndexType<int>``
-      * Specify integer type to be used for traversing the iteration space. Defaults to the ``size_type`` of `ExecutionSpaceConcept <execution_spaces.html#typedefs>`__. Can affect the performance depending on the backend.
+      * Specify integer type to be used for traversing the iteration space. Defaults to ``ExecutionSpace::index_type`` (``ExecutionSpace::size_type`` until Kokkos 5.2), as defined by `ExecutionSpaceConcept <execution_spaces.html#typedefs>`__. Can affect the performance depending on the backend.
 
     * * LaunchBounds
       * ``LaunchBounds<MaxThreads, MinBlocks>``
