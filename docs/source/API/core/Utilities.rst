@@ -29,7 +29,7 @@ that work consistently across host and device code.
 
 
 Runtime and Device Information
--------------------------------
+------------------------------
 Kokkos provides utility functions to query runtime information about the
 Kokkos execution environment.
 
@@ -54,6 +54,7 @@ Kokkos execution environment.
    ./utilities/num_devices
    ./utilities/num_threads
    ./utilities/print_configuration
+
 
 Other
 -----
