@@ -122,6 +122,14 @@ Scalar Types
 
    non-:cpp:`const` version of :cpp:type:`value_type`.
 
+.. cpp:type:: element_type
+
+   The element type of the :cpp:class:`View` following the :cpp:`std::mdspan` convention.
+   May be :cpp:`const`-qualified (e.g., :cpp:`const double`) for read-only views.
+   Equivalent to :cpp:type:`value_type` for Kokkos views.
+
+   .. versionadded:: 4.5
+
 
 Spaces
 ^^^^^^
@@ -150,6 +158,10 @@ Spaces
 View Types
 ^^^^^^^^^^
 
+.. cpp:type:: type
+
+   This :cpp:class:`View`'s own fully-specified type.
+
 .. cpp:type:: non_const_type
 
    this :cpp:class:`View` type with :cpp:type:`non_const_data_type` passed as the :cpp:any:`DataType` template parameter
@@ -173,6 +185,45 @@ View Types
 
    .. versionremoved:: 5.3
 
+.. cpp:type:: array_type
+
+   Alias for :cpp:type:`type`.
+
+   .. deprecated:: 5.0
+      Use :cpp:type:`type` instead.
+
+.. cpp:type:: uniform_type
+
+   Canonical form of this :cpp:class:`View` with static extents preserved.
+
+.. cpp:type:: uniform_const_type
+
+   :cpp:`const`-element version of :cpp:type:`uniform_type`.
+
+.. cpp:type:: uniform_runtime_type
+
+   Version of :cpp:type:`uniform_type` with all extents made dynamic.
+
+.. cpp:type:: uniform_runtime_const_type
+
+   :cpp:`const`-element version of :cpp:type:`uniform_runtime_type`.
+
+.. cpp:type:: uniform_nomemspace_type
+
+   Version of :cpp:type:`uniform_type` with :cpp:class:`Kokkos::AnonymousSpace` as the memory space.
+
+.. cpp:type:: uniform_const_nomemspace_type
+
+   :cpp:`const`-element version of :cpp:type:`uniform_nomemspace_type`.
+
+.. cpp:type:: uniform_runtime_nomemspace_type
+
+   Version of :cpp:type:`uniform_runtime_type` with :cpp:class:`Kokkos::AnonymousSpace` as the memory space.
+
+.. cpp:type:: uniform_runtime_const_nomemspace_type
+
+   :cpp:`const`-element version of :cpp:type:`uniform_runtime_nomemspace_type`.
+
 Data Handles
 ^^^^^^^^^^^^
 
@@ -190,9 +241,22 @@ Data Handles
 
    pointer to :cpp:type:`value_type`.
 
+.. cpp:type:: data_handle_type
+
+   The data handle type following the :cpp:`std::mdspan` convention.
+   For managed views this is a reference-counted handle; for unmanaged views it is a raw pointer (e.g., :cpp:`double*`).
+
+   .. versionadded:: 4.5
+
 
 Other Types
 ^^^^^^^^^^^
+
+.. cpp:type:: traits
+
+   The :cpp:class:`ViewTraits` specialization for this :cpp:class:`View`.
+   Provides access to all compile-time properties such as :cpp:type:`data_type`, :cpp:type:`array_layout`,
+   :cpp:type:`memory_space`, and :cpp:type:`memory_traits`.
 
 .. cpp:type:: array_layout
 
@@ -201,6 +265,20 @@ Other Types
 .. cpp:type:: size_type
 
    index type associated with the memory space of this :cpp:class:`View`.
+
+.. cpp:type:: index_type
+
+   Integral type used for indexing, following the :cpp:`std::mdspan` convention.
+   Default is :cpp:`std::size_t`.
+
+   .. versionadded:: 4.5
+
+.. cpp:type:: rank_type
+
+   Type used to represent the rank of the :cpp:class:`View` (i.e., the type of :cpp:func:`rank` and :cpp:func:`rank_dynamic`).
+   It is :cpp:`std::size_t`.
+
+   .. versionadded:: 4.5
 
 .. cpp:type:: dimension
 
@@ -211,6 +289,51 @@ Other Types
    A specialization tag used for partial specialization of the mapping construct underlying a :cpp:class:`View`.
 
    .. versionremoved:: 5.3
+
+mdspan Types
+^^^^^^^^^^^^
+
+The following types provide compatibility with :cpp:`std::mdspan` (C++23).
+They describe the :ref:`natural mdspan <api-view-natural-mdspans>` of the :cpp:class:`View`.
+
+.. cpp:type:: mdspan_type
+
+   The natural :cpp:`std::mdspan` type corresponding to this :cpp:class:`View`.
+   Only available when :cpp:type:`array_layout` is one of :cpp:struct:`LayoutLeft`,
+   :cpp:struct:`LayoutRight`, or :cpp:class:`LayoutStride`.
+
+   .. versionadded:: 5.0
+
+   .. seealso:: :ref:`Natural mdspans <api-view-natural-mdspans>`
+
+.. cpp:type:: extents_type
+
+   The :cpp:`std::extents` type of :cpp:type:`mdspan_type`, encoding the rank and
+   static/dynamic extent information of the :cpp:class:`View`.
+
+   .. versionadded:: 5.0
+
+.. cpp:type:: layout_type
+
+   The mdspan layout policy type of :cpp:type:`mdspan_type`.
+   Note that this is the mdspan layout type (e.g., :cpp:`std::layout_left`) and is
+   distinct from :cpp:type:`array_layout` (the Kokkos layout tag, e.g., :cpp:struct:`LayoutLeft`).
+
+   .. versionadded:: 5.0
+
+.. cpp:type:: accessor_type
+
+   The mdspan accessor policy type of :cpp:type:`mdspan_type`.
+   Encodes the memory space and access properties (e.g., atomic access).
+
+   .. versionadded:: 5.0
+
+.. cpp:type:: mapping_type
+
+   The mdspan mapping type of :cpp:type:`mdspan_type`, i.e., :cpp:`layout_type::mapping<extents_type>`.
+   Describes the mapping from multi-dimensional indices to a linear offset.
+
+   .. versionadded:: 5.0
 
 
 
