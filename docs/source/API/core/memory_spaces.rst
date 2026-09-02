@@ -102,7 +102,7 @@ Availability can be checked with the preprocessor define ``KOKKOS_HAS_SHARED_HOS
 For the following backends ``Kokkos::SharedHostPinnedSpace`` is pointing to the corresponding |MemorySpaceType|_:
 
 * Cuda -> ``CudaHostPinnedSpace``
-* HIP -> ``HipHostPinnedSpace``
+* HIP -> ``HIPHostPinnedSpace``
 * SYCL -> ``SYCLHostUSMSpace``
 * Only backends running on host -> ``HostSpace``
 
