@@ -182,10 +182,10 @@ calls to mathematical functions.  Instead, prefer explicit qualification
 ``Kokkos::sqrt`` or an using-declaration ``using Kokkos::sqrt;`` at local
 scope.
 
-Mathematical constants
-======================
+Mathematical constants and numeric traits
+==========================================
 
-- Avoid taking the address of mathematical constants in device code.  It is not supported by some toolchains, hence not portable.
+- Avoid taking the address of mathematical constants or numeric traits in device code.  It is not supported by some toolchains, hence not portable.
 
 .. code-block:: cpp
 
@@ -196,10 +196,13 @@ Mathematical constants
       Kokkos::complex z1(Kokkos::numbers::pi);
       // error: identifier "Kokkos::numbers::pi" is undefined in device code
 
-      // 1*pi is a temporary
+      // 1*pi and +pi are temporaries
       Kokkos::complex z2(1 * Kokkos::numbers::pi);  // OK
+      Kokkos::complex z2b(+Kokkos::numbers::pi);    // OK
 
       // copy into a local variable
       auto pi = Kokkos::numbers::pi;
       Kokkos::complex z3(pi);  // OK
     }
+
+The same applies to numeric traits, e.g. ``Kokkos::infinity_v<float>``.
