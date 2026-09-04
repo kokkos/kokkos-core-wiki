@@ -24,7 +24,7 @@ Interface
 .. cpp:struct:: AUTO_t
 
    Tag type passed in place of ``team_size`` to :doc:`TeamPolicy` to
-   request that Kokkos choose the team size automatically.
+   request that Kokkos selects the team size automatically.
 
    .. cpp:function:: KOKKOS_FUNCTION constexpr const AUTO_t& operator()() const;
 
