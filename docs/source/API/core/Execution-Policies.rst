@@ -109,3 +109,4 @@ Execution Policies generally accept compile time arguments via template paramete
    ./policies/TeamVectorRange
    ./policies/ThreadVectorMDRange
    ./policies/ThreadVectorRange
+   ./policies/AUTO
