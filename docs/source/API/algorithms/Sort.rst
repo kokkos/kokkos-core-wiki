@@ -15,7 +15,7 @@ Sort
     class BinSort {
         template<class DstViewType, class SrcViewType> struct copy_functor { }
         template<class DstViewType, class PermuteViewType, class SrcViewType> struct copy_permute_functor { }
-        template<class ValuesViewType> void sort( ValuesViewType const & values, int values_range_begin, int values_range_end ) const { }
+        template<class ValuesViewType> void sort( ValuesViewType const & values, int64_t values_range_begin, int64_t values_range_end ) const { }
         template<class ValuesViewType> void sort( ValuesViewType const & values ) const { }
     }
 
