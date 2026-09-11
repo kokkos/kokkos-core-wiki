@@ -185,7 +185,9 @@ scope.
 Mathematical constants and numeric traits
 ==========================================
 
-- Avoid taking the address of mathematical constants or numeric traits in device code.  It is not supported by some toolchains, hence not portable.
+- Avoid passing mathematical constants or numeric traits by reference or taking
+  their address in device code. It is not supported by some toolchains, hence
+  not portable.
 
 .. code-block:: cpp
 
