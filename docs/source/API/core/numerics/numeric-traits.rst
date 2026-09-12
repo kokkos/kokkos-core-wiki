@@ -28,7 +28,7 @@ Usage
 .. code-block:: cpp
 
    constexpr auto inf = Kokkos::infinity<float>::value;
-   auto x = Kokkos::finite_min_v<T>;
+   auto x = Kokkos::finite_min_v<float>;
 
 .. _cpp_reference_numeric_limits: https://en.cppreference.com/w/cpp/types/numeric_limits
 
