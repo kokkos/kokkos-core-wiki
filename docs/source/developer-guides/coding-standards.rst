@@ -195,40 +195,28 @@ Do:
     const int* const p   = &i;
     float const* const q = &f;
 
-Naming style conventions (core/src)
+Symbol naming style conventions
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-The following conventions are based on the most common patterns used in
-``kokkos/kokkos`` under ``core/src`` and its subdirectories.
+The following conventions are based on the most commonly used patterns in Kokkos Core.
+These are guidelines, and they were not always consistently followed.
 
 * **Classes and structs**: Use ``UpperCamelCase`` (for example ``View``,
-  ``Device``, ``ParallelFor``, ``GraphNodeImpl``). Lightweight token/tag types
-  may use a trailing ``_t`` (for example ``AUTO_t``).
+  ``Device``, ``ParallelFor``, ``GraphNodeImpl``).
 * **Template parameters**: Use semantic ``UpperCamelCase`` names for type
   parameters (for example ``ExecutionSpace``, ``MemorySpace``, ``DataType``,
   ``FunctorType``). Variadic packs typically use descriptive plural names like
   ``Properties`` or ``Args``. Short names (``T``, ``P``, etc.) are mostly used
   in local/internal contexts.
-* **Macros**: Use all-caps with underscores and a ``KOKKOS_`` prefix. Reserve
-  ``KOKKOS_IMPL_`` for internal-only macros. Keep header guards in the same
-  all-caps underscore style.
+* **Macros**: Use all-caps with underscores and a ``KOKKOS_`` prefix. Use
+  ``KOKKOS_IMPL_`` for internal-only macros.
 * **Functions (including member functions)**: Use ``lower_snake_case`` names
   (for example ``parallel_for``, ``create_mirror_view_and_copy``,
-  ``impl_static_fence``, ``print_configuration``). Internal implementation
-  hooks/helpers frequently use an ``impl_`` prefix.
+  ``impl_static_fence``, ``print_configuration``). Non-public member functions that
+  for implementation reasons can't be made ``private`` use an ``impl_`` prefix.
 * **Class data members**: Use ``m_`` + ``lower_snake_case`` (for example
   ``m_space_instance``, ``m_thread_team_data``, ``m_queue``).
-* **Private members**: Keep the same member naming style (``m_`` prefix for
-  data), and use descriptive ``lower_snake_case`` names for private helper
-  functions, often with ``impl_`` for implementation details.
-
-Additional symbol categories worth documenting:
-
 * **Namespaces**: ``Kokkos`` for public APIs, with ``Kokkos::Impl`` and
   ``Kokkos::Experimental`` used to scope internal or experimental symbols.
 * **Type aliases and traits aliases**: Commonly use ``lower_snake_case`` with
   ``_type`` suffixes where helpful (for example ``execution_space``,
   ``value_type``, ``device_type``).
-* **Tag/token objects and constants**: Tag types are usually ``UpperCamelCase``
-  (or ``*_t`` tokens), while ``constexpr`` variables and boolean capability
-  flags are commonly ``lower_snake_case`` (for example ``AUTO``,
-  ``has_shared_space``).
