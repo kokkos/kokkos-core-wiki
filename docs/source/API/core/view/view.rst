@@ -264,7 +264,8 @@ Other Types
 
 .. cpp:type:: size_type
 
-   index type associated with the memory space of this :cpp:class:`View`.
+   Unsigned version of :cpp:type:`index_type` following the :cpp:`std::mdspan` convention.
+   Default is :cpp:`std::size_t`.
 
 .. cpp:type:: index_type
 
