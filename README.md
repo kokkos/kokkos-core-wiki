@@ -40,6 +40,39 @@ cd docs
 make clean
 ```
 
+
+## Build with the container
+
+Build the image from the repository root:
+
+```sh
+podman build -t kokkos-docs -f Containerfile .
+```
+
+Then build the documentation with the repository mounted into the container:
+
+```sh
+podman run --rm \
+  --user "$(id -u):$(id -g)" \
+  --env HOME=/tmp \
+  --volume "$PWD:/workspace" \
+  --workdir /workspace/docs \
+  kokkos-docs \
+  make html
+```
+
+To clean the generated documentation:
+
+```sh
+podman run --rm \
+  --user "$(id -u):$(id -g)" \
+  --env HOME=/tmp \
+  --volume "$PWD:/workspace" \
+  --workdir /workspace/docs \
+  kokkos-docs \
+  make clean
+```
+
 ## Displaying the site locally
 
 `docs/generated_docs/index.html` can be opened in a web browser, or alternatively you can use python's built-in http server:

@@ -9,23 +9,27 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      docs-directory: /home/runner/work/kokkos-core-wiki/kokkos-core-wiki/docs
-    container:
-      image: python:3.12
+      DOCS_IMAGE: kokkos-docs
+      DOCS_DIRECTORY: ${{ github.workspace }}/docs
     steps:
       - uses: actions/checkout@v7
-      - run: pip install -r build_requirements.txt
-      - run: apt update && apt --yes --no-install-recommends install graphviz
+      - name: Build documentation container
+        run: docker build --file Containerfile --tag "${DOCS_IMAGE}" .
       - name: Build documentation
-        working-directory: ${{ env.docs-directory }}
         run: |
-          make html
-      - name: Updload documentation as artifact
+          docker run --rm \
+            --user "$(id -u):$(id -g)" \
+            --env HOME=/tmp \
+            --volume "${GITHUB_WORKSPACE}:/workspace" \
+            --workdir /workspace/docs \
+            "${DOCS_IMAGE}" \
+            make html
+      - name: Upload documentation as artifact
         id: deployment
         uses: actions/upload-pages-artifact@v5.0.0
         with:
           name: github-pages
-          path: ${{ env.docs-directory }}/generated_docs
+          path: ${{ env.DOCS_DIRECTORY }}/generated_docs
 
   deploy:
     if: ${{ github.ref == 'refs/heads/main' }}
