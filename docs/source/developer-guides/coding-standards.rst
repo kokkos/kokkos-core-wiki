@@ -196,7 +196,7 @@ Do:
     float const* const q = &f;
 
 Symbol naming style conventions
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 The following conventions are based on the most commonly used patterns in Kokkos Core.
 These are guidelines, and they were not always consistently followed.
 
