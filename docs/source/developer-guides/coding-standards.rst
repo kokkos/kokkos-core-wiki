@@ -200,8 +200,8 @@ Symbol naming style conventions
 The following conventions are based on the most commonly used patterns in Kokkos Core.
 These are guidelines, and they were not always consistently followed.
 
-* **Classes and structs**: Use ``UpperCamelCase`` (for example ``View``,
-  ``Device``, ``ParallelFor``, ``GraphNodeImpl``).
+* **Classes and Concepts**: Use ``UpperCamelCase`` (for example ``View``,
+  ``Device``, ``ExecutionSpace``, ``GraphNodeImpl``).
 * **Template parameters**: Use semantic ``UpperCamelCase`` names for type
   parameters (for example ``ExecutionSpace``, ``MemorySpace``, ``DataType``,
   ``FunctorType``). Variadic packs typically use descriptive plural names like
