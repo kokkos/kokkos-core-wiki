@@ -89,7 +89,7 @@ Template Arguments
 Public Class Members
 --------------------
 
-.. cpp:namespace-push:: Kokkos::MDRangePolicy
+.. cpp:namespace-push:: MDRangePolicy
 
 Nested typedefs
 ~~~~~~~~~~~~~~~
