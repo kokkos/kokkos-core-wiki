@@ -52,7 +52,7 @@ Interface
              Kokkos::Iterate inner = Kokkos::Iterate::Default>
     class Kokkos::Rank;
 
-``Kokkos::Rank`` is a template argument unique to ``MDRangePolicy``, it can be deduced via the CTAD (Class Template Argument Deduction).
+``Kokkos::Rank`` is a template argument unique to ``MDRangePolicy``. It can be deduced using class template argument deduction (CTAD).
 It specifies the rank of the iteration space and, optionally, the iteration order over and within tiles.
 
 ``outer`` and ``inner`` default to ``Kokkos::Iterate::Default`` and can be set to ``Kokkos::Iterate::Left`` or ``Kokkos::Iterate::Right``.
@@ -89,7 +89,7 @@ Template Arguments
 Public Class Members
 --------------------
 
-.. cpp:namespace-push:: template<class ... Args> Kokkos::MDRangePolicy
+.. cpp:namespace-push:: Kokkos::MDRangePolicy
 
 Nested typedefs
 ~~~~~~~~~~~~~~~
