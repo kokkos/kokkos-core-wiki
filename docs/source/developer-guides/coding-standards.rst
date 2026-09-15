@@ -194,3 +194,29 @@ Do:
     // A const pointer to a const, using either style
     const int* const p   = &i;
     float const* const q = &f;
+
+Symbol naming style conventions
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+The following conventions are based on the most commonly used patterns in Kokkos Core.
+These are guidelines, and they were not always consistently followed.
+
+* **Classes and Concepts**: Use ``UpperCamelCase`` (for example ``View``,
+  ``Device``, ``ExecutionSpace``, ``GraphNodeImpl``).
+* **Template parameters**: Use semantic ``UpperCamelCase`` names for type
+  parameters (for example ``ExecutionSpace``, ``MemorySpace``, ``DataType``,
+  ``FunctorType``). Variadic packs typically use descriptive plural names like
+  ``Properties`` or ``Args``. Short names (``T``, ``P``, etc.) are mostly used
+  in local/internal contexts.
+* **Macros**: Use all-caps with underscores and a ``KOKKOS_`` prefix. Use
+  ``KOKKOS_IMPL_`` for internal-only macros.
+* **Functions (including member functions)**: Use ``lower_snake_case`` names
+  (for example ``parallel_for``, ``create_mirror_view_and_copy``,
+  ``impl_static_fence``, ``print_configuration``). Non-public member functions that
+  for implementation reasons can't be made ``private`` use an ``impl_`` prefix.
+* **Class data members**: Use ``m_`` + ``lower_snake_case`` (for example
+  ``m_space_instance``, ``m_thread_team_data``, ``m_queue``).
+* **Namespaces**: ``Kokkos`` for public APIs, with ``Kokkos::Impl`` and
+  ``Kokkos::Experimental`` used to scope internal or experimental symbols.
+* **Type aliases and traits aliases**: Commonly use ``lower_snake_case`` with
+  ``_type`` suffixes where helpful (for example ``execution_space``,
+  ``value_type``, ``device_type``).
