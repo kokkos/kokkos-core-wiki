@@ -15,6 +15,7 @@ Kokkos offers portable half precision types under the name ``Kokkos::Experimenta
 This types will either map to the current backend own types (for instance ``__half`` on Cuda), or to ``float`` if no such type is available.
 
 The macros ``KOKKOS_HALF_T_IS_FLOAT`` and ``KOKKOS_BHALF_T_IS_FLOAT`` are set to ``true`` when ``half_t`` and ``bhalf_t`` are mapped to ``float``, and ``false`` otherwise.
+Since Kokkos 5.3, ``KOKKOS_HAS_NATIVE_HALF_TYPE`` and ``KOKKOS_HAS_NATIVE_BHALF_TYPE`` are defined or not defined under the same condition. The latter macros make it easier to detect support at configure-time in downstream projects, e.g., via CMake's ``check_cxx_symbol_exists``.
 
 Functions
 ---------
