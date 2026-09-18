@@ -183,19 +183,19 @@ Member Functions
 
     * Returns the lower bound (start index) of the multi-dimensional range.
 
-.. versionadded:: 5.3
+    .. versionadded:: 5.3
 
 .. cpp:function:: point_type upper() const
 
     * Returns the upper bound (end index) of the multi-dimensional range.
 
-.. versionadded:: 5.3
+    .. versionadded:: 5.3
 
 .. cpp:function:: tile_type tile() const
 
     * Returns the tile size used by the policy.
 
-.. versionadded:: 5.3
+    .. versionadded:: 5.3
 
 .. cpp:function:: tile_type tile_size_recommended() const
 
