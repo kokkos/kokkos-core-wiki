@@ -832,22 +832,22 @@ Kokkos will attempt to autodetect the architecture flag at configuration time.
     * * ``Kokkos_ARCH_VEGA90A``
       * GFX90A
       * MI200 series
-      * Prefer ``Kokkos_ARCH_AMD_GFX90A``
+      * (removed in Kokkos 5.3)
 
     * * ``Kokkos_ARCH_VEGA908``
       * GFX908
       * MI100
-      * Prefer ``Kokkos_ARCH_AMD_GFX908``
+      * (removed in Kokkos 5.3)
 
     * * ``Kokkos_ARCH_VEGA906``
       * GFX906
       * MI50, MI60
-      * Prefer ``Kokkos_ARCH_AMD_GFX906``
+      * (removed in Kokkos 5.3)
 
     * * ``Kokkos_ARCH_VEGA900``
       * GFX900
       * MI25
-      * removed in 4.0
+      * (removed in Kokkos 4.0)
 
 Intel GPUs
 ~~~~~~~~~~

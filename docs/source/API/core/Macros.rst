@@ -311,9 +311,9 @@ Architectures
 +-----------------------------------+-------------------------------------------------------------------------------------------------+
 | ``KOKKOS_ARCH_MAXWELL53``         | Optimize for NVIDIA Maxwell generation CC 5.3 (GPU)                                             |
 +-----------------------------------+-------------------------------------------------------------------------------------------------+
-| ``KOKKOS_ARCH_NAVI``              | Set if any AMD Navi GPU architecture as been enabled :sup:`Since Kokkos 4.0`                    |
+| ``KOKKOS_ARCH_NAVI``              | Set if any AMD Navi GPU architecture as been enabled :sup:`removed in Kokkos 5.3`               |
 +-----------------------------------+-------------------------------------------------------------------------------------------------+
-| ``KOKKOS_ARCH_NAVI1030``          | Optimize for AMD GPU V620/W6800 GFX1030 (GPU) :sup:`Since Kokkos 4.0`                           |
+| ``KOKKOS_ARCH_NAVI1030``          | Optimize for AMD GPU V620/W6800 GFX1030 (GPU) :sup:`removed in Kokkos 5.3`                      |
 +-----------------------------------+-------------------------------------------------------------------------------------------------+
 | ``KOKKOS_ARCH_PASCAL``            | Set if any NVIDIA Pascal architecture has been enabled                                          |
 +-----------------------------------+-------------------------------------------------------------------------------------------------+
@@ -365,13 +365,13 @@ Architectures
 +-----------------------------------+-------------------------------------------------------------------------------------------------+
 | ``KOKKOS_ARCH_AMD_ZEN5``          | Optimize for AMD Zen5 architecture (HOST)                                                       |
 +-----------------------------------+-------------------------------------------------------------------------------------------------+
-| ``KOKKOS_ARCH_VEGA``              | Set if any AMD Vega GPU architecture as been enabled                                            |
+| ``KOKKOS_ARCH_VEGA``              | Set if any AMD Vega GPU architecture as been enabled :sup:`removed in Kokkos 5.3`               |
 +-----------------------------------+-------------------------------------------------------------------------------------------------+
-| ``KOKKOS_ARCH_VEGA900``           | Optimize for AMD GPU MI25 GFX900 (GPU) :sup:`Removed in Kokkos 4.0`                             |
+| ``KOKKOS_ARCH_VEGA900``           | Optimize for AMD GPU MI25 GFX900 (GPU) :sup:`removed in Kokkos 4.0`                             |
 +-----------------------------------+-------------------------------------------------------------------------------------------------+
-| ``KOKKOS_ARCH_VEGA906``           | Optimize for AMD GPU MI50/MI60 GFX906 (GPU)                                                     |
+| ``KOKKOS_ARCH_VEGA906``           | Optimize for AMD GPU MI50/MI60 GFX906 (GPU) :sup: `removed in Kokkos 5.3`                       |
 +-----------------------------------+-------------------------------------------------------------------------------------------------+
-| ``KOKKOS_ARCH_VEGA908``           | Optimize for AMD GPU MI100 GFX908 (GPU)                                                         |
+| ``KOKKOS_ARCH_VEGA908``           | Optimize for AMD GPU MI100 GFX908 (GPU) :sup:`removed in Kokkos 5.3`                            |
 +-----------------------------------+-------------------------------------------------------------------------------------------------+
-| ``KOKKOS_ARCH_VEGA90A``           | Optimize for AMD GPU MI200 series GFX90A (GPU)                                                  |
+| ``KOKKOS_ARCH_VEGA90A``           | Optimize for AMD GPU MI200 series GFX90A (GPU) :sup:`removed in Kokkos 5.3`                     |
 +-----------------------------------+-------------------------------------------------------------------------------------------------+
