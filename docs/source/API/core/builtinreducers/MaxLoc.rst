@@ -121,7 +121,7 @@ Example
     int value[3];
     KOKKOS_FUNCTION int& operator[](int i) { return value[i]; }
     KOKKOS_FUNCTION const int& operator[](int i) const { return value[i]; }
-    KOKKOS_FUNCTION bool operator==(const Idx3D_t& other) {
+    KOKKOS_FUNCTION bool operator==(const Idx3D_t& other) const {
       return this->value[0] == other.value[0] &&
              this->value[1] == other.value[1] &&
              this->value[2] == other.value[2];
@@ -137,7 +137,7 @@ Example
     {
       Kokkos::View<double***> a("A", 5, 5, 5);
       Kokkos::deep_copy(a, 10);
-      a(2, 3, 1)        = 5;
+      a(2, 3, 1)        = 15;
       using MaxLoc_t    = Kokkos::MaxLoc<double, Idx3D_t>;
       using MaxLocVal_t = typename MaxLoc_t::value_type;
       MaxLocVal_t result;

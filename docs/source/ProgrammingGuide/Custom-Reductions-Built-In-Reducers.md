@@ -72,7 +72,7 @@ struct Kokkos::reduction_identity<Kokkos::pair<int, int>> {
 };
 
 int main(int argc, char* argv[]) {
-  Kokkos::initialize(argc, argv);
+  Kokkos::ScopeGuard(argc, argv);
 
   int M = 10;
   int N = 10;
@@ -81,15 +81,14 @@ int main(int argc, char* argv[]) {
   // fill A
 
   // Create a variable for the result
-  using reducer_type = MinMaxLoc2D;
-  using value_type   = typename reducer_type::value_type;
+  using value_type = typename MinMaxLoc2D::value_type;
   value_type minmaxloc;
 
   using team_type = typename Kokkos::TeamPolicy<>::member_type;
 
   // Start a team parallel reduce
   Kokkos::parallel_reduce(
-      "MinLocReduce", Kokkos::TeamPolicy<>(N, Kokkos::AUTO),
+      "MinMaxLocReduce", Kokkos::TeamPolicy<>(N, Kokkos::AUTO),
       KOKKOS_LAMBDA(const team_type& team, value_type& team_minmaxloc) {
         // Create a temporary to store the reduction value for the row
         value_type row_minmaxloc;
@@ -111,7 +110,7 @@ int main(int argc, char* argv[]) {
                 thread_minmaxloc.max_loc = Kokkos::pair<int, int>(n, m);
               }
             },
-            reducer_type(row_minmaxloc));
+            MinMaxLoc2D(row_minmaxloc));
 
         // One guy in the team should contribute to the whole
         // Note: for a min or max reduction it wouldn't hurt if
@@ -127,12 +126,11 @@ int main(int argc, char* argv[]) {
           }
         });
       },
-      reducer_type(minmaxloc));
+      MinMaxLoc2D(minmaxloc));
 
   printf("Min %lf at (%i, %i)\n", minmaxloc.min_val, minmaxloc.min_loc.first,
          minmaxloc.min_loc.second);
   printf("Max %lf at (%i, %i)\n", minmaxloc.max_val, minmaxloc.max_loc.first,
          minmaxloc.max_loc.second);
-  Kokkos::finalize();
 }
 ```

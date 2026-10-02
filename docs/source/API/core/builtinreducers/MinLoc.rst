@@ -121,7 +121,7 @@ Example
     int value[3];
     KOKKOS_FUNCTION int& operator[](int i) { return value[i]; }
     KOKKOS_FUNCTION const int& operator[](int i) const { return value[i]; }
-    KOKKOS_FUNCTION bool operator==(const Idx3D_t& other) {
+    KOKKOS_FUNCTION bool operator==(const Idx3D_t& other) const {
       return this->value[0] == other.value[0] &&
              this->value[1] == other.value[1] &&
              this->value[2] == other.value[2];
