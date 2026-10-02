@@ -62,56 +62,77 @@ printf("Min: %lf at %i\n", minloc.val, minloc.loc);
 Reducers can be used in nested reductions. This example also makes use of a 2D index type to find the minimum and maximum value of a matrix as well as their indices. 
 
 ```c++
-Kokkos::View<double**> A("A",N,M);
-// fill A
+using MinMaxLoc2D = Kokkos::MinMaxLoc<double, Kokkos::pair<int, int>>;
 
-// Create a variable for the result
-typedef Kokkos::MinMaxLoc<double, Kokkos::pair<int,int>> reducer_type;
-typedef reducer_type::value_type value_type;
-value_type minmaxloc
-
-typedef Kokkos::TeamPolicy<>::member_type team_type;
-
-// Start a team parallel reduce
-Kokkos::parallel_reduce( "MinLocReduce", Kokkos::TeamPolicy<>(N,AUTO), 
-    KOKKOS_LAMBDA (const team_type& team, value_type& team_minmaxloc) {
-
-  // Create a temporary to store the reduction value for the row
-  value_type row_minmaxloc;
-  int n = team.league_rank();
-
-  // Run a nested parallel reduce with the team over the row
-  Kokkos::parallel_reduce( Kokkos::TeamThreadRange(team, M), 
-      [=] (const int& m, value_type& thread_minmaxloc) {
-    double val = A(n,m);
-    
-    // Check whether this is a new minimum or maximum value
-    if(val < thread_minmaxloc.min_val) {
-      thread_minmaxloc.min_val = val;
-      thread_minmaxloc.min_loc = Kokkos::pair<int,int>(n,m);
-    }
-    if(val > thread_minmaxloc.max_val) {
-      thread_minmaxloc.max_val = val;
-      thread_minmaxloc.max_loc = Kokkos::pair<int,int>(n,m);
-    }
-
-  }, reducer_type(row_minmaxloc));
-  
-  // One guy in the team should contribute to the whole
-  // Note: for a min or max reduction it wouldn't hurt if 
-  //       every team member did this
-  Kokkos::single(Kokkos::PerTeam(team), [=] () {
-    if( row_minmaxloc.min_val < team_minmaxloc.min_val ) {
-      team_minmaxloc.min_val = row_minmaxloc.min_val;
-      team_minmaxloc.min_loc = row_minmaxloc.min_loc;
-    }
-    if( row_minmaxloc.max_val > team_minmax.max_val ) {
-      team_minmaxloc.max_val = row_minmaxloc.max_val;
-      team_minmaxloc.max_loc = row_minmaxloc.max_loc;
-    }
+template <>
+struct Kokkos::reduction_identity<Kokkos::pair<int, int>> {
+  KOKKOS_FUNCTION static constexpr Kokkos::pair<int, int> min() {
+    return {0, 0};
   }
-}, reducer_type(minmaxloc));
+};
 
-printf("Min %lf at (%i, %i)\n",minmaxloc.min_val, minmaxloc.min_loc.first, minmaxloc.min_loc.second);
-printf("Max %lf at (%i, %i)\n",minmaxloc.max_val, minmaxloc.max_loc.first, minmaxloc.max_loc.second);
+int main(int argc, char* argv[]) {
+  Kokkos::initialize(argc, argv);
+
+  int M = 10;
+  int N = 10;
+
+  Kokkos::View<double**> A("A", N, M);
+  // fill A
+
+  // Create a variable for the result
+  using reducer_type = MinMaxLoc2D;
+  using value_type   = typename reducer_type::value_type;
+  value_type minmaxloc;
+
+  using team_type = typename Kokkos::TeamPolicy<>::member_type;
+
+  // Start a team parallel reduce
+  Kokkos::parallel_reduce(
+      "MinLocReduce", Kokkos::TeamPolicy<>(N, Kokkos::AUTO),
+      KOKKOS_LAMBDA(const team_type& team, value_type& team_minmaxloc) {
+        // Create a temporary to store the reduction value for the row
+        value_type row_minmaxloc;
+        int n = team.league_rank();
+
+        // Run a nested parallel reduce with the team over the row
+        Kokkos::parallel_reduce(
+            Kokkos::TeamThreadRange(team, M),
+            [=](const int& m, value_type& thread_minmaxloc) {
+              double val = A(n, m);
+
+              // Check whether this is a new minimum or maximum value
+              if (val < thread_minmaxloc.min_val) {
+                thread_minmaxloc.min_val = val;
+                thread_minmaxloc.min_loc = Kokkos::pair<int, int>(n, m);
+              }
+              if (val > thread_minmaxloc.max_val) {
+                thread_minmaxloc.max_val = val;
+                thread_minmaxloc.max_loc = Kokkos::pair<int, int>(n, m);
+              }
+            },
+            reducer_type(row_minmaxloc));
+
+        // One guy in the team should contribute to the whole
+        // Note: for a min or max reduction it wouldn't hurt if
+        //       every team member did this
+        Kokkos::single(Kokkos::PerTeam(team), [=, &team_minmaxloc]() {
+          if (row_minmaxloc.min_val < team_minmaxloc.min_val) {
+            team_minmaxloc.min_val = row_minmaxloc.min_val;
+            team_minmaxloc.min_loc = row_minmaxloc.min_loc;
+          }
+          if (row_minmaxloc.max_val > team_minmaxloc.max_val) {
+            team_minmaxloc.max_val = row_minmaxloc.max_val;
+            team_minmaxloc.max_loc = row_minmaxloc.max_loc;
+          }
+        });
+      },
+      reducer_type(minmaxloc));
+
+  printf("Min %lf at (%i, %i)\n", minmaxloc.min_val, minmaxloc.min_loc.first,
+         minmaxloc.min_loc.second);
+  printf("Max %lf at (%i, %i)\n", minmaxloc.max_val, minmaxloc.max_loc.first,
+         minmaxloc.max_loc.second);
+  Kokkos::finalize();
+}
 ```
