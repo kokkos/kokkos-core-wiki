@@ -72,7 +72,7 @@ struct Kokkos::reduction_identity<Kokkos::pair<int, int>> {
 };
 
 int main(int argc, char* argv[]) {
-  Kokkos::ScopeGuard(argc, argv);
+  Kokkos::ScopeGuard guard(argc, argv);
 
   int M = 10;
   int N = 10;
