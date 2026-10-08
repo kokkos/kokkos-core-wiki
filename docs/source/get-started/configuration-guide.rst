@@ -471,6 +471,11 @@ If cross-compiling, or if you want to be specific, the CPU architecture can be p
       - Examples
       - Notes
 
+    * - ``Kokkos_ARCH_ARMV9_VERA``
+      - ARMv9.2-A/A64
+      - Vera CPUs @ LANL Vision
+      - (since Kokkos 5.3)
+
     * - ``Kokkos_ARCH_ARMV9_GRACE``
       - ARMv9-A/A64/neoverse-v2
       - GH200 @ CSCS ALPS
