@@ -220,3 +220,66 @@ These are guidelines, and they were not always consistently followed.
 * **Type aliases and traits aliases**: Commonly use ``lower_snake_case`` with
   ``_type`` suffixes where helpful (for example ``execution_space``,
   ``value_type``, ``device_type``).
+
+Use an anonymous namespace in unit tests
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Test files commonly declare helper functions, functors, and types at
+namespace scope (fixtures, ``operator()`` structs for ``parallel_for``, free
+functions, etc.). Since every ``.cpp`` test file is compiled into the same
+test executable, any such symbol with external linkage can clash with an
+identically named symbol defined in another test file. This is a genuine ODR
+violation: at best it is a duplicate-symbol link error, and at worst the
+linker silently picks one definition and a test ends up calling the wrong
+one.
+
+Wrapping the test file's contents in a namespace called ``Test`` does **not**
+solve this. ``namespace Test { ... }`` is just a regular, open namespace:
+nearly every test file in the suite reopens the exact same ``Test``
+namespace, so a function or class with the same name defined in two different
+test files still collides, exactly as if neither had used a namespace at
+all. The namespace name does nothing to make the symbols unique because it
+is shared, not per-file.
+
+The robust fix is to put test-local declarations in an unnamed (anonymous)
+namespace instead. Each translation unit gets its own, distinct anonymous
+namespace, so every symbol declared inside one is given internal linkage and
+cannot collide with a same-named symbol in any other ``.cpp`` file; there is
+no need to invent a unique name per file or per test.
+
+Don't:
+
+.. code-block:: cpp
+
+    #include <gtest/gtest.h>
+    #include <Kokkos_Core.hpp>
+
+    namespace Test {
+    struct Functor {
+      KOKKOS_FUNCTION void operator()(int i) const { /* ... */ }
+    };
+
+    void run_test() { /* ... */ }
+    }  // namespace Test
+
+    TEST(TEST_CATEGORY, functor) {
+      Test::run_test();
+    }
+
+Do:
+
+.. code-block:: cpp
+
+    #include <gtest/gtest.h>
+    #include <Kokkos_Core.hpp>
+
+    namespace {
+    struct Functor {
+      KOKKOS_FUNCTION void operator()(int i) const { /* ... */ }
+    };
+
+    void run_test() { /* ... */ }
+    }  // namespace
+
+    TEST(TEST_CATEGORY, functor) {
+      run_test();
+    }
