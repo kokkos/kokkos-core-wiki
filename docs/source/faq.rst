@@ -47,3 +47,15 @@ See the :ref:`Debugging section in the Configuration Guide <debugging>` for more
    By default, neither of the above options enables bounds checking due to the high overhead. To catch "out-of-bounds" errors in your Views:
 
    * **CMake Flag:** ``-DKokkos_ENABLE_DEBUG_BOUNDS_CHECK=ON``
+
+How do I set the host compiler used by ``nvcc_wrapper``?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+``nvcc_wrapper`` uses ``g++`` as the default host compiler if you don't tell it otherwise.
+To explicitly control which host compiler ``nvcc`` uses, set the ``NVCC_WRAPPER_DEFAULT_COMPILER`` environment variable to the compiler you want, for example:
+
+.. code-block:: sh
+
+   export NVCC_WRAPPER_DEFAULT_COMPILER=g++-12
+
+This is equivalent to passing ``-ccbin`` directly to ``nvcc``, but lets you set it once in your environment rather than threading it through every build invocation.
+See :ref:`nvcc_wrapper: Why do we have it and what does it do <nvcc_wrapper>` for background on ``nvcc_wrapper``.
