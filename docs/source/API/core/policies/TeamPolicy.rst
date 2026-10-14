@@ -146,7 +146,7 @@ Description
 
    .. cpp:function:: const execution_space& space() const;
 
-      Returns: a const reference to the ``execution_space`` instance the policy was constructed with. If no execution space instance was provided to the constructor, returns an instance of the default-constructed ``execution_space``.
+      Returns: a const reference to the underlying ``execution_space`` instance. If no execution space instance was provided to the constructor, the underlying instance is the default execution space instance.
 
    .. cpp:function:: int team_size() const;
 
