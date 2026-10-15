@@ -152,6 +152,10 @@ CTAD Constructors (since 4.3)
 
 Member Functions
 ~~~~~~~~~~~~~~~~
+.. cpp:function:: const execution_space& space() const
+
+    * Returns a const reference to the underlying ``execution_space`` instance. If no execution space instance was provided to the constructor, the underlying instance is the default execution space instance.
+
 .. cpp:function:: tile_type tile_size_recommended() const
 
     * Returns a ``Kokkos::Array<array_index_type, rank>`` type containing per-rank tile sizes that ``MDRangePolicy`` internally uses by default. The default tile sizes are static and are set based on the specified backend.

@@ -74,7 +74,7 @@ Synopsis
         RangePolicy& set_chunk_size(int chunk_size_);
 
         // return ExecSpace instance provided to the constructor
-        KOKKOS_FUNCTION const execution_space & space() const;
+        const execution_space & space() const;
         // return Range begin
         KOKKOS_FUNCTION member_type begin() const;
         // return Range end

@@ -144,6 +144,10 @@ Description
 
    .. rubric:: Query Runtime Settings
 
+   .. cpp:function:: const execution_space& space() const;
+
+      Returns: a const reference to the underlying ``execution_space`` instance. If no execution space instance was provided to the constructor, the underlying instance is the default execution space instance.
+
    .. cpp:function:: int team_size() const;
 
       Returns: the requested team size.
