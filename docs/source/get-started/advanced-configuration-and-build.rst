@@ -1,6 +1,8 @@
 Advanced Configuration and Build
 ================================
 
+.. _nvcc_wrapper:
+
 nvcc_wrapper: Why do we have it and what does it do
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -15,6 +17,12 @@ To help users with this problem, Kokkos comes with a small ``bash`` script calle
 This script has two functions. It redirects compile and link commands to ``nvcc``, and it sorts the given compiler and linker flags into the ones for the host and the device compiler.
 
 To use it explicitly, set ``CMAKE_CXX_COMPILER`` accordingly. If the compiler can't compile device code, Kokkos will use ``kokkos_launch_compiler`` (see next section) to redirect calls to ``nvcc_wrapper`` automatically.
+
+By default, ``nvcc_wrapper`` uses ``g++`` as the host compiler. To explicitly control which host compiler ``nvcc`` uses, set the ``NVCC_WRAPPER_DEFAULT_COMPILER`` environment variable, for example:
+
+.. code-block:: sh
+
+   export NVCC_WRAPPER_DEFAULT_COMPILER=g++-12
 
 kokkos_launch_compiler: What does it do and how to control it
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
