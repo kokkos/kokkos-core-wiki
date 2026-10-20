@@ -37,8 +37,8 @@ General Template Arguments
 
 Valid template arguments for ``MDRangePolicy`` are described `here <../Execution-Policies.html#common-arguments-for-all-execution-policies>`_.
 
-Argument Specific to MDRangePolicy - ``Kokkos::Rank``
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Required Argument Specific to MDRangePolicy - ``Kokkos::Rank``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Interface
 ^^^^^^^^^
@@ -185,19 +185,19 @@ Member Functions
 
 .. cpp:function:: point_type lower() const
 
-    * Returns the lower bound (start index) of the multi-dimensional range.
+    * Returns the inclusive lower bounds of the multi-dimensional range.
 
     .. versionadded:: 5.3
 
 .. cpp:function:: point_type upper() const
 
-    * Returns the upper bound (end index) of the multi-dimensional range.
+    * Returns the exclusive upper bounds of the multi-dimensional range.
 
     .. versionadded:: 5.3
 
-.. cpp:function:: tile_type tile() const
+.. cpp:function:: tile_type tile_size() const
 
-    * Returns the tile size used by the policy.
+    * Returns the tile size used by the policy. Entries that were not specified at construction, or were set to zero or a negative value, are replaced by default values.
 
     .. versionadded:: 5.3
 
