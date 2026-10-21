@@ -623,6 +623,12 @@ Kokkos will attempt to autodetect the architecture flag at configuration time.
       * R100
       * (since Kokkos 5.3)
 
+    * * ``Kokkos_ARCH_BLACKWELL121``
+      * Blackwell
+      * 12.1
+      * DGX Spark
+      * (since Kokkos 5.1)
+
     * * ``Kokkos_ARCH_BLACKWELL120``
       * Blackwell
       * 12.0
