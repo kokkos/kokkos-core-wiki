@@ -1,3 +1,4 @@
+setuptools<82
 Sphinx==9.1.0
 furo==2025.12.19
 myst-parser==5.1.0
