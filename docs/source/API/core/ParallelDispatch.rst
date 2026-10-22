@@ -47,6 +47,7 @@ The following parallel pattern tags are used to call the correct overload for te
    ./parallel-dispatch/parallel_reduce
    ./parallel-dispatch/parallel_scan
    ./parallel-dispatch/fence
+   ./parallel-dispatch/UniqueToken.rst
    ./parallel-dispatch/ParallelForTag
    ./parallel-dispatch/ParallelReduceTag
    ./parallel-dispatch/ParallelScanTag
