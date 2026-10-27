@@ -878,6 +878,11 @@ Intel GPUs
       * Intel Data Center GPU Max 1550
       *
 
+    * * ``Kokkos_ARCH_INTEL_BMG``
+      * Intel Arc Battlemage
+      * Intel Arc Pro B70
+      * (since Kokkos 5.3)
+
     * * ``Kokkos_ARCH_INTEL_XEHP``
       * Xe-HP
       *
