@@ -1,0 +1,26 @@
+Further Performance Optimization
+================================
+
+.. |sbs| image:: figures/grid_stride_loop_static_batch.png
+   :alt: Figure 17.1 One-dimensional grid-stride loop, without and with unrolling
+
+In this chapter, we will discuss further ways to optimize performance. Different ideas involving varied settings have been collected here. We would like to highlight that these parameters should be tuned only to obtain extra performance gains, by exploiting problem-specific structure and machine architecture. The values of these parameters need to be re-visited, when the user code is run on a new architecture. All these parameters have default values that don't enable the associated optimization.
+
+Static Batch Size
+-----------------
+
+For now, this parameter concerns `RangePolicy <../API/core/policies/RangePolicy.html>`__ based execution of :cpp:`Kokkos::parallel_for` in CUDA and HIP backends. `StaticBatchSize <../API/core/Execution-Policies.html#other-arguments-for-certain-execution-policies>`__ is a compile-time template parameter of the execution policy. It is of scalar integer type, with default value 1. It is currently inside the ``Kokkos::Experimental`` namespace.
+
+In GPU backends, like CUDA and HIP, :cpp:`Kokkos::parallel_for` executes the one-dimensional iteration space specified by the :cpp:`Kokkos::RangePolicy`, using a `grid-stride loop <https://developer.nvidia.com/blog/cuda-pro-tip-write-flexible-kernels-grid-stride-loops/>`_. With a grid-stride loop, iteration spaces of any sizes can be handled. As shown in the figure, each thread handles multiple elements, by taking steps that are the size of the thread grid. Using ``StaticBatchSize``, we can make each thread process more elements, involving another smaller loop, before taking the bigger step. In the figure, we can see that for a static batch size of 2. Thus, the same iteration space is processed by a smaller number of threads, where each thread does more work. While the same amount of memory traffic is involved in both the cases, we now increase the instruction level parallelism, which might lead to better utilization of the computational resources on the GPU. This approach is especially useful for kernels, which have less arithmetic intensity and don't saturate the memory bandwidth, like the Stream benchmark.
+
+|sbs|
+
+For example, you can apply an unrolling factor of 4 in the following manner.
+
+.. code-block:: cpp
+
+  Kokkos::parallel_for(
+      Kokkos::RangePolicy<
+          Kokkos::Experimental::StaticBatchSize<4> /*, other arguments */>(N),
+      KOKKOS_LAMBDA(const int i){...});
+
