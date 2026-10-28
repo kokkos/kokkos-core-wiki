@@ -23,6 +23,9 @@ Top Level Execution Policies
     * * `TeamPolicy <policies/TeamPolicy.html>`__
       * Assigns to each iterate in a contiguous range a team of threads
 
+    * * `SinglePolicy <policies/SinglePolicy.html>`__
+      * Scalar execution policy for executing a single instance of a kernel.
+
 Nested Execution Policies
 ============================
 
@@ -101,6 +104,7 @@ Execution Policies generally accept compile time arguments via template paramete
    ./policies/MDRangePolicy
    ./policies/NestedPolicies
    ./policies/RangePolicy
+   ./policies/SinglePolicy
    ./policies/TeamHandleConcept
    ./policies/TeamPolicy
    ./policies/TeamThreadMDRange
