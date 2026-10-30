@@ -41,7 +41,7 @@ Core API
    * - `Detection Idiom <core/Detection-Idiom.html>`__
      - Used to recognize, in an SFINAE-friendly way, the validity of any C++ expression.
    * - `Macros <core/Macros.html>`__
-     - Global macros defined by Kokkos, used for architectures, general settings, etc.
+     - Macros defined by Kokkos: function annotations, version checks, and macros that report how Kokkos was configured.
 
 .. toctree::
    :hidden:
