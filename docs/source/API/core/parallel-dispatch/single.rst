@@ -16,9 +16,9 @@ Usage
 .. code-block:: cpp
 
     Kokkos::single(name, policy, functor);
-    Kokkos::single(name, policy, functor, output...);
+    Kokkos::single(name, policy, functor, output);
     Kokkos::single(policy, functor);
-    Kokkos::single(policy, functor, output...);
+    Kokkos::single(policy, functor, output);
     Kokkos::single(functor);
     Kokkos::single(name, functor);
 
@@ -36,10 +36,10 @@ Interface
 
 .. code-block:: cpp
 
-    template <class ExecPolicy, class FunctorType, class ValueType> 
+    template <class ExecPolicy, class FunctorType, class ReturnType> 
     Kokkos::single(const ExecPolicy& policy, 
                    const FunctorType& functor, 
-                   ValueType& val);
+                   ReturnType& ret);
 
 .. code-block:: cpp
 
@@ -66,9 +66,9 @@ Parameters:
   - :cpp:func:`PerTeam` restricts execution to a single vector lane in the calling team.
   - :cpp:func:`PerThread` restricts execution to a single vector lane in the calling thread.
 
-* ``name`` is only usable with |SinglePolicy|_
+* ``name``: A user provided string which is used in profiling and debugging tools via the Kokkos Profiling Hooks. 
 
-* ``val`` is a reference to the output variable. The functor's ``operator()`` receives a reference to the reduction value.
+* ``ret`` is a reference to the output variable. The functor's ``operator()`` receives a reference to this value.
 
 Examples
 --------
@@ -80,7 +80,7 @@ Using ``Kokkos::single`` in Hierarchical Parallelism
   #include<Kokkos_Core.hpp>
 
   int main(int argc, char* argv[]) {
-    Kokkos::initialize(argc,argv);
+    Kokkos::ScopeGuard guard(argc,argv);
 
     using team_policy = Kokkos::TeamPolicy<Kokkos::DefaultExecutionSpace>;
     using team_handle = team_policy::member_type;
@@ -93,7 +93,6 @@ Using ``Kokkos::single`` in Hierarchical Parallelism
         });
     });
 
-    Kokkos::finalize();
     return 0;
   }
 
@@ -105,7 +104,7 @@ Using ``Kokkos::single`` to execute a functor once and produce a single output
   #include<Kokkos_Core.hpp>
 
   int main(int argc, char* argv[]) {
-    Kokkos::initialize(argc,argv);
+    Kokkos::ScopeGuard guard(argc,argv);
 
     float value;
     Kokkos::single("label", Kokkos::SinglePolicy(),
@@ -113,8 +112,32 @@ Using ``Kokkos::single`` to execute a functor once and produce a single output
         val = 1.0;
     }, value);
 
-    Kokkos::finalize();
     return 0;
   }
 
+
+To produce several outputs using ``Kokkos::single``, a custom return type needs to be used
+
+.. code-block:: cpp
+
+  #include<Kokkos_Core.hpp>
+
+  struct CustomReturn {
+    int val1;
+    int val2;
+  };
+
+  int main(int argc, char* argv[]) {
+    Kokkos::ScopeGuard guard(argc,argv);
+
+    CustomReturn ret;
+
+    Kokkos::single("label", Kokkos::SinglePolicy(),
+        KOKKOS_LAMBDA(CustomReturn& r) {
+          r.val1 = 1;
+          r.val2 = 2;
+        }, ret);
+
+    return 0;
+  }
 

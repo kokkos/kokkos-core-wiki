@@ -22,8 +22,8 @@ Usage
     Kokkos::SinglePolicy()
 
 ``SinglePolicy`` defines an execution policy that executes a functor or lambda exactly once.
-It has to be used with |single|_ to perform a single operation or to produce one
-or more scalar outputs.
+It can only be used with |single|_ to perform a single operation or to produce one
+scalar output.
 
 Synopsis
 --------
@@ -60,6 +60,9 @@ General Template Arguments
 
 Valid template arguments for ``SinglePolicy`` are described `here <../Execution-Policies.html#common-arguments-for-all-execution-policies>`_
 
+The only exception is that the ``LaunchBounds`` argument is incompatible with ``SinglePolicy``.
+
+
 Public Class Members
 --------------------
 
@@ -80,7 +83,7 @@ Examples
 Using ``SinglePolicy`` for a single operation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Execute a functor once with zero arguments. The functor can also be called with a WorkTag.
+Execute a functor once with zero arguments. The functor can also be called with a WorkTag to choose which `operator()` will be called.
 
 .. code-block:: cpp
 
@@ -98,7 +101,7 @@ Execute a functor once with zero arguments. The functor can also be called with 
 
     // With an ExecutionSpace instance
     Kokkos::DefaultExecutionSpace exec_space;
-    Kokkos::single("label",Kokkos::SinglePolicy(exec_space), f);
+    Kokkos::single("label", Kokkos::SinglePolicy(exec_space), f);
 
     // With both a WorkTag and an ExecutionSpace
     Kokkos::single("label",
@@ -135,22 +138,4 @@ The functor can also be called with a WorkTag. The functor's ``operator()`` rece
         Kokkos::SinglePolicy<Kokkos::DefaultExecutionSpace>(),
         KOKKOS_LAMBDA(int& ret) { ret = 5; }, val);
     // val == 5
-
-Using ``SinglePolicy`` to produce multiple outputs
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-The functor's ``operator()`` can receive multiple reduction arguments.
-
-.. code-block:: cpp
-
-    int val1, val2;
-
-    // With a lambda producing 2 outputs
-    Kokkos::single("label", Kokkos::SinglePolicy(),
-        KOKKOS_LAMBDA(int& s1, int& s2) {
-          s1 = 1;
-          s2 = 2;
-        }, val1, val2);
-    // val1 == 1
-    // val2 == 2
 
