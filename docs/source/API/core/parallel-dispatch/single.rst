@@ -99,6 +99,9 @@ Using ``Kokkos::single`` in Hierarchical Parallelism
 
 Using ``Kokkos::single`` to execute a functor once and produce a single output
 
+.. warning::
+   The OpenACC backend currently doesn't support returning a value with ``single``
+
 .. code-block:: cpp
 
   #include<Kokkos_Core.hpp>
@@ -117,6 +120,9 @@ Using ``Kokkos::single`` to execute a functor once and produce a single output
 
 
 To produce several outputs using ``Kokkos::single``, a custom return type needs to be used
+
+.. warning::
+   The OpenACC backend currently doesn't support returning a value with ``single``
 
 .. code-block:: cpp
 
