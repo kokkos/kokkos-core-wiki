@@ -1,9 +1,6 @@
 ``MDRangePolicy``
 =================
 
-.. role:: cpp(code)
-    :language: cpp
-
 Header File: ``<Kokkos_Core.hpp>``
 
 Usage
@@ -40,8 +37,8 @@ Valid template arguments for ``MDRangePolicy`` are described `here <../Execution
 Required Argument Specific to MDRangePolicy - ``Kokkos::Rank``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Interface
-^^^^^^^^^
+Rank Interface
+^^^^^^^^^^^^^^
 .. code-block:: cpp
 
     template<int N,
@@ -49,15 +46,15 @@ Interface
              Kokkos::Iterate inner = Kokkos::Iterate::Default>
     class Kokkos::Rank;
 
-``Kokkos::Rank`` is a template argument unique to ``MDRangePolicy``. It can be deduced using class template argument deduction (CTAD).
-It specifies the rank of the iteration space and, optionally, the iteration order over and within tiles.
+``Kokkos::Rank`` is a template argument unique to ``MDRangePolicy``. It can be deduced using CTAD (since 4.3).
+It specifies the rank of the iteration space and, optionally, the iteration order over all the tiles and within each tile.
 
 ``outer`` and ``inner`` default to ``Kokkos::Iterate::Default`` and can be set to ``Kokkos::Iterate::Left`` or ``Kokkos::Iterate::Right``.
 
 Template Arguments
 ^^^^^^^^^^^^^^^^^^
 
-.. cpp:class:: template<int N, Kokkos::Iterate outer, Kokkos::Iterate inner> Kokkos::Rank;
+.. cpp:class:: template<int N, Kokkos::Iterate outer, Kokkos::Iterate inner> Kokkos::Rank
 
   :tparam N: Rank of the iteration space (1 to 6).
   :tparam outer: Iteration order over tiles (optional).
@@ -65,7 +62,7 @@ Template Arguments
 
   .. note:: Rank 1 is supported since Kokkos 5.2.
 
-  .. cpp:enum-class:: Kokkos::Iterate
+.. cpp:enum-class:: Kokkos::Iterate
 
   .. cpp:enumerator:: Kokkos::Iterate::Default
 
@@ -81,7 +78,7 @@ Template Arguments
 
   .. note::
 
-      For best performance, match the iteration order to your View's memory layout. See :ref:`Iteration Order <MDRangePolicy-Iteration-order>` in the Programming Guide.
+    For best performance, match the iteration order to your View's memory layout. See :ref:`Iteration Order <MDRangePolicy-Iteration-order>` in the Programming Guide.
 
 Public Class Members
 --------------------
@@ -90,6 +87,7 @@ Public Class Members
 
 Nested typedefs
 ~~~~~~~~~~~~~~~
+
 .. cpp:type:: execution_space
 .. cpp:type:: iteration_pattern
 
@@ -104,11 +102,20 @@ Nested typedefs
 .. cpp:type:: launch_bounds
 .. cpp:type:: point_type
 
-    Alias to ``Kokkos::Array<array_index_type, rank>``.
+    Alias to ``Kokkos::Array<index_type, rank>``.
+
+    .. versionchanged:: 5.3
+
+       Previously ``Kokkos::Array<array_index_type, rank>``.
 
 .. cpp:type:: tile_type
 
-    Alias to ``Kokkos::Array<array_index_type, rank>``.
+    Alias to ``Kokkos::Array<index_type, rank>``.
+
+    .. versionchanged:: 5.3
+
+       Previously ``Kokkos::Array<array_index_type, rank>``.
+
 
 Constructors
 ~~~~~~~~~~~~
@@ -121,9 +128,17 @@ Constructors
 
     * Provide a start and end index.
 
+.. cpp:function:: MDRangePolicy(const execution_space& space, const Kokkos::Array<int64_t,rank>& begin, const Kokkos::Array<int64_t,rank>& end)
+
+    * Provide a start and end index and use the provided execution space instance.
+
 .. cpp:function:: MDRangePolicy(const Kokkos::Array<int64_t,rank>& begin, const Kokkos::Array<int64_t,rank>& end,  const Kokkos::Array<int64_t,rank>& tiling)
 
     * Provide a start and end index as well as the tiling dimensions.
+
+.. cpp:function:: MDRangePolicy(const execution_space& space, const Kokkos::Array<int64_t,rank>& begin, const Kokkos::Array<int64_t,rank>& end, const Kokkos::Array<int64_t,rank>& tiling)
+
+    * Provide a start and end index as well as the tiling dimensions, and use the provided execution space instance.
 
 .. cpp:function:: template<class OT, class IT> MDRangePolicy(const std::initializer_list<OT>& begin, const std::initializer_list<IT>& end)
 
@@ -131,7 +146,7 @@ Constructors
 
 .. cpp:function:: template<class OT, class IT, class TT> MDRangePolicy(const std::initializer_list<OT>& begin, const std::initializer_list<IT>& end, const std::initializer_list<TT>& tiling)
 
-    * Provide a start and end index as well as the tiling dimensions. The length of the lists must match the rank of the policy.
+    * Provide a start and end index as well as the tiling dimensions. The length of the lists must match the rank of the policy except for the tiling list which may be shorter.
 
 CTAD Constructors (since 4.3)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -197,13 +212,13 @@ Member Functions
 
 .. cpp:function:: tile_type tile_size() const
 
-    * Returns the tile size used by the policy. Entries that were not specified at construction, or were set to zero or a negative value, are replaced by default values.
+    * Returns the tile size used by the policy. Entries that were not specified at construction, or were set to less than or equal to zero, are replaced by default values.
 
     .. versionadded:: 5.3
 
 .. cpp:function:: tile_type tile_size_recommended() const
 
-    * Returns a ``Kokkos::Array<array_index_type, rank>`` type containing per-rank tile sizes that ``MDRangePolicy`` internally uses by default. The default tile sizes are static and are set based on the specified backend.
+    * Returns a ``tile_type`` containing per-rank tile sizes that ``MDRangePolicy`` internally uses by default. The default tile sizes are static and are set based on the specified backend.
 
     .. note:: ``tile_size_recommended()`` available since Kokkos 4.5
 
@@ -220,12 +235,17 @@ Notes
 
 * The start index must not be greater than the matching end index for all ranks.
 * The begin and end array ranks must match.
-* The tiling array rank must be less than or equal to the begin/end array rank.
+* The tiling array length must be less than or equal to the begin/end array length.
 
 Examples
 --------
 
 .. code-block:: cpp
 
-    MDRangePolicy<Rank<3>> policy_1({0,0,0},{N0,N1,N2});
-    MDRangePolicy<Cuda,Rank<3,Iterate::Right,Iterate::Left>> policy_2({5,5,5},{N0-5,N1-5,N2-5},{T0,T1,T2});
+    Kokkos::MDRangePolicy<Rank<3>> policy_1({0,0,0},{N0,N1,N2});
+    Kokkos::MDRangePolicy<Cuda,Rank<3,Iterate::Right,Iterate::Left>> policy_2({5,5,5},{N0-5,N1-5,N2-5},{T0,T1,T2});
+
+    Kokkos::parallel_for("fill", policy_1, KOKKOS_LAMBDA (int i, int j, int k) { a(i,j,k) = i + j + k; });
+
+    double sum;
+    Kokkos::parallel_reduce("sum", policy_2, KOKKOS_LAMBDA (int i, int j, int k, double& update) { update += a(i,j,k); }, sum);
