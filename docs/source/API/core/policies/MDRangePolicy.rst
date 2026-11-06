@@ -173,6 +173,7 @@ Notes
 
 * The start index must not be greater than the matching end index for all ranks.
 * The begin and end array ranks must match.
+* The total flat extent of the iteration space must be representable by ``MDRangePolicy::index_type`` (since Kokkos 5.3).
 * The tiling array rank must be less than or equal to the begin/end array rank.
 
 Examples
