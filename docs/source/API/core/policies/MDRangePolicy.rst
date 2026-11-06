@@ -64,21 +64,21 @@ Template Arguments
 
 .. cpp:enum-class:: Kokkos::Iterate
 
-  .. cpp:enumerator:: Kokkos::Iterate::Default
+    .. cpp:enumerator:: Default
 
-      Use the natural iteration order for the execution space.
+        Use the natural iteration order for the execution space.
 
-  .. cpp:enumerator:: Kokkos::Iterate::Left
+    .. cpp:enumerator:: Left
 
-      Column-major: leftmost index varies fastest.
+        Column-major: leftmost index varies fastest.
 
-  .. cpp:enumerator:: Kokkos::Iterate::Right
+    .. cpp:enumerator:: Right
 
-      Row-major: rightmost index varies fastest.
+        Row-major: rightmost index varies fastest.
 
-  .. note::
+    .. note::
 
-    For best performance, match the iteration order to your View's memory layout. See :ref:`Iteration Order <MDRangePolicy-Iteration-order>` in the Programming Guide.
+        For best performance, match the iteration order to your View's memory layout. See :ref:`Iteration Order <MDRangePolicy-Iteration-order>` in the Programming Guide.
 
 Public Class Members
 --------------------
@@ -242,10 +242,19 @@ Examples
 
 .. code-block:: cpp
 
-    Kokkos::MDRangePolicy<Rank<3>> policy_1({0,0,0},{N0,N1,N2});
-    Kokkos::MDRangePolicy<Cuda,Rank<3,Iterate::Right,Iterate::Left>> policy_2({5,5,5},{N0-5,N1-5,N2-5},{T0,T1,T2});
+    MDRangePolicy<> policy_1({0,0,0}, {N0,N1,N2});
+    MDRangePolicy<Rank<3>> policy_2({5,5,5}, {N0-5,N1-5,N2-5}, {T0,T1,T2});
+    MDRangePolicy<Cuda, Rank<3, Iterate::Right, Iterate::Left>> policy_3({0,0,0}, {N0,N1,N2});
 
-    Kokkos::parallel_for("fill", policy_1, KOKKOS_LAMBDA (int i, int j, int k) { a(i,j,k) = i + j + k; });
+.. code-block:: cpp
+
+    MDRangePolicy<Rank<2>> md_policy({0,0}, {10,10});
+
+    parallel_for("fill", md_policy, KOKKOS_LAMBDA(int i, int j) {
+        a(i, j) = i + j;
+    });
 
     double sum;
-    Kokkos::parallel_reduce("sum", policy_2, KOKKOS_LAMBDA (int i, int j, int k, double& update) { update += a(i,j,k); }, sum);
+    parallel_reduce("sum", md_policy, KOKKOS_LAMBDA(int i, int j, double& update) {
+        update += a(i, j);
+    },sum);
