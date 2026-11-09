@@ -27,26 +27,27 @@ Synopsis
 
 .. code-block:: cpp
 
-    template<class ... Args>
+    template <typename... Properties>
     struct Kokkos::SinglePolicy {
-        using execution_policy = SinglePolicy;
+        using traits = Kokkos::Impl::PolicyTraits<Properties...>;
+        using execution_policy = Kokkos::SinglePolicy<Properties...>;
+        using execution_space  = typename traits::execution_space;
 
         // Inherited from PolicyTraits<Args...>
         using execution_space = PolicyTraits<Args...>::execution_space;
-        using work_tag        = PolicyTraits<Args...>::work_tag;
-
-        using base_class      = RangePolicy<Kokkos::LaunchBounds<1>, Args...>;
 
         // Constructors
         SinglePolicy(const SinglePolicy&) = default;
-        SinglePolicy(SinglePolicy&&) = default;
 
         SinglePolicy();
 
         SinglePolicy(const execution_space& exec_space);
 
         // return ExecSpace instance provided to the constructor
-        KOKKOS_FUNCTION const execution_space & space() const;
+        inline const execution_space & space() const;
+
+        // return an equivalent RangePolicy
+        const range_policy& impl_get_range_policy() const { return m_range_policy; }
     };
 
 Parameters

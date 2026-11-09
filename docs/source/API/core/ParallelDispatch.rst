@@ -24,7 +24,7 @@ Parallel execution patterns for composing algorithms.
 Special Dispatch
 ----------------
 
-Restrict Execution to a certain resources
+Execute a functor once on a specific execution space
 
 .. list-table::
    :widths: 25 75

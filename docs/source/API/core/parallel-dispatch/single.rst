@@ -20,7 +20,7 @@ Usage
     Kokkos::single(functor);
     Kokkos::single(name, functor);
 
-Execute functor on restricted resource defined by the policy
+Execute the functor exactly once on the execution space defined by the policy
 
 Interface
 ---------
@@ -58,15 +58,32 @@ Interface
 Parameters:
 ~~~~~~~~~~~
 
-* ``ExecPolicy``: defines execution properties, valid policies are:
+* ``name``: A user provided string which is used in profiling and debugging tools via the Kokkos Profiling Hooks. 
+
+* ``ExecPolicy``: Defines execution properties, valid policies are:
 
   - :cpp:struct:`SinglePolicy` restricts execution to a single thread in the execution space.
   - :cpp:func:`PerTeam` restricts execution to a single vector lane in the calling team.
   - :cpp:func:`PerThread` restricts execution to a single vector lane in the calling thread.
 
-* ``name``: A user provided string which is used in profiling and debugging tools via the Kokkos Profiling Hooks. 
+*  ``FunctorType``: A valid functor having either a ``operator() () const`` or ``operator() (ReturnType&) const`` member function. The functor can be defined using a C++ class/struct or a lambda.
 
-* ``ret`` is a reference to the output variable. The functor's ``operator()`` receives a reference to this value.
+* ``ret``: A reference to the output variable. The functor's ``operator()`` receives a reference to this value.
+
+Requirements
+~~~~~~~~~~~~
+* ``policy`` should be defined with no ``LaunchBounds`` attribute.
+
+* if ``single`` is called without a return value, ``FunctorType`` needs a member function with signature ``operator() () const``.
+
+* if ``single`` is called with a return value, ``FunctorType`` needs a member function with signature ``operator() (ReturnType&) const`` instead.
+
+Semantics
+---------
+
+* The functors call operator is invoked exactly once without any parallelization.
+
+* The call is potentially asynchronous. To guarantee a kernel has finished, a developer should call fence on the execution space on which the kernel is run.
 
 Examples
 --------
