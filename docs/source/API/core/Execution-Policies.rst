@@ -24,7 +24,7 @@ Top Level Execution Policies
       * Assigns to each iterate in a contiguous range a team of threads
 
     * * `SinglePolicy <policies/SinglePolicy.html>`__
-      * Scalar execution policy for executing a single instance of a kernel.
+      * Launches a kernel on a single processing unit
 
 Nested Execution Policies
 ============================

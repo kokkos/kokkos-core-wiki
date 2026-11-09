@@ -5,8 +5,6 @@
 
 .. |SinglePolicy| replace:: ``SinglePolicy``
 
-.. role::cpp(code)
-    :language: cpp
 
 Header File: ``<Kokkos_Core.hpp>``
 
@@ -62,7 +60,7 @@ Parameters:
 
 * ``ExecPolicy``: defines execution properties, valid policies are:
 
-  - :cpp:func:`SinglePolicy` restricts execution to a single thread in the execution space.
+  - :cpp:struct:`SinglePolicy` restricts execution to a single thread in the execution space.
   - :cpp:func:`PerTeam` restricts execution to a single vector lane in the calling team.
   - :cpp:func:`PerThread` restricts execution to a single vector lane in the calling thread.
 
@@ -97,7 +95,7 @@ Using ``Kokkos::single`` in Hierarchical Parallelism
   }
 
 
-Using ``Kokkos::single`` to execute a functor once and produce a single output
+Using ``Kokkos::single`` to execute a functor once and produce a scalar output
 
 .. warning::
    The OpenACC backend currently doesn't support returning a value with ``single``

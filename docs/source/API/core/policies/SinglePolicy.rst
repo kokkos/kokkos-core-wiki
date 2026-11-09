@@ -5,8 +5,6 @@
 
 .. |single| replace:: ``Kokkos::single``
 
-.. role::cpp(code)
-    :language: cpp
 
 Header File: ``<Kokkos_Core.hpp>``
 
@@ -22,8 +20,7 @@ Usage
     Kokkos::SinglePolicy()
 
 ``SinglePolicy`` defines an execution policy that executes a functor or lambda exactly once.
-It can only be used with |single|_ to perform a single operation or to produce one
-scalar output.
+It can only be used with the pattern |single|_ to perform the execution once, with the possibility of returning an output.
 
 Synopsis
 --------
