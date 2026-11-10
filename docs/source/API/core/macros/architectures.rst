@@ -6,10 +6,9 @@ configured to target.
 
 .. warning::
 
-   Do not make your code depend on ``KOKKOS_ARCH_*`` macros.  Kokkos handles
+   Avoid making code depend on ``KOKKOS_ARCH_*`` macros.  Kokkos handles
    architecture-specific optimizations internally, and these macros tie your
-   code to a particular build configuration.  They are documented here for
-   completeness, and no stability guarantee is made about them.
+   code to a particular build configuration.
 
 Relationship with CMake options
 -------------------------------
