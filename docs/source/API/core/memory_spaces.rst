@@ -118,7 +118,7 @@ For the following backends ``Kokkos::SharedHostPinnedSpace`` is pointing to the 
 ``Kokkos::DefaultMemorySpace``
 ------------------------------
 
-``Kokkos::DefaultMemorySpace`` :sup:`since 5.3` is a |MemorySpaceType|_ alias for the ``MemorySpace`` corresponding to the |DefaultExecutionSpaceType|_. It is a convenient alias for ``Kokkos::DefaultExecutionSpace::memory_space``.
+``Kokkos::DefaultMemorySpace`` :sup:`since 5.3` is a |MemorySpaceType|_ alias for the ``MemorySpace`` corresponding to the |DefaultExecutionSpaceType|_. It is an alias for ``Kokkos::DefaultExecutionSpace::memory_space``.
 
 ``Kokkos::DefaultHostMemorySpace``
 ----------------------------------
