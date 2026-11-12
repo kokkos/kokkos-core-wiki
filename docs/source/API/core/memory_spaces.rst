@@ -26,6 +26,15 @@ Memory Spaces
 
 .. |ExecutionSpaceTypes| replace:: :cpp:func:`ExecutionSpace` types
 
+.. _DefaultExecutionSpaceType: ./execution_spaces.html#kokkos-defaultexecutionspace
+
+.. |DefaultExecutionSpaceType| replace:: :cpp:func:`DefaultExecutionSpace` type
+
+.. _DefaultHostExecutionSpaceType: ./execution_spaces.html#kokkos-defaulthostexecutionspace
+
+.. |DefaultHostExecutionSpaceType| replace:: :cpp:func:`DefaultHostExecutionSpace` type
+
+
 ``Kokkos::CudaSpace``
 ---------------------
 
@@ -105,6 +114,16 @@ For the following backends ``Kokkos::SharedHostPinnedSpace`` is pointing to the 
 * HIP -> ``HIPHostPinnedSpace``
 * SYCL -> ``SYCLHostUSMSpace``
 * Only backends running on host -> ``HostSpace``
+
+``Kokkos::DefaultMemorySpace``
+------------------------------
+
+``Kokkos::DefaultMemorySpace`` :sup:`since 5.3` is a |MemorySpaceType|_ alias for the ``MemorySpace`` corresponding to the |DefaultExecutionSpaceType|_. It is an alias for ``Kokkos::DefaultExecutionSpace::memory_space``.
+
+``Kokkos::DefaultHostMemorySpace``
+----------------------------------
+
+``Kokkos::DefaultHostMemorySpace`` :sup:`since 5.3` is a |MemorySpaceType|_ alias for the ``MemorySpace`` corresponding to the |DefaultHostExecutionSpaceType|_. It is an alias for ``Kokkos::DefaultHostExecutionSpace::memory_space``.
 
 ``Kokkos::MemorySpaceConcept``
 ------------------------------
