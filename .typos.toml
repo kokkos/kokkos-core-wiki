@@ -5,6 +5,7 @@ extend-ignore-re = [
   "countr_",
   "nd_array",
   "ND_ARRAY",
+  "\\.intoto\\.jsonl",
 ]
 
 [default.extend-identifiers]

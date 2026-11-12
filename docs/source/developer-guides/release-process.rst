@@ -344,7 +344,21 @@ generated artifacts:
 
   sha256sum -c kokkos-X.Y.Z-SHA-256.txt
 
-3. Sign the checksum file:
+3. Verify the SLSA provenance:
+
+Download the ``kokkos-X.Y.Z.intoto.jsonl`` provenance file from the release
+page and verify it against the source archives with
+`slsa-verifier <https://github.com/slsa-framework/slsa-verifier>`_:
+
+.. code-block:: console
+
+  slsa-verifier verify-artifact \
+    --provenance-path kokkos-X.Y.Z.intoto.jsonl \
+    --source-uri github.com/kokkos/kokkos \
+    --source-tag X.Y.Z \
+    kokkos-X.Y.Z.zip kokkos-X.Y.Z.tar.gz
+
+4. Sign the checksum file:
 
 .. code-block:: console
 
@@ -352,7 +366,7 @@ generated artifacts:
 
 **Publish the Release**
 
-4. Navigate to the release page on GitHub
+5. Navigate to the release page on GitHub
 (https://github.com/kokkos/kokkos/releases/latest):
 
 - Click the "Edit" button
