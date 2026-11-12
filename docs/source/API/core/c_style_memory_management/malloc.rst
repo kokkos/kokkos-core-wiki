@@ -22,7 +22,7 @@ Allocate ``size`` bytes of uninitialized storage on the specified memory space |
 
 If allocation succeeds, returns a pointer to the lowest (first) byte in the allocated memory block that is suitably aligned for any scalar type.
 
-If allocation fails, an exception of type ``Kokkos::Experimental::RawMemoryAllocationFailure`` is thrown.
+If allocation fails, an exception is thrown: :cpp:class:`Experimental::BadAlloc` since Kokkos 5.2 (derived from ``std::runtime_error``), a ``std::runtime_error`` in earlier versions (4.4 and later).
 
 .. warning::
 
@@ -43,4 +43,4 @@ Description
 
     :returns: On success, returns the pointer to the beginning of newly allocated memory. To avoid a memory leak, the returned pointer must be deallocated with |Kokkos_kokkos_free|_ or |Kokkos_realloc|_.
 
-    :throws: On failure, throws ``Kokkos::Experimental::RawMemoryAllocationFailure``.
+    :throws: On failure, throws :cpp:class:`Experimental::BadAlloc` (since Kokkos 5.2; derived from ``std::runtime_error``) or a ``std::runtime_error`` in earlier versions.
