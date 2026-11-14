@@ -62,11 +62,12 @@ Parameters:
 
 * ``ExecPolicy``: Defines execution properties, valid policies are:
 
-  - :cpp:struct:`SinglePolicy` restricts execution to a single thread in the execution space.
+  - :cpp:func:`SinglePolicy` restricts execution to a single thread in the execution space.
   - :cpp:func:`PerTeam` restricts execution to a single vector lane in the calling team.
   - :cpp:func:`PerThread` restricts execution to a single vector lane in the calling thread.
 
-  If no ``policy`` argument is provided, ``policy`` is :cpp:struct:`SinglePolicy
+  If no ``policy`` argument is provided, ``policy`` is :cpp:func:`SinglePolicy`
+
 *  ``FunctorType``: The functor defining the operation that will be performed. The functor can be defined using a C++ class/struct or a lambda.
 
 * ``ret``: A reference to the output variable. The functor's ``operator()`` receives a reference to this value.
