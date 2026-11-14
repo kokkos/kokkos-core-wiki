@@ -66,7 +66,8 @@ Parameters:
   - :cpp:func:`PerTeam` restricts execution to a single vector lane in the calling team.
   - :cpp:func:`PerThread` restricts execution to a single vector lane in the calling thread.
 
-*  ``FunctorType``: A valid functor having either a ``operator() () const`` or ``operator() (ReturnType&) const`` member function. The functor can be defined using a C++ class/struct or a lambda.
+  If no ``policy`` argument is provided, ``policy`` is :cpp:struct:`SinglePolicy
+*  ``FunctorType``: The functor defining the operation that will be performed. The functor can be defined using a C++ class/struct or a lambda.
 
 * ``ret``: A reference to the output variable. The functor's ``operator()`` receives a reference to this value.
 
@@ -76,7 +77,9 @@ Requirements
 
 * if ``single`` is called without a return value, ``FunctorType`` needs a member function with signature ``operator() () const``.
 
-* if ``single`` is called with a return value, ``FunctorType`` needs a member function with signature ``operator() (ReturnType&) const`` instead.
+* if ``single`` is called without a return value, ``FunctorType`` needs a member function with signature ``operator() () const`` or ``operator() (typename ExecPolicy::work_tag) const`` if the execution policies ``work_tag`` is not ``void``.
+
+* if ``single`` is called with a return value, ``FunctorType`` needs a member function with signature ``operator() (ReturnType&) const`` or ``operator() (typename ExecPolicy::work_tag, ReturnType&) const`` if the execution policies ``work_tag`` is not ``void``.
 
 Semantics
 ---------
@@ -99,13 +102,14 @@ Using ``Kokkos::single`` in Hierarchical Parallelism
 
     using team_policy = Kokkos::TeamPolicy<Kokkos::DefaultExecutionSpace>;
     using team_handle = team_policy::member_type;
-
+    Kokkos::View<int> counter("Counter");
     Kokkos::parallel_for(team_policy(100, Kokkos::AUTO()),
       KOKKOS_LAMBDA(const team_handle& team) {
         int val;
-        Kokkos::single(Kokkos::PerTeam(team), [&]() {
-          val = team.league_rank();
-        });
+        Kokkos::single(Kokkos::PerTeam(team), [&](int& tmp) {
+          tmp = Kokkos::atomic_inc(&counter());
+        }, val);
+        if(val >= 100) Kokkos::abort("Too many atomics");
     });
 
     return 0;

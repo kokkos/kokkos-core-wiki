@@ -45,9 +45,6 @@ Synopsis
 
         // return ExecSpace instance provided to the constructor
         inline const execution_space & space() const;
-
-        // return an equivalent RangePolicy
-        const range_policy& impl_get_range_policy() const { return m_range_policy; }
     };
 
 Parameters
@@ -78,8 +75,6 @@ Constructors
 Examples
 --------
 
-Using ``SinglePolicy`` for a single operation
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Execute a functor once with zero arguments. The functor can also be called with a WorkTag to choose which `operator()` will be called.
 
@@ -105,35 +100,4 @@ Execute a functor once with zero arguments. The functor can also be called with 
     Kokkos::single("label",
         Kokkos::SinglePolicy<TimesTwoTag, Kokkos::DefaultExecutionSpace>(), f);
 
-
-Using ``SinglePolicy`` to produce scalar output
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Produce a single scalar output by passing a reference to the output variable as an argument to the functor's ``operator()``. 
-The functor can also be called with a WorkTag. The functor's ``operator()`` receives a reference to the reduction value.
-
-.. code-block:: cpp
-
-    struct ReductionFunctor {
-      KOKKOS_FUNCTION void operator()(int& res) const { res = 5; }
-      KOKKOS_FUNCTION void operator()(const TenTag, int& res) const { res = 10; }
-    };
-
-    int val;
-    ReductionFunctor f;
-
-    // Default execution space
-    Kokkos::single("label", Kokkos::SinglePolicy(), f, val);
-    // val == 5
-
-    // With a WorkTag and an ExecutionSpace
-    Kokkos::single("label",
-        Kokkos::SinglePolicy<Kokkos::DefaultExecutionSpace, TenTag>(), f, val);
-    // val == 10
-
-    // With a lambda
-    Kokkos::single("label",
-        Kokkos::SinglePolicy<Kokkos::DefaultExecutionSpace>(),
-        KOKKOS_LAMBDA(int& ret) { ret = 5; }, val);
-    // val == 5
 
