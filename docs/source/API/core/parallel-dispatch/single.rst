@@ -6,7 +6,7 @@
 .. |SinglePolicy| replace:: ``SinglePolicy``
 
 
-Header File: ``<Kokkos_Core.hpp>``
+Defined in header: ``<impl/Kokkos_Single.hpp>``:sup:`since Kokkos 5.3`, which is included from ``<Kokkos_Core.hpp>``
 
 Usage
 -----

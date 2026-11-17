@@ -6,7 +6,7 @@
 .. |single| replace:: ``Kokkos::single``
 
 
-Header File: ``<Kokkos_Core.hpp>``
+Defined in header: ``<Kokkos_ExecPolicy.hpp>``:sup:`since Kokkos 5.3`, which is included from ``<Kokkos_Core.hpp>``
 
 Usage
 -----
