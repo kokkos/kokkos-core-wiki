@@ -21,3 +21,4 @@ Programming Guide
    ./ProgrammingGuide/Kokkos-and-Virtual-Functions
    ./ProgrammingGuide/SIMD
    ./ProgrammingGuide/Graph
+   ./ProgrammingGuide/FurtherPerfOptimization
