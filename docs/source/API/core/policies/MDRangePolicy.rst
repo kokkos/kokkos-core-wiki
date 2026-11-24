@@ -212,7 +212,7 @@ Member Functions
 
 .. cpp:function:: tile_type tile_size() const
 
-    * Returns the tile size used by the policy. Entries that were not specified at construction, or were set to less than or equal to zero, are replaced by default values.
+    * Returns the tile size used by the policy.
 
     .. versionadded:: 5.3
 
