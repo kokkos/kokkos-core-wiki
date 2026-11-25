@@ -18,6 +18,8 @@ that work consistently across host and device code.
        Behavior depends on ``NDEBUG`` and ``KOKKOS_ENABLE_DEBUG`` macros.
    * - :doc:`utilities/printf`
      - Prints formatted output to the standard output stream.
+   * - :doc:`utilities/BadAlloc`
+     - Exception type thrown when a memory allocation fails.
 
 .. toctree::
    :hidden:
@@ -26,6 +28,7 @@ that work consistently across host and device code.
    ./utilities/abort
    ./utilities/assert
    ./utilities/printf
+   ./utilities/BadAlloc
 
 
 Runtime and Device Information

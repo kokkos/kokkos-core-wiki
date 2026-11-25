@@ -43,4 +43,4 @@ Description
 
   :returns: On success, returns a pointer to the beginning of the newly allocated memory. To avoid a memory leak, the returned pointer must be deallocated with |Kokkos_kokkos_free|_, the original pointer ``ptr`` is invalidated and any access to it is undefined behavior (even if reallocation was in-place). On failure, returns a null pointer. The original pointer ptr remains valid and may need to be deallocated with |Kokkos_kokkos_free|_.
 
-  :throws: On failure, throws ``Kokkos::Experimental::RawMemoryAllocationFailure``.
+  :throws: On failure, throws :cpp:class:`Experimental::BadAlloc` (since Kokkos 5.2; derived from ``std::runtime_error``) or a ``std::runtime_error`` in earlier versions.
