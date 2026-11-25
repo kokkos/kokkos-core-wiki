@@ -76,8 +76,6 @@ Requirements
 ~~~~~~~~~~~~
 * ``policy`` should be defined with no ``LaunchBounds`` attribute.
 
-* if ``single`` is called without a return value, ``FunctorType`` needs a member function with signature ``operator() () const``.
-
 * if ``single`` is called without a return value, ``FunctorType`` needs a member function with signature ``operator() () const`` or ``operator() (typename ExecPolicy::work_tag) const`` if the execution policies ``work_tag`` is not ``void``.
 
 * if ``single`` is called with a return value, ``FunctorType`` needs a member function with signature ``operator() (ReturnType&) const`` or ``operator() (typename ExecPolicy::work_tag, ReturnType&) const`` if the execution policies ``work_tag`` is not ``void``.
