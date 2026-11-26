@@ -125,28 +125,24 @@ Constructors
     * Default constructor. Creates an uninitialized policy.
 
 .. cpp:function:: MDRangePolicy(const Kokkos::Array<int64_t,rank>& lower, const Kokkos::Array<int64_t,rank>& upper)
+                  template<class OT, class IT> MDRangePolicy(const std::initializer_list<OT>& lower, const std::initializer_list<IT>& upper)
 
-    * Provide the lower and upper bounds.
+    * Provide the lower and upper bounds. When given as initializer lists, their length must match the rank of the policy.
 
 .. cpp:function:: MDRangePolicy(const execution_space& space, const Kokkos::Array<int64_t,rank>& lower, const Kokkos::Array<int64_t,rank>& upper)
+                  template<class OT, class IT> MDRangePolicy(const execution_space& space, const std::initializer_list<OT>& lower, const std::initializer_list<IT>& upper)
 
-    * Provide the lower and upper bounds, and use the provided execution space instance.
+    * Provide the lower and upper bounds, and use the provided execution space instance. When given as initializer lists, their length must match the rank of the policy.
 
 .. cpp:function:: MDRangePolicy(const Kokkos::Array<int64_t,rank>& lower, const Kokkos::Array<int64_t,rank>& upper, const Kokkos::Array<int64_t,rank>& tiling)
+                  template<class OT, class IT, class TT> MDRangePolicy(const std::initializer_list<OT>& lower, const std::initializer_list<IT>& upper, const std::initializer_list<TT>& tiling)
 
-    * Provide the lower and upper bounds as well as the tile sizes.
+    * Provide the lower and upper bounds as well as the tile sizes. When given as initializer lists, their length must match the rank of the policy.
 
 .. cpp:function:: MDRangePolicy(const execution_space& space, const Kokkos::Array<int64_t,rank>& lower, const Kokkos::Array<int64_t,rank>& upper, const Kokkos::Array<int64_t,rank>& tiling)
+                  template<class OT, class IT, class TT> MDRangePolicy(const execution_space& space, const std::initializer_list<OT>& lower, const std::initializer_list<IT>& upper, const std::initializer_list<TT>& tiling)
 
-    * Provide the lower and upper bounds as well as the tile sizes, and use the provided execution space instance.
-
-.. cpp:function:: template<class OT, class IT> MDRangePolicy(const std::initializer_list<OT>& lower, const std::initializer_list<IT>& upper)
-
-    * Provide the lower and upper bounds. The length of the lists must match the rank of the policy.
-
-.. cpp:function:: template<class OT, class IT, class TT> MDRangePolicy(const std::initializer_list<OT>& lower, const std::initializer_list<IT>& upper, const std::initializer_list<TT>& tiling)
-
-    * Provide the lower and upper bounds as well as the tile sizes. The length of the lists must match the rank of the policy.
+    * Provide the lower and upper bounds as well as the tile sizes, and use the provided execution space instance. When given as initializer lists, their length must match the rank of the policy.
 
 CTAD Constructors (since 4.3)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
