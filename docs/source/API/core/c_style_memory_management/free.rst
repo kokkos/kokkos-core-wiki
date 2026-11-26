@@ -6,15 +6,7 @@
 
 Defined in header ``<Kokkos_Core.hpp>``
 
-.. _Kokkos_kokkos_malloc: ./malloc.html
-
-.. |Kokkos_kokkos_malloc| replace:: ``Kokkos::kokkos_malloc()``
-
-.. _Kokkos_kokkos_realloc: ./realloc.html
-
-.. |Kokkos_kokkos_realloc| replace:: ``Kokkos::kokkos_realloc()``
-
-Deallocates the space previously allocated by |Kokkos_kokkos_malloc|_ or |Kokkos_kokkos_realloc|_ on the specified memory space ``MemorySpace``.
+Deallocates the space previously allocated by :cpp:func:`kokkos_malloc` or :cpp:func:`kokkos_realloc` on the specified memory space ``MemorySpace``.
 
 If ``ptr`` is a null pointer, the function does nothing.
 
