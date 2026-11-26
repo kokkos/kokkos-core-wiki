@@ -61,6 +61,7 @@ pygments_dark_style = "monokai"
 # a list of builtin themes.
 #
 html_theme = 'furo'
+html_favicon = 'kokkos-favicon.png'
 
 html_theme_options = {
 #   "announcement": "Upcoming Event: KUG returns to Chicago March 19-20, 2026. <a href='https://kokkos.org/blog/kug-2026-program-announced/'>Register now!</a>",
