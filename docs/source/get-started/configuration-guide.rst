@@ -843,17 +843,17 @@ Kokkos will attempt to autodetect the architecture flag at configuration time.
     * * ``Kokkos_ARCH_VEGA90A``
       * GFX90A
       * MI200 series
-      * (removed in Kokkos 5.3)
+      * (removed in Kokkos 5.3, use ``Kokkos_ARCH_GFX90A`` instead)
 
     * * ``Kokkos_ARCH_VEGA908``
       * GFX908
       * MI100
-      * (removed in Kokkos 5.3)
+      * (removed in Kokkos 5.3, use ``Kokkos_ARCH_GFX908`` instead)
 
     * * ``Kokkos_ARCH_VEGA906``
       * GFX906
       * MI50, MI60
-      * (removed in Kokkos 5.3)
+      * (removed in Kokkos 5.3, use ``Kokkos_ARCH_GFX906`` instead)
 
     * * ``Kokkos_ARCH_VEGA900``
       * GFX900
