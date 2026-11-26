@@ -10,14 +10,6 @@ Defined in header ``<Kokkos_Core.hpp>``
 
 .. |MemorySpace| replace:: ``MemorySpace``
 
-.. _Kokkos_kokkos_free: free.html
-
-.. |Kokkos_kokkos_free| replace:: ``Kokkos::kokkos_free()``
-
-.. _Kokkos_realloc: realloc.html
-
-.. |Kokkos_realloc| replace:: ``Kokkos::kokkos_realloc()``
-
 Allocate ``size`` bytes of uninitialized storage on the specified memory space |MemorySpace|_ plus some extra space for metadata such as the label.
 
 If allocation succeeds, returns a pointer to the lowest (first) byte in the allocated memory block that is suitably aligned for any scalar type.
@@ -41,6 +33,8 @@ Description
 
     :param size: The number of bytes to allocate.
 
-    :returns: On success, returns the pointer to the beginning of newly allocated memory. To avoid a memory leak, the returned pointer must be deallocated with |Kokkos_kokkos_free|_ or |Kokkos_realloc|_.
+    :returns: On success, returns the pointer to the beginning of newly
+      allocated memory. To avoid a memory leak, the returned pointer must be
+      deallocated with :cpp:func:`kokkos_free` or :cpp:func:`kokkos_realloc`.
 
     :throws: On failure, throws :cpp:class:`Experimental::BadAlloc` (since Kokkos 5.2; derived from ``std::runtime_error``) or a ``std::runtime_error`` in earlier versions.
