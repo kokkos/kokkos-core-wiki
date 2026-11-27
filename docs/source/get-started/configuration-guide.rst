@@ -481,6 +481,16 @@ If cross-compiling, or if you want to be specific, the CPU architecture can be p
       - GH200 @ CSCS ALPS
       - (since Kokkos 4.4.1)
 
+    * - ``Kokkos_ARCH_ARMV84_SVE``
+      - ARMv8.4-A+sve/A64
+      -
+      - (since Kokkos 4.7)
+
+    * - ``Kokkos_ARCH_ARMV84``
+      - ARMv8.4-A/A64
+      -
+      - (since Kokkos 4.7)
+
     * - ``Kokkos_ARCH_A64FX``
       - ARMv8.2/A64
       - A64FX @ Fugaku
